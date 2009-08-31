@@ -1,0 +1,59 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" ctype="Workspace" />
+  <MonoDevelop.Ide.DebuggingService>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Docky/Docky/Interface/DockWindow.cs" ctype="Workbench">
+    <Files>
+      <File FileName="Docky/Docky/Docky.cs" Line="1" Column="1" />
+      <File FileName="Docky/Docky/UserArgs.cs" Line="1" Column="1" />
+      <File FileName="Docky.Services/Docky.Services/IPreferences.cs" Line="1" Column="1" />
+      <File FileName="Docky.Services/Docky.Services/PreferencesService.cs" Line="1" Column="1" />
+      <File FileName="Docky.Services/Docky.Services/DrawingService.cs" Line="1" Column="1" />
+      <File FileName="Docky.Items/Docky.Items/AbstractDockItem.cs" Line="29" Column="13" />
+      <File FileName="Docky.Services/Docky.Services/Preferences.cs" Line="1" Column="1" />
+      <File FileName="Docky.Services/Docky.Services/SystemService.cs" Line="1" Column="1" />
+      <File FileName="Docky/Docky/Interface/DockPosition.cs" Line="1" Column="1" />
+      <File FileName="Docky/Docky/Interface/Dock.cs" Line="1" Column="1" />
+      <File FileName="Docky/Docky/DockController.cs" Line="1" Column="1" />
+      <File FileName="Docky/Docky/Interface/AutohideType.cs" Line="1" Column="1" />
+      <File FileName="Docky/Docky/Interface/DockPreferences.cs" Line="1" Column="1" />
+      <File FileName="Docky/Docky/Interface/DockWindow.cs" Line="28" Column="19" />
+      <File FileName="Docky/Docky/Interface/IDockPreferences.cs" Line="1" Column="1" />
+      <File FileName="Docky/Docky/Interface/CursorTracker.cs" Line="1" Column="1" />
+      <File FileName="Docky.Items/Docky.Items/WnckDockItem.cs" Line="1" Column="1" />
+      <File FileName="Docky.Services/Docky.Services/DockServices.cs" Line="1" Column="1" />
+      <File FileName="Docky/Docky/Interface/CursorPostionChangedArgs.cs" Line="1" Column="1" />
+      <File FileName="Docky.Items/Docky.Items/PaintNeededEventArgs.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Docky" expanded="True">
+            <Option id="ShowVersionControlOverlays" value="True" />
+            <Option id="ShowAllFiles" value="False" />
+            <Node name="References" expanded="True" selected="True" />
+            <Node name="Docky" expanded="True">
+              <Node name="Interface" expanded="True" />
+            </Node>
+          </Node>
+          <Node name="Docky.CairoHelper" expanded="True">
+            <Node name="References" expanded="True" />
+            <Node name="Docky.CairoHelper" expanded="True" />
+          </Node>
+          <Node name="Docky.Items" expanded="True">
+            <Node name="References" expanded="True" />
+            <Node name="Docky.Items" expanded="True" />
+          </Node>
+          <Node name="Docky.Services" expanded="True">
+            <Node name="References" expanded="True" />
+            <Node name="Docky.Services" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+</Properties>
