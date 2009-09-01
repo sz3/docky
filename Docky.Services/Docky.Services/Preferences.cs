@@ -40,6 +40,7 @@ namespace Docky.Services
 				result = client.Get (AbsolutePathForKey (key));
 			} catch (GConf.NoSuchKeyException e) {
 				Console.Error.WriteLine (e.Message);
+				Set<T> (key, def);
 				return def;
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);

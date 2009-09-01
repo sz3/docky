@@ -34,6 +34,15 @@ namespace Docky
 
 		public static UserArgs CommandLinePreferences { get; private set; }
 		
+		static DockController controller;
+		internal static DockController Controller { 
+			get {
+				if (controller == null)
+					controller = new DockController ();
+				return controller;
+			}
+		}
+		
 		
 		public static void Main (string [] args)
 		{
@@ -43,7 +52,7 @@ namespace Docky
 			Gdk.Threads.Init ();
 			Gtk.Application.Init ();
 			
-			
+			Controller.Initialize ();
 			
 			Gdk.Threads.Enter ();
 			Gtk.Application.Run ();

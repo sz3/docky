@@ -17,7 +17,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -48,7 +48,7 @@ namespace Docky.Interface
 		
 		public int Height { get; private set; }
 		
-		Gdk.Point WindowPosition { get; set; }
+		Gdk.Point WindowPosition;
 		
 		AutohideManager AutohideManager { get; set; }
 		
@@ -67,25 +67,28 @@ namespace Docky.Interface
 			}
 		}
 		
+		List<AbstractDockItem> collection_backend;
+		ReadOnlyCollection<AbstractDockItem> collection_frontend;
+		
 		/// <summary>
-		/// Returns a list of dock items as they should be provided on the dock,
-		/// and inserts nulls for separator locations. Currently this is probably
-		/// too slow to be used in production code. Also nulls probably are not
-		/// the best way to denote separators
+		/// Provides a list of all items to be displayed on the dock. Nulls are
+		/// inserted where separators should go.
 		/// </summary>
-		IEnumerable<AbstractDockItem> Items {
+		ReadOnlyCollection<AbstractDockItem> Items {
 			get {
-				AbstractDockItem last = null;
-				foreach (IDockItemProvider provider in ItemProviders) {
-					if (provider.Separated && last != null)
-						yield return null;
+				if (collection_backend.Count == 0) {
+					AbstractDockItem last = null;
+					foreach (IDockItemProvider provider in ItemProviders) {
+						if (provider.Separated && last != null)
+							collection_backend.Add (null);
 					
-					foreach (AbstractDockItem adi in provider.Items)
-						yield return adi;
-					
-					if (provider.Separated && provider != ItemProviders.Last ())
-						yield return null;
+						collection_backend.AddRange (provider.Items);
+						
+						if (provider.Separated && provider != ItemProviders.Last ())
+							collection_backend.Add (null);
+					}
 				}
+				return collection_frontend;
 			}
 		}
 		
@@ -155,6 +158,9 @@ namespace Docky.Interface
 		public DockWindow () : base (Gtk.WindowType.Toplevel)
 		{
 			DrawRegions = new Dictionary<AbstractDockItem, Gdk.Rectangle> ();
+			
+			collection_backend = new List<AbstractDockItem> ();
+			collection_frontend = collection_backend.AsReadOnly ();
 			
 			AppPaintable    = true;
 			AcceptFocus     = false;
@@ -227,6 +233,8 @@ namespace Docky.Interface
 		
 		void ProviderItemsChanged (object sender, ItemsChangedArgs args)
 		{
+			collection_backend.Clear ();
+			
 			if (args.Type == AddRemoveChangeType.Remove)
 				DrawRegions.Remove (args.Item);
 		}
@@ -265,6 +273,7 @@ namespace Docky.Interface
 			} else {
 				UnregisterItemProvider (e.Provider);
 			}
+			collection_backend.Clear ();
 		}
 
 		void PreferencesZoomPercentChanged (object sender, EventArgs e)
@@ -373,6 +382,12 @@ namespace Docky.Interface
 		void UpdateDrawRegions ()
 		{
 			
+			foreach (AbstractDockItem adi in Items) {
+				if (adi == null) {
+					// separator code here;
+					continue;
+				}
+			}
 		}
 		
 		void DrawDock (DockySurface surface)
@@ -383,7 +398,8 @@ namespace Docky.Interface
 			
 			// whilst not immediately obvious, the first item in the enumeration should always
 			// be the first dock item, and the last should be the last. The proper data structure
-			// is perhaps not a dictionary. Future consideration needed.
+			// is perhaps not a dictionary. Future consideration needed. Also note that Items may
+			// not start or end with a null.
 			first = DrawRegions [Items.First ()];
 			last = DrawRegions [Items.Last ()];
 			

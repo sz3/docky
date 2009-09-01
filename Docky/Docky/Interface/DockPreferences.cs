@@ -22,6 +22,7 @@ using System.Linq;
 using System.Text;
 
 using Docky.Items;
+using Docky.Services;
 
 namespace Docky.Interface
 {
@@ -30,6 +31,8 @@ namespace Docky.Interface
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class DockPreferences : Gtk.Bin, IDockPreferences
 	{
+		IPreferences prefs;
+		
 		string name;
 		int icon_size;
 		bool zoom_enabled;
@@ -59,6 +62,7 @@ namespace Docky.Interface
 				if (hide_type == value)
 					return;
 				hide_type = value;
+				SetOption ("Autohide", hide_type.ToString ());
 				OnAutohideChanged ();
 			}
 		}
@@ -69,6 +73,7 @@ namespace Docky.Interface
 				if (position == value)
 					return;
 				position = value;
+				SetOption ("Position", position.ToString ());
 				OnPositionChanged ();
 			}
 		}
@@ -79,6 +84,7 @@ namespace Docky.Interface
 				if (icon_size == value)
 					return;
 				icon_size = value;
+				SetOption ("IconSize", icon_size);
 				OnIconSizeChanged ();
 			}
 		}
@@ -89,6 +95,7 @@ namespace Docky.Interface
 				if (zoom_enabled == value)
 					return;
 				zoom_enabled = value;
+				SetOption ("ZoomEnabled", zoom_enabled);
 				OnZoomEnabledChanged ();
 			}
 		}
@@ -99,6 +106,7 @@ namespace Docky.Interface
 				if (zoom_percent == value)
 					return;
 				zoom_percent = value;
+				SetOption ("ZoomPercent", zoom_percent);
 				OnZoomPercentChanged ();
 			}
 		}
@@ -107,6 +115,9 @@ namespace Docky.Interface
 		{
 			this.Build ();
 			name = dockName;
+			
+			prefs = DockServices.Preferences.Get<DockPreferences> ();
+			
 			BuildOptions ();
 			BuildItemProviders ();
 		}
@@ -114,7 +125,7 @@ namespace Docky.Interface
 		public bool SetName (string name)
 		{
 			
-			return true;
+			return false;
 		}
 		
 		public string GetName ()
@@ -124,7 +135,26 @@ namespace Docky.Interface
 		
 		void BuildOptions ()
 		{
+			Autohide = (AutohideType) Enum.Parse (typeof (AutohideType), 
+			                                      GetOption ("Autohide", AutohideType.None.ToString ()));
 			
+			DockPosition position = (DockPosition) Enum.Parse (typeof (DockPosition), 
+			                                                   GetOption ("Position", DockPosition.Bottom.ToString ()));
+			Position = position; //fixme
+			
+			IconSize    = GetOption ("IconSize", 64);
+			ZoomEnabled = GetOption ("ZoomEnabled", true);
+			ZoomPercent = GetOption ("ZoomPercent", 2);
+		}
+		
+		T GetOption<T> (string key, T def)
+		{
+			return prefs.Get (name + "/" + key, def);
+		}
+		
+		bool SetOption<T> (string key, T val)
+		{
+			return prefs.Set (name + "/" + key, val);
 		}
 		
 		void BuildItemProviders ()
