@@ -24,6 +24,8 @@ using Cairo;
 using Gdk;
 using Gtk;
 
+using Docky.Items;
+
 namespace Docky.Interface
 {
 
@@ -35,6 +37,8 @@ namespace Docky.Interface
 		event EventHandler AutohideChanged;
 		event EventHandler ZoomEnabledChanged;
 		event EventHandler ZoomPercentChanged;
+		
+		event EventHandler<ItemProvidersChangedEventArgs> ItemProvidersChanged;
 		
 		IEnumerable<IDockItemProvider> ItemProviders { get; }
 		

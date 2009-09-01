@@ -33,6 +33,10 @@ namespace Docky.Items
 	{
 
 		#region IDockItemProvider implementation
+		public event EventHandler ItemsChanged;
+		
+		public bool Separated { get { return true; } }
+		
 		public bool ItemCanBeMoved (AbstractDockItem item)
 		{
 			throw new System.NotImplementedException();

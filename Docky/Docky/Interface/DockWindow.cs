@@ -119,22 +119,55 @@ namespace Docky.Interface
 			
 		}
 		
+		void RegisterItemProvider (IDockItemProvider provider)
+		{
+			provider.ItemsChanged += ProviderItemsChanged;
+		}
+		
+		void UnregisterItemProvider (IDockItemProvider provider)
+		{
+			provider.ItemsChanged -= ProviderItemsChanged;
+		}
+		
+		void ProviderItemsChanged (object sender, EventArgs e)
+		{
+			
+		}
+		
 		void RegisterPreferencesEvents (IDockPreferences preferences)
 		{
 			preferences.AutohideChanged    += PreferencesAutohideChanged;	
 			preferences.IconSizeChanged    += PreferencesIconSizeChanged;	
 			preferences.PositionChanged    += PreferencesPositionChanged;
 			preferences.ZoomEnabledChanged += PreferencesZoomEnabledChanged;
-			preferences.ZoomPercentChanged += PreferencesZoomPercentChanged;		
+			preferences.ZoomPercentChanged += PreferencesZoomPercentChanged;
+			
+			preferences.ItemProvidersChanged += PreferencesItemProvidersChanged;	
+			
+			foreach (IDockItemProvider provider in preferences.ItemProviders)
+				RegisterItemProvider (provider);
 		}
-		
+
 		void UnregisterPreferencesEvents (IDockPreferences preferences)
 		{
 			preferences.AutohideChanged    -= PreferencesAutohideChanged;	
 			preferences.IconSizeChanged    -= PreferencesIconSizeChanged;	
 			preferences.PositionChanged    -= PreferencesPositionChanged;
 			preferences.ZoomEnabledChanged -= PreferencesZoomEnabledChanged;
-			preferences.ZoomPercentChanged -= PreferencesZoomPercentChanged;		
+			preferences.ZoomPercentChanged -= PreferencesZoomPercentChanged;
+			
+			preferences.ItemProvidersChanged -= PreferencesItemProvidersChanged;
+			foreach (IDockItemProvider provider in preferences.ItemProviders)
+				UnregisterItemProvider (provider);
+		}
+		
+		void PreferencesItemProvidersChanged (object sender, ItemProvidersChangedEventArgs e)
+		{
+			if (e.Type == ProviderChangeType.Add) {
+				RegisterItemProvider (e.Provider);
+			} else {
+				UnregisterItemProvider (e.Provider);
+			}
 		}
 
 		void PreferencesZoomPercentChanged (object sender, EventArgs e)
@@ -182,6 +215,13 @@ namespace Docky.Interface
 				return true;
 			
 			return false;
+		}
+		
+		public override void Dispose ()
+		{
+			UnregisterPreferencesEvents (Preferences);
+			
+			base.Dispose ();
 		}
 	}
 }

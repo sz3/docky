@@ -45,8 +45,10 @@ namespace Docky.Interface
 		public event EventHandler ZoomEnabledChanged;
 		public event EventHandler ZoomPercentChanged;
 		
+		public event EventHandler<ItemProvidersChangedEventArgs> ItemProvidersChanged;
+		
 		public IEnumerable<IDockItemProvider> ItemProviders { 
-			get { item_providers.AsEnumerable (); }
+			get { return item_providers.AsEnumerable (); }
 		}
 		
 		public ApplicationDockItemProvider ApplicationProvider { get; private set; }
@@ -106,6 +108,7 @@ namespace Docky.Interface
 			this.Build ();
 			name = dockName;
 			BuildOptions ();
+			BuildItemProviders ();
 		}
 		
 		public bool SetName (string name)
@@ -129,7 +132,7 @@ namespace Docky.Interface
 			item_providers = new List<IDockItemProvider> ();
 			
 			ApplicationProvider = new ApplicationDockItemProvider ();
-			item_providers.Add (item_providers);
+			item_providers.Add (ApplicationProvider);
 		}
 		
 		void OnAutohideChanged ()

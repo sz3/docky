@@ -27,6 +27,8 @@ namespace Docky.Items
 
 	public interface IDockItemProvider
 	{
+		event EventHandler ItemsChanged;
+		
 		bool Separated { get; }
 		
 		ReadOnlyCollection<AbstractDockItem> Items { get; }

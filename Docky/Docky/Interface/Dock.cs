@@ -36,23 +36,24 @@ namespace Docky.Interface
 	{
 		DockPreferences prefs;
 		
-		public Gtk.Widget PreferencesWidget { 
-			get { return Preferences as Gtk.Widget; }
+		public IDockPreferences Preferences {
+			get { return prefs as IDockPreferences; }
 		}
 		
-		public IEnumerable<IDockItemProvider> ItemProviders {
-			get { return item_providers.AsEnumerable (); }
+		public Gtk.Widget PreferencesWidget { 
+			get { return Preferences as Gtk.Widget; }
 		}
 		
 		public Dock (DockPreferences prefs)
 		{
 			this.prefs = prefs;
-			item_providers = new List<IDockItemProvider> ();
 		}
 		
 		#region IDisposable implementation
 		public void Dispose ()
 		{
+			prefs.Destroy ();
+			prefs.Dispose ();
 		}
 		#endregion
 
