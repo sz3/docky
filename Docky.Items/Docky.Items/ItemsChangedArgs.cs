@@ -16,29 +16,19 @@
 // 
 
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 
 namespace Docky.Items
 {
 
 
-	public interface IDockItemProvider
+	public class ItemsChangedArgs : EventArgs
 	{
-		event EventHandler<ItemsChangedArgs> ItemsChanged;
+		public AddRemoveChangeType Type { get; set; }
 		
-		bool Separated { get; }
-		
-		ReadOnlyCollection<AbstractDockItem> Items { get; }
-		
-		bool ItemCanBeMoved (AbstractDockItem item);
-		
-		bool ItemCanBeRemoved (AbstractDockItem item);
-		
-		bool MoveItem (AbstractDockItem item, int position);
-		
-		bool RemoveItem (AbstractDockItem item);
+		public AbstractDockItem Item { get; set; }
+
+		public ItemsChangedArgs ()
+		{
+		}
 	}
 }

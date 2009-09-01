@@ -54,6 +54,8 @@
     <Compile Include="Docky.Items\WnckDockItem.cs" />
     <Compile Include="Docky.Items\IDockItemProvider.cs" />
     <Compile Include="Docky.Items\ApplicationDockItemProvider.cs" />
+    <Compile Include="Docky.Items\ItemsChangedArgs.cs" />
+    <Compile Include="Docky.Items\AddRemoveChangeType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Docky.Services\Docky.Services.csproj">
