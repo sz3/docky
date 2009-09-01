@@ -35,14 +35,10 @@ namespace Docky
 	internal class DockController
 	{
 		IPreferences prefs;
-		IList<Dock> docks;
+		List<Dock> docks;
 		
-		IList<Dock> Docks { 
-			get { 
-				if (docks == null) docks = new List<Dock> ();
-				return docks; 
-			}
-			set { docks = value; }
+		public IEnumerable<Dock> Docks { 
+			get { return docks.AsEnumerable (); }
 		}
 		
 		public DockController ()
@@ -51,6 +47,7 @@ namespace Docky
 		
 		public void Initialize ()
 		{
+			docks = new List<Dock> ();
 			prefs = DockServices.Preferences.Get<DockController> ();
 			CreateDocks ();
 		}
@@ -62,7 +59,7 @@ namespace Docky
 			foreach (string name in dockNames) {
 				DockPreferences dockPrefs = new DockPreferences (name);
 				Dock dock = new Dock (dockPrefs);
-				Docks.Add (dock);
+				docks.Add (dock);
 			}
 		}
 	}

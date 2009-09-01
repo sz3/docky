@@ -140,7 +140,11 @@ namespace Docky.Interface
 			
 			DockPosition position = (DockPosition) Enum.Parse (typeof (DockPosition), 
 			                                                   GetOption ("Position", DockPosition.Bottom.ToString ()));
-			Position = position; //fixme
+			while (Docky.Controller.Docks.Any ((Dock d) => d.Preferences.Position == position)) {
+				Console.Error.WriteLine ("Dock position already in use: " + position.ToString ());
+				position = (DockPosition) (((int) position) + 1 % 4);
+			}
+			Position = position;
 			
 			IconSize    = GetOption ("IconSize", 64);
 			ZoomEnabled = GetOption ("ZoomEnabled", true);

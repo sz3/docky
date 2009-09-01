@@ -44,6 +44,8 @@ namespace Docky.Interface
 		
 		IDockPreferences preferences;
 		
+		DockySurface main_buffer, background_buffer, icons_buffer;
+		
 		public int Width { get; private set; }
 		
 		public int Height { get; private set; }
@@ -54,14 +56,17 @@ namespace Docky.Interface
 		
 		CursorTracker CursorTracker { get; set; }
 		
+		DockAnimationState AnimationState { get; set; }
+		
 		Dictionary<AbstractDockItem, Gdk.Rectangle> DrawRegions { get; set; }
 		
-		IDockPreferences Preferences { 
+		public IDockPreferences Preferences { 
 			get { return preferences; }
 			set {
 				if (preferences == value)
 					return;
-				UnregisterPreferencesEvents (preferences);
+				if (preferences != null)
+					UnregisterPreferencesEvents (preferences);
 				preferences = value;
 				RegisterPreferencesEvents (value);
 			}
@@ -158,6 +163,8 @@ namespace Docky.Interface
 		public DockWindow () : base (Gtk.WindowType.Toplevel)
 		{
 			DrawRegions = new Dictionary<AbstractDockItem, Gdk.Rectangle> ();
+			AnimationState = new DockAnimationState ();
+			BuildAnimationEngine ();
 			
 			collection_backend = new List<AbstractDockItem> ();
 			collection_frontend = collection_backend.AsReadOnly ();
@@ -175,14 +182,19 @@ namespace Docky.Interface
 			SetCompositeColormap ();
 			Stick ();
 			
-			Show ();
-			
 			Realized += HandleRealized;	
+		}
+		
+		void BuildAnimationEngine ()
+		{
+			
 		}
 
 		#region Event Handling
 		void HandleRealized (object sender, EventArgs e)
 		{
+			GdkWindow.SetBackPixmap (null, false);
+			
 			CursorTracker = CursorTracker.ForDisplay (Display);
 			CursorTracker.CursorPositionChanged += HandleCursorPositionChanged;	
 			
@@ -455,6 +467,13 @@ namespace Docky.Interface
 		void DrawDockBackground (DockySurface surface, Gdk.Rectangle backgroundArea)
 		{
 			
+		}
+		
+		protected override void OnStyleSet (Style previous_style)
+		{
+			if (GdkWindow != null)
+				GdkWindow.SetBackPixmap (null, false);
+			base.OnStyleSet (previous_style);
 		}
 		
 		protected override bool OnExposeEvent (EventExpose evnt)

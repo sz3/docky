@@ -35,6 +35,7 @@ namespace Docky.Interface
 	public class Dock : IDisposable
 	{
 		DockPreferences prefs;
+		DockWindow window;
 		
 		public IDockPreferences Preferences {
 			get { return prefs as IDockPreferences; }
@@ -47,6 +48,10 @@ namespace Docky.Interface
 		public Dock (DockPreferences prefs)
 		{
 			this.prefs = prefs;
+			window = new DockWindow {
+				Preferences = Preferences,
+			};
+			window.ShowAll ();
 		}
 		
 		#region IDisposable implementation
