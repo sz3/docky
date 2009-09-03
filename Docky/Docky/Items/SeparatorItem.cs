@@ -43,6 +43,12 @@ namespace Docky.Items
 			}
 		}
 		
+		public override bool Zoom {
+			get {
+				return false;
+			}
+		}
+		
 		public SeparatorItem ()
 		{
 		}

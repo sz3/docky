@@ -32,6 +32,7 @@ namespace Docky.CairoHelper
 	public class DockySurface : IDisposable
 	{
 		Surface surface;
+		Context context;
 		
 		public Surface Internal {
 			get { 
@@ -49,6 +50,14 @@ namespace Docky.CairoHelper
 		public int Width { get; private set; }
 		
 		public int Height { get; private set; }
+		
+		public Context Context {
+			get {
+				if (context == null)
+					context = new Context (Internal);
+				return context;
+			}
+		}
 
 		public DockySurface (int width, int height, Surface model) : this (width, height) 
 		{
@@ -59,6 +68,17 @@ namespace Docky.CairoHelper
 		{
 			Width = width;
 			Height = height;
+		}
+		
+		public void Clear ()
+		{
+			Context.Save ();
+			
+			Context.Color = new Cairo.Color (0, 0, 0, 0);
+			Context.Operator = Operator.Source;
+			Context.Paint ();
+			
+			Context.Restore ();
 		}
 		
 		public DockySurface DeepCopy ()
@@ -72,11 +92,6 @@ namespace Docky.CairoHelper
 			result.Internal = copy;
 			
 			return result;
-		}
-		
-		public Cairo.Context GetContext ()
-		{
-			return new Cairo.Context (Internal);
 		}
 		
 		public void EnsureSurfaceModel (Surface reference)
@@ -99,6 +114,10 @@ namespace Docky.CairoHelper
 				using (Cairo.Context cr = new Cairo.Context (Internal)) {
 					last.Show (cr, 0, 0);
 				}
+				if (context != null) {
+					(context as IDisposable).Dispose ();
+					context = null;
+				}
 				last.Destroy ();
 			}
 		}
@@ -106,6 +125,8 @@ namespace Docky.CairoHelper
 		#region IDisposable implementation
 		public void Dispose ()
 		{
+			if (context != null)
+				(context as IDisposable).Dispose ();
 			if (surface != null)
 				surface.Destroy ();
 		}

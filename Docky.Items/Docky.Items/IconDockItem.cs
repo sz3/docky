@@ -67,13 +67,11 @@ namespace Docky.Items
 				temp.Dispose ();
 			}
 			
-			using (Cairo.Context cr = surface.GetContext ()) {
-				Gdk.CairoHelper.SetSourcePixbuf (cr, 
-				                                 pbuf, 
-				                                 (surface.Width - pbuf.Width) / 2, 
-				                                 (surface.Height - pbuf.Height) / 2);
-				cr.Paint ();
-			}
+			Gdk.CairoHelper.SetSourcePixbuf (surface.Context, 
+			                                 pbuf, 
+			                                 (surface.Width - pbuf.Width) / 2, 
+			                                 (surface.Height - pbuf.Height) / 2);
+			surface.Context.Paint ();
 			
 			pbuf.Dispose ();
 		}

@@ -50,6 +50,10 @@ namespace Docky.Items
 			get { return true; }
 		}
 		
+		public virtual bool Zoom {
+			get { return true; }
+		}
+		
 		public string HoverText { 
 			get {
 				return hover_text;

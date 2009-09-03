@@ -54,13 +54,18 @@ namespace Docky.Interface
 		const int DockWidthBuffer    = 5;
 		const int ItemWidthBuffer    = 2;
 		
+		readonly TimeSpan BaseAnimationTime = new TimeSpan (0, 0, 0, 0, 150);
+		
 		DateTime hidden_change_time;
 		DateTime cursor_over_dock_area_change_time;
+		DateTime render_time;
 		
 		IDockPreferences preferences;
 		DockySurface main_buffer, background_buffer, icons_buffer;
 		
 		Gdk.Rectangle current_mask_area;
+		double? zoom_in_buffer;
+		bool rendering;
 		
 		public int Width { get; private set; }
 		
@@ -113,7 +118,15 @@ namespace Docky.Interface
 			}
 		}
 		
-		#region Preferences Shortcuts
+		#region Shortcuts
+		AutohideType Autohide {
+			get { return Preferences.Autohide; }
+		}
+		
+		bool CursorIsOverDockArea {
+			get { return AutohideManager.CursorIsOverDockArea; }
+		}
+		
 		IEnumerable<IDockItemProvider> ItemProviders {
 			get { return Preferences.ItemProviders; }
 		}
@@ -126,6 +139,7 @@ namespace Docky.Interface
 		int Monitor {
 			get { return 0; }
 		}
+		
 		
 		DockPosition Position {
 			get { return Preferences.Position; }
@@ -185,6 +199,32 @@ namespace Docky.Interface
 			get { return ZoomedIconSize + 2 * DockHeightBuffer; }
 		}
 		
+		double ZoomIn {
+			get {
+				
+				// we buffer this value during renders since it will be checked many times and we dont need to 
+				// recalculate it each time
+				if (zoom_in_buffer.HasValue && rendering) {
+					return zoom_in_buffer.Value;
+				}
+				
+				double zoom = Math.Min (1, (render_time - cursor_over_dock_area_change_time).TotalMilliseconds / 
+				                        BaseAnimationTime.TotalMilliseconds);
+				if (!CursorIsOverDockArea) {
+					zoom = 1 - zoom;
+				}
+				
+				if (rendering)
+					zoom_in_buffer = zoom;
+				
+				return zoom;
+			}
+		}
+		
+		int ZoomSize {
+			get { return (int) (330 * (IconSize / 64.0)); }
+		}
+		
 		public DockWindow () : base (Gtk.WindowType.Toplevel)
 		{
 			DrawValues = new Dictionary<AbstractDockItem, DrawValue> ();
@@ -231,6 +271,7 @@ namespace Docky.Interface
 			Screen.SizeChanged += ScreenSizeChanged;
 			
 			SetSizeRequest ();
+			UpdateDockWidth ();
 		}
 
 		void ScreenSizeChanged (object sender, EventArgs e)
@@ -242,7 +283,7 @@ namespace Docky.Interface
 		{
 			cursor_over_dock_area_change_time = DateTime.UtcNow;
 			
-			if (AutohideManager.CursorIsOverDockArea)
+			if (CursorIsOverDockArea)
 				CursorTracker.RequestHighResolution (this);
 			else
 				CursorTracker.CancelHighResolution (this);
@@ -255,7 +296,7 @@ namespace Docky.Interface
 
 		void HandleCursorPositionChanged (object sender, CursorPostionChangedArgs e)
 		{
-			
+			QueueDraw ();
 		}
 		
 		void RegisterItemProvider (IDockItemProvider provider)
@@ -419,7 +460,7 @@ namespace Docky.Interface
 				}
 			}
 			
-			DockWidth = Items.Select (adi => adi.IconSurface (background_buffer.Internal, IconSize))
+			DockWidth = Items.Select (adi => adi.IconSurface (model, IconSize))
 					         .Sum (s => s.Width);
 			DockWidth += 2 * DockWidthBuffer;
 		}
@@ -429,10 +470,15 @@ namespace Docky.Interface
 			Gdk.Rectangle geo;
 			geo = Screen.GetMonitorGeometry (Monitor);
 			
-			Width = geo.Width;
-			Height = ZoomedIconSize + 2 * DockHeightBuffer + UrgentBounceHeight;
-			Height = Math.Max (150, Height);
-			
+			if (VerticalDock) {
+				Height = geo.Height;
+				Width = ZoomedIconSize + 2 * DockHeightBuffer + UrgentBounceHeight;
+				Width = Math.Max (150, Width);
+			} else {
+				Width = geo.Width;
+				Height = ZoomedIconSize + 2 * DockHeightBuffer + UrgentBounceHeight;
+				Height = Math.Max (150, Height);
+			}
 			SetSizeRequest (Width, Height);
 		}
 		#endregion
@@ -443,6 +489,7 @@ namespace Docky.Interface
 			
 		}
 		
+		// fixme, this ONLY works for square items
 		Gdk.Rectangle DrawValueToRectangle (DrawValue val, int iconSize)
 		{
 			return new Gdk.Rectangle ((int) (val.Center.X - (iconSize * val.Zoom / 2)),
@@ -460,9 +507,11 @@ namespace Docky.Interface
 		void UpdateDrawRegionsForSurface (DockySurface surface)
 		{
 			// first we do the math as if this is a top dock, to do this we need to set
-			// up some "pretend" variables
+			// up some "pretend" variables. we pretend we are a top dock because 0,0 is
+			// at the top.
 			int width;
 			int height;
+			double zoom;
 			
 			// our width and height switch around if we have a veritcal dock
 			if (!VerticalDock) {
@@ -474,9 +523,14 @@ namespace Docky.Interface
 			}
 			
 			Gdk.Point cursor = Cursor;
+			Console.WriteLine (cursor);
 			
 			Gdk.Rectangle geo;
-			Screen.GetMonitorGeometry (Monitor);
+			geo = Screen.GetMonitorGeometry (Monitor);
+			
+			// screen shift sucks
+			cursor.X -= geo.X;
+			cursor.Y -= geo.Y;
 			
 			// "relocate" our cursor to be on the top
 			switch (Position) {
@@ -484,20 +538,23 @@ namespace Docky.Interface
 				;
 				break;
 			case DockPosition.Left:
-				int tmpX = cursor.X;
-				cursor.X = cursor.Y;
-				cursor.Y = tmpX;
+				int tmpY = cursor.Y;
+				cursor.Y = cursor.X;
+				cursor.X = width - (width - tmpY);
 				break;
 			case DockPosition.Right:
-				int tmpY = cursor.Y;
-				cursor.X = (geo.X + geo.Width) - cursor.X;
+				tmpY = cursor.Y;
+				cursor.X = (geo.Width - 1) - cursor.X;
 				cursor.Y = cursor.X;
-				cursor.X = cursor.Y;
+				cursor.X = width - (width - tmpY);
 				break;
 			case DockPosition.Bottom:
-				cursor.Y = (geo.Y + geo.Height) - cursor.Y;
+				cursor.Y = (geo.Height - 1) - cursor.Y;
 				break;
 			}
+			
+			Console.WriteLine (cursor);
+			Console.WriteLine ();
 			
 			// the line along the dock width about which the center of unzoomed icons sit
 			int midline = DockHeight / 2;
@@ -515,24 +572,108 @@ namespace Docky.Interface
 				if (adi.Square) {
 					halfSize = ItemWidthBuffer + IconSize / 2;
 				} else {
-					DockySurface surface = adi.IconSurface (surface.Internal, IconSize);
+					DockySurface icon = adi.IconSurface (surface.Internal, IconSize);
 					
 					// yeah I am pretty sure...
 					if (adi.Square || adi.RotateWidthDock || !VerticalDock) {
-						halfSize = ItemWidthBuffer + surface.Width / 2;
+						halfSize = ItemWidthBuffer + icon.Width / 2;
 					} else {
-						halfSize = ItemWidthBuffer + surface.Height / 2;
+						halfSize = ItemWidthBuffer + icon.Height / 2;
 					}
 				}
 				// center now represents our midpoint
 				center.X += halfSize;
 				
-				
-				
-				DrawValues [adi] = val;
+				if (ZoomPercent > 1) {
+					// get us some handy doubles with fancy names
+					double cursorPosition = cursor.X;
+					double centerPosition = center.X;
+					
+					// ZoomPercent is a number greater than 1.  It should never be less than one.
+					// ZoomIn is a range of 0 to 1. we need a number that is 1 when ZoomIn is 0, 
+					// and ZoomPercent when ZoomIn is 1.  Then we treat this as 
+					// if it were the ZoomPercent for the rest of the calculation
+					double zoomInPercent = 1 + (ZoomPercent - 1) * ZoomIn;
+					
+					// offset from the center of the true position, ranged between 0 and half of the zoom range
+					double offset = Math.Min (Math.Abs (cursorPosition - centerPosition), ZoomSize / 2);
+					
+					double offsetPercent = offset / (ZoomSize / 2.0);
+					// zoom is calculated as 1 through target_zoom (default 2).  
+					// The larger your offset, the smaller your zoom
+					
+					// First we get the point on our curve that defines out current zoom
+					// offset is always going to fall on a point on the curve >= 0
+					zoom = 1 - offsetPercent * offsetPercent;
+					
+					// scale this to match out zoomInPercent
+					zoom = 1 + zoom * (zoomInPercent - 1);
+					
+					// pull in our offset to make things less spaced out
+					// explaination since this is a bit tricky...
+					// we have three terms, basically offset = f(x) * h(x) * g(x)
+					// f(x) == offset identify
+					// h(x) == a number from 0 to DockPreference.ZoomPercent - 1.  This is used to get the smooth "zoom in" effect.
+					//         additionally serves to "curve" the offset based on the max zoom
+					// g(x) == a term used to move the ends of the zoom inward.  Precalculated that the edges should be 66% of the current
+					//         value. The center is 100%. (1 - offsetPercent) == 0,1 distance from center
+					// The .66 value comes from the area under the curve.  Dont as me to explain it too much because it's too clever for me
+					offset = offset * (zoomInPercent - 1) * (1 - offsetPercent / 3);
+					
+					if (cursorPosition > centerPosition) {
+						centerPosition -= offset;
+					} else {
+						centerPosition += offset;
+					}
+					
+					if (!adi.Zoom) {
+						val.Zoom = 1;
+						val.Center = new Cairo.PointD (centerPosition, center.Y);
+					} else {
+						double zoomedCenterHeight = DockHeightBuffer + (IconSize * zoom / 2.0);
+						
+						if (zoom == 1)
+							centerPosition = Math.Round (centerPosition);
+						
+						val.Center = new Cairo.PointD (centerPosition, zoomedCenterHeight);
+						val.Zoom = zoom;
+					}
+				} else {
+					val.Zoom = 1;
+					val.Center = new PointD (center.X, center.Y);
+				}
 				
 				// move past midpoint to end of icon
 				center.X += halfSize;
+				
+				// now we undo our transforms to the point
+				switch (Position) {
+				case DockPosition.Top:
+					;
+					break;
+				case DockPosition.Left:
+					double tmpY = val.Center.Y;
+					val.Center.Y = val.Center.X;
+					val.Center.X = width - (width - tmpY);
+					break;
+				case DockPosition.Right:
+					tmpY = val.Center.Y;
+					val.Center.Y = val.Center.X;
+					val.Center.X = width - (width - tmpY);
+					val.Center.X = (geo.Width - 1) - val.Center.X;
+					
+					break;
+				case DockPosition.Bottom:
+					val.Center.Y = (geo.Height - 1) - val.Center.Y;
+					break;
+				}
+				
+				val.Center.X += geo.X;
+				val.Center.Y += geo.Y;
+				
+//				Console.WriteLine ("Point: {0} {1}", val.Center.X, val.Center.Y);
+				
+				DrawValues [adi] = val;
 			}
 		}
 		
@@ -553,7 +694,7 @@ namespace Docky.Interface
 			int hotAreaSize;
 			if (AutohideManager.Hidden) {
 				hotAreaSize = 1;
-			} else if (AutohideManager.CursorIsOverDockArea) {
+			} else if (CursorIsOverDockArea) {
 				hotAreaSize = ZoomedDockHeight;
 			} else {
 				hotAreaSize = DockHeight;
@@ -599,22 +740,34 @@ namespace Docky.Interface
 				cursorArea.Height = hotAreaSize;
 				break;
 			}
+			
+//			Console.WriteLine ("Dock Area: {0}", dockArea);
 		}
 		
 		void DrawDock (DockySurface surface)
 		{
+			surface.Clear ();
 			UpdateDrawRegionsForSurface (surface);
 			
 			Gdk.Rectangle dockArea, cursorArea;
 			GetDockAreaOnSurface (surface, out dockArea, out cursorArea);
 			
-			AutohideManager.SetDockArea (cursorArea);
+			DrawDockBackground (surface, dockArea);
+			
 			SetInputMask (cursorArea);
+			
+			// adjust our cursor area for our position
+			cursorArea.X += WindowPosition.X;
+			cursorArea.Y += WindowPosition.Y;
+			AutohideManager.SetDockArea (cursorArea);
 		}
 		
 		void DrawDockBackground (DockySurface surface, Gdk.Rectangle backgroundArea)
 		{
-			
+			Cairo.Context cr = surface.Context;
+			cr.Rectangle (backgroundArea.X, backgroundArea.Y, backgroundArea.Width, backgroundArea.Height);
+			cr.Color = new Cairo.Color (0, 0, 1, .3);
+			cr.Fill ();
 		}
 		
 		protected override void OnStyleSet (Style previous_style)
@@ -630,6 +783,11 @@ namespace Docky.Interface
 				return true;
 			
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
+				
+				render_time = DateTime.UtcNow;
+				rendering = true;
+				zoom_in_buffer = null;
+				
 				if (main_buffer == null || main_buffer.Width != Width || main_buffer.Height != Height) {
 					if (main_buffer != null)
 						main_buffer.Dispose ();
@@ -637,8 +795,10 @@ namespace Docky.Interface
 				}
 				
 				DrawDock (main_buffer);
+				cr.Operator = Operator.Source;
 				cr.SetSource (main_buffer.Internal, 0, 0);
 				cr.Paint ();
+				rendering = false;
 			}
 			
 			return false;
@@ -674,6 +834,11 @@ namespace Docky.Interface
 		public override void Dispose ()
 		{
 			UnregisterPreferencesEvents (Preferences);
+			
+			// clear out our separators
+			foreach (AbstractDockItem adi in Items.Where (adi => adi is SeparatorItem))
+				adi.Dispose ();
+			
 			
 			base.Dispose ();
 		}
