@@ -40,10 +40,19 @@ namespace Docky.Interface
 			public double Zoom;
 		}
 		
-		const int    UrgentBounceHeight   = 80;
-		const int    LaunchBounceHeight   = 30;
-		const int    DockHeightBuffer     = 7;
-		const int    DockWidthBuffer      = 5;
+		/*******************************************
+		 * Note to reader:
+		 * All values labeled X or width reference x or width as thought of from a horizontally positioned dock.
+		 * This is because as the dock rotates, the math is largely unchanged, however there needs to be a consistent
+		 * name for these directions regardless of orientation. The catch is that when speaking to cairo, x/y are
+		 * normal
+		 * *****************************************/
+		
+		const int UrgentBounceHeight = 80;
+		const int LaunchBounceHeight = 30;
+		const int DockHeightBuffer   = 7;
+		const int DockWidthBuffer    = 5;
+		const int ItemWidthBuffer    = 2;
 		
 		DateTime hidden_change_time;
 		DateTime cursor_over_dock_area_change_time;
@@ -92,12 +101,12 @@ namespace Docky.Interface
 					AbstractDockItem last = null;
 					foreach (IDockItemProvider provider in ItemProviders) {
 						if (provider.Separated && last != null)
-							collection_backend.Add (null);
+							collection_backend.Add (new SeparatorItem ());
 					
 						collection_backend.AddRange (provider.Items);
 						
 						if (provider.Separated && provider != ItemProviders.Last ())
-							collection_backend.Add (null);
+							collection_backend.Add (new SeparatorItem ());
 					}
 				}
 				return collection_frontend;
@@ -147,7 +156,7 @@ namespace Docky.Interface
 		}
 		
 		int DockWidth {
-			get;
+			get; 
 			set;
 		}
 		
@@ -321,7 +330,7 @@ namespace Docky.Interface
 
 		void PreferencesIconSizeChanged (object sender, EventArgs e)
 		{
-			
+			UpdateDockWidth ();
 		}
 
 		void PreferencesAutohideChanged (object sender, EventArgs e)
@@ -332,6 +341,11 @@ namespace Docky.Interface
 		
 		void UpdateCollectionBuffer ()
 		{
+			// dispose of our separators as we made them ourselves,
+			// this could be a bit more elegant
+			foreach (AbstractDockItem item in Items.Where (adi => adi is SeparatorItem))
+				item.Dispose ();
+			
 			collection_backend.Clear ();
 			UpdateDockWidth ();
 		}
@@ -393,11 +407,21 @@ namespace Docky.Interface
 		
 		void UpdateDockWidth ()
 		{
-			int width = 0;
-			width += IconSize      * Items.Where (w => w != null).Count ();
-			width += SeparatorSize * Items.Where (w => w == null).Count ();
+			if (GdkWindow == null)
+				return;
 			
-			DockWidth = width;
+			Surface model;
+			if (background_buffer != null) {
+				model = main_buffer.Internal;
+			} else {
+				using (Cairo.Context cr = Gdk.CairoHelper.Create (GdkWindow)) {
+					model = cr.Target;
+				}
+			}
+			
+			DockWidth = Items.Select (adi => adi.IconSurface (background_buffer.Internal, IconSize))
+					         .Sum (s => s.Width);
+			DockWidth += 2 * DockWidthBuffer;
 		}
 		
 		void SetSizeRequest ()
@@ -428,19 +452,91 @@ namespace Docky.Interface
 		}
 		
 		/// <summary>
-		/// Updates all draw regions
+		/// Updates drawing regions for the supplied surface
 		/// </summary>
-		void UpdateDrawRegions ()
+		/// <param name="surface">
+		/// The <see cref="DockySurface"/> surface off which the coordinates will be based
+		/// </param>
+		void UpdateDrawRegionsForSurface (DockySurface surface)
 		{
+			// first we do the math as if this is a top dock, to do this we need to set
+			// up some "pretend" variables
+			int width;
+			int height;
+			
+			// our width and height switch around if we have a veritcal dock
+			if (!VerticalDock) {
+				width = surface.Width;
+				height = surface.Height;
+			} else {
+				width = surface.Height;
+				height = surface.Width;
+			}
+			
+			Gdk.Point cursor = Cursor;
+			
+			Gdk.Rectangle geo;
+			Screen.GetMonitorGeometry (Monitor);
+			
+			// "relocate" our cursor to be on the top
+			switch (Position) {
+			case DockPosition.Top:
+				;
+				break;
+			case DockPosition.Left:
+				int tmpX = cursor.X;
+				cursor.X = cursor.Y;
+				cursor.Y = tmpX;
+				break;
+			case DockPosition.Right:
+				int tmpY = cursor.Y;
+				cursor.X = (geo.X + geo.Width) - cursor.X;
+				cursor.Y = cursor.X;
+				cursor.X = cursor.Y;
+				break;
+			case DockPosition.Bottom:
+				cursor.Y = (geo.Y + geo.Height) - cursor.Y;
+				break;
+			}
+			
+			// the line along the dock width about which the center of unzoomed icons sit
+			int midline = DockHeight / 2;
+			
+			// the left most edge of the first dock item
+			int startX = ((width - DockWidth) / 2) + DockWidthBuffer + ItemWidthBuffer;
+			
+			Gdk.Point center = new Gdk.Point (startX, midline);
+			
 			foreach (AbstractDockItem adi in Items) {
-				if (adi == null) {
-					// separator code here;
-					continue;
+				DrawValue val = new DrawValue ();
+				
+				// div by 2 may result in rounding errors? Will this render OK? Shorts WidthBuffer by 1?
+				int halfSize;
+				if (adi.Square) {
+					halfSize = ItemWidthBuffer + IconSize / 2;
+				} else {
+					DockySurface surface = adi.IconSurface (surface.Internal, IconSize);
+					
+					// yeah I am pretty sure...
+					if (adi.Square || adi.RotateWidthDock || !VerticalDock) {
+						halfSize = ItemWidthBuffer + surface.Width / 2;
+					} else {
+						halfSize = ItemWidthBuffer + surface.Height / 2;
+					}
 				}
+				// center now represents our midpoint
+				center.X += halfSize;
+				
+				
+				
+				DrawValues [adi] = val;
+				
+				// move past midpoint to end of icon
+				center.X += halfSize;
 			}
 		}
 		
-		void GetCurrentDockArea (out Gdk.Rectangle dockArea, out Gdk.Rectangle cursorArea)
+		void GetDockAreaOnSurface (DockySurface surface, out Gdk.Rectangle dockArea, out Gdk.Rectangle cursorArea)
 		{
 			DrawValue firstDv, lastDv;
 			Gdk.Rectangle first, last;
@@ -507,10 +603,10 @@ namespace Docky.Interface
 		
 		void DrawDock (DockySurface surface)
 		{
-			UpdateDrawRegions ();
+			UpdateDrawRegionsForSurface (surface);
 			
 			Gdk.Rectangle dockArea, cursorArea;
-			GetCurrentDockArea (out dockArea, out cursorArea);
+			GetDockAreaOnSurface (surface, out dockArea, out cursorArea);
 			
 			AutohideManager.SetDockArea (cursorArea);
 			SetInputMask (cursorArea);

@@ -42,6 +42,14 @@ namespace Docky.Items
 		public event EventHandler HoverTextChanged;
 		public event EventHandler<PaintNeededEventArgs> PaintNeeded;
 		
+		public virtual bool RotateWidthDock {
+			get { return false; }
+		}
+		
+		public virtual bool Square {
+			get { return true; }
+		}
+		
 		public string HoverText { 
 			get {
 				return hover_text;
@@ -164,11 +172,16 @@ namespace Docky.Items
 				average_color = null;
 				ResetBuffer (buffer);
 			
-				buffer = new DockySurface (size, size, model);
+				buffer = CreateIconBuffer (model, size);
 				
 				PaintIconSurface (buffer);
 			}
 			return buffer;
+		}
+		
+		protected virtual DockySurface CreateIconBuffer (Surface model, int size)
+		{
+			return new DockySurface (size, size, model);
 		}
 		
 		protected abstract void PaintIconSurface (DockySurface surface);
