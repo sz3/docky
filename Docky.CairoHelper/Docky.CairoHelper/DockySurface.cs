@@ -74,6 +74,11 @@ namespace Docky.CairoHelper
 			return result;
 		}
 		
+		public Cairo.Context GetContext ()
+		{
+			return new Cairo.Context (Internal);
+		}
+		
 		public void EnsureSurfaceModel (Surface reference)
 		{
 			if (reference == null)

@@ -34,9 +34,9 @@ namespace Docky.Items
 {
 
 
-	public abstract class WnckDockItem : AbstractDockItem
+	public abstract class WnckDockItem : IconDockItem
 	{
-		protected abstract IEnumerable<Wnck.Window> Windows { get; }
+		public abstract IEnumerable<Wnck.Window> Windows { get; }
 		
 		protected IEnumerable<Wnck.Window> ManagedWindows {
 			get {
@@ -44,15 +44,12 @@ namespace Docky.Items
 			}
 		}
 		
-		public WnckDockItem ()
-		{
-		}
-		
-		public override void SetScreenRegion (Gdk.Screen screen, Gdk.Rectangle region)
+		public sealed override void SetScreenRegion (Gdk.Screen screen, Gdk.Rectangle region)
 		{
 			foreach (Wnck.Window w in ManagedWindows) {
 				w.SetIconGeometry (region.X, region.Y, region.Width, region.Height);
 			}
 		}
+		
 	}
 }

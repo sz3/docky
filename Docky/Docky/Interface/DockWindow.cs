@@ -34,17 +34,24 @@ namespace Docky.Interface
 
 	public class DockWindow : Gtk.Window
 	{
+		struct DrawValue 
+		{
+			public PointD Center;
+			public double Zoom;
+		}
+		
 		const int    UrgentBounceHeight   = 80;
 		const int    LaunchBounceHeight   = 30;
-		const int    DockHeightBuffer   = 7;
+		const int    DockHeightBuffer     = 7;
 		const int    DockWidthBuffer      = 5;
 		
 		DateTime hidden_change_time;
 		DateTime cursor_over_dock_area_change_time;
 		
 		IDockPreferences preferences;
-		
 		DockySurface main_buffer, background_buffer, icons_buffer;
+		
+		Gdk.Rectangle current_mask_area;
 		
 		public int Width { get; private set; }
 		
@@ -58,7 +65,7 @@ namespace Docky.Interface
 		
 		DockAnimationState AnimationState { get; set; }
 		
-		Dictionary<AbstractDockItem, Gdk.Rectangle> DrawRegions { get; set; }
+		Dictionary<AbstractDockItem, DrawValue> DrawValues { get; set; }
 		
 		public IDockPreferences Preferences { 
 			get { return preferences; }
@@ -139,8 +146,17 @@ namespace Docky.Interface
 			get { return IconSize + 2 * DockHeightBuffer; }
 		}
 		
+		int DockWidth {
+			get;
+			set;
+		}
+		
 		int ItemHorizontalBuffer {
 			get { return (int) (0.08 * IconSize); }
+		}
+		
+		int SeparatorSize {
+			get { return (int) (.2 * IconSize); }
 		}
 		
 		bool VerticalDock {
@@ -156,13 +172,13 @@ namespace Docky.Interface
 			}
 		}
 		
-		int ZoomedDockSize {
+		int ZoomedDockHeight {
 			get { return ZoomedIconSize + 2 * DockHeightBuffer; }
 		}
 		
 		public DockWindow () : base (Gtk.WindowType.Toplevel)
 		{
-			DrawRegions = new Dictionary<AbstractDockItem, Gdk.Rectangle> ();
+			DrawValues = new Dictionary<AbstractDockItem, DrawValue> ();
 			AnimationState = new DockAnimationState ();
 			BuildAnimationEngine ();
 			
@@ -200,8 +216,8 @@ namespace Docky.Interface
 			
 			AutohideManager = new AutohideManager (Screen);
 			AutohideManager.Behavior = Preferences.Autohide;
-			AutohideManager.HiddenChanged += AutohideManagerHiddenChanged;
-			AutohideManager.CursorIsOverDockAreaChanged += AutohideManagerCursorIsOverDockAreaChanged;
+			AutohideManager.HiddenChanged += HandleHiddenChanged;
+			AutohideManager.CursorIsOverDockAreaChanged += HandleCursorIsOverDockAreaChanged;
 			
 			Screen.SizeChanged += ScreenSizeChanged;
 			
@@ -213,7 +229,7 @@ namespace Docky.Interface
 			SetSizeRequest ();
 		}
 
-		void AutohideManagerCursorIsOverDockAreaChanged (object sender, EventArgs e)
+		void HandleCursorIsOverDockAreaChanged (object sender, EventArgs e)
 		{
 			cursor_over_dock_area_change_time = DateTime.UtcNow;
 			
@@ -223,7 +239,7 @@ namespace Docky.Interface
 				CursorTracker.CancelHighResolution (this);
 		}
 
-		void AutohideManagerHiddenChanged (object sender, EventArgs e)
+		void HandleHiddenChanged (object sender, EventArgs e)
 		{
 			hidden_change_time = DateTime.UtcNow;
 		}
@@ -245,10 +261,10 @@ namespace Docky.Interface
 		
 		void ProviderItemsChanged (object sender, ItemsChangedArgs args)
 		{
-			collection_backend.Clear ();
+			UpdateCollectionBuffer ();
 			
 			if (args.Type == AddRemoveChangeType.Remove)
-				DrawRegions.Remove (args.Item);
+				DrawValues.Remove (args.Item);
 		}
 		
 		void RegisterPreferencesEvents (IDockPreferences preferences)
@@ -285,7 +301,7 @@ namespace Docky.Interface
 			} else {
 				UnregisterItemProvider (e.Provider);
 			}
-			collection_backend.Clear ();
+			UpdateCollectionBuffer ();
 		}
 
 		void PreferencesZoomPercentChanged (object sender, EventArgs e)
@@ -313,6 +329,12 @@ namespace Docky.Interface
 			
 		}
 		#endregion
+		
+		void UpdateCollectionBuffer ()
+		{
+			collection_backend.Clear ();
+			UpdateDockWidth ();
+		}
 		
 		void SetCompositeColormap ()
 		{
@@ -369,6 +391,15 @@ namespace Docky.Interface
 			}
 		}
 		
+		void UpdateDockWidth ()
+		{
+			int width = 0;
+			width += IconSize      * Items.Where (w => w != null).Count ();
+			width += SeparatorSize * Items.Where (w => w == null).Count ();
+			
+			DockWidth = width;
+		}
+		
 		void SetSizeRequest ()
 		{
 			Gdk.Rectangle geo;
@@ -388,12 +419,19 @@ namespace Docky.Interface
 			
 		}
 		
+		Gdk.Rectangle DrawValueToRectangle (DrawValue val, int iconSize)
+		{
+			return new Gdk.Rectangle ((int) (val.Center.X - (iconSize * val.Zoom / 2)),
+			                          (int) (val.Center.Y - (iconSize * val.Zoom / 2)),
+			                          (int) (iconSize * val.Zoom),
+			                          (int) (iconSize * val.Zoom));
+		}
+		
 		/// <summary>
 		/// Updates all draw regions
 		/// </summary>
 		void UpdateDrawRegions ()
 		{
-			
 			foreach (AbstractDockItem adi in Items) {
 				if (adi == null) {
 					// separator code here;
@@ -402,23 +440,28 @@ namespace Docky.Interface
 			}
 		}
 		
-		void DrawDock (DockySurface surface)
+		void GetCurrentDockArea (out Gdk.Rectangle dockArea, out Gdk.Rectangle cursorArea)
 		{
-			UpdateDrawRegions ();
-			
+			DrawValue firstDv, lastDv;
 			Gdk.Rectangle first, last;
 			
-			// whilst not immediately obvious, the first item in the enumeration should always
-			// be the first dock item, and the last should be the last. The proper data structure
-			// is perhaps not a dictionary. Future consideration needed. Also note that Items may
-			// not start or end with a null.
-			first = DrawRegions [Items.First ()];
-			last = DrawRegions [Items.Last ()];
+			firstDv = DrawValues [Items [0]];
+			lastDv  = DrawValues [Items [Items.Count - 1]];
 			
-			Gdk.Rectangle dockArea = new Gdk.Rectangle (0, 0, 0, 0);
-			Gdk.Rectangle hotArea = new Gdk.Rectangle (0, 0, 0, 0);
+			first = DrawValueToRectangle (firstDv, IconSize);
+			last  = DrawValueToRectangle (lastDv, IconSize);
 			
-			int hotAreaSize = (AutohideManager.Hidden) ? 1 : ZoomedDockSize;
+			dockArea = new Gdk.Rectangle (0, 0, 0, 0);
+			cursorArea = new Gdk.Rectangle (0, 0, 0, 0);
+			
+			int hotAreaSize;
+			if (AutohideManager.Hidden) {
+				hotAreaSize = 1;
+			} else if (AutohideManager.CursorIsOverDockArea) {
+				hotAreaSize = ZoomedDockHeight;
+			} else {
+				hotAreaSize = DockHeight;
+			}
 			
 			switch (Position) {
 			case DockPosition.Top:
@@ -427,41 +470,50 @@ namespace Docky.Interface
 				dockArea.Width = last.X + DockWidthBuffer - dockArea.X;
 				dockArea.Height = DockHeight;
 				
-				hotArea = dockArea;
-				hotArea.Height = hotAreaSize;
+				cursorArea = dockArea;
+				cursorArea.Height = hotAreaSize;
 				break;
 			case DockPosition.Left:
 				dockArea.X = 0;
 				dockArea.Y = first.Y - DockWidthBuffer;
 				dockArea.Width = DockHeight;
-				dockArea.Height = last.Y + hotAreaSize - dockArea.Y;
+				dockArea.Height = (last.Y + last.Height + DockWidthBuffer) - dockArea.Y;
 				
-				hotArea = dockArea;
-				hotArea.Width = hotAreaSize;
+				cursorArea = dockArea;
+				cursorArea.Width = hotAreaSize;
 				break;
 			case DockPosition.Right:
 				dockArea.X = surface.Width - DockHeight;
 				dockArea.Y = first.Y - DockWidthBuffer;
 				dockArea.Width = DockHeight;
-				dockArea.Height = last.Y + DockWidthBuffer - dockArea.Y;
+				dockArea.Height = (last.Y + last.Height + DockWidthBuffer) - dockArea.Y;
 				
-				hotArea = dockArea;
-				hotArea.X = dockArea.X + dockArea.Width - hotAreaSize;
-				hotArea.Width = hotAreaSize;
+				cursorArea = dockArea;
+				cursorArea.X = dockArea.X + dockArea.Width - hotAreaSize;
+				cursorArea.Width = hotAreaSize;
 				break;
 			case DockPosition.Bottom:
 				dockArea.X = first.X - DockWidthBuffer;
 				dockArea.Y = surface.Height - DockHeight;
-				dockArea.Width = last.X + DockWidthBuffer - dockArea.X;
+				dockArea.Width = (last.X + last.Width + DockWidthBuffer) - dockArea.X;
 				dockArea.Height = DockHeight;
 				
-				hotArea = dockArea;
-				hotArea.Y = dockArea.Y + dockArea.Height - hotAreaSize;
-				hotArea.Height = hotAreaSize;
+				cursorArea = dockArea;
+				cursorArea.Y = dockArea.Y + dockArea.Height - hotAreaSize;
+				cursorArea.Height = hotAreaSize;
 				break;
 			}
+		}
+		
+		void DrawDock (DockySurface surface)
+		{
+			UpdateDrawRegions ();
 			
-			AutohideManager.SetDockArea (hotArea);
+			Gdk.Rectangle dockArea, cursorArea;
+			GetCurrentDockArea (out dockArea, out cursorArea);
+			
+			AutohideManager.SetDockArea (cursorArea);
+			SetInputMask (cursorArea);
 		}
 		
 		void DrawDockBackground (DockySurface surface, Gdk.Rectangle backgroundArea)
@@ -478,10 +530,48 @@ namespace Docky.Interface
 		
 		protected override bool OnExposeEvent (EventExpose evnt)
 		{
-			if (!IsRealized)
+			if (!IsRealized || !Items.Any ())
 				return true;
 			
+			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
+				if (main_buffer == null || main_buffer.Width != Width || main_buffer.Height != Height) {
+					if (main_buffer != null)
+						main_buffer.Dispose ();
+					main_buffer = new DockySurface (Width, Height, cr.Target);
+				}
+				
+				DrawDock (main_buffer);
+				cr.SetSource (main_buffer.Internal, 0, 0);
+				cr.Paint ();
+			}
+			
 			return false;
+		}
+
+		#endregion
+		
+		#region XServer Related
+		void SetInputMask (Gdk.Rectangle area)
+		{
+			if (!IsRealized || current_mask_area == area)
+				return;
+
+			current_mask_area = area;
+			if (area.Width == 0 || area.Height == 0) {
+				InputShapeCombineMask (null, 0, 0);
+				return;
+			}
+
+			Gdk.Pixmap pixmap = new Gdk.Pixmap (null, area.Width, area.Height, 1);
+			Context cr = Gdk.CairoHelper.Create (pixmap);
+			
+			cr.Color = new Cairo.Color (0, 0, 0, 1);
+			cr.Paint ();
+
+			InputShapeCombineMask (pixmap, area.X, area.Y);
+			
+			(cr as IDisposable).Dispose ();
+			pixmap.Dispose ();
 		}
 		#endregion
 		

@@ -31,7 +31,7 @@ namespace Docky.Items
 		
 		bool Separated { get; }
 		
-		ReadOnlyCollection<AbstractDockItem> Items { get; }
+		IEnumerable<AbstractDockItem> Items { get; }
 		
 		bool ItemCanBeMoved (AbstractDockItem item);
 		

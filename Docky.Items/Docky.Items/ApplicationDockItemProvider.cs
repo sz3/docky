@@ -31,7 +31,43 @@ namespace Docky.Items
 
 	public class ApplicationDockItemProvider : IDockItemProvider
 	{
-
+		public static ApplicationDockItemProvider WindowManager;
+		static List<ApplicationDockItemProvider> Providers = new List<ApplicationDockItemProvider> ();
+		
+		List<AbstractDockItem> items;
+		
+		public bool InsertItem (string desktop_file)
+		{
+			return InsertItemAt (desktop_file, 0);
+		}
+		
+		public bool InsertItemAt (string desktop_file, int position)
+		{
+			if (desktop_file == null)
+				throw new ArgumentNullException ("desktop file");
+			
+			ApplicationDockItem item = ApplicationDockItem.NewFromFilename (desktop_file);
+			if (item == null) return false;
+			
+			items.Insert (position, item);
+			return true;
+		}
+		
+		public bool SetWindowManager ()
+		{
+			if (WindowManager != null)
+				WindowManager.UnsetWindowManager ();
+			
+			WindowManager = this;
+			return true;
+		}
+		
+		public bool UnsetWindowManager ()
+		{
+			WindowManager = null;
+			return true;
+		}
+		
 		#region IDockItemProvider implementation
 		public event EventHandler<ItemsChangedArgs> ItemsChanged;
 		
@@ -39,33 +75,47 @@ namespace Docky.Items
 		
 		public bool ItemCanBeMoved (AbstractDockItem item)
 		{
-			throw new System.NotImplementedException();
+			return true;
 		}
 		
 		public bool ItemCanBeRemoved (AbstractDockItem item)
 		{
-			throw new System.NotImplementedException();
+			return true;
 		}
 		
 		public bool MoveItem (AbstractDockItem item, int position)
 		{
-			throw new System.NotImplementedException();
+			if (!items.Contains (item))
+				return false;
+			
+			items.Remove (item);
+			items.Insert (position, item);
+			
+			return true;
 		}
 		
 		public bool RemoveItem (AbstractDockItem item)
 		{
-			throw new System.NotImplementedException();
+			return false;
 		}
 		
-		public ReadOnlyCollection<AbstractDockItem> Items {
+		public IEnumerable<AbstractDockItem> Items {
 			get {
-				throw new System.NotImplementedException();
+				return items.AsEnumerable ();
 			}
 		}
 		#endregion
 
 		public ApplicationDockItemProvider ()
 		{
+			items = new List<AbstractDockItem> ();
+			
+			Providers.Add (this);
+		}
+		
+		~ApplicationDockItemProvider ()
+		{
+			Providers.Remove (this);
 		}
 	}
 }

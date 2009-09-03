@@ -167,6 +167,12 @@ namespace Docky.Interface
 			
 			ApplicationProvider = new ApplicationDockItemProvider ();
 			item_providers.Add (ApplicationProvider);
+			
+			ApplicationProvider.InsertItem ("/usr/share/applications/banshee-1.desktop");
+			ApplicationProvider.InsertItem ("/usr/share/applications/gnome-terminal.desktop");
+			ApplicationProvider.InsertItem ("/usr/share/applications/pidgin.desktop");
+			ApplicationProvider.InsertItem ("/usr/share/applications/xchat.desktop");
+			ApplicationProvider.InsertItem ("/usr/share/applications/firefox.desktop");
 		}
 		
 		void OnAutohideChanged ()

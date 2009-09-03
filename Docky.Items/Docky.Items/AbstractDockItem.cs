@@ -149,6 +149,14 @@ namespace Docky.Items
 		}
 		#endregion
 		
+		public virtual void Clicked (uint button, Gdk.ModifierType mod)
+		{
+		}
+		
+		public virtual void Scrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
+		{
+		}
+		
 		#region Buffer Handling
 		public DockySurface IconSurface (Surface model, int size)
 		{

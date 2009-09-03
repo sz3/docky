@@ -18,8 +18,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.InteropServices;
 using System.Linq;
 using System.Text;
+
+using Docky.Windowing;
+using Docky.Xlib;
 
 namespace Wnck
 {
@@ -27,11 +31,66 @@ namespace Wnck
 
 	public static class Window_Extensions
 	{
+		public static int Area (this Wnck.Window self)
+		{
+			Gdk.Rectangle geo = self.EasyGeometry ();
+			return geo.Width * geo.Height;
+		}
+		
 		public static Gdk.Rectangle EasyGeometry (this Window self)
 		{
 			Gdk.Rectangle geo;
 			self.GetGeometry (out geo.X, out geo.Y, out geo.Width, out geo.Height);
 			return geo;
+		}
+		
+		public static void SetWorkaroundGeometry (this Wnck.Window window, WindowGravity gravity, WindowMoveResizeMask mask, 
+		                                     int x, int y, int width, int height)
+		{
+			// This is very weird.  Don't know when they will fix it. You must subtract the top and left
+			// frame extents from a move operation to get the window to actually show in the right spot.
+			// Save for maybe kwin, I think only compiz uses Viewports anyhow, so this is ok.
+			int [] extents = window.FrameExtents ();
+			
+			x -= extents [(int) Position.Left];
+			y -= extents [(int) Position.Top];
+			
+			window.SetGeometry (gravity, mask, x, y, width, height);
+		}
+		
+		public static int [] FrameExtents (this Wnck.Window window)
+		{
+			return GetCardinalProperty (window, X11Atoms.Instance._NET_FRAME_EXTENTS);
+		}
+		
+		public static int [] GetCardinalProperty (this Wnck.Window window, IntPtr atom)
+		{
+			X11Atoms atoms = X11Atoms.Instance;
+			IntPtr display;
+			IntPtr type;
+			int format;
+			IntPtr prop_return;
+			IntPtr nitems, bytes_after;
+			int result;
+			int [] extents = new int[12];
+			
+			IntPtr window_handle = (IntPtr) window.Xid;
+			
+			display = Xlib.GdkDisplayXDisplay (Gdk.Screen.Default.Display);
+			type = IntPtr.Zero;
+			
+			result = Xlib.XGetWindowProperty (display, window_handle, atom, (IntPtr) 0,
+			                                  (IntPtr) System.Int32.MaxValue, false, atoms.XA_CARDINAL, out type, out format,
+			                                  out nitems, out bytes_after, out prop_return);
+			
+			if (type == atoms.XA_CARDINAL && format == 32) {
+				extents = new int [(int) nitems];
+				for (int i = 0; i < (int) nitems; i++) {
+					extents [i] = Marshal.ReadInt32 (prop_return, i * IntPtr.Size);
+				}
+			}
+			
+			return extents;
 		}
 	}
 }
