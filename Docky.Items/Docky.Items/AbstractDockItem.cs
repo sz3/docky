@@ -37,7 +37,7 @@ namespace Docky.Items
 	{
 		string hover_text;
 		int position;
-		DockySurface buffer, text_buffer;
+		DockySurface main_buffer, text_buffer;
 		Cairo.Color? average_color;
 		
 		public event EventHandler PositionChanged;
@@ -65,7 +65,7 @@ namespace Docky.Items
 					return;
 				
 				hover_text = value;
-				ResetBuffer (text_buffer);
+				text_buffer = ResetBuffer (text_buffer);
 				OnHoverTextChanged ();
 			}
 		}
@@ -94,16 +94,16 @@ namespace Docky.Items
 		
 		public Cairo.Color AverageColor ()
 		{
-			if (buffer == null)
+			if (main_buffer == null)
 				return new Cairo.Color (1, 1, 1, 1);
 			
 			if (average_color.HasValue)
 				return average_color.Value;
 				
-			ImageSurface sr = new ImageSurface (Format.ARGB32, buffer.Width, buffer.Height);
+			ImageSurface sr = new ImageSurface (Format.ARGB32, main_buffer.Width, main_buffer.Height);
 			using (Context cr = new Context (sr)) {
 				cr.Operator = Operator.Source;
-				buffer.Internal.Show (cr, 0, 0);
+				main_buffer.Internal.Show (cr, 0, 0);
 			}
 			
 			sr.Flush ();
@@ -141,7 +141,7 @@ namespace Docky.Items
 				gTotal += g * score;
 				bTotal += b * score;
 			}
-			double pixelCount = buffer.Width * buffer.Height * byte.MaxValue;
+			double pixelCount = main_buffer.Width * main_buffer.Height * byte.MaxValue;
 			
 			sr.Destroy ();
 			
@@ -187,15 +187,15 @@ namespace Docky.Items
 		#region Buffer Handling
 		public DockySurface IconSurface (Surface model, int size)
 		{
-			if (buffer == null || buffer.Height != size || buffer.Width != size) {
+			if (main_buffer == null || main_buffer.Height != size || main_buffer.Width != size) {
 				average_color = null;
-				ResetBuffer (buffer);
+				main_buffer = ResetBuffer (main_buffer);
 			
-				buffer = CreateIconBuffer (model, size);
+				main_buffer = CreateIconBuffer (model, size);
 				
-				PaintIconSurface (buffer);
+				PaintIconSurface (main_buffer);
 			}
-			return buffer;
+			return main_buffer;
 		}
 		
 		protected virtual DockySurface CreateIconBuffer (Surface model, int size)
@@ -245,16 +245,17 @@ namespace Docky.Items
 		
 		public void ResetBuffers ()
 		{
-			ResetBuffer (buffer);
-			ResetBuffer (text_buffer);
+			main_buffer = ResetBuffer (main_buffer);
+			text_buffer = ResetBuffer (text_buffer);
 		}
 		
-		void ResetBuffer (DockySurface buffer)
+		DockySurface ResetBuffer (DockySurface buffer)
 		{
 			if (buffer != null) {
 				buffer.Dispose ();
-				buffer = null;
 			}
+			
+			return null;
 		}
 		#endregion
 		

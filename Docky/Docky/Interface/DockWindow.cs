@@ -64,7 +64,7 @@ namespace Docky.Interface
 		DateTime render_time;
 		
 		IDockPreferences preferences;
-		DockySurface main_buffer, background_buffer, icons_buffer;
+		DockySurface main_buffer, background_buffer;
 		
 		Gdk.Rectangle current_mask_area;
 		double? zoom_in_buffer;
@@ -154,7 +154,7 @@ namespace Docky.Interface
 		}
 		
 		double ZoomPercent {
-			get { return Preferences.ZoomPercent; }
+			get { return ZoomEnabled ? Preferences.ZoomPercent : 1; }
 		}
 		#endregion
 		
@@ -365,17 +365,18 @@ namespace Docky.Interface
 
 		void PreferencesZoomPercentChanged (object sender, EventArgs e)
 		{
-			
+			AnimatedDraw ();
 		}
 
 		void PreferencesZoomEnabledChanged (object sender, EventArgs e)
 		{
-			
+			AnimatedDraw ();
 		}
 
 		void PreferencesPositionChanged (object sender, EventArgs e)
 		{
-			
+			Reposition ();
+			SetSizeRequest ();
 		}
 
 		void PreferencesIconSizeChanged (object sender, EventArgs e)
@@ -486,8 +487,7 @@ namespace Docky.Interface
 				}
 			}
 			
-			DockWidth = Items.Select (adi => adi.IconSurface (model, IconSize))
-					         .Sum (s => s.Width);
+			DockWidth = Items.Sum (adi => adi.Square ? IconSize : adi.IconSurface (model, IconSize).Width);
 			DockWidth += 2 * DockWidthBuffer;
 		}
 		
@@ -968,6 +968,19 @@ namespace Docky.Interface
 			pixmap.Dispose ();
 		}
 		#endregion
+		
+		void ResetBuffers ()
+		{
+			if (main_buffer != null) {
+				main_buffer.Dispose ();
+				main_buffer = null;
+			}
+			
+			if (background_buffer != null) {
+				background_buffer.Dispose ();
+				background_buffer = null;
+			}
+		}
 		
 		public override void Dispose ()
 		{
