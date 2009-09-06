@@ -60,7 +60,7 @@ namespace Docky.Interface
 		readonly TimeSpan BaseAnimationTime = new TimeSpan (0, 0, 0, 0, 150);
 		
 		DateTime hidden_change_time;
-		DateTime cursor_over_dock_area_change_time;
+		DateTime dock_hovered_change_time;
 		DateTime render_time;
 		
 		IDockPreferences preferences;
@@ -69,6 +69,7 @@ namespace Docky.Interface
 		Gdk.Rectangle current_mask_area;
 		double? zoom_in_buffer;
 		bool rendering;
+		uint animation_timer;
 		
 		public int Width { get; private set; }
 		
@@ -80,7 +81,7 @@ namespace Docky.Interface
 		
 		CursorTracker CursorTracker { get; set; }
 		
-		DockAnimationState AnimationState { get; set; }
+		AnimationState AnimationState { get; set; }
 		
 		Dictionary<AbstractDockItem, DrawValue> DrawValues { get; set; }
 		
@@ -126,8 +127,8 @@ namespace Docky.Interface
 			get { return Preferences.Autohide; }
 		}
 		
-		bool CursorIsOverDockArea {
-			get { return AutohideManager.CursorIsOverDockArea; }
+		bool DockHovered {
+			get { return AutohideManager.DockHovered; }
 		}
 		
 		IEnumerable<IDockItemProvider> ItemProviders {
@@ -211,9 +212,9 @@ namespace Docky.Interface
 					return zoom_in_buffer.Value;
 				}
 				
-				double zoom = Math.Min (1, (render_time - cursor_over_dock_area_change_time).TotalMilliseconds / 
+				double zoom = Math.Min (1, (render_time - dock_hovered_change_time).TotalMilliseconds / 
 				                        BaseAnimationTime.TotalMilliseconds);
-				if (!CursorIsOverDockArea) {
+				if (!DockHovered) {
 					zoom = 1 - zoom;
 				}
 				
@@ -231,7 +232,7 @@ namespace Docky.Interface
 		public DockWindow () : base (Gtk.WindowType.Toplevel)
 		{
 			DrawValues = new Dictionary<AbstractDockItem, DrawValue> ();
-			AnimationState = new DockAnimationState ();
+			AnimationState = new AnimationState ();
 			BuildAnimationEngine ();
 			
 			collection_backend = new List<AbstractDockItem> ();
@@ -255,7 +256,8 @@ namespace Docky.Interface
 		
 		void BuildAnimationEngine ()
 		{
-			
+			AnimationState.AddCondition (Animations.DockHoveredChanged, 
+			                             () => (DockHovered && ZoomIn != 1) || (!DockHovered && ZoomIn != 0)); 
 		}
 
 		#region Event Handling
@@ -269,7 +271,7 @@ namespace Docky.Interface
 			AutohideManager = new AutohideManager (Screen);
 			AutohideManager.Behavior = Preferences.Autohide;
 			AutohideManager.HiddenChanged += HandleHiddenChanged;
-			AutohideManager.CursorIsOverDockAreaChanged += HandleCursorIsOverDockAreaChanged;
+			AutohideManager.DockHoveredChanged += HandleDockHoveredChanged;
 			
 			Screen.SizeChanged += ScreenSizeChanged;
 			
@@ -282,24 +284,28 @@ namespace Docky.Interface
 			SetSizeRequest ();
 		}
 
-		void HandleCursorIsOverDockAreaChanged (object sender, EventArgs e)
+		void HandleDockHoveredChanged (object sender, EventArgs e)
 		{
-			cursor_over_dock_area_change_time = DateTime.UtcNow;
+			dock_hovered_change_time = DateTime.UtcNow;
 			
-			if (CursorIsOverDockArea)
+			if (DockHovered)
 				CursorTracker.RequestHighResolution (this);
 			else
 				CursorTracker.CancelHighResolution (this);
+			
+			AnimatedDraw ();
 		}
 
 		void HandleHiddenChanged (object sender, EventArgs e)
 		{
 			hidden_change_time = DateTime.UtcNow;
+			
+			AnimatedDraw ();
 		}
 
 		void HandleCursorPositionChanged (object sender, CursorPostionChangedArgs e)
 		{
-			QueueDraw ();
+			AnimatedDraw ();
 		}
 		
 		void RegisterItemProvider (IDockItemProvider provider)
@@ -382,6 +388,23 @@ namespace Docky.Interface
 			
 		}
 		#endregion
+		
+		protected override bool OnMotionNotifyEvent (EventMotion evnt)
+		{
+			CursorTracker.SendManualUpdate (evnt);
+			return base.OnMotionNotifyEvent (evnt);
+		}
+		
+		protected override bool OnEnterNotifyEvent (EventCrossing evnt)
+		{
+			CursorTracker.SendManualUpdate (evnt);
+			return base.OnEnterNotifyEvent (evnt);
+		}
+
+		protected override bool OnLeaveNotifyEvent (EventCrossing evnt)
+		{
+			return base.OnLeaveNotifyEvent (evnt);
+		}
 		
 		void UpdateCollectionBuffer ()
 		{
@@ -489,7 +512,30 @@ namespace Docky.Interface
 		#region Drawing
 		void AnimatedDraw ()
 		{
+			if (0 < animation_timer) {
+				return;
+			}
 			
+			// the presense of this queue draw has caused some confusion, so I will explain.
+			// first its here to draw the "first frame".  Without it, we have a 16ms delay till that happens,
+			// however minor that is.
+			QueueDraw ();
+			
+			if (AnimationState.AnimationNeeded)
+				animation_timer = GLib.Timeout.Add (1000/60, OnDrawTimeoutElapsed);
+		}
+		
+		bool OnDrawTimeoutElapsed ()
+		{
+			QueueDraw ();
+			
+			if (AnimationState.AnimationNeeded)
+				return true;
+			
+			//reset the timer to 0 so that the next time AnimatedDraw is called we fall back into
+			//the draw loop.
+			animation_timer = 0;
+			return false;
 		}
 		
 		// fixme, this ONLY works for square items
@@ -670,10 +716,6 @@ namespace Docky.Interface
 				val.Center.X += geo.X;
 				val.Center.Y += geo.Y;
 				
-				Console.WriteLine ("Dock: {0} Width: {1} Height {2}", Position, Width, Height);
-				Console.WriteLine ("Point: {0} {1}", val.Center.X, val.Center.Y);
-				Console.WriteLine ();
-				
 				DrawValues [adi] = val;
 			}
 		}
@@ -695,7 +737,7 @@ namespace Docky.Interface
 			int hotAreaSize;
 			if (AutohideManager.Hidden) {
 				hotAreaSize = 1;
-			} else if (CursorIsOverDockArea) {
+			} else if (DockHovered) {
 				hotAreaSize = ZoomedDockHeight;
 			} else {
 				hotAreaSize = DockHeight;
@@ -780,7 +822,7 @@ namespace Docky.Interface
 				}
 					
 					
-				Gdk.Pixbuf background = new Gdk.Pixbuf (Assembly.GetExecutingAssembly (), "classic.svg");
+				Gdk.Pixbuf background = new Gdk.Pixbuf (Assembly.GetExecutingAssembly (), "grayscale.svg");
 				
 				Gdk.Pixbuf tmp;
 				

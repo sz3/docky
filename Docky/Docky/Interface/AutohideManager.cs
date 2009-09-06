@@ -33,7 +33,7 @@ namespace Docky.Interface
 	public class AutohideManager : IDisposable
 	{
 		public event EventHandler HiddenChanged;
-		public event EventHandler CursorIsOverDockAreaChanged;
+		public event EventHandler DockHoveredChanged;
 		
 		Gdk.Rectangle dock_area, last_known_geo;
 		Wnck.Screen screen;
@@ -41,15 +41,15 @@ namespace Docky.Interface
 		
 		bool WindowIntersectingOther { get; set; }
 		
-		bool cursorIsOverDockArea;
-		public bool CursorIsOverDockArea {
-			get { return cursorIsOverDockArea; }
+		bool dockHoverd;
+		public bool DockHovered {
+			get { return dockHoverd; }
 			private set { 
-				if (cursorIsOverDockArea == value)
+				if (dockHoverd == value)
 					return;
 				
-				cursorIsOverDockArea = value; 
-				OnCursorIsOverDockAreaChanged ();
+				dockHoverd = value; 
+				OnDockHoveredChanged ();
 			}
 		}
 		
@@ -96,7 +96,7 @@ namespace Docky.Interface
 		
 		void HandleCursorPositionChanged (object sender, CursorPostionChangedArgs args)
 		{
-			CursorIsOverDockArea = dock_area.Contains (tracker.Cursor);
+			DockHovered = dock_area.Contains (tracker.Cursor);
 			SetHidden ();
 		}
 
@@ -162,18 +162,18 @@ namespace Docky.Interface
 				Hidden = false;
 				break;
 			case AutohideType.Autohide:
-				Hidden = !CursorIsOverDockArea;
+				Hidden = !DockHovered;
 				break;
 			case AutohideType.Intellihide:
-				Hidden = !CursorIsOverDockArea && WindowIntersectingOther;
+				Hidden = !DockHovered && WindowIntersectingOther;
 				break;
 			}
 		}
 		
-		void OnCursorIsOverDockAreaChanged ()
+		void OnDockHoveredChanged ()
 		{
-			if (CursorIsOverDockAreaChanged != null)
-				CursorIsOverDockAreaChanged (this, EventArgs.Empty);
+			if (DockHoveredChanged != null)
+				DockHoveredChanged (this, EventArgs.Empty);
 		}
 		
 		void OnHiddenChanged ()

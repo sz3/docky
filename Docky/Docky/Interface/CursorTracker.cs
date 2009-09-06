@@ -84,6 +84,16 @@ namespace Docky.Interface
 			ResetTimer ();
 		}
 		
+		public void SendManualUpdate (Gdk.EventCrossing evnt)
+		{
+			Update (evnt.Window.Screen, (int) evnt.XRoot, (int) evnt.YRoot, evnt.State);
+		}
+		
+		public void SendManualUpdate (Gdk.EventMotion evnt)
+		{
+			Update (evnt.Window.Screen, (int) evnt.XRoot, (int) evnt.YRoot, evnt.State);
+		}
+		
 		void ResetTimer ()
 		{
 			uint length = resolution_senders.Any () ? HighResTimeout : LowResTimeout;
@@ -98,12 +108,19 @@ namespace Docky.Interface
 		
 		bool OnTimerTick ()
 		{
-			Gdk.Point lastPostion = Cursor;
-			
 			int x, y;
 			ModifierType mod;
 			Gdk.Screen screen;
 			display.GetPointer (out screen, out x, out y, out mod);
+			
+			Update (screen, x, y, mod);
+			
+			return true;
+		}
+		
+		void Update (Gdk.Screen screen, int x, int y, Gdk.ModifierType mod)
+		{
+			Gdk.Point lastPostion = Cursor;
 			
 			Cursor = new Gdk.Point (x, y);
 			Modifier = mod;
@@ -111,8 +128,6 @@ namespace Docky.Interface
 			
 			if (lastPostion != Cursor)
 				OnCursorPositionChanged (lastPostion);
-			
-			return true;
 		}
 		
 		void OnCursorPositionChanged (Gdk.Point oldPoint)

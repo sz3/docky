@@ -26,18 +26,15 @@ namespace Docky.Interface
 	public delegate bool AnimationConditionHandler ();
 	
 	public enum Animations {
-		Open,
-		Zoom,
+		HideChanged,
+		DockHoveredChanged,
 		Bounce,
-		Painter,
-		Summon,
 		IconInsert,
 		UrgencyChanged,
-		InputModeChanged,
 		ActiveWindowChanged,
 	}
 	
-	public class DockAnimationState : IDisposable
+	public class AnimationState : IDisposable
 	{
 		Dictionary<Animations, AnimationConditionHandler> animation_conditions;
 		bool previous_animation_needed;
@@ -53,7 +50,7 @@ namespace Docky.Interface
 			}
 		}
 		
-		public DockAnimationState()
+		public AnimationState()
 		{
 			animation_conditions = new Dictionary<Animations, AnimationConditionHandler> ();
 		}
