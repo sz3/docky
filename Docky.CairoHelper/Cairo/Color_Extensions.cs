@@ -21,7 +21,7 @@ namespace Cairo
 {
 
 
-	public static class CairoColor_Extensions
+	public static class Color_Extensions
 	{
 		public static Gdk.Color ToGdkColor (this Color self)
 		{

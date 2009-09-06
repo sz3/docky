@@ -37,8 +37,6 @@ namespace Docky.Items
 		
 		bool ItemCanBeRemoved (AbstractDockItem item);
 		
-		bool MoveItem (AbstractDockItem item, int position);
-		
 		bool RemoveItem (AbstractDockItem item);
 	}
 }

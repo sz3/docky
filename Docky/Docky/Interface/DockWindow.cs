@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Reflection;
 using System.Linq;
 using System.Text;
 
@@ -53,6 +54,8 @@ namespace Docky.Interface
 		const int DockHeightBuffer   = 7;
 		const int DockWidthBuffer    = 5;
 		const int ItemWidthBuffer    = 2;
+		const int BackgroundWidth    = 1000;
+		const int BackgroundHeight   = 128;
 		
 		readonly TimeSpan BaseAnimationTime = new TimeSpan (0, 0, 0, 0, 150);
 		
@@ -523,7 +526,6 @@ namespace Docky.Interface
 			}
 			
 			Gdk.Point cursor = Cursor;
-			Console.WriteLine (cursor);
 			
 			Gdk.Rectangle geo;
 			geo = Screen.GetMonitorGeometry (Monitor);
@@ -552,9 +554,6 @@ namespace Docky.Interface
 				cursor.Y = (geo.Height - 1) - cursor.Y;
 				break;
 			}
-			
-			Console.WriteLine (cursor);
-			Console.WriteLine ();
 			
 			// the line along the dock width about which the center of unzoomed icons sit
 			int midline = DockHeight / 2;
@@ -660,18 +659,20 @@ namespace Docky.Interface
 					tmpY = val.Center.Y;
 					val.Center.Y = val.Center.X;
 					val.Center.X = width - (width - tmpY);
-					val.Center.X = (geo.Width - 1) - val.Center.X;
+					val.Center.X = (height - 1) - val.Center.X;
 					
 					break;
 				case DockPosition.Bottom:
-					val.Center.Y = (geo.Height - 1) - val.Center.Y;
+					val.Center.Y = (height - 1) - val.Center.Y;
 					break;
 				}
 				
 				val.Center.X += geo.X;
 				val.Center.Y += geo.Y;
 				
-//				Console.WriteLine ("Point: {0} {1}", val.Center.X, val.Center.Y);
+				Console.WriteLine ("Dock: {0} Width: {1} Height {2}", Position, Width, Height);
+				Console.WriteLine ("Point: {0} {1}", val.Center.X, val.Center.Y);
+				Console.WriteLine ();
 				
 				DrawValues [adi] = val;
 			}
@@ -704,7 +705,7 @@ namespace Docky.Interface
 			case DockPosition.Top:
 				dockArea.X = first.X - DockWidthBuffer;
 				dockArea.Y = 0;
-				dockArea.Width = last.X + DockWidthBuffer - dockArea.X;
+				dockArea.Width = (last.X + last.Width + DockWidthBuffer) - dockArea.X;
 				dockArea.Height = DockHeight;
 				
 				cursorArea = dockArea;
@@ -754,6 +755,13 @@ namespace Docky.Interface
 			
 			DrawDockBackground (surface, dockArea);
 			
+			double zOffset = ZoomedIconSize / (double) IconSize;
+			foreach (AbstractDockItem adi in Items) {
+				DrawValue val = DrawValues [adi];
+				DockySurface icon = adi.IconSurface (surface.Internal, ZoomedIconSize);
+				icon.ShowAtPointAndZoom (surface, val.Center, val.Zoom / zOffset);
+			}
+			
 			SetInputMask (cursorArea);
 			
 			// adjust our cursor area for our position
@@ -764,10 +772,98 @@ namespace Docky.Interface
 		
 		void DrawDockBackground (DockySurface surface, Gdk.Rectangle backgroundArea)
 		{
-			Cairo.Context cr = surface.Context;
-			cr.Rectangle (backgroundArea.X, backgroundArea.Y, backgroundArea.Width, backgroundArea.Height);
-			cr.Color = new Cairo.Color (0, 0, 1, .3);
-			cr.Fill ();
+			if (background_buffer == null) {
+				if (VerticalDock) {
+					background_buffer = new DockySurface (BackgroundHeight, BackgroundWidth, surface.Internal);
+				} else {
+					background_buffer = new DockySurface (BackgroundWidth, BackgroundHeight, surface.Internal);
+				}
+					
+					
+				Gdk.Pixbuf background = new Gdk.Pixbuf (Assembly.GetExecutingAssembly (), "classic.svg");
+				
+				Gdk.Pixbuf tmp;
+				
+				switch (Position) {
+				case DockPosition.Top:
+					tmp = background.RotateSimple (PixbufRotation.Upsidedown);
+					background.Dispose ();
+					background = tmp;
+					break;
+				case DockPosition.Left:
+					tmp = background.RotateSimple (PixbufRotation.Clockwise);
+					background.Dispose ();
+					background = tmp;
+					break;
+				case DockPosition.Right:
+					tmp = background.RotateSimple (PixbufRotation.Counterclockwise);
+					background.Dispose ();
+					background = tmp;
+					break;
+				case DockPosition.Bottom:
+					;
+					break;
+				}
+				
+				Gdk.CairoHelper.SetSourcePixbuf (background_buffer.Context, background, 0, 0);
+				background_buffer.Context.Paint ();
+			}
+			
+			Cairo.Context context = surface.Context;
+
+			int xOffset = 0;
+			int yOffset = 0;
+			
+			switch (Position) {
+			case DockPosition.Left:
+				xOffset = background_buffer.Width - backgroundArea.Width;
+				break;
+			case DockPosition.Top:
+				yOffset = background_buffer.Height - backgroundArea.Height;
+				break;
+			}
+			
+			if (VerticalDock) {
+				context.SetSource (background_buffer.Internal, 
+				                   backgroundArea.X - xOffset, 
+				                   backgroundArea.Y - yOffset);
+				
+				context.Rectangle (backgroundArea.X, 
+				                   backgroundArea.Y, 
+				                   backgroundArea.Width, 
+				                   backgroundArea.Height / 2);
+				context.Fill ();
+				
+				context.SetSource (background_buffer.Internal, 
+				                   backgroundArea.X - xOffset, 
+				                   backgroundArea.Y + backgroundArea.Height - background_buffer.Height - yOffset);
+				context.Rectangle (backgroundArea.X, 
+				                   backgroundArea.Y + backgroundArea.Height / 2, 
+				                   backgroundArea.Width, 
+				                   backgroundArea.Height - backgroundArea.Height / 2);
+				context.Fill ();
+			} else {
+				context.SetSource (background_buffer.Internal, 
+				                   backgroundArea.X - xOffset, 
+				                   backgroundArea.Y - yOffset);
+				
+				context.Rectangle (backgroundArea.X - xOffset, 
+				                   backgroundArea.Y, 
+				                   backgroundArea.Width / 2, 
+				                   backgroundArea.Height);
+				context.Fill ();
+				
+				context.SetSource (background_buffer.Internal, 
+				                   backgroundArea.X + backgroundArea.Width - background_buffer.Width, 
+				                   backgroundArea.Y - yOffset);
+				context.Rectangle (backgroundArea.X + backgroundArea.Width / 2, 
+				                   backgroundArea.Y, 
+				                   backgroundArea.Width - backgroundArea.Width / 2, 
+				                   backgroundArea.Height);
+				context.Fill ();
+			}
+			
+			context.IdentityMatrix ();
 		}
 		
 		protected override void OnStyleSet (Style previous_style)

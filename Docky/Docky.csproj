@@ -9,6 +9,7 @@
     <OutputType>Exe</OutputType>
     <AssemblyName>Docky-2</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <ReleaseVersion>2.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +32,8 @@
     <Folder Include="Docky\" />
     <Folder Include="Docky\Interface\" />
     <Folder Include="Docky\Items\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Docky\CairoHelper\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Docky\Docky.cs" />
@@ -50,6 +53,7 @@
     <Compile Include="Docky\Interface\ItemProvidersChangedEventArgs.cs" />
     <Compile Include="Docky\Interface\DockAnimationState.cs" />
     <Compile Include="Docky\Items\SeparatorItem.cs" />
+    <Compile Include="Docky\CairoHelper\DockySurface_Extensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Addins, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
@@ -115,6 +119,12 @@
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
       <LogicalName>gui.stetic</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\classic.svg">
+      <LogicalName>classic.svg</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\grayscale.svg">
+      <LogicalName>grayscale.svg</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

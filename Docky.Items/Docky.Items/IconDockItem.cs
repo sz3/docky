@@ -52,6 +52,10 @@ namespace Docky.Items
 		
 		protected override sealed void PaintIconSurface (DockySurface surface)
 		{
+//			surface.Context.Color = new Cairo.Color (1, 1, 1, .4);
+//			surface.Context.Paint ();
+//			return;
+			
 			int iconSize = Math.Min (surface.Width, surface.Height);
 			
 			Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (Icon, iconSize);

@@ -36,9 +36,11 @@ namespace Docky.Items
 	public abstract class AbstractDockItem : IDisposable
 	{
 		string hover_text;
+		int position;
 		DockySurface buffer, text_buffer;
 		Cairo.Color? average_color;
 		
+		public event EventHandler PositionChanged;
 		public event EventHandler HoverTextChanged;
 		public event EventHandler<PaintNeededEventArgs> PaintNeeded;
 		
@@ -65,6 +67,19 @@ namespace Docky.Items
 				hover_text = value;
 				ResetBuffer (text_buffer);
 				OnHoverTextChanged ();
+			}
+		}
+		
+		public int Position {
+			get {
+				return position;
+			}
+			set {
+				if (position == value)
+					return;
+				
+				position = value;
+				OnPositionChanged ();
 			}
 		}
 		
@@ -252,6 +267,12 @@ namespace Docky.Items
 		{
 			if (HoverTextChanged != null)
 				HoverTextChanged (this, EventArgs.Empty);
+		}
+		
+		void OnPositionChanged ()
+		{
+			if (PositionChanged != null)
+				PositionChanged (this, EventArgs.Empty);
 		}
 		
 		protected void OnPaintNeeded ()
