@@ -34,11 +34,16 @@ namespace Docky
 	public partial class ConfigurationWindow : Gtk.Window
 	{
 
+		DockPlacementWidget placement;
+		
 		public ConfigurationWindow () : base (Gtk.WindowType.Toplevel)
 		{
 			this.Build ();
 			
-			dock_pacement_align.Add (new DockPlacementWidget ());
+			placement = new DockPlacementWidget ();
+			placement.ActiveDockChanged += PlacementActiveDockChanged;
+			
+			dock_pacement_align.Add (placement);
 			
 			configuration_widget_notebook.RemovePage (0);
 			
@@ -48,5 +53,19 @@ namespace Docky
 			
 			ShowAll ();
 		}
+
+		void PlacementActiveDockChanged (object sender, EventArgs e)
+		{
+			configuration_widget_notebook.Page = 
+				configuration_widget_notebook.PageNum (placement.ActiveDock.PreferencesWidget);
+		}
+		
+		protected override bool OnDeleteEvent (Event evnt)
+		{
+			Hide ();
+			
+			return true;
+		}
+
 	}
 }

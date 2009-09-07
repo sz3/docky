@@ -35,10 +35,20 @@ namespace Docky
 	{
 		const int Width = 260;
 		const int Height = 175;
+		
+		const int DockSize = 30;
 
 		Gdk.Rectangle allocation;
 		
 		public event EventHandler ActiveDockChanged;
+		
+		int X {
+			get { return (allocation.Width - Width) / 2; }
+		}
+		
+		int Y {
+			get { return (allocation.Height - Height) / 2; }
+		}
 		
 		public Dock ActiveDock {
 			get; private set;
@@ -46,7 +56,10 @@ namespace Docky
 		
 		public DockPlacementWidget ()
 		{
+			ActiveDock = Docky.Controller.Docks.First ();
 			SetSizeRequest (Width, Height);
+			
+			AddEvents ((int) Gdk.EventMask.AllEventsMask);
 		}
 		
 		// Is there really not an easier way to get this?
@@ -57,6 +70,39 @@ namespace Docky
 			base.OnSizeAllocated (allocation);
 		}
 		
+		protected override bool OnButtonReleaseEvent (EventButton evnt)
+		{
+			foreach (Dock dock in Docky.Controller.Docks) {
+				Gdk.Rectangle area = DockRenderArea (dock.Preferences.Position);
+				if (area.Contains ((int) evnt.X, (int) evnt.Y)) {
+					ActiveDock = dock;
+					OnActiveDockChanged ();
+					break;
+				}
+			}
+			
+			return base.OnButtonReleaseEvent (evnt);
+		}
+
+		
+		Gdk.Rectangle DockRenderArea (DockPosition position)
+		{
+			int x = X;
+			int y = Y;
+			
+			switch (position) {
+			case DockPosition.Top:
+				return new Gdk.Rectangle (x + (DockSize + 5), y + 1, Width - 2 * (DockSize + 5), DockSize);
+			case DockPosition.Left:
+				return new Gdk.Rectangle (x + 1, y + (DockSize + 5), DockSize, Height - 2 * (DockSize + 5));
+			case DockPosition.Right:
+				return new Gdk.Rectangle (x + Width - DockSize - 1, y + (DockSize + 5), DockSize, Height - 2 * (DockSize + 5)); 
+			default:
+			case DockPosition.Bottom:
+				return new Gdk.Rectangle (x + (DockSize + 5), y + Height - DockSize - 1, Width - 2 * (DockSize + 5), DockSize);
+			}
+		}
+		
 		protected override bool OnExposeEvent (EventExpose evnt)
 		{
 			if (!IsRealized)
@@ -64,8 +110,8 @@ namespace Docky
 			
 			bool result = base.OnExposeEvent (evnt);
 			
-			int x = (allocation.Width - Width) / 2;
-			int y = (allocation.Height - Height) / 2;
+			int x = X;
+			int y = Y;
 			
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
 				cr.RoundedRectangle (x + .5, 
@@ -85,10 +131,28 @@ namespace Docky
 				cr.Color = new Cairo.Color (0, 0, 0);
 				cr.LineWidth = 1;
 				cr.Stroke ();
+				
+				foreach (Dock dock in Docky.Controller.Docks) {
+					Gdk.Rectangle area = DockRenderArea (dock.Preferences.Position);
+					cr.Rectangle (area.X, area.Y, area.Width, area.Height);
+					
+					if (ActiveDock == dock)
+						cr.Color = new Cairo.Color (1, 1, 1, .9);
+					else
+						cr.Color = new Cairo.Color (1, 1, 1, .35);
+					
+					cr.Fill ();
+				}
 			}
 			
 			return result;
 		}
 
+		void OnActiveDockChanged ()
+		{
+			QueueDraw ();
+			if (ActiveDockChanged != null)
+				ActiveDockChanged (this, EventArgs.Empty);
+		}
 	}
 }

@@ -13,15 +13,17 @@ namespace Docky {
     
     public partial class ConfigurationWindow {
         
+        private Gtk.VBox vbox1;
+        
         private Gtk.HBox hbox1;
         
-        private Gtk.VBox vbox1;
+        private Gtk.VBox vbox2;
         
         private Gtk.Frame frame1;
         
         private Gtk.Alignment GtkAlignment;
         
-        private Gtk.VBox vbox2;
+        private Gtk.VBox vbox3;
         
         private Gtk.CheckButton checkbutton1;
         
@@ -49,9 +51,23 @@ namespace Docky {
         
         private Gtk.Label GtkLabel3;
         
+        private Gtk.Alignment alignment1;
+        
+        private Gtk.Frame frame3;
+        
+        private Gtk.Alignment GtkAlignment3;
+        
         private Gtk.Notebook configuration_widget_notebook;
         
         private Gtk.Label label1;
+        
+        private Gtk.Label GtkLabel5;
+        
+        private Gtk.HBox hbox2;
+        
+        private Gtk.HBox hbox3;
+        
+        private Gtk.Button button2;
         
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
@@ -60,15 +76,18 @@ namespace Docky {
             this.Title = Mono.Unix.Catalog.GetString("ConfigurationWindow");
             this.WindowPosition = ((Gtk.WindowPosition)(4));
             // Container child Docky.ConfigurationWindow.Gtk.Container+ContainerChild
+            this.vbox1 = new Gtk.VBox();
+            this.vbox1.Name = "vbox1";
+            // Container child vbox1.Gtk.Box+BoxChild
             this.hbox1 = new Gtk.HBox();
             this.hbox1.Name = "hbox1";
             this.hbox1.Homogeneous = true;
             this.hbox1.Spacing = 6;
             // Container child hbox1.Gtk.Box+BoxChild
-            this.vbox1 = new Gtk.VBox();
-            this.vbox1.Name = "vbox1";
-            this.vbox1.Spacing = 6;
-            // Container child vbox1.Gtk.Box+BoxChild
+            this.vbox2 = new Gtk.VBox();
+            this.vbox2.Name = "vbox2";
+            this.vbox2.Spacing = 6;
+            // Container child vbox2.Gtk.Box+BoxChild
             this.frame1 = new Gtk.Frame();
             this.frame1.Name = "frame1";
             this.frame1.ShadowType = ((Gtk.ShadowType)(0));
@@ -77,22 +96,22 @@ namespace Docky {
             this.GtkAlignment.Name = "GtkAlignment";
             this.GtkAlignment.LeftPadding = ((uint)(12));
             // Container child GtkAlignment.Gtk.Container+ContainerChild
-            this.vbox2 = new Gtk.VBox();
-            this.vbox2.Name = "vbox2";
-            this.vbox2.Spacing = 6;
-            // Container child vbox2.Gtk.Box+BoxChild
+            this.vbox3 = new Gtk.VBox();
+            this.vbox3.Name = "vbox3";
+            this.vbox3.Spacing = 6;
+            // Container child vbox3.Gtk.Box+BoxChild
             this.checkbutton1 = new Gtk.CheckButton();
             this.checkbutton1.CanFocus = true;
             this.checkbutton1.Name = "checkbutton1";
             this.checkbutton1.Label = Mono.Unix.Catalog.GetString("Start When Computer Starts");
             this.checkbutton1.DrawIndicator = true;
             this.checkbutton1.UseUnderline = true;
-            this.vbox2.Add(this.checkbutton1);
-            Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.vbox2[this.checkbutton1]));
+            this.vbox3.Add(this.checkbutton1);
+            Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.vbox3[this.checkbutton1]));
             w1.Position = 0;
             w1.Expand = false;
             w1.Fill = false;
-            // Container child vbox2.Gtk.Box+BoxChild
+            // Container child vbox3.Gtk.Box+BoxChild
             this.cpu_saver_checkbox = new Gtk.CheckButton();
             this.cpu_saver_checkbox.TooltipMarkup = "Warning! Checking this box may severely hurt the rendering speed of Docky. This option prevents docky from keeping several caches and buffers.";
             this.cpu_saver_checkbox.CanFocus = true;
@@ -100,24 +119,24 @@ namespace Docky {
             this.cpu_saver_checkbox.Label = Mono.Unix.Catalog.GetString("Low Memory Mode [Slow Rendering]");
             this.cpu_saver_checkbox.DrawIndicator = true;
             this.cpu_saver_checkbox.UseUnderline = true;
-            this.vbox2.Add(this.cpu_saver_checkbox);
-            Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(this.vbox2[this.cpu_saver_checkbox]));
+            this.vbox3.Add(this.cpu_saver_checkbox);
+            Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(this.vbox3[this.cpu_saver_checkbox]));
             w2.Position = 1;
             w2.Expand = false;
             w2.Fill = false;
-            this.GtkAlignment.Add(this.vbox2);
+            this.GtkAlignment.Add(this.vbox3);
             this.frame1.Add(this.GtkAlignment);
             this.GtkLabel2 = new Gtk.Label();
             this.GtkLabel2.Name = "GtkLabel2";
             this.GtkLabel2.LabelProp = Mono.Unix.Catalog.GetString("<b>General Options</b>");
             this.GtkLabel2.UseMarkup = true;
             this.frame1.LabelWidget = this.GtkLabel2;
-            this.vbox1.Add(this.frame1);
-            Gtk.Box.BoxChild w5 = ((Gtk.Box.BoxChild)(this.vbox1[this.frame1]));
+            this.vbox2.Add(this.frame1);
+            Gtk.Box.BoxChild w5 = ((Gtk.Box.BoxChild)(this.vbox2[this.frame1]));
             w5.Position = 0;
             w5.Expand = false;
             w5.Fill = false;
-            // Container child vbox1.Gtk.Box+BoxChild
+            // Container child vbox2.Gtk.Box+BoxChild
             this.dock_placement_frame = new Gtk.Frame();
             this.dock_placement_frame.Name = "dock_placement_frame";
             this.dock_placement_frame.ShadowType = ((Gtk.ShadowType)(0));
@@ -135,10 +154,10 @@ namespace Docky {
             this.GtkLabel4.LabelProp = Mono.Unix.Catalog.GetString("<b>Dock Placement</b>");
             this.GtkLabel4.UseMarkup = true;
             this.dock_placement_frame.LabelWidget = this.GtkLabel4;
-            this.vbox1.Add(this.dock_placement_frame);
-            Gtk.Box.BoxChild w8 = ((Gtk.Box.BoxChild)(this.vbox1[this.dock_placement_frame]));
+            this.vbox2.Add(this.dock_placement_frame);
+            Gtk.Box.BoxChild w8 = ((Gtk.Box.BoxChild)(this.vbox2[this.dock_placement_frame]));
             w8.Position = 1;
-            // Container child vbox1.Gtk.Box+BoxChild
+            // Container child vbox2.Gtk.Box+BoxChild
             this.frame2 = new Gtk.Frame();
             this.frame2.Name = "frame2";
             this.frame2.ShadowType = ((Gtk.ShadowType)(0));
@@ -177,13 +196,28 @@ namespace Docky {
             this.GtkLabel3.LabelProp = Mono.Unix.Catalog.GetString("<b>Theming</b>");
             this.GtkLabel3.UseMarkup = true;
             this.frame2.LabelWidget = this.GtkLabel3;
-            this.vbox1.Add(this.frame2);
-            Gtk.Box.BoxChild w13 = ((Gtk.Box.BoxChild)(this.vbox1[this.frame2]));
+            this.vbox2.Add(this.frame2);
+            Gtk.Box.BoxChild w13 = ((Gtk.Box.BoxChild)(this.vbox2[this.frame2]));
             w13.Position = 2;
-            this.hbox1.Add(this.vbox1);
-            Gtk.Box.BoxChild w14 = ((Gtk.Box.BoxChild)(this.hbox1[this.vbox1]));
+            this.hbox1.Add(this.vbox2);
+            Gtk.Box.BoxChild w14 = ((Gtk.Box.BoxChild)(this.hbox1[this.vbox2]));
             w14.Position = 0;
             // Container child hbox1.Gtk.Box+BoxChild
+            this.alignment1 = new Gtk.Alignment(0.5F, 0.5F, 1F, 1F);
+            this.alignment1.Name = "alignment1";
+            this.alignment1.RightPadding = ((uint)(5));
+            this.alignment1.BottomPadding = ((uint)(5));
+            // Container child alignment1.Gtk.Container+ContainerChild
+            this.frame3 = new Gtk.Frame();
+            this.frame3.Name = "frame3";
+            this.frame3.ShadowType = ((Gtk.ShadowType)(2));
+            // Container child frame3.Gtk.Container+ContainerChild
+            this.GtkAlignment3 = new Gtk.Alignment(0F, 0F, 1F, 1F);
+            this.GtkAlignment3.Name = "GtkAlignment3";
+            this.GtkAlignment3.LeftPadding = ((uint)(12));
+            this.GtkAlignment3.RightPadding = ((uint)(10));
+            this.GtkAlignment3.BottomPadding = ((uint)(10));
+            // Container child GtkAlignment3.Gtk.Container+ContainerChild
             this.configuration_widget_notebook = new Gtk.Notebook();
             this.configuration_widget_notebook.CanFocus = true;
             this.configuration_widget_notebook.Name = "configuration_widget_notebook";
@@ -199,10 +233,50 @@ namespace Docky {
             this.label1.LabelProp = Mono.Unix.Catalog.GetString("page1");
             this.configuration_widget_notebook.SetTabLabel(w15, this.label1);
             this.label1.ShowAll();
-            this.hbox1.Add(this.configuration_widget_notebook);
-            Gtk.Box.BoxChild w16 = ((Gtk.Box.BoxChild)(this.hbox1[this.configuration_widget_notebook]));
-            w16.Position = 1;
-            this.Add(this.hbox1);
+            this.GtkAlignment3.Add(this.configuration_widget_notebook);
+            this.frame3.Add(this.GtkAlignment3);
+            this.GtkLabel5 = new Gtk.Label();
+            this.GtkLabel5.Name = "GtkLabel5";
+            this.GtkLabel5.LabelProp = Mono.Unix.Catalog.GetString("<b>Dock Configuration</b>");
+            this.GtkLabel5.UseMarkup = true;
+            this.frame3.LabelWidget = this.GtkLabel5;
+            this.alignment1.Add(this.frame3);
+            this.hbox1.Add(this.alignment1);
+            Gtk.Box.BoxChild w19 = ((Gtk.Box.BoxChild)(this.hbox1[this.alignment1]));
+            w19.Position = 1;
+            this.vbox1.Add(this.hbox1);
+            Gtk.Box.BoxChild w20 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox1]));
+            w20.Position = 0;
+            // Container child vbox1.Gtk.Box+BoxChild
+            this.hbox2 = new Gtk.HBox();
+            this.hbox2.Name = "hbox2";
+            this.hbox2.Spacing = 6;
+            // Container child hbox2.Gtk.Box+BoxChild
+            this.hbox3 = new Gtk.HBox();
+            this.hbox3.Name = "hbox3";
+            this.hbox3.Spacing = 6;
+            this.hbox2.Add(this.hbox3);
+            Gtk.Box.BoxChild w21 = ((Gtk.Box.BoxChild)(this.hbox2[this.hbox3]));
+            w21.Position = 0;
+            // Container child hbox2.Gtk.Box+BoxChild
+            this.button2 = new Gtk.Button();
+            this.button2.CanFocus = true;
+            this.button2.Name = "button2";
+            this.button2.UseStock = true;
+            this.button2.UseUnderline = true;
+            this.button2.BorderWidth = ((uint)(5));
+            this.button2.Label = "gtk-close";
+            this.hbox2.Add(this.button2);
+            Gtk.Box.BoxChild w22 = ((Gtk.Box.BoxChild)(this.hbox2[this.button2]));
+            w22.Position = 1;
+            w22.Expand = false;
+            w22.Fill = false;
+            this.vbox1.Add(this.hbox2);
+            Gtk.Box.BoxChild w23 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox2]));
+            w23.Position = 1;
+            w23.Expand = false;
+            w23.Fill = false;
+            this.Add(this.vbox1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }

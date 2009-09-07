@@ -41,6 +41,15 @@ namespace Docky
 			get { return docks.AsEnumerable (); }
 		}
 		
+		IEnumerable<string> DockNames {
+			get {
+				return prefs.Get<string []> ("ActiveDocks", new [] {"default"}).AsEnumerable ();
+			}
+			set {
+				prefs.Set<string []> ("ActiveDocks", value.ToArray ());
+			}
+		}
+		
 		public DockController ()
 		{
 		}
@@ -52,11 +61,34 @@ namespace Docky
 			CreateDocks ();
 		}
 		
+		public Dock CreateDock ()
+		{
+			string name = "Dock" + 1;
+			for (int i = 2; DockNames.Contains (name); i++)
+				name = "Dock" + i;
+			
+			DockPreferences dockPrefs = new DockPreferences (name);
+			Dock dock = new Dock (dockPrefs);
+			docks.Add (dock);
+			
+			DockNames = DockNames.Concat (new [] { name });
+			
+			return dock;
+		}
+		
+		public bool DeleteDock (Dock dock)
+		{
+			if (!docks.Contains (dock))
+				return false;
+			
+			docks.Remove (dock);
+			DockNames = DockNames.Where (s => s != dock.Preferences.GetName ());
+			return true;
+		}
+		
 		void CreateDocks ()
 		{
-			string [] dockNames = prefs.Get<string []> ("ActiveDocks", new [] {"default"});
-			
-			foreach (string name in dockNames) {
+			foreach (string name in DockNames) {
 				DockPreferences dockPrefs = new DockPreferences (name);
 				Dock dock = new Dock (dockPrefs);
 				docks.Add (dock);

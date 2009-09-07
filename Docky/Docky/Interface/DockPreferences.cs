@@ -21,6 +21,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
+using Cairo;
+using Gdk;
+using Gtk;
+
 using Docky.Items;
 using Docky.Services;
 
@@ -31,6 +35,16 @@ namespace Docky.Interface
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class DockPreferences : Gtk.Bin, IDockPreferences
 	{
+		static T Clamp<T> (T value, T max, T min)
+		where T : IComparable<T> {     
+			T result = value;
+			if (value.CompareTo (max) > 0)
+				result = max;
+			if (value.CompareTo (min) < 0)
+				result = min;
+			return result;
+		} 
+		
 		IPreferences prefs;
 		
 		string name;
@@ -81,6 +95,7 @@ namespace Docky.Interface
 		public int IconSize {
 			get { return icon_size; }
 			set {
+				value = Clamp (value, 128, 24);
 				if (icon_size == value)
 					return;
 				icon_size = value;
@@ -103,10 +118,12 @@ namespace Docky.Interface
 		public double ZoomPercent {
 			get { return zoom_percent; }
 			set {
+				value = Clamp (value, 4, 1);
 				if (zoom_percent == value)
 					return;
+				
 				zoom_percent = value;
-				SetOption ("ZoomPercent", zoom_percent);
+				SetOption<double> ("ZoomPercent", zoom_percent);
 				OnZoomPercentChanged ();
 			}
 		}
@@ -115,6 +132,13 @@ namespace Docky.Interface
 		{
 			this.Build ();
 			
+			icon_scale.Adjustment.SetBounds (24, 129, 1, 1, 1);
+			zoom_scale.Adjustment.SetBounds (1, 4.01, .01, .01, .01);
+			
+			zoom_scale.FormatValue += delegate(object o, FormatValueArgs args) {
+				args.RetVal = string.Format ("{0:#}%", args.Value * 100);
+			};
+			
 			name = dockName;
 			
 			prefs = DockServices.Preferences.Get<DockPreferences> ();
@@ -122,7 +146,53 @@ namespace Docky.Interface
 			BuildOptions ();
 			BuildItemProviders ();
 			
+			icon_scale.ValueChanged += IconScaleValueChanged;
+			zoom_scale.ValueChanged += ZoomScaleValueChanged;
+			zoom_checkbutton.Toggled += ZoomCheckbuttonToggled;
+			autohide_box.Changed += AutohideBoxChanged;
+			position_box.Changed += PositionBoxChanged;
+			
 			ShowAll ();
+		}
+
+		void PositionBoxChanged (object sender, EventArgs e)
+		{
+			Position = (DockPosition) position_box.Active;
+			
+			if (position_box.Active != (int) Position)
+				position_box.Active = (int) Position;
+		}
+
+		void AutohideBoxChanged (object sender, EventArgs e)
+		{
+			Autohide = (AutohideType) autohide_box.Active;
+			
+			if (autohide_box.Active != (int) Autohide)
+				autohide_box.Active = (int) Autohide;
+		}
+
+		void ZoomCheckbuttonToggled (object sender, EventArgs e)
+		{
+			ZoomEnabled = zoom_checkbutton.Active;
+			
+			// may seem odd but its just a check
+			zoom_checkbutton.Active = ZoomEnabled;
+		}
+
+		void ZoomScaleValueChanged (object sender, EventArgs e)
+		{
+			ZoomPercent = zoom_scale.Value;
+			
+			if (ZoomPercent != zoom_scale.Value)
+				zoom_scale.Value = ZoomPercent;
+		}
+
+		void IconScaleValueChanged (object sender, EventArgs e)
+		{
+			IconSize = (int) icon_scale.Value;
+			
+			if (IconSize != icon_scale.Value)
+				icon_scale.Value = IconSize;
 		}
 		
 		public bool SetName (string name)
@@ -151,17 +221,24 @@ namespace Docky.Interface
 			
 			IconSize    = GetOption ("IconSize", 64);
 			ZoomEnabled = GetOption ("ZoomEnabled", true);
-			ZoomPercent = GetOption ("ZoomPercent", 2);
+			ZoomPercent = GetOption ("ZoomPercent", 2.0);
+			
+			position_box.Active = (int) Position;
+			autohide_box.Active = (int) Autohide;
+			
+			zoom_checkbutton.Active = ZoomEnabled;
+			zoom_scale.Value = ZoomPercent;
+			icon_scale.Value = IconSize;
 		}
 		
 		T GetOption<T> (string key, T def)
 		{
-			return prefs.Get (name + "/" + key, def);
+			return prefs.Get<T> (name + "/" + key, def);
 		}
 		
 		bool SetOption<T> (string key, T val)
 		{
-			return prefs.Set (name + "/" + key, val);
+			return prefs.Set<T> (name + "/" + key, val);
 		}
 		
 		void BuildItemProviders ()

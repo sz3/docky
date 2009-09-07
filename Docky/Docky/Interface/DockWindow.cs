@@ -203,6 +203,17 @@ namespace Docky.Interface
 			get { return ZoomedIconSize + 2 * DockHeightBuffer; }
 		}
 		
+		double HideOffset {
+			get {
+				double progress = Math.Min (1, (render_time - hidden_change_time).TotalMilliseconds / 
+				                            BaseAnimationTime.TotalMilliseconds);
+				if (AutohideManager.Hidden)
+					return progress;
+				
+				return 1 - progress;
+			}
+		}
+		
 		double ZoomIn {
 			get {
 				
@@ -258,6 +269,8 @@ namespace Docky.Interface
 		{
 			AnimationState.AddCondition (Animations.DockHoveredChanged, 
 			                             () => (DockHovered && ZoomIn != 1) || (!DockHovered && ZoomIn != 0)); 
+			AnimationState.AddCondition (Animations.HideChanged,
+			                             () => ((hidden_change_time - DateTime.UtcNow) < BaseAnimationTime));
 		}
 
 		#region Event Handling
@@ -365,11 +378,13 @@ namespace Docky.Interface
 
 		void PreferencesZoomPercentChanged (object sender, EventArgs e)
 		{
+			SetSizeRequest ();
 			AnimatedDraw ();
 		}
 
 		void PreferencesZoomEnabledChanged (object sender, EventArgs e)
 		{
+			SetSizeRequest ();
 			AnimatedDraw ();
 		}
 
@@ -386,7 +401,7 @@ namespace Docky.Interface
 
 		void PreferencesAutohideChanged (object sender, EventArgs e)
 		{
-			
+			AutohideManager.Behavior = Autohide;
 		}
 		#endregion
 		
@@ -783,8 +798,6 @@ namespace Docky.Interface
 				cursorArea.Height = hotAreaSize;
 				break;
 			}
-			
-//			Console.WriteLine ("Dock Area: {0}", dockArea);
 		}
 		
 		void DrawDock (DockySurface surface)
@@ -805,11 +818,15 @@ namespace Docky.Interface
 			}
 			
 			SetInputMask (cursorArea);
+
+			dockArea.X += WindowPosition.X;
+			dockArea.Y += WindowPosition.Y;
+			AutohideManager.SetIntersectArea (dockArea);
 			
 			// adjust our cursor area for our position
 			cursorArea.X += WindowPosition.X;
 			cursorArea.Y += WindowPosition.Y;
-			AutohideManager.SetDockArea (cursorArea);
+			AutohideManager.SetCursorArea (cursorArea);
 		}
 		
 		void DrawDockBackground (DockySurface surface, Gdk.Rectangle backgroundArea)
@@ -934,7 +951,22 @@ namespace Docky.Interface
 				
 				DrawDock (main_buffer);
 				cr.Operator = Operator.Source;
-				cr.SetSource (main_buffer.Internal, 0, 0);
+				
+				switch (Position) {
+				case DockPosition.Top:
+					cr.SetSource (main_buffer.Internal, 0, 0 - HideOffset * DockHeight);
+					break;
+				case DockPosition.Left:
+					cr.SetSource (main_buffer.Internal, 0 - HideOffset * DockHeight, 0);
+					break;
+				case DockPosition.Right:
+					cr.SetSource (main_buffer.Internal, HideOffset * DockHeight, 0);
+					break;
+				case DockPosition.Bottom:
+					cr.SetSource (main_buffer.Internal, 0, HideOffset * DockHeight);
+					break;
+				}
+				
 				cr.Paint ();
 				rendering = false;
 			}

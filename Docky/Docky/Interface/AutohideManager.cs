@@ -35,9 +35,10 @@ namespace Docky.Interface
 		public event EventHandler HiddenChanged;
 		public event EventHandler DockHoveredChanged;
 		
-		Gdk.Rectangle dock_area, last_known_geo;
+		Gdk.Rectangle cursor_area, intersect_area, last_known_geo;
 		Wnck.Screen screen;
 		CursorTracker tracker;
+		int pid;
 		
 		bool WindowIntersectingOther { get; set; }
 		
@@ -81,6 +82,8 @@ namespace Docky.Interface
 		
 		internal AutohideManager (Gdk.Screen screen)
 		{
+			pid = System.Diagnostics.Process.GetCurrentProcess ().Id;
+			
 			tracker = CursorTracker.ForDisplay (screen.Display);
 			this.screen = Wnck.Screen.Get (screen.Number);
 			
@@ -88,15 +91,22 @@ namespace Docky.Interface
 			this.screen.ActiveWindowChanged += HandleActiveWindowChanged;
 		}
 		
-		public void SetDockArea (Gdk.Rectangle area)
+		public void SetCursorArea (Gdk.Rectangle area)
 		{
-			dock_area = area;
+			cursor_area = area;
+			DockHovered = cursor_area.Contains (tracker.Cursor);
+			SetHidden ();
+		}
+		
+		public void SetIntersectArea (Gdk.Rectangle area)
+		{
+			intersect_area = area;
 			UpdateWindowIntersect ();
 		}
 		
 		void HandleCursorPositionChanged (object sender, CursorPostionChangedArgs args)
 		{
-			DockHovered = dock_area.Contains (tracker.Cursor);
+			DockHovered = cursor_area.Contains (tracker.Cursor);
 			SetHidden ();
 		}
 
@@ -107,7 +117,6 @@ namespace Docky.Interface
 			
 			SetupActiveWindow ();
 			UpdateWindowIntersect ();
-			SetHidden ();
 		}
 		
 		void SetupActiveWindow ()
@@ -133,25 +142,30 @@ namespace Docky.Interface
 			
 			last_known_geo = geo;
 			UpdateWindowIntersect ();
-			SetHidden ();
 		}
 		
 		void UpdateWindowIntersect ()
 		{
-			Gdk.Rectangle adjustedDockArea = dock_area;
+			Gdk.Rectangle adjustedDockArea = intersect_area; 
 			adjustedDockArea.Inflate (-2, -2);
 			
 			bool intersect = false;
 			try {
 				Wnck.Window activeWindow = screen.ActiveWindow;
 				
-				intersect = screen.Windows.Any (w => w.WindowType != Wnck.WindowType.Desktop && 
-				                                activeWindow.Pid == w.Pid &&
-				                                w.EasyGeometry ().IntersectsWith (adjustedDockArea));
-			} catch {
+				intersect = activeWindow != null &&
+					screen.Windows.Any (w => w.WindowType != Wnck.WindowType.Desktop && 
+					                    activeWindow.Pid == w.Pid &&
+					                    w.Pid != pid &&
+					                    w.EasyGeometry ().IntersectsWith (adjustedDockArea));
+			} catch (Exception e) {
+				Console.WriteLine (e.Message);
 			}
 			
-			WindowIntersectingOther = intersect;
+			if (WindowIntersectingOther != intersect) {
+				WindowIntersectingOther = intersect;
+				SetHidden ();
+			}
 		}
 		
 		void SetHidden ()
