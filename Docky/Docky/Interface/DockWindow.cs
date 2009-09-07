@@ -53,7 +53,6 @@ namespace Docky.Interface
 		const int LaunchBounceHeight = 30;
 		const int DockHeightBuffer   = 7;
 		const int DockWidthBuffer    = 5;
-		const int ItemWidthBuffer    = 2;
 		const int BackgroundWidth    = 1000;
 		const int BackgroundHeight   = 150;
 		
@@ -75,7 +74,7 @@ namespace Docky.Interface
 		
 		public int Height { get; private set; }
 		
-		Gdk.Point WindowPosition;
+		Gdk.Point window_position;
 		
 		AutohideManager AutohideManager { get; set; }
 		
@@ -162,13 +161,6 @@ namespace Docky.Interface
 			get { return CursorTracker.Cursor; }
 		}
 		
-		Gdk.Point RelativeCursor {
-			get {
-				return new Gdk.Point (Cursor.X - WindowPosition.X, 
-				                      Cursor.Y - WindowPosition.Y);
-			}
-		}
-		
 		int DockHeight {
 			get { return IconSize + 2 * DockHeightBuffer; }
 		}
@@ -178,7 +170,7 @@ namespace Docky.Interface
 			set;
 		}
 		
-		int ItemHorizontalBuffer {
+		int ItemWidthBuffer {
 			get { return (int) (0.08 * IconSize); }
 		}
 		
@@ -209,7 +201,6 @@ namespace Docky.Interface
 				                            BaseAnimationTime.TotalMilliseconds);
 				if (AutohideManager.Hidden)
 					return progress;
-				
 				return 1 - progress;
 			}
 		}
@@ -462,8 +453,8 @@ namespace Docky.Interface
 		
 		protected override bool OnConfigureEvent (EventConfigure evnt)
 		{
-			WindowPosition.X = evnt.X;
-			WindowPosition.Y = evnt.Y;
+			window_position.X = evnt.X;
+			window_position.Y = evnt.Y;
 			
 			return base.OnConfigureEvent (evnt);
 		}
@@ -819,13 +810,13 @@ namespace Docky.Interface
 			
 			SetInputMask (cursorArea);
 
-			dockArea.X += WindowPosition.X;
-			dockArea.Y += WindowPosition.Y;
+			dockArea.X += window_position.X;
+			dockArea.Y += window_position.Y;
 			AutohideManager.SetIntersectArea (dockArea);
 			
 			// adjust our cursor area for our position
-			cursorArea.X += WindowPosition.X;
-			cursorArea.Y += WindowPosition.Y;
+			cursorArea.X += window_position.X;
+			cursorArea.Y += window_position.Y;
 			AutohideManager.SetCursorArea (cursorArea);
 		}
 		
