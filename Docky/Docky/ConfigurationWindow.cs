@@ -40,7 +40,7 @@ namespace Docky
 		{
 			this.Build ();
 			
-			placement = new DockPlacementWidget ();
+			placement = new DockPlacementWidget (Docky.Controller.Docks);
 			placement.ActiveDockChanged += PlacementActiveDockChanged;
 			
 			dock_pacement_align.Add (placement);
@@ -65,6 +65,31 @@ namespace Docky
 			Hide ();
 			
 			return true;
+		}
+
+		protected virtual void OnCloseButtonClicked (object sender, System.EventArgs e)
+		{
+			Hide ();
+		}
+
+
+		protected virtual void OnDeleteButtonClicked (object sender, System.EventArgs e)
+		{
+			configuration_widget_notebook.Remove (placement.ActiveDock.PreferencesWidget);
+			Docky.Controller.DeleteDock (placement.ActiveDock);
+			placement.SetDocks (Docky.Controller.Docks);
+		}
+
+		protected virtual void OnAddButtonClicked (object sender, System.EventArgs e)
+		{
+			Dock dock = Docky.Controller.CreateDock ();
+			if (dock == null)
+				return;
+			
+			configuration_widget_notebook.Add (dock.PreferencesWidget);
+			placement.SetDocks (Docky.Controller.Docks);
+			
+			placement.ActiveDock = dock;
 		}
 
 	}

@@ -25,7 +25,7 @@ namespace Docky.Items
 {
 
 
-	public interface IDockItemProvider
+	public interface IDockItemProvider : IDisposable
 	{
 		event EventHandler<ItemsChangedArgs> ItemsChanged;
 		

@@ -203,6 +203,8 @@ namespace Docky.Interface
 				screen.ActiveWindowChanged -= HandleActiveWindowChanged;
 				screen.ActiveWindow.GeometryChanged -= HandleGeometryChanged;
 			}
+			
+			tracker.CursorPositionChanged -= HandleCursorPositionChanged;
 		}
 		#endregion
 	}

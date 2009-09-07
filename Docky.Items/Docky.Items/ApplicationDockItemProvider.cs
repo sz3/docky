@@ -117,5 +117,11 @@ namespace Docky.Items
 		{
 			Providers.Remove (this);
 		}
+		
+		public void Dispose ()
+		{
+			foreach (ApplicationDockItem item in items)
+				item.Dispose ();
+		}
 	}
 }

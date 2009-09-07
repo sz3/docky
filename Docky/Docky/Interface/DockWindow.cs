@@ -171,11 +171,7 @@ namespace Docky.Interface
 		}
 		
 		int ItemWidthBuffer {
-			get { return (int) (0.08 * IconSize); }
-		}
-		
-		int SeparatorSize {
-			get { return (int) (.2 * IconSize); }
+			get { return (int) (0.05 * IconSize); }
 		}
 		
 		bool VerticalDock {
@@ -274,6 +270,7 @@ namespace Docky.Interface
 			
 			AutohideManager = new AutohideManager (Screen);
 			AutohideManager.Behavior = Preferences.Autohide;
+			
 			AutohideManager.HiddenChanged += HandleHiddenChanged;
 			AutohideManager.DockHoveredChanged += HandleDockHoveredChanged;
 			
@@ -309,7 +306,8 @@ namespace Docky.Interface
 
 		void HandleCursorPositionChanged (object sender, CursorPostionChangedArgs e)
 		{
-			AnimatedDraw ();
+			if (DockHovered && e.LastPosition != Cursor)
+				AnimatedDraw ();
 		}
 		
 		void RegisterItemProvider (IDockItemProvider provider)
@@ -383,6 +381,8 @@ namespace Docky.Interface
 		{
 			Reposition ();
 			SetSizeRequest ();
+			ResetBuffers ();
+			AnimatedDraw ();
 		}
 
 		void PreferencesIconSizeChanged (object sender, EventArgs e)
@@ -442,6 +442,7 @@ namespace Docky.Interface
 		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
 		{
 			base.OnSizeAllocated (allocation);
+			ResetBuffers ();
 			Reposition ();
 		}
 
@@ -857,6 +858,8 @@ namespace Docky.Interface
 				
 				Gdk.CairoHelper.SetSourcePixbuf (background_buffer.Context, background, 0, 0);
 				background_buffer.Context.Paint ();
+				
+				background.Dispose ();
 			}
 			
 			Cairo.Context context = surface.Context;
@@ -979,16 +982,14 @@ namespace Docky.Interface
 				return;
 			}
 
-			Gdk.Pixmap pixmap = new Gdk.Pixmap (null, area.Width, area.Height, 1);
-			Context cr = Gdk.CairoHelper.Create (pixmap);
+			using (Gdk.Pixmap pixmap = new Gdk.Pixmap (null, area.Width, area.Height, 1))
+			using (Context cr = Gdk.CairoHelper.Create (pixmap)) {
 			
-			cr.Color = new Cairo.Color (0, 0, 0, 1);
-			cr.Paint ();
-
-			InputShapeCombineMask (pixmap, area.X, area.Y);
-			
-			(cr as IDisposable).Dispose ();
-			pixmap.Dispose ();
+				cr.Color = new Cairo.Color (0, 0, 0, 1);
+				cr.Paint ();
+				
+				InputShapeCombineMask (pixmap, area.X, area.Y);
+			}
 		}
 		#endregion
 		
@@ -1007,13 +1008,25 @@ namespace Docky.Interface
 		
 		public override void Dispose ()
 		{
+			AutohideManager.Dispose ();
 			UnregisterPreferencesEvents (Preferences);
+			
+			CursorTracker.CursorPositionChanged -= HandleCursorPositionChanged;
+			AutohideManager.HiddenChanged -= HandleHiddenChanged;
+			AutohideManager.DockHoveredChanged -= HandleDockHoveredChanged;
+			Screen.SizeChanged -= ScreenSizeChanged;
+			
+			if (animation_timer > 0)
+				GLib.Source.Remove (animation_timer);
 			
 			// clear out our separators
 			foreach (AbstractDockItem adi in Items.Where (adi => adi is SeparatorItem))
 				adi.Dispose ();
 			
+			ResetBuffers ();
 			
+			Hide ();
+			Destroy ();
 			base.Dispose ();
 		}
 	}

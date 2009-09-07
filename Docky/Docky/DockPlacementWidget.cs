@@ -39,6 +39,7 @@ namespace Docky
 		const int DockSize = 30;
 
 		Gdk.Rectangle allocation;
+		IEnumerable<Dock> docks;
 		
 		public event EventHandler ActiveDockChanged;
 		
@@ -50,16 +51,53 @@ namespace Docky
 			get { return (allocation.Height - Height) / 2; }
 		}
 		
+		Dock activeDock;
 		public Dock ActiveDock {
-			get; private set;
+			get { return activeDock; } 
+			set { 
+				if (!docks.Contains (value))
+					return;
+				activeDock = value; 
+				QueueDraw ();
+			}
 		}
 		
-		public DockPlacementWidget ()
+		public DockPlacementWidget (IEnumerable<Dock> docks)
 		{
-			ActiveDock = Docky.Controller.Docks.First ();
+			this.docks = docks;
+			RegisterDocks ();
+			ActiveDock = docks.First ();
 			SetSizeRequest (Width, Height);
 			
 			AddEvents ((int) Gdk.EventMask.AllEventsMask);
+		}
+		
+		public void SetDocks (IEnumerable<Dock> docks)
+		{
+			UnregisterDocks ();
+			this.docks = docks;
+			RegisterDocks ();
+			
+			ActiveDock = docks.First ();
+		}
+		
+		void RegisterDocks ()
+		{
+			foreach (Dock dock in docks) {
+				dock.Preferences.PositionChanged += DockPreferencesPositionChanged;
+			}
+		}
+
+		void DockPreferencesPositionChanged (object sender, EventArgs e)
+		{
+			QueueDraw ();
+		}
+		
+		void UnregisterDocks ()
+		{
+			foreach (Dock dock in docks) {
+				dock.Preferences.PositionChanged -= DockPreferencesPositionChanged;
+			}
 		}
 		
 		// Is there really not an easier way to get this?
@@ -72,7 +110,7 @@ namespace Docky
 		
 		protected override bool OnButtonReleaseEvent (EventButton evnt)
 		{
-			foreach (Dock dock in Docky.Controller.Docks) {
+			foreach (Dock dock in docks) {
 				Gdk.Rectangle area = DockRenderArea (dock.Preferences.Position);
 				if (area.Contains ((int) evnt.X, (int) evnt.Y)) {
 					ActiveDock = dock;
@@ -132,7 +170,7 @@ namespace Docky
 				cr.LineWidth = 1;
 				cr.Stroke ();
 				
-				foreach (Dock dock in Docky.Controller.Docks) {
+				foreach (Dock dock in docks) {
 					Gdk.Rectangle area = DockRenderArea (dock.Preferences.Position);
 					cr.Rectangle (area.X, area.Y, area.Width, area.Height);
 					

@@ -59,6 +59,8 @@ namespace Docky.Interface
 		{
 			prefs.Destroy ();
 			prefs.Dispose ();
+			
+			window.Dispose ();
 		}
 		#endregion
 

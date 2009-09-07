@@ -84,7 +84,7 @@ namespace Docky.Interface
 		public DockPosition Position {
 			get { return position; }
 			set {
-				if (position == value)
+				if (position == value || Docky.Controller.Docks.Any (d => d.Preferences.Position == value))
 					return;
 				position = value;
 				SetOption ("Position", position.ToString ());
@@ -213,9 +213,10 @@ namespace Docky.Interface
 			
 			DockPosition position = (DockPosition) Enum.Parse (typeof (DockPosition), 
 			                                                   GetOption ("Position", DockPosition.Bottom.ToString ()));
+			
 			while (Docky.Controller.Docks.Any ((Dock d) => d.Preferences.Position == position)) {
 				Console.Error.WriteLine ("Dock position already in use: " + position.ToString ());
-				position = (DockPosition) (((int) position) + 1 % 4);
+				position = (DockPosition) ((((int) position) + 1) % 4);
 			}
 			Position = position;
 			

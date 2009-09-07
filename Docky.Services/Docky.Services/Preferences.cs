@@ -31,7 +31,7 @@ namespace Docky.Services
 	{
 		static GConf.Client client = new GConf.Client ();
 		
-		readonly string GConfPrefix = "/apps/docky-2/preferences/" + typeof (TOwner).FullName.Replace (".", "/");
+		readonly string GConfPrefix = "/apps/docky-2/" + typeof (TOwner).FullName.Replace (".", "/");
 		
 		public T Get<T> (string key, T def)
 		{

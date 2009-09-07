@@ -176,7 +176,7 @@ namespace Docky.Items
 		}
 		#endregion
 		
-		public virtual void Clicked (uint button, Gdk.ModifierType mod)
+		public virtual void Clicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
 		}
 		

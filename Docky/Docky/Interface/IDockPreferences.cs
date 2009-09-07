@@ -55,5 +55,6 @@ namespace Docky.Interface
 		bool SetName (string name);
 		
 		string GetName ();
+		
 	}
 }
