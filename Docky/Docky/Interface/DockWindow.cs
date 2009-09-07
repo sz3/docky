@@ -55,7 +55,7 @@ namespace Docky.Interface
 		const int DockWidthBuffer    = 5;
 		const int ItemWidthBuffer    = 2;
 		const int BackgroundWidth    = 1000;
-		const int BackgroundHeight   = 128;
+		const int BackgroundHeight   = 150;
 		
 		readonly TimeSpan BaseAnimationTime = new TimeSpan (0, 0, 0, 0, 150);
 		

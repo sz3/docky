@@ -54,6 +54,9 @@ namespace Docky
 			
 			Controller.Initialize ();
 			
+			ConfigurationWindow config = new ConfigurationWindow ();
+			config.Show ();
+			
 			Gdk.Threads.Enter ();
 			Gtk.Application.Run ();
 			Gdk.Threads.Leave ();

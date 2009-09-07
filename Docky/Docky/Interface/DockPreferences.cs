@@ -114,12 +114,15 @@ namespace Docky.Interface
 		public DockPreferences (string dockName)
 		{
 			this.Build ();
+			
 			name = dockName;
 			
 			prefs = DockServices.Preferences.Get<DockPreferences> ();
 			
 			BuildOptions ();
 			BuildItemProviders ();
+			
+			ShowAll ();
 		}
 		
 		public bool SetName (string name)

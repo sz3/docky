@@ -16,6 +16,16 @@
 // 
 
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+
+using Cairo;
+using Gdk;
+using Gtk;
+
+using Docky.Interface;
 
 namespace Docky
 {
@@ -24,9 +34,19 @@ namespace Docky
 	public partial class ConfigurationWindow : Gtk.Window
 	{
 
-		public ConfigurationWindow () : base(Gtk.WindowType.Toplevel)
+		public ConfigurationWindow () : base (Gtk.WindowType.Toplevel)
 		{
 			this.Build ();
+			
+			dock_pacement_align.Add (new DockPlacementWidget ());
+			
+			configuration_widget_notebook.RemovePage (0);
+			
+			foreach (Dock dock in Docky.Controller.Docks) {
+				configuration_widget_notebook.Add (dock.PreferencesWidget);
+			}
+			
+			ShowAll ();
 		}
 	}
 }
