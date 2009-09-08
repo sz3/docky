@@ -590,7 +590,7 @@ namespace Docky.Interface
 			}
 			
 			DockWidth = Items.Sum (adi => adi.Square ? IconSize : adi.IconSurface (model, IconSize).Width);
-			DockWidth += 2 * DockWidthBuffer;
+			DockWidth += 2 * DockWidthBuffer + (Items.Count - 1) * ItemWidthBuffer;
 		}
 		
 		void SetSizeRequest ()
@@ -707,7 +707,7 @@ namespace Docky.Interface
 			int midline = DockHeight / 2;
 			
 			// the left most edge of the first dock item
-			int startX = ((width - DockWidth) / 2) + DockWidthBuffer + ItemWidthBuffer;
+			int startX = ((width - DockWidth) / 2) + DockWidthBuffer;
 			
 			Gdk.Point center = new Gdk.Point (startX, midline);
 			
@@ -715,21 +715,21 @@ namespace Docky.Interface
 				DrawValue val = new DrawValue ();
 				
 				// div by 2 may result in rounding errors? Will this render OK? Shorts WidthBuffer by 1?
-				int halfSize;
+				double halfSize;
 				if (adi.Square) {
-					halfSize = ItemWidthBuffer + IconSize / 2;
+					halfSize = IconSize / 2.0;
 				} else {
 					DockySurface icon = adi.IconSurface (surface.Internal, IconSize);
 					
 					// yeah I am pretty sure...
 					if (adi.Square || adi.RotateWidthDock || !VerticalDock) {
-						halfSize = ItemWidthBuffer + icon.Width / 2;
+						halfSize = icon.Width / 2.0;
 					} else {
-						halfSize = ItemWidthBuffer + icon.Height / 2;
+						halfSize = icon.Height / 2.0;
 					}
 				}
 				// center now represents our midpoint
-				center.X += halfSize;
+				center.X += (int) Math.Floor (halfSize);
 				
 				if (ZoomPercent > 1) {
 					// get us some handy doubles with fancy names
@@ -791,7 +791,7 @@ namespace Docky.Interface
 				}
 				
 				// move past midpoint to end of icon
-				center.X += halfSize;
+				center.X += (int) Math.Ceiling (halfSize) + ItemWidthBuffer;
 				
 				// now we undo our transforms to the point
 				switch (Position) {
@@ -822,10 +822,30 @@ namespace Docky.Interface
 			}
 		}
 		
+		Gdk.Rectangle StaticDockArea (DockySurface surface)
+		{
+			switch (Position) {
+			case DockPosition.Top:
+				return new Gdk.Rectangle ((surface.Width - DockWidth) / 2, 0, DockWidth, DockHeight);
+				break;
+			case DockPosition.Left:
+				return new Gdk.Rectangle (0, (surface.Height - DockWidth) / 2, DockHeight, DockWidth);
+				break;
+			case DockPosition.Right:
+				return new Gdk.Rectangle (surface.Width - DockHeight, (surface.Height - DockWidth) / 2, DockHeight, DockWidth);
+				break;
+			case DockPosition.Bottom:
+				return new Gdk.Rectangle ((surface.Width - DockWidth) / 2, surface.Height - DockHeight, DockWidth, DockHeight);
+				break;
+			}
+			
+			return Gdk.Rectangle.Zero;
+		}
+		
 		void GetDockAreaOnSurface (DockySurface surface, out Gdk.Rectangle dockArea, out Gdk.Rectangle cursorArea)
 		{
 			DrawValue firstDv, lastDv;
-			Gdk.Rectangle first, last;
+			Gdk.Rectangle first, last, staticArea;
 			
 			firstDv = DrawValues [Items [0]];
 			lastDv  = DrawValues [Items [Items.Count - 1]];
@@ -835,6 +855,7 @@ namespace Docky.Interface
 			
 			dockArea = new Gdk.Rectangle (0, 0, 0, 0);
 			cursorArea = new Gdk.Rectangle (0, 0, 0, 0);
+			staticArea = StaticDockArea (surface);
 			
 			int hotAreaSize;
 			if (AutohideManager.Hidden) {
@@ -852,8 +873,10 @@ namespace Docky.Interface
 				dockArea.Width = (last.X + last.Width + DockWidthBuffer) - dockArea.X;
 				dockArea.Height = DockHeight;
 				
-				cursorArea = dockArea;
-				cursorArea.Height = hotAreaSize;
+				cursorArea = new Gdk.Rectangle (staticArea.X,
+				                                dockArea.Y,
+				                                staticArea.Width,
+				                                hotAreaSize);
 				break;
 			case DockPosition.Left:
 				dockArea.X = 0;
@@ -861,8 +884,10 @@ namespace Docky.Interface
 				dockArea.Width = DockHeight;
 				dockArea.Height = (last.Y + last.Height + DockWidthBuffer) - dockArea.Y;
 				
-				cursorArea = dockArea;
-				cursorArea.Width = hotAreaSize;
+				cursorArea = new Gdk.Rectangle (dockArea.X,
+				                                staticArea.Y,
+				                                hotAreaSize,
+				                                staticArea.Height);
 				break;
 			case DockPosition.Right:
 				dockArea.X = surface.Width - DockHeight;
@@ -870,9 +895,10 @@ namespace Docky.Interface
 				dockArea.Width = DockHeight;
 				dockArea.Height = (last.Y + last.Height + DockWidthBuffer) - dockArea.Y;
 				
-				cursorArea = dockArea;
-				cursorArea.X = dockArea.X + dockArea.Width - hotAreaSize;
-				cursorArea.Width = hotAreaSize;
+				cursorArea = new Gdk.Rectangle (dockArea.X + dockArea.Width - hotAreaSize,
+				                                staticArea.Y,
+				                                hotAreaSize,
+				                                staticArea.Height);
 				break;
 			case DockPosition.Bottom:
 				dockArea.X = first.X - DockWidthBuffer;
@@ -880,9 +906,10 @@ namespace Docky.Interface
 				dockArea.Width = (last.X + last.Width + DockWidthBuffer) - dockArea.X;
 				dockArea.Height = DockHeight;
 				
-				cursorArea = dockArea;
-				cursorArea.Y = dockArea.Y + dockArea.Height - hotAreaSize;
-				cursorArea.Height = hotAreaSize;
+				cursorArea = new Gdk.Rectangle (staticArea.X,
+				                                dockArea.Y + dockArea.Height - hotAreaSize,
+				                                staticArea.Width,
+				                                hotAreaSize);
 				break;
 			}
 		}
@@ -913,11 +940,11 @@ namespace Docky.Interface
 			
 			SetInputMask (cursorArea);
 
+			
 			dockArea.X += window_position.X;
 			dockArea.Y += window_position.Y;
 			AutohideManager.SetIntersectArea (dockArea);
 			
-			// adjust our cursor area for our position
 			cursorArea.X += window_position.X;
 			cursorArea.Y += window_position.Y;
 			AutohideManager.SetCursorArea (cursorArea);

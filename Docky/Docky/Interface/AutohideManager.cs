@@ -93,13 +93,19 @@ namespace Docky.Interface
 		
 		public void SetCursorArea (Gdk.Rectangle area)
 		{
+			if (cursor_area == area)
+				return;
 			cursor_area = area;
 			DockHovered = cursor_area.Contains (tracker.Cursor);
 			SetHidden ();
+			
 		}
 		
 		public void SetIntersectArea (Gdk.Rectangle area)
 		{
+			if (intersect_area == area)
+				return;
+			
 			intersect_area = area;
 			UpdateWindowIntersect ();
 		}
