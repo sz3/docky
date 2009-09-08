@@ -51,5 +51,9 @@ namespace Docky.Items
 			}
 		}
 		
+		protected override ClickAnimation OnClicked (uint button, ModifierType mod, double xPercent, double yPercent)
+		{
+			return ClickAnimation.Bounce;
+		}
 	}
 }

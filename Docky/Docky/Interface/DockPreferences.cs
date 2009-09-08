@@ -68,6 +68,7 @@ namespace Docky.Interface
 			get { return item_providers.AsEnumerable (); }
 		}
 		
+		#region Public Properties
 		public ApplicationDockItemProvider ApplicationProvider { get; private set; }
 		
 		public AutohideType Autohide {
@@ -127,9 +128,27 @@ namespace Docky.Interface
 				OnZoomPercentChanged ();
 			}
 		}
+		#endregion
+		
+		IEnumerable<string> Launchers {
+			get {
+				return GetOption<string []> ("Launchers", new string [0]).AsEnumerable ();
+			}
+			set {
+				SetOption<string []> ("Launchers", value.ToArray ());
+			}
+		}
+		
+		bool FirstRun {
+			get { return prefs.Get ("FirstRun", true); }
+			set { prefs.Set ("FirstRun", value); }
+		}
 		
 		public DockPreferences (string dockName)
 		{
+			// ensures position actually gets set
+			position = (DockPosition) 100;
+			
 			this.Build ();
 			
 			icon_scale.Adjustment.SetBounds (24, 129, 1, 1, 1);
@@ -249,11 +268,20 @@ namespace Docky.Interface
 			ApplicationProvider = new ApplicationDockItemProvider ();
 			item_providers.Add (ApplicationProvider);
 			
-			ApplicationProvider.InsertItem ("/usr/share/applications/banshee-1.desktop");
-			ApplicationProvider.InsertItem ("/usr/share/applications/gnome-terminal.desktop");
-			ApplicationProvider.InsertItem ("/usr/share/applications/pidgin.desktop");
-			ApplicationProvider.InsertItem ("/usr/share/applications/xchat.desktop");
-			ApplicationProvider.InsertItem ("/usr/share/applications/firefox.desktop");
+			if (FirstRun) {
+				Launchers = new [] {
+					"/usr/share/applications/banshee-1.desktop",
+					"/usr/share/applications/gnome-terminal.desktop",
+					"/usr/share/applications/pidgin.desktop",
+					"/usr/share/applications/xchat.desktop",
+					"/usr/share/applications/firefox.desktop",
+				};
+				FirstRun = false;
+			}
+			
+			foreach (string launcher in Launchers) {
+				ApplicationProvider.InsertItem (launcher);
+			}
 		}
 		
 		void OnAutohideChanged ()

@@ -41,6 +41,10 @@ namespace Docky
 			get { return docks.AsEnumerable (); }
 		}
 		
+		public int NumDocks {
+			get { return DockNames.Count (); }
+		}
+		
 		IEnumerable<string> DockNames {
 			get {
 				return prefs.Get<string []> ("ActiveDocks", new [] {"Dock1"}).AsEnumerable ().Take (4);
@@ -70,11 +74,11 @@ namespace Docky
 			for (int i = 2; DockNames.Contains (name); i++)
 				name = "Dock" + i;
 			
+			DockNames = DockNames.Concat (new [] { name });
+			
 			DockPreferences dockPrefs = new DockPreferences (name);
 			Dock dock = new Dock (dockPrefs);
 			docks.Add (dock);
-			
-			DockNames = DockNames.Concat (new [] { name });
 			
 			return dock;
 		}

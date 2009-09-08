@@ -44,6 +44,14 @@ namespace Docky.Items
 		public event EventHandler HoverTextChanged;
 		public event EventHandler<PaintNeededEventArgs> PaintNeeded;
 		
+		public DateTime LastClick {
+			get; private set;
+		}
+		
+		public ClickAnimation ClickAnimation {
+			get; private set;
+		}
+		
 		public virtual bool RotateWidthDock {
 			get { return false; }
 		}
@@ -176,13 +184,27 @@ namespace Docky.Items
 		}
 		#endregion
 		
-		public virtual void Clicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
+		#region Input Handling
+		public void Clicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
+			ClickAnimation = OnClicked (button, mod, xPercent, yPercent);
+			LastClick = DateTime.UtcNow;
 		}
 		
-		public virtual void Scrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
+		protected virtual ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
+		{
+			return ClickAnimation.None;
+		}
+		
+		public void Scrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
+		{
+			OnScrolled (direction, mod);
+		}
+		
+		protected virtual void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
 		{
 		}
+		#endregion
 		
 		#region Buffer Handling
 		public DockySurface IconSurface (Surface model, int size)

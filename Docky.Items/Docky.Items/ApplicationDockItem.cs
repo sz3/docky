@@ -61,6 +61,9 @@ namespace Docky.Items
 			desktop_item = item;
 			if (item.AttrExists ("Icon"))
 				Icon = item.GetString ("Icon");
+			
+			if (item.AttrExists ("Name"))
+				HoverText = item.GetString ("Name");
 		}
 
 	}

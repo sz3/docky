@@ -39,6 +39,42 @@ namespace Docky.Interface
 		{
 			public PointD Center;
 			public double Zoom;
+			
+			public void MoveIn (DockPosition position, double amount)
+			{
+				switch (position) {
+				case DockPosition.Top:
+					Center.Y += amount;
+					break;
+				case DockPosition.Left:
+					Center.X += amount;
+					break;
+				case DockPosition.Right:
+					Center.X -= amount;
+					break;
+				case DockPosition.Bottom:
+					Center.Y -= amount;
+					break;
+				}
+			}
+			
+			public void MoveOut (DockPosition position, double amount)
+			{
+				switch (position) {
+				case DockPosition.Top:
+					Center.Y -= amount;
+					break;
+				case DockPosition.Left:
+					Center.X -= amount;
+					break;
+				case DockPosition.Right:
+					Center.X += amount;
+					break;
+				case DockPosition.Bottom:
+					Center.Y += amount;
+					break;
+				}
+			}
 		}
 		
 		/*******************************************
@@ -57,6 +93,7 @@ namespace Docky.Interface
 		const int BackgroundHeight   = 150;
 		
 		readonly TimeSpan BaseAnimationTime = new TimeSpan (0, 0, 0, 0, 150);
+		readonly TimeSpan BounceTime = new TimeSpan (0, 0, 0, 0, 600);
 		
 		DateTime hidden_change_time;
 		DateTime dock_hovered_change_time;
@@ -249,6 +286,12 @@ namespace Docky.Interface
 			SetCompositeColormap ();
 			Stick ();
 			
+			AddEvents ((int) (Gdk.EventMask.ButtonPressMask |
+			                  Gdk.EventMask.ButtonReleaseMask |
+			                  Gdk.EventMask.EnterNotifyMask |
+			                  Gdk.EventMask.LeaveNotifyMask |
+			                  Gdk.EventMask.ScrollMask));
+			
 			Realized += HandleRealized;	
 		}
 		
@@ -258,6 +301,8 @@ namespace Docky.Interface
 			                             () => (DockHovered && ZoomIn != 1) || (!DockHovered && ZoomIn != 0)); 
 			AnimationState.AddCondition (Animations.HideChanged,
 			                             () => ((hidden_change_time - DateTime.UtcNow) < BaseAnimationTime));
+			AnimationState.AddCondition (Animations.Bounce,
+			                             () => Items.Any (i => (DateTime.UtcNow - i.LastClick) < BounceTime));
 		}
 
 		#region Event Handling
@@ -396,6 +441,30 @@ namespace Docky.Interface
 		}
 		#endregion
 		
+		#region Input Handling
+		void ItemForPosition (Gdk.Point position, out AbstractDockItem dockItem)
+		{
+			double x, y;
+			ItemForPosition (position, out dockItem, out x, out y);
+		}
+		
+		void ItemForPosition (Gdk.Point position, out AbstractDockItem dockItem, out double xPercent, out double yPercent)
+		{
+			dockItem = null;
+			xPercent = yPercent = 0;
+			foreach (AbstractDockItem item in Items.Where (i => DrawValues.ContainsKey (i))) {
+				DrawValue val = DrawValues [item];
+				Gdk.Rectangle region = DrawValueToRectangle (val, IconSize);
+				if (region.Contains (position)) {
+					dockItem = item;
+					
+					xPercent = (position.X - region.X) / (double) region.Height;
+					yPercent = (position.Y - region.Y) / (double) region.Width;
+					break;
+				}
+			}
+		}
+		
 		protected override bool OnMotionNotifyEvent (EventMotion evnt)
 		{
 			CursorTracker.SendManualUpdate (evnt);
@@ -410,8 +479,34 @@ namespace Docky.Interface
 
 		protected override bool OnLeaveNotifyEvent (EventCrossing evnt)
 		{
+			CursorTracker.SendManualUpdate (evnt);
 			return base.OnLeaveNotifyEvent (evnt);
 		}
+		
+		protected override bool OnButtonReleaseEvent (EventButton evnt)
+		{
+			AbstractDockItem item;
+			double x, y;
+			ItemForPosition (new Gdk.Point ((int) evnt.X, (int) evnt.Y), out item, out x, out y);
+			if (item != null) {
+				item.Clicked (evnt.Button, evnt.State, x, y);
+				AnimatedDraw ();
+			}
+			
+			return base.OnButtonReleaseEvent (evnt);
+		}
+
+		protected override bool OnScrollEvent (EventScroll evnt)
+		{
+			AbstractDockItem item;
+			ItemForPosition (new Gdk.Point ((int) evnt.X, (int) evnt.Y), out item);
+			if (item != null) {
+				item.Scrolled (evnt.Direction, evnt.State);
+			}
+			
+			return base.OnScrollEvent (evnt);
+		}
+		#endregion
 		
 		void UpdateCollectionBuffer ()
 		{
@@ -802,11 +897,18 @@ namespace Docky.Interface
 			
 			DrawDockBackground (surface, dockArea);
 			
-			double zOffset = ZoomedIconSize / (double) IconSize;
+			double zoomOffset = ZoomedIconSize / (double) IconSize;
 			foreach (AbstractDockItem adi in Items) {
 				DrawValue val = DrawValues [adi];
 				DockySurface icon = adi.IconSurface (surface.Internal, ZoomedIconSize);
-				icon.ShowAtPointAndZoom (surface, val.Center, val.Zoom / zOffset);
+				if ((render_time - adi.LastClick) < BounceTime) {
+					double move = Math.Abs (
+					                        Math.Sin (2 * Math.PI * (render_time - adi.LastClick).TotalMilliseconds / 
+					                                  BounceTime.TotalMilliseconds) * LaunchBounceHeight
+					                        );
+					val.MoveIn (Position, move);
+				}
+				icon.ShowAtPointAndZoom (surface, val.Center, val.Zoom / zoomOffset);
 			}
 			
 			SetInputMask (cursorArea);
@@ -928,8 +1030,10 @@ namespace Docky.Interface
 		
 		protected override bool OnExposeEvent (EventExpose evnt)
 		{
-			if (!IsRealized || !Items.Any ())
+			if (!IsRealized || !Items.Any ()) {
+				SetInputMask (new Gdk.Rectangle (0, 0, 1, 1));
 				return true;
+			}
 			
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
 				

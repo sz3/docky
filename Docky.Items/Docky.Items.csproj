@@ -9,6 +9,7 @@
     <OutputType>Library</OutputType>
     <AssemblyName>Docky.Items</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <ReleaseVersion>2.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,6 +57,7 @@
     <Compile Include="Docky.Items\AddRemoveChangeType.cs" />
     <Compile Include="Docky.Items\ApplicationDockItem.cs" />
     <Compile Include="Docky.Items\IconDockItem.cs" />
+    <Compile Include="Docky.Items\ClickAnimation.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Docky.Services\Docky.Services.csproj">
