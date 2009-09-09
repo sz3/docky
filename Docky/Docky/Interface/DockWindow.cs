@@ -28,6 +28,7 @@ using Gtk;
 
 using Docky.Items;
 using Docky.CairoHelper;
+using Docky.Xlib;
 
 namespace Docky.Interface
 {
@@ -102,7 +103,9 @@ namespace Docky.Interface
 		IDockPreferences preferences;
 		DockySurface main_buffer, background_buffer;
 		
+		Gdk.Rectangle monitor_geo;
 		Gdk.Rectangle current_mask_area;
+		Gdk.Point window_position;
 		double? zoom_in_buffer;
 		bool rendering;
 		uint animation_timer;
@@ -110,8 +113,6 @@ namespace Docky.Interface
 		public int Width { get; private set; }
 		
 		public int Height { get; private set; }
-		
-		Gdk.Point window_position;
 		
 		AutohideManager AutohideManager { get; set; }
 		
@@ -152,6 +153,10 @@ namespace Docky.Interface
 						
 						if (provider.Separated && provider != ItemProviders.Last ())
 							collection_backend.Add (new SeparatorItem ());
+					}
+					
+					for (int i = collection_backend.Count; i < 2; i++) {
+						collection_backend.Add (new SpacingItem ());
 					}
 				}
 				return collection_frontend;
@@ -194,6 +199,7 @@ namespace Docky.Interface
 		}
 		#endregion
 		
+		#region Internal Properties
 		Gdk.Point Cursor {
 			get { return CursorTracker.Cursor; }
 		}
@@ -263,6 +269,7 @@ namespace Docky.Interface
 		int ZoomSize {
 			get { return (int) (330 * (IconSize / 64.0)); }
 		}
+		#endregion
 		
 		public DockWindow () : base (Gtk.WindowType.Toplevel)
 		{
@@ -295,6 +302,7 @@ namespace Docky.Interface
 			Realized += HandleRealized;	
 		}
 		
+		#region Event Handling
 		void BuildAnimationEngine ()
 		{
 			AnimationState.AddCondition (Animations.DockHoveredChanged, 
@@ -305,7 +313,6 @@ namespace Docky.Interface
 			                             () => Items.Any (i => (DateTime.UtcNow - i.LastClick) < BounceTime));
 		}
 
-		#region Event Handling
 		void HandleRealized (object sender, EventArgs e)
 		{
 			GdkWindow.SetBackPixmap (null, false);
@@ -438,6 +445,7 @@ namespace Docky.Interface
 		void PreferencesAutohideChanged (object sender, EventArgs e)
 		{
 			AutohideManager.Behavior = Autohide;
+			SetStruts ();
 		}
 		#endregion
 		
@@ -508,11 +516,12 @@ namespace Docky.Interface
 		}
 		#endregion
 		
+		#region Misc.
 		void UpdateCollectionBuffer ()
 		{
 			// dispose of our separators as we made them ourselves,
 			// this could be a bit more elegant
-			foreach (AbstractDockItem item in Items.Where (adi => adi is SeparatorItem))
+			foreach (AbstractDockItem item in Items.Where (adi => adi is SeparatorItem || adi is SpacingItem))
 				item.Dispose ();
 			
 			collection_backend.Clear ();
@@ -532,6 +541,20 @@ namespace Docky.Interface
             Colormap = colormap;
             colormap.Dispose ();
 		}
+		
+		void ResetBuffers ()
+		{
+			if (main_buffer != null) {
+				main_buffer.Dispose ();
+				main_buffer = null;
+			}
+			
+			if (background_buffer != null) {
+				background_buffer.Dispose ();
+				background_buffer = null;
+			}
+		}
+		#endregion
 		
 		#region Size and Position
 		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
@@ -557,22 +580,23 @@ namespace Docky.Interface
 		
 		void Reposition ()
 		{
-			Gdk.Rectangle geo;
-			geo = Screen.GetMonitorGeometry (Monitor);
+			monitor_geo = Screen.GetMonitorGeometry (Monitor);
 			
 			switch (Position) {
 			default:
 			case DockPosition.Top:
 			case DockPosition.Left:
-				Move (geo.X, geo.Y);
+				Move (monitor_geo.X, monitor_geo.Y);
 				break;
 			case DockPosition.Right:
-				Move (geo.X + geo.Width - Width, geo.Y);
+				Move (monitor_geo.X + monitor_geo.Width - Width, monitor_geo.Y);
 				break;
 			case DockPosition.Bottom:
-				Move (geo.X, geo.Y + geo.Height - Height);
+				Move (monitor_geo.X, monitor_geo.Y + monitor_geo.Height - Height);
 				break;
 			}
+			
+			SetStruts ();
 		}
 		
 		void UpdateDockWidth ()
@@ -595,15 +619,12 @@ namespace Docky.Interface
 		
 		void SetSizeRequest ()
 		{
-			Gdk.Rectangle geo;
-			geo = Screen.GetMonitorGeometry (Monitor);
-			
 			if (VerticalDock) {
-				Height = geo.Height;
+				Height = monitor_geo.Height;
 				Width = ZoomedIconSize + 2 * DockHeightBuffer + UrgentBounceHeight;
 				Width = Math.Max (150, Width);
 			} else {
-				Width = geo.Width;
+				Width = monitor_geo.Width;
 				Height = ZoomedIconSize + 2 * DockHeightBuffer + UrgentBounceHeight;
 				Height = Math.Max (150, Height);
 			}
@@ -675,12 +696,9 @@ namespace Docky.Interface
 			
 			Gdk.Point cursor = Cursor;
 			
-			Gdk.Rectangle geo;
-			geo = Screen.GetMonitorGeometry (Monitor);
-			
 			// screen shift sucks
-			cursor.X -= geo.X;
-			cursor.Y -= geo.Y;
+			cursor.X -= monitor_geo.X;
+			cursor.Y -= monitor_geo.Y;
 			
 			// "relocate" our cursor to be on the top
 			switch (Position) {
@@ -694,12 +712,12 @@ namespace Docky.Interface
 				break;
 			case DockPosition.Right:
 				tmpY = cursor.Y;
-				cursor.X = (geo.Width - 1) - cursor.X;
+				cursor.X = (monitor_geo.Width - 1) - cursor.X;
 				cursor.Y = cursor.X;
 				cursor.X = width - (width - tmpY);
 				break;
 			case DockPosition.Bottom:
-				cursor.Y = (geo.Height - 1) - cursor.Y;
+				cursor.Y = (monitor_geo.Height - 1) - cursor.Y;
 				break;
 			}
 			
@@ -815,8 +833,8 @@ namespace Docky.Interface
 					break;
 				}
 				
-				val.Center.X += geo.X;
-				val.Center.Y += geo.Y;
+				val.Center.X += monitor_geo.X;
+				val.Center.Y += monitor_geo.Y;
 				
 				DrawValues [adi] = val;
 			}
@@ -827,16 +845,12 @@ namespace Docky.Interface
 			switch (Position) {
 			case DockPosition.Top:
 				return new Gdk.Rectangle ((surface.Width - DockWidth) / 2, 0, DockWidth, DockHeight);
-				break;
 			case DockPosition.Left:
 				return new Gdk.Rectangle (0, (surface.Height - DockWidth) / 2, DockHeight, DockWidth);
-				break;
 			case DockPosition.Right:
 				return new Gdk.Rectangle (surface.Width - DockHeight, (surface.Height - DockWidth) / 2, DockHeight, DockWidth);
-				break;
 			case DockPosition.Bottom:
 				return new Gdk.Rectangle ((surface.Width - DockWidth) / 2, surface.Height - DockHeight, DockWidth, DockHeight);
-				break;
 			}
 			
 			return Gdk.Rectangle.Zero;
@@ -854,7 +868,6 @@ namespace Docky.Interface
 			last  = DrawValueToRectangle (lastDv, IconSize);
 			
 			dockArea = new Gdk.Rectangle (0, 0, 0, 0);
-			cursorArea = new Gdk.Rectangle (0, 0, 0, 0);
 			staticArea = StaticDockArea (surface);
 			
 			int hotAreaSize;
@@ -900,6 +913,7 @@ namespace Docky.Interface
 				                                hotAreaSize,
 				                                staticArea.Height);
 				break;
+			default:
 			case DockPosition.Bottom:
 				dockArea.X = first.X - DockWidthBuffer;
 				dockArea.Y = surface.Height - DockHeight;
@@ -1122,20 +1136,49 @@ namespace Docky.Interface
 				InputShapeCombineMask (pixmap, area.X, area.Y);
 			}
 		}
-		#endregion
 		
-		void ResetBuffers ()
+		void SetStruts ()
 		{
-			if (main_buffer != null) {
-				main_buffer.Dispose ();
-				main_buffer = null;
+			if (!IsRealized) return;
+			
+			X11Atoms atoms = X11Atoms.Instance;
+			
+			IntPtr [] struts = new IntPtr [12];
+			
+			if (Autohide == AutohideType.None) {
+				switch (Position) {
+				case DockPosition.Top:
+					struts [(int) Struts.Top] = (IntPtr) (DockHeight + monitor_geo.Y);
+					struts [(int) Struts.TopStart] = (IntPtr) monitor_geo.X;
+					struts [(int) Struts.TopEnd] = (IntPtr) (monitor_geo.X + monitor_geo.Width - 1);
+					break;
+				case DockPosition.Left:
+					struts [(int) Struts.Left] = (IntPtr) (monitor_geo.X + DockHeight);
+					struts [(int) Struts.LeftStart] = (IntPtr) monitor_geo.Y;
+					struts [(int) Struts.LeftEnd] = (IntPtr) (monitor_geo.Y + monitor_geo.Height - 1);
+					break;
+				case DockPosition.Right:
+					struts [(int) Struts.Right] = (IntPtr) (DockHeight + (Screen.Width - (monitor_geo.X + monitor_geo.Width)));
+					struts [(int) Struts.RightStart] = (IntPtr) monitor_geo.Y;
+					struts [(int) Struts.RightEnd] = (IntPtr) (monitor_geo.Y + monitor_geo.Height - 1);
+					break;
+				case DockPosition.Bottom:
+					struts [(int) Struts.Bottom] = (IntPtr) (DockHeight + (Screen.Height - (monitor_geo.Y + monitor_geo.Height)));
+					struts [(int) Struts.BottomStart] = (IntPtr) monitor_geo.X;
+					struts [(int) Struts.BottomEnd] = (IntPtr) (monitor_geo.X + monitor_geo.Width - 1);
+					break;
+				}
 			}
 			
-			if (background_buffer != null) {
-				background_buffer.Dispose ();
-				background_buffer = null;
-			}
+			IntPtr [] first_struts = new [] { struts [0], struts [1], struts [2], struts [3] };
+
+			Xlib.Xlib.XChangeProperty (GdkWindow, atoms._NET_WM_STRUT_PARTIAL, atoms.XA_CARDINAL,
+			                      (int) PropertyMode.PropModeReplace, struts);
+			
+			Xlib.Xlib.XChangeProperty (GdkWindow, atoms._NET_WM_STRUT, atoms.XA_CARDINAL, 
+			                      (int) PropertyMode.PropModeReplace, first_struts);
 		}
+		#endregion
 		
 		public override void Dispose ()
 		{
