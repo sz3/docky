@@ -17,7 +17,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -25,41 +26,30 @@ using Cairo;
 using Gdk;
 using Gtk;
 
-namespace Docky
+namespace Docky.Items
 {
 
 
-	public static class Docky
+	public class FileDockItem : IconDockItem
 	{
-
-		public static UserArgs CommandLinePreferences { get; private set; }
-		
-		static DockController controller;
-		internal static DockController Controller { 
-			get {
-				if (controller == null)
-					controller = new DockController ();
-				return controller;
+		public static FileDockItem NewFromUri (string uri)
+		{
+			string path = new Uri (uri).LocalPath;
+			if (!Directory.Exists (path) && !File.Exists (path)) {
+				return null;
 			}
+			
+			return new FileDockItem (uri);
 		}
 		
+		string uri;
 		
-		public static void Main (string [] args)
+		FileDockItem (string uri)
 		{
-			CommandLinePreferences = new UserArgs (args);
+			Gnome.IconLookupResultFlags results;
+			Icon = Gnome.Icon.LookupSync (IconTheme.Default, null, uri, null, 0, out results);
 			
-			//Init gtk and related
-			Gdk.Threads.Init ();
-			Gtk.Application.Init ("Docky", ref args);
-			
-			Controller.Initialize ();
-			
-			ConfigurationWindow config = new ConfigurationWindow ();
-			config.Show ();
-			
-			Gdk.Threads.Enter ();
-			Gtk.Application.Run ();
-			Gdk.Threads.Leave ();
+			this.uri = uri;
 		}
 	}
 }

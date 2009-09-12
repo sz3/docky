@@ -86,11 +86,16 @@ namespace Docky.Interface
 		
 		public void SendManualUpdate (Gdk.EventCrossing evnt)
 		{
+			// we get screwy inputs sometimes
+			if (evnt.XRoot == 0 || evnt.YRoot == 0)
+				return;
 			Update (evnt.Window.Screen, (int) evnt.XRoot, (int) evnt.YRoot, evnt.State);
 		}
 		
 		public void SendManualUpdate (Gdk.EventMotion evnt)
 		{
+			if (evnt.XRoot == 0 || evnt.YRoot == 0)
+				return;
 			Update (evnt.Window.Screen, (int) evnt.XRoot, (int) evnt.YRoot, evnt.State);
 		}
 		

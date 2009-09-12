@@ -18,9 +18,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Reflection;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 
 using Cairo;
 using Gdk;
@@ -39,42 +40,39 @@ namespace Docky.Interface
 		struct DrawValue 
 		{
 			public PointD Center;
+			public PointD StaticCenter;
+			public Gdk.Rectangle HoverArea;
 			public double Zoom;
 			
-			public void MoveIn (DockPosition position, double amount)
+			public DrawValue MoveIn (DockPosition position, double amount)
 			{
+				DrawValue result = new DrawValue {
+					Center = Center,
+					StaticCenter = StaticCenter,
+					HoverArea = HoverArea,
+					Zoom = Zoom
+				};
+				
 				switch (position) {
 				case DockPosition.Top:
-					Center.Y += amount;
+					result.Center.Y += amount;
+					result.StaticCenter.Y += amount;
 					break;
 				case DockPosition.Left:
-					Center.X += amount;
+					result.Center.X += amount;
+					result.StaticCenter.X += amount;
 					break;
 				case DockPosition.Right:
-					Center.X -= amount;
+					result.Center.X -= amount;
+					result.StaticCenter.X -= amount;
 					break;
 				case DockPosition.Bottom:
-					Center.Y -= amount;
+					result.Center.Y -= amount;
+					result.StaticCenter.Y -= amount;
 					break;
 				}
-			}
-			
-			public void MoveOut (DockPosition position, double amount)
-			{
-				switch (position) {
-				case DockPosition.Top:
-					Center.Y -= amount;
-					break;
-				case DockPosition.Left:
-					Center.X -= amount;
-					break;
-				case DockPosition.Right:
-					Center.X += amount;
-					break;
-				case DockPosition.Bottom:
-					Center.Y += amount;
-					break;
-				}
+				
+				return result;
 			}
 		}
 		
@@ -106,8 +104,11 @@ namespace Docky.Interface
 		Gdk.Rectangle monitor_geo;
 		Gdk.Rectangle current_mask_area;
 		Gdk.Point window_position;
+		Gdk.Window proxy_window;
+		
 		double? zoom_in_buffer;
 		bool rendering;
+		
 		uint animation_timer;
 		
 		public int Width { get; private set; }
@@ -172,6 +173,11 @@ namespace Docky.Interface
 			get { return AutohideManager.DockHovered; }
 		}
 		
+		AbstractDockItem HoveredItem {
+			get;
+			set;
+		}
+		
 		IEnumerable<IDockItemProvider> ItemProviders {
 			get { return Preferences.ItemProviders; }
 		}
@@ -202,6 +208,10 @@ namespace Docky.Interface
 		#region Internal Properties
 		Gdk.Point Cursor {
 			get { return CursorTracker.Cursor; }
+		}
+		
+		Gdk.Point LocalCursor {
+			get { return new Gdk.Point (Cursor.X - window_position.X, Cursor.Y - window_position.Y); }
 		}
 		
 		int DockHeight {
@@ -267,11 +277,13 @@ namespace Docky.Interface
 		}
 		
 		int ZoomSize {
-			get { return (int) (330 * (IconSize / 64.0)); }
+			get { 
+				return (int) (330 * (IconSize / 64.0)); 
+			}
 		}
 		#endregion
 		
-		public DockWindow () : base (Gtk.WindowType.Toplevel)
+		public DockWindow () : base(Gtk.WindowType.Toplevel)
 		{
 			DrawValues = new Dictionary<AbstractDockItem, DrawValue> ();
 			AnimationState = new AnimationState ();
@@ -280,26 +292,30 @@ namespace Docky.Interface
 			collection_backend = new List<AbstractDockItem> ();
 			collection_frontend = collection_backend.AsReadOnly ();
 			
-			AppPaintable    = true;
-			AcceptFocus     = false;
-			Decorated       = false;
-			DoubleBuffered  = false;
-			SkipPagerHint   = true;
+			AppPaintable = true;
+			AcceptFocus = false;
+			Decorated = false;
+			DoubleBuffered = false;
+			SkipPagerHint = true;
 			SkipTaskbarHint = true;
-			Resizable       = false;
-			CanFocus        = false;
-			TypeHint        = WindowTypeHint.Dock;
+			Resizable = false;
+			CanFocus = false;
+			TypeHint = WindowTypeHint.Dock;
 			
-			SetCompositeColormap ();
+			this.SetCompositeColormap ();
 			Stick ();
 			
-			AddEvents ((int) (Gdk.EventMask.ButtonPressMask |
+			AddEvents ((int)(Gdk.EventMask.ButtonPressMask |
 			                  Gdk.EventMask.ButtonReleaseMask |
 			                  Gdk.EventMask.EnterNotifyMask |
 			                  Gdk.EventMask.LeaveNotifyMask |
 			                  Gdk.EventMask.ScrollMask));
 			
-			Realized += HandleRealized;	
+			Realized += HandleRealized;
+			
+			EnableDragTo ();
+			EnableDragFrom ();
+			RegisterDragEvents ();
 		}
 		
 		#region Event Handling
@@ -346,6 +362,8 @@ namespace Docky.Interface
 			else
 				CursorTracker.CancelHighResolution (this);
 			
+			if ((CursorTracker.Modifier & ModifierType.Button1Mask) == ModifierType.Button1Mask)
+				EnsureDragAndDropProxy ();
 			AnimatedDraw ();
 		}
 
@@ -360,6 +378,7 @@ namespace Docky.Interface
 		{
 			if (DockHovered && e.LastPosition != Cursor)
 				AnimatedDraw ();
+			EnsureDragAndDropProxy ();
 		}
 		
 		void RegisterItemProvider (IDockItemProvider provider)
@@ -450,28 +469,6 @@ namespace Docky.Interface
 		#endregion
 		
 		#region Input Handling
-		void ItemForPosition (Gdk.Point position, out AbstractDockItem dockItem)
-		{
-			double x, y;
-			ItemForPosition (position, out dockItem, out x, out y);
-		}
-		
-		void ItemForPosition (Gdk.Point position, out AbstractDockItem dockItem, out double xPercent, out double yPercent)
-		{
-			dockItem = null;
-			xPercent = yPercent = 0;
-			foreach (AbstractDockItem item in Items.Where (i => DrawValues.ContainsKey (i))) {
-				DrawValue val = DrawValues [item];
-				Gdk.Rectangle region = DrawValueToRectangle (val, IconSize);
-				if (region.Contains (position)) {
-					dockItem = item;
-					
-					xPercent = (position.X - region.X) / (double) region.Height;
-					yPercent = (position.Y - region.Y) / (double) region.Width;
-					break;
-				}
-			}
-		}
 		
 		protected override bool OnMotionNotifyEvent (EventMotion evnt)
 		{
@@ -493,11 +490,15 @@ namespace Docky.Interface
 		
 		protected override bool OnButtonReleaseEvent (EventButton evnt)
 		{
-			AbstractDockItem item;
 			double x, y;
-			ItemForPosition (new Gdk.Point ((int) evnt.X, (int) evnt.Y), out item, out x, out y);
-			if (item != null) {
-				item.Clicked (evnt.Button, evnt.State, x, y);
+			if (HoveredItem != null) {
+				DrawValue val = DrawValues[HoveredItem];
+				Gdk.Rectangle region = DrawValueToRectangle (val, IconSize);
+					
+				x = (Cursor.X - region.X) / (double) region.Height;
+				y = (Cursor.Y - region.Y) / (double) region.Width;
+				
+				HoveredItem.Clicked (evnt.Button, evnt.State, x, y);
 				AnimatedDraw ();
 			}
 			
@@ -506,13 +507,196 @@ namespace Docky.Interface
 
 		protected override bool OnScrollEvent (EventScroll evnt)
 		{
-			AbstractDockItem item;
-			ItemForPosition (new Gdk.Point ((int) evnt.X, (int) evnt.Y), out item);
-			if (item != null) {
-				item.Scrolled (evnt.Direction, evnt.State);
+			if (HoveredItem != null) {
+				HoveredItem.Scrolled (evnt.Direction, evnt.State);
 			}
 			
 			return base.OnScrollEvent (evnt);
+		}
+		#endregion
+		
+		#region Drag Handling
+		bool drag_known;
+		bool drag_data_requested;
+		bool drag_is_desktop_file;
+		bool drag_from_enabled;
+		bool drag_began;
+		
+		IEnumerable<string> drag_data;
+		
+		void RegisterDragEvents ()
+		{
+			DragMotion       += HandleDragMotion;
+			DragBegin        += HandleDragBegin;
+			DragDataReceived += HandleDragDataReceived;
+			DragDrop         += HandleDragDrop;
+			DragEnd          += HandleDragEnd;
+			DragLeave        += HandleDragLeave;
+			DragFailed       += HandleDragFailed;
+		}
+
+
+		/// <summary>
+		/// Emitted on the drag source when drag is started
+		/// </summary>
+		void HandleDragBegin (object o, DragBeginArgs args)
+		{
+			drag_began = true;
+			
+			if (proxy_window != null) {
+				EnableDragTo ();
+				proxy_window = null;
+			}
+			
+			Gdk.Pixbuf pbuf = new Gdk.Pixbuf (Gdk.Colorspace.Rgb, true, 8, 1, 1);
+			Gtk.Drag.SetIconPixbuf (args.Context, pbuf, 0, 0);
+			pbuf.Dispose ();
+		}
+
+		/// <summary>
+		/// Emitted on the drop site. If the data was recieved to preview the data, call
+		/// Gdk.Drag.Status (), else call Gdk.Drag.Finish () 
+		/// RetVal = true on success
+		/// </summary>
+		void HandleDragDataReceived (object o, DragDataReceivedArgs args)
+		{
+			if (drag_data_requested) {
+				SelectionData data = args.SelectionData;
+				
+				string uris = Encoding.UTF8.GetString (data.Data);
+				uris = System.Uri.UnescapeDataString (uris);
+				
+				drag_data = Regex.Split (uris, "\r\n")
+					.Where (uri => uri.StartsWith ("file://"));
+				
+				drag_data_requested = false;
+				drag_is_desktop_file = drag_data.Any (d => d.EndsWith (".desktop"));
+				
+				Gdk.Drag.Status (args.Context, DragAction.Copy, Gtk.Global.CurrentEventTime);
+			
+			} else {
+				Console.WriteLine ("Data Recieved At End");
+			}
+			args.RetVal = true;
+		}
+
+		/// <summary>
+		/// Emitted on the drop site when the user drops data on the widget.
+		/// </summary>
+		void HandleDragDrop (object o, DragDropArgs args)
+		{
+			AbstractDockItem item = HoveredItem;
+			
+			if (!drag_is_desktop_file && item != null && item.CanAcceptDrop (drag_data)) {
+				item.AcceptDrop (drag_data);
+			} else {
+				Preferences.AddItems (drag_data);
+			}
+			
+			args.RetVal = true;
+			Gtk.Drag.Finish (args.Context, true, false, args.Time);
+		}
+
+		/// <summary>
+		/// Emitted on the drag source when the drag finishes
+		/// </summary>
+		void HandleDragEnd (object o, DragEndArgs args)
+		{
+			drag_began = false;
+		}
+
+		/// <summary>
+		/// Emitted on drop site when drag leaves widget
+		/// </summary>
+		void HandleDragLeave (object o, DragLeaveArgs args)
+		{
+			drag_known = false;
+		}
+		
+		/// <summary>
+		/// Emitted on drag source. Return true to disable drag failed animation
+		/// </summary>
+		void HandleDragFailed (object o, DragFailedArgs args)
+		{
+			args.RetVal = true;
+		}
+
+		/// <summary>
+		/// Emitted on drop site.
+		/// Set RetVal == cursor is over drop zone
+		/// if (RetVal) Gdk.Drag.Status, unless the decision cannot be made, in which case it may be defered by
+		/// a get data call
+		/// </summary>
+		void HandleDragMotion (object o, DragMotionArgs args)
+		{
+			if (!drag_known) {
+				drag_known = true;
+				Gdk.Atom atom = Gtk.Drag.DestFindTarget (this, args.Context, null);
+				Gtk.Drag.GetData (this, args.Context, atom, args.Time);
+				drag_data_requested = true;
+			} else {
+				;
+			}
+			args.RetVal = true;
+		}
+		
+		IEnumerable<Gdk.Window> WorkspaceWindowStack {
+			get {
+				try {
+					return Wnck.Screen.Default.WindowsStacked
+						.Where (wnk => wnk.IsVisibleOnWorkspace (Wnck.Screen.Default.ActiveWorkspace))
+						.Select (wnk => Gdk.Window.ForeignNew ((uint) wnk.Xid));
+				} catch {
+					return null;
+				}
+			}
+		}
+		
+		void EnsureDragAndDropProxy ()
+		{
+			// having a proxy window here is VERY bad ju-ju
+			if (drag_began) {
+				return;
+			}
+			
+			if (DockHovered) {
+				if (proxy_window == null)
+					return;
+				proxy_window = null;
+				EnableDragTo ();
+			} else {
+				IEnumerable<Gdk.Window> windows = WorkspaceWindowStack;
+
+				foreach (Gdk.Window w in windows.Reverse ()) {
+					if (w == null || w == GdkWindow || !w.IsVisible || !w.IsViewable)
+						continue;
+					
+					Gdk.Rectangle rect;
+					int depth;
+					w.GetGeometry (out rect.X, out rect.Y, out rect.Width, out rect.Height, out depth);
+					if (rect.Contains (Cursor)) {
+						if (w != proxy_window) {
+							proxy_window = w;
+							Gtk.Drag.DestSetProxy (this, w, DragProtocol.Xdnd, true);
+						}
+						break;
+					}
+				}
+			}
+		}
+
+		void EnableDragTo ()
+		{
+			TargetEntry dest_te = new TargetEntry ("text/uri-list", 0, 0);
+			Gtk.Drag.DestSet (this, 0, new [] {dest_te}, Gdk.DragAction.Copy);
+		}
+		
+		void EnableDragFrom ()
+		{
+			drag_from_enabled = true;
+			// we dont really want to offer the drag to anything, merely pretend to, so we set a mimetype nothing takes
+			TargetEntry te = new TargetEntry ("nomatch", TargetFlags.App | TargetFlags.OtherApp, 0);
+			Gtk.Drag.SourceSet (this, Gdk.ModifierType.Button1Mask, new [] {te}, DragAction.Copy);
 		}
 		#endregion
 		
@@ -526,20 +710,6 @@ namespace Docky.Interface
 			
 			collection_backend.Clear ();
 			UpdateDockWidth ();
-		}
-		
-		void SetCompositeColormap ()
-		{
-			Gdk.Colormap colormap;
-
-            colormap = Screen.RgbaColormap;
-            if (colormap == null) {
-                    colormap = Screen.RgbColormap;
-                    Console.Error.WriteLine ("No alpha support.");
-            }
-            
-            Colormap = colormap;
-            colormap.Dispose ();
 		}
 		
 		void ResetBuffers ()
@@ -604,12 +774,12 @@ namespace Docky.Interface
 			if (GdkWindow == null)
 				return;
 			
-			Surface model;
+			DockySurface model;
 			if (background_buffer != null) {
-				model = main_buffer.Internal;
+				model = main_buffer;
 			} else {
 				using (Cairo.Context cr = Gdk.CairoHelper.Create (GdkWindow)) {
-					model = cr.Target;
+					model = new DockySurface (0, 0, cr.Target);
 				}
 			}
 			
@@ -621,8 +791,7 @@ namespace Docky.Interface
 		{
 			if (VerticalDock) {
 				Height = monitor_geo.Height;
-				Width = ZoomedIconSize + 2 * DockHeightBuffer + UrgentBounceHeight;
-				Width = Math.Max (150, Width);
+				Width = ZoomedIconSize + 2 * DockHeightBuffer + 250;
 			} else {
 				Width = monitor_geo.Width;
 				Height = ZoomedIconSize + 2 * DockHeightBuffer + UrgentBounceHeight;
@@ -684,6 +853,7 @@ namespace Docky.Interface
 			int width;
 			int height;
 			double zoom;
+			bool hoveredItemSet = false;
 			
 			// our width and height switch around if we have a veritcal dock
 			if (!VerticalDock) {
@@ -737,7 +907,7 @@ namespace Docky.Interface
 				if (adi.Square) {
 					halfSize = IconSize / 2.0;
 				} else {
-					DockySurface icon = adi.IconSurface (surface.Internal, IconSize);
+					DockySurface icon = adi.IconSurface (surface, IconSize);
 					
 					// yeah I am pretty sure...
 					if (adi.Square || adi.RotateWidthDock || !VerticalDock) {
@@ -748,6 +918,7 @@ namespace Docky.Interface
 				}
 				// center now represents our midpoint
 				center.X += (int) Math.Floor (halfSize);
+				val.StaticCenter = new PointD (center.X, center.Y);
 				
 				if (ZoomPercent > 1) {
 					// get us some handy doubles with fancy names
@@ -808,9 +979,6 @@ namespace Docky.Interface
 					val.Center = new PointD (center.X, center.Y);
 				}
 				
-				// move past midpoint to end of icon
-				center.X += (int) Math.Ceiling (halfSize) + ItemWidthBuffer;
-				
 				// now we undo our transforms to the point
 				switch (Position) {
 				case DockPosition.Top:
@@ -820,6 +988,10 @@ namespace Docky.Interface
 					double tmpY = val.Center.Y;
 					val.Center.Y = val.Center.X;
 					val.Center.X = width - (width - tmpY);
+					
+					tmpY = val.StaticCenter.Y;
+					val.StaticCenter.Y = val.StaticCenter.X;
+					val.StaticCenter.X = width - (width - tmpY);
 					break;
 				case DockPosition.Right:
 					tmpY = val.Center.Y;
@@ -827,17 +999,52 @@ namespace Docky.Interface
 					val.Center.X = width - (width - tmpY);
 					val.Center.X = (height - 1) - val.Center.X;
 					
+					tmpY = val.StaticCenter.Y;
+					val.StaticCenter.Y = val.StaticCenter.X;
+					val.StaticCenter.X = width - (width - tmpY);
+					val.StaticCenter.X = (height - 1) - val.StaticCenter.X;
 					break;
 				case DockPosition.Bottom:
 					val.Center.Y = (height - 1) - val.Center.Y;
+					val.StaticCenter.Y = (height - 1) - val.StaticCenter.Y;
 					break;
 				}
 				
-				val.Center.X += monitor_geo.X;
-				val.Center.Y += monitor_geo.Y;
+				int halfHoverSize = (IconSize + ItemWidthBuffer) / 2;
+				Gdk.Rectangle hoverArea = new Gdk.Rectangle ((int) val.StaticCenter.X - halfHoverSize, 
+					                                         (int) val.StaticCenter.Y - halfHoverSize,
+					                                         2 * halfHoverSize,
+					                                         2 * halfHoverSize);
 				
-				DrawValues [adi] = val;
+				val.HoverArea = hoverArea;
+				
+				if (VerticalDock) {
+					hoverArea.X -= DockHeightBuffer;
+					hoverArea.Width += 2 * DockHeightBuffer;
+					
+					hoverArea.Y -= ItemWidthBuffer / 2;
+					hoverArea.Height += ItemWidthBuffer;
+				} else {
+					hoverArea.Y -= DockHeightBuffer;
+					hoverArea.Height += 2 * DockHeightBuffer;
+					
+					hoverArea.X -= ItemWidthBuffer / 2;
+					hoverArea.Width += ItemWidthBuffer;
+				}
+				
+				DrawValues[adi] = val;
+				
+				if (hoverArea.Contains (LocalCursor)) {
+					HoveredItem = adi;
+					hoveredItemSet = true;
+				}
+				
+				// move past midpoint to end of icon
+				center.X += (int) Math.Ceiling (halfSize) + ItemWidthBuffer;
 			}
+			
+			if (!hoveredItemSet)
+				HoveredItem = null;
 		}
 		
 		Gdk.Rectangle StaticDockArea (DockySurface surface)
@@ -938,18 +1145,8 @@ namespace Docky.Interface
 			
 			DrawDockBackground (surface, dockArea);
 			
-			double zoomOffset = ZoomedIconSize / (double) IconSize;
 			foreach (AbstractDockItem adi in Items) {
-				DrawValue val = DrawValues [adi];
-				DockySurface icon = adi.IconSurface (surface.Internal, ZoomedIconSize);
-				if ((render_time - adi.LastClick) < BounceTime) {
-					double move = Math.Abs (
-					                        Math.Sin (2 * Math.PI * (render_time - adi.LastClick).TotalMilliseconds / 
-					                                  BounceTime.TotalMilliseconds) * LaunchBounceHeight
-					                        );
-					val.MoveIn (Position, move);
-				}
-				icon.ShowAtPointAndZoom (surface, val.Center, val.Zoom / zoomOffset);
+				DrawItem (surface, adi);
 			}
 			
 			SetInputMask (cursorArea);
@@ -964,13 +1161,38 @@ namespace Docky.Interface
 			AutohideManager.SetCursorArea (cursorArea);
 		}
 		
+		void DrawItem (DockySurface surface, AbstractDockItem item)
+		{
+			double zoomOffset = ZoomedIconSize / (double) IconSize;
+			
+			DrawValue val = DrawValues [item];
+			DockySurface icon = item.IconSurface (surface, ZoomedIconSize);
+			
+			if ((render_time - item.LastClick) < BounceTime) {
+				double move = Math.Abs (
+					Math.Sin (2 * Math.PI * (render_time - item.LastClick).TotalMilliseconds / 
+						BounceTime.TotalMilliseconds) * LaunchBounceHeight
+					);
+				val = val.MoveIn (Position, move);
+			}
+			icon.ShowAtPointAndZoom (surface, val.Center, val.Zoom / zoomOffset);
+			
+			if (HoveredItem == item) {
+				DrawValue loc = DrawValues [item];
+				loc = loc.MoveIn (Position, IconSize * (ZoomPercent + .1) - IconSize / 2);
+				
+				DockySurface text = item.HoverTextSurface (surface, Style);
+				text.ShowAtEdge (surface, loc.StaticCenter, Position);
+			}
+		}
+		
 		void DrawDockBackground (DockySurface surface, Gdk.Rectangle backgroundArea)
 		{
 			if (background_buffer == null) {
 				if (VerticalDock) {
-					background_buffer = new DockySurface (BackgroundHeight, BackgroundWidth, surface.Internal);
+					background_buffer = new DockySurface (BackgroundHeight, BackgroundWidth, surface);
 				} else {
-					background_buffer = new DockySurface (BackgroundWidth, BackgroundHeight, surface.Internal);
+					background_buffer = new DockySurface (BackgroundWidth, BackgroundHeight, surface);
 				}
 					
 					

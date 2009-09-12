@@ -45,11 +45,11 @@ namespace Docky.Interface
 		bool dockHoverd;
 		public bool DockHovered {
 			get { return dockHoverd; }
-			private set { 
+			private set {
 				if (dockHoverd == value)
 					return;
 				
-				dockHoverd = value; 
+				dockHoverd = value;
 				OnDockHoveredChanged ();
 			}
 		}

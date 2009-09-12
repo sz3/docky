@@ -16,51 +16,28 @@
 // 
 
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 
-using Cairo;
 using Gdk;
-using Gtk;
 
-using Docky.CairoHelper;
-
-namespace Docky.Items
+namespace Gtk
 {
 
 
-	public class SeparatorItem : AbstractDockItem
+	public static class Widget_Extensions
 	{
-		public override bool RotateWidthDock {
-			get { return true; }
-		}
-		
-		public override bool Square {
-			get {
-				return false;
-			}
-		}
-		
-		public override bool Zoom {
-			get {
-				return false;
-			}
-		}
-		
-		public SeparatorItem ()
+
+		public static void SetCompositeColormap (this Gtk.Widget self)
 		{
-		}
-		
-		protected override DockySurface CreateIconBuffer (DockySurface model, int size)
-		{
-			return new DockySurface ((int) (size * .2), size, model);
-		}
-		
-		protected override void PaintIconSurface (DockySurface surface)
-		{
-			// fixme
+			Gdk.Colormap colormap;
+
+            colormap = self.Screen.RgbaColormap;
+            if (colormap == null) {
+                    colormap = self.Screen.RgbColormap;
+                    Console.Error.WriteLine ("No alpha support.");
+            }
+            
+            self.Colormap = colormap;
+            colormap.Dispose ();
 		}
 	}
 }

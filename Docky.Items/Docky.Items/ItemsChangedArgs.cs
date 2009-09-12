@@ -30,5 +30,11 @@ namespace Docky.Items
 		public ItemsChangedArgs ()
 		{
 		}
+		
+		public ItemsChangedArgs (AbstractDockItem item, AddRemoveChangeType type)
+		{
+			Item = item;
+			Type = type;
+		}
 	}
 }

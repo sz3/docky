@@ -163,12 +163,12 @@ namespace Docky.Items
 		}
 		
 		#region Drop Handling
-		public virtual bool CanAcceptDrop (string path)
+		public virtual bool CanAcceptDrop (IEnumerable<string> uris)
 		{
 			return false;
 		}
 		
-		public virtual bool AcceptDrop (string path)
+		public virtual bool AcceptDrop (IEnumerable<string> uris)
 		{
 			return false;
 		}
@@ -207,7 +207,7 @@ namespace Docky.Items
 		#endregion
 		
 		#region Buffer Handling
-		public DockySurface IconSurface (Surface model, int size)
+		public DockySurface IconSurface (DockySurface model, int size)
 		{
 			if (main_buffer == null || main_buffer.Height != size || main_buffer.Width != size) {
 				average_color = null;
@@ -220,42 +220,46 @@ namespace Docky.Items
 			return main_buffer;
 		}
 		
-		protected virtual DockySurface CreateIconBuffer (Surface model, int size)
+		protected virtual DockySurface CreateIconBuffer (DockySurface model, int size)
 		{
 			return new DockySurface (size, size, model);
 		}
 		
 		protected abstract void PaintIconSurface (DockySurface surface);
 		
-		public DockySurface HoverTextSurface (Surface model, Style style)
+		public DockySurface HoverTextSurface (DockySurface model, Style style)
 		{
 			if (text_buffer == null) {
 			
 				Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
 				
 				layout.FontDescription = style.FontDescription;
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (14);
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (10);
 				layout.FontDescription.Weight = Pango.Weight.Bold;
+				layout.Ellipsize = Pango.EllipsizeMode.End;
+				layout.Width = Pango.Units.FromPixels (200);
 				
 				layout.SetText (HoverText);
 				
 				Pango.Rectangle inkRect, logicalRect;
 				layout.GetPixelExtents (out inkRect, out logicalRect);
 				
-				int textWidth = Pango.Units.ToPixels (inkRect.Width);
-				int textHeight = Pango.Units.ToPixels (logicalRect.Height);
-				text_buffer = new DockySurface (textWidth + 16, 30, model);
+				int textWidth = inkRect.Width;
+				int textHeight = logicalRect.Height;
+				int buffer = 12;
+				text_buffer = new DockySurface (textWidth + buffer, textHeight + buffer, model);
 				
 				using (Cairo.Context cr = new Cairo.Context (text_buffer.Internal)) {
-					cr.RoundedRectangle (.5, .5, text_buffer.Width - 1, text_buffer.Height - 1, 5);
+					cr.RoundedRectangle (.5, .5, text_buffer.Width - 1, text_buffer.Height - 1, buffer / 2);
 					cr.Color = new Cairo.Color (0, 0, 0, .8);
 					cr.FillPreserve ();
 					
 					cr.Color = new Cairo.Color (1, 1, 1, .3);
 					cr.Stroke ();
 					
-					cr.MoveTo (8, (30 - textHeight) / 2);
+					cr.MoveTo (buffer / 2, buffer / 2);
 					Pango.CairoHelper.LayoutPath (cr, layout);
+					cr.Color = new Cairo.Color (1, 1, 1);
 					cr.Fill ();
 				}
 				

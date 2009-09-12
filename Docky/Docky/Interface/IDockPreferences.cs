@@ -52,6 +52,8 @@ namespace Docky.Interface
 				
 		double ZoomPercent { get; set; }
 		
+		void AddItems (IEnumerable<string> items);
+		
 		bool SetName (string name);
 		
 		string GetName ();

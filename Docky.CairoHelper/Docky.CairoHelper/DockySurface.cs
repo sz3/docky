@@ -58,10 +58,15 @@ namespace Docky.CairoHelper
 				return context;
 			}
 		}
-
+		
 		public DockySurface (int width, int height, Surface model) : this (width, height) 
 		{
 			EnsureSurfaceModel (model);
+		}
+
+		public DockySurface (int width, int height, DockySurface model) : this (width, height) 
+		{
+			EnsureSurfaceModel (model.Internal);
 		}
 		
 		public DockySurface (int width, int height)

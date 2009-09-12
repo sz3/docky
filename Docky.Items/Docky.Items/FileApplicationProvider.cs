@@ -29,27 +29,57 @@ namespace Docky.Items
 {
 
 
-	public class ApplicationDockItemProvider : IDockItemProvider
+	public class FileApplicationProvider : IDockItemProvider
 	{
-		public static ApplicationDockItemProvider WindowManager;
-		static List<ApplicationDockItemProvider> Providers = new List<ApplicationDockItemProvider> ();
+		public static FileApplicationProvider WindowManager;
+		static List<FileApplicationProvider> Providers = new List<FileApplicationProvider> ();
 		
 		List<AbstractDockItem> items;
+		List<string> uris;
 		
-		public bool InsertItem (string desktop_file)
+		public FileApplicationProvider ()
 		{
-			return InsertItemAt (desktop_file, 0);
+			items = new List<AbstractDockItem> ();
+			uris = new List<string> ();
+			
+			Providers.Add (this);
 		}
 		
-		public bool InsertItemAt (string desktop_file, int position)
+		public bool InsertItem (string uri)
 		{
-			if (desktop_file == null)
-				throw new ArgumentNullException ("desktop file");
+			return InsertItemAt (uri, 0);
+		}
+		
+		public bool InsertItemAt (string uri, int position)
+		{
+			if (uri == null)
+				throw new ArgumentNullException ("uri");
 			
-			ApplicationDockItem item = ApplicationDockItem.NewFromFilename (desktop_file);
-			if (item == null) return false;
+			if (uris.Contains (uri))
+				return false;
+			
+			AbstractDockItem item;
+			
+			try {
+				if (uri.EndsWith (".desktop")) {
+					item = ApplicationDockItem.NewFromUri (uri);
+				} else {
+					item = FileDockItem.NewFromUri (uri);
+				}
+			} catch (Exception e) {
+				item = null;
+			}
+			
+			if (item == null)
+				return false;
 			
 			items.Insert (position, item);
+			uris.Add (uri);
+			
+			if (ItemsChanged != null) {
+				ItemsChanged (this, new ItemsChangedArgs (item, AddRemoveChangeType.Add));
+			}
+			
 			return true;
 		}
 		
@@ -106,21 +136,14 @@ namespace Docky.Items
 		}
 		#endregion
 
-		public ApplicationDockItemProvider ()
-		{
-			items = new List<AbstractDockItem> ();
-			
-			Providers.Add (this);
-		}
-		
-		~ApplicationDockItemProvider ()
+		~FileApplicationProvider ()
 		{
 			Providers.Remove (this);
 		}
 		
 		public void Dispose ()
 		{
-			foreach (ApplicationDockItem item in items)
+			foreach (AbstractDockItem item in items)
 				item.Dispose ();
 		}
 	}

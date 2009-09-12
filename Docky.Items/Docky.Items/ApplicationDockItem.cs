@@ -31,9 +31,10 @@ namespace Docky.Items
 
 	public class ApplicationDockItem : WnckDockItem
 	{
-		public static ApplicationDockItem NewFromFilename (string filename)
+		public static ApplicationDockItem NewFromUri (string uri)
 		{
 			Gnome.DesktopItem desktopItem;
+			string filename = new Uri (uri).LocalPath;
 			
 			try {
 				desktopItem = Gnome.DesktopItem.NewFromFile (filename, 0);

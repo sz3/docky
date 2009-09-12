@@ -64,12 +64,12 @@ namespace Docky.Interface
 		
 		public event EventHandler<ItemProvidersChangedEventArgs> ItemProvidersChanged;
 		
+		FileApplicationProvider ApplicationProvider { get; set; }
+		
+		#region Public Properties
 		public IEnumerable<IDockItemProvider> ItemProviders { 
 			get { return item_providers.AsEnumerable (); }
 		}
-		
-		#region Public Properties
-		public ApplicationDockItemProvider ApplicationProvider { get; private set; }
 		
 		public AutohideType Autohide {
 			get { return hide_type; }
@@ -214,6 +214,13 @@ namespace Docky.Interface
 				icon_scale.Value = IconSize;
 		}
 		
+		public void AddItems (IEnumerable<string> items)
+		{
+			if (items == null)
+				return;
+			Launchers = Launchers.Concat (items.Where (item => ApplicationProvider.InsertItem (item)));
+		}
+		
 		public bool SetName (string name)
 		{
 			
@@ -265,16 +272,16 @@ namespace Docky.Interface
 		{
 			item_providers = new List<IDockItemProvider> ();
 			
-			ApplicationProvider = new ApplicationDockItemProvider ();
+			ApplicationProvider = new FileApplicationProvider ();
 			item_providers.Add (ApplicationProvider);
 			
 			if (FirstRun) {
-				Launchers = new [] {
-					"/usr/share/applications/banshee-1.desktop",
-					"/usr/share/applications/gnome-terminal.desktop",
-					"/usr/share/applications/pidgin.desktop",
-					"/usr/share/applications/xchat.desktop",
-					"/usr/share/applications/firefox.desktop",
+				Launchers = new[] {
+					"file:///usr/share/applications/banshee-1.desktop",
+					"file:///usr/share/applications/gnome-terminal.desktop",
+					"file:///usr/share/applications/pidgin.desktop",
+					"file:///usr/share/applications/xchat.desktop",
+					"file:///usr/share/applications/firefox.desktop",
 				};
 				FirstRun = false;
 			}

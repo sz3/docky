@@ -59,6 +59,7 @@ namespace Docky
 					return;
 				activeDock = value; 
 				QueueDraw ();
+				OnActiveDockChanged ();
 			}
 		}
 		

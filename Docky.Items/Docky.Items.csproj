@@ -42,6 +42,8 @@
     </Reference>
     <Reference Include="wnck-sharp, Version=2.20.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="gnomedesktop-sharp, Version=2.20.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gnome-sharp, Version=2.24.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gnome-vfs-sharp, Version=2.24.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -52,12 +54,13 @@
     <Compile Include="Docky.Items\PaintNeededEventArgs.cs" />
     <Compile Include="Docky.Items\WnckDockItem.cs" />
     <Compile Include="Docky.Items\IDockItemProvider.cs" />
-    <Compile Include="Docky.Items\ApplicationDockItemProvider.cs" />
+    <Compile Include="Docky.Items\FileApplicationProvider.cs" />
     <Compile Include="Docky.Items\ItemsChangedArgs.cs" />
     <Compile Include="Docky.Items\AddRemoveChangeType.cs" />
     <Compile Include="Docky.Items\ApplicationDockItem.cs" />
     <Compile Include="Docky.Items\IconDockItem.cs" />
     <Compile Include="Docky.Items\ClickAnimation.cs" />
+    <Compile Include="Docky.Items\FileDockItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Docky.Services\Docky.Services.csproj">

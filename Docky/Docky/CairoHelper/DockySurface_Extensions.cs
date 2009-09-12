@@ -25,6 +25,8 @@ using Cairo;
 using Gdk;
 using Gtk;
 
+using Docky.Interface;
+
 namespace Docky.CairoHelper
 {
 
@@ -46,6 +48,36 @@ namespace Docky.CairoHelper
 			
 			cr.IdentityMatrix ();
 			
+		}
+		
+		public static void ShowAtEdge (this DockySurface self, DockySurface target, PointD point, DockPosition position)
+		{
+			if (target == null)
+				throw new ArgumentNullException ("target");
+			
+			Cairo.Context cr = target.Context;
+			double x = point.X;
+			double y = point.Y;
+			
+			switch (position) {
+			case DockPosition.Top:
+				x -= self.Width / 2;
+				break;
+			case DockPosition.Left:
+				y -= self.Height / 2;
+				break;
+			case DockPosition.Right:
+				x -= self.Width;
+				y -= self.Height / 2;
+				break;
+			case DockPosition.Bottom:
+				x -= self.Width / 2;
+				y -= self.Height / 2;
+				break;
+			}
+			
+			cr.SetSource (self.Internal, x, y);
+			cr.Paint ();
 		}
 	}
 }

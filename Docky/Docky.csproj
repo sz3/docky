@@ -34,6 +34,7 @@
     <Folder Include="Docky\Items\" />
     <Folder Include="Resources\" />
     <Folder Include="Docky\CairoHelper\" />
+    <Folder Include="Gtk\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Docky\Docky.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="gtk-gui\Docky.ConfigurationWindow.cs" />
     <Compile Include="Docky\DockPlacementWidget.cs" />
     <Compile Include="Docky\Items\SpacingItem.cs" />
+    <Compile Include="Gtk\Widget_Extensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Addins, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
