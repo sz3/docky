@@ -678,6 +678,7 @@ namespace Docky.Interface
 		/// </summary>
 		void HandleDragMotion (object o, DragMotionArgs args)
 		{
+			// we own the drag if drag_began is true, lets not be silly
 			if (!drag_known && !drag_began) {
 				drag_known = true;
 				Gdk.Atom atom = Gtk.Drag.DestFindTarget (this, args.Context, null);
