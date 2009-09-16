@@ -618,6 +618,7 @@ namespace Docky.Interface
 		/// </summary>
 		void HandleDragDrop (object o, DragDropArgs args)
 		{
+			args.RetVal = true;
 			if (drag_data == null)
 				return;
 			
@@ -630,7 +631,6 @@ namespace Docky.Interface
 					Preferences.DefaultProvider.InsertItem (s);
 			}
 			
-			args.RetVal = true;
 			Gtk.Drag.Finish (args.Context, true, false, args.Time);
 		}
 
