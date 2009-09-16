@@ -30,19 +30,8 @@ namespace Docky.Windowing
 	
 	public static class WindowUtils
 	{
-		enum OpenOfficeProducts {
-			Writer,
-			Calc,
-			Base,
-			Math,
-			Impress,
-		}
 		
 		static bool initialized;
-		
-		static string RemapFile {
-			get { return Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData), "RemapFile"); }
-		}
 		
 		static IEnumerable<string> PrefixStrings {
 			get {
@@ -75,7 +64,6 @@ namespace Docky.Windowing
 				return;
 			
 			initialized = true;
-			Wnck.Global.ClientType = Wnck.ClientType.Pager;
 			
 			List<Regex> regex = new List<Regex> ();
 			foreach (string s in PrefixStrings) {
@@ -100,65 +88,11 @@ namespace Docky.Windowing
 				window_list_update_needed = true;
 			};
 			
-			BuildRemapDictionary ();
+			RemapDictionary = BuildDefaultRemapDictionary ();
 		}
 		#endregion
 		
 		#region Private Methods
-		static void BuildRemapDictionary ()
-		{
-			if (!File.Exists (RemapFile)) {
-				RemapDictionary = BuildDefaultRemapDictionary ();
-				
-				try {
-					using (StreamWriter writer = new StreamWriter (RemapFile)) {
-						writer.WriteLine ("# Docky Remap File");
-						writer.WriteLine ("# Add key value pairs following dictionary syntax");
-						writer.WriteLine ("# key, value");
-						writer.WriteLine ("# key, altKey, value");
-						writer.WriteLine ("# Lines starting with # are comments, otherwise # is a valid character");
-						
-						foreach (KeyValuePair<string, string> kvp in RemapDictionary) {
-							writer.WriteLine ("{0}, {1}", kvp.Key, kvp.Value);
-						}
-						writer.Close ();
-					}
-				} catch {
-				}
-			} else {
-				RemapDictionary = new Dictionary<string, string> ();
-				
-				try {
-					using (StreamReader reader = new StreamReader (RemapFile)) {
-						string line;
-						while (!reader.EndOfStream) {
-							line = reader.ReadLine ();
-							if (line.StartsWith ("#") || !line.Contains (","))
-								continue;
-							string [] array = line.Split (',');
-							if (array.Length < 2 || array [0].Length == 0)
-								continue;
-							
-							string val = array [array.Length - 1].Trim ().ToLower ();
-							if (string.IsNullOrEmpty (val))
-								continue;
-							
-							for (int i=0; i < array.Length - 1; i++) {
-								string key = array [i].Trim ().ToLower ();
-								if (string.IsNullOrEmpty (key))
-									continue;
-								RemapDictionary [key] = val;
-							}
-						}
-						
-						reader.Close ();
-					}
-				} catch {
-					RemapDictionary = BuildDefaultRemapDictionary ();
-				}
-			}
-		}
-		
 		static Dictionary<string, string> BuildDefaultRemapDictionary ()
 		{
 			Dictionary<string, string> remapDict = new Dictionary<string, string> ();
@@ -238,7 +172,7 @@ namespace Docky.Windowing
 		/// <returns>
 		/// A <see cref="List"/>
 		/// </returns>
-		public static List<Window> GetWindows ()
+		internal static List<Window> GetWindows ()
 		{
 			if (window_list == null || window_list_update_needed)
 				window_list = new List<Window> (Wnck.Screen.Default.WindowsStacked);

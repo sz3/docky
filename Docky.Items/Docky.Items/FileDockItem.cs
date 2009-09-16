@@ -26,6 +26,8 @@ using Cairo;
 using Gdk;
 using Gtk;
 
+using Docky.Services;
+
 namespace Docky.Items
 {
 
@@ -49,7 +51,21 @@ namespace Docky.Items
 			Gnome.IconLookupResultFlags results;
 			Icon = Gnome.Icon.LookupSync (IconTheme.Default, null, uri, null, 0, out results);
 			
+			HoverText = System.IO.Path.GetFileName (new Uri (uri).LocalPath);
 			this.uri = uri;
+		}
+		
+		public override string UniqueID ()
+		{
+			return uri;
+		}
+
+		
+		protected override ClickAnimation OnClicked (uint button, ModifierType mod, double xPercent, double yPercent)
+		{
+			DockServices.System.Open (uri);
+			
+			return ClickAnimation.Bounce;
 		}
 	}
 }

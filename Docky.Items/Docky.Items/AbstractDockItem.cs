@@ -36,11 +36,9 @@ namespace Docky.Items
 	public abstract class AbstractDockItem : IDisposable
 	{
 		string hover_text;
-		int position;
 		DockySurface main_buffer, text_buffer;
 		Cairo.Color? average_color;
 		
-		public event EventHandler PositionChanged;
 		public event EventHandler HoverTextChanged;
 		public event EventHandler<PaintNeededEventArgs> PaintNeeded;
 		
@@ -79,16 +77,8 @@ namespace Docky.Items
 		}
 		
 		public int Position {
-			get {
-				return position;
-			}
-			set {
-				if (position == value)
-					return;
-				
-				position = value;
-				OnPositionChanged ();
-			}
+			get;
+			set;
 		}
 		
 		public IDockItemProvider Owner {
@@ -99,6 +89,8 @@ namespace Docky.Items
 		public AbstractDockItem ()
 		{
 		}
+		
+		public abstract string UniqueID ();
 		
 		public Cairo.Color AverageColor ()
 		{
@@ -229,6 +221,9 @@ namespace Docky.Items
 		
 		public DockySurface HoverTextSurface (DockySurface model, Style style)
 		{
+			if (string.IsNullOrEmpty (HoverText))
+				return null;
+			
 			if (text_buffer == null) {
 			
 				Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
@@ -294,12 +289,6 @@ namespace Docky.Items
 		{
 			if (HoverTextChanged != null)
 				HoverTextChanged (this, EventArgs.Empty);
-		}
-		
-		void OnPositionChanged ()
-		{
-			if (PositionChanged != null)
-				PositionChanged (this, EventArgs.Empty);
 		}
 		
 		protected void OnPaintNeeded ()

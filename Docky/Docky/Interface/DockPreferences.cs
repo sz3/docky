@@ -64,9 +64,14 @@ namespace Docky.Interface
 		
 		public event EventHandler<ItemProvidersChangedEventArgs> ItemProvidersChanged;
 		
-		FileApplicationProvider ApplicationProvider { get; set; }
+		public FileApplicationProvider DefaultProvider { get; set; }
 		
 		#region Public Properties
+		public IEnumerable<string> SortList {
+			get { return GetOption<string[]> ("SortList", new string[0]); }
+			set { SetOption<string[]> ("SortList", value.ToArray ()); }
+		}
+		
 		public IEnumerable<IDockItemProvider> ItemProviders { 
 			get { return item_providers.AsEnumerable (); }
 		}
@@ -214,13 +219,6 @@ namespace Docky.Interface
 				icon_scale.Value = IconSize;
 		}
 		
-		public void AddItems (IEnumerable<string> items)
-		{
-			if (items == null)
-				return;
-			Launchers = Launchers.Concat (items.Where (item => ApplicationProvider.InsertItem (item)));
-		}
-		
 		public bool SetName (string name)
 		{
 			
@@ -230,6 +228,11 @@ namespace Docky.Interface
 		public string GetName ()
 		{
 			return name;
+		}
+		
+		public void SyncPreferences ()
+		{
+			UpdateSortList ();
 		}
 		
 		void BuildOptions ()
@@ -272,8 +275,8 @@ namespace Docky.Interface
 		{
 			item_providers = new List<IDockItemProvider> ();
 			
-			ApplicationProvider = new FileApplicationProvider ();
-			item_providers.Add (ApplicationProvider);
+			DefaultProvider = new FileApplicationProvider ();
+			item_providers.Add (DefaultProvider);
 			
 			if (FirstRun) {
 				Launchers = new[] {
@@ -287,8 +290,43 @@ namespace Docky.Interface
 			}
 			
 			foreach (string launcher in Launchers) {
-				ApplicationProvider.InsertItem (launcher);
+				DefaultProvider.InsertItem (launcher);
 			}
+			
+			DefaultProvider.ItemsChanged += DefaultProviderItemsChanged;
+			
+			List<string> sortList = SortList.ToList ();
+			foreach (IDockItemProvider provider in item_providers) {
+				SortProviderOnList (provider, sortList);
+			}
+			
+			UpdateSortList ();
+		}
+
+		void DefaultProviderItemsChanged (object sender, ItemsChangedArgs e)
+		{
+			Launchers = DefaultProvider.Uris;
+		}
+		
+		void SortProviderOnList (IDockItemProvider provider, List<string> sortList)
+		{
+			Func<AbstractDockItem, int> indexFunc = delegate(AbstractDockItem a) {
+				int res = sortList.IndexOf (a.UniqueID ());
+				return res >= 0 ? res : 1000;
+			};
+			
+			int i = 0;
+			foreach (AbstractDockItem item in provider.Items.OrderBy (indexFunc)) {
+				item.Position = i++;
+			}
+		}
+		
+		void UpdateSortList ()
+		{
+			SortList = item_providers
+				.SelectMany (p => p.Items)
+				.OrderBy (i => i.Position)
+				.Select (i => i.UniqueID ());
 		}
 		
 		void OnAutohideChanged ()

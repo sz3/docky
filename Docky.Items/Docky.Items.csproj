@@ -71,5 +71,9 @@
       <Project>{B23E0EDD-6443-4F99-9EAC-B7CC906F080D}</Project>
       <Name>Docky.CairoHelper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Docky.Windowing\Docky.Windowing.csproj">
+      <Project>{888FCD95-7C79-45C4-A744-9C840DF4B9B0}</Project>
+      <Name>Docky.Windowing</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

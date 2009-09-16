@@ -40,6 +40,8 @@ namespace Docky.Interface
 		
 		event EventHandler<ItemProvidersChangedEventArgs> ItemProvidersChanged;
 		
+		FileApplicationProvider DefaultProvider { get; set; }
+		
 		IEnumerable<IDockItemProvider> ItemProviders { get; }
 		
 		AutohideType Autohide { get; set; }
@@ -52,11 +54,10 @@ namespace Docky.Interface
 				
 		double ZoomPercent { get; set; }
 		
-		void AddItems (IEnumerable<string> items);
-		
 		bool SetName (string name);
 		
 		string GetName ();
 		
+		void SyncPreferences ();
 	}
 }

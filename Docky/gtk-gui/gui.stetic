@@ -445,7 +445,7 @@ Bottom</property>
   </widget>
   <widget class="Gtk.Window" id="Docky.ConfigurationWindow" design-size="728 418">
     <property name="MemberName" />
-    <property name="Title" translatable="yes">ConfigurationWindow</property>
+    <property name="Title" translatable="yes">Docky Configuration</property>
     <property name="WindowPosition">CenterOnParent</property>
     <child>
       <widget class="Gtk.VBox" id="vbox1">

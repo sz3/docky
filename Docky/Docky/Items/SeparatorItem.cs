@@ -53,6 +53,11 @@ namespace Docky.Items
 		{
 		}
 		
+		public override string UniqueID ()
+		{
+			return "separator";
+		}
+		
 		protected override DockySurface CreateIconBuffer (DockySurface model, int size)
 		{
 			return new DockySurface ((int) (size * .2), size, model);

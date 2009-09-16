@@ -37,6 +37,10 @@ namespace Docky.Items
 		List<AbstractDockItem> items;
 		List<string> uris;
 		
+		public IEnumerable<string> Uris {
+			get { return uris.AsEnumerable (); }
+		}
+		
 		public FileApplicationProvider ()
 		{
 			items = new List<AbstractDockItem> ();
@@ -47,7 +51,7 @@ namespace Docky.Items
 		
 		public bool InsertItem (string uri)
 		{
-			return InsertItemAt (uri, 0);
+			return InsertItemAt (uri, items.Count);
 		}
 		
 		public bool InsertItemAt (string uri, int position)
@@ -73,6 +77,7 @@ namespace Docky.Items
 			if (item == null)
 				return false;
 			
+			item.Owner = this;
 			items.Insert (position, item);
 			uris.Add (uri);
 			
@@ -102,11 +107,6 @@ namespace Docky.Items
 		public event EventHandler<ItemsChangedArgs> ItemsChanged;
 		
 		public bool Separated { get { return true; } }
-		
-		public bool ItemCanBeMoved (AbstractDockItem item)
-		{
-			return true;
-		}
 		
 		public bool ItemCanBeRemoved (AbstractDockItem item)
 		{

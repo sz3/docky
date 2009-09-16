@@ -26,6 +26,9 @@ using Gdk;
 using Gtk;
 using Wnck;
 
+using Docky.Services;
+using Docky.Windowing;
+
 namespace Docky.Items
 {
 
@@ -50,22 +53,59 @@ namespace Docky.Items
 		}
 		
 		Gnome.DesktopItem desktop_item;
+		string path;
+		List<Wnck.Window> windows;
 		
 		public override IEnumerable<Wnck.Window> Windows {
 			get {
-				yield break;
+				return windows;
 			}
 		}
 		
 		private ApplicationDockItem (Gnome.DesktopItem item)
 		{
+			windows = new List<Wnck.Window> ();
 			desktop_item = item;
 			if (item.AttrExists ("Icon"))
 				Icon = item.GetString ("Icon");
 			
 			if (item.AttrExists ("Name"))
 				HoverText = item.GetString ("Name");
+			
+			path = new Uri (item.Location).LocalPath;
+			
+			UpdateWindows ();
+			
+			Wnck.Screen.Default.WindowOpened += WnckScreenDefaultWindowOpened;
+		}
+		
+		public override string UniqueID ()
+		{
+			return path;
 		}
 
+		void WnckScreenDefaultWindowOpened (object o, WindowOpenedArgs args)
+		{
+			UpdateWindows ();
+		}
+		
+		void UpdateWindows ()
+		{
+			windows.Clear ();
+			try {
+				windows.AddRange (WindowMatcher.Default.WindowsForDesktopFile (path));
+			} catch {
+				Console.Error.WriteLine ("Could not get windows for " + path);
+			}
+		}
+
+		protected override ClickAnimation OnClicked (uint button, ModifierType mod, double xPercent, double yPercent)
+		{
+			if (!Windows.Any ()) {
+				desktop_item.Launch (null, 0);
+				return ClickAnimation.Bounce;
+			}
+			return base.OnClicked (button, mod, xPercent, yPercent);
+		}
 	}
 }

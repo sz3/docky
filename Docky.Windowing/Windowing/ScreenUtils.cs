@@ -56,7 +56,6 @@ namespace Docky.Windowing
 				return;
 			
 			initialized = true;
-			Wnck.Global.ClientType = Wnck.ClientType.Pager;
 			
 			Wnck.Screen.Default.ViewportsChanged += HandleViewportsChanged;
 			Wnck.Screen.Default.WorkspaceCreated += HandleWorkspaceCreated;

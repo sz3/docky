@@ -44,13 +44,18 @@ namespace Docky
 		}
 		
 		
-		public static void Main (string [] args)
+		public static void Main (string[] args)
 		{
 			CommandLinePreferences = new UserArgs (args);
 			
 			//Init gtk and related
 			Gdk.Threads.Init ();
 			Gtk.Application.Init ("Docky", ref args);
+			Gnome.Vfs.Vfs.Initialize ();
+			
+			Windowing.WindowUtils.Initialize ();
+			Windowing.ScreenUtils.Initialize ();
+			Wnck.Global.ClientType = Wnck.ClientType.Pager;
 			
 			Controller.Initialize ();
 			
@@ -60,6 +65,8 @@ namespace Docky
 			Gdk.Threads.Enter ();
 			Gtk.Application.Run ();
 			Gdk.Threads.Leave ();
+			
+			Gnome.Vfs.Vfs.Shutdown ();
 		}
 	}
 }

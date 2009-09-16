@@ -75,7 +75,7 @@ namespace Docky {
             Stetic.Gui.Initialize(this);
             // Widget Docky.ConfigurationWindow
             this.Name = "Docky.ConfigurationWindow";
-            this.Title = Mono.Unix.Catalog.GetString("ConfigurationWindow");
+            this.Title = Mono.Unix.Catalog.GetString("Docky Configuration");
             this.WindowPosition = ((Gtk.WindowPosition)(4));
             // Container child Docky.ConfigurationWindow.Gtk.Container+ContainerChild
             this.vbox1 = new Gtk.VBox();

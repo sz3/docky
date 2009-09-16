@@ -38,6 +38,11 @@ namespace Docky.Items
 		{
 		}
 		
+		public override string UniqueID ()
+		{
+			return "spacing";
+		}
+		
 		protected override void PaintIconSurface (DockySurface surface)
 		{
 		}

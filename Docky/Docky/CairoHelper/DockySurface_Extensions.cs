@@ -76,8 +76,19 @@ namespace Docky.CairoHelper
 				break;
 			}
 			
-			cr.SetSource (self.Internal, x, y);
+			cr.SetSource (self.Internal, (int) x, (int) y);
 			cr.Paint ();
+		}
+		
+		public static Gdk.Pixbuf LoadToPixbuf (this DockySurface self)
+		{
+			Gdk.Pixbuf pbuf;
+			string tmp = System.IO.Path.GetTempFileName ();
+			self.Internal.WriteToPng (tmp);
+			pbuf = new Pixbuf (tmp);
+			System.IO.File.Delete (tmp);
+
+			return pbuf;
 		}
 	}
 }

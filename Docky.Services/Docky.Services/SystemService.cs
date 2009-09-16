@@ -16,6 +16,8 @@
 // 
 
 using System;
+using System.Diagnostics;
+using System.IO;
 
 namespace Docky.Services
 {
@@ -40,6 +42,28 @@ namespace Docky.Services
 		
 		internal SystemService ()
 		{
+		}
+		
+		public void Email (string address)
+		{
+			Process.Start ("xdg-email", address);
+		}
+		
+		public void Open (string uri)
+		{
+			Process.Start ("xdg-open", uri);
+		}
+		
+		public void Execute (string executable)
+		{
+			if (File.Exists (executable)) {
+				Process proc = new Process ();
+				proc.StartInfo.FileName = executable;
+				proc.StartInfo.UseShellExecute = false;
+				proc.Start ();
+			} else {
+				Process.Start (executable);
+			}
 		}
 		
 		void OnConnectionStatusChanged ()

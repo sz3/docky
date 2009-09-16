@@ -33,8 +33,6 @@ namespace Docky.Items
 		
 		IEnumerable<AbstractDockItem> Items { get; }
 		
-		bool ItemCanBeMoved (AbstractDockItem item);
-		
 		bool ItemCanBeRemoved (AbstractDockItem item);
 		
 		bool RemoveItem (AbstractDockItem item);
