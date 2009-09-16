@@ -473,6 +473,7 @@ namespace Docky.Interface
 		void PreferencesIconSizeChanged (object sender, EventArgs e)
 		{
 			UpdateDockWidth ();
+			AnimatedDraw ();
 		}
 
 		void PreferencesAutohideChanged (object sender, EventArgs e)
