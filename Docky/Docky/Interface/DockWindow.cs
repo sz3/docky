@@ -26,6 +26,7 @@ using System.Text.RegularExpressions;
 using Cairo;
 using Gdk;
 using Gtk;
+using Wnck;
 
 using Docky.Items;
 using Docky.CairoHelper;
@@ -372,8 +373,7 @@ namespace Docky.Interface
 			else
 				CursorTracker.CancelHighResolution (this);
 			
-			if ((CursorTracker.Modifier & ModifierType.Button1Mask) == ModifierType.Button1Mask)
-				EnsureDragAndDropProxy ();
+			EnsureDragAndDropProxy ();
 			AnimatedDraw ();
 		}
 
@@ -603,9 +603,8 @@ namespace Docky.Interface
 				
 				Gdk.Drag.Status (args.Context, DragAction.Copy, Gtk.Global.CurrentEventTime);
 			
-			} else {
-//				Console.WriteLine ("Data Recieved Without Request");
 			}
+			Gdk.Drag.Status (args.Context, DragAction.Copy, Gtk.Global.CurrentEventTime);
 			args.RetVal = true;
 		}
 
@@ -632,7 +631,7 @@ namespace Docky.Interface
 		/// </summary>
 		void HandleDragEnd (object o, DragEndArgs args)
 		{
-			if (!DockHovered && drag_began != null) {
+			if (!DockHovered && drag_item != null) {
 				IDockItemProvider provider = ProviderForItem (drag_item);
 				if (provider != null && provider.ItemCanBeRemoved (drag_item)) {
 					
@@ -640,9 +639,6 @@ namespace Docky.Interface
 			}
 			
 			drag_began = false;
-			drag_data = null;
-			drag_data_requested = false;
-			drag_is_desktop_file = false;
 			drag_item = null;
 			
 			AnimatedDraw ();
@@ -653,6 +649,9 @@ namespace Docky.Interface
 		/// </summary>
 		void HandleDragLeave (object o, DragLeaveArgs args)
 		{
+			drag_data = null;
+			drag_data_requested = false;
+			drag_is_desktop_file = false;
 			drag_known = false;
 		}
 		
@@ -678,20 +677,28 @@ namespace Docky.Interface
 				Gtk.Drag.GetData (this, args.Context, atom, args.Time);
 				drag_data_requested = true;
 			} else {
-				Gdk.Drag.Status (args.Context, args.Context.Action, args.Time);
+				Gdk.Drag.Status (args.Context, DragAction.Copy, args.Time);
 			}
 			args.RetVal = true;
 		}
 		
-		IEnumerable<Gdk.Window> WorkspaceWindowStack {
-			get {
-				try {
-					return Wnck.Screen.Default.WindowsStacked
-						.Where (wnk => wnk.IsVisibleOnWorkspace (Wnck.Screen.Default.ActiveWorkspace))
-						.Select (wnk => Gdk.Window.ForeignNew ((uint) wnk.Xid));
-				} catch {
+		Gdk.Window BestProxyWindow ()
+		{
+			try {
+				int pid = System.Diagnostics.Process.GetCurrentProcess ().Id;
+				IEnumerable<ulong> xids = Wnck.Screen.Default.WindowsStacked
+					.Reverse () // top to bottom order
+					.Where (wnk => wnk.IsVisibleOnWorkspace (Wnck.Screen.Default.ActiveWorkspace) && 
+							                                 wnk.Pid != pid &&
+							                                 wnk.EasyGeometry ().Contains (Cursor))
+					.Select (wnk => wnk.Xid);
+				
+				if (!xids.Any ())
 					return null;
-				}
+				
+				return Gdk.Window.ForeignNew ((uint) xids.First ());
+			} catch {
+				return null;
 			}
 		}
 		
@@ -732,23 +739,12 @@ namespace Docky.Interface
 					return;
 				proxy_window = null;
 				EnableDragTo ();
-			} else {
-				IEnumerable<Gdk.Window> windows = WorkspaceWindowStack;
-
-				foreach (Gdk.Window w in windows.Reverse ()) {
-					if (w == null || w == GdkWindow || !w.IsVisible || !w.IsViewable)
-						continue;
-					
-					Gdk.Rectangle rect;
-					int depth;
-					w.GetGeometry (out rect.X, out rect.Y, out rect.Width, out rect.Height, out depth);
-					if (rect.Contains (Cursor)) {
-						if (w != proxy_window) {
-							proxy_window = w;
-							Gtk.Drag.DestSetProxy (this, w, DragProtocol.Xdnd, true);
-						}
-						break;
-					}
+			} else if ((CursorTracker.Modifier & ModifierType.Button1Mask) == ModifierType.Button1Mask) {
+				Gdk.Window bestProxy = BestProxyWindow ();
+				if (proxy_window != bestProxy) {
+					proxy_window = bestProxy;
+					Gtk.Drag.DestSetProxy (this, proxy_window, DragProtocol.Xdnd, true);
+//					Console.WriteLine ("{0} {1} {2} {3}", Preferences.GetName (), w.TypeHint, w.State, Cursor);
 				}
 			}
 		}
