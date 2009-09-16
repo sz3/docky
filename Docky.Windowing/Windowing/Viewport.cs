@@ -101,7 +101,7 @@ namespace Docky.Windowing
 		
 		private IEnumerable<Wnck.Window> RawWindows ()
 		{
-			foreach (Wnck.Window window in WindowUtils.GetWindows ()) {
+			foreach (Wnck.Window window in Wnck.Screen.Default.Windows) {
 				if (WindowCenterInViewport (window) || window.IsSticky)
 					yield return window;
 			}

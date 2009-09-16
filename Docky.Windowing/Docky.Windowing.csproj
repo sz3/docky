@@ -48,7 +48,6 @@
     <Compile Include="Windowing\ScreenUtils.cs" />
     <Compile Include="Windowing\Viewport.cs" />
     <Compile Include="Windowing\WindowControl.cs" />
-    <Compile Include="Windowing\WindowUtils.cs" />
     <Compile Include="Xlib\X11Atoms.cs" />
     <Compile Include="Xlib\Xlib.cs" />
     <Compile Include="Windowing\Position.cs" />

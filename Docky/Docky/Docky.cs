@@ -53,7 +53,6 @@ namespace Docky
 			Gtk.Application.Init ("Docky", ref args);
 			Gnome.Vfs.Vfs.Initialize ();
 			
-			Windowing.WindowUtils.Initialize ();
 			Windowing.ScreenUtils.Initialize ();
 			Wnck.Global.ClientType = Wnck.ClientType.Pager;
 			
