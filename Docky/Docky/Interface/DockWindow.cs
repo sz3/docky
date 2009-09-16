@@ -606,8 +606,6 @@ namespace Docky.Interface
 				drag_data_requested = false;
 				drag_is_desktop_file = drag_data.Any (d => d.EndsWith (".desktop"));
 				
-				Gdk.Drag.Status (args.Context, DragAction.Copy, Gtk.Global.CurrentEventTime);
-			
 			}
 			Gdk.Drag.Status (args.Context, DragAction.Copy, Gtk.Global.CurrentEventTime);
 			args.RetVal = true;
@@ -680,7 +678,7 @@ namespace Docky.Interface
 		/// </summary>
 		void HandleDragMotion (object o, DragMotionArgs args)
 		{
-			if (!drag_known) {
+			if (!drag_known && !drag_began) {
 				drag_known = true;
 				Gdk.Atom atom = Gtk.Drag.DestFindTarget (this, args.Context, null);
 				Gtk.Drag.GetData (this, args.Context, atom, args.Time);
