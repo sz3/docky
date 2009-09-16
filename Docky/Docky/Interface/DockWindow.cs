@@ -619,6 +619,8 @@ namespace Docky.Interface
 		void HandleDragDrop (object o, DragDropArgs args)
 		{
 			args.RetVal = true;
+			Gtk.Drag.Finish (args.Context, true, false, args.Time);
+			
 			if (drag_data == null)
 				return;
 			
@@ -631,7 +633,9 @@ namespace Docky.Interface
 					Preferences.DefaultProvider.InsertItem (s);
 			}
 			
-			Gtk.Drag.Finish (args.Context, true, false, args.Time);
+			drag_data = null;
+			drag_data_requested = false;
+			drag_is_desktop_file = false;
 		}
 
 		/// <summary>
@@ -657,9 +661,6 @@ namespace Docky.Interface
 		/// </summary>
 		void HandleDragLeave (object o, DragLeaveArgs args)
 		{
-			drag_data = null;
-			drag_data_requested = false;
-			drag_is_desktop_file = false;
 			drag_known = false;
 		}
 		
