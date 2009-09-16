@@ -618,6 +618,9 @@ namespace Docky.Interface
 		/// </summary>
 		void HandleDragDrop (object o, DragDropArgs args)
 		{
+			if (drag_data == null)
+				return;
+			
 			AbstractDockItem item = HoveredItem;
 			
 			if (!drag_is_desktop_file && item != null && item.CanAcceptDrop (drag_data)) {
