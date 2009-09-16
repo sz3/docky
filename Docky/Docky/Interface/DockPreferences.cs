@@ -193,6 +193,8 @@ namespace Docky.Interface
 			
 			if (autohide_box.Active != (int) Autohide)
 				autohide_box.Active = (int) Autohide;
+
+			fade_on_hide_check.Sensitive = (int) Autohide > 0;
 		}
 
 		void ZoomCheckbuttonToggled (object sender, EventArgs e)
@@ -201,6 +203,7 @@ namespace Docky.Interface
 			
 			// may seem odd but its just a check
 			zoom_checkbutton.Active = ZoomEnabled;
+			zoom_scale.Sensitive = ZoomEnabled;
 		}
 
 		void ZoomScaleValueChanged (object sender, EventArgs e)
@@ -255,9 +258,11 @@ namespace Docky.Interface
 			
 			position_box.Active = (int) Position;
 			autohide_box.Active = (int) Autohide;
+			fade_on_hide_check.Sensitive = (int) Autohide > 0;
 			
 			zoom_checkbutton.Active = ZoomEnabled;
 			zoom_scale.Value = ZoomPercent;
+			zoom_scale.Sensitive = ZoomEnabled;
 			icon_scale.Value = IconSize;
 		}
 		
