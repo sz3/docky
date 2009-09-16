@@ -1,0 +1,16 @@
+EXTRA_DIST = COPYRIGHT
+
+ACLOCAL_AMFLAGS = -I m4 -I m4/shamrock
+
+SUBDIRS = \
+	. \
+	Docky.CairoHelper \
+	Docky.Services \
+	Docky.Windowing \
+	Docky.Items \
+	Docky \
+	m4
+
+# Get rid of the build dir on clean.
+clean-local:
+	rm -rf $(top_builddir)/build

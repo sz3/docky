@@ -1,0 +1,5 @@
+Name: Docky.Windowing
+Description: Docky Windowing.
+Version: @ABI_VERSION@
+
+Libs: -r:@expanded_libdir@/@PACKAGE@/Docky.Windowing.dll
