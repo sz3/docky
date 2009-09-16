@@ -87,12 +87,14 @@ namespace Docky.Interface
 		
 		public event EventHandler<HoveredItemChangedArgs> HoveredItemChanged;
 		
-		const int UrgentBounceHeight = 80;
-		const int LaunchBounceHeight = 30;
-		const int DockHeightBuffer   = 7;
-		const int DockWidthBuffer    = 5;
-		const int BackgroundWidth    = 1000;
-		const int BackgroundHeight   = 150;
+		const int UrgentBounceHeight  = 80;
+		const int LaunchBounceHeight  = 30;
+		const int DockHeightBuffer    = 7;
+		const int DockWidthBuffer     = 5;
+		const int BackgroundWidth     = 1000;
+		const int BackgroundHeight    = 150;
+		const int NormalIndicatorSize = 30;
+		const int UrgentIndicatorSize = 24;
 		
 		readonly TimeSpan BaseAnimationTime = new TimeSpan (0, 0, 0, 0, 150);
 		readonly TimeSpan BounceTime = new TimeSpan (0, 0, 0, 0, 600);
@@ -102,7 +104,7 @@ namespace Docky.Interface
 		DateTime render_time;
 		
 		IDockPreferences preferences;
-		DockySurface main_buffer, background_buffer;
+		DockySurface main_buffer, background_buffer, normal_indicator_buffer, urgent_indicator_buffer;
 		AbstractDockItem hoveredItem;
 		
 		Gdk.Rectangle monitor_geo;
@@ -407,6 +409,8 @@ namespace Docky.Interface
 			
 			if (args.Type == AddRemoveChangeType.Remove)
 				DrawValues.Remove (args.Item);
+			
+			AnimatedDraw ();
 		}
 		
 		void RegisterPreferencesEvents (IDockPreferences preferences)
@@ -634,7 +638,7 @@ namespace Docky.Interface
 			if (!DockHovered && drag_item != null) {
 				IDockItemProvider provider = ProviderForItem (drag_item);
 				if (provider != null && provider.ItemCanBeRemoved (drag_item)) {
-					
+					provider.RemoveItem (drag_item);
 				}
 			}
 			
@@ -766,16 +770,24 @@ namespace Docky.Interface
 		#region Misc.
 		void UpdateCollectionBuffer ()
 		{
-			GLib.Idle.Add (delegate {
-				// dispose of our separators as we made them ourselves,
-				// this could be a bit more elegant
+			if (rendering) { // resetting a durring a render is bad. Complete the render then reset.
+				GLib.Idle.Add (delegate {
+					// dispose of our separators as we made them ourselves,
+					// this could be a bit more elegant
+					foreach (AbstractDockItem item in Items.Where (adi => adi is SeparatorItem || adi is SpacingItem))
+						item.Dispose ();
+					
+					collection_backend.Clear ();
+					UpdateDockWidth ();
+					return false;
+				});
+			} else {
 				foreach (AbstractDockItem item in Items.Where (adi => adi is SeparatorItem || adi is SpacingItem))
 					item.Dispose ();
 				
 				collection_backend.Clear ();
 				UpdateDockWidth ();
-				return false;
-			});
+			}
 		}
 		
 		void ResetBuffers ()
@@ -788,6 +800,16 @@ namespace Docky.Interface
 			if (background_buffer != null) {
 				background_buffer.Dispose ();
 				background_buffer = null;
+			}
+			
+			if (normal_indicator_buffer != null) {
+				normal_indicator_buffer.Dispose ();
+				normal_indicator_buffer = null;
+			}
+			
+			if (urgent_indicator_buffer != null) {
+				urgent_indicator_buffer.Dispose ();
+				urgent_indicator_buffer = null;
 			}
 		}
 		#endregion
@@ -1222,25 +1244,75 @@ namespace Docky.Interface
 			double zoomOffset = ZoomedIconSize / (double) IconSize;
 			
 			DrawValue val = DrawValues [item];
+			DrawValue center = val;
 			DockySurface icon = item.IconSurface (surface, ZoomedIconSize);
 			
 			if ((render_time - item.LastClick) < BounceTime) {
-				double move = Math.Abs (
-					Math.Sin (2 * Math.PI * (render_time - item.LastClick).TotalMilliseconds / 
-						BounceTime.TotalMilliseconds) * LaunchBounceHeight
-					);
-				val = val.MoveIn (Position, move);
+				double animationProgress = (render_time - item.LastClick).TotalMilliseconds / BounceTime.TotalMilliseconds;
+			
+				if (item.ClickAnimation == ClickAnimation.Bounce) {
+					double move = Math.Abs (Math.Sin (2 * Math.PI * animationProgress) * LaunchBounceHeight);
+					center = center.MoveIn (Position, move);
+				}
 			}
-			icon.ShowAtPointAndZoom (surface, val.Center, val.Zoom / zoomOffset);
+			
+			icon.ShowAtPointAndZoom (surface, center.Center, center.Zoom / zoomOffset);
 			
 			if (HoveredItem == item && !drag_began) {
-				DrawValue loc = DrawValues [item];
-				loc = loc.MoveIn (Position, IconSize * (ZoomPercent + .1) - IconSize / 2);
+				DrawValue loc = val.MoveIn (Position, IconSize * (ZoomPercent + .1) - IconSize / 2);
 				
 				DockySurface text = item.HoverTextSurface (surface, Style);
 				if (text != null)
 					text.ShowAtEdge (surface, loc.StaticCenter, Position);
 			}
+			
+			if (item.Indicator != ActivityIndicator.None) {
+				if (normal_indicator_buffer == null)
+					normal_indicator_buffer = CreateNormalIndicatorBuffer ();
+				if (urgent_indicator_buffer == null)
+					urgent_indicator_buffer = CreateUrgentIndicatorBuffer ();
+				
+				DrawValue loc = val.MoveIn (Position, 0 - IconSize * val.Zoom / 2 - DockHeightBuffer);
+				normal_indicator_buffer.ShowAtPointAndZoom (surface, loc.Center, 1);
+			}
+		}
+		
+		DockySurface CreateNormalIndicatorBuffer ()
+		{
+			return CreateIndicatorBuffer (NormalIndicatorSize, new Cairo.Color (.3, .65, 1));
+		}
+		
+		DockySurface CreateUrgentIndicatorBuffer ()
+		{
+			return CreateIndicatorBuffer (NormalIndicatorSize, new Cairo.Color (1, 0, 0));
+		}
+		
+		DockySurface CreateIndicatorBuffer (int size, Cairo.Color color)
+		{
+			DockySurface surface = new DockySurface (size, size, background_buffer);
+			surface.Clear ();
+			
+			Cairo.Context cr = surface.Context;
+			
+			double x = size / 2;
+			double y = x;
+				
+			cr.MoveTo (x, y);
+			cr.Arc (x, y, size / 2, 0, Math.PI * 2);
+				
+			RadialGradient rg = new RadialGradient (x, y, 0, x, y, size / 2);
+			rg.AddColorStop (0, new Cairo.Color (1, 1, 1, 1));
+			rg.AddColorStop (.10, color.SetAlpha (1.0));
+			rg.AddColorStop (.20, color.SetAlpha (.60));
+			rg.AddColorStop (.25, color.SetAlpha (.25));
+			rg.AddColorStop (.50, color.SetAlpha (.15));
+			rg.AddColorStop (1.0, color.SetAlpha (0.0));
+			
+			cr.Pattern = rg;
+			cr.Fill ();
+			rg.Destroy ();
+			
+			return surface;
 		}
 		
 		void DrawDockBackground (DockySurface surface, Gdk.Rectangle backgroundArea)

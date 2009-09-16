@@ -29,6 +29,7 @@ using Wnck;
 using Docky;
 using Docky.CairoHelper;
 using Docky.Services;
+using Docky.Windowing;
 
 namespace Docky.Items
 {
@@ -36,6 +37,17 @@ namespace Docky.Items
 
 	public abstract class WnckDockItem : IconDockItem
 	{
+		public override ActivityIndicator Indicator {
+			get {
+				int count = ManagedWindows.Count ();
+				if (count > 1)
+					return ActivityIndicator.SinglePlus;
+				if (count == 1)
+					return ActivityIndicator.Single;
+				return ActivityIndicator.None;
+			}
+		}
+		
 		public abstract IEnumerable<Wnck.Window> Windows { get; }
 		
 		protected IEnumerable<Wnck.Window> ManagedWindows {
@@ -53,7 +65,35 @@ namespace Docky.Items
 		
 		protected override ClickAnimation OnClicked (uint button, ModifierType mod, double xPercent, double yPercent)
 		{
-			return ClickAnimation.Bounce;
+			if (!ManagedWindows.Any ())
+				return ClickAnimation.None;
+			
+			List<Wnck.Window> stack = new List<Wnck.Window> (Wnck.Screen.Default.WindowsStacked);
+			IEnumerable<Wnck.Window> windows = ManagedWindows.OrderByDescending (w => stack.IndexOf (w));
+			
+			bool not_in_viewport = !windows.Any (w => !w.IsSkipTasklist && w.IsInViewport (w.Screen.ActiveWorkspace));
+			bool urgent = windows.Any (w => w.NeedsAttention ());
+			
+			if (not_in_viewport || urgent) {
+				foreach (Wnck.Window window in windows) {
+					if (urgent && !window.NeedsAttention ())
+						continue;
+					if (!window.IsSkipTasklist) {
+						WindowControl.IntelligentFocusOffViewportWindow (window, windows);
+						return ClickAnimation.Darken;
+					}
+				}
+			}
+			
+			if (windows.Any (w => w.IsMinimized && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace))) {
+				WindowControl.RestoreWindows (windows);
+			} else if (windows.Any (w => w.IsActive && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace))) {
+				WindowControl.MinimizeWindows (windows);
+			} else {
+				WindowControl.FocusWindows (windows);
+			}
+			
+			return ClickAnimation.Darken;
 		}
 	}
 }

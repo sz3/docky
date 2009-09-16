@@ -77,16 +77,24 @@ namespace Docky.Items
 			UpdateWindows ();
 			
 			Wnck.Screen.Default.WindowOpened += WnckScreenDefaultWindowOpened;
+			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
 		}
-		
+
 		public override string UniqueID ()
 		{
 			return path;
+		}
+		
+		void WnckScreenDefaultWindowClosed (object o, WindowClosedArgs args)
+		{
+			UpdateWindows ();
+			OnPaintNeeded ();
 		}
 
 		void WnckScreenDefaultWindowOpened (object o, WindowOpenedArgs args)
 		{
 			UpdateWindows ();
+			OnPaintNeeded ();
 		}
 		
 		void UpdateWindows ()

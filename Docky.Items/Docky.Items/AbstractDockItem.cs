@@ -42,6 +42,10 @@ namespace Docky.Items
 		public event EventHandler HoverTextChanged;
 		public event EventHandler<PaintNeededEventArgs> PaintNeeded;
 		
+		public virtual ActivityIndicator Indicator {
+			get { return ActivityIndicator.None; }
+		}
+		
 		public DateTime LastClick {
 			get; private set;
 		}

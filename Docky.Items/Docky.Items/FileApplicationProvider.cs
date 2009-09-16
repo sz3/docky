@@ -34,32 +34,25 @@ namespace Docky.Items
 		public static FileApplicationProvider WindowManager;
 		static List<FileApplicationProvider> Providers = new List<FileApplicationProvider> ();
 		
-		List<AbstractDockItem> items;
-		List<string> uris;
+		Dictionary<string, AbstractDockItem> items;
 		
 		public IEnumerable<string> Uris {
-			get { return uris.AsEnumerable (); }
+			get { return items.Keys.AsEnumerable (); }
 		}
 		
 		public FileApplicationProvider ()
 		{
-			items = new List<AbstractDockItem> ();
-			uris = new List<string> ();
+			items = new Dictionary<string, AbstractDockItem> ();
 			
 			Providers.Add (this);
 		}
 		
 		public bool InsertItem (string uri)
 		{
-			return InsertItemAt (uri, items.Count);
-		}
-		
-		public bool InsertItemAt (string uri, int position)
-		{
 			if (uri == null)
 				throw new ArgumentNullException ("uri");
 			
-			if (uris.Contains (uri))
+			if (items.ContainsKey (uri))
 				return false;
 			
 			AbstractDockItem item;
@@ -78,8 +71,7 @@ namespace Docky.Items
 				return false;
 			
 			item.Owner = this;
-			items.Insert (position, item);
-			uris.Add (uri);
+			items[uri] = item;
 			
 			if (ItemsChanged != null) {
 				ItemsChanged (this, new ItemsChangedArgs (item, AddRemoveChangeType.Add));
@@ -113,28 +105,36 @@ namespace Docky.Items
 			return true;
 		}
 		
-		public bool MoveItem (AbstractDockItem item, int position)
-		{
-			if (!items.Contains (item))
-				return false;
-			
-			items.Remove (item);
-			items.Insert (position, item);
-			
-			return true;
-		}
-		
 		public bool RemoveItem (AbstractDockItem item)
 		{
-			return false;
+			if (!items.ContainsValue (item))
+				return false;
+			
+			foreach (KeyValuePair<string, AbstractDockItem> kvp in items) {
+				if (kvp.Value == item) {
+					items.Remove (kvp.Key);
+				}
+			}
+			
+			OnItemsChanged (item, AddRemoveChangeType.Remove);
+			
+			item.Dispose ();
+			return true;
 		}
 		
 		public IEnumerable<AbstractDockItem> Items {
 			get {
-				return items.AsEnumerable ();
+				return items.Values.AsEnumerable ();
 			}
 		}
 		#endregion
+		
+		void OnItemsChanged (AbstractDockItem item, AddRemoveChangeType type)
+		{
+			if (ItemsChanged != null) {
+				ItemsChanged (this, new ItemsChangedArgs (item, type));
+			}
+		}
 
 		~FileApplicationProvider ()
 		{
@@ -143,7 +143,7 @@ namespace Docky.Items
 		
 		public void Dispose ()
 		{
-			foreach (AbstractDockItem item in items)
+			foreach (AbstractDockItem item in items.Values)
 				item.Dispose ();
 		}
 	}
