@@ -756,7 +756,10 @@ namespace Docky.Interface
 		
 		IDockItemProvider ProviderForItem (AbstractDockItem item)
 		{
-			return ItemProviders.DefaultIfEmpty (null).Where (p => p.Items.Contains (item)).FirstOrDefault ();
+			return ItemProviders
+				.DefaultIfEmpty (null)
+				.Where (p => p.Items.Contains (item))
+				.FirstOrDefault ();
 		}
 		
 		bool DragItemsCanInteract (AbstractDockItem dragItem, AbstractDockItem hoveredItem)
