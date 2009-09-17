@@ -117,7 +117,7 @@ namespace Docky.Items
 					.Cast<WnckDockItem> ()
 					.SelectMany (wdi => wdi.Windows)
 					.Contains (window))
-					return;
+					continue;
 				
 				desktopFile = WindowMatcher.Default.DesktopFileForWindow (window);
 				
@@ -130,6 +130,7 @@ namespace Docky.Items
 					OnItemsChanged (item, AddRemoveChangeType.Add);
 				}
 			}
+			
 		}
 
 		void HandleTransientWindowsChanged (object sender, EventArgs e)
@@ -171,9 +172,8 @@ namespace Docky.Items
 			item.Owner = this;
 			items[uri] = item;
 			
-			if (ItemsChanged != null) {
-				ItemsChanged (this, new ItemsChangedArgs (item, AddRemoveChangeType.Add));
-			}
+			
+			OnItemsChanged (item, AddRemoveChangeType.Add);
 			
 			return true;
 		}

@@ -340,6 +340,8 @@ namespace Docky.Interface
 				SortList = SortList.Where (s => s != e.Item.UniqueID ());
 			}
 			
+			// by definition, we got here first since we hooked up this event before anyone else
+			// could get ahold of this. therefor we get our event evoked first.
 			SortProviderOnList (DefaultProvider, SortList.ToList ());
 		}
 		
