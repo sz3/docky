@@ -1309,7 +1309,7 @@ namespace Docky.Interface
 				if (urgent_indicator_buffer == null)
 					urgent_indicator_buffer = CreateUrgentIndicatorBuffer ();
 				
-				DrawValue loc = val.MoveIn (Position, 0 - IconSize * val.Zoom / 2 - DockHeightBuffer);
+				DrawValue loc = val.MoveIn (Position, 1 - IconSize * val.Zoom / 2 - DockHeightBuffer);
 				normal_indicator_buffer.ShowAtPointAndZoom (surface, loc.Center, 1);
 			}
 		}
