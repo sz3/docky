@@ -37,12 +37,17 @@ namespace Docky.Items
 
 	public abstract class WnckDockItem : IconDockItem
 	{
+		public event EventHandler WindowsChanged;
+		
 		IEnumerable<Wnck.Window> windows;
 		public IEnumerable<Wnck.Window> Windows {
 			get { return windows; }
 			protected set {
 				windows = value;
 				SetIndicator ();
+				
+				if (WindowsChanged != null)
+					WindowsChanged (this, EventArgs.Empty);
 			}
 		}
 		

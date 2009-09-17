@@ -51,6 +51,7 @@ namespace Docky.Interface
 		int icon_size;
 		bool zoom_enabled;
 		double zoom_percent;
+		bool window_manager;
 		DockPosition position;
 		AutohideType hide_type;
 		
@@ -135,12 +136,20 @@ namespace Docky.Interface
 		}
 		#endregion
 		
+		public bool WindowManager {
+			get { return window_manager; }
+			set {
+				window_manager = value;
+				SetOption ("WindowManager", window_manager);
+			}
+		}
+		
 		IEnumerable<string> Launchers {
 			get {
-				return GetOption<string []> ("Launchers", new string [0]).AsEnumerable ();
+				return GetOption<string[]> ("Launchers", new string[0]).AsEnumerable ();
 			}
 			set {
-				SetOption<string []> ("Launchers", value.ToArray ());
+				SetOption<string[]> ("Launchers", value.ToArray ());
 			}
 		}
 		
@@ -167,8 +176,8 @@ namespace Docky.Interface
 			
 			prefs = DockServices.Preferences.Get<DockPreferences> ();
 			
-			BuildOptions ();
 			BuildItemProviders ();
+			BuildOptions ();
 			
 			icon_scale.ValueChanged += IconScaleValueChanged;
 			zoom_scale.ValueChanged += ZoomScaleValueChanged;
@@ -240,10 +249,11 @@ namespace Docky.Interface
 		
 		void BuildOptions ()
 		{
-			Autohide = (AutohideType) Enum.Parse (typeof (AutohideType), 
+			// fixme -- this should not be needed
+			Autohide = (AutohideType) Enum.Parse (typeof(AutohideType), 
 			                                      GetOption ("Autohide", AutohideType.None.ToString ()));
 			
-			DockPosition position = (DockPosition) Enum.Parse (typeof (DockPosition), 
+			DockPosition position = (DockPosition) Enum.Parse (typeof(DockPosition), 
 			                                                   GetOption ("Position", DockPosition.Bottom.ToString ()));
 			
 			while (Docky.Controller.Docks.Any ((Dock d) => d.Preferences.Position == position)) {
@@ -252,9 +262,14 @@ namespace Docky.Interface
 			}
 			Position = position;
 			
-			IconSize    = GetOption ("IconSize", 64);
+			IconSize = GetOption ("IconSize", 64);
 			ZoomEnabled = GetOption ("ZoomEnabled", true);
 			ZoomPercent = GetOption ("ZoomPercent", 2.0);
+			WindowManager = GetOption ("WindowManager", false);
+			// end fixme
+			
+			if (WindowManager)
+				DefaultProvider.SetWindowManager ();
 			
 			position_box.Active = (int) Position;
 			autohide_box.Active = (int) Autohide;
@@ -264,6 +279,12 @@ namespace Docky.Interface
 			zoom_scale.Value = ZoomPercent;
 			zoom_scale.Sensitive = ZoomEnabled;
 			icon_scale.Value = IconSize;
+			
+			
+			window_manager_check.Active = DefaultProvider.IsWindowManager;
+			DefaultProvider.WindowManagerChanged += delegate {
+				WindowManager = window_manager_check.Active = DefaultProvider.IsWindowManager;
+			};
 		}
 		
 		T GetOption<T> (string key, T def)
@@ -284,6 +305,8 @@ namespace Docky.Interface
 			item_providers.Add (DefaultProvider);
 			
 			if (FirstRun) {
+				WindowManager = true;
+				
 				Launchers = new[] {
 					"file:///usr/share/applications/banshee-1.desktop",
 					"file:///usr/share/applications/gnome-terminal.desktop",
@@ -311,6 +334,13 @@ namespace Docky.Interface
 		void DefaultProviderItemsChanged (object sender, ItemsChangedArgs e)
 		{
 			Launchers = DefaultProvider.Uris;
+			
+			// remove item from sort list
+			if (e.Type == AddRemoveChangeType.Remove) {
+				SortList = SortList.Where (s => s != e.Item.UniqueID ());
+			}
+			
+			SortProviderOnList (DefaultProvider, SortList.ToList ());
 		}
 		
 		void SortProviderOnList (IDockItemProvider provider, List<string> sortList)
@@ -362,6 +392,14 @@ namespace Docky.Interface
 		{
 			if (ZoomPercentChanged != null)
 				ZoomPercentChanged (this, EventArgs.Empty);
+		}
+
+		protected virtual void OnWindowManagerCheckToggled (object sender, System.EventArgs e)
+		{
+			if (window_manager_check.Active)
+				DefaultProvider.SetWindowManager ();
+			else
+				DefaultProvider.UnsetWindowManager ();
 		}
 	}
 }

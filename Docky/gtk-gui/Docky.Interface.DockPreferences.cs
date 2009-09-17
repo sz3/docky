@@ -345,6 +345,7 @@ namespace Docky.Interface {
                 this.Child.ShowAll();
             }
             this.Hide();
+            this.window_manager_check.Toggled += new System.EventHandler(this.OnWindowManagerCheckToggled);
         }
     }
 }

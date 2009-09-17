@@ -24,6 +24,9 @@ using System.Text;
 using Cairo;
 using Gdk;
 using Gtk;
+using Wnck;
+
+using Docky.Windowing;
 
 namespace Docky.Items
 {
@@ -34,17 +37,112 @@ namespace Docky.Items
 		public static FileApplicationProvider WindowManager;
 		static List<FileApplicationProvider> Providers = new List<FileApplicationProvider> ();
 		
+		static IEnumerable<Wnck.Window> ManagedWindows {
+			get {
+				return Providers
+					.SelectMany (p => p.PermanentItems)
+					.Where (i => i is WnckDockItem)
+					.Cast<WnckDockItem> ()
+					.SelectMany (w => w.Windows);
+			}
+		}
+		
+		static IEnumerable<Wnck.Window> UnmanagedWindows {
+			get {
+				IEnumerable<Wnck.Window> managed = ManagedWindows.ToArray ();
+				return Wnck.Screen.Default.Windows
+					.Where (w => !w.IsSkipPager && !managed.Contains (w));
+			}
+		}
+		
+		public event EventHandler WindowManagerChanged;
+		
 		Dictionary<string, AbstractDockItem> items;
+		List<AbstractDockItem> transient_items;
 		
 		public IEnumerable<string> Uris {
 			get { return items.Keys.AsEnumerable (); }
 		}
 		
+		public bool IsWindowManager {
+			get { return WindowManager == this; }
+		}
+		
+		IEnumerable<AbstractDockItem> PermanentItems {
+			get {
+				return items.Values.AsEnumerable ();
+			}
+		}
+		
 		public FileApplicationProvider ()
 		{
 			items = new Dictionary<string, AbstractDockItem> ();
+			transient_items = new List<AbstractDockItem> ();
 			
 			Providers.Add (this);
+			
+			Wnck.Screen.Default.WindowOpened += WnckScreenDefaultWindowOpened;
+			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
+		}
+
+		void WnckScreenDefaultWindowOpened (object o, WindowOpenedArgs args)
+		{
+			// ensure we run last (more or less) so that all icons can update first
+			GLib.Timeout.Add (10, delegate {
+				UpdateTransientItems ();
+				return false;
+			});
+		}
+
+		void WnckScreenDefaultWindowClosed (object o, WindowClosedArgs args)
+		{
+			// we dont need to delay in this case as icons owning extra windows
+			// is a non-event
+			UpdateTransientItems ();
+		}
+		
+		void UpdateTransientItems ()
+		{
+			if (!IsWindowManager) {
+				transient_items.Clear ();
+				return;
+			}
+			// we will need a list of these bad boys we can mess with
+			List<Wnck.Window> windows = UnmanagedWindows.ToList ();
+			
+			string desktopFile;
+			AbstractDockItem item;
+			foreach (Wnck.Window window in windows) {
+				if (transient_items.Where (adi => adi is WnckDockItem)
+					.Cast<WnckDockItem> ()
+					.SelectMany (wdi => wdi.Windows)
+					.Contains (window))
+					return;
+				
+				desktopFile = WindowMatcher.Default.DesktopFileForWindow (window);
+				
+				if (desktopFile != null) {
+					item = ApplicationDockItem.NewFromUri (new Uri (desktopFile).AbsoluteUri);
+					transient_items.Add (item);
+					
+					(item as ApplicationDockItem).WindowsChanged += HandleTransientWindowsChanged;
+					
+					OnItemsChanged (item, AddRemoveChangeType.Add);
+				}
+			}
+		}
+
+		void HandleTransientWindowsChanged (object sender, EventArgs e)
+		{
+			if (!(sender is WnckDockItem))
+				return;
+			
+			WnckDockItem item = sender as WnckDockItem;
+			if (!item.Windows.Any ()) {
+				transient_items.Remove (item);
+				OnItemsChanged (item, AddRemoveChangeType.Remove);
+				item.Dispose ();
+			}
 		}
 		
 		public bool InsertItem (string uri)
@@ -80,19 +178,31 @@ namespace Docky.Items
 			return true;
 		}
 		
-		public bool SetWindowManager ()
+		public void SetWindowManager ()
 		{
+			if (WindowManager == this)
+				return;
+			
 			if (WindowManager != null)
 				WindowManager.UnsetWindowManager ();
 			
 			WindowManager = this;
-			return true;
+			OnWindowManagerChanged ();
 		}
 		
-		public bool UnsetWindowManager ()
+		public void UnsetWindowManager ()
 		{
+			if (WindowManager != this)
+				return;
+			
 			WindowManager = null;
-			return true;
+			OnWindowManagerChanged ();
+		}
+		
+		void OnWindowManagerChanged ()
+		{
+			if (WindowManagerChanged != null)
+				WindowManagerChanged (this, EventArgs.Empty);
 		}
 		
 		#region IDockItemProvider implementation
@@ -132,7 +242,7 @@ namespace Docky.Items
 		
 		public IEnumerable<AbstractDockItem> Items {
 			get {
-				return items.Values.AsEnumerable ();
+				return items.Values.Concat (transient_items);
 			}
 		}
 		#endregion
