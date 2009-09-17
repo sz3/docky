@@ -110,11 +110,19 @@ namespace Docky.Items
 			if (!items.ContainsValue (item))
 				return false;
 			
+			string key = null;
 			foreach (KeyValuePair<string, AbstractDockItem> kvp in items) {
 				if (kvp.Value == item) {
-					items.Remove (kvp.Key);
+					key = kvp.Key;
+					break;
 				}
 			}
+			
+			// this should never happen...
+			if (key == null)
+				return false;
+			
+			items.Remove (key);
 			
 			OnItemsChanged (item, AddRemoveChangeType.Remove);
 			
