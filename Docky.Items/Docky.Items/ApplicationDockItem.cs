@@ -61,8 +61,15 @@ namespace Docky.Items
 			if (item.AttrExists ("Icon"))
 				Icon = item.GetString ("Icon");
 			
-			if (item.AttrExists ("Name"))
-				HoverText = item.GetString ("Name");
+			if (item.AttrExists ("Name")) {
+				try {
+					HoverText = item.GetLocalestring ("Name");
+				} catch {
+					HoverText = item.GetString ("Name");
+				}
+			} else {
+				HoverText = System.IO.Path.GetFileNameWithoutExtension (path);
+			}
 			
 			path = new Uri (item.Location).LocalPath;
 			
