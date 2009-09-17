@@ -396,20 +396,51 @@ namespace Docky.Interface
 		void RegisterItemProvider (IDockItemProvider provider)
 		{
 			provider.ItemsChanged += ProviderItemsChanged;
+			
+			foreach (AbstractDockItem item in provider.Items)
+				RegisterItem (item);
 		}
 		
 		void UnregisterItemProvider (IDockItemProvider provider)
 		{
 			provider.ItemsChanged -= ProviderItemsChanged;
+			
+			foreach (AbstractDockItem item in provider.Items)
+				UnregisterItem (item);
 		}
 		
 		void ProviderItemsChanged (object sender, ItemsChangedArgs args)
 		{
 			UpdateCollectionBuffer ();
 			
-			if (args.Type == AddRemoveChangeType.Remove)
-				DrawValues.Remove (args.Item);
+			if (args.Type == AddRemoveChangeType.Add)
+				RegisterItem (args.Item);
+			else if (args.Type == AddRemoveChangeType.Remove)
+				UnregisterItem (args.Item);
 			
+			AnimatedDraw ();
+		}
+		
+		void RegisterItem (AbstractDockItem item)
+		{
+			item.HoverTextChanged += ItemHoverTextChanged;
+			item.PaintNeeded += ItemPaintNeeded;
+		}
+
+		void UnregisterItem (AbstractDockItem item)
+		{
+			item.HoverTextChanged -= ItemHoverTextChanged;
+			item.PaintNeeded -= ItemPaintNeeded;
+			DrawValues.Remove (item);
+		}
+
+		void ItemHoverTextChanged (object sender, EventArgs e)
+		{
+			AnimatedDraw ();
+		}
+		
+		void ItemPaintNeeded (object sender, PaintNeededEventArgs e)
+		{
 			AnimatedDraw ();
 		}
 		
@@ -752,7 +783,6 @@ namespace Docky.Interface
 				if (proxy_window != bestProxy) {
 					proxy_window = bestProxy;
 					Gtk.Drag.DestSetProxy (this, proxy_window, DragProtocol.Xdnd, true);
-//					Console.WriteLine ("{0} {1} {2} {3}", Preferences.GetName (), w.TypeHint, w.State, Cursor);
 				}
 			}
 		}

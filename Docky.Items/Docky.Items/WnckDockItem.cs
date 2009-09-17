@@ -37,22 +37,30 @@ namespace Docky.Items
 
 	public abstract class WnckDockItem : IconDockItem
 	{
-		public override ActivityIndicator Indicator {
-			get {
-				int count = ManagedWindows.Count ();
-				if (count > 1)
-					return ActivityIndicator.SinglePlus;
-				if (count == 1)
-					return ActivityIndicator.Single;
-				return ActivityIndicator.None;
+		IEnumerable<Wnck.Window> windows;
+		public IEnumerable<Wnck.Window> Windows {
+			get { return windows; }
+			protected set {
+				windows = value;
+				SetIndicator ();
 			}
 		}
-		
-		public abstract IEnumerable<Wnck.Window> Windows { get; }
 		
 		protected IEnumerable<Wnck.Window> ManagedWindows {
 			get {
 				return Windows.Where (w => !w.IsSkipTasklist);
+			}
+		}
+		
+		void SetIndicator ()
+		{
+			int count = ManagedWindows.Count ();
+			if (count > 1) {
+				Indicator = ActivityIndicator.SinglePlus;
+			} else if (count == 1) {
+				Indicator = ActivityIndicator.Single;
+			} else {
+				Indicator = ActivityIndicator.None;
 			}
 		}
 		

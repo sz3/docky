@@ -54,17 +54,9 @@ namespace Docky.Items
 		
 		Gnome.DesktopItem desktop_item;
 		string path;
-		List<Wnck.Window> windows;
-		
-		public override IEnumerable<Wnck.Window> Windows {
-			get {
-				return windows;
-			}
-		}
 		
 		private ApplicationDockItem (Gnome.DesktopItem item)
 		{
-			windows = new List<Wnck.Window> ();
 			desktop_item = item;
 			if (item.AttrExists ("Icon"))
 				Icon = item.GetString ("Icon");
@@ -99,9 +91,8 @@ namespace Docky.Items
 		
 		void UpdateWindows ()
 		{
-			windows.Clear ();
 			try {
-				windows.AddRange (WindowMatcher.Default.WindowsForDesktopFile (path));
+				Windows = WindowMatcher.Default.WindowsForDesktopFile (path);
 			} catch {
 				Console.Error.WriteLine ("Could not get windows for " + path);
 			}

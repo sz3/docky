@@ -38,12 +38,21 @@ namespace Docky.Items
 		string hover_text;
 		DockySurface main_buffer, text_buffer;
 		Cairo.Color? average_color;
+		ActivityIndicator indicator;
 		
 		public event EventHandler HoverTextChanged;
 		public event EventHandler<PaintNeededEventArgs> PaintNeeded;
 		
-		public virtual ActivityIndicator Indicator {
-			get { return ActivityIndicator.None; }
+		public ActivityIndicator Indicator {
+			get {
+				return indicator; 
+			}
+			set {
+				if (value == indicator)
+					return;
+				indicator = value;
+				OnPaintNeeded ();
+			}
 		}
 		
 		public DateTime LastClick {
