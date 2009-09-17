@@ -89,6 +89,8 @@ namespace Docky.Interface
 			
 			tracker.CursorPositionChanged   += HandleCursorPositionChanged;
 			this.screen.ActiveWindowChanged += HandleActiveWindowChanged;
+			this.screen.WindowOpened        += HandleWindowOpened;
+			this.screen.WindowClosed        += HandleWindowClosed;
 		}
 		
 		public void SetCursorArea (Gdk.Rectangle area)
@@ -122,6 +124,16 @@ namespace Docky.Interface
 				args.PreviousWindow.GeometryChanged -= HandleGeometryChanged;
 			
 			SetupActiveWindow ();
+			UpdateWindowIntersect ();
+		}
+		
+		void HandleWindowOpened (object sender, WindowOpenedArgs args)
+		{
+			UpdateWindowIntersect ();
+		}
+		
+		void HandleWindowClosed (object sender, WindowClosedArgs args)
+		{
 			UpdateWindowIntersect ();
 		}
 		
@@ -160,7 +172,7 @@ namespace Docky.Interface
 				Wnck.Window activeWindow = screen.ActiveWindow;
 				
 				intersect = activeWindow != null &&
-					screen.Windows.Any (w => w.WindowType != Wnck.WindowType.Desktop && 
+					screen.Windows.Any (w => !w.IsMinimized && w.WindowType != Wnck.WindowType.Desktop && 
 					                    activeWindow.Pid == w.Pid &&
 					                    w.Pid != pid &&
 					                    w.EasyGeometry ().IntersectsWith (adjustedDockArea));
