@@ -220,6 +220,8 @@ namespace Docky.Interface
 			if (screen != null) {
 				screen.ActiveWindowChanged -= HandleActiveWindowChanged;
 				screen.ActiveWindow.GeometryChanged -= HandleGeometryChanged;
+				screen.WindowOpened -= HandleWindowOpened;
+				screen.WindowClosed -= HandleWindowClosed;
 			}
 			
 			tracker.CursorPositionChanged -= HandleCursorPositionChanged;
