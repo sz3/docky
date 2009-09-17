@@ -12,7 +12,7 @@
     <widget-library name="../../Docky.Windowing/bin/Debug/Docky.Windowing.dll" />
     <widget-library name="../bin/Debug/Docky-2.exe" internal="true" />
   </import>
-  <widget class="Gtk.Bin" id="Docky.Interface.DockPreferences" design-size="355 331">
+  <widget class="Gtk.Bin" id="Docky.Interface.DockPreferences" design-size="368 331">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <child>
@@ -22,7 +22,7 @@
         <child>
           <widget class="Gtk.Table" id="table1">
             <property name="MemberName" />
-            <property name="NRows">4</property>
+            <property name="NRows">5</property>
             <property name="NColumns">3</property>
             <property name="RowSpacing">6</property>
             <property name="ColumnSpacing">6</property>
@@ -66,8 +66,9 @@ Intellihide</property>
                 <property name="LeftAttach">2</property>
                 <property name="RightAttach">3</property>
                 <property name="AutoSize">True</property>
+                <property name="XOptions">Fill</property>
                 <property name="YOptions">Fill</property>
-                <property name="XExpand">True</property>
+                <property name="XExpand">False</property>
                 <property name="XFill">True</property>
                 <property name="XShrink">False</property>
                 <property name="YExpand">False</property>
@@ -172,8 +173,9 @@ Intellihide</property>
                 <property name="LeftAttach">2</property>
                 <property name="RightAttach">3</property>
                 <property name="AutoSize">True</property>
+                <property name="XOptions">Fill</property>
                 <property name="YOptions">Fill</property>
-                <property name="XExpand">True</property>
+                <property name="XExpand">False</property>
                 <property name="XFill">True</property>
                 <property name="XShrink">False</property>
                 <property name="YExpand">False</property>
@@ -198,6 +200,30 @@ Bottom</property>
                 <property name="XOptions">Fill</property>
                 <property name="YOptions">Fill</property>
                 <property name="XExpand">False</property>
+                <property name="XFill">True</property>
+                <property name="XShrink">False</property>
+                <property name="YExpand">False</property>
+                <property name="YFill">True</property>
+                <property name="YShrink">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.CheckButton" id="window_manager_check">
+                <property name="MemberName" />
+                <property name="CanFocus">True</property>
+                <property name="Label" translatable="yes">Manage Windows</property>
+                <property name="DrawIndicator">True</property>
+                <property name="HasLabel">True</property>
+                <property name="UseUnderline">True</property>
+                <property name="Xalign">0</property>
+              </widget>
+              <packing>
+                <property name="TopAttach">4</property>
+                <property name="BottomAttach">5</property>
+                <property name="RightAttach">3</property>
+                <property name="AutoSize">False</property>
+                <property name="YOptions">Fill</property>
+                <property name="XExpand">True</property>
                 <property name="XFill">True</property>
                 <property name="XShrink">False</property>
                 <property name="YExpand">False</property>

@@ -1065,7 +1065,7 @@ namespace Docky.Interface
 					
 					// First we get the point on our curve that defines out current zoom
 					// offset is always going to fall on a point on the curve >= 0
-					zoom = 1 - offsetPercent * offsetPercent;
+					zoom = 1 - Math.Pow (offsetPercent, 2); 
 					
 					// scale this to match out zoomInPercent
 					zoom = 1 + zoom * (zoomInPercent - 1);

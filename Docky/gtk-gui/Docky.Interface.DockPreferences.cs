@@ -33,6 +33,8 @@ namespace Docky.Interface {
         
         private Gtk.ComboBox position_box;
         
+        private Gtk.CheckButton window_manager_check;
+        
         private Gtk.CheckButton zoom_checkbutton;
         
         private Gtk.HScale zoom_scale;
@@ -73,7 +75,7 @@ namespace Docky.Interface {
             this.vbox1.Name = "vbox1";
             this.vbox1.Spacing = 6;
             // Container child vbox1.Gtk.Box+BoxChild
-            this.table1 = new Gtk.Table(((uint)(4)), ((uint)(3)), false);
+            this.table1 = new Gtk.Table(((uint)(5)), ((uint)(3)), false);
             this.table1.Name = "table1";
             this.table1.RowSpacing = ((uint)(6));
             this.table1.ColumnSpacing = ((uint)(6));
@@ -105,6 +107,7 @@ namespace Docky.Interface {
             w2.BottomAttach = ((uint)(2));
             w2.LeftAttach = ((uint)(2));
             w2.RightAttach = ((uint)(3));
+            w2.XOptions = ((Gtk.AttachOptions)(4));
             w2.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table1.Gtk.Table+TableChild
             this.icon_scale = new Gtk.HScale(null);
@@ -165,6 +168,7 @@ namespace Docky.Interface {
             Gtk.Table.TableChild w7 = ((Gtk.Table.TableChild)(this.table1[this.multiple_window_indicator_check]));
             w7.LeftAttach = ((uint)(2));
             w7.RightAttach = ((uint)(3));
+            w7.XOptions = ((Gtk.AttachOptions)(4));
             w7.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table1.Gtk.Table+TableChild
             this.position_box = Gtk.ComboBox.NewText();
@@ -181,6 +185,20 @@ namespace Docky.Interface {
             w8.XOptions = ((Gtk.AttachOptions)(4));
             w8.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table1.Gtk.Table+TableChild
+            this.window_manager_check = new Gtk.CheckButton();
+            this.window_manager_check.CanFocus = true;
+            this.window_manager_check.Name = "window_manager_check";
+            this.window_manager_check.Label = Mono.Unix.Catalog.GetString("Manage Windows");
+            this.window_manager_check.DrawIndicator = true;
+            this.window_manager_check.UseUnderline = true;
+            this.window_manager_check.Xalign = 0F;
+            this.table1.Add(this.window_manager_check);
+            Gtk.Table.TableChild w9 = ((Gtk.Table.TableChild)(this.table1[this.window_manager_check]));
+            w9.TopAttach = ((uint)(4));
+            w9.BottomAttach = ((uint)(5));
+            w9.RightAttach = ((uint)(3));
+            w9.YOptions = ((Gtk.AttachOptions)(4));
+            // Container child table1.Gtk.Table+TableChild
             this.zoom_checkbutton = new Gtk.CheckButton();
             this.zoom_checkbutton.CanFocus = true;
             this.zoom_checkbutton.Name = "zoom_checkbutton";
@@ -189,11 +207,11 @@ namespace Docky.Interface {
             this.zoom_checkbutton.UseUnderline = true;
             this.zoom_checkbutton.Xalign = 1F;
             this.table1.Add(this.zoom_checkbutton);
-            Gtk.Table.TableChild w9 = ((Gtk.Table.TableChild)(this.table1[this.zoom_checkbutton]));
-            w9.TopAttach = ((uint)(3));
-            w9.BottomAttach = ((uint)(4));
-            w9.XOptions = ((Gtk.AttachOptions)(4));
-            w9.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w10 = ((Gtk.Table.TableChild)(this.table1[this.zoom_checkbutton]));
+            w10.TopAttach = ((uint)(3));
+            w10.BottomAttach = ((uint)(4));
+            w10.XOptions = ((Gtk.AttachOptions)(4));
+            w10.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table1.Gtk.Table+TableChild
             this.zoom_scale = new Gtk.HScale(null);
             this.zoom_scale.CanFocus = true;
@@ -206,25 +224,25 @@ namespace Docky.Interface {
             this.zoom_scale.Digits = 2;
             this.zoom_scale.ValuePos = ((Gtk.PositionType)(0));
             this.table1.Add(this.zoom_scale);
-            Gtk.Table.TableChild w10 = ((Gtk.Table.TableChild)(this.table1[this.zoom_scale]));
-            w10.TopAttach = ((uint)(3));
-            w10.BottomAttach = ((uint)(4));
-            w10.LeftAttach = ((uint)(1));
-            w10.RightAttach = ((uint)(3));
-            w10.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w11 = ((Gtk.Table.TableChild)(this.table1[this.zoom_scale]));
+            w11.TopAttach = ((uint)(3));
+            w11.BottomAttach = ((uint)(4));
+            w11.LeftAttach = ((uint)(1));
+            w11.RightAttach = ((uint)(3));
+            w11.YOptions = ((Gtk.AttachOptions)(4));
             this.vbox1.Add(this.table1);
-            Gtk.Box.BoxChild w11 = ((Gtk.Box.BoxChild)(this.vbox1[this.table1]));
-            w11.Position = 0;
-            w11.Expand = false;
-            w11.Fill = false;
+            Gtk.Box.BoxChild w12 = ((Gtk.Box.BoxChild)(this.vbox1[this.table1]));
+            w12.Position = 0;
+            w12.Expand = false;
+            w12.Fill = false;
             // Container child vbox1.Gtk.Box+BoxChild
             this.hseparator1 = new Gtk.HSeparator();
             this.hseparator1.Name = "hseparator1";
             this.vbox1.Add(this.hseparator1);
-            Gtk.Box.BoxChild w12 = ((Gtk.Box.BoxChild)(this.vbox1[this.hseparator1]));
-            w12.Position = 1;
-            w12.Expand = false;
-            w12.Fill = false;
+            Gtk.Box.BoxChild w13 = ((Gtk.Box.BoxChild)(this.vbox1[this.hseparator1]));
+            w13.Position = 1;
+            w13.Expand = false;
+            w13.Fill = false;
             // Container child vbox1.Gtk.Box+BoxChild
             this.table2 = new Gtk.Table(((uint)(2)), ((uint)(3)), false);
             this.table2.Name = "table2";
@@ -241,10 +259,10 @@ namespace Docky.Interface {
             this.treeview1.Name = "treeview1";
             this.GtkScrolledWindow.Add(this.treeview1);
             this.table2.Add(this.GtkScrolledWindow);
-            Gtk.Table.TableChild w14 = ((Gtk.Table.TableChild)(this.table2[this.GtkScrolledWindow]));
-            w14.TopAttach = ((uint)(1));
-            w14.BottomAttach = ((uint)(2));
-            w14.XOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w15 = ((Gtk.Table.TableChild)(this.table2[this.GtkScrolledWindow]));
+            w15.TopAttach = ((uint)(1));
+            w15.BottomAttach = ((uint)(2));
+            w15.XOptions = ((Gtk.AttachOptions)(4));
             // Container child table2.Gtk.Table+TableChild
             this.GtkScrolledWindow1 = new Gtk.ScrolledWindow();
             this.GtkScrolledWindow1.Name = "GtkScrolledWindow1";
@@ -256,30 +274,30 @@ namespace Docky.Interface {
             this.treeview2.Name = "treeview2";
             this.GtkScrolledWindow1.Add(this.treeview2);
             this.table2.Add(this.GtkScrolledWindow1);
-            Gtk.Table.TableChild w16 = ((Gtk.Table.TableChild)(this.table2[this.GtkScrolledWindow1]));
-            w16.TopAttach = ((uint)(1));
-            w16.BottomAttach = ((uint)(2));
-            w16.LeftAttach = ((uint)(2));
-            w16.RightAttach = ((uint)(3));
-            w16.XOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w17 = ((Gtk.Table.TableChild)(this.table2[this.GtkScrolledWindow1]));
+            w17.TopAttach = ((uint)(1));
+            w17.BottomAttach = ((uint)(2));
+            w17.LeftAttach = ((uint)(2));
+            w17.RightAttach = ((uint)(3));
+            w17.XOptions = ((Gtk.AttachOptions)(4));
             // Container child table2.Gtk.Table+TableChild
             this.label5 = new Gtk.Label();
             this.label5.Name = "label5";
             this.label5.LabelProp = Mono.Unix.Catalog.GetString("<b>Inactive Plugins</b>");
             this.label5.UseMarkup = true;
             this.table2.Add(this.label5);
-            Gtk.Table.TableChild w17 = ((Gtk.Table.TableChild)(this.table2[this.label5]));
-            w17.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w18 = ((Gtk.Table.TableChild)(this.table2[this.label5]));
+            w18.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table2.Gtk.Table+TableChild
             this.label6 = new Gtk.Label();
             this.label6.Name = "label6";
             this.label6.LabelProp = Mono.Unix.Catalog.GetString("<b>Active Plugins</b>");
             this.label6.UseMarkup = true;
             this.table2.Add(this.label6);
-            Gtk.Table.TableChild w18 = ((Gtk.Table.TableChild)(this.table2[this.label6]));
-            w18.LeftAttach = ((uint)(2));
-            w18.RightAttach = ((uint)(3));
-            w18.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w19 = ((Gtk.Table.TableChild)(this.table2[this.label6]));
+            w19.LeftAttach = ((uint)(2));
+            w19.RightAttach = ((uint)(3));
+            w19.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table2.Gtk.Table+TableChild
             this.vbox2 = new Gtk.VBox();
             this.vbox2.Name = "vbox2";
@@ -296,8 +314,8 @@ namespace Docky.Interface {
             this.button10.Add(this.image4);
             this.button10.Label = null;
             this.vbox2.Add(this.button10);
-            Gtk.Box.BoxChild w20 = ((Gtk.Box.BoxChild)(this.vbox2[this.button10]));
-            w20.Position = 0;
+            Gtk.Box.BoxChild w21 = ((Gtk.Box.BoxChild)(this.vbox2[this.button10]));
+            w21.Position = 0;
             // Container child vbox2.Gtk.Box+BoxChild
             this.button11 = new Gtk.Button();
             this.button11.CanFocus = true;
@@ -310,18 +328,18 @@ namespace Docky.Interface {
             this.button11.Add(this.image3);
             this.button11.Label = null;
             this.vbox2.Add(this.button11);
-            Gtk.Box.BoxChild w22 = ((Gtk.Box.BoxChild)(this.vbox2[this.button11]));
-            w22.Position = 2;
+            Gtk.Box.BoxChild w23 = ((Gtk.Box.BoxChild)(this.vbox2[this.button11]));
+            w23.Position = 2;
             this.table2.Add(this.vbox2);
-            Gtk.Table.TableChild w23 = ((Gtk.Table.TableChild)(this.table2[this.vbox2]));
-            w23.TopAttach = ((uint)(1));
-            w23.BottomAttach = ((uint)(2));
-            w23.LeftAttach = ((uint)(1));
-            w23.RightAttach = ((uint)(2));
-            w23.XOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w24 = ((Gtk.Table.TableChild)(this.table2[this.vbox2]));
+            w24.TopAttach = ((uint)(1));
+            w24.BottomAttach = ((uint)(2));
+            w24.LeftAttach = ((uint)(1));
+            w24.RightAttach = ((uint)(2));
+            w24.XOptions = ((Gtk.AttachOptions)(4));
             this.vbox1.Add(this.table2);
-            Gtk.Box.BoxChild w24 = ((Gtk.Box.BoxChild)(this.vbox1[this.table2]));
-            w24.Position = 2;
+            Gtk.Box.BoxChild w25 = ((Gtk.Box.BoxChild)(this.vbox1[this.table2]));
+            w25.Position = 2;
             this.Add(this.vbox1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();
