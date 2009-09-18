@@ -58,6 +58,10 @@ namespace Docky
 			PluginManager.Initialize ();
 			Controller.Initialize ();
 			
+			foreach (Items.IDockItemProvider provider in PluginManager.ItemProviders) {
+				Console.WriteLine (provider.Separated);
+			}
+			
 			ConfigurationWindow config = new ConfigurationWindow ();
 			config.Show ();
 			

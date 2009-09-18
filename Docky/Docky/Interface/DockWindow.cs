@@ -1260,7 +1260,7 @@ namespace Docky.Interface
 			DrawDockBackground (surface, dockArea);
 			
 			foreach (AbstractDockItem adi in Items) {
-				DrawItem (surface, adi);
+				DrawItem (surface, dockArea, adi);
 			}
 			
 			SetInputMask (cursorArea);
@@ -1275,7 +1275,7 @@ namespace Docky.Interface
 			AutohideManager.SetCursorArea (cursorArea);
 		}
 		
-		void DrawItem (DockySurface surface, AbstractDockItem item)
+		void DrawItem (DockySurface surface, Gdk.Rectangle dockArea, AbstractDockItem item)
 		{
 			if (drag_item == item)
 				return;
@@ -1293,6 +1293,24 @@ namespace Docky.Interface
 					double move = Math.Abs (Math.Sin (2 * Math.PI * animationProgress) * LaunchBounceHeight);
 					center = center.MoveIn (Position, move);
 				}
+			}
+			
+			if ((item.State & ItemState.Active) == ItemState.Active) {
+				Gdk.Rectangle area;
+				
+				if (VerticalDock) {
+					area = new Gdk.Rectangle (dockArea.X, 
+						(int) (val.Center.Y - (IconSize * val.Zoom) / 2) - ItemWidthBuffer,
+						DockHeight,
+						(int) (IconSize * val.Zoom) + 2 * ItemWidthBuffer);
+				} else {
+					area = new Gdk.Rectangle ((int) (val.Center.X - (IconSize * val.Zoom) / 2) - ItemWidthBuffer,
+						dockArea.Y, 
+						(int) (IconSize * val.Zoom) + 2 * ItemWidthBuffer,
+						DockHeight);
+				}
+				
+				DrawActiveIndicator (surface, area, item.AverageColor ());
 			}
 			
 			icon.ShowAtPointAndZoom (surface, center.Center, center.Zoom / zoomOffset);
@@ -1314,6 +1332,35 @@ namespace Docky.Interface
 				DrawValue loc = val.MoveIn (Position, 1 - IconSize * val.Zoom / 2 - DockHeightBuffer);
 				normal_indicator_buffer.ShowAtPointAndZoom (surface, loc.Center, 1);
 			}
+		}
+		
+		void DrawActiveIndicator (DockySurface surface, Gdk.Rectangle area, Cairo.Color color)
+		{
+			surface.Context.Rectangle (area.X, area.Y, area.Width, area.Height);
+			LinearGradient lg;
+			
+			switch (Position) {
+			case DockPosition.Top:
+				lg = new LinearGradient (0, area.Y, 0, area.Y + area.Height);
+				break;
+			case DockPosition.Left:
+				lg = new LinearGradient (area.X, 0, area.X + area.Width, 0);
+				break;
+			case DockPosition.Right:
+				lg = new LinearGradient (area.X + area.Width, 0, area.X, 0);
+				break;
+			default:
+			case DockPosition.Bottom:
+				lg = new LinearGradient (0, area.Y + area.Height, 0, area.Y);
+				break;
+			}
+			lg.AddColorStop (0, color.SetAlpha (0.9));
+			lg.AddColorStop (1, color.SetAlpha (0.1));
+			
+			surface.Context.Pattern = lg;
+			surface.Context.Fill ();
+			
+			lg.Destroy ();
 		}
 		
 		DockySurface CreateNormalIndicatorBuffer ()

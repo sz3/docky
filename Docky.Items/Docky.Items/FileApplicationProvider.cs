@@ -211,6 +211,8 @@ namespace Docky.Items
 		#region IDockItemProvider implementation
 		public event EventHandler<ItemsChangedArgs> ItemsChanged;
 		
+		public string Name { get { return "File Application Provider"; } }
+		
 		public bool Separated { get { return true; } }
 		
 		public bool ItemCanBeRemoved (AbstractDockItem item)

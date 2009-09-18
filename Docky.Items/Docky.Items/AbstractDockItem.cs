@@ -39,6 +39,7 @@ namespace Docky.Items
 		DockySurface main_buffer, text_buffer;
 		Cairo.Color? average_color;
 		ActivityIndicator indicator;
+		ItemState state;
 		
 		public event EventHandler HoverTextChanged;
 		public event EventHandler<PaintNeededEventArgs> PaintNeeded;
@@ -47,12 +48,27 @@ namespace Docky.Items
 			get {
 				return indicator; 
 			}
-			set {
+			protected set {
 				if (value == indicator)
 					return;
 				indicator = value;
 				OnPaintNeeded ();
 			}
+		}
+		
+		public ItemState State {
+			get { return state; }
+			protected set {
+				if (state == value)
+					return;
+				StateSetTime = DateTime.UtcNow;
+				state = value;
+				OnPaintNeeded ();
+			}
+		}
+		
+		public DateTime StateSetTime {
+			get; private set; 
 		}
 		
 		public DateTime LastClick {
@@ -161,8 +177,8 @@ namespace Docky.Items
 			average_color = new Cairo.Color (rTotal / pixelCount, 
 			                                 gTotal / pixelCount, 
 			                                 bTotal / pixelCount)
-				.SetValue (1)
-				.MultiplySaturation (1.3);
+				.SetValue (.8)
+				.MultiplySaturation (1.15);
 			
 			return average_color.Value;
 		}

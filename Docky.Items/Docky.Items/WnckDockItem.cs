@@ -45,6 +45,7 @@ namespace Docky.Items
 			protected set {
 				windows = value;
 				SetIndicator ();
+				SetState ();
 				
 				if (WindowsChanged != null)
 					WindowsChanged (this, EventArgs.Empty);
@@ -57,6 +58,16 @@ namespace Docky.Items
 			}
 		}
 		
+		public WnckDockItem ()
+		{
+			Wnck.Screen.Default.ActiveWindowChanged += WnckScreenDefaultActiveWindowChanged;
+		}
+
+		void WnckScreenDefaultActiveWindowChanged (object o, ActiveWindowChangedArgs args)
+		{
+			SetState ();
+		}
+		
 		void SetIndicator ()
 		{
 			int count = ManagedWindows.Count ();
@@ -67,6 +78,17 @@ namespace Docky.Items
 			} else {
 				Indicator = ActivityIndicator.None;
 			}
+		}
+		
+		void SetState ()
+		{
+			ItemState state = 0;
+			
+			if (Windows.Contains (Wnck.Screen.Default.ActiveWindow)) {
+				state |= ItemState.Active;
+			}
+			
+			State = state;
 		}
 		
 		public sealed override void SetScreenRegion (Gdk.Screen screen, Gdk.Rectangle region)

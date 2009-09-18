@@ -63,6 +63,7 @@
     <Compile Include="Docky.Items\ClickAnimation.cs" />
     <Compile Include="Docky.Items\FileDockItem.cs" />
     <Compile Include="Docky.Items\ActivityIndicator.cs" />
+    <Compile Include="Docky.Items\ItemState.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Docky.Services\Docky.Services.csproj">

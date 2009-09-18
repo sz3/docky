@@ -78,8 +78,8 @@ namespace Cairo
 		
 		public static Cairo.Color MultiplySaturation (this Color self, double amount)
 		{
-			if (amount < 0 || amount > 1)
-				throw new ArgumentOutOfRangeException ("Brighten Amount", "Brighten amount must be between 0 and 1");
+			if (amount < 0)
+				throw new ArgumentOutOfRangeException ("Amount", "Amount must be greater than or equal to 0");
 			
 			double h, s, v, r, g, b;
 			RGBToHSV (self.R, self.G, self.B, out h, out s, out v);

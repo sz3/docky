@@ -8,4 +8,8 @@
 		<ExtensionNode name="ItemProvider" objectType="Docky.Items.IDockItemProvider"/>
 	</ExtensionPoint>
 	
+	<!--<Extension path="/Docky/ItemProvider">
+		<ItemProvider type="Docky.Items.FileApplicationProvider" />
+	</Extension>-->
+
 </Addin>

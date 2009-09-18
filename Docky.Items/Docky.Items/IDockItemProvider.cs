@@ -29,6 +29,8 @@ namespace Docky.Items
 	{
 		event EventHandler<ItemsChangedArgs> ItemsChanged;
 		
+		string Name { get; }
+		
 		bool Separated { get; }
 		
 		IEnumerable<AbstractDockItem> Items { get; }
