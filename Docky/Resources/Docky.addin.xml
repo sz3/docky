@@ -1,0 +1,11 @@
+<Addin id="Core" namespace="Docky" version="1.0" isroot="false">
+ 
+	<Runtime>
+		<Import assembly="Docky.exe" />
+	</Runtime>
+	
+	<Dependencies>
+		<Addin id="Items" version="1.0" />
+	</Dependencies>
+
+</Addin>

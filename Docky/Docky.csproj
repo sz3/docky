@@ -7,7 +7,6 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{FF0B1BB8-6069-4074-BF42-A138D1F99D89}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <AssemblyName>Docky-2</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <ReleaseVersion>2.0</ReleaseVersion>
   </PropertyGroup>
@@ -19,6 +18,7 @@
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AssemblyName>Docky</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -26,6 +26,7 @@
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AssemblyName>Docky-2</AssemblyName>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -61,6 +62,7 @@
     <Compile Include="Docky\Items\SpacingItem.cs" />
     <Compile Include="Gtk\Widget_Extensions.cs" />
     <Compile Include="Docky\Interface\HoveredItemChangedArgs.cs" />
+    <Compile Include="Docky\PluginManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Addins, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
@@ -135,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\grayscale.svg">
       <LogicalName>grayscale.svg</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Docky.addin.xml">
+      <LogicalName>Docky.addin.xml</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

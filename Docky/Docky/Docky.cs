@@ -43,7 +43,6 @@ namespace Docky
 			}
 		}
 		
-		
 		public static void Main (string[] args)
 		{
 			CommandLinePreferences = new UserArgs (args);
@@ -56,6 +55,7 @@ namespace Docky
 			Windowing.ScreenUtils.Initialize ();
 			Wnck.Global.ClientType = Wnck.ClientType.Pager;
 			
+			PluginManager.Initialize ();
 			Controller.Initialize ();
 			
 			ConfigurationWindow config = new ConfigurationWindow ();
