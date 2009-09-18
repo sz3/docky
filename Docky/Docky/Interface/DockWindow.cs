@@ -1411,7 +1411,7 @@ namespace Docky.Interface
 				}
 					
 					
-				Gdk.Pixbuf background = new Gdk.Pixbuf (Assembly.GetExecutingAssembly (), "grayscale.svg");
+				Gdk.Pixbuf background = new Gdk.Pixbuf (Assembly.GetExecutingAssembly (), "classic.svg");
 				Gdk.Pixbuf tmp;
 				
 				switch (Position) {
