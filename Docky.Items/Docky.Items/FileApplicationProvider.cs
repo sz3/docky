@@ -104,7 +104,9 @@ namespace Docky.Items
 		void UpdateTransientItems ()
 		{
 			if (!IsWindowManager) {
-				transient_items.Clear ();
+				if (transient_items.Any ())
+					transient_items.Clear ();
+				OnItemsChanged (null, AddRemoveChangeType.Remove);
 				return;
 			}
 			// we will need a list of these bad boys we can mess with
@@ -201,6 +203,7 @@ namespace Docky.Items
 		
 		void OnWindowManagerChanged ()
 		{
+			UpdateTransientItems ();
 			if (WindowManagerChanged != null)
 				WindowManagerChanged (this, EventArgs.Empty);
 		}

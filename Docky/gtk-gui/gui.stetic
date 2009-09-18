@@ -210,8 +210,9 @@ Bottom</property>
             <child>
               <widget class="Gtk.CheckButton" id="window_manager_check">
                 <property name="MemberName" />
+                <property name="Tooltip" translatable="yes">When set, windows which do not already have launchers on a dock will be added to this dock.</property>
                 <property name="CanFocus">True</property>
-                <property name="Label" translatable="yes">Manage Windows</property>
+                <property name="Label" translatable="yes">Manage Windows Without Launcher</property>
                 <property name="DrawIndicator">True</property>
                 <property name="HasLabel">True</property>
                 <property name="UseUnderline">True</property>

@@ -413,10 +413,12 @@ namespace Docky.Interface
 		{
 			UpdateCollectionBuffer ();
 			
-			if (args.Type == AddRemoveChangeType.Add)
-				RegisterItem (args.Item);
-			else if (args.Type == AddRemoveChangeType.Remove)
-				UnregisterItem (args.Item);
+			if (args.Item != null) {
+				if (args.Type == AddRemoveChangeType.Add)
+					RegisterItem (args.Item);
+				else if (args.Type == AddRemoveChangeType.Remove)
+					UnregisterItem (args.Item);
+			}
 			
 			AnimatedDraw ();
 		}

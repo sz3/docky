@@ -186,9 +186,10 @@ namespace Docky.Interface {
             w8.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table1.Gtk.Table+TableChild
             this.window_manager_check = new Gtk.CheckButton();
+            this.window_manager_check.TooltipMarkup = "When set, windows which do not already have launchers on a dock will be added to this dock.";
             this.window_manager_check.CanFocus = true;
             this.window_manager_check.Name = "window_manager_check";
-            this.window_manager_check.Label = Mono.Unix.Catalog.GetString("Manage Windows");
+            this.window_manager_check.Label = Mono.Unix.Catalog.GetString("Manage Windows Without Launcher");
             this.window_manager_check.DrawIndicator = true;
             this.window_manager_check.UseUnderline = true;
             this.window_manager_check.Xalign = 0F;

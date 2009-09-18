@@ -336,7 +336,7 @@ namespace Docky.Interface
 			Launchers = DefaultProvider.Uris;
 			
 			// remove item from sort list
-			if (e.Type == AddRemoveChangeType.Remove) {
+			if (e.Type == AddRemoveChangeType.Remove && e.Item != null) {
 				SortList = SortList.Where (s => s != e.Item.UniqueID ());
 			}
 			
