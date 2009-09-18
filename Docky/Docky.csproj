@@ -63,6 +63,7 @@
     <Compile Include="Gtk\Widget_Extensions.cs" />
     <Compile Include="Docky\Interface\HoveredItemChangedArgs.cs" />
     <Compile Include="Docky\PluginManager.cs" />
+    <Compile Include="Docky\Items\DockyItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Addins, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
@@ -140,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Docky.addin.xml">
       <LogicalName>Docky.addin.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\logo.svg">
+      <LogicalName>logo.svg</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

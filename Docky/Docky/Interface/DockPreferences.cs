@@ -46,15 +46,7 @@ namespace Docky.Interface
 		} 
 		
 		IPreferences prefs;
-		
 		string name;
-		int icon_size;
-		bool zoom_enabled;
-		double zoom_percent;
-		bool window_manager;
-		DockPosition position;
-		AutohideType hide_type;
-		
 		List<IDockItemProvider> item_providers;
 		
 		public event EventHandler PositionChanged;
@@ -77,6 +69,7 @@ namespace Docky.Interface
 			get { return item_providers.AsEnumerable (); }
 		}
 		
+		AutohideType hide_type;
 		public AutohideType Autohide {
 			get { return hide_type; }
 			set {
@@ -88,6 +81,7 @@ namespace Docky.Interface
 			}
 		}
 		
+		DockPosition position;
 		public DockPosition Position {
 			get { return position; }
 			set {
@@ -99,45 +93,66 @@ namespace Docky.Interface
 			}
 		}
 		
+		int? icon_size;
 		public int IconSize {
-			get { return icon_size; }
+			get {
+				if (!icon_size.HasValue) {
+					icon_size = GetOption ("IconSize", 64);
+				}
+				return icon_size.Value; 
+			}
 			set {
 				value = Clamp (value, 128, 24);
 				if (icon_size == value)
 					return;
 				icon_size = value;
-				SetOption ("IconSize", icon_size);
+				SetOption ("IconSize", icon_size.Value);
 				OnIconSizeChanged ();
 			}
 		}
 		
+		bool? zoom_enabled;
 		public bool ZoomEnabled {
-			get { return zoom_enabled; }
+			get {
+				if (!zoom_enabled.HasValue)
+					zoom_enabled = GetOption ("ZoomEnabled", true);
+				return zoom_enabled.Value; 
+			}
 			set {
 				if (zoom_enabled == value)
 					return;
 				zoom_enabled = value;
-				SetOption ("ZoomEnabled", zoom_enabled);
+				SetOption ("ZoomEnabled", zoom_enabled.Value);
 				OnZoomEnabledChanged ();
 			}
 		}
 				
+		double? zoom_percent;
 		public double ZoomPercent {
-			get { return zoom_percent; }
+			get {
+				if (!zoom_percent.HasValue)
+					zoom_percent = GetOption ("ZoomPercent", 2.0);
+				return zoom_percent.Value; 
+			}
 			set {
 				value = Clamp (value, 4, 1);
 				if (zoom_percent == value)
 					return;
 				
 				zoom_percent = value;
-				SetOption<double> ("ZoomPercent", zoom_percent);
+				SetOption<double> ("ZoomPercent", zoom_percent.Value);
 				OnZoomPercentChanged ();
 			}
 		}
 		#endregion
 		
+		bool? window_manager;
 		public bool WindowManager {
-			get { return window_manager; }
+			get {
+				if (!window_manager.HasValue)
+					window_manager = GetOption ("WindowManager", false);
+				return window_manager.Value; 
+			}
 			set {
 				window_manager = value;
 				SetOption ("WindowManager", window_manager);
@@ -249,7 +264,6 @@ namespace Docky.Interface
 		
 		void BuildOptions ()
 		{
-			// fixme -- this should not be needed
 			Autohide = (AutohideType) Enum.Parse (typeof(AutohideType), 
 			                                      GetOption ("Autohide", AutohideType.None.ToString ()));
 			
@@ -262,11 +276,6 @@ namespace Docky.Interface
 			}
 			Position = position;
 			
-			IconSize = GetOption ("IconSize", 64);
-			ZoomEnabled = GetOption ("ZoomEnabled", true);
-			ZoomPercent = GetOption ("ZoomPercent", 2.0);
-			WindowManager = GetOption ("WindowManager", false);
-			// end fixme
 			
 			if (WindowManager)
 				DefaultProvider.SetWindowManager ();

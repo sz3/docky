@@ -33,7 +33,7 @@ namespace Docky.Items
 
 	public class SeparatorItem : AbstractDockItem
 	{
-		public override bool RotateWidthDock {
+		public override bool RotateWithDock {
 			get { return true; }
 		}
 		

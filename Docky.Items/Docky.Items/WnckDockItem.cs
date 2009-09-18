@@ -52,7 +52,7 @@ namespace Docky.Items
 			}
 		}
 		
-		protected IEnumerable<Wnck.Window> ManagedWindows {
+		public IEnumerable<Wnck.Window> ManagedWindows {
 			get {
 				return Windows.Where (w => !w.IsSkipTasklist);
 			}

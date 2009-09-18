@@ -79,7 +79,7 @@ namespace Docky.Items
 			get; private set;
 		}
 		
-		public virtual bool RotateWidthDock {
+		public virtual bool RotateWithDock {
 			get { return false; }
 		}
 		

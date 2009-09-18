@@ -141,7 +141,7 @@ namespace Docky.Items
 				return;
 			
 			WnckDockItem item = sender as WnckDockItem;
-			if (!item.Windows.Any ()) {
+			if (!item.ManagedWindows.Any ()) {
 				transient_items.Remove (item);
 				OnItemsChanged (item, AddRemoveChangeType.Remove);
 				item.Dispose ();

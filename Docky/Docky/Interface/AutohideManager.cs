@@ -39,6 +39,7 @@ namespace Docky.Interface
 		Wnck.Screen screen;
 		CursorTracker tracker;
 		int pid;
+		uint timer;
 		
 		bool WindowIntersectingOther { get; set; }
 		
@@ -123,8 +124,14 @@ namespace Docky.Interface
 			if (args.PreviousWindow != null)
 				args.PreviousWindow.GeometryChanged -= HandleGeometryChanged;
 			
-			SetupActiveWindow ();
-			UpdateWindowIntersect ();
+			if (timer > 0)
+				GLib.Source.Remove (timer);
+			
+			timer = GLib.Timeout.Add (100, delegate {
+				SetupActiveWindow ();
+				UpdateWindowIntersect ();
+				return false;
+			});
 		}
 		
 		void HandleWindowOpened (object sender, WindowOpenedArgs args)

@@ -151,6 +151,9 @@ namespace Docky.Interface
 		public ReadOnlyCollection<AbstractDockItem> Items {
 			get {
 				if (collection_backend.Count == 0) {
+					if (Preferences.DefaultProvider.IsWindowManager)
+						collection_backend.Add (new DockyItem ());
+					
 					AbstractDockItem last = null;
 					foreach (IDockItemProvider provider in ItemProviders) {
 						if (provider.Separated && last != null)
@@ -809,11 +812,12 @@ namespace Docky.Interface
 		#region Misc.
 		void UpdateCollectionBuffer ()
 		{
-			if (rendering) { // resetting a durring a render is bad. Complete the render then reset.
+			if (rendering) {
+				// resetting a durring a render is bad. Complete the render then reset.
 				GLib.Idle.Add (delegate {
 					// dispose of our separators as we made them ourselves,
 					// this could be a bit more elegant
-					foreach (AbstractDockItem item in Items.Where (adi => adi is SeparatorItem || adi is SpacingItem))
+					foreach (AbstractDockItem item in Items.Where (adi => adi is SeparatorItem || adi is SpacingItem || adi is DockyItem))
 						item.Dispose ();
 					
 					collection_backend.Clear ();
@@ -821,7 +825,7 @@ namespace Docky.Interface
 					return false;
 				});
 			} else {
-				foreach (AbstractDockItem item in Items.Where (adi => adi is SeparatorItem || adi is SpacingItem))
+				foreach (AbstractDockItem item in Items.Where (adi => adi is SeparatorItem || adi is SpacingItem || adi is DockyItem))
 					item.Dispose ();
 				
 				collection_backend.Clear ();
@@ -1037,7 +1041,7 @@ namespace Docky.Interface
 					DockySurface icon = adi.IconSurface (surface, IconSize);
 					
 					// yeah I am pretty sure...
-					if (adi.Square || adi.RotateWidthDock || !VerticalDock) {
+					if (adi.Square || adi.RotateWithDock || !VerticalDock) {
 						halfSize = icon.Width / 2.0;
 					} else {
 						halfSize = icon.Height / 2.0;
@@ -1630,7 +1634,7 @@ namespace Docky.Interface
 				GLib.Source.Remove (animation_timer);
 			
 			// clear out our separators
-			foreach (AbstractDockItem adi in Items.Where (adi => adi is SeparatorItem))
+			foreach (AbstractDockItem adi in Items.Where (adi => adi is SeparatorItem || adi is SpacingItem || adi is DockyItem))
 				adi.Dispose ();
 			
 			ResetBuffers ();

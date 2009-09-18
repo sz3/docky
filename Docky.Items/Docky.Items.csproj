@@ -84,4 +84,7 @@
       <LogicalName>Docky.Items.addin.xml</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu.svg" />
+  </ItemGroup>
 </Project>
