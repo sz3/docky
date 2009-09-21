@@ -100,33 +100,31 @@ namespace Docky.Windowing
 		Dictionary<Wnck.Window, string> window_to_desktop_file;
 		Dictionary<string, string> desktop_file_exec_strings;
 		List<Regex> prefix_filters;
-		List<Wnck.Window> windows;
+		Wnck.Screen screen;
 		
 		WindowMatcher ()
 		{
+			screen = Wnck.Screen.Default;
 			prefix_filters = BuildPrefixFilters ();
 			desktop_file_exec_strings = BuildExecStrings ();
-			windows = Wnck.Screen.Default.Windows.ToList ();
 			
 			window_to_desktop_file = new Dictionary<Wnck.Window, string> ();
-			foreach (Wnck.Window w in windows) {
+			foreach (Wnck.Window w in screen.Windows) {
 				SetupWindow (w);
 			}
 			
-			Wnck.Screen.Default.WindowOpened += WnckScreenDefaultWindowOpened;
-			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
+			screen.WindowOpened += WnckScreenDefaultWindowOpened;
+			screen.WindowClosed += WnckScreenDefaultWindowClosed;
 		}
 
 		#region Window Setup
 		void WnckScreenDefaultWindowOpened (object o, WindowOpenedArgs args)
 		{
-			windows = Wnck.Screen.Default.Windows.ToList ();
 			SetupWindow (args.Window);
 		}
 
 		void WnckScreenDefaultWindowClosed (object o, WindowClosedArgs args)
 		{
-			windows = Wnck.Screen.Default.Windows.ToList ();
 			if (args.Window != null)
 				window_to_desktop_file.Remove (args.Window);
 		}
@@ -143,6 +141,9 @@ namespace Docky.Windowing
 		
 		public IEnumerable<Wnck.Window> WindowsForDesktopFile (string desktop_file)
 		{
+			if (desktop_file == null)
+				throw new ArgumentNullException ("desktop file");
+			
 			foreach (KeyValuePair<Wnck.Window, string> kvp in window_to_desktop_file) {
 				if (kvp.Value == desktop_file)
 					yield return kvp.Key;
@@ -151,15 +152,24 @@ namespace Docky.Windowing
 		
 		public IEnumerable<Wnck.Window> SimilarWindows (Wnck.Window window)
 		{
+			if (window == null)
+				throw new ArgumentNullException ("window");
+			
 			if (!window_to_desktop_file.ContainsKey (window))
 				return new[] { window };
+			
 			string id = window_to_desktop_file[window];
 			
-			return window_to_desktop_file.Where (kvp => kvp.Value == id).Select (kvp => kvp.Key);
+			return window_to_desktop_file
+				.Where (kvp => kvp.Value == id)
+				.Select (kvp => kvp.Key);
 		}
 		
 		public string DesktopFileForWindow (Wnck.Window window)
 		{
+			if (window == null)
+				throw new ArgumentNullException ("window");
+			
 			string file = window_to_desktop_file[window];
 			return (file.EndsWith (".desktop")) ? file : null;
 		}
@@ -167,8 +177,12 @@ namespace Docky.Windowing
 		string FindDesktopFileForWindowOrDefault (Wnck.Window window)
 		{
 			int pid = window.Pid;
-			if (pid <= 1)
-				return window.Name;
+			if (pid <= 1) {
+				if (window.ClassGroup != null)
+					return window.ClassGroup.ResClass;
+				else
+					return window.Name;
+			}
 			
 			string[] command_line = CommandLineForPid (pid);
 			

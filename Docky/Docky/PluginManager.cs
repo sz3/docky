@@ -36,8 +36,6 @@ namespace Docky
 	{
 		const string DefaultPluginIcon = "folder_tar";
 		
-		static IEnumerable<string> ExtensionPaths = new [] { "/Docky/ItemProvider" };
-		
 		const string PluginsDirectory = "plugins";
 		const string ApplicationDirectory = "docky";
 		const string DefaultAddinsDirectory = "addins";

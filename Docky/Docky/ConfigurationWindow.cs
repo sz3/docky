@@ -36,7 +36,7 @@ namespace Docky
 
 		DockPlacementWidget placement;
 		
-		public ConfigurationWindow () : base (Gtk.WindowType.Toplevel)
+		public ConfigurationWindow () : base(Gtk.WindowType.Toplevel)
 		{
 			this.Build ();
 			
@@ -52,6 +52,7 @@ namespace Docky
 			}
 			
 			ShowAll ();
+			GdkWindow.IconName = "gtk-properties";
 		}
 
 		void PlacementActiveDockChanged (object sender, EventArgs e)

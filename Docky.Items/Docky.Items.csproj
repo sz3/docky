@@ -64,6 +64,7 @@
     <Compile Include="Docky.Items\FileDockItem.cs" />
     <Compile Include="Docky.Items\ActivityIndicator.cs" />
     <Compile Include="Docky.Items\ItemState.cs" />
+    <Compile Include="Docky.Items\WindowDockItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Docky.Services\Docky.Services.csproj">
@@ -83,8 +84,5 @@
     <EmbeddedResource Include="Resources\Docky.Items.addin.xml">
       <LogicalName>Docky.Items.addin.xml</LogicalName>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\menu.svg" />
   </ItemGroup>
 </Project>

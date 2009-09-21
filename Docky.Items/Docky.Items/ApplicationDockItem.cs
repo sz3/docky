@@ -98,16 +98,12 @@ namespace Docky.Items
 		
 		void UpdateWindows ()
 		{
-			try {
-				Windows = WindowMatcher.Default.WindowsForDesktopFile (path);
-			} catch {
-				Console.Error.WriteLine ("Could not get windows for " + path);
-			}
+			Windows = WindowMatcher.Default.WindowsForDesktopFile (path);
 		}
 
 		protected override ClickAnimation OnClicked (uint button, ModifierType mod, double xPercent, double yPercent)
 		{
-			if (!Windows.Any ()) {
+			if (!Windows.Any () && button == 1) {
 				desktop_item.Launch (null, 0);
 				return ClickAnimation.Bounce;
 			}

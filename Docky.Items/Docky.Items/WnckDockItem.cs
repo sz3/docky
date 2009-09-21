@@ -100,7 +100,7 @@ namespace Docky.Items
 		
 		protected override ClickAnimation OnClicked (uint button, ModifierType mod, double xPercent, double yPercent)
 		{
-			if (!ManagedWindows.Any ())
+			if (!ManagedWindows.Any () || button != 1)
 				return ClickAnimation.None;
 			
 			List<Wnck.Window> stack = new List<Wnck.Window> (Wnck.Screen.Default.WindowsStacked);

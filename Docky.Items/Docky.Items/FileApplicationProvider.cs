@@ -113,7 +113,7 @@ namespace Docky.Items
 			List<Wnck.Window> windows = UnmanagedWindows.ToList ();
 			
 			string desktopFile;
-			AbstractDockItem item;
+			WnckDockItem item;
 			foreach (Wnck.Window window in windows) {
 				if (transient_items.Where (adi => adi is WnckDockItem)
 					.Cast<WnckDockItem> ()
@@ -125,12 +125,14 @@ namespace Docky.Items
 				
 				if (desktopFile != null) {
 					item = ApplicationDockItem.NewFromUri (new Uri (desktopFile).AbsoluteUri);
-					transient_items.Add (item);
-					
-					(item as ApplicationDockItem).WindowsChanged += HandleTransientWindowsChanged;
-					
-					OnItemsChanged (item, AddRemoveChangeType.Add);
+				} else {
+					item = new WindowDockItem (window);
 				}
+				
+				transient_items.Add (item);
+				item.WindowsChanged += HandleTransientWindowsChanged;
+					
+				OnItemsChanged (item, AddRemoveChangeType.Add);
 			}
 			
 		}
@@ -164,7 +166,7 @@ namespace Docky.Items
 				} else {
 					item = FileDockItem.NewFromUri (uri);
 				}
-			} catch (Exception e) {
+			} catch {
 				item = null;
 			}
 			

@@ -25,6 +25,8 @@ using Cairo;
 using Gdk;
 using Gtk;
 
+using Docky.Windowing;
+
 namespace Docky
 {
 
@@ -52,7 +54,6 @@ namespace Docky
 			Gtk.Application.Init ("Docky", ref args);
 			Gnome.Vfs.Vfs.Initialize ();
 			
-			Windowing.ScreenUtils.Initialize ();
 			Wnck.Global.ClientType = Wnck.ClientType.Pager;
 			
 			PluginManager.Initialize ();

@@ -9,6 +9,7 @@
     <OutputType>Exe</OutputType>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <ReleaseVersion>2.0</ReleaseVersion>
+    <RootNamespace>Docky</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,6 +37,7 @@
     <Folder Include="Resources\" />
     <Folder Include="Docky\CairoHelper\" />
     <Folder Include="Gtk\" />
+    <Folder Include="Docky\Menus\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Docky\Docky.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="Docky\Interface\HoveredItemChangedArgs.cs" />
     <Compile Include="Docky\PluginManager.cs" />
     <Compile Include="Docky\Items\DockyItem.cs" />
+    <Compile Include="Docky\Menus\DockMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Addins, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
@@ -144,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\logo.svg">
       <LogicalName>logo.svg</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\menu.svg">
+      <LogicalName>menu.svg</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

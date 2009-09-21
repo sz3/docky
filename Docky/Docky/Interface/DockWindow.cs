@@ -30,6 +30,7 @@ using Wnck;
 
 using Docky.Items;
 using Docky.CairoHelper;
+using Docky.Menus;
 using Docky.Xlib;
 
 namespace Docky.Interface
@@ -126,6 +127,8 @@ namespace Docky.Interface
 		CursorTracker CursorTracker { get; set; }
 		
 		AnimationState AnimationState { get; set; }
+		
+		DockMenu Menu { get; set; }
 		
 		Dictionary<AbstractDockItem, DrawValue> DrawValues { get; set; }
 		
@@ -301,6 +304,8 @@ namespace Docky.Interface
 		public DockWindow () : base(Gtk.WindowType.Toplevel)
 		{
 			DrawValues = new Dictionary<AbstractDockItem, DrawValue> ();
+			Menu = new DockMenu (this);
+			
 			AnimationState = new AnimationState ();
 			BuildAnimationEngine ();
 			
@@ -543,6 +548,22 @@ namespace Docky.Interface
 		{
 			CursorTracker.SendManualUpdate (evnt);
 			return base.OnLeaveNotifyEvent (evnt);
+		}
+		
+		protected override bool OnButtonPressEvent (EventButton evnt)
+		{
+			if (drag_began)
+				return base.OnButtonPressEvent (evnt);
+			
+			if (HoveredItem != null && evnt.Button == 3) {
+				DrawValue val = DrawValues[HoveredItem];
+				val = val.MoveIn (Position, ZoomedIconSize / 2 + DockHeightBuffer * 2);
+				Menu.Anchor = new Gdk.Point ((int) val.StaticCenter.X + window_position.X, (int) val.StaticCenter.Y + window_position.Y);
+				Menu.Orientation = Position;
+				Menu.Show ();
+			}
+			
+			return base.OnButtonPressEvent (evnt);
 		}
 		
 		protected override bool OnButtonReleaseEvent (EventButton evnt)

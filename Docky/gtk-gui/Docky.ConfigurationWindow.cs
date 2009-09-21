@@ -76,7 +76,8 @@ namespace Docky {
             // Widget Docky.ConfigurationWindow
             this.Name = "Docky.ConfigurationWindow";
             this.Title = Mono.Unix.Catalog.GetString("Docky Configuration");
-            this.WindowPosition = ((Gtk.WindowPosition)(4));
+            this.TypeHint = ((Gdk.WindowTypeHint)(1));
+            this.WindowPosition = ((Gtk.WindowPosition)(1));
             // Container child Docky.ConfigurationWindow.Gtk.Container+ContainerChild
             this.vbox1 = new Gtk.VBox();
             this.vbox1.Name = "vbox1";
