@@ -23,6 +23,9 @@ FILES = \
 	Docky.Items/IconDockItem.cs \
 	Docky.Items/WnckDockItem.cs
 
+RESOURCES = \
+    Resources/Docky.Items.addin.xml
+
 PROJECT_REFERENCES= \
 	Docky.Services \
 	Docky.CairoHelper \
