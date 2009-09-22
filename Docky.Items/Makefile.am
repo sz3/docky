@@ -7,6 +7,9 @@ TARGET = library
 PKG_CONFIG_FILES = docky.items.pc
 
 FILES = \
+	Docky.Items/ItemState.cs \
+	Docky.Menus/MenuItem.cs \
+	Docky.Items/WindowDockItem.cs \
 	Docky.Items/AbstractDockItem.cs \
 	Docky.Items/ApplicationDockItem.cs \
 	Docky.Items/FileDockItem.cs \

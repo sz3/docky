@@ -28,7 +28,12 @@ FILES = \
 	Docky/DockPlacementWidget.cs \
 	Docky/Items/SpacingItem.cs \
 	Gtk/Widget_Extensions.cs \
-	Docky/Interface/HoveredItemChangedArgs.cs
+	Docky/Interface/HoveredItemChangedArgs.cs \
+    Docky/PluginManager.cs \
+    Docky/Items/DockyItem.cs \
+    Docky/Menus/DockMenu.cs \
+    Docky/Menus/MenuItemWidget.cs \
+    Docky/Menus/DockItemMenu.cs
 
 RESOURCES = \
 	gtk-gui/gui.stetic \

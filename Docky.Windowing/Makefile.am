@@ -10,8 +10,6 @@ FILES = \
     AssemblyInfo.cs \
     Wnck/Window_Extensions.cs \
     Windowing/ClickAction.cs \
-    Windowing/ScreenUtils.cs \
-    Windowing/Viewport.cs \
     Windowing/WindowControl.cs \
     Xlib/X11Atoms.cs \
     Xlib/Xlib.cs \
