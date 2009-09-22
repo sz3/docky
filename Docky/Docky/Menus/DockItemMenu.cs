@@ -23,33 +23,41 @@ using System.Text;
 
 using Cairo;
 using Gdk;
+using Gtk;
+using Wnck;
 
-using Docky.Menus;
+using Docky.CairoHelper;
+using Docky.Items;
+using Docky.Interface;
 
-namespace Docky.Items
+namespace Docky.Menus
 {
 
 
-	public class DockyItem : IconDockItem
+	public class DockItemMenu : DockMenu
 	{
 
-		public DockyItem ()
+		public DockItemMenu (Gtk.Window parent) : base (parent)
 		{
-			HoverText = "Docky";
-			Icon = "logo.svg@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName;
 		}
 		
-		public override string UniqueID ()
+		public void SetItems (IEnumerable<MenuItem> items)
 		{
-			return "DockyItem";
+			if (Container.Child != null) {
+				foreach (Gtk.Widget widget in (Container.Child as VBox).Children)
+					widget.Destroy ();
+				
+				Container.Remove (Container.Child);
+			}
+			
+			VBox vbox = new VBox ();
+			Container.Add (vbox);
+			
+			foreach (MenuItem item in items) {
+				vbox.PackStart (new MenuItemWidget (item), false, false, 0);
+			}
+			
+			Container.ShowAll ();
 		}
-		
-		public override IEnumerable<Menus.MenuItem> GetMenuItems ()
-		{
-			yield return new MenuItem ("Show Preferences", "gtk-properties", (o, a) => Docky.Config.Show ());
-			yield return new MenuItem ("About Docky", "gtk-about", (o, a) => Docky.ShowAbout ());
-			yield return new MenuItem ("Quit", "gtk-quit", (o, a) => Gtk.Application.Quit ());
-		}
-
 	}
 }

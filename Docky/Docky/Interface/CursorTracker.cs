@@ -125,6 +125,9 @@ namespace Docky.Interface
 		
 		void Update (Gdk.Screen screen, int x, int y, Gdk.ModifierType mod)
 		{
+			if (screen.Display.PointerIsGrabbed ())
+				return;
+			
 			Gdk.Point lastPostion = Cursor;
 			
 			Cursor = new Gdk.Point (x, y);

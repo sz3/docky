@@ -309,6 +309,11 @@ namespace Docky.Items
 		}
 		#endregion
 		
+		public virtual IEnumerable<Docky.Menus.MenuItem> GetMenuItems ()
+		{
+			return Enumerable.Empty<Docky.Menus.MenuItem> ();
+		}
+		
 		public virtual void SetScreenRegion (Gdk.Screen screen, Gdk.Rectangle region)
 		{
 			return;

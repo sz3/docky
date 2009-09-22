@@ -23,11 +23,11 @@ using System.Text;
 
 using Cairo;
 using Gdk;
-using Gtk;
 using Wnck;
 
 using Docky;
 using Docky.CairoHelper;
+using Docky.Menus;
 using Docky.Services;
 using Docky.Windowing;
 
@@ -122,13 +122,23 @@ namespace Docky.Items
 			
 			if (windows.Any (w => w.IsMinimized && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace))) {
 				WindowControl.RestoreWindows (windows);
-			} else if (windows.Any (w => w.IsActive && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace))) {
+			}
+			else if (windows.Any (w => w.IsActive && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace))) {
 				WindowControl.MinimizeWindows (windows);
 			} else {
 				WindowControl.FocusWindows (windows);
 			}
 			
 			return ClickAnimation.Darken;
+		}
+		
+		public override IEnumerable<MenuItem> GetMenuItems ()
+		{
+			if (ManagedWindows.Any ()) {
+				yield return new MenuItem ("Minimize", "gtk-close", (o, a) => WindowControl.MinimizeWindows (ManagedWindows));
+				yield return new MenuItem ("Close All", "gtk-close", (o, a) => WindowControl.CloseWindows (ManagedWindows));
+				
+			}
 		}
 	}
 }

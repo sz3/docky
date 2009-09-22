@@ -10,6 +10,7 @@
     <AssemblyName>Docky.Items</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <ReleaseVersion>2.0</ReleaseVersion>
+    <RootNamespace>Docky.Items</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,6 +50,7 @@
   <ItemGroup>
     <Folder Include="Docky.Items\" />
     <Folder Include="Resources\" />
+    <Folder Include="Docky.Menus\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Docky.Items\AbstractDockItem.cs" />
@@ -65,6 +67,7 @@
     <Compile Include="Docky.Items\ActivityIndicator.cs" />
     <Compile Include="Docky.Items\ItemState.cs" />
     <Compile Include="Docky.Items\WindowDockItem.cs" />
+    <Compile Include="Docky.Menus\MenuItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Docky.Services\Docky.Services.csproj">

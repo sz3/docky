@@ -23,9 +23,9 @@ using System.Text;
 
 using Cairo;
 using Gdk;
-using Gtk;
 using Wnck;
 
+using Docky.Menus;
 using Docky.Windowing;
 
 namespace Docky.Items

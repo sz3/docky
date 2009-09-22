@@ -21,35 +21,54 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
-using Cairo;
-using Gdk;
-
-using Docky.Menus;
-
-namespace Docky.Items
+namespace Docky.Menus
 {
 
-
-	public class DockyItem : IconDockItem
+	public class MenuItem
 	{
-
-		public DockyItem ()
-		{
-			HoverText = "Docky";
-			Icon = "logo.svg@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName;
+		public event EventHandler TextChanged;
+		public event EventHandler IconChanged;
+		public event EventHandler Clicked;
+		
+		string text;
+		public string Text {
+			get { return text; }
+			set {
+				if (text == value)
+					return;
+				text = value;
+				if (TextChanged != null)
+					TextChanged (this, EventArgs.Empty);
+			} 
 		}
 		
-		public override string UniqueID ()
-		{
-			return "DockyItem";
+		string icon;
+		public string Icon {
+			get { return icon; }
+			set {
+				if (icon == value)
+					return;
+				icon = value;
+				if (IconChanged != null)
+					IconChanged (this, EventArgs.Empty);
+			}
 		}
 		
-		public override IEnumerable<Menus.MenuItem> GetMenuItems ()
+		public void SendClick ()
 		{
-			yield return new MenuItem ("Show Preferences", "gtk-properties", (o, a) => Docky.Config.Show ());
-			yield return new MenuItem ("About Docky", "gtk-about", (o, a) => Docky.ShowAbout ());
-			yield return new MenuItem ("Quit", "gtk-quit", (o, a) => Gtk.Application.Quit ());
+			if (Clicked != null)
+				Clicked (this, EventArgs.Empty);
 		}
-
+		
+		public MenuItem (string text, string icon)
+		{
+			this.icon = icon;
+			this.text = text;
+		}
+		
+		public MenuItem (string text, string icon, EventHandler onClicked) : this(text, icon)
+		{
+			Clicked += onClicked;
+		}
 	}
 }

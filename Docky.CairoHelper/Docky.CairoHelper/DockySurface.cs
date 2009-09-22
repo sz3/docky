@@ -31,6 +31,7 @@ namespace Docky.CairoHelper
 
 	public class DockySurface : IDisposable
 	{
+		bool disposed;
 		Surface surface;
 		Context context;
 		
@@ -130,6 +131,9 @@ namespace Docky.CairoHelper
 		#region IDisposable implementation
 		public void Dispose ()
 		{
+			if (disposed)
+				return;
+			disposed = true;
 			if (context != null)
 				(context as IDisposable).Dispose ();
 			if (surface != null)
@@ -137,5 +141,11 @@ namespace Docky.CairoHelper
 		}
 		#endregion
 
+		~DockySurface ()
+		{
+			// just to be safe
+			if (!disposed)
+				Dispose ();
+		}
 	}
 }

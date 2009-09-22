@@ -128,7 +128,7 @@ namespace Docky.Interface
 		
 		AnimationState AnimationState { get; set; }
 		
-		DockMenu Menu { get; set; }
+		DockItemMenu Menu { get; set; }
 		
 		Dictionary<AbstractDockItem, DrawValue> DrawValues { get; set; }
 		
@@ -296,6 +296,7 @@ namespace Docky.Interface
 		
 		int ZoomSize {
 			get { 
+				// 330 chosen for its pleasant (to me) look
 				return (int) (330 * (IconSize / 64.0)); 
 			}
 		}
@@ -304,7 +305,9 @@ namespace Docky.Interface
 		public DockWindow () : base(Gtk.WindowType.Toplevel)
 		{
 			DrawValues = new Dictionary<AbstractDockItem, DrawValue> ();
-			Menu = new DockMenu (this);
+			Menu = new DockItemMenu (this);
+			Menu.Shown += (o, a) => AnimatedDraw ();
+			Menu.Hidden += (o, a) => AnimatedDraw ();
 			
 			AnimationState = new AnimationState ();
 			BuildAnimationEngine ();
@@ -556,11 +559,15 @@ namespace Docky.Interface
 				return base.OnButtonPressEvent (evnt);
 			
 			if (HoveredItem != null && evnt.Button == 3) {
-				DrawValue val = DrawValues[HoveredItem];
-				val = val.MoveIn (Position, ZoomedIconSize / 2 + DockHeightBuffer * 2);
-				Menu.Anchor = new Gdk.Point ((int) val.StaticCenter.X + window_position.X, (int) val.StaticCenter.Y + window_position.Y);
-				Menu.Orientation = Position;
-				Menu.Show ();
+				IEnumerable<Menus.MenuItem> items = HoveredItem.GetMenuItems ();
+				if (items.Any ()) {
+					DrawValue val = DrawValues[HoveredItem];
+					val = val.MoveIn (Position, ZoomedIconSize / 2.15);
+					Menu.Anchor = new Gdk.Point ((int) val.Center.X + window_position.X, (int) val.Center.Y + window_position.Y);
+					Menu.Orientation = Position;
+					Menu.SetItems (HoveredItem.GetMenuItems ());
+					Menu.Show ();
+				}
 			}
 			
 			return base.OnButtonPressEvent (evnt);
@@ -1340,7 +1347,8 @@ namespace Docky.Interface
 			
 			icon.ShowAtPointAndZoom (surface, center.Center, center.Zoom / zoomOffset);
 			
-			if (HoveredItem == item && !drag_began) {
+			// fixme menu.visible check likely slow. buffer
+			if (HoveredItem == item && !drag_began && !Menu.Visible) {
 				DrawValue loc = val.MoveIn (Position, IconSize * (ZoomPercent + .1) - IconSize / 2);
 				
 				DockySurface text = item.HoverTextSurface (surface, Style);

@@ -21,6 +21,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
+using Mono.Unix;
+
 using Cairo;
 using Gdk;
 using Gtk;
@@ -45,6 +47,15 @@ namespace Docky
 			}
 		}
 		
+		static ConfigurationWindow config;
+		internal static ConfigurationWindow Config {
+			get {
+				if (config == null)
+					config = new ConfigurationWindow ();
+				return config;
+			}
+		}
+		
 		public static void Main (string[] args)
 		{
 			CommandLinePreferences = new UserArgs (args);
@@ -63,14 +74,29 @@ namespace Docky
 				Console.WriteLine (provider.Separated);
 			}
 			
-			ConfigurationWindow config = new ConfigurationWindow ();
-			config.Show ();
-			
 			Gdk.Threads.Enter ();
 			Gtk.Application.Run ();
 			Gdk.Threads.Leave ();
 			
 			Gnome.Vfs.Vfs.Shutdown ();
+		}
+		
+		public static void ShowAbout ()
+		{
+			Gtk.AboutDialog about = new Gtk.AboutDialog ();
+			about.Artists = new[] { "Daniel Foré" };
+			about.ProgramName = "Docky";
+			about.Version = "2.0 Alpha 1";
+			about.Logo = Services.DockServices.Drawing.LoadIcon ("logo.svg@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName, 128);
+			about.Copyright = "Copyright \xa9 2009 Docky Developers";
+			about.Comments = "Docky. Simply Powerful.";
+			about.Authors = new[] {
+				"Jason Smith",
+				"Robert Dyer"
+			};
+			
+			about.Run ();
+			about.Destroy ();
 		}
 	}
 }

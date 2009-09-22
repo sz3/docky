@@ -34,7 +34,9 @@ namespace Docky.Menus
 {
 	public class DockMenu : Gtk.Window
 	{
+		const int Padding   = 10;
 		const int TailSize  = 20;
+		const int TailWidth = 30;
 		const int SliceSize = 20;
 		const int SvgWidth  = 100;
 		const int SvgHeight = 120;
@@ -70,7 +72,7 @@ namespace Docky.Menus
 			int middleWidth = SvgWidth - 2 * SliceSize;
 			int middleHeight = SvgHeight - 2 * SliceSize - TailSize;
 			int tailSliceSize = TailSize + SliceSize;
-			int tailSideSize = (middleWidth - TailSize) / 2;
+			int tailSideSize = (middleWidth - TailWidth) / 2;
 			
 			DockySurface[] results = new DockySurface[11];
 			results[(int) Slice.TopLeft] = CreateSlice (main, new Gdk.Rectangle (
@@ -124,7 +126,7 @@ namespace Docky.Menus
 			results[(int) Slice.Tail] = CreateSlice (main, new Gdk.Rectangle (
 					SliceSize + tailSideSize,
 					SvgHeight - tailSliceSize,
-					TailSize,
+					TailWidth,
 					tailSliceSize));
 				
 			results[(int) Slice.TailRight] = CreateSlice (main, new Gdk.Rectangle (
@@ -158,14 +160,19 @@ namespace Docky.Menus
 		DockySurface background_buffer;
 		Gdk.Rectangle allocation;
 		DockPosition orientation;
+		DateTime show_time;
+		
+		protected Gtk.Bin Container { get; private set; }
 		
 		public Gdk.Point Anchor { get; set; }
 		
 		public DockPosition Orientation {
 			get { return orientation; }
 			set {
+				if (orientation == value)
+					return;
 				orientation = value;
-				SetSize ();
+				SetPadding ();
 				ResetBackgroundBuffer ();
 			} 
 		}
@@ -186,16 +193,20 @@ namespace Docky.Menus
 			
 			this.SetCompositeColormap ();
 			
-			SetSize ();
+			Container = new Gtk.Alignment (0.5f, 0.5f, 0, 0);
+			Container.Show ();
+			
+			Add (Container);
+			
+			SetPadding ();
 		}
 		
-		void SetSize ()
+		void SetPadding ()
 		{
-			if (Orientation == DockPosition.Bottom || Orientation == DockPosition.Top) {
-				SetSizeRequest (100, 100 + TailSize);
-			} else {
-				SetSizeRequest (100 + TailSize, 100);
-			}
+			(Container as Alignment).LeftPadding   = Orientation == DockPosition.Left   ? (uint) (TailSize + Padding) : (uint) Padding;
+			(Container as Alignment).RightPadding  = Orientation == DockPosition.Right  ? (uint) (TailSize + Padding) : (uint) Padding;
+			(Container as Alignment).TopPadding    = Orientation == DockPosition.Top    ? (uint) (TailSize + Padding) : (uint) Padding;
+			(Container as Alignment).BottomPadding = Orientation == DockPosition.Bottom ? (uint) (TailSize + Padding) : (uint) Padding;
 		}
 		
 		void Reposition ()
@@ -226,7 +237,27 @@ namespace Docky.Menus
 		
 		protected override void OnShown ()
 		{
+			show_time = DateTime.UtcNow;
 			Reposition ();
+			
+			GLib.Timeout.Add (10, delegate {
+				Gdk.GrabStatus status = Gdk.Pointer.Grab (
+					GdkWindow, 
+					true, 
+					Gdk.EventMask.ButtonPressMask | 
+					Gdk.EventMask.ButtonReleaseMask, 
+					null, 
+					null, 
+					Gtk.Global.CurrentEventTime);
+				
+				if (status == GrabStatus.AlreadyGrabbed || status == GrabStatus.Success) {
+					Gtk.Grab.Add (this);
+					return false;
+				}
+				return true;
+				
+			});
+			
 			base.OnShown ();
 		}
 		
@@ -245,7 +276,7 @@ namespace Docky.Menus
 			int middleWidth = surface.Width - 2 * SliceSize;
 			int middleHeight = surface.Height - 2 * SliceSize - TailSize;
 			int tailSliceSize = TailSize + SliceSize;
-			int tailSideSize = (middleWidth - TailSize) / 2;
+			int tailSideSize = (middleWidth - TailWidth) / 2;
 			
 			DrawSlice (surface, slices[(int) Slice.TopLeft], new Gdk.Rectangle (
 					0, 
@@ -298,7 +329,7 @@ namespace Docky.Menus
 			DrawSlice (surface, slices[(int) Slice.Tail], new Gdk.Rectangle (
 					SliceSize + tailSideSize,
 					surface.Height - tailSliceSize,
-					TailSize,
+					TailWidth,
 					tailSliceSize));
 				
 			DrawSlice (surface, slices[(int) Slice.TailRight], new Gdk.Rectangle (
@@ -377,12 +408,13 @@ namespace Docky.Menus
 				background_buffer.Internal.Show (cr, 0, 0);
 			}
 			
-			return true;
+			return base.OnExposeEvent (evnt);
 		}
 		
 		protected override bool OnButtonReleaseEvent (EventButton evnt)
 		{
-			Hide ();
+			if ((DateTime.UtcNow - show_time).TotalMilliseconds > 500)
+				Hide ();
 			return base.OnButtonReleaseEvent (evnt);
 		}
 	}
