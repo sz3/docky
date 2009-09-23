@@ -52,6 +52,8 @@ namespace Docky.Interface
 		public event EventHandler PositionChanged;
 		public event EventHandler IconSizeChanged;
 		public event EventHandler AutohideChanged;
+		public event EventHandler FadeOnHideChanged;
+		public event EventHandler FadeOpacityChanged;
 		public event EventHandler ZoomEnabledChanged;
 		public event EventHandler ZoomPercentChanged;
 		
@@ -78,6 +80,38 @@ namespace Docky.Interface
 				hide_type = value;
 				SetOption ("Autohide", hide_type.ToString ());
 				OnAutohideChanged ();
+			}
+		}
+		
+		bool? fade_on_hide;
+		public bool FadeOnHide {
+			get {
+				if (!fade_on_hide.HasValue)
+					fade_on_hide = GetOption ("FadeOnHide", false);
+				return fade_on_hide.Value; 
+			}
+			set {
+				if (fade_on_hide == value)
+					return;
+				fade_on_hide = value;
+				SetOption ("FadeOnHide", fade_on_hide.Value);
+				OnFadeOnHideChanged ();
+			}
+		}
+		
+		double? fade_opacity;
+		public double FadeOpacity {
+			get {
+				if (!fade_opacity.HasValue)
+					fade_opacity = GetOption ("FadeOpacity", 0.4);
+				return fade_opacity.Value; 
+			}
+			set {
+				if (fade_opacity == value)
+					return;
+				fade_opacity = value;
+				SetOption ("FadeOpacity", fade_opacity.Value);
+				OnFadeOpacityChanged ();
 			}
 		}
 		
@@ -199,6 +233,7 @@ namespace Docky.Interface
 			zoom_checkbutton.Toggled += ZoomCheckbuttonToggled;
 			autohide_box.Changed += AutohideBoxChanged;
 			position_box.Changed += PositionBoxChanged;
+			fade_on_hide_check.Toggled += FadeOnHideToggled;
 			
 			ShowAll ();
 		}
@@ -219,6 +254,11 @@ namespace Docky.Interface
 				autohide_box.Active = (int) Autohide;
 
 			fade_on_hide_check.Sensitive = (int) Autohide > 0;
+		}
+
+		void FadeOnHideToggled (object sender, EventArgs e)
+		{
+			FadeOnHide = fade_on_hide_check.Active;
 		}
 
 		void ZoomCheckbuttonToggled (object sender, EventArgs e)
@@ -288,6 +328,7 @@ namespace Docky.Interface
 			zoom_scale.Value = ZoomPercent;
 			zoom_scale.Sensitive = ZoomEnabled;
 			icon_scale.Value = IconSize;
+			fade_on_hide_check.Active = FadeOnHide;
 			
 			
 			window_manager_check.Active = DefaultProvider.IsWindowManager;
@@ -379,6 +420,18 @@ namespace Docky.Interface
 		{
 			if (AutohideChanged != null)
 				AutohideChanged (this, EventArgs.Empty);
+		}
+		
+		void OnFadeOnHideChanged ()
+		{
+			if (FadeOnHideChanged != null)
+				FadeOnHideChanged (this, EventArgs.Empty);
+		}
+		
+		void OnFadeOpacityChanged ()
+		{
+			if (FadeOpacityChanged != null)
+				FadeOpacityChanged (this, EventArgs.Empty);
 		}
 		
 		void OnPositionChanged ()

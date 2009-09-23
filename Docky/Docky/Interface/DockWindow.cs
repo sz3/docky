@@ -267,9 +267,23 @@ namespace Docky.Interface
 		
 		double HideOffset {
 			get {
+				if (Preferences.FadeOnHide)
+					return 0;
 				double progress = Math.Min (1, (render_time - hidden_change_time).TotalMilliseconds / 
 				                            BaseAnimationTime.TotalMilliseconds);
 				if (AutohideManager.Hidden)
+					return progress;
+				return 1 - progress;
+			}
+		}
+		
+		double DockOpacity {
+			get {
+				if (!(Preferences.FadeOnHide && AutohideManager.Hidden))
+					return 1;
+				double progress = Preferences.FadeOpacity * Math.Min (1, (render_time - hidden_change_time).TotalMilliseconds / 
+				                            BaseAnimationTime.TotalMilliseconds);
+				if (!AutohideManager.Hidden)
 					return progress;
 				return 1 - progress;
 			}
@@ -1234,7 +1248,7 @@ namespace Docky.Interface
 			staticArea = StaticDockArea (surface);
 			
 			int hotAreaSize;
-			if (AutohideManager.Hidden) {
+			if (!Preferences.FadeOnHide && AutohideManager.Hidden) {
 				hotAreaSize = 1;
 			} else if (DockHovered) {
 				hotAreaSize = ZoomedDockHeight;
@@ -1305,6 +1319,8 @@ namespace Docky.Interface
 				DrawItem (surface, dockArea, adi);
 			}
 			
+			SetDockOpacity (surface);
+			
 			SetInputMask (cursorArea);
 
 			
@@ -1315,6 +1331,17 @@ namespace Docky.Interface
 			cursorArea.X += window_position.X;
 			cursorArea.Y += window_position.Y;
 			AutohideManager.SetCursorArea (cursorArea);
+		}
+		
+		void SetDockOpacity (DockySurface surface)
+		{
+			surface.Context.Save ();
+			
+			surface.Context.Color = new Cairo.Color (0, 0, 0, 0);
+			surface.Context.Operator = Operator.Source;
+			surface.Context.PaintWithAlpha (1 - DockOpacity);
+			
+			surface.Context.Restore ();
 		}
 		
 		void DrawItem (DockySurface surface, Gdk.Rectangle dockArea, AbstractDockItem item)

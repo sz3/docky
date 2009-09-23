@@ -35,6 +35,8 @@ namespace Docky.Interface
 		event EventHandler PositionChanged;
 		event EventHandler IconSizeChanged;
 		event EventHandler AutohideChanged;
+		event EventHandler FadeOnHideChanged;
+		event EventHandler FadeOpacityChanged;
 		event EventHandler ZoomEnabledChanged;
 		event EventHandler ZoomPercentChanged;
 		
@@ -45,6 +47,10 @@ namespace Docky.Interface
 		IEnumerable<IDockItemProvider> ItemProviders { get; }
 		
 		AutohideType Autohide { get; set; }
+		
+		bool FadeOnHide { get; set; }
+		
+		double FadeOpacity { get; set; }
 		
 		DockPosition Position { get; set; }
 		
