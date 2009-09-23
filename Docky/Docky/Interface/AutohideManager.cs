@@ -127,7 +127,7 @@ namespace Docky.Interface
 			if (timer > 0)
 				GLib.Source.Remove (timer);
 			
-			timer = GLib.Timeout.Add (100, delegate {
+			timer = GLib.Timeout.Add (200, delegate {
 				SetupActiveWindow ();
 				UpdateWindowIntersect ();
 				return false;
@@ -166,7 +166,10 @@ namespace Docky.Interface
 				return;
 			
 			last_known_geo = geo;
-			UpdateWindowIntersect ();
+			timer = GLib.Timeout.Add (200, delegate {
+				UpdateWindowIntersect ();
+				return false;
+			});
 		}
 		
 		void UpdateWindowIntersect ()

@@ -23,9 +23,9 @@ using System.Text;
 
 using Cairo;
 using Gdk;
-using Gtk;
 using Wnck;
 
+using Docky.Menus;
 using Docky.Services;
 using Docky.Windowing;
 
@@ -54,6 +54,12 @@ namespace Docky.Items
 		
 		Gnome.DesktopItem desktop_item;
 		string path;
+	
+		public override string ShortName {
+			get {
+				return HoverText; // fixme
+			}
+		}
 		
 		private ApplicationDockItem (Gnome.DesktopItem item)
 		{
@@ -100,14 +106,31 @@ namespace Docky.Items
 		{
 			Windows = WindowMatcher.Default.WindowsForDesktopFile (path);
 		}
+		
+		public override IEnumerable<MenuItem> GetMenuItems ()
+		{
+			if (ManagedWindows.Any ())
+				yield return new MenuItem ("Launch New Instance", RunIcon, (o, a) => Launch ());
+			else
+				yield return new MenuItem ("Launch", RunIcon, (o, a) => Launch ());
+			
+			foreach (MenuItem item in base.GetMenuItems ()) {
+				yield return item;
+			}
+		}
 
 		protected override ClickAnimation OnClicked (uint button, ModifierType mod, double xPercent, double yPercent)
 		{
-			if (!Windows.Any () && button == 1) {
-				desktop_item.Launch (null, 0);
+			if ((!ManagedWindows.Any () && button == 1) || button == 2) {
+				Launch ();
 				return ClickAnimation.Bounce;
 			}
 			return base.OnClicked (button, mod, xPercent, yPercent);
+		}
+		
+		void Launch ()
+		{
+			desktop_item.Launch (null, 0);
 		}
 	}
 }

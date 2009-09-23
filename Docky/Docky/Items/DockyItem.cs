@@ -47,8 +47,8 @@ namespace Docky.Items
 		public override IEnumerable<Menus.MenuItem> GetMenuItems ()
 		{
 			yield return new MenuItem ("Show Preferences", "gtk-properties", (o, a) => Docky.Config.Show ());
-			yield return new MenuItem ("About Docky", "gtk-about", (o, a) => Docky.ShowAbout ());
-			yield return new MenuItem ("Quit", "gtk-quit", (o, a) => Gtk.Application.Quit ());
+			yield return new MenuItem ("About", "gtk-about", (o, a) => Docky.ShowAbout ());
+			yield return new MenuItem ("Quit Docky", "gtk-quit", (o, a) => Gtk.Application.Quit ());
 		}
 
 	}

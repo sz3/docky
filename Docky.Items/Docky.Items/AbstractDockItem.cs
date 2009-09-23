@@ -91,7 +91,7 @@ namespace Docky.Items
 			get { return true; }
 		}
 		
-		public string HoverText { 
+		public string HoverText {
 			get {
 				return hover_text;
 			}
@@ -102,6 +102,12 @@ namespace Docky.Items
 				hover_text = value;
 				text_buffer = ResetBuffer (text_buffer);
 				OnHoverTextChanged ();
+			}
+		}
+		
+		public virtual string ShortName {
+			get {
+				return HoverText;
 			}
 		}
 		

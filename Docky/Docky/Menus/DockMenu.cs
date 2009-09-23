@@ -37,7 +37,7 @@ namespace Docky.Menus
 		const int Padding   = 10;
 		const int TailSize  = 20;
 		const int TailWidth = 30;
-		const int SliceSize = 20;
+		const int SliceSize = 18;
 		const int SvgWidth  = 100;
 		const int SvgHeight = 120;
 		
@@ -239,6 +239,8 @@ namespace Docky.Menus
 		{
 			show_time = DateTime.UtcNow;
 			Reposition ();
+
+			CursorTracker.ForDisplay (Display).Enabled = false;
 			
 			GLib.Timeout.Add (10, delegate {
 				Gdk.GrabStatus status = Gdk.Pointer.Grab (
@@ -255,11 +257,18 @@ namespace Docky.Menus
 					return false;
 				}
 				return true;
-				
+			
 			});
 			
 			base.OnShown ();
 		}
+		
+		protected override void OnHidden ()
+		{
+			CursorTracker.ForDisplay (Display).Enabled = true;
+			base.OnHidden ();
+		}
+
 		
 		void ResetBackgroundBuffer ()
 		{
@@ -320,11 +329,13 @@ namespace Docky.Menus
 					SliceSize, 
 					tailSliceSize));
 			
-			DrawSlice (surface, slices[(int) Slice.TailLeft], new Gdk.Rectangle (
-					SliceSize, 
-					surface.Height - tailSliceSize, 
-					tailSideSize, 
-					tailSliceSize));
+			if (tailSideSize > 0) {
+				DrawSlice (surface, slices[(int) Slice.TailLeft], new Gdk.Rectangle (
+						SliceSize, 
+						surface.Height - tailSliceSize, 
+						tailSideSize, 
+						tailSliceSize));
+			}
 			
 			DrawSlice (surface, slices[(int) Slice.Tail], new Gdk.Rectangle (
 					SliceSize + tailSideSize,
@@ -332,11 +343,13 @@ namespace Docky.Menus
 					TailWidth,
 					tailSliceSize));
 				
-			DrawSlice (surface, slices[(int) Slice.TailRight], new Gdk.Rectangle (
-					SliceSize + middleWidth - tailSideSize,
-					surface.Height - tailSliceSize,
-					tailSideSize,
-					tailSliceSize));
+			if (tailSideSize > 0) {
+				DrawSlice (surface, slices[(int) Slice.TailRight], new Gdk.Rectangle (
+						SliceSize + middleWidth - tailSideSize,
+						surface.Height - tailSliceSize,
+						tailSideSize,
+						tailSliceSize));
+			}
 			
 			DrawSlice (surface, slices[(int) Slice.BottomRight], new Gdk.Rectangle (
 					SliceSize + middleWidth,
@@ -413,7 +426,7 @@ namespace Docky.Menus
 		
 		protected override bool OnButtonReleaseEvent (EventButton evnt)
 		{
-			if ((DateTime.UtcNow - show_time).TotalMilliseconds > 500)
+			if (evnt.Button != 3 || (DateTime.UtcNow - show_time).TotalMilliseconds > 500)
 				Hide ();
 			return base.OnButtonReleaseEvent (evnt);
 		}

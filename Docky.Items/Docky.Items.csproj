@@ -87,5 +87,17 @@
     <EmbeddedResource Include="Resources\Docky.Items.addin.xml">
       <LogicalName>Docky.Items.addin.xml</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\close.svg">
+      <LogicalName>close.svg</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\maximize.svg">
+      <LogicalName>maximize.svg</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\minimize.svg">
+      <LogicalName>minimize.svg</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\run.svg">
+      <LogicalName>run.svg</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

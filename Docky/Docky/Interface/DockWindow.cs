@@ -115,6 +115,7 @@ namespace Docky.Interface
 		
 		double? zoom_in_buffer;
 		bool rendering;
+		bool update_screen_regions;
 		
 		uint animation_timer;
 		
@@ -154,6 +155,7 @@ namespace Docky.Interface
 		public ReadOnlyCollection<AbstractDockItem> Items {
 			get {
 				if (collection_backend.Count == 0) {
+					update_screen_regions = true;
 					if (Preferences.DefaultProvider.IsWindowManager)
 						collection_backend.Add (new DockyItem ());
 					
@@ -307,7 +309,6 @@ namespace Docky.Interface
 			DrawValues = new Dictionary<AbstractDockItem, DrawValue> ();
 			Menu = new DockItemMenu (this);
 			Menu.Shown += (o, a) => AnimatedDraw ();
-			Menu.Hidden += (o, a) => AnimatedDraw ();
 			
 			AnimationState = new AnimationState ();
 			BuildAnimationEngine ();
@@ -1185,9 +1186,18 @@ namespace Docky.Interface
 					hoveredItemSet = true;
 				}
 				
+				if (update_screen_regions) {
+					Gdk.Rectangle region = PointZoomToRectangle (val.StaticCenter, 1, IconSize);
+					region.X += window_position.X;
+					region.Y += window_position.Y;
+					adi.SetScreenRegion (Screen, region);
+				}
+				
 				// move past midpoint to end of icon
 				center.X += (int) Math.Ceiling (halfSize) + ItemWidthBuffer;
 			}
+			
+			update_screen_regions = false;
 			
 			if (!hoveredItemSet)
 				HoveredItem = null;

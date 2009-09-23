@@ -68,7 +68,7 @@
     <Compile Include="Docky\Items\DockyItem.cs" />
     <Compile Include="Docky\Menus\DockMenu.cs" />
     <Compile Include="Docky\Menus\MenuItemWidget.cs" />
-    <Compile Include="Docky\Menus\DockyItemMenu.cs" />
+    <Compile Include="Docky\Menus\DockItemMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Addins, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
@@ -97,6 +97,7 @@
     </Reference>
     <Reference Include="rsvg2-sharp, Version=2.18.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
+      <Package>rsvg2-sharp-2.0</Package>
     </Reference>
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
@@ -107,6 +108,7 @@
     </Reference>
     <Reference Include="wnck-sharp, Version=2.20.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
+      <Package>wnck-sharp-1.0</Package>
     </Reference>
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
@@ -114,6 +116,7 @@
     <Reference Include="Mono.Posix" />
     <Reference Include="gnome-vfs-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
+      <Package>gnome-vfs-sharp-2.0</Package>
     </Reference>
   </ItemGroup>
   <ItemGroup>

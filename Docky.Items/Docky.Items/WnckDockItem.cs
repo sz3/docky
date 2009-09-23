@@ -58,6 +58,30 @@ namespace Docky.Items
 			}
 		}
 		
+		protected string CloseIcon {
+			get {
+				return "close.svg@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName;
+			}
+		}
+		
+		protected string MaximizeIcon {
+			get {
+				return "maximize.svg@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName;
+			}
+		}
+		
+		protected string MinimizeIcon {
+			get {
+				return "minimize.svg@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName;
+			}
+		}
+		
+		protected string RunIcon {
+			get {
+				return "run.svg@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName;
+			}
+		}
+		
 		public WnckDockItem ()
 		{
 			Wnck.Screen.Default.ActiveWindowChanged += WnckScreenDefaultActiveWindowChanged;
@@ -135,8 +159,12 @@ namespace Docky.Items
 		public override IEnumerable<MenuItem> GetMenuItems ()
 		{
 			if (ManagedWindows.Any ()) {
-				yield return new MenuItem ("Minimize", "gtk-close", (o, a) => WindowControl.MinimizeWindows (ManagedWindows));
-				yield return new MenuItem ("Close All", "gtk-close", (o, a) => WindowControl.CloseWindows (ManagedWindows));
+				yield return new MenuItem ("Maximize", MaximizeIcon, (o, a) => WindowControl.MaximizeWindow (ManagedWindows.First ()));
+				if (ManagedWindows.Any (w => w.IsMinimized))
+					yield return new MenuItem ("Restore", MinimizeIcon, (o, a) => WindowControl.RestoreWindows (ManagedWindows));
+				else
+					yield return new MenuItem ("Minimize", MinimizeIcon, (o, a) => WindowControl.MinimizeWindows (ManagedWindows));
+				yield return new MenuItem ("Close", CloseIcon, (o, a) => WindowControl.CloseWindows (ManagedWindows));
 				
 			}
 		}

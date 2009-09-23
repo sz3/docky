@@ -57,8 +57,11 @@ namespace Docky.Interface
 		
 		public Gdk.Screen Screen { get; private set; }
 		
+		public bool Enabled { get; set; }
+		
 		CursorTracker (Gdk.Display display)
 		{
+			Enabled = true;
 			this.display = display;
 			resolution_senders = new List<object> ();
 			ResetTimer ();
@@ -87,14 +90,14 @@ namespace Docky.Interface
 		public void SendManualUpdate (Gdk.EventCrossing evnt)
 		{
 			// we get screwy inputs sometimes
-			if (evnt.XRoot == 0 || evnt.YRoot == 0)
+			if (Math.Abs (evnt.XRoot - Cursor.X) > 100 || Math.Abs (evnt.YRoot - Cursor.Y) > 100)
 				return;
 			Update (evnt.Window.Screen, (int) evnt.XRoot, (int) evnt.YRoot, evnt.State);
 		}
 		
 		public void SendManualUpdate (Gdk.EventMotion evnt)
 		{
-			if (evnt.XRoot == 0 || evnt.YRoot == 0)
+			if (Math.Abs (evnt.XRoot - Cursor.X) > 100 || Math.Abs (evnt.YRoot - Cursor.Y) > 100)
 				return;
 			Update (evnt.Window.Screen, (int) evnt.XRoot, (int) evnt.YRoot, evnt.State);
 		}
@@ -125,7 +128,7 @@ namespace Docky.Interface
 		
 		void Update (Gdk.Screen screen, int x, int y, Gdk.ModifierType mod)
 		{
-			if (screen.Display.PointerIsGrabbed ())
+			if (!Enabled)
 				return;
 			
 			Gdk.Point lastPostion = Cursor;
