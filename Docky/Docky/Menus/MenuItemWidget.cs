@@ -48,7 +48,7 @@ namespace Docky.Menus
 			VisibleWindow = false;
 			AboveChild = true;
 			
-			SetSizeRequest (180, 24);
+			SetSizeRequest (200, 24);
 		}
 
 		void ItemTextChanged (object sender, EventArgs e)
@@ -84,7 +84,7 @@ namespace Docky.Menus
 		protected override bool OnQueryTooltip (int x, int y, bool keyboard_tooltip, Tooltip tooltip)
 		{
 			tooltip.Text = item.Text;
-			return base.OnQueryTooltip (x, y, keyboard_tooltip, tooltip);
+			return true;
 		}
 		
 		protected override bool OnExposeEvent (EventExpose evnt)

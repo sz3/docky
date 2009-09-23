@@ -94,6 +94,8 @@ namespace Docky.Windowing
 				yield return "aoss";
 				yield return "python(\\d.\\d)?";
 				yield return "(ba)?sh";
+				yield return "-.*";
+				yield return "*.\\.desktop";
 			}
 		}
 		
@@ -188,13 +190,28 @@ namespace Docky.Windowing
 			
 			// if we have a classname that matches a desktopid we have a winner
 			if (window.ClassGroup != null) {
-				string class_name = window.ClassGroup.ResClass;
-				
-				IEnumerable<string> matches = DesktopFiles
-					.Where (file => Path.GetFileNameWithoutExtension (file).Equals (class_name, StringComparison.CurrentCultureIgnoreCase));
-				
-				if (matches.Any ())
-					return matches.First ();
+				if (window.ClassGroup.Name.ToLower ().StartsWith ("openoffice")) {
+					string title = window.Name;
+					if (title.Contains ("Writer"))
+						command_line[0] = "ooffice-writer";
+					else if (title.Contains ("Draw"))
+						command_line[0] = "ooffice-draw";
+					else if (title.Contains ("Impress"))
+						command_line[0] = "ooffice-impress";
+					else if (title.Contains ("Calc"))
+						command_line[0] = "ooffice-calc";
+					else if (title.Contains ("Math"))
+						command_line[0] = "ooffice-math";
+					
+				} else {
+					string class_name = window.ClassGroup.ResClass;
+					
+					IEnumerable<string> matches = DesktopFiles
+						.Where (file => Path.GetFileNameWithoutExtension (file).Equals (class_name, StringComparison.CurrentCultureIgnoreCase));
+					
+					if (matches.Any ())
+						return matches.First ();
+				}
 			}
 			
 			if (desktop_file_exec_strings.ContainsKey (command_line[0])) {
@@ -216,9 +233,12 @@ namespace Docky.Windowing
 				}
 			} catch { return null; }
 			
+			cmdline = cmdline.ToLower ();
+			
 			string[] result = cmdline.Split (Convert.ToChar (0x0));
 			
 			return result
+				.Select (s => s.Split (new []{'/', '\\'}).Last ())
 				.Where (s => !prefix_filters.Any (f => f.IsMatch (s)))
 				.ToArray ();
 		}
@@ -233,18 +253,24 @@ namespace Docky.Windowing
 					continue;
 				
 				string exec = item.GetString ("Exec");
+				string vexec = null;
 				
-				string[] parts = exec.Split (' ');
+				if (exec.StartsWith ("ooffice")) {
+					vexec = "ooffice" + exec.Split (' ') [1];
+				} else {
+					string[] parts = exec.Split (' ');
+					
+					vexec = parts
+						.DefaultIfEmpty (null)
+						.Select (part => part.Split (new []{'/', '\\'}).Last ())
+						.Where (part => !prefix_filters.Any (f => f.IsMatch (part)))
+						.FirstOrDefault ();
+				}
 				
-				exec = parts
-					.DefaultIfEmpty (null)
-					.Where (part => !prefix_filters.Any (f => f.IsMatch (part)))
-					.FirstOrDefault ();
-				
-				if (exec == null)
+				if (vexec == null)
 					continue;
 				
-				result [exec] = file;
+				result [vexec] = file;
 				item.Dispose ();
 			}
 			
@@ -253,7 +279,7 @@ namespace Docky.Windowing
 		
 		List<Regex> BuildPrefixFilters ()
 		{
-			return new List<Regex> (PrefixStrings.Select (s => new Regex (s)));
+			return new List<Regex> (PrefixStrings.Select (s => new Regex ("^" + s + "$")));
 		}
 	}
 }

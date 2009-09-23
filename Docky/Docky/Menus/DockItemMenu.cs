@@ -54,7 +54,11 @@ namespace Docky.Menus
 			Container.Add (vbox);
 			
 			foreach (MenuItem item in items) {
-				vbox.PackStart (new MenuItemWidget (item), false, false, 0);
+				if (item is SeparatorMenuItem) {
+					vbox.PackStart (new SeparatorWidget ());
+				} else {
+					vbox.PackStart (new MenuItemWidget (item), false, false, 0);
+				}
 			}
 			
 			Container.ShowAll ();

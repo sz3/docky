@@ -166,6 +166,11 @@ namespace Docky.Items
 					yield return new MenuItem ("Minimize", MinimizeIcon, (o, a) => WindowControl.MinimizeWindows (ManagedWindows));
 				yield return new MenuItem ("Close", CloseIcon, (o, a) => WindowControl.CloseWindows (ManagedWindows));
 				
+				yield return new SeparatorMenuItem ();
+				
+				foreach (Wnck.Window window in ManagedWindows) {
+					yield return new WindowMenuItem (window, Icon);
+				}
 			}
 		}
 	}
