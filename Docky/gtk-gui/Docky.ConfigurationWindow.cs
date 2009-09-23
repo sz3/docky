@@ -76,6 +76,7 @@ namespace Docky {
             // Widget Docky.ConfigurationWindow
             this.Name = "Docky.ConfigurationWindow";
             this.Title = Mono.Unix.Catalog.GetString("Docky Configuration");
+            this.Icon = Stetic.IconLoader.LoadIcon(this, "gtk-preferences", Gtk.IconSize.Menu, 16);
             this.TypeHint = ((Gdk.WindowTypeHint)(1));
             this.WindowPosition = ((Gtk.WindowPosition)(1));
             // Container child Docky.ConfigurationWindow.Gtk.Container+ContainerChild

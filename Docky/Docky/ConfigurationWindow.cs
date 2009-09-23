@@ -52,7 +52,6 @@ namespace Docky
 			}
 			
 			ShowAll ();
-			GdkWindow.IconName = "gtk-properties";
 		}
 
 		void PlacementActiveDockChanged (object sender, EventArgs e)

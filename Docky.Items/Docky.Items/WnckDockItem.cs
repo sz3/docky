@@ -47,7 +47,10 @@ namespace Docky.Items
 		public IEnumerable<Wnck.Window> Windows {
 			get { return windows; }
 			protected set {
+				UnregisterWindows (windows);
 				windows = value;
+				RegisterWindows (windows);
+				
 				SetIndicator ();
 				SetState ();
 				
@@ -88,7 +91,27 @@ namespace Docky.Items
 		
 		public WnckDockItem ()
 		{
+			windows = Enumerable.Empty<Wnck.Window> ();
 			Wnck.Screen.Default.ActiveWindowChanged += WnckScreenDefaultActiveWindowChanged;
+		}
+		
+		void RegisterWindows (IEnumerable<Wnck.Window> windows)
+		{
+			foreach (Wnck.Window window in windows) {
+				window.StateChanged += WindowStateChanged;
+			}
+		}
+
+		void UnregisterWindows (IEnumerable<Wnck.Window> windows)
+		{
+			foreach (Wnck.Window window in windows) {
+				window.StateChanged -= WindowStateChanged;
+			}
+		}
+		
+		void WindowStateChanged (object o, StateChangedArgs args)
+		{
+			SetState ();
 		}
 
 		void WnckScreenDefaultActiveWindowChanged (object o, ActiveWindowChangedArgs args)
@@ -112,8 +135,11 @@ namespace Docky.Items
 		{
 			ItemState state = 0;
 			
-			if (Windows.Contains (Wnck.Screen.Default.ActiveWindow)) {
+			if (ManagedWindows.Contains (Wnck.Screen.Default.ActiveWindow)) {
 				state |= ItemState.Active;
+			}
+			if (ManagedWindows.Any (w => w.NeedsAttention ())) {
+				state |= ItemState.Urgent;
 			}
 			
 			State = state;
@@ -201,7 +227,7 @@ namespace Docky.Items
 					yield return new MenuItem ("Unmaximize", MaximizeIcon, (o, a) => WindowControl.UnmaximizeWindows (ManagedWindows));
 				else
 					yield return new MenuItem ("Maximize", MaximizeIcon, (o, a) => WindowControl.MaximizeWindows (ManagedWindows));
-					
+				
 				if (ManagedWindows.Any (w => w.IsMinimized))
 					yield return new MenuItem ("Restore", MinimizeIcon, (o, a) => WindowControl.RestoreWindows (ManagedWindows));
 				else
@@ -214,6 +240,14 @@ namespace Docky.Items
 					yield return new WindowMenuItem (window, Icon);
 				}
 			}
+		}
+		
+		public void Dispose ()
+		{
+			Wnck.Screen.Default.ActiveWindowChanged -= WnckScreenDefaultActiveWindowChanged;
+			UnregisterWindows (Windows);
+			
+			base.Dispose ();
 		}
 	}
 }

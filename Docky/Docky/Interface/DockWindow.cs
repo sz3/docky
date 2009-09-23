@@ -95,7 +95,7 @@ namespace Docky.Interface
 		const int BackgroundWidth     = 1000;
 		const int BackgroundHeight    = 150;
 		const int NormalIndicatorSize = 20;
-		const int UrgentIndicatorSize = 24;
+		const int UrgentIndicatorSize = 26;
 		
 		readonly TimeSpan BaseAnimationTime = new TimeSpan (0, 0, 0, 0, 150);
 		readonly TimeSpan BounceTime = new TimeSpan (0, 0, 0, 0, 600);
@@ -1398,7 +1398,12 @@ namespace Docky.Interface
 					urgent_indicator_buffer = CreateUrgentIndicatorBuffer ();
 				
 				DrawValue loc = val.MoveIn (Position, 1 - IconSize * val.Zoom / 2 - DockHeightBuffer);
-				normal_indicator_buffer.ShowAtPointAndZoom (surface, loc.Center, 1);
+				
+				if ((item.State & ItemState.Urgent) == ItemState.Urgent) {
+					urgent_indicator_buffer.ShowAtPointAndZoom (surface, loc.Center, 1);
+				} else {
+					normal_indicator_buffer.ShowAtPointAndZoom (surface, loc.Center, 1);
+				}
 			}
 		}
 		
@@ -1438,7 +1443,7 @@ namespace Docky.Interface
 		
 		DockySurface CreateUrgentIndicatorBuffer ()
 		{
-			return CreateIndicatorBuffer (NormalIndicatorSize, new Cairo.Color (1, 0, 0));
+			return CreateIndicatorBuffer (UrgentIndicatorSize, new Cairo.Color (1, .2, .2));
 		}
 		
 		DockySurface CreateIndicatorBuffer (int size, Cairo.Color color)
