@@ -1,0 +1,15 @@
+<Addin id="StandardPlugins" namespace="Docky" version="1.0" isroot="false">
+ 
+ 	<Dependencies>
+		<Addin id="Items" version="1.0" />
+	</Dependencies>
+ 
+	<Runtime>
+		<Import assembly="Docky.StandardPlugins.dll"/>
+	</Runtime>
+	
+	<Extension path="/Docky/ItemProvider">
+		<ItemProvider type="Trash.TrashItemProvider" />
+	</Extension>
+
+</Addin>

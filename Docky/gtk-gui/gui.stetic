@@ -319,10 +319,11 @@ Bottom</property>
                 <property name="HscrollbarPolicy">Never</property>
                 <property name="ShadowType">In</property>
                 <child>
-                  <widget class="Gtk.TreeView" id="treeview1">
+                  <widget class="Gtk.NodeView" id="inactive_view">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="ShowScrollbars">True</property>
+                    <property name="HeadersVisible">False</property>
                   </widget>
                 </child>
               </widget>
@@ -345,10 +346,11 @@ Bottom</property>
                 <property name="HscrollbarPolicy">Never</property>
                 <property name="ShadowType">In</property>
                 <child>
-                  <widget class="Gtk.TreeView" id="treeview2">
+                  <widget class="Gtk.NodeView" id="active_view">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="ShowScrollbars">True</property>
+                    <property name="HeadersVisible">False</property>
                   </widget>
                 </child>
               </widget>
@@ -408,13 +410,14 @@ Bottom</property>
                 <property name="MemberName" />
                 <property name="Spacing">6</property>
                 <child>
-                  <widget class="Gtk.Button" id="button10">
+                  <widget class="Gtk.Button" id="enable_plugin_button">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="Type">Custom</property>
                     <property name="Relief">None</property>
+                    <signal name="Clicked" handler="OnEnablePluginButtonClicked" />
                     <child>
-                      <widget class="Gtk.Image" id="image4">
+                      <widget class="Gtk.Image" id="asdf">
                         <property name="MemberName" />
                         <property name="Pixbuf">stock:gtk-go-forward Menu</property>
                       </widget>
@@ -429,11 +432,12 @@ Bottom</property>
                   <placeholder />
                 </child>
                 <child>
-                  <widget class="Gtk.Button" id="button11">
+                  <widget class="Gtk.Button" id="disable_plugin_button">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="Type">Custom</property>
                     <property name="Relief">None</property>
+                    <signal name="Clicked" handler="OnDisablePluginButtonClicked" />
                     <child>
                       <widget class="Gtk.Image" id="image3">
                         <property name="MemberName" />

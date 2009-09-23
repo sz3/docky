@@ -130,6 +130,7 @@ namespace Docky.Items
 				}
 				
 				transient_items.Add (item);
+				item.Owner = this;
 				item.WindowsChanged += HandleTransientWindowsChanged;
 					
 				OnItemsChanged (item, AddRemoveChangeType.Add);

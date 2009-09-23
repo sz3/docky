@@ -45,11 +45,11 @@ namespace Docky.Interface {
         
         private Gtk.ScrolledWindow GtkScrolledWindow;
         
-        private Gtk.TreeView treeview1;
+        private Gtk.NodeView inactive_view;
         
         private Gtk.ScrolledWindow GtkScrolledWindow1;
         
-        private Gtk.TreeView treeview2;
+        private Gtk.NodeView active_view;
         
         private Gtk.Label label5;
         
@@ -57,11 +57,11 @@ namespace Docky.Interface {
         
         private Gtk.VBox vbox2;
         
-        private Gtk.Button button10;
+        private Gtk.Button enable_plugin_button;
         
-        private Gtk.Image image4;
+        private Gtk.Image asdf;
         
-        private Gtk.Button button11;
+        private Gtk.Button disable_plugin_button;
         
         private Gtk.Image image3;
         
@@ -255,10 +255,11 @@ namespace Docky.Interface {
             this.GtkScrolledWindow.HscrollbarPolicy = ((Gtk.PolicyType)(2));
             this.GtkScrolledWindow.ShadowType = ((Gtk.ShadowType)(1));
             // Container child GtkScrolledWindow.Gtk.Container+ContainerChild
-            this.treeview1 = new Gtk.TreeView();
-            this.treeview1.CanFocus = true;
-            this.treeview1.Name = "treeview1";
-            this.GtkScrolledWindow.Add(this.treeview1);
+            this.inactive_view = new Gtk.NodeView();
+            this.inactive_view.CanFocus = true;
+            this.inactive_view.Name = "inactive_view";
+            this.inactive_view.HeadersVisible = false;
+            this.GtkScrolledWindow.Add(this.inactive_view);
             this.table2.Add(this.GtkScrolledWindow);
             Gtk.Table.TableChild w15 = ((Gtk.Table.TableChild)(this.table2[this.GtkScrolledWindow]));
             w15.TopAttach = ((uint)(1));
@@ -270,10 +271,11 @@ namespace Docky.Interface {
             this.GtkScrolledWindow1.HscrollbarPolicy = ((Gtk.PolicyType)(2));
             this.GtkScrolledWindow1.ShadowType = ((Gtk.ShadowType)(1));
             // Container child GtkScrolledWindow1.Gtk.Container+ContainerChild
-            this.treeview2 = new Gtk.TreeView();
-            this.treeview2.CanFocus = true;
-            this.treeview2.Name = "treeview2";
-            this.GtkScrolledWindow1.Add(this.treeview2);
+            this.active_view = new Gtk.NodeView();
+            this.active_view.CanFocus = true;
+            this.active_view.Name = "active_view";
+            this.active_view.HeadersVisible = false;
+            this.GtkScrolledWindow1.Add(this.active_view);
             this.table2.Add(this.GtkScrolledWindow1);
             Gtk.Table.TableChild w17 = ((Gtk.Table.TableChild)(this.table2[this.GtkScrolledWindow1]));
             w17.TopAttach = ((uint)(1));
@@ -304,32 +306,32 @@ namespace Docky.Interface {
             this.vbox2.Name = "vbox2";
             this.vbox2.Spacing = 6;
             // Container child vbox2.Gtk.Box+BoxChild
-            this.button10 = new Gtk.Button();
-            this.button10.CanFocus = true;
-            this.button10.Name = "button10";
-            this.button10.Relief = ((Gtk.ReliefStyle)(2));
-            // Container child button10.Gtk.Container+ContainerChild
-            this.image4 = new Gtk.Image();
-            this.image4.Name = "image4";
-            this.image4.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-go-forward", Gtk.IconSize.Menu, 16);
-            this.button10.Add(this.image4);
-            this.button10.Label = null;
-            this.vbox2.Add(this.button10);
-            Gtk.Box.BoxChild w21 = ((Gtk.Box.BoxChild)(this.vbox2[this.button10]));
+            this.enable_plugin_button = new Gtk.Button();
+            this.enable_plugin_button.CanFocus = true;
+            this.enable_plugin_button.Name = "enable_plugin_button";
+            this.enable_plugin_button.Relief = ((Gtk.ReliefStyle)(2));
+            // Container child enable_plugin_button.Gtk.Container+ContainerChild
+            this.asdf = new Gtk.Image();
+            this.asdf.Name = "asdf";
+            this.asdf.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-go-forward", Gtk.IconSize.Menu, 16);
+            this.enable_plugin_button.Add(this.asdf);
+            this.enable_plugin_button.Label = null;
+            this.vbox2.Add(this.enable_plugin_button);
+            Gtk.Box.BoxChild w21 = ((Gtk.Box.BoxChild)(this.vbox2[this.enable_plugin_button]));
             w21.Position = 0;
             // Container child vbox2.Gtk.Box+BoxChild
-            this.button11 = new Gtk.Button();
-            this.button11.CanFocus = true;
-            this.button11.Name = "button11";
-            this.button11.Relief = ((Gtk.ReliefStyle)(2));
-            // Container child button11.Gtk.Container+ContainerChild
+            this.disable_plugin_button = new Gtk.Button();
+            this.disable_plugin_button.CanFocus = true;
+            this.disable_plugin_button.Name = "disable_plugin_button";
+            this.disable_plugin_button.Relief = ((Gtk.ReliefStyle)(2));
+            // Container child disable_plugin_button.Gtk.Container+ContainerChild
             this.image3 = new Gtk.Image();
             this.image3.Name = "image3";
             this.image3.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-go-back", Gtk.IconSize.Menu, 16);
-            this.button11.Add(this.image3);
-            this.button11.Label = null;
-            this.vbox2.Add(this.button11);
-            Gtk.Box.BoxChild w23 = ((Gtk.Box.BoxChild)(this.vbox2[this.button11]));
+            this.disable_plugin_button.Add(this.image3);
+            this.disable_plugin_button.Label = null;
+            this.vbox2.Add(this.disable_plugin_button);
+            Gtk.Box.BoxChild w23 = ((Gtk.Box.BoxChild)(this.vbox2[this.disable_plugin_button]));
             w23.Position = 2;
             this.table2.Add(this.vbox2);
             Gtk.Table.TableChild w24 = ((Gtk.Table.TableChild)(this.table2[this.vbox2]));
@@ -347,6 +349,8 @@ namespace Docky.Interface {
             }
             this.Hide();
             this.window_manager_check.Toggled += new System.EventHandler(this.OnWindowManagerCheckToggled);
+            this.enable_plugin_button.Clicked += new System.EventHandler(this.OnEnablePluginButtonClicked);
+            this.disable_plugin_button.Clicked += new System.EventHandler(this.OnDisablePluginButtonClicked);
         }
     }
 }

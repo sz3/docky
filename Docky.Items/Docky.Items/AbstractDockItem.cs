@@ -342,7 +342,7 @@ namespace Docky.Items
 		}
 
 		#region IDisposable implementation
-		public void Dispose ()
+		public virtual void Dispose ()
 		{
 			ResetBuffers ();
 		}

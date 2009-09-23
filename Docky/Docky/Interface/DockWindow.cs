@@ -156,7 +156,7 @@ namespace Docky.Interface
 			get {
 				if (collection_backend.Count == 0) {
 					update_screen_regions = true;
-					if (Preferences.DefaultProvider.IsWindowManager)
+					if (Preferences.DefaultProvider.IsWindowManager) 
 						collection_backend.Add (new DockyItem ());
 					
 					AbstractDockItem last = null;

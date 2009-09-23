@@ -31,12 +31,12 @@ using Docky.Services;
 namespace Docky.Interface
 {
 
-
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class DockPreferences : Gtk.Bin, IDockPreferences
 	{
 		static T Clamp<T> (T value, T max, T min)
-		where T : IComparable<T> {     
+		where T : IComparable<T>
+		{
 			T result = value;
 			if (value.CompareTo (max) > 0)
 				result = max;
@@ -44,6 +44,21 @@ namespace Docky.Interface
 				result = min;
 			return result;
 		} 
+		
+		[TreeNode(ListOnly = true)]
+		public class PluginTreeNode : Gtk.TreeNode
+		{
+			[Gtk.TreeNodeValue(Column = 0)]
+			public string Name;
+
+			public IDockItemProvider Provider;
+
+			public PluginTreeNode (IDockItemProvider provider)
+			{
+				Provider = provider;
+				Name = provider.Name;
+			}
+		}
 		
 		IPreferences prefs;
 		string name;
@@ -234,10 +249,52 @@ namespace Docky.Interface
 			autohide_box.Changed += AutohideBoxChanged;
 			position_box.Changed += PositionBoxChanged;
 			fade_on_hide_check.Toggled += FadeOnHideToggled;
+		
+			SetupTreeViews ();
+			
+			Shown += delegate {
+				PopulateTreeViews ();
+			};
 			
 			ShowAll ();
 		}
+		
+		
 
+		void SetupTreeViews ()
+		{
+			SetupTreeView (inactive_view);
+			SetupTreeView (active_view);
+		}
+		
+		void SetupTreeView (Gtk.NodeView view)
+		{
+			Gtk.NodeStore store = new Gtk.NodeStore (typeof(PluginTreeNode));
+			view.NodeStore = store;
+			
+			view.AppendColumn ("Name", new Gtk.CellRendererText (), "text", 0);
+			view.ShowAll ();
+			
+			view.HeadersVisible = false;
+		}
+		
+		void PopulateTreeViews ()
+		{
+			active_view.NodeStore.Clear ();
+			inactive_view.NodeStore.Clear ();
+			
+			IEnumerable<IDockItemProvider> available_providers = PluginManager.ItemProviders
+				.Where (p => !Docky.Controller.Docks.SelectMany (d => d.Preferences.ItemProviders).Contains (p));
+			
+			foreach (IDockItemProvider provider in available_providers) {
+				inactive_view.NodeStore.AddNode (new PluginTreeNode (provider));
+			}
+			
+			foreach (IDockItemProvider provider in ItemProviders.Where (p => p != DefaultProvider)) {
+				active_view.NodeStore.AddNode (new PluginTreeNode (provider));
+			}
+		}
+		
 		void PositionBoxChanged (object sender, EventArgs e)
 		{
 			Position = (DockPosition) position_box.Active;
@@ -464,6 +521,43 @@ namespace Docky.Interface
 				DefaultProvider.SetWindowManager ();
 			else
 				DefaultProvider.UnsetWindowManager ();
+		}
+
+		protected virtual void OnDisablePluginButtonClicked (object sender, System.EventArgs e)
+		{
+			PluginTreeNode node = active_view.NodeSelection.SelectedNode as PluginTreeNode;
+			
+			if (node == null)
+				return;
+			
+			active_view.NodeStore.RemoveNode (node);
+			
+			item_providers.Remove (node.Provider);
+			OnItemProvidersChanged (node.Provider, AddRemoveChangeType.Remove);
+			
+			inactive_view.NodeStore.AddNode (node);
+		}
+
+		protected virtual void OnEnablePluginButtonClicked (object sender, System.EventArgs e)
+		{
+			PluginTreeNode node = inactive_view.NodeSelection.SelectedNode as PluginTreeNode;
+			
+			if (node == null)
+				return;
+			
+			inactive_view.NodeStore.RemoveNode (node);
+			
+			item_providers.Add (node.Provider);
+			OnItemProvidersChanged (node.Provider, AddRemoveChangeType.Add);
+			
+			active_view.NodeStore.AddNode (node);
+		}
+		
+		void OnItemProvidersChanged (IDockItemProvider provider, AddRemoveChangeType type)
+		{
+			if (ItemProvidersChanged != null) {
+				ItemProvidersChanged (this, new ItemProvidersChangedEventArgs (provider, type));
+			}
 		}
 	}
 }

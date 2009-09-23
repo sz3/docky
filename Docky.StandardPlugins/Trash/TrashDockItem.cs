@@ -16,22 +16,41 @@
 // 
 
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
 
+using Docky.CairoHelper;
 using Docky.Items;
+using Docky.Menus;
+using Docky.Services;
 
-namespace Docky.Interface
+namespace Trash
 {
 
-	public class ItemProvidersChangedEventArgs : System.EventArgs
+
+	public class TrashDockItem : IconDockItem
 	{
 
-		public AddRemoveChangeType Type { get; set; }
-		public IDockItemProvider Provider { get; set; }
-		
-		public ItemProvidersChangedEventArgs (IDockItemProvider provider, AddRemoveChangeType type)
+		public TrashDockItem ()
 		{
-			Provider = provider;
-			Type = type;
+			Icon = "user-trash";
+		}
+		
+		public override string UniqueID ()
+		{
+			return "TrashCan";
+		}
+		
+		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
+		{
+			if (button == 1) {
+				DockServices.System.Open ("trash://");
+				return ClickAnimation.Bounce;
+			}
+			
+			return ClickAnimation.None;
 		}
 	}
 }

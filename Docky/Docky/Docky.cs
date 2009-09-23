@@ -70,10 +70,6 @@ namespace Docky
 			PluginManager.Initialize ();
 			Controller.Initialize ();
 			
-			foreach (Items.IDockItemProvider provider in PluginManager.ItemProviders) {
-				Console.WriteLine (provider.Separated);
-			}
-			
 			Gdk.Threads.Enter ();
 			Gtk.Application.Run ();
 			Gdk.Threads.Leave ();
