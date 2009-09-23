@@ -10,8 +10,6 @@ FILES = \
     AssemblyInfo.cs \
     Wnck/Window_Extensions.cs \
     Windowing/ClickAction.cs \
-    Windowing/ScreenUtils.cs \
-    Windowing/Viewport.cs \
     Windowing/WindowControl.cs \
     Xlib/X11Atoms.cs \
     Xlib/Xlib.cs \
@@ -26,3 +24,8 @@ REFERENCES =  \
 	$(GTK_SHARP_20_LIBS) \
 	$(WNCK_SHARP_10_LIBS) \
 	$(MONO_CAIRO_LIBS)
+
+CLEANFILES += Docky.Windowing.dll.config
+EXTRA_DIST += Docky.Windowing.dll.config.in
+
+module_DATA += Docky.Windowing.dll.config

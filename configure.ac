@@ -114,6 +114,7 @@ Docky.CairoHelper/Makefile
 Docky.Items/Makefile
 Docky.Services/Makefile
 Docky.Windowing/Makefile
+Docky.Windowing/Docky.Windowing.dll.config
 Docky/docky
 Makefile
 m4/Makefile
