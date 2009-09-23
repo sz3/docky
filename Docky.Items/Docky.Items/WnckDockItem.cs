@@ -39,6 +39,10 @@ namespace Docky.Items
 	{
 		public event EventHandler WindowsChanged;
 		
+		int last_raised;
+		DateTime last_scroll = new DateTime (0);
+		TimeSpan scroll_rate = new TimeSpan (0, 0, 0, 0, 200);
+		
 		IEnumerable<Wnck.Window> windows;
 		public IEnumerable<Wnck.Window> Windows {
 			get { return windows; }
@@ -115,6 +119,41 @@ namespace Docky.Items
 			State = state;
 		}
 		
+		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
+		{
+			int count = ManagedWindows.Count ();
+			
+			if (count < 1 || (DateTime.UtcNow - last_scroll) < scroll_rate) return;
+			
+			last_scroll = DateTime.UtcNow;
+			
+			// This block will make sure that if we're scrolling on an app that is already active
+			// that when we scroll we move on the next window instead of appearing to do nothing
+			Wnck.Window focused = ManagedWindows.Where (w => w.IsActive).FirstOrDefault ();
+			if (focused != null)
+				for (; last_raised < count - 1; last_raised++)
+					if (ManagedWindows.ElementAt (last_raised).Pid == focused.Pid)
+						break;
+
+			switch (direction) {
+			case ScrollDirection.Up:
+			case ScrollDirection.Right:
+				last_raised++;
+				break;
+			case ScrollDirection.Down:
+			case ScrollDirection.Left:
+				last_raised--;
+				break;
+			}
+			
+			if (last_raised < 0)
+				last_raised = count - 1;
+			else if (last_raised >= count)
+				last_raised = 0;
+
+			ManagedWindows.ElementAt (last_raised).CenterAndFocusWindow ();
+		}
+		
 		public sealed override void SetScreenRegion (Gdk.Screen screen, Gdk.Rectangle region)
 		{
 			foreach (Wnck.Window w in ManagedWindows) {
@@ -146,8 +185,7 @@ namespace Docky.Items
 			
 			if (windows.Any (w => w.IsMinimized && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace))) {
 				WindowControl.RestoreWindows (windows);
-			}
-			else if (windows.Any (w => w.IsActive && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace))) {
+			} else if (windows.Any (w => w.IsActive && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace))) {
 				WindowControl.MinimizeWindows (windows);
 			} else {
 				WindowControl.FocusWindows (windows);
