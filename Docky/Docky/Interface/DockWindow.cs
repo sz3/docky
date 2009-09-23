@@ -279,6 +279,8 @@ namespace Docky.Interface
 		
 		double DockOpacity {
 			get {
+				if (!Preferences.FadeOnHide)
+					return 1;
 				double progress = Preferences.FadeOpacity * Math.Min (1, (render_time - hidden_change_time).TotalMilliseconds / 
 				                            BaseAnimationTime.TotalMilliseconds);
 				if (!AutohideManager.Hidden)
