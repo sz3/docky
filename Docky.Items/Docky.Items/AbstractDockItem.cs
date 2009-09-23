@@ -61,6 +61,7 @@ namespace Docky.Items
 			protected set {
 				if (state == value)
 					return;
+				
 				StateSetTime = DateTime.UtcNow;
 				state = value;
 				OnPaintNeeded ();
