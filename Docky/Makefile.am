@@ -33,6 +33,7 @@ FILES = \
     Docky/Items/DockyItem.cs \
     Docky/Menus/DockMenu.cs \
     Docky/Menus/MenuItemWidget.cs \
+	Docky/Menus/SeparatorWidget.cs \
     Docky/Menus/DockItemMenu.cs
 
 RESOURCES = \

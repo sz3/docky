@@ -9,6 +9,8 @@ PKG_CONFIG_FILES = docky.items.pc
 FILES = \
 	Docky.Items/ItemState.cs \
 	Docky.Menus/MenuItem.cs \
+	Docky.Menus/SeparatorMenuItem.cs \
+	Docky.Menus/WindowMenuItem.cs \
 	Docky.Items/WindowDockItem.cs \
 	Docky.Items/AbstractDockItem.cs \
 	Docky.Items/ApplicationDockItem.cs \
@@ -24,7 +26,11 @@ FILES = \
 	Docky.Items/WnckDockItem.cs
 
 RESOURCES = \
-    Resources/Docky.Items.addin.xml
+	Resources/close.svg \
+	Resources/maximize.svg \
+	Resources/minimize.svg \
+	Resources/run.svg \
+	Resources/Docky.Items.addin.xml
 
 PROJECT_REFERENCES= \
 	Docky.Services \
