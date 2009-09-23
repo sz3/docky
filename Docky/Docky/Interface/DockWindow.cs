@@ -245,7 +245,7 @@ namespace Docky.Interface
 		}
 		
 		int ItemWidthBuffer {
-			get { return (int) (0.05 * IconSize); }
+			get { return (int) (0.08 * IconSize); }
 		}
 		
 		bool VerticalDock {
@@ -1377,14 +1377,16 @@ namespace Docky.Interface
 				Gdk.Rectangle area;
 				
 				if (VerticalDock) {
-					area = new Gdk.Rectangle (dockArea.X, 
-						(int) (val.Center.Y - (IconSize * val.Zoom) / 2) - ItemWidthBuffer,
+					area = new Gdk.Rectangle (
+						dockArea.X, 
+						(int) (val.Center.Y - (IconSize * val.Zoom) / 2) - ItemWidthBuffer / 2,
 						DockHeight,
-						(int) (IconSize * val.Zoom) + 2 * ItemWidthBuffer);
+						(int) (IconSize * val.Zoom) + ItemWidthBuffer);
 				} else {
-					area = new Gdk.Rectangle ((int) (val.Center.X - (IconSize * val.Zoom) / 2) - ItemWidthBuffer,
+					area = new Gdk.Rectangle (
+						(int) (val.Center.X - (IconSize * val.Zoom) / 2) - ItemWidthBuffer / 2,
 						dockArea.Y, 
-						(int) (IconSize * val.Zoom) + 2 * ItemWidthBuffer,
+						(int) (IconSize * val.Zoom) + ItemWidthBuffer,
 						DockHeight);
 				}
 				
@@ -1438,8 +1440,8 @@ namespace Docky.Interface
 				lg = new LinearGradient (0, area.Y + area.Height, 0, area.Y);
 				break;
 			}
-			lg.AddColorStop (0, color.SetAlpha (0.9));
-			lg.AddColorStop (1, color.SetAlpha (0.1));
+			lg.AddColorStop (0, color.SetAlpha (0.6));
+			lg.AddColorStop (1, color.SetAlpha (0.0));
 			
 			surface.Context.Pattern = lg;
 			surface.Context.Fill ();
