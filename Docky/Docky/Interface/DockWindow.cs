@@ -365,9 +365,8 @@ namespace Docky.Interface
 			AnimationState.AddCondition (Animations.HideChanged,
 			                             () => ((DateTime.UtcNow - hidden_change_time) < BaseAnimationTime));
 			AnimationState.AddCondition (Animations.Bounce,
-			                             () => Items.Any (i => (DateTime.UtcNow - i.LastClick) < BounceTime));
-			AnimationState.AddCondition (Animations.UrgencyChanged,
-				                         () => Items.Any (i => (DateTime.UtcNow - i.StateSetTime) < BounceTime));
+			                             () => Items.Any (i => (DateTime.UtcNow - i.LastClick) < BounceTime ||
+					                                            (DateTime.UtcNow - i.StateSetTime) < BounceTime));
 		}
 
 		void HandleRealized (object sender, EventArgs e)

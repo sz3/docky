@@ -30,8 +30,6 @@ namespace Docky.Interface
 		DockHoveredChanged,
 		Bounce,
 		IconInsert,
-		UrgencyChanged,
-		ActiveWindowChanged,
 	}
 	
 	public class AnimationState : IDisposable
