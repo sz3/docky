@@ -103,7 +103,7 @@ namespace Docky.Interface
 		public double FadeOpacity {
 			get {
 				if (!fade_opacity.HasValue)
-					fade_opacity = GetOption ("FadeOpacity", 0.4);
+					fade_opacity = GetOption ("FadeOpacity", 1);
 				return fade_opacity.Value; 
 			}
 			set {
