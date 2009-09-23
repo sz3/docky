@@ -261,7 +261,9 @@ namespace Docky.Interface
 		
 			SetupTreeViews ();
 			
-			Shown += delegate {
+			// more or less happens every time the visiblity of the widget changes.
+			// kind of a dirty hack, good refactoring candidate
+			Mapped += delegate {
 				PopulateTreeViews ();
 			};
 			
