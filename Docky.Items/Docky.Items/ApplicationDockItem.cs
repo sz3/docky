@@ -130,7 +130,17 @@ namespace Docky.Items
 		
 		void Launch ()
 		{
-			desktop_item.Launch (null, 0);
+			LaunchWithFiles (Enumerable.Empty<string> ());
+		}
+		
+		public void LaunchWithFiles (IEnumerable<string> files)
+		{
+			if (files.Any ()) {
+				GLib.List glist = new GLib.List (files.ToArray () as object[], typeof(string), false, true);
+				desktop_item.Launch (glist, Gnome.DesktopItemLaunchFlags.OnlyOne);
+			} else {
+				desktop_item.Launch (null, 0);
+			}
 		}
 	}
 }

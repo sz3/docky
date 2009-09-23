@@ -94,7 +94,7 @@ namespace Docky.Interface
 		const int DockWidthBuffer     = 5;
 		const int BackgroundWidth     = 1000;
 		const int BackgroundHeight    = 150;
-		const int NormalIndicatorSize = 30;
+		const int NormalIndicatorSize = 20;
 		const int UrgentIndicatorSize = 24;
 		
 		readonly TimeSpan BaseAnimationTime = new TimeSpan (0, 0, 0, 0, 150);
