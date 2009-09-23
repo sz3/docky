@@ -72,7 +72,7 @@ namespace Docky.CairoHelper
 				break;
 			case DockPosition.Bottom:
 				x -= self.Width / 2;
-				y -= self.Height / 2;
+				y -= self.Height;
 				break;
 			}
 			
