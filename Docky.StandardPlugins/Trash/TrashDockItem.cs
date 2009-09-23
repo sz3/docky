@@ -36,6 +36,7 @@ namespace Trash
 		public TrashDockItem ()
 		{
 			Icon = "user-trash";
+			HoverText = "Recycle Bin";
 		}
 		
 		public override string UniqueID ()

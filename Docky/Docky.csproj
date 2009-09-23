@@ -137,6 +137,10 @@
       <Project>{888FCD95-7C79-45C4-A744-9C840DF4B9B0}</Project>
       <Name>Docky.Windowing</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Docky.StandardPlugins\Docky.StandardPlugins.csproj">
+      <Project>{39FA0106-BDA3-4541-8922-C6BE0D9CC51D}</Project>
+      <Name>Docky.StandardPlugins</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">

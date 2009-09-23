@@ -217,6 +217,15 @@ namespace Docky.Interface
 			}
 		}
 		
+		IEnumerable<string> Plugins {
+			get {
+				return GetOption<string[]> ("Plugins", new string[0]).AsEnumerable ();
+			}
+			set {
+				SetOption<string[]> ("Plugins", value.ToArray ());
+			}
+		}
+		
 		bool FirstRun {
 			get { return prefs.Get ("FirstRun", true); }
 			set { prefs.Set ("FirstRun", value); }
@@ -430,6 +439,15 @@ namespace Docky.Interface
 			
 			DefaultProvider.ItemsChanged += DefaultProviderItemsChanged;
 			
+			foreach (string providerName in Plugins) {
+				foreach (IDockItemProvider provider in PluginManager.ItemProviders) {
+					if (provider.Name == providerName) {
+						item_providers.Add (provider);
+						break;
+					}
+				}
+			}
+			
 			List<string> sortList = SortList.ToList ();
 			foreach (IDockItemProvider provider in item_providers) {
 				SortProviderOnList (provider, sortList);
@@ -536,6 +554,8 @@ namespace Docky.Interface
 			OnItemProvidersChanged (node.Provider, AddRemoveChangeType.Remove);
 			
 			inactive_view.NodeStore.AddNode (node);
+			
+			SyncPlugins ();
 		}
 
 		protected virtual void OnEnablePluginButtonClicked (object sender, System.EventArgs e)
@@ -551,6 +571,8 @@ namespace Docky.Interface
 			OnItemProvidersChanged (node.Provider, AddRemoveChangeType.Add);
 			
 			active_view.NodeStore.AddNode (node);
+			
+			SyncPlugins ();
 		}
 		
 		void OnItemProvidersChanged (IDockItemProvider provider, AddRemoveChangeType type)
@@ -558,6 +580,11 @@ namespace Docky.Interface
 			if (ItemProvidersChanged != null) {
 				ItemProvidersChanged (this, new ItemProvidersChangedEventArgs (provider, type));
 			}
+		}
+		
+		void SyncPlugins ()
+		{
+			Plugins = ItemProviders.Where (p => p != DefaultProvider).Select (p => p.Name);
 		}
 	}
 }

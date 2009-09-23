@@ -11,6 +11,7 @@
     <widget-library name="../../Docky.Items/bin/Debug/Docky.Items.dll" />
     <widget-library name="../../Docky.Windowing/bin/Debug/Docky.Windowing.dll" />
     <widget-library name="../bin/Debug/Docky.exe" internal="true" />
+    <widget-library name="../../Docky.StandardPlugins/bin/Debug/Docky.StandardPlugins.dll" />
   </import>
   <widget class="Gtk.Bin" id="Docky.Interface.DockPreferences" design-size="368 331">
     <property name="MemberName" />
