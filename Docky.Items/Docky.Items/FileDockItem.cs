@@ -24,7 +24,8 @@ using System.Text;
 
 using Cairo;
 using Gdk;
-using Gtk;
+
+using Docky.Menus;
 
 using Docky.Services;
 
@@ -49,7 +50,7 @@ namespace Docky.Items
 		FileDockItem (string uri)
 		{
 			Gnome.IconLookupResultFlags results;
-			Icon = Gnome.Icon.LookupSync (IconTheme.Default, null, uri, null, 0, out results);
+			Icon = Gnome.Icon.LookupSync (Gtk.IconTheme.Default, null, uri, null, 0, out results);
 			
 			HoverText = System.IO.Path.GetFileName (new Uri (uri).LocalPath);
 			this.uri = uri;
@@ -63,9 +64,27 @@ namespace Docky.Items
 		
 		protected override ClickAnimation OnClicked (uint button, ModifierType mod, double xPercent, double yPercent)
 		{
-			DockServices.System.Open (uri);
+			Open ();
 			
 			return ClickAnimation.Bounce;
+		}
+		
+		public override IEnumerable<MenuItem> GetMenuItems ()
+		{
+			yield return new MenuItem ("Open", "gtk-open", (o, a) => Open ());
+			yield return new MenuItem ("Open Containing Folder", "folder", (o, a) => OpenContainingFolder ());
+		}
+		
+		void Open ()
+		{
+			DockServices.System.Open (uri);
+		}
+		
+		void OpenContainingFolder ()
+		{
+			// retarded but works. Must be a better way
+			string path = System.IO.Path.GetDirectoryName (new Uri (uri).AbsolutePath);
+			DockServices.System.Open (new Uri (path).AbsoluteUri);
 		}
 	}
 }
