@@ -197,7 +197,11 @@ namespace Docky.Items
 		public override IEnumerable<MenuItem> GetMenuItems ()
 		{
 			if (ManagedWindows.Any ()) {
-				yield return new MenuItem ("Maximize", MaximizeIcon, (o, a) => WindowControl.MaximizeWindow (ManagedWindows.First ()));
+				if (ManagedWindows.Any (w => w.IsMaximized))
+					yield return new MenuItem ("Unmaximize", MaximizeIcon, (o, a) => WindowControl.UnmaximizeWindows (ManagedWindows));
+				else
+					yield return new MenuItem ("Maximize", MaximizeIcon, (o, a) => WindowControl.MaximizeWindows (ManagedWindows));
+					
 				if (ManagedWindows.Any (w => w.IsMinimized))
 					yield return new MenuItem ("Restore", MinimizeIcon, (o, a) => WindowControl.RestoreWindows (ManagedWindows));
 				else

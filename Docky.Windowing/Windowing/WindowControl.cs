@@ -192,9 +192,27 @@ namespace Docky.Windowing
 			MinimizeRestoreWindows (new [] {window});
 		}
 		
-		public static void MaximizeWindow (Window window)
+		public static void MaximizeWindows (IEnumerable<Window> windows)
+		{
+			foreach (Window window in windows)
+				window.Maximize ();
+		}
+		
+		public static void MaximizeWindows (Window window)
 		{
 			window.Maximize ();
+		}
+		
+		public static void UnmaximizeWindows (IEnumerable<Window> windows)
+		{
+			foreach (Wnck.Window window in windows)
+				UnmaximizeWindows (window);
+		}
+		
+		public static void UnmaximizeWindows (Wnck.Window window)
+		{
+			if (window.IsMaximized)
+				window.Unmaximize ();
 		}
 		
 		public static void MoveToWorkspace (Window window, Workspace workspace)
