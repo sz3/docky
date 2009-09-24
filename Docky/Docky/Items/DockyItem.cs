@@ -30,7 +30,7 @@ namespace Docky.Items
 {
 
 
-	public class DockyItem : IconDockItem
+	internal class DockyItem : IconDockItem, INonPersistedItem
 	{
 
 		public DockyItem ()

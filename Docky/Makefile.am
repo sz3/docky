@@ -31,6 +31,7 @@ FILES = \
 	Docky/Interface/HoveredItemChangedArgs.cs \
     Docky/PluginManager.cs \
     Docky/Items/DockyItem.cs \
+    Docky/Items/INonPersistedItem.cs \
     Docky/Menus/DockMenu.cs \
     Docky/Menus/MenuItemWidget.cs \
 	Docky/Menus/SeparatorWidget.cs \

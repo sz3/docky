@@ -66,6 +66,7 @@
     <Compile Include="Docky\Interface\HoveredItemChangedArgs.cs" />
     <Compile Include="Docky\PluginManager.cs" />
     <Compile Include="Docky\Items\DockyItem.cs" />
+    <Compile Include="Docky\Items\INonPersistedItem.cs" />
     <Compile Include="Docky\Menus\DockMenu.cs" />
     <Compile Include="Docky\Menus\MenuItemWidget.cs" />
     <Compile Include="Docky\Menus\DockItemMenu.cs" />

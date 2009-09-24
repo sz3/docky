@@ -31,7 +31,7 @@ namespace Docky.Items
 {
 
 
-	public class SeparatorItem : AbstractDockItem
+	internal class SeparatorItem : AbstractDockItem, INonPersistedItem
 	{
 		public override bool RotateWithDock {
 			get { return true; }

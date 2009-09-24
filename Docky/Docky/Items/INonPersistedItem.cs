@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,36 +16,11 @@
 // 
 
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-
-using Cairo;
-using Gdk;
-using Gtk;
-
-using Docky.CairoHelper;
 
 namespace Docky.Items
 {
-
-
-	internal class SpacingItem : AbstractDockItem, INonPersistedItem
+	// marker interface for items that dont need persisted
+	internal interface INonPersistedItem
 	{
-
-		public SpacingItem ()
-		{
-		}
-		
-		public override string UniqueID ()
-		{
-			return "spacing";
-		}
-		
-		protected override void PaintIconSurface (DockySurface surface)
-		{
-		}
-		
 	}
 }

@@ -869,7 +869,7 @@ namespace Docky.Interface
 				GLib.Idle.Add (delegate {
 					// dispose of our separators as we made them ourselves,
 					// this could be a bit more elegant
-					foreach (AbstractDockItem item in Items.Where (adi => adi is SeparatorItem || adi is SpacingItem || adi is DockyItem))
+					foreach (AbstractDockItem item in Items.Where (adi => adi is INonPersistedItem))
 						item.Dispose ();
 					
 					collection_backend.Clear ();
@@ -877,7 +877,7 @@ namespace Docky.Interface
 					return false;
 				});
 			} else {
-				foreach (AbstractDockItem item in Items.Where (adi => adi is SeparatorItem || adi is SpacingItem || adi is DockyItem))
+				foreach (AbstractDockItem item in Items.Where (adi => adi is INonPersistedItem))
 					item.Dispose ();
 				
 				collection_backend.Clear ();
@@ -1747,7 +1747,7 @@ namespace Docky.Interface
 				GLib.Source.Remove (animation_timer);
 			
 			// clear out our separators
-			foreach (AbstractDockItem adi in Items.Where (adi => adi is SeparatorItem || adi is SpacingItem || adi is DockyItem))
+			foreach (AbstractDockItem adi in Items.Where (adi => adi is INonPersistedItem))
 				adi.Dispose ();
 			
 			ResetBuffers ();
