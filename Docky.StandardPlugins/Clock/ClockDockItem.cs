@@ -213,7 +213,7 @@ namespace Clock
 				
 				// draw AM indicator
 				layout.SetText ("am");
-				cr.Color = new Cairo.Color (1, 1, 1, DateTime.Now.Hour < 12 ? 0.9 : 0.5);
+				cr.Color = new Cairo.Color (1, 1, 1, DateTime.Now.Hour < 12 ? 0.8 : 0.2);
 				layout.GetPixelExtents (out inkRect, out logicalRect);
 				cr.MoveTo ((center - inkRect.Width) / 2, yOffset);
 				Pango.CairoHelper.LayoutPath (cr, layout);
@@ -221,7 +221,7 @@ namespace Clock
 				
 				// draw PM indicator
 				layout.SetText ("pm");
-				cr.Color = new Cairo.Color (1, 1, 1, DateTime.Now.Hour > 11 ? 0.9 : 0.5);
+				cr.Color = new Cairo.Color (1, 1, 1, DateTime.Now.Hour > 11 ? 0.8 : 0.2);
 				layout.GetPixelExtents (out inkRect, out logicalRect);
 				cr.MoveTo (center + (center - inkRect.Width) / 2, yOffset);
 				Pango.CairoHelper.LayoutPath (cr, layout);
