@@ -112,6 +112,7 @@ AC_CONFIG_FILES([
 Docky/Makefile
 Docky.CairoHelper/Makefile
 Docky.Items/Makefile
+Docky.StandardPlugins/Makefile
 Docky.Services/Makefile
 Docky.Windowing/Makefile
 Docky.Windowing/Docky.Windowing.dll.config

@@ -48,6 +48,7 @@ PROJECT_REFERENCES = \
 	Docky.CairoHelper \
 	Docky.Items \
 	Docky.Services \
+	Docky.StandardPlugins \
 	Docky.Windowing
 
 REFERENCES =  \

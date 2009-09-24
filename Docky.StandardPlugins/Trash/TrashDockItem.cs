@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -47,11 +48,27 @@ namespace Trash
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
 			if (button == 1) {
-				DockServices.System.Open ("trash://");
+				OpenTrash ();
 				return ClickAnimation.Bounce;
 			}
 			
 			return ClickAnimation.None;
+		}
+		
+		public override IEnumerable<MenuItem> GetMenuItems ()
+		{
+			yield return new MenuItem ("Open Recycling Bin", "user-trash", (o, a) => OpenTrash ());
+			yield return new MenuItem ("Empty Trash", "gtk-delete", (o, a) => EmptyTrash ());
+		}
+		
+		void OpenTrash ()
+		{
+			DockServices.System.Open ("trash://");
+		}
+		
+		void EmptyTrash ()
+		{
+			// fixme
 		}
 	}
 }

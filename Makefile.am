@@ -8,6 +8,7 @@ SUBDIRS = \
 	Docky.Services \
 	Docky.Windowing \
 	Docky.Items \
+	Docky.StandardPlugins \
 	Docky \
 	m4
 
