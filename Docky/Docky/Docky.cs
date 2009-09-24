@@ -91,8 +91,13 @@ namespace Docky
 				"Robert Dyer"
 			};
 			
-			about.Run ();
-			about.Destroy ();
+			about.ShowAll ();
+			
+			about.Response += delegate {
+				about.Hide ();
+				about.Destroy ();
+			};
+			
 		}
 	}
 }

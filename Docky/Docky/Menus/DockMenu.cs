@@ -166,6 +166,8 @@ namespace Docky.Menus
 		
 		public Gdk.Point Anchor { get; set; }
 		
+		public new bool Visible { get; set; }
+		
 		public DockPosition Orientation {
 			get { return orientation; }
 			set {
@@ -237,6 +239,7 @@ namespace Docky.Menus
 		
 		protected override void OnShown ()
 		{
+			Visible = true;
 			show_time = DateTime.UtcNow;
 			Reposition ();
 
@@ -265,6 +268,7 @@ namespace Docky.Menus
 		
 		protected override void OnHidden ()
 		{
+			Visible = false;
 			CursorTracker.ForDisplay (Display).Enabled = true;
 			base.OnHidden ();
 		}
@@ -426,8 +430,9 @@ namespace Docky.Menus
 		
 		protected override bool OnButtonReleaseEvent (EventButton evnt)
 		{
-			if (evnt.Button != 3 || (DateTime.UtcNow - show_time).TotalMilliseconds > 500)
+			if (evnt.Button != 3 || (DateTime.UtcNow - show_time).TotalMilliseconds > 500) {
 				Hide ();
+			}
 			return base.OnButtonReleaseEvent (evnt);
 		}
 	}

@@ -347,6 +347,7 @@ namespace Docky.Interface
 			                  Gdk.EventMask.ButtonReleaseMask |
 			                  Gdk.EventMask.EnterNotifyMask |
 			                  Gdk.EventMask.LeaveNotifyMask |
+					          Gdk.EventMask.PointerMotionMask |
 			                  Gdk.EventMask.ScrollMask));
 			
 			Realized += HandleRealized;
@@ -1426,7 +1427,6 @@ namespace Docky.Interface
 				icon = item.IconSurface (surface, IconSize);
 				icon.ShowAtPointAndRotation (surface, center.Center, rotation);
 			}
-			// fixme menu.visible check likely slow. buffer
 			if (HoveredItem == item && !drag_began && !Menu.Visible) {
 				DrawValue loc = val.MoveIn (Position, IconSize * (ZoomPercent + .1) - IconSize / 2);
 				

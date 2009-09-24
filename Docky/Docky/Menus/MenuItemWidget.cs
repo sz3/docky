@@ -64,14 +64,14 @@ namespace Docky.Menus
 		protected override bool OnButtonReleaseEvent (EventButton evnt)
 		{
 			item.SendClick ();
-			return base.OnButtonReleaseEvent (evnt);
+			return false;
 		}
 		
 		protected override bool OnEnterNotifyEvent (EventCrossing evnt)
 		{
 			hovered = true;
 			QueueDraw ();
-			return base.OnEnterNotifyEvent (evnt);
+			return false;
 		}
 
 		protected override bool OnLeaveNotifyEvent (EventCrossing evnt)
