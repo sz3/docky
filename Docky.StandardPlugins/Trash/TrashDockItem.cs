@@ -178,9 +178,6 @@ namespace Trash
 		
 		void EmptyTrash ()
 		{
-			fsw.Dispose ();
-			fsw = null;
-			
 			string message = Catalog.GetString ("<big><b>Empty all of the items from the trash?</b></big>\n\n" + 
 			                                    "If you choose to empty the trash, all items in it\nwill be permanently lost. " + 
 			                                    "Please note that you\ncan also delete them separately.");
@@ -189,24 +186,31 @@ namespace Trash
 												  Gtk.MessageType.Warning, 
 												  Gtk.ButtonsType.None,
 												  message);
+			md.Modal = false;
 			md.AddButton ("_Cancel", Gtk.ResponseType.Cancel);
 			md.AddButton ("Empty _Trash", Gtk.ResponseType.Ok);
 
-			Gtk.ResponseType result = (Gtk.ResponseType) md.Run ();
-			md.Destroy ();
-
-			if (result != Gtk.ResponseType.Cancel && 
-				Directory.Exists (Trash)) {
-				try {
-					Directory.Delete (Trash, true);
-					Directory.CreateDirectory (Trash);
-				} catch { /* do nothing */ }
-			}
-				
-			SetupFileSystemWatch ();
+			md.Response += (o, args) => {
+				if (args.ResponseId != Gtk.ResponseType.Cancel && Directory.Exists (Trash)) {
+					fsw.Dispose ();
+					fsw = null;
+					
+					try {
+						Directory.Delete (Trash, true);
+						Directory.CreateDirectory (Trash);
+					} catch { /* do nothing */ }
+					
+					SetupFileSystemWatch ();
+					
+					Gtk.Application.Invoke (delegate {
+						UpdateIcon ();
+						OnPaintNeeded ();
+					});
+				}
+				md.Destroy ();
+			};
 			
-			UpdateIcon ();
-			OnPaintNeeded ();
+			md.Show ();
 		}
 	}
 }
