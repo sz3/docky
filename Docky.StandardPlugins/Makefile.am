@@ -7,6 +7,9 @@ TARGET = library
 PKG_CONFIG_FILES = docky.standardplugins.pc
 
 FILES = \
+	Clock/ClockItemProvider.cs \
+	Clock/ClockDockItem.cs \
+	Clock/ClockThemeSelector.cs \
 	Trash/TrashItemProvider.cs \
 	Trash/TrashDockItem.cs
 
@@ -21,5 +24,7 @@ PROJECT_REFERENCES = \
 REFERENCES =  \
 	System \
 	System.Core \
+	Mono.Cairo \
 	Mono.Posix \
-	$(GTK_SHARP_20_LIBS)
+	$(GTK_SHARP_20_LIBS) \
+	$(LIBRSVG_SHARP_LIBS)
