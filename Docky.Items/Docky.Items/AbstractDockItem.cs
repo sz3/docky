@@ -321,6 +321,12 @@ namespace Docky.Items
 			text_buffer = ResetBuffer (text_buffer);
 		}
 		
+		protected void QueueRedraw ()
+		{
+			ResetBuffers ();
+			OnPaintNeeded ();
+		}
+		
 		DockySurface ResetBuffer (DockySurface buffer)
 		{
 			if (buffer != null) {
