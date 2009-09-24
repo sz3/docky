@@ -21,4 +21,5 @@ PROJECT_REFERENCES = \
 REFERENCES =  \
 	System \
 	System.Core \
+	Mono.Posix \
 	$(GTK_SHARP_20_LIBS)

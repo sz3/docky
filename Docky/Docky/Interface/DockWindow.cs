@@ -722,10 +722,16 @@ namespace Docky.Interface
 		/// </summary>
 		void HandleDragEnd (object o, DragEndArgs args)
 		{
-			if (!DockHovered && drag_item != null) {
-				IDockItemProvider provider = ProviderForItem (drag_item);
-				if (provider != null && provider.ItemCanBeRemoved (drag_item)) {
-					provider.RemoveItem (drag_item);
+			if (drag_item != null) {
+				if (!DockHovered) {
+					IDockItemProvider provider = ProviderForItem (drag_item);
+					if (provider != null && provider.ItemCanBeRemoved (drag_item)) {
+						provider.RemoveItem (drag_item);
+					}
+				} else {
+					AbstractDockItem item = HoveredItem;
+					if (item != null && item.CanAcceptDrop (drag_item))
+						item.AcceptDrop (drag_item);
 				}
 			}
 			

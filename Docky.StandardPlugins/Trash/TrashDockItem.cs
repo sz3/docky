@@ -22,6 +22,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
+using Mono.Unix;
+
 using Docky.CairoHelper;
 using Docky.Items;
 using Docky.Menus;
@@ -33,16 +35,124 @@ namespace Trash
 
 	public class TrashDockItem : IconDockItem
 	{
+		
+		FileSystemWatcher fsw;
 
+		string Trash {
+			get { 
+				return Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData), "Trash/files/");
+			}
+		}
+		
 		public TrashDockItem ()
 		{
-			Icon = "user-trash";
+			if (!Directory.Exists (Trash))
+				Directory.CreateDirectory (Trash);
+			
 			HoverText = "Recycle Bin";
+			
+			UpdateIcon ();
+			SetupFileSystemWatch ();
+		}
+		
+		void SetupFileSystemWatch ()
+		{
+			fsw = new FileSystemWatcher (Trash);
+			fsw.IncludeSubdirectories = false;
+			fsw.NotifyFilter = NotifyFilters.FileName | NotifyFilters.DirectoryName;
+
+			fsw.Changed += HandleChanged;
+			fsw.Created += HandleChanged;
+			fsw.Deleted += HandleChanged;
+			fsw.EnableRaisingEvents = true;
+		}
+
+		void HandleChanged(object sender, FileSystemEventArgs e)
+		{
+			Gtk.Application.Invoke (delegate {
+				UpdateIcon ();
+				OnPaintNeeded ();
+			});
+		}
+
+		void UpdateIcon ()
+		{
+			if (Directory.Exists (Trash) && (Directory.GetFiles (Trash).Any () || Directory.GetDirectories (Trash).Any ()))
+				Icon = "gnome-stock-trash-full";
+			else
+				Icon = "gnome-stock-trash";
 		}
 		
 		public override string UniqueID ()
 		{
 			return "TrashCan";
+		}
+		
+		public override bool CanAcceptDrop (IEnumerable<string> uris)
+		{
+			bool accepted = false;
+			
+			foreach (string item in uris)
+				accepted |= CanReceiveItem (item);
+
+			return accepted;
+		}
+		
+		public override bool CanAcceptDrop (AbstractDockItem item)
+		{
+			if (item == this)
+				return false;
+
+			if (item.Owner == null)
+				return false;
+
+			return item.Owner.ItemCanBeRemoved (item);
+		}
+		
+		public override bool AcceptDrop (AbstractDockItem item)
+		{
+			if (!CanAcceptDrop (item))
+				return false;
+
+			item.Owner.RemoveItem (item);
+			return true;
+		}
+		
+		public override bool AcceptDrop (IEnumerable<string> uris)
+		{
+			bool accepted = false;
+			
+			foreach (string item in uris)
+				accepted |= ReceiveItem (item);
+
+			return accepted;
+		}
+		
+		bool CanReceiveItem (string item)
+		{
+			if (item.StartsWith ("file://"))
+				item = item.Substring ("file://".Length);
+			
+			// if the file doesn't exist for whatever reason, we bail
+			if (!File.Exists (item) && !Directory.Exists (item))
+				return false;
+
+			return true;
+		}
+		
+		bool ReceiveItem (string item)
+		{
+			try {
+				DockServices.System.Execute (string.Format ("gvfs-trash \"{0}\"", item));
+			} catch (Exception e) { 
+//				Log.Error (e.Message);
+//				Log.Error ("Could not move {0} to trash", item); 
+				return false;
+			}
+			
+			UpdateIcon ();
+			OnPaintNeeded ();
+			return true;
 		}
 		
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
@@ -68,7 +178,35 @@ namespace Trash
 		
 		void EmptyTrash ()
 		{
-			// fixme
+			fsw.Dispose ();
+			fsw = null;
+			
+			string message = Catalog.GetString ("<big><b>Empty all of the items from the trash?</b></big>\n\n" + 
+			                                    "If you choose to empty the trash, all items in it\nwill be permanently lost. " + 
+			                                    "Please note that you\ncan also delete them separately.");
+			Gtk.MessageDialog md = new Gtk.MessageDialog (null, 
+												  Gtk.DialogFlags.Modal,
+												  Gtk.MessageType.Warning, 
+												  Gtk.ButtonsType.None,
+												  message);
+			md.AddButton ("_Cancel", Gtk.ResponseType.Cancel);
+			md.AddButton ("Empty _Trash", Gtk.ResponseType.Ok);
+
+			Gtk.ResponseType result = (Gtk.ResponseType) md.Run ();
+			md.Destroy ();
+
+			if (result != Gtk.ResponseType.Cancel && 
+				Directory.Exists (Trash)) {
+				try {
+					Directory.Delete (Trash, true);
+					Directory.CreateDirectory (Trash);
+				} catch { /* do nothing */ }
+			}
+				
+			SetupFileSystemWatch ();
+			
+			UpdateIcon ();
+			OnPaintNeeded ();
 		}
 	}
 }
