@@ -67,11 +67,13 @@ namespace Clock
 		public ClockItemProvider ()
 		{
 			clock = new ClockDockItem ();
+			clock.Owner = this;
 		}
 
 		#region IDisposable implementation
 		public void Dispose ()
 		{
+			clock.Dispose ();
 		}
 		#endregion
 

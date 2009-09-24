@@ -35,6 +35,7 @@ namespace Docky.Items
 
 		public DockyItem ()
 		{
+			Indicator = ActivityIndicator.Single;
 			HoverText = "Docky";
 			Icon = "logo.svg@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName;
 		}

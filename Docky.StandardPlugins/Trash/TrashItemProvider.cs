@@ -67,11 +67,13 @@ namespace Trash
 		public TrashItemProvider ()
 		{
 			trash = new TrashDockItem ();
+			trash.Owner = this;
 		}
 
 		#region IDisposable implementation
 		public void Dispose ()
 		{
+			trash.Dispose ();
 		}
 		#endregion
 
