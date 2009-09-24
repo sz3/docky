@@ -366,7 +366,7 @@ namespace Docky.Interface
 			                             () => ((DateTime.UtcNow - hidden_change_time) < BaseAnimationTime));
 			AnimationState.AddCondition (Animations.Bounce,
 			                             () => Items.Any (i => (DateTime.UtcNow - i.LastClick) < BounceTime ||
-					                                            (DateTime.UtcNow - i.StateSetTime) < BounceTime));
+					                                            (DateTime.UtcNow - i.StateSetTime (ItemState.Urgent)) < BounceTime));
 		}
 
 		void HandleRealized (object sender, EventArgs e)
@@ -1366,8 +1366,8 @@ namespace Docky.Interface
 			}
 			
 			if ((item.State & ItemState.Urgent) == ItemState.Urgent && 
-				(render_time - item.StateSetTime) < BounceTime) {
-				double urgentProgress = (render_time - item.StateSetTime).TotalMilliseconds / BounceTime.TotalMilliseconds;
+				(render_time - item.StateSetTime (ItemState.Urgent)) < BounceTime) {
+				double urgentProgress = (render_time - item.StateSetTime (ItemState.Urgent)).TotalMilliseconds / BounceTime.TotalMilliseconds;
 				
 				double move = Math.Abs (Math.Sin (Math.PI * urgentProgress) * UrgentBounceHeight);
 				center = center.MoveIn (Position, move);

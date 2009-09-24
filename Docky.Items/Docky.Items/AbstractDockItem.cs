@@ -40,6 +40,7 @@ namespace Docky.Items
 		Cairo.Color? average_color;
 		ActivityIndicator indicator;
 		ItemState state;
+		Dictionary<ItemState, DateTime> state_times;
 		
 		public event EventHandler HoverTextChanged;
 		public event EventHandler<PaintNeededEventArgs> PaintNeeded;
@@ -62,14 +63,12 @@ namespace Docky.Items
 				if (state == value)
 					return;
 				
-				StateSetTime = DateTime.UtcNow;
+				ItemState difference = value ^ state;
+				
+				SetStateTime (difference, DateTime.UtcNow);
 				state = value;
 				OnPaintNeeded ();
 			}
-		}
-		
-		public DateTime StateSetTime {
-			get; private set; 
 		}
 		
 		public DateTime LastClick {
@@ -124,6 +123,22 @@ namespace Docky.Items
 		
 		public AbstractDockItem ()
 		{
+			state_times = new Dictionary<ItemState, DateTime> ();
+		}
+		
+		public DateTime StateSetTime (ItemState state)
+		{
+			if (!state_times.ContainsKey (state))
+				return new DateTime (0);
+			return state_times [state];
+		}
+		
+		void SetStateTime (ItemState state, DateTime time)
+		{
+			foreach (ItemState i in Enum.GetValues (typeof(ItemState)).Cast<ItemState> ()) {
+				if ((state & i) == i)
+					state_times[i] = time;
+			}
 		}
 		
 		public abstract string UniqueID ();
@@ -197,16 +212,6 @@ namespace Docky.Items
 		}
 		
 		public virtual bool AcceptDrop (IEnumerable<string> uris)
-		{
-			return false;
-		}
-		
-		public virtual bool CanAcceptDrop (AbstractDockItem item)
-		{
-			return false;
-		}
-		
-		public virtual bool AcceptDrop (AbstractDockItem item)
 		{
 			return false;
 		}
