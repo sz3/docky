@@ -1139,7 +1139,7 @@ namespace Docky.Interface
 					
 					if (!adi.Zoom) {
 						val.Zoom = 1;
-						val.Center = new Cairo.PointD (centerPosition, center.Y);
+						val.Center = new Cairo.PointD ((int) centerPosition, center.Y);
 					} else {
 						double zoomedCenterHeight = DockHeightBuffer + (IconSize * zoom / 2.0);
 						
@@ -1354,7 +1354,6 @@ namespace Docky.Interface
 			
 			DrawValue val = DrawValues [item];
 			DrawValue center = val;
-			DockySurface icon = item.IconSurface (surface, ZoomedIconSize);
 			
 			if ((render_time - item.LastClick) < BounceTime) {
 				double animationProgress = (render_time - item.LastClick).TotalMilliseconds / BounceTime.TotalMilliseconds;
@@ -1393,8 +1392,14 @@ namespace Docky.Interface
 				DrawActiveIndicator (surface, area, item.AverageColor ());
 			}
 			
-			icon.ShowAtPointAndZoom (surface, center.Center, center.Zoom / zoomOffset);
-			
+			DockySurface icon;
+			if (item.Zoom) {
+				icon = item.IconSurface (surface, ZoomedIconSize);
+				icon.ShowAtPointAndZoom (surface, center.Center, center.Zoom / zoomOffset);
+			} else {
+				icon = item.IconSurface (surface, IconSize);
+				icon.ShowAtPointAndZoom (surface, center.Center, 1);
+			}
 			// fixme menu.visible check likely slow. buffer
 			if (HoveredItem == item && !drag_began && !Menu.Visible) {
 				DrawValue loc = val.MoveIn (Position, IconSize * (ZoomPercent + .1) - IconSize / 2);

@@ -65,7 +65,29 @@ namespace Docky.Items
 		
 		protected override void PaintIconSurface (DockySurface surface)
 		{
-			// fixme
+			surface.Context.LineWidth = 1;
+			surface.Context.MoveTo ((surface.Width / 2) - 0.5, 0);
+			surface.Context.LineTo ((surface.Width / 2) - 0.5, surface.Height);
+			
+			RadialGradient rg = new RadialGradient (surface.Width / 2, surface.Height / 2, 0, surface.Width / 2, surface.Height / 2, surface.Height / 2);
+			rg.AddColorStop (0, new Cairo.Color (1, 1, 1, .7));
+			rg.AddColorStop (1, new Cairo.Color (1, 1, 1, 0));
+		
+			surface.Context.Pattern = rg;
+			surface.Context.Stroke ();
+			rg.Destroy ();
+			
+			surface.Context.MoveTo ((surface.Width / 2) + 0.5, 0);
+			surface.Context.LineTo ((surface.Width / 2) + 0.5, surface.Height);
+			
+			rg = new RadialGradient (surface.Width / 2, surface.Height / 2, 0, surface.Width / 2, surface.Height / 2, surface.Height / 2);
+			rg.AddColorStop (0, new Cairo.Color (0, 0, 0, 1));
+			rg.AddColorStop (1, new Cairo.Color (0, 0, 0, 0));
+			
+			surface.Context.Pattern = rg;
+			surface.Context.Stroke ();
+			rg.Destroy ();
+			
 		}
 	}
 }
