@@ -508,6 +508,7 @@ namespace Docky.Interface
 				UnregisterItemProvider (e.Provider);
 			}
 			UpdateCollectionBuffer ();
+			AnimatedDraw ();
 		}
 
 		void PreferencesZoomPercentChanged (object sender, EventArgs e)
