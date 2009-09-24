@@ -543,6 +543,13 @@ namespace Docky.Interface
 				DefaultProvider.UnsetWindowManager ();
 		}
 
+		[GLib.ConnectBefore]
+		protected virtual void OnActiveViewDoubleClicked (object sender, ButtonPressEventArgs e)
+		{
+			if (e.Event.Type == EventType.TwoButtonPress)
+				OnDisablePluginButtonClicked (sender, e);
+		}
+
 		protected virtual void OnDisablePluginButtonClicked (object sender, System.EventArgs e)
 		{
 			PluginTreeNode node = active_view.NodeSelection.SelectedNode as PluginTreeNode;
@@ -560,6 +567,13 @@ namespace Docky.Interface
 			SyncPlugins ();
 		}
 
+		[GLib.ConnectBefore]
+		protected virtual void OnInactiveViewDoubleClicked (object sender, ButtonPressEventArgs e)
+		{
+			if (e.Event.Type == EventType.TwoButtonPress)
+				OnEnablePluginButtonClicked (sender, e);
+		}
+		
 		protected virtual void OnEnablePluginButtonClicked (object sender, System.EventArgs e)
 		{
 			PluginTreeNode node = inactive_view.NodeSelection.SelectedNode as PluginTreeNode;
