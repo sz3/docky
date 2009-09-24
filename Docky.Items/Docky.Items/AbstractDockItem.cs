@@ -215,6 +215,16 @@ namespace Docky.Items
 		{
 			return false;
 		}
+		
+		public virtual bool CanAcceptDrop (AbstractDockItem item)
+		{
+			return false;
+		}
+		
+		public virtual bool AcceptDrop (AbstractDockItem item)
+		{
+			return false;
+		}
 		#endregion
 		
 		#region Input Handling
