@@ -283,9 +283,9 @@ namespace Clock
 			
 			yield return new MenuItem (Catalog.GetString ("24-Hour Clock"), ShowMilitary ? "gtk-apply" : "gtk-remove", (o, a) => { ShowMilitary = !ShowMilitary; QueueRedraw(); });
 			
-			yield return new MenuItem (Catalog.GetString ("Show Date"), ShowDate ? "gtk-apply" : "gtk-remove", (o, a) => { ShowDate = !ShowDate; QueueRedraw (); }/*, !ShowDigital*/);
+			yield return new MenuItem (Catalog.GetString ("Show Date"), ShowDate ? "gtk-apply" : "gtk-remove", (o, a) => { ShowDate = !ShowDate; QueueRedraw (); }, !ShowDigital);
 			
-			yield return new MenuItem (Catalog.GetString ("Select Theme"), "preferences-desktop-theme", (o, a) => { new ClockThemeSelector (this).Show (); }/*, ShowDigital*/);
+			yield return new MenuItem (Catalog.GetString ("Select Theme"), "preferences-desktop-theme", (o, a) => { new ClockThemeSelector (this).Show (); }, ShowDigital);
 		}
 	}
 }

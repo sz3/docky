@@ -44,6 +44,12 @@ namespace Trash
 			}
 		}
 		
+		bool TrashFull {
+			get {
+				return Directory.Exists (Trash) && (Directory.GetFiles (Trash).Any () || Directory.GetDirectories (Trash).Any ());
+			}
+		}
+		
 		public TrashDockItem ()
 		{
 			if (!Directory.Exists (Trash))
@@ -77,7 +83,7 @@ namespace Trash
 
 		void UpdateIcon ()
 		{
-			if (Directory.Exists (Trash) && (Directory.GetFiles (Trash).Any () || Directory.GetDirectories (Trash).Any ()))
+			if (TrashFull)
 				Icon = "gnome-stock-trash-full";
 			else
 				Icon = "gnome-stock-trash";
@@ -168,7 +174,7 @@ namespace Trash
 		public override IEnumerable<MenuItem> GetMenuItems ()
 		{
 			yield return new MenuItem ("Open Recycling Bin", "user-trash", (o, a) => OpenTrash ());
-			yield return new MenuItem ("Empty Trash", "gtk-delete", (o, a) => EmptyTrash ());
+			yield return new MenuItem ("Empty Trash", "gtk-delete", (o, a) => EmptyTrash (), !TrashFull);
 		}
 		
 		void OpenTrash ()

@@ -41,6 +41,7 @@ namespace Docky.Menus
 			this.item = item;
 			item.IconChanged += ItemIconChanged;
 			item.TextChanged += ItemTextChanged;
+			item.DisabledChanged += ItemDisabledChanged;
 			
 			AddEvents ((int) Gdk.EventMask.AllEventsMask);
 			
@@ -49,6 +50,11 @@ namespace Docky.Menus
 			AboveChild = true;
 			
 			SetSizeRequest (200, 24);
+		}
+
+		void ItemDisabledChanged (object sender, EventArgs e)
+		{
+			QueueDraw ();
 		}
 
 		void ItemTextChanged (object sender, EventArgs e)
@@ -63,21 +69,26 @@ namespace Docky.Menus
 		
 		protected override bool OnButtonReleaseEvent (EventButton evnt)
 		{
-			item.SendClick ();
-			return false;
+			if (!item.Disabled)
+				item.SendClick ();
+			return item.Disabled;
 		}
 		
 		protected override bool OnEnterNotifyEvent (EventCrossing evnt)
 		{
-			hovered = true;
-			QueueDraw ();
+			if (!item.Disabled) {
+				hovered = true;
+				QueueDraw ();
+			}
 			return false;
 		}
 
 		protected override bool OnLeaveNotifyEvent (EventCrossing evnt)
 		{
-			hovered = false;
-			QueueDraw ();
+			if (!item.Disabled) {
+				hovered = false;
+				QueueDraw ();
+			}
 			return base.OnLeaveNotifyEvent (evnt);
 		}
 		
@@ -97,14 +108,14 @@ namespace Docky.Menus
 			Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (item.Icon, allocation.Height - 6);
 			
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
-				if (hovered) {
+				if (hovered && !item.Disabled) {
 					cr.Rectangle (allocation.X, allocation.Y, allocation.Width, allocation.Height);
 					cr.Color = new Cairo.Color (1, 1, 1, .1);
 					cr.Fill ();
 				}
 				
 				Gdk.CairoHelper.SetSourcePixbuf (cr, pixbuf, allocation.X + 1, allocation.Y + 3);
-				cr.Paint ();
+				cr.PaintWithAlpha (item.Disabled ? 0.5 : 1);
 			
 				Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
 				layout.SetText (item.Text);
@@ -119,7 +130,7 @@ namespace Docky.Menus
 				
 				cr.MoveTo (allocation.X + allocation.Height + 5, allocation.Y + (allocation.Height - logical.Height) / 2);
 				Pango.CairoHelper.LayoutPath (cr, layout);
-				cr.Color = new Cairo.Color (1, 1, 1);
+				cr.Color = new Cairo.Color (1, 1, 1, item.Disabled ? 0.5 : 1);
 				cr.Fill ();
 			}
 			

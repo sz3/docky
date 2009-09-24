@@ -26,9 +26,22 @@ namespace Docky.Menus
 
 	public class MenuItem
 	{
+		public event EventHandler DisabledChanged;
 		public event EventHandler TextChanged;
 		public event EventHandler IconChanged;
 		public event EventHandler Clicked;
+		
+		bool disabled;
+		public bool Disabled {
+			get { return disabled; }
+			set {
+				if (disabled == value)
+					return;
+				disabled = value;
+				if (DisabledChanged != null)
+					DisabledChanged (this, EventArgs.Empty);
+			} 
+		}
 		
 		string text;
 		public string Text {
@@ -64,9 +77,22 @@ namespace Docky.Menus
 		{
 			this.icon = icon;
 			this.text = text;
+			disabled = false;
+		}
+		
+		public MenuItem (string text, string icon, bool disabled)
+		{
+			this.icon = icon;
+			this.text = text;
+			this.disabled = disabled;
 		}
 		
 		public MenuItem (string text, string icon, EventHandler onClicked) : this(text, icon)
+		{
+			Clicked += onClicked;
+		}
+		
+		public MenuItem (string text, string icon, EventHandler onClicked, bool disabled) : this(text, icon, disabled)
 		{
 			Clicked += onClicked;
 		}
