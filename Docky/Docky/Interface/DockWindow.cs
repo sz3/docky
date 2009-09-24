@@ -1404,8 +1404,27 @@ namespace Docky.Interface
 				icon = item.IconSurface (surface, ZoomedIconSize);
 				icon.ShowAtPointAndZoom (surface, center.Center, center.Zoom / zoomOffset);
 			} else {
+				double rotation = 0;
+				
+				if (item.RotateWithDock) {
+					switch (Position) {
+					case DockPosition.Top:
+						rotation = Math.PI;
+						break;
+					case DockPosition.Left:
+						rotation = Math.PI * 1.5;
+						break;
+					case DockPosition.Right:
+						rotation = Math.PI * .5;
+						break;
+					case DockPosition.Bottom:
+						rotation = 0;
+						break;
+					}
+				}
+				
 				icon = item.IconSurface (surface, IconSize);
-				icon.ShowAtPointAndZoom (surface, center.Center, 1);
+				icon.ShowAtPointAndRotation (surface, center.Center, rotation);
 			}
 			// fixme menu.visible check likely slow. buffer
 			if (HoveredItem == item && !drag_began && !Menu.Visible) {

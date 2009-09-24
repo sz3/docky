@@ -50,6 +50,23 @@ namespace Docky.CairoHelper
 			
 		}
 		
+		public static void ShowAtPointAndRotation (this DockySurface self, DockySurface target, PointD point, double rotation)
+		{
+			if (target == null)
+				throw new ArgumentNullException ("target");
+			
+			Cairo.Context cr = target.Context;
+			double cos, sin;
+			cos = Math.Cos (rotation);
+			sin = Math.Sin (rotation);
+			Matrix m = new Matrix (cos, sin, 0 - sin, cos, point.X, point.Y);
+			cr.Transform (m);
+			cr.SetSource (self.Internal, 0 - self.Width / 2, 0 - self.Height / 2);
+			cr.Paint ();
+			
+			cr.IdentityMatrix ();
+		}
+		
 		public static void ShowAtEdge (this DockySurface self, DockySurface target, PointD point, DockPosition position)
 		{
 			if (target == null)
