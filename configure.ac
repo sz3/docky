@@ -119,6 +119,7 @@ Docky/Makefile
 Docky.CairoHelper/Makefile
 Docky.Items/Makefile
 Docky.StandardPlugins/Makefile
+Docky.StandardPlugins/Docky.DefaultClockTheme/Makefile
 Docky.Services/Makefile
 Docky.Windowing/Makefile
 Docky.Windowing/Docky.Windowing.dll.config

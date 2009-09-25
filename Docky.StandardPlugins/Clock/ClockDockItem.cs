@@ -87,8 +87,8 @@ namespace Clock
 		public IEnumerable<string> ThemeURIs {
 			get {
 				//yield return System.IO.Path.Combine (Services.Paths.UserDataDirectory, "ClockTheme/");
-				yield return "/usr/share/gnome-do/ClockTheme/";
-				yield return "/usr/local/share/gnome-do/ClockTheme/";
+				yield return "/usr/local/share/docky/ClockTheme/";
+				yield return "/usr/share/docky/ClockTheme/";
 			}
 		}
 		

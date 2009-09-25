@@ -1,3 +1,5 @@
+SUBDIRS = Docky.DefaultClockTheme
+
 # Simple component buildsystem
 include $(top_srcdir)/build.rules.mk
 
