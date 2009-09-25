@@ -7,6 +7,8 @@ TARGET = library
 PKG_CONFIG_FILES = docky.standardplugins.pc
 
 FILES = \
+	BatteryMonitor/BatteryMonitorItemProvider.cs \
+	BatteryMonitor/BatteryMonitorDockItem.cs \
 	Clock/ClockItemProvider.cs \
 	Clock/ClockDockItem.cs \
 	Clock/ClockThemeSelector.cs \
@@ -34,7 +36,21 @@ RESOURCES = \
 	Resources/Docky.StandardPlugins.addin.xml \
 	Resources/icons/badge-yellow.svg \
 	Resources/icons/gmail-logo-dark.png \
-	Resources/icons/gmail-logo.png
+	Resources/icons/gmail-logo.png \
+	Resources/battery/battery_bottom.svg \
+	Resources/battery/battery_inside_10.svg \
+	Resources/battery/battery_inside_100.svg \
+	Resources/battery/battery_inside_20.svg \
+	Resources/battery/battery_inside_30.svg \
+	Resources/battery/battery_inside_40.svg \
+	Resources/battery/battery_inside_50.svg \
+	Resources/battery/battery_inside_60.svg \
+	Resources/battery/battery_inside_70.svg \
+	Resources/battery/battery_inside_80.svg \
+	Resources/battery/battery_inside_90.svg \
+	Resources/battery/battery_inside_90_new.svg \
+	Resources/battery/battery_plugged.svg \
+	Resources/battery/battery_top.svg
 
 PROJECT_REFERENCES = \
 	Docky.CairoHelper \
@@ -49,5 +65,6 @@ REFERENCES =  \
 	System.Web \
 	Mono.Cairo \
 	Mono.Posix \
+	$(NDESK_DBUS_10_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(LIBRSVG_SHARP_LIBS)
