@@ -12,6 +12,7 @@ FILES = \
     Docky.Services/DockServices.cs \
     Docky.Services/SystemService.cs \
     Docky.Services/DrawingService.cs \
+    Docky.Services/NotificationService.cs \
     Docky.Services/Preferences.cs
 
 REFERENCES =  \
@@ -20,4 +21,5 @@ REFERENCES =  \
 	$(GCONF_SHARP_20_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(MONO_CAIRO_LIBS) \
+	$(NOTIFY_SHARP_LIBS) \
 	$(LIBRSVG_SHARP_LIBS)

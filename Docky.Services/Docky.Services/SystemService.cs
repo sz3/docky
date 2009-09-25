@@ -27,6 +27,7 @@ namespace Docky.Services
 	{
 		public event EventHandler ConnectionStatusChanged;
 		public event EventHandler BatteryStateChanged;
+		public event EventHandler NetworkStateChanged;
 		
 		public bool NetworkConnected {
 			get {

@@ -29,11 +29,14 @@ namespace Docky.Services
 		
 		public static SystemService System { get; private set; }
 		
+		public static NotificationService Notifications { get; private set; }
+		
 		static DockServices ()
 		{
-			Drawing     = new DrawingService ();
-			Preferences = new PreferencesService ();
-			System     = new SystemService ();
+			Drawing       = new DrawingService ();
+			Preferences   = new PreferencesService ();
+			System        = new SystemService ();
+			Notifications = new NotificationService ();
 		}
 	}
 }
