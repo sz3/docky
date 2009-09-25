@@ -1258,7 +1258,7 @@ namespace Docky.Interface
 			staticArea = StaticDockArea (surface);
 			
 			int hotAreaSize;
-			if ((!Preferences.FadeOnHide || Preferences.FadeOpacity == 1) && AutohideManager.Hidden) {
+			if ((!Preferences.FadeOnHide || Preferences.FadeOpacity == 0) && AutohideManager.Hidden) {
 				hotAreaSize = 1;
 			} else if (DockHovered) {
 				hotAreaSize = ZoomedDockHeight;
