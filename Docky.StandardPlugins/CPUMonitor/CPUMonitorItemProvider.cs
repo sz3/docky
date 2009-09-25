@@ -23,11 +23,11 @@ using System.Text;
 
 using Docky.Items;
 
-namespace Clock
+namespace CPUMonitor
 {
 
 
-	public class ClockItemProvider : IDockItemProvider
+	public class CPUMonitorItemProvider : IDockItemProvider
 	{
 
 		#region IDockItemProvider implementation
@@ -45,7 +45,7 @@ namespace Clock
 		
 		public string Name {
 			get {
-				return "Clock";
+				return "CPUMonitor";
 			}
 		}
 		
@@ -57,23 +57,23 @@ namespace Clock
 		
 		public IEnumerable<AbstractDockItem> Items {
 			get {
-				yield return clock;
+				yield return monitor;
 			}
 		}
 		#endregion
 
-		ClockDockItem clock;
+		CPUMonitorDockItem monitor;
 		
-		public ClockItemProvider ()
+		public CPUMonitorItemProvider ()
 		{
-			clock = new ClockDockItem ();
-			clock.Owner = this;
+			monitor = new CPUMonitorDockItem ();
+			monitor.Owner = this;
 		}
 
 		#region IDisposable implementation
 		public void Dispose ()
 		{
-			clock.Dispose ();
+			monitor.Dispose ();
 		}
 		#endregion
 

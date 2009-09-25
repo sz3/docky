@@ -10,6 +10,8 @@ FILES = \
 	Clock/ClockItemProvider.cs \
 	Clock/ClockDockItem.cs \
 	Clock/ClockThemeSelector.cs \
+	CPUMonitor/CPUMonitorDockItem.cs \
+	CPUMonitor/CPUMonitorItemProvider.cs \
 	Trash/TrashItemProvider.cs \
 	Trash/TrashDockItem.cs
 

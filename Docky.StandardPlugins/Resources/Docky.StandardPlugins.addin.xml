@@ -15,5 +15,9 @@
 	<Extension path="/Docky/ItemProvider">
 		<ItemProvider type="Clock.ClockItemProvider" />
 	</Extension>
+	
+	<Extension path="/Docky/ItemProvider">
+		<ItemProvider type="CPUMonitor.CPUMonitorItemProvider" />
+	</Extension>
 
 </Addin>
