@@ -44,6 +44,8 @@
       <Package>rsvg2-sharp-2.0</Package>
     </Reference>
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Docky.CairoHelper\Docky.CairoHelper.csproj">
@@ -73,6 +75,19 @@
     <Compile Include="Clock\ClockThemeSelector.cs" />
     <Compile Include="CPUMonitor\CPUMonitorDockItem.cs" />
     <Compile Include="CPUMonitor\CPUMonitorItemProvider.cs" />
+    <Compile Include="GMail\GMailItemProvider.cs" />
+    <Compile Include="GMail\GMailAtom.cs" />
+    <Compile Include="GMail\GMailErrorArgs.cs" />
+    <Compile Include="GMail\GMailLoginConfig.cs" />
+    <Compile Include="GMail\GMailPreferences.cs" />
+    <Compile Include="GMail\GMailConfiguration.cs" />
+    <Compile Include="GMail\GMailConfigurationDialog.cs" />
+    <Compile Include="GMail\GMailMenuItem.cs" />
+    <Compile Include="GMail\GMailDockItem.cs" />
+    <Compile Include="GMail\AbstractLoginWidget.cs" />
+    <Compile Include="GMail\gtk-gui\GMail.GMailConfiguration.cs" />
+    <Compile Include="GMail\gtk-gui\GMail.AbstractLoginWidget.cs" />
+    <Compile Include="GMail\gtk-gui\generated.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Docky.StandardPlugins.addin.xml">

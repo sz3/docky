@@ -19,5 +19,9 @@
 	<Extension path="/Docky/ItemProvider">
 		<ItemProvider type="CPUMonitor.CPUMonitorItemProvider" />
 	</Extension>
+	
+	<Extension path="/Docky/ItemProvider">
+		<ItemProvider type="GMail.GMailItemProvider" />
+	</Extension>
 
 </Addin>
