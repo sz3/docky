@@ -25,6 +25,8 @@ FILES = \
 	GMail/gtk-gui/GMail.GMailConfiguration.cs \
 	GMail/gtk-gui/GMail.AbstractLoginWidget.cs \
 	GMail/gtk-gui/generated.cs \
+	Switcher/SwitcherItemProvider.cs \
+	Switcher/SwitcherDockItem.cs \
 	Trash/TrashItemProvider.cs \
 	Trash/TrashDockItem.cs
 
@@ -37,7 +39,8 @@ RESOURCES = \
 PROJECT_REFERENCES = \
 	Docky.CairoHelper \
 	Docky.Services \
-	Docky.Items
+	Docky.Items \
+	Docky.Windowing
 
 REFERENCES =  \
 	System \
