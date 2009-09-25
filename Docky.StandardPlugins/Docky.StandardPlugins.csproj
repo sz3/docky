@@ -10,6 +10,7 @@
     <RootNamespace>Docky.StandardPlugins</RootNamespace>
     <AssemblyName>Docky.StandardPlugins</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <ReleaseVersion>2.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,6 +38,12 @@
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="Mono.Posix" />
     <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="Mono.Cairo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <Reference Include="rsvg2-sharp, Version=2.18.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>rsvg2-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Docky.CairoHelper\Docky.CairoHelper.csproj">
@@ -54,11 +61,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Trash\" />
+    <Folder Include="CPUMonitor\" />
+    <Folder Include="Clock\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Trash\TrashDockItem.cs" />
     <Compile Include="Trash\TrashItemProvider.cs" />
+    <Compile Include="Clock\ClockDockItem.cs" />
+    <Compile Include="Clock\ClockItemProvider.cs" />
+    <Compile Include="Clock\ClockThemeSelector.cs" />
+    <Compile Include="CPUMonitor\CPUMonitorDockItem.cs" />
+    <Compile Include="CPUMonitor\CPUMonitorItemProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Docky.StandardPlugins.addin.xml">
