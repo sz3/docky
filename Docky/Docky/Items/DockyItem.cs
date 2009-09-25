@@ -45,6 +45,14 @@ namespace Docky.Items
 			return "DockyItem";
 		}
 		
+		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
+		{
+			if (button == 1)
+				Docky.Config.Show ();
+			
+			return ClickAnimation.None;
+		}
+		
 		public override IEnumerable<Menus.MenuItem> GetMenuItems ()
 		{
 			yield return new MenuItem ("Show Preferences", "gtk-properties", (o, a) => Docky.Config.Show ());
