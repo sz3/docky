@@ -281,10 +281,11 @@ namespace Docky.Interface
 			get {
 				if (!Preferences.FadeOnHide)
 					return 1;
-				double progress = Preferences.FadeOpacity * Math.Min (1, (render_time - hidden_change_time).TotalMilliseconds / 
-				                            BaseAnimationTime.TotalMilliseconds);
+				double progress = Math.Min (1, (render_time - hidden_change_time).TotalMilliseconds / 
+									BaseAnimationTime.TotalMilliseconds);
+				progress = (1 - Preferences.FadeOpacity) * progress;
 				if (!AutohideManager.Hidden)
-					return progress;
+					return Preferences.FadeOpacity + progress;
 				return 1 - progress;
 			}
 		}
