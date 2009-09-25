@@ -93,7 +93,7 @@ namespace Docky.Interface
 				if (hide_type == value)
 					return;
 				hide_type = value;
-				SetOption ("Autohide", hide_type.ToString ());
+				SetOption<string> ("Autohide", hide_type.ToString ());
 				OnAutohideChanged ();
 			}
 		}
@@ -102,14 +102,14 @@ namespace Docky.Interface
 		public bool FadeOnHide {
 			get {
 				if (!fade_on_hide.HasValue)
-					fade_on_hide = GetOption ("FadeOnHide", false);
+					fade_on_hide = GetOption<bool> ("FadeOnHide", false);
 				return fade_on_hide.Value; 
 			}
 			set {
 				if (fade_on_hide == value)
 					return;
 				fade_on_hide = value;
-				SetOption ("FadeOnHide", fade_on_hide.Value);
+				SetOption<bool> ("FadeOnHide", fade_on_hide.Value);
 				OnFadeOnHideChanged ();
 			}
 		}
@@ -118,14 +118,14 @@ namespace Docky.Interface
 		public double FadeOpacity {
 			get {
 				if (!fade_opacity.HasValue)
-					fade_opacity = GetOption ("FadeOpacity", 1);
+					fade_opacity = GetOption<double> ("FadeOpacity", 1);
 				return fade_opacity.Value; 
 			}
 			set {
 				if (fade_opacity == value)
 					return;
 				fade_opacity = value;
-				SetOption ("FadeOpacity", fade_opacity.Value);
+				SetOption<double> ("FadeOpacity", fade_opacity.Value);
 				OnFadeOpacityChanged ();
 			}
 		}
@@ -137,7 +137,7 @@ namespace Docky.Interface
 				if (position == value || Docky.Controller.Docks.Any (d => d.Preferences.Position == value))
 					return;
 				position = value;
-				SetOption ("Position", position.ToString ());
+				SetOption<string> ("Position", position.ToString ());
 				OnPositionChanged ();
 			}
 		}
@@ -146,7 +146,7 @@ namespace Docky.Interface
 		public int IconSize {
 			get {
 				if (!icon_size.HasValue) {
-					icon_size = GetOption ("IconSize", 64);
+					icon_size = GetOption<int?> ("IconSize", 64);
 				}
 				return icon_size.Value; 
 			}
@@ -155,7 +155,7 @@ namespace Docky.Interface
 				if (icon_size == value)
 					return;
 				icon_size = value;
-				SetOption ("IconSize", icon_size.Value);
+				SetOption<int?> ("IconSize", icon_size.Value);
 				OnIconSizeChanged ();
 			}
 		}
@@ -164,14 +164,14 @@ namespace Docky.Interface
 		public bool ZoomEnabled {
 			get {
 				if (!zoom_enabled.HasValue)
-					zoom_enabled = GetOption ("ZoomEnabled", true);
+					zoom_enabled = GetOption<bool?> ("ZoomEnabled", true);
 				return zoom_enabled.Value; 
 			}
 			set {
 				if (zoom_enabled == value)
 					return;
 				zoom_enabled = value;
-				SetOption ("ZoomEnabled", zoom_enabled.Value);
+				SetOption<bool?> ("ZoomEnabled", zoom_enabled.Value);
 				OnZoomEnabledChanged ();
 			}
 		}
@@ -180,7 +180,7 @@ namespace Docky.Interface
 		public double ZoomPercent {
 			get {
 				if (!zoom_percent.HasValue)
-					zoom_percent = GetOption ("ZoomPercent", 2.0);
+					zoom_percent = GetOption<double?> ("ZoomPercent", 2.0);
 				return zoom_percent.Value; 
 			}
 			set {
@@ -189,7 +189,7 @@ namespace Docky.Interface
 					return;
 				
 				zoom_percent = value;
-				SetOption<double> ("ZoomPercent", zoom_percent.Value);
+				SetOption<double?> ("ZoomPercent", zoom_percent.Value);
 				OnZoomPercentChanged ();
 			}
 		}
@@ -199,12 +199,12 @@ namespace Docky.Interface
 		public bool WindowManager {
 			get {
 				if (!window_manager.HasValue)
-					window_manager = GetOption ("WindowManager", false);
+					window_manager = GetOption<bool?> ("WindowManager", false);
 				return window_manager.Value; 
 			}
 			set {
 				window_manager = value;
-				SetOption ("WindowManager", window_manager);
+				SetOption<bool?> ("WindowManager", window_manager);
 			}
 		}
 		
@@ -227,8 +227,8 @@ namespace Docky.Interface
 		}
 		
 		bool FirstRun {
-			get { return prefs.Get ("FirstRun", true); }
-			set { prefs.Set ("FirstRun", value); }
+			get { return prefs.Get<bool> ("FirstRun", true); }
+			set { prefs.Set<bool> ("FirstRun", value); }
 		}
 		
 		public DockPreferences (string dockName)
