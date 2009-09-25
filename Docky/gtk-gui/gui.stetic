@@ -353,7 +353,7 @@ Bottom</property>
                     <property name="CanFocus">True</property>
                     <property name="ShowScrollbars">True</property>
                     <property name="HeadersVisible">False</property>
-                    <signal name="ButtonPressEvent" handler="OnInactiveViewDoubleClicked" />
+                    <signal name="ButtonPressEvent" handler="OnActiveViewDoubleClicked" />
                   </widget>
                 </child>
               </widget>

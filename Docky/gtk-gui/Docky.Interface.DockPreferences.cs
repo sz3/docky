@@ -351,8 +351,8 @@ namespace Docky.Interface {
             this.window_manager_check.Toggled += new System.EventHandler(this.OnWindowManagerCheckToggled);
             this.enable_plugin_button.Clicked += new System.EventHandler(this.OnEnablePluginButtonClicked);
             this.disable_plugin_button.Clicked += new System.EventHandler(this.OnDisablePluginButtonClicked);
-            this.inactive_view.ButtonPressEvent += new Gtk.ButtonPressEventHandler(this.OnInactiveViewDoubleClicked);
             this.active_view.ButtonPressEvent += new Gtk.ButtonPressEventHandler(this.OnActiveViewDoubleClicked);
+            this.inactive_view.ButtonPressEvent += new Gtk.ButtonPressEventHandler(this.OnInactiveViewDoubleClicked);
         }
     }
 }
