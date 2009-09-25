@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -19,12 +19,12 @@ using System;
 
 namespace Docky.Services
 {
-
-
 	public interface IPreferences
 	{
 		T Get<T> (string name, T def);
+		T GetSecure<T> (string name, T def);
 		
 		bool Set<T> (string name, T val);
+		bool SetSecure<T> (string name, T val);
 	}
 }

@@ -18,8 +18,10 @@ FILES = \
 REFERENCES =  \
 	System \
 	System.Core \
+	Mono.Posix \
 	$(GCONF_SHARP_20_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
+	$(GNOME_KEYRING_SHARP_LIBS) \
 	$(MONO_CAIRO_LIBS) \
 	$(NOTIFY_SHARP_LIBS) \
 	$(LIBRSVG_SHARP_LIBS)
