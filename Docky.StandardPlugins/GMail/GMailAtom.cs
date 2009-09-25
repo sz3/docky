@@ -253,7 +253,7 @@ namespace GMail
 						Gtk.Application.Invoke (delegate {
 							OnGMailFailed (Catalog.GetString ("Network Error"));
 						});
-				} catch (Exception e) {
+				} catch /*(Exception e)*/ {
 					//Log<GMailAtom>.Error (e.ToString ());
 					Gtk.Application.Invoke (delegate {
 						OnGMailFailed (Catalog.GetString ("General Error"));

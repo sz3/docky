@@ -31,9 +31,6 @@ namespace GMail
             
         const string Uri = "https://www.google.com/accounts/NewAccount?service=mail";
 		
-		string Username { get; set; }
-		string Password { get; set; }
-		
 		public GMailLoginConfig () : base ("GMail", Uri)
 		{
 			Username = GMailPreferences.User;

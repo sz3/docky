@@ -32,7 +32,7 @@ namespace GMail
 		{
 			this.message = message;
 			Clicked += delegate {
-				DockServices.System.Open (message.Link);
+				DockServices.System.Open (this.message.Link);
 			};
 		}
 	}

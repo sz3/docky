@@ -220,11 +220,6 @@ namespace GMail
 			validate_btn.Sensitive = true;
 		}
 
-		void OnUsernameEntryActivated (object sender, System.EventArgs e)
-		{
-			password_entry.GrabFocus ();
-		}
-
 		void OnPasswordEntryActivated (object sender, System.EventArgs e)
 		{
 			validate_btn.Activate ();
