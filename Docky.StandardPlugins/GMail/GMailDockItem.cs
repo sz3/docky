@@ -235,18 +235,18 @@ namespace GMail
 				yield return new SeparatorMenuItem ();
 			}
 			
-			yield return new MenuItem (Catalog.GetString ("Check Now"),
-					Gtk.Stock.Refresh,
-					delegate {
-						GMailAtom.ResetTimer (true);
-						QueueRedraw ();
-					});
-			
 			yield return new MenuItem (Catalog.GetString ("Settings"),
 					Gtk.Stock.Preferences,
 					delegate {
 						GMailConfigurationDialog dlg = new GMailConfigurationDialog ();
 						dlg.Show ();
+					});
+			
+			yield return new MenuItem (Catalog.GetString ("Check Now"),
+					Gtk.Stock.Refresh,
+					delegate {
+						GMailAtom.ResetTimer (true);
+						QueueRedraw ();
 					});
 		}
 	}
