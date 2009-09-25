@@ -58,7 +58,14 @@
       <SpecificVersion>False</SpecificVersion>
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-  </ItemGroup>
+    <Reference Include="Mono.Posix" />
+    <Reference Include="Gnome.Keyring, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1a73e1bde00c9b66">
+      <Package>gnome-keyring-sharp</Package>
+    </Reference>
+    <Reference Include="notify-sharp, Version=0.4.0.0, Culture=neutral, PublicKeyToken=2df29c54e245917a">
+      <Package>notify-sharp</Package>
+    </Reference>
+ </ItemGroup>
   <ItemGroup>
     <Compile Include="Docky.Services\IPreferences.cs" />
     <Compile Include="Docky.Services\PreferencesService.cs" />
@@ -66,6 +73,7 @@
     <Compile Include="Docky.Services\SystemService.cs" />
     <Compile Include="Docky.Services\DrawingService.cs" />
     <Compile Include="Docky.Services\Preferences.cs" />
+	<Compile Include="Docky.Services\NotificationService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
