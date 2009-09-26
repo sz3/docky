@@ -189,7 +189,11 @@ namespace Docky.Interface
 		
 		
 		AbstractDockItem HoveredItem {
-			get { return hoveredItem; }
+			get {
+				if (!DockHovered)
+					return null;
+				return hoveredItem; 
+			}
 			set {
 				if (hoveredItem == value)
 					return;
