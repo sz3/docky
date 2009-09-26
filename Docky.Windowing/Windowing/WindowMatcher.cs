@@ -99,8 +99,8 @@ namespace Docky.Windowing
 			}
 		}
 		
-		Dictionary<Wnck.Window, string> window_to_desktop_file;
-		Dictionary<string, string> desktop_file_exec_strings;
+		Dictionary<Wnck.Window, List<string>> window_to_desktop_files;
+		Dictionary<string, List<string>> exec_to_desktop_files;
 		List<Regex> prefix_filters;
 		Wnck.Screen screen;
 		
@@ -108,9 +108,9 @@ namespace Docky.Windowing
 		{
 			screen = Wnck.Screen.Default;
 			prefix_filters = BuildPrefixFilters ();
-			desktop_file_exec_strings = BuildExecStrings ();
+			exec_to_desktop_files = BuildExecStrings ();
 			
-			window_to_desktop_file = new Dictionary<Wnck.Window, string> ();
+			window_to_desktop_files = new Dictionary<Wnck.Window, List<string>> ();
 			foreach (Wnck.Window w in screen.Windows) {
 				SetupWindow (w);
 			}
@@ -128,15 +128,15 @@ namespace Docky.Windowing
 		void WnckScreenDefaultWindowClosed (object o, WindowClosedArgs args)
 		{
 			if (args.Window != null)
-				window_to_desktop_file.Remove (args.Window);
+				window_to_desktop_files.Remove (args.Window);
 		}
 		
 		void SetupWindow (Wnck.Window window)
 		{
-			window_to_desktop_file[window] = FindDesktopFileForWindowOrDefault (window);
+			window_to_desktop_files[window] = FindDesktopFileForWindowOrDefault (window).ToList ();
 			
 			window.NameChanged += delegate {
-				window_to_desktop_file[window] = FindDesktopFileForWindowOrDefault (window);
+				window_to_desktop_files[window] = FindDesktopFileForWindowOrDefault (window).ToList ();
 			};
 		}
 		#endregion
@@ -146,8 +146,8 @@ namespace Docky.Windowing
 			if (desktop_file == null)
 				throw new ArgumentNullException ("desktop file");
 			
-			foreach (KeyValuePair<Wnck.Window, string> kvp in window_to_desktop_file) {
-				if (kvp.Value == desktop_file)
+			foreach (KeyValuePair<Wnck.Window, List<string>> kvp in window_to_desktop_files) {
+				if (kvp.Value.Contains (desktop_file))
 					yield return kvp.Key;
 			}
 		}
@@ -157,13 +157,13 @@ namespace Docky.Windowing
 			if (window == null)
 				throw new ArgumentNullException ("window");
 			
-			if (!window_to_desktop_file.ContainsKey (window))
+			if (!window_to_desktop_files.ContainsKey (window))
 				return new[] { window };
 			
-			string id = window_to_desktop_file[window];
+			string id = window_to_desktop_files[window].First ();
 			
-			return window_to_desktop_file
-				.Where (kvp => kvp.Value == id)
+			return window_to_desktop_files
+				.Where (kvp => kvp.Value.Contains (id))
 				.Select (kvp => kvp.Key);
 		}
 		
@@ -172,18 +172,21 @@ namespace Docky.Windowing
 			if (window == null)
 				throw new ArgumentNullException ("window");
 			
-			string file = window_to_desktop_file[window];
+			string file = window_to_desktop_files[window].First ();
 			return (file.EndsWith (".desktop")) ? file : null;
 		}
 		
-		string FindDesktopFileForWindowOrDefault (Wnck.Window window)
+		IEnumerable<string> FindDesktopFileForWindowOrDefault (Wnck.Window window)
 		{
 			int pid = window.Pid;
 			if (pid <= 1) {
-				if (window.ClassGroup != null)
-					return window.ClassGroup.ResClass;
-				else
-					return window.Name;
+				if (window.ClassGroup != null) {
+					yield return window.ClassGroup.ResClass;
+					yield break;
+				} else {
+					yield return window.Name;
+					yield break;
+				}
 			}
 			
 			string[] command_line = CommandLineForPid (pid);
@@ -209,16 +212,18 @@ namespace Docky.Windowing
 					IEnumerable<string> matches = DesktopFiles
 						.Where (file => Path.GetFileNameWithoutExtension (file).Equals (class_name, StringComparison.CurrentCultureIgnoreCase));
 					
-					if (matches.Any ())
-						return matches.First ();
+					foreach (string s in matches)
+						yield return s;
 				}
 			}
 			
-			if (desktop_file_exec_strings.ContainsKey (command_line[0])) {
-				return desktop_file_exec_strings[command_line[0]];
+			if (exec_to_desktop_files.ContainsKey (command_line[0])) {
+				foreach (string s in exec_to_desktop_files[command_line[0]])
+					yield return s;
+				yield break;
 			}
 			
-			return window.Pid.ToString ();
+			yield return window.Pid.ToString ();
 		}
 			
 		string[] CommandLineForPid (int pid)
@@ -243,13 +248,16 @@ namespace Docky.Windowing
 				.ToArray ();
 		}
 		
-		Dictionary<string, string> BuildExecStrings ()
+		Dictionary<string, List<string>> BuildExecStrings ()
 		{
-			Dictionary<string, string> result = new Dictionary<string, string> ();
+			Dictionary<string, List<string>> result = new Dictionary<string, List<string>> ();
 			
 			foreach (string file in DesktopFiles) {
 				Gnome.DesktopItem item = Gnome.DesktopItem.NewFromFile (file, 0);
 				if (item == null || !item.AttrExists ("Exec"))
+					continue;
+				
+				if (item.AttrExists ("NoDisplay") && item.GetBoolean ("NoDisplay"))
 					continue;
 				
 				string exec = item.GetString ("Exec");
@@ -270,7 +278,9 @@ namespace Docky.Windowing
 				if (vexec == null)
 					continue;
 				
-				result [vexec] = file;
+				if (!result.ContainsKey (vexec))
+					result[vexec] = new List<string> ();
+				result[vexec].Add (file);
 				item.Dispose ();
 			}
 			
