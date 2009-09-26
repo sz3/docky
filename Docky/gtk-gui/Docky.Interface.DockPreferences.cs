@@ -275,6 +275,7 @@ namespace Docky.Interface {
             this.active_view.CanFocus = true;
             this.active_view.Name = "active_view";
             this.active_view.HeadersVisible = false;
+            this.active_view.Reorderable = true;
             this.GtkScrolledWindow1.Add(this.active_view);
             this.table2.Add(this.GtkScrolledWindow1);
             Gtk.Table.TableChild w17 = ((Gtk.Table.TableChild)(this.table2[this.GtkScrolledWindow1]));

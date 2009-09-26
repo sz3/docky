@@ -65,7 +65,8 @@
     <Reference Include="notify-sharp, Version=0.4.0.0, Culture=neutral, PublicKeyToken=2df29c54e245917a">
       <Package>notify-sharp</Package>
     </Reference>
- </ItemGroup>
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Docky.Services\IPreferences.cs" />
     <Compile Include="Docky.Services\PreferencesService.cs" />
@@ -73,7 +74,7 @@
     <Compile Include="Docky.Services\SystemService.cs" />
     <Compile Include="Docky.Services\DrawingService.cs" />
     <Compile Include="Docky.Services\Preferences.cs" />
-	<Compile Include="Docky.Services\NotificationService.cs" />
+    <Compile Include="Docky.Services\NotificationService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

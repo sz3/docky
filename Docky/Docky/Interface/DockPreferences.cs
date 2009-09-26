@@ -276,6 +276,8 @@ namespace Docky.Interface
 		{
 			SetupTreeView (inactive_view);
 			SetupTreeView (active_view);
+			
+			active_view.Reorderable = true;
 		}
 		
 		void SetupTreeView (Gtk.NodeView view)
