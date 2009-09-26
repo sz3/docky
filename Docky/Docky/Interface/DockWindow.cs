@@ -156,18 +156,22 @@ namespace Docky.Interface
 			get {
 				if (collection_backend.Count == 0) {
 					update_screen_regions = true;
-					if (Preferences.DefaultProvider.IsWindowManager) 
+					if (Preferences.DefaultProvider.IsWindowManager)
 						collection_backend.Add (new DockyItem ());
 					
-					AbstractDockItem last = null;
+					bool priorItems = false;
+					bool separatorNeeded = false;
 					foreach (IDockItemProvider provider in ItemProviders) {
-						if (provider.Separated && last != null)
+						if (!provider.Items.Any ())
+							continue;
+						
+						if (provider.Separated && priorItems || separatorNeeded)
 							collection_backend.Add (new SeparatorItem ());
 					
 						collection_backend.AddRange (provider.Items.OrderBy (i => i.Position));
+						priorItems = true;
 						
-						if (provider.Separated && provider != ItemProviders.Last ())
-							collection_backend.Add (new SeparatorItem ());
+						separatorNeeded = provider.Separated;
 					}
 					
 					for (int i = collection_backend.Count; i < 2; i++) {

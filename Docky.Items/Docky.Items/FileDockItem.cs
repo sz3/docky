@@ -45,15 +45,51 @@ namespace Docky.Items
 			return new FileDockItem (uri);
 		}
 		
+		static string IconNameForPath (string path)
+		{
+			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
+			
+			if (path == home)
+				return "folder-home";
+			
+			if (path.StartsWith (home)) {
+				switch (path.Substring (home.Length + 1)) {
+				case "Desktop":
+					return "desktop";
+				case "Pictures":
+					return "folder-pictures";
+				case "Music":
+					return "folder-music";
+				case "Documents":
+					return "folder-documents";
+				case "Downloads":
+					return "folder-download";
+				case "Public":
+					return "folder-publicshare";
+				case "Videos":
+					return "folder-video";
+				}
+			}
+			
+			return "folder";
+		}
+		
 		string uri;
 		
 		FileDockItem (string uri)
 		{
-			Gnome.IconLookupResultFlags results;
-			Icon = Gnome.Icon.LookupSync (Gtk.IconTheme.Default, null, uri, null, 0, out results);
+			this.uri = uri;
+			string path = new Uri (uri).AbsolutePath;
+			
+			if (!Directory.Exists (path)) {
+				Gnome.IconLookupResultFlags results;
+			
+				Icon = Gnome.Icon.LookupSync (Gtk.IconTheme.Default, null, uri, null, 0, out results);
+			} else {
+				Icon = IconNameForPath (path);
+			}
 			
 			HoverText = System.IO.Path.GetFileName (new Uri (uri).LocalPath);
-			this.uri = uri;
 		}
 		
 		public override string UniqueID ()

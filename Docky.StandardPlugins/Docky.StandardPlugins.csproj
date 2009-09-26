@@ -76,6 +76,7 @@
     <Folder Include="GMail\" />
     <Folder Include="Switcher\" />
     <Folder Include="Resources\" />
+    <Folder Include="Bookmarks\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Trash\TrashDockItem.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Switcher\SwitcherItemProvider.cs" />
     <Compile Include="BatteryMonitor\BatteryMonitorDockItem.cs" />
     <Compile Include="BatteryMonitor\BatteryMonitorItemProvider.cs" />
+    <Compile Include="Bookmarks\BookmarksItemProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Docky.StandardPlugins.addin.xml">

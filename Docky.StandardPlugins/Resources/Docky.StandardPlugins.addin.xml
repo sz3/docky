@@ -32,4 +32,8 @@
 		<ItemProvider type="BatteryMonitor.BatteryMonitorItemProvider" />
 	</Extension>
 
+	<Extension path="/Docky/ItemProvider">
+		<ItemProvider type="Bookmarks.BookmarksItemProvider" />
+	</Extension>
+
 </Addin>
