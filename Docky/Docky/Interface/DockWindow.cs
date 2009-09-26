@@ -1201,9 +1201,9 @@ namespace Docky.Interface
 				Gdk.Rectangle hoverArea = PointZoomToRectangle (val.Center, val.Zoom, IconSize);
 				
 				if (VerticalDock) {
-					hoverArea.Inflate (DockHeightBuffer + 1, ItemWidthBuffer / 2);
+					hoverArea.Inflate ((int) (ZoomedDockHeight * .3), ItemWidthBuffer / 2);
 				} else {
-					hoverArea.Inflate (ItemWidthBuffer / 2, DockHeightBuffer + 1);
+					hoverArea.Inflate (ItemWidthBuffer / 2, (int) (ZoomedDockHeight * .3));
 				}
 				
 				val.HoverArea = hoverArea;
@@ -1265,7 +1265,7 @@ namespace Docky.Interface
 			if ((!Preferences.FadeOnHide || Preferences.FadeOpacity == 0) && AutohideManager.Hidden) {
 				hotAreaSize = 1;
 			} else if (DockHovered) {
-				hotAreaSize = ZoomedDockHeight;
+				hotAreaSize = (int) (ZoomedDockHeight * 1.3);
 			} else {
 				hotAreaSize = DockHeight;
 			}
