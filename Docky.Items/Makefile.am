@@ -7,6 +7,7 @@ TARGET = library
 PKG_CONFIG_FILES = docky.items.pc
 
 FILES = \
+	Docky.Items/Enumerable_Extensions.cs \
 	Docky.Items/ItemState.cs \
 	Docky.Menus/MenuItem.cs \
 	Docky.Menus/SeparatorMenuItem.cs \
@@ -20,7 +21,6 @@ FILES = \
 	Docky.Items/ClickAnimation.cs \
 	Docky.Items/IDockItemProvider.cs \
 	Docky.Items/PaintNeededEventArgs.cs \
-	Docky.Items/AddRemoveChangeType.cs \
 	Docky.Items/FileApplicationProvider.cs \
 	Docky.Items/IconDockItem.cs \
 	Docky.Items/WnckDockItem.cs

@@ -104,9 +104,9 @@ namespace Docky.Items
 		void UpdateTransientItems ()
 		{
 			if (!IsWindowManager) {
+				OnItemsChanged (null, transient_items);
 				if (transient_items.Any ())
 					transient_items.Clear ();
-				OnItemsChanged (null, AddRemoveChangeType.Remove);
 				return;
 			}
 			// we will need a list of these bad boys we can mess with
@@ -133,7 +133,7 @@ namespace Docky.Items
 				item.Owner = this;
 				item.WindowsChanged += HandleTransientWindowsChanged;
 					
-				OnItemsChanged (item, AddRemoveChangeType.Add);
+				OnItemsChanged (item.AsEnumerable (), null);
 			}
 			
 		}
@@ -146,7 +146,7 @@ namespace Docky.Items
 			WnckDockItem item = sender as WnckDockItem;
 			if (!item.ManagedWindows.Any ()) {
 				transient_items.Remove (item);
-				OnItemsChanged (item, AddRemoveChangeType.Remove);
+				OnItemsChanged (null, item.AsEnumerable ());
 				item.Dispose ();
 			}
 		}
@@ -178,7 +178,7 @@ namespace Docky.Items
 			items[uri] = item;
 			
 			
-			OnItemsChanged (item, AddRemoveChangeType.Add);
+			OnItemsChanged (item.AsEnumerable (), null);
 			
 			return true;
 		}
@@ -242,7 +242,7 @@ namespace Docky.Items
 			
 			items.Remove (key);
 			
-			OnItemsChanged (item, AddRemoveChangeType.Remove);
+			OnItemsChanged (null, item.AsEnumerable ());
 			
 			item.Dispose ();
 			return true;
@@ -255,10 +255,10 @@ namespace Docky.Items
 		}
 		#endregion
 		
-		void OnItemsChanged (AbstractDockItem item, AddRemoveChangeType type)
+		void OnItemsChanged (IEnumerable<AbstractDockItem> added, IEnumerable<AbstractDockItem> removed)
 		{
 			if (ItemsChanged != null) {
-				ItemsChanged (this, new ItemsChangedArgs (item, type));
+				ItemsChanged (this, new ItemsChangedArgs (added, removed));
 			}
 		}
 

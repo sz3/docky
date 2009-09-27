@@ -69,7 +69,6 @@
     <Compile Include="Docky.Items\IDockItemProvider.cs" />
     <Compile Include="Docky.Items\FileApplicationProvider.cs" />
     <Compile Include="Docky.Items\ItemsChangedArgs.cs" />
-    <Compile Include="Docky.Items\AddRemoveChangeType.cs" />
     <Compile Include="Docky.Items\ApplicationDockItem.cs" />
     <Compile Include="Docky.Items\IconDockItem.cs" />
     <Compile Include="Docky.Items\ClickAnimation.cs" />

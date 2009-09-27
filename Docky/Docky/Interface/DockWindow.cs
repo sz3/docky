@@ -485,12 +485,10 @@ namespace Docky.Interface
 		{
 			UpdateCollectionBuffer ();
 			
-			if (args.Item != null) {
-				if (args.Type == AddRemoveChangeType.Add)
-					RegisterItem (args.Item);
-				else if (args.Type == AddRemoveChangeType.Remove)
-					UnregisterItem (args.Item);
-			}
+			foreach (AbstractDockItem item in args.AddedItems)
+				RegisterItem (item);
+			foreach (AbstractDockItem item in args.RemovedItems)
+				UnregisterItem (item);
 			
 			AnimatedDraw ();
 		}
@@ -547,11 +545,10 @@ namespace Docky.Interface
 		
 		void PreferencesItemProvidersChanged (object sender, ItemProvidersChangedEventArgs e)
 		{
-			if (e.Type == AddRemoveChangeType.Add) {
-				RegisterItemProvider (e.Provider);
-			} else {
-				UnregisterItemProvider (e.Provider);
-			}
+			foreach (IDockItemProvider provider in e.AddedProviders)
+				RegisterItemProvider (provider);
+			foreach (IDockItemProvider provider in e.RemovedProviders)
+				UnregisterItemProvider (provider);
 			UpdateCollectionBuffer ();
 			AnimatedDraw ();
 		}

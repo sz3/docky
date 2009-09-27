@@ -125,7 +125,7 @@ namespace Bookmarks
 		void OnItemsChanged ()
 		{
 			if (ItemsChanged != null)
-				ItemsChanged (this, new ItemsChangedArgs (null, AddRemoveChangeType.Add));
+				ItemsChanged (this, new ItemsChangedArgs (Items, null));
 		}
 
 		#region IDockItemProvider implementation

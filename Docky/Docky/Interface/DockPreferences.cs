@@ -482,9 +482,8 @@ namespace Docky.Interface
 			Launchers = DefaultProvider.Uris;
 			
 			// remove item from sort list
-			if (e.Type == AddRemoveChangeType.Remove && e.Item != null) {
-				SortList = SortList.Where (s => s != e.Item.UniqueID ());
-			}
+			foreach (AbstractDockItem removeItem in e.RemovedItems)
+				SortList = SortList.Where (s => s != removeItem.UniqueID ());
 			
 			// by definition, we got here first since we hooked up this event before anyone else
 			// could get ahold of this. therefor we get our event evoked first.
@@ -591,7 +590,7 @@ namespace Docky.Interface
 			active_view.NodeStore.RemoveNode (node);
 			
 			item_providers.Remove (node.Provider);
-			OnItemProvidersChanged (node.Provider, AddRemoveChangeType.Remove);
+			OnItemProvidersChanged (null, node.Provider.AsEnumerable ());
 			
 			inactive_view.NodeStore.AddNode (node);
 			
@@ -615,17 +614,17 @@ namespace Docky.Interface
 			inactive_view.NodeStore.RemoveNode (node);
 			
 			item_providers.Add (node.Provider);
-			OnItemProvidersChanged (node.Provider, AddRemoveChangeType.Add);
+			OnItemProvidersChanged (node.Provider.AsEnumerable (), null);
 			
 			active_view.NodeStore.AddNode (node);
 			
 			SyncPlugins ();
 		}
 		
-		void OnItemProvidersChanged (IDockItemProvider provider, AddRemoveChangeType type)
+		void OnItemProvidersChanged (IEnumerable<IDockItemProvider> addedProviders, IEnumerable<IDockItemProvider> removedProviders)
 		{
 			if (ItemProvidersChanged != null) {
-				ItemProvidersChanged (this, new ItemProvidersChangedEventArgs (provider, type));
+				ItemProvidersChanged (this, new ItemProvidersChangedEventArgs (addedProviders, removedProviders));
 			}
 		}
 		

@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,25 +16,26 @@
 // 
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Docky.Items
 {
-
-
 	public class ItemsChangedArgs : EventArgs
 	{
-		public AddRemoveChangeType Type { get; set; }
-		
-		public AbstractDockItem Item { get; set; }
+		public IEnumerable<AbstractDockItem> AddedItems { get; set; }
+		public IEnumerable<AbstractDockItem> RemovedItems { get; set; }
 
 		public ItemsChangedArgs ()
 		{
+			AddedItems = Enumerable.Empty<AbstractDockItem> ();
+			RemovedItems = Enumerable.Empty<AbstractDockItem> ();
 		}
 		
-		public ItemsChangedArgs (AbstractDockItem item, AddRemoveChangeType type)
+		public ItemsChangedArgs (IEnumerable<AbstractDockItem> addedItems, IEnumerable<AbstractDockItem> removedItems)
 		{
-			Item = item;
-			Type = type;
+			AddedItems = addedItems == null ? Enumerable.Empty<AbstractDockItem> () : addedItems;
+			RemovedItems = removedItems == null ? Enumerable.Empty<AbstractDockItem> () : removedItems;
 		}
 	}
 }

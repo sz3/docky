@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,14 +16,20 @@
 // 
 
 using System;
+using System.Collections.Generic;
 
 namespace Docky.Items
 {
-
-
-	public enum AddRemoveChangeType
+	public static class Enumerable_Extensions
 	{
-		Add,
-		Remove,
+		public static List<AbstractDockItem> AsEnumerable (this AbstractDockItem item)
+		{
+			return new List<AbstractDockItem> { item };
+		}
+		
+		public static List<IDockItemProvider> AsEnumerable (this IDockItemProvider item)
+		{
+			return new List<IDockItemProvider> { item };
+		}
 	}
 }

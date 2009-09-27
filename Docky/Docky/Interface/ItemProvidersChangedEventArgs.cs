@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,22 +16,22 @@
 // 
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 using Docky.Items;
 
 namespace Docky.Interface
 {
-
 	public class ItemProvidersChangedEventArgs : System.EventArgs
 	{
-
-		public AddRemoveChangeType Type { get; set; }
-		public IDockItemProvider Provider { get; set; }
+		public IEnumerable<IDockItemProvider> AddedProviders { get; set; }
+		public IEnumerable<IDockItemProvider> RemovedProviders { get; set; }
 		
-		public ItemProvidersChangedEventArgs (IDockItemProvider provider, AddRemoveChangeType type)
+		public ItemProvidersChangedEventArgs (IEnumerable<IDockItemProvider> addedProviders, IEnumerable<IDockItemProvider> removedProviders)
 		{
-			Provider = provider;
-			Type = type;
+			AddedProviders = addedProviders == null ? Enumerable.Empty<IDockItemProvider> () : addedProviders;
+			RemovedProviders = removedProviders == null ? Enumerable.Empty<IDockItemProvider> () : removedProviders;
 		}
 	}
 }
