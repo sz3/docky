@@ -90,15 +90,19 @@ namespace Docky.Interface
 		public void SendManualUpdate (Gdk.EventCrossing evnt)
 		{
 			// we get screwy inputs sometimes
-			if (Math.Abs (evnt.XRoot - Cursor.X) > 100 || Math.Abs (evnt.YRoot - Cursor.Y) > 100)
+			if (Math.Abs (evnt.XRoot - Cursor.X) > 100 || Math.Abs (evnt.YRoot - Cursor.Y) > 100) {
+				OnTimerTick ();
 				return;
+			}
 			Update (evnt.Window.Screen, (int) evnt.XRoot, (int) evnt.YRoot, evnt.State);
 		}
 		
 		public void SendManualUpdate (Gdk.EventMotion evnt)
 		{
-			if (Math.Abs (evnt.XRoot - Cursor.X) > 100 || Math.Abs (evnt.YRoot - Cursor.Y) > 100)
+			if (Math.Abs (evnt.XRoot - Cursor.X) > 100 || Math.Abs (evnt.YRoot - Cursor.Y) > 100) {
+				OnTimerTick ();
 				return;
+			}
 			Update (evnt.Window.Screen, (int) evnt.XRoot, (int) evnt.YRoot, evnt.State);
 		}
 		

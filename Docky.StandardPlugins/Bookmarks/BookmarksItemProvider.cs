@@ -42,6 +42,25 @@ namespace Bookmarks
 		{
 			items = new List<FileDockItem> ();
 		
+			BuildItems ();
+			
+			FileSystemWatcher watcher = new FileSystemWatcher (Path.GetDirectoryName (BookmarksFile));
+			watcher.Filter = ".gtk-bookmarks";
+			watcher.IncludeSubdirectories = false;
+			watcher.Renamed += WatcherRenamed;
+			
+			watcher.EnableRaisingEvents = true;
+		}
+
+		void WatcherRenamed (object sender, RenamedEventArgs e)
+		{
+			Gtk.Application.Invoke (delegate {
+				UpdateItems ();
+			});
+		}
+		
+		void BuildItems ()
+		{
 			if (File.Exists (BookmarksFile)) {
 				StreamReader reader;
 				try {
@@ -49,7 +68,7 @@ namespace Bookmarks
 				} catch {
 					return;
 				}
-			
+				
 				string uri;
 				while (!reader.EndOfStream) {
 					uri = reader.ReadLine ().Split (' ').First ();
@@ -60,6 +79,49 @@ namespace Bookmarks
 				
 				reader.Dispose ();
 			}
+		}
+		
+		void UpdateItems ()
+		{
+			List<FileDockItem> old = items;
+			items = new List<FileDockItem> ();
+			
+			if (File.Exists (BookmarksFile)) {
+				StreamReader reader;
+				try {
+					reader = new StreamReader (BookmarksFile);
+				} catch {
+					return;
+				}
+				
+				string uri;
+				while (!reader.EndOfStream) {
+					uri = reader.ReadLine ().Split (' ').First ();
+					
+					if (old.Any (fdi => fdi.Uri == uri)) {
+						FileDockItem item = old.Where (fdi => fdi.Uri == uri).First ();
+						old.Remove (item);
+						items.Add (item);
+					} else {
+						FileDockItem item = FileDockItem.NewFromUri (uri);
+						if (item != null)
+							items.Add (item);
+					}
+				}
+				
+				
+				reader.Dispose ();
+			}
+			foreach (AbstractDockItem item in old)
+				item.Dispose ();
+		
+			OnItemsChanged ();
+		}
+		
+		void OnItemsChanged ()
+		{
+			if (ItemsChanged != null)
+				ItemsChanged (this, new ItemsChangedArgs (null, AddRemoveChangeType.Add));
 		}
 
 		#region IDockItemProvider implementation

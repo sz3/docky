@@ -53,6 +53,7 @@ namespace Docky.Items
 				return "folder-home";
 			
 			if (path.StartsWith (home)) {
+				// add one due to the path separtor
 				switch (path.Substring (home.Length + 1)) {
 				case "Desktop":
 					return "desktop";
@@ -75,6 +76,10 @@ namespace Docky.Items
 		}
 		
 		string uri;
+		
+		public string Uri {
+			get { return uri; }
+		}
 		
 		FileDockItem (string uri)
 		{
