@@ -18,7 +18,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Docky.Items
+namespace System.Collections.Generic
 {
 	public static class Enumerable_Extensions
 	{
