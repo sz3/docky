@@ -48,6 +48,7 @@
     <Compile Include="Docky\Interface\AutohideType.cs" />
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="Docky\Interface\DockPreferences.cs" />
+    <Compile Include="gtk-gui\Docky.Interface.DockPreferences.cs" />
     <Compile Include="Docky\Interface\DockWindow.cs" />
     <Compile Include="Docky\Interface\IDockPreferences.cs" />
     <Compile Include="Docky\Interface\CursorTracker.cs" />
@@ -70,7 +71,6 @@
     <Compile Include="Docky\Menus\MenuItemWidget.cs" />
     <Compile Include="Docky\Menus\DockItemMenu.cs" />
     <Compile Include="Docky\Menus\SeparatorWidget.cs" />
-    <Compile Include="gtk-gui\bin1.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Addins, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
