@@ -22,14 +22,9 @@ namespace Docky.Items
 {
 	public static class Enumerable_Extensions
 	{
-		public static List<AbstractDockItem> AsEnumerable (this AbstractDockItem item)
+		public static IEnumerable<T> AsSingle<T> (this T item)
 		{
-			return new List<AbstractDockItem> { item };
-		}
-		
-		public static List<IDockItemProvider> AsEnumerable (this IDockItemProvider item)
-		{
-			return new List<IDockItemProvider> { item };
+			return new [] { item };
 		}
 	}
 }

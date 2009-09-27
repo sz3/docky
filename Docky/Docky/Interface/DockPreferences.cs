@@ -590,7 +590,7 @@ namespace Docky.Interface
 			active_view.NodeStore.RemoveNode (node);
 			
 			item_providers.Remove (node.Provider);
-			OnItemProvidersChanged (null, node.Provider.AsEnumerable ());
+			OnItemProvidersChanged (null, node.Provider.AsSingle ());
 			
 			inactive_view.NodeStore.AddNode (node);
 			
@@ -614,7 +614,7 @@ namespace Docky.Interface
 			inactive_view.NodeStore.RemoveNode (node);
 			
 			item_providers.Add (node.Provider);
-			OnItemProvidersChanged (node.Provider.AsEnumerable (), null);
+			OnItemProvidersChanged (node.Provider.AsSingle (), null);
 			
 			active_view.NodeStore.AddNode (node);
 			

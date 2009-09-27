@@ -133,7 +133,7 @@ namespace Docky.Items
 				item.Owner = this;
 				item.WindowsChanged += HandleTransientWindowsChanged;
 					
-				OnItemsChanged (item.AsEnumerable (), null);
+				OnItemsChanged (item.AsSingle<AbstractDockItem> (), null);
 			}
 			
 		}
@@ -146,7 +146,7 @@ namespace Docky.Items
 			WnckDockItem item = sender as WnckDockItem;
 			if (!item.ManagedWindows.Any ()) {
 				transient_items.Remove (item);
-				OnItemsChanged (null, item.AsEnumerable ());
+				OnItemsChanged (null, item.AsSingle<AbstractDockItem> ());
 				item.Dispose ();
 			}
 		}
@@ -178,7 +178,7 @@ namespace Docky.Items
 			items[uri] = item;
 			
 			
-			OnItemsChanged (item.AsEnumerable (), null);
+			OnItemsChanged (item.AsSingle<AbstractDockItem> (), null);
 			
 			return true;
 		}
@@ -242,7 +242,7 @@ namespace Docky.Items
 			
 			items.Remove (key);
 			
-			OnItemsChanged (null, item.AsEnumerable ());
+			OnItemsChanged (null, item.AsSingle<AbstractDockItem> ());
 			
 			item.Dispose ();
 			return true;
