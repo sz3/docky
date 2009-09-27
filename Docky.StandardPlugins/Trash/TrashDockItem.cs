@@ -77,7 +77,6 @@ namespace Trash
 		{
 			Gtk.Application.Invoke (delegate {
 				UpdateIcon ();
-				OnPaintNeeded ();
 			});
 		}
 

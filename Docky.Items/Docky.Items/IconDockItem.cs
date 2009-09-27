@@ -41,7 +41,7 @@ namespace Docky.Items
 				if (icon == value)
 					return;
 				icon = value;
-				ResetBuffers ();
+				QueueRedraw ();
 			}
 		}
 		

@@ -418,7 +418,11 @@ namespace Docky.Interface
 
 		void HandleHiddenChanged (object sender, EventArgs e)
 		{
-			hidden_change_time = DateTime.UtcNow;
+			if ((DateTime.UtcNow - hidden_change_time) > BaseAnimationTime) {
+				hidden_change_time = DateTime.UtcNow;
+			} else {
+				hidden_change_time = DateTime.UtcNow - (BaseAnimationTime - (DateTime.UtcNow - hidden_change_time));
+			}
 			
 			AnimatedDraw ();
 		}

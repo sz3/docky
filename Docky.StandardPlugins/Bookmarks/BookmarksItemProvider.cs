@@ -73,8 +73,10 @@ namespace Bookmarks
 				while (!reader.EndOfStream) {
 					uri = reader.ReadLine ().Split (' ').First ();
 					FileDockItem item = FileDockItem.NewFromUri (uri);
-					if (item != null)
+					if (item != null) {
+						item.Owner = this;
 						items.Add (item);
+					}
 				}
 				
 				reader.Dispose ();
@@ -104,8 +106,10 @@ namespace Bookmarks
 						items.Add (item);
 					} else {
 						FileDockItem item = FileDockItem.NewFromUri (uri);
-						if (item != null)
+						if (item != null) {
+							item.Owner = this;
 							items.Add (item);
+						}
 					}
 				}
 				
