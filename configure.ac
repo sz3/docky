@@ -123,6 +123,7 @@ Docky.StandardPlugins/Docky.DefaultClockTheme/Makefile
 Docky.Services/Makefile
 Docky.Windowing/Makefile
 Docky.Windowing/Docky.Windowing.dll.config
+Docky.Zeitgeist/Makefile
 Docky/docky
 Makefile
 m4/Makefile

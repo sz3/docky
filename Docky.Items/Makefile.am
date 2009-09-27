@@ -35,6 +35,7 @@ RESOURCES = \
 PROJECT_REFERENCES= \
 	Docky.Services \
 	Docky.CairoHelper \
+	Docky.Zeitgeist \
 	Docky.Windowing
 
 REFERENCES =  \

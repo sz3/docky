@@ -62,6 +62,7 @@ namespace Docky
 			
 			//Init gtk and related
 			Gdk.Threads.Init ();
+			NDesk.DBus.BusG.Init ();
 			Gtk.Application.Init ("Docky", ref args);
 			Gnome.Vfs.Vfs.Initialize ();
 			

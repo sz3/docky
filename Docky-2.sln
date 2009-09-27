@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docky.Windowing", "Docky.Wi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docky.StandardPlugins", "Docky.StandardPlugins\Docky.StandardPlugins.csproj", "{39FA0106-BDA3-4541-8922-C6BE0D9CC51D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docky.Zeitgeist", "Docky.Zeitgeist\Docky.Zeitgeist.csproj", "{ECABA30A-6CC5-4CD3-A1DB-88E12884527B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{B23E0EDD-6443-4F99-9EAC-B7CC906F080D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B23E0EDD-6443-4F99-9EAC-B7CC906F080D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B23E0EDD-6443-4F99-9EAC-B7CC906F080D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECABA30A-6CC5-4CD3-A1DB-88E12884527B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECABA30A-6CC5-4CD3-A1DB-88E12884527B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECABA30A-6CC5-4CD3-A1DB-88E12884527B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECABA30A-6CC5-4CD3-A1DB-88E12884527B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FF0B1BB8-6069-4074-BF42-A138D1F99D89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FF0B1BB8-6069-4074-BF42-A138D1F99D89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF0B1BB8-6069-4074-BF42-A138D1F99D89}.Release|Any CPU.ActiveCfg = Release|Any CPU
