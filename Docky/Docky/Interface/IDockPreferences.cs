@@ -56,6 +56,8 @@ namespace Docky.Interface
 		
 		int IconSize { get; set; }
 		
+		bool IndicateMultipleWindows { get; set; }
+		
 		bool ZoomEnabled { get; set; }
 				
 		double ZoomPercent { get; set; }

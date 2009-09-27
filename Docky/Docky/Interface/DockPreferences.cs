@@ -69,6 +69,7 @@ namespace Docky.Interface
 		public event EventHandler AutohideChanged;
 		public event EventHandler FadeOnHideChanged;
 		public event EventHandler FadeOpacityChanged;
+		public event EventHandler IndicatorSettingChanged;
 		public event EventHandler ZoomEnabledChanged;
 		public event EventHandler ZoomPercentChanged;
 		
@@ -148,7 +149,7 @@ namespace Docky.Interface
 				if (!icon_size.HasValue) {
 					icon_size = GetOption<int?> ("IconSize", 64);
 				}
-				return icon_size.Value; 
+				return icon_size.Value;
 			}
 			set {
 				value = Clamp (value, 128, 24);
@@ -157,6 +158,22 @@ namespace Docky.Interface
 				icon_size = value;
 				SetOption<int?> ("IconSize", icon_size.Value);
 				OnIconSizeChanged ();
+			}
+		}
+		
+		bool? indicate_multiple_windows;
+		public bool IndicateMultipleWindows {
+			get {
+				if (!indicate_multiple_windows.HasValue)
+					indicate_multiple_windows = GetOption<bool?> ("IndicateMultipleWindows", false);
+				return indicate_multiple_windows.Value;
+			}
+			set {
+				if (indicate_multiple_windows == value)
+					return;
+				indicate_multiple_windows = value;
+				SetOption<bool?> ("IndicateMultipleWindows", indicate_multiple_windows.Value);
+				OnIndicatorSettingChanged ();
 			}
 		}
 		
@@ -524,6 +541,12 @@ namespace Docky.Interface
 			if (IconSizeChanged != null)
 				IconSizeChanged (this, EventArgs.Empty);
 		}
+		
+		void OnIndicatorSettingChanged ()
+		{
+			if (IndicatorSettingChanged != null)
+				IndicatorSettingChanged (this, EventArgs.Empty);
+		}
 				
 		void OnZoomEnabledChanged ()
 		{
@@ -537,6 +560,12 @@ namespace Docky.Interface
 				ZoomPercentChanged (this, EventArgs.Empty);
 		}
 
+		protected virtual void OnMultipleWindowIndicatorCheckToggled (object sender, System.EventArgs e)
+		{
+			IndicateMultipleWindows = multiple_window_indicator_check.Active;
+			multiple_window_indicator_check.Active = IndicateMultipleWindows;
+		}
+		
 		protected virtual void OnWindowManagerCheckToggled (object sender, System.EventArgs e)
 		{
 			if (window_manager_check.Active)
@@ -604,5 +633,6 @@ namespace Docky.Interface
 		{
 			Plugins = ItemProviders.Where (p => p != DefaultProvider).Select (p => p.Name);
 		}
+
 	}
 }

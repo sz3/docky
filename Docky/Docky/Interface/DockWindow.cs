@@ -76,6 +76,37 @@ namespace Docky.Interface
 				
 				return result;
 			}
+			
+			public DrawValue MoveRight (DockPosition position, double amount)
+			{
+				DrawValue result = new DrawValue {
+					Center = Center,
+					StaticCenter = StaticCenter,
+					HoverArea = HoverArea,
+					Zoom = Zoom
+				};
+				
+				switch (position) {
+				case DockPosition.Top:
+					result.Center.X += amount;
+					result.StaticCenter.X += amount;
+					break;
+				case DockPosition.Left:
+					result.Center.Y += amount;
+					result.StaticCenter.Y += amount;
+					break;
+				case DockPosition.Right:
+					result.Center.Y -= amount;
+					result.StaticCenter.Y -= amount;
+					break;
+				case DockPosition.Bottom:
+					result.Center.X -= amount;
+					result.StaticCenter.X -= amount;
+					break;
+				}
+				
+				return result;
+			}
 		}
 		
 		/*******************************************
@@ -1456,10 +1487,18 @@ namespace Docky.Interface
 				
 				DrawValue loc = val.MoveIn (Position, 1 - IconSize * val.Zoom / 2 - DockHeightBuffer);
 				
+				DockySurface indicator;
 				if ((item.State & ItemState.Urgent) == ItemState.Urgent) {
-					urgent_indicator_buffer.ShowAtPointAndZoom (surface, loc.Center, 1);
+					indicator = urgent_indicator_buffer;
 				} else {
-					normal_indicator_buffer.ShowAtPointAndZoom (surface, loc.Center, 1);
+					indicator = normal_indicator_buffer;
+				}
+				
+				if (item.Indicator == ActivityIndicator.Single || !Preferences.IndicateMultipleWindows) {
+					indicator.ShowAtPointAndZoom (surface, loc.Center, 1);
+				} else {
+					indicator.ShowAtPointAndZoom (surface, loc.MoveRight (Position, 4).Center, 1);
+					indicator.ShowAtPointAndZoom (surface, loc.MoveRight (Position, -4).Center, 1);
 				}
 			}
 		}
