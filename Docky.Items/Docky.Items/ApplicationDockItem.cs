@@ -109,13 +109,6 @@ namespace Docky.Items
 		
 		public override IEnumerable<MenuItem> GetMenuItems ()
 		{
-			if (desktop_item.AttrExists ("MimeType")) {
-				string[] mimes = desktop_item.GetString ("MimeType").Split (';');
-				
-				foreach (string s in Zeitgeist.ZeitgeistProxy.Default.RelevantFilesForMimeTypes (mimes))
-					Console.WriteLine (s);
-			}
-			
 			if (ManagedWindows.Any ())
 				yield return new MenuItem ("New Instance", RunIcon, (o, a) => Launch ());
 			else
