@@ -24,7 +24,7 @@ namespace Docky.Items
 	{
 		public static IEnumerable<T> AsSingle<T> (this T item)
 		{
-			return new [] { item };
+			yield return item;
 		}
 	}
 }
