@@ -9,11 +9,8 @@ PKG_CONFIG_FILES = docky.windowing.pc
 FILES = \
     AssemblyInfo.cs \
     Wnck/Window_Extensions.cs \
-    Windowing/Viewport.cs \
     Windowing/ClickAction.cs \
     Windowing/WindowControl.cs \
-    Windowing/LayoutUtils.cs \
-    Windowing/ScreenUtils.cs \
     Xlib/X11Atoms.cs \
     Xlib/Xlib.cs \
     Windowing/Position.cs \
