@@ -156,12 +156,10 @@ namespace BatteryMonitor
 		
 		protected override void PaintIconSurface (DockySurface surface)
 		{
-			/* FIXME
-			if (Services.System.GetOnBatteryPower () || (Capacity > 0 && Capacity < .98))
-				ShowDocklet ();
+			if (DockServices.System.OnBattery || (Capacity < .98 && Capacity > 0))
+				(Owner as BatteryMonitorItemProvider).ShowItem ();
 			else
-				HideDocklet ();
-			*/
+				(Owner as BatteryMonitorItemProvider).HideItem ();
 			
 			Context cr = surface.Context;
 			int size = Math.Min (surface.Width, surface.Height);

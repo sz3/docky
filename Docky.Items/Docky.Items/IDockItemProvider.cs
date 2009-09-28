@@ -23,8 +23,6 @@ using System.Text;
 
 namespace Docky.Items
 {
-
-
 	public interface IDockItemProvider : IDisposable
 	{
 		event EventHandler<ItemsChangedArgs> ItemsChanged;
@@ -38,5 +36,7 @@ namespace Docky.Items
 		bool ItemCanBeRemoved (AbstractDockItem item);
 		
 		bool RemoveItem (AbstractDockItem item);
+		
+		IEnumerable<Docky.Menus.MenuItem> GetMenuItems (AbstractDockItem item);
 	}
 }

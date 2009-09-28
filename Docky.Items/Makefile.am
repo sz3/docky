@@ -14,6 +14,7 @@ FILES = \
 	Docky.Menus/WindowMenuItem.cs \
 	Docky.Items/WindowDockItem.cs \
 	Docky.Items/AbstractDockItem.cs \
+	Docky.Items/AbstractDockItemProvider.cs \
 	Docky.Items/ApplicationDockItem.cs \
 	Docky.Items/FileDockItem.cs \
 	Docky.Items/ItemsChangedArgs.cs \

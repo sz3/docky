@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,49 +17,32 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 
 using Docky.Items;
 
 namespace Trash
 {
-
-
-	public class TrashItemProvider : IDockItemProvider
+	public class TrashItemProvider : AbstractDockItemProvider
 	{
-
 		#region IDockItemProvider implementation
-		public event EventHandler<ItemsChangedArgs> ItemsChanged;
 		
-		public bool ItemCanBeRemoved (AbstractDockItem item)
-		{
-			return false;
-		}
-		
-		public bool RemoveItem (AbstractDockItem item)
-		{
-			return false;
-		}
-		
-		public string Name {
+		public override string Name {
 			get {
 				return "Trash";
 			}
 		}
 		
-		public bool Separated {
-			get {
-				return false;
-			}
-		}
-		
-		public IEnumerable<AbstractDockItem> Items {
+		public override IEnumerable<AbstractDockItem> Items {
 			get {
 				yield return trash;
 			}
 		}
+		
+		public override void Dispose ()
+		{
+			trash.Dispose ();
+		}
+		
 		#endregion
 
 		TrashDockItem trash;
@@ -69,13 +52,5 @@ namespace Trash
 			trash = new TrashDockItem ();
 			trash.Owner = this;
 		}
-
-		#region IDisposable implementation
-		public void Dispose ()
-		{
-			trash.Dispose ();
-		}
-		#endregion
-
 	}
 }

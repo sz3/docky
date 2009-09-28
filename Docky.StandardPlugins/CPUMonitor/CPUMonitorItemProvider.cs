@@ -17,49 +17,32 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 
 using Docky.Items;
 
 namespace CPUMonitor
 {
-
-
-	public class CPUMonitorItemProvider : IDockItemProvider
+	public class CPUMonitorItemProvider : AbstractDockItemProvider
 	{
-
 		#region IDockItemProvider implementation
-		public event EventHandler<ItemsChangedArgs> ItemsChanged;
 		
-		public bool ItemCanBeRemoved (AbstractDockItem item)
-		{
-			return false;
-		}
-		
-		public bool RemoveItem (AbstractDockItem item)
-		{
-			return false;
-		}
-		
-		public string Name {
+		public override string Name {
 			get {
 				return "CPUMonitor";
 			}
 		}
 		
-		public bool Separated {
-			get {
-				return false;
-			}
-		}
-		
-		public IEnumerable<AbstractDockItem> Items {
+		public override IEnumerable<AbstractDockItem> Items {
 			get {
 				yield return monitor;
 			}
 		}
+		
+		public override void Dispose ()
+		{
+			monitor.Dispose ();
+		}
+		
 		#endregion
 
 		CPUMonitorDockItem monitor;
@@ -69,13 +52,5 @@ namespace CPUMonitor
 			monitor = new CPUMonitorDockItem ();
 			monitor.Owner = this;
 		}
-
-		#region IDisposable implementation
-		public void Dispose ()
-		{
-			monitor.Dispose ();
-		}
-		#endregion
-
 	}
 }

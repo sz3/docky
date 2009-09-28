@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -30,9 +30,7 @@ using Docky.Windowing;
 
 namespace Docky.Items
 {
-
-
-	public class FileApplicationProvider : IDockItemProvider
+	public class FileApplicationProvider : AbstractDockItemProvider
 	{
 		public static FileApplicationProvider WindowManager;
 		static List<FileApplicationProvider> Providers = new List<FileApplicationProvider> ();
@@ -212,18 +210,16 @@ namespace Docky.Items
 		}
 		
 		#region IDockItemProvider implementation
-		public event EventHandler<ItemsChangedArgs> ItemsChanged;
+		public override string Name { get { return "File Application Provider"; } }
 		
-		public string Name { get { return "File Application Provider"; } }
+		public override bool Separated { get { return true; } }
 		
-		public bool Separated { get { return true; } }
-		
-		public bool ItemCanBeRemoved (AbstractDockItem item)
+		public override bool ItemCanBeRemoved (AbstractDockItem item)
 		{
 			return true;
 		}
 		
-		public bool RemoveItem (AbstractDockItem item)
+		public override bool RemoveItem (AbstractDockItem item)
 		{
 			if (!items.ContainsValue (item))
 				return false;
@@ -248,29 +244,23 @@ namespace Docky.Items
 			return true;
 		}
 		
-		public IEnumerable<AbstractDockItem> Items {
+		public override IEnumerable<AbstractDockItem> Items {
 			get {
 				return items.Values.Concat (transient_items);
 			}
 		}
-		#endregion
 		
-		void OnItemsChanged (IEnumerable<AbstractDockItem> added, IEnumerable<AbstractDockItem> removed)
+		public override void Dispose ()
 		{
-			if (ItemsChanged != null) {
-				ItemsChanged (this, new ItemsChangedArgs (added, removed));
-			}
+			foreach (AbstractDockItem item in items.Values)
+				item.Dispose ();
 		}
+		
+		#endregion
 
 		~FileApplicationProvider ()
 		{
 			Providers.Remove (this);
-		}
-		
-		public void Dispose ()
-		{
-			foreach (AbstractDockItem item in items.Values)
-				item.Dispose ();
 		}
 	}
 }

@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,65 +17,60 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 
 using Docky.Items;
 
 namespace BatteryMonitor
 {
-
-
-	public class BatteryMonitorItemProvider : IDockItemProvider
+	public class BatteryMonitorItemProvider : AbstractDockItemProvider
 	{
-
 		#region IDockItemProvider implementation
-		public event EventHandler<ItemsChangedArgs> ItemsChanged;
 		
-		public bool ItemCanBeRemoved (AbstractDockItem item)
-		{
-			return false;
-		}
-		
-		public bool RemoveItem (AbstractDockItem item)
-		{
-			return false;
-		}
-		
-		public string Name {
+		public override string Name {
 			get {
 				return "BatteryMonitor";
 			}
 		}
 		
-		public bool Separated {
+		public override IEnumerable<AbstractDockItem> Items {
 			get {
-				return false;
+				if (!hidden)
+					yield return battery;
+				yield break;
 			}
 		}
-		
-		public IEnumerable<AbstractDockItem> Items {
-			get {
-				yield return battery;
-			}
-		}
-		#endregion
 
-		BatteryMonitorDockItem battery;
-		
-		public BatteryMonitorItemProvider ()
-		{
-			battery = new BatteryMonitorDockItem ();
-			battery.Owner = this;
-		}
-
-		#region IDisposable implementation
-		public void Dispose ()
+		public override void Dispose ()
 		{
 			battery.Dispose ();
 		}
+		
 		#endregion
 
+		BatteryMonitorDockItem battery;
+		bool hidden;
+		
+		public void HideItem ()
+		{
+			if (hidden == true)
+				return;
+			hidden = true;
+			OnItemsChanged (null, battery.AsSingle<AbstractDockItem> ());
+		}
+		
+		public void ShowItem ()
+		{
+			if (hidden == false)
+				return;
+			hidden = false;
+			OnItemsChanged (battery.AsSingle<AbstractDockItem> (), null);
+		}
+		
+		public BatteryMonitorItemProvider ()
+		{
+			hidden = false;
+			battery = new BatteryMonitorDockItem ();
+			battery.Owner = this;
+		}
 	}
 }

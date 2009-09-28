@@ -17,49 +17,32 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 
 using Docky.Items;
 
 namespace Clock
 {
-
-
-	public class ClockItemProvider : IDockItemProvider
+	public class ClockItemProvider : AbstractDockItemProvider
 	{
-
 		#region IDockItemProvider implementation
-		public event EventHandler<ItemsChangedArgs> ItemsChanged;
 		
-		public bool ItemCanBeRemoved (AbstractDockItem item)
-		{
-			return false;
-		}
-		
-		public bool RemoveItem (AbstractDockItem item)
-		{
-			return false;
-		}
-		
-		public string Name {
+		public override string Name {
 			get {
 				return "Clock";
 			}
 		}
 		
-		public bool Separated {
-			get {
-				return false;
-			}
-		}
-		
-		public IEnumerable<AbstractDockItem> Items {
+		public override IEnumerable<AbstractDockItem> Items {
 			get {
 				yield return clock;
 			}
 		}
+		
+		public override void Dispose ()
+		{
+			clock.Dispose ();
+		}
+		
 		#endregion
 
 		ClockDockItem clock;
@@ -69,13 +52,5 @@ namespace Clock
 			clock = new ClockDockItem ();
 			clock.Owner = this;
 		}
-
-		#region IDisposable implementation
-		public void Dispose ()
-		{
-			clock.Dispose ();
-		}
-		#endregion
-
 	}
 }

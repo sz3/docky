@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,20 +17,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.IO;
-using System.Text;
 
 using Docky.Items;
 
 namespace Bookmarks
 {
-
-
-	public class BookmarksItemProvider : IDockItemProvider
+	public class BookmarksItemProvider : AbstractDockItemProvider
 	{
-		List<FileDockItem> items;
+		List<AbstractDockItem> items;
 		
 		string BookmarksFile {
 			get {
@@ -40,7 +36,7 @@ namespace Bookmarks
 		
 		public BookmarksItemProvider ()
 		{
-			items = new List<FileDockItem> ();
+			items = new List<AbstractDockItem> ();
 		
 			BuildItems ();
 			
@@ -85,8 +81,8 @@ namespace Bookmarks
 		
 		void UpdateItems ()
 		{
-			List<FileDockItem> old = items;
-			items = new List<FileDockItem> ();
+			List<AbstractDockItem> old = items;
+			items = new List<AbstractDockItem> ();
 			
 			if (File.Exists (BookmarksFile)) {
 				StreamReader reader;
@@ -100,8 +96,8 @@ namespace Bookmarks
 				while (!reader.EndOfStream) {
 					uri = reader.ReadLine ().Split (' ').First ();
 					
-					if (old.Any (fdi => fdi.Uri == uri)) {
-						FileDockItem item = old.Where (fdi => fdi.Uri == uri).First ();
+					if (old.Cast<FileDockItem> ().Any (fdi => fdi.Uri == uri)) {
+						FileDockItem item = old.Cast<FileDockItem> ().Where (fdi => fdi.Uri == uri).First ();
 						old.Remove (item);
 						items.Add (item);
 					} else {
@@ -116,57 +112,39 @@ namespace Bookmarks
 				
 				reader.Dispose ();
 			}
+			
 			foreach (AbstractDockItem item in old)
 				item.Dispose ();
-		
-			OnItemsChanged ();
-		}
-		
-		void OnItemsChanged ()
-		{
-			if (ItemsChanged != null)
-				ItemsChanged (this, new ItemsChangedArgs (Items, null));
+			
+			OnItemsChanged (items, old);
 		}
 
 		#region IDockItemProvider implementation
-		public event EventHandler<ItemsChangedArgs> ItemsChanged;
 		
-		public string Name {
+		public override string Name {
 			get {
 				return "Bookmark Items";
 			}
 		}
 		
-		public bool Separated {
+		public override bool Separated {
 			get {
 				return true;
 			}
 		}
 		
-		public IEnumerable<AbstractDockItem> Items {
+		public override IEnumerable<AbstractDockItem> Items {
 			get {
 				return items.Cast<AbstractDockItem> ();
 			}
 		}
-
-		public bool ItemCanBeRemoved (AbstractDockItem item)
-		{
-			return false;
-		}
 		
-		public bool RemoveItem (AbstractDockItem item)
-		{
-			return false;
-		}
-		#endregion
-		
-		#region IDisposable implementation
-		public void Dispose ()
+		public override void Dispose ()
 		{
 			foreach (FileDockItem item in items)
 				item.Dispose ();
 		}
+		
 		#endregion
-
 	}
 }
