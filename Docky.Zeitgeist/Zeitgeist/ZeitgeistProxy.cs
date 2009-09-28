@@ -63,6 +63,12 @@ namespace Zeitgeist
 			}
 		}
 		
+		public static int UnixTime (DateTime time)
+		{
+			DateTime unixEpoch = new DateTime (1970, 1, 1, 0, 0, 0).ToLocalTime ();
+			return (int) ((time.Ticks - unixEpoch.Ticks) / 10000000);
+		}
+		
 		public IEnumerable<string> RelevantFilesForMimeTypes (IEnumerable<string> mimes)
 		{
 			if (zeitgeist == null)
@@ -72,18 +78,12 @@ namespace Zeitgeist
 			filter[0] = new Dictionary<string, object> ();
 			filter[0]["mimetypes"] = mimes.ToArray ();
 			
-//			int timestamp = (int) DateTime.Now.AddDays (-12).ToFileTime ();
-			
-			Console.WriteLine ("Pre Run");
-			IDictionary<string, object>[] results = zeitgeist.FindEvents (0, 0, 5, false, "item", filter);
-			Console.WriteLine ("Post Run");
+			IDictionary<string, object>[] results = zeitgeist.FindEvents (UnixTime (DateTime.Now.AddDays (-14)), 0, 5, false, "mostused", filter);
 			
 			foreach (IDictionary<string, object> result in results) {
 				if (result.ContainsKey ("uri"))
 					yield return result["uri"] as string;
 			}
-			
-//			zg.FindEvents(t, 0, 20, False, 'item', [{'mimetypes': ["image/png", "image/jpeg","image/tiff"]}])
 		}
 	}
 }

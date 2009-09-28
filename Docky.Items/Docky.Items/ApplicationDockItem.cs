@@ -109,12 +109,6 @@ namespace Docky.Items
 		
 		public override IEnumerable<MenuItem> GetMenuItems ()
 		{
-//			if (desktop_item.AttrExists ("MimeType")) {
-//				string[] mimes = desktop_item.GetString ("MimeType").Split (';');
-//				foreach (string s in Zeitgeist.ZeitgeistProxy.Default.RelevantFilesForMimeTypes (mimes))
-//					Console.WriteLine (s);
-//			}
-			
 			if (ManagedWindows.Any ())
 				yield return new MenuItem ("New Instance", RunIcon, (o, a) => Launch ());
 			else
@@ -123,6 +117,29 @@ namespace Docky.Items
 			foreach (MenuItem item in base.GetMenuItems ()) {
 				yield return item;
 			}
+			
+			if (desktop_item.AttrExists ("MimeType")) {
+				string[] mimes = desktop_item.GetString ("MimeType").Split (';');
+				bool separate = true;
+				foreach (string uri in Zeitgeist.ZeitgeistProxy.Default.RelevantFilesForMimeTypes (mimes)) {
+					if (separate) {
+						yield return new SeparatorMenuItem ();
+						separate = false;
+					}
+					RelatedFileMenuItem item = new RelatedFileMenuItem (uri);
+					item.Clicked += ItemClicked;
+					yield return item;
+				}
+			}
+		}
+
+		void ItemClicked (object sender, EventArgs e)
+		{
+			RelatedFileMenuItem item = sender as RelatedFileMenuItem;
+			if (item == null)
+				return;
+			
+			LaunchWithFiles (item.Uri.AsSingle ());
 		}
 
 		protected override ClickAnimation OnClicked (uint button, ModifierType mod, double xPercent, double yPercent)

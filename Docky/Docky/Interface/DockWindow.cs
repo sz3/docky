@@ -621,9 +621,9 @@ namespace Docky.Interface
 				IEnumerable<Menus.MenuItem> items;
 				
 				if (HoveredItem.Owner != null)
-					items = HoveredItem.Owner.GetMenuItems (HoveredItem);
+					items = HoveredItem.Owner.GetMenuItems (HoveredItem).ToArray ();
 				else
-					items = HoveredItem.GetMenuItems ();
+					items = HoveredItem.GetMenuItems ().ToArray ();
 				
 				if (items.Any ()) {
 					DrawValue val = DrawValues[HoveredItem];

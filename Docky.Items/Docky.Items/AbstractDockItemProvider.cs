@@ -21,11 +21,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-using Cairo;
-using Gdk;
-using Gtk;
-
 using Docky;
+using Docky.Menus;
 using Docky.CairoHelper;
 using Docky.Services;
 
@@ -53,7 +50,7 @@ namespace Docky.Items
 			return false;
 		}
 		
-		public virtual IEnumerable<Docky.Menus.MenuItem> GetMenuItems (AbstractDockItem item)
+		public virtual IEnumerable<MenuItem> GetMenuItems (AbstractDockItem item)
 		{
 			return item.GetMenuItems ();
 		}

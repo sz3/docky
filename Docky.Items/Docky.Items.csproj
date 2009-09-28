@@ -80,6 +80,7 @@
     <Compile Include="Docky.Menus\WindowMenuItem.cs" />
     <Compile Include="Docky.Items\Enumerable_Extensions.cs" />
     <Compile Include="Docky.Items\AbstractDockItemProvider.cs" />
+    <Compile Include="Docky.Menus\AssociatedFileMenuItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Docky.Services\Docky.Services.csproj">

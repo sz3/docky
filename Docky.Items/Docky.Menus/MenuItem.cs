@@ -73,6 +73,11 @@ namespace Docky.Menus
 				Clicked (this, EventArgs.Empty);
 		}
 		
+		public MenuItem ()
+		{
+			
+		}
+		
 		public MenuItem (string text, string icon)
 		{
 			this.icon = icon;

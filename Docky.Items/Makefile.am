@@ -10,6 +10,7 @@ FILES = \
 	Docky.Items/Enumerable_Extensions.cs \
 	Docky.Items/ItemState.cs \
 	Docky.Menus/MenuItem.cs \
+	Docky.Menus/RelatedFileMenuItem.cs \
 	Docky.Menus/SeparatorMenuItem.cs \
 	Docky.Menus/WindowMenuItem.cs \
 	Docky.Items/WindowDockItem.cs \
