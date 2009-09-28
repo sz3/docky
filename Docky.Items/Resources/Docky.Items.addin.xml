@@ -5,7 +5,7 @@
 	</Runtime>
 	
 	<ExtensionPoint path="/Docky/ItemProvider">
-		<ExtensionNode name="ItemProvider" objectType="Docky.Items.IDockItemProvider"/>
+		<ExtensionNode name="ItemProvider" objectType="Docky.Items.AbstractDockItemProvider"/>
 	</ExtensionPoint>
 	
 	<!--<Extension path="/Docky/ItemProvider">

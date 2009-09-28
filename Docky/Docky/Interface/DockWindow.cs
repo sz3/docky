@@ -1494,8 +1494,8 @@ namespace Docky.Interface
 				if (item.Indicator == ActivityIndicator.Single || !Preferences.IndicateMultipleWindows) {
 					indicator.ShowAtPointAndZoom (surface, loc.Center, 1);
 				} else {
-					indicator.ShowAtPointAndZoom (surface, loc.MoveRight (Position, 4).Center, 1);
-					indicator.ShowAtPointAndZoom (surface, loc.MoveRight (Position, -4).Center, 1);
+					indicator.ShowAtPointAndZoom (surface, loc.MoveRight (Position, 3).Center, 1);
+					indicator.ShowAtPointAndZoom (surface, loc.MoveRight (Position, -3).Center, 1);
 				}
 			}
 		}
