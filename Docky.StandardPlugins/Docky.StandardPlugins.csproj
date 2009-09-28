@@ -74,7 +74,6 @@
     <Folder Include="Clock\" />
     <Folder Include="BatteryMonitor\" />
     <Folder Include="GMail\" />
-    <Folder Include="Switcher\" />
     <Folder Include="Resources\" />
     <Folder Include="Bookmarks\" />
   </ItemGroup>
@@ -99,8 +98,6 @@
     <Compile Include="GMail\gtk-gui\GMail.GMailConfiguration.cs" />
     <Compile Include="GMail\gtk-gui\GMail.AbstractLoginWidget.cs" />
     <Compile Include="GMail\gtk-gui\generated.cs" />
-    <Compile Include="Switcher\SwitcherDockItem.cs" />
-    <Compile Include="Switcher\SwitcherItemProvider.cs" />
     <Compile Include="BatteryMonitor\BatteryMonitorDockItem.cs" />
     <Compile Include="BatteryMonitor\BatteryMonitorItemProvider.cs" />
     <Compile Include="Bookmarks\BookmarksItemProvider.cs" />

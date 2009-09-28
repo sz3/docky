@@ -98,8 +98,8 @@ namespace Docky
 		/// <value>
 		/// All loaded ItemSources.
 		/// </value>
-		public static IEnumerable<IDockItemProvider> ItemProviders {
-			get { return AddinManager.GetExtensionObjects ("/Docky/ItemProvider").OfType<IDockItemProvider> (); }
+		public static IEnumerable<AbstractDockItemProvider> ItemProviders {
+			get { return AddinManager.GetExtensionObjects ("/Docky/ItemProvider").OfType<AbstractDockItemProvider> (); }
 		}
 	}
 }

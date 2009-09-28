@@ -25,13 +25,13 @@ namespace Docky.Interface
 {
 	public class ItemProvidersChangedEventArgs : System.EventArgs
 	{
-		public IEnumerable<IDockItemProvider> AddedProviders { get; set; }
-		public IEnumerable<IDockItemProvider> RemovedProviders { get; set; }
+		public IEnumerable<AbstractDockItemProvider> AddedProviders { get; set; }
+		public IEnumerable<AbstractDockItemProvider> RemovedProviders { get; set; }
 		
-		public ItemProvidersChangedEventArgs (IEnumerable<IDockItemProvider> addedProviders, IEnumerable<IDockItemProvider> removedProviders)
+		public ItemProvidersChangedEventArgs (IEnumerable<AbstractDockItemProvider> addedProviders, IEnumerable<AbstractDockItemProvider> removedProviders)
 		{
-			AddedProviders = addedProviders == null ? Enumerable.Empty<IDockItemProvider> () : addedProviders;
-			RemovedProviders = removedProviders == null ? Enumerable.Empty<IDockItemProvider> () : removedProviders;
+			AddedProviders = addedProviders == null ? Enumerable.Empty<AbstractDockItemProvider> () : addedProviders;
+			RemovedProviders = removedProviders == null ? Enumerable.Empty<AbstractDockItemProvider> () : removedProviders;
 		}
 	}
 }

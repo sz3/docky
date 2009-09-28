@@ -31,7 +31,7 @@ using Docky.Services;
 
 namespace Docky.Items
 {
-	public abstract class AbstractDockItemProvider : IDockItemProvider
+	public abstract class AbstractDockItemProvider
 	{
 		public event EventHandler<ItemsChangedArgs> ItemsChanged;
 		

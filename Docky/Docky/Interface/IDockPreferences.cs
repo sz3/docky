@@ -44,7 +44,7 @@ namespace Docky.Interface
 		
 		FileApplicationProvider DefaultProvider { get; set; }
 		
-		IEnumerable<IDockItemProvider> ItemProviders { get; }
+		IEnumerable<AbstractDockItemProvider> ItemProviders { get; }
 		
 		AutohideType Autohide { get; set; }
 		

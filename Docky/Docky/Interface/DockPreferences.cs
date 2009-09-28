@@ -51,9 +51,9 @@ namespace Docky.Interface
 			[Gtk.TreeNodeValue(Column = 0)]
 			public string Name;
 
-			public IDockItemProvider Provider;
+			public AbstractDockItemProvider Provider;
 
-			public PluginTreeNode (IDockItemProvider provider)
+			public PluginTreeNode (AbstractDockItemProvider provider)
 			{
 				Provider = provider;
 				Name = provider.Name;
@@ -62,7 +62,7 @@ namespace Docky.Interface
 		
 		IPreferences prefs;
 		string name;
-		List<IDockItemProvider> item_providers;
+		List<AbstractDockItemProvider> item_providers;
 		
 		public event EventHandler PositionChanged;
 		public event EventHandler IconSizeChanged;
@@ -83,7 +83,7 @@ namespace Docky.Interface
 			set { SetOption<string[]> ("SortList", value.ToArray ()); }
 		}
 		
-		public IEnumerable<IDockItemProvider> ItemProviders { 
+		public IEnumerable<AbstractDockItemProvider> ItemProviders { 
 			get { return item_providers.AsEnumerable (); }
 		}
 		
@@ -313,14 +313,14 @@ namespace Docky.Interface
 			active_view.NodeStore.Clear ();
 			inactive_view.NodeStore.Clear ();
 			
-			IEnumerable<IDockItemProvider> available_providers = PluginManager.ItemProviders
+			IEnumerable<AbstractDockItemProvider> available_providers = PluginManager.ItemProviders
 				.Where (p => !Docky.Controller.Docks.SelectMany (d => d.Preferences.ItemProviders).Contains (p));
 			
-			foreach (IDockItemProvider provider in available_providers) {
+			foreach (AbstractDockItemProvider provider in available_providers) {
 				inactive_view.NodeStore.AddNode (new PluginTreeNode (provider));
 			}
 			
-			foreach (IDockItemProvider provider in ItemProviders.Where (p => p != DefaultProvider)) {
+			foreach (AbstractDockItemProvider provider in ItemProviders.Where (p => p != DefaultProvider)) {
 				active_view.NodeStore.AddNode (new PluginTreeNode (provider));
 			}
 		}
@@ -437,7 +437,7 @@ namespace Docky.Interface
 		
 		void BuildItemProviders ()
 		{
-			item_providers = new List<IDockItemProvider> ();
+			item_providers = new List<AbstractDockItemProvider> ();
 			
 			DefaultProvider = new FileApplicationProvider ();
 			item_providers.Add (DefaultProvider);
@@ -462,7 +462,7 @@ namespace Docky.Interface
 			DefaultProvider.ItemsChanged += DefaultProviderItemsChanged;
 			
 			foreach (string providerName in Plugins) {
-				foreach (IDockItemProvider provider in PluginManager.ItemProviders) {
+				foreach (AbstractDockItemProvider provider in PluginManager.ItemProviders) {
 					if (provider.Name == providerName) {
 						item_providers.Add (provider);
 						break;
@@ -471,7 +471,7 @@ namespace Docky.Interface
 			}
 			
 			List<string> sortList = SortList.ToList ();
-			foreach (IDockItemProvider provider in item_providers) {
+			foreach (AbstractDockItemProvider provider in item_providers) {
 				SortProviderOnList (provider, sortList);
 			}
 			
@@ -491,7 +491,7 @@ namespace Docky.Interface
 			SortProviderOnList (DefaultProvider, SortList.ToList ());
 		}
 		
-		void SortProviderOnList (IDockItemProvider provider, List<string> sortList)
+		void SortProviderOnList (AbstractDockItemProvider provider, List<string> sortList)
 		{
 			Func<AbstractDockItem, int> indexFunc = delegate(AbstractDockItem a) {
 				int res = sortList.IndexOf (a.UniqueID ());
@@ -622,7 +622,7 @@ namespace Docky.Interface
 			SyncPlugins ();
 		}
 		
-		void OnItemProvidersChanged (IEnumerable<IDockItemProvider> addedProviders, IEnumerable<IDockItemProvider> removedProviders)
+		void OnItemProvidersChanged (IEnumerable<AbstractDockItemProvider> addedProviders, IEnumerable<AbstractDockItemProvider> removedProviders)
 		{
 			if (ItemProvidersChanged != null) {
 				ItemProvidersChanged (this, new ItemProvidersChangedEventArgs (addedProviders, removedProviders));

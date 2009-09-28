@@ -116,7 +116,7 @@ namespace Docky.Items
 			set;
 		}
 		
-		public IDockItemProvider Owner {
+		public AbstractDockItemProvider Owner {
 			get;
 			set;
 		}

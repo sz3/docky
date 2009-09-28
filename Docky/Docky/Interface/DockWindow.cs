@@ -192,7 +192,7 @@ namespace Docky.Interface
 					
 					bool priorItems = false;
 					bool separatorNeeded = false;
-					foreach (IDockItemProvider provider in ItemProviders) {
+					foreach (AbstractDockItemProvider provider in ItemProviders) {
 						if (!provider.Items.Any ())
 							continue;
 						
@@ -238,7 +238,7 @@ namespace Docky.Interface
 			}
 		}
 		
-		IEnumerable<IDockItemProvider> ItemProviders {
+		IEnumerable<AbstractDockItemProvider> ItemProviders {
 			get { return Preferences.ItemProviders; }
 		}
 		
@@ -465,7 +465,7 @@ namespace Docky.Interface
 			EnsureDragAndDropProxy ();
 		}
 		
-		void RegisterItemProvider (IDockItemProvider provider)
+		void RegisterItemProvider (AbstractDockItemProvider provider)
 		{
 			provider.ItemsChanged += ProviderItemsChanged;
 			
@@ -473,7 +473,7 @@ namespace Docky.Interface
 				RegisterItem (item);
 		}
 		
-		void UnregisterItemProvider (IDockItemProvider provider)
+		void UnregisterItemProvider (AbstractDockItemProvider provider)
 		{
 			provider.ItemsChanged -= ProviderItemsChanged;
 			
@@ -518,36 +518,36 @@ namespace Docky.Interface
 		
 		void RegisterPreferencesEvents (IDockPreferences preferences)
 		{
-			preferences.AutohideChanged    += PreferencesAutohideChanged;	
-			preferences.IconSizeChanged    += PreferencesIconSizeChanged;	
-			preferences.PositionChanged    += PreferencesPositionChanged;
+			preferences.AutohideChanged += PreferencesAutohideChanged;
+			preferences.IconSizeChanged += PreferencesIconSizeChanged;
+			preferences.PositionChanged += PreferencesPositionChanged;
 			preferences.ZoomEnabledChanged += PreferencesZoomEnabledChanged;
 			preferences.ZoomPercentChanged += PreferencesZoomPercentChanged;
 			
-			preferences.ItemProvidersChanged += PreferencesItemProvidersChanged;	
+			preferences.ItemProvidersChanged += PreferencesItemProvidersChanged;
 			
-			foreach (IDockItemProvider provider in preferences.ItemProviders)
+			foreach (AbstractDockItemProvider provider in preferences.ItemProviders)
 				RegisterItemProvider (provider);
 		}
 
 		void UnregisterPreferencesEvents (IDockPreferences preferences)
 		{
-			preferences.AutohideChanged    -= PreferencesAutohideChanged;	
-			preferences.IconSizeChanged    -= PreferencesIconSizeChanged;	
-			preferences.PositionChanged    -= PreferencesPositionChanged;
+			preferences.AutohideChanged -= PreferencesAutohideChanged;
+			preferences.IconSizeChanged -= PreferencesIconSizeChanged;
+			preferences.PositionChanged -= PreferencesPositionChanged;
 			preferences.ZoomEnabledChanged -= PreferencesZoomEnabledChanged;
 			preferences.ZoomPercentChanged -= PreferencesZoomPercentChanged;
 			
 			preferences.ItemProvidersChanged -= PreferencesItemProvidersChanged;
-			foreach (IDockItemProvider provider in preferences.ItemProviders)
+			foreach (AbstractDockItemProvider provider in preferences.ItemProviders)
 				UnregisterItemProvider (provider);
 		}
 		
 		void PreferencesItemProvidersChanged (object sender, ItemProvidersChangedEventArgs e)
 		{
-			foreach (IDockItemProvider provider in e.AddedProviders)
+			foreach (AbstractDockItemProvider provider in e.AddedProviders)
 				RegisterItemProvider (provider);
-			foreach (IDockItemProvider provider in e.RemovedProviders)
+			foreach (AbstractDockItemProvider provider in e.RemovedProviders)
 				UnregisterItemProvider (provider);
 			UpdateCollectionBuffer ();
 			AnimatedDraw ();
@@ -766,7 +766,7 @@ namespace Docky.Interface
 		{
 			if (drag_item != null) {
 				if (!DockHovered) {
-					IDockItemProvider provider = ProviderForItem (drag_item);
+					AbstractDockItemProvider provider = ProviderForItem (drag_item);
 					if (provider != null && provider.ItemCanBeRemoved (drag_item)) {
 						provider.RemoveItem (drag_item);
 					}
@@ -852,7 +852,7 @@ namespace Docky.Interface
 			}
 		}
 		
-		IDockItemProvider ProviderForItem (AbstractDockItem item)
+		AbstractDockItemProvider ProviderForItem (AbstractDockItem item)
 		{
 			return ItemProviders
 				.DefaultIfEmpty (null)
