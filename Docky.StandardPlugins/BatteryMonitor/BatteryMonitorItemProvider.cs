@@ -34,9 +34,7 @@ namespace BatteryMonitor
 		
 		public override IEnumerable<AbstractDockItem> Items {
 			get {
-				if (!hidden)
-					yield return battery;
-				yield break;
+				yield return battery;
 			}
 		}
 
@@ -47,29 +45,29 @@ namespace BatteryMonitor
 		
 		#endregion
 
-		BatteryMonitorDockItem battery;
+		AbstractDockItem battery;
+		
 		bool hidden;
-		
-		public void HideItem ()
+		public bool Hidden
 		{
-			if (hidden == true)
-				return;
-			hidden = true;
-			OnItemsChanged (null, battery.AsSingle<AbstractDockItem> ());
-		}
-		
-		public void ShowItem ()
-		{
-			if (hidden == false)
-				return;
-			hidden = false;
-			OnItemsChanged (battery.AsSingle<AbstractDockItem> (), null);
+			get {
+				return hidden;
+			}
+			set {
+				if (hidden == value)
+					return;
+				hidden = value;
+				if (hidden)
+					OnItemsChanged (null, Items);
+				else
+					OnItemsChanged (Items, null);
+			}
 		}
 		
 		public BatteryMonitorItemProvider ()
 		{
 			hidden = false;
-			battery = new BatteryMonitorDockItem ();
+			battery = new BatteryMonitorProcItem ();
 			battery.Owner = this;
 		}
 	}
