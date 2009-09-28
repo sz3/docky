@@ -416,6 +416,7 @@ namespace Docky.Interface
 			zoom_scale.Sensitive = ZoomEnabled;
 			icon_scale.Value = IconSize;
 			fade_on_hide_check.Active = FadeOnHide;
+			multiple_window_indicator_check.Active = IndicateMultipleWindows;
 			
 			
 			window_manager_check.Active = DefaultProvider.IsWindowManager;
