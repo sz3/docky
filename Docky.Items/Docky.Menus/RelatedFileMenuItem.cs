@@ -34,15 +34,19 @@ namespace Docky.Menus
 		{
 			Uri = uri;
 			
-			Gnome.IconLookupResultFlags results;
-			Icon = Gnome.Icon.LookupSync (Gtk.IconTheme.Default, null, uri, null, 0, out results);
+			if (uri.StartsWith ("http")) {
+				Icon = "html";
+			} else {
+				Gnome.IconLookupResultFlags results;
+				Icon = Gnome.Icon.LookupSync (Gtk.IconTheme.Default, null, uri, null, 0, out results);
+			}
 			
-			if (uri.StartsWith ("file://"))
+			if (uri.StartsWith ("file://")) {
 				Text = Path.GetFileName (System.Uri.UnescapeDataString (new Uri (uri).AbsolutePath));
-			else if (uri.StartsWith ("http://"))
-				Text = new Uri (uri).Host;
-			else
-				Text = System.Uri.UnescapeDataString (uri);
+			} else {
+				Uri u = new Uri (uri);
+				Text = System.Uri.UnescapeDataString (uri.Substring (u.Scheme.Length + 3));
+			}
 		}
 	}
 }

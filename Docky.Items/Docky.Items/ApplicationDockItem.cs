@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 using Cairo;
 using Gdk;
@@ -54,6 +55,10 @@ namespace Docky.Items
 		
 		Gnome.DesktopItem desktop_item;
 		string path;
+		string[] related_uris;
+		object related_lock;
+		
+		uint timer;
 	
 		public override string ShortName {
 			get {
@@ -63,6 +68,9 @@ namespace Docky.Items
 		
 		private ApplicationDockItem (Gnome.DesktopItem item)
 		{
+			related_lock = new Object ();
+			related_uris = new string[0];
+			
 			desktop_item = item;
 			if (item.AttrExists ("Icon"))
 				Icon = item.GetString ("Icon");
@@ -80,6 +88,12 @@ namespace Docky.Items
 			path = new Uri (item.Location).LocalPath;
 			
 			UpdateWindows ();
+			UpdateRelated ();
+			
+			timer = GLib.Timeout.Add (10 * 60 * 1000, delegate {
+				UpdateRelated ();
+				return true;
+			});
 			
 			Wnck.Screen.Default.WindowOpened += WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
@@ -107,6 +121,21 @@ namespace Docky.Items
 			Windows = WindowMatcher.Default.WindowsForDesktopFile (path);
 		}
 		
+		void UpdateRelated ()
+		{
+			if (desktop_item.AttrExists ("MimeType")) {
+				string[] mimes = desktop_item.GetString ("MimeType").Split (';');
+				Thread th = new Thread ((ThreadStart) delegate {
+					string[] uris = Zeitgeist.ZeitgeistProxy.Default.RelevantFilesForMimeTypes (mimes).ToArray ();
+					lock (related_lock) {
+						related_uris = uris;
+					}
+				});
+				th.Priority = ThreadPriority.BelowNormal;
+				th.Start ();
+			}
+		}
+		
 		public override IEnumerable<MenuItem> GetMenuItems ()
 		{
 			if (ManagedWindows.Any ())
@@ -118,14 +147,10 @@ namespace Docky.Items
 				yield return item;
 			}
 			
-			if (desktop_item.AttrExists ("MimeType")) {
-				string[] mimes = desktop_item.GetString ("MimeType").Split (';');
-				bool separate = true;
-				foreach (string uri in Zeitgeist.ZeitgeistProxy.Default.RelevantFilesForMimeTypes (mimes)) {
-					if (separate) {
-						yield return new SeparatorMenuItem ();
-						separate = false;
-					}
+			if (related_uris.Any ()) {
+				yield return new SeparatorMenuItem ();
+				
+				foreach (string uri in related_uris) {
 					RelatedFileMenuItem item = new RelatedFileMenuItem (uri);
 					item.Clicked += ItemClicked;
 					yield return item;
@@ -164,6 +189,12 @@ namespace Docky.Items
 			} else {
 				desktop_item.Launch (null, 0);
 			}
+		}
+		
+		public override void Dispose ()
+		{
+			GLib.Source.Remove (timer);
+			base.Dispose ();
 		}
 	}
 }
