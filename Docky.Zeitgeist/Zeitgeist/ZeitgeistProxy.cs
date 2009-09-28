@@ -78,8 +78,13 @@ namespace Zeitgeist
 			filter[0] = new Dictionary<string, object> ();
 			filter[0]["mimetypes"] = mimes.ToArray ();
 			
-			IDictionary<string, object>[] results = zeitgeist.FindEvents (UnixTime (DateTime.Now.AddDays (-31)), 0, 4, false, "mostused", filter);
-			
+			try {
+				IDictionary<string, object>[] results = zeitgeist.FindEvents (UnixTime (DateTime.Now.AddDays (-31)), 0, 4, false, "mostused", filter);
+			} catch {
+				yield break;
+			}
+				
+				
 			foreach (IDictionary<string, object> result in results) {
 				if (result.ContainsKey ("uri"))
 					yield return result["uri"] as string;
