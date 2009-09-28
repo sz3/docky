@@ -25,10 +25,6 @@
 	</Extension>
 	
 	<Extension path="/Docky/ItemProvider">
-		<ItemProvider type="Switcher.SwitcherItemProvider" />
-	</Extension>
-	
-	<Extension path="/Docky/ItemProvider">
 		<ItemProvider type="BatteryMonitor.BatteryMonitorItemProvider" />
 	</Extension>
 
