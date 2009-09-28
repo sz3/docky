@@ -32,10 +32,11 @@ using Docky.Services;
 
 namespace BatteryMonitor
 {
-	public class BatteryMonitorDockItem : AbstractDockItem
+	public class BatteryMonitorProcItem : AbstractDockItem
 	{
-		const string BattInfoPath = "/proc/acpi/battery/BAT0/info";
-		const string BattStatePath = "/proc/acpi/battery/BAT0/state";
+		const string BattBasePath = "/proc/acpi/battery";
+		const string BattInfoPath = "info";
+		const string BattStatePath = "state";
 		
 		const string BottomSvg  = "battery_bottom.svg";
 		const string InsideSvg  = "battery_inside_{0}.svg";
@@ -65,12 +66,10 @@ namespace BatteryMonitor
 			return "BatteryMonitor";
 		}
 		
-		public BatteryMonitorDockItem ()
+		public BatteryMonitorProcItem ()
 		{
 			DockServices.System.BatteryStateChanged += HandleBatteryStateChanged;
 			number_regex = new Regex ("[0-9]+");
-			
-			GetBatteryCapacity ();
 			
 			UpdateBattStat ();
 			
@@ -79,68 +78,81 @@ namespace BatteryMonitor
 		
 		void HandleBatteryStateChanged (object sender, EventArgs args)
 		{
-			GetBatteryCapacity ();
-			QueueRedraw ();
+			UpdateBattStat ();
 		}
 		
 		void GetBatteryCapacity ()
 		{
-			max_capacity = 1;
+			max_capacity = 0;
 			
-			if (File.Exists (BattInfoPath)) {
-				using (StreamReader reader = new StreamReader (BattInfoPath)) {
-					string line;
-					while (!reader.EndOfStream) {
-						line = reader.ReadLine ();
-						if (!line.StartsWith ("last full capacity"))
-							continue;
-						
-						try {
-							max_capacity = Convert.ToInt32 (number_regex.Matches (line) [0].Value);
-						} catch { }
+			DirectoryInfo basePath = new DirectoryInfo (BattBasePath);
+			
+			foreach (DirectoryInfo battDir in basePath.GetDirectories ()) {
+				string path = BattBasePath + "/" + battDir.Name + "/" + BattInfoPath;
+				if (File.Exists (path)) {
+					using (StreamReader reader = new StreamReader (path)) {
+						string line;
+						while (!reader.EndOfStream) {
+							line = reader.ReadLine ();
+							if (!line.StartsWith ("last full capacity"))
+								continue;
+							
+							try {
+								max_capacity += Convert.ToInt32 (number_regex.Matches (line) [0].Value);
+							} catch { }
+						}
 					}
 				}
 			}
+			
+			max_capacity = Math.Max (1, max_capacity);
 		}
 		
 		bool UpdateBattStat ()
 		{
+			GetBatteryCapacity ();
+			
 			string capacity = null;
 			string chargeState = null;
 			
-			if (!File.Exists (BattStatePath)) {
-				current_capacity = 0;
-				max_capacity = 1;
-				
-				HoverText = "No Battery Found";
-				QueueRedraw ();
-				return true;
+			current_capacity = 0;
+			DirectoryInfo basePath = new DirectoryInfo (BattBasePath);
+			
+			foreach (DirectoryInfo battDir in basePath.GetDirectories ()) {
+				string path = BattBasePath + "/" + battDir.Name + "/" + BattStatePath;
+				if (File.Exists (path)) {
+					try {
+						using (StreamReader reader = new StreamReader (path)) {
+							string line;
+							while (!reader.EndOfStream) {
+								if (!string.IsNullOrEmpty (capacity) && !string.IsNullOrEmpty (chargeState))
+									break;
+								
+								line = reader.ReadLine ();
+								if (line.StartsWith ("remaining capacity")) {
+									capacity = line;
+									continue;
+								}
+								
+								if (line.StartsWith ("charging state"))
+									chargeState = line;
+							}
+						}
+					} catch (IOException) {}
+					
+					try {
+						current_capacity += Convert.ToInt32 (number_regex.Matches (capacity) [0].Value);
+					} catch { }
+				}
 			}
 			
-			try {
-				using (StreamReader reader = new StreamReader (BattStatePath)) {
-					string line;
-					while (!reader.EndOfStream) {
-						if (!string.IsNullOrEmpty (capacity) && !string.IsNullOrEmpty (chargeState))
-							break;
-						
-						line = reader.ReadLine ();
-						if (line.StartsWith ("remaining capacity")) {
-							capacity = line;
-							continue;
-						}
-						
-						if (line.StartsWith ("charging state"))
-							chargeState = line;
-					}
-				}
-			} catch (IOException) {}
+			if (current_capacity == 0) {
+				max_capacity = 1;
+				HoverText = "No Battery Found";
+			} else {
+				HoverText = string.Format ("{0:0.0}%", Capacity * 100);
+			}
 			
-			try {
-				current_capacity = Convert.ToInt32 (number_regex.Matches (capacity) [0].Value);
-			} catch { }
-			
-			HoverText = string.Format ("{0:0.0}%", Capacity * 100);
 			QueueRedraw ();
 
 			return true;
@@ -156,10 +168,7 @@ namespace BatteryMonitor
 		
 		protected override void PaintIconSurface (DockySurface surface)
 		{
-			if (DockServices.System.OnBattery || (Capacity < .98 && Capacity > 0))
-				(Owner as BatteryMonitorItemProvider).ShowItem ();
-			else
-				(Owner as BatteryMonitorItemProvider).HideItem ();
+			(Owner as BatteryMonitorItemProvider).Hidden = (!DockServices.System.OnBattery && (Capacity > .98 || Capacity < 1));
 			
 			Context cr = surface.Context;
 			int size = Math.Min (surface.Width, surface.Height);
