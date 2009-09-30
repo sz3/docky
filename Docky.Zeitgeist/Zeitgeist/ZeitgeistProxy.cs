@@ -81,7 +81,8 @@ namespace Zeitgeist
 			IDictionary<string, object>[] results;
 			try {
 				results = zeitgeist.FindEvents (UnixTime (DateTime.Now.AddDays (-31)), 0, 4, false, "mostused", filter);
-			} catch {
+			} catch (Exception e) {
+				Console.WriteLine (e.Message);
 				yield break;
 			}
 				
