@@ -21,7 +21,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
-namespace Zeitgeist
+namespace Docky.Zeitgeist
 {
 
 
@@ -56,7 +56,7 @@ namespace Zeitgeist
 		internal ZeitgeistResult (IDictionary<string, object> dbusResult)
 		{
 			if (dbusResult.ContainsKey ("timestamp")) {
-				
+				Timestamp = ZeitgeistProxy.FromUnixTime ((int) dbusResult["timestamp"]);
 			}
 			
 			if (dbusResult.ContainsKey ("uri")) {

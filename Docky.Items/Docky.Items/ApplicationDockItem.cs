@@ -29,6 +29,7 @@ using Wnck;
 using Docky.Menus;
 using Docky.Services;
 using Docky.Windowing;
+using Docky.Zeitgeist;
 
 namespace Docky.Items
 {
@@ -55,7 +56,7 @@ namespace Docky.Items
 		
 		Gnome.DesktopItem desktop_item;
 		string path;
-		string[] related_uris;
+		ZeitgeistResult[] related_uris;
 		object related_lock;
 		
 		uint timer;
@@ -69,7 +70,7 @@ namespace Docky.Items
 		private ApplicationDockItem (Gnome.DesktopItem item)
 		{
 			related_lock = new Object ();
-			related_uris = new string[0];
+			related_uris = new ZeitgeistResult[0];
 			
 			desktop_item = item;
 			if (item.AttrExists ("Icon"))
@@ -126,7 +127,18 @@ namespace Docky.Items
 			if (desktop_item.AttrExists ("MimeType")) {
 				string[] mimes = desktop_item.GetString ("MimeType").Split (';');
 				Thread th = new Thread ((ThreadStart) delegate {
-					string[] uris = Zeitgeist.ZeitgeistProxy.Default.RelevantFilesForMimeTypes (mimes).ToArray ();
+					Zeitgeist.ZeitgeistFilter filter = new Zeitgeist.ZeitgeistFilter ();
+					filter.MimeTypes.AddRange (mimes);
+					
+					ZeitgeistResult[] uris = ZeitgeistProxy.Default.FindEvents (
+						DateTime.Now.AddDays (-31), 
+						DateTime.Now, 
+						4, 
+						false, 
+						"mostused",
+						filter.AsSingle ())
+						.ToArray ();
+					
 					lock (related_lock) {
 						related_uris = uris;
 					}
@@ -150,10 +162,14 @@ namespace Docky.Items
 			if (related_uris.Any ()) {
 				yield return new SeparatorMenuItem ();
 				
-				foreach (string uri in related_uris) {
-					RelatedFileMenuItem item = new RelatedFileMenuItem (uri);
-					item.Clicked += ItemClicked;
-					yield return item;
+				lock (related_lock) {
+					foreach (ZeitgeistResult result in related_uris) {
+						RelatedFileMenuItem item = new RelatedFileMenuItem (result.Uri);
+						if (!string.IsNullOrEmpty (result.Text))
+							item.Text = result.Text;
+						item.Clicked += ItemClicked;
+						yield return item;
+					}
 				}
 			}
 		}
@@ -186,6 +202,7 @@ namespace Docky.Items
 			if (files.Any ()) {
 				GLib.List glist = new GLib.List (files.ToArray () as object[], typeof(string), false, true);
 				desktop_item.Launch (glist, Gnome.DesktopItemLaunchFlags.OnlyOne);
+				glist.Dispose ();
 			} else {
 				desktop_item.Launch (null, 0);
 			}

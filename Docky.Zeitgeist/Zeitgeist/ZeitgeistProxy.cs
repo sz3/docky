@@ -24,7 +24,7 @@ using System.Text;
 using NDesk.DBus;
 using org.freedesktop.DBus;
 
-namespace Zeitgeist
+namespace Docky.Zeitgeist
 {
 
 
@@ -82,6 +82,9 @@ namespace Zeitgeist
 		public IEnumerable<ZeitgeistResult> FindEvents (DateTime start, DateTime stop, int maxResults, bool ascending, 
 			                                            string mode, IEnumerable<ZeitgeistFilter> filters)
 		{
+			if (zeitgeist == null)
+				yield break;
+			
 			int startTime = ToUnixTime (start);
 			int stopTime = ToUnixTime (stop);
 			
@@ -89,7 +92,8 @@ namespace Zeitgeist
 			try {
 				results = zeitgeist.FindEvents (startTime, stopTime, maxResults, ascending, 
 					                            mode, filters.Select (f => f.ToDBusFilter ()).ToArray ());
-			} catch {
+			} catch (Exception e) {
+				Console.WriteLine (e.Message);
 				yield break;
 			}
 			

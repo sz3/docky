@@ -21,7 +21,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
-namespace Zeitgeist
+namespace Docky.Zeitgeist
 {
 
 
@@ -58,13 +58,27 @@ namespace Zeitgeist
 		internal IDictionary<string, object> ToDBusFilter ()
 		{
 			IDictionary<string, object> result = new Dictionary<string, object> ();
-			result["name"] = Names.ToArray ();
-			result["uri"] = Uris.ToArray ();
-			result["tags"] = Tags.ToArray ();
-			result["mimetypes"] = MimeTypes.ToArray ();
-			result["source"] = Sources.ToArray ();
-			result["content"] = Content.ToArray ();
-			result["applicaiton"] = Apps.ToArray ();
+			if (Names.Any ())
+				result["name"] = Names.ToArray ();
+			
+			if (Uris.Any ())
+				result["uri"] = Uris.ToArray ();
+			
+			if (Tags.Any ())
+				result["tags"] = Tags.ToArray ();
+			
+			if (MimeTypes.Any ())
+				result["mimetypes"] = MimeTypes.ToArray ();
+			
+			if (Sources.Any ())
+				result["source"] = Sources.ToArray ();
+			
+			if (Content.Any ())
+				result["content"] = Content.ToArray ();
+			
+			if (Apps.Any ())
+				result["application"] = Apps.ToArray ();
+			
 			result["bookmarked"] = Bookmarked;
 			
 			return result;
