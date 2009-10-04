@@ -33,10 +33,14 @@ namespace Zeitgeist
 		static DateTime UnixEpoch = new DateTime (1970, 1, 1, 0, 0, 0).ToLocalTime ();
 		
 		static ZeitgeistProxy proxy;
+		static object default_lock = new object ();
+		
 		public static ZeitgeistProxy Default {
 			get {
-				if (proxy == null)
-					proxy = new ZeitgeistProxy ();
+				lock (default_lock) {
+					if (proxy == null)
+						proxy = new ZeitgeistProxy ();
+				}
 				return proxy;
 			}
 		}
@@ -57,10 +61,9 @@ namespace Zeitgeist
 		ZeitgeistProxy ()
 		{
 			try {
-				if (Bus.Session.NameHasOwner (BusName)) {
-					zeitgeist = Bus.Session.GetObject<IZeitgeistDaemon> (BusName, new ObjectPath (PathName));
-				}
-			} catch {
+				zeitgeist = Bus.Session.GetObject<IZeitgeistDaemon> (BusName, new ObjectPath (PathName));
+			} catch (Exception e) {
+				Console.Error.WriteLine (e.Message);
 				Console.Error.WriteLine ("Failed to connect to zeitgeist bus");
 			}
 		}
@@ -112,7 +115,6 @@ namespace Zeitgeist
 				yield break;
 			}
 			
-				
 			foreach (IDictionary<string, object> result in results) {
 				if (result.ContainsKey ("uri"))
 					yield return result["uri"] as string;
