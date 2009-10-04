@@ -98,9 +98,10 @@
     <Compile Include="GMail\gtk-gui\GMail.GMailConfiguration.cs" />
     <Compile Include="GMail\gtk-gui\GMail.AbstractLoginWidget.cs" />
     <Compile Include="GMail\gtk-gui\generated.cs" />
-    <Compile Include="BatteryMonitor\BatteryMonitorDockItem.cs" />
     <Compile Include="BatteryMonitor\BatteryMonitorItemProvider.cs" />
     <Compile Include="Bookmarks\BookmarksItemProvider.cs" />
+    <Compile Include="BatteryMonitor\BatteryMonitorProcItem.cs" />
+    <Compile Include="BatteryMonitor\BatteryStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Docky.StandardPlugins.addin.xml">

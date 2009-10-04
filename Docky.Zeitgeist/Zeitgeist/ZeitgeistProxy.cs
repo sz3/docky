@@ -30,6 +30,8 @@ namespace Zeitgeist
 
 	public class ZeitgeistProxy
 	{
+		static DateTime UnixEpoch = new DateTime (1970, 1, 1, 0, 0, 0).ToLocalTime ();
+		
 		static ZeitgeistProxy proxy;
 		public static ZeitgeistProxy Default {
 			get {
@@ -63,10 +65,34 @@ namespace Zeitgeist
 			}
 		}
 		
-		public static int UnixTime (DateTime time)
+		public static DateTime FromUnixTime (int time)
 		{
-			DateTime unixEpoch = new DateTime (1970, 1, 1, 0, 0, 0).ToLocalTime ();
-			return (int) ((time.Ticks - unixEpoch.Ticks) / 10000000);
+			long ticks = (time * 10000000) + UnixEpoch.Ticks;
+			return new DateTime (ticks);
+		}
+		
+		public static int ToUnixTime (DateTime time)
+		{
+			return (int) ((time.Ticks - UnixEpoch.Ticks) / 10000000);
+		}
+		
+		public IEnumerable<ZeitgeistResult> FindEvents (DateTime start, DateTime stop, int maxResults, bool ascending, 
+			                                            string mode, IEnumerable<ZeitgeistFilter> filters)
+		{
+			int startTime = ToUnixTime (start);
+			int stopTime = ToUnixTime (stop);
+			
+			IDictionary<string, object>[] results;
+			try {
+				results = zeitgeist.FindEvents (startTime, stopTime, maxResults, ascending, 
+					                            mode, filters.Select (f => f.ToDBusFilter ()).ToArray ());
+			} catch {
+				yield break;
+			}
+			
+			foreach (IDictionary<string, object> result in results) {
+				yield return new ZeitgeistResult (result);
+			}
 		}
 		
 		public IEnumerable<string> RelevantFilesForMimeTypes (IEnumerable<string> mimes)
@@ -80,12 +106,12 @@ namespace Zeitgeist
 			
 			IDictionary<string, object>[] results;
 			try {
-				results = zeitgeist.FindEvents (UnixTime (DateTime.Now.AddDays (-31)), 0, 4, false, "mostused", filter);
+				results = zeitgeist.FindEvents (ToUnixTime (DateTime.Now.AddDays (-31)), 0, 4, false, "mostused", filter);
 			} catch (Exception e) {
 				Console.WriteLine (e.Message);
 				yield break;
 			}
-				
+			
 				
 			foreach (IDictionary<string, object> result in results) {
 				if (result.ContainsKey ("uri"))

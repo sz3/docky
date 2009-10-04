@@ -5,6 +5,8 @@ ASSEMBLY = Docky.Zeitgeist
 TARGET = library
 
 FILES = \
+	Zeitgeist/ZeitgeistResult.cs \
+	Zeitgeist/ZeitgeistFilter.cs \
 	Zeitgeist/ZeitgeistProxy.cs
 
 REFERENCES =  \
