@@ -42,7 +42,7 @@ namespace Docky.Menus
 			}
 			
 			if (uri.StartsWith ("file://")) {
-				Text = Path.GetFileName (System.Uri.UnescapeDataString (new Uri (uri).AbsolutePath));
+				Text = Path.GetFileName (Gnome.Vfs.Global.GetLocalPathFromUri (uri));
 			} else {
 				Uri u = new Uri (uri);
 				Text = System.Uri.UnescapeDataString (uri.Substring (u.Scheme.Length + 3));

@@ -706,6 +706,10 @@ namespace Docky.Interface
 			
 			Gdk.Pixbuf pbuf;
 			drag_item = HoveredItem;
+			
+			if (drag_item is INonPersistedItem)
+				drag_item = null;
+			
 			if (drag_item != null) {
 				pbuf = HoveredItem.IconSurface (background_buffer, ZoomedIconSize).LoadToPixbuf ();
 			} else {

@@ -22,9 +22,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-using Cairo;
-using Gdk;
-
 using Docky.Menus;
 
 using Docky.Services;
@@ -37,7 +34,7 @@ namespace Docky.Items
 	{
 		public static FileDockItem NewFromUri (string uri)
 		{
-			string path = new Uri (uri).LocalPath;
+			string path = Gnome.Vfs.Global.GetLocalPathFromUri (uri);
 			if (!Directory.Exists (path) && !File.Exists (path)) {
 				return null;
 			}
@@ -76,6 +73,7 @@ namespace Docky.Items
 		}
 		
 		string uri;
+		bool is_folder;
 		
 		public string Uri {
 			get { return uri; }
@@ -84,17 +82,19 @@ namespace Docky.Items
 		FileDockItem (string uri)
 		{
 			this.uri = uri;
-			string path = new Uri (uri).AbsolutePath;
+			string path = Gnome.Vfs.Global.GetLocalPathFromUri (uri);
 			
 			if (!Directory.Exists (path)) {
+				is_folder = false;
 				Gnome.IconLookupResultFlags results;
 			
 				Icon = Gnome.Icon.LookupSync (Gtk.IconTheme.Default, null, uri, null, 0, out results);
 			} else {
+				is_folder = true;
 				Icon = IconNameForPath (path);
 			}
 			
-			HoverText = System.IO.Path.GetFileName (new Uri (uri).LocalPath);
+			HoverText = System.IO.Path.GetFileName (path);
 		}
 		
 		public override string UniqueID ()
@@ -102,12 +102,34 @@ namespace Docky.Items
 			return uri;
 		}
 
-		
-		protected override ClickAnimation OnClicked (uint button, ModifierType mod, double xPercent, double yPercent)
+		public override bool CanAcceptDrop (IEnumerable<string> uris)
 		{
-			Open ();
-			
-			return ClickAnimation.Bounce;
+			return is_folder;
+		}
+
+		public override bool AcceptDrop (IEnumerable<string> uris)
+		{
+			string folder = Gnome.Vfs.Global.GetLocalPathFromUri (Uri);
+			foreach (string uri in uris) {
+				string file = Gnome.Vfs.Global.GetLocalPathFromUri (uri);
+				string newName = Path.Combine (folder, Path.GetFileName (file));
+				if (File.Exists (file) && !File.Exists (newName) && !Directory.Exists (newName)) {
+					File.Move (file, Path.Combine (folder, Path.GetFileName (file)));
+				} else if (Directory.Exists (file) && !File.Exists (newName) && !Directory.Exists (newName)) {
+					Directory.Move (file, newName);
+				}
+			}
+			return true;
+		}
+		
+		
+		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
+		{
+			if (button == 1) {
+				Open ();
+				return ClickAnimation.Bounce;
+			}
+			return base.OnClicked (button, mod, xPercent, yPercent);
 		}
 		
 		public override IEnumerable<MenuItem> GetMenuItems ()
@@ -124,8 +146,8 @@ namespace Docky.Items
 		void OpenContainingFolder ()
 		{
 			// retarded but works. Must be a better way
-			string path = System.IO.Path.GetDirectoryName (new Uri (uri).AbsolutePath);
-			DockServices.System.Open (new Uri (path).AbsoluteUri);
+			string path = System.IO.Path.GetDirectoryName (Gnome.Vfs.Global.GetLocalPathFromUri (uri));
+			DockServices.System.Open (Gnome.Vfs.Global.GetUriFromLocalPath (path));
 		}
 	}
 }

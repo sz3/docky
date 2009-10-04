@@ -101,28 +101,5 @@ namespace Docky.Zeitgeist
 				yield return new ZeitgeistResult (result);
 			}
 		}
-		
-		public IEnumerable<string> RelevantFilesForMimeTypes (IEnumerable<string> mimes)
-		{
-			if (zeitgeist == null)
-				yield break;
-			
-			IDictionary<string, object>[] filter = new Dictionary<string, object>[1];
-			filter[0] = new Dictionary<string, object> ();
-			filter[0]["mimetypes"] = mimes.ToArray ();
-			
-			IDictionary<string, object>[] results;
-			try {
-				results = zeitgeist.FindEvents (ToUnixTime (DateTime.Now.AddDays (-31)), 0, 4, false, "mostused", filter);
-			} catch (Exception e) {
-				Console.WriteLine (e.Message);
-				yield break;
-			}
-			
-			foreach (IDictionary<string, object> result in results) {
-				if (result.ContainsKey ("uri"))
-					yield return result["uri"] as string;
-			}
-		}
 	}
 }

@@ -39,7 +39,7 @@ namespace Docky.Items
 		public static ApplicationDockItem NewFromUri (string uri)
 		{
 			Gnome.DesktopItem desktopItem;
-			string filename = new Uri (uri).LocalPath;
+			string filename = Gnome.Vfs.Global.GetLocalPathFromUri (uri);
 			
 			try {
 				desktopItem = Gnome.DesktopItem.NewFromFile (filename, 0);
@@ -86,7 +86,7 @@ namespace Docky.Items
 				HoverText = System.IO.Path.GetFileNameWithoutExtension (path);
 			}
 			
-			path = new Uri (item.Location).LocalPath;
+			path = Gnome.Vfs.Global.GetLocalPathFromUri (item.Location);
 			
 			UpdateWindows ();
 			UpdateRelated ();
