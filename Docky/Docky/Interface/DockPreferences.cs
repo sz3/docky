@@ -135,9 +135,15 @@ namespace Docky.Interface
 		public DockPosition Position {
 			get { return position; }
 			set {
-				if (position == value || Docky.Controller.Docks.Any (d => d.Preferences.Position == value))
+				if (position == value)
 					return;
+				Dock other_dock = null;
+				if (Docky.Controller.Docks.Any (d => d.Preferences.Position == value))
+					other_dock = Docky.Controller.Docks.Where (d => d.Preferences.Position == value).First();
+				DockPosition old_position = position;
 				position = value;
+				if (other_dock != null)
+					other_dock.Preferences.Position = old_position;
 				SetOption<string> ("Position", position.ToString ());
 				OnPositionChanged ();
 			}
