@@ -62,52 +62,68 @@ namespace GMail
 	/// </summary>
 	public class GMailAtom
 	{
-		public static event EventHandler GMailChecked;
-		public static event EventHandler GMailChecking;
-		public static event EventHandler<GMailErrorArgs> GMailFailed;
+		static event EventHandler ResetNeeded;
 		
-		public static GMailState State { get; protected set; }
+		public static void SettingsChanged ()
+		{
+			if (ResetNeeded != null)
+				ResetNeeded (null, new EventArgs());
+		}
+		
+		public event EventHandler GMailChecked;
+		public event EventHandler GMailChecking;
+		public event EventHandler<GMailErrorArgs> GMailFailed;
+		
+		public GMailState State { get; protected set; }
 
-		public static int UnreadCount { get; protected set; }
-		public static int NewCount { get; protected set; }
+		public int UnreadCount { get; protected set; }
+		public int NewCount { get; protected set; }
 		
-		public static bool HasUnread {
+		public bool HasUnread {
 			get {
 				return UnreadCount > 0 && State == GMailState.Normal;
 			}
 		}
 		
-		static GMailAtom () {
+		public GMailAtom (string label)
+		{
+			CurrentLabel = label;
 			State = GMailState.ManualReload;
-			DockServices.System.NetworkStateChanged += HandleNetworkStateChanged;
+			DockServices.System.NetworkStateChanged += HandleNeedReset;
 			// this is not implemented in mono yet
 //			ServicePointManager.ServerCertificateValidationCallback +=
 //				(sender, cert, chain, errors) => { return true; };
+			ResetNeeded += HandleNeedReset;
 		}
 		
-		static void HandleNetworkStateChanged (object o, EventArgs state)
+		public void Dispose ()
+		{
+			ResetNeeded -= HandleNeedReset;
+		}
+		
+		void HandleNeedReset (object o, EventArgs state)
 		{
 			ResetTimer ();
 		}
 		
-		static List<UnreadMessage> messages = new List<UnreadMessage> ();
+		List<UnreadMessage> messages = new List<UnreadMessage> ();
 		
-		public static IEnumerable<UnreadMessage> Messages {
+		public IEnumerable<UnreadMessage> Messages {
 			get {
 				return messages as IEnumerable<UnreadMessage>;
 			}
 		}
 		
-		static uint UpdateTimer { get; set; }
+		uint UpdateTimer { get; set; }
 		
-		public static void ResetTimer (bool manual)
+		public void ResetTimer (bool manual)
 		{
 			if (manual)
 				State = GMailState.ManualReload;
 			ResetTimer ();
 		}
 		
-		public static void ResetTimer ()
+		public void ResetTimer ()
 		{
 			StopTimer ();
 			
@@ -119,21 +135,14 @@ namespace GMail
 			UpdateTimer = GLib.Timeout.Add (GMailPreferences.RefreshRate * 60 * 1000, () => { CheckGMail (); return true; });
 		}
 		
-		public static void StopTimer ()
+		public void StopTimer ()
 		{
 			if (UpdateTimer != 0)
 				GLib.Source.Remove (UpdateTimer);
 			UpdateTimer = 0;
 		}
 		
-		public static string CurrentLabel {
-			get {
-				if (GMailPreferences.CurrentLabel >= 0 && GMailPreferences.CurrentLabel < GMailPreferences.Labels.Length)
-					return GMailPreferences.Labels [GMailPreferences.CurrentLabel];
-				else
-					return "Inbox";
-			}
-		}
+		public string CurrentLabel { get; protected set; }
 		
 		public static bool ValidateCredentials (string username, string password)
 		{
@@ -163,7 +172,7 @@ namespace GMail
 			return true;
 		}
 		
-		static void CheckGMail ()
+		void CheckGMail ()
 		{
 			new Thread (() => {
 				try {
@@ -262,14 +271,14 @@ namespace GMail
 			}).Start ();
 		}
 		
-		public static void OnGMailChecked ()
+		void OnGMailChecked ()
 		{
 			State = GMailState.Normal;
 			if (GMailChecked != null)
 				GMailChecked (null, EventArgs.Empty);
 		}
 		
-		public static void OnGMailChecking ()
+		void OnGMailChecking ()
 		{
 			if (State != GMailState.ManualReload)
 				State = GMailState.Reloading;
@@ -277,7 +286,7 @@ namespace GMail
 				GMailChecking (null, EventArgs.Empty);
 		}
 		
-		public static void OnGMailFailed (string error)
+		void OnGMailFailed (string error)
 		{
 			State = GMailState.Error;
 			if (GMailFailed != null)

@@ -113,9 +113,6 @@ namespace GMail
 				
 				GMailPreferences.Labels = labels;
 				
-				if (removedLabel.Equals (GMailAtom.CurrentLabel) && GMailPreferences.CurrentLabel >= 0)
-					GMailPreferences.CurrentLabel--;
-				
 				UpdateLabels ();
 			}
 		}

@@ -39,30 +39,40 @@ namespace GMail
 			return "GMailDockItem";
 		}
 		
-		public GMailDockItem ()
+		public bool Visible {
+			get { return atom.UnreadCount > 0 || atom.CurrentLabel == "Inbox"; }
+		}
+		
+		GMailAtom atom;
+		
+		public GMailDockItem (string label)
 		{
-			GMailAtom.GMailChecked += GMailCheckedHandler;
-			GMailAtom.GMailChecking += GMailCheckingHandler;
-			GMailAtom.GMailFailed += GMailFailedHandler;
+			atom = new GMailAtom (label);
 			
-			GMailAtom.ResetTimer ();
+			atom.GMailChecked += GMailCheckedHandler;
+			atom.GMailChecking += GMailCheckingHandler;
+			atom.GMailFailed += GMailFailedHandler;
+			
+			atom.ResetTimer ();
 		}
 		
 		static int old_count = 0;
 		public void GMailCheckedHandler (object obj, EventArgs e)
 		{
-			string status = "";
-			if (old_count < GMailAtom.NewCount)
+			if (old_count < atom.NewCount)
 				UpdateAttention (true);
-			old_count = GMailAtom.NewCount;
-			if (GMailAtom.UnreadCount == 0)
+			old_count = atom.NewCount;
+			
+			string status = "";
+			if (atom.UnreadCount == 0)
 				status = Catalog.GetString ("No unread mail");
-			else if (GMailAtom.UnreadCount == 1)
+			else if (atom.UnreadCount == 1)
 				status = Catalog.GetString ("1 unread message");
 			else
-				status = GMailAtom.UnreadCount + Catalog.GetString (" unread messages");
-			HoverText = GMailAtom.CurrentLabel + " - " + status;
+				status = atom.UnreadCount + Catalog.GetString (" unread messages");
+			HoverText = atom.CurrentLabel + " - " + status;
 			
+			(Owner as GMailItemProvider).ItemVisibilityChanged (this, Visible);
 			QueueRedraw ();
 		}
 		
@@ -97,19 +107,26 @@ namespace GMail
 			Context cr = surface.Context;
 			
 			string icon = "gmail-logo.png@";
-			if (GMailAtom.State == GMailState.ManualReload || GMailAtom.State == GMailState.Error)
+			if (atom.State == GMailState.ManualReload || atom.State == GMailState.Error)
 				icon = "gmail-logo-dark.png@";
 			
 			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (icon + GetType ().Assembly.FullName, size))
 			{
 				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, 0, 0);
-				if (GMailAtom.State == GMailState.ManualReload || !GMailAtom.HasUnread)
+				if (atom.State == GMailState.ManualReload || !atom.HasUnread)
 					cr.PaintWithAlpha (.5);
 				else
 					cr.Paint ();
 			}
 			
-			if (GMailAtom.HasUnread)
+			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
+			layout.FontDescription = new Gtk.Style().FontDescription;
+			layout.FontDescription.Weight = Pango.Weight.Bold;
+			layout.Ellipsize = Pango.EllipsizeMode.None;
+			
+			Pango.Rectangle inkRect, logicalRect;
+			
+			if (atom.HasUnread)
 			{
 				using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("badge-yellow.svg@" + GetType ().Assembly.FullName, size / 2))
 				{
@@ -117,21 +134,15 @@ namespace GMail
 					cr.PaintWithAlpha (0.9);
 				}
 			
-				Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-				
-				layout.FontDescription = new Gtk.Style().FontDescription;
-				layout.FontDescription.Weight = Pango.Weight.Bold;
-				layout.Ellipsize = Pango.EllipsizeMode.None;
 				layout.Width = Pango.Units.FromPixels (size / 2);
 
-				layout.SetText ("" + GMailAtom.UnreadCount);
+				layout.SetText ("" + atom.UnreadCount);
 
-				if (GMailAtom.UnreadCount < 100)
+				if (atom.UnreadCount < 100)
 					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (size / 4);
 				else
 					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (size / 5);
 
-				Pango.Rectangle inkRect, logicalRect;
 				layout.GetPixelExtents (out inkRect, out logicalRect);
 				cr.MoveTo (size / 2 + (size / 2 - inkRect.Width) / 2, (size / 2 - logicalRect.Height) / 2);
 
@@ -142,11 +153,27 @@ namespace GMail
 				cr.Color = new Cairo.Color (1, 1, 1, 1);
 				cr.Fill ();
 			}
+			
+			layout.Width = Pango.Units.FromPixels (size);
+
+			layout.SetText (atom.CurrentLabel);
+
+			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (size / 5);
+
+			layout.GetPixelExtents (out inkRect, out logicalRect);
+			cr.MoveTo ((size - inkRect.Width) / 2, size - logicalRect.Height);
+
+			Pango.CairoHelper.LayoutPath (cr, layout);
+			cr.LineWidth = 2;
+			cr.Color = new Cairo.Color (0, 0, 0, 0.4);
+			cr.StrokePreserve ();
+			cr.Color = new Cairo.Color (1, 1, 1, 0.6);
+			cr.Fill ();
 		}
 		
 		void OpenInbox ()
 		{
-			string label = GMailAtom.CurrentLabel;
+			string label = atom.CurrentLabel;
 			string username = GMailPreferences.User;
 			string[] login = username.Split (new char[] {'@'});
 			string domain = login.Length > 1 ? login [1] : "gmail.com";
@@ -175,38 +202,12 @@ namespace GMail
 			return ClickAnimation.None;
 		}
 		
-		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
-		{
-			UpdateAttention (false);
-			
-			if (GMailPreferences.Labels.Length == 0)
-				return;
-			
-			switch (direction) {
-			case Gdk.ScrollDirection.Up:
-			case Gdk.ScrollDirection.Left:
-				GMailPreferences.CurrentLabel--;
-				break;
-			case Gdk.ScrollDirection.Down:
-			case Gdk.ScrollDirection.Right:
-				GMailPreferences.CurrentLabel++;
-				break;
-			}
-			
-			if (GMailPreferences.CurrentLabel < -1)
-				GMailPreferences.CurrentLabel = GMailPreferences.Labels.Length - 1;
-			if (GMailPreferences.CurrentLabel >= GMailPreferences.Labels.Length)
-				GMailPreferences.CurrentLabel = -1;
-			
-			GMailAtom.ResetTimer (true);
-			base.OnScrolled (direction, mod);
-		}
-		
 		public override void Dispose ()
 		{
-			GMailAtom.GMailChecked -= GMailCheckedHandler;
-			GMailAtom.GMailChecking -= GMailCheckingHandler;
-			GMailAtom.GMailFailed -= GMailFailedHandler;
+			atom.GMailChecked -= GMailCheckedHandler;
+			atom.GMailChecking -= GMailCheckingHandler;
+			atom.GMailFailed -= GMailFailedHandler;
+			atom.Dispose ();
 
 			base.Dispose ();
 		}
@@ -215,7 +216,7 @@ namespace GMail
 		{
 			UpdateAttention (false);
 			
-			yield return new MenuItem (Catalog.GetString ("View ") + GMailAtom.CurrentLabel,
+			yield return new MenuItem (Catalog.GetString ("View ") + atom.CurrentLabel,
 					"gmail-logo.png@" + GetType ().Assembly.FullName,
 					delegate {
 						Clicked (1, Gdk.ModifierType.None, 0, 0);
@@ -228,8 +229,8 @@ namespace GMail
 			
 			yield return new SeparatorMenuItem ();
 
-			if (GMailAtom.HasUnread) {
-				foreach (UnreadMessage message in GMailAtom.Messages.Take (10))
+			if (atom.HasUnread) {
+				foreach (UnreadMessage message in atom.Messages.Take (10))
 					yield return new GMailMenuItem (message);
 				
 				yield return new SeparatorMenuItem ();
@@ -245,7 +246,7 @@ namespace GMail
 			yield return new MenuItem (Catalog.GetString ("Check Now"),
 					Gtk.Stock.Refresh,
 					delegate {
-						GMailAtom.ResetTimer (true);
+						atom.ResetTimer (true);
 						QueueRedraw ();
 					});
 		}

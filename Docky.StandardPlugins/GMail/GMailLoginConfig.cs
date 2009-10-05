@@ -41,7 +41,7 @@ namespace GMail
 		{
 			GMailPreferences.User = username;
 			GMailPreferences.Password = password;
-			GMailAtom.ResetTimer ();
+			GMailAtom.SettingsChanged ();
 		}
 		
 		protected override bool Validate (string username, string password)

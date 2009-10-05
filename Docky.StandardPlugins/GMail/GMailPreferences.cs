@@ -31,7 +31,6 @@ namespace GMail
 		const string RefreshRateKey = "RefreshRate";
 		const string FeedUrlKey = "Feed";
 		const string LabelsKey = "Labels";
-		const string CurrentLabelKey = "CurrentLabel";
 		const string LastCheckedKey = "LastChecked";
 		const string NeedsAttentionKey = "NeedsAttention";
 		const string NotifyKey = "Notify";
@@ -131,25 +130,6 @@ namespace GMail
 		public static string[] Labels {
  			get { return prefs.Get<string[]> (LabelsKey, new string[] {}); }
  			set { prefs.Set<string[]> (LabelsKey, value); OnLabelsChanged (); }
- 		}
-		
-		/// <value>
-		/// </value>
-		public static event EventHandler CurrentLabelChanged;
-		
-		/// <value>
-		/// </value>
-		public static void OnCurrentLabelChanged ()
-		{
-			if (CurrentLabelChanged != null)
-				CurrentLabelChanged (null, EventArgs.Empty);
-		}
-		
-		/// <value>
-		/// </value>
-		public static int CurrentLabel {
- 			get { return prefs.Get<int> (CurrentLabelKey, -1); }
- 			set { prefs.Set<int> (CurrentLabelKey, value); OnCurrentLabelChanged (); }
  		}
 		
 		/// <value>

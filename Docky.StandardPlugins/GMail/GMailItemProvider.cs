@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2009 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -34,23 +34,85 @@ namespace GMail
 		
 		public override IEnumerable<AbstractDockItem> Items {
 			get {
-				yield return gmail;
+				foreach (GMailDockItem item in items.Values)
+					if (item.Visible)
+						yield return item;
 			}
 		}
 		
 		public override void Dispose ()
 		{
-			gmail.Dispose ();
+			string[] keys = new string [items.Keys.Count];
+			items.Keys.CopyTo (keys, 0);
+			foreach (string label in keys)
+				RemoveItem (label);
 		}
 		
 		#endregion
+		
+		public void ItemVisibilityChanged (AbstractDockItem item, bool newVisible)
+		{
+			if (visible [item] == newVisible)
+				return;
+			
+			visible [item] = newVisible;
 
-		GMailDockItem gmail;
+			if (newVisible)
+				OnItemsChanged (item.AsSingle (), null);
+			else
+				OnItemsChanged (null, item.AsSingle ());
+		}
+		
+		void RemoveItem (string label)
+		{
+			if (!items.ContainsKey (label))
+				return;
+
+			AbstractDockItem item = items [label];
+			items.Remove (label);
+			visible.Remove (item);
+			
+			OnItemsChanged (item.AsSingle (), null);
+			item.Dispose ();
+		}
+		
+		void AddItem (string label)
+		{
+			if (items.ContainsKey (label))
+				return;
+
+			GMailDockItem item = new GMailDockItem (label);
+			item.Owner = this;
+			
+			if (item.Visible)
+				OnItemsChanged (null, (item as AbstractDockItem).AsSingle ());
+			items.Add (label, item);
+			visible.Add (item, item.Visible);
+		}
+
+		Dictionary<string, AbstractDockItem> items = new Dictionary<string, AbstractDockItem> ();
+		Dictionary<AbstractDockItem, bool> visible = new Dictionary<AbstractDockItem, bool> ();
 		
 		public GMailItemProvider ()
 		{
-			gmail = new GMailDockItem ();
-			gmail.Owner = this;
+			AddItem ("Inbox");
+			
+			foreach (string label in GMailPreferences.Labels)
+				AddItem (label);
+			
+			GMailPreferences.LabelsChanged += HandleLabelsChanged;
+		}
+		
+		void HandleLabelsChanged (object o, EventArgs e)
+		{
+			string[] keys = new string [items.Keys.Count];
+			items.Keys.CopyTo (keys, 0);
+			foreach (string label in keys)
+				if (label != "Inbox")
+					RemoveItem (label);
+
+			foreach (string label in GMailPreferences.Labels)
+				AddItem (label);
 		}
 	}
 }
