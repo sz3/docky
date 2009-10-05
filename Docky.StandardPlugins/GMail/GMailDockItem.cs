@@ -154,6 +154,10 @@ namespace GMail
 				cr.Fill ();
 			}
 			
+			// no need to draw the label for the Inbox
+			if (atom.CurrentLabel == "Inbox")
+				return;
+
 			layout.Width = Pango.Units.FromPixels (size);
 
 			layout.SetText (atom.CurrentLabel);
