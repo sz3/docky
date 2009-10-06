@@ -5,6 +5,7 @@ ASSEMBLY = Docky
 TARGET = exe
 
 FILES = \
+	AssemblyInfo.cs \
 	Docky/Docky.cs \
 	Docky/UserArgs.cs \
 	Docky/DockController.cs \

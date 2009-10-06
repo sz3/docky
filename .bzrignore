@@ -13,3 +13,4 @@ Docky/docky
 *.pidb
 *.userprefs
 bin
+Docky/AssemblyInfo.cs

@@ -83,7 +83,7 @@ namespace Docky
 			Gtk.AboutDialog about = new Gtk.AboutDialog ();
 			about.Artists = new[] { "Daniel Foré" };
 			about.ProgramName = "Docky";
-			about.Version = "2.0 Alpha 1";
+			about.Version = AssemblyInfo.DisplayVersion + "\n" + AssemblyInfo.VersionDetails;
 			about.Logo = Services.DockServices.Drawing.LoadIcon ("logo.svg@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName, 128);
 			about.Copyright = "Copyright \xa9 2009 Docky Developers";
 			about.Comments = "Docky. Simply Powerful.";

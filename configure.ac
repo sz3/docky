@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.54])
 
-AC_INIT([docky], [0.0.1])
+AC_INIT([docky], [2.0.0 Alpha 1])
 AM_INIT_AUTOMAKE([foreign tar-pax])
 
 AC_CONFIG_MACRO_DIR([m4])
@@ -125,6 +125,7 @@ Docky.Windowing/Makefile
 Docky.Windowing/Docky.Windowing.dll.config
 Docky.Zeitgeist/Makefile
 Docky/docky
+Docky/AssemblyInfo.cs
 Makefile
 m4/Makefile
 ])
