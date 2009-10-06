@@ -1442,10 +1442,12 @@ namespace Docky.Interface
 					center = center.MoveIn (Position, move);
 					break;
 				case ClickAnimation.Darken:
-					darken = Math.Sin (Math.PI * clickAnimationProgress) * .4;
+					darken = (clickAnimationProgress - 0.5);
+					darken = 1.6 * darken * darken + 0.6;
 					break;
 				case ClickAnimation.Lighten:
-					lighten = Math.Sin (Math.PI * clickAnimationProgress) * .4;
+					lighten = (clickAnimationProgress - 0.5);
+					lighten = 1.6 * lighten * lighten + 0.6;
 					break;
 				}
 			}
