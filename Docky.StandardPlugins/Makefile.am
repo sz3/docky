@@ -32,7 +32,9 @@ FILES = \
 	GMail/gtk-gui/GMail.AbstractLoginWidget.cs \
 	GMail/gtk-gui/generated.cs \
 	Trash/TrashItemProvider.cs \
-	Trash/TrashDockItem.cs
+	Trash/TrashDockItem.cs \
+	RemovableDevices/VolumeItem.cs \
+	RemovableDevices/VolumeProvider.cs
 
 RESOURCES = \
 	Resources/Docky.StandardPlugins.addin.xml \
@@ -67,6 +69,7 @@ REFERENCES =  \
 	System.Web \
 	Mono.Cairo \
 	Mono.Posix \
+	$(GNOME_VFS_SHARP_20_LIBS) \
 	$(NDESK_DBUS_10_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(LIBRSVG_SHARP_LIBS)

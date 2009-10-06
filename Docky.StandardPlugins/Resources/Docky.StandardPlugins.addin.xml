@@ -9,27 +9,13 @@
 	</Runtime>
 	
 	<Extension path="/Docky/ItemProvider">
-		<ItemProvider type="Trash.TrashItemProvider" />
-	</Extension>
-	
-	<Extension path="/Docky/ItemProvider">
+		<ItemProvider type="Trash.TrashItemProvider" />	
 		<ItemProvider type="Clock.ClockItemProvider" />
-	</Extension>
-	
-	<Extension path="/Docky/ItemProvider">
 		<ItemProvider type="CPUMonitor.CPUMonitorItemProvider" />
-	</Extension>
-	
-	<Extension path="/Docky/ItemProvider">
 		<ItemProvider type="GMail.GMailItemProvider" />
-	</Extension>
-	
-	<Extension path="/Docky/ItemProvider">
 		<ItemProvider type="BatteryMonitor.BatteryMonitorItemProvider" />
-	</Extension>
-
-	<Extension path="/Docky/ItemProvider">
 		<ItemProvider type="Bookmarks.BookmarksItemProvider" />
-	</Extension>
+		<ItemProvider type="RemovableDevices.VolumeProvider" />
+	</Extension>	
 
 </Addin>
