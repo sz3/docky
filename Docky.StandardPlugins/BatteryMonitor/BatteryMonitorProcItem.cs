@@ -66,8 +66,10 @@ namespace BatteryMonitor
 			return "BatteryMonitor";
 		}
 		
-		public BatteryMonitorProcItem ()
+		public BatteryMonitorProcItem (AbstractDockItemProvider owner)
 		{
+			Owner = owner;
+			
 			DockServices.System.BatteryStateChanged += HandleBatteryStateChanged;
 			number_regex = new Regex ("[0-9]+");
 			
@@ -149,7 +151,9 @@ namespace BatteryMonitor
 			if (current_capacity == 0) {
 				max_capacity = 1;
 				HoverText = "No Battery Found";
+				(Owner as BatteryMonitorItemProvider).Hidden = true;
 			} else {
+				(Owner as BatteryMonitorItemProvider).Hidden = false;
 				HoverText = string.Format ("{0:0.0}%", Capacity * 100);
 			}
 			

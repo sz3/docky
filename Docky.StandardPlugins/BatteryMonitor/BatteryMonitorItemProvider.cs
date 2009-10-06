@@ -34,7 +34,10 @@ namespace BatteryMonitor
 		
 		public override IEnumerable<AbstractDockItem> Items {
 			get {
-				yield return battery;
+				if (!hidden)
+					yield return battery;
+
+				yield break;
 			}
 		}
 
@@ -67,8 +70,7 @@ namespace BatteryMonitor
 		public BatteryMonitorItemProvider ()
 		{
 			hidden = false;
-			battery = new BatteryMonitorProcItem ();
-			battery.Owner = this;
+			battery = new BatteryMonitorProcItem (this);
 		}
 	}
 }
