@@ -58,7 +58,8 @@ namespace RemovableDevices
 		public override IEnumerable<MenuItem> GetMenuItems ()
 		{
 			yield return new MenuItem ("Open", this.Icon, (o, a) => OpenVolume ());
-			yield return new MenuItem ("Unmount", "gtk-delete", (o, a) => UnMount ());
+			string removeLabel = (VfsVolume.Drive.NeedsEject ()) ? "Eject" : "Unmount";
+			yield return new MenuItem (removeLabel, "media-eject", (o, a) => UnMount ());
 		}
 
 	}
