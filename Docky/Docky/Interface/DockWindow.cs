@@ -136,7 +136,7 @@ namespace Docky.Interface
 		DateTime render_time;
 		
 		IDockPreferences preferences;
-		DockySurface main_buffer, background_buffer, normal_indicator_buffer, urgent_indicator_buffer;
+		DockySurface main_buffer, background_buffer, icon_buffer, normal_indicator_buffer, urgent_indicator_buffer;
 		AbstractDockItem hoveredItem;
 		
 		Gdk.Rectangle monitor_geo;
@@ -948,6 +948,11 @@ namespace Docky.Interface
 				background_buffer = null;
 			}
 			
+			if (icon_buffer != null) {
+				icon_buffer.Dispose ();
+				icon_buffer = null;
+			}
+			
 			if (normal_indicator_buffer != null) {
 				normal_indicator_buffer.Dispose ();
 				normal_indicator_buffer = null;
@@ -1375,11 +1380,21 @@ namespace Docky.Interface
 			
 			DrawDockBackground (surface, dockArea);
 			
-			foreach (AbstractDockItem adi in Items) {
-				DrawItem (surface, dockArea, adi);
+			if (icon_buffer == null || icon_buffer.Width != surface.Width || icon_buffer.Height != surface.Height) {
+				if (icon_buffer != null)
+					icon_buffer.Dispose ();
+				icon_buffer = new DockySurface (surface.Width, surface.Height, surface);
 			}
 			
-			SetDockOpacity (surface);
+			icon_buffer.Clear ();
+			foreach (AbstractDockItem adi in Items) {
+				DrawItem (icon_buffer, dockArea, adi);
+			}
+			
+			icon_buffer.Internal.Show (surface.Context, 0, 0);
+			
+			if (DockOpacity < 1)
+				SetDockOpacity (surface);
 			
 			SetInputMask (cursorArea);
 
@@ -1414,12 +1429,24 @@ namespace Docky.Interface
 			DrawValue val = DrawValues [item];
 			DrawValue center = val;
 			
-			if ((render_time - item.LastClick) < BounceTime) {
-				double animationProgress = (render_time - item.LastClick).TotalMilliseconds / BounceTime.TotalMilliseconds;
+			double clickAnimationProgress = 0;
+			double lighten = 0;
+			double darken = 0;
 			
-				if (item.ClickAnimation == ClickAnimation.Bounce) {
-					double move = Math.Abs (Math.Sin (2 * Math.PI * animationProgress) * LaunchBounceHeight);
+			if ((render_time - item.LastClick) < BounceTime) {
+				clickAnimationProgress = (render_time - item.LastClick).TotalMilliseconds / BounceTime.TotalMilliseconds;
+			
+				switch (item.ClickAnimation) {
+				case ClickAnimation.Bounce:
+					double move = Math.Abs (Math.Sin (2 * Math.PI * clickAnimationProgress) * LaunchBounceHeight);
 					center = center.MoveIn (Position, move);
+					break;
+				case ClickAnimation.Darken:
+					darken = Math.Sin (Math.PI * clickAnimationProgress) * .4;
+					break;
+				case ClickAnimation.Lighten:
+					lighten = Math.Sin (Math.PI * clickAnimationProgress) * .4;
+					break;
 				}
 			}
 			
@@ -1429,26 +1456,6 @@ namespace Docky.Interface
 				
 				double move = Math.Abs (Math.Sin (Math.PI * urgentProgress) * UrgentBounceHeight);
 				center = center.MoveIn (Position, move);
-			}
-			
-			if ((item.State & ItemState.Active) == ItemState.Active) {
-				Gdk.Rectangle area;
-				
-				if (VerticalDock) {
-					area = new Gdk.Rectangle (
-						dockArea.X, 
-						(int) (val.Center.Y - (IconSize * val.Zoom) / 2) - ItemWidthBuffer / 2,
-						DockHeight,
-						(int) (IconSize * val.Zoom) + ItemWidthBuffer);
-				} else {
-					area = new Gdk.Rectangle (
-						(int) (val.Center.X - (IconSize * val.Zoom) / 2) - ItemWidthBuffer / 2,
-						dockArea.Y, 
-						(int) (IconSize * val.Zoom) + ItemWidthBuffer,
-						DockHeight);
-				}
-				
-				DrawActiveIndicator (surface, area, item.AverageColor ());
 			}
 			
 			DockySurface icon;
@@ -1478,6 +1485,44 @@ namespace Docky.Interface
 				icon = item.IconSurface (surface, IconSize);
 				icon.ShowAtPointAndRotation (surface, center.Center, rotation);
 			}
+			
+			if (darken > 0 || lighten > 0) {
+				Gdk.Rectangle area = PointZoomToRectangle (val.Center, val.Zoom, IconSize);
+				surface.Context.Rectangle (area.X, area.Y, area.Height, area.Width);
+				
+				if (darken > 0) {
+					surface.Context.Color = new Cairo.Color (0, 0, 0, darken);
+				} else if (lighten > 0) {
+					surface.Context.Color = new Cairo.Color (1, 1, 1, lighten);
+				}
+				
+				surface.Context.Operator = Operator.Atop;
+				surface.Context.Fill ();
+				surface.Context.Operator = Operator.Over;
+			}
+			
+			if ((item.State & ItemState.Active) == ItemState.Active) {
+				Gdk.Rectangle area;
+				
+				if (VerticalDock) {
+					area = new Gdk.Rectangle (
+						dockArea.X, 
+						(int) (val.Center.Y - (IconSize * val.Zoom) / 2) - ItemWidthBuffer / 2,
+						DockHeight,
+						(int) (IconSize * val.Zoom) + ItemWidthBuffer);
+				} else {
+					area = new Gdk.Rectangle (
+						(int) (val.Center.X - (IconSize * val.Zoom) / 2) - ItemWidthBuffer / 2,
+						dockArea.Y, 
+						(int) (IconSize * val.Zoom) + ItemWidthBuffer,
+						DockHeight);
+				}
+				
+				surface.Context.Operator = Operator.DestOver;
+				DrawActiveIndicator (surface, area, item.AverageColor ());
+				surface.Context.Operator = Operator.Over;
+			}
+			
 			if (HoveredItem == item && !drag_began && !Menu.Visible) {
 				DrawValue loc = val.MoveIn (Position, IconSize * (ZoomPercent + .1) - IconSize / 2);
 				

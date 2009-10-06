@@ -40,13 +40,16 @@ namespace Docky.CairoHelper
 				throw new ArgumentNullException ("target");
 			
 			Cairo.Context cr = target.Context;
-			cr.Scale (zoom, zoom);
+			if (zoom != 1)
+				cr.Scale (zoom, zoom);
+			
 			cr.SetSource (self.Internal, 
 			              (point.X - zoom * self.Width / 2) / zoom,
 			              (point.Y - zoom * self.Height / 2) / zoom);
 			cr.Paint ();
 			
-			cr.IdentityMatrix ();
+			if (zoom != 1)
+				cr.IdentityMatrix ();
 			
 		}
 		
