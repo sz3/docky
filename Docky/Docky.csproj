@@ -81,7 +81,7 @@
       <SpecificVersion>False</SpecificVersion>
       <Package>mono-addins-gui-0.2</Package>
     </Reference>
-    <Reference Include="Mono.Cairo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
+    <Reference Include="Mono.Cairo">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Mono.Addins.Setup, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
@@ -99,7 +99,6 @@
     </Reference>
     <Reference Include="rsvg2-sharp, Version=2.18.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
-      <Package>rsvg2-sharp-2.0</Package>
     </Reference>
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
@@ -110,7 +109,6 @@
     </Reference>
     <Reference Include="wnck-sharp, Version=2.20.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
-      <Package>wnck-sharp-1.0</Package>
     </Reference>
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
@@ -118,7 +116,6 @@
     <Reference Include="Mono.Posix" />
     <Reference Include="gnome-vfs-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
-      <Package>gnome-vfs-sharp-2.0</Package>
     </Reference>
     <Reference Include="NDesk.DBus, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f6716e4f9b2ed099">
       <Package>ndesk-dbus-1.0</Package>
@@ -128,10 +125,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Docky.Services\Docky.Services.csproj">
-      <Project>{8A6E0EDD-6443-4F99-9EAC-D9CC906F080D}</Project>
-      <Name>Docky.Services</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Docky.CairoHelper\Docky.CairoHelper.csproj">
       <Project>{B23E0EDD-6443-4F99-9EAC-B7CC906F080D}</Project>
       <Name>Docky.CairoHelper</Name>
@@ -140,13 +133,13 @@
       <Project>{AB6E0EDD-6443-4F99-9EAC-DABC906F080D}</Project>
       <Name>Docky.Items</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Docky.Services\Docky.Services.csproj">
+      <Project>{8A6E0EDD-6443-4F99-9EAC-D9CC906F080D}</Project>
+      <Name>Docky.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Docky.Windowing\Docky.Windowing.csproj">
       <Project>{888FCD95-7C79-45C4-A744-9C840DF4B9B0}</Project>
       <Name>Docky.Windowing</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Docky.StandardPlugins\Docky.StandardPlugins.csproj">
-      <Project>{39FA0106-BDA3-4541-8922-C6BE0D9CC51D}</Project>
-      <Name>Docky.StandardPlugins</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

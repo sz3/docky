@@ -35,26 +35,16 @@
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="Mono.Cairo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <Reference Include="Mono.Cairo" />
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="rsvg2-sharp, Version=2.18.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>rsvg2-sharp-2.0</Package>
-    </Reference>
+    <Reference Include="rsvg2-sharp, Version=2.18.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="wnck-sharp, Version=2.20.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>wnck-sharp-1.0</Package>
-    </Reference>
-    <Reference Include="gnomedesktop-sharp, Version=2.20.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>gnome-desktop-sharp-2.0</Package>
-    </Reference>
-    <Reference Include="gnome-sharp, Version=2.24.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>gnome-sharp-2.0</Package>
-    </Reference>
-    <Reference Include="gnome-vfs-sharp, Version=2.24.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>gnome-vfs-sharp-2.0</Package>
-    </Reference>
+    <Reference Include="wnck-sharp, Version=2.20.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gnomedesktop-sharp, Version=2.20.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gnome-sharp, Version=2.24.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gnome-vfs-sharp, Version=2.24.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -83,13 +73,13 @@
     <Compile Include="Docky.Menus\RelatedFileMenuItem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Docky.Services\Docky.Services.csproj">
-      <Project>{8A6E0EDD-6443-4F99-9EAC-D9CC906F080D}</Project>
-      <Name>Docky.Services</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Docky.CairoHelper\Docky.CairoHelper.csproj">
       <Project>{B23E0EDD-6443-4F99-9EAC-B7CC906F080D}</Project>
       <Name>Docky.CairoHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Docky.Services\Docky.Services.csproj">
+      <Project>{8A6E0EDD-6443-4F99-9EAC-D9CC906F080D}</Project>
+      <Name>Docky.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\Docky.Windowing\Docky.Windowing.csproj">
       <Project>{888FCD95-7C79-45C4-A744-9C840DF4B9B0}</Project>
