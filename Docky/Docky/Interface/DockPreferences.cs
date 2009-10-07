@@ -640,5 +640,12 @@ namespace Docky.Interface
 			Plugins = ItemProviders.Where (p => p != DefaultProvider).Select (p => p.Name);
 		}
 
+		public void FreeProviders ()
+		{
+			OnItemProvidersChanged (null, item_providers);
+			item_providers = new List<AbstractDockItemProvider> ();
+			
+			SyncPlugins ();
+		}
 	}
 }

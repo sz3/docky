@@ -67,5 +67,7 @@ namespace Docky.Interface
 		string GetName ();
 		
 		void SyncPreferences ();
+		
+		void FreeProviders ();
 	}
 }
