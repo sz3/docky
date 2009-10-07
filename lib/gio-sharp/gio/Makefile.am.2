@@ -1,7 +1,9 @@
 include $(top_srcdir)/build.rules.mk
 
-UNSAFE = -unsafe
-DEBUG = -debug
+ASSEMBLY = gio-sharp
+TARGET = library
+
+MCS_FLAGS += -unsafe -debug
 
 SRCS = \
 	$(srcdir)/AssemblyInfo.cs \
@@ -13,6 +15,10 @@ CUSTOMS = \
 	$(srcdir)/FileAdapter.custom \
 	$(srcdir)/File.custom \
 	$(srcdir)/FileEnumerator.custom	
+
+FILES = \
+	$(CUSTOMS) \
+	$(SRCS)
 
 SNK = 	$(srcdir)/snk
 
@@ -39,8 +45,7 @@ gtk-sharp.snk: $(SNK)
 
 gio-sharp.dll: generated/File.cs $(SRCS) gtk-sharp.snk
 	@echo -e "\n*** Building $@"
-	$(MCS) -target:library -out:$@ $(UNSAFE) $(DEBUG) $(ASSEMBLIES) $(SRCS) generated/*.cs
-	cp $@ $(top_builddir)/build/
+	$(MCS) -target:library -out:$(top_builddir)/build/$@ $(UNSAFE) $(DEBUG) $(ASSEMBLIES) $(SRCS) generated/*.cs
 
 assemblydir = $(pkglibdir)
 assembly_DATA =	\
