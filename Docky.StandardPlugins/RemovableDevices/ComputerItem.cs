@@ -38,8 +38,8 @@ namespace RemovableDevices
 		
 		public ComputerItem ()
 		{
-			this.Icon = "computer";
-			this.HoverText = "Computer";
+			Icon = "computer";
+			HoverText = "Computer";
 		}
 		
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)

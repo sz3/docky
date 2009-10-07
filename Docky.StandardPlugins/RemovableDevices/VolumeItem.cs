@@ -43,17 +43,14 @@ namespace RemovableDevices
 		
 		public VolumeItem (Volume volume)
 		{
-			this.VfsVolume = volume;
+			VfsVolume = volume;
 			
-			this.Icon = volume.Icon;
+			Icon = volume.Icon;
 			
-			string name = volume.DisplayName;
-			
-			if (StringIsUUID (name)) {
-				name = string.Format ("{0} ({1})", volume.DeviceType.ToString (), volume.DevicePath);
-			}
-			
-			this.HoverText = name;
+			if (StringIsUUID (volume.DisplayName))
+				HoverText = string.Format ("{0} ({1})", volume.DeviceType.ToString (), volume.DevicePath);
+			else
+				HoverText = volume.DisplayName;
 		}
 		
 		bool StringIsUUID (string uuid)
@@ -82,12 +79,12 @@ namespace RemovableDevices
 		
 		void UnMount ()
 		{
-			this.VfsVolume.Unmount ( (s,e,d) => {} );
+			VfsVolume.Unmount ( (s,e,d) => {} );
 		}
 		
 		public override IEnumerable<MenuItem> GetMenuItems ()
 		{
-			yield return new MenuItem ("Open", this.Icon, (o, a) => OpenVolume ());
+			yield return new MenuItem ("Open", Icon, (o, a) => OpenVolume ());
 			string removeLabel = (VfsVolume.Drive.NeedsEject ()) ? "Eject" : "Unmount";
 			yield return new MenuItem (removeLabel, "media-eject", (o, a) => UnMount ());
 		}
