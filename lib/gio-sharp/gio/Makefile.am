@@ -3,20 +3,20 @@ include $(top_srcdir)/build.rules.mk
 UNSAFE = -unsafe
 DEBUG = -debug
 
-SRCS =								\
-	$(srcdir)/AssemblyInfo.cs				\
-	$(srcdir)/FileFactory.cs				\
+SRCS = \
+	$(srcdir)/AssemblyInfo.cs \
+	$(srcdir)/FileFactory.cs \
 	$(srcdir)/GioStream.cs
 
-CUSTOMS =							\
-	$(srcdir)/AppInfoAdapter.custom				\
-	$(srcdir)/FileAdapter.custom				\
-	$(srcdir)/File.custom					\
+CUSTOMS = \
+	$(srcdir)/AppInfoAdapter.custom \
+	$(srcdir)/FileAdapter.custom \
+	$(srcdir)/File.custom \
 	$(srcdir)/FileEnumerator.custom	
 
 SNK = 	$(srcdir)/snk
 
-ASSEMBLIES =					\
+ASSEMBLIES = \
 	-pkg:glib-sharp-2.0
 
 all: gio-sharp.dll
@@ -39,10 +39,9 @@ gtk-sharp.snk: $(SNK)
 
 gio-sharp.dll: generated/File.cs $(SRCS) gtk-sharp.snk
 	@echo -e "\n*** Building $@"
-	$(MCS) -target:library -out:$@ $(UNSAFE) $(DEBUG) $(ASSEMBLIES) $(SRCS) generated/*.cs
-	cp $@ /home/alex/Desktop
+	$(MCS) -target:library -out:$(top_builddir)/build/$@ $(UNSAFE) $(DEBUG) $(ASSEMBLIES) $(SRCS) generated/*.cs
 
 assemblydir = $(pkglibdir)
-assembly_DATA =			\
-	gio-sharp.dll		\
+assembly_DATA =	\
+	gio-sharp.dll \
 	gio-sharp.dll.config
