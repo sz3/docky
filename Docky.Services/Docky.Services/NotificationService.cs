@@ -52,10 +52,6 @@ namespace Docky.Services
 
 		Pixbuf DefaultIcon { get; set; }
 		
-		string title;
-		string message;
-		string icon;
-	
 		public NotificationService ()
 		{
 			DefaultIcon = DockServices.Drawing.LoadIcon (DefaultIconName, IconSize);

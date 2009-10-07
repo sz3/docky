@@ -71,7 +71,6 @@ namespace Wnck
 			int format;
 			IntPtr prop_return;
 			IntPtr nitems, bytes_after;
-			int result;
 			int [] extents = new int[12];
 			
 			IntPtr window_handle = (IntPtr) window.Xid;
@@ -79,7 +78,7 @@ namespace Wnck
 			display = Xlib.GdkDisplayXDisplay (Gdk.Screen.Default.Display);
 			type = IntPtr.Zero;
 			
-			result = Xlib.XGetWindowProperty (display, window_handle, atom, (IntPtr) 0,
+			Xlib.XGetWindowProperty (display, window_handle, atom, (IntPtr) 0,
 			                                  (IntPtr) System.Int32.MaxValue, false, atoms.XA_CARDINAL, out type, out format,
 			                                  out nitems, out bytes_after, out prop_return);
 			

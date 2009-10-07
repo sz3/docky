@@ -83,9 +83,9 @@ namespace Docky.Services
 		
 		#region IPreferences - secure, based on Gnome Keyring
 		
-		readonly string ErrorSavingMessage = Catalog.GetString ("Error saving {0}");
-		readonly string KeyNotFoundMessage = Catalog.GetString ("Key \"{0}\" not found in keyring");
-		readonly string KeyringUnavailableMessage = Catalog.GetString ("gnome-keyring-daemon could not be reached!");
+		//readonly string ErrorSavingMessage = Catalog.GetString ("Error saving {0}");
+		//readonly string KeyNotFoundMessage = Catalog.GetString ("Key \"{0}\" not found in keyring");
+		//readonly string KeyringUnavailableMessage = Catalog.GetString ("gnome-keyring-daemon could not be reached!");
 		
 		const string DefaultRootPath = "gnome-do";
 
@@ -106,7 +106,7 @@ namespace Docky.Services
 			
 			try {
 				Ring.CreateItem (Ring.GetDefaultKeyring (), ItemType.GenericSecret, AbsolutePathForKey (key, DefaultRootPath), keyData, val.ToString (), true);
-			} catch (KeyringException e) {
+			} catch /*(KeyringException e)*/ {
 				//Log.Error (ErrorSavingMessage, key, e.Message);
 				//Log.Debug (e.StackTrace);
 				return false;

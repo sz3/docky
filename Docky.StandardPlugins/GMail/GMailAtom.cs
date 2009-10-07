@@ -89,7 +89,7 @@ namespace GMail
 		{
 			CurrentLabel = label;
 			State = GMailState.ManualReload;
-			DockServices.System.NetworkStateChanged += HandleNeedReset;
+			DockServices.System.ConnectionStatusChanged += HandleNeedReset;
 			// this is not implemented in mono yet
 //			ServicePointManager.ServerCertificateValidationCallback +=
 //				(sender, cert, chain, errors) => { return true; };
@@ -98,6 +98,7 @@ namespace GMail
 		
 		public void Dispose ()
 		{
+			DockServices.System.ConnectionStatusChanged -= HandleNeedReset;
 			ResetNeeded -= HandleNeedReset;
 		}
 		

@@ -107,7 +107,7 @@ namespace CPUMonitor
 					if (usage_diff > 0)
 						CPUUtilization = Math.Max (0.01, Math.Round (((1 - (idle_diff / (double) usage_diff)) + CPUUtilization) / 2, 2));
 						
-				} catch (Exception e) {
+				} catch {
 					CPUUtilization = 0.01;
 				}
 			}
