@@ -112,8 +112,6 @@ namespace BatteryMonitor
 		
 		bool UpdateBattStat ()
 		{
-			GetBatteryCapacity ();
-			
 			string capacity = null;
 			string chargeState = null;
 			
@@ -152,8 +150,11 @@ namespace BatteryMonitor
 				max_capacity = -1;
 				HoverText = "No Battery Found";
 			} else {
+				GetBatteryCapacity ();
 				HoverText = string.Format ("{0:0.0}%", Capacity * 100);
 			}
+			
+			(Owner as BatteryMonitorItemProvider).Hidden = max_capacity == -1 || !DockServices.System.OnBattery || Capacity > .98 || Capacity < .01;
 			
 			QueueRedraw ();
 
@@ -170,8 +171,6 @@ namespace BatteryMonitor
 		
 		protected override void PaintIconSurface (DockySurface surface)
 		{
-			(Owner as BatteryMonitorItemProvider).Hidden = max_capacity == -1 || !DockServices.System.OnBattery || Capacity > .98 || Capacity < 1;
-			
 			Context cr = surface.Context;
 			int size = Math.Min (surface.Width, surface.Height);
 			
