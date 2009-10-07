@@ -58,7 +58,7 @@ namespace RemovableDevices
 		
 		bool StringIsUUID (string uuid)
 		{
-			Regex regex = new Regex ("........-....-4...-....-............");
+			Regex regex = new Regex ("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}");
 			
 			return regex.IsMatch (uuid);
 		}
