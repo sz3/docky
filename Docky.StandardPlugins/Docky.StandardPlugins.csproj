@@ -86,6 +86,7 @@
     <Compile Include="BatteryMonitor\BatteryStatus.cs" />
     <Compile Include="RemovableDevices\VolumeProvider.cs" />
     <Compile Include="RemovableDevices\VolumeItem.cs" />
+    <Compile Include="RemovableDevices\ComputerItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Docky.StandardPlugins.addin.xml">

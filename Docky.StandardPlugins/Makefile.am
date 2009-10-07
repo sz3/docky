@@ -33,6 +33,7 @@ FILES = \
 	GMail/gtk-gui/generated.cs \
 	Trash/TrashItemProvider.cs \
 	Trash/TrashDockItem.cs \
+	RemovableDevices/ComputerItem.cs \
 	RemovableDevices/VolumeItem.cs \
 	RemovableDevices/VolumeProvider.cs
 
