@@ -97,6 +97,8 @@ AC_SUBST([NDESK_DBUS_GLIB_10_LIBS])
 AC_SUBST([NOTIFY_SHARP_LIBS])
 AC_SUBST([WNCK_SHARP_10_LIBS])
 
+GIO_SHARP_LIBS="-r:$top_srcdir/build/gio-sharp.dll"
+AC_SUBST([GIO_SHARP_LIBS])
 
 PKG_CHECK_MODULES([NUNIT], [nunit], have_nunit=yes, have_nunit=no)
 AM_CONDITIONAL(HAVE_NUNIT, test "$have_nunit" = "yes")
