@@ -115,6 +115,10 @@ fi
 dnl }}}
 
 AC_CONFIG_FILES([
+lib/Makefile
+lib/gio-sharp/Makefile
+lib/gio-sharp/generator/Makefile
+lib/gio-sharp/gio/Makefile
 Docky/Makefile
 Docky.CairoHelper/Makefile
 Docky.Items/Makefile
