@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 using Gnome.Vfs;
 
@@ -46,7 +47,20 @@ namespace RemovableDevices
 			
 			this.Icon = volume.Icon;
 			
-			this.HoverText = volume.DisplayName;
+			string name = volume.DisplayName;
+			
+			if (StringIsUUID (name)) {
+				name = string.Format ("{0} ({1})", volume.DeviceType.ToString (), volume.DevicePath);
+			}
+			
+			this.HoverText = name;
+		}
+		
+		bool StringIsUUID (string uuid)
+		{
+			Regex regex = new Regex ("........-....-4...-....-............");
+			
+			return regex.IsMatch (uuid);
 		}
 		
 		public Volume VfsVolume { get; private set; }
