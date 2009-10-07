@@ -1140,13 +1140,15 @@ namespace Docky.Interface
 			
 			foreach (AbstractDockItem adi in Items) {
 				DrawValue val = new DrawValue ();
+				int iconSize = IconSize;
 				
 				// div by 2 may result in rounding errors? Will this render OK? Shorts WidthBuffer by 1?
 				double halfSize;
 				if (adi.Square) {
-					halfSize = IconSize / 2.0;
+					halfSize = iconSize / 2.0;
 				} else {
-					DockySurface icon = adi.IconSurface (surface, IconSize);
+					DockySurface icon = adi.IconSurface (surface, iconSize);
+					iconSize = icon.Width;
 					
 					// yeah I am pretty sure...
 					if (adi.Square || adi.RotateWithDock || !VerticalDock) {
@@ -1205,7 +1207,7 @@ namespace Docky.Interface
 						val.Zoom = 1;
 						val.Center = new Cairo.PointD ((int) centerPosition, center.Y);
 					} else {
-						double zoomedCenterHeight = DockHeightBuffer + (IconSize * zoom / 2.0);
+						double zoomedCenterHeight = DockHeightBuffer + (iconSize * zoom / 2.0);
 						
 						if (zoom == 1)
 							centerPosition = Math.Round (centerPosition);
@@ -1249,7 +1251,7 @@ namespace Docky.Interface
 					break;
 				}
 				
-				Gdk.Rectangle hoverArea = PointZoomToRectangle (val.Center, val.Zoom, IconSize);
+				Gdk.Rectangle hoverArea = PointZoomToRectangle (val.Center, val.Zoom, iconSize);
 				
 				if (VerticalDock) {
 					hoverArea.Inflate ((int) (ZoomedDockHeight * .3), ItemWidthBuffer / 2);
@@ -1266,7 +1268,7 @@ namespace Docky.Interface
 				}
 				
 				if (update_screen_regions) {
-					Gdk.Rectangle region = PointZoomToRectangle (val.StaticCenter, 1, IconSize);
+					Gdk.Rectangle region = PointZoomToRectangle (val.StaticCenter, 1, iconSize);
 					region.X += window_position.X;
 					region.Y += window_position.Y;
 					adi.SetScreenRegion (Screen, region);
