@@ -24,13 +24,17 @@ using org.freedesktop.DBus;
 
 namespace Docky.Services
 {
-
 	public class SystemService
 	{
-		public event EventHandler<ConnectionStatusChangeEventArgs> ConnectionStatusChanged;
-		public event EventHandler BatteryStateChanged;
-
 		internal SystemService ()
+		{
+			InitializeBattery ();
+			InitializeNetwork ();
+		}
+		
+		#region Network
+		
+		void InitializeNetwork ()
 		{
 			try {
 				BusG.Init ();
@@ -39,7 +43,7 @@ namespace Docky.Services
 					network.StateChanged += OnConnectionStatusChanged;
 					SetConnected ();
 				}
-			} catch (Exception e) {
+			} catch /*(Exception e)*/ {
 				// if something bad happened, log the error and assume we are connected
 				// FIXME: use proper logging
 				//Log<NetworkService>.Error ("Could not initialize Network Manager dbus: {0}", e.Message);
@@ -48,7 +52,7 @@ namespace Docky.Services
 			}
 		}		
 		
-		#region Network
+		public event EventHandler<ConnectionStatusChangeEventArgs> ConnectionStatusChanged;
 		
 		const string NetworkManagerName = "org.freedesktop.NetworkManager";
 		const string NetworkManagerPath = "/org/freedesktop/NetworkManager";
@@ -75,7 +79,7 @@ namespace Docky.Services
 		
 		void SetConnected ()
 		{
-			if (this.State == NetworkState.Connected)
+			if (State == NetworkState.Connected)
 				NetworkConnected = true;
 			else
 				NetworkConnected = false;
@@ -93,11 +97,88 @@ namespace Docky.Services
 		
 		#endregion
 		
+		#region Battery
+		
+		public event EventHandler BatteryStateChanged;
+
 		public bool OnBattery {
 			get {
-				return false;
+				return on_battery;
 			}
 		}
+		
+		void OnBatteryStateChanged ()
+		{
+			if (BatteryStateChanged != null)
+				BatteryStateChanged (this, EventArgs.Empty);
+		}
+		
+		const string PowerManagementName = "org.freedesktop.PowerManagement";
+		const string PowerManagementPath = "/org/freedesktop/PowerManagement";
+		const string DeviceKitPowerName = "org.freedesktop.DeviceKit.Power";
+		const string DeviceKitPowerPath = "/org/freedesktop/DeviceKit/Power";
+		
+		delegate void BoolDelegate (bool val);
+		
+		[Interface(PowerManagementName)]
+		interface IPowerManagement
+		{
+			bool GetOnBattery ();
+			event BoolDelegate OnBatteryChanged;
+		}
+		
+		[Interface(DeviceKitPowerName)]
+		interface IDeviceKitPower : org.freedesktop.DBus.Properties
+		{
+			event Action OnChanged;
+		}
+		
+		bool on_battery;
+		
+		IPowerManagement power;
+		IDeviceKitPower devicekit;
+		
+		void InitializeBattery ()
+		{
+			// Set a sane default value for on_battery.  Thus, if we don't find a working power manager
+			// we assume we're not on battery.
+			on_battery = false;
+			try {
+				BusG.Init ();
+				if (Bus.System.NameHasOwner (DeviceKitPowerName)) {
+					devicekit = Bus.System.GetObject<IDeviceKitPower> (DeviceKitPowerName, new ObjectPath (DeviceKitPowerPath));
+					devicekit.OnChanged += DeviceKitOnChanged;
+					on_battery = (bool) devicekit.Get (DeviceKitPowerName, "on-battery");
+					//Log<SystemService>.Debug ("Using org.freedesktop.DeviceKit.Power for battery information");
+				} else if (Bus.Session.NameHasOwner (PowerManagementName)) {
+					power = Bus.Session.GetObject<IPowerManagement> (PowerManagementName, new ObjectPath (PowerManagementPath));
+					power.OnBatteryChanged += PowerOnBatteryChanged;
+					on_battery = power.GetOnBattery ();
+					//Log<SystemService>.Debug ("Using org.freedesktop.PowerManager for battery information");
+				}
+			} catch /*(Exception e)*/ {
+				//Log<SystemService>.Error ("Could not initialize dbus: {0}", e.Message);
+				//Log<SystemService>.Debug (e.StackTrace);
+			}
+		}
+
+		void PowerOnBatteryChanged (bool val)
+		{
+			on_battery = val;
+			OnBatteryStateChanged ();
+		}
+		
+		void DeviceKitOnChanged ()
+		{
+			bool newState = (bool) devicekit.Get (DeviceKitPowerName, "on-battery");
+			
+			if (on_battery != newState) {
+				on_battery = newState;
+				OnBatteryStateChanged ();
+			}
+		}
+		
+		#endregion
 		
 		public void Email (string address)
 		{
@@ -119,12 +200,6 @@ namespace Docky.Services
 			} else {
 				Process.Start (executable);
 			}
-		}
-		
-		void OnBatteryStateChanged ()
-		{
-			if (BatteryStateChanged != null)
-				BatteryStateChanged (this, EventArgs.Empty);
 		}
 	}
 }
