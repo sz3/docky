@@ -7,6 +7,7 @@ TARGET = library
 PKG_CONFIG_FILES = docky.services.pc
 
 FILES = \
+	Docky.Services/ConnectionStatusChangeEventArgs.cs \
     Docky.Services/IPreferences.cs \
     Docky.Services/PreferencesService.cs \
     Docky.Services/DockServices.cs \
@@ -19,6 +20,8 @@ REFERENCES =  \
 	System \
 	System.Core \
 	Mono.Posix \
+	$(NDESK_DBUS_10_LIBS) \
+	$(NDESK_DBUS_GLIB_10_LIBS) \
 	$(GCONF_SHARP_20_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(GNOME_KEYRING_SHARP_LIBS) \
