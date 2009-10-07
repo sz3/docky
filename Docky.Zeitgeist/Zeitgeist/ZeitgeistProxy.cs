@@ -61,7 +61,9 @@ namespace Docky.Zeitgeist
 		ZeitgeistProxy ()
 		{
 			try {
-				zeitgeist = Bus.Session.GetObject<IZeitgeistDaemon> (BusName, new ObjectPath (PathName));
+				StartReply reply = Bus.Session.StartServiceByName (BusName);
+				if (reply == StartReply.AlreadyRunning || reply == StartReply.Success)
+					zeitgeist = Bus.Session.GetObject<IZeitgeistDaemon> (BusName, new ObjectPath (PathName));
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
 				Console.Error.WriteLine ("Failed to connect to zeitgeist bus");
