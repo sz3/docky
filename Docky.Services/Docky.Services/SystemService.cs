@@ -19,29 +19,84 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
+using NDesk.DBus;
+using org.freedesktop.DBus;
+
 namespace Docky.Services
 {
 
-
 	public class SystemService
 	{
-		public event EventHandler ConnectionStatusChanged;
+		public event EventHandler<ConnectionStatusChangeEventArgs> ConnectionStatusChanged;
 		public event EventHandler BatteryStateChanged;
-		
-		public bool NetworkConnected {
-			get {
-				return true;
+
+		internal SystemService ()
+		{
+			try {
+				BusG.Init ();
+				if (Bus.System.NameHasOwner (NetworkManagerName)) {
+					network = Bus.System.GetObject<INetworkManager> (NetworkManagerName, new ObjectPath (NetworkManagerPath));
+					network.StateChanged += OnConnectionStatusChanged;
+					SetConnected ();
+				}
+			} catch (Exception e) {
+				// if something bad happened, log the error and assume we are connected
+				// FIXME: use proper logging
+				//Log<NetworkService>.Error ("Could not initialize Network Manager dbus: {0}", e.Message);
+				//Log<NetworkService>.Debug (e.StackTrace);
+				NetworkConnected = true;
 			}
+		}		
+		
+		#region Network
+		
+		const string NetworkManagerName = "org.freedesktop.NetworkManager";
+		const string NetworkManagerPath = "/org/freedesktop/NetworkManager";
+		INetworkManager network;
+		
+		[Interface(NetworkManagerName)]
+		interface INetworkManager : org.freedesktop.DBus.Properties
+		{
+			event StateChangedHandler StateChanged;
 		}
+		
+		delegate void StateChangedHandler (uint state);
+		
+		public bool NetworkConnected { get; private set; }
+		
+		void OnConnectionStatusChanged (uint state)
+		{
+			NetworkState newState = (NetworkState) Enum.ToObject (typeof (NetworkState), state);
+			SetConnected ();
+			
+			if (ConnectionStatusChanged != null)
+				ConnectionStatusChanged (this, new ConnectionStatusChangeEventArgs (newState));
+		}
+		
+		void SetConnected ()
+		{
+			if (this.State == NetworkState.Connected)
+				NetworkConnected = true;
+			else
+				NetworkConnected = false;
+		}
+		
+		NetworkState State {
+			get	{ 
+				try {
+					return (NetworkState) Enum.ToObject (typeof (NetworkState), network.Get (NetworkManagerName, "State"));
+				} catch (Exception) {
+					return NetworkState.Unknown;
+				}
+			}
+		}		
+		
+		#endregion
 		
 		public bool OnBattery {
 			get {
 				return false;
 			}
-		}
-		
-		internal SystemService ()
-		{
 		}
 		
 		public void Email (string address)
@@ -64,12 +119,6 @@ namespace Docky.Services
 			} else {
 				Process.Start (executable);
 			}
-		}
-		
-		void OnConnectionStatusChanged ()
-		{
-			if (ConnectionStatusChanged != null)
-				ConnectionStatusChanged (this, EventArgs.Empty);
 		}
 		
 		void OnBatteryStateChanged ()
