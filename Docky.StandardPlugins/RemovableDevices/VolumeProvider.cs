@@ -39,6 +39,7 @@ namespace RemovableDevices
 		
 		public override IEnumerable<AbstractDockItem> Items {
 			get {
+				yield return Computer;
 				foreach (VolumeItem item in Volumes)
 					yield return item;
 			}
@@ -56,9 +57,11 @@ namespace RemovableDevices
 		
 		List<VolumeItem> Volumes;
 		public VolumeMonitor Monitor { get; private set; }
+		ComputerItem Computer;
 		
 		public VolumeProvider ()
 		{
+			Computer = new ComputerItem ();
 			
 			// initialize VFS in case it isn't already
 			if (!Vfs.Initialized)
