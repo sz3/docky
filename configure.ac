@@ -6,6 +6,10 @@ AM_INIT_AUTOMAKE([foreign tar-pax])
 
 AC_CONFIG_MACRO_DIR([m4])
 
+dnl -- Intl
+IT_PROG_INTLTOOL([0.35.0])
+SHAMROCK_CONFIGURE_I18N(docky)
+
 dnl -- Populate top_srcdir variable
 top_srcdir=$(readlink -f $0 | sed -e s/configure$//)
 
@@ -133,6 +137,7 @@ fi
 dnl }}}
 
 AC_CONFIG_FILES([
+data/docky.desktop
 lib/Makefile
 lib/gio-sharp/Makefile
 lib/gio-sharp/generator/Makefile
@@ -149,7 +154,23 @@ Docky.Zeitgeist/Makefile
 Docky/docky
 Docky/AssemblyInfo.cs
 Makefile
+data/Makefile
+data/icons/Makefile
+data/icons/hicolor/16x16/Makefile
+data/icons/hicolor/16x16/apps/Makefile
+data/icons/hicolor/22x22/Makefile
+data/icons/hicolor/22x22/apps/Makefile
+data/icons/hicolor/24x24/Makefile
+data/icons/hicolor/24x24/apps/Makefile
+data/icons/hicolor/32x32/Makefile
+data/icons/hicolor/32x32/apps/Makefile
+data/icons/hicolor/48x48/Makefile
+data/icons/hicolor/48x48/apps/Makefile
+data/icons/hicolor/64x64/Makefile
+data/icons/hicolor/64x64/apps/Makefile
+data/icons/hicolor/Makefile
 m4/Makefile
+po/Makefile.in
 ])
 
 AC_OUTPUT

@@ -1,9 +1,10 @@
-EXTRA_DIST = COPYRIGHT
+EXTRA_DIST = config.rpath  COPYRIGHT
 
 ACLOCAL_AMFLAGS = -I m4 -I m4/shamrock
 
 SUBDIRS = \
 	. \
+	data \
 	lib \
 	Docky.Services \
 	Docky.Zeitgeist \
