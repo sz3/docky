@@ -136,19 +136,20 @@ namespace Docky.Items
 				transient_items.Add (item);
 				item.Owner = this;
 				item.WindowsChanged += HandleTransientWindowsChanged;
-					
+				
 				OnItemsChanged (item.AsSingle<AbstractDockItem> (), null);
 			}
 			
 			// remove old transient items
 			List<AbstractDockItem> removed_transient_items = new List<AbstractDockItem> ();
 			
-			foreach (WnckDockItem wdi in transient_items.Where (adi => adi is WnckDockItem).Cast<WnckDockItem> ())
+			foreach (WnckDockItem wdi in transient_items.Where (adi => adi is WnckDockItem).Cast<WnckDockItem> ()) {
 				foreach (Wnck.Window window in ManagedWindows)
 					if (wdi.Windows.Contains (window)) {
 						removed_transient_items.Add (wdi);
 						continue;
 					}
+			}
 			
 			foreach (AbstractDockItem adi in removed_transient_items)
 				transient_items.Remove (adi);
