@@ -137,7 +137,6 @@ fi
 dnl }}}
 
 AC_CONFIG_FILES([
-data/docky.desktop
 lib/Makefile
 lib/gio-sharp/Makefile
 lib/gio-sharp/generator/Makefile
