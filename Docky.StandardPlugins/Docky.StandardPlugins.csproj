@@ -83,7 +83,6 @@
     <Compile Include="BatteryMonitor\BatteryMonitorItemProvider.cs" />
     <Compile Include="Bookmarks\BookmarksItemProvider.cs" />
     <Compile Include="BatteryMonitor\BatteryMonitorProcItem.cs" />
-    <Compile Include="BatteryMonitor\BatteryStatus.cs" />
     <Compile Include="RemovableDevices\VolumeProvider.cs" />
     <Compile Include="RemovableDevices\VolumeItem.cs" />
     <Compile Include="RemovableDevices\ComputerItem.cs" />

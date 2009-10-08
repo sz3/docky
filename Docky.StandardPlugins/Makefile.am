@@ -11,7 +11,6 @@ PKG_CONFIG_FILES = docky.standardplugins.pc
 FILES = \
 	BatteryMonitor/BatteryMonitorItemProvider.cs \
 	BatteryMonitor/BatteryMonitorProcItem.cs \
-	BatteryMonitor/BatteryStatus.cs \
 	Bookmarks/BookmarksItemProvider.cs \
 	Clock/ClockItemProvider.cs \
 	Clock/ClockDockItem.cs \
