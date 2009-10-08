@@ -14,7 +14,7 @@
    id="svg2"
    sodipodi:version="0.32"
    inkscape:version="0.46"
-   sodipodi:docname="menu_experiment.svg"
+   sodipodi:docname="menu.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    inkscape:export-filename="/home/daniel/elementary/Docky2/menu_experiment.png"
    inkscape:export-xdpi="90"
@@ -31,8 +31,8 @@
     </rdf:RDF>
   </metadata>
   <sodipodi:namedview
-     inkscape:window-height="793"
-     inkscape:window-width="1440"
+     inkscape:window-height="789"
+     inkscape:window-width="1438"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      guidetolerance="10.0"
@@ -44,10 +44,10 @@
      id="base"
      showgrid="false"
      inkscape:zoom="3.65"
-     inkscape:cx="70"
-     inkscape:cy="52"
+     inkscape:cx="-69.315068"
+     inkscape:cy="62.958904"
      inkscape:window-x="0"
-     inkscape:window-y="24"
+     inkscape:window-y="86"
      inkscape:current-layer="svg2"
      borderlayer="true">
     <inkscape:grid
@@ -58,14 +58,6 @@
   </sodipodi:namedview>
   <defs
      id="defs4">
-    <filter
-       inkscape:collect="always"
-       id="filter3189">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="2.660625"
-         id="feGaussianBlur3191" />
-    </filter>
     <filter
        inkscape:collect="always"
        id="filter3229">
@@ -81,7 +73,7 @@
      d="M 9.5,3.5 C 6.176,3.5 3.5,6.1760001 3.5,9.5 L 3.5,90.5 C 3.5,93.824 6.176,96.5 9.5,96.5 L 40,96.5 L 50,107.5 L 60,96.5 L 90.5,96.5 C 93.824,96.5 96.500004,93.824 96.5,90.5 L 96.5,9.5 C 96.5,6.176 93.824004,3.5 90.5,3.5 L 9.5,3.5 z"
      sodipodi:nodetypes="cccccccccccc" />
   <path
-     style="opacity:0.55000000000000004;fill:#0c0c0c;fill-opacity:1;stroke:#b4b4b4;stroke-width:1.00000011999999994;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     style="opacity:0.80000000000000004;fill:#141414;fill-opacity:0.94117647;stroke:#b4b4b4;stroke-width:1.00000011999999994;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      id="path3233"
      d="M 9.5,3.5 C 6.176,3.5 3.5,6.1760001 3.5,9.5 L 3.5,90.5 C 3.5,93.824 6.176,96.5 9.5,96.5 L 40,96.5 L 50,107.5 L 60,96.5 L 90.5,96.5 C 93.824,96.5 96.500004,93.824 96.5,90.5 L 96.5,9.5 C 96.5,6.176 93.824004,3.5 90.5,3.5 L 9.5,3.5 z"
      sodipodi:nodetypes="cccccccccccc" />
