@@ -132,7 +132,8 @@ namespace Docky.Items
 						false, 
 						"mostused",
 						filter.AsSingle ())
-						.Where (res => !res.Uri.StartsWith ("file://") || System.IO.File.Exists (new Uri (res.Uri).LocalPath))
+						.Where (res => res.Uri.Contains ("://") &&
+									(!res.Uri.StartsWith ("file://") || System.IO.File.Exists (new Uri (res.Uri).LocalPath)))
 						.Take (4)
 						.ToArray ();
 					

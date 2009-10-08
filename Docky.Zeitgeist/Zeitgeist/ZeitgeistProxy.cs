@@ -102,8 +102,7 @@ namespace Docky.Zeitgeist
 			}
 			
 			foreach (IDictionary<string, object> result in results) {
-				if ((result["uri"] as string).Contains ("://"))
-					yield return new ZeitgeistResult (result);
+				yield return new ZeitgeistResult (result);
 			}
 		}
 	}
