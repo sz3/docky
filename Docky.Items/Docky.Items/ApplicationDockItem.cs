@@ -126,12 +126,14 @@ namespace Docky.Items
 					filter.MimeTypes.AddRange (mimes);
 					
 					ZeitgeistResult[] uris = ZeitgeistProxy.Default.FindEvents (
-						DateTime.Now.AddDays (-31), 
+						DateTime.Now.AddDays (-14), 
 						DateTime.Now, 
-						4, 
+						8, 
 						false, 
 						"mostused",
 						filter.AsSingle ())
+						.Where (res => !res.Uri.StartsWith ("file://") || System.IO.File.Exists (new Uri (res.Uri).LocalPath))
+						.Take (4)
 						.ToArray ();
 					
 					lock (related_lock) {
