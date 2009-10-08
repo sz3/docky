@@ -1095,8 +1095,8 @@ namespace Docky.Interface
 					height = tmp;
 				}
 				
-				return new Gdk.Rectangle ((int) (val.Center.X - (IconSize * val.Zoom / 2)),
-					(int) (val.Center.Y - (IconSize * val.Zoom / 2)),
+				return new Gdk.Rectangle ((int) (val.Center.X - (width * val.Zoom / 2)),
+					(int) (val.Center.Y - (height * val.Zoom / 2)),
 					(int) (width * val.Zoom),
 					(int) (height * val.Zoom));
 			}
@@ -1449,10 +1449,6 @@ namespace Docky.Interface
 			
 			DrawValue val = DrawValues [item];
 			DrawValue center = val;
-			
-			surface.Context.Rectangle (val.HoverArea.X, val.HoverArea.Y, val.HoverArea.Width, val.HoverArea.Height);
-			surface.Context.Color = item.AverageColor ().SetAlpha (.3);
-			surface.Context.Fill ();
 			
 			double clickAnimationProgress = 0;
 			double lighten = 0;
