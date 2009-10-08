@@ -1,4 +1,4 @@
-Notes on how to do a localization (l10n) for gnome-do
+Notes on how to do a localization (l10n) for docky
 =====================================================
 
 Creating a l10n:
@@ -13,9 +13,6 @@ Creating a l10n:
 
         Add your l10n to configure.in, find the ALL_LINGUAS variable and add your
         l10n to it.
-
-Please, pay special when doing the translations because most of the logic puzzles
-need to have very clear and precise questions to be fair.
 
 Updating your l10n:
 ------------------

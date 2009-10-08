@@ -20,3 +20,10 @@ lib/gio-sharp/gio/gio-sharp.dll
 lib/gio-sharp/gio/gio-sharp.dll.config
 lib/gio-sharp/gio/gio-sharp.dll.mdb
 lib/gio-sharp/gio/gtk-sharp.snk
+intltool-extract.in
+intltool-merge.in
+intltool-update.in
+po/stamp-it
+po/POTFILES
+data/docky.desktop
+po/Makefile.in.in
