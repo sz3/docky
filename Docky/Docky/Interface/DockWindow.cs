@@ -1089,7 +1089,7 @@ namespace Docky.Interface
 				int width = surface.Width;
 				int height = surface.Height;
 				
-				if (item.RotateWithDock) {
+				if (item.RotateWithDock && VerticalDock) {
 					int tmp = width;
 					width = height;
 					height = tmp;
