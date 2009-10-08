@@ -33,6 +33,8 @@ namespace Docky.Windowing
 	{
 		public string Location { get; private set; }
 		
+		string[] LocaleEnvVariables = new [] {"LC_ALL", "LC_MESSAGES", "LANG", "LANGUAGE"};
+		
 		public DesktopItem (string path)
 		{
 			Location = path;
@@ -101,17 +103,52 @@ namespace Docky.Windowing
 			return result;
 		}
 		
+		IEnumerable<string> PostfixStringsForLocale (string locale)
+		{
+			if (string.IsNullOrEmpty (locale) || locale.Length < 2)
+				yield break;
+			
+			if (locale.Contains (".")) {
+				locale = Regex.Replace (locale, @"\..+(?<end>@*)", "${end}");
+			}
+			yield return locale;
+			
+			if (locale.Contains ("@")) {
+				string noMod = Regex.Replace (locale, @"@*", "");
+				yield return noMod;
+			}
+			
+			if (locale.Contains ("_")) {
+				string noCountry = Regex.Replace (locale, @"_..", "");
+				yield return noCountry;
+			}
+			
+			yield return locale.Substring (0, 2);
+		}
+		
 		public string GetLocaleString (string key)
 		{
-			string locale = Environment.GetEnvironmentVariable ("LANG");
-			//fixme : full support not included
+			string locale = null;
 			
+			foreach (string env in LocaleEnvVariables) {
+				locale = Environment.GetEnvironmentVariable (env);
+				if (!string.IsNullOrEmpty (locale) && locale.Length >= 2)
+					break;
+			}
+			
+			// short circuit out of here, we cant find locale
 			if (string.IsNullOrEmpty (locale) || locale.Length < 2)
-				return null;
+				return GetString (key);
 			
-			string postfix = locale.Substring (0, 2);
+			string result = null;
 			
-			return GetString (string.Format ("{0}[{1}]", key, postfix));
+			foreach (string postfix in PostfixStringsForLocale (locale)) {
+				result = GetString (string.Format ("{0}[{1}]", key, postfix));
+				if (result != null)
+					return result;
+			}
+			
+			return GetString (key);
 		}
 		
 		public IEnumerable<string> GetStrings (string key)
