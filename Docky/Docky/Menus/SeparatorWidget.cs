@@ -52,8 +52,8 @@ namespace Docky.Menus
 				
 				LinearGradient lg = new LinearGradient (Allocation.X, 0, Allocation.X + Allocation.Width, 0);
 				lg.AddColorStop (0, new Cairo.Color (1, 1, 1, 0));
-				lg.AddColorStop (.4, new Cairo.Color (1, 1, 1, .6));
-				lg.AddColorStop (.6, new Cairo.Color (1, 1, 1, .6));
+				lg.AddColorStop (.4, new Cairo.Color (1, 1, 1, .4));
+				lg.AddColorStop (.6, new Cairo.Color (1, 1, 1, .4));
 				lg.AddColorStop (1, new Cairo.Color (1, 1, 1, 0));
 				cr.Pattern = lg;
 				
