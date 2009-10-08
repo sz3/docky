@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Chris Szikszoy, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -43,11 +43,10 @@ namespace Docky.Services
 					network.StateChanged += OnConnectionStatusChanged;
 					SetConnected ();
 				}
-			} catch /*(Exception e)*/ {
+			} catch (Exception e) {
 				// if something bad happened, log the error and assume we are connected
-				// FIXME: use proper logging
-				//Log<NetworkService>.Error ("Could not initialize Network Manager dbus: {0}", e.Message);
-				//Log<NetworkService>.Debug (e.StackTrace);
+				Log<SystemService>.Error ("Could not initialize Network Manager dbus: '{0}'", e.Message);
+				Log<SystemService>.Info (e.StackTrace);
 				NetworkConnected = true;
 			}
 		}		
@@ -149,16 +148,16 @@ namespace Docky.Services
 					devicekit = Bus.System.GetObject<IDeviceKitPower> (DeviceKitPowerName, new ObjectPath (DeviceKitPowerPath));
 					devicekit.OnChanged += DeviceKitOnChanged;
 					on_battery = (bool) devicekit.Get (DeviceKitPowerName, "on-battery");
-					//Log<SystemService>.Debug ("Using org.freedesktop.DeviceKit.Power for battery information");
+					Log<SystemService>.Debug ("Using org.freedesktop.DeviceKit.Power for battery information");
 				} else if (Bus.Session.NameHasOwner (PowerManagementName)) {
 					power = Bus.Session.GetObject<IPowerManagement> (PowerManagementName, new ObjectPath (PowerManagementPath));
 					power.OnBatteryChanged += PowerOnBatteryChanged;
 					on_battery = power.GetOnBattery ();
-					//Log<SystemService>.Debug ("Using org.freedesktop.PowerManager for battery information");
+					Log<SystemService>.Debug ("Using org.freedesktop.PowerManager for battery information");
 				}
-			} catch /*(Exception e)*/ {
-				//Log<SystemService>.Error ("Could not initialize dbus: {0}", e.Message);
-				//Log<SystemService>.Debug (e.StackTrace);
+			} catch (Exception e) {
+				Log<SystemService>.Error ("Could not initialize power manager dbus: '{0}'", e.Message);
+				Log<SystemService>.Info (e.StackTrace);
 			}
 		}
 

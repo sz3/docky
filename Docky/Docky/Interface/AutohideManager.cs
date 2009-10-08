@@ -26,6 +26,8 @@ using Gdk;
 using Gtk;
 using Wnck;
 
+using Docky.Services;
+
 namespace Docky.Interface
 {
 
@@ -193,7 +195,8 @@ namespace Docky.Interface
 					                    w.Pid != pid &&
 					                    w.EasyGeometry ().IntersectsWith (adjustedDockArea));
 			} catch (Exception e) {
-				Console.WriteLine (e.Message);
+				Log<AutohideManager>.Error ("Failed to update window intersect: '{0}'", e.Message);
+				Log<AutohideManager>.Info (e.StackTrace);
 			}
 			
 			if (WindowIntersectingOther != intersect) {

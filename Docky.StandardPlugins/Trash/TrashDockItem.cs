@@ -149,9 +149,8 @@ namespace Trash
 		{
 			try {
 				DockServices.System.Execute (string.Format ("gvfs-trash \"{0}\"", item));
-			} catch /*(Exception e)*/ { 
-//				Log.Error (e.Message);
-//				Log.Error ("Could not move {0} to trash", item); 
+			} catch (Exception e) { 
+				Log<TrashDockItem>.Error ("Could not move {0} to trash: '{1}'", item, e.Message);
 				return false;
 			}
 			

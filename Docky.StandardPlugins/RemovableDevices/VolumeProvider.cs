@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using Gnome.Vfs;
 
 using Docky.Items;
+using Docky.Services;
 
 namespace RemovableDevices
 {
@@ -61,6 +62,7 @@ namespace RemovableDevices
 		
 		public VolumeProvider ()
 		{
+
 			Computer = new ComputerItem ();
 			
 			// initialize VFS in case it isn't already
@@ -73,7 +75,6 @@ namespace RemovableDevices
 
 			foreach (Volume v in Monitor.MountedVolumes) {
 				if (v.IsUserVisible) {
-					// Console.WriteLine ("adding {0}", v.DisplayName);
 					Volumes.Add ( new VolumeItem (v));
 				}
 			}
@@ -85,7 +86,7 @@ namespace RemovableDevices
 		void HandleVolumeUnmounted(object o, VolumeUnmountedArgs args)
 		{
 			if (Volumes.Any ( d => d.VfsVolume == args.Volume)) {
-				// Console.WriteLine ("Removing {0}", args.Volume.DisplayName);
+				Log<VolumeProvider>.Info ("{0} unmounted.", args.Volume.DisplayName);
 				VolumeItem volToRemove = Volumes.First ( d => d.VfsVolume == args.Volume);
 				Volumes.Remove (volToRemove);
 				OnItemsChanged (null, (volToRemove as AbstractDockItem).AsSingle ());
@@ -95,7 +96,7 @@ namespace RemovableDevices
 
 		void HandleVolumeMounted(object o, VolumeMountedArgs args)
 		{
-			// Console.WriteLine ("Adding {0}", args.Volume.DisplayName);
+			Log<VolumeProvider>.Info ("{0} mounted.", args.Volume.DisplayName);
 			VolumeItem newVol = new VolumeItem (args.Volume);
 			Volumes.Add (newVol);
 			OnItemsChanged ((newVol as AbstractDockItem).AsSingle (), null);

@@ -44,12 +44,12 @@ namespace Docky.Services
 			try {
 				result = client.Get (AbsolutePathForKey (key, GConfPrefix));
 			} catch (GConf.NoSuchKeyException e) {
-				Console.Error.WriteLine (e.Message);
+				Log.Debug ("Key {0} does not exist, creating.", key);
 				Set<T> (key, def);
 				return def;
 			} catch (Exception e) {
-				Console.Error.WriteLine (e.Message);
-				Console.Error.WriteLine (e.StackTrace);
+				Log.Error ("Failed to get gconf value for {0} : '{1}'", key, e.Message);
+				Log.Info (e.StackTrace);
 				return def;
 			}
 			
@@ -65,8 +65,8 @@ namespace Docky.Services
 			try {
 				client.Set (AbsolutePathForKey (key, GConfPrefix), val);
 			} catch (Exception e) {
-				Console.Error.WriteLine ("Encountered error setting GConf key {0}: {1}", key, e.Message);
-				Console.Error.WriteLine (e.StackTrace);
+				Log.Error ("Encountered error setting GConf key {0}: '{1}'", key, e.Message);
+				Log.Info (e.StackTrace);
 				success = false;
 			}
 			return success;
@@ -83,11 +83,11 @@ namespace Docky.Services
 		
 		#region IPreferences - secure, based on Gnome Keyring
 		
-		//readonly string ErrorSavingMessage = Catalog.GetString ("Error saving {0}");
-		//readonly string KeyNotFoundMessage = Catalog.GetString ("Key \"{0}\" not found in keyring");
-		//readonly string KeyringUnavailableMessage = Catalog.GetString ("gnome-keyring-daemon could not be reached!");
+		readonly string ErrorSavingMessage = "Error saving {0} : '{0}'";
+		readonly string KeyNotFoundMessage = "Key \"{0}\" not found in keyring";
+		readonly string KeyringUnavailableMessage = "gnome-keyring-daemon could not be reached!";
 		
-		const string DefaultRootPath = "gnome-do";
+		const string DefaultRootPath = "docky";
 
 		public bool SetSecure<T> (string key, T val)
 		{
@@ -97,7 +97,7 @@ namespace Docky.Services
 			Hashtable keyData;
 			
 			if (!Ring.Available) {
-				//Log.Error (KeyringUnavailableMessage);
+				Log.Error (KeyringUnavailableMessage);
 				return false;
 			}
 
@@ -106,9 +106,9 @@ namespace Docky.Services
 			
 			try {
 				Ring.CreateItem (Ring.GetDefaultKeyring (), ItemType.GenericSecret, AbsolutePathForKey (key, DefaultRootPath), keyData, val.ToString (), true);
-			} catch /*(KeyringException e)*/ {
-				//Log.Error (ErrorSavingMessage, key, e.Message);
-				//Log.Debug (e.StackTrace);
+			} catch (KeyringException e) {
+				Log.Error (ErrorSavingMessage, key, e.Message);
+				Log.Info (e.StackTrace);
 				return false;
 			}
 
@@ -120,7 +120,7 @@ namespace Docky.Services
 			Hashtable keyData;
 			
 			if (!Ring.Available) {
-				//Log.Error (KeyringUnavailableMessage);
+				Log.Error (KeyringUnavailableMessage);
 				return def;
 			}
 
@@ -135,7 +135,7 @@ namespace Docky.Services
 					return (T) Convert.ChangeType (secureValue, typeof (T));
 				}
 			} catch (KeyringException) {
-				//Log.Debug (KeyNotFoundMessage, AbsolutePathForKey (key));
+				Log.Error (KeyNotFoundMessage, AbsolutePathForKey (key, DefaultRootPath));
 			}
 
 			return def;
