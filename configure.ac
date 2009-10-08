@@ -38,6 +38,22 @@ dnl Find gconftool-2
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 AM_GCONF_SOURCE_2
 
+dnl find gapi2-fixup
+AC_PATH_PROG(GAPI2FIXUP, gapi2-fixup, no)
+if test ! -x "$GAPI2FIXUP"; then
+   AC_MSG_ERROR([No gapi post-processor found])
+fi
+
+AC_PATH_PROG(GAPI2PARSER, gapi2-parser, no)
+if test ! -x "$GAPI2PARSER"; then
+   AC_MSG_ERROR([No gapi parser found])
+fi
+
+AC_PATH_PROG(GAPI2CODEGEN, gapi2-codegen, no)
+if test ! -x "$GAPI2CODEGEN"; then
+   AC_MSG_ERROR([No gapi code generator found])
+fi
+
 dnl Expansions
 SHAMROCK_EXPAND_LIBDIR
 SHAMROCK_EXPAND_BINDIR
@@ -81,6 +97,8 @@ AC_SUBST([NDESK_DBUS_GLIB_10_LIBS])
 AC_SUBST([NOTIFY_SHARP_LIBS])
 AC_SUBST([WNCK_SHARP_10_LIBS])
 
+GIO_SHARP_LIBS="-r:$top_srcdir/build/gio-sharp.dll"
+AC_SUBST([GIO_SHARP_LIBS])
 
 PKG_CHECK_MODULES([NUNIT], [nunit], have_nunit=yes, have_nunit=no)
 AM_CONDITIONAL(HAVE_NUNIT, test "$have_nunit" = "yes")
@@ -115,6 +133,10 @@ fi
 dnl }}}
 
 AC_CONFIG_FILES([
+lib/Makefile
+lib/gio-sharp/Makefile
+lib/gio-sharp/generator/Makefile
+lib/gio-sharp/gio/Makefile
 Docky/Makefile
 Docky.CairoHelper/Makefile
 Docky.Items/Makefile

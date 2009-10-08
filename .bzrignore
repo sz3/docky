@@ -14,3 +14,9 @@ Docky/docky
 *.userprefs
 bin
 Docky/AssemblyInfo.cs
+lib/gio-sharp/gio/generated
+lib/gio-sharp/gio/gio-api.xml
+lib/gio-sharp/gio/gio-sharp.dll
+lib/gio-sharp/gio/gio-sharp.dll.config
+lib/gio-sharp/gio/gio-sharp.dll.mdb
+lib/gio-sharp/gio/gtk-sharp.snk
