@@ -11,4 +11,4 @@ else
     DOCKY_EXE="@expanded_libdir@/@PACKAGE@/Docky.exe"
 fi
 
-mono "$DOCKY_EXE" "$@"
+mono --debug "$DOCKY_EXE" "$@"
