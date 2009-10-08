@@ -102,9 +102,12 @@ namespace Docky.Items
 		void UpdateTransientItems ()
 		{
 			if (!IsWindowManager) {
-				OnItemsChanged (null, transient_items);
-				if (transient_items.Any ())
+				if (transient_items.Any ()) {
+					OnItemsChanged (null, transient_items);
+					foreach (AbstractDockItem adi in transient_items)
+						adi.Dispose ();
 					transient_items.Clear ();
+				}
 				return;
 			}
 			// we will need a list of these bad boys we can mess with
@@ -252,8 +255,11 @@ namespace Docky.Items
 		
 		public override void Dispose ()
 		{
-			foreach (AbstractDockItem item in items.Values)
-				item.Dispose ();
+			OnItemsChanged (null, Items);
+			foreach (AbstractDockItem adi in Items)
+				adi.Dispose ();
+			items.Clear ();
+			transient_items.Clear ();
 		}
 		
 		#endregion
