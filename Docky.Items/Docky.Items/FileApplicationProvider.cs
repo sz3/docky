@@ -247,6 +247,9 @@ namespace Docky.Items
 			OnItemsChanged (null, item.AsSingle<AbstractDockItem> ());
 			
 			item.Dispose ();
+			
+			// this is so if the launcher has open windows and we manage those...
+			UpdateTransientItems ();
 			return true;
 		}
 		
