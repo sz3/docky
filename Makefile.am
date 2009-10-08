@@ -4,9 +4,9 @@ ACLOCAL_AMFLAGS = -I m4 -I m4/shamrock
 
 SUBDIRS = \
 	. \
+	Docky.Services \
 	Docky.Zeitgeist \
 	Docky.CairoHelper \
-	Docky.Services \
 	Docky.Windowing \
 	Docky.Items \
 	Docky.StandardPlugins \
