@@ -10,16 +10,19 @@ FILES = \
     AssemblyInfo.cs \
     Wnck/Window_Extensions.cs \
     Windowing/ClickAction.cs \
+    Windowing/DesktopItem.cs \
     Windowing/WindowControl.cs \
     Xlib/X11Atoms.cs \
     Xlib/Xlib.cs \
     Windowing/Position.cs \
     Windowing/WindowMatcher.cs
 
+PROJECT_REFERENCES = \
+	Docky.Services
+
 REFERENCES =  \
 	System \
 	System.Core \
-	$(GNOME_DESKTOP_SHARP_20_LIBS) \
 	$(GLIB_SHARP_20_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(WNCK_SHARP_10_LIBS) \

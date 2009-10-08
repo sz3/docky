@@ -46,9 +46,6 @@
     <Reference Include="wnck-sharp, Version=2.20.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <Package>wnck-sharp-1.0</Package>
     </Reference>
-    <Reference Include="gnomedesktop-sharp, Version=2.20.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>gnome-desktop-sharp-2.0</Package>
-    </Reference>
     <Reference Include="gnome-sharp, Version=2.24.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <Package>gnome-sharp-2.0</Package>
     </Reference>

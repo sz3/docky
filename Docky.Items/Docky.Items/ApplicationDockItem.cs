@@ -38,11 +38,11 @@ namespace Docky.Items
 	{
 		public static ApplicationDockItem NewFromUri (string uri)
 		{
-			Gnome.DesktopItem desktopItem;
+			DesktopItem desktopItem;
 			string filename = Gnome.Vfs.Global.GetLocalPathFromUri (uri);
 			
 			try {
-				desktopItem = Gnome.DesktopItem.NewFromFile (filename, 0);
+				desktopItem = new DesktopItem (filename);
 			} catch (Exception e) {
 				Console.Error.WriteLine (e.Message);
 				return null;
@@ -54,8 +54,7 @@ namespace Docky.Items
 			return new ApplicationDockItem (desktopItem);
 		}
 		
-		Gnome.DesktopItem desktop_item;
-		string path;
+		DesktopItem desktop_item;
 		ZeitgeistResult[] related_uris;
 		object related_lock;
 		
@@ -67,26 +66,22 @@ namespace Docky.Items
 			}
 		}
 		
-		private ApplicationDockItem (Gnome.DesktopItem item)
+		private ApplicationDockItem (DesktopItem item)
 		{
 			related_lock = new Object ();
 			related_uris = new ZeitgeistResult[0];
 			
 			desktop_item = item;
-			if (item.AttrExists ("Icon"))
+			if (item.HasAttribute ("Icon"))
 				Icon = item.GetString ("Icon");
 			
-			if (item.AttrExists ("Name")) {
-				try {
-					HoverText = item.GetLocalestring ("Name");
-				} catch {
+			if (item.HasAttribute ("Name")) {
+				HoverText = item.GetLocaleString ("Name");
+				if (HoverText == null)
 					HoverText = item.GetString ("Name");
-				}
 			} else {
-				HoverText = System.IO.Path.GetFileNameWithoutExtension (path);
+				HoverText = System.IO.Path.GetFileNameWithoutExtension (item.Location);
 			}
-			
-			path = Gnome.Vfs.Global.GetLocalPathFromUri (item.Location);
 			
 			UpdateWindows ();
 			UpdateRelated ();
@@ -102,7 +97,7 @@ namespace Docky.Items
 
 		public override string UniqueID ()
 		{
-			return path;
+			return desktop_item.Location;
 		}
 		
 		void WnckScreenDefaultWindowClosed (object o, WindowClosedArgs args)
@@ -119,13 +114,13 @@ namespace Docky.Items
 		
 		void UpdateWindows ()
 		{
-			Windows = WindowMatcher.Default.WindowsForDesktopFile (path);
+			Windows = WindowMatcher.Default.WindowsForDesktopFile (desktop_item.Location);
 		}
 		
 		void UpdateRelated ()
 		{
-			if (desktop_item.AttrExists ("MimeType")) {
-				string[] mimes = desktop_item.GetString ("MimeType").Split (';');
+			if (desktop_item.HasAttribute ("MimeType")) {
+				string[] mimes = desktop_item.GetStrings ("MimeType").ToArray ();
 				Thread th = new Thread ((ThreadStart) delegate {
 					Zeitgeist.ZeitgeistFilter filter = new Zeitgeist.ZeitgeistFilter ();
 					filter.MimeTypes.AddRange (mimes);
@@ -199,13 +194,7 @@ namespace Docky.Items
 		
 		public void LaunchWithFiles (IEnumerable<string> files)
 		{
-			if (files.Any ()) {
-				GLib.List glist = new GLib.List (files.ToArray () as object[], typeof(string), false, true);
-				desktop_item.Launch (glist, Gnome.DesktopItemLaunchFlags.OnlyOne);
-				glist.Dispose ();
-			} else {
-				desktop_item.Launch (null, 0);
-			}
+			desktop_item.Launch (files);
 		}
 		
 		public override void Dispose ()

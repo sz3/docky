@@ -197,7 +197,13 @@ namespace Docky.Services
 				proc.StartInfo.UseShellExecute = false;
 				proc.Start ();
 			} else {
-				Process.Start (executable);
+				if (executable.Contains (" ")) {
+					string[] args = executable.Split (' ');
+					
+					Process.Start (args[0], executable.Substring (args[0].Length + 1));
+				} else {
+					Process.Start (executable);
+				}
 			}
 		}
 	}

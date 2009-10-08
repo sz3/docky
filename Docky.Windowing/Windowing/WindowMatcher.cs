@@ -253,24 +253,27 @@ namespace Docky.Windowing
 			Dictionary<string, List<string>> result = new Dictionary<string, List<string>> ();
 			
 			foreach (string file in DesktopFiles) {
-				Gnome.DesktopItem item = Gnome.DesktopItem.NewFromFile (file, 0);
-				if (item == null || !item.AttrExists ("Exec"))
+				DesktopItem item = new DesktopItem (file);
+				if (item == null || !item.HasAttribute ("Exec"))
 					continue;
 				
-				if (item.AttrExists ("NoDisplay") && item.GetBoolean ("NoDisplay"))
+				if (item.HasAttribute ("NoDisplay") && item.GetBool ("NoDisplay"))
 					continue;
 				
 				string exec = item.GetString ("Exec");
 				string vexec = null;
 				
 				if (exec.StartsWith ("ooffice")) {
-					vexec = "ooffice" + exec.Split (' ') [1];
+					vexec = "ooffice" + exec.Split (' ')[1];
 				} else {
 					string[] parts = exec.Split (' ');
 					
 					vexec = parts
 						.DefaultIfEmpty (null)
-						.Select (part => part.Split (new []{'/', '\\'}).Last ())
+						.Select (part => part.Split (new[] {
+						'/',
+						'\\'
+					}).Last ())
 						.Where (part => !prefix_filters.Any (f => f.IsMatch (part)))
 						.FirstOrDefault ();
 				}
