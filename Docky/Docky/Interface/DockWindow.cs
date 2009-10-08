@@ -647,11 +647,10 @@ namespace Docky.Interface
 			
 			double x, y;
 			if (HoveredItem != null) {
-				DrawValue val = DrawValues[HoveredItem];
-				Gdk.Rectangle region = PointZoomToRectangle (val.Center, val.Zoom, IconSize);
+				Gdk.Rectangle region = DrawRegionForItem (HoveredItem);
 					
-				x = (Cursor.X - region.X) / (double) region.Height;
-				y = (Cursor.Y - region.Y) / (double) region.Width;
+				x = ((Cursor.X + window_position.X) - region.X) / (double) region.Height;
+				y = ((Cursor.Y + window_position.Y) - region.Y) / (double) region.Width;
 				
 				HoveredItem.Clicked (evnt.Button, evnt.State, x, y);
 				AnimatedDraw ();
@@ -1069,13 +1068,38 @@ namespace Docky.Interface
 			return false;
 		}
 		
-		// fixme, this ONLY works for square items
-		Gdk.Rectangle PointZoomToRectangle (PointD point, double zoom, int iconSize)
+		Gdk.Rectangle DrawRegionForItem (AbstractDockItem item)
 		{
-			return new Gdk.Rectangle ((int) (point.X - (iconSize * zoom / 2)),
-			                          (int) (point.Y - (iconSize * zoom / 2)),
-			                          (int) (iconSize * zoom),
-			                          (int) (iconSize * zoom));
+			if (!DrawValues.ContainsKey (item))
+				return Gdk.Rectangle.Zero;
+			
+			return DrawRegionForItemValue (item, DrawValues[item]);
+		}
+		
+		Gdk.Rectangle DrawRegionForItemValue (AbstractDockItem item, DrawValue val)
+		{
+			if (item.Square) {
+				return new Gdk.Rectangle ((int) (val.Center.X - (IconSize * val.Zoom / 2)),
+					(int) (val.Center.Y - (IconSize * val.Zoom / 2)),
+					(int) (IconSize * val.Zoom),
+					(int) (IconSize * val.Zoom));
+			} else {
+				DockySurface surface = item.IconSurface (main_buffer, IconSize);
+				
+				int width = surface.Width;
+				int height = surface.Height;
+				
+				if (item.RotateWithDock) {
+					int tmp = width;
+					width = height;
+					height = tmp;
+				}
+				
+				return new Gdk.Rectangle ((int) (val.Center.X - (IconSize * val.Zoom / 2)),
+					(int) (val.Center.Y - (IconSize * val.Zoom / 2)),
+					(int) (width * val.Zoom),
+					(int) (height * val.Zoom));
+			}
 		}
 		
 		/// <summary>
@@ -1148,10 +1172,9 @@ namespace Docky.Interface
 					halfSize = iconSize / 2.0;
 				} else {
 					DockySurface icon = adi.IconSurface (surface, iconSize);
-					iconSize = icon.Width;
 					
 					// yeah I am pretty sure...
-					if (adi.Square || adi.RotateWithDock || !VerticalDock) {
+					if (adi.RotateWithDock || !VerticalDock) {
 						halfSize = icon.Width / 2.0;
 					} else {
 						halfSize = icon.Height / 2.0;
@@ -1251,7 +1274,7 @@ namespace Docky.Interface
 					break;
 				}
 				
-				Gdk.Rectangle hoverArea = PointZoomToRectangle (val.Center, val.Zoom, iconSize);
+				Gdk.Rectangle hoverArea = DrawRegionForItemValue (adi, val);
 				
 				if (VerticalDock) {
 					hoverArea.Inflate ((int) (ZoomedDockHeight * .3), ItemWidthBuffer / 2);
@@ -1261,14 +1284,14 @@ namespace Docky.Interface
 				
 				val.HoverArea = hoverArea;
 				DrawValues[adi] = val;
-				
+
 				if (hoverArea.Contains (LocalCursor)) {
 					HoveredItem = adi;
 					hoveredItemSet = true;
 				}
 				
 				if (update_screen_regions) {
-					Gdk.Rectangle region = PointZoomToRectangle (val.StaticCenter, 1, iconSize);
+					Gdk.Rectangle region = hoverArea;
 					region.X += window_position.X;
 					region.Y += window_position.Y;
 					adi.SetScreenRegion (Screen, region);
@@ -1302,14 +1325,10 @@ namespace Docky.Interface
 		
 		void GetDockAreaOnSurface (DockySurface surface, out Gdk.Rectangle dockArea, out Gdk.Rectangle cursorArea)
 		{
-			DrawValue firstDv, lastDv;
 			Gdk.Rectangle first, last, staticArea;
 			
-			firstDv = DrawValues [Items [0]];
-			lastDv  = DrawValues [Items [Items.Count - 1]];
-			
-			first = PointZoomToRectangle (firstDv.Center, firstDv.Zoom, IconSize);
-			last  = PointZoomToRectangle (lastDv.Center, lastDv.Zoom, IconSize);
+			first = DrawRegionForItem (Items[0]);
+			last = DrawRegionForItem (Items[Items.Count - 1]);
 			
 			dockArea = new Gdk.Rectangle (0, 0, 0, 0);
 			staticArea = StaticDockArea (surface);
@@ -1431,6 +1450,10 @@ namespace Docky.Interface
 			DrawValue val = DrawValues [item];
 			DrawValue center = val;
 			
+			surface.Context.Rectangle (val.HoverArea.X, val.HoverArea.Y, val.HoverArea.Width, val.HoverArea.Height);
+			surface.Context.Color = item.AverageColor ().SetAlpha (.3);
+			surface.Context.Fill ();
+			
 			double clickAnimationProgress = 0;
 			double lighten = 0;
 			double darken = 0;
@@ -1489,7 +1512,7 @@ namespace Docky.Interface
 			}
 			
 			if (darken > 0 || lighten > 0) {
-				Gdk.Rectangle area = PointZoomToRectangle (val.Center, val.Zoom, IconSize);
+				Gdk.Rectangle area = DrawRegionForItem (item);
 				surface.Context.Rectangle (area.X, area.Y, area.Height, area.Width);
 				
 				if (darken > 0) {
