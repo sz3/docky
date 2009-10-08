@@ -154,7 +154,14 @@ namespace BatteryMonitor
 				HoverText = string.Format ("{0:0.0}%", Capacity * 100);
 			}
 			
-			(Owner as BatteryMonitorItemProvider).Hidden = max_capacity == -1 || !DockServices.System.OnBattery || Capacity > .98 || Capacity < .01;
+			bool hidden = max_capacity == -1 || !DockServices.System.OnBattery || Capacity > .98 || Capacity < .01;
+			
+			if (hidden && !(Owner as BatteryMonitorItemProvider).Hidden)
+				Log<BatteryMonitorProcItem>.Debug ("Hiding battery item (capacity=" + Capacity +
+						") (max_capacity=" + max_capacity +
+						") (OnBattery=" + DockServices.System.OnBattery + ")");
+
+			(Owner as BatteryMonitorItemProvider).Hidden = hidden;
 			
 			QueueRedraw ();
 
