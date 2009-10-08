@@ -155,7 +155,7 @@ namespace GMail
 					url = "https://mail.google.com/mail";
 				url += "/feed/atom/";
 				
-				//Log<GMailAtom>.Info ("Fetching Atom feed: " + url);
+				Log<GMailAtom>.Info ("Fetching Atom feed: " + url);
 				HttpWebRequest request = (HttpWebRequest)WebRequest.Create (url);
 				request.UserAgent = @"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.10) Gecko/2009042523 Ubuntu/9.04 (jaunty) Firefox/3.0.10";
 				request.Credentials = new NetworkCredential (username, password);
@@ -186,7 +186,7 @@ namespace GMail
 						url = "https://mail.google.com/mail";
 					url += "/feed/atom/" + HttpUtility.UrlEncode (CurrentLabel);
 					
-					//Log<GMailAtom>.Info ("Fetching Atom feed: " + url);
+					Log<GMailAtom>.Info ("Fetching Atom feed: " + url);
 					HttpWebRequest request = (HttpWebRequest)WebRequest.Create (url);
 					request.UserAgent = @"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.10) Gecko/2009042523 Ubuntu/9.04 (jaunty) Firefox/3.0.10";
 					request.Credentials = new NetworkCredential (GMailPreferences.User, GMailPreferences.Password);
@@ -263,8 +263,8 @@ namespace GMail
 						Gtk.Application.Invoke (delegate {
 							OnGMailFailed (Catalog.GetString ("Network Error"));
 						});
-				} catch /*(Exception e)*/ {
-					//Log<GMailAtom>.Error (e.ToString ());
+				} catch (Exception e) {
+					Log<GMailAtom>.Error (e.ToString ());
 					Gtk.Application.Invoke (delegate {
 						OnGMailFailed (Catalog.GetString ("General Error"));
 					});
