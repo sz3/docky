@@ -113,8 +113,8 @@ $AUTOMAKE --add-missing --gnu $am_opt
 echo "Running $AUTOCONF ..."
 $AUTOCONF
 
-#check_autotool_version intltoolize 0.35
-#run intltoolize --force --copy --automake
+check_autotool_version intltoolize 0.35
+run intltoolize --force --copy --automake
 
 echo Running $srcdir/configure $conf_flags "$@" ...
 $srcdir/configure $conf_flags "$@" \
