@@ -64,7 +64,6 @@ namespace Docky.Services
 			bool success = true;
 			try {
 				client.Set (AbsolutePathForKey (key, GConfPrefix), val);
-				Log.Debug ("setting {0} = {1}", key, val.ToString ());
 			} catch (Exception e) {
 				Log.Error ("Encountered error setting GConf key {0}: '{1}'", key, e.Message);
 				Log.Info (e.StackTrace);
@@ -109,7 +108,7 @@ namespace Docky.Services
 				Ring.CreateItem (Ring.GetDefaultKeyring (), ItemType.GenericSecret, AbsolutePathForKey (key, DefaultRootPath), keyData, val.ToString (), true);
 			} catch (KeyringException e) {
 				Log.Error (ErrorSavingMessage, key, e.Message);
-				Log.info (e.StackTrace);
+				Log.Info (e.StackTrace);
 				return false;
 			}
 
@@ -136,7 +135,7 @@ namespace Docky.Services
 					return (T) Convert.ChangeType (secureValue, typeof (T));
 				}
 			} catch (KeyringException) {
-				Log.Error (KeyNotFoundMessage, AbsolutePathForKey (key));
+				Log.Error (KeyNotFoundMessage, AbsolutePathForKey (key, DefaultRootPath));
 			}
 
 			return def;
