@@ -24,6 +24,8 @@ using System.Text;
 using NDesk.DBus;
 using org.freedesktop.DBus;
 
+using Docky.Services;
+
 namespace Docky.Zeitgeist
 {
 
@@ -65,8 +67,7 @@ namespace Docky.Zeitgeist
 				if (reply == StartReply.AlreadyRunning || reply == StartReply.Success)
 					zeitgeist = Bus.Session.GetObject<IZeitgeistDaemon> (BusName, new ObjectPath (PathName));
 			} catch (Exception e) {
-				Console.Error.WriteLine (e.Message);
-				Console.Error.WriteLine ("Failed to connect to zeitgeist bus");
+				Log<ZeitgeistProxy>.Error ("Failed to connect to zeitgeist bus : '{0}'", e.Message);
 			}
 		}
 		
@@ -95,7 +96,8 @@ namespace Docky.Zeitgeist
 				results = zeitgeist.FindEvents (startTime, stopTime, maxResults, ascending, 
 					                            mode, filters.Select (f => f.ToDBusFilter ()).ToArray ());
 			} catch (Exception e) {
-				Console.WriteLine (e.Message);
+				Log<ZeitgeistProxy>.Error ("Failed to find Zeitgeist events: '{0}'", e.Message);
+				Log<ZeitgeistProxy>.Info (e.StackTrace);
 				yield break;
 			}
 			

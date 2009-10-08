@@ -80,9 +80,15 @@
     <Compile Include="Docky.Services\Preferences.cs" />
     <Compile Include="Docky.Services\NotificationService.cs" />
     <Compile Include="Docky.Services\ConnectionStatusChangeEventArgs.cs" />
+    <Compile Include="Docky.Services\Logging\LogBase.cs" />
+    <Compile Include="Docky.Services\Logging\ConsoleCrayon.cs" />
+    <Compile Include="Docky.Services\LogTSender.cs" />
+    <Compile Include="Docky.Services\Log.cs" />
+    <Compile Include="Docky.Services\Logging\ConsoleLog.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Docky.Services\" />
+    <Folder Include="Docky.Services\Logging\" />
   </ItemGroup>
 </Project>

@@ -19,30 +19,41 @@ using System;
 
 namespace Docky.Services
 {
+	
+	public enum LogLevel {
+		Debug,
+		Info,
+		Warn,
+		Error,
+		Fatal,
+	}	
 
-
-	public class DockServices
+	public class Log : Logging.LogBase
 	{
-		public static DrawingService Drawing { get; private set; }
-		
-		public static PreferencesService Preferences { get; private set; }
-		
-		public static SystemService System { get; private set; }
-		
-		public static NotificationService Notifications { get; private set; }
-		
-		public DockServices ()
+
+		public static void Debug (string msg, params object [] args)
 		{
+			Write (LogLevel.Debug, msg, args);
 		}
 		
-		static DockServices ()
+		public static void Info (string msg, params object [] args)
 		{
-			Drawing       = new DrawingService ();
-			Preferences   = new PreferencesService ();
-			System        = new SystemService ();
-			Notifications = new NotificationService ();
-			
-			Log<DockServices>.Info ("Dock services initialized.");
+			Write (LogLevel.Info, msg, args);
+		}
+		
+		public static void Warn (string msg, params object [] args)
+		{
+			Write (LogLevel.Warn, msg, args);
+		}
+		
+		public static void Error (string msg, params object [] args)
+		{
+			Write (LogLevel.Error, msg, args);
+		}
+		
+		public static void Fatal (string msg, params object [] args)
+		{
+			Write (LogLevel.Fatal, msg, args);
 		}
 	}
 }

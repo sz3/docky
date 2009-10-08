@@ -28,6 +28,7 @@ using Gdk;
 using Gtk;
 
 using Docky.Windowing;
+using Docky.Services;
 
 namespace Docky
 {
@@ -71,6 +72,9 @@ namespace Docky
 			PluginManager.Initialize ();
 			Controller.Initialize ();
 			
+			//FIXME: parse args to set log level
+			Log.DisplayLevel = LogLevel.Debug;
+			
 			Gdk.Threads.Enter ();
 			Gtk.Application.Run ();
 			Gdk.Threads.Leave ();
@@ -89,7 +93,8 @@ namespace Docky
 			about.Comments = "Docky. Simply Powerful.";
 			about.Authors = new[] {
 				"Jason Smith",
-				"Robert Dyer"
+				"Robert Dyer",
+				"Chris Szikszoy"
 			};
 			
 			about.ShowAll ();
