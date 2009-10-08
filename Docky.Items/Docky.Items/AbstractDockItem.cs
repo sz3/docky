@@ -124,6 +124,7 @@ namespace Docky.Items
 		public AbstractDockItem ()
 		{
 			state_times = new Dictionary<ItemState, DateTime> ();
+			Gtk.IconTheme.Default.Changed += HandleIconThemeChanged;
 		}
 		
 		public DateTime StateSetTime (ItemState state)
@@ -353,6 +354,11 @@ namespace Docky.Items
 				HoverTextChanged (this, EventArgs.Empty);
 		}
 		
+		void HandleIconThemeChanged (object o, EventArgs e)
+		{
+			QueueRedraw ();
+		}
+		
 		protected void OnPaintNeeded ()
 		{
 			if (PaintNeeded != null) {
@@ -365,6 +371,7 @@ namespace Docky.Items
 		#region IDisposable implementation
 		public virtual void Dispose ()
 		{
+			Gtk.IconTheme.Default.Changed -= HandleIconThemeChanged;
 			ResetBuffers ();
 		}
 
