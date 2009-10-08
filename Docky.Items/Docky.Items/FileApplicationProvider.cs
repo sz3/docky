@@ -103,10 +103,13 @@ namespace Docky.Items
 		{
 			if (!IsWindowManager) {
 				if (transient_items.Any ()) {
-					OnItemsChanged (null, transient_items);
-					foreach (AbstractDockItem adi in transient_items)
+					List<AbstractDockItem> old_transient_items = transient_items;
+					
+					transient_items = new List<AbstractDockItem> ();
+					
+					OnItemsChanged (null, old_transient_items);
+					foreach (AbstractDockItem adi in old_transient_items)
 						adi.Dispose ();
-					transient_items.Clear ();
 				}
 				return;
 			}
@@ -255,11 +258,14 @@ namespace Docky.Items
 		
 		public override void Dispose ()
 		{
-			OnItemsChanged (null, Items);
-			foreach (AbstractDockItem adi in Items)
+			IEnumerable<AbstractDockItem> old_items = Items;
+			
+			items = new Dictionary<string, AbstractDockItem> ();
+			transient_items = new List<AbstractDockItem> ();
+			
+			OnItemsChanged (null, old_items);
+			foreach (AbstractDockItem adi in old_items)
 				adi.Dispose ();
-			items.Clear ();
-			transient_items.Clear ();
 		}
 		
 		#endregion
