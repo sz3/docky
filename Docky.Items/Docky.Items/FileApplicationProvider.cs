@@ -216,7 +216,7 @@ namespace Docky.Items
 		
 		public override bool ItemCanBeRemoved (AbstractDockItem item)
 		{
-			return true;
+			return items.ContainsValue (item);
 		}
 		
 		public override bool RemoveItem (AbstractDockItem item)
