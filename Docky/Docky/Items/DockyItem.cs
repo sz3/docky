@@ -37,7 +37,7 @@ namespace Docky.Items
 		{
 			Indicator = ActivityIndicator.Single;
 			HoverText = "Docky";
-			Icon = "logo.svg@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName;
+			Icon = "docky";
 		}
 		
 		public override string UniqueID ()

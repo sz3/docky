@@ -88,7 +88,7 @@ namespace Docky
 			about.Artists = new[] { "Daniel Foré" };
 			about.ProgramName = "Docky";
 			about.Version = AssemblyInfo.DisplayVersion + "\n" + AssemblyInfo.VersionDetails;
-			about.Logo = Services.DockServices.Drawing.LoadIcon ("logo.svg@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName, 128);
+			about.IconName = "docky";
 			about.Copyright = "Copyright \xa9 2009 Docky Developers";
 			about.Comments = "Docky. Simply Powerful.";
 			about.Authors = new[] {

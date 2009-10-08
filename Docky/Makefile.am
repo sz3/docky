@@ -43,7 +43,6 @@ RESOURCES = \
 	Resources/classic.svg \
 	Resources/grayscale.svg \
     Resources/Docky.addin.xml \
-    Resources/logo.svg \
     Resources/menu.svg
 
 PROJECT_REFERENCES = \
