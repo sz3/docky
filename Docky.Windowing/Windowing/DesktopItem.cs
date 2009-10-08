@@ -106,6 +106,9 @@ namespace Docky.Windowing
 			string locale = Environment.GetEnvironmentVariable ("LANG");
 			//fixme : full support not included
 			
+			if (string.IsNullOrEmpty (locale) || locale.Length < 2)
+				return null;
+			
 			string postfix = locale.Substring (0, 2);
 			
 			return GetString (string.Format ("{0}[{1}]", key, postfix));
