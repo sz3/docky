@@ -70,7 +70,7 @@ namespace Docky.Items
 			surface.Context.LineTo ((surface.Width / 2) - 0.5, surface.Height);
 			
 			RadialGradient rg = new RadialGradient (surface.Width / 2, surface.Height / 2, 0, surface.Width / 2, surface.Height / 2, surface.Height / 2);
-			rg.AddColorStop (0, new Cairo.Color (1, 1, 1, .7));
+			rg.AddColorStop (0, new Cairo.Color (1, 1, 1, .4));
 			rg.AddColorStop (1, new Cairo.Color (1, 1, 1, 0));
 		
 			surface.Context.Pattern = rg;
