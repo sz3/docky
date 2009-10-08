@@ -229,25 +229,8 @@ namespace Docky.Interface
 				if (value == window_manager)
 					return;
 				
-				bool alreadySet = Docky.Controller.Docks.Any (d => d.Preferences != this && d.Preferences.WindowManager);
-				
-				// make sure only 1 dock has this set
-				if (value && alreadySet)
-					foreach (Dock d in Docky.Controller.Docks)
-						d.Preferences.WindowManager = false;
-				
 				window_manager = value;
-				
-				// make sure at least 1 dock has this set
-				if (!value && !alreadySet)
-					window_manager = true;
-				
 				SetOption<bool?> ("WindowManager", window_manager);
-				
-				if (window_manager.Value)
-					DefaultProvider.SetWindowManager ();
-				else
-					DefaultProvider.UnsetWindowManager ();
 			}
 		}
 		
@@ -596,8 +579,7 @@ namespace Docky.Interface
 		{
 			if (window_manager_check.Active)
 				DefaultProvider.SetWindowManager ();
-			else
-				DefaultProvider.UnsetWindowManager ();
+			WindowManager = window_manager_check.Active = DefaultProvider.IsWindowManager;
 		}
 
 		[GLib.ConnectBefore]
