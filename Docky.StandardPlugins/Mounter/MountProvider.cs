@@ -97,8 +97,8 @@ namespace Mounter
 			//Mount m = args.Mount;
 			Mount m = NewOrRemovedMount;
 			
-			if (Mounts.Any (d => d.UniqueID () == m.Uuid)) {
-				MountItem mntToRemove = Mounts.First (d => d.UniqueID () == m.Uuid);
+			if (Mounts.Any (d => d.Mnt.Handle == m.Handle)) {
+				MountItem mntToRemove = Mounts.First (d => d.Mnt.Handle == m.Handle);
 				Mounts.Remove (mntToRemove);
 				OnItemsChanged (null, (mntToRemove as AbstractDockItem).AsSingle ());
 				mntToRemove.Dispose ();
@@ -112,35 +112,35 @@ namespace Mounter
 		// I can't use List<Mount> .Except (List<Mount>)
 		Mount NewOrRemovedMount {
 			get {
-				List<string> oldMounts = new List<string> ();
-				List<string> currentMounts = new List<string> ();
+				List<IntPtr> oldMounts = new List<IntPtr> ();
+				List<IntPtr> currentMounts = new List<IntPtr> ();
 				
-				Mounts.ForEach ( m => oldMounts.Add (m.Mnt.Uuid));
+				Mounts.ForEach ( m => oldMounts.Add (m.Mnt.Handle));
 				foreach (Mount m in Monitor.Mounts)
-					currentMounts.Add (m.Uuid);
+					currentMounts.Add (m.Handle);
 				
 				Console.WriteLine ("current mounts: {0}", currentMounts.Count ());
-				foreach (string s in currentMounts)
+				foreach (IntPtr s in currentMounts)
 					Console.WriteLine (s);
 				Console.WriteLine ("old mounts: {0}", oldMounts.Count ());
-				foreach (string s in oldMounts)
+				foreach (IntPtr s in oldMounts)
 					Console.WriteLine (s);
 				
-				IEnumerable<string> difference = new List<string> ();
+				IEnumerable<IntPtr> difference = new List<IntPtr> ();
 
 				Mount ret;
 				
 				if (currentMounts.Count () > oldMounts.Count ()) {
 					difference = currentMounts.Except (oldMounts);
-					ret = Monitor.Mounts.First (m => m.Uuid == difference.First ());
+					ret = Monitor.Mounts.First (m => m.Handle == difference.First ());
 				}
 				else {
 					difference = oldMounts.Except (currentMounts);
-					ret = Mounts.First (m => m.Mnt.Uuid == difference.First ()).Mnt;
+					ret = Mounts.First (m => m.Mnt.Handle == difference.First ()).Mnt;
 				}
 				
 				Console.WriteLine ("difference: {0}", difference.Count ());
-				foreach (string s in difference)
+				foreach (IntPtr s in difference)
 					Console.WriteLine (s);
 				
 				return ret;
