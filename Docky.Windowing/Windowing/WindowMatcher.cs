@@ -133,10 +133,10 @@ namespace Docky.Windowing
 		
 		void SetupWindow (Wnck.Window window)
 		{
-			window_to_desktop_files[window] = FindDesktopFileForWindowOrDefault (window).ToList ();
+			window_to_desktop_files [window] = FindDesktopFileForWindowOrDefault (window).ToList ();
 			
 			window.NameChanged += delegate {
-				window_to_desktop_files[window] = FindDesktopFileForWindowOrDefault (window).ToList ();
+				window_to_desktop_files [window] = FindDesktopFileForWindowOrDefault (window).ToList ();
 			};
 		}
 		#endregion
@@ -158,9 +158,9 @@ namespace Docky.Windowing
 				throw new ArgumentNullException ("window");
 			
 			if (!window_to_desktop_files.ContainsKey (window))
-				return new[] { window };
+				return new [] { window };
 			
-			string id = window_to_desktop_files[window].First ();
+			string id = window_to_desktop_files [window].First ();
 			
 			return window_to_desktop_files
 				.Where (kvp => kvp.Value.Contains (id))
@@ -172,7 +172,7 @@ namespace Docky.Windowing
 			if (window == null)
 				throw new ArgumentNullException ("window");
 			
-			string file = window_to_desktop_files[window].First ();
+			string file = window_to_desktop_files [window].First ();
 			return (file.EndsWith (".desktop")) ? file : null;
 		}
 		
@@ -196,15 +196,15 @@ namespace Docky.Windowing
 				if (window.ClassGroup.Name.ToLower ().StartsWith ("openoffice")) {
 					string title = window.Name;
 					if (title.Contains ("Writer"))
-						command_line[0] = "ooffice-writer";
+						command_line [0] = "ooffice-writer";
 					else if (title.Contains ("Draw"))
-						command_line[0] = "ooffice-draw";
+						command_line [0] = "ooffice-draw";
 					else if (title.Contains ("Impress"))
-						command_line[0] = "ooffice-impress";
+						command_line [0] = "ooffice-impress";
 					else if (title.Contains ("Calc"))
-						command_line[0] = "ooffice-calc";
+						command_line [0] = "ooffice-calc";
 					else if (title.Contains ("Math"))
-						command_line[0] = "ooffice-math";
+						command_line [0] = "ooffice-math";
 					
 				} else {
 					string class_name = window.ClassGroup.ResClass;
@@ -217,8 +217,8 @@ namespace Docky.Windowing
 				}
 			}
 			
-			if (exec_to_desktop_files.ContainsKey (command_line[0])) {
-				foreach (string s in exec_to_desktop_files[command_line[0]])
+			if (command_line != null && exec_to_desktop_files.ContainsKey (command_line [0])) {
+				foreach (string s in exec_to_desktop_files [command_line [0]])
 					yield return s;
 				yield break;
 			}
@@ -226,7 +226,7 @@ namespace Docky.Windowing
 			yield return window.Pid.ToString ();
 		}
 			
-		string[] CommandLineForPid (int pid)
+		string [] CommandLineForPid (int pid)
 		{
 			string cmdline;
 			
@@ -240,7 +240,7 @@ namespace Docky.Windowing
 			
 			cmdline = cmdline.ToLower ();
 			
-			string[] result = cmdline.Split (Convert.ToChar (0x0));
+			string [] result = cmdline.Split (Convert.ToChar (0x0));
 			
 			return result
 				.Select (s => s.Split (new []{'/', '\\'}).Last ())
@@ -264,13 +264,13 @@ namespace Docky.Windowing
 				string vexec = null;
 				
 				if (exec.StartsWith ("ooffice")) {
-					vexec = "ooffice" + exec.Split (' ')[1];
+					vexec = "ooffice" + exec.Split (' ') [1];
 				} else {
-					string[] parts = exec.Split (' ');
+					string [] parts = exec.Split (' ');
 					
 					vexec = parts
 						.DefaultIfEmpty (null)
-						.Select (part => part.Split (new[] {
+						.Select (part => part.Split (new [] {
 						'/',
 						'\\'
 					}).Last ())
@@ -282,8 +282,8 @@ namespace Docky.Windowing
 					continue;
 				
 				if (!result.ContainsKey (vexec))
-					result[vexec] = new List<string> ();
-				result[vexec].Add (file);
+					result [vexec] = new List<string> ();
+				result [vexec].Add (file);
 				item.Dispose ();
 			}
 			
