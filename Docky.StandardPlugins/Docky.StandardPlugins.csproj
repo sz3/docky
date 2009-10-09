@@ -60,7 +60,6 @@
     <Folder Include="GMail\" />
     <Folder Include="Resources\" />
     <Folder Include="Bookmarks\" />
-    <Folder Include="RemovableDevices\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Trash\TrashDockItem.cs" />
@@ -86,9 +85,9 @@
     <Compile Include="BatteryMonitor\BatteryMonitorItemProvider.cs" />
     <Compile Include="Bookmarks\BookmarksItemProvider.cs" />
     <Compile Include="BatteryMonitor\BatteryMonitorProcItem.cs" />
-    <Compile Include="RemovableDevices\MountProvider.cs" />
-    <Compile Include="RemovableDevices\MountItem.cs" />
-    <Compile Include="RemovableDevices\ComputerItem.cs" />
+    <Compile Include="Mounter\ComputerItem.cs" />
+    <Compile Include="Mounter\MountItem.cs" />
+    <Compile Include="Mounter\MountProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Docky.StandardPlugins.addin.xml">
