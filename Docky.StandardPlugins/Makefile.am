@@ -32,9 +32,9 @@ FILES = \
 	GMail/gtk-gui/generated.cs \
 	Trash/TrashItemProvider.cs \
 	Trash/TrashDockItem.cs \
-	RemovableDevices/ComputerItem.cs \
-	RemovableDevices/MountItem.cs \
-	RemovableDevices/MountProvider.cs
+	Mounter/ComputerItem.cs \
+	Mounter/MountItem.cs \
+	Mounter/MountProvider.cs
 
 RESOURCES = \
 	Resources/Docky.StandardPlugins.addin.xml \
