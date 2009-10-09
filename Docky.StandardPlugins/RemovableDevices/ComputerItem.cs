@@ -20,7 +20,7 @@ using System;
 using Docky.Items;
 using Docky.Services;
 
-namespace RemovableDevices
+namespace Mounter
 {
 
 

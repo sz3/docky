@@ -91,7 +91,7 @@ namespace BatteryMonitor
 			
 			foreach (DirectoryInfo battDir in basePath.GetDirectories ()) {
 				string path = BattBasePath + "/" + battDir.Name + "/" + BattInfoPath;
-				if (File.Exists (path)) {
+				if (System.IO.File.Exists (path)) {
 					using (StreamReader reader = new StreamReader (path)) {
 						string line;
 						while (!reader.EndOfStream) {
@@ -120,7 +120,7 @@ namespace BatteryMonitor
 			
 			foreach (DirectoryInfo battDir in basePath.GetDirectories ()) {
 				string path = BattBasePath + "/" + battDir.Name + "/" + BattStatePath;
-				if (File.Exists (path)) {
+				if (System.IO.File.Exists (path)) {
 					try {
 						using (StreamReader reader = new StreamReader (path)) {
 							string line;
