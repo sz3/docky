@@ -80,6 +80,7 @@ namespace Mounter
 
 		void HandleMountAdded (object o, MountAddedArgs args)
 		{
+			Console.WriteLine ("Mount added..");
 			//FIXME: due to a bug in GIO#, this will crash when trying to get args.Mount
 			//Mount m = args.Mount;
 			Mount m = NewOrRemovedMount;
@@ -92,6 +93,7 @@ namespace Mounter
 		
 		void HandleMountRemoved (object o, MountRemovedArgs args)
 		{
+			Console.WriteLine ("Mount removed..");
 			//Mount m = args.Mount;
 			Mount m = NewOrRemovedMount;
 			
@@ -117,16 +119,31 @@ namespace Mounter
 				foreach (Mount m in Monitor.Mounts)
 					currentMounts.Add (m.Uuid);
 				
+				Console.WriteLine ("current mounts: {0}", currentMounts.Count ());
+				foreach (string s in currentMounts)
+					Console.WriteLine (s);
+				Console.WriteLine ("old mounts: {0}", oldMounts.Count ());
+				foreach (string s in oldMounts)
+					Console.WriteLine (s);
+				
 				IEnumerable<string> difference = new List<string> ();
+
+				Mount ret;
 				
 				if (currentMounts.Count () > oldMounts.Count ()) {
 					difference = currentMounts.Except (oldMounts);
-					return Monitor.Mounts.First (m => m.Uuid == difference.First ());
+					ret = Monitor.Mounts.First (m => m.Uuid == difference.First ());
 				}
 				else {
 					difference = oldMounts.Except (currentMounts);
-					return Mounts.First (m => m.Mnt.Uuid == difference.First ()).Mnt;
+					ret = Mounts.First (m => m.Mnt.Uuid == difference.First ()).Mnt;
 				}
+				
+				Console.WriteLine ("difference: {0}", difference.Count ());
+				foreach (string s in difference)
+					Console.WriteLine (s);
+				
+				return ret;
 			}
 		}
 	}
