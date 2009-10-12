@@ -12,6 +12,7 @@ FILES = \
 	BatteryMonitor/BatteryMonitorItemProvider.cs \
 	BatteryMonitor/BatteryMonitorProcItem.cs \
 	Bookmarks/BookmarksItemProvider.cs \
+	Bookmarks/BookmarkDockItem.cs \
 	Clock/ClockItemProvider.cs \
 	Clock/ClockDockItem.cs \
 	Clock/ClockThemeSelector.cs \

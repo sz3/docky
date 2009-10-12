@@ -82,6 +82,7 @@
     <Compile Include="GMail\gtk-gui\generated.cs" />
     <Compile Include="BatteryMonitor\BatteryMonitorItemProvider.cs" />
     <Compile Include="Bookmarks\BookmarksItemProvider.cs" />
+    <Compile Include="Bookmarks\BookmarkDockItem.cs" />
     <Compile Include="BatteryMonitor\BatteryMonitorProcItem.cs" />
     <Compile Include="RemovableDevices\VolumeProvider.cs" />
     <Compile Include="RemovableDevices\VolumeItem.cs" />
