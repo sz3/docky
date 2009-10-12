@@ -86,7 +86,7 @@ namespace Docky.Items
 		void WnckScreenDefaultWindowOpened (object o, WindowOpenedArgs args)
 		{
 			// ensure we run last (more or less) so that all icons can update first
-			GLib.Timeout.Add (10, delegate {
+			GLib.Idle.Add (delegate {
 				UpdateTransientItems ();
 				return false;
 			});
@@ -113,6 +113,7 @@ namespace Docky.Items
 				}
 				return;
 			}
+			
 			// we will need a list of these bad boys we can mess with
 			List<Wnck.Window> windows = UnmanagedWindows.ToList ();
 			

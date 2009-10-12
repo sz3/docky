@@ -147,6 +147,7 @@ namespace Docky.Interface
 		double? zoom_in_buffer;
 		bool rendering;
 		bool update_screen_regions;
+		bool hovered_accepts_drop;
 		
 		uint animation_timer;
 		
@@ -227,13 +228,19 @@ namespace Docky.Interface
 			get {
 				if (!DockHovered)
 					return null;
-				return hoveredItem; 
+				return hoveredItem;
 			}
 			set {
 				if (hoveredItem == value)
 					return;
 				AbstractDockItem last = hoveredItem;
 				hoveredItem = value;
+				hovered_accepts_drop = false;
+				if (hoveredItem != null && drag_known) {
+					if (hoveredItem.CanAcceptDrop (drag_data)) {
+						hovered_accepts_drop = true;
+					}
+				}
 				OnHoveredItemChanged (last);
 			}
 		}
@@ -674,6 +681,7 @@ namespace Docky.Interface
 		bool drag_data_requested;
 		bool drag_is_desktop_file;
 		bool drag_began;
+		int marker = 0;
 		
 		AbstractDockItem drag_item;
 		
@@ -816,6 +824,11 @@ namespace Docky.Interface
 		/// </summary>
 		void HandleDragMotion (object o, DragMotionArgs args)
 		{
+			if (marker != args.Context.GetHashCode ()) {
+				marker = args.Context.GetHashCode ();
+				drag_known = false;
+			}
+			
 			// we own the drag if drag_began is true, lets not be silly
 			if (!drag_known && !drag_began) {
 				drag_known = true;
@@ -1469,6 +1482,10 @@ namespace Docky.Interface
 					lighten = Math.Max (0, Math.Sin (Math.PI * 2 * clickAnimationProgress)) * .5;
 					break;
 				}
+			}
+			
+			if (hovered_accepts_drop && HoveredItem == item) {
+				lighten += .3;
 			}
 			
 			if ((item.State & ItemState.Urgent) == ItemState.Urgent && 

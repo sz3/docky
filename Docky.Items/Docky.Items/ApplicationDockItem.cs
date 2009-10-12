@@ -59,6 +59,7 @@ namespace Docky.Items
 		object related_lock;
 		
 		uint timer;
+		IEnumerable<string> mimes;
 	
 		public override string ShortName {
 			get {
@@ -81,6 +82,12 @@ namespace Docky.Items
 					HoverText = item.GetString ("Name");
 			} else {
 				HoverText = System.IO.Path.GetFileNameWithoutExtension (item.Location);
+			}
+			
+			if (item.HasAttribute ("MimeType")) {
+				mimes = item.GetStrings ("MimeType");
+			} else {
+				mimes = Enumerable.Empty<string> ();
 			}
 			
 			UpdateWindows ();
@@ -119,8 +126,7 @@ namespace Docky.Items
 		
 		void UpdateRelated ()
 		{
-			if (desktop_item.HasAttribute ("MimeType")) {
-				string[] mimes = desktop_item.GetStrings ("MimeType").ToArray ();
+			if (mimes.Any ()) {
 				Thread th = new Thread ((ThreadStart) delegate {
 					Zeitgeist.ZeitgeistFilter filter = new Zeitgeist.ZeitgeistFilter ();
 					filter.MimeTypes.AddRange (mimes);
@@ -180,6 +186,29 @@ namespace Docky.Items
 			
 			LaunchWithFiles (item.Uri.AsSingle ());
 		}
+		
+		public override bool CanAcceptDrop (IEnumerable<string> uris)
+		{
+			if (uris == null)
+				return false;
+			
+			foreach (string uri in uris) {
+				string mime = Gnome.Vfs.Global.GetMimeType (uri);
+				Console.WriteLine (uri);
+				Console.WriteLine ();
+				if (mimes.Contains (mime))
+					return true;
+			}
+			
+			return base.CanAcceptDrop (uris);
+		}
+		
+		public override bool AcceptDrop (IEnumerable<string> uris)
+		{
+			LaunchWithFiles (uris);
+			return true;
+		}
+
 
 		protected override ClickAnimation OnClicked (uint button, ModifierType mod, double xPercent, double yPercent)
 		{
