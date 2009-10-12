@@ -38,14 +38,22 @@ namespace Bookmarks
 		{
 			items = new List<AbstractDockItem> ();
 		
-			BuildItems ();
+			UpdateItems ();
 			
 			FileSystemWatcher watcher = new FileSystemWatcher (Path.GetDirectoryName (BookmarksFile));
 			watcher.Filter = ".gtk-bookmarks";
 			watcher.IncludeSubdirectories = false;
 			watcher.Renamed += WatcherRenamed;
+			watcher.Changed += WatcherChanged;
 			
 			watcher.EnableRaisingEvents = true;
+		}
+
+		void WatcherChanged (object sender, FileSystemEventArgs e)
+		{
+			Gtk.Application.Invoke (delegate {
+				UpdateItems ();
+			});
 		}
 
 		void WatcherRenamed (object sender, RenamedEventArgs e)
@@ -55,68 +63,59 @@ namespace Bookmarks
 			});
 		}
 		
-		void BuildItems ()
-		{
-			if (File.Exists (BookmarksFile)) {
-				StreamReader reader;
-				try {
-					reader = new StreamReader (BookmarksFile);
-				} catch {
-					return;
-				}
-				
-				string uri;
-				while (!reader.EndOfStream) {
-					uri = reader.ReadLine ().Split (' ').First ();
-					FileDockItem item = FileDockItem.NewFromUri (uri);
-					if (item != null) {
-						item.Owner = this;
-						items.Add (item);
-					}
-				}
-				
-				reader.Dispose ();
-			}
-		}
-		
 		void UpdateItems ()
 		{
 			List<AbstractDockItem> old = items;
 			items = new List<AbstractDockItem> ();
 			
 			if (File.Exists (BookmarksFile)) {
-				StreamReader reader;
-				try {
-					reader = new StreamReader (BookmarksFile);
-				} catch {
-					return;
-				}
-				
-				string uri;
-				while (!reader.EndOfStream) {
-					uri = reader.ReadLine ().Split (' ').First ();
-					
-					if (old.Cast<FileDockItem> ().Any (fdi => fdi.Uri == uri)) {
-						FileDockItem item = old.Cast<FileDockItem> ().Where (fdi => fdi.Uri == uri).First ();
-						old.Remove (item);
-						items.Add (item);
-					} else {
-						FileDockItem item = FileDockItem.NewFromUri (uri);
-						if (item != null) {
-							item.Owner = this;
+				using (StreamReader reader = new StreamReader (BookmarksFile)) {
+					while (!reader.EndOfStream) {
+						string uri = reader.ReadLine ().Split (' ').First ();
+						
+						if (old.Cast<BookmarkDockItem> ().Any (fdi => fdi.Uri == uri)) {
+							BookmarkDockItem item = old.Cast<BookmarkDockItem> ().Where (fdi => fdi.Uri == uri).First ();
+							old.Remove (item);
 							items.Add (item);
+						} else {
+							BookmarkDockItem item = BookmarkDockItem.NewFromUri (uri);
+							if (item != null) {
+								item.Owner = this;
+								items.Add (item);
+							}
 						}
 					}
 				}
-				
-				
-				reader.Dispose ();
 			}
 			
 			foreach (AbstractDockItem item in old)
 				item.Dispose ();
 			
 			OnItemsChanged (items, old);
+		}
+		
+		public void RemoveBookmark (BookmarkDockItem item)
+		{
+			if (File.Exists (BookmarksFile)) {
+				string tempPath = Path.GetTempFileName();
+				
+				using (StreamReader reader = new StreamReader (BookmarksFile)) {
+					using (StreamWriter writer = new StreamWriter(File.OpenWrite(tempPath))) {
+						while (!reader.EndOfStream) {
+							string line = reader.ReadLine();
+							if (item.Uri != line)
+								writer.WriteLine(line);
+						}
+					}
+				}
+				
+				if (File.Exists (tempPath)) {
+					File.Delete (BookmarksFile);
+					File.Move (tempPath, BookmarksFile);
+				}
+			}
+			
+			UpdateItems ();
 		}
 
 		#region IDockItemProvider implementation
@@ -135,13 +134,13 @@ namespace Bookmarks
 		
 		public override IEnumerable<AbstractDockItem> Items {
 			get {
-				return items.Cast<AbstractDockItem> ();
+				return items;
 			}
 		}
 		
 		public override void Dispose ()
 		{
-			foreach (FileDockItem item in items)
+			foreach (AbstractDockItem item in items)
 				item.Dispose ();
 		}
 		

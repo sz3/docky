@@ -79,7 +79,7 @@ namespace Docky.Items
 			get { return uri; }
 		}
 		
-		FileDockItem (string uri)
+		protected FileDockItem (string uri)
 		{
 			this.uri = uri;
 			string path = Gnome.Vfs.Global.GetLocalPathFromUri (uri);
