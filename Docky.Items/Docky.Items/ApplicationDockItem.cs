@@ -193,10 +193,9 @@ namespace Docky.Items
 				return false;
 			
 			foreach (string uri in uris) {
-				string mime = Gnome.Vfs.Global.GetMimeType (uri);
-				Console.WriteLine (uri);
-				Console.WriteLine ();
-				if (mimes.Contains (mime))
+				GLib.FileInfo info = GLib.FileFactory.NewForUri (uri).QueryInfo ("*", GLib.FileQueryInfoFlags.None, null);
+				string mime = info.ContentType;
+				if (mimes.Any (m => GLib.Content.TypeIsA (mime, m) || GLib.Content.TypeEquals (mime, m)))
 					return true;
 			}
 			

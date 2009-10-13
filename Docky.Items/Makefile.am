@@ -44,6 +44,7 @@ REFERENCES =  \
 	System.Core \
 	$(GTK_SHARP_20_LIBS) \
 	$(GLIB_SHARP_20_LIBS) \
+	$(GIO_SHARP_LIBS) \
 	Mono.Cairo \
 	$(LIBRSVG_SHARP_LIBS) \
 	$(WNCK_SHARP_10_LIBS) \
