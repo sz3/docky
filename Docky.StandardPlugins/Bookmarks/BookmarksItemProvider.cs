@@ -96,6 +96,28 @@ namespace Bookmarks
 		
 		public void RemoveBookmark (BookmarkDockItem item)
 		{
+		}
+
+		#region IDockItemProvider implementation
+		
+		public override string Name {
+			get {
+				return "Bookmark Items";
+			}
+		}
+		
+		public override bool ItemCanBeRemoved (AbstractDockItem item)
+		{
+			return items.Contains (item);
+		}
+		
+		public override bool RemoveItem (AbstractDockItem item)
+		{
+			if (!ItemCanBeRemoved (item))
+				return false;
+			
+			BookmarkDockItem bookmark = item as BookmarkDockItem;
+			
 			if (File.Exists (BookmarksFile)) {
 				string tempPath = Path.GetTempFileName();
 				
@@ -103,7 +125,7 @@ namespace Bookmarks
 					using (StreamWriter writer = new StreamWriter(File.OpenWrite(tempPath))) {
 						while (!reader.EndOfStream) {
 							string line = reader.ReadLine();
-							if (item.Uri != line)
+							if (bookmark.Uri != line)
 								writer.WriteLine(line);
 						}
 					}
@@ -116,14 +138,7 @@ namespace Bookmarks
 			}
 			
 			UpdateItems ();
-		}
-
-		#region IDockItemProvider implementation
-		
-		public override string Name {
-			get {
-				return "Bookmark Items";
-			}
+			return true;
 		}
 		
 		public override bool Separated {
