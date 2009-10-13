@@ -109,6 +109,14 @@ namespace Docky.Interface
 			}
 		}
 		
+		static DateTime UpdateTimeStamp (DateTime lastStamp, TimeSpan animationLength)
+		{
+			TimeSpan delta = DateTime.UtcNow - lastStamp;
+			if (delta < animationLength)
+				return DateTime.UtcNow.Subtract (animationLength - delta);
+			return DateTime.UtcNow;
+		}
+		
 		/*******************************************
 		 * Note to reader:
 		 * All values labeled X or width reference x or width as thought of from a horizontally positioned dock.
@@ -441,7 +449,7 @@ namespace Docky.Interface
 
 		void HandleDockHoveredChanged (object sender, EventArgs e)
 		{
-			dock_hovered_change_time = DateTime.UtcNow;
+			dock_hovered_change_time = UpdateTimeStamp (dock_hovered_change_time, BaseAnimationTime);
 			
 			if (DockHovered)
 				CursorTracker.RequestHighResolution (this);
@@ -454,12 +462,7 @@ namespace Docky.Interface
 
 		void HandleHiddenChanged (object sender, EventArgs e)
 		{
-			if ((DateTime.UtcNow - hidden_change_time) > BaseAnimationTime) {
-				hidden_change_time = DateTime.UtcNow;
-			} else {
-				hidden_change_time = DateTime.UtcNow - (BaseAnimationTime - (DateTime.UtcNow - hidden_change_time));
-			}
-			
+			hidden_change_time = UpdateTimeStamp (hidden_change_time, BaseAnimationTime);
 			AnimatedDraw ();
 		}
 
