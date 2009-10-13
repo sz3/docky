@@ -27,3 +27,4 @@ po/stamp-it
 po/POTFILES
 data/docky.desktop
 po/Makefile.in.in
+po/.intltool-merge-cache

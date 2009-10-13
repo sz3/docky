@@ -42,7 +42,7 @@ namespace Bookmarks
 		
 		void Remove ()
 		{
-			(Owner as BookmarksItemProvider).RemoveBookmark (this);
+			Owner.RemoveItem (this);
 		}
 
 		public override IEnumerable<MenuItem> GetMenuItems ()
