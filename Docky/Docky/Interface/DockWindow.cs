@@ -938,7 +938,7 @@ namespace Docky.Interface
 		{
 			HoveredAcceptsDrop = false;
 			if (HoveredItem != null && ExternalDragActive) {
-				if (HoveredItem.CanAcceptDrop (drag_data)) {
+				if (drag_data != null && HoveredItem.CanAcceptDrop (drag_data)) {
 					HoveredAcceptsDrop = true;
 				}
 			}
