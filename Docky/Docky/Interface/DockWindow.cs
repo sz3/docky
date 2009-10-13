@@ -235,15 +235,11 @@ namespace Docky.Interface
 					return;
 				AbstractDockItem last = hoveredItem;
 				hoveredItem = value;
-				hovered_accepts_drop = false;
-				if (hoveredItem != null && drag_known) {
-					if (hoveredItem.CanAcceptDrop (drag_data)) {
-						hovered_accepts_drop = true;
-					}
-				}
+				SetHoveredAcceptsDrop ();
 				OnHoveredItemChanged (last);
 			}
 		}
+
 		
 		IEnumerable<AbstractDockItemProvider> ItemProviders {
 			get { return Preferences.ItemProviders; }
@@ -403,6 +399,16 @@ namespace Docky.Interface
 			EnableDragTo ();
 			EnableDragFrom ();
 			RegisterDragEvents ();
+		}
+
+		void SetHoveredAcceptsDrop ()
+		{
+			hovered_accepts_drop = false;
+			if (HoveredItem != null && drag_known) {
+				if (HoveredItem.CanAcceptDrop (drag_data)) {
+					hovered_accepts_drop = true;
+				}
+			}
 		}
 
 		#region Event Handling
@@ -744,8 +750,9 @@ namespace Docky.Interface
 				
 				drag_data_requested = false;
 				drag_is_desktop_file = drag_data.Any (d => d.EndsWith (".desktop"));
-				
+				SetHoveredAcceptsDrop ();
 			}
+			
 			Gdk.Drag.Status (args.Context, DragAction.Copy, Gtk.Global.CurrentEventTime);
 			args.RetVal = true;
 		}
@@ -1485,7 +1492,7 @@ namespace Docky.Interface
 			}
 			
 			if (hovered_accepts_drop && HoveredItem == item && drag_known) {
-				lighten += .3;
+				lighten += .4;
 			}
 			
 			if ((item.State & ItemState.Urgent) == ItemState.Urgent && 
