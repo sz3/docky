@@ -147,13 +147,14 @@ namespace Docky.Interface
 		double? zoom_in_buffer;
 		bool rendering;
 		bool update_screen_regions;
-		bool hovered_accepts_drop;
 		
 		uint animation_timer;
 		
 		public int Width { get; private set; }
 		
 		public int Height { get; private set; }
+		
+		bool HoveredAcceptsDrop { get; set; }
 		
 		AutohideManager AutohideManager { get; set; }
 		
@@ -359,8 +360,9 @@ namespace Docky.Interface
 				return (int) (330 * (IconSize / 64.0)); 
 			}
 		}
+
 		#endregion
-		
+	
 		public DockWindow () : base(Gtk.WindowType.Toplevel)
 		{
 			DrawValues = new Dictionary<AbstractDockItem, DrawValue> ();
@@ -403,10 +405,10 @@ namespace Docky.Interface
 
 		void SetHoveredAcceptsDrop ()
 		{
-			hovered_accepts_drop = false;
+			HoveredAcceptsDrop = false;
 			if (HoveredItem != null && drag_known) {
 				if (HoveredItem.CanAcceptDrop (drag_data)) {
-					hovered_accepts_drop = true;
+					HoveredAcceptsDrop = true;
 				}
 			}
 		}
@@ -1491,7 +1493,7 @@ namespace Docky.Interface
 				}
 			}
 			
-			if (hovered_accepts_drop && HoveredItem == item && drag_known) {
+			if (HoveredAcceptsDrop && HoveredItem == item && drag_known) {
 				lighten += .4;
 			}
 			
