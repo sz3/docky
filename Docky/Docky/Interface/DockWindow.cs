@@ -162,6 +162,10 @@ namespace Docky.Interface
 		
 		public int Height { get; private set; }
 		
+		bool ExternalDragActive { get; set; }
+		
+		bool InternalDragActive { get; set; }
+		
 		bool HoveredAcceptsDrop { get; set; }
 		
 		AutohideManager AutohideManager { get; set; }
@@ -604,25 +608,28 @@ namespace Docky.Interface
 		
 		protected override bool OnMotionNotifyEvent (EventMotion evnt)
 		{
+			ExternalDragActive = false;
 			CursorTracker.SendManualUpdate (evnt);
 			return base.OnMotionNotifyEvent (evnt);
 		}
 		
 		protected override bool OnEnterNotifyEvent (EventCrossing evnt)
 		{
+			ExternalDragActive = false;
 			CursorTracker.SendManualUpdate (evnt);
 			return base.OnEnterNotifyEvent (evnt);
 		}
 
 		protected override bool OnLeaveNotifyEvent (EventCrossing evnt)
 		{
+			ExternalDragActive = false;
 			CursorTracker.SendManualUpdate (evnt);
 			return base.OnLeaveNotifyEvent (evnt);
 		}
 		
 		protected override bool OnButtonPressEvent (EventButton evnt)
 		{
-			if (drag_began)
+			if (InternalDragActive)
 				return base.OnButtonPressEvent (evnt);
 			
 			if (HoveredItem != null && evnt.Button == 3) {
@@ -650,7 +657,7 @@ namespace Docky.Interface
 		{
 			// This event gets fired before the drag end event, in this case
 			// we ignore it.
-			if (drag_began)
+			if (InternalDragActive)
 				return base.OnButtonPressEvent (evnt);
 			
 			double x, y;
@@ -681,7 +688,6 @@ namespace Docky.Interface
 		bool drag_known;
 		bool drag_data_requested;
 		bool drag_is_desktop_file;
-		bool drag_began;
 		int marker = 0;
 		
 		AbstractDockItem drag_item;
@@ -705,7 +711,7 @@ namespace Docky.Interface
 		/// </summary>
 		void HandleDragBegin (object o, DragBeginArgs args)
 		{
-			drag_began = true;
+			InternalDragActive = true;
 			
 			if (proxy_window != null) {
 				EnableDragTo ();
@@ -796,7 +802,7 @@ namespace Docky.Interface
 				}
 			}
 			
-			drag_began = false;
+			InternalDragActive = false;
 			drag_item = null;
 			
 			AnimatedDraw ();
@@ -826,13 +832,14 @@ namespace Docky.Interface
 		/// </summary>
 		void HandleDragMotion (object o, DragMotionArgs args)
 		{
+			ExternalDragActive = true;
 			if (marker != args.Context.GetHashCode ()) {
 				marker = args.Context.GetHashCode ();
 				drag_known = false;
 			}
 			
-			// we own the drag if drag_began is true, lets not be silly
-			if (!drag_known && !drag_began) {
+			// we own the drag if InternalDragActive is true, lets not be silly
+			if (!drag_known && !InternalDragActive) {
 				drag_known = true;
 				Gdk.Atom atom = Gtk.Drag.DestFindTarget (this, args.Context, null);
 				Gtk.Drag.GetData (this, args.Context, atom, args.Time);
@@ -865,7 +872,7 @@ namespace Docky.Interface
 		
 		void HandleHoveredItemChanged (object sender, HoveredItemChangedArgs e)
 		{
-			if (drag_began && DragItemsCanInteract (drag_item, HoveredItem)) {
+			if (InternalDragActive && DragItemsCanInteract (drag_item, HoveredItem)) {
 				
 				int tmp = drag_item.Position;
 				drag_item.Position = HoveredItem.Position;
@@ -894,7 +901,7 @@ namespace Docky.Interface
 		void EnsureDragAndDropProxy ()
 		{
 			// having a proxy window here is VERY bad ju-ju
-			if (drag_began) {
+			if (InternalDragActive) {
 				return;
 			}
 			
@@ -930,7 +937,7 @@ namespace Docky.Interface
 		void SetHoveredAcceptsDrop ()
 		{
 			HoveredAcceptsDrop = false;
-			if (HoveredItem != null && drag_known) {
+			if (HoveredItem != null && ExternalDragActive) {
 				if (HoveredItem.CanAcceptDrop (drag_data)) {
 					HoveredAcceptsDrop = true;
 				}
@@ -1496,7 +1503,7 @@ namespace Docky.Interface
 				}
 			}
 			
-			if (HoveredAcceptsDrop && HoveredItem == item && drag_known) {
+			if (HoveredAcceptsDrop && HoveredItem == item && ExternalDragActive) {
 				lighten += .4;
 			}
 			
@@ -1573,7 +1580,7 @@ namespace Docky.Interface
 				surface.Context.Operator = Operator.Over;
 			}
 			
-			if (HoveredItem == item && !drag_began && !Menu.Visible) {
+			if (HoveredItem == item && !InternalDragActive && !Menu.Visible) {
 				DrawValue loc = val.MoveIn (Position, IconSize * (ZoomPercent + .1) - IconSize / 2);
 				
 				DockySurface text = item.HoverTextSurface (surface, Style);

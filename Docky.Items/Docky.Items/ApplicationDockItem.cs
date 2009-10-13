@@ -36,6 +36,7 @@ namespace Docky.Items
 
 	public class ApplicationDockItem : WnckDockItem
 	{
+
 		public static ApplicationDockItem NewFromUri (string uri)
 		{
 			DesktopItem desktopItem;
@@ -101,7 +102,7 @@ namespace Docky.Items
 			Wnck.Screen.Default.WindowOpened += WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
 		}
-
+		
 		public override string UniqueID ()
 		{
 			return desktop_item.Location;

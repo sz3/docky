@@ -35,7 +35,7 @@ namespace Docky.Items
 		public static FileApplicationProvider WindowManager;
 		static List<FileApplicationProvider> Providers = new List<FileApplicationProvider> ();
 		
-		static IEnumerable<Wnck.Window> ManagedWindows {
+		internal static IEnumerable<Wnck.Window> ManagedWindows {
 			get {
 				return Providers
 					.SelectMany (p => p.PermanentItems)

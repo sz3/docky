@@ -87,10 +87,12 @@ namespace Docky.Items
 		
 		void UpdateWindows (Wnck.Window baseWindow)
 		{
-			if (baseWindow != null)
-				Windows = WindowMatcher.Default.SimilarWindows (baseWindow);
-			else
+			if (baseWindow != null) {
+				Windows = WindowMatcher.Default.SimilarWindows (baseWindow)
+					.Where (w => !FileApplicationProvider.ManagedWindows.Contains (w));
+			} else {
 				Windows = Enumerable.Empty<Wnck.Window> ();
+			}
 		}
 	}
 }
