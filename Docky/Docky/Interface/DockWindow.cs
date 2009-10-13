@@ -403,16 +403,6 @@ namespace Docky.Interface
 			RegisterDragEvents ();
 		}
 
-		void SetHoveredAcceptsDrop ()
-		{
-			HoveredAcceptsDrop = false;
-			if (HoveredItem != null && drag_known) {
-				if (HoveredItem.CanAcceptDrop (drag_data)) {
-					HoveredAcceptsDrop = true;
-				}
-			}
-		}
-
 		#region Event Handling
 		void BuildAnimationEngine ()
 		{
@@ -934,6 +924,16 @@ namespace Docky.Interface
 		#endregion
 		
 		#region Misc.
+		void SetHoveredAcceptsDrop ()
+		{
+			HoveredAcceptsDrop = false;
+			if (HoveredItem != null && drag_known) {
+				if (HoveredItem.CanAcceptDrop (drag_data)) {
+					HoveredAcceptsDrop = true;
+				}
+			}
+		}
+		
 		void UpdateCollectionBuffer ()
 		{
 			if (rendering) {
