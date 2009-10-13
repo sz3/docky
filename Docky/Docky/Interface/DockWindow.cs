@@ -738,7 +738,6 @@ namespace Docky.Interface
 				SelectionData data = args.SelectionData;
 				
 				string uris = Encoding.UTF8.GetString (data.Data);
-				uris = System.Uri.UnescapeDataString (uris);
 				
 				drag_data = Regex.Split (uris, "\r\n")
 					.Where (uri => uri.StartsWith ("file://"));
