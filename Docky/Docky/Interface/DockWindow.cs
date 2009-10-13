@@ -770,6 +770,7 @@ namespace Docky.Interface
 					Preferences.DefaultProvider.InsertItem (s);
 			}
 			
+			drag_known = false;
 			drag_data = null;
 			drag_data_requested = false;
 			drag_is_desktop_file = false;
@@ -1483,7 +1484,7 @@ namespace Docky.Interface
 				}
 			}
 			
-			if (hovered_accepts_drop && HoveredItem == item) {
+			if (hovered_accepts_drop && HoveredItem == item && drag_known) {
 				lighten += .3;
 			}
 			
@@ -1524,7 +1525,7 @@ namespace Docky.Interface
 			}
 			
 			if (darken > 0 || lighten > 0) {
-				Gdk.Rectangle area = DrawRegionForItem (item);
+				Gdk.Rectangle area = DrawRegionForItemValue (item, center);
 				surface.Context.Rectangle (area.X, area.Y, area.Height, area.Width);
 				
 				if (darken > 0) {
