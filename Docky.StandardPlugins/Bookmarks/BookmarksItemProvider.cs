@@ -93,10 +93,6 @@ namespace Bookmarks
 			
 			OnItemsChanged (items, old);
 		}
-		
-		public void RemoveBookmark (BookmarkDockItem item)
-		{
-		}
 
 		#region IDockItemProvider implementation
 		
