@@ -1446,6 +1446,9 @@ namespace Docky.Interface
 			
 			icon_buffer.Internal.Show (surface.Context, 0, 0);
 			
+			if (DockOpacity < 1)
+				SetDockOpacity (surface);
+			
 			SetInputMask (cursorArea);
 
 			
@@ -1456,6 +1459,17 @@ namespace Docky.Interface
 			cursorArea.X += window_position.X;
 			cursorArea.Y += window_position.Y;
 			AutohideManager.SetCursorArea (cursorArea);
+		}
+		
+		void SetDockOpacity (DockySurface surface)
+		{
+			surface.Context.Save ();
+			
+			surface.Context.Color = new Cairo.Color (0, 0, 0, 0);
+			surface.Context.Operator = Operator.Source;
+			surface.Context.PaintWithAlpha (1 - DockOpacity);
+			
+			surface.Context.Restore ();
 		}
 		
 		void DrawItem (DockySurface surface, Gdk.Rectangle dockArea, AbstractDockItem item)
@@ -1806,7 +1820,7 @@ namespace Docky.Interface
 					break;
 				}
 				
-				cr.PaintWithAlpha (DockOpacity);
+				cr.Paint ();
 				rendering = false;
 			}
 			
