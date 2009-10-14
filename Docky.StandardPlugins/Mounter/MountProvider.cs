@@ -40,7 +40,6 @@ namespace Mounter
 		
 		public override IEnumerable<AbstractDockItem> Items {
 			get {
-				//yield return Computer;
 				foreach (MountItem item in Mounts)
 					yield return item;
 			}
@@ -56,12 +55,9 @@ namespace Mounter
 		
 		List<MountItem> Mounts;
 		public VolumeMonitor Monitor { get; private set; }
-		ComputerItem Computer;
 		
 		public MountProvider ()
 		{
-			//Computer = new ComputerItem ();
-			
 			GLib.GType.Init ();
 
 			Mounts = new List<MountItem> ();
@@ -69,7 +65,9 @@ namespace Mounter
 			Monitor = VolumeMonitor.Default;
 
 			foreach (Mount m in Monitor.Mounts) {
-				Mounts.Add ( new MountItem (m));
+				if (IsTrash (m))
+					continue;
+				Mounts.Add (new MountItem (m));
 				Log<MountProvider>.Debug ("Adding {0}.", m.Name);
 			}
 			
@@ -80,10 +78,11 @@ namespace Mounter
 
 		void HandleMountAdded (object o, MountAddedArgs args)
 		{
-			Console.WriteLine ("Mount added..");
-			//FIXME: due to a bug in GIO#, this will crash when trying to get args.Mount
-			//Mount m = args.Mount;
-			Mount m = NewOrRemovedMount;
+			// FIXME: due to a bug in GIO#, this will crash when trying to get args.Mount
+			Mount m = MountAdapter.GetObject (args.Args[0] as GLib.Object);
+			
+			if (IsTrash (m))
+				return;
 			
 			MountItem newMnt = new MountItem (m);
 			Mounts.Add (newMnt);
@@ -93,9 +92,8 @@ namespace Mounter
 		
 		void HandleMountRemoved (object o, MountRemovedArgs args)
 		{
-			Console.WriteLine ("Mount removed..");
-			//Mount m = args.Mount;
-			Mount m = NewOrRemovedMount;
+			// FIXME: due to a bug in GIO#, this will crash when trying to get args.Mount
+			Mount m = MountAdapter.GetObject (args.Args[0] as GLib.Object);
 			
 			if (Mounts.Any (d => d.Mnt.Handle == m.Handle)) {
 				MountItem mntToRemove = Mounts.First (d => d.Mnt.Handle == m.Handle);
@@ -106,45 +104,28 @@ namespace Mounter
 			}
 		}
 		
-		// A hack of a workaround because GIO# currently fails on args.Mount for Mount*Args
-		// trust me, I know it looks asinine to compare the UUIDs, but because GLib.Mount
-		// *DOESN'T* inherit from System.Object (and therefore, no .Equals () or .GetHashCode ()),
-		// I can't use List<Mount> .Except (List<Mount>)
-		Mount NewOrRemovedMount {
-			get {
-				List<IntPtr> oldMounts = new List<IntPtr> ();
-				List<IntPtr> currentMounts = new List<IntPtr> ();
-				
-				Mounts.ForEach ( m => oldMounts.Add (m.Mnt.Handle));
-				foreach (Mount m in Monitor.Mounts)
-					currentMounts.Add (m.Handle);
-				
-				Console.WriteLine ("current mounts: {0}", currentMounts.Count ());
-				foreach (IntPtr s in currentMounts)
-					Console.WriteLine (s);
-				Console.WriteLine ("old mounts: {0}", oldMounts.Count ());
-				foreach (IntPtr s in oldMounts)
-					Console.WriteLine (s);
-				
-				IEnumerable<IntPtr> difference = new List<IntPtr> ();
-
-				Mount ret;
-				
-				if (currentMounts.Count () > oldMounts.Count ()) {
-					difference = currentMounts.Except (oldMounts);
-					ret = Monitor.Mounts.First (m => m.Handle == difference.First ());
-				}
-				else {
-					difference = oldMounts.Except (currentMounts);
-					ret = Mounts.First (m => m.Mnt.Handle == difference.First ()).Mnt;
-				}
-				
-				Console.WriteLine ("difference: {0}", difference.Count ());
-				foreach (IntPtr s in difference)
-					Console.WriteLine (s);
-				
-				return ret;
-			}
+		// determine if the mount should be handled or not
+		bool IsTrash (Mount m)
+		{
+			return m.Volume == null;
+		}
+		
+		public override bool ItemCanBeRemoved (AbstractDockItem item)
+		{
+			if (item is MountItem)
+				return true;
+			return false;
+		}
+		
+		public override bool RemoveItem (AbstractDockItem item)
+		{
+			Mounts.Remove (item as MountItem);
+			
+			OnItemsChanged (null, item.AsSingle ());
+			
+			(item as MountItem).UnMount ();
+			
+			return false;
 		}
 	}
 }

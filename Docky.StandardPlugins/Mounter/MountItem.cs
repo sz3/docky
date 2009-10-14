@@ -35,7 +35,7 @@ namespace Mounter
 		
 		public override string UniqueID ()
 		{
-			return Mnt.Uuid;
+			return Mnt.Handle.ToString ();
 		}
 		
 		#endregion
@@ -43,8 +43,8 @@ namespace Mounter
 		public MountItem (Mount mount)
 		{
 			Mnt = mount;
-
-			Icon = new ThemedIcon (Mnt.Icon.Handle).Names [0];
+			
+			SetIconFromGIcon (mount.Icon);
 			
 			HoverText = Mnt.Name;
 		}
@@ -66,7 +66,7 @@ namespace Mounter
 			DockServices.System.Open (Mnt.Root.ToString ());
 		}
 		
-		void UnMount ()
+		public void UnMount ()
 		{
 			Log<MountItem>.Debug ("Trying to unmount {0}.", Mnt.Name);
 			if (Mnt.CanEject ())

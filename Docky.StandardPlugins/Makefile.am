@@ -32,7 +32,6 @@ FILES = \
 	GMail/gtk-gui/generated.cs \
 	Trash/TrashItemProvider.cs \
 	Trash/TrashDockItem.cs \
-	Mounter/ComputerItem.cs \
 	Mounter/MountItem.cs \
 	Mounter/MountProvider.cs
 

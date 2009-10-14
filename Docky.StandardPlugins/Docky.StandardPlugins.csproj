@@ -85,7 +85,6 @@
     <Compile Include="BatteryMonitor\BatteryMonitorItemProvider.cs" />
     <Compile Include="Bookmarks\BookmarksItemProvider.cs" />
     <Compile Include="BatteryMonitor\BatteryMonitorProcItem.cs" />
-    <Compile Include="Mounter\ComputerItem.cs" />
     <Compile Include="Mounter\MountItem.cs" />
     <Compile Include="Mounter\MountProvider.cs" />
   </ItemGroup>
