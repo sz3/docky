@@ -43,7 +43,7 @@ namespace Docky.Services
 			object result;
 			try {
 				result = client.Get (AbsolutePathForKey (key, GConfPrefix));
-			} catch (GConf.NoSuchKeyException e) {
+			} catch (GConf.NoSuchKeyException) {
 				Log.Debug ("Key {0} does not exist, creating.", key);
 				Set<T> (key, def);
 				return def;

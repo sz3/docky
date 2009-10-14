@@ -47,7 +47,10 @@
     <Reference Include="NDesk.DBus, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f6716e4f9b2ed099">
       <Package>ndesk-dbus-1.0</Package>
     </Reference>
-    <Reference Include="gnome-vfs-sharp, Version=2.24.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gio-sharp, Version=2.14.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\usr\local\lib\docky\gio-sharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Trash\" />
@@ -57,7 +60,6 @@
     <Folder Include="GMail\" />
     <Folder Include="Resources\" />
     <Folder Include="Bookmarks\" />
-    <Folder Include="RemovableDevices\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Trash\TrashDockItem.cs" />
@@ -84,9 +86,8 @@
     <Compile Include="Bookmarks\BookmarksItemProvider.cs" />
     <Compile Include="Bookmarks\BookmarkDockItem.cs" />
     <Compile Include="BatteryMonitor\BatteryMonitorProcItem.cs" />
-    <Compile Include="RemovableDevices\VolumeProvider.cs" />
-    <Compile Include="RemovableDevices\VolumeItem.cs" />
-    <Compile Include="RemovableDevices\ComputerItem.cs" />
+    <Compile Include="Mounter\MountItem.cs" />
+    <Compile Include="Mounter\MountProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Docky.StandardPlugins.addin.xml">

@@ -24,6 +24,7 @@ using System.Linq;
 using System.Text;
 
 using Cairo;
+using GLib;
 using Gdk;
 using Gtk;
 
@@ -181,6 +182,13 @@ namespace Docky.Services
 				}
 			}
 			return pixbuf;
+		}
+		
+		public static string IconFromCurrentTheme (GLib.Icon icon)
+		{
+			ThemedIcon themeIcon = new ThemedIcon (icon.Handle);
+			
+			return themeIcon.Names.First (n => IconTheme.Default.HasIcon (n));
 		}
 	}
 }

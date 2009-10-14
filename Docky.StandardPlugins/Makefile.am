@@ -33,9 +33,8 @@ FILES = \
 	GMail/gtk-gui/generated.cs \
 	Trash/TrashItemProvider.cs \
 	Trash/TrashDockItem.cs \
-	RemovableDevices/ComputerItem.cs \
-	RemovableDevices/VolumeItem.cs \
-	RemovableDevices/VolumeProvider.cs
+	Mounter/MountItem.cs \
+	Mounter/MountProvider.cs
 
 RESOURCES = \
 	Resources/Docky.StandardPlugins.addin.xml \
@@ -70,6 +69,7 @@ REFERENCES =  \
 	System.Web \
 	Mono.Cairo \
 	Mono.Posix \
+	$(GIO_SHARP_LIBS) \
 	$(GNOME_VFS_SHARP_20_LIBS) \
 	$(NDESK_DBUS_10_LIBS) \
 	$(GTK_SHARP_20_LIBS) \

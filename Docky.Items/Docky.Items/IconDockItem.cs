@@ -45,6 +45,11 @@ namespace Docky.Items
 			}
 		}
 		
+		protected void SetIconFromGIcon (GLib.Icon gIcon)
+		{
+			Icon = Docky.Services.DrawingService.IconFromCurrentTheme (gIcon);
+		}
+		
 		public IconDockItem ()
 		{
 			icon = "default";

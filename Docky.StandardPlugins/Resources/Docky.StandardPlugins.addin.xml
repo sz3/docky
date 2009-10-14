@@ -15,7 +15,7 @@
 		<ItemProvider type="GMail.GMailItemProvider" />
 		<ItemProvider type="BatteryMonitor.BatteryMonitorItemProvider" />
 		<ItemProvider type="Bookmarks.BookmarksItemProvider" />
-		<ItemProvider type="RemovableDevices.VolumeProvider" />
+		<ItemProvider type="Mounter.MountProvider" />
 	</Extension>	
 
 </Addin>
