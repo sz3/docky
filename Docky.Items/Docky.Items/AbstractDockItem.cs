@@ -172,27 +172,36 @@ namespace Docky.Items
 			double gTotal = 0;
 			double bTotal = 0;
 			
-			for (int i = 0; i < data.Length - 3; i += 4) {
-				b = data [i + 0];
-				g = data [i + 1];
-				r = data [i + 2];
-				
-				byte max = Math.Max (r, Math.Max (g, b));
-				byte min = Math.Min (r, Math.Min (g, b));
-				double delta = max - min;
-				
-				double sat;
-				if (delta == 0) {
-					sat = 0;
-				} else {
-					sat = delta / max;
+			unsafe {
+				fixed (byte* dataSrc = data) {
+					byte* dataPtr = dataSrc;
+					
+					for (int i = 0; i < data.Length - 3; i += 4) {
+						b = dataPtr [0];
+						g = dataPtr [1];
+						r = dataPtr [2];
+						
+						byte max = Math.Max (r, Math.Max (g, b));
+						byte min = Math.Min (r, Math.Min (g, b));
+						double delta = max - min;
+						
+						double sat;
+						if (delta == 0) {
+							sat = 0;
+						} else {
+							sat = delta / max;
+						}
+						double score = .2 + .8 * sat;
+						
+						rTotal += r * score;
+						gTotal += g * score;
+						bTotal += b * score;
+						
+						dataPtr += 4;
+					}
 				}
-				double score = .2 + .8 * sat;
-				
-				rTotal += r * score;
-				gTotal += g * score;
-				bTotal += b * score;
 			}
+			
 			double pixelCount = main_buffer.Width * main_buffer.Height * byte.MaxValue;
 			
 			sr.Destroy ();
