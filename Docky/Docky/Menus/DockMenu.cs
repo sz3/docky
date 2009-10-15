@@ -58,15 +58,8 @@ namespace Docky.Menus
 		
 		protected static bool IsLight { get; private set; }
 		
-		static DockySurface [] menu_slices;
-		
-		static DockySurface[] GetSlices (DockySurface model)
+		static void SetLight ()
 		{
-			if (menu_slices != null)
-				return menu_slices;
-			
-			DockySurface main = new DockySurface (SvgWidth, SvgHeight, model);
-			
 			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (Docky.Controller.MenuSvg, -1)) {
 				int dark = 0;
 				int light = 0;
@@ -89,7 +82,19 @@ namespace Docky.Menus
 					}
 				}
 				IsLight = light > dark;
-				
+			}
+		}
+		
+		static DockySurface [] menu_slices;
+		
+		static DockySurface[] GetSlices (DockySurface model)
+		{
+			if (menu_slices != null)
+				return menu_slices;
+			
+			DockySurface main = new DockySurface (SvgWidth, SvgHeight, model);
+			
+			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (Docky.Controller.MenuSvg, -1)) {
 				Gdk.CairoHelper.SetSourcePixbuf (main.Context, pixbuf, 0, 0);
 				main.Context.Paint ();
 			}
@@ -206,6 +211,8 @@ namespace Docky.Menus
 		
 		public DockMenu (Gtk.Window parent) : base(Gtk.WindowType.Popup)
 		{
+			SetLight ();
+			
 			AcceptFocus = false;
 			Decorated = false;
 			KeepAbove = true;
@@ -243,6 +250,8 @@ namespace Docky.Menus
 				background_buffer.Dispose ();
 				background_buffer = null;
 			}
+			
+			SetLight ();
 		}
 		
 		void SetPadding ()
