@@ -41,7 +41,6 @@ FILES = \
 RESOURCES = \
 	gtk-gui/gui.stetic \
 	Resources/classic.svg \
-	Resources/grayscale.svg \
     Resources/Docky.addin.xml \
     Resources/menu.svg
 

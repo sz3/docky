@@ -1,4 +1,4 @@
-SUBDIRS = icons
+SUBDIRS = icons themes
 
 EXTRA_DIST = docky.desktop.in 
 CLEANFILES = docky.desktop

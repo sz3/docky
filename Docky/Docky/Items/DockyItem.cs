@@ -47,9 +47,10 @@ namespace Docky.Items
 		
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
-			if (button == 1)
+			if (button == 1) {
 				Docky.Config.Show ();
-			
+				return ClickAnimation.Bounce;
+			}
 			return ClickAnimation.None;
 		}
 		
