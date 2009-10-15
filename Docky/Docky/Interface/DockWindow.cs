@@ -795,8 +795,11 @@ namespace Docky.Interface
 			if (!drag_is_desktop_file && item != null && item.CanAcceptDrop (drag_data)) {
 				item.AcceptDrop (drag_data);
 			} else {
-				foreach (string s in drag_data)
+				foreach (string s in drag_data) {
 					Preferences.DefaultProvider.InsertItem (s);
+					if (FileApplicationProvider.WindowManager != null)
+						FileApplicationProvider.WindowManager.UpdateTransientItems ();
+				}
 			}
 			
 			drag_known = false;
@@ -815,6 +818,8 @@ namespace Docky.Interface
 					AbstractDockItemProvider provider = ProviderForItem (drag_item);
 					if (provider != null && provider.ItemCanBeRemoved (drag_item)) {
 						provider.RemoveItem (drag_item);
+						if (FileApplicationProvider.WindowManager != null)
+							FileApplicationProvider.WindowManager.UpdateTransientItems ();
 					}
 				} else {
 					AbstractDockItem item = HoveredItem;

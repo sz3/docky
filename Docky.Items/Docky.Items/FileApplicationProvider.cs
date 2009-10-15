@@ -99,7 +99,7 @@ namespace Docky.Items
 			UpdateTransientItems ();
 		}
 		
-		void UpdateTransientItems ()
+		public void UpdateTransientItems ()
 		{
 			if (!IsWindowManager) {
 				if (transient_items.Any ()) {
