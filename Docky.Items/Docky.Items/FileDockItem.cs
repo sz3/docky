@@ -126,12 +126,12 @@ namespace Docky.Items
 			yield return new MenuItem ("Open Containing Folder", "folder", (o, a) => OpenContainingFolder ());
 		}
 		
-		void Open ()
+		protected void Open ()
 		{
 			DockServices.System.Open (uri);
 		}
 		
-		void OpenContainingFolder ()
+		protected void OpenContainingFolder ()
 		{
 			DockServices.System.Open (OwnedFile.Parent.Uri.ToString ());
 		}
