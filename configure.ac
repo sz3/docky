@@ -170,6 +170,8 @@ data/icons/hicolor/64x64/apps/Makefile
 data/icons/hicolor/Makefile
 data/themes/Makefile
 data/themes/Grayscale/Makefile
+data/themes/Air/Makefile
+data/themes/HUD/Makefile
 m4/Makefile
 po/Makefile.in
 ])

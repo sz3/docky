@@ -1,1 +1,1 @@
-SUBDIRS = Grayscale
+SUBDIRS = Grayscale Air HUD
