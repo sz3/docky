@@ -101,5 +101,9 @@ namespace Docky
 			placement.ActiveDock = dock;
 		}
 
+		protected virtual void OnThemeComboChanged (object sender, System.EventArgs e)
+		{
+			Docky.Controller.DockTheme = theme_combo.ActiveText;
+		}
 	}
 }

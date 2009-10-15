@@ -73,10 +73,9 @@ namespace Docky
 				return prefs.Get ("Theme", DefaultTheme);
 			}
 			set {
-				if (!ThemeContainerFolders.Contains (value) || DockTheme == value)
+				if (DockTheme == value)
 					return;
 				prefs.Set ("Theme", value);
-				
 				if (ThemeChanged != null)
 					ThemeChanged (this, EventArgs.Empty);
 			}

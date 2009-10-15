@@ -312,6 +312,7 @@ namespace Docky {
             this.DefaultWidth = 728;
             this.DefaultHeight = 418;
             this.Show();
+            this.theme_combo.Changed += new System.EventHandler(this.OnThemeComboChanged);
             this.add_button.Clicked += new System.EventHandler(this.OnAddButtonClicked);
             this.delete_button.Clicked += new System.EventHandler(this.OnDeleteButtonClicked);
             this.close_button.Clicked += new System.EventHandler(this.OnCloseButtonClicked);

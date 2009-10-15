@@ -410,11 +410,13 @@ namespace Docky.Interface
 			
 			Realized += HandleRealized;
 			HoveredItemChanged += HandleHoveredItemChanged;
+			Docky.Controller.ThemeChanged += DockyControllerThemeChanged;
 			
 			EnableDragTo ();
 			EnableDragFrom ();
 			RegisterDragEvents ();
 		}
+
 
 		#region Event Handling
 		void BuildAnimationEngine ()
@@ -428,6 +430,12 @@ namespace Docky.Interface
 					                                            (DateTime.UtcNow - i.StateSetTime (ItemState.Urgent)) < BounceTime));
 		}
 
+		void DockyControllerThemeChanged (object sender, EventArgs e)
+		{
+			ResetBuffers ();
+			AnimatedDraw ();
+		}
+		
 		void HandleRealized (object sender, EventArgs e)
 		{
 			GdkWindow.SetBackPixmap (null, false);
@@ -1904,6 +1912,7 @@ namespace Docky.Interface
 			AutohideManager.HiddenChanged -= HandleHiddenChanged;
 			AutohideManager.DockHoveredChanged -= HandleDockHoveredChanged;
 			Screen.SizeChanged -= ScreenSizeChanged;
+			Docky.Controller.ThemeChanged -= DockyControllerThemeChanged;
 			
 			if (animation_timer > 0)
 				GLib.Source.Remove (animation_timer);

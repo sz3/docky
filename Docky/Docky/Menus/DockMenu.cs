@@ -202,6 +202,16 @@ namespace Docky.Menus
 			Add (Container);
 			
 			SetPadding ();
+			
+			Docky.Controller.ThemeChanged += DockyControllerThemeChanged;
+		}
+
+		void DockyControllerThemeChanged (object sender, EventArgs e)
+		{
+			if (background_buffer != null) {
+				background_buffer.Dispose ();
+				background_buffer = null;
+			}
 		}
 		
 		void SetPadding ()
