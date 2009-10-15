@@ -708,12 +708,24 @@ namespace Docky.Interface
 			DragMotion       += HandleDragMotion;
 			DragBegin        += HandleDragBegin;
 			DragDataReceived += HandleDragDataReceived;
+			DragDataGet      += HandleDragDataGet;
 			DragDrop         += HandleDragDrop;
 			DragEnd          += HandleDragEnd;
 			DragLeave        += HandleDragLeave;
 			DragFailed       += HandleDragFailed;
 		}
 
+		/// <summary>
+		/// Emitted on the drag source to fetch drag data
+		/// </summary>
+		void HandleDragDataGet (object o, DragDataGetArgs args)
+		{
+			if (InternalDragActive && drag_item != null && !(drag_item is INonPersistedItem)) {
+				string uri = string.Format ("docky://{0}\r\n", drag_item.UniqueID ());
+				byte[] data = System.Text.Encoding.UTF8.GetBytes (uri);
+				args.SelectionData.Set (args.SelectionData.Target, 8, data, data.Length);
+			}
+		}
 
 		/// <summary>
 		/// Emitted on the drag source when drag is started
@@ -930,14 +942,17 @@ namespace Docky.Interface
 
 		void EnableDragTo ()
 		{
-			TargetEntry dest_te = new TargetEntry ("text/uri-list", 0, 0);
-			Gtk.Drag.DestSet (this, 0, new [] {dest_te}, Gdk.DragAction.Copy);
+			TargetEntry[] dest = new [] {
+				new TargetEntry ("text/uri-list", 0, 0),
+				new TargetEntry ("text/docky-uri-list", 0, 0),
+			};
+			Gtk.Drag.DestSet (this, 0, dest, Gdk.DragAction.Copy);
 		}
 		
 		void EnableDragFrom ()
 		{
 			// we dont really want to offer the drag to anything, merely pretend to, so we set a mimetype nothing takes
-			TargetEntry te = new TargetEntry ("text/uri-list", TargetFlags.App, 0);
+			TargetEntry te = new TargetEntry ("text/docky-uri-list", 0, 0);
 			Gtk.Drag.SourceSet (this, Gdk.ModifierType.Button1Mask, new[] { te }, DragAction.Copy);
 		}
 		#endregion
