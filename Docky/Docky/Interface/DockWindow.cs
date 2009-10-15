@@ -773,8 +773,13 @@ namespace Docky.Interface
 				
 				drag_data_requested = false;
 				drag_is_desktop_file = drag_data.Any (d => d.StartsWith ("file://") && d.EndsWith (".desktop"));
+				drag_is_desktop_file = drag_is_desktop_file || drag_data.Any (d => d.StartsWith ("docky://"));
 				SetHoveredAcceptsDrop ();
 			}
+			
+			Gdk.DragAction action = DragAction.Copy;
+			if (drag_data != null && drag_data.Any (d => d.StartsWith ("docky://")))
+				action = DragAction.Private;
 			
 			Gdk.Drag.Status (args.Context, DragAction.Copy, Gtk.Global.CurrentEventTime);
 			args.RetVal = true;
@@ -785,23 +790,32 @@ namespace Docky.Interface
 		/// </summary>
 		void HandleDragDrop (object o, DragDropArgs args)
 		{
-			args.RetVal = true;
-			Gtk.Drag.Finish (args.Context, true, false, args.Time);
+			bool success = true;
 			
-			if (drag_data == null)
-				return;
+			if (drag_data != null) {
+				AbstractDockItem item = HoveredItem;
 			
-			AbstractDockItem item = HoveredItem;
-			
-			if (!drag_is_desktop_file && item != null && item.CanAcceptDrop (drag_data)) {
-				item.AcceptDrop (drag_data);
-			} else {
-				foreach (string s in drag_data) {
-					Preferences.DefaultProvider.InsertItem (s);
-					if (FileApplicationProvider.WindowManager != null)
-						FileApplicationProvider.WindowManager.UpdateTransientItems ();
+				if (!drag_is_desktop_file && item != null && item.CanAcceptDrop (drag_data)) {
+					item.AcceptDrop (drag_data);
+				} else {
+					foreach (string s in drag_data) {
+						if (s.StartsWith ("file://")) {
+							Preferences.DefaultProvider.InsertItem (s);
+							if (FileApplicationProvider.WindowManager != null)
+								FileApplicationProvider.WindowManager.UpdateTransientItems ();
+						} else if (s.StartsWith ("docky://")) {
+							AbstractDockItem remote = AbstractDockItem.MaybeDockItemForUniqueID (s.Substring ("docky://".Length));
+							if (remote == null) {
+								continue;
+							}
+							success = Preferences.DefaultProvider.InsertItem (remote);
+						}
+					}
 				}
 			}
+			
+			args.RetVal = true;
+			Gtk.Drag.Finish (args.Context, success, false, args.Time);
 			
 			drag_known = false;
 			drag_data = null;
@@ -814,14 +828,14 @@ namespace Docky.Interface
 		void HandleDragEnd (object o, DragEndArgs args)
 		{
 			if (drag_item != null) {
-				if (!DockHovered) {
+				if (!DockHovered && args.Context.Action != DragAction.Private) {
 					AbstractDockItemProvider provider = ProviderForItem (drag_item);
 					if (provider != null && provider.ItemCanBeRemoved (drag_item)) {
 						provider.RemoveItem (drag_item);
 						if (FileApplicationProvider.WindowManager != null)
 							FileApplicationProvider.WindowManager.UpdateTransientItems ();
 					}
-				} else {
+				} else if (DockHovered) {
 					AbstractDockItem item = HoveredItem;
 					if (item != null && item.CanAcceptDrop (drag_item))
 						item.AcceptDrop (drag_item);
