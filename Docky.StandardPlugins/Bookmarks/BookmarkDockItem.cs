@@ -17,7 +17,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
+
+using GLib;
 
 using Docky.Items;
 using Docky.Menus;
@@ -26,18 +27,23 @@ namespace Bookmarks
 {
 	public class BookmarkDockItem : FileDockItem
 	{
-		public static new BookmarkDockItem NewFromUri (string uri)
-		{
-			string path = Gnome.Vfs.Global.GetLocalPathFromUri (uri);
-			if (!Directory.Exists (path) && !File.Exists (path)) {
-				return null;
-			}
-			
-			return new BookmarkDockItem (uri);
+		public static new BookmarkDockItem NewFromUri (string uri, string name)
+		{	
+			return new BookmarkDockItem (uri, name);
 		}
 		
-		BookmarkDockItem (string uri) : base (uri)
+		BookmarkDockItem (string uri, string name) : base (uri)
 		{
+			// incase the icon is null, give it a generic folder icon
+			// this can happen with a bookmark that's not native,
+			// or doesn't have a path for some reason
+			if (string.IsNullOrEmpty (this.Icon))
+				Icon = "folder";
+			
+			if (string.IsNullOrEmpty (name))
+				HoverText = OwnedFile.Basename;
+			else 
+				HoverText = name;
 		}
 		
 		void Remove ()
@@ -47,9 +53,10 @@ namespace Bookmarks
 
 		public override IEnumerable<MenuItem> GetMenuItems ()
 		{
+			/*
 			foreach (MenuItem item in base.GetMenuItems())
 				yield return item;
-			
+			*/
 			yield return new MenuItem ("Remove", "gtk-remove", (o, a) => Remove());
 		}
 	}

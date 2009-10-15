@@ -24,6 +24,8 @@ using System.Text;
 
 using Mono.Unix;
 
+using GLib;
+
 using Docky.CairoHelper;
 using Docky.Items;
 using Docky.Menus;
@@ -97,8 +99,8 @@ namespace Trash
 		{
 			bool accepted = false;
 			
-			foreach (string item in uris)
-				accepted |= CanReceiveItem (item);
+			foreach (string uri in uris)
+				accepted |= CanReceiveItem (uri);
 
 			return accepted;
 		}
@@ -127,36 +129,30 @@ namespace Trash
 		{
 			bool accepted = false;
 			
-			foreach (string item in uris)
-				accepted |= ReceiveItem (item);
+			foreach (string uri in uris)
+				accepted |= ReceiveItem (uri);
 
 			return accepted;
 		}
 		
-		bool CanReceiveItem (string item)
+		bool CanReceiveItem (string uri)
 		{
-			if (item.StartsWith ("file://"))
-				item = item.Substring ("file://".Length);
-			
 			// if the file doesn't exist for whatever reason, we bail
-			if (!File.Exists (item) && !Directory.Exists (item))
-				return false;
-
-			return true;
+			return FileFactory.NewForUri (uri).Exists;
 		}
 		
-		bool ReceiveItem (string item)
+		bool ReceiveItem (string uri)
 		{
-			try {
-				DockServices.System.Execute (string.Format ("gvfs-trash \"{0}\"", item));
-			} catch (Exception e) { 
-				Log<TrashDockItem>.Error ("Could not move {0} to trash: '{1}'", item, e.Message);
-				return false;
-			}
+			bool trashed = FileFactory.NewForUri (uri).Trash (null);
 			
-			UpdateIcon ();
-			OnPaintNeeded ();
-			return true;
+			if (trashed) {
+				UpdateIcon ();
+				OnPaintNeeded ();
+			}
+			else
+				Log<TrashDockItem>.Error ("Could not move {0} to trash.'", uri);
+			
+			return trashed;
 		}
 		
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
