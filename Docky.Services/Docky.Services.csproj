@@ -91,6 +91,7 @@
     <Compile Include="Docky.Services\LogTSender.cs" />
     <Compile Include="Docky.Services\Log.cs" />
     <Compile Include="Docky.Services\Logging\ConsoleLog.cs" />
+    <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

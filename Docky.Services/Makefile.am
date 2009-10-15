@@ -7,19 +7,20 @@ TARGET = library
 PKG_CONFIG_FILES = docky.services.pc
 
 FILES = \
+	AssemblyInfo.cs \
 	Docky.Services/Logging/ConsoleCrayon.cs \
 	Docky.Services/Logging/LogBase.cs \
 	Docky.Services/Logging/ConsoleLog.cs \
 	Docky.Services/Log.cs \
 	Docky.Services/LogTSender.cs \
 	Docky.Services/ConnectionStatusChangeEventArgs.cs \
-    Docky.Services/IPreferences.cs \
-    Docky.Services/PreferencesService.cs \
-    Docky.Services/DockServices.cs \
-    Docky.Services/SystemService.cs \
-    Docky.Services/DrawingService.cs \
-    Docky.Services/NotificationService.cs \
-    Docky.Services/Preferences.cs
+	Docky.Services/IPreferences.cs \
+ 	Docky.Services/PreferencesService.cs \
+	Docky.Services/DockServices.cs \
+	Docky.Services/SystemService.cs \
+	Docky.Services/DrawingService.cs \
+	Docky.Services/NotificationService.cs \
+	Docky.Services/Preferences.cs
 
 REFERENCES =  \
 	System \

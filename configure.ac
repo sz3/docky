@@ -147,6 +147,7 @@ Docky.Items/Makefile
 Docky.StandardPlugins/Makefile
 Docky.StandardPlugins/Docky.DefaultClockTheme/Makefile
 Docky.Services/Makefile
+Docky.Services/AssemblyInfo.cs
 Docky.Windowing/Makefile
 Docky.Windowing/Docky.Windowing.dll.config
 Docky.Zeitgeist/Makefile

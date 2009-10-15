@@ -34,7 +34,7 @@ namespace Docky.Services
 		
 		public string SystemDataFolder {
 			get {
-				return Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.CommonApplicationData), "docky");
+				return Path.Combine (AssemblyInfo.DataDirectory, "docky");
 			}
 		}
 		
