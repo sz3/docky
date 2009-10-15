@@ -18,7 +18,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.IO;
+
+using GLib;
 
 using Docky.Items;
 
@@ -28,9 +29,11 @@ namespace Bookmarks
 	{
 		List<AbstractDockItem> items;
 		
-		string BookmarksFile {
+		File BookmarksFile {
 			get {
-				return Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), ".gtk-bookmarks");
+				string path = System.IO.Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), ".gtk-bookmarks");
+				
+				return FileFactory.NewForPath (path);
 			}
 		}
 		
@@ -38,47 +41,45 @@ namespace Bookmarks
 		{
 			items = new List<AbstractDockItem> ();
 		
-			UpdateItems ();
+			UpdateItems (BookmarksFile);
 			
-			FileSystemWatcher watcher = new FileSystemWatcher (Path.GetDirectoryName (BookmarksFile));
-			watcher.Filter = ".gtk-bookmarks";
-			watcher.IncludeSubdirectories = false;
-			watcher.Renamed += WatcherRenamed;
+			GType.Init ();
+			
+			FileMonitor watcher = FileMonitor.File (BookmarksFile, FileMonitorFlags.None, null);
+			
 			watcher.Changed += WatcherChanged;
+		}
+
+		void WatcherChanged (object o, ChangedArgs args)
+		{
+			// FIXME: bug in current GIO / GLib-sharp, should be able to use args.File
+			File f = (File) FileAdapter.GetObject (args.Args[0] as GLib.Object);
 			
-			watcher.EnableRaisingEvents = true;
-		}
-
-		void WatcherChanged (object sender, FileSystemEventArgs e)
-		{
-			Gtk.Application.Invoke (delegate {
-				UpdateItems ();
-			});
-		}
-
-		void WatcherRenamed (object sender, RenamedEventArgs e)
-		{
-			Gtk.Application.Invoke (delegate {
-				UpdateItems ();
-			});
+			if (args.EventType == FileMonitorEvent.ChangesDoneHint)
+				Gtk.Application.Invoke ( delegate {
+					UpdateItems (f);
+				});
 		}
 		
-		void UpdateItems ()
+		void UpdateItems (File file)
 		{
 			List<AbstractDockItem> old = items;
 			items = new List<AbstractDockItem> ();
 			
-			if (File.Exists (BookmarksFile)) {
-				using (StreamReader reader = new StreamReader (BookmarksFile)) {
-					while (!reader.EndOfStream) {
-						string uri = reader.ReadLine ().Split (' ').First ();
-						
+			if (file.QueryExists (null)) {
+				using (DataInputStream stream = new DataInputStream (file.Read (null))) {
+					ulong length;
+					string line, name, uri;
+					while ((line = stream.ReadLine (out length, null)) != null) {
+						uri = line.Split (' ').First ();
+						File bookmark = FileFactory.NewForUri (uri);
+						name = line.Substring (uri.Length).Trim ();
 						if (old.Cast<BookmarkDockItem> ().Any (fdi => fdi.Uri == uri)) {
-							BookmarkDockItem item = old.Cast<BookmarkDockItem> ().Where (fdi => fdi.Uri == uri).First ();
+							BookmarkDockItem item = old.Cast<BookmarkDockItem> ().First (fdi => fdi.Uri == uri);
 							old.Remove (item);
 							items.Add (item);
 						} else {
-							BookmarkDockItem item = BookmarkDockItem.NewFromUri (uri);
+							BookmarkDockItem item = BookmarkDockItem.NewFromUri (bookmark.Uri.ToString (), name);
 							if (item != null) {
 								item.Owner = this;
 								items.Add (item);
@@ -114,26 +115,29 @@ namespace Bookmarks
 			
 			BookmarkDockItem bookmark = item as BookmarkDockItem;
 			
-			if (File.Exists (BookmarksFile)) {
-				string tempPath = Path.GetTempFileName();
-				
-				using (StreamReader reader = new StreamReader (BookmarksFile)) {
-					using (StreamWriter writer = new StreamWriter(File.OpenWrite(tempPath))) {
-						while (!reader.EndOfStream) {
-							string line = reader.ReadLine();
-							if (bookmark.Uri != line)
-								writer.WriteLine(line);
+			if (!bookmark.OwnedFile.Exists)
+				return false;
+			
+			File tempFile = FileFactory.NewForPath (System.IO.Path.GetTempFileName());
+			
+			using (DataInputStream reader = new DataInputStream (BookmarksFile.Read (null))) {
+				using (DataOutputStream writer = new DataOutputStream (tempFile.AppendTo (FileCreateFlags.None, null))) {
+					string line;
+					ulong length;
+					while ((line = reader.ReadLine (out length, null)) != null) {
+						if (!line.Contains (bookmark.Uri))
+							writer.PutString (string.Format ("{0}\n", line), null);
+						else {
+							items.Remove (bookmark);
+							OnItemsChanged (null, (bookmark as AbstractDockItem).AsSingle ());
 						}
 					}
 				}
-				
-				if (File.Exists (tempPath)) {
-					File.Delete (BookmarksFile);
-					File.Move (tempPath, BookmarksFile);
-				}
 			}
 			
-			UpdateItems ();
+			if (tempFile.Exists)
+				tempFile.Move (BookmarksFile, FileCopyFlags.Overwrite, null, null);
+
 			return true;
 		}
 		

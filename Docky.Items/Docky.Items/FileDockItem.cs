@@ -18,12 +18,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Text;
 
-using Docky.Menus;
+using GLib;
 
+using Docky.Menus;
 using Docky.Services;
 
 namespace Docky.Items
@@ -34,42 +34,15 @@ namespace Docky.Items
 	{
 		public static FileDockItem NewFromUri (string uri)
 		{
+			// FIXME: need to do something with this... .Exists will fail for non native files
+			// but they are still valid file items (like an unmounted ftp://... file
+			/*
 			string path = Gnome.Vfs.Global.GetLocalPathFromUri (uri);
 			if (!Directory.Exists (path) && !File.Exists (path)) {
 				return null;
 			}
-			
+			*/
 			return new FileDockItem (uri);
-		}
-		
-		static string IconNameForPath (string path)
-		{
-			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-			
-			if (path == home)
-				return "folder-home";
-			
-			if (path.StartsWith (home)) {
-				// add one due to the path separtor
-				switch (path.Substring (home.Length + 1)) {
-				case "Desktop":
-					return "desktop";
-				case "Pictures":
-					return "folder-pictures";
-				case "Music":
-					return "folder-music";
-				case "Documents":
-					return "folder-documents";
-				case "Downloads":
-					return "folder-download";
-				case "Public":
-					return "folder-publicshare";
-				case "Videos":
-					return "folder-video";
-				}
-			}
-			
-			return "folder";
 		}
 		
 		string uri;
@@ -79,22 +52,27 @@ namespace Docky.Items
 			get { return uri; }
 		}
 		
+		public File OwnedFile { get; private set; }
+		
 		protected FileDockItem (string uri)
 		{
 			this.uri = uri;
-			string path = Gnome.Vfs.Global.GetLocalPathFromUri (uri);
+			OwnedFile = FileFactory.NewForUri (uri);
 			
-			if (!Directory.Exists (path)) {
-				is_folder = false;
-				Gnome.IconLookupResultFlags results;
-			
-				Icon = Gnome.Icon.LookupSync (Gtk.IconTheme.Default, null, uri, null, 0, out results);
-			} else {
+			if (OwnedFile.QueryFileType (0, null) == FileType.Directory)
 				is_folder = true;
-				Icon = IconNameForPath (path);
-			}
+			else
+				is_folder = false;
 			
-			HoverText = System.IO.Path.GetFileName (path);
+			// only check the icon if it's a native file or it's mounted (ie: .Path != null)
+			if (OwnedFile.IsNative && !string.IsNullOrEmpty (OwnedFile.Path)) {
+				FileInfo info = OwnedFile.QueryInfo ("*", FileQueryInfoFlags.None, null);
+				Icon = Docky.Services.DrawingService.IconFromCurrentTheme (info.Icon);
+			}
+			else
+				Icon = "";
+			
+			HoverText = OwnedFile.Basename;
 		}
 		
 		public override string UniqueID ()
@@ -108,20 +86,30 @@ namespace Docky.Items
 		}
 
 		public override bool AcceptDrop (IEnumerable<string> uris)
-		{
-			string folder = Gnome.Vfs.Global.GetLocalPathFromUri (Uri);
+		{			
 			foreach (string uri in uris) {
-				string file = Gnome.Vfs.Global.GetLocalPathFromUri (uri);
-				string newName = Path.Combine (folder, Path.GetFileName (file));
-				if (File.Exists (file) && !File.Exists (newName) && !Directory.Exists (newName)) {
-					File.Move (file, Path.Combine (folder, Path.GetFileName (file)));
-				} else if (Directory.Exists (file) && !File.Exists (newName) && !Directory.Exists (newName)) {
-					Directory.Move (file, newName);
-				}
-			}
+				File file = FileFactory.NewForUri (uri);
+				if (!file.Exists)
+					continue;
+				string nameAfterMove = NewFileName (OwnedFile, file);
+				file.Move (OwnedFile.GetChild (nameAfterMove), FileCopyFlags.NofollowSymlinks | FileCopyFlags.AllMetadata, null, null);
+			}			
 			return true;
 		}
 		
+		string NewFileName (File dest, File fileToMove)
+		{
+			string name = fileToMove.Basename;
+			int i = 1;
+			if (dest.GetChild (name).Exists) {
+				do {
+					name = fileToMove.Basename;
+					name = string.Format ("{0} ({1})", name, i);
+					i++;
+				} while (dest.GetChild (name).Exists);
+			}
+			return name;
+		}
 		
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
@@ -145,9 +133,7 @@ namespace Docky.Items
 		
 		void OpenContainingFolder ()
 		{
-			// retarded but works. Must be a better way
-			string path = System.IO.Path.GetDirectoryName (Gnome.Vfs.Global.GetLocalPathFromUri (uri));
-			DockServices.System.Open (Gnome.Vfs.Global.GetUriFromLocalPath (path));
+			DockServices.System.Open (OwnedFile.Parent.Uri.ToString ());
 		}
 	}
 }
