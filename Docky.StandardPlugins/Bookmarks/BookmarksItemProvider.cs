@@ -22,11 +22,33 @@ using System.Linq;
 using GLib;
 
 using Docky.Items;
+using Docky.Menus;
 
 namespace Bookmarks
 {
 	public class BookmarksItemProvider : AbstractDockItemProvider
 	{
+		class NonRemovableItem : FileDockItem
+		{
+			public NonRemovableItem (string uri, string name, string icon) : base (uri)
+			{
+				if (!string.IsNullOrEmpty (icon))
+				    Icon = icon;
+				    
+				if (string.IsNullOrEmpty (name))
+					HoverText = OwnedFile.Basename;
+				else 
+					HoverText = name;
+			}
+			
+			public override IEnumerable<Docky.Menus.MenuItem> GetMenuItems ()
+			{
+				yield return new MenuItem ("Open", "gtk-open", (o, a) => Open ());
+			}
+		}
+		
+		NonRemovableItem computer, home;
+		
 		List<AbstractDockItem> items;
 		
 		File BookmarksFile {
@@ -40,6 +62,10 @@ namespace Bookmarks
 		public BookmarksItemProvider ()
 		{
 			items = new List<AbstractDockItem> ();
+			
+			computer = new NonRemovableItem ("computer://", "Computer", "computer");
+			home = new NonRemovableItem (string.Format ("file://{0}",
+			    Environment.GetFolderPath (Environment.SpecialFolder.Personal)), null, null);
 		
 			UpdateItems (BookmarksFile);
 			
@@ -105,7 +131,7 @@ namespace Bookmarks
 		
 		public override bool ItemCanBeRemoved (AbstractDockItem item)
 		{
-			return items.Contains (item);
+			return item is BookmarkDockItem;
 		}
 		
 		public override bool RemoveItem (AbstractDockItem item)
@@ -149,7 +175,10 @@ namespace Bookmarks
 		
 		public override IEnumerable<AbstractDockItem> Items {
 			get {
-				return items;
+				yield return computer;
+				yield return home;
+				foreach (AbstractDockItem item in items)
+					yield return item;
 			}
 		}
 		
