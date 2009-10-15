@@ -21,6 +21,7 @@ using System.Linq;
 
 using GLib;
 
+using Docky.Services;
 using Docky.Items;
 using Docky.Menus;
 
@@ -92,6 +93,8 @@ namespace Bookmarks
 			List<AbstractDockItem> old = items;
 			items = new List<AbstractDockItem> ();
 			
+			Log<BookmarksItemProvider>.Debug ("Updating bookmarks.");
+			
 			if (file.QueryExists (null)) {
 				using (DataInputStream stream = new DataInputStream (file.Read (null))) {
 					ulong length;
@@ -104,6 +107,10 @@ namespace Bookmarks
 							BookmarkDockItem item = old.Cast<BookmarkDockItem> ().First (fdi => fdi.Uri == uri);
 							old.Remove (item);
 							items.Add (item);
+						} else if (bookmark.Uri.Scheme == "file" && !bookmark.Exists) {
+							Log<BookmarksItemProvider>.Warn ("Bookmark path '{0}' does not exist, please fix the bookmarks file",
+							    bookmark.Uri.ToString ());
+							continue;
 						} else {
 							BookmarkDockItem item = BookmarkDockItem.NewFromUri (bookmark.Uri.ToString (), name);
 							if (item != null) {
@@ -156,6 +163,7 @@ namespace Bookmarks
 						else {
 							items.Remove (bookmark);
 							OnItemsChanged (null, (bookmark as AbstractDockItem).AsSingle ());
+							Log<BookmarksItemProvider>.Debug ("Removing '{0}'", bookmark.HoverText);
 						}
 					}
 				}
