@@ -723,7 +723,8 @@ namespace Docky.Interface
 			if (InternalDragActive && drag_item != null && !(drag_item is INonPersistedItem)) {
 				string uri = string.Format ("docky://{0}\r\n", drag_item.UniqueID ());
 				byte[] data = System.Text.Encoding.UTF8.GetBytes (uri);
-				args.SelectionData.Set (args.SelectionData.Target, 8, data, data.Length);
+				args.SelectionData.Set (Gdk.Atom.Intern ("text/docky-uri-list", false), 8, data, data.Length);
+				args.SelectionData.Text = uri;
 			}
 		}
 
@@ -768,10 +769,10 @@ namespace Docky.Interface
 				string uris = Encoding.UTF8.GetString (data.Data);
 				
 				drag_data = Regex.Split (uris, "\r\n")
-					.Where (uri => uri.StartsWith ("file://"));
+					.Where (uri => uri.StartsWith ("file://") || uri.StartsWith ("docky://"));
 				
 				drag_data_requested = false;
-				drag_is_desktop_file = drag_data.Any (d => d.EndsWith (".desktop"));
+				drag_is_desktop_file = drag_data.Any (d => d.StartsWith ("file://") && d.EndsWith (".desktop"));
 				SetHoveredAcceptsDrop ();
 			}
 			
@@ -804,7 +805,6 @@ namespace Docky.Interface
 			
 			drag_known = false;
 			drag_data = null;
-			drag_data_requested = false;
 			drag_is_desktop_file = false;
 		}
 
@@ -866,10 +866,10 @@ namespace Docky.Interface
 			
 			// we own the drag if InternalDragActive is true, lets not be silly
 			if (!drag_known && !InternalDragActive) {
+				drag_data_requested = true;
 				drag_known = true;
 				Gdk.Atom atom = Gtk.Drag.DestFindTarget (this, args.Context, null);
 				Gtk.Drag.GetData (this, args.Context, atom, args.Time);
-				drag_data_requested = true;
 			} else {
 				Gdk.Drag.Status (args.Context, DragAction.Copy, args.Time);
 			}

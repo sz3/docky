@@ -68,6 +68,12 @@ namespace Docky.Items
 			}
 		}
 		
+		public DesktopItem OwnedItem {
+			get {
+				return desktop_item;
+			}
+		}
+		
 		private ApplicationDockItem (DesktopItem item)
 		{
 			related_lock = new Object ();

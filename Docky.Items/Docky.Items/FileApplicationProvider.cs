@@ -209,6 +209,26 @@ namespace Docky.Items
 			return true;
 		}
 		
+		public bool InsertItem (AbstractDockItem item)
+		{
+			if (item is FileDockItem) {
+				FileDockItem file = item as FileDockItem;
+				
+				file.Owner = this;
+				items[file.Uri] = file;
+			} else if (item is ApplicationDockItem) {
+				ApplicationDockItem app = item as ApplicationDockItem;
+				
+				app.Owner = this;
+				items[app.OwnedItem.Location] = app;
+			} else {
+				return false;
+			}
+			
+			OnItemsChanged (item.AsSingle (), null);
+			return true;
+		}
+		
 		public void SetWindowManager ()
 		{
 			if (WindowManager == this)
