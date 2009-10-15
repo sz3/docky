@@ -31,6 +31,7 @@ using Wnck;
 using Docky.Items;
 using Docky.CairoHelper;
 using Docky.Menus;
+using Docky.Services;
 using Docky.Xlib;
 
 namespace Docky.Interface
@@ -1450,7 +1451,6 @@ namespace Docky.Interface
 				SetDockOpacity (surface);
 			
 			SetInputMask (cursorArea);
-
 			
 			dockArea.X += window_position.X;
 			dockArea.Y += window_position.Y;
@@ -1643,7 +1643,7 @@ namespace Docky.Interface
 		
 		DockySurface CreateNormalIndicatorBuffer ()
 		{
-			return CreateIndicatorBuffer (NormalIndicatorSize, new Cairo.Color (.3, .65, 1));
+			return CreateIndicatorBuffer (NormalIndicatorSize, new Cairo.Color (.4, .7, 1));
 		}
 		
 		DockySurface CreateUrgentIndicatorBuffer ()
@@ -1689,7 +1689,7 @@ namespace Docky.Interface
 				}
 					
 					
-				Gdk.Pixbuf background = new Gdk.Pixbuf (Assembly.GetExecutingAssembly (), "classic.svg");
+				Gdk.Pixbuf background = DockServices.Drawing.LoadIcon (Docky.Controller.BackgroundSvg, -1);
 				Gdk.Pixbuf tmp;
 				
 				switch (Position) {

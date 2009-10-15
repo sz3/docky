@@ -29,6 +29,7 @@ using Wnck;
 using Docky.CairoHelper;
 using Docky.Items;
 using Docky.Interface;
+using Docky.Services;
 
 namespace Docky.Menus
 {
@@ -64,7 +65,7 @@ namespace Docky.Menus
 			
 			DockySurface main = new DockySurface (SvgWidth, SvgHeight, model);
 			
-			using (Gdk.Pixbuf pixbuf = new Gdk.Pixbuf (System.Reflection.Assembly.GetExecutingAssembly (), "menu.svg")) {
+			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (Docky.Controller.MenuSvg, -1)) {
 				Gdk.CairoHelper.SetSourcePixbuf (main.Context, pixbuf, 0, 0);
 				main.Context.Paint ();
 			}

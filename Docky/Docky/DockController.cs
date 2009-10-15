@@ -19,9 +19,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.IO;
 using System.Text;
 
-using Cairo;
 using Gdk;
 using Gtk;
 
@@ -34,8 +34,12 @@ namespace Docky
 
 	internal class DockController
 	{
+		const string DefaultTheme = "Classic";
+		
 		IPreferences prefs;
 		List<Dock> docks;
+		
+		public event EventHandler ThemeChanged;
 		
 		public IEnumerable<Dock> Docks { 
 			get { return docks.AsEnumerable (); }
@@ -43,6 +47,51 @@ namespace Docky
 		
 		public int NumDocks {
 			get { return DockNames.Count (); }
+		}
+		
+		IEnumerable<string> ThemeContainerFolders {
+			get {
+				yield return Path.Combine (DockServices.System.SystemDataFolder, "themes");
+				yield return Path.Combine (DockServices.System.UserDataFolder, "themes");
+			}
+		}
+		
+		public IEnumerable<string> DockThemes {
+			get {
+				yield return DefaultTheme;
+				foreach (string dir in ThemeContainerFolders) {
+					if (!Directory.Exists (dir))
+						continue;
+					foreach (string s in Directory.GetDirectories (dir))
+						yield return Path.GetFileName (s);
+				}
+			}
+		}
+		
+		public string DockTheme {
+			get {
+				return prefs.Get ("Theme", DefaultTheme);
+			}
+			set {
+				if (!ThemeContainerFolders.Contains (value) || DockTheme == value)
+					return;
+				prefs.Set ("Theme", value);
+				
+				if (ThemeChanged != null)
+					ThemeChanged (this, EventArgs.Empty);
+			}
+		}
+		
+		public string BackgroundSvg {
+			get {
+				return ThemedSvg ("background.svg", "classic.svg");
+			}
+		}
+		
+		public string MenuSvg {
+			get {
+				return ThemedSvg ("menu.svg", "menu.svg");
+			}
 		}
 		
 		IEnumerable<string> DockNames {
@@ -63,6 +112,31 @@ namespace Docky
 			docks = new List<Dock> ();
 			prefs = DockServices.Preferences.Get<DockController> ();
 			CreateDocks ();
+		}
+		
+		string FolderForTheme (string theme)
+		{
+			foreach (string dir in ThemeContainerFolders) {
+				if (!Directory.Exists (dir))
+					continue;
+				foreach (string subdir in Directory.GetDirectories (dir)) {
+					if (Path.GetFileName (subdir) == theme)
+						return subdir;
+				}
+			}
+			return null;
+		}
+		
+		string ThemedSvg (string svgName, string def)
+		{
+			string themeFolder = FolderForTheme (DockTheme);
+			
+			if (DockTheme != DefaultTheme && themeFolder != null) {
+				string path = Path.Combine (themeFolder, svgName);
+				if (File.Exists (path))
+					return path;
+			}
+			return def + "@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName;
 		}
 		
 		public Dock CreateDock ()

@@ -40,6 +40,15 @@ namespace Docky
 		{
 			this.Build ();
 			
+			int i = 0;
+			foreach (string theme in Docky.Controller.DockThemes) {
+				theme_combo.AppendText (theme);
+				if (Docky.Controller.DockTheme == theme) {
+					theme_combo.Active = i;
+				}
+				i++;
+			}
+			
 			placement = new DockPlacementWidget (Docky.Controller.Docks);
 			placement.ActiveDockChanged += PlacementActiveDockChanged;
 			

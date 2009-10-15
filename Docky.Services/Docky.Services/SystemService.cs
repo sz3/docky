@@ -32,6 +32,18 @@ namespace Docky.Services
 			InitializeNetwork ();
 		}
 		
+		public string SystemDataFolder {
+			get {
+				return Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.CommonApplicationData), "docky");
+			}
+		}
+		
+		public string UserDataFolder {
+			get {
+				return Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData), "docky");
+			}
+		}
+		
 		#region Network
 		
 		void InitializeNetwork ()

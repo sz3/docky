@@ -33,7 +33,7 @@ namespace Docky {
         
         private Gtk.Label label2;
         
-        private Gtk.ComboBox combobox1;
+        private Gtk.ComboBox theme_combo;
         
         private Gtk.Label GtkLabel2;
         
@@ -142,13 +142,10 @@ namespace Docky {
             w3.Expand = false;
             w3.Fill = false;
             // Container child hbox4.Gtk.Box+BoxChild
-            this.combobox1 = Gtk.ComboBox.NewText();
-            this.combobox1.AppendText(Mono.Unix.Catalog.GetString("classic"));
-            this.combobox1.AppendText(Mono.Unix.Catalog.GetString("greyscale"));
-            this.combobox1.Name = "combobox1";
-            this.combobox1.Active = 0;
-            this.hbox4.Add(this.combobox1);
-            Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.hbox4[this.combobox1]));
+            this.theme_combo = Gtk.ComboBox.NewText();
+            this.theme_combo.Name = "theme_combo";
+            this.hbox4.Add(this.theme_combo);
+            Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.hbox4[this.theme_combo]));
             w4.Position = 1;
             w4.Expand = false;
             w4.Fill = false;

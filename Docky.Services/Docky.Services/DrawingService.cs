@@ -57,14 +57,20 @@ namespace Docky.Services
 			// the format: "resource@assemblyname".
 			if (IconIsEmbeddedResource (name)) {
 				pixbuf = IconFromEmbeddedResource (name, size);
-				if (pixbuf != null) return pixbuf;
-			} 
-
+				if (pixbuf != null)
+					return pixbuf;
+			}
+			
 			if (IconIsFile (name)) {
 				pixbuf = IconFromFile (name, size);
-				if (pixbuf != null) return pixbuf;
+				if (pixbuf != null)
+					return pixbuf;
 			}
-
+			
+			if (size <= 0) {
+				throw new ArgumentException ("Size must be greater than 0 if icon is not a file or embedded resource");
+			}
+			
 			// Try to load icon from defaul theme.
 			pixbuf = IconFromTheme (name, size, IconTheme.Default);
 			if (pixbuf != null) return pixbuf;
@@ -118,8 +124,12 @@ namespace Docky.Services
 			assemblyName = name.Substring (resource.Length + 1);
 			try {
 				foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies ()) {
-					if (asm.FullName != assemblyName) continue;
-					pixbuf = new Pixbuf (asm, resource, size, size);
+					if (asm.FullName != assemblyName)
+						continue;
+					if (size == -1)
+						pixbuf = new Pixbuf (asm, resource);
+					else
+						pixbuf = new Pixbuf (asm, resource, size, size);
 					break;
 				}
 			} catch (Exception e) {
@@ -137,8 +147,11 @@ namespace Docky.Services
 
 			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 			name = name.Replace ("~", home);
-			try	{
-				pixbuf = new Pixbuf (name, size, size);
+			try {
+				if (size == -1)
+					pixbuf = new Pixbuf (name);
+				else
+					pixbuf = new Pixbuf (name, size, size);
 			} catch {
 				pixbuf = null;
 			}
@@ -156,7 +169,7 @@ namespace Docky.Services
 			} else {
 				name_noext = name;
 			}
-			try	{
+			try {
 				if (theme.HasIcon (name)) {  
 					pixbuf = theme.LoadIcon (name, size, 0);
 				} else if (theme.HasIcon (name_noext)) { 
