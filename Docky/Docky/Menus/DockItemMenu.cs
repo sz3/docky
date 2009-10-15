@@ -57,7 +57,12 @@ namespace Docky.Menus
 				if (item is SeparatorMenuItem) {
 					vbox.PackStart (new SeparatorWidget ());
 				} else {
-					vbox.PackStart (new MenuItemWidget (item), false, false, 0);
+					MenuItemWidget menuItem = new MenuItemWidget (item);
+					if (IsLight)
+						menuItem.TextColor = new Cairo.Color (0, 0, 0);
+					else
+						menuItem.TextColor = new Cairo.Color (1, 1, 1);
+					vbox.PackStart (menuItem, false, false, 0);
 				}
 			}
 			

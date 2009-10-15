@@ -36,8 +36,11 @@ namespace Docky.Menus
 		MenuItem item;
 		bool hovered;
 		
+		public Cairo.Color TextColor { get; set; }
+		
 		internal MenuItemWidget (MenuItem item) : base()
 		{
+			TextColor = new Cairo.Color (1, 1, 1);
 			this.item = item;
 			item.IconChanged += ItemIconChanged;
 			item.TextChanged += ItemTextChanged;
@@ -130,7 +133,7 @@ namespace Docky.Menus
 				
 				cr.MoveTo (allocation.X + allocation.Height + 5, allocation.Y + (allocation.Height - logical.Height) / 2);
 				Pango.CairoHelper.LayoutPath (cr, layout);
-				cr.Color = new Cairo.Color (1, 1, 1, item.Disabled ? 0.5 : 1);
+				cr.Color = TextColor.SetAlpha (item.Disabled ? 0.5 : 1);
 				cr.Fill ();
 			}
 			

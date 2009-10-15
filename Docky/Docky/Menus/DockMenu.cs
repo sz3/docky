@@ -56,6 +56,8 @@ namespace Docky.Menus
 			Center,
 		}
 		
+		protected static bool IsLight { get; private set; }
+		
 		static DockySurface [] menu_slices;
 		
 		static DockySurface[] GetSlices (DockySurface model)
@@ -66,6 +68,28 @@ namespace Docky.Menus
 			DockySurface main = new DockySurface (SvgWidth, SvgHeight, model);
 			
 			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (Docky.Controller.MenuSvg, -1)) {
+				int dark = 0;
+				int light = 0;
+				unsafe {
+					byte* pixelPtr = (byte*) pixbuf.Pixels;
+					for (int i = 0; i < pixbuf.Height; i++) {
+						for (int j = 0; j < pixbuf.Width; j++) {
+							byte max = Math.Max (pixelPtr[0], Math.Max (pixelPtr[1], pixelPtr[2]));
+							
+							if (pixelPtr[3] > 0) {
+								if (max > byte.MaxValue / 2)
+									light++;
+								else
+									dark++;
+							}
+							
+							pixelPtr += 4;
+						}
+						pixelPtr += pixbuf.Rowstride - pixbuf.Width * 4;
+					}
+				}
+				IsLight = light > dark;
+				
 				Gdk.CairoHelper.SetSourcePixbuf (main.Context, pixbuf, 0, 0);
 				main.Context.Paint ();
 			}
