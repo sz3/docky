@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.0"
+   width="1000"
+   height="150"
+   id="svg2">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient3159">
+      <stop
+         id="stop3161"
+         style="stop-color:#ffffff;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop3163"
+         style="stop-color:#ffffff;stop-opacity:0.40000001"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3155">
+      <stop
+         id="stop3157"
+         style="stop-color:#ffffff;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop3159"
+         style="stop-color:#ffffff;stop-opacity:0"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       x1="157.38963"
+       y1="1"
+       x2="157.38963"
+       y2="150.57092"
+       id="linearGradient3161"
+       xlink:href="#linearGradient3155"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       x1="500"
+       y1="0"
+       x2="500"
+       y2="151.205"
+       id="linearGradient3165"
+       xlink:href="#linearGradient3159"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       x1="500"
+       y1="0"
+       x2="500"
+       y2="75.574883"
+       id="linearGradient3181"
+       xlink:href="#linearGradient3159"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <path
+     d="M 999.5,150 L 999.5,5.93607 C 999.5,2.9996655 997.00033,0.5 994.01877,0.5 L 6,0.5 C 2.5867104,0.5 0.5,2.9469231 0.5,6 L 0.5,150"
+     id="rect2396"
+     style="opacity:0.7;fill:url(#linearGradient3181);fill-opacity:1;stroke:#808080;stroke-width:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <path
+     d="M 998.5,150 L 998.5,5.93607 C 998.5,3.6509317 996.50015,1.5 994.01877,1.5 L 6,1.5 C 3.3337857,1.5 1.49997,3.2581783 1.49997,6 L 1.49997,150"
+     id="path3171"
+     style="opacity:0.7;fill:none;fill-opacity:1;stroke:url(#linearGradient3161);stroke-width:1;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+</svg>
