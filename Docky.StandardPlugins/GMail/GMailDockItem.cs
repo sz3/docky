@@ -36,7 +36,7 @@ namespace GMail
 	{
 		public override string UniqueID ()
 		{
-			return "GMailDockItem";
+			return "GMailDockItem#" + atom.CurrentLabel;
 		}
 		
 		public bool Visible {
