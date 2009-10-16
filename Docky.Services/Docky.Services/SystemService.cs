@@ -211,8 +211,12 @@ namespace Docky.Services
 			
 			// before we try to use the files, make sure they are mounted
 			foreach (GLib.File f in files) {
+				// it doesn't need to be mounted
 				if (f.IsNative)
 					continue;
+				// it's already mounted
+				if (VolumeMonitor.Default.Mounts.Any (m => m.Root.Uri == f.Uri))
+				    continue;
 				nMounts++;
 				f.MountEnclosingVolume (0, null, null, (o, args) => {
 					while (!f.MountEnclosingVolumeFinish (args));
@@ -220,6 +224,7 @@ namespace Docky.Services
 					MaybeLaunch (files, nMounts);
 				});
 			}
+
 			MaybeLaunch (files, nMounts);
 		}
 
