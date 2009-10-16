@@ -201,7 +201,12 @@ namespace Docky.Services
 		{
 			ThemedIcon themeIcon = new ThemedIcon (icon.Handle);
 			
-			return themeIcon.Names.First (n => IconTheme.Default.HasIcon (n));
+			if (themeIcon != null)
+				return themeIcon.Names.First (n => IconTheme.Default.HasIcon (n));
+			
+			File iconFile = new FileIcon (icon.Handle);
+			
+			Console.WriteLine (iconFile.File.Path);
 		}
 	}
 }
