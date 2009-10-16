@@ -92,8 +92,7 @@ namespace Docky.Services
 			}
 			
 			// If all else fails, use the UnknownPixbuf.
-			pixbuf = UnknownPixbuf ();
-			return pixbuf;
+			return UnknownPixbuf ();
 		}
 		
 		static Pixbuf UnknownPixbuf () 
@@ -118,10 +117,9 @@ namespace Docky.Services
 		static Pixbuf IconFromEmbeddedResource (string name, int size)
 		{
 			Pixbuf pixbuf = null;
-			string resource, assemblyName;
+			string resource = name.Substring (0, name.IndexOf ("@"));
+			string assemblyName = name.Substring (resource.Length + 1);
 			
-			resource = name.Substring (0, name.IndexOf ("@"));
-			assemblyName = name.Substring (resource.Length + 1);
 			try {
 				foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies ()) {
 					if (asm.FullName != assemblyName)
@@ -133,9 +131,9 @@ namespace Docky.Services
 					break;
 				}
 			} catch (Exception e) {
-				Console.Error.WriteLine ("Failed to load icon resource {0} from assembly {1}: {2}",
+				Log<DrawingService>.Warn ("Failed to load icon resource {0} from assembly {1}: {2}",
 				                         resource, assemblyName, e.Message); 
-				Console.Error.WriteLine (e.StackTrace);
+				Log<DrawingService>.Debug (e.StackTrace);
 				pixbuf = null;
 			}
 			return pixbuf;
@@ -152,7 +150,9 @@ namespace Docky.Services
 					pixbuf = new Pixbuf (name);
 				else
 					pixbuf = new Pixbuf (name, size, size);
-			} catch {
+			} catch (Exception e) {
+				Log<DrawingService>.Warn ("Error loading icon from file '" + name + "': " + e);
+				Log<DrawingService>.Debug (e.StackTrace);
 				pixbuf = null;
 			}
 			return pixbuf;
@@ -161,14 +161,13 @@ namespace Docky.Services
 		static Pixbuf IconFromTheme (string name, int size, IconTheme theme)
 		{
 			Pixbuf pixbuf = null;
-			string name_noext;
+			string name_noext = name;
 			
 			// We may have to remove the extension.
 			if (name.Contains (".")) {
 				name_noext = name.Remove (name.LastIndexOf ("."));
-			} else {
-				name_noext = name;
 			}
+			
 			try {
 				if (theme.HasIcon (name)) {  
 					pixbuf = theme.LoadIcon (name, size, 0);
@@ -177,7 +176,9 @@ namespace Docky.Services
 				} else if (name == "gnome-mime-text-plain" && theme.HasIcon ("gnome-mime-text")) { 
 					pixbuf = theme.LoadIcon ("gnome-mime-text", size, 0);
 				}
-			} catch {
+			} catch (Exception e) {
+				Log<DrawingService>.Warn ("Error loading themed icon '" + name + "': " + e);
+				Log<DrawingService>.Debug (e.StackTrace);
 				pixbuf = null;
 			}
 		
@@ -190,7 +191,9 @@ namespace Docky.Services
 			if (IconTheme.Default.HasIcon ("gtk-file")) {
 				try {
 					pixbuf = IconTheme.Default.LoadIcon ("gtk-file", size, 0);
-				} catch {
+				} catch (Exception e) {
+					Log<DrawingService>.Warn ("Error loading generic icon: " + e);
+					Log<DrawingService>.Debug (e.StackTrace);
 					pixbuf = null;					
 				}
 			}
