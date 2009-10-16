@@ -35,7 +35,7 @@ namespace Bookmarks
 		BookmarkDockItem (string uri, string name) : base (uri)
 		{
 			// incase the icon is null, give it a generic folder icon
-			// this can happen with a bookmark that's not native,
+			// this can happen with a bookmark that's not mounted,
 			// or doesn't have a path for some reason
 			if (string.IsNullOrEmpty (this.Icon))
 				Icon = "folder";
@@ -53,10 +53,7 @@ namespace Bookmarks
 
 		public override IEnumerable<MenuItem> GetMenuItems ()
 		{
-			/*
-			foreach (MenuItem item in base.GetMenuItems())
-				yield return item;
-			*/
+			yield return new MenuItem ("Open", "gtk-open", (o, a) => Open ());
 			yield return new MenuItem ("Remove", "gtk-remove", (o, a) => Remove());
 		}
 	}

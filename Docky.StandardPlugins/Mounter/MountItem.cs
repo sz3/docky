@@ -93,6 +93,5 @@ namespace Mounter
 				yield return new MenuItem (removeLabel, "media-eject", (o, a) => UnMount ());
 			}
 		}
-
 	}
 }

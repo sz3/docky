@@ -16,8 +16,12 @@
 // 
 
 using System;
+using System.Linq;
 using System.Diagnostics;
+using System.Collections.Generic;
 using System.IO;
+
+using GLib;
 
 using NDesk.DBus;
 using org.freedesktop.DBus;
@@ -193,18 +197,77 @@ namespace Docky.Services
 		
 		public void Email (string address)
 		{
-			Process.Start ("xdg-email", address);
+			System.Diagnostics.Process.Start ("xdg-email", address);
 		}
 		
 		public void Open (string uri)
 		{
-			Process.Start ("xdg-open", uri);
+			System.Diagnostics.Process.Start ("xdg-open", uri);
 		}
+		
+		public void Open (IEnumerable<string> uris)
+		{
+			uris.ToList ().ForEach (uri =>  Open (uri));
+		}
+		
+		public void Open (IEnumerable<GLib.File> files)
+		{
+			List<GLib.File> noMountNeeded = new List<GLib.File> ();
+			
+			// before we try to use the files, make sure they are mounted
+			foreach (GLib.File f in files) {
+				// it doesn't need to be mounted or it's already mounted
+				if (f.IsNative ||
+				    VolumeMonitor.Default.Mounts.Any (m => f.Uri.ToString ().Contains (m.Root.Uri.ToString ()))) {
+					noMountNeeded.Add (f);
+				    continue;
+				}
+				f.MountEnclosingVolume (0, null, null, (o, args) => {
+					// wait for the mount to finish
+					while (!f.MountEnclosingVolumeFinish (args));
+					// FIXME: when we can get a dock item from the UID, redraw the icon here.
+					Launch (new [] {f});
+				});
+			}
+
+			if (noMountNeeded.Count () > 0)
+				Launch (noMountNeeded);
+		}
+
+		void Launch (IEnumerable<GLib.File> files)
+		{
+			AppInfo app = files.First ().QueryDefaultHandler (null);
+			
+			GLib.List launchList;
+			
+			if (app != null) {
+				// check if the app supports files or Uris
+				if (app.SupportsFiles) {
+					launchList = new GLib.List (typeof (GLib.File));
+					foreach (GLib.File f in files)
+						launchList.Append (f);
+					// if launching was successful, bail
+					if (app.Launch (launchList, null))
+						return;
+				} else if (app.SupportsUris) {
+					launchList = new GLib.List (typeof (string));
+					foreach (GLib.File f in files)
+						launchList.Append (f.Uri.ToString ());
+					if (app.LaunchUris (launchList, null))
+						return;
+				}
+			}
+			
+			Log<SystemService>.Error ("Error opening files. The application doesn't support files/URIs or wasn't found.");
+			// fall back on xdg-open
+			Open (files.Select (f => f.Uri.ToString ()));
+		}
+
 		
 		public void Execute (string executable)
 		{
-			if (File.Exists (executable)) {
-				Process proc = new Process ();
+			if (System.IO.File.Exists (executable)) {
+				System.Diagnostics.Process proc = new System.Diagnostics.Process ();
 				proc.StartInfo.FileName = executable;
 				proc.StartInfo.UseShellExecute = false;
 				proc.Start ();
@@ -212,9 +275,9 @@ namespace Docky.Services
 				if (executable.Contains (" ")) {
 					string[] args = executable.Split (' ');
 					
-					Process.Start (args[0], executable.Substring (args[0].Length + 1));
+					System.Diagnostics.Process.Start (args[0], executable.Substring (args[0].Length + 1));
 				} else {
-					Process.Start (executable);
+					System.Diagnostics.Process.Start (executable);
 				}
 			}
 		}
