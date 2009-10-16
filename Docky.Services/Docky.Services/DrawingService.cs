@@ -207,6 +207,7 @@ namespace Docky.Services
 			FileIcon iconFile = new FileIcon (icon.Handle);
 			
 			Console.WriteLine (iconFile.File.Path);
+			return "";
 		}
 	}
 }
