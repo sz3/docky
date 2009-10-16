@@ -197,11 +197,18 @@ namespace Docky.Services
 			return pixbuf;
 		}
 		
-		public static string IconFromCurrentTheme (GLib.Icon icon)
+		public static string IconFromGIcon (GLib.Icon icon)
 		{
 			ThemedIcon themeIcon = new ThemedIcon (icon.Handle);
 			
-			return themeIcon.Names.First (n => IconTheme.Default.HasIcon (n));
+			// if the icon exists in the theme, this will return the relevent 
+			if (themeIcon.Names.Any ())
+				return themeIcon.Names.First (n => IconTheme.Default.HasIcon (n));
+			
+			// in some cases, devices provide their own icon.  This will use the devices icon.
+			FileIcon iconFile = new FileIcon (icon.Handle);
+			
+			return iconFile.File.Path;
 		}
 	}
 }
