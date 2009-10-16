@@ -86,13 +86,17 @@ namespace Docky.Items
 		}
 
 		public override bool AcceptDrop (IEnumerable<string> uris)
-		{			
+		{
 			foreach (string uri in uris) {
-				File file = FileFactory.NewForUri (uri);
-				if (!file.Exists)
+				try {
+					File file = FileFactory.NewForUri (uri);
+					if (!file.Exists)
+						continue;
+					string nameAfterMove = NewFileName (OwnedFile, file);
+					file.Move (OwnedFile.GetChild (nameAfterMove), FileCopyFlags.NofollowSymlinks | FileCopyFlags.AllMetadata, null, null);
+				} catch {
 					continue;
-				string nameAfterMove = NewFileName (OwnedFile, file);
-				file.Move (OwnedFile.GetChild (nameAfterMove), FileCopyFlags.NofollowSymlinks | FileCopyFlags.AllMetadata, null, null);
+				}
 			}			
 			return true;
 		}
