@@ -209,6 +209,12 @@ namespace Docky.Services
 		{			
 			int nMounts = 0;
 			
+			Console.WriteLine ("Trying to mount: {0}", files.First ().Uri);
+			
+			foreach (Mount m in VolumeMonitor.Default.Mounts)
+				Console.WriteLine (m.Root.Uri);
+			
+			/*
 			// before we try to use the files, make sure they are mounted
 			foreach (GLib.File f in files) {
 				// it doesn't need to be mounted
@@ -226,6 +232,7 @@ namespace Docky.Services
 			}
 
 			MaybeLaunch (files, nMounts);
+			*/
 		}
 
 		void MaybeLaunch (IEnumerable<GLib.File> files, int nMounts)
