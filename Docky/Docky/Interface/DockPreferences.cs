@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -502,9 +502,10 @@ namespace Docky.Interface
 		
 		void SortProviderOnList (AbstractDockItemProvider provider, List<string> sortList)
 		{
+			int defaultRes = 1000;
 			Func<AbstractDockItem, int> indexFunc = delegate(AbstractDockItem a) {
 				int res = sortList.IndexOf (a.UniqueID ());
-				return res >= 0 ? res : 1000;
+				return res >= 0 ? res : defaultRes++;
 			};
 			
 			int i = 0;

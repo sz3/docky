@@ -17,15 +17,7 @@
    sodipodi:docname="minimize.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
-     id="defs6195">
-    <inkscape:perspective
-       sodipodi:type="inkscape:persp3d"
-       inkscape:vp_x="0 : 526.18109 : 1"
-       inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_z="744.09448 : 526.18109 : 1"
-       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
-       id="perspective6201" />
-  </defs>
+     id="defs6195" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -36,19 +28,19 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="11.313708"
-     inkscape:cx="4.6231905"
-     inkscape:cy="4.9176352"
+     inkscape:zoom="40.285714"
+     inkscape:cx="-5.2127659"
+     inkscape:cy="7"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
-     showgrid="true"
+     showgrid="false"
      inkscape:snap-bbox="true"
      inkscape:snap-nodes="false"
      inkscape:showpageshadow="false"
      inkscape:window-width="1280"
      inkscape:window-height="773"
-     inkscape:window-x="198"
-     inkscape:window-y="93"
+     inkscape:window-x="158"
+     inkscape:window-y="40"
      showborder="true">
     <inkscape:grid
        type="xygrid"
@@ -74,7 +66,7 @@
     <path
        sodipodi:nodetypes="ccccc"
        id="rect7725"
-       d="M 2.39212,6 L 11.60788,6 C 12.37912,6 13,6.97004 13,8 L 1,8 C 1,6.97004 1.62088,6 2.39212,6 z"
-       style="fill:#eeeeec;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible" />
+       d="M 1.75,6 L 12.25,6 C 13.02124,6 13,6.97004 13,8 L 1,8 C 1,6.97004 0.97876003,6 1.75,6 z"
+       style="fill:#787878;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible" />
   </g>
 </svg>

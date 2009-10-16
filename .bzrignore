@@ -13,7 +13,7 @@ Docky/docky
 *.pidb
 *.userprefs
 bin
-Docky/AssemblyInfo.cs
+AssemblyInfo.cs
 lib/gio-sharp/gio/generated
 lib/gio-sharp/gio/gio-api.xml
 lib/gio-sharp/gio/gio-sharp.dll
