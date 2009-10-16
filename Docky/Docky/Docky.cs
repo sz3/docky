@@ -69,11 +69,10 @@ namespace Docky
 			
 			Wnck.Global.ClientType = Wnck.ClientType.Pager;
 			
+			Log.DisplayLevel = CommandLinePreferences.Logging;
+			
 			PluginManager.Initialize ();
 			Controller.Initialize ();
-			
-			//FIXME: parse args to set log level
-			Log.DisplayLevel = LogLevel.Debug;
 			
 			Gdk.Threads.Enter ();
 			Gtk.Application.Run ();

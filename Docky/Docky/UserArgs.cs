@@ -21,15 +21,28 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
+using Docky.Services;
+
 namespace Docky
 {
 
 
 	public class UserArgs
 	{
+		public LogLevel Logging { get; protected set; }
 
 		internal UserArgs (string [] args)
 		{
+			// defaults
+			Logging = LogLevel.Warn;
+			
+			// parse the command line
+			foreach (string s in args) {
+				if (s == "--info")
+					Logging = LogLevel.Info;
+				else if (s == "--debug")
+					Logging = LogLevel.Debug;
+			}
 		}
 	}
 }
