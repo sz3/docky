@@ -113,7 +113,7 @@ namespace Docky.Menus
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
 				if (hovered && !item.Disabled) {
 					cr.Rectangle (allocation.X, allocation.Y, allocation.Width, allocation.Height);
-					cr.Color = new Cairo.Color (1, 1, 1, .1);
+					cr.Color = TextColor.SetAlpha (.1);
 					cr.Fill ();
 				}
 				
