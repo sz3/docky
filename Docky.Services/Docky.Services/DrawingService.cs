@@ -204,7 +204,7 @@ namespace Docky.Services
 			if (themeIcon != null)
 				return themeIcon.Names.First (n => IconTheme.Default.HasIcon (n));
 			
-			File iconFile = new FileIcon (icon.Handle);
+			FileIcon iconFile = new FileIcon (icon.Handle);
 			
 			Console.WriteLine (iconFile.File.Path);
 		}
