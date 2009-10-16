@@ -208,20 +208,14 @@ namespace Docky.Services
 		public void Open (IEnumerable<GLib.File> files)
 		{			
 			int nMounts = 0;
-			
-			Console.WriteLine ("Trying to mount: {0}", files.First ().Uri);
-			
-			foreach (Mount m in VolumeMonitor.Default.Mounts)
-				Console.WriteLine (m.Root.Uri);
-			
-			/*
+
 			// before we try to use the files, make sure they are mounted
 			foreach (GLib.File f in files) {
 				// it doesn't need to be mounted
 				if (f.IsNative)
 					continue;
 				// it's already mounted
-				if (VolumeMonitor.Default.Mounts.Any (m => m.Root.Uri == f.Uri))
+				if (VolumeMonitor.Default.Mounts.Any (m => f.Uri.ToString ().Contains (m.Root.Uri.ToString ())))
 				    continue;
 				nMounts++;
 				f.MountEnclosingVolume (0, null, null, (o, args) => {
@@ -232,7 +226,6 @@ namespace Docky.Services
 			}
 
 			MaybeLaunch (files, nMounts);
-			*/
 		}
 
 		void MaybeLaunch (IEnumerable<GLib.File> files, int nMounts)
