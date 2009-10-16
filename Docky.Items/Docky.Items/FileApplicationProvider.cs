@@ -209,32 +209,6 @@ namespace Docky.Items
 			return true;
 		}
 		
-		public bool InsertItem (AbstractDockItem item)
-		{
-			if (item.Owner == null || !(item.Owner is FileApplicationProvider))
-				return false;
-			
-			(item.Owner as FileApplicationProvider).RemoveItem (item, false);
-			
-			if (item is FileDockItem) {
-				FileDockItem file = item as FileDockItem;
-				
-				file.Owner = this;
-				items[file.Uri] = file;
-			} else if (item is ApplicationDockItem) {
-				ApplicationDockItem app = item as ApplicationDockItem;
-				
-				app.Owner = this;
-				string uri = new Uri (app.OwnedItem.Location).AbsoluteUri;
-				items[uri] = app;
-			} else {
-				return false;
-			}
-			
-			OnItemsChanged (item.AsSingle (), null);
-			return true;
-		}
-		
 		public void SetWindowManager ()
 		{
 			if (WindowManager == this)
@@ -275,11 +249,6 @@ namespace Docky.Items
 		
 		public override bool RemoveItem (AbstractDockItem item)
 		{
-			return RemoveItem (item, true);
-		}
-		
-		bool RemoveItem (AbstractDockItem item, bool dispose)
-		{
 			if (!items.ContainsValue (item))
 				return false;
 			
@@ -299,8 +268,7 @@ namespace Docky.Items
 			
 			OnItemsChanged (null, item.AsSingle<AbstractDockItem> ());
 			
-			if (dispose)
-				item.Dispose ();
+			item.Dispose ();
 			
 			// this is so if the launcher has open windows and we manage those...
 			UpdateTransientItems ();

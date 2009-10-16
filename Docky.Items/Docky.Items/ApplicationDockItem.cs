@@ -68,12 +68,6 @@ namespace Docky.Items
 			}
 		}
 		
-		public DesktopItem OwnedItem {
-			get {
-				return desktop_item;
-			}
-		}
-		
 		private ApplicationDockItem (DesktopItem item)
 		{
 			related_lock = new Object ();
@@ -199,14 +193,8 @@ namespace Docky.Items
 			if (uris == null)
 				return false;
 			
-			GLib.FileInfo info;
 			foreach (string uri in uris) {
-				try {
-					info = GLib.FileFactory.NewForUri (uri).QueryInfo ("*", GLib.FileQueryInfoFlags.None, null);
-				} catch {
-					continue;
-				}
-				
+				GLib.FileInfo info = GLib.FileFactory.NewForUri (uri).QueryInfo ("*", GLib.FileQueryInfoFlags.None, null);
 				string mime = info.ContentType;
 				if (mimes.Any (m => GLib.Content.TypeIsA (mime, m) || GLib.Content.TypeEquals (mime, m)))
 					return true;

@@ -35,15 +35,6 @@ namespace Docky.Items
 
 	public abstract class AbstractDockItem : IDisposable
 	{
-		static Dictionary<string, AbstractDockItem> items_by_uid = new Dictionary<string, AbstractDockItem> ();
-		
-		public static AbstractDockItem MaybeDockItemForUniqueID (string uniqueID)
-		{
-			if (!items_by_uid.ContainsKey (uniqueID))
-				return null;
-			return items_by_uid[uniqueID];
-		}
-		
 		string hover_text;
 		DockySurface main_buffer, text_buffer;
 		Cairo.Color? average_color;
@@ -134,11 +125,6 @@ namespace Docky.Items
 		{
 			state_times = new Dictionary<ItemState, DateTime> ();
 			Gtk.IconTheme.Default.Changed += HandleIconThemeChanged;
-			
-			GLib.Idle.Add (delegate {
-				items_by_uid[UniqueID ()] = this;
-				return false;
-			});
 		}
 		
 		public DateTime StateSetTime (ItemState state)
@@ -394,7 +380,6 @@ namespace Docky.Items
 		#region IDisposable implementation
 		public virtual void Dispose ()
 		{
-			items_by_uid.Remove (UniqueID ());
 			Gtk.IconTheme.Default.Changed -= HandleIconThemeChanged;
 			ResetBuffers ();
 		}

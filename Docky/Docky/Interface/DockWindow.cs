@@ -723,8 +723,7 @@ namespace Docky.Interface
 			if (InternalDragActive && drag_item != null && !(drag_item is INonPersistedItem)) {
 				string uri = string.Format ("docky://{0}\r\n", drag_item.UniqueID ());
 				byte[] data = System.Text.Encoding.UTF8.GetBytes (uri);
-				args.SelectionData.Set (Gdk.Atom.Intern ("text/docky-uri-list", false), 8, data, data.Length);
-				args.SelectionData.Text = uri;
+				args.SelectionData.Set (args.SelectionData.Target, 8, data, data.Length);
 			}
 		}
 
@@ -769,17 +768,12 @@ namespace Docky.Interface
 				string uris = Encoding.UTF8.GetString (data.Data);
 				
 				drag_data = Regex.Split (uris, "\r\n")
-					.Where (uri => uri.StartsWith ("file://") || uri.StartsWith ("docky://"));
+					.Where (uri => uri.StartsWith ("file://"));
 				
 				drag_data_requested = false;
-				drag_is_desktop_file = drag_data.Any (d => d.StartsWith ("file://") && d.EndsWith (".desktop"));
-				drag_is_desktop_file = drag_is_desktop_file || drag_data.Any (d => d.StartsWith ("docky://"));
+				drag_is_desktop_file = drag_data.Any (d => d.EndsWith (".desktop"));
 				SetHoveredAcceptsDrop ();
 			}
-			
-			Gdk.DragAction action = DragAction.Copy;
-			if (drag_data != null && drag_data.Any (d => d.StartsWith ("docky://")))
-				action = DragAction.Private;
 			
 			Gdk.Drag.Status (args.Context, DragAction.Copy, Gtk.Global.CurrentEventTime);
 			args.RetVal = true;
@@ -790,35 +784,27 @@ namespace Docky.Interface
 		/// </summary>
 		void HandleDragDrop (object o, DragDropArgs args)
 		{
-			bool success = true;
+			args.RetVal = true;
+			Gtk.Drag.Finish (args.Context, true, false, args.Time);
 			
-			if (drag_data != null) {
-				AbstractDockItem item = HoveredItem;
+			if (drag_data == null)
+				return;
 			
-				if (!drag_is_desktop_file && item != null && item.CanAcceptDrop (drag_data)) {
-					item.AcceptDrop (drag_data);
-				} else {
-					foreach (string s in drag_data) {
-						if (s.StartsWith ("file://")) {
-							Preferences.DefaultProvider.InsertItem (s);
-							if (FileApplicationProvider.WindowManager != null)
-								FileApplicationProvider.WindowManager.UpdateTransientItems ();
-						} else if (s.StartsWith ("docky://")) {
-							AbstractDockItem remote = AbstractDockItem.MaybeDockItemForUniqueID (s.Substring ("docky://".Length));
-							if (remote == null) {
-								continue;
-							}
-							success = Preferences.DefaultProvider.InsertItem (remote);
-						}
-					}
+			AbstractDockItem item = HoveredItem;
+			
+			if (!drag_is_desktop_file && item != null && item.CanAcceptDrop (drag_data)) {
+				item.AcceptDrop (drag_data);
+			} else {
+				foreach (string s in drag_data) {
+					Preferences.DefaultProvider.InsertItem (s);
+					if (FileApplicationProvider.WindowManager != null)
+						FileApplicationProvider.WindowManager.UpdateTransientItems ();
 				}
 			}
 			
-			args.RetVal = true;
-			Gtk.Drag.Finish (args.Context, success, false, args.Time);
-			
 			drag_known = false;
 			drag_data = null;
+			drag_data_requested = false;
 			drag_is_desktop_file = false;
 		}
 
@@ -828,14 +814,14 @@ namespace Docky.Interface
 		void HandleDragEnd (object o, DragEndArgs args)
 		{
 			if (drag_item != null) {
-				if (!DockHovered && args.Context.Action != DragAction.Private) {
+				if (!DockHovered) {
 					AbstractDockItemProvider provider = ProviderForItem (drag_item);
 					if (provider != null && provider.ItemCanBeRemoved (drag_item)) {
 						provider.RemoveItem (drag_item);
 						if (FileApplicationProvider.WindowManager != null)
 							FileApplicationProvider.WindowManager.UpdateTransientItems ();
 					}
-				} else if (DockHovered) {
+				} else {
 					AbstractDockItem item = HoveredItem;
 					if (item != null && item.CanAcceptDrop (drag_item))
 						item.AcceptDrop (drag_item);
@@ -880,10 +866,10 @@ namespace Docky.Interface
 			
 			// we own the drag if InternalDragActive is true, lets not be silly
 			if (!drag_known && !InternalDragActive) {
-				drag_data_requested = true;
 				drag_known = true;
 				Gdk.Atom atom = Gtk.Drag.DestFindTarget (this, args.Context, null);
 				Gtk.Drag.GetData (this, args.Context, atom, args.Time);
+				drag_data_requested = true;
 			} else {
 				Gdk.Drag.Status (args.Context, DragAction.Copy, args.Time);
 			}
