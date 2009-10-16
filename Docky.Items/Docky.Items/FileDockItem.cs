@@ -128,7 +128,7 @@ namespace Docky.Items
 		
 		protected void Open ()
 		{
-			DockServices.System.Open (uri);
+			DockServices.System.Open (OwnedFile.AsSingle ());
 		}
 		
 		protected void OpenContainingFolder ()
