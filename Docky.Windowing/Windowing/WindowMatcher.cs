@@ -238,6 +238,9 @@ namespace Docky.Windowing
 				}
 			} catch { return null; }
 			
+			if (cmdline == null)
+				return null;
+			
 			cmdline = cmdline.ToLower ();
 			
 			string [] result = cmdline.Split (Convert.ToChar (0x0));
