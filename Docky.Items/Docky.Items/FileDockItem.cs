@@ -112,12 +112,10 @@ namespace Docky.Items
 		{
 			string name = fileToMove.Basename;
 			int i = 1;
-			if (dest.GetChild (name).Exists) {
-				do {
-					name = fileToMove.Basename;
-					name = string.Format ("{0} ({1})", name, i);
-					i++;
-				} while (dest.GetChild (name).Exists);
+			while (dest.GetChild (name).Exists) {
+				name = fileToMove.Basename;
+				name = string.Format ("{0} ({1})", name, i);
+				i++;
 			}
 			return name;
 		}

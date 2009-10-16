@@ -1090,7 +1090,7 @@ namespace Docky.Interface
 		{
 			if (VerticalDock) {
 				Height = monitor_geo.Height;
-				Width = ZoomedIconSize + 2 * DockHeightBuffer + 250;
+				Width = ZoomedIconSize + 2 * DockHeightBuffer + 180;
 			} else {
 				Width = monitor_geo.Width;
 				Height = ZoomedIconSize + 2 * DockHeightBuffer + UrgentBounceHeight;
