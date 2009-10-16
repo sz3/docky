@@ -205,34 +205,37 @@ namespace Docky.Services
 			System.Diagnostics.Process.Start ("xdg-open", uri);
 		}
 		
+		public void Open (IEnumerable<string> uris)
+		{
+			uris.ToList ().ForEach (uri =>  Open (uri));
+		}
+		
 		public void Open (IEnumerable<GLib.File> files)
-		{			
-			int nMounts = 0;
-
+		{
+			List<GLib.File> noMountNeeded = new List<GLib.File> ();
+			
 			// before we try to use the files, make sure they are mounted
 			foreach (GLib.File f in files) {
-				// it doesn't need to be mounted
-				if (f.IsNative)
-					continue;
-				// it's already mounted
-				if (VolumeMonitor.Default.Mounts.Any (m => f.Uri.ToString ().Contains (m.Root.Uri.ToString ())))
+				// it doesn't need to be mounted or it's already mounted
+				if (f.IsNative ||
+				    VolumeMonitor.Default.Mounts.Any (m => f.Uri.ToString ().Contains (m.Root.Uri.ToString ()))) {
+					noMountNeeded.Add (f);
 				    continue;
-				nMounts++;
+				}
 				f.MountEnclosingVolume (0, null, null, (o, args) => {
+					// wait for the mount to finish
 					while (!f.MountEnclosingVolumeFinish (args));
-					nMounts--;
-					MaybeLaunch (files, nMounts);
+					// FIXME: when we can get a dock item from the UID, redraw the icon here.
+					Launch (new [] {f});
 				});
 			}
 
-			MaybeLaunch (files, nMounts);
+			if (noMountNeeded.Count () > 0)
+				Launch (noMountNeeded);
 		}
 
-		void MaybeLaunch (IEnumerable<GLib.File> files, int nMounts)
+		void Launch (IEnumerable<GLib.File> files)
 		{
-			if (nMounts > 0)
-				return;
-			
 			AppInfo app = files.First ().QueryDefaultHandler (null);
 			
 			GLib.List launchList;
@@ -243,20 +246,21 @@ namespace Docky.Services
 					launchList = new GLib.List (typeof (GLib.File));
 					foreach (GLib.File f in files)
 						launchList.Append (f);
-					app.Launch (launchList, null);
-					return;
+					// if launching was successful, bail
+					if (app.Launch (launchList, null))
+						return;
 				} else if (app.SupportsUris) {
 					launchList = new GLib.List (typeof (string));
 					foreach (GLib.File f in files)
 						launchList.Append (f.Uri.ToString ());
-					app.LaunchUris (launchList, null);
-					return;
+					if (app.LaunchUris (launchList, null))
+						return;
 				}
 			}
 			
 			Log<SystemService>.Error ("Error opening files. The application doesn't support files/URIs or wasn't found.");
 			// fall back on xdg-open
-			files.ToList ().ForEach (f =>  Open (f.Uri.ToString ()));
+			Open (files.Select (f => f.Uri.ToString ()));
 		}
 
 		

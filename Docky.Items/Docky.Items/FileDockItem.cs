@@ -35,7 +35,8 @@ namespace Docky.Items
 		public static FileDockItem NewFromUri (string uri)
 		{
 			// FIXME: need to do something with this... .Exists will fail for non native files
-			// but they are still valid file items (like an unmounted ftp://... file
+			// but they are still valid file items (like an unmounted ftp://... file)
+			// even File.QueryExists () will return false for valid files (ftp://) that aren't mounted.
 			/*
 			string path = Gnome.Vfs.Global.GetLocalPathFromUri (uri);
 			if (!Directory.Exists (path) && !File.Exists (path)) {
@@ -59,15 +60,21 @@ namespace Docky.Items
 			this.uri = uri;
 			OwnedFile = FileFactory.NewForUri (uri);
 			
+			UpdateInfo ();
+		}
+		
+		// this should be called after a successful mount of the file
+		public void UpdateInfo ()
+		{
 			if (OwnedFile.QueryFileType (0, null) == FileType.Directory)
 				is_folder = true;
 			else
-				is_folder = false;
+				is_folder = false;		
 			
-			// only check the icon if it's a native file or it's mounted (ie: .Path != null)
-			if (OwnedFile.IsNative && !string.IsNullOrEmpty (OwnedFile.Path)) {
+			// only check the icon if it's mounted (ie: .Path != null)
+			if (!string.IsNullOrEmpty (OwnedFile.Path)) {
 				FileInfo info = OwnedFile.QueryInfo ("*", FileQueryInfoFlags.None, null);
-				Icon = Docky.Services.DrawingService.IconFromCurrentTheme (info.Icon);
+				SetIconFromGIcon (info.Icon);
 			}
 			else
 				Icon = "";
@@ -86,7 +93,7 @@ namespace Docky.Items
 		}
 
 		public override bool AcceptDrop (IEnumerable<string> uris)
-		{			
+		{
 			foreach (string uri in uris) {
 				File file = FileFactory.NewForUri (uri);
 				if (!file.Exists)
@@ -133,7 +140,7 @@ namespace Docky.Items
 		
 		protected void OpenContainingFolder ()
 		{
-			DockServices.System.Open (OwnedFile.Parent.Uri.ToString ());
+			DockServices.System.Open (OwnedFile.Parent.AsSingle ());
 		}
 	}
 }
