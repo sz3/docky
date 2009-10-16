@@ -53,7 +53,10 @@ namespace GMail
 			atom.GMailChecking += GMailCheckingHandler;
 			atom.GMailFailed += GMailFailedHandler;
 			
-			atom.ResetTimer ();
+			GLib.Idle.Add (delegate {
+				atom.ResetTimer ();
+				return false;
+			});
 		}
 		
 		static int old_count = 0;
