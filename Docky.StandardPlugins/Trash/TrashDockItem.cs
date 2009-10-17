@@ -57,7 +57,7 @@ namespace Trash
 			if (!Directory.Exists (Trash))
 				Directory.CreateDirectory (Trash);
 			
-			HoverText = "Recycle Bin";
+			HoverText = "Trash";
 			
 			UpdateIcon ();
 			SetupFileSystemWatch ();
@@ -138,7 +138,7 @@ namespace Trash
 		bool CanReceiveItem (string uri)
 		{
 			// if the file doesn't exist for whatever reason, we bail
-			return FileFactory.NewForUri (uri).Exists;
+			return FileFactory.NewForUri (uri).Exests;
 		}
 		
 		bool ReceiveItem (string uri)
@@ -167,7 +167,7 @@ namespace Trash
 		
 		public override IEnumerable<MenuItem> GetMenuItems ()
 		{
-			yield return new MenuItem ("Open Recycling Bin", "user-trash", (o, a) => OpenTrash ());
+			yield return new MenuItem ("Open Trash", "user-trash", (o, a) => OpenTrash ());
 			yield return new MenuItem ("Empty Trash", "gtk-delete", (o, a) => EmptyTrash (), !TrashFull);
 		}
 		
