@@ -62,6 +62,8 @@ namespace Docky.Items
 		
 		uint timer;
 		IEnumerable<string> mimes;
+		
+		public DesktopItem OwnedItem { get { return desktop_item; } }
 	
 		public override string ShortName {
 			get {
@@ -160,10 +162,10 @@ namespace Docky.Items
 				yield return new MenuItem ("New Instance", RunIcon, (o, a) => Launch ());
 			else
 				yield return new MenuItem ("Open", RunIcon, (o, a) => Launch ());
-			
+
 			foreach (MenuItem item in base.GetMenuItems ()) {
 				yield return item;
-			}
+			}			
 			
 			if (related_uris.Any ()) {
 				yield return new SeparatorMenuItem ();

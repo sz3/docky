@@ -225,6 +225,12 @@ namespace Docky.Items
 			return true;
 		}
 		
+		public void PinToDock (ApplicationDockItem item)
+		{
+			transient_items.Remove (item);
+			items.Add (new Uri (item.OwnedItem.Location).AbsoluteUri, item);
+		}
+		
 		public void SetWindowManager ()
 		{
 			if (WindowManager == this)
@@ -295,6 +301,16 @@ namespace Docky.Items
 			get {
 				return items.Values.Concat (transient_items);
 			}
+		}
+		
+		public override IEnumerable<Menus.MenuItem> GetMenuItems (AbstractDockItem item)
+		{
+			if (item is ApplicationDockItem && !items.ContainsValue (item)) {
+				yield return new Menus.MenuItem ("Pin to Dock", "add", (o, a) => PinToDock (item as ApplicationDockItem));
+			}
+			
+			foreach (Menus.MenuItem menuItem in base.GetMenuItems (item))
+			         yield return menuItem;
 		}
 		
 		public override void Dispose ()
