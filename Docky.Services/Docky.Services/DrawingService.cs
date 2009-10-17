@@ -151,7 +151,7 @@ namespace Docky.Services
 				else
 					pixbuf = new Pixbuf (name, size, size);
 			} catch (Exception e) {
-				Log<DrawingService>.Warn ("Error loading icon from file '" + name + "': " + e);
+				Log<DrawingService>.Warn ("Error loading icon from file '" + name + "': " + e.Message);
 				Log<DrawingService>.Debug (e.StackTrace);
 				pixbuf = null;
 			}
@@ -177,7 +177,7 @@ namespace Docky.Services
 					pixbuf = theme.LoadIcon ("gnome-mime-text", size, 0);
 				}
 			} catch (Exception e) {
-				Log<DrawingService>.Warn ("Error loading themed icon '" + name + "': " + e);
+				Log<DrawingService>.Warn ("Error loading themed icon '" + name + "': " + e.Message);
 				Log<DrawingService>.Debug (e.StackTrace);
 				pixbuf = null;
 			}
@@ -192,7 +192,7 @@ namespace Docky.Services
 				try {
 					pixbuf = IconTheme.Default.LoadIcon ("gtk-file", size, 0);
 				} catch (Exception e) {
-					Log<DrawingService>.Warn ("Error loading generic icon: " + e);
+					Log<DrawingService>.Warn ("Error loading generic icon: " + e.Message);
 					Log<DrawingService>.Debug (e.StackTrace);
 					pixbuf = null;					
 				}
