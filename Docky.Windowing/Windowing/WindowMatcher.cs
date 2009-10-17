@@ -172,8 +172,26 @@ namespace Docky.Windowing
 			if (window == null)
 				throw new ArgumentNullException ("window");
 			
-			string file = window_to_desktop_files [window].First ();
-			return (file.EndsWith (".desktop")) ? file : null;
+			if (WindowIsOpenOffice (window))
+				SetupWindow (window);
+			
+			string file = window_to_desktop_files[window].First ();
+			file = file.EndsWith (".desktop") ? file : null;
+			
+			return file;
+		}
+		
+		public bool WindowIsReadyForMatch (Wnck.Window window)
+		{
+			if (!WindowIsOpenOffice (window))
+				return true;
+			SetupWindow (window);
+			return window_to_desktop_files[window].First ().EndsWith (".desktop");
+		}
+		
+		bool WindowIsOpenOffice (Wnck.Window window)
+		{
+			return window.ClassGroup != null && window.ClassGroup.Name.ToLower ().StartsWith ("openoffice");
 		}
 		
 		IEnumerable<string> FindDesktopFileForWindowOrDefault (Wnck.Window window)
@@ -193,18 +211,18 @@ namespace Docky.Windowing
 			
 			// if we have a classname that matches a desktopid we have a winner
 			if (window.ClassGroup != null) {
-				if (window.ClassGroup.Name.ToLower ().StartsWith ("openoffice")) {
+				if (WindowIsOpenOffice (window)) {
 					string title = window.Name;
 					if (title.Contains ("Writer"))
-						command_line [0] = "ooffice-writer";
+						command_line[0] = "ooffice-writer";
 					else if (title.Contains ("Draw"))
-						command_line [0] = "ooffice-draw";
+						command_line[0] = "ooffice-draw";
 					else if (title.Contains ("Impress"))
-						command_line [0] = "ooffice-impress";
+						command_line[0] = "ooffice-impress";
 					else if (title.Contains ("Calc"))
-						command_line [0] = "ooffice-calc";
+						command_line[0] = "ooffice-calc";
 					else if (title.Contains ("Math"))
-						command_line [0] = "ooffice-math";
+						command_line[0] = "ooffice-math";
 					
 				} else {
 					string class_name = window.ClassGroup.ResClass;
@@ -217,15 +235,15 @@ namespace Docky.Windowing
 				}
 			}
 			
-			if (command_line != null && exec_to_desktop_files.ContainsKey (command_line [0])) {
-				foreach (string s in exec_to_desktop_files [command_line [0]])
+			if (command_line != null && exec_to_desktop_files.ContainsKey (command_line[0])) {
+				foreach (string s in exec_to_desktop_files[command_line[0]])
 					yield return s;
 				yield break;
 			}
 			
 			yield return window.Pid.ToString ();
 		}
-			
+		
 		string [] CommandLineForPid (int pid)
 		{
 			string cmdline;

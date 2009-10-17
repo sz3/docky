@@ -85,11 +85,27 @@ namespace Docky.Items
 
 		void WnckScreenDefaultWindowOpened (object o, WindowOpenedArgs args)
 		{
-			// ensure we run last (more or less) so that all icons can update first
-			GLib.Idle.Add (delegate {
-				UpdateTransientItems ();
-				return false;
-			});
+			if (args.Window.IsSkipTasklist)
+				return;
+			
+			if (!WindowMatcher.Default.WindowIsReadyForMatch (args.Window)) {
+				int i = 0;
+				// try to give open office enough time to open and set its title
+				GLib.Timeout.Add (150, delegate {
+					if (!WindowMatcher.Default.WindowIsReadyForMatch (args.Window) && i < 20) {
+						i++;
+						return true;
+					}
+					UpdateTransientItems ();
+					return false;
+				});
+			} else {
+				// ensure we run last (more or less) so that all icons can update first
+				GLib.Timeout.Add (150, delegate {
+					UpdateTransientItems ();
+					return false;
+				});
+			}
 		}
 
 		void WnckScreenDefaultWindowClosed (object o, WindowClosedArgs args)
