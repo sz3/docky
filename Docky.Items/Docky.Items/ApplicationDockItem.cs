@@ -155,7 +155,7 @@ namespace Docky.Items
 		public override IEnumerable<MenuItem> GetMenuItems ()
 		{
 			if (ManagedWindows.Any ())
-				yield return new MenuItem ("New Instance", RunIcon, (o, a) => Launch ());
+				yield return new MenuItem ("New Window", RunIcon, (o, a) => Launch ());
 			else
 				yield return new MenuItem ("Open", RunIcon, (o, a) => Launch ());
 

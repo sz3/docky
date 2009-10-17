@@ -232,7 +232,7 @@ namespace Docky.Items
 					yield return new MenuItem ("Restore", MinimizeIcon, (o, a) => WindowControl.RestoreWindows (ManagedWindows));
 				else
 					yield return new MenuItem ("Minimize", MinimizeIcon, (o, a) => WindowControl.MinimizeWindows (ManagedWindows));
-				yield return new MenuItem ("Close", CloseIcon, (o, a) => WindowControl.CloseWindows (ManagedWindows));
+				yield return new MenuItem ("Quit", CloseIcon, (o, a) => WindowControl.CloseWindows (ManagedWindows));
 				
 				yield return new SeparatorMenuItem ();
 				
