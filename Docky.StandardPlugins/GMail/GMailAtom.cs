@@ -81,7 +81,7 @@ namespace GMail
 		
 		public bool HasUnread {
 			get {
-				return UnreadCount > 0 && State == GMailState.Normal;
+				return UnreadCount > 0 && State != GMailState.Error;
 			}
 		}
 		

@@ -134,7 +134,7 @@ namespace GMail
 				using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("badge-yellow.svg@" + GetType ().Assembly.FullName, size / 2))
 				{
 					Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, size / 2, 0);
-					cr.PaintWithAlpha (0.9);
+					cr.PaintWithAlpha (1);
 				}
 			
 				layout.Width = Pango.Units.FromPixels (size / 2);
@@ -151,7 +151,7 @@ namespace GMail
 
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.LineWidth = 2;
-				cr.Color = new Cairo.Color (0, 0, 0, 0.4);
+				cr.Color = new Cairo.Color (0, 0, 0, 0.2);
 				cr.StrokePreserve ();
 				cr.Color = new Cairo.Color (1, 1, 1, 1);
 				cr.Fill ();
