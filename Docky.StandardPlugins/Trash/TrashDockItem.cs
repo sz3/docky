@@ -138,7 +138,7 @@ namespace Trash
 		bool CanReceiveItem (string uri)
 		{
 			// if the file doesn't exist for whatever reason, we bail
-			return FileFactory.NewForUri (uri).Exests;
+			return FileFactory.NewForUri (uri).Exists;
 		}
 		
 		bool ReceiveItem (string uri)
