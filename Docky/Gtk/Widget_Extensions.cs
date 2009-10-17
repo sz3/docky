@@ -19,6 +19,8 @@ using System;
 
 using Gdk;
 
+using Docky.Services;
+
 namespace Gtk
 {
 
@@ -33,7 +35,7 @@ namespace Gtk
             colormap = self.Screen.RgbaColormap;
             if (colormap == null) {
                     colormap = self.Screen.RgbColormap;
-                    Console.Error.WriteLine ("No alpha support.");
+                    Log.Error ("No alpha support.");
             }
             
             self.Colormap = colormap;

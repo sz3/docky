@@ -407,7 +407,7 @@ namespace Docky.Interface
 			                                                   GetOption ("Position", DockPosition.Bottom.ToString ()));
 			
 			while (Docky.Controller.Docks.Any ((Dock d) => d.Preferences.Position == position)) {
-				Console.Error.WriteLine ("Dock position already in use: " + position.ToString ());
+				Log<DockPreferences>.Error ("Dock position already in use: " + position.ToString ());
 				position = (DockPosition) ((((int) position) + 1) % 4);
 			}
 			Position = position;

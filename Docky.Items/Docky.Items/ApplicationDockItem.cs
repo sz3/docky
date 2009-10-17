@@ -45,7 +45,8 @@ namespace Docky.Items
 			try {
 				desktopItem = new DesktopItem (filename);
 			} catch (Exception e) {
-				Console.Error.WriteLine (e.Message);
+				Log<ApplicationDockItem>.Error (e.Message);
+				Log<ApplicationDockItem>.Debug (e.StackTrace);
 				return null;
 			}
 			
