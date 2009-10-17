@@ -33,7 +33,7 @@ function run () {
 }
 
 
-PROJECT=Do
+PROJECT=Docky
 FILE=
 CONFIGURE=configure.ac
 
