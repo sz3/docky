@@ -266,8 +266,13 @@ namespace Docky.Services
 					}
 				} else if (app.SupportsUris) {
 					launchList = new GLib.List (typeof (string));
-					foreach (GLib.File f in files)
-						launchList.Append (f.Uri.ToString ());
+					foreach (GLib.File f in files) {
+						// FIXME: File.URI is crashing in the Sys.Uri constructor somewhere
+						try {
+							launchList.Append (f.Uri.ToString ());
+							return;
+						} catch { break; }
+					}
 					try {
 						if (app.LaunchUris (launchList, null))
 							return;
