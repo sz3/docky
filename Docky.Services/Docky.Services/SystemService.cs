@@ -224,7 +224,9 @@ namespace Docky.Services
 				}
 				f.MountEnclosingVolume (0, null, null, (o, args) => {
 					// wait for the mount to finish
-					while (!f.MountEnclosingVolumeFinish (args));
+					try {
+						while (!f.MountEnclosingVolumeFinish (args));
+					} catch { }
 					// FIXME: when we can get a dock item from the UID, redraw the icon here.
 					Launch (new [] {f});
 				});
