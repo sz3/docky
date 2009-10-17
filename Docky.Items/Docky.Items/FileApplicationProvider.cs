@@ -306,11 +306,11 @@ namespace Docky.Items
 		public override IEnumerable<Menus.MenuItem> GetMenuItems (AbstractDockItem item)
 		{
 			if (item is ApplicationDockItem && !items.ContainsValue (item)) {
-				yield return new Menus.MenuItem ("Pin to Dock", "add", (o, a) => PinToDock (item as ApplicationDockItem));
+				yield return new Menus.MenuItem ("Pin to Dock", "pin.svg@" + GetType ().Assembly.FullName, (o, a) => PinToDock (item as ApplicationDockItem));
 			}
 			
 			foreach (Menus.MenuItem menuItem in base.GetMenuItems (item))
-			         yield return menuItem;
+				 yield return menuItem;
 		}
 		
 		public override void Dispose ()

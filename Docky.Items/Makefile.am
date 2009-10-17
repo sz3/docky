@@ -30,6 +30,7 @@ RESOURCES = \
 	Resources/close.svg \
 	Resources/maximize.svg \
 	Resources/minimize.svg \
+	Resources/pin.svg \
 	Resources/run.svg \
 	Resources/Docky.Items.addin.xml
 
