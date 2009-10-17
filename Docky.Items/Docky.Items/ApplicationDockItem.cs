@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -33,10 +33,8 @@ using Docky.Zeitgeist;
 
 namespace Docky.Items
 {
-
 	public class ApplicationDockItem : WnckDockItem
 	{
-
 		public static ApplicationDockItem NewFromUri (string uri)
 		{
 			DesktopItem desktopItem;
@@ -56,27 +54,25 @@ namespace Docky.Items
 			return new ApplicationDockItem (desktopItem);
 		}
 		
-		DesktopItem desktop_item;
-		ZeitgeistResult[] related_uris;
-		object related_lock;
+		ZeitgeistResult[] related_uris = new ZeitgeistResult[0];
+		object related_lock = new Object ();
 		
 		uint timer;
 		IEnumerable<string> mimes;
 		
-		public DesktopItem OwnedItem { get { return desktop_item; } }
+		public DesktopItem OwnedItem { get; protected set; }
 	
 		public override string ShortName {
 			get {
-				return HoverText; // fixme
+				// FIXME
+				return HoverText;
 			}
 		}
 		
 		private ApplicationDockItem (DesktopItem item)
 		{
-			related_lock = new Object ();
-			related_uris = new ZeitgeistResult[0];
+			OwnedItem = item;
 			
-			desktop_item = item;
 			if (item.HasAttribute ("Icon"))
 				Icon = item.GetString ("Icon");
 			
@@ -108,7 +104,7 @@ namespace Docky.Items
 		
 		public override string UniqueID ()
 		{
-			return desktop_item.Location;
+			return OwnedItem.Location;
 		}
 		
 		void WnckScreenDefaultWindowClosed (object o, WindowClosedArgs args)
@@ -125,7 +121,7 @@ namespace Docky.Items
 		
 		void UpdateWindows ()
 		{
-			Windows = WindowMatcher.Default.WindowsForDesktopFile (desktop_item.Location);
+			Windows = WindowMatcher.Default.WindowsForDesktopFile (OwnedItem.Location);
 		}
 		
 		void UpdateRelated ()
@@ -229,12 +225,14 @@ namespace Docky.Items
 		
 		public void LaunchWithFiles (IEnumerable<string> files)
 		{
-			desktop_item.Launch (files);
+			OwnedItem.Launch (files);
 		}
 		
 		public override void Dispose ()
 		{
 			GLib.Source.Remove (timer);
+			Wnck.Screen.Default.WindowOpened -= WnckScreenDefaultWindowOpened;
+			Wnck.Screen.Default.WindowClosed -= WnckScreenDefaultWindowClosed;
 			base.Dispose ();
 		}
 	}
