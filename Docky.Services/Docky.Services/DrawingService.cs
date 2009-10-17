@@ -202,7 +202,12 @@ namespace Docky.Services
 		
 		public static string IconFromGIcon (GLib.Icon icon)
 		{
+			Console.WriteLine (icon.Handle);
+
 			ThemedIcon themeIcon = new ThemedIcon (icon.Handle);
+
+			foreach (string s in themeIcon.Names)
+				Console.WriteLine (s);
 			
 			// if the icon exists in the theme, this will return the relevent 
 			if (themeIcon.Names.Any ())
