@@ -15,10 +15,10 @@
    id="svg2"
    sodipodi:version="0.32"
    inkscape:version="0.46"
-   sodipodi:docname="grayscale.svg"
+   sodipodi:docname="background.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <metadata
-     id="metadata16">
+     id="metadata15">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -29,7 +29,7 @@
     </rdf:RDF>
   </metadata>
   <sodipodi:namedview
-     inkscape:window-height="793"
+     inkscape:window-height="789"
      inkscape:window-width="1440"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -41,70 +41,59 @@
      pagecolor="#ffffff"
      id="base"
      showgrid="false"
-     inkscape:showpageshadow="false"
-     showborder="false"
-     inkscape:zoom="1"
-     inkscape:cx="513.90476"
-     inkscape:cy="115.04283"
+     inkscape:zoom="0.50074534"
+     inkscape:cx="300.93145"
+     inkscape:cy="109.55718"
      inkscape:window-x="0"
      inkscape:window-y="24"
      inkscape:current-layer="svg2" />
   <defs
      id="defs4">
     <linearGradient
-       id="linearGradient3192">
+       id="linearGradient3159">
       <stop
-         id="stop3194"
-         style="stop-color:#a0a0a0;stop-opacity:1"
+         id="stop3161"
+         style="stop-color:#dfdfdf;stop-opacity:1"
          offset="0" />
       <stop
-         id="stop3196"
-         style="stop-color:#3c3c3c;stop-opacity:0.8067227;"
+         id="stop3163"
+         style="stop-color:#acacac;stop-opacity:1"
          offset="1" />
     </linearGradient>
     <linearGradient
-       id="linearGradient3184">
+       id="linearGradient3155">
       <stop
-         id="stop3186"
+         id="stop3157"
          style="stop-color:#ffffff;stop-opacity:1"
          offset="0" />
       <stop
-         id="stop3190"
+         id="stop3159"
          style="stop-color:#ffffff;stop-opacity:0"
          offset="1" />
     </linearGradient>
     <linearGradient
-       x1="443.77048"
-       y1="0"
-       x2="443.77048"
-       y2="11.206196"
-       id="linearGradient3182"
-       xlink:href="#linearGradient3184"
+       x1="157.38963"
+       y1="1"
+       x2="157.38963"
+       y2="150.57092"
+       id="linearGradient3161"
+       xlink:href="#linearGradient3155"
        gradientUnits="userSpaceOnUse" />
     <linearGradient
-       x1="484.73389"
+       x1="500"
        y1="0"
-       x2="484.73389"
-       y2="128.54042"
-       id="linearGradient3198"
-       xlink:href="#linearGradient3192"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       x1="337.94827"
-       y1="0"
-       x2="337.94827"
-       y2="128.54042"
-       id="linearGradient3210"
-       xlink:href="#linearGradient3192"
+       x2="500"
+       y2="75.25"
+       id="linearGradient3181"
+       xlink:href="#linearGradient3159"
        gradientUnits="userSpaceOnUse" />
   </defs>
   <path
      d="M 999.5,150 L 999.5,5.93607 C 999.5,2.9996655 997.00033,0.5 994.01877,0.5 L 6,0.5 C 2.5867104,0.5 0.5,2.9469231 0.5,6 L 0.5,150"
      id="rect2396"
-     style="opacity:0.59999999999999998;fill:url(#linearGradient3198);fill-opacity:1;stroke:url(#linearGradient3210);stroke-width:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     sodipodi:nodetypes="cccccc" />
+     style="opacity:1;fill:url(#linearGradient3181);fill-opacity:1;stroke:#8c8c8c;stroke-width:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
   <path
-     d="M 999.5,128 L 999.5,5.93607 C 999.5,2.9996655 997.00033,0.5 994.01877,0.5 L 6,0.5 C 2.5867104,0.5 0.5,2.9469231 0.5,6 L 0.5,128"
-     id="path2404"
-     style="opacity:0.29999999999999999;fill:none;fill-opacity:1;stroke:url(#linearGradient3182);stroke-width:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+     d="M 998.5,150 L 998.5,5.93607 C 998.5,3.6509317 996.50015,1.5 994.01877,1.5 L 6,1.5 C 3.3337857,1.5 1.49997,3.2581783 1.49997,6 L 1.49997,150"
+     id="path3171"
+     style="opacity:0.6;fill:none;fill-opacity:1;stroke:url(#linearGradient3161);stroke-width:1;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
 </svg>
