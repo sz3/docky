@@ -160,9 +160,16 @@ namespace Docky.Items
 			else
 				yield return new MenuItem ("Open", RunIcon, (o, a) => Launch ());
 			
+			if (!(Owner as FileApplicationProvider).Uris.Contains (string.Format ("file://{0}", desktop_item.Location)))
+				yield return new MenuItem ("Pin to Dock", "add", (o, a) => (Owner as FileApplicationProvider)
+				    .InsertItem (string.Format ("file://{0}", desktop_item.Location)));
+			else
+				yield return new MenuItem ("Unpin from Dock", "remove", (o, a) => (Owner as FileApplicationProvider)
+				    .RemoveItem (this));			
+			
 			foreach (MenuItem item in base.GetMenuItems ()) {
 				yield return item;
-			}
+			}			
 			
 			if (related_uris.Any ()) {
 				yield return new SeparatorMenuItem ();
