@@ -233,6 +233,7 @@ namespace Docky.Services
 				f.MountEnclosingVolume (0, null, null, (o, args) => {
 					// wait for the mount to finish
 					try {
+						Console.WriteLine ("trying to mount...");
 						while (!f.MountEnclosingVolumeFinish (args));
 					} catch { }
 					// FIXME: when we can get a dock item from the UID, redraw the icon here.
@@ -270,8 +271,7 @@ namespace Docky.Services
 						// FIXME: File.URI is crashing in the Sys.Uri constructor somewhere
 						try {
 							launchList.Append (f.Uri.ToString ());
-							return;
-						} catch { break; }
+						} catch { return; }
 					}
 					try {
 						if (app.LaunchUris (launchList, null))

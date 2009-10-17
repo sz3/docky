@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
+//using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -35,47 +35,35 @@ namespace Trash
 {
 
 
-	public class TrashDockItem : IconDockItem
+	public class TrashDockItem : FileDockItem
 	{
 		
-		FileSystemWatcher fsw;
-
-		string Trash {
-			get { 
-				return Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData), "Trash/files/");
+		uint ItemsInTrash {
+			get {
+				FileInfo info = OwnedFile.QueryInfo ("trash::item-count", FileQueryInfoFlags.None, null);
+				return info.GetAttributeUInt ("trash::item-count");
 			}
 		}
 		
 		bool TrashFull {
 			get {
-				return Directory.Exists (Trash) && (Directory.GetFiles (Trash).Any () || Directory.GetDirectories (Trash).Any ());
+				return ItemsInTrash > 0;
 			}
 		}
 		
-		public TrashDockItem ()
+		FileMonitor TrashMonitor { get; set; }
+		
+		public TrashDockItem () : base ("trash://")
 		{
-			if (!Directory.Exists (Trash))
-				Directory.CreateDirectory (Trash);
-			
 			HoverText = "Trash";
 			
 			UpdateIcon ();
-			SetupFileSystemWatch ();
-		}
 		
-		void SetupFileSystemWatch ()
-		{
-			fsw = new FileSystemWatcher (Trash);
-			fsw.IncludeSubdirectories = false;
-			fsw.NotifyFilter = NotifyFilters.FileName | NotifyFilters.DirectoryName;
-
-			fsw.Changed += HandleChanged;
-			fsw.Created += HandleChanged;
-			fsw.Deleted += HandleChanged;
-			fsw.EnableRaisingEvents = true;
+			TrashMonitor = OwnedFile.Monitor (FileMonitorFlags.None, null);
+			TrashMonitor.Changed += HandleChanged;
 		}
 
-		void HandleChanged(object sender, FileSystemEventArgs e)
+		void HandleChanged (object o, ChangedArgs args)
 		{
 			Gtk.Application.Invoke (delegate {
 				UpdateIcon ();
@@ -84,10 +72,8 @@ namespace Trash
 
 		void UpdateIcon ()
 		{
-			if (TrashFull)
-				Icon = "gnome-stock-trash-full";
-			else
-				Icon = "gnome-stock-trash";
+			FileInfo info = OwnedFile.QueryInfo ("standard::icon", FileQueryInfoFlags.None, null);
+			SetIconFromGIcon (info.Icon);
 		}
 		
 		public override string UniqueID ()
@@ -138,7 +124,7 @@ namespace Trash
 		bool CanReceiveItem (string uri)
 		{
 			// if the file doesn't exist for whatever reason, we bail
-			return FileFactory.NewForUri (uri).Exests;
+			return FileFactory.NewForUri (uri).Exists;
 		}
 		
 		bool ReceiveItem (string uri)
@@ -173,7 +159,7 @@ namespace Trash
 		
 		void OpenTrash ()
 		{
-			DockServices.System.Open ("trash://");
+			DockServices.System.Open (OwnedFile);
 		}
 		
 		void EmptyTrash ()
@@ -191,17 +177,15 @@ namespace Trash
 			md.AddButton ("Empty _Trash", Gtk.ResponseType.Ok);
 
 			md.Response += (o, args) => {
-				if (args.ResponseId != Gtk.ResponseType.Cancel && Directory.Exists (Trash)) {
-					fsw.Dispose ();
-					fsw = null;
+				if (args.ResponseId != Gtk.ResponseType.Cancel ) {//&& Directory.Exists (Trash)) {
+					//fsw.Dispose ();
+					//fsw = null;
 					
 					try {
-						Directory.Delete (Trash, true);
-						Directory.CreateDirectory (Trash);
+						//Directory.Delete (Trash, true);
+						//Directory.CreateDirectory (Trash);
 					} catch { /* do nothing */ }
-					
-					SetupFileSystemWatch ();
-					
+
 					Gtk.Application.Invoke (delegate {
 						UpdateIcon ();
 						OnPaintNeeded ();
