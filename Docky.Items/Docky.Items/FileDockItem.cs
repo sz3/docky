@@ -138,12 +138,12 @@ namespace Docky.Items
 		
 		protected void Open ()
 		{
-			DockServices.System.Open (OwnedFile.AsSingle ());
+			DockServices.System.Open (OwnedFile);
 		}
 		
 		protected void OpenContainingFolder ()
 		{
-			DockServices.System.Open (OwnedFile.Parent.AsSingle ());
+			DockServices.System.Open (OwnedFile.Parent);
 		}
 	}
 }

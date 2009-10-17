@@ -210,17 +210,25 @@ namespace Docky.Services
 			uris.ToList ().ForEach (uri =>  Open (uri));
 		}
 		
+		public void Open (GLib.File file)
+		{
+			Open (new [] { file });
+		}
+		
 		public void Open (IEnumerable<GLib.File> files)
 		{
 			List<GLib.File> noMountNeeded = new List<GLib.File> ();
 			
 			// before we try to use the files, make sure they are mounted
 			foreach (GLib.File f in files) {
-				// it doesn't need to be mounted or it's already mounted
-				if (f.IsNative ||
-				    VolumeMonitor.Default.Mounts.Any (m => f.Uri.ToString ().Contains (m.Root.Uri.ToString ()))) {
-					noMountNeeded.Add (f);
-				    continue;
+				// if the path isn't empty, 
+				// check if it's a local file or on VolumeMonitor's mount list.
+				// if it is, skip it.
+				if (!string.IsNullOrEmpty (f.Path)) {
+					if (f.IsNative ||VolumeMonitor.Default.Mounts.Any (m => f.Path.Contains (m.Root.Path))) {
+						noMountNeeded.Add (f);
+						continue;
+					}
 				}
 				f.MountEnclosingVolume (0, null, null, (o, args) => {
 					// wait for the mount to finish
@@ -230,7 +238,7 @@ namespace Docky.Services
 				});
 			}
 
-			if (noMountNeeded.Count () > 0)
+			if (noMountNeeded.Any ())
 				Launch (noMountNeeded);
 		}
 
@@ -246,15 +254,25 @@ namespace Docky.Services
 					launchList = new GLib.List (typeof (GLib.File));
 					foreach (GLib.File f in files)
 						launchList.Append (f);
-					// if launching was successful, bail
-					if (app.Launch (launchList, null))
-						return;
+					try {
+						// if launching was successful, bail
+						if (app.Launch (launchList, null))
+							return;
+					} catch (GLib.GException e) {
+						Log<SystemService>.Error (e.Message);
+						Log<SystemService>.Info (e.StackTrace);
+					}
 				} else if (app.SupportsUris) {
 					launchList = new GLib.List (typeof (string));
 					foreach (GLib.File f in files)
 						launchList.Append (f.Uri.ToString ());
-					if (app.LaunchUris (launchList, null))
-						return;
+					try {
+						if (app.LaunchUris (launchList, null))
+							return;
+					} catch (GLib.GException e) {
+						Log<SystemService>.Error (e.Message);
+						Log<SystemService>.Info (e.StackTrace);
+					}
 				}
 			}
 			

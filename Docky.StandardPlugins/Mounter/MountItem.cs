@@ -63,7 +63,7 @@ namespace Mounter
 		
 		void OpenVolume ()
 		{
-			DockServices.System.Open (Mnt.Root.ToString ());
+			DockServices.System.Open (Mnt.Root);
 		}
 		
 		public void UnMount ()
