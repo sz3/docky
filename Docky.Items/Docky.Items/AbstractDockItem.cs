@@ -333,8 +333,13 @@ namespace Docky.Items
 		
 		protected void QueueRedraw ()
 		{
-			ResetBuffers ();
-			OnPaintNeeded ();
+			// try to ensure we dont clobber the buffers
+			// during an already in-progress repaint
+			GLib.Idle.Add (delegate {
+				ResetBuffers ();
+				OnPaintNeeded ();
+				return false;
+			});
 		}
 		
 		DockySurface ResetBuffer (DockySurface buffer)
