@@ -175,6 +175,11 @@ namespace GMail
 		
 		void CheckGMail ()
 		{
+			if (string.IsNullOrEmpty (GMailPreferences.User) || string.IsNullOrEmpty (GMailPreferences.Password)) {
+				OnGMailFailed (Catalog.GetString ("Username or Password not set"));
+				return;
+			}
+
 			new Thread (() => {
 				try {
 					Gtk.Application.Invoke (delegate { OnGMailChecking (); });
