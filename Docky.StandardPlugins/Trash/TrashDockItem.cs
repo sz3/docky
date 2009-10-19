@@ -86,8 +86,6 @@ namespace Trash
 				break;
 			}
 			
-			//HoverText = (itemsInTrash == 0 || itemsInTrash > 1) ? noItems string.Format (manyItems, itemsInTrash) : oneItem;
-
 			FileInfo info = OwnedFile.QueryInfo ("standard::icon", FileQueryInfoFlags.None, null);
 			SetIconFromGIcon (info.Icon);
 		}

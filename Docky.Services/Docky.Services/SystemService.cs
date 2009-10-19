@@ -233,11 +233,14 @@ namespace Docky.Services
 				f.MountEnclosingVolume (0, null, null, (o, args) => {
 					// wait for the mount to finish
 					try {
-						Console.WriteLine ("trying to mount...");
-						while (!f.MountEnclosingVolumeFinish (args));
-					} catch { }
-					// FIXME: when we can get a dock item from the UID, redraw the icon here.
-					Launch (new [] {f});
+						if (f.MountEnclosingVolumeFinish (args))
+							// FIXME: when we can get a dock item from the UID, redraw the icon here.
+							Launch (new [] {f});
+					// an exception can be thrown here if we are trying to mount an already mounted file
+					// in that case, just launch it.
+					} catch (GLib.GException) {
+						Launch (new [] {f});
+					}
 				});
 			}
 
@@ -246,7 +249,7 @@ namespace Docky.Services
 		}
 
 		void Launch (IEnumerable<GLib.File> files)
-		{
+		{			
 			AppInfo app = files.First ().QueryDefaultHandler (null);
 			
 			GLib.List launchList;
