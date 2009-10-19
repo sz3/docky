@@ -18,7 +18,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-//using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -37,6 +36,8 @@ namespace Trash
 
 	public class TrashDockItem : FileDockItem
 	{
+		const string OneInTrash = "1 item in Trash";
+		const string ManyInTrash = "{0} items in Trash";
 		
 		uint ItemsInTrash {
 			get {
@@ -55,23 +56,38 @@ namespace Trash
 		
 		public TrashDockItem () : base ("trash://")
 		{
-			HoverText = "Trash";
-			
-			UpdateIcon ();
+			Update ();
 		
 			TrashMonitor = OwnedFile.Monitor (FileMonitorFlags.None, null);
 			TrashMonitor.Changed += HandleChanged;
 		}
 
 		void HandleChanged (object o, ChangedArgs args)
-		{
+		{			
+			
 			Gtk.Application.Invoke (delegate {
-				UpdateIcon ();
+				Update ();
 			});
 		}
 
-		void UpdateIcon ()
+		void Update ()
 		{
+			// this can be a little costly, let's just call it once and store locally
+			uint itemsInTrash = ItemsInTrash;
+			switch (itemsInTrash) {
+			case 0:
+				HoverText = string.Format (ManyInTrash, "No");
+				break;
+			case 1:
+				HoverText = string.Format (OneInTrash, "1");
+				break;
+			default:
+				HoverText = string.Format (ManyInTrash, itemsInTrash);
+				break;
+			}
+			
+			//HoverText = (itemsInTrash == 0 || itemsInTrash > 1) ? noItems string.Format (manyItems, itemsInTrash) : oneItem;
+
 			FileInfo info = OwnedFile.QueryInfo ("standard::icon", FileQueryInfoFlags.None, null);
 			SetIconFromGIcon (info.Icon);
 		}
@@ -132,7 +148,7 @@ namespace Trash
 			bool trashed = FileFactory.NewForUri (uri).Trash (null);
 			
 			if (trashed) {
-				UpdateIcon ();
+				Update ();
 				OnPaintNeeded ();
 			}
 			else
@@ -177,17 +193,20 @@ namespace Trash
 			md.AddButton ("Empty _Trash", Gtk.ResponseType.Ok);
 
 			md.Response += (o, args) => {
-				if (args.ResponseId != Gtk.ResponseType.Cancel ) {//&& Directory.Exists (Trash)) {
-					//fsw.Dispose ();
-					//fsw = null;
+				if (args.ResponseId != Gtk.ResponseType.Cancel ) {
+					// disable events for a minute
+					TrashMonitor.Changed -= HandleChanged;
 					
 					try {
-						//Directory.Delete (Trash, true);
-						//Directory.CreateDirectory (Trash);
+						// this should be done in a thread
+						DeleteContents (OwnedFile);
 					} catch { /* do nothing */ }
+					
+					// eneble events again
+					TrashMonitor.Changed += HandleChanged;
 
 					Gtk.Application.Invoke (delegate {
-						UpdateIcon ();
+						Update ();
 						OnPaintNeeded ();
 					});
 				}
@@ -195,6 +214,26 @@ namespace Trash
 			};
 			
 			md.Show ();
+		}
+
+		void DeleteContents (File file)
+		{
+			FileEnumerator enumerator = file.EnumerateChildren ("standard::type,standard::name,access::can-delete", FileQueryInfoFlags.NofollowSymlinks, null);
+			
+			if (enumerator == null)
+				return;
+			
+			FileInfo info;
+			
+			while ((info = enumerator.NextFile ()) != null) {
+				File child = file.GetChild (info.Name);
+
+				if (info.FileType == FileType.Directory)
+					DeleteContents (child);
+
+				if (info.GetAttributeBoolean ("access::can-delete"))
+					child.Delete (null);
+			}
 		}
 	}
 }
