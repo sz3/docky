@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,7 +18,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -35,59 +34,60 @@ namespace Trash
 {
 
 
-	public class TrashDockItem : IconDockItem
+	public class TrashDockItem : FileDockItem
 	{
+		const string OneInTrash = "1 item in Trash";
+		const string ManyInTrash = "{0} items in Trash";
 		
-		FileSystemWatcher fsw;
-
-		string Trash {
-			get { 
-				return Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData), "Trash/files/");
+		uint ItemsInTrash {
+			get {
+				FileInfo info = OwnedFile.QueryInfo ("trash::item-count", FileQueryInfoFlags.None, null);
+				return info.GetAttributeUInt ("trash::item-count");
 			}
 		}
 		
 		bool TrashFull {
 			get {
-				return Directory.Exists (Trash) && (Directory.GetFiles (Trash).Any () || Directory.GetDirectories (Trash).Any ());
+				return ItemsInTrash > 0;
 			}
 		}
 		
-		public TrashDockItem ()
-		{
-			if (!Directory.Exists (Trash))
-				Directory.CreateDirectory (Trash);
-			
-			HoverText = "Trash";
-			
-			UpdateIcon ();
-			SetupFileSystemWatch ();
-		}
+		FileMonitor TrashMonitor { get; set; }
 		
-		void SetupFileSystemWatch ()
+		public TrashDockItem () : base ("trash://")
 		{
-			fsw = new FileSystemWatcher (Trash);
-			fsw.IncludeSubdirectories = false;
-			fsw.NotifyFilter = NotifyFilters.FileName | NotifyFilters.DirectoryName;
-
-			fsw.Changed += HandleChanged;
-			fsw.Created += HandleChanged;
-			fsw.Deleted += HandleChanged;
-			fsw.EnableRaisingEvents = true;
+			Update ();
+		
+			TrashMonitor = OwnedFile.Monitor (FileMonitorFlags.None, null);
+			TrashMonitor.Changed += HandleChanged;
 		}
 
-		void HandleChanged(object sender, FileSystemEventArgs e)
-		{
+		void HandleChanged (object o, ChangedArgs args)
+		{			
+			
 			Gtk.Application.Invoke (delegate {
-				UpdateIcon ();
+				Update ();
 			});
 		}
 
-		void UpdateIcon ()
+		void Update ()
 		{
-			if (TrashFull)
-				Icon = "gnome-stock-trash-full";
-			else
-				Icon = "gnome-stock-trash";
+			// this can be a little costly, let's just call it once and store locally
+			uint itemsInTrash = ItemsInTrash;
+			switch (itemsInTrash) {
+			case 0:
+				HoverText = string.Format (ManyInTrash, "No");
+				break;
+			case 1:
+				HoverText = string.Format (OneInTrash, "1");
+				break;
+			default:
+				HoverText = string.Format (ManyInTrash, itemsInTrash);
+				break;
+			}
+			
+			FileInfo info = OwnedFile.QueryInfo ("standard::icon", FileQueryInfoFlags.None, null);
+			SetIconFromGIcon (info.Icon);
 		}
 		
 		public override string UniqueID ()
@@ -146,7 +146,7 @@ namespace Trash
 			bool trashed = FileFactory.NewForUri (uri).Trash (null);
 			
 			if (trashed) {
-				UpdateIcon ();
+				Update ();
 				OnPaintNeeded ();
 			}
 			else
@@ -173,7 +173,7 @@ namespace Trash
 		
 		void OpenTrash ()
 		{
-			DockServices.System.Open ("trash://");
+			DockServices.System.Open (OwnedFile);
 		}
 		
 		void EmptyTrash ()
@@ -191,19 +191,20 @@ namespace Trash
 			md.AddButton ("Empty _Trash", Gtk.ResponseType.Ok);
 
 			md.Response += (o, args) => {
-				if (args.ResponseId != Gtk.ResponseType.Cancel && Directory.Exists (Trash)) {
-					fsw.Dispose ();
-					fsw = null;
+				if (args.ResponseId != Gtk.ResponseType.Cancel ) {
+					// disable events for a minute
+					TrashMonitor.Changed -= HandleChanged;
 					
 					try {
-						Directory.Delete (Trash, true);
-						Directory.CreateDirectory (Trash);
+						// this should be done in a thread
+						DeleteContents (OwnedFile);
 					} catch { /* do nothing */ }
 					
-					SetupFileSystemWatch ();
-					
+					// eneble events again
+					TrashMonitor.Changed += HandleChanged;
+
 					Gtk.Application.Invoke (delegate {
-						UpdateIcon ();
+						Update ();
 						OnPaintNeeded ();
 					});
 				}
@@ -211,6 +212,26 @@ namespace Trash
 			};
 			
 			md.Show ();
+		}
+
+		void DeleteContents (File file)
+		{
+			FileEnumerator enumerator = file.EnumerateChildren ("standard::type,standard::name,access::can-delete", FileQueryInfoFlags.NofollowSymlinks, null);
+			
+			if (enumerator == null)
+				return;
+			
+			FileInfo info;
+			
+			while ((info = enumerator.NextFile ()) != null) {
+				File child = file.GetChild (info.Name);
+
+				if (info.FileType == FileType.Directory)
+					DeleteContents (child);
+
+				if (info.GetAttributeBoolean ("access::can-delete"))
+					child.Delete (null);
+			}
 		}
 	}
 }
