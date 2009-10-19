@@ -53,8 +53,8 @@ namespace Docky.Menus
 				cr.LineTo (Allocation.X + Allocation.Width, Allocation.Y + 1.5);
 				
 				RadialGradient rg = new RadialGradient (Allocation.X + Allocation.Width / 2, Allocation.Y + 1.5, 0, Allocation.X + Allocation.Width / 2, Allocation.Y + 1.5, Allocation.Width / 2);
-				rg.AddColorStop (0, new Cairo.Color (1, 1, 1, .3));
-				rg.AddColorStop (1, new Cairo.Color (1, 1, 1, 0));
+				rg.AddColorStop (0, new Cairo.Color (0, 0, 0, 0.9));
+				rg.AddColorStop (1, new Cairo.Color (0, 0, 0, 0));
 				
 				cr.Pattern = rg;
 				cr.Stroke ();
@@ -64,8 +64,8 @@ namespace Docky.Menus
 				cr.LineTo (Allocation.X + Allocation.Width, Allocation.Y + 2.5);
 				
 				rg = new RadialGradient (Allocation.X + Allocation.Width / 2, Allocation.Y + 2.5, 0, Allocation.X + Allocation.Width / 2, Allocation.Y + 2.5, Allocation.Width / 2);
-				rg.AddColorStop (0, new Cairo.Color (0, 0, 0, 0.9));
-				rg.AddColorStop (1, new Cairo.Color (0, 0, 0, 0));
+				rg.AddColorStop (0, new Cairo.Color (1, 1, 1, .3));
+				rg.AddColorStop (1, new Cairo.Color (1, 1, 1, 0));
 				
 				cr.Pattern = rg;
 				cr.Stroke ();
