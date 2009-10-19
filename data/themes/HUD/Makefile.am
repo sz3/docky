@@ -1,4 +1,5 @@
 hudthemedir = $(datadir)/docky/themes/HUD
-hudtheme_DATA = background.svg
+hudtheme_DATA = background.svg \
+		menu.svg
 
 EXTRA_DIST = $(hudtheme_DATA)

@@ -47,13 +47,29 @@ namespace Docky.Menus
 				return false;
 			
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
+				
 				cr.MoveTo (Allocation.X, Allocation.Y + 1.5);
 				cr.LineTo (Allocation.X + Allocation.Width, Allocation.Y + 1.5);
 				
 				LinearGradient lg = new LinearGradient (Allocation.X, 0, Allocation.X + Allocation.Width, 0);
+				lg.AddColorStop (0, new Cairo.Color (0, 0, 0, 0));
+				lg.AddColorStop (.4, new Cairo.Color (0, 0, 0, 0.9));
+				lg.AddColorStop (.6, new Cairo.Color (0, 0, 0, 0.9));
+				lg.AddColorStop (1, new Cairo.Color (0, 0, 0, 0));
+				cr.Pattern = lg;
+				
+				cr.LineWidth = 1;
+				cr.Stroke ();
+				
+				lg.Destroy ();
+				
+				cr.MoveTo (Allocation.X, Allocation.Y + 2.5);
+				cr.LineTo (Allocation.X + Allocation.Width, Allocation.Y + 2.5);
+				
+				lg = new LinearGradient (Allocation.X, 0, Allocation.X + Allocation.Width, 0);
 				lg.AddColorStop (0, new Cairo.Color (1, 1, 1, 0));
-				lg.AddColorStop (.4, new Cairo.Color (1, 1, 1, .4));
-				lg.AddColorStop (.6, new Cairo.Color (1, 1, 1, .4));
+				lg.AddColorStop (.4, new Cairo.Color (1, 1, 1, .3));
+				lg.AddColorStop (.6, new Cairo.Color (1, 1, 1, .3));
 				lg.AddColorStop (1, new Cairo.Color (1, 1, 1, 0));
 				cr.Pattern = lg;
 				
@@ -61,6 +77,8 @@ namespace Docky.Menus
 				cr.Stroke ();
 				
 				lg.Destroy ();
+				
+
 			}
 			
 			return false;
