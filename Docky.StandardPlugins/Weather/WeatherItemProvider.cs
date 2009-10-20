@@ -34,7 +34,7 @@ namespace WeatherDocklet
 		
 		public override string Name {
 			get {
-				return "Weather Commands";
+				return "Weather";
 			}
 		}
 		
