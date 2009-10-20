@@ -20,7 +20,8 @@ FILES = \
 	Docky.Services/SystemService.cs \
 	Docky.Services/DrawingService.cs \
 	Docky.Services/NotificationService.cs \
-	Docky.Services/Preferences.cs
+	Docky.Services/Preferences.cs \
+	Docky.Services/NativeInterop.cs
 
 REFERENCES =  \
 	System \
