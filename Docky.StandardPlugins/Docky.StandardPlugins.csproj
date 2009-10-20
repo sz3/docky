@@ -61,39 +61,6 @@
     <Folder Include="Resources\" />
     <Folder Include="Bookmarks\" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Trash\TrashDockItem.cs" />
-    <Compile Include="Trash\TrashItemProvider.cs" />
-    <Compile Include="Clock\ClockDockItem.cs" />
-    <Compile Include="Clock\ClockItemProvider.cs" />
-    <Compile Include="Clock\ClockThemeSelector.cs" />
-    <Compile Include="CPUMonitor\CPUMonitorDockItem.cs" />
-    <Compile Include="CPUMonitor\CPUMonitorItemProvider.cs" />
-    <Compile Include="GMail\GMailItemProvider.cs" />
-    <Compile Include="GMail\GMailAtom.cs" />
-    <Compile Include="GMail\GMailErrorArgs.cs" />
-    <Compile Include="GMail\GMailLoginConfig.cs" />
-    <Compile Include="GMail\GMailPreferences.cs" />
-    <Compile Include="GMail\GMailConfiguration.cs" />
-    <Compile Include="GMail\GMailConfigurationDialog.cs" />
-    <Compile Include="GMail\GMailMenuItem.cs" />
-    <Compile Include="GMail\GMailDockItem.cs" />
-    <Compile Include="GMail\AbstractLoginWidget.cs" />
-    <Compile Include="GMail\gtk-gui\GMail.GMailConfiguration.cs" />
-    <Compile Include="GMail\gtk-gui\GMail.AbstractLoginWidget.cs" />
-    <Compile Include="GMail\gtk-gui\generated.cs" />
-    <Compile Include="BatteryMonitor\BatteryMonitorItemProvider.cs" />
-    <Compile Include="Bookmarks\BookmarksItemProvider.cs" />
-    <Compile Include="Bookmarks\BookmarkDockItem.cs" />
-    <Compile Include="BatteryMonitor\BatteryMonitorProcItem.cs" />
-    <Compile Include="Mounter\MountItem.cs" />
-    <Compile Include="Mounter\MountProvider.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Docky.StandardPlugins.addin.xml">
-      <LogicalName>Docky.StandardPlugins.addin.xml</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Docky.Items\Docky.Items.csproj">
@@ -108,5 +75,8 @@
       <Project>{8A6E0EDD-6443-4F99-9EAC-D9CC906F080D}</Project>
       <Name>Docky.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Docky.StandardPlugins.addin.xml" />
   </ItemGroup>
 </Project>

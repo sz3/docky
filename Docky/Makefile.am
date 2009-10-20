@@ -72,6 +72,7 @@ REFERENCES =  \
 #
 
 CLEANFILES += docky
-EXTRA_DIST += docky.in
+EXTRA_DIST += docky.in Docky.addins
 
+module_DATA += Docky.addins
 bin_SCRIPTS = docky

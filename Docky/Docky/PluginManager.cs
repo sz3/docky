@@ -38,20 +38,15 @@ namespace Docky
 		
 		const string PluginsDirectory = "plugins";
 		const string ApplicationDirectory = "docky";
-		const string DefaultAddinsDirectory = "addins";
 
 		//// <value>
-		/// Directory where Do saves its Mono.Addins repository cache.
+		/// Directory where Docky saves its Mono.Addins repository cache.
 		/// </value>
 		static string UserPluginsDirectory {
 			get {
 				string userData = Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData);
 				return Path.Combine (Path.Combine (userData, ApplicationDirectory), PluginsDirectory);
 			}
-		}
-		
-		public static string UserAddinInstallationDirectory {
-			get { return Path.Combine (UserPluginsDirectory, DefaultAddinsDirectory); }
 		}
 			
 		/// <summary>
@@ -61,7 +56,29 @@ namespace Docky
 		public static void Initialize ()
 		{
 			// Initialize Mono.Addins.
-			AddinManager.Initialize (UserPluginsDirectory);	
+			AddinManager.Initialize (UserPluginsDirectory);
+			
+			/*
+			AddinManager.Registry.Rebuild (null);
+			AddinManager.Registry.Update (null);
+			
+			foreach (Addin ad in AddinManager.Registry.GetAddins ())
+				Console.WriteLine (ad.Id);
+			
+			// Get the extension nodes in the extension point
+			foreach (TypeExtensionNode node in AddinManager.GetExtensionNodes ("/Docky/ItemProvider")) {
+				Console.WriteLine (node.Id);
+			}
+			
+			
+			// loaded addins, I think.
+			IEnumerable<AbstractDockItem> items = AddinManager.GetExtensionObjects ("/Docky/ItemProvider").OfType<AbstractDockItem> ();
+			
+			foreach (AbstractDockItem i in items)
+			{
+				Console.WriteLine (i.HoverText);
+			}
+			*/
 		}
 		
 		public static void Enable (Addin addin)

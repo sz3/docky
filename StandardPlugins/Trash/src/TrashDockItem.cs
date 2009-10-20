@@ -25,7 +25,6 @@ using Mono.Unix;
 
 using GLib;
 
-using Docky.CairoHelper;
 using Docky.Items;
 using Docky.Menus;
 using Docky.Services;
@@ -167,8 +166,8 @@ namespace Trash
 		
 		public override IEnumerable<MenuItem> GetMenuItems ()
 		{
-			yield return new MenuItem ("Open Trash", "user-trash", (o, a) => OpenTrash ());
-			yield return new MenuItem ("Empty Trash", "gtk-delete", (o, a) => EmptyTrash (), !TrashFull);
+			yield return new MenuItem ("Open Trash", Icon, (o, a) => OpenTrash ());
+			yield return new MenuItem ("Empty Trash", "gtk-clear", (o, a) => EmptyTrash (), !TrashFull);
 		}
 		
 		void OpenTrash ()

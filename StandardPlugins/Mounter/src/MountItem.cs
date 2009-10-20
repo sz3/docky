@@ -42,6 +42,8 @@ namespace Mounter
 		
 		public MountItem (Mount mount)
 		{
+			Console.WriteLine ("MOUNTER CONSTRUCTING... ");
+			
 			Mnt = mount;
 			
 			SetIconFromGIcon (mount.Icon);

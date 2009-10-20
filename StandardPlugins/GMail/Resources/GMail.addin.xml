@@ -1,0 +1,21 @@
+<Addin 
+	id="GMail"
+	namespace="Docky"
+	version="1.0"
+	isroot="false"
+	defaultEnabled="false"
+>
+ 
+ 	<Dependencies>
+		<Addin id="Items" version="1.0" />
+	</Dependencies>
+ 
+	<Runtime>
+		<Import assembly="Docky.StandardPlugins.dll"/>
+	</Runtime>
+	
+	<Extension path="/Docky/ItemProvider">
+		<ItemProvider type="GMail.GMailItemProvider" />
+	</Extension>	
+
+</Addin>

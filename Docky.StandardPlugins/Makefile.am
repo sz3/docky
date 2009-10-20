@@ -37,7 +37,7 @@ FILES = \
 	Mounter/MountProvider.cs
 
 RESOURCES = \
-	Resources/Docky.StandardPlugins.addin.xml \
+	Resources/Trash.addin.xml \
 	Resources/icons/badge-yellow.svg \
 	Resources/icons/gmail-logo-dark.png \
 	Resources/icons/gmail-logo.png \
