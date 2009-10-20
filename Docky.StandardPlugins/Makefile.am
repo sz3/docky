@@ -34,7 +34,24 @@ FILES = \
 	Trash/TrashItemProvider.cs \
 	Trash/TrashDockItem.cs \
 	Mounter/MountItem.cs \
-	Mounter/MountProvider.cs
+	Mounter/MountProvider.cs \
+	Weather/ForecastMenuItem.cs \
+	Weather/WeatherForecast.cs \
+	Weather/IWeatherSource.cs \
+	Weather/Sources/AbstractWeatherSource.cs \
+	Weather/Sources/WeatherChannelWeatherSource.cs \
+	Weather/Sources/GoogleWeatherSource.cs \
+	Weather/Sources/WunderWeatherSource.cs \
+	Weather/WeatherItemProvider.cs \
+	Weather/WeatherConfiguration.cs \
+	Weather/WeatherConfigurationDialog.cs \
+	Weather/WeatherPreferences.cs \
+	Weather/WeatherController.cs \
+	Weather/WeatherService.cs \
+	Weather/WeatherDocklet.WeatherConfiguration.cs \
+	Weather/WeatherUnits.cs \
+	Weather/WeatherDocklet.cs \
+	Weather/WeatherErrorArgs.cs
 
 RESOURCES = \
 	Resources/Docky.StandardPlugins.addin.xml \

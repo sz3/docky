@@ -16,6 +16,7 @@
 		<ItemProvider type="BatteryMonitor.BatteryMonitorItemProvider" />
 		<ItemProvider type="Bookmarks.BookmarksItemProvider" />
 		<ItemProvider type="Mounter.MountProvider" />
+		<ItemProvider type="WeatherDocklet.WeatherItemProvider" />
 	</Extension>	
 
 </Addin>
