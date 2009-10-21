@@ -1,5 +1,5 @@
 # Simple component buildsystem
-include $(top_srcdir)/build.rules.mk
+include $(top_srcdir)/build.rules.core.mk
 
 ASSEMBLY = Docky
 TARGET = exe
@@ -41,14 +41,12 @@ FILES = \
 RESOURCES = \
 	gtk-gui/gui.stetic \
 	Resources/classic.svg \
-    Resources/Docky.addin.xml \
     Resources/menu.svg
 
 PROJECT_REFERENCES = \
 	Docky.CairoHelper \
 	Docky.Items \
 	Docky.Services \
-	Docky.StandardPlugins \
 	Docky.Windowing
 
 REFERENCES =  \
@@ -76,3 +74,5 @@ EXTRA_DIST += docky.in Docky.addins
 
 module_DATA += Docky.addins
 bin_SCRIPTS = docky
+
+MCS_FLAGS += -unsafe

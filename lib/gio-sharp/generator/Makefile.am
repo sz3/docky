@@ -1,4 +1,4 @@
-include $(top_srcdir)/build.rules.mk
+include $(top_srcdir)/build.rules.core.mk
 
 ASSEMBLY = gapi_codegen
 TARGET = exe

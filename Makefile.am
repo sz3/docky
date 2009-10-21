@@ -11,7 +11,7 @@ SUBDIRS = \
 	Docky.CairoHelper \
 	Docky.Windowing \
 	Docky.Items \
-	Docky.StandardPlugins \
+	StandardPlugins \
 	Docky \
 	m4
 

@@ -27,17 +27,20 @@ using Mono.Addins.Gui;
 using Mono.Addins.Setup;
 
 using Docky.Items;
+using Docky.Services;
 
 namespace Docky
 {
 
 
-	public static class PluginManager
+	public class PluginManager
 	{
 		const string DefaultPluginIcon = "folder_tar";
 		
 		const string PluginsDirectory = "plugins";
 		const string ApplicationDirectory = "docky";
+		
+		const string IPExtensionPath = "/Docky/ItemProvider";
 
 		//// <value>
 		/// Directory where Docky saves its Mono.Addins repository cache.
@@ -58,27 +61,54 @@ namespace Docky
 			// Initialize Mono.Addins.
 			AddinManager.Initialize (UserPluginsDirectory);
 			
-			/*
 			AddinManager.Registry.Rebuild (null);
 			AddinManager.Registry.Update (null);
 			
-			foreach (Addin ad in AddinManager.Registry.GetAddins ())
-				Console.WriteLine (ad.Id);
+			foreach (Addin a in AddinManager.Registry.GetAddins ())
+			{
+				Console.WriteLine ("{0} is enabled? {1}", a.Name, a.Enabled);
+				if (!a.Enabled)
+					Enable (a);
+			}
 			
+			/*
 			// Get the extension nodes in the extension point
 			foreach (TypeExtensionNode node in AddinManager.GetExtensionNodes ("/Docky/ItemProvider")) {
-				Console.WriteLine (node.Id);
-			}
-			
-			
-			// loaded addins, I think.
-			IEnumerable<AbstractDockItem> items = AddinManager.GetExtensionObjects ("/Docky/ItemProvider").OfType<AbstractDockItem> ();
-			
-			foreach (AbstractDockItem i in items)
-			{
-				Console.WriteLine (i.HoverText);
+				Enable (node.Id);
+				object plugin = node.GetInstance ();
+				Console.WriteLine (plugin.GetType ().Name);
 			}
 			*/
+			
+			AddinManager.AddExtensionNodeHandler (IPExtensionPath, OnPluginEvent);
+		}
+		
+		static void OnPluginEvent (object sender, ExtensionNodeEventArgs args)
+		{
+			TypeExtensionNode node = args.ExtensionNode as TypeExtensionNode;
+			
+			switch (args.Change) {
+			case ExtensionChange.Add:
+				try {
+					object plugin = node.GetInstance ();
+					Log<PluginManager>.Debug ("Loaded \"{0}\" from plugin.", plugin.GetType ().Name);
+				} catch (Exception e) {
+					Log<PluginManager>.Error ("Encountered error loading plugin: {0} \"{1}\"",
+							e.GetType ().Name, e.Message);
+					Log<PluginManager>.Debug (e.StackTrace);
+				}
+				break;
+			case ExtensionChange.Remove:
+				try {
+					object plugin = node.GetInstance ();
+					Log<PluginManager>.Debug ("Unloaded \"{0}\".", plugin.GetType ().Name);
+				} catch (Exception e) {
+					Log<PluginManager>.Error ("Encountered error unloading plugin: {0} \"{1}\"",
+							e.GetType ().Name, e.Message);
+					Log<PluginManager>.Debug (e.StackTrace);
+				}
+				break;
+			}	
 		}
 		
 		public static void Enable (Addin addin)

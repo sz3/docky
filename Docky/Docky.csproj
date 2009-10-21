@@ -152,9 +152,6 @@
     <EmbeddedResource Include="Resources\classic.svg">
       <LogicalName>classic.svg</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Docky.addin.xml">
-      <LogicalName>Docky.addin.xml</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\menu.svg">
       <LogicalName>menu.svg</LogicalName>
     </EmbeddedResource>

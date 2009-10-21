@@ -1,4 +1,4 @@
-include $(top_srcdir)/build.rules.mk
+include $(top_srcdir)/build.rules.core.mk
 
 UNSAFE = -unsafe
 DEBUG = -debug

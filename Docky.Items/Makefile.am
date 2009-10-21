@@ -1,5 +1,5 @@
 # Simple component buildsystem
-include $(top_srcdir)/build.rules.mk
+include $(top_srcdir)/build.rules.core.mk
 
 ASSEMBLY = Docky.Items
 TARGET = library
@@ -52,3 +52,5 @@ REFERENCES =  \
 	$(WNCK_SHARP_10_LIBS) \
 	$(GNOME_SHARP_20_LIBS) \
 	$(GNOME_VFS_SHARP_20_LIBS)
+	
+MCS_FLAGS += -unsafe
