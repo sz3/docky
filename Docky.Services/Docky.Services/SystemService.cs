@@ -52,6 +52,7 @@ namespace Docky.Services
 		
 		void InitializeNetwork ()
 		{
+			NetworkConnected = true;
 			try {
 				BusG.Init ();
 				if (Bus.System.NameHasOwner (NetworkManagerName)) {
@@ -63,7 +64,6 @@ namespace Docky.Services
 				// if something bad happened, log the error and assume we are connected
 				Log<SystemService>.Error ("Could not initialize Network Manager dbus: '{0}'", e.Message);
 				Log<SystemService>.Info (e.StackTrace);
-				NetworkConnected = true;
 			}
 		}		
 		
