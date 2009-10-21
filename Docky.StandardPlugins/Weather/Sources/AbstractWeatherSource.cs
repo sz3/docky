@@ -72,8 +72,6 @@ namespace WeatherDocklet
 		public void ReloadWeatherData ()
 		{
 			new Thread(() => {
-				Log<AbstractWeatherSource>.Info (Name + ": Reloading weather data");
-				
 				try {
 					OnWeatherReloading ();
 	
@@ -83,18 +81,18 @@ namespace WeatherDocklet
 						ConvertResults ();
 					
 					OnWeatherUpdated ();
-				} catch (NullReferenceException) {
+				} catch (NullReferenceException e) {
 					OnWeatherError (Catalog.GetString ("Invalid Weather Location"));
-					Log<AbstractWeatherSource>.Info (Name + ": Invalid Weather Location");
-				} catch (XmlException) {
+					Log<AbstractWeatherSource>.Debug (Name + ": " + e.StackTrace);
+				} catch (XmlException e) {
 					OnWeatherError (Catalog.GetString ("Invalid Weather Location"));
-					Log<AbstractWeatherSource>.Info (Name + ": Invalid Weather Location");
+					Log<AbstractWeatherSource>.Debug (Name + ": " + e.StackTrace);
 				} catch (WebException e) {
 					OnWeatherError (Catalog.GetString ("Network Error: " + e.Message));
-					Log<AbstractWeatherSource>.Info (Name + ": Network Error: " + e.Message);
 				} catch (Exception e) {
 					OnWeatherError (Catalog.GetString ("Invalid Weather Location"));
 					Log<AbstractWeatherSource>.Error (Name + ": " + e.ToString ());
+					Log<AbstractWeatherSource>.Debug (Name + ": " + e.StackTrace);
 				}
 			}).Start ();
 		}
@@ -269,6 +267,7 @@ namespace WeatherDocklet
 		/// </summary>
 		protected void OnWeatherUpdated ()
 		{
+			Log<AbstractWeatherSource>.Debug (Name + ": reload success");
 			if (WeatherUpdated != null)
 				Gtk.Application.Invoke (delegate { WeatherUpdated(); });
 		}
@@ -278,6 +277,7 @@ namespace WeatherDocklet
 		/// </summary>
 		protected void OnWeatherError (string msg)
 		{
+			Log<AbstractWeatherSource>.Debug (Name + ": error: " + msg);
 			if (WeatherError != null)
 				Gtk.Application.Invoke (delegate { WeatherError (this, new WeatherErrorArgs(msg)); });
 		}
@@ -287,6 +287,7 @@ namespace WeatherDocklet
 		/// </summary>
 		protected void OnWeatherReloading ()
 		{
+			Log<AbstractWeatherSource>.Info (Name + ": Reloading weather data");
 			if (WeatherReloading != null)
 				Gtk.Application.Invoke (delegate { WeatherReloading (); });
 		}
