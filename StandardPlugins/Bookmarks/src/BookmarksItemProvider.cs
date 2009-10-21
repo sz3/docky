@@ -63,7 +63,7 @@ namespace Bookmarks
 		public BookmarksItemProvider ()
 		{
 			items = new List<AbstractDockItem> ();
-			
+
 			computer = new NonRemovableItem ("computer://", "Computer", "computer");
 			home = new NonRemovableItem (string.Format ("file://{0}",
 			    Environment.GetFolderPath (Environment.SpecialFolder.Personal)), null, null);

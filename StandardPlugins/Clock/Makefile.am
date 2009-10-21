@@ -1,3 +1,5 @@
+SUBDIRS = Themes
+
 # Simple component buildsystem
 include $(top_srcdir)/build.rules.docklets.mk
 

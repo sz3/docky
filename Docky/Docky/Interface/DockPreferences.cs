@@ -46,17 +46,63 @@ namespace Docky.Interface
 		} 
 		
 		[TreeNode(ListOnly = true)]
-		public class PluginTreeNode : Gtk.TreeNode
+		public class AddinTreenode : Gtk.TreeNode
 		{
 			[Gtk.TreeNodeValue(Column = 0)]
+			public Pixbuf Icon;
+			
+			[Gtk.TreeNodeValue(Column = 1)]
+			public string Name;
+
+			public string AddinID;
+			
+			public AbstractDockItemProvider Provider;
+
+			public AddinTreenode (string addinID, AbstractDockItemProvider provider)
+			{
+				AddinID = addinID;
+				if (string.IsNullOrEmpty (addinID))
+				    AddinID = PluginManager.AddinIDFromProvider (provider);
+				
+				Name = PluginManager.AddinFromID (AddinID).Name;
+				
+				Provider = provider;
+				if (provider == null)
+					Provider = null;
+				
+				if (provider == null ||  !PluginManager.AddinFromID (AddinID).Enabled)
+					Icon = DockServices.Drawing.LoadIcon (PluginManager.DefaultPluginIcon, 22);
+				// we should enhance Provider to provide an icon  we can use here
+				else
+					Icon = DockServices.Drawing.LoadIcon ("gtk-apply", 22);
+			}
+			
+			public AddinTreenode (string addinId) : this (addinId, null)
+			{	
+			}
+			
+			public AddinTreenode (AbstractDockItemProvider provider) : this (null, provider)
+			{
+			}
+		}
+		
+		[TreeNode(ListOnly = true)]
+		public class EnabledAddinTreenode : Gtk.TreeNode
+		{
+			[Gtk.TreeNodeValue(Column = 0)]
+			public Pixbuf Icon;
+			
+			[Gtk.TreeNodeValue(Column = 1)]
 			public string Name;
 
 			public AbstractDockItemProvider Provider;
 
-			public PluginTreeNode (AbstractDockItemProvider provider)
+			public EnabledAddinTreenode (AbstractDockItemProvider provider)
 			{
 				Provider = provider;
 				Name = provider.Name;
+				// TODO: Implement a Icon property in AbstractDockItemProvider for showing an icon here
+				Icon = DockServices.Drawing.LoadIcon ("gtk-delete", 22);
 			}
 		}
 		
@@ -300,18 +346,18 @@ namespace Docky.Interface
 
 		void SetupTreeViews ()
 		{
-			SetupTreeView (inactive_view);
-			SetupTreeView (active_view);
+			SetupTreeView (inactive_view, new Gtk.NodeStore (typeof (AddinTreenode)));
+			SetupTreeView (active_view, new Gtk.NodeStore (typeof (AddinTreenode)));
 			
 			active_view.Reorderable = true;
 		}
 		
-		void SetupTreeView (Gtk.NodeView view)
+		void SetupTreeView (Gtk.NodeView view, Gtk.NodeStore store)
 		{
-			Gtk.NodeStore store = new Gtk.NodeStore (typeof(PluginTreeNode));
 			view.NodeStore = store;
 			
-			view.AppendColumn ("Name", new Gtk.CellRendererText (), "text", 0);
+			view.AppendColumn ("Icon", new Gtk.CellRendererPixbuf (), "pixbuf", 0);
+			view.AppendColumn ("Name", new Gtk.CellRendererText (), "text", 1);
 			view.ShowAll ();
 			
 			view.HeadersVisible = false;
@@ -321,17 +367,12 @@ namespace Docky.Interface
 		{
 			active_view.NodeStore.Clear ();
 			inactive_view.NodeStore.Clear ();
+
+			foreach (string id in PluginManager.AvailableProviderIDs)
+				inactive_view.NodeStore.AddNode (new AddinTreenode (id));
 			
-			IEnumerable<AbstractDockItemProvider> available_providers = PluginManager.ItemProviders
-				.Where (p => !Docky.Controller.Docks.SelectMany (d => d.Preferences.ItemProviders).Contains (p));
-			
-			foreach (AbstractDockItemProvider provider in available_providers) {
-				inactive_view.NodeStore.AddNode (new PluginTreeNode (provider));
-			}
-			
-			foreach (AbstractDockItemProvider provider in ItemProviders.Where (p => p != DefaultProvider)) {
-				active_view.NodeStore.AddNode (new PluginTreeNode (provider));
-			}
+			foreach (AbstractDockItemProvider provider in ItemProviders.Where (p => p != DefaultProvider))
+				active_view.NodeStore.AddNode (new AddinTreenode (provider));
 		}
 		
 		void PositionBoxChanged (object sender, EventArgs e)
@@ -592,17 +633,23 @@ namespace Docky.Interface
 
 		protected virtual void OnDisablePluginButtonClicked (object sender, System.EventArgs e)
 		{
-			PluginTreeNode node = active_view.NodeSelection.SelectedNode as PluginTreeNode;
+			AddinTreenode node = active_view.NodeSelection.SelectedNode as AddinTreenode;
 			
 			if (node == null)
 				return;
 			
+			// disable this addin
+			PluginManager.Disable (node.AddinID);
+			
+			// remove it from the active addins list
 			active_view.NodeStore.RemoveNode (node);
 			
+			// remove it from the dock
 			item_providers.Remove (node.Provider);
 			OnItemProvidersChanged (null, node.Provider.AsSingle ());
 			
-			inactive_view.NodeStore.AddNode (node);
+			// add it back to the list of available addins
+			inactive_view.NodeStore.AddNode (new AddinTreenode (node.AddinID));
 			
 			SyncPlugins ();
 		}
@@ -616,17 +663,25 @@ namespace Docky.Interface
 		
 		protected virtual void OnEnablePluginButtonClicked (object sender, System.EventArgs e)
 		{
-			PluginTreeNode node = inactive_view.NodeSelection.SelectedNode as PluginTreeNode;
+			AddinTreenode node = inactive_view.NodeSelection.SelectedNode as AddinTreenode;
 			
 			if (node == null)
 				return;
 			
+			// enable the addin
+			PluginManager.Enable (node.AddinID);
+			
+			AbstractDockItemProvider provider = PluginManager.ItemProviderFromAddin (node.AddinID);
+			
+			// remove this addin from the inactive list
 			inactive_view.NodeStore.RemoveNode (node);
 			
-			item_providers.Add (node.Provider);
-			OnItemProvidersChanged (node.Provider.AsSingle (), null);
+			// add this provider to the list of enabled providers and trigger ProvidersChanged
+			item_providers.Add (provider);
+			OnItemProvidersChanged (provider.AsSingle (), null);
 			
-			active_view.NodeStore.AddNode (node);
+			// Add the node to the enabled providers treeview
+			active_view.NodeStore.AddNode (new AddinTreenode (provider));
 			
 			SyncPlugins ();
 		}

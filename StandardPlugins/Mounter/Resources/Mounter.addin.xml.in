@@ -4,6 +4,7 @@
 	version="1.0"
 	isroot="false"
 	defaultEnabled="true"
+	name="Mounter"
 >
  
  	<Dependencies>

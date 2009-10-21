@@ -35,9 +35,9 @@ namespace Docky.Items
 	public abstract class IconDockItem : AbstractDockItem
 	{
 		string icon;
-		protected string Icon {
+		public string Icon {
 			get { return icon; }
-			set {
+			protected set {
 				if (icon == value)
 					return;
 				icon = value;

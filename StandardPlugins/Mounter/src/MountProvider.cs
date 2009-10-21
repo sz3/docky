@@ -75,7 +75,7 @@ namespace Mounter
 			Monitor.MountRemoved += HandleMountRemoved;
 			
 		}
-
+		
 		void HandleMountAdded (object o, MountAddedArgs args)
 		{
 			// FIXME: due to a bug in GIO#, this will crash when trying to get args.Mount

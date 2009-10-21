@@ -166,6 +166,8 @@ StandardPlugins/Bookmarks/Makefile
 StandardPlugins/Bookmarks/Resources/Bookmarks.addin.xml
 StandardPlugins/Clock/Makefile
 StandardPlugins/Clock/Resources/Clock.addin.xml
+StandardPlugins/Clock/Themes/Makefile
+StandardPlugins/Clock/Themes/Default/Makefile
 StandardPlugins/CPUMonitor/Makefile
 StandardPlugins/CPUMonitor/Resources/CPUMonitor.addin.xml
 StandardPlugins/GMail/Makefile

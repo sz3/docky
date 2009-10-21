@@ -20,7 +20,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 
 using Mono.Addins;
 using Mono.Addins.Gui;
@@ -35,7 +34,7 @@ namespace Docky
 
 	public class PluginManager
 	{
-		const string DefaultPluginIcon = "folder_tar";
+		public static readonly string DefaultPluginIcon = "folder_tar";
 		
 		const string PluginsDirectory = "plugins";
 		const string ApplicationDirectory = "docky";
@@ -61,54 +60,28 @@ namespace Docky
 			// Initialize Mono.Addins.
 			AddinManager.Initialize (UserPluginsDirectory);
 			
-			AddinManager.Registry.Rebuild (null);
 			AddinManager.Registry.Update (null);
 			
-			foreach (Addin a in AddinManager.Registry.GetAddins ())
-			{
-				Console.WriteLine ("{0} is enabled? {1}", a.Name, a.Enabled);
-				if (!a.Enabled)
-					Enable (a);
-			}
-			
-			/*
-			// Get the extension nodes in the extension point
-			foreach (TypeExtensionNode node in AddinManager.GetExtensionNodes ("/Docky/ItemProvider")) {
-				Enable (node.Id);
-				object plugin = node.GetInstance ();
-				Console.WriteLine (plugin.GetType ().Name);
-			}
-			*/
-			
-			AddinManager.AddExtensionNodeHandler (IPExtensionPath, OnPluginEvent);
+			// Add feedback when addin is loaded or unloaded
+			AddinManager.AddinLoaded += AddinManagerAddinLoaded;
+			AddinManager.AddinUnloaded += AddinManagerAddinUnloaded;
+		}
+
+		static void AddinManagerAddinLoaded (object sender, AddinEventArgs args)
+		{
+			Addin addin = AddinFromID (args.AddinId);
+			Log<PluginManager>.Info ("Loaded \"{0}\".", addin.Name);
+		}
+
+		static void AddinManagerAddinUnloaded (object sender, AddinEventArgs args)
+		{
+			Addin addin = AddinFromID (args.AddinId);
+			Log<PluginManager>.Info ("Unloaded \"{0}\".", addin.Name);
 		}
 		
-		static void OnPluginEvent (object sender, ExtensionNodeEventArgs args)
+		public static Addin AddinFromID (string id)
 		{
-			TypeExtensionNode node = args.ExtensionNode as TypeExtensionNode;
-			
-			switch (args.Change) {
-			case ExtensionChange.Add:
-				try {
-					object plugin = node.GetInstance ();
-					Log<PluginManager>.Debug ("Loaded \"{0}\" from plugin.", plugin.GetType ().Name);
-				} catch (Exception e) {
-					Log<PluginManager>.Error ("Encountered error loading plugin: {0} \"{1}\"",
-							e.GetType ().Name, e.Message);
-					Log<PluginManager>.Debug (e.StackTrace);
-				}
-				break;
-			case ExtensionChange.Remove:
-				try {
-					object plugin = node.GetInstance ();
-					Log<PluginManager>.Debug ("Unloaded \"{0}\".", plugin.GetType ().Name);
-				} catch (Exception e) {
-					Log<PluginManager>.Error ("Encountered error unloading plugin: {0} \"{1}\"",
-							e.GetType ().Name, e.Message);
-					Log<PluginManager>.Debug (e.StackTrace);
-				}
-				break;
-			}	
+			return AddinManager.Registry.GetAddin (id);
 		}
 		
 		public static void Enable (Addin addin)
@@ -118,7 +91,7 @@ namespace Docky
 		
 		public static void Enable (string id)
 		{
-			Enable (AddinManager.Registry.GetAddin (id));
+			Enable (AddinFromID (id));
 		}
 		
 		public static void Disable (Addin addin)
@@ -128,7 +101,7 @@ namespace Docky
 		
 		public static void Disable (string id)
 		{
-			Disable (AddinManager.Registry.GetAddin (id));
+			Disable (AddinFromID (id));
 		}
 		
 		static void SetAddinEnabled (Addin addin, bool enabled)
@@ -137,16 +110,61 @@ namespace Docky
 				addin.Enabled = enabled;
 		}
 		
-		public static IEnumerable<Addin> GetAddins ()
+		public static IEnumerable<Addin> AllAddins ()
 		{
 			return AddinManager.Registry.GetAddins ();
 		}
+		
+		public static AbstractDockItemProvider ItemProviderFromAddin (string addinID)
+		{
+			foreach (TypeExtensionNode node in AddinManager.GetExtensionNodes (IPExtensionPath)) {
+				object provider;
+				
+				try {
+					provider = node.GetInstance ();
+				} catch (Exception e) {
+					continue;
+				}
+				
+				if (Addin.GetIdName (addinID) == Addin.GetIdName (node.Addin.Id))
+				    return provider as AbstractDockItemProvider;
+			}
+			
+			// shouldn't happen
+			return null;
+		}
+		
+		public static string AddinIDFromProvider (AbstractDockItemProvider provider)
+		{
+			foreach (TypeExtensionNode node in AddinManager.GetExtensionNodes (IPExtensionPath)) {
+				AbstractDockItemProvider nodeProvider;
+				
+				try {
+					nodeProvider = node.GetInstance () as AbstractDockItemProvider;
+				} catch {
+					continue;
+				}
+				
+				if (nodeProvider.Name == provider.Name)
+					return node.Addin.Id;
+			}
+			
+			// shouldn't happen
+			return "";
+		}
 
 		/// <value>
-		/// All loaded ItemSources.
+		/// All loaded ItemProviders.
 		/// </value>
 		public static IEnumerable<AbstractDockItemProvider> ItemProviders {
-			get { return AddinManager.GetExtensionObjects ("/Docky/ItemProvider").OfType<AbstractDockItemProvider> (); }
+			get { return AddinManager.GetExtensionObjects (IPExtensionPath).OfType<AbstractDockItemProvider> (); }
+		}
+		
+		// this will return a list of Provider IDs that are currently not used by any docks
+		public static IEnumerable<string> AvailableProviderIDs {
+			get {
+				return AllAddins ().Where (a => !a.Enabled).Select (a => Addin.GetIdName (a.Id));
+			}
 		}
 	}
 }
