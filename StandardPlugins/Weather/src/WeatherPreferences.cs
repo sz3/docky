@@ -16,6 +16,7 @@
 // 
 
 using System;
+using System.Globalization;
 
 using Docky.Services;
 
@@ -113,11 +114,16 @@ namespace WeatherDocklet
 				MetricChanged (null, EventArgs.Empty);
 		}
 		
+		static bool? MetricDefault;
+		
 		/// <value>
 		/// If metric units are used.
 		/// </value>
 		public static bool Metric {
- 			get { return prefs.Get<bool> (MetricKey, false); }
+ 			get { 
+				if (!MetricDefault.HasValue)
+					MetricDefault = CultureInfo.CurrentCulture.Name != "en-US";
+				return prefs.Get<bool> (MetricKey, false); }
  			set { prefs.Set<bool> (MetricKey, value); OnMetricChanged (); }
  		}
 	}
