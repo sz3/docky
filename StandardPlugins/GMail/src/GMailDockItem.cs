@@ -180,21 +180,23 @@ namespace GMail
 		
 		void OpenInbox ()
 		{
-			string label = atom.CurrentLabel;
-			string username = GMailPreferences.User;
-			string[] login = username.Split (new char[] {'@'});
+			string[] login = GMailPreferences.User.Split (new char[] {'@'});
 			string domain = login.Length > 1 ? login [1] : "gmail.com";
-			string url = "https://mail.google.com/{0}/#{1}";
+			string url = "https://mail.google.com/";
 			
-			if (label != "Inbox")
-				label = String.Format ("label/{0}", HttpUtility.UrlEncode (label));
-			
+			// add the domain
 			if (domain == "gmail.com" || domain == "googlemail.com")
-				url = String.Format (url, "mail", label);
+				url += "mail";
 			else
-				url = String.Format (url, "a/" + domain, label);
+				url += "a/" + domain;
 			
-			DockServices.System.Open (url);
+			url += "/\\#";
+
+			// going to a custom label
+			if (atom.CurrentLabel != "Inbox")
+				url += "label/";
+			
+			DockServices.System.Open (url + HttpUtility.UrlEncode (atom.CurrentLabel));
 		}
 		
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
