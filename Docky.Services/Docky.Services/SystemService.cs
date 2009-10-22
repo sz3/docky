@@ -52,6 +52,7 @@ namespace Docky.Services
 		
 		void InitializeNetwork ()
 		{
+			NetworkConnected = true;
 			try {
 				BusG.Init ();
 				if (Bus.System.NameHasOwner (NetworkManagerName)) {
@@ -63,7 +64,6 @@ namespace Docky.Services
 				// if something bad happened, log the error and assume we are connected
 				Log<SystemService>.Error ("Could not initialize Network Manager dbus: '{0}'", e.Message);
 				Log<SystemService>.Info (e.StackTrace);
-				NetworkConnected = true;
 			}
 		}		
 		
@@ -271,10 +271,18 @@ namespace Docky.Services
 				} else if (app.SupportsUris) {
 					launchList = new GLib.List (typeof (string));
 					foreach (GLib.File f in files) {
-						// FIXME: File.URI is crashing in the Sys.Uri constructor somewhere
+						// try to use GLib.File.Uri first, if that throws an exception,
+						// catch and use P/Invoke to libdocky.  If that's still null, warn & skip the file.
 						try {
 							launchList.Append (f.Uri.ToString ());
-						} catch { return; }
+						} catch (UriFormatException) { 
+							string uri = f.StringUri ();
+							if (string.IsNullOrEmpty (uri)) {
+								Log<SystemService>.Warn ("Failed to retrieve URI for {0}.  It will be skipped.", f.ParsedName);
+								continue;
+							}
+							launchList.Append (uri);
+						}
 					}
 					try {
 						if (app.LaunchUris (launchList, null))
@@ -288,7 +296,7 @@ namespace Docky.Services
 			
 			Log<SystemService>.Error ("Error opening files. The application doesn't support files/URIs or wasn't found.");
 			// fall back on xdg-open
-			Open (files.Select (f => f.Uri.ToString ()));
+			Open (files.Select (f => f.StringUri ()));
 		}
 
 		

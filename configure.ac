@@ -176,6 +176,8 @@ StandardPlugins/Mounter/Makefile
 StandardPlugins/Mounter/Resources/Mounter.addin.xml
 StandardPlugins/Trash/Makefile
 StandardPlugins/Trash/Resources/Trash.addin.xml
+StandardPlugins/Weather/Makefile
+StandardPlugins/Weather/Resources/Weather.addin.xml
 Makefile
 data/Makefile
 data/icons/Makefile

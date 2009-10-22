@@ -5,10 +5,10 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{39FA0106-BDA3-4541-8922-C6BE0D9CC51D}</ProjectGuid>
+    <ProjectGuid>{4D89D694-57E9-4142-AED4-7F2ECEE1D12D}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Docky.StandardPlugins</RootNamespace>
-    <AssemblyName>Docky.StandardPlugins</AssemblyName>
+    <RootNamespace>Weather</RootNamespace>
+    <AssemblyName>Weather</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <ReleaseVersion>2.0</ReleaseVersion>
   </PropertyGroup>
@@ -32,51 +32,58 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="Mono.Cairo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <Reference Include="Mono.Posix" />
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="Mono.Posix" />
-    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="Mono.Cairo" />
-    <Reference Include="rsvg2-sharp, Version=2.18.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Web" />
-    <Reference Include="NDesk.DBus, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f6716e4f9b2ed099">
-      <Package>ndesk-dbus-1.0</Package>
-    </Reference>
-    <Reference Include="gio-sharp, Version=2.14.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\usr\local\lib\docky\gio-sharp.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Trash\" />
-    <Folder Include="CPUMonitor\" />
-    <Folder Include="Clock\" />
-    <Folder Include="BatteryMonitor\" />
-    <Folder Include="GMail\" />
+    <Folder Include="src\" />
+    <Folder Include="src\Sources\" />
     <Folder Include="Resources\" />
-    <Folder Include="Bookmarks\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\ForecastMenuItem.cs" />
+    <Compile Include="src\IWeatherSource.cs" />
+    <Compile Include="src\WeatherConfiguration.cs" />
+    <Compile Include="src\WeatherConfigurationDialog.cs" />
+    <Compile Include="src\WeatherController.cs" />
+    <Compile Include="src\WeatherDocklet.cs" />
+    <Compile Include="src\WeatherDocklet.WeatherConfiguration.cs" />
+    <Compile Include="src\WeatherErrorArgs.cs" />
+    <Compile Include="src\WeatherForecast.cs" />
+    <Compile Include="src\WeatherItemProvider.cs" />
+    <Compile Include="src\WeatherPreferences.cs" />
+    <Compile Include="src\WeatherService.cs" />
+    <Compile Include="src\WeatherUnits.cs" />
+    <Compile Include="src\Sources\AbstractWeatherSource.cs" />
+    <Compile Include="src\Sources\GoogleWeatherSource.cs" />
+    <Compile Include="src\Sources\WeatherChannelWeatherSource.cs" />
+    <Compile Include="src\Sources\WunderWeatherSource.cs" />
+    <Compile Include="src\generated.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\gui.stetic" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\Docky.Items\Docky.Items.csproj">
+    <ProjectReference Include="..\..\Docky.Items\Docky.Items.csproj">
       <Project>{AB6E0EDD-6443-4F99-9EAC-DABC906F080D}</Project>
       <Name>Docky.Items</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Docky.CairoHelper\Docky.CairoHelper.csproj">
+    <ProjectReference Include="..\..\Docky.CairoHelper\Docky.CairoHelper.csproj">
       <Project>{B23E0EDD-6443-4F99-9EAC-B7CC906F080D}</Project>
       <Name>Docky.CairoHelper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Docky.Services\Docky.Services.csproj">
+    <ProjectReference Include="..\..\Docky.Services\Docky.Services.csproj">
       <Project>{8A6E0EDD-6443-4F99-9EAC-D9CC906F080D}</Project>
       <Name>Docky.Services</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Docky.StandardPlugins.addin.xml" />
   </ItemGroup>
 </Project>

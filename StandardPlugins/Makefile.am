@@ -5,7 +5,8 @@ SUBDIRS = \
 	CPUMonitor \
 	GMail \
 	Mounter \
-	Trash
+	Trash \
+	Weather
 
 DIST_SUBDIRS = \
 	BatteryMonitor \
@@ -14,4 +15,5 @@ DIST_SUBDIRS = \
 	CPUMonitor \
 	GMail \
 	Mounter \
-	Trash
+	Trash \
+	Weather

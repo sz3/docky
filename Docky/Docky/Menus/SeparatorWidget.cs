@@ -47,20 +47,29 @@ namespace Docky.Menus
 				return false;
 			
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
+				cr.LineWidth = 1;
+				
 				cr.MoveTo (Allocation.X, Allocation.Y + 1.5);
 				cr.LineTo (Allocation.X + Allocation.Width, Allocation.Y + 1.5);
 				
-				LinearGradient lg = new LinearGradient (Allocation.X, 0, Allocation.X + Allocation.Width, 0);
-				lg.AddColorStop (0, new Cairo.Color (1, 1, 1, 0));
-				lg.AddColorStop (.4, new Cairo.Color (1, 1, 1, .4));
-				lg.AddColorStop (.6, new Cairo.Color (1, 1, 1, .4));
-				lg.AddColorStop (1, new Cairo.Color (1, 1, 1, 0));
-				cr.Pattern = lg;
+				RadialGradient rg = new RadialGradient (Allocation.X + Allocation.Width / 2, Allocation.Y + 1.5, 0, Allocation.X + Allocation.Width / 2, Allocation.Y + 1.5, Allocation.Width / 2);
+				rg.AddColorStop (0, new Cairo.Color (0, 0, 0, 0.9));
+				rg.AddColorStop (1, new Cairo.Color (0, 0, 0, 0));
 				
-				cr.LineWidth = 1;
+				cr.Pattern = rg;
 				cr.Stroke ();
+				rg.Destroy ();
 				
-				lg.Destroy ();
+				cr.MoveTo (Allocation.X, Allocation.Y + 2.5);
+				cr.LineTo (Allocation.X + Allocation.Width, Allocation.Y + 2.5);
+				
+				rg = new RadialGradient (Allocation.X + Allocation.Width / 2, Allocation.Y + 2.5, 0, Allocation.X + Allocation.Width / 2, Allocation.Y + 2.5, Allocation.Width / 2);
+				rg.AddColorStop (0, new Cairo.Color (1, 1, 1, .3));
+				rg.AddColorStop (1, new Cairo.Color (1, 1, 1, 0));
+				
+				cr.Pattern = rg;
+				cr.Stroke ();
+				rg.Destroy ();
 			}
 			
 			return false;
