@@ -58,5 +58,13 @@ namespace WeatherDocklet
 		{
 			item = new WeatherDocklet ();
 		}
+		
+		public override void AddedToDock ()
+		{
+			GLib.Idle.Add (delegate {
+				WeatherController.ResetTimer ();
+				return false;
+			});
+		}
 	}
 }

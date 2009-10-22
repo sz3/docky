@@ -516,6 +516,7 @@ namespace Docky.Interface
 				foreach (AbstractDockItemProvider provider in PluginManager.ItemProviders) {
 					if (provider.Name == providerName) {
 						item_providers.Add (provider);
+						provider.AddedToDock ();
 						break;
 					}
 				}
@@ -679,6 +680,7 @@ namespace Docky.Interface
 			
 			// add this provider to the list of enabled providers and trigger ProvidersChanged
 			item_providers.Add (provider);
+			provider.AddedToDock ();
 			OnItemProvidersChanged (provider.AsSingle (), null);
 			
 			// Add the node to the enabled providers treeview

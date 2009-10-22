@@ -62,5 +62,9 @@ namespace Docky.Items
 		}
 		
 		public abstract void Dispose ();
+		
+		public virtual void AddedToDock ()
+		{
+		}
 	}
 }

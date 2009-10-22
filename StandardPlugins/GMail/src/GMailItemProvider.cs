@@ -114,5 +114,14 @@ namespace GMail
 			foreach (string label in GMailPreferences.Labels)
 				AddItem (label);
 		}
+		
+		public override void AddedToDock ()
+		{
+			GLib.Idle.Add (delegate {
+				foreach (GMailDockItem item in items.Values)
+					item.Atom.ResetTimer ();
+				return false;
+			});
+		}
 	}
 }

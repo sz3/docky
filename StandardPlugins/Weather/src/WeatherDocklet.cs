@@ -70,10 +70,6 @@ namespace WeatherDocklet
 			
 			HoverText = Catalog.GetString ("Fetching data...");
 			ShowBusyAnimation ();
-			GLib.Idle.Add (delegate {
-				WeatherController.ResetTimer ();
-				return false;
-			});
 		}
 		
 		/// <summary>

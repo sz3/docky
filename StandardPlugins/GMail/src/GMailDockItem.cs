@@ -36,44 +36,39 @@ namespace GMail
 	{
 		public override string UniqueID ()
 		{
-			return "GMailDockItem#" + atom.CurrentLabel;
+			return "GMailDockItem#" + Atom.CurrentLabel;
 		}
 		
 		public bool Visible {
-			get { return atom.UnreadCount > 0 || atom.CurrentLabel == "Inbox"; }
+			get { return Atom.UnreadCount > 0 || Atom.CurrentLabel == "Inbox"; }
 		}
 		
-		GMailAtom atom;
+		public GMailAtom Atom { get; protected set; }
 		
 		public GMailDockItem (string label)
 		{
-			atom = new GMailAtom (label);
+			Atom = new GMailAtom (label);
 			
-			atom.GMailChecked += GMailCheckedHandler;
-			atom.GMailChecking += GMailCheckingHandler;
-			atom.GMailFailed += GMailFailedHandler;
-			
-			GLib.Idle.Add (delegate {
-				atom.ResetTimer ();
-				return false;
-			});
+			Atom.GMailChecked += GMailCheckedHandler;
+			Atom.GMailChecking += GMailCheckingHandler;
+			Atom.GMailFailed += GMailFailedHandler;
 		}
 		
 		static int old_count = 0;
 		public void GMailCheckedHandler (object obj, EventArgs e)
 		{
-			if (old_count < atom.NewCount)
+			if (old_count < Atom.NewCount)
 				UpdateAttention (true);
-			old_count = atom.NewCount;
+			old_count = Atom.NewCount;
 			
 			string status = "";
-			if (atom.UnreadCount == 0)
+			if (Atom.UnreadCount == 0)
 				status = Catalog.GetString ("No unread mail");
-			else if (atom.UnreadCount == 1)
+			else if (Atom.UnreadCount == 1)
 				status = Catalog.GetString ("1 unread message");
 			else
-				status = atom.UnreadCount + Catalog.GetString (" unread messages");
-			HoverText = atom.CurrentLabel + " - " + status;
+				status = Atom.UnreadCount + Catalog.GetString (" unread messages");
+			HoverText = Atom.CurrentLabel + " - " + status;
 			
 			(Owner as GMailItemProvider).ItemVisibilityChanged (this, Visible);
 			QueueRedraw ();
@@ -110,13 +105,13 @@ namespace GMail
 			Context cr = surface.Context;
 			
 			string icon = "gmail-logo.png@";
-			if (atom.State == GMailState.ManualReload || atom.State == GMailState.Error)
+			if (Atom.State == GMailState.ManualReload || Atom.State == GMailState.Error)
 				icon = "gmail-logo-dark.png@";
 			
 			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (icon + GetType ().Assembly.FullName, size))
 			{
 				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, 0, 0);
-				if (atom.State == GMailState.ManualReload || !atom.HasUnread)
+				if (Atom.State == GMailState.ManualReload || !Atom.HasUnread)
 					cr.PaintWithAlpha (.5);
 				else
 					cr.Paint ();
@@ -129,7 +124,7 @@ namespace GMail
 			
 			Pango.Rectangle inkRect, logicalRect;
 			
-			if (atom.HasUnread)
+			if (Atom.HasUnread)
 			{
 				using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("badge-yellow.svg@" + GetType ().Assembly.FullName, size / 2))
 				{
@@ -139,9 +134,9 @@ namespace GMail
 			
 				layout.Width = Pango.Units.FromPixels (size / 2);
 
-				layout.SetText ("" + atom.UnreadCount);
+				layout.SetText ("" + Atom.UnreadCount);
 
-				if (atom.UnreadCount < 100)
+				if (Atom.UnreadCount < 100)
 					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (size / 4);
 				else
 					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (size / 5);
@@ -158,12 +153,12 @@ namespace GMail
 			}
 			
 			// no need to draw the label for the Inbox
-			if (atom.CurrentLabel == "Inbox")
+			if (Atom.CurrentLabel == "Inbox")
 				return;
 
 			layout.Width = Pango.Units.FromPixels (size);
 
-			layout.SetText (atom.CurrentLabel);
+			layout.SetText (Atom.CurrentLabel);
 
 			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (size / 5);
 
@@ -193,10 +188,10 @@ namespace GMail
 			url += "/\\#";
 
 			// going to a custom label
-			if (atom.CurrentLabel != "Inbox")
+			if (Atom.CurrentLabel != "Inbox")
 				url += "label/";
 			
-			DockServices.System.Open (url + HttpUtility.UrlEncode (atom.CurrentLabel));
+			DockServices.System.Open (url + HttpUtility.UrlEncode (Atom.CurrentLabel));
 		}
 		
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
@@ -213,10 +208,10 @@ namespace GMail
 		
 		public override void Dispose ()
 		{
-			atom.GMailChecked -= GMailCheckedHandler;
-			atom.GMailChecking -= GMailCheckingHandler;
-			atom.GMailFailed -= GMailFailedHandler;
-			atom.Dispose ();
+			Atom.GMailChecked -= GMailCheckedHandler;
+			Atom.GMailChecking -= GMailCheckingHandler;
+			Atom.GMailFailed -= GMailFailedHandler;
+			Atom.Dispose ();
 
 			base.Dispose ();
 		}
@@ -225,7 +220,7 @@ namespace GMail
 		{
 			UpdateAttention (false);
 			
-			yield return new MenuItem (Catalog.GetString ("View ") + atom.CurrentLabel,
+			yield return new MenuItem (Catalog.GetString ("View ") + Atom.CurrentLabel,
 					"gmail-logo.png@" + GetType ().Assembly.FullName,
 					delegate {
 						Clicked (1, Gdk.ModifierType.None, 0, 0);
@@ -238,8 +233,8 @@ namespace GMail
 			
 			yield return new SeparatorMenuItem ();
 
-			if (atom.HasUnread) {
-				foreach (UnreadMessage message in atom.Messages.Take (10))
+			if (Atom.HasUnread) {
+				foreach (UnreadMessage message in Atom.Messages.Take (10))
 					yield return new GMailMenuItem (message);
 				
 				yield return new SeparatorMenuItem ();
@@ -255,7 +250,7 @@ namespace GMail
 			yield return new MenuItem (Catalog.GetString ("Check Now"),
 					Gtk.Stock.Refresh,
 					delegate {
-						atom.ResetTimer (true);
+						Atom.ResetTimer (true);
 						QueueRedraw ();
 					});
 		}
