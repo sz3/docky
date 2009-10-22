@@ -152,6 +152,7 @@ lib/gio-sharp/gio/Makefile
 Docky/Makefile
 Docky.CairoHelper/Makefile
 Docky.Items/Makefile
+Docky.Items/Resources/Docky.Items.addin.xml
 Docky.Services/Makefile
 Docky.Services/AssemblyInfo.cs
 Docky.Windowing/Makefile
