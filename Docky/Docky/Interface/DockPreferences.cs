@@ -501,7 +501,8 @@ namespace Docky.Interface
 					"file:///usr/share/applications/pidgin.desktop",
 					"file:///usr/share/applications/xchat.desktop",
 					"file:///usr/share/applications/firefox.desktop",
-				};
+				}.Where (s => System.IO.File.Exists (new Uri (s).LocalPath));
+				
 				FirstRun = false;
 			}
 			
