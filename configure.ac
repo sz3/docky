@@ -101,6 +101,14 @@ AC_SUBST([NDESK_DBUS_GLIB_10_LIBS])
 AC_SUBST([NOTIFY_SHARP_LIBS])
 AC_SUBST([WNCK_SHARP_10_LIBS])
 
+dnl Docky references
+DOCKY_CAIRO_LIBS="-r:$top_srcdir/build/Docky.CairoHelper.dll"
+AC_SUBST([DOCKY_CAIRO_LIBS])
+DOCKY_ITEMS_LIBS="-r:$top_srcdir/build/Docky.Items.dll"
+AC_SUBST([DOCKY_ITEMS_LIBS])
+DOCKY_SERVICES_LIBS="-r:$top_srcdir/build/Docky.Services.dll"
+AC_SUBST([DOCKY_SERVICES_LIBS])
+
 GIO_SHARP_LIBS="-r:$top_srcdir/build/gio-sharp.dll"
 AC_SUBST([GIO_SHARP_LIBS])
 
@@ -144,8 +152,6 @@ lib/gio-sharp/gio/Makefile
 Docky/Makefile
 Docky.CairoHelper/Makefile
 Docky.Items/Makefile
-Docky.StandardPlugins/Makefile
-Docky.StandardPlugins/Docky.DefaultClockTheme/Makefile
 Docky.Services/Makefile
 Docky.Services/AssemblyInfo.cs
 Docky.Windowing/Makefile
@@ -153,6 +159,25 @@ Docky.Windowing/Docky.Windowing.dll.config
 Docky.Zeitgeist/Makefile
 Docky/docky
 Docky/AssemblyInfo.cs
+StandardPlugins/Makefile
+StandardPlugins/BatteryMonitor/Makefile
+StandardPlugins/BatteryMonitor/Resources/BatteryMonitor.addin.xml
+StandardPlugins/Bookmarks/Makefile
+StandardPlugins/Bookmarks/Resources/Bookmarks.addin.xml
+StandardPlugins/Clock/Makefile
+StandardPlugins/Clock/Resources/Clock.addin.xml
+StandardPlugins/Clock/Themes/Makefile
+StandardPlugins/Clock/Themes/Default/Makefile
+StandardPlugins/CPUMonitor/Makefile
+StandardPlugins/CPUMonitor/Resources/CPUMonitor.addin.xml
+StandardPlugins/GMail/Makefile
+StandardPlugins/GMail/Resources/GMail.addin.xml
+StandardPlugins/Mounter/Makefile
+StandardPlugins/Mounter/Resources/Mounter.addin.xml
+StandardPlugins/Trash/Makefile
+StandardPlugins/Trash/Resources/Trash.addin.xml
+StandardPlugins/Weather/Makefile
+StandardPlugins/Weather/Resources/Weather.addin.xml
 Makefile
 data/Makefile
 data/icons/Makefile

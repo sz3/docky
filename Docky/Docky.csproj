@@ -20,6 +20,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AssemblyName>Docky</AssemblyName>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -28,6 +29,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AssemblyName>Docky-2</AssemblyName>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -100,7 +102,6 @@
     </Reference>
     <Reference Include="rsvg2-sharp, Version=2.18.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
-      <Package>rsvg2-sharp-2.0</Package>
     </Reference>
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
@@ -111,7 +112,6 @@
     </Reference>
     <Reference Include="wnck-sharp, Version=2.20.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
-      <Package>wnck-sharp-1.0</Package>
     </Reference>
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
@@ -119,7 +119,6 @@
     <Reference Include="Mono.Posix" />
     <Reference Include="gnome-vfs-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
-      <Package>gnome-vfs-sharp-2.0</Package>
     </Reference>
     <Reference Include="NDesk.DBus, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f6716e4f9b2ed099">
       <Package>ndesk-dbus-1.0</Package>
@@ -145,10 +144,6 @@
       <Project>{888FCD95-7C79-45C4-A744-9C840DF4B9B0}</Project>
       <Name>Docky.Windowing</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Docky.StandardPlugins\Docky.StandardPlugins.csproj">
-      <Project>{39FA0106-BDA3-4541-8922-C6BE0D9CC51D}</Project>
-      <Name>Docky.StandardPlugins</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -156,12 +151,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\classic.svg">
       <LogicalName>classic.svg</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\grayscale.svg">
-      <LogicalName>grayscale.svg</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Docky.addin.xml">
-      <LogicalName>Docky.addin.xml</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\menu.svg">
       <LogicalName>menu.svg</LogicalName>

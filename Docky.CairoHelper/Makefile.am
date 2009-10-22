@@ -1,5 +1,5 @@
 # Simple component buildsystem
-include $(top_srcdir)/build.rules.mk
+include $(top_srcdir)/build.rules.core.mk
 
 ASSEMBLY = Docky.CairoHelper
 TARGET = library
