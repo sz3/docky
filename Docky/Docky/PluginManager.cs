@@ -122,7 +122,7 @@ namespace Docky
 				
 				try {
 					provider = node.GetInstance ();
-				} catch (Exception e) {
+				} catch (Exception) {
 					continue;
 				}
 				
