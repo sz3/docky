@@ -3,7 +3,7 @@
 	namespace="Docky"
 	version="1.0"
 	isroot="false"
-	defaultEnabled="true"
+	defaultEnabled="false"
 	name="Mounter"
 >
  
