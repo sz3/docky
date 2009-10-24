@@ -109,9 +109,7 @@ namespace Docky.Interface
 			cell = new CellRendererText ();
 			AppendColumn ("Name", cell, "text", Column.Name);
 						
-			Model.RowsReordered += HandleStoreRowsReordered;
-			
-			this.ButtonReleaseEvent += HandleHandleButtonReleaseEvent;
+			ButtonReleaseEvent += HandleHandleButtonReleaseEvent;
 		}
 
 		// There is a GTK# problem with Model.RowsReordered never being emitted
@@ -120,15 +118,12 @@ namespace Docky.Interface
 		void HandleHandleButtonReleaseEvent (object o, ButtonReleaseEventArgs args)
 		{
 			GLib.Timeout.Add (200, delegate {
-				TreeIter iter;
-				if (Model.GetIterFirst (out iter))
-					Model.EmitRowsReordered (null, iter);
+				UpdateAddinOrder ();
 				return false;
 			});
 		}
 
-		[GLib.ConnectBefore]
-		protected virtual void HandleStoreRowsReordered (object o, RowsReorderedArgs args)
+		void UpdateAddinOrder ()
 		{
 			List<AddinTreeNode> new_order = GetAddinOrder ();
 			bool changed = false;
