@@ -626,22 +626,15 @@ namespace Docky.Interface
 		
 		void OnActiveViewAddinOrderChanged (object sender, AddinOrderChangedArgs e)
 		{
-			List<AbstractDockItemProvider> new_providers = e.NewOrder.Select ( a => a.Provider).ToList ();
-			List<AbstractDockItemProvider> old_providers = item_providers;
+			item_providers = item_providers
+				.OrderBy (adip => e.NewOrder
+					.Select (a => a.Provider)
+					.ToList ()
+					.IndexOf (adip))
+				.ToList ();
 			
-			new_providers.ForEach ( provider => item_providers.Remove (provider));
-			
-			// I can't do this until DBO makes the application part of the dock a normal addin
-			// calling this on the dock that provides launchers / window management will remove it
-			// and never add it back
-			//item_providers.Clear ();
-			
-			foreach (AbstractDockItemProvider provider in new_providers) {
-				item_providers.Add (provider);
-				provider.AddedToDock ();
-			}
-			
-			OnItemProvidersChanged (new_providers, old_providers);
+			SyncPlugins ();	
+			OnItemProvidersChanged (null, null);
 		}
 
 		[GLib.ConnectBefore]
