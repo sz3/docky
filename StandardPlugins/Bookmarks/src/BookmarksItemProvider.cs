@@ -52,6 +52,15 @@ namespace Bookmarks
 		
 		List<AbstractDockItem> items;
 		
+		IEnumerable<AbstractDockItem> InnerItems {
+			get {
+				yield return computer;
+				yield return home;
+				foreach (AbstractDockItem item in items)
+					yield return item;
+			}
+		}
+		
 		File BookmarksFile {
 			get {
 				string path = System.IO.Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), ".gtk-bookmarks");
@@ -122,10 +131,10 @@ namespace Bookmarks
 				}
 			}
 			
+			Items = InnerItems;
+			
 			foreach (AbstractDockItem item in old)
 				item.Dispose ();
-			
-			OnItemsChanged (items, old);
 		}
 
 		#region IDockItemProvider implementation
@@ -151,7 +160,7 @@ namespace Bookmarks
 			if (!bookmark.OwnedFile.Exists)
 				return false;
 			
-			File tempFile = FileFactory.NewForPath (System.IO.Path.GetTempFileName());
+			File tempFile = FileFactory.NewForPath (System.IO.Path.GetTempFileName ());
 			
 			using (DataInputStream reader = new DataInputStream (BookmarksFile.Read (null))) {
 				using (DataOutputStream writer = new DataOutputStream (tempFile.AppendTo (FileCreateFlags.None, null))) {
@@ -162,7 +171,7 @@ namespace Bookmarks
 							writer.PutString (string.Format ("{0}\n", line), null);
 						else {
 							items.Remove (bookmark);
-							OnItemsChanged (null, (bookmark as AbstractDockItem).AsSingle ());
+							Items = InnerItems;
 							Log<BookmarksItemProvider>.Debug ("Removing '{0}'", bookmark.HoverText);
 						}
 					}
@@ -181,17 +190,9 @@ namespace Bookmarks
 			}
 		}
 		
-		public override IEnumerable<AbstractDockItem> Items {
-			get {
-				yield return computer;
-				yield return home;
-				foreach (AbstractDockItem item in items)
-					yield return item;
-			}
-		}
-		
 		public override void Dispose ()
 		{
+			Items = Enumerable.Empty<AbstractDockItem> ();
 			foreach (AbstractDockItem item in items)
 				item.Dispose ();
 		}

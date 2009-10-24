@@ -38,15 +38,8 @@ namespace WeatherDocklet
 			}
 		}
 		
-		public override IEnumerable<AbstractDockItem> Items {
-			get {
-				yield return item;
-			}
-		}
-		
 		public override void Dispose ()
 		{
-			OnItemsChanged (item.AsSingle (), null);
 			item.Dispose ();
 		}
 		
@@ -57,6 +50,8 @@ namespace WeatherDocklet
 		public WeatherItemProvider ()
 		{
 			item = new WeatherDocklet ();
+			
+			Items = item.AsSingle<AbstractDockItem> ();
 		}
 		
 		public override void AddedToDock ()

@@ -32,12 +32,6 @@ namespace CPUMonitor
 			}
 		}
 		
-		public override IEnumerable<AbstractDockItem> Items {
-			get {
-				yield return monitor;
-			}
-		}
-		
 		public override void Dispose ()
 		{
 			monitor.Dispose ();
@@ -51,6 +45,8 @@ namespace CPUMonitor
 		{
 			monitor = new CPUMonitorDockItem ();
 			monitor.Owner = this;
+			
+			Items = monitor.AsSingle<AbstractDockItem> ();
 		}
 	}
 }
