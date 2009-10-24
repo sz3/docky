@@ -162,6 +162,7 @@ namespace Docky
 				return false;
 			
 			docks.Remove (dock);
+			dock.Preferences.FreeProviders ();
 			dock.Dispose ();
 			DockNames = DockNames.Where (s => s != dock.Preferences.GetName ());
 			return true;

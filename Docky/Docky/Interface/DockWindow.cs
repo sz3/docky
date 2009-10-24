@@ -1926,7 +1926,6 @@ namespace Docky.Interface
 		{
 			AutohideManager.Dispose ();
 			UnregisterPreferencesEvents (Preferences);
-			Preferences.FreeProviders ();
 			
 			CursorTracker.CursorPositionChanged -= HandleCursorPositionChanged;
 			AutohideManager.HiddenChanged -= HandleHiddenChanged;

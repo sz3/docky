@@ -71,6 +71,11 @@ namespace Docky
 			AddinManager.AddinLoaded += AddinManagerAddinLoaded;
 			AddinManager.AddinUnloaded += AddinManagerAddinUnloaded;
 		}
+		
+		public static void Shutdown ()
+		{
+			AddinManager.Shutdown ();
+		}
 
 		static void AddinManagerAddinLoaded (object sender, AddinEventArgs args)
 		{
