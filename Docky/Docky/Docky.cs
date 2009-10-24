@@ -78,7 +78,10 @@ namespace Docky
 			Gtk.Application.Run ();
 			Gdk.Threads.Leave ();
 			
+			Controller.Dispose ();
 			Gnome.Vfs.Vfs.Shutdown ();
+			
+			Environment.Exit (0);
 		}
 		
 		public static void ShowAbout ()

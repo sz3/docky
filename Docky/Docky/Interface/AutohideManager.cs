@@ -238,12 +238,14 @@ namespace Docky.Interface
 		{
 			if (screen != null) {
 				screen.ActiveWindowChanged -= HandleActiveWindowChanged;
-				screen.ActiveWindow.GeometryChanged -= HandleGeometryChanged;
+				if (screen.ActiveWindow != null)
+					screen.ActiveWindow.GeometryChanged -= HandleGeometryChanged;
 				screen.WindowOpened -= HandleWindowOpened;
 				screen.WindowClosed -= HandleWindowClosed;
 			}
 			
-			tracker.CursorPositionChanged -= HandleCursorPositionChanged;
+			if (tracker != null)
+				tracker.CursorPositionChanged -= HandleCursorPositionChanged;
 		}
 		#endregion
 	}
