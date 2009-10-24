@@ -32,6 +32,8 @@ namespace BatteryMonitor
 			}
 		}
 		
+		public override string Icon { get { return "battery"; } }
+		
 		public override IEnumerable<AbstractDockItem> Items {
 			get {
 				if (!hidden)

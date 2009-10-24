@@ -34,6 +34,8 @@ namespace Docky.Items
 		
 		public abstract string Name { get; }
 		
+		public abstract string Icon { get; }
+		
 		public virtual bool Separated {
 			get { return false; }
 		}

@@ -262,6 +262,8 @@ namespace Docky.Items
 		#region IDockItemProvider implementation
 		public override string Name { get { return "File Application Provider"; } }
 		
+		public override string Icon { get { return "gtk-delete"; } }
+		
 		public override bool Separated { get { return true; } }
 		
 		public override bool ItemCanBeRemoved (AbstractDockItem item)

@@ -32,6 +32,8 @@ namespace Trash
 			}
 		}
 		
+		public override string Icon { get { return "trashcan_full"; } }
+		
 		public override IEnumerable<AbstractDockItem> Items {
 			get {
 				yield return trash;

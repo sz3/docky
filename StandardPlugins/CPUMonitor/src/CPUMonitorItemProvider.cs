@@ -32,6 +32,8 @@ namespace CPUMonitor
 			}
 		}
 		
+		public override string Icon { get { return "system"; } }
+		
 		public override IEnumerable<AbstractDockItem> Items {
 			get {
 				yield return monitor;

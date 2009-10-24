@@ -38,6 +38,8 @@ namespace Mounter
 			}
 		}
 		
+		public override string Icon { get { return "drive-removable-media-usb"; } }
+		
 		public override IEnumerable<AbstractDockItem> Items {
 			get {
 				foreach (MountItem item in Mounts)

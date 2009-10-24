@@ -63,7 +63,7 @@ namespace Docky.Zeitgeist
 		ZeitgeistProxy ()
 		{
 			try {
-				if (!Bus.Session.NameHasOwner (BusName));
+				if (!Bus.Session.NameHasOwner (BusName))
 				    return;
 				StartReply reply = Bus.Session.StartServiceByName (BusName);
 				if (reply == StartReply.AlreadyRunning || reply == StartReply.Success)

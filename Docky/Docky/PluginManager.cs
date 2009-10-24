@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,10 +16,10 @@
 // 
 
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 using Mono.Addins;
 using Mono.Addins.Gui;
@@ -38,17 +38,22 @@ namespace Docky
 		
 		const string PluginsDirectory = "plugins";
 		const string ApplicationDirectory = "docky";
+		const string DefaultAddinsDirectory = "addins";
 		
 		const string IPExtensionPath = "/Docky/ItemProvider";
 
 		//// <value>
 		/// Directory where Docky saves its Mono.Addins repository cache.
 		/// </value>
-		static string UserPluginsDirectory {
+		public static string UserPluginsDirectory {
 			get {
 				string userData = Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData);
 				return Path.Combine (Path.Combine (userData, ApplicationDirectory), PluginsDirectory);
 			}
+		}
+		
+		public static string UserAddinInstallationDirectory {
+			get { return Path.Combine (UserPluginsDirectory, DefaultAddinsDirectory); }
 		}
 			
 		/// <summary>
@@ -110,9 +115,28 @@ namespace Docky
 				addin.Enabled = enabled;
 		}
 		
-		public static IEnumerable<Addin> AllAddins ()
-		{
-			return AddinManager.Registry.GetAddins ();
+		public static IEnumerable<Addin> AllAddins {
+			get {
+				return AddinManager.Registry.GetAddins ();
+			}
+		}
+		
+		public static void InstallLocalPlugins ()
+		{	
+			IEnumerable<string> saved, manual;
+			
+			manual = Directory.GetFiles (UserAddinInstallationDirectory, "*.dll")
+				.Select (s => Path.GetFileName (s));
+					
+			manual.ToList ().ForEach (dll => Log<PluginManager>.Info ("Installing {0}", dll));
+			
+			AddinManager.Registry.Rebuild (null);
+			
+			saved = AllAddins
+				.Where (addin => manual.Contains (Path.GetFileName (addin.AddinFile)))
+				.Select (addin => addin.Id);
+				
+			manual.ToList ().ForEach (dll => File.Delete (dll));
 		}
 		
 		public static AbstractDockItemProvider ItemProviderFromAddin (string addinID)
@@ -163,7 +187,7 @@ namespace Docky
 		// this will return a list of Provider IDs that are currently not used by any docks
 		public static IEnumerable<string> AvailableProviderIDs {
 			get {
-				return AllAddins ().Where (a => !a.Enabled).Select (a => Addin.GetIdName (a.Id));
+				return AllAddins .Where (a => !a.Enabled).Select (a => Addin.GetIdName (a.Id));
 			}
 		}
 	}

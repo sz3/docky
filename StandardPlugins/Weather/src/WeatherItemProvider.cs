@@ -38,6 +38,8 @@ namespace WeatherDocklet
 			}
 		}
 		
+		public override string Icon { get { return "weather-clear"; } }
+		
 		public override IEnumerable<AbstractDockItem> Items {
 			get {
 				yield return item;

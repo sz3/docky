@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="src\gui.stetic" />
+    <None Include="Resources\Weather.addin.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
