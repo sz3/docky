@@ -291,7 +291,7 @@ namespace Docky.Interface
 			TargetEntry addin = new TargetEntry ("text/uri-list", 0, 0);
 
 			inactive_view.EnableModelDragDest (new [] {addin}, DragAction.Copy);
-			inactive_view.DragDataReceived += HandleInactive_viewDragDataReceived;
+			inactive_view.DragDataReceived += HandleInactiveViewDragDataReceived;
 			
 			// more or less happens every time the visiblity of the widget changes.
 			// kind of a dirty hack, good refactoring candidate
@@ -303,7 +303,7 @@ namespace Docky.Interface
 	
 		}
 
-		void HandleInactive_viewDragDataReceived (object o, DragDataReceivedArgs args)
+		void HandleInactiveViewDragDataReceived (object o, DragDataReceivedArgs args)
 		{
 			string data;
 			string [] uriList;
@@ -345,7 +345,7 @@ namespace Docky.Interface
 			PopulateTreeViews ();
 		}
 
-		void HandleActive_viewDragDataReceived (object o, DragDataReceivedArgs args)
+		void HandleActiveViewDragDataReceived (object o, DragDataReceivedArgs args)
 		{
 			string draggedName = Encoding.UTF8.GetString (args.SelectionData.Data);
 			
