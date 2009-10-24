@@ -957,8 +957,8 @@ namespace Docky.Interface
 		void EnableDragFrom ()
 		{
 			// we dont really want to offer the drag to anything, merely pretend to, so we set a mimetype nothing takes
-			TargetEntry te = new TargetEntry ("text/docky-uri-list", 0, 0);
-			Gtk.Drag.SourceSet (this, Gdk.ModifierType.Button1Mask, new[] { te }, DragAction.Copy);
+			TargetEntry te = new TargetEntry ("text/docky-uri-list", TargetFlags.App, 0);
+			Gtk.Drag.SourceSet (this, Gdk.ModifierType.Button1Mask, new[] { te }, DragAction.Private);
 		}
 		#endregion
 		

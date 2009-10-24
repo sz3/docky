@@ -23,6 +23,7 @@ PROJECT_REFERENCES = \
 REFERENCES =  \
 	System \
 	System.Core \
+	Mono.Posix \
 	$(GLIB_SHARP_20_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(WNCK_SHARP_10_LIBS) \

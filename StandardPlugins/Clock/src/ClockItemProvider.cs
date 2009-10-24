@@ -34,12 +34,6 @@ namespace Clock
 		
 		public override string Icon { get { return "clock"; } }
 		
-		public override IEnumerable<AbstractDockItem> Items {
-			get {
-				yield return clock;
-			}
-		}
-		
 		public override void Dispose ()
 		{
 			clock.Dispose ();
@@ -53,6 +47,8 @@ namespace Clock
 		{
 			clock = new ClockDockItem ();
 			clock.Owner = this;
+			
+			Items = clock.AsSingle<AbstractDockItem> ();
 		}
 	}
 }

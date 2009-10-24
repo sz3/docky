@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Docky.Items;
 
@@ -24,6 +25,7 @@ namespace GMail
 {
 	public class GMailItemProvider : AbstractDockItemProvider
 	{
+		
 		#region IDockItemProvider implementation
 		
 		public override string Name {
@@ -33,14 +35,6 @@ namespace GMail
 		}
 		
 		public override string Icon { get { return "gmail-logo.png@" + GetType ().Assembly.FullName; } }
-		
-		public override IEnumerable<AbstractDockItem> Items {
-			get {
-				foreach (GMailDockItem item in items.Values)
-					if (item.Visible)
-						yield return item;
-			}
-		}
 		
 		public override void Dispose ()
 		{
@@ -54,15 +48,19 @@ namespace GMail
 		
 		public void ItemVisibilityChanged (AbstractDockItem item, bool newVisible)
 		{
-			if (visible [item] == newVisible)
+			if (visible[item] == newVisible)
 				return;
 			
-			visible [item] = newVisible;
+			visible[item] = newVisible;
 
-			if (newVisible)
-				OnItemsChanged (item.AsSingle (), null);
-			else
-				OnItemsChanged (null, item.AsSingle ());
+			SetItems ();
+		}
+		
+		void SetItems ()
+		{
+			Items = items.Values
+				.Where (adi => (adi is GMailDockItem) && (adi as GMailDockItem).Visible)
+				.Cast<AbstractDockItem> ();
 		}
 		
 		void RemoveItem (string label)
@@ -70,11 +68,12 @@ namespace GMail
 			if (!items.ContainsKey (label))
 				return;
 
-			AbstractDockItem item = items [label];
+			AbstractDockItem item = items[label];
 			items.Remove (label);
 			visible.Remove (item);
 			
-			OnItemsChanged (item.AsSingle (), null);
+			SetItems ();
+			
 			item.Dispose ();
 		}
 		
@@ -86,10 +85,10 @@ namespace GMail
 			GMailDockItem item = new GMailDockItem (label);
 			item.Owner = this;
 			
-			if (item.Visible)
-				OnItemsChanged (null, (item as AbstractDockItem).AsSingle ());
 			items.Add (label, item);
 			visible.Add (item, item.Visible);
+			
+			SetItems ();
 		}
 
 		Dictionary<string, AbstractDockItem> items = new Dictionary<string, AbstractDockItem> ();
@@ -103,6 +102,8 @@ namespace GMail
 				AddItem (label);
 			
 			GMailPreferences.LabelsChanged += HandleLabelsChanged;
+			
+			SetItems ();
 		}
 		
 		void HandleLabelsChanged (object o, EventArgs e)

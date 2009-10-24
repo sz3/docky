@@ -26,6 +26,7 @@ RESOURCES = \
 
 REFERENCES =  \
 	System \
+	System.Core \
 	Mono.Cairo \
 	Mono.Posix \
 	$(DOCKY_CAIRO_LIBS) \

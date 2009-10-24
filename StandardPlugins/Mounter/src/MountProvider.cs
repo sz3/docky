@@ -40,17 +40,10 @@ namespace Mounter
 		
 		public override string Icon { get { return "drive-removable-media-usb"; } }
 		
-		public override IEnumerable<AbstractDockItem> Items {
-			get {
-				foreach (MountItem item in Mounts)
-					yield return item;
-			}
-		}
-		
 		public override void Dispose ()
 		{
-			foreach (Mount m in Mounts)
-				OnItemsChanged (null, (m as AbstractDockItem).AsSingle ());
+			foreach (MountItem m in Mounts)
+				m.Dispose ();
 		}
 		
 		#endregion
@@ -75,7 +68,13 @@ namespace Mounter
 			
 			Monitor.MountAdded += HandleMountAdded;
 			Monitor.MountRemoved += HandleMountRemoved;
-			
+		
+			SetItems ();
+		}
+		
+		void SetItems ()
+		{
+			Items = Mounts.Cast<AbstractDockItem> ();
 		}
 		
 		void HandleMountAdded (object o, MountAddedArgs args)
@@ -88,7 +87,7 @@ namespace Mounter
 			
 			MountItem newMnt = new MountItem (m);
 			Mounts.Add (newMnt);
-			OnItemsChanged ((newMnt as AbstractDockItem).AsSingle (), null);
+			SetItems ();
 			Log<MountProvider>.Info ("{0} mounted.", m.Name);
 		}		
 		
@@ -100,7 +99,7 @@ namespace Mounter
 			if (Mounts.Any (d => d.Mnt.Handle == m.Handle)) {
 				MountItem mntToRemove = Mounts.First (d => d.Mnt.Handle == m.Handle);
 				Mounts.Remove (mntToRemove);
-				OnItemsChanged (null, (mntToRemove as AbstractDockItem).AsSingle ());
+				SetItems ();
 				mntToRemove.Dispose ();
 				Log<MountProvider>.Info ("{0} unmounted.", m.Name);
 			}
@@ -114,20 +113,16 @@ namespace Mounter
 		
 		public override bool ItemCanBeRemoved (AbstractDockItem item)
 		{
-			if (item is MountItem)
-				return true;
-			return false;
+			return (item is MountItem);
 		}
 		
 		public override bool RemoveItem (AbstractDockItem item)
 		{
 			Mounts.Remove (item as MountItem);
-			
-			OnItemsChanged (null, item.AsSingle ());
-			
+			SetItems ();
 			(item as MountItem).UnMount ();
 			
-			return false;
+			return true;
 		}
 	}
 }
