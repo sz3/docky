@@ -33,6 +33,8 @@ namespace BatteryMonitor
 			}
 		}
 		
+		public override string Icon { get { return "battery"; } }
+		
 		public override void Dispose ()
 		{
 			battery.Dispose ();

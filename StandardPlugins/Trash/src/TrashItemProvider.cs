@@ -32,6 +32,8 @@ namespace Trash
 			}
 		}
 		
+		public override string Icon { get { return "trashcan_full"; } }
+		
 		public override void Dispose ()
 		{
 			trash.Dispose ();

@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2009 Jason Smith, Robert Dyer, Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,7 +18,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Linq;
+using System.IO;
 using System.Text;
 
 using Cairo;
@@ -27,6 +30,7 @@ using Gtk;
 
 using Docky.Items;
 using Docky.Services;
+using System.Text.RegularExpressions;
 
 namespace Docky.Interface
 {
@@ -43,72 +47,13 @@ namespace Docky.Interface
 			if (value.CompareTo (min) < 0)
 				result = min;
 			return result;
-		} 
-		
-		[TreeNode(ListOnly = true)]
-		public class AddinTreenode : Gtk.TreeNode
-		{
-			[Gtk.TreeNodeValue(Column = 0)]
-			public Pixbuf Icon;
-			
-			[Gtk.TreeNodeValue(Column = 1)]
-			public string Name;
-
-			public string AddinID;
-			
-			public AbstractDockItemProvider Provider;
-
-			public AddinTreenode (string addinID, AbstractDockItemProvider provider)
-			{
-				AddinID = addinID;
-				if (string.IsNullOrEmpty (addinID))
-				    AddinID = PluginManager.AddinIDFromProvider (provider);
-				
-				Name = PluginManager.AddinFromID (AddinID).Name;
-				
-				Provider = provider;
-				if (provider == null)
-					Provider = null;
-				
-				if (provider == null ||  !PluginManager.AddinFromID (AddinID).Enabled)
-					Icon = DockServices.Drawing.LoadIcon (PluginManager.DefaultPluginIcon, 22);
-				// we should enhance Provider to provide an icon  we can use here
-				else
-					Icon = DockServices.Drawing.LoadIcon ("gtk-apply", 22);
-			}
-			
-			public AddinTreenode (string addinId) : this (addinId, null)
-			{	
-			}
-			
-			public AddinTreenode (AbstractDockItemProvider provider) : this (null, provider)
-			{
-			}
 		}
-		
-		[TreeNode(ListOnly = true)]
-		public class EnabledAddinTreenode : Gtk.TreeNode
-		{
-			[Gtk.TreeNodeValue(Column = 0)]
-			public Pixbuf Icon;
-			
-			[Gtk.TreeNodeValue(Column = 1)]
-			public string Name;
 
-			public AbstractDockItemProvider Provider;
-
-			public EnabledAddinTreenode (AbstractDockItemProvider provider)
-			{
-				Provider = provider;
-				Name = provider.Name;
-				// TODO: Implement a Icon property in AbstractDockItemProvider for showing an icon here
-				Icon = DockServices.Drawing.LoadIcon ("gtk-delete", 22);
-			}
-		}
-		
 		IPreferences prefs;
 		string name;
 		List<AbstractDockItemProvider> item_providers;
+		
+		AddinTreeView inactive_view, active_view;
 		
 		public event EventHandler PositionChanged;
 		public event EventHandler IconSizeChanged;
@@ -331,7 +276,22 @@ namespace Docky.Interface
 			position_box.Changed += PositionBoxChanged;
 			fade_on_hide_check.Toggled += FadeOnHideToggled;
 		
-			SetupTreeViews ();
+			
+			// TreeViews
+			inactive_view = new AddinTreeView (false);
+			inactive_view.ButtonPressEvent += OnInactiveViewDoubleClicked;
+			inactive_scroll.Add (inactive_view);
+			
+			active_view = new AddinTreeView (true);
+			active_view.ButtonPressEvent += OnActiveViewDoubleClicked;
+			active_view.AddinOrderChanged += OnActiveViewAddinOrderChanged;
+			active_scroll.Add (active_view);
+			
+			// drag + drop for addin install
+			TargetEntry addin = new TargetEntry ("text/uri-list", 0, 0);
+
+			inactive_view.EnableModelDragDest (new [] {addin}, DragAction.Copy);
+			inactive_view.DragDataReceived += HandleInactive_viewDragDataReceived;
 			
 			// more or less happens every time the visiblity of the widget changes.
 			// kind of a dirty hack, good refactoring candidate
@@ -340,39 +300,77 @@ namespace Docky.Interface
 			};
 			
 			ShowAll ();
+	
 		}
-		
-		
 
-		void SetupTreeViews ()
+		void HandleInactive_viewDragDataReceived (object o, DragDataReceivedArgs args)
 		{
-			SetupTreeView (inactive_view, new Gtk.NodeStore (typeof (AddinTreenode)));
-			SetupTreeView (active_view, new Gtk.NodeStore (typeof (AddinTreenode)));
+			string data;
+			string [] uriList;
+			List<string> errors;
 			
-			active_view.Reorderable = true;
+			data = Encoding.UTF8.GetString (args.SelectionData.Data);
+			// Sometimes we get a null at the end, and it crashes us.
+			data = data.TrimEnd ('\0');
+			
+			errors = new List<string> ();
+			uriList = Regex.Split (data, "\r\n");
+			
+			foreach (string uri in data.Split (new [] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries)) {
+				string file, path, filename;
+				
+				if (string.IsNullOrEmpty (uri))
+					continue;
+				
+				file = uri.Remove (0, 7); // 7 is the length of file://
+				filename = System.IO.Path.GetFileName (file);
+				
+				if (!file.EndsWith (".dll"))
+					continue;
+				
+				try {
+					if (!Directory.Exists (PluginManager.UserAddinInstallationDirectory))
+						Directory.CreateDirectory (PluginManager.UserAddinInstallationDirectory);
+					
+					path = System.IO.Path.Combine (PluginManager.UserAddinInstallationDirectory, filename);
+					File.Copy (file, path, true);
+					
+				} catch (Exception e) {
+					Log.Error ("{0} failed to process '{1}': {2}", name, uri, e.Message);
+					Log.Info (e.StackTrace);
+				}
+			}
+			
+			PluginManager.InstallLocalPlugins ();
+			PopulateTreeViews ();
 		}
-		
-		void SetupTreeView (Gtk.NodeView view, Gtk.NodeStore store)
+
+		void HandleActive_viewDragDataReceived (object o, DragDataReceivedArgs args)
 		{
-			view.NodeStore = store;
+			string draggedName = Encoding.UTF8.GetString (args.SelectionData.Data);
 			
-			view.AppendColumn ("Icon", new Gtk.CellRendererPixbuf (), "pixbuf", 0);
-			view.AppendColumn ("Name", new Gtk.CellRendererText (), "text", 1);
-			view.ShowAll ();
+			AddinTreeNode node = inactive_view.current_order.ToList ().First (a => a.Name == draggedName);
 			
-			view.HeadersVisible = false;
+			Console.WriteLine (node.Name);
+			
+			// catch the off case the inactive view doesn't contain the node it's trying to drag.
+			// shoud _never_ be possible, but you never know.
+			if (node == null)
+				return;
+			
+			EnableAddin (node);
 		}
 		
 		void PopulateTreeViews ()
 		{
-			active_view.NodeStore.Clear ();
-			inactive_view.NodeStore.Clear ();
+			active_view.Clear ();
+			inactive_view.Clear ();
 
 			foreach (string id in PluginManager.AvailableProviderIDs)
-				inactive_view.NodeStore.AddNode (new AddinTreenode (id));
+				inactive_view.Add (new AddinTreeNode (id));
 			
 			foreach (AbstractDockItemProvider provider in ItemProviders.Where (p => p != DefaultProvider))
-				active_view.NodeStore.AddNode (new AddinTreenode (provider));
+				active_view.Add (new AddinTreeNode (provider));
 		}
 		
 		void PositionBoxChanged (object sender, EventArgs e)
@@ -625,6 +623,26 @@ namespace Docky.Interface
 				DefaultProvider.SetWindowManager ();
 			WindowManager = window_manager_check.Active = DefaultProvider.IsWindowManager;
 		}
+		
+		void OnActiveViewAddinOrderChanged (object sender, AddinOrderChangedArgs e)
+		{
+			List<AbstractDockItemProvider> new_providers = e.NewOrder.Select ( a => a.Provider).ToList ();
+			List<AbstractDockItemProvider> old_providers = item_providers;
+			
+			new_providers.ForEach ( provider => item_providers.Remove (provider));
+			
+			// I can't do this until DBO makes the application part of the dock a normal addin
+			// calling this on the dock that provides launchers / window management will remove it
+			// and never add it back
+			//item_providers.Clear ();
+			
+			foreach (AbstractDockItemProvider provider in new_providers) {
+				item_providers.Add (provider);
+				provider.AddedToDock ();
+			}
+			
+			OnItemProvidersChanged (new_providers, old_providers);
+		}
 
 		[GLib.ConnectBefore]
 		protected virtual void OnActiveViewDoubleClicked (object sender, ButtonPressEventArgs e)
@@ -635,27 +653,37 @@ namespace Docky.Interface
 
 		protected virtual void OnDisablePluginButtonClicked (object sender, System.EventArgs e)
 		{
-			AddinTreenode node = active_view.NodeSelection.SelectedNode as AddinTreenode;
+			if (inactive_view.SelectedAddin != null)
+				return;
+			
+			AddinTreeNode node = active_view.SelectedAddin as AddinTreeNode;
 			
 			if (node == null)
 				return;
 			
+			DisableAddin (node);
+		}
+
+		private void DisableAddin (AddinTreeNode node)
+		{
 			// disable this addin
 			PluginManager.Disable (node.AddinID);
 			
 			// remove it from the active addins list
-			active_view.NodeStore.RemoveNode (node);
+			active_view.Remove (node);
 			
 			// remove it from the dock
 			item_providers.Remove (node.Provider);
 			OnItemProvidersChanged (null, node.Provider.AsSingle ());
 			
-			// add it back to the list of available addins
-			inactive_view.NodeStore.AddNode (new AddinTreenode (node.AddinID));
+			node.Provider = null;
 			
-			SyncPlugins ();
-		}
+			// add it back to the list of available addins
+			inactive_view.Add (node);
 
+			SyncPlugins ();
+		}		
+		
 		[GLib.ConnectBefore]
 		protected virtual void OnInactiveViewDoubleClicked (object sender, ButtonPressEventArgs e)
 		{
@@ -665,18 +693,29 @@ namespace Docky.Interface
 		
 		protected virtual void OnEnablePluginButtonClicked (object sender, System.EventArgs e)
 		{
-			AddinTreenode node = inactive_view.NodeSelection.SelectedNode as AddinTreenode;
+			if (inactive_view.SelectedAddin == null)
+				return;
+			
+			AddinTreeNode node = inactive_view.SelectedAddin as AddinTreeNode;
 			
 			if (node == null)
 				return;
 			
+			EnableAddin (node);
+		}
+		
+		private void EnableAddin (AddinTreeNode node)
+		{
 			// enable the addin
 			PluginManager.Enable (node.AddinID);
 			
+			// create the object
 			AbstractDockItemProvider provider = PluginManager.ItemProviderFromAddin (node.AddinID);
 			
+			node.Provider = provider;
+			
 			// remove this addin from the inactive list
-			inactive_view.NodeStore.RemoveNode (node);
+			inactive_view.Remove (node);
 			
 			// add this provider to the list of enabled providers and trigger ProvidersChanged
 			item_providers.Add (provider);
@@ -684,9 +723,9 @@ namespace Docky.Interface
 			OnItemProvidersChanged (provider.AsSingle (), null);
 			
 			// Add the node to the enabled providers treeview
-			active_view.NodeStore.AddNode (new AddinTreenode (provider));
+			active_view.Add (node);
 			
-			SyncPlugins ();
+			SyncPlugins ();	
 		}
 		
 		void OnItemProvidersChanged (IEnumerable<AbstractDockItemProvider> addedProviders, IEnumerable<AbstractDockItemProvider> removedProviders)

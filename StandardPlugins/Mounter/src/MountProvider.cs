@@ -38,6 +38,8 @@ namespace Mounter
 			}
 		}
 		
+		public override string Icon { get { return "drive-removable-media-usb"; } }
+		
 		public override void Dispose ()
 		{
 			foreach (MountItem m in Mounts)

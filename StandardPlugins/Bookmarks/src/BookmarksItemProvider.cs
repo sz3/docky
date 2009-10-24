@@ -145,6 +145,8 @@ namespace Bookmarks
 			}
 		}
 		
+		public override string Icon { get { return "folder-home"; } }
+		
 		public override bool ItemCanBeRemoved (AbstractDockItem item)
 		{
 			return item is BookmarkDockItem;
