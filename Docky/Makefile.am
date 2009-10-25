@@ -15,6 +15,7 @@ FILES = \
 	gtk-gui/generated.cs \
 	Docky/Interface/DockPreferences.cs \
 	gtk-gui/Docky.Interface.DockPreferences.cs \
+	Docky/Interface/AddinTreeView.cs \
 	Docky/Interface/DockWindow.cs \
 	Docky/Interface/IDockPreferences.cs \
 	Docky/Interface/CursorTracker.cs \

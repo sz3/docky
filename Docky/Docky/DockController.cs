@@ -32,7 +32,7 @@ namespace Docky
 {
 
 
-	internal class DockController
+	internal class DockController : IDisposable
 	{
 		const string DefaultTheme = "Classic";
 		
@@ -162,6 +162,7 @@ namespace Docky
 				return false;
 			
 			docks.Remove (dock);
+			dock.Preferences.FreeProviders ();
 			dock.Dispose ();
 			DockNames = DockNames.Where (s => s != dock.Preferences.GetName ());
 			return true;
@@ -175,5 +176,13 @@ namespace Docky
 				docks.Add (dock);
 			}
 		}
+		#region IDisposable implementation
+		public void Dispose ()
+		{
+			foreach (Dock d in Docks) {
+				d.Dispose ();
+			}
+		}
+		#endregion
 	}
 }

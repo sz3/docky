@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Docky.Items;
 
@@ -32,15 +33,8 @@ namespace BatteryMonitor
 			}
 		}
 		
-		public override IEnumerable<AbstractDockItem> Items {
-			get {
-				if (!hidden)
-					yield return battery;
-
-				yield break;
-			}
-		}
-
+		public override string Icon { get { return "battery"; } }
+		
 		public override void Dispose ()
 		{
 			battery.Dispose ();
@@ -61,15 +55,15 @@ namespace BatteryMonitor
 					return;
 				hidden = value;
 				if (hidden)
-					OnItemsChanged (null, Items);
+					Items = Enumerable.Empty<AbstractDockItem> ();
 				else
-					OnItemsChanged (Items, null);
+					Items = battery.AsSingle<AbstractDockItem> ();
 			}
 		}
 		
 		public BatteryMonitorItemProvider ()
 		{
-			hidden = false;
+			Hidden = false;
 			battery = new BatteryMonitorProcItem (this);
 		}
 	}

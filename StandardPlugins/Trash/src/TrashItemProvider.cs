@@ -32,11 +32,7 @@ namespace Trash
 			}
 		}
 		
-		public override IEnumerable<AbstractDockItem> Items {
-			get {
-				yield return trash;
-			}
-		}
+		public override string Icon { get { return "trashcan_full"; } }
 		
 		public override void Dispose ()
 		{
@@ -51,6 +47,8 @@ namespace Trash
 		{
 			trash = new TrashDockItem ();
 			trash.Owner = this;
+			
+			Items = trash.AsSingle<AbstractDockItem> ();
 		}
 	}
 }

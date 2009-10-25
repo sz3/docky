@@ -24,22 +24,115 @@ using System.Text;
 using Cairo;
 using Gdk;
 
+using Docky.CairoHelper;
+
 namespace Docky.Painters
 {
 
 
-	public class AbstractDockPainter
+	public class AbstractDockPainter : IDisposable
 	{
-
+		DockySurface surface;
+		bool paint_needed;
+		
+		public event EventHandler PaintNeeded;
+		public event EventHandler HideRequest;
+		
+		public virtual bool SupportsVertical {
+			get { return false; }
+		}
+		
+		public virtual int MinimumSize {
+			get { return 400; }
+		}
+		
 		protected Gdk.Rectangle Allocation { get; private set; }
 		
-		public AbstractDockPainter ()
+		protected AbstractDockPainter ()
 		{
+			paint_needed = true;
 		}
 		
 		public void SetAllocation (Gdk.Rectangle allocation)
 		{
 			Allocation = allocation;
+			OnAllocationSet (allocation);
 		}
+		
+		public DockySurface GetSurface (DockySurface similar)
+		{
+			if (surface == null || surface.Width != Allocation.Width || surface.Height != Allocation.Height) {
+				if (surface != null)
+					surface.Dispose ();
+				surface = new DockySurface (Allocation.Width, Allocation.Height, similar);
+			}
+			
+			if (paint_needed) {
+				PaintSurface (surface);
+				paint_needed = false;
+			}
+			
+			return surface;
+		}
+		
+		protected virtual void PaintSurface (DockySurface surface)
+		{
+			
+		}
+		
+		protected virtual void OnAllocationSet (Gdk.Rectangle allocation)
+		{
+		
+		}
+		
+		public void ButtonPressed (int x, int y, Gdk.ModifierType mod)
+		{
+			OnButtonPressed (x, y, mod);
+		}
+		
+		protected virtual void OnButtonPressed (int x, int y, Gdk.ModifierType mod)
+		{
+		
+		}
+		
+		public void ButtonReleased (int x, int y, Gdk.ModifierType mod)
+		{
+			OnButtonReleased (x, y, mod);
+		}
+		
+		protected virtual void OnButtonReleased (int x, int y, Gdk.ModifierType mod)
+		{
+			
+		}
+		
+		public void Scrolled (ScrollDirection direction, int x, int y, Gdk.ModifierType mod)
+		{
+			OnScrolled (direction, x, y, mod);
+		}
+		
+		protected virtual void OnScrolled (ScrollDirection direction, int x, int y, Gdk.ModifierType type)
+		{
+		
+		}
+		
+		protected void Hide ()
+		{
+			if (HideRequest != null)
+				HideRequest (this, EventArgs.Empty);
+		}
+		
+		protected void QueueRepaint ()
+		{
+			paint_needed = true;
+			if (PaintNeeded != null)
+				PaintNeeded (this, EventArgs.Empty);
+		}
+		#region IDisposable implementation
+		public void Dispose ()
+		{
+			surface.Dispose ();
+			surface = null;
+		}
+		#endregion
 	}
 }

@@ -72,6 +72,12 @@ namespace Docky.Items
 			}
 		}
 		
+		IEnumerable<AbstractDockItem> InternalItems {
+			get {
+				return items.Values.Concat (transient_items);
+			}
+		}
+		
 		public FileApplicationProvider ()
 		{
 			items = new Dictionary<string, AbstractDockItem> ();
@@ -123,7 +129,7 @@ namespace Docky.Items
 					
 					transient_items = new List<AbstractDockItem> ();
 					
-					OnItemsChanged (null, old_transient_items);
+					Items = InternalItems;
 					foreach (AbstractDockItem adi in old_transient_items)
 						adi.Dispose ();
 				}
@@ -158,7 +164,7 @@ namespace Docky.Items
 				item.Owner = this;
 				item.WindowsChanged += HandleTransientWindowsChanged;
 				
-				OnItemsChanged (item.AsSingle<AbstractDockItem> (), null);
+				Items = InternalItems;
 			}
 			
 			// remove old transient items
@@ -174,7 +180,7 @@ namespace Docky.Items
 			
 			foreach (AbstractDockItem adi in removed_transient_items)
 				transient_items.Remove (adi);
-			OnItemsChanged (null, removed_transient_items);
+			Items = InternalItems;
 			foreach (AbstractDockItem adi in removed_transient_items)
 				adi.Dispose();
 		}
@@ -187,7 +193,7 @@ namespace Docky.Items
 			WnckDockItem item = sender as WnckDockItem;
 			if (!item.ManagedWindows.Any ()) {
 				transient_items.Remove (item);
-				OnItemsChanged (null, item.AsSingle<AbstractDockItem> ());
+				Items = InternalItems;
 				item.Dispose ();
 			}
 		}
@@ -219,7 +225,7 @@ namespace Docky.Items
 			items[uri] = item;
 			
 			
-			OnItemsChanged (item.AsSingle<AbstractDockItem> (), null);
+			Items = InternalItems;
 			UpdateTransientItems ();
 			
 			return true;
@@ -262,6 +268,8 @@ namespace Docky.Items
 		#region IDockItemProvider implementation
 		public override string Name { get { return "File Application Provider"; } }
 		
+		public override string Icon { get { return "gtk-delete"; } }
+		
 		public override bool Separated { get { return true; } }
 		
 		public override bool ItemCanBeRemoved (AbstractDockItem item)
@@ -288,19 +296,13 @@ namespace Docky.Items
 			
 			items.Remove (key);
 			
-			OnItemsChanged (null, item.AsSingle<AbstractDockItem> ());
+			Items = InternalItems;
 			
 			item.Dispose ();
 			
 			// this is so if the launcher has open windows and we manage those...
 			UpdateTransientItems ();
 			return true;
-		}
-		
-		public override IEnumerable<AbstractDockItem> Items {
-			get {
-				return items.Values.Concat (transient_items);
-			}
 		}
 		
 		public override IEnumerable<Menus.MenuItem> GetMenuItems (AbstractDockItem item)
@@ -320,7 +322,7 @@ namespace Docky.Items
 			items = new Dictionary<string, AbstractDockItem> ();
 			transient_items = new List<AbstractDockItem> ();
 			
-			OnItemsChanged (null, old_items);
+			Items = Enumerable.Empty<AbstractDockItem> ();
 			foreach (AbstractDockItem adi in old_items)
 				adi.Dispose ();
 		}

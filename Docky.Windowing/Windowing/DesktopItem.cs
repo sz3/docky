@@ -165,9 +165,9 @@ namespace Docky.Windowing
 			string result = GetString (key);
 			
 			if (string.Equals (result, "false", StringComparison.CurrentCultureIgnoreCase)) {
-				return true;
-			} else if (string.Equals (result, "true", StringComparison.CurrentCultureIgnoreCase)) {
 				return false;
+			} else if (string.Equals (result, "true", StringComparison.CurrentCultureIgnoreCase)) {
+				return true;
 			} else {
 				throw new ArgumentException ();
 			}
@@ -180,6 +180,42 @@ namespace Docky.Windowing
 			return Convert.ToDouble (result);
 		}
 		
+		string FindProgramInPath (string program)
+		{
+			string[] paths = Environment.GetEnvironmentVariable ("PATH").Split (':');
+			
+			foreach (string path in paths) {
+				string file = Path.Combine (path, program);
+				if (!File.Exists (file))
+					continue;
+				
+				Mono.Unix.Native.Stat stat;
+				Mono.Unix.Native.Syscall.stat (file, out stat);
+				
+				if ((stat.st_mode & Mono.Unix.Native.FilePermissions.S_IXOTH) == Mono.Unix.Native.FilePermissions.S_IXOTH) {
+					return file;
+				}
+			}
+			
+			return null;
+		}
+		
+		string GetTerminal ()
+		{
+			
+			if (FindProgramInPath ("gnome-terminal") != null) {
+				return "gnome-terminal -x";
+			} else if (FindProgramInPath ("nxterm") != null) {
+				return "nxterm -e";
+			} else if (FindProgramInPath ("rxvt") != null) {
+				return "rxvt -e";
+			} else if (FindProgramInPath ("color-xterm") != null) {
+				return "color-xterm -e";
+			} else {
+				return "xterm -e";
+			}
+		}
+		
 		public void Launch (IEnumerable<string> uris)
 		{
 			string exec = GetString ("Exec");
@@ -187,6 +223,11 @@ namespace Docky.Windowing
 				return;
 			
 			StringBuilder builder = new StringBuilder ();
+			
+			if (HasAttribute ("Terminal") && GetBool ("Terminal")) {
+				builder.Append (GetTerminal ());
+				builder.Append (" ");
+			}
 			
 			bool uris_placed = !uris.Any ();
 			

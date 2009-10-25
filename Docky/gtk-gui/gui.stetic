@@ -312,23 +312,25 @@ Bottom</property>
               <placeholder />
             </child>
             <child>
-              <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow">
+              <widget class="Gtk.ScrolledWindow" id="active_scroll">
                 <property name="MemberName" />
-                <property name="HscrollbarPolicy">Never</property>
+                <property name="CanFocus">True</property>
                 <property name="ShadowType">In</property>
                 <child>
-                  <widget class="Gtk.NodeView" id="inactive_view">
+                  <widget class="Gtk.Viewport" id="GtkViewport1">
                     <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="ShowScrollbars">True</property>
-                    <property name="HeadersVisible">False</property>
-                    <signal name="ButtonPressEvent" handler="OnInactiveViewDoubleClicked" />
+                    <property name="ShadowType">None</property>
+                    <child>
+                      <placeholder />
+                    </child>
                   </widget>
                 </child>
               </widget>
               <packing>
                 <property name="TopAttach">1</property>
                 <property name="BottomAttach">2</property>
+                <property name="LeftAttach">2</property>
+                <property name="RightAttach">3</property>
                 <property name="AutoSize">True</property>
                 <property name="XOptions">Fill</property>
                 <property name="XExpand">False</property>
@@ -340,26 +342,23 @@ Bottom</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow1">
+              <widget class="Gtk.ScrolledWindow" id="inactive_scroll">
                 <property name="MemberName" />
-                <property name="HscrollbarPolicy">Never</property>
+                <property name="CanFocus">True</property>
                 <property name="ShadowType">In</property>
                 <child>
-                  <widget class="Gtk.NodeView" id="active_view">
+                  <widget class="Gtk.Viewport" id="GtkViewport">
                     <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="ShowScrollbars">True</property>
-                    <property name="HeadersVisible">False</property>
-                    <property name="Reorderable">True</property>
-                    <signal name="ButtonPressEvent" handler="OnActiveViewDoubleClicked" />
+                    <property name="ShadowType">None</property>
+                    <child>
+                      <placeholder />
+                    </child>
                   </widget>
                 </child>
               </widget>
               <packing>
                 <property name="TopAttach">1</property>
                 <property name="BottomAttach">2</property>
-                <property name="LeftAttach">2</property>
-                <property name="RightAttach">3</property>
                 <property name="AutoSize">True</property>
                 <property name="XOptions">Fill</property>
                 <property name="XExpand">False</property>

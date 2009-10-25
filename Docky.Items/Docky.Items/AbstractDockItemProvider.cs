@@ -34,11 +34,29 @@ namespace Docky.Items
 		
 		public abstract string Name { get; }
 		
+		public abstract string Icon { get; }
+		
 		public virtual bool Separated {
 			get { return false; }
 		}
 		
-		public abstract IEnumerable<AbstractDockItem> Items { get; }
+		IEnumerable<AbstractDockItem> items;
+		public IEnumerable<AbstractDockItem> Items {
+			get { return items; }
+			protected set {
+				IEnumerable<AbstractDockItem> added = value.Where (adi => !items.Contains (adi));
+				IEnumerable<AbstractDockItem> removed = items.Where (adi => !value.Contains (adi));
+				
+				items = value;
+				
+				OnItemsChanged (added, removed);
+			}
+		}
+		
+		protected AbstractDockItemProvider ()
+		{
+			items = Enumerable.Empty<AbstractDockItem> ();
+		}
 		
 		public virtual bool ItemCanBeRemoved (AbstractDockItem item)
 		{
@@ -55,7 +73,7 @@ namespace Docky.Items
 			return item.GetMenuItems ();
 		}
 		
-		protected void OnItemsChanged (IEnumerable<AbstractDockItem> added, IEnumerable<AbstractDockItem> removed)
+		void OnItemsChanged (IEnumerable<AbstractDockItem> added, IEnumerable<AbstractDockItem> removed)
 		{
 			if (ItemsChanged != null)
 				ItemsChanged (this, new ItemsChangedArgs (added, removed));
