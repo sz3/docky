@@ -82,7 +82,6 @@ namespace Docky.Painters
 		
 		protected virtual void OnAllocationSet (Gdk.Rectangle allocation)
 		{
-		
 		}
 		
 		public void ButtonPressed (int x, int y, Gdk.ModifierType mod)
@@ -92,7 +91,6 @@ namespace Docky.Painters
 		
 		protected virtual void OnButtonPressed (int x, int y, Gdk.ModifierType mod)
 		{
-		
 		}
 		
 		public void ButtonReleased (int x, int y, Gdk.ModifierType mod)
@@ -102,7 +100,6 @@ namespace Docky.Painters
 		
 		protected virtual void OnButtonReleased (int x, int y, Gdk.ModifierType mod)
 		{
-			
 		}
 		
 		public void Scrolled (ScrollDirection direction, int x, int y, Gdk.ModifierType mod)
@@ -112,7 +109,6 @@ namespace Docky.Painters
 		
 		protected virtual void OnScrolled (ScrollDirection direction, int x, int y, Gdk.ModifierType type)
 		{
-		
 		}
 		
 		protected void Hide ()

@@ -123,7 +123,7 @@ namespace Docky.Items
 		
 		public AbstractDockItem ()
 		{
-			state_times = new Dictionary<ItemState, DateTime> ();
+ 			state_times = new Dictionary<ItemState, DateTime> ();
 			Gtk.IconTheme.Default.Changed += HandleIconThemeChanged;
 		}
 		
