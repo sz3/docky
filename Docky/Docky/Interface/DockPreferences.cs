@@ -306,15 +306,10 @@ namespace Docky.Interface
 		void HandleInactiveViewDragDataReceived (object o, DragDataReceivedArgs args)
 		{
 			string data;
-			string [] uriList;
-			List<string> errors;
 			
 			data = Encoding.UTF8.GetString (args.SelectionData.Data);
 			// Sometimes we get a null at the end, and it crashes us.
 			data = data.TrimEnd ('\0');
-			
-			errors = new List<string> ();
-			uriList = Regex.Split (data, "\r\n");
 			
 			foreach (string uri in data.Split (new [] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries)) {
 				string file, path, filename;
@@ -343,20 +338,6 @@ namespace Docky.Interface
 			
 			PluginManager.InstallLocalPlugins ();
 			PopulateTreeViews ();
-		}
-
-		void HandleActiveViewDragDataReceived (object o, DragDataReceivedArgs args)
-		{
-			string draggedName = Encoding.UTF8.GetString (args.SelectionData.Data);
-			
-			AddinTreeNode node = inactive_view.current_order.ToList ().First (a => a.Name == draggedName);
-			
-			// catch the off case the inactive view doesn't contain the node it's trying to drag.
-			// shoud _never_ be possible, but you never know.
-			if (node == null)
-				return;
-			
-			EnableAddin (node);
 		}
 		
 		void PopulateTreeViews ()

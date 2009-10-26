@@ -85,8 +85,7 @@ namespace Trash
 				break;
 			}
 			
-			FileInfo info = OwnedFile.QueryInfo ("standard::icon", FileQueryInfoFlags.None, null);
-			SetIconFromGIcon (info.Icon);
+			SetIconFromGIcon (OwnedFile.Icon ());
 		}
 		
 		public override string UniqueID ()

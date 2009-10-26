@@ -8,6 +8,7 @@ PKG_CONFIG_FILES = docky.services.pc
 
 FILES = \
 	AssemblyInfo.cs \
+	Docky.Services/Extensions/GLibFileExtension.cs \
 	Docky.Services/Logging/ConsoleCrayon.cs \
 	Docky.Services/Logging/LogBase.cs \
 	Docky.Services/Logging/ConsoleLog.cs \

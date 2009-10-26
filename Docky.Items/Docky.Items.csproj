@@ -56,6 +56,7 @@
     <Folder Include="Docky.Items\" />
     <Folder Include="Resources\" />
     <Folder Include="Docky.Menus\" />
+    <Folder Include="Docky.Painters\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Docky.Items\AbstractDockItem.cs" />
@@ -76,6 +77,8 @@
     <Compile Include="Docky.Items\Enumerable_Extensions.cs" />
     <Compile Include="Docky.Items\AbstractDockItemProvider.cs" />
     <Compile Include="Docky.Menus\RelatedFileMenuItem.cs" />
+    <Compile Include="Docky.Painters\AbstractDockPainter.cs" />
+    <Compile Include="Docky.Items\PainterRequestEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Docky.Services\Docky.Services.csproj">
@@ -96,9 +99,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Docky.Items.addin.xml">
-      <LogicalName>Docky.Items.addin.xml</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\close.svg">
       <LogicalName>close.svg</LogicalName>
     </EmbeddedResource>

@@ -7,6 +7,7 @@ TARGET = library
 PKG_CONFIG_FILES = docky.items.pc
 
 FILES = \
+	Docky.Painters/AbstractDockPainter.cs \
 	Docky.Items/Enumerable_Extensions.cs \
 	Docky.Items/ItemState.cs \
 	Docky.Menus/MenuItem.cs \
@@ -22,6 +23,7 @@ FILES = \
 	Docky.Items/ActivityIndicator.cs \
 	Docky.Items/ClickAnimation.cs \
 	Docky.Items/PaintNeededEventArgs.cs \
+	Docky.Items/PainterRequestEventArgs.cs \
 	Docky.Items/FileApplicationProvider.cs \
 	Docky.Items/IconDockItem.cs \
 	Docky.Items/WnckDockItem.cs

@@ -5,6 +5,7 @@ SUBDIRS = \
 	CPUMonitor \
 	GMail \
 	Mounter \
+	RecentDocuments \
 	Trash \
 	Weather
 
@@ -15,5 +16,6 @@ DIST_SUBDIRS = \
 	CPUMonitor \
 	GMail \
 	Mounter \
+	RecentDocuments \
 	Trash \
 	Weather

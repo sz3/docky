@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Chris Szikszoy
+//  Copyright (C) 2009 Jason Smith
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,25 +16,29 @@
 // 
 
 using System;
-using System.Runtime.InteropServices;
+using Docky.Painters;
 
-namespace Docky.Services
+namespace Docky.Items
 {
+
+	public enum ShowHideType {
+		Show,
+		Hide,
+	}
 	
-	public class NativeInterop
-	{		
-		[DllImport ("gio-2.0")]
-		private static extern IntPtr g_file_get_uri (IntPtr fileHandle);
+	public class PainterRequestEventArgs : EventArgs
+	{
+		public AbstractDockItem Owner { get; private set; }
 		
-		public static string StrUri (GLib.File file)
+		public AbstractDockPainter Painter { get; private set; }
+		
+		public ShowHideType Type { get; private set; }
+		
+		public PainterRequestEventArgs (AbstractDockItem owner, AbstractDockPainter painter, ShowHideType type)
 		{
-			try {
-				return Marshal.PtrToStringAuto (g_file_get_uri (file.Handle));
-			} catch (DllNotFoundException e) {
-				Log<NativeInterop>.Fatal ("Could not load libdocky, please report immediately.");
-				Log<NativeInterop>.Info (e.StackTrace);
-				return "";
-			}
+			Owner = owner;
+			Painter = painter;
+			Type = type;
 		}
 	}
 }
