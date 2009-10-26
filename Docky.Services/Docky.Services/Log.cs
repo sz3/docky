@@ -44,7 +44,14 @@ namespace Docky.Services
 		
 		public static void Notify (string msg, params object[] args)
 		{
-			SendNote (msg, args);
+			Notify ("Docky", "", msg, args);
+		}
+		
+		public static void Notify (string title, string icon, string msg, params object[] args)
+		{
+			SendNote (title, icon, msg, args);
+			// also write the log out to the console
+			Write (LogLevel.Notify, msg, args);
 		}
 		
 		public static void Warn (string msg, params object [] args)

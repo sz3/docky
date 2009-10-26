@@ -86,14 +86,6 @@ namespace Docky.Services.Logging
 				title = "Docky";
 			
 			NotificationService.Notify (title, string.Format (msg, args), icon);
-			
-			// also write the log out to the console
-			Write (LogLevel.Notify, string.Format ("[{0}] {1}", title, msg), args);
-		}
-		
-		public static void SendNote (string msg, params object[] args)
-		{
-			SendNote (null, "", msg, args);
 		}
 	}
 }

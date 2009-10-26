@@ -78,22 +78,22 @@ namespace Docky.Services
 				return;
 			}
 			
-			// if we aren't using notify-osd, show a status icon
-			int x = 0, y = 0;
-			Screen screen = Screen.Default;
-			
-			statusIcon.Visible = true;
-			
-			System.Threading.Thread.Sleep (2000);
-			
-			Rectangle area;
-			Orientation orientation;
-
-			statusIcon.GetGeometry (out screen, out area, out orientation);
-			x = area.X + area.Width / 2;
-			y = area.Y + area.Height - 5;
-			
-			Notify (title, message, icon, screen, x, y);
+			// if we aren't using notify-osd, show a status icon, then after a short delay show the note
+			DockServices.System.RunOnMainThread (() => {
+				int x = 0, y = 0;
+				Screen screen = Screen.Default;
+				
+				statusIcon.Visible = true;
+				
+				Rectangle area;
+				Orientation orientation;
+	
+				statusIcon.GetGeometry (out screen, out area, out orientation);
+				x = area.X + area.Width / 2;
+				y = area.Y + area.Height - 5;
+				
+				Notify (title, message, icon, screen, x, y);
+			}, 2000); //2 seconds
 		}
 		
 		static void Notify (string title, string message, string icon, Screen screen, int x, int y)
@@ -103,7 +103,7 @@ namespace Docky.Services
 			notify.Show ();
 			
 			notify.Closed += delegate {
-				DockServices.System.RunOnMainThread ( () => statusIcon.Visible = false );
+				DockServices.System.RunOnMainThread (() => statusIcon.Visible = false );
 			};
 		}
 		

@@ -43,6 +43,8 @@ namespace Docky.Services
 		public static void Notify (string msg, params object[] args)
 		{
 			SendNote (typeof (TSender).Name, "", msg, args);
+			// also write the log out to the console
+			Write (LogLevel.Notify, AddSender (msg), args);
 		}
 		
 		public static void Warn (string msg, params object [] args)
