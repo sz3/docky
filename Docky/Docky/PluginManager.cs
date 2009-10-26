@@ -128,7 +128,7 @@ namespace Docky
 		
 		public static void InstallLocalPlugins ()
 		{	
-			IEnumerable<string> saved, manual;
+			IEnumerable<string> manual;
 			
 			manual = Directory.GetFiles (UserAddinInstallationDirectory, "*.dll")
 				.Select (s => Path.GetFileName (s));
@@ -136,10 +136,6 @@ namespace Docky
 			manual.ToList ().ForEach (dll => Log<PluginManager>.Info ("Installing {0}", dll));
 			
 			AddinManager.Registry.Rebuild (null);
-			
-			saved = AllAddins
-				.Where (addin => manual.Contains (Path.GetFileName (addin.AddinFile)))
-				.Select (addin => addin.Id);
 				
 			manual.ToList ().ForEach (dll => File.Delete (dll));
 		}
