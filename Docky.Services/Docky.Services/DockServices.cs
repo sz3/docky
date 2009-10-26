@@ -28,10 +28,6 @@ namespace Docky.Services
 		public static PreferencesService Preferences { get; private set; }
 		
 		public static SystemService System { get; private set; }
-				
-		public DockServices ()
-		{
-		}
 		
 		static DockServices ()
 		{
@@ -40,8 +36,6 @@ namespace Docky.Services
 			System        = new SystemService ();
 			
 			Log<DockServices>.Info ("Dock services initialized.");
-			Log<DockServices>.Notify ("Dock services initialized.");
-			Log.Notify ("Dock services initialized.");
 		}
 	}
 }
