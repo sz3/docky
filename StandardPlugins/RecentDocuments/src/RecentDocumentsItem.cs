@@ -54,8 +54,6 @@ namespace RecentDocuments
 			
 			RefreshRecentDocs ();
 			
-			CurrentFile = RecentDocs.ElementAt (CurrentIndex);
-			
 			UpdateInfo ();
 		}
 		
@@ -75,6 +73,8 @@ namespace RecentDocuments
 		
 		void UpdateInfo ()
 		{
+			CurrentFile = RecentDocs.ElementAt (CurrentIndex);
+			
 			SetIconFromGIcon (CurrentFile.Icon ());
 	
 			HoverText = CurrentFile.Basename;
@@ -93,8 +93,6 @@ namespace RecentDocuments
 			
 			CurrentIndex %= NumRecentDocs;
 			
-			CurrentFile = RecentDocs.ElementAt (CurrentIndex);
-			
 			UpdateInfo ();
 		}
 		
@@ -110,11 +108,14 @@ namespace RecentDocuments
 
 		public override IEnumerable<Docky.Menus.MenuItem> GetMenuItems ()
 		{
-			foreach (File f in RecentDocs) {
+			List<Docky.Menus.MenuItem> fileMenuItems = new List<Docky.Menus.MenuItem> ();
+			RecentDocs.ForEach (f => {
 				string icon = DockServices.Drawing.IconFromGIcon (f.Icon ());
 				
-				yield return new Docky.Menus.MenuItem (f.Basename, icon, (o, a) => DockServices.System.Open (f));
-			}
+				fileMenuItems.Add (new Docky.Menus.MenuItem (f.Basename, icon, (o, a) => DockServices.System.Open (f)));
+			});
+			
+			return fileMenuItems;
 		}
 	}
 }
