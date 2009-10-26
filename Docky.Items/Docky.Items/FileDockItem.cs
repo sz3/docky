@@ -73,10 +73,8 @@ namespace Docky.Items
 				is_folder = false;		
 			
 			// only check the icon if it's mounted (ie: .Path != null)
-			if (!string.IsNullOrEmpty (OwnedFile.Path)) {
-				FileInfo info = OwnedFile.QueryInfo ("*", FileQueryInfoFlags.None, null);
-				SetIconFromGIcon (info.Icon);
-			}
+			if (!string.IsNullOrEmpty (OwnedFile.Path))
+				SetIconFromGIcon (OwnedFile.Icon ());
 			else
 				Icon = "";
 			

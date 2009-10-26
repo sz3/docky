@@ -75,8 +75,7 @@ namespace RecentDocuments
 		
 		void UpdateInfo ()
 		{
-			FileInfo info = CurrentFile.QueryInfo ("*", FileQueryInfoFlags.None, null);
-			SetIconFromGIcon (info.Icon);
+			SetIconFromGIcon (CurrentFile.Icon ());
 	
 			HoverText = CurrentFile.Basename;
 			
@@ -112,8 +111,7 @@ namespace RecentDocuments
 		public override IEnumerable<Docky.Menus.MenuItem> GetMenuItems ()
 		{
 			foreach (File f in RecentDocs) {
-				FileInfo info = f.QueryInfo ("*", FileQueryInfoFlags.None, null);
-				string icon = DockServices.Drawing.IconFromGIcon (info.Icon);
+				string icon = DockServices.Drawing.IconFromGIcon (f.Icon ());
 				
 				yield return new Docky.Menus.MenuItem (f.Basename, icon, (o, a) => DockServices.System.Open (f));
 			}

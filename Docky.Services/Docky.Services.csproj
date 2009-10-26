@@ -91,10 +91,12 @@
     <Compile Include="Docky.Services\Logging\ConsoleLog.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Docky.Services\NativeInterop.cs" />
+    <Compile Include="Docky.Services\Extensions\GLibFileExtension.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Docky.Services\" />
     <Folder Include="Docky.Services\Logging\" />
+    <Folder Include="Docky.Services\Extensions\" />
   </ItemGroup>
 </Project>

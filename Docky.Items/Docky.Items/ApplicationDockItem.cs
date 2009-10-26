@@ -193,7 +193,7 @@ namespace Docky.Items
 				return false;
 			
 			foreach (string uri in uris) {
-				GLib.FileInfo info = GLib.FileFactory.NewForUri (uri).QueryInfo ("*", GLib.FileQueryInfoFlags.None, null);
+				GLib.FileInfo info = GLib.FileFactory.NewForUri (uri).QueryInfo ("standard::content-type", GLib.FileQueryInfoFlags.None, null);
 				string mime = info.ContentType;
 				if (mimes.Any (m => GLib.Content.TypeIsA (mime, m) || GLib.Content.TypeEquals (mime, m)))
 					return true;
