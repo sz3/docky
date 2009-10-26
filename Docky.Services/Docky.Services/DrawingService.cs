@@ -200,7 +200,7 @@ namespace Docky.Services
 			return pixbuf;
 		}
 		
-		public static string IconFromGIcon (GLib.Icon icon)
+		public string IconFromGIcon (GLib.Icon icon)
 		{
 			ThemedIcon themeIcon = new ThemedIcon (icon.Handle);
 			

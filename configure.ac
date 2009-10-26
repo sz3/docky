@@ -175,6 +175,8 @@ StandardPlugins/GMail/Makefile
 StandardPlugins/GMail/Resources/GMail.addin.xml
 StandardPlugins/Mounter/Makefile
 StandardPlugins/Mounter/Resources/Mounter.addin.xml
+StandardPlugins/RecentDocuments/Makefile
+StandardPlugins/RecentDocuments/Resources/RecentDocuments.addin.xml
 StandardPlugins/Trash/Makefile
 StandardPlugins/Trash/Resources/Trash.addin.xml
 StandardPlugins/Weather/Makefile

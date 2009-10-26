@@ -1,0 +1,22 @@
+<Addin 
+	id="RecentDocuments"
+	namespace="Docky"
+	version="1.0"
+	isroot="false"
+	defaultEnabled="false"
+	name="Recent Documents"
+>
+ 
+ 	<Dependencies>
+		<Addin id="Items" version="1.0" />
+	</Dependencies>
+ 
+	<Runtime>
+		<Import assembly="RecentDocuments.dll"/>
+	</Runtime>
+	
+	<Extension path="/Docky/ItemProvider">
+		<ItemProvider type="RecentDocuments.RecentDocumentsItemProvider" />	
+	</Extension>	
+
+</Addin>

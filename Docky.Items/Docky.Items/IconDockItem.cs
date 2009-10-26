@@ -47,7 +47,7 @@ namespace Docky.Items
 		
 		protected void SetIconFromGIcon (GLib.Icon gIcon)
 		{
-			Icon = Docky.Services.DrawingService.IconFromGIcon (gIcon);
+			Icon = DockServices.Drawing.IconFromGIcon (gIcon);
 		}
 		
 		public IconDockItem ()
