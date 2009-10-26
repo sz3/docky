@@ -23,6 +23,7 @@ namespace Docky.Services
 	public enum LogLevel {
 		Debug,
 		Info,
+		Notify,
 		Warn,
 		Error,
 		Fatal,
@@ -39,6 +40,11 @@ namespace Docky.Services
 		public static void Info (string msg, params object [] args)
 		{
 			Write (LogLevel.Info, msg, args);
+		}
+		
+		public static void Notify (string msg, params object[] args)
+		{
+			SendNote (msg, args);
 		}
 		
 		public static void Warn (string msg, params object [] args)

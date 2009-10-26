@@ -40,6 +40,11 @@ namespace Docky.Services
 			Write (LogLevel.Info, AddSender (msg), args);
 		}
 		
+		public static void Notify (string msg, params object[] args)
+		{
+			SendNote (typeof (TSender).Name, "", msg, args);
+		}
+		
 		public static void Warn (string msg, params object [] args)
 		{
 			Write (LogLevel.Warn, AddSender (msg), args);

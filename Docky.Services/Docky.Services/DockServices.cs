@@ -28,9 +28,7 @@ namespace Docky.Services
 		public static PreferencesService Preferences { get; private set; }
 		
 		public static SystemService System { get; private set; }
-		
-		public static NotificationService Notifications { get; private set; }
-		
+				
 		public DockServices ()
 		{
 		}
@@ -40,9 +38,10 @@ namespace Docky.Services
 			Drawing       = new DrawingService ();
 			Preferences   = new PreferencesService ();
 			System        = new SystemService ();
-			Notifications = new NotificationService ();
 			
 			Log<DockServices>.Info ("Dock services initialized.");
+			Log.Notify ("asdf!");
+
 		}
 	}
 }

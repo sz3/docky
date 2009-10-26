@@ -19,42 +19,49 @@
 
 using System;
 
+using Gtk;
 using Gdk;
 using LibNotify = Notifications;
 	
 namespace Docky.Services
 {	
-	public enum NotificationCapability {
-		actions,
-		append,
-		body,
-		body_hyperlinks,
-		body_images,
-		body_markup,
-		icon_multi,
-		icon_static,
-		image_svg,
-		max,
-		positioning, // not an official capability
-		scaling, // not an official capability
-		sound
-	}
 	
-	public class NotificationService
+	internal class NotificationService
 	{
+		enum NotificationCapability {
+				actions,
+				append,
+				body,
+				body_hyperlinks,
+				body_images,
+				body_markup,
+				icon_multi,
+				icon_static,
+				image_svg,
+				max,
+				positioning, // not an official capability
+				scaling, // not an official capability
+				sound
+		}
+		
 		const string DefaultIconName = "docky";
 		
-		const int IconSize = 48;
+		const int StatusIconSize = 24;
+		const int NoteIconSize = 48;
 		const int LettersPerWord = 7;
 		const int MillisecondsPerWord = 350;
 		const int MinNotifyShow = 5000;
 		const int MaxNotifyShow = 10000;
 
-		Pixbuf DefaultIcon { get; set; }
+		static Pixbuf DefaultIcon;
+		static StatusIcon statusIcon;
 		
-		public NotificationService ()
+		static NotificationService ()
 		{
-			DefaultIcon = DockServices.Drawing.LoadIcon (DefaultIconName, IconSize);
+			DefaultIcon = DockServices.Drawing.LoadIcon (DefaultIconName, NoteIconSize);
+			statusIcon = new StatusIcon ();
+			statusIcon.Pixbuf = DockServices.Drawing.LoadIcon (DefaultIconName, StatusIconSize);
+			statusIcon.Visible = false;
 		}
 
 		static int ReadableDurationForMessage (string title, string message)
@@ -63,31 +70,56 @@ namespace Docky.Services
 			return Math.Min (Math.Max (t, MinNotifyShow), MaxNotifyShow);
 		}
 
-		public void Notify (string title, string message, string icon)
+		public static void Notify (string title, string message, string icon)
 		{
-			Notify (title, message, icon, Screen.Default, 0, 0);
+			
+			if (ServerIsNotifyOSD ()) {
+				Notify (title, message, icon, Screen.Default, 0, 0);
+				return;
+			}
+			
+			// if we aren't using notify-osd, show a status icon
+			int x = 0, y = 0;
+			Screen screen = Screen.Default;
+			
+			statusIcon.Visible = true;
+			
+			System.Threading.Thread.Sleep (2000);
+			
+			Rectangle area;
+			Orientation orientation;
+
+			statusIcon.GetGeometry (out screen, out area, out orientation);
+			x = area.X + area.Width / 2;
+			y = area.Y + area.Height - 5;
+			
+			Notify (title, message, icon, screen, x, y);
 		}
 		
-		public void Notify (string title, string message, string icon, Screen screen, int x, int y)
+		static void Notify (string title, string message, string icon, Screen screen, int x, int y)
 		{
 			LibNotify.Notification notify = ToNotify (title, message, icon);
 			notify.SetGeometryHints (screen, x, y);
 			notify.Show ();
+			
+			notify.Closed += delegate {
+				DockServices.System.RunOnMainThread ( () => statusIcon.Visible = false );
+			};
 		}
 		
-		public bool SupportsCapability (NotificationCapability capability)
+		static bool SupportsCapability (NotificationCapability capability)
 		{
 			// positioning and scaling are not actual capabilities, i just know for a fact most other servers
 			// support geo. hints, and notify-osd is the only that auto scales images
 			if (capability == NotificationCapability.positioning)
-				return LibNotify.Global.ServerInformation.Name != "notify-osd";
+				return !ServerIsNotifyOSD ();
 			else if (capability == NotificationCapability.scaling)
-				return LibNotify.Global.ServerInformation.Name == "notify-osd";
+				return ServerIsNotifyOSD ();
 			
 			return Array.IndexOf (LibNotify.Global.Capabilities, Enum.GetName (typeof (NotificationCapability), capability)) > -1;
 		}
 
-		LibNotify.Notification ToNotify (string title, string message, string icon)
+		static LibNotify.Notification ToNotify (string title, string message, string icon)
 		{
 			LibNotify.Notification notify = new LibNotify.Notification ();
 			notify.Body = GLib.Markup.EscapeText (message);
@@ -101,10 +133,15 @@ namespace Docky.Services
 			} else {
 				notify.Icon = string.IsNullOrEmpty (icon)
 					? DefaultIcon
-					: DockServices.Drawing.LoadIcon (icon, IconSize);
+					: DockServices.Drawing.LoadIcon (icon, NoteIconSize);
 			}
 
 			return notify;
+		}
+		
+		static bool ServerIsNotifyOSD ()
+		{
+			return LibNotify.Global.ServerInformation.Name == "notify-osd";
 		}
 	}
 }

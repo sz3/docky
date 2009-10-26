@@ -67,6 +67,9 @@ namespace Docky.Services.Logging
 			case LogLevel.Warn:
 				ConsoleCrayon.ForegroundColor = ConsoleColor.Yellow;
 				break;
+			case LogLevel.Notify:
+				ConsoleCrayon.ForegroundColor = ConsoleColor.DarkMagenta;
+				break;
 			case LogLevel.Info:
 				ConsoleCrayon.ForegroundColor = ConsoleColor.Blue;
 				break;

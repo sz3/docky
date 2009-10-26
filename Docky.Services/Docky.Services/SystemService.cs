@@ -321,5 +321,32 @@ namespace Docky.Services
 				}
 			}
 		}
+		
+		public void RunOnMainThread (Action action)
+		{
+			RunOnMainThread (action, new TimeSpan (0));
+		}
+		
+		public void RunOnMainThread (Action action, int delay)
+		{
+			RunOnMainThread (action, new TimeSpan (0, 0, 0, 0, delay));
+		}
+		
+		public void RunOnMainThread (Action action, TimeSpan delay)
+		{
+			System.Threading.Thread newThread = new System.Threading.Thread (() => {
+				System.Threading.Thread.Sleep (delay);
+				Gtk.Application.Invoke ((sender, e) => {
+					try {
+						action ();
+					} catch (Exception ex) {
+						Log<SystemService>.Error ("Error in RunOnMainThread: {0}", ex.Message);
+						Log<SystemService>.Debug (ex.StackTrace);
+					}
+				});
+			});
+			
+			newThread.Start ();
+		}
 	}
 }
