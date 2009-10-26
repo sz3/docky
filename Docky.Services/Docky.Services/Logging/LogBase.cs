@@ -77,5 +77,15 @@ namespace Docky.Services.Logging
 				Writing = false;
 			}
 		}
+		
+		public static void SendNote (string sender, string icon, string msg, params object[] args)
+		{			
+			string title = sender;
+			
+			if (string.IsNullOrEmpty (sender))
+				title = "Docky";
+			
+			NotificationService.Notify (title, string.Format (msg, args), icon);
+		}
 	}
 }
