@@ -49,7 +49,7 @@ namespace Docky.Services
 		public Gdk.Pixbuf LoadIcon (string name, int size)
 		{
 			if (name == null)
-				throw new ArgumentNullException ("name");
+				name = "";
 			
 			Gdk.Pixbuf pixbuf;
 			
@@ -204,11 +204,11 @@ namespace Docky.Services
 		{
 			ThemedIcon themeIcon = new ThemedIcon (icon.Handle);
 			
-			// if the icon exists in the theme, this will return the relevent 
+			// if the icon exists in the theme, this will return the relevent ion
 			if (themeIcon.Names.Any ())
-				return themeIcon.Names.First (n => IconTheme.Default.HasIcon (n));
-			
-			// in some cases, devices provide their own icon.  This will use the devices icon.
+				return themeIcon.Names.FirstOrDefault (n => IconTheme.Default.HasIcon (n));
+
+			// in some cases, devices provide their own icon.  This will use the device icon.
 			FileIcon iconFile = new FileIcon (icon.Handle);
 			
 			return iconFile.File.Path;
