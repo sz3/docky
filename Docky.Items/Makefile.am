@@ -23,6 +23,7 @@ FILES = \
 	Docky.Items/ActivityIndicator.cs \
 	Docky.Items/ClickAnimation.cs \
 	Docky.Items/PaintNeededEventArgs.cs \
+	Docky.Items/PainterRequestEventArgs.cs \
 	Docky.Items/FileApplicationProvider.cs \
 	Docky.Items/IconDockItem.cs \
 	Docky.Items/WnckDockItem.cs

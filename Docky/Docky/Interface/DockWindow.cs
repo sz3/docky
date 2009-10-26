@@ -31,6 +31,7 @@ using Wnck;
 using Docky.Items;
 using Docky.CairoHelper;
 using Docky.Menus;
+using Docky.Painters;
 using Docky.Services;
 using Docky.Xlib;
 
@@ -254,6 +255,15 @@ namespace Docky.Interface
 			}
 		}
 
+		AbstractDockPainter painter;
+		DateTime painter_change_time;
+		AbstractDockPainter Painter {
+			get { return painter; }
+			set {
+				painter = value;
+				painter_change_time = DateTime.UtcNow;
+			}
+		}
 		
 		IEnumerable<AbstractDockItemProvider> ItemProviders {
 			get { return Preferences.ItemProviders; }
@@ -518,15 +528,17 @@ namespace Docky.Interface
 		{
 			item.HoverTextChanged += ItemHoverTextChanged;
 			item.PaintNeeded += ItemPaintNeeded;
+			item.PainterRequest += ItemPainterRequest;
 		}
 
 		void UnregisterItem (AbstractDockItem item)
 		{
 			item.HoverTextChanged -= ItemHoverTextChanged;
 			item.PaintNeeded -= ItemPaintNeeded;
+			item.PainterRequest -= ItemPainterRequest;
 			DrawValues.Remove (item);
 		}
-
+		
 		void ItemHoverTextChanged (object sender, EventArgs e)
 		{
 			AnimatedDraw ();
@@ -535,6 +547,20 @@ namespace Docky.Interface
 		void ItemPaintNeeded (object sender, PaintNeededEventArgs e)
 		{
 			AnimatedDraw ();
+		}
+
+		void ItemPainterRequest (object sender, PainterRequestEventArgs e)
+		{
+			AbstractDockItem owner = sender as AbstractDockItem;
+			
+			if (!Items.Contains (owner) || e.Painter == null)
+				return;
+			
+			if (e.Type == ShowHideType.Show) {
+				ShowPainter (owner, e.Painter);
+			} else if (e.Type == ShowHideType.Hide && Painter == e.Painter) {
+				HidePainter ();
+			}
 		}
 		
 		void RegisterPreferencesEvents (IDockPreferences preferences)
@@ -1022,6 +1048,43 @@ namespace Docky.Interface
 				urgent_indicator_buffer.Dispose ();
 				urgent_indicator_buffer = null;
 			}
+		}
+		#endregion
+		
+		#region Painters
+		void ShowPainter (AbstractDockItem owner, AbstractDockPainter painter)
+		{
+			if (Painter != null || owner == null || painter == null)
+				return;
+			
+			Painter = painter;
+			Painter.HideRequest += HandlePainterHideRequest;
+			Painter.PaintNeeded += HandlePainterPaintNeeded;
+			
+			Painter.Shown ();
+		}
+		
+		void HidePainter ()
+		{
+			if (Painter == null)
+				return;
+			
+			Painter.HideRequest += HandlePainterHideRequest;
+			Painter.PaintNeeded += HandlePainterPaintNeeded;
+			
+			Painter = null;
+			Painter.Hidden ();
+		}
+		
+		void HandlePainterPaintNeeded (object sender, EventArgs e)
+		{
+			AnimatedDraw ();
+		}
+
+		void HandlePainterHideRequest (object sender, EventArgs e)
+		{
+			if (Painter == sender as AbstractDockPainter)
+				HidePainter ();
 		}
 		#endregion
 		

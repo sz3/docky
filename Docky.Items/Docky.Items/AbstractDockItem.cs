@@ -27,6 +27,7 @@ using Gtk;
 
 using Docky;
 using Docky.CairoHelper;
+using Docky.Painters;
 using Docky.Services;
 
 namespace Docky.Items
@@ -44,6 +45,7 @@ namespace Docky.Items
 		
 		public event EventHandler HoverTextChanged;
 		public event EventHandler<PaintNeededEventArgs> PaintNeeded;
+		public event EventHandler<PainterRequestEventArgs> PainterRequest;
 		
 		public ActivityIndicator Indicator {
 			get {
@@ -379,6 +381,20 @@ namespace Docky.Items
 				PaintNeededEventArgs args = new PaintNeededEventArgs { DrawLength = TimeSpan.MinValue };
 				
 				PaintNeeded (this, args);
+			}
+		}
+		
+		protected void ShowPainter (AbstractDockPainter painter)
+		{
+			if (PainterRequest != null && painter != null) {
+				PainterRequest (this, new PainterRequestEventArgs (this, painter, ShowHideType.Show));
+			}
+		}
+		
+		protected void HidePainter (AbstractDockPainter painter)
+		{
+			if (PainterRequest != null && painter != null) {
+				PainterRequest (this, new PainterRequestEventArgs (this, painter, ShowHideType.Hide));
 			}
 		}
 

@@ -86,6 +86,7 @@
     <Compile Include="Docky.Items\AbstractDockItemProvider.cs" />
     <Compile Include="Docky.Menus\RelatedFileMenuItem.cs" />
     <Compile Include="Docky.Painters\AbstractDockPainter.cs" />
+    <Compile Include="Docky.Items\PainterRequestEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Docky.Services\Docky.Services.csproj">

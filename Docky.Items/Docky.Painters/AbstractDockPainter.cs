@@ -55,6 +55,9 @@ namespace Docky.Painters
 		
 		public void SetAllocation (Gdk.Rectangle allocation)
 		{
+			if (allocation == Allocation)
+				return;
+			
 			Allocation = allocation;
 			OnAllocationSet (allocation);
 		}
@@ -62,8 +65,7 @@ namespace Docky.Painters
 		public DockySurface GetSurface (DockySurface similar)
 		{
 			if (surface == null || surface.Width != Allocation.Width || surface.Height != Allocation.Height) {
-				if (surface != null)
-					surface.Dispose ();
+				ResetBuffer ();
 				surface = new DockySurface (Allocation.Width, Allocation.Height, similar);
 			}
 			
@@ -76,6 +78,27 @@ namespace Docky.Painters
 		}
 		
 		protected virtual void PaintSurface (DockySurface surface)
+		{
+		
+		}
+		
+		public void Shown ()
+		{
+			OnShown ();
+		}
+		
+		protected virtual void OnShown ()
+		{
+			
+		}
+		
+		public void Hidden ()
+		{
+			OnHidden ();
+			ResetBuffer ();
+		}
+		
+		protected virtual void OnHidden ()
 		{
 			
 		}
@@ -123,11 +146,19 @@ namespace Docky.Painters
 			if (PaintNeeded != null)
 				PaintNeeded (this, EventArgs.Empty);
 		}
+		
+		void ResetBuffer ()
+		{
+			if (surface != null) {
+				surface.Dispose ();
+				surface = null;
+			}
+		}
+		
 		#region IDisposable implementation
 		public void Dispose ()
 		{
-			surface.Dispose ();
-			surface = null;
+			ResetBuffer ();
 		}
 		#endregion
 	}
