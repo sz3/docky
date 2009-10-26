@@ -34,6 +34,7 @@ namespace Docky.Services
 			Drawing       = new DrawingService ();
 			Preferences   = new PreferencesService ();
 			System        = new SystemService ();
+			NotificationService.Initialize ();
 			
 			Log<DockServices>.Info ("Dock services initialized.");
 		}

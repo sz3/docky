@@ -56,12 +56,12 @@ namespace Docky.Services
 		static Pixbuf DefaultIcon;
 		static StatusIcon statusIcon;
 		
-		static NotificationService ()
+		public static void Initialize ()
 		{
 			DefaultIcon = DockServices.Drawing.LoadIcon (DefaultIconName, NoteIconSize);
 			statusIcon = new StatusIcon ();
 			statusIcon.Pixbuf = DockServices.Drawing.LoadIcon (DefaultIconName, StatusIconSize);
-			statusIcon.Visible = false;
+			statusIcon.Visible = false;	
 		}
 
 		static int ReadableDurationForMessage (string title, string message)

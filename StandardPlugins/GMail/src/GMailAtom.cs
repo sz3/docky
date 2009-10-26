@@ -238,11 +238,11 @@ namespace GMail
 					
 					if (GMailPreferences.Notify) {
 						if (NewCount > 5)
-							Log.Notify (CurrentLabel, "gmail-logo.png@" + State.GetType ().Assembly.FullName, "You have {0} new, unread messages", NewCount);
+							Log.Notify (CurrentLabel, "gmail-logo.png@" + GetType ().Assembly.FullName, "You have {0} new, unread messages", NewCount);
 						else
 							foreach (UnreadMessage message in tmp)
 								if (message.SendDate > GMailPreferences.LastChecked)
-									Log.Notify (message.Topic, "gmail-logo.png@" + State.GetType ().Assembly.FullName, Catalog.GetString ("From: {0}"), message.From);
+									Log.Notify (message.Topic, "gmail-logo.png@" + GetType ().Assembly.FullName, Catalog.GetString ("From: {0}"), message.From);
 					}
 					
 					try {
