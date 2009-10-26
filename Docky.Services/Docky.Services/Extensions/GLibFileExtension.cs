@@ -14,27 +14,24 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
-
 using System;
-using System.Runtime.InteropServices;
+
+using GLib;
 
 namespace Docky.Services
 {
-	
-	public class NativeInterop
-	{		
-		[DllImport ("gio-2.0")]
-		private static extern IntPtr g_file_get_uri (IntPtr fileHandle);
-		
-		public static string StrUri (GLib.File file)
+
+	public static class GLibFileExtension
+	{
+		public static string StringUri (this GLib.File file)
 		{
-			try {
-				return Marshal.PtrToStringAuto (g_file_get_uri (file.Handle));
-			} catch (DllNotFoundException e) {
-				Log<NativeInterop>.Fatal ("Could not load libdocky, please report immediately.");
-				Log<NativeInterop>.Info (e.StackTrace);
-				return "";
-			}
+			return NativeInterop.StrUri (file);
+		}
+		
+		public static GLib.Icon Icon (this GLib.File file)
+		{
+			FileInfo info = file.QueryInfo ("standard::icon", FileQueryInfoFlags.None, null);
+			return info.Icon;
 		}
 	}
 }
