@@ -216,6 +216,37 @@ namespace Docky.Windowing
 			}
 		}
 		
+		IEnumerable<string> TokenizeString (string input)
+		{
+			StringBuilder builder = new StringBuilder ();
+			for (int i = 0; i < input.Length; i++) {
+				
+				char c = input[i];
+				// escape sequence
+				if (c == '\\') {
+					// end of string
+					if (i == input.Length - 1) {
+						break;
+					}
+					i++;
+					char n = input[i];
+					
+					if (char.IsWhiteSpace (n)) {
+						builder.Append (' ');
+					}
+				} else if (char.IsWhiteSpace (c)) {
+					if (builder.Length > 0) {
+						yield return builder.ToString ();
+						builder = new StringBuilder ();
+					}
+				} else {
+					builder.Append (c);
+				}
+			}
+			
+			yield return builder.ToString ();
+		}
+		
 		public void Launch (IEnumerable<string> uris)
 		{
 			string exec = GetString ("Exec");
@@ -231,7 +262,7 @@ namespace Docky.Windowing
 			
 			bool uris_placed = !uris.Any ();
 			
-			foreach (string token in exec.Split (' ')) {
+			foreach (string token in TokenizeString (exec)) {
 				if (token.StartsWith ("%")) {
 					switch (token[1]) {
 					case 'f':
