@@ -23,9 +23,9 @@ using System.Text;
 
 using Cairo;
 using Gdk;
-using Gtk;
 using Wnck;
 
+using Docky.Menus;
 using Docky.Windowing;
 
 namespace Docky.Items
@@ -305,14 +305,16 @@ namespace Docky.Items
 			return true;
 		}
 		
-		public override IEnumerable<Menus.MenuItem> GetMenuItems (AbstractDockItem item)
+		public override MenuList GetMenuItems (AbstractDockItem item)
 		{
+			MenuList list = base.GetMenuItems (item);
+			
 			if (item is ApplicationDockItem && !items.ContainsValue (item)) {
-				yield return new Menus.MenuItem ("Pin to Dock", "pin.svg@" + GetType ().Assembly.FullName, (o, a) => PinToDock (item as ApplicationDockItem));
+				list[MenuListContainer.Actions].Insert (0, 
+					new MenuItem ("Pin to Dock", "pin.svg@" + GetType ().Assembly.FullName, (o, a) => PinToDock (item as ApplicationDockItem)));
 			}
 			
-			foreach (Menus.MenuItem menuItem in base.GetMenuItems (item))
-				 yield return menuItem;
+			return list;
 		}
 		
 		public override void Dispose ()

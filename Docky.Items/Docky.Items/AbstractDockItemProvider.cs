@@ -68,7 +68,7 @@ namespace Docky.Items
 			return false;
 		}
 		
-		public virtual IEnumerable<MenuItem> GetMenuItems (AbstractDockItem item)
+		public virtual MenuList GetMenuItems (AbstractDockItem item)
 		{
 			return item.GetMenuItems ();
 		}

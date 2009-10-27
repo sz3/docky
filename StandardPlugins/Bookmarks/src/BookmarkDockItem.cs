@@ -51,10 +51,13 @@ namespace Bookmarks
 			Owner.RemoveItem (this);
 		}
 
-		public override IEnumerable<MenuItem> GetMenuItems ()
+		public override MenuList GetMenuItems ()
 		{
-			yield return new MenuItem ("Open", "gtk-open", (o, a) => Open ());
-			yield return new MenuItem ("Remove", "gtk-remove", (o, a) => Remove());
+			// intentionally dont inherit
+			MenuList list = new MenuList ();
+			list[MenuListContainer.Actions].Add (new MenuItem ("Open", "gtk-open", (o, a) => Open ()));
+			list[MenuListContainer.Actions].Add (new MenuItem ("Remove", "gtk-remove", (o, a) => Remove ()));
+			return list;
 		}
 	}
 }

@@ -668,19 +668,19 @@ namespace Docky.Interface
 				return base.OnButtonPressEvent (evnt);
 			
 			if (HoveredItem != null && evnt.Button == 3) {
-				IEnumerable<Menus.MenuItem> items;
+				MenuList list;
 				
 				if (HoveredItem.Owner != null)
-					items = HoveredItem.Owner.GetMenuItems (HoveredItem).ToArray ();
+					list = HoveredItem.Owner.GetMenuItems (HoveredItem);
 				else
-					items = HoveredItem.GetMenuItems ().ToArray ();
+					list = HoveredItem.GetMenuItems ();
 				
-				if (items.Any ()) {
+				if (list.Any ()) {
 					DrawValue val = DrawValues[HoveredItem];
 					val = val.MoveIn (Position, ZoomedIconSize / 2.15);
 					Menu.Anchor = new Gdk.Point ((int) val.Center.X + window_position.X, (int) val.Center.Y + window_position.Y);
 					Menu.Orientation = Position;
-					Menu.SetItems (items);
+					Menu.SetItems (list);
 					Menu.Show ();
 				}
 			}

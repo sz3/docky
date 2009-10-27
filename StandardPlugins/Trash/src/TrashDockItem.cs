@@ -163,10 +163,15 @@ namespace Trash
 			return ClickAnimation.None;
 		}
 		
-		public override IEnumerable<MenuItem> GetMenuItems ()
+		public override MenuList GetMenuItems ()
 		{
-			yield return new MenuItem ("Open Trash", Icon, (o, a) => OpenTrash ());
-			yield return new MenuItem ("Empty Trash", "gtk-clear", (o, a) => EmptyTrash (), !TrashFull);
+			// intentionally dont inherit
+			MenuList list = new MenuList ();
+			list[MenuListContainer.Actions].Add (
+				new MenuItem ("Open Trash", Icon, (o, a) => OpenTrash ()));
+			list[MenuListContainer.Actions].Add (
+				new MenuItem ("Empty Trash", "gtk-clear", (o, a) => EmptyTrash (), !TrashFull));
+			return list;
 		}
 		
 		void OpenTrash ()

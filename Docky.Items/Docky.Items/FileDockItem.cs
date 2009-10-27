@@ -131,10 +131,12 @@ namespace Docky.Items
 			return base.OnClicked (button, mod, xPercent, yPercent);
 		}
 		
-		public override IEnumerable<MenuItem> GetMenuItems ()
+		public override MenuList GetMenuItems ()
 		{
-			yield return new MenuItem ("Open", "gtk-open", (o, a) => Open ());
-			yield return new MenuItem ("Open Containing Folder", "folder", (o, a) => OpenContainingFolder ());
+			MenuList list = base.GetMenuItems ();
+			list[MenuListContainer.Actions].Add (new MenuItem ("Open", "gtk-open", (o, a) => Open ()));
+			list[MenuListContainer.Actions].Add (new MenuItem ("Open Containing Folder", "folder", (o, a) => OpenContainingFolder ()));
+			return list;
 		}
 		
 		protected void Open ()

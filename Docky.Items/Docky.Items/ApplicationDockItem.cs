@@ -152,30 +152,27 @@ namespace Docky.Items
 			}
 		}
 		
-		public override IEnumerable<MenuItem> GetMenuItems ()
+		public override MenuList GetMenuItems ()
 		{
+			MenuList list = base.GetMenuItems ();
 			if (ManagedWindows.Any ())
-				yield return new MenuItem ("New Window", RunIcon, (o, a) => Launch ());
+				list[MenuListContainer.Actions].Insert (0, new MenuItem ("New Window", RunIcon, (o, a) => Launch ()));
 			else
-				yield return new MenuItem ("Open", RunIcon, (o, a) => Launch ());
+				list[MenuListContainer.Actions].Insert (0, new MenuItem ("Open", RunIcon, (o, a) => Launch ()));
 
-			foreach (MenuItem item in base.GetMenuItems ()) {
-				yield return item;
-			}			
-			
 			if (related_uris.Any ()) {
-				yield return new SeparatorMenuItem ();
-				
 				lock (related_lock) {
 					foreach (ZeitgeistResult result in related_uris) {
 						RelatedFileMenuItem item = new RelatedFileMenuItem (result.Uri);
 						if (!string.IsNullOrEmpty (result.Text))
 							item.Text = result.Text;
 						item.Clicked += ItemClicked;
-						yield return item;
+						list[MenuListContainer.RelatedItems].Add (item);
 					}
 				}
 			}
+			
+			return list;
 		}
 
 		void ItemClicked (object sender, EventArgs e)

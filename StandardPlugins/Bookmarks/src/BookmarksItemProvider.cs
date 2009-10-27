@@ -42,9 +42,11 @@ namespace Bookmarks
 					HoverText = name;
 			}
 			
-			public override IEnumerable<Docky.Menus.MenuItem> GetMenuItems ()
+			public override MenuList GetMenuItems ()
 			{
-				yield return new MenuItem ("Open", "gtk-open", (o, a) => Open ());
+				MenuList list = new MenuList ();
+				list[MenuListContainer.Actions].Add (new MenuItem ("Open", "gtk-open", (o, a) => Open ()));
+				return list;
 			}
 		}
 		

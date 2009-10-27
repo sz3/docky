@@ -285,42 +285,47 @@ namespace WeatherDocklet
 				WeatherController.NextLocation ();
 		}
 		
-		public override IEnumerable<MenuItem> GetMenuItems ()
+		public override MenuList GetMenuItems ()
 		{
+			MenuList list = base.GetMenuItems ();
+			
 			if (WeatherController.Weather.Condition != null)
 			{
-				yield return new MenuItem (Catalog.GetString ("Radar Map"),
-						WeatherController.Weather.Image, (o,a) => WeatherController.Weather.ShowRadar ());
+				list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Radar Map"),
+						WeatherController.Weather.Image, (o, a) => WeatherController.Weather.ShowRadar ()));
 				
-				yield return new SeparatorMenuItem ();
+				list[MenuListContainer.Actions].Add (new SeparatorMenuItem ());
 			}
 			
 			bool hasForecast = false;
 			
 			for (int i = 0; i < WeatherController.Weather.ForecastDays; i++)
-				if (WeatherController.Weather.Forecasts [i].dow != null)
+				if (WeatherController.Weather.Forecasts[i].dow != null)
 				{
 					hasForecast = true;
-					yield return new ForecastMenuItem (i,
-							Catalog.GetString (WeatherForecast.DayName (WeatherController.Weather.Forecasts [i].dow) + "'s Forecast"),
-							WeatherController.Weather.Forecasts [i].image);
+					list[MenuListContainer.Actions].Add (new ForecastMenuItem (i,
+							Catalog.GetString (WeatherForecast.DayName (WeatherController.Weather.Forecasts[i].dow) + "'s Forecast"),
+							WeatherController.Weather.Forecasts[i].image));
 				}
 			
 			if (hasForecast)
-				yield return new SeparatorMenuItem ();
+				list[MenuListContainer.Actions].Add (new SeparatorMenuItem ());
 			
-			yield return new MenuItem (Catalog.GetString ("Settings"), Gtk.Stock.Preferences,
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Settings"), Gtk.Stock.Preferences,
 					delegate {
-						WeatherConfigurationDialog dlg = new WeatherConfigurationDialog ();
-						dlg.Show ();
-					});
+				WeatherConfigurationDialog dlg = new WeatherConfigurationDialog ();
+				dlg.Show ();
+			}));
 			
-			yield return new MenuItem (Catalog.GetString ("Reload Weather Data"), Gtk.Stock.Refresh,
-					(o,a) => {
-						Status = WeatherDockletStatus.ManualReload;
-						ShowBusyAnimation ();
-						WeatherController.ResetTimer();
-					});
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Reload Weather Data"), Gtk.Stock.Refresh,
+					(o, a) =>
+					{
+				Status = WeatherDockletStatus.ManualReload;
+				ShowBusyAnimation ();
+				WeatherController.ResetTimer ();
+			}));
+			
+			return list;
 		}
 		
 		public override void Dispose ()

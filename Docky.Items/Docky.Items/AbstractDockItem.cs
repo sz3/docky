@@ -354,9 +354,9 @@ namespace Docky.Items
 		}
 		#endregion
 		
-		public virtual IEnumerable<Docky.Menus.MenuItem> GetMenuItems ()
+		public virtual Docky.Menus.MenuList GetMenuItems ()
 		{
-			return Enumerable.Empty<Docky.Menus.MenuItem> ();
+			return new Docky.Menus.MenuList ();
 		}
 		
 		public virtual void SetScreenRegion (Gdk.Screen screen, Gdk.Rectangle region)

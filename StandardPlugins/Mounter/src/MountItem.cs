@@ -85,13 +85,16 @@ namespace Mounter
 			    
 		}
 		
-		public override IEnumerable<MenuItem> GetMenuItems ()
+		public override MenuList GetMenuItems ()
 		{
-			yield return new MenuItem ("Open", Icon, (o, a) => OpenVolume ());
+			MenuList list = base.GetMenuItems ();
+			list[MenuListContainer.Actions].Add (new MenuItem ("Open", Icon, (o, a) => OpenVolume ()));
 			if (Mnt.CanEject () || Mnt.CanUnmount) {
 				string removeLabel = (Mnt.CanEject ()) ? "Eject" : "Unmount";
-				yield return new MenuItem (removeLabel, "media-eject", (o, a) => UnMount ());
+				list[MenuListContainer.Actions].Add (new MenuItem (removeLabel, "media-eject", (o, a) => UnMount ()));
 			}
+			
+			return list;
 		}
 	}
 }

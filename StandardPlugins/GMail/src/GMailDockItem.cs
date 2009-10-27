@@ -216,43 +216,47 @@ namespace GMail
 			base.Dispose ();
 		}
 		
-		public override IEnumerable<MenuItem> GetMenuItems ()
+		public override MenuList GetMenuItems ()
 		{
+			MenuList list = base.GetMenuItems ();
+			
 			UpdateAttention (false);
 			
-			yield return new MenuItem (Catalog.GetString ("View ") + Atom.CurrentLabel,
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("View ") + Atom.CurrentLabel,
 					"gmail-logo.png@" + GetType ().Assembly.FullName,
 					delegate {
 						Clicked (1, Gdk.ModifierType.None, 0, 0);
-					});
-			yield return new MenuItem (Catalog.GetString ("Compose Mail"),
+					}));
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Compose Mail"),
 					"mail-message-new",
 					delegate {
 						DockServices.System.Open ("https://mail.google.com/mail/#compose");
-					});
+					}));
 			
-			yield return new SeparatorMenuItem ();
-
+			list[MenuListContainer.Actions].Add (new SeparatorMenuItem ());
+			
 			if (Atom.HasUnread) {
 				foreach (UnreadMessage message in Atom.Messages.Take (10))
-					yield return new GMailMenuItem (message);
+					list[MenuListContainer.Actions].Add (new GMailMenuItem (message));
 				
-				yield return new SeparatorMenuItem ();
+				list[MenuListContainer.Actions].Add (new SeparatorMenuItem ());
 			}
 			
-			yield return new MenuItem (Catalog.GetString ("Settings"),
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Settings"),
 					Gtk.Stock.Preferences,
 					delegate {
-						GMailConfigurationDialog dlg = new GMailConfigurationDialog ();
-						dlg.Show ();
-					});
+				GMailConfigurationDialog dlg = new GMailConfigurationDialog ();
+				dlg.Show ();
+			}));
 			
-			yield return new MenuItem (Catalog.GetString ("Check Now"),
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Check Now"),
 					Gtk.Stock.Refresh,
 					delegate {
-						Atom.ResetTimer (true);
-						QueueRedraw ();
-					});
+				Atom.ResetTimer (true);
+				QueueRedraw ();
+			}));
+			
+			return list;
 		}
 	}
 }

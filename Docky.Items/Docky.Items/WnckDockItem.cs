@@ -220,26 +220,35 @@ namespace Docky.Items
 			return ClickAnimation.Darken;
 		}
 		
-		public override IEnumerable<MenuItem> GetMenuItems ()
+		public override MenuList GetMenuItems ()
 		{
+			MenuList list = base.GetMenuItems ();
 			if (ManagedWindows.Any ()) {
-				if (ManagedWindows.Any (w => w.IsMaximized))
-					yield return new MenuItem ("Unmaximize", MaximizeIcon, (o, a) => WindowControl.UnmaximizeWindows (ManagedWindows));
-				else
-					yield return new MenuItem ("Maximize", MaximizeIcon, (o, a) => WindowControl.MaximizeWindows (ManagedWindows));
+				if (ManagedWindows.Any (w => w.IsMaximized)) {
+					list[MenuListContainer.Actions].Add (new MenuItem ("Unmaximize", MaximizeIcon, 
+							(o, a) => WindowControl.UnmaximizeWindows (ManagedWindows)));
+				} else {
+					list[MenuListContainer.Actions].Add (new MenuItem ("Maximize", MaximizeIcon, 
+							(o, a) => WindowControl.MaximizeWindows (ManagedWindows)));
+				}
 				
-				if (ManagedWindows.Any (w => w.IsMinimized))
-					yield return new MenuItem ("Restore", MinimizeIcon, (o, a) => WindowControl.RestoreWindows (ManagedWindows));
-				else
-					yield return new MenuItem ("Minimize", MinimizeIcon, (o, a) => WindowControl.MinimizeWindows (ManagedWindows));
-				yield return new MenuItem ("Quit", CloseIcon, (o, a) => WindowControl.CloseWindows (ManagedWindows));
+				if (ManagedWindows.Any (w => w.IsMinimized)) {
+					list[MenuListContainer.Actions].Add (new MenuItem ("Restore", MinimizeIcon, 
+							(o, a) => WindowControl.RestoreWindows (ManagedWindows)));
+				} else {
+					list[MenuListContainer.Actions].Add (new MenuItem ("Minimize", MinimizeIcon, 
+							(o, a) => WindowControl.MinimizeWindows (ManagedWindows)));
+				}
 				
-				yield return new SeparatorMenuItem ();
+				list[MenuListContainer.Actions].Add (new MenuItem ("Quit", CloseIcon, 
+						(o, a) => WindowControl.CloseWindows (ManagedWindows)));
 				
 				foreach (Wnck.Window window in ManagedWindows) {
-					yield return new WindowMenuItem (window, Icon);
+					list[MenuListContainer.Windows].Add (new WindowMenuItem (window, Icon));
 				}
 			}
+			
+			return list;
 		}
 		
 		public override void Dispose ()

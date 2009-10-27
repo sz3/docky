@@ -277,15 +277,32 @@ namespace Clock
 			});
 		}
 		
-		public override IEnumerable<MenuItem> GetMenuItems ()
+		public override MenuList GetMenuItems ()
 		{
-			yield return new MenuItem (Catalog.GetString ("Digital Clock"), ShowDigital ? "gtk-apply" : "gtk-remove", (o, a) => { ShowDigital = !ShowDigital; QueueRedraw (); });
+			MenuList list = base.GetMenuItems ();
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Digital Clock"), ShowDigital ? "gtk-apply" : "gtk-remove", (o, a) =>
+			{
+				ShowDigital = !ShowDigital;
+				QueueRedraw ();
+			}));
 			
-			yield return new MenuItem (Catalog.GetString ("24-Hour Clock"), ShowMilitary ? "gtk-apply" : "gtk-remove", (o, a) => { ShowMilitary = !ShowMilitary; QueueRedraw(); });
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("24-Hour Clock"), ShowMilitary ? "gtk-apply" : "gtk-remove", (o, a) =>
+			{
+				ShowMilitary = !ShowMilitary;
+				QueueRedraw ();
+			}));
 			
-			yield return new MenuItem (Catalog.GetString ("Show Date"), ShowDate ? "gtk-apply" : "gtk-remove", (o, a) => { ShowDate = !ShowDate; QueueRedraw (); }, !ShowDigital);
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Show Date"), ShowDate ? "gtk-apply" : "gtk-remove", (o, a) =>
+			{
+				ShowDate = !ShowDate;
+				QueueRedraw ();
+			}, !ShowDigital));
 			
-			yield return new MenuItem (Catalog.GetString ("Select Theme"), "preferences-desktop-theme", (o, a) => { new ClockThemeSelector (this).Show (); }, ShowDigital);
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Select Theme"), "preferences-desktop-theme", (o, a) => 
+			{ 
+				new ClockThemeSelector (this).Show (); 
+			}, ShowDigital));
+			return list;
 		}
 	}
 }

@@ -20,7 +20,6 @@ using System.Xml.Linq;
 using System.Linq;
 using System.Collections.Generic;
 
-using Gtk;
 using GLib;
 
 using Docky.Items;
@@ -50,7 +49,7 @@ namespace RecentDocuments
 		{
 			RecentDocs = new List<File> ();
 			
-			RecentManager.Default.Changed += (o, e) => RefreshRecentDocs ();
+			Gtk.RecentManager.Default.Changed += (o, e) => RefreshRecentDocs ();
 			
 			RefreshRecentDocs ();
 			
@@ -59,12 +58,12 @@ namespace RecentDocuments
 		
 		void RefreshRecentDocs ()
 		{
-			GLib.List recent_items = new GLib.List (RecentManager.Default.Items.Handle, typeof (RecentInfo));
+			GLib.List recent_items = new GLib.List (Gtk.RecentManager.Default.Items.Handle, typeof(Gtk.RecentInfo));
 			
 			lock (RecentDocs) {
 				RecentDocs.Clear ();
 				
-				RecentDocs.AddRange (recent_items.Cast<RecentInfo> ()
+				RecentDocs.AddRange (recent_items.Cast<Gtk.RecentInfo> ()
 				                     .Where (it => it.Exists ())
 				                     .Take (NumRecentDocs)
 				                     .Select (f => FileFactory.NewForUri (f.Uri)));
@@ -106,16 +105,18 @@ namespace RecentDocuments
 			return ClickAnimation.None;
 		}
 
-		public override IEnumerable<Docky.Menus.MenuItem> GetMenuItems ()
+		public override MenuList GetMenuItems ()
 		{
-			List<Docky.Menus.MenuItem> fileMenuItems = new List<Docky.Menus.MenuItem> ();
-			RecentDocs.ForEach (f => {
-				string icon = DockServices.Drawing.IconFromGIcon (f.Icon ());
-				
-				fileMenuItems.Add (new Docky.Menus.MenuItem (f.Basename, icon, (o, a) => DockServices.System.Open (f)));
-			});
+			MenuList list = base.GetMenuItems ();
 			
-			return fileMenuItems;
+			foreach (File _f in RecentDocs) {
+				GLib.File f = _f;
+				string icon = DockServices.Drawing.IconFromGIcon (f.Icon ());
+				MenuItem item = new MenuItem (f.Basename, icon, (o, a) => DockServices.System.Open (f));
+				list[MenuListContainer.RelatedItems].Add (item);
+			}
+			
+			return list;
 		}
 	}
 }
