@@ -233,6 +233,8 @@ namespace Docky.Windowing
 					
 					if (char.IsWhiteSpace (n)) {
 						builder.Append (' ');
+					} else if (n == '\\') {
+						builder.Append ('\\');
 					}
 				} else if (char.IsWhiteSpace (c)) {
 					if (builder.Length > 0) {
