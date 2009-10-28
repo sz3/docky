@@ -242,7 +242,13 @@ namespace Docky.Items
 		#region Input Handling
 		public void Clicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
-			ClickAnimation = OnClicked (button, mod, xPercent, yPercent);
+			try {
+				ClickAnimation = OnClicked (button, mod, xPercent, yPercent);
+			} catch (Exception e) {
+				Log<AbstractDockItem>.Error (e.Message);
+				ClickAnimation = ClickAnimation.Darken;
+			}
+			
 			LastClick = DateTime.UtcNow;
 		}
 		
