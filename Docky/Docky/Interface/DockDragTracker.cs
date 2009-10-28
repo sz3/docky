@@ -286,7 +286,8 @@ namespace Docky.Interface
 		/// </summary>
 		void HandleDragMotion (object o, DragMotionArgs args)
 		{
-			ExternalDragActive = true;
+			if (!InternalDragActive)
+				ExternalDragActive = true;
 			if (marker != args.Context.GetHashCode ()) {
 				marker = args.Context.GetHashCode ();
 				drag_known = false;

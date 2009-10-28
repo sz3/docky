@@ -268,7 +268,7 @@ namespace Docky.Interface
 							continue;
 						
 						Gdk.Rectangle rect = DrawValues[item].HoverArea;
-						rect.Inflate (5, 5);
+						rect.Inflate (IconSize, IconSize);
 						
 						if (rect.Contains (LocalCursor)) {
 							almost_hovered = item;
@@ -1080,7 +1080,14 @@ namespace Docky.Interface
 					// offset from the center of the true position, ranged between 0 and half of the zoom range
 					double offset = Math.Min (Math.Abs (cursorPosition - centerPosition), ZoomSize / 2);
 					
-					double offsetPercent = offset / (ZoomSize / 2.0);
+					double offsetPercent;
+					if (ExternalDragActive) {
+						// Provide space for dropping between items
+						offset += ZoomedIconSize * (offset / (ZoomSize / 2.0));
+						offsetPercent = Math.Min (1, offset / (ZoomSize / 2.0 + ZoomedIconSize));
+					} else {
+						offsetPercent = offset / (ZoomSize / 2.0);
+					}
 					// zoom is calculated as 1 through target_zoom (default 2).  
 					// The larger your offset, the smaller your zoom
 					
@@ -1101,6 +1108,7 @@ namespace Docky.Interface
 					//         value. The center is 100%. (1 - offsetPercent) == 0,1 distance from center
 					// The .66 value comes from the area under the curve.  Dont as me to explain it too much because it's too clever for me
 					offset = offset * (zoomInPercent - 1) * (1 - offsetPercent / 3);
+					
 					
 					if (cursorPosition > centerPosition) {
 						centerPosition -= offset;
