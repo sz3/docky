@@ -52,7 +52,6 @@ namespace RecentDocuments
 		public RecentDocumentsItemProvider ()
 		{
 			docs = new RecentDocumentsItem ();
-			docs.Owner = this;
 			
 			Items = docs.AsSingle<AbstractDockItem> ();
 		}

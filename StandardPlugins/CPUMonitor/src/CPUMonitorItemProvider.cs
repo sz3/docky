@@ -46,7 +46,6 @@ namespace CPUMonitor
 		public CPUMonitorItemProvider ()
 		{
 			monitor = new CPUMonitorDockItem ();
-			monitor.Owner = this;
 			
 			Items = monitor.AsSingle<AbstractDockItem> ();
 		}
