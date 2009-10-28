@@ -16,9 +16,9 @@
 // 
 
 using System;
-using System.Threading;
 
 using Docky.Menus;
+using Docky.Services;
 
 namespace WeatherDocklet
 {
@@ -49,12 +49,9 @@ namespace WeatherDocklet
 		
 		public void ShowForecast (object o, EventArgs e)
 		{
-			new Thread(() => {
-				try {
-					WeatherController.Weather.ShowForecast (i);
-				} catch {
-				}
-			}).Start ();
+			DockServices.System.RunOnThread (() => {
+				WeatherController.Weather.ShowForecast (i);
+			});
 		}
 	}
 }

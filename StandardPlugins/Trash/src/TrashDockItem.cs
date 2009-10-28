@@ -198,10 +198,9 @@ namespace Trash
 					// disable events for a minute
 					TrashMonitor.Changed -= HandleChanged;
 					
-					try {
-						// this should be done in a thread
+					DockServices.System.RunOnMainThread (() => {
 						DeleteContents (OwnedFile);
-					} catch { /* do nothing */ }
+					});
 					
 					// eneble events again
 					TrashMonitor.Changed += HandleChanged;

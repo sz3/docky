@@ -17,9 +17,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading;
 
 using Gtk;
+
+using Docky.Services;
 
 namespace WeatherDocklet
 {
@@ -86,24 +87,22 @@ namespace WeatherDocklet
 			searchTreeStore.Clear ();
 			searchTreeStore.AppendValues ("Currently searching...", "");
 			
-			new Thread(() => {
-				try {
-					List<string> vals = new List<string> ();
-		
-					foreach (string s in WeatherController.Weather.SearchLocation (location.Text))
-						vals.Add (s);
+			DockServices.System.RunOnThread (() => {
+				List<string> vals = new List<string> ();
+	
+				foreach (string s in WeatherController.Weather.SearchLocation (location.Text))
+					vals.Add (s);
+				
+				Gtk.Application.Invoke (delegate {
+					searchTreeStore.Clear ();
 					
-					Gtk.Application.Invoke (delegate {
-						searchTreeStore.Clear ();
-						
-						if (vals.Count > 0)
-							for (int i = 0; i < vals.Count; i += 2)
-								searchTreeStore.AppendValues (vals [i], vals [i + 1]);
-						else
-							searchTreeStore.AppendValues ("No results found", "");
-					});
-				} catch {}
-			}).Start ();
+					if (vals.Count > 0)
+						for (int i = 0; i < vals.Count; i += 2)
+							searchTreeStore.AppendValues (vals [i], vals [i + 1]);
+					else
+						searchTreeStore.AppendValues ("No results found", "");
+				});
+			});
 		}
 
 		protected virtual void OnLocationSelectionChanged (object o, System.EventArgs args)

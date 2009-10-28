@@ -25,6 +25,7 @@ using GLib;
 
 using NDesk.DBus;
 using org.freedesktop.DBus;
+using System.Threading;
 
 namespace Docky.Services
 {
@@ -321,9 +322,44 @@ namespace Docky.Services
 			}
 		}
 		
+		public void RunOnThread (Action action, TimeSpan delay)
+		{
+			RunOnThread (() => {
+				System.Threading.Thread.Sleep (delay);
+				action ();
+			});
+		}
+		
+		public void RunOnThread (Action action, int delay)
+		{
+			RunOnThread (action, new TimeSpan (0, 0, 0, 0, delay));
+		}
+		
+		public void RunOnThread (Action action)
+		{
+			System.Threading.Thread newThread = new System.Threading.Thread (() => {
+				try {
+					action ();
+				} catch (ThreadAbortException) {
+				} catch (Exception e) {
+					Log<SystemService>.Error ("Error in RunOnThread: {0}", e.Message);
+					Log<SystemService>.Debug (e.StackTrace);
+				}
+			});
+			
+			newThread.Start ();
+		}
+		
 		public void RunOnMainThread (Action action)
 		{
-			RunOnMainThread (action, new TimeSpan (0));
+			Gtk.Application.Invoke ((sender, arg) => {
+				try {
+					action ();
+				} catch (Exception e) {
+					Log<SystemService>.Error ("Error in RunOnMainThread: {0}", e.Message);
+					Log<SystemService>.Debug (e.StackTrace);
+				}
+			});
 		}
 		
 		public void RunOnMainThread (Action action, int delay)
@@ -333,19 +369,7 @@ namespace Docky.Services
 		
 		public void RunOnMainThread (Action action, TimeSpan delay)
 		{
-			System.Threading.Thread newThread = new System.Threading.Thread (() => {
-				System.Threading.Thread.Sleep (delay);
-				Gtk.Application.Invoke ((sender, e) => {
-					try {
-						action ();
-					} catch (Exception ex) {
-						Log<SystemService>.Error ("Error in RunOnMainThread: {0}", ex.Message);
-						Log<SystemService>.Debug (ex.StackTrace);
-					}
-				});
-			});
-			
-			newThread.Start ();
+			RunOnThread (() => RunOnMainThread (action), delay);
 		}
 	}
 }

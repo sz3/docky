@@ -180,7 +180,7 @@ namespace GMail
 				return;
 			}
 
-			new Thread (() => {
+			DockServices.System.RunOnThread (() => {
 				try {
 					Gtk.Application.Invoke (delegate { OnGMailChecking (); });
 
@@ -274,7 +274,7 @@ namespace GMail
 						OnGMailFailed (Catalog.GetString ("General Error"));
 					});
 				}
-			}).Start ();
+			});
 		}
 		
 		void OnGMailChecked ()

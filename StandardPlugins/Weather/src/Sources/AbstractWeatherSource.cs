@@ -18,7 +18,6 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Threading;
 using System.Web;
 using System.Xml;
 
@@ -71,7 +70,7 @@ namespace WeatherDocklet
 		
 		public void ReloadWeatherData ()
 		{
-			new Thread(() => {
+			DockServices.System.RunOnThread (() => {
 				try {
 					OnWeatherReloading ();
 	
@@ -94,7 +93,7 @@ namespace WeatherDocklet
 					Log<AbstractWeatherSource>.Error (Name + ": " + e.ToString ());
 					Log<AbstractWeatherSource>.Debug (Name + ": " + e.StackTrace);
 				}
-			}).Start ();
+			});
 		}
 		
 		public void ShowRadar ()
