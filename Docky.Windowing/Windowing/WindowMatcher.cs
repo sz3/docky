@@ -99,6 +99,12 @@ namespace Docky.Windowing
 			}
 		}
 		
+		static IEnumerable<string> SuffixStrings {
+			get {
+				yield return "-bin";
+			}
+		}
+		
 		Dictionary<Wnck.Window, List<string>> window_to_desktop_files;
 		Dictionary<string, List<string>> exec_to_desktop_files;
 		List<Regex> prefix_filters;
@@ -235,9 +241,20 @@ namespace Docky.Windowing
 				}
 			}
 			
-			if (command_line != null && exec_to_desktop_files.ContainsKey (command_line[0])) {
-				foreach (string s in exec_to_desktop_files[command_line[0]])
-					yield return s;
+			if (command_line != null) {
+				string cmd = command_line[0];
+				foreach (string s in SuffixStrings) {
+					if (!cmd.EndsWith (s))
+					    continue;
+					if (exec_to_desktop_files.ContainsKey (cmd.Remove (cmd.LastIndexOf (s), s.Length))) {
+						cmd = cmd.Remove (cmd.LastIndexOf (s), s.Length);
+						break;
+					}
+				}
+				if (exec_to_desktop_files.ContainsKey (cmd)) {
+					foreach (string s in exec_to_desktop_files[cmd])
+						yield return s;
+				}
 				yield break;
 			}
 			
