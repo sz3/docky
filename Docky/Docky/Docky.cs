@@ -61,11 +61,12 @@ namespace Docky
 		{
 			CommandLinePreferences = new UserArgs (args);
 			
-			//Init gtk and related
+			//Init gtk and GLib related
 			Gdk.Threads.Init ();
 			NDesk.DBus.BusG.Init ();
 			Gtk.Application.Init ("Docky", ref args);
 			Gnome.Vfs.Vfs.Initialize ();
+			GLib.GType.Init ();
 			
 			Wnck.Global.ClientType = Wnck.ClientType.Pager;
 			
@@ -88,7 +89,6 @@ namespace Docky
 		public static void ShowAbout ()
 		{
 			Gtk.AboutDialog about = new Gtk.AboutDialog ();
-			about.Artists = new[] { "Daniel Foré" };
 			about.ProgramName = "Docky";
 			about.Version = AssemblyInfo.DisplayVersion + "\n" + AssemblyInfo.VersionDetails;
 			about.IconName = "docky";
@@ -102,6 +102,9 @@ namespace Docky
 				"Jason Smith",
 				"Robert Dyer",
 				"Chris Szikszoy"
+			};
+			about.Artists = new[] { 
+				"Daniel Foré",
 			};
 			
 			about.ShowAll ();

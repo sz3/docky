@@ -66,7 +66,6 @@ namespace Docky.Items
 		// this should be called after a successful mount of the file
 		public void UpdateInfo ()
 		{
-			
 			if (OwnedFile.QueryFileType (0, null) == FileType.Directory)
 				is_folder = true;
 			else

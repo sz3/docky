@@ -51,7 +51,7 @@ namespace Bookmarks
 		}
 		
 		NonRemovableItem computer, home;
-		
+		File bookmarks_file = null;
 		List<AbstractDockItem> items;
 		
 		IEnumerable<AbstractDockItem> InnerItems {
@@ -65,9 +65,12 @@ namespace Bookmarks
 		
 		File BookmarksFile {
 			get {
-				string path = System.IO.Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), ".gtk-bookmarks");
+				if (bookmarks_file == null) {
+					string path = System.IO.Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), ".gtk-bookmarks");
 				
-				return FileFactory.NewForPath (path);
+					bookmarks_file = FileFactory.NewForPath (path);
+				}
+				return bookmarks_file;
 			}
 		}
 		
@@ -79,9 +82,7 @@ namespace Bookmarks
 			home = new NonRemovableItem (string.Format ("file://{0}",
 			    Environment.GetFolderPath (Environment.SpecialFolder.Personal)), null, null);
 		
-			UpdateItems (BookmarksFile);
-			
-			GType.Init ();
+			UpdateItems ();
 			
 			FileMonitor watcher = FileMonitor.File (BookmarksFile, FileMonitorFlags.None, null);
 			
@@ -90,44 +91,42 @@ namespace Bookmarks
 
 		void WatcherChanged (object o, ChangedArgs args)
 		{
-			// FIXME: bug in current GIO / GLib-sharp, should be able to use args.File
-			File f = (File) FileAdapter.GetObject (args.Args[0] as GLib.Object);
-			
 			if (args.EventType == FileMonitorEvent.ChangesDoneHint)
 				Gtk.Application.Invoke ( delegate {
-					UpdateItems (f);
+					UpdateItems ();
 				});
 		}
 		
-		void UpdateItems (File file)
+		void UpdateItems ()
 		{
 			List<AbstractDockItem> old = items;
 			items = new List<AbstractDockItem> ();
 			
 			Log<BookmarksItemProvider>.Debug ("Updating bookmarks.");
 			
-			if (file.QueryExists (null)) {
-				using (DataInputStream stream = new DataInputStream (file.Read (null))) {
-					ulong length;
-					string line, name, uri;
-					while ((line = stream.ReadLine (out length, null)) != null) {
-						uri = line.Split (' ').First ();
-						File bookmark = FileFactory.NewForUri (uri);
-						name = line.Substring (uri.Length).Trim ();
-						if (old.Cast<BookmarkDockItem> ().Any (fdi => fdi.Uri == uri)) {
-							BookmarkDockItem item = old.Cast<BookmarkDockItem> ().First (fdi => fdi.Uri == uri);
-							old.Remove (item);
-							items.Add (item);
-						} else if (bookmark.Uri.Scheme == "file" && !bookmark.Exists) {
-							Log<BookmarksItemProvider>.Warn ("Bookmark path '{0}' does not exist, please fix the bookmarks file",
-							    bookmark.Uri.ToString ());
-							continue;
-						} else {
-							BookmarkDockItem item = BookmarkDockItem.NewFromUri (bookmark.Uri.ToString (), name);
-							if (item != null) {
-								items.Add (item);
-							}
-						}
+			if (!BookmarksFile.QueryExists (null)) {
+				Log<BookmarksItemProvider>.Error ("File '{0} does not exist.", BookmarksFile);
+				return;
+			}
+			
+			using (DataInputStream stream = new DataInputStream (BookmarksFile.Read (null))) {
+				ulong length;
+				string line, name, uri;
+				while ((line = stream.ReadLine (out length, null)) != null) {
+					uri = line.Split (' ').First ();
+					File bookmark = FileFactory.NewForUri (uri);
+					name = line.Substring (uri.Length).Trim ();
+					if (old.Cast<BookmarkDockItem> ().Any (fdi => fdi.Uri == uri)) {
+						BookmarkDockItem item = old.Cast<BookmarkDockItem> ().First (fdi => fdi.Uri == uri);
+						old.Remove (item);
+						items.Add (item);
+					} else if (!bookmark.Exists) {
+						Log<BookmarksItemProvider>.Warn ("Bookmark path '{0}' does not exist, please fix the bookmarks file",
+						    bookmark.StringUri ());
+						continue;
+					} else {
+						BookmarkDockItem item = BookmarkDockItem.NewFromUri (bookmark.StringUri (), name);
+						items.Add (item);
 					}
 				}
 			}
@@ -196,7 +195,7 @@ namespace Bookmarks
 		public override void Dispose ()
 		{
 			Items = Enumerable.Empty<AbstractDockItem> ();
-			foreach (AbstractDockItem item in items)
+			foreach (AbstractDockItem item in Items)
 				item.Dispose ();
 		}
 		

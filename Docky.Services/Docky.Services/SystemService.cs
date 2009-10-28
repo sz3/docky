@@ -236,7 +236,6 @@ namespace Docky.Services
 					// wait for the mount to finish
 					try {
 						if (f.MountEnclosingVolumeFinish (args))
-							// FIXME: when we can get a dock item from the UID, redraw the icon here.
 							Launch (new [] {f});
 					// an exception can be thrown here if we are trying to mount an already mounted file
 					// in that case, just launch it.

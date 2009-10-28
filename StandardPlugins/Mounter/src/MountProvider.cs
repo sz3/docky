@@ -53,8 +53,6 @@ namespace Mounter
 		
 		public MountProvider ()
 		{
-			GLib.GType.Init ();
-
 			Mounts = new List<MountItem> ();
 			
 			Monitor = VolumeMonitor.Default;
