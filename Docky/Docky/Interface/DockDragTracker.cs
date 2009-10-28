@@ -220,6 +220,7 @@ namespace Docky.Interface
 					}
 					
 					drop_accepted = drop_accepted || provider.AcceptDrop (s);
+					
 					if (FileApplicationProvider.WindowManager != null)
 						FileApplicationProvider.WindowManager.UpdateTransientItems ();
 				}

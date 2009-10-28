@@ -147,6 +147,38 @@ namespace Bookmarks
 		
 		public override string Icon { get { return "folder-home"; } }
 		
+		
+		protected override bool OnCanAcceptDrop (string uri)
+		{
+			return System.IO.Directory.Exists (new Uri (uri).LocalPath);
+		}
+
+		protected override bool OnAcceptDrop (string uri)
+		{
+			File tempFile = FileFactory.NewForPath (System.IO.Path.GetTempFileName ());
+			BookmarkDockItem bookmark = BookmarkDockItem.NewFromUri (uri, null);
+			
+			if (!System.IO.Directory.Exists (new Uri (uri).LocalPath) || !bookmark.OwnedFile.Exists)
+				return false;
+			
+			using (DataInputStream reader = new DataInputStream (BookmarksFile.Read (null))) {
+				using (DataOutputStream writer = new DataOutputStream (tempFile.AppendTo (FileCreateFlags.None, null))) {
+					string line;
+					ulong length;
+					while ((line = reader.ReadLine (out length, null)) != null) {
+						writer.PutString (string.Format ("{0}\n", line), null);
+					}
+					
+					writer.PutString (string.Format ("{0}\n", bookmark.Uri), null);
+				}
+			}
+			
+			if (tempFile.Exists)
+				tempFile.Move (BookmarksFile, FileCopyFlags.Overwrite, null, null);
+			
+			return true;
+		}
+		
 		public override bool ItemCanBeRemoved (AbstractDockItem item)
 		{
 			return item is BookmarkDockItem;
@@ -195,7 +227,7 @@ namespace Bookmarks
 		public override void Dispose ()
 		{
 			Items = Enumerable.Empty<AbstractDockItem> ();
-			foreach (AbstractDockItem item in Items)
+			foreach (AbstractDockItem item in items)
 				item.Dispose ();
 		}
 		
