@@ -59,9 +59,23 @@ namespace Docky.Interface
 
 		public bool HoveredAcceptsDrop { get; private set; }
 		
+		public IEnumerable<string> DragData {
+			get { return drag_data; }
+		}
+		
+		public AbstractDockItem DragItem {
+			get { return drag_item; }
+		}
+		
 		public DockDragTracker (DockWindow owner)
 		{
 			Owner = owner;
+			RegisterDragEvents ();
+			
+			EnableDragTo ();
+			EnableDragFrom ();
+			
+			Owner.HoveredItemChanged += HandleHoveredItemChanged;
 		}
 		
 		void RegisterDragEvents ()
@@ -74,6 +88,25 @@ namespace Docky.Interface
 			Owner.DragEnd += HandleDragEnd;
 			Owner.DragLeave += HandleDragLeave;
 			Owner.DragFailed += HandleDragFailed;
+			
+			Owner.MotionNotifyEvent += HandleOwnerMotionNotifyEvent;
+			Owner.EnterNotifyEvent += HandleOwnerEnterNotifyEvent;
+			Owner.LeaveNotifyEvent += HandleOwnerLeaveNotifyEvent;
+		}
+
+		void HandleOwnerLeaveNotifyEvent (object o, LeaveNotifyEventArgs args)
+		{
+			ExternalDragActive = false;
+		}
+
+		void HandleOwnerEnterNotifyEvent (object o, EnterNotifyEventArgs args)
+		{
+			ExternalDragActive = false;
+		}
+
+		void HandleOwnerMotionNotifyEvent (object o, MotionNotifyEventArgs args)
+		{
+			ExternalDragActive = false;
 		}
 		
 		void UnregisterDragEvents ()
@@ -86,6 +119,10 @@ namespace Docky.Interface
 			Owner.DragEnd -= HandleDragEnd;
 			Owner.DragLeave -= HandleDragLeave;
 			Owner.DragFailed -= HandleDragFailed;
+			
+			Owner.MotionNotifyEvent -= HandleOwnerMotionNotifyEvent;
+			Owner.EnterNotifyEvent -= HandleOwnerEnterNotifyEvent;
+			Owner.LeaveNotifyEvent -= HandleOwnerLeaveNotifyEvent;
 		}
 
 		/// <summary>
@@ -307,7 +344,7 @@ namespace Docky.Interface
 				   ProviderForItem (dragItem) != null;
 		}
 		
-		void EnsureDragAndDropProxy ()
+		public void EnsureDragAndDropProxy ()
 		{
 			// having a proxy window here is VERY bad ju-ju
 			if (InternalDragActive) {
@@ -346,7 +383,8 @@ namespace Docky.Interface
 		#region IDisposable implementation
 		public void Dispose ()
 		{
-			throw new System.NotImplementedException();
+			UnregisterDragEvents ();
+			Owner.HoveredItemChanged -= HandleHoveredItemChanged;
 		}
 		#endregion
 	}
