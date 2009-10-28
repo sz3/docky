@@ -22,6 +22,7 @@ using GLib;
 
 using Docky.Items;
 using Docky.Menus;
+using Docky.Services;
 
 namespace Bookmarks
 {
@@ -49,6 +50,25 @@ namespace Bookmarks
 		void Remove ()
 		{
 			Owner.RemoveItem (this);
+		}
+		
+		void Open ()
+		{
+			base.Open ();
+			// refresh the icon, but wait a couple of seconds for a possible mount operation to finish
+			GLib.Timeout.Add (2000, () => {
+				SetIconFromGIcon (OwnedFile.Icon ());
+				return false;
+			});
+		}
+		
+		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
+		{
+			if (button == 1) {
+				Open ();
+				return ClickAnimation.Bounce;
+			}
+			return ClickAnimation.None;
 		}
 
 		public override MenuList GetMenuItems ()
