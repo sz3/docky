@@ -48,6 +48,8 @@ namespace Docky.Items
 				IEnumerable<AbstractDockItem> removed = items.Where (adi => !value.Contains (adi));
 				
 				items = value;
+				foreach (AbstractDockItem item in items)
+					item.Owner = this;
 				
 				OnItemsChanged (added, removed);
 			}

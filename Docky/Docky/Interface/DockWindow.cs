@@ -258,9 +258,33 @@ namespace Docky.Interface
 		
 		internal AbstractDockItemProvider HoveredProvider {
 			get {
+				if (!DockHovered)
+					return null;
+				
+				if (HoveredItem == null) {
+					AbstractDockItem almost_hovered = null;
+					foreach (AbstractDockItem item in Items) {
+						if (item is INonPersistedItem || !DrawValues.ContainsKey (item))
+							continue;
+						
+						Gdk.Rectangle rect = DrawValues[item].HoverArea;
+						rect.Inflate (5, 5);
+						
+						if (rect.Contains (LocalCursor)) {
+							almost_hovered = item;
+							break;
+						}
+					}
+					
+					if (almost_hovered != null && almost_hovered.Owner != null) {
+						return almost_hovered.Owner;
+					}
+				}
+				
 				if (HoveredItem != null && HoveredItem.Owner != null) {
 					return HoveredItem.Owner;
 				}
+				
 				return Preferences.DefaultProvider;
 			}
 		}

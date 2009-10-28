@@ -202,12 +202,16 @@ namespace Docky.Interface
 			
 			AbstractDockItem item = Owner.HoveredItem;
 			
+			bool drop_accepted = false;
 			if (!drag_is_desktop_file && item != null && item.CanAcceptDrop (drag_data)) {
-				item.AcceptDrop (drag_data);
-			} else {
+				drop_accepted = item.AcceptDrop (drag_data);
+			}
+			
+			if (!drop_accepted) {
 				foreach (string s in drag_data) {
 					AbstractDockItemProvider provider;
-					if (Owner.HoveredProvider.CanAcceptDrop (s)) {
+					if (Owner.HoveredProvider != null && Owner.HoveredProvider.CanAcceptDrop (s)) {
+						Console.WriteLine (Owner.HoveredProvider.Name);
 						provider = Owner.HoveredProvider;
 					} else if (Owner.Preferences.DefaultProvider.CanAcceptDrop (s)) {
 						provider = Owner.Preferences.DefaultProvider;
@@ -216,7 +220,7 @@ namespace Docky.Interface
 						continue;
 					}
 					
-					provider.AcceptDrop (s);
+					drop_accepted = drop_accepted || provider.AcceptDrop (s);
 					if (FileApplicationProvider.WindowManager != null)
 						FileApplicationProvider.WindowManager.UpdateTransientItems ();
 				}
