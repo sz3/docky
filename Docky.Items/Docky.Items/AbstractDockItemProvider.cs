@@ -64,6 +64,7 @@ namespace Docky.Items
 				return OnCanAcceptDrop (uri);
 			} catch (Exception e) {
 				Log<AbstractDockItem>.Error (e.Message);
+				Log<AbstractDockItemProvider>.Debug (e.StackTrace);
 			}
 			return false;
 		}
@@ -79,6 +80,7 @@ namespace Docky.Items
 				return OnAcceptDrop (uri);
 			} catch (Exception e) {
 				Log<AbstractDockItem>.Error (e.Message);
+				Log<AbstractDockItemProvider>.Debug (e.StackTrace);
 			}
 			return false;
 		}
