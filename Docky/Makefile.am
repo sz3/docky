@@ -31,6 +31,7 @@ FILES = \
 	Docky/Interface/HoveredItemChangedArgs.cs \
 	Docky/Interface/IDockPreferences.cs \
 	Docky/Interface/ItemProvidersChangedEventArgs.cs \
+	Docky/Interface/PoofWindow.cs \
 	Docky/Items/DockyItem.cs \
 	Docky/Items/INonPersistedItem.cs \
 	Docky/Items/SeparatorItem.cs \

@@ -237,6 +237,10 @@ namespace Docky.Interface
 				if (!Owner.DockHovered) {
 					AbstractDockItemProvider provider = ProviderForItem (drag_item);
 					if (provider != null && provider.ItemCanBeRemoved (drag_item)) {
+						PoofWindow window = new PoofWindow (128);
+						window.SetCenterPosition (Owner.CursorTracker.Cursor);
+						window.Run ();
+						
 						provider.RemoveItem (drag_item);
 						if (FileApplicationProvider.WindowManager != null)
 							FileApplicationProvider.WindowManager.UpdateTransientItems ();

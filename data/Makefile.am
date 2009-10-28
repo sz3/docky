@@ -9,4 +9,7 @@ applications_DATA = docky.desktop
 startupdir = $(sysconfdir)/xdg/autostart
 startup_DATA = docky.desktop
 
+poofdir = $(datadir)/docky
+poof_DATA = poof.png
+
 @INTLTOOL_DESKTOP_RULE@
