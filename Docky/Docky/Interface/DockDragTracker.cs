@@ -211,7 +211,6 @@ namespace Docky.Interface
 				foreach (string s in drag_data) {
 					AbstractDockItemProvider provider;
 					if (Owner.HoveredProvider != null && Owner.HoveredProvider.CanAcceptDrop (s)) {
-						Console.WriteLine (Owner.HoveredProvider.Name);
 						provider = Owner.HoveredProvider;
 					} else if (Owner.Preferences.DefaultProvider.CanAcceptDrop (s)) {
 						provider = Owner.Preferences.DefaultProvider;
