@@ -198,6 +198,16 @@ namespace Docky.Items
 			}
 		}
 		
+		protected override bool OnCanAcceptDrop (string uri)
+		{
+			return true;
+		}
+
+		protected override bool OnAcceptDrop (string uri)
+		{
+			return InsertItem (uri);
+		}
+		
 		public bool InsertItem (string uri)
 		{
 			if (uri == null)

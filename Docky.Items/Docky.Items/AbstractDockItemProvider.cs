@@ -58,6 +58,36 @@ namespace Docky.Items
 			items = Enumerable.Empty<AbstractDockItem> ();
 		}
 		
+		public bool CanAcceptDrop (string uri)
+		{
+			try {
+				return OnCanAcceptDrop (uri);
+			} catch (Exception e) {
+				Log<AbstractDockItem>.Error (e.Message);
+			}
+			return false;
+		}
+		
+		protected virtual bool OnCanAcceptDrop (string uri)
+		{
+			return false;
+		}
+		
+		public bool AcceptDrop (string uri)
+		{
+			try {
+				return OnAcceptDrop (uri);
+			} catch (Exception e) {
+				Log<AbstractDockItem>.Error (e.Message);
+			}
+			return false;
+		}
+		
+		protected virtual bool OnAcceptDrop (string uri)
+		{
+			return false;
+		}
+		
 		public virtual bool ItemCanBeRemoved (AbstractDockItem item)
 		{
 			return false;

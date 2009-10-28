@@ -170,9 +170,11 @@ namespace Docky.Interface
 		
 		bool HoveredAcceptsDrop { get; set; }
 		
-		AutohideManager AutohideManager { get; set; }
+		internal AutohideManager AutohideManager { get; private set; }
 		
-		CursorTracker CursorTracker { get; set; }
+		internal CursorTracker CursorTracker { get; private set; }
+		
+		internal DockDragTracker DragTracker { get; private set; }
 		
 		AnimationState AnimationState { get; set; }
 		
@@ -234,24 +236,33 @@ namespace Docky.Interface
 			get { return Preferences.Autohide; }
 		}
 		
-		bool DockHovered {
+		internal bool DockHovered {
 			get { return AutohideManager.DockHovered; }
 		}
 		
 		
-		AbstractDockItem HoveredItem {
+		internal AbstractDockItem HoveredItem {
 			get {
 				if (!DockHovered)
 					return null;
 				return hoveredItem;
 			}
-			set {
+			private set {
 				if (hoveredItem == value)
 					return;
 				AbstractDockItem last = hoveredItem;
 				hoveredItem = value;
 				SetHoveredAcceptsDrop ();
 				OnHoveredItemChanged (last);
+			}
+		}
+		
+		internal AbstractDockItemProvider HoveredProvider {
+			get {
+				if (HoveredItem != null && HoveredItem.Owner != null) {
+					return HoveredItem.Owner;
+				}
+				return Preferences.DefaultProvider;
 			}
 		}
 
@@ -265,7 +276,7 @@ namespace Docky.Interface
 			}
 		}
 		
-		IEnumerable<AbstractDockItemProvider> ItemProviders {
+		internal IEnumerable<AbstractDockItemProvider> ItemProviders {
 			get { return Preferences.ItemProviders; }
 		}
 		
@@ -321,7 +332,7 @@ namespace Docky.Interface
 		/// <summary>
 		/// The int size a fully zoomed icon will display at.
 		/// </summary>
-		int ZoomedIconSize {
+		internal int ZoomedIconSize {
 			get { 
 				return ZoomEnabled ? (int) (IconSize * ZoomPercent) : IconSize; 
 			}
@@ -989,7 +1000,7 @@ namespace Docky.Interface
 		#endregion
 		
 		#region Misc.
-		void SetHoveredAcceptsDrop ()
+		internal void SetHoveredAcceptsDrop ()
 		{
 			HoveredAcceptsDrop = false;
 			if (HoveredItem != null && ExternalDragActive) {
@@ -999,7 +1010,7 @@ namespace Docky.Interface
 			}
 		}
 		
-		void UpdateCollectionBuffer ()
+		internal void UpdateCollectionBuffer ()
 		{
 			if (rendering) {
 				// resetting a durring a render is bad. Complete the render then reset.
@@ -1164,7 +1175,7 @@ namespace Docky.Interface
 		#endregion
 		
 		#region Drawing
-		void AnimatedDraw ()
+		internal void AnimatedDraw ()
 		{
 			if (0 < animation_timer) {
 				return;
