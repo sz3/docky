@@ -46,7 +46,6 @@ namespace Trash
 		public TrashItemProvider ()
 		{
 			trash = new TrashDockItem ();
-			trash.Owner = this;
 			
 			Items = trash.AsSingle<AbstractDockItem> ();
 		}

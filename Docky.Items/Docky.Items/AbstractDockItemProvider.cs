@@ -48,6 +48,8 @@ namespace Docky.Items
 				IEnumerable<AbstractDockItem> removed = items.Where (adi => !value.Contains (adi));
 				
 				items = value;
+				foreach (AbstractDockItem item in items)
+					item.Owner = this;
 				
 				OnItemsChanged (added, removed);
 			}
@@ -56,6 +58,38 @@ namespace Docky.Items
 		protected AbstractDockItemProvider ()
 		{
 			items = Enumerable.Empty<AbstractDockItem> ();
+		}
+		
+		public bool CanAcceptDrop (string uri)
+		{
+			try {
+				return OnCanAcceptDrop (uri);
+			} catch (Exception e) {
+				Log<AbstractDockItem>.Error (e.Message);
+				Log<AbstractDockItemProvider>.Debug (e.StackTrace);
+			}
+			return false;
+		}
+		
+		protected virtual bool OnCanAcceptDrop (string uri)
+		{
+			return false;
+		}
+		
+		public bool AcceptDrop (string uri)
+		{
+			try {
+				return OnAcceptDrop (uri);
+			} catch (Exception e) {
+				Log<AbstractDockItem>.Error (e.Message);
+				Log<AbstractDockItemProvider>.Debug (e.StackTrace);
+			}
+			return false;
+		}
+		
+		protected virtual bool OnAcceptDrop (string uri)
+		{
+			return false;
 		}
 		
 		public virtual bool ItemCanBeRemoved (AbstractDockItem item)

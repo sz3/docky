@@ -6,43 +6,45 @@ TARGET = exe
 
 FILES = \
 	AssemblyInfo.cs \
+	gtk-gui/generated.cs \
+	gtk-gui/Docky.Interface.DockPreferences.cs \
+	gtk-gui/Docky.ConfigurationWindow.cs \
+	Gtk/Widget_Extensions.cs \
+	Docky/ConfigurationWindow.cs \
+	Docky/DockController.cs \
+	Docky/DockPlacementWidget.cs \
 	Docky/Docky.cs \
 	Docky/UserArgs.cs \
-	Docky/DockController.cs \
-	Docky/Interface/Dock.cs \
-	Docky/Interface/DockPosition.cs \
-	Docky/Interface/AutohideType.cs \
-	gtk-gui/generated.cs \
-	Docky/Interface/DockPreferences.cs \
-	gtk-gui/Docky.Interface.DockPreferences.cs \
-	Docky/Interface/AddinTreeView.cs \
-	Docky/Interface/DockWindow.cs \
-	Docky/Interface/IDockPreferences.cs \
-	Docky/Interface/CursorTracker.cs \
-	Docky/Interface/CursorPostionChangedArgs.cs \
-	Docky/Interface/AutohideManager.cs \
-	Docky/Interface/ItemProvidersChangedEventArgs.cs \
-	Docky/Interface/AnimationState.cs \
-	Docky/Items/SeparatorItem.cs \
+	Docky/PluginManager.cs \
 	Docky/CairoHelper/DockySurface_Extensions.cs \
-	Docky/ConfigurationWindow.cs \
-	gtk-gui/Docky.ConfigurationWindow.cs \
-	Docky/DockPlacementWidget.cs \
-	Docky/Items/SpacingItem.cs \
-	Gtk/Widget_Extensions.cs \
+	Docky/Interface/AddinTreeView.cs \
+	Docky/Interface/AnimationState.cs \
+	Docky/Interface/AutohideManager.cs \
+	Docky/Interface/AutohideType.cs \
+	Docky/Interface/CursorPostionChangedArgs.cs \
+	Docky/Interface/CursorTracker.cs \
+	Docky/Interface/Dock.cs \
+	Docky/Interface/DockDragTracker.cs \
+	Docky/Interface/DockPosition.cs \
+	Docky/Interface/DockWindow.cs \
+	Docky/Interface/DockPreferences.cs \
 	Docky/Interface/HoveredItemChangedArgs.cs \
-    Docky/PluginManager.cs \
-    Docky/Items/DockyItem.cs \
-    Docky/Items/INonPersistedItem.cs \
-    Docky/Menus/DockMenu.cs \
-    Docky/Menus/MenuItemWidget.cs \
+	Docky/Interface/IDockPreferences.cs \
+	Docky/Interface/ItemProvidersChangedEventArgs.cs \
+	Docky/Interface/PoofWindow.cs \
+	Docky/Items/DockyItem.cs \
+	Docky/Items/INonPersistedItem.cs \
+	Docky/Items/SeparatorItem.cs \
+	Docky/Items/SpacingItem.cs \
+	Docky/Menus/DockMenu.cs \
+	Docky/Menus/MenuItemWidget.cs \
 	Docky/Menus/SeparatorWidget.cs \
-    Docky/Menus/DockItemMenu.cs
+	Docky/Menus/DockItemMenu.cs
 
 RESOURCES = \
 	gtk-gui/gui.stetic \
 	Resources/classic.svg \
-    Resources/menu.svg
+	Resources/menu.svg
 
 PROJECT_REFERENCES = \
 	Docky.CairoHelper \

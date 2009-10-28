@@ -152,7 +152,6 @@ namespace Docky.Interface
 		Gdk.Rectangle monitor_geo;
 		Gdk.Rectangle current_mask_area;
 		Gdk.Point window_position;
-		Gdk.Window proxy_window;
 		
 		double? zoom_in_buffer;
 		bool rendering;
@@ -164,15 +163,17 @@ namespace Docky.Interface
 		
 		public int Height { get; private set; }
 		
-		bool ExternalDragActive { get; set; }
+		bool ExternalDragActive { get { return DragTracker.ExternalDragActive; } }
 		
-		bool InternalDragActive { get; set; }
+		bool InternalDragActive { get { return DragTracker.InternalDragActive; } }
 		
 		bool HoveredAcceptsDrop { get; set; }
 		
-		AutohideManager AutohideManager { get; set; }
+		internal AutohideManager AutohideManager { get; private set; }
 		
-		CursorTracker CursorTracker { get; set; }
+		internal CursorTracker CursorTracker { get; private set; }
+		
+		internal DockDragTracker DragTracker { get; private set; }
 		
 		AnimationState AnimationState { get; set; }
 		
@@ -234,24 +235,57 @@ namespace Docky.Interface
 			get { return Preferences.Autohide; }
 		}
 		
-		bool DockHovered {
+		internal bool DockHovered {
 			get { return AutohideManager.DockHovered; }
 		}
 		
 		
-		AbstractDockItem HoveredItem {
+		internal AbstractDockItem HoveredItem {
 			get {
 				if (!DockHovered)
 					return null;
 				return hoveredItem;
 			}
-			set {
+			private set {
 				if (hoveredItem == value)
 					return;
 				AbstractDockItem last = hoveredItem;
 				hoveredItem = value;
 				SetHoveredAcceptsDrop ();
 				OnHoveredItemChanged (last);
+			}
+		}
+		
+		internal AbstractDockItemProvider HoveredProvider {
+			get {
+				if (!DockHovered)
+					return null;
+				
+				if (HoveredItem == null) {
+					AbstractDockItem almost_hovered = null;
+					foreach (AbstractDockItem item in Items) {
+						if (item is INonPersistedItem || !DrawValues.ContainsKey (item))
+							continue;
+						
+						Gdk.Rectangle rect = DrawValues[item].HoverArea;
+						rect.Inflate (5, 5);
+						
+						if (rect.Contains (LocalCursor)) {
+							almost_hovered = item;
+							break;
+						}
+					}
+					
+					if (almost_hovered != null && almost_hovered.Owner != null) {
+						return almost_hovered.Owner;
+					}
+				}
+				
+				if (HoveredItem != null && HoveredItem.Owner != null) {
+					return HoveredItem.Owner;
+				}
+				
+				return Preferences.DefaultProvider;
 			}
 		}
 
@@ -265,7 +299,7 @@ namespace Docky.Interface
 			}
 		}
 		
-		IEnumerable<AbstractDockItemProvider> ItemProviders {
+		internal IEnumerable<AbstractDockItemProvider> ItemProviders {
 			get { return Preferences.ItemProviders; }
 		}
 		
@@ -321,7 +355,7 @@ namespace Docky.Interface
 		/// <summary>
 		/// The int size a fully zoomed icon will display at.
 		/// </summary>
-		int ZoomedIconSize {
+		internal int ZoomedIconSize {
 			get { 
 				return ZoomEnabled ? (int) (IconSize * ZoomPercent) : IconSize; 
 			}
@@ -392,6 +426,7 @@ namespace Docky.Interface
 			Menu = new DockItemMenu (this);
 			Menu.Shown += (o, a) => AnimatedDraw ();
 			
+			DragTracker = new DockDragTracker (this);
 			AnimationState = new AnimationState ();
 			BuildAnimationEngine ();
 			
@@ -419,12 +454,7 @@ namespace Docky.Interface
 			                  Gdk.EventMask.ScrollMask));
 			
 			Realized += HandleRealized;
-			HoveredItemChanged += HandleHoveredItemChanged;
 			Docky.Controller.ThemeChanged += DockyControllerThemeChanged;
-			
-			EnableDragTo ();
-			EnableDragFrom ();
-			RegisterDragEvents ();
 		}
 
 
@@ -479,7 +509,7 @@ namespace Docky.Interface
 			else
 				CursorTracker.CancelHighResolution (this);
 			
-			EnsureDragAndDropProxy ();
+			DragTracker.EnsureDragAndDropProxy ();
 			AnimatedDraw ();
 		}
 
@@ -493,7 +523,7 @@ namespace Docky.Interface
 		{
 			if (DockHovered && e.LastPosition != Cursor)
 				AnimatedDraw ();
-			EnsureDragAndDropProxy ();
+			DragTracker.EnsureDragAndDropProxy ();
 		}
 		
 		void RegisterItemProvider (AbstractDockItemProvider provider)
@@ -643,21 +673,18 @@ namespace Docky.Interface
 		
 		protected override bool OnMotionNotifyEvent (EventMotion evnt)
 		{
-			ExternalDragActive = false;
 			CursorTracker.SendManualUpdate (evnt);
 			return base.OnMotionNotifyEvent (evnt);
 		}
 		
 		protected override bool OnEnterNotifyEvent (EventCrossing evnt)
 		{
-			ExternalDragActive = false;
 			CursorTracker.SendManualUpdate (evnt);
 			return base.OnEnterNotifyEvent (evnt);
 		}
 
 		protected override bool OnLeaveNotifyEvent (EventCrossing evnt)
 		{
-			ExternalDragActive = false;
 			CursorTracker.SendManualUpdate (evnt);
 			return base.OnLeaveNotifyEvent (evnt);
 		}
@@ -719,287 +746,18 @@ namespace Docky.Interface
 		}
 		#endregion
 		
-		#region Drag Handling
-		bool drag_known;
-		bool drag_data_requested;
-		bool drag_is_desktop_file;
-		int marker = 0;
-		
-		AbstractDockItem drag_item;
-		
-		IEnumerable<string> drag_data;
-		
-		void RegisterDragEvents ()
-		{
-			DragMotion       += HandleDragMotion;
-			DragBegin        += HandleDragBegin;
-			DragDataReceived += HandleDragDataReceived;
-			DragDataGet      += HandleDragDataGet;
-			DragDrop         += HandleDragDrop;
-			DragEnd          += HandleDragEnd;
-			DragLeave        += HandleDragLeave;
-			DragFailed       += HandleDragFailed;
-		}
-
-		/// <summary>
-		/// Emitted on the drag source to fetch drag data
-		/// </summary>
-		void HandleDragDataGet (object o, DragDataGetArgs args)
-		{
-			if (InternalDragActive && drag_item != null && !(drag_item is INonPersistedItem)) {
-				string uri = string.Format ("docky://{0}\r\n", drag_item.UniqueID ());
-				byte[] data = System.Text.Encoding.UTF8.GetBytes (uri);
-				args.SelectionData.Set (args.SelectionData.Target, 8, data, data.Length);
-			}
-		}
-
-		/// <summary>
-		/// Emitted on the drag source when drag is started
-		/// </summary>
-		void HandleDragBegin (object o, DragBeginArgs args)
-		{
-			InternalDragActive = true;
-			
-			if (proxy_window != null) {
-				EnableDragTo ();
-				proxy_window = null;
-			}
-			
-			Gdk.Pixbuf pbuf;
-			drag_item = HoveredItem;
-			
-			if (drag_item is INonPersistedItem)
-				drag_item = null;
-			
-			if (drag_item != null) {
-				pbuf = HoveredItem.IconSurface (background_buffer, ZoomedIconSize).LoadToPixbuf ();
-			} else {
-				pbuf = new Gdk.Pixbuf (Gdk.Colorspace.Rgb, true, 8, 1, 1);
-			}
-			
-			Gtk.Drag.SetIconPixbuf (args.Context, pbuf, pbuf.Width / 2, pbuf.Height / 2);
-			pbuf.Dispose ();
-		}
-
-		/// <summary>
-		/// Emitted on the drop site. If the data was recieved to preview the data, call
-		/// Gdk.Drag.Status (), else call Gdk.Drag.Finish () 
-		/// RetVal = true on success
-		/// </summary>
-		void HandleDragDataReceived (object o, DragDataReceivedArgs args)
-		{
-			if (drag_data_requested) {
-				SelectionData data = args.SelectionData;
-				
-				string uris = Encoding.UTF8.GetString (data.Data);
-				
-				drag_data = Regex.Split (uris, "\r\n")
-					.Where (uri => uri.StartsWith ("file://"));
-				
-				drag_data_requested = false;
-				drag_is_desktop_file = drag_data.Any (d => d.EndsWith (".desktop"));
-				SetHoveredAcceptsDrop ();
-			}
-			
-			Gdk.Drag.Status (args.Context, DragAction.Copy, Gtk.Global.CurrentEventTime);
-			args.RetVal = true;
-		}
-
-		/// <summary>
-		/// Emitted on the drop site when the user drops data on the widget.
-		/// </summary>
-		void HandleDragDrop (object o, DragDropArgs args)
-		{
-			args.RetVal = true;
-			Gtk.Drag.Finish (args.Context, true, false, args.Time);
-			
-			if (drag_data == null)
-				return;
-			
-			AbstractDockItem item = HoveredItem;
-			
-			if (!drag_is_desktop_file && item != null && item.CanAcceptDrop (drag_data)) {
-				item.AcceptDrop (drag_data);
-			} else {
-				foreach (string s in drag_data) {
-					Preferences.DefaultProvider.InsertItem (s);
-					if (FileApplicationProvider.WindowManager != null)
-						FileApplicationProvider.WindowManager.UpdateTransientItems ();
-				}
-			}
-			
-			drag_known = false;
-			drag_data = null;
-			drag_data_requested = false;
-			drag_is_desktop_file = false;
-		}
-
-		/// <summary>
-		/// Emitted on the drag source when the drag finishes
-		/// </summary>
-		void HandleDragEnd (object o, DragEndArgs args)
-		{
-			if (drag_item != null) {
-				if (!DockHovered) {
-					AbstractDockItemProvider provider = ProviderForItem (drag_item);
-					if (provider != null && provider.ItemCanBeRemoved (drag_item)) {
-						provider.RemoveItem (drag_item);
-						if (FileApplicationProvider.WindowManager != null)
-							FileApplicationProvider.WindowManager.UpdateTransientItems ();
-					}
-				} else {
-					AbstractDockItem item = HoveredItem;
-					if (item != null && item.CanAcceptDrop (drag_item))
-						item.AcceptDrop (drag_item);
-				}
-			}
-			
-			InternalDragActive = false;
-			drag_item = null;
-			
-			AnimatedDraw ();
-		}
-
-		/// <summary>
-		/// Emitted on drop site when drag leaves widget
-		/// </summary>
-		void HandleDragLeave (object o, DragLeaveArgs args)
-		{
-			drag_known = false;
-		}
-		
-		/// <summary>
-		/// Emitted on drag source. Return true to disable drag failed animation
-		/// </summary>
-		void HandleDragFailed (object o, DragFailedArgs args)
-		{
-			args.RetVal = true;
-		}
-
-		/// <summary>
-		/// Emitted on drop site.
-		/// Set RetVal == cursor is over drop zone
-		/// if (RetVal) Gdk.Drag.Status, unless the decision cannot be made, in which case it may be defered by
-		/// a get data call
-		/// </summary>
-		void HandleDragMotion (object o, DragMotionArgs args)
-		{
-			ExternalDragActive = true;
-			if (marker != args.Context.GetHashCode ()) {
-				marker = args.Context.GetHashCode ();
-				drag_known = false;
-			}
-			
-			// we own the drag if InternalDragActive is true, lets not be silly
-			if (!drag_known && !InternalDragActive) {
-				drag_known = true;
-				Gdk.Atom atom = Gtk.Drag.DestFindTarget (this, args.Context, null);
-				Gtk.Drag.GetData (this, args.Context, atom, args.Time);
-				drag_data_requested = true;
-			} else {
-				Gdk.Drag.Status (args.Context, DragAction.Copy, args.Time);
-			}
-			args.RetVal = true;
-		}
-		
-		Gdk.Window BestProxyWindow ()
-		{
-			try {
-				int pid = System.Diagnostics.Process.GetCurrentProcess ().Id;
-				IEnumerable<ulong> xids = Wnck.Screen.Default.WindowsStacked
-					.Reverse () // top to bottom order
-					.Where (wnk => wnk.IsVisibleOnWorkspace (Wnck.Screen.Default.ActiveWorkspace) && 
-							                                 wnk.Pid != pid &&
-							                                 wnk.EasyGeometry ().Contains (Cursor))
-					.Select (wnk => wnk.Xid);
-				
-				if (!xids.Any ())
-					return null;
-				
-				return Gdk.Window.ForeignNew ((uint) xids.First ());
-			} catch {
-				return null;
-			}
-		}
-		
-		void HandleHoveredItemChanged (object sender, HoveredItemChangedArgs e)
-		{
-			if (InternalDragActive && DragItemsCanInteract (drag_item, HoveredItem)) {
-				
-				int tmp = drag_item.Position;
-				drag_item.Position = HoveredItem.Position;
-				HoveredItem.Position = tmp;
-				
-				UpdateCollectionBuffer ();
-				Preferences.SyncPreferences ();
-			}
-		}
-		
-		AbstractDockItemProvider ProviderForItem (AbstractDockItem item)
-		{
-			return ItemProviders
-				.DefaultIfEmpty (null)
-				.Where (p => p.Items.Contains (item))
-				.FirstOrDefault ();
-		}
-		
-		bool DragItemsCanInteract (AbstractDockItem dragItem, AbstractDockItem hoveredItem)
-		{
-			return dragItem != hoveredItem &&
-				   ProviderForItem (dragItem) == ProviderForItem (hoveredItem) && 
-				   ProviderForItem (dragItem) != null;
-		}
-		
-		void EnsureDragAndDropProxy ()
-		{
-			// having a proxy window here is VERY bad ju-ju
-			if (InternalDragActive) {
-				return;
-			}
-			
-			if (DockHovered) {
-				if (proxy_window == null)
-					return;
-				proxy_window = null;
-				EnableDragTo ();
-			} else if ((CursorTracker.Modifier & ModifierType.Button1Mask) == ModifierType.Button1Mask) {
-				Gdk.Window bestProxy = BestProxyWindow ();
-				if (proxy_window != bestProxy) {
-					proxy_window = bestProxy;
-					Gtk.Drag.DestSetProxy (this, proxy_window, DragProtocol.Xdnd, true);
-				}
-			}
-		}
-
-		void EnableDragTo ()
-		{
-			TargetEntry[] dest = new [] {
-				new TargetEntry ("text/uri-list", 0, 0),
-				new TargetEntry ("text/docky-uri-list", 0, 0),
-			};
-			Gtk.Drag.DestSet (this, 0, dest, Gdk.DragAction.Copy);
-		}
-		
-		void EnableDragFrom ()
-		{
-			// we dont really want to offer the drag to anything, merely pretend to, so we set a mimetype nothing takes
-			TargetEntry te = new TargetEntry ("text/docky-uri-list", TargetFlags.App, 0);
-			Gtk.Drag.SourceSet (this, Gdk.ModifierType.Button1Mask, new[] { te }, DragAction.Private);
-		}
-		#endregion
-		
 		#region Misc.
-		void SetHoveredAcceptsDrop ()
+		internal void SetHoveredAcceptsDrop ()
 		{
 			HoveredAcceptsDrop = false;
 			if (HoveredItem != null && ExternalDragActive) {
-				if (drag_data != null && HoveredItem.CanAcceptDrop (drag_data)) {
+				if (DragTracker.DragData != null && HoveredItem.CanAcceptDrop (DragTracker.DragData)) {
 					HoveredAcceptsDrop = true;
 				}
 			}
 		}
 		
-		void UpdateCollectionBuffer ()
+		internal void UpdateCollectionBuffer ()
 		{
 			if (rendering) {
 				// resetting a durring a render is bad. Complete the render then reset.
@@ -1164,7 +922,7 @@ namespace Docky.Interface
 		#endregion
 		
 		#region Drawing
-		void AnimatedDraw ()
+		internal void AnimatedDraw ()
 		{
 			if (0 < animation_timer) {
 				return;
@@ -1565,7 +1323,7 @@ namespace Docky.Interface
 		
 		void DrawItem (DockySurface surface, Gdk.Rectangle dockArea, AbstractDockItem item)
 		{
-			if (drag_item == item)
+			if (DragTracker.DragItem == item)
 				return;
 			
 			double zoomOffset = ZoomedIconSize / (double) IconSize;
@@ -1990,6 +1748,7 @@ namespace Docky.Interface
 			AutohideManager.Dispose ();
 			UnregisterPreferencesEvents (Preferences);
 			
+			DragTracker.Dispose ();
 			CursorTracker.CursorPositionChanged -= HandleCursorPositionChanged;
 			AutohideManager.HiddenChanged -= HandleHiddenChanged;
 			AutohideManager.DockHoveredChanged -= HandleDockHoveredChanged;

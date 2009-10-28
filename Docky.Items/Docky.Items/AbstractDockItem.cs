@@ -242,7 +242,14 @@ namespace Docky.Items
 		#region Input Handling
 		public void Clicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
-			ClickAnimation = OnClicked (button, mod, xPercent, yPercent);
+			try {
+				ClickAnimation = OnClicked (button, mod, xPercent, yPercent);
+			} catch (Exception e) {
+				Log<AbstractDockItem>.Error (e.Message);
+				Log<AbstractDockItem>.Debug (e.StackTrace);
+				ClickAnimation = ClickAnimation.Darken;
+			}
+			
 			LastClick = DateTime.UtcNow;
 		}
 		
@@ -253,7 +260,12 @@ namespace Docky.Items
 		
 		public void Scrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
 		{
-			OnScrolled (direction, mod);
+			try {
+				OnScrolled (direction, mod);
+			} catch (Exception e) {
+				Log<AbstractDockItem>.Error (e.Message);
+				Log<AbstractDockItem>.Debug (e.StackTrace);
+			}
 		}
 		
 		protected virtual void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
@@ -268,9 +280,20 @@ namespace Docky.Items
 				average_color = null;
 				main_buffer = ResetBuffer (main_buffer);
 			
-				main_buffer = CreateIconBuffer (model, size);
+				try {
+					main_buffer = CreateIconBuffer (model, size);
+				} catch (Exception e) {
+					Log<AbstractDockItem>.Error (e.Message);
+					Log<AbstractDockItem>.Debug (e.StackTrace);
+					main_buffer = new DockySurface (size, size, model);
+				}
 				
-				PaintIconSurface (main_buffer);
+				try {
+					PaintIconSurface (main_buffer);
+				} catch (Exception e) {
+					Log<AbstractDockItem>.Error (e.Message);
+					Log<AbstractDockItem>.Debug (e.StackTrace);
+				}
 			}
 			return main_buffer;
 		}

@@ -46,7 +46,6 @@ namespace Clock
 		public ClockItemProvider ()
 		{
 			clock = new ClockDockItem ();
-			clock.Owner = this;
 			
 			Items = clock.AsSingle<AbstractDockItem> ();
 		}

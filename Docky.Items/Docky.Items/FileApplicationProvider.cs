@@ -161,7 +161,6 @@ namespace Docky.Items
 				}
 				
 				transient_items.Add (item);
-				item.Owner = this;
 				item.WindowsChanged += HandleTransientWindowsChanged;
 				
 				Items = InternalItems;
@@ -198,6 +197,16 @@ namespace Docky.Items
 			}
 		}
 		
+		protected override bool OnCanAcceptDrop (string uri)
+		{
+			return true;
+		}
+
+		protected override bool OnAcceptDrop (string uri)
+		{
+			return InsertItem (uri);
+		}
+		
 		public bool InsertItem (string uri)
 		{
 			if (uri == null)
@@ -221,7 +230,6 @@ namespace Docky.Items
 			if (item == null)
 				return false;
 			
-			item.Owner = this;
 			items[uri] = item;
 			
 			

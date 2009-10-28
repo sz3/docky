@@ -125,7 +125,6 @@ namespace Bookmarks
 						} else {
 							BookmarkDockItem item = BookmarkDockItem.NewFromUri (bookmark.Uri.ToString (), name);
 							if (item != null) {
-								item.Owner = this;
 								items.Add (item);
 							}
 						}
