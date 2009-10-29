@@ -28,7 +28,7 @@ using Docky.Services;
 namespace Mounter
 {
 	
-	public class MountItem : IconDockItem
+	public class MountItem : FileDockItem
 	{
 		
 		#region IconDockItem implementation
@@ -40,8 +40,8 @@ namespace Mounter
 		
 		#endregion
 		
-		public MountItem (Mount mount)
-		{		
+		public MountItem (Mount mount) : base (mount.Root.StringUri ())
+		{
 			Mnt = mount;
 			
 			SetIconFromGIcon (mount.Icon);
@@ -54,16 +54,11 @@ namespace Mounter
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
 			if (button == 1) {
-				OpenVolume ();
+				Open ();
 				return ClickAnimation.Bounce;
 			}
 			
 			return ClickAnimation.None;
-		}
-		
-		void OpenVolume ()
-		{
-			DockServices.System.Open (Mnt.Root);
 		}
 		
 		public void UnMount ()
@@ -77,18 +72,18 @@ namespace Mounter
 		
 		void HandleMountFinished (GLib.Object sender, AsyncResult result)
 		{
-			string success = "successful";
-			if (!Mnt.UnmountFinish (result))
-				success = "failed";
+			string unmountMessage = "Unmount of {0} {1}.";
 			
-			Log<MountItem>.Debug ("Unmount of {0} {1}.", Mnt.Name, success);
-			    
+			if (!Mnt.UnmountFinish (result))
+				Log<MountItem>.Notify (unmountMessage, Mnt.Name, "Failed");
+			else
+				Log<MountItem>.Debug (unmountMessage, Mnt.Name, "Succeeded");
 		}
 		
 		public override MenuList GetMenuItems ()
 		{
 			MenuList list = base.GetMenuItems ();
-			list[MenuListContainer.Actions].Add (new MenuItem ("Open", Icon, (o, a) => OpenVolume ()));
+			list[MenuListContainer.Actions].Add (new MenuItem ("Open", Icon, (o, a) => Open ()));
 			if (Mnt.CanEject () || Mnt.CanUnmount) {
 				string removeLabel = (Mnt.CanEject ()) ? "Eject" : "Unmount";
 				list[MenuListContainer.Actions].Add (new MenuItem (removeLabel, "media-eject", (o, a) => UnMount ()));

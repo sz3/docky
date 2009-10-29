@@ -199,7 +199,7 @@ namespace Trash
 					TrashMonitor.Changed -= HandleChanged;
 					
 					DockServices.System.RunOnMainThread (() => {
-						DeleteContents (OwnedFile);
+						OwnedFile.Delete_Recurse ();
 					});
 					
 					// eneble events again
@@ -214,26 +214,6 @@ namespace Trash
 			};
 			
 			md.Show ();
-		}
-
-		void DeleteContents (File file)
-		{
-			FileEnumerator enumerator = file.EnumerateChildren ("standard::type,standard::name,access::can-delete", FileQueryInfoFlags.NofollowSymlinks, null);
-			
-			if (enumerator == null)
-				return;
-			
-			FileInfo info;
-			
-			while ((info = enumerator.NextFile ()) != null) {
-				File child = file.GetChild (info.Name);
-
-				if (info.FileType == FileType.Directory)
-					DeleteContents (child);
-
-				if (info.GetAttributeBoolean ("access::can-delete"))
-					child.Delete (null);
-			}
 		}
 	}
 }
