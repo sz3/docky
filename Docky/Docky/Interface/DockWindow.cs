@@ -266,6 +266,17 @@ namespace Docky.Interface
 			}
 		}
 		
+		internal AbstractDockItem RightMostItem {
+			get {
+				return Items
+					.Where (adi => !(adi is INonPersistedItem) && DrawValues.ContainsKey (adi))
+					.Where (adi => (VerticalDock ? DrawValues[adi].Center.Y - LocalCursor.Y : DrawValues[adi].Center.X - LocalCursor.X) > 0)
+					.OrderBy (adi => Math.Abs (VerticalDock ? DrawValues[adi].Center.Y - LocalCursor.Y : DrawValues[adi].Center.X - LocalCursor.X))
+					.DefaultIfEmpty (null)
+					.FirstOrDefault ();
+			}
+		}
+		
 		internal AbstractDockItemProvider HoveredProvider {
 			get {
 				if (!DockHovered)

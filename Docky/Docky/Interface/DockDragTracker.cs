@@ -207,7 +207,13 @@ namespace Docky.Interface
 				drop_accepted = item.AcceptDrop (drag_data);
 			}
 			
-			int newPosition = Owner.ClosestItem.Position;
+			AbstractDockItem rightMost = Owner.RightMostItem;
+			int newPosition;
+			
+			if (rightMost != null)
+				newPosition = rightMost.Position;
+			else
+				newPosition = 0;
 			
 			if (!drop_accepted) {
 				foreach (string s in drag_data) {
