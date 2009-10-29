@@ -256,26 +256,24 @@ namespace Docky.Interface
 			}
 		}
 		
+		internal AbstractDockItem ClosestItem {
+			get {
+				return Items
+					.Where (adi => !(adi is INonPersistedItem) && DrawValues.ContainsKey (adi))
+					.OrderBy (adi => Math.Abs (VerticalDock ? DrawValues[adi].Center.Y - LocalCursor.Y : DrawValues[adi].Center.X - LocalCursor.X))
+					.DefaultIfEmpty (null)
+					.FirstOrDefault ();
+			}
+		}
+		
 		internal AbstractDockItemProvider HoveredProvider {
 			get {
 				if (!DockHovered)
 					return null;
 				
-				if (HoveredItem == null) {
-					AbstractDockItem almost_hovered;
-					
-					almost_hovered = Items.Where (adi => !(adi is INonPersistedItem) && DrawValues.ContainsKey (adi))
-						.OrderBy (adi => Math.Abs (VerticalDock ? DrawValues[adi].Center.Y - LocalCursor.Y : DrawValues[adi].Center.X - LocalCursor.X))
-						.DefaultIfEmpty (null)
-						.FirstOrDefault ();
-					
-					if (almost_hovered != null && almost_hovered.Owner != null) {
-						return almost_hovered.Owner;
-					}
-				}
-				
-				if (HoveredItem != null && HoveredItem.Owner != null) {
-					return HoveredItem.Owner;
+				AbstractDockItem closest = HoveredItem ?? ClosestItem;
+				if (closest != null && closest.Owner != null) {
+					return closest.Owner;
 				}
 				
 				return Preferences.DefaultProvider;

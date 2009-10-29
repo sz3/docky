@@ -202,18 +202,23 @@ namespace Docky.Items
 			return true;
 		}
 
-		protected override bool OnAcceptDrop (string uri)
+		protected override AbstractDockItem OnAcceptDrop (string uri)
 		{
-			return InsertItem (uri);
+			return Insert (uri);
 		}
 		
 		public bool InsertItem (string uri)
+		{
+			return Insert (uri) != null;
+		}
+		
+		AbstractDockItem Insert (string uri)
 		{
 			if (uri == null)
 				throw new ArgumentNullException ("uri");
 			
 			if (items.ContainsKey (uri))
-				return false;
+				return null;
 			
 			AbstractDockItem item;
 			
@@ -228,7 +233,7 @@ namespace Docky.Items
 			}
 			
 			if (item == null)
-				return false;
+				return null;
 			
 			items[uri] = item;
 			
@@ -236,7 +241,7 @@ namespace Docky.Items
 			Items = InternalItems;
 			UpdateTransientItems ();
 			
-			return true;
+			return item;
 		}
 		
 		public void PinToDock (ApplicationDockItem item)

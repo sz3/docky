@@ -207,6 +207,8 @@ namespace Docky.Interface
 				drop_accepted = item.AcceptDrop (drag_data);
 			}
 			
+			int newPosition = Owner.ClosestItem.Position;
+			
 			if (!drop_accepted) {
 				foreach (string s in drag_data) {
 					AbstractDockItemProvider provider;
@@ -219,7 +221,7 @@ namespace Docky.Interface
 						continue;
 					}
 					
-					drop_accepted = drop_accepted || provider.AcceptDrop (s);
+					drop_accepted = drop_accepted || provider.AcceptDrop (s, newPosition);
 					
 					if (FileApplicationProvider.WindowManager != null)
 						FileApplicationProvider.WindowManager.UpdateTransientItems ();

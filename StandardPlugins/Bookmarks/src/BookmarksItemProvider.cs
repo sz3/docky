@@ -153,13 +153,13 @@ namespace Bookmarks
 			return System.IO.Directory.Exists (new Uri (uri).LocalPath);
 		}
 
-		protected override bool OnAcceptDrop (string uri)
+		protected override AbstractDockItem OnAcceptDrop (string uri)
 		{
 			File tempFile = FileFactory.NewForPath (System.IO.Path.GetTempFileName ());
 			BookmarkDockItem bookmark = BookmarkDockItem.NewFromUri (uri, null);
 			
 			if (!System.IO.Directory.Exists (new Uri (uri).LocalPath) || !bookmark.OwnedFile.Exists)
-				return false;
+				return null;
 			
 			using (DataInputStream reader = new DataInputStream (BookmarksFile.Read (null))) {
 				using (DataOutputStream writer = new DataOutputStream (tempFile.AppendTo (FileCreateFlags.None, null))) {
@@ -176,7 +176,7 @@ namespace Bookmarks
 			if (tempFile.Exists)
 				tempFile.Move (BookmarksFile, FileCopyFlags.Overwrite, null, null);
 			
-			return true;
+			return bookmark;
 		}
 		
 		public override bool ItemCanBeRemoved (AbstractDockItem item)

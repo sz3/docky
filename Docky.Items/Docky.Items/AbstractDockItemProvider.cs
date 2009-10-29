@@ -47,6 +47,12 @@ namespace Docky.Items
 				IEnumerable<AbstractDockItem> added = value.Where (adi => !items.Contains (adi));
 				IEnumerable<AbstractDockItem> removed = items.Where (adi => !value.Contains (adi));
 				
+				int position = items.Any () ? items.Max (adi => adi.Position) + 1 : 0;
+				foreach (AbstractDockItem item in added) {
+					item.Position = position;
+					position++;
+				}
+				
 				items = value;
 				foreach (AbstractDockItem item in items)
 					item.Owner = this;
@@ -76,20 +82,29 @@ namespace Docky.Items
 			return false;
 		}
 		
-		public bool AcceptDrop (string uri)
+		public bool AcceptDrop (string uri, int position)
 		{
+			AbstractDockItem newItem = null;
 			try {
-				return OnAcceptDrop (uri);
+				newItem = OnAcceptDrop (uri);
 			} catch (Exception e) {
 				Log<AbstractDockItem>.Error (e.Message);
 				Log<AbstractDockItemProvider>.Debug (e.StackTrace);
 			}
-			return false;
+			
+			if (newItem != null) {
+				foreach (AbstractDockItem item in Items.Where (adi => adi.Position >= position)) {
+					item.Position++;
+				}
+				newItem.Position = position;
+			}
+			
+			return newItem != null;
 		}
 		
-		protected virtual bool OnAcceptDrop (string uri)
+		protected virtual AbstractDockItem OnAcceptDrop (string uri)
 		{
-			return false;
+			return null;
 		}
 		
 		public virtual bool ItemCanBeRemoved (AbstractDockItem item)

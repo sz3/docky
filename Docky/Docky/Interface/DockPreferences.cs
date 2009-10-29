@@ -487,8 +487,6 @@ namespace Docky.Interface
 				DefaultProvider.InsertItem (launcher);
 			}
 			
-			DefaultProvider.ItemsChanged += DefaultProviderItemsChanged;
-			
 			foreach (string providerName in Plugins) {
 				foreach (AbstractDockItemProvider provider in PluginManager.ItemProviders) {
 					if (provider.Name == providerName) {
@@ -505,19 +503,6 @@ namespace Docky.Interface
 			}
 			
 			UpdateSortList ();
-		}
-
-		void DefaultProviderItemsChanged (object sender, ItemsChangedArgs e)
-		{
-			Launchers = DefaultProvider.Uris;
-			
-			// remove item from sort list
-			foreach (AbstractDockItem removeItem in e.RemovedItems)
-				SortList = SortList.Where (s => s != removeItem.UniqueID ());
-			
-			// by definition, we got here first since we hooked up this event before anyone else
-			// could get ahold of this. therefor we get our event evoked first.
-			SortProviderOnList (DefaultProvider, SortList.ToList ());
 		}
 		
 		void SortProviderOnList (AbstractDockItemProvider provider, List<string> sortList)
