@@ -262,19 +262,12 @@ namespace Docky.Interface
 					return null;
 				
 				if (HoveredItem == null) {
-					AbstractDockItem almost_hovered = null;
-					foreach (AbstractDockItem item in Items) {
-						if (item is INonPersistedItem || !DrawValues.ContainsKey (item))
-							continue;
-						
-						Gdk.Rectangle rect = DrawValues[item].HoverArea;
-						rect.Inflate (IconSize, IconSize);
-						
-						if (rect.Contains (LocalCursor)) {
-							almost_hovered = item;
-							break;
-						}
-					}
+					AbstractDockItem almost_hovered;
+					
+					almost_hovered = Items.Where (adi => !(adi is INonPersistedItem) && DrawValues.ContainsKey (adi))
+						.OrderBy (adi => Math.Abs (VerticalDock ? DrawValues[adi].Center.Y - LocalCursor.Y : DrawValues[adi].Center.X - LocalCursor.X))
+						.DefaultIfEmpty (null)
+						.FirstOrDefault ();
 					
 					if (almost_hovered != null && almost_hovered.Owner != null) {
 						return almost_hovered.Owner;
