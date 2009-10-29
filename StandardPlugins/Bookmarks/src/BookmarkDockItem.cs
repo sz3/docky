@@ -62,6 +62,22 @@ namespace Bookmarks
 			});
 		}
 		
+		public override bool CanAcceptDrop (IEnumerable<string> uris)
+		{
+			return true;
+		}
+
+		public override bool AcceptDrop (IEnumerable<string> uris)
+		{
+			bool retVal = false;
+			OwnedFile.MountWithActionAndFallback (() => {
+				retVal = base.AcceptDrop (uris);
+			}, () => {
+				retVal = base.AcceptDrop (uris);
+			});
+			return retVal;
+		}
+		
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
 			if (button == 1) {
