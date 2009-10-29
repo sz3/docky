@@ -83,6 +83,7 @@ namespace GMail
 				return;
 
 			GMailDockItem item = new GMailDockItem (label);
+			item.Owner = this;
 			
 			items.Add (label, item);
 			visible.Add (item, item.Visible);
@@ -114,7 +115,8 @@ namespace GMail
 					RemoveItem (label);
 
 			foreach (string label in GMailPreferences.Labels)
-				AddItem (label);
+				if (!keys.Contains (label))
+					AddItem (label);
 		}
 		
 		public override void AddedToDock ()
