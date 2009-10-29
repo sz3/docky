@@ -70,33 +70,31 @@ namespace Docky.Services
 			return Math.Min (Math.Max (t, MinNotifyShow), MaxNotifyShow);
 		}
 
-		public static void Notify (string title, string message, string icon)
-		{
-			
+		public static LibNotify.Notification Notify (string title, string message, string icon)
+		{	
 			if (ServerIsNotifyOSD ()) {
-				Notify (title, message, icon, Screen.Default, 0, 0);
-				return;
+				return Notify (title, message, icon, Screen.Default, 0, 0);
 			}
 			
-			// if we aren't using notify-osd, show a status icon, then after a short delay show the note
+			Screen screen = Screen.Default;
+			int x = 0, y = 0;
+			
+			// if we aren't using notify-osd, show a status icon
 			DockServices.System.RunOnMainThread (() => {
-				int x = 0, y = 0;
-				Screen screen = Screen.Default;
-				
 				statusIcon.Visible = true;
-				
-				Rectangle area;
-				Orientation orientation;
-	
-				statusIcon.GetGeometry (out screen, out area, out orientation);
-				x = area.X + area.Width / 2;
-				y = area.Y + area.Height - 5;
-				
-				Notify (title, message, icon, screen, x, y);
-			}, 2000); //2 seconds
+			});
+			
+			Rectangle area;
+			Orientation orientation;
+
+			statusIcon.GetGeometry (out screen, out area, out orientation);
+			x = area.X + area.Width / 2;
+			y = area.Y + area.Height - 5;
+			
+			return Notify (title, message, icon, screen, x, y);
 		}
 		
-		static void Notify (string title, string message, string icon, Screen screen, int x, int y)
+		static LibNotify.Notification Notify (string title, string message, string icon, Screen screen, int x, int y)
 		{
 			LibNotify.Notification notify = ToNotify (title, message, icon);
 			notify.SetGeometryHints (screen, x, y);
@@ -105,6 +103,8 @@ namespace Docky.Services
 			notify.Closed += delegate {
 				DockServices.System.RunOnMainThread (() => statusIcon.Visible = false );
 			};
+			
+			return notify;
 		}
 		
 		static bool SupportsCapability (NotificationCapability capability)

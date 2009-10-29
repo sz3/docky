@@ -19,6 +19,8 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
+using Notifications;
+
 namespace Docky.Services.Logging
 {
 	
@@ -78,14 +80,14 @@ namespace Docky.Services.Logging
 			}
 		}
 		
-		public static void SendNote (string sender, string icon, string msg, params object[] args)
+		public static Notification SendNote (string sender, string icon, string msg, params object[] args)
 		{			
 			string title = sender;
 			
 			if (string.IsNullOrEmpty (sender))
 				title = "Docky";
 			
-			NotificationService.Notify (title, string.Format (msg, args), icon);
+			return NotificationService.Notify (title, string.Format (msg, args), icon);
 		}
 	}
 }

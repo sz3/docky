@@ -33,5 +33,102 @@ namespace Docky.Services
 			FileInfo info = file.QueryInfo ("standard::icon", FileQueryInfoFlags.None, null);
 			return info.Icon;
 		}
+		
+		// This is the recursive equivalent to GLib.File.Delete ()
+		public static void Delete_Recurse (this GLib.File file)
+		{
+			FileEnumerator enumerator = file.EnumerateChildren ("standard::type,standard::name,access::can-delete", FileQueryInfoFlags.NofollowSymlinks, null);
+			
+			if (enumerator == null)
+				return;
+			
+			FileInfo info;
+			
+			while ((info = enumerator.NextFile ()) != null) {
+				File child = file.GetChild (info.Name);
+
+				if (info.FileType == FileType.Directory)
+					Delete_Recurse (child);
+
+				if (info.GetAttributeBoolean ("access::can-delete"))
+					child.Delete (null);
+			}
+		}
+		
+		// This is the recursive equivalent of GLib.File.Copy ()
+		public static void Copy_Recurse (this GLib.File source, GLib.File dest, FileCopyFlags flags, FileProgressCallback progress_cb)
+		{
+			long totalBytes = source.GetSize ();
+			long copiedBytes = 0;
+			
+			Recursive_Copy (source, dest, ref copiedBytes, totalBytes, progress_cb);
+		}
+		
+		static void Recursive_Copy (GLib.File source, GLib.File dest, ref long copiedBytes, long totalBytes, FileProgressCallback progress_cb)
+		{
+			FileInfo fileInfo = source.QueryInfo ("standard::type", FileQueryInfoFlags.NofollowSymlinks, null);
+			
+			if (fileInfo.FileType != FileType.Directory) {
+				source.Copy (dest, FileCopyFlags.AllMetadata | FileCopyFlags.NofollowSymlinks, null, (current, total) => {
+					progress_cb.Invoke (current, totalBytes);
+				});
+				return;
+			}
+	
+			FileEnumerator enumerator = source.EnumerateChildren ("standard::type,standard::name,standard::size", FileQueryInfoFlags.NofollowSymlinks, null);
+			
+			if (enumerator == null)
+				return;
+			
+			FileInfo info;
+			
+			while ((info = enumerator.NextFile ()) != null) {
+				File child = source.GetChild (info.Name);
+
+				if (info.FileType == FileType.Directory) {
+					// copy all of the children
+					Recursive_Copy (child, dest.GetChild (info.Name), ref copiedBytes, totalBytes, progress_cb);
+				} else {
+					// first create the directory at the destination if it doesn't exist
+					if (!dest.Exists)
+						dest.MakeDirectoryWithParents (null);
+					// this looks crazy making variables here, assigning in the delegate, then reassigning to
+					// copiedBytes, but c# won't let me use out or ref vars in a delegate func.
+					long copied = copiedBytes;
+					// copy
+					child.Copy (dest.GetChild (info.Name), FileCopyFlags.AllMetadata | FileCopyFlags.NofollowSymlinks, null, (current, total) => {
+						progress_cb.Invoke (copied + current, totalBytes);
+					});
+					copiedBytes += info.Size;
+				}
+			}
+		}
+		
+		// will recurse and get the total size in bytes
+		public static long GetSize(this GLib.File file)
+		{
+			FileInfo fileInfo = file.QueryInfo ("standard::type,standard::size", FileQueryInfoFlags.NofollowSymlinks, null);
+			
+			if (fileInfo.FileType != FileType.Directory)
+				return fileInfo.Size;
+				
+			long size = 0;
+			FileEnumerator enumerator = file.EnumerateChildren ("standard::type,standard::name,standard::size", FileQueryInfoFlags.NofollowSymlinks, null);
+			
+			if (enumerator == null)
+				return 0;
+			
+			FileInfo info;
+			
+			while ((info = enumerator.NextFile ()) != null) {
+				File child = file.GetChild (info.Name);
+				
+				if (info.FileType == FileType.Directory)
+					size += GetSize (child);
+				else
+					size += info.Size;
+			}
+			return size;
+		}
 	}
 }

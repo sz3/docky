@@ -22,6 +22,7 @@ using System.Linq;
 using System.Text;
 
 using GLib;
+using Notifications;
 
 using Docky.Menus;
 using Docky.Services;
@@ -94,13 +95,45 @@ namespace Docky.Items
 
 		public override bool AcceptDrop (IEnumerable<string> uris)
 		{
+			string FSID_att_str = "id::filesystem";
+			
 			foreach (string uri in uris) {
 				try {
 					File file = FileFactory.NewForUri (uri);
 					if (!file.Exists)
 						continue;
+					
+					string ownedFSID = OwnedFile.QueryInfo (FSID_att_str, FileQueryInfoFlags.NofollowSymlinks, null).GetAttributeAsString (FSID_att_str);
+					string destFSID = file.QueryInfo (FSID_att_str, FileQueryInfoFlags.NofollowSymlinks, null).GetAttributeAsString (FSID_att_str);
+					
 					string nameAfterMove = NewFileName (OwnedFile, file);
-					file.Move (OwnedFile.GetChild (nameAfterMove), FileCopyFlags.NofollowSymlinks | FileCopyFlags.AllMetadata, null, null);
+					DockServices.System.RunOnThread (()=> {
+						Notification note;
+						bool moving = true;
+						long cur = 0, tot = 10;
+						
+						note = Docky.Services.Log.Notify (string.Format ("Moving {0}", file.Basename), DockServices.Drawing.IconFromGIcon (file.Icon ()), "{0}% Complete.", cur / tot);
+						GLib.Timeout.Add (250, () => {
+							note.Body = string.Format ("{0}% Complete.", string.Format ("{0:00.0}", ((float) Math.Min (cur, tot) / tot) * 100));
+							return moving;
+						});
+						
+						// check the filesystem IDs, if they are the same, we move, otherwise we copy.
+						if (ownedFSID == destFSID) {
+							file.Move (OwnedFile.GetChild (nameAfterMove), FileCopyFlags.NofollowSymlinks | FileCopyFlags.AllMetadata | FileCopyFlags.NoFallbackForMove, null, (current, total) => {
+								cur = current;
+								tot = total;
+							});
+						} else {
+							file.Copy_Recurse (OwnedFile.GetChild (nameAfterMove), 0, (current, total) => {
+								cur = current;
+								tot = total;
+							});
+						}
+						
+						moving = false;
+						note.Body = "100% Complete.";
+					});
 				} catch {
 					continue;
 				}
