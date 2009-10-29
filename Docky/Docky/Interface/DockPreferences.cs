@@ -704,5 +704,14 @@ namespace Docky.Interface
 			
 			SyncPlugins ();
 		}
+		
+		public override void Dispose ()
+		{
+			SyncPlugins ();
+			SyncPreferences ();
+			UpdateSortList ();
+			
+			base.Dispose ();
+		}
 	}
 }

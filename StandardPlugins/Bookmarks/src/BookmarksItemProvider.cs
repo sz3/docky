@@ -173,6 +173,9 @@ namespace Bookmarks
 				}
 			}
 			
+			items.Add (bookmark);
+			Items = InnerItems;
+			
 			if (tempFile.Exists)
 				tempFile.Move (BookmarksFile, FileCopyFlags.Overwrite, null, null);
 			

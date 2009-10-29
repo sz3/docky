@@ -99,6 +99,8 @@ namespace Docky.Items
 				newItem.Position = position;
 			}
 			
+			OnItemsChanged (null, null);
+			
 			return newItem != null;
 		}
 		
