@@ -130,5 +130,20 @@ namespace Docky.Services
 			}
 			return size;
 		}
+		
+		public static string NewLineString (this GLib.DataInputStream stream)
+		{
+			switch (stream.NewlineType) {
+			case DataStreamNewlineType.Cr:
+				return "\r";
+			case DataStreamNewlineType.Lf:
+				return "\n";
+			case DataStreamNewlineType.CrLf:
+				return "\r\n";
+			// this is a safe default because \n is the common line ending on *nix
+			default:
+				return "\n";
+			}
+		}
 	}
 }

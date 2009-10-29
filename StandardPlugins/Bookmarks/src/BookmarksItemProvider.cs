@@ -66,9 +66,7 @@ namespace Bookmarks
 		File BookmarksFile {
 			get {
 				if (bookmarks_file == null) {
-					string path = System.IO.Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), ".gtk-bookmarks");
-				
-					bookmarks_file = FileFactory.NewForPath (path);
+					bookmarks_file = FileFactory.NewForPath (Environment.GetFolderPath (Environment.SpecialFolder.Personal)).GetChild (".gtk-bookmarks");
 				}
 				return bookmarks_file;
 			}
@@ -120,7 +118,7 @@ namespace Bookmarks
 						BookmarkDockItem item = old.Cast<BookmarkDockItem> ().First (fdi => fdi.Uri == uri);
 						old.Remove (item);
 						items.Add (item);
-					} else if (!bookmark.Exists) {
+					} else if (bookmark.StringUri ().StartsWith ("file://") && !bookmark.Exists) {
 						Log<BookmarksItemProvider>.Warn ("Bookmark path '{0}' does not exist, please fix the bookmarks file",
 						    bookmark.StringUri ());
 						continue;
@@ -158,7 +156,8 @@ namespace Bookmarks
 			File tempFile = FileFactory.NewForPath (System.IO.Path.GetTempFileName ());
 			BookmarkDockItem bookmark = BookmarkDockItem.NewFromUri (uri, null);
 			
-			if (!System.IO.Directory.Exists (new Uri (uri).LocalPath) || !bookmark.OwnedFile.Exists)
+			// make sure the bookmarked location actually exists
+			if (!bookmark.OwnedFile.Exists)
 				return null;
 			
 			using (DataInputStream reader = new DataInputStream (BookmarksFile.Read (null))) {
@@ -166,10 +165,10 @@ namespace Bookmarks
 					string line;
 					ulong length;
 					while ((line = reader.ReadLine (out length, null)) != null) {
-						writer.PutString (string.Format ("{0}\n", line), null);
+						writer.PutString (string.Format ("{0}{1}", line, reader.NewLineString ()), null);
 					}
 					
-					writer.PutString (string.Format ("{0}\n", bookmark.Uri), null);
+					writer.PutString (string.Format ("{0}{1}", bookmark.Uri, reader.NewLineString ()), null);
 				}
 			}
 			
@@ -205,7 +204,7 @@ namespace Bookmarks
 					ulong length;
 					while ((line = reader.ReadLine (out length, null)) != null) {
 						if (!line.Contains (bookmark.Uri))
-							writer.PutString (string.Format ("{0}\n", line), null);
+							writer.PutString (string.Format ("{0}{1}", line, reader.NewLineString ()), null);
 						else {
 							items.Remove (bookmark);
 							Items = InnerItems;
@@ -232,6 +231,8 @@ namespace Bookmarks
 			Items = Enumerable.Empty<AbstractDockItem> ();
 			foreach (AbstractDockItem item in items)
 				item.Dispose ();
+			computer.Dispose ();
+			home.Dispose();
 		}
 		
 		#endregion
