@@ -299,8 +299,15 @@ namespace Docky.Interface
 				PopulateTreeViews ();
 			};
 			
+			DefaultProvider.ItemsChanged += HandleDefaultProviderItemsChanged;
+			
 			ShowAll ();
 	
+		}
+
+		void HandleDefaultProviderItemsChanged (object sender, ItemsChangedArgs e)
+		{
+			Launchers = DefaultProvider.Uris;
 		}
 
 		void HandleInactiveViewDragDataReceived (object o, DragDataReceivedArgs args)
