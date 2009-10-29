@@ -109,29 +109,31 @@ namespace Docky.Items
 					string nameAfterMove = NewFileName (OwnedFile, file);
 					DockServices.System.RunOnThread (()=> {
 						Notification note;
-						bool moving = true;
+						bool performing = true;
 						long cur = 0, tot = 10;
 						
-						note = Docky.Services.Log.Notify (string.Format ("Moving {0}", file.Basename), DockServices.Drawing.IconFromGIcon (file.Icon ()), "{0}% Complete.", cur / tot);
+						note = Docky.Services.Log.Notify ("", DockServices.Drawing.IconFromGIcon (file.Icon ()), "{0}% Complete.", cur / tot);
 						GLib.Timeout.Add (250, () => {
 							note.Body = string.Format ("{0}% Complete.", string.Format ("{0:00.0}", ((float) Math.Min (cur, tot) / tot) * 100));
-							return moving;
+							return performing;
 						});
 						
 						// check the filesystem IDs, if they are the same, we move, otherwise we copy.
 						if (ownedFSID == destFSID) {
+							note.Summary = string.Format ("Moving {0}", file.Basename);
 							file.Move (OwnedFile.GetChild (nameAfterMove), FileCopyFlags.NofollowSymlinks | FileCopyFlags.AllMetadata | FileCopyFlags.NoFallbackForMove, null, (current, total) => {
 								cur = current;
 								tot = total;
 							});
 						} else {
+							note.Summary = string.Format ("Copying {0}", file.Basename);
 							file.Copy_Recurse (OwnedFile.GetChild (nameAfterMove), 0, (current, total) => {
 								cur = current;
 								tot = total;
 							});
 						}
 						
-						moving = false;
+						performing = false;
 						note.Body = "100% Complete.";
 					});
 				} catch {
@@ -143,15 +145,24 @@ namespace Docky.Items
 		
 		string NewFileName (File dest, File fileToMove)
 		{
-			string name = fileToMove.Basename;
+			string name, ext;
 			
-			int i = 1;
-			while (dest.GetChild (name).Exists) {
-				name = string.Format ("{0} ({1})", fileToMove.Basename, i);
-				i++;
+			if (fileToMove.Basename.Split ('.').Count() > 0) {
+				name = fileToMove.Basename.Split ('.').First ();
+				ext = fileToMove.Basename.Substring (fileToMove.Basename.IndexOf ('.'));
+			} else {
+				name = fileToMove.Basename;
+				ext = "";
 			}
-			
-			return name;
+			if (dest.GetChild (fileToMove.Basename).Exists) {
+				int i = 1;
+				while (dest.GetChild (string.Format ("{0} ({1}){2}", name, i, ext)).Exists) {
+					i++;
+				}
+				return string.Format ("{0} ({1}){2}", name, i, ext);
+			} else {
+				return fileToMove.Basename;
+			}
 		}
 		
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
