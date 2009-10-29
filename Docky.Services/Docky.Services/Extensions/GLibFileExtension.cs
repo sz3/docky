@@ -145,5 +145,20 @@ namespace Docky.Services
 				return "\n";
 			}
 		}
+		
+		public static void MountWithActionAndFallback (this GLib.File file, Action success, Action failed)
+		{
+			file.MountEnclosingVolume (0, null, null, (o, result) => {
+				// wait for the mount to finish
+				try {
+					if (file.MountEnclosingVolumeFinish (result))
+						success.Invoke ();
+				// an exception can be thrown here if we are trying to mount an already mounted file
+				// in that case, resort to the fallback
+				} catch (GLib.GException) {
+					failed.Invoke ();
+				}						
+			});
+		}
 	}
 }

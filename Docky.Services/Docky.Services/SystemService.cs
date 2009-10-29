@@ -233,17 +233,8 @@ namespace Docky.Services
 						continue;
 					}
 				}
-				f.MountEnclosingVolume (0, null, null, (o, args) => {
-					// wait for the mount to finish
-					try {
-						if (f.MountEnclosingVolumeFinish (args))
-							Launch (new [] {f});
-					// an exception can be thrown here if we are trying to mount an already mounted file
-					// in that case, just launch it.
-					} catch (GLib.GException) {
-						Launch (new [] {f});
-					}
-				});
+				// try to mount, if successful launch, otherwise (it's possibly already mounted) try to launch anyways
+				f.MountWithActionAndFallback (() => Launch (new [] {f}), () => Launch (new [] {f}));
 			}
 
 			if (noMountNeeded.Any ())
