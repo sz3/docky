@@ -330,19 +330,19 @@ namespace Docky.Items
 				int buffer = 12;
 				text_buffer = new DockySurface (textWidth + buffer, textHeight + buffer, model);
 				
-				using (Cairo.Context cr = new Cairo.Context (text_buffer.Internal)) {
-					cr.RoundedRectangle (.5, .5, text_buffer.Width - 1, text_buffer.Height - 1, buffer / 2);
-					cr.Color = new Cairo.Color (0, 0, 0, .8);
-					cr.FillPreserve ();
-					
-					cr.Color = new Cairo.Color (1, 1, 1, .3);
-					cr.Stroke ();
-					
-					cr.MoveTo (buffer / 2, buffer / 2);
-					Pango.CairoHelper.LayoutPath (cr, layout);
-					cr.Color = new Cairo.Color (1, 1, 1);
-					cr.Fill ();
-				}
+				Cairo.Context cr = text_buffer.Context;
+				cr.RoundedRectangle (.5, .5, text_buffer.Width - 1, text_buffer.Height - 1, buffer / 2);
+				cr.Color = new Cairo.Color (0, 0, 0, .8);
+				cr.FillPreserve ();
+				
+				cr.Color = new Cairo.Color (1, 1, 1, .3);
+				cr.LineWidth = 1;
+				cr.Stroke ();
+				
+				cr.MoveTo (buffer / 2, buffer / 2);
+				Pango.CairoHelper.LayoutPath (cr, layout);
+				cr.Color = new Cairo.Color (1, 1, 1);
+				cr.Fill ();
 				
 				layout.Dispose ();
 			}
