@@ -52,7 +52,7 @@ namespace Bookmarks
 			Owner.RemoveItem (this);
 		}
 		
-		void Open ()
+		new void Open ()
 		{
 			base.Open ();
 			// refresh the icon, but wait a couple of seconds for a possible mount operation to finish
