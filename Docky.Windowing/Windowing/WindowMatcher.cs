@@ -166,7 +166,8 @@ namespace Docky.Windowing
 			if (!window_to_desktop_files.ContainsKey (window))
 				return new [] { window };
 			
-			string id = window_to_desktop_files [window].Default ("").FirstOrDefault ();
+			string id = window_to_desktop_files [window].FirstOrDefault ();
+			if (id == null) id = "";
 			
 			return window_to_desktop_files
 				.Where (kvp => kvp.Value.Contains (id))
@@ -181,7 +182,8 @@ namespace Docky.Windowing
 			if (WindowIsOpenOffice (window))
 				SetupWindow (window);
 			
-			string file = window_to_desktop_files[window].Default ("").FirstOrDefault ();
+			string file = window_to_desktop_files[window].FirstOrDefault ();
+			if (file == null) file = "";
 			file = file.EndsWith (".desktop") ? file : null;
 			
 			return file;
@@ -192,7 +194,9 @@ namespace Docky.Windowing
 			if (!WindowIsOpenOffice (window))
 				return true;
 			SetupWindow (window);
-			return window_to_desktop_files[window].Default ("").FirstOrDefault ().EndsWith (".desktop");
+			string win = window_to_desktop_files[window].FirstOrDefault ();
+			if (win == null) win = "";
+			return win.EndsWith (".desktop");
 		}
 		
 		bool WindowIsOpenOffice (Wnck.Window window)
