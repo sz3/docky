@@ -208,7 +208,7 @@ namespace Docky.Windowing
 		{
 			int pid = window.Pid;
 			if (pid <= 1) {
-				if (window.ClassGroup != null) {
+				if (window.ClassGroup != null && !string.IsNullOrEmpty (window.ClassGroup.ResClass)) {
 					yield return window.ClassGroup.ResClass;
 					yield break;
 				} else {
@@ -249,15 +249,18 @@ namespace Docky.Windowing
 				string cmd = command_line[0];
 				foreach (string s in SuffixStrings) {
 					if (!cmd.EndsWith (s))
-					    continue;
+						continue;
 					if (exec_to_desktop_files.ContainsKey (cmd.Remove (cmd.LastIndexOf (s), s.Length))) {
 						cmd = cmd.Remove (cmd.LastIndexOf (s), s.Length);
 						break;
 					}
 				}
 				if (exec_to_desktop_files.ContainsKey (cmd)) {
-					foreach (string s in exec_to_desktop_files[cmd])
+					foreach (string s in exec_to_desktop_files[cmd]) {
+						if (string.IsNullOrEmpty (s))
+							continue;
 						yield return s;
+					}
 				}
 				yield break;
 			}
