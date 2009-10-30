@@ -143,14 +143,18 @@ namespace Docky.Interface
 		
 		DateTime hidden_change_time;
 		DateTime dock_hovered_change_time;
+		DateTime painter_change_time;
 		DateTime render_time;
 		
 		IDockPreferences preferences;
-		DockySurface main_buffer, background_buffer, icon_buffer, normal_indicator_buffer, urgent_indicator_buffer;
+		DockySurface main_buffer, background_buffer, icon_buffer, painter_buffer;
+		DockySurface normal_indicator_buffer, urgent_indicator_buffer;
 		AbstractDockItem hoveredItem;
+		AbstractDockPainter painter;
 		
 		Gdk.Rectangle monitor_geo;
 		Gdk.Rectangle current_mask_area;
+		Gdk.Rectangle painter_area;
 		Gdk.Point window_position;
 		
 		double? zoom_in_buffer;
@@ -290,19 +294,17 @@ namespace Docky.Interface
 				return Preferences.DefaultProvider;
 			}
 		}
+		
+		internal IEnumerable<AbstractDockItemProvider> ItemProviders {
+			get { return Preferences.ItemProviders; }
+		}
 
-		AbstractDockPainter painter;
-		DateTime painter_change_time;
 		AbstractDockPainter Painter {
 			get { return painter; }
 			set {
 				painter = value;
 				painter_change_time = DateTime.UtcNow;
 			}
-		}
-		
-		internal IEnumerable<AbstractDockItemProvider> ItemProviders {
-			get { return Preferences.ItemProviders; }
 		}
 		
 		int IconSize {
@@ -405,6 +407,10 @@ namespace Docky.Interface
 				if (!DockHovered) {
 					zoom = 1 - zoom;
 				}
+				
+				// FIXME: Very harsh
+				if (Painter != null)
+					zoom = 0;
 				
 				if (rendering)
 					zoom_in_buffer = zoom;
@@ -796,6 +802,11 @@ namespace Docky.Interface
 				main_buffer = null;
 			}
 			
+			if (painter_buffer != null) {
+				painter_buffer.Dispose ();
+				painter_buffer = null;
+			}
+			
 			if (background_buffer != null) {
 				background_buffer.Dispose ();
 				background_buffer = null;
@@ -821,13 +832,14 @@ namespace Docky.Interface
 		#region Painters
 		void ShowPainter (AbstractDockItem owner, AbstractDockPainter painter)
 		{
-			if (Painter != null || owner == null || painter == null)
+			if (Painter != null || owner == null || painter == null || (!painter.SupportsVertical && VerticalDock))
 				return;
 			
 			Painter = painter;
 			Painter.HideRequest += HandlePainterHideRequest;
 			Painter.PaintNeeded += HandlePainterPaintNeeded;
 			
+			Painter.SetAllocation (new Gdk.Rectangle (0, 0, DockWidth - 100, DockHeight));
 			Painter.Shown ();
 		}
 		
@@ -1300,23 +1312,26 @@ namespace Docky.Interface
 			
 			DrawDockBackground (surface, dockArea);
 			
-			if (icon_buffer == null || icon_buffer.Width != surface.Width || icon_buffer.Height != surface.Height) {
-				if (icon_buffer != null)
-					icon_buffer.Dispose ();
-				icon_buffer = new DockySurface (surface.Width, surface.Height, surface);
-			}
 			
 			if (Painter == null) {
+			
+				if (icon_buffer == null || icon_buffer.Width != surface.Width || icon_buffer.Height != surface.Height) {
+					if (icon_buffer != null)
+						icon_buffer.Dispose ();
+					icon_buffer = new DockySurface (surface.Width, surface.Height, surface);
+				}
+				
 				icon_buffer.Clear ();
 				foreach (AbstractDockItem adi in Items) {
 					DrawItem (icon_buffer, dockArea, adi);
 				}
 			
 				icon_buffer.Internal.Show (surface.Context, 0, 0);
+			
 			} else {
-				
+				DrawPainter (surface, dockArea);
 			}
-				
+			
 			if (DockOpacity < 1)
 				SetDockOpacity (surface);
 			
@@ -1329,6 +1344,24 @@ namespace Docky.Interface
 			cursorArea.X += window_position.X;
 			cursorArea.Y += window_position.Y;
 			AutohideManager.SetCursorArea (cursorArea);
+		}
+		
+		void DrawPainter (DockySurface surface, Gdk.Rectangle dockArea)
+		{
+			if (painter_buffer == null || painter_buffer.Width != surface.Width || painter_buffer.Height != surface.Height) {
+				if (painter_buffer != null)
+					painter_buffer.Dispose ();
+				painter_buffer = new DockySurface (surface.Width, surface.Height, surface);
+			}
+			
+			painter_buffer.Clear ();
+			DockySurface painterSurface = Painter.GetSurface (surface);
+			
+			painterSurface.Internal.Show (painter_buffer.Context, 
+				dockArea.X + (dockArea.Width - painterSurface.Width) / 2,
+				dockArea.Y + (dockArea.Height - painterSurface.Height) / 2);
+			
+			painter_buffer.Internal.Show (surface.Context, 0, 0);
 		}
 		
 		void SetDockOpacity (DockySurface surface)
