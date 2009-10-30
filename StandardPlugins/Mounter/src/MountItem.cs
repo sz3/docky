@@ -82,7 +82,6 @@ namespace Mounter
 		
 		public override MenuList GetMenuItems ()
 		{
-			MenuList list = base.GetMenuItems ();
 			list[MenuListContainer.Actions].Add (new MenuItem ("Open", Icon, (o, a) => Open ()));
 			if (Mnt.CanEject () || Mnt.CanUnmount) {
 				string removeLabel = (Mnt.CanEject ()) ? "Eject" : "Unmount";
