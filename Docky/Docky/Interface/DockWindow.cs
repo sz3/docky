@@ -745,7 +745,7 @@ namespace Docky.Interface
 
 		protected override bool OnScrollEvent (EventScroll evnt)
 		{
-			if (Painter) {
+			if (Painter != null) {
 				
 			} else if (HoveredItem != null) {
 				HoveredItem.Scrolled (evnt.Direction, evnt.State);
