@@ -46,6 +46,7 @@
     <Compile Include="src\ClockDockItem.cs" />
     <Compile Include="src\ClockItemProvider.cs" />
     <Compile Include="src\ClockThemeSelector.cs" />
+    <Compile Include="src\CalendarPainter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

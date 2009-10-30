@@ -8,7 +8,8 @@ ASSEMBLY = Clock
 FILES = \
 	src/ClockItemProvider.cs \
 	src/ClockDockItem.cs \
-	src/ClockThemeSelector.cs
+	src/ClockThemeSelector.cs \
+	src/CalendarPainter.cs
 
 RESOURCES = \
 	Resources/Clock.addin.xml

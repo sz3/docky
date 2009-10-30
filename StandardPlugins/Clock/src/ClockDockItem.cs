@@ -266,6 +266,13 @@ namespace Clock
 			RenderFileOntoContext (cr, System.IO.Path.Combine (ThemePath, "clock-frame.svg"), radius * 2);
 		}
 		
+		protected virtual ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
+		{
+			CalendarPainter painter = new CalendarPainter (this);
+			ShowPainter (painter);
+			return ClickAnimation.None;
+		}
+		
 		public void SetTheme (string theme)
 		{
 			if (string.IsNullOrEmpty (theme))
