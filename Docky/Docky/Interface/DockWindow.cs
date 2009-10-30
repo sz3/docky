@@ -160,6 +160,7 @@ namespace Docky.Interface
 		double? zoom_in_buffer;
 		bool rendering;
 		bool update_screen_regions;
+		bool repaint_painter;
 		
 		uint animation_timer;
 		
@@ -703,7 +704,12 @@ namespace Docky.Interface
 				return base.OnButtonPressEvent (evnt);
 			
 			if (Painter != null) {
+				int x, y;
 				
+				x = LocalCursor.X - painter_area.X;
+				y = LocalCursor.Y - painter_area.Y;
+				
+				Painter.ButtonPressed (x, y, evnt.State);
 			} else if (HoveredItem != null && evnt.Button == 3) {
 				MenuList list;
 				
@@ -732,11 +738,16 @@ namespace Docky.Interface
 			if (InternalDragActive)
 				return base.OnButtonPressEvent (evnt);
 			
-			double x, y;
 			
 			if (Painter != null) {
+				int x, y;
 				
+				x = LocalCursor.X - painter_area.X;
+				y = LocalCursor.Y - painter_area.Y;
+				
+				Painter.ButtonReleased (x, y, evnt.State);
 			} else if (HoveredItem != null) {
+				double x, y;
 				Gdk.Rectangle region = DrawRegionForItem (HoveredItem);
 					
 				x = ((Cursor.X + window_position.X) - region.X) / (double) region.Height;
@@ -839,6 +850,7 @@ namespace Docky.Interface
 			Painter.HideRequest += HandlePainterHideRequest;
 			Painter.PaintNeeded += HandlePainterPaintNeeded;
 			
+			repaint_painter = true;
 			Painter.SetAllocation (new Gdk.Rectangle (0, 0, DockWidth - 100, DockHeight));
 			Painter.Shown ();
 		}
@@ -848,15 +860,16 @@ namespace Docky.Interface
 			if (Painter == null)
 				return;
 			
-			Painter.HideRequest += HandlePainterHideRequest;
-			Painter.PaintNeeded += HandlePainterPaintNeeded;
+			Painter.HideRequest -= HandlePainterHideRequest;
+			Painter.PaintNeeded -= HandlePainterPaintNeeded;
 			
-			Painter = null;
 			Painter.Hidden ();
+			Painter = null;
 		}
 		
 		void HandlePainterPaintNeeded (object sender, EventArgs e)
 		{
+			repaint_painter = true;
 			AnimatedDraw ();
 		}
 
@@ -1352,14 +1365,21 @@ namespace Docky.Interface
 				if (painter_buffer != null)
 					painter_buffer.Dispose ();
 				painter_buffer = new DockySurface (surface.Width, surface.Height, surface);
+				repaint_painter = true;
 			}
 			
-			painter_buffer.Clear ();
-			DockySurface painterSurface = Painter.GetSurface (surface);
+			if (repaint_painter) {
+				painter_buffer.Clear ();
+				DockySurface painterSurface = Painter.GetSurface (surface);
 			
-			painterSurface.Internal.Show (painter_buffer.Context, 
-				dockArea.X + (dockArea.Width - painterSurface.Width) / 2,
-				dockArea.Y + (dockArea.Height - painterSurface.Height) / 2);
+				painter_area = new Gdk.Rectangle (dockArea.X + (dockArea.Width - painterSurface.Width) / 2,
+					dockArea.Y + (dockArea.Height - painterSurface.Height) / 2,
+					painterSurface.Width,
+					painterSurface.Height);
+			
+				painterSurface.Internal.Show (painter_buffer.Context, painter_area.X, painter_area.Y);
+				repaint_painter = false;
+			}
 			
 			painter_buffer.Internal.Show (surface.Context, 0, 0);
 		}
