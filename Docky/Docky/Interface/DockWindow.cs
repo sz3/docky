@@ -507,6 +507,7 @@ namespace Docky.Interface
 		void ScreenSizeChanged (object sender, EventArgs e)
 		{
 			SetSizeRequest ();
+			Reposition ();
 		}
 
 		void HandleDockHoveredChanged (object sender, EventArgs e)
