@@ -37,6 +37,7 @@ namespace Clock
 	public class ClockDockItem : AbstractDockItem
 	{
 		int minute;
+		CalendarPainter painter;
 		
 		static IPreferences prefs = DockServices.Preferences.Get<ClockDockItem> ();
 		
@@ -104,6 +105,8 @@ namespace Clock
 		
 		public ClockDockItem ()
 		{
+			painter = new CalendarPainter (this);
+			
 			GLib.Timeout.Add (1000, ClockUpdateTimer);
 		}
 		
@@ -266,10 +269,10 @@ namespace Clock
 			RenderFileOntoContext (cr, System.IO.Path.Combine (ThemePath, "clock-frame.svg"), radius * 2);
 		}
 		
-		protected virtual ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
+		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
-			CalendarPainter painter = new CalendarPainter (this);
-			ShowPainter (painter);
+			if (button == 1)
+				ShowPainter (painter);
 			return ClickAnimation.None;
 		}
 		

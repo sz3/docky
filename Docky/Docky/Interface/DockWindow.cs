@@ -696,7 +696,9 @@ namespace Docky.Interface
 			if (InternalDragActive)
 				return base.OnButtonPressEvent (evnt);
 			
-			if (HoveredItem != null && evnt.Button == 3) {
+			if (Painter != null) {
+				
+			} else if (HoveredItem != null && evnt.Button == 3) {
 				MenuList list;
 				
 				if (HoveredItem.Owner != null)
@@ -725,7 +727,10 @@ namespace Docky.Interface
 				return base.OnButtonPressEvent (evnt);
 			
 			double x, y;
-			if (HoveredItem != null) {
+			
+			if (Painter != null) {
+				
+			} else if (HoveredItem != null) {
 				Gdk.Rectangle region = DrawRegionForItem (HoveredItem);
 					
 				x = ((Cursor.X + window_position.X) - region.X) / (double) region.Height;
@@ -740,7 +745,9 @@ namespace Docky.Interface
 
 		protected override bool OnScrollEvent (EventScroll evnt)
 		{
-			if (HoveredItem != null) {
+			if (Painter) {
+				
+			} else if (HoveredItem != null) {
 				HoveredItem.Scrolled (evnt.Direction, evnt.State);
 			}
 			
@@ -1299,13 +1306,17 @@ namespace Docky.Interface
 				icon_buffer = new DockySurface (surface.Width, surface.Height, surface);
 			}
 			
-			icon_buffer.Clear ();
-			foreach (AbstractDockItem adi in Items) {
-				DrawItem (icon_buffer, dockArea, adi);
+			if (Painter == null) {
+				icon_buffer.Clear ();
+				foreach (AbstractDockItem adi in Items) {
+					DrawItem (icon_buffer, dockArea, adi);
+				}
+			
+				icon_buffer.Internal.Show (surface.Context, 0, 0);
+			} else {
+				
 			}
-			
-			icon_buffer.Internal.Show (surface.Context, 0, 0);
-			
+				
 			if (DockOpacity < 1)
 				SetDockOpacity (surface);
 			
