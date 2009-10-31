@@ -62,8 +62,6 @@ namespace Docky.Interface
 				
 		double ZoomPercent { get; set; }
 		
-		int MonitorNumber { get; set; }
-		
 		bool SetName (string name);
 		
 		string GetName ();

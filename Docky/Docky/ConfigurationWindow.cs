@@ -49,9 +49,10 @@ namespace Docky
 				i++;
 			}
 			
-			for (int mon = 1; mon <= Screen.Default.NMonitors; mon++)
-				monitor_combo.AppendText ("Monitor " + mon.ToString ());
-			monitor_combo.Active = 0;
+			placement = new DockPlacementWidget (Docky.Controller.Docks);
+			placement.ActiveDockChanged += PlacementActiveDockChanged;
+			
+			dock_pacement_align.Add (placement);
 			
 			configuration_widget_notebook.RemovePage (0);
 			
@@ -59,31 +60,7 @@ namespace Docky
 				configuration_widget_notebook.Add (dock.PreferencesWidget);
 			}
 			
-			configuration_widget_notebook.Page = 
-				configuration_widget_notebook.PageNum (placement.ActiveDock.PreferencesWidget);
-			
 			ShowAll ();
-		}
-		
-		void UpdatePlacementWidget (int monitorNumber)
-		{
-			placement = new DockPlacementWidget (Docky.Controller.DocksForMonitor (monitorNumber));
-			placement.ActiveDockChanged += PlacementActiveDockChanged;
-			
-			dock_pacement_align.Add (placement);
-		
-			if (placement.ActiveDock != null)
-				configuration_widget_notebook.Page = 
-					configuration_widget_notebook.PageNum (placement.ActiveDock.PreferencesWidget);
-
-			ShowAll ();
-		}
-		
-		void UpdateButtons ()
-		{
-			add_button.Sensitive = (Docky.Controller.PositionsAvailableForDock (monitor_combo.Active).Count () -
-				Docky.Controller.DocksForMonitor (monitor_combo.Active).Count ()) > 0;
-			delete_button.Sensitive = Docky.Controller.Docks.Count () > 1;
 		}
 
 		void PlacementActiveDockChanged (object sender, EventArgs e)
@@ -109,36 +86,24 @@ namespace Docky
 		{
 			configuration_widget_notebook.Remove (placement.ActiveDock.PreferencesWidget);
 			Docky.Controller.DeleteDock (placement.ActiveDock);
-			placement.SetDocks (Docky.Controller.DocksForMonitor (monitor_combo.Active));
-			UpdateButtons ();
+			placement.SetDocks (Docky.Controller.Docks);
 		}
 
 		protected virtual void OnAddButtonClicked (object sender, System.EventArgs e)
 		{
-			Dock dock = Docky.Controller.CreateDock (monitor_combo.Active);
+			Dock dock = Docky.Controller.CreateDock ();
 			if (dock == null)
 				return;
 			
 			configuration_widget_notebook.Add (dock.PreferencesWidget);
-			placement.SetDocks (Docky.Controller.DocksForMonitor (monitor_combo.Active));
+			placement.SetDocks (Docky.Controller.Docks);
 			
 			placement.ActiveDock = dock;
-			
-			UpdateButtons ();
 		}
 
 		protected virtual void OnThemeComboChanged (object sender, System.EventArgs e)
 		{
 			Docky.Controller.DockTheme = theme_combo.ActiveText;
 		}
-		
-		protected virtual void OnMonitorComboChanged (object sender, System.EventArgs e)
-		{
-			if (placement != null)
-				dock_pacement_align.Remove (placement);
-			UpdatePlacementWidget (monitor_combo.Active);
-			UpdateButtons ();
-		}
-	
 	}
 }
