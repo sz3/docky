@@ -114,6 +114,11 @@ namespace Docky
 			Disable (AddinFromID (id));
 		}
 		
+		public static void Disable (AbstractDockItemProvider provider)
+		{
+			Disable (AddinIDFromProvider (provider));
+		}
+		
 		static void SetAddinEnabled (Addin addin, bool enabled)
 		{
 			if (addin != null)

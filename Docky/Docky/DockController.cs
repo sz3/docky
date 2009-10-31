@@ -25,6 +25,7 @@ using System.Text;
 using Gdk;
 using Gtk;
 
+using Docky.Items;
 using Docky.Interface;
 using Docky.Services;
 
@@ -111,6 +112,11 @@ namespace Docky
 			docks = new List<Dock> ();
 			prefs = DockServices.Preferences.Get<DockController> ();
 			CreateDocks ();
+			
+			GLib.Timeout.Add (500, delegate {
+				EnsurePluginState ();
+				return false;
+			});
 		}
 		
 		string FolderForTheme (string theme)
@@ -165,6 +171,8 @@ namespace Docky
 			dock.Preferences.FreeProviders ();
 			dock.Dispose ();
 			DockNames = DockNames.Where (s => s != dock.Preferences.GetName ());
+			
+			EnsurePluginState ();
 			return true;
 		}
 		
@@ -174,6 +182,15 @@ namespace Docky
 				DockPreferences dockPrefs = new DockPreferences (name);
 				Dock dock = new Dock (dockPrefs);
 				docks.Add (dock);
+			}
+		}
+		
+		void EnsurePluginState ()
+		{
+			foreach (AbstractDockItemProvider provider in PluginManager.ItemProviders) {
+				if (!docks.Any (d => d.Preferences.ItemProviders.Contains (provider))) {
+					PluginManager.Disable (provider);
+				}
 			}
 		}
 		#region IDisposable implementation

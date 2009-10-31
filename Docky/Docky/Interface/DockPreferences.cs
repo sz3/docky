@@ -299,6 +299,10 @@ namespace Docky.Interface
 				PopulateTreeViews ();
 			};
 			
+			Shown += delegate {
+				PopulateTreeViews ();
+			};
+			
 			DefaultProvider.ItemsChanged += HandleDefaultProviderItemsChanged;
 			
 			ShowAll ();
@@ -707,6 +711,10 @@ namespace Docky.Interface
 		public void FreeProviders ()
 		{
 			OnItemProvidersChanged (null, item_providers);
+			
+			foreach (AbstractDockItemProvider adip in item_providers.Where (adip => adip != DefaultProvider)) {
+				PluginManager.Disable (adip);
+			}
 			item_providers = new List<AbstractDockItemProvider> ();
 			
 			SyncPlugins ();
