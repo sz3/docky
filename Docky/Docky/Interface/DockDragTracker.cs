@@ -201,6 +201,8 @@ namespace Docky.Interface
 				drag_data_requested = false;
 				drag_is_desktop_file = drag_data.Any (d => d.EndsWith (".desktop"));
 				Owner.SetHoveredAcceptsDrop ();
+			} else {
+				Console.WriteLine ("WTF?");
 			}
 			
 			Gdk.Drag.Status (args.Context, DragAction.Copy, Gtk.Global.CurrentEventTime);
@@ -306,6 +308,7 @@ namespace Docky.Interface
 		{
 			if (!InternalDragActive)
 				ExternalDragActive = true;
+			
 			if (marker != args.Context.GetHashCode ()) {
 				marker = args.Context.GetHashCode ();
 				drag_known = false;
@@ -315,8 +318,12 @@ namespace Docky.Interface
 			if (!drag_known && !InternalDragActive) {
 				drag_known = true;
 				Gdk.Atom atom = Gtk.Drag.DestFindTarget (Owner, args.Context, null);
-				Gtk.Drag.GetData (Owner, args.Context, atom, args.Time);
-				drag_data_requested = true;
+				if (atom != null) {
+					Gtk.Drag.GetData (Owner, args.Context, atom, args.Time);
+					drag_data_requested = true;
+				} else {
+					Gdk.Drag.Status (args.Context, DragAction.Private, args.Time);
+				}
 			} else {
 				Gdk.Drag.Status (args.Context, DragAction.Copy, args.Time);
 			}
