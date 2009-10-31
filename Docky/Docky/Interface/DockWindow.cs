@@ -1386,7 +1386,7 @@ namespace Docky.Interface
 			
 			if (ActiveGlow) {
 				surface.Context.Operator = Operator.Atop;
-				surface.Context.Color = new Cairo.Color (1, 1, 1, .7);
+				surface.Context.Color = new Cairo.Color (1, 1, 1, .5);
 				surface.Context.Paint ();
 				surface.Context.Operator = Operator.Over;
 			}
