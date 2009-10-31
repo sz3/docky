@@ -113,6 +113,9 @@ namespace Docky
 				dock.ConfigurationClick += HandleDockConfigurationClick;
 			}
 			
+			KeepAbove = true;
+			Stick ();
+			
 			base.OnShown ();
 		}
 
