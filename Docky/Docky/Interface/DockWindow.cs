@@ -221,6 +221,7 @@ namespace Docky.Interface
 					return;
 				config_mode = value;
 				DragTracker.Enabled = !config_mode;
+				update_screen_regions = true;
 				
 				AnimatedDraw ();
 			}
@@ -1254,7 +1255,10 @@ namespace Docky.Interface
 					Gdk.Rectangle region = hoverArea;
 					region.X += window_position.X;
 					region.Y += window_position.Y;
-					adi.SetScreenRegion (Screen, region);
+					if (ConfigurationMode)
+						adi.SetScreenRegion (Screen, new Gdk.Rectangle (0, 0, 0, 0));
+					else
+						adi.SetScreenRegion (Screen, region);
 				}
 				
 				// move past midpoint to end of icon
