@@ -72,6 +72,8 @@ namespace Docky
 			
 			SetupConfigAlignment ();
 			
+			start_with_computer_checkbutton.Active = IsAutoStartEnabled ();
+			
 			ShowAll ();
 		}
 		
