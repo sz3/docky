@@ -107,12 +107,12 @@ namespace Docky
 			about.Copyright = "Copyright \xa9 2009 Docky Developers";
 			about.Comments = "Docky. Simply Powerful.";
 			about.Authors = new[] {
-				"Jason Smith",
-				"Robert Dyer",
-				"Chris Szikszoy"
+				"Jason Smith <jassmith@gmail.com>",
+				"Robert Dyer <psybers@gmail.com>",
+				"Chris Szikszoy <chris@szikszoy.com>"
 			};
 			about.Artists = new[] { 
-				"Daniel Foré",
+				"Daniel Foré <daniel.p.fore@gmail.com>",
 			};
 			
 			about.ShowAll ();
