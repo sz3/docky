@@ -53,6 +53,7 @@ namespace Docky
 		public const string DisplayVersion = "@VERSION@";
 		public const string VersionDetails = "@VERSION_INFO@";
 		public const string LocaleDirectory = "@expanded_datadir@/locale";
+		public const string InstallData = "@expanded_datadir@";
 	}
 }
 
