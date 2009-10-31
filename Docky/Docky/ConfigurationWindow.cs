@@ -103,6 +103,7 @@ namespace Docky
 			} else {
 				config_alignment.Add (ActiveDock.PreferencesWidget);
 			}
+			config_alignment.ShowAll ();
 		}
 
 		protected override void OnShown ()
