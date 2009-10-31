@@ -16,16 +16,18 @@
 // 
 
 using System;
-using System.Linq;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
 
 using GLib;
 
 using NDesk.DBus;
 using org.freedesktop.DBus;
-using System.Threading;
 
 namespace Docky.Services
 {
@@ -361,6 +363,19 @@ namespace Docky.Services
 		public void RunOnMainThread (Action action, TimeSpan delay)
 		{
 			RunOnThread (() => RunOnMainThread (action), delay);
+		}
+		
+		[DllImport ("libc")]
+		private static extern int prctl (int option, byte [] arg2, IntPtr arg3, IntPtr arg4, IntPtr arg5);
+		
+		private static int prctl (int option, string arg2)
+		{
+			return prctl (option, Encoding.ASCII.GetBytes (arg2 + "\0"), IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
+		}
+		
+		public void SetProcessName (string name)
+		{
+			prctl (15 /* PR_SET_NAME */, name);
 		}
 	}
 }

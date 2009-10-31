@@ -72,6 +72,14 @@ namespace Docky
 			
 			Log.DisplayLevel = CommandLinePreferences.Logging;
 			
+			// set process name
+			try {
+				DockServices.System.SetProcessName ("docky");
+			} catch (Exception e) {
+				Log.Error ("Failed to set process name: {0}", e.Message);
+				Log.Debug (e.StackTrace);
+			}
+			
 			PluginManager.Initialize ();
 			Controller.Initialize ();
 			
