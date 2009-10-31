@@ -113,6 +113,11 @@ namespace Docky
 				dock.ConfigurationClick += HandleDockConfigurationClick;
 			}
 			
+			if (Docky.Controller.Docks.Count () == 1) {
+				ActiveDock = Docky.Controller.Docks.First ();
+				SetupConfigAlignment ();
+			}
+			
 			KeepAbove = true;
 			Stick ();
 			
