@@ -314,7 +314,7 @@ namespace Docky.Interface
 		
 		//fixme
 		int Monitor {
-			get { return 0; }
+			get { return Preferences.MonitorNumber; }
 		}
 		
 		
@@ -908,6 +908,9 @@ namespace Docky.Interface
 		void Reposition ()
 		{
 			monitor_geo = Screen.GetMonitorGeometry (Monitor);
+			
+			//Console.WriteLine ("{0} {1} {2} {3}", monitor_geo.Top, monitor_geo.Left, monitor_geo.Bottom, monitor_geo.Right);
+			//Console.WriteLine ("{0} {1}", monitor_geo.X, monitor_geo.Y);
 			
 			switch (Position) {
 			default:

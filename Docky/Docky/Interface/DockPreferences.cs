@@ -129,8 +129,11 @@ namespace Docky.Interface
 				if (position == value)
 					return;
 				Dock other_dock = null;
-				if (Docky.Controller.Docks.Any (d => d.Preferences.Position == value))
-					other_dock = Docky.Controller.Docks.Where (d => d.Preferences.Position == value).First();
+				int monitor = 0;
+				if (monitor_number.HasValue)
+					monitor = MonitorNumber;
+				if (Docky.Controller.DocksForMonitor (monitor).Any (d => d.Preferences.Position == value))
+					other_dock = Docky.Controller.DocksForMonitor (monitor).Where (d => d.Preferences.Position == value).First();
 				DockPosition old_position = position;
 				position = value;
 				if (other_dock != null)
@@ -195,7 +198,7 @@ namespace Docky.Interface
 			get {
 				if (!zoom_percent.HasValue)
 					zoom_percent = GetOption<double?> ("ZoomPercent", 2.0);
-				return zoom_percent.Value; 
+				return zoom_percent.Value;
 			}
 			set {
 				value = Clamp (value, 4, 1);
@@ -205,6 +208,22 @@ namespace Docky.Interface
 				zoom_percent = value;
 				SetOption<double?> ("ZoomPercent", zoom_percent.Value);
 				OnZoomPercentChanged ();
+			}
+		}
+		
+		int? monitor_number;
+		public int MonitorNumber {
+			get {
+				if (!monitor_number.HasValue)
+					monitor_number = GetOption<int?> ("MonitorNumber", 0);
+				return monitor_number.Value;
+			}
+			set {
+				if (monitor_number == value)
+					return;
+				monitor_number = value;
+				SetOption<int?> ("MonitorNumber", monitor_number.Value);
+				//OnIndicatorSettingChanged ();
 			}
 		}
 		#endregion
@@ -248,6 +267,11 @@ namespace Docky.Interface
 			set { prefs.Set<bool> ("FirstRun", value); }
 		}
 		
+		public DockPreferences (string dockName, int monitorNumber) : this (dockName)
+		{
+			MonitorNumber = monitorNumber;
+		}
+		
 		public DockPreferences (string dockName)
 		{
 			// ensures position actually gets set
@@ -266,6 +290,7 @@ namespace Docky.Interface
 			
 			prefs = DockServices.Preferences.Get<DockPreferences> ();
 			
+			BuildPositionCombo ();
 			BuildItemProviders ();
 			BuildOptions ();
 			
@@ -304,6 +329,32 @@ namespace Docky.Interface
 			ShowAll ();
 	
 		}
+
+		void BuildPositionCombo ()
+		{
+			ListStore positionList = new ListStore (typeof(string), typeof(DockPosition));
+			
+			foreach (DockPosition position in Docky.Controller.PositionsAvailableForDock (MonitorNumber))
+				positionList.AppendValues (position.ToString (), position);
+			
+			position_box.Model = positionList;
+		}
+		
+		TreeIter IterFromPosition (DockPosition position)
+		{
+			TreeIter iter;
+			
+			position_box.Model.GetIterFirst (out iter);
+			
+			do {
+				if ((DockPosition) position_box.Model.GetValue (iter, 1) == position)
+					return iter;
+			} while (position_box.Model.IterNext (ref iter));
+			
+			// this should never happen.
+			return default (TreeIter);
+		}
+
 
 		void HandleDefaultProviderItemsChanged (object sender, ItemsChangedArgs e)
 		{
@@ -361,10 +412,10 @@ namespace Docky.Interface
 		
 		void PositionBoxChanged (object sender, EventArgs e)
 		{
-			Position = (DockPosition) position_box.Active;
+			TreeIter activeIter;
+			(sender as ComboBox).GetActiveIter (out activeIter);
 			
-			if (position_box.Active != (int) Position)
-				position_box.Active = (int) Position;
+			Position = (DockPosition) (sender as ComboBox).Model.GetValue (activeIter, 1);
 		}
 
 		void AutohideBoxChanged (object sender, EventArgs e)
@@ -431,7 +482,7 @@ namespace Docky.Interface
 			DockPosition position = (DockPosition) Enum.Parse (typeof(DockPosition), 
 			                                                   GetOption ("Position", DockPosition.Bottom.ToString ()));
 			
-			while (Docky.Controller.Docks.Any ((Dock d) => d.Preferences.Position == position)) {
+			while (Docky.Controller.DocksForMonitor (MonitorNumber).Any ((Dock d) => d.Preferences.Position == position)) {
 				Log<DockPreferences>.Error ("Dock position already in use: " + position.ToString ());
 				position = (DockPosition) ((((int) position) + 1) % 4);
 			}
@@ -441,7 +492,7 @@ namespace Docky.Interface
 			if (WindowManager)
 				DefaultProvider.SetWindowManager ();
 			
-			position_box.Active = (int) Position;
+			position_box.SetActiveIter (IterFromPosition (Position));
 			autohide_box.Active = (int) Autohide;
 			fade_on_hide_check.Sensitive = (int) Autohide > 0;
 			

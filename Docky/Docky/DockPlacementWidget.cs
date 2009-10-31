@@ -53,13 +53,13 @@ namespace Docky
 		
 		Dock activeDock;
 		public Dock ActiveDock {
-			get { return activeDock; } 
-			set { 
-				if (!docks.Contains (value))
-					return;
-				activeDock = value; 
+			get { return activeDock; }
+			set {
+				if (docks.Contains (value)) {
+					activeDock = value;
+					OnActiveDockChanged ();
+				}
 				QueueDraw ();
-				OnActiveDockChanged ();
 			}
 		}
 		
@@ -67,7 +67,10 @@ namespace Docky
 		{
 			this.docks = docks;
 			RegisterDocks ();
-			ActiveDock = docks.First ();
+			if (docks.Any ())
+				ActiveDock = docks.First ();
+			else
+				ActiveDock = null;
 			SetSizeRequest (Width, Height);
 			
 			AddEvents ((int) Gdk.EventMask.AllEventsMask);
@@ -78,8 +81,10 @@ namespace Docky
 			UnregisterDocks ();
 			this.docks = docks;
 			RegisterDocks ();
-			
-			ActiveDock = docks.First ();
+			if (docks.Any ())
+				ActiveDock = docks.First ();
+			else
+				ActiveDock = null;
 		}
 		
 		void RegisterDocks ()
