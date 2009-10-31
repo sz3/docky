@@ -36,8 +36,26 @@ namespace Docky
 
 	public partial class ConfigurationWindow : Gtk.Window
 	{
-
-		DockPlacementWidget placement;
+		
+		Dock activeDock;
+		string AutoStartKey = "Hidden";
+		DesktopItem autostartfile;
+		
+		Dock ActiveDock {
+			get { return activeDock; }
+			set {
+				if (activeDock == value)
+					return;
+				
+				if (activeDock != null)
+					activeDock.UnsetActiveGlow ();
+				
+				activeDock = value;
+				
+				if (activeDock != null)
+					activeDock.SetActiveGlow ();
+			}
+		}
 		
 		public ConfigurationWindow () : base(Gtk.WindowType.Toplevel)
 		{
@@ -52,96 +70,110 @@ namespace Docky
 				i++;
 			}
 			
-			checkbutton1.Active = IsAutoStartEnabled ();
-			checkbutton1.Toggled += OnCheckbutton1Toggled;
-			
-			placement = new DockPlacementWidget (Docky.Controller.Docks);
-			placement.ActiveDockChanged += PlacementActiveDockChanged;
-			
-			dock_pacement_align.Add (placement);
-			
-			configuration_widget_notebook.RemovePage (0);
-			
-			foreach (Dock dock in Docky.Controller.Docks) {
-				configuration_widget_notebook.Add (dock.PreferencesWidget);
-			}
+			SetupConfigAlignment ();
 			
 			ShowAll ();
-		}
-
-		void PlacementActiveDockChanged (object sender, EventArgs e)
-		{
-			configuration_widget_notebook.Page = 
-				configuration_widget_notebook.PageNum (placement.ActiveDock.PreferencesWidget);
 		}
 		
 		protected override bool OnDeleteEvent (Event evnt)
 		{
 			Hide ();
-			
+			ActiveDock = null;
+			SetupConfigAlignment ();
 			return true;
 		}
 
 		protected virtual void OnCloseButtonClicked (object sender, System.EventArgs e)
 		{
 			Hide ();
+			ActiveDock = null;
+			SetupConfigAlignment ();
+		}
+		
+		void SetupConfigAlignment ()
+		{
+			if (config_alignment.Child != null) {
+				config_alignment.Remove (config_alignment.Child);
+			}
+			
+			if (ActiveDock == null) {
+				config_alignment.Add (new Gtk.Label (Mono.Unix.Catalog.GetString ("Click a dock to configure.")));
+			} else {
+				config_alignment.Add (ActiveDock.PreferencesWidget);
+			}
 		}
 
-
-		protected virtual void OnDeleteButtonClicked (object sender, System.EventArgs e)
+		protected override void OnShown ()
 		{
-			configuration_widget_notebook.Remove (placement.ActiveDock.PreferencesWidget);
-			Docky.Controller.DeleteDock (placement.ActiveDock);
-			placement.SetDocks (Docky.Controller.Docks);
+			foreach (Dock dock in Docky.Controller.Docks) {
+				dock.EnterConfigurationMode ();
+				dock.ConfigurationClick += HandleDockConfigurationClick;
+			}
+			
+			base.OnShown ();
 		}
 
-		protected virtual void OnAddButtonClicked (object sender, System.EventArgs e)
+		void HandleDockConfigurationClick (object sender, EventArgs e)
 		{
-			Dock dock = Docky.Controller.CreateDock ();
-			if (dock == null)
-				return;
+			Dock dock = sender as Dock;
 			
-			configuration_widget_notebook.Add (dock.PreferencesWidget);
-			placement.SetDocks (Docky.Controller.Docks);
-			
-			placement.ActiveDock = dock;
+			if (ActiveDock != dock) {
+				ActiveDock = dock;
+				SetupConfigAlignment ();
+			}
+		}
+
+		protected override void OnHidden ()
+		{
+			foreach (Dock dock in Docky.Controller.Docks) {
+				dock.ConfigurationClick -= HandleDockConfigurationClick;
+				dock.LeaveConfigurationMode ();
+				dock.UnsetActiveGlow ();
+			}
+			base.OnHidden ();
 		}
 
 		protected virtual void OnThemeComboChanged (object sender, System.EventArgs e)
 		{
 			Docky.Controller.DockTheme = theme_combo.ActiveText;
 		}
-		
-		protected virtual void OnCheckbutton1Toggled (object sender, System.EventArgs e)
+	
+		protected virtual void OnDeleteDockButtonClicked (object sender, System.EventArgs e)
 		{
-			SetAutoStartEnabled (checkbutton1.Active);
-		}
-		
-		string AutoStartKey = "Hidden";
-		DesktopItem autostartfile;
-		
-		string AutoStartDir {
-			get {
-				return System.IO.Path.Combine (
-					Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData), "autostart");
-		    }
-		}
-		
-		string AutoStartFileName {
-		  get {
-		      return System.IO.Path.Combine (AutoStartDir, "docky.desktop");
-		    }
-		}
-		
-		string AutoStartUri {
-			get {
-				return Gnome.Vfs.Uri.GetUriFromLocalPath (AutoStartFileName);
+			if (ActiveDock != null) {
+				Docky.Controller.DeleteDock (ActiveDock);
+				ActiveDock = null;
+				SetupConfigAlignment ();
 			}
 		}
 		
+		protected virtual void OnNewDockButtonClicked (object sender, System.EventArgs e)
+		{
+			Dock newDock = Docky.Controller.CreateDock ();
+			
+			if (newDock != null) {
+				newDock.ConfigurationClick += HandleDockConfigurationClick;
+				newDock.EnterConfigurationMode ();
+				ActiveDock = newDock;
+				SetupConfigAlignment ();
+			}
+		}
+
+		string AutoStartDir {
+			get { return System.IO.Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData), "autostart"); }
+		}
+
+		string AutoStartFileName {
+			get { return System.IO.Path.Combine (AutoStartDir, "docky.desktop"); }
+		}
+
+		string AutoStartUri {
+			get { return Gnome.Vfs.Uri.GetUriFromLocalPath (AutoStartFileName); }
+		}
+
 		DesktopItem AutoStartFile {
 			get {
-				if (autostartfile != null) 
+				if (autostartfile != null)
 					return autostartfile;
 				
 				try {
@@ -149,12 +181,11 @@ namespace Docky
 				} catch (GLib.GException loadException) {
 					Log<DockPlacementWidget>.Info ("Unable to load existing autostart file: {0}", loadException.Message);
 					Log<DockPlacementWidget>.Info ("Writing new autostart file to {0}", AutoStartFileName);
-					autostartfile = DesktopItem.NewFromFile (System.IO.Path.Combine (AssemblyInfo.InstallData, "applications/docky.desktop"),
-					                                         DesktopItemLoadFlags.NoTranslations);
+					autostartfile = DesktopItem.NewFromFile (System.IO.Path.Combine (AssemblyInfo.InstallData, "applications/docky.desktop"), DesktopItemLoadFlags.NoTranslations);
 					try {
 						if (!Directory.Exists (AutoStartDir))
 							Directory.CreateDirectory (AutoStartDir);
-
+						
 						autostartfile.Save (AutoStartUri, true);
 						autostartfile.Location = AutoStartUri;
 					} catch (Exception e) {
@@ -164,7 +195,7 @@ namespace Docky
 				return autostartfile;
 			}
 		}
-		
+
 		bool IsAutoStartEnabled ()
 		{
 			DesktopItem autostart = AutoStartFile;
@@ -174,11 +205,11 @@ namespace Docky
 			}
 			
 			if (autostart.AttrExists (AutoStartKey)) {
-				return !String.Equals(autostart.GetString (AutoStartKey), "true", StringComparison.OrdinalIgnoreCase);
+				return !String.Equals (autostart.GetString (AutoStartKey), "true", StringComparison.OrdinalIgnoreCase);
 			}
 			return false;
 		}
-		
+
 		void SetAutoStartEnabled (bool enabled)
 		{
 			DesktopItem autostart = AutoStartFile;
@@ -190,5 +221,11 @@ namespace Docky
 				Log<SystemService>.Error ("Failed to update autostart file: {0}", e.Message);
 			}
 		}
+		
+		protected virtual void OnStartWithComputerCheckbuttonToggled (object sender, System.EventArgs e)
+		{
+			SetAutoStartEnabled (start_with_computer_checkbutton.Active);
+		}
+	
 	}
 }

@@ -161,6 +161,8 @@ namespace Docky.Interface
 		bool rendering;
 		bool update_screen_regions;
 		bool repaint_painter;
+		bool active_glow;
+		bool config_mode;
 		
 		uint animation_timer;
 		
@@ -186,7 +188,7 @@ namespace Docky.Interface
 		
 		Dictionary<AbstractDockItem, DrawValue> DrawValues { get; set; }
 		
-		public IDockPreferences Preferences { 
+		public IDockPreferences Preferences {
 			get { return preferences; }
 			set {
 				if (preferences == value)
@@ -195,6 +197,32 @@ namespace Docky.Interface
 					UnregisterPreferencesEvents (preferences);
 				preferences = value;
 				RegisterPreferencesEvents (value);
+			}
+		}
+		
+		public bool ActiveGlow {
+			get {
+				return active_glow;
+			}
+			set {
+				if (active_glow == value)
+					return;
+				active_glow = value;
+				AnimatedDraw ();
+			}
+		}
+		
+		public bool ConfigurationMode {
+			get {
+				return config_mode;
+			}
+			set {
+				if (config_mode == value)
+					return;
+				config_mode = value;
+				DragTracker.Enabled = !config_mode;
+				
+				AnimatedDraw ();
 			}
 		}
 		
@@ -317,8 +345,7 @@ namespace Docky.Interface
 			get { return 0; }
 		}
 		
-		
-		DockPosition Position {
+		internal DockPosition Position {
 			get { return Preferences.Position; }
 		}
 		
@@ -410,7 +437,7 @@ namespace Docky.Interface
 				}
 				
 				// FIXME: Very harsh
-				if (Painter != null)
+				if (Painter != null || ConfigurationMode)
 					zoom = 0;
 				
 				if (rendering)
@@ -685,25 +712,28 @@ namespace Docky.Interface
 		
 		protected override bool OnMotionNotifyEvent (EventMotion evnt)
 		{
-			CursorTracker.SendManualUpdate (evnt);
+			if (!ConfigurationMode)
+				CursorTracker.SendManualUpdate (evnt);
 			return base.OnMotionNotifyEvent (evnt);
 		}
 		
 		protected override bool OnEnterNotifyEvent (EventCrossing evnt)
 		{
-			CursorTracker.SendManualUpdate (evnt);
+			if (!ConfigurationMode)
+				CursorTracker.SendManualUpdate (evnt);
 			return base.OnEnterNotifyEvent (evnt);
 		}
 
 		protected override bool OnLeaveNotifyEvent (EventCrossing evnt)
 		{
-			CursorTracker.SendManualUpdate (evnt);
+			if (!ConfigurationMode)
+				CursorTracker.SendManualUpdate (evnt);
 			return base.OnLeaveNotifyEvent (evnt);
 		}
 		
 		protected override bool OnButtonPressEvent (EventButton evnt)
 		{
-			if (InternalDragActive)
+			if (InternalDragActive || ConfigurationMode)
 				return base.OnButtonPressEvent (evnt);
 			
 			if (Painter != null) {
@@ -738,7 +768,7 @@ namespace Docky.Interface
 		{
 			// This event gets fired before the drag end event, in this case
 			// we ignore it.
-			if (InternalDragActive)
+			if (InternalDragActive || ConfigurationMode)
 				return base.OnButtonPressEvent (evnt);
 			
 			
@@ -765,6 +795,9 @@ namespace Docky.Interface
 
 		protected override bool OnScrollEvent (EventScroll evnt)
 		{
+			if (InternalDragActive || ConfigurationMode)
+				return base.OnScrollEvent (evnt);
+			
 			if (Painter != null) {
 				
 			} else if (HoveredItem != null) {
@@ -1351,6 +1384,13 @@ namespace Docky.Interface
 			if (DockOpacity < 1)
 				SetDockOpacity (surface);
 			
+			if (ActiveGlow) {
+				surface.Context.Operator = Operator.Atop;
+				surface.Context.Color = new Cairo.Color (1, 1, 1, .7);
+				surface.Context.Paint ();
+				surface.Context.Operator = Operator.Over;
+			}
+			
 			SetInputMask (cursorArea);
 			
 			dockArea.X += window_position.X;
@@ -1506,7 +1546,7 @@ namespace Docky.Interface
 				surface.Context.Operator = Operator.Over;
 			}
 			
-			if (HoveredItem == item && !InternalDragActive && !Menu.Visible) {
+			if (HoveredItem == item && !InternalDragActive && !Menu.Visible && !ConfigurationMode) {
 				DrawValue loc = val.MoveIn (Position, IconSize * (ZoomPercent + .1) - IconSize / 2);
 				
 				DockySurface text = item.HoverTextSurface (surface, Style);

@@ -45,6 +45,7 @@ namespace Docky.Interface
 		bool drag_known;
 		bool drag_data_requested;
 		bool drag_is_desktop_file;
+		bool enabled = true;
 		int marker = 0;
 		
 		AbstractDockItem drag_item;
@@ -58,6 +59,23 @@ namespace Docky.Interface
 		public bool InternalDragActive { get; private set; }
 
 		public bool HoveredAcceptsDrop { get; private set; }
+		
+		public bool Enabled {
+			get {
+				return enabled;
+			}
+			set {
+				if (enabled == value)
+					return;
+				enabled = value;
+				
+				if (enabled) {
+					EnableDragFrom ();
+				} else {
+					DisableDragFrom ();
+				}
+			}
+		}
 		
 		public IEnumerable<string> DragData {
 			get { return drag_data; }
@@ -381,6 +399,11 @@ namespace Docky.Interface
 				new TargetEntry ("text/docky-uri-list", 0, 0),
 			};
 			Gtk.Drag.DestSet (Owner, 0, dest, Gdk.DragAction.Copy);
+		}
+		
+		void DisableDragFrom ()
+		{
+			Gtk.Drag.SourceUnset (Owner);
 		}
 		
 		void EnableDragFrom ()

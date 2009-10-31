@@ -37,6 +37,8 @@ namespace Docky.Interface
 		DockPreferences prefs;
 		DockWindow window;
 		
+		public event EventHandler ConfigurationClick;
+		
 		public IDockPreferences Preferences {
 			get { return prefs as IDockPreferences; }
 		}
@@ -52,6 +54,34 @@ namespace Docky.Interface
 				Preferences = Preferences,
 			};
 			window.ShowAll ();
+		}
+		
+		public void EnterConfigurationMode ()
+		{
+			window.ConfigurationMode = true;
+			window.ButtonReleaseEvent += HandleWindowButtonReleaseEvent;
+		}
+
+		public void LeaveConfigurationMode ()
+		{
+			window.ConfigurationMode = false;
+			window.ButtonReleaseEvent -= HandleWindowButtonReleaseEvent;
+		}
+		
+		void HandleWindowButtonReleaseEvent (object o, ButtonReleaseEventArgs args)
+		{
+			if (ConfigurationClick != null)
+				ConfigurationClick (this, EventArgs.Empty);
+		}
+		
+		public void SetActiveGlow ()
+		{
+			window.ActiveGlow = true;
+		}
+		
+		public void UnsetActiveGlow ()
+		{
+			window.ActiveGlow = false;
 		}
 		
 		#region IDisposable implementation
