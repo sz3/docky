@@ -201,8 +201,6 @@ namespace Docky.Interface
 				drag_data_requested = false;
 				drag_is_desktop_file = drag_data.Any (d => d.EndsWith (".desktop"));
 				Owner.SetHoveredAcceptsDrop ();
-			} else {
-				Console.WriteLine ("WTF?");
 			}
 			
 			Gdk.Drag.Status (args.Context, DragAction.Copy, Gtk.Global.CurrentEventTime);
