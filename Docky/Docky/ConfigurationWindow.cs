@@ -151,11 +151,15 @@ namespace Docky
 	
 		protected virtual void OnDeleteDockButtonClicked (object sender, System.EventArgs e)
 		{
+			if (!(Docky.Controller.Docks.Count () > 1))
+				return;
+			
 			if (ActiveDock != null) {
 				Docky.Controller.DeleteDock (ActiveDock);
 				ActiveDock = null;
 				SetupConfigAlignment ();
 			}
+			CheckButtons ();
 		}
 		
 		protected virtual void OnNewDockButtonClicked (object sender, System.EventArgs e)
@@ -167,6 +171,24 @@ namespace Docky
 				newDock.EnterConfigurationMode ();
 				ActiveDock = newDock;
 				SetupConfigAlignment ();
+			}
+			CheckButtons ();
+		}
+		
+		void CheckButtons ()
+		{
+			new_dock_button.Sensitive = true;
+			delete_dock_button.Sensitive = true;
+			if (Docky.Controller.Docks.Count () == 1) {
+				delete_dock_button.Sensitive = false;
+				new_dock_button.Sensitive = true;
+			}
+			int spotsAvailable = 0;
+			for (int i = 0; i < Screen.Default.NMonitors; i++)
+				spotsAvailable += Docky.Controller.PositionsAvailableForDock (i).Count ();
+			if (spotsAvailable == 0) {
+				delete_dock_button.Sensitive = true;
+				new_dock_button.Sensitive = false;
 			}
 		}
 

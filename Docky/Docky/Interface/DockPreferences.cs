@@ -128,13 +128,9 @@ namespace Docky.Interface
 			set {
 				if (position == value)
 					return;
-				Dock other_dock = null;
-				if (Docky.Controller.Docks.Any (d => d.Preferences.Position == value))
-					other_dock = Docky.Controller.Docks.Where (d => d.Preferences.Position == value).First();
-				DockPosition old_position = position;
 				position = value;
-				if (other_dock != null)
-					other_dock.Preferences.Position = old_position;
+				if (!Docky.Controller.PositionsAvailableForDock (MonitorNumber).Contains (value))
+					position = Docky.Controller.PositionsAvailableForDock (MonitorNumber).First ();
 				SetOption<string> ("Position", position.ToString ());
 				OnPositionChanged ();
 			}
@@ -195,7 +191,7 @@ namespace Docky.Interface
 			get {
 				if (!zoom_percent.HasValue)
 					zoom_percent = GetOption<double?> ("ZoomPercent", 2.0);
-				return zoom_percent.Value; 
+				return zoom_percent.Value;
 			}
 			set {
 				value = Clamp (value, 4, 1);
@@ -205,6 +201,21 @@ namespace Docky.Interface
 				zoom_percent = value;
 				SetOption<double?> ("ZoomPercent", zoom_percent.Value);
 				OnZoomPercentChanged ();
+			}
+		}
+		
+		int? monitor_number;
+		public int MonitorNumber {
+			get {
+				if (!monitor_number.HasValue)
+					monitor_number = GetOption<int?> ("MonitorNumber", 0);
+				return monitor_number.Value;
+			}
+			set {
+				if (monitor_number == value)
+					return;
+				monitor_number = value;
+				SetOption<int?> ("MonitorNumber", monitor_number.Value);
 			}
 		}
 		#endregion
@@ -248,8 +259,15 @@ namespace Docky.Interface
 			set { prefs.Set<bool> ("FirstRun", value); }
 		}
 		
+		public DockPreferences (string dockName, int monitorNumber) : this(dockName)
+		{
+			MonitorNumber = monitorNumber;
+		}
+		
 		public DockPreferences (string dockName)
 		{
+			prefs = DockServices.Preferences.Get<DockPreferences> ();
+			
 			// ensures position actually gets set
 			position = (DockPosition) 100;
 			
@@ -263,8 +281,6 @@ namespace Docky.Interface
 			};
 			
 			name = dockName;
-			
-			prefs = DockServices.Preferences.Get<DockPreferences> ();
 			
 			BuildItemProviders ();
 			BuildOptions ();
@@ -435,12 +451,7 @@ namespace Docky.Interface
 			DockPosition position = (DockPosition) Enum.Parse (typeof(DockPosition), 
 			                                                   GetOption ("Position", DockPosition.Bottom.ToString ()));
 			
-			while (Docky.Controller.Docks.Any ((Dock d) => d.Preferences.Position == position)) {
-				Log<DockPreferences>.Error ("Dock position already in use: " + position.ToString ());
-				position = (DockPosition) ((((int) position) + 1) % 4);
-			}
 			Position = position;
-			
 			
 			if (WindowManager)
 				DefaultProvider.SetWindowManager ();

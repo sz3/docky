@@ -31,7 +31,13 @@ using Docky.Services;
 
 namespace Docky
 {
-
+	
+	class DockMonitor
+	{
+		public Rectangle Geo { get; set; }
+		public int MonitorNumber { get; set; }
+		public IEnumerable<DockPosition> PossiblePositions { get; set; }
+	}
 
 	internal class DockController : IDisposable
 	{
@@ -48,6 +54,21 @@ namespace Docky
 		
 		public int NumDocks {
 			get { return DockNames.Count (); }
+		}
+		
+		List<DockMonitor> DockMonitors { get; set; }
+
+		public IEnumerable<DockPosition> PositionsAvailableForDock (int monitorNum)
+		{
+			foreach (DockPosition position in DockMonitors.Where (d => d.MonitorNumber == monitorNum).First ().PossiblePositions) {
+				if (!DocksForMonitor (monitorNum).Any (dock => dock.Preferences.Position == position))
+					yield return position;
+			}
+		}
+
+		public IEnumerable<Dock> DocksForMonitor (int monitorNumber)
+		{
+			return docks.Where (d => d.Preferences.MonitorNumber == monitorNumber);
 		}
 		
 		IEnumerable<string> ThemeContainerFolders {
@@ -111,12 +132,48 @@ namespace Docky
 		{
 			docks = new List<Dock> ();
 			prefs = DockServices.Preferences.Get<DockController> ();
+			DetectMonitors ();
 			CreateDocks ();
 			
 			GLib.Timeout.Add (500, delegate {
 				EnsurePluginState ();
 				return false;
 			});
+		}
+		
+		void DetectMonitors ()
+		{
+			DockMonitors = new List<DockMonitor> ();
+			
+			// first add all of the screens and their geometries
+			for (int i = 0; i < Screen.Default.NMonitors; i++) {
+				DockMonitor mon = new DockMonitor ();
+				mon.MonitorNumber = i;
+				mon.Geo = Screen.Default.GetMonitorGeometry (i);
+				DockMonitors.Add (mon);
+			}
+			
+			int topDockVal = DockMonitors.OrderBy (d => d.Geo.Top).First ().Geo.Top;
+			int bottomDockVal = DockMonitors.OrderByDescending (d => d.Geo.Bottom).First ().Geo.Bottom;
+			int leftDockVal = DockMonitors.OrderBy (d => d.Geo.Left).First ().Geo.Left;
+			int rightDockVal = DockMonitors.OrderByDescending (d => d.Geo.Right).First ().Geo.Right;
+			
+			// now build the list of available positions for a given screen.
+			for (int i = 0; i < DockMonitors.Count (); i++) {
+				List<DockPosition> positions = new List<DockPosition> ();
+				DockMonitor mon = DockMonitors.Where (d => d.MonitorNumber == i).First ();
+				
+				if (mon.Geo.Left == leftDockVal)
+					positions.Add (DockPosition.Left);
+				if (mon.Geo.Right == rightDockVal)
+					positions.Add (DockPosition.Right);
+				if (mon.Geo.Top == topDockVal)
+					positions.Add (DockPosition.Top);
+				if (mon.Geo.Bottom == bottomDockVal)
+					positions.Add (DockPosition.Bottom);
+				
+				mon.PossiblePositions = positions;
+			}
 		}
 		
 		string FolderForTheme (string theme)
@@ -146,8 +203,13 @@ namespace Docky
 		
 		public Dock CreateDock ()
 		{
-			if (docks.Count >= 4)
-				return null;
+			int mon;
+			for (mon = 0; mon < Screen.Default.NMonitors; mon++) {
+				if (PositionsAvailableForDock (mon).Any ())
+					break;
+				if (mon == Screen.Default.NMonitors - 1)
+					return null;
+			}
 			
 			string name = "Dock" + 1;
 			for (int i = 2; DockNames.Contains (name); i++)
@@ -155,7 +217,7 @@ namespace Docky
 			
 			DockNames = DockNames.Concat (new [] { name });
 			
-			DockPreferences dockPrefs = new DockPreferences (name);
+			DockPreferences dockPrefs = new DockPreferences (name, mon);
 			Dock dock = new Dock (dockPrefs);
 			docks.Add (dock);
 			
@@ -172,7 +234,6 @@ namespace Docky
 			dock.Dispose ();
 			DockNames = DockNames.Where (s => s != dock.Preferences.GetName ());
 			
-			EnsurePluginState ();
 			return true;
 		}
 		
