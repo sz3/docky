@@ -83,6 +83,7 @@ namespace GMail
 				return;
 
 			GMailDockItem item = new GMailDockItem (label);
+			item.Owner = this;
 			
 			items.Add (label, item);
 			visible.Add (item, item.Visible);
