@@ -71,8 +71,10 @@ namespace Docky.Interface
 				
 				if (enabled) {
 					EnableDragFrom ();
+					EnableDragTo ();
 				} else {
 					DisableDragFrom ();
+					DisableDragTo ();
 				}
 			}
 		}
@@ -406,9 +408,9 @@ namespace Docky.Interface
 			Gtk.Drag.DestSet (Owner, 0, dest, Gdk.DragAction.Copy);
 		}
 		
-		void DisableDragFrom ()
+		void DisableDragTo ()
 		{
-			Gtk.Drag.SourceUnset (Owner);
+			Gtk.Drag.DestUnset (Owner);
 		}
 		
 		void EnableDragFrom ()
@@ -417,6 +419,12 @@ namespace Docky.Interface
 			TargetEntry te = new TargetEntry ("text/docky-uri-list", TargetFlags.App, 0);
 			Gtk.Drag.SourceSet (Owner, Gdk.ModifierType.Button1Mask, new[] { te }, DragAction.Private);
 		}
+		
+		void DisableDragFrom ()
+		{
+			Gtk.Drag.SourceUnset (Owner);
+		}
+		
 		#region IDisposable implementation
 		public void Dispose ()
 		{
