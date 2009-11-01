@@ -45,8 +45,11 @@ namespace GMail
 		
 		public GMailAtom Atom { get; protected set; }
 		
-		public GMailDockItem (string label)
+		GMailItemProvider parent;
+		
+		public GMailDockItem (string label, GMailItemProvider parent)
 		{
+			this.parent = parent;
 			Atom = new GMailAtom (label);
 			
 			Atom.GMailChecked += GMailCheckedHandler;
@@ -70,7 +73,7 @@ namespace GMail
 				status = Atom.UnreadCount + Catalog.GetString (" unread messages");
 			HoverText = Atom.CurrentLabel + " - " + status;
 			
-			(Owner as GMailItemProvider).ItemVisibilityChanged (this, Visible);
+			parent.ItemVisibilityChanged (this, Visible);
 			QueueRedraw ();
 		}
 		
