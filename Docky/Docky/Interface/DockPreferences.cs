@@ -289,7 +289,6 @@ namespace Docky.Interface
 			zoom_scale.ValueChanged += ZoomScaleValueChanged;
 			zoom_checkbutton.Toggled += ZoomCheckbuttonToggled;
 			autohide_box.Changed += AutohideBoxChanged;
-			position_box.Changed += PositionBoxChanged;
 			fade_on_hide_check.Toggled += FadeOnHideToggled;
 		
 			
@@ -379,14 +378,6 @@ namespace Docky.Interface
 				active_view.Add (new AddinTreeNode (provider));
 		}
 		
-		void PositionBoxChanged (object sender, EventArgs e)
-		{
-			Position = (DockPosition) position_box.Active;
-			
-			if (position_box.Active != (int) Position)
-				position_box.Active = (int) Position;
-		}
-
 		void AutohideBoxChanged (object sender, EventArgs e)
 		{
 			Autohide = (AutohideType) autohide_box.Active;
@@ -456,7 +447,6 @@ namespace Docky.Interface
 			if (WindowManager)
 				DefaultProvider.SetWindowManager ();
 			
-			position_box.Active = (int) Position;
 			autohide_box.Active = (int) Autohide;
 			fade_on_hide_check.Sensitive = (int) Autohide > 0;
 			
