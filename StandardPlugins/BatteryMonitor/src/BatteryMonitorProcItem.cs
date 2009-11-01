@@ -48,6 +48,7 @@ namespace BatteryMonitor
 		uint timer;
 		
 		Regex number_regex;
+		AbstractDockItemProvider owner;
 		
 		double Capacity {
 			get {
@@ -68,8 +69,7 @@ namespace BatteryMonitor
 		
 		public BatteryMonitorProcItem (AbstractDockItemProvider owner)
 		{
-			Owner = owner;
-			
+			this.owner = owner;
 			DockServices.System.BatteryStateChanged += HandleBatteryStateChanged;
 			number_regex = new Regex ("[0-9]+");
 			
@@ -156,12 +156,12 @@ namespace BatteryMonitor
 			
 			bool hidden = max_capacity == -1 || !DockServices.System.OnBattery || Capacity > .98 || Capacity < .01;
 			
-			if (hidden && !(Owner as BatteryMonitorItemProvider).Hidden)
+			if (hidden && !(owner as BatteryMonitorItemProvider).Hidden)
 				Log<BatteryMonitorProcItem>.Debug ("Hiding battery item (capacity=" + Capacity +
 						") (max_capacity=" + max_capacity +
 						") (OnBattery=" + DockServices.System.OnBattery + ")");
 
-			(Owner as BatteryMonitorItemProvider).Hidden = hidden;
+			(owner as BatteryMonitorItemProvider).Hidden = hidden;
 			
 			QueueRedraw ();
 
