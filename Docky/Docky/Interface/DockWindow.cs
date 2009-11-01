@@ -145,6 +145,7 @@ namespace Docky.Interface
 		DateTime dock_hovered_change_time;
 		DateTime painter_change_time;
 		DateTime render_time;
+		DateTime items_change_time;
 		
 		IDockPreferences preferences;
 		DockySurface main_buffer, background_buffer, icon_buffer, painter_buffer;
@@ -377,6 +378,27 @@ namespace Docky.Interface
 			set;
 		}
 		
+		int DynamicDockWidth {
+			get {
+				if (GdkWindow == null)
+					return 0;
+				
+				DockySurface model;
+				if (background_buffer != null) {
+					model = main_buffer;
+				} else {
+					using (Cairo.Context cr = Gdk.CairoHelper.Create (GdkWindow)) {
+						model = new DockySurface (0, 0, cr.Target);
+					}
+				}
+				
+				int dockWidth = Items.Sum (adi => (int) ((adi.Square ? IconSize : adi.IconSurface (model, IconSize).Width) * 
+						Math.Min (1, (DateTime.UtcNow - adi.AddTime).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds)));
+				dockWidth += 2 * DockWidthBuffer + (Items.Count - 1) * ItemWidthBuffer;
+				return dockWidth;
+			}
+		}
+		
 		int ItemWidthBuffer {
 			get { return (int) (0.08 * IconSize); }
 		}
@@ -502,6 +524,8 @@ namespace Docky.Interface
 			                             () => (DockHovered && ZoomIn != 1) || (!DockHovered && ZoomIn != 0));
 			AnimationState.AddCondition (Animations.HideChanged,
 			                             () => ((DateTime.UtcNow - hidden_change_time) < BaseAnimationTime));
+			AnimationState.AddCondition (Animations.ItemsChanged,
+				                         () => ((DateTime.UtcNow - items_change_time) < BaseAnimationTime));
 			AnimationState.AddCondition (Animations.Bounce,
 			                             () => Items.Any (i => (DateTime.UtcNow - i.LastClick) < BounceTime ||
 					                                            (DateTime.UtcNow - i.StateSetTime (ItemState.Urgent)) < BounceTime));
@@ -841,6 +865,8 @@ namespace Docky.Interface
 				collection_backend.Clear ();
 				UpdateDockWidth ();
 			}
+			
+			items_change_time = DateTime.UtcNow;
 		}
 		
 		void ResetBuffers ()
@@ -1111,7 +1137,7 @@ namespace Docky.Interface
 			int midline = DockHeight / 2;
 			
 			// the left most edge of the first dock item
-			int startX = ((width - DockWidth) / 2) + DockWidthBuffer;
+			int startX = ((width - DynamicDockWidth) / 2) + DockWidthBuffer;
 			
 			Gdk.Point center = new Gdk.Point (startX, midline);
 			
@@ -1133,6 +1159,9 @@ namespace Docky.Interface
 						halfSize = icon.Height / 2.0;
 					}
 				}
+				
+				halfSize *= Math.Min (1, (DateTime.UtcNow - adi.AddTime).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds);
+				
 				// center now represents our midpoint
 				center.X += (int) Math.Floor (halfSize);
 				val.StaticCenter = new PointD (center.X, center.Y);
@@ -1485,10 +1514,11 @@ namespace Docky.Interface
 				center = center.MoveIn (Position, move);
 			}
 			
+			double opacity = Math.Min (1, (render_time - item.AddTime).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds);
 			DockySurface icon;
 			if (item.Zoom) {
 				icon = item.IconSurface (surface, ZoomedIconSize);
-				icon.ShowAtPointAndZoom (surface, center.Center, center.Zoom / zoomOffset);
+				icon.ShowAtPointAndZoom (surface, center.Center, center.Zoom / zoomOffset, opacity);
 			} else {
 				double rotation = 0;
 				
@@ -1510,7 +1540,7 @@ namespace Docky.Interface
 				}
 				
 				icon = item.IconSurface (surface, IconSize);
-				icon.ShowAtPointAndRotation (surface, center.Center, rotation);
+				icon.ShowAtPointAndRotation (surface, center.Center, rotation, opacity);
 			}
 			
 			if (darken > 0 || lighten > 0) {

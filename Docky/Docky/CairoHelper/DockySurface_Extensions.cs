@@ -36,6 +36,11 @@ namespace Docky.CairoHelper
 
 		public static void ShowAtPointAndZoom (this DockySurface self, DockySurface target, PointD point, double zoom)
 		{
+			self.ShowAtPointAndZoom (target, point, zoom, 1);
+		}
+		
+		public static void ShowAtPointAndZoom (this DockySurface self, DockySurface target, PointD point, double zoom, double opacity)
+		{
 			if (target == null)
 				throw new ArgumentNullException ("target");
 			
@@ -46,14 +51,14 @@ namespace Docky.CairoHelper
 			cr.SetSource (self.Internal, 
 			              (point.X - zoom * self.Width / 2) / zoom,
 			              (point.Y - zoom * self.Height / 2) / zoom);
-			cr.Paint ();
+			cr.PaintWithAlpha (opacity);
 			
 			if (zoom != 1)
 				cr.IdentityMatrix ();
 			
 		}
 		
-		public static void ShowAtPointAndRotation (this DockySurface self, DockySurface target, PointD point, double rotation)
+		public static void ShowAtPointAndRotation (this DockySurface self, DockySurface target, PointD point, double rotation, double opacity)
 		{
 			if (target == null)
 				throw new ArgumentNullException ("target");
@@ -65,7 +70,7 @@ namespace Docky.CairoHelper
 			Matrix m = new Matrix (cos, sin, 0 - sin, cos, point.X, point.Y);
 			cr.Transform (m);
 			cr.SetSource (self.Internal, 0 - self.Width / 2, 0 - self.Height / 2);
-			cr.Paint ();
+			cr.PaintWithAlpha (opacity);
 			
 			cr.IdentityMatrix ();
 		}

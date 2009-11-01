@@ -49,6 +49,7 @@ namespace Docky.Items
 				
 				int position = items.Any () ? items.Max (adi => adi.Position) + 1 : 0;
 				foreach (AbstractDockItem item in added) {
+					item.AddTime = DateTime.UtcNow;
 					item.Position = position;
 					position++;
 				}

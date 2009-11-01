@@ -73,6 +73,10 @@ namespace Docky.Items
 			}
 		}
 		
+		public DateTime AddTime {
+			get; internal set;
+		}
+		
 		public DateTime LastClick {
 			get; private set;
 		}

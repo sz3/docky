@@ -29,7 +29,7 @@ namespace Docky.Interface
 		HideChanged,
 		DockHoveredChanged,
 		Bounce,
-		IconInsert,
+		ItemsChanged,
 	}
 	
 	public class AnimationState : IDisposable
