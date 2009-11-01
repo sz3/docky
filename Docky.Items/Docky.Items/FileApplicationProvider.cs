@@ -150,7 +150,7 @@ namespace Docky.Items
 				
 				desktopFile = WindowMatcher.Default.DesktopFileForWindow (window);
 				
-				if (desktopFile != null) {
+				if (!string.IsNullOrEmpty (desktopFile)) {
 					item = ApplicationDockItem.NewFromUri (new Uri (desktopFile).AbsoluteUri);
 				} else {
 					item = new WindowDockItem (window);

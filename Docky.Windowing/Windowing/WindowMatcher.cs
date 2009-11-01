@@ -164,10 +164,9 @@ namespace Docky.Windowing
 				throw new ArgumentNullException ("window");
 			
 			if (!window_to_desktop_files.ContainsKey (window))
-				return new [] { window };
+				return new[] { window };
 			
-			string id = window_to_desktop_files [window].FirstOrDefault ();
-			if (id == null) id = "";
+			string id = window_to_desktop_files[window].DefaultIfEmpty ("").FirstOrDefault ();
 			
 			return window_to_desktop_files
 				.Where (kvp => kvp.Value.Contains (id))
@@ -183,7 +182,8 @@ namespace Docky.Windowing
 				SetupWindow (window);
 			
 			string file = window_to_desktop_files[window].FirstOrDefault ();
-			if (file == null) file = "";
+			if (file == null)
+				file = "";
 			file = file.EndsWith (".desktop") ? file : null;
 			
 			return file;
@@ -217,6 +217,8 @@ namespace Docky.Windowing
 				}
 			}
 			
+			bool matched = false;
+			
 			string[] command_line = CommandLineForPid (pid);
 			
 			// if we have a classname that matches a desktopid we have a winner
@@ -240,8 +242,10 @@ namespace Docky.Windowing
 					IEnumerable<string> matches = DesktopFiles
 						.Where (file => Path.GetFileNameWithoutExtension (file).Equals (class_name, StringComparison.CurrentCultureIgnoreCase));
 					
-					foreach (string s in matches)
+					foreach (string s in matches) {
 						yield return s;
+						matched = true;
+					}
 				}
 			}
 			
@@ -260,12 +264,13 @@ namespace Docky.Windowing
 						if (string.IsNullOrEmpty (s))
 							continue;
 						yield return s;
+						matched = true;
 					}
 				}
-				yield break;
 			}
 			
-			yield return window.Pid.ToString ();
+			if (!matched)
+				yield return window.Pid.ToString ();
 		}
 		
 		string [] CommandLineForPid (int pid)
