@@ -344,7 +344,7 @@ namespace Docky.Interface
 		
 		//fixme
 		int Monitor {
-			get { return 0; }
+			get { return Preferences.MonitorNumber; }
 		}
 		
 		internal DockPosition Position {

@@ -74,6 +74,8 @@ namespace Docky
 			
 			start_with_computer_checkbutton.Active = IsAutoStartEnabled ();
 			
+			CheckButtons ();
+			
 			ShowAll ();
 		}
 		
@@ -151,11 +153,15 @@ namespace Docky
 	
 		protected virtual void OnDeleteDockButtonClicked (object sender, System.EventArgs e)
 		{
+			if (!(Docky.Controller.Docks.Count () > 1))
+				return;
+			
 			if (ActiveDock != null) {
 				Docky.Controller.DeleteDock (ActiveDock);
 				ActiveDock = null;
 				SetupConfigAlignment ();
 			}
+			CheckButtons ();
 		}
 		
 		protected virtual void OnNewDockButtonClicked (object sender, System.EventArgs e)
@@ -168,6 +174,17 @@ namespace Docky
 				ActiveDock = newDock;
 				SetupConfigAlignment ();
 			}
+			CheckButtons ();
+		}
+		
+		void CheckButtons ()
+		{
+			int spotsAvailable = 0;
+			for (int i = 0; i < Screen.Default.NMonitors; i++)
+				spotsAvailable += Docky.Controller.PositionsAvailableForDock (i).Count ();
+			
+			delete_dock_button.Sensitive = (Docky.Controller.Docks.Count () == 1) ? false : true;
+			new_dock_button.Sensitive = (spotsAvailable == 0) ? false : true;
 		}
 
 		string AutoStartDir {
