@@ -100,6 +100,7 @@ namespace Docky.Items
 			
 			Wnck.Screen.Default.WindowOpened += WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
+			Wnck.Screen.Default.ActiveWindowChanged += WnckScreenDefaultWindowChanged;
 		}
 		
 		public override string UniqueID ()
@@ -119,6 +120,12 @@ namespace Docky.Items
 			OnPaintNeeded ();
 		}
 		
+		void WnckScreenDefaultWindowChanged (object o, ActiveWindowChangedArgs args)
+		{
+			UpdateWindows ();
+			OnPaintNeeded ();
+		}
+
 		void UpdateWindows ()
 		{
 			Windows = WindowMatcher.Default.WindowsForDesktopFile (OwnedItem.Location);
