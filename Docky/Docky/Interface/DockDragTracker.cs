@@ -45,7 +45,7 @@ namespace Docky.Interface
 		bool drag_known;
 		bool drag_data_requested;
 		bool drag_is_desktop_file;
-		bool enabled = true;
+		bool repo_mode = false;
 		int marker = 0;
 		
 		AbstractDockItem drag_item;
@@ -60,21 +60,19 @@ namespace Docky.Interface
 
 		public bool HoveredAcceptsDrop { get; private set; }
 		
-		public bool Enabled {
+		public bool RepositionMode {
 			get {
-				return enabled;
+				return repo_mode;
 			}
 			set {
-				if (enabled == value)
+				if (repo_mode == value)
 					return;
-				enabled = value;
+				repo_mode = value;
 				
-				if (enabled) {
-					EnableDragFrom ();
-					EnableDragTo ();
-				} else {
-					DisableDragFrom ();
+				if (repo_mode) {
 					DisableDragTo ();
+				} else {
+					EnableDragTo ();
 				}
 			}
 		}
@@ -172,7 +170,9 @@ namespace Docky.Interface
 			Gdk.Pixbuf pbuf;
 			drag_item = Owner.HoveredItem;
 			
-			if (drag_item is INonPersistedItem)
+			// If we are in Reposition MOde or over a non-draggable item
+			// dont drag it!
+			if (drag_item is INonPersistedItem || RepositionMode)
 				drag_item = null;
 			
 			if (drag_item != null) {
@@ -183,6 +183,45 @@ namespace Docky.Interface
 			
 			Gtk.Drag.SetIconPixbuf (args.Context, pbuf, pbuf.Width / 2, pbuf.Height / 2);
 			pbuf.Dispose ();
+			
+			// Set up a cursor tracker so we can move the window on the fly
+			if (RepositionMode) {
+				Owner.CursorTracker.CursorPositionChanged += HandleCursorPositionChanged;
+			}
+		}
+
+		void HandleCursorPositionChanged (object sender, CursorPostionChangedArgs e)
+		{
+			Gdk.Point cursor = Owner.CursorTracker.Cursor;
+			int monitor = Owner.Screen.GetMonitorAtPoint (cursor.X, cursor.Y);
+			
+			Gdk.Rectangle geo = Owner.Screen.GetMonitorGeometry (monitor);
+			
+			Gdk.Rectangle left = new Gdk.Rectangle (geo.X, geo.Y + 64, 64, geo.Height - 64 * 2);
+			Gdk.Rectangle top = new Gdk.Rectangle (geo.X + 64, geo.Y, geo.Width - 64 * 2, 64);
+			Gdk.Rectangle right = new Gdk.Rectangle (geo.X + geo.Width - 64, geo.Y + 64, 64, geo.Height - 64 * 2);
+			Gdk.Rectangle bottom = new Gdk.Rectangle (geo.X + 64, geo.Y + geo.Height - 64, geo.Width - 64 * 2, 64);
+			
+			DockPosition target = DockPosition.Left;
+			if (left.Contains (cursor)) {
+				target = DockPosition.Left;
+			} else if (top.Contains (cursor)) {
+				target = DockPosition.Top;
+			} else if (right.Contains (cursor)) {
+				target = DockPosition.Right;
+			} else if (bottom.Contains (cursor)) {
+				target = DockPosition.Bottom;
+			} else {
+				return;
+			}
+			
+			IDockPreferences prefs = Owner.Preferences;
+			if (prefs.Position != target || prefs.MonitorNumber != monitor) {
+				if (Docky.Controller.PositionsAvailableForDock (monitor).Contains (target)) {
+					prefs.MonitorNumber = monitor;
+					prefs.Position = target;
+				}
+			}
 		}
 
 		/// <summary>
@@ -257,6 +296,9 @@ namespace Docky.Interface
 		/// </summary>
 		void HandleDragEnd (object o, DragEndArgs args)
 		{
+			if (RepositionMode)
+				Owner.CursorTracker.CursorPositionChanged -= HandleCursorPositionChanged;
+			
 			if (drag_item != null) {
 				if (!Owner.DockHovered) {
 					AbstractDockItemProvider provider = ProviderForItem (drag_item);

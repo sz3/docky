@@ -221,7 +221,7 @@ namespace Docky.Interface
 				if (config_mode == value)
 					return;
 				config_mode = value;
-				DragTracker.Enabled = !config_mode;
+				DragTracker.RepositionMode = config_mode;
 				update_screen_regions = true;
 				
 				AnimatedDraw ();
@@ -342,7 +342,6 @@ namespace Docky.Interface
 			get { return Preferences.IconSize; }
 		}
 		
-		//fixme
 		int Monitor {
 			get { return Preferences.MonitorNumber; }
 		}
@@ -708,6 +707,7 @@ namespace Docky.Interface
 
 		void PreferencesPositionChanged (object sender, EventArgs e)
 		{
+			monitor_geo = Screen.GetMonitorGeometry (Monitor);
 			Reposition ();
 			SetSizeRequest ();
 			ResetBuffers ();

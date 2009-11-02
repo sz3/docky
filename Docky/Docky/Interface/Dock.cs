@@ -68,12 +68,6 @@ namespace Docky.Interface
 			window.ButtonReleaseEvent -= HandleWindowButtonReleaseEvent;
 		}
 		
-		void HandleWindowButtonReleaseEvent (object o, ButtonReleaseEventArgs args)
-		{
-			if (ConfigurationClick != null)
-				ConfigurationClick (this, EventArgs.Empty);
-		}
-		
 		public void SetActiveGlow ()
 		{
 			window.ActiveGlow = true;
@@ -82,6 +76,12 @@ namespace Docky.Interface
 		public void UnsetActiveGlow ()
 		{
 			window.ActiveGlow = false;
+		}
+		
+		void HandleWindowButtonReleaseEvent (object o, ButtonReleaseEventArgs args)
+		{
+			if (ConfigurationClick != null)
+				ConfigurationClick (this, EventArgs.Empty);
 		}
 		
 		#region IDisposable implementation
