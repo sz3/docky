@@ -433,7 +433,7 @@ namespace Docky.Interface
 		
 		double DockOpacity {
 			get {
-				if (!Preferences.FadeOnHide)
+				if (!Preferences.FadeOnHide || Painter != null)
 					return 1;
 				double progress = Math.Min (1, (render_time - hidden_change_time).TotalMilliseconds / 
 									BaseAnimationTime.TotalMilliseconds);
