@@ -348,6 +348,9 @@ namespace Docky.Interface
 		/// </summary>
 		void HandleDragMotion (object o, DragMotionArgs args)
 		{
+			if (RepositionMode)
+				return;
+			
 			if (!InternalDragActive)
 				ExternalDragActive = true;
 			
