@@ -33,7 +33,7 @@ namespace Clock
 	{
 		const int LineHeight = 16;
 		const double lowlight = .35;
-		const string BoldFormatString = "<b>{0}</b>";
+		const string BoldFormatString = "{0}";
 		
 		DateTime paint_time;
 		
@@ -118,7 +118,7 @@ namespace Clock
 			layout.FontDescription.Weight = Pango.Weight.Bold;
 			layout.Ellipsize = Pango.EllipsizeMode.None;
 			layout.Width = Pango.Units.FromPixels (offsetSize);
-			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (9);
+			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (10);
 			
 			cr.Color = new Cairo.Color (1, 1, 1, .5);
 			for (int i = 1; i < 8; i++) {
@@ -148,7 +148,7 @@ namespace Clock
 			layout.FontDescription.Weight = Pango.Weight.Bold;
 			layout.Ellipsize = Pango.EllipsizeMode.None;
 			layout.Width = Pango.Units.FromPixels (offsetSize);
-			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (9);
+			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (10);
 			
 			for (int i = 0; i < 9; i++) {
 				if (i == 8) {
@@ -160,7 +160,7 @@ namespace Clock
 					int woy = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear (lineStart.AddDays (6), 
 					                                                             DateTimeFormatInfo.CurrentInfo.CalendarWeekRule, 
 					                                                             DateTimeFormatInfo.CurrentInfo.FirstDayOfWeek);
-					layout.SetText (string.Format ("<b>W{0:00}</b>", woy));
+					layout.SetText (string.Format ("W{0:00}", woy));
 					//textContext.Alignment = Pango.Alignment.Right;
 				} else {
 					DateTime day = lineStart.AddDays (dayOffset);
@@ -180,7 +180,7 @@ namespace Clock
 						//cr.Color = color.ConvertToCairo (1.0);
 						cr.Color = new Cairo.Color (1, 1, 1, 0.8);
 						
-						layout.SetText (string.Format ("<b>{0:00}</b>", day.Day));
+						layout.SetText (string.Format ("{0:00}", day.Day));
 					}
 					dayOffset++;
 				}
