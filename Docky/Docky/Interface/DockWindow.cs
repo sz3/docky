@@ -974,15 +974,12 @@ namespace Docky.Interface
 			default:
 			case DockPosition.Top:
 			case DockPosition.Left:
-				Gravity = Gravity.NorthWest;
 				Move (monitor_geo.X, monitor_geo.Y);
 				break;
 			case DockPosition.Right:
-				Gravity = Gravity.SouthEast;
 				Move (monitor_geo.X + monitor_geo.Width - Width, monitor_geo.Y);
 				break;
 			case DockPosition.Bottom:
-				Gravity = Gravity.SouthEast;
 				Move (monitor_geo.X, monitor_geo.Y + monitor_geo.Height - Height);
 				break;
 			}
