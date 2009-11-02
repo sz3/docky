@@ -817,7 +817,12 @@ namespace Docky.Interface
 				return base.OnScrollEvent (evnt);
 			
 			if (Painter != null) {
+				int x, y;
 				
+				x = LocalCursor.X - painter_area.X;
+				y = LocalCursor.Y - painter_area.Y;
+				
+				Painter.Scrolled (evnt.Direction, x, y, evnt.State);
 			} else if (HoveredItem != null) {
 				HoveredItem.Scrolled (evnt.Direction, evnt.State);
 			}
