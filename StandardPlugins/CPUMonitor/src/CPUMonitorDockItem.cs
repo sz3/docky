@@ -89,8 +89,7 @@ namespace CPUMonitor
 				string cpu_line = reader.ReadLine ();
 				MatchCollection collection = regex.Matches (cpu_line);
 				try {
-					long usage = Convert.ToInt64 (collection [(int) ProcFields.IOWait].Value) +
-						         Convert.ToInt64 (collection [(int) ProcFields.Idle].Value) +
+					long usage = Convert.ToInt64 (collection [(int) ProcFields.Idle].Value) +
 							     Convert.ToInt64 (collection [(int) ProcFields.IRQ].Value) +
 							     Convert.ToInt64 (collection [(int) ProcFields.Nice].Value) +
 							     Convert.ToInt64 (collection [(int) ProcFields.SoftIRQ].Value) +
@@ -98,7 +97,8 @@ namespace CPUMonitor
 							     Convert.ToInt64 (collection [(int) ProcFields.User].Value);
 					
 					long usage_diff = usage - last_usage;
-					long idle = Convert.ToInt64 (collection [(int) ProcFields.Idle].Value);
+					long idle = Convert.ToInt64 (collection [(int) ProcFields.Idle].Value) + 
+						        Convert.ToInt64 (collection [(int) ProcFields.IOWait].Value);
 					long idle_diff = idle - last_idle;
 					
 					last_idle = idle;

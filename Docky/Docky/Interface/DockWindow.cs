@@ -421,7 +421,7 @@ namespace Docky.Interface
 		
 		double HideOffset {
 			get {
-				if (Preferences.FadeOnHide)
+				if (Preferences.FadeOnHide || ConfigurationMode)
 					return 0;
 				double progress = Math.Min (1, (render_time - hidden_change_time).TotalMilliseconds / 
 				                            BaseAnimationTime.TotalMilliseconds);
