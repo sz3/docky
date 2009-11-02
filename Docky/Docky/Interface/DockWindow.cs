@@ -707,7 +707,6 @@ namespace Docky.Interface
 
 		void PreferencesPositionChanged (object sender, EventArgs e)
 		{
-			monitor_geo = Screen.GetMonitorGeometry (Monitor);
 			Reposition ();
 			SetSizeRequest ();
 			ResetBuffers ();
