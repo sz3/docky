@@ -128,10 +128,7 @@ namespace Docky.Interface
 			set {
 				if (position == value)
 					return;
-				if (!Docky.Controller.PositionsAvailableForDock (MonitorNumber).Contains (value))
-					position = Docky.Controller.PositionsAvailableForDock (MonitorNumber).First ();
-				else
-					position = value;
+				position = value;
 				SetOption<string> ("Position", position.ToString ());
 				OnPositionChanged ();
 			}
