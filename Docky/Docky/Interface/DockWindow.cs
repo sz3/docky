@@ -920,6 +920,7 @@ namespace Docky.Interface
 			Painter.PaintNeeded += HandlePainterPaintNeeded;
 			
 			repaint_painter = true;
+			update_screen_regions = true;
 			Painter.SetAllocation (new Gdk.Rectangle (0, 0, DockWidth - 100, DockHeight));
 			Painter.Shown ();
 		}
@@ -932,6 +933,7 @@ namespace Docky.Interface
 			Painter.HideRequest -= HandlePainterHideRequest;
 			Painter.PaintNeeded -= HandlePainterPaintNeeded;
 			
+			update_screen_regions = true;
 			Painter.Hidden ();
 			Painter = null;
 		}
@@ -1297,7 +1299,7 @@ namespace Docky.Interface
 					Gdk.Rectangle region = hoverArea;
 					region.X += window_position.X;
 					region.Y += window_position.Y;
-					if (ConfigurationMode)
+					if (ConfigurationMode || Painter != null)
 						adi.SetScreenRegion (Screen, new Gdk.Rectangle (0, 0, 0, 0));
 					else
 						adi.SetScreenRegion (Screen, region);
