@@ -557,10 +557,7 @@ namespace Docky.Interface
 
 		void ScreenSizeChanged (object sender, EventArgs e)
 		{
-			Reposition ();
-			SetSizeRequest ();
-			ResetBuffers ();
-			AnimatedDraw ();
+			Reconfigure ();
 		}
 
 		void HandleDockHoveredChanged (object sender, EventArgs e)
@@ -707,10 +704,7 @@ namespace Docky.Interface
 
 		void PreferencesPositionChanged (object sender, EventArgs e)
 		{
-			Reposition ();
-			SetSizeRequest ();
-			ResetBuffers ();
-			AnimatedDraw ();
+			Reconfigure ();
 		}
 
 		void PreferencesIconSizeChanged (object sender, EventArgs e)
@@ -833,6 +827,14 @@ namespace Docky.Interface
 		#endregion
 		
 		#region Misc.
+		void Reconfigure ()
+		{
+			Reposition ();
+			SetSizeRequest ();
+			ResetBuffers ();
+			AnimatedDraw ();
+		}
+		
 		internal void SetHoveredAcceptsDrop ()
 		{
 			HoveredAcceptsDrop = false;
