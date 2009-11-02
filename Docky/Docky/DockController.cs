@@ -215,9 +215,10 @@ namespace Docky
 			for (int i = 2; DockNames.Contains (name); i++)
 				name = "Dock" + i;
 			
-			DockNames = DockNames.Concat (new [] { name });
+			DockNames = DockNames.Concat (new[] { name });
 			
 			DockPreferences dockPrefs = new DockPreferences (name, mon);
+			dockPrefs.Position = PositionsAvailableForDock (mon).First ();
 			Dock dock = new Dock (dockPrefs);
 			docks.Add (dock);
 			
