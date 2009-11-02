@@ -829,8 +829,8 @@ namespace Docky.Interface
 		#region Misc.
 		void Reconfigure ()
 		{
-			Reposition ();
 			SetSizeRequest ();
+			Reposition ();
 			ResetBuffers ();
 			AnimatedDraw ();
 		}
@@ -968,7 +968,7 @@ namespace Docky.Interface
 		
 		void Reposition ()
 		{
-			monitor_geo = Screen.GetMonitorGeometry (Monitor);
+			UpdateMonitorGeometry ();
 			
 			switch (Position) {
 			default:
@@ -1005,8 +1005,15 @@ namespace Docky.Interface
 			DockWidth += 2 * DockWidthBuffer + (Items.Count - 1) * ItemWidthBuffer;
 		}
 		
+		void UpdateMonitorGeometry ()
+		{
+			monitor_geo = Screen.GetMonitorGeometry (Monitor);
+		}
+		
 		void SetSizeRequest ()
 		{
+			UpdateMonitorGeometry ();
+			
 			if (VerticalDock) {
 				Height = monitor_geo.Height;
 				Width = ZoomedIconSize + 2 * DockHeightBuffer + 180;
