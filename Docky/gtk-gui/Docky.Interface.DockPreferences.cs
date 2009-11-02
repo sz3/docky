@@ -74,6 +74,7 @@ namespace Docky.Interface {
             this.autohide_box.AppendText(Mono.Unix.Catalog.GetString("None"));
             this.autohide_box.AppendText(Mono.Unix.Catalog.GetString("Autohide"));
             this.autohide_box.AppendText(Mono.Unix.Catalog.GetString("Intellihide"));
+            this.autohide_box.TooltipMarkup = "None : Always present, acts like a panel\nAutohide : Hides whenever the mouse is not over it.\nIntellihide : Hides when dock is obstructing the active application.";
             this.autohide_box.Name = "autohide_box";
             this.autohide_box.Active = 0;
             this.table3.Add(this.autohide_box);
@@ -84,6 +85,7 @@ namespace Docky.Interface {
             w1.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table3.Gtk.Table+TableChild
             this.fade_on_hide_check = new Gtk.CheckButton();
+            this.fade_on_hide_check.TooltipMarkup = "Fade out dock instead of slide off screen";
             this.fade_on_hide_check.CanFocus = true;
             this.fade_on_hide_check.Name = "fade_on_hide_check";
             this.fade_on_hide_check.Label = Mono.Unix.Catalog.GetString("Fade On Hide");
@@ -134,6 +136,7 @@ namespace Docky.Interface {
             w5.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table3.Gtk.Table+TableChild
             this.multiple_window_indicator_check = new Gtk.CheckButton();
+            this.multiple_window_indicator_check.TooltipMarkup = "Causes launchers which currently manage more than one window to have an extra indicator under it.";
             this.multiple_window_indicator_check.CanFocus = true;
             this.multiple_window_indicator_check.Name = "multiple_window_indicator_check";
             this.multiple_window_indicator_check.Label = Mono.Unix.Catalog.GetString("Indicate Multiple Windows");

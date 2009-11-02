@@ -101,7 +101,7 @@ namespace Docky
 			}
 			
 			if (ActiveDock == null) {
-				config_alignment.Add (new Gtk.Label (Mono.Unix.Catalog.GetString ("Click a dock to configure.")));
+				config_alignment.Add (new Gtk.Label (Mono.Unix.Catalog.GetString ("Click on any dock to configure.")));
 			} else {
 				config_alignment.Add (ActiveDock.PreferencesWidget);
 			}

@@ -30,6 +30,9 @@
             <child>
               <widget class="Gtk.ComboBox" id="autohide_box">
                 <property name="MemberName" />
+                <property name="Tooltip" translatable="yes">None : Always present, acts like a panel
+Autohide : Hides whenever the mouse is not over it.
+Intellihide : Hides when dock is obstructing the active application.</property>
                 <property name="IsTextCombo">True</property>
                 <property name="Items" translatable="yes">None
 Autohide
@@ -53,6 +56,7 @@ Intellihide</property>
             <child>
               <widget class="Gtk.CheckButton" id="fade_on_hide_check">
                 <property name="MemberName" />
+                <property name="Tooltip" translatable="yes">Fade out dock instead of slide off screen</property>
                 <property name="CanFocus">True</property>
                 <property name="Label" translatable="yes">Fade On Hide</property>
                 <property name="DrawIndicator">True</property>
@@ -140,6 +144,7 @@ Intellihide</property>
             <child>
               <widget class="Gtk.CheckButton" id="multiple_window_indicator_check">
                 <property name="MemberName" />
+                <property name="Tooltip" translatable="yes">Causes launchers which currently manage more than one window to have an extra indicator under it.</property>
                 <property name="CanFocus">True</property>
                 <property name="Label" translatable="yes">Indicate Multiple Windows</property>
                 <property name="DrawIndicator">True</property>
