@@ -182,21 +182,26 @@ namespace Docky.Interface
 		
 		void UpdateWindowIntersect ()
 		{
-			Gdk.Rectangle adjustedDockArea = intersect_area; 
+			Gdk.Rectangle adjustedDockArea = intersect_area;
 			adjustedDockArea.Inflate (-2, -2);
 			
 			bool intersect = false;
+			Wnck.Window activeWindow = screen.ActiveWindow;
+			
 			try {
-				Wnck.Window activeWindow = screen.ActiveWindow;
-				
-				intersect = activeWindow != null &&
-					screen.Windows.Any (w => !w.IsMinimized && w.WindowType != Wnck.WindowType.Desktop && 
-					                    activeWindow.Pid == w.Pid &&
-					                    w.Pid != pid &&
-					                    w.EasyGeometry ().IntersectsWith (adjustedDockArea));
+				foreach (Wnck.Window window in screen.Windows.Where (w => !w.IsMinimized && w.WindowType != Wnck.WindowType.Desktop)) {
+					if (window.Pid == pid || (Behavior == AutohideType.Intellihide && activeWindow.Pid != window.Pid)) {
+						continue;
+					}
+					
+					if (window.EasyGeometry ().IntersectsWith (adjustedDockArea)) {
+						intersect = true;
+						break;
+					}
+				}
 			} catch (Exception e) {
 				Log<AutohideManager>.Error ("Failed to update window intersect: '{0}'", e.Message);
-				Log<AutohideManager>.Info (e.StackTrace);
+				Log<AutohideManager>.Debug (e.StackTrace);
 			}
 			
 			if (WindowIntersectingOther != intersect) {
@@ -216,6 +221,7 @@ namespace Docky.Interface
 				Hidden = !DockHovered;
 				break;
 			case AutohideType.Intellihide:
+			case AutohideType.UniversalIntellihide:
 				Hidden = !DockHovered && WindowIntersectingOther;
 				break;
 			}

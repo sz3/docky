@@ -63,6 +63,7 @@ namespace Docky.Interface {
             this.Name = "Docky.Interface.DockPreferences";
             // Container child Docky.Interface.DockPreferences.Gtk.Container+ContainerChild
             this.vbox1 = new Gtk.VBox();
+            this.vbox1.Name = "vbox1";
             this.vbox1.Spacing = 6;
             // Container child vbox1.Gtk.Box+BoxChild
             this.table3 = new Gtk.Table(((uint)(5)), ((uint)(3)), false);
@@ -74,6 +75,7 @@ namespace Docky.Interface {
             this.autohide_box.AppendText(Mono.Unix.Catalog.GetString("None"));
             this.autohide_box.AppendText(Mono.Unix.Catalog.GetString("Autohide"));
             this.autohide_box.AppendText(Mono.Unix.Catalog.GetString("Intellihide"));
+            this.autohide_box.AppendText(Mono.Unix.Catalog.GetString("Universal Intellihide"));
             this.autohide_box.TooltipMarkup = "None : Always present, acts like a panel\nAutohide : Hides whenever the mouse is not over it.\nIntellihide : Hides when dock is obstructing the active application.";
             this.autohide_box.Name = "autohide_box";
             this.autohide_box.Active = 0;

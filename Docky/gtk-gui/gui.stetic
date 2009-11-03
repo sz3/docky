@@ -36,7 +36,8 @@ Intellihide : Hides when dock is obstructing the active application.</property>
                 <property name="IsTextCombo">True</property>
                 <property name="Items" translatable="yes">None
 Autohide
-Intellihide</property>
+Intellihide
+Universal Intellihide</property>
                 <property name="Active">0</property>
               </widget>
               <packing>

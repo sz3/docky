@@ -26,5 +26,6 @@ namespace Docky.Interface
 		None = 0,
 		Autohide,
 		Intellihide,
+		UniversalIntellihide,
 	}
 }
