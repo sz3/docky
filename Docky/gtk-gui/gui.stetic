@@ -37,7 +37,7 @@ Intellihide : Hides when dock is obstructing the active application.</property>
                 <property name="Items" translatable="yes">None
 Autohide
 Intellihide
-Universal Intellihide</property>
+Defenestraphobia</property>
                 <property name="Active">0</property>
               </widget>
               <packing>
