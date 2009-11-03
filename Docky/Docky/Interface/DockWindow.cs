@@ -1564,6 +1564,7 @@ namespace Docky.Interface
 			}
 			
 			double opacity = Math.Min (1, (render_time - item.AddTime).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds);
+			opacity = Math.Pow (opacity, 2);
 			DockySurface icon;
 			if (item.Zoom) {
 				icon = item.IconSurface (surface, ZoomedIconSize);
@@ -1625,7 +1626,7 @@ namespace Docky.Interface
 				}
 				
 				surface.Context.Operator = Operator.DestOver;
-				DrawActiveIndicator (surface, area, item.AverageColor ());
+				DrawActiveIndicator (surface, area, item.AverageColor (), opacity);
 				surface.Context.Operator = Operator.Over;
 			}
 			
@@ -1661,7 +1662,7 @@ namespace Docky.Interface
 			}
 		}
 		
-		void DrawActiveIndicator (DockySurface surface, Gdk.Rectangle area, Cairo.Color color)
+		void DrawActiveIndicator (DockySurface surface, Gdk.Rectangle area, Cairo.Color color, double opacity)
 		{
 			surface.Context.Rectangle (area.X, area.Y, area.Width, area.Height);
 			LinearGradient lg;
@@ -1681,7 +1682,7 @@ namespace Docky.Interface
 				lg = new LinearGradient (0, area.Y + area.Height, 0, area.Y);
 				break;
 			}
-			lg.AddColorStop (0, color.SetAlpha (0.6));
+			lg.AddColorStop (0, color.SetAlpha (0.6 * opacity));
 			lg.AddColorStop (1, color.SetAlpha (0.0));
 			
 			surface.Context.Pattern = lg;
