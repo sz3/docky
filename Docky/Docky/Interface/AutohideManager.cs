@@ -188,7 +188,8 @@ namespace Docky.Interface
 				window.WindowType != Wnck.WindowType.Desktop &&
 				window.WindowType != Wnck.WindowType.Dock &&
 				window.WindowType != Wnck.WindowType.Splashscreen &&
-				window.WindowType != Wnck.WindowType.Menu;
+				window.WindowType != Wnck.WindowType.Menu &&
+				window.IsVisibleOnWorkspace (Wnck.Screen.Default.ActiveWorkspace);
 		}
 		
 		void UpdateWindowIntersect ()
