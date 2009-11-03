@@ -146,6 +146,7 @@ namespace Docky.Interface
 		DateTime painter_change_time;
 		DateTime render_time;
 		DateTime items_change_time;
+		DateTime remove_time;
 		
 		IDockPreferences preferences;
 		DockySurface main_buffer, background_buffer, icon_buffer, painter_buffer;
@@ -164,6 +165,12 @@ namespace Docky.Interface
 		bool repaint_painter;
 		bool active_glow;
 		bool config_mode;
+		
+		/// <summary>
+		/// Used as a decimal representation of the "index" of where the old item used to be
+		/// </summary>
+		double remove_index;
+		int remove_size;
 		
 		uint animation_timer;
 		
@@ -394,6 +401,10 @@ namespace Docky.Interface
 				int dockWidth = Items.Sum (adi => (int) ((adi.Square ? IconSize : adi.IconSurface (model, IconSize).Width) * 
 						Math.Min (1, (DateTime.UtcNow - adi.AddTime).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds)));
 				dockWidth += 2 * DockWidthBuffer + (Items.Count - 1) * ItemWidthBuffer;
+				if (remove_index != 0) {
+					dockWidth += (int) ((ItemWidthBuffer + remove_size) *
+						(1 - Math.Min (1, (DateTime.UtcNow - remove_time).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds)));
+				}
 				return dockWidth;
 			}
 		}
@@ -604,12 +615,20 @@ namespace Docky.Interface
 		
 		void ProviderItemsChanged (object sender, ItemsChangedArgs args)
 		{
-			UpdateCollectionBuffer ();
 			
-			foreach (AbstractDockItem item in args.AddedItems)
+			foreach (AbstractDockItem item in args.AddedItems) {
 				RegisterItem (item);
-			foreach (AbstractDockItem item in args.RemovedItems)
+			}
+			
+			foreach (AbstractDockItem item in args.RemovedItems) {
+				remove_time = DateTime.UtcNow;
 				UnregisterItem (item);
+				
+				remove_index = Items.IndexOf (item) - .5;
+				remove_size = IconSize; //FIXME
+			}
+			
+			UpdateCollectionBuffer ();
 			
 			AnimatedDraw ();
 		}
@@ -1158,7 +1177,19 @@ namespace Docky.Interface
 			
 			Gdk.Point center = new Gdk.Point (startX, midline);
 			
+			int index = 0;
 			foreach (AbstractDockItem adi in Items) {
+				
+				// used to handle remove animation
+				if (remove_index != 0 && remove_index < index && remove_index > index - 1) {
+					double removePercent = 1 - Math.Min (1, (DateTime.UtcNow - remove_time).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds);
+					if (removePercent == 0) {
+						remove_index = 0;
+					} else {
+						center.X += (int) ((remove_size + ItemWidthBuffer) * removePercent);
+					}
+				}
+				
 				DrawValue val = new DrawValue ();
 				int iconSize = IconSize;
 				
@@ -1309,6 +1340,7 @@ namespace Docky.Interface
 				
 				// move past midpoint to end of icon
 				center.X += (int) Math.Ceiling (halfSize) + ItemWidthBuffer;
+				index++;
 			}
 			
 			update_screen_regions = false;
