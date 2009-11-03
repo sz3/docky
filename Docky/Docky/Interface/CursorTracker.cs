@@ -45,6 +45,7 @@ namespace Docky.Interface
 		const uint HighResTimeout = 20;
 			
 		Gdk.Display display;
+		DateTime last_update;
 		List<object> resolution_senders;
 		uint timer;
 		uint timer_speed;
@@ -120,6 +121,10 @@ namespace Docky.Interface
 		
 		bool OnTimerTick ()
 		{
+			if ((DateTime.UtcNow - last_update).TotalMilliseconds < 15) {
+				return true;
+			}
+			
 			int x, y;
 			ModifierType mod;
 			Gdk.Screen screen;
@@ -132,6 +137,8 @@ namespace Docky.Interface
 		
 		void Update (Gdk.Screen screen, int x, int y, Gdk.ModifierType mod)
 		{
+			last_update = DateTime.UtcNow;
+				
 			if (!Enabled)
 				return;
 			
