@@ -190,7 +190,7 @@ namespace Docky.Interface
 			
 			try {
 				foreach (Wnck.Window window in screen.Windows.Where (w => !w.IsMinimized && w.WindowType != Wnck.WindowType.Desktop)) {
-					if (window.Pid == pid || (Behavior == AutohideType.Intellihide && activeWindow.Pid != window.Pid)) {
+					if (window.Pid == pid || (activeWindow != null && Behavior == AutohideType.Intellihide && activeWindow.Pid != window.Pid)) {
 						continue;
 					}
 					
