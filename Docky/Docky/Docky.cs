@@ -72,13 +72,11 @@ namespace Docky
 			
 			Log.DisplayLevel = CommandLinePreferences.Logging;
 			
+			// for now, let's output the version number
+			Log.Fatal ("Version: {0}", AssemblyInfo.VersionDetails);
+			
 			// set process name
-			try {
-				DockServices.System.SetProcessName ("docky");
-			} catch (Exception e) {
-				Log.Error ("Failed to set process name: {0}", e.Message);
-				Log.Debug (e.StackTrace);
-			}
+			DockServices.System.SetProcessName ("docky");
 			
 			PluginManager.Initialize ();
 			Controller.Initialize ();

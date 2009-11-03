@@ -365,17 +365,9 @@ namespace Docky.Services
 			RunOnThread (() => RunOnMainThread (action), delay);
 		}
 		
-		[DllImport ("libc")]
-		private static extern int prctl (int option, byte [] arg2, IntPtr arg3, IntPtr arg4, IntPtr arg5);
-		
-		private static int prctl (int option, string arg2)
-		{
-			return prctl (option, Encoding.ASCII.GetBytes (arg2 + "\0"), IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
-		}
-		
 		public void SetProcessName (string name)
 		{
-			prctl (15 /* PR_SET_NAME */, name);
+			NativeInterop.prctl (15 /* PR_SET_NAME */, name);
 		}
 	}
 }

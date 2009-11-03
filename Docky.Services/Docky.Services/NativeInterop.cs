@@ -26,14 +26,36 @@ namespace Docky.Services
 		[DllImport ("gio-2.0")]
 		private static extern IntPtr g_file_get_uri (IntPtr fileHandle);
 		
+		[DllImport("libc")]
+		private static extern int prctl (int option, byte[] arg2, IntPtr arg3, IntPtr arg4, IntPtr arg5);
+		
 		public static string StrUri (GLib.File file)
 		{
 			try {
 				return Marshal.PtrToStringAuto (g_file_get_uri (file.Handle));
 			} catch (DllNotFoundException e) {
-				Log<NativeInterop>.Fatal ("Could not load libdocky, please report immediately.");
+				Log<NativeInterop>.Fatal ("Could not find gio-2.0, please report immediately.");
 				Log<NativeInterop>.Info (e.StackTrace);
 				return "";
+			} catch (Exception e) {
+				Log<NativeInterop>.Error ("Failed to retrieve uri for file '{0}': {1}", file.Basename, e.Message);
+				Log<NativeInterop>.Info (e.StackTrace);
+				return "";
+			}
+		}
+
+		public static int prctl (int option, string arg2)
+		{
+			try {
+				return prctl (option, Encoding.ASCII.GetBytes (arg2 + "\0"), IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
+			} catch (DllNotFoundException e) {
+				Log<NativeInterop>.Fatal ("Could not load libc, please report immediately.");
+				Log<NativeInterop>.Info (e.StackTrace);
+				return -1;
+			} catch (Exception e) {
+				Log<NativeInterop>.Error ("Failed to set process name: {0}", e.Message);
+				Log<NativeInterop>.Info (e.StackTrace);
+				return -1;
 			}
 		}
 	}
