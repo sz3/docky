@@ -95,6 +95,8 @@ namespace Clock
 		
 		protected override void PaintSurface (DockySurface surface)
 		{
+			surface.Clear ();
+			
 			paint_time = DateTime.Now;
 			int height = surface.Height / LineHeight;
 			RenderHeader (surface);
