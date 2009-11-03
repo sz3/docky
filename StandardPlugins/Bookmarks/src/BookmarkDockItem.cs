@@ -33,7 +33,7 @@ namespace Bookmarks
 			return new BookmarkDockItem (uri, name);
 		}
 		
-		BookmarkDockItem (string uri, string name) : base (uri)
+		BookmarkDockItem (string uri, string name) : base(uri)
 		{
 			// incase the icon is null, give it a generic folder icon
 			// this can happen with a bookmark that's not mounted,
@@ -43,25 +43,17 @@ namespace Bookmarks
 			
 			if (string.IsNullOrEmpty (name))
 				HoverText = OwnedFile.Basename;
-			else 
+			else
 				HoverText = name;
+			
+			OwnedFile.AddMountAction (() => SetIconFromGIcon (OwnedFile.Icon ()));
 		}
 		
 		void Remove ()
 		{
 			Owner.RemoveItem (this);
 		}
-		
-		new void Open ()
-		{
-			base.Open ();
-			// refresh the icon, but wait a couple of seconds for a possible mount operation to finish
-			GLib.Timeout.Add (2000, () => {
-				SetIconFromGIcon (OwnedFile.Icon ());
-				return false;
-			});
-		}
-		
+
 		public override bool CanAcceptDrop (IEnumerable<string> uris)
 		{
 			return true;

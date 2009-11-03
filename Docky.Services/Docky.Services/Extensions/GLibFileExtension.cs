@@ -15,6 +15,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
 using System;
+using System.Collections.Generic;
 
 using GLib;
 
@@ -23,6 +24,13 @@ namespace Docky.Services
 
 	public static class GLibFileExtension
 	{
+		static Dictionary<File, List<Action>> MountActions;
+		
+		static GLibFileExtension ()
+		{
+			MountActions = new Dictionary<File, List<Action>> ();
+		}
+		
 		public static string StringUri (this GLib.File file)
 		{
 			return NativeInterop.StrUri (file);
@@ -151,14 +159,32 @@ namespace Docky.Services
 			file.MountEnclosingVolume (0, null, null, (o, result) => {
 				// wait for the mount to finish
 				try {
-					if (file.MountEnclosingVolumeFinish (result))
+					if (file.MountEnclosingVolumeFinish (result)) {
+						lock (MountActions[file]) {
+								foreach (Action act in MountActions[file])
+									act.Invoke ();
+						}
 						success.Invoke ();
-				// an exception can be thrown here if we are trying to mount an already mounted file
-				// in that case, resort to the fallback
+					}
+					// an exception can be thrown here if we are trying to mount an already mounted file
+					// in that case, resort to the fallback
 				} catch (GLib.GException) {
 					failed.Invoke ();
-				}						
+				}
 			});
+		}
+		
+		public static void AddMountAction (this GLib.File file, Action action)
+		{
+			if (!MountActions.ContainsKey (file))
+				MountActions[file] = new List<Action> ();
+			MountActions [file].Add (action);
+		}
+		
+		public static void RemoveAction (this GLib.File file, Action action)
+		{
+			if (MountActions.ContainsKey (file) && MountActions [file].Contains (action))
+				MountActions [file].Remove (action);
 		}
 	}
 }
