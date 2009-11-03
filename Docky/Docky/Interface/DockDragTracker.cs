@@ -46,6 +46,7 @@ namespace Docky.Interface
 		bool drag_data_requested;
 		bool drag_is_desktop_file;
 		bool repo_mode = false;
+		bool drag_disabled = false;
 		int marker = 0;
 		
 		AbstractDockItem drag_item;
@@ -59,6 +60,25 @@ namespace Docky.Interface
 		public bool InternalDragActive { get; private set; }
 
 		public bool HoveredAcceptsDrop { get; private set; }
+		
+		public bool DragDisabled {
+			get {
+				return drag_disabled;
+			}
+			set {
+				if (drag_disabled == value)
+					return;
+				drag_disabled = value;
+				
+				if (drag_disabled) {
+					DisableDragTo ();
+					DisableDragFrom ();
+				} else {
+					EnableDragTo ();
+					EnableDragFrom ();
+				}
+			}
+		}
 		
 		public bool RepositionMode {
 			get {
@@ -170,7 +190,7 @@ namespace Docky.Interface
 			Gdk.Pixbuf pbuf;
 			drag_item = Owner.HoveredItem;
 			
-			// If we are in Reposition MOde or over a non-draggable item
+			// If we are in Reposition Mode or over a non-draggable item
 			// dont drag it!
 			if (drag_item is INonPersistedItem || RepositionMode)
 				drag_item = null;
