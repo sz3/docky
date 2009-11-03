@@ -180,6 +180,17 @@ namespace Docky.Interface
 			});
 		}
 		
+		bool IsIntersectableWindow (Wnck.Window window)
+		{
+			return window != null &&
+				!window.IsMinimized &&
+				window.Pid != pid &&
+				window.WindowType != Wnck.WindowType.Desktop &&
+				window.WindowType != Wnck.WindowType.Dock &&
+				window.WindowType != Wnck.WindowType.Splashscreen &&
+				window.WindowType != Wnck.WindowType.Menu;
+		}
+		
 		void UpdateWindowIntersect ()
 		{
 			Gdk.Rectangle adjustedDockArea = intersect_area;
@@ -189,8 +200,8 @@ namespace Docky.Interface
 			Wnck.Window activeWindow = screen.ActiveWindow;
 			
 			try {
-				foreach (Wnck.Window window in screen.Windows.Where (w => !w.IsMinimized && w.WindowType != Wnck.WindowType.Desktop)) {
-					if (window.Pid == pid || (activeWindow != null && Behavior == AutohideType.Intellihide && activeWindow.Pid != window.Pid)) {
+				foreach (Wnck.Window window in screen.Windows.Where (w => IsIntersectableWindow (w))) {
+					if (Behavior == AutohideType.Intellihide && activeWindow != null && activeWindow.Pid != window.Pid) {
 						continue;
 					}
 					
