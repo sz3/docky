@@ -921,6 +921,7 @@ namespace Docky.Interface
 			
 			repaint_painter = true;
 			update_screen_regions = true;
+			DragTracker.RepositionMode = true;
 			Painter.SetAllocation (new Gdk.Rectangle (0, 0, DockWidth - 100, DockHeight));
 			Painter.Shown ();
 		}
@@ -933,6 +934,7 @@ namespace Docky.Interface
 			Painter.HideRequest -= HandlePainterHideRequest;
 			Painter.PaintNeeded -= HandlePainterPaintNeeded;
 			
+			DragTracker.RepositionMode = config_mode;
 			update_screen_regions = true;
 			Painter.Hidden ();
 			Painter = null;
