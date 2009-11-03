@@ -189,6 +189,7 @@ namespace Docky.Interface
 				window.WindowType != Wnck.WindowType.Dock &&
 				window.WindowType != Wnck.WindowType.Splashscreen &&
 				window.WindowType != Wnck.WindowType.Menu &&
+				Wnck.Screen.Default.ActiveWorkspace != null &&
 				window.IsVisibleOnWorkspace (Wnck.Screen.Default.ActiveWorkspace);
 		}
 		
