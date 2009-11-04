@@ -76,7 +76,7 @@ namespace Clock
 		
 		public override int MinimumSize {
 			get {
-				return 670;
+				return 630;
 			}
 		}
 		
@@ -135,35 +135,37 @@ namespace Clock
 			int dayOffset = 0;
 			
 			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
+			Pango.Rectangle inkRect, logicalRect;
 			
 			layout.FontDescription = new Gtk.Style().FontDescription;
-			layout.FontDescription.Weight = Pango.Weight.Bold;
 			layout.Ellipsize = Pango.EllipsizeMode.None;
 			layout.Width = Pango.Units.FromPixels (offsetSize);
 			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (10);
 			
 			for (int i = 0; i < 9; i++) {
+				layout.FontDescription.Weight = Pango.Weight.Bold;
+				
 				if (i == 8) {
 					cr.Color = new Cairo.Color (1, 1, 1, lowlight);
 					layout.SetText (string.Format (BoldFormatString, lineStart.AddDays (6).ToString ("MMM").ToUpper ()));
-					//textContext.Alignment = Pango.Alignment.Left;
+					layout.GetPixelExtents (out inkRect, out logicalRect);
+					cr.MoveTo (offsetSize * i - inkRect.Width, centerLine - logicalRect.Height);
 				} else if (i == 0) {
 					cr.Color = new Cairo.Color (1, 1, 1, lowlight);
 					int woy = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear (lineStart.AddDays (6), 
 					                                                             DateTimeFormatInfo.CurrentInfo.CalendarWeekRule, 
 					                                                             DateTimeFormatInfo.CurrentInfo.FirstDayOfWeek);
 					layout.SetText (string.Format ("W{0:00}", woy));
-					//textContext.Alignment = Pango.Alignment.Right;
+					layout.GetPixelExtents (out inkRect, out logicalRect);
+					cr.MoveTo (offsetSize * i, centerLine - logicalRect.Height);
 				} else {
 					DateTime day = lineStart.AddDays (dayOffset);
-					//textContext.Alignment = Pango.Alignment.Center;
 					
 					if (day.Month == CalendarStartDate.AddDays (6).Month)
 						cr.Color = new Cairo.Color (1, 1, 1);
 					else
 						cr.Color = new Cairo.Color (1, 1, 1, .8);
 					
-					layout.SetText (string.Format ("{0:00}", day.Day));
 					if (day.Date == DateTime.Today)
 					{
 						// FIXME
@@ -171,14 +173,15 @@ namespace Clock
 						//Gdk.Color color = style.Backgrounds [(int) StateType.Selected].SetMinimumValue (100);
 						//cr.Color = color.ConvertToCairo (1.0);
 						cr.Color = new Cairo.Color (1, 1, 1, 0.8);
-						
-						layout.SetText (string.Format ("{0:00}", day.Day));
+					} else {
+						layout.FontDescription.Weight = Pango.Weight.Normal;
 					}
 					dayOffset++;
+					
+					layout.SetText (string.Format ("{0:00}", day.Day));
+					layout.GetPixelExtents (out inkRect, out logicalRect);
+					cr.MoveTo (offsetSize * i - inkRect.Width / 2, centerLine - logicalRect.Height);
 				}
-				Pango.Rectangle inkRect, logicalRect;
-				layout.GetPixelExtents (out inkRect, out logicalRect);
-				cr.MoveTo (offsetSize * i - inkRect.Width / 2, centerLine - logicalRect.Height);
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.Fill ();
 			}
