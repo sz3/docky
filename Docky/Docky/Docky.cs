@@ -70,10 +70,12 @@ namespace Docky
 			
 			Wnck.Global.ClientType = Wnck.ClientType.Pager;
 			
-			Log.DisplayLevel = CommandLinePreferences.Logging;
-			
 			// for now, let's output the version number
-			Log.Fatal ("Version: {0}", AssemblyInfo.VersionDetails);
+			Log.DisplayLevel = LogLevel.Info;
+			Log.Info ("Loading Docky, Version: {0}", AssemblyInfo.VersionDetails);
+			
+			// now lets set the log level
+			Log.DisplayLevel = CommandLinePreferences.Logging;
 			
 			// set process name
 			DockServices.System.SetProcessName ("docky");
