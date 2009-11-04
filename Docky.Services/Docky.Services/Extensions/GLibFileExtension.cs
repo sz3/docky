@@ -161,15 +161,21 @@ namespace Docky.Services
 				try {
 					if (file.MountEnclosingVolumeFinish (result)) {
 						lock (MountActions[file]) {
-								foreach (Action act in MountActions[file])
-									act.Invoke ();
+							foreach (Action act in MountActions[file])
+								act.Invoke ();
 						}
 						success.Invoke ();
 					}
 					// an exception can be thrown here if we are trying to mount an already mounted file
 					// in that case, resort to the fallback
 				} catch (GLib.GException) {
-					failed.Invoke ();
+					// FIXME
+					// need to use GLib.MountOperation for mounting to be able to specify credentials
+					// until we have a proper way to determine if mount was successful or not,
+					// make sure this doesn't crash
+					try {
+						failed.Invoke ();
+					} catch {}
 				}
 			});
 		}
