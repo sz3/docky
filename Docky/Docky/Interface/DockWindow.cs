@@ -942,6 +942,7 @@ namespace Docky.Interface
 			update_screen_regions = true;
 			DragTracker.DragDisabled = true;
 			Painter.SetAllocation (new Gdk.Rectangle (0, 0, DockWidth - 100, DockHeight));
+			Painter.SetStyle (Style);
 			Painter.Shown ();
 		}
 		

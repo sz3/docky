@@ -48,6 +48,8 @@ namespace Docky.Painters
 		
 		protected Gdk.Rectangle Allocation { get; private set; }
 		
+		protected Gtk.Style Style { get; private set; }
+		
 		protected AbstractDockPainter ()
 		{
 			paint_needed = true;
@@ -60,6 +62,11 @@ namespace Docky.Painters
 			
 			Allocation = allocation;
 			OnAllocationSet (allocation);
+		}
+		
+		public void SetStyle (Gtk.Style style)
+		{
+			Style = style;
 		}
 		
 		public DockySurface GetSurface (DockySurface similar)
@@ -104,6 +111,10 @@ namespace Docky.Painters
 		}
 		
 		protected virtual void OnAllocationSet (Gdk.Rectangle allocation)
+		{
+		}
+		
+		protected virtual void OnStyleSet (Gtk.Style style)
 		{
 		}
 		
