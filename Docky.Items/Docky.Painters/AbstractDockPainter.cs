@@ -123,6 +123,7 @@ namespace Docky.Painters
 		
 		protected virtual void OnButtonReleased (int x, int y, Gdk.ModifierType mod)
 		{
+			Hide ();
 		}
 		
 		public void Scrolled (ScrollDirection direction, int x, int y, Gdk.ModifierType mod)

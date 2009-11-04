@@ -58,13 +58,6 @@ namespace Clock
 			}
 		}
 		
-		// FIXME
-		protected bool NeedsRepaint {
-			get {
-				return paint_time.Date != DateTime.Now.Date;
-			}
-		}
-		
 		public CalendarPainter (ClockDockItem clock) : base ()
 		{
 			Clock = clock;
@@ -81,20 +74,17 @@ namespace Clock
 				StartDate = StartDate.AddDays (7);
 		}
 		
-		protected override void OnButtonReleased (int x, int y, ModifierType mod)
-		{
-			Hide ();
-		}
-		
 		public override int MinimumSize {
 			get {
 				return 670;
 			}
 		}
-
 		
 		protected override void PaintSurface (DockySurface surface)
 		{
+			if (paint_time.Date == DateTime.Now.Date)
+				return;
+			
 			surface.Clear ();
 			
 			paint_time = DateTime.Now;
