@@ -121,7 +121,7 @@ namespace Docky.Interface
 		
 		bool OnTimerTick ()
 		{
-			if ((DateTime.UtcNow - last_update).TotalMilliseconds < 15) {
+			if ((DateTime.UtcNow - last_update).TotalMilliseconds < 10) {
 				return true;
 			}
 			
