@@ -1467,8 +1467,14 @@ namespace Docky.Interface
 				SetDockOpacity (surface);
 			
 			if (ActiveGlow) {
+				Gdk.Color color = Style.BaseColors[(int) Gtk.StateType.Active];
+				
 				surface.Context.Operator = Operator.Atop;
-				surface.Context.Color = new Cairo.Color (1, 1, 1, .5);
+				surface.Context.Color = new Cairo.Color (
+					(double) color.Red / ushort.MaxValue, 
+					(double) color.Green / ushort.MaxValue, 
+					(double) color.Blue / ushort.MaxValue, 
+					.65).MultiplySaturation (3);
 				surface.Context.Paint ();
 				surface.Context.Operator = Operator.Over;
 			}
