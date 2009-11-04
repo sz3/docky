@@ -47,7 +47,7 @@ namespace Docky.Services
 		public static int prctl (int option, string arg2)
 		{
 			try {
-				return prctl (option, Encoding.ASCII.GetBytes (arg2 + "\0"), IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
+				return prctl (option, System.Text.Encoding.ASCII.GetBytes (arg2 + "\0"), IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
 			} catch (DllNotFoundException e) {
 				Log<NativeInterop>.Fatal ("Could not load libc, please report immediately.");
 				Log<NativeInterop>.Info (e.StackTrace);
