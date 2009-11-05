@@ -52,7 +52,6 @@ namespace RecentDocuments
 			Gtk.RecentManager.Default.Changed += (o, e) => RefreshRecentDocs ();
 			
 			RefreshRecentDocs ();
-			
 			UpdateInfo ();
 		}
 		
@@ -71,9 +70,9 @@ namespace RecentDocuments
 		}
 		
 		void UpdateInfo ()
-		{
+		{			
 			CurrentFile = RecentDocs.ElementAt (CurrentIndex);
-			
+
 			SetIconFromGIcon (CurrentFile.Icon ());
 	
 			HoverText = CurrentFile.Basename;
@@ -86,9 +85,9 @@ namespace RecentDocuments
 			CurrentIndex += NumRecentDocs;
 			
 			if (direction == Gdk.ScrollDirection.Up)
-				CurrentIndex += 1;
-			else if (direction == Gdk.ScrollDirection.Down)
 				CurrentIndex -= 1;
+			else if (direction == Gdk.ScrollDirection.Down)
+				CurrentIndex += 1;
 			
 			CurrentIndex %= NumRecentDocs;
 			
@@ -111,9 +110,20 @@ namespace RecentDocuments
 			
 			foreach (File _f in RecentDocs) {
 				GLib.File f = _f;
+				if (!f.Exists)
+					continue;
 				string icon = DockServices.Drawing.IconFromGIcon (f.Icon ());
 				MenuItem item = new MenuItem (f.Basename, icon, (o, a) => DockServices.System.Open (f));
 				list[MenuListContainer.RelatedItems].Add (item);
+			}
+			
+			// check to make sure our right click menu has the same number of items as RecentDocs
+			// if it doesn't, one of the recent docs might have been deleted, so update the list.
+			if (list[MenuListContainer.RelatedItems].Count () != RecentDocs.Count ()) {
+				RefreshRecentDocs ();
+				if (RecentDocs.Any (f => f.Path == CurrentFile.Path))
+					CurrentIndex = RecentDocs.IndexOf (RecentDocs.First (f => f.Path == CurrentFile.Path));
+				UpdateInfo ();
 			}
 			
 			return list;
