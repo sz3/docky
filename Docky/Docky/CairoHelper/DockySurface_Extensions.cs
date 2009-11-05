@@ -120,7 +120,7 @@ namespace Docky.CairoHelper
 			return pbuf;
 		}
 		
-		public static DockySurface CreateMask (this DockySurface self)
+		public static DockySurface CreateMask (this DockySurface self, double cutOff)
 		{
 			ImageSurface original = new ImageSurface (Format.Argb32, self.Width, self.Height);
 			
@@ -129,6 +129,7 @@ namespace Docky.CairoHelper
 			
 			byte a;
 			int length = original.Data.Length;
+			byte slice = (byte) (byte.MaxValue * cutOff);
 			
 			unsafe {
 				byte* dataPtr = (byte*) original.DataPtr;
@@ -139,7 +140,7 @@ namespace Docky.CairoHelper
 					dataPtr[0] = 0;
 					dataPtr[1] = 0;
 					dataPtr[2] = 0;
-					dataPtr[3] = (a > 0) ? byte.MaxValue : (byte) 0;
+					dataPtr[3] = (a > slice) ? byte.MaxValue : (byte) 0;
 					
 					dataPtr += 4;
 				}
@@ -153,7 +154,7 @@ namespace Docky.CairoHelper
 			return target;
 		}
 		
-		public unsafe static DockySurface GaussianBlur (this DockySurface self, int size)
+		public unsafe static void GaussianBlur (this DockySurface self, int size)
 		{
 			// Note: This method is wickedly slow
 			
@@ -237,11 +238,10 @@ namespace Docky.CairoHelper
 					srcPtr[i] = (byte) ybufferPtr[i];
 			}
 			
-			DockySurface target = new DockySurface (self.Width, self.Height, self);
-			original.Show (target.Context, 0, 0);
+			self.Context.Operator = Operator.Source;
+			self.Context.SetSource (original);
+			self.Context.Paint ();
 			original.Destroy ();
-			
-			return target;
 		}
 		
 		static double[] BuildGaussianKernel (int gaussWidth)
@@ -266,6 +266,96 @@ namespace Docky.CairoHelper
 			}
 			
 			return kernel;
+		}
+		
+		public static void ExponentialBlur (this DockySurface self, int radius, int alphaPrecision, int paramPrecision)
+		{
+			self.ExponentialBlur (new Gdk.Rectangle (0, 0, self.Width, self.Height), radius, alphaPrecision, paramPrecision);
+		}
+		
+		public unsafe static void ExponentialBlur (this DockySurface self, Gdk.Rectangle area, int radius, int alphaPrecision, int paramPrecision)
+		{
+			if (radius < 1)
+				return;
+			
+			int alpha = (int) ((1 << alphaPrecision) * (1.0 - Math.Exp (-2.3 / (radius + 1.0))));
+			int height = area.Height;
+			int width = area.Width;
+			
+			ImageSurface original = new ImageSurface (Format.Argb32, width, height);
+			
+			using (Cairo.Context cr = new Cairo.Context (original)) {
+				cr.Operator = Operator.Source;
+				cr.SetSource (self.Internal, -area.X, -area.Y);
+				cr.Paint ();
+			}
+			
+			byte* pixels = (byte*) original.DataPtr;
+			int zR, zG, zB, zA;
+			for (int rowIndex = 0; rowIndex < height; rowIndex++) {
+				// Get a pointer to our current row
+				byte* row = pixels + rowIndex * width * 4;
+				
+				zR = row[0] << paramPrecision;
+				zG = row[1] << paramPrecision;
+				zB = row[2] << paramPrecision;
+				zA = row[3] << paramPrecision;
+				// Left to Right
+				for (int index = 1; index < width; index ++) {
+					ExponentialBlurInner (&row[index * 4], ref zR, ref zG, ref zB, ref zA, alpha, alphaPrecision, paramPrecision);
+				}
+				
+				// Right to Left
+				for (int index = width - 2; index >= 0; index--) {
+					ExponentialBlurInner (&row[index * 4], ref zR, ref zG, ref zB, ref zA, alpha, alphaPrecision, paramPrecision);
+				}
+			}
+			
+			for (int columnIndex = 0; columnIndex < width; columnIndex++) {
+				// blur columns
+				byte *column = pixels + columnIndex * 4;
+				
+				zR = column[0] << paramPrecision;
+				zG = column[1] << paramPrecision;
+				zB = column[2] << paramPrecision;
+				zA = column[3] << paramPrecision;
+				
+				// Top to Bottom
+				for (int index = width; index < (height - 1) * width; index += width) {
+					ExponentialBlurInner (&column[index * 4], ref zR, ref zG, ref zB, ref zA, alpha, alphaPrecision, paramPrecision);
+				}
+				
+				// Bottom to Top
+				for (int index = (height - 2) * width; index >= 0; index -= width) {
+					ExponentialBlurInner (&column[index * 4], ref zR, ref zG, ref zB, ref zA, alpha, alphaPrecision, paramPrecision);
+				}
+			}
+			
+			self.Context.Operator = Operator.Source;
+			self.Context.SetSource (original, area.X, area.Y);
+			self.Context.Rectangle (area.X, area.Y, area.Width, area.Height);
+			self.Context.Fill ();
+			self.Context.Operator = Operator.Over;
+			original.Destroy ();
+		}
+		
+		unsafe static void ExponentialBlurInner (byte* pixel, ref int zR, ref int zG, ref int zB, ref int zA, int alpha, int alphaPrecision, int paramPrecision)
+		{
+			int R, G, B, A;
+			R = pixel[0];
+			G = pixel[1];
+			B = pixel[2];
+			A = pixel[3];
+			
+			zR += (alpha * ((R << paramPrecision) - zR)) >> alphaPrecision;
+			zG += (alpha * ((G << paramPrecision) - zG)) >> alphaPrecision;
+			zB += (alpha * ((B << paramPrecision) - zB)) >> alphaPrecision;
+			zA += (alpha * ((A << paramPrecision) - zA)) >> alphaPrecision;
+			
+			pixel[0] = (byte) (zR >> paramPrecision);
+			pixel[1] = (byte) (zG >> paramPrecision);
+			pixel[2] = (byte) (zB >> paramPrecision);
+			pixel[3] = (byte) (zA >> paramPrecision);
 		}
 	}
 }
