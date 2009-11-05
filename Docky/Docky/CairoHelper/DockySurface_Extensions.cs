@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 using Cairo;
 using Gdk;
@@ -268,13 +269,15 @@ namespace Docky.CairoHelper
 			return kernel;
 		}
 		
-		public static void ExponentialBlur (this DockySurface self, int radius, int alphaPrecision, int paramPrecision)
+		public static void ExponentialBlur (this DockySurface self, int radius)
 		{
-			self.ExponentialBlur (new Gdk.Rectangle (0, 0, self.Width, self.Height), radius, alphaPrecision, paramPrecision);
+			self.ExponentialBlur (new Gdk.Rectangle (0, 0, self.Width, self.Height), radius);
 		}
 		
-		public unsafe static void ExponentialBlur (this DockySurface self, Gdk.Rectangle area, int radius, int alphaPrecision, int paramPrecision)
+		public unsafe static void ExponentialBlur (this DockySurface self, Gdk.Rectangle area, int radius)
 		{
+			int alphaPrecision = 16; 
+			int paramPrecision = 7;
 			if (radius < 1)
 				return;
 			
@@ -291,27 +294,37 @@ namespace Docky.CairoHelper
 			}
 			
 			byte* pixels = (byte*) original.DataPtr;
-			int zR, zG, zB, zA;
-			for (int rowIndex = 0; rowIndex < height; rowIndex++) {
-				// Get a pointer to our current row
-				byte* row = pixels + rowIndex * width * 4;
-				
-				zR = row[0] << paramPrecision;
-				zG = row[1] << paramPrecision;
-				zB = row[2] << paramPrecision;
-				zA = row[3] << paramPrecision;
-				// Left to Right
-				for (int index = 1; index < width; index ++) {
-					ExponentialBlurInner (&row[index * 4], ref zR, ref zG, ref zB, ref zA, alpha, alphaPrecision, paramPrecision);
-				}
-				
-				// Right to Left
-				for (int index = width - 2; index >= 0; index--) {
-					ExponentialBlurInner (&row[index * 4], ref zR, ref zG, ref zB, ref zA, alpha, alphaPrecision, paramPrecision);
-				}
-			}
 			
-			for (int columnIndex = 0; columnIndex < width; columnIndex++) {
+			// Process Rows
+			Thread th = new Thread ((ThreadStart) delegate {
+				ExponentialBlurRows (pixels, width, height, 0, height / 2, alpha, alphaPrecision, paramPrecision);
+			});
+			th.Start ();
+			
+			ExponentialBlurRows (pixels, width, height, height / 2, height, alpha, alphaPrecision, paramPrecision);
+			th.Join ();
+			
+			// Process Columns
+			th = new Thread ((ThreadStart) delegate {
+				ExponentialBlurColumns (pixels, width, height, 0, width / 2, alpha, alphaPrecision, paramPrecision);
+			});
+			th.Start ();
+			
+			ExponentialBlurColumns (pixels, width, height, width / 2, width, alpha, alphaPrecision, paramPrecision);
+			th.Join ();
+			
+			self.Context.Operator = Operator.Source;
+			self.Context.SetSource (original, area.X, area.Y);
+			self.Context.Rectangle (area.X, area.Y, area.Width, area.Height);
+			self.Context.Fill ();
+			self.Context.Operator = Operator.Over;
+			original.Destroy ();
+		}
+		
+		unsafe static void ExponentialBlurColumns (byte* pixels, int width, int height, int start, int end, int alpha, int alphaPrecision, int paramPrecision)
+		{
+			for (int columnIndex = start; columnIndex < end; columnIndex++) {
+				int zR, zG, zB, zA;
 				// blur columns
 				byte *column = pixels + columnIndex * 4;
 				
@@ -330,13 +343,29 @@ namespace Docky.CairoHelper
 					ExponentialBlurInner (&column[index * 4], ref zR, ref zG, ref zB, ref zA, alpha, alphaPrecision, paramPrecision);
 				}
 			}
-			
-			self.Context.Operator = Operator.Source;
-			self.Context.SetSource (original, area.X, area.Y);
-			self.Context.Rectangle (area.X, area.Y, area.Width, area.Height);
-			self.Context.Fill ();
-			self.Context.Operator = Operator.Over;
-			original.Destroy ();
+		}
+		
+		unsafe static void ExponentialBlurRows (byte* pixels, int width, int height, int start, int end, int alpha, int alphaPrecision, int paramPrecision)
+		{
+			for (int rowIndex = start; rowIndex < end; rowIndex++) {
+				int zR, zG, zB, zA;
+				// Get a pointer to our current row
+				byte* row = pixels + rowIndex * width * 4;
+				
+				zR = row[0] << paramPrecision;
+				zG = row[1] << paramPrecision;
+				zB = row[2] << paramPrecision;
+				zA = row[3] << paramPrecision;
+				// Left to Right
+				for (int index = 1; index < width; index ++) {
+					ExponentialBlurInner (&row[index * 4], ref zR, ref zG, ref zB, ref zA, alpha, alphaPrecision, paramPrecision);
+				}
+				
+				// Right to Left
+				for (int index = width - 2; index >= 0; index--) {
+					ExponentialBlurInner (&row[index * 4], ref zR, ref zG, ref zB, ref zA, alpha, alphaPrecision, paramPrecision);
+				}
+			}
 		}
 		
 		unsafe static void ExponentialBlurInner (byte* pixel, ref int zR, ref int zG, ref int zB, ref int zA, int alpha, int alphaPrecision, int paramPrecision)
