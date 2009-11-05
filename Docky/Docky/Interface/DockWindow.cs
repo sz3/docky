@@ -368,7 +368,12 @@ namespace Docky.Interface
 		
 		#region Internal Properties
 		Gdk.Point Cursor {
-			get { return CursorTracker.Cursor; }
+			get {
+				if (Screen != CursorTracker.Screen) {
+					return new Gdk.Point (-1000, -1000);
+				}
+				return CursorTracker.Cursor; 
+			}
 		}
 		
 		Gdk.Point LocalCursor {
