@@ -46,7 +46,10 @@ namespace Bookmarks
 			else
 				HoverText = name;
 			
-			OwnedFile.AddMountAction (() => SetIconFromGIcon (OwnedFile.Icon ()));
+			OwnedFile.AddMountAction (() => {
+				SetIconFromGIcon (OwnedFile.Icon ());
+				OnPaintNeeded ();
+			});
 		}
 		
 		void Remove ()
