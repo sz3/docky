@@ -239,12 +239,17 @@ namespace Docky.Windowing
 				} else {
 					string class_name = window.ClassGroup.ResClass;
 					
-					IEnumerable<string> matches = DesktopFiles
-						.Where (file => Path.GetFileNameWithoutExtension (file).Equals (class_name, StringComparison.CurrentCultureIgnoreCase));
+					try {
+						IEnumerable<string> matches = DesktopFiles
+							.Where (file => Path.GetFileNameWithoutExtension (file).Equals (class_name, StringComparison.CurrentCultureIgnoreCase));
 					
-					foreach (string s in matches) {
-						yield return s;
-						matched = true;
+						foreach (string s in matches) {
+							yield return s;
+							matched = true;
+						}
+					} catch (Exception e) {
+						Docky.Services.Log<WindowMatcher>.Error (e.Message);
+						Docky.Services.Log<WindowMatcher>.Debug (e.StackTrace);
 					}
 				}
 			}
