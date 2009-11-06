@@ -168,11 +168,12 @@ namespace Clock
 					
 					if (day.Date == DateTime.Today)
 					{
-						// FIXME
-						//Style style = Docky.Interface.DockWindow.Window.Style;
-						//Gdk.Color color = style.Backgrounds [(int) StateType.Selected].SetMinimumValue (100);
-						//cr.Color = color.ConvertToCairo (1.0);
-						cr.Color = new Cairo.Color (1, 1, 1, 0.8);
+						                                                               // FIXME
+						Gdk.Color color = Style.Backgrounds [(int) StateType.Selected];//.SetMinimumValue (100);
+						cr.Color = new Cairo.Color ((double) color.Red / ushort.MaxValue,
+													(double) color.Green / ushort.MaxValue,
+													(double) color.Blue / ushort.MaxValue,
+													1.0);
 					} else {
 						layout.FontDescription.Weight = Pango.Weight.Normal;
 					}
