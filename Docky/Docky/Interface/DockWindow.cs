@@ -299,7 +299,7 @@ namespace Docky.Interface
 				SetHoveredAcceptsDrop ();
 				OnHoveredItemChanged (last);
 				
-				if (hoveredItem != null) {
+				if (hoveredItem != null && background_buffer != null) {
 					DrawValue loc = DrawValues[hoveredItem].MoveIn (Position, IconSize * (ZoomPercent + .1) - IconSize / 2);
 					
 					Gdk.Point point = new Gdk.Point ((int) loc.StaticCenter.X, (int) loc.StaticCenter.Y);
