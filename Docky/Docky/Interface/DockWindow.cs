@@ -299,18 +299,22 @@ namespace Docky.Interface
 				SetHoveredAcceptsDrop ();
 				OnHoveredItemChanged (last);
 				
-				if (hoveredItem != null && background_buffer != null) {
-					DrawValue loc = DrawValues[hoveredItem].MoveIn (Position, IconSize * (ZoomPercent + .1) - IconSize / 2);
-					
-					Gdk.Point point = new Gdk.Point ((int) loc.StaticCenter.X, (int) loc.StaticCenter.Y);
-					point.X += window_position.X;
-					point.Y += window_position.Y;
-					
-					TextManager.Gravity = Position; // FIXME
-					TextManager.SetSurfaceAtPoint (hoveredItem.HoverTextSurface (background_buffer, Style), point); 
-				}
-				
+				UpdateHoverText ();
 				SetTooltipVisibility ();
+			}
+		}
+		
+		void UpdateHoverText ()
+		{
+			if (hoveredItem != null && background_buffer != null) {
+				DrawValue loc = DrawValues[hoveredItem].MoveIn (Position, IconSize * (ZoomPercent + .1) - IconSize / 2);
+				
+				Gdk.Point point = new Gdk.Point ((int) loc.StaticCenter.X, (int) loc.StaticCenter.Y);
+				point.X += window_position.X;
+				point.Y += window_position.Y;
+				
+				TextManager.Gravity = Position; // FIXME
+				TextManager.SetSurfaceAtPoint (hoveredItem.HoverTextSurface (background_buffer, Style), point); 
 			}
 		}
 		
@@ -684,6 +688,7 @@ namespace Docky.Interface
 		
 		void ItemHoverTextChanged (object sender, EventArgs e)
 		{
+			UpdateHoverText ();
 			AnimatedDraw ();
 		}
 		
