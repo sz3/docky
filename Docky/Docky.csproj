@@ -77,7 +77,7 @@
     <Compile Include="Docky\Interface\AddinTreeView.cs" />
     <Compile Include="Docky\Interface\DockDragTracker.cs" />
     <Compile Include="Docky\Interface\PoofWindow.cs" />
-    <Compile Include="Docky\Interface\SurfaceWindow.cs" />
+    <Compile Include="Docky\Interface\HoverTextManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Addins, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
