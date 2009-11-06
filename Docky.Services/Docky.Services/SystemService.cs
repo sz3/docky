@@ -148,7 +148,7 @@ namespace Docky.Services
 		[Interface(DeviceKitPowerName)]
 		interface IDeviceKitPower : org.freedesktop.DBus.Properties
 		{
-			event Action OnChanged;
+			event Action Changed;
 		}
 		
 		bool on_battery;
@@ -165,8 +165,8 @@ namespace Docky.Services
 				BusG.Init ();
 				if (Bus.System.NameHasOwner (DeviceKitPowerName)) {
 					devicekit = Bus.System.GetObject<IDeviceKitPower> (DeviceKitPowerName, new ObjectPath (DeviceKitPowerPath));
-					devicekit.OnChanged += DeviceKitOnChanged;
-					on_battery = (bool) devicekit.Get (DeviceKitPowerName, "on-battery");
+					devicekit.Changed += HandleDeviceKitChanged;
+					HandleDeviceKitChanged ();
 					Log<SystemService>.Debug ("Using org.freedesktop.DeviceKit.Power for battery information");
 				} else if (Bus.Session.NameHasOwner (PowerManagementName)) {
 					power = Bus.Session.GetObject<IPowerManagement> (PowerManagementName, new ObjectPath (PowerManagementPath));
@@ -182,13 +182,15 @@ namespace Docky.Services
 
 		void PowerOnBatteryChanged (bool val)
 		{
-			on_battery = val;
-			OnBatteryStateChanged ();
+			if (on_battery != val) {
+				on_battery = val;
+				OnBatteryStateChanged ();
+			}
 		}
 		
-		void DeviceKitOnChanged ()
+		void HandleDeviceKitChanged ()
 		{
-			bool newState = (bool) devicekit.Get (DeviceKitPowerName, "on-battery");
+			bool newState = (bool) devicekit.Get (DeviceKitPowerName, "OnBattery");
 			
 			if (on_battery != newState) {
 				on_battery = newState;
