@@ -895,7 +895,11 @@ namespace Docky.Interface
 		
 		void SetTooltipVisibility ()
 		{
-			bool visible = HoveredItem != null && !InternalDragActive && !Menu.Visible && !ConfigurationMode;
+			bool visible = HoveredItem != null && 
+				!InternalDragActive && 
+				!Menu.Visible && 
+				!ConfigurationMode && 
+				Painter == null;
 			
 			if (visible)
 				TextManager.Show ();
@@ -988,6 +992,8 @@ namespace Docky.Interface
 			Painter.SetAllocation (new Gdk.Rectangle (0, 0, DockWidth - 100, DockHeight));
 			Painter.SetStyle (Style);
 			Painter.Shown ();
+			
+			SetTooltipVisibility ();
 		}
 		
 		void HidePainter ()
@@ -1002,6 +1008,8 @@ namespace Docky.Interface
 			update_screen_regions = true;
 			Painter.Hidden ();
 			Painter = null;
+			
+			SetTooltipVisibility ();
 		}
 		
 		void HandlePainterPaintNeeded (object sender, EventArgs e)
