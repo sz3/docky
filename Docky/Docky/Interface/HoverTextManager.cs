@@ -38,6 +38,7 @@ namespace Docky.Interface
 		public bool Visible { get; private set; }
 		
 		Gtk.Window window;
+		Gdk.Point currentPoint;
 		DockySurface currentSurface;
 		
 		public HoverTextManager ()
@@ -46,7 +47,11 @@ namespace Docky.Interface
 		
 		public void SetSurfaceAtPoint (DockySurface surface, Gdk.Point point)
 		{
+			if (surface == currentSurface && point == currentPoint)
+				return;
+				
 			currentSurface = surface;
+			currentPoint = point;
 			
 			ClearWindow ();
 			
@@ -58,6 +63,7 @@ namespace Docky.Interface
 			window.AppPaintable = true;
 			window.AcceptFocus = false;
 			window.Decorated = false;
+			window.DoubleBuffered = true;
 			window.KeepAbove = true;
 			window.SkipPagerHint = true;
 			window.SkipTaskbarHint = true;
@@ -92,9 +98,9 @@ namespace Docky.Interface
 		void HandleWindowExposeEvent (object o, ExposeEventArgs args)
 		{
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (args.Event.Window)) {
-				cr.AlphaPaint ();
-				if (currentSurface != null)
-					currentSurface.Internal.Show (cr, 0, 0);
+				cr.Operator = Operator.Source;
+				cr.SetSource (currentSurface.Internal);
+				cr.Paint ();
 			}
 		}
 		

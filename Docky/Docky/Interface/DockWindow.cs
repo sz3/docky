@@ -688,7 +688,8 @@ namespace Docky.Interface
 		
 		void ItemHoverTextChanged (object sender, EventArgs e)
 		{
-			UpdateHoverText ();
+			if ((sender as AbstractDockItem) == HoveredItem)
+				UpdateHoverText ();
 			AnimatedDraw ();
 		}
 		
