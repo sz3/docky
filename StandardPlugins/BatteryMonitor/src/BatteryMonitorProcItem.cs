@@ -113,7 +113,6 @@ namespace BatteryMonitor
 		bool UpdateBattStat ()
 		{
 			string capacity = null;
-			string chargeState = null;
 			
 			current_capacity = 0;
 			DirectoryInfo basePath = new DirectoryInfo (BattBasePath);
@@ -123,19 +122,13 @@ namespace BatteryMonitor
 				if (System.IO.File.Exists (path)) {
 					try {
 						using (StreamReader reader = new StreamReader (path)) {
-							string line;
 							while (!reader.EndOfStream) {
-								if (!string.IsNullOrEmpty (capacity) && !string.IsNullOrEmpty (chargeState))
-									break;
+								string line = reader.ReadLine ();
 								
-								line = reader.ReadLine ();
 								if (line.StartsWith ("remaining capacity")) {
 									capacity = line;
-									continue;
+									break;
 								}
-								
-								if (line.StartsWith ("charging state"))
-									chargeState = line;
 							}
 						}
 					} catch (IOException) {}
