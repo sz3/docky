@@ -322,7 +322,7 @@ namespace Docky.Items
 				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (10);
 				layout.FontDescription.Weight = Pango.Weight.Bold;
 				layout.Ellipsize = Pango.EllipsizeMode.End;
-				layout.Width = Pango.Units.FromPixels (200);
+				layout.Width = Pango.Units.FromPixels (500);
 				
 				layout.SetText (HoverText);
 				
