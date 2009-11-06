@@ -29,6 +29,7 @@ FILES = \
 	Docky/Interface/DockWindow.cs \
 	Docky/Interface/DockPreferences.cs \
 	Docky/Interface/HoveredItemChangedArgs.cs \
+	Docky/Interface/HoverTextManager.cs \
 	Docky/Interface/IDockPreferences.cs \
 	Docky/Interface/ItemProvidersChangedEventArgs.cs \
 	Docky/Interface/PoofWindow.cs \

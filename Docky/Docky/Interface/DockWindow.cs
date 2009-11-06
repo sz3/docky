@@ -190,6 +190,8 @@ namespace Docky.Interface
 		
 		internal DockDragTracker DragTracker { get; private set; }
 		
+		internal HoverTextManager TextManager { get; private set; }
+		
 		AnimationState AnimationState { get; set; }
 		
 		DockItemMenu Menu { get; set; }
@@ -231,6 +233,7 @@ namespace Docky.Interface
 				DragTracker.RepositionMode = config_mode;
 				update_screen_regions = true;
 				
+				SetTooltipVisibility ();
 				AnimatedDraw ();
 			}
 		}
@@ -295,6 +298,19 @@ namespace Docky.Interface
 				hoveredItem = value;
 				SetHoveredAcceptsDrop ();
 				OnHoveredItemChanged (last);
+				
+				if (hoveredItem != null) {
+					DrawValue loc = DrawValues[hoveredItem].MoveIn (Position, IconSize * (ZoomPercent + .1) - IconSize / 2);
+					
+					Gdk.Point point = new Gdk.Point ((int) loc.StaticCenter.X, (int) loc.StaticCenter.Y);
+					point.X += window_position.X;
+					point.Y += window_position.Y;
+					
+					TextManager.Gravity = Position; // FIXME
+					TextManager.SetSurfaceAtPoint (hoveredItem.HoverTextSurface (background_buffer, Style), point); 
+				}
+				
+				SetTooltipVisibility ();
 			}
 		}
 		
@@ -498,8 +514,10 @@ namespace Docky.Interface
 		{
 			DrawValues = new Dictionary<AbstractDockItem, DrawValue> ();
 			Menu = new DockItemMenu (this);
-			Menu.Shown += (o, a) => AnimatedDraw ();
+			Menu.Shown += HandleMenuShown;
+			Menu.Hidden += HandleMenuHidden;
 			
+			TextManager = new HoverTextManager ();
 			DragTracker = new DockDragTracker (this);
 			AnimationState = new AnimationState ();
 			BuildAnimationEngine ();
@@ -544,6 +562,17 @@ namespace Docky.Interface
 			AnimationState.AddCondition (Animations.Bounce,
 			                             () => Items.Any (i => (DateTime.UtcNow - i.LastClick) < BounceTime ||
 					                                            (DateTime.UtcNow - i.StateSetTime (ItemState.Urgent)) < BounceTime));
+		}
+
+		void HandleMenuHidden (object sender, EventArgs e)
+		{
+			SetTooltipVisibility ();
+		}
+
+		void HandleMenuShown (object sender, EventArgs e)
+		{
+			AnimatedDraw ();
+			SetTooltipVisibility ();
 		}
 
 		void DockyControllerThemeChanged (object sender, EventArgs e)
@@ -864,6 +893,16 @@ namespace Docky.Interface
 			AnimatedDraw ();
 		}
 		
+		void SetTooltipVisibility ()
+		{
+			bool visible = HoveredItem != null && !InternalDragActive && !Menu.Visible && !ConfigurationMode;
+			
+			if (visible)
+				TextManager.Show ();
+			else
+				TextManager.Hide ();
+		}
+		
 		internal void SetHoveredAcceptsDrop ()
 		{
 			HoveredAcceptsDrop = false;
@@ -1050,11 +1089,10 @@ namespace Docky.Interface
 			
 			if (VerticalDock) {
 				Height = monitor_geo.Height;
-				Width = ZoomedIconSize + 2 * DockHeightBuffer + 180;
+				Width = DockHeightBuffer + ZoomedIconSize + UrgentBounceHeight;
 			} else {
 				Width = monitor_geo.Width;
-				Height = ZoomedIconSize + 2 * DockHeightBuffer + UrgentBounceHeight;
-				Height = Math.Max (150, Height);
+				Height = DockHeightBuffer + ZoomedIconSize + UrgentBounceHeight;
 			}
 			SetSizeRequest (Width, Height);
 		}
@@ -1642,14 +1680,6 @@ namespace Docky.Interface
 				surface.Context.Operator = Operator.Over;
 			}
 			
-			if (HoveredItem == item && !InternalDragActive && !Menu.Visible && !ConfigurationMode) {
-				DrawValue loc = val.MoveIn (Position, IconSize * (ZoomPercent + .1) - IconSize / 2);
-				
-				DockySurface text = item.HoverTextSurface (surface, Style);
-				if (text != null)
-					text.ShowAtEdge (surface, loc.StaticCenter, Position);
-			}
-			
 			if (item.Indicator != ActivityIndicator.None) {
 				if (normal_indicator_buffer == null)
 					normal_indicator_buffer = CreateNormalIndicatorBuffer ();
@@ -1749,7 +1779,6 @@ namespace Docky.Interface
 				} else {
 					background_buffer = new DockySurface (BackgroundWidth, BackgroundHeight, surface);
 				}
-					
 					
 				Gdk.Pixbuf background = DockServices.Drawing.LoadIcon (Docky.Controller.BackgroundSvg, -1);
 				Gdk.Pixbuf tmp;
@@ -1961,7 +1990,9 @@ namespace Docky.Interface
 			AutohideManager.Dispose ();
 			UnregisterPreferencesEvents (Preferences);
 			
+			TextManager.Dispose ();
 			DragTracker.Dispose ();
+			
 			CursorTracker.CursorPositionChanged -= HandleCursorPositionChanged;
 			AutohideManager.HiddenChanged -= HandleHiddenChanged;
 			AutohideManager.DockHoveredChanged -= HandleDockHoveredChanged;
