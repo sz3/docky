@@ -43,21 +43,6 @@ namespace Docky.Interface
 		
 		public HoverTextManager ()
 		{
-		}
-		
-		public void SetSurfaceAtPoint (DockySurface surface, Gdk.Point point)
-		{
-			if (surface == currentSurface && point == currentPoint)
-				return;
-				
-			currentSurface = surface;
-			currentPoint = point;
-			
-			ClearWindow ();
-			
-			if (surface == null)
-				return;
-			
 			window = new Gtk.Window (Gtk.WindowType.Popup);
 			
 			window.AppPaintable = true;
@@ -73,8 +58,24 @@ namespace Docky.Interface
 			window.Stick ();
 			
 			window.SetCompositeColormap ();
-			window.SetSizeRequest (surface.Width, surface.Height);
 			window.ExposeEvent += HandleWindowExposeEvent;
+		}
+		
+		public void SetSurfaceAtPoint (DockySurface surface, Gdk.Point point)
+		{
+			if (surface == currentSurface && point == currentPoint)
+				return;
+				
+			currentSurface = surface;
+			currentPoint = point;
+			
+			if (surface == null) {
+				window.Hide ();
+				return;
+			}
+			
+			window.SetSizeRequest (surface.Width, surface.Height);
+			window.QueueDraw ();
 			
 			switch (Gravity) {
 			case DockPosition.Top:
@@ -99,7 +100,10 @@ namespace Docky.Interface
 		{
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (args.Event.Window)) {
 				cr.Operator = Operator.Source;
-				cr.SetSource (currentSurface.Internal);
+				if (currentSurface == null)
+					cr.Color = new Cairo.Color (1, 1, 1, 0);
+				else
+					cr.SetSource (currentSurface.Internal);
 				cr.Paint ();
 			}
 		}
@@ -107,29 +111,24 @@ namespace Docky.Interface
 		public void Show ()
 		{
 			Visible = true;
-			if (window != null)
+			if (currentSurface != null)
 				window.Show ();
 		}
 		
 		public void Hide ()
 		{
 			Visible = false;
-			if (window != null)
-				window.Hide ();
+			window.Hide ();
 		}
 		
-		void ClearWindow ()
+		#region IDisposable implementation
+		public void Dispose ()
 		{
 			if (window != null) {
 				window.Destroy ();
 				window.Dispose ();
 				window = null;
 			}
-		}
-		#region IDisposable implementation
-		public void Dispose ()
-		{
-			ClearWindow ();
 		}
 		#endregion
 	}
