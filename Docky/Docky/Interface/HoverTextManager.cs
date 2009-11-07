@@ -40,6 +40,7 @@ namespace Docky.Interface
 		Gtk.Window window;
 		Gdk.Point currentPoint;
 		DockySurface currentSurface;
+		uint timer;
 		
 		public HoverTextManager ()
 		{
@@ -77,20 +78,31 @@ namespace Docky.Interface
 			window.SetSizeRequest (surface.Width, surface.Height);
 			window.QueueDraw ();
 			
+			Gdk.Point center = Gdk.Point.Zero;
 			switch (Gravity) {
 			case DockPosition.Top:
-				window.Move (point.X - surface.Width / 2, point.Y);
+				center = new Gdk.Point (point.X - surface.Width / 2, point.Y);
 				break;
 			case DockPosition.Left:
-				window.Move (point.X, point.Y - surface.Height / 2);
+				center = new Gdk.Point (point.X, point.Y - surface.Height / 2);
 				break;
 			case DockPosition.Right:
-				window.Move (point.X - surface.Width, point.Y - surface.Height / 2);
+				center = new Gdk.Point (point.X - surface.Width, point.Y - surface.Height / 2);
 				break;
 			case DockPosition.Bottom:
-				window.Move (point.X - surface.Width / 2, point.Y - surface.Height);
+				center = new Gdk.Point (point.X - surface.Width / 2, point.Y - surface.Height);
 				break;
 			}
+			
+			if (timer > 0)
+				GLib.Source.Remove (timer);
+			
+			window.Move (center.X, center.Y);
+			timer = GLib.Timeout.Add (100, delegate {
+				window.Move (center.X, center.Y);
+				timer = 0;
+				return false;
+			});
 			
 			if (Visible)
 				window.Show ();
