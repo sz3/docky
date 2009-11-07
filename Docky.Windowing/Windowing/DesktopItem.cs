@@ -31,9 +31,9 @@ namespace Docky.Windowing
 
 	public class DesktopItem : IDisposable
 	{
-		public string Location { get; private set; }
+		static string[] LocaleEnvVariables = new [] {"LC_ALL", "LC_MESSAGES", "LANG", "LANGUAGE"};
 		
-		string[] LocaleEnvVariables = new [] {"LC_ALL", "LC_MESSAGES", "LANG", "LANGUAGE"};
+		public string Location { get; private set; }
 		
 		public DesktopItem (string path)
 		{

@@ -48,7 +48,7 @@ namespace Docky.Items
 			get { return windows; }
 			protected set {
 				UnregisterWindows (windows);
-				windows = value;
+				windows = value.ToArray ();
 				RegisterWindows (windows);
 				
 				SetIndicator ();

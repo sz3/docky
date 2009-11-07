@@ -563,9 +563,18 @@ namespace Docky.Interface
 			                             () => ((DateTime.UtcNow - hidden_change_time) < BaseAnimationTime));
 			AnimationState.AddCondition (Animations.ItemsChanged,
 				                         () => ((DateTime.UtcNow - items_change_time) < BaseAnimationTime));
-			AnimationState.AddCondition (Animations.Bounce,
-			                             () => Items.Any (i => (DateTime.UtcNow - i.LastClick) < BounceTime ||
-					                                            (DateTime.UtcNow - i.StateSetTime (ItemState.Urgent)) < BounceTime));
+			AnimationState.AddCondition (Animations.Bounce, BouncingItems);
+		}
+		
+		bool BouncingItems ()
+		{
+			DateTime now = DateTime.UtcNow;
+			
+			foreach (AbstractDockItem adi in Items) {
+				if ((now - adi.LastClick) < BounceTime || (now - adi.StateSetTime (ItemState.Urgent)) < BounceTime)
+					return true;
+			}
+			return false;
 		}
 
 		void HandleMenuHidden (object sender, EventArgs e)
@@ -1201,6 +1210,7 @@ namespace Docky.Interface
 			}
 			
 			Gdk.Point cursor = Cursor;
+			Gdk.Point localCursor = LocalCursor;
 			
 			// screen shift sucks
 			cursor.X -= monitor_geo.X;
@@ -1381,7 +1391,7 @@ namespace Docky.Interface
 				val.HoverArea = hoverArea;
 				DrawValues[adi] = val;
 
-				if (hoverArea.Contains (LocalCursor)) {
+				if (hoverArea.Contains (localCursor)) {
 					HoveredItem = adi;
 					hoveredItemSet = true;
 				}
