@@ -47,6 +47,8 @@ namespace Mounter
 			SetIconFromGIcon (mount.Icon);
 			
 			HoverText = Mnt.Name;
+			
+			Mnt.Changed += (o, a) => SetIconFromGIcon (Mnt.Icon);
 		}
 		
 		public Mount Mnt { get; private set; }
