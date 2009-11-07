@@ -70,9 +70,11 @@ namespace Docky
 			
 			Wnck.Global.ClientType = Wnck.ClientType.Pager;
 			
-			// for now, let's output the version number
+			// output the version number & system info
 			Log.DisplayLevel = LogLevel.Info;
-			Log.Info ("Loading Docky, Version: {0}", AssemblyInfo.VersionDetails);
+			Log.Info ("Docky version: {0}", AssemblyInfo.VersionDetails);
+			Log.Info ("Kernel version: {0}", System.Environment.OSVersion.Version);
+			Log.Info ("CLR version: {0}", System.Environment.Version);
 			
 			// now lets set the log level
 			Log.DisplayLevel = CommandLinePreferences.Logging;
