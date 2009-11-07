@@ -258,6 +258,22 @@ namespace Docky.Interface
 			set { prefs.Set<bool> ("FirstRun", value); }
 		}
 		
+		public void ResetPreferences ()
+		{
+			SetOption<string> ("Autohide", "None");
+			SetOption<bool> ("FadeOnHide", false);
+			SetOption<double> ("FadeOpacity", 0);
+			SetOption<int?> ("IconSize", 64);
+			SetOption<bool?> ("IndicateMultipleWindows", false);
+			SetOption<string[]> ("Launchers", new string[0]);
+			SetOption<int?> ("MonitorNumber", 0);
+			SetOption<string[]> ("Plugins", new string[0]);
+			SetOption<string[]> ("SortList", new string[0]);
+			SetOption<bool?> ("WindowManager", false);
+			SetOption<bool?> ("ZoomEnabled", true);
+			SetOption<double?> ("ZoomPercent", 2.0);
+		}
+		
 		public DockPreferences (string dockName, int monitorNumber) : this(dockName)
 		{
 			MonitorNumber = monitorNumber;
