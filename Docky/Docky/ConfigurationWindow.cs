@@ -61,6 +61,8 @@ namespace Docky
 		{
 			this.Build ();
 			
+			SkipTaskbarHint = true;
+			
 			int i = 0;
 			foreach (string theme in Docky.Controller.DockThemes) {
 				theme_combo.AppendText (theme);
