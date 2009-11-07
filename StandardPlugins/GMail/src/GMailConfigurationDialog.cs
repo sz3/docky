@@ -25,6 +25,8 @@ namespace GMail
 	{
 		public GMailConfigurationDialog ()
 		{
+			IconName = Gtk.Stock.Preferences;
+			
 			Notebook notebook = new Notebook ();
 			
 			GMailLoginConfig login = new GMailLoginConfig ();

@@ -25,6 +25,8 @@ namespace WeatherDocklet
 	{
 		public WeatherConfigurationDialog ()
 		{
+			IconName = Gtk.Stock.Preferences;
+			
 			WeatherConfiguration config = new WeatherConfiguration ();
 			
 			VBox.PackEnd (config);
