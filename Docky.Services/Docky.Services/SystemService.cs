@@ -305,15 +305,17 @@ namespace Docky.Services
 				proc.StartInfo.UseShellExecute = false;
 				proc.Start ();
 			} else {
+				System.Diagnostics.Process proc;
 				if (executable.Contains (" ")) {
 					string[] args = executable.Split (' ');
 					
 					Log<SystemService>.Debug ("Calling: " + args[0] + " " + executable.Substring (args[0].Length + 1));
-					System.Diagnostics.Process.Start (args[0], executable.Substring (args[0].Length + 1));
+					proc = System.Diagnostics.Process.Start (args[0], executable.Substring (args[0].Length + 1));
 				} else {
 					Log<SystemService>.Debug ("Calling: " + executable);
-					System.Diagnostics.Process.Start (executable);
+					proc = System.Diagnostics.Process.Start (executable);
 				}
+				proc.Dispose ();
 			}
 		}
 		
