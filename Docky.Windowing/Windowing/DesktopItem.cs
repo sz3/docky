@@ -180,168 +180,28 @@ namespace Docky.Windowing
 			return Convert.ToDouble (result);
 		}
 		
-		string FindProgramInPath (string program)
-		{
-			string[] paths = Environment.GetEnvironmentVariable ("PATH").Split (':');
-			
-			foreach (string path in paths) {
-				string file = Path.Combine (path, program);
-				if (!File.Exists (file))
-					continue;
-				
-				Mono.Unix.Native.Stat stat;
-				Mono.Unix.Native.Syscall.stat (file, out stat);
-				
-				if ((stat.st_mode & Mono.Unix.Native.FilePermissions.S_IXOTH) == Mono.Unix.Native.FilePermissions.S_IXOTH) {
-					return file;
-				}
-			}
-			
-			return null;
-		}
-		
-		string GetTerminal ()
-		{
-			
-			if (FindProgramInPath ("gnome-terminal") != null) {
-				return "gnome-terminal -x";
-			} else if (FindProgramInPath ("nxterm") != null) {
-				return "nxterm -e";
-			} else if (FindProgramInPath ("rxvt") != null) {
-				return "rxvt -e";
-			} else if (FindProgramInPath ("color-xterm") != null) {
-				return "color-xterm -e";
-			} else {
-				return "xterm -e";
-			}
-		}
-		
-		IEnumerable<string> TokenizeString (string input)
-		{
-			StringBuilder builder = new StringBuilder ();
-			for (int i = 0; i < input.Length; i++) {
-				
-				char c = input[i];
-				// escape sequence
-				if (c == '\\') {
-					// end of string
-					if (i == input.Length - 1) {
-						break;
-					}
-					i++;
-					char n = input[i];
-					
-					if (char.IsWhiteSpace (n)) {
-						builder.Append (' ');
-					} else if (n == '\\') {
-						builder.Append ('\\');
-					}
-				} else if (char.IsWhiteSpace (c)) {
-					if (builder.Length > 0) {
-						yield return builder.ToString ();
-						builder = new StringBuilder ();
-					}
-				} else {
-					builder.Append (c);
-				}
-			}
-			
-			yield return builder.ToString ();
-		}
-		
 		public void Launch (IEnumerable<string> uris)
 		{
-			string exec = GetString ("Exec");
-			if (exec == null)
+			GLib.DesktopAppInfo dai = GLib.DesktopAppInfo.NewFromFilename (Location);
+			
+			string[] uriList = uris.Where (uri => uri != null).ToArray ();
+			if (!uriList.Any ()) {
+				dai.Launch (null, null);
 				return;
-			
-			StringBuilder builder = new StringBuilder ();
-			
-			if (HasAttribute ("Terminal") && GetBool ("Terminal")) {
-				builder.Append (GetTerminal ());
-				builder.Append (" ");
-			}
-			
-			bool uris_placed = !uris.Any ();
-			
-			foreach (string token in TokenizeString (exec)) {
-				if (token.StartsWith ("%")) {
-					switch (token[1]) {
-					case 'f':
-						// single file
-						if (uris_placed)
-							continue;
-						
-						string file = new Uri (uris.First ()).LocalPath;
-						builder.Append (file);
-						builder.Append (" ");
-						
-						uris_placed = true;
-						break;
-					case 'F':
-						// multiple files
-						if (uris_placed)
-							continue;
-						
-						foreach (string uri in uris) {
-							file = new Uri (uri).LocalPath;
-							builder.Append (file);
-							builder.Append (" ");
-						}
-						
-						uris_placed = true;
-						break;
-					case 'u':
-						// single uri
-						if (uris_placed)
-							continue;
-						
-						builder.Append (uris.First ());
-						builder.Append (" ");
-						
-						uris_placed = true;
-						break;
-					case 'U':
-						// multiple uris
-						if (uris_placed)
-							continue;
-						
-						foreach (string uri in uris) {
-							builder.Append (uri);
-							builder.Append (" ");
-						}
-						
-						uris_placed = true;
-						break;
-					case 'i':
-						// icon
-						if (!HasAttribute ("Icon"))
-							continue;
-						builder.Append (GetString ("Icon"));
-						builder.Append (" ");
-						break;
-					case 'c':
-						// translated name
-						string name = GetLocaleString ("Name");
-						if (name == null)
-							continue;
-						builder.Append (name);
-						builder.Append (" ");
-						break;
-					case 'k':
-						// .desktop file
-						builder.Append (Location);
-						builder.Append (" ");
-						break;
-					default:
-						continue;
-					}
-				} else {
-					builder.Append (token);
-					builder.Append (" ");
+			} else {
+				if (dai.SupportsUris) {
+					GLib.List glist = new GLib.List (uriList as object[], typeof(string), false, true);
+					dai.LaunchUris (glist, null);
+					glist.Dispose ();
+				} else if (dai.SupportsFiles) {
+					GLib.File[] files = uriList.Select (uri => GLib.FileFactory.NewForUri (uri)).ToArray ();
+					GLib.List glist = new GLib.List (files as object[], typeof(GLib.File), false, true);
+					dai.Launch (glist, null);
+					glist.Dispose ();
 				}
 			}
-			DockServices.System.Execute (builder.ToString ());
+			
+			dai.Dispose ();
 		}
 		
 		#region IDisposable implementation

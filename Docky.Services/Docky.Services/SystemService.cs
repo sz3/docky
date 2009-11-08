@@ -334,7 +334,8 @@ namespace Docky.Services
 		
 		public void RunOnThread (Action action)
 		{
-			System.Threading.Thread newThread = new System.Threading.Thread (() => {
+			System.Threading.Thread newThread = new System.Threading.Thread (() =>
+			{
 				try {
 					action ();
 				} catch (ThreadAbortException) {

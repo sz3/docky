@@ -43,6 +43,10 @@
       <Package>wnck-sharp-1.0</Package>
     </Reference>
     <Reference Include="Mono.Posix" />
+    <Reference Include="gio-sharp, Version=2.14.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\gio-sharp\gio\gio-sharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
