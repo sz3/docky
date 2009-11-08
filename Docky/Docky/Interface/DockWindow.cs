@@ -1516,12 +1516,12 @@ namespace Docky.Interface
 				Gdk.Color color = Style.BaseColors[(int) Gtk.StateType.Active];
 				
 				using (DockySurface tmp = surface.CreateMask (0)) {
-					tmp.ExponentialBlur (20);
+					tmp.ExponentialBlur (30);
 					tmp.Context.Color = new Cairo.Color (
 						(double) color.Red / ushort.MaxValue, 
 						(double) color.Green / ushort.MaxValue, 
 						(double) color.Blue / ushort.MaxValue, 
-						.65).SetValue (1).MultiplySaturation (3);
+						.90).SetValue (1).MultiplySaturation (4);
 					tmp.Context.Operator = Operator.Atop;
 					tmp.Context.Paint ();
 				
