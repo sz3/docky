@@ -1512,6 +1512,25 @@ namespace Docky.Interface
 			
 			DrawDockBackground (surface, dockArea);
 			
+			if (ActiveGlow) {
+				Gdk.Color color = Style.BaseColors[(int) Gtk.StateType.Active];
+				
+				using (DockySurface tmp = surface.CreateMask (0)) {
+					tmp.ExponentialBlur (20);
+					tmp.Context.Color = new Cairo.Color (
+						(double) color.Red / ushort.MaxValue, 
+						(double) color.Green / ushort.MaxValue, 
+						(double) color.Blue / ushort.MaxValue, 
+						.65).SetValue (1).MultiplySaturation (3);
+					tmp.Context.Operator = Operator.Atop;
+					tmp.Context.Paint ();
+				
+					surface.Context.Operator = Operator.DestOver;
+					surface.Context.SetSource (tmp.Internal);
+					surface.Context.Paint ();
+					surface.Context.Operator = Operator.Over;
+				}
+			}
 			
 			if (Painter == null) {
 			
@@ -1534,19 +1553,6 @@ namespace Docky.Interface
 			
 			if (DockOpacity < 1)
 				SetDockOpacity (surface);
-			
-			if (ActiveGlow) {
-				Gdk.Color color = Style.BaseColors[(int) Gtk.StateType.Active];
-				
-				surface.Context.Operator = Operator.Atop;
-				surface.Context.Color = new Cairo.Color (
-					(double) color.Red / ushort.MaxValue, 
-					(double) color.Green / ushort.MaxValue, 
-					(double) color.Blue / ushort.MaxValue, 
-					.65).MultiplySaturation (3);
-				surface.Context.Paint ();
-				surface.Context.Operator = Operator.Over;
-			}
 			
 			SetInputMask (cursorArea);
 			
