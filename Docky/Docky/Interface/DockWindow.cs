@@ -285,7 +285,6 @@ namespace Docky.Interface
 			get { return AutohideManager.DockHovered; }
 		}
 		
-		
 		internal AbstractDockItem HoveredItem {
 			get {
 				if (!DockHovered)

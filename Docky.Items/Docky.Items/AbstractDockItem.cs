@@ -280,7 +280,7 @@ namespace Docky.Items
 		#region Buffer Handling
 		public DockySurface IconSurface (DockySurface model, int size)
 		{
-			if (main_buffer == null || main_buffer.Height != size || main_buffer.Width != size) {
+			if (main_buffer == null || (main_buffer.Height != size && main_buffer.Width != size)) {
 				average_color = null;
 				main_buffer = ResetBuffer (main_buffer);
 			

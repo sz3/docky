@@ -37,7 +37,7 @@ namespace Docky.CairoHelper
 		
 		public Surface Internal {
 			get { 
-				if (surface == null)
+				if (surface == null && !disposed)
 					surface = new ImageSurface (Format.Argb32, Width, Height);
 				return surface; 
 			}
@@ -54,7 +54,7 @@ namespace Docky.CairoHelper
 		
 		public Context Context {
 			get {
-				if (context == null)
+				if (context == null && !disposed)
 					context = new Context (Internal);
 				return context;
 			}
@@ -78,6 +78,8 @@ namespace Docky.CairoHelper
 		
 		public void Clear ()
 		{
+			if (disposed)
+				return;
 			Context.Save ();
 			
 			Context.Color = new Cairo.Color (0, 0, 0, 0);
@@ -89,6 +91,8 @@ namespace Docky.CairoHelper
 		
 		public DockySurface DeepCopy ()
 		{
+			if (disposed)
+				return null;
 			Surface copy = Internal.CreateSimilar (Content.ColorAlpha, Width, Height);
 			using (Cairo.Context cr = new Cairo.Context (copy)) {
 				Internal.Show (cr, 0, 0);
@@ -102,6 +106,8 @@ namespace Docky.CairoHelper
 		
 		public void EnsureSurfaceModel (Surface reference)
 		{
+			if (disposed)
+				return;
 			if (reference == null)
 				throw new ArgumentNullException ("Reference Surface", "Reference Surface may not be null");
 			
