@@ -76,7 +76,6 @@ namespace Docky.Interface
 			}
 			
 			window.SetSizeRequest (surface.Width, surface.Height);
-			window.QueueDraw ();
 			
 			Gdk.Point center = Gdk.Point.Zero;
 			switch (Gravity) {
@@ -96,6 +95,7 @@ namespace Docky.Interface
 			
 			if (timer > 0)
 				GLib.Source.Remove (timer);
+			
 			
 			window.Move (center.X, center.Y);
 			timer = GLib.Timeout.Add (100, delegate {
