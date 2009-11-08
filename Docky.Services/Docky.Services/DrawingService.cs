@@ -34,7 +34,7 @@ namespace Docky.Services
 
 	public class DrawingService
 	{
-		const string MissingIconIcon = "emblem-noread";
+		const string MissingIconIcon = "application-default-icon";
 		
 		internal DrawingService ()
 		{
