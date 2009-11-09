@@ -423,22 +423,14 @@ namespace Docky.Interface
 				if (GdkWindow == null)
 					return 0;
 				
-				DockySurface model;
-				if (background_buffer != null) {
-					model = main_buffer;
-				} else {
-					using (Cairo.Context cr = Gdk.CairoHelper.Create (GdkWindow)) {
-						model = new DockySurface (0, 0, cr.Target);
-					}
-				}
-				
-				int dockWidth = Items.Sum (adi => (int) ((adi.Square ? IconSize : adi.IconSurface (model, IconSize).Width) * 
+				int dockWidth = Items.Sum (adi => (int) ((adi.Square ? IconSize : adi.IconSurface (background_buffer, IconSize).Width) * 
 						Math.Min (1, (DateTime.UtcNow - adi.AddTime).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds)));
 				dockWidth += 2 * DockWidthBuffer + (Items.Count - 1) * ItemWidthBuffer;
 				if (remove_index != 0) {
 					dockWidth += (int) ((ItemWidthBuffer + remove_size) *
 						(1 - Math.Min (1, (DateTime.UtcNow - remove_time).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds)));
 				}
+				
 				return dockWidth;
 			}
 		}
@@ -1090,22 +1082,13 @@ namespace Docky.Interface
 			if (GdkWindow == null)
 				return;
 			
-			DockySurface model;
-			if (background_buffer != null) {
-				model = main_buffer;
-			} else {
-				using (Cairo.Context cr = Gdk.CairoHelper.Create (GdkWindow)) {
-					model = new DockySurface (0, 0, cr.Target);
-				}
-			}
-			
 			MaxIconSize = Preferences.IconSize;
-			DockWidth = Items.Sum (adi => adi.Square ? MaxIconSize : adi.IconSurface (model, MaxIconSize).Width);
+			DockWidth = Items.Sum (adi => adi.Square ? MaxIconSize : adi.IconSurface (background_buffer, MaxIconSize).Width);
 			DockWidth += 2 * DockWidthBuffer + (Items.Count - 1) * ItemWidthBuffer;
 			
 			while (DockWidth > (VerticalDock ? Height : Width)) {
 				MaxIconSize--;
-				DockWidth = Items.Sum (adi => adi.Square ? MaxIconSize : adi.IconSurface (model, MaxIconSize).Width);
+				DockWidth = Items.Sum (adi => adi.Square ? MaxIconSize : adi.IconSurface (background_buffer, MaxIconSize).Width);
 				DockWidth += 2 * DockWidthBuffer + (Items.Count - 1) * ItemWidthBuffer;
 			}
 		}
@@ -2052,6 +2035,9 @@ namespace Docky.Interface
 		
 		public override void Dispose ()
 		{
+			if (Menu != null)
+				Menu.Dispose ();
+			
 			AutohideManager.Dispose ();
 			UnregisterPreferencesEvents (Preferences);
 			

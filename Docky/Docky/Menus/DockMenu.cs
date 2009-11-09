@@ -486,5 +486,23 @@ namespace Docky.Menus
 			}
 			return base.OnButtonReleaseEvent (evnt);
 		}
+		
+		public override void Dispose ()
+		{
+			if (menu_slices != null) {
+				foreach (DockySurface s in menu_slices) {
+					s.Dispose ();
+				}
+				menu_slices = null;
+			}
+			
+			if (background_buffer != null) {
+				background_buffer.Dispose ();
+				background_buffer = null;
+			}
+			
+			base.Dispose ();
+		}
+
 	}
 }

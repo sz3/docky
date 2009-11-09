@@ -137,7 +137,7 @@ namespace Docky.Items
 
 		void HandleProcessExit (object sender, EventArgs e)
 		{
-			ResetBuffers ();
+			Dispose ();
 		}
 		
 		public DateTime StateSetTime (ItemState state)
@@ -353,6 +353,9 @@ namespace Docky.Items
 					Log<AbstractDockItem>.Error (e.Message);
 					Log<AbstractDockItem>.Debug (e.StackTrace);
 				}
+			} else {
+				if (model != null)
+					main_buffer.EnsureSurfaceModel (model.Internal);
 			}
 			return main_buffer;
 		}
@@ -493,8 +496,8 @@ namespace Docky.Items
 		#region IDisposable implementation
 		public virtual void Dispose ()
 		{
-			Gtk.IconTheme.Default.Changed -= HandleIconThemeChanged;
 			AppDomain.CurrentDomain.ProcessExit -= HandleProcessExit;
+			Gtk.IconTheme.Default.Changed -= HandleIconThemeChanged;
 			ResetBuffers ();
 		}
 

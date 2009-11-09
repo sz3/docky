@@ -60,29 +60,24 @@ namespace Docky.CairoHelper
 			}
 		}
 		
-		public DockySurface (int width, int height, Surface model) : this (width, height) 
+		public DockySurface (int width, int height, Surface model) : this(width, height)
 		{
-			EnsureSurfaceModel (model);
+			if (model != null)
+				EnsureSurfaceModel (model);
 		}
 
-		public DockySurface (int width, int height, DockySurface model) : this (width, height) 
+		public DockySurface (int width, int height, DockySurface model) : this(width, height)
 		{
-			EnsureSurfaceModel (model.Internal);
+			if (model != null)
+				EnsureSurfaceModel (model.Internal);
 		}
 		
 		public DockySurface (int width, int height)
 		{
 			Width = width;
 			Height = height;
-			
-			AppDomain.CurrentDomain.ProcessExit += HandleProcessExit;
 		}
 
-		void HandleProcessExit (object sender, EventArgs e)
-		{
-			Dispose ();
-		}
-		
 		public void Clear ()
 		{
 			if (disposed)
@@ -147,7 +142,6 @@ namespace Docky.CairoHelper
 			if (disposed)
 				return;
 			
-			AppDomain.CurrentDomain.ProcessExit -= HandleProcessExit;
 			disposed = true;
 			if (context != null)
 				(context as IDisposable).Dispose ();
