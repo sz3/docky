@@ -160,7 +160,7 @@ namespace Docky
 			
 			if (ActiveDock != null) {
 				Docky.Controller.DeleteDock (ActiveDock);
-				ActiveDock = null;
+				ActiveDock = Docky.Controller.Docks.FirstOrDefault ();
 				SetupConfigAlignment ();
 			}
 			CheckButtons ();
