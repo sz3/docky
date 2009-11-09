@@ -237,7 +237,7 @@ namespace Docky.Windowing
 						command_line[0] = "ooffice-math";
 					
 				} else {
-					string class_name = window.ClassGroup.ResClass;
+					string class_name = window.ClassGroup.ResClass.Replace (".", "");
 					IEnumerable<string> matches = Enumerable.Empty<string> ();
 					try {
 						matches = DesktopFiles
