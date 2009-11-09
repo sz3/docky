@@ -74,6 +74,13 @@ namespace Docky.CairoHelper
 		{
 			Width = width;
 			Height = height;
+			
+			AppDomain.CurrentDomain.ProcessExit += HandleProcessExit;
+		}
+
+		void HandleProcessExit (object sender, EventArgs e)
+		{
+			Dispose ();
 		}
 		
 		public void Clear ()
@@ -140,6 +147,7 @@ namespace Docky.CairoHelper
 			if (disposed)
 				return;
 			
+			AppDomain.CurrentDomain.ProcessExit -= HandleProcessExit;
 			disposed = true;
 			if (context != null)
 				(context as IDisposable).Dispose ();

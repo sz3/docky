@@ -494,6 +494,7 @@ namespace Docky.Items
 		public virtual void Dispose ()
 		{
 			Gtk.IconTheme.Default.Changed -= HandleIconThemeChanged;
+			AppDomain.CurrentDomain.ProcessExit -= HandleProcessExit;
 			ResetBuffers ();
 		}
 
