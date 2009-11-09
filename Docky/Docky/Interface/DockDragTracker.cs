@@ -55,7 +55,19 @@ namespace Docky.Interface
 		
 		public DockWindow Owner { get; private set; }
 		
-		public bool ExternalDragActive { get; private set; }
+		bool externalDragActive;
+		public bool ExternalDragActive {
+			get { return externalDragActive; }
+			private set {
+				externalDragActive = value;
+				if (!value) {
+					drag_known = false;
+					drag_data = null;
+					drag_data_requested = false;
+					drag_is_desktop_file = false;
+				}
+			} 
+		}
 
 		public bool InternalDragActive { get; private set; }
 
@@ -128,18 +140,6 @@ namespace Docky.Interface
 			Owner.DragFailed += HandleDragFailed;
 			
 			Owner.MotionNotifyEvent += HandleOwnerMotionNotifyEvent;
-			Owner.EnterNotifyEvent += HandleOwnerEnterNotifyEvent;
-			Owner.LeaveNotifyEvent += HandleOwnerLeaveNotifyEvent;
-		}
-
-		void HandleOwnerLeaveNotifyEvent (object o, LeaveNotifyEventArgs args)
-		{
-			ExternalDragActive = false;
-		}
-
-		void HandleOwnerEnterNotifyEvent (object o, EnterNotifyEventArgs args)
-		{
-			ExternalDragActive = false;
 		}
 
 		void HandleOwnerMotionNotifyEvent (object o, MotionNotifyEventArgs args)
@@ -159,8 +159,6 @@ namespace Docky.Interface
 			Owner.DragFailed -= HandleDragFailed;
 			
 			Owner.MotionNotifyEvent -= HandleOwnerMotionNotifyEvent;
-			Owner.EnterNotifyEvent -= HandleOwnerEnterNotifyEvent;
-			Owner.LeaveNotifyEvent -= HandleOwnerLeaveNotifyEvent;
 		}
 
 		/// <summary>
@@ -305,12 +303,9 @@ namespace Docky.Interface
 				}
 			}
 			
-			drag_known = false;
-			drag_data = null;
-			drag_data_requested = false;
-			drag_is_desktop_file = false;
+			ExternalDragActive = false;
 		}
-
+		
 		/// <summary>
 		/// Emitted on the drag source when the drag finishes
 		/// </summary>
@@ -371,8 +366,9 @@ namespace Docky.Interface
 			if (RepositionMode)
 				return;
 			
-			if (!InternalDragActive)
+			if (!InternalDragActive) {
 				ExternalDragActive = true;
+			}
 			
 			if (marker != args.Context.GetHashCode ()) {
 				marker = args.Context.GetHashCode ();
