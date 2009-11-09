@@ -203,7 +203,7 @@ namespace Docky.Items
 					return true;
 			}
 			
-			return base.CanAcceptDrop (uris);
+			return base.OnCanAcceptDrop (uris);
 		}
 		
 		protected override bool OnAcceptDrop (IEnumerable<string> uris)

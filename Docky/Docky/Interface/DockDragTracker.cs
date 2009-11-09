@@ -178,6 +178,7 @@ namespace Docky.Interface
 		/// </summary>
 		void HandleDragBegin (object o, DragBeginArgs args)
 		{
+			Owner.CursorTracker.RequestHighResolution (this);
 			InternalDragActive = true;
 			
 			if (proxy_window != null) {
@@ -337,6 +338,7 @@ namespace Docky.Interface
 			drag_item = null;
 			
 			Owner.AnimatedDraw ();
+			Owner.CursorTracker.CancelHighResolution (this);
 		}
 
 		/// <summary>

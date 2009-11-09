@@ -66,9 +66,9 @@ namespace Bookmarks
 		{
 			bool retVal = false;
 			OwnedFile.MountWithActionAndFallback (() => {
-				retVal = base.AcceptDrop (uris);
+				retVal = base.OnAcceptDrop (uris);
 			}, () => {
-				retVal = base.AcceptDrop (uris);
+				retVal = base.OnAcceptDrop (uris);
 			});
 			return retVal;
 		}

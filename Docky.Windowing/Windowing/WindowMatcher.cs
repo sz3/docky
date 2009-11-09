@@ -318,7 +318,7 @@ namespace Docky.Windowing
 				string exec = item.GetString ("Exec");
 				string vexec = null;
 				
-				if (exec.StartsWith ("ooffice")) {
+				if (exec.StartsWith ("ooffice") && exec.Contains (' ')) {
 					vexec = "ooffice" + exec.Split (' ') [1];
 				} else {
 					string [] parts = exec.Split (' ');
