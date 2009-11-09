@@ -49,7 +49,7 @@ namespace Docky.Items
 			get {
 				IEnumerable<Wnck.Window> managed = ManagedWindows.ToArray ();
 				return Wnck.Screen.Default.Windows
-					.Where (w => !w.IsSkipPager && !managed.Contains (w));
+					.Where (w => !w.IsSkipTasklist && !managed.Contains (w));
 			}
 		}
 		
@@ -116,6 +116,8 @@ namespace Docky.Items
 
 		void WnckScreenDefaultWindowClosed (object o, WindowClosedArgs args)
 		{
+			if (args.Window.IsSkipTasklist)
+				return;
 			// we dont need to delay in this case as icons owning extra windows
 			// is a non-event
 			UpdateTransientItems ();
@@ -135,7 +137,6 @@ namespace Docky.Items
 				}
 				return;
 			}
-			
 			// we will need a list of these bad boys we can mess with
 			List<Wnck.Window> windows = UnmanagedWindows.ToList ();
 			
