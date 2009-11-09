@@ -457,7 +457,7 @@ namespace Docky.Interface
 		
 		double HideOffset {
 			get {
-				if (Preferences.FadeOnHide || ConfigurationMode)
+				if (Painter != null || ConfigurationMode)
 					return 0;
 				double progress = Math.Min (1, (render_time - hidden_change_time).TotalMilliseconds / 
 				                            BaseAnimationTime.TotalMilliseconds);
@@ -469,14 +469,7 @@ namespace Docky.Interface
 		
 		double DockOpacity {
 			get {
-				if (!Preferences.FadeOnHide || Painter != null)
-					return 1;
-				double progress = Math.Min (1, (render_time - hidden_change_time).TotalMilliseconds / 
-									BaseAnimationTime.TotalMilliseconds);
-				progress = (1 - Preferences.FadeOpacity) * progress;
-				if (!AutohideManager.Hidden)
-					return Preferences.FadeOpacity + progress;
-				return 1 - progress;
+				return Math.Min (1, (1 - HideOffset) + Preferences.FadeOpacity);
 			}
 		}
 		
@@ -1591,6 +1584,8 @@ namespace Docky.Interface
 		
 		void SetDockOpacity (DockySurface surface)
 		{
+			if (!Preferences.FadeOnHide)
+				return;
 			surface.Context.Save ();
 			
 			surface.Context.Color = new Cairo.Color (0, 0, 0, 0);
@@ -1926,19 +1921,23 @@ namespace Docky.Interface
 				DrawDock (main_buffer);
 				cr.Operator = Operator.Source;
 				
-				switch (Position) {
-				case DockPosition.Top:
-					cr.SetSource (main_buffer.Internal, 0, 0 - HideOffset * DockHeight);
-					break;
-				case DockPosition.Left:
-					cr.SetSource (main_buffer.Internal, 0 - HideOffset * DockHeight, 0);
-					break;
-				case DockPosition.Right:
-					cr.SetSource (main_buffer.Internal, HideOffset * DockHeight, 0);
-					break;
-				case DockPosition.Bottom:
-					cr.SetSource (main_buffer.Internal, 0, HideOffset * DockHeight);
-					break;
+				if (Preferences.FadeOnHide) {
+					cr.SetSource (main_buffer.Internal);
+				} else {
+					switch (Position) {
+					case DockPosition.Top:
+						cr.SetSource (main_buffer.Internal, 0, 0 - HideOffset * DockHeight);
+						break;
+					case DockPosition.Left:
+						cr.SetSource (main_buffer.Internal, 0 - HideOffset * DockHeight, 0);
+						break;
+					case DockPosition.Right:
+						cr.SetSource (main_buffer.Internal, HideOffset * DockHeight, 0);
+						break;
+					case DockPosition.Bottom:
+						cr.SetSource (main_buffer.Internal, 0, HideOffset * DockHeight);
+						break;
+					}
 				}
 				
 				cr.Paint ();
