@@ -169,12 +169,7 @@ namespace Docky.Services
 					}
 					// an exception can be thrown here if we are trying to mount an already mounted file
 					// in that case, resort to the fallback
-				} catch (GLib.GException e) {
-					// FIXME
-					// need to use GLib.MountOperation for mounting to be able to specify credentials
-					// until we have a proper way to determine if mount was successful or not,
-					// make sure this doesn't crash
-					Console.WriteLine (e.Message);
+				} catch (GLib.GException) {
 					try {
 						failed.Invoke ();
 					} catch {}
