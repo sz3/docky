@@ -94,11 +94,29 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Docky.Services\NativeInterop.cs" />
     <Compile Include="Docky.Services\Extensions\GLibFileExtension.cs" />
+    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="Docky.Services\GUI\AnonymousWidget.cs" />
+    <Compile Include="Docky.Services\GUI\PasswordSaveWidget.cs" />
+    <Compile Include="gtk-gui\Docky.Services.GUI.PasswordSaveWidget.cs" />
+    <Compile Include="Docky.Services\GUI\MountOperationDialog.cs" />
+    <Compile Include="gtk-gui\Docky.Services.GUI.MountOperationDialog.cs" />
+    <Compile Include="Docky.Services\GUI\PasswordWidget.cs" />
+    <Compile Include="gtk-gui\Docky.Services.GUI.PasswordWidget.cs" />
+    <Compile Include="gtk-gui\Docky.Services.GUI.AnonymousWidget.cs" />
+    <Compile Include="Docky.Services\GUI\UsernameWidget.cs" />
+    <Compile Include="gtk-gui\Docky.Services.GUI.UsernameWidget.cs" />
+    <Compile Include="Docky.Services\GUI\DockyMountOperation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Docky.Services\" />
     <Folder Include="Docky.Services\Logging\" />
     <Folder Include="Docky.Services\Extensions\" />
+    <Folder Include="Docky.Services\GUI\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="gtk-gui\gui.stetic">
+      <LogicalName>gui.stetic</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

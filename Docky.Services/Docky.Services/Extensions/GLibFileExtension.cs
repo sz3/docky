@@ -156,7 +156,11 @@ namespace Docky.Services
 		
 		public static void MountWithActionAndFallback (this GLib.File file, Action success, Action failed)
 		{
-			file.MountEnclosingVolume (0, null, null, (o, result) => {
+			Console.WriteLine (file.StringUri ());
+			GUI.DockyMountOperation op = new GUI.DockyMountOperation ();
+			file.MountEnclosingVolume (0, op, null, (o, result) =>
+			{
+				Console.WriteLine ("asdf");
 				// wait for the mount to finish
 				try {
 					if (file.MountEnclosingVolumeFinish (result)) {
@@ -168,11 +172,12 @@ namespace Docky.Services
 					}
 					// an exception can be thrown here if we are trying to mount an already mounted file
 					// in that case, resort to the fallback
-				} catch (GLib.GException) {
+				} catch (GLib.GException e) {
 					// FIXME
 					// need to use GLib.MountOperation for mounting to be able to specify credentials
 					// until we have a proper way to determine if mount was successful or not,
 					// make sure this doesn't crash
+					Console.WriteLine (e.Message);
 					try {
 						failed.Invoke ();
 					} catch {}
