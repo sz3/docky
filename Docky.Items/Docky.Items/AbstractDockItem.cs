@@ -434,7 +434,17 @@ namespace Docky.Items
 			return new Docky.Menus.MenuList ();
 		}
 		
-		public virtual void SetScreenRegion (Gdk.Screen screen, Gdk.Rectangle region)
+		public void SetScreenRegion (Gdk.Screen screen, Gdk.Rectangle region)
+		{
+			try {
+				OnSetScreenRegion (screen, region);
+			} catch (Exception e) {
+				Log<AbstractDockItem>.Error (e.Message);
+				Log<AbstractDockItem>.Debug (e.StackTrace);
+			}
+		}
+		
+		protected virtual void OnSetScreenRegion (Gdk.Screen screen, Gdk.Rectangle region)
 		{
 			return;
 		}
