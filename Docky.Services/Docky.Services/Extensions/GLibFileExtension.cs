@@ -156,11 +156,8 @@ namespace Docky.Services
 		
 		public static void MountWithActionAndFallback (this GLib.File file, Action success, Action failed)
 		{
-			Console.WriteLine (file.StringUri ());
-			GUI.DockyMountOperation op = new GUI.DockyMountOperation ();
-			file.MountEnclosingVolume (0, op, null, (o, result) =>
+			file.MountEnclosingVolume (0, new Gtk.MountOperation (null), null, (o, result) =>
 			{
-				Console.WriteLine ("asdf");
 				// wait for the mount to finish
 				try {
 					if (file.MountEnclosingVolumeFinish (result)) {

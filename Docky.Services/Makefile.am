@@ -23,18 +23,7 @@ FILES = \
 	Docky.Services/NotificationService.cs \
 	Docky.Services/Preferences.cs \
 	Docky.Services/NativeInterop.cs \
-	gtk-gui/Docky.Services.GUI.PasswordSaveWidget.cs \
-	gtk-gui/Docky.Services.GUI.MountOperationDialog.cs \
-	gtk-gui/Docky.Services.GUI.UsernameWidget.cs \
-	gtk-gui/Docky.Services.GUI.AnonymousWidget.cs \
-	gtk-gui/Docky.Services.GUI.PasswordWidget.cs \
-	gtk-gui/generated.cs \
-	Docky.Services/GUI/PasswordSaveWidget.cs \
-	Docky.Services/GUI/MountOperationDialog.cs \
-	Docky.Services/GUI/PasswordWidget.cs \
-	Docky.Services/GUI/UsernameWidget.cs \
-	Docky.Services/GUI/AnonymousWidget.cs \
-	Docky.Services/GUI/DockyMountOperation.cs
+	Gtk/MountOperation.cs
 	
 REFERENCES =  \
 	System \
