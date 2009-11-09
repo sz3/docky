@@ -50,7 +50,6 @@ namespace Docky.Interface
 			window.AcceptFocus = false;
 			window.Decorated = false;
 			window.DoubleBuffered = true;
-			window.KeepAbove = true;
 			window.SkipPagerHint = true;
 			window.SkipTaskbarHint = true;
 			window.Resizable = false;
