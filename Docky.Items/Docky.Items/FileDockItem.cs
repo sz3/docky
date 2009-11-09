@@ -88,12 +88,12 @@ namespace Docky.Items
 			return uri;
 		}
 
-		public override bool CanAcceptDrop (IEnumerable<string> uris)
+		protected override bool OnCanAcceptDrop (IEnumerable<string> uris)
 		{
 			return is_folder;
 		}
 
-		public override bool AcceptDrop (IEnumerable<string> uris)
+		protected override bool OnAcceptDrop (IEnumerable<string> uris)
 		{
 			string FSID_att_str = "id::filesystem";
 			

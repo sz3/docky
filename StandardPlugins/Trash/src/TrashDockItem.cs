@@ -93,7 +93,7 @@ namespace Trash
 			return "TrashCan";
 		}
 		
-		public override bool CanAcceptDrop (IEnumerable<string> uris)
+		protected override bool OnCanAcceptDrop (IEnumerable<string> uris)
 		{
 			bool accepted = false;
 			
@@ -103,7 +103,7 @@ namespace Trash
 			return accepted;
 		}
 		
-		public override bool CanAcceptDrop (AbstractDockItem item)
+		protected override bool OnCanAcceptDrop (AbstractDockItem item)
 		{
 			if (item == this)
 				return false;
@@ -114,7 +114,7 @@ namespace Trash
 			return item.Owner.ItemCanBeRemoved (item);
 		}
 		
-		public override bool AcceptDrop (AbstractDockItem item)
+		protected override bool OnAcceptDrop (AbstractDockItem item)
 		{
 			if (!CanAcceptDrop (item))
 				return false;
@@ -123,7 +123,7 @@ namespace Trash
 			return true;
 		}
 		
-		public override bool AcceptDrop (IEnumerable<string> uris)
+		protected override bool OnAcceptDrop (IEnumerable<string> uris)
 		{
 			bool accepted = false;
 			

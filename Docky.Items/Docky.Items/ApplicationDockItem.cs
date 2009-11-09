@@ -191,7 +191,7 @@ namespace Docky.Items
 			LaunchWithFiles (item.Uri.AsSingle ());
 		}
 		
-		public override bool CanAcceptDrop (IEnumerable<string> uris)
+		protected override bool OnCanAcceptDrop (IEnumerable<string> uris)
 		{
 			if (uris == null)
 				return false;
@@ -206,7 +206,7 @@ namespace Docky.Items
 			return base.CanAcceptDrop (uris);
 		}
 		
-		public override bool AcceptDrop (IEnumerable<string> uris)
+		protected override bool OnAcceptDrop (IEnumerable<string> uris)
 		{
 			LaunchWithFiles (uris);
 			return true;

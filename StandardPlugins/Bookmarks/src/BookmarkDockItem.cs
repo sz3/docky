@@ -57,12 +57,12 @@ namespace Bookmarks
 			Owner.RemoveItem (this);
 		}
 
-		public override bool CanAcceptDrop (IEnumerable<string> uris)
+		protected override bool OnCanAcceptDrop (IEnumerable<string> uris)
 		{
 			return true;
 		}
 
-		public override bool AcceptDrop (IEnumerable<string> uris)
+		protected override bool OnAcceptDrop (IEnumerable<string> uris)
 		{
 			bool retVal = false;
 			OwnedFile.MountWithActionAndFallback (() => {

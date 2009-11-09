@@ -222,22 +222,70 @@ namespace Docky.Items
 		}
 		
 		#region Drop Handling
-		public virtual bool CanAcceptDrop (IEnumerable<string> uris)
+		public bool CanAcceptDrop (IEnumerable<string> uris)
+		{
+			bool result = false;
+			try {
+				result = OnCanAcceptDrop (uris);
+			} catch (Exception e) {
+				Log<AbstractDockItem>.Error (e.Message);
+				Log<AbstractDockItem>.Debug (e.StackTrace);
+			}
+			return result;
+		}
+		
+		public bool AcceptDrop (IEnumerable<string> uris)
+		{
+			bool result = false;
+			try {
+				result = OnAcceptDrop (uris);
+			} catch (Exception e) {
+				Log<AbstractDockItem>.Error (e.Message);
+				Log<AbstractDockItem>.Debug (e.StackTrace);
+			}
+			return result;
+		}
+		
+		public bool CanAcceptDrop (AbstractDockItem item)
+		{
+			bool result = false;
+			try {
+				result = OnCanAcceptDrop (item);
+			} catch (Exception e) {
+				Log<AbstractDockItem>.Error (e.Message);
+				Log<AbstractDockItem>.Debug (e.StackTrace);
+			}
+			return result;
+		}
+		
+		public bool AcceptDrop (AbstractDockItem item)
+		{
+			bool result = false;
+			try {
+				result = OnAcceptDrop (item);
+			} catch (Exception e) {
+				Log<AbstractDockItem>.Error (e.Message);
+				Log<AbstractDockItem>.Debug (e.StackTrace);
+			}
+			return result;
+		}
+		
+		protected virtual bool OnCanAcceptDrop (IEnumerable<string> uris)
 		{
 			return false;
 		}
 		
-		public virtual bool AcceptDrop (IEnumerable<string> uris)
+		protected virtual bool OnAcceptDrop (IEnumerable<string> uris)
 		{
 			return false;
 		}
 		
-		public virtual bool CanAcceptDrop (AbstractDockItem item)
+		protected virtual bool OnCanAcceptDrop (AbstractDockItem item)
 		{
 			return false;
 		}
 		
-		public virtual bool AcceptDrop (AbstractDockItem item)
+		protected virtual bool OnAcceptDrop (AbstractDockItem item)
 		{
 			return false;
 		}
