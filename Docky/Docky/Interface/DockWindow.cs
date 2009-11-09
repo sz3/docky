@@ -386,7 +386,11 @@ namespace Docky.Interface
 		}
 		
 		double ZoomPercent {
-			get { return ZoomEnabled ? Preferences.ZoomPercent : 1; }
+			get {
+				if (!ZoomEnabled)
+					return 1;
+				return (Preferences.IconSize * Preferences.ZoomPercent) / MaxIconSize;
+			}
 		}
 		#endregion
 		
@@ -1505,6 +1509,23 @@ namespace Docky.Interface
 			}
 		}
 		
+		Gdk.Rectangle NormalizeArea (Gdk.Rectangle area)
+		{
+			int right = Math.Min (Width, area.Right);
+			int bottom = Math.Min (Height, area.Bottom);
+			
+			if (area.X < 0)
+				area.X = 0;
+			
+			if (area.Y < 0)
+				area.Y = 0;
+			
+			area.Width = right - area.X;
+			area.Height = bottom - area.Y;
+			
+			return area;
+		}
+		
 		void DrawDock (DockySurface surface)
 		{
 			surface.Clear ();
@@ -1559,10 +1580,12 @@ namespace Docky.Interface
 			
 			SetInputMask (cursorArea);
 			
+			dockArea = NormalizeArea (dockArea);
 			dockArea.X += window_position.X;
 			dockArea.Y += window_position.Y;
 			AutohideManager.SetIntersectArea (dockArea);
 			
+			cursorArea = NormalizeArea (cursorArea);
 			cursorArea.X += window_position.X;
 			cursorArea.Y += window_position.Y;
 			AutohideManager.SetCursorArea (cursorArea);
