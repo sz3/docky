@@ -179,6 +179,8 @@ namespace Docky.Interface
 		
 		public int Height { get; private set; }
 		
+		int MaxIconSize { get; set; }
+		
 		bool ExternalDragActive { get { return DragTracker.ExternalDragActive; } }
 		
 		bool InternalDragActive { get { return DragTracker.InternalDragActive; } }
@@ -208,6 +210,8 @@ namespace Docky.Interface
 					UnregisterPreferencesEvents (preferences);
 				preferences = value;
 				RegisterPreferencesEvents (value);
+				
+				MaxIconSize = preferences.IconSize;
 			}
 		}
 		
@@ -366,7 +370,7 @@ namespace Docky.Interface
 		}
 		
 		int IconSize {
-			get { return Preferences.IconSize; }
+			get { return Math.Min (MaxIconSize, Preferences.IconSize); }
 		}
 		
 		int Monitor {
@@ -1090,8 +1094,15 @@ namespace Docky.Interface
 				}
 			}
 			
-			DockWidth = Items.Sum (adi => adi.Square ? IconSize : adi.IconSurface (model, IconSize).Width);
+			MaxIconSize = Preferences.IconSize;
+			DockWidth = Items.Sum (adi => adi.Square ? MaxIconSize : adi.IconSurface (model, MaxIconSize).Width);
 			DockWidth += 2 * DockWidthBuffer + (Items.Count - 1) * ItemWidthBuffer;
+			
+			while (DockWidth > (VerticalDock ? Height : Width)) {
+				MaxIconSize--;
+				DockWidth = Items.Sum (adi => adi.Square ? MaxIconSize : adi.IconSurface (model, MaxIconSize).Width);
+				DockWidth += 2 * DockWidthBuffer + (Items.Count - 1) * ItemWidthBuffer;
+			}
 		}
 		
 		void UpdateMonitorGeometry ()
