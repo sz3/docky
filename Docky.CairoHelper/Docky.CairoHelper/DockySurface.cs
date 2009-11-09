@@ -139,6 +139,7 @@ namespace Docky.CairoHelper
 		{
 			if (disposed)
 				return;
+			
 			disposed = true;
 			if (context != null)
 				(context as IDisposable).Dispose ();
@@ -150,8 +151,9 @@ namespace Docky.CairoHelper
 		~DockySurface ()
 		{
 			// just to be safe
-			if (!disposed)
+			if (!disposed) {
 				Dispose ();
+			}
 		}
 	}
 }

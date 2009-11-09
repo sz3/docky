@@ -129,8 +129,15 @@ namespace Docky.Items
 		
 		public AbstractDockItem ()
 		{
- 			state_times = new Dictionary<ItemState, DateTime> ();
+			state_times = new Dictionary<ItemState, DateTime> ();
 			Gtk.IconTheme.Default.Changed += HandleIconThemeChanged;
+			
+			AppDomain.CurrentDomain.ProcessExit += HandleProcessExit;
+		}
+
+		void HandleProcessExit (object sender, EventArgs e)
+		{
+			ResetBuffers ();
 		}
 		
 		public DateTime StateSetTime (ItemState state)

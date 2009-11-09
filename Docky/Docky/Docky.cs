@@ -92,8 +92,6 @@ namespace Docky
 			Controller.Dispose ();
 			PluginManager.Shutdown ();
 			Gnome.Vfs.Vfs.Shutdown ();
-			
-			Environment.Exit (0);
 		}
 		
 		public static void ShowAbout ()

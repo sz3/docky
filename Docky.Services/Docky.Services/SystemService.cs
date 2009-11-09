@@ -345,6 +345,7 @@ namespace Docky.Services
 				}
 			});
 			
+			newThread.IsBackground = true;
 			newThread.Start ();
 		}
 		
