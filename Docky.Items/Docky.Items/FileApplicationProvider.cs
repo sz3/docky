@@ -154,10 +154,11 @@ namespace Docky.Items
 					item = ApplicationDockItem.NewFromUri (new Uri (desktopFile).AbsoluteUri);
 				} else {
 					item = new WindowDockItem (window);
-					if (!item.ManagedWindows.Any ()) {
-						item.Dispose ();
-						continue;
-					}
+				}
+				
+				if (!item.ManagedWindows.Any ()) {
+					item.Dispose ();
+					continue;
 				}
 				
 				transient_items.Add (item);
