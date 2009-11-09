@@ -211,6 +211,7 @@ namespace Docky.Interface
 				preferences = value;
 				RegisterPreferencesEvents (value);
 				
+				// Initialize value
 				MaxIconSize = preferences.IconSize;
 			}
 		}
@@ -1116,6 +1117,7 @@ namespace Docky.Interface
 		
 		void SetSizeRequest ()
 		{
+			UpdateDockWidth ();
 			UpdateMonitorGeometry ();
 			
 			if (VerticalDock) {

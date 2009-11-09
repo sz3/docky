@@ -41,6 +41,7 @@ namespace Docky.Interface
 		Gdk.Point currentPoint;
 		DockySurface currentSurface;
 		uint timer;
+		bool fullscreen;
 		
 		public HoverTextManager ()
 		{
@@ -59,6 +60,27 @@ namespace Docky.Interface
 			
 			window.SetCompositeColormap ();
 			window.ExposeEvent += HandleWindowExposeEvent;
+			
+			Wnck.Screen.Default.ActiveWindowChanged += HandleWnckScreenDefaultActiveWindowChanged;
+		}
+
+		void HandleWnckScreenDefaultActiveWindowChanged (object o, Wnck.ActiveWindowChangedArgs args)
+		{
+			if (args.PreviousWindow != null)
+				args.PreviousWindow.GeometryChanged -= HandleWnckScreenDefaultActiveWindowGeometryChanged;
+			if (Wnck.Screen.Default.ActiveWindow != null)
+				Wnck.Screen.Default.ActiveWindow.GeometryChanged += HandleWnckScreenDefaultActiveWindowGeometryChanged;
+		}
+
+		void HandleWnckScreenDefaultActiveWindowGeometryChanged (object sender, EventArgs e)
+		{
+			Wnck.Window active = sender as Wnck.Window;
+			if (active == null)
+				return;
+
+			fullscreen = active.IsFullscreen;
+			if (fullscreen && window != null)
+				window.Hide ();
 		}
 		
 		public void SetSurfaceAtPoint (DockySurface surface, Gdk.Point point)
@@ -103,7 +125,7 @@ namespace Docky.Interface
 				return false;
 			});
 			
-			if (Visible)
+			if (Visible && !fullscreen)
 				window.Show ();
 		}
 
@@ -124,7 +146,7 @@ namespace Docky.Interface
 		public void Show ()
 		{
 			Visible = true;
-			if (currentSurface != null)
+			if (currentSurface != null && !fullscreen)
 				window.Show ();
 		}
 		
@@ -137,6 +159,7 @@ namespace Docky.Interface
 		#region IDisposable implementation
 		public void Dispose ()
 		{
+			Wnck.Screen.Default.ActiveWindowChanged -= HandleWnckScreenDefaultActiveWindowChanged;
 			if (window != null) {
 				window.Destroy ();
 				window.Dispose ();
