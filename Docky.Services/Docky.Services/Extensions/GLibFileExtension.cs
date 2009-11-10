@@ -15,6 +15,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 using GLib;
@@ -70,6 +71,15 @@ namespace Docky.Services
 			long copiedBytes = 0;
 			
 			Recursive_Copy (source, dest, ref copiedBytes, totalBytes, progress_cb);
+		}
+		
+		public static bool DirectoryHasFiles (this GLib.File file)
+		{
+			System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo (file.Path);
+			
+			if (dir.GetFiles ().Count () > 0 || dir.GetDirectories ().Count () > 0)
+				return true;
+			return false;
 		}
 		
 		static void Recursive_Copy (GLib.File source, GLib.File dest, ref long copiedBytes, long totalBytes, FileProgressCallback progress_cb)
@@ -156,7 +166,8 @@ namespace Docky.Services
 		
 		public static void MountWithActionAndFallback (this GLib.File file, Action success, Action failed)
 		{
-			file.MountEnclosingVolume (0, null, null, (o, result) => {
+			file.MountEnclosingVolume (0, new Gtk.MountOperation (null), null, (o, result) =>
+			{
 				// wait for the mount to finish
 				try {
 					if (file.MountEnclosingVolumeFinish (result)) {
@@ -169,10 +180,6 @@ namespace Docky.Services
 					// an exception can be thrown here if we are trying to mount an already mounted file
 					// in that case, resort to the fallback
 				} catch (GLib.GException) {
-					// FIXME
-					// need to use GLib.MountOperation for mounting to be able to specify credentials
-					// until we have a proper way to determine if mount was successful or not,
-					// make sure this doesn't crash
 					try {
 						failed.Invoke ();
 					} catch {}

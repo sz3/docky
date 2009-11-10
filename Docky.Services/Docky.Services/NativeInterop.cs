@@ -18,6 +18,8 @@
 using System;
 using System.Runtime.InteropServices;
 
+using GLib;
+
 namespace Docky.Services
 {
 	
@@ -29,7 +31,24 @@ namespace Docky.Services
 		[DllImport("libc")]
 		private static extern int prctl (int option, byte[] arg2, IntPtr arg3, IntPtr arg4, IntPtr arg5);
 		
-		public static string StrUri (GLib.File file)
+		
+		// these next 4 methods are not yet in GIO#.  The methods in GIO# (Unmount, Eject, UnmountFinish, EjectFinish)
+		// have been marked as deprecated since 2.22.  Once GIO# gets these methods we can remove these.
+		[DllImport("gio-2.0")]
+		private static extern void g_mount_unmount_with_operation (IntPtr mount, int flags, IntPtr mount_operation, 
+			IntPtr cancellable, GLibSharp.AsyncReadyCallbackNative callback, IntPtr user_data);
+		
+		[DllImport("gio-2.0")]
+		private static extern void g_mount_eject_with_operation (IntPtr mount, int flags, IntPtr mount_operation, 
+			IntPtr cancellable, GLibSharp.AsyncReadyCallbackNative callback, IntPtr user_data);
+		
+		[DllImport("gio-2.0")]
+		private static extern bool g_mount_unmount_with_operation_finish (IntPtr mount, IntPtr result, out IntPtr error);
+		
+		[DllImport("gio-2.0")]
+		private static extern bool g_mount_eject_with_operation_finish (IntPtr mount, IntPtr result, out IntPtr error);
+		
+		public static string StrUri (File file)
 		{
 			try {
 				return Marshal.PtrToStringAuto (g_file_get_uri (file.Handle));
@@ -49,7 +68,7 @@ namespace Docky.Services
 			try {
 				return prctl (option, System.Text.Encoding.ASCII.GetBytes (arg2 + "\0"), IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
 			} catch (DllNotFoundException e) {
-				Log<NativeInterop>.Fatal ("Could not load libc, please report immediately.");
+				Log<NativeInterop>.Fatal ("Could not find libc, please report immediately.");
 				Log<NativeInterop>.Info (e.StackTrace);
 				return -1;
 			} catch (Exception e) {
@@ -57,6 +76,43 @@ namespace Docky.Services
 				Log<NativeInterop>.Info (e.StackTrace);
 				return -1;
 			}
+		}
+		
+		public static void UnmountWithOperation (Mount mount, MountUnmountFlags flags, MountOperation op, 
+			Cancellable cancellable, AsyncReadyCallback cb)
+		{
+			GLibSharp.AsyncReadyCallbackWrapper cb_wrapper = new GLibSharp.AsyncReadyCallbackWrapper (cb);
+			g_mount_unmount_with_operation (mount.Handle, (int) flags, op == null ? IntPtr.Zero : op.Handle, 
+				cancellable == null ? IntPtr.Zero : cancellable.Handle, cb_wrapper.NativeDelegate, IntPtr.Zero);
+		}
+		
+		public static void EjectWithOperation (Mount mount, MountUnmountFlags flags, MountOperation op, 
+			Cancellable cancellable, AsyncReadyCallback cb)
+		{
+			GLibSharp.AsyncReadyCallbackWrapper cb_wrapper = new GLibSharp.AsyncReadyCallbackWrapper (cb);
+			g_mount_eject_with_operation (mount.Handle, (int) flags, op == null ? IntPtr.Zero : op.Handle, 
+				cancellable == null ? IntPtr.Zero : cancellable.Handle, cb_wrapper.NativeDelegate, IntPtr.Zero);
+		}
+		
+		public static bool EjectWithOperationFinish (Mount mount, AsyncResult result)
+		{
+			IntPtr error = IntPtr.Zero;
+			bool success = g_mount_eject_with_operation_finish (mount.Handle, result == null ? IntPtr.Zero : 
+				((result is GLib.Object) ? (result as GLib.Object).Handle : (result as GLib.AsyncResultAdapter).Handle), out error);
+			bool ret = success;
+			if (error != IntPtr.Zero)
+				throw new GLib.GException (error);
+			return ret;
+		}
+		
+		public static bool UnmountWithOperation (Mount mount, AsyncResult result)
+		{
+			IntPtr error = IntPtr.Zero;
+			bool success = g_mount_unmount_with_operation_finish (mount.Handle, result == null ? IntPtr.Zero : ((result is GLib.Object) ? (result as GLib.Object).Handle : (result as GLib.AsyncResultAdapter).Handle), out error);
+			bool ret = success;
+			if (error != IntPtr.Zero)
+				throw new GLib.GException (error);
+			return ret;
 		}
 	}
 }

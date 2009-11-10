@@ -9,6 +9,7 @@ PKG_CONFIG_FILES = docky.services.pc
 FILES = \
 	AssemblyInfo.cs \
 	Docky.Services/Extensions/GLibFileExtension.cs \
+	Docky.Services/Extensions/GLibMountExtension.cs \
 	Docky.Services/Logging/ConsoleCrayon.cs \
 	Docky.Services/Logging/LogBase.cs \
 	Docky.Services/Logging/ConsoleLog.cs \
@@ -22,8 +23,10 @@ FILES = \
 	Docky.Services/DrawingService.cs \
 	Docky.Services/NotificationService.cs \
 	Docky.Services/Preferences.cs \
-	Docky.Services/NativeInterop.cs
-
+	Docky.Services/NativeInterop.cs \
+	Gtk/MountOperation.cs \
+	GLibSharp/AsyncReadyCallbackNative.cs
+	
 REFERENCES =  \
 	System \
 	System.Core \

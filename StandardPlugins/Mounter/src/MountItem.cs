@@ -65,21 +65,28 @@ namespace Mounter
 		
 		public void UnMount ()
 		{
-			Log<MountItem>.Debug ("Trying to unmount {0}.", Mnt.Name);
 			if (Mnt.CanEject ())
-				Mnt.Eject (MountUnmountFlags.Force, null, new AsyncReadyCallback (HandleMountFinished));
+				Mnt.EjectWithOperation (MountUnmountFlags.Force, new Gtk.MountOperation (null), null, (s, result) =>
+				{
+					try {
+						if (!Mnt.EjectWithOperationFinish (result))
+							Log<MountItem>.Error ("Failed to eject {0}", Mnt.Name);
+					} catch (Exception e) {
+						Log<MountItem>.Error ("An error when ejecting {0} was encountered: {1}", Mnt.Name, e.Message);
+						Log<MountItem>.Debug (e.StackTrace);
+					}
+				});
 			else
-				Mnt.Unmount (MountUnmountFlags.Force, null, new AsyncReadyCallback (HandleMountFinished));
-		}
-		
-		void HandleMountFinished (GLib.Object sender, AsyncResult result)
-		{
-			string unmountMessage = "Unmount of {0} {1}.";
-			
-			if (!Mnt.UnmountFinish (result))
-				Log<MountItem>.Notify (unmountMessage, Mnt.Name, "Failed");
-			else
-				Log<MountItem>.Debug (unmountMessage, Mnt.Name, "Succeeded");
+				Mnt.UnmountWithOperation (MountUnmountFlags.Force, new Gtk.MountOperation (null), null, (s, result) =>
+				{
+					try {
+						if (!Mnt.UnmountWithOperationFinish (result))
+							Log<MountItem>.Error ("Failed to unmount {0}", Mnt.Name);
+					} catch (Exception e) {
+						Log<MountItem>.Error ("An error when unmounting {0} was encountered: {1}", Mnt.Name, e.Message);
+						Log<MountItem>.Debug (e.StackTrace);
+					}
+				});
 		}
 		
 		public override MenuList GetMenuItems ()
