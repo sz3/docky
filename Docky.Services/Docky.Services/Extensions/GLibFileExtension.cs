@@ -15,6 +15,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 using GLib;
@@ -70,6 +71,15 @@ namespace Docky.Services
 			long copiedBytes = 0;
 			
 			Recursive_Copy (source, dest, ref copiedBytes, totalBytes, progress_cb);
+		}
+		
+		public static bool DirectoryHasFiles (this GLib.File file)
+		{
+			System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo (file.Path);
+			
+			if (dir.GetFiles ().Count () > 0 || dir.GetDirectories ().Count () > 0)
+				return true;
+			return false;
 		}
 		
 		static void Recursive_Copy (GLib.File source, GLib.File dest, ref long copiedBytes, long totalBytes, FileProgressCallback progress_cb)

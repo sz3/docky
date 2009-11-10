@@ -96,6 +96,8 @@
     <Compile Include="Docky.Services\Extensions\GLibFileExtension.cs" />
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="Gtk\MountOperation.cs" />
+    <Compile Include="GLibSharp\AsyncReadyCallbackNative.cs" />
+    <Compile Include="Docky.Services\Extensions\GLibMountExtension.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -103,6 +105,7 @@
     <Folder Include="Docky.Services\Logging\" />
     <Folder Include="Docky.Services\Extensions\" />
     <Folder Include="Gtk\" />
+    <Folder Include="GLibSharp\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
