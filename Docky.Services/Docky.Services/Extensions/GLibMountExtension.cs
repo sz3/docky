@@ -29,7 +29,7 @@ namespace Docky.Services
 	{
 		
 		const string EmptyTrashTitle = "Do you want to empty the trash before you unmount?";
-		const string EmptyTrashMessage = "In order to regain the free space on this volume" + 
+		const string EmptyTrashMessage = "In order to regain the free space on this volume " + 
 			"the trash must be emptied. All trashed items on the volume will be permanently lost.";
 		
 		// as of GLib 2.22, Mount.UnMount and Mount.Eject are deprecated.  These should be used instead.
