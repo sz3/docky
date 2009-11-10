@@ -899,6 +899,7 @@ namespace Docky.Interface
 			SetSizeRequest ();
 			Reposition ();
 			ResetBuffers ();
+			UpdateDockWidth ();
 			AnimatedDraw ();
 		}
 		
@@ -1185,6 +1186,7 @@ namespace Docky.Interface
 		/// </param>
 		void UpdateDrawRegionsForSurface (DockySurface surface)
 		{
+			
 			// first we do the math as if this is a top dock, to do this we need to set
 			// up some "pretend" variables. we pretend we are a top dock because 0,0 is
 			// at the top.
@@ -1202,8 +1204,8 @@ namespace Docky.Interface
 				height = surface.Width;
 			}
 			
-			Gdk.Point cursor = Cursor;
-			Gdk.Point localCursor = LocalCursor;
+			Gdk.Point cursor = LocalCursor;
+			Gdk.Point localCursor = cursor;
 			
 			// screen shift sucks
 			cursor.X -= monitor_geo.X;
@@ -1221,12 +1223,12 @@ namespace Docky.Interface
 				break;
 			case DockPosition.Right:
 				tmpY = cursor.Y;
-				cursor.X = (monitor_geo.Width - 1) - cursor.X;
+				cursor.X = (Width - 1) - cursor.X;
 				cursor.Y = cursor.X;
 				cursor.X = width - (width - tmpY);
 				break;
 			case DockPosition.Bottom:
-				cursor.Y = (monitor_geo.Height - 1) - cursor.Y;
+				cursor.Y = (Height - 1) - cursor.Y;
 				break;
 			}
 			
