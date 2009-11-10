@@ -1,1 +1,1 @@
-SUBDIRS = Grayscale Air HUD
+SUBDIRS = Grayscale Air HUD Smoke

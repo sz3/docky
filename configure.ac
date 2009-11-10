@@ -201,6 +201,7 @@ data/themes/Makefile
 data/themes/Grayscale/Makefile
 data/themes/Air/Makefile
 data/themes/HUD/Makefile
+data/themes/Smoke/Makefile
 m4/Makefile
 po/Makefile.in
 ])
