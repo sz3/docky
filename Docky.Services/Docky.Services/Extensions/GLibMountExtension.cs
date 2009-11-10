@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -27,6 +27,10 @@ namespace Docky.Services
 
 	public static class GLibMountExtension
 	{
+		
+		const string EmptyTrashTitle = "Do you want to empty the trash before you unmount?";
+		const string EmptyTrashMessage = "In order to regain the free space on this volume" + 
+			"the trash must be emptied. All trashed items on the volume will be permanently lost.";
 		
 		// as of GLib 2.22, Mount.UnMount and Mount.Eject are deprecated.  These should be used instead.
 		public static void UnmountWithOperation (this GLib.Mount m, MountUnmountFlags flags, GLib.MountOperation operation, 
@@ -99,12 +103,7 @@ namespace Docky.Services
 					yield return FileFactory.NewForPath (root.GetChild (d.Name).GetChild ("info").Path);
 				}
 			}
-			yield break;
 		}
-		
-		const string EmptyTrashTitle = "Do you want to empty the trash before you unmount?";
-		const string EmptyTrashMessage = "In order to regain the free space on this volume" +
-			"the trash must be emptied. All trashed items on the volume will be permanently lost.";
 		
 		static ResponseType PromptEmptyTrash (this Mount m, out MessageDialog dialog)
 		{
