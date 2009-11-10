@@ -203,8 +203,7 @@ namespace WeatherDocklet
 			int size = Math.Min (surface.Width, surface.Height);
 			Context cr = surface.Context;
 			
-			switch (Status)
-			{
+			switch (Status) {
 			case WeatherDockletStatus.Error:
 				RenderIconOntoContext (cr, "network-offline", 0, 0, size);
 				cr.Fill ();

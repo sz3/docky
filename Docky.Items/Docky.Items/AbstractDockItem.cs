@@ -37,6 +37,7 @@ namespace Docky.Items
 	public abstract class AbstractDockItem : IDisposable
 	{
 		string hover_text;
+		bool redraw;
 		DockySurface main_buffer, text_buffer;
 		Cairo.Color? average_color;
 		ActivityIndicator indicator;
@@ -336,9 +337,8 @@ namespace Docky.Items
 		public DockySurface IconSurface (DockySurface model, int size)
 		{
 			if (main_buffer == null || (main_buffer.Height != size && main_buffer.Width != size)) {
-				average_color = null;
 				main_buffer = ResetBuffer (main_buffer);
-			
+				
 				try {
 					main_buffer = CreateIconBuffer (model, size);
 				} catch (Exception e) {
@@ -347,15 +347,25 @@ namespace Docky.Items
 					main_buffer = new DockySurface (size, size, model);
 				}
 				
+				redraw = true;
+			} else {
+				if (model != null)
+					main_buffer.EnsureSurfaceModel (model.Internal);
+			}
+			
+			if (redraw) {
+				average_color = null;
+				
+				main_buffer.Clear ();
+				main_buffer.ResetContext ();
 				try {
 					PaintIconSurface (main_buffer);
 				} catch (Exception e) {
 					Log<AbstractDockItem>.Error (e.Message);
 					Log<AbstractDockItem>.Debug (e.StackTrace);
 				}
-			} else {
-				if (model != null)
-					main_buffer.EnsureSurfaceModel (model.Internal);
+				
+				redraw = false;
 			}
 			return main_buffer;
 		}
@@ -423,7 +433,10 @@ namespace Docky.Items
 			// try to ensure we dont clobber the buffers
 			// during an already in-progress repaint
 			GLib.Idle.Add (delegate {
-				ResetBuffers ();
+				if (!Square) {
+					ResetBuffers ();
+				}
+				redraw = true;
 				OnPaintNeeded ();
 				return false;
 			});

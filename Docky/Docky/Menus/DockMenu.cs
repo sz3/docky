@@ -445,7 +445,6 @@ namespace Docky.Menus
 		{
 			if (!IsRealized)
 				return false;
-			
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
 				if (background_buffer == null) {
 					if (Orientation == DockPosition.Bottom || Orientation == DockPosition.Top) {

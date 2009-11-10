@@ -78,6 +78,15 @@ namespace Docky.CairoHelper
 			Height = height;
 		}
 
+		public void ResetContext ()
+		{
+			if (context == null)
+				return;
+			
+			(context as IDisposable).Dispose ();
+			context = null;
+		}
+		
 		public void Clear ()
 		{
 			if (disposed)
