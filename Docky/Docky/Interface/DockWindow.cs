@@ -1521,6 +1521,25 @@ namespace Docky.Interface
 			
 			DrawDockBackground (surface, dockArea);
 			
+			if (Painter == null) {
+			
+				if (icon_buffer == null || icon_buffer.Width != surface.Width || icon_buffer.Height != surface.Height) {
+					if (icon_buffer != null)
+						icon_buffer.Dispose ();
+					icon_buffer = new DockySurface (surface.Width, surface.Height, surface);
+				}
+				
+				icon_buffer.Clear ();
+				foreach (AbstractDockItem adi in Items) {
+					DrawItem (icon_buffer, dockArea, adi);
+				}
+			
+				icon_buffer.Internal.Show (surface.Context, 0, 0);
+			
+			} else {
+				DrawPainter (surface, dockArea);
+			}
+			
 			if (ActiveGlow) {
 				Gdk.Color color = Style.BaseColors[(int) Gtk.StateType.Active];
 				
@@ -1539,25 +1558,6 @@ namespace Docky.Interface
 					surface.Context.Paint ();
 					surface.Context.Operator = Operator.Over;
 				}
-			}
-			
-			if (Painter == null) {
-			
-				if (icon_buffer == null || icon_buffer.Width != surface.Width || icon_buffer.Height != surface.Height) {
-					if (icon_buffer != null)
-						icon_buffer.Dispose ();
-					icon_buffer = new DockySurface (surface.Width, surface.Height, surface);
-				}
-				
-				icon_buffer.Clear ();
-				foreach (AbstractDockItem adi in Items) {
-					DrawItem (icon_buffer, dockArea, adi);
-				}
-			
-				icon_buffer.Internal.Show (surface.Context, 0, 0);
-			
-			} else {
-				DrawPainter (surface, dockArea);
 			}
 			
 			if (DockOpacity < 1)
