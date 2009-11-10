@@ -444,6 +444,17 @@ namespace Docky.Interface
 			return name;
 		}
 		
+		public void DisableDocklet (AbstractDockItemProvider provider)
+		{
+			PluginManager.Disable (provider);
+			item_providers.Remove (provider);
+			
+			OnItemProvidersChanged (null, provider.AsSingle ());
+			SyncPlugins ();
+			
+			PopulateTreeViews ();
+		}
+		
 		public void SyncPreferences ()
 		{
 			UpdateSortList ();
@@ -647,7 +658,7 @@ namespace Docky.Interface
 			
 			DisableAddin (node);
 		}
-
+		
 		private void DisableAddin (AddinTreeNode node)
 		{
 			// disable this addin

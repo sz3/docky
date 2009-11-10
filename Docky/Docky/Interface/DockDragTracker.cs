@@ -317,17 +317,29 @@ namespace Docky.Interface
 			
 			if (drag_item != null) {
 				if (!Owner.DockHovered) {
+					// Remove from dock
 					AbstractDockItemProvider provider = ProviderForItem (drag_item);
+					bool poof = false;
+					
 					if (provider != null && provider.ItemCanBeRemoved (drag_item)) {
-						PoofWindow window = new PoofWindow (128);
-						window.SetCenterPosition (Owner.CursorTracker.Cursor);
-						window.Run ();
-						
+						// provider can manually remove
 						provider.RemoveItem (drag_item);
 						if (FileApplicationProvider.WindowManager != null)
 							FileApplicationProvider.WindowManager.UpdateTransientItems ();
+						poof = true;
+					} else if (provider != null && provider.Items.Count () == 1) {
+						// it is safe to disable plugin
+						Owner.Preferences.DisableDocklet (provider);
+						poof = true;
+					}
+					
+					if (poof) {
+						PoofWindow window = new PoofWindow (128);
+						window.SetCenterPosition (Owner.CursorTracker.Cursor);
+						window.Run ();
 					}
 				} else {
+					// Dropped somewhere on dock
 					AbstractDockItem item = Owner.HoveredItem;
 					if (item != null && item.CanAcceptDrop (drag_item))
 						item.AcceptDrop (drag_item);

@@ -68,6 +68,8 @@ namespace Docky.Interface
 		
 		string GetName ();
 		
+		void DisableDocklet (AbstractDockItemProvider provider);
+		
 		void SyncPreferences ();
 		
 		void ResetPreferences ();
