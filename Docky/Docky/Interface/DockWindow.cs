@@ -1825,7 +1825,7 @@ namespace Docky.Interface
 				} else {
 					background_buffer = new DockySurface (BackgroundWidth, BackgroundHeight, surface);
 				}
-					
+				
 				Gdk.Pixbuf background = DockServices.Drawing.LoadIcon (Docky.Controller.BackgroundSvg, -1);
 				Gdk.Pixbuf tmp;
 				
@@ -1856,61 +1856,7 @@ namespace Docky.Interface
 				background.Dispose ();
 			}
 			
-			Cairo.Context context = surface.Context;
-
-			int xOffset = 0;
-			int yOffset = 0;
-			
-			switch (Position) {
-			case DockPosition.Left:
-				xOffset = background_buffer.Width - backgroundArea.Width;
-				break;
-			case DockPosition.Top:
-				yOffset = background_buffer.Height - backgroundArea.Height;
-				break;
-			}
-			
-			if (VerticalDock) {
-				context.SetSource (background_buffer.Internal, 
-				                   backgroundArea.X - xOffset, 
-				                   backgroundArea.Y - yOffset);
-				
-				context.Rectangle (backgroundArea.X, 
-				                   backgroundArea.Y, 
-				                   backgroundArea.Width, 
-				                   backgroundArea.Height / 2);
-				context.Fill ();
-				
-				context.SetSource (background_buffer.Internal, 
-				                   backgroundArea.X - xOffset, 
-				                   backgroundArea.Y + backgroundArea.Height - background_buffer.Height - yOffset);
-				context.Rectangle (backgroundArea.X, 
-				                   backgroundArea.Y + backgroundArea.Height / 2, 
-				                   backgroundArea.Width, 
-				                   backgroundArea.Height - backgroundArea.Height / 2);
-				context.Fill ();
-			} else {
-				context.SetSource (background_buffer.Internal, 
-				                   backgroundArea.X - xOffset, 
-				                   backgroundArea.Y - yOffset);
-				
-				context.Rectangle (backgroundArea.X - xOffset, 
-				                   backgroundArea.Y, 
-				                   backgroundArea.Width / 2, 
-				                   backgroundArea.Height);
-				context.Fill ();
-				
-				context.SetSource (background_buffer.Internal, 
-				                   backgroundArea.X + backgroundArea.Width - background_buffer.Width, 
-				                   backgroundArea.Y - yOffset);
-				context.Rectangle (backgroundArea.X + backgroundArea.Width / 2, 
-				                   backgroundArea.Y, 
-				                   backgroundArea.Width - backgroundArea.Width / 2, 
-				                   backgroundArea.Height);
-				context.Fill ();
-			}
-			
-			context.IdentityMatrix ();
+			background_buffer.TileOntoSurface (surface, backgroundArea, 50, Position);
 		}
 		
 		protected override void OnStyleSet (Style previous_style)

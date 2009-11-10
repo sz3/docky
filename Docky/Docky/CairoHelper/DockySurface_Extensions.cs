@@ -110,6 +110,61 @@ namespace Docky.CairoHelper
 			cr.Paint ();
 		}
 		
+		public static void TileOntoSurface (this DockySurface self, DockySurface target, Gdk.Rectangle area, int edgeBuffer, DockPosition orientation)
+		{
+			if (orientation == DockPosition.Left || orientation == DockPosition.Right) {
+				int x = area.X;
+				if (orientation == DockPosition.Left)
+					x -= self.Width - area.Width;
+				
+				Cairo.Context cr = target.Context;
+				// draw left edge
+				cr.Rectangle (area.X, area.Y, area.Width, edgeBuffer);
+				cr.SetSource (self.Internal, x, area.Y);
+				cr.Fill ();
+				
+				int maxMiddleMove = self.Height - 2 * edgeBuffer;
+				int position = area.Y + edgeBuffer;
+				int edgeTarget = area.Y + area.Height - edgeBuffer;
+				while (position < edgeTarget) {
+					int height = Math.Min (edgeTarget - position, maxMiddleMove);
+					cr.Rectangle (area.X, position, area.Width, height);
+					cr.SetSource (self.Internal, x, position - edgeBuffer);
+					cr.Fill ();
+					position += height;
+				}
+				
+				cr.Rectangle (area.X, position, area.Width, edgeBuffer);
+				cr.SetSource (self.Internal, x, area.Y + area.Height - self.Height);
+				cr.Fill ();
+			} else {
+				int y = area.Y;
+				if (orientation == DockPosition.Top)
+					y -= self.Height - area.Height;
+				
+				Cairo.Context cr = target.Context;
+				// draw left edge
+				cr.Rectangle (area.X, area.Y, edgeBuffer, area.Height);
+				cr.SetSource (self.Internal, area.X, y);
+				cr.Fill ();
+				
+				int maxMiddleMove = self.Width - 2 * edgeBuffer;
+				int position = area.X + edgeBuffer;
+				int edgeTarget = area.X + area.Width - edgeBuffer;
+				while (position < edgeTarget) {
+					int width = Math.Min (edgeTarget - position, maxMiddleMove);
+					cr.Rectangle (position, area.Y, width, area.Height);
+					cr.SetSource (self.Internal, position - edgeBuffer, y);
+					cr.Fill ();
+					position += width;
+				}
+				
+				cr.Rectangle (position, area.Y, edgeBuffer, area.Height);
+				cr.SetSource (self.Internal, area.X + area.Width - self.Width, y);
+				cr.Fill ();
+			}
+		}
+		
 		public static Gdk.Pixbuf LoadToPixbuf (this DockySurface self)
 		{
 			Gdk.Pixbuf pbuf;
