@@ -23,8 +23,16 @@ namespace GMail
 {
 	public class GMailConfigurationDialog : Dialog
 	{
+		public static GMailConfigurationDialog instance;
+		
 		public GMailConfigurationDialog ()
 		{
+			SkipTaskbarHint = true;
+			TypeHint = Gdk.WindowTypeHint.Dialog;
+			WindowPosition = Gtk.WindowPosition.Center;
+			KeepAbove = true;
+			Stick ();
+			
 			IconName = Gtk.Stock.Preferences;
 			
 			Notebook notebook = new Notebook ();
@@ -45,7 +53,7 @@ namespace GMail
 		
 		protected override void OnResponse (ResponseType response_id)
 		{
-			Destroy ();
+			Hide ();
 		}
 	}
 }

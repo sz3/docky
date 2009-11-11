@@ -248,16 +248,16 @@ namespace GMail
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Settings"),
 					Gtk.Stock.Preferences,
 					delegate {
-				GMailConfigurationDialog dlg = new GMailConfigurationDialog ();
-				dlg.Show ();
-			}));
+						if (GMailConfigurationDialog.instance == null)
+							GMailConfigurationDialog.instance = new GMailConfigurationDialog ();
+						GMailConfigurationDialog.instance.Show ();
+					}));
 			
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Check Now"),
 					Gtk.Stock.Refresh,
 					delegate {
-				Atom.ResetTimer (true);
-				QueueRedraw ();
-			}));
+						Atom.ResetTimer (true);
+					}));
 			
 			return list;
 		}

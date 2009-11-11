@@ -23,8 +23,16 @@ namespace WeatherDocklet
 {
 	public class WeatherConfigurationDialog : Dialog
 	{
+		public static WeatherConfigurationDialog instance;
+		
 		public WeatherConfigurationDialog ()
 		{
+			SkipTaskbarHint = true;
+			TypeHint = Gdk.WindowTypeHint.Dialog;
+			WindowPosition = Gtk.WindowPosition.Center;
+			KeepAbove = true;
+			Stick ();
+			
 			IconName = Gtk.Stock.Preferences;
 			
 			WeatherConfiguration config = new WeatherConfiguration ();
@@ -39,7 +47,7 @@ namespace WeatherDocklet
 		
 		protected override void OnResponse (ResponseType response_id)
 		{
-			Destroy ();
+			Hide ();
 		}
 	}
 }
