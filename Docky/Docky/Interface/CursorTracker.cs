@@ -114,7 +114,8 @@ namespace Docky.Interface
 			if (timer_speed != length) {
 				if (timer > 0)
 					GLib.Source.Remove (timer);
-				timer = GLib.Timeout.Add (length, OnTimerTick);
+				if (Docky.CommandLinePreferences.PoleCursor)
+					timer = GLib.Timeout.Add (length, OnTimerTick);
 				timer_speed = length;
 			}
 		}

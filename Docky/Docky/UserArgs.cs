@@ -30,18 +30,28 @@ namespace Docky
 	public class UserArgs
 	{
 		public LogLevel Logging { get; protected set; }
+		
+		public bool PoleCursor { get; protected set; }
 
-		internal UserArgs (string [] args)
+		internal UserArgs (string[] args)
 		{
 			// defaults
 			Logging = LogLevel.Warn;
+			PoleCursor = true;
 			
 			// parse the command line
 			foreach (string s in args) {
-				if (s == "--info")
+				switch (s) {
+				case "--info":
 					Logging = LogLevel.Info;
-				else if (s == "--debug")
+					break;
+				case "--debig":
 					Logging = LogLevel.Debug;
+					break;
+				case "--disable-polling":
+					PoleCursor = false;
+					break;
+				}
 			}
 		}
 	}
