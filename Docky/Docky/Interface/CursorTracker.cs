@@ -110,7 +110,6 @@ namespace Docky.Interface
 		void ResetTimer ()
 		{
 			uint length = resolution_senders.Any () ? HighResTimeout : LowResTimeout;
-			
 			if (timer_speed != length) {
 				if (timer > 0)
 					GLib.Source.Remove (timer);

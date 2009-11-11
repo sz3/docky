@@ -32,6 +32,8 @@ namespace Docky
 		public LogLevel Logging { get; protected set; }
 		
 		public bool PoleCursor { get; protected set; }
+		
+		public int MaxSize { get; protected set; }
 
 		internal UserArgs (string[] args)
 		{
@@ -44,16 +46,19 @@ namespace Docky
 				Console.WriteLine ("  --info                 Enable info level logging");
 				Console.WriteLine ("  --debug                Enable debug level logging");
 				Console.WriteLine ("  --disable-polling      Disable cursor polling (for testing)");
+				Console.WriteLine ("  --max-size=SIZE        Sets the maximum window dimension (min 500)");
 				Environment.Exit (0);
 			}
 			
 			// defaults
 			Logging = LogLevel.Warn;
 			PoleCursor = true;
+			MaxSize = int.MaxValue;
 			
+			args = args.SelectMany (s => s.Split ('=')).ToArray ();
 			// parse the command line
-			foreach (string s in args) {
-				switch (s) {
+			for (int i = 0; i < args.Length; i++) {
+				switch (args[i]) {
 				case "--info":
 					Logging = LogLevel.Info;
 					break;
@@ -62,6 +67,21 @@ namespace Docky
 					break;
 				case "--disable-polling":
 					PoleCursor = false;
+					break;
+				case "--max-size":
+					if (i == args.Length - 1)
+						break;
+					int size;
+					try {
+						size = Convert.ToInt32 (args[i + 1]);
+						i++;
+					} catch (FormatException e) {
+						break;
+					} catch (OverflowException e) {
+						break;
+					}
+					size = Math.Max (size, 500);
+					MaxSize = size;
 					break;
 				}
 			}

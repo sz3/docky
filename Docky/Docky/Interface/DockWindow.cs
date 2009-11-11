@@ -1064,14 +1064,16 @@ namespace Docky.Interface
 			switch (Position) {
 			default:
 			case DockPosition.Top:
+				Move (monitor_geo.X + (monitor_geo.Width - Width) / 2, monitor_geo.Y);
+				break;
 			case DockPosition.Left:
-				Move (monitor_geo.X, monitor_geo.Y);
+				Move (monitor_geo.X, monitor_geo.Y + (monitor_geo.Height - Height) / 2);
 				break;
 			case DockPosition.Right:
-				Move (monitor_geo.X + monitor_geo.Width - Width, monitor_geo.Y);
+				Move (monitor_geo.X + monitor_geo.Width - Width, monitor_geo.Y + (monitor_geo.Height - Height) / 2);
 				break;
 			case DockPosition.Bottom:
-				Move (monitor_geo.X, monitor_geo.Y + monitor_geo.Height - Height);
+				Move (monitor_geo.X + (monitor_geo.Width - Width) / 2, monitor_geo.Y + monitor_geo.Height - Height);
 				break;
 			}
 			
@@ -1105,10 +1107,10 @@ namespace Docky.Interface
 			UpdateMonitorGeometry ();
 			
 			if (VerticalDock) {
-				Height = monitor_geo.Height;
+				Height = Math.Min (Docky.CommandLinePreferences.MaxSize, monitor_geo.Height);
 				Width = DockHeightBuffer + ZoomedIconSize + UrgentBounceHeight;
 			} else {
-				Width = monitor_geo.Width;
+				Width = Math.Min (Docky.CommandLinePreferences.MaxSize, monitor_geo.Width);
 				Height = DockHeightBuffer + ZoomedIconSize + UrgentBounceHeight;
 			}
 			SetSizeRequest (Width, Height);
