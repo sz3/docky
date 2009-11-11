@@ -20,6 +20,8 @@ AC_SUBST(ABI_VERSION)
 if test -d $top_srcdir/.bzr ; then
    VERSION_INFO=`bzr version-info --custom \
    --template="bzr {branch_nick} r{revno}"`
+elif test -e $top_srcdir/.version_info ; then
+   VERSION_INFO=`cat .version_info`
 else
    VERSION_INFO="Release"
 fi
