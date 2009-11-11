@@ -59,7 +59,8 @@ namespace Docky
 		
 		public static void Main (string[] args)
 		{
-			CommandLinePreferences = new UserArgs (args);
+			CommandLinePreferences = new UserArgs ();
+			CommandLinePreferences.ProcessArgs (args);
 			
 			//Init gtk and GLib related
 			Gdk.Threads.Init ();
@@ -76,8 +77,10 @@ namespace Docky
 			Log.Info ("Kernel version: {0}", System.Environment.OSVersion.Version);
 			Log.Info ("CLR version: {0}", System.Environment.Version);
 			
-			// now lets set the log level
-			Log.DisplayLevel = CommandLinePreferences.Logging;
+			// if the debug option was passed, set it to debug
+			// otherwise leave it to the default, which is warn
+			if (CommandLinePreferences.Debug)
+				Log.DisplayLevel = LogLevel.Debug;
 			
 			// set process name
 			DockServices.System.SetProcessName ("docky");

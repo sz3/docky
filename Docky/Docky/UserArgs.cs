@@ -23,18 +23,35 @@ using System.Text;
 
 using Docky.Services;
 
+using Mono.GetOptions;
+
 namespace Docky
 {
 
 
-	public class UserArgs
+	public class UserArgs : Options
 	{
 		public LogLevel Logging { get; protected set; }
 		
-		public bool PoleCursor { get; protected set; }
+		[Option ("Disable cursor polling (for testing)", 'p', "disable-polling")]
+		public bool NoPollCursor;
 		
-		public int MaxSize { get; protected set; }
+		[Option ("Maximum window dimension (min 500)", 'm', "max-size")]
+		public int MaxSize;
+		
+		[Option ("Enable debug level logging", 'd', "debug")]
+		public bool Debug;
 
+		public UserArgs ()
+		{
+			base.
+			ParsingMode = OptionsParsingMode.GNU_DoubleDash;
+			// defaults;
+			Logging = LogLevel.Warn;
+			MaxSize = int.MaxValue;
+		}
+		
+		/*
 		internal UserArgs (string[] args)
 		{
 			if (args.Contains ("--help")) {
@@ -85,6 +102,6 @@ namespace Docky
 					break;
 				}
 			}
-		}
+		}*/
 	}
 }

@@ -17,6 +17,15 @@ dnl Plugin ABI version; bump whenever plugin interface changes
 ABI_VERSION=0.1
 AC_SUBST(ABI_VERSION)
 
+dnl Bzr Revno, if release set BZR_REVNO to the release version number
+if test -d $top_srcdir/.bzr ; then
+	BZR_REVNO=`bzr version-info --custom \
+	--template="{revno}"`
+else
+	BZR_REVNO=0.1
+fi
+AC_SUBST(BZR_REVNO)
+
 if test -d $top_srcdir/.bzr ; then
    VERSION_INFO=`bzr version-info --custom \
    --template="bzr {branch_nick} r{revno}"`
@@ -77,6 +86,7 @@ PKG_CHECK_MODULES([MONO_ADDINS], [mono-addins])
 PKG_CHECK_MODULES([MONO_ADDINS_GUI], [mono-addins-gui])
 PKG_CHECK_MODULES([MONO_ADDINS_SETUP], [mono-addins-setup])
 PKG_CHECK_MODULES([MONO_CAIRO], [mono-cairo])
+PKG_CHECK_MODULES([MONO_OPTIONS], [mono-options])
 PKG_CHECK_MODULES([NDESK_DBUS_10], [ndesk-dbus-1.0])
 PKG_CHECK_MODULES([NDESK_DBUS_GLIB_10], [ndesk-dbus-glib-1.0])
 PKG_CHECK_MODULES([NOTIFY_SHARP], [notify-sharp])
@@ -96,6 +106,7 @@ AC_SUBST([MONO_ADDINS_LIBS])
 AC_SUBST([MONO_ADDINS_GUI_LIBS])
 AC_SUBST([MONO_ADDINS_SETUP_LIBS])
 AC_SUBST([MONO_CAIRO_LIBS])
+AC_SUBST([MONO_OPTIONS_LIBS])
 AC_SUBST([NDESK_DBUS_10_LIBS])
 AC_SUBST([NDESK_DBUS_GLIB_10_LIBS])
 AC_SUBST([NOTIFY_SHARP_LIBS])
