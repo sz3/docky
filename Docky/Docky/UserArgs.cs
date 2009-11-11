@@ -35,6 +35,18 @@ namespace Docky
 
 		internal UserArgs (string[] args)
 		{
+			if (args.Contains ("--help")) {
+				Console.WriteLine ("Docky - The fastest dock in the west");
+				Console.WriteLine ("Usage");
+				Console.WriteLine ("  docky [OPTION...]");
+				Console.WriteLine ("");
+				Console.WriteLine ("Arguments:");
+				Console.WriteLine ("  --info                 Enable info level logging");
+				Console.WriteLine ("  --debug                Enable debug level logging");
+				Console.WriteLine ("  --disable-polling      Disable cursor polling (for testing)");
+				Environment.Exit (0);
+			}
+			
 			// defaults
 			Logging = LogLevel.Warn;
 			PoleCursor = true;
@@ -45,7 +57,7 @@ namespace Docky
 				case "--info":
 					Logging = LogLevel.Info;
 					break;
-				case "--debig":
+				case "--debug":
 					Logging = LogLevel.Debug;
 					break;
 				case "--disable-polling":
