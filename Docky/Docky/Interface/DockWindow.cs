@@ -1113,6 +1113,19 @@ namespace Docky.Interface
 				Width = Math.Min (Docky.CommandLinePreferences.MaxSize, monitor_geo.Width);
 				Height = DockHeightBuffer + ZoomedIconSize + UrgentBounceHeight;
 			}
+			
+			if (Docky.CommandLinePreferences.NetbookHackMode) {
+				// Currently the intel i945 series of cards (used on netbooks frequently) will 
+				// for some mystical reason get terrible drawing performance if the window is
+				// between 1009 pixels and 1024 pixels in width OR height. We just pad it out an extra
+				// pixel
+				if (Width >= 1009 && Width <= 1024)
+					Width = 1026;
+		
+				if (Height >= 1009 && Height <= 1024)
+					Height = 1026;
+				
+			}
 			SetSizeRequest (Width, Height);
 		}
 		#endregion
@@ -1500,8 +1513,8 @@ namespace Docky.Interface
 		
 		Gdk.Rectangle NormalizeArea (Gdk.Rectangle area)
 		{
-			int right = Math.Min (Width, area.Right);
-			int bottom = Math.Min (Height, area.Bottom);
+			int right = Math.Min (monitor_geo.X + monitor_geo.Width, area.Right);
+			int bottom = Math.Min (monitor_geo.Y + monitor_geo.Height, area.Bottom);
 			
 			if (area.X < 0)
 				area.X = 0;
