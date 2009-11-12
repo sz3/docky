@@ -77,6 +77,11 @@ namespace Docky.CairoHelper
 			Width = width;
 			Height = height;
 		}
+		
+		public DockySurface (ImageSurface image) : this(image.Width, image.Height)
+		{
+			Internal = image;
+		}
 
 		public void ResetContext ()
 		{
@@ -115,7 +120,7 @@ namespace Docky.CairoHelper
 			return result;
 		}
 		
-		public void EnsureSurfaceModel (Surface reference)
+		public virtual void EnsureSurfaceModel (Surface reference)
 		{
 			if (disposed)
 				return;

@@ -138,6 +138,7 @@ namespace Docky.Interface
 		const int BackgroundHeight    = 150;
 		const int NormalIndicatorSize = 20;
 		const int UrgentIndicatorSize = 26;
+		const int GlowSize            = 30;
 		
 		readonly TimeSpan BaseAnimationTime = new TimeSpan (0, 0, 0, 0, 150);
 		readonly TimeSpan BounceTime = new TimeSpan (0, 0, 0, 0, 600);
@@ -1511,23 +1512,6 @@ namespace Docky.Interface
 			}
 		}
 		
-		Gdk.Rectangle NormalizeArea (Gdk.Rectangle area)
-		{
-			int right = Math.Min (monitor_geo.X + monitor_geo.Width, area.Right);
-			int bottom = Math.Min (monitor_geo.Y + monitor_geo.Height, area.Bottom);
-			
-			if (area.X < 0)
-				area.X = 0;
-			
-			if (area.Y < 0)
-				area.Y = 0;
-			
-			area.Width = right - area.X;
-			area.Height = bottom - area.Y;
-			
-			return area;
-		}
-		
 		void DrawDock (DockySurface surface)
 		{
 			surface.Clear ();
@@ -1560,8 +1544,10 @@ namespace Docky.Interface
 			if (ActiveGlow) {
 				Gdk.Color color = Style.BaseColors[(int) Gtk.StateType.Active];
 				
-				using (DockySurface tmp = surface.CreateMask (0)) {
-					tmp.ExponentialBlur (30);
+				Gdk.Rectangle extents;
+				using (DockySurface tmp = surface.CreateMask (0, out extents)) {
+					extents.Inflate (GlowSize * 2, GlowSize * 2);
+					tmp.ExponentialBlur (GlowSize, extents);
 					tmp.Context.Color = new Cairo.Color (
 						(double) color.Red / ushort.MaxValue, 
 						(double) color.Green / ushort.MaxValue, 
@@ -1582,12 +1568,12 @@ namespace Docky.Interface
 			
 			SetInputMask (cursorArea);
 			
-			dockArea = NormalizeArea (dockArea);
+			dockArea.Intersect (monitor_geo);
 			dockArea.X += window_position.X;
 			dockArea.Y += window_position.Y;
 			AutohideManager.SetIntersectArea (dockArea);
 			
-			cursorArea = NormalizeArea (cursorArea);
+			cursorArea.Intersect (monitor_geo);
 			cursorArea.X += window_position.X;
 			cursorArea.Y += window_position.Y;
 			AutohideManager.SetCursorArea (cursorArea);
