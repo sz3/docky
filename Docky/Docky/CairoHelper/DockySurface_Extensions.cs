@@ -186,8 +186,6 @@ namespace Docky.CairoHelper
 				cr.Paint ();
 			}
 			
-			byte a;
-			int length = original.Data.Length;
 			int width = original.Width;
 			int height = original.Height;
 			byte slice = (byte) (byte.MaxValue * cutOff);

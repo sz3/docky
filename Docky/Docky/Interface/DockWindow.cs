@@ -1542,7 +1542,7 @@ namespace Docky.Interface
 			}
 			
 			if (ActiveGlow) {
-				Gdk.Color color = Style.BaseColors[(int) Gtk.StateType.Active];
+				Gdk.Color color = Style.BaseColors[(int) Gtk.StateType.Selected];
 				
 				Gdk.Rectangle extents;
 				using (DockySurface tmp = surface.CreateMask (0, out extents)) {
