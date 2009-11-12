@@ -134,6 +134,7 @@ namespace Docky
 			prefs = DockServices.Preferences.Get<DockController> ();
 			DetectMonitors ();
 			CreateDocks ();
+			EnforceWindowManager ();
 			
 			GLib.Timeout.Add (500, delegate {
 				EnsurePluginState ();
@@ -248,6 +249,20 @@ namespace Docky
 				Dock dock = new Dock (dockPrefs);
 				docks.Add (dock);
 			}
+		}
+		
+		void EnforceWindowManager ()
+		{
+			bool hasWm = false;
+			
+			foreach (Dock dock in docks)
+				if (dock.Preferences.DefaultProvider.IsWindowManager){
+					hasWm = true;
+					break;
+				}
+			
+			if (!hasWm)
+				docks.First ().Preferences.DefaultProvider.SetWindowManager ();
 		}
 		
 		void EnsurePluginState ()
