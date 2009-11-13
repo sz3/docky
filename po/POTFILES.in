@@ -14,7 +14,6 @@ StandardPlugins/GMail/src/GMailMenuItem.cs
 StandardPlugins/Clock/src/ClockThemeSelector.cs
 StandardPlugins/Clock/src/ClockDockItem.cs
 Docky.Windowing/Windowing/DesktopItem.cs
-Docky.Windowing/Windowing/WindowMatcher.cs
 Docky/gtk-gui/Docky.ConfigurationWindow.cs
 Docky/gtk-gui/Docky.Interface.DockPreferences.cs
 Docky/Docky/Interface/DockDragTracker.cs

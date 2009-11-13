@@ -250,10 +250,6 @@ msgstr ""
 msgid "Select Theme"
 msgstr ""
 
-#: ../Docky.Windowing/Windowing/WindowMatcher.cs:333
-msgid "Exec"
-msgstr ""
-
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:57
 msgid "Docky Configuration"
 msgstr ""
