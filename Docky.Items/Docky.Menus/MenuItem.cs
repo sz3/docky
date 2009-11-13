@@ -31,6 +31,8 @@ namespace Docky.Menus
 		public event EventHandler IconChanged;
 		public event EventHandler Clicked;
 		
+		public bool Bold { get; set;}
+		
 		bool disabled;
 		public bool Disabled {
 			get { return disabled; }
@@ -80,6 +82,7 @@ namespace Docky.Menus
 		
 		public MenuItem (string text, string icon)
 		{
+			Bold = false;
 			this.icon = icon;
 			this.text = text;
 			disabled = false;
@@ -87,6 +90,7 @@ namespace Docky.Menus
 		
 		public MenuItem (string text, string icon, bool disabled)
 		{
+			Bold = false;
 			this.icon = icon;
 			this.text = text;
 			this.disabled = disabled;
