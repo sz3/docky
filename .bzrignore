@@ -30,3 +30,6 @@ po/Makefile.in.in
 po/.intltool-merge-cache
 *.addin.xml
 Docky.Windowing/Docky.Windowing.dll.config
+de.gmo
+es.gmo
+eu.gmo
