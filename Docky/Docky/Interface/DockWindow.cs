@@ -150,10 +150,12 @@ namespace Docky.Interface
 		DateTime remove_time;
 		
 		IDockPreferences preferences;
-		DockySurface main_buffer, background_buffer, icon_buffer, painter_buffer;
+		DockySurface main_buffer, background_buffer, icon_buffer;
+		DockySurface painter_buffer, painter_icon_buffer;
 		DockySurface normal_indicator_buffer, urgent_indicator_buffer;
 		AbstractDockItem hoveredItem;
 		AbstractDockPainter painter;
+		AbstractDockItem painterOwner;
 		
 		Gdk.Rectangle monitor_geo;
 		Gdk.Rectangle current_mask_area;
@@ -636,6 +638,26 @@ namespace Docky.Interface
 			if (DockHovered && e.LastPosition != Cursor)
 				AnimatedDraw ();
 			DragTracker.EnsureDragAndDropProxy ();
+			
+			UpdateMonitorGeometry ();
+			int distance;
+			switch (Position) {
+			default:
+			case DockPosition.Top:
+				distance = e.LastPosition.Y - ZoomedDockHeight;
+				break;
+			case DockPosition.Left:
+				distance = e.LastPosition.X - ZoomedDockHeight;
+				break;
+			case DockPosition.Bottom:
+				distance = monitor_geo.Height - ZoomedDockHeight - e.LastPosition.Y;
+				break;
+			case DockPosition.Right:
+				distance = monitor_geo.Width - ZoomedDockHeight - e.LastPosition.X;
+				break;
+			}
+			if (distance > 0.3 * DockHeight)
+				HidePainter ();
 		}
 		
 		void RegisterItemProvider (AbstractDockItemProvider provider)
@@ -831,7 +853,8 @@ namespace Docky.Interface
 				x = LocalCursor.X - painter_area.X;
 				y = LocalCursor.Y - painter_area.Y;
 				
-				Painter.ButtonPressed (x, y, evnt.State);
+				if (painter_area.Contains (LocalCursor))
+					Painter.ButtonPressed (x, y, evnt.State);
 			} else if (HoveredItem != null && evnt.Button == 3) {
 				MenuList list;
 				
@@ -867,7 +890,10 @@ namespace Docky.Interface
 				x = LocalCursor.X - painter_area.X;
 				y = LocalCursor.Y - painter_area.Y;
 				
-				Painter.ButtonReleased (x, y, evnt.State);
+				if (!painter_area.Contains (LocalCursor))
+					HidePainter ();
+				else
+					Painter.ButtonReleased (x, y, evnt.State);
 			} else if (HoveredItem != null) {
 				double x, y;
 				Gdk.Rectangle region = DrawRegionForItem (HoveredItem);
@@ -893,7 +919,8 @@ namespace Docky.Interface
 				x = LocalCursor.X - painter_area.X;
 				y = LocalCursor.Y - painter_area.Y;
 				
-				Painter.Scrolled (evnt.Direction, x, y, evnt.State);
+				if (painter_area.Contains (LocalCursor))
+					Painter.Scrolled (evnt.Direction, x, y, evnt.State);
 			} else if (HoveredItem != null) {
 				HoveredItem.Scrolled (evnt.Direction, evnt.State);
 			}
@@ -1002,17 +1029,19 @@ namespace Docky.Interface
 				return;
 			
 			Painter = painter;
+			painterOwner = owner;
 			Painter.HideRequest += HandlePainterHideRequest;
 			Painter.PaintNeeded += HandlePainterPaintNeeded;
 			
 			repaint_painter = true;
 			update_screen_regions = true;
 			DragTracker.DragDisabled = true;
-			Painter.SetAllocation (new Gdk.Rectangle (0, 0, DockWidth - 100, DockHeight));
-			Painter.SetStyle (Style);
-			Painter.Shown ();
 			
 			SetTooltipVisibility ();
+			Reconfigure ();
+			Painter.SetStyle (Style);
+			
+			Painter.Shown ();
 		}
 		
 		void HidePainter ()
@@ -1025,9 +1054,11 @@ namespace Docky.Interface
 			
 			DragTracker.DragDisabled = false;
 			update_screen_regions = true;
+			
 			Painter.Hidden ();
 			Painter = null;
 			
+			Reconfigure ();
 			SetTooltipVisibility ();
 		}
 		
@@ -1102,6 +1133,15 @@ namespace Docky.Interface
 				MaxIconSize--;
 				DockWidth = Items.Sum (adi => adi.Square ? MaxIconSize : adi.IconSurface (background_buffer, MaxIconSize).Width);
 				DockWidth += 2 * DockWidthBuffer + (Items.Count - 1) * ItemWidthBuffer;
+			}
+				
+			if (Painter != null) {
+				// this allows Painter.MinimumSize to use Allocation
+				Painter.SetAllocation (new Gdk.Rectangle (0, 0, DockWidth - ZoomedIconSize, DockHeight));
+				// now we can use MinimumSize
+				DockWidth = (int) Math.Max (DockWidth, Painter.MinimumSize + ZoomedIconSize);
+				// and update the painter's allocation!
+				Painter.SetAllocation (new Gdk.Rectangle (0, 0, DockWidth - ZoomedIconSize, DockHeight));
 			}
 		}
 		
@@ -1519,6 +1559,9 @@ namespace Docky.Interface
 				                                hotAreaSize);
 				break;
 			}
+			
+			if (Painter != null)
+				dockArea = staticArea;
 		}
 		
 		void DrawDock (DockySurface surface)
@@ -1601,15 +1644,46 @@ namespace Docky.Interface
 				painter_buffer.Clear ();
 				DockySurface painterSurface = Painter.GetSurface (surface);
 			
-				painter_area = new Gdk.Rectangle (dockArea.X + (dockArea.Width - painterSurface.Width) / 2,
+				painter_area = new Gdk.Rectangle (dockArea.X + ZoomedIconSize + (dockArea.Width - ZoomedIconSize - painterSurface.Width) / 2,
 					dockArea.Y + (dockArea.Height - painterSurface.Height) / 2,
 					painterSurface.Width,
 					painterSurface.Height);
 			
 				painterSurface.Internal.Show (painter_buffer.Context, painter_area.X, painter_area.Y);
+			
+				if (painter_icon_buffer == null)
+					painter_icon_buffer = new DockySurface (surface.Width, surface.Height, surface);
+				else
+					painter_icon_buffer.Clear ();
+				
+				PointD point;
+				switch (Position) {
+				default:
+				case DockPosition.Top:
+					point = new PointD(dockArea.X + ZoomedIconSize / 2,
+						dockArea.Y + DockHeightBuffer + ZoomedIconSize / 2);
+					break;
+				case DockPosition.Left:
+					point = new PointD(dockArea.X + DockHeightBuffer + ZoomedIconSize / 2,
+						dockArea.Y + ZoomedIconSize / 2);
+					break;
+				case DockPosition.Bottom:
+					point = new PointD(dockArea.X + ZoomedIconSize / 2,
+						dockArea.Y + painterSurface.Height - DockHeightBuffer - ZoomedIconSize / 2);
+					break;
+				case DockPosition.Right:
+					point = new PointD(dockArea.X + painterSurface.Height - DockHeightBuffer - ZoomedIconSize / 2,
+						dockArea.Y + ZoomedIconSize / 2);
+					break;
+				}
+				
+				DockySurface icon = painterOwner.IconSurface (painter_icon_buffer, ZoomedIconSize);
+				icon.ShowAtPointAndZoom (painter_icon_buffer, point, DrawValues [painterOwner].Zoom, 1);
+				
 				repaint_painter = false;
 			}
 			
+			painter_icon_buffer.Internal.Show (surface.Context, 0, 0);
 			painter_buffer.Internal.Show (surface.Context, 0, 0);
 		}
 		
