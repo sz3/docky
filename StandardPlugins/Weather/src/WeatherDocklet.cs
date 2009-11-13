@@ -312,17 +312,17 @@ namespace WeatherDocklet
 			
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Settings"), Gtk.Stock.Preferences,
 					delegate {
-				WeatherConfigurationDialog dlg = new WeatherConfigurationDialog ();
-				dlg.Show ();
-			}));
+						if (WeatherConfigurationDialog.instance == null)
+							WeatherConfigurationDialog.instance = new WeatherConfigurationDialog ();
+						WeatherConfigurationDialog.instance.Show ();
+					}));
 			
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Reload Weather Data"), Gtk.Stock.Refresh,
-					(o, a) =>
-					{
-				Status = WeatherDockletStatus.ManualReload;
-				ShowBusyAnimation ();
-				WeatherController.ResetTimer ();
-			}));
+					delegate {
+						Status = WeatherDockletStatus.ManualReload;
+						ShowBusyAnimation ();
+						WeatherController.ResetTimer ();
+					}));
 			
 			return list;
 		}

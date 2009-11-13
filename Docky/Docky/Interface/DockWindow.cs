@@ -138,13 +138,13 @@ namespace Docky.Interface
 		const int BackgroundHeight    = 150;
 		const int NormalIndicatorSize = 20;
 		const int UrgentIndicatorSize = 26;
+		const int GlowSize            = 30;
 		
 		readonly TimeSpan BaseAnimationTime = new TimeSpan (0, 0, 0, 0, 150);
 		readonly TimeSpan BounceTime = new TimeSpan (0, 0, 0, 0, 600);
 		
 		DateTime hidden_change_time;
 		DateTime dock_hovered_change_time;
-		DateTime painter_change_time;
 		DateTime render_time;
 		DateTime items_change_time;
 		DateTime remove_time;
@@ -174,6 +174,7 @@ namespace Docky.Interface
 		int remove_size;
 		
 		uint animation_timer;
+		uint icon_size_timer;
 		
 		public int Width { get; private set; }
 		
@@ -366,7 +367,6 @@ namespace Docky.Interface
 			get { return painter; }
 			set {
 				painter = value;
-				painter_change_time = DateTime.UtcNow;
 			}
 		}
 		
@@ -771,6 +771,15 @@ namespace Docky.Interface
 
 		void PreferencesIconSizeChanged (object sender, EventArgs e)
 		{
+			if (icon_size_timer > 0)
+				GLib.Source.Remove (icon_size_timer);
+			
+			icon_size_timer = GLib.Timeout.Add (1000, delegate {
+				Reconfigure ();
+				icon_size_timer = 0;
+				return false;
+			});
+			
 			UpdateDockWidth ();
 			AnimatedDraw ();
 		}
@@ -1113,6 +1122,20 @@ namespace Docky.Interface
 				Width = Math.Min (Docky.CommandLinePreferences.MaxSize, monitor_geo.Width);
 				Height = DockHeightBuffer + ZoomedIconSize + UrgentBounceHeight;
 			}
+			
+			if (Docky.CommandLinePreferences.NetbookMode) {
+				// Currently the intel i945 series of cards (used on netbooks frequently) will 
+				// for some mystical reason get terrible drawing performance if the window is
+				// between 1009 pixels and 1024 pixels in width OR height. We just pad it out an extra
+				// pixel
+				if (Width >= 1009 && Width <= 1024)
+					Width = 1026;
+				
+				if (Height >= 1009 && Height <= 1024)
+					Height = 1026;
+				
+			}
+			
 			SetSizeRequest (Width, Height);
 		}
 		#endregion
@@ -1498,23 +1521,6 @@ namespace Docky.Interface
 			}
 		}
 		
-		Gdk.Rectangle NormalizeArea (Gdk.Rectangle area)
-		{
-			int right = Math.Min (Width, area.Right);
-			int bottom = Math.Min (Height, area.Bottom);
-			
-			if (area.X < 0)
-				area.X = 0;
-			
-			if (area.Y < 0)
-				area.Y = 0;
-			
-			area.Width = right - area.X;
-			area.Height = bottom - area.Y;
-			
-			return area;
-		}
-		
 		void DrawDock (DockySurface surface)
 		{
 			surface.Clear ();
@@ -1545,10 +1551,12 @@ namespace Docky.Interface
 			}
 			
 			if (ActiveGlow) {
-				Gdk.Color color = Style.BaseColors[(int) Gtk.StateType.Active];
+				Gdk.Color color = Style.BaseColors[(int) Gtk.StateType.Selected];
 				
-				using (DockySurface tmp = surface.CreateMask (0)) {
-					tmp.ExponentialBlur (30);
+				Gdk.Rectangle extents;
+				using (DockySurface tmp = surface.CreateMask (0, out extents)) {
+					extents.Inflate (GlowSize * 2, GlowSize * 2);
+					tmp.ExponentialBlur (GlowSize, extents);
 					tmp.Context.Color = new Cairo.Color (
 						(double) color.Red / ushort.MaxValue, 
 						(double) color.Green / ushort.MaxValue, 
@@ -1569,12 +1577,12 @@ namespace Docky.Interface
 			
 			SetInputMask (cursorArea);
 			
-			dockArea = NormalizeArea (dockArea);
+			dockArea.Intersect (monitor_geo);
 			dockArea.X += window_position.X;
 			dockArea.Y += window_position.Y;
 			AutohideManager.SetIntersectArea (dockArea);
 			
-			cursorArea = NormalizeArea (cursorArea);
+			cursorArea.Intersect (monitor_geo);
 			cursorArea.X += window_position.X;
 			cursorArea.Y += window_position.Y;
 			AutohideManager.SetCursorArea (cursorArea);

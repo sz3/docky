@@ -37,11 +37,15 @@ namespace Docky
 		
 		[Option ("Enable debug level logging", 'd', "debug")]
 		public bool Debug;
+		
+		[Option ("Netbook mode", 'n', "netbook")]
+		public bool NetbookMode;
 
 		public UserArgs (string[] args)
 		{
 			ProcessArgs (args);
 			ParsingMode = OptionsParsingMode.GNU_DoubleDash;
+			
 			// defaults
 			if (MaxSize == 0)
 				MaxSize = int.MaxValue;

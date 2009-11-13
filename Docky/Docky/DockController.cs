@@ -25,6 +25,8 @@ using System.Text;
 using Gdk;
 using Gtk;
 
+using Mono.Unix;
+
 using Docky.Items;
 using Docky.Interface;
 using Docky.Services;
@@ -98,6 +100,7 @@ namespace Docky
 				if (DockTheme == value)
 					return;
 				prefs.Set ("Theme", value);
+				Log.Info ("Setting theme: " + value);
 				if (ThemeChanged != null)
 					ThemeChanged (this, EventArgs.Empty);
 			}
@@ -132,8 +135,10 @@ namespace Docky
 		{
 			docks = new List<Dock> ();
 			prefs = DockServices.Preferences.Get<DockController> ();
+			Log.Info ("Setting theme: " + DockTheme);
 			DetectMonitors ();
 			CreateDocks ();
+			EnforceWindowManager ();
 			
 			GLib.Timeout.Add (500, delegate {
 				EnsurePluginState ();
@@ -248,6 +253,20 @@ namespace Docky
 				Dock dock = new Dock (dockPrefs);
 				docks.Add (dock);
 			}
+		}
+		
+		void EnforceWindowManager ()
+		{
+			bool hasWm = false;
+			
+			foreach (Dock dock in docks)
+				if (dock.Preferences.DefaultProvider.IsWindowManager){
+					hasWm = true;
+					break;
+				}
+			
+			if (!hasWm)
+				docks.First ().Preferences.DefaultProvider.SetWindowManager ();
 		}
 		
 		void EnsurePluginState ()

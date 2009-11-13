@@ -29,6 +29,7 @@ namespace Docky.Menus
 		
 		public WindowMenuItem (Wnck.Window window, string icon) : base(window.Name, icon)
 		{
+			Bold = window.NeedsAttention ();
 			this.window = window;
 			
 			this.Clicked += HandleClicked;

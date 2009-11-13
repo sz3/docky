@@ -43,8 +43,23 @@ namespace Docky.Windowing
 		static IEnumerable<string> DesktopFiles {
 			get {
 				return DesktopFileDirectories
-					.SelectMany (dir => Directory.GetFiles (dir, "*.desktop"));
+					.SelectMany (dir => FindDesktopFiles (dir));
 			}
+		}
+		
+		static IEnumerable<string> FindDesktopFiles (string dir) {
+			IEnumerable<string> files;
+			
+			try {
+				files = Directory.GetFiles (dir, "*.desktop");
+			} catch {
+				return Enumerable.Empty<string> ();
+			}
+			
+			foreach (string subdir in Directory.GetDirectories (dir))
+				files = files.Union (FindDesktopFiles (subdir));
+			
+			return files;
 		}
 		
 		static IEnumerable<string> DesktopFileDirectories

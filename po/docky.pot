@@ -1,0 +1,351 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-11-12 21:36-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:71
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
+msgid "Fetching data..."
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:293
+msgid "Radar Map"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:306
+msgid "'s Forecast"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:313
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:246
+msgid "Settings"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:320
+msgid "Reload Weather Data"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:84
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:87
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:92
+msgid "Invalid Weather Location"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:90
+msgid "Network Error: "
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:87
+msgid "Today"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:90
+msgid "Tomorrow"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:88
+msgid "_Weather Provider"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:116
+msgid "Some information about the weather source."
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:155
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:133
+msgid "Move _Up"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:167
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:145
+msgid "Move _Down"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:179
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:157
+msgid "_Remove"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:202
+msgid "Add _Location"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:224
+msgid "_Search"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:235
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:202
+msgid "_Add"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:269
+msgid "Automatically Update _Every"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:279
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:80
+msgid "mins"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:309
+msgid "Use _Metric Units"
+msgstr ""
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
+msgid ""
+"<big><b>Empty all of the items from the trash?</b></big>\n"
+"\n"
+"If you choose to empty the trash, all items in it\n"
+"will be permanently lost. Please note that you\n"
+"can also delete them separately."
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:70
+msgid "Check _Every"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:180
+msgid "Add _Label"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs:89
+msgid "Password"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs:111
+msgid "Username"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs:124
+msgid "<i>Verify and save account information</i>"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs:180
+msgid "Don't have an account?"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailConfiguration.cs:38
+msgid "Labels"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:69
+msgid "No unread mail"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:71
+#, csharp-format
+msgid "{0} unread message"
+msgid_plural "{0} unread messages"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:91
+msgid "Checking mail..."
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:226
+msgid "View "
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:231
+msgid "Compose Mail"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:254
+msgid "Check Now"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:179
+msgid "Username or Password not set"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:245
+#, csharp-format
+msgid "From: {0}"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:256
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:260
+msgid "Feed Error"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:265
+msgid "Invalid Username"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:269
+msgid "Network Error"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:274
+msgid "General Error"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:43
+#, csharp-format
+msgid "Sign up for {0}"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:44
+msgid "Validating..."
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:45
+#, csharp-format
+msgid "Don't have {0}?"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:46
+msgid "Account validation failed!"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:47
+msgid "Verify and save account information"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:48
+msgid "Account validation succeeded!"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
+msgid "From: "
+msgstr ""
+
+#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:45
+msgid "Themes"
+msgstr ""
+
+#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:50
+msgid "Theme"
+msgstr ""
+
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:293
+msgid "Digital Clock"
+msgstr ""
+
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:299
+msgid "24-Hour Clock"
+msgstr ""
+
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:305
+msgid "Show Date"
+msgstr ""
+
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:311
+msgid "Select Theme"
+msgstr ""
+
+#: ../Docky.Windowing/Windowing/WindowMatcher.cs:333
+msgid "Exec"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:57
+msgid "Docky Configuration"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:85
+msgid "Start When Computer Starts"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:100
+msgid "Theme:"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:123
+msgid "<b>General Options</b>"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:144
+msgid "<b>Dock Configuration</b>"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:178
+msgid "New Dock"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:205
+msgid "Delete Dock"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
+msgid "None"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:76
+msgid "Autohide"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
+msgid "Intellihide"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:78
+msgid "Defenestraphobia"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:93
+msgid "Fade On Hide"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:123
+msgid "Icon Size:"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:134
+msgid "Autohide:"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:144
+msgid "Indicate Multiple Windows"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:159
+msgid "Manage Windows Without Launcher"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:174
+msgid "Zoom:"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:246
+msgid "<b>Inactive Plugins</b>"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:254
+msgid "<b>Active Plugins</b>"
+msgstr ""
+
+#: ../Docky/Docky/ConfigurationWindow.cs:106
+msgid "Click on any dock to configure."
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:77
+msgid "Icon"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:82
+msgid "Name"
+msgstr ""
+
+#: ../data/docky.desktop.in.h:1
+msgid "Docky"
+msgstr ""
+
+#: ../data/docky.desktop.in.h:2
+msgid "The finest dock no money can buy."
+msgstr ""
