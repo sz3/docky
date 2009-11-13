@@ -3,6 +3,19 @@ include $(top_srcdir)/build.rules.core.mk
 UNSAFE = -unsafe
 DEBUG = -debug
 
+EXTRA_DIST = 	AppInfoAdapter.custom \
+		FileEnumerator.custom \
+		gio-sharp.dll.config  \
+		AssemblyInfo.cs       \
+		FileFactory.cs        \
+		GioStream.cs          \
+		FileAdapter.custom    \
+		gio-api.raw           \
+		File.custom           \
+		Gio.metadata          \
+		snk
+
+
 SRCS = \
 	$(srcdir)/AssemblyInfo.cs \
 	$(srcdir)/FileFactory.cs \
