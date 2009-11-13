@@ -175,6 +175,7 @@ Docky.Items/Makefile
 Docky.Items/Resources/Docky.Items.addin.xml
 Docky.Services/Makefile
 Docky.Services/AssemblyInfo.cs
+Docky.Services/Docky.Services.dll.config
 Docky.Windowing/Makefile
 Docky.Windowing/Docky.Windowing.dll.config
 Docky.Zeitgeist/Makefile
