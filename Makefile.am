@@ -6,6 +6,7 @@ SUBDIRS = \
 	. \
 	data \
 	lib \
+	po \
 	Docky.Services \
 	Docky.Zeitgeist \
 	Docky.CairoHelper \
