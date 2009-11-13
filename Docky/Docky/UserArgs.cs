@@ -79,9 +79,7 @@ namespace Docky
 					try {
 						size = Convert.ToInt32 (args[i + 1]);
 						i++;
-					} catch (FormatException e) {
-						break;
-					} catch (OverflowException e) {
+					} catch {
 						break;
 					}
 					size = Math.Max (size, 500);

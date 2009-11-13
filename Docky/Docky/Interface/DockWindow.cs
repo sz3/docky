@@ -145,7 +145,6 @@ namespace Docky.Interface
 		
 		DateTime hidden_change_time;
 		DateTime dock_hovered_change_time;
-		DateTime painter_change_time;
 		DateTime render_time;
 		DateTime items_change_time;
 		DateTime remove_time;
@@ -367,7 +366,6 @@ namespace Docky.Interface
 			get { return painter; }
 			set {
 				painter = value;
-				painter_change_time = DateTime.UtcNow;
 			}
 		}
 		
