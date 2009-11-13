@@ -68,7 +68,8 @@ REFERENCES =  \
 	$(NDESK_DBUS_GLIB_10_LIBS) \
 	$(MONO_ADDINS_LIBS) \
 	$(MONO_ADDINS_GUI_LIBS) \
-	$(MONO_ADDINS_SETUP_LIBS)
+	$(MONO_ADDINS_SETUP_LIBS) \
+	Mono.GetOptions
 
 #
 # Extra rules for our binary, not worth factoring out

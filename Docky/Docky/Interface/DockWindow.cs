@@ -1123,7 +1123,7 @@ namespace Docky.Interface
 				Height = DockHeightBuffer + ZoomedIconSize + UrgentBounceHeight;
 			}
 			
-			if (Docky.CommandLinePreferences.NetbookHackMode) {
+			if (Docky.CommandLinePreferences.NetbookMode) {
 				// Currently the intel i945 series of cards (used on netbooks frequently) will 
 				// for some mystical reason get terrible drawing performance if the window is
 				// between 1009 pixels and 1024 pixels in width OR height. We just pad it out an extra

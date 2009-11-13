@@ -16,80 +16,45 @@
 // 
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 
 using Docky.Services;
+
+using Mono.GetOptions;
 
 namespace Docky
 {
 
 
-	public class UserArgs
+	public class UserArgs : Options
 	{
 		public LogLevel Logging { get; protected set; }
 		
-		public bool PoleCursor { get; protected set; }
+		[Option ("Disable cursor polling (for testing)", 'p', "disable-polling")]
+		public bool NoPollCursor;
 		
-		public bool NetbookHackMode { get; protected set; }
+		[Option ("Maximum window dimension (min 500)", 'm', "max-size")]
+		public int MaxSize;
 		
-		public int MaxSize { get; protected set; }
+		[Option ("Enable debug level logging", 'd', "debug")]
+		public bool Debug;
+		
+		[Option ("Netbook mode", 'n', "netbook")]
+		public bool NetbookMode;
 
-		internal UserArgs (string[] args)
+		public UserArgs (string[] args)
 		{
-			if (args.Contains ("--help")) {
-				Console.WriteLine ("Docky - The fastest dock in the west");
-				Console.WriteLine ("Usage");
-				Console.WriteLine ("  docky [OPTION...]");
-				Console.WriteLine ("");
-				Console.WriteLine ("Arguments:");
-				Console.WriteLine ("  --info                 Enable info level logging");
-				Console.WriteLine ("  --debug                Enable debug level logging");
-				Console.WriteLine ("  --disable-polling      Disable cursor polling (for testing)");
-				Console.WriteLine ("  --max-size=SIZE        Sets the maximum window dimension (min 500)");
-				Console.WriteLine ("  --netbook-hack-mode    Enable netbook hack mode for i945 chips at 1024x600");
-				Environment.Exit (0);
-			}
+			ProcessArgs (args);
+			ParsingMode = OptionsParsingMode.GNU_DoubleDash;
 			
 			// defaults
+			if (MaxSize == 0)
+				MaxSize = int.MaxValue;
+			MaxSize = Math.Max (MaxSize, 500);
 			Logging = LogLevel.Warn;
-			PoleCursor = true;
-			NetbookHackMode = false;
-			MaxSize = int.MaxValue;
-			
-			args = args.SelectMany (s => s.Split ('=')).ToArray ();
-			// parse the command line
-			for (int i = 0; i < args.Length; i++) {
-				switch (args[i]) {
-				case "--info":
-					Logging = LogLevel.Info;
-					break;
-				case "--debug":
-					Logging = LogLevel.Debug;
-					break;
-				case "--disable-polling":
-					PoleCursor = false;
-					break;
-				case "--max-size":
-					if (i == args.Length - 1)
-						break;
-					int size;
-					try {
-						size = Convert.ToInt32 (args[i + 1]);
-						i++;
-					} catch {
-						break;
-					}
-					size = Math.Max (size, 500);
-					MaxSize = size;
-					break;
-				case "--netbook-hack-mode":
-					NetbookHackMode = true;
-					break;
-				}
-			}
+			// if the debug option was passed, set it to debug
+			// otherwise leave it to the default, which is warn
+			if (Debug)
+				Log.DisplayLevel = LogLevel.Debug; 
 		}
 	}
 }

@@ -76,9 +76,6 @@ namespace Docky
 			Log.Info ("Kernel version: {0}", System.Environment.OSVersion.Version);
 			Log.Info ("CLR version: {0}", System.Environment.Version);
 			
-			// now lets set the log level
-			Log.DisplayLevel = CommandLinePreferences.Logging;
-			
 			// set process name
 			DockServices.System.SetProcessName ("docky");
 			

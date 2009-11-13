@@ -17,6 +17,7 @@
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Mono.GetOptions;
 
 // Information about this assembly is defined by the following
 // attributes.
@@ -24,13 +25,20 @@ using System.Runtime.CompilerServices;
 // change them to the information which is associated with the assembly
 // you compile.
 [assembly: AssemblyTitle("Docky")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("The fastest dock in the west!")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("docky")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCopyright("GPL")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+
+[assembly: Mono.About ("For more information, please visit http://launchpad.net/docky/")]
+[assembly: Mono.Author ("Jason Smith <jassmith@gmail.com>")]
+[assembly: Mono.Author ("Robert Dyer <psybers@gmail.com>")]
+[assembly: Mono.Author ("Chris Szikszoy <chris@szikszoy.com>")]
+[assembly: Mono.Author ("Daniel Foré <daniel.p.fore@gmail.com>")]
+[assembly: Mono.UsageComplement ("")]
 
 // The assembly version has following format:
 //
@@ -38,7 +46,7 @@ using System.Runtime.CompilerServices;
 //
 // You can specify all values by your own or you can build default build and revision
 // numbers with the '*' character (the default):
-[assembly: AssemblyVersion("@ABI_VERSION@.0.0")]
+[assembly: AssemblyVersion("@BZR_REVNO@")]
 
 // The following attributes specify the key for the sign of your assembly. See the
 // .NET Framework documentation for more information about signing.
