@@ -1577,14 +1577,14 @@ namespace Docky.Interface
 			
 			SetInputMask (cursorArea);
 			
-			dockArea.Intersect (monitor_geo);
 			dockArea.X += window_position.X;
 			dockArea.Y += window_position.Y;
+			dockArea.Intersect (monitor_geo);
 			AutohideManager.SetIntersectArea (dockArea);
 			
-			cursorArea.Intersect (monitor_geo);
 			cursorArea.X += window_position.X;
 			cursorArea.Y += window_position.Y;
+			cursorArea.Intersect (monitor_geo);
 			AutohideManager.SetCursorArea (cursorArea);
 		}
 		
