@@ -54,7 +54,7 @@ namespace Docky
 			// if the debug option was passed, set it to debug
 			// otherwise leave it to the default, which is warn
 			if (Debug)
-				Log.DisplayLevel = LogLevel.Debug; 
+				Log.DisplayLevel = LogLevel.Debug;
 		}
 	}
 }
