@@ -174,6 +174,7 @@ namespace Docky.Interface
 		int remove_size;
 		
 		uint animation_timer;
+		uint icon_size_timer;
 		
 		public int Width { get; private set; }
 		
@@ -770,6 +771,15 @@ namespace Docky.Interface
 
 		void PreferencesIconSizeChanged (object sender, EventArgs e)
 		{
+			if (icon_size_timer > 0)
+				GLib.Source.Remove (icon_size_timer);
+			
+			icon_size_timer = GLib.Timeout.Add (1000, delegate {
+				Reconfigure ();
+				icon_size_timer = 0;
+				return false;
+			});
+			
 			UpdateDockWidth ();
 			AnimatedDraw ();
 		}
@@ -1120,11 +1130,12 @@ namespace Docky.Interface
 				// pixel
 				if (Width >= 1009 && Width <= 1024)
 					Width = 1026;
-		
+				
 				if (Height >= 1009 && Height <= 1024)
 					Height = 1026;
 				
 			}
+			
 			SetSizeRequest (Width, Height);
 		}
 		#endregion
