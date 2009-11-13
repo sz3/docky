@@ -431,6 +431,7 @@ namespace WeatherDocklet
 			if (Page != 0)
 				ResetBuffers ();
 			Page = 0;
+			ResetBuffers ();
 			QueueRepaint ();
 		}
 		
