@@ -67,10 +67,8 @@ namespace GMail
 			string status = "";
 			if (Atom.UnreadCount == 0)
 				status = Catalog.GetString ("No unread mail");
-			else if (Atom.UnreadCount == 1)
-				status = Catalog.GetString ("1 unread message");
 			else
-				status = Atom.UnreadCount + Catalog.GetString (" unread messages");
+				status = Catalog.GetPluralString ("{0} unread message", "{0} unread messages", Atom.UnreadCount);
 			HoverText = Atom.CurrentLabel + " - " + status;
 			
 			parent.ItemVisibilityChanged (this, Visible);
