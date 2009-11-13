@@ -57,11 +57,15 @@ namespace WeatherDocklet
 		/// </value>
 		WeatherDockletStatus Status { get; set; }
 		
+		WeatherPainter painter;
+		
 		/// <summary>
 		/// Creates a new weather docklet.
 		/// </summary>
 		public WeatherDocklet ()
 		{
+			painter = new WeatherPainter (this);
+			
 			Status = WeatherDockletStatus.Initializing;
 			
 			WeatherController.WeatherReloading += HandleWeatherReloading;
@@ -268,6 +272,13 @@ namespace WeatherDocklet
 				}
 				break;
 			}
+		}
+		
+		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
+		{
+			if (button == 1)
+				ShowPainter (painter);
+			return ClickAnimation.None;
 		}
 		
 		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)

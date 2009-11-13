@@ -20,6 +20,7 @@ FILES = \
 	src/WeatherDocklet.WeatherConfiguration.cs \
 	src/WeatherUnits.cs \
 	src/WeatherDocklet.cs \
+	src/WeatherPainter.cs \
 	src/generated.cs \
 	src/WeatherErrorArgs.cs
 
