@@ -59,8 +59,6 @@ namespace Docky
 		
 		public static void Main (string[] args)
 		{
-			CommandLinePreferences = new UserArgs (args);
-			
 			//Init gtk and GLib related
 			Gdk.Threads.Init ();
 			NDesk.DBus.BusG.Init ();
@@ -75,6 +73,9 @@ namespace Docky
 			Log.Info ("Docky version: {0}", AssemblyInfo.VersionDetails);
 			Log.Info ("Kernel version: {0}", System.Environment.OSVersion.Version);
 			Log.Info ("CLR version: {0}", System.Environment.Version);
+			
+			// process the command line args
+			CommandLinePreferences = new UserArgs (args);
 			
 			// set process name
 			DockServices.System.SetProcessName ("docky");

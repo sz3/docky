@@ -112,4 +112,9 @@
       <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Docky.Services.dll.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

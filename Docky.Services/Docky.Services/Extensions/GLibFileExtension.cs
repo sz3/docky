@@ -166,7 +166,16 @@ namespace Docky.Services
 		
 		public static void MountWithActionAndFallback (this GLib.File file, Action success, Action failed)
 		{
-			file.MountEnclosingVolume (0, new Gtk.MountOperation (null), null, (o, result) =>
+			// In rare instances creating a Gtk.MountOperation can fail so let's try to create it first
+			Gtk.MountOperation op = null;
+			try {
+				op = new Gtk.MountOperation (null);
+			} catch (Exception e) {
+				Log.Error ("Unable to create a Gtk.MountOperation. " +
+					"This is most likely due to a missing gtk or glib library.  Error message: {0}", e.Message);
+				Log.Debug (e.StackTrace);
+			}
+			file.MountEnclosingVolume (0, op == null ? null : op, null, (o, result) =>
 			{
 				// wait for the mount to finish
 				try {

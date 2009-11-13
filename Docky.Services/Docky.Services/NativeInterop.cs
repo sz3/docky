@@ -81,38 +81,78 @@ namespace Docky.Services
 		public static void UnmountWithOperation (Mount mount, MountUnmountFlags flags, MountOperation op, 
 			Cancellable cancellable, AsyncReadyCallback cb)
 		{
-			GLibSharp.AsyncReadyCallbackWrapper cb_wrapper = new GLibSharp.AsyncReadyCallbackWrapper (cb);
-			g_mount_unmount_with_operation (mount.Handle, (int) flags, op == null ? IntPtr.Zero : op.Handle, 
+			try {
+				GLibSharp.AsyncReadyCallbackWrapper cb_wrapper = new GLibSharp.AsyncReadyCallbackWrapper (cb);
+				g_mount_unmount_with_operation (mount.Handle, (int) flags, op == null ? IntPtr.Zero : op.Handle, 
 				cancellable == null ? IntPtr.Zero : cancellable.Handle, cb_wrapper.NativeDelegate, IntPtr.Zero);
+			} catch (DllNotFoundException e) {
+				Log<NativeInterop>.Fatal ("Could not find gio-2.0, please report immediately.");
+				Log<NativeInterop>.Info (e.StackTrace);
+				return;
+			} catch (Exception e) {
+				Log<NativeInterop>.Error ("Failed to unmount with operation name: {0}", e.Message);
+				Log<NativeInterop>.Info (e.StackTrace);
+				return;
+			}
 		}
 		
 		public static void EjectWithOperation (Mount mount, MountUnmountFlags flags, MountOperation op, 
 			Cancellable cancellable, AsyncReadyCallback cb)
 		{
-			GLibSharp.AsyncReadyCallbackWrapper cb_wrapper = new GLibSharp.AsyncReadyCallbackWrapper (cb);
-			g_mount_eject_with_operation (mount.Handle, (int) flags, op == null ? IntPtr.Zero : op.Handle, 
+			try {
+				GLibSharp.AsyncReadyCallbackWrapper cb_wrapper = new GLibSharp.AsyncReadyCallbackWrapper (cb);
+				g_mount_eject_with_operation (mount.Handle, (int) flags, op == null ? IntPtr.Zero : op.Handle, 
 				cancellable == null ? IntPtr.Zero : cancellable.Handle, cb_wrapper.NativeDelegate, IntPtr.Zero);
+			} catch (DllNotFoundException e) {
+				Log<NativeInterop>.Fatal ("Could not find gio-2.0, please report immediately.");
+				Log<NativeInterop>.Info (e.StackTrace);
+				return;
+			} catch (Exception e) {
+				Log<NativeInterop>.Error ("Failed to eject with operation name: {0}", e.Message);
+				Log<NativeInterop>.Info (e.StackTrace);
+				return;
+			}
 		}
 		
 		public static bool EjectWithOperationFinish (Mount mount, AsyncResult result)
 		{
-			IntPtr error = IntPtr.Zero;
-			bool success = g_mount_eject_with_operation_finish (mount.Handle, result == null ? IntPtr.Zero : 
+			try {
+				IntPtr error = IntPtr.Zero;
+				bool success = g_mount_eject_with_operation_finish (mount.Handle, result == null ? IntPtr.Zero : 
 				((result is GLib.Object) ? (result as GLib.Object).Handle : (result as GLib.AsyncResultAdapter).Handle), out error);
-			bool ret = success;
-			if (error != IntPtr.Zero)
-				throw new GLib.GException (error);
-			return ret;
+				bool ret = success;
+				if (error != IntPtr.Zero)
+					throw new GLib.GException (error);
+				return ret;
+			} catch (DllNotFoundException e) {
+				Log<NativeInterop>.Fatal ("Could not find gio-2.0, please report immediately.");
+				Log<NativeInterop>.Info (e.StackTrace);
+				return false;
+			} catch (Exception e) {
+				Log<NativeInterop>.Error ("Failed to eject with operation finish name: {0}", e.Message);
+				Log<NativeInterop>.Info (e.StackTrace);
+				return false;
+			}
 		}
 		
 		public static bool UnmountWithOperation (Mount mount, AsyncResult result)
 		{
-			IntPtr error = IntPtr.Zero;
-			bool success = g_mount_unmount_with_operation_finish (mount.Handle, result == null ? IntPtr.Zero : ((result is GLib.Object) ? (result as GLib.Object).Handle : (result as GLib.AsyncResultAdapter).Handle), out error);
-			bool ret = success;
-			if (error != IntPtr.Zero)
-				throw new GLib.GException (error);
-			return ret;
+			try {
+				IntPtr error = IntPtr.Zero;
+				bool success = g_mount_unmount_with_operation_finish (mount.Handle, result == null ? IntPtr.Zero : ((result is GLib.Object) ? (result as GLib.Object).Handle : (result as GLib.AsyncResultAdapter).Handle), out error);
+				bool ret = success;
+				if (error != IntPtr.Zero)
+					throw new GLib.GException (error);
+				return ret;
+			} catch (DllNotFoundException e) {
+				Log<NativeInterop>.Fatal ("Could not find gio-2.0, please report immediately.");
+				Log<NativeInterop>.Info (e.StackTrace);
+				return false;
+			} catch (Exception e) {
+				Log<NativeInterop>.Error ("Failed to unmount with operation finish name: {0}", e.Message);
+				Log<NativeInterop>.Info (e.StackTrace);
+				return false;
+			}
 		}
 	}
 }
