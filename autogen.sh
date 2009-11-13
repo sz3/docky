@@ -107,8 +107,8 @@ esac
 echo "Running $ACLOCAL $aclocalinclude ..."
 $ACLOCAL $aclocalinclude
 
-echo "Running $AUTOMAKE --gnu $am_opt ..."
-$AUTOMAKE --add-missing --gnu $am_opt
+echo "Running $AUTOMAKE --copy --gnu $am_opt ..."
+$AUTOMAKE --add-missing --copy --gnu $am_opt
 
 echo "Running $AUTOCONF ..."
 $AUTOCONF
