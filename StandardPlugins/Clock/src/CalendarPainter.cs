@@ -118,7 +118,7 @@ namespace Clock
 				
 				Pango.Rectangle inkRect, logicalRect;
 				layout.GetPixelExtents (out inkRect, out logicalRect);
-				cr.MoveTo (offsetSize * i - inkRect.Width / 2, centerLine - logicalRect.Height);
+				cr.MoveTo (offsetSize * i + (offsetSize - inkRect.Width) / 2, centerLine - logicalRect.Height);
 				
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.Fill ();
@@ -149,7 +149,7 @@ namespace Clock
 					cr.Color = new Cairo.Color (1, 1, 1, lowlight);
 					layout.SetText (string.Format (BoldFormatString, lineStart.AddDays (6).ToString ("MMM").ToUpper ()));
 					layout.GetPixelExtents (out inkRect, out logicalRect);
-					cr.MoveTo (offsetSize * i - inkRect.Width, centerLine - logicalRect.Height);
+					cr.MoveTo (offsetSize * i, centerLine - logicalRect.Height);
 				} else if (i == 0) {
 					cr.Color = new Cairo.Color (1, 1, 1, lowlight);
 					int woy = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear (lineStart.AddDays (6), 
@@ -157,7 +157,7 @@ namespace Clock
 					                                                             DateTimeFormatInfo.CurrentInfo.FirstDayOfWeek);
 					layout.SetText (string.Format ("W{0:00}", woy));
 					layout.GetPixelExtents (out inkRect, out logicalRect);
-					cr.MoveTo (offsetSize * i, centerLine - logicalRect.Height);
+					cr.MoveTo (offsetSize - inkRect.Width, centerLine - logicalRect.Height);
 				} else {
 					DateTime day = lineStart.AddDays (dayOffset);
 					
@@ -181,7 +181,7 @@ namespace Clock
 					
 					layout.SetText (string.Format ("{0:00}", day.Day));
 					layout.GetPixelExtents (out inkRect, out logicalRect);
-					cr.MoveTo (offsetSize * i - inkRect.Width / 2, centerLine - logicalRect.Height);
+					cr.MoveTo (offsetSize * i + (offsetSize - inkRect.Width) / 2, centerLine - logicalRect.Height);
 				}
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.Fill ();
