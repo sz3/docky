@@ -40,3 +40,8 @@ REFERENCES =  \
 	$(MONO_CAIRO_LIBS) \
 	$(NOTIFY_SHARP_LIBS) \
 	$(LIBRSVG_SHARP_LIBS)
+	
+CLEANFILES += Docky.Services.dll.config
+EXTRA_DIST += Docky.Services.dll.config.in
+
+module_DATA += Docky.Services.dll.config

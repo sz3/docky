@@ -58,7 +58,7 @@ namespace Docky
 		}
 		
 		public static void Main (string[] args)
-		{			
+		{
 			//Init gtk and GLib related
 			Gdk.Threads.Init ();
 			NDesk.DBus.BusG.Init ();
