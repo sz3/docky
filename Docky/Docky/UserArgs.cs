@@ -16,10 +16,6 @@
 // 
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 
 using Docky.Services;
 
@@ -42,66 +38,19 @@ namespace Docky
 		[Option ("Enable debug level logging", 'd', "debug")]
 		public bool Debug;
 
-		public UserArgs ()
+		public UserArgs (string[] args)
 		{
-			base.
+			ProcessArgs (args);
 			ParsingMode = OptionsParsingMode.GNU_DoubleDash;
-			// defaults;
-			Logging = LogLevel.Warn;
-			MaxSize = int.MaxValue;
-		}
-		
-		/*
-		internal UserArgs (string[] args)
-		{
-			if (args.Contains ("--help")) {
-				Console.WriteLine ("Docky - The fastest dock in the west");
-				Console.WriteLine ("Usage");
-				Console.WriteLine ("  docky [OPTION...]");
-				Console.WriteLine ("");
-				Console.WriteLine ("Arguments:");
-				Console.WriteLine ("  --info                 Enable info level logging");
-				Console.WriteLine ("  --debug                Enable debug level logging");
-				Console.WriteLine ("  --disable-polling      Disable cursor polling (for testing)");
-				Console.WriteLine ("  --max-size=SIZE        Sets the maximum window dimension (min 500)");
-				Environment.Exit (0);
-			}
-			
 			// defaults
+			if (MaxSize == 0)
+				MaxSize = int.MaxValue;
+			MaxSize = Math.Max (MaxSize, 500);
 			Logging = LogLevel.Warn;
-			PoleCursor = true;
-			MaxSize = int.MaxValue;
-			
-			args = args.SelectMany (s => s.Split ('=')).ToArray ();
-			// parse the command line
-			for (int i = 0; i < args.Length; i++) {
-				switch (args[i]) {
-				case "--info":
-					Logging = LogLevel.Info;
-					break;
-				case "--debug":
-					Logging = LogLevel.Debug;
-					break;
-				case "--disable-polling":
-					PoleCursor = false;
-					break;
-				case "--max-size":
-					if (i == args.Length - 1)
-						break;
-					int size;
-					try {
-						size = Convert.ToInt32 (args[i + 1]);
-						i++;
-					} catch (FormatException e) {
-						break;
-					} catch (OverflowException e) {
-						break;
-					}
-					size = Math.Max (size, 500);
-					MaxSize = size;
-					break;
-				}
-			}
-		}*/
+			// if the debug option was passed, set it to debug
+			// otherwise leave it to the default, which is warn
+			if (Debug)
+				Log.DisplayLevel = LogLevel.Debug; 
+		}
 	}
 }
