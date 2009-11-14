@@ -105,11 +105,16 @@ namespace GMail
 			int size = Math.Min (surface.Width, surface.Height);
 			Context cr = surface.Context;
 			
-			string icon = "gmail-logo.png@";
+			string icon =  Gtk.IconTheme.Default.HasIcon ("Gmail") ? "Gmail" : "gmail-logo.png@";
 			if (Atom.State == GMailState.ManualReload || Atom.State == GMailState.Error)
 				icon = "gmail-logo-dark.png@";
 			
-			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (icon + GetType ().Assembly.FullName, size))
+			if (icon.Contains ('@'))
+				icon += GetType ().Assembly.FullName;
+			
+			Console.WriteLine (icon);
+			
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (icon, size))
 			{
 				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, 0, 0);
 				if (Atom.State == GMailState.ManualReload || !Atom.HasUnread)

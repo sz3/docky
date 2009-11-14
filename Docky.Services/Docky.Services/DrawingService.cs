@@ -194,7 +194,7 @@ namespace Docky.Services
 				} catch (Exception e) {
 					Log<DrawingService>.Warn ("Error loading generic icon: " + e.Message);
 					Log<DrawingService>.Debug (e.StackTrace);
-					pixbuf = null;					
+					pixbuf = null;
 				}
 			}
 			return pixbuf;
