@@ -43,8 +43,8 @@ namespace Docky
 
 		public UserArgs (string[] args)
 		{
-			ProcessArgs (args);
 			ParsingMode = OptionsParsingMode.GNU_DoubleDash;
+			ProcessArgs (args);
 			
 			// defaults
 			if (MaxSize == 0)

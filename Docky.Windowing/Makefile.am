@@ -30,7 +30,6 @@ REFERENCES =  \
 	$(WNCK_SHARP_10_LIBS) \
 	$(MONO_CAIRO_LIBS)
 
-CLEANFILES += Docky.Windowing.dll.config
-EXTRA_DIST += Docky.Windowing.dll.config.in
+EXTRA_DIST += Docky.Windowing.dll.config
 
 module_DATA += Docky.Windowing.dll.config
