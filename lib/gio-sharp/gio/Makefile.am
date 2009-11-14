@@ -59,3 +59,9 @@ assemblydir = $(pkglibdir)
 assembly_DATA =	\
 	gio-sharp.dll \
 	gio-sharp.dll.config
+
+clean-local:
+	rm -rf generated
+
+
+CLEANFILES = gio-sharp.dll gio-sharp.dll.mdb gtk-sharp.snk gio-api.xml
