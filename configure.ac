@@ -122,14 +122,14 @@ AC_SUBST([NOTIFY_SHARP_LIBS])
 AC_SUBST([WNCK_SHARP_10_LIBS])
 
 dnl Docky references
-DOCKY_CAIRO_LIBS="-r:$top_srcdir/build/Docky.CairoHelper.dll"
+DOCKY_CAIRO_LIBS="-r:$(pwd)/build/Docky.CairoHelper.dll"
 AC_SUBST([DOCKY_CAIRO_LIBS])
-DOCKY_ITEMS_LIBS="-r:$top_srcdir/build/Docky.Items.dll"
+DOCKY_ITEMS_LIBS="-r:$(pwd)/build/Docky.Items.dll"
 AC_SUBST([DOCKY_ITEMS_LIBS])
-DOCKY_SERVICES_LIBS="-r:$top_srcdir/build/Docky.Services.dll"
+DOCKY_SERVICES_LIBS="-r:$(pwd)/build/Docky.Services.dll"
 AC_SUBST([DOCKY_SERVICES_LIBS])
 
-GIO_SHARP_LIBS="-r:$top_srcdir/build/gio-sharp.dll"
+GIO_SHARP_LIBS="-r:$(pwd)/build/gio-sharp.dll"
 AC_SUBST([GIO_SHARP_LIBS])
 
 PKG_CHECK_MODULES([NUNIT], [nunit], have_nunit=yes, have_nunit=no)
