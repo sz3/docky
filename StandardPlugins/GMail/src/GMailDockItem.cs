@@ -46,6 +46,8 @@ namespace GMail
 		public GMailAtom Atom { get; protected set; }
 		
 		GMailItemProvider parent;
+		string gmailIcon;
+		string gmailDarkIcon;
 		
 		public GMailDockItem (string label, GMailItemProvider parent)
 		{
@@ -55,6 +57,14 @@ namespace GMail
 			Atom.GMailChecked += GMailCheckedHandler;
 			Atom.GMailChecking += GMailCheckingHandler;
 			Atom.GMailFailed += GMailFailedHandler;
+			Gtk.IconTheme.Default.Changed += delegate { SetIcons (); };
+			SetIcons ();
+		}
+		
+		private void SetIcons ()
+		{
+			gmailIcon = Gtk.IconTheme.Default.HasIcon ("gmail") ? "gmail" : "gmail-logo.png@";
+			gmailDarkIcon = "gmail-logo-dark.png@";
 		}
 		
 		static int old_count = 0;
@@ -105,15 +115,12 @@ namespace GMail
 			int size = Math.Min (surface.Width, surface.Height);
 			Context cr = surface.Context;
 			
-			string icon =  Gtk.IconTheme.Default.HasIcon ("Gmail") ? "Gmail" : "gmail-logo.png@";
+			string icon = gmailIcon;
 			if (Atom.State == GMailState.ManualReload || Atom.State == GMailState.Error)
-				icon = "gmail-logo-dark.png@";
+				icon = gmailDarkIcon;
 			
-			if (icon.Contains ('@'))
-				icon += GetType ().Assembly.FullName;
-			
-			Console.WriteLine (icon);
-			
+			icon = icon.Contains ('@') ? icon + GetType ().Assembly.FullName : icon;
+						
 			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (icon, size))
 			{
 				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, 0, 0);
@@ -229,7 +236,7 @@ namespace GMail
 			UpdateAttention (false);
 			
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("View ") + Atom.CurrentLabel,
-					"gmail-logo.png@" + GetType ().Assembly.FullName,
+					gmailIcon.Contains ('@') ? gmailIcon + GetType ().Assembly.FullName : gmailIcon,
 					delegate {
 						Clicked (1, Gdk.ModifierType.None, 0, 0);
 					}));
