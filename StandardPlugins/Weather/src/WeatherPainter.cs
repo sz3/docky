@@ -459,9 +459,10 @@ namespace WeatherDocklet
 			}
 		}
 		
-		public void Dispose ()
+		public override void Dispose ()
 		{
 			ResetBuffers ();
+			base.Dispose ();
 		}
 	}
 }

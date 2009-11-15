@@ -168,7 +168,7 @@ namespace Docky.Painters
 		}
 		
 		#region IDisposable implementation
-		public void Dispose ()
+		public virtual void Dispose ()
 		{
 			ResetBuffer ();
 		}
