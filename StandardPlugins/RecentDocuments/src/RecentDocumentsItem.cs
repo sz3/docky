@@ -43,20 +43,14 @@ namespace RecentDocuments
 		const int NumRecentDocs = 7;
 		List<FileDockItem> RecentDocs;
 		FileDockItem CurrentFile;
-		int CurrentIndex = 0;
 		
 		public RecentDocumentsItem ()
 		{
 			RecentDocs = new List<FileDockItem> ();
 			
-			Gtk.RecentManager.Default.Changed += (o, e) =>
-			{
-				RefreshRecentDocs ();
-				UpdateKeepCurrent ();
-			};
+			Gtk.RecentManager.Default.Changed += delegate { RefreshRecentDocs (); };
 			
 			RefreshRecentDocs ();
-			UpdateInfo ();
 		}
 		
 		void RefreshRecentDocs ()
@@ -71,45 +65,41 @@ namespace RecentDocuments
 				                     .Take (NumRecentDocs)
 				                     .Select (f => FileDockItem.NewFromUri (f.Uri)));
 			}
+			
+			UpdateInfo ();
 		}
 		
 		void UpdateInfo ()
 		{
-			if (RecentDocs.Count () == 0) {
-				CurrentFile = FileDockItem.NewFromUri ("");
-				Icon = "";
-				HoverText = "The recent documents list is empty!";
-			} else {
-				CurrentFile = RecentDocs.ElementAt (CurrentIndex);
-				Icon = CurrentFile.Icon;
-				HoverText = CurrentFile.HoverText;
-			}
-			OnPaintNeeded ();
-		}
-		
-		void UpdateKeepCurrent ()
-		{
-			if (RecentDocs.Any (f => f.OwnedFile.Path == CurrentFile.OwnedFile.Path))
-				CurrentIndex = RecentDocs.IndexOf (RecentDocs.First (f => f.OwnedFile.Path == CurrentFile.OwnedFile.Path));
-			UpdateInfo ();
+			if (RecentDocs.Count() == 0)
+				return;
+			
+			if (CurrentFile == null)
+				CurrentFile = RecentDocs.FirstOrDefault ();
+			
+			Icon = CurrentFile.Icon;
+			HoverText = CurrentFile.HoverText;
+			QueueRedraw ();
 		}
 		
 		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
 		{
 			int offset = Math.Min (NumRecentDocs, RecentDocs.Count ());
+			int currentIndex = RecentDocs.IndexOf (CurrentFile);
 			
-			CurrentIndex += offset;
+			currentIndex += offset;
 			
 			if (direction == Gdk.ScrollDirection.Up)
-				CurrentIndex -= 1;
+				currentIndex -= 1;
 			else if (direction == Gdk.ScrollDirection.Down)
-				CurrentIndex += 1;
+				currentIndex += 1;
 			
 			if (offset == 0)
-				CurrentIndex = 0;
+				currentIndex = 0;
 			else
-				CurrentIndex %= offset;
+				currentIndex %= offset;
 			
+			CurrentFile = RecentDocs.ElementAt (currentIndex);
 			UpdateInfo ();
 		}
 		
@@ -138,10 +128,8 @@ namespace RecentDocuments
 			
 			// check to make sure our right click menu has the same number of items as RecentDocs
 			// if it doesn't, one of the recent docs might have been deleted, so update the list.
-			if (list[MenuListContainer.RelatedItems].Count () != RecentDocs.Count ()) {
+			if (list[MenuListContainer.RelatedItems].Count () != RecentDocs.Count ())
 				RefreshRecentDocs ();
-				UpdateKeepCurrent ();
-			}
 			
 			return list;
 		}
