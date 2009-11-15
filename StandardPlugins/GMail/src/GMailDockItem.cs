@@ -63,8 +63,13 @@ namespace GMail
 		
 		private void SetIcons ()
 		{
-			gmailIcon = Gtk.IconTheme.Default.HasIcon ("gmail") ? "gmail" : "gmail-logo.png@";
-			gmailDarkIcon = "gmail-logo-dark.png@";
+			if (Gtk.IconTheme.Default.HasIcon ("gmail")) {
+				gmailIcon = "gmail";
+				gmailDarkIcon = "gmail";
+			} else {
+				gmailIcon = "gmail-logo.png@" + GetType ().Assembly.FullName;
+				gmailDarkIcon = "gmail-logo-dark.png@" + GetType ().Assembly.FullName;
+			}
 		}
 		
 		static int old_count = 0;
@@ -118,8 +123,6 @@ namespace GMail
 			string icon = gmailIcon;
 			if (Atom.State == GMailState.ManualReload || Atom.State == GMailState.Error)
 				icon = gmailDarkIcon;
-			
-			icon = icon.Contains ('@') ? icon + GetType ().Assembly.FullName : icon;
 						
 			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (icon, size))
 			{
@@ -236,7 +239,7 @@ namespace GMail
 			UpdateAttention (false);
 			
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("View ") + Atom.CurrentLabel,
-					gmailIcon.Contains ('@') ? gmailIcon + GetType ().Assembly.FullName : gmailIcon,
+					gmailIcon,
 					delegate {
 						Clicked (1, Gdk.ModifierType.None, 0, 0);
 					}));
