@@ -41,13 +41,13 @@ namespace RecentDocuments
 		#endregion
 		
 		const int NumRecentDocs = 7;
-		List<File> RecentDocs;
-		File CurrentFile;
+		List<FileDockItem> RecentDocs;
+		FileDockItem CurrentFile;
 		int CurrentIndex = 0;
 		
 		public RecentDocumentsItem ()
 		{
-			RecentDocs = new List<File> ();
+			RecentDocs = new List<FileDockItem> ();
 			
 			Gtk.RecentManager.Default.Changed += (o, e) => RefreshRecentDocs ();
 			
@@ -65,17 +65,17 @@ namespace RecentDocuments
 				RecentDocs.AddRange (recent_items.Cast<Gtk.RecentInfo> ()
 				                     .Where (it => it.Exists ())
 				                     .Take (NumRecentDocs)
-				                     .Select (f => FileFactory.NewForUri (f.Uri)));
+				                     .Select (f => FileDockItem.NewFromUri (f.Uri)));
 			}
 		}
 		
 		void UpdateInfo ()
-		{			
+		{
 			CurrentFile = RecentDocs.ElementAt (CurrentIndex);
-
-			SetIconFromGIcon (CurrentFile.Icon ());
+			
+			Icon = CurrentFile.Icon;
 	
-			HoverText = CurrentFile.Basename;
+			HoverText = CurrentFile.HoverText;
 			
 			OnPaintNeeded ();
 		}
@@ -97,7 +97,7 @@ namespace RecentDocuments
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
 			if (button == 1) {
-				DockServices.System.Open (CurrentFile);
+				DockServices.System.Open (CurrentFile.OwnedFile);
 				return ClickAnimation.Bounce;
 			}
 			
@@ -108,12 +108,12 @@ namespace RecentDocuments
 		{
 			MenuList list = base.GetMenuItems ();
 			
-			foreach (File _f in RecentDocs) {
-				GLib.File f = _f;
-				if (!f.Exists)
+			foreach (FileDockItem _f in RecentDocs) {
+				FileDockItem f = _f;
+				if (!f.OwnedFile.Exists)
 					continue;
-				string icon = DockServices.Drawing.IconFromGIcon (f.Icon ());
-				MenuItem item = new MenuItem (f.Basename, icon, (o, a) => DockServices.System.Open (f));
+
+				MenuItem item = new MenuItem (f.OwnedFile.Basename, f.Icon, (o, a) => DockServices.System.Open (f.OwnedFile));
 				list[MenuListContainer.RelatedItems].Add (item);
 			}
 			
@@ -121,8 +121,8 @@ namespace RecentDocuments
 			// if it doesn't, one of the recent docs might have been deleted, so update the list.
 			if (list[MenuListContainer.RelatedItems].Count () != RecentDocs.Count ()) {
 				RefreshRecentDocs ();
-				if (RecentDocs.Any (f => f.Path == CurrentFile.Path))
-					CurrentIndex = RecentDocs.IndexOf (RecentDocs.First (f => f.Path == CurrentFile.Path));
+				if (RecentDocs.Any (f => f.OwnedFile.Path == CurrentFile.OwnedFile.Path))
+					CurrentIndex = RecentDocs.IndexOf (RecentDocs.First (f => f.OwnedFile.Path == CurrentFile.OwnedFile.Path));
 				UpdateInfo ();
 			}
 			

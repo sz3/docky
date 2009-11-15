@@ -47,6 +47,8 @@ namespace Docky.Items
 			return new FileDockItem (uri);
 		}
 		
+		const string ThumbnailPathKey = "thumbnail::path";
+		const string FilesystemIDKey = "id::filesystem";
 		string uri;
 		bool is_folder;
 		
@@ -73,8 +75,14 @@ namespace Docky.Items
 				is_folder = false;
 			
 			// only check the icon if it's mounted (ie: .Path != null)
-			if (!string.IsNullOrEmpty (OwnedFile.Path))
-				SetIconFromGIcon (OwnedFile.Icon ());
+			if (!string.IsNullOrEmpty (OwnedFile.Path)) {
+				string thumbnailPath = OwnedFile.QueryInfo (ThumbnailPathKey, FileQueryInfoFlags.NofollowSymlinks, 
+					null).GetAttributeAsString (ThumbnailPathKey);
+				if (string.IsNullOrEmpty (thumbnailPath))
+					SetIconFromGIcon (OwnedFile.Icon ());
+				else
+					Icon = thumbnailPath;
+			}
 			else
 				Icon = "";
 			
@@ -98,16 +106,16 @@ namespace Docky.Items
 
 		protected override bool OnAcceptDrop (IEnumerable<string> uris)
 		{
-			string FSID_att_str = "id::filesystem";
-			
 			foreach (string uri in uris) {
 				try {
 					File file = FileFactory.NewForUri (uri);
 					if (!file.Exists)
 						continue;
 					
-					string ownedFSID = OwnedFile.QueryInfo (FSID_att_str, FileQueryInfoFlags.NofollowSymlinks, null).GetAttributeAsString (FSID_att_str);
-					string destFSID = file.QueryInfo (FSID_att_str, FileQueryInfoFlags.NofollowSymlinks, null).GetAttributeAsString (FSID_att_str);
+					string ownedFSID = OwnedFile.QueryInfo (FilesystemIDKey, FileQueryInfoFlags.NofollowSymlinks, null)
+						.GetAttributeAsString (FilesystemIDKey);
+					string destFSID = file.QueryInfo (FilesystemIDKey, FileQueryInfoFlags.NofollowSymlinks, null)
+						.GetAttributeAsString (FilesystemIDKey);
 					
 					string nameAfterMove = NewFileName (OwnedFile, file);
 					DockServices.System.RunOnThread (()=> {
