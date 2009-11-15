@@ -123,8 +123,7 @@ namespace Bookmarks
 						    bookmark.StringUri ());
 						continue;
 					} else {
-						BookmarkDockItem item = BookmarkDockItem.NewFromUri (bookmark.StringUri (), name);
-						items.Add (item);
+						items.Add (new BookmarkDockItem (bookmark.StringUri (), name));
 					}
 				}
 			}
@@ -154,7 +153,7 @@ namespace Bookmarks
 		protected override AbstractDockItem OnAcceptDrop (string uri)
 		{
 			File tempFile = FileFactory.NewForPath (System.IO.Path.GetTempFileName ());
-			BookmarkDockItem bookmark = BookmarkDockItem.NewFromUri (uri, null);
+			BookmarkDockItem bookmark = new BookmarkDockItem (uri, null);
 			
 			// make sure the bookmarked location actually exists
 			if (!bookmark.OwnedFile.Exists)

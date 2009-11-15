@@ -28,12 +28,7 @@ namespace Bookmarks
 {
 	public class BookmarkDockItem : FileDockItem
 	{
-		public static new BookmarkDockItem NewFromUri (string uri, string name)
-		{	
-			return new BookmarkDockItem (uri, name);
-		}
-		
-		BookmarkDockItem (string uri, string name) : base(uri)
+		public BookmarkDockItem (string uri, string name) : base(uri)
 		{
 			// incase the icon is null, give it a generic folder icon
 			// this can happen with a bookmark that's not mounted,
