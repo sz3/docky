@@ -49,7 +49,11 @@ namespace RecentDocuments
 		{
 			RecentDocs = new List<FileDockItem> ();
 			
-			Gtk.RecentManager.Default.Changed += (o, e) => RefreshRecentDocs ();
+			Gtk.RecentManager.Default.Changed += (o, e) =>
+			{
+				RefreshRecentDocs ();
+				UpdateKeepCurrent ();
+			};
 			
 			RefreshRecentDocs ();
 			UpdateInfo ();
@@ -71,25 +75,40 @@ namespace RecentDocuments
 		
 		void UpdateInfo ()
 		{
-			CurrentFile = RecentDocs.ElementAt (CurrentIndex);
-			
-			Icon = CurrentFile.Icon;
-	
-			HoverText = CurrentFile.HoverText;
-			
+			if (RecentDocs.Count () == 0) {
+				CurrentFile = FileDockItem.NewFromUri ("");
+				Icon = "";
+				HoverText = "The recent documents list is empty!";
+			} else {
+				CurrentFile = RecentDocs.ElementAt (CurrentIndex);
+				Icon = CurrentFile.Icon;
+				HoverText = CurrentFile.HoverText;
+			}
 			OnPaintNeeded ();
+		}
+		
+		void UpdateKeepCurrent ()
+		{
+			if (RecentDocs.Any (f => f.OwnedFile.Path == CurrentFile.OwnedFile.Path))
+				CurrentIndex = RecentDocs.IndexOf (RecentDocs.First (f => f.OwnedFile.Path == CurrentFile.OwnedFile.Path));
+			UpdateInfo ();
 		}
 		
 		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
 		{
-			CurrentIndex += NumRecentDocs;
+			int offset = Math.Min (NumRecentDocs, RecentDocs.Count ());
+			
+			CurrentIndex += offset;
 			
 			if (direction == Gdk.ScrollDirection.Up)
 				CurrentIndex -= 1;
 			else if (direction == Gdk.ScrollDirection.Down)
 				CurrentIndex += 1;
 			
-			CurrentIndex %= NumRecentDocs;
+			if (offset == 0)
+				CurrentIndex = 0;
+			else
+				CurrentIndex %= offset;
 			
 			UpdateInfo ();
 		}
@@ -121,9 +140,7 @@ namespace RecentDocuments
 			// if it doesn't, one of the recent docs might have been deleted, so update the list.
 			if (list[MenuListContainer.RelatedItems].Count () != RecentDocs.Count ()) {
 				RefreshRecentDocs ();
-				if (RecentDocs.Any (f => f.OwnedFile.Path == CurrentFile.OwnedFile.Path))
-					CurrentIndex = RecentDocs.IndexOf (RecentDocs.First (f => f.OwnedFile.Path == CurrentFile.OwnedFile.Path));
-				UpdateInfo ();
+				UpdateKeepCurrent ();
 			}
 			
 			return list;
