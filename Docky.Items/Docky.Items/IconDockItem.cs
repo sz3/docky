@@ -45,6 +45,17 @@ namespace Docky.Items
 			}
 		}
 		
+		double shift;
+		protected double HueShift {
+			get { return shift; }
+			set {
+				if (shift == value)
+					return;
+				shift = value;
+				QueueRedraw ();
+			}
+		}
+		
 		protected void SetIconFromGIcon (GLib.Icon gIcon)
 		{
 			Icon = DockServices.Drawing.IconFromGIcon (gIcon);
@@ -71,6 +82,32 @@ namespace Docky.Items
 				                                InterpType.Hyper);
 				
 				temp.Dispose ();
+			}
+			
+			if (shift != 0) {
+				unsafe {
+					double a, r, g, b;
+					byte* pixels = (byte*) pbuf.Pixels;
+					for (int i = 0; i < pbuf.Height * pbuf.Width; i++) {
+						r = (double) pixels[0];
+						g = (double) pixels[1];
+						b = (double) pixels[2];
+						a = (double) pixels[3];
+						
+						Cairo.Color color = new Cairo.Color (r / byte.MaxValue, 
+							g / byte.MaxValue, 
+							b / byte.MaxValue,
+							a / byte.MaxValue);
+						color = color.AddHue (shift);
+						
+						pixels[0] = (byte) (color.R * byte.MaxValue);
+						pixels[1] = (byte) (color.G * byte.MaxValue);
+						pixels[2] = (byte) (color.B * byte.MaxValue);
+						pixels[3] = (byte) (color.A * byte.MaxValue);
+						
+						pixels += 4;
+					}
+				}
 			}
 			
 			Gdk.CairoHelper.SetSourcePixbuf (surface.Context, 

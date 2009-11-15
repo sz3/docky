@@ -70,7 +70,7 @@ namespace Docky.Items
 			if (OwnedFile.QueryFileType (0, null) == FileType.Directory)
 				is_folder = true;
 			else
-				is_folder = false;		
+				is_folder = false;
 			
 			// only check the icon if it's mounted (ie: .Path != null)
 			if (!string.IsNullOrEmpty (OwnedFile.Path))
@@ -79,6 +79,9 @@ namespace Docky.Items
 				Icon = "";
 			
 			HoverText = OwnedFile.Basename;
+			
+			if (Icon == "inode-directory")
+				HueShift = new Uri (uri).AbsolutePath.GetHashCode () % 160;
 			
 			OnPaintNeeded ();
 		}

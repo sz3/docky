@@ -30,11 +30,22 @@ namespace Cairo
 		
 		public static Cairo.Color SetHue (this Color self, double hue)
 		{
-			if (hue < 0 || hue > 360) throw new ArgumentOutOfRangeException ("Hue", "Hue must be between 0 and 360");
+			if (hue < 0 || hue > 360)
+				throw new ArgumentOutOfRangeException ("Hue", "Hue must be between 0 and 360");
 			
 			double h, s, v, r, g, b;
 			RGBToHSV (self.R, self.G, self.B, out h, out s, out v);
 			h = hue;
+			HSVToRGB (h, s, v, out r, out g, out b);
+			
+			return new Cairo.Color (r, g, b, self.A);
+		}
+		
+		public static Cairo.Color AddHue (this Color self, double val)
+		{
+			double h, s, v, r, g, b;
+			RGBToHSV (self.R, self.G, self.B, out h, out s, out v);
+			h = (((h + val) % 360) + 360) % 360;
 			HSVToRGB (h, s, v, out r, out g, out b);
 			
 			return new Cairo.Color (r, g, b, self.A);
