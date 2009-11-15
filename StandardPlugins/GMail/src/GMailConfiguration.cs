@@ -75,14 +75,16 @@ namespace GMail
 		
 		protected virtual void OnAddClicked (object sender, System.EventArgs e)
 		{
-			if (label.Text.Trim ().Length == 0)
-				return;
-			if (FindLabelIndex (label.Text) != -1)
+			// GMail's atom feed doesnt like the '/' character
+			// and needs it as '-'
+			string newLabel = label.Text.Replace ("/", "-").Trim ();
+			
+			if (newLabel.Length == 0 || FindLabelIndex (newLabel) != -1)
 				return;
 			
 			string[] labels = new string [GMailPreferences.Labels.Length + 1];
 			Array.Copy (GMailPreferences.Labels, 0, labels, 0, GMailPreferences.Labels.Length);
-			labels [GMailPreferences.Labels.Length] = label.Text.Trim ();
+			labels [GMailPreferences.Labels.Length] = newLabel;
 			
 			GMailPreferences.Labels = labels;
 			UpdateLabels ();
