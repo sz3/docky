@@ -221,7 +221,9 @@ namespace Docky.Windowing
 		
 		IEnumerable<string> FindDesktopFileForWindowOrDefault (Wnck.Window window)
 		{
+			
 			int pid = window.Pid;
+			Console.WriteLine ("Processing window {0} \\ {1}", window.Name, window.WindowType);
 			if (pid <= 1) {
 				if (window.ClassGroup != null && !string.IsNullOrEmpty (window.ClassGroup.ResClass)) {
 					yield return window.ClassGroup.ResClass;
@@ -282,22 +284,25 @@ namespace Docky.Windowing
 			}
 			
 			if (command_line.Count () != 0) {
-				string cmd = command_line[0];
-				foreach (string s in SuffixStrings) {
-					if (!cmd.EndsWith (s))
-						continue;
-					if (exec_to_desktop_files.ContainsKey (cmd.Remove (cmd.LastIndexOf (s), s.Length))) {
-						cmd = cmd.Remove (cmd.LastIndexOf (s), s.Length);
-						break;
-					}
-				}
-				if (exec_to_desktop_files.ContainsKey (cmd)) {
-					foreach (string s in exec_to_desktop_files[cmd]) {
-						if (string.IsNullOrEmpty (s))
+				foreach (string cmd in command_line) {
+					/*
+					foreach (string s in SuffixStrings) {
+						if (!cmd.EndsWith (s))
 							continue;
-						Console.WriteLine ("Exec to desktop: {0} = {1}", cmd, s);
-						yield return s;
-						matched = true;
+						if (exec_to_desktop_files.ContainsKey (cmd.Remove (cmd.LastIndexOf (s), s.Length))) {
+							cmd = cmd.Remove (cmd.LastIndexOf (s), s.Length);
+							break;
+						}
+					}
+					*/					
+					if (exec_to_desktop_files.ContainsKey (cmd)) {
+						foreach (string s in exec_to_desktop_files[cmd]) {
+							if (string.IsNullOrEmpty (s))
+								continue;
+							Console.WriteLine ("Exec to desktop: {0} = {1}", cmd, s);
+							yield return s;
+							matched = true;
+						}
 					}
 				}
 			}
