@@ -58,11 +58,10 @@ namespace RecentDocuments
 		
 		void UpdateItems ()
 		{
-			if (Gtk.RecentManager.Default.Size == 0) {
+			if (Gtk.RecentManager.Default.Size == 0 && Items.Count () == 1)
 				Items = Enumerable.Empty<AbstractDockItem> ();
-			} else {
+			if (Gtk.RecentManager.Default.Size > 0 && Items.Count () == 0)
 				Items = docs.AsSingle<AbstractDockItem> ();
-			}
 		}
 	}
 }

@@ -74,8 +74,8 @@ namespace RecentDocuments
 			if (RecentDocs.Count() == 0)
 				return;
 			
-			if (CurrentFile == null)
-				CurrentFile = RecentDocs.FirstOrDefault ();
+			if (CurrentFile == null || RecentDocs.IndexOf (CurrentFile) == -1)
+				CurrentFile = RecentDocs.First ();
 			
 			Icon = CurrentFile.Icon;
 			HoverText = CurrentFile.HoverText;
