@@ -233,8 +233,20 @@ namespace Docky.Windowing
 			}
 			
 			bool matched = false;
+	
+			List<string> command_line = new List<string> ();
 			
-			string[] command_line = CommandLineForPid (pid);
+			// get ppid and parents
+			IEnumerable<int> pids = PIDAndParents (pid);
+			foreach (int p in pids)
+				command_line.AddRange (CommandLineForPid (p));
+			//save it to a list
+			
+			Console.WriteLine ("starting with pid: {0}", pid);
+			foreach (string cmd in command_line)
+				Console.WriteLine ("Possible cmdline: {0}", cmd);
+			
+			//string[] command_line = CommandLineForPid (pid);
 			
 			// if we have a classname that matches a desktopid we have a winner
 			if (window.ClassGroup != null) {
@@ -269,7 +281,7 @@ namespace Docky.Windowing
 				}
 			}
 			
-			if (command_line != null) {
+			if (command_line.Count () != 0) {
 				string cmd = command_line[0];
 				foreach (string s in SuffixStrings) {
 					if (!cmd.EndsWith (s))
@@ -283,6 +295,7 @@ namespace Docky.Windowing
 					foreach (string s in exec_to_desktop_files[cmd]) {
 						if (string.IsNullOrEmpty (s))
 							continue;
+						Console.WriteLine ("Exec to desktop: {0} = {1}", cmd, s);
 						yield return s;
 						matched = true;
 					}
@@ -293,10 +306,47 @@ namespace Docky.Windowing
 				yield return window.Pid.ToString ();
 		}
 		
+		IEnumerable<int> PIDAndParents (int pid)
+		{
+			string cmdline;
+
+			do {
+				yield return pid;
+				
+				try {
+					string procPath = new [] { "/proc", pid.ToString (), "stat" }.Aggregate (Path.Combine);
+					using (StreamReader reader = new StreamReader (procPath)) {
+						cmdline = reader.ReadLine ();
+						reader.Close ();
+					}
+				} catch { 
+					yield break; 
+				}
+				
+				if (cmdline == null) {
+					yield break;
+				}
+				
+				cmdline = cmdline.ToLower ();
+				
+				string [] result = cmdline.Split (Convert.ToChar (0x0));
+				
+				result = result[0].Split (' ');
+
+				if (result.Count () < 4) {
+					Console.WriteLine ("Breaking...");
+					yield break;
+				}
+				
+				// the ppid is index number 3
+				pid = int.Parse (result[3]);
+			} while (pid != 1);
+		}
+		
 		string [] CommandLineForPid (int pid)
 		{
 			string cmdline;
-			
+
 			try {
 				string procPath = new [] { "/proc", pid.ToString (), "cmdline" }.Aggregate (Path.Combine);
 				using (StreamReader reader = new StreamReader (procPath)) {
