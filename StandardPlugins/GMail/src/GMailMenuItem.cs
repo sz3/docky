@@ -28,7 +28,7 @@ namespace GMail
 	{
 		UnreadMessage message;
 		
-		public GMailMenuItem (UnreadMessage message) : base (message.Topic + " - " + Catalog.GetString ("From: ") + message.FromName, "gmail-logo.png@" + message.GetType ().Assembly.FullName)
+		public GMailMenuItem (UnreadMessage message, string icon) : base (message.Topic + " - " + Catalog.GetString ("From: ") + message.FromName, icon)
 		{
 			this.message = message;
 			Clicked += delegate {

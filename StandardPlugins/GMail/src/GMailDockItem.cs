@@ -46,8 +46,6 @@ namespace GMail
 		public GMailAtom Atom { get; protected set; }
 		
 		GMailItemProvider parent;
-		string gmailIcon;
-		string gmailDarkIcon;
 		
 		public GMailDockItem (string label, GMailItemProvider parent)
 		{
@@ -57,20 +55,8 @@ namespace GMail
 			Atom.GMailChecked += GMailCheckedHandler;
 			Atom.GMailChecking += GMailCheckingHandler;
 			Atom.GMailFailed += GMailFailedHandler;
-			Gtk.IconTheme.Default.Changed += delegate { SetIcons (); };
-			SetIcons ();
 		}
 		
-		private void SetIcons ()
-		{
-			if (Gtk.IconTheme.Default.HasIcon ("gmail")) {
-				gmailIcon = "gmail";
-				gmailDarkIcon = "gmail";
-			} else {
-				gmailIcon = "gmail-logo.png@" + GetType ().Assembly.FullName;
-				gmailDarkIcon = "gmail-logo-dark.png@" + GetType ().Assembly.FullName;
-			}
-		}
 		
 		static int old_count = 0;
 		public void GMailCheckedHandler (object obj, EventArgs e)
@@ -120,9 +106,9 @@ namespace GMail
 			int size = Math.Min (surface.Width, surface.Height);
 			Context cr = surface.Context;
 			
-			string icon = gmailIcon;
+			string icon = Atom.Icon;
 			if (Atom.State == GMailState.ManualReload || Atom.State == GMailState.Error)
-				icon = gmailDarkIcon;
+				icon = Atom.DisabledIcon;
 						
 			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (icon, size))
 			{
@@ -239,7 +225,7 @@ namespace GMail
 			UpdateAttention (false);
 			
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("View ") + Atom.CurrentLabel,
-					gmailIcon,
+					Atom.Icon,
 					delegate {
 						Clicked (1, Gdk.ModifierType.None, 0, 0);
 					}));
@@ -253,7 +239,7 @@ namespace GMail
 			
 			if (Atom.HasUnread) {
 				foreach (UnreadMessage message in Atom.Messages.Take (10))
-					list[MenuListContainer.Actions].Add (new GMailMenuItem (message));
+					list[MenuListContainer.Actions].Add (new GMailMenuItem (message, Atom.Icon));
 				
 				list[MenuListContainer.Actions].Add (new SeparatorMenuItem ());
 			}
