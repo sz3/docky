@@ -223,7 +223,7 @@ namespace Docky.Windowing
 		{
 			
 			int pid = window.Pid;
-			Console.WriteLine ("Processing window {0} \\ {1}", window.Name, window.WindowType);
+			Console.WriteLine ("Processing window {0} \\ {1}", window.Name, pid);
 			if (pid <= 1) {
 				if (window.ClassGroup != null && !string.IsNullOrEmpty (window.ClassGroup.ResClass)) {
 					yield return window.ClassGroup.ResClass;
