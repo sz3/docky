@@ -45,6 +45,7 @@ namespace Docky.Menus
 		static int Padding = ShadowSize + 4;
 		static int TotalHeight = SvgHeight + 2 * ShadowSize;
 		static int TotalWidth = SvgWidth + 2 * ShadowSize;
+		static int MinSize = SliceSize * 2 + TailWidth;
 		
 		enum Slice {
 			Top,
@@ -305,10 +306,19 @@ namespace Docky.Menus
 			ResetBackgroundBuffer ();
 			Reposition ();
 			base.OnSizeAllocated (allocation);
+			
+			if (Orientation == DockPosition.Bottom || Orientation == DockPosition.Top) {
+				if (allocation.Width < MinSize)
+					WidthRequest = MinSize;
+			} else {
+				if (allocation.Height < MinSize)
+					HeightRequest = MinSize;
+			}
 		}
 		
 		protected override void OnShown ()
 		{
+			SetSizeRequest (-1, -1);
 			Visible = true;
 			show_time = DateTime.UtcNow;
 			Reposition ();
@@ -354,82 +364,118 @@ namespace Docky.Menus
 		
 		void DrawBackground (DockySurface surface)
 		{
+			// This method is just annoying enough to turn into a loop that its hardly worth it
+			
 			DockySurface[] slices = GetSlices (surface);
+			int middle = surface.Width / 2;
 			
-			int middleWidth = surface.Width - 2 * SliceSize;
-			int middleHeight = surface.Height - 2 * SliceSize - TailSize;
-			int tailSliceSize = TailSize + SliceSize;
-			int tailSideSize = (middleWidth - TailWidth) / 2;
+			// left to right
+			int left = 0;
+			int right = surface.Width;
+			int leftMiddle = left + SliceSize;
+			int rightMiddle = right - SliceSize;
+			int leftTailMiddle = middle - (TailWidth / 2);
+			int rightTailMiddle = middle + (TailWidth / 2);
 			
+			// top to bottom
+			int top = 0;
+			int bottom = surface.Height;
+			int topMiddle = top + SliceSize;
+			int bottomMiddle = bottom - (SliceSize + TailSize);
+			
+			int yTop = top;
+			int yBottom = topMiddle - top;
+			int xLeft = left;
+			int xRight = leftMiddle;
 			DrawSlice (surface, slices[(int) Slice.TopLeft], new Gdk.Rectangle (
-					0, 
-					0, 
-					SliceSize, 
-					SliceSize));
+					xLeft, 
+					yTop, 
+					xRight - xLeft, 
+					yBottom - yTop));
 			
+			xLeft = leftMiddle;
+			xRight = rightMiddle;
 			DrawSlice (surface, slices[(int) Slice.Top], new Gdk.Rectangle (
-					SliceSize, 
-					0, 
-					middleWidth, 
-					SliceSize));
+					xLeft, 
+					yTop, 
+					xRight - xLeft, 
+					yBottom - yTop));
 			
+			xLeft = rightMiddle;
+			xRight = right;
 			DrawSlice (surface, slices[(int) Slice.TopRight], new Gdk.Rectangle (
-					surface.Width - SliceSize, 
-					0, 
-					SliceSize, 
-					SliceSize));
+					xLeft, 
+					yTop, 
+					xRight - xLeft, 
+					yBottom - yTop));
 			
+			xLeft = left;
+			xRight = leftMiddle;
+			yTop = topMiddle;
+			yBottom = bottomMiddle;
 			DrawSlice (surface, slices[(int) Slice.Left], new Gdk.Rectangle (
-					0, 
-					SliceSize, 
-					SliceSize, 
-					middleHeight));
+					xLeft, 
+					yTop, 
+					xRight - xLeft, 
+					yBottom - yTop));
 			
+			xLeft = leftMiddle;
+			xRight = rightMiddle;
 			DrawSlice (surface, slices[(int) Slice.Center], new Gdk.Rectangle (
-					SliceSize, 
-					SliceSize, 
-					middleWidth, 
-					middleHeight));
+					xLeft, 
+					yTop, 
+					xRight - xLeft, 
+					yBottom - yTop));
 			
+			xLeft = rightMiddle;
+			xRight = right;
 			DrawSlice (surface, slices[(int) Slice.Right], new Gdk.Rectangle (
-					surface.Width - SliceSize, 
-					SliceSize, 
-					SliceSize, 
-					middleHeight));
+					xLeft, 
+					yTop, 
+					xRight - xLeft, 
+					yBottom - yTop));
 			
+			xLeft = left;
+			xRight = leftMiddle;
+			yTop = bottomMiddle;
+			yBottom = bottom;
 			DrawSlice (surface, slices[(int) Slice.BottomLeft], new Gdk.Rectangle (
-					0, 
-					surface.Height - tailSliceSize, 
-					SliceSize, 
-					tailSliceSize));
+					xLeft, 
+					yTop, 
+					xRight - xLeft, 
+					yBottom - yTop));
 			
-			if (tailSideSize > 0) {
-				DrawSlice (surface, slices[(int) Slice.TailLeft], new Gdk.Rectangle (
-						SliceSize, 
-						surface.Height - tailSliceSize, 
-						tailSideSize, 
-						tailSliceSize));
-			}
+			xLeft = leftMiddle;
+			xRight = leftTailMiddle;
+			DrawSlice (surface, slices[(int) Slice.TailLeft], new Gdk.Rectangle (
+					xLeft, 
+					yTop, 
+					xRight - xLeft, 
+					yBottom - yTop));
 			
+			xLeft = leftTailMiddle;
+			xRight = rightTailMiddle;
 			DrawSlice (surface, slices[(int) Slice.Tail], new Gdk.Rectangle (
-					SliceSize + tailSideSize,
-					surface.Height - tailSliceSize,
-					TailWidth,
-					tailSliceSize));
-				
-			if (tailSideSize > 0) {
-				DrawSlice (surface, slices[(int) Slice.TailRight], new Gdk.Rectangle (
-						SliceSize + middleWidth - tailSideSize,
-						surface.Height - tailSliceSize,
-						tailSideSize,
-						tailSliceSize));
-			}
+					xLeft, 
+					yTop, 
+					xRight - xLeft, 
+					yBottom - yTop));
 			
+			xLeft = rightTailMiddle;
+			xRight = rightMiddle;
+			DrawSlice (surface, slices[(int) Slice.TailRight], new Gdk.Rectangle (
+					xLeft, 
+					yTop, 
+					xRight - xLeft, 
+					yBottom - yTop));
+			
+			xLeft = rightMiddle;
+			xRight = right;
 			DrawSlice (surface, slices[(int) Slice.BottomRight], new Gdk.Rectangle (
-					SliceSize + middleWidth,
-					surface.Height - tailSliceSize,
-					SliceSize,
-					tailSliceSize));
+					xLeft, 
+					yTop, 
+					xRight - xLeft, 
+					yBottom - yTop));
 		}
 		
 		void DrawSlice (DockySurface target, DockySurface slice, Gdk.Rectangle area)
