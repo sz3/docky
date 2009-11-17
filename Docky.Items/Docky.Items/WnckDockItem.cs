@@ -135,7 +135,7 @@ namespace Docky.Items
 		{
 			ItemState state = 0;
 			
-			if (Wnck.Screen.Default.ActiveWindow != null && ManagedWindows.Any (w => w.Pid == Wnck.Screen.Default.ActiveWindow.Pid)) {
+			if (Windows.Any (w => w == Wnck.Screen.Default.ActiveWindow)) {
 				state |= ItemState.Active;
 			}
 			if (ManagedWindows.Any (w => w.NeedsAttention ())) {
@@ -212,7 +212,7 @@ namespace Docky.Items
 			if (windows.Any (w => w.IsMinimized && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace))) {
 				WindowControl.RestoreWindows (windows);
 			} else if (windows.Any (w => w.IsActive && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace)) ||
-						windows.Any (w => w.Pid == Wnck.Screen.Default.ActiveWindow.Pid)) {
+						Windows.Any (w => w == Wnck.Screen.Default.ActiveWindow)) {
 				WindowControl.MinimizeWindows (windows);
 			} else {
 				WindowControl.FocusWindows (windows);
