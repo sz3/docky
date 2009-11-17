@@ -35,14 +35,14 @@ namespace Docky.Menus
 {
 	public class DockMenu : Gtk.Window
 	{
-		const int Padding    = 10;
 		const int TailSize   = 20;
 		const int TailWidth  = 30;
-		const int SliceSize  = 18;
 		const int SvgWidth   = 100;
 		const int SvgHeight  = 120;
-		const int ShadowSize = 7;
+		const int ShadowSize = 12;
 		
+		static int SliceSize = ShadowSize + 12;
+		static int Padding = ShadowSize + 4;
 		static int TotalHeight = SvgHeight + 2 * ShadowSize;
 		static int TotalWidth = SvgWidth + 2 * ShadowSize;
 		
@@ -107,8 +107,10 @@ namespace Docky.Menus
 			using (DockySurface shadow = main.CreateMask (0, out extents)) {
 				shadow.GaussianBlur (ShadowSize);
 				shadow.Context.Operator = Operator.DestOut;
-				shadow.Context.SetSource (main.Internal);
-				shadow.Context.Paint ();
+				for (int i = 0; i < 3; i++) {
+					shadow.Context.SetSource (main.Internal);
+					shadow.Context.Paint ();
+				}
 				
 				main.Context.Operator = Operator.DestOver;
 				main.Context.SetSource (shadow.Internal);
