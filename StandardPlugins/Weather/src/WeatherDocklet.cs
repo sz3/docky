@@ -314,7 +314,7 @@ namespace WeatherDocklet
 				{
 					hasForecast = true;
 					list[MenuListContainer.Actions].Add (new ForecastMenuItem (i,
-							Catalog.GetString (WeatherForecast.DayName (WeatherController.Weather.Forecasts[i].dow) + "'s Forecast"),
+							string.Format (Catalog.GetString ("{0}'s Forecast"), WeatherForecast.DayName (WeatherController.Weather.Forecasts[i].dow)),
 							WeatherController.Weather.Forecasts[i].image));
 				}
 			
