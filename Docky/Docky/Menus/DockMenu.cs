@@ -108,7 +108,7 @@ namespace Docky.Menus
 			using (DockySurface shadow = main.CreateMask (0, out extents)) {
 				shadow.GaussianBlur (ShadowSize);
 				shadow.Context.Operator = Operator.DestOut;
-				for (int i = 0; i < 3; i++) {
+				for (int i = 0; i < 4; i++) {
 					shadow.Context.SetSource (main.Internal);
 					shadow.Context.Paint ();
 				}

@@ -85,9 +85,11 @@ namespace Docky.Interface
 		
 		public void SetSurfaceAtPoint (DockySurface surface, Gdk.Point point)
 		{
-			if (surface == currentSurface && point == currentPoint)
+			if (surface == currentSurface && point == currentPoint) {
+				window.QueueDraw ();
 				return;
-				
+			}
+			
 			currentSurface = surface;
 			currentPoint = point;
 			
@@ -97,7 +99,7 @@ namespace Docky.Interface
 			}
 			
 			window.SetSizeRequest (surface.Width, surface.Height);
-			
+				
 			Gdk.Point center = Gdk.Point.Zero;
 			switch (Gravity) {
 			case DockPosition.Top:
@@ -117,10 +119,10 @@ namespace Docky.Interface
 			if (timer > 0)
 				GLib.Source.Remove (timer);
 			
-			
 			window.Move (center.X, center.Y);
 			timer = GLib.Timeout.Add (100, delegate {
 				window.Move (center.X, center.Y);
+				window.QueueDraw ();
 				timer = 0;
 				return false;
 			});
@@ -159,6 +161,7 @@ namespace Docky.Interface
 		#region IDisposable implementation
 		public void Dispose ()
 		{
+			currentSurface = null;
 			Wnck.Screen.Default.ActiveWindowChanged -= HandleWnckScreenDefaultActiveWindowChanged;
 			if (window != null) {
 				window.Destroy ();
