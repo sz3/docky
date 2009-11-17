@@ -135,7 +135,7 @@ namespace Docky.Items
 		{
 			ItemState state = 0;
 			
-			if (ManagedWindows.Contains (Wnck.Screen.Default.ActiveWindow)) {
+			if (Wnck.Screen.Default.ActiveWindow != null && ManagedWindows.Any (w => w.Pid == Wnck.Screen.Default.ActiveWindow.Pid)) {
 				state |= ItemState.Active;
 			}
 			if (ManagedWindows.Any (w => w.NeedsAttention ())) {
