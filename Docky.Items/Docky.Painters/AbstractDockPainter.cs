@@ -25,11 +25,10 @@ using Cairo;
 using Gdk;
 
 using Docky.CairoHelper;
+using Docky.Services;
 
 namespace Docky.Painters
 {
-
-
 	public class AbstractDockPainter : IDisposable
 	{
 		DockySurface surface;
@@ -61,12 +60,31 @@ namespace Docky.Painters
 				return;
 			
 			Allocation = allocation;
-			OnAllocationSet (allocation);
+			try {
+				OnAllocationSet (allocation);
+			} catch (Exception e) {
+				Log<AbstractDockPainter>.Error (e.Message);
+				Log<AbstractDockPainter>.Debug (e.StackTrace);
+			}
+		}
+		
+		protected virtual void OnAllocationSet (Gdk.Rectangle allocation)
+		{
 		}
 		
 		public void SetStyle (Gtk.Style style)
 		{
 			Style = style;
+			try {
+				OnStyleSet (style);
+			} catch (Exception e) {
+				Log<AbstractDockPainter>.Error (e.Message);
+				Log<AbstractDockPainter>.Debug (e.StackTrace);
+			}
+		}
+		
+		protected virtual void OnStyleSet (Gtk.Style style)
+		{
 		}
 		
 		public DockySurface GetSurface (DockySurface similar)
@@ -86,41 +104,45 @@ namespace Docky.Painters
 		
 		protected virtual void PaintSurface (DockySurface surface)
 		{
-		
 		}
 		
 		public void Shown ()
 		{
-			OnShown ();
+			try {
+				OnShown ();
+			} catch (Exception e) {
+				Log<AbstractDockPainter>.Error (e.Message);
+				Log<AbstractDockPainter>.Debug (e.StackTrace);
+			}
 		}
 		
 		protected virtual void OnShown ()
 		{
-			
 		}
 		
 		public void Hidden ()
 		{
-			OnHidden ();
+			try {
+				OnHidden ();
+			} catch (Exception e) {
+				Log<AbstractDockPainter>.Error (e.Message);
+				Log<AbstractDockPainter>.Debug (e.StackTrace);
+			}
 			ResetBuffer ();
 		}
 		
 		protected virtual void OnHidden ()
 		{
-			
-		}
-		
-		protected virtual void OnAllocationSet (Gdk.Rectangle allocation)
-		{
-		}
-		
-		protected virtual void OnStyleSet (Gtk.Style style)
-		{
 		}
 		
 		public void ButtonPressed (int x, int y, Gdk.ModifierType mod)
 		{
-			OnButtonPressed (x, y, mod);
+			try {
+				OnButtonPressed (x, y, mod);
+			} catch (Exception e) {
+				Log<AbstractDockPainter>.Error (e.Message);
+				Log<AbstractDockPainter>.Debug (e.StackTrace);
+			}
 		}
 		
 		protected virtual void OnButtonPressed (int x, int y, Gdk.ModifierType mod)
@@ -129,7 +151,12 @@ namespace Docky.Painters
 		
 		public void ButtonReleased (int x, int y, Gdk.ModifierType mod)
 		{
-			OnButtonReleased (x, y, mod);
+			try {
+				OnButtonReleased (x, y, mod);
+			} catch (Exception e) {
+				Log<AbstractDockPainter>.Error (e.Message);
+				Log<AbstractDockPainter>.Debug (e.StackTrace);
+			}
 		}
 		
 		protected virtual void OnButtonReleased (int x, int y, Gdk.ModifierType mod)
@@ -139,7 +166,12 @@ namespace Docky.Painters
 		
 		public void Scrolled (ScrollDirection direction, int x, int y, Gdk.ModifierType mod)
 		{
-			OnScrolled (direction, x, y, mod);
+			try {
+				OnScrolled (direction, x, y, mod);
+			} catch (Exception e) {
+				Log<AbstractDockPainter>.Error (e.Message);
+				Log<AbstractDockPainter>.Debug (e.StackTrace);
+			}
 		}
 		
 		protected virtual void OnScrolled (ScrollDirection direction, int x, int y, Gdk.ModifierType type)
