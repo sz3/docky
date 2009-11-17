@@ -35,12 +35,16 @@ namespace Docky.Menus
 {
 	public class DockMenu : Gtk.Window
 	{
-		const int Padding   = 10;
-		const int TailSize  = 20;
-		const int TailWidth = 30;
-		const int SliceSize = 18;
-		const int SvgWidth  = 100;
-		const int SvgHeight = 120;
+		const int Padding    = 10;
+		const int TailSize   = 20;
+		const int TailWidth  = 30;
+		const int SliceSize  = 18;
+		const int SvgWidth   = 100;
+		const int SvgHeight  = 120;
+		const int ShadowSize = 7;
+		
+		static int TotalHeight = SvgHeight + 2 * ShadowSize;
+		static int TotalWidth = SvgWidth + 2 * ShadowSize;
 		
 		enum Slice {
 			Top,
@@ -92,15 +96,28 @@ namespace Docky.Menus
 			if (menu_slices != null)
 				return menu_slices;
 			
-			DockySurface main = new DockySurface (SvgWidth, SvgHeight, model);
+			DockySurface main = new DockySurface (TotalWidth, TotalHeight, model);
 			
 			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (Docky.Controller.MenuSvg, -1)) {
-				Gdk.CairoHelper.SetSourcePixbuf (main.Context, pixbuf, 0, 0);
+				Gdk.CairoHelper.SetSourcePixbuf (main.Context, pixbuf, ShadowSize, ShadowSize);
 				main.Context.Paint ();
 			}
 			
-			int middleWidth = SvgWidth - 2 * SliceSize;
-			int middleHeight = SvgHeight - 2 * SliceSize - TailSize;
+			Gdk.Rectangle extents;
+			using (DockySurface shadow = main.CreateMask (0, out extents)) {
+				shadow.GaussianBlur (ShadowSize);
+				shadow.Context.Operator = Operator.DestOut;
+				shadow.Context.SetSource (main.Internal);
+				shadow.Context.Paint ();
+				
+				main.Context.Operator = Operator.DestOver;
+				main.Context.SetSource (shadow.Internal);
+				main.Context.PaintWithAlpha (1);
+				main.Context.Operator = Operator.Over;
+			}
+			
+			int middleWidth = TotalWidth - 2 * SliceSize;
+			int middleHeight = TotalHeight - 2 * SliceSize - TailSize;
 			int tailSliceSize = TailSize + SliceSize;
 			int tailSideSize = (middleWidth - TailWidth) / 2;
 			
@@ -118,7 +135,7 @@ namespace Docky.Menus
 					SliceSize));
 			
 			results[(int) Slice.TopRight] = CreateSlice (main, new Gdk.Rectangle (
-					SvgWidth - SliceSize, 
+					TotalWidth - SliceSize, 
 					0, 
 					SliceSize, 
 					SliceSize));
@@ -136,38 +153,38 @@ namespace Docky.Menus
 					middleHeight));
 			
 			results[(int) Slice.Right] = CreateSlice (main, new Gdk.Rectangle (
-					SvgWidth - SliceSize, 
+					TotalWidth - SliceSize, 
 					SliceSize, 
 					SliceSize, 
 					middleHeight));
 			
 			results[(int) Slice.BottomLeft] = CreateSlice (main, new Gdk.Rectangle (
 					0, 
-					SvgHeight - tailSliceSize, 
+					TotalHeight - tailSliceSize, 
 					SliceSize, 
 					tailSliceSize));
 			
 			results[(int) Slice.TailLeft] = CreateSlice (main, new Gdk.Rectangle (
 					SliceSize, 
-					SvgHeight - tailSliceSize, 
+					TotalHeight - tailSliceSize, 
 					tailSideSize, 
 					tailSliceSize));
 			
 			results[(int) Slice.Tail] = CreateSlice (main, new Gdk.Rectangle (
 					SliceSize + tailSideSize,
-					SvgHeight - tailSliceSize,
+					TotalHeight - tailSliceSize,
 					TailWidth,
 					tailSliceSize));
 				
 			results[(int) Slice.TailRight] = CreateSlice (main, new Gdk.Rectangle (
 					SliceSize + middleWidth - tailSideSize,
-					SvgHeight - tailSliceSize,
+					TotalHeight - tailSliceSize,
 					tailSideSize,
 					tailSliceSize));
 			
 			results[(int) Slice.BottomRight] = CreateSlice (main, new Gdk.Rectangle (
 					SliceSize + middleWidth,
-					SvgHeight - tailSliceSize,
+					TotalHeight - tailSliceSize,
 					SliceSize,
 					tailSliceSize));
 			

@@ -346,7 +346,7 @@ namespace Docky.CairoHelper
 		const int AlphaPrecision = 16; 
 		const int ParamPrecision = 7;
 		
-		public unsafe static void Exponentialblur (this DockySurface self, int radius)
+		public unsafe static void ExponentialBlur (this DockySurface self, int radius)
 		{
 			self.ExponentialBlur (radius, new Gdk.Rectangle (0, 0, self.Width, self.Height));
 		}
