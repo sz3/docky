@@ -28,13 +28,13 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <sodipodi:namedview
-     inkscape:window-height="1030"
-     inkscape:window-width="1680"
+     inkscape:window-height="689"
+     inkscape:window-width="1280"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      guidetolerance="10.0"
@@ -45,11 +45,11 @@
      pagecolor="#ffffff"
      id="base"
      showgrid="false"
-     inkscape:zoom="4.6256569"
-     inkscape:cx="50"
-     inkscape:cy="59.694268"
+     inkscape:zoom="2.3128285"
+     inkscape:cx="15.410318"
+     inkscape:cy="59.267341"
      inkscape:window-x="0"
-     inkscape:window-y="1"
+     inkscape:window-y="24"
      inkscape:current-layer="svg2"
      borderlayer="false"
      inkscape:window-maximized="1"
@@ -66,16 +66,7 @@
        snapvisiblegridlinesonly="true" />
   </sodipodi:namedview>
   <defs
-     id="defs4">
-    <filter
-       id="filter3229"
-       inkscape:collect="always">
-      <feGaussianBlur
-         id="feGaussianBlur3231"
-         stdDeviation="2.2655"
-         inkscape:collect="always" />
-    </filter>
-  </defs>
+     id="defs4" />
   <path
      style="opacity:0.80000000000000004;fill:#141414;fill-opacity:0.94117647000000004;stroke:#b4b4b4;stroke-width:1.00000011999999994;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;color:#000000;fill-rule:nonzero;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
      id="path3233"
