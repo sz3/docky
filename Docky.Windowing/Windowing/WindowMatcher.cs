@@ -223,7 +223,7 @@ namespace Docky.Windowing
 		{
 			
 			int pid = window.Pid;
-			Console.WriteLine ("Processing window {0} \\ {1}", window.Name, pid);
+			//Console.WriteLine ("Processing window {0} \\ {1}", window.Name, pid);
 			if (pid <= 1) {
 				if (window.ClassGroup != null && !string.IsNullOrEmpty (window.ClassGroup.ResClass)) {
 					yield return window.ClassGroup.ResClass;
@@ -240,16 +240,14 @@ namespace Docky.Windowing
 			
 			// get ppid and parents
 			IEnumerable<int> pids = PIDAndParents (pid);
+			// and save their possible cmdlines to a list
 			foreach (int p in pids)
 				command_line.AddRange (CommandLineForPid (p));
-			//save it to a list
 			
-			Console.WriteLine ("starting with pid: {0}", pid);
-			foreach (string cmd in command_line)
-				Console.WriteLine ("Possible cmdline: {0}", cmd);
-			
-			//string[] command_line = CommandLineForPid (pid);
-			
+			//Console.WriteLine ("starting with pid: {0}", pid);
+			//foreach (string cmd in command_line)
+			//	Console.WriteLine ("Possible cmdline: {0}", cmd);
+
 			// if we have a classname that matches a desktopid we have a winner
 			if (window.ClassGroup != null) {
 				if (WindowIsOpenOffice (window)) {
@@ -284,22 +282,12 @@ namespace Docky.Windowing
 			}
 			
 			if (command_line.Count () != 0) {
-				foreach (string cmd in command_line) {
-					/*
-					foreach (string s in SuffixStrings) {
-						if (!cmd.EndsWith (s))
-							continue;
-						if (exec_to_desktop_files.ContainsKey (cmd.Remove (cmd.LastIndexOf (s), s.Length))) {
-							cmd = cmd.Remove (cmd.LastIndexOf (s), s.Length);
-							break;
-						}
-					}
-					*/					
+				foreach (string cmd in command_line) {			
 					if (exec_to_desktop_files.ContainsKey (cmd)) {
 						foreach (string s in exec_to_desktop_files[cmd]) {
 							if (string.IsNullOrEmpty (s))
 								continue;
-							Console.WriteLine ("Exec to desktop: {0} = {1}", cmd, s);
+							//Console.WriteLine ("Exec to desktop: {0} = {1}", cmd, s);
 							yield return s;
 							matched = true;
 						}
@@ -328,20 +316,15 @@ namespace Docky.Windowing
 					yield break; 
 				}
 				
-				if (cmdline == null) {
+				if (cmdline == null)
 					yield break;
-				}
 				
 				cmdline = cmdline.ToLower ();
 				
-				string [] result = cmdline.Split (Convert.ToChar (0x0));
-				
-				result = result[0].Split (' ');
+				string [] result = cmdline.Split (Convert.ToChar (0x0))[0].Split (' ');
 
-				if (result.Count () < 4) {
-					Console.WriteLine ("Breaking...");
+				if (result.Count () < 4)
 					yield break;
-				}
 				
 				// the ppid is index number 3
 				pid = int.Parse (result[3]);
