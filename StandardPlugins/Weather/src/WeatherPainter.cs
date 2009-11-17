@@ -411,12 +411,10 @@ namespace WeatherDocklet
 			QueueRepaint ();
 		}
 		
-		/*
-		protected virtual void OnButtonReleased (int x, int y, Gdk.ModifierType mod)
+		protected override void OnButtonReleased (int x, int y, Gdk.ModifierType mod)
 		{
 			NextPage ();
 		}
-		*/
 		
 		protected override void OnScrolled (Gdk.ScrollDirection direction, int x, int y, Gdk.ModifierType type)
 		{
