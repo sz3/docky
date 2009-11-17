@@ -214,7 +214,6 @@ namespace Docky.Items
 			} else if (windows.Any (w => w.IsActive && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace)) ||
 						windows.Any (w => w.Pid == Wnck.Screen.Default.ActiveWindow.Pid)) {
 				WindowControl.MinimizeWindows (windows);
-				WindowControl.MinimizeWindows (windows);
 			} else {
 				WindowControl.FocusWindows (windows);
 			}
