@@ -138,7 +138,7 @@ namespace Docky.Interface
 		public int IconSize {
 			get {
 				if (!icon_size.HasValue) {
-					icon_size = GetOption<int?> ("IconSize", 64);
+					icon_size = GetOption<int?> ("IconSize", 48);
 				}
 				return icon_size.Value;
 			}
