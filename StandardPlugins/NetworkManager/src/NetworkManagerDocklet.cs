@@ -45,6 +45,7 @@ namespace NetworkManagerDocklet
 		void ReDraw ()
 		{
 			Gtk.Application.Invoke (delegate {
+				Icon = SetDockletIcon ();
 				QueueRedraw ();
 			});
 		}
@@ -145,15 +146,15 @@ namespace NetworkManagerDocklet
 		
 		MenuItem MakeConEntry (WirelessAccessPoint ap)
 		{
-			string apName;
+			string apName = ap.SSID;
 			string icon = APIconFromStrength (ap.Strength);
 			
-			if (NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().Any (dev => dev.ActiveAccessPoint == ap))
-			    apName = string.Format ("<b>{0}</b>", ap.SSID);
-			else
-				apName = ap.SSID;
+			bool bold = NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().Any (dev => dev.ActiveAccessPoint == ap);
 			
-			return new Docky.Menus.MenuItem (apName, icon, (o, a) => NM.ConnectTo (ap));
+			Docky.Menus.MenuItem item = new Docky.Menus.MenuItem (apName, icon, (o, a) => NM.ConnectTo (ap));
+			item.Bold = bold;
+			
+			return item;
 		}
 		
 		#endregion 
