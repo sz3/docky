@@ -1651,10 +1651,12 @@ namespace Docky.Interface
 			
 				painterSurface.Internal.Show (painter_buffer.Context, painter_area.X, painter_area.Y);
 			
-				if (painter_icon_buffer == null)
+				if (painter_icon_buffer == null || painter_icon_buffer.Width != surface.Width || painter_icon_buffer.Height != surface.Height) {
+					if (painter_icon_buffer != null)
+						painter_icon_buffer.Dispose ();
 					painter_icon_buffer = new DockySurface (surface.Width, surface.Height, surface);
-				else
-					painter_icon_buffer.Clear ();
+				}
+				painter_icon_buffer.Clear ();
 				
 				PointD point;
 				switch (Position) {
