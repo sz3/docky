@@ -233,23 +233,29 @@ namespace Docky.Windowing
 			}
 			
 			bool matched = false;
+	
+			List<string> command_line = new List<string> ();
 			
-			string[] command_line = CommandLineForPid (pid);
-			
+			// get ppid and parents
+			IEnumerable<int> pids = PIDAndParents (pid);
+			// and save their possible cmdlines to a list
+			foreach (int p in pids)
+				command_line.AddRange (CommandLineForPid (p));
+
 			// if we have a classname that matches a desktopid we have a winner
 			if (window.ClassGroup != null) {
 				if (WindowIsOpenOffice (window)) {
 					string title = window.Name;
 					if (title.Contains ("Writer"))
-						command_line[0] = "ooffice-writer";
+						command_line [0] = "ooffice-writer";
 					else if (title.Contains ("Draw"))
-						command_line[0] = "ooffice-draw";
+						command_line [0] = "ooffice-draw";
 					else if (title.Contains ("Impress"))
-						command_line[0] = "ooffice-impress";
+						command_line [0] = "ooffice-impress";
 					else if (title.Contains ("Calc"))
-						command_line[0] = "ooffice-calc";
+						command_line [0] = "ooffice-calc";
 					else if (title.Contains ("Math"))
-						command_line[0] = "ooffice-math";
+						command_line [0] = "ooffice-math";
 					
 				} else {
 					string class_name = window.ClassGroup.ResClass.Replace (".", "");
@@ -269,22 +275,15 @@ namespace Docky.Windowing
 				}
 			}
 			
-			if (command_line != null) {
-				string cmd = command_line[0];
-				foreach (string s in SuffixStrings) {
-					if (!cmd.EndsWith (s))
-						continue;
-					if (exec_to_desktop_files.ContainsKey (cmd.Remove (cmd.LastIndexOf (s), s.Length))) {
-						cmd = cmd.Remove (cmd.LastIndexOf (s), s.Length);
-						break;
-					}
-				}
-				if (exec_to_desktop_files.ContainsKey (cmd)) {
-					foreach (string s in exec_to_desktop_files[cmd]) {
-						if (string.IsNullOrEmpty (s))
-							continue;
-						yield return s;
-						matched = true;
+			if (command_line.Count () != 0) {
+				foreach (string cmd in command_line) {			
+					if (exec_to_desktop_files.ContainsKey (cmd)) {
+						foreach (string s in exec_to_desktop_files[cmd]) {
+							if (string.IsNullOrEmpty (s))
+								continue;
+							yield return s;
+							matched = true;
+						}
 					}
 				}
 			}
@@ -293,10 +292,43 @@ namespace Docky.Windowing
 				yield return window.Pid.ToString ();
 		}
 		
+		IEnumerable<int> PIDAndParents (int pid)
+		{
+			string cmdline;
+
+			do {
+				yield return pid;
+				
+				try {
+					string procPath = new [] { "/proc", pid.ToString (), "stat" }.Aggregate (Path.Combine);
+					using (StreamReader reader = new StreamReader (procPath)) {
+						cmdline = reader.ReadLine ();
+						reader.Close ();
+					}
+				} catch { 
+					yield break; 
+				}
+				
+				if (cmdline == null)
+					yield break;
+				
+				cmdline = cmdline.ToLower ();
+				
+				string [] result = cmdline.Split (Convert.ToChar (0x0)) [0].Split (' ');
+
+				if (result.Count () < 4)
+					yield break;
+				
+				// the ppid is index number 3
+				if (!int.TryParse (result [3], out pid))
+					yield break;
+			} while (pid != 1);
+		}
+		
 		string [] CommandLineForPid (int pid)
 		{
 			string cmdline;
-			
+
 			try {
 				string procPath = new [] { "/proc", pid.ToString (), "cmdline" }.Aggregate (Path.Combine);
 				using (StreamReader reader = new StreamReader (procPath)) {

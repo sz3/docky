@@ -147,8 +147,10 @@ namespace Docky.Items
 						performing = false;
 						note.Body = "100% Complete.";
 					});
-				} catch {
+				} catch (GException ex) {
+					
 					continue;
+				} catch (Exception e) {
 				}
 			}			
 			return true;

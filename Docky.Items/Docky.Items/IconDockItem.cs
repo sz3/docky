@@ -40,6 +40,9 @@ namespace Docky.Items
 			protected set {
 				if (icon == value)
 					return;
+				// if we set this, clear the forced pixbuf
+				if (forced_pixbuf != null)
+					forced_pixbuf = null;
 				icon = value;
 				
 				Gtk.IconInfo info = Gtk.IconTheme.Default.LookupIcon (icon, 48, Gtk.IconLookupFlags.ForceSvg);
@@ -65,14 +68,30 @@ namespace Docky.Items
 			}
 		}
 		
+		Pixbuf forced_pixbuf;
+		protected Pixbuf ForcePixbuf {
+			get { return forced_pixbuf; }
+			set {
+				if (forced_pixbuf == value)
+					return;
+				forced_pixbuf = value;
+				QueueRedraw ();
+			}
+		}
+		
 		protected void SetIconFromGIcon (GLib.Icon gIcon)
 		{
 			Icon = DockServices.Drawing.IconFromGIcon (gIcon);
 		}
 		
+		protected void SetIconFromPixbuf (Pixbuf pbuf)
+		{
+			forced_pixbuf = pbuf;
+		}
+		
 		public IconDockItem ()
 		{
-			icon = "default";
+			Icon = "default";
 		}
 		
 		protected override sealed void PaintIconSurface (DockySurface surface)
@@ -80,7 +99,12 @@ namespace Docky.Items
 			
 			int iconSize = Math.Min (surface.Width, surface.Height);
 			
-			Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (Icon, iconSize);
+			Gdk.Pixbuf pbuf;
+			
+			if (forced_pixbuf == null)
+				pbuf = DockServices.Drawing.LoadIcon (Icon, iconSize);
+			else
+				pbuf = forced_pixbuf.ScaleSimple (iconSize, iconSize, InterpType.Bilinear);
 			
 			if (pbuf.Width != iconSize && pbuf.Height != iconSize) {
 				double scale = iconSize / (double) Math.Max (pbuf.Width, pbuf.Height);
