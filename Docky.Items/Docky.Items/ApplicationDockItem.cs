@@ -73,14 +73,8 @@ namespace Docky.Items
 		{
 			OwnedItem = item;
 			
-			if (item.HasAttribute ("Icon")) {
+			if (item.HasAttribute ("Icon"))
 				Icon = item.GetString ("Icon");
-				Gtk.IconInfo info = Gtk.IconTheme.Default.LookupIcon (Icon, 48, Gtk.IconLookupFlags.ForceSvg);
-				if (info.Filename.EndsWith (".svg")) {
-					Icon = info.Filename;
-				}
-				info.Dispose ();
-			}
 			
 			if (item.HasAttribute ("Name")) {
 				HoverText = item.GetLocaleString ("Name");
