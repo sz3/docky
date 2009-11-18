@@ -221,9 +221,7 @@ namespace Docky.Windowing
 		
 		IEnumerable<string> FindDesktopFileForWindowOrDefault (Wnck.Window window)
 		{
-			
 			int pid = window.Pid;
-			//Console.WriteLine ("Processing window {0} \\ {1}", window.Name, pid);
 			if (pid <= 1) {
 				if (window.ClassGroup != null && !string.IsNullOrEmpty (window.ClassGroup.ResClass)) {
 					yield return window.ClassGroup.ResClass;
@@ -243,10 +241,6 @@ namespace Docky.Windowing
 			// and save their possible cmdlines to a list
 			foreach (int p in pids)
 				command_line.AddRange (CommandLineForPid (p));
-			
-			//Console.WriteLine ("starting with pid: {0}", pid);
-			//foreach (string cmd in command_line)
-			//	Console.WriteLine ("Possible cmdline: {0}", cmd);
 
 			// if we have a classname that matches a desktopid we have a winner
 			if (window.ClassGroup != null) {
@@ -287,7 +281,6 @@ namespace Docky.Windowing
 						foreach (string s in exec_to_desktop_files[cmd]) {
 							if (string.IsNullOrEmpty (s))
 								continue;
-							//Console.WriteLine ("Exec to desktop: {0} = {1}", cmd, s);
 							yield return s;
 							matched = true;
 						}
@@ -327,7 +320,8 @@ namespace Docky.Windowing
 					yield break;
 				
 				// the ppid is index number 3
-				pid = int.Parse (result[3]);
+				if (!int.TryParse (result [3], out pid))
+					yield break;
 			} while (pid != 1);
 		}
 		
