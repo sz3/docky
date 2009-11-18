@@ -38,7 +38,8 @@ namespace Docky.Items
 	{
 		string hover_text;
 		bool redraw;
-		DockySurface main_buffer, text_buffer;
+		DockySurface text_buffer;
+		DockySurface[] icon_buffers;
 		Cairo.Color? average_color;
 		ActivityIndicator indicator;
 		ItemState state;
@@ -130,6 +131,7 @@ namespace Docky.Items
 		
 		public AbstractDockItem ()
 		{
+			icon_buffers = new DockySurface[2];
 			state_times = new Dictionary<ItemState, DateTime> ();
 			Gtk.IconTheme.Default.Changed += HandleIconThemeChanged;
 			
@@ -160,16 +162,16 @@ namespace Docky.Items
 		
 		public Cairo.Color AverageColor ()
 		{
-			if (main_buffer == null)
+			if (icon_buffers[0] == null)
 				return new Cairo.Color (1, 1, 1, 1);
 			
 			if (average_color.HasValue)
 				return average_color.Value;
 				
-			ImageSurface sr = new ImageSurface (Format.ARGB32, main_buffer.Width, main_buffer.Height);
+			ImageSurface sr = new ImageSurface (Format.ARGB32, icon_buffers[0].Width, icon_buffers[0].Height);
 			using (Context cr = new Context (sr)) {
 				cr.Operator = Operator.Source;
-				main_buffer.Internal.Show (cr, 0, 0);
+				icon_buffers[0].Internal.Show (cr, 0, 0);
 			}
 			
 			sr.Flush ();
@@ -216,7 +218,7 @@ namespace Docky.Items
 				}
 			}
 			
-			double pixelCount = main_buffer.Width * main_buffer.Height * byte.MaxValue;
+			double pixelCount = icon_buffers[0].Width * icon_buffers[0].Height * byte.MaxValue;
 			
 			sr.Destroy ();
 			
@@ -336,38 +338,56 @@ namespace Docky.Items
 		#region Buffer Handling
 		public DockySurface IconSurface (DockySurface model, int size)
 		{
-			if (main_buffer == null || (main_buffer.Height != size && main_buffer.Width != size)) {
-				main_buffer = ResetBuffer (main_buffer);
-				
-				try {
-					main_buffer = CreateIconBuffer (model, size);
-				} catch (Exception e) {
-					Log<AbstractDockItem>.Error (e.Message);
-					Log<AbstractDockItem>.Debug (e.StackTrace);
-					main_buffer = new DockySurface (size, size, model);
+			if (!redraw) {
+				// look for something nice to return
+				foreach (DockySurface surface in icon_buffers) {
+					if (surface == null)
+						continue;
+					if (surface.Width == size || surface.Height == size)
+						return surface;
 				}
-				
-				redraw = true;
-			} else {
-				if (model != null)
-					main_buffer.EnsureSurfaceModel (model.Internal);
 			}
 			
-			if (redraw) {
-				average_color = null;
-				
-				main_buffer.Clear ();
-				main_buffer.ResetContext ();
+			int i = -1;
+			for (int x = 0; x < icon_buffers.Length; x++) {
+				if (icon_buffers[x] != null && (icon_buffers[x].Width == size || icon_buffers[x].Height == size)) {
+					i = x;
+					break;
+				}
+				if (i == -1 && icon_buffers[x] == null)
+					i = x;
+			}
+			
+			i = Math.Max (i, 0);
+			
+			if (icon_buffers[i] == null || (icon_buffers[i].Width != size && icon_buffers[i].Height != size)) {
+				if (icon_buffers[i] != null)
+					icon_buffers[i] = ResetBuffer (icon_buffers[i]);
+					
 				try {
-					PaintIconSurface (main_buffer);
+					icon_buffers[i] = CreateIconBuffer (model, size);
 				} catch (Exception e) {
 					Log<AbstractDockItem>.Error (e.Message);
 					Log<AbstractDockItem>.Debug (e.StackTrace);
+					icon_buffers[i] = new DockySurface (size, size, model);
 				}
-				
-				redraw = false;
 			}
-			return main_buffer;
+			
+			average_color = null;
+			
+			icon_buffers[i].Clear ();
+			icon_buffers[i].ResetContext ();
+			
+			try {
+				PaintIconSurface (icon_buffers[i]);
+			} catch (Exception e) {
+				Log<AbstractDockItem>.Error (e.Message);
+				Log<AbstractDockItem>.Debug (e.StackTrace);
+			}
+			
+			redraw = false;
+			
+			return icon_buffers[i];
 		}
 		
 		protected virtual DockySurface CreateIconBuffer (DockySurface model, int size)
@@ -424,7 +444,8 @@ namespace Docky.Items
 		
 		public void ResetBuffers ()
 		{
-			main_buffer = ResetBuffer (main_buffer);
+			for (int i = 0; i < icon_buffers.Length; i++)
+				icon_buffers[i] = ResetBuffer (icon_buffers[i]);
 			text_buffer = ResetBuffer (text_buffer);
 		}
 		

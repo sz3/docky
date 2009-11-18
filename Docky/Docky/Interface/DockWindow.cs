@@ -1363,6 +1363,9 @@ namespace Docky.Interface
 					} else {
 						offsetPercent = offset / (ZoomSize / 2.0);
 					}
+					
+					if (offsetPercent > .99)
+						offsetPercent = 1;
 					// zoom is calculated as 1 through target_zoom (default 2).  
 					// The larger your offset, the smaller your zoom
 					
@@ -1740,8 +1743,13 @@ namespace Docky.Interface
 			opacity = Math.Pow (opacity, 2);
 			DockySurface icon;
 			if (item.Zoom) {
-				icon = item.IconSurface (surface, ZoomedIconSize);
-				icon.ShowAtPointAndZoom (surface, center.Center, center.Zoom / zoomOffset, opacity);
+				if (center.Zoom == 1) {
+					icon = item.IconSurface (surface, IconSize);
+					icon.ShowAtPointAndZoom (surface, center.Center, 1, opacity);
+				} else {
+					icon = item.IconSurface (surface, ZoomedIconSize);
+					icon.ShowAtPointAndZoom (surface, center.Center, center.Zoom / zoomOffset, opacity);
+				}
 			} else {
 				double rotation = 0;
 				

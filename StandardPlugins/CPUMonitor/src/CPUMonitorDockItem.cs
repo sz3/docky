@@ -139,7 +139,7 @@ namespace CPUMonitor
 			double center = size / 2.0;
 			Cairo.Color base_color = new Cairo.Color (1, .3, .3, .5).SetHue (120 * (1 - CPUUtilization));
 			
-			double radius = Math.Min (CPUUtilization * 1.3, 1);
+			double radius = Math.Max (Math.Min (CPUUtilization * 1.3, 1), .001);
 			// draw underlay
 			cr.Arc (center, center, center * RadiusPercent, 0, Math.PI * 2);
 			cr.Color = new Cairo.Color (0, 0, 0, .5);
@@ -174,13 +174,13 @@ namespace CPUMonitor
 			lg.Destroy ();
 			
 			//draw outer circles
-			cr.LineWidth = size / 64.0;
+			cr.LineWidth = 1;
 			cr.Arc (center, center, center * RadiusPercent, 0, Math.PI * 2);
 			cr.Color = new Cairo.Color (1, 1, 1, .75);
 			cr.Stroke ();
 			
-			cr.LineWidth = size / 64.0;
-			cr.Arc (center, center, center * RadiusPercent - 2, 0, Math.PI * 2);
+			cr.LineWidth = 1;
+			cr.Arc (center, center, center * RadiusPercent - 1, 0, Math.PI * 2);
 			cr.Color = new Cairo.Color (.8, .8, .8, .75);
 			cr.Stroke ();
 			
