@@ -256,7 +256,6 @@ namespace WeatherDocklet
 			cr.Color = new Cairo.Color (0.627, 0.627, 0.627, .8);
 			cr.LineWidth = 1;
 			cr.LineCap = LineCap.Round;
-			//cr.SetDash (new double[] {3.0, 2.0}, 0);
 			
 			int lines = 5;
 			for (int line = 0; line < lines - 1; line++) {
@@ -333,7 +332,7 @@ namespace WeatherDocklet
 			
 			layout.SetText (WeatherController.Weather.City);
 			layout.GetPixelExtents (out inkRect, out logicalRect);
-			cr.MoveTo (0, Allocation.Height * 2 / 5 - logicalRect.Height / 2);
+			cr.MoveTo (0, Allocation.Height / 3.5 - logicalRect.Height / 2);
 			Pango.CairoHelper.LayoutPath (cr, layout);
 			cr.Fill ();
 			
@@ -368,7 +367,8 @@ namespace WeatherDocklet
 				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 4));
 			
 			int xOffset = (column - 1) * 2 * xWidth;
-			int yOffset = Allocation.Height * row * 2 / 5;
+			int yOffset = row == 1 ? Allocation.Height : (int) (Allocation.Height * 2.5);
+			yOffset = (int) (yOffset / 3.5);
 			
 			cr.Color = new Cairo.Color (1, 1, 1, 0.9);
 			layout.SetText (label);
