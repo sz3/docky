@@ -87,6 +87,10 @@ namespace Docky.Items
 			get; private set;
 		}
 		
+		public virtual bool ScalableRendering {
+			get { return true; }
+		}
+		
 		public virtual bool RotateWithDock {
 			get { return false; }
 		}
