@@ -11,4 +11,8 @@ else
     DOCKY_EXE="@expanded_libdir@/@PACKAGE@/Docky.exe"
 fi
 
-mono --debug "$DOCKY_EXE" "$@"
+if [ `pgrep -c docky` -lt 2 ]; then
+	mono --debug "$DOCKY_EXE" "$@"
+else
+	echo "Docky appears to already be running.  Exiting..."
+fi
