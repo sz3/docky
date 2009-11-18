@@ -1743,7 +1743,7 @@ namespace Docky.Interface
 			opacity = Math.Pow (opacity, 2);
 			DockySurface icon;
 			if (item.Zoom) {
-				if (center.Zoom == 1) {
+				if (center.Zoom == 1 && IconSize >= 32) {
 					icon = item.IconSurface (surface, IconSize);
 					icon.ShowAtPointAndZoom (surface, center.Center, 1, opacity);
 				} else {
