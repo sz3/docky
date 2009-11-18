@@ -37,7 +37,7 @@ namespace Docky.Items
 	public abstract class AbstractDockItem : IDisposable
 	{
 		string hover_text;
-		bool redraw;
+		bool[] redraw;
 		DockySurface text_buffer;
 		DockySurface[] icon_buffers;
 		Cairo.Color? average_color;
@@ -132,6 +132,7 @@ namespace Docky.Items
 		public AbstractDockItem ()
 		{
 			icon_buffers = new DockySurface[2];
+			redraw = new bool[2];
 			state_times = new Dictionary<ItemState, DateTime> ();
 			Gtk.IconTheme.Default.Changed += HandleIconThemeChanged;
 			
@@ -338,14 +339,13 @@ namespace Docky.Items
 		#region Buffer Handling
 		public DockySurface IconSurface (DockySurface model, int size)
 		{
-			if (!redraw) {
-				// look for something nice to return
-				foreach (DockySurface surface in icon_buffers) {
-					if (surface == null)
-						continue;
-					if (surface.Width == size || surface.Height == size)
-						return surface;
-				}
+			// look for something nice to return
+			for (int j = 0; j < icon_buffers.Length; j++) {
+				if (icon_buffers[j] == null || redraw[j])
+					continue;
+				
+				if (icon_buffers[j].Width == size || icon_buffers[j].Height == size)
+					return icon_buffers[j];
 			}
 			
 			int i = -1;
@@ -385,7 +385,7 @@ namespace Docky.Items
 				Log<AbstractDockItem>.Debug (e.StackTrace);
 			}
 			
-			redraw = false;
+			redraw[i] = false;
 			
 			return icon_buffers[i];
 		}
@@ -457,7 +457,8 @@ namespace Docky.Items
 				if (!Square) {
 					ResetBuffers ();
 				}
-				redraw = true;
+				for (int i = 0; i < redraw.Length; i++)
+					redraw[i] = true;
 				OnPaintNeeded ();
 				return false;
 			});
