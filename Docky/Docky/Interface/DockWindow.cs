@@ -150,8 +150,7 @@ namespace Docky.Interface
 		DateTime remove_time;
 		
 		IDockPreferences preferences;
-		DockySurface main_buffer, background_buffer, icon_buffer;
-		DockySurface painter_buffer, painter_icon_buffer;
+		DockySurface main_buffer, background_buffer, icon_buffer, painter_buffer;
 		DockySurface normal_indicator_buffer, urgent_indicator_buffer;
 		AbstractDockItem hoveredItem;
 		AbstractDockPainter painter;
@@ -1651,13 +1650,6 @@ namespace Docky.Interface
 			
 				painterSurface.Internal.Show (painter_buffer.Context, painter_area.X, painter_area.Y);
 			
-				if (painter_icon_buffer == null || painter_icon_buffer.Width != surface.Width || painter_icon_buffer.Height != surface.Height) {
-					if (painter_icon_buffer != null)
-						painter_icon_buffer.Dispose ();
-					painter_icon_buffer = new DockySurface (surface.Width, surface.Height, surface);
-				}
-				painter_icon_buffer.Clear ();
-				
 				PointD point;
 				switch (Position) {
 				default:
@@ -1679,13 +1671,12 @@ namespace Docky.Interface
 					break;
 				}
 				
-				DockySurface icon = painterOwner.IconSurface (painter_icon_buffer, ZoomedIconSize);
-				icon.ShowAtPointAndZoom (painter_icon_buffer, point, DrawValues [painterOwner].Zoom, 1);
+				DockySurface icon = painterOwner.IconSurface (painter_buffer, ZoomedIconSize);
+				icon.ShowAtPointAndZoom (painter_buffer, point, DrawValues [painterOwner].Zoom, 1);
 				
 				repaint_painter = false;
 			}
 			
-			painter_icon_buffer.Internal.Show (surface.Context, 0, 0);
 			painter_buffer.Internal.Show (surface.Context, 0, 0);
 		}
 		
