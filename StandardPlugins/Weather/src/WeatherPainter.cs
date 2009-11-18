@@ -144,21 +144,21 @@ namespace WeatherDocklet
 				cr.Color = colorTitle;
 				layout.SetText (string.Format ("{0}", WeatherController.Weather.Forecasts [day].dow));
 				layout.GetPixelExtents (out inkRect, out logicalRect);
-				cr.MoveTo (xOffset + (Allocation.Height - inkRect.Width) / 2, Allocation.Height * 2 / 10 - logicalRect.Height / 2);
+				cr.MoveTo (xOffset + (Allocation.Height - inkRect.Width) / 2, 0);
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.Fill ();
 				
 				cr.Color = colorHigh;
 				layout.SetText (string.Format ("{0}{1}", WeatherController.Weather.Forecasts [day].high, WeatherUnits.TempUnit));
 				layout.GetPixelExtents (out inkRect, out logicalRect);
-				cr.MoveTo (xOffset + (Allocation.Height - inkRect.Width) / 2, Allocation.Height * 5 / 10 - logicalRect.Height / 2);
+				cr.MoveTo (xOffset + (Allocation.Height - inkRect.Width) / 2, Allocation.Height / 2 - logicalRect.Height / 2);
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.Fill ();
 				
 				cr.Color = colorLow;
 				layout.SetText (string.Format ("{0}{1}", WeatherController.Weather.Forecasts [day].low, WeatherUnits.TempUnit));
 				layout.GetPixelExtents (out inkRect, out logicalRect);
-				cr.MoveTo (xOffset + (Allocation.Height - inkRect.Width) / 2, Allocation.Height * 8 / 10 - logicalRect.Height / 2);
+				cr.MoveTo (xOffset + (Allocation.Height - inkRect.Width) / 2, Allocation.Height - logicalRect.Height);
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.Fill ();
 				
