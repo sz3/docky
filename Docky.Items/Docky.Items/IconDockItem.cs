@@ -92,10 +92,10 @@ namespace Docky.Items
 			
 			Gdk.Pixbuf pbuf;
 			
-			//if (forced_pixbuf == null)
+			if (forced_pixbuf == null)
 				pbuf = DockServices.Drawing.LoadIcon (Icon, iconSize);
-			//else
-			//	pbuf = forced_pixbuf.ScaleSimple (iconSize, iconSize, InterpType.Bilinear);
+			else
+				pbuf = forced_pixbuf.ScaleSimple (iconSize, iconSize, InterpType.Bilinear);
 			
 			if (pbuf.Width != iconSize && pbuf.Height != iconSize) {
 				double scale = iconSize / (double) Math.Max (pbuf.Width, pbuf.Height);
