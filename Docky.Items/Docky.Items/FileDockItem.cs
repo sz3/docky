@@ -82,13 +82,13 @@ namespace Docky.Items
 					SetIconFromGIcon (OwnedFile.Icon ());
 				else
 					Icon = thumbnailPath;
-			}
-			else
+			} else {
 				Icon = "";
+			}
 			
 			HoverText = OwnedFile.Basename;
 			
-			if (Icon == "inode-directory")
+			if (Icon.Contains ("inode-directory"))
 				HueShift = new Uri (uri).AbsolutePath.GetHashCode () % 160;
 			
 			OnPaintNeeded ();

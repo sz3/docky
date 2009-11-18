@@ -43,10 +43,12 @@ namespace Docky.Items
 				icon = value;
 				
 				Gtk.IconInfo info = Gtk.IconTheme.Default.LookupIcon (icon, 48, Gtk.IconLookupFlags.ForceSvg);
-				if (info.Filename.EndsWith (".svg")) {
-					icon = info.Filename;
+				if (info != null) {
+					if (info.Filename != null && info.Filename.EndsWith (".svg")) {
+						icon = info.Filename;
+					}
+					info.Dispose ();
 				}
-				info.Dispose ();
 				
 				QueueRedraw ();
 			}
