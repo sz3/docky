@@ -1136,11 +1136,11 @@ namespace Docky.Interface
 				
 			if (Painter != null) {
 				// this allows Painter.MinimumSize to use Allocation
-				Painter.SetAllocation (new Gdk.Rectangle (0, 0, DockWidth - ZoomedIconSize, DockHeight));
+				Painter.SetAllocation (new Gdk.Rectangle (0, 0, DockWidth - ZoomedIconSize - 3 * DockWidthBuffer, DockHeight - 2 * DockWidthBuffer));
 				// now we can use MinimumSize
 				DockWidth = (int) Math.Max (DockWidth, Painter.MinimumSize + ZoomedIconSize);
 				// and update the painter's allocation!
-				Painter.SetAllocation (new Gdk.Rectangle (0, 0, DockWidth - ZoomedIconSize, DockHeight));
+				Painter.SetAllocation (new Gdk.Rectangle (0, 0, DockWidth - ZoomedIconSize - 3 * DockWidthBuffer, DockHeight - 2 * DockWidthBuffer));
 			}
 		}
 		
@@ -1643,8 +1643,8 @@ namespace Docky.Interface
 				painter_buffer.Clear ();
 				DockySurface painterSurface = Painter.GetSurface (surface);
 			
-				painter_area = new Gdk.Rectangle (dockArea.X + ZoomedIconSize + (dockArea.Width - ZoomedIconSize - painterSurface.Width) / 2,
-					dockArea.Y + (dockArea.Height - painterSurface.Height) / 2,
+				painter_area = new Gdk.Rectangle (dockArea.X + ZoomedIconSize + 2 * DockWidthBuffer,
+					dockArea.Y + DockWidthBuffer,
 					painterSurface.Width,
 					painterSurface.Height);
 			
@@ -1654,20 +1654,20 @@ namespace Docky.Interface
 				switch (Position) {
 				default:
 				case DockPosition.Top:
-					point = new PointD(dockArea.X + ZoomedIconSize / 2,
+					point = new PointD(dockArea.X + ZoomedIconSize / 2 + DockWidthBuffer,
 						dockArea.Y + DockHeightBuffer + ZoomedIconSize / 2);
 					break;
 				case DockPosition.Left:
 					point = new PointD(dockArea.X + DockHeightBuffer + ZoomedIconSize / 2,
-						dockArea.Y + ZoomedIconSize / 2);
+						dockArea.Y + ZoomedIconSize / 2 + DockWidthBuffer);
 					break;
 				case DockPosition.Bottom:
-					point = new PointD(dockArea.X + ZoomedIconSize / 2,
-						dockArea.Y + painterSurface.Height - DockHeightBuffer - ZoomedIconSize / 2);
+					point = new PointD(dockArea.X + ZoomedIconSize / 2 + DockWidthBuffer,
+						dockArea.Y + dockArea.Height - DockHeightBuffer - ZoomedIconSize / 2);
 					break;
 				case DockPosition.Right:
-					point = new PointD(dockArea.X + painterSurface.Height - DockHeightBuffer - ZoomedIconSize / 2,
-						dockArea.Y + ZoomedIconSize / 2);
+					point = new PointD(dockArea.X + dockArea.Height - DockHeightBuffer - ZoomedIconSize / 2,
+						dockArea.Y + ZoomedIconSize / 2 + DockWidthBuffer);
 					break;
 				}
 				
