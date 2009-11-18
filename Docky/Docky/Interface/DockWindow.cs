@@ -1138,7 +1138,7 @@ namespace Docky.Interface
 				// this allows Painter.MinimumSize to use Allocation
 				Painter.SetAllocation (new Gdk.Rectangle (0, 0, DockWidth - ZoomedIconSize - 3 * DockWidthBuffer, DockHeight - 2 * DockWidthBuffer));
 				// now we can use MinimumSize
-				DockWidth = (int) Math.Max (DockWidth, Painter.MinimumSize + ZoomedIconSize);
+				DockWidth = (int) Math.Max (DockWidth, Painter.MinimumSize + ZoomedIconSize + 3 * DockWidthBuffer);
 				// and update the painter's allocation!
 				Painter.SetAllocation (new Gdk.Rectangle (0, 0, DockWidth - ZoomedIconSize - 3 * DockWidthBuffer, DockHeight - 2 * DockWidthBuffer));
 			}
