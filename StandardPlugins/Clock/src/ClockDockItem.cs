@@ -105,7 +105,7 @@ namespace Clock
 		
 		public ClockDockItem ()
 		{
-			painter = new CalendarPainter (this);
+			painter = new CalendarPainter ();
 			
 			GLib.Timeout.Add (1000, ClockUpdateTimer);
 		}

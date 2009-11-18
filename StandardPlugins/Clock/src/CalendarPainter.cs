@@ -33,11 +33,8 @@ namespace Clock
 	{
 		const int LineHeight = 16;
 		const double lowlight = .35;
-		const string BoldFormatString = "{0}";
 		
 		DateTime paint_time;
-		
-		ClockDockItem Clock { get; set; }
 		
 		DateTime startDate;
 		public DateTime StartDate
@@ -58,9 +55,8 @@ namespace Clock
 			}
 		}
 		
-		public CalendarPainter (ClockDockItem clock) : base ()
+		public CalendarPainter () : base ()
 		{
-			Clock = clock;
 			StartDate = DateTime.Today;
 		}
 		
@@ -88,7 +84,7 @@ namespace Clock
 			surface.Clear ();
 			
 			paint_time = DateTime.Now;
-			int height = surface.Height / LineHeight;
+			int height = Allocation.Height / LineHeight;
 			RenderHeader (surface);
 			for (int i = 1; i < height; i++)
 				RenderLine (surface, i);
@@ -99,8 +95,8 @@ namespace Clock
 		void RenderHeader (DockySurface surface)
 		{
 			Context cr = surface.Context;
-			int centerLine = LineHeight / 2 + ((surface.Height % LineHeight) / 2);
-			int offsetSize = surface.Width / 9;
+			int centerLine = LineHeight / 2 + ((Allocation.Height % LineHeight) / 2);
+			int offsetSize = Allocation.Width / 9;
 			
 			DateTime day = CalendarStartDate;
 			
@@ -114,7 +110,7 @@ namespace Clock
 			
 			cr.Color = new Cairo.Color (1, 1, 1, .5);
 			for (int i = 1; i < 8; i++) {
-				layout.SetText (string.Format (BoldFormatString, day.ToString ("ddd").ToUpper ()));
+				layout.SetText (string.Format ("{0}", day.ToString ("ddd").ToUpper ()));
 				
 				Pango.Rectangle inkRect, logicalRect;
 				layout.GetPixelExtents (out inkRect, out logicalRect);
@@ -130,8 +126,8 @@ namespace Clock
 		{
 			Context cr = surface.Context;
 			DateTime lineStart = CalendarStartDate.AddDays ((line - 1) * 7);
-			int offsetSize = surface.Width / 9;
-			int centerLine = LineHeight / 2 + LineHeight * line + ((surface.Height % LineHeight) / 2);
+			int offsetSize = Allocation.Width / 9;
+			int centerLine = LineHeight / 2 + LineHeight * line + ((Allocation.Height % LineHeight) / 2);
 			int dayOffset = 0;
 			
 			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
@@ -147,7 +143,7 @@ namespace Clock
 				
 				if (i == 8) {
 					cr.Color = new Cairo.Color (1, 1, 1, lowlight);
-					layout.SetText (string.Format (BoldFormatString, lineStart.AddDays (6).ToString ("MMM").ToUpper ()));
+					layout.SetText (string.Format ("{0}", lineStart.AddDays (6).ToString ("MMM").ToUpper ()));
 					layout.GetPixelExtents (out inkRect, out logicalRect);
 					cr.MoveTo (offsetSize * i, centerLine - logicalRect.Height);
 				} else if (i == 0) {
