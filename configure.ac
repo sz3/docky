@@ -188,6 +188,7 @@ StandardPlugins/Clock/Makefile
 StandardPlugins/Clock/Resources/Clock.addin.xml
 StandardPlugins/Clock/Themes/Makefile
 StandardPlugins/Clock/Themes/Default/Makefile
+StandardPlugins/Clock/Themes/Default24/Makefile
 StandardPlugins/CPUMonitor/Makefile
 StandardPlugins/CPUMonitor/Resources/CPUMonitor.addin.xml
 StandardPlugins/GMail/Makefile

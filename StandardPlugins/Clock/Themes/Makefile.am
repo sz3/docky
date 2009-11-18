@@ -1,6 +1,8 @@
 SUBDIRS = \
-	Default
+	Default \
+	Default24
 
 DIST_SUBDIRS = \
-	Default
+	Default \
+	Default24
 
