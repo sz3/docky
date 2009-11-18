@@ -247,15 +247,15 @@ namespace Docky.Windowing
 				if (WindowIsOpenOffice (window)) {
 					string title = window.Name;
 					if (title.Contains ("Writer"))
-						command_line[0] = "ooffice-writer";
+						command_line [0] = "ooffice-writer";
 					else if (title.Contains ("Draw"))
-						command_line[0] = "ooffice-draw";
+						command_line [0] = "ooffice-draw";
 					else if (title.Contains ("Impress"))
-						command_line[0] = "ooffice-impress";
+						command_line [0] = "ooffice-impress";
 					else if (title.Contains ("Calc"))
-						command_line[0] = "ooffice-calc";
+						command_line [0] = "ooffice-calc";
 					else if (title.Contains ("Math"))
-						command_line[0] = "ooffice-math";
+						command_line [0] = "ooffice-math";
 					
 				} else {
 					string class_name = window.ClassGroup.ResClass.Replace (".", "");
@@ -314,7 +314,7 @@ namespace Docky.Windowing
 				
 				cmdline = cmdline.ToLower ();
 				
-				string [] result = cmdline.Split (Convert.ToChar (0x0))[0].Split (' ');
+				string [] result = cmdline.Split (Convert.ToChar (0x0)) [0].Split (' ');
 
 				if (result.Count () < 4)
 					yield break;
