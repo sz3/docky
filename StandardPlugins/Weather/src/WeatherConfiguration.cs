@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Gtk;
 
@@ -49,7 +50,7 @@ namespace WeatherDocklet
 			aboutLabel.Text = WeatherController.Weather.About;
 			
 			int selected = 0;
-			foreach (AbstractWeatherSource aws in WeatherController.Service.WeatherSources)
+			foreach (AbstractWeatherSource aws in WeatherController.Sources.Values.OrderBy (d => d.Name))
 			{
 				source.AppendText (aws.Name);
 				if (aws.Name.Equals(WeatherPreferences.Source))

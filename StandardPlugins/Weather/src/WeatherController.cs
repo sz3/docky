@@ -16,6 +16,7 @@
 // 
 
 using System;
+using System.Collections.Generic;
 using System.Web;
 
 using Docky.Services;
@@ -43,9 +44,9 @@ namespace WeatherDocklet
 		public static event Action WeatherUpdated;
 		
 		/// <value>
-		/// The weather service, for looking up weather sources.
+		/// A <see cref="System.Collections.Generic.Dictionary"/> of all weather sources.
 		/// </value>
-		public static WeatherService Service { get; protected set; }
+		public static Dictionary<string, AbstractWeatherSource> Sources { get; protected set; }
 		
 		/// <value>
 		/// The current weather source.
@@ -82,6 +83,12 @@ namespace WeatherDocklet
 		static WeatherController ()
 		{
 			CurrentLocationIndex = 0;
+			
+			Sources = new Dictionary<string, AbstractWeatherSource> ();
+			
+			Sources.Add (GoogleWeatherSource.GetInstance ().Name, GoogleWeatherSource.GetInstance ());
+			Sources.Add (WeatherChannelWeatherSource.GetInstance ().Name, WeatherChannelWeatherSource.GetInstance ());
+			Sources.Add (WunderWeatherSource.GetInstance ().Name, WunderWeatherSource.GetInstance ());
 			
 			ResetWeatherSource ();
 			UpdateUnits ();
@@ -153,9 +160,6 @@ namespace WeatherDocklet
 		/// </summary>
 		public static void ResetWeatherSource ()
 		{
-			if (Service == null)
-				Service = new WeatherService ();
-			
 			if (Weather != null)
 			{
 				Weather.WeatherReloading -= HandleWeatherReloading;
@@ -163,10 +167,10 @@ namespace WeatherDocklet
 				Weather.WeatherUpdated -= HandleWeatherUpdated;
 			}
 			
-			if (Service.Sources.ContainsKey (WeatherPreferences.Source))
-				Weather = Service.Sources [WeatherPreferences.Source];
+			if (Sources.ContainsKey (WeatherPreferences.Source))
+				Weather = Sources [WeatherPreferences.Source];
 			else
-				Weather = Service.Sources ["Weather Underground"];
+				Weather = Sources ["Weather Underground"];
 			
 			Weather.WeatherReloading += HandleWeatherReloading;
 			Weather.WeatherError += HandleWeatherError;

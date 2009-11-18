@@ -16,7 +16,6 @@ FILES = \
 	src/WeatherConfigurationDialog.cs \
 	src/WeatherPreferences.cs \
 	src/WeatherController.cs \
-	src/WeatherService.cs \
 	src/WeatherDocklet.WeatherConfiguration.cs \
 	src/WeatherUnits.cs \
 	src/WeatherDocklet.cs \

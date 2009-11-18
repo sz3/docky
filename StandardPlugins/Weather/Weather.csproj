@@ -60,7 +60,6 @@
     <Compile Include="src\WeatherForecast.cs" />
     <Compile Include="src\WeatherItemProvider.cs" />
     <Compile Include="src\WeatherPreferences.cs" />
-    <Compile Include="src\WeatherService.cs" />
     <Compile Include="src\WeatherUnits.cs" />
     <Compile Include="src\WeatherPainter.cs" />
     <Compile Include="src\Sources\AbstractWeatherSource.cs" />
