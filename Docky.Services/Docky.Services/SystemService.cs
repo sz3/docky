@@ -80,6 +80,8 @@ namespace Docky.Services
 		interface INetworkManager : org.freedesktop.DBus.Properties
 		{
 			event StateChangedHandler StateChanged;
+			
+			
 		}
 		
 		delegate void StateChangedHandler (uint state);
