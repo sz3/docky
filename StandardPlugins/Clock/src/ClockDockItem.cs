@@ -60,6 +60,7 @@ namespace Clock
 					return;
 				digital = value;
 				prefs.Set<bool> ("ShowDigital", value);
+				CheckForThemes ();
 			}
 		}
 		
@@ -82,6 +83,8 @@ namespace Clock
 					return;
 				current_theme = value;
 				prefs.Set<string> ("ClockTheme", value);
+				ShowMilitary = value.EndsWith ("-24");
+				CheckForThemes ();
 			}
 		}
 		
@@ -103,9 +106,54 @@ namespace Clock
 			}
 		}
 		
+		void CheckForThemes ()
+		{
+			// if its digital, we dont care about the theme
+			if (ShowDigital)
+				return;
+			
+			// check if we have a 24hr theme available
+			bool has24hourtheme = false;
+			
+			if (CurrentTheme.EndsWith ("-24"))
+				has24hourtheme = true;
+			else
+				foreach (string path in ThemeURIs)
+					if (Directory.Exists (path + CurrentTheme + "-24")) {
+						has24hourtheme = true;
+						break;
+					}
+			
+			// check if we have a 12hr theme available
+			bool has12hourtheme = false;
+			
+			if (!CurrentTheme.EndsWith ("-24"))
+				has12hourtheme = true;
+			else
+				foreach (string path in ThemeURIs)
+					if (Directory.Exists (path + CurrentTheme.Substring (0, CurrentTheme.Length - 3))) {
+						has12hourtheme = true;
+						break;
+					}
+			
+			// make sure military and the theme match
+			if (ShowMilitary) {
+				if (!has24hourtheme)
+					ShowMilitary = false;
+				else if (!CurrentTheme.EndsWith ("-24"))
+					CurrentTheme = CurrentTheme + "-24";
+			} else {
+				if (!has12hourtheme)
+					ShowMilitary = true;
+				else if (CurrentTheme.EndsWith ("-24"))
+					CurrentTheme = CurrentTheme.Substring (0, CurrentTheme.Length - 3);
+			}
+		}
+		
 		public ClockDockItem ()
 		{
 			painter = new CalendarPainter ();
+			CheckForThemes ();
 			
 			GLib.Timeout.Add (1000, ClockUpdateTimer);
 		}
@@ -300,7 +348,7 @@ namespace Clock
 			{
 				ShowMilitary = !ShowMilitary;
 				QueueRedraw ();
-			}));
+			}, !ShowDigital));
 			
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Show Date"), ShowDate ? "gtk-apply" : "gtk-remove", (o, a) =>
 			{
