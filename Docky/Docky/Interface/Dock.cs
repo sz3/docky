@@ -59,13 +59,13 @@ namespace Docky.Interface
 		public void EnterConfigurationMode ()
 		{
 			window.ConfigurationMode = true;
-			window.ButtonReleaseEvent += HandleWindowButtonReleaseEvent;
+			window.ButtonPressEvent += HandleWindowButtonPressEvent;
 		}
 
 		public void LeaveConfigurationMode ()
 		{
 			window.ConfigurationMode = false;
-			window.ButtonReleaseEvent -= HandleWindowButtonReleaseEvent;
+			window.ButtonPressEvent -= HandleWindowButtonPressEvent;
 		}
 		
 		public void SetActiveGlow ()
@@ -78,7 +78,7 @@ namespace Docky.Interface
 			window.ActiveGlow = false;
 		}
 		
-		void HandleWindowButtonReleaseEvent (object o, ButtonReleaseEventArgs args)
+		void HandleWindowButtonPressEvent (object o, ButtonPressEventArgs args)
 		{
 			if (ConfigurationClick != null)
 				ConfigurationClick (this, EventArgs.Empty);
