@@ -263,7 +263,7 @@ namespace Docky.Interface
 			SetOption<string> ("Autohide", "None");
 			SetOption<bool> ("FadeOnHide", false);
 			SetOption<double> ("FadeOpacity", 0);
-			SetOption<int?> ("IconSize", 64);
+			SetOption<int?> ("IconSize", 48);
 			SetOption<bool?> ("IndicateMultipleWindows", false);
 			SetOption<string[]> ("Launchers", new string[0]);
 			SetOption<int?> ("MonitorNumber", 0);
