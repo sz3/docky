@@ -52,7 +52,7 @@ namespace Docky.Services
 		public static Notification Notify (string title, string icon, string msg, params object[] args)
 		{
 			// also write the log out to the console
-			Write (LogLevel.Notify, msg, args);
+			Write (LogLevel.Notify, title + " - " + msg, args);
 			
 			return SendNote (title, icon, msg, args);
 		}
