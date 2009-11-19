@@ -1,6 +1,8 @@
 
 using System;
 
+using Docky.Services;
+
 namespace NetworkManagerDocklet
 {
 	
@@ -15,14 +17,27 @@ namespace NetworkManagerDocklet
 		public string SSID {
 			get
 			{
-				return System.Text.ASCIIEncoding.ASCII.GetString ((byte[]) BusObject.Get (BusName, "Ssid"));
+				try {
+					return System.Text.ASCIIEncoding.ASCII.GetString ((byte[]) BusObject.Get (BusName, "Ssid"));
+				} catch (Exception e) {
+					Log<WirelessAccessPoint>.Error (ObjectPath);
+					Log<WirelessAccessPoint>.Error (e.Message);
+					Log<WirelessAccessPoint>.Debug (e.StackTrace);
+					return "Unknown SSID";
+				}
 			}
 		}
 
 		public byte Strength {
 			get
 			{
-				return  (byte) BusObject.Get (BusName, "Strength");
+				try {
+					return (byte) BusObject.Get (BusName, "Strength");
+				} catch (Exception e) {
+					Log<WirelessAccessPoint>.Error (e.Message);
+					Log<WirelessAccessPoint>.Debug (e.StackTrace);
+					return (byte) 0;
+				}
 			}
 		}
 		

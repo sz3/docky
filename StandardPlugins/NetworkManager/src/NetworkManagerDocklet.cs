@@ -24,7 +24,7 @@ namespace NetworkManagerDocklet
 			HoverText = "Network Manager";
 			Icon = SetDockletIcon ();
 			
-			GLib.Timeout.Add (30 * 1000, delegate {
+			GLib.Timeout.Add (10 * 1000, delegate {
 				ReDraw ();
 				return true;
 			});

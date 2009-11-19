@@ -13,23 +13,26 @@ namespace NetworkManagerDocklet
 		
 		public DeviceManager() : base ("org.freedesktop.NetworkManager", "/org/freedesktop/NetworkManager")
 		{
-			NetworkDevices = new List<NetworkDevice> ();
-			
-			foreach (ObjectPath objPath in BusObject.GetDevices ())
-			{
-				NetworkDevice device = new NetworkDevice (objPath.ToString ());
-				if (device.DType == DeviceType.Wired)
-					device = new WiredDevice (device.ObjectPath.ToString ());
-				else if (device.DType == DeviceType.Wireless)
-					device = new WirelessDevice (device.ObjectPath.ToString ());
-				else
-					continue;
-				device.StateChanged += OnStateChanged;
-				NetworkDevices.Add (device);
-			}
 		}
 		
-		public List<NetworkDevice> NetworkDevices { get; private set; }
+		public List<NetworkDevice> NetworkDevices {
+			get {
+				List<NetworkDevice> list = new List<NetworkDevice> ();
+				
+				foreach (ObjectPath objPath in BusObject.GetDevices ()) {
+					NetworkDevice device = new NetworkDevice (objPath.ToString ());
+					if (device.DType == DeviceType.Wired)
+						device = new WiredDevice (device.ObjectPath.ToString ()); else if (device.DType == DeviceType.Wireless)
+						device = new WirelessDevice (device.ObjectPath.ToString ());
+					else
+						continue;
+					device.StateChanged += OnStateChanged;
+					list.Add (device);
+				}
+				
+				return list;
+			}
+		}
 		
 		void OnStateChanged (object o, DeviceStateChangedArgs args)
 		{
