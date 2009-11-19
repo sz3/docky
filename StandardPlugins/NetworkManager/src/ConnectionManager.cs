@@ -47,20 +47,7 @@ namespace NetworkManagerDocklet
 		public IEnumerable<NetworkConnection> AllConnections {
 			get { return UserConnections.Union (SystemConnections); }
 		}
-		
-		void PrintConnections ()
-		{
-			Console.WriteLine ("UserConnections:");
-			Console.WriteLine ("Total wireless connections {0}", this.UserConnections.OfType<WirelessConnection> ().Count ());
-			Console.WriteLine ("Total wired connections {0}", this.UserConnections.OfType<WiredConnection> ().Count ());
-			foreach (NetworkConnection con in UserConnections.ToArray ())
-				Console.WriteLine (" --> " + con.ConnectionName);
-			Console.WriteLine ("System:");
-			Console.WriteLine ("Total wireless connections {0}", this.SystemConnections.OfType<WirelessConnection> ().Count ());
-			Console.WriteLine ("Total wired connections {0}", this.SystemConnections.OfType<WiredConnection> ().Count ());
-			foreach (NetworkConnection con in SystemConnections.ToArray ())
-				Console.WriteLine (" --> " + con.ConnectionName);
-		}
+	
 		
 		//Commented because of some oddity in NetworkManager that emits these signals multiple times with erroneous data.
 		/*
@@ -88,8 +75,6 @@ namespace NetworkManagerDocklet
 						connection = new WiredConnection (SystemBus, con, ConnectionOwner.System);
 					else 
 						continue;
-					
-					Console.WriteLine ("adding {0} as {1}", connection.ConnectionName, connection.GetType ().ToString ());
 					//connection.ConnectionRemoved += OnNetworkConnectionRemoved;
 					SystemConnections.Add (connection);
 				}
@@ -107,7 +92,6 @@ namespace NetworkManagerDocklet
 					else 
 						continue;
 					
-					Console.WriteLine ("adding {0} as {1}", connection.ConnectionName, connection.GetType ().ToString ());
 					//connection.ConnectionRemoved += OnNetworkConnectionRemoved;
 					UserConnections.Add (connection);
 				}

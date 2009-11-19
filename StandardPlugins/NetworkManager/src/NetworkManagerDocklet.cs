@@ -37,6 +37,7 @@ namespace NetworkManagerDocklet
 		
 		void OnDeviceStateChanged (object sender, DeviceStateChangedArgs args)
 		{
+			Console.WriteLine (args.NewState);
 			ReDraw ();
 		}
 		
@@ -53,17 +54,21 @@ namespace NetworkManagerDocklet
 		string SetDockletIcon ()
 		{
 			string icon = "nm-device-wired";
-			if (NM.ActiveConnections.Any ()) {
-				if (NM.ActiveConnections.OfType<WirelessConnection> ().Any ()) {
-					string ssid = NM.ActiveConnections.OfType<WirelessConnection> ().First ().SSID;
-					byte strength = NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().First ().APBySSID (ssid).Strength;
-					icon = APIconFromStrength (strength);
+			try {
+				if (NM.ActiveConnections.Any ()) {
+					if (NM.ActiveConnections.OfType<WirelessConnection> ().Any ()) {
+						string ssid = NM.ActiveConnections.OfType<WirelessConnection> ().First ().SSID;
+						byte strength = NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().First ().APBySSID (ssid).Strength;
+						icon = APIconFromStrength (strength);
+					}
+					if (NM.DevManager.NetworkDevices.Any (dev => dev.State == DeviceState.Configuring ||
+					    dev.State == DeviceState.IPConfiguring || dev.State == DeviceState.Preparing))
+						icon = "nm-stage01-connecting01";
+				} else {
+					icon = "nm-no-connection";
 				}
-				if (NM.DevManager.NetworkDevices.Any (dev => dev.State == DeviceState.Configuring ||
-				    dev.State == DeviceState.IPConfiguring || dev.State == DeviceState.Preparing))
-					icon = "nm-stage01-connecting01";
-			} else {
-				icon = "nm-no-connection";
+			} catch {
+				icon = APIconFromStrength ((byte) 100);
 			}
 			return icon;
 		}
@@ -82,10 +87,6 @@ namespace NetworkManagerDocklet
 			return icon;
 		}
 
-		#region IRightClickable implementation 
-		
-		public event EventHandler RemoveClicked;
-		
 		public override MenuList GetMenuItems ()
 		{
 			MenuList list = base.GetMenuItems ();
@@ -156,7 +157,5 @@ namespace NetworkManagerDocklet
 			
 			return item;
 		}
-		
-		#endregion 
 	}
 }

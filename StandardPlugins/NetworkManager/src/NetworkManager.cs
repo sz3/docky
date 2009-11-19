@@ -28,11 +28,7 @@ namespace NetworkManagerDocklet
 		void OnDevStateChanged(object o, DeviceStateChangedArgs args)
 		{
 			NetworkDevice dev = o as NetworkDevice;
-			if (args.NewState == DeviceState.Active) {
-				Console.WriteLine ("A device has been activated! {0}", dev.ObjectPath);
-				Console.WriteLine ("{0}, {1}, {2}", dev.IP4Address.ToString (), dev.Gateway.ToString (), dev.PrimaryDNS.ToString ());				
-			}
-			Console.WriteLine ("Active Connections: {0}", ActiveConnections.Count ());
+
 			if (DeviceStateChanged != null)
 				DeviceStateChanged (dev, args);
 		}
@@ -92,8 +88,6 @@ namespace NetworkManagerDocklet
 			else
 				serviceName = "org.freedesktop.NetworkManagerUserSettings";
 			string conStr = con.ObjectPath;
-			
-			Console.WriteLine ("{0}\n{1}\n{2}\n{3}", serviceName, conStr, dev.ObjectPath, specObj);
 			
 			DevManager.BusObject.ActivateConnection(serviceName, new ObjectPath (conStr), new ObjectPath (dev.ObjectPath), new ObjectPath (specObj));
 		}

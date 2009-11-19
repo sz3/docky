@@ -24,10 +24,6 @@ namespace NetworkManagerDocklet
 				WirelessAccessPoint ap = new WirelessAccessPoint (APObjPath.ToString ());
 				AddApToDict (ap);
 			}
-			
-			DumpAPs ();
-			
-			//GLib.Timeout.Add (5000, delegate { DumpAPs (); return true; });
 		}
 		
 		public DBusObject<IWirelessDevice> WirelessProperties { get; private set; }
@@ -73,7 +69,6 @@ namespace NetworkManagerDocklet
 				{
 					if (VisibleAccessPoints[key].Count == 0) {
 						VisibleAccessPoints.Remove (key);
-						Console.WriteLine ("key {0} removed.", key);
 					}
 				}
 			}
@@ -85,18 +80,6 @@ namespace NetworkManagerDocklet
 			if (VisibleAccessPoints.ContainsKey (ssid))
 				return VisibleAccessPoints[ssid].First ();
 			return null;
-		}
-		
-		public void DumpAPs ()
-		{
-			lock (VisibleAccessPoints) {
-				foreach (string key in VisibleAccessPoints.Keys)
-				{
-					Console.WriteLine ("{0}", key);
-					foreach (WirelessAccessPoint ap in VisibleAccessPoints[key])
-						Console.WriteLine (" --> {0} ({1})", ap.ObjectPath, ap.Strength);
-				}
-			}
 		}
 
 		public WirelessAccessPoint ActiveAccessPoint {
