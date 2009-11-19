@@ -493,6 +493,7 @@ namespace Docky.Interface
 			autohide_box.Active = (int) Autohide;
 			fade_on_hide_check.Sensitive = (int) Autohide > 0;
 			
+			panel_mode_button.Active = PanelMode;
 			zoom_checkbutton.Active = ZoomEnabled;
 			zoom_scale.Value = ZoomPercent;
 			zoom_scale.Sensitive = ZoomEnabled;
