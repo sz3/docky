@@ -242,6 +242,8 @@ namespace GMail
 							message.SendDate = DateTime.Parse (item.SelectSingleNode ("atom:modified", nsmgr).InnerText);
 						} catch (Exception) {}
 						message.Link = item.SelectSingleNode ("atom:link", nsmgr).Attributes ["href"].InnerText;
+						if (message.Topic.Length == 0)
+							message.Topic = Catalog.GetString ("(no subject)");
 						
 						tmp.Add (message);
 					}
