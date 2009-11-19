@@ -181,7 +181,7 @@ namespace Docky.Windowing
 			if (!window_to_desktop_files.ContainsKey (window))
 				return new[] { window };
 			
-			string id = window_to_desktop_files[window].DefaultIfEmpty ("").FirstOrDefault ();
+			string id = window_to_desktop_files [window].DefaultIfEmpty ("").FirstOrDefault ();
 			
 			return window_to_desktop_files
 				.Where (kvp => kvp.Value.Contains (id))
@@ -197,6 +197,7 @@ namespace Docky.Windowing
 				SetupWindow (window);
 			
 			string file = window_to_desktop_files[window].FirstOrDefault ();
+
 			if (file == null)
 				file = "";
 			file = file.EndsWith (".desktop") ? file : null;
@@ -233,29 +234,27 @@ namespace Docky.Windowing
 			}
 			
 			bool matched = false;
-	
-			List<string> command_line = new List<string> ();
+			int currentPid = 0;
 			
 			// get ppid and parents
 			IEnumerable<int> pids = PIDAndParents (pid);
-			// and save their possible cmdlines to a list
-			foreach (int p in pids)
-				command_line.AddRange (CommandLineForPid (p));
-
+			// first grab the initial set of possible command lines for the pid
+			string[] command_line = CommandLineForPid (pids.ElementAt (currentPid)).Where (cmd => !string.IsNullOrEmpty (cmd)).ToArray ();
+			
 			// if we have a classname that matches a desktopid we have a winner
 			if (window.ClassGroup != null) {
 				if (WindowIsOpenOffice (window)) {
 					string title = window.Name;
 					if (title.Contains ("Writer"))
-						command_line [0] = "ooffice-writer";
+						command_line[0] = "ooffice-writer";
 					else if (title.Contains ("Draw"))
-						command_line [0] = "ooffice-draw";
+						command_line[0] = "ooffice-draw";
 					else if (title.Contains ("Impress"))
-						command_line [0] = "ooffice-impress";
+						command_line[0] = "ooffice-impress";
 					else if (title.Contains ("Calc"))
-						command_line [0] = "ooffice-calc";
+						command_line[0] = "ooffice-calc";
 					else if (title.Contains ("Math"))
-						command_line [0] = "ooffice-math";
+						command_line[0] = "ooffice-math";
 					
 				} else {
 					string class_name = window.ClassGroup.ResClass.Replace (".", "");
@@ -275,8 +274,11 @@ namespace Docky.Windowing
 				}
 			}
 			
-			if (command_line.Count () != 0) {
-				foreach (string cmd in command_line) {			
+			do {
+				if (command_line == null)
+					continue;
+				command_line = CommandLineForPid (pids.ElementAt (currentPid)).Where (cmd => !string.IsNullOrEmpty (cmd)).ToArray ();
+				foreach (string cmd in command_line) {
 					if (exec_to_desktop_files.ContainsKey (cmd)) {
 						foreach (string s in exec_to_desktop_files[cmd]) {
 							if (string.IsNullOrEmpty (s))
@@ -286,10 +288,14 @@ namespace Docky.Windowing
 						}
 					}
 				}
-			}
+				// if we found a match, bail.
+				if (matched)
+					yield break;
+				currentPid++;
+			} while (currentPid < pids.Count ());
 			
-			if (!matched)
-				yield return window.Pid.ToString ();
+			// if no match was found, just return the pid
+			yield return window.Pid.ToString ();
 		}
 		
 		IEnumerable<int> PIDAndParents (int pid)
