@@ -31,8 +31,9 @@ namespace Clock
 {
 	public class CalendarPainter : AbstractDockPainter
 	{
-		const int LineHeight = 16;
 		const double lowlight = .35;
+		
+		int LineHeight { get; set; }
 		
 		DateTime paint_time;
 		
@@ -83,6 +84,8 @@ namespace Clock
 			
 			surface.Clear ();
 			
+			LineHeight = Math.Max (12, Allocation.Height / 4);
+			
 			paint_time = DateTime.Now;
 			int height = Allocation.Height / LineHeight;
 			RenderHeader (surface);
@@ -95,7 +98,7 @@ namespace Clock
 		void RenderHeader (DockySurface surface)
 		{
 			Context cr = surface.Context;
-			int centerLine = LineHeight / 2 + ((Allocation.Height % LineHeight) / 2);
+			int centerLine = LineHeight + ((Allocation.Height % LineHeight) / 2);
 			int offsetSize = Allocation.Width / 9;
 			
 			DateTime day = CalendarStartDate;
@@ -106,7 +109,7 @@ namespace Clock
 			layout.FontDescription.Weight = Pango.Weight.Bold;
 			layout.Ellipsize = Pango.EllipsizeMode.None;
 			layout.Width = Pango.Units.FromPixels (offsetSize);
-			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (10);
+			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (0.625 * LineHeight));
 			
 			cr.Color = new Cairo.Color (1, 1, 1, .5);
 			for (int i = 1; i < 8; i++) {
@@ -127,7 +130,7 @@ namespace Clock
 			Context cr = surface.Context;
 			DateTime lineStart = CalendarStartDate.AddDays ((line - 1) * 7);
 			int offsetSize = Allocation.Width / 9;
-			int centerLine = LineHeight / 2 + LineHeight * line + ((Allocation.Height % LineHeight) / 2);
+			int centerLine = LineHeight + LineHeight * line + ((Allocation.Height % LineHeight) / 2);
 			int dayOffset = 0;
 			
 			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
@@ -136,7 +139,7 @@ namespace Clock
 			layout.FontDescription = new Gtk.Style().FontDescription;
 			layout.Ellipsize = Pango.EllipsizeMode.None;
 			layout.Width = Pango.Units.FromPixels (offsetSize);
-			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (10);
+			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (0.625 * LineHeight));
 			
 			for (int i = 0; i < 9; i++) {
 				layout.FontDescription.Weight = Pango.Weight.Bold;
