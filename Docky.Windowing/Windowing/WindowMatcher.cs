@@ -335,10 +335,10 @@ namespace Docky.Windowing
 					cmdline = reader.ReadLine ();
 					reader.Close ();
 				}
-			} catch { return null; }
+			} catch { return new string[0]; }
 			
 			if (cmdline == null)
-				return null;
+				return new string[0];
 			
 			cmdline = cmdline.ToLower ();
 			
