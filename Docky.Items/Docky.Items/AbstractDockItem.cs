@@ -483,6 +483,23 @@ namespace Docky.Items
 			return new Docky.Menus.MenuList ();
 		}
 		
+		protected Gtk.Style Style { get; private set; }
+		
+		public void SetStyle (Gtk.Style style)
+		{
+			Style = style;
+			try {
+				OnStyleSet (style);
+			} catch (Exception e) {
+				Log<AbstractDockPainter>.Error (e.Message);
+				Log<AbstractDockPainter>.Debug (e.StackTrace);
+			}
+		}
+		
+		protected virtual void OnStyleSet (Gtk.Style style)
+		{
+		}
+		
 		public void SetScreenRegion (Gdk.Screen screen, Gdk.Rectangle region)
 		{
 			try {

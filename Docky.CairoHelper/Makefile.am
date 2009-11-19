@@ -8,6 +8,7 @@ PKG_CONFIG_FILES = docky.cairohelper.pc
 
 FILES = \
 	Docky.CairoHelper/DockySurface.cs \
+	Docky.CairoHelper/Util.cs \
 	Cairo/Context_Extensions.cs \
 	Cairo/Color_Extensions.cs
 

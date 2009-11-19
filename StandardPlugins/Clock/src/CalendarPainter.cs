@@ -164,8 +164,7 @@ namespace Clock
 					
 					if (day.Date == DateTime.Today)
 					{
-						                                                               // FIXME
-						Gdk.Color color = Style.Backgrounds [(int) StateType.Selected];//.SetMinimumValue (100);
+						Gdk.Color color = Style.Backgrounds [(int) StateType.Selected].SetMinimumValue (100);
 						cr.Color = new Cairo.Color ((double) color.Red / ushort.MaxValue,
 													(double) color.Green / ushort.MaxValue,
 													(double) color.Blue / ushort.MaxValue,

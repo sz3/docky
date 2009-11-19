@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Docky.CairoHelper\DockySurface.cs" />
+    <Compile Include="Docky.CairoHelper\Util.cs" />
     <Compile Include="Cairo\Context_Extensions.cs" />
     <Compile Include="Cairo\Color_Extensions.cs" />
   </ItemGroup>

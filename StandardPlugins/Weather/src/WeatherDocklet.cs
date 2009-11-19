@@ -221,27 +221,29 @@ namespace WeatherDocklet
 				
 				RenderIconOntoContext (cr, WeatherController.Weather.Image, 0, 0, size, busy ? 0.5 : 1);
 				
-				Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-				layout.FontDescription = new Gtk.Style().FontDescription;
-				layout.FontDescription.Weight = Pango.Weight.Bold;
-				layout.Ellipsize = Pango.EllipsizeMode.None;
-				
-				Pango.Rectangle inkRect, logicalRect;
-				
-				layout.Width = Pango.Units.FromPixels (size / 2);
-				layout.SetText (WeatherController.Weather.Temp + WeatherUnits.TempUnit);
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (size / 3.5));
+				if (size >= 32) {
+					Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
+					layout.FontDescription = new Gtk.Style().FontDescription;
+					layout.FontDescription.Weight = Pango.Weight.Bold;
+					layout.Ellipsize = Pango.EllipsizeMode.None;
+					
+					Pango.Rectangle inkRect, logicalRect;
+					
+					layout.Width = Pango.Units.FromPixels (size / 2);
+					layout.SetText (WeatherController.Weather.Temp + WeatherUnits.TempUnit);
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (size / 3.5));
 
-				layout.GetPixelExtents (out inkRect, out logicalRect);
-				cr.MoveTo ((size - inkRect.Width) / 2, size - logicalRect.Height);
+					layout.GetPixelExtents (out inkRect, out logicalRect);
+					cr.MoveTo ((size - inkRect.Width) / 2, size - logicalRect.Height);
 
-				Pango.CairoHelper.LayoutPath (cr, layout);
-				cr.LineWidth = 4;
-				cr.Color = new Cairo.Color (0, 0, 0, busy ? 0.25 : 0.5);
-				cr.StrokePreserve ();
+					Pango.CairoHelper.LayoutPath (cr, layout);
+					cr.LineWidth = 4;
+					cr.Color = new Cairo.Color (0, 0, 0, busy ? 0.25 : 0.5);
+					cr.StrokePreserve ();
 
-				cr.Color = new Cairo.Color (1, 1, 1, busy ? 0.4 : 0.8);
-				cr.Fill ();
+					cr.Color = new Cairo.Color (1, 1, 1, busy ? 0.4 : 0.8);
+					cr.Fill ();
+				}
 				
 				if (busy)
 					goto case WeatherDockletStatus.Initializing;
@@ -257,14 +259,14 @@ namespace WeatherDocklet
 				cr.LineCap = LineCap.Round;
 				cr.Translate (size / 2, size / 2);
 				
-				// FIXME
-				//Gtk.Style style = Docky.Interface.DockWindow.Window.Style;
-				//Gdk.Color color = style.Backgrounds [(int) StateType.Selected].SetMinimumValue (100);
+				Gdk.Color color = Style.Backgrounds [(int) Gtk.StateType.Selected].SetMinimumValue (100);
 				
 				for (int i = 0; i < armsPerGroup * groups; i++) {
 					int position = 1 + ((i + BusyCounter) % armsPerGroup);
-					//cr.Color = color.ConvertToCairo (1 - Math.Log (position) / baseLog);
-					cr.Color = new Cairo.Color (1, 1, 1, 1 - Math.Log (position) / baseLog);
+					cr.Color = new Cairo.Color ((double) color.Red / ushort.MaxValue,
+												(double) color.Green / ushort.MaxValue,
+												(double) color.Blue / ushort.MaxValue,
+												1 - Math.Log (position) / baseLog);
 					cr.MoveTo (0, size / 8);
 					cr.LineTo (0, size / 4);
 					cr.Rotate (-2 * Math.PI / (armsPerGroup * groups));
