@@ -56,6 +56,7 @@ namespace Docky.Interface
 		AddinTreeView inactive_view, active_view;
 		
 		public event EventHandler PositionChanged;
+		public event EventHandler PanelModeChanged;
 		public event EventHandler IconSizeChanged;
 		public event EventHandler AutohideChanged;
 		public event EventHandler FadeOnHideChanged;
@@ -87,6 +88,22 @@ namespace Docky.Interface
 				hide_type = value;
 				SetOption<string> ("Autohide", hide_type.ToString ());
 				OnAutohideChanged ();
+			}
+		}
+		
+		bool? panel_mode;
+		public bool PanelMode {
+			get {
+				if (!panel_mode.HasValue)
+					panel_mode = GetOption<bool> ("PanelMode", false);
+				return panel_mode.Value;
+			}
+			set {
+				if (panel_mode == value)
+					return;
+				panel_mode = value;
+				SetOption<bool> ("PanelMode", panel_mode.Value);
+				OnPanelModeChanged ();
 			}
 		}
 		
@@ -600,6 +617,12 @@ namespace Docky.Interface
 			if (IndicatorSettingChanged != null)
 				IndicatorSettingChanged (this, EventArgs.Empty);
 		}
+		
+		void OnPanelModeChanged ()
+		{
+			if (PanelModeChanged != null)
+				PanelModeChanged (this, EventArgs.Empty);
+		}
 				
 		void OnZoomEnabledChanged ()
 		{
@@ -624,6 +647,12 @@ namespace Docky.Interface
 			if (window_manager_check.Active)
 				DefaultProvider.SetWindowManager ();
 			WindowManager = window_manager_check.Active = DefaultProvider.IsWindowManager;
+		}
+		
+		protected virtual void OnPanelModeButtonToggled (object sender, System.EventArgs e)
+		{
+			PanelMode = panel_mode_button.Active;
+			panel_mode_button.Active = PanelMode;
 		}
 		
 		void OnActiveViewAddinOrderChanged (object sender, AddinOrderChangedArgs e)

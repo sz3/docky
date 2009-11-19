@@ -1574,8 +1574,20 @@ namespace Docky.Interface
 			Gdk.Rectangle dockArea, cursorArea;
 			GetDockAreaOnSurface (surface, out dockArea, out cursorArea);
 			
-			DrawDockBackground (surface, dockArea);
-			
+			if (Preferences.PanelMode) {
+				Gdk.Rectangle panelArea = dockArea;
+				if (VerticalDock) {
+					panelArea.Y = -100;
+					panelArea.Height = Height + 200;
+				} else {
+					panelArea.X = -100;
+					panelArea.Width = Width + 200;
+				}
+				DrawDockBackground (surface, panelArea);
+			} else {
+				DrawDockBackground (surface, dockArea);
+			}
+				
 			if (Painter == null) {
 			
 				if (icon_buffer == null || icon_buffer.Width != surface.Width || icon_buffer.Height != surface.Height) {

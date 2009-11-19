@@ -48,6 +48,8 @@ namespace Docky.Interface
 		
 		AutohideType Autohide { get; set; }
 		
+		bool PanelMode { get; set; }
+		
 		bool FadeOnHide { get; set; }
 		
 		double FadeOpacity { get; set; }
