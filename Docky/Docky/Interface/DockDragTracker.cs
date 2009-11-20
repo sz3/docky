@@ -428,10 +428,20 @@ namespace Docky.Interface
 		void HandleHoveredItemChanged (object sender, HoveredItemChangedArgs e)
 		{
 			if (InternalDragActive && DragItemsCanInteract (drag_item, Owner.HoveredItem)) {
+				int destPos = Owner.HoveredItem.Position;
 				
-				int tmp = drag_item.Position;
-				drag_item.Position = Owner.HoveredItem.Position;
-				Owner.HoveredItem.Position = tmp;
+				// drag right
+				if (drag_item.Position < destPos) {
+					foreach (AbstractDockItem adi in Owner.Items
+										.Where (i => i.Position > drag_item.Position && i.Position <= destPos))
+						adi.Position--;
+				// drag left
+				} else if (drag_item.Position > destPos) {
+					foreach (AbstractDockItem adi in Owner.Items
+										.Where (i => i.Position < drag_item.Position && i.Position >= destPos))
+						adi.Position++;
+				}
+				drag_item.Position = destPos;
 				
 				Owner.UpdateCollectionBuffer ();
 				Owner.Preferences.SyncPreferences ();
