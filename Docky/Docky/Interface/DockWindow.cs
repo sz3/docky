@@ -821,6 +821,13 @@ namespace Docky.Interface
 		
 		#region Input Handling
 		
+		protected override bool OnKeyPressEvent (EventKey evnt)
+		{
+			if (evnt.Key == Gdk.Key.Escape)
+				HidePainter ();
+			return base.OnKeyPressEvent (evnt);
+		}
+		
 		protected override bool OnMotionNotifyEvent (EventMotion evnt)
 		{
 			if (!ConfigurationMode)
@@ -1042,6 +1049,7 @@ namespace Docky.Interface
 			Painter.SetStyle (Style);
 			
 			Painter.Shown ();
+			Keyboard.Grab (GdkWindow, true, Gtk.Global.CurrentEventTime);
 		}
 		
 		void HidePainter ()
@@ -1057,6 +1065,7 @@ namespace Docky.Interface
 			
 			Painter.Hidden ();
 			Painter = null;
+			Keyboard.Ungrab (Gtk.Global.CurrentEventTime);
 			
 			Reconfigure ();
 			SetTooltipVisibility ();
