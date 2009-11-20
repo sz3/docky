@@ -238,24 +238,23 @@ namespace Docky.Windowing
 			
 			// get ppid and parents
 			IEnumerable<int> pids = PIDAndParents (pid);
-			// first grab the initial set of possible command lines for the pid
-			string[] command_line = CommandLineForPid (pids.ElementAt (currentPid)).Where (cmd => !string.IsNullOrEmpty (cmd)).ToArray ();
+			// this list holds a list of the command line parts from left (0) to right (n)
+			List<string> command_line = new List<string> ();
 			
 			// if we have a classname that matches a desktopid we have a winner
 			if (window.ClassGroup != null) {
 				if (WindowIsOpenOffice (window)) {
 					string title = window.Name;
 					if (title.Contains ("Writer"))
-						command_line[0] = "ooffice-writer";
+						command_line.Add ("ooffice-writer");
 					else if (title.Contains ("Draw"))
-						command_line[0] = "ooffice-draw";
+						command_line.Add ("ooffice-draw");
 					else if (title.Contains ("Impress"))
-						command_line[0] = "ooffice-impress";
+						command_line.Add ("ooffice-impress");
 					else if (title.Contains ("Calc"))
-						command_line[0] = "ooffice-calc";
+						command_line.Add ("ooffice-calc");
 					else if (title.Contains ("Math"))
-						command_line[0] = "ooffice-math";
-					
+						command_line.Add ("ooffice-math");
 				} else {
 					string class_name = window.ClassGroup.ResClass.Replace (".", "");
 					IEnumerable<string> matches = Enumerable.Empty<string> ();
@@ -275,9 +274,9 @@ namespace Docky.Windowing
 			}
 			
 			do {
-				if (command_line == null)
+				command_line.AddRange (CommandLineForPid (pids.ElementAt (currentPid)).Where (cmd => !string.IsNullOrEmpty (cmd)));
+				if (command_line.Count () == 0)
 					continue;
-				command_line = CommandLineForPid (pids.ElementAt (currentPid)).Where (cmd => !string.IsNullOrEmpty (cmd)).ToArray ();
 				foreach (string cmd in command_line) {
 					if (exec_to_desktop_files.ContainsKey (cmd)) {
 						foreach (string s in exec_to_desktop_files[cmd]) {
@@ -291,6 +290,7 @@ namespace Docky.Windowing
 				// if we found a match, bail.
 				if (matched)
 					yield break;
+				command_line.Clear ();
 				currentPid++;
 			} while (currentPid < pids.Count ());
 			
