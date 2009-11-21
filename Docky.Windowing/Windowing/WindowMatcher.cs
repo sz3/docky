@@ -274,7 +274,7 @@ namespace Docky.Windowing
 			}
 			
 			do {
-				command_line.AddRange (CommandLineForPid (pids.ElementAt (currentPid)).Where (cmd => !string.IsNullOrEmpty (cmd)));
+				command_line.AddRange (CommandLineForPid (pids.ElementAt (currentPid++)).Where (cmd => !string.IsNullOrEmpty (cmd)));
 				if (command_line.Count () == 0)
 					continue;
 				foreach (string cmd in command_line) {
@@ -291,7 +291,6 @@ namespace Docky.Windowing
 				if (matched)
 					yield break;
 				command_line.Clear ();
-				currentPid++;
 			} while (currentPid < pids.Count ());
 			
 			// if no match was found, just return the pid
