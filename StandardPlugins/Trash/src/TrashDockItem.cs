@@ -34,7 +34,6 @@ namespace Trash
 {
 	public class TrashDockItem : FileDockItem
 	{
-		Client client = new Client ();
 		const string OneInTrash = "1 item in Trash";
 		const string ManyInTrash = "{0} items in Trash";
 		
