@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith, Chris Szikszoy
+//  Copyright (C) 2009 Jason Smith, Chris Szikszoy, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -23,6 +23,7 @@ using System.Text;
 
 using Mono.Unix;
 
+using GConf;
 using GLib;
 
 using Docky.Items;
@@ -31,10 +32,9 @@ using Docky.Services;
 
 namespace Trash
 {
-
-
 	public class TrashDockItem : FileDockItem
 	{
+		Client client = new Client ();
 		const string OneInTrash = "1 item in Trash";
 		const string ManyInTrash = "{0} items in Trash";
 		
@@ -63,7 +63,6 @@ namespace Trash
 
 		void HandleChanged (object o, ChangedArgs args)
 		{			
-			
 			Gtk.Application.Invoke (delegate {
 				Update ();
 			});
@@ -181,39 +180,53 @@ namespace Trash
 		
 		void EmptyTrash ()
 		{
-			string message = Catalog.GetString ("<big><b>Empty all of the items from the trash?</b></big>\n\n" + 
-			                                    "If you choose to empty the trash, all items in it\nwill be permanently lost. " + 
-			                                    "Please note that you\ncan also delete them separately.");
-			Gtk.MessageDialog md = new Gtk.MessageDialog (null, 
-												  Gtk.DialogFlags.Modal,
-												  Gtk.MessageType.Warning, 
-												  Gtk.ButtonsType.None,
-												  message);
-			md.Modal = false;
-			md.AddButton ("_Cancel", Gtk.ResponseType.Cancel);
-			md.AddButton ("Empty _Trash", Gtk.ResponseType.Ok);
-
-			md.Response += (o, args) => {
-				if (args.ResponseId != Gtk.ResponseType.Cancel ) {
-					// disable events for a minute
-					TrashMonitor.Changed -= HandleChanged;
-					
-					DockServices.System.RunOnMainThread (() => {
-						OwnedFile.Delete_Recurse ();
-					});
-					
-					// eneble events again
-					TrashMonitor.Changed += HandleChanged;
-
-					Gtk.Application.Invoke (delegate {
-						Update ();
-						OnPaintNeeded ();
-					});
-				}
-				md.Destroy ();
-			};
+			bool confirm = true;
 			
-			md.Show ();
+			try {
+				confirm = (bool) new Client ().Get ("/apps/nautilus/preferences/confirm_trash");
+			} catch {}
+			
+			if (confirm) {
+				string message = Catalog.GetString ("<big><b>Empty all of the items from the trash?</b></big>\n\n" + 
+													"If you choose to empty the trash, all items in it\nwill be permanently lost. " + 
+													"Please note that you\ncan also delete them separately.");
+				Gtk.MessageDialog md = new Gtk.MessageDialog (null, 
+													  Gtk.DialogFlags.Modal,
+													  Gtk.MessageType.Warning, 
+													  Gtk.ButtonsType.None,
+													  message);
+				md.Modal = false;
+				md.AddButton ("_Cancel", Gtk.ResponseType.Cancel);
+				md.AddButton ("Empty _Trash", Gtk.ResponseType.Ok);
+
+				md.Response += (o, args) => {
+					if (args.ResponseId != Gtk.ResponseType.Cancel)
+						PerformEmptyTrash ();
+					md.Destroy ();
+				};
+				
+				md.Show ();
+			} else {
+				PerformEmptyTrash ();
+			}
+		}
+		
+		void PerformEmptyTrash ()
+		{
+			// disable events for a minute
+			TrashMonitor.Changed -= HandleChanged;
+			
+			DockServices.System.RunOnMainThread (() => {
+				OwnedFile.Delete_Recurse ();
+			});
+			
+			// eneble events again
+			TrashMonitor.Changed += HandleChanged;
+
+			Gtk.Application.Invoke (delegate {
+				Update ();
+				OnPaintNeeded ();
+			});
 		}
 	}
 }

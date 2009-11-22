@@ -14,6 +14,7 @@ REFERENCES =  \
 	System \
 	System.Core \
 	Mono.Posix \
+	$(GCONF_SHARP_20_LIBS) \
 	$(GIO_SHARP_LIBS) \
 	$(DOCKY_ITEMS_LIBS) \
 	$(DOCKY_SERVICES_LIBS) \
