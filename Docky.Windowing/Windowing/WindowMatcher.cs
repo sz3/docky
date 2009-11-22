@@ -25,6 +25,8 @@ using System.Text.RegularExpressions;
 
 using Wnck;
 
+using Docky.Services;
+
 namespace Docky.Windowing
 {
 
@@ -114,12 +116,6 @@ namespace Docky.Windowing
 			}
 		}
 		
-		static IEnumerable<string> SuffixStrings {
-			get {
-				yield return "-bin";
-			}
-		}
-		
 		Dictionary<Wnck.Window, List<string>> window_to_desktop_files;
 		Dictionary<string, List<string>> exec_to_desktop_files;
 		List<Regex> prefix_filters;
@@ -136,8 +132,33 @@ namespace Docky.Windowing
 				SetupWindow (w);
 			}
 			
+			foreach (GLib.File dir in DesktopFileDirectories.Select (d => GLib.FileFactory.NewForPath (d))) {
+				MonitorDesktopFileDirs (dir);
+			}
+
 			screen.WindowOpened += WnckScreenDefaultWindowOpened;
 			screen.WindowClosed += WnckScreenDefaultWindowClosed;
+		}
+		
+		void MonitorDesktopFileDirs (GLib.File dir)
+		{
+			// build a list of all the subdirectories
+			List<GLib.File> dirs = new List<GLib.File> () {dir};
+			dirs = dirs.Union (dir.SubDirs ()).ToList ();	
+			
+			foreach (GLib.File d in dirs) {
+				GLib.FileMonitor mon = d.Monitor (GLib.FileMonitorFlags.None, null);
+				mon.RateLimit = 1000;
+				mon.Changed += delegate(object o, GLib.ChangedArgs args) {
+					// bug in GIO#, calling args.File crashes
+					GLib.File file = GLib.FileAdapter.GetObject ((GLib.Object) args.Args[0]);
+					// if a new directory was created, make sure we watch that dir as well.
+					if (file.QueryFileType (GLib.FileQueryInfoFlags.NofollowSymlinks, null) == GLib.FileType.Directory)
+						MonitorDesktopFileDirs (file);
+					// reload our dictionary of exec strings
+					exec_to_desktop_files = BuildExecStrings ();
+				};
+			}
 		}
 
 		#region Window Setup
@@ -278,7 +299,8 @@ namespace Docky.Windowing
 			do {
 				command_line.AddRange (CommandLineForPid (pids.ElementAt (currentPid++))
 					.Select (cmd => cmd.Replace (@"\", @"\\"))
-					.Where (cmd => !string.IsNullOrEmpty (cmd)));
+					.Where (cmd => !string.IsNullOrEmpty (cmd))
+					.Distinct ());
 				if (command_line.Count () == 0)
 					continue;
 				foreach (string cmd in command_line) {
@@ -349,9 +371,7 @@ namespace Docky.Windowing
 				yield break;
 			
 			cmdline = cmdline.ToLower ();
-			
-			//Console.WriteLine ("cmdline: {0}", cmdline);
-			
+						
 			string [] result = cmdline.Split (Convert.ToChar (0x0));
 			
 			// these are sanitized results
@@ -359,6 +379,8 @@ namespace Docky.Windowing
 				.Select (s => s.Split (new []{'/', '\\'}).Last ())
 				.Where (s => !prefix_filters.Any (f => f.IsMatch (s))))
 				yield return sanitizedCmd;
+			
+			yield return cmdline.Split (new [] {".exe"}, StringSplitOptions.None)[0];
 			
 			// return the entire cmdline last as a last ditch effort to find a match
 			yield return cmdline;
