@@ -255,6 +255,8 @@ namespace Docky.Windowing
 						command_line.Add ("ooffice-calc");
 					else if (title.Contains ("Math"))
 						command_line.Add ("ooffice-math");
+				} else if (window.ClassGroup.ResClass == "Wine") {
+					// we can match Wine apps normally so don't do anything here
 				} else {
 					string class_name = window.ClassGroup.ResClass.Replace (".", "");
 					IEnumerable<string> matches = Enumerable.Empty<string> ();
@@ -272,9 +274,11 @@ namespace Docky.Windowing
 					}
 				}
 			}
-			
+	
 			do {
-				command_line.AddRange (CommandLineForPid (pids.ElementAt (currentPid++)).Where (cmd => !string.IsNullOrEmpty (cmd)));
+				command_line.AddRange (CommandLineForPid (pids.ElementAt (currentPid++))
+					.Select (cmd => cmd.Replace (@"\", @"\\"))
+					.Where (cmd => !string.IsNullOrEmpty (cmd)));
 				if (command_line.Count () == 0)
 					continue;
 				foreach (string cmd in command_line) {
@@ -290,7 +294,6 @@ namespace Docky.Windowing
 				// if we found a match, bail.
 				if (matched)
 					yield break;
-				command_line.Clear ();
 			} while (currentPid < pids.Count ());
 			
 			// if no match was found, just return the pid
@@ -330,7 +333,7 @@ namespace Docky.Windowing
 			} while (pid != 1);
 		}
 		
-		string [] CommandLineForPid (int pid)
+		IEnumerable<string> CommandLineForPid (int pid)
 		{
 			string cmdline;
 
@@ -340,19 +343,25 @@ namespace Docky.Windowing
 					cmdline = reader.ReadLine ();
 					reader.Close ();
 				}
-			} catch { return new string[0]; }
+			} catch { yield break; }
 			
 			if (cmdline == null)
-				return new string[0];
+				yield break;
 			
 			cmdline = cmdline.ToLower ();
 			
+			//Console.WriteLine ("cmdline: {0}", cmdline);
+			
 			string [] result = cmdline.Split (Convert.ToChar (0x0));
 			
-			return result
+			// these are sanitized results
+			foreach (string sanitizedCmd in result
 				.Select (s => s.Split (new []{'/', '\\'}).Last ())
-				.Where (s => !prefix_filters.Any (f => f.IsMatch (s)))
-				.ToArray ();
+				.Where (s => !prefix_filters.Any (f => f.IsMatch (s))))
+				yield return sanitizedCmd;
+			
+			// return the entire cmdline last as a last ditch effort to find a match
+			yield return cmdline;
 		}
 		
 		Dictionary<string, List<string>> BuildExecStrings ()
@@ -372,6 +381,12 @@ namespace Docky.Windowing
 				
 				if (exec.StartsWith ("ooffice") && exec.Contains (' ')) {
 					vexec = "ooffice" + exec.Split (' ') [1];
+				// for wine apps
+				} else if (exec.StartsWith ("env WINEPREFIX=") && exec.Contains (" wine ")) {
+					int startIndex = exec.IndexOf ("wine \"") + 6; // length of 'wine \'
+					int length = exec.LastIndexOf ('"') - startIndex;
+					// CommandLineForPid already splits based on \\ and takes the last entry, so do the same here
+					vexec = exec.Substring (startIndex, length).Split (new [] {@"\\"}, StringSplitOptions.RemoveEmptyEntries).Last ().ToLower ();
 				} else {
 					string [] parts = exec.Split (' ');
 					
