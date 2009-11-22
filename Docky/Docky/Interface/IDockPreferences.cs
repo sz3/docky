@@ -35,6 +35,7 @@ namespace Docky.Interface
 		event EventHandler PositionChanged;
 		event EventHandler IconSizeChanged;
 		event EventHandler AutohideChanged;
+		event EventHandler PanelModeChanged;
 		event EventHandler FadeOnHideChanged;
 		event EventHandler FadeOpacityChanged;
 		event EventHandler ZoomEnabledChanged;

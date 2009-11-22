@@ -740,6 +740,7 @@ namespace Docky.Interface
 		void RegisterPreferencesEvents (IDockPreferences preferences)
 		{
 			preferences.AutohideChanged += PreferencesAutohideChanged;
+			preferences.PanelModeChanged += PreferencesPanelModeChanged;
 			preferences.IconSizeChanged += PreferencesIconSizeChanged;
 			preferences.PositionChanged += PreferencesPositionChanged;
 			preferences.ZoomEnabledChanged += PreferencesZoomEnabledChanged;
@@ -754,6 +755,7 @@ namespace Docky.Interface
 		void UnregisterPreferencesEvents (IDockPreferences preferences)
 		{
 			preferences.AutohideChanged -= PreferencesAutohideChanged;
+			preferences.PanelModeChanged -= PreferencesPanelModeChanged;
 			preferences.IconSizeChanged -= PreferencesIconSizeChanged;
 			preferences.PositionChanged -= PreferencesPositionChanged;
 			preferences.ZoomEnabledChanged -= PreferencesZoomEnabledChanged;
@@ -804,6 +806,11 @@ namespace Docky.Interface
 			
 			UpdateDockWidth ();
 			AnimatedDraw ();
+		}
+
+		void PreferencesPanelModeChanged (object sender, EventArgs e)
+		{
+			Reconfigure ();
 		}
 
 		void PreferencesAutohideChanged (object sender, EventArgs e)
