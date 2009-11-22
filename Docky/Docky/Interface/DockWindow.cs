@@ -153,6 +153,7 @@ namespace Docky.Interface
 		DockySurface main_buffer, background_buffer, icon_buffer, painter_buffer;
 		DockySurface normal_indicator_buffer, urgent_indicator_buffer;
 		AbstractDockItem hoveredItem;
+		AbstractDockItem lastClickedItem;
 		AbstractDockPainter painter;
 		AbstractDockItem painterOwner;
 		
@@ -885,6 +886,8 @@ namespace Docky.Interface
 					Menu.SetItems (list);
 					Menu.Show ();
 				}
+			} else if (HoveredItem != null) {
+				lastClickedItem = HoveredItem;
 			}
 			
 			return base.OnButtonPressEvent (evnt);
@@ -908,7 +911,7 @@ namespace Docky.Interface
 					HidePainter ();
 				else
 					Painter.ButtonReleased (x, y, evnt.State);
-			} else if (HoveredItem != null) {
+			} else if (HoveredItem != null && lastClickedItem == HoveredItem) {
 				double x, y;
 				Gdk.Rectangle region = DrawRegionForItem (HoveredItem);
 					
