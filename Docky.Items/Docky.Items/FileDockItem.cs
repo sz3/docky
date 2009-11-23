@@ -63,6 +63,8 @@ namespace Docky.Items
 		
 		protected FileDockItem (string uri)
 		{
+			IconUpdated += HandleIconUpdated;
+			
 			this.uri = uri;
 			OwnedFile = FileFactory.NewForUri (uri);
 			
@@ -91,9 +93,6 @@ namespace Docky.Items
 			
 			HoverText = OwnedFile.Basename;
 			
-			if (Icon.Contains ("inode-directory") || Icon.Contains ("folder"))
-				HueShift = prefs.Get<double> (hueRegex.Replace (OwnedFile.Path, "_"), Math.Abs (new Uri (uri).AbsolutePath.GetHashCode ()) % 360);
-			
 			OnPaintNeeded ();
 		}
 		
@@ -106,12 +105,17 @@ namespace Docky.Items
 		{
 			if (!Icon.Contains ("inode-directory") && !Icon.Contains ("folder"))
 				return;
+			
 			if (direction == Gdk.ScrollDirection.Up)
 				HueShift += 5;
 			else if (direction == Gdk.ScrollDirection.Down)
 				HueShift -= 5;
+			
+			if (HueShift < 0)
+				HueShift += 360;
 			HueShift %= 360;
-			prefs.Set<double> (hueRegex.Replace (OwnedFile.Path, "_"), HueShift);
+			
+			prefs.Set<double> (hueRegex.Replace (UniqueID (), "_"), HueShift);
 		}
 
 		protected override bool OnCanAcceptDrop (IEnumerable<string> uris)
@@ -218,6 +222,12 @@ namespace Docky.Items
 		protected void OpenContainingFolder ()
 		{
 			DockServices.System.Open (OwnedFile.Parent);
+		}
+		
+		void HandleIconUpdated (object obj, EventArgs args)
+		{
+			if (Icon.Contains ("inode-directory") || Icon.Contains ("folder"))
+				HueShift = prefs.Get<double> (hueRegex.Replace (UniqueID (), "_"), Math.Abs (new Uri (uri).AbsolutePath.GetHashCode ()) % 360);
 		}
 	}
 }

@@ -34,6 +34,8 @@ namespace Docky.Items
 
 	public abstract class IconDockItem : AbstractDockItem
 	{
+		public event EventHandler IconUpdated;
+		
 		string icon;
 		public string Icon {
 			get { return icon; }
@@ -53,6 +55,7 @@ namespace Docky.Items
 					info.Dispose ();
 				}
 				
+				OnIconUpdated ();
 				QueueRedraw ();
 			}
 		}
@@ -150,6 +153,12 @@ namespace Docky.Items
 			surface.Context.Paint ();
 			
 			pbuf.Dispose ();
+		}
+		
+		void OnIconUpdated ()
+		{
+			if (IconUpdated != null)
+				IconUpdated (this, EventArgs.Empty);
 		}
 	}
 }
