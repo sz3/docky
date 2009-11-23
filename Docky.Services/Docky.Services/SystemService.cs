@@ -204,14 +204,12 @@ namespace Docky.Services
 		
 		public void Email (string address)
 		{
-			Log<SystemService>.Debug ("Calling: xdg-email" + address);
-			System.Diagnostics.Process.Start ("xdg-email", address);
+			Execute ("xdg-email " + address);
 		}
 		
 		public void Open (string uri)
 		{
-			Log<SystemService>.Debug ("Calling: xdg-open " + uri);
-			System.Diagnostics.Process.Start ("xdg-open", uri);
+			Execute ("xdg-open " + uri);
 		}
 		
 		public void Open (IEnumerable<string> uris)
@@ -311,8 +309,8 @@ namespace Docky.Services
 				if (executable.Contains (" ")) {
 					string[] args = executable.Split (' ');
 					
-					Log<SystemService>.Debug ("Calling: " + args[0] + " " + executable.Substring (args[0].Length + 1));
-					proc = System.Diagnostics.Process.Start (args[0], executable.Substring (args[0].Length + 1));
+					Log<SystemService>.Debug ("Calling: " + args[0] + " \"" + executable.Substring (args[0].Length + 1) + "\"");
+					proc = System.Diagnostics.Process.Start (args[0], "\"" + executable.Substring (args[0].Length + 1) + "\"");
 				} else {
 					Log<SystemService>.Debug ("Calling: " + executable);
 					proc = System.Diagnostics.Process.Start (executable);

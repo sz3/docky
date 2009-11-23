@@ -49,6 +49,7 @@ namespace Docky.Items
 		
 		const string ThumbnailPathKey = "thumbnail::path";
 		const string FilesystemIDKey = "id::filesystem";
+		static IPreferences prefs = DockServices.Preferences.Get <FileDockItem> ();
 		string uri;
 		bool is_folder;
 		
@@ -89,7 +90,7 @@ namespace Docky.Items
 			HoverText = OwnedFile.Basename;
 			
 			if (Icon.Contains ("inode-directory"))
-				HueShift = new Uri (uri).AbsolutePath.GetHashCode () % 160;
+				HueShift = prefs.Get<double> (OwnedFile.Path.Replace ("/", "_"), Math.Abs (new Uri (uri).AbsolutePath.GetHashCode ()) % 360);
 			
 			OnPaintNeeded ();
 		}
@@ -97,6 +98,18 @@ namespace Docky.Items
 		public override string UniqueID ()
 		{
 			return uri;
+		}
+		
+		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
+		{
+			if (!Icon.Contains ("inode-directory"))
+				return;
+			if (direction == Gdk.ScrollDirection.Up)
+				HueShift += 5;
+			else if (direction == Gdk.ScrollDirection.Down)
+				HueShift -= 5;
+			HueShift %= 360;
+			prefs.Set<double> (OwnedFile.Path.Replace ("/", "_"), HueShift);
 		}
 
 		protected override bool OnCanAcceptDrop (IEnumerable<string> uris)
