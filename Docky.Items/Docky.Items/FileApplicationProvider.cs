@@ -85,6 +85,13 @@ namespace Docky.Items
 			
 			Providers.Add (this);
 			
+			// update the transient items when something happens in a desktop file directory
+			// It is possible that a .desktop file was created for a window that didn't have one before,
+			// this would associate that desktop file with the existing window.
+			WindowMatcher.DesktopFileChanged += delegate {
+				UpdateTransientItems ();
+			};
+			
 			Wnck.Screen.Default.WindowOpened += WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
 		}

@@ -15,6 +15,7 @@ FILES = \
     Xlib/X11Atoms.cs \
     Xlib/Xlib.cs \
     Windowing/Position.cs \
+    Windowing/DesktopFileChangedEventArgs.cs \
     Windowing/WindowMatcher.cs
 
 PROJECT_REFERENCES = \

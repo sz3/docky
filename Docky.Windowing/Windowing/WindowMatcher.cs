@@ -33,6 +33,8 @@ namespace Docky.Windowing
 
 	public class WindowMatcher
 	{
+		public static event EventHandler<DesktopFileChangedEventArgs> DesktopFileChanged;
+		
 		static WindowMatcher def;
 		public static WindowMatcher Default {
 			get {
@@ -150,13 +152,27 @@ namespace Docky.Windowing
 				GLib.FileMonitor mon = d.Monitor (GLib.FileMonitorFlags.None, null);
 				mon.RateLimit = 1000;
 				mon.Changed += delegate(object o, GLib.ChangedArgs args) {
-					// bug in GIO#, calling args.File crashes
+					// bug in GIO#, calling args.File or args.OtherFile crashes hard
 					GLib.File file = GLib.FileAdapter.GetObject ((GLib.Object) args.Args[0]);
-					// if a new directory was created, make sure we watch that dir as well.
-					if (file.QueryFileType (GLib.FileQueryInfoFlags.NofollowSymlinks, null) == GLib.FileType.Directory)
-						MonitorDesktopFileDirs (file);
-					// reload our dictionary of exec strings
-					exec_to_desktop_files = BuildExecStrings ();
+					GLib.File otherFile = GLib.FileAdapter.GetObject ((GLib.Object) args.Args[1]);
+
+					// according to GLib documentation, the change signal runs on the same
+					// thread that the monitor was created on.  Without running this part on a thread
+					// docky freezes up for about 500-800 ms while the .desktop files are parsed.
+					DockServices.System.RunOnThread (() => {
+						// if a new directory was created, make sure we watch that dir as well
+						if (file.QueryFileType (GLib.FileQueryInfoFlags.NofollowSymlinks, null) == GLib.FileType.Directory)
+							MonitorDesktopFileDirs (file);
+						// we only care about .desktop files
+						if (!file.Path.EndsWith (".desktop"))
+							return;
+						// reload our dictionary of exec strings
+						exec_to_desktop_files = BuildExecStrings ();
+						//Console.WriteLine ("{0} => {1}", file.Path, args.EventType);
+						if (DesktopFileChanged != null) {
+							DesktopFileChanged (this, new DesktopFileChangedEventArgs (args.EventType, file, otherFile));
+						}
+					});
 				};
 			}
 		}
@@ -317,7 +333,7 @@ namespace Docky.Windowing
 				if (matched)
 					yield break;
 			} while (currentPid < pids.Count ());
-			
+			command_line.Clear ();
 			// if no match was found, just return the pid
 			yield return window.Pid.ToString ();
 		}
@@ -380,7 +396,9 @@ namespace Docky.Windowing
 				.Where (s => !prefix_filters.Any (f => f.IsMatch (s))))
 				yield return sanitizedCmd;
 			
-			yield return cmdline.Split (new [] {".exe"}, StringSplitOptions.None)[0];
+			// some wine apps are launched via a shell script that sets the proc name to "app.exe"
+			if (cmdline.EndsWith (".exe"))
+				yield return cmdline.Split (new [] {".exe"}, StringSplitOptions.None)[0];
 			
 			// return the entire cmdline last as a last ditch effort to find a match
 			yield return cmdline;

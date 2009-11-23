@@ -89,7 +89,7 @@ namespace Docky.Items
 			
 			HoverText = OwnedFile.Basename;
 			
-			if (Icon.Contains ("inode-directory"))
+			if (Icon != null && Icon.Contains ("inode-directory"))
 				HueShift = prefs.Get<double> (OwnedFile.Path.Replace ("/", "_"), Math.Abs (new Uri (uri).AbsolutePath.GetHashCode ()) % 360);
 			
 			OnPaintNeeded ();
@@ -102,13 +102,13 @@ namespace Docky.Items
 		
 		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
 		{
-			if (!Icon.Contains ("inode-directory"))
+			if (Icon != null && !Icon.Contains ("inode-directory"))
 				return;
 			if (direction == Gdk.ScrollDirection.Up)
 				HueShift += 5;
 			else if (direction == Gdk.ScrollDirection.Down)
 				HueShift -= 5;
-			HueShift = HueShift % 360;
+			HueShift %= 360;
 			prefs.Set<double> (OwnedFile.Path.Replace ("/", "_"), HueShift);
 		}
 

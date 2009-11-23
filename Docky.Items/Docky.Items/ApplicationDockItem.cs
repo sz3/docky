@@ -73,23 +73,7 @@ namespace Docky.Items
 		{
 			OwnedItem = item;
 			
-			if (item.HasAttribute ("Icon"))
-				Icon = item.GetString ("Icon");
-			
-			if (item.HasAttribute ("Name")) {
-				HoverText = item.GetLocaleString ("Name");
-				if (HoverText == null)
-					HoverText = item.GetString ("Name");
-			} else {
-				HoverText = System.IO.Path.GetFileNameWithoutExtension (item.Location);
-			}
-			
-			if (item.HasAttribute ("MimeType")) {
-				mimes = item.GetStrings ("MimeType");
-			} else {
-				mimes = Enumerable.Empty<string> ();
-			}
-			
+			UpdateInfo ();
 			UpdateWindows ();
 			UpdateRelated ();
 			
@@ -98,9 +82,35 @@ namespace Docky.Items
 				return true;
 			});
 			
+			WindowMatcher.DesktopFileChanged += delegate(object sender, DesktopFileChangedEventArgs e) {
+				if (e.File.Path == item.Location) {
+					UpdateInfo ();
+				}
+			};
+			
 			Wnck.Screen.Default.WindowOpened += WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
 			Wnck.Screen.Default.ActiveWindowChanged += WnckScreenDefaultWindowChanged;
+		}
+		
+		void UpdateInfo ()
+		{
+			if (OwnedItem.HasAttribute ("Icon"))
+				Icon = OwnedItem.GetString ("Icon");
+			
+			if (OwnedItem.HasAttribute ("Name")) {
+				HoverText = OwnedItem.GetLocaleString ("Name");
+				if (HoverText == null)
+					HoverText = OwnedItem.GetString ("Name");
+			} else {
+				HoverText = System.IO.Path.GetFileNameWithoutExtension (OwnedItem.Location);
+			}
+			
+			if (OwnedItem.HasAttribute ("MimeType")) {
+				mimes = OwnedItem.GetStrings ("MimeType");
+			} else {
+				mimes = Enumerable.Empty<string> ();
+			}
 		}
 		
 		public override string UniqueID ()
