@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 using GLib;
 using Notifications;
@@ -50,6 +51,7 @@ namespace Docky.Items
 		const string ThumbnailPathKey = "thumbnail::path";
 		const string FilesystemIDKey = "id::filesystem";
 		static IPreferences prefs = DockServices.Preferences.Get <FileDockItem> ();
+		static Regex hueRegex = new Regex ("[^a-zA-Z0-9]");
 		string uri;
 		bool is_folder;
 		
@@ -89,8 +91,8 @@ namespace Docky.Items
 			
 			HoverText = OwnedFile.Basename;
 			
-			if (Icon.Contains ("inode-directory"))
-				HueShift = prefs.Get<double> (OwnedFile.Path.Replace ("/", "_"), Math.Abs (new Uri (uri).AbsolutePath.GetHashCode ()) % 360);
+			if (Icon.Contains ("inode-directory") || Icon.Contains ("folder"))
+				HueShift = prefs.Get<double> (hueRegex.Replace (OwnedFile.Path, "_"), Math.Abs (new Uri (uri).AbsolutePath.GetHashCode ()) % 360);
 			
 			OnPaintNeeded ();
 		}
@@ -102,14 +104,14 @@ namespace Docky.Items
 		
 		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
 		{
-			if (!Icon.Contains ("inode-directory"))
+			if (!Icon.Contains ("inode-directory") && !Icon.Contains ("folder"))
 				return;
 			if (direction == Gdk.ScrollDirection.Up)
 				HueShift += 5;
 			else if (direction == Gdk.ScrollDirection.Down)
 				HueShift -= 5;
 			HueShift %= 360;
-			prefs.Set<double> (OwnedFile.Path.Replace ("/", "_"), HueShift);
+			prefs.Set<double> (hueRegex.Replace (OwnedFile.Path, "_"), HueShift);
 		}
 
 		protected override bool OnCanAcceptDrop (IEnumerable<string> uris)
