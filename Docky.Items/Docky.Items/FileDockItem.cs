@@ -110,7 +110,6 @@ namespace Docky.Items
 				HueShift -= 5;
 			HueShift = HueShift % 360;
 			prefs.Set<double> (OwnedFile.Path.Replace ("/", "_"), HueShift);
-			Console.WriteLine (HueShift);
 		}
 
 		protected override bool OnCanAcceptDrop (IEnumerable<string> uris)
