@@ -739,6 +739,11 @@ namespace Docky.Interface
 			
 			node.Provider = provider;
 			
+			if (provider == null) {
+				Log<DockPreferences>.Warn ("Could not enable {0}: Item was null", node.Name);
+				return;
+			}
+			
 			// remove this addin from the inactive list
 			inactive_view.Remove (node);
 			
