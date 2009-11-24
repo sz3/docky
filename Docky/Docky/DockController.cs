@@ -135,10 +135,14 @@ namespace Docky
 		{
 			docks = new List<Dock> ();
 			prefs = DockServices.Preferences.Get<DockController> ();
+			
 			Log.Info ("Setting theme: " + DockTheme);
+			
 			DetectMonitors ();
 			CreateDocks ();
+			
 			EnforceWindowManager ();
+			EnsurePluginState ();
 			
 			GLib.Timeout.Add (500, delegate {
 				EnsurePluginState ();

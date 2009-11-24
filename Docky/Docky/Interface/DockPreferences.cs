@@ -543,13 +543,22 @@ namespace Docky.Interface
 				DefaultProvider.InsertItem (launcher);
 			}
 			
+			// we have a plugin thats not enabled, go nuclear
+			if (Plugins.Any (s => !PluginManager.ItemProviders.Any (ip => ip.Name == s))) {
+				foreach (Mono.Addins.Addin addin in PluginManager.AllAddins) {
+					addin.Enabled = true;
+				}
+			}
+			
 			foreach (string providerName in Plugins) {
-				foreach (AbstractDockItemProvider provider in PluginManager.ItemProviders) {
-					if (provider.Name == providerName) {
-						item_providers.Add (provider);
-						provider.AddedToDock ();
-						break;
-					}
+				AbstractDockItemProvider provider = PluginManager.ItemProviders
+					.Where (adip => adip.Name == providerName)
+					.DefaultIfEmpty (null)
+					.FirstOrDefault ();
+				
+				if (provider != null) {
+					item_providers.Add (provider);
+					provider.AddedToDock ();
 				}
 			}
 			
