@@ -87,8 +87,14 @@ namespace Docky.Items
 			
 			Wnck.Screen.Default.WindowOpened += WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
+			Wnck.Screen.Default.ViewportsChanged += WnckScreenDefaultViewportsChanged;
 		}
 
+		void WnckScreenDefaultViewportsChanged (object o, EventArgs args)
+		{
+			UpdateTransientItems ();
+		}
+		
 		void WnckScreenDefaultWindowOpened (object o, WindowOpenedArgs args)
 		{
 			if (args.Window.IsSkipTasklist)
@@ -334,6 +340,10 @@ namespace Docky.Items
 		
 		public override void Dispose ()
 		{
+			Wnck.Screen.Default.WindowOpened -= WnckScreenDefaultWindowOpened;
+			Wnck.Screen.Default.WindowClosed -= WnckScreenDefaultWindowClosed;
+			Wnck.Screen.Default.ViewportsChanged -= WnckScreenDefaultViewportsChanged;
+			
 			IEnumerable<AbstractDockItem> old_items = Items;
 			
 			items = new Dictionary<string, AbstractDockItem> ();

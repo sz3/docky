@@ -43,6 +43,8 @@ namespace Docky.Items
 		DateTime last_scroll = new DateTime (0);
 		TimeSpan scroll_rate = new TimeSpan (0, 0, 0, 0, 200);
 		
+		static IPreferences prefs = DockServices.Preferences.Get <WnckDockItem> ();
+		
 		IEnumerable<Wnck.Window> windows;
 		public IEnumerable<Wnck.Window> Windows {
 			get { return windows; }
@@ -61,7 +63,10 @@ namespace Docky.Items
 		
 		public IEnumerable<Wnck.Window> ManagedWindows {
 			get {
-				return Windows.Where (w => !w.IsSkipTasklist);
+				if (prefs.Get<bool> ("CurrentDesktopOnly", false))
+					return Windows.Where (w => !w.IsSkipTasklist && w.Workspace != null && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace));
+				else
+					return Windows.Where (w => !w.IsSkipTasklist);
 			}
 		}
 		
