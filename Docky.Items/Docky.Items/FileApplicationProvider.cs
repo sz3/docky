@@ -88,6 +88,12 @@ namespace Docky.Items
 			Wnck.Screen.Default.WindowOpened += WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
 			Wnck.Screen.Default.ViewportsChanged += WnckScreenDefaultViewportsChanged;
+			Wnck.Screen.Default.ActiveWorkspaceChanged += WnckScreenDefaultActiveWorkspaceChanged;
+		}
+
+		void WnckScreenDefaultActiveWorkspaceChanged (object o, ActiveWorkspaceChangedArgs args)
+		{
+			UpdateTransientItems ();
 		}
 
 		void WnckScreenDefaultViewportsChanged (object o, EventArgs args)
@@ -343,6 +349,7 @@ namespace Docky.Items
 			Wnck.Screen.Default.WindowOpened -= WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed -= WnckScreenDefaultWindowClosed;
 			Wnck.Screen.Default.ViewportsChanged -= WnckScreenDefaultViewportsChanged;
+			Wnck.Screen.Default.ActiveWorkspaceChanged -= WnckScreenDefaultActiveWorkspaceChanged;
 			
 			IEnumerable<AbstractDockItem> old_items = Items;
 			
