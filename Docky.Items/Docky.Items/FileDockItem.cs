@@ -224,7 +224,7 @@ namespace Docky.Items
 			DockServices.System.Open (OwnedFile.Parent);
 		}
 		
-		void HandleIconUpdated (object obj, EventArgs args)
+		protected virtual void HandleIconUpdated (object obj, EventArgs args)
 		{
 			if (Icon.Contains ("inode-directory") || Icon.Contains ("folder"))
 				HueShift = prefs.Get<double> (hueRegex.Replace (UniqueID (), "_"), Math.Abs (new Uri (uri).AbsolutePath.GetHashCode ()) % 360);
