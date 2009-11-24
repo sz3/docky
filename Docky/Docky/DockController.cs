@@ -62,6 +62,9 @@ namespace Docky
 
 		public IEnumerable<DockPosition> PositionsAvailableForDock (int monitorNum)
 		{
+			if (DockMonitors.Count () != Gdk.Screen.Default.NMonitors)
+				DetectMonitors ();
+			
 			foreach (DockPosition position in DockMonitors.Where (d => d.MonitorNumber == monitorNum).First ().PossiblePositions) {
 				if (!DocksForMonitor (monitorNum).Any (dock => dock.Preferences.Position == position))
 					yield return position;

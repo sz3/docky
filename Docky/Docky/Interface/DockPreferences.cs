@@ -224,6 +224,8 @@ namespace Docky.Interface
 			get {
 				if (!monitor_number.HasValue)
 					monitor_number = GetOption<int?> ("MonitorNumber", 0);
+				if (monitor_number.Value >= Gdk.Screen.Default.NMonitors)
+					monitor_number = 0;
 				return monitor_number.Value;
 			}
 			set {
