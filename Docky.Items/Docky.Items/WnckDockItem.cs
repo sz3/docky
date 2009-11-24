@@ -64,7 +64,7 @@ namespace Docky.Items
 		public IEnumerable<Wnck.Window> ManagedWindows {
 			get {
 				if (prefs.Get<bool> ("CurrentDesktopOnly", false))
-					return Windows.Where (w => !w.IsSkipTasklist && w.Workspace != null && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace));
+					return Windows.Where (w => !w.IsSkipTasklist && w.Workspace != null && Wnck.Screen.Default.ActiveWorkspace != null && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace));
 				else
 					return Windows.Where (w => !w.IsSkipTasklist);
 			}
