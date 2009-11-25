@@ -1,3 +1,19 @@
+//  
+//  Copyright (C) 2009 Chris Szikszoy, Robert Dyer, Jason Smith
+// 
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+// 
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+// 
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// 
 
 using System;
 using System.Linq;
@@ -12,10 +28,8 @@ using Docky.Services;
 
 namespace NetworkManagerDocklet
 {
-
 	public class NetworkManagerDocklet : IconDockItem
 	{
-		
 		public NetworkManagerDocklet ()
 		{
 			NM = new NetworkManager ();
@@ -37,7 +51,7 @@ namespace NetworkManagerDocklet
 		
 		void OnDeviceStateChanged (object sender, DeviceStateChangedArgs args)
 		{
-			Console.WriteLine (args.NewState);
+			//Console.WriteLine (args.NewState);
 			ReDraw ();
 		}
 		
@@ -136,13 +150,10 @@ namespace NetworkManagerDocklet
 			
 			List<MenuItem> wifi = list[MenuListContainer.Actions];
 			
-			if (NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().Any ()) {
-				foreach (WirelessDevice device in NM.DevManager.NetworkDevices.OfType<WirelessDevice> ()) {
-					foreach (List<WirelessAccessPoint> val in device.VisibleAccessPoints.Values.OrderByDescending (ap => ap.First ().Strength)) {
+			if (NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().Any ())
+				foreach (WirelessDevice device in NM.DevManager.NetworkDevices.OfType<WirelessDevice> ())
+					foreach (List<WirelessAccessPoint> val in device.VisibleAccessPoints.Values.OrderByDescending (ap => ap.First ().Strength))
 						wifi.Add (MakeConEntry (val.First ()));
-					}
-				}
-			}
 			
 			return list;
 		}
@@ -176,16 +187,6 @@ namespace NetworkManagerDocklet
 //			//yield return new WidgetMenuArgs (box);
 //			
 //			//yield return new SimpleMenuButtonArgs (() => Console.WriteLine ("asdf"),"Click me!", "network-manager");
-//		}
-//		
-//		AbstractMenuArgs MakeConEntry (NetworkConnection con)
-//		{
-//			string name = con.ConnectionName;
-//			string icon = "nm-device-wired";
-//			if (NM.ActiveConnections.Contains (con))
-//				name = string.Format ("<b>{0}</b>",name);
-//			
-//			return new SimpleMenuButtonArgs (() => NM.ConnectTo (con), name, icon);
 //		}
 		
 		MenuItem MakeConEntry (WirelessAccessPoint ap)

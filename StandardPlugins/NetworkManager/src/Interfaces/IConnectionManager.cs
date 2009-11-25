@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Chris Szikszoy, Robert Dyer
+//  Copyright (C) 2009 Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,19 +17,17 @@
 
 using System;
 
+using NDesk.DBus;
+using org.freedesktop.DBus;
+
 namespace NetworkManagerDocklet
 {
-	public class DeviceStateChangedArgs : EventArgs
+	public delegate void ConnectionAddedHandler (string objectPath);
+	
+	[Interface ("org.freedesktop.NetworkManagerSettings")]
+	public interface IConnectionManager
 	{
-		public DeviceState NewState { get; protected set; }
-		public DeviceState OldState { get; protected set; }
-		public uint Reason { get; protected set; }
-		
-		public DeviceStateChangedArgs (DeviceState newState, DeviceState oldState, uint reason)
-		{
-			NewState = newState;
-			OldState = oldState;
-			Reason = reason;
-		}
+		string[] ListConnections ();
+		event ConnectionAddedHandler NewConnection;
 	}
 }

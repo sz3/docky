@@ -20,13 +20,10 @@ using System.Collections.Generic;
 
 using Docky.Items;
 
-
 namespace NetworkManagerDocklet
 {
-
 	public class NetworkManagerItemProvider : AbstractDockItemProvider
 	{
-
 		#region IDockItemProvider implementation
 		
 		public override string Name {

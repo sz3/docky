@@ -21,6 +21,7 @@ FILES = \
 	src/WirelessDevice.cs \
 	src/Interfaces/IAccessPoint.cs \
 	src/Interfaces/IActiveConnection.cs \
+	src/Interfaces/IConnectionManager.cs \
 	src/Interfaces/IDHCP4Config.cs \
 	src/Interfaces/IIP4Config.cs \
 	src/Interfaces/INetManager.cs \

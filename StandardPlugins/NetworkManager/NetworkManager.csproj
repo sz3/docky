@@ -49,6 +49,7 @@
     <Compile Include="src\WirelessDevice.cs" />
     <Compile Include="src\Interfaces\IAccessPoint.cs" />
     <Compile Include="src\Interfaces\IActiveConnection.cs" />
+    <Compile Include="src\Interfaces\IConnectionManager.cs" />
     <Compile Include="src\Interfaces\IDHCP4Config.cs" />
     <Compile Include="src\Interfaces\IIP4Config.cs" />
     <Compile Include="src\Interfaces\INetworkConnection.cs" />
