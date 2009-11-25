@@ -51,26 +51,69 @@ namespace NetworkManagerDocklet
 			});
 		}
 		
+		int iconStage;
+		int iconStep;
+		uint iconTimer;
+		
+		string AnimatedIcon (NetworkDevice dev)
+		{
+			if (iconTimer == 0)
+				iconTimer = GLib.Timeout.Add (100, delegate {
+					ReDraw ();
+					return true;
+				});
+			
+			switch (dev.State) {
+			case DeviceState.Configuring:
+				iconStage = 1;
+				break;
+			case DeviceState.IPConfiguring:
+				iconStage = 2;
+				break;
+			default:
+			case DeviceState.Preparing:
+				iconStage = 3;
+				break;
+			}
+			
+			if (iconStep == 11)
+				iconStep = 0;
+			return string.Format ("nm-stage0{0}-connecting{1:00}", iconStage, ++iconStep);
+		}
+		
 		string SetDockletIcon ()
 		{
-			string icon = "nm-device-wired";
 			try {
-				if (NM.ActiveConnections.Any ()) {
-					if (NM.ActiveConnections.OfType<WirelessConnection> ().Any ()) {
-						string ssid = NM.ActiveConnections.OfType<WirelessConnection> ().First ().SSID;
-						byte strength = NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().First ().APBySSID (ssid).Strength;
-						icon = APIconFromStrength (strength);
-					}
-					if (NM.DevManager.NetworkDevices.Any (dev => dev.State == DeviceState.Configuring ||
-					    dev.State == DeviceState.IPConfiguring || dev.State == DeviceState.Preparing))
-						icon = "nm-stage01-connecting01";
-				} else {
-					icon = "nm-no-connection";
+				// currently connecting (animated)
+				NetworkDevice dev = NM.DevManager.NetworkDevices
+					.Where (d => d.State == DeviceState.Configuring || d.State == DeviceState.IPConfiguring || d.State == DeviceState.Preparing)
+					.FirstOrDefault ();
+				if (dev != null)
+					return AnimatedIcon (dev);
+				
+				if (iconTimer != 0) {
+					GLib.Source.Remove (iconTimer);
+					iconStep = 0;
+					iconStage = 0;
+				}
+				
+				// no connection
+				if (!NM.ActiveConnections.Any ())
+					return "nm-no-connection";
+				
+				// wireless connection
+				if (NM.ActiveConnections.OfType<WirelessConnection> ().Any ()) {
+					string ssid = NM.ActiveConnections.OfType<WirelessConnection> ().First ().SSID;
+					byte strength = NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().First ().APBySSID (ssid).Strength;
+					return APIconFromStrength (strength);
 				}
 			} catch {
-				icon = APIconFromStrength ((byte) 100);
+				// FIXME why do we default to this?
+				return APIconFromStrength ((byte) 100);
 			}
-			return icon;
+			
+			// default to wired connection
+			return "nm-device-wired";
 		}
 		
 		string APIconFromStrength (byte strength)
