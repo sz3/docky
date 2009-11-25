@@ -138,8 +138,8 @@ namespace NetworkManagerDocklet
 			
 			if (NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().Any ()) {
 				foreach (WirelessDevice device in NM.DevManager.NetworkDevices.OfType<WirelessDevice> ()) {
-					foreach (KeyValuePair<string, List<WirelessAccessPoint>> kvp in device.VisibleAccessPoints) {
-						wifi.Add (MakeConEntry (kvp.Value.First ()));
+					foreach (List<WirelessAccessPoint> val in device.VisibleAccessPoints.Values.OrderByDescending (ap => ap.First ().Strength)) {
+						wifi.Add (MakeConEntry (val.First ()));
 					}
 				}
 			}
