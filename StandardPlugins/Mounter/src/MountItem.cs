@@ -100,5 +100,9 @@ namespace Mounter
 			
 			return list;
 		}
+		
+		protected override void HandleIconUpdated (object obj, EventArgs args)
+		{
+		}
 	}
 }

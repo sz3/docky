@@ -41,8 +41,33 @@ namespace RecentDocuments
 		#endregion
 		
 		const int NumRecentDocs = 7;
+		
 		List<FileDockItem> RecentDocs;
-		FileDockItem CurrentFile;
+		
+		FileDockItem currentFile;
+		FileMonitor watcher;
+			
+		FileDockItem CurrentFile {
+			get {
+				return currentFile;
+			}
+			set {
+				if (currentFile == value)
+					return;
+				currentFile = value;
+				
+				if (watcher != null)
+					watcher.Changed -= WatcherChanged;
+				
+				watcher = FileMonitor.File (currentFile.OwnedFile, FileMonitorFlags.None, null);
+				watcher.Changed += WatcherChanged;
+			}
+		}
+		
+		void WatcherChanged (object o, ChangedArgs args)
+		{
+			RefreshRecentDocs ();
+		}
 		
 		public RecentDocumentsItem ()
 		{
@@ -132,6 +157,15 @@ namespace RecentDocuments
 				RefreshRecentDocs ();
 			
 			return list;
+		}
+
+		public override void Dispose ()
+		{
+			if (watcher != null) {
+				watcher.Changed -= WatcherChanged;
+				watcher.Dispose ();
+			}
+			base.Dispose ();
 		}
 	}
 }
