@@ -122,7 +122,7 @@ namespace WeatherDocklet
 		public static bool Metric {
  			get { 
 				if (!MetricDefault.HasValue)
-					MetricDefault = CultureInfo.CurrentCulture.Name != "en-US";
+					MetricDefault = RegionInfo.CurrentRegion != null && RegionInfo.CurrentRegion.IsMetric;
 				return prefs.Get<bool> (MetricKey, false); }
  			set { prefs.Set<bool> (MetricKey, value); OnMetricChanged (); }
  		}

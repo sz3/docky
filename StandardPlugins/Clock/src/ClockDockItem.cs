@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -41,7 +42,7 @@ namespace Clock
 		
 		static IPreferences prefs = DockServices.Preferences.Get<ClockDockItem> ();
 		
-		bool show_military = prefs.Get<bool> ("ShowMilitary", false);
+		bool show_military = prefs.Get<bool> ("ShowMilitary", CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern [0] == 'H');
 		bool ShowMilitary {
 			get { return show_military; }
 			set {
