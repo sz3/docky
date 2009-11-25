@@ -5,6 +5,7 @@ SUBDIRS = \
 	CPUMonitor \
 	GMail \
 	Mounter \
+	NetworkManager \
 	RecentDocuments \
 	Trash \
 	Weather
