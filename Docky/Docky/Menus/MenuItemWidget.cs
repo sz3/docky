@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -29,14 +29,17 @@ using Docky.Services;
 
 namespace Docky.Menus
 {
-
-
 	internal class MenuItemWidget : Gtk.EventBox
 	{
+		const int MinWidth = 100;
+		const int MaxWidth = 500;
+		
 		MenuItem item;
 		bool hovered;
 		
 		public Cairo.Color TextColor { get; set; }
+		
+		public int TextWidth { get; protected set; }
 		
 		internal MenuItemWidget (MenuItem item) : base()
 		{
@@ -52,7 +55,24 @@ namespace Docky.Menus
 			VisibleWindow = false;
 			AboveChild = true;
 			
-			SetSizeRequest (200, 24);
+			CalcTextWidth ();
+		}
+		
+		void CalcTextWidth ()
+		{
+			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
+			layout.SetText (item.Text);
+			layout.Width = Pango.Units.FromPixels (MaxWidth);
+			layout.FontDescription = Style.FontDescription;
+			layout.Ellipsize = Pango.EllipsizeMode.End;
+			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (12);
+			layout.FontDescription.Weight = Pango.Weight.Bold;
+			
+			Pango.Rectangle logical, ink;
+			layout.GetPixelExtents (out ink, out logical);
+			
+			TextWidth = Math.Min (MaxWidth, Math.Max (MinWidth, logical.Width)) + 34;
+			SetSizeRequest (TextWidth, 24);
 		}
 
 		void ItemDisabledChanged (object sender, EventArgs e)
@@ -62,6 +82,7 @@ namespace Docky.Menus
 
 		void ItemTextChanged (object sender, EventArgs e)
 		{
+			CalcTextWidth ();
 			QueueDraw ();
 		}
 

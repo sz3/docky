@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -32,11 +32,8 @@ using Docky.Interface;
 
 namespace Docky.Menus
 {
-
-
 	public class DockItemMenu : DockMenu
 	{
-
 		public DockItemMenu (Gtk.Window parent) : base (parent)
 		{
 		}
@@ -44,7 +41,6 @@ namespace Docky.Menus
 		IEnumerable<MenuItem> ParseMenuList (MenuList list)
 		{
 			bool separate = false;
-			
 			
 			List<MenuItem> actions, windows, related;
 			actions = list[MenuListContainer.Actions];
@@ -87,6 +83,7 @@ namespace Docky.Menus
 			
 			VBox vbox = new VBox ();
 			Container.Add (vbox);
+			int width = 1;
 			
 			foreach (MenuItem item in ParseMenuList (items)) {
 				if (item is SeparatorMenuItem) {
@@ -98,8 +95,11 @@ namespace Docky.Menus
 					else
 						menuItem.TextColor = new Cairo.Color (1, 1, 1);
 					vbox.PackStart (menuItem, false, false, 0);
+					
+					width = Math.Max (width, menuItem.TextWidth);
 				}
 			}
+			vbox.SetSizeRequest (width, -1);
 			
 			Container.ShowAll ();
 		}
