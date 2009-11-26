@@ -151,18 +151,11 @@ namespace NetworkManagerDocklet
 			
 			List<MenuItem> wifi = list[MenuListContainer.Actions];
 			
-			int count = 0;
-			if (NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().Any ()) {
-				foreach (WirelessDevice device in NM.DevManager.NetworkDevices.OfType<WirelessDevice> ()) {
-					foreach (List<WirelessAccessPoint> val in device.VisibleAccessPoints.Values.OrderByDescending (ap => ap.Max (wap => wap.Strength))) {
-						if (count > 7)
-							break;
-						
+			if (NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().Any ())
+				foreach (WirelessDevice device in NM.DevManager.NetworkDevices.OfType<WirelessDevice> ())
+					foreach (List<WirelessAccessPoint> val in device.VisibleAccessPoints.Values.OrderByDescending (ap => ap.Max (wap => wap.Strength)).Take (8))
 						wifi.Add (MakeConEntry (val.OrderByDescending (wap => wap.Strength).First ()));
-						count++;
-					}
-				}
-			}
+			
 			return list;
 		}
 		
