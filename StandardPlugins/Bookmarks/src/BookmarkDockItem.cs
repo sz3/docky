@@ -83,6 +83,7 @@ namespace Bookmarks
 			MenuList list = new MenuList ();
 			list[MenuListContainer.Actions].Add (new MenuItem ("Open", "gtk-open", (o, a) => Open ()));
 			list[MenuListContainer.Actions].Add (new MenuItem ("Remove", "gtk-remove", (o, a) => Remove ()));
+			list[MenuListContainer.Actions].Add (new MenuItem ("Reset Color", "edit-clear", (o, a) => HueShift = 0));
 			return list;
 		}
 	}

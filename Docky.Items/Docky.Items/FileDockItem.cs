@@ -211,6 +211,7 @@ namespace Docky.Items
 			MenuList list = base.GetMenuItems ();
 			list[MenuListContainer.Actions].Add (new MenuItem ("Open", "gtk-open", (o, a) => Open ()));
 			list[MenuListContainer.Actions].Add (new MenuItem ("Open Containing Folder", "folder", (o, a) => OpenContainingFolder ()));
+			list[MenuListContainer.Actions].Add (new MenuItem ("Reset Color", "edit-clear", (o, a) => HueShift = 0));
 			return list;
 		}
 		
@@ -227,7 +228,7 @@ namespace Docky.Items
 		protected virtual void HandleIconUpdated (object obj, EventArgs args)
 		{
 			if (Icon.Contains ("inode-directory") || Icon.Contains ("folder"))
-				HueShift = prefs.Get<double> (hueRegex.Replace (UniqueID (), "_"), Math.Abs (new Uri (uri).AbsolutePath.GetHashCode ()) % 360);
+				HueShift = prefs.Get<double> (hueRegex.Replace (UniqueID (), "_"), 0);
 		}
 	}
 }
