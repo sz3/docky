@@ -49,9 +49,10 @@ namespace Docky.Items
 		public IEnumerable<Wnck.Window> Windows {
 			get { return windows; }
 			protected set {
-				UnregisterWindows (windows);
+				UnregisterWindows (windows.Where (w => !value.Contains (w)));
+				RegisterWindows (value.Where (w => !windows.Contains (w)));
+				
 				windows = value.ToArray ();
-				RegisterWindows (windows);
 				
 				SetIndicator ();
 				SetState ();
@@ -98,6 +99,13 @@ namespace Docky.Items
 		{
 			windows = Enumerable.Empty<Wnck.Window> ();
 			Wnck.Screen.Default.ActiveWindowChanged += WnckScreenDefaultActiveWindowChanged;
+			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
+		}
+		
+		void WnckScreenDefaultWindowClosed (object o, WindowClosedArgs args)
+		{
+			if (args.Window != null)
+				Windows = Windows.Where (w => w != args.Window);
 		}
 		
 		void RegisterWindows (IEnumerable<Wnck.Window> windows)
