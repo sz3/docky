@@ -90,10 +90,11 @@ namespace Docky.Menus
 					vbox.PackStart (new SeparatorWidget ());
 				} else {
 					MenuItemWidget menuItem = new MenuItemWidget (item);
-					if (IsLight)
-						menuItem.TextColor = new Cairo.Color (0.2, 0.2, 0.2);
-					else
-						menuItem.TextColor = new Cairo.Color (1, 1, 1);
+					if (IsLight) {
+						menuItem.TextColor = item.Bold ? new Cairo.Color (0.1, 0.1, 0.1) : new Cairo.Color (0.2, 0.2, 0.2);
+					} else {
+						menuItem.TextColor = item.Bold ? new Cairo.Color (1, 1, 1) : new Cairo.Color (0.9, 0.9, 0.9);
+					}
 					vbox.PackStart (menuItem, false, false, 0);
 					
 					width = Math.Max (width, menuItem.TextWidth);

@@ -140,6 +140,13 @@ namespace Docky.Menus
 				
 				Gdk.CairoHelper.SetSourcePixbuf (cr, pixbuf, allocation.X + 1, allocation.Y + 3);
 				cr.PaintWithAlpha (item.Disabled ? 0.5 : 1);
+				
+				if (item.Bold) {
+					cr.Operator = Operator.Add;
+					Gdk.CairoHelper.SetSourcePixbuf (cr, pixbuf, allocation.X + 1, allocation.Y + 3);
+					cr.PaintWithAlpha (.5);
+					cr.Operator = Operator.Over;
+				}
 			
 				Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
 				layout.SetText (item.Text);
