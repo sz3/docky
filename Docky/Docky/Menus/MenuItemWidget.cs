@@ -32,7 +32,7 @@ namespace Docky.Menus
 	internal class MenuItemWidget : Gtk.EventBox
 	{
 		const int MinWidth = 100;
-		const int MaxWidth = 500;
+		const int MaxWidth = 350;
 		
 		MenuItem item;
 		bool hovered;

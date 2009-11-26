@@ -37,41 +37,7 @@ namespace Docky.Menus
 		public DockItemMenu (Gtk.Window parent) : base (parent)
 		{
 		}
-		
-		IEnumerable<MenuItem> ParseMenuList (MenuList list)
-		{
-			bool separate = false;
-			
-			List<MenuItem> actions, windows, related;
-			actions = list[MenuListContainer.Actions];
-			windows = list[MenuListContainer.Windows];
-			related = list[MenuListContainer.RelatedItems];
-			
-			if (actions.Any ()) {
-				foreach (MenuItem item in actions)
-					yield return item;
-				separate = true;
-			}
-			
-			if (windows.Any ()) {
-				if (separate)
-					yield return new SeparatorMenuItem ();
-				
-				foreach (MenuItem item in windows)
-					yield return item;
-				
-				separate = true;
-			}
-			
-			if (related.Any ()) {
-				if (separate)
-					yield return new SeparatorMenuItem ();
-				
-				foreach (MenuItem item in related)
-					yield return item;
-			}
-		}
-		
+
 		public void SetItems (MenuList items)
 		{
 			if (Container.Child != null) {
@@ -85,7 +51,7 @@ namespace Docky.Menus
 			Container.Add (vbox);
 			int width = 1;
 			
-			foreach (MenuItem item in ParseMenuList (items)) {
+			foreach (MenuItem item in items.DisplayItems) {
 				if (item is SeparatorMenuItem) {
 					vbox.PackStart (new SeparatorWidget ());
 				} else {

@@ -24,26 +24,45 @@ using System.Text;
 namespace Docky.Menus
 {
 	public enum MenuListContainer {
+		Header,
 		Actions,
 		Windows,
 		RelatedItems,
+		CustomOne,
+		CustomTwo,
+		Footer,
 	}
 	
 	public class MenuList
 	{
 		Dictionary<MenuListContainer, List<MenuItem>> list;
 		
+		public IEnumerable<MenuItem> DisplayItems {
+			get {
+				bool separate = false;
+				foreach (MenuListContainer container in list.Keys.OrderBy (key => (int) key)) {
+					if (!list[container].Any ())
+						continue;
+					
+					if (separate)
+						yield return new SeparatorMenuItem ();
+					foreach (MenuItem item in list[container])
+						yield return item;
+					separate = true;
+				}
+			}
+		}
+		
 		public MenuList ()
 		{
 			list = new Dictionary<MenuListContainer, List<MenuItem>> ();
-			foreach (MenuListContainer container in Enum.GetValues (typeof(MenuListContainer))) {
-				list[container] = new List<MenuItem> ();
-			}
 		}
 		
 		public List<MenuItem> this[MenuListContainer container]
 		{
 			get {
+				if (!list.ContainsKey (container))
+					list[container] = new List<MenuItem> ();
 				return list[container];
 			}
 		}
