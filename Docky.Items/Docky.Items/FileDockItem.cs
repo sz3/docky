@@ -117,6 +117,12 @@ namespace Docky.Items
 			
 			prefs.Set<double> (hueRegex.Replace (UniqueID (), "_"), HueShift);
 		}
+		
+		protected void ResetHue ()
+		{
+			HueShift = 0;
+			prefs.Set<double> (hueRegex.Replace (UniqueID (), "_"), HueShift);
+		}
 
 		protected override bool OnCanAcceptDrop (IEnumerable<string> uris)
 		{
@@ -211,7 +217,8 @@ namespace Docky.Items
 			MenuList list = base.GetMenuItems ();
 			list[MenuListContainer.Actions].Add (new MenuItem ("Open", "gtk-open", (o, a) => Open ()));
 			list[MenuListContainer.Actions].Add (new MenuItem ("Open Containing Folder", "folder", (o, a) => OpenContainingFolder ()));
-			list[MenuListContainer.Actions].Add (new MenuItem ("Reset Color", "edit-clear", (o, a) => HueShift = 0));
+			if (HueShift != 0)
+				list[MenuListContainer.Actions].Add (new MenuItem ("Reset Color", "edit-clear", (o, a) => ResetHue ()));
 			return list;
 		}
 		
