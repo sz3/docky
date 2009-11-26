@@ -181,7 +181,7 @@ namespace Docky.Items
 			}
 			
 			// remove old transient items
-			List<AbstractDockItem> removed_transient_items = new List<AbstractDockItem> ();
+			List<WnckDockItem> removed_transient_items = new List<WnckDockItem> ();
 			
 			foreach (WnckDockItem wdi in transient_items.Where (adi => adi is WnckDockItem).Cast<WnckDockItem> ()) {
 				foreach (Wnck.Window window in ManagedWindows)
@@ -191,10 +191,17 @@ namespace Docky.Items
 					}
 			}
 			
-			foreach (AbstractDockItem adi in removed_transient_items)
+			RemoveTransientItems (removed_transient_items);
+		}
+		
+		void RemoveTransientItems (IEnumerable<WnckDockItem> items)
+		{
+			foreach (WnckDockItem adi in items) {
+				adi.WindowsChanged -= HandleTransientWindowsChanged;
 				transient_items.Remove (adi);
+			}
 			Items = InternalItems;
-			foreach (AbstractDockItem adi in removed_transient_items)
+			foreach (AbstractDockItem adi in items)
 				adi.Dispose();
 		}
 
@@ -204,11 +211,8 @@ namespace Docky.Items
 				return;
 			
 			WnckDockItem item = sender as WnckDockItem;
-			if (!item.ManagedWindows.Any ()) {
-				transient_items.Remove (item);
-				Items = InternalItems;
-				item.Dispose ();
-			}
+			if (!item.ManagedWindows.Any ())
+				RemoveTransientItems (item.AsSingle ());
 		}
 		
 		protected override bool OnCanAcceptDrop (string uri)
