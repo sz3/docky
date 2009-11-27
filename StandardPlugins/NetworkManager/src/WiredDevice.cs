@@ -26,7 +26,7 @@ namespace NetworkManagerDocklet
 {
 	public class WiredDevice : NetworkDevice
 	{
-		public WiredDevice (string objectPath) : base (objectPath)
+		internal WiredDevice (string objectPath) : base (objectPath)
 		{
 			this.WiredProperties = new DBusObject<IWiredDevice> ("org.freedesktop.NetworkManager", objectPath);
 		}

@@ -28,6 +28,22 @@ namespace NetworkManagerDocklet
 {
 	public class NetworkDevice : DBusObject<INetworkDevice>
 	{
+		static Dictionary<string, NetworkDevice> devices = new Dictionary<string, NetworkDevice> ();
+		
+		public static NetworkDevice NewForObjectPath (string objectPath)
+		{
+			if (!devices.ContainsKey (objectPath)) {
+				NetworkDevice result = new NetworkDevice (objectPath);
+				if (result.DType == DeviceType.Wired) {
+					result = new WiredDevice (objectPath);
+				} else if (result.DType == DeviceType.Wireless) {
+					result = new WirelessDevice (objectPath);
+				}
+				devices[objectPath] = result;
+			}
+			return devices[objectPath];
+		}
+		
 		const string NMBusName = "org.freedesktop.NetworkManager";
 		
 		public delegate void DeviceStateChangedHandler (object o, DeviceStateChangedArgs args);
@@ -50,7 +66,7 @@ namespace NetworkManagerDocklet
 			get	{ return (DeviceState) Enum.ToObject (typeof (DeviceType), BusObject.Get (BusName, "State")); }
 		}
 		
-		public NetworkDevice(string objectPath) : base (NMBusName, objectPath)
+		protected NetworkDevice (string objectPath) : base (NMBusName, objectPath)
 		{
 			BusObject.StateChanged += OnStateChanged;
 			SetIPs ();

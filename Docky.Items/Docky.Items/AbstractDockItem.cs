@@ -83,6 +83,10 @@ namespace Docky.Items
 			get; private set;
 		}
 		
+		public virtual uint MenuButton {
+			get { return 3; }
+		}
+		
 		public ClickAnimation ClickAnimation {
 			get; private set;
 		}

@@ -41,23 +41,12 @@ namespace NetworkManagerDocklet
 				List<NetworkDevice> list = new List<NetworkDevice> ();
 				
 				foreach (ObjectPath objPath in BusObject.GetDevices ()) {
-					NetworkDevice device = new NetworkDevice (objPath.ToString ());
-					if (device.DType == DeviceType.Wired)
-						device = new WiredDevice (device.ObjectPath.ToString ()); else if (device.DType == DeviceType.Wireless)
-						device = new WirelessDevice (device.ObjectPath.ToString ());
-					else
-						continue;
-					device.StateChanged += OnStateChanged;
+					NetworkDevice device = NetworkDevice.NewForObjectPath (objPath.ToString ());
 					list.Add (device);
 				}
 				
 				return list;
 			}
-		}
-		
-		void OnStateChanged (object o, DeviceStateChangedArgs args)
-		{
-			//Console.WriteLine ("A device state has changed: {0} new state: {1}", (o as NetworkDevice).ObjectPath, args.NewState);
 		}
 	}
 }

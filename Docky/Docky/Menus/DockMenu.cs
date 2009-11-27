@@ -545,7 +545,7 @@ namespace Docky.Menus
 		
 		protected override bool OnButtonReleaseEvent (EventButton evnt)
 		{
-			if (evnt.Button != 3 || (DateTime.UtcNow - show_time).TotalMilliseconds > 500) {
+			if ((DateTime.UtcNow - show_time).TotalMilliseconds > 500) {
 				Hide ();
 			}
 			return base.OnButtonReleaseEvent (evnt);

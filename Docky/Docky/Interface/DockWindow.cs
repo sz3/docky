@@ -870,7 +870,7 @@ namespace Docky.Interface
 				
 				if (painter_area.Contains (LocalCursor))
 					Painter.ButtonPressed (x, y, evnt.State);
-			} else if (HoveredItem != null && evnt.Button == 3) {
+			} else if (HoveredItem != null && evnt.Button == HoveredItem.MenuButton) {
 				MenuList list;
 				
 				if (HoveredItem.Owner != null)

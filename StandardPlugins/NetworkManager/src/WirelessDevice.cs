@@ -27,13 +27,13 @@ namespace NetworkManagerDocklet
 {
 	public class WirelessDevice : NetworkDevice
 	{
-		public WirelessDevice (string objectPath) : base (objectPath)
+		internal WirelessDevice (string objectPath) : base(objectPath)
 		{
 			this.WirelessProperties = new DBusObject<IWirelessDevice> ("org.freedesktop.NetworkManager", objectPath);
 			this.WirelessProperties.BusObject.AccessPointAdded += OnAPAdded;
 			this.WirelessProperties.BusObject.AccessPointRemoved += OnAPRemoved;
 			
-			VisibleAccessPoints = new Dictionary <string, List<WirelessAccessPoint>> ();
+			VisibleAccessPoints = new Dictionary<string, List<WirelessAccessPoint>> ();
 			foreach (ObjectPath APObjPath in WirelessProperties.BusObject.GetAccessPoints ()) {
 				WirelessAccessPoint ap = new WirelessAccessPoint (APObjPath.ToString ());
 				AddApToDict (ap);
@@ -45,7 +45,6 @@ namespace NetworkManagerDocklet
 
 		void OnAPAdded (string objectPath)
 		{
-			Console.WriteLine ("AP added: {0}", objectPath);
 			WirelessAccessPoint ap = new WirelessAccessPoint (objectPath);
 			AddApToDict (ap);
 			//DumpAPs ();
@@ -53,7 +52,6 @@ namespace NetworkManagerDocklet
 
 		void OnAPRemoved (string objectPath)
 		{
-			Console.WriteLine ("AP removed: {0}", objectPath);
 			RemoveFromDict (objectPath);
 			//DumpAPs ();
 		}

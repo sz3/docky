@@ -31,6 +31,10 @@ namespace NetworkManagerDocklet
 	public class NetworkManagerDocklet : IconDockItem
 	{
 		
+		public override uint MenuButton {
+			get { return 1; }
+		}
+		
 		public NetworkManagerDocklet ()
 		{
 			NM = new NetworkManager ();
@@ -151,10 +155,22 @@ namespace NetworkManagerDocklet
 			
 			List<MenuItem> wifi = list[MenuListContainer.Actions];
 			
-			if (NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().Any ())
-				foreach (WirelessDevice device in NM.DevManager.NetworkDevices.OfType<WirelessDevice> ())
-					foreach (List<WirelessAccessPoint> val in device.VisibleAccessPoints.Values.OrderByDescending (ap => ap.Max (wap => wap.Strength)).Take (8))
+			int count = 0;
+			if (NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().Any ()) {
+				foreach (WirelessDevice device in NM.DevManager.NetworkDevices.OfType<WirelessDevice> ()) {
+					foreach (List<WirelessAccessPoint> val in device.VisibleAccessPoints.Values.OrderByDescending (ap => ap.Max (wap => wap.Strength))) {
+						if (count > 7)
+							break;
+						
 						wifi.Add (MakeConEntry (val.OrderByDescending (wap => wap.Strength).First ()));
+						count++;
+					}
+				}
+			}
+			
+			if (!wifi.Any ()) {
+				wifi.Add (new MenuItem ("Disconnected", "nm-no-connection", true));
+			}
 			
 			return list;
 		}
@@ -194,7 +210,7 @@ namespace NetworkManagerDocklet
 		{
 			string apName = ap.SSID;
 			string icon = APIconFromStrength (ap.Strength);
-			bool bold = NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().Any (dev => dev.ActiveAccessPoint.SSID == ap.SSID);
+			bool bold = NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().Any (dev => dev.ActiveAccessPoint == ap);
 			
 			Docky.Menus.MenuItem item = new Docky.Menus.MenuItem (apName, icon, (o, a) => NM.ConnectTo (ap));
 			item.Bold = bold;
