@@ -274,6 +274,20 @@ namespace Docky.Windowing
 			}
 			
 			do {
+				// do a match on the process name
+				string name = NameForPid (pids.ElementAt (currentPid++));
+				if (exec_to_desktop_files.ContainsKey (name)) {
+					foreach (string s in exec_to_desktop_files[name]) {
+						if (string.IsNullOrEmpty (s))
+							continue;
+						yield return s;
+						matched = true;
+					}
+				}
+				if (matched)
+					yield break;
+				
+				// otherwise do a match on the commandline
 				command_line.AddRange (CommandLineForPid (pids.ElementAt (currentPid++)).Where (cmd => !string.IsNullOrEmpty (cmd)));
 				if (command_line.Count () == 0)
 					continue;
@@ -353,6 +367,22 @@ namespace Docky.Windowing
 				.Select (s => s.Split (new []{'/', '\\'}).Last ())
 				.Where (s => !prefix_filters.Any (f => f.IsMatch (s)))
 				.ToArray ();
+		}
+		
+		string NameForPid (int pid)
+		{
+			string name;
+
+			try {
+				string procPath = new [] { "/proc", pid.ToString (), "status" }.Aggregate (Path.Combine);
+				using (StreamReader reader = new StreamReader (procPath))
+					name = reader.ReadLine ();
+			} catch { return ""; }
+			
+			if (string.IsNullOrEmpty (name) || !name.StartsWith ("Name:"))
+				return "";
+			
+			return name.Substring (6);
 		}
 		
 		Dictionary<string, List<string>> BuildExecStrings ()
