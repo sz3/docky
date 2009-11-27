@@ -881,7 +881,7 @@ namespace Docky.Interface
 				if (list.Any ()) {
 					DrawValue val = DrawValues[HoveredItem];
 					val = val.MoveIn (Position, ZoomedIconSize / 2.15);
-					Menu.Anchor = new Gdk.Point ((int) val.Center.X + window_position.X, (int) val.Center.Y + window_position.Y);
+					Menu.Anchor = new Gdk.Point ((int) val.Center.X + window_position.X, (int) val.Center.Y + window_position.Y + 5);
 					Menu.Orientation = Position;
 					Menu.SetItems (list);
 					Menu.Show ();
