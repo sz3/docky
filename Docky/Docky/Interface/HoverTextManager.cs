@@ -101,18 +101,19 @@ namespace Docky.Interface
 			window.SetSizeRequest (surface.Width, surface.Height);
 				
 			Gdk.Point center = Gdk.Point.Zero;
+			int padding = 5;
 			switch (Gravity) {
 			case DockPosition.Top:
-				center = new Gdk.Point (point.X - surface.Width / 2, point.Y);
+				center = new Gdk.Point (point.X - surface.Width / 2, point.Y + padding);
 				break;
 			case DockPosition.Left:
-				center = new Gdk.Point (point.X, point.Y - surface.Height / 2);
+				center = new Gdk.Point (point.X + padding, point.Y - surface.Height / 2);
 				break;
 			case DockPosition.Right:
-				center = new Gdk.Point (point.X - surface.Width, point.Y - surface.Height / 2);
+				center = new Gdk.Point (point.X - surface.Width - padding, point.Y - surface.Height / 2);
 				break;
 			case DockPosition.Bottom:
-				center = new Gdk.Point (point.X - surface.Width / 2, point.Y - surface.Height);
+				center = new Gdk.Point (point.X - surface.Width / 2, point.Y - surface.Height - padding);
 				break;
 			}
 			
