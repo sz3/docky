@@ -275,7 +275,7 @@ namespace Docky.Windowing
 			
 			do {
 				// do a match on the process name
-				string name = NameForPid (pids.ElementAt (currentPid++));
+				string name = NameForPid (pids.ElementAt (currentPid));
 				if (exec_to_desktop_files.ContainsKey (name)) {
 					foreach (string s in exec_to_desktop_files[name]) {
 						if (string.IsNullOrEmpty (s))
