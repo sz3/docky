@@ -23,7 +23,7 @@ namespace NetworkManagerDocklet
 {
 	public class WirelessAccessPoint : DBusObject<IAccessPoint>, IComparable<WirelessAccessPoint>
 	{
-		public WirelessAccessPoint(string objectPath) : base ("org.freedesktop.NetworkManager", objectPath)
+		public WirelessAccessPoint (string objectPath) : base("org.freedesktop.NetworkManager", objectPath)
 		{
 		}
 		
@@ -45,6 +45,7 @@ namespace NetworkManagerDocklet
 				try {
 					return (byte) BusObject.Get (BusName, "Strength");
 				} catch (Exception e) {
+					Log<WirelessAccessPoint>.Error (ObjectPath);
 					Log<WirelessAccessPoint>.Error (e.Message);
 					Log<WirelessAccessPoint>.Debug (e.StackTrace);
 					return (byte) 0;

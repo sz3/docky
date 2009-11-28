@@ -27,59 +27,43 @@ namespace NetworkManagerDocklet
 {
 	public class WirelessDevice : NetworkDevice
 	{
+		public DBusObject<IWirelessDevice> WirelessProperties { get; private set; }
+		
+		IEnumerable<WirelessAccessPoint> accessPoints;
+		IEnumerable<WirelessAccessPoint> AccessPoints {
+			get {
+				IEnumerable<string> paths = AccessPointPaths.Select (ap => ap.ToString ()).ToArray ();
+				
+				accessPoints = accessPoints
+					.Where (ap => paths.Any (p => ap.ObjectPath == p))
+					.Concat (paths
+							.Where (p => !accessPoints.Any (x => x.ObjectPath == p))
+							.Select (p => new WirelessAccessPoint (p))
+							)
+					.ToArray ();
+				
+				return accessPoints;
+			}
+		}
+		
+		public Dictionary<string, IEnumerable<WirelessAccessPoint>> VisibleAccessPoints {
+			get {
+				return AccessPoints
+					.GroupBy (ap => ap.SSID)
+					.Select (en => en.AsEnumerable ())
+					.ToDictionary (en => en.First ().SSID);
+			}
+		}
+		
+		IEnumerable<ObjectPath> AccessPointPaths {
+			get { return WirelessProperties.BusObject.GetAccessPoints (); }
+		}
+		
 		internal WirelessDevice (string objectPath) : base(objectPath)
 		{
-			this.WirelessProperties = new DBusObject<IWirelessDevice> ("org.freedesktop.NetworkManager", objectPath);
-			this.WirelessProperties.BusObject.AccessPointAdded += OnAPAdded;
-			this.WirelessProperties.BusObject.AccessPointRemoved += OnAPRemoved;
+			accessPoints = Enumerable.Empty<WirelessAccessPoint> ();
 			
-			VisibleAccessPoints = new Dictionary<string, List<WirelessAccessPoint>> ();
-			foreach (ObjectPath APObjPath in WirelessProperties.BusObject.GetAccessPoints ()) {
-				WirelessAccessPoint ap = new WirelessAccessPoint (APObjPath.ToString ());
-				AddApToDict (ap);
-			}
-		}
-		
-		public DBusObject<IWirelessDevice> WirelessProperties { get; private set; }
-		public Dictionary<string, List<WirelessAccessPoint>> VisibleAccessPoints { get; private set; }
-
-		void OnAPAdded (string objectPath)
-		{
-			WirelessAccessPoint ap = new WirelessAccessPoint (objectPath);
-			AddApToDict (ap);
-			//DumpAPs ();
-		}
-
-		void OnAPRemoved (string objectPath)
-		{
-			RemoveFromDict (objectPath);
-			//DumpAPs ();
-		}
-		
-		void AddApToDict (WirelessAccessPoint ap)
-		{
-			lock (VisibleAccessPoints) {
-				if (VisibleAccessPoints.ContainsKey (ap.SSID)) {
-				    VisibleAccessPoints[ap.SSID].Add (ap);
-					VisibleAccessPoints[ap.SSID].Sort ();
-				} else {
-					VisibleAccessPoints[ap.SSID] = new List<WirelessAccessPoint> (new [] {ap});
-				}
-			}
-		}
-		
-		// FIXME -- fixed by adding lock (VisibleAccessPoints) ?
-		void RemoveFromDict (string objPath)
-		{
-			lock (VisibleAccessPoints) {
-				foreach (List<WirelessAccessPoint> ap in VisibleAccessPoints.Values)
-					ap.RemoveAll (apt => apt.ObjectPath == objPath);
-				
-				// remove empty entries
-				foreach (string key in VisibleAccessPoints.Keys.ToList ())
-					if (VisibleAccessPoints[key].Count == 0)
-						VisibleAccessPoints.Remove (key);
-			}
+			this.WirelessProperties = new DBusObject<IWirelessDevice> ("org.freedesktop.NetworkManager", objectPath);
 		}
 		
 		public WirelessAccessPoint APBySSID (string ssid)
@@ -93,12 +77,10 @@ namespace NetworkManagerDocklet
 		public WirelessAccessPoint ActiveAccessPoint {
 			get {
 				string access = WirelessProperties.BusObject.Get (WirelessProperties.BusName, "ActiveAccessPoint").ToString ();
-				foreach (string key in VisibleAccessPoints.Keys)
-					if (VisibleAccessPoints[key].Where (ap => ap.ObjectPath == access).Count () > 0)
-						return VisibleAccessPoints[key].Where (ap => ap.ObjectPath == access).First ();
-				
-				// this should also catch the case of no active AP, where access = "/";
-				return null;
+				return AccessPoints
+					.Where (ap => ap.ObjectPath == access)
+					.DefaultIfEmpty (null)
+					.FirstOrDefault ();
 			}
 		}
 		

@@ -158,7 +158,7 @@ namespace NetworkManagerDocklet
 			int count = 0;
 			if (NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().Any ()) {
 				foreach (WirelessDevice device in NM.DevManager.NetworkDevices.OfType<WirelessDevice> ()) {
-					foreach (List<WirelessAccessPoint> val in device.VisibleAccessPoints.Values.OrderByDescending (ap => ap.Max (wap => wap.Strength))) {
+					foreach (IEnumerable<WirelessAccessPoint> val in device.VisibleAccessPoints.Values.OrderByDescending (ap => ap.Max (wap => wap.Strength))) {
 						if (count > 7)
 							break;
 						

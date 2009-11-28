@@ -30,8 +30,8 @@ namespace NetworkManagerDocklet
 		public string BusName { get; private set; }
 		public string ObjectPath { get; private set; }
 		public T BusObject { get; private set; }
-
-		public DBusObject(string busName, string objectPath)
+		
+		public DBusObject (string busName, string objectPath)
 		{
 			this.ObjectPath = objectPath;
 			this.BusName = busName;
