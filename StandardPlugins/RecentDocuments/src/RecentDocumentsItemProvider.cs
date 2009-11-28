@@ -19,9 +19,12 @@ using System.Linq;
 using System.Collections.Generic;
 
 using GLib;
+using Gtk;
+using Mono.Unix;
 
 using Docky.Items;
-using Gtk;
+using Docky.Menus;
+using Docky.Services;
 
 namespace RecentDocuments
 {
@@ -62,6 +65,41 @@ namespace RecentDocuments
 				Items = Enumerable.Empty<AbstractDockItem> ();
 			if (Gtk.RecentManager.Default.Size > 0 && Items.Count () == 0)
 				Items = docs.AsSingle<AbstractDockItem> ();
+		}
+		
+		void ClearRecent ()
+		{
+			Gtk.MessageDialog md = new Gtk.MessageDialog (null, 
+					  0,
+					  Gtk.MessageType.Warning, 
+					  Gtk.ButtonsType.None,
+					  "<b><big>" + Catalog.GetString ("Clear the Recent Documents list?") + "</big></b>");
+			
+			md.Title = Catalog.GetString ("Clear Recent Documents");
+			md.Icon = DockServices.Drawing.LoadIcon ("docky", 22);
+			md.SecondaryText = Catalog.GetString ("If you clear the Recent Documents list, you clear the following:\n" +
+				"\u2022 All items from the Places \u2192 Recent Documents menu item.\n" +
+				"\u2022 All items from the recent documents list in all applications.");
+			md.Modal = false;
+			
+			md.AddButton (Catalog.GetString ("_Cancel"), Gtk.ResponseType.Cancel);
+			md.AddButton (Catalog.GetString ("C_lear"), Gtk.ResponseType.Ok);
+			md.DefaultResponse = Gtk.ResponseType.Ok;
+
+			md.Response += (o, args) => {
+				if (args.ResponseId != Gtk.ResponseType.Cancel)
+					Gtk.RecentManager.Default.PurgeItems ();
+				md.Destroy ();
+			};
+			
+			md.Show ();
+		}
+		
+		public override MenuList GetMenuItems (AbstractDockItem item)
+		{
+			MenuList list = base.GetMenuItems (item);
+			list[MenuListContainer.Footer].Add (new Docky.Menus.MenuItem (Catalog.GetString ("Clear Recent Documents..."), "edit-clear", (o, a) => ClearRecent ()));
+			return list;
 		}
 	}
 }
