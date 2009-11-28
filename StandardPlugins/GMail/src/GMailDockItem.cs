@@ -109,7 +109,7 @@ namespace GMail
 			string icon = Atom.Icon;
 			if (Atom.State == GMailState.ManualReload || Atom.State == GMailState.Error)
 				icon = Atom.DisabledIcon;
-						
+			
 			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (icon, size))
 			{
 				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, 0, 0);
@@ -119,54 +119,27 @@ namespace GMail
 					cr.Paint ();
 			}
 			
-			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-			layout.FontDescription = new Gtk.Style().FontDescription;
-			layout.FontDescription.Weight = Pango.Weight.Bold;
-			layout.Ellipsize = Pango.EllipsizeMode.None;
-			
-			Pango.Rectangle inkRect, logicalRect;
-			
+			BadgeText = "";
 			if (Atom.HasUnread)
-			{
-				using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("badge-yellow.svg@" + GetType ().Assembly.FullName, size / 2))
-				{
-					Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, size / 2, 0);
-					cr.PaintWithAlpha (1);
-				}
-			
-				layout.Width = Pango.Units.FromPixels (size / 2);
-
-				layout.SetText ("" + Atom.UnreadCount);
-
-				if (Atom.UnreadCount < 100)
-					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (size / 4);
-				else
-					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (size / 5);
-
-				layout.GetPixelExtents (out inkRect, out logicalRect);
-				cr.MoveTo (size / 2 + (size / 2 - inkRect.Width) / 2, (size / 2 - logicalRect.Height) / 2);
-
-				Pango.CairoHelper.LayoutPath (cr, layout);
-				cr.LineWidth = 2;
-				cr.Color = new Cairo.Color (0, 0, 0, 0.2);
-				cr.StrokePreserve ();
-				cr.Color = new Cairo.Color (1, 1, 1, 1);
-				cr.Fill ();
-			}
+				BadgeText += Atom.UnreadCount;
 			
 			// no need to draw the label for the Inbox
 			if (Atom.CurrentLabel == "Inbox")
 				return;
-
+			
+			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
 			layout.Width = Pango.Units.FromPixels (size);
-
-			layout.SetText (Atom.CurrentLabel);
-
+			layout.Ellipsize = Pango.EllipsizeMode.None;
+			layout.FontDescription = new Gtk.Style().FontDescription;
+			layout.FontDescription.Weight = Pango.Weight.Bold;
 			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (size / 5);
-
+			
+			layout.SetText (Atom.CurrentLabel);
+			
+			Pango.Rectangle inkRect, logicalRect;
 			layout.GetPixelExtents (out inkRect, out logicalRect);
 			cr.MoveTo ((size - inkRect.Width) / 2, size - logicalRect.Height);
-
+			
 			Pango.CairoHelper.LayoutPath (cr, layout);
 			cr.LineWidth = 2;
 			cr.Color = new Cairo.Color (0, 0, 0, 0.4);
