@@ -186,17 +186,20 @@ namespace Trash
 			} catch {}
 			
 			if (confirm) {
-				string message = Catalog.GetString ("<big><b>Empty all of the items from the trash?</b></big>\n\n" + 
-													"If you choose to empty the trash, all items in it\nwill be permanently lost. " + 
-													"Please note that you\ncan also delete them separately.");
 				Gtk.MessageDialog md = new Gtk.MessageDialog (null, 
-													  Gtk.DialogFlags.Modal,
-													  Gtk.MessageType.Warning, 
-													  Gtk.ButtonsType.None,
-													  message);
+						  0,
+						  Gtk.MessageType.Warning, 
+						  Gtk.ButtonsType.None,
+						  "<b><big>" + Catalog.GetString ("Empty all of the items from the trash?") + "</big></b>");
+				md.Icon = DockServices.Drawing.LoadIcon ("docky", 22);
+				md.SecondaryText = Catalog.GetString ("If you choose to empty the trash, all items in it\n" +
+					"will be permanently lost. Please note that you\n" +
+					"can also delete them separately.");
 				md.Modal = false;
-				md.AddButton ("_Cancel", Gtk.ResponseType.Cancel);
-				md.AddButton ("Empty _Trash", Gtk.ResponseType.Ok);
+				
+				md.AddButton (Catalog.GetString ("_Cancel"), Gtk.ResponseType.Cancel);
+				md.AddButton (Catalog.GetString ("Empty _Trash"), Gtk.ResponseType.Ok);
+				md.DefaultResponse = Gtk.ResponseType.Ok;
 
 				md.Response += (o, args) => {
 					if (args.ResponseId != Gtk.ResponseType.Cancel)
