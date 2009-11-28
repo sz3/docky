@@ -69,6 +69,18 @@ namespace Docky.Menus
 			}
 		}
 		
+		string emblem;
+		public string Emblem {
+			get { return emblem; }
+			set {
+				if (emblem == value)
+					return;
+				emblem = value;
+				if (IconChanged != null)
+					IconChanged (this, EventArgs.Empty);
+			}
+		}
+		
 		public void SendClick ()
 		{
 			if (Clicked != null)

@@ -212,8 +212,13 @@ namespace NetworkManagerDocklet
 			string icon = APIconFromStrength (ap.Strength);
 			bool bold = NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().Any (dev => dev.ActiveAccessPoint == ap);
 			
+			bool secure = ap.Flags == APFlags.Privacy || ap.RsnFlags != AccessPointSecurity.None || ap.WpaFlags != AccessPointSecurity.None;
+			
 			Docky.Menus.MenuItem item = new Docky.Menus.MenuItem (apName, icon, (o, a) => NM.ConnectTo (ap));
 			item.Bold = bold;
+			
+			if (secure)
+				item.Emblem = "nm-secure-lock";
 			
 			return item;
 		}

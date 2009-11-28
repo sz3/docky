@@ -21,6 +21,27 @@ using Docky.Services;
 
 namespace NetworkManagerDocklet
 {
+	public enum AccessPointSecurity
+	{
+		None               = 0,
+		PairWEP40          = 1 << 0,
+		PairWEP104         = 1 << 1,
+		PairTKIP           = 1 << 2,
+		PairCCMP           = 1 << 3,
+		GroupWEP40         = 1 << 4,
+		GroupWEP104        = 1 << 5,
+		GroupTKIP          = 1 << 6,
+		GroupCCMP          = 1 << 7,
+		KeyManagementPSK   = 1 << 8,
+		KeyManagement8021X = 1 << 9,
+	}
+	
+	public enum APFlags
+	{
+		None    = 0,
+		Privacy = 1,
+	}
+	
 	public class WirelessAccessPoint : DBusObject<IAccessPoint>, IComparable<WirelessAccessPoint>
 	{
 		public WirelessAccessPoint (string objectPath) : base("org.freedesktop.NetworkManager", objectPath)
@@ -49,6 +70,45 @@ namespace NetworkManagerDocklet
 					Log<WirelessAccessPoint>.Error (e.Message);
 					Log<WirelessAccessPoint>.Debug (e.StackTrace);
 					return (byte) 0;
+				}
+			}
+		}
+		
+		public APFlags Flags {
+			get {
+				try {
+					return (APFlags) Convert.ToInt32 (BusObject.Get (BusName, "Flags"));
+				} catch (Exception e) {
+					Log<WirelessAccessPoint>.Error (ObjectPath);
+					Log<WirelessAccessPoint>.Error (e.Message);
+					Log<WirelessAccessPoint>.Debug (e.StackTrace);
+					return APFlags.None;
+				}
+			}
+		}
+		
+		public AccessPointSecurity RsnFlags {
+			get {
+				try {
+					return (AccessPointSecurity) Convert.ToInt32 (BusObject.Get (BusName, "RsnFlags"));
+				} catch (Exception e) {
+					Log<WirelessAccessPoint>.Error (ObjectPath);
+					Log<WirelessAccessPoint>.Error (e.Message);
+					Log<WirelessAccessPoint>.Debug (e.StackTrace);
+					return AccessPointSecurity.None;
+				}
+			}
+		}
+		
+		public AccessPointSecurity WpaFlags {
+			get {
+				try {
+					return (AccessPointSecurity) Convert.ToInt32 (BusObject.Get (BusName, "WpaFlags"));
+				} catch (Exception e) {
+					Log<WirelessAccessPoint>.Error (ObjectPath);
+					Log<WirelessAccessPoint>.Error (e.Message);
+					Log<WirelessAccessPoint>.Debug (e.StackTrace);
+					return AccessPointSecurity.None;
 				}
 			}
 		}

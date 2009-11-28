@@ -144,8 +144,15 @@ namespace Docky.Menus
 				if (item.Bold) {
 					cr.Operator = Operator.Add;
 					Gdk.CairoHelper.SetSourcePixbuf (cr, pixbuf, allocation.X + 1, allocation.Y + 3);
-					cr.PaintWithAlpha (.5);
+					cr.PaintWithAlpha (.8);
 					cr.Operator = Operator.Over;
+				}
+				
+				if (!string.IsNullOrEmpty (item.Emblem)) {
+					Gdk.Pixbuf emblem = DockServices.Drawing.LoadIcon (item.Emblem, allocation.Height - 6);
+					Gdk.CairoHelper.SetSourcePixbuf (cr, emblem, allocation.X + 1, allocation.Y + 3);
+					cr.Paint ();
+					emblem.Dispose ();
 				}
 			
 				Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
