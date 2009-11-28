@@ -92,7 +92,8 @@ namespace Docky.Items
 		}
 		
 		public virtual bool ScalableRendering {
-			get { return true; }
+			get;
+			protected set;
 		}
 		
 		public virtual bool RotateWithDock {
@@ -139,6 +140,7 @@ namespace Docky.Items
 		
 		public AbstractDockItem ()
 		{
+			ScalableRendering = true;
 			icon_buffers = new DockySurface[2];
 			redraw = new bool[2];
 			state_times = new Dictionary<ItemState, DateTime> ();

@@ -47,12 +47,13 @@ namespace Docky.Items
 					forced_pixbuf = null;
 				icon = value;
 				
-				Gtk.IconInfo info = Gtk.IconTheme.Default.LookupIcon (icon, 48, Gtk.IconLookupFlags.ForceSvg);
-				if (info != null) {
-					if (info.Filename != null && info.Filename.EndsWith (".svg")) {
+				using (Gtk.IconInfo info = Gtk.IconTheme.Default.LookupIcon (icon, 48, Gtk.IconLookupFlags.ForceSvg)) {
+					if (info != null && info.Filename != null && info.Filename.EndsWith (".svg")) {
 						icon = info.Filename;
+						ScalableRendering = true;
+					} else {
+						ScalableRendering = false;
 					}
-					info.Dispose ();
 				}
 				
 				OnIconUpdated ();
