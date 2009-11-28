@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-17 17:39-0600\n"
+"POT-Creation-Date: 2009-11-28 14:22-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,67 +49,71 @@ msgstr ""
 msgid "Delete Dock"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
 msgid "None"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:76
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:78
 msgid "Autohide"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:79
 msgid "Intellihide"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:78
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
 msgid "Window Dodge"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:93
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:95
 msgid "Fade On Hide"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:123
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:125
 msgid "Icon Size:"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:134
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:136
 msgid "Autohide:"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:144
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:146
 msgid "Indicate Multiple Windows"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:159
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:160
+msgid "Panel Mode"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:175
 msgid "Manage Windows Without Launcher"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:174
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:190
 msgid "Zoom:"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:246
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:262
 msgid "<b>Inactive Plugins</b>"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:254
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:270
 msgid "<b>Active Plugins</b>"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:293
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:342
 msgid "Digital Clock"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:299
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:348
 msgid "24-Hour Clock"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:305
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:354
 msgid "Show Date"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:311
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:360
 msgid "Select Theme"
 msgstr ""
 
@@ -151,25 +155,29 @@ msgstr ""
 msgid "Username or Password not set"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:262
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:246
+msgid "(no subject)"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:264
 #, csharp-format
 msgid "From: {0}"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:273
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:277
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:275
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:279
 msgid "Feed Error"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:282
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:284
 msgid "Invalid Username"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:286
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:288
 msgid "Network Error"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:291
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:293
 msgid "General Error"
 msgstr ""
 
@@ -201,7 +209,7 @@ msgid "Compose Mail"
 msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:247
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:324
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:326
 msgid "Settings"
 msgstr ""
 
@@ -262,13 +270,23 @@ msgstr ""
 msgid "_Add"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:193
+msgid "Empty all of the items from the trash?"
+msgstr ""
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:195
 msgid ""
-"<big><b>Empty all of the items from the trash?</b></big>\n"
-"\n"
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
+msgstr ""
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:200
+msgid "_Cancel"
+msgstr ""
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:201
+msgid "Empty _Trash"
 msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:84
@@ -286,16 +304,16 @@ msgstr ""
 msgid "Fetching data..."
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:304
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:306
 msgid "Radar Map"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:317
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:319
 #, csharp-format
 msgid "{0}'s Forecast"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:331
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:333
 msgid "Reload Weather Data"
 msgstr ""
 
@@ -331,31 +349,31 @@ msgstr ""
 msgid "Tomorrow"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:340
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:339
 msgid "Humidity"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:342
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:341
 msgid "Temp"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:344
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:343
 msgid "Feels Like"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:346
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:345
 msgid "Wind"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:347
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:346
 msgid "Direction"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:349
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:348
 msgid "Sunrise"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:350
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:349
 msgid "Sunset"
 msgstr ""
 
