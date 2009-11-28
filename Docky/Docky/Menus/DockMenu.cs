@@ -241,7 +241,7 @@ namespace Docky.Menus
 			SkipTaskbarHint = true;
 			Resizable = false;
 			Modal = true;
-			TypeHint = WindowTypeHint.PopupMenu;
+			TypeHint = WindowTypeHint.Dock;
 			
 			AddEvents ((int) Gdk.EventMask.AllEventsMask);
 			
