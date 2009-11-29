@@ -1,4 +1,4 @@
-# Spanish translation for docky
+# Hungarian translation for docky
 # Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the docky package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-28 14:22-0600\n"
-"PO-Revision-Date: 2009-11-28 21:41+0000\n"
-"Last-Translator: Sebastián Porta <sebastianporta@gmail.com>\n"
-"Language-Team: Spanish <es@li.org>\n"
+"PO-Revision-Date: 2009-11-18 08:34+0000\n"
+"Last-Translator: NewPlayer <Unknown>\n"
+"Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,260 +20,260 @@ msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:106
 msgid "Click on any dock to configure."
-msgstr "Selecciona cualquier dock para configurar."
+msgstr "A beállításokhoz kattintson valamelyik dokkra."
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:57
 msgid "Docky Configuration"
-msgstr "Configuración de Docky"
+msgstr "Docky beállításai"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:85
 msgid "Start When Computer Starts"
-msgstr "Iniciar Cuando Inicia la Computadora"
+msgstr "Indítás a számítógép indításakor"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:100
 msgid "Theme:"
-msgstr "Tema:"
+msgstr "Téma:"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:123
 msgid "<b>General Options</b>"
-msgstr "<b>Opciones Generales</b>"
+msgstr "<b>Általános beállítások</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:144
 msgid "<b>Dock Configuration</b>"
-msgstr "<b>Configuración del Dock</b>"
+msgstr "<b>Dokkbeállítások</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:178
 msgid "New Dock"
-msgstr "Nuevo Dock"
+msgstr "Új dokk"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:205
 msgid "Delete Dock"
-msgstr "Borro Dock"
+msgstr "Dokk törlése"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
 msgid "None"
-msgstr "Ninguno"
+msgstr "Semmi"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:78
 msgid "Autohide"
-msgstr "Autoesconder"
+msgstr "Automatikus elrejtés"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:79
 msgid "Intellihide"
-msgstr ""
+msgstr "Intelligens elrejtés"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
 msgid "Window Dodge"
-msgstr "Esquivar Ventanas"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:95
 msgid "Fade On Hide"
-msgstr "Desvanecer Al Esconder"
+msgstr "Áttűnés elrejtéskor"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:125
 msgid "Icon Size:"
-msgstr "Tamaño del Icono:"
+msgstr "Ikonméret:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:136
 msgid "Autohide:"
-msgstr "Autoesconder:"
+msgstr "Automatikus elrejtés:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:146
 msgid "Indicate Multiple Windows"
-msgstr "Indicar Múltiples Ventanas"
+msgstr "Többszörös ablakok jelzése"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:160
 msgid "Panel Mode"
-msgstr "Modo Panel"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:175
 msgid "Manage Windows Without Launcher"
-msgstr "Gestionar Ventanas Sin Lanzador"
+msgstr "Indítóikon nélküli ablakok kezelése"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:190
 msgid "Zoom:"
-msgstr "Zoom:"
+msgstr "Nagyítás:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:262
 msgid "<b>Inactive Plugins</b>"
-msgstr "<b>Plugins Inactivos</b>"
+msgstr "Inaktív bővítmények"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:270
 msgid "<b>Active Plugins</b>"
-msgstr "<b>Plugins Activos</b>"
+msgstr "Aktív bővítmények"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:342
 msgid "Digital Clock"
-msgstr "Reloj Digital"
+msgstr "Digitális óra"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:348
 msgid "24-Hour Clock"
-msgstr "Reloj de 24 Horas"
+msgstr "24 órás formátum"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:354
 msgid "Show Date"
-msgstr "Mostrar Fecha"
+msgstr "Dátum megjelenítése"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:360
 msgid "Select Theme"
-msgstr "Seleccionar Tema"
+msgstr "Válasszon témát"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:45
 msgid "Themes"
-msgstr "Temas"
+msgstr "Témák"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:50
 msgid "Theme"
-msgstr "Tema"
+msgstr "Téma"
 
 #: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:43
 #, csharp-format
 msgid "Sign up for {0}"
-msgstr "Inscribirse en {0}"
+msgstr "Feliratkozás erre: {0}"
 
 #: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:44
 msgid "Validating..."
-msgstr "Validando..."
+msgstr "Ellenőrzés…"
 
 #: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:45
 #, csharp-format
 msgid "Don't have {0}?"
-msgstr "¿No tiene {0}?"
+msgstr "Nincs {0}?"
 
 #: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:46
 msgid "Account validation failed!"
-msgstr "¡Ha fallado la validación de la cuenta!"
+msgstr "A fiók ellenőrzése sikertelen!"
 
 #: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:47
 msgid "Verify and save account information"
-msgstr "Verificar y guardar la información de la cuenta"
+msgstr "Fiókinformáció ellenőrzése és mentése"
 
 #: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:48
 msgid "Account validation succeeded!"
-msgstr "¡La cuenta se validó correctament!"
+msgstr "A fiók ellenőrzése sikeres!"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:196
 msgid "Username or Password not set"
-msgstr "Nombre de Usuario o Contraseña no configurados"
+msgstr "A felhasználónév vagy jelszó nincs megadva"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:246
 msgid "(no subject)"
-msgstr "(sin asunto)"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:264
 #, csharp-format
 msgid "From: {0}"
-msgstr "De: {0}"
+msgstr "Feladó: {0}"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:275
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:279
 msgid "Feed Error"
-msgstr "Error de Suministro"
+msgstr "Hírforráshiba"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:284
 msgid "Invalid Username"
-msgstr "Nombre de Usuario Inválido"
+msgstr "Érvénytelen felhasználónév"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:288
 msgid "Network Error"
-msgstr "Error de Red"
+msgstr "Hálózati hiba"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:293
 msgid "General Error"
-msgstr "Error General"
+msgstr "Általános hiba"
 
 #: ../StandardPlugins/GMail/src/GMailConfiguration.cs:38
 msgid "Labels"
-msgstr "Etiquetas"
+msgstr "Címkék"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:70
 msgid "No unread mail"
-msgstr "No hay correo sin leer"
+msgstr "Nincs új üzenet"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:72
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
-msgstr[0] "{0} mensaje sin leer"
-msgstr[1] "{0} mensajes sin leer"
+msgstr[0] "olvasatlan üzenet"
+msgstr[1] "olvasatlan üzenetek"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:92
 msgid "Checking mail..."
-msgstr "Comprobando correo..."
+msgstr "E-mailek ellenőrzése..."
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
 msgid "View "
-msgstr "Ver "
+msgstr "Nézet "
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:232
 msgid "Compose Mail"
-msgstr "Redactar Correo"
+msgstr "Levél írása"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:247
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:326
 msgid "Settings"
-msgstr "Configuración"
+msgstr "Beállítások"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:255
 msgid "Check Now"
-msgstr "Comprobar Ahora"
+msgstr "Ellenőrzés most"
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
-msgstr "De: "
+msgstr "Feladó: "
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs:89
 msgid "Password"
-msgstr "Contraseña"
+msgstr "Jelszó"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs:111
 msgid "Username"
-msgstr "Nombre de Usuario"
+msgstr "Felhasználónév"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs:124
 msgid "<i>Verify and save account information</i>"
-msgstr "<i>Verificar y guardar la información de la cuenta</i>"
+msgstr "<i>Felhasználói fiók információinak ellenőrzése és mentése</i>"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs:180
 msgid "Don't have an account?"
-msgstr "¿No tiene una cuenta?"
+msgstr "Nincs fiókja?"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:70
 msgid "Check _Every"
-msgstr "Comprobar _Cada"
+msgstr "_Ellenőrzés"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:80
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:279
 msgid "mins"
-msgstr "mins"
+msgstr "perc"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:133
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:155
 msgid "Move _Up"
-msgstr "Mover _Arriba"
+msgstr "Mozgatás _fel"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:145
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:167
 msgid "Move _Down"
-msgstr "Mover _Abajo"
+msgstr "Mozgatás _le"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:157
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:179
 msgid "_Remove"
-msgstr "_Quitar"
+msgstr "_Eltávolítás"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:180
 msgid "Add _Label"
-msgstr "Agregar _Etiqueta"
+msgstr "_Címke hozzáadása"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:202
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:235
 msgid "_Add"
-msgstr "_Añadir"
+msgstr "_Hozzáadás"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:193
 msgid "Empty all of the items from the trash?"
-msgstr "¿Borrar todos los elementos de la papelera?"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:195
 msgid ""
@@ -281,105 +281,102 @@ msgid ""
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
-"Si elige vaciar la papelera, todos los elementos en ella\n"
-"se borrarán permanentemente. Note que también\n"
-"puede borrarlos separadamente."
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:200
 msgid "_Cancel"
-msgstr "_Cancelar"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:201
 msgid "Empty _Trash"
-msgstr "Vaciar la _papelera"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:84
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:87
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:92
 msgid "Invalid Weather Location"
-msgstr "Lugar del Clima Inválido"
+msgstr "Érvénytelen hely"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:90
 msgid "Network Error: "
-msgstr "Error de Red: "
+msgstr "Hálózati hiba: "
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:75
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:85
 msgid "Fetching data..."
-msgstr "Recibiendo datos..."
+msgstr "Adatok fogadása..."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:306
 msgid "Radar Map"
-msgstr "Mapa de Radar"
+msgstr "Műholdas térkép"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:319
 #, csharp-format
 msgid "{0}'s Forecast"
-msgstr "Pronóstico para {0}"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:333
 msgid "Reload Weather Data"
-msgstr "Recargar Datos del Clima"
+msgstr "Időjárási adatok újratöltése"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:88
 msgid "_Weather Provider"
-msgstr "Proveedor del CLima"
+msgstr "_Időjárásjelentés-szolgáltató"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:116
 msgid "Some information about the weather source."
-msgstr "Algo de información acerca de la fuente del clima."
+msgstr "Információk az időjárásjelntés forrásáról."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:202
 msgid "Add _Location"
-msgstr "Agregar _Lugar"
+msgstr "_Hely hozzáadása"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:224
 msgid "_Search"
-msgstr "_Buscar"
+msgstr "_Keresés"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:269
 msgid "Automatically Update _Every"
-msgstr "Actualizar Automaticamente _Cada"
+msgstr "Automatikus _frissítés"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:309
 msgid "Use _Metric Units"
-msgstr "Usar Unidades _Métricas"
+msgstr "_Metrikus mértékegység használata"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:87
 msgid "Today"
-msgstr "Hoy"
+msgstr "Ma"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:90
 msgid "Tomorrow"
-msgstr "Mañana"
+msgstr "Holnap"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:339
 msgid "Humidity"
-msgstr "Humedad"
+msgstr "Páratartalom"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:341
 msgid "Temp"
-msgstr "Temperatura"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:343
 msgid "Feels Like"
-msgstr "Sensación Térmica"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:345
 msgid "Wind"
-msgstr "Viento"
+msgstr "Szeles"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:346
 msgid "Direction"
-msgstr "Dirección"
+msgstr "Hivatkozás"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:348
 msgid "Sunrise"
-msgstr "Amanecer"
+msgstr "Napfelkelte"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:349
 msgid "Sunset"
-msgstr "Ocaso"
+msgstr "Napsütés"
 
 #: ../data/docky.desktop.in.h:1
 msgid "Docky"
@@ -387,26 +384,4 @@ msgstr "Docky"
 
 #: ../data/docky.desktop.in.h:2
 msgid "The finest dock no money can buy."
-msgstr "El mejor dock que el dinero no puede comprar."
-
-#~ msgid ""
-#~ "<big><b>Empty all of the items from the trash?</b></big>\n"
-#~ "\n"
-#~ "If you choose to empty the trash, all items in it\n"
-#~ "will be permanently lost. Please note that you\n"
-#~ "can also delete them separately."
-#~ msgstr ""
-#~ "<big><b>¿Borrar todos los archivos de la papelera?</b></big>\n"
-#~ "\n"
-#~ "Si elige vaciar la papelera, todos los elementos en ella\n"
-#~ "se borrarán permanentemente. Tenga en cuenta que\n"
-#~ "también puede borrarlos separadamente."
-
-#~ msgid "Exec"
-#~ msgstr "Ejecutar"
-
-#~ msgid "Icon"
-#~ msgstr "Ícono"
-
-#~ msgid "Name"
-#~ msgstr "Nombre"
+msgstr "A legjobb dokk, amit nem lehet pénzért megvenni."

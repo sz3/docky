@@ -1,4 +1,4 @@
-# Spanish translation for docky
+# Galician translation for docky
 # Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the docky package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-28 14:22-0600\n"
-"PO-Revision-Date: 2009-11-28 21:41+0000\n"
-"Last-Translator: Sebastián Porta <sebastianporta@gmail.com>\n"
-"Language-Team: Spanish <es@li.org>\n"
+"PO-Revision-Date: 2009-11-25 11:18+0000\n"
+"Last-Translator: Indalecio Freiría Santos <Unknown>\n"
+"Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:106
 msgid "Click on any dock to configure."
-msgstr "Selecciona cualquier dock para configurar."
+msgstr "Selecciona calquera dock para configurar."
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:57
 msgid "Docky Configuration"
@@ -28,7 +28,7 @@ msgstr "Configuración de Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:85
 msgid "Start When Computer Starts"
-msgstr "Iniciar Cuando Inicia la Computadora"
+msgstr "Iniciar cando inicia o computador"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:100
 msgid "Theme:"
@@ -36,59 +36,59 @@ msgstr "Tema:"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:123
 msgid "<b>General Options</b>"
-msgstr "<b>Opciones Generales</b>"
+msgstr "<b>Opcións xerais</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:144
 msgid "<b>Dock Configuration</b>"
-msgstr "<b>Configuración del Dock</b>"
+msgstr "<b>Configuración do Dock</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:178
 msgid "New Dock"
-msgstr "Nuevo Dock"
+msgstr "Novo Dock"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:205
 msgid "Delete Dock"
-msgstr "Borro Dock"
+msgstr "Borrar Dock"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
 msgid "None"
-msgstr "Ninguno"
+msgstr "Ningún"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:78
 msgid "Autohide"
-msgstr "Autoesconder"
+msgstr "Ocultar automaticamente"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:79
 msgid "Intellihide"
-msgstr ""
+msgstr "Ocultar de xeito intelixente"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
 msgid "Window Dodge"
-msgstr "Esquivar Ventanas"
+msgstr "Esquivar xanela"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:95
 msgid "Fade On Hide"
-msgstr "Desvanecer Al Esconder"
+msgstr "Desvanecer ao ocultar"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:125
 msgid "Icon Size:"
-msgstr "Tamaño del Icono:"
+msgstr "Tamaño da icona:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:136
 msgid "Autohide:"
-msgstr "Autoesconder:"
+msgstr "Ocultar automaticamente:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:146
 msgid "Indicate Multiple Windows"
-msgstr "Indicar Múltiples Ventanas"
+msgstr "Indicar xanelas múltiples"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:160
 msgid "Panel Mode"
-msgstr "Modo Panel"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:175
 msgid "Manage Windows Without Launcher"
-msgstr "Gestionar Ventanas Sin Lanzador"
+msgstr "Xestionar xanelas sen lanzador"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:190
 msgid "Zoom:"
@@ -96,27 +96,27 @@ msgstr "Zoom:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:262
 msgid "<b>Inactive Plugins</b>"
-msgstr "<b>Plugins Inactivos</b>"
+msgstr "<b>Complementos inactivos</b>"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:270
 msgid "<b>Active Plugins</b>"
-msgstr "<b>Plugins Activos</b>"
+msgstr "<b>Complementos activos</b>"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:342
 msgid "Digital Clock"
-msgstr "Reloj Digital"
+msgstr "Reloxo dixital"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:348
 msgid "24-Hour Clock"
-msgstr "Reloj de 24 Horas"
+msgstr "Reloxo de 24 horas"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:354
 msgid "Show Date"
-msgstr "Mostrar Fecha"
+msgstr "Amosar a data"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:360
 msgid "Select Theme"
-msgstr "Seleccionar Tema"
+msgstr "Seleccionar tema"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:45
 msgid "Themes"
@@ -129,36 +129,36 @@ msgstr "Tema"
 #: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:43
 #, csharp-format
 msgid "Sign up for {0}"
-msgstr "Inscribirse en {0}"
+msgstr "Rexístrese para {0}"
 
 #: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:44
 msgid "Validating..."
-msgstr "Validando..."
+msgstr "A validar..."
 
 #: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:45
 #, csharp-format
 msgid "Don't have {0}?"
-msgstr "¿No tiene {0}?"
+msgstr "Non ten {0}?"
 
 #: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:46
 msgid "Account validation failed!"
-msgstr "¡Ha fallado la validación de la cuenta!"
+msgstr "Houbo un fallo ao validar a conta!"
 
 #: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:47
 msgid "Verify and save account information"
-msgstr "Verificar y guardar la información de la cuenta"
+msgstr "<i>Verificar e gardar a información da conta</i>"
 
 #: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:48
 msgid "Account validation succeeded!"
-msgstr "¡La cuenta se validó correctament!"
+msgstr "Conta validada correctamente!"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:196
 msgid "Username or Password not set"
-msgstr "Nombre de Usuario o Contraseña no configurados"
+msgstr "Nome de usuario ou contrasinal non configurados"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:246
 msgid "(no subject)"
-msgstr "(sin asunto)"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:264
 #, csharp-format
@@ -168,19 +168,19 @@ msgstr "De: {0}"
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:275
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:279
 msgid "Feed Error"
-msgstr "Error de Suministro"
+msgstr "Erro de subministro"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:284
 msgid "Invalid Username"
-msgstr "Nombre de Usuario Inválido"
+msgstr "Nome de usuario inválido"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:288
 msgid "Network Error"
-msgstr "Error de Red"
+msgstr "Erro de Conexión"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:293
 msgid "General Error"
-msgstr "Error General"
+msgstr "Erro xeral"
 
 #: ../StandardPlugins/GMail/src/GMailConfiguration.cs:38
 msgid "Labels"
@@ -188,18 +188,18 @@ msgstr "Etiquetas"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:70
 msgid "No unread mail"
-msgstr "No hay correo sin leer"
+msgstr "Non hai correo sen ler"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:72
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
-msgstr[0] "{0} mensaje sin leer"
-msgstr[1] "{0} mensajes sin leer"
+msgstr[0] "{0} mensaxe sen ler"
+msgstr[1] "{0} mensaxes sen ler"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:92
 msgid "Checking mail..."
-msgstr "Comprobando correo..."
+msgstr "Comprobando o correo..."
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
 msgid "View "
@@ -207,7 +207,7 @@ msgstr "Ver "
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:232
 msgid "Compose Mail"
-msgstr "Redactar Correo"
+msgstr "Redactar"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:247
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:326
@@ -216,7 +216,7 @@ msgstr "Configuración"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:255
 msgid "Check Now"
-msgstr "Comprobar Ahora"
+msgstr "Comprobar agora"
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
@@ -224,56 +224,56 @@ msgstr "De: "
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs:89
 msgid "Password"
-msgstr "Contraseña"
+msgstr "Contrasinal"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs:111
 msgid "Username"
-msgstr "Nombre de Usuario"
+msgstr "Nome de usuario"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs:124
 msgid "<i>Verify and save account information</i>"
-msgstr "<i>Verificar y guardar la información de la cuenta</i>"
+msgstr "<i>Verificar e gardar a información da conta</i>"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs:180
 msgid "Don't have an account?"
-msgstr "¿No tiene una cuenta?"
+msgstr "Non tes unha conta?"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:70
 msgid "Check _Every"
-msgstr "Comprobar _Cada"
+msgstr "Comprobar _cada"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:80
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:279
 msgid "mins"
-msgstr "mins"
+msgstr "minutos"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:133
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:155
 msgid "Move _Up"
-msgstr "Mover _Arriba"
+msgstr "S_ubir"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:145
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:167
 msgid "Move _Down"
-msgstr "Mover _Abajo"
+msgstr "_Baixar"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:157
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:179
 msgid "_Remove"
-msgstr "_Quitar"
+msgstr "_Eliminar"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:180
 msgid "Add _Label"
-msgstr "Agregar _Etiqueta"
+msgstr "Engadir _etiqueta"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:202
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:235
 msgid "_Add"
-msgstr "_Añadir"
+msgstr "_Engadir"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:193
 msgid "Empty all of the items from the trash?"
-msgstr "¿Borrar todos los elementos de la papelera?"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:195
 msgid ""
@@ -281,57 +281,54 @@ msgid ""
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
-"Si elige vaciar la papelera, todos los elementos en ella\n"
-"se borrarán permanentemente. Note que también\n"
-"puede borrarlos separadamente."
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:200
 msgid "_Cancel"
-msgstr "_Cancelar"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:201
 msgid "Empty _Trash"
-msgstr "Vaciar la _papelera"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:84
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:87
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:92
 msgid "Invalid Weather Location"
-msgstr "Lugar del Clima Inválido"
+msgstr "Lugar invalido do clima"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:90
 msgid "Network Error: "
-msgstr "Error de Red: "
+msgstr "Erro de rede: "
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:75
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:85
 msgid "Fetching data..."
-msgstr "Recibiendo datos..."
+msgstr "Recibindo datos..."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:306
 msgid "Radar Map"
-msgstr "Mapa de Radar"
+msgstr "Mapa de radar"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:319
 #, csharp-format
 msgid "{0}'s Forecast"
-msgstr "Pronóstico para {0}"
+msgstr "Prognóstico para {0}"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:333
 msgid "Reload Weather Data"
-msgstr "Recargar Datos del Clima"
+msgstr "Recargar datos do clima"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:88
 msgid "_Weather Provider"
-msgstr "Proveedor del CLima"
+msgstr "Proveedor do clima"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:116
 msgid "Some information about the weather source."
-msgstr "Algo de información acerca de la fuente del clima."
+msgstr "Algo de información acerca da fonte do clima."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:202
 msgid "Add _Location"
-msgstr "Agregar _Lugar"
+msgstr "Engadir _lugar"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:224
 msgid "_Search"
@@ -339,23 +336,23 @@ msgstr "_Buscar"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:269
 msgid "Automatically Update _Every"
-msgstr "Actualizar Automaticamente _Cada"
+msgstr "Actualizar automaticamente _cada"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:309
 msgid "Use _Metric Units"
-msgstr "Usar Unidades _Métricas"
+msgstr "Usar unidades _métricas"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:87
 msgid "Today"
-msgstr "Hoy"
+msgstr "Hoxe"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:90
 msgid "Tomorrow"
-msgstr "Mañana"
+msgstr "Mañá"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:339
 msgid "Humidity"
-msgstr "Humedad"
+msgstr "Humidade"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:341
 msgid "Temp"
@@ -363,11 +360,11 @@ msgstr "Temperatura"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:343
 msgid "Feels Like"
-msgstr "Sensación Térmica"
+msgstr "Sensación térmica"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:345
 msgid "Wind"
-msgstr "Viento"
+msgstr "Vento"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:346
 msgid "Direction"
@@ -375,11 +372,11 @@ msgstr "Dirección"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:348
 msgid "Sunrise"
-msgstr "Amanecer"
+msgstr "Amencer"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:349
 msgid "Sunset"
-msgstr "Ocaso"
+msgstr "Entre lusco e fusco"
 
 #: ../data/docky.desktop.in.h:1
 msgid "Docky"
@@ -387,26 +384,4 @@ msgstr "Docky"
 
 #: ../data/docky.desktop.in.h:2
 msgid "The finest dock no money can buy."
-msgstr "El mejor dock que el dinero no puede comprar."
-
-#~ msgid ""
-#~ "<big><b>Empty all of the items from the trash?</b></big>\n"
-#~ "\n"
-#~ "If you choose to empty the trash, all items in it\n"
-#~ "will be permanently lost. Please note that you\n"
-#~ "can also delete them separately."
-#~ msgstr ""
-#~ "<big><b>¿Borrar todos los archivos de la papelera?</b></big>\n"
-#~ "\n"
-#~ "Si elige vaciar la papelera, todos los elementos en ella\n"
-#~ "se borrarán permanentemente. Tenga en cuenta que\n"
-#~ "también puede borrarlos separadamente."
-
-#~ msgid "Exec"
-#~ msgstr "Ejecutar"
-
-#~ msgid "Icon"
-#~ msgstr "Ícono"
-
-#~ msgid "Name"
-#~ msgstr "Nombre"
+msgstr "O mellor dock que os cartos non poden mercar."

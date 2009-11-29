@@ -7,259 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-11-12 21:36-0600\n"
-"PO-Revision-Date: 2009-11-13 10:24+0000\n"
+"POT-Creation-Date: 2009-11-28 14:22-0600\n"
+"PO-Revision-Date: 2009-11-25 13:48+0000\n"
 "Last-Translator: Ibai Oihanguren <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-11-13 14:36+0000\n"
+"X-Launchpad-Export-Date: 2009-11-29 00:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:71
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
-msgid "Fetching data..."
-msgstr "Datuak eskuratzen..."
-
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:293
-msgid "Radar Map"
-msgstr "Radar-mapa"
-
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:306
-msgid "'s Forecast"
-msgstr "- Aurrikuspenak"
-
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:313
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:246
-msgid "Settings"
-msgstr "Ezarpenak"
-
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:320
-msgid "Reload Weather Data"
-msgstr "Birkargatu eguraldi informazioa"
-
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:84
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:87
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:92
-msgid "Invalid Weather Location"
-msgstr "Kokaleku baliogabea"
-
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:90
-msgid "Network Error: "
-msgstr "Sareko errorea: "
-
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:87
-msgid "Today"
-msgstr "Gaur"
-
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:90
-msgid "Tomorrow"
-msgstr "Bihar"
-
-#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:88
-msgid "_Weather Provider"
-msgstr "_Hornitzailea"
-
-#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:116
-msgid "Some information about the weather source."
-msgstr "Eguraldi aurrikuspenaren jatorriari buruzko informazioa"
-
-#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:155
-#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:133
-msgid "Move _Up"
-msgstr "Eraman _gora"
-
-#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:167
-#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:145
-msgid "Move _Down"
-msgstr "Eraman _behera"
-
-#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:179
-#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:157
-msgid "_Remove"
-msgstr "_Kendu"
-
-#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:202
-msgid "Add _Location"
-msgstr "Gehi_tu kokalekua"
-
-#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:224
-msgid "_Search"
-msgstr "Bi_latu"
-
-#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:235
-#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:202
-msgid "_Add"
-msgstr "_Gehitu"
-
-#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:269
-msgid "Automatically Update _Every"
-msgstr "Automatikoki eguneratzeko _maiztasuna:"
-
-#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:279
-#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:80
-msgid "mins"
-msgstr "min"
-
-#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:309
-msgid "Use _Metric Units"
-msgstr "_Erabili unitate metrikoak"
-
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
-msgid ""
-"<big><b>Empty all of the items from the trash?</b></big>\n"
-"\n"
-"If you choose to empty the trash, all items in it\n"
-"will be permanently lost. Please note that you\n"
-"can also delete them separately."
-msgstr ""
-"<big><b>Zakarrontziko elementu guztiak hustu?</b></big>\n"
-"\n"
-"Zakarrontzia husten baduzu, bertan dauden\n"
-"elementu guztiak galduko dira, betirako.\n"
-"Gogora ezazu banaka ere ezabatu\n"
-"ditzakezula."
-
-#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:70
-msgid "Check _Every"
-msgstr "Mezurik dagoen _begiratu"
-
-#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:180
-msgid "Add _Label"
-msgstr "_Etiketa gehitu"
-
-#: ../StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs:89
-msgid "Password"
-msgstr "Pasahitza"
-
-#: ../StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs:111
-msgid "Username"
-msgstr "Erabiltzailea"
-
-#: ../StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs:124
-msgid "<i>Verify and save account information</i>"
-msgstr "<i>Kontuaren informazioa egiaztatu eta gorde</li>"
-
-#: ../StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs:180
-msgid "Don't have an account?"
-msgstr "Ez daukazu konturik?"
-
-#: ../StandardPlugins/GMail/src/GMailConfiguration.cs:38
-msgid "Labels"
-msgstr "Etiketak"
-
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:69
-msgid "No unread mail"
-msgstr "Mezu berririk ez"
-
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:71
-#, csharp-format
-msgid "{0} unread message"
-msgid_plural "{0} unread messages"
-msgstr[0] "Mezu berri {0}"
-msgstr[1] "{0} mezu berri"
-
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:91
-msgid "Checking mail..."
-msgstr "Mezuak begiratzen..."
-
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:226
-msgid "View "
-msgstr "Ikusi "
-
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:231
-msgid "Compose Mail"
-msgstr "Idatzi mezu berria"
-
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:254
-msgid "Check Now"
-msgstr "Begiratu orain"
-
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:179
-msgid "Username or Password not set"
-msgstr "Erabiltzaile-izena edo pasahitza falta da"
-
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:245
-#, csharp-format
-msgid "From: {0}"
-msgstr "Nork: {0}"
-
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:256
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:260
-msgid "Feed Error"
-msgstr "Jario errorea"
-
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:265
-msgid "Invalid Username"
-msgstr "Okerreko erabiltzaile-izena"
-
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:269
-msgid "Network Error"
-msgstr "Sareko errorea"
-
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:274
-msgid "General Error"
-msgstr "Errore orokorra"
-
-#: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:43
-#, csharp-format
-msgid "Sign up for {0}"
-msgstr "{0}en izena eman"
-
-#: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:44
-msgid "Validating..."
-msgstr "Egiaztatzen..."
-
-#: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:45
-#, csharp-format
-msgid "Don't have {0}?"
-msgstr "Ez daukazu {0} konturik?"
-
-#: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:46
-msgid "Account validation failed!"
-msgstr "Kontuaren egiaztaketak huts egin du"
-
-#: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:47
-msgid "Verify and save account information"
-msgstr "Egiaztatu eta gorde kontuaren informazioa"
-
-#: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:48
-msgid "Account validation succeeded!"
-msgstr "Kontua behar bezala egiaztatu da"
-
-#: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
-msgid "From: "
-msgstr "Nork: "
-
-#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:45
-msgid "Themes"
-msgstr "Gaiak"
-
-#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:50
-msgid "Theme"
-msgstr "Gaia"
-
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:293
-msgid "Digital Clock"
-msgstr "Erloju digitala"
-
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:299
-msgid "24-Hour Clock"
-msgstr "24 orduko erlojua"
-
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:305
-msgid "Show Date"
-msgstr "Erakutsi data"
-
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:311
-msgid "Select Theme"
-msgstr "Hautatu gaia"
-
-#: ../Docky.Windowing/Windowing/WindowMatcher.cs:333
-msgid "Exec"
-msgstr "Exekutatu"
+#: ../Docky/Docky/ConfigurationWindow.cs:106
+msgid "Click on any dock to configure."
+msgstr "Klikatu edozein dock konfiguratzeko"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:57
 msgid "Docky Configuration"
@@ -289,65 +50,333 @@ msgstr "Dock berria"
 msgid "Delete Dock"
 msgstr "Dock-a ezabatu"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
 msgid "None"
 msgstr "Inoiz ez"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:76
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:78
 msgid "Autohide"
 msgstr "Automatikoki ezkutatu"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:79
 msgid "Intellihide"
-msgstr "Intellihide"
+msgstr "Adimentsuki ezkutatu"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:78
-msgid "Defenestraphobia"
-msgstr "Defenestraphobia"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
+msgid "Window Dodge"
+msgstr "Leihoak ekidin"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:93
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:95
 msgid "Fade On Hide"
 msgstr "Pixkanaka desagertu"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:123
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:125
 msgid "Icon Size:"
 msgstr "Ikonoen tamaina:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:134
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:136
 msgid "Autohide:"
 msgstr "Ezkutatu:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:144
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:146
 msgid "Indicate Multiple Windows"
 msgstr "Adierazi leiho batetik gora daudenean"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:159
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:160
+msgid "Panel Mode"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:175
 msgid "Manage Windows Without Launcher"
 msgstr "Kudeatu abiarazle gabeko leihoak"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:174
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:190
 msgid "Zoom:"
 msgstr "Zoom-a:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:246
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:262
 msgid "<b>Inactive Plugins</b>"
 msgstr "<b>Plugin ez-aktiboak</b>"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:254
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:270
 msgid "<b>Active Plugins</b>"
 msgstr "<b>Plugin aktiboak</b>"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:106
-msgid "Click on any dock to configure."
-msgstr "Klikatu edozein dock konfiguratzeko"
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:342
+msgid "Digital Clock"
+msgstr "Erloju digitala"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:77
-msgid "Icon"
-msgstr "Ikonoa"
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:348
+msgid "24-Hour Clock"
+msgstr "24 orduko erlojua"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:82
-msgid "Name"
-msgstr "Izena"
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:354
+msgid "Show Date"
+msgstr "Erakutsi data"
+
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:360
+msgid "Select Theme"
+msgstr "Hautatu gaia"
+
+#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:45
+msgid "Themes"
+msgstr "Gaiak"
+
+#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:50
+msgid "Theme"
+msgstr "Gaia"
+
+#: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:43
+#, csharp-format
+msgid "Sign up for {0}"
+msgstr "{0}en izena eman"
+
+#: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:44
+msgid "Validating..."
+msgstr "Egiaztatzen..."
+
+#: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:45
+#, csharp-format
+msgid "Don't have {0}?"
+msgstr "Ez daukazu {0} konturik?"
+
+#: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:46
+msgid "Account validation failed!"
+msgstr "Kontuaren egiaztaketak huts egin du"
+
+#: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:47
+msgid "Verify and save account information"
+msgstr "Egiaztatu eta gorde kontuaren informazioa"
+
+#: ../StandardPlugins/GMail/src/AbstractLoginWidget.cs:48
+msgid "Account validation succeeded!"
+msgstr "Kontua behar bezala egiaztatu da"
+
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:196
+msgid "Username or Password not set"
+msgstr "Erabiltzaile-izena edo pasahitza falta da"
+
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:246
+msgid "(no subject)"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:264
+#, csharp-format
+msgid "From: {0}"
+msgstr "Nork: {0}"
+
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:275
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:279
+msgid "Feed Error"
+msgstr "Jario errorea"
+
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:284
+msgid "Invalid Username"
+msgstr "Okerreko erabiltzaile-izena"
+
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:288
+msgid "Network Error"
+msgstr "Sareko errorea"
+
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:293
+msgid "General Error"
+msgstr "Errore orokorra"
+
+#: ../StandardPlugins/GMail/src/GMailConfiguration.cs:38
+msgid "Labels"
+msgstr "Etiketak"
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:70
+msgid "No unread mail"
+msgstr "Mezu berririk ez"
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:72
+#, csharp-format
+msgid "{0} unread message"
+msgid_plural "{0} unread messages"
+msgstr[0] "Mezu berri {0}"
+msgstr[1] "{0} mezu berri"
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:92
+msgid "Checking mail..."
+msgstr "Mezuak begiratzen..."
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
+msgid "View "
+msgstr "Ikusi "
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:232
+msgid "Compose Mail"
+msgstr "Idatzi mezu berria"
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:247
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:326
+msgid "Settings"
+msgstr "Ezarpenak"
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:255
+msgid "Check Now"
+msgstr "Begiratu orain"
+
+#: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
+msgid "From: "
+msgstr "Nork: "
+
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs:89
+msgid "Password"
+msgstr "Pasahitza"
+
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs:111
+msgid "Username"
+msgstr "Erabiltzailea"
+
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs:124
+msgid "<i>Verify and save account information</i>"
+msgstr "<i>Kontuaren informazioa egiaztatu eta gorde</li>"
+
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs:180
+msgid "Don't have an account?"
+msgstr "Ez daukazu konturik?"
+
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:70
+msgid "Check _Every"
+msgstr "Mezurik dagoen _begiratu"
+
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:80
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:279
+msgid "mins"
+msgstr "min"
+
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:133
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:155
+msgid "Move _Up"
+msgstr "Eraman _gora"
+
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:145
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:167
+msgid "Move _Down"
+msgstr "Eraman _behera"
+
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:157
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:179
+msgid "_Remove"
+msgstr "_Kendu"
+
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:180
+msgid "Add _Label"
+msgstr "_Etiketa gehitu"
+
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:202
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:235
+msgid "_Add"
+msgstr "_Gehitu"
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:193
+msgid "Empty all of the items from the trash?"
+msgstr ""
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:195
+msgid ""
+"If you choose to empty the trash, all items in it\n"
+"will be permanently lost. Please note that you\n"
+"can also delete them separately."
+msgstr ""
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:200
+msgid "_Cancel"
+msgstr ""
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:201
+msgid "Empty _Trash"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:84
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:87
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:92
+msgid "Invalid Weather Location"
+msgstr "Kokaleku baliogabea"
+
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:90
+msgid "Network Error: "
+msgstr "Sareko errorea: "
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:75
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:85
+msgid "Fetching data..."
+msgstr "Datuak eskuratzen..."
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:306
+msgid "Radar Map"
+msgstr "Radar-mapa"
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:319
+#, csharp-format
+msgid "{0}'s Forecast"
+msgstr "{0} (aurrikuspena)"
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:333
+msgid "Reload Weather Data"
+msgstr "Birkargatu eguraldi informazioa"
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:88
+msgid "_Weather Provider"
+msgstr "_Hornitzailea"
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:116
+msgid "Some information about the weather source."
+msgstr "Eguraldi aurrikuspenaren jatorriari buruzko informazioa"
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:202
+msgid "Add _Location"
+msgstr "Gehi_tu kokalekua"
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:224
+msgid "_Search"
+msgstr "Bi_latu"
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:269
+msgid "Automatically Update _Every"
+msgstr "Automatikoki eguneratzeko _maiztasuna:"
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:309
+msgid "Use _Metric Units"
+msgstr "_Erabili unitate metrikoak"
+
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:87
+msgid "Today"
+msgstr "Gaur"
+
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:90
+msgid "Tomorrow"
+msgstr "Bihar"
+
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:339
+msgid "Humidity"
+msgstr "Hezetasuna"
+
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:341
+msgid "Temp"
+msgstr "Tenperatura"
+
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:343
+msgid "Feels Like"
+msgstr "Sentsazioa"
+
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:345
+msgid "Wind"
+msgstr "Haizea"
+
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:346
+msgid "Direction"
+msgstr "Norantza"
+
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:348
+msgid "Sunrise"
+msgstr "Eguzki-irteera"
+
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:349
+msgid "Sunset"
+msgstr "Eguzki-sarrera"
 
 #: ../data/docky.desktop.in.h:1
 msgid "Docky"
@@ -356,3 +385,32 @@ msgstr "Docky"
 #: ../data/docky.desktop.in.h:2
 msgid "The finest dock no money can buy."
 msgstr "Diruz erosi ezin daitekeen dock-ik ederrena."
+
+#~ msgid "'s Forecast"
+#~ msgstr "- Aurrikuspenak"
+
+#~ msgid ""
+#~ "<big><b>Empty all of the items from the trash?</b></big>\n"
+#~ "\n"
+#~ "If you choose to empty the trash, all items in it\n"
+#~ "will be permanently lost. Please note that you\n"
+#~ "can also delete them separately."
+#~ msgstr ""
+#~ "<big><b>Zakarrontziko elementu guztiak hustu?</b></big>\n"
+#~ "\n"
+#~ "Zakarrontzia husten baduzu, bertan dauden\n"
+#~ "elementu guztiak galduko dira, betirako.\n"
+#~ "Gogora ezazu banaka ere ezabatu\n"
+#~ "ditzakezula."
+
+#~ msgid "Exec"
+#~ msgstr "Exekutatu"
+
+#~ msgid "Defenestraphobia"
+#~ msgstr "Defenestraphobia"
+
+#~ msgid "Icon"
+#~ msgstr "Ikonoa"
+
+#~ msgid "Name"
+#~ msgstr "Izena"
