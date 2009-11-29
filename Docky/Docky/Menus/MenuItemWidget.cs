@@ -33,6 +33,8 @@ namespace Docky.Menus
 	{
 		const int MinWidth = 100;
 		const int MaxWidth = 350;
+		const int FontSize = 11;
+		const int IconBuffer = 3;
 		
 		MenuItem item;
 		bool hovered;
@@ -65,14 +67,14 @@ namespace Docky.Menus
 			layout.Width = Pango.Units.FromPixels (MaxWidth);
 			layout.FontDescription = Style.FontDescription;
 			layout.Ellipsize = Pango.EllipsizeMode.End;
-			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (12);
+			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (FontSize);
 			layout.FontDescription.Weight = Pango.Weight.Bold;
 			
 			Pango.Rectangle logical, ink;
 			layout.GetPixelExtents (out ink, out logical);
 			
 			TextWidth = Math.Min (MaxWidth, Math.Max (MinWidth, logical.Width)) + 34;
-			SetSizeRequest (TextWidth, 24);
+			SetSizeRequest (TextWidth, 22);
 		}
 
 		void ItemDisabledChanged (object sender, EventArgs e)
@@ -129,7 +131,7 @@ namespace Docky.Menus
 			
 			Gdk.Rectangle allocation = Allocation;
 			
-			Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (item.Icon, allocation.Height - 2);
+			Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (item.Icon, allocation.Height - IconBuffer * 2);
 			
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
 				if (hovered && !item.Disabled) {
@@ -138,19 +140,19 @@ namespace Docky.Menus
 					cr.Fill ();
 				}
 				
-				Gdk.CairoHelper.SetSourcePixbuf (cr, pixbuf, allocation.X + 1, allocation.Y + 1);
+				Gdk.CairoHelper.SetSourcePixbuf (cr, pixbuf, allocation.X + 1, allocation.Y + IconBuffer);
 				cr.PaintWithAlpha (item.Disabled ? 0.5 : 1);
 				
 				if (item.Bold) {
 					cr.Operator = Operator.Add;
-					Gdk.CairoHelper.SetSourcePixbuf (cr, pixbuf, allocation.X + 1, allocation.Y + 1);
+					Gdk.CairoHelper.SetSourcePixbuf (cr, pixbuf, allocation.X + 1, allocation.Y + IconBuffer);
 					cr.PaintWithAlpha (.8);
 					cr.Operator = Operator.Over;
 				}
 				
 				if (!string.IsNullOrEmpty (item.Emblem)) {
-					Gdk.Pixbuf emblem = DockServices.Drawing.LoadIcon (item.Emblem, allocation.Height - 2);
-					Gdk.CairoHelper.SetSourcePixbuf (cr, emblem, allocation.X + 1, allocation.Y + 1);
+					Gdk.Pixbuf emblem = DockServices.Drawing.LoadIcon (item.Emblem, allocation.Height - IconBuffer * 2);
+					Gdk.CairoHelper.SetSourcePixbuf (cr, emblem, allocation.X + 1, allocation.Y + IconBuffer);
 					cr.Paint ();
 					emblem.Dispose ();
 				}
@@ -160,7 +162,7 @@ namespace Docky.Menus
 				layout.Width = Pango.Units.FromPixels (allocation.Width - allocation.Height - 10);
 				layout.FontDescription = Style.FontDescription;
 				layout.Ellipsize = Pango.EllipsizeMode.End;
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (12);
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (FontSize);
 				layout.FontDescription.Weight = Pango.Weight.Bold;
 				
 				Pango.Rectangle logical, ink;
