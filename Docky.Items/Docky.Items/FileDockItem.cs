@@ -103,7 +103,7 @@ namespace Docky.Items
 		
 		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
 		{
-			if (!Icon.Contains ("inode-directory") && !Icon.Contains ("folder"))
+			if (Icon == null || !(Icon.Contains ("inode-directory") || Icon.Contains ("folder")))
 				return;
 			
 			if (direction == Gdk.ScrollDirection.Up)
@@ -234,7 +234,7 @@ namespace Docky.Items
 		
 		protected virtual void HandleIconUpdated (object obj, EventArgs args)
 		{
-			if (Icon.Contains ("inode-directory") || Icon.Contains ("folder"))
+			if (Icon != null && (Icon.Contains ("inode-directory") || Icon.Contains ("folder")))
 				HueShift = prefs.Get<double> (hueRegex.Replace (UniqueID (), "_"), 0);
 		}
 	}

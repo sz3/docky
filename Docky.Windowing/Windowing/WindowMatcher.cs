@@ -25,12 +25,16 @@ using System.Text.RegularExpressions;
 
 using Wnck;
 
+using Docky.Services;
+
 namespace Docky.Windowing
 {
 
 
 	public class WindowMatcher
 	{
+		public static event EventHandler<DesktopFileChangedEventArgs> DesktopFileChanged;
+		
 		static WindowMatcher def;
 		public static WindowMatcher Default {
 			get {
@@ -114,12 +118,6 @@ namespace Docky.Windowing
 			}
 		}
 		
-		static IEnumerable<string> SuffixStrings {
-			get {
-				yield return "-bin";
-			}
-		}
-		
 		Dictionary<Wnck.Window, List<string>> window_to_desktop_files;
 		Dictionary<string, List<string>> exec_to_desktop_files;
 		List<Regex> prefix_filters;
@@ -136,8 +134,49 @@ namespace Docky.Windowing
 				SetupWindow (w);
 			}
 			
+			foreach (GLib.File dir in DesktopFileDirectories.Select (d => GLib.FileFactory.NewForPath (d))) {
+				MonitorDesktopFileDirs (dir);
+			}
+
 			screen.WindowOpened += WnckScreenDefaultWindowOpened;
 			screen.WindowClosed += WnckScreenDefaultWindowClosed;
+		}
+		
+		void MonitorDesktopFileDirs (GLib.File dir)
+		{
+			// build a list of all the subdirectories
+			List<GLib.File> dirs = new List<GLib.File> () {dir};
+			try {
+				dirs = dirs.Union (dir.SubDirs ()).ToList ();	
+			} catch {}
+			
+			foreach (GLib.File d in dirs) {
+				GLib.FileMonitor mon = d.Monitor (GLib.FileMonitorFlags.None, null);
+				mon.RateLimit = 1000;
+				mon.Changed += delegate(object o, GLib.ChangedArgs args) {
+					// bug in GIO#, calling args.File or args.OtherFile crashes hard
+					GLib.File file = GLib.FileAdapter.GetObject ((GLib.Object) args.Args[0]);
+					GLib.File otherFile = GLib.FileAdapter.GetObject ((GLib.Object) args.Args[1]);
+
+					// according to GLib documentation, the change signal runs on the same
+					// thread that the monitor was created on.  Without running this part on a thread
+					// docky freezes up for about 500-800 ms while the .desktop files are parsed.
+					DockServices.System.RunOnThread (() => {
+						// if a new directory was created, make sure we watch that dir as well
+						if (file.QueryFileType (GLib.FileQueryInfoFlags.NofollowSymlinks, null) == GLib.FileType.Directory)
+							MonitorDesktopFileDirs (file);
+						// we only care about .desktop files
+						if (!file.Path.EndsWith (".desktop"))
+							return;
+						// reload our dictionary of exec strings
+						exec_to_desktop_files = BuildExecStrings ();
+						//Console.WriteLine ("{0} => {1}", file.Path, args.EventType);
+						if (DesktopFileChanged != null) {
+							DesktopFileChanged (this, new DesktopFileChangedEventArgs (args.EventType, file, otherFile));
+						}
+					});
+				};
+			}
 		}
 
 		#region Window Setup
@@ -255,6 +294,8 @@ namespace Docky.Windowing
 						command_line.Add ("ooffice-calc");
 					else if (title.Contains ("Math"))
 						command_line.Add ("ooffice-math");
+				} else if (window.ClassGroup.ResClass == "Wine") {
+					// we can match Wine apps normally so don't do anything here
 				} else {
 					string class_name = window.ClassGroup.ResClass.Replace (".", "");
 					IEnumerable<string> matches = Enumerable.Empty<string> ();
@@ -272,7 +313,7 @@ namespace Docky.Windowing
 					}
 				}
 			}
-			
+	
 			do {
 				// do a match on the process name
 				string name = NameForPid (pids.ElementAt (currentPid));
@@ -288,7 +329,10 @@ namespace Docky.Windowing
 					yield break;
 				
 				// otherwise do a match on the commandline
-				command_line.AddRange (CommandLineForPid (pids.ElementAt (currentPid++)).Where (cmd => !string.IsNullOrEmpty (cmd)));
+				command_line.AddRange (CommandLineForPid (pids.ElementAt (currentPid++))
+					.Select (cmd => cmd.Replace (@"\", @"\\"))
+					.Where (cmd => !string.IsNullOrEmpty (cmd))
+					.Distinct ());
 				if (command_line.Count () == 0)
 					continue;
 				foreach (string cmd in command_line) {
@@ -304,9 +348,8 @@ namespace Docky.Windowing
 				// if we found a match, bail.
 				if (matched)
 					yield break;
-				command_line.Clear ();
 			} while (currentPid < pids.Count ());
-			
+			command_line.Clear ();
 			// if no match was found, just return the pid
 			yield return window.Pid.ToString ();
 		}
@@ -344,7 +387,7 @@ namespace Docky.Windowing
 			} while (pid != 1);
 		}
 		
-		string [] CommandLineForPid (int pid)
+		IEnumerable<string> CommandLineForPid (int pid)
 		{
 			string cmdline;
 
@@ -354,19 +397,28 @@ namespace Docky.Windowing
 					cmdline = reader.ReadLine ();
 					reader.Close ();
 				}
-			} catch { return new string[0]; }
+			} catch { yield break; }
 			
 			if (cmdline == null)
-				return new string[0];
+				yield break;
 			
-			cmdline = cmdline.ToLower ();
-			
+			cmdline = cmdline.Trim ().ToLower ();
+						
 			string [] result = cmdline.Split (Convert.ToChar (0x0));
 			
-			return result
+			// these are sanitized results
+			foreach (string sanitizedCmd in result
 				.Select (s => s.Split (new []{'/', '\\'}).Last ())
-				.Where (s => !prefix_filters.Any (f => f.IsMatch (s)))
-				.ToArray ();
+				.Where (s => !prefix_filters.Any (f => f.IsMatch (s)))) {
+				yield return sanitizedCmd;
+				
+				// some wine apps are launched via a shell script that sets the proc name to "app.exe"
+				if (sanitizedCmd.EndsWith (".exe"))
+					yield return sanitizedCmd.Split (new [] {".exe"}, StringSplitOptions.None)[0];
+			}
+			
+			// return the entire cmdline last as a last ditch effort to find a match
+			yield return cmdline;
 		}
 		
 		string NameForPid (int pid)
@@ -402,6 +454,13 @@ namespace Docky.Windowing
 				
 				if (exec.StartsWith ("ooffice") && exec.Contains (' ')) {
 					vexec = "ooffice" + exec.Split (' ') [1];
+				// for wine apps
+				} else if ((exec.StartsWith ("env WINEPREFIX=") && exec.Contains (" wine ")) ||
+						exec.StartsWith ("wine ")) {
+					int startIndex = exec.IndexOf ("wine \"") + 6; // length of 'wine \'
+					int length = exec.LastIndexOf ('"') - startIndex;
+					// CommandLineForPid already splits based on \\ and takes the last entry, so do the same here
+					vexec = exec.Substring (startIndex, length).Split (new [] {@"\\"}, StringSplitOptions.RemoveEmptyEntries).Last ().ToLower ();
 				} else {
 					string [] parts = exec.Split (' ');
 					

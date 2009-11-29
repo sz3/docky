@@ -43,6 +43,28 @@ namespace Docky.Services
 			return info.Icon;
 		}
 		
+		// Recursively list all of the subdirs for a given directory
+		public static IEnumerable<GLib.File> SubDirs (this GLib.File file)
+		{
+			FileEnumerator enumerator = file.EnumerateChildren ("standard::type,standard::name", FileQueryInfoFlags.NofollowSymlinks, null);
+			
+			if (enumerator == null)
+				return Enumerable.Empty <GLib.File> ();
+			
+			FileInfo info;
+			List<GLib.File> dirs = new List<GLib.File> ();
+			
+			while ((info = enumerator.NextFile ()) != null) {
+				File child = file.GetChild (info.Name);
+				
+				if (info.FileType == FileType.Directory) {
+					dirs.Add (child);
+					dirs = dirs.Union (SubDirs (child)).ToList ();
+				}
+			}
+			return dirs.AsEnumerable ();
+		}
+		
 		// This is the recursive equivalent to GLib.File.Delete ()
 		public static void Delete_Recurse (this GLib.File file)
 		{
