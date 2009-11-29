@@ -106,6 +106,7 @@ namespace NetworkManagerDocklet
 				NetworkDevice dev = NM.DevManager.NetworkDevices
 					.Where (d => d.State == DeviceState.Configuring || d.State == DeviceState.IPConfiguring || d.State == DeviceState.Preparing)
 					.FirstOrDefault ();
+				
 				if (dev != null) {
 					HoverText = "Connecting...";
 					return AnimatedIcon (dev);
@@ -158,7 +159,7 @@ namespace NetworkManagerDocklet
 		{
 			MenuList list = base.GetMenuItems ();
 			
-			List<MenuItem> wifi = list[MenuListContainer.Actions];
+			List<MenuItem> wifi = list[MenuListContainer.CustomOne];
 			
 			int count = 0;
 			if (NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().Any ()) {

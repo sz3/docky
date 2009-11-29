@@ -49,7 +49,7 @@ namespace CPUMonitor
 			SoftIRQ,    // servicing soft irqs
 		}
 		
-		uint update_timer;
+		bool disposed;
 		
 		long last_usage;
 		long last_idle;
@@ -64,12 +64,16 @@ namespace CPUMonitor
 			return "CPUMonitor";
 		}
 		
-		public CPUMonitorDockItem()
+		public CPUMonitorDockItem ()
 		{
 			regex = new Regex ("\\d+");
-			update_timer = GLib.Timeout.Add (UpdateMS, delegate {
-				UpdateUtilization ();
-				return true;
+			
+			DockServices.System.RunOnThread (() =>
+			{
+				while (!disposed) {
+					UpdateUtilization ();
+					System.Threading.Thread.Sleep (UpdateMS);
+				}
 			});
 		}
 		
@@ -127,8 +131,10 @@ namespace CPUMonitor
 				}
 			}
 			
-			QueueRedraw ();
-			HoverText = string.Format ("CPU: {0:0}%  Mem: {1:0}%", CPUUtilization * 100, MemoryUtilization * 100);
+			DockServices.System.RunOnMainThread (() => {
+				QueueRedraw ();
+				HoverText = string.Format ("CPU: {0:0}%  Mem: {1:0}%", CPUUtilization * 100, MemoryUtilization * 100);
+			});
 		}
 
 		protected override void PaintIconSurface (DockySurface surface)
@@ -193,7 +199,7 @@ namespace CPUMonitor
 
 		public override void Dispose ()
 		{
-			GLib.Source.Remove (update_timer);
+			disposed = true;
 			base.Dispose ();
 		}
 	}
