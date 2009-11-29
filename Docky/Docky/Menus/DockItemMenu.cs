@@ -59,7 +59,7 @@ namespace Docky.Menus
 					if (IsLight) {
 						menuItem.TextColor = item.Bold ? new Cairo.Color (0.1, 0.1, 0.1) : new Cairo.Color (0.2, 0.2, 0.2);
 					} else {
-						menuItem.TextColor = item.Bold ? new Cairo.Color (1, 1, 1) : new Cairo.Color (0.9, 0.9, 0.9);
+						menuItem.TextColor = item.Bold ? new Cairo.Color (.5, .6, 1) : new Cairo.Color (1, 1, 1);
 					}
 					vbox.PackStart (menuItem, false, false, 0);
 					
