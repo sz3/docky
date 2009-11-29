@@ -73,7 +73,6 @@ namespace WeatherDocklet
 			WeatherController.WeatherUpdated += HandleWeatherUpdated;
 			
 			HoverText = Catalog.GetString ("Fetching data...");
-			ShowBusyAnimation ();
 		}
 		
 		/// <summary>
@@ -180,28 +179,6 @@ namespace WeatherDocklet
 			}
 		}
 		
-		int BusyCounter { get; set; }
-		uint BusyTimer { get; set; }
-		
-		void ShowBusyAnimation ()
-		{
-			BusyCounter = 0;
-			if (BusyTimer == 0)
-				BusyTimer = GLib.Timeout.Add (80, BusyTimeout);
-		}
-		
-		public bool BusyTimeout ()
-		{
-			BusyCounter++;
-			QueueRedraw ();
-			if (Status != WeatherDockletStatus.ManualReload && Status != WeatherDockletStatus.Initializing) {
-				GLib.Source.Remove (BusyTimer);
-				BusyTimer = 0;
-				return false;
-			}
-			return true;
-		}
-		
 		protected override void PaintIconSurface (DockySurface surface)
 		{
 			int size = Math.Min (surface.Width, surface.Height);
@@ -209,6 +186,7 @@ namespace WeatherDocklet
 			
 			switch (Status) {
 			case WeatherDockletStatus.Error:
+				Busy = false;
 				RenderIconOntoContext (cr, "network-offline", 0, 0, size);
 				cr.Fill ();
 				break;
@@ -217,9 +195,9 @@ namespace WeatherDocklet
 			case WeatherDockletStatus.ManualReload:
 			case WeatherDockletStatus.Normal:
 			case WeatherDockletStatus.Reloading:
-				bool busy = Status == WeatherDockletStatus.ManualReload;
+				Busy = Status == WeatherDockletStatus.ManualReload;
 				
-				RenderIconOntoContext (cr, WeatherController.Weather.Image, 0, 0, size, busy ? 0.5 : 1);
+				RenderIconOntoContext (cr, WeatherController.Weather.Image, 0, 0, size, 1);
 				
 				if (size >= 32) {
 					Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
@@ -238,40 +216,16 @@ namespace WeatherDocklet
 
 					Pango.CairoHelper.LayoutPath (cr, layout);
 					cr.LineWidth = 4;
-					cr.Color = new Cairo.Color (0, 0, 0, busy ? 0.25 : 0.5);
+					cr.Color = new Cairo.Color (0, 0, 0, 0.5);
 					cr.StrokePreserve ();
 
-					cr.Color = new Cairo.Color (1, 1, 1, busy ? 0.4 : 0.8);
+					cr.Color = new Cairo.Color (1, 1, 1, 0.8);
 					cr.Fill ();
 				}
-				
-				if (busy)
-					goto case WeatherDockletStatus.Initializing;
-
 				break;
 
 			case WeatherDockletStatus.Initializing:
-				int groups = 3;
-				int armsPerGroup = 8;
-				double baseLog = Math.Log (armsPerGroup + 1);
-				
-				cr.LineWidth = Math.Max (1.0, size / 40);
-				cr.LineCap = LineCap.Round;
-				cr.Translate (size / 2, size / 2);
-				
-				Gdk.Color color = Style.Backgrounds [(int) Gtk.StateType.Selected].SetMinimumValue (100);
-				
-				for (int i = 0; i < armsPerGroup * groups; i++) {
-					int position = 1 + ((i + BusyCounter) % armsPerGroup);
-					cr.Color = new Cairo.Color ((double) color.Red / ushort.MaxValue,
-												(double) color.Green / ushort.MaxValue,
-												(double) color.Blue / ushort.MaxValue,
-												1 - Math.Log (position) / baseLog);
-					cr.MoveTo (0, size / 8);
-					cr.LineTo (0, size / 4);
-					cr.Rotate (-2 * Math.PI / (armsPerGroup * groups));
-					cr.Stroke ();
-				}
+				Busy = true;
 				break;
 			}
 		}
@@ -289,7 +243,7 @@ namespace WeatherDocklet
 				return;
 
 			Status = WeatherDockletStatus.ManualReload;
-			ShowBusyAnimation ();
+			QueueRedraw ();
 			
 			if (direction == Gdk.ScrollDirection.Up)
 				WeatherController.PreviousLocation ();
@@ -333,7 +287,7 @@ namespace WeatherDocklet
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Reload Weather Data"), Gtk.Stock.Refresh,
 					delegate {
 						Status = WeatherDockletStatus.ManualReload;
-						ShowBusyAnimation ();
+						QueueRedraw ();
 						WeatherController.ResetTimer ();
 					}));
 			

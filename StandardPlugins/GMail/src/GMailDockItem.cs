@@ -73,6 +73,7 @@ namespace GMail
 			HoverText = Atom.CurrentLabel + " - " + status;
 			
 			parent.ItemVisibilityChanged (this, Visible);
+			Busy = false;
 			QueueRedraw ();
 		}
 		
@@ -90,6 +91,7 @@ namespace GMail
 			UpdateAttention (false);
 			
 			HoverText = Catalog.GetString ("Checking mail...");
+			Busy = true;
 			QueueRedraw ();
 		}
 		
@@ -98,6 +100,7 @@ namespace GMail
 			UpdateAttention (false);
 			
 			HoverText = e.Error;
+			Busy = false;
 			QueueRedraw ();
 		}
 		
@@ -107,13 +110,13 @@ namespace GMail
 			Context cr = surface.Context;
 			
 			string icon = Atom.Icon;
-			if (Atom.State == GMailState.ManualReload || Atom.State == GMailState.Error)
+			if (Atom.State == GMailState.Error)
 				icon = Atom.DisabledIcon;
 			
 			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (icon, size))
 			{
 				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, 0, 0);
-				if (Atom.State == GMailState.ManualReload || !Atom.HasUnread)
+				if (!Atom.HasUnread)
 					cr.PaintWithAlpha (.5);
 				else
 					cr.Paint ();

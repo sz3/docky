@@ -46,6 +46,9 @@ namespace Docky.Items
 		ActivityIndicator indicator;
 		ItemState state;
 		Dictionary<ItemState, DateTime> state_times;
+		int busyCounter;
+		uint busyTimer;
+		bool busy;
 		
 		public event EventHandler HoverTextChanged;
 		public event EventHandler<PaintNeededEventArgs> PaintNeeded;
@@ -138,6 +141,29 @@ namespace Docky.Items
 		}
 		
 		protected string BadgeText { get; set; }
+		
+		protected bool Busy
+		{
+			get {
+				return busy;
+			}
+			set {
+				if (busy == value)
+					return;
+				busy = value;
+				if (busy) {
+					busyCounter = 0;
+					busyTimer = GLib.Timeout.Add (80, delegate {
+						busyCounter++;
+						QueueRedraw ();
+						return true;
+					});
+				} else {
+					GLib.Source.Remove (busyTimer);
+					busyTimer = 0;
+				}
+			}
+		}
 		
 		public int Position {
 			get;
@@ -408,6 +434,8 @@ namespace Docky.Items
 			}
 			
 			PaintBadgeSurface (icon_buffers [i]);
+			if (Busy)
+				PaintBusySurface (icon_buffers [i]);
 			
 			redraw [i] = false;
 			
@@ -474,6 +502,37 @@ namespace Docky.Items
 			surface.Context.StrokePreserve ();
 			surface.Context.Color = new Cairo.Color (1, 1, 1, 1);
 			surface.Context.Fill ();
+		}
+		
+		void PaintBusySurface (DockySurface surface)
+		{
+			surface.Context.Color = new Cairo.Color (0, 0, 0, 0);
+			surface.Context.Operator = Operator.Source;
+			surface.Context.PaintWithAlpha (0.5);
+			
+			int groups = 3;
+			int armsPerGroup = 8;
+			double baseLog = Math.Log (armsPerGroup + 1);
+			int size = Math.Min (surface.Width, surface.Height);
+			
+			surface.Context.LineWidth = Math.Max (1.0, size / 40);
+			surface.Context.LineCap = LineCap.Round;
+			surface.Context.Translate (surface.Width / 2, surface.Height / 2);
+			
+			Gdk.Color color = Style.Backgrounds [(int) Gtk.StateType.Selected].SetMinimumValue (100);
+			Cairo.Color baseColor = new Cairo.Color ((double) color.Red / ushort.MaxValue,
+										(double) color.Green / ushort.MaxValue,
+										(double) color.Blue / ushort.MaxValue,
+										1);
+			
+			for (int i = 0; i < armsPerGroup * groups; i++) {
+				int position = 1 + ((i + busyCounter) % armsPerGroup);
+				surface.Context.Color = baseColor.SetAlpha (1 - Math.Log (position) / baseLog);
+				surface.Context.MoveTo (0, size / 8);
+				surface.Context.LineTo (0, size / 4);
+				surface.Context.Rotate (-2 * Math.PI / (armsPerGroup * groups));
+				surface.Context.Stroke ();
+			}
 		}
 		
 		public DockySurface HoverTextSurface (DockySurface model, Style style)
