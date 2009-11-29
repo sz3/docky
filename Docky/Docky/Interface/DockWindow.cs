@@ -1092,11 +1092,12 @@ namespace Docky.Interface
 			DragTracker.DragDisabled = true;
 			
 			SetTooltipVisibility ();
-			Reconfigure ();
 			Painter.SetStyle (Style);
 			
+			UpdateDockWidth ();
 			Painter.Shown ();
 			Keyboard.Grab (GdkWindow, true, Gtk.Global.CurrentEventTime);
+			AnimatedDraw ();
 		}
 		
 		void HidePainter ()
@@ -1114,8 +1115,8 @@ namespace Docky.Interface
 			Painter = null;
 			Keyboard.Ungrab (Gtk.Global.CurrentEventTime);
 			
-			Reconfigure ();
 			SetTooltipVisibility ();
+			AnimatedDraw ();
 		}
 		
 		void HandlePainterPaintNeeded (object sender, EventArgs e)
@@ -1712,6 +1713,7 @@ namespace Docky.Interface
 			}
 			
 			if (repaint_painter) {
+				painter_buffer.ResetContext ();
 				painter_buffer.Clear ();
 				DockySurface painterSurface = Painter.GetSurface (surface);
 			
@@ -1719,7 +1721,7 @@ namespace Docky.Interface
 					dockArea.Y + DockWidthBuffer,
 					painterSurface.Width,
 					painterSurface.Height);
-			
+				
 				painterSurface.Internal.Show (painter_buffer.Context, painter_area.X, painter_area.Y);
 			
 				PointD point;

@@ -31,6 +31,7 @@ namespace Docky.Interface
 		Bounce,
 		Waiting,
 		ItemsChanged,
+		PainterChanged,
 	}
 	
 	public class AnimationState : IDisposable
