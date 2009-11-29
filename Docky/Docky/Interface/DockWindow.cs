@@ -2076,6 +2076,10 @@ namespace Docky.Interface
 		{
 			if (GdkWindow != null)
 				GdkWindow.SetBackPixmap (null, false);
+			foreach (AbstractDockItem adi in Items)
+				adi.SetStyle (Style);
+			if (Painter != null)
+				Painter.SetStyle (Style);
 			base.OnStyleSet (previous_style);
 		}
 		

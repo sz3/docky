@@ -582,6 +582,7 @@ namespace Docky.Items
 			badgeColors [1] = badgeColors [0].AddHue (10);
 			badgeColors [2] = badgeColors [0].AddHue (30);
 			badgeColors [3] = badgeColors [0].AddHue (50);
+			QueueRedraw ();
 		}
 		
 		protected virtual void OnStyleSet (Gtk.Style style)
