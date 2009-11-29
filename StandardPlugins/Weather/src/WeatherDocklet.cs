@@ -186,7 +186,7 @@ namespace WeatherDocklet
 			
 			switch (Status) {
 			case WeatherDockletStatus.Error:
-				Busy = false;
+				State ^= ItemState.Wait;
 				RenderIconOntoContext (cr, "network-offline", 0, 0, size);
 				cr.Fill ();
 				break;
@@ -195,7 +195,10 @@ namespace WeatherDocklet
 			case WeatherDockletStatus.ManualReload:
 			case WeatherDockletStatus.Normal:
 			case WeatherDockletStatus.Reloading:
-				Busy = Status == WeatherDockletStatus.ManualReload;
+				if (Status == WeatherDockletStatus.ManualReload)
+					State |= ItemState.Wait;
+				else
+					State ^= ItemState.Wait;
 				
 				RenderIconOntoContext (cr, WeatherController.Weather.Image, 0, 0, size, 1);
 				
@@ -225,7 +228,7 @@ namespace WeatherDocklet
 				break;
 
 			case WeatherDockletStatus.Initializing:
-				Busy = true;
+				State |= ItemState.Wait;
 				break;
 			}
 		}

@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ namespace Docky.Items
 		Middle = 1 << 1,
 		Right  = 1 << 2,
 	}
-
+	
 	public abstract class AbstractDockItem : IDisposable
 	{
 		string hover_text;
@@ -53,7 +53,6 @@ namespace Docky.Items
 		Dictionary<ItemState, DateTime> state_times;
 		int busyCounter;
 		uint busyTimer;
-		bool busy;
 		
 		public event EventHandler HoverTextChanged;
 		public event EventHandler<PaintNeededEventArgs> PaintNeeded;
@@ -78,6 +77,20 @@ namespace Docky.Items
 					return;
 				
 				ItemState difference = value ^ state;
+				
+				if ((difference & ItemState.Wait) != 0) {
+					if ((value & ItemState.Wait) != 0) {
+						busyCounter = 0;
+						busyTimer = GLib.Timeout.Add (80, delegate {
+							busyCounter++;
+							QueueRedraw ();
+							return true;
+						});
+					} else {
+						GLib.Source.Remove (busyTimer);
+						busyTimer = 0;
+					}
+				}
 				
 				SetStateTime (difference, DateTime.UtcNow);
 				state = value;
@@ -146,29 +159,6 @@ namespace Docky.Items
 		}
 		
 		protected string BadgeText { get; set; }
-		
-		protected bool Busy
-		{
-			get {
-				return busy;
-			}
-			set {
-				if (busy == value)
-					return;
-				busy = value;
-				if (busy) {
-					busyCounter = 0;
-					busyTimer = GLib.Timeout.Add (80, delegate {
-						busyCounter++;
-						QueueRedraw ();
-						return true;
-					});
-				} else {
-					GLib.Source.Remove (busyTimer);
-					busyTimer = 0;
-				}
-			}
-		}
 		
 		public int Position {
 			get;
@@ -439,7 +429,7 @@ namespace Docky.Items
 			}
 			
 			PaintBadgeSurface (icon_buffers [i]);
-			if (Busy)
+			if ((State & ItemState.Wait) != 0)
 				PaintBusySurface (icon_buffers [i]);
 			
 			redraw [i] = false;

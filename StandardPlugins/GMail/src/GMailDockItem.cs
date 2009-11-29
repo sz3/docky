@@ -73,7 +73,7 @@ namespace GMail
 			HoverText = Atom.CurrentLabel + " - " + status;
 			
 			parent.ItemVisibilityChanged (this, Visible);
-			Busy = false;
+			State ^= ItemState.Wait;
 			QueueRedraw ();
 		}
 		
@@ -91,7 +91,7 @@ namespace GMail
 			UpdateAttention (false);
 			
 			HoverText = Catalog.GetString ("Checking mail...");
-			Busy = true;
+			State |= ItemState.Wait;
 			QueueRedraw ();
 		}
 		
@@ -100,7 +100,7 @@ namespace GMail
 			UpdateAttention (false);
 			
 			HoverText = e.Error;
-			Busy = false;
+			State ^= ItemState.Wait;
 			QueueRedraw ();
 		}
 		
