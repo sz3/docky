@@ -44,24 +44,21 @@ namespace Docky.Items
 		public IEnumerable<AbstractDockItem> Items {
 			get { return items; }
 			protected set {
-				GLib.Idle.Add (delegate {
-					IEnumerable<AbstractDockItem> added = value.Where (adi => !items.Contains (adi)).ToArray ();
-					IEnumerable<AbstractDockItem> removed = items.Where (adi => !value.Contains (adi)).ToArray ();
-					
-					int position = items.Any () ? items.Max (adi => adi.Position) + 1 : 0;
-					foreach (AbstractDockItem item in added) {
-						item.AddTime = DateTime.UtcNow;
-						item.Position = position;
-						position++;
-					}
-					
-					items = value.ToArray ();
-					foreach (AbstractDockItem item in items)
-						item.Owner = this;
-					
-					OnItemsChanged (added, removed);
-					return false;
-				});
+				IEnumerable<AbstractDockItem> added = value.Where (adi => !items.Contains (adi)).ToArray ();
+				IEnumerable<AbstractDockItem> removed = items.Where (adi => !value.Contains (adi)).ToArray ();
+				
+				int position = items.Any () ? items.Max (adi => adi.Position) + 1 : 0;
+				foreach (AbstractDockItem item in added) {
+					item.AddTime = DateTime.UtcNow;
+					item.Position = position;
+					position++;
+				}
+				
+				items = value.ToArray ();
+				foreach (AbstractDockItem item in items)
+					item.Owner = this;
+				
+				OnItemsChanged (added, removed);
 			}
 		}
 		

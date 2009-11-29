@@ -170,10 +170,13 @@ namespace Docky.Windowing
 							return;
 						// reload our dictionary of exec strings
 						exec_to_desktop_files = BuildExecStrings ();
-						//Console.WriteLine ("{0} => {1}", file.Path, args.EventType);
-						if (DesktopFileChanged != null) {
-							DesktopFileChanged (this, new DesktopFileChangedEventArgs (args.EventType, file, otherFile));
-						}
+						
+						// Make sure to trigger event on main thread
+						DockServices.System.RunOnMainThread (() => {
+							if (DesktopFileChanged != null) {
+								DesktopFileChanged (this, new DesktopFileChangedEventArgs (args.EventType, file, otherFile));
+							}
+						});
 					});
 				};
 			}

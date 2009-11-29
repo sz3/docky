@@ -267,14 +267,14 @@ namespace Docky.Interface
 					
 					bool priorItems = false;
 					bool separatorNeeded = false;
-					foreach (AbstractDockItemProvider provider in ItemProviders.ToList ()) {
+					foreach (AbstractDockItemProvider provider in ItemProviders) {
 						if (!provider.Items.Any ())
 							continue;
 						
 						if (provider.Separated && priorItems || separatorNeeded)
 							collection_backend.Add (new SeparatorItem ());
 					
-						collection_backend.AddRange (provider.Items.ToList ().OrderBy (i => i.Position));
+						collection_backend.AddRange (provider.Items.OrderBy (i => i.Position));
 						priorItems = true;
 						
 						separatorNeeded = provider.Separated;
