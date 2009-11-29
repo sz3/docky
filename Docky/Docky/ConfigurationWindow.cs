@@ -103,7 +103,24 @@ namespace Docky
 			}
 			
 			if (ActiveDock == null) {
-				config_alignment.Add (new Gtk.Label (Mono.Unix.Catalog.GetString ("Click on any dock to configure.")));
+				VBox vbox = new VBox ();
+				
+				HBox hboxTop = new HBox ();
+				HBox hboxBottom = new HBox ();
+				Label label1 = new Gtk.Label (Mono.Unix.Catalog.GetString ("Click on any dock to configure."));
+				Label label2 = new Gtk.Label (Mono.Unix.Catalog.GetString ("Drag any dock to move it."));
+				
+				vbox.Add (hboxTop);
+				vbox.Add (label1);
+				vbox.Add (label2);
+				vbox.Add (hboxBottom);
+				
+				vbox.SetChildPacking (hboxTop, true, true, 0, PackType.End);
+				vbox.SetChildPacking (label1, false, false, 0, PackType.End);
+				vbox.SetChildPacking (label2, false, false, 0, PackType.End);
+				vbox.SetChildPacking (hboxBottom, true, true, 0, PackType.End);
+				
+				config_alignment.Add (vbox);
 			} else {
 				config_alignment.Add (ActiveDock.PreferencesWidget);
 			}
