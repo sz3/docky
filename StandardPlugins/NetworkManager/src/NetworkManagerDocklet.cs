@@ -107,9 +107,10 @@ namespace NetworkManagerDocklet
 				NetworkDevice dev = NM.DevManager.NetworkDevices
 					.Where (d => d.State == DeviceState.Configuring || d.State == DeviceState.IPConfiguring || d.State == DeviceState.Preparing)
 					.FirstOrDefault ();
-				if (dev != null)
+				if (dev != null) {
+					HoverText = "Connecting...";
 					return AnimatedIcon (dev);
-				
+				}
 				if (iconTimer != 0) {
 					GLib.Source.Remove (iconTimer);
 					iconStep = 0;
@@ -117,13 +118,18 @@ namespace NetworkManagerDocklet
 				}
 				
 				// no connection
-				if (!NM.ActiveConnections.Any ())
+				if (!NM.ActiveConnections.Any ()) {
+					HoverText = "Disconnected";
 					return "nm-no-connection";
+				}
 				
 				// wireless connection
 				if (NM.ActiveConnections.OfType<WirelessConnection> ().Any ()) {
 					string ssid = NM.ActiveConnections.OfType<WirelessConnection> ().First ().SSID;
 					byte strength = NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().First ().APBySSID (ssid).Strength;
+					
+					HoverText = string.Format ("Connected: {0}", ssid);
+					
 					return APIconFromStrength (strength);
 				}
 			} catch {
