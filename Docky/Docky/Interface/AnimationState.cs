@@ -29,6 +29,7 @@ namespace Docky.Interface
 		HideChanged,
 		DockHoveredChanged,
 		Bounce,
+		Waiting,
 		ItemsChanged,
 	}
 	

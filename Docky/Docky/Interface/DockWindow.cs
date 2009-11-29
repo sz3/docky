@@ -140,6 +140,9 @@ namespace Docky.Interface
 		const int UrgentIndicatorSize = 26;
 		const int GlowSize            = 30;
 		
+		const int WaitGroups          = 3;
+		const int WaitArmsPerGroup    = 8;
+		
 		readonly TimeSpan BaseAnimationTime = new TimeSpan (0, 0, 0, 0, 150);
 		readonly TimeSpan BounceTime = new TimeSpan (0, 0, 0, 0, 600);
 		
@@ -152,6 +155,7 @@ namespace Docky.Interface
 		IDockPreferences preferences;
 		DockySurface main_buffer, background_buffer, icon_buffer, painter_buffer;
 		DockySurface normal_indicator_buffer, urgent_indicator_buffer;
+		DockySurface wait_buffer;
 		AbstractDockItem hoveredItem;
 		AbstractDockItem lastClickedItem;
 		AbstractDockPainter painter;
@@ -560,6 +564,7 @@ namespace Docky.Interface
 			AnimationState.AddCondition (Animations.ItemsChanged,
 				                         () => ((DateTime.UtcNow - items_change_time) < BaseAnimationTime));
 			AnimationState.AddCondition (Animations.Bounce, BouncingItems);
+			AnimationState.AddCondition (Animations.Waiting, WaitingItems);
 		}
 		
 		bool BouncingItems ()
@@ -570,6 +575,15 @@ namespace Docky.Interface
 				if ((now - adi.LastClick) < BounceTime || (now - adi.StateSetTime (ItemState.Urgent)) < BounceTime)
 					return true;
 			}
+			return false;
+		}
+		
+		bool WaitingItems ()
+		{
+			foreach (AbstractDockItem adi in Items)
+				if ((adi.State & ItemState.Wait) != 0)
+					return true;
+			
 			return false;
 		}
 
@@ -1053,6 +1067,11 @@ namespace Docky.Interface
 			if (urgent_indicator_buffer != null) {
 				urgent_indicator_buffer.Dispose ();
 				urgent_indicator_buffer = null;
+			}
+			
+			if (wait_buffer != null) {
+				wait_buffer.Dispose ();
+				wait_buffer = null;
 			}
 		}
 		#endregion
@@ -1781,6 +1800,10 @@ namespace Docky.Interface
 				lighten += .4;
 			}
 			
+			if ((item.State & ItemState.Wait) != 0) {
+				darken += .5;
+			}
+			
 			if ((item.State & ItemState.Urgent) == ItemState.Urgent && 
 				(render_time - item.StateSetTime (ItemState.Urgent)) < BounceTime) {
 				double urgentProgress = (render_time - item.StateSetTime (ItemState.Urgent)).TotalMilliseconds / BounceTime.TotalMilliseconds;
@@ -1861,6 +1884,15 @@ namespace Docky.Interface
 				surface.Context.Operator = Operator.Over;
 			}
 			
+			if ((item.State & ItemState.Wait) != 0) {
+				int rotate = ((int) ((DateTime.UtcNow - item.StateSetTime (ItemState.Wait)).TotalMilliseconds / 80)) % (WaitArmsPerGroup * WaitGroups);
+				
+				if (wait_buffer == null)
+					wait_buffer = CreateWaitBuffer ();
+				
+				wait_buffer.ShowWithOptions (surface, val.Center, val.Zoom / 2, rotate * 2 * Math.PI / (WaitArmsPerGroup * WaitGroups), 1);
+			}
+			
 			if (item.Indicator != ActivityIndicator.None) {
 				if (normal_indicator_buffer == null)
 					normal_indicator_buffer = CreateNormalIndicatorBuffer ();
@@ -1912,6 +1944,40 @@ namespace Docky.Interface
 			surface.Context.Fill ();
 			
 			lg.Destroy ();
+		}
+		
+		DockySurface CreateWaitBuffer ()
+		{
+			DockySurface surface = new DockySurface (ZoomedIconSize, ZoomedIconSize, background_buffer);
+			surface.Clear ();
+			
+			surface.Context.Color = new Cairo.Color (0, 0, 0, 0);
+			surface.Context.Operator = Operator.Source;
+			surface.Context.PaintWithAlpha (0.5);
+			
+			double baseLog = Math.Log (WaitArmsPerGroup + 1);
+			int size = Math.Min (surface.Width, surface.Height);
+			
+			surface.Context.LineWidth = Math.Max (1.0, size / 40);
+			surface.Context.LineCap = LineCap.Round;
+			surface.Context.Translate (surface.Width / 2, surface.Height / 2);
+			
+			Gdk.Color color = Style.Backgrounds [(int) Gtk.StateType.Selected].SetMinimumValue (100);
+			Cairo.Color baseColor = new Cairo.Color ((double) color.Red / ushort.MaxValue,
+										(double) color.Green / ushort.MaxValue,
+										(double) color.Blue / ushort.MaxValue,
+										1);
+			
+			for (int i = 0; i < WaitArmsPerGroup * WaitGroups; i++) {
+				int position = 1 + (i % WaitArmsPerGroup);
+				surface.Context.Color = baseColor.SetAlpha (1 - Math.Log (position) / baseLog);
+				surface.Context.MoveTo (0, size / 8);
+				surface.Context.LineTo (0, size / 4);
+				surface.Context.Rotate (-2 * Math.PI / (WaitArmsPerGroup * WaitGroups));
+				surface.Context.Stroke ();
+			}
+			
+			return surface;
 		}
 		
 		DockySurface CreateNormalIndicatorBuffer ()

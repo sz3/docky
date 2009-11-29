@@ -82,7 +82,6 @@ namespace GMail
 			if (!GMailPreferences.NeedsAttention)
 				return;
 			
-			State = status ? ItemState.Urgent : ItemState.Wait;
 			Indicator = status ? ActivityIndicator.Single : ActivityIndicator.None;
 		}
 		

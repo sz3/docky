@@ -67,6 +67,7 @@ namespace WeatherDocklet
 			painter = new WeatherPainter (this);
 			
 			Status = WeatherDockletStatus.Initializing;
+			State |= ItemState.Wait;
 			
 			WeatherController.WeatherReloading += HandleWeatherReloading;
 			WeatherController.WeatherError += HandleWeatherError;
@@ -82,8 +83,12 @@ namespace WeatherDocklet
 		{
 			Gtk.Application.Invoke (delegate {
 				HoverText = Catalog.GetString ("Fetching data...");
-				if (Status != WeatherDockletStatus.Initializing && Status != WeatherDockletStatus.ManualReload)
+				if (Status != WeatherDockletStatus.Initializing && Status != WeatherDockletStatus.ManualReload) {
 					Status = WeatherDockletStatus.Reloading;
+					State ^= ItemState.Wait;
+				} else {
+					State |= ItemState.Wait;
+				}
 				QueueRedraw ();
 			});
 		}
@@ -102,6 +107,7 @@ namespace WeatherDocklet
 			Gtk.Application.Invoke (delegate {
 				HoverText = e.Error;
 				Status = WeatherDockletStatus.Error;
+				State ^= ItemState.Wait;
 				QueueRedraw ();
 			});
 		}
@@ -122,6 +128,7 @@ namespace WeatherDocklet
 					weather.Temp + WeatherUnits.TempUnit + feelsLike +
 					"   " + weather.City;
 				Status = WeatherDockletStatus.Normal;
+				State ^= ItemState.Wait;
 				QueueRedraw ();
 			});
 		}
@@ -186,7 +193,6 @@ namespace WeatherDocklet
 			
 			switch (Status) {
 			case WeatherDockletStatus.Error:
-				State ^= ItemState.Wait;
 				RenderIconOntoContext (cr, "network-offline", 0, 0, size);
 				cr.Fill ();
 				break;
@@ -195,11 +201,6 @@ namespace WeatherDocklet
 			case WeatherDockletStatus.ManualReload:
 			case WeatherDockletStatus.Normal:
 			case WeatherDockletStatus.Reloading:
-				if (Status == WeatherDockletStatus.ManualReload)
-					State |= ItemState.Wait;
-				else
-					State ^= ItemState.Wait;
-				
 				RenderIconOntoContext (cr, WeatherController.Weather.Image, 0, 0, size, 1);
 				
 				if (size >= 32) {
@@ -228,7 +229,6 @@ namespace WeatherDocklet
 				break;
 
 			case WeatherDockletStatus.Initializing:
-				State |= ItemState.Wait;
 				break;
 			}
 		}
@@ -246,6 +246,7 @@ namespace WeatherDocklet
 				return;
 
 			Status = WeatherDockletStatus.ManualReload;
+			State |= ItemState.Wait;
 			QueueRedraw ();
 			
 			if (direction == Gdk.ScrollDirection.Up)
@@ -290,6 +291,7 @@ namespace WeatherDocklet
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Reload Weather Data"), Gtk.Stock.Refresh,
 					delegate {
 						Status = WeatherDockletStatus.ManualReload;
+						State |= ItemState.Wait;
 						QueueRedraw ();
 						WeatherController.ResetTimer ();
 					}));
