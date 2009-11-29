@@ -1984,22 +1984,22 @@ namespace Docky.Interface
 		
 		DockySurface CreateNormalIndicatorBuffer ()
 		{
-			Gdk.Color gdkColor = Style.Backgrounds [(int) StateType.Selected].SetMinimumValue (50);
+			Gdk.Color gdkColor = Style.Backgrounds [(int) StateType.Selected].SetMinimumValue (90);
 			Cairo.Color color = new Cairo.Color ((double) gdkColor.Red / ushort.MaxValue,
 											(double) gdkColor.Green / ushort.MaxValue,
 											(double) gdkColor.Blue / ushort.MaxValue,
 											1.0);
-			return CreateIndicatorBuffer (NormalIndicatorSize, color.SetValue (.9));
+			return CreateIndicatorBuffer (NormalIndicatorSize, color);
 		}
 		
 		DockySurface CreateUrgentIndicatorBuffer ()
 		{
-			Gdk.Color gdkColor = Style.Backgrounds [(int) StateType.Selected].SetMinimumValue (50);
+			Gdk.Color gdkColor = Style.Backgrounds [(int) StateType.Selected].SetMinimumValue (90);
 			Cairo.Color color = new Cairo.Color ((double) gdkColor.Red / ushort.MaxValue,
 											(double) gdkColor.Green / ushort.MaxValue,
 											(double) gdkColor.Blue / ushort.MaxValue,
 											1.0);
-			return CreateIndicatorBuffer (UrgentIndicatorSize, color.SetValue (.9).AddHue (150).SetSaturation (1));
+			return CreateIndicatorBuffer (UrgentIndicatorSize, color.AddHue (150).SetSaturation (1));
 		}
 		
 		DockySurface CreateIndicatorBuffer (int size, Cairo.Color color)
