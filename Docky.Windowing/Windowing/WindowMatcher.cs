@@ -457,10 +457,11 @@ namespace Docky.Windowing
 				// for wine apps
 				} else if ((exec.StartsWith ("env WINEPREFIX=") && exec.Contains (" wine ")) ||
 						exec.StartsWith ("wine ")) {
-					int startIndex = exec.IndexOf ("wine \"") + 6; // length of 'wine \'
-					int length = exec.LastIndexOf ('"') - startIndex;
+					int startIndex = exec.IndexOf ("wine ") + 5; // length of 'wine '
 					// CommandLineForPid already splits based on \\ and takes the last entry, so do the same here
-					vexec = exec.Substring (startIndex, length).Split (new [] {@"\\"}, StringSplitOptions.RemoveEmptyEntries).Last ().ToLower ();
+					vexec = exec.Substring (startIndex).Split (new [] {@"\\"}, StringSplitOptions.RemoveEmptyEntries).Last ().ToLower ();
+					if (vexec.EndsWith ("\""))
+						vexec = vexec.Substring (0, vexec.Length - 1);
 				} else {
 					string [] parts = exec.Split (' ');
 					
