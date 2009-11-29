@@ -81,6 +81,7 @@ namespace Docky.Painters
 				Log<AbstractDockPainter>.Error (e.Message);
 				Log<AbstractDockPainter>.Debug (e.StackTrace);
 			}
+			QueueRepaint ();
 		}
 		
 		protected virtual void OnStyleSet (Gtk.Style style)
