@@ -1,0 +1,25 @@
+# Simple component buildsystem
+include $(top_srcdir)/build.rules.docklets.mk
+
+ASSEMBLY = NPR
+
+FILES = \
+	src/NPRItemProvider.cs \
+	src/NPR.cs \
+	src/Station.cs \
+	src/StationUrl.cs
+
+RESOURCES = \
+	Resources/NPR.addin.xml
+
+REFERENCES =  \
+	System \
+	System.Web \
+	System.Xml.Linq \
+	System.Core \
+	Mono.Posix \
+	$(DOCKY_CAIRO_LIBS) \
+	$(DOCKY_ITEMS_LIBS) \
+	$(DOCKY_SERVICES_LIBS) \
+	$(GIO_SHARP_LIBS) \
+	$(GTK_SHARP_20_LIBS)

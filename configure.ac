@@ -197,6 +197,8 @@ StandardPlugins/Mounter/Makefile
 StandardPlugins/Mounter/Resources/Mounter.addin.xml
 StandardPlugins/NetworkManager/Makefile
 StandardPlugins/NetworkManager/Resources/NetworkManager.addin.xml
+StandardPlugins/NPR/Makefile
+StandardPlugins/NPR/Resources/NPR.addin.xml
 StandardPlugins/RecentDocuments/Makefile
 StandardPlugins/RecentDocuments/Resources/RecentDocuments.addin.xml
 StandardPlugins/Trash/Makefile

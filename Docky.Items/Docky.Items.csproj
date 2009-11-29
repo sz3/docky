@@ -56,7 +56,6 @@
     </Reference>
     <Reference Include="gio-sharp, Version=2.14.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\build\gio-sharp.dll</HintPath>
     </Reference>
     <Reference Include="notify-sharp, Version=0.4.0.0, Culture=neutral, PublicKeyToken=2df29c54e245917a">
       <Package>notify-sharp-0.4</Package>
