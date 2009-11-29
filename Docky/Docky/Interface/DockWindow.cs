@@ -1892,7 +1892,7 @@ namespace Docky.Interface
 				if (wait_buffer == null)
 					wait_buffer = CreateWaitBuffer ();
 				
-				wait_buffer.ShowWithOptions (surface, val.Center, val.Zoom / 2, rotate * 2 * Math.PI / (WaitArmsPerGroup * WaitGroups), 1);
+				wait_buffer.ShowWithOptions (surface, center.Center, center.Zoom, rotate * 2 * Math.PI / (WaitArmsPerGroup * WaitGroups), 1);
 			}
 			
 			if (item.Indicator != ActivityIndicator.None) {
@@ -1950,7 +1950,7 @@ namespace Docky.Interface
 		
 		DockySurface CreateWaitBuffer ()
 		{
-			DockySurface surface = new DockySurface (ZoomedIconSize, ZoomedIconSize, background_buffer);
+			DockySurface surface = new DockySurface (IconSize, IconSize, background_buffer);
 			surface.Clear ();
 			
 			surface.Context.Color = new Cairo.Color (0, 0, 0, 0);
