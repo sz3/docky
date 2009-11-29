@@ -462,8 +462,8 @@ namespace Docky.Items
 			// draw filled gradient
 			RadialGradient rg = new RadialGradient (x, padding, 0, x, padding, size);
 			rg.AddColorStop (0, badgeColors [0]);
-			rg.AddColorStop (.6, badgeColors [1]);
-			rg.AddColorStop (.8, badgeColors [2]);
+			rg.AddColorStop (.3, badgeColors [1]);
+			rg.AddColorStop (.6, badgeColors [2]);
 			rg.AddColorStop (1.0, badgeColors [3]);
 			
 			surface.Context.Pattern = rg;
@@ -575,13 +575,13 @@ namespace Docky.Items
 				Log<AbstractDockPainter>.Debug (e.StackTrace);
 			}
 			Gdk.Color gdkColor = Style.Backgrounds [(int) StateType.Selected].SetMinimumValue (100);
-			badgeColors [0] = new Cairo.Color ((double) gdkColor.Red / ushort.MaxValue,
+			badgeColors [1] = new Cairo.Color ((double) gdkColor.Red / ushort.MaxValue,
 											(double) gdkColor.Green / ushort.MaxValue,
 											(double) gdkColor.Blue / ushort.MaxValue,
 											1.0);
-			badgeColors [1] = badgeColors [0].AddHue (10);
-			badgeColors [2] = badgeColors [0].AddHue (30);
-			badgeColors [3] = badgeColors [0].AddHue (50);
+			badgeColors [0] = badgeColors [1].AddHue (-6);
+			badgeColors [2] = badgeColors [1].AddHue (8);
+			badgeColors [3] = badgeColors [1].AddHue (8);
 			QueueRedraw ();
 		}
 		
