@@ -1725,7 +1725,7 @@ namespace Docky.Interface
 				}
 				
 				DockySurface icon = painterOwner.IconSurface (painter_buffer, ZoomedIconSize);
-				icon.ShowAtPointAndZoom (painter_buffer, point, DrawValues [painterOwner].Zoom, 1);
+				icon.ShowWithOptions (painter_buffer, point, DrawValues [painterOwner].Zoom, 0, 1);
 				
 				repaint_painter = false;
 			}
@@ -1795,10 +1795,10 @@ namespace Docky.Interface
 			if (item.Zoom) {
 				if (item.ScalableRendering && center.Zoom == 1) {
 					icon = item.IconSurface (surface, IconSize);
-					icon.ShowAtPointAndZoom (surface, center.Center, 1, opacity);
+					icon.ShowWithOptions (surface, center.Center, 1, 0, opacity);
 				} else {
 					icon = item.IconSurface (surface, ZoomedIconSize);
-					icon.ShowAtPointAndZoom (surface, center.Center, center.Zoom / zoomOffset, opacity);
+					icon.ShowWithOptions (surface, center.Center, center.Zoom / zoomOffset, 0, opacity);
 				}
 			} else {
 				double rotation = 0;
@@ -1821,7 +1821,7 @@ namespace Docky.Interface
 				}
 				
 				icon = item.IconSurface (surface, IconSize);
-				icon.ShowAtPointAndRotation (surface, center.Center, rotation, opacity);
+				icon.ShowWithOptions (surface, center.Center, 1, rotation, opacity);
 			}
 			
 			if (darken > 0 || lighten > 0) {
@@ -1877,10 +1877,10 @@ namespace Docky.Interface
 				}
 				
 				if (item.Indicator == ActivityIndicator.Single || !Preferences.IndicateMultipleWindows) {
-					indicator.ShowAtPointAndZoom (surface, loc.Center, 1);
+					indicator.ShowWithOptions (surface, loc.Center, 1, 0, 1);
 				} else {
-					indicator.ShowAtPointAndZoom (surface, loc.MoveRight (Position, 3).Center, 1);
-					indicator.ShowAtPointAndZoom (surface, loc.MoveRight (Position, -3).Center, 1);
+					indicator.ShowWithOptions (surface, loc.MoveRight (Position, 3).Center, 1, 0, 1);
+					indicator.ShowWithOptions (surface, loc.MoveRight (Position, -3).Center, 1, 0, 1);
 				}
 			}
 		}

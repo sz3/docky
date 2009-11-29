@@ -39,42 +39,26 @@ namespace Docky.CairoHelper
 	public static class DockySurface_Extensions
 	{
 
-		public static void ShowAtPointAndZoom (this DockySurface self, DockySurface target, PointD point, double zoom)
-		{
-			self.ShowAtPointAndZoom (target, point, zoom, 1);
-		}
-		
-		public static void ShowAtPointAndZoom (this DockySurface self, DockySurface target, PointD point, double zoom, double opacity)
+		public static void ShowWithOptions (this DockySurface self, DockySurface target, PointD point, double zoom, double rotation, double opacity)
 		{
 			if (target == null)
 				throw new ArgumentNullException ("target");
 			
 			Cairo.Context cr = target.Context;
-			if (zoom != 1)
-				cr.Scale (zoom, zoom);
 			
-			cr.SetSource (self.Internal, 
-			              (point.X - zoom * self.Width / 2) / zoom,
-			              (point.Y - zoom * self.Height / 2) / zoom);
-			cr.PaintWithAlpha (opacity);
-			
-			if (zoom != 1)
-				cr.IdentityMatrix ();
-			
-		}
-		
-		public static void ShowAtPointAndRotation (this DockySurface self, DockySurface target, PointD point, double rotation, double opacity)
-		{
-			if (target == null)
-				throw new ArgumentNullException ("target");
-			
-			Cairo.Context cr = target.Context;
 			double cos, sin;
 			cos = Math.Cos (rotation);
 			sin = Math.Sin (rotation);
 			Matrix m = new Matrix (cos, sin, 0 - sin, cos, point.X, point.Y);
 			cr.Transform (m);
-			cr.SetSource (self.Internal, 0 - self.Width / 2, 0 - self.Height / 2);
+			
+			if (zoom != 1)
+				cr.Scale (zoom, zoom);
+			
+			cr.SetSource (self.Internal,
+				0 - self.Width / 2, 
+				0 - self.Height / 2);
+			
 			cr.PaintWithAlpha (opacity);
 			
 			cr.IdentityMatrix ();
