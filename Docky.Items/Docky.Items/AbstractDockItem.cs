@@ -33,7 +33,12 @@ using Docky.Services;
 
 namespace Docky.Items
 {
-
+	public enum MenuButton {
+		None   = 0,
+		Left   = 1 << 0,
+		Middle = 1 << 1,
+		Right  = 1 << 2,
+	}
 
 	public abstract class AbstractDockItem : IDisposable
 	{
@@ -88,8 +93,8 @@ namespace Docky.Items
 			get; private set;
 		}
 		
-		public virtual uint MenuButton {
-			get { return 3; }
+		public virtual MenuButton MenuButton {
+			get { return MenuButton.Right; }
 		}
 		
 		public ClickAnimation ClickAnimation {

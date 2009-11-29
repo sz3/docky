@@ -30,9 +30,8 @@ namespace NetworkManagerDocklet
 {
 	public class NetworkManagerDocklet : IconDockItem
 	{
-		
-		public override uint MenuButton {
-			get { return 1; }
+		public override MenuButton MenuButton {
+			get { return MenuButton.Left | MenuButton.Right; }
 		}
 		
 		public NetworkManagerDocklet ()

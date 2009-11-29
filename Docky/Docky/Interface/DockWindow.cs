@@ -862,6 +862,22 @@ namespace Docky.Interface
 			if (InternalDragActive || ConfigurationMode)
 				return base.OnButtonPressEvent (evnt);
 			
+			MenuButton button;
+			switch (evnt.Button) {
+			case 1:
+				button = MenuButton.Left;
+				break;
+			case 2:
+				button = MenuButton.Middle;
+				break;
+			case 3:
+				button = MenuButton.Right;
+				break;
+			default:
+				button = MenuButton.None;
+				break;
+			}
+			
 			if (Painter != null) {
 				int x, y;
 				
@@ -870,7 +886,7 @@ namespace Docky.Interface
 				
 				if (painter_area.Contains (LocalCursor))
 					Painter.ButtonPressed (x, y, evnt.State);
-			} else if (HoveredItem != null && evnt.Button == HoveredItem.MenuButton) {
+			} else if (HoveredItem != null && (button & HoveredItem.MenuButton) == button) {
 				MenuList list;
 				
 				if (HoveredItem.Owner != null)
