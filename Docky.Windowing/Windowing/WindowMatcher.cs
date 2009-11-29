@@ -118,6 +118,8 @@ namespace Docky.Windowing
 			}
 		}
 		
+		object update_lock;
+		
 		Dictionary<Wnck.Window, List<string>> window_to_desktop_files;
 		Dictionary<string, List<string>> exec_to_desktop_files;
 		List<Regex> prefix_filters;
@@ -125,6 +127,7 @@ namespace Docky.Windowing
 		
 		WindowMatcher ()
 		{
+			update_lock = new object ();
 			screen = Wnck.Screen.Default;
 			prefix_filters = BuildPrefixFilters ();
 			exec_to_desktop_files = BuildExecStrings ();
@@ -169,7 +172,10 @@ namespace Docky.Windowing
 						if (!file.Path.EndsWith (".desktop"))
 							return;
 						// reload our dictionary of exec strings
-						exec_to_desktop_files = BuildExecStrings ();
+						Dictionary<string, List<string>> execToDesktopFiles = BuildExecStrings ();
+						
+						lock (update_lock)
+							exec_to_desktop_files = BuildExecStrings ();
 						
 						// Make sure to trigger event on main thread
 						DockServices.System.RunOnMainThread (() => {
@@ -317,41 +323,43 @@ namespace Docky.Windowing
 				}
 			}
 	
-			do {
-				// do a match on the process name
-				string name = NameForPid (pids.ElementAt (currentPid));
-				if (exec_to_desktop_files.ContainsKey (name)) {
-					foreach (string s in exec_to_desktop_files[name]) {
-						if (string.IsNullOrEmpty (s))
-							continue;
-						yield return s;
-						matched = true;
-					}
-				}
-				if (matched)
-					yield break;
-				
-				// otherwise do a match on the commandline
-				command_line.AddRange (CommandLineForPid (pids.ElementAt (currentPid++))
-					.Select (cmd => cmd.Replace (@"\", @"\\"))
-					.Where (cmd => !string.IsNullOrEmpty (cmd))
-					.Distinct ());
-				if (command_line.Count () == 0)
-					continue;
-				foreach (string cmd in command_line) {
-					if (exec_to_desktop_files.ContainsKey (cmd)) {
-						foreach (string s in exec_to_desktop_files[cmd]) {
+			lock (update_lock) {
+				do {
+					// do a match on the process name
+					string name = NameForPid (pids.ElementAt (currentPid));
+					if (exec_to_desktop_files.ContainsKey (name)) {
+						foreach (string s in exec_to_desktop_files[name]) {
 							if (string.IsNullOrEmpty (s))
 								continue;
 							yield return s;
 							matched = true;
 						}
 					}
-				}
-				// if we found a match, bail.
-				if (matched)
-					yield break;
-			} while (currentPid < pids.Count ());
+					if (matched)
+						yield break;
+					
+					// otherwise do a match on the commandline
+					command_line.AddRange (CommandLineForPid (pids.ElementAt (currentPid++))
+						.Select (cmd => cmd.Replace (@"\", @"\\"))
+						.Where (cmd => !string.IsNullOrEmpty (cmd))
+						.Distinct ());
+					if (command_line.Count () == 0)
+						continue;
+					foreach (string cmd in command_line) {
+						if (exec_to_desktop_files.ContainsKey (cmd)) {
+							foreach (string s in exec_to_desktop_files[cmd]) {
+								if (string.IsNullOrEmpty (s))
+									continue;
+								yield return s;
+								matched = true;
+							}
+						}
+					}
+					// if we found a match, bail.
+					if (matched)
+						yield break;
+				} while (currentPid < pids.Count ());
+			}
 			command_line.Clear ();
 			// if no match was found, just return the pid
 			yield return window.Pid.ToString ();
