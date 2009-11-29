@@ -115,10 +115,10 @@ namespace Docky
 				vbox.Add (label2);
 				vbox.Add (hboxBottom);
 				
-				vbox.SetChildPacking (hboxTop, true, true, 0, PackType.End);
-				vbox.SetChildPacking (label1, false, false, 0, PackType.End);
-				vbox.SetChildPacking (label2, false, false, 0, PackType.End);
-				vbox.SetChildPacking (hboxBottom, true, true, 0, PackType.End);
+				vbox.SetChildPacking (hboxTop, true, true, 0, PackType.Start);
+				vbox.SetChildPacking (label1, false, false, 0, PackType.Start);
+				vbox.SetChildPacking (label2, false, false, 0, PackType.Start);
+				vbox.SetChildPacking (hboxBottom, true, true, 0, PackType.Start);
 				
 				config_alignment.Add (vbox);
 			} else {
