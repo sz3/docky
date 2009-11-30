@@ -151,9 +151,7 @@ namespace Docky.Windowing
 			List<GLib.File> dirs = new List<GLib.File> () {dir};
 			try {
 				dirs = dirs.Union (dir.SubDirs ()).ToList ();	
-			} catch {
-				// do nothing
-			}
+			} catch {}
 			
 			foreach (GLib.File d in dirs) {
 				GLib.FileMonitor mon = d.Monitor (GLib.FileMonitorFlags.None, null);
@@ -231,12 +229,11 @@ namespace Docky.Windowing
 			if (!window_to_desktop_files.ContainsKey (window))
 				return new[] { window };
 			
-			IEnumerable<string> ids = window_to_desktop_files[window];
+			string id = window_to_desktop_files [window].DefaultIfEmpty ("").FirstOrDefault ();
 			
 			return window_to_desktop_files
-				.Where (kvp => ids.Any (id => kvp.Value.Contains (id)))
-				.Select (kvp => kvp.Key)
-				.ToArray ();
+				.Where (kvp => kvp.Value.Contains (id))
+				.Select (kvp => kvp.Key);
 		}
 		
 		public string DesktopFileForWindow (Wnck.Window window)
@@ -260,11 +257,10 @@ namespace Docky.Windowing
 		{
 			if (!WindowIsOpenOffice (window))
 				return true;
-			
 			SetupWindow (window);
 			string win = window_to_desktop_files[window].FirstOrDefault ();
-			
-			return !string.IsNullOrEmpty (win) && win.EndsWith (".desktop");
+			if (win == null) win = "";
+			return win.EndsWith (".desktop");
 		}
 		
 		bool WindowIsOpenOffice (Wnck.Window window)
@@ -276,8 +272,6 @@ namespace Docky.Windowing
 		{
 			int pid = window.Pid;
 			if (pid <= 1) {
-				// PID Is too small to be a user PID (1 or 0)
-				// this means we dont have a meaningful way forward
 				if (window.ClassGroup != null && !string.IsNullOrEmpty (window.ClassGroup.ResClass)) {
 					yield return window.ClassGroup.ResClass;
 					yield break;
@@ -285,7 +279,6 @@ namespace Docky.Windowing
 					yield return window.Name;
 					yield break;
 				}
-				// Control should never reach here
 			}
 			
 			bool matched = false;
@@ -293,7 +286,6 @@ namespace Docky.Windowing
 			
 			// get ppid and parents
 			IEnumerable<int> pids = PIDAndParents (pid);
-			
 			// this list holds a list of the command line parts from left (0) to right (n)
 			List<string> command_line = new List<string> ();
 			
@@ -333,6 +325,17 @@ namespace Docky.Windowing
 	
 			lock (update_lock) {
 				do {
+					// do a match on the process name
+					string name = NameForPid (pids.ElementAt (currentPid));
+					if (exec_to_desktop_files.ContainsKey (name)) {
+						foreach (string s in exec_to_desktop_files[name]) {
+							if (string.IsNullOrEmpty (s))
+								continue;
+							yield return s;
+							matched = true;
+						}
+					}
+					
 					// otherwise do a match on the commandline
 					command_line.AddRange (CommandLineForPid (pids.ElementAt (currentPid++))
 						.Select (cmd => cmd.Replace (@"\", @"\\"))
@@ -350,7 +353,6 @@ namespace Docky.Windowing
 							}
 						}
 					}
-					
 					// if we found a match, bail.
 					if (matched)
 						yield break;
@@ -361,15 +363,6 @@ namespace Docky.Windowing
 			yield return window.Pid.ToString ();
 		}
 		
-		/// <summary>
-		/// Yields out all the PID's in a PID parent tree and the passed PID
-		/// </summary>
-		/// <param name="pid">
-		/// A <see cref="System.Int32"/>
-		/// </param>
-		/// <returns>
-		/// A <see cref="IEnumerable<System.Int32>"/>
-		/// </returns>
 		IEnumerable<int> PIDAndParents (int pid)
 		{
 			string cmdline;
@@ -437,6 +430,22 @@ namespace Docky.Windowing
 			yield return cmdline;
 		}
 		
+		string NameForPid (int pid)
+		{
+			string name;
+
+			try {
+				string procPath = new [] { "/proc", pid.ToString (), "status" }.Aggregate (Path.Combine);
+				using (StreamReader reader = new StreamReader (procPath))
+					name = reader.ReadLine ();
+			} catch { return ""; }
+			
+			if (string.IsNullOrEmpty (name) || !name.StartsWith ("Name:"))
+				return "";
+			
+			return name.Substring (6);
+		}
+		
 		Dictionary<string, List<string>> BuildExecStrings ()
 		{
 			Dictionary<string, List<string>> result = new Dictionary<string, List<string>> ();
@@ -455,7 +464,8 @@ namespace Docky.Windowing
 				if (exec.StartsWith ("ooffice") && exec.Contains (' ')) {
 					vexec = "ooffice" + exec.Split (' ') [1];
 				// for wine apps
-				} else if ((exec.StartsWith ("env WINEPREFIX=") && exec.Contains (" wine ")) || exec.StartsWith ("wine ")) {
+				} else if ((exec.StartsWith ("env WINEPREFIX=") && exec.Contains (" wine ")) ||
+						exec.StartsWith ("wine ")) {
 					int startIndex = exec.IndexOf ("wine ") + 5; // length of 'wine '
 					// CommandLineForPid already splits based on \\ and takes the last entry, so do the same here
 					vexec = exec.Substring (startIndex).Split (new [] {@"\\"}, StringSplitOptions.RemoveEmptyEntries).Last ().ToLower ();
