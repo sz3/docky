@@ -20,6 +20,7 @@ using System.Linq;
 using System.Collections.Generic;
 
 using Docky.Items;
+using Docky.Services;
 
 namespace NPR
 {
@@ -47,11 +48,25 @@ namespace NPR
 		
 		public NPRItemProvider ()
 		{
-			foreach (Station s in NPR.MyStations.Select (id => NPR.StationById (id)))
+			ReloadStations ();
+			NPR.StationsUpdated += delegate {
+				ReloadStations ();
+			};
+		}
+				
+		public void ReloadStations ()
+		{
+			items.Clear ();
+			foreach (int stationID in NPR.MyStations)
 			{
-				items.Add (s);
+				items.Add (new Station (stationID));
+				Items = items;
 			}
-			Items = items;
+			
+			if (NPR.MyStations.Count () == 0) {
+				items.Add (new NullStation ());
+				Items = items;
+			}
 		}
 	}
 }

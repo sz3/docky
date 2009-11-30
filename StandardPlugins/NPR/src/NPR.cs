@@ -39,20 +39,22 @@ namespace NPR
 		
 		static IPreferences prefs;
 		
+		public static EventHandler StationsUpdated;
+		
 		public static int[] MyStations {
 			get {
 				return prefs.Get<int []> ("MyStations", null);
 			}
 			set {
 				prefs.Set<int []> ("MyStations", value);
+				if (StationsUpdated != null)
+					StationsUpdated (null, EventArgs.Empty);
 			}
 		}
 		
 		static NPR ()
 		{
 			prefs = DockServices.Preferences.Get <NPR> ();
-			
-			MyStations = new int[] {145,233,270,55,1089};
 		}
 		
 		public NPR ()
@@ -75,24 +77,28 @@ namespace NPR
 		
 		static XElement APIReturn (string url, NameValueCollection query)
 		{
-			return XElement.Load (BuildQueryString (url, query));
+				return XElement.Load (BuildQueryString (url, query));
 		}
 		
 		public static IEnumerable<Station> SearchStations (uint zip) 
 		{
 			NameValueCollection query = new NameValueCollection ();
 			query["zip"] = zip.ToString ();	
-						
-			return APIReturn (stationsUrl, query).Elements ("station").Select (e => new Station (e));
+				
+			XElement result = APIReturn (stationsUrl, query);
+			
+			if (result.Elements ("station").Any (e => e.HasAttributes))
+				return result.Elements ("station").Select (e => new Station (e));
+			
+			return Enumerable.Empty<Station> ();
 		}
 		
-		public static Station StationById (int id)
+		public static XElement StationXElement (int id)
 		{
 			NameValueCollection query = new NameValueCollection ();
 			query["id"] = id.ToString ();
 			
-			return new Station (APIReturn (stationsUrl, query).Element ("station"));
-			
+			return APIReturn (stationsUrl, query).Element ("station");
 		}
 	}
 }

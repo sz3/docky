@@ -7,7 +7,15 @@ FILES = \
 	src/NPRItemProvider.cs \
 	src/NPR.cs \
 	src/Station.cs \
-	src/StationUrl.cs
+	src/NullStation.cs \
+	src/StationUrl.cs \
+	src/StationSearchWidget.cs \
+	src/ConfigDialog.cs \
+	src/StationsView.cs \
+	src/StationTile.cs \
+	src/WrapLabel.cs \
+	gtk-gui/NPR.StationSearchWidget.cs \
+	gtk-gui/generated.cs
 
 RESOURCES = \
 	Resources/NPR.addin.xml

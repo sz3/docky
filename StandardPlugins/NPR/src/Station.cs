@@ -39,41 +39,66 @@ namespace NPR
 		public uint Signal { get; private set; }
 		public string TagLine { get; private set; }
 		public string Logo { get; private set; }
-		XElement StationElement { get; set; }
+		public string MarketCity { get; private set; }
+		public IEnumerable<StationUrl> StationUrls { get; private set; }
+		
+		public event EventHandler FinishedLoading;
+		
+		private bool IsReady {
+			get {
+				return (State & ItemState.Wait) != ItemState.Wait;
+			}
+		}
+		
+		public Station (int id)
+		{
+			State |= ItemState.Wait;
+
+			DockServices.System.RunOnThread (() => {
+				LoadDataFromXElement (NPR.StationXElement (id));
+			});
+		}
 		
 		public Station (XElement stationElement)
 		{
 			State |= ItemState.Wait;
 			
-			StationElement = stationElement;
-			Name = StationElement.Element ("name").Value;
-			ID = uint.Parse (StationElement.Attribute ("id").Value);
+			LoadDataFromXElement (stationElement);
+		}
+		
+		void LoadDataFromXElement (XElement stationElement)
+		{
+			Name = stationElement.Element ("name").Value;
+			ID = uint.Parse (stationElement.Attribute ("id").Value);
 			
+			Signal = 0;
 			// when looking up a station by ID, there is no signal property
-			if (StationElement.Elements ("signal").Any ())
-				Signal = uint.Parse (StationElement.Element ("signal").Attribute ("strength").Value);
-			else 
-				Signal = 0;
-			TagLine = StationElement.Element ("tagline").Value;
+			if (stationElement.Elements ("signal").Any ())
+				Signal = uint.Parse (stationElement.Element ("signal").Attribute ("strength").Value);
+			
+			MarketCity = "";
+			// or MarketCity property
+			if (stationElement.Elements ("marketCity").Any ())
+				MarketCity = stationElement.Element ("marketCity").Value;
+			
+			TagLine = stationElement.Element ("tagline").Value;
+			
+			StationUrls = stationElement.Elements ("url").Select (u => new StationUrl (u));
 			
 			WebClient cl = new WebClient ();
-			string logo = StationElement.Elements ("image").First (el => el.Attribute ("type").Value == "logo").Value;
+			string logo = stationElement.Elements ("image").First (el => el.Attribute ("type").Value == "logo").Value;
 			string logoFile = System.IO.Path.GetTempFileName ();
 			cl.DownloadFileAsync (new Uri (logo), logoFile);
 			cl.DownloadFileCompleted += delegate {
 				State ^= ItemState.Wait;
 				Icon = logoFile;
+				if (FinishedLoading != null)
+					FinishedLoading (this, EventArgs.Empty);
 			};
 			
 			string hover = (string.IsNullOrEmpty (TagLine)) ? Name : string.Format ("{0} : {1}", Name, TagLine);
 			
 			HoverText = hover;
-		}
-		
-		public IEnumerable<StationUrl> StationUrls {
-			get {
-				return StationElement.Elements ("url").Select (u => new StationUrl (u));
-			}
 		}
 		
 		#region IconDockItem
@@ -85,6 +110,9 @@ namespace NPR
 
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
+			if (!IsReady)
+				return ClickAnimation.None;
+			
 			if (button == 1) {
 				DockServices.System.Open (StationUrls.First (u => u.UrlType == StationUrlType.OrgHomePage).Target);
 				
@@ -93,11 +121,21 @@ namespace NPR
 			
 			return ClickAnimation.None;
 		}
+
+		void ShowConfig ()
+		{
+			if (ConfigDialog.instance == null)
+				ConfigDialog.instance = new ConfigDialog ();
+			ConfigDialog.instance.Show ();
+		}
 		
 		public override MenuList GetMenuItems ()
 		{
 			MenuList list = base.GetMenuItems ();
-						
+			
+			if (!IsReady)
+				return list;
+			
 			List<StationUrl> urls = StationUrls.ToList ();
 			
 			if (urls.Any (u => u.UrlType == StationUrlType.OrgHomePage)) {
@@ -114,9 +152,16 @@ namespace NPR
 							DockServices.System.Open (urls.First (u => u.UrlType == StationUrlType.ProgramSchedule).Target);
 						}));
 			}
-			
+			if (urls.Any (u => u.UrlType == StationUrlType.PledgePage)) {
+				list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Donate"),
+						"emblem-money",
+						delegate {
+							DockServices.System.Open (urls.First (u => u.UrlType == StationUrlType.PledgePage).Target);
+						}));
+			}
+
 			list[MenuListContainer.Actions].Add (new SeparatorMenuItem ());
-			
+
 			urls.Where (u => u.UrlType >= StationUrlType.AudioMP3Stream).ToList ().ForEach (url => {
 				string format = "", icon = "";
 				switch (url.UrlType) {
@@ -149,23 +194,11 @@ namespace NPR
 			
 			list[MenuListContainer.Actions].Add (new SeparatorMenuItem ());
 			
-			if (urls.Any (u => u.UrlType == StationUrlType.PledgePage)) {
-				list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Donate"),
-						"emblem-money",
-						delegate {
-							DockServices.System.Open (urls.First (u => u.UrlType == StationUrlType.PledgePage).Target);
-						}));
-			}
-			
-			/*
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Donate"),
-					"emblem-money",
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Settings"),
+					Gtk.Stock.Preferences,
 					delegate {
-						if (GMailConfigurationDialog.instance == null)
-							GMailConfigurationDialog.instance = new GMailConfigurationDialog ();
-						GMailConfigurationDialog.instance.Show ();
+						ShowConfig ();
 					}));
-			*/
 			return list;
 		}
 

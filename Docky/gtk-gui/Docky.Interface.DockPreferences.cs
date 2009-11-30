@@ -10,6 +10,7 @@
 
 namespace Docky.Interface {
     
+    
     public partial class DockPreferences {
         
         private Gtk.VBox vbox1;
