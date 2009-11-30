@@ -184,7 +184,6 @@ namespace Docky.Items
 				transient_items.Add (item);
 				item.WindowsChanged += HandleTransientWindowsChanged;
 				
-				Items = InternalItems;
 			}
 			
 			// remove old transient items
@@ -207,7 +206,9 @@ namespace Docky.Items
 				adi.WindowsChanged -= HandleTransientWindowsChanged;
 				transient_items.Remove (adi);
 			}
+			
 			Items = InternalItems;
+			
 			foreach (AbstractDockItem adi in items)
 				adi.Dispose();
 		}

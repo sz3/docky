@@ -191,7 +191,7 @@ namespace NetworkManagerDocklet
 				}
 			}
 			
-			if (!wifi.Any ()) {
+			if (!wifi.Any () && !active.Any ()) {
 				wifi.Add (new MenuItem ("Disconnected", "nm-no-connection", true));
 			}
 			

@@ -696,7 +696,6 @@ namespace Docky.Interface
 		
 		void ProviderItemsChanged (object sender, ItemsChangedArgs args)
 		{
-			
 			foreach (AbstractDockItem item in args.AddedItems) {
 				RegisterItem (item);
 			}

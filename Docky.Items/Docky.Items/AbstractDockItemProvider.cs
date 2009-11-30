@@ -54,6 +54,9 @@ namespace Docky.Items
 					position++;
 				}
 				
+				if (!added.Any () && !removed.Any ())
+					return;
+				
 				items = value.ToArray ();
 				foreach (AbstractDockItem item in items)
 					item.Owner = this;
