@@ -370,9 +370,11 @@ namespace Docky.Interface
 
 		AbstractDockPainter Painter {
 			get { return painter; }
-			set {
-				painter = value;
-			}
+			set { painter = value; }
+		}
+		
+		int PainterBufferSize {
+			get { return ZoomedIconSize + 3 * DockWidthBuffer; }
 		}
 		
 		int IconSize {
@@ -436,6 +438,9 @@ namespace Docky.Interface
 					dockWidth += (int) ((ItemWidthBuffer + remove_size) *
 						(1 - Math.Min (1, (DateTime.UtcNow - remove_time).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds)));
 				}
+				
+				if (Painter != null)
+					return Painter.MinimumSize + PainterBufferSize;
 				
 				return dockWidth;
 			}
@@ -1713,7 +1718,7 @@ namespace Docky.Interface
 				Gdk.Rectangle allocation = new Gdk.Rectangle (
 					0, 
 					0, 
-					dockArea.Width - ZoomedIconSize - 3 * DockWidthBuffer, 
+					dockArea.Width - PainterBufferSize, 
 					dockArea.Height - 2 * DockHeightBuffer);
 				
 				if (Painter.Allocation != allocation)
