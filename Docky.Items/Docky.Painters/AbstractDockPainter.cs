@@ -45,7 +45,7 @@ namespace Docky.Painters
 			get { return 400; }
 		}
 		
-		protected Gdk.Rectangle Allocation { get; private set; }
+		public Gdk.Rectangle Allocation { get; private set; }
 		
 		protected Gtk.Style Style { get; private set; }
 		
