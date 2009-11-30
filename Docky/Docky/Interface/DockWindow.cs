@@ -1970,8 +1970,11 @@ namespace Docky.Interface
 			double baseLog = Math.Log (WaitArmsPerGroup + 1);
 			int size = Math.Min (surface.Width, surface.Height);
 			
-			surface.Context.LineWidth = Math.Max (1.0, size / 40);
+			// Ensure that LineWidth is a multiple of 2 for nice drawing
+			surface.Context.LineWidth = (int) Math.Max (1, size / 40.0);
+			surface.Context.LineWidth = surface.Context.LineWidth + (surface.Context.LineWidth % 2);
 			surface.Context.LineCap = LineCap.Round;
+			
 			surface.Context.Translate (surface.Width / 2, surface.Height / 2);
 			
 			Gdk.Color color = Style.Backgrounds [(int) Gtk.StateType.Selected].SetMinimumValue (100);
