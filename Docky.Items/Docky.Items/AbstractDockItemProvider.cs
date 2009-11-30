@@ -131,10 +131,10 @@ namespace Docky.Items
 				ItemsChanged (this, new ItemsChangedArgs (added, removed));
 		}
 		
-		public abstract void Dispose ();
-		
 		public virtual void AddedToDock ()
 		{
 		}
+		
+		public abstract void Dispose ();
 	}
 }
