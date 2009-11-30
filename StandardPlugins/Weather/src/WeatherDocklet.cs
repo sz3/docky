@@ -255,9 +255,9 @@ namespace WeatherDocklet
 				WeatherController.NextLocation ();
 		}
 		
-		public override MenuList GetMenuItems ()
+		protected override MenuList OnGetMenuItems ()
 		{
-			MenuList list = base.GetMenuItems ();
+			MenuList list = base.OnGetMenuItems ();
 			
 			if (WeatherController.Weather.Condition != null)
 			{

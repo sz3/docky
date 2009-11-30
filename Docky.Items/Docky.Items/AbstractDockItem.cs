@@ -56,6 +56,9 @@ namespace Docky.Items
 		public event EventHandler<PaintNeededEventArgs> PaintNeeded;
 		public event EventHandler<PainterRequestEventArgs> PainterRequest;
 		
+		/// <summary>
+		/// Indicates if the item should have zero, one, or multiple indicate dots below it
+		/// </summary>
 		public ActivityIndicator Indicator {
 			get {
 				return indicator; 
@@ -68,6 +71,9 @@ namespace Docky.Items
 			}
 		}
 		
+		/// <summary>
+		/// The current state of the item. Indicates wait, urgency, and active
+		/// </summary>
 		public ItemState State {
 			get { return state; }
 			protected set {
@@ -82,39 +88,67 @@ namespace Docky.Items
 			}
 		}
 		
+		/// <summary>
+		/// The time at which the item was added (and made visible) in the item provider
+		/// </summary>
 		public DateTime AddTime {
 			get; internal set;
 		}
 		
+		/// <summary>
+		/// The last time this item was clicked
+		/// </summary>
 		public DateTime LastClick {
 			get; private set;
 		}
 		
+		/// <summary>
+		/// Which mouse buttons trigger the menu
+		/// </summary>
 		public virtual MenuButton MenuButton {
 			get { return MenuButton.Right; }
 		}
 		
+		/// <summary>
+		/// The animation with which the item wishes to display
+		/// </summary>
 		public ClickAnimation ClickAnimation {
 			get; private set;
 		}
 		
+		/// <summary>
+		/// Determines if the item will be rendered at multiple sizes when zoomed. Not advised for icons who
+		/// use a themed icon as this may look different at different sizes
+		/// </summary>
 		public virtual bool ScalableRendering {
 			get;
 			protected set;
 		}
 		
+		/// <summary>
+		/// Causes an items "upward" orientation to always face in if true
+		/// </summary>
 		public virtual bool RotateWithDock {
 			get { return false; }
 		}
 		
+		/// <summary>
+		/// Provices a performance optimization if the icon is known to be square or can be treated as such
+		/// </summary>
 		public virtual bool Square {
 			get { return true; }
 		}
 		
+		/// <summary>
+		/// Indicates that an item should be zoomed on hover. Reasons for not zooming include separators and xembed
+		/// </summary>
 		public virtual bool Zoom {
 			get { return true; }
 		}
 		
+		/// <summary>
+		/// The text displayed when an item is hovered
+		/// </summary>
 		public string HoverText {
 			get {
 				return hover_text;
@@ -129,12 +163,18 @@ namespace Docky.Items
 			}
 		}
 		
+		/// <summary>
+		/// Future use for displaying a header in menus
+		/// </summary>
 		public virtual string ShortName {
 			get {
 				return HoverText;
 			}
 		}
 		
+		/// <summary>
+		/// An icon which will be displayed as a badge over the current icon
+		/// </summary>
 		protected virtual string BadgeIcon
 		{
 			get {
@@ -142,13 +182,22 @@ namespace Docky.Items
 			}
 		}
 		
+		/// <summary>
+		/// The text displayed over a badge
+		/// </summary>
 		protected string BadgeText { get; set; }
 		
+		/// <summary>
+		/// The position of the icon, non-providers should not modify this value!
+		/// </summary>
 		public int Position {
 			get;
 			set;
 		}
 		
+		/// <summary>
+		/// The owning provider of the item
+		/// </summary>
 		public AbstractDockItemProvider Owner {
 			get;
 			internal set;
@@ -171,6 +220,15 @@ namespace Docky.Items
 			Dispose ();
 		}
 		
+		/// <summary>
+		/// Fetches the time at which a particular state was last set or unset
+		/// </summary>
+		/// <param name="state">
+		/// A <see cref="ItemState"/>
+		/// </param>
+		/// <returns>
+		/// The <see cref="DateTime"/> at which the state was changed
+		/// </returns>
 		public DateTime StateSetTime (ItemState state)
 		{
 			if (!state_times.ContainsKey (state))
@@ -186,8 +244,23 @@ namespace Docky.Items
 			}
 		}
 		
+		/// <summary>
+		/// A string which uniquely identifies the instance of the current item and is stable across process runs.
+		/// This string will be used to sort the item on the dock, failure to properly create a unique string
+		/// will result in improper sorting.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="System.String"/>
+		/// </returns>
 		public abstract string UniqueID ();
 		
+		/// <summary>
+		/// The average color of the pixels in the current represenation of the item, 
+		/// weighted for saturation and opacity.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="Cairo.Color"/>
+		/// </returns>
 		public Cairo.Color AverageColor ()
 		{
 			if (icon_buffers [0] == null)
@@ -260,6 +333,15 @@ namespace Docky.Items
 		}
 		
 		#region Drop Handling
+		/// <summary>
+		/// Called by the owning dock to determine if an item is capable of handling a set of URIs on a drop.
+		/// </summary>
+		/// <param name="uris">
+		/// A <see cref="IEnumerable<System.String>"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="System.Boolean"/>
+		/// </returns>
 		public bool CanAcceptDrop (IEnumerable<string> uris)
 		{
 			bool result = false;
@@ -272,6 +354,15 @@ namespace Docky.Items
 			return result;
 		}
 		
+		/// <summary>
+		/// Called by the owning dock when a set of URIs has been dropped on an item and CanAcceptDrop has returned true
+		/// </summary>
+		/// <param name="uris">
+		/// A <see cref="IEnumerable<System.String>"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="System.Boolean"/>
+		/// </returns>
 		public bool AcceptDrop (IEnumerable<string> uris)
 		{
 			bool result = false;
@@ -284,6 +375,15 @@ namespace Docky.Items
 			return result;
 		}
 		
+		/// <summary>
+		/// Called by the owning dock to determine if an item is capable of handling an AbstractDockItem on a drop event.
+		/// </summary>
+		/// <param name="item">
+		/// A <see cref="AbstractDockItem"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="System.Boolean"/>
+		/// </returns>
 		public bool CanAcceptDrop (AbstractDockItem item)
 		{
 			bool result = false;
@@ -296,6 +396,15 @@ namespace Docky.Items
 			return result;
 		}
 		
+		/// <summary>
+		/// Called by the owning dock when an AbstractDockitem has been dropped on an item and CanAcceptDrop has returned true
+		/// </summary>
+		/// <param name="item">
+		/// A <see cref="AbstractDockItem"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="System.Boolean"/>
+		/// </returns>
 		public bool AcceptDrop (AbstractDockItem item)
 		{
 			bool result = false;
@@ -330,6 +439,21 @@ namespace Docky.Items
 		#endregion
 		
 		#region Input Handling
+		/// <summary>
+		/// Called by owning Dock when the item is clicked
+		/// </summary>
+		/// <param name="button">
+		/// A <see cref="System.UInt32"/>
+		/// </param>
+		/// <param name="mod">
+		/// A <see cref="Gdk.ModifierType"/>
+		/// </param>
+		/// <param name="xPercent">
+		/// A <see cref="System.Double"/> representing the percentage across the icon on which the click took place
+		/// </param>
+		/// <param name="yPercent">
+		/// A <see cref="System.Double"/> representing the percentage down the icon on which the click took place
+		/// </param>
 		public void Clicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
 			try {
@@ -348,6 +472,15 @@ namespace Docky.Items
 			return ClickAnimation.None;
 		}
 		
+		/// <summary>
+		/// Called by owning dock when item is scrolled
+		/// </summary>
+		/// <param name="direction">
+		/// A <see cref="Gdk.ScrollDirection"/>
+		/// </param>
+		/// <param name="mod">
+		/// A <see cref="Gdk.ModifierType"/>
+		/// </param>
 		public void Scrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
 		{
 			try {
@@ -364,6 +497,18 @@ namespace Docky.Items
 		#endregion
 		
 		#region Buffer Handling
+		/// <summary>
+		/// Returns the <see cref="DockySurface"/> which holds the visual representation of the item.
+		/// </summary>
+		/// <param name="model">
+		/// A <see cref="DockySurface"/>
+		/// </param>
+		/// <param name="size">
+		/// A <see cref="System.Int32"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="DockySurface"/>
+		/// </returns>
 		public DockySurface IconSurface (DockySurface model, int size)
 		{
 			// look for something nice to return
@@ -444,31 +589,33 @@ namespace Docky.Items
 			layout.GetPixelExtents (out inkRect, out logicalRect);
 			
 			int size = Math.Max (logicalRect.Width, logicalRect.Height);
-			int padding = 3;
-			int x = surface.Width - size / 2 - 2 * padding;
-			int y = size / 2 + 2 * padding;
-			
-			// draw outline
-			surface.Context.LineWidth = padding;
-			
-			surface.Context.Color = new Cairo.Color (0, 0, 0, 0.5);
-			surface.Context.Arc (x + 1, y + 1, size / 2 + padding, 0, Math.PI * 2);
-			surface.Context.Stroke ();
-			
-			surface.Context.Color = new Cairo.Color (1, 1, 1, 1);
-			surface.Context.Arc (x, y, size / 2 + padding, 0, Math.PI * 2);
-			surface.Context.StrokePreserve ();
+			int padding = 4;
+			int lineWidth = 2;
+			int x = surface.Width - size / 2 - padding - lineWidth;
+			int y = size / 2 + padding + lineWidth;
 			
 			// draw filled gradient
-			RadialGradient rg = new RadialGradient (x, padding, 0, x, padding, size);
+			RadialGradient rg = new RadialGradient (x, lineWidth, 0, x, lineWidth, size + 2 * padding);
 			rg.AddColorStop (0, badgeColors [0]);
 			rg.AddColorStop (.3, badgeColors [1]);
 			rg.AddColorStop (.6, badgeColors [2]);
 			rg.AddColorStop (1.0, badgeColors [3]);
 			
 			surface.Context.Pattern = rg;
+			surface.Context.Arc (x, y, size / 2 + padding, 0, Math.PI * 2);
 			surface.Context.Fill ();
 			rg.Destroy ();
+			
+			// draw outline shadow
+			surface.Context.LineWidth = lineWidth;
+			surface.Context.Color = new Cairo.Color (0, 0, 0, 0.5);
+			surface.Context.Arc (x, y + 1, size / 2 + padding, 0, Math.PI * 2);
+			surface.Context.Stroke ();
+			
+			// draw outline
+			surface.Context.Color = new Cairo.Color (1, 1, 1, 1);
+			surface.Context.Arc (x, y, size / 2 + padding, 0, Math.PI * 2);
+			surface.Context.Stroke ();
 			
 			// draw text
 			surface.Context.MoveTo (x - logicalRect.Width / 2, y - logicalRect.Height / 2);
@@ -481,6 +628,18 @@ namespace Docky.Items
 			surface.Context.Fill ();
 		}
 		
+		/// <summary>
+		/// Returns a <see cref="DockySurface"/> containing a visual representation of the HoverText
+		/// </summary>
+		/// <param name="model">
+		/// A <see cref="DockySurface"/>
+		/// </param>
+		/// <param name="style">
+		/// A <see cref="Style"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="DockySurface"/>
+		/// </returns>
 		public DockySurface HoverTextSurface (DockySurface model, Style style)
 		{
 			if (string.IsNullOrEmpty (HoverText))
@@ -526,6 +685,9 @@ namespace Docky.Items
 			return text_buffer;
 		}
 		
+		/// <summary>
+		/// Resets the buffers of the item, forcing them to be redrawn the next time the item is shown
+		/// </summary>
 		public void ResetBuffers ()
 		{
 			for (int i = 0; i < icon_buffers.Length; i++)
@@ -558,7 +720,24 @@ namespace Docky.Items
 		}
 		#endregion
 		
-		public virtual Docky.Menus.MenuList GetMenuItems ()
+		/// <summary>
+		/// Fetches the items which are placed into a menu
+		/// </summary>
+		/// <returns>
+		/// A <see cref="Docky.Menus.MenuList"/>
+		/// </returns>
+		public Docky.Menus.MenuList GetMenuItems ()
+		{
+			try {
+				return OnGetMenuItems ();
+			} catch (Exception e) {
+				Log<AbstractDockItem>.Error (e.Message);
+				Log<AbstractDockItem>.Debug (e.StackTrace);
+				return new Docky.Menus.MenuList ();
+			}
+		}
+		
+		protected virtual Docky.Menus.MenuList OnGetMenuItems ()
 		{
 			return new Docky.Menus.MenuList ();
 		}
@@ -578,15 +757,16 @@ namespace Docky.Items
 			badgeColors [1] = new Cairo.Color ((double) gdkColor.Red / ushort.MaxValue,
 											(double) gdkColor.Green / ushort.MaxValue,
 											(double) gdkColor.Blue / ushort.MaxValue,
-											1.0);
-			badgeColors [0] = badgeColors [1].AddHue (-6);
-			badgeColors [2] = badgeColors [1].AddHue (8);
-			badgeColors [3] = badgeColors [1].AddHue (8);
+											1.0).MinimumSaturation (0.4).BrightenValue (0.5);
+			badgeColors [0] = badgeColors [1].AddHue (-6).BrightenValue (1);
+			badgeColors [2] = badgeColors [1].AddHue (8).DarkenValue (0.5);
+			badgeColors [3] = badgeColors [1].AddHue (8).DarkenValue (1);
 			QueueRedraw ();
 		}
 		
 		protected virtual void OnStyleSet (Gtk.Style style)
 		{
+			// do nothing
 		}
 		
 		public void SetScreenRegion (Gdk.Screen screen, Gdk.Rectangle region)

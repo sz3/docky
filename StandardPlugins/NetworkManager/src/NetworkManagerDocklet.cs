@@ -30,6 +30,14 @@ namespace NetworkManagerDocklet
 {
 	public class NetworkManagerDocklet : IconDockItem
 	{
+		IEnumerable<WirelessAccessPoint> ActiveAccessPoints {
+			get {
+				return NM.DevManager.NetworkDevices.OfType<WirelessDevice> ()
+					.Where (dev => dev.ActiveAccessPoint != null)
+					.Select (dev => dev.ActiveAccessPoint);
+			}
+		}
+		
 		public override MenuButton MenuButton {
 			get { return MenuButton.Left | MenuButton.Right; }
 		}
@@ -155,11 +163,16 @@ namespace NetworkManagerDocklet
 			return icon;
 		}
 
-		public override MenuList GetMenuItems ()
+		protected override MenuList OnGetMenuItems ()
 		{
-			MenuList list = base.GetMenuItems ();
+			MenuList list = base.OnGetMenuItems ();
 			
 			List<MenuItem> wifi = list[MenuListContainer.CustomOne];
+			List<MenuItem> active = list[MenuListContainer.Header];
+			
+			foreach (WirelessAccessPoint wap in ActiveAccessPoints) {
+				active.Add (MakeConEntry (wap));
+			}
 			
 			int count = 0;
 			if (NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().Any ()) {
@@ -167,6 +180,10 @@ namespace NetworkManagerDocklet
 					foreach (IEnumerable<WirelessAccessPoint> val in device.VisibleAccessPoints.Values.OrderByDescending (ap => ap.Max (wap => wap.Strength))) {
 						if (count > 7)
 							break;
+						
+						// Dont pack any of the active access points since they should already be packed
+						if (val.Any (wap => ActiveAccessPoints.Contains (wap)))
+							continue;
 						
 						wifi.Add (MakeConEntry (val.OrderByDescending (wap => wap.Strength).First ()));
 						count++;

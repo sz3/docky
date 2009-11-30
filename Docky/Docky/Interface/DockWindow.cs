@@ -178,6 +178,7 @@ namespace Docky.Interface
 		/// </summary>
 		double remove_index;
 		int remove_size;
+		int maxIconSize;
 		
 		uint animation_timer;
 		uint icon_size_timer;
@@ -185,8 +186,6 @@ namespace Docky.Interface
 		public int Width { get; private set; }
 		
 		public int Height { get; private set; }
-		
-		int MaxIconSize { get; set; }
 		
 		bool ExternalDragActive { get { return DragTracker.ExternalDragActive; } }
 		
@@ -371,13 +370,20 @@ namespace Docky.Interface
 
 		AbstractDockPainter Painter {
 			get { return painter; }
-			set {
-				painter = value;
-			}
+			set { painter = value; }
+		}
+		
+		int PainterBufferSize {
+			get { return ZoomedIconSize + 3 * DockWidthBuffer; }
 		}
 		
 		int IconSize {
 			get { return Math.Min (MaxIconSize, Preferences.IconSize); }
+		}
+		
+		int MaxIconSize {
+			get { return Math.Min (Preferences.IconSize, maxIconSize); }
+			set { maxIconSize = value; } 
 		}
 		
 		int Monitor {
@@ -420,11 +426,6 @@ namespace Docky.Interface
 		}
 		
 		int DockWidth {
-			get; 
-			set;
-		}
-		
-		int DynamicDockWidth {
 			get {
 				if (GdkWindow == null)
 					return 0;
@@ -432,10 +433,14 @@ namespace Docky.Interface
 				int dockWidth = Items.Sum (adi => (int) ((adi.Square ? IconSize : adi.IconSurface (background_buffer, IconSize).Width) * 
 						Math.Min (1, (DateTime.UtcNow - adi.AddTime).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds)));
 				dockWidth += 2 * DockWidthBuffer + (Items.Count - 1) * ItemWidthBuffer;
+				
 				if (remove_index != 0) {
 					dockWidth += (int) ((ItemWidthBuffer + remove_size) *
 						(1 - Math.Min (1, (DateTime.UtcNow - remove_time).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds)));
 				}
+				
+				if (Painter != null)
+					return Painter.MinimumSize + PainterBufferSize;
 				
 				return dockWidth;
 			}
@@ -620,7 +625,6 @@ namespace Docky.Interface
 			Screen.SizeChanged += ScreenSizeChanged;
 			
 			SetSizeRequest ();
-			UpdateDockWidth ();
 		}
 
 		void ScreenSizeChanged (object sender, EventArgs e)
@@ -810,6 +814,8 @@ namespace Docky.Interface
 
 		void PreferencesIconSizeChanged (object sender, EventArgs e)
 		{
+			MaxIconSize = Preferences.IconSize;
+			
 			if (icon_size_timer > 0)
 				GLib.Source.Remove (icon_size_timer);
 			
@@ -819,7 +825,6 @@ namespace Docky.Interface
 				return false;
 			});
 			
-			UpdateDockWidth ();
 			AnimatedDraw ();
 		}
 
@@ -982,7 +987,6 @@ namespace Docky.Interface
 			SetSizeRequest ();
 			Reposition ();
 			ResetBuffers ();
-			UpdateDockWidth ();
 			AnimatedDraw ();
 		}
 		
@@ -1023,7 +1027,6 @@ namespace Docky.Interface
 						item.Dispose ();
 					
 					collection_backend.Clear ();
-					UpdateDockWidth ();
 					return false;
 				});
 			} else {
@@ -1031,7 +1034,6 @@ namespace Docky.Interface
 					item.Dispose ();
 				
 				collection_backend.Clear ();
-				UpdateDockWidth ();
 			}
 			
 			items_change_time = DateTime.UtcNow;
@@ -1094,7 +1096,6 @@ namespace Docky.Interface
 			SetTooltipVisibility ();
 			Painter.SetStyle (Style);
 			
-			UpdateDockWidth ();
 			Painter.Shown ();
 			Keyboard.Grab (GdkWindow, true, Gtk.Global.CurrentEventTime);
 			AnimatedDraw ();
@@ -1177,31 +1178,6 @@ namespace Docky.Interface
 			SetStruts ();
 		}
 		
-		void UpdateDockWidth ()
-		{
-			if (GdkWindow == null)
-				return;
-			
-			MaxIconSize = Preferences.IconSize;
-			DockWidth = Items.Sum (adi => adi.Square ? MaxIconSize : adi.IconSurface (background_buffer, MaxIconSize).Width);
-			DockWidth += 2 * DockWidthBuffer + (Items.Count - 1) * ItemWidthBuffer;
-			
-			while (DockWidth > (VerticalDock ? Height : Width)) {
-				MaxIconSize--;
-				DockWidth = Items.Sum (adi => adi.Square ? MaxIconSize : adi.IconSurface (background_buffer, MaxIconSize).Width);
-				DockWidth += 2 * DockWidthBuffer + (Items.Count - 1) * ItemWidthBuffer;
-			}
-				
-			if (Painter != null) {
-				// this allows Painter.MinimumSize to use Allocation
-				Painter.SetAllocation (new Gdk.Rectangle (0, 0, DockWidth - ZoomedIconSize - 3 * DockWidthBuffer, DockHeight - 2 * DockWidthBuffer));
-				// now we can use MinimumSize
-				DockWidth = (int) Math.Max (DockWidth, Painter.MinimumSize + ZoomedIconSize + 3 * DockWidthBuffer);
-				// and update the painter's allocation!
-				Painter.SetAllocation (new Gdk.Rectangle (0, 0, DockWidth - ZoomedIconSize - 3 * DockWidthBuffer, DockHeight - 2 * DockWidthBuffer));
-			}
-		}
-		
 		void UpdateMonitorGeometry ()
 		{
 			monitor_geo = Screen.GetMonitorGeometry (Monitor);
@@ -1209,7 +1185,6 @@ namespace Docky.Interface
 		
 		void SetSizeRequest ()
 		{
-			UpdateDockWidth ();
 			UpdateMonitorGeometry ();
 			
 			if (VerticalDock) {
@@ -1358,7 +1333,7 @@ namespace Docky.Interface
 			int midline = DockHeight / 2;
 			
 			// the left most edge of the first dock item
-			int startX = ((width - DynamicDockWidth) / 2) + DockWidthBuffer;
+			int startX = ((width - DockWidth) / 2) + DockWidthBuffer;
 			
 			Gdk.Point center = new Gdk.Point (startX, midline);
 			
@@ -1537,8 +1512,31 @@ namespace Docky.Interface
 				HoveredItem = null;
 		}
 		
+		void UpdateMaxIconSize ()
+		{
+			int dockWidth = DockWidth;
+			
+			if (dockWidth > monitor_geo.Width) {
+				// MaxIconSize is too large, must fix
+				MaxIconSize = Preferences.IconSize;
+				while (dockWidth > monitor_geo.Width) {
+					MaxIconSize--;
+					dockWidth = DockWidth;
+				}
+			} else if (MaxIconSize < Preferences.IconSize) {
+				// Perhaps MaxIconSize is too small, lets find out!
+				while (dockWidth < monitor_geo.Width && MaxIconSize <= Preferences.IconSize) {
+					MaxIconSize++;
+					dockWidth = DockWidth;
+				}
+				MaxIconSize--;
+			}
+		}
+		
 		Gdk.Rectangle StaticDockArea (DockySurface surface)
 		{
+			int dockWidth = DockWidth;
+			
 			switch (Position) {
 			case DockPosition.Top:
 				return new Gdk.Rectangle ((surface.Width - DockWidth) / 2, 0, DockWidth, DockHeight);
@@ -1627,6 +1625,7 @@ namespace Docky.Interface
 		void DrawDock (DockySurface surface)
 		{
 			surface.Clear ();
+			UpdateMaxIconSize ();
 			UpdateDrawRegionsForSurface (surface);
 			
 			Gdk.Rectangle dockArea, cursorArea;
@@ -1715,12 +1714,23 @@ namespace Docky.Interface
 			if (repaint_painter) {
 				painter_buffer.ResetContext ();
 				painter_buffer.Clear ();
+				
+				Gdk.Rectangle allocation = new Gdk.Rectangle (
+					0, 
+					0, 
+					dockArea.Width - PainterBufferSize, 
+					dockArea.Height - 2 * DockHeightBuffer);
+				
+				if (Painter.Allocation != allocation)
+					Painter.SetAllocation (allocation);
+				
 				DockySurface painterSurface = Painter.GetSurface (surface);
 			
 				painter_area = new Gdk.Rectangle (dockArea.X + ZoomedIconSize + 2 * DockWidthBuffer,
 					dockArea.Y + DockWidthBuffer,
 					painterSurface.Width,
 					painterSurface.Height);
+				
 				
 				painterSurface.Internal.Show (painter_buffer.Context, painter_area.X, painter_area.Y);
 			
@@ -1960,8 +1970,11 @@ namespace Docky.Interface
 			double baseLog = Math.Log (WaitArmsPerGroup + 1);
 			int size = Math.Min (surface.Width, surface.Height);
 			
-			surface.Context.LineWidth = Math.Max (1.0, size / 40);
+			// Ensure that LineWidth is a multiple of 2 for nice drawing
+			surface.Context.LineWidth = (int) Math.Max (1, size / 40.0);
+			surface.Context.LineWidth = surface.Context.LineWidth + (surface.Context.LineWidth % 2);
 			surface.Context.LineCap = LineCap.Round;
+			
 			surface.Context.Translate (surface.Width / 2, surface.Height / 2);
 			
 			Gdk.Color color = Style.Backgrounds [(int) Gtk.StateType.Selected].SetMinimumValue (100);
@@ -1984,17 +1997,17 @@ namespace Docky.Interface
 		
 		DockySurface CreateNormalIndicatorBuffer ()
 		{
-			Gdk.Color gdkColor = Style.Backgrounds [(int) StateType.Selected].SetMinimumValue (50);
+			Gdk.Color gdkColor = Style.Backgrounds [(int) StateType.Selected].SetMinimumValue (90);
 			Cairo.Color color = new Cairo.Color ((double) gdkColor.Red / ushort.MaxValue,
 											(double) gdkColor.Green / ushort.MaxValue,
 											(double) gdkColor.Blue / ushort.MaxValue,
 											1.0);
-			return CreateIndicatorBuffer (NormalIndicatorSize, color);
+			return CreateIndicatorBuffer (NormalIndicatorSize, color.MinimumSaturation (0.4));
 		}
 		
 		DockySurface CreateUrgentIndicatorBuffer ()
 		{
-			Gdk.Color gdkColor = Style.Backgrounds [(int) StateType.Selected].SetMinimumValue (50);
+			Gdk.Color gdkColor = Style.Backgrounds [(int) StateType.Selected].SetMinimumValue (90);
 			Cairo.Color color = new Cairo.Color ((double) gdkColor.Red / ushort.MaxValue,
 											(double) gdkColor.Green / ushort.MaxValue,
 											(double) gdkColor.Blue / ushort.MaxValue,

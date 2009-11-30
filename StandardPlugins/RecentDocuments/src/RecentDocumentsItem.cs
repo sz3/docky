@@ -138,9 +138,9 @@ namespace RecentDocuments
 			return ClickAnimation.None;
 		}
 
-		public override MenuList GetMenuItems ()
+		protected override MenuList OnGetMenuItems ()
 		{
-			MenuList list = base.GetMenuItems ();
+			MenuList list = base.OnGetMenuItems ();
 			
 			foreach (FileDockItem _f in RecentDocs) {
 				FileDockItem f = _f;

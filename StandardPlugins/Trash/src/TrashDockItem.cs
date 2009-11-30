@@ -161,7 +161,7 @@ namespace Trash
 			return ClickAnimation.None;
 		}
 		
-		public override MenuList GetMenuItems ()
+		protected override MenuList OnGetMenuItems ()
 		{
 			// intentionally dont inherit
 			MenuList list = new MenuList ();
