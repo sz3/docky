@@ -8,8 +8,8 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="14"
-   height="14"
+   width="16"
+   height="16"
    id="svg6193"
    sodipodi:version="0.32"
    inkscape:version="0.46"
@@ -29,7 +29,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="28.486302"
-     inkscape:cx="-10.885789"
+     inkscape:cx="-15.308968"
      inkscape:cy="7.0420587"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -66,8 +66,8 @@
      inkscape:groupmode="layer"
      id="layer1">
     <path
-       style="opacity:1;fill:#787878;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.75000000000000000;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="M 2.03125 1 C 1.4672596 1 1 1.4672598 1 2.03125 L 1 11.96875 C 1 12.53274 1.4672598 13 2.03125 13 L 11.96875 13 C 12.53274 13 13 12.53274 13 11.96875 L 13 2.03125 C 13 1.4672596 12.53274 1 11.96875 1 L 2.03125 1 z M 3.03125 4 L 10.96875 4 C 11.53274 4 12 4.4672596 12 5.03125 L 12 10.96875 C 12 11.53274 11.53274 12 10.96875 12 L 3.03125 12 C 2.4672598 12 2 11.53274 2 10.96875 L 2 5.03125 C 2 4.4672598 2.4672596 4 3.03125 4 z "
+       style="opacity:1;fill:#787878;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="M 3.03125,2 C 2.4672596,2 2,2.4672598 2,3.03125 L 2,12.96875 C 2,13.53274 2.4672598,14 3.03125,14 L 12.96875,14 C 13.53274,14 14,13.53274 14,12.96875 L 14,3.03125 C 14,2.4672596 13.53274,2 12.96875,2 L 3.03125,2 z M 4.03125,5 L 11.96875,5 C 12.53274,5 13,5.4672596 13,6.03125 L 13,11.96875 C 13,12.53274 12.53274,13 11.96875,13 L 4.03125,13 C 3.4672598,13 3,12.53274 3,11.96875 L 3,6.03125 C 3,5.4672598 3.4672596,5 4.03125,5 z"
        id="rect2381" />
   </g>
 </svg>
