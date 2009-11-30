@@ -75,6 +75,18 @@ namespace Cairo
 			return new Cairo.Color (r, g, b, self.A);
 		}
 		
+		public static Cairo.Color MinimumSaturation (this Color self, double sat)
+		{
+			if (sat < 0 || sat > 1) throw new ArgumentOutOfRangeException ("Saturation", "Saturation must be between 0 and 1");
+			
+			double h, s, v, r, g, b;
+			RGBToHSV (self.R, self.G, self.B, out h, out s, out v);
+			s = Math.Max (s, sat);
+			HSVToRGB (h, s, v, out r, out g, out b);
+			
+			return new Cairo.Color (r, g, b, self.A);
+		}
+		
 		public static Cairo.Color BrightenValue (this Color self, double amount)
 		{
 			if (amount < 0 || amount > 1) throw new ArgumentOutOfRangeException ("Brighten Amount", "Brighten amount must be between 0 and 1");

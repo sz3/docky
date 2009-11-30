@@ -757,7 +757,7 @@ namespace Docky.Items
 			badgeColors [1] = new Cairo.Color ((double) gdkColor.Red / ushort.MaxValue,
 											(double) gdkColor.Green / ushort.MaxValue,
 											(double) gdkColor.Blue / ushort.MaxValue,
-											1.0).BrightenValue (0.5);
+											1.0).MinimumSaturation (0.4).BrightenValue (0.5);
 			badgeColors [0] = badgeColors [1].AddHue (-6).BrightenValue (1);
 			badgeColors [2] = badgeColors [1].AddHue (8).DarkenValue (0.5);
 			badgeColors [3] = badgeColors [1].AddHue (8).DarkenValue (1);

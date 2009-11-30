@@ -2002,7 +2002,7 @@ namespace Docky.Interface
 											(double) gdkColor.Green / ushort.MaxValue,
 											(double) gdkColor.Blue / ushort.MaxValue,
 											1.0);
-			return CreateIndicatorBuffer (NormalIndicatorSize, color);
+			return CreateIndicatorBuffer (NormalIndicatorSize, color.MinimumSaturation (0.4));
 		}
 		
 		DockySurface CreateUrgentIndicatorBuffer ()
