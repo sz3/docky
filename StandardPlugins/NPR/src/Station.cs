@@ -35,7 +35,7 @@ namespace NPR
 	public class Station : IconDockItem
 	{
 		public string Name { get; private set; }
-		public uint ID { get; private set; }
+		public int ID { get; private set; }
 		public uint Signal { get; private set; }
 		public string TagLine { get; private set; }
 		public string Logo { get; private set; }
@@ -44,19 +44,31 @@ namespace NPR
 		
 		public event EventHandler FinishedLoading;
 		
+		private string DefaultLogo { get; set; }
+		private string LogoFile { get; set; }
+		private bool IsSetUp { get; set; }
 		private bool IsReady {
 			get {
-				return (State & ItemState.Wait) != ItemState.Wait;
+				return ((State & ItemState.Wait) != ItemState.Wait) && IsSetUp;
 			}
 		}
 		
 		public Station (int id)
 		{
 			State |= ItemState.Wait;
-
-			DockServices.System.RunOnThread (() => {
-				LoadDataFromXElement (NPR.StationXElement (id));
-			});
+			Icon = DefaultLogo = "nprlogo.png@" + GetType ().Assembly.FullName;
+			
+			if (id > 0) {
+				HoverText = Catalog.GetString ("Fetching information...");
+				DockServices.System.RunOnThread (() => {
+					LoadDataFromXElement (NPR.StationXElement (id));
+				});
+				// this is how we create our "null" station entry
+			} else {
+				ID = id;
+				HoverText = Catalog.GetString ("Click to add NPR stations");
+				State ^= ItemState.Wait;
+			}
 		}
 		
 		public Station (XElement stationElement)
@@ -68,8 +80,10 @@ namespace NPR
 		
 		void LoadDataFromXElement (XElement stationElement)
 		{
+			IsSetUp = false;
+			
 			Name = stationElement.Element ("name").Value;
-			ID = uint.Parse (stationElement.Attribute ("id").Value);
+			ID = int.Parse (stationElement.Attribute ("id").Value);
 			
 			Signal = 0;
 			// when looking up a station by ID, there is no signal property
@@ -87,21 +101,34 @@ namespace NPR
 			
 			WebClient cl = new WebClient ();
 			string logo = stationElement.Elements ("image").First (el => el.Attribute ("type").Value == "logo").Value;
-			string logoFile = System.IO.Path.GetTempFileName ();
-			cl.DownloadFileAsync (new Uri (logo), logoFile);
-			cl.DownloadFileCompleted += delegate {
-				State ^= ItemState.Wait;
-				Icon = logoFile;
-				if (FinishedLoading != null)
-					FinishedLoading (this, EventArgs.Empty);
-			};
 			
-			string hover = (string.IsNullOrEmpty (TagLine)) ? Name : string.Format ("{0} : {1}", Name, TagLine);
-			
-			HoverText = hover;
+			LogoFile = System.IO.Path.Combine (System.IO.Path.GetTempPath (), Name.GetHashCode ().ToString ());
+			if (System.IO.File.Exists (LogoFile)) {
+				SetFinish ();
+			} else {
+				cl.DownloadFileAsync (new Uri (logo), LogoFile);
+				cl.DownloadFileCompleted += delegate {
+					SetFinish ();
+				};
+			}
 		}
 		
 		#region IconDockItem
+		
+		void SetFinish ()
+		{
+			State ^= ItemState.Wait;
+			IsSetUp = true;
+			
+			// try g
+			Icon = LogoFile;
+			
+			string hover = (string.IsNullOrEmpty (TagLine)) ? Name : string.Format ("{0} : {1}", Name, TagLine);
+			HoverText = hover;
+			
+			if (FinishedLoading != null)
+				FinishedLoading (this, EventArgs.Empty);
+		}
 		
 		public override string UniqueID ()
 		{
@@ -109,12 +136,12 @@ namespace NPR
 		}
 
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
-		{
-			if (!IsReady)
-				return ClickAnimation.None;
-			
+		{			
 			if (button == 1) {
-				DockServices.System.Open (StationUrls.First (u => u.UrlType == StationUrlType.OrgHomePage).Target);
+				if (IsReady)
+					DockServices.System.Open (StationUrls.First (u => u.UrlType == StationUrlType.OrgHomePage).Target);
+				else
+					ShowConfig ();
 				
 				return ClickAnimation.Bounce;
 			}
@@ -129,9 +156,9 @@ namespace NPR
 			ConfigDialog.instance.Show ();
 		}
 		
-		public override MenuList GetMenuItems ()
+		protected override MenuList OnGetMenuItems ()
 		{
-			MenuList list = base.GetMenuItems ();
+			MenuList list = base.OnGetMenuItems ();
 			
 			if (!IsReady)
 				return list;
@@ -160,7 +187,8 @@ namespace NPR
 						}));
 			}
 
-			list[MenuListContainer.Actions].Add (new SeparatorMenuItem ());
+			if (list.Count () > 0)
+				list[MenuListContainer.Actions].Add (new SeparatorMenuItem ());
 
 			urls.Where (u => u.UrlType >= StationUrlType.AudioMP3Stream).ToList ().ForEach (url => {
 				string format = "", icon = "";

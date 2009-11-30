@@ -7,7 +7,7 @@ FILES = \
 	src/NPRItemProvider.cs \
 	src/NPR.cs \
 	src/Station.cs \
-	src/NullStation.cs \
+	src/StationsUpdatedEventArgs.cs \
 	src/StationUrl.cs \
 	src/StationSearchWidget.cs \
 	src/ConfigDialog.cs \
@@ -18,7 +18,8 @@ FILES = \
 	gtk-gui/generated.cs
 
 RESOURCES = \
-	Resources/NPR.addin.xml
+	Resources/NPR.addin.xml \
+	Resources/nprlogo.png
 
 REFERENCES =  \
 	System \

@@ -34,12 +34,13 @@ namespace NPR
 			}
 		}
 		
-		public override string Icon { get { return "trashcan_full"; } }
+		public override string Icon { get { return "nprlogo.png@" + GetType ().Assembly.FullName; } }
 		
 		public override void Dispose ()
 		{
-			foreach (AbstractDockItem adi in items)
+			items.ForEach (adi => {
 				adi.Dispose ();
+			});
 		}
 		
 		#endregion
@@ -49,24 +50,62 @@ namespace NPR
 		public NPRItemProvider ()
 		{
 			ReloadStations ();
-			NPR.StationsUpdated += delegate {
-				ReloadStations ();
+			
+			NPR.StationsUpdated += delegate (object sender, StationsUpdatedEventArgs args) {
+				switch (args.UpdateAction) {
+				case StationUpdateAction.Added:
+					AddStation (args.StationID);
+					break;
+				case StationUpdateAction.Removed:
+					RemoveStation (args.StationID);
+					break;
+				}
 			};
 		}
-				
+		
+		void AddStation (int stationID)
+		{
+			items.Add (new Station (stationID));
+			
+			items.Cast <Station> ().Where (s => s.ID < 0).ToList ().ForEach (station => {
+				items.Remove (station);
+				station.Dispose ();
+			});
+			
+			Items = items;
+		}
+		
+		void RemoveStation (int stationID)
+		{
+			Station station = items.Cast <Station> ().Where (s => s.ID == stationID).First ();
+			
+			items.Remove (station);
+			Items = items;
+			
+			station.Dispose ();
+			
+			MaybeAddNullStation ();
+		}
+		
+		void MaybeAddNullStation ()
+		{
+			if (items.Count () == 0)
+				items.Add (new Station (-1));
+			
+			Items = items;
+		}
+		
 		public void ReloadStations ()
 		{
 			items.Clear ();
-			foreach (int stationID in NPR.MyStations)
-			{
-				items.Add (new Station (stationID));
-				Items = items;
-			}
 			
-			if (NPR.MyStations.Count () == 0) {
-				items.Add (new NullStation ());
-				Items = items;
-			}
+			NPR.MyStations.ToList ().ForEach (s => {
+				items.Add (new Station (s));				
+			});
+				
+			Items = items;
+			
+			MaybeAddNullStation ();
 		}
 	}
 }

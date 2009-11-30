@@ -87,7 +87,6 @@ namespace NPR
 		
 		private void OnAddinActiveChanged (object o, EventArgs args)
 		{
-			Console.WriteLine ("updating...");
 			foreach (StationTile tile in tiles) {
 				tile.UpdateState ();
 			}

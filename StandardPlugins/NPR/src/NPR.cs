@@ -39,16 +39,29 @@ namespace NPR
 		
 		static IPreferences prefs;
 		
-		public static EventHandler StationsUpdated;
+		public static EventHandler<StationsUpdatedEventArgs> StationsUpdated;
 		
 		public static int[] MyStations {
 			get {
 				return prefs.Get<int []> ("MyStations", null);
 			}
 			set {
+				int[] currentStations = MyStations;
+	
+				StationUpdateAction action;
+				int station;
+				
+				if (value.Length > currentStations.Length) {
+					action = StationUpdateAction.Added;
+					station = value.Except (currentStations).First ();
+				} else {
+					action = StationUpdateAction.Removed;
+					station = MyStations.Except (value).First ();
+				}
+				
 				prefs.Set<int []> ("MyStations", value);
 				if (StationsUpdated != null)
-					StationsUpdated (null, EventArgs.Empty);
+					StationsUpdated (null, new StationsUpdatedEventArgs (station, action));
 			}
 		}
 		
@@ -71,7 +84,6 @@ namespace NPR
 				                          HttpUtility.UrlEncode(query[key]));
 			}
 			queryString.AppendFormat ("apiKey={0}", apiKey);
-			Console.WriteLine ("Query string: {0}", queryString.ToString ());
 			return queryString.ToString ();
 		}
 		

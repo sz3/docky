@@ -46,9 +46,9 @@ namespace Docky.Services
 			return new Pango.Layout (context);
 		}
 		
-		public Gdk.Pixbuf LoadIcon (string name, int size)
+		public Gdk.Pixbuf LoadIcon (string icon, int size, string fallbackIcon)
 		{
-			if (name == null)
+		if (name == null)
 				name = "";
 			
 			Gdk.Pixbuf pixbuf;
@@ -81,18 +81,20 @@ namespace Docky.Services
 				if (pixbuf != null) return pixbuf;
 			}
 			
-			// After this point, we assume that the caller's icon cannot be found, so we attempt
-			// to provide a suitable alternative. We return false to indicate that an alternative
-			// icon selection was made.
+			// After this point, we assume that the caller's icon cannot be found,
+			// so we attempt to provide a suitable alternative.
 			
-			// Try to load a pretty "no icon found" icon.
-			if (name != MissingIconIcon) {
-				pixbuf = LoadIcon (MissingIconIcon, size);
-				if (pixbuf != null) return pixbuf;
-			}
+			// Try to load a the fallbackIcon
+			pixbuf = LoadIcon (fallbackIcon, size);
+			if (pixbuf != null) return pixbuf;
 			
 			// If all else fails, use the UnknownPixbuf.
 			return UnknownPixbuf ();
+		}
+		
+		public Gdk.Pixbuf LoadIcon (string name, int size)
+		{
+			LoadIcon (name, size, MissingIcon);
 		}
 		
 		static Pixbuf UnknownPixbuf () 
