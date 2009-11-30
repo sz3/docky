@@ -558,7 +558,18 @@ namespace Docky.Items
 		}
 		#endregion
 		
-		public virtual Docky.Menus.MenuList GetMenuItems ()
+		public Docky.Menus.MenuList GetMenuItems ()
+		{
+			try {
+				return OnGetMenuItems ();
+			} catch (Exception e) {
+				Log<AbstractDockItem>.Error (e.Message);
+				Log<AbstractDockItem>.Debug (e.StackTrace);
+				return new Docky.Menus.MenuList ();
+			}
+		}
+		
+		protected virtual Docky.Menus.MenuList OnGetMenuItems ()
 		{
 			return new Docky.Menus.MenuList ();
 		}

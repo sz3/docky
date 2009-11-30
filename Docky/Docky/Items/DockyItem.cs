@@ -54,9 +54,9 @@ namespace Docky.Items
 			return ClickAnimation.None;
 		}
 		
-		public override MenuList GetMenuItems ()
+		protected override MenuList OnGetMenuItems ()
 		{
-			MenuList list = base.GetMenuItems ();
+			MenuList list = base.OnGetMenuItems ();
 			list[MenuListContainer.Actions].Add (new MenuItem ("Show Preferences", "gtk-properties", (o, a) => Docky.Config.Show ()));
 			list[MenuListContainer.Actions].Add (new MenuItem ("About", "gtk-about", (o, a) => Docky.ShowAbout ()));
 			list[MenuListContainer.Actions].Add (new MenuItem ("Quit Docky", "gtk-quit", (o, a) => Gtk.Application.Quit ()));

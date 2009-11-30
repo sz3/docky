@@ -336,9 +336,9 @@ namespace Clock
 			});
 		}
 		
-		public override MenuList GetMenuItems ()
+		protected override MenuList OnGetMenuItems ()
 		{
-			MenuList list = base.GetMenuItems ();
+			MenuList list = base.OnGetMenuItems ();
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Digital Clock"), ShowDigital ? "gtk-apply" : "gtk-remove", (o, a) =>
 			{
 				ShowDigital = !ShowDigital;

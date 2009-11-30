@@ -212,9 +212,9 @@ namespace Docky.Items
 			return base.OnClicked (button, mod, xPercent, yPercent);
 		}
 		
-		public override MenuList GetMenuItems ()
+		protected override MenuList OnGetMenuItems ()
 		{
-			MenuList list = base.GetMenuItems ();
+			MenuList list = base.OnGetMenuItems ();
 			list[MenuListContainer.Actions].Add (new MenuItem ("Open", "gtk-open", (o, a) => Open ()));
 			list[MenuListContainer.Actions].Add (new MenuItem ("Open Containing Folder", "folder", (o, a) => OpenContainingFolder ()));
 			if (HueShift != 0)

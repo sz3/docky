@@ -193,9 +193,9 @@ namespace GMail
 			base.Dispose ();
 		}
 		
-		public override MenuList GetMenuItems ()
+		protected override MenuList OnGetMenuItems ()
 		{
-			MenuList list = base.GetMenuItems ();
+			MenuList list = base.OnGetMenuItems ();
 			
 			UpdateAttention (false);
 			

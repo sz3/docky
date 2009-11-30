@@ -42,7 +42,7 @@ namespace Bookmarks
 					HoverText = name;
 			}
 			
-			public override MenuList GetMenuItems ()
+			protected override MenuList OnGetMenuItems ()
 			{
 				MenuList list = new MenuList ();
 				list[MenuListContainer.Actions].Add (new MenuItem ("Open", "gtk-open", (o, a) => Open ()));

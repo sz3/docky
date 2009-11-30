@@ -169,9 +169,9 @@ namespace Docky.Items
 			}
 		}
 		
-		public override MenuList GetMenuItems ()
+		protected override MenuList OnGetMenuItems ()
 		{
-			MenuList list = base.GetMenuItems ();
+			MenuList list = base.OnGetMenuItems ();
 			if (ManagedWindows.Any ())
 				list[MenuListContainer.Actions].Insert (0, new MenuItem ("New Window", RunIcon, (o, a) => Launch ()));
 			else

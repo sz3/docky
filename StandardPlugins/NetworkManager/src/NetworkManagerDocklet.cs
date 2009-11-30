@@ -163,9 +163,9 @@ namespace NetworkManagerDocklet
 			return icon;
 		}
 
-		public override MenuList GetMenuItems ()
+		protected override MenuList OnGetMenuItems ()
 		{
-			MenuList list = base.GetMenuItems ();
+			MenuList list = base.OnGetMenuItems ();
 			
 			List<MenuItem> wifi = list[MenuListContainer.CustomOne];
 			List<MenuItem> active = list[MenuListContainer.Header];

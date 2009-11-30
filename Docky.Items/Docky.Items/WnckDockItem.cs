@@ -234,9 +234,9 @@ namespace Docky.Items
 			return ClickAnimation.Darken;
 		}
 		
-		public override MenuList GetMenuItems ()
+		protected override MenuList OnGetMenuItems ()
 		{
-			MenuList list = base.GetMenuItems ();
+			MenuList list = base.OnGetMenuItems ();
 			if (ManagedWindows.Any ()) {
 				if (ManagedWindows.Any (w => w.IsMaximized)) {
 					list[MenuListContainer.Actions].Add (new MenuItem ("Unmaximize", MaximizeIcon, 
