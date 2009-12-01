@@ -23,6 +23,7 @@ using System.Text;
 
 using Cairo;
 using Gdk;
+using Mono.Unix;
 
 using Docky.Menus;
 
@@ -57,9 +58,9 @@ namespace Docky.Items
 		protected override MenuList OnGetMenuItems ()
 		{
 			MenuList list = base.OnGetMenuItems ();
-			list[MenuListContainer.Actions].Add (new MenuItem ("Show Preferences", "gtk-properties", (o, a) => Docky.Config.Show ()));
-			list[MenuListContainer.Actions].Add (new MenuItem ("About", "gtk-about", (o, a) => Docky.ShowAbout ()));
-			list[MenuListContainer.Actions].Add (new MenuItem ("Quit Docky", "gtk-quit", (o, a) => Gtk.Application.Quit ()));
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Show Preferences"), "gtk-properties", (o, a) => Docky.Config.Show ()));
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("About"), "gtk-about", (o, a) => Docky.ShowAbout ()));
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Quit Docky"), "gtk-quit", (o, a) => Gtk.Application.Quit ()));
 			return list;
 		}
 

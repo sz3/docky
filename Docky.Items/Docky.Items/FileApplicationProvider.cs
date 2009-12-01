@@ -23,6 +23,7 @@ using System.Text;
 
 using Cairo;
 using Gdk;
+using Mono.Unix;
 using Wnck;
 
 using Docky.Menus;
@@ -350,7 +351,7 @@ namespace Docky.Items
 			
 			if (item is ApplicationDockItem && !items.ContainsValue (item)) {
 				list[MenuListContainer.Actions].Insert (0, 
-					new MenuItem ("Pin to Dock", "pin.svg@" + GetType ().Assembly.FullName, (o, a) => PinToDock (item as ApplicationDockItem)));
+					new MenuItem (Catalog.GetString ("Pin to Dock"), "pin.svg@" + GetType ().Assembly.FullName, (o, a) => PinToDock (item as ApplicationDockItem)));
 			}
 			
 			return list;

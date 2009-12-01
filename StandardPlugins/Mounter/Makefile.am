@@ -13,6 +13,7 @@ RESOURCES = \
 REFERENCES =  \
 	System \
 	System.Core \
+	Mono.Posix \
 	$(GIO_SHARP_LIBS) \
 	$(DOCKY_ITEMS_LIBS) \
 	$(DOCKY_SERVICES_LIBS) \

@@ -21,6 +21,7 @@ using System.Collections.Generic;
 
 using Gdk;
 using Cairo;
+using Mono.Unix;
 
 using Docky.Items;
 using Docky.Menus;
@@ -164,7 +165,7 @@ namespace NetworkManagerDocklet
 			}
 			
 			if (!wifi.Any () && !active.Any ()) {
-				wifi.Add (new MenuItem ("Disconnected", "nm-no-connection", true));
+				wifi.Add (new MenuItem (Catalog.GetString ("Disconnected"), "nm-no-connection", true));
 			}
 			
 			return list;

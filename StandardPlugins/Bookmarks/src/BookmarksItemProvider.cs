@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using GLib;
+using Mono.Unix;
 
 using Docky.Services;
 using Docky.Items;
@@ -45,7 +46,7 @@ namespace Bookmarks
 			protected override MenuList OnGetMenuItems ()
 			{
 				MenuList list = new MenuList ();
-				list[MenuListContainer.Actions].Add (new MenuItem ("Open", "gtk-open", (o, a) => Open ()));
+				list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Open"), "gtk-open", (o, a) => Open ()));
 				return list;
 			}
 		}

@@ -166,9 +166,9 @@ namespace Trash
 			// intentionally dont inherit
 			MenuList list = new MenuList ();
 			list[MenuListContainer.Actions].Add (
-				new MenuItem ("Open Trash", Icon, (o, a) => OpenTrash ()));
+				new MenuItem (Catalog.GetString ("Open Trash"), Icon, (o, a) => OpenTrash ()));
 			list[MenuListContainer.Actions].Add (
-				new MenuItem ("Empty Trash", "gtk-clear", (o, a) => EmptyTrash (), !TrashFull));
+				new MenuItem (Catalog.GetString ("Empty Trash"), "gtk-clear", (o, a) => EmptyTrash (), !TrashFull));
 			return list;
 		}
 		

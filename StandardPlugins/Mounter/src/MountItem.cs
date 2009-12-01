@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 using GLib;
+using Mono.Unix;
 
 using Docky.Items;
 using Docky.Menus;
@@ -92,9 +93,9 @@ namespace Mounter
 		protected override MenuList OnGetMenuItems ()
 		{
 			MenuList list = new MenuList ();
-			list[MenuListContainer.Actions].Add (new MenuItem ("Open", Icon, (o, a) => Open ()));
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Open"), Icon, (o, a) => Open ()));
 			if (Mnt.CanEject () || Mnt.CanUnmount) {
-				string removeLabel = (Mnt.CanEject ()) ? "Eject" : "Unmount";
+				string removeLabel = (Mnt.CanEject ()) ? Catalog.GetString ("Eject") : Catalog.GetString ("Unmount");
 				list[MenuListContainer.Actions].Add (new MenuItem (removeLabel, "media-eject", (o, a) => UnMount ()));
 			}
 			
