@@ -1974,10 +1974,12 @@ namespace Docky.Interface
 			
 			// Ensure that LineWidth is a multiple of 2 for nice drawing
 			surface.Context.LineWidth = (int) Math.Max (1, size / 40.0);
-			surface.Context.LineWidth = surface.Context.LineWidth + (surface.Context.LineWidth % 2);
 			surface.Context.LineCap = LineCap.Round;
 			
 			surface.Context.Translate (surface.Width / 2, surface.Height / 2);
+			
+			if (surface.Context.LineWidth % 2 == 1)
+				surface.Context.Translate (.5, .5);
 			
 			Gdk.Color color = Style.Backgrounds [(int) Gtk.StateType.Selected].SetMinimumValue (100);
 			Cairo.Color baseColor = new Cairo.Color ((double) color.Red / ushort.MaxValue,
