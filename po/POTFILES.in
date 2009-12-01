@@ -1,6 +1,13 @@
 Docky/Docky/ConfigurationWindow.cs
+Docky/Docky/Items/DockyItem.cs
 Docky/gtk-gui/Docky.ConfigurationWindow.cs
 Docky/gtk-gui/Docky.Interface.DockPreferences.cs
+Docky.Items/Docky.Items/ApplicationDockItem.cs
+Docky.Items/Docky.Items/FileApplicationProvider.cs
+Docky.Items/Docky.Items/FileDockItem.cs
+Docky.Items/Docky.Items/WnckDockItem.cs
+StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs
+StandardPlugins/Bookmarks/src/BookmarkDockItem.cs
 StandardPlugins/Clock/src/ClockDockItem.cs
 StandardPlugins/Clock/src/ClockThemeSelector.cs
 StandardPlugins/GMail/src/AbstractLoginWidget.cs
@@ -10,6 +17,9 @@ StandardPlugins/GMail/src/GMailDockItem.cs
 StandardPlugins/GMail/src/GMailMenuItem.cs
 StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs
 StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs
+StandardPlugins/Mounter/src/MountItem.cs
+StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs
+StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs
 StandardPlugins/Trash/src/TrashDockItem.cs
 StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs
 StandardPlugins/Weather/src/WeatherDocklet.cs

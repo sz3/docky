@@ -99,27 +99,13 @@ namespace Docky.Items
 		}
 		
 		protected override sealed void PaintIconSurface (DockySurface surface)
-		{
-			
-			int iconSize = Math.Min (surface.Width, surface.Height);
-			
+		{			
 			Gdk.Pixbuf pbuf;
 			
 			if (forced_pixbuf == null)
-				pbuf = DockServices.Drawing.LoadIcon (Icon, iconSize);
+				pbuf = DockServices.Drawing.LoadIcon (Icon, surface.Width, surface.Height);
 			else
-				pbuf = forced_pixbuf.ScaleSimple (iconSize, iconSize, InterpType.Bilinear);
-			
-			if (pbuf.Width != iconSize && pbuf.Height != iconSize) {
-				double scale = iconSize / (double) Math.Max (pbuf.Width, pbuf.Height);
-				
-				Gdk.Pixbuf temp = pbuf;
-				pbuf = temp.ScaleSimple ((int) (temp.Width * scale), 
-				                         (int) (temp.Height * scale), 
-				                                InterpType.Hyper);
-				
-				temp.Dispose ();
-			}
+				pbuf = DockServices.Drawing.ARScale (surface.Width, surface.Height, forced_pixbuf); //forced_pixbuf.ScaleSimple (surface.Width, surface.Height, InterpType.Bilinear);
 			
 			if (shift != 0) {
 				unsafe {

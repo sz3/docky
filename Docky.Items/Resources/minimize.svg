@@ -8,8 +8,8 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="14"
-   height="14"
+   width="16"
+   height="16"
    id="svg6193"
    sodipodi:version="0.32"
    inkscape:version="0.46"
@@ -28,9 +28,9 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="40.285714"
-     inkscape:cx="-5.2127659"
-     inkscape:cy="7"
+     inkscape:zoom="35.125"
+     inkscape:cx="4.4128114"
+     inkscape:cy="8"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -66,7 +66,7 @@
     <path
        sodipodi:nodetypes="ccccc"
        id="rect7725"
-       d="M 1.75,6 L 12.25,6 C 13.02124,6 13,6.97004 13,8 L 1,8 C 1,6.97004 0.97876003,6 1.75,6 z"
+       d="M 2.75,7 L 13.25,7 C 14.02124,7 14,7.97004 14,9 L 2,9 C 2,7.97004 1.97876,7 2.75,7 z"
        style="fill:#787878;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible" />
   </g>
 </svg>

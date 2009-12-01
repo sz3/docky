@@ -24,6 +24,7 @@ using System.Threading;
 
 using Cairo;
 using Gdk;
+using Mono.Unix;
 using Wnck;
 
 using Docky.Menus;
@@ -98,10 +99,10 @@ namespace Docky.Items
 			if (OwnedItem.HasAttribute ("Icon"))
 				Icon = OwnedItem.GetString ("Icon");
 			
-			if (OwnedItem.HasAttribute ("Name")) {
+			if (OwnedItem.HasAttribute ("X-GNOME-FullName")) {
+				HoverText = OwnedItem.GetLocaleString ("X-GNOME-FullName");
+			} else if (OwnedItem.HasAttribute ("Name")) {
 				HoverText = OwnedItem.GetLocaleString ("Name");
-				if (HoverText == null)
-					HoverText = OwnedItem.GetString ("Name");
 			} else {
 				HoverText = System.IO.Path.GetFileNameWithoutExtension (OwnedItem.Location);
 			}
@@ -173,9 +174,9 @@ namespace Docky.Items
 		{
 			MenuList list = base.OnGetMenuItems ();
 			if (ManagedWindows.Any ())
-				list[MenuListContainer.Actions].Insert (0, new MenuItem ("New Window", RunIcon, (o, a) => Launch ()));
+				list[MenuListContainer.Actions].Insert (0, new MenuItem (Catalog.GetString ("New Window"), RunIcon, (o, a) => Launch ()));
 			else
-				list[MenuListContainer.Actions].Insert (0, new MenuItem ("Open", RunIcon, (o, a) => Launch ()));
+				list[MenuListContainer.Actions].Insert (0, new MenuItem (Catalog.GetString ("Open"), RunIcon, (o, a) => Launch ()));
 
 			if (related_uris.Any ()) {
 				lock (related_lock) {

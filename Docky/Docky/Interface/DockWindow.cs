@@ -148,8 +148,9 @@ namespace Docky.Interface
 		
 		DateTime hidden_change_time;
 		DateTime dock_hovered_change_time;
-		DateTime render_time;
 		DateTime items_change_time;
+		DateTime painter_change_time;
+		DateTime render_time;
 		DateTime remove_time;
 		
 		IDockPreferences preferences;
@@ -696,7 +697,6 @@ namespace Docky.Interface
 		
 		void ProviderItemsChanged (object sender, ItemsChangedArgs args)
 		{
-			
 			foreach (AbstractDockItem item in args.AddedItems) {
 				RegisterItem (item);
 			}
@@ -1625,7 +1625,10 @@ namespace Docky.Interface
 		void DrawDock (DockySurface surface)
 		{
 			surface.Clear ();
-			UpdateMaxIconSize ();
+			
+			if (Painter == null)
+				UpdateMaxIconSize ();
+			
 			UpdateDrawRegionsForSurface (surface);
 			
 			Gdk.Rectangle dockArea, cursorArea;
@@ -1972,10 +1975,12 @@ namespace Docky.Interface
 			
 			// Ensure that LineWidth is a multiple of 2 for nice drawing
 			surface.Context.LineWidth = (int) Math.Max (1, size / 40.0);
-			surface.Context.LineWidth = surface.Context.LineWidth + (surface.Context.LineWidth % 2);
 			surface.Context.LineCap = LineCap.Round;
 			
 			surface.Context.Translate (surface.Width / 2, surface.Height / 2);
+			
+			if (surface.Context.LineWidth % 2 == 1)
+				surface.Context.Translate (.5, .5);
 			
 			Gdk.Color color = Style.Backgrounds [(int) Gtk.StateType.Selected].SetMinimumValue (100);
 			Cairo.Color baseColor = new Cairo.Color ((double) color.Red / ushort.MaxValue,
@@ -2052,7 +2057,7 @@ namespace Docky.Interface
 					background_buffer = new DockySurface (BackgroundWidth, BackgroundHeight, surface);
 				}
 				
-				Gdk.Pixbuf background = DockServices.Drawing.LoadIcon (Docky.Controller.BackgroundSvg, -1);
+				Gdk.Pixbuf background = DockServices.Drawing.LoadIcon (Docky.Controller.BackgroundSvg);
 				Gdk.Pixbuf tmp;
 				
 				switch (Position) {

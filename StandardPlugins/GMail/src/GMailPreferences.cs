@@ -35,7 +35,7 @@ namespace GMail
 		const string NeedsAttentionKey = "NeedsAttention";
 		const string NotifyKey = "Notify";
 		
-		static IPreferences prefs = DockServices.Preferences.Get<GMailPreferences> ();
+		public static IPreferences prefs = DockServices.Preferences.Get<GMailPreferences> ();
 		
 		/// <value>
 		/// </value>

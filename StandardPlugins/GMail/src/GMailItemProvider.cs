@@ -122,7 +122,7 @@ namespace GMail
 		{
 			GLib.Idle.Add (delegate {
 				foreach (GMailDockItem item in items.Values)
-					item.Atom.ResetTimer ();
+					item.Atom.ResetTimer (true);
 				return false;
 			});
 		}

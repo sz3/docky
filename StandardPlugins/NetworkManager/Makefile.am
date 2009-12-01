@@ -37,6 +37,7 @@ REFERENCES =  \
 	System \
 	System.Core \
 	Mono.Cairo \
+	Mono.Posix \
 	$(DOCKY_ITEMS_LIBS) \
 	$(DOCKY_SERVICES_LIBS) \
 	$(GLIB_SHARP_20_LIBS) \

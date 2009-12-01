@@ -23,6 +23,7 @@ using System.Text;
 
 using Cairo;
 using Gdk;
+using Mono.Unix;
 using Wnck;
 
 using Docky;
@@ -239,22 +240,22 @@ namespace Docky.Items
 			MenuList list = base.OnGetMenuItems ();
 			if (ManagedWindows.Any ()) {
 				if (ManagedWindows.Any (w => w.IsMaximized)) {
-					list[MenuListContainer.Actions].Add (new MenuItem ("Unmaximize", MaximizeIcon, 
+					list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Unmaximize"), MaximizeIcon, 
 							(o, a) => WindowControl.UnmaximizeWindows (ManagedWindows)));
 				} else {
-					list[MenuListContainer.Actions].Add (new MenuItem ("Maximize", MaximizeIcon, 
+					list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Maximize"), MaximizeIcon, 
 							(o, a) => WindowControl.MaximizeWindows (ManagedWindows)));
 				}
 				
 				if (ManagedWindows.Any (w => w.IsMinimized)) {
-					list[MenuListContainer.Actions].Add (new MenuItem ("Restore", MinimizeIcon, 
+					list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Restore"), MinimizeIcon, 
 							(o, a) => WindowControl.RestoreWindows (ManagedWindows)));
 				} else {
-					list[MenuListContainer.Actions].Add (new MenuItem ("Minimize", MinimizeIcon, 
+					list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Minimize"), MinimizeIcon, 
 							(o, a) => WindowControl.MinimizeWindows (ManagedWindows)));
 				}
 				
-				list[MenuListContainer.Actions].Add (new MenuItem ("Quit", CloseIcon, 
+				list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Quit"), CloseIcon, 
 						(o, a) => WindowControl.CloseWindows (ManagedWindows)));
 				
 				foreach (Wnck.Window window in ManagedWindows) {

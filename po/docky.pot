@@ -8,17 +8,33 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-28 14:22-0600\n"
+"POT-Creation-Date: 2009-12-01 01:09-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:106
+#: ../Docky/Docky/ConfigurationWindow.cs:110
 msgid "Click on any dock to configure."
+msgstr ""
+
+#: ../Docky/Docky/ConfigurationWindow.cs:111
+msgid "Drag any dock to move it."
+msgstr ""
+
+#: ../Docky/Docky/Items/DockyItem.cs:61
+msgid "Show Preferences"
+msgstr ""
+
+#: ../Docky/Docky/Items/DockyItem.cs:62
+msgid "About"
+msgstr ""
+
+#: ../Docky/Docky/Items/DockyItem.cs:63
+msgid "Quit Docky"
 msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:57
@@ -99,6 +115,64 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:270
 msgid "<b>Active Plugins</b>"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:100
+msgid "Icon"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:105
+msgid "Name"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:177
+msgid "New Window"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:179
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:219
+#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:49
+#: ../StandardPlugins/Bookmarks/src/BookmarkDockItem.cs:85
+#: ../StandardPlugins/Mounter/src/MountItem.cs:96
+msgid "Open"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:354
+msgid "Pin to Dock"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:220
+msgid "Open Containing Folder"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:221
+#: ../StandardPlugins/Bookmarks/src/BookmarkDockItem.cs:87
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:278
+msgid "Reset Color"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:243
+msgid "Unmaximize"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:246
+msgid "Maximize"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:251
+msgid "Restore"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:254
+msgid "Minimize"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:258
+msgid "Quit"
+msgstr ""
+
+#: ../StandardPlugins/Bookmarks/src/BookmarkDockItem.cs:86
+msgid "Remove"
 msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:342
@@ -185,35 +259,35 @@ msgstr ""
 msgid "Labels"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:70
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:89
 msgid "No unread mail"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:72
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:91
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:92
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:111
 msgid "Checking mail..."
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:244
 msgid "View "
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:232
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:249
 msgid "Compose Mail"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:247
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:326
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:264
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:284
 msgid "Settings"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:255
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:272
 msgid "Check Now"
 msgstr ""
 
@@ -270,6 +344,54 @@ msgstr ""
 msgid "_Add"
 msgstr ""
 
+#: ../StandardPlugins/Mounter/src/MountItem.cs:98
+msgid "Eject"
+msgstr ""
+
+#: ../StandardPlugins/Mounter/src/MountItem.cs:98
+msgid "Unmount"
+msgstr ""
+
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:168
+msgid "Disconnected"
+msgstr ""
+
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:76
+msgid "Clear the Recent Documents list?"
+msgstr ""
+
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:78
+msgid "Clear Recent Documents"
+msgstr ""
+
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:80
+msgid ""
+"If you clear the Recent Documents list, you clear the following:\n"
+"• All items from the Places → Recent Documents menu item.\n"
+"• All items from the recent documents list in all applications."
+msgstr ""
+
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:85
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:200
+msgid "_Cancel"
+msgstr ""
+
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:86
+msgid "C_lear"
+msgstr ""
+
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:101
+msgid "Clear Recent Documents..."
+msgstr ""
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:169
+msgid "Open Trash"
+msgstr ""
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:171
+msgid "Empty Trash"
+msgstr ""
+
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:193
 msgid "Empty all of the items from the trash?"
 msgstr ""
@@ -279,10 +401,6 @@ msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
-msgstr ""
-
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:200
-msgid "_Cancel"
 msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:201
@@ -299,21 +417,21 @@ msgstr ""
 msgid "Network Error: "
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:75
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:76
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:85
 msgid "Fetching data..."
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:306
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:264
 msgid "Radar Map"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:319
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:277
 #, csharp-format
 msgid "{0}'s Forecast"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:333
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:291
 msgid "Reload Weather Data"
 msgstr ""
 
