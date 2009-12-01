@@ -99,10 +99,10 @@ namespace Docky.Items
 			if (OwnedItem.HasAttribute ("Icon"))
 				Icon = OwnedItem.GetString ("Icon");
 			
-			if (OwnedItem.HasAttribute ("Name")) {
+			if (OwnedItem.HasAttribute ("X-GNOME-FullName")) {
+				HoverText = OwnedItem.GetLocaleString ("X-GNOME-FullName");
+			} else if (OwnedItem.HasAttribute ("Name")) {
 				HoverText = OwnedItem.GetLocaleString ("Name");
-				if (HoverText == null)
-					HoverText = OwnedItem.GetString ("Name");
 			} else {
 				HoverText = System.IO.Path.GetFileNameWithoutExtension (OwnedItem.Location);
 			}
