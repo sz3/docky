@@ -60,6 +60,7 @@ namespace Docky
 		public static void Main (string[] args)
 		{
 			//Init gtk and GLib related
+			Catalog.Init ("docky", AssemblyInfo.LocaleDirectory);
 			Gdk.Threads.Init ();
 			NDesk.DBus.BusG.Init ();
 			Gtk.Application.Init ("Docky", ref args);
