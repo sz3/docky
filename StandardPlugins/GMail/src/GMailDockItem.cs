@@ -18,6 +18,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Web;
 
 using Cairo;
@@ -47,6 +48,22 @@ namespace GMail
 		
 		GMailItemProvider parent;
 		
+		int shift;
+		
+		public int HueShift {
+			get {
+				return shift;
+			}
+			set {
+				if (shift == value)
+					return;
+				shift = value;
+				QueueRedraw ();
+			}
+		}
+		
+		static Regex hueRegex = new Regex ("[^a-zA-Z0-9]");
+		
 		public GMailDockItem (string label, GMailItemProvider parent)
 		{
 			this.parent = parent;
@@ -55,6 +72,8 @@ namespace GMail
 			Atom.GMailChecked += GMailCheckedHandler;
 			Atom.GMailChecking += GMailCheckingHandler;
 			Atom.GMailFailed += GMailFailedHandler;
+			
+			HueShift = GMailPreferences.prefs.Get<int> (hueRegex.Replace (UniqueID (), "_"), 0);
 		}
 		
 		
@@ -90,7 +109,8 @@ namespace GMail
 			UpdateAttention (false);
 			
 			HoverText = Catalog.GetString ("Checking mail...");
-			State |= ItemState.Wait;
+			if (Atom.State == GMailState.ManualReload)
+				State |= ItemState.Wait;
 			QueueRedraw ();
 		}
 		
@@ -114,6 +134,32 @@ namespace GMail
 			
 			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (icon, size))
 			{
+				if (HueShift != 0) {
+					unsafe {
+						double a, r, g, b;
+						byte* pixels = (byte*) pbuf.Pixels;
+						for (int i = 0; i < pbuf.Height * pbuf.Width; i++) {
+							r = (double) pixels[0];
+							g = (double) pixels[1];
+							b = (double) pixels[2];
+							a = (double) pixels[3];
+							
+							Cairo.Color color = new Cairo.Color (r / byte.MaxValue, 
+								g / byte.MaxValue, 
+								b / byte.MaxValue,
+								a / byte.MaxValue);
+							color = color.AddHue (HueShift);
+							
+							pixels[0] = (byte) (color.R * byte.MaxValue);
+							pixels[1] = (byte) (color.G * byte.MaxValue);
+							pixels[2] = (byte) (color.B * byte.MaxValue);
+							pixels[3] = (byte) (color.A * byte.MaxValue);
+							
+							pixels += 4;
+						}
+					}
+				}
+				
 				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, 0, 0);
 				if (!Atom.HasUnread)
 					cr.PaintWithAlpha (.5);
@@ -124,30 +170,6 @@ namespace GMail
 			BadgeText = "";
 			if (Atom.HasUnread)
 				BadgeText += Atom.UnreadCount;
-			
-			// no need to draw the label for the Inbox
-			if (Atom.CurrentLabel == "Inbox")
-				return;
-			
-			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-			layout.Width = Pango.Units.FromPixels (size);
-			layout.Ellipsize = Pango.EllipsizeMode.None;
-			layout.FontDescription = new Gtk.Style().FontDescription;
-			layout.FontDescription.Weight = Pango.Weight.Bold;
-			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (size / 5);
-			
-			layout.SetText (Atom.CurrentLabel);
-			
-			Pango.Rectangle inkRect, logicalRect;
-			layout.GetPixelExtents (out inkRect, out logicalRect);
-			cr.MoveTo ((size - inkRect.Width) / 2, size - logicalRect.Height);
-			
-			Pango.CairoHelper.LayoutPath (cr, layout);
-			cr.LineWidth = 2;
-			cr.Color = new Cairo.Color (0, 0, 0, 0.4);
-			cr.StrokePreserve ();
-			cr.Color = new Cairo.Color (1, 1, 1, 0.6);
-			cr.Fill ();
 		}
 		
 		void OpenInbox ()
@@ -193,6 +215,26 @@ namespace GMail
 			base.Dispose ();
 		}
 		
+		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
+		{
+			if (direction == Gdk.ScrollDirection.Up)
+				HueShift += 5;
+			else if (direction == Gdk.ScrollDirection.Down)
+				HueShift -= 5;
+			
+			if (HueShift < 0)
+				HueShift += 360;
+			HueShift %= 360;
+			
+			GMailPreferences.prefs.Set<int> (hueRegex.Replace (UniqueID (), "_"), HueShift);
+		}
+		
+		protected void ResetHue ()
+		{
+			HueShift = 0;
+			GMailPreferences.prefs.Set<int> (hueRegex.Replace (UniqueID (), "_"), HueShift);
+		}
+		
 		protected override MenuList OnGetMenuItems ()
 		{
 			MenuList list = base.OnGetMenuItems ();
@@ -232,6 +274,12 @@ namespace GMail
 					delegate {
 						Atom.ResetTimer (true);
 					}));
+			
+			list[MenuListContainer.Footer].Add (new MenuItem (Catalog.GetString ("Reset Color"),
+					"edit-clear",
+					delegate {
+						ResetHue ();
+					}, HueShift == 0));
 			
 			return list;
 		}
