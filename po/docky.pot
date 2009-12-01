@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-28 14:22-0600\n"
+"POT-Creation-Date: 2009-12-01 00:59-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,8 +17,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:106
+#: ../Docky/Docky/ConfigurationWindow.cs:110
 msgid "Click on any dock to configure."
+msgstr ""
+
+#: ../Docky/Docky/ConfigurationWindow.cs:111
+msgid "Drag any dock to move it."
 msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:57
@@ -185,36 +189,40 @@ msgstr ""
 msgid "Labels"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:70
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:89
 msgid "No unread mail"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:72
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:91
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:92
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:111
 msgid "Checking mail..."
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:244
 msgid "View "
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:232
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:249
 msgid "Compose Mail"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:247
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:326
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:264
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:284
 msgid "Settings"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:255
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:272
 msgid "Check Now"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:278
+msgid "Reset Color"
 msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
@@ -270,6 +278,14 @@ msgstr ""
 msgid "_Add"
 msgstr ""
 
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:169
+msgid "Open Trash"
+msgstr ""
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:171
+msgid "Empty Trash"
+msgstr ""
+
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:193
 msgid "Empty all of the items from the trash?"
 msgstr ""
@@ -299,21 +315,21 @@ msgstr ""
 msgid "Network Error: "
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:75
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:76
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:85
 msgid "Fetching data..."
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:306
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:264
 msgid "Radar Map"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:319
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:277
 #, csharp-format
 msgid "{0}'s Forecast"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:333
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:291
 msgid "Reload Weather Data"
 msgstr ""
 
