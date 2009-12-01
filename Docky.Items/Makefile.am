@@ -50,6 +50,7 @@ REFERENCES =  \
 	$(GLIB_SHARP_20_LIBS) \
 	$(GIO_SHARP_LIBS) \
 	Mono.Cairo \
+	Mono.Posix \
 	$(GIO_SHARP_LIBS) \
 	$(LIBRSVG_SHARP_LIBS) \
 	$(WNCK_SHARP_10_LIBS) \

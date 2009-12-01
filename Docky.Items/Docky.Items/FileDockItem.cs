@@ -23,6 +23,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 
 using GLib;
+using Mono.Unix;
 using Notifications;
 
 using Docky.Menus;
@@ -215,10 +216,9 @@ namespace Docky.Items
 		protected override MenuList OnGetMenuItems ()
 		{
 			MenuList list = base.OnGetMenuItems ();
-			list[MenuListContainer.Actions].Add (new MenuItem ("Open", "gtk-open", (o, a) => Open ()));
-			list[MenuListContainer.Actions].Add (new MenuItem ("Open Containing Folder", "folder", (o, a) => OpenContainingFolder ()));
-			if (HueShift != 0)
-				list[MenuListContainer.Actions].Add (new MenuItem ("Reset Color", "edit-clear", (o, a) => ResetHue ()));
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Open"), "gtk-open", (o, a) => Open ()));
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Open Containing Folder"), "folder", (o, a) => OpenContainingFolder ()));
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Reset Color"), "edit-clear", (o, a) => ResetHue (), HueShift == 0));
 			return list;
 		}
 		
