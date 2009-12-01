@@ -124,6 +124,16 @@ namespace Docky.Menus
 			return true;
 		}
 		
+		void PlacePixbuf (Context cr, Pixbuf pixbuf, Gdk.Rectangle allocation)
+		{
+			int iconSize = allocation.Height - IconBuffer * 2;
+			
+			int x = allocation.X + 1 + ((iconSize - pixbuf.Width) / 2);
+			int y = allocation.Y + IconBuffer + ((iconSize - pixbuf.Height) / 2);
+			
+			Gdk.CairoHelper.SetSourcePixbuf (cr, pixbuf, x, y);
+		}
+		
 		protected override bool OnExposeEvent (EventExpose evnt)
 		{
 			if (!IsRealized)
@@ -139,20 +149,20 @@ namespace Docky.Menus
 					cr.Color = TextColor.SetAlpha (.1);
 					cr.Fill ();
 				}
-				
-				Gdk.CairoHelper.SetSourcePixbuf (cr, pixbuf, allocation.X + 1, allocation.Y + IconBuffer);
+
+				PlacePixbuf (cr, pixbuf, allocation);
 				cr.PaintWithAlpha (item.Disabled ? 0.5 : 1);
 				
 				if (item.Bold) {
 					cr.Operator = Operator.Add;
-					Gdk.CairoHelper.SetSourcePixbuf (cr, pixbuf, allocation.X + 1, allocation.Y + IconBuffer);
+					PlacePixbuf (cr, pixbuf, allocation);
 					cr.PaintWithAlpha (.8);
 					cr.Operator = Operator.Over;
 				}
 				
 				if (!string.IsNullOrEmpty (item.Emblem)) {
 					Gdk.Pixbuf emblem = DockServices.Drawing.LoadIcon (item.Emblem, allocation.Height - IconBuffer * 2);
-					Gdk.CairoHelper.SetSourcePixbuf (cr, emblem, allocation.X + 1, allocation.Y + IconBuffer);
+					PlacePixbuf (cr, pixbuf, allocation);
 					cr.Paint ();
 					emblem.Dispose ();
 				}
