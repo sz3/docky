@@ -56,7 +56,7 @@ namespace NPR
 		public Station (int id)
 		{
 			State |= ItemState.Wait;
-			Icon = DefaultLogo = "nprlogo.png@" + GetType ().Assembly.FullName;
+			Icon = DefaultLogo = "nprlogo.gif@" + GetType ().Assembly.FullName;
 			
 			if (id > 0) {
 				HoverText = Catalog.GetString ("Fetching information...");
@@ -107,8 +107,8 @@ namespace NPR
 				SetFinish ();
 			} else {
 				cl.DownloadFileAsync (new Uri (logo), LogoFile);
-				cl.DownloadFileCompleted += delegate {
-					SetFinish ();
+				cl.DownloadDataCompleted += delegate {
+					DockServices.System.RunOnMainThread (SetFinish);
 				};
 			}
 		}
@@ -120,8 +120,17 @@ namespace NPR
 			State ^= ItemState.Wait;
 			IsSetUp = true;
 			
-			// try g
-			Icon = LogoFile;
+			// try loading the file, if this fails, then we use the backup.
+			try {
+				Gdk.Pixbuf pbuf = new Gdk.Pixbuf (LogoFile);
+				pbuf.Dispose ();
+				// if we get to this point, the logofile will load just fine
+				Icon = LogoFile;
+			} catch (Exception e) {
+				// delete the bad logofile
+				System.IO.File.Delete (LogoFile);
+				Icon = DefaultLogo;
+			}
 			
 			string hover = (string.IsNullOrEmpty (TagLine)) ? Name : string.Format ("{0} : {1}", Name, TagLine);
 			HoverText = hover;

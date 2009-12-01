@@ -72,7 +72,7 @@ namespace NPR
 		
 		private Gdk.Pixbuf LoadTileImage ()
 		{
-			return DockServices.Drawing.LoadIcon (station.Icon, 64, "nprlogo.png@" + GetType ().Assembly.FullName);
+			return DockServices.Drawing.LoadIcon (station.Icon, 64, "nprlogo.gif@" + GetType ().Assembly.FullName);
 		}
 		
 		private void BuildTile ()
