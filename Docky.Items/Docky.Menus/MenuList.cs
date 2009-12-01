@@ -71,5 +71,10 @@ namespace Docky.Menus
 		{
 			return list.Values.Any (sl => sl.Any ());
 		}
+		
+		public int Count ()
+		{
+			return list.Values.Count ();
+		}
 	}
 }

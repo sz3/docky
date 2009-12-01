@@ -5,10 +5,10 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B9639467-BDF1-432F-AECB-B1BB7992A0FC}</ProjectGuid>
+    <ProjectGuid>{C65612E7-55E9-4B63-BB47-5DFD4ACE80E5}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Trash</RootNamespace>
-    <AssemblyName>Trash</AssemblyName>
+    <RootNamespace>NPR</RootNamespace>
+    <AssemblyName>NPR</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <ReleaseVersion>2.0</ReleaseVersion>
   </PropertyGroup>
@@ -32,40 +32,58 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="Mono.Posix" />
-    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="Mono.Posix" />
     <Reference Include="gio-sharp, Version=2.14.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\gio-sharp.dll</HintPath>
     </Reference>
-    <Reference Include="gconf-sharp, Version=2.24.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>gconf-sharp-2.0</Package>
-    </Reference>
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\TrashItemProvider.cs" />
-    <Compile Include="src\TrashDockItem.cs" />
+    <Compile Include="src\NPR.cs" />
+    <Compile Include="src\Station.cs" />
+    <Compile Include="src\StationUrl.cs" />
+    <Compile Include="src\NPRItemProvider.cs" />
+    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="src\ConfigDialog.cs" />
+    <Compile Include="src\StationSearchWidget.cs" />
+    <Compile Include="src\StationTile.cs" />
+    <Compile Include="src\StationsView.cs" />
+    <Compile Include="src\WrapLabel.cs" />
+    <Compile Include="gtk-gui\NPR.StationSearchWidget.cs" />
+    <Compile Include="src\StationsUpdatedEventArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Docky.Items\Docky.Items.csproj">
+      <Project>{AB6E0EDD-6443-4F99-9EAC-DABC906F080D}</Project>
+      <Name>Docky.Items</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Docky.Services\Docky.Services.csproj">
+      <Project>{8A6E0EDD-6443-4F99-9EAC-D9CC906F080D}</Project>
+      <Name>Docky.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Folder Include="src\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Trash.addin.xml" />
+    <None Include="Resources\NPR.addin.xml" />
+    <None Include="Resources\nprlogo.gif" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Docky.Services\Docky.Services.csproj">
-      <Project>{8A6E0EDD-6443-4F99-9EAC-D9CC906F080D}</Project>
-      <Name>Docky.Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Docky.Items\Docky.Items.csproj">
-      <Project>{AB6E0EDD-6443-4F99-9EAC-DABC906F080D}</Project>
-      <Name>Docky.Items</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="gtk-gui\gui.stetic">
+      <LogicalName>gui.stetic</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

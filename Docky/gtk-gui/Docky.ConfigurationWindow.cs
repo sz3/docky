@@ -10,6 +10,7 @@
 
 namespace Docky {
     
+    
     public partial class ConfigurationWindow {
         
         private Gtk.VBox vbox1;

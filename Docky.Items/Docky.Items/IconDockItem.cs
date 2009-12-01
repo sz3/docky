@@ -95,7 +95,7 @@ namespace Docky.Items
 		
 		public IconDockItem ()
 		{
-			Icon = "default";
+			Icon = "";
 		}
 		
 		protected override sealed void PaintIconSurface (DockySurface surface)
@@ -105,7 +105,7 @@ namespace Docky.Items
 			if (forced_pixbuf == null)
 				pbuf = DockServices.Drawing.LoadIcon (Icon, surface.Width, surface.Height);
 			else
-				pbuf = DockServices.Drawing.ARScale (surface.Width, surface.Height, forced_pixbuf); //forced_pixbuf.ScaleSimple (surface.Width, surface.Height, InterpType.Bilinear);
+				pbuf = DockServices.Drawing.ARScale (surface.Width, surface.Height, forced_pixbuf);
 			
 			if (shift != 0) {
 				unsafe {
