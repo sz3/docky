@@ -73,7 +73,7 @@ namespace GMail
 			HoverText = Atom.CurrentLabel + " - " + status;
 			
 			parent.ItemVisibilityChanged (this, Visible);
-			State ^= ItemState.Wait;
+			State &= ~ItemState.Wait;
 			QueueRedraw ();
 		}
 		
@@ -99,7 +99,7 @@ namespace GMail
 			UpdateAttention (false);
 			
 			HoverText = e.Error;
-			State ^= ItemState.Wait;
+			State &= ~ItemState.Wait;
 			QueueRedraw ();
 		}
 		

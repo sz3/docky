@@ -85,7 +85,7 @@ namespace WeatherDocklet
 				HoverText = Catalog.GetString ("Fetching data...");
 				if (Status != WeatherDockletStatus.Initializing && Status != WeatherDockletStatus.ManualReload) {
 					Status = WeatherDockletStatus.Reloading;
-					State ^= ItemState.Wait;
+					State &= ~ItemState.Wait;
 				} else {
 					State |= ItemState.Wait;
 				}
@@ -107,7 +107,7 @@ namespace WeatherDocklet
 			Gtk.Application.Invoke (delegate {
 				HoverText = e.Error;
 				Status = WeatherDockletStatus.Error;
-				State ^= ItemState.Wait;
+				State &= ~ItemState.Wait;
 				QueueRedraw ();
 			});
 		}
@@ -128,7 +128,7 @@ namespace WeatherDocklet
 					weather.Temp + WeatherUnits.TempUnit + feelsLike +
 					"   " + weather.City;
 				Status = WeatherDockletStatus.Normal;
-				State ^= ItemState.Wait;
+				State &= ~ItemState.Wait;
 				QueueRedraw ();
 			});
 		}

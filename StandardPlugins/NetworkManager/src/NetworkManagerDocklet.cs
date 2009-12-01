@@ -81,32 +81,6 @@ namespace NetworkManagerDocklet
 		int iconStep;
 		uint iconTimer;
 		
-		string AnimatedIcon (NetworkDevice dev)
-		{
-			if (iconTimer == 0)
-				iconTimer = GLib.Timeout.Add (100, delegate {
-					ReDraw ();
-					return true;
-				});
-			
-			switch (dev.State) {
-			case DeviceState.Configuring:
-				iconStage = 1;
-				break;
-			case DeviceState.IPConfiguring:
-				iconStage = 2;
-				break;
-			default:
-			case DeviceState.Preparing:
-				iconStage = 3;
-				break;
-			}
-			
-			if (iconStep == 11)
-				iconStep = 0;
-			return string.Format ("nm-stage0{0}-connecting{1:00}", iconStage, ++iconStep);
-		}
-		
 		string SetDockletIcon ()
 		{
 			try {
@@ -117,13 +91,11 @@ namespace NetworkManagerDocklet
 				
 				if (dev != null) {
 					HoverText = "Connecting...";
-					return AnimatedIcon (dev);
+					State |= ItemState.Wait;
+					return "nm-no-connection";
 				}
-				if (iconTimer != 0) {
-					GLib.Source.Remove (iconTimer);
-					iconStep = 0;
-					iconStage = 0;
-				}
+				
+				State &= ~ItemState.Wait;
 				
 				// no connection
 				if (!NM.ActiveConnections.Any ()) {
