@@ -268,12 +268,33 @@ namespace Docky.Windowing
 			return window.ClassGroup != null && window.ClassGroup.Name.ToLower ().StartsWith ("openoffice");
 		}
 		
+		IEnumerable<string> DesktopFilesForDesktopID (string id)
+		{
+			IEnumerable<string> matches = Enumerable.Empty<string> ();
+			try {
+				matches = DesktopFiles
+					.Where (file => Path.GetFileNameWithoutExtension (file).Equals (id, StringComparison.CurrentCultureIgnoreCase));
+			} catch (Exception e) {
+				Docky.Services.Log<WindowMatcher>.Error (e.Message);
+				Docky.Services.Log<WindowMatcher>.Debug (e.StackTrace);
+			}
+			
+			return matches;
+		}
+		
 		IEnumerable<string> FindDesktopFileForWindowOrDefault (Wnck.Window window)
 		{
 			int pid = window.Pid;
 			if (pid <= 1) {
 				if (window.ClassGroup != null && !string.IsNullOrEmpty (window.ClassGroup.ResClass)) {
-					yield return window.ClassGroup.ResClass;
+					IEnumerable<string> matches = DesktopFilesForDesktopID (window.ClassGroup.ResClass);
+					if (matches.Any ()) {
+						foreach (string s in matches) {
+							yield return s;
+						}
+					} else {
+						yield return window.ClassGroup.ResClass;
+					}
 					yield break;
 				} else {
 					yield return window.Name;
@@ -307,14 +328,7 @@ namespace Docky.Windowing
 					// we can match Wine apps normally so don't do anything here
 				} else {
 					string class_name = window.ClassGroup.ResClass.Replace (".", "");
-					IEnumerable<string> matches = Enumerable.Empty<string> ();
-					try {
-						matches = DesktopFiles
-							.Where (file => Path.GetFileNameWithoutExtension (file).Equals (class_name, StringComparison.CurrentCultureIgnoreCase));
-					} catch (Exception e) {
-						Docky.Services.Log<WindowMatcher>.Error (e.Message);
-						Docky.Services.Log<WindowMatcher>.Debug (e.StackTrace);
-					}
+					IEnumerable<string> matches = DesktopFilesForDesktopID (class_name);
 					
 					foreach (string s in matches) {
 						yield return s;
