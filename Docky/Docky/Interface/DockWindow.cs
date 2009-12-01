@@ -1624,7 +1624,10 @@ namespace Docky.Interface
 		void DrawDock (DockySurface surface)
 		{
 			surface.Clear ();
-			UpdateMaxIconSize ();
+			
+			if (Painter == null)
+				UpdateMaxIconSize ();
+			
 			UpdateDrawRegionsForSurface (surface);
 			
 			Gdk.Rectangle dockArea, cursorArea;
