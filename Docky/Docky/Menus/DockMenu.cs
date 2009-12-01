@@ -65,7 +65,7 @@ namespace Docky.Menus
 		
 		static void SetLight ()
 		{
-			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (Docky.Controller.MenuSvg, -1)) {
+			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (Docky.Controller.MenuSvg)) {
 				int dark = 0;
 				int light = 0;
 				unsafe {
@@ -99,7 +99,7 @@ namespace Docky.Menus
 			
 			DockySurface main = new DockySurface (TotalWidth, TotalHeight, model);
 			
-			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (Docky.Controller.MenuSvg, -1)) {
+			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (Docky.Controller.MenuSvg)) {
 				Gdk.CairoHelper.SetSourcePixbuf (main.Context, pixbuf, ShadowSize, ShadowSize);
 				main.Context.Paint ();
 			}
