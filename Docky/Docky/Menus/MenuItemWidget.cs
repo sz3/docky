@@ -64,7 +64,7 @@ namespace Docky.Menus
 		{
 			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
 			layout.SetText (item.Text);
-			layout.Width = Pango.Units.FromPixels (MaxWidth);
+			layout.Width = Pango.Units.FromPixels (2 * MaxWidth);
 			layout.FontDescription = Style.FontDescription;
 			layout.Ellipsize = Pango.EllipsizeMode.End;
 			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (FontSize);
@@ -73,6 +73,7 @@ namespace Docky.Menus
 			Pango.Rectangle logical, ink;
 			layout.GetPixelExtents (out ink, out logical);
 			
+			HasTooltip = logical.Width > MaxWidth;
 			TextWidth = Math.Min (MaxWidth, Math.Max (MinWidth, logical.Width)) + 34;
 			SetSizeRequest (TextWidth, 22);
 		}

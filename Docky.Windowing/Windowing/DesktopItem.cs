@@ -53,7 +53,7 @@ namespace Docky.Windowing
 				return false;
 			}
 			
-			Regex regex = new Regex ("^" + key + " *= *");
+			Regex regex = new Regex ("^" + key + "\\s*=\\s*");
 			
 			bool result = false;
 			string line;
@@ -84,7 +84,8 @@ namespace Docky.Windowing
 				return null;
 			}
 			
-			Regex regex = new Regex ("^" + key + " *=");
+			key = Regex.Escape (key);
+			Regex regex = new Regex ("^" + key + "\\s*=\\s*");
 			
 			string result = null;
 			string line;
