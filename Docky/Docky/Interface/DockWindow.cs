@@ -2057,7 +2057,7 @@ namespace Docky.Interface
 					background_buffer = new DockySurface (BackgroundWidth, BackgroundHeight, surface);
 				}
 				
-				Gdk.Pixbuf background = DockServices.Drawing.LoadIcon (Docky.Controller.BackgroundSvg, -1);
+				Gdk.Pixbuf background = DockServices.Drawing.LoadIcon (Docky.Controller.BackgroundSvg);
 				Gdk.Pixbuf tmp;
 				
 				switch (Position) {

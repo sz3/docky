@@ -46,90 +46,145 @@ namespace Docky.Services
 			return new Pango.Layout (context);
 		}
 		
-		public Gdk.Pixbuf LoadIcon (string name, int size)
+		// load an icon specifying all arguments
+		public Gdk.Pixbuf LoadIcon (string name, int width, int height, string fallback)
 		{
-			if (name == null)
-				name = "";
+			if (string.IsNullOrEmpty (name))
+				name = MissingIconIcon;
+			if (string.IsNullOrEmpty (fallback))
+				fallback = MissingIconIcon;
 			
 			Gdk.Pixbuf pixbuf;
 			
 			// The icon can be loaded from a loaded assembly if the icon has
 			// the format: "resource@assemblyname".
 			if (IconIsEmbeddedResource (name)) {
-				pixbuf = IconFromEmbeddedResource (name, size);
+				pixbuf = IconFromEmbeddedResource (name, width, height);
 				if (pixbuf != null)
 					return pixbuf;
 			}
 			
 			if (IconIsFile (name)) {
-				pixbuf = IconFromFile (name, size);
+				pixbuf = IconFromFile (name, width, height);
 				if (pixbuf != null)
 					return pixbuf;
 			}
 			
-			if (size <= 0) {
-				throw new ArgumentException ("Size must be greater than 0 if icon is not a file or embedded resource");
-			}
+			if (width <= 0 || height <= 0)
+				throw new ArgumentException ("Width / Height must be greater than 0 if icon is not a file or embedded resource");
 			
 			// Try to load icon from defaul theme.
-			pixbuf = IconFromTheme (name, size, IconTheme.Default);
+			pixbuf = IconFromTheme (name, Math.Max (width, height), IconTheme.Default);
 			if (pixbuf != null) return pixbuf;
 
 			// Try to load a generic file icon.
 			if (name.StartsWith ("gnome-mime")) {
-				pixbuf = GenericFileIcon (size);
+				pixbuf = GenericFileIcon (Math.Max (width, height));
 				if (pixbuf != null) return pixbuf;
 			}
 			
-			// After this point, we assume that the caller's icon cannot be found, so we attempt
-			// to provide a suitable alternative. We return false to indicate that an alternative
-			// icon selection was made.
+			// After this point, we assume that the caller's icon cannot be found,
+			// so we attempt to provide a suitable alternative.
 			
-			// Try to load a pretty "no icon found" icon.
-			if (name != MissingIconIcon) {
-				pixbuf = LoadIcon (MissingIconIcon, size);
-				if (pixbuf != null) return pixbuf;
-			}
+			// Try to load the fallback icon
+			Log<DrawingService>.Info ("Could not find '{0}', using fallback of '{1}'.", name, fallback);
+			pixbuf = LoadIcon (MissingIconIcon, width, height);
+			if (pixbuf != null) return pixbuf;
 			
 			// If all else fails, use the UnknownPixbuf.
 			return UnknownPixbuf ();
 		}
 		
-		static Pixbuf UnknownPixbuf () 
+		// load an icon specifying the width and height
+		public Gdk.Pixbuf LoadIcon (string name, int width, int height)
+		{
+			return LoadIcon (name, width, height, "");
+		}
+		
+		// load a square icon with the given size
+		public Gdk.Pixbuf LoadIcon (string name, int size)
+		{
+			return LoadIcon (name, size, size);
+		}
+		
+		// load the icon at its native size
+		// note that when this is used on icons that are not files or resources
+		// an exception will be thrown
+		public Gdk.Pixbuf LoadIcon (string name)
+		{
+			return LoadIcon (name, -1);
+		}
+		
+		public Pixbuf ARScale (int width, int height, Pixbuf pixbuf)
+		{			
+			double xScale = (double) width / (double) pixbuf.Width;
+			xScale = Math.Min (1, xScale);
+			double yScale = (double) height / (double) pixbuf.Height;
+			yScale = Math.Min (1,yScale);
+			double scale = Math.Min (xScale, yScale);
+			
+			Pixbuf temp = pixbuf;
+			pixbuf = temp.ScaleSimple ((int) (temp.Width * scale),
+			                           (int) (temp.Height * scale),
+			                           InterpType.Hyper);
+			temp.Dispose ();
+			
+			return pixbuf;
+		}
+		
+		public string IconFromGIcon (GLib.Icon icon)
+		{
+			if (icon is ThemedIcon) {
+				ThemedIcon themeIcon = new ThemedIcon (icon.Handle);
+				
+				// if the icon exists in the theme, this will return the relevent ion
+				if (themeIcon.Names.Any ())
+					return themeIcon.Names.FirstOrDefault (n => IconTheme.Default.HasIcon (n));
+			} else if (icon is FileIcon) {
+				// in some cases, devices provide their own icon.  This will use the device icon.
+				FileIcon iconFile = new FileIcon (icon.Handle);
+				
+				return iconFile.File.Path;
+			}
+			return "";
+		}
+		
+		Pixbuf UnknownPixbuf () 
 		{
 			Pixbuf pb = new Pixbuf (Colorspace.Rgb, true, 8, 1, 1);
 			pb.Fill (0x00000000);
 			return pb;
 		}
 		
-		static bool IconIsEmbeddedResource (string name)
+		bool IconIsEmbeddedResource (string name)
 		{
 			return 0 < name.IndexOf ("@");
 		}
 		
-		static bool IconIsFile (string name)
+		bool IconIsFile (string name)
 		{
 			return name.StartsWith ("/") ||
 				   name.StartsWith ("~/") || 
 				   name.StartsWith ("file://", StringComparison.OrdinalIgnoreCase);
 		}
 		
-		static Pixbuf IconFromEmbeddedResource (string name, int size)
+		Pixbuf IconFromEmbeddedResource (string name, int width, int height)
 		{
 			Pixbuf pixbuf = null;
 			string resource = name.Substring (0, name.IndexOf ("@"));
 			string assemblyName = name.Substring (resource.Length + 1);
 			
 			try {
-				foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies ()) {
-					if (asm.FullName != assemblyName)
-						continue;
-					if (size == -1)
-						pixbuf = new Pixbuf (asm, resource);
-					else
-						pixbuf = new Pixbuf (asm, resource, size, size);
-					break;
-				}
+				Assembly asm = AppDomain.CurrentDomain.GetAssemblies ().First (a => a.FullName == assemblyName);
+				if (asm == null)
+					throw new ArgumentNullException ("Could not find assembly '{0}'.", assemblyName);
+				
+				pixbuf = new Pixbuf (asm, resource);
+				
+				// now scale the pixbuf but keep the aspect ratio
+				if (width > 0 && height > 0)
+					pixbuf = ARScale (width, height, pixbuf);
+				
 			} catch (Exception e) {
 				Log<DrawingService>.Warn ("Failed to load icon resource {0} from assembly {1}: {2}",
 				                         resource, assemblyName, e.Message); 
@@ -139,17 +194,17 @@ namespace Docky.Services
 			return pixbuf;
 		}
 		
-		static Pixbuf IconFromFile (string name, int size)
+		Pixbuf IconFromFile (string name, int width, int height)
 		{
 			Pixbuf pixbuf;
 
 			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 			name = name.Replace ("~", home);
 			try {
-				if (size == -1)
+				if (width <= 0 || height <= 0)
 					pixbuf = new Pixbuf (name);
 				else
-					pixbuf = new Pixbuf (name, size, size);
+					pixbuf = new Pixbuf (name, width, height, true);
 			} catch (Exception e) {
 				Log<DrawingService>.Warn ("Error loading icon from file '" + name + "': " + e.Message);
 				Log<DrawingService>.Debug (e.StackTrace);
@@ -158,7 +213,7 @@ namespace Docky.Services
 			return pixbuf;
 		}
 		
-		static Pixbuf IconFromTheme (string name, int size, IconTheme theme)
+		Pixbuf IconFromTheme (string name, int size, IconTheme theme)
 		{
 			Pixbuf pixbuf = null;
 			string name_noext = name;
@@ -185,7 +240,7 @@ namespace Docky.Services
 			return pixbuf;
 		}
 		
-		static Pixbuf GenericFileIcon (int size)
+		Pixbuf GenericFileIcon (int size)
 		{
 			Pixbuf pixbuf = null;
 			if (IconTheme.Default.HasIcon ("gtk-file")) {
@@ -198,23 +253,6 @@ namespace Docky.Services
 				}
 			}
 			return pixbuf;
-		}
-		
-		public string IconFromGIcon (GLib.Icon icon)
-		{
-			if (icon is ThemedIcon) {
-				ThemedIcon themeIcon = new ThemedIcon (icon.Handle);
-				
-				// if the icon exists in the theme, this will return the relevent ion
-				if (themeIcon.Names.Any ())
-					return themeIcon.Names.FirstOrDefault (n => IconTheme.Default.HasIcon (n));
-			} else if (icon is FileIcon) {
-				// in some cases, devices provide their own icon.  This will use the device icon.
-				FileIcon iconFile = new FileIcon (icon.Handle);
-				
-				return iconFile.File.Path;
-			}
-			return "";
 		}
 	}
 }
