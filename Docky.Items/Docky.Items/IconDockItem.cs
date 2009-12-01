@@ -95,7 +95,7 @@ namespace Docky.Items
 		
 		public IconDockItem ()
 		{
-			Icon = "default";
+			Icon = "";
 		}
 		
 		protected override sealed void PaintIconSurface (DockySurface surface)

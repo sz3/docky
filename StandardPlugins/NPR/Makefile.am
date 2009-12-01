@@ -19,7 +19,7 @@ FILES = \
 
 RESOURCES = \
 	Resources/NPR.addin.xml \
-	Resources/nprlogo.png
+	Resources/nprlogo.gif
 
 REFERENCES =  \
 	System \

@@ -56,6 +56,7 @@ namespace NPR
 		public Station (int id)
 		{
 			State |= ItemState.Wait;
+			
 			Icon = DefaultLogo = "nprlogo.gif@" + GetType ().Assembly.FullName;
 			
 			if (id > 0) {
@@ -74,6 +75,8 @@ namespace NPR
 		public Station (XElement stationElement)
 		{
 			State |= ItemState.Wait;
+			
+			Icon = DefaultLogo = "nprlogo.gif@" + GetType ().Assembly.FullName;
 			
 			LoadDataFromXElement (stationElement);
 		}
@@ -106,10 +109,14 @@ namespace NPR
 			if (System.IO.File.Exists (LogoFile)) {
 				SetFinish ();
 			} else {
-				cl.DownloadFileAsync (new Uri (logo), LogoFile);
-				cl.DownloadDataCompleted += delegate {
-					DockServices.System.RunOnMainThread (SetFinish);
-				};
+				DockServices.System.RunOnThread (() => {
+					try {
+						cl.DownloadFile (logo, LogoFile);
+					} catch {
+					} finally {
+						DockServices.System.RunOnMainThread (SetFinish);
+					}
+				});
 			}
 		}
 		

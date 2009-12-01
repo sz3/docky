@@ -65,14 +65,9 @@ namespace NPR
 			BuildTile ();
 			
 			station.FinishedLoading += delegate {
-				tileImage.Pixbuf = LoadTileImage ();
+				tileImage.Pixbuf = DockServices.Drawing.LoadIcon (station.Icon, 64);
 				tileImage.Show ();
 			};
-		}
-		
-		private Gdk.Pixbuf LoadTileImage ()
-		{
-			return DockServices.Drawing.LoadIcon (station.Icon, 64, "nprlogo.gif@" + GetType ().Assembly.FullName);
 		}
 		
 		private void BuildTile ()
@@ -82,7 +77,7 @@ namespace NPR
 			ColumnSpacing = 5;
 			
 			tileImage = new Image ();
-			tileImage.Pixbuf = LoadTileImage ();
+			tileImage.Pixbuf = DockServices.Drawing.LoadIcon (station.Icon, 64);
 			
 			tileImage.Show ();
 			tileImage.Yalign = 0.0f;
