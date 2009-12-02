@@ -177,9 +177,10 @@ namespace Docky.Menus
 		
 		public override void Dispose ()
 		{
-			foreach (Gtk.Widget widget in (Container.Child as VBox).Children)
-				if (widget is MenuItemWidget)
-					(widget as MenuItemWidget).SelectedChanged -= HandleSelectedChanged;
+			if (Container != null && Container.Child != null && (Container.Child as VBox).Children != null)
+				foreach (Gtk.Widget widget in (Container.Child as VBox).Children)
+					if (widget is MenuItemWidget)
+						(widget as MenuItemWidget).SelectedChanged -= HandleSelectedChanged;
 			
 			base.Dispose ();
 		}
