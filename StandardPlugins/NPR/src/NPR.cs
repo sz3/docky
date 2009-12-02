@@ -43,7 +43,7 @@ namespace NPR
 		
 		public static int[] MyStations {
 			get {
-				return prefs.Get<int []> ("MyStations", null);
+				return prefs.Get<int []> ("MyStations", new int[] { });
 			}
 			set {
 				int[] currentStations = MyStations;
