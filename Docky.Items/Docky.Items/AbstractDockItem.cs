@@ -207,7 +207,7 @@ namespace Docky.Items
 		{
 			ScalableRendering = true;
 			icon_buffers = new DockySurface [2];
-			badgeColors = new Cairo.Color [4];
+			badgeColors = new Cairo.Color [2];
 			redraw = new bool [2];
 			state_times = new Dictionary<ItemState, DateTime> ();
 			Gtk.IconTheme.Default.Changed += HandleIconThemeChanged;
@@ -603,9 +603,7 @@ namespace Docky.Items
 			// draw filled gradient
 			RadialGradient rg = new RadialGradient (x, lineWidth, 0, x, lineWidth, size + 2 * padding);
 			rg.AddColorStop (0, badgeColors [0]);
-			rg.AddColorStop (.3, badgeColors [1]);
-			rg.AddColorStop (.6, badgeColors [2]);
-			rg.AddColorStop (1.0, badgeColors [3]);
+			rg.AddColorStop (1.0, badgeColors [1]);
 			
 			surface.Context.Pattern = rg;
 			surface.Context.Arc (x, y, size / 2 + padding, 0, Math.PI * 2);
@@ -618,7 +616,7 @@ namespace Docky.Items
 			surface.Context.Stroke ();
 			
 			surface.Context.LineWidth = lineWidth / 2;
-			surface.Context.Color = badgeColors [3];
+			surface.Context.Color = badgeColors [1];
 			surface.Context.Arc (x, y, size / 2 + padding - lineWidth, 0, Math.PI * 2);
 			surface.Context.Stroke ();
 			
@@ -762,10 +760,8 @@ namespace Docky.Items
 			badgeColors [0] = new Cairo.Color ((double) gdkColor.Red / ushort.MaxValue,
 											(double) gdkColor.Green / ushort.MaxValue,
 											(double) gdkColor.Blue / ushort.MaxValue,
-											1.0).SetValue (1).SetSaturation (1);
-			badgeColors [1] = badgeColors [0].SetValue (0.9).SetSaturation (0.9);
-			badgeColors [2] = badgeColors [0].SetValue (0.7).SetSaturation (0.7);
-			badgeColors [3] = badgeColors [0].SetValue (0.5).SetSaturation (0.5);
+											1.0).SetValue (1).SetSaturation (0.47);
+			badgeColors [1] = badgeColors [0].SetValue (0.5).SetSaturation (0.51);
 			QueueRedraw ();
 		}
 		
