@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -29,20 +29,16 @@ using Docky.Services;
 
 namespace Docky.Windowing
 {
-
-
 	public class WindowMatcher
 	{
 		public static event EventHandler<DesktopFileChangedEventArgs> DesktopFileChanged;
 		
-		static WindowMatcher def;
-		public static WindowMatcher Default {
-			get {
-				if (def == null)
-					def = new WindowMatcher ();
-				return def;
-			}
+		static WindowMatcher ()
+		{
+			Default = new WindowMatcher ();
 		}
+		
+		public static WindowMatcher Default { get; protected set; }
 		
 		static IEnumerable<string> DesktopFiles {
 			get {
