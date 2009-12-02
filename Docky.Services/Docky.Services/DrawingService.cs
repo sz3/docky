@@ -46,29 +46,28 @@ namespace Docky.Services
 			return new Pango.Layout (context);
 		}
 		
-		// load an icon specifying all arguments
-		public Gdk.Pixbuf LoadIcon (string name, int width, int height, string fallback)
+		// load an icon specifying the width and height
+		public Gdk.Pixbuf LoadIcon (string names, int width, int height)
 		{
-			if (string.IsNullOrEmpty (name))
-				name = MissingIconIcon;
-			if (string.IsNullOrEmpty (fallback))
-				fallback = MissingIconIcon;
+			List<string> iconNames = names.Split (':').ToList ();
+			// add the MissingIconIcon as a last resort icon.
+			iconNames.Add (MissingIconIcon);
 			
-			Gdk.Pixbuf pixbuf;
+			Gdk.Pixbuf pixbuf = null;
 			
-			do {
+			foreach (string name in iconNames) {
 				// The icon can be loaded from a loaded assembly if the icon has
 				// the format: "resource@assemblyname".
 				if (IconIsEmbeddedResource (name)) {
 					pixbuf = IconFromEmbeddedResource (name, width, height);
 					if (pixbuf != null)
-						continue;
+						break;
 				}
 				
 				if (IconIsFile (name)) {
 					pixbuf = IconFromFile (name, width, height);
 					if (pixbuf != null)
-						continue;
+						break;
 				}
 				
 				if (width <= 0 || height <= 0)
@@ -77,52 +76,44 @@ namespace Docky.Services
 				// Try to load icon from defaul theme.
 				pixbuf = IconFromTheme (name, Math.Max (width, height), IconTheme.Default);
 				if (pixbuf != null)
-					continue;
+					break;
 				
 				// Try to load a generic file icon.
 				if (name.StartsWith ("gnome-mime")) {
 					pixbuf = GenericFileIcon (Math.Max (width, height));
 					if (pixbuf != null)
-						continue;
+						break;
 				}
 				
 				// After this point, we assume that the caller's icon cannot be found,
-				// so we attempt to provide a suitable alternative.
+				// so we warn and continue, trying the next in the list
 				
-				// Try to load the fallback icon
-				Log<DrawingService>.Info ("Could not find '{0}', using fallback of '{1}'.", name, fallback);
-				pixbuf = LoadIcon (MissingIconIcon, width, height);
-			} while (false);
+				if (name != iconNames.Last ())
+					Log<DrawingService>.Info ("Could not find '{0}', using fallback of '{1}'.", name, iconNames[ iconNames.IndexOf (name) + 1]);
+			}
 			
 			if (pixbuf != null) {
 				if (width != -1 && height != -1 && width != pixbuf.Width && height != pixbuf.Height)
 					pixbuf = ARScale (width, height, pixbuf);
 				return pixbuf;
-			}
-			
+			}		
 			
 			// If all else fails, use the UnknownPixbuf.
 			return UnknownPixbuf ();
 		}
-		
-		// load an icon specifying the width and height
-		public Gdk.Pixbuf LoadIcon (string name, int width, int height)
-		{
-			return LoadIcon (name, width, height, "");
-		}
-		
+
 		// load a square icon with the given size
-		public Gdk.Pixbuf LoadIcon (string name, int size)
+		public Gdk.Pixbuf LoadIcon (string names, int size)
 		{
-			return LoadIcon (name, size, size);
+			return LoadIcon (names, size, size);
 		}
 		
 		// load the icon at its native size
 		// note that when this is used on icons that are not files or resources
 		// an exception will be thrown
-		public Gdk.Pixbuf LoadIcon (string name)
+		public Gdk.Pixbuf LoadIcon (string names)
 		{
-			return LoadIcon (name, -1);
+			return LoadIcon (names, -1);
 		}
 		
 		public Pixbuf ARScale (int width, int height, Pixbuf pixbuf)

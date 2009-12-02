@@ -34,7 +34,7 @@ namespace NPR
 			}
 		}
 		
-		public override string Icon { get { return "nprlogo.png@" + GetType ().Assembly.FullName; } }
+		public override string Icon { get { return "nprlogo.gif@" + GetType ().Assembly.FullName; } }
 		
 		public override void Dispose ()
 		{
