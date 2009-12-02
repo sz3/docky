@@ -118,9 +118,9 @@ namespace Docky.Services
 		public Pixbuf ARScale (int width, int height, Pixbuf pixbuf)
 		{			
 			double xScale = (double) width / (double) pixbuf.Width;
-			xScale = Math.Min (1, xScale);
+//			xScale = Math.Min (1, xScale);
 			double yScale = (double) height / (double) pixbuf.Height;
-			yScale = Math.Min (1,yScale);
+//			yScale = Math.Min (1,yScale);
 			double scale = Math.Min (xScale, yScale);
 			
 			Pixbuf temp = pixbuf;
