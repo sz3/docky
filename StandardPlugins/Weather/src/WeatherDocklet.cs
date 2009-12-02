@@ -64,6 +64,8 @@ namespace WeatherDocklet
 		/// </summary>
 		public WeatherDocklet ()
 		{
+			ScalableRendering = false;
+			
 			painter = new WeatherPainter (this);
 			
 			Status = WeatherDockletStatus.Initializing;

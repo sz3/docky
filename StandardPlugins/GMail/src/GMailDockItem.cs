@@ -66,6 +66,8 @@ namespace GMail
 		
 		public GMailDockItem (string label, GMailItemProvider parent)
 		{
+			ScalableRendering = false;
+			
 			this.parent = parent;
 			Atom = new GMailAtom (label);
 			

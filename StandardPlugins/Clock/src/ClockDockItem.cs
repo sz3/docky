@@ -153,6 +153,8 @@ namespace Clock
 		
 		public ClockDockItem ()
 		{
+			ScalableRendering = false;
+			
 			painter = new CalendarPainter ();
 			CheckForThemes ();
 			
