@@ -200,6 +200,8 @@ namespace Docky.Items
 			badgeColors = new Cairo.Color [2];
 			redraw = new bool [2];
 			state_times = new Dictionary<ItemState, DateTime> ();
+			foreach (ItemState val in Enum.GetValues (typeof (ItemState)))
+				state_times [val] = new DateTime (0);
 			Gtk.IconTheme.Default.Changed += HandleIconThemeChanged;
 			
 			AppDomain.CurrentDomain.ProcessExit += HandleProcessExit;
@@ -221,8 +223,6 @@ namespace Docky.Items
 		/// </returns>
 		public DateTime StateSetTime (ItemState state)
 		{
-			if (!state_times.ContainsKey (state))
-				return new DateTime (0);
 			return state_times [state];
 		}
 		
