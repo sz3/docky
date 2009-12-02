@@ -79,7 +79,7 @@ namespace Docky.Interface {
             this.autohide_box.AppendText(Mono.Unix.Catalog.GetString("Autohide"));
             this.autohide_box.AppendText(Mono.Unix.Catalog.GetString("Intellihide"));
             this.autohide_box.AppendText(Mono.Unix.Catalog.GetString("Window Dodge"));
-            this.autohide_box.TooltipMarkup = "None : Always present, acts like a panel\nAutohide : Hides whenever the mouse is not over it.\nIntellihide : Hides when dock is obstructing the active application.";
+            this.autohide_box.TooltipMarkup = "None : Always present, acts like a panel.\nAutohide : Hides whenever the mouse is not over it.\nIntellihide : Hides when dock obstructs the active application.\nWindow Dodge : Hides when dock obstructs any window.";
             this.autohide_box.Name = "autohide_box";
             this.autohide_box.Active = 0;
             this.table3.Add(this.autohide_box);

@@ -30,9 +30,10 @@
             <child>
               <widget class="Gtk.ComboBox" id="autohide_box">
                 <property name="MemberName" />
-                <property name="Tooltip" translatable="yes">None : Always present, acts like a panel
+                <property name="Tooltip" translatable="yes">None : Always present, acts like a panel.
 Autohide : Hides whenever the mouse is not over it.
-Intellihide : Hides when dock is obstructing the active application.</property>
+Intellihide : Hides when dock obstructs the active application.
+Window Dodge : Hides when dock obstructs any window.</property>
                 <property name="IsTextCombo">True</property>
                 <property name="Items" translatable="yes">None
 Autohide
