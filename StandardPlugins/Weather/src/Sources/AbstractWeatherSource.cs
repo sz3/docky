@@ -268,7 +268,7 @@ namespace WeatherDocklet
 		{
 			Log<AbstractWeatherSource>.Debug (Name + ": reload success");
 			if (WeatherUpdated != null)
-				Gtk.Application.Invoke (delegate { WeatherUpdated(); });
+				DockServices.System.RunOnMainThread (WeatherUpdated);
 		}
 		
 		/// <summary>
@@ -278,7 +278,7 @@ namespace WeatherDocklet
 		{
 			Log<AbstractWeatherSource>.Debug (Name + ": error: " + msg);
 			if (WeatherError != null)
-				Gtk.Application.Invoke (delegate { WeatherError (this, new WeatherErrorArgs(msg)); });
+				DockServices.System.RunOnMainThread (() => WeatherError (this, new WeatherErrorArgs(msg)));
 		}
 		
 		/// <summary>
@@ -288,7 +288,7 @@ namespace WeatherDocklet
 		{
 			Log<AbstractWeatherSource>.Info (Name + ": Reloading weather data");
 			if (WeatherReloading != null)
-				Gtk.Application.Invoke (delegate { WeatherReloading (); });
+				DockServices.System.RunOnMainThread (WeatherReloading);
 		}
 		
 		/// <summary>
