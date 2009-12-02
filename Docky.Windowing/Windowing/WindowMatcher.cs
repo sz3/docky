@@ -472,6 +472,9 @@ namespace Docky.Windowing
 				if (item.HasAttribute ("NoDisplay") && item.GetBool ("NoDisplay"))
 					continue;
 				
+				if (item.HasAttribute ("X-Docky-NoMatch") && item.GetBool ("X-Docky-NoMatch"))
+					continue;
+				
 				string exec = item.GetString ("Exec");
 				string vexec = null;
 				

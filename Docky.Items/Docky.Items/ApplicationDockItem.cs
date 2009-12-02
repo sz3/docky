@@ -58,6 +58,7 @@ namespace Docky.Items
 		ZeitgeistResult[] related_uris = new ZeitgeistResult[0];
 		object related_lock = new Object ();
 		
+		bool can_manage_windows;
 		uint timer;
 		IEnumerable<string> mimes;
 		
@@ -73,6 +74,7 @@ namespace Docky.Items
 		private ApplicationDockItem (DesktopItem item)
 		{
 			OwnedItem = item;
+			can_manage_windows = true;
 			
 			UpdateInfo ();
 			UpdateWindows ();
@@ -112,6 +114,10 @@ namespace Docky.Items
 			} else {
 				mimes = Enumerable.Empty<string> ();
 			}
+			
+			if (OwnedItem.HasAttribute ("X-Docky-NoMatch") && OwnedItem.GetBool ("X-Docky-NoMatch")) {
+				can_manage_windows = false;
+			}
 		}
 		
 		public override string UniqueID ()
@@ -139,7 +145,10 @@ namespace Docky.Items
 
 		void UpdateWindows ()
 		{
-			Windows = WindowMatcher.Default.WindowsForDesktopFile (OwnedItem.Location);
+			if (can_manage_windows)
+				Windows = WindowMatcher.Default.WindowsForDesktopFile (OwnedItem.Location);
+			else
+				Windows = Enumerable.Empty<Wnck.Window> ();
 		}
 		
 		void UpdateRelated ()
