@@ -37,7 +37,110 @@ namespace Docky.Menus
 		public DockItemMenu (Gtk.Window parent) : base (parent)
 		{
 		}
-
+		
+		int GetSelected ()
+		{
+			int selected = 0;
+			
+			foreach (Gtk.Widget widget in (Container.Child as VBox).Children)
+				if (widget is MenuItemWidget) {
+					if ((widget as MenuItemWidget).Selected)
+						return selected;
+					selected++;
+				}
+			
+			return -1;
+		}
+		
+		MenuItemWidget GetSelectedItem ()
+		{
+			int selected = 0;
+			
+			foreach (Gtk.Widget widget in (Container.Child as VBox).Children)
+				if (widget is MenuItemWidget) {
+					if ((widget as MenuItemWidget).Selected)
+						return (widget as MenuItemWidget);
+					selected++;
+				}
+			
+			return null;
+		}
+		
+		void UpdateSelected (int selected)
+		{
+			int count = 0;
+			
+			foreach (Gtk.Widget widget in (Container.Child as VBox).Children)
+				if (widget is MenuItemWidget) {
+					(widget as MenuItemWidget).Selected = count == selected;
+					count++;
+				}
+			
+			QueueDraw ();
+		}
+		
+		int NumberItems ()
+		{
+			int count = 0;
+			
+			foreach (Gtk.Widget widget in (Container.Child as VBox).Children)
+				if (widget is MenuItemWidget)
+					count++;
+			
+			return count;
+		}
+		
+		protected override bool OnKeyPressEvent (EventKey evnt)
+		{
+			if (evnt.Key == Gdk.Key.Up) {
+				do {
+					int selected = GetSelected () - 1;
+					
+					if (selected < 0)
+						selected = NumberItems () - 1;
+					
+					UpdateSelected (selected);
+				} while (GetSelectedItem ().item.Disabled);
+			} else if (evnt.Key == Gdk.Key.Down) {
+				do {
+					int selected = GetSelected () + 1;
+					
+					if (selected > NumberItems () - 1)
+						selected = 0;
+					
+					UpdateSelected (selected);
+				} while (GetSelectedItem ().item.Disabled);
+			} else if (evnt.Key == Gdk.Key.Return && GetSelectedItem () != null) {
+				MenuItem item = (GetSelectedItem () as MenuItemWidget).item;
+				if (!item.Disabled) {
+					item.SendClick ();
+					Hide ();
+				}
+			} else if (evnt.Key == Gdk.Key.Escape) {
+				Hide ();
+			} else {
+				foreach (Gtk.Widget widget in (Container.Child as VBox).Children)
+					if (widget is MenuItemWidget) {
+						MenuItem item = (widget as MenuItemWidget).item;
+						if (evnt.KeyValue == item.Mnemonic)
+							if (!item.Disabled) {
+								item.SendClick ();
+								Hide ();
+							}
+					}
+			}
+			
+			return base.OnKeyPressEvent (evnt);
+		}
+		
+		void HandleSelectedChanged (object obj, EventArgs args)
+		{
+			MenuItemWidget item = obj as MenuItemWidget;
+			bool selected = item.Selected;
+			UpdateSelected (-1);
+			item.Selected = selected;
+		}
+		
 		public void SetItems (MenuList items)
 		{
 			if (Container.Child != null) {
@@ -56,6 +159,7 @@ namespace Docky.Menus
 					vbox.PackStart (new SeparatorWidget ());
 				} else {
 					MenuItemWidget menuItem = new MenuItemWidget (item);
+					menuItem.SelectedChanged += HandleSelectedChanged;
 					if (IsLight) {
 						menuItem.TextColor = new Cairo.Color (0.2, 0.2, 0.2);
 					} else {
@@ -69,6 +173,15 @@ namespace Docky.Menus
 			vbox.SetSizeRequest (width, -1);
 			
 			Container.ShowAll ();
+		}
+		
+		public override void Dispose ()
+		{
+			foreach (Gtk.Widget widget in (Container.Child as VBox).Children)
+				if (widget is MenuItemWidget)
+					(widget as MenuItemWidget).SelectedChanged -= HandleSelectedChanged;
+			
+			base.Dispose ();
 		}
 	}
 }

@@ -45,6 +45,8 @@ namespace Docky.Menus
 			} 
 		}
 		
+		public char? Mnemonic { get; protected set; }
+		
 		string text;
 		public string Text {
 			get { return text; }
@@ -52,6 +54,8 @@ namespace Docky.Menus
 				if (text == value)
 					return;
 				text = value;
+				if (text.IndexOf ("_") != -1)
+					Mnemonic = text.ToLower () [text.IndexOf ("_") + 1];
 				if (TextChanged != null)
 					TextChanged (this, EventArgs.Empty);
 			} 
@@ -96,7 +100,7 @@ namespace Docky.Menus
 		{
 			Bold = false;
 			this.icon = icon;
-			this.text = text;
+			Text = text;
 			disabled = false;
 		}
 		
@@ -104,7 +108,7 @@ namespace Docky.Menus
 		{
 			Bold = false;
 			this.icon = icon;
-			this.text = text;
+			Text = text;
 			this.disabled = disabled;
 		}
 		

@@ -174,9 +174,9 @@ namespace Docky.Items
 		{
 			MenuList list = base.OnGetMenuItems ();
 			if (ManagedWindows.Any ())
-				list[MenuListContainer.Actions].Insert (0, new MenuItem (Catalog.GetString ("New Window"), RunIcon, (o, a) => Launch ()));
+				list[MenuListContainer.Actions].Insert (0, new MenuItem (Catalog.GetString ("New _Window"), RunIcon, (o, a) => Launch ()));
 			else
-				list[MenuListContainer.Actions].Insert (0, new MenuItem (Catalog.GetString ("Open"), RunIcon, (o, a) => Launch ()));
+				list[MenuListContainer.Actions].Insert (0, new MenuItem (Catalog.GetString ("_Open"), RunIcon, (o, a) => Launch ()));
 
 			if (related_uris.Any ()) {
 				lock (related_lock) {

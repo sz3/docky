@@ -240,22 +240,22 @@ namespace Docky.Items
 			MenuList list = base.OnGetMenuItems ();
 			if (ManagedWindows.Any ()) {
 				if (ManagedWindows.Any (w => w.IsMaximized)) {
-					list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Unmaximize"), MaximizeIcon, 
+					list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Unma_ximize"), MaximizeIcon, 
 							(o, a) => WindowControl.UnmaximizeWindows (ManagedWindows)));
 				} else {
-					list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Maximize"), MaximizeIcon, 
+					list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Ma_ximize"), MaximizeIcon, 
 							(o, a) => WindowControl.MaximizeWindows (ManagedWindows)));
 				}
 				
 				if (ManagedWindows.Any (w => w.IsMinimized)) {
-					list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Restore"), MinimizeIcon, 
+					list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Restore"), MinimizeIcon, 
 							(o, a) => WindowControl.RestoreWindows (ManagedWindows)));
 				} else {
-					list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Minimize"), MinimizeIcon, 
+					list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Mi_nimize"), MinimizeIcon, 
 							(o, a) => WindowControl.MinimizeWindows (ManagedWindows)));
 				}
 				
-				list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Quit"), CloseIcon, 
+				list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Quit"), CloseIcon, 
 						(o, a) => WindowControl.CloseWindows (ManagedWindows)));
 				
 				foreach (Wnck.Window window in ManagedWindows) {

@@ -243,12 +243,12 @@ namespace GMail
 			
 			UpdateAttention (false);
 			
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("View ") + Atom.CurrentLabel,
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_View ") + Atom.CurrentLabel,
 					Atom.Icon,
 					delegate {
 						Clicked (1, Gdk.ModifierType.None, 0, 0);
 					}));
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Compose Mail"),
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Compose Mail"),
 					"mail-message-new",
 					delegate {
 						DockServices.System.Open ("https://mail.google.com/mail/#compose");
@@ -263,7 +263,7 @@ namespace GMail
 				list[MenuListContainer.Actions].Add (new SeparatorMenuItem ());
 			}
 			
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Settings"),
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Settings"),
 					Gtk.Stock.Preferences,
 					delegate {
 						if (GMailConfigurationDialog.instance == null)
@@ -271,13 +271,13 @@ namespace GMail
 						GMailConfigurationDialog.instance.Show ();
 					}));
 			
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Check Now"),
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Check _Now"),
 					Gtk.Stock.Refresh,
 					delegate {
 						Atom.ResetTimer (true);
 					}));
 			
-			list[MenuListContainer.Footer].Add (new MenuItem (Catalog.GetString ("Reset Color"),
+			list[MenuListContainer.Footer].Add (new MenuItem (Catalog.GetString ("_Reset Color"),
 					"edit-clear",
 					delegate {
 						ResetHue ();

@@ -93,9 +93,9 @@ namespace Mounter
 		protected override MenuList OnGetMenuItems ()
 		{
 			MenuList list = new MenuList ();
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Open"), Icon, (o, a) => Open ()));
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Open"), Icon, (o, a) => Open ()));
 			if (Mnt.CanEject () || Mnt.CanUnmount) {
-				string removeLabel = (Mnt.CanEject ()) ? Catalog.GetString ("Eject") : Catalog.GetString ("Unmount");
+				string removeLabel = (Mnt.CanEject ()) ? Catalog.GetString ("_Eject") : Catalog.GetString ("_Unmount");
 				list[MenuListContainer.Actions].Add (new MenuItem (removeLabel, "media-eject", (o, a) => UnMount ()));
 			}
 			

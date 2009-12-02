@@ -263,7 +263,7 @@ namespace WeatherDocklet
 			
 			if (WeatherController.Weather.Condition != null)
 			{
-				list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Radar Map"),
+				list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Radar _Map"),
 						WeatherController.Weather.Image, (o, a) => WeatherController.Weather.ShowRadar ()));
 				
 				list[MenuListContainer.Actions].Add (new SeparatorMenuItem ());
@@ -283,14 +283,14 @@ namespace WeatherDocklet
 			if (hasForecast)
 				list[MenuListContainer.Actions].Add (new SeparatorMenuItem ());
 			
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Settings"), Gtk.Stock.Preferences,
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Settings"), Gtk.Stock.Preferences,
 					delegate {
 						if (WeatherConfigurationDialog.instance == null)
 							WeatherConfigurationDialog.instance = new WeatherConfigurationDialog ();
 						WeatherConfigurationDialog.instance.Show ();
 					}));
 			
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Reload Weather Data"), Gtk.Stock.Refresh,
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Reload Weather Data"), Gtk.Stock.Refresh,
 					delegate {
 						Status = WeatherDockletStatus.ManualReload;
 						State |= ItemState.Wait;

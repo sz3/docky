@@ -36,8 +36,11 @@ namespace Docky.Menus
 		const int FontSize = 11;
 		const int IconBuffer = 3;
 		
-		MenuItem item;
-		bool hovered;
+		public MenuItem item;
+		
+		public event EventHandler SelectedChanged;
+		
+ 		public bool Selected { get; set; }
 		
 		public Cairo.Color TextColor { get; set; }
 		
@@ -101,10 +104,23 @@ namespace Docky.Menus
 			return item.Disabled;
 		}
 		
+		protected override bool OnMotionNotifyEvent (EventMotion evnt)
+		{
+			if (!item.Disabled && !Selected) {
+				Selected = true;
+				if (SelectedChanged != null)
+					SelectedChanged (this, EventArgs.Empty);
+				QueueDraw ();
+			}
+			return false;
+		}
+		
 		protected override bool OnEnterNotifyEvent (EventCrossing evnt)
 		{
-			if (!item.Disabled) {
-				hovered = true;
+			if (!item.Disabled && !Selected) {
+				Selected = true;
+				if (SelectedChanged != null)
+					SelectedChanged (this, EventArgs.Empty);
 				QueueDraw ();
 			}
 			return false;
@@ -112,8 +128,10 @@ namespace Docky.Menus
 
 		protected override bool OnLeaveNotifyEvent (EventCrossing evnt)
 		{
-			if (!item.Disabled) {
-				hovered = false;
+			if (!item.Disabled && Selected) {
+				Selected = false;
+				if (SelectedChanged != null)
+					SelectedChanged (this, EventArgs.Empty);
 				QueueDraw ();
 			}
 			return base.OnLeaveNotifyEvent (evnt);
@@ -145,7 +163,7 @@ namespace Docky.Menus
 			Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (item.Icon, allocation.Height - IconBuffer * 2);
 			
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
-				if (hovered && !item.Disabled) {
+				if (Selected && !item.Disabled) {
 					cr.Rectangle (allocation.X, allocation.Y, allocation.Width, allocation.Height);
 					cr.Color = TextColor.SetAlpha (.1);
 					cr.Fill ();
@@ -169,7 +187,8 @@ namespace Docky.Menus
 				}
 			
 				Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-				layout.SetText (item.Text);
+				char accel;
+				layout.SetMarkupWithAccel (item.Text, '_', out accel);
 				layout.Width = Pango.Units.FromPixels (allocation.Width - allocation.Height - 10);
 				layout.FontDescription = Style.FontDescription;
 				layout.Ellipsize = Pango.EllipsizeMode.End;

@@ -84,10 +84,10 @@ namespace WeatherDocklet
 				day = DayOfWeek.Sunday;
 
 			if (DateTime.Now.DayOfWeek == day)
-				return Catalog.GetString ("Today");
+				return Catalog.GetString ("_Today");
 
 			if (DateTime.Now.AddDays (1).DayOfWeek == day)
-				return Catalog.GetString ("Tomorrow");
+				return Catalog.GetString ("T_omorrow");
 
 			return DateTime.Now.AddDays (day - DateTime.Now.DayOfWeek).ToString ("dddd");
 		}

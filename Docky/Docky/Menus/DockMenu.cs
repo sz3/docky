@@ -336,6 +336,7 @@ namespace Docky.Menus
 					Gtk.Global.CurrentEventTime);
 				
 				if (status == GrabStatus.AlreadyGrabbed || status == GrabStatus.Success) {
+					Gdk.Keyboard.Grab (GdkWindow, true, Gtk.Global.CurrentEventTime);
 					Gtk.Grab.Add (this);
 					return false;
 				}
