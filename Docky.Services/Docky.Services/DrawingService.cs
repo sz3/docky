@@ -56,40 +56,50 @@ namespace Docky.Services
 			
 			Gdk.Pixbuf pixbuf;
 			
-			// The icon can be loaded from a loaded assembly if the icon has
-			// the format: "resource@assemblyname".
-			if (IconIsEmbeddedResource (name)) {
-				pixbuf = IconFromEmbeddedResource (name, width, height);
+			do {
+				// The icon can be loaded from a loaded assembly if the icon has
+				// the format: "resource@assemblyname".
+				if (IconIsEmbeddedResource (name)) {
+					pixbuf = IconFromEmbeddedResource (name, width, height);
+					if (pixbuf != null)
+						continue;
+				}
+				
+				if (IconIsFile (name)) {
+					pixbuf = IconFromFile (name, width, height);
+					if (pixbuf != null)
+						continue;
+				}
+				
+				if (width <= 0 || height <= 0)
+					throw new ArgumentException ("Width / Height must be greater than 0 if icon is not a file or embedded resource");
+				
+				// Try to load icon from defaul theme.
+				pixbuf = IconFromTheme (name, Math.Max (width, height), IconTheme.Default);
 				if (pixbuf != null)
-					return pixbuf;
+					continue;
+				
+				// Try to load a generic file icon.
+				if (name.StartsWith ("gnome-mime")) {
+					pixbuf = GenericFileIcon (Math.Max (width, height));
+					if (pixbuf != null)
+						continue;
+				}
+				
+				// After this point, we assume that the caller's icon cannot be found,
+				// so we attempt to provide a suitable alternative.
+				
+				// Try to load the fallback icon
+				Log<DrawingService>.Info ("Could not find '{0}', using fallback of '{1}'.", name, fallback);
+				pixbuf = LoadIcon (MissingIconIcon, width, height);
+			} while (false);
+			
+			if (pixbuf != null) {
+				if (width != -1 && height != -1 && width != pixbuf.Width && height != pixbuf.Height)
+					pixbuf = ARScale (width, height, pixbuf);
+				return pixbuf;
 			}
 			
-			if (IconIsFile (name)) {
-				pixbuf = IconFromFile (name, width, height);
-				if (pixbuf != null)
-					return pixbuf;
-			}
-			
-			if (width <= 0 || height <= 0)
-				throw new ArgumentException ("Width / Height must be greater than 0 if icon is not a file or embedded resource");
-			
-			// Try to load icon from defaul theme.
-			pixbuf = IconFromTheme (name, Math.Max (width, height), IconTheme.Default);
-			if (pixbuf != null) return pixbuf;
-
-			// Try to load a generic file icon.
-			if (name.StartsWith ("gnome-mime")) {
-				pixbuf = GenericFileIcon (Math.Max (width, height));
-				if (pixbuf != null) return pixbuf;
-			}
-			
-			// After this point, we assume that the caller's icon cannot be found,
-			// so we attempt to provide a suitable alternative.
-			
-			// Try to load the fallback icon
-			Log<DrawingService>.Info ("Could not find '{0}', using fallback of '{1}'.", name, fallback);
-			pixbuf = LoadIcon (MissingIconIcon, width, height);
-			if (pixbuf != null) return pixbuf;
 			
 			// If all else fails, use the UnknownPixbuf.
 			return UnknownPixbuf ();
