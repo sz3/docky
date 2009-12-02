@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 GNOME Do
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -19,8 +19,6 @@ using System;
 
 namespace Cairo
 {
-
-
 	public static class Color_Extensions
 	{
 		public static Gdk.Color ToGdkColor (this Color self)
@@ -41,11 +39,13 @@ namespace Cairo
 			return new Cairo.Color (r, g, b, self.A);
 		}
 		
-		public static Cairo.Color AddHue (this Color self, double val)
+		public static Cairo.Color SetSaturation (this Color self, double sat)
 		{
+			if (sat < 0 || sat > 1) throw new ArgumentOutOfRangeException ("Saturation", "Saturation must be between 0 and 1");
+			
 			double h, s, v, r, g, b;
 			RGBToHSV (self.R, self.G, self.B, out h, out s, out v);
-			h = (((h + val) % 360) + 360) % 360;
+			s = sat;
 			HSVToRGB (h, s, v, out r, out g, out b);
 			
 			return new Cairo.Color (r, g, b, self.A);
@@ -63,13 +63,17 @@ namespace Cairo
 			return new Cairo.Color (r, g, b, self.A);
 		}
 		
-		public static Cairo.Color SetSaturation (this Color self, double sat)
+		public static Cairo.Color SetAlpha (this Color self, double alpha)
 		{
-			if (sat < 0 || sat > 1) throw new ArgumentOutOfRangeException ("Saturation", "Saturation must be between 0 and 1");
-			
+			if (alpha < 0 || alpha > 1) throw new ArgumentOutOfRangeException ("Alpha", "Alpha must be between 0 and 1");
+			return new Cairo.Color (self.R, self.G, self.B, alpha);
+		}
+		
+		public static Cairo.Color AddHue (this Color self, double val)
+		{
 			double h, s, v, r, g, b;
 			RGBToHSV (self.R, self.G, self.B, out h, out s, out v);
-			s = sat;
+			h = (((h + val) % 360) + 360) % 360;
 			HSVToRGB (h, s, v, out r, out g, out b);
 			
 			return new Cairo.Color (r, g, b, self.A);
@@ -82,30 +86,6 @@ namespace Cairo
 			double h, s, v, r, g, b;
 			RGBToHSV (self.R, self.G, self.B, out h, out s, out v);
 			s = Math.Max (s, sat);
-			HSVToRGB (h, s, v, out r, out g, out b);
-			
-			return new Cairo.Color (r, g, b, self.A);
-		}
-		
-		public static Cairo.Color BrightenValue (this Color self, double amount)
-		{
-			if (amount < 0 || amount > 1) throw new ArgumentOutOfRangeException ("Brighten Amount", "Brighten amount must be between 0 and 1");
-			
-			double h, s, v, r, g, b;
-			RGBToHSV (self.R, self.G, self.B, out h, out s, out v);
-			v += (1 - v) * amount;
-			HSVToRGB (h, s, v, out r, out g, out b);
-			
-			return new Cairo.Color (r, g, b, self.A);
-		}
-		
-		public static Cairo.Color DarkenValue (this Color self, double amount)
-		{
-			if (amount < 0 || amount > 1) throw new ArgumentOutOfRangeException ("Darken Amount", "Darken amount must be between 0 and 1");
-			
-			double h, s, v, r, g, b;
-			RGBToHSV (self.R, self.G, self.B, out h, out s, out v);
-			v -= (1 - v) * amount;
 			HSVToRGB (h, s, v, out r, out g, out b);
 			
 			return new Cairo.Color (r, g, b, self.A);
@@ -124,9 +104,40 @@ namespace Cairo
 			return new Cairo.Color (r, g, b, self.A);
 		}
 		
-		public static Cairo.Color SetAlpha (this Color self, double alpha)
+		public static Cairo.Color BrightenValue (this Color self, double amount)
 		{
-			return new Cairo.Color (self.R, self.G, self.B, alpha);
+			if (amount < 0 || amount > 1) throw new ArgumentOutOfRangeException ("Brighten Amount", "Brighten amount must be between 0 and 1");
+			
+			double h, s, v, r, g, b;
+			RGBToHSV (self.R, self.G, self.B, out h, out s, out v);
+			v = Math.Min (1, v + (1 - v) * amount);
+			HSVToRGB (h, s, v, out r, out g, out b);
+			
+			return new Cairo.Color (r, g, b, self.A);
+		}
+		
+		public static Cairo.Color DarkenValue (this Color self, double amount)
+		{
+			if (amount < 0 || amount > 1) throw new ArgumentOutOfRangeException ("Darken Amount", "Darken amount must be between 0 and 1");
+			
+			double h, s, v, r, g, b;
+			RGBToHSV (self.R, self.G, self.B, out h, out s, out v);
+			v = Math.Max (0, v - (1 - v) * amount);
+			HSVToRGB (h, s, v, out r, out g, out b);
+			
+			return new Cairo.Color (r, g, b, self.A);
+		}
+		
+		public static Cairo.Color DarkenBySaturation (this Color self, double amount)
+		{
+			if (amount < 0 || amount > 1) throw new ArgumentOutOfRangeException ("Darken Amount", "Darken amount must be between 0 and 1");
+			
+			double h, s, v, r, g, b;
+			RGBToHSV (self.R, self.G, self.B, out h, out s, out v);
+			v = Math.Max (0, v - amount * s);
+			HSVToRGB (h, s, v, out r, out g, out b);
+			
+			return new Cairo.Color (r, g, b, self.A);
 		}
 		
 		static void RGBToHSV (double r, double g, double b, out double h, out double s, out double v)
@@ -237,20 +248,5 @@ namespace Cairo
 				}
 			}
 		}
-//		
-//		static void RGBToHSL (double r, double g, double b, out double h, out double s, out double l)
-//		{
-//			if (r < 0 || r > 1) throw new ArgumentOutOfRangeException ("r");
-//			if (g < 0 || g > 1) throw new ArgumentOutOfRangeException ("g");
-//			if (b < 0 || b > 1) throw new ArgumentOutOfRangeException ("b");
-//			
-//		}
-//		
-//		static void HSVToRGB (double h, double s, double v, out double r, out double g, out double b)
-//		{
-//			if (h < 0 || h > 360) throw new ArgumentOutOfRangeException ("h");
-//			if (s < 0 || s > 1) throw new ArgumentOutOfRangeException ("s");
-//			if (l < 0 || l > 1) throw new ArgumentOutOfRangeException ("l");
-//		}
 	}
 }

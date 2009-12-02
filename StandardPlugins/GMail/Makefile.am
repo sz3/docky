@@ -20,7 +20,6 @@ FILES = \
 
 RESOURCES = \
 	Resources/GMail.addin.xml \
-	Resources/icons/gmail-logo-dark.png \
 	Resources/icons/gmail-logo.png
 
 REFERENCES =  \

@@ -87,17 +87,13 @@ namespace GMail
 		
 		void SetIcons ()
 		{
-			if (Gtk.IconTheme.Default.HasIcon ("gmail")) {
+			if (Gtk.IconTheme.Default.HasIcon ("gmail"))
 				Icon = "gmail";
-				DisabledIcon = "gmail";
-			} else {
+			else
 				Icon = "gmail-logo.png@" + GetType ().Assembly.FullName;
-				DisabledIcon = "gmail-logo-dark.png@" + GetType ().Assembly.FullName;
-			}
 		}
 		
 		public string Icon { get; protected set; }
-		public string DisabledIcon { get; protected set; }
 		
 		public GMailAtom (string label)
 		{

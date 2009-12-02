@@ -130,13 +130,9 @@ namespace GMail
 			int size = Math.Min (surface.Width, surface.Height);
 			Context cr = surface.Context;
 			
-			string icon = Atom.Icon;
-			if (Atom.State == GMailState.Error)
-				icon = Atom.DisabledIcon;
-			
-			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (icon, size))
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (Atom.Icon, size))
 			{
-				if (HueShift != 0) {
+				if (HueShift != 0 || Atom.State == GMailState.Error) {
 					unsafe {
 						double a, r, g, b;
 						byte* pixels = (byte*) pbuf.Pixels;
@@ -150,7 +146,10 @@ namespace GMail
 								g / byte.MaxValue, 
 								b / byte.MaxValue,
 								a / byte.MaxValue);
-							color = color.AddHue (HueShift);
+							if (HueShift != 0)
+								color = color.AddHue (HueShift);
+							if (Atom.State == GMailState.Error)
+								color = color.DarkenBySaturation (0.5).SetSaturation (0);
 							
 							pixels[0] = (byte) (color.R * byte.MaxValue);
 							pixels[1] = (byte) (color.G * byte.MaxValue);
