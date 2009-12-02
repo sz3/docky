@@ -594,6 +594,12 @@ namespace Docky.Items
 			int x = surface.Width - size / 2 - padding - lineWidth;
 			int y = size / 2 + padding + lineWidth;
 			
+			// draw outline shadow
+			surface.Context.LineWidth = lineWidth;
+			surface.Context.Color = new Cairo.Color (0, 0, 0, 0.5);
+			surface.Context.Arc (x, y + 1, size / 2 + padding, 0, Math.PI * 2);
+			surface.Context.Stroke ();
+			
 			// draw filled gradient
 			RadialGradient rg = new RadialGradient (x, lineWidth, 0, x, lineWidth, size + 2 * padding);
 			rg.AddColorStop (0, badgeColors [0]);
@@ -606,15 +612,14 @@ namespace Docky.Items
 			surface.Context.Fill ();
 			rg.Destroy ();
 			
-			// draw outline shadow
-			surface.Context.LineWidth = lineWidth;
-			surface.Context.Color = new Cairo.Color (0, 0, 0, 0.5);
-			surface.Context.Arc (x, y + 1, size / 2 + padding, 0, Math.PI * 2);
-			surface.Context.Stroke ();
-			
 			// draw outline
 			surface.Context.Color = new Cairo.Color (1, 1, 1, 1);
 			surface.Context.Arc (x, y, size / 2 + padding, 0, Math.PI * 2);
+			surface.Context.Stroke ();
+			
+			surface.Context.LineWidth = lineWidth / 2;
+			surface.Context.Color = badgeColors [3];
+			surface.Context.Arc (x, y, size / 2 + padding - lineWidth, 0, Math.PI * 2);
 			surface.Context.Stroke ();
 			
 			// draw text
@@ -753,14 +758,14 @@ namespace Docky.Items
 				Log<AbstractDockPainter>.Error (e.Message);
 				Log<AbstractDockPainter>.Debug (e.StackTrace);
 			}
-			Gdk.Color gdkColor = Style.Backgrounds [(int) StateType.Selected].SetMinimumValue (100);
-			badgeColors [1] = new Cairo.Color ((double) gdkColor.Red / ushort.MaxValue,
+			Gdk.Color gdkColor = Style.Backgrounds [(int) StateType.Selected];
+			badgeColors [0] = new Cairo.Color ((double) gdkColor.Red / ushort.MaxValue,
 											(double) gdkColor.Green / ushort.MaxValue,
 											(double) gdkColor.Blue / ushort.MaxValue,
-											1.0).MinimumSaturation (0.4).BrightenValue (0.5);
-			badgeColors [0] = badgeColors [1].AddHue (-6).BrightenValue (1);
-			badgeColors [2] = badgeColors [1].AddHue (8).DarkenValue (0.5);
-			badgeColors [3] = badgeColors [1].AddHue (8).DarkenValue (1);
+											1.0).SetValue (1).SetSaturation (1);
+			badgeColors [1] = badgeColors [0].SetValue (0.9).SetSaturation (0.9);
+			badgeColors [2] = badgeColors [0].SetValue (0.7).SetSaturation (0.7);
+			badgeColors [3] = badgeColors [0].SetValue (0.5).SetSaturation (0.5);
 			QueueRedraw ();
 		}
 		
