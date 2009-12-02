@@ -163,7 +163,7 @@ namespace Docky.Menus
 				
 				if (!string.IsNullOrEmpty (item.Emblem)) {
 					Gdk.Pixbuf emblem = DockServices.Drawing.LoadIcon (item.Emblem, allocation.Height - IconBuffer * 2);
-					PlacePixbuf (cr, pixbuf, allocation);
+					PlacePixbuf (cr, emblem, allocation);
 					cr.Paint ();
 					emblem.Dispose ();
 				}
