@@ -173,16 +173,6 @@ namespace Docky.Items
 		}
 		
 		/// <summary>
-		/// An icon which will be displayed as a badge over the current icon
-		/// </summary>
-		protected virtual string BadgeIcon
-		{
-			get {
-				return "badge.svg@" + Assembly.GetExecutingAssembly ().FullName;
-			}
-		}
-		
-		/// <summary>
 		/// The text displayed over a badge
 		/// </summary>
 		protected string BadgeText { get; set; }
