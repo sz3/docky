@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-03 14:20-0600\n"
+"POT-Creation-Date: 2009-12-03 15:45-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -437,7 +437,8 @@ msgid "_Open Trash"
 msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:161
-msgid "_Empty Trash"
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:198
+msgid "Empty _Trash"
 msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:183
@@ -449,10 +450,6 @@ msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
-msgstr ""
-
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:198
-msgid "Empty _Trash"
 msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:84
