@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-03 14:17-0600\n"
+"POT-Creation-Date: 2009-12-03 14:20-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -286,6 +286,18 @@ msgstr ""
 msgid "Labels"
 msgstr ""
 
+#: ../StandardPlugins/GMail/src/GMailConfigurationDialog.cs:38
+msgid "GMail Configuration"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailConfigurationDialog.cs:43
+msgid "Login"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailConfigurationDialog.cs:46
+msgid "Config"
+msgstr ""
+
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:49
 msgid "Inbox"
 msgstr ""
@@ -324,6 +336,10 @@ msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:281
 msgid "_Reset Color"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:35
+msgid "GMail"
 msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
@@ -447,6 +463,58 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:90
 msgid "Network Error: "
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:48
+msgid "iGoogle"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:54
+msgid ""
+"Weather data provided by Google.  This source requires locations to be "
+"specified as US Zip Code or 'City, Country'."
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:53
+msgid "Weather Channel"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:59
+msgid ""
+"Weather data provided by and copyright The Weather Channel.  This source "
+"requires locations to be specified as US Zip Code or a unique code from the "
+"website.  To find your code, look up your forecast on their site and the "
+"code is in the URL after '/local/' and looks like AAXX0000."
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:48
+msgid "Weather Underground"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:54
+msgid ""
+"Weather data provided by and copyright Weather Underground.  This source "
+"requires locations to be specified as US Zip Code or 'City, Country'."
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherConfiguration.cs:42
+msgid "Locations"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherConfiguration.cs:47
+msgid "Search Results"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherConfiguration.cs:90
+msgid "Currently searching..."
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherConfiguration.cs:105
+msgid "No results found"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherConfigurationDialog.cs:37
+msgid "Weather Configuration"
 msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:78

@@ -13,7 +13,10 @@ StandardPlugins/Clock/src/ClockThemeSelector.cs
 StandardPlugins/GMail/src/AbstractLoginWidget.cs
 StandardPlugins/GMail/src/GMailAtom.cs
 StandardPlugins/GMail/src/GMailConfiguration.cs
+StandardPlugins/GMail/src/GMailConfigurationDialog.cs
 StandardPlugins/GMail/src/GMailDockItem.cs
+StandardPlugins/GMail/src/GMailItemProvider.cs
+StandardPlugins/GMail/src/GMailLoginConfig.cs
 StandardPlugins/GMail/src/GMailMenuItem.cs
 StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs
 StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs
@@ -22,6 +25,11 @@ StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs
 StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs
 StandardPlugins/Trash/src/TrashDockItem.cs
 StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs
+StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs
+StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs
+StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs
+StandardPlugins/Weather/src/WeatherConfiguration.cs
+StandardPlugins/Weather/src/WeatherConfigurationDialog.cs
 StandardPlugins/Weather/src/WeatherDocklet.cs
 StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs
 StandardPlugins/Weather/src/WeatherForecast.cs
