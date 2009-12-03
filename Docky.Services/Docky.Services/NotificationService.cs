@@ -123,7 +123,7 @@ namespace Docky.Services
 		{
 			LibNotify.Notification notify = new LibNotify.Notification ();
 			notify.Body = GLib.Markup.EscapeText (message);
-			notify.Summary = GLib.Markup.EscapeText (title);
+			notify.Summary = title;
 			notify.Timeout = ReadableDurationForMessage (title, message);
 			
 			if (SupportsCapability (NotificationCapability.scaling) && !icon.Contains ("@")) {
