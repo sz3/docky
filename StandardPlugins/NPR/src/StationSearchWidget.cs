@@ -61,7 +61,9 @@ namespace NPR
 						view.AppendStation (new Station (stationXElement));
 					});
 				}
-			});	
+			});
+			
+			ZipEntry.GrabFocus ();
 		}
 		
 		protected virtual void SearchClicked (object sender, System.EventArgs e)
@@ -91,6 +93,13 @@ namespace NPR
 		protected virtual void MyStationsClicked (object sender, System.EventArgs e)
 		{
 			ShowMyStations ();
+		}
+
+		[GLib.ConnectBefore]
+		protected virtual void OnKeyPressed (object o, Gtk.KeyPressEventArgs args)
+		{
+			if (args.Event.Key == Gdk.Key.Return)
+				Search.Click ();
 		}
 	}
 }

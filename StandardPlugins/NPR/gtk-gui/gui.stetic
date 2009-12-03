@@ -45,6 +45,7 @@
                 <property name="CanFocus">True</property>
                 <property name="IsEditable">True</property>
                 <property name="InvisibleChar">●</property>
+                <signal name="KeyPressEvent" handler="OnKeyPressed" />
               </widget>
               <packing>
                 <property name="Position">1</property>

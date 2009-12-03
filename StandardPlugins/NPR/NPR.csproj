@@ -59,8 +59,8 @@
     <Compile Include="src\StationTile.cs" />
     <Compile Include="src\StationsView.cs" />
     <Compile Include="src\WrapLabel.cs" />
-    <Compile Include="gtk-gui\NPR.StationSearchWidget.cs" />
     <Compile Include="src\StationsUpdatedEventArgs.cs" />
+    <Compile Include="gtk-gui\bin1.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
