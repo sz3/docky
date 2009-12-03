@@ -21,10 +21,12 @@ using Docky.Services;
 
 using Mono.GetOptions;
 
+// disable the warning message about Mono.GetOptions.Options being obsolete
+#pragma warning disable 618
+
 namespace Docky
 {
-
-
+	
 	public class UserArgs : Options
 	{
 		public LogLevel Logging { get; protected set; }

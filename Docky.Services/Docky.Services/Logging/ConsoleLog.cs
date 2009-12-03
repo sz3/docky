@@ -49,11 +49,6 @@ namespace Docky.Services.Logging
 			return string.Format (LogFormat, levelString, Time);
 		}
 		
-		static string FormatLogMessage (LogLevel level, string message)
-		{
-			return string.Format ("{0} {1}", FormatLogPrompt (level), message);
-		}
-		
 		public static void Log (LogLevel level, string message)
 		{
 			switch (level) {
@@ -79,9 +74,8 @@ namespace Docky.Services.Logging
 			}
 			Console.Write (FormatLogPrompt (level));
 			ConsoleCrayon.ResetColor ();
-			
-			Console.Write (" ");
-			Console.WriteLine (message);
+
+			Console.WriteLine (" {0}", message);
 		}		
 	}
 }

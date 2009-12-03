@@ -112,7 +112,7 @@ namespace Gtk {
 				return ret;
 			}
 		}
-
+/*
 		[StructLayout (LayoutKind.Sequential)]
 		struct GtkMountOperationClass {
 			IntPtr GtkReserved1;
@@ -145,6 +145,7 @@ namespace Gtk {
 			IntPtr class_ptr = new IntPtr (gtype.GetClassPtr ().ToInt64 () + class_offset);
 			Marshal.StructureToPtr (class_struct, class_ptr, false);
 		}
+		*/
 
 		[DllImport("libgtk-x11-2.0", CallingConvention = CallingConvention.Cdecl)]
 		static extern IntPtr gtk_mount_operation_get_type();

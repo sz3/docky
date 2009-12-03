@@ -135,7 +135,7 @@ namespace NPR
 				pbuf.Dispose ();
 				// if we get to this point, the logofile will load just fine
 				Icon = LogoFile;
-			} catch (Exception e) {
+			} catch {
 				// delete the bad logofile
 				System.IO.File.Delete (LogoFile);
 				Icon = DefaultLogo;
