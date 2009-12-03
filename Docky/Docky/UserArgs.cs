@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,6 @@ using Mono.GetOptions;
 
 namespace Docky
 {
-	
 	public class UserArgs : Options
 	{
 		public LogLevel Logging { get; protected set; }
@@ -42,6 +41,12 @@ namespace Docky
 		
 		[Option ("Netbook mode", 'n', "netbook")]
 		public bool NetbookMode;
+		
+		[Option ("Nvidia mode (for Nvidia cards that lag after awhile) [-b 10]", 'n', "nvidia")]
+		public bool NvidiaMode;
+		
+		[Option ("Maximum time (in minutes) to keep buffers", 'b', "buffer-time")]
+		public uint BufferTime;
 
 		public UserArgs (string[] args)
 		{
@@ -53,6 +58,8 @@ namespace Docky
 				MaxSize = int.MaxValue;
 			MaxSize = Math.Max (MaxSize, 500);
 			Logging = LogLevel.Warn;
+			if (NvidiaMode)
+				BufferTime = 10;
 			// if the debug option was passed, set it to debug
 			// otherwise leave it to the default, which is warn
 			if (Debug)

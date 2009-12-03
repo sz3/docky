@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -38,8 +38,6 @@ using Docky.Xlib;
 
 namespace Docky.Interface
 {
-
-
 	public class DockWindow : Gtk.Window
 	{
 		struct DrawValue 
@@ -556,6 +554,13 @@ namespace Docky.Interface
 			
 			Realized += HandleRealized;
 			Docky.Controller.ThemeChanged += DockyControllerThemeChanged;
+			
+			// fix for nvidia bug
+			if (Docky.CommandLinePreferences.BufferTime > 0)
+				GLib.Timeout.Add (Docky.CommandLinePreferences.BufferTime * 60 * 1000, delegate {
+					ResetBuffers ();
+					return true;
+				});
 		}
 
 
