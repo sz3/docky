@@ -67,6 +67,8 @@ namespace NPR
 				// this is how we create our "null" station entry
 			} else {
 				ID = id;
+				Name = "No stations found.";
+				TagLine = "Please try your search again.";
 				HoverText = Catalog.GetString ("Click to add NPR stations");
 				State ^= ItemState.Wait;
 			}
@@ -164,6 +166,31 @@ namespace NPR
 			
 			return ClickAnimation.None;
 		}
+		
+		void PlayStream (string url)
+		{
+			DockServices.System.RunOnThread (() => {
+				try {
+					WebClient cl = new WebClient ();
+					string tempPath = System.IO.Path.GetTempPath ();
+					string filename = url.Split (new [] {'/'}).Last ();
+					filename = System.IO.Path.Combine (tempPath, filename);
+					
+					GLib.File file = FileFactory.NewForPath (filename);
+					if (file.Exists)
+						file.Delete ();
+					
+					cl.DownloadFile (url, file.Path);
+					DockServices.System.Open (file);
+				} catch (Exception e) {
+					Docky.Services.Log<Station>.Error ("Failed to play streaming url ({0}) : {1}", url, e.Message);
+					Docky.Services.Log<Station>.Debug (e.StackTrace);
+					// also notify the user that we couldn't play this stream for some reason.
+					Docky.Services.Log.Notify (Name, Icon, "The streaming link failed to play.  " +
+					                           "This is most likely a problem with the NPR station.");
+				}
+			});
+		}
 
 		void ShowConfig ()
 		{
@@ -175,7 +202,7 @@ namespace NPR
 		protected override MenuList OnGetMenuItems ()
 		{
 			MenuList list = base.OnGetMenuItems ();
-			
+
 			if (!IsReady)
 				return list;
 			
@@ -208,10 +235,16 @@ namespace NPR
 
 			urls.Where (u => u.UrlType >= StationUrlType.AudioMP3Stream).ToList ().ForEach (url => {
 				string format = "", icon = "";
+				string port = "";
+
+				int start = url.Target.LastIndexOf (":") + 1;
+				int end = url.Target.IndexOf ("/", start);
+				port = url.Target.Substring (start, end-start);
+				
 				switch (url.UrlType) {
 				case StationUrlType.AudioMP3Stream:
 					format = "MP3";
-					icon = "audio-x-mpeg";
+					icon = "audio-x-mpeg:audio-x-generic";
 					break;
 				case StationUrlType.AudioRAMStream:
 					format = "Real Audio";
@@ -219,20 +252,20 @@ namespace NPR
 					break;
 				case StationUrlType.AudioWMAStream:
 					format = "Windows Media";
-					icon = "audio-x-ms-wma";
+					icon = "audio-x-ms-wma:audio-x-generic";
+					break;
+				default:
+					icon = "audio-x-mpeg";
 					break;
 				}
 				
-				list[MenuListContainer.Actions].Add (new MenuItem (string.Format ("{0} ({1})", url.Title, format),
+				string formatStr = string.IsNullOrEmpty (format) ? "{0} " : "{0} ({1}) ";
+				formatStr += string.IsNullOrEmpty (port) ? "" : " port {2}";
+								
+				list[MenuListContainer.Actions].Add (new MenuItem (string.Format (formatStr, url.Title, format, port),
 					icon,
 					delegate {
-						DockServices.System.RunOnThread (() => {
-							WebClient cl = new WebClient ();
-							string tempFile = System.IO.Path.GetTempFileName ();
-							cl.DownloadFile (url.Target, tempFile);
-							GLib.File f = FileFactory.NewForPath (tempFile);
-							DockServices.System.Open (f);
-						});
+						PlayStream (url.Target);
 					}));
 			});
 			

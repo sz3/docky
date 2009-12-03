@@ -27,7 +27,6 @@ using Docky.Services;
 namespace NPR
 {
 
-
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class StationSearchWidget : Gtk.Bin
 	{
@@ -42,28 +41,15 @@ namespace NPR
 			
 			stationsScroll.HscrollbarPolicy = PolicyType.Never;
 			stationsScroll.AddWithViewport (view);
+
 		}
 		
 		public void ClearResults ()
 		{
 			view.Clear ();
-			ZipEntry.Text = "";
 		}
 		
-		protected virtual void SearchClicked (object sender, System.EventArgs e)
-		{
-			uint zip;
-			if (!uint.TryParse (ZipEntry.Text, out zip))
-				return;
-			
-			view.Clear ();
-			
-			IEnumerable<Station> stations = NPR.SearchStations (zip);
-			foreach (Station s in stations)
-				view.AppendStation (s);
-		}
-
-		protected virtual void MyStationsClicked (object sender, System.EventArgs e)
+		public void ShowMyStations ()
 		{
 			view.Clear ();
 			ZipEntry.Text = "";
@@ -75,8 +61,43 @@ namespace NPR
 						view.AppendStation (new Station (stationXElement));
 					});
 				}
-				DockServices.System.RunOnMainThread (() => { my_stations.Sensitive = true; });
+			});	
+		}
+		
+		protected virtual void SearchClicked (object sender, System.EventArgs e)
+		{
+			uint zip;
+			if (!uint.TryParse (ZipEntry.Text, out zip))
+				return;
+			
+			my_stations.Sensitive = true;
+			
+			view.Clear ();
+			
+			DockServices.System.RunOnMainThread (() => {
+				// grab a list of nearby stations, sorted by closeness to the supplied query
+				IEnumerable<Station> stations = NPR.SearchStations (zip).OrderByDescending (s => s.Signal);
+				DockServices.System.RunOnMainThread (() => {
+					if (stations.Count () == 0) {
+						view.AppendStation (new Station (-1));
+						return;
+					}
+					foreach (Station s in stations)
+						view.AppendStation (s);
+				});
 			});
+		}
+
+		protected virtual void MyStationsClicked (object sender, System.EventArgs e)
+		{
+			ShowMyStations ();
+		}
+
+		protected virtual void OnKeyPress (object o, Gtk.KeyPressEventArgs args)
+		{
+			Console.WriteLine (args.Event.Key);
+			if (args.Event.Key == Gdk.Key.Return)
+				Search.Activate ();
 		}
 	}
 }

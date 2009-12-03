@@ -39,7 +39,6 @@ namespace NPR
 {    
 	public class StationTile : Table
 	{
-		private Station station;
 		private Button add_remove_button;
 		private Box button_box;
 		
@@ -50,22 +49,19 @@ namespace NPR
 		private WrapLabel description;
         private WrapLabel city;
 		
-		private bool last;
-		public bool Last {
-			get { return last; }
-			set { last = value; }
-		}
+		public Station OwnedObject { get; private set; }
+		public bool Last { get; private set; }
 		
 		public event EventHandler ActiveChanged;
 		
-		public StationTile (Station station) : base (3, 3, false)
+		public StationTile (Station OwnedObject) : base (3, 3, false)
 		{
-			this.station = station;
+			this.OwnedObject = OwnedObject;
 			
 			BuildTile ();
 			
-			station.FinishedLoading += delegate {
-				tileImage.Pixbuf = DockServices.Drawing.LoadIcon (station.Icon, 64);
+			OwnedObject.FinishedLoading += delegate {
+				tileImage.Pixbuf = DockServices.Drawing.LoadIcon (OwnedObject.Icon, 64);
 				tileImage.Show ();
 			};
 		}
@@ -77,7 +73,7 @@ namespace NPR
 			ColumnSpacing = 5;
 			
 			tileImage = new Image ();
-			tileImage.Pixbuf = DockServices.Drawing.LoadIcon (station.Icon, 64);
+			tileImage.Pixbuf = DockServices.Drawing.LoadIcon (OwnedObject.Icon, 64);
 			
 			tileImage.Show ();
 			tileImage.Yalign = 0.0f;
@@ -86,7 +82,7 @@ namespace NPR
             title = new Label ();
             title.Show ();
             title.Xalign = 0.0f;
-            title.Markup = String.Format ("<b>{0}</b>", GLib.Markup.EscapeText (station.Name));
+            title.Markup = String.Format ("<b>{0}</b>", GLib.Markup.EscapeText (OwnedObject.Name));
 						
 			Attach (title, 1, 3, 0, 1, 
 			        AttachOptions.Expand | AttachOptions.Fill, 
@@ -94,22 +90,24 @@ namespace NPR
 			
 			description = new WrapLabel ();
 			description.Show ();
-			description.Text = station.TagLine;
+			description.Text = OwnedObject.TagLine;
 			description.Wrap = false;
 			
 			Attach (description, 1, 3, 1, 2,
 			        AttachOptions.Expand | AttachOptions.Fill, 
 			        AttachOptions.Expand | AttachOptions.Fill, 0, 0);
 			
+			
 			city = new WrapLabel ();
 			city.Markup = String.Format (
 			                                "<small><b>{0}</b> <i>{1}</i></small>", 
 			                                Catalog.GetString ("City:"),
-			                                GLib.Markup.EscapeText (station.MarketCity)
+			                                GLib.Markup.EscapeText (OwnedObject.MarketCity)
 			                                );
 			
 			city.Show ();
-			Attach (city, 1, 2, 2, 3,
+			if (OwnedObject.ID > 0)
+				Attach (city, 1, 2, 2, 3,
 			        AttachOptions.Expand | AttachOptions.Fill, 
 			        AttachOptions.Expand | AttachOptions.Fill,  0, 4);
 
@@ -125,14 +123,17 @@ namespace NPR
 			Label label = new Label ();
 			label.ModifyFont (font);
 			add_remove_button = new Button ();
+			add_remove_button.UseUnderline = true;
 			add_remove_button.Add (label);
 			add_remove_button.Clicked += OnAddRemoveClicked;
-			box.PackStart (add_remove_button, false, false, 0);
+			
+			if (OwnedObject.ID > 0)
+				box.PackStart (add_remove_button, false, false, 0);
 			
 			Attach (button_box, 2, 3, 2, 3, 
 			        AttachOptions.Shrink, 
-			        AttachOptions.Expand | AttachOptions.Fill, 0, 0);
-			
+				        AttachOptions.Expand | AttachOptions.Fill, 0, 0);
+
 			Show ();
 			
 			UpdateState ();
@@ -150,10 +151,11 @@ namespace NPR
 			if (State == StateType.Selected) {
 				Gtk.Style.PaintFlatBox (Style, evnt.Window, State, ShadowType.None, evnt.Area, 
 				                        this, "cell_odd", Allocation.X, Allocation.Y, 
-				                        Allocation.Width, Allocation.Height - (last ? 0 : 1));
+				                        Allocation.Width, Allocation.Height - (Last ? 0 : 1));
 			}
 			
-			if (!last) {            
+			
+			if (!Last) {            
 				Gtk.Style.PaintHline (Style, evnt.Window, StateType.Normal, evnt.Area, this, null, 
 				                      Allocation.X, Allocation.Right, Allocation.Bottom - 1);
 			}
@@ -163,27 +165,20 @@ namespace NPR
 		
 		private void OnAddRemoveClicked (object o, EventArgs args)
 		{
-			List<int> stations = NPR.MyStations.ToList ();
-			if (stations.Contains ((int)station.ID))
-				stations.Remove ((int)station.ID);
-			else
-				stations.Add ((int)station.ID);
-			
-			NPR.MyStations = stations.ToArray ();
 			if (ActiveChanged != null)
 				ActiveChanged (this, EventArgs.Empty);
 		}
 		
 		public void UpdateState ()
 		{
-			bool enabled = NPR.MyStations.Contains ((int)station.ID);
+			bool enabled = NPR.MyStations.Contains ((int)OwnedObject.ID);
 			bool sensitive = enabled || (!enabled && State == StateType.Selected);
 			
 			title.Sensitive = sensitive;
 			description.Sensitive = sensitive;
 			description.Wrap = State == StateType.Selected;
 			city.Visible = State == StateType.Selected;
-			add_remove_button.Label = enabled ? Catalog.GetString ("Remove") : Catalog.GetString ("Add");
+			add_remove_button.Label = enabled ? Catalog.GetString ("_Remove") : Catalog.GetString ("_Add");
 		}
 		
 		public void Select (bool select)

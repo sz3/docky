@@ -27,6 +27,7 @@
 //
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using Gtk;
 
@@ -54,7 +55,6 @@ namespace NPR
 			tiles.Clear ();
 			foreach (Widget child in box.Children) {
 				box.Remove (child);
-				child.Dispose ();
 			}
 		}
 
@@ -76,8 +76,8 @@ namespace NPR
 		public void AppendStation (Station station)
 		{
 			StationTile tile = new StationTile (station);
-			tile.ActiveChanged += OnAddinActiveChanged;
-			tile.SizeAllocated += OnAddinSizeAllocated;
+			tile.ActiveChanged += OnStationActiveChanged;
+			tile.SizeAllocated += OnStationSizeAllocated;
 			tile.Show ();
 			tiles.Add (tile);
 			
@@ -85,14 +85,23 @@ namespace NPR
 		}
 
 		
-		private void OnAddinActiveChanged (object o, EventArgs args)
+		private void OnStationActiveChanged (object o, EventArgs args)
 		{
-			foreach (StationTile tile in tiles) {
-				tile.UpdateState ();
+			StationTile tile = o as StationTile;
+			List<int> stations = NPR.MyStations.ToList ();
+			if (stations.Contains ((int)tile.OwnedObject.ID))
+				stations.Remove ((int)tile.OwnedObject.ID);
+			else
+				stations.Add ((int)tile.OwnedObject.ID);
+			
+			NPR.MyStations = stations.ToArray ();			
+			
+			foreach (StationTile stationTile in tiles) {
+				stationTile.UpdateState ();
 			}
 		}
 		
-		private void OnAddinSizeAllocated (object o, SizeAllocatedArgs args)
+		private void OnStationSizeAllocated (object o, SizeAllocatedArgs args)
 		{
 			ScrolledWindow scroll;
 			
