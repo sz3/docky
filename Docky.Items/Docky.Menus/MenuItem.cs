@@ -53,7 +53,7 @@ namespace Docky.Menus
 			set {
 				if (text == value)
 					return;
-				text = value;
+				text = GLib.Markup.EscapeText (value);
 				if (text.IndexOf ("_") != -1)
 					Mnemonic = text.ToLower () [text.IndexOf ("_") + 1];
 				if (TextChanged != null)
