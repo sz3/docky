@@ -21,6 +21,8 @@ using System.Net;
 using System.Web;
 using System.Xml;
 
+using Mono.Unix;
+
 using Docky.Services;
 
 namespace WeatherDocklet
@@ -48,15 +50,15 @@ namespace WeatherDocklet
 		
 		public override string Name {
 			get {
-				return "Weather Channel";
+				return Catalog.GetString ("Weather Channel");
 			}
 		}
 		
 		public override string About {
 			get {
-				return "Weather data provided by and copyright The Weather Channel.  " +
+				return Catalog.GetString ("Weather data provided by and copyright The Weather Channel.  " +
 					"This source requires locations to be specified as US Zip Code or a unique code from the website.  " +
-					"To find your code, look up your forecast on their site and the code is in the URL after '/local/' and looks like AAXX0000.";
+					"To find your code, look up your forecast on their site and the code is in the URL after '/local/' and looks like AAXX0000.");
 			}
 		}
 		

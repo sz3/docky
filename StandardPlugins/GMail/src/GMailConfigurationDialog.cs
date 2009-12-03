@@ -18,6 +18,7 @@
 using System;
 
 using Gtk;
+using Mono.Unix;
 
 namespace GMail
 {
@@ -34,21 +35,28 @@ namespace GMail
 			Stick ();
 			
 			IconName = Gtk.Stock.Preferences;
+			Title = Catalog.GetString ("GMail Configuration");
 			
 			Notebook notebook = new Notebook ();
 			
 			GMailLoginConfig login = new GMailLoginConfig ();
-			notebook.AppendPage (login, new Label ("Login"));
+			notebook.AppendPage (login, new Label (Catalog.GetString ("Login")));
 			
 			GMailConfiguration config = new GMailConfiguration ();
-			notebook.AppendPage (config, new Label ("Config"));
+			notebook.AppendPage (config, new Label (Catalog.GetString ("Config")));
 			
 			VBox.PackEnd (notebook);
 			VBox.ShowAll ();
 			
-			AddButton ("Close", ResponseType.Close);
+            Gtk.Button close_button = new Gtk.Button();
+            close_button.CanFocus = true;
+            close_button.Name = "close_button";
+            close_button.UseStock = true;
+            close_button.UseUnderline = true;
+            close_button.Label = "gtk-close";
+			close_button.Show ();
+			AddActionWidget (close_button, ResponseType.Close);
 			SetDefaultSize (350, 400);
-			Title = "GMail Configuration";
 		}
 		
 		protected override void OnResponse (ResponseType response_id)

@@ -42,6 +42,11 @@ namespace GMail
 			items.Keys.CopyTo (keys, 0);
 			foreach (string label in keys)
 				RemoveItem (label);
+			
+			if (GMailConfigurationDialog.instance == null) {
+				GMailConfigurationDialog.instance.Destroy ();
+				GMailConfigurationDialog.instance = null;
+			}
 		}
 		
 		#endregion
@@ -95,7 +100,7 @@ namespace GMail
 		
 		public GMailItemProvider ()
 		{
-			AddItem ("Inbox");
+			AddItem (GMailDockItem.DefaultLabel);
 			
 			foreach (string label in GMailPreferences.Labels)
 				AddItem (label);
@@ -110,7 +115,7 @@ namespace GMail
 			string[] keys = new string [items.Keys.Count];
 			items.Keys.CopyTo (keys, 0);
 			foreach (string label in keys)
-				if (label != "Inbox")
+				if (label != GMailDockItem.DefaultLabel)
 					RemoveItem (label);
 
 			foreach (string label in GMailPreferences.Labels)

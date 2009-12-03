@@ -303,6 +303,11 @@ namespace WeatherDocklet
 		
 		public override void Dispose ()
 		{
+			if (WeatherConfigurationDialog.instance == null) {
+				WeatherConfigurationDialog.instance.Destroy ();
+				WeatherConfigurationDialog.instance = null;
+			}
+			
 			WeatherController.WeatherReloading -= HandleWeatherReloading;
 			WeatherController.WeatherError -= HandleWeatherError;
 			WeatherController.WeatherUpdated -= HandleWeatherUpdated;

@@ -21,6 +21,8 @@ using System.Net;
 using System.Web;
 using System.Xml;
 
+using Mono.Unix;
+
 using Docky.Services;
 
 namespace WeatherDocklet
@@ -43,14 +45,14 @@ namespace WeatherDocklet
 		
 		public override string Name {
 			get {
-				return "iGoogle";
+				return Catalog.GetString ("iGoogle");
 			}
 		}
 		
 		public override string About {
 			get {
-				return "Weather data provided by Google.  " +
-					"This source requires locations to be specified as US Zip Code or 'City, Country'.";
+				return Catalog.GetString ("Weather data provided by Google.  " +
+					"This source requires locations to be specified as US Zip Code or 'City, Country'.");
 			}
 		}
 		

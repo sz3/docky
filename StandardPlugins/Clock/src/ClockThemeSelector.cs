@@ -34,6 +34,8 @@ namespace Clock
 {
 	public class ClockThemeSelector : Gtk.Dialog
 	{
+		public static ClockThemeSelector instance;
+	
 		TreeStore labelTreeStore = new TreeStore (typeof (string));
 		TreeView labelTreeView = new TreeView ();
 		
@@ -42,7 +44,24 @@ namespace Clock
 		public ClockThemeSelector (ClockDockItem dockItem)
 		{
 			DockItem = dockItem;
+			
+			SkipTaskbarHint = true;
+			TypeHint = Gdk.WindowTypeHint.Dialog;
+			WindowPosition = Gtk.WindowPosition.Center;
+			KeepAbove = true;
+			Stick ();
+			
 			Title = Catalog.GetString ("Themes");
+			IconName = Gtk.Stock.Preferences;
+			
+            Gtk.Button close_button = new Gtk.Button();
+            close_button.CanFocus = true;
+            close_button.Name = "close_button";
+            close_button.UseStock = true;
+            close_button.UseUnderline = true;
+            close_button.BorderWidth = ((uint)(5));
+            close_button.Label = "gtk-close";
+			AddActionWidget (close_button, ResponseType.Close);
 			
 			labelTreeView.Model = labelTreeStore;
 			labelTreeView.HeadersVisible = false;
@@ -55,7 +74,6 @@ namespace Clock
 			win.Show ();
 			VBox.PackEnd (win);
 			VBox.ShowAll ();
-			AddButton ("Close", ResponseType.Close);
 
 			UpdateThemeList ();
 		}
@@ -96,7 +114,7 @@ namespace Clock
 		
 		protected override void OnResponse (ResponseType response_id)
 		{
-			Destroy ();
+			Hide ();
 		}
 	}
 }

@@ -18,6 +18,7 @@
 using System;
 
 using Gtk;
+using Mono.Unix;
 
 namespace WeatherDocklet
 {
@@ -33,6 +34,7 @@ namespace WeatherDocklet
 			KeepAbove = true;
 			Stick ();
 			
+			Title = Catalog.GetString ("Weather Configuration");
 			IconName = Gtk.Stock.Preferences;
 			
 			WeatherConfiguration config = new WeatherConfiguration ();
@@ -40,9 +42,15 @@ namespace WeatherDocklet
 			VBox.PackEnd (config);
 			VBox.ShowAll ();
 			
-			AddButton ("Close", ResponseType.Close);
+            Gtk.Button close_button = new Gtk.Button();
+            close_button.CanFocus = true;
+            close_button.Name = "close_button";
+            close_button.UseStock = true;
+            close_button.UseUnderline = true;
+            close_button.Label = "gtk-close";
+			close_button.Show ();
+			AddActionWidget (close_button, ResponseType.Close);
 			SetDefaultSize (350, 400);
-			Title = "Weather Configuration";
 		}
 		
 		protected override void OnResponse (ResponseType response_id)

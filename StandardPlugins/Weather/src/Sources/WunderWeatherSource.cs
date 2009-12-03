@@ -45,14 +45,14 @@ namespace WeatherDocklet
 		
 		public override string Name {
 			get {
-				return "Weather Underground";
+				return Catalog.GetString ("Weather Underground");
 			}
 		}
 		
 		public override string About {
 			get {
-				return "Weather data provided by and copyright Weather Underground.  " +
-					"This source requires locations to be specified as US Zip Code or 'City, Country'.";
+				return Catalog.GetString ("Weather data provided by and copyright Weather Underground.  " +
+					"This source requires locations to be specified as US Zip Code or 'City, Country'.");
 			}
 		}
 		

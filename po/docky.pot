@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-03 08:44+0100\n"
+"POT-Creation-Date: 2009-12-03 14:17-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,6 +81,18 @@ msgstr ""
 msgid "Window Dodge"
 msgstr ""
 
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:82
+msgid ""
+"None : Always present, acts like a panel.\n"
+"Autohide : Hides whenever the mouse is not over it.\n"
+"Intellihide : Hides when dock obstructs the active application.\n"
+"Window Dodge : Hides when dock obstructs any window."
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:93
+msgid "Fade out dock instead of slide off screen"
+msgstr ""
+
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:96
 msgid "Fade On Hide"
 msgstr ""
@@ -93,12 +105,24 @@ msgstr ""
 msgid "Autohide:"
 msgstr ""
 
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:144
+msgid ""
+"Causes launchers which currently manage more than one window to have an "
+"extra indicator under it."
+msgstr ""
+
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:147
 msgid "Indicate Multiple Windows"
 msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:161
 msgid "Panel Mode"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:173
+msgid ""
+"When set, windows which do not already have launchers on a dock will be "
+"added to this dock."
 msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:176
@@ -136,15 +160,15 @@ msgstr ""
 msgid "_Pin to Dock"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:219
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:216
 msgid "Open"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:220
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:217
 msgid "Open Containing Folder"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:221
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:218
 msgid "Reset Color"
 msgstr ""
 
@@ -178,27 +202,27 @@ msgstr ""
 msgid "Reset _Color"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:344
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:342
 msgid "Di_gital Clock"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:350
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:348
 msgid "24-Hour _Clock"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:356
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:354
 msgid "Show _Date"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:362
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:360
 msgid "Select _Theme"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:45
+#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:50
+#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
 msgid "Theme"
 msgstr ""
 
@@ -228,33 +252,33 @@ msgstr ""
 msgid "Account validation succeeded!"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:192
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:182
 msgid "Username or Password not set"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:242
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:232
 msgid "(no subject)"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:260
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:250
 #, csharp-format
 msgid "From: {0}"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:271
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:275
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:261
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:265
 msgid "Feed Error"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:280
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:270
 msgid "Invalid Username"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:284
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:274
 msgid "Network Error"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:289
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:279
 msgid "General Error"
 msgstr ""
 
@@ -262,39 +286,43 @@ msgstr ""
 msgid "Labels"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:91
-msgid "No unread mail"
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:49
+msgid "Inbox"
 msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:93
+msgid "No unread mail"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:113
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:115
 msgid "Checking mail..."
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:245
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:247
 msgid "_View "
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:250
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:252
 msgid "_Compose Mail"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:265
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:267
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:286
 msgid "_Settings"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:273
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:275
 msgid "Check _Now"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:279
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:281
 msgid "_Reset Color"
 msgstr ""
 
@@ -354,7 +382,7 @@ msgstr ""
 msgid "_Unmount"
 msgstr ""
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:168
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:164
 msgid "Disconnected"
 msgstr ""
 
@@ -373,39 +401,41 @@ msgid ""
 "• All items from the recent documents list in all applications."
 msgstr ""
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:85
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:200
-msgid "_Cancel"
-msgstr ""
-
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:86
-msgid "C_lear"
-msgstr ""
-
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:101
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
 msgid "_Clear Recent Documents..."
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:169
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:72
+msgid "No items in Trash"
+msgstr ""
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:74
+#, csharp-format
+msgid "{0} item in Trash"
+msgid_plural "{0} items in Trash"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:159
 msgid "_Open Trash"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:171
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:161
 msgid "_Empty Trash"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:193
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:183
 msgid "Empty all of the items from the trash?"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:195
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:185
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:201
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:198
 msgid "Empty _Trash"
 msgstr ""
 

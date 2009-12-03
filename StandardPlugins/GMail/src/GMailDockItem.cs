@@ -41,10 +41,12 @@ namespace GMail
 		}
 		
 		public bool Visible {
-			get { return Atom.UnreadCount > 0 || Atom.CurrentLabel == "Inbox"; }
+			get { return Atom.UnreadCount > 0 || Atom.CurrentLabel == DefaultLabel; }
 		}
 		
 		public GMailAtom Atom { get; protected set; }
+		
+		public static string DefaultLabel { get { return Catalog.GetString ("Inbox"); } }
 		
 		GMailItemProvider parent;
 		
@@ -188,7 +190,7 @@ namespace GMail
 			url += "/\\#";
 
 			// going to a custom label
-			if (Atom.CurrentLabel != "Inbox")
+			if (Atom.CurrentLabel != DefaultLabel)
 				url += "label/";
 			
 			DockServices.System.Open (url + HttpUtility.UrlEncode (Atom.CurrentLabel));

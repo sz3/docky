@@ -33,8 +33,6 @@ using Docky.Services;
 
 namespace Clock
 {
-
-
 	public class ClockDockItem : AbstractDockItem
 	{
 		int minute;
@@ -361,9 +359,20 @@ namespace Clock
 			
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Select _Theme"), "preferences-desktop-theme", (o, a) => 
 			{ 
-				new ClockThemeSelector (this).Show (); 
+				if (ClockThemeSelector.instance == null)
+					ClockThemeSelector.instance = new ClockThemeSelector (this);
+				ClockThemeSelector.instance.Show (); 
 			}, ShowDigital));
 			return list;
+		}
+		
+		public override void Dispose ()
+		{
+			if (ClockThemeSelector.instance == null) {
+				ClockThemeSelector.instance.Destroy ();
+				ClockThemeSelector.instance = null;
+			}
+			base.Dispose ();
 		}
 	}
 }

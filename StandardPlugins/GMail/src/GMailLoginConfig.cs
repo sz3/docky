@@ -20,6 +20,7 @@ using System;
 using System.Text.RegularExpressions;
 
 using Gtk;
+using Mono.Unix;
 
 namespace GMail
 {	
@@ -31,7 +32,7 @@ namespace GMail
             
         const string Uri = "https://www.google.com/accounts/NewAccount?service=mail";
 		
-		public GMailLoginConfig () : base ("GMail", Uri)
+		public GMailLoginConfig () : base (Catalog.GetString ("GMail"), Uri)
 		{
 			Username = GMailPreferences.User;
 			Password = GMailPreferences.Password;

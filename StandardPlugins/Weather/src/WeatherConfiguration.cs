@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Gtk;
+using Mono.Unix;
 
 using Docky.Services;
 
@@ -38,12 +39,12 @@ namespace WeatherDocklet
 			
 			locationTreeView.Model = locationTreeStore;
 			locationTreeView.Selection.Changed += OnLocationSelectionChanged;
-			locationTreeView.AppendColumn ("Locations", new CellRendererText (), "text", 0);
+			locationTreeView.AppendColumn (Catalog.GetString ("Locations"), new CellRendererText (), "text", 0);
 			UpdateLocations ();
 			
 			searchTreeView.Model = searchTreeStore;
 			searchTreeView.Selection.Changed += OnSearchSelectionChanged;
-			searchTreeView.AppendColumn ("Search Results", new CellRendererText (), "text", 0);
+			searchTreeView.AppendColumn (Catalog.GetString ("Search Results"), new CellRendererText (), "text", 0);
 			
 			timeout.Value = WeatherPreferences.Timeout;
 			metric.Active = WeatherPreferences.Metric;
@@ -86,7 +87,7 @@ namespace WeatherDocklet
 		protected virtual void OnSearchClicked (object sender, System.EventArgs e)
 		{
 			searchTreeStore.Clear ();
-			searchTreeStore.AppendValues ("Currently searching...", "");
+			searchTreeStore.AppendValues (Catalog.GetString ("Currently searching..."), "");
 			
 			DockServices.System.RunOnThread (() => {
 				List<string> vals = new List<string> ();
@@ -101,7 +102,7 @@ namespace WeatherDocklet
 						for (int i = 0; i < vals.Count; i += 2)
 							searchTreeStore.AppendValues (vals [i], vals [i + 1]);
 					else
-						searchTreeStore.AppendValues ("No results found", "");
+						searchTreeStore.AppendValues (Catalog.GetString ("No results found"), "");
 				});
 			});
 		}

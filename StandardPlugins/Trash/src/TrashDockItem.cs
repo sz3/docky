@@ -34,9 +34,6 @@ namespace Trash
 {
 	public class TrashDockItem : FileDockItem
 	{
-		const string OneInTrash = "1 item in Trash";
-		const string ManyInTrash = "{0} items in Trash";
-		
 		uint ItemsInTrash {
 			get {
 				FileInfo info = OwnedFile.QueryInfo ("trash::item-count", FileQueryInfoFlags.None, null);
@@ -71,17 +68,10 @@ namespace Trash
 		{
 			// this can be a little costly, let's just call it once and store locally
 			uint itemsInTrash = ItemsInTrash;
-			switch (itemsInTrash) {
-			case 0:
-				HoverText = string.Format (ManyInTrash, "No");
-				break;
-			case 1:
-				HoverText = string.Format (OneInTrash, "1");
-				break;
-			default:
-				HoverText = string.Format (ManyInTrash, itemsInTrash);
-				break;
-			}
+			if (itemsInTrash == 0)
+				HoverText = Catalog.GetString ("No items in Trash");
+			else
+				HoverText = string.Format (Catalog.GetPluralString ("{0} item in Trash", "{0} items in Trash", (int) itemsInTrash), itemsInTrash);
 			
 			SetIconFromGIcon (OwnedFile.Icon ());
 		}
@@ -197,7 +187,14 @@ namespace Trash
 					"can also delete them separately.");
 				md.Modal = false;
 				
-				md.AddButton (Catalog.GetString ("_Cancel"), Gtk.ResponseType.Cancel);
+				Gtk.Button cancel_button = new Gtk.Button();
+				cancel_button.CanFocus = true;
+				cancel_button.Name = "cancel_button";
+				cancel_button.UseStock = true;
+				cancel_button.UseUnderline = true;
+				cancel_button.Label = "gtk-cancel";
+				cancel_button.Show ();
+				md.AddActionWidget (cancel_button, Gtk.ResponseType.Cancel);
 				md.AddButton (Catalog.GetString ("Empty _Trash"), Gtk.ResponseType.Ok);
 				md.DefaultResponse = Gtk.ResponseType.Ok;
 
