@@ -42,14 +42,14 @@ namespace NPR
 			VBox.PackEnd (searchWidget);
 			VBox.ShowAll ();
 			
-			AddButton ("Close", ResponseType.Close);
+			AddButton ("_Close", ResponseType.Close);
 			SetDefaultSize (350, 400);
 			Title = "NPR Configuration";
 		}
 		
 		protected override void OnShown ()
 		{
-			searchWidget.ClearResults ();
+			searchWidget.ShowMyStations ();
 			base.OnShown ();
 		}
 		
