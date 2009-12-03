@@ -92,12 +92,5 @@ namespace NPR
 		{
 			ShowMyStations ();
 		}
-
-		protected virtual void OnKeyPress (object o, Gtk.KeyPressEventArgs args)
-		{
-			Console.WriteLine (args.Event.Key);
-			if (args.Event.Key == Gdk.Key.Return)
-				Search.Activate ();
-		}
 	}
 }
