@@ -88,16 +88,6 @@ namespace GMail
 			}
 		}
 		
-		void SetIcons ()
-		{
-			if (Gtk.IconTheme.Default.HasIcon ("gmail"))
-				Icon = "gmail";
-			else
-				Icon = "gmail-logo.png@" + GetType ().Assembly.FullName;
-		}
-		
-		public string Icon { get; protected set; }
-		
 		public GMailAtom (string label)
 		{
 			CurrentLabel = label;
@@ -107,15 +97,12 @@ namespace GMail
 //			ServicePointManager.ServerCertificateValidationCallback +=
 //				(sender, cert, chain, errors) => { return true; };
 			ResetNeeded += HandleNeedReset;
-			Gtk.IconTheme.Default.Changed += delegate { SetIcons (); };
-			SetIcons ();
 		}
 		
 		public void Dispose ()
 		{
 			DockServices.System.ConnectionStatusChanged -= HandleNeedReset;
 			ResetNeeded -= HandleNeedReset;
-			Gtk.IconTheme.Default.Changed -= delegate { SetIcons (); };
 		}
 		
 		void HandleNeedReset (object o, EventArgs state)
@@ -256,11 +243,11 @@ namespace GMail
 					
 					if (GMailPreferences.Notify) {
 						if (NewCount > 5)
-							Log.Notify (CurrentLabel, Icon, "You have {0} new, unread messages", NewCount);
+							Log.Notify (CurrentLabel, "gmail", "You have {0} new, unread messages", NewCount);
 						else
 							foreach (UnreadMessage message in tmp)
 								if (message.SendDate > GMailPreferences.LastChecked)
-									Log.Notify (message.Topic, Icon, Catalog.GetString ("From: {0}"), message.From);
+									Log.Notify (message.Topic, "gmail", Catalog.GetString ("From: {0}"), message.From);
 					}
 					
 					try {

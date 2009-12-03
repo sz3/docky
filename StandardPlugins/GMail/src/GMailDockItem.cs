@@ -130,7 +130,7 @@ namespace GMail
 			int size = Math.Min (surface.Width, surface.Height);
 			Context cr = surface.Context;
 			
-			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (Atom.Icon, size))
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("gmail", size))
 			{
 				if (HueShift != 0 || Atom.State == GMailState.Error) {
 					unsafe {
@@ -243,7 +243,7 @@ namespace GMail
 			UpdateAttention (false);
 			
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_View ") + Atom.CurrentLabel,
-					Atom.Icon,
+					"gmail",
 					delegate {
 						Clicked (1, Gdk.ModifierType.None, 0, 0);
 					}));
@@ -257,7 +257,7 @@ namespace GMail
 			
 			if (Atom.HasUnread) {
 				foreach (UnreadMessage message in Atom.Messages.Take (10))
-					list[MenuListContainer.Actions].Add (new GMailMenuItem (message, Atom.Icon));
+					list[MenuListContainer.Actions].Add (new GMailMenuItem (message, "gmail"));
 				
 				list[MenuListContainer.Actions].Add (new SeparatorMenuItem ());
 			}

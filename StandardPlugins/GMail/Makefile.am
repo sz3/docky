@@ -19,8 +19,7 @@ FILES = \
 	src/gtk-gui/generated.cs
 
 RESOURCES = \
-	Resources/GMail.addin.xml \
-	Resources/icons/gmail-logo.png
+	Resources/GMail.addin.xml
 
 REFERENCES =  \
 	System \

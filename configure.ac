@@ -220,6 +220,8 @@ data/icons/hicolor/48x48/Makefile
 data/icons/hicolor/48x48/apps/Makefile
 data/icons/hicolor/64x64/Makefile
 data/icons/hicolor/64x64/apps/Makefile
+data/icons/hicolor/128x128/Makefile
+data/icons/hicolor/128x128/apps/Makefile
 data/icons/hicolor/Makefile
 data/themes/Makefile
 data/themes/Grayscale/Makefile

@@ -64,11 +64,9 @@
   <ItemGroup>
     <Folder Include="src\" />
     <Folder Include="Resources\" />
-    <Folder Include="Resources\icons\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\GMail.addin.xml" />
-    <None Include="Resources\icons\gmail-logo.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Docky.Services\Docky.Services.csproj">
