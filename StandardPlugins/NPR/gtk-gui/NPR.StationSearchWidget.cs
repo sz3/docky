@@ -103,6 +103,7 @@ namespace NPR {
             }
             this.Hide();
             this.my_stations.Clicked += new System.EventHandler(this.MyStationsClicked);
+            this.ZipEntry.KeyPressEvent += new Gtk.KeyPressEventHandler(this.OnKeyPressed);
             this.Search.Clicked += new System.EventHandler(this.SearchClicked);
         }
     }
