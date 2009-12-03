@@ -167,9 +167,7 @@ namespace Docky.Windowing
 						// we only care about .desktop files
 						if (!file.Path.EndsWith (".desktop"))
 							return;
-						// reload our dictionary of exec strings
-						Dictionary<string, List<string>> execToDesktopFiles = BuildExecStrings ();
-						
+						// reload our dictionary of exec strings						
 						lock (update_lock)
 							exec_to_desktop_files = BuildExecStrings ();
 						

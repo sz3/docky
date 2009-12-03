@@ -149,7 +149,6 @@ namespace Docky.Interface
 		DateTime hidden_change_time;
 		DateTime dock_hovered_change_time;
 		DateTime items_change_time;
-		DateTime painter_change_time;
 		DateTime render_time;
 		DateTime remove_time;
 		
@@ -1534,9 +1533,7 @@ namespace Docky.Interface
 		}
 		
 		Gdk.Rectangle StaticDockArea (DockySurface surface)
-		{
-			int dockWidth = DockWidth;
-			
+		{			
 			switch (Position) {
 			case DockPosition.Top:
 				return new Gdk.Rectangle ((surface.Width - DockWidth) / 2, 0, DockWidth, DockHeight);

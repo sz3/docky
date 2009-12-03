@@ -37,7 +37,7 @@ namespace NetworkManagerDocklet
 		
 		public delegate void ConnectionRemovedHandler (object o, NetworkConnectionRemovedArgs args);
 		
-		public event ConnectionRemovedHandler ConnectionRemoved;		
+		//public event ConnectionRemovedHandler ConnectionRemoved;		
 		
 		public ConnectionOwner Owner { get; private set; }
 		
@@ -60,10 +60,12 @@ namespace NetworkManagerDocklet
 			//BusObject.Removed += OnDeviceRemoved;
 		}
 
+		/*
 		void OnDeviceRemoved()
 		{
 			if (ConnectionRemoved != null)
 				ConnectionRemoved (this, new NetworkConnectionRemovedArgs (ConnectionName));
 		}
+		*/
 	}
 }

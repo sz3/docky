@@ -78,10 +78,6 @@ namespace NetworkManagerDocklet
 			});
 		}
 		
-		int iconStage;
-		int iconStep;
-		uint iconTimer;
-		
 		string SetDockletIcon ()
 		{
 			try {

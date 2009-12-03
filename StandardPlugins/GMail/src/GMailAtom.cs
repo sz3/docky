@@ -29,6 +29,9 @@ using Mono.Unix;
 
 using Docky.Services;
 
+// disable the warning message about System.Net.ServicePointManager.CertificatePolicy being obsolete
+#pragma warning disable 618
+
 namespace GMail
 {
 	public enum GMailState
@@ -172,7 +175,7 @@ namespace GMail
 				HttpWebRequest request = (HttpWebRequest)WebRequest.Create (url);
 				request.UserAgent = @"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.10) Gecko/2009042523 Ubuntu/9.04 (jaunty) Firefox/3.0.10";
 				request.Credentials = new NetworkCredential (username, password);
-				// remove when ServicePointManager.ServerCertificateValidationCallback implemented in mono
+				// FIXME: remove when ServicePointManager.ServerCertificateValidationCallback implemented in mono
 				System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 				
 				using (HttpWebResponse response = (HttpWebResponse)request.GetResponse ())
