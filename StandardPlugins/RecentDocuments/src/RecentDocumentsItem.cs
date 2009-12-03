@@ -46,8 +46,10 @@ namespace RecentDocuments
 		
 		FileDockItem currentFile;
 		FileMonitor watcher;
-			
-		FileDockItem CurrentFile {
+		
+		RecentDocumentsItemProvider recentOwner;
+		
+		public FileDockItem CurrentFile {
 			get {
 				return currentFile;
 			}
@@ -56,11 +58,15 @@ namespace RecentDocuments
 					return;
 				currentFile = value;
 				
-				if (watcher != null)
+				if (watcher != null) {
 					watcher.Changed -= WatcherChanged;
+					watcher = null;
+				}
 				
-				watcher = FileMonitor.File (currentFile.OwnedFile, FileMonitorFlags.None, null);
-				watcher.Changed += WatcherChanged;
+				if (value != null) {
+					watcher = FileMonitor.File (currentFile.OwnedFile, FileMonitorFlags.None, null);
+					watcher.Changed += WatcherChanged;
+				}
 			}
 		}
 		
@@ -69,8 +75,9 @@ namespace RecentDocuments
 			RefreshRecentDocs ();
 		}
 		
-		public RecentDocumentsItem ()
+		public RecentDocumentsItem (RecentDocumentsItemProvider recentOwner)
 		{
+			this.recentOwner = recentOwner;
 			RecentDocs = new List<FileDockItem> ();
 			
 			Gtk.RecentManager.Default.Changed += delegate { RefreshRecentDocs (); };
@@ -92,12 +99,15 @@ namespace RecentDocuments
 			}
 			
 			UpdateInfo ();
+			recentOwner.UpdateItems ();
 		}
 		
 		void UpdateInfo ()
 		{
-			if (RecentDocs.Count() == 0)
+			if (RecentDocs.Count() == 0) {
+				CurrentFile = null;
 				return;
+			}
 			
 			if (CurrentFile == null || RecentDocs.IndexOf (CurrentFile) == -1)
 				CurrentFile = RecentDocs.First ();
