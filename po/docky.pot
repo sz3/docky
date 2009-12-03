@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-01 01:09-0600\n"
+"POT-Creation-Date: 2009-12-03 08:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,119 +26,118 @@ msgid "Drag any dock to move it."
 msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:61
-msgid "Show Preferences"
+msgid "_Show Preferences"
 msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:62
-msgid "About"
+msgid "_About"
 msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:63
-msgid "Quit Docky"
+msgid "_Quit Docky"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:57
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:58
 msgid "Docky Configuration"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:85
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:86
 msgid "Start When Computer Starts"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:100
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:101
 msgid "Theme:"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:123
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:124
 msgid "<b>General Options</b>"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:144
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:145
 msgid "<b>Dock Configuration</b>"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:178
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:179
 msgid "New Dock"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:205
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:206
 msgid "Delete Dock"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:78
 msgid "None"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:78
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:79
 msgid "Autohide"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:79
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
 msgid "Intellihide"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:81
 msgid "Window Dodge"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:95
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:96
 msgid "Fade On Hide"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:125
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:126
 msgid "Icon Size:"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:136
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:137
 msgid "Autohide:"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:146
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:147
 msgid "Indicate Multiple Windows"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:160
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:161
 msgid "Panel Mode"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:175
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:176
 msgid "Manage Windows Without Launcher"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:190
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:191
 msgid "Zoom:"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:262
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:263
 msgid "<b>Inactive Plugins</b>"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:270
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:271
 msgid "<b>Active Plugins</b>"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:100
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:102
 msgid "Icon"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:105
-msgid "Name"
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:186
+msgid "New _Window"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:177
-msgid "New Window"
-msgstr ""
-
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:179
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:219
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:188
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:49
 #: ../StandardPlugins/Bookmarks/src/BookmarkDockItem.cs:85
 #: ../StandardPlugins/Mounter/src/MountItem.cs:96
-msgid "Open"
+msgid "_Open"
 msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:354
-msgid "Pin to Dock"
+msgid "_Pin to Dock"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:219
+msgid "Open"
 msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:220
@@ -146,49 +145,53 @@ msgid "Open Containing Folder"
 msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:221
-#: ../StandardPlugins/Bookmarks/src/BookmarkDockItem.cs:87
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:278
 msgid "Reset Color"
 msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:243
-msgid "Unmaximize"
+msgid "Unma_ximize"
 msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:246
-msgid "Maximize"
+msgid "Ma_ximize"
 msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:251
-msgid "Restore"
+msgid "_Restore"
 msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:254
-msgid "Minimize"
+msgid "Mi_nimize"
 msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:258
-msgid "Quit"
+msgid "_Quit"
 msgstr ""
 
 #: ../StandardPlugins/Bookmarks/src/BookmarkDockItem.cs:86
-msgid "Remove"
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:157
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:179
+msgid "_Remove"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:342
-msgid "Digital Clock"
+#: ../StandardPlugins/Bookmarks/src/BookmarkDockItem.cs:87
+msgid "Reset _Color"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:348
-msgid "24-Hour Clock"
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:344
+msgid "Di_gital Clock"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:354
-msgid "Show Date"
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:350
+msgid "24-Hour _Clock"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:360
-msgid "Select Theme"
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:356
+msgid "Show _Date"
+msgstr ""
+
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:362
+msgid "Select _Theme"
 msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:45
@@ -225,33 +228,33 @@ msgstr ""
 msgid "Account validation succeeded!"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:196
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:192
 msgid "Username or Password not set"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:246
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:242
 msgid "(no subject)"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:264
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:260
 #, csharp-format
 msgid "From: {0}"
 msgstr ""
 
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:271
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:275
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:279
 msgid "Feed Error"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:284
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:280
 msgid "Invalid Username"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:288
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:284
 msgid "Network Error"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:293
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:289
 msgid "General Error"
 msgstr ""
 
@@ -259,36 +262,40 @@ msgstr ""
 msgid "Labels"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:89
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:91
 msgid "No unread mail"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:91
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:93
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:111
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:113
 msgid "Checking mail..."
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:244
-msgid "View "
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:245
+msgid "_View "
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:249
-msgid "Compose Mail"
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:250
+msgid "_Compose Mail"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:264
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:284
-msgid "Settings"
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:265
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:286
+msgid "_Settings"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:272
-msgid "Check Now"
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:273
+msgid "Check _Now"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:279
+msgid "_Reset Color"
 msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
@@ -330,11 +337,6 @@ msgstr ""
 msgid "Move _Down"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:157
-#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:179
-msgid "_Remove"
-msgstr ""
-
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:180
 msgid "Add _Label"
 msgstr ""
@@ -345,11 +347,11 @@ msgid "_Add"
 msgstr ""
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:98
-msgid "Eject"
+msgid "_Eject"
 msgstr ""
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:98
-msgid "Unmount"
+msgid "_Unmount"
 msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:168
@@ -381,15 +383,15 @@ msgid "C_lear"
 msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:101
-msgid "Clear Recent Documents..."
+msgid "_Clear Recent Documents..."
 msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:169
-msgid "Open Trash"
+msgid "_Open Trash"
 msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:171
-msgid "Empty Trash"
+msgid "_Empty Trash"
 msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:193
@@ -417,22 +419,22 @@ msgstr ""
 msgid "Network Error: "
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:76
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:85
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:78
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:87
 msgid "Fetching data..."
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:264
-msgid "Radar Map"
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:266
+msgid "Radar _Map"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:277
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:279
 #, csharp-format
 msgid "{0}'s Forecast"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:291
-msgid "Reload Weather Data"
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:293
+msgid "_Reload Weather Data"
 msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:88
@@ -460,11 +462,11 @@ msgid "Use _Metric Units"
 msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:87
-msgid "Today"
+msgid "_Today"
 msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:90
-msgid "Tomorrow"
+msgid "T_omorrow"
 msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:339
