@@ -53,6 +53,11 @@ namespace WeatherDocklet
 			SetDefaultSize (350, 400);
 		}
 		
+		protected override void OnClose ()
+		{
+			Hide ();
+		}
+		
 		protected override void OnResponse (ResponseType response_id)
 		{
 			Hide ();

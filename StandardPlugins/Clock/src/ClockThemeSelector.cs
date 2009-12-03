@@ -112,6 +112,11 @@ namespace Clock
 				DockItem.SetTheme ((string) model.GetValue (iter, 0));
 		}
 		
+		protected override void OnClose ()
+		{
+			Hide ();
+		}
+		
 		protected override void OnResponse (ResponseType response_id)
 		{
 			Hide ();
