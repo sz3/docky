@@ -229,30 +229,6 @@ namespace Docky.Interface
 			surface.DrawSlice (slices[2], new Gdk.Rectangle (surface.Width - AbstractDockItem.HoverTextHeight / 2, 0, AbstractDockItem.HoverTextHeight / 2, AbstractDockItem.HoverTextHeight));
 		}
 		
-		void DrawSlice (DockySurface target, DockySurface slice, int xOffset, int width)
-		{
-			// simple case goes here
-			if (width == slice.Width) {
-				slice.Internal.Show (target.Context, xOffset, 0);
-				return;
-			}
-			
-			int columns = (width / slice.Width) + 1;
-			
-			target.Context.Rectangle (xOffset, 0, width, AbstractDockItem.HoverTextHeight);
-			target.Context.Clip ();
-			
-			for (int c = 0; c < columns; c++) {
-				int x = xOffset + c * slice.Width;
-				
-				target.Context.SetSource (slice.Internal, x, 0);
-				target.Context.Rectangle (x, 0, slice.Width, AbstractDockItem.HoverTextHeight);
-				target.Context.Fill ();
-			}
-			
-			target.Context.ResetClip ();
-		}
-		
 		void ResetBackgroundBuffer ()
 		{
 			if (background_buffer != null) {
