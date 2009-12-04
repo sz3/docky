@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -15,7 +14,7 @@
    height="120"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.47pre4 r22446"
+   inkscape:version="0.46"
    sodipodi:docname="menu.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    inkscape:export-filename="/home/daniel/elementary/Docky2/menu_experiment.png"
@@ -33,8 +32,8 @@
     </rdf:RDF>
   </metadata>
   <sodipodi:namedview
-     inkscape:window-height="1030"
-     inkscape:window-width="1680"
+     inkscape:window-height="789"
+     inkscape:window-width="1440"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      guidetolerance="10.0"
@@ -45,17 +44,17 @@
      pagecolor="#ffffff"
      id="base"
      showgrid="false"
-     inkscape:zoom="6.5416667"
-     inkscape:cx="50"
+     inkscape:zoom="4.8416667"
+     inkscape:cx="57.435456"
      inkscape:cy="60"
      inkscape:window-x="0"
-     inkscape:window-y="1"
+     inkscape:window-y="24"
      inkscape:current-layer="svg2"
      borderlayer="false"
      inkscape:window-maximized="1"
      inkscape:showpageshadow="false"
      showborder="false"
-     showguides="true"
+     showguides="false"
      inkscape:guide-bbox="true">
     <inkscape:grid
        type="xygrid"
@@ -79,24 +78,6 @@
          offset="1"
          id="stop3623" />
     </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3619"
-       id="linearGradient3625"
-       x1="60.5"
-       y1="4"
-       x2="60.5"
-       y2="10.268016"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3619"
-       id="linearGradient3603"
-       gradientUnits="userSpaceOnUse"
-       x1="60.5"
-       y1="4"
-       x2="60.5"
-       y2="10.268016" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3619"
