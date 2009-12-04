@@ -193,6 +193,8 @@ namespace Docky.Items
 			internal set;
 		}
 		
+		public const int HoverTextHeight = 26;
+		
 		public AbstractDockItem ()
 		{
 			ScalableRendering = true;
@@ -633,7 +635,7 @@ namespace Docky.Items
 		/// <returns>
 		/// A <see cref="DockySurface"/>
 		/// </returns>
-		public DockySurface HoverTextSurface (DockySurface model, Style style)
+		public DockySurface HoverTextSurface (DockySurface model, Style style, bool isLight)
 		{
 			if (string.IsNullOrEmpty (HoverText))
 				return null;
@@ -655,21 +657,14 @@ namespace Docky.Items
 				
 				int textWidth = inkRect.Width;
 				int textHeight = logicalRect.Height;
-				int buffer = 12;
-				text_buffer = new DockySurface (textWidth + buffer, textHeight + buffer, model);
+				int buffer = HoverTextHeight - textHeight;
+				text_buffer = new DockySurface (textWidth + buffer, HoverTextHeight, model);
 				
 				Cairo.Context cr = text_buffer.Context;
-				cr.RoundedRectangle (.5, .5, text_buffer.Width - 1, text_buffer.Height - 1, buffer / 2);
-				cr.Color = new Cairo.Color (0, 0, 0, .8);
-				cr.FillPreserve ();
-				
-				cr.Color = new Cairo.Color (1, 1, 1, .3);
-				cr.LineWidth = 1;
-				cr.Stroke ();
 				
 				cr.MoveTo (buffer / 2, buffer / 2);
 				Pango.CairoHelper.LayoutPath (cr, layout);
-				cr.Color = new Cairo.Color (1, 1, 1);
+				cr.Color = isLight ? new Cairo.Color (0.2, 0.2, 0.2) : new Cairo.Color (1, 1, 1);
 				cr.Fill ();
 				
 				layout.Dispose ();

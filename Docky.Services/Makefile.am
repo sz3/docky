@@ -44,3 +44,5 @@ REFERENCES =  \
 EXTRA_DIST += Docky.Services.dll.config
 
 module_DATA += Docky.Services.dll.config
+
+MCS_FLAGS += -unsafe
