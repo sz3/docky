@@ -46,6 +46,8 @@ namespace Docky.Menus
 		
 		public int TextWidth { get; protected set; }
 		
+		Gdk.Pixbuf pixbuf, emblem;
+		
 		internal MenuItemWidget (MenuItem item) : base()
 		{
 			TextColor = new Cairo.Color (1, 1, 1);
@@ -160,7 +162,12 @@ namespace Docky.Menus
 			
 			Gdk.Rectangle allocation = Allocation;
 			
-			Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (item.Icon, allocation.Height - IconBuffer * 2);
+			int pixbufSize = allocation.Height - IconBuffer * 2;
+			if (pixbuf == null || (pixbuf.Height != pixbufSize && pixbuf.Width != pixbufSize)) {
+				if (pixbuf != null)
+					pixbuf.Dispose ();
+				pixbuf = DockServices.Drawing.LoadIcon (item.Icon, allocation.Height - IconBuffer * 2);
+			}
 			
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
 				if (Selected && !item.Disabled) {
@@ -180,10 +187,13 @@ namespace Docky.Menus
 				}
 				
 				if (!string.IsNullOrEmpty (item.Emblem)) {
-					Gdk.Pixbuf emblem = DockServices.Drawing.LoadIcon (item.Emblem, allocation.Height - IconBuffer * 2);
+					if (emblem == null || (emblem.Height != pixbufSize && emblem.Width != pixbufSize)) {
+						if (emblem != null)
+							emblem.Dispose ();
+						emblem = DockServices.Drawing.LoadIcon (item.Emblem, allocation.Height - IconBuffer * 2);
+					}
 					PlacePixbuf (cr, emblem, allocation);
 					cr.Paint ();
-					emblem.Dispose ();
 				}
 			
 				Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
@@ -204,8 +214,17 @@ namespace Docky.Menus
 				cr.Fill ();
 			}
 			
-			pixbuf.Dispose ();
 			return true;
+		}
+		
+		public override void Dispose ()
+		{
+			if (pixbuf != null)
+				pixbuf.Dispose ();
+			
+			if (emblem != null)
+				emblem.Dispose ();
+			base.Dispose ();
 		}
 	}
 }

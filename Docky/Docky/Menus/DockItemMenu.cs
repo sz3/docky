@@ -144,9 +144,10 @@ namespace Docky.Menus
 		public void SetItems (MenuList items)
 		{
 			if (Container.Child != null) {
-				foreach (Gtk.Widget widget in (Container.Child as VBox).Children)
+				foreach (Gtk.Widget widget in (Container.Child as VBox).Children) {
+					widget.Dispose ();
 					widget.Destroy ();
-				
+				}
 				Container.Remove (Container.Child);
 			}
 			
