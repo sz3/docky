@@ -60,6 +60,7 @@ namespace Clock
 				digital = value;
 				prefs.Set<bool> ("ShowDigital", value);
 				CheckForThemes ();
+				ScalableRendering = !digital;
 			}
 		}
 		
@@ -151,7 +152,7 @@ namespace Clock
 		
 		public ClockDockItem ()
 		{
-			ScalableRendering = false;
+			ScalableRendering = !ShowDigital;
 			
 			painter = new CalendarPainter ();
 			CheckForThemes ();
