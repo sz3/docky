@@ -163,6 +163,9 @@
     <EmbeddedResource Include="Resources\classic.svg">
       <LogicalName>classic.svg</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\tooltip.svg">
+      <LogicalName>tooltip.svg</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\menu.svg">
       <LogicalName>menu.svg</LogicalName>
     </EmbeddedResource>

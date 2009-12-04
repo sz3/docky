@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -13,7 +14,7 @@
    height="26"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.46"
+   inkscape:version="0.47pre4 r22446"
    sodipodi:docname="tooltip.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    inkscape:export-filename="/home/daniel/elementary/Docky2/menu_experiment.png"
@@ -31,8 +32,8 @@
     </rdf:RDF>
   </metadata>
   <sodipodi:namedview
-     inkscape:window-height="789"
-     inkscape:window-width="1440"
+     inkscape:window-height="1054"
+     inkscape:window-width="1920"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      guidetolerance="10.0"
@@ -44,10 +45,10 @@
      id="base"
      showgrid="false"
      inkscape:zoom="22.346154"
-     inkscape:cx="19.5"
-     inkscape:cy="13"
+     inkscape:cx="11.534423"
+     inkscape:cy="12.910499"
      inkscape:window-x="0"
-     inkscape:window-y="24"
+     inkscape:window-y="0"
      inkscape:current-layer="svg2"
      borderlayer="true"
      inkscape:window-maximized="1"
@@ -64,9 +65,17 @@
        snapvisiblegridlinesonly="true" />
   </sodipodi:namedview>
   <defs
-     id="defs4" />
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 13 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="39 : 13 : 1"
+       inkscape:persp3d-origin="19.5 : 8.6666667 : 1"
+       id="perspective2888" />
+  </defs>
   <rect
-     style="opacity:0.8;fill:#141414;fill-opacity:0.94117647;fill-rule:nonzero;stroke:#b4b4b4;stroke-width:1.00000012;stroke-linecap:square;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+     style="opacity:1;fill:#000000;fill-opacity:0.80000000999999998;fill-rule:nonzero;stroke:#ffffff;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.30196079999999997;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
      id="rect2400"
      width="38"
      height="25"
