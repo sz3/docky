@@ -45,7 +45,6 @@ namespace Docky.Services
 		}
 		
 		public bool IsIconLight (string icon) {
-			int dark = 0;
 			int light = 0;
 			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (icon)) {
 				unsafe {
@@ -58,7 +57,7 @@ namespace Docky.Services
 								if (max > byte.MaxValue / 2)
 									light++;
 								else
-									dark++;
+									light--;
 							}
 							
 							pixelPtr += 4;
@@ -68,7 +67,7 @@ namespace Docky.Services
 				}
 			}
 			
-			return light > dark;
+			return light > 0;
 		}
 		
 		// load an icon specifying the width and height
