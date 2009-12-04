@@ -49,23 +49,23 @@ namespace NPR
 		
 		public NPRItemProvider ()
 		{
-			ReloadStations ();
+			//ReloadStations ();
 			
 			NPR.StationsUpdated += delegate (object sender, StationsUpdatedEventArgs args) {
 				switch (args.UpdateAction) {
 				case StationUpdateAction.Added:
-					AddStation (args.StationID);
+					//AddStation (args.StationID);
 					break;
 				case StationUpdateAction.Removed:
-					RemoveStation (args.StationID);
+					//RemoveStation (args.StationID);
 					break;
 				}
 			};
 		}
-		
+		/*
 		void AddStation (int stationID)
 		{
-			items.Add (new Station (stationID));
+			items.Add (new StationDockItem (stationID));
 			
 			items.Cast <Station> ().Where (s => s.ID < 0).ToList ().ForEach (station => {
 				items.Remove (station);
@@ -77,7 +77,7 @@ namespace NPR
 		
 		void RemoveStation (int stationID)
 		{
-			Station station = items.Cast <Station> ().Where (s => s.ID == stationID).First ();
+			StationDockItem station = items.Cast <Station> ().Where (s => s.ID == stationID).First ();
 			
 			items.Remove (station);
 			Items = items;
@@ -85,6 +85,7 @@ namespace NPR
 			station.Dispose ();
 			
 			MaybeAddNullStation ();
+			
 		}
 		
 		void MaybeAddNullStation ()
@@ -107,5 +108,6 @@ namespace NPR
 			
 			MaybeAddNullStation ();
 		}
+		*/
 	}
 }

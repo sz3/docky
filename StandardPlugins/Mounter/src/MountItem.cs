@@ -24,6 +24,7 @@ using Mono.Unix;
 
 using Docky.Items;
 using Docky.Menus;
+using Docky.Widgets;
 using Docky.Services;
 
 namespace Mounter

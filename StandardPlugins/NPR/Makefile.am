@@ -11,8 +11,6 @@ FILES = \
 	src/StationUrl.cs \
 	src/StationSearchWidget.cs \
 	src/ConfigDialog.cs \
-	src/StationsView.cs \
-	src/StationTile.cs \
 	src/WrapLabel.cs \
 	gtk-gui/NPR.StationSearchWidget.cs \
 	gtk-gui/generated.cs
@@ -30,5 +28,6 @@ REFERENCES =  \
 	$(DOCKY_CAIRO_LIBS) \
 	$(DOCKY_ITEMS_LIBS) \
 	$(DOCKY_SERVICES_LIBS) \
+	$(DOCKY_WIDGETS_LIBS) \
 	$(GIO_SHARP_LIBS) \
 	$(GTK_SHARP_20_LIBS)

@@ -112,5 +112,12 @@ namespace NPR
 			
 			return APIReturn (stationsUrl, query).Element ("station");
 		}
+		
+		void ShowConfig ()
+		{
+			if (ConfigDialog.instance == null)
+				ConfigDialog.instance = new ConfigDialog ();
+			ConfigDialog.instance.Show ();
+		}
 	}
 }

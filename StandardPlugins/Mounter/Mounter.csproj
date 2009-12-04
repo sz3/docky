@@ -63,5 +63,9 @@
       <Project>{8A6E0EDD-6443-4F99-9EAC-D9CC906F080D}</Project>
       <Name>Docky.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Docky.Widgets\Docky.Widgets.csproj">
+      <Project>{9CF2F475-7848-4333-9A35-93E8224653B3}</Project>
+      <Name>Docky.Widgets</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

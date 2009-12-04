@@ -26,13 +26,14 @@ using GLib;
 using Docky.Items;
 using Docky.Menus;
 using Docky.Services;
+using Docky.Widgets;
 
 using Mono.Unix;
 
 namespace NPR
 {
 
-	public class Station : IconDockItem
+	public class Station : AbstractDockItem
 	{
 		public string Name { get; private set; }
 		public int ID { get; private set; }
@@ -42,25 +43,25 @@ namespace NPR
 		public string MarketCity { get; private set; }
 		public IEnumerable<StationUrl> StationUrls { get; private set; }
 		
-		public event EventHandler FinishedLoading;
-		
 		private string DefaultLogo { get; set; }
 		private string LogoFile { get; set; }
 		private bool IsSetUp { get; set; }
+		/*
 		private bool IsReady {
 			get {
 				return ((State & ItemState.Wait) != ItemState.Wait) && IsSetUp;
 			}
 		}
+		*/
 		
 		public Station (int id)
 		{
-			State |= ItemState.Wait;
+			//State |= ItemState.Wait;
 			
 			Icon = DefaultLogo = "nprlogo.gif@" + GetType ().Assembly.FullName;
 			
 			if (id > 0) {
-				HoverText = Catalog.GetString ("Fetching information...");
+				//HoverText = Catalog.GetString ("Fetching information...");
 				DockServices.System.RunOnThread (() => {
 					LoadDataFromXElement (NPR.StationXElement (id));
 				});
@@ -69,14 +70,14 @@ namespace NPR
 				ID = id;
 				Name = "No stations found.";
 				TagLine = "Please try your search again.";
-				HoverText = Catalog.GetString ("Click to add NPR stations");
-				State ^= ItemState.Wait;
+				//HoverText = Catalog.GetString ("Click to add NPR stations");
+				//State ^= ItemState.Wait;
 			}
 		}
 		
 		public Station (XElement stationElement)
 		{
-			State |= ItemState.Wait;
+			//State |= ItemState.Wait;
 			
 			Icon = DefaultLogo = "nprlogo.gif@" + GetType ().Assembly.FullName;
 			
@@ -126,7 +127,7 @@ namespace NPR
 		
 		void SetFinish ()
 		{
-			State ^= ItemState.Wait;
+			//State ^= ItemState.Wait;
 			IsSetUp = true;
 			
 			// try loading the file, if this fails, then we use the backup.
@@ -141,30 +142,10 @@ namespace NPR
 				Icon = DefaultLogo;
 			}
 			
-			string hover = (string.IsNullOrEmpty (TagLine)) ? Name : string.Format ("{0} : {1}", Name, TagLine);
-			HoverText = hover;
+			//string hover = (string.IsNullOrEmpty (TagLine)) ? Name : string.Format ("{0} : {1}", Name, TagLine);
+			//HoverText = hover;
 			
-			if (FinishedLoading != null)
-				FinishedLoading (this, EventArgs.Empty);
-		}
-		
-		public override string UniqueID ()
-		{
-			return Name + TagLine;
-		}
-
-		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
-		{			
-			if (button == 1) {
-				if (IsReady)
-					DockServices.System.Open (StationUrls.First (u => u.UrlType == StationUrlType.OrgHomePage).Target);
-				else
-					ShowConfig ();
-				
-				return ClickAnimation.Bounce;
-			}
-			
-			return ClickAnimation.None;
+			OnFinishedLoading ();
 		}
 		
 		void PlayStream (string url)
@@ -191,14 +172,27 @@ namespace NPR
 				}
 			});
 		}
-
-		void ShowConfig ()
-		{
-			if (ConfigDialog.instance == null)
-				ConfigDialog.instance = new ConfigDialog ();
-			ConfigDialog.instance.Show ();
-		}
 		
+		/*
+		public override string UniqueID ()
+		{
+			return Name + TagLine;
+		}
+
+		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
+		{			
+			if (button == 1) {
+				if (IsReady)
+					DockServices.System.Open (StationUrls.First (u => u.UrlType == StationUrlType.OrgHomePage).Target);
+				else
+					ShowConfig ();
+				
+				return ClickAnimation.Bounce;
+			}
+			
+			return ClickAnimation.None;
+		}
+
 		protected override MenuList OnGetMenuItems ()
 		{
 			MenuList list = base.OnGetMenuItems ();
@@ -278,7 +272,7 @@ namespace NPR
 					}));
 			return list;
 		}
-
+		*/
 		#endregion
 		
 	}

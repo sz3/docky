@@ -23,6 +23,7 @@ using System.Xml.Linq;
 using Gtk;
 
 using Docky.Services;
+using Docky.Widgets;
 
 namespace NPR
 {
@@ -31,13 +32,13 @@ namespace NPR
 	public partial class StationSearchWidget : Gtk.Bin
 	{
 		
-		StationsView view;
+		TileView view;
 
 		public StationSearchWidget ()
 		{
 			this.Build ();
 			
-			view = new StationsView ();
+			view = new TileView ();
 			
 			stationsScroll.HscrollbarPolicy = PolicyType.Never;
 			stationsScroll.AddWithViewport (view);
@@ -58,7 +59,7 @@ namespace NPR
 			DockServices.System.RunOnThread (() => {
 				foreach (XElement stationXElement in NPR.MyStations.Select (id => NPR.StationXElement (id))) {
 					DockServices.System.RunOnMainThread (() => {
-						view.AppendStation (new Station (stationXElement));
+						view.AppendTile (new Station (stationXElement));
 					});
 				}
 			});
@@ -81,11 +82,11 @@ namespace NPR
 				IEnumerable<Station> stations = NPR.SearchStations (zip).OrderByDescending (s => s.Signal);
 				DockServices.System.RunOnMainThread (() => {
 					if (stations.Count () == 0) {
-						view.AppendStation (new Station (-1));
+						view.AppendTile (new Station (-1));
 						return;
 					}
 					foreach (Station s in stations)
-						view.AppendStation (s);
+						view.AppendTile (s);
 				});
 			});
 		}

@@ -128,6 +128,8 @@ DOCKY_ITEMS_LIBS="-r:$(pwd)/build/Docky.Items.dll"
 AC_SUBST([DOCKY_ITEMS_LIBS])
 DOCKY_SERVICES_LIBS="-r:$(pwd)/build/Docky.Services.dll"
 AC_SUBST([DOCKY_SERVICES_LIBS])
+DOCKY_WIDGETS_LIBS="-r:$(pwd)/build/Docky.Widgets.dll"
+AC_SUBST([DOCKY_WIDGETS_LIBS])
 
 GIO_SHARP_LIBS="-r:$(pwd)/build/gio-sharp.dll"
 AC_SUBST([GIO_SHARP_LIBS])
@@ -173,6 +175,7 @@ Docky/Makefile
 Docky.CairoHelper/Makefile
 Docky.Items/Makefile
 Docky.Items/Resources/Docky.Items.addin.xml
+Docky.Widgets/Makefile
 Docky.Services/Makefile
 Docky.Services/AssemblyInfo.cs
 Docky.Windowing/Makefile

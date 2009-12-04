@@ -8,6 +8,7 @@ SUBDIRS = \
 	lib \
 	po \
 	Docky.Services \
+	Docky.Widgets \
 	Docky.Zeitgeist \
 	Docky.CairoHelper \
 	Docky.Windowing \
