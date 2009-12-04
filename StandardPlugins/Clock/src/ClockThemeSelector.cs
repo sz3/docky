@@ -82,10 +82,9 @@ namespace Clock
 		{
 			List<string> themes = new List<string> ();
 			
-			foreach (string path in DockItem.ThemeURIs)
-				if (Directory.Exists (path))
-					foreach (DirectoryInfo p in new DirectoryInfo (path).GetDirectories ())
-						themes.Add (p.Name);
+			if (Directory.Exists (DockItem.ThemeFolder))
+				foreach (DirectoryInfo p in new DirectoryInfo (DockItem.ThemeFolder).GetDirectories ())
+					themes.Add (p.Name);
 			
 			labelTreeStore.Clear ();
 			
