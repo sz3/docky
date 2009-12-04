@@ -42,7 +42,7 @@ namespace Docky.Menus
 				disabled = value;
 				if (DisabledChanged != null)
 					DisabledChanged (this, EventArgs.Empty);
-			} 
+			}
 		}
 		
 		public char? Mnemonic { get; protected set; }
