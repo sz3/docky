@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.0"
+   width="39"
+   height="26"
+   id="svg2">
+  <defs
+     id="defs4">
+    <linearGradient
+       x1="19.801878"
+       y1="-0.043123405"
+       x2="19.801878"
+       y2="6.1712933"
+       id="linearGradient3160"
+       xlink:href="#linearGradient3154"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       id="linearGradient3154">
+      <stop
+         id="stop3156"
+         style="stop-color:#ffffff;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop3158"
+         style="stop-color:#ffffff;stop-opacity:0"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3164">
+      <stop
+         id="stop3166"
+         style="stop-color:#f0f0f1;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop3168"
+         style="stop-color:#ffffff;stop-opacity:1"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       x1="46.490067"
+       y1="-0.055477817"
+       x2="46.490067"
+       y2="6.1589398"
+       id="linearGradient2486"
+       xlink:href="#linearGradient3154"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-104.32702,-0.4122211)" />
+    <linearGradient
+       x1="51.854305"
+       y1="99.918022"
+       x2="51.854305"
+       y2="111.20135"
+       id="linearGradient2489"
+       xlink:href="#linearGradient3164"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-106.20654,-7.0352847)" />
+  </defs>
+  <rect
+     width="38"
+     height="25"
+     rx="3.9999995"
+     ry="4"
+     x="0.50000006"
+     y="0.50000006"
+     id="rect2400"
+     style="opacity:0.8;fill:#f2f2f4;fill-opacity:0.60392157;fill-rule:nonzero;stroke:url(#linearGradient3160);stroke-width:1.00000012;stroke-linecap:square;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+</svg>
