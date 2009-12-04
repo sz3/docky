@@ -77,7 +77,7 @@ namespace Bookmarks
 		{
 			items = new List<AbstractDockItem> ();
 
-			computer = new NonRemovableItem ("computer://", "Computer", "computer");
+			computer = new NonRemovableItem ("computer://", Catalog.GetString ("Computer"), "computer");
 			home = new NonRemovableItem (string.Format ("file://{0}",
 			    Environment.GetFolderPath (Environment.SpecialFolder.Personal)), null, null);
 		

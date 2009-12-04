@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-03 15:45-0600\n"
+"POT-Creation-Date: 2009-12-04 14:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -192,6 +192,10 @@ msgstr ""
 msgid "_Quit"
 msgstr ""
 
+#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:80
+msgid "Computer"
+msgstr ""
+
 #: ../StandardPlugins/Bookmarks/src/BookmarkDockItem.cs:86
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:157
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:179
@@ -202,19 +206,19 @@ msgstr ""
 msgid "Reset _Color"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:342
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:343
 msgid "Di_gital Clock"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:348
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:349
 msgid "24-Hour _Clock"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:354
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:355
 msgid "Show _Date"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:360
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:361
 msgid "Select _Theme"
 msgstr ""
 
@@ -398,8 +402,22 @@ msgstr ""
 msgid "_Unmount"
 msgstr ""
 
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:51
+msgid "Network Manager"
+msgstr ""
+
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:90
+msgid "Connecting..."
+msgstr ""
+
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:99
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:164
 msgid "Disconnected"
+msgstr ""
+
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:108
+#, csharp-format
+msgid "Connected: {0}"
 msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:76

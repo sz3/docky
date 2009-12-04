@@ -48,7 +48,7 @@ namespace NetworkManagerDocklet
 			NM = new NetworkManager ();
 			NM.DeviceStateChanged += OnDeviceStateChanged;
 			
-			HoverText = "Network Manager";
+			HoverText = Catalog.GetString ("Network Manager");
 			Icon = SetDockletIcon ();
 			
 			GLib.Timeout.Add (10 * 1000, delegate {
@@ -87,7 +87,7 @@ namespace NetworkManagerDocklet
 					.FirstOrDefault ();
 				
 				if (dev != null) {
-					HoverText = "Connecting...";
+					HoverText = Catalog.GetString ("Connecting...");
 					State |= ItemState.Wait;
 					return "nm-no-connection";
 				}
@@ -96,7 +96,7 @@ namespace NetworkManagerDocklet
 				
 				// no connection
 				if (!NM.ActiveConnections.Any ()) {
-					HoverText = "Disconnected";
+					HoverText = Catalog.GetString ("Disconnected");
 					return "nm-no-connection";
 				}
 				
@@ -105,7 +105,7 @@ namespace NetworkManagerDocklet
 					string ssid = NM.ActiveConnections.OfType<WirelessConnection> ().First ().SSID;
 					byte strength = NM.DevManager.NetworkDevices.OfType<WirelessDevice> ().First ().APBySSID (ssid).Strength;
 					
-					HoverText = string.Format ("Connected: {0}", ssid);
+					HoverText = string.Format (Catalog.GetString ("Connected: {0}"), ssid);
 					
 					return APIconFromStrength (strength);
 				}
