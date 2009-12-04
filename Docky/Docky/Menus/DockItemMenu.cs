@@ -162,7 +162,7 @@ namespace Docky.Menus
 					MenuItemWidget menuItem = new MenuItemWidget (item);
 					menuItem.SelectedChanged += HandleSelectedChanged;
 					if (IsLight) {
-						menuItem.TextColor = new Cairo.Color (0.2, 0.2, 0.2);
+						menuItem.TextColor = new Cairo.Color (0.1, 0.1, 0.1);
 					} else {
 						menuItem.TextColor = new Cairo.Color (1, 1, 1);
 					}

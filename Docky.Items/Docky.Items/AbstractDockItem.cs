@@ -645,7 +645,7 @@ namespace Docky.Items
 				Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
 				
 				layout.FontDescription = style.FontDescription;
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (10);
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (11);
 				layout.FontDescription.Weight = Pango.Weight.Bold;
 				layout.Ellipsize = Pango.EllipsizeMode.End;
 				layout.Width = Pango.Units.FromPixels (500);
@@ -664,7 +664,7 @@ namespace Docky.Items
 				
 				cr.MoveTo (buffer / 2, buffer / 2);
 				Pango.CairoHelper.LayoutPath (cr, layout);
-				cr.Color = isLight ? new Cairo.Color (0.2, 0.2, 0.2) : new Cairo.Color (1, 1, 1);
+				cr.Color = isLight ? new Cairo.Color (0.1, 0.1, 0.1) : new Cairo.Color (1, 1, 1);
 				cr.Fill ();
 				
 				layout.Dispose ();
