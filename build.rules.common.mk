@@ -8,6 +8,9 @@ RESOURCES_EXPANDED = $(addprefix $(srcdir)/, $(RESOURCES))
 RESOURCES_BUILD = $(foreach resource, $(RESOURCES_EXPANDED), \
         -resource:$(resource),$(notdir $(resource)))
 
+COMPONENT_REFERENCES = $(foreach ref, $(PROJECT_REFERENCES),-r:$(BUILD_DIR)/$(ref).dll)
+COMPONENT_DEPS = $(foreach ref,$(PROJECT_REFERENCES),$(BUILD_DIR)/$(ref).dll)
+
 BUILD_DIR = $(top_builddir)/build
 
 ASSEMBLY_EXTENSION = $(strip $(patsubst library, dll, $(TARGET)))

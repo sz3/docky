@@ -8,18 +8,22 @@ PKG_CONFIG_FILES = docky.widgets.pc
 
 FILES = \
 	AssemblyInfo.cs \
-	Docky.Widgets/ConfigDialog.cs \
-	Docky.Widgets/ExtensionMethods.cs \
+	Docky.Widgets/AbstractTile.cs \
 	Docky.Widgets/Actor.cs \
 	Docky.Widgets/AnimatedBox.cs \
 	Docky.Widgets/AnimatedHBox.cs \
 	Docky.Widgets/AnimatedVBox.cs \
 	Docky.Widgets/AnimatedWidget.cs \
 	Docky.Widgets/Choreographer.cs \
+	Docky.Widgets/ConfigDialog.cs \
+	Docky.Widgets/ExtensionMethods.cs \
+	Docky.Widgets/ITile.cs \
 	Docky.Widgets/SingleActorStage.cs \
 	Docky.Widgets/Stage.cs \
+	Docky.Widgets/Tile.cs \
+	Docky.Widgets/TileView.cs \
 	Docky.Widgets/WrapLabel.cs
-	
+
 REFERENCES =  \
 	System \
 	System.Core \

@@ -19,15 +19,16 @@ RESOURCES = \
 	Resources/NPR.addin.xml \
 	Resources/nprlogo.gif
 
+PROJECT_REFERENCES = 	Docky.CairoHelper \
+			Docky.Items \
+			Docky.Services \
+			Docky.Widgets
+
 REFERENCES =  \
 	System \
 	System.Web \
 	System.Xml.Linq \
 	System.Core \
 	Mono.Posix \
-	$(DOCKY_CAIRO_LIBS) \
-	$(DOCKY_ITEMS_LIBS) \
-	$(DOCKY_SERVICES_LIBS) \
-	$(DOCKY_WIDGETS_LIBS) \
 	$(GIO_SHARP_LIBS) \
 	$(GTK_SHARP_20_LIBS)
