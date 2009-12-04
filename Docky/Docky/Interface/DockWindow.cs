@@ -1079,6 +1079,9 @@ namespace Docky.Interface
 				wait_buffer.Dispose ();
 				wait_buffer = null;
 			}
+			
+			foreach (AbstractDockItem item in Items)
+				item.ResetBuffers ();
 		}
 		#endregion
 		
