@@ -4,9 +4,6 @@
 
 include $(top_srcdir)/build.rules.common.mk
 
-COMPONENT_REFERENCES = $(foreach ref, $(PROJECT_REFERENCES),-r:$(BUILD_DIR)/$(ref).dll)
-COMPONENT_DEPS = $(foreach ref,$(PROJECT_REFERENCES),$(BUILD_DIR)/$(ref).dll)
-
 moduledir = $(pkglibdir)
 # Install libraries as data; there's no need for them to be excutable
 module_DATA = $(foreach file,$(filter %.dll,$(OUTPUT_FILES)),$(file) $(file).mdb) $(foreach file,$(filter %.exe,$(OUTPUT_FILES)),$(file).mdb)

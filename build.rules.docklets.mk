@@ -20,7 +20,7 @@ plugin_DATA = $(OUTPUT_FILES)
 
 # All docklets should be translatable; every plugin will need to link to
 # Mono.Addins for this.
-COMPONENT_REFERENCES = $(MONO_ADDINS_LIBS)
+COMPONENT_REFERENCES += $(MONO_ADDINS_LIBS)
 
 all: $(OUTPUT_FILES)
 
