@@ -1,5 +1,5 @@
 //  
-// Copyright (C) 2009 Chris Szikszoy
+// Copyright (C) 2009 Chris Szikszoy, Robery Dyer
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,45 +14,50 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
-/*
+
 using System;
+using System.Linq;
+using System.Collections.Generic;
 
 using Gtk;
 
-namespace NPR
+namespace Docky.Widgets
 {
 	public class ConfigDialog : Dialog
 	{
-		public static ConfigDialog instance;
+		public static ConfigDialog Instance;
 		
-		StationSearchWidget searchWidget;
-		
-		public ConfigDialog ()
+		public ConfigDialog (string windowTitle, IEnumerable<Widget> widgets) : this (windowTitle, widgets, 350, 400)
 		{
-
+		}
+		                     
+		public ConfigDialog (string windowTitle, IEnumerable<Widget> widgets, int width, int height)
+		{
 			SkipTaskbarHint = true;
 			TypeHint = Gdk.WindowTypeHint.Dialog;
-			WindowPosition = Gtk.WindowPosition.Center;
+			WindowPosition = WindowPosition.Center;
 			KeepAbove = true;
 			Stick ();
 			
-			IconName = Gtk.Stock.Preferences;
+			IconName = Stock.Preferences;
+			Title = windowTitle;
 			
-			searchWidget = new StationSearchWidget ();
-
-			VBox.PackEnd (searchWidget);
+			if (widgets.Count () > 1) {
+				Notebook notebook = new Notebook ();
+				
+				foreach (Widget widget in widgets)
+					notebook.AppendPage (widget, new Label (widget.Name));
+				
+				VBox.PackStart (notebook);
+			} else {
+				VBox.PackStart (widgets.First ());
+			}
+			
 			VBox.ShowAll ();
 			
-			AddButton ("_Close", ResponseType.Close);
-			SetDefaultSize (350, 400);
-			Title = "NPR Configuration";
-
-		}
-		
-		protected override void OnShown ()
-		{
+			this.AddAutoTranslateButton ("gtk-close", ResponseType.Close);
 			
-			base.OnShown ();
+			SetDefaultSize (width, height);
 		}
 		
 		protected override void OnResponse (ResponseType response_id)
@@ -61,4 +66,3 @@ namespace NPR
 		}
 	}
 }
-*/

@@ -1,5 +1,5 @@
 //
-// AddinTile.cs
+// Tile.cs
 //
 // Author:
 //   Aaron Bockover <abockover@novell.com>
@@ -30,14 +30,13 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-using Gtk;
-using Mono.Unix;
-
 using Docky.Services;
 
-namespace NPR
+using Gtk;
+
+namespace Docky.Widgets
 {    
-	public class StationTile : Table
+	internal class Tile : Table
 	{
 		private Button add_remove_button;
 		private Box button_box;
@@ -47,23 +46,24 @@ namespace NPR
 		private Image tileImage;
 		
 		private WrapLabel description;
-        private WrapLabel city;
+        private WrapLabel subDesc;
 		
-		public Station OwnedObject { get; private set; }
+		public AbstractTileObject OwnedObject { get; private set; }
 		public bool Last { get; private set; }
 		
 		public event EventHandler ActiveChanged;
 		
-		public StationTile (Station OwnedObject) : base (3, 3, false)
+		public Tile (AbstractTileObject obj) : base (3, 3, false)
 		{
-			this.OwnedObject = OwnedObject;
+			OwnedObject = obj;	
 			
-			BuildTile ();
-			
-			OwnedObject.FinishedLoading += delegate {
+			OwnedObject.IconUpdated += delegate {
+				Console.WriteLine ("Icon updated.");
 				tileImage.Pixbuf = DockServices.Drawing.LoadIcon (OwnedObject.Icon, 64);
 				tileImage.Show ();
 			};
+			
+			BuildTile ();
 		}
 		
 		private void BuildTile ()
@@ -90,7 +90,7 @@ namespace NPR
 			
 			description = new WrapLabel ();
 			description.Show ();
-			description.Text = OwnedObject.TagLine;
+			description.Text = OwnedObject.Description;
 			description.Wrap = false;
 			
 			Attach (description, 1, 3, 1, 2,
@@ -98,16 +98,18 @@ namespace NPR
 			        AttachOptions.Expand | AttachOptions.Fill, 0, 0);
 			
 			
-			city = new WrapLabel ();
-			city.Markup = String.Format (
-			                                "<small><b>{0}</b> <i>{1}</i></small>", 
-			                                Catalog.GetString ("City:"),
-			                                GLib.Markup.EscapeText (OwnedObject.MarketCity)
-			                                );
+			subDesc = new WrapLabel ();
 			
-			city.Show ();
-			if (OwnedObject.ID > 0)
-				Attach (city, 1, 2, 2, 3,
+			if (!string.IsNullOrEmpty (OwnedObject.SubDescriptionText) &&
+			    !string.IsNullOrEmpty (OwnedObject.SubDescriptionTitle))			
+				subDesc.Markup = String.Format (
+				                                "<small><b>{0}</b> <i>{1}</i></small>", 
+				                                GLib.Markup.EscapeText (OwnedObject.SubDescriptionTitle),
+				                                GLib.Markup.EscapeText (OwnedObject.SubDescriptionText)
+				                                );
+			subDesc.Show ();
+
+			Attach (subDesc, 1, 2, 2, 3,
 			        AttachOptions.Expand | AttachOptions.Fill, 
 			        AttachOptions.Expand | AttachOptions.Fill,  0, 4);
 
@@ -127,7 +129,7 @@ namespace NPR
 			add_remove_button.Add (label);
 			add_remove_button.Clicked += OnAddRemoveClicked;
 			
-			if (OwnedObject.ID > 0)
+			if (OwnedObject.ShowActionButton)
 				box.PackStart (add_remove_button, false, false, 0);
 			
 			Attach (button_box, 2, 3, 2, 3, 
@@ -171,14 +173,14 @@ namespace NPR
 		
 		public void UpdateState ()
 		{
-			bool enabled = NPR.MyStations.Contains ((int)OwnedObject.ID);
+			bool enabled = OwnedObject.Enabled;
 			bool sensitive = enabled || (!enabled && State == StateType.Selected);
 			
 			title.Sensitive = sensitive;
 			description.Sensitive = sensitive;
 			description.Wrap = State == StateType.Selected;
-			city.Visible = State == StateType.Selected;
-			add_remove_button.Label = enabled ? Catalog.GetString ("_Remove") : Catalog.GetString ("_Add");
+			subDesc.Visible = State == StateType.Selected;
+			add_remove_button.Label = enabled ? OwnedObject.ButtonStateEnabledText : OwnedObject.ButtonStateDisabledText;
 		}
 		
 		public void Select (bool select)

@@ -17,23 +17,22 @@
 
 using System;
 
-namespace NPR
+using Gtk;
+
+namespace Docky.Widgets
 {
-	
-	public enum StationUpdateAction {
-		Added,
-		Removed,
-	}
 
-	public class StationsUpdatedEventArgs : EventArgs
+	public static class ExtensionMethods
 	{
-		public Station Station { get; private set; }
-		public StationUpdateAction UpdateAction { get; private set; }
-
-		public StationsUpdatedEventArgs (Station station, StationUpdateAction action)
+		public static void AddAutoTranslateButton (this Dialog d, string gtkString, ResponseType response)
 		{
-			this.Station = station;
-			this.UpdateAction = action;
+			Gtk.Button button = new Gtk.Button();
+            button.CanFocus = true;
+            button.UseStock = true;
+            button.UseUnderline = true;
+            button.Label = gtkString;
+			button.Show ();
+			d.AddActionWidget (button, response);
 		}
 	}
 }

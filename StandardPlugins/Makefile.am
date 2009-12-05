@@ -6,9 +6,9 @@ SUBDIRS = \
 	GMail \
 	Mounter \
 	NetworkManager \
+	NPR \
 	RecentDocuments \
 	Trash \
-	NPR \
 	Weather
 
 DIST_SUBDIRS = \
@@ -18,7 +18,8 @@ DIST_SUBDIRS = \
 	CPUMonitor \
 	GMail \
 	Mounter \
+	NetworkManager \
+	NPR \
 	RecentDocuments \
 	Trash \
-	NPR \
 	Weather

@@ -10,10 +10,7 @@ FILES = \
 	src/StationsUpdatedEventArgs.cs \
 	src/StationUrl.cs \
 	src/StationSearchWidget.cs \
-	src/ConfigDialog.cs \
-	src/StationsView.cs \
-	src/StationTile.cs \
-	src/WrapLabel.cs \
+	src/StationDockItem.cs \
 	gtk-gui/NPR.StationSearchWidget.cs \
 	gtk-gui/generated.cs
 
@@ -21,14 +18,16 @@ RESOURCES = \
 	Resources/NPR.addin.xml \
 	Resources/nprlogo.gif
 
+PROJECT_REFERENCES = 	Docky.CairoHelper \
+			Docky.Items \
+			Docky.Services \
+			Docky.Widgets
+
 REFERENCES =  \
 	System \
 	System.Web \
 	System.Xml.Linq \
 	System.Core \
 	Mono.Posix \
-	$(DOCKY_CAIRO_LIBS) \
-	$(DOCKY_ITEMS_LIBS) \
-	$(DOCKY_SERVICES_LIBS) \
 	$(GIO_SHARP_LIBS) \
 	$(GTK_SHARP_20_LIBS)

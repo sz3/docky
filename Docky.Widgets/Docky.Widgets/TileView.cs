@@ -31,17 +31,19 @@ using System.Linq;
 using System.Collections.Generic;
 using Gtk;
 
+using Docky.Widgets;
 
-namespace NPR
+namespace Docky.Widgets
 {
-	public class StationsView : EventBox
+	[System.ComponentModel.ToolboxItem(true)]
+	public class TileView : EventBox 
 	{
-		private List<StationTile> tiles = new List<StationTile> ();
+		private List<Tile> tiles = new List<Tile> ();
 		private VBox box = new VBox ();
 		
 		private int selected_index = -1;
 		
-		public StationsView ()
+		public TileView ()
 		{
 			CanFocus = true;
 			VisibleWindow = false;
@@ -57,6 +59,39 @@ namespace NPR
 				box.Remove (child);
 			}
 		}
+		
+		public void RemoveTile (AbstractTileObject tileObject)
+		{
+			Tile tile = tiles.First (t => t.OwnedObject == tileObject);
+			
+			if (tile == null)
+				throw new ArgumentException ("Container does not own supplied ITile.  It may have been removed previously", "tileObject");
+	
+			if (selected_index == tiles.IndexOf (tile))
+				ClearSelection ();
+			
+			box.Remove (tile);
+		}
+		
+		public void ClearSelection ()
+		{
+			if (selected_index >= 0 && selected_index < tiles.Count) {
+				tiles[selected_index].Select (false);
+			}
+			
+			selected_index = -1;
+		}		
+		
+		public void AppendTile (AbstractTileObject tileObject)
+		{			
+			Tile tile = new Tile (tileObject);
+			tile.ActiveChanged += OnTileActiveChanged;
+			tile.SizeAllocated += OnTileSizeAllocated;
+			tile.Show ();
+			tiles.Add (tile);
+			
+			box.PackStart (tile, false, false, 0);
+		}		
 
 		private bool changing_styles = false;
 		
@@ -72,36 +107,18 @@ namespace NPR
 			changing_styles = false;
 		}
 		
-		
-		public void AppendStation (Station station)
+		private void OnTileActiveChanged (object o, EventArgs args)
 		{
-			StationTile tile = new StationTile (station);
-			tile.ActiveChanged += OnStationActiveChanged;
-			tile.SizeAllocated += OnStationSizeAllocated;
-			tile.Show ();
-			tiles.Add (tile);
+			Tile tile = o as Tile;
 			
-			box.PackStart (tile, false, false, 0);
-		}
-
-		
-		private void OnStationActiveChanged (object o, EventArgs args)
-		{
-			StationTile tile = o as StationTile;
-			List<int> stations = NPR.MyStations.ToList ();
-			if (stations.Contains ((int)tile.OwnedObject.ID))
-				stations.Remove ((int)tile.OwnedObject.ID);
-			else
-				stations.Add ((int)tile.OwnedObject.ID);
+			tile.OwnedObject.OnActiveChanged ();
 			
-			NPR.MyStations = stations.ToArray ();			
-			
-			foreach (StationTile stationTile in tiles) {
-				stationTile.UpdateState ();
+			foreach (Tile t in tiles) {
+				t.UpdateState ();
 			}
 		}
 		
-		private void OnStationSizeAllocated (object o, SizeAllocatedArgs args)
+		private void OnTileSizeAllocated (object o, SizeAllocatedArgs args)
 		{
 			ScrolledWindow scroll;
 			
@@ -109,13 +126,13 @@ namespace NPR
 				return;
 			}
 			
-			StationTile tile = (StationTile)o;
+			Tile tile = (Tile)o;
 			
 			if (tiles.IndexOf (tile) != selected_index) {
 				return;
 			}
 			
-			Gdk.Rectangle ta = ((StationTile)o).Allocation;
+			Gdk.Rectangle ta = ((Tile)o).Allocation;
 			Gdk.Rectangle va = new Gdk.Rectangle (0, (int)scroll.Vadjustment.Value, 
 			                                      Allocation.Width, Parent.Allocation.Height);
 			
@@ -193,15 +210,6 @@ namespace NPR
 			}
 			
 			QueueResize ();
-		}
-		
-		private void ClearSelection ()
-		{
-			if (selected_index >= 0 && selected_index < tiles.Count) {
-				tiles[selected_index].Select (false);
-			}
-			
-			selected_index = -1;
 		}
 	}
 }

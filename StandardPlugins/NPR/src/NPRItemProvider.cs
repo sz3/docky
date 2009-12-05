@@ -54,43 +54,44 @@ namespace NPR
 			NPR.StationsUpdated += delegate (object sender, StationsUpdatedEventArgs args) {
 				switch (args.UpdateAction) {
 				case StationUpdateAction.Added:
-					AddStation (args.StationID);
+					AddStation (args.Station);
 					break;
 				case StationUpdateAction.Removed:
-					RemoveStation (args.StationID);
+					RemoveStation (args.Station);
 					break;
 				}
 			};
 		}
 		
-		void AddStation (int stationID)
+		void AddStation (Station station)
 		{
-			items.Add (new Station (stationID));
+			items.Add (new StationDockItem (station));
 			
-			items.Cast <Station> ().Where (s => s.ID < 0).ToList ().ForEach (station => {
-				items.Remove (station);
-				station.Dispose ();
+			items.Cast <StationDockItem> ().Where (s => s.OwnedStation.ID < 0).ToList ().ForEach (sdi => {
+				items.Remove (sdi);
+				sdi.Dispose ();
 			});
 			
 			Items = items;
 		}
 		
-		void RemoveStation (int stationID)
+		void RemoveStation (Station station)
 		{
-			Station station = items.Cast <Station> ().Where (s => s.ID == stationID).First ();
+			StationDockItem sdi = items.Cast <StationDockItem> ().Where (s => s.OwnedStation == station).First ();
 			
-			items.Remove (station);
+			items.Remove (sdi);
 			Items = items;
 			
-			station.Dispose ();
+			sdi.Dispose ();
 			
 			MaybeAddNullStation ();
+			
 		}
 		
 		void MaybeAddNullStation ()
 		{
 			if (items.Count () == 0)
-				items.Add (new Station (-1));
+				items.Add (new StationDockItem (NPR.LookupStation (-1)));
 			
 			Items = items;
 		}
@@ -100,7 +101,7 @@ namespace NPR
 			items.Clear ();
 			
 			NPR.MyStations.ToList ().ForEach (s => {
-				items.Add (new Station (s));				
+				items.Add (new StationDockItem (NPR.LookupStation (s)));				
 			});
 				
 			Items = items;

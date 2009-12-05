@@ -5,12 +5,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C65612E7-55E9-4B63-BB47-5DFD4ACE80E5}</ProjectGuid>
+    <ProjectGuid>{9CF2F475-7848-4333-9A35-93E8224653B3}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>NPR</RootNamespace>
-    <AssemblyName>NPR</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <RootNamespace>Docky.Widgets</RootNamespace>
     <ReleaseVersion>2.0</ReleaseVersion>
+    <AssemblyName>Docky.Widgets</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +21,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -29,6 +30,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -36,55 +38,48 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Web" />
-    <Reference Include="Mono.Posix" />
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="gio-sharp, Version=2.14.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\build\gio-sharp.dll</HintPath>
+      <HintPath>..\build\gio-sharp.dll</HintPath>
     </Reference>
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="Mono.Posix" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\NPR.cs" />
-    <Compile Include="src\Station.cs" />
-    <Compile Include="src\StationUrl.cs" />
-    <Compile Include="src\NPRItemProvider.cs" />
-    <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="src\StationsUpdatedEventArgs.cs" />
-    <Compile Include="src\StationDockItem.cs" />
-    <Compile Include="src\StationSearchWidget.cs" />
-    <Compile Include="gtk-gui\NPR.StationSearchWidget.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Docky.Widgets\ConfigDialog.cs" />
+    <Compile Include="Docky.Widgets\ExtensionMethods.cs" />
+    <Compile Include="Docky.Widgets\WrapLabel.cs" />
+    <Compile Include="Docky.Widgets\AnimatedBox.cs" />
+    <Compile Include="Docky.Widgets\AnimatedHBox.cs" />
+    <Compile Include="Docky.Widgets\AnimatedVBox.cs" />
+    <Compile Include="Docky.Widgets\AnimatedWidget.cs" />
+    <Compile Include="Docky.Widgets\SingleActorStage.cs" />
+    <Compile Include="Docky.Widgets\Stage.cs" />
+    <Compile Include="Docky.Widgets\Actor.cs" />
+    <Compile Include="Docky.Widgets\Choreographer.cs" />
+    <Compile Include="Docky.Widgets\TileView.cs" />
+    <Compile Include="Docky.Widgets\Tile.cs" />
+    <Compile Include="Docky.Widgets\HoverImageButton.cs" />
+    <Compile Include="Docky.Widgets\SearchEntry.cs" />
+    <Compile Include="Docky.Widgets\AbstractTileObject.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Docky.Widgets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Docky.Widgets.dll.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <LogicalName>Docky.Widgets.dll.config</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\..\Docky.Items\Docky.Items.csproj">
-      <Project>{AB6E0EDD-6443-4F99-9EAC-DABC906F080D}</Project>
-      <Name>Docky.Items</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Docky.Services\Docky.Services.csproj">
+    <ProjectReference Include="..\Docky.Services\Docky.Services.csproj">
       <Project>{8A6E0EDD-6443-4F99-9EAC-D9CC906F080D}</Project>
       <Name>Docky.Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Docky.Widgets\Docky.Widgets.csproj">
-      <Project>{9CF2F475-7848-4333-9A35-93E8224653B3}</Project>
-      <Name>Docky.Widgets</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\" />
-    <Folder Include="Resources\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\NPR.addin.xml" />
-    <None Include="Resources\nprlogo.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="gtk-gui\gui.stetic">
-      <LogicalName>gui.stetic</LogicalName>
-    </EmbeddedResource>
   </ItemGroup>
 </Project>
