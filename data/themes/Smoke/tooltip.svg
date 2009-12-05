@@ -7,6 +7,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.0"
@@ -29,8 +30,8 @@
     </rdf:RDF>
   </metadata>
   <sodipodi:namedview
-     inkscape:window-height="789"
-     inkscape:window-width="1440"
+     inkscape:window-height="689"
+     inkscape:window-width="1280"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      guidetolerance="10.0"
@@ -41,22 +42,47 @@
      pagecolor="#ffffff"
      id="base"
      showgrid="false"
-     inkscape:zoom="14.25641"
+     inkscape:zoom="5.0404021"
      inkscape:cx="-12.007896"
      inkscape:cy="12.719424"
      inkscape:window-x="0"
      inkscape:window-y="24"
      inkscape:current-layer="svg2"
-     inkscape:window-maximized="0" />
+     inkscape:window-maximized="1" />
   <defs
      id="defs4">
-    <inkscape:perspective
-       sodipodi:type="inkscape:persp3d"
-       inkscape:vp_x="0 : 13 : 1"
-       inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_z="39 : 13 : 1"
-       inkscape:persp3d-origin="19.5 : 8.6666667 : 1"
-       id="perspective7" />
+    <linearGradient
+       gradientTransform="matrix(1.086652,0,0,1.0127177,-4.2797024,-3.9711037)"
+       y2="12.137069"
+       x2="60.5"
+       y1="4"
+       x1="60.5"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3606"
+       xlink:href="#linearGradient3619"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient3619"
+       inkscape:collect="always">
+      <stop
+         id="stop3621"
+         offset="0"
+         style="stop-color:#ffffff;stop-opacity:1;" />
+      <stop
+         id="stop3623"
+         offset="1"
+         style="stop-color:#ffffff;stop-opacity:0;" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3619"
+       id="linearGradient2860"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.086652,0,0,1.0127177,-118.34614,6.1291583)"
+       x1="60.5"
+       y1="4"
+       x2="60.5"
+       y2="12.137069" />
   </defs>
   <rect
      width="38"
@@ -66,5 +92,5 @@
      x="0.50000006"
      y="0.50000006"
      id="rect2400"
-     style="opacity:0.90000000000000002;fill:#ffffff;fill-opacity:0.40807176000000001;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.00000011999999994;stroke-linecap:square;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.59192824;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+     style="opacity:0.59999999999999998;fill:#a0a0a0;fill-opacity:1;fill-rule:nonzero;stroke:#808080;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;color:#000000" />
 </svg>
