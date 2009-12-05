@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -65,29 +65,7 @@ namespace Docky.Menus
 		
 		static void SetLight ()
 		{
-			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (Docky.Controller.MenuSvg)) {
-				int dark = 0;
-				int light = 0;
-				unsafe {
-					byte* pixelPtr = (byte*) pixbuf.Pixels;
-					for (int i = 0; i < pixbuf.Height; i++) {
-						for (int j = 0; j < pixbuf.Width; j++) {
-							byte max = Math.Max (pixelPtr[0], Math.Max (pixelPtr[1], pixelPtr[2]));
-							
-							if (pixelPtr[3] > 0) {
-								if (max > byte.MaxValue / 2)
-									light++;
-								else
-									dark++;
-							}
-							
-							pixelPtr += 4;
-						}
-						pixelPtr += pixbuf.Rowstride - pixbuf.Width * 4;
-					}
-				}
-				IsLight = light > dark;
-			}
+			IsLight = DockServices.Drawing.IsIconLight (Docky.Controller.MenuSvg);
 		}
 		
 		static DockySurface [] menu_slices;
@@ -125,67 +103,67 @@ namespace Docky.Menus
 			int tailSideSize = (middleWidth - TailWidth) / 2;
 			
 			DockySurface[] results = new DockySurface[11];
-			results[(int) Slice.TopLeft] = CreateSlice (main, new Gdk.Rectangle (
+			results[(int) Slice.TopLeft] = main.CreateSlice (new Gdk.Rectangle (
 					0, 
 					0, 
 					SliceSize, 
 					SliceSize));
 			
-			results[(int) Slice.Top] = CreateSlice (main, new Gdk.Rectangle (
+			results[(int) Slice.Top] = main.CreateSlice (new Gdk.Rectangle (
 					SliceSize, 
 					0, 
 					middleWidth, 
 					SliceSize));
 			
-			results[(int) Slice.TopRight] = CreateSlice (main, new Gdk.Rectangle (
+			results[(int) Slice.TopRight] = main.CreateSlice (new Gdk.Rectangle (
 					TotalWidth - SliceSize, 
 					0, 
 					SliceSize, 
 					SliceSize));
 			
-			results[(int) Slice.Left] = CreateSlice (main, new Gdk.Rectangle (
+			results[(int) Slice.Left] = main.CreateSlice (new Gdk.Rectangle (
 					0, 
 					SliceSize, 
 					SliceSize, 
 					middleHeight));
 			
-			results[(int) Slice.Center] = CreateSlice (main, new Gdk.Rectangle (
+			results[(int) Slice.Center] = main.CreateSlice (new Gdk.Rectangle (
 					SliceSize, 
 					SliceSize, 
 					middleWidth, 
 					middleHeight));
 			
-			results[(int) Slice.Right] = CreateSlice (main, new Gdk.Rectangle (
+			results[(int) Slice.Right] = main.CreateSlice (new Gdk.Rectangle (
 					TotalWidth - SliceSize, 
 					SliceSize, 
 					SliceSize, 
 					middleHeight));
 			
-			results[(int) Slice.BottomLeft] = CreateSlice (main, new Gdk.Rectangle (
+			results[(int) Slice.BottomLeft] = main.CreateSlice (new Gdk.Rectangle (
 					0, 
 					TotalHeight - tailSliceSize, 
 					SliceSize, 
 					tailSliceSize));
 			
-			results[(int) Slice.TailLeft] = CreateSlice (main, new Gdk.Rectangle (
+			results[(int) Slice.TailLeft] = main.CreateSlice (new Gdk.Rectangle (
 					SliceSize, 
 					TotalHeight - tailSliceSize, 
 					tailSideSize, 
 					tailSliceSize));
 			
-			results[(int) Slice.Tail] = CreateSlice (main, new Gdk.Rectangle (
+			results[(int) Slice.Tail] = main.CreateSlice (new Gdk.Rectangle (
 					SliceSize + tailSideSize,
 					TotalHeight - tailSliceSize,
 					TailWidth,
 					tailSliceSize));
 				
-			results[(int) Slice.TailRight] = CreateSlice (main, new Gdk.Rectangle (
+			results[(int) Slice.TailRight] = main.CreateSlice (new Gdk.Rectangle (
 					SliceSize + middleWidth - tailSideSize,
 					TotalHeight - tailSliceSize,
 					tailSideSize,
 					tailSliceSize));
 			
-			results[(int) Slice.BottomRight] = CreateSlice (main, new Gdk.Rectangle (
+			results[(int) Slice.BottomRight] = main.CreateSlice (new Gdk.Rectangle (
 					SliceSize + middleWidth,
 					TotalHeight - tailSliceSize,
 					SliceSize,
@@ -196,15 +174,6 @@ namespace Docky.Menus
 			main.Dispose ();
 			
 			return menu_slices;
-		}
-		
-		static DockySurface CreateSlice (DockySurface original, Gdk.Rectangle area)
-		{
-			DockySurface result = new DockySurface (area.Width, area.Height, original);
-			
-			original.Internal.Show (result.Context, 0 - area.X, 0 - area.Y);
-			
-			return result;
 		}
 		
 		DockySurface background_buffer;
@@ -266,10 +235,7 @@ namespace Docky.Menus
 				menu_slices = null;
 			}
 			
-			if (background_buffer != null) {
-				background_buffer.Dispose ();
-				background_buffer = null;
-			}
+			ResetBackgroundBuffer ();
 			
 			SetLight ();
 		}
@@ -388,7 +354,7 @@ namespace Docky.Menus
 			int yBottom = topMiddle - top;
 			int xLeft = left;
 			int xRight = leftMiddle;
-			DrawSlice (surface, slices[(int) Slice.TopLeft], new Gdk.Rectangle (
+			surface.DrawSlice (slices[(int) Slice.TopLeft], new Gdk.Rectangle (
 					xLeft, 
 					yTop, 
 					xRight - xLeft, 
@@ -396,7 +362,7 @@ namespace Docky.Menus
 			
 			xLeft = leftMiddle;
 			xRight = rightMiddle;
-			DrawSlice (surface, slices[(int) Slice.Top], new Gdk.Rectangle (
+			surface.DrawSlice (slices[(int) Slice.Top], new Gdk.Rectangle (
 					xLeft, 
 					yTop, 
 					xRight - xLeft, 
@@ -404,7 +370,7 @@ namespace Docky.Menus
 			
 			xLeft = rightMiddle;
 			xRight = right;
-			DrawSlice (surface, slices[(int) Slice.TopRight], new Gdk.Rectangle (
+			surface.DrawSlice (slices[(int) Slice.TopRight], new Gdk.Rectangle (
 					xLeft, 
 					yTop, 
 					xRight - xLeft, 
@@ -414,7 +380,7 @@ namespace Docky.Menus
 			xRight = leftMiddle;
 			yTop = topMiddle;
 			yBottom = bottomMiddle;
-			DrawSlice (surface, slices[(int) Slice.Left], new Gdk.Rectangle (
+			surface.DrawSlice (slices[(int) Slice.Left], new Gdk.Rectangle (
 					xLeft, 
 					yTop, 
 					xRight - xLeft, 
@@ -422,7 +388,7 @@ namespace Docky.Menus
 			
 			xLeft = leftMiddle;
 			xRight = rightMiddle;
-			DrawSlice (surface, slices[(int) Slice.Center], new Gdk.Rectangle (
+			surface.DrawSlice (slices[(int) Slice.Center], new Gdk.Rectangle (
 					xLeft, 
 					yTop, 
 					xRight - xLeft, 
@@ -430,7 +396,7 @@ namespace Docky.Menus
 			
 			xLeft = rightMiddle;
 			xRight = right;
-			DrawSlice (surface, slices[(int) Slice.Right], new Gdk.Rectangle (
+			surface.DrawSlice (slices[(int) Slice.Right], new Gdk.Rectangle (
 					xLeft, 
 					yTop, 
 					xRight - xLeft, 
@@ -440,7 +406,7 @@ namespace Docky.Menus
 			xRight = leftMiddle;
 			yTop = bottomMiddle;
 			yBottom = bottom;
-			DrawSlice (surface, slices[(int) Slice.BottomLeft], new Gdk.Rectangle (
+			surface.DrawSlice (slices[(int) Slice.BottomLeft], new Gdk.Rectangle (
 					xLeft, 
 					yTop, 
 					xRight - xLeft, 
@@ -448,7 +414,7 @@ namespace Docky.Menus
 			
 			xLeft = leftMiddle;
 			xRight = leftTailMiddle;
-			DrawSlice (surface, slices[(int) Slice.TailLeft], new Gdk.Rectangle (
+			surface.DrawSlice (slices[(int) Slice.TailLeft], new Gdk.Rectangle (
 					xLeft, 
 					yTop, 
 					xRight - xLeft, 
@@ -456,7 +422,7 @@ namespace Docky.Menus
 			
 			xLeft = leftTailMiddle;
 			xRight = rightTailMiddle;
-			DrawSlice (surface, slices[(int) Slice.Tail], new Gdk.Rectangle (
+			surface.DrawSlice (slices[(int) Slice.Tail], new Gdk.Rectangle (
 					xLeft, 
 					yTop, 
 					xRight - xLeft, 
@@ -464,7 +430,7 @@ namespace Docky.Menus
 			
 			xLeft = rightTailMiddle;
 			xRight = rightMiddle;
-			DrawSlice (surface, slices[(int) Slice.TailRight], new Gdk.Rectangle (
+			surface.DrawSlice (slices[(int) Slice.TailRight], new Gdk.Rectangle (
 					xLeft, 
 					yTop, 
 					xRight - xLeft, 
@@ -472,39 +438,11 @@ namespace Docky.Menus
 			
 			xLeft = rightMiddle;
 			xRight = right;
-			DrawSlice (surface, slices[(int) Slice.BottomRight], new Gdk.Rectangle (
+			surface.DrawSlice (slices[(int) Slice.BottomRight], new Gdk.Rectangle (
 					xLeft, 
 					yTop, 
 					xRight - xLeft, 
 					yBottom - yTop));
-		}
-		
-		void DrawSlice (DockySurface target, DockySurface slice, Gdk.Rectangle area)
-		{
-			// simple case goes here
-			if (area.Width == slice.Width && area.Height == slice.Height) {
-				slice.Internal.Show (target.Context, area.X, area.Y);
-				return;
-			}
-			
-			int columns = (area.Width / slice.Width) + 1;
-			int rows = (area.Height / slice.Height) + 1;
-			
-			target.Context.Rectangle (area.X, area.Y, area.Width, area.Height);
-			target.Context.Clip ();
-			
-			for (int c = 0; c < columns; c++) {
-				for (int r = 0; r < rows; r++) {
-					int x = area.X + c * slice.Width;
-					int y = area.Y + r * slice.Height;
-					
-					target.Context.SetSource (slice.Internal, x, y);
-					target.Context.Rectangle (x, y, slice.Width, slice.Height);
-					target.Context.Fill ();
-				}
-			}
-			
-			target.Context.ResetClip ();
 		}
 		
 		protected override bool OnExposeEvent (EventExpose evnt)
@@ -561,10 +499,7 @@ namespace Docky.Menus
 				menu_slices = null;
 			}
 			
-			if (background_buffer != null) {
-				background_buffer.Dispose ();
-				background_buffer = null;
-			}
+			ResetBackgroundBuffer ();
 			
 			base.Dispose ();
 		}

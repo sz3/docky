@@ -152,6 +152,7 @@ namespace Docky
 			if (ActiveDock != dock) {
 				ActiveDock = dock;
 				SetupConfigAlignment ();
+				CheckButtons ();
 			}
 		}
 
@@ -205,7 +206,7 @@ namespace Docky
 			for (int i = 0; i < Screen.Default.NMonitors; i++)
 				spotsAvailable += Docky.Controller.PositionsAvailableForDock (i).Count ();
 			
-			delete_dock_button.Sensitive = (Docky.Controller.Docks.Count () == 1) ? false : true;
+			delete_dock_button.Sensitive = (Docky.Controller.Docks.Count () == 1 || ActiveDock == null) ? false : true;
 			new_dock_button.Sensitive = (spotsAvailable == 0) ? false : true;
 		}
 

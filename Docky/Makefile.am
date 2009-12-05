@@ -45,6 +45,7 @@ FILES = \
 RESOURCES = \
 	gtk-gui/gui.stetic \
 	Resources/classic.svg \
+	Resources/tooltip.svg \
 	Resources/menu.svg
 
 PROJECT_REFERENCES = \

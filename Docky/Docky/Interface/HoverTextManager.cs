@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -27,13 +27,13 @@ using Gtk;
 
 using Docky.CairoHelper;
 using Docky.Items;
+using Docky.Services;
 
 namespace Docky.Interface
 {
 
 	public class HoverTextManager : IDisposable
 	{
-
 		public DockPosition Gravity { get; set; }
 		public bool Visible { get; private set; }
 		
@@ -43,8 +43,20 @@ namespace Docky.Interface
 		uint timer;
 		bool fullscreen;
 		
+		static DockySurface [] slices;
+		DockySurface background_buffer;
+		
+		public static bool IsLight { get; private set; }
+		
+		static void SetLight ()
+		{
+			IsLight = DockServices.Drawing.IsIconLight (Docky.Controller.TooltipSvg);
+		}
+		
 		public HoverTextManager ()
 		{
+			SetLight ();
+			
 			window = new Gtk.Window (Gtk.WindowType.Popup);
 			
 			window.AppPaintable = true;
@@ -62,8 +74,22 @@ namespace Docky.Interface
 			window.ExposeEvent += HandleWindowExposeEvent;
 			
 			Wnck.Screen.Default.ActiveWindowChanged += HandleWnckScreenDefaultActiveWindowChanged;
+			
+			Docky.Controller.ThemeChanged += DockyControllerThemeChanged;
 		}
-
+		
+		void DockyControllerThemeChanged (object sender, EventArgs e)
+		{
+			if (slices != null) {
+				foreach (DockySurface s in slices) {
+					s.Dispose ();
+				}
+				slices = null;
+			}
+			ResetBackgroundBuffer ();
+			SetLight ();
+		}
+		
 		void HandleWnckScreenDefaultActiveWindowChanged (object o, Wnck.ActiveWindowChangedArgs args)
 		{
 			if (args.PreviousWindow != null)
@@ -90,6 +116,7 @@ namespace Docky.Interface
 				return;
 			}
 			
+			ResetBackgroundBuffer ();
 			currentSurface = surface;
 			currentPoint = point;
 			
@@ -137,10 +164,19 @@ namespace Docky.Interface
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (args.Event.Window)) {
 				cr.Operator = Operator.Source;
 				
-				if (currentSurface == null)
+				if (currentSurface == null) {
 					cr.Color = new Cairo.Color (1, 1, 1, 0);
-				else
+				} else {
+					if (background_buffer == null) {
+						background_buffer = new DockySurface (currentSurface.Width, currentSurface.Height, cr.Target);
+						DrawBackground (background_buffer);
+					}
+					
+					background_buffer.Internal.Show (cr, 0, 0);
+					cr.Operator = Operator.Over;
+					
 					cr.SetSource (currentSurface.Internal);
+				}
 				
 				cr.Paint ();
 			}
@@ -159,6 +195,48 @@ namespace Docky.Interface
 			window.Hide ();
 		}
 		
+		static DockySurface[] GetSlices (DockySurface model)
+		{
+			if (slices != null)
+				return slices;
+			
+			DockySurface main = new DockySurface (3 * AbstractDockItem.HoverTextHeight / 2, AbstractDockItem.HoverTextHeight, model);
+			
+			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (Docky.Controller.TooltipSvg)) {
+				Gdk.CairoHelper.SetSourcePixbuf (main.Context, pixbuf, 0, 0);
+				main.Context.Paint ();
+			}
+			
+			DockySurface[] results = new DockySurface[3];
+			
+			results[0] = main.CreateSlice (new Gdk.Rectangle (0, 0, AbstractDockItem.HoverTextHeight / 2, AbstractDockItem.HoverTextHeight));
+			results[1] = main.CreateSlice (new Gdk.Rectangle (AbstractDockItem.HoverTextHeight / 2, 0, AbstractDockItem.HoverTextHeight / 2, AbstractDockItem.HoverTextHeight));
+			results[2] = main.CreateSlice (new Gdk.Rectangle (AbstractDockItem.HoverTextHeight, 0, AbstractDockItem.HoverTextHeight / 2, AbstractDockItem.HoverTextHeight));
+			
+			slices = results;
+			
+			main.Dispose ();
+			
+			return slices;
+		}
+		
+		void DrawBackground (DockySurface surface)
+		{
+			DockySurface[] slices = GetSlices (surface);
+			
+			surface.DrawSlice (slices[0], new Gdk.Rectangle (0, 0, AbstractDockItem.HoverTextHeight / 2, AbstractDockItem.HoverTextHeight));
+			surface.DrawSlice (slices[1], new Gdk.Rectangle (AbstractDockItem.HoverTextHeight / 2, 0, Math.Max (0, surface.Width - AbstractDockItem.HoverTextHeight), AbstractDockItem.HoverTextHeight));
+			surface.DrawSlice (slices[2], new Gdk.Rectangle (surface.Width - AbstractDockItem.HoverTextHeight / 2, 0, AbstractDockItem.HoverTextHeight / 2, AbstractDockItem.HoverTextHeight));
+		}
+		
+		void ResetBackgroundBuffer ()
+		{
+			if (background_buffer != null) {
+				background_buffer.Dispose ();
+				background_buffer = null;
+			}
+		}
+		
 		#region IDisposable implementation
 		public void Dispose ()
 		{
@@ -169,6 +247,13 @@ namespace Docky.Interface
 				window.Dispose ();
 				window = null;
 			}
+			if (slices != null) {
+				foreach (DockySurface s in slices) {
+					s.Dispose ();
+				}
+				slices = null;
+			}
+			ResetBackgroundBuffer ();
 		}
 		#endregion
 	}

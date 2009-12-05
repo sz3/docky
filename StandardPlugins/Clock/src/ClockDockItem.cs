@@ -60,6 +60,7 @@ namespace Clock
 				digital = value;
 				prefs.Set<bool> ("ShowDigital", value);
 				CheckForThemes ();
+				ScalableRendering = !digital;
 			}
 		}
 		
@@ -87,19 +88,17 @@ namespace Clock
 			}
 		}
 		
-		public IEnumerable<string> ThemeURIs {
+		public string ThemeFolder {
 			get {
-				//yield return System.IO.Path.Combine (Services.Paths.UserDataDirectory, "ClockTheme/");
-				yield return "/usr/local/share/docky/ClockTheme/";
-				yield return "/usr/share/docky/ClockTheme/";
+				return System.IO.Path.Combine (DockServices.System.SystemDataFolder, "ClockTheme");
 			}
 		}
 		
-		string ThemePath {
+		public string ThemePath {
 			get {
-				foreach (string path in ThemeURIs)
-					if (Directory.Exists (path + CurrentTheme))
-						return path + CurrentTheme;
+				string path = System.IO.Path.Combine (ThemeFolder, CurrentTheme);
+				if (Directory.Exists (path))
+					return path;
 
 				return "";
 			}
@@ -114,26 +113,14 @@ namespace Clock
 			// check if we have a 24hr theme available
 			bool has24hourtheme = false;
 			
-			if (CurrentTheme.EndsWith ("-24"))
+			if (CurrentTheme.EndsWith ("-24") || Directory.Exists (ThemePath + "-24"))
 				has24hourtheme = true;
-			else
-				foreach (string path in ThemeURIs)
-					if (Directory.Exists (path + CurrentTheme + "-24")) {
-						has24hourtheme = true;
-						break;
-					}
 			
 			// check if we have a 12hr theme available
 			bool has12hourtheme = false;
 			
-			if (!CurrentTheme.EndsWith ("-24"))
+			if (!CurrentTheme.EndsWith ("-24") || Directory.Exists (ThemePath.Substring (0, ThemePath.Length - 3)))
 				has12hourtheme = true;
-			else
-				foreach (string path in ThemeURIs)
-					if (Directory.Exists (path + CurrentTheme.Substring (0, CurrentTheme.Length - 3))) {
-						has12hourtheme = true;
-						break;
-					}
 			
 			// make sure military and the theme match
 			if (ShowMilitary) {
@@ -151,7 +138,7 @@ namespace Clock
 		
 		public ClockDockItem ()
 		{
-			ScalableRendering = false;
+			ScalableRendering = !ShowDigital;
 			
 			painter = new CalendarPainter ();
 			CheckForThemes ();

@@ -82,10 +82,9 @@ namespace Clock
 		{
 			List<string> themes = new List<string> ();
 			
-			foreach (string path in DockItem.ThemeURIs)
-				if (Directory.Exists (path))
-					foreach (DirectoryInfo p in new DirectoryInfo (path).GetDirectories ())
-						themes.Add (p.Name);
+			if (Directory.Exists (DockItem.ThemeFolder))
+				foreach (DirectoryInfo p in new DirectoryInfo (DockItem.ThemeFolder).GetDirectories ())
+					themes.Add (p.Name);
 			
 			labelTreeStore.Clear ();
 			
@@ -110,6 +109,11 @@ namespace Clock
 			
 			if (((TreeSelection)o).GetSelected (out model, out iter))
 				DockItem.SetTheme ((string) model.GetValue (iter, 0));
+		}
+		
+		protected override void OnClose ()
+		{
+			Hide ();
 		}
 		
 		protected override void OnResponse (ResponseType response_id)

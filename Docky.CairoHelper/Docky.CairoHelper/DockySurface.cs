@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -148,6 +148,43 @@ namespace Docky.CairoHelper
 				}
 				last.Destroy ();
 			}
+		}
+		
+		public DockySurface CreateSlice (Gdk.Rectangle area)
+		{
+			DockySurface result = new DockySurface (area.Width, area.Height, this);
+			
+			Internal.Show (result.Context, 0 - area.X, 0 - area.Y);
+			
+			return result;
+		}
+		
+		public void DrawSlice (DockySurface slice, Gdk.Rectangle area)
+		{
+			// simple case goes here
+			if (area.Width == slice.Width && area.Height == slice.Height) {
+				slice.Internal.Show (Context, area.X, area.Y);
+				return;
+			}
+			
+			int columns = (area.Width / slice.Width) + 1;
+			int rows = (area.Height / slice.Height) + 1;
+			
+			Context.Rectangle (area.X, area.Y, area.Width, area.Height);
+			Context.Clip ();
+			
+			for (int c = 0; c < columns; c++) {
+				for (int r = 0; r < rows; r++) {
+					int x = area.X + c * slice.Width;
+					int y = area.Y + r * slice.Height;
+					
+					Context.SetSource (slice.Internal, x, y);
+					Context.Rectangle (x, y, slice.Width, slice.Height);
+					Context.Fill ();
+				}
+			}
+			
+			Context.ResetClip ();
 		}
 
 		#region IDisposable implementation

@@ -26,6 +26,7 @@ using Gdk;
 using Gtk;
 
 using Docky.Services;
+using Docky.CairoHelper;
 
 namespace Docky.Menus
 {
@@ -45,6 +46,8 @@ namespace Docky.Menus
 		public Cairo.Color TextColor { get; set; }
 		
 		public int TextWidth { get; protected set; }
+		
+		DockySurface icon_surface, emblem_surface;
 		
 		internal MenuItemWidget (MenuItem item) : base()
 		{
@@ -143,14 +146,38 @@ namespace Docky.Menus
 			return true;
 		}
 		
-		void PlacePixbuf (Context cr, Pixbuf pixbuf, Gdk.Rectangle allocation)
+		void PlaceSurface (Context cr, DockySurface surface, Gdk.Rectangle allocation)
 		{
 			int iconSize = allocation.Height - IconBuffer * 2;
 			
-			int x = allocation.X + 1 + ((iconSize - pixbuf.Width) / 2);
-			int y = allocation.Y + IconBuffer + ((iconSize - pixbuf.Height) / 2);
+			int x = allocation.X + 1 + ((iconSize - surface.Width) / 2);
+			int y = allocation.Y + IconBuffer + ((iconSize - surface.Height) / 2);
 			
-			Gdk.CairoHelper.SetSourcePixbuf (cr, pixbuf, x, y);
+			cr.SetSource (surface.Internal, x, y);
+		}
+		
+		DockySurface LoadIcon (string icon, int size)
+		{
+			bool monochrome = icon.StartsWith ("[monochrome]");
+			if (monochrome) {
+				icon = icon.Substring ("[monochrome]".Length);
+			}
+			
+			DockySurface surface;
+			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (icon, size)) {
+				surface = new DockySurface (pixbuf.Width, pixbuf.Height);
+				Gdk.CairoHelper.SetSourcePixbuf (surface.Context, pixbuf, 0, 0);
+				surface.Context.Paint ();
+			}
+			
+			if (monochrome) {
+				surface.Context.Operator = Operator.Atop;
+				surface.Context.Color = TextColor;
+				surface.Context.Paint ();
+				surface.ResetContext ();
+			}
+			
+			return surface;
 		}
 		
 		protected override bool OnExposeEvent (EventExpose evnt)
@@ -160,7 +187,18 @@ namespace Docky.Menus
 			
 			Gdk.Rectangle allocation = Allocation;
 			
-			Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (item.Icon, allocation.Height - IconBuffer * 2);
+			int pixbufSize = allocation.Height - IconBuffer * 2;
+			if (icon_surface == null || (icon_surface.Height != pixbufSize && icon_surface.Width != pixbufSize)) {
+				if (icon_surface != null)
+					icon_surface.Dispose ();
+				if (emblem_surface != null)
+					emblem_surface.Dispose ();
+				
+				icon_surface = LoadIcon (item.Icon, pixbufSize);
+				
+				if (!string.IsNullOrEmpty (item.Emblem))
+					emblem_surface = LoadIcon (item.Emblem, pixbufSize);
+			}
 			
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
 				if (Selected && !item.Disabled) {
@@ -169,21 +207,19 @@ namespace Docky.Menus
 					cr.Fill ();
 				}
 
-				PlacePixbuf (cr, pixbuf, allocation);
+				PlaceSurface (cr, icon_surface, allocation);
 				cr.PaintWithAlpha (item.Disabled ? 0.5 : 1);
 				
 				if (item.Bold) {
 					cr.Operator = Operator.Add;
-					PlacePixbuf (cr, pixbuf, allocation);
+					PlaceSurface (cr, icon_surface, allocation);
 					cr.PaintWithAlpha (.8);
 					cr.Operator = Operator.Over;
 				}
 				
 				if (!string.IsNullOrEmpty (item.Emblem)) {
-					Gdk.Pixbuf emblem = DockServices.Drawing.LoadIcon (item.Emblem, allocation.Height - IconBuffer * 2);
-					PlacePixbuf (cr, emblem, allocation);
+					PlaceSurface (cr, emblem_surface, allocation);
 					cr.Paint ();
-					emblem.Dispose ();
 				}
 			
 				Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
@@ -204,8 +240,17 @@ namespace Docky.Menus
 				cr.Fill ();
 			}
 			
-			pixbuf.Dispose ();
 			return true;
+		}
+		
+		public override void Dispose ()
+		{
+			if (icon_surface != null)
+				icon_surface.Dispose ();
+			
+			if (emblem_surface != null)
+				emblem_surface.Dispose ();
+			base.Dispose ();
 		}
 	}
 }

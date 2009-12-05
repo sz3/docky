@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -30,8 +30,6 @@ using Gtk;
 
 namespace Docky.Services
 {
-
-
 	public class DrawingService
 	{
 		const string MissingIconIcon = "application-default-icon";
@@ -46,10 +44,36 @@ namespace Docky.Services
 			return new Pango.Layout (context);
 		}
 		
+		public bool IsIconLight (string icon) {
+			int light = 0;
+			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (icon)) {
+				unsafe {
+					byte* pixelPtr = (byte*) pixbuf.Pixels;
+					for (int i = 0; i < pixbuf.Height; i++) {
+						for (int j = 0; j < pixbuf.Width; j++) {
+							byte max = Math.Max (pixelPtr[0], Math.Max (pixelPtr[1], pixelPtr[2]));
+							
+							if (pixelPtr[3] > 0) {
+								if (max > byte.MaxValue / 2)
+									light++;
+								else
+									light--;
+							}
+							
+							pixelPtr += 4;
+						}
+						pixelPtr += pixbuf.Rowstride - pixbuf.Width * 4;
+					}
+				}
+			}
+			
+			return light > 0;
+		}
+		
 		// load an icon specifying the width and height
 		public Gdk.Pixbuf LoadIcon (string names, int width, int height)
 		{
-			List<string> iconNames = names.Split (':').ToList ();
+			List<string> iconNames = names.Split (':').Where (i => !string.IsNullOrEmpty (i)).ToList ();
 			// add the MissingIconIcon as a last resort icon.
 			iconNames.Add (MissingIconIcon);
 			

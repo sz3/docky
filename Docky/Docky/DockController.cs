@@ -121,6 +121,12 @@ namespace Docky
 			}
 		}
 		
+		public string TooltipSvg {
+			get {
+				return ThemedSvg ("tooltip.svg", "tooltip.svg");
+			}
+		}
+		
 		IEnumerable<string> DockNames {
 			get {
 				return prefs.Get<string []> ("ActiveDocks", new [] {"Dock1"}).AsEnumerable ().Take (4);

@@ -144,9 +144,10 @@ namespace Docky.Menus
 		public void SetItems (MenuList items)
 		{
 			if (Container.Child != null) {
-				foreach (Gtk.Widget widget in (Container.Child as VBox).Children)
+				foreach (Gtk.Widget widget in (Container.Child as VBox).Children) {
+					widget.Dispose ();
 					widget.Destroy ();
-				
+				}
 				Container.Remove (Container.Child);
 			}
 			
@@ -161,7 +162,7 @@ namespace Docky.Menus
 					MenuItemWidget menuItem = new MenuItemWidget (item);
 					menuItem.SelectedChanged += HandleSelectedChanged;
 					if (IsLight) {
-						menuItem.TextColor = new Cairo.Color (0.2, 0.2, 0.2);
+						menuItem.TextColor = new Cairo.Color (0.1, 0.1, 0.1);
 					} else {
 						menuItem.TextColor = new Cairo.Color (1, 1, 1);
 					}

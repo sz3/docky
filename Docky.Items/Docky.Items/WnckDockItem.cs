@@ -74,25 +74,25 @@ namespace Docky.Items
 		
 		protected string CloseIcon {
 			get {
-				return "close.svg@" + GetType ().Assembly.FullName;
+				return "[monochrome]close.svg@" + GetType ().Assembly.FullName;
 			}
 		}
 		
 		protected string MaximizeIcon {
 			get {
-				return "maximize.svg@" + GetType ().Assembly.FullName;
+				return "[monochrome]maximize.svg@" + GetType ().Assembly.FullName;
 			}
 		}
 		
 		protected string MinimizeIcon {
 			get {
-				return "minimize.svg@" + GetType ().Assembly.FullName;
+				return "[monochrome]minimize.svg@" + GetType ().Assembly.FullName;
 			}
 		}
 		
 		protected string RunIcon {
 			get {
-				return "run.svg@" + GetType ().Assembly.FullName;
+				return "[monochrome]run.svg@" + GetType ().Assembly.FullName;
 			}
 		}
 		

@@ -54,16 +54,16 @@ namespace RecentDocuments
 		
 		public RecentDocumentsItemProvider ()
 		{
-			docs = new RecentDocumentsItem ();
+			docs = new RecentDocumentsItem (this);
 			UpdateItems ();
 			Gtk.RecentManager.Default.Changed += delegate { UpdateItems (); };
 		}
 		
-		void UpdateItems ()
+		public void UpdateItems ()
 		{
-			if (Gtk.RecentManager.Default.Size == 0 && Items.Count () == 1)
+			if ((docs == null || docs.CurrentFile == null) && Items.Count () == 1)
 				Items = Enumerable.Empty<AbstractDockItem> ();
-			if (Gtk.RecentManager.Default.Size > 0 && Items.Count () == 0)
+			if (docs != null && docs.CurrentFile != null && Items.Count () == 0)
 				Items = docs.AsSingle<AbstractDockItem> ();
 		}
 		

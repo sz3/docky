@@ -158,7 +158,7 @@ namespace Trash
 			list[MenuListContainer.Actions].Add (
 				new MenuItem (Catalog.GetString ("_Open Trash"), Icon, (o, a) => OpenTrash ()));
 			list[MenuListContainer.Actions].Add (
-				new MenuItem (Catalog.GetString ("_Empty Trash"), "gtk-clear", (o, a) => EmptyTrash (), !TrashFull));
+				new MenuItem (Catalog.GetString ("Empty _Trash"), "gtk-clear", (o, a) => EmptyTrash (), !TrashFull));
 			return list;
 		}
 		

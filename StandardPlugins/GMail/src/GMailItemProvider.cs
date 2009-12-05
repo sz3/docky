@@ -34,7 +34,7 @@ namespace GMail
 			}
 		}
 		
-		public override string Icon { get { return "gmail-logo.png@" + GetType ().Assembly.FullName; } }
+		public override string Icon { get { return "gmail"; } }
 		
 		public override void Dispose ()
 		{
