@@ -32,6 +32,7 @@ using Gtk;
 
 namespace Docky.Widgets
 {
+	[System.ComponentModel.ToolboxItem(true)]
     public class AnimatedVBox : AnimatedBox
     {
         public AnimatedVBox () : base (false)

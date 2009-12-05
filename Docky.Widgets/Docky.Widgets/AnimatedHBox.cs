@@ -32,6 +32,7 @@ using Gtk;
 
 namespace Docky.Widgets
 {
+	[System.ComponentModel.ToolboxItem(true)]
     public class AnimatedHBox : AnimatedBox
     {
         public AnimatedHBox () : base (true)
