@@ -30,8 +30,11 @@
 using System;
 using Gtk;
 
-namespace Banshee.Widgets
+using Docky.Services;
+
+namespace Docky.Widgets
 {
+	[System.ComponentModel.ToolboxItem(true)]
     public class SearchEntry : EventBox
     {
         private HBox box;
@@ -479,8 +482,10 @@ namespace Banshee.Widgets
                 text_gc.Copy(Style.TextGC(StateType.Normal));
                 Gdk.Color color_a = parent.Style.Base(StateType.Normal);
                 Gdk.Color color_b = parent.Style.Text(StateType.Normal);
-                //text_gc.RgbFgColor = Hyena.Gui.GtkUtilities.ColorBlend(color_a, color_b);
+                text_gc.RgbFgColor = DockServices.Drawing.ColorBlend(color_a, color_b);
             }
+			
+			
 
             protected override bool OnExposeEvent(Gdk.EventExpose evnt)
             {

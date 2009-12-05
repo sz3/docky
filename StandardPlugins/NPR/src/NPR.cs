@@ -27,6 +27,7 @@ using System.Collections.Specialized;
 using System.Collections.Generic;
 
 using Docky.Services;
+using Docky.Widgets;
 
 namespace NPR
 {
@@ -38,8 +39,11 @@ namespace NPR
 		const string stationsUrl = "http://api.npr.org/stations";
 		
 		static IPreferences prefs;
+		static StationSearchWidget stationSearchWidget;
+		static List<Station> Stations;
 		
 		public static EventHandler<StationsUpdatedEventArgs> StationsUpdated;
+		public static ConfigDialog Config;
 		
 		public static int[] MyStations {
 			get {
@@ -61,13 +65,16 @@ namespace NPR
 				
 				prefs.Set<int []> ("MyStations", value);
 				if (StationsUpdated != null)
-					StationsUpdated (null, new StationsUpdatedEventArgs (station, action));
+					StationsUpdated (null, new StationsUpdatedEventArgs (LookupStation (station), action));
 			}
 		}
 		
 		static NPR ()
 		{
 			prefs = DockServices.Preferences.Get <NPR> ();
+			Stations = new List<Station> ();
+			// create the null station
+			LookupStation (-1);
 		}
 		
 		public NPR ()
@@ -100,9 +107,9 @@ namespace NPR
 			XElement result = APIReturn (stationsUrl, query);
 			
 			if (result.Elements ("station").Any (e => e.HasAttributes))
-				return result.Elements ("station").Select (e => new Station (e));
-			
-			return Enumerable.Empty<Station> ();
+				return result.Elements ("station").Select (e => LookupStation (int.Parse (e.Attribute ("id").Value)));
+						
+			return new [] { LookupStation (-1) };
 		}
 		
 		public static XElement StationXElement (int id)
@@ -113,11 +120,27 @@ namespace NPR
 			return APIReturn (stationsUrl, query).Element ("station");
 		}
 		
-		void ShowConfig ()
+		public static Station LookupStation (int id)
 		{
-			if (ConfigDialog.instance == null)
-				ConfigDialog.instance = new ConfigDialog ();
-			ConfigDialog.instance.Show ();
+			if (Stations.Where (s => s.ID == id).Any ())
+				return Stations.First (s => s.ID == id);
+		
+			//the station wasn't in our list, so create one and add it
+			Station station = new Station (id);
+			Stations.Add (station);
+			return station;
+		}
+		
+		public static void ShowConfig ()
+		{
+			if (ConfigDialog.Instance == null) {
+				stationSearchWidget = new StationSearchWidget ();
+				ConfigDialog.Instance = new ConfigDialog ("NPR", new [] {stationSearchWidget});
+				ConfigDialog.Instance.Shown += delegate {
+					stationSearchWidget.ShowMyStations ();
+				};
+			}
+			ConfigDialog.Instance.Show ();
 		}
 	}
 }

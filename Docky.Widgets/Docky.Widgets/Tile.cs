@@ -48,21 +48,22 @@ namespace Docky.Widgets
 		private WrapLabel description;
         private WrapLabel subDesc;
 		
-		public ITile OwnedObject { get; private set; }
+		public AbstractTileObject OwnedObject { get; private set; }
 		public bool Last { get; private set; }
 		
 		public event EventHandler ActiveChanged;
 		
-		public Tile (ITile OwnedObject) : base (3, 3, false)
+		public Tile (AbstractTileObject obj) : base (3, 3, false)
 		{
-			this.OwnedObject = OwnedObject;
+			OwnedObject = obj;	
 			
-			BuildTile ();
-			
-			OwnedObject.FinishedLoading += delegate {
+			OwnedObject.IconUpdated += delegate {
+				Console.WriteLine ("Icon updated.");
 				tileImage.Pixbuf = DockServices.Drawing.LoadIcon (OwnedObject.Icon, 64);
 				tileImage.Show ();
 			};
+			
+			BuildTile ();
 		}
 		
 		private void BuildTile ()
@@ -98,16 +99,17 @@ namespace Docky.Widgets
 			
 			
 			subDesc = new WrapLabel ();
-			subDesc.Markup = String.Format (
-			                                "<small><b>{0}</b> <i>{1}</i></small>", 
-			                                GLib.Markup.EscapeText (OwnedObject.SubDescriptionTitle),
-			                                GLib.Markup.EscapeText (OwnedObject.SubDescriptionText)
-			                                );
 			
-			subDesc.Show ();
 			if (!string.IsNullOrEmpty (OwnedObject.SubDescriptionText) &&
-			    !string.IsNullOrEmpty (OwnedObject.SubDescriptionTitle))
-				Attach (subDesc, 1, 2, 2, 3,
+			    !string.IsNullOrEmpty (OwnedObject.SubDescriptionTitle))			
+				subDesc.Markup = String.Format (
+				                                "<small><b>{0}</b> <i>{1}</i></small>", 
+				                                GLib.Markup.EscapeText (OwnedObject.SubDescriptionTitle),
+				                                GLib.Markup.EscapeText (OwnedObject.SubDescriptionText)
+				                                );
+			subDesc.Show ();
+
+			Attach (subDesc, 1, 2, 2, 3,
 			        AttachOptions.Expand | AttachOptions.Fill, 
 			        AttachOptions.Expand | AttachOptions.Fill,  0, 4);
 

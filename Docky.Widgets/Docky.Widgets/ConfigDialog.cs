@@ -25,7 +25,7 @@ namespace Docky.Widgets
 {
 	public class ConfigDialog : Dialog
 	{
-		public static ConfigDialog instance;
+		public static ConfigDialog Instance;
 		
 		public ConfigDialog (string windowTitle, IEnumerable<Widget> widgets) : this (windowTitle, widgets, 350, 400)
 		{

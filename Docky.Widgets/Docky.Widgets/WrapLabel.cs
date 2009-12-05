@@ -34,6 +34,7 @@ using Gtk;
 
 namespace Docky.Widgets
 {
+	[System.ComponentModel.ToolboxItem(true)]
     public class WrapLabel : Widget
     {
         private string text;

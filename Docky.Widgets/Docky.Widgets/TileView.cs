@@ -35,6 +35,7 @@ using Docky.Widgets;
 
 namespace Docky.Widgets
 {
+	[System.ComponentModel.ToolboxItem(true)]
 	public class TileView : EventBox 
 	{
 		private List<Tile> tiles = new List<Tile> ();
@@ -59,7 +60,7 @@ namespace Docky.Widgets
 			}
 		}
 		
-		public void RemoveTile (ITile tileObject)
+		public void RemoveTile (AbstractTileObject tileObject)
 		{
 			Tile tile = tiles.First (t => t.OwnedObject == tileObject);
 			
@@ -81,8 +82,8 @@ namespace Docky.Widgets
 			selected_index = -1;
 		}		
 		
-		public void AppendTile (ITile tileObject)
-		{
+		public void AppendTile (AbstractTileObject tileObject)
+		{			
 			Tile tile = new Tile (tileObject);
 			tile.ActiveChanged += OnTileActiveChanged;
 			tile.SizeAllocated += OnTileSizeAllocated;

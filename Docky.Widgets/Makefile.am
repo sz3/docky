@@ -8,7 +8,7 @@ PKG_CONFIG_FILES = docky.widgets.pc
 
 FILES = \
 	AssemblyInfo.cs \
-	Docky.Widgets/AbstractTile.cs \
+	Docky.Widgets/AbstractTileObject.cs \
 	Docky.Widgets/Actor.cs \
 	Docky.Widgets/AnimatedBox.cs \
 	Docky.Widgets/AnimatedHBox.cs \
@@ -17,8 +17,9 @@ FILES = \
 	Docky.Widgets/Choreographer.cs \
 	Docky.Widgets/ConfigDialog.cs \
 	Docky.Widgets/ExtensionMethods.cs \
-	Docky.Widgets/ITile.cs \
 	Docky.Widgets/SingleActorStage.cs \
+	Docky.Widgets/SearchEntry.cs \
+	Docky.Widgets/HoverImageButton.cs \
 	Docky.Widgets/Stage.cs \
 	Docky.Widgets/Tile.cs \
 	Docky.Widgets/TileView.cs \
@@ -35,3 +36,5 @@ REFERENCES =  \
 EXTRA_DIST += Docky.Widgets.dll.config
 
 module_DATA += Docky.Widgets.dll.config
+
+MCS_FLAGS += -unsafe

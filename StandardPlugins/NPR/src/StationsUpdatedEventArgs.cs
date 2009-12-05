@@ -27,12 +27,12 @@ namespace NPR
 
 	public class StationsUpdatedEventArgs : EventArgs
 	{
-		public int StationID { get; private set; }
+		public Station Station { get; private set; }
 		public StationUpdateAction UpdateAction { get; private set; }
 
-		public StationsUpdatedEventArgs (int stationID, StationUpdateAction action)
+		public StationsUpdatedEventArgs (Station station, StationUpdateAction action)
 		{
-			this.StationID = stationID;
+			this.Station = station;
 			this.UpdateAction = action;
 		}
 	}

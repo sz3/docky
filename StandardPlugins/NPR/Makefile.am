@@ -10,8 +10,7 @@ FILES = \
 	src/StationsUpdatedEventArgs.cs \
 	src/StationUrl.cs \
 	src/StationSearchWidget.cs \
-	src/ConfigDialog.cs \
-	src/WrapLabel.cs \
+	src/StationDockItem.cs \
 	gtk-gui/NPR.StationSearchWidget.cs \
 	gtk-gui/generated.cs
 

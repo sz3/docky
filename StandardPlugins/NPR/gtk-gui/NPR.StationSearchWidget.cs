@@ -19,11 +19,13 @@ namespace NPR {
         
         private Gtk.Button my_stations;
         
-        private Gtk.Entry ZipEntry;
+        private Docky.Widgets.SearchEntry ZipEntry;
         
         private Gtk.Button Search;
         
         private Gtk.ScrolledWindow stationsScroll;
+        
+        private Docky.Widgets.TileView tileview;
         
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
@@ -50,11 +52,11 @@ namespace NPR {
             w1.Expand = false;
             w1.Fill = false;
             // Container child hbox1.Gtk.Box+BoxChild
-            this.ZipEntry = new Gtk.Entry();
-            this.ZipEntry.CanFocus = true;
+            this.ZipEntry = new Docky.Widgets.SearchEntry();
             this.ZipEntry.Name = "ZipEntry";
-            this.ZipEntry.IsEditable = true;
-            this.ZipEntry.InvisibleChar = '●';
+            this.ZipEntry.EmptyMessage = "Zip Code";
+            this.ZipEntry.Ready = true;
+            this.ZipEntry.HasFocus = true;
             this.hbox1.Add(this.ZipEntry);
             Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(this.hbox1[this.ZipEntry]));
             w2.Position = 1;
@@ -86,24 +88,32 @@ namespace NPR {
             w11.Fill = false;
             this.vbox1.Add(this.hbox1);
             Gtk.Box.BoxChild w12 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox1]));
-            w12.Position = 1;
+            w12.Position = 0;
             w12.Expand = false;
             w12.Fill = false;
             // Container child vbox1.Gtk.Box+BoxChild
             this.stationsScroll = new Gtk.ScrolledWindow();
             this.stationsScroll.CanFocus = true;
             this.stationsScroll.Name = "stationsScroll";
+            this.stationsScroll.HscrollbarPolicy = ((Gtk.PolicyType)(2));
             this.stationsScroll.ShadowType = ((Gtk.ShadowType)(1));
+            // Container child stationsScroll.Gtk.Container+ContainerChild
+            Gtk.Viewport w13 = new Gtk.Viewport();
+            w13.ShadowType = ((Gtk.ShadowType)(0));
+            // Container child GtkViewport.Gtk.Container+ContainerChild
+            this.tileview = new Docky.Widgets.TileView();
+            this.tileview.Name = "tileview";
+            w13.Add(this.tileview);
+            this.stationsScroll.Add(w13);
             this.vbox1.Add(this.stationsScroll);
-            Gtk.Box.BoxChild w13 = ((Gtk.Box.BoxChild)(this.vbox1[this.stationsScroll]));
-            w13.Position = 2;
+            Gtk.Box.BoxChild w16 = ((Gtk.Box.BoxChild)(this.vbox1[this.stationsScroll]));
+            w16.Position = 1;
             this.Add(this.vbox1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
             this.Hide();
             this.my_stations.Clicked += new System.EventHandler(this.MyStationsClicked);
-            this.ZipEntry.KeyPressEvent += new Gtk.KeyPressEventHandler(this.OnKeyPressed);
             this.Search.Clicked += new System.EventHandler(this.SearchClicked);
         }
     }

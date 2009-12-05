@@ -54,12 +54,10 @@
     <Compile Include="src\StationUrl.cs" />
     <Compile Include="src\NPRItemProvider.cs" />
     <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="src\ConfigDialog.cs" />
-    <Compile Include="src\StationSearchWidget.cs" />
-    <Compile Include="src\WrapLabel.cs" />
     <Compile Include="src\StationsUpdatedEventArgs.cs" />
     <Compile Include="src\StationDockItem.cs" />
-    <Compile Include="gtk-gui\bin1.cs" />
+    <Compile Include="src\StationSearchWidget.cs" />
+    <Compile Include="gtk-gui\NPR.StationSearchWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

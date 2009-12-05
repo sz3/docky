@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
-
+/*
 using System;
 
 using Gtk;
@@ -29,6 +29,7 @@ namespace NPR
 		
 		public ConfigDialog ()
 		{
+
 			SkipTaskbarHint = true;
 			TypeHint = Gdk.WindowTypeHint.Dialog;
 			WindowPosition = Gtk.WindowPosition.Center;
@@ -45,11 +46,12 @@ namespace NPR
 			AddButton ("_Close", ResponseType.Close);
 			SetDefaultSize (350, 400);
 			Title = "NPR Configuration";
+
 		}
 		
 		protected override void OnShown ()
 		{
-			searchWidget.ShowMyStations ();
+			
 			base.OnShown ();
 		}
 		
@@ -59,3 +61,4 @@ namespace NPR
 		}
 	}
 }
+*/

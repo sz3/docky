@@ -31,62 +31,56 @@ namespace NPR
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class StationSearchWidget : Gtk.Bin
 	{
-		
-		TileView view;
 
 		public StationSearchWidget ()
 		{
 			this.Build ();
 			
-			view = new TileView ();
-			
-			stationsScroll.HscrollbarPolicy = PolicyType.Never;
-			stationsScroll.AddWithViewport (view);
-
+			ZipEntry.InnerEntry.KeyPressEvent += OnKeyPressed;
+			ZipEntry.Show ();
 		}
 		
 		public void ClearResults ()
 		{
-			view.Clear ();
+			tileview.Clear ();
+			ZipEntry.InnerEntry.Text = "";
 		}
 		
 		public void ShowMyStations ()
 		{
-			view.Clear ();
-			ZipEntry.Text = "";
+			ClearResults ();
 			my_stations.Sensitive = false;
 			
-			DockServices.System.RunOnThread (() => {
-				foreach (XElement stationXElement in NPR.MyStations.Select (id => NPR.StationXElement (id))) {
-					DockServices.System.RunOnMainThread (() => {
-						view.AppendTile (new Station (stationXElement));
-					});
-				}
+			// no need to thread this, MyStations already exist in memory
+			NPR.MyStations.ToList ().ForEach (sID => {
+				tileview.AppendTile (NPR.LookupStation (sID));
 			});
 			
-			ZipEntry.GrabFocus ();
+			//ZipEntry.GrabFocus ();
 		}
 		
 		protected virtual void SearchClicked (object sender, System.EventArgs e)
 		{
 			uint zip;
-			if (!uint.TryParse (ZipEntry.Text, out zip))
+			if (!uint.TryParse (ZipEntry.InnerEntry.Text, out zip))
 				return;
 			
 			my_stations.Sensitive = true;
 			
-			view.Clear ();
+			tileview.Clear ();
 			
-			DockServices.System.RunOnMainThread (() => {
+			DockServices.System.RunOnThread (() => {
 				// grab a list of nearby stations, sorted by closeness to the supplied query
-				IEnumerable<Station> stations = NPR.SearchStations (zip).OrderByDescending (s => s.Signal);
-				DockServices.System.RunOnMainThread (() => {
-					if (stations.Count () == 0) {
-						view.AppendTile (new Station (-1));
-						return;
-					}
-					foreach (Station s in stations)
-						view.AppendTile (s);
+				IEnumerable<Station> stations = NPR.SearchStations (zip);
+
+				stations.ToList ().ForEach (s => {
+					if (s.IsLoaded)
+						tileview.AppendTile (s);
+					s.FinishedLoading += delegate {
+						DockServices.System.RunOnMainThread (() => {
+							tileview.AppendTile (s);
+						});
+					};
 				});
 			});
 		}

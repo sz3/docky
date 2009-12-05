@@ -29,7 +29,7 @@
 using System;
 using Gtk;
 
-namespace Banshee.Widgets
+namespace Docky.Widgets
 {
     public class HoverImageButton : EventBox
     {

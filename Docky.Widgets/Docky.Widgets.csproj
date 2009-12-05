@@ -21,6 +21,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -29,6 +30,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -60,8 +62,9 @@
     <Compile Include="Docky.Widgets\Choreographer.cs" />
     <Compile Include="Docky.Widgets\TileView.cs" />
     <Compile Include="Docky.Widgets\Tile.cs" />
-    <Compile Include="Docky.Widgets\ITile.cs" />
-    <Compile Include="Docky.Widgets\AbstractTile.cs" />
+    <Compile Include="Docky.Widgets\HoverImageButton.cs" />
+    <Compile Include="Docky.Widgets\SearchEntry.cs" />
+    <Compile Include="Docky.Widgets\AbstractTileObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Docky.Widgets\" />
