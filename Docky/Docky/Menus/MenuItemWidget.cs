@@ -150,7 +150,7 @@ namespace Docky.Menus
 		{
 			int iconSize = allocation.Height - IconBuffer * 2;
 			
-			int x = allocation.X + 1 + ((iconSize - surface.Width) / 2);
+			int x = allocation.X + 4 + ((iconSize - surface.Width) / 2);
 			int y = allocation.Y + IconBuffer + ((iconSize - surface.Height) / 2);
 			
 			cr.SetSource (surface.Internal, x, y);
@@ -227,7 +227,7 @@ namespace Docky.Menus
 				Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
 				char accel;
 				layout.SetMarkupWithAccel (item.Text, '_', out accel);
-				layout.Width = Pango.Units.FromPixels (allocation.Width - allocation.Height - 10);
+				layout.Width = Pango.Units.FromPixels (allocation.Width - allocation.Height - 13);
 				layout.FontDescription = Style.FontDescription;
 				layout.Ellipsize = Pango.EllipsizeMode.End;
 				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (FontSize);
@@ -236,7 +236,7 @@ namespace Docky.Menus
 				Pango.Rectangle logical, ink;
 				layout.GetPixelExtents (out ink, out logical);
 				
-				cr.MoveTo (allocation.X + allocation.Height + 5, allocation.Y + (allocation.Height - logical.Height) / 2);
+				cr.MoveTo (allocation.X + allocation.Height + 8, allocation.Y + (allocation.Height - logical.Height) / 2);
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.Color = TextColor.SetAlpha (item.Disabled ? 0.5 : 1);
 				cr.Fill ();
