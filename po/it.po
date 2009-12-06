@@ -7,122 +7,236 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-28 14:22-0600\n"
-"PO-Revision-Date: 2009-11-27 00:45+0000\n"
+"POT-Creation-Date: 2009-12-04 14:25+0100\n"
+"PO-Revision-Date: 2009-12-05 00:54+0000\n"
 "Last-Translator: Quizzlo <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-11-29 00:28+0000\n"
+"X-Launchpad-Export-Date: 2009-12-06 11:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:106
+#: ../Docky/Docky/ConfigurationWindow.cs:110
 msgid "Click on any dock to configure."
 msgstr "Clicca su un dock per configurarlo."
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:57
+#: ../Docky/Docky/ConfigurationWindow.cs:111
+msgid "Drag any dock to move it."
+msgstr "Trascina un dock per spostarlo."
+
+#: ../Docky/Docky/Items/DockyItem.cs:61
+msgid "_Show Preferences"
+msgstr "_Mostra preferenze"
+
+#: ../Docky/Docky/Items/DockyItem.cs:62
+msgid "_About"
+msgstr "_Informazioni"
+
+#: ../Docky/Docky/Items/DockyItem.cs:63
+msgid "_Quit Docky"
+msgstr "_Esci da Docky"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:58
 msgid "Docky Configuration"
 msgstr "Configurazione di Docky"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:85
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:86
 msgid "Start When Computer Starts"
-msgstr "Esegui all'Avvio del Computer"
+msgstr "Esegui all'avvio del computer"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:100
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:101
 msgid "Theme:"
 msgstr "Tema:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:123
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:124
 msgid "<b>General Options</b>"
-msgstr "<b>Opzioni Generali</b>"
+msgstr "<b>Opzioni generali</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:144
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:145
 msgid "<b>Dock Configuration</b>"
-msgstr "<b>Configurazione Dock</b>"
+msgstr "<b>Configurazione dock</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:178
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:179
 msgid "New Dock"
 msgstr "Nuovo Dock"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:205
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:206
 msgid "Delete Dock"
 msgstr "Elimina Dock"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
-msgid "None"
-msgstr "Nessuno"
-
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:78
-msgid "Autohide"
-msgstr "Scomparsa Automatica"
+msgid "None"
+msgstr "Nessuna"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:79
-msgid "Intellihide"
-msgstr "Scomparsa Intelligente"
+msgid "Autohide"
+msgstr "Scomparsa automatica"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
+msgid "Intellihide"
+msgstr "Scomparsa intelligente"
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:81
 msgid "Window Dodge"
-msgstr "Evita Finestre"
+msgstr "Evita finestre"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:95
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:82
+msgid ""
+"None : Always present, acts like a panel.\n"
+"Autohide : Hides whenever the mouse is not over it.\n"
+"Intellihide : Hides when dock obstructs the active application.\n"
+"Window Dodge : Hides when dock obstructs any window."
+msgstr ""
+"Nessuna: Sempre presente, si comporta come un pannello.\n"
+"Scomparsa automatica: Scompare quando il mouse non si trova sul dock.\n"
+"Scomparsa intelligente: Scompare quando il dock ostruisce l'applicazione "
+"attiva.\n"
+"Evita finestre: Scompare quando il dock ostruisce qualsiasi finestra."
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:93
+msgid "Fade out dock instead of slide off screen"
+msgstr "Dissolve invece di scorrere via dallo schermo"
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:96
 msgid "Fade On Hide"
-msgstr "Svanisce Alla Scomparsa"
+msgstr "Dissolvenza alla scomparsa"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:125
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:126
 msgid "Icon Size:"
-msgstr "Dimensione Icone:"
+msgstr "Dimensione icone:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:136
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:137
 msgid "Autohide:"
-msgstr "Scomparsa Automatica:"
+msgstr "Scomparsa automatica:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:146
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:144
+msgid ""
+"Causes launchers which currently manage more than one window to have an "
+"extra indicator under it."
+msgstr ""
+"Consente ai lanciatori che gestiscono più di una finestra di avere un "
+"indicatore extra al di sotto di esso."
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:147
 msgid "Indicate Multiple Windows"
-msgstr "Indica Finestre Multiple"
+msgstr "Indica finestre multiple"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:160
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:161
 msgid "Panel Mode"
-msgstr "Modalità Pannello"
+msgstr "Modalità pannello"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:175
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:173
+msgid ""
+"When set, windows which do not already have launchers on a dock will be "
+"added to this dock."
+msgstr ""
+"Quando impostato, le finestre che non hanno ancora un lanciatore su un dock "
+"verranno aggiunte a questo dock."
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:176
 msgid "Manage Windows Without Launcher"
-msgstr "Gestione Finestre Senza Lanciatore"
+msgstr "Gestione finestre senza lanciatore"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:190
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:191
 msgid "Zoom:"
 msgstr "Ingrandimento:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:262
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:263
 msgid "<b>Inactive Plugins</b>"
-msgstr "<b>Plugin Inattivi</b>"
+msgstr "<b>Plugin inattivi</b>"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:270
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:271
 msgid "<b>Active Plugins</b>"
-msgstr "<b>Plugin Attivi</b>"
+msgstr "<b>Plugin attivi</b>"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:342
-msgid "Digital Clock"
-msgstr "Orologio Digitale"
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:102
+msgid "Icon"
+msgstr "Icona"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:348
-msgid "24-Hour Clock"
-msgstr "Orologio 24-Ore"
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:186
+msgid "New _Window"
+msgstr "Nuova _finestra"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:354
-msgid "Show Date"
-msgstr "Mostra Data"
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:188
+#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:49
+#: ../StandardPlugins/Bookmarks/src/BookmarkDockItem.cs:85
+#: ../StandardPlugins/Mounter/src/MountItem.cs:96
+msgid "_Open"
+msgstr "_Apri"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:360
-msgid "Select Theme"
-msgstr "Seleziona Tema"
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:354
+msgid "_Pin to Dock"
+msgstr "_Fissa sul Dock"
 
-#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:45
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:216
+msgid "Open"
+msgstr "Apri"
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:217
+msgid "Open Containing Folder"
+msgstr "Apri finestra che lo contiene"
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:218
+msgid "Reset Color"
+msgstr "Reset del colore"
+
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:243
+msgid "Unma_ximize"
+msgstr "_Demassimizza"
+
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:246
+msgid "Ma_ximize"
+msgstr "_Massimizza"
+
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:251
+msgid "_Restore"
+msgstr "_Ripristina"
+
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:254
+msgid "Mi_nimize"
+msgstr "_Minimizza"
+
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:258
+msgid "_Quit"
+msgstr "_Esci"
+
+#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:80
+msgid "Computer"
+msgstr "Computer"
+
+#: ../StandardPlugins/Bookmarks/src/BookmarkDockItem.cs:86
+#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:157
+#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:179
+msgid "_Remove"
+msgstr "_Elimina"
+
+#: ../StandardPlugins/Bookmarks/src/BookmarkDockItem.cs:87
+msgid "Reset _Color"
+msgstr "Reset del _colore"
+
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:343
+msgid "Di_gital Clock"
+msgstr "_Orologio digitale"
+
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:349
+msgid "24-Hour _Clock"
+msgstr "Orologio _24-Ore"
+
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:355
+msgid "Show _Date"
+msgstr "Mostra _data"
+
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:361
+msgid "Select _Theme"
+msgstr "Seleziona _tema"
+
+#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
 msgstr "Temi"
 
-#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:50
+#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
 msgid "Theme"
 msgstr "Tema"
 
@@ -152,71 +266,95 @@ msgstr "Verifica e salva le informazioni dell'account"
 msgid "Account validation succeeded!"
 msgstr "Convalida dell'account riuscita!"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:196
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:182
 msgid "Username or Password not set"
-msgstr "Nome Utente o Password non impostati"
+msgstr "Nome utente o password non impostati"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:246
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:232
 msgid "(no subject)"
 msgstr "(nessun oggetto)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:264
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:250
 #, csharp-format
 msgid "From: {0}"
 msgstr "Da: {0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:275
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:279
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:261
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:265
 msgid "Feed Error"
-msgstr "Errore Feed"
+msgstr "Errore feed"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:284
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:270
 msgid "Invalid Username"
-msgstr "Nome Utente Non Valido"
+msgstr "Nome utente non valido"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:288
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:274
 msgid "Network Error"
-msgstr "Errore di Rete"
+msgstr "Errore di rete"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:293
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:279
 msgid "General Error"
-msgstr "Errore Generale"
+msgstr "Errore generale"
 
 #: ../StandardPlugins/GMail/src/GMailConfiguration.cs:38
 msgid "Labels"
 msgstr "Etichette"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:70
+#: ../StandardPlugins/GMail/src/GMailConfigurationDialog.cs:38
+msgid "GMail Configuration"
+msgstr "Configurazione di GMail"
+
+#: ../StandardPlugins/GMail/src/GMailConfigurationDialog.cs:43
+msgid "Login"
+msgstr "Login"
+
+#: ../StandardPlugins/GMail/src/GMailConfigurationDialog.cs:46
+msgid "Config"
+msgstr "Configura"
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:49
+msgid "Inbox"
+msgstr "Posta in arrivo"
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:93
 msgid "No unread mail"
 msgstr "Nessun messaggio non letto"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:72
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
 msgstr[0] "{0} messaggio non letto"
 msgstr[1] "{0} messaggi non letti"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:92
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:115
 msgid "Checking mail..."
 msgstr "Controllo messaggi..."
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
-msgid "View "
-msgstr "Mostra "
-
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:232
-msgid "Compose Mail"
-msgstr "Scrivi Messaggio"
-
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:247
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:326
-msgid "Settings"
-msgstr "Impostazioni"
+msgid "_View "
+msgstr "_Mostra "
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:255
-msgid "Check Now"
-msgstr "Controlla Ora"
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:252
+msgid "_Compose Mail"
+msgstr "_Scrivi messaggio"
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:267
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:286
+msgid "_Settings"
+msgstr "_Impostazioni"
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:275
+msgid "Check _Now"
+msgstr "_Controlla ora"
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:281
+msgid "_Reset Color"
+msgstr "Reset del _colore"
+
+#: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:35
+msgid "GMail"
+msgstr "GMail"
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
@@ -240,7 +378,7 @@ msgstr "Non possiedi un account?"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:70
 msgid "Check _Every"
-msgstr "_Verifica Ogni"
+msgstr "_Verifica ogni"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:80
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:279
@@ -250,77 +388,196 @@ msgstr "minuti"
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:133
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:155
 msgid "Move _Up"
-msgstr "Sposta in A_lto"
+msgstr "Sposta in a_lto"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:145
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:167
 msgid "Move _Down"
-msgstr "Sposta In _Basso"
-
-#: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:157
-#: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:179
-msgid "_Remove"
-msgstr "_Elimina"
+msgstr "Sposta In _basso"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:180
 msgid "Add _Label"
-msgstr "Aggiungi _Etichetta"
+msgstr "Aggiungi _etichetta"
 
 #: ../StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs:202
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:235
 msgid "_Add"
 msgstr "A_ggiungi"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:193
-msgid "Empty all of the items from the trash?"
-msgstr ""
+#: ../StandardPlugins/Mounter/src/MountItem.cs:98
+msgid "_Eject"
+msgstr "_Espelli"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:195
+#: ../StandardPlugins/Mounter/src/MountItem.cs:98
+msgid "_Unmount"
+msgstr "_Smonta"
+
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:51
+msgid "Network Manager"
+msgstr "Gestore rete"
+
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:90
+msgid "Connecting..."
+msgstr "Connessione in corso..."
+
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:99
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:164
+msgid "Disconnected"
+msgstr "Disconnesso"
+
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:108
+#, csharp-format
+msgid "Connected: {0}"
+msgstr "Connesso: {0}"
+
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:76
+msgid "Clear the Recent Documents list?"
+msgstr "Pulire l'elenco dei documenti recenti?"
+
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:78
+msgid "Clear Recent Documents"
+msgstr "Pulisci documenti recenti"
+
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:80
+msgid ""
+"If you clear the Recent Documents list, you clear the following:\n"
+"• All items from the Places → Recent Documents menu item.\n"
+"• All items from the recent documents list in all applications."
+msgstr ""
+"Scegliendo di pulire l'elenco dei documenti recenti verranno rimosse:\n"
+"• tutte le voci dal menù «Risorse → Documenti recenti»;\n"
+"• tutte le voci negli elenchi dei documenti recenti delle singole "
+"applicazioni."
+
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
+msgid "_Clear Recent Documents..."
+msgstr "_Pulisci documenti recenti..."
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:72
+msgid "No items in Trash"
+msgstr "Nessun elemento nel cestino"
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:74
+#, csharp-format
+msgid "{0} item in Trash"
+msgid_plural "{0} items in Trash"
+msgstr[0] "{0} elemento nel cestino"
+msgstr[1] "{0} elementi nel cestino"
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:159
+msgid "_Open Trash"
+msgstr "_Apri cestino"
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:161
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:198
+msgid "Empty _Trash"
+msgstr "_Svuota cestino"
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:183
+msgid "Empty all of the items from the trash?"
+msgstr "Svuotare il cestino da tutti gli oggetti presenti?"
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:185
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
-
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:200
-msgid "_Cancel"
-msgstr ""
-
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:201
-msgid "Empty _Trash"
-msgstr ""
+"Scegliendo di svuotare il cestino, tutti gli oggetti\n"
+"in esso contenuti sono perduti in modo permanente.\n"
+"Notare che è anche possibile eliminarli uno ad uno."
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:84
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:87
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:92
 msgid "Invalid Weather Location"
-msgstr "Località Meteo Non Valida"
+msgstr "Località meteo non valida"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:90
 msgid "Network Error: "
-msgstr "Errore Rete: "
+msgstr "Errore rete: "
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:75
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:85
+#: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:48
+msgid "iGoogle"
+msgstr "iGoogle"
+
+#: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:54
+msgid ""
+"Weather data provided by Google.  This source requires locations to be "
+"specified as US Zip Code or 'City, Country'."
+msgstr ""
+"Dati meteo forniti da Google. Questa fonte richiede che la località sia "
+"specificata come C.A.P. USA oppure 'Città, Paese'."
+
+#: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:53
+msgid "Weather Channel"
+msgstr "Weather Channel"
+
+#: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:59
+msgid ""
+"Weather data provided by and copyright The Weather Channel.  This source "
+"requires locations to be specified as US Zip Code or a unique code from the "
+"website.  To find your code, look up your forecast on their site and the "
+"code is in the URL after '/local/' and looks like AAXX0000."
+msgstr ""
+"Dati meteo forniti da The Weather Channel. Questa fonte richiede che la "
+"località sia specificata come C.A.P. USA oppure un codice unico dal sito. "
+"Per trovare il codice, cercare la localita all'interno del sito; il codice "
+"si trova nell'URL dopo '/local/' ed è simile a AAXX0000."
+
+#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:48
+msgid "Weather Underground"
+msgstr "Weather Underground"
+
+#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:54
+msgid ""
+"Weather data provided by and copyright Weather Underground.  This source "
+"requires locations to be specified as US Zip Code or 'City, Country'."
+msgstr ""
+"Dati meteo forniti da Weather Underground. Questa fonte richiede che la "
+"località sia specificate come C.A.P. USA oppure 'Città, Paese'."
+
+#: ../StandardPlugins/Weather/src/WeatherConfiguration.cs:42
+msgid "Locations"
+msgstr "Località"
+
+#: ../StandardPlugins/Weather/src/WeatherConfiguration.cs:47
+msgid "Search Results"
+msgstr "Risultati ricerca"
+
+#: ../StandardPlugins/Weather/src/WeatherConfiguration.cs:90
+msgid "Currently searching..."
+msgstr "Ricerca in corso..."
+
+#: ../StandardPlugins/Weather/src/WeatherConfiguration.cs:105
+msgid "No results found"
+msgstr "Nessun risultato trovato"
+
+#: ../StandardPlugins/Weather/src/WeatherConfigurationDialog.cs:37
+msgid "Weather Configuration"
+msgstr "Configurazione meteo"
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:78
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:87
 msgid "Fetching data..."
 msgstr "Prelevamento dati..."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:306
-msgid "Radar Map"
-msgstr "Mappa Radar"
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:266
+msgid "Radar _Map"
+msgstr "_Mappa radar"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:319
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:279
 #, csharp-format
 msgid "{0}'s Forecast"
 msgstr "Previsioni per {0}"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:333
-msgid "Reload Weather Data"
-msgstr "Ricarica Dati Meteo"
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:293
+msgid "_Reload Weather Data"
+msgstr "_Ricarica dati meteo"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:88
 msgid "_Weather Provider"
-msgstr "_Provider Meteo"
+msgstr "_Provider meteo"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:116
 msgid "Some information about the weather source."
@@ -328,7 +585,7 @@ msgstr "Alcune informazioni sulla fonte meteo."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:202
 msgid "Add _Location"
-msgstr "Aggiungi _Località"
+msgstr "Aggiungi _località"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:224
 msgid "_Search"
@@ -336,19 +593,19 @@ msgstr "_Cerca"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:269
 msgid "Automatically Update _Every"
-msgstr "Aggiorna Automaticamente _Ogni"
+msgstr "Aggiorna automaticamente _ogni"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.WeatherConfiguration.cs:309
 msgid "Use _Metric Units"
-msgstr "Utilizza _Unità Metriche"
+msgstr "Utilizza _unità metriche"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:87
-msgid "Today"
-msgstr "Oggi"
+msgid "_Today"
+msgstr "_oggi"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:90
-msgid "Tomorrow"
-msgstr "Domani"
+msgid "T_omorrow"
+msgstr "_domani"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:339
 msgid "Humidity"
@@ -360,7 +617,7 @@ msgstr "Temperatura"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:343
 msgid "Feels Like"
-msgstr "Sembra Quasi"
+msgstr "Sembrano quasi"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:345
 msgid "Wind"
@@ -385,3 +642,33 @@ msgstr "Docky"
 #: ../data/docky.desktop.in.h:2
 msgid "The finest dock no money can buy."
 msgstr "Il miglior dock che nessuna moneta può comprare."
+
+#~ msgid "Settings"
+#~ msgstr "Impostazioni"
+
+#~ msgid "Radar Map"
+#~ msgstr "Mappa Radar"
+
+#~ msgid "Reload Weather Data"
+#~ msgstr "Ricarica Dati Meteo"
+
+#~ msgid "Compose Mail"
+#~ msgstr "Scrivi Messaggio"
+
+#~ msgid "View "
+#~ msgstr "Mostra "
+
+#~ msgid "Check Now"
+#~ msgstr "Controlla Ora"
+
+#~ msgid "Digital Clock"
+#~ msgstr "Orologio Digitale"
+
+#~ msgid "Select Theme"
+#~ msgstr "Seleziona Tema"
+
+#~ msgid "Show Date"
+#~ msgstr "Mostra Data"
+
+#~ msgid "24-Hour Clock"
+#~ msgstr "Orologio 24-Ore"
