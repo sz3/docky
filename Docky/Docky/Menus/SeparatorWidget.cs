@@ -48,7 +48,7 @@ namespace Docky.Menus
 			if (title == null)
 				SetSizeRequest (-1, 3);
 			else
-				SetSizeRequest (-1, 15);
+				SetSizeRequest (-1, 11);
 		}
 		
 		protected override bool OnExposeEvent (EventExpose evnt)
@@ -71,7 +71,7 @@ namespace Docky.Menus
 					layout.Width = Pango.Units.FromPixels (Allocation.Width - Allocation.Height);
 					layout.FontDescription = Style.FontDescription;
 					layout.Ellipsize = Pango.EllipsizeMode.End;
-					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (10);
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (8);
 					layout.FontDescription.Weight = Pango.Weight.Bold;
 					
 					Pango.Rectangle logical, ink;
