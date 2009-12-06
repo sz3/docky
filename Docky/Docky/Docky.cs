@@ -81,6 +81,12 @@ namespace Docky
 			// set process name
 			DockServices.System.SetProcessName ("docky");
 			
+			// check compositing
+			CheckComposite ();
+			Gdk.Screen.Default.CompositedChanged += delegate {
+				CheckComposite ();
+			};
+			
 			PluginManager.Initialize ();
 			Controller.Initialize ();
 			
@@ -91,6 +97,12 @@ namespace Docky
 			Controller.Dispose ();
 			PluginManager.Shutdown ();
 			Gnome.Vfs.Vfs.Shutdown ();
+		}
+		
+		static void CheckComposite ()
+		{
+			if (!Gdk.Screen.Default.IsComposited)
+				Log.Notify (Catalog.GetString ("Docky requires compositing to work properly.  Please enable compositing and restart docky."));
 		}
 		
 		public static void ShowAbout ()
