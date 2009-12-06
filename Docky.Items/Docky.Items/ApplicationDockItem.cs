@@ -188,6 +188,8 @@ namespace Docky.Items
 				list[MenuListContainer.Actions].Insert (0, new MenuItem (Catalog.GetString ("_Open"), RunIcon, (o, a) => Launch ()));
 
 			if (related_uris.Any ()) {
+				
+				list.SetContainerTitle (MenuListContainer.RelatedItems, Mono.Unix.Catalog.GetString ("Related Items"));
 				lock (related_lock) {
 					foreach (ZeitgeistResult result in related_uris) {
 						RelatedFileMenuItem item = new RelatedFileMenuItem (result.Uri);
