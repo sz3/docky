@@ -351,7 +351,7 @@ namespace Docky.Items
 			
 			if (item is ApplicationDockItem && !items.ContainsValue (item)) {
 				list[MenuListContainer.Actions].Insert (0, 
-					new MenuItem (Catalog.GetString ("_Pin to Dock"), "pin.svg@" + GetType ().Assembly.FullName, (o, a) => PinToDock (item as ApplicationDockItem)));
+					new MenuItem (Catalog.GetString ("_Pin to Dock"), "[monochrome]pin.svg@" + GetType ().Assembly.FullName, (o, a) => PinToDock (item as ApplicationDockItem)));
 			}
 			
 			return list;
