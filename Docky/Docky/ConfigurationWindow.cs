@@ -169,6 +169,7 @@ namespace Docky
 		protected virtual void OnThemeComboChanged (object sender, System.EventArgs e)
 		{
 			Docky.Controller.DockTheme = theme_combo.ActiveText;
+			themePreview.Pixbuf = DockServices.Drawing.LoadIcon (Docky.Controller.MenuSvg, 80, 30);
 		}
 	
 		protected virtual void OnDeleteDockButtonClicked (object sender, System.EventArgs e)
