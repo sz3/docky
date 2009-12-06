@@ -129,7 +129,7 @@ namespace Docky.Windowing
 			screen = Wnck.Screen.Default;
 			prefix_filters = BuildPrefixFilters ();
 			
-			exec_to_desktop_files = DesirializeExecStrings ();
+			exec_to_desktop_files = DeserializeExecStrings ();
 			
 			if (exec_to_desktop_files == null) {
 				exec_to_desktop_files = BuildExecStrings ();
@@ -493,7 +493,7 @@ namespace Docky.Windowing
 			}
 		}
 		
-		Dictionary<string, List<string>> DesirializeExecStrings ()
+		Dictionary<string, List<string>> DeserializeExecStrings ()
 		{
 			string file = Path.Combine (DockServices.System.UserDataFolder, "ExecStrings");
 			
