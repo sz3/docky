@@ -485,9 +485,10 @@ namespace Docky.Windowing
 				File.Delete (file);
 			
 			try {
-				FileStream stream = new FileStream (file, FileMode.OpenOrCreate);
-				BinaryFormatter formatter = new BinaryFormatter ();
-				formatter.Serialize (stream, exec_to_desktop_files);
+				using (FileStream stream = new FileStream (file, FileMode.OpenOrCreate)) {
+					BinaryFormatter formatter = new BinaryFormatter ();
+					formatter.Serialize (stream, exec_to_desktop_files);
+				}
 			} catch {
 				return;
 			}
@@ -503,9 +504,10 @@ namespace Docky.Windowing
 			Dictionary<string, List<string>> result;
 			
 			try {
-				FileStream stream = new FileStream (file, FileMode.Open);
-				BinaryFormatter formatter = new BinaryFormatter ();
-				result = (Dictionary<string, List<string>>) formatter.Deserialize (stream);
+				using (FileStream stream = new FileStream (file, FileMode.Open)) {
+					BinaryFormatter formatter = new BinaryFormatter ();
+					result = (Dictionary<string, List<string>>) formatter.Deserialize (stream);
+				}
 			} catch {
 				return null;
 			}
