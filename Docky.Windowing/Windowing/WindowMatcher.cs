@@ -22,6 +22,8 @@ using System.Linq;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 using Wnck;
 
@@ -126,7 +128,23 @@ namespace Docky.Windowing
 			update_lock = new object ();
 			screen = Wnck.Screen.Default;
 			prefix_filters = BuildPrefixFilters ();
-			exec_to_desktop_files = BuildExecStrings ();
+			
+			exec_to_desktop_files = DesirializeExecStrings ();
+			
+			if (exec_to_desktop_files == null) {
+				exec_to_desktop_files = BuildExecStrings ();
+				SerializeExecStrings ();
+			} else {
+				// rebuild after 2 minutes just to be sure we are up to date
+				GLib.Timeout.Add (2 * 60 * 1000, delegate {
+					lock (update_lock) {
+						exec_to_desktop_files = BuildExecStrings ();
+						SerializeExecStrings ();
+					}
+					return false;
+				});
+			}
+			
 			
 			window_to_desktop_files = new Dictionary<Wnck.Window, List<string>> ();
 			foreach (Wnck.Window w in screen.Windows) {
@@ -136,7 +154,7 @@ namespace Docky.Windowing
 			foreach (GLib.File dir in DesktopFileDirectories.Select (d => GLib.FileFactory.NewForPath (d))) {
 				MonitorDesktopFileDirs (dir);
 			}
-
+			
 			screen.WindowOpened += WnckScreenDefaultWindowOpened;
 			screen.WindowClosed += WnckScreenDefaultWindowClosed;
 		}
@@ -168,8 +186,10 @@ namespace Docky.Windowing
 						if (!file.Path.EndsWith (".desktop"))
 							return;
 						// reload our dictionary of exec strings						
-						lock (update_lock)
+						lock (update_lock) {
 							exec_to_desktop_files = BuildExecStrings ();
+							SerializeExecStrings ();
+						}
 						
 						// Make sure to trigger event on main thread
 						DockServices.System.RunOnMainThread (() => {
@@ -452,6 +472,45 @@ namespace Docky.Windowing
 				return "";
 			
 			return name.Substring (6);
+		}
+		
+		void SerializeExecStrings ()
+		{
+			if (exec_to_desktop_files == null)
+				return;
+			
+			string file = Path.Combine (DockServices.System.UserDataFolder, "ExecStrings");
+			
+			if (File.Exists (file))
+				File.Delete (file);
+			
+			try {
+				FileStream stream = new FileStream (file, FileMode.OpenOrCreate);
+				BinaryFormatter formatter = new BinaryFormatter ();
+				formatter.Serialize (stream, exec_to_desktop_files);
+			} catch {
+				return;
+			}
+		}
+		
+		Dictionary<string, List<string>> DesirializeExecStrings ()
+		{
+			string file = Path.Combine (DockServices.System.UserDataFolder, "ExecStrings");
+			
+			if (!File.Exists (file))
+				return null;
+			
+			Dictionary<string, List<string>> result;
+			
+			try {
+				FileStream stream = new FileStream (file, FileMode.Open);
+				BinaryFormatter formatter = new BinaryFormatter ();
+				result = (Dictionary<string, List<string>>) formatter.Deserialize (stream);
+			} catch {
+				return null;
+			}
+			
+			return result;
 		}
 		
 		Dictionary<string, List<string>> BuildExecStrings ()
