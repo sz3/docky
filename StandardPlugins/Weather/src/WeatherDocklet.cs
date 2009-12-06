@@ -263,34 +263,29 @@ namespace WeatherDocklet
 			
 			if (WeatherController.Weather.Condition != null)
 			{
-				list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Radar _Map"),
+				list[MenuListContainer.Header].Add (new MenuItem (Catalog.GetString ("Radar _Map"),
 						WeatherController.Weather.Image, (o, a) => WeatherController.Weather.ShowRadar ()));
-				
-				list[MenuListContainer.Actions].Add (new SeparatorMenuItem ());
 			}
 			
-			bool hasForecast = false;
 			
+			list.SetContainerTitle (MenuListContainer.Actions, Mono.Unix.Catalog.GetString ("Forecasts"));
 			for (int i = 0; i < WeatherController.Weather.ForecastDays; i++)
 				if (WeatherController.Weather.Forecasts[i].dow != null)
 				{
-					hasForecast = true;
 					list[MenuListContainer.Actions].Add (new ForecastMenuItem (i,
 							string.Format (Catalog.GetString ("{0}'s Forecast"), WeatherForecast.DayName (WeatherController.Weather.Forecasts[i].dow)),
 							WeatherController.Weather.Forecasts[i].image));
 				}
 			
-			if (hasForecast)
-				list[MenuListContainer.Actions].Add (new SeparatorMenuItem ());
-			
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Settings"), Gtk.Stock.Preferences,
+			list.SetContainerTitle (MenuListContainer.CustomOne, Mono.Unix.Catalog.GetString ("Configuration"));
+			list[MenuListContainer.CustomOne].Add (new MenuItem (Catalog.GetString ("_Settings"), Gtk.Stock.Preferences,
 					delegate {
 						if (WeatherConfigurationDialog.instance == null)
 							WeatherConfigurationDialog.instance = new WeatherConfigurationDialog ();
 						WeatherConfigurationDialog.instance.Show ();
 					}));
 			
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Reload Weather Data"), Gtk.Stock.Refresh,
+			list[MenuListContainer.CustomOne].Add (new MenuItem (Catalog.GetString ("_Reload Weather Data"), Gtk.Stock.Refresh,
 					delegate {
 						Status = WeatherDockletStatus.ManualReload;
 						State |= ItemState.Wait;
