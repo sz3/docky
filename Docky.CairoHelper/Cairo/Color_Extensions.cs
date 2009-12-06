@@ -26,6 +26,7 @@ namespace Cairo
 			return new Gdk.Color ((byte) (byte.MaxValue * self.R), (byte) (byte.MaxValue * self.G), (byte) (byte.MaxValue * self.B));
 		}
 		
+		// Basic Setters
 		public static Cairo.Color SetHue (this Color self, double hue)
 		{
 			if (hue < 0 || hue > 360)
@@ -53,7 +54,8 @@ namespace Cairo
 		
 		public static Cairo.Color SetValue (this Color self, double val)
 		{
-			if (val < 0 || val > 1) throw new ArgumentOutOfRangeException ("Value", "Value must be between 0 and 1");
+			if (val < 0 || val > 1)
+				throw new ArgumentOutOfRangeException ("Value", "Value must be between 0 and 1");
 			
 			double h, s, v, r, g, b;
 			RGBToHSV (self.R, self.G, self.B, out h, out s, out v);
@@ -65,10 +67,34 @@ namespace Cairo
 		
 		public static Cairo.Color SetAlpha (this Color self, double alpha)
 		{
-			if (alpha < 0 || alpha > 1) throw new ArgumentOutOfRangeException ("Alpha", "Alpha must be between 0 and 1");
+			if (alpha < 0 || alpha > 1)
+				throw new ArgumentOutOfRangeException ("Alpha", "Alpha must be between 0 and 1");
 			return new Cairo.Color (self.R, self.G, self.B, alpha);
 		}
 		
+		// Basic Getters
+		public static double GetHue (this Color self)
+		{
+			double h, s, v;
+			RGBToHSV (self.R, self.G, self.B, out h, out s, out v);
+			return h;
+		}
+
+		public static double GetSaturation (this Color self)
+		{
+			double h, s, v;
+			RGBToHSV (self.R, self.G, self.B, out h, out s, out v);
+			return s;
+		}
+
+		public static double GetValue (this Color self)
+		{
+			double h, s, v;
+			RGBToHSV (self.R, self.G, self.B, out h, out s, out v);
+			return v;
+		}
+		
+		// More complex but useful operations
 		public static Cairo.Color AddHue (this Color self, double val)
 		{
 			double h, s, v, r, g, b;
@@ -81,11 +107,51 @@ namespace Cairo
 		
 		public static Cairo.Color MinimumSaturation (this Color self, double sat)
 		{
-			if (sat < 0 || sat > 1) throw new ArgumentOutOfRangeException ("Saturation", "Saturation must be between 0 and 1");
+			if (sat < 0 || sat > 1)
+				throw new ArgumentOutOfRangeException ("Saturation", "Saturation must be between 0 and 1");
 			
 			double h, s, v, r, g, b;
 			RGBToHSV (self.R, self.G, self.B, out h, out s, out v);
 			s = Math.Max (s, sat);
+			HSVToRGB (h, s, v, out r, out g, out b);
+			
+			return new Cairo.Color (r, g, b, self.A);
+		}
+		
+		public static Cairo.Color MinimumValue (this Color self, double val)
+		{
+			if (val < 0 || val > 1)
+				throw new ArgumentOutOfRangeException ("Value", "Value must be between 0 and 1");
+			
+			double h, s, v, r, g, b;
+			RGBToHSV (self.R, self.G, self.B, out h, out s, out v);
+			v = Math.Max (v, val);
+			HSVToRGB (h, s, v, out r, out g, out b);
+			
+			return new Cairo.Color (r, g, b, self.A);
+		}
+		
+		public static Cairo.Color MaximumSaturation (this Color self, double sat)
+		{
+			if (sat < 0 || sat > 1)
+				throw new ArgumentOutOfRangeException ("Saturation", "Saturation must be between 0 and 1");
+			
+			double h, s, v, r, g, b;
+			RGBToHSV (self.R, self.G, self.B, out h, out s, out v);
+			s = Math.Min (s, sat);
+			HSVToRGB (h, s, v, out r, out g, out b);
+			
+			return new Cairo.Color (r, g, b, self.A);
+		}
+
+		public static Cairo.Color MaximumValue (this Color self, double val)
+		{
+			if (val < 0 || val > 1)
+				throw new ArgumentOutOfRangeException ("Value", "Value must be between 0 and 1");
+			
+			double h, s, v, r, g, b;
+			RGBToHSV (self.R, self.G, self.B, out h, out s, out v);
+			v = Math.Min (v, val);
 			HSVToRGB (h, s, v, out r, out g, out b);
 			
 			return new Cairo.Color (r, g, b, self.A);
