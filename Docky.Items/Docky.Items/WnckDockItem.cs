@@ -238,6 +238,9 @@ namespace Docky.Items
 		protected override MenuList OnGetMenuItems ()
 		{
 			MenuList list = base.OnGetMenuItems ();
+			
+			list.SetContainerTitle (MenuListContainer.Actions, "Actions");
+			list.SetContainerTitle (MenuListContainer.Windows, "Windows");
 			if (ManagedWindows.Any ()) {
 				if (ManagedWindows.Any (w => w.IsMaximized)) {
 					list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Unma_ximize"), MaximizeIcon, 

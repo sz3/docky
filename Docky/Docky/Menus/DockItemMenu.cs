@@ -155,17 +155,23 @@ namespace Docky.Menus
 			Container.Add (vbox);
 			int width = 1;
 			
+			Cairo.Color textColor;
+			if (IsLight) {
+				textColor = new Cairo.Color (0.1, 0.1, 0.1);
+			} else {
+				textColor = new Cairo.Color (1, 1, 1);
+			}
+			
 			foreach (MenuItem item in items.DisplayItems) {
 				if (item is SeparatorMenuItem) {
-					vbox.PackStart (new SeparatorWidget ());
+					SeparatorWidget widget = new SeparatorWidget ((item as SeparatorMenuItem).Title);
+					widget.TextColor = textColor;
+					vbox.PackStart (widget);
 				} else {
 					MenuItemWidget menuItem = new MenuItemWidget (item);
 					menuItem.SelectedChanged += HandleSelectedChanged;
-					if (IsLight) {
-						menuItem.TextColor = new Cairo.Color (0.1, 0.1, 0.1);
-					} else {
-						menuItem.TextColor = new Cairo.Color (1, 1, 1);
-					}
+					menuItem.TextColor = textColor;
+					
 					vbox.PackStart (menuItem, false, false, 0);
 					
 					width = Math.Max (width, menuItem.TextWidth);

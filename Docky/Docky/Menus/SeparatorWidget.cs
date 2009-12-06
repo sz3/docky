@@ -25,20 +25,30 @@ using Cairo;
 using Gdk;
 using Gtk;
 
+using Docky.Services;
+
 namespace Docky.Menus
 {
 
 
 	public class SeparatorWidget : EventBox
 	{
-
-		public SeparatorWidget ()
+		string title;
+		
+		public Cairo.Color TextColor { get; set; }
+		
+		public SeparatorWidget (string title)
 		{
+			this.title = title;
 			HasTooltip = true;
 			VisibleWindow = false;
 			AboveChild = true;
 			
-			SetSizeRequest (-1, 3);
+			// Y-size must be odd to look pretty
+			if (title == null)
+				SetSizeRequest (-1, 3);
+			else
+				SetSizeRequest (-1, 15);
 		}
 		
 		protected override bool OnExposeEvent (EventExpose evnt)
@@ -49,10 +59,42 @@ namespace Docky.Menus
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
 				cr.LineWidth = 1;
 				
-				cr.MoveTo (Allocation.X, Allocation.Y + 1.5);
-				cr.LineTo (Allocation.X + Allocation.Width, Allocation.Y + 1.5);
+				int x = Allocation.X;
+				int width = Allocation.Width;
+				int right = x + width;
+				int xMiddle = x + width / 2;
+				double yMiddle = Allocation.Y + Allocation.Height / 2.0;
 				
-				RadialGradient rg = new RadialGradient (Allocation.X + Allocation.Width / 2, Allocation.Y + 1.5, 0, Allocation.X + Allocation.Width / 2, Allocation.Y + 1.5, Allocation.Width / 2);
+				if (!string.IsNullOrEmpty (title)) {
+					Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
+					layout.SetText (title);
+					layout.Width = Pango.Units.FromPixels (Allocation.Width - Allocation.Height);
+					layout.FontDescription = Style.FontDescription;
+					layout.Ellipsize = Pango.EllipsizeMode.End;
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (10);
+					layout.FontDescription.Weight = Pango.Weight.Bold;
+					
+					Pango.Rectangle logical, ink;
+					layout.GetPixelExtents (out ink, out logical);
+					
+					cr.MoveTo (Allocation.X, Allocation.Y + (Allocation.Height - logical.Height) / 2);
+					Pango.CairoHelper.LayoutPath (cr, layout);
+					cr.Color = TextColor.SetAlpha (.6);
+					cr.Fill ();
+					
+					x += logical.Width + 3;
+				}
+				
+				cr.MoveTo (x, yMiddle);
+				cr.LineTo (right, yMiddle);
+				
+				RadialGradient rg = new RadialGradient (
+					xMiddle, 
+					yMiddle, 
+					0, 
+					xMiddle, 
+					yMiddle, 
+					width / 2);
 				rg.AddColorStop (0, new Cairo.Color (0, 0, 0, 0.9));
 				rg.AddColorStop (1, new Cairo.Color (0, 0, 0, 0));
 				
@@ -60,10 +102,16 @@ namespace Docky.Menus
 				cr.Stroke ();
 				rg.Destroy ();
 				
-				cr.MoveTo (Allocation.X, Allocation.Y + 2.5);
-				cr.LineTo (Allocation.X + Allocation.Width, Allocation.Y + 2.5);
+				cr.MoveTo (x, yMiddle + 1);
+				cr.LineTo (right, yMiddle + 1);
 				
-				rg = new RadialGradient (Allocation.X + Allocation.Width / 2, Allocation.Y + 2.5, 0, Allocation.X + Allocation.Width / 2, Allocation.Y + 2.5, Allocation.Width / 2);
+				rg = new RadialGradient (
+					xMiddle, 
+					yMiddle + 1, 
+					0, 
+					xMiddle, 
+					yMiddle + 1, 
+					width / 2);
 				rg.AddColorStop (0, new Cairo.Color (1, 1, 1, .3));
 				rg.AddColorStop (1, new Cairo.Color (1, 1, 1, 0));
 				

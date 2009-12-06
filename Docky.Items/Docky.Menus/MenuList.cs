@@ -36,6 +36,7 @@ namespace Docky.Menus
 	public class MenuList
 	{
 		Dictionary<MenuListContainer, List<MenuItem>> list;
+		Dictionary<MenuListContainer, string> titles;
 		
 		public IEnumerable<MenuItem> DisplayItems {
 			get {
@@ -44,8 +45,12 @@ namespace Docky.Menus
 					if (!list[container].Any ())
 						continue;
 					
-					if (separate)
-						yield return new SeparatorMenuItem ();
+					if (separate || titles.ContainsKey (container)) {
+						if (titles.ContainsKey (container))
+							yield return new SeparatorMenuItem (titles[container]);
+						else
+							yield return new SeparatorMenuItem ();
+					}
 					foreach (MenuItem item in list[container])
 						yield return item;
 					separate = true;
@@ -56,6 +61,19 @@ namespace Docky.Menus
 		public MenuList ()
 		{
 			list = new Dictionary<MenuListContainer, List<MenuItem>> ();
+			titles = new Dictionary<MenuListContainer, string> ();
+		}
+		
+		public void SetContainerTitle (MenuListContainer container, string title)
+		{
+			titles[container] = title;
+		}
+		
+		public string GetContainerTitle (MenuListContainer container)
+		{
+			if (titles.ContainsKey (container))
+				return titles[container];
+			return null;
 		}
 		
 		public List<MenuItem> this[MenuListContainer container]

@@ -24,7 +24,14 @@ namespace Docky.Menus
 	public class SeparatorMenuItem : MenuItem
 	{
 
-		public SeparatorMenuItem () : base ("", "")
+		public string Title { get; private set; }
+		
+		public SeparatorMenuItem (string title) : base("", "")
+		{
+			Title = title;
+		}
+		
+		public SeparatorMenuItem () : base("", "")
 		{
 		}
 	}
