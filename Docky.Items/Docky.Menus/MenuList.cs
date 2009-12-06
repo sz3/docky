@@ -45,7 +45,7 @@ namespace Docky.Menus
 					if (!list[container].Any ())
 						continue;
 					
-					if (separate || titles.ContainsKey (container)) {
+					if (separate || (titles.ContainsKey (container) && list.Values.Count > 1)) {
 						if (titles.ContainsKey (container))
 							yield return new SeparatorMenuItem (titles[container]);
 						else

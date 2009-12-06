@@ -77,12 +77,12 @@ namespace Docky.Menus
 					Pango.Rectangle logical, ink;
 					layout.GetPixelExtents (out ink, out logical);
 					
-					cr.MoveTo (Allocation.X, Allocation.Y + (Allocation.Height - logical.Height) / 2);
+					cr.MoveTo (Allocation.X + 3, Allocation.Y + (Allocation.Height - logical.Height) / 2);
 					Pango.CairoHelper.LayoutPath (cr, layout);
 					cr.Color = TextColor.SetAlpha (.6);
 					cr.Fill ();
 					
-					x += logical.Width + 3;
+					x += logical.Width + 6;
 				}
 				
 				cr.MoveTo (x, yMiddle);
