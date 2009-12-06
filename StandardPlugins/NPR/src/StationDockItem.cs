@@ -36,7 +36,7 @@ namespace NPR
 		
 		private bool IsReady {
 			get {
-				return (State & ItemState.Wait) != ItemState.Wait;
+				return (State & ItemState.Wait) != ItemState.Wait && OwnedStation.ID > 0;
 			}
 		}
 
@@ -62,6 +62,8 @@ namespace NPR
 			Icon = OwnedStation.Icon;
 			string hover = (string.IsNullOrEmpty (OwnedStation.Description)) ? 
 				OwnedStation.Name : string.Format ("{0} : {1}", OwnedStation.Name, OwnedStation.Description);
+			if (OwnedStation.ID < 1)
+				hover = Catalog.GetString ("Click to add NPR stations.");
 			HoverText = hover;
 			State ^= ItemState.Wait;
 		}
@@ -78,7 +80,8 @@ namespace NPR
 			if (button == 1) {
 				if (IsReady)
 					DockServices.System.Open (OwnedStation.StationUrls.First (u => u.UrlType == StationUrlType.OrgHomePage).Target);
-
+				else
+					NPR.ShowConfig ();
 				return ClickAnimation.Bounce;
 			}
 			

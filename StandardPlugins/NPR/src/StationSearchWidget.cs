@@ -55,8 +55,6 @@ namespace NPR
 			NPR.MyStations.ToList ().ForEach (sID => {
 				tileview.AppendTile (NPR.LookupStation (sID));
 			});
-			
-			//ZipEntry.GrabFocus ();
 		}
 		
 		protected virtual void SearchClicked (object sender, System.EventArgs e)

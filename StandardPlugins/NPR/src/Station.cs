@@ -76,7 +76,6 @@ namespace NPR
 				Name = "No stations found.";
 				Description = "Please try your search again.";
 				ShowActionButton = false;
-				Console.WriteLine ("station finished.");
 				IsLoaded = true;
 			}
 		}
@@ -120,7 +119,6 @@ namespace NPR
 				Gdk.Pixbuf pbuf = new Gdk.Pixbuf (LogoFile);
 				pbuf.Dispose ();
 				// if we get to this point, the logofile will load just fine
-				//Console.WriteLine ("Setting icon to: {0}", LogoFile);
 				Icon = LogoFile;
 			} catch {
 				// delete the bad logofile

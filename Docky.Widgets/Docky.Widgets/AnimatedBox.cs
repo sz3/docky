@@ -380,7 +380,6 @@ namespace Docky.Widgets
             
             AnimatedWidget animated_widget = new AnimatedWidget (widget, duration, easing, blocking, horizontal);
             animated_widget.Parent = this;
-			Console.WriteLine ("adding animated widget: {0}", animated_widget.Duration);
             animated_widget.WidgetDestroyed += OnWidgetDestroyed;
             stage.Add (animated_widget, duration);
             animated_widget.Node = end 
@@ -451,7 +450,6 @@ namespace Docky.Widgets
                 throw new ArgumentNullException ("widget");
             }
             
-			Console.WriteLine (Widgets.Count ());
             AnimatedWidget animated_widget = null;
             foreach (AnimatedWidget child in Widgets) {
                 if (child.Widget == widget) {

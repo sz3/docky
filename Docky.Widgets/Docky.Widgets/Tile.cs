@@ -58,7 +58,6 @@ namespace Docky.Widgets
 			OwnedObject = obj;	
 			
 			OwnedObject.IconUpdated += delegate {
-				Console.WriteLine ("Icon updated.");
 				tileImage.Pixbuf = DockServices.Drawing.LoadIcon (OwnedObject.Icon, 64);
 				tileImage.Show ();
 			};
