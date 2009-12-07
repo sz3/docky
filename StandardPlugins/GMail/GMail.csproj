@@ -46,17 +46,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\gtk-gui\GMail.AbstractLoginWidget.cs" />
-    <Compile Include="src\gtk-gui\GMail.GMailConfiguration.cs" />
-    <Compile Include="src\gtk-gui\generated.cs" />
-    <Compile Include="src\AbstractLoginWidget.cs" />
     <Compile Include="src\GMailAtom.cs" />
-    <Compile Include="src\GMailConfiguration.cs" />
     <Compile Include="src\GMailConfigurationDialog.cs" />
     <Compile Include="src\GMailDockItem.cs" />
     <Compile Include="src\GMailErrorArgs.cs" />
     <Compile Include="src\GMailItemProvider.cs" />
-    <Compile Include="src\GMailLoginConfig.cs" />
     <Compile Include="src\GMailMenuItem.cs" />
     <Compile Include="src\GMailPreferences.cs" />
   </ItemGroup>
@@ -80,6 +74,10 @@
     <ProjectReference Include="..\..\Docky.CairoHelper\Docky.CairoHelper.csproj">
       <Project>{B23E0EDD-6443-4F99-9EAC-B7CC906F080D}</Project>
       <Name>Docky.CairoHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Docky.Widgets\Docky.Widgets.csproj">
+      <Project>{9CF2F475-7848-4333-9A35-93E8224653B3}</Project>
+      <Name>Docky.Widgets</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

@@ -42,11 +42,6 @@ namespace GMail
 			items.Keys.CopyTo (keys, 0);
 			foreach (string label in keys)
 				RemoveItem (label);
-			
-			if (GMailConfigurationDialog.instance == null) {
-				GMailConfigurationDialog.instance.Destroy ();
-				GMailConfigurationDialog.instance = null;
-			}
 		}
 		
 		#endregion

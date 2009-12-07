@@ -29,6 +29,8 @@ using Docky.Items;
 using Docky.Menus;
 using Docky.Services;
 
+using Docky.Widgets;
+
 namespace GMail
 {
 	/// <summary>
@@ -267,9 +269,9 @@ namespace GMail
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Settings"),
 					Gtk.Stock.Preferences,
 					delegate {
-						if (GMailConfigurationDialog.instance == null)
-							GMailConfigurationDialog.instance = new GMailConfigurationDialog ();
-						GMailConfigurationDialog.instance.Show ();
+						if (ConfigDialog.Instance == null)
+							ConfigDialog.Instance = new ConfigDialog ("", new Gtk.Widget [] { });
+						ConfigDialog.Instance.Show ();
 					}));
 			
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Check _Now"),
