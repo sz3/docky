@@ -437,8 +437,18 @@ namespace Docky.Interface
 						(1 - Math.Min (1, (DateTime.UtcNow - remove_time).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds)));
 				}
 				
-				if (Painter != null)
+				if (Painter != null) {
+					Gdk.Rectangle allocation = new Gdk.Rectangle (
+						0, 
+						0, 
+						dockWidth - PainterBufferSize, 
+						IconSize);
+					
+					if (Painter.Allocation != allocation)
+						Painter.SetAllocation (allocation);
+					
 					return Painter.MinimumSize + PainterBufferSize;
+				}
 				
 				return dockWidth;
 			}
