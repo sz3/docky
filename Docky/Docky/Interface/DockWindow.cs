@@ -372,7 +372,7 @@ namespace Docky.Interface
 		}
 		
 		int PainterBufferSize {
-			get { return ZoomedIconSize + 3 * DockWidthBuffer; }
+			get { return 2 * IconSize + 3 * DockWidthBuffer; }
 		}
 		
 		int IconSize {
@@ -1744,7 +1744,7 @@ namespace Docky.Interface
 				
 				DockySurface painterSurface = Painter.GetSurface (surface);
 			
-				painter_area = new Gdk.Rectangle (dockArea.X + ZoomedIconSize + 2 * DockWidthBuffer,
+				painter_area = new Gdk.Rectangle (dockArea.X + 2 * IconSize + 2 * DockWidthBuffer,
 					dockArea.Y + DockWidthBuffer,
 					painterSurface.Width,
 					painterSurface.Height);
@@ -1756,25 +1756,25 @@ namespace Docky.Interface
 				switch (Position) {
 				default:
 				case DockPosition.Top:
-					point = new PointD(dockArea.X + ZoomedIconSize / 2 + DockWidthBuffer,
-						dockArea.Y + DockHeightBuffer + ZoomedIconSize / 2);
+					point = new PointD(dockArea.X + IconSize + DockWidthBuffer,
+						dockArea.Y + DockHeightBuffer + IconSize);
 					break;
 				case DockPosition.Left:
-					point = new PointD(dockArea.X + DockHeightBuffer + ZoomedIconSize / 2,
-						dockArea.Y + ZoomedIconSize / 2 + DockWidthBuffer);
+					point = new PointD(dockArea.X + DockHeightBuffer + IconSize,
+						dockArea.Y + IconSize + DockWidthBuffer);
 					break;
 				case DockPosition.Bottom:
-					point = new PointD(dockArea.X + ZoomedIconSize / 2 + DockWidthBuffer,
-						dockArea.Y + dockArea.Height - DockHeightBuffer - ZoomedIconSize / 2);
+					point = new PointD(dockArea.X + IconSize + DockWidthBuffer,
+						dockArea.Y + dockArea.Height - DockHeightBuffer - IconSize);
 					break;
 				case DockPosition.Right:
-					point = new PointD(dockArea.X + dockArea.Height - DockHeightBuffer - ZoomedIconSize / 2,
-						dockArea.Y + ZoomedIconSize / 2 + DockWidthBuffer);
+					point = new PointD(dockArea.X + dockArea.Height - DockHeightBuffer - IconSize,
+						dockArea.Y + IconSize + DockWidthBuffer);
 					break;
 				}
 				
-				DockySurface icon = painterOwner.IconSurface (painter_buffer, ZoomedIconSize);
-				icon.ShowWithOptions (painter_buffer, point, DrawValues [painterOwner].Zoom, 0, 1);
+				DockySurface icon = painterOwner.IconSurface (painter_buffer, 2 * IconSize);
+				icon.ShowWithOptions (painter_buffer, point, 1, 0, 1);
 				
 				repaint_painter = false;
 			}
