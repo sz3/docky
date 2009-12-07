@@ -54,7 +54,7 @@ namespace NPR {
             // Container child hbox1.Gtk.Box+BoxChild
             this.ZipEntry = new Docky.Widgets.SearchEntry();
             this.ZipEntry.Name = "ZipEntry";
-            this.ZipEntry.EmptyMessage = "Zip Code";
+            this.ZipEntry.EmptyMessage = Mono.Unix.Catalog.GetString("Zip Code");
             this.ZipEntry.Ready = true;
             this.ZipEntry.HasFocus = true;
             this.hbox1.Add(this.ZipEntry);

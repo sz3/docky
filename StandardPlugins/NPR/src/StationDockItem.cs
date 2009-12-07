@@ -43,7 +43,7 @@ namespace NPR
 		public StationDockItem (Station station)
 		{
 			State |= ItemState.Wait;
-			HoverText = "Fetching Information...";
+			HoverText = Catalog.GetString ("Fetching Information...");
 			
 			OwnedStation = station;			
 			

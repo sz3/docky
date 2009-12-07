@@ -73,8 +73,8 @@ namespace NPR
 				// this is how we create our "null" station entry
 			} else {
 				ID = id;
-				Name = "No stations found.";
-				Description = "Please try your search again.";
+				Name = Catalog.GetString ("No stations found.");
+				Description = Catalog.GetString ("Please try your search again.");
 				ShowActionButton = false;
 				IsLoaded = true;
 			}

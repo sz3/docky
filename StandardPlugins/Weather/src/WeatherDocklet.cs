@@ -273,7 +273,7 @@ namespace WeatherDocklet
 				if (WeatherController.Weather.Forecasts[i].dow != null)
 				{
 					list[MenuListContainer.Actions].Add (new ForecastMenuItem (i,
-							string.Format (Catalog.GetString ("{0}'s Forecast"), WeatherForecast.DayName (WeatherController.Weather.Forecasts[i].dow)),
+							string.Format ("{0}", WeatherForecast.DayName (WeatherController.Weather.Forecasts[i].dow)),
 							WeatherController.Weather.Forecasts[i].image));
 				}
 			

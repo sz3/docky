@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-07 11:01+0100\n"
+"POT-Creation-Date: 2009-12-07 20:57+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -412,8 +412,24 @@ msgstr ""
 msgid "My _Stations"
 msgstr ""
 
+#: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:57
+msgid "Zip Code"
+msgstr ""
+
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:79
 msgid "S_earch"
+msgstr ""
+
+#: ../StandardPlugins/NPR/src/Station.cs:76
+msgid "No stations found."
+msgstr ""
+
+#: ../StandardPlugins/NPR/src/Station.cs:77
+msgid "Please try your search again."
+msgstr ""
+
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:46
+msgid "Fetching Information..."
 msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:66
@@ -559,11 +575,6 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:271
 msgid "Forecasts"
-msgstr ""
-
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:276
-#, csharp-format
-msgid "{0}'s Forecast"
 msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:280
