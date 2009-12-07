@@ -22,6 +22,9 @@ StandardPlugins/GMail/src/gtk-gui/GMail.AbstractLoginWidget.cs
 StandardPlugins/GMail/src/gtk-gui/GMail.GMailConfiguration.cs
 StandardPlugins/Mounter/src/MountItem.cs
 StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs
+StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs
+StandardPlugins/NPR/src/Station.cs
+StandardPlugins/NPR/src/StationDockItem.cs
 StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs
 StandardPlugins/Trash/src/TrashDockItem.cs
 StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs
