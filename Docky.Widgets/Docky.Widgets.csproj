@@ -65,6 +65,10 @@
     <Compile Include="Docky.Widgets\HoverImageButton.cs" />
     <Compile Include="Docky.Widgets\SearchEntry.cs" />
     <Compile Include="Docky.Widgets\AbstractTileObject.cs" />
+    <Compile Include="Docky.Widgets\ListOnlyTileView.cs" />
+    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="Docky.Widgets\AbstractLoginWidget.cs" />
+    <Compile Include="gtk-gui\Docky.Widgets.AbstractLoginWidget.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Docky.Widgets\" />
@@ -73,6 +77,9 @@
     <EmbeddedResource Include="Docky.Widgets.dll.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <LogicalName>Docky.Widgets.dll.config</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gtk-gui\gui.stetic">
+      <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

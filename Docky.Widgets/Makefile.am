@@ -23,14 +23,20 @@ FILES = \
 	Docky.Widgets/Stage.cs \
 	Docky.Widgets/Tile.cs \
 	Docky.Widgets/TileView.cs \
-	Docky.Widgets/WrapLabel.cs
+	Docky.Widgets/WrapLabel.cs \
+	Docky.Widgets/ListOnlyTileView.cs \
+	Docky.Widgets/AbstractLoginWidget.cs \
+	gtk-gui/Docky.Widgets.AbstractLoginWidget.cs \
+	gtk-gui/generated.cs
+
+PROJECT_REFERENCES = \
+	Docky.Services
 
 REFERENCES =  \
 	System \
 	System.Core \
 	Mono.Posix \
 	$(GIO_SHARP_LIBS) \
-	$(DOCKY_SERVICES_LIBS) \
 	$(GTK_SHARP_20_LIBS)
 
 EXTRA_DIST += Docky.Widgets.dll.config
