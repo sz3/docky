@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-07 20:57+0100\n"
+"POT-Creation-Date: 2009-12-07 14:07-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,6 +81,18 @@ msgstr ""
 msgid "Window Dodge"
 msgstr ""
 
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:82
+msgid ""
+"None : Always present, acts like a panel.\n"
+"Autohide : Hides whenever the mouse is not over it.\n"
+"Intellihide : Hides when dock obstructs the active application.\n"
+"Window Dodge : Hides when dock obstructs any window."
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:93
+msgid "Fade out dock instead of slide off screen"
+msgstr ""
+
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:96
 msgid "Fade On Hide"
 msgstr ""
@@ -93,12 +105,24 @@ msgstr ""
 msgid "Autohide:"
 msgstr ""
 
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:144
+msgid ""
+"Causes launchers which currently manage more than one window to have an "
+"extra indicator under it."
+msgstr ""
+
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:147
 msgid "Indicate Multiple Windows"
 msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:161
 msgid "Panel Mode"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:173
+msgid ""
+"When set, windows which do not already have launchers on a dock will be "
+"added to this dock."
 msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:176
