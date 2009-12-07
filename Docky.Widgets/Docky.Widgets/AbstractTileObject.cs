@@ -157,7 +157,7 @@ namespace Docky.Widgets
 					enabled = false;
 				return enabled.Value;
 			}
-			protected set {
+			set {
 				if (enabled.HasValue && enabled.Value == true)
 					return;
 				enabled = value;

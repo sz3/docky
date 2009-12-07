@@ -48,9 +48,11 @@ namespace Docky.Widgets
 		private WrapLabel description;
         private WrapLabel subDesc;
 		
+		public TileView Owner { get; set; }
+		
 		public AbstractTileObject OwnedObject { get; private set; }
 		public bool Last { get; private set; }
-		
+
 		public event EventHandler ActiveChanged;
 		
 		public Tile (AbstractTileObject obj) : base (3, 3, false)

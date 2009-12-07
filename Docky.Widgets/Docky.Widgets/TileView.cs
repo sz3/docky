@@ -37,11 +37,11 @@ namespace Docky.Widgets
 {
 	[System.ComponentModel.ToolboxItem(true)]
 	public class TileView : EventBox 
-	{
+	{		
 		private List<Tile> tiles = new List<Tile> ();
 		private VBox box = new VBox ();
 		
-		private int selected_index = -1;
+		protected int selected_index = -1;
 		
 		public TileView ()
 		{
@@ -60,12 +60,12 @@ namespace Docky.Widgets
 			}
 		}
 		
-		public void RemoveTile (AbstractTileObject tileObject)
+		public virtual void RemoveTile (AbstractTileObject tileObject)
 		{
 			Tile tile = tiles.First (t => t.OwnedObject == tileObject);
 			
 			if (tile == null)
-				throw new ArgumentException ("Container does not own supplied ITile.  It may have been removed previously", "tileObject");
+				throw new ArgumentException ("Container does not own that AbstractTileObject.  It may have been removed already.", "tileObject");
 	
 			if (selected_index == tiles.IndexOf (tile))
 				ClearSelection ();
@@ -73,7 +73,7 @@ namespace Docky.Widgets
 			box.Remove (tile);
 		}
 		
-		public void ClearSelection ()
+		public virtual void ClearSelection ()
 		{
 			if (selected_index >= 0 && selected_index < tiles.Count) {
 				tiles[selected_index].Select (false);
@@ -82,9 +82,10 @@ namespace Docky.Widgets
 			selected_index = -1;
 		}		
 		
-		public void AppendTile (AbstractTileObject tileObject)
+		public virtual void AppendTile (AbstractTileObject tileObject)
 		{			
 			Tile tile = new Tile (tileObject);
+			tile.Owner = this;
 			tile.ActiveChanged += OnTileActiveChanged;
 			tile.SizeAllocated += OnTileSizeAllocated;
 			tile.Show ();
@@ -107,11 +108,12 @@ namespace Docky.Widgets
 			changing_styles = false;
 		}
 		
-		private void OnTileActiveChanged (object o, EventArgs args)
+		public virtual void OnTileActiveChanged (object o, EventArgs args)
 		{
 			Tile tile = o as Tile;
 			
-			tile.OwnedObject.OnActiveChanged ();
+			if (tile != null)
+				tile.OwnedObject.OnActiveChanged ();
 			
 			foreach (Tile t in tiles) {
 				t.UpdateState ();
