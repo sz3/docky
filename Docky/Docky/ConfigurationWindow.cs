@@ -72,6 +72,9 @@ namespace Docky
 				i++;
 			}
 			
+			if (Docky.Controller.Docks.Count () == 1)
+				ActiveDock = Docky.Controller.Docks.First ();
+			
 			SetupConfigAlignment ();
 			
 			start_with_computer_checkbutton.Active = IsAutoStartEnabled ();
@@ -169,7 +172,11 @@ namespace Docky
 		protected virtual void OnThemeComboChanged (object sender, System.EventArgs e)
 		{
 			Docky.Controller.DockTheme = theme_combo.ActiveText;
-			themePreview.Pixbuf = DockServices.Drawing.LoadIcon (Docky.Controller.MenuSvg, 80, 30);
+			if (Docky.Controller.NumDocks == 1) {
+				ActiveDock = null;
+				SetupConfigAlignment ();
+				CheckButtons ();
+			}
 		}
 	
 		protected virtual void OnDeleteDockButtonClicked (object sender, System.EventArgs e)
