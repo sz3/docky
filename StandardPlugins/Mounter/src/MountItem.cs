@@ -37,7 +37,7 @@ namespace Mounter
 		
 		public override string UniqueID ()
 		{
-			return Mnt.Handle.ToString ();
+			return "MountItem#" + Mnt.Handle.ToString ();
 		}
 		
 		#endregion
