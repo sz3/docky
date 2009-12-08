@@ -34,7 +34,7 @@ namespace Docky.Widgets
 		}
 
 		string icon;
-		public virtual string Name {
+		public virtual string Icon {
 			get {
 				if (icon == null)
 					icon = "";
@@ -64,7 +64,7 @@ namespace Docky.Widgets
 		}
 		
 		string desc;
-		public virtual string Icon {
+		public virtual string Description {
 			get { 
 				if (desc == null)
 					desc = "";
@@ -78,7 +78,7 @@ namespace Docky.Widgets
 		}		
 		
 		string name;
-		public virtual string Description {
+		public virtual string Name {
 			get { 
 				if (name == null)
 					name = "";
