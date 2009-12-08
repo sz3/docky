@@ -130,7 +130,6 @@ namespace Docky.Interface
 		
 		const int UrgentBounceHeight  = 80;
 		const int LaunchBounceHeight  = 30;
-		const int DockHeightBuffer    = 7;
 		const int DockWidthBuffer     = 5;
 		const int BackgroundWidth     = 1000;
 		const int BackgroundHeight    = 150;
@@ -452,6 +451,10 @@ namespace Docky.Interface
 				
 				return dockWidth;
 			}
+		}
+		
+		int DockHeightBuffer {
+			get { return (Preferences.PanelMode) ? 3 : 7; }
 		}
 		
 		int ItemWidthBuffer {
@@ -1551,19 +1554,35 @@ namespace Docky.Interface
 		}
 		
 		Gdk.Rectangle StaticDockArea (DockySurface surface)
-		{			
+		{	
+			Gdk.Rectangle area = Gdk.Rectangle.Zero;
+			
 			switch (Position) {
 			case DockPosition.Top:
-				return new Gdk.Rectangle ((surface.Width - DockWidth) / 2, 0, DockWidth, DockHeight);
+				area = new Gdk.Rectangle ((surface.Width - DockWidth) / 2, 0, DockWidth, DockHeight);
+				break;
 			case DockPosition.Left:
-				return new Gdk.Rectangle (0, (surface.Height - DockWidth) / 2, DockHeight, DockWidth);
+				area = new Gdk.Rectangle (0, (surface.Height - DockWidth) / 2, DockHeight, DockWidth);
+				break;
 			case DockPosition.Right:
-				return new Gdk.Rectangle (surface.Width - DockHeight, (surface.Height - DockWidth) / 2, DockHeight, DockWidth);
+				area = new Gdk.Rectangle (surface.Width - DockHeight, (surface.Height - DockWidth) / 2, DockHeight, DockWidth);
+				break;
 			case DockPosition.Bottom:
-				return new Gdk.Rectangle ((surface.Width - DockWidth) / 2, surface.Height - DockHeight, DockWidth, DockHeight);
+				area = new Gdk.Rectangle ((surface.Width - DockWidth) / 2, surface.Height - DockHeight, DockWidth, DockHeight);
+				break;
 			}
 			
-			return Gdk.Rectangle.Zero;
+			if (Preferences.PanelMode) {
+				if (VerticalDock) {
+					area.Y = 0;
+					area.Height = surface.Height;
+				} else {
+					area.X = 0;
+					area.Width = surface.Width;
+				}
+			}
+			
+			return area;
 		}
 		
 		void GetDockAreaOnSurface (DockySurface surface, out Gdk.Rectangle dockArea, out Gdk.Rectangle cursorArea)
@@ -1633,6 +1652,7 @@ namespace Docky.Interface
 				break;
 			}
 			
+			// Force dock area to not resize when painter is showing
 			if (Painter != null)
 				dockArea = staticArea;
 		}
