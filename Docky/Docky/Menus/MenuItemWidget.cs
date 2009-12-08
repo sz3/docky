@@ -80,7 +80,7 @@ namespace Docky.Menus
 			layout.GetPixelExtents (out ink, out logical);
 			
 			HasTooltip = logical.Width > MaxWidth;
-			TextWidth = Math.Min (MaxWidth, Math.Max (MinWidth, logical.Width)) + 34;
+			TextWidth = Math.Min (MaxWidth, Math.Max (MinWidth, logical.Width)) + 36;
 			SetSizeRequest (TextWidth, 22);
 		}
 
