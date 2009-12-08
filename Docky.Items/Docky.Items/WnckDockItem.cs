@@ -239,8 +239,6 @@ namespace Docky.Items
 		{
 			MenuList list = base.OnGetMenuItems ();
 			
-			list.SetContainerTitle (MenuListContainer.Actions, Mono.Unix.Catalog.GetString ("Actions"));
-			list.SetContainerTitle (MenuListContainer.Windows, Mono.Unix.Catalog.GetString ("Windows"));
 			if (ManagedWindows.Any ()) {
 				if (ManagedWindows.Any (w => w.IsMaximized)) {
 					list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Unma_ximize"), MaximizeIcon, 

@@ -277,7 +277,6 @@ namespace WeatherDocklet
 							WeatherController.Weather.Forecasts[i].image));
 				}
 			
-			list.SetContainerTitle (MenuListContainer.CustomOne, Mono.Unix.Catalog.GetString ("Configuration"));
 			list[MenuListContainer.CustomOne].Add (new MenuItem (Catalog.GetString ("_Settings"), Gtk.Stock.Preferences,
 					delegate {
 						if (WeatherConfigurationDialog.instance == null)
