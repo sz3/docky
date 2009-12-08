@@ -72,7 +72,7 @@ namespace NPR
 		
 		public override string UniqueID ()
 		{
-			return OwnedStation.Name + OwnedStation.Description;
+			return "NPR#_" + OwnedStation.Name + OwnedStation.Description;
 		}
 
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
@@ -86,6 +86,10 @@ namespace NPR
 			}
 			
 			return ClickAnimation.None;
+		}
+		
+		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
+		{
 		}
 
 		protected override MenuList OnGetMenuItems ()

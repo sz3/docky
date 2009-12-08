@@ -32,7 +32,6 @@ using Docky.Widgets;
 namespace NPR
 {
 
-
 	public class NPR
 	{
 		const string apiKey = "MDA0NDA4MTcxMDEyNTkzNzkwMTc4ODYwYQ001";
@@ -41,6 +40,7 @@ namespace NPR
 		static IPreferences prefs;
 		static StationSearchWidget stationSearchWidget;
 		static List<Station> Stations;
+		static ConfigDialog config;
 		
 		public static EventHandler<StationsUpdatedEventArgs> StationsUpdated;
 		public static ConfigDialog Config;
@@ -133,14 +133,14 @@ namespace NPR
 		
 		public static void ShowConfig ()
 		{
-			if (ConfigDialog.Instance == null) {
+			if (config == null) {
 				stationSearchWidget = new StationSearchWidget ();
-				ConfigDialog.Instance = new ConfigDialog ("NPR", new [] {stationSearchWidget});
-				ConfigDialog.Instance.Shown += delegate {
+				config = new ConfigDialog ("NPR", new [] {stationSearchWidget});
+				config.Shown += delegate {
 					stationSearchWidget.ShowMyStations ();
 				};
 			}
-			ConfigDialog.Instance.Show ();
+			config.Show ();
 		}
 	}
 }

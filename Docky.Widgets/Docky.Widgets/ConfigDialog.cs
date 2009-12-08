@@ -24,9 +24,7 @@ using Gtk;
 namespace Docky.Widgets
 {
 	public class ConfigDialog : Dialog
-	{
-		public static ConfigDialog Instance;
-		
+	{		
 		public ConfigDialog (string windowTitle, IEnumerable<Widget> widgets) : this (windowTitle, widgets, 350, 400)
 		{
 		}
@@ -58,6 +56,11 @@ namespace Docky.Widgets
 			this.AddAutoTranslateButton ("gtk-close", ResponseType.Close);
 			
 			SetDefaultSize (width, height);
+		}
+		
+		protected override void OnClose ()
+		{
+			Hide ();
 		}
 		
 		protected override void OnResponse (ResponseType response_id)

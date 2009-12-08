@@ -7,10 +7,10 @@ SUBDIRS = \
 	data \
 	lib \
 	po \
+	Docky.CairoHelper \
 	Docky.Services \
 	Docky.Widgets \
 	Docky.Zeitgeist \
-	Docky.CairoHelper \
 	Docky.Windowing \
 	Docky.Items \
 	StandardPlugins \
