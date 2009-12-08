@@ -74,10 +74,13 @@ namespace GMail
 			old_count = Atom.NewCount;
 			
 			string status = "";
-			if (Atom.UnreadCount == 0)
+			if (Atom.UnreadCount == 0) {
+				BadgeText = "";
 				status = Catalog.GetString ("No unread mail");
-			else
+			} else {
+				BadgeText = "" + Atom.UnreadCount;
 				status = string.Format (Catalog.GetPluralString ("{0} unread message", "{0} unread messages", Atom.UnreadCount), Atom.UnreadCount);
+			}
 			HoverText = Atom.CurrentLabel + " - " + status;
 			
 			parent.ItemVisibilityChanged (this, Visible);
@@ -114,10 +117,12 @@ namespace GMail
 		
 		protected override void PostProcessIconSurface (DockySurface surface)
 		{
-			int size = Math.Min (surface.Width, surface.Height);
-			Context cr = surface.Context;
-
 			if (Atom.State == GMailState.Error) {
+				surface.Clear ();
+				
+				Context cr = surface.Context;
+				int size = Math.Min (surface.Width, surface.Height);
+				
 				using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("gmail", size)) {
 					unsafe {
 						double a, r, g, b;
@@ -144,17 +149,13 @@ namespace GMail
 						}
 					}
 					Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, 0, 0);
+					cr.Paint ();
 				}
+			} else if (!Atom.HasUnread) {
+				surface.Context.Color = new Cairo.Color (0, 0, 0, 0);
+				surface.Context.Operator = Operator.Source;
+				surface.Context.PaintWithAlpha (.5);
 			}
-				
-			if (!Atom.HasUnread)
-				cr.PaintWithAlpha (.5);
-			else
-				cr.Paint ();
-			
-			BadgeText = "";
-			if (Atom.HasUnread)
-				BadgeText += Atom.UnreadCount;
 		}
 	
 		void OpenInbox ()

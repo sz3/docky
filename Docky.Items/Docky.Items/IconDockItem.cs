@@ -124,7 +124,9 @@ namespace Docky.Items
 			
 			try {
 				PostProcessIconSurface (surface);
-			} catch {
+			} catch (Exception e) {
+				Log<IconDockItem>.Error (e.Message);
+				Log<IconDockItem>.Debug (e.StackTrace);
 			}
 		}
 		
