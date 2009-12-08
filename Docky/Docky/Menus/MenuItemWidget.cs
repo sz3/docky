@@ -173,8 +173,8 @@ namespace Docky.Menus
 			if (monochrome) {
 				surface.Context.Operator = Operator.Atop;
 				double v = TextColor.GetValue ();
-				// normalize value toward .5 by 20%
-				surface.Context.Color = TextColor.SetValue ((v * .8) + (.5 * .2));
+				// reduce value by 20%
+				surface.Context.Color = TextColor.SetValue (v * .8);
 				surface.Context.Paint ();
 				surface.ResetContext ();
 			}
