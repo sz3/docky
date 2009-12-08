@@ -24,7 +24,7 @@ namespace Docky.Widgets
 	public class ListOnlyTileView : TileView
 	{
 
-		public ListOnlyTileView ()
+		public ListOnlyTileView () : base ()
 		{
 		}
 		
@@ -40,7 +40,7 @@ namespace Docky.Widgets
 			
 			RemoveTile (t.OwnedObject);
 			
-			base.OnTileActiveChanged (null, args);
+			base.OnTileActiveChanged (o, args);
 		}
 	}
 }

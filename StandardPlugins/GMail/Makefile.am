@@ -9,7 +9,12 @@ FILES = \
 	src/GMailErrorArgs.cs \
 	src/GMailPreferences.cs \
 	src/GMailMenuItem.cs \
-	src/GMailDockItem.cs
+	src/GMailDockItem.cs \
+	src/GMailLoginConfig.cs \
+	src/GMailLabel.cs \
+	src/GMailLabelConfig.cs \
+	gtk-gui/GMail.GMailLabelConfig.cs \
+	gtk-gui/generated.cs
 
 RESOURCES = \
 	Resources/GMail.addin.xml

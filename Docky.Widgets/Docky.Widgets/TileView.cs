@@ -41,6 +41,20 @@ namespace Docky.Widgets
 		private List<Tile> tiles = new List<Tile> ();
 		private VBox box = new VBox ();
 		
+		const int DefaultIconSize = 64;
+		
+		int? icon_size;
+		public int IconSize {
+			get { 
+				if (!icon_size.HasValue)
+					icon_size = DefaultIconSize;
+				return icon_size.Value;
+			}
+			set { 
+				icon_size = value;
+			}
+		}
+		
 		protected int selected_index = -1;
 		
 		public TileView ()
@@ -84,7 +98,7 @@ namespace Docky.Widgets
 		
 		public virtual void AppendTile (AbstractTileObject tileObject)
 		{			
-			Tile tile = new Tile (tileObject);
+			Tile tile = new Tile (tileObject, IconSize);
 			tile.Owner = this;
 			tile.ActiveChanged += OnTileActiveChanged;
 			tile.SizeAllocated += OnTileSizeAllocated;
@@ -112,8 +126,9 @@ namespace Docky.Widgets
 		{
 			Tile tile = o as Tile;
 			
-			if (tile != null)
+			if (tile != null) {
 				tile.OwnedObject.OnActiveChanged ();
+			}
 			
 			foreach (Tile t in tiles) {
 				t.UpdateState ();

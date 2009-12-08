@@ -38,39 +38,28 @@ namespace GMail
 		
 		public override void Dispose ()
 		{
-			string[] keys = new string [items.Keys.Count];
-			items.Keys.CopyTo (keys, 0);
-			foreach (string label in keys)
-				RemoveItem (label);
+			items.ForEach (adi => (RemoveItem (adi as GMailDockItem)));
 		}
 		
 		#endregion
 		
 		public void ItemVisibilityChanged (AbstractDockItem item, bool newVisible)
 		{
-			if (visible[item] == newVisible)
-				return;
-			
-			visible[item] = newVisible;
-
 			SetItems ();
 		}
 		
 		void SetItems ()
 		{
-			Items = items.Values
-				.Where (adi => (adi is GMailDockItem) && (adi as GMailDockItem).Visible)
-				.Cast<AbstractDockItem> ();
+			Items = items.Where (adi => (adi as GMailDockItem).Visible);
 		}
 		
 		void RemoveItem (string label)
 		{
-			if (!items.ContainsKey (label))
+			if (label == GMailDockItem.DefaultLabel)
 				return;
-
-			AbstractDockItem item = items[label];
-			items.Remove (label);
-			visible.Remove (item);
+			
+			AbstractDockItem item = items.First (adi => (adi as GMailDockItem).Atom.CurrentLabel == label);
+			items.Remove (item);
 			
 			SetItems ();
 			
@@ -79,22 +68,18 @@ namespace GMail
 		
 		void AddItem (string label)
 		{
-			if (items.ContainsKey (label))
-				return;
-
-			GMailDockItem item = new GMailDockItem (label, this);
-			
-			items.Add (label, item);
-			visible.Add (item, item.Visible);
+			GMailDockItem it = new GMailDockItem (label, this);
+			items.Add (it);
 			
 			SetItems ();
 		}
 
-		Dictionary<string, AbstractDockItem> items = new Dictionary<string, AbstractDockItem> ();
-		Dictionary<AbstractDockItem, bool> visible = new Dictionary<AbstractDockItem, bool> ();
+		public static List<AbstractDockItem> items;
 		
 		public GMailItemProvider ()
 		{
+			items = new List<AbstractDockItem> ();
+			
 			AddItem (GMailDockItem.DefaultLabel);
 			
 			foreach (string label in GMailPreferences.Labels)
@@ -107,22 +92,22 @@ namespace GMail
 		
 		void HandleLabelsChanged (object o, EventArgs e)
 		{
-			string[] keys = new string [items.Keys.Count];
-			items.Keys.CopyTo (keys, 0);
-			foreach (string label in keys)
-				if (label != GMailDockItem.DefaultLabel)
-					RemoveItem (label);
+			string[] currentLabels = Items.Select (adi => (adi as GMailDockItem).Atom.CurrentLabel)
+				.Where (label => label != GMailDockItem.DefaultLabel).ToArray ();
+			string[] newLabels = GMailPreferences.Labels;
+			
+			if (currentLabels.Length > newLabels.Length)
+				RemoveItem (currentLabels.Except (newLabels).First ());
+			else
+				AddItem (newLabels.Except (currentLabels).First());
 
-			foreach (string label in GMailPreferences.Labels)
-				if (!keys.Contains (label))
-					AddItem (label);
+			AddedToDock ();
 		}
 		
 		public override void AddedToDock ()
 		{
 			GLib.Idle.Add (delegate {
-				foreach (GMailDockItem item in items.Values)
-					item.Atom.ResetTimer (true);
+				items.ForEach (adi => (adi as GMailDockItem).Atom.ResetTimer (true));
 				return false;
 			});
 		}

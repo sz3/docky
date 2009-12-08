@@ -39,7 +39,7 @@ namespace Docky.Services
 		readonly string GConfPrefix = "/apps/docky-2/" + typeof (TOwner).FullName.Replace (".", "/");
 		
 		public T Get<T> (string key, T def)
-		{
+		{			
 			object result;
 			try {
 				result = client.Get (AbsolutePathForKey (key, GConfPrefix));

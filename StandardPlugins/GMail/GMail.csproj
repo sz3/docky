@@ -47,12 +47,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\GMailAtom.cs" />
-    <Compile Include="src\GMailConfigurationDialog.cs" />
     <Compile Include="src\GMailDockItem.cs" />
     <Compile Include="src\GMailErrorArgs.cs" />
     <Compile Include="src\GMailItemProvider.cs" />
     <Compile Include="src\GMailMenuItem.cs" />
     <Compile Include="src\GMailPreferences.cs" />
+    <Compile Include="src\GMailLoginConfig.cs" />
+    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="src\GMailLabelConfig.cs" />
+    <Compile Include="src\GMailLabel.cs" />
+    <Compile Include="gtk-gui\GMail.GMailLabelConfig.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -79,5 +83,10 @@
       <Project>{9CF2F475-7848-4333-9A35-93E8224653B3}</Project>
       <Name>Docky.Widgets</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="gtk-gui\gui.stetic">
+      <LogicalName>gui.stetic</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

@@ -28,6 +28,8 @@ using GLib;
 using Gdk;
 using Gtk;
 
+using Docky.CairoHelper;
+
 namespace Docky.Services
 {
 	public class DrawingService
@@ -68,6 +70,36 @@ namespace Docky.Services
 			}
 			
 			return light > 0;
+		}
+		
+		public Gdk.Pixbuf AddHueShift (Gdk.Pixbuf source, double shift)
+		{
+			if (shift != 0) {
+				unsafe {
+					double a, r, g, b;
+					byte* pixels = (byte*) source.Pixels;
+					for (int i = 0; i < source.Height * source.Width; i++) {
+						r = (double) pixels[0];
+						g = (double) pixels[1];
+						b = (double) pixels[2];
+						a = (double) pixels[3];
+						
+						Cairo.Color color = new Cairo.Color (r / byte.MaxValue, 
+							g / byte.MaxValue, 
+							b / byte.MaxValue,
+							a / byte.MaxValue);
+						color = color.AddHue (shift);
+						
+						pixels[0] = (byte) (color.R * byte.MaxValue);
+						pixels[1] = (byte) (color.G * byte.MaxValue);
+						pixels[2] = (byte) (color.B * byte.MaxValue);
+						pixels[3] = (byte) (color.A * byte.MaxValue);
+						
+						pixels += 4;
+					}
+				}
+			}
+			return source;
 		}
 		
 		// load an icon specifying the width and height

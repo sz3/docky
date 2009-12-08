@@ -54,7 +54,7 @@ namespace NPR {
             // Container child hbox1.Gtk.Box+BoxChild
             this.ZipEntry = new Docky.Widgets.SearchEntry();
             this.ZipEntry.Name = "ZipEntry";
-            this.ZipEntry.EmptyMessage = Mono.Unix.Catalog.GetString("Zip Code");
+            this.ZipEntry.EmptyMessage = "Zip Code";
             this.ZipEntry.Ready = true;
             this.ZipEntry.HasFocus = true;
             this.hbox1.Add(this.ZipEntry);
@@ -103,6 +103,7 @@ namespace NPR {
             // Container child GtkViewport.Gtk.Container+ContainerChild
             this.tileview = new Docky.Widgets.TileView();
             this.tileview.Name = "tileview";
+            this.tileview.IconSize = 64;
             w13.Add(this.tileview);
             this.stationsScroll.Add(w13);
             this.vbox1.Add(this.stationsScroll);

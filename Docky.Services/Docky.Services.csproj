@@ -119,4 +119,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Docky.CairoHelper\Docky.CairoHelper.csproj">
+      <Project>{B23E0EDD-6443-4F99-9EAC-B7CC906F080D}</Project>
+      <Name>Docky.CairoHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

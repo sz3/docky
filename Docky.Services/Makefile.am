@@ -26,6 +26,9 @@ FILES = \
 	Docky.Services/NativeInterop.cs \
 	Gtk/MountOperation.cs \
 	GLibSharp/AsyncReadyCallbackNative.cs
+
+PROJECT_REFERENCES = \
+	Docky.CairoHelper
 	
 REFERENCES =  \
 	System \

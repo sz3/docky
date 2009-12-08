@@ -48,6 +48,21 @@ namespace Docky.Widgets
 			}
 		}
 		
+		int shift;
+		public virtual int HueShift {
+			get {
+				if (shift == null)
+				    shift = 50;
+				return shift;
+			}
+			protected set {
+				if (shift == value)
+					return;
+				shift = value;
+				OnIconUpdated ();
+			}
+		}
+		
 		string desc;
 		public virtual string Icon {
 			get { 

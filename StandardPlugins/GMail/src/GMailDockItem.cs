@@ -35,7 +35,7 @@ namespace GMail
 {
 	/// <summary>
 	/// </summary>
-	public class GMailDockItem : AbstractDockItem
+	public class GMailDockItem : IconDockItem
 	{
 		public override string UniqueID ()
 		{
@@ -48,26 +48,10 @@ namespace GMail
 		
 		public GMailAtom Atom { get; protected set; }
 		
-		public static string DefaultLabel { get { return Catalog.GetString ("Inbox"); } }
+		public static string DefaultLabel { get { return "Inbox"; } }
 		
 		GMailItemProvider parent;
-		
-		int shift;
-		
-		public int HueShift {
-			get {
-				return shift;
-			}
-			set {
-				if (shift == value)
-					return;
-				shift = value;
-				QueueRedraw ();
-			}
-		}
-		
-		static Regex hueRegex = new Regex ("[^a-zA-Z0-9]");
-		
+				
 		public GMailDockItem (string label, GMailItemProvider parent)
 		{
 			ScalableRendering = false;
@@ -79,9 +63,8 @@ namespace GMail
 			Atom.GMailChecking += GMailCheckingHandler;
 			Atom.GMailFailed += GMailFailedHandler;
 			
-			HueShift = GMailPreferences.prefs.Get<int> (hueRegex.Replace (UniqueID (), "_"), 0);
+			Icon = "gmail";
 		}
-		
 		
 		static int old_count = 0;
 		public void GMailCheckedHandler (object obj, EventArgs e)
@@ -129,14 +112,13 @@ namespace GMail
 			QueueRedraw ();
 		}
 		
-		protected override void PaintIconSurface (DockySurface surface)
+		protected override void PostProcessIconSurface (DockySurface surface)
 		{
 			int size = Math.Min (surface.Width, surface.Height);
 			Context cr = surface.Context;
-			
-			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("gmail", size))
-			{
-				if (HueShift != 0 || Atom.State == GMailState.Error) {
+
+			if (Atom.State == GMailState.Error) {
+				using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("gmail", size)) {
 					unsafe {
 						double a, r, g, b;
 						byte* pixels = (byte*) pbuf.Pixels;
@@ -150,10 +132,8 @@ namespace GMail
 								g / byte.MaxValue, 
 								b / byte.MaxValue,
 								a / byte.MaxValue);
-							if (HueShift != 0)
-								color = color.AddHue (HueShift);
-							if (Atom.State == GMailState.Error)
-								color = color.DarkenBySaturation (0.5).SetSaturation (0);
+						
+							color = color.DarkenBySaturation (0.5).SetSaturation (0);
 							
 							pixels[0] = (byte) (color.R * byte.MaxValue);
 							pixels[1] = (byte) (color.G * byte.MaxValue);
@@ -163,20 +143,20 @@ namespace GMail
 							pixels += 4;
 						}
 					}
+					Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, 0, 0);
 				}
-				
-				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, 0, 0);
-				if (!Atom.HasUnread)
-					cr.PaintWithAlpha (.5);
-				else
-					cr.Paint ();
 			}
+				
+			if (!Atom.HasUnread)
+				cr.PaintWithAlpha (.5);
+			else
+				cr.Paint ();
 			
 			BadgeText = "";
 			if (Atom.HasUnread)
 				BadgeText += Atom.UnreadCount;
 		}
-		
+	
 		void OpenInbox ()
 		{
 			string[] login = GMailPreferences.User.Split (new char[] {'@'});
@@ -219,27 +199,7 @@ namespace GMail
 
 			base.Dispose ();
 		}
-		
-		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
-		{
-			if (direction == Gdk.ScrollDirection.Up)
-				HueShift += 5;
-			else if (direction == Gdk.ScrollDirection.Down)
-				HueShift -= 5;
-			
-			if (HueShift < 0)
-				HueShift += 360;
-			HueShift %= 360;
-			
-			GMailPreferences.prefs.Set<int> (hueRegex.Replace (UniqueID (), "_"), HueShift);
-		}
-		
-		protected void ResetHue ()
-		{
-			HueShift = 0;
-			GMailPreferences.prefs.Set<int> (hueRegex.Replace (UniqueID (), "_"), HueShift);
-		}
-		
+
 		protected override MenuList OnGetMenuItems ()
 		{
 			MenuList list = base.OnGetMenuItems ();
@@ -269,9 +229,7 @@ namespace GMail
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Settings"),
 					Gtk.Stock.Preferences,
 					delegate {
-						if (ConfigDialog.Instance == null)
-							ConfigDialog.Instance = new ConfigDialog ("", new Gtk.Widget [] { });
-						ConfigDialog.Instance.Show ();
+						GMailAtom.ShowConfig ();
 					}));
 			
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Check _Now"),
@@ -284,7 +242,7 @@ namespace GMail
 					"edit-clear",
 					delegate {
 						ResetHue ();
-					}, HueShift == 0));
+					}));
 			
 			return list;
 		}

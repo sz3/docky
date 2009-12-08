@@ -48,6 +48,8 @@ namespace Docky.Widgets
 		private WrapLabel description;
         private WrapLabel subDesc;
 		
+		private int IconSize { get; set; }
+		
 		public TileView Owner { get; set; }
 		
 		public AbstractTileObject OwnedObject { get; private set; }
@@ -55,14 +57,19 @@ namespace Docky.Widgets
 
 		public event EventHandler ActiveChanged;
 		
-		public Tile (AbstractTileObject obj) : base (3, 3, false)
+		public Tile (AbstractTileObject obj, int iconSize) : base (3, 3, false)
 		{
 			OwnedObject = obj;	
 			
 			OwnedObject.IconUpdated += delegate {
-				tileImage.Pixbuf = DockServices.Drawing.LoadIcon (OwnedObject.Icon, 64);
+				Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (OwnedObject.Icon, IconSize);
+				pbuf = DockServices.Drawing.AddHueShift (pbuf, OwnedObject.HueShift);
+				tileImage.Pixbuf = pbuf;
+				pbuf.Dispose ();
 				tileImage.Show ();
 			};
+			
+			IconSize = iconSize;
 			
 			BuildTile ();
 		}
@@ -74,7 +81,10 @@ namespace Docky.Widgets
 			ColumnSpacing = 5;
 			
 			tileImage = new Image ();
-			tileImage.Pixbuf = DockServices.Drawing.LoadIcon (OwnedObject.Icon, 64);
+			Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (OwnedObject.Icon, IconSize);
+			pbuf = DockServices.Drawing.AddHueShift (pbuf, OwnedObject.HueShift);
+			tileImage.Pixbuf = pbuf;
+			pbuf.Dispose ();
 			
 			tileImage.Show ();
 			tileImage.Yalign = 0.0f;

@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 using Cairo;
 using Gdk;
@@ -35,6 +36,8 @@ namespace Docky.Items
 	public abstract class IconDockItem : AbstractDockItem
 	{
 		public event EventHandler IconUpdated;
+		static IPreferences prefs = DockServices.Preferences.Get <IconDockItem> ();
+		static Regex hueRegex = new Regex ("[^a-zA-Z0-9]");
 		
 		string icon;
 		public string Icon {
@@ -61,10 +64,10 @@ namespace Docky.Items
 			}
 		}
 		
-		double shift;
-		protected double HueShift {
+		int shift;
+		public int HueShift {
 			get { return shift; }
-			set {
+			protected set {
 				if (shift == value)
 					return;
 				shift = value;
@@ -98,7 +101,7 @@ namespace Docky.Items
 			Icon = "";
 		}
 		
-		protected override sealed void PaintIconSurface (DockySurface surface)
+		protected override void PaintIconSurface (DockySurface surface)
 		{			
 			Gdk.Pixbuf pbuf;
 			
@@ -107,32 +110,10 @@ namespace Docky.Items
 			else
 				pbuf = DockServices.Drawing.ARScale (surface.Width, surface.Height, forced_pixbuf);
 			
-			if (shift != 0) {
-				unsafe {
-					double a, r, g, b;
-					byte* pixels = (byte*) pbuf.Pixels;
-					for (int i = 0; i < pbuf.Height * pbuf.Width; i++) {
-						r = (double) pixels[0];
-						g = (double) pixels[1];
-						b = (double) pixels[2];
-						a = (double) pixels[3];
-						
-						Cairo.Color color = new Cairo.Color (r / byte.MaxValue, 
-							g / byte.MaxValue, 
-							b / byte.MaxValue,
-							a / byte.MaxValue);
-						color = color.AddHue (shift);
-						
-						pixels[0] = (byte) (color.R * byte.MaxValue);
-						pixels[1] = (byte) (color.G * byte.MaxValue);
-						pixels[2] = (byte) (color.B * byte.MaxValue);
-						pixels[3] = (byte) (color.A * byte.MaxValue);
-						
-						pixels += 4;
-					}
-				}
-			}
+			HueShift = prefs.Get<int> (hueRegex.Replace (UniqueID (), "_"), 0);
 			
+			pbuf = DockServices.Drawing.AddHueShift (pbuf, HueShift);
+
 			Gdk.CairoHelper.SetSourcePixbuf (surface.Context, 
 			                                 pbuf, 
 			                                 (surface.Width - pbuf.Width) / 2, 
@@ -140,6 +121,35 @@ namespace Docky.Items
 			surface.Context.Paint ();
 			
 			pbuf.Dispose ();
+			
+			try {
+				PostProcessIconSurface (surface);
+			} catch {
+			}
+		}
+		
+		protected virtual void PostProcessIconSurface (DockySurface surface)
+		{
+		}
+		
+		protected override void OnScrolled (ScrollDirection direction, ModifierType mod)
+		{
+			if (direction == Gdk.ScrollDirection.Up)
+				HueShift += 5;
+			else if (direction == Gdk.ScrollDirection.Down)
+				HueShift -= 5;
+			
+			if (HueShift < 0)
+				HueShift += 360;
+			HueShift %= 360;
+			
+			prefs.Set<int> (hueRegex.Replace (UniqueID (), "_"), HueShift);
+		}
+		
+		protected void ResetHue ()
+		{
+			HueShift = 0;
+			prefs.Set<int> (hueRegex.Replace (UniqueID (), "_"), HueShift);
 		}
 		
 		void OnIconUpdated ()

@@ -20,7 +20,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 
 using GLib;
 using Mono.Unix;
@@ -51,8 +50,6 @@ namespace Docky.Items
 		
 		const string ThumbnailPathKey = "thumbnail::path";
 		const string FilesystemIDKey = "id::filesystem";
-		static IPreferences prefs = DockServices.Preferences.Get <FileDockItem> ();
-		static Regex hueRegex = new Regex ("[^a-zA-Z0-9]");
 		string uri;
 		bool is_folder;
 		
@@ -63,9 +60,7 @@ namespace Docky.Items
 		public File OwnedFile { get; private set; }
 		
 		protected FileDockItem (string uri)
-		{
-			IconUpdated += HandleIconUpdated;
-			
+		{			
 			this.uri = uri;
 			OwnedFile = FileFactory.NewForUri (uri);
 			
@@ -106,23 +101,7 @@ namespace Docky.Items
 		{
 			if (Icon == null || !(Icon.Contains ("inode-directory") || Icon.Contains ("folder")))
 				return;
-			
-			if (direction == Gdk.ScrollDirection.Up)
-				HueShift += 5;
-			else if (direction == Gdk.ScrollDirection.Down)
-				HueShift -= 5;
-			
-			if (HueShift < 0)
-				HueShift += 360;
-			HueShift %= 360;
-			
-			prefs.Set<double> (hueRegex.Replace (UniqueID (), "_"), HueShift);
-		}
-		
-		protected void ResetHue ()
-		{
-			HueShift = 0;
-			prefs.Set<double> (hueRegex.Replace (UniqueID (), "_"), HueShift);
+			base.OnScrolled (direction, mod);
 		}
 
 		protected override bool OnCanAcceptDrop (IEnumerable<string> uris)
@@ -227,12 +206,6 @@ namespace Docky.Items
 		protected void OpenContainingFolder ()
 		{
 			DockServices.System.Open (OwnedFile.Parent);
-		}
-		
-		protected virtual void HandleIconUpdated (object obj, EventArgs args)
-		{
-			if (Icon != null && (Icon.Contains ("inode-directory") || Icon.Contains ("folder")))
-				HueShift = prefs.Get<double> (hueRegex.Replace (UniqueID (), "_"), 0);
 		}
 	}
 }

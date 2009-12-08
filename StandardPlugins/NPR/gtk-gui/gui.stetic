@@ -87,6 +87,7 @@
                 <child>
                   <widget class="Docky.Widgets.TileView" id="tileview">
                     <property name="MemberName" />
+                    <property name="IconSize">64</property>
                   </widget>
                 </child>
               </widget>
