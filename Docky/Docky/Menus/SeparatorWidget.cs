@@ -37,12 +37,15 @@ namespace Docky.Menus
 		
 		public Cairo.Color TextColor { get; set; }
 		
+		public bool DrawLine { get; set; }
+		
 		public SeparatorWidget (string title)
 		{
 			this.title = title;
 			HasTooltip = true;
 			VisibleWindow = false;
 			AboveChild = true;
+			DrawLine = true;
 			
 			// Y-size must be odd to look pretty
 			if (title == null)
@@ -85,41 +88,42 @@ namespace Docky.Menus
 					x += logical.Width + 5;
 				}
 				
-				cr.MoveTo (x, yMiddle);
-				cr.LineTo (right, yMiddle);
-				
-				RadialGradient rg = new RadialGradient (
-					xMiddle, 
-					yMiddle, 
-					0, 
-					xMiddle, 
-					yMiddle, 
-					width / 2);
-				rg.AddColorStop (0, new Cairo.Color (0, 0, 0, 0.9));
-				rg.AddColorStop (1, new Cairo.Color (0, 0, 0, 0));
-				
-				cr.Pattern = rg;
-				cr.Stroke ();
-				rg.Destroy ();
-				
-				cr.MoveTo (x, yMiddle + 1);
-				cr.LineTo (right, yMiddle + 1);
-				
-				rg = new RadialGradient (
-					xMiddle, 
-					yMiddle + 1, 
-					0, 
-					xMiddle, 
-					yMiddle + 1, 
-					width / 2);
-				rg.AddColorStop (0, new Cairo.Color (1, 1, 1, .3));
-				rg.AddColorStop (1, new Cairo.Color (1, 1, 1, 0));
-				
-				cr.Pattern = rg;
-				cr.Stroke ();
-				rg.Destroy ();
+				if (DrawLine) {
+					cr.MoveTo (x, yMiddle);
+					cr.LineTo (right, yMiddle);
+					
+					RadialGradient rg = new RadialGradient (
+						xMiddle, 
+						yMiddle, 
+						0, 
+						xMiddle, 
+						yMiddle, 
+						width / 2);
+					rg.AddColorStop (0, new Cairo.Color (0, 0, 0, 0.9));
+					rg.AddColorStop (1, new Cairo.Color (0, 0, 0, 0));
+					
+					cr.Pattern = rg;
+					cr.Stroke ();
+					rg.Destroy ();
+					
+					cr.MoveTo (x, yMiddle + 1);
+					cr.LineTo (right, yMiddle + 1);
+					
+					rg = new RadialGradient (
+						xMiddle, 
+						yMiddle + 1, 
+						0, 
+						xMiddle, 
+						yMiddle + 1, 
+						width / 2);
+					rg.AddColorStop (0, new Cairo.Color (1, 1, 1, .3));
+					rg.AddColorStop (1, new Cairo.Color (1, 1, 1, 0));
+					
+					cr.Pattern = rg;
+					cr.Stroke ();
+					rg.Destroy ();
+				}
 			}
-			
 			return false;
 		}
 	}

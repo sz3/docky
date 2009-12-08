@@ -162,16 +162,23 @@ namespace Docky.Menus
 				textColor = new Cairo.Color (1, 1, 1);
 			}
 			
+			bool first = true;
 			foreach (MenuItem item in items.DisplayItems) {
 				if (item is SeparatorMenuItem) {
 					SeparatorWidget widget = new SeparatorWidget ((item as SeparatorMenuItem).Title);
 					widget.TextColor = textColor;
+					
+					if (first)
+						widget.DrawLine = false;
+					
+					first = false;
 					vbox.PackStart (widget);
 				} else {
 					MenuItemWidget menuItem = new MenuItemWidget (item);
 					menuItem.SelectedChanged += HandleSelectedChanged;
 					menuItem.TextColor = textColor;
 					
+					first = false;
 					vbox.PackStart (menuItem, false, false, 0);
 					
 					width = Math.Max (width, menuItem.TextWidth);
