@@ -46,7 +46,7 @@ namespace GMail
 		
 		public GMailAtom Atom { get; protected set; }
 		
-		public static string DefaultLabel { get { return Catalog.GetString ("Inbox"); } }
+		public static string DefaultLabel { get { return "Inbox"; } }
 		
 		GMailItemProvider parent;
 		
