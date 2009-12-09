@@ -202,10 +202,18 @@ namespace Docky.Items
 				}
 			}
 			
-			list[MenuListContainer.CustomOne].AddRange (DBusManager.Default.RemoteEntries
+			var remote = DBusManager.Default.RemoteEntries
 				.Where (e => e.Target == OwnedItem.DesktopID)
-				.Select (e => new MenuItem (e.Name, e.Icon, (o, a) => e.OnActivated ())));
+				.GroupBy (e => e.Title);
 			
+			MenuListContainer container = MenuListContainer.Footer + 1;
+			foreach (var entries in remote) {
+				list.SetContainerTitle (container, entries.Key);
+				foreach (RemoteMenuEntry entry in entries) {
+					list[container].Add (new MenuItem (entry.Name, entry.Icon, (o, a) => entry.OnActivated ()));
+				}
+				container++;
+			}
 				
 			return list;
 		}

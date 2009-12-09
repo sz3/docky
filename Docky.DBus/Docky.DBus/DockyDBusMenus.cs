@@ -30,14 +30,16 @@ namespace Docky.DBus
 		public uint ID { get; private set; }
 		public string Target {get; private set;}
 		public string Name {get; private set;}
-		public string Icon {get; private set;}
+		public string Icon { get; private set; }
+		public string Title { get; private set; }
 	
-		public RemoteMenuEntry (uint id, string target, string name, string icon)
+		public RemoteMenuEntry (uint id, string target, string name, string icon, string title)
 		{
 			ID = id;
 			Target = target;
 			Name = name;
 			Icon = icon;
+			Title = title;
 		}
 		
 		public void OnActivated ()
@@ -57,10 +59,10 @@ namespace Docky.DBus
 		uint last = 2500;
 		
 		#region IDockyDBusMenus implementation
-		public uint AddMenuItem (string target, string name, string icon)
+		public uint AddMenuItem (string target, string name, string icon, string title)
 		{
 			uint number = last++;
-			entries[number] = new RemoteMenuEntry (number, target, name, icon);
+			entries[number] = new RemoteMenuEntry (number, target, name, icon, title);
 			entries[number].Activated += HandleActivated;
 			return number;
 		}

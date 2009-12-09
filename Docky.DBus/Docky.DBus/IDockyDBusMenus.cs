@@ -29,7 +29,7 @@ namespace Docky.DBus
 	{
 		event MenuItemActivatedHandler MenuItemActivated;
 
-		uint AddMenuItem (string target, string name, string icon);
+		uint AddMenuItem (string target, string name, string icon, string title);
 		void RemoveMenuItem (uint item);
 		void ConfirmMenuItem (uint item);
 	}
