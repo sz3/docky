@@ -29,7 +29,7 @@ using Docky.Menus;
 
 namespace Docky.Items
 {
-	internal class DockyItem : IconDockItem, INonPersistedItem
+	internal class DockyItem : ColoredIconDockItem, INonPersistedItem
 	{
 		public DockyItem ()
 		{
@@ -68,7 +68,8 @@ namespace Docky.Items
 		
 		protected override MenuList OnGetMenuItems ()
 		{
-			MenuList list = base.OnGetMenuItems ();
+			// intentionally dont inherit
+			MenuList list = new MenuList ();
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Settings"), "gtk-preferences", (o, a) => Docky.Config.Show ()));
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_About"), "gtk-about", (o, a) => Docky.ShowAbout ()));
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Quit Docky"), "gtk-quit", (o, a) => Gtk.Application.Quit ()));

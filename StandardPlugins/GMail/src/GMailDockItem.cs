@@ -35,7 +35,7 @@ namespace GMail
 {
 	/// <summary>
 	/// </summary>
-	public class GMailDockItem : IconDockItem
+	public class GMailDockItem : ColoredIconDockItem
 	{
 		public override string UniqueID ()
 		{

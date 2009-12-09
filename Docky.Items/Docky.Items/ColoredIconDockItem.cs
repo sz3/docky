@@ -33,69 +33,43 @@ using Docky.CairoHelper;
 
 namespace Docky.Items
 {
-	public abstract class IconDockItem : AbstractDockItem
+	public abstract class ColoredIconDockItem : IconDockItem
 	{
-		public event EventHandler IconUpdated;
+		static IPreferences prefs = DockServices.Preferences.Get <ColoredIconDockItem> ();
+		static Regex hueRegex = new Regex ("[^a-zA-Z0-9]");
 		
-		string icon;
-		public string Icon {
-			get { return icon; }
+		int? shift;
+		public int HueShift {
+			get {
+				if (!shift.HasValue)
+					HueShift = prefs.Get<int> (hueRegex.Replace (UniqueID (), "_"), 0);
+				return shift.Value;
+			}
 			protected set {
-				if (icon == value)
+				if (shift.HasValue && shift.Value == value)
 					return;
-				// if we set this, clear the forced pixbuf
-				if (forced_pixbuf != null)
-					forced_pixbuf = null;
-				icon = value;
+				shift = value;
+				prefs.Set<int> (hueRegex.Replace (UniqueID (), "_"), value);
 				
-				using (Gtk.IconInfo info = Gtk.IconTheme.Default.LookupIcon (icon, 48, Gtk.IconLookupFlags.ForceSvg)) {
-					if (info != null && info.Filename != null && info.Filename.EndsWith (".svg")) {
-						icon = info.Filename;
-						ScalableRendering = true;
-					} else {
-						ScalableRendering = false;
-					}
-				}
-				
-				OnIconUpdated ();
 				QueueRedraw ();
 			}
 		}
 		
-		Pixbuf forced_pixbuf;
-		protected Pixbuf ForcePixbuf {
-			get { return forced_pixbuf; }
-			set {
-				if (forced_pixbuf == value)
-					return;
-				forced_pixbuf = value;
-				QueueRedraw ();
-			}
-		}
-		
-		protected void SetIconFromGIcon (GLib.Icon gIcon)
+		public ColoredIconDockItem ()
 		{
-			Icon = DockServices.Drawing.IconFromGIcon (gIcon);
-		}
-		
-		protected void SetIconFromPixbuf (Pixbuf pbuf)
-		{
-			forced_pixbuf = pbuf;
-		}
-		
-		public IconDockItem ()
-		{
-			Icon = "";
 		}
 		
 		protected override void PaintIconSurface (DockySurface surface)
 		{			
 			Gdk.Pixbuf pbuf;
 			
-			if (forced_pixbuf == null)
+			if (ForcePixbuf == null)
 				pbuf = DockServices.Drawing.LoadIcon (Icon, surface.Width, surface.Height);
 			else
-				pbuf = DockServices.Drawing.ARScale (surface.Width, surface.Height, forced_pixbuf);
+				pbuf = DockServices.Drawing.ARScale (surface.Width, surface.Height, ForcePixbuf);
+			
+			if (HueShift != 0)
+				pbuf = DockServices.Drawing.AddHueShift (pbuf, HueShift);
 
 			Gdk.CairoHelper.SetSourcePixbuf (surface.Context, 
 			                                 pbuf, 
@@ -113,14 +87,32 @@ namespace Docky.Items
 			}
 		}
 		
-		protected virtual void PostProcessIconSurface (DockySurface surface)
+		protected override MenuList OnGetMenuItems ()
 		{
+			MenuList list = base.OnGetMenuItems ();
+			list[MenuListContainer.Footer].Add (new Menus.MenuItem (Catalog.GetString ("Reset Color"), "edit-clear", (o, a) => ResetHue (), HueShift == 0));
+			return list;
 		}
 		
-		void OnIconUpdated ()
+		protected override void OnScrolled (ScrollDirection direction, ModifierType mod)
 		{
-			if (IconUpdated != null)
-				IconUpdated (this, EventArgs.Empty);
+			int shift = HueShift;
+			
+			if (direction == Gdk.ScrollDirection.Up)
+				shift += 5;
+			else if (direction == Gdk.ScrollDirection.Down)
+				shift -= 5;
+			
+			if (shift < 0)
+				shift += 360;
+			shift %= 360;
+			
+			HueShift = shift;
+		}
+		
+		protected void ResetHue ()
+		{
+			HueShift = 0;
 		}
 	}
 }
