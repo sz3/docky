@@ -13,7 +13,7 @@
     <widget-library name="../../Docky.Windowing/bin/Debug/Docky.Windowing.dll" />
     <widget-library name="../bin/Debug/Docky.exe" internal="true" />
   </import>
-  <widget class="Gtk.Bin" id="Docky.Interface.DockPreferences" design-size="419 356">
+  <widget class="Gtk.Bin" id="Docky.Interface.DockPreferences" design-size="411 356">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <child>
@@ -23,23 +23,20 @@
         <child>
           <widget class="Gtk.Table" id="table3">
             <property name="MemberName" />
-            <property name="NRows">6</property>
+            <property name="NRows">7</property>
             <property name="NColumns">3</property>
             <property name="RowSpacing">6</property>
             <property name="ColumnSpacing">6</property>
             <child>
               <widget class="Gtk.ComboBox" id="autohide_box">
                 <property name="MemberName" />
-                <property name="Tooltip" translatable="yes">None : Always present, acts like a panel.
-Autohide : Hides whenever the mouse is not over it.
-Intellihide : Hides when dock obstructs the active application.
-Window Dodge : Hides when dock obstructs any window.</property>
+                <property name="Tooltip" translatable="yes" />
                 <property name="IsTextCombo">True</property>
                 <property name="Items" translatable="yes">None
 Autohide
 Intellihide
 Window Dodge</property>
-                <property name="Active">0</property>
+                <property name="Active">3</property>
               </widget>
               <packing>
                 <property name="LeftAttach">1</property>
@@ -69,8 +66,29 @@ Window Dodge</property>
                 <property name="LeftAttach">2</property>
                 <property name="RightAttach">3</property>
                 <property name="AutoSize">True</property>
+                <property name="XOptions">Fill</property>
                 <property name="YOptions">Fill</property>
-                <property name="XExpand">True</property>
+                <property name="XExpand">False</property>
+                <property name="XFill">True</property>
+                <property name="XShrink">False</property>
+                <property name="YExpand">False</property>
+                <property name="YFill">True</property>
+                <property name="YShrink">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.Label" id="hide_desc">
+                <property name="MemberName" />
+                <property name="Yalign">0</property>
+              </widget>
+              <packing>
+                <property name="TopAttach">1</property>
+                <property name="BottomAttach">2</property>
+                <property name="RightAttach">3</property>
+                <property name="AutoSize">False</property>
+                <property name="XOptions">Fill</property>
+                <property name="YOptions">Fill</property>
+                <property name="XExpand">False</property>
                 <property name="XFill">True</property>
                 <property name="XShrink">False</property>
                 <property name="YExpand">False</property>
@@ -90,14 +108,13 @@ Window Dodge</property>
                 <property name="ValuePos">Left</property>
               </widget>
               <packing>
-                <property name="TopAttach">1</property>
-                <property name="BottomAttach">2</property>
+                <property name="TopAttach">2</property>
+                <property name="BottomAttach">3</property>
                 <property name="LeftAttach">1</property>
                 <property name="RightAttach">3</property>
                 <property name="AutoSize">True</property>
-                <property name="XOptions">Fill</property>
                 <property name="YOptions">Fill</property>
-                <property name="XExpand">False</property>
+                <property name="XExpand">True</property>
                 <property name="XFill">True</property>
                 <property name="XShrink">False</property>
                 <property name="YExpand">False</property>
@@ -109,11 +126,12 @@ Window Dodge</property>
               <widget class="Gtk.Label" id="label1">
                 <property name="MemberName" />
                 <property name="Xalign">1</property>
+                <property name="Yalign">0</property>
                 <property name="LabelProp" translatable="yes">Icon Size:</property>
               </widget>
               <packing>
-                <property name="TopAttach">1</property>
-                <property name="BottomAttach">2</property>
+                <property name="TopAttach">2</property>
+                <property name="BottomAttach">3</property>
                 <property name="AutoSize">True</property>
                 <property name="XOptions">Fill</property>
                 <property name="YOptions">Fill</property>
@@ -146,7 +164,7 @@ Window Dodge</property>
             <child>
               <widget class="Gtk.CheckButton" id="multiple_window_indicator_check">
                 <property name="MemberName" />
-                <property name="Tooltip" translatable="yes">Causes launchers which currently manage more than one window to have an extra indicator under it.</property>
+                <property name="Tooltip" translatable="yes" />
                 <property name="CanFocus">True</property>
                 <property name="Label" translatable="yes">Indicate Multiple Windows</property>
                 <property name="DrawIndicator">True</property>
@@ -155,8 +173,8 @@ Window Dodge</property>
                 <signal name="Toggled" handler="OnMultipleWindowIndicatorCheckToggled" />
               </widget>
               <packing>
-                <property name="TopAttach">4</property>
-                <property name="BottomAttach">5</property>
+                <property name="TopAttach">5</property>
+                <property name="BottomAttach">6</property>
                 <property name="RightAttach">3</property>
                 <property name="AutoSize">True</property>
                 <property name="XOptions">Fill</property>
@@ -180,8 +198,8 @@ Window Dodge</property>
                 <signal name="Toggled" handler="OnPanelModeButtonToggled" />
               </widget>
               <packing>
-                <property name="TopAttach">3</property>
-                <property name="BottomAttach">4</property>
+                <property name="TopAttach">4</property>
+                <property name="BottomAttach">5</property>
                 <property name="RightAttach">3</property>
                 <property name="AutoSize">True</property>
                 <property name="XOptions">Fill</property>
@@ -197,7 +215,7 @@ Window Dodge</property>
             <child>
               <widget class="Gtk.CheckButton" id="window_manager_check">
                 <property name="MemberName" />
-                <property name="Tooltip" translatable="yes">When set, windows which do not already have launchers on a dock will be added to this dock.</property>
+                <property name="Tooltip" translatable="yes" />
                 <property name="CanFocus">True</property>
                 <property name="Label" translatable="yes">Manage Windows Without Launcher</property>
                 <property name="DrawIndicator">True</property>
@@ -207,8 +225,8 @@ Window Dodge</property>
                 <signal name="Toggled" handler="OnWindowManagerCheckToggled" />
               </widget>
               <packing>
-                <property name="TopAttach">5</property>
-                <property name="BottomAttach">6</property>
+                <property name="TopAttach">6</property>
+                <property name="BottomAttach">7</property>
                 <property name="RightAttach">3</property>
                 <property name="AutoSize">True</property>
                 <property name="XOptions">Fill</property>
@@ -232,8 +250,8 @@ Window Dodge</property>
                 <property name="Xalign">1</property>
               </widget>
               <packing>
-                <property name="TopAttach">2</property>
-                <property name="BottomAttach">3</property>
+                <property name="TopAttach">3</property>
+                <property name="BottomAttach">4</property>
                 <property name="AutoSize">True</property>
                 <property name="XOptions">Fill</property>
                 <property name="YOptions">Fill</property>
@@ -253,13 +271,14 @@ Window Dodge</property>
                 <property name="Upper">100</property>
                 <property name="PageIncrement">10</property>
                 <property name="StepIncrement">0.01</property>
+                <property name="Value">20</property>
                 <property name="DrawValue">True</property>
                 <property name="Digits">2</property>
                 <property name="ValuePos">Left</property>
               </widget>
               <packing>
-                <property name="TopAttach">2</property>
-                <property name="BottomAttach">3</property>
+                <property name="TopAttach">3</property>
+                <property name="BottomAttach">4</property>
                 <property name="LeftAttach">1</property>
                 <property name="RightAttach">3</property>
                 <property name="AutoSize">True</property>
@@ -306,6 +325,7 @@ Window Dodge</property>
               <widget class="Gtk.ScrolledWindow" id="active_scroll">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
+                <property name="HscrollbarPolicy">Never</property>
                 <property name="ShadowType">In</property>
                 <child>
                   <widget class="Gtk.Viewport" id="GtkViewport1">
@@ -336,6 +356,7 @@ Window Dodge</property>
               <widget class="Gtk.ScrolledWindow" id="inactive_scroll">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
+                <property name="HscrollbarPolicy">Never</property>
                 <property name="ShadowType">In</property>
                 <child>
                   <widget class="Gtk.Viewport" id="GtkViewport">
