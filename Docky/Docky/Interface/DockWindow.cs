@@ -940,6 +940,13 @@ namespace Docky.Interface
 				}
 			} else if (HoveredItem != null) {
 				lastClickedItem = HoveredItem;
+			} else if (button == MenuButton.Right) {
+				using (AbstractDockItem dockyItem = new DockyItem ()) {
+					Menu.Anchor = new Gdk.Point (LocalCursor.X + window_position.X, window_position.Y + Allocation.Height - DockHeight + 10);
+					Menu.Orientation = Position;
+					Menu.SetItems (dockyItem.GetMenuItems ());
+					Menu.Show ();
+				}
 			}
 			
 			return base.OnButtonPressEvent (evnt);
