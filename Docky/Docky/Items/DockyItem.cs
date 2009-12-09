@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -29,11 +29,8 @@ using Docky.Menus;
 
 namespace Docky.Items
 {
-
-
 	internal class DockyItem : IconDockItem, INonPersistedItem
 	{
-
 		public DockyItem ()
 		{
 			Indicator = ActivityIndicator.Single;
@@ -41,9 +38,23 @@ namespace Docky.Items
 			Icon = "docky";
 		}
 		
+		protected override void OnStyleSet (Gtk.Style style)
+		{
+			Gdk.Color gdkColor = Style.Backgrounds [(int) Gtk.StateType.Selected];
+			int hue = (int) new Cairo.Color ((double) gdkColor.Red / ushort.MaxValue,
+											(double) gdkColor.Green / ushort.MaxValue,
+											(double) gdkColor.Blue / ushort.MaxValue,
+											1.0).GetHue ();
+			HueShift = (((hue - 202) % 360) + 360) % 360;
+		}
+		
 		public override string UniqueID ()
 		{
 			return "DockyItem";
+		}
+		
+		protected override void OnScrolled (ScrollDirection direction, ModifierType mod)
+		{
 		}
 		
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
