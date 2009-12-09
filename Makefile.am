@@ -9,6 +9,7 @@ SUBDIRS = \
 	po \
 	Docky.CairoHelper \
 	Docky.Services \
+	Docky.DBus \
 	Docky.Widgets \
 	Docky.Zeitgeist \
 	Docky.Windowing \

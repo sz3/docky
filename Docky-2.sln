@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPR", "StandardPlugins\NPR\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docky.Widgets", "Docky.Widgets\Docky.Widgets.csproj", "{9CF2F475-7848-4333-9A35-93E8224653B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docky.DBus", "Docky.DBus\Docky.DBus.csproj", "{487D3B93-FAAF-4734-B337-85810A60ACCF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{2F5FDD02-4BDA-4E80-8B92-A8BD55FFBC81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F5FDD02-4BDA-4E80-8B92-A8BD55FFBC81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F5FDD02-4BDA-4E80-8B92-A8BD55FFBC81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{487D3B93-FAAF-4734-B337-85810A60ACCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{487D3B93-FAAF-4734-B337-85810A60ACCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{487D3B93-FAAF-4734-B337-85810A60ACCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{487D3B93-FAAF-4734-B337-85810A60ACCF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{48D9779F-BBEE-4DB4-95DA-844C12C51B32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{48D9779F-BBEE-4DB4-95DA-844C12C51B32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48D9779F-BBEE-4DB4-95DA-844C12C51B32}.Release|Any CPU.ActiveCfg = Release|Any CPU

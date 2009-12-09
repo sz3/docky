@@ -27,6 +27,7 @@ using Cairo;
 using Gdk;
 using Gtk;
 
+using Docky.DBus;
 using Docky.Windowing;
 using Docky.Services;
 
@@ -87,6 +88,7 @@ namespace Docky
 				CheckComposite ();
 			};
 			
+			DBusManager.Default.Initialize ();
 			PluginManager.Initialize ();
 			Controller.Initialize ();
 			

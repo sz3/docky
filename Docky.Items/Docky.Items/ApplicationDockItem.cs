@@ -27,6 +27,7 @@ using Gdk;
 using Mono.Unix;
 using Wnck;
 
+using Docky.DBus;
 using Docky.Menus;
 using Docky.Services;
 using Docky.Windowing;
@@ -201,6 +202,11 @@ namespace Docky.Items
 				}
 			}
 			
+			list[MenuListContainer.CustomOne].AddRange (DBusManager.Default.RemoteEntries
+				.Where (e => e.Target == OwnedItem.DesktopID)
+				.Select (e => new MenuItem (e.Name, e.Icon, (o, a) => e.OnActivated ())));
+			
+				
 			return list;
 		}
 

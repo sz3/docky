@@ -155,6 +155,10 @@
       <Project>{888FCD95-7C79-45C4-A744-9C840DF4B9B0}</Project>
       <Name>Docky.Windowing</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Docky.DBus\Docky.DBus.csproj">
+      <Project>{487D3B93-FAAF-4734-B337-85810A60ACCF}</Project>
+      <Name>Docky.DBus</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
