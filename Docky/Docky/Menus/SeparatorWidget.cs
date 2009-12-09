@@ -99,7 +99,7 @@ namespace Docky.Menus
 						xMiddle, 
 						yMiddle, 
 						width / 2);
-					rg.AddColorStop (0, new Cairo.Color (0, 0, 0, 0.9));
+					rg.AddColorStop (0, new Cairo.Color (0, 0, 0, 0.4));
 					rg.AddColorStop (1, new Cairo.Color (0, 0, 0, 0));
 					
 					cr.Pattern = rg;
@@ -116,7 +116,7 @@ namespace Docky.Menus
 						xMiddle, 
 						yMiddle + 1, 
 						width / 2);
-					rg.AddColorStop (0, new Cairo.Color (1, 1, 1, .3));
+					rg.AddColorStop (0, new Cairo.Color (1, 1, 1, .4));
 					rg.AddColorStop (1, new Cairo.Color (1, 1, 1, 0));
 					
 					cr.Pattern = rg;
