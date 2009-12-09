@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -15,7 +14,7 @@
    height="26"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.47pre4 r22446"
+   inkscape:version="0.46"
    sodipodi:docname="tooltip.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <metadata
@@ -30,8 +29,8 @@
     </rdf:RDF>
   </metadata>
   <sodipodi:namedview
-     inkscape:window-height="689"
-     inkscape:window-width="1280"
+     inkscape:window-height="789"
+     inkscape:window-width="1440"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      guidetolerance="10.0"
@@ -42,7 +41,7 @@
      pagecolor="#ffffff"
      id="base"
      showgrid="false"
-     inkscape:zoom="5.0404021"
+     inkscape:zoom="1.7820513"
      inkscape:cx="-12.007896"
      inkscape:cy="12.719424"
      inkscape:window-x="0"
@@ -52,37 +51,27 @@
   <defs
      id="defs4">
     <linearGradient
-       gradientTransform="matrix(1.086652,0,0,1.0127177,-4.2797024,-3.9711037)"
-       y2="12.137069"
-       x2="60.5"
-       y1="4"
-       x1="60.5"
-       gradientUnits="userSpaceOnUse"
-       id="linearGradient3606"
-       xlink:href="#linearGradient3619"
-       inkscape:collect="always" />
-    <linearGradient
-       id="linearGradient3619"
+       id="linearGradient3154"
        inkscape:collect="always">
       <stop
-         id="stop3621"
+         id="stop3156"
          offset="0"
          style="stop-color:#ffffff;stop-opacity:1;" />
       <stop
-         id="stop3623"
+         id="stop3158"
          offset="1"
          style="stop-color:#ffffff;stop-opacity:0;" />
     </linearGradient>
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient3619"
-       id="linearGradient2860"
+       xlink:href="#linearGradient3154"
+       id="linearGradient2407"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1.086652,0,0,1.0127177,-118.34614,6.1291583)"
-       x1="60.5"
-       y1="4"
-       x2="60.5"
-       y2="12.137069" />
+       x1="46.490067"
+       y1="-0.055477817"
+       x2="46.490067"
+       y2="6.1589398"
+       gradientTransform="translate(-144.8337,-53.506021)" />
   </defs>
   <rect
      width="38"
@@ -92,5 +81,5 @@
      x="0.50000006"
      y="0.50000006"
      id="rect2400"
-     style="opacity:0.59999999999999998;fill:#a0a0a0;fill-opacity:1;fill-rule:nonzero;stroke:#808080;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;color:#000000" />
+     style="opacity:0.80000000000000004;fill:#b4b4b4;fill-opacity:1;fill-rule:nonzero;stroke:#a5a5a5;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;color:#000000" />
 </svg>
