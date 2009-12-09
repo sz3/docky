@@ -38,9 +38,17 @@ namespace GMail
 
 			Icon = "gmail";
 			if (item != null) {
-				Icon = item.Icon;
-				HueShift = item.HueShift;
+				item.IconUpdated += delegate {
+					SetIcon (item);
+				};
+				SetIcon (item);
 			}
+		}
+		
+		void SetIcon (GMailDockItem item)
+		{
+			Icon = item.Icon;
+			HueShift = item.HueShift;
 		}
 		
 		public override void OnActiveChanged ()

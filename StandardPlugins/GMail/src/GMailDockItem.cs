@@ -203,47 +203,45 @@ namespace GMail
 
 		protected override MenuList OnGetMenuItems ()
 		{
-			MenuList list = base.OnGetMenuItems ();
+			MenuList list = base.OnGetMenuItems ();;
 			
 			UpdateAttention (false);
 			
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_View ") + Atom.CurrentLabel,
+			List<MenuItem> items = new List<MenuItem> () { 
+				new MenuItem (Catalog.GetString ("_View ") + Atom.CurrentLabel,
 					"gmail",
 					delegate {
 						Clicked (1, Gdk.ModifierType.None, 0, 0);
-					}));
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Compose Mail"),
+					}), 
+				new MenuItem (Catalog.GetString ("_Compose Mail"),
 					"mail-message-new",
 					delegate {
 						DockServices.System.Open ("https://mail.google.com/mail/#compose");
-					}));
-			
-			list[MenuListContainer.Actions].Add (new SeparatorMenuItem ());
+					}),
+			};
 			
 			if (Atom.HasUnread) {
-				foreach (UnreadMessage message in Atom.Messages.Take (10))
-					list[MenuListContainer.Actions].Add (new GMailMenuItem (message, "gmail"));
+				items.Add (new SeparatorMenuItem (Catalog.GetString ("New Mail")));
 				
-				list[MenuListContainer.Actions].Add (new SeparatorMenuItem ());
+				foreach (UnreadMessage message in Atom.Messages.Take (10))
+					items.Add (new GMailMenuItem (message, "gmail"));
 			}
 			
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Settings"),
+			items.Add (new SeparatorMenuItem ());
+			
+			items.Add (new MenuItem (Catalog.GetString ("_Settings"),
 					Gtk.Stock.Preferences,
 					delegate {
 						GMailAtom.ShowConfig ();
 					}));
 			
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Check _Now"),
+			items.Add (new MenuItem (Catalog.GetString ("Check _Now"),
 					Gtk.Stock.Refresh,
 					delegate {
 						Atom.ResetTimer (true);
 					}));
 			
-			list[MenuListContainer.Footer].Add (new MenuItem (Catalog.GetString ("_Reset Color"),
-					"edit-clear",
-					delegate {
-						ResetHue ();
-					}));
+			list[MenuListContainer.Actions].InsertRange (0, items);
 			
 			return list;
 		}

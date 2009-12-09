@@ -192,9 +192,8 @@ namespace Docky.Items
 		protected override MenuList OnGetMenuItems ()
 		{
 			MenuList list = base.OnGetMenuItems ();
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Open"), "gtk-open", (o, a) => Open ()));
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Open Containing Folder"), "folder", (o, a) => OpenContainingFolder ()));
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Reset Color"), "edit-clear", (o, a) => ResetHue (), HueShift == 0));
+			list[MenuListContainer.Actions].Insert (0, new MenuItem (Catalog.GetString ("Open"), "gtk-open", (o, a) => Open ()));
+			list[MenuListContainer.Actions].Insert (1, new MenuItem (Catalog.GetString ("Open Containing Folder"), "folder", (o, a) => OpenContainingFolder ()));
 			return list;
 		}
 		
