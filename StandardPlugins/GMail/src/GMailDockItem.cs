@@ -236,7 +236,7 @@ namespace GMail
 						GMailAtom.ShowConfig ();
 					}));
 			
-			items.Add (new MenuItem (Catalog.GetString ("Check _Now"),
+			items.Add (new MenuItem (Catalog.GetString ("Check _Mail"),
 					Gtk.Stock.Refresh,
 					delegate {
 						Atom.ResetTimer (true);

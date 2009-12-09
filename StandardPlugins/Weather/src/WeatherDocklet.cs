@@ -283,7 +283,7 @@ namespace WeatherDocklet
 			list[MenuListContainer.CustomOne].Add (new MenuItem (Catalog.GetString ("_Settings"), Gtk.Stock.Preferences, 
 					delegate { ShowConfig (); }));
 			
-			list[MenuListContainer.CustomOne].Add (new MenuItem (Catalog.GetString ("_Reload Weather Data"), Gtk.Stock.Refresh,
+			list[MenuListContainer.CustomOne].Add (new MenuItem (Catalog.GetString ("Check _Weather"), Gtk.Stock.Refresh,
 					delegate {
 						Status = WeatherDockletStatus.ManualReload;
 						State |= ItemState.Wait;
