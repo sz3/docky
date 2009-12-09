@@ -51,11 +51,8 @@
   <ItemGroup>
     <Compile Include="src\ForecastMenuItem.cs" />
     <Compile Include="src\IWeatherSource.cs" />
-    <Compile Include="src\WeatherConfiguration.cs" />
-    <Compile Include="src\WeatherConfigurationDialog.cs" />
     <Compile Include="src\WeatherController.cs" />
     <Compile Include="src\WeatherDocklet.cs" />
-    <Compile Include="src\WeatherDocklet.WeatherConfiguration.cs" />
     <Compile Include="src\WeatherErrorArgs.cs" />
     <Compile Include="src\WeatherForecast.cs" />
     <Compile Include="src\WeatherItemProvider.cs" />
@@ -66,10 +63,11 @@
     <Compile Include="src\Sources\GoogleWeatherSource.cs" />
     <Compile Include="src\Sources\WeatherChannelWeatherSource.cs" />
     <Compile Include="src\Sources\WunderWeatherSource.cs" />
-    <Compile Include="src\generated.cs" />
+    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="src\WeatherConfig.cs" />
+    <Compile Include="gtk-gui\vbox2.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\gui.stetic" />
     <None Include="Resources\Weather.addin.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -86,5 +84,14 @@
       <Project>{8A6E0EDD-6443-4F99-9EAC-D9CC906F080D}</Project>
       <Name>Docky.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Docky.Widgets\Docky.Widgets.csproj">
+      <Project>{9CF2F475-7848-4333-9A35-93E8224653B3}</Project>
+      <Name>Docky.Widgets</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="gtk-gui\gui.stetic">
+      <LogicalName>gui.stetic</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

@@ -12,19 +12,24 @@ FILES = \
 	src/Sources/GoogleWeatherSource.cs \
 	src/Sources/WunderWeatherSource.cs \
 	src/WeatherItemProvider.cs \
-	src/WeatherConfiguration.cs \
-	src/WeatherConfigurationDialog.cs \
 	src/WeatherPreferences.cs \
 	src/WeatherController.cs \
-	src/WeatherDocklet.WeatherConfiguration.cs \
 	src/WeatherUnits.cs \
 	src/WeatherDocklet.cs \
 	src/WeatherPainter.cs \
-	src/generated.cs \
-	src/WeatherErrorArgs.cs
+	src/WeatherErrorArgs.cs \
+	src/WeatherConfig.cs \
+	gtk-gui/WeatherDocklet.WeatherConfig.cs \
+	gtk-gui/generated.cs
 
 RESOURCES = \
 	Resources/Weather.addin.xml
+
+PROJECT_REFERENCES = \
+	Docky.CairoHelper \
+	Docky.Services \
+	Docky.Items \
+	Docky.Widgets
 
 REFERENCES =  \
 	System \
@@ -33,7 +38,4 @@ REFERENCES =  \
 	System.Xml \
 	Mono.Cairo \
 	Mono.Posix \
-	$(DOCKY_CAIRO_LIBS) \
-	$(DOCKY_SERVICES_LIBS) \
-	$(DOCKY_ITEMS_LIBS) \
 	$(GTK_SHARP_20_LIBS)

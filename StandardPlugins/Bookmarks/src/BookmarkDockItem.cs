@@ -84,8 +84,7 @@ namespace Bookmarks
 			MenuList list = new MenuList ();
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Open"), "gtk-open", (o, a) => Open ()));
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Remove"), "gtk-remove", (o, a) => Remove ()));
-			list[MenuListContainer.Actions].Add (new SeparatorMenuItem ());
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Reset _Color"), "edit-clear", (o, a) => ResetHue (), HueShift == 0));
+			list[MenuListContainer.Footer].Add (new MenuItem (Catalog.GetString ("Reset _Color"), "edit-clear", (o, a) => ResetHue (), HueShift == 0));
 			return list;
 		}
 	}

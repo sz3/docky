@@ -32,7 +32,7 @@ namespace Docky.Items
 {
 
 
-	public class FileDockItem : IconDockItem
+	public class FileDockItem : ChameleonDockItem
 	{
 		public static FileDockItem NewFromUri (string uri)
 		{
