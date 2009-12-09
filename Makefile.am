@@ -9,11 +9,11 @@ SUBDIRS = \
 	po \
 	Docky.CairoHelper \
 	Docky.Services \
-	Docky.DBus \
 	Docky.Widgets \
 	Docky.Zeitgeist \
 	Docky.Windowing \
 	Docky.Items \
+	Docky.DBus \
 	StandardPlugins \
 	Docky \
 	m4

@@ -29,6 +29,7 @@ using Gdk;
 using Gtk;
 using Wnck;
 
+using Docky.DBus;
 using Docky.Items;
 using Docky.CairoHelper;
 using Docky.Menus;
@@ -738,6 +739,8 @@ namespace Docky.Interface
 			item.HoverTextChanged += ItemHoverTextChanged;
 			item.PaintNeeded += ItemPaintNeeded;
 			item.PainterRequest += ItemPainterRequest;
+			
+			DBusManager.Default.RegisterItem (item);
 		}
 
 		void UnregisterItem (AbstractDockItem item)
@@ -746,6 +749,8 @@ namespace Docky.Interface
 			item.PaintNeeded -= ItemPaintNeeded;
 			item.PainterRequest -= ItemPainterRequest;
 			DrawValues.Remove (item);
+			
+			DBusManager.Default.UnregisterItem (item);
 		}
 		
 		void ItemHoverTextChanged (object sender, EventArgs e)

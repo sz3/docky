@@ -17,20 +17,27 @@
 
 using System;
 
-using org.freedesktop.DBus;
-using NDesk.DBus;
-
 namespace Docky.DBus
 {
-	public delegate void MenuItemActivatedHandler (uint menuHandle);
 
-	[Interface ("org.gnome.Docky.Menus")]
-	public interface IDockyDBusMenus
+
+	public class RemoteDockItem : RemoteItem
 	{
-		event MenuItemActivatedHandler MenuItemActivated;
-
-		uint AddMenuItem (string target, string name, string icon, string title);
-		void RemoveMenuItem (uint item);
-		void ConfirmMenuItem (uint item);
+		public event EventHandler<Gtk.ButtonReleaseEventArgs> ButtonReleased;
+		
+		public string HoverText {get; private set;}
+		public string Icon { get; private set; }
+	
+		public RemoteDockItem (uint id, string hovertext, string icon) : base (id)
+		{
+			HoverText = hovertext;
+			Icon = icon;
+		}
+		
+		public void OnButtonReleased (Gtk.ButtonReleaseEventArgs args)
+		{
+			if (ButtonReleased != null)
+				ButtonReleased (this, args);
+		}
 	}
 }

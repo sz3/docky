@@ -27,7 +27,6 @@ using Gdk;
 using Mono.Unix;
 using Wnck;
 
-using Docky.DBus;
 using Docky.Menus;
 using Docky.Services;
 using Docky.Windowing;
@@ -202,18 +201,18 @@ namespace Docky.Items
 				}
 			}
 			
-			var remote = DBusManager.Default.RemoteEntries
-				.Where (e => e.Target == OwnedItem.DesktopID)
-				.GroupBy (e => e.Title);
-			
-			MenuListContainer container = MenuListContainer.Footer + 1;
-			foreach (var entries in remote) {
-				list.SetContainerTitle (container, entries.Key);
-				foreach (RemoteMenuEntry entry in entries) {
-					list[container].Add (new MenuItem (entry.Name, entry.Icon, (o, a) => entry.OnActivated ()));
-				}
-				container++;
-			}
+//			var remote = DBusManager.Default.RemoteEntries
+//				.Where (e => e.Target == OwnedItem.DesktopID)
+//				.GroupBy (e => e.Title);
+//			
+//			MenuListContainer container = MenuListContainer.Footer + 1;
+//			foreach (var entries in remote) {
+//				list.SetContainerTitle (container, entries.Key);
+//				foreach (RemoteMenuEntry entry in entries) {
+//					list[container].Add (new MenuItem (entry.Name, entry.Icon, (o, a) => entry.OnActivated ()));
+//				}
+//				container++;
+//			}
 				
 			return list;
 		}

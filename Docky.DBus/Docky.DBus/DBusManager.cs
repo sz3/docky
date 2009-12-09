@@ -20,10 +20,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 using org.freedesktop.DBus;
 using NDesk.DBus;
 
+using Docky.Items;
 using Docky.Services;
 
 namespace Docky.DBus
@@ -33,7 +35,7 @@ namespace Docky.DBus
 	{
 		const string BusName        = "org.gnome.Docky";
 		const string DockyPath      = "/org/gnome/Docky";
-		const string MenusPath      = "/org/gnome/Docky/Menus";
+		const string ItemsPath      = "/org/gnome/Docky/Items";
 		
 		static DBusManager manager;
 		public static DBusManager Default {
@@ -44,14 +46,8 @@ namespace Docky.DBus
 			}
 		}
 
-		DockyDBus      docky;
-		DockyDBusMenus menus;
-		
-		public IEnumerable<RemoteMenuEntry> RemoteEntries {
-			get {
-				return menus.MenuEntries;
-			}
-		}
+		DockyDBus docky;
+		Dictionary<AbstractDockItem, DockyDBusItem> items;
 		
 		private DBusManager ()
 		{
@@ -62,18 +58,40 @@ namespace Docky.DBus
 			Bus bus = Bus.Session;
 			
 			if (bus.RequestName (BusName) != RequestNameReply.PrimaryOwner) {
-				Log<DBusManager>.Error ("BusName is already owned");
+				Log<DBusManager>.Error ("Bus Name is already owned");
 				return;
 			}
 			
-			ObjectPath dockyPath = new ObjectPath (DockyPath);
-			ObjectPath menusPath = new ObjectPath (MenusPath);
+			items = new Dictionary<AbstractDockItem, DockyDBusItem> ();
 			
+			ObjectPath dockyPath = new ObjectPath (DockyPath);
 			docky = new DockyDBus ();
-			menus = new DockyDBusMenus ();
 			
 			bus.Register (dockyPath, docky);
-			bus.Register (menusPath, menus);
+		}
+		
+		public void RegisterItem (AbstractDockItem item)
+		{
+			if (items.ContainsKey (item))
+				return;
+			
+			ObjectPath path = new ObjectPath (PathForItem (item));
+			DockyDBusItem dbusitem = new DockyDBusItem (item);
+			
+			items[item] = dbusitem;
+			Bus.Session.Register (path, dbusitem);
+		}
+		
+		public void UnregisterItem (AbstractDockItem item)
+		{
+			ObjectPath path = new ObjectPath (PathForItem (item));
+			Bus.Session.Unregister (path);
+		}
+		
+		string PathForItem (AbstractDockItem item)
+		{
+			
+			return ItemsPath + "/" + Math.Abs (item.UniqueID ().GetHashCode ());
 		}
 	}
 }
