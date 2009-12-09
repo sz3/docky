@@ -141,7 +141,6 @@
                 <child>
                   <widget class="Docky.Widgets.TileView" id="results_view">
                     <property name="MemberName" />
-                    <property name="IconSize">24</property>
                   </widget>
                 </child>
               </widget>
