@@ -27,7 +27,7 @@ FILES = \
 	Docky.Items/PainterRequestEventArgs.cs \
 	Docky.Items/FileApplicationProvider.cs \
 	Docky.Items/IconDockItem.cs \
-	Docky.Items/ChameleonDockItem.cs \
+	Docky.Items/ColoredIconDockItem.cs \
 	Docky.Items/WnckDockItem.cs
 
 RESOURCES = \
