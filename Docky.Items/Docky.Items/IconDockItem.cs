@@ -96,6 +96,8 @@ namespace Docky.Items
 				pbuf = DockServices.Drawing.LoadIcon (Icon, surface.Width, surface.Height);
 			else
 				pbuf = DockServices.Drawing.ARScale (surface.Width, surface.Height, forced_pixbuf);
+			
+			pbuf = ProcessPixbuf (pbuf);
 
 			Gdk.CairoHelper.SetSourcePixbuf (surface.Context, 
 			                                 pbuf, 
@@ -111,6 +113,11 @@ namespace Docky.Items
 				Log<IconDockItem>.Error (e.Message);
 				Log<IconDockItem>.Debug (e.StackTrace);
 			}
+		}
+		
+		protected virtual Gdk.Pixbuf ProcessPixbuf (Gdk.Pixbuf pbuf)
+		{
+			return pbuf;
 		}
 		
 		protected virtual void PostProcessIconSurface (DockySurface surface)

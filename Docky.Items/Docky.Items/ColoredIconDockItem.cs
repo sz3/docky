@@ -59,32 +59,9 @@ namespace Docky.Items
 		{
 		}
 		
-		protected override void PaintIconSurface (DockySurface surface)
-		{			
-			Gdk.Pixbuf pbuf;
-			
-			if (ForcePixbuf == null)
-				pbuf = DockServices.Drawing.LoadIcon (Icon, surface.Width, surface.Height);
-			else
-				pbuf = DockServices.Drawing.ARScale (surface.Width, surface.Height, ForcePixbuf);
-			
-			if (HueShift != 0)
-				pbuf = DockServices.Drawing.AddHueShift (pbuf, HueShift);
-
-			Gdk.CairoHelper.SetSourcePixbuf (surface.Context, 
-			                                 pbuf, 
-			                                 (surface.Width - pbuf.Width) / 2, 
-			                                 (surface.Height - pbuf.Height) / 2);
-			surface.Context.Paint ();
-			
-			pbuf.Dispose ();
-			
-			try {
-				PostProcessIconSurface (surface);
-			} catch (Exception e) {
-				Log<IconDockItem>.Error (e.Message);
-				Log<IconDockItem>.Debug (e.StackTrace);
-			}
+		protected override Gdk.Pixbuf ProcessPixbuf (Gdk.Pixbuf pbuf)
+		{
+			return DockServices.Drawing.AddHueShift (pbuf, HueShift);
 		}
 		
 		protected override MenuList OnGetMenuItems ()
