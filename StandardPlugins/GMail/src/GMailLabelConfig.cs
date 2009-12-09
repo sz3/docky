@@ -30,7 +30,7 @@ namespace GMail
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class GMailLabelConfig : Gtk.Bin
 	{
-
+		
 		public GMailLabelConfig ()
 		{
 			this.Build ();

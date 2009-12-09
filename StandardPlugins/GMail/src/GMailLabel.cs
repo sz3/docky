@@ -35,7 +35,7 @@ namespace GMail
 			
 			Name = labelName;
 			GMailDockItem item = GMailItemProvider.items.First (adi => (adi as GMailDockItem).Atom.CurrentLabel == labelName) as GMailDockItem;
-			
+
 			Icon = "gmail";
 			if (item != null) {
 				Icon = item.Icon;

@@ -62,12 +62,15 @@ namespace Docky.Widgets
 			new_account_button_box.Add (new_account_button);
 
 			// masks chars for passwords
-			password_entry.Visibility = false;
+			password_entry.InnerEntry.Visibility = false;
 
-			password_entry.Activated += OnPasswordEntryActivated;
+			password_entry.InnerEntry.Activated += OnPasswordEntryActivated;
 			new_account_button.Clicked += OnNewAccountBtnClicked;
 
 			ChangeService (serviceName, serviceUri);
+			
+			username_entry.Show ();
+			password_entry.Show ();
 
 			ShowAll ();
 
@@ -78,16 +81,16 @@ namespace Docky.Widgets
 		/// Give access to the text in the username entry box
 		/// </value>
 		protected string Username { 
-			get { return username_entry.Text; }
-			set { username_entry.Text = value; }
+			get { return username_entry.InnerEntry.Text; }
+			set { username_entry.InnerEntry.Text = value; }
 		}
 
 		/// <value>
 		/// gives access to the text in the password entry box
 		/// </value>
 		protected string Password { 
-			get { return password_entry.Text; }
-			set { password_entry.Text = value; }
+			get { return password_entry.InnerEntry.Text; }
+			set { password_entry.InnerEntry.Text = value; }
 		}
 
 		/// <value>
@@ -189,8 +192,8 @@ namespace Docky.Widgets
 			validate_lbl.Markup = BusyValidatingLabel;
 			validate_btn.Sensitive = false;
 			
-			string username = username_entry.Text;
-			string password = password_entry.Text;
+			string username = username_entry.InnerEntry.Text;
+			string password = password_entry.InnerEntry.Text;
 			
 			Thread thread = new Thread (new ThreadStart(() => ValidateCredentials (username, password)));
 			

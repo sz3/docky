@@ -21,11 +21,11 @@ namespace Docky.Widgets {
         
         private Gtk.Table login_tbl;
         
-        private Gtk.Entry password_entry;
+        private Docky.Widgets.SearchEntry password_entry;
         
         private Gtk.Label password_lbl;
         
-        private Gtk.Entry username_entry;
+        private Docky.Widgets.SearchEntry username_entry;
         
         private Gtk.Label username_lbl;
         
@@ -69,19 +69,17 @@ namespace Docky.Widgets {
             this.login_tbl.RowSpacing = ((uint)(6));
             this.login_tbl.ColumnSpacing = ((uint)(6));
             // Container child login_tbl.Gtk.Table+TableChild
-            this.password_entry = new Gtk.Entry();
-            this.password_entry.CanFocus = true;
+            this.password_entry = new Docky.Widgets.SearchEntry();
             this.password_entry.Name = "password_entry";
-            this.password_entry.IsEditable = true;
-            this.password_entry.Visibility = false;
-            this.password_entry.InvisibleChar = '●';
+            this.password_entry.EmptyMessage = "Password";
+            this.password_entry.Ready = true;
+            this.password_entry.HasFocus = false;
             this.login_tbl.Add(this.password_entry);
             Gtk.Table.TableChild w1 = ((Gtk.Table.TableChild)(this.login_tbl[this.password_entry]));
             w1.TopAttach = ((uint)(1));
             w1.BottomAttach = ((uint)(2));
             w1.LeftAttach = ((uint)(1));
             w1.RightAttach = ((uint)(2));
-            w1.YOptions = ((Gtk.AttachOptions)(4));
             // Container child login_tbl.Gtk.Table+TableChild
             this.password_lbl = new Gtk.Label();
             this.password_lbl.Name = "password_lbl";
@@ -94,16 +92,15 @@ namespace Docky.Widgets {
             w2.XOptions = ((Gtk.AttachOptions)(4));
             w2.YOptions = ((Gtk.AttachOptions)(4));
             // Container child login_tbl.Gtk.Table+TableChild
-            this.username_entry = new Gtk.Entry();
-            this.username_entry.CanFocus = true;
+            this.username_entry = new Docky.Widgets.SearchEntry();
             this.username_entry.Name = "username_entry";
-            this.username_entry.IsEditable = true;
-            this.username_entry.InvisibleChar = '●';
+            this.username_entry.EmptyMessage = "Username";
+            this.username_entry.Ready = true;
+            this.username_entry.HasFocus = false;
             this.login_tbl.Add(this.username_entry);
             Gtk.Table.TableChild w3 = ((Gtk.Table.TableChild)(this.login_tbl[this.username_entry]));
             w3.LeftAttach = ((uint)(1));
             w3.RightAttach = ((uint)(2));
-            w3.YOptions = ((Gtk.AttachOptions)(4));
             // Container child login_tbl.Gtk.Table+TableChild
             this.username_lbl = new Gtk.Label();
             this.username_lbl.Name = "username_lbl";

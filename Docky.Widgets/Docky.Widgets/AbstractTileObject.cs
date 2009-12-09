@@ -22,7 +22,6 @@ using Mono.Unix;
 namespace Docky.Widgets
 {
 
-
 	public abstract class AbstractTileObject
 	{
 		public event EventHandler IconUpdated;
@@ -48,15 +47,15 @@ namespace Docky.Widgets
 			}
 		}
 		
-		int shift;
+		int? shift;
 		public virtual int HueShift {
 			get {
-				if (shift == null)
-				    shift = 50;
-				return shift;
+				if (!shift.HasValue)
+				    shift = 0;
+				return shift.Value;
 			}
 			protected set {
-				if (shift == value)
+				if (shift.HasValue && shift.Value == value)
 					return;
 				shift = value;
 				OnIconUpdated ();
@@ -173,7 +172,7 @@ namespace Docky.Widgets
 				return enabled.Value;
 			}
 			set {
-				if (enabled.HasValue && enabled.Value == true)
+				if (enabled.HasValue && enabled.Value == value)
 					return;
 				enabled = value;
 			}

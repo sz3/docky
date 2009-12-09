@@ -40,11 +40,15 @@ namespace Docky.Widgets
 			IconName = Stock.Preferences;
 			Title = windowTitle;
 			
-			if (widgets.Count () > 1) {
+			if (widgets.Count () > 1) {				
 				Notebook notebook = new Notebook ();
 				
-				foreach (Widget widget in widgets)
-					notebook.AppendPage (widget, new Label (widget.Name));
+				foreach (Widget widget in widgets) {
+					Gtk.Alignment spacer = new Gtk.Alignment (0,0,1,1);
+					spacer.LeftPadding = spacer.RightPadding = spacer.TopPadding = spacer.BottomPadding = 7;
+					spacer.Child = widget;
+					notebook.AppendPage (spacer, new Label (widget.Name));
+				}
 				
 				VBox.PackStart (notebook);
 			} else {
