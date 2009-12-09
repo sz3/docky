@@ -497,8 +497,9 @@ namespace Docky.Interface
 			
 			panel_mode_button.Active = PanelMode;
 			zoom_checkbutton.Active = ZoomEnabled;
+			zoom_checkbutton.Sensitive = !PanelMode;
 			zoom_scale.Value = ZoomPercent;
-			zoom_scale.Sensitive = ZoomEnabled;
+			zoom_scale.Sensitive = !PanelMode && ZoomEnabled;
 			icon_scale.Value = IconSize;
 			fade_on_hide_check.Active = FadeOnHide;
 			multiple_window_indicator_check.Active = IndicateMultipleWindows;
@@ -665,6 +666,8 @@ namespace Docky.Interface
 		{
 			PanelMode = panel_mode_button.Active;
 			panel_mode_button.Active = PanelMode;
+			zoom_scale.Sensitive = !PanelMode && ZoomEnabled;
+			zoom_checkbutton.Sensitive = !PanelMode;
 		}
 		
 		void OnActiveViewAddinOrderChanged (object sender, AddinOrderChangedArgs e)
