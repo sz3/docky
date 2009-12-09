@@ -50,7 +50,7 @@ namespace WeatherDocklet
 		
 		public override string Name {
 			get {
-				return Catalog.GetString ("Weather Channel");
+				return "Weather Channel";
 			}
 		}
 		
