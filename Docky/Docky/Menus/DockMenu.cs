@@ -198,6 +198,8 @@ namespace Docky.Menus
 			} 
 		}
 		
+		public int Monitor { get; set; }
+		
 		public DockMenu (Gtk.Window parent) : base(Gtk.WindowType.Popup)
 		{
 			SetLight ();
@@ -250,20 +252,37 @@ namespace Docky.Menus
 		
 		void Reposition ()
 		{
+			Gdk.Rectangle monitor_geo = Screen.GetMonitorGeometry (Monitor);
+			int x, y;
+			
 			switch (Orientation) {
+			default:
 			case DockPosition.Bottom:
-				Move (Anchor.X - allocation.Width / 2, Anchor.Y - allocation.Height);
+				x = Anchor.X - allocation.Width / 2;
+				y = Anchor.Y - allocation.Height;
 				break;
 			case DockPosition.Top:
-				Move (Anchor.X - allocation.Width / 2, Anchor.Y);
+				x = Anchor.X - allocation.Width / 2;
+				y = Anchor.Y;
 				break;
 			case DockPosition.Left:
-				Move (Anchor.X, Anchor.Y - allocation.Height / 2);
+				x = Anchor.X;
+				y = Anchor.Y - allocation.Height / 2;
 				break;
 			case DockPosition.Right:
-				Move (Anchor.X - allocation.Width, Anchor.Y - allocation.Height / 2);
+				x = Anchor.X - allocation.Width;
+				y = Anchor.Y - allocation.Height / 2;
 				break;
 			}
+			
+			x = Math.Max (x, 0);
+			y = Math.Max (y, 0);
+			if (x + allocation.Width > monitor_geo.X + monitor_geo.Width)
+				x = monitor_geo.X + monitor_geo.Width - allocation.Width;
+			if (y + allocation.Height > monitor_geo.Y + monitor_geo.Height)
+				y = monitor_geo.Y + monitor_geo.Height - allocation.Height;
+			
+			Move (x, y);
 		}
 		
 		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
