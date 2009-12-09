@@ -65,7 +65,8 @@
     <Compile Include="src\Sources\WunderWeatherSource.cs" />
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="src\WeatherConfig.cs" />
-    <Compile Include="gtk-gui\vbox2.cs" />
+    <Compile Include="src\WeatherTile.cs" />
+    <Compile Include="gtk-gui\WeatherDocklet.WeatherConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Weather.addin.xml" />

@@ -563,5 +563,4 @@ namespace WeatherDocklet
 			return mVHzArr[2];
 		}
 	}
-
 }

@@ -298,23 +298,16 @@ namespace WeatherDocklet
 		{
 			if (Config == null) {
 				WeatherConfig locations = new WeatherConfig ();
-				Config = new ConfigDialog (Catalog.GetString ("Weather Configuration"), new Gtk.Widget [] { locations });
+				Config = new ConfigDialog (Catalog.GetString ("Weather Configuration"), new Gtk.Widget [] { locations }, 400, 500);
 				Config.Shown += delegate {
-					Console.WriteLine ("show my locations...");
+					locations.ShowMyLocations ();
 				};
 			}
 			Config.Show ();
 		}
 		
 		public override void Dispose ()
-		{
-			/*
-			if (WeatherConfigurationDialog.instance == null) {
-				WeatherConfigurationDialog.instance.Destroy ();
-				WeatherConfigurationDialog.instance = null;
-			}
-			*/
-			
+		{			
 			WeatherController.WeatherReloading -= HandleWeatherReloading;
 			WeatherController.WeatherError -= HandleWeatherError;
 			WeatherController.WeatherUpdated -= HandleWeatherUpdated;

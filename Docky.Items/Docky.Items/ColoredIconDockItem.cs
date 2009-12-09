@@ -51,6 +51,7 @@ namespace Docky.Items
 				shift = value;
 				prefs.Set<int> (hueRegex.Replace (UniqueID (), "_"), value);
 				
+				OnIconUpdated ();
 				QueueRedraw ();
 			}
 		}

@@ -277,6 +277,7 @@ namespace Docky.Interface {
             w16.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table2.Gtk.Table+TableChild
             this.vbox2 = new Gtk.VBox();
+            this.vbox2.Name = "vbox2";
             this.vbox2.Spacing = 6;
             // Container child vbox2.Gtk.Box+BoxChild
             this.enable_plugin_button = new Gtk.Button();

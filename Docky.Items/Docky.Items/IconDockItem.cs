@@ -117,7 +117,7 @@ namespace Docky.Items
 		{
 		}
 		
-		void OnIconUpdated ()
+		protected void OnIconUpdated ()
 		{
 			if (IconUpdated != null)
 				IconUpdated (this, EventArgs.Empty);
