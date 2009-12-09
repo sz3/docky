@@ -68,6 +68,7 @@ namespace Docky.Interface {
             this.Name = "Docky.Interface.DockPreferences";
             // Container child Docky.Interface.DockPreferences.Gtk.Container+ContainerChild
             this.vbox1 = new Gtk.VBox();
+            this.vbox1.Name = "vbox1";
             this.vbox1.Spacing = 6;
             // Container child vbox1.Gtk.Box+BoxChild
             this.table3 = new Gtk.Table(((uint)(7)), ((uint)(3)), false);
@@ -106,6 +107,7 @@ namespace Docky.Interface {
             this.hide_desc = new Gtk.Label();
             this.hide_desc.Name = "hide_desc";
             this.hide_desc.Yalign = 0F;
+            this.hide_desc.UseMarkup = true;
             this.table3.Add(this.hide_desc);
             Gtk.Table.TableChild w3 = ((Gtk.Table.TableChild)(this.table3[this.hide_desc]));
             w3.TopAttach = ((uint)(1));

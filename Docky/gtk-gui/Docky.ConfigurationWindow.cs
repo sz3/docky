@@ -62,6 +62,7 @@ namespace Docky {
             this.BorderWidth = ((uint)(2));
             // Container child Docky.ConfigurationWindow.Gtk.Container+ContainerChild
             this.vbox1 = new Gtk.VBox();
+            this.vbox1.Name = "vbox1";
             // Container child vbox1.Gtk.Box+BoxChild
             this.vbox2 = new Gtk.VBox();
             this.vbox2.Name = "vbox2";

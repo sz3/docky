@@ -605,16 +605,16 @@ namespace Docky.Interface
 		{
 			switch (autohide_box.Active) {
 			case 0:
-				hide_desc.Text = Mono.Unix.Catalog.GetString ("Always present, acts like a panel.");
+				hide_desc.Markup = Mono.Unix.Catalog.GetString ("<i>Always present, acts like a panel.</i>");
 				break;
 			case 1:
-				hide_desc.Text = Mono.Unix.Catalog.GetString ("Hides whenever the mouse is not over it.");
+				hide_desc.Markup = Mono.Unix.Catalog.GetString ("<i>Hides whenever the mouse is not over it.</i>");
 				break;
 			case 2:
-				hide_desc.Text = Mono.Unix.Catalog.GetString ("Hides when dock obstructs the active application.");
+				hide_desc.Markup = Mono.Unix.Catalog.GetString ("<i>Hides when dock obstructs the active application.</i>");
 				break;
 			case 3:
-				hide_desc.Text = Mono.Unix.Catalog.GetString ("Hides when dock obstructs any window.");
+				hide_desc.Markup = Mono.Unix.Catalog.GetString ("<i>Hides when dock obstructs any window.</i>");
 				break;
 			}
 				                                              
