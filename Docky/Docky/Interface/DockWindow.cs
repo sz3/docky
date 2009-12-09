@@ -322,6 +322,7 @@ namespace Docky.Interface
 				point.Y += window_position.Y;
 				
 				TextManager.Gravity = Position; // FIXME
+				TextManager.Monitor = Monitor;
 				TextManager.SetSurfaceAtPoint (hoveredItem.HoverTextSurface (background_buffer, Style, HoverTextManager.IsLight), point);
 			}
 		}

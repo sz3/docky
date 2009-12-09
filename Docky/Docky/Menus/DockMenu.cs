@@ -275,12 +275,8 @@ namespace Docky.Menus
 				break;
 			}
 			
-			x = Math.Max (x, 0);
-			y = Math.Max (y, 0);
-			if (x + allocation.Width > monitor_geo.X + monitor_geo.Width)
-				x = monitor_geo.X + monitor_geo.Width - allocation.Width;
-			if (y + allocation.Height > monitor_geo.Y + monitor_geo.Height)
-				y = monitor_geo.Y + monitor_geo.Height - allocation.Height;
+			x = Math.Max (0, Math.Min (x, monitor_geo.X + monitor_geo.Width - allocation.Width));
+			y = Math.Max (0, Math.Min (y, monitor_geo.Y + monitor_geo.Height - allocation.Height));
 			
 			Move (x, y);
 		}
