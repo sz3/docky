@@ -92,10 +92,10 @@ namespace GMail
 		
 		void HandleLabelsChanged (object o, EventArgs e)
 		{
-			string[] currentLabels = Items.Select (adi => (adi as GMailDockItem).Atom.CurrentLabel)
+			string[] currentLabels = items.Select (adi => (adi as GMailDockItem).Atom.CurrentLabel)
 				.Where (label => label != GMailDockItem.DefaultLabel).ToArray ();
 			string[] newLabels = GMailPreferences.Labels;
-			
+
 			if (currentLabels.Length > newLabels.Length)
 				RemoveItem (currentLabels.Except (newLabels).First ());
 			else

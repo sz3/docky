@@ -37,7 +37,9 @@ namespace GMail
 			
 			label_list.IconSize = 24;
 
-			label_entry.InnerEntry.KeyPressEvent += OnKeyPressed;
+			label_entry.InnerEntry.Activated += delegate {
+				add_label.Click ();
+			};
 			label_entry.Show ();
 			
 			Shown += delegate {
@@ -57,7 +59,7 @@ namespace GMail
 			
 			label_entry.InnerEntry.Text = "";
 			
-			if (newLabel.Length == 0 || GMailPreferences.Labels.Contains (newLabel))
+			if (newLabel.Length == 0 || GMailPreferences.Labels.Contains (newLabel) || newLabel == GMailDockItem.DefaultLabel)
 				return;
 			
 			List<string> labels = GMailPreferences.Labels.ToList ();
@@ -70,13 +72,6 @@ namespace GMail
 		protected virtual void OnIntervalValueChanged (object sender, System.EventArgs e)
 		{
 			GMailPreferences.RefreshRate = (uint) check_interval.ValueAsInt;
-		}
-		
-		[GLib.ConnectBefore]
-		protected virtual void OnKeyPressed (object o, Gtk.KeyPressEventArgs args)
-		{
-			if (args.Event.Key == Gdk.Key.Return)
-				add_label.Click ();
 		}
 	}
 }

@@ -105,7 +105,7 @@ namespace WeatherDocklet
 		/// A description for this weather source.
 		/// </value>
 		string About { get; }
-		
+
 		/// <value>
 		/// Indicates if the source supports heat index/wind chill.
 		/// </value>

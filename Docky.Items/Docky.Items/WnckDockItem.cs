@@ -237,7 +237,7 @@ namespace Docky.Items
 		
 		protected override MenuList OnGetMenuItems ()
 		{
-			MenuList list = base.OnGetMenuItems ();
+			MenuList list = new MenuList ();
 			
 			if (ManagedWindows.Any ()) {
 				if (ManagedWindows.Any (w => w.IsMaximized)) {

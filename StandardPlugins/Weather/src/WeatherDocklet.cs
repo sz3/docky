@@ -26,6 +26,7 @@ using Docky.CairoHelper;
 using Docky.Items;
 using Docky.Menus;
 using Docky.Services;
+using Docky.Widgets;
 
 namespace WeatherDocklet
 {
@@ -58,6 +59,8 @@ namespace WeatherDocklet
 		WeatherDockletStatus Status { get; set; }
 		
 		WeatherPainter painter;
+		
+		ConfigDialog Config;
 		
 		/// <summary>
 		/// Creates a new weather docklet.
@@ -277,12 +280,8 @@ namespace WeatherDocklet
 							WeatherController.Weather.Forecasts[i].image));
 				}
 			
-			list[MenuListContainer.CustomOne].Add (new MenuItem (Catalog.GetString ("_Settings"), Gtk.Stock.Preferences,
-					delegate {
-						if (WeatherConfigurationDialog.instance == null)
-							WeatherConfigurationDialog.instance = new WeatherConfigurationDialog ();
-						WeatherConfigurationDialog.instance.Show ();
-					}));
+			list[MenuListContainer.CustomOne].Add (new MenuItem (Catalog.GetString ("_Settings"), Gtk.Stock.Preferences, 
+					delegate { ShowConfig (); }));
 			
 			list[MenuListContainer.CustomOne].Add (new MenuItem (Catalog.GetString ("_Reload Weather Data"), Gtk.Stock.Refresh,
 					delegate {
@@ -295,13 +294,20 @@ namespace WeatherDocklet
 			return list;
 		}
 		
-		public override void Dispose ()
+		void ShowConfig ()
 		{
-			if (WeatherConfigurationDialog.instance == null) {
-				WeatherConfigurationDialog.instance.Destroy ();
-				WeatherConfigurationDialog.instance = null;
+			if (Config == null) {
+				WeatherConfig locations = new WeatherConfig ();
+				Config = new ConfigDialog (Catalog.GetString ("Weather Configuration"), new Gtk.Widget [] { locations }, 400, 500);
+				Config.Shown += delegate {
+					locations.ShowMyLocations ();
+				};
 			}
-			
+			Config.Show ();
+		}
+		
+		public override void Dispose ()
+		{			
 			WeatherController.WeatherReloading -= HandleWeatherReloading;
 			WeatherController.WeatherError -= HandleWeatherError;
 			WeatherController.WeatherUpdated -= HandleWeatherUpdated;
