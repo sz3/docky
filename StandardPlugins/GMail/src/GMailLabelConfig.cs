@@ -42,6 +42,7 @@ namespace GMail
 			label_entry.Show ();
 			
 			Shown += delegate {
+				check_interval.Value = GMailPreferences.RefreshRate;
 				label_list.Clear ();
 				label_list.AppendTile (new GMailLabel (GMailDockItem.DefaultLabel));
 				foreach (string label in GMailPreferences.Labels)
