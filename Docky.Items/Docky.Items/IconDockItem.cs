@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -33,12 +33,9 @@ using Docky.CairoHelper;
 
 namespace Docky.Items
 {
-
 	public abstract class IconDockItem : AbstractDockItem
 	{
 		public event EventHandler IconUpdated;
-		static IPreferences prefs = DockServices.Preferences.Get <IconDockItem> ();
-		static Regex hueRegex = new Regex ("[^a-zA-Z0-9]");
 		
 		string icon;
 		public string Icon {
@@ -59,19 +56,6 @@ namespace Docky.Items
 						ScalableRendering = false;
 					}
 				}
-				
-				OnIconUpdated ();
-				QueueRedraw ();
-			}
-		}
-		
-		int shift;
-		public int HueShift {
-			get { return shift; }
-			protected set {
-				if (shift == value)
-					return;
-				shift = value;
 				
 				OnIconUpdated ();
 				QueueRedraw ();
@@ -113,9 +97,7 @@ namespace Docky.Items
 			else
 				pbuf = DockServices.Drawing.ARScale (surface.Width, surface.Height, forced_pixbuf);
 			
-			HueShift = prefs.Get<int> (hueRegex.Replace (UniqueID (), "_"), 0);
-			
-			pbuf = DockServices.Drawing.AddHueShift (pbuf, HueShift);
+			pbuf = ProcessPixbuf (pbuf);
 
 			Gdk.CairoHelper.SetSourcePixbuf (surface.Context, 
 			                                 pbuf, 
@@ -133,39 +115,16 @@ namespace Docky.Items
 			}
 		}
 		
+		protected virtual Gdk.Pixbuf ProcessPixbuf (Gdk.Pixbuf pbuf)
+		{
+			return pbuf;
+		}
+		
 		protected virtual void PostProcessIconSurface (DockySurface surface)
 		{
 		}
 		
-		protected override MenuList OnGetMenuItems ()
-		{
-			MenuList list = base.OnGetMenuItems ();
-			list[MenuListContainer.Actions].Add (new Menus.SeparatorMenuItem ());
-			list[MenuListContainer.Actions].Add (new Menus.MenuItem (Catalog.GetString ("Reset Color"), "edit-clear", (o, a) => ResetHue (), HueShift == 0));
-			return list;
-		}
-		
-		protected override void OnScrolled (ScrollDirection direction, ModifierType mod)
-		{
-			if (direction == Gdk.ScrollDirection.Up)
-				HueShift += 5;
-			else if (direction == Gdk.ScrollDirection.Down)
-				HueShift -= 5;
-			
-			if (HueShift < 0)
-				HueShift += 360;
-			HueShift %= 360;
-			
-			prefs.Set<int> (hueRegex.Replace (UniqueID (), "_"), HueShift);
-		}
-		
-		protected void ResetHue ()
-		{
-			HueShift = 0;
-			prefs.Set<int> (hueRegex.Replace (UniqueID (), "_"), HueShift);
-		}
-		
-		void OnIconUpdated ()
+		protected void OnIconUpdated ()
 		{
 			if (IconUpdated != null)
 				IconUpdated (this, EventArgs.Empty);

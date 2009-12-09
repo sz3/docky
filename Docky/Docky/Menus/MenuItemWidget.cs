@@ -68,8 +68,9 @@ namespace Docky.Menus
 		
 		void CalcTextWidth ()
 		{
+			char accel;
 			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-			layout.SetText (item.Text);
+			layout.SetMarkupWithAccel (item.Text, '_', out accel);
 			layout.Width = Pango.Units.FromPixels (2 * MaxWidth);
 			layout.FontDescription = Style.FontDescription;
 			layout.Ellipsize = Pango.EllipsizeMode.End;

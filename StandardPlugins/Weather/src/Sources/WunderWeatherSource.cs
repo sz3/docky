@@ -45,7 +45,7 @@ namespace WeatherDocklet
 		
 		public override string Name {
 			get {
-				return Catalog.GetString ("Weather Underground");
+				return "Weather Underground";
 			}
 		}
 		
@@ -55,7 +55,7 @@ namespace WeatherDocklet
 					"This source requires locations to be specified as US Zip Code or 'City, Country'.");
 			}
 		}
-		
+
 		protected override string FeedUrl {
 			get {
 				return "http://api.wunderground.com/auto/wui/geo/WXCurrentObXML/index.xml?query=" + WeatherController.EncodedCurrentLocation;

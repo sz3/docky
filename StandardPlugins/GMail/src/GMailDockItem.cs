@@ -35,7 +35,7 @@ namespace GMail
 {
 	/// <summary>
 	/// </summary>
-	public class GMailDockItem : IconDockItem
+	public class GMailDockItem : ColoredIconDockItem
 	{
 		public override string UniqueID ()
 		{
@@ -115,43 +115,44 @@ namespace GMail
 			QueueRedraw ();
 		}
 		
+		protected override Gdk.Pixbuf ProcessPixbuf (Gdk.Pixbuf pbuf)
+		{
+			pbuf = base.ProcessPixbuf (pbuf);
+			
+			if (Atom.State != GMailState.Error)
+				return pbuf;
+			
+			unsafe {
+				double a, r, g, b;
+				byte* pixels = (byte*) pbuf.Pixels;
+				for (int i = 0; i < pbuf.Height * pbuf.Width; i++) {
+					r = (double) pixels[0];
+					g = (double) pixels[1];
+					b = (double) pixels[2];
+					a = (double) pixels[3];
+					
+					Cairo.Color color = new Cairo.Color (r / byte.MaxValue, 
+						g / byte.MaxValue, 
+						b / byte.MaxValue,
+						a / byte.MaxValue);
+				
+					color = color.DarkenBySaturation (0.5).SetSaturation (0);
+					
+					pixels[0] = (byte) (color.R * byte.MaxValue);
+					pixels[1] = (byte) (color.G * byte.MaxValue);
+					pixels[2] = (byte) (color.B * byte.MaxValue);
+					pixels[3] = (byte) (color.A * byte.MaxValue);
+					
+					pixels += 4;
+				}
+			}
+			
+			return pbuf;
+		}
+		
 		protected override void PostProcessIconSurface (DockySurface surface)
 		{
-			if (Atom.State == GMailState.Error) {
-				surface.Clear ();
-				
-				Context cr = surface.Context;
-				int size = Math.Min (surface.Width, surface.Height);
-				
-				using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("gmail", size)) {
-					unsafe {
-						double a, r, g, b;
-						byte* pixels = (byte*) pbuf.Pixels;
-						for (int i = 0; i < pbuf.Height * pbuf.Width; i++) {
-							r = (double) pixels[0];
-							g = (double) pixels[1];
-							b = (double) pixels[2];
-							a = (double) pixels[3];
-							
-							Cairo.Color color = new Cairo.Color (r / byte.MaxValue, 
-								g / byte.MaxValue, 
-								b / byte.MaxValue,
-								a / byte.MaxValue);
-						
-							color = color.DarkenBySaturation (0.5).SetSaturation (0);
-							
-							pixels[0] = (byte) (color.R * byte.MaxValue);
-							pixels[1] = (byte) (color.G * byte.MaxValue);
-							pixels[2] = (byte) (color.B * byte.MaxValue);
-							pixels[3] = (byte) (color.A * byte.MaxValue);
-							
-							pixels += 4;
-						}
-					}
-					Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, 0, 0);
-					cr.Paint ();
-				}
-			} else if (!Atom.HasUnread) {
+			if (Atom.State != GMailState.Error && !Atom.HasUnread) {
 				surface.Context.Color = new Cairo.Color (0, 0, 0, 0);
 				surface.Context.Operator = Operator.Source;
 				surface.Context.PaintWithAlpha (.5);

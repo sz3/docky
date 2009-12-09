@@ -322,6 +322,7 @@ namespace Docky.Interface
 				point.Y += window_position.Y;
 				
 				TextManager.Gravity = Position; // FIXME
+				TextManager.Monitor = Monitor;
 				TextManager.SetSurfaceAtPoint (hoveredItem.HoverTextSurface (background_buffer, Style, HoverTextManager.IsLight), point);
 			}
 		}
@@ -935,6 +936,7 @@ namespace Docky.Interface
 					val = val.MoveIn (Position, ZoomedIconSize / 2.15);
 					Menu.Anchor = new Gdk.Point ((int) val.Center.X + window_position.X, (int) val.Center.Y + window_position.Y + 5);
 					Menu.Orientation = Position;
+					Menu.Monitor = Monitor;
 					Menu.SetItems (list);
 					Menu.Show ();
 				}
@@ -957,6 +959,7 @@ namespace Docky.Interface
 						break;
 					}
 					Menu.Orientation = Position;
+					Menu.Monitor = Monitor;
 					Menu.SetItems (dockyItem.GetMenuItems ());
 					Menu.Show ();
 				}

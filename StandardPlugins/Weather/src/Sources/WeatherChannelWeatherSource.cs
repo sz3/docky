@@ -50,7 +50,7 @@ namespace WeatherDocklet
 		
 		public override string Name {
 			get {
-				return Catalog.GetString ("Weather Channel");
+				return "Weather Channel";
 			}
 		}
 		
@@ -61,7 +61,7 @@ namespace WeatherDocklet
 					"To find your code, look up your forecast on their site and the code is in the URL after '/local/' and looks like AAXX0000.");
 			}
 		}
-		
+
 		protected override string FeedUrl {
 			get {
 				return "http://xoap.weather.com/weather/local/" +

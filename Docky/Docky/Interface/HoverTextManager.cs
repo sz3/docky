@@ -53,6 +53,8 @@ namespace Docky.Interface
 			IsLight = DockServices.Drawing.IsIconLight (Docky.Controller.TooltipSvg);
 		}
 		
+		public int Monitor { get; set; }
+		
 		public HoverTextManager ()
 		{
 			SetLight ();
@@ -146,6 +148,10 @@ namespace Docky.Interface
 			
 			if (timer > 0)
 				GLib.Source.Remove (timer);
+			
+			Gdk.Rectangle monitor_geo = window.Screen.GetMonitorGeometry (Monitor);
+			center.X = Math.Max (0, Math.Min (center.X, monitor_geo.X + monitor_geo.Width - surface.Width));
+			center.Y = Math.Max (0, Math.Min (center.Y, monitor_geo.Y + monitor_geo.Height - surface.Height));
 			
 			window.Move (center.X, center.Y);
 			timer = GLib.Timeout.Add (100, delegate {
