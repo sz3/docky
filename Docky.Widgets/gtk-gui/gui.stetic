@@ -35,24 +35,22 @@
                     <property name="RowSpacing">6</property>
                     <property name="ColumnSpacing">6</property>
                     <child>
-                      <widget class="Gtk.Entry" id="password_entry">
+                      <widget class="Docky.Widgets.SearchEntry" id="password_entry">
                         <property name="MemberName" />
-                        <property name="CanFocus">True</property>
-                        <property name="IsEditable">True</property>
-                        <property name="Visibility">False</property>
-                        <property name="InvisibleChar">●</property>
+                        <property name="EmptyMessage">Password</property>
+                        <property name="Ready">True</property>
+                        <property name="HasFocus">False</property>
                       </widget>
                       <packing>
                         <property name="TopAttach">1</property>
                         <property name="BottomAttach">2</property>
                         <property name="LeftAttach">1</property>
                         <property name="RightAttach">2</property>
-                        <property name="AutoSize">True</property>
-                        <property name="YOptions">Fill</property>
+                        <property name="AutoSize">False</property>
                         <property name="XExpand">True</property>
                         <property name="XFill">True</property>
                         <property name="XShrink">False</property>
-                        <property name="YExpand">False</property>
+                        <property name="YExpand">True</property>
                         <property name="YFill">True</property>
                         <property name="YShrink">False</property>
                       </packing>
@@ -78,21 +76,20 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="Gtk.Entry" id="username_entry">
+                      <widget class="Docky.Widgets.SearchEntry" id="username_entry">
                         <property name="MemberName" />
-                        <property name="CanFocus">True</property>
-                        <property name="IsEditable">True</property>
-                        <property name="InvisibleChar">●</property>
+                        <property name="EmptyMessage">Username</property>
+                        <property name="Ready">True</property>
+                        <property name="HasFocus">False</property>
                       </widget>
                       <packing>
                         <property name="LeftAttach">1</property>
                         <property name="RightAttach">2</property>
-                        <property name="AutoSize">True</property>
-                        <property name="YOptions">Fill</property>
+                        <property name="AutoSize">False</property>
                         <property name="XExpand">True</property>
                         <property name="XFill">True</property>
                         <property name="XShrink">False</property>
-                        <property name="YExpand">False</property>
+                        <property name="YExpand">True</property>
                         <property name="YFill">True</property>
                         <property name="YShrink">False</property>
                       </packing>

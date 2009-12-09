@@ -35,12 +35,20 @@ namespace GMail
 			
 			Name = labelName;
 			GMailDockItem item = GMailItemProvider.items.First (adi => (adi as GMailDockItem).Atom.CurrentLabel == labelName) as GMailDockItem;
-			
+
 			Icon = "gmail";
 			if (item != null) {
-				Icon = item.Icon;
-				HueShift = item.HueShift;
+				item.IconUpdated += delegate {
+					SetIcon (item);
+				};
+				SetIcon (item);
 			}
+		}
+		
+		void SetIcon (GMailDockItem item)
+		{
+			Icon = item.Icon;
+			HueShift = item.HueShift;
 		}
 		
 		public override void OnActiveChanged ()

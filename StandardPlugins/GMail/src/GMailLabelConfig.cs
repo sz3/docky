@@ -1,4 +1,3 @@
-//  
 //  Copyright (C) 2009 Jason Smith
 // 
 //  This program is free software: you can redistribute it and/or modify
@@ -30,7 +29,7 @@ namespace GMail
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class GMailLabelConfig : Gtk.Bin
 	{
-
+		
 		public GMailLabelConfig ()
 		{
 			this.Build ();

@@ -16,22 +16,23 @@
 // 
 
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 
-using Cairo;
 using Gdk;
 using Gtk;
+using Cairo;
+using Mono.Unix;
 
-using Docky.CairoHelper;
+using Docky.Menus;
 using Docky.Services;
+using Docky.CairoHelper;
 
 namespace Docky.Items
 {
-
 
 	public abstract class IconDockItem : AbstractDockItem
 	{
@@ -71,6 +72,8 @@ namespace Docky.Items
 				if (shift == value)
 					return;
 				shift = value;
+				
+				OnIconUpdated ();
 				QueueRedraw ();
 			}
 		}
@@ -132,6 +135,14 @@ namespace Docky.Items
 		
 		protected virtual void PostProcessIconSurface (DockySurface surface)
 		{
+		}
+		
+		protected override MenuList OnGetMenuItems ()
+		{
+			MenuList list = base.OnGetMenuItems ();
+			list[MenuListContainer.Actions].Add (new Menus.SeparatorMenuItem ());
+			list[MenuListContainer.Actions].Add (new Menus.MenuItem (Catalog.GetString ("Reset Color"), "edit-clear", (o, a) => ResetHue (), HueShift == 0));
+			return list;
 		}
 		
 		protected override void OnScrolled (ScrollDirection direction, ModifierType mod)

@@ -7,9 +7,10 @@
   <import>
     <widget-library name="../../../Docky.Items/bin/Debug/Docky.Items.dll" />
     <widget-library name="../../../Docky.Services/bin/Debug/Docky.Services.dll" />
+    <widget-library name="../../../Docky.Widgets/bin/Debug/Docky.Widgets.dll" />
     <widget-library name="../bin/Debug/NPR.dll" internal="true" />
   </import>
-  <widget class="Gtk.Bin" id="NPR.StationSearchWidget" design-size="311 241">
+  <widget class="Gtk.Bin" id="NPR.StationSearchWidget" design-size="514 241">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <child>
