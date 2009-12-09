@@ -44,9 +44,12 @@ FILES = \
 
 RESOURCES = \
 	gtk-gui/gui.stetic \
+	Resources/about.svg \
 	Resources/classic.svg \
-	Resources/tooltip.svg \
-	Resources/menu.svg
+	Resources/close.svg \
+	Resources/menu.svg \
+	Resources/preferences.svg \
+	Resources/tooltip.svg 
 
 PROJECT_REFERENCES = \
 	Docky.CairoHelper \

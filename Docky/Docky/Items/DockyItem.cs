@@ -38,6 +38,24 @@ namespace Docky.Items
 			Icon = "docky";
 		}
 		
+		protected string AboutIcon {
+			get {
+				return "[monochrome]about.svg@" + GetType ().Assembly.FullName;
+			}
+		}
+		
+		protected string CloseIcon {
+			get {
+				return "[monochrome]close.svg@" + GetType ().Assembly.FullName;
+			}
+		}
+		
+		protected string PrefsIcon {
+			get {
+				return "[monochrome]preferences.svg@" + GetType ().Assembly.FullName;
+			}
+		}
+		
 		protected override void OnStyleSet (Gtk.Style style)
 		{
 			Gdk.Color gdkColor = Style.Backgrounds [(int) Gtk.StateType.Selected];
@@ -70,9 +88,9 @@ namespace Docky.Items
 		{
 			// intentionally dont inherit
 			MenuList list = new MenuList ();
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Settings"), "gtk-preferences", (o, a) => Docky.Config.Show ()));
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_About"), "gtk-about", (o, a) => Docky.ShowAbout ()));
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Quit Docky"), "gtk-quit", (o, a) => Gtk.Application.Quit ()));
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Settings"), PrefsIcon, (o, a) => Docky.Config.Show ()));
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_About"), AboutIcon, (o, a) => Docky.ShowAbout ()));
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Quit Docky"), CloseIcon, (o, a) => Gtk.Application.Quit ()));
 			return list;
 		}
 
