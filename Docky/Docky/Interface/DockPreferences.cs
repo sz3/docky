@@ -307,6 +307,12 @@ namespace Docky.Interface
 			
 			this.Build ();
 			
+			// Manually set the tooltips <shakes fist at MD...>
+			multiple_window_indicator_check.TooltipMarkup = Mono.Unix.Catalog.GetString (
+			    "Causes launchers which currently manage more than one window to have an extra indicator under it.");
+			window_manager_check.TooltipMarkup = Mono.Unix.Catalog.GetString (
+			    "When set, windows which do not already have launchers on a dock will be added to this dock.");
+			
 			icon_scale.Adjustment.SetBounds (24, 129, 1, 1, 1);
 			zoom_scale.Adjustment.SetBounds (1, 4.01, .01, .01, .01);
 			
@@ -497,8 +503,9 @@ namespace Docky.Interface
 			
 			panel_mode_button.Active = PanelMode;
 			zoom_checkbutton.Active = ZoomEnabled;
+			zoom_checkbutton.Sensitive = !PanelMode;
 			zoom_scale.Value = ZoomPercent;
-			zoom_scale.Sensitive = ZoomEnabled;
+			zoom_scale.Sensitive = !PanelMode && ZoomEnabled;
 			icon_scale.Value = IconSize;
 			fade_on_hide_check.Active = FadeOnHide;
 			multiple_window_indicator_check.Active = IndicateMultipleWindows;
@@ -596,6 +603,21 @@ namespace Docky.Interface
 		
 		void OnAutohideChanged ()
 		{
+			switch (autohide_box.Active) {
+			case 0:
+				hide_desc.Markup = Mono.Unix.Catalog.GetString ("<i>Always present, acts like a panel.</i>");
+				break;
+			case 1:
+				hide_desc.Markup = Mono.Unix.Catalog.GetString ("<i>Hides whenever the mouse is not over it.</i>");
+				break;
+			case 2:
+				hide_desc.Markup = Mono.Unix.Catalog.GetString ("<i>Hides when dock obstructs the active application.</i>");
+				break;
+			case 3:
+				hide_desc.Markup = Mono.Unix.Catalog.GetString ("<i>Hides when dock obstructs any window.</i>");
+				break;
+			}
+				                                              
 			if (AutohideChanged != null)
 				AutohideChanged (this, EventArgs.Empty);
 		}
@@ -665,6 +687,8 @@ namespace Docky.Interface
 		{
 			PanelMode = panel_mode_button.Active;
 			panel_mode_button.Active = PanelMode;
+			zoom_scale.Sensitive = !PanelMode && ZoomEnabled;
+			zoom_checkbutton.Sensitive = !PanelMode;
 		}
 		
 		void OnActiveViewAddinOrderChanged (object sender, AddinOrderChangedArgs e)

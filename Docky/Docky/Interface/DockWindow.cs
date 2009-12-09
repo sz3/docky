@@ -394,7 +394,7 @@ namespace Docky.Interface
 		}
 		
 		bool ZoomEnabled {
-			get { return Preferences.ZoomEnabled; }
+			get { return !Preferences.PanelMode && Preferences.ZoomEnabled; }
 		}
 		
 		double ZoomPercent {
