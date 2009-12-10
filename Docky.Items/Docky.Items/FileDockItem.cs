@@ -191,7 +191,7 @@ namespace Docky.Items
 		{
 			MenuList list = base.OnGetMenuItems ();
 			list[MenuListContainer.Actions].Insert (0, new MenuItem (Catalog.GetString ("Open"), "gtk-open", (o, a) => Open ()));
-			list[MenuListContainer.Actions].Insert (1, new MenuItem (Catalog.GetString ("Open Containing Folder"), "folder", (o, a) => OpenContainingFolder ()));
+			list[MenuListContainer.Actions].Insert (1, new MenuItem (Catalog.GetString ("Open Containing Folder"), "folder", (o, a) => OpenContainingFolder (), OwnedFile.Parent == null));
 			return list;
 		}
 		
