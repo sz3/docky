@@ -121,7 +121,7 @@ namespace Docky.Items
 		
 		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
 		{
-			if (Icon == null || !(Icon.Contains ("inode-directory") || Icon.Contains ("folder")))
+			if (Icon == null)
 				return;
 			base.OnScrolled (direction, mod);
 		}

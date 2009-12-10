@@ -488,7 +488,7 @@ Window Dodge</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Window" id="Docky.ConfigurationWindow" design-size="400 482">
+  <widget class="Gtk.Window" id="Docky.ConfigurationWindow" design-size="488 482">
     <property name="MemberName" />
     <property name="Title" translatable="yes">Docky Configuration</property>
     <property name="Icon">stock:gtk-preferences Menu</property>
