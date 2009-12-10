@@ -1,13 +1,17 @@
 Docky/Docky/ConfigurationWindow.cs
+Docky/Docky/Docky.cs
+Docky/Docky/Interface/DockPreferences.cs
 Docky/Docky/Items/DockyItem.cs
 Docky/gtk-gui/Docky.ConfigurationWindow.cs
 Docky/gtk-gui/Docky.Interface.DockPreferences.cs
 Docky.Items/Docky.Items/ApplicationDockItem.cs
+Docky.Items/Docky.Items/ColoredIconDockItem.cs
 Docky.Items/Docky.Items/FileApplicationProvider.cs
 Docky.Items/Docky.Items/FileDockItem.cs
 Docky.Items/Docky.Items/WnckDockItem.cs
 Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs
 Docky.Widgets/Docky.Widgets/AbstractTileObject.cs
+Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs
 StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs
 StandardPlugins/Bookmarks/src/BookmarkDockItem.cs
 StandardPlugins/Clock/src/ClockDockItem.cs
@@ -25,6 +29,7 @@ StandardPlugins/NPR/src/Station.cs
 StandardPlugins/NPR/src/StationDockItem.cs
 StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs
 StandardPlugins/Trash/src/TrashDockItem.cs
+StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs
 StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs
 StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs
 StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs

@@ -22,7 +22,6 @@ using System.Linq;
 using System.Text;
 
 using Cairo;
-using GConf;
 using Gdk;
 using Gtk;
 
@@ -46,12 +45,12 @@ namespace Docky.Menus
 		
  		public bool Selected { get; set; }
 		
+		public bool MenuShowingIcons { get; set; }
+		
 		public Cairo.Color TextColor { get; set; }
 		
 		public int TextWidth { get; protected set; }
-		
-		bool UsePixbufs { get; set; }
-		
+				
 		DockySurface icon_surface, emblem_surface;
 		
 		internal MenuItemWidget (MenuItem item) : base()
@@ -63,7 +62,6 @@ namespace Docky.Menus
 			item.DisabledChanged += ItemDisabledChanged;
 			
 			AddEvents ((int) Gdk.EventMask.AllEventsMask);
-			UsePixbufs = (bool) new GConf.Client ().Get ("/desktop/gnome/interface/menus_have_icons");
 			
 			HasTooltip = true;
 			VisibleWindow = false;
@@ -88,7 +86,7 @@ namespace Docky.Menus
 			
 			HasTooltip = logical.Width > MaxWidth;
 			TextWidth = Math.Min (MaxWidth, Math.Max (MinWidth, logical.Width)) + 2 * Padding + 1;
-			if (UsePixbufs)
+			if (item.ShowIcons)
 				TextWidth += MenuHeight + Padding;
 			SetSizeRequest (TextWidth, MenuHeight);
 		}
@@ -165,6 +163,17 @@ namespace Docky.Menus
 			cr.SetSource (surface.Internal, x, y);
 		}
 		
+		DockySurface LoadIcon (Pixbuf icon, int size)
+		{
+			DockySurface surface;
+			using (Gdk.Pixbuf pixbuf = icon.ScaleSimple (size, size, InterpType.Bilinear)) {
+				surface = new DockySurface (pixbuf.Width, pixbuf.Height);
+				Gdk.CairoHelper.SetSourcePixbuf (surface.Context, pixbuf, 0, 0);
+				surface.Context.Paint ();
+			}
+			return surface;
+		}
+		
 		DockySurface LoadIcon (string icon, int size)
 		{
 			bool monochrome = icon.StartsWith ("[monochrome]");
@@ -172,12 +181,7 @@ namespace Docky.Menus
 				icon = icon.Substring ("[monochrome]".Length);
 			}
 			
-			DockySurface surface;
-			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (icon, size)) {
-				surface = new DockySurface (pixbuf.Width, pixbuf.Height);
-				Gdk.CairoHelper.SetSourcePixbuf (surface.Context, pixbuf, 0, 0);
-				surface.Context.Paint ();
-			}
+			DockySurface surface = LoadIcon (DockServices.Drawing.LoadIcon (icon, size), size);
 			
 			if (monochrome) {
 				surface.Context.Operator = Operator.Atop;
@@ -199,13 +203,16 @@ namespace Docky.Menus
 			Gdk.Rectangle allocation = Allocation;
 			
 			int pixbufSize = allocation.Height - IconBuffer * 2;
-			if (UsePixbufs && (icon_surface == null || (icon_surface.Height != pixbufSize && icon_surface.Width != pixbufSize))) {
+			if (item.ShowIcons && (icon_surface == null || (icon_surface.Height != pixbufSize && icon_surface.Width != pixbufSize))) {
 				if (icon_surface != null)
 					icon_surface.Dispose ();
 				if (emblem_surface != null)
 					emblem_surface.Dispose ();
 				
-				icon_surface = LoadIcon (item.Icon, pixbufSize);
+				if (item.ForcePixbuf == null)
+					icon_surface = LoadIcon (item.Icon, pixbufSize);
+				else
+					icon_surface = LoadIcon (item.ForcePixbuf, pixbufSize);
 				
 				if (!string.IsNullOrEmpty (item.Emblem))
 					emblem_surface = LoadIcon (item.Emblem, pixbufSize);
@@ -218,7 +225,7 @@ namespace Docky.Menus
 					cr.Fill ();
 				}
 				
-				if (UsePixbufs) {
+				if (item.ShowIcons) {
 					PlaceSurface (cr, icon_surface, allocation);
 					cr.PaintWithAlpha (item.Disabled ? 0.5 : 1);
 				}
@@ -230,7 +237,7 @@ namespace Docky.Menus
 					cr.Operator = Operator.Over;
 				}
 				
-				if (UsePixbufs && !string.IsNullOrEmpty (item.Emblem)) {
+				if (item.ShowIcons && !string.IsNullOrEmpty (item.Emblem)) {
 					PlaceSurface (cr, emblem_surface, allocation);
 					cr.Paint ();
 				}
@@ -238,7 +245,7 @@ namespace Docky.Menus
 				Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
 				char accel;
 				layout.SetMarkupWithAccel (item.Text, '_', out accel);
-				if (UsePixbufs)
+				if (item.ShowIcons)
 					layout.Width = Pango.Units.FromPixels (allocation.Width - allocation.Height - 3 * Padding - 1);
 				else
 					layout.Width = Pango.Units.FromPixels (allocation.Width - 2 * Padding - 1);
@@ -251,7 +258,7 @@ namespace Docky.Menus
 				layout.GetPixelExtents (out ink, out logical);
 				
 				int offset;
-				if (UsePixbufs)
+				if (item.ShowIcons || MenuShowingIcons)
 					offset = allocation.Height + 2 * Padding;
 				else
 					offset = Padding;

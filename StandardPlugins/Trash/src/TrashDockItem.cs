@@ -36,8 +36,7 @@ namespace Trash
 	{
 		uint ItemsInTrash {
 			get {
-				FileInfo info = OwnedFile.QueryInfo ("trash::item-count", FileQueryInfoFlags.None, null);
-				return info.GetAttributeUInt ("trash::item-count");
+				return OwnedFile.QueryUintAttr ("trash::item-count");
 			}
 		}
 		
