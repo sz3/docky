@@ -37,10 +37,32 @@ namespace Docky.Services
 			return NativeInterop.StrUri (file);
 		}
 		
+		public static FileInfo QueryInfoSimple (this GLib.File file, string attribute)
+		{
+			FileInfo info = file.QueryInfo (attribute, FileQueryInfoFlags.None, null);
+			return info;
+		}
+		
 		public static GLib.Icon Icon (this GLib.File file)
 		{
-			FileInfo info = file.QueryInfo ("standard::icon", FileQueryInfoFlags.None, null);
-			return info.Icon;
+			//FileInfo info = file.QueryInfo (", FileQueryInfoFlags.None, null);
+			return file.QueryInfoSimple ("standard::icon").Icon;
+		}
+		
+		public static string QueryStringAttr (this GLib.File file, string attribute)
+		{
+			return file.QueryInfoSimple (attribute).GetAttributeAsString (attribute);
+		}
+		
+		public static bool QueryBoolAttr (this GLib.File file, string attribute)
+		{
+			return file.QueryInfoSimple (attribute).GetAttributeBoolean (attribute);
+		}
+		
+		public static FileType QueryFileType (this GLib.File file)
+		{
+			return file.QueryInfoSimple ("standard::type").FileType;
+			
 		}
 		
 		// Recursively list all of the subdirs for a given directory
@@ -105,10 +127,8 @@ namespace Docky.Services
 		}
 		
 		static void Recursive_Copy (GLib.File source, GLib.File dest, ref long copiedBytes, long totalBytes, FileProgressCallback progress_cb)
-		{
-			FileInfo fileInfo = source.QueryInfo ("standard::type", FileQueryInfoFlags.NofollowSymlinks, null);
-			
-			if (fileInfo.FileType != FileType.Directory) {
+		{			
+			if (source.QueryFileType () != FileType.Directory) {
 				source.Copy (dest, FileCopyFlags.AllMetadata | FileCopyFlags.NofollowSymlinks, null, (current, total) => {
 					progress_cb.Invoke (current, totalBytes);
 				});
@@ -202,11 +222,16 @@ namespace Docky.Services
 				// wait for the mount to finish
 				try {
 					if (file.MountEnclosingVolumeFinish (result)) {
+						// invoke the supplied success action
+						success.Invoke ();
+						// if we have any other actions for this file on a successful mount
+						// invoke them too
+						if (!MountActions.ContainsKey (file))
+							return;
 						lock (MountActions[file]) {
 							foreach (Action act in MountActions[file])
 								act.Invoke ();
 						}
-						success.Invoke ();
 					}
 					// an exception can be thrown here if we are trying to mount an already mounted file
 					// in that case, resort to the fallback

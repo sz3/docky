@@ -46,10 +46,17 @@ namespace Docky.Items
 			return new FileDockItem (uri);
 		}
 		
+		public static FileDockItem NewFromUri (string uri, string force_hover_text, string backup_icon)
+		{
+			return new FileDockItem (uri, force_hover_text, backup_icon);
+		}
+		
 		const string ThumbnailPathKey = "thumbnail::path";
 		const string FilesystemIDKey = "id::filesystem";
 		string uri;
 		bool is_folder;
+		string forced_hover_text = null;
+		string backup_icon = null;
 		
 		public string Uri {
 			get { return uri; }
@@ -62,6 +69,19 @@ namespace Docky.Items
 			this.uri = uri;
 			OwnedFile = FileFactory.NewForUri (uri);
 			
+			// update this file on successful mount
+			OwnedFile.AddMountAction (() => {
+				SetIconFromGIcon (OwnedFile.Icon ());
+				OnPaintNeeded ();
+			});
+			
+			UpdateInfo ();
+		}
+		
+		protected FileDockItem (string uri, string forced_hover, string backupIcon) : this (uri)
+		{
+			forced_hover_text = forced_hover;
+			backup_icon = backupIcon;
 			UpdateInfo ();
 		}
 		
@@ -75,17 +95,21 @@ namespace Docky.Items
 			
 			// only check the icon if it's mounted (ie: .Path != null)
 			if (!string.IsNullOrEmpty (OwnedFile.Path)) {
-				string thumbnailPath = OwnedFile.QueryInfo (ThumbnailPathKey, FileQueryInfoFlags.NofollowSymlinks, 
-					null).GetAttributeAsString (ThumbnailPathKey);
+				string thumbnailPath = OwnedFile.QueryStringAttr (ThumbnailPathKey);
 				if (string.IsNullOrEmpty (thumbnailPath))
 					SetIconFromGIcon (OwnedFile.Icon ());
 				else
 					Icon = thumbnailPath;
+			} else if (!string.IsNullOrEmpty (backup_icon)) {
+				Icon = backup_icon;
 			} else {
 				Icon = "";
 			}
 			
-			HoverText = OwnedFile.Basename;
+			if (string.IsNullOrEmpty (forced_hover_text))
+			    HoverText = OwnedFile.Basename;
+			else
+				HoverText = forced_hover_text;
 			
 			OnPaintNeeded ();
 		}
@@ -104,25 +128,34 @@ namespace Docky.Items
 
 		protected override bool OnCanAcceptDrop (IEnumerable<string> uris)
 		{
-			return is_folder;
+			bool can_write;
+			// this could fail if we try to call it on an unmounted location
+			try {
+				can_write = OwnedFile.QueryBoolAttr ("access::can-write");
+			} catch {
+				can_write = false;
+			}
+			
+			Console.WriteLine ("Can drop? {0}", is_folder && can_write);
+			// only accept the drop if it's a folder, and we can write to it.
+			return is_folder && can_write;
 		}
 
 		protected override bool OnAcceptDrop (IEnumerable<string> uris)
 		{
+			Notification note = null;
 			foreach (string uri in uris) {
 				try {
 					File file = FileFactory.NewForUri (uri);
 					if (!file.Exists)
 						continue;
 					
-					string ownedFSID = OwnedFile.QueryInfo (FilesystemIDKey, FileQueryInfoFlags.NofollowSymlinks, null)
-						.GetAttributeAsString (FilesystemIDKey);
-					string destFSID = file.QueryInfo (FilesystemIDKey, FileQueryInfoFlags.NofollowSymlinks, null)
-						.GetAttributeAsString (FilesystemIDKey);
+					string ownedFSID = OwnedFile.QueryStringAttr (FilesystemIDKey);
+					string destFSID = file.QueryStringAttr (FilesystemIDKey);
 					
 					string nameAfterMove = NewFileName (OwnedFile, file);
 					DockServices.System.RunOnThread (()=> {
-						Notification note;
+						
 						bool performing = true;
 						long cur = 0, tot = 10;
 						
@@ -150,7 +183,14 @@ namespace Docky.Items
 						performing = false;
 						note.Body = "100% Complete.";
 					});
-				} catch {
+					// until we use a new version of GTK# which supports getting the GLib.Error code
+					// this is about the best we can do.
+				} catch (Exception e) {
+					Log<FileDockItem>.Error ("Error performing drop action: {0}", e.Message);
+					Log<FileDockItem>.Debug (e.StackTrace);
+					
+					if (note != null)
+						note.Close ();
 				}
 			}			
 			return true;
@@ -159,8 +199,8 @@ namespace Docky.Items
 		string NewFileName (File dest, File fileToMove)
 		{
 			string name, ext;
-			
-			if (fileToMove.Basename.Split ('.').Count() > 0) {
+						
+			if (fileToMove.Basename.Split ('.').Count() > 1) {
 				name = fileToMove.Basename.Split ('.').First ();
 				ext = fileToMove.Basename.Substring (fileToMove.Basename.IndexOf ('.'));
 			} else {

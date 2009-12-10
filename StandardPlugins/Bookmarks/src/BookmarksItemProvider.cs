@@ -43,6 +43,16 @@ namespace Bookmarks
 					HoverText = name;
 			}
 			
+			protected override bool OnCanAcceptDrop (AbstractDockItem item)
+			{
+				return false;
+			}
+			
+			protected override bool OnCanAcceptDrop (IEnumerable<string> uris)
+			{
+				return false;
+			}
+			
 			protected override MenuList OnGetMenuItems ()
 			{
 				MenuList list = new MenuList ();
@@ -51,7 +61,8 @@ namespace Bookmarks
 			}
 		}
 		
-		NonRemovableItem computer, home;
+		NonRemovableItem computer;
+		FileDockItem home;
 		File bookmarks_file = null;
 		List<AbstractDockItem> items;
 		
@@ -78,8 +89,8 @@ namespace Bookmarks
 			items = new List<AbstractDockItem> ();
 
 			computer = new NonRemovableItem ("computer://", Catalog.GetString ("Computer"), "computer");
-			home = new NonRemovableItem (string.Format ("file://{0}",
-			    Environment.GetFolderPath (Environment.SpecialFolder.Personal)), null, null);
+			home = FileDockItem.NewFromUri (string.Format ("file://{0}",
+			    Environment.GetFolderPath (Environment.SpecialFolder.Personal)));
 		
 			UpdateItems ();
 			
@@ -115,8 +126,8 @@ namespace Bookmarks
 					uri = line.Split (' ').First ();
 					File bookmark = FileFactory.NewForUri (uri);
 					name = line.Substring (uri.Length).Trim ();
-					if (old.Cast<BookmarkDockItem> ().Any (fdi => fdi.Uri == uri)) {
-						BookmarkDockItem item = old.Cast<BookmarkDockItem> ().First (fdi => fdi.Uri == uri);
+					if (old.Cast<FileDockItem> ().Any (fdi => fdi.Uri == uri)) {
+						FileDockItem item = old.Cast<FileDockItem> ().First (fdi => fdi.Uri == uri);
 						old.Remove (item);
 						items.Add (item);
 					} else if (bookmark.StringUri ().StartsWith ("file://") && !bookmark.Exists) {
@@ -124,7 +135,7 @@ namespace Bookmarks
 						    bookmark.StringUri ());
 						continue;
 					} else {
-						items.Add (new BookmarkDockItem (bookmark.StringUri (), name));
+						items.Add (FileDockItem.NewFromUri (bookmark.StringUri (), name, "folder"));
 					}
 				}
 			}
@@ -154,7 +165,7 @@ namespace Bookmarks
 		protected override AbstractDockItem OnAcceptDrop (string uri)
 		{
 			File tempFile = FileFactory.NewForPath (System.IO.Path.GetTempFileName ());
-			BookmarkDockItem bookmark = new BookmarkDockItem (uri, null);
+			FileDockItem bookmark = FileDockItem.NewFromUri (uri);
 			
 			// make sure the bookmarked location actually exists
 			if (!bookmark.OwnedFile.Exists)
