@@ -136,6 +136,9 @@
     <Reference Include="gnomedesktop-sharp, Version=2.20.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <Package>gnome-desktop-sharp-2.0</Package>
     </Reference>
+    <Reference Include="gconf-sharp, Version=2.24.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gconf-sharp-2.0</Package>
+    </Reference>
     <Reference Include="Mono.GetOptions" />
   </ItemGroup>
   <ItemGroup>

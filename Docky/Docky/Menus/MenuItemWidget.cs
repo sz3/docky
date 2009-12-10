@@ -22,6 +22,7 @@ using System.Linq;
 using System.Text;
 
 using Cairo;
+using GConf;
 using Gdk;
 using Gtk;
 
@@ -32,10 +33,12 @@ namespace Docky.Menus
 {
 	internal class MenuItemWidget : Gtk.EventBox
 	{
+		const int MenuHeight = 22;
 		const int MinWidth = 100;
 		const int MaxWidth = 350;
 		const int FontSize = 11;
-		const int IconBuffer = 3;
+		const int Padding = 4;
+		const int IconBuffer = Padding - 1;
 		
 		public MenuItem item;
 		
@@ -46,6 +49,8 @@ namespace Docky.Menus
 		public Cairo.Color TextColor { get; set; }
 		
 		public int TextWidth { get; protected set; }
+		
+		bool UsePixbufs { get; set; }
 		
 		DockySurface icon_surface, emblem_surface;
 		
@@ -58,6 +63,7 @@ namespace Docky.Menus
 			item.DisabledChanged += ItemDisabledChanged;
 			
 			AddEvents ((int) Gdk.EventMask.AllEventsMask);
+			UsePixbufs = (bool) new GConf.Client ().Get ("/desktop/gnome/interface/menus_have_icons");
 			
 			HasTooltip = true;
 			VisibleWindow = false;
@@ -81,8 +87,10 @@ namespace Docky.Menus
 			layout.GetPixelExtents (out ink, out logical);
 			
 			HasTooltip = logical.Width > MaxWidth;
-			TextWidth = Math.Min (MaxWidth, Math.Max (MinWidth, logical.Width)) + 36;
-			SetSizeRequest (TextWidth, 22);
+			TextWidth = Math.Min (MaxWidth, Math.Max (MinWidth, logical.Width)) + 2 * Padding + 1;
+			if (UsePixbufs)
+				TextWidth += MenuHeight + Padding;
+			SetSizeRequest (TextWidth, MenuHeight);
 		}
 
 		void ItemDisabledChanged (object sender, EventArgs e)
@@ -151,7 +159,7 @@ namespace Docky.Menus
 		{
 			int iconSize = allocation.Height - IconBuffer * 2;
 			
-			int x = allocation.X + 4 + ((iconSize - surface.Width) / 2);
+			int x = allocation.X + Padding + ((iconSize - surface.Width) / 2);
 			int y = allocation.Y + IconBuffer + ((iconSize - surface.Height) / 2);
 			
 			cr.SetSource (surface.Internal, x, y);
@@ -191,7 +199,7 @@ namespace Docky.Menus
 			Gdk.Rectangle allocation = Allocation;
 			
 			int pixbufSize = allocation.Height - IconBuffer * 2;
-			if (icon_surface == null || (icon_surface.Height != pixbufSize && icon_surface.Width != pixbufSize)) {
+			if (UsePixbufs && (icon_surface == null || (icon_surface.Height != pixbufSize && icon_surface.Width != pixbufSize))) {
 				if (icon_surface != null)
 					icon_surface.Dispose ();
 				if (emblem_surface != null)
@@ -209,9 +217,11 @@ namespace Docky.Menus
 					cr.Color = TextColor.SetAlpha (.1);
 					cr.Fill ();
 				}
-
-				PlaceSurface (cr, icon_surface, allocation);
-				cr.PaintWithAlpha (item.Disabled ? 0.5 : 1);
+				
+				if (UsePixbufs) {
+					PlaceSurface (cr, icon_surface, allocation);
+					cr.PaintWithAlpha (item.Disabled ? 0.5 : 1);
+				}
 				
 				if (item.Bold) {
 					cr.Operator = Operator.Add;
@@ -220,7 +230,7 @@ namespace Docky.Menus
 					cr.Operator = Operator.Over;
 				}
 				
-				if (!string.IsNullOrEmpty (item.Emblem)) {
+				if (UsePixbufs && !string.IsNullOrEmpty (item.Emblem)) {
 					PlaceSurface (cr, emblem_surface, allocation);
 					cr.Paint ();
 				}
@@ -228,7 +238,10 @@ namespace Docky.Menus
 				Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
 				char accel;
 				layout.SetMarkupWithAccel (item.Text, '_', out accel);
-				layout.Width = Pango.Units.FromPixels (allocation.Width - allocation.Height - 13);
+				if (UsePixbufs)
+					layout.Width = Pango.Units.FromPixels (allocation.Width - allocation.Height - 3 * Padding - 1);
+				else
+					layout.Width = Pango.Units.FromPixels (allocation.Width - 2 * Padding - 1);
 				layout.FontDescription = Style.FontDescription;
 				layout.Ellipsize = Pango.EllipsizeMode.End;
 				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (FontSize);
@@ -237,7 +250,12 @@ namespace Docky.Menus
 				Pango.Rectangle logical, ink;
 				layout.GetPixelExtents (out ink, out logical);
 				
-				cr.MoveTo (allocation.X + allocation.Height + 8, allocation.Y + (allocation.Height - logical.Height) / 2);
+				int offset;
+				if (UsePixbufs)
+					offset = allocation.Height + 2 * Padding;
+				else
+					offset = Padding;
+				cr.MoveTo (allocation.X + offset, allocation.Y + (allocation.Height - logical.Height) / 2);
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.Color = TextColor.SetAlpha (item.Disabled ? 0.5 : 1);
 				cr.Fill ();
