@@ -30,6 +30,7 @@ namespace Docky.DBus
 	public interface IDockyDBusItem
 	{
 		bool OwnsDesktopFile { get; }
+		bool OwnsUri { get; }
 		bool CanSetIcon { get; }
 		bool Attention { get; }
 		bool Wait { get; }
@@ -39,6 +40,7 @@ namespace Docky.DBus
 		
 		string Name { get; }
 		string DesktopFile { get; }
+		string Uri { get; }
 		
 		uint[] Items { get; }
 		

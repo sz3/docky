@@ -130,6 +130,12 @@ namespace Docky.DBus
 			}
 		}
 		
+		public bool OwnsUri {
+			get {
+				return owner is FileDockItem;
+			}
+		}
+		
 		public bool Attention { 
 			get { return (owner.State & ItemState.Urgent) == ItemState.Urgent; }
 		}
@@ -142,6 +148,14 @@ namespace Docky.DBus
 			get {
 				if (owner is ApplicationDockItem)
 					return (owner as ApplicationDockItem).OwnedItem.Location;
+				return "";
+			}
+		}
+		
+		public string Uri {
+			get {
+				if (owner is FileDockItem)
+					return (owner as FileDockItem).Uri;
 				return "";
 			}
 		}
