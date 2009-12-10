@@ -505,30 +505,33 @@ namespace Docky.Items
 		{
 			// look for something nice to return
 			for (int j = 0; j < icon_buffers.Length; j++) {
-				if (icon_buffers [j] == null || redraw [j])
+				if (icon_buffers[j] == null || redraw[j])
 					continue;
 				
-				if (icon_buffers [j].Width == size || icon_buffers [j].Height == size)
-					return icon_buffers [j];
+				if (icon_buffers[j].Width == size || icon_buffers[j].Height == size) {
+					return icon_buffers[j];
+				}
 			}
 			
+			// Find the buffer most similar to the requested size so as to reduce cache thrashing
 			int i = -1;
 			for (int x = 0; x < icon_buffers.Length; x++) {
-				if (icon_buffers [x] != null && (icon_buffers [x].Width == size || icon_buffers [x].Height == size)) {
+				if (icon_buffers[x] != null && (icon_buffers[x].Width == size || icon_buffers[x].Height == size)) {
 					i = x;
 					break;
 				}
-				if (i == -1 && icon_buffers [x] == null)
+				if (i == -1 && icon_buffers[x] == null)
 					i = x;
 			}
 			
 			i = Math.Max (i, 0);
 			
-			if (icon_buffers [i] == null || (icon_buffers [i].Width != size && icon_buffers [i].Height != size)) {
-				if (icon_buffers [i] != null)
-					icon_buffers [i] = ResetBuffer (icon_buffers [i]);
-					
+			if (icon_buffers[i] == null || icon_buffers[i].Width != size || icon_buffers[i].Height != size) {
+				if (icon_buffers[i] != null)
+					icon_buffers[i] = ResetBuffer (icon_buffers[i]);
+				
 				try {
+					Console.WriteLine (HoverText);
 					icon_buffers [i] = CreateIconBuffer (model, size);
 				} catch (Exception e) {
 					Log<AbstractDockItem>.Error (e.Message);

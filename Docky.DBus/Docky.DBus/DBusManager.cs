@@ -49,6 +49,12 @@ namespace Docky.DBus
 		DockyDBus docky;
 		Dictionary<AbstractDockItem, DockyDBusItem> items;
 		
+		internal IEnumerable<AbstractDockItem> Items {
+			get {
+				return items.Keys;
+			}
+		}
+		
 		private DBusManager ()
 		{
 		}
@@ -88,7 +94,7 @@ namespace Docky.DBus
 			Bus.Session.Unregister (path);
 		}
 		
-		string PathForItem (AbstractDockItem item)
+		internal string PathForItem (AbstractDockItem item)
 		{
 			
 			return ItemsPath + "/" + Math.Abs (item.UniqueID ().GetHashCode ());

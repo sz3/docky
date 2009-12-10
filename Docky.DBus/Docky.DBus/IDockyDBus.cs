@@ -26,8 +26,18 @@ namespace Docky.DBus
 	[Interface("org.gnome.Docky")]
 	public interface IDockyDBus
 	{
+		string[] DockItemPaths ();
+		
+		string DockItemPathForDesktopID (string id);
+		
+		string DockItemPathForDesktopFile (string path);
+		
+		string DockItemPathForWindowXID (uint xid);
+		
 		void ShowAbout ();
+		
 		void ShowSettings ();
+		
 		void Quit ();
 	}
 }

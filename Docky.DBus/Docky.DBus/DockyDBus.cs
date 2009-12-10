@@ -16,6 +16,12 @@
 // 
 
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+
+using Docky.Items;
 
 namespace Docky.DBus
 {
@@ -24,6 +30,44 @@ namespace Docky.DBus
 	public class DockyDBus : IDockyDBus
 	{
 		#region IDockyDBus implementation
+		public string[] DockItemPaths ()
+		{
+			return DBusManager.Default.Items
+				.Select (adi => DBusManager.Default.PathForItem (adi))
+				.ToArray ();
+		}
+
+		public string DockItemPathForDesktopID (string id)
+		{
+			return DBusManager.Default.Items
+				.OfType<ApplicationDockItem> ()
+				.Where (adi => adi.OwnedItem.DesktopID == id)
+				.Select (adi => DBusManager.Default.PathForItem (adi))
+				.DefaultIfEmpty ("")
+				.FirstOrDefault ();
+		}
+
+		public string DockItemPathForDesktopFile (string path)
+		{
+			return DBusManager.Default.Items
+				.OfType<ApplicationDockItem> ()
+				.Where (adi => adi.OwnedItem.Location == path)
+				.Select (adi => DBusManager.Default.PathForItem (adi))
+				.DefaultIfEmpty ("")
+				.FirstOrDefault ();
+		}
+		
+		public string DockItemPathForWindowXID (uint xid)
+		{
+			return DBusManager.Default.Items
+				.OfType<WnckDockItem> ()
+				.Where (wdi => wdi.Windows.Any (w => (uint) w.Xid == xid))
+				.Select (wdi => DBusManager.Default.PathForItem (wdi))
+				.DefaultIfEmpty ("")
+				.FirstOrDefault ();
+		}
+		
+		
 		public void ShowAbout ()
 		{
 		}
@@ -36,6 +80,8 @@ namespace Docky.DBus
 		
 		public void Quit ()
 		{
+			// fixme
+			System.Environment.Exit (0);
 		}
 		
 		#endregion
