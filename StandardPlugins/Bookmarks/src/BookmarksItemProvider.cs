@@ -52,13 +52,6 @@ namespace Bookmarks
 			{
 				return false;
 			}
-			
-			protected override MenuList OnGetMenuItems ()
-			{
-				MenuList list = new MenuList ();
-				list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Open"), "gtk-open", (o, a) => Open ()));
-				return list;
-			}
 		}
 		
 		NonRemovableItem computer;
