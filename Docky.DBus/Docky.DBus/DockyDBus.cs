@@ -30,6 +30,8 @@ namespace Docky.DBus
 	public class DockyDBus : IDockyDBus
 	{
 		#region IDockyDBus implementation
+		public event ItemAddedHandler ItemAdded;
+		
 		public string[] DockItemPaths ()
 		{
 			return DBusManager.Default.Items
@@ -88,6 +90,12 @@ namespace Docky.DBus
 
 		public DockyDBus ()
 		{
+		}
+		
+		public void OnItemAdded (string path)
+		{
+			if (ItemAdded != null)
+				ItemAdded (path);
 		}
 	}
 }

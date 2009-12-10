@@ -81,11 +81,13 @@ namespace Docky.DBus
 			if (items.ContainsKey (item))
 				return;
 			
-			ObjectPath path = new ObjectPath (PathForItem (item));
+			string path = PathForItem (item);
 			DockyDBusItem dbusitem = new DockyDBusItem (item);
 			
 			items[item] = dbusitem;
-			Bus.Session.Register (path, dbusitem);
+			Bus.Session.Register (new ObjectPath (path), dbusitem);
+			
+			docky.OnItemAdded (path);
 		}
 		
 		public void UnregisterItem (AbstractDockItem item)
