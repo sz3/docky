@@ -30,7 +30,9 @@ namespace Docky.DBus
 	public class DockyDBus : IDockyDBus
 	{
 		#region IDockyDBus implementation
-		public event ItemAddedHandler ItemAdded;
+		public event ItemChangedHandler ItemAdded;
+		
+		public event ItemChangedHandler ItemRemoved;
 		
 		public string[] DockItemPaths ()
 		{
@@ -96,6 +98,12 @@ namespace Docky.DBus
 		{
 			if (ItemAdded != null)
 				ItemAdded (path);
+		}
+		
+		public void OnItemRemoved (string path)
+		{
+			if (ItemRemoved != null)
+				ItemRemoved (path);
 		}
 	}
 }

@@ -100,6 +100,8 @@ namespace Docky.DBus
 			
 			ObjectPath path = new ObjectPath (PathForItem (item));
 			Bus.Session.Unregister (path);
+			
+			docky.OnItemRemoved (PathForItem (item));
 		}
 		
 		internal string PathForItem (AbstractDockItem item)

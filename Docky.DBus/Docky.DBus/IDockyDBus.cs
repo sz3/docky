@@ -22,12 +22,14 @@ using NDesk.DBus;
 
 namespace Docky.DBus
 {
-	public delegate void ItemAddedHandler (string path);
+	public delegate void ItemChangedHandler (string path);
 
 	[Interface("org.gnome.Docky")]
 	public interface IDockyDBus
 	{
-		event ItemAddedHandler ItemAdded;
+		event ItemChangedHandler ItemAdded;
+		
+		event ItemChangedHandler ItemRemoved;
 		
 		string[] DockItemPaths ();
 		
