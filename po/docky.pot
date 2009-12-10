@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-10 10:06+0100\n"
+"POT-Creation-Date: 2009-12-10 12:08+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -162,7 +162,7 @@ msgid "New _Window"
 msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:188
-#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:49
+#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:59
 #: ../StandardPlugins/Mounter/src/MountItem.cs:97
 msgid "_Open"
 msgstr ""
@@ -179,11 +179,11 @@ msgstr ""
 msgid "_Pin to Dock"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:193
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:232
 msgid "Open"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:233
 msgid "Open Containing Folder"
 msgstr ""
 
@@ -257,7 +257,7 @@ msgstr ""
 msgid "Don't have an account?"
 msgstr ""
 
-#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:80
+#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:91
 msgid "Computer"
 msgstr ""
 
@@ -283,6 +283,19 @@ msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
 msgid "Theme"
+msgstr ""
+
+#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
+msgid "_Add Label"
+msgstr ""
+
+#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:114
+msgid "Check e_very:"
+msgstr ""
+
+#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:124
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:187
+msgid "minutes"
 msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:185
@@ -364,19 +377,6 @@ msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
-msgstr ""
-
-#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
-msgid "_Add Label"
-msgstr ""
-
-#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:114
-msgid "Check e_very:"
-msgstr ""
-
-#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:124
-#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:187
-msgid "minutes"
 msgstr ""
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
@@ -465,31 +465,31 @@ msgstr ""
 msgid "_Clear Recent Documents..."
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:72
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:71
 msgid "No items in Trash"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:74
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:159
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:158
 msgid "_Open Trash"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:161
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:198
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:160
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:197
 msgid "Empty _Trash"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:183
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:182
 msgid "Empty all of the items from the trash?"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:185
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
@@ -605,12 +605,4 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:356
 msgid "Sunset"
-msgstr ""
-
-#: ../data/docky.desktop.in.h:1
-msgid "Docky"
-msgstr ""
-
-#: ../data/docky.desktop.in.h:2
-msgid "The finest dock no money can buy."
 msgstr ""

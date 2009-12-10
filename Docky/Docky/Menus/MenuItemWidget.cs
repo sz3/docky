@@ -230,7 +230,7 @@ namespace Docky.Menus
 					cr.PaintWithAlpha (item.Disabled ? 0.5 : 1);
 				}
 				
-				if (item.Bold) {
+				if (item.Bold && item.ShowIcons) {
 					cr.Operator = Operator.Add;
 					PlaceSurface (cr, icon_surface, allocation);
 					cr.PaintWithAlpha (.8);

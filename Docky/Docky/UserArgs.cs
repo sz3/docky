@@ -42,7 +42,7 @@ namespace Docky
 		[Option ("Netbook mode", 'n', "netbook")]
 		public bool NetbookMode;
 		
-		[Option ("Nvidia mode (for Nvidia cards that lag after awhile) [-b 10]", 'n', "nvidia")]
+		[Option ("Nvidia mode (for Nvidia cards that lag after awhile) [-b 10]", "nvidia")]
 		public bool NvidiaMode;
 		
 		[Option ("Maximum time (in minutes) to keep buffers", 'b', "buffer-time")]
