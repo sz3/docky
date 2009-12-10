@@ -91,8 +91,6 @@ namespace Bookmarks
 			computer = new NonRemovableItem ("computer://", Catalog.GetString ("Computer"), "computer");
 			home = FileDockItem.NewFromUri (string.Format ("file://{0}",
 			    Environment.GetFolderPath (Environment.SpecialFolder.Personal)));
-			
-			Console.WriteLine (home.Icon);
 		
 			UpdateItems ();
 			
