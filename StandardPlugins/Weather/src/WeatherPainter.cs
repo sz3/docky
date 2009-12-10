@@ -73,9 +73,15 @@ namespace WeatherDocklet
 		{
 		}
 		
-		public override int MinimumSize {
+		public override int MinimumHeight {
 			get {
-				return 2 * WeatherController.Weather.ForecastDays * Allocation.Height;
+				return 42;
+			}
+		}
+		
+		public override int MinimumWidth {
+			get {
+				return 2 * WeatherController.Weather.ForecastDays * Math.Max (MinimumHeight, Allocation.Height);
 			}
 		}
 		
@@ -162,10 +168,11 @@ namespace WeatherDocklet
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.Fill ();
 				
-				WeatherDocklet.RenderIconOntoContext (cr, WeatherController.Weather.Forecasts [day].image,
-				                               xOffset + Allocation.Height + 2, 5,
-				                               Allocation.Height - 5,
-											   WeatherController.Weather.Forecasts [day].chanceOf ? .6 : 1);
+				using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (WeatherController.Weather.Forecasts [day].image, Allocation.Height - 5))
+				{
+					Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, xOffset + Allocation.Height + 2, 5);
+					cr.PaintWithAlpha (WeatherController.Weather.Forecasts [day].chanceOf ? .6 : 1);
+				}
 				
 				if (WeatherController.Weather.Forecasts [day].chanceOf)
 				{

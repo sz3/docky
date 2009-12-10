@@ -375,7 +375,7 @@ namespace Docky.Interface
 			get { return 2 * IconSize + 3 * DockWidthBuffer; }
 		}
 		
-		int IconSize {
+		internal int IconSize {
 			get { return Math.Min (MaxIconSize, Preferences.IconSize); }
 		}
 		
@@ -420,7 +420,12 @@ namespace Docky.Interface
 		}
 		
 		int DockHeight {
-			get { return IconSize + 2 * DockHeightBuffer; }
+			get {
+				int height = IconSize;
+				if (Painter != null)
+					height = Math.Max (IconSize, Painter.MinimumHeight);
+				return height + 2 * DockHeightBuffer;
+			}
 		}
 		
 		int DockWidth {
@@ -428,7 +433,7 @@ namespace Docky.Interface
 				if (GdkWindow == null)
 					return 0;
 				
-				int dockWidth = Items.Sum (adi => (int) ((adi.Square ? IconSize : adi.IconSurface (background_buffer, IconSize).Width) * 
+				int dockWidth = Items.Sum (adi => (int) ((adi.Square ? IconSize : adi.IconSurface (background_buffer, IconSize, IconSize).Width) * 
 						Math.Min (1, (DateTime.UtcNow - adi.AddTime).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds)));
 				dockWidth += 2 * DockWidthBuffer + (Items.Count - 1) * ItemWidthBuffer;
 				
@@ -447,7 +452,7 @@ namespace Docky.Interface
 					if (Painter.Allocation != allocation)
 						Painter.SetAllocation (allocation);
 					
-					return Painter.MinimumSize + PainterBufferSize;
+					return Painter.MinimumWidth + PainterBufferSize;
 				}
 				
 				return dockWidth;
@@ -1300,7 +1305,7 @@ namespace Docky.Interface
 					(int) (IconSize * val.Zoom),
 					(int) (IconSize * val.Zoom));
 			} else {
-				DockySurface surface = item.IconSurface (main_buffer, IconSize);
+				DockySurface surface = item.IconSurface (main_buffer, IconSize, IconSize);
 				
 				int width = surface.Width;
 				int height = surface.Height;
@@ -1401,7 +1406,7 @@ namespace Docky.Interface
 				if (adi.Square) {
 					halfSize = iconSize / 2.0;
 				} else {
-					DockySurface icon = adi.IconSurface (surface, iconSize);
+					DockySurface icon = adi.IconSurface (surface, iconSize, IconSize);
 					
 					// yeah I am pretty sure...
 					if (adi.RotateWithDock || !VerticalDock) {
@@ -1595,7 +1600,7 @@ namespace Docky.Interface
 				break;
 			}
 			
-			if (Preferences.PanelMode) {
+			if (Preferences.PanelMode && Painter == null) {
 				if (VerticalDock) {
 					area.Y = 0;
 					area.Height = surface.Height;
@@ -1816,7 +1821,7 @@ namespace Docky.Interface
 					break;
 				}
 				
-				DockySurface icon = painterOwner.IconSurface (painter_buffer, 2 * IconSize);
+				DockySurface icon = painterOwner.IconSurface (painter_buffer, 2 * IconSize, IconSize);
 				icon.ShowWithOptions (painter_buffer, point, 1, 0, 1);
 				
 				repaint_painter = false;
@@ -1890,10 +1895,10 @@ namespace Docky.Interface
 			DockySurface icon;
 			if (item.Zoom) {
 				if (item.ScalableRendering && center.Zoom == 1) {
-					icon = item.IconSurface (surface, IconSize);
+					icon = item.IconSurface (surface, IconSize, IconSize);
 					icon.ShowWithOptions (surface, center.Center, 1, 0, opacity);
 				} else {
-					icon = item.IconSurface (surface, ZoomedIconSize);
+					icon = item.IconSurface (surface, ZoomedIconSize, IconSize);
 					icon.ShowWithOptions (surface, center.Center, center.Zoom / zoomOffset, 0, opacity);
 				}
 			} else {
@@ -1916,7 +1921,7 @@ namespace Docky.Interface
 					}
 				}
 				
-				icon = item.IconSurface (surface, IconSize);
+				icon = item.IconSurface (surface, IconSize, IconSize);
 				icon.ShowWithOptions (surface, center.Center, 1, rotation, opacity);
 			}
 			
