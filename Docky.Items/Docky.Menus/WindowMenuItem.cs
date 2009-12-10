@@ -33,6 +33,7 @@ namespace Docky.Menus
 			this.window = window;
 			
 			this.Clicked += HandleClicked;
+			this.ShowIcons = true;
 		}
 
 		void HandleClicked (object sender, EventArgs e)

@@ -61,20 +61,19 @@ REFERENCES =  \
 	System \
 	System.Core \
 	Mono.Posix \
+	Mono.Cairo \
+	Mono.GetOptions \
 	$(GLIB_SHARP_20_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(GNOME_DESKTOP_SHARP_20_LIBS) \
-	Mono.Cairo \
 	$(WNCK_SHARP_10_LIBS) \
 	$(GNOME_VFS_SHARP_20_LIBS) \
-	$(GCONF_SHARP_20_LIBS) \
 	$(LIBRSVG_SHARP_LIBS) \
 	$(NDESK_DBUS_10_LIBS) \
 	$(NDESK_DBUS_GLIB_10_LIBS) \
 	$(MONO_ADDINS_LIBS) \
 	$(MONO_ADDINS_GUI_LIBS) \
-	$(MONO_ADDINS_SETUP_LIBS) \
-	Mono.GetOptions
+	$(MONO_ADDINS_SETUP_LIBS)
 
 #
 # Extra rules for our binary, not worth factoring out

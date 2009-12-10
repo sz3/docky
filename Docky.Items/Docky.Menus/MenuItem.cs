@@ -21,6 +21,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
+using GConf;
+
 namespace Docky.Menus
 {
 
@@ -32,6 +34,20 @@ namespace Docky.Menus
 		public event EventHandler Clicked;
 		
 		public bool Bold { get; set;}
+		
+		bool? show_icons;
+		public bool ShowIcons { 
+			get {
+				if (!show_icons.HasValue)
+					show_icons = (bool) new GConf.Client ().Get ("/desktop/gnome/interface/menus_have_icons");
+				return show_icons.Value;
+			}
+			protected set {
+				if (show_icons.HasValue && show_icons.Value == value)
+					return;
+				show_icons = value;
+			}
+		}	
 		
 		bool disabled;
 		public bool Disabled {

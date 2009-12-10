@@ -22,7 +22,6 @@ using System.Linq;
 using System.Text;
 
 using Cairo;
-using GConf;
 using Gdk;
 using Gtk;
 
@@ -49,9 +48,7 @@ namespace Docky.Menus
 		public Cairo.Color TextColor { get; set; }
 		
 		public int TextWidth { get; protected set; }
-		
-		bool UsePixbufs { get; set; }
-		
+				
 		DockySurface icon_surface, emblem_surface;
 		
 		internal MenuItemWidget (MenuItem item) : base()
@@ -63,7 +60,6 @@ namespace Docky.Menus
 			item.DisabledChanged += ItemDisabledChanged;
 			
 			AddEvents ((int) Gdk.EventMask.AllEventsMask);
-			UsePixbufs = (bool) new GConf.Client ().Get ("/desktop/gnome/interface/menus_have_icons");
 			
 			HasTooltip = true;
 			VisibleWindow = false;
@@ -88,7 +84,7 @@ namespace Docky.Menus
 			
 			HasTooltip = logical.Width > MaxWidth;
 			TextWidth = Math.Min (MaxWidth, Math.Max (MinWidth, logical.Width)) + 2 * Padding + 1;
-			if (UsePixbufs)
+			if (item.ShowIcons)
 				TextWidth += MenuHeight + Padding;
 			SetSizeRequest (TextWidth, MenuHeight);
 		}
@@ -199,7 +195,7 @@ namespace Docky.Menus
 			Gdk.Rectangle allocation = Allocation;
 			
 			int pixbufSize = allocation.Height - IconBuffer * 2;
-			if (UsePixbufs && (icon_surface == null || (icon_surface.Height != pixbufSize && icon_surface.Width != pixbufSize))) {
+			if (item.ShowIcons && (icon_surface == null || (icon_surface.Height != pixbufSize && icon_surface.Width != pixbufSize))) {
 				if (icon_surface != null)
 					icon_surface.Dispose ();
 				if (emblem_surface != null)
@@ -218,7 +214,7 @@ namespace Docky.Menus
 					cr.Fill ();
 				}
 				
-				if (UsePixbufs) {
+				if (item.ShowIcons) {
 					PlaceSurface (cr, icon_surface, allocation);
 					cr.PaintWithAlpha (item.Disabled ? 0.5 : 1);
 				}
@@ -230,7 +226,7 @@ namespace Docky.Menus
 					cr.Operator = Operator.Over;
 				}
 				
-				if (UsePixbufs && !string.IsNullOrEmpty (item.Emblem)) {
+				if (item.ShowIcons && !string.IsNullOrEmpty (item.Emblem)) {
 					PlaceSurface (cr, emblem_surface, allocation);
 					cr.Paint ();
 				}
@@ -238,7 +234,7 @@ namespace Docky.Menus
 				Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
 				char accel;
 				layout.SetMarkupWithAccel (item.Text, '_', out accel);
-				if (UsePixbufs)
+				if (item.ShowIcons)
 					layout.Width = Pango.Units.FromPixels (allocation.Width - allocation.Height - 3 * Padding - 1);
 				else
 					layout.Width = Pango.Units.FromPixels (allocation.Width - 2 * Padding - 1);
@@ -251,7 +247,7 @@ namespace Docky.Menus
 				layout.GetPixelExtents (out ink, out logical);
 				
 				int offset;
-				if (UsePixbufs)
+				if (item.ShowIcons)
 					offset = allocation.Height + 2 * Padding;
 				else
 					offset = Padding;

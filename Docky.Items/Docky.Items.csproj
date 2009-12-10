@@ -62,6 +62,9 @@
       <HintPath>..\build\gio-sharp.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Posix" />
+    <Reference Include="gconf-sharp, Version=2.24.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gconf-sharp-2.0</Package>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
