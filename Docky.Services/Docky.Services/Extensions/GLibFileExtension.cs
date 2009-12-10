@@ -45,7 +45,6 @@ namespace Docky.Services
 		
 		public static GLib.Icon Icon (this GLib.File file)
 		{
-			//FileInfo info = file.QueryInfo (", FileQueryInfoFlags.None, null);
 			return file.QueryInfoSimple ("standard::icon").Icon;
 		}
 		
@@ -53,6 +52,11 @@ namespace Docky.Services
 		{
 			return file.QueryInfoSimple (attribute).GetAttributeAsString (attribute);
 		}
+		
+		public static uint QueryUintAttr (this GLib.File file, string attribute)
+		{
+			return file.QueryInfoSimple (attribute).GetAttributeUInt (attribute);
+		}		
 		
 		public static bool QueryBoolAttr (this GLib.File file, string attribute)
 		{

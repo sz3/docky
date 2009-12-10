@@ -194,7 +194,7 @@ namespace Bookmarks
 		
 		public override bool ItemCanBeRemoved (AbstractDockItem item)
 		{
-			return item is BookmarkDockItem;
+			return !(item is NonRemovableItem);
 		}
 		
 		public override bool RemoveItem (AbstractDockItem item)
@@ -202,7 +202,7 @@ namespace Bookmarks
 			if (!ItemCanBeRemoved (item))
 				return false;
 			
-			BookmarkDockItem bookmark = item as BookmarkDockItem;
+			FileDockItem bookmark = item as FileDockItem;
 			
 			if (!bookmark.OwnedFile.Exists)
 				return false;
@@ -214,7 +214,7 @@ namespace Bookmarks
 					string line;
 					ulong length;
 					while ((line = reader.ReadLine (out length, null)) != null) {
-						if (!line.Contains (bookmark.Uri))
+						if (line.Split (' ')[0] != bookmark.Uri)
 							writer.PutString (string.Format ("{0}{1}", line, reader.NewLineString ()), null);
 						else {
 							items.Remove (bookmark);

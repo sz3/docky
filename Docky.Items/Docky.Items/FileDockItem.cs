@@ -136,7 +136,6 @@ namespace Docky.Items
 				can_write = false;
 			}
 			
-			Console.WriteLine ("Can drop? {0}", is_folder && can_write);
 			// only accept the drop if it's a folder, and we can write to it.
 			return is_folder && can_write;
 		}
