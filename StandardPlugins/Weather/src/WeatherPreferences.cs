@@ -52,7 +52,7 @@ namespace WeatherDocklet
 		/// The current weather source name.
 		/// </value>
 		public static string Source {
- 			get { return prefs.Get<string> (SourceKey, "Weather Underground"); }
+ 			get { return prefs.Get<string> (SourceKey, WunderWeatherSource.GetInstance ().Name); }
  			set { prefs.Set<string> (SourceKey, value); OnSourceChanged (); }
  		}
 		

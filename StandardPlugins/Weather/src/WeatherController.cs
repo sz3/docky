@@ -170,7 +170,7 @@ namespace WeatherDocklet
 			if (Sources.ContainsKey (WeatherPreferences.Source))
 				Weather = Sources [WeatherPreferences.Source];
 			else
-				Weather = Sources ["Weather Underground"];
+				Weather = Sources [WunderWeatherSource.GetInstance ().Name];
 			
 			Weather.WeatherReloading += HandleWeatherReloading;
 			Weather.WeatherError += HandleWeatherError;
