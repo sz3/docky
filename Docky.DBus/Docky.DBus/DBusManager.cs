@@ -76,6 +76,11 @@ namespace Docky.DBus
 			bus.Register (dockyPath, docky);
 		}
 		
+		public void Shutdown ()
+		{
+			docky.Shutdown ();
+		}
+		
 		public void RegisterItem (AbstractDockItem item)
 		{
 			if (items.ContainsKey (item))

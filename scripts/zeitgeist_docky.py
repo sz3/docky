@@ -67,7 +67,10 @@ class DockyUriItem():
 	
 	def dispose(self):
 		for k, v in self.id_map.iteritems():
-			self.iface.RemoveItem (k)
+			try:
+				self.iface.RemoveItem (k)
+			except:
+				break;
 		glib.source_remove (self.timer)
 		glib.source_remove (self.update_timer)
 	
@@ -98,6 +101,7 @@ class DockySink():
 	def __init__(self):
 		self.bus = dbus.SessionBus ()
 		self.items = {}
+		self.disposed = False;
 
 		obj = self.bus.get_object (dockybus, dockypath)
 		self._iface = dbus.Interface (obj, dockyiface)
@@ -106,6 +110,7 @@ class DockySink():
 		
 		self.bus.add_signal_receiver (self.item_added, "ItemAdded", dockyiface, dockybus, dockypath)
 		self.bus.add_signal_receiver (self.item_removed, "ItemRemoved", dockyiface, dockybus, dockypath)
+		self.bus.add_signal_receiver (self.shut_down, "ShuttingDown", dockyiface, dockybus, dockypath)
 		
 		for pathtoitem in paths:
 			obj = self.bus.get_object (dockybus, pathtoitem)
@@ -114,17 +119,26 @@ class DockySink():
 				self.items[pathtoitem] = DockyUriItem (pathtoitem)
 	
 	def item_added(self, path):
+		if self.disposed:
+			return;
 		obj = self.bus.get_object (dockybus, path)
 		item = dbus.Interface (obj, itemiface)
 		if item.GetOwnsUri():
 			self.items[path] = DockyUriItem (path)
 
 	def item_removed(self, path):
+		if self.disposed:
+			return;
 		if path in self.items:
 			self.items[path].dispose ()
 			del self.items[path]
 	
+	def shut_down(self):
+		self.dispose ()
+		gobject.idle_add (quit, 1)
+	
 	def dispose(self):
+		self.disposed = True;
 		for path, item in self.items.iteritems ():
 			item.dispose ()
 			

@@ -27,6 +27,8 @@ namespace Docky.DBus
 	[Interface("org.gnome.Docky")]
 	public interface IDockyDBus
 	{
+		event Action ShuttingDown;
+		
 		event ItemChangedHandler ItemAdded;
 		
 		event ItemChangedHandler ItemRemoved;

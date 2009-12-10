@@ -34,6 +34,8 @@ namespace Docky.DBus
 		
 		public event ItemChangedHandler ItemRemoved;
 		
+		public event Action ShuttingDown;
+		
 		public string[] DockItemPaths ()
 		{
 			return DBusManager.Default.Items
@@ -92,6 +94,12 @@ namespace Docky.DBus
 
 		public DockyDBus ()
 		{
+		}
+		
+		public void Shutdown ()
+		{
+			if (ShuttingDown != null)
+				ShuttingDown ();
 		}
 		
 		public void OnItemAdded (string path)

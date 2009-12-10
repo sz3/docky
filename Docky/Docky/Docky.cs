@@ -153,5 +153,11 @@ namespace Docky
 			};
 			
 		}
+		
+		public static void Quit ()
+		{
+			DBusManager.Default.Shutdown ();
+			Gtk.Application.Quit ();
+		}
 	}
 }
