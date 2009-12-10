@@ -163,6 +163,17 @@ namespace Docky.Menus
 			cr.SetSource (surface.Internal, x, y);
 		}
 		
+		DockySurface LoadIcon (Pixbuf icon, int size)
+		{
+			DockySurface surface;
+			using (Gdk.Pixbuf pixbuf = icon.ScaleSimple (size, size, InterpType.Bilinear)) {
+				surface = new DockySurface (pixbuf.Width, pixbuf.Height);
+				Gdk.CairoHelper.SetSourcePixbuf (surface.Context, pixbuf, 0, 0);
+				surface.Context.Paint ();
+			}
+			return surface;
+		}
+		
 		DockySurface LoadIcon (string icon, int size)
 		{
 			bool monochrome = icon.StartsWith ("[monochrome]");
@@ -170,12 +181,7 @@ namespace Docky.Menus
 				icon = icon.Substring ("[monochrome]".Length);
 			}
 			
-			DockySurface surface;
-			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (icon, size)) {
-				surface = new DockySurface (pixbuf.Width, pixbuf.Height);
-				Gdk.CairoHelper.SetSourcePixbuf (surface.Context, pixbuf, 0, 0);
-				surface.Context.Paint ();
-			}
+			DockySurface surface = LoadIcon (DockServices.Drawing.LoadIcon (icon, size), size);
 			
 			if (monochrome) {
 				surface.Context.Operator = Operator.Atop;
@@ -203,7 +209,10 @@ namespace Docky.Menus
 				if (emblem_surface != null)
 					emblem_surface.Dispose ();
 				
-				icon_surface = LoadIcon (item.Icon, pixbufSize);
+				if (item.ForcePixbuf == null)
+					icon_surface = LoadIcon (item.Icon, pixbufSize);
+				else
+					icon_surface = LoadIcon (item.ForcePixbuf, pixbufSize);
 				
 				if (!string.IsNullOrEmpty (item.Emblem))
 					emblem_surface = LoadIcon (item.Emblem, pixbufSize);

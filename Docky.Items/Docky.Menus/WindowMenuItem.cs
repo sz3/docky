@@ -17,6 +17,8 @@
 
 using System;
 
+using Gdk;
+
 using Docky.Windowing;
 
 namespace Docky.Menus
@@ -34,6 +36,11 @@ namespace Docky.Menus
 			
 			this.Clicked += HandleClicked;
 			this.ShowIcons = true;
+		}
+		
+		public WindowMenuItem (Wnck.Window window, Pixbuf icon) : this (window, "")
+		{
+			ForcePixbuf = icon;
 		}
 
 		void HandleClicked (object sender, EventArgs e)

@@ -260,7 +260,7 @@ namespace Docky.Items
 						(o, a) => WindowControl.CloseWindows (ManagedWindows)));
 				
 				foreach (Wnck.Window window in ManagedWindows) {
-					list[MenuListContainer.Windows].Add (new WindowMenuItem (window, Icon));
+					list[MenuListContainer.Windows].Add (new WindowMenuItem (window, window.Icon));
 				}
 			}
 			

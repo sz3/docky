@@ -22,6 +22,7 @@ using System.Linq;
 using System.Text;
 
 using GConf;
+using Gdk;
 
 namespace Docky.Menus
 {
@@ -81,6 +82,9 @@ namespace Docky.Menus
 		public string Icon {
 			get { return icon; }
 			set {
+				// if we set this, clear the forced pixbuf
+				if (forced_pixbuf != null)
+					forced_pixbuf = null;
 				if (icon == value)
 					return;
 				icon = value;
@@ -88,6 +92,16 @@ namespace Docky.Menus
 					IconChanged (this, EventArgs.Empty);
 			}
 		}
+		
+		Pixbuf forced_pixbuf;
+		public Pixbuf ForcePixbuf {
+			get { return forced_pixbuf; }
+			protected set {
+				if (forced_pixbuf == value)
+					return;
+				forced_pixbuf = value;
+			}
+		}		
 		
 		string emblem;
 		public string Emblem {
@@ -109,15 +123,10 @@ namespace Docky.Menus
 		
 		public MenuItem ()
 		{
-			
 		}
 		
-		public MenuItem (string text, string icon)
+		public MenuItem (string text, string icon) : this (text, icon, false)
 		{
-			Bold = false;
-			this.icon = icon;
-			Text = text;
-			disabled = false;
 		}
 		
 		public MenuItem (string text, string icon, bool disabled)

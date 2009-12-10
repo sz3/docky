@@ -41,11 +41,11 @@ namespace Docky.Items
 		public string Icon {
 			get { return icon; }
 			protected set {
-				if (icon == value)
-					return;
 				// if we set this, clear the forced pixbuf
 				if (forced_pixbuf != null)
 					forced_pixbuf = null;
+				if (icon == value)
+					return;
 				icon = value;
 				
 				using (Gtk.IconInfo info = Gtk.IconTheme.Default.LookupIcon (icon, 48, Gtk.IconLookupFlags.ForceSvg)) {
