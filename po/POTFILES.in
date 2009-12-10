@@ -13,15 +13,14 @@ Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs
 Docky.Widgets/Docky.Widgets/AbstractTileObject.cs
 Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs
 StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs
-StandardPlugins/Bookmarks/src/BookmarkDockItem.cs
 StandardPlugins/Clock/src/ClockDockItem.cs
 StandardPlugins/Clock/src/ClockThemeSelector.cs
+StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs
 StandardPlugins/GMail/src/GMailAtom.cs
 StandardPlugins/GMail/src/GMailDockItem.cs
 StandardPlugins/GMail/src/GMailLabelConfig.cs
 StandardPlugins/GMail/src/GMailLoginConfig.cs
 StandardPlugins/GMail/src/GMailMenuItem.cs
-StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs
 StandardPlugins/Mounter/src/MountItem.cs
 StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs
 StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs
@@ -38,5 +37,3 @@ StandardPlugins/Weather/src/WeatherConfig.cs
 StandardPlugins/Weather/src/WeatherDocklet.cs
 StandardPlugins/Weather/src/WeatherForecast.cs
 StandardPlugins/Weather/src/WeatherPainter.cs
-# files added by intltool-prepare
-data/docky.desktop.in
