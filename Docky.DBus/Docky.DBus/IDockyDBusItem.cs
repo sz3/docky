@@ -29,19 +29,34 @@ namespace Docky.DBus
 	[Interface ("org.gnome.Docky.Item")]
 	public interface IDockyDBusItem
 	{
-		string Name { get; }
-		string Text { get; }
-		string Icon { get; }
-		
 		bool OwnsDesktopFile { get; }
+		bool CanSetIcon { get; }
+		bool Attention { get; }
+		bool Wait { get; }
+		
+		string Text { get; set; }
+		string Icon { get; set; }
+		
+		string Name { get; }
 		string DesktopFile { get; }
+		
+		uint[] Items { get; }
 		
 		event MenuItemActivatedHandler MenuItemActivated;
 
 		uint AddMenuItem (string name, string icon, string title);
-		
 		void RemoveItem (uint item);
-		
 		void ConfirmItem (uint item);
+		
+		void SetAttention ();
+		void UnsetAttention ();
+		
+		void SetWaiting ();
+		void UnsetWaiting ();
+		
+		void ResetText ();
+		void ResetIcon ();
+		
+		Tuple GetItem (uint item);
 	}
 }

@@ -71,7 +71,7 @@ namespace Clock
 				StartDate = StartDate.AddDays (7);
 		}
 		
-		public override int MinimumSize {
+		public virtual int MinimumSize {
 			get {
 				return 630;
 			}

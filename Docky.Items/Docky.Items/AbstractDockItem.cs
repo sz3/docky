@@ -43,6 +43,7 @@ namespace Docky.Items
 	public abstract class AbstractDockItem : IDisposable
 	{
 		string hover_text;
+		string remote_text;
 		bool[] redraw;
 		DockySurface text_buffer;
 		DockySurface[] icon_buffers;
@@ -76,7 +77,7 @@ namespace Docky.Items
 		/// </summary>
 		public ItemState State {
 			get { return state; }
-			protected set {
+			set {
 				if (state == value)
 					return;
 				
@@ -151,7 +152,7 @@ namespace Docky.Items
 		/// </summary>
 		public string HoverText {
 			get {
-				return hover_text;
+				return string.IsNullOrEmpty (remote_text) ? hover_text : remote_text;
 			}
 			protected set {
 				if (hover_text == value)
@@ -193,20 +194,40 @@ namespace Docky.Items
 			internal set;
 		}
 		
+		/// <summary>
+		/// 
+		/// </summary>
+		public Docky.Menus.MenuList RemoteMenuItems {
+			get;
+			private set;
+		}
+		
 		public const int HoverTextHeight = 26;
+		
+		protected int IconSize { get; private set; }
+		
+		protected bool IsSmall { get { return IconSize < 32; } }
 		
 		public AbstractDockItem ()
 		{
 			ScalableRendering = true;
-			icon_buffers = new DockySurface [2];
-			badgeColors = new Cairo.Color [2];
-			redraw = new bool [2];
+			icon_buffers = new DockySurface[2];
+			badgeColors = new Cairo.Color[2];
+			redraw = new bool[2];
 			state_times = new Dictionary<ItemState, DateTime> ();
-			foreach (ItemState val in Enum.GetValues (typeof (ItemState)))
-				state_times [val] = new DateTime (0);
+			foreach (ItemState val in Enum.GetValues (typeof(ItemState)))
+				state_times[val] = new DateTime (0);
 			Gtk.IconTheme.Default.Changed += HandleIconThemeChanged;
+			RemoteMenuItems = new Docky.Menus.MenuList ();
 			
 			AppDomain.CurrentDomain.ProcessExit += HandleProcessExit;
+		}
+		
+		public void SetRemoteText (string text)
+		{
+			remote_text = text;
+			text_buffer = ResetBuffer (text_buffer);
+			OnHoverTextChanged ();
 		}
 
 		void HandleProcessExit (object sender, EventArgs e)
@@ -501,14 +522,16 @@ namespace Docky.Items
 		/// <returns>
 		/// A <see cref="DockySurface"/>
 		/// </returns>
-		public DockySurface IconSurface (DockySurface model, int size)
+		public DockySurface IconSurface (DockySurface model, int size, int iconSize)
 		{
+			IconSize = iconSize;
+			
 			// look for something nice to return
 			for (int j = 0; j < icon_buffers.Length; j++) {
 				if (icon_buffers[j] == null || redraw[j])
 					continue;
 				
-				if (icon_buffers[j].Width == size || icon_buffers[j].Height == size) {
+				if (icon_buffers[j].Height == size) {
 					return icon_buffers[j];
 				}
 			}
@@ -531,7 +554,6 @@ namespace Docky.Items
 					icon_buffers[i] = ResetBuffer (icon_buffers[i]);
 				
 				try {
-					Console.WriteLine (HoverText);
 					icon_buffers [i] = CreateIconBuffer (model, size);
 				} catch (Exception e) {
 					Log<AbstractDockItem>.Error (e.Message);
@@ -576,7 +598,8 @@ namespace Docky.Items
 			layout.Ellipsize = Pango.EllipsizeMode.None;
 			layout.FontDescription = new Gtk.Style().FontDescription;
 			layout.FontDescription.Weight = Pango.Weight.Bold;
-			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (surface.Height / (2 + 2 * BadgeText.Length));
+			int fontSize = IsSmall ? 0 : 2;
+			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (surface.Height / (fontSize + 2 * BadgeText.Length));
 			
 			layout.SetText (BadgeText);
 			
@@ -589,38 +612,45 @@ namespace Docky.Items
 			int x = surface.Width - size / 2 - padding - lineWidth;
 			int y = size / 2 + padding + lineWidth;
 			
-			// draw outline shadow
-			surface.Context.LineWidth = lineWidth;
-			surface.Context.Color = new Cairo.Color (0, 0, 0, 0.5);
-			surface.Context.Arc (x, y + 1, size / 2 + padding, 0, Math.PI * 2);
-			surface.Context.Stroke ();
-			
-			// draw filled gradient
-			RadialGradient rg = new RadialGradient (x, lineWidth, 0, x, lineWidth, size + 2 * padding);
-			rg.AddColorStop (0, badgeColors [0]);
-			rg.AddColorStop (1.0, badgeColors [1]);
-			
-			surface.Context.Pattern = rg;
-			surface.Context.Arc (x, y, size / 2 + padding, 0, Math.PI * 2);
-			surface.Context.Fill ();
-			rg.Destroy ();
-			
-			// draw outline
-			surface.Context.Color = new Cairo.Color (1, 1, 1, 1);
-			surface.Context.Arc (x, y, size / 2 + padding, 0, Math.PI * 2);
-			surface.Context.Stroke ();
-			
-			surface.Context.LineWidth = lineWidth / 2;
-			surface.Context.Color = badgeColors [1];
-			surface.Context.Arc (x, y, size / 2 + padding - lineWidth, 0, Math.PI * 2);
-			surface.Context.Stroke ();
+			if (!IsSmall) {
+				// draw outline shadow
+				surface.Context.LineWidth = lineWidth;
+				surface.Context.Color = new Cairo.Color (0, 0, 0, 0.5);
+				surface.Context.Arc (x, y + 1, size / 2 + padding, 0, Math.PI * 2);
+				surface.Context.Stroke ();
+				
+				// draw filled gradient
+				RadialGradient rg = new RadialGradient (x, lineWidth, 0, x, lineWidth, size + 2 * padding);
+				rg.AddColorStop (0, badgeColors [0]);
+				rg.AddColorStop (1.0, badgeColors [1]);
+				
+				surface.Context.Pattern = rg;
+				surface.Context.Arc (x, y, size / 2 + padding, 0, Math.PI * 2);
+				surface.Context.Fill ();
+				rg.Destroy ();
+				
+				// draw outline
+				surface.Context.Color = new Cairo.Color (1, 1, 1, 1);
+				surface.Context.Arc (x, y, size / 2 + padding, 0, Math.PI * 2);
+				surface.Context.Stroke ();
+				
+				surface.Context.LineWidth = lineWidth / 2;
+				surface.Context.Color = badgeColors [1];
+				surface.Context.Arc (x, y, size / 2 + padding - lineWidth, 0, Math.PI * 2);
+				surface.Context.Stroke ();
+				
+				surface.Context.Color = new Cairo.Color (0, 0, 0, 0.2);
+			} else {
+				x = surface.Width - logicalRect.Width / 2;
+				y = logicalRect.Height / 2;
+				surface.Context.Color = new Cairo.Color (0, 0, 0, 0.6);
+			}
 			
 			// draw text
 			surface.Context.MoveTo (x - logicalRect.Width / 2, y - logicalRect.Height / 2);
 			
 			Pango.CairoHelper.LayoutPath (surface.Context, layout);
 			surface.Context.LineWidth = 2;
-			surface.Context.Color = new Cairo.Color (0, 0, 0, 0.2);
 			surface.Context.StrokePreserve ();
 			surface.Context.Color = new Cairo.Color (1, 1, 1, 1);
 			surface.Context.Fill ();
@@ -720,7 +750,7 @@ namespace Docky.Items
 		public Docky.Menus.MenuList GetMenuItems ()
 		{
 			try {
-				return OnGetMenuItems ();
+				return OnGetMenuItems ().Combine (RemoteMenuItems);
 			} catch (Exception e) {
 				Log<AbstractDockItem>.Error (e.Message);
 				Log<AbstractDockItem>.Debug (e.StackTrace);

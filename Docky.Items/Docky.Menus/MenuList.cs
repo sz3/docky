@@ -85,6 +85,12 @@ namespace Docky.Menus
 			}
 		}
 		
+		public void Remove (MenuItem item)
+		{
+			foreach (List<MenuItem> lst in list.Values)
+				lst.Remove (item);
+		}
+		
 		public bool Any ()
 		{
 			return list.Values.Any (sl => sl.Any ());
@@ -93,6 +99,34 @@ namespace Docky.Menus
 		public int Count ()
 		{
 			return list.Values.Count ();
+		}
+		
+		public MenuList Combine (MenuList other)
+		{
+			MenuList result = new MenuList ();
+			
+			foreach (KeyValuePair<MenuListContainer, List<MenuItem>> kvp in list)
+			{
+				MenuListContainer container = kvp.Key;
+				result[container].AddRange (kvp.Value);
+			}
+			
+			foreach (KeyValuePair<MenuListContainer, List<MenuItem>> kvp in other.list)
+			{
+				MenuListContainer container = kvp.Key;
+				result[container].AddRange (kvp.Value);
+			}
+			
+			// copy other first so any conflicts are resolved with this copy winning
+			foreach (KeyValuePair<MenuListContainer, string> kvp in other.titles) {
+				result.SetContainerTitle (kvp.Key, kvp.Value);
+			}
+			
+			foreach (KeyValuePair<MenuListContainer, string> kvp in titles) {
+				result.SetContainerTitle (kvp.Key, kvp.Value);
+			}
+			
+			return result;
 		}
 	}
 }

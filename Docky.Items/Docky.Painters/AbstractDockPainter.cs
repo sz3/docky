@@ -41,7 +41,11 @@ namespace Docky.Painters
 			get { return false; }
 		}
 		
-		public virtual int MinimumSize {
+		public virtual int MinimumHeight {
+			get { return 0; }
+		}
+		
+		public virtual int MinimumWidth {
 			get { return 400; }
 		}
 		

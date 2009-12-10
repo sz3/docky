@@ -46,7 +46,7 @@ namespace WeatherDocklet
 	/// A docklet to display the current temp and condition as an icon and
 	/// use a painter to display forecast information.
 	/// </summary>
-	public class WeatherDocklet : AbstractDockItem
+	public class WeatherDocklet : IconDockItem
 	{
 		public override string UniqueID ()
 		{
@@ -79,6 +79,7 @@ namespace WeatherDocklet
 			WeatherController.WeatherUpdated += HandleWeatherUpdated;
 			
 			HoverText = Catalog.GetString ("Fetching data...");
+			Icon = "weather-few-clouds";
 		}
 		
 		/// <summary>
@@ -111,6 +112,7 @@ namespace WeatherDocklet
 		{
 			Gtk.Application.Invoke (delegate {
 				HoverText = e.Error;
+				Icon = "weather-few-clouds";
 				Status = WeatherDockletStatus.Error;
 				State &= ~ItemState.Wait;
 				QueueRedraw ();
@@ -132,110 +134,55 @@ namespace WeatherDocklet
 				HoverText = weather.Condition + "   " +
 					weather.Temp + WeatherUnits.TempUnit + feelsLike +
 					"   " + weather.City;
+				Icon = WeatherController.Weather.Image;
 				Status = WeatherDockletStatus.Normal;
 				State &= ~ItemState.Wait;
 				QueueRedraw ();
 			});
 		}
 		
-		/// <summary>
-		/// Draws an icon onto a context using the specified offset and size.
-		/// </summary>
-		/// <param name="cr">
-		/// A <see cref="Context"/> to draw the icon.
-		/// </param>
-		/// <param name="icon">
-		/// A <see cref="System.String"/> containing the icon name to use.
-		/// </param>
-		/// <param name="xoffset">
-		/// A <see cref="System.Int32"/> indicating the x offset for the icon.
-		/// </param>
-		/// <param name="yoffset">
-		/// A <see cref="System.Int32"/> indicating the y offset for the icon.
-		/// </param>
-		/// <param name="size">
-		/// A <see cref="System.Int32"/> indicating the size of the icon.
-		/// </param>
-		public static void RenderIconOntoContext (Context cr, string icon, int xoffset, int yoffset, int size)
+		protected override void PostProcessIconSurface (DockySurface surface)
 		{
-			RenderIconOntoContext (cr, icon, xoffset, yoffset, size, 1);
-		}
-		
-		/// <summary>
-		/// Draws an icon onto a context using the specified offset and size.
-		/// </summary>
-		/// <param name="cr">
-		/// A <see cref="Context"/> to draw the icon.
-		/// </param>
-		/// <param name="icon">
-		/// A <see cref="System.String"/> containing the icon name to use.
-		/// </param>
-		/// <param name="xoffset">
-		/// A <see cref="System.Int32"/> indicating the x offset for the icon.
-		/// </param>
-		/// <param name="yoffset">
-		/// A <see cref="System.Int32"/> indicating the y offset for the icon.
-		/// </param>
-		/// <param name="size">
-		/// A <see cref="System.Int32"/> indicating the size of the icon.
-		/// </param>
-		/// <param name="alpha">
-		/// A <see cref="double"/> indicating the alpha to use.
-		/// </param>
-		public static void RenderIconOntoContext (Context cr, string icon, int xoffset, int yoffset, int size, double alpha)
-		{
-			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (icon, size))
-			{
-				CairoHelper.SetSourcePixbuf (cr, pbuf, xoffset, yoffset);
-				cr.PaintWithAlpha (alpha);
-			}
-		}
-		
-		protected override void PaintIconSurface (DockySurface surface)
-		{
+			if (Status == WeatherDockletStatus.Error)
+				return;
+			if (Status == WeatherDockletStatus.Initializing)
+				return;
+			
 			int size = Math.Min (surface.Width, surface.Height);
 			Context cr = surface.Context;
 			
-			switch (Status) {
-			case WeatherDockletStatus.Error:
-				RenderIconOntoContext (cr, "network-offline", 0, 0, size);
-				cr.Fill ();
-				break;
-
-			default:
-			case WeatherDockletStatus.ManualReload:
-			case WeatherDockletStatus.Normal:
-			case WeatherDockletStatus.Reloading:
-				RenderIconOntoContext (cr, WeatherController.Weather.Image, 0, 0, size, 1);
-				
-				if (size >= 32) {
-					Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-					layout.FontDescription = new Gtk.Style().FontDescription;
-					layout.FontDescription.Weight = Pango.Weight.Bold;
-					layout.Ellipsize = Pango.EllipsizeMode.None;
-					
-					Pango.Rectangle inkRect, logicalRect;
-					
-					layout.Width = Pango.Units.FromPixels (size / 2);
-					layout.SetText (WeatherController.Weather.Temp + WeatherUnits.TempUnit);
-					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (size / 3.5));
-
-					layout.GetPixelExtents (out inkRect, out logicalRect);
-					cr.MoveTo ((size - inkRect.Width) / 2, size - logicalRect.Height);
-
-					Pango.CairoHelper.LayoutPath (cr, layout);
-					cr.LineWidth = 4;
-					cr.Color = new Cairo.Color (0, 0, 0, 0.5);
-					cr.StrokePreserve ();
-
-					cr.Color = new Cairo.Color (1, 1, 1, 0.8);
-					cr.Fill ();
-				}
-				break;
-
-			case WeatherDockletStatus.Initializing:
-				break;
-			}
+			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
+			layout.FontDescription = new Gtk.Style().FontDescription;
+			layout.FontDescription.Weight = Pango.Weight.Bold;
+			layout.Ellipsize = Pango.EllipsizeMode.None;
+			
+			Pango.Rectangle inkRect, logicalRect;
+			
+			layout.Width = Pango.Units.FromPixels (size);
+			layout.SetText (WeatherController.Weather.Temp + WeatherUnits.TempUnit);
+			if (IsSmall)
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (size / 2.5));
+			else
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (size / 3.5));
+			
+			layout.GetPixelExtents (out inkRect, out logicalRect);
+			cr.MoveTo ((size - inkRect.Width) / 2, size - logicalRect.Height);
+			
+			Pango.CairoHelper.LayoutPath (cr, layout);
+			cr.LineWidth = 2;
+			cr.Color = new Cairo.Color (0, 0, 0, 0.8);
+			cr.StrokePreserve ();
+			
+			cr.Color = new Cairo.Color (1, 1, 1, 0.8);
+			cr.Fill ();
+		}
+		
+		protected override Gdk.Pixbuf ProcessPixbuf (Gdk.Pixbuf pbuf)
+		{
+			if (Status != WeatherDockletStatus.Error && Status != WeatherDockletStatus.Initializing)
+				return pbuf;
+			
+			return DockServices.Drawing.MonochromePixbuf (pbuf);
 		}
 		
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)

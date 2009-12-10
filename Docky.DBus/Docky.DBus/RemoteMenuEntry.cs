@@ -16,30 +16,26 @@
 // 
 
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+
+using Docky.Menus;
 
 namespace Docky.DBus
 {
 
 
-	public class RemoteMenuEntry : RemoteItem
+	public class RemoteMenuEntry : MenuItem
 	{
-		public event EventHandler Activated;
-
-		public string Name { get; private set; }
-		public string Icon { get; private set; }
+		public uint ID { get; private set; }
 		public string Title { get; private set; }
 
-		public RemoteMenuEntry (uint id, string name, string icon, string title) : base(id)
+		public RemoteMenuEntry (uint id, string name, string icon, string title) : base(name, icon)
 		{
-			Name = name;
-			Icon = icon;
+			ID = id;
 			Title = title;
-		}
-
-		public void OnActivated ()
-		{
-			if (Activated != null)
-				Activated (this, EventArgs.Empty);
 		}
 	}
 }

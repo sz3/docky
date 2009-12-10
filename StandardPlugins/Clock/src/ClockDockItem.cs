@@ -146,6 +146,10 @@ namespace Clock
 			GLib.Timeout.Add (1000, ClockUpdateTimer);
 		}
 		
+		public override bool Square {
+			get { return !IsSmall || !ShowDigital; }
+		}
+		
 		public override string UniqueID ()
 		{
 			return "Clock";
@@ -165,10 +169,18 @@ namespace Clock
 			if (!File.Exists (file))
 				return;
 			
-			Gdk.Pixbuf pbuf = Rsvg.Tool.PixbufFromFileAtSize (file, size, size);
-			Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, 0, 0);
-			cr.Paint ();
-			pbuf.Dispose ();
+			using (Gdk.Pixbuf pbuf = Rsvg.Tool.PixbufFromFileAtSize (file, size, size)) {
+				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, 0, 0);
+				cr.Paint ();
+			}
+		}
+		
+		protected override DockySurface CreateIconBuffer (DockySurface model, int size)
+		{
+			if (Square)
+				return base.CreateIconBuffer (model, size);
+			else
+				return new DockySurface (2 * size, size, model);
 		}
 
 		protected override void PaintIconSurface (DockySurface surface)
@@ -180,13 +192,15 @@ namespace Clock
 			
 			int size = Math.Min (surface.Width, surface.Height);
 			
-			if (ShowDigital)
-				MakeDigitalIcon (surface.Context, size);
+			if (ShowDigital && Square)
+				MakeSquareDigitalIcon (surface.Context, size);
+			else if (ShowDigital && !Square)
+				MakeRectangularDigitalIcon (surface.Context, size);
 			else
 				MakeAnalogIcon (surface.Context, size);
 		}
 		
-		void MakeDigitalIcon (Context cr, int size)
+		void MakeSquareDigitalIcon (Context cr, int size)
 		{
 			// useful sizes
 			int timeSize = size / 4;
@@ -264,6 +278,81 @@ namespace Clock
 				layout.GetPixelExtents (out inkRect, out logicalRect);
 				cr.MoveTo (center + (center - inkRect.Width) / 2, yOffset);
 				Pango.CairoHelper.LayoutPath (cr, layout);
+				cr.Fill ();
+			}
+		}
+		
+		void MakeRectangularDigitalIcon (Context cr, int size)
+		{
+			// useful sizes
+			int timeSize = size / 3;
+			int dateSize = size / 4;
+			int ampmSize = size / 4;
+			int spacing = timeSize / 2;
+			
+			// shared by all text
+			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
+			
+			layout.FontDescription = new Gtk.Style().FontDescription;
+			layout.FontDescription.Weight = Pango.Weight.Bold;
+			layout.Ellipsize = Pango.EllipsizeMode.None;
+			layout.Width = Pango.Units.FromPixels (size);
+			
+			
+			// draw the time, outlined
+			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (timeSize);
+			
+			if (ShowMilitary)
+				layout.SetText (DateTime.Now.ToString ("HH:mm"));
+			else
+				layout.SetText (DateTime.Now.ToString ("h:mm"));
+			
+			Pango.Rectangle inkRect, logicalRect;
+			layout.GetPixelExtents (out inkRect, out logicalRect);
+			
+			int timeYOffset = timeSize / 2;
+			if (!ShowDate)
+				timeYOffset += timeSize / 2;
+			cr.MoveTo (size - inkRect.Width / 2, timeYOffset);
+			
+			Pango.CairoHelper.LayoutPath (cr, layout);
+			cr.LineWidth = 2;
+			cr.Color = new Cairo.Color (0, 0, 0, 0.5);
+			cr.StrokePreserve ();
+			cr.Color = new Cairo.Color (1, 1, 1, 0.8);
+			cr.Fill ();
+			
+			// draw the date, outlined
+			if (ShowDate) {
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (dateSize);
+				
+				layout.SetText (DateTime.Now.ToString ("MMM dd"));
+				layout.GetPixelExtents (out inkRect, out logicalRect);
+				cr.MoveTo (size - inkRect.Width / 2, size - spacing - dateSize);
+				
+				Pango.CairoHelper.LayoutPath (cr, layout);
+				cr.Color = new Cairo.Color (0, 0, 0, 0.5);
+				cr.StrokePreserve ();
+				cr.Color = new Cairo.Color (1, 1, 1, 0.8);
+				cr.Fill ();
+			}
+			
+			if (!ShowMilitary) {
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (ampmSize);
+				
+				if (DateTime.Now.Hour < 12)
+					layout.SetText ("am");
+				else
+					layout.SetText ("pm");
+				
+				layout.GetPixelExtents (out inkRect, out logicalRect);
+				int yOffset = timeSize;
+				if (!ShowDate)
+					yOffset += timeSize / 2;
+				cr.MoveTo (2 * size - logicalRect.Width, yOffset - inkRect.Height);
+				
+				Pango.CairoHelper.LayoutPath (cr, layout);
+				cr.Color = new Cairo.Color (1, 1, 1, 0.8);
 				cr.Fill ();
 			}
 		}

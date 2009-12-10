@@ -10,9 +10,7 @@ FILES = \
 	Docky.DBus/DockyDBusItem.cs \
 	Docky.DBus/IDockyDBus.cs \
 	Docky.DBus/IDockyDBusItem.cs \
-	Docky.DBus/RemoteItem.cs \
-	Docky.DBus/RemoteMenuEntry.cs \
-	Docky.DBus/RemoteDockItem.cs
+	Docky.DBus/RemoteMenuEntry.cs
 
 PROJECT_REFERENCES = \
 	Docky.Items \

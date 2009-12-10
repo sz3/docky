@@ -57,9 +57,7 @@
     <Compile Include="Docky.DBus\IDockyDBusItem.cs" />
     <Compile Include="Docky.DBus\DockyDBusItem.cs" />
     <Compile Include="Docky.DBus\DockyDBus.cs" />
-    <Compile Include="Docky.DBus\RemoteItem.cs" />
     <Compile Include="Docky.DBus\RemoteMenuEntry.cs" />
-    <Compile Include="Docky.DBus\RemoteDockItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Docky.Services\Docky.Services.csproj">

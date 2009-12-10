@@ -90,6 +90,12 @@ namespace Docky.DBus
 		
 		public void UnregisterItem (AbstractDockItem item)
 		{
+			if (!items.ContainsKey (item))
+				return;
+			
+			items[item].Dispose ();
+			items.Remove (item);
+			
 			ObjectPath path = new ObjectPath (PathForItem (item));
 			Bus.Session.Unregister (path);
 		}

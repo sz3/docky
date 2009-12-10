@@ -37,9 +37,10 @@ namespace Docky.Items
 	{
 		public event EventHandler IconUpdated;
 		
+		string remote_icon;
 		string icon;
 		public string Icon {
-			get { return icon; }
+			get { return string.IsNullOrEmpty (remote_icon) ? icon : remote_icon; }
 			protected set {
 				if (icon == value)
 					return;
@@ -86,6 +87,14 @@ namespace Docky.Items
 		public IconDockItem ()
 		{
 			Icon = "";
+		}
+		
+		public void SetRemoteIcon (string icon)
+		{
+			remote_icon = icon;
+			
+			OnIconUpdated ();
+			QueueRedraw ();
 		}
 		
 		protected override void PaintIconSurface (DockySurface surface)
