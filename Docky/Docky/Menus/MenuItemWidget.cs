@@ -37,7 +37,8 @@ namespace Docky.Menus
 		const int MinWidth = 100;
 		const int MaxWidth = 350;
 		const int FontSize = 11;
-		const int IconBuffer = 3;
+		const int Padding = 4;
+		const int IconBuffer = Padding - 1;
 		
 		public MenuItem item;
 		
@@ -86,9 +87,9 @@ namespace Docky.Menus
 			layout.GetPixelExtents (out ink, out logical);
 			
 			HasTooltip = logical.Width > MaxWidth;
-			TextWidth = Math.Min (MaxWidth, Math.Max (MinWidth, logical.Width)) + 9;
+			TextWidth = Math.Min (MaxWidth, Math.Max (MinWidth, logical.Width)) + 2 * Padding + 1;
 			if (UsePixbufs)
-				TextWidth += MenuHeight + 4;
+				TextWidth += MenuHeight + Padding;
 			SetSizeRequest (TextWidth, MenuHeight);
 		}
 
@@ -158,7 +159,7 @@ namespace Docky.Menus
 		{
 			int iconSize = allocation.Height - IconBuffer * 2;
 			
-			int x = allocation.X + 4 + ((iconSize - surface.Width) / 2);
+			int x = allocation.X + Padding + ((iconSize - surface.Width) / 2);
 			int y = allocation.Y + IconBuffer + ((iconSize - surface.Height) / 2);
 			
 			cr.SetSource (surface.Internal, x, y);
@@ -238,9 +239,9 @@ namespace Docky.Menus
 				char accel;
 				layout.SetMarkupWithAccel (item.Text, '_', out accel);
 				if (UsePixbufs)
-					layout.Width = Pango.Units.FromPixels (allocation.Width - allocation.Height - 13);
+					layout.Width = Pango.Units.FromPixels (allocation.Width - allocation.Height - 3 * Padding - 1);
 				else
-					layout.Width = Pango.Units.FromPixels (allocation.Width - 9);
+					layout.Width = Pango.Units.FromPixels (allocation.Width - 2 * Padding - 1);
 				layout.FontDescription = Style.FontDescription;
 				layout.Ellipsize = Pango.EllipsizeMode.End;
 				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (FontSize);
@@ -251,9 +252,9 @@ namespace Docky.Menus
 				
 				int offset;
 				if (UsePixbufs)
-					offset = allocation.Height + 8;
+					offset = allocation.Height + 2 * Padding;
 				else
-					offset = 4;
+					offset = Padding;
 				cr.MoveTo (allocation.X + offset, allocation.Y + (allocation.Height - logical.Height) / 2);
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.Color = TextColor.SetAlpha (item.Disabled ? 0.5 : 1);
