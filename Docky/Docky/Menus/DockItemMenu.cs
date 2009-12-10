@@ -162,6 +162,14 @@ namespace Docky.Menus
 				textColor = new Cairo.Color (1, 1, 1);
 			}
 			
+			bool hasIcon = false;
+			foreach (MenuItem item in items.DisplayItems) {
+				if (item.ShowIcons) {
+					hasIcon = true;
+					break;
+				}
+			}
+			
 			bool first = true;
 			foreach (MenuItem item in items.DisplayItems) {
 				if (item is SeparatorMenuItem) {
@@ -177,6 +185,7 @@ namespace Docky.Menus
 					MenuItemWidget menuItem = new MenuItemWidget (item);
 					menuItem.SelectedChanged += HandleSelectedChanged;
 					menuItem.TextColor = textColor;
+					menuItem.MenuShowingIcons = hasIcon;
 					
 					first = false;
 					vbox.PackStart (menuItem, false, false, 0);

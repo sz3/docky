@@ -45,6 +45,8 @@ namespace Docky.Menus
 		
  		public bool Selected { get; set; }
 		
+		public bool MenuShowingIcons { get; set; }
+		
 		public Cairo.Color TextColor { get; set; }
 		
 		public int TextWidth { get; protected set; }
@@ -247,7 +249,7 @@ namespace Docky.Menus
 				layout.GetPixelExtents (out ink, out logical);
 				
 				int offset;
-				if (item.ShowIcons)
+				if (item.ShowIcons || MenuShowingIcons)
 					offset = allocation.Height + 2 * Padding;
 				else
 					offset = Padding;
