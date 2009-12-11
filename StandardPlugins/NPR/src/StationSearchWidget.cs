@@ -58,18 +58,14 @@ namespace NPR
 		}
 		
 		protected virtual void SearchClicked (object sender, System.EventArgs e)
-		{
-			uint zip;
-			if (!uint.TryParse (ZipEntry.InnerEntry.Text, out zip))
-				return;
-			
+		{			
 			my_stations.Sensitive = true;
 			
 			tileview.Clear ();
 			
 			DockServices.System.RunOnThread (() => {
 				// grab a list of nearby stations, sorted by closeness to the supplied query
-				IEnumerable<Station> stations = NPR.SearchStations (zip);
+				IEnumerable<Station> stations = NPR.SearchStations (ZipEntry.InnerEntry.Text);
 
 				stations.ToList ().ForEach (s => {
 					if (s.IsLoaded)
