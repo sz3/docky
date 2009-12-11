@@ -130,6 +130,8 @@ DOCKY_SERVICES_LIBS="-r:$(pwd)/build/Docky.Services.dll"
 AC_SUBST([DOCKY_SERVICES_LIBS])
 DOCKY_WIDGETS_LIBS="-r:$(pwd)/build/Docky.Widgets.dll"
 AC_SUBST([DOCKY_WIDGETS_LIBS])
+DOCKY_WINDOWING_LIBS="-r:$(pwd)/build/Docky.Windowing.dll"
+AC_SUBST([DOCKY_WINDOWING_LIBS])
 
 GIO_SHARP_LIBS="-r:$(pwd)/build/gio-sharp.dll"
 AC_SUBST([GIO_SHARP_LIBS])

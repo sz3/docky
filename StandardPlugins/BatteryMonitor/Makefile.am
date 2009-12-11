@@ -27,8 +27,8 @@ RESOURCES = \
 REFERENCES =  \
 	System \
 	System.Core \
-	Mono.Cairo \
 	Mono.Posix \
+	$(MONO_CAIRO_LIBS) \
 	$(DOCKY_CAIRO_LIBS) \
 	$(DOCKY_ITEMS_LIBS) \
 	$(DOCKY_SERVICES_LIBS) \

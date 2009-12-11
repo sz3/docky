@@ -29,13 +29,11 @@ FILES = \
 	gtk-gui/Docky.Widgets.AbstractLoginWidget.cs \
 	gtk-gui/generated.cs
 
-PROJECT_REFERENCES = \
-	Docky.Services
-
 REFERENCES =  \
 	System \
 	System.Core \
 	Mono.Posix \
+	$(DOCKY_SERVICES_LIBS) \
 	$(GIO_SHARP_LIBS) \
 	$(GTK_SHARP_20_LIBS)
 
