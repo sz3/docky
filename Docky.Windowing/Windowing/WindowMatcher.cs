@@ -444,9 +444,8 @@ namespace Docky.Windowing
 			// these are sanitized results
 			foreach (string sanitizedCmd in result
 				.Select (s => s.Split (new []{'/', '\\'}).Last ())
-				.Where (s => !prefix_filters.Any (f => f.IsMatch (s)))
 			    .Distinct ()
-			    .Where (cmd => !string.IsNullOrEmpty (cmd))) {
+				.Where (s => !string.IsNullOrEmpty (s) && !prefix_filters.Any (f => f.IsMatch (s)))) {
 				
 				yield return sanitizedCmd;
 				
@@ -543,7 +542,8 @@ namespace Docky.Windowing
 					// CommandLineForPid already splits based on \\ and takes the last entry, so do the same here
 					vexec = exec.Substring (startIndex).Split (new [] {@"\\"}, StringSplitOptions.RemoveEmptyEntries).Last ().ToLower ();
 					// remove the trailing " and anything after it
-					vexec = vexec.Substring (0, vexec.IndexOf ("\""));
+					if (vexec.Contains ("\""))
+					    vexec = vexec.Substring (0, vexec.IndexOf ("\""));
 				} else {
 					string [] parts = exec.Split (' ');
 					
