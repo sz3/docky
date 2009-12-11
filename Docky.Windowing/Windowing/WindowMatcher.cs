@@ -366,9 +366,7 @@ namespace Docky.Windowing
 					
 					// otherwise do a match on the commandline
 					command_line.AddRange (CommandLineForPid (pids.ElementAt (currentPid++))
-						.Select (cmd => cmd.Replace (@"\", @"\\"))
-						.Where (cmd => !string.IsNullOrEmpty (cmd))
-						.Distinct ());
+						.Select (cmd => cmd.Replace (@"\", @"\\")));
 					if (command_line.Count () == 0)
 						continue;
 					foreach (string cmd in command_line) {
@@ -446,7 +444,10 @@ namespace Docky.Windowing
 			// these are sanitized results
 			foreach (string sanitizedCmd in result
 				.Select (s => s.Split (new []{'/', '\\'}).Last ())
-				.Where (s => !prefix_filters.Any (f => f.IsMatch (s)))) {
+				.Where (s => !prefix_filters.Any (f => f.IsMatch (s)))
+			    .Distinct ()
+			    .Where (cmd => !string.IsNullOrEmpty (cmd))) {
+				
 				yield return sanitizedCmd;
 				
 				// some wine apps are launched via a shell script that sets the proc name to "app.exe"
@@ -541,8 +542,8 @@ namespace Docky.Windowing
 					int startIndex = exec.IndexOf ("wine ") + 5; // length of 'wine '
 					// CommandLineForPid already splits based on \\ and takes the last entry, so do the same here
 					vexec = exec.Substring (startIndex).Split (new [] {@"\\"}, StringSplitOptions.RemoveEmptyEntries).Last ().ToLower ();
-					if (vexec.EndsWith ("\""))
-						vexec = vexec.Substring (0, vexec.Length - 1);
+					// remove the trailing " and anything after it
+					vexec = vexec.Substring (0, vexec.IndexOf ("\""));
 				} else {
 					string [] parts = exec.Split (' ');
 					
