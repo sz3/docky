@@ -6,6 +6,7 @@ import glib
 import dbus
 import dbus.glib
 import sys
+import urllib
 import os
 
 from zeitgeist.client import ZeitgeistClient
@@ -30,21 +31,34 @@ class MostUsedProvider():
 		today = time.time()
 		delta = today - 14 * 86400
 
+		def exists(uri):
+		 	return not uri.startswith("file://") or os.path.exists(urllib.unquote(str(uri[7:])))
+
 		def _handle_find_events(ids):
 			self._zg.get_events(ids, _handle_get_events)
 
 		def _handle_get_events(events):
 			uris = []
+			counter = 0
 			for event in events:
-				for subject in event.subjects:
-					uris.append(subject)
+				if counter < 5:
+					for subject in event.subjects:
+						if counter < 5 and exists(subject.uri):
+							uris.append(subject)
+							counter+=1
+						elif counter >= 5:
+							break
+						else:
+							print "skipping", subject.uri
+				else:
+					break
 			handler(directory, uris)
 
 		event = Event()
 		subject = Subject()
 		subject.set_origin(directory)
 		event.set_subjects([subject])
-		self._zg.find_event_ids_for_templates([event],_handle_find_events, [delta*1000, today*1000], num_events=5, result_type=5)
+		self._zg.find_event_ids_for_templates([event],_handle_find_events, [delta*1000, today*1000], num_events=100, result_type=5) 
 
 class DockyUriItem():
 	def __init__(self, path):
@@ -91,7 +105,7 @@ class DockyUriItem():
 
 	def _handle_get_most_used(self, directory, uris):
 		for subject in uris:
-			menu_id = self.iface.AddMenuItem (subject.text, "gtk-file", "Recent Items")
+			menu_id = self.iface.AddMenuItem (subject.text, "gtk-file", "Most used Items")
 			self.id_map[menu_id] = subject.uri
 		
 	def menu_pressed_signal(self, menu_id):

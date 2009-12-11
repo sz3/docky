@@ -245,7 +245,7 @@ namespace Docky {
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
-            this.DefaultWidth = 400;
+            this.DefaultWidth = 488;
             this.DefaultHeight = 482;
             this.Show();
             this.start_with_computer_checkbutton.Toggled += new System.EventHandler(this.OnStartWithComputerCheckbuttonToggled);
