@@ -122,9 +122,9 @@ class DockySink():
 
 		paths = self._iface.DockItemPaths()
 		
-		self.bus.add_signal_receiver (self.item_added, "ItemAdded", dockyiface, dockybus, dockypath)
-		self.bus.add_signal_receiver (self.item_removed, "ItemRemoved", dockyiface, dockybus, dockypath)
-		self.bus.add_signal_receiver (self.shut_down, "ShuttingDown", dockyiface, dockybus, dockypath)
+		self.bus.add_signal_receiver (self.item_added,   "ItemAdded",    dockyiface, dockybus, dockypath)
+		self.bus.add_signal_receiver (self.item_removed, "ItemRemoved",  dockyiface, dockybus, dockypath)
+		self.bus.add_signal_receiver (self.shut_down,    "ShuttingDown", dockyiface, dockybus, dockypath)
 		
 		for pathtoitem in paths:
 			obj = self.bus.get_object (dockybus, pathtoitem)
