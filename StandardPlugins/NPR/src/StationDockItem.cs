@@ -102,30 +102,29 @@ namespace NPR
 			List<StationUrl> urls = OwnedStation.StationUrls.ToList ();
 			
 			if (urls.Any (u => u.UrlType == StationUrlType.OrgHomePage)) {
-				list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Home Page"),
+				list[MenuListContainer.Header].Add (new MenuItem (Catalog.GetString ("Home Page"),
 						Gtk.Stock.Home,
 						delegate {
 							Clicked (1, Gdk.ModifierType.None, 0, 0);
 						}));
 			}
 			if (urls.Any (u => u.UrlType == StationUrlType.ProgramSchedule)) {
-				list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Program Schedule"),
+				list[MenuListContainer.Header].Add (new MenuItem (Catalog.GetString ("Program Schedule"),
 						"gnome-calendar",
 						delegate {
 							DockServices.System.Open (urls.First (u => u.UrlType == StationUrlType.ProgramSchedule).Target);
 						}));
 			}
 			if (urls.Any (u => u.UrlType == StationUrlType.PledgePage)) {
-				list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Donate"),
+				list[MenuListContainer.Header].Add (new MenuItem (Catalog.GetString ("Donate"),
 						"emblem-money",
 						delegate {
 							DockServices.System.Open (urls.First (u => u.UrlType == StationUrlType.PledgePage).Target);
 						}));
 			}
-
-			if (list.Count () > 0)
-				list[MenuListContainer.Actions].Add (new SeparatorMenuItem ());
-
+			
+			list.SetContainerTitle (MenuListContainer.CustomOne, Catalog.GetString ("Live Streams"));
+			
 			urls.Where (u => u.UrlType >= StationUrlType.AudioMP3Stream).ToList ().ForEach (url => {
 				string format = "", icon = "";
 				string port = "";
@@ -155,16 +154,14 @@ namespace NPR
 				string formatStr = string.IsNullOrEmpty (format) ? "{0} " : "{0} ({1}) ";
 				formatStr += string.IsNullOrEmpty (port) ? "" : " port {2}";
 								
-				list[MenuListContainer.Actions].Add (new MenuItem (string.Format (formatStr, url.Title, format, port),
+				list[MenuListContainer.CustomOne].Add (new MenuItem (string.Format (formatStr, url.Title, format, port),
 					icon,
 					delegate {
 						OwnedStation.PlayStream (url.Target);
 					}));
 			});
-			
-			list[MenuListContainer.Actions].Add (new SeparatorMenuItem ());
-			
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Settings"),
+						
+			list[MenuListContainer.Footer].Add (new MenuItem (Catalog.GetString ("Settings"),
 					Gtk.Stock.Preferences,
 					delegate {
 						NPR.ShowConfig ();
