@@ -1900,47 +1900,52 @@ namespace Docky.Interface
 			double opacity = Math.Min (1, (render_time - item.AddTime).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds);
 			opacity = Math.Pow (opacity, 2);
 			DockySurface icon;
+			
+			double renderZoom = 1, renderRotation = 0;
+			
+			if (item.RotateWithDock) {
+				switch (Position) {
+				case DockPosition.Top:
+					renderRotation = Math.PI;
+					break;
+				case DockPosition.Left:
+					renderRotation = Math.PI * 1.5;
+					break;
+				case DockPosition.Right:
+					renderRotation = Math.PI * .5;
+					break;
+				default:
+				case DockPosition.Bottom:
+					renderRotation = 0;
+					break;
+				}
+			}
+			
 			if (item.Zoom) {
 				if (item.ScalableRendering && center.Zoom == 1) {
 					icon = item.IconSurface (surface, IconSize, IconSize);
-					icon.ShowWithOptions (surface, center.Center, 1, 0, opacity);
 				} else {
 					icon = item.IconSurface (surface, ZoomedIconSize, IconSize);
-					icon.ShowWithOptions (surface, center.Center, center.Zoom / zoomOffset, 0, opacity);
+					renderZoom = center.Zoom / zoomOffset;
 				}
 			} else {
-				double rotation = 0;
-				
-				if (item.RotateWithDock) {
-					switch (Position) {
-					case DockPosition.Top:
-						rotation = Math.PI;
-						break;
-					case DockPosition.Left:
-						rotation = Math.PI * 1.5;
-						break;
-					case DockPosition.Right:
-						rotation = Math.PI * .5;
-						break;
-					case DockPosition.Bottom:
-						rotation = 0;
-						break;
-					}
-				}
-				
 				icon = item.IconSurface (surface, IconSize, IconSize);
-				icon.ShowWithOptions (surface, center.Center, 1, rotation, opacity);
 			}
 			
-			if (darken > 0 || lighten > 0) {
+			// The big expensive paint happens right here!
+			icon.ShowWithOptions (surface, center.Center, renderZoom, renderRotation, opacity);
+			
+			if (lighten > 0) {
+				surface.Context.Operator = Operator.Add;
+				icon.ShowWithOptions (surface, center.Center, renderZoom, renderRotation, opacity * lighten);
+				surface.Context.Operator = Operator.Over;
+			}
+			
+			if (darken > 0) {
 				Gdk.Rectangle area = DrawRegionForItemValue (item, center);
 				surface.Context.Rectangle (area.X, area.Y, area.Height, area.Width);
 				
-				if (darken > 0) {
-					surface.Context.Color = new Cairo.Color (0, 0, 0, darken);
-				} else if (lighten > 0) {
-					surface.Context.Color = new Cairo.Color (1, 1, 1, lighten);
-				}
+				surface.Context.Color = new Cairo.Color (0, 0, 0, darken);
 				
 				surface.Context.Operator = Operator.Atop;
 				surface.Context.Fill ();
