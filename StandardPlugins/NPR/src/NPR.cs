@@ -99,10 +99,10 @@ namespace NPR
 				return XElement.Load (BuildQueryString (url, query));
 		}
 		
-		public static IEnumerable<Station> SearchStations (uint zip) 
+		public static IEnumerable<Station> SearchStations (string zip) 
 		{
 			NameValueCollection query = new NameValueCollection ();
-			query["zip"] = zip.ToString ();	
+			query["zip"] = zip;
 				
 			XElement result = APIReturn (stationsUrl, query);
 			
