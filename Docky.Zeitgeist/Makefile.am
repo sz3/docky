@@ -9,7 +9,7 @@ FILES = \
 	Zeitgeist/ZeitgeistFilter.cs \
 	Zeitgeist/ZeitgeistProxy.cs
 
-PROJECT_REFERENCES = \
+PROJECT_REFERENCES= \
 	Docky.Services
 
 REFERENCES =  \

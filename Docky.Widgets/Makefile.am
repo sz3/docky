@@ -29,7 +29,7 @@ FILES = \
 	gtk-gui/Docky.Widgets.AbstractLoginWidget.cs \
 	gtk-gui/generated.cs
 
-PROJECT_REFERENCES = \
+PROJECT_REFERENCES= \
 	Docky.Services
 
 REFERENCES =  \

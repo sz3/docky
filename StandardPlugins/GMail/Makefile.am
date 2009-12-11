@@ -20,9 +20,9 @@ RESOURCES = \
 	Resources/GMail.addin.xml
 
 PROJECT_REFERENCES = \
-	Docky.Services \
 	Docky.CairoHelper \
 	Docky.Items \
+	Docky.Services \
 	Docky.Widgets
 
 REFERENCES =  \
@@ -30,8 +30,8 @@ REFERENCES =  \
 	System.Web \
 	System.Xml \
 	System.Core \
-	Mono.Cairo \
 	Mono.Posix \
+	$(MONO_CAIRO_LIBS) \
 	$(GTK_SHARP_20_LIBS)
 
 MCS_FLAGS += -unsafe

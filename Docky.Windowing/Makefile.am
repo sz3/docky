@@ -18,9 +18,9 @@ FILES = \
     Windowing/DesktopFileChangedEventArgs.cs \
     Windowing/WindowMatcher.cs
 
-PROJECT_REFERENCES = \
+PROJECT_REFERENCES= \
 	Docky.Services
-
+	
 REFERENCES =  \
 	System \
 	System.Core \

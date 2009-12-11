@@ -10,6 +10,10 @@ FILES = \
 RESOURCES = \
 	Resources/RecentDocuments.addin.xml
 
+PROJECT_REFERENCES = \
+	Docky.Items \
+	Docky.Services
+
 REFERENCES =  \
 	System \
 	System.Xml \
@@ -17,6 +21,4 @@ REFERENCES =  \
 	System.Core \
 	Mono.Posix \
 	$(GIO_SHARP_LIBS) \
-	$(DOCKY_ITEMS_LIBS) \
-	$(DOCKY_SERVICES_LIBS) \
 	$(GTK_SHARP_20_LIBS)
