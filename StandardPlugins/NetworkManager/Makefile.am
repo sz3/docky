@@ -33,13 +33,15 @@ FILES = \
 RESOURCES = \
 	Resources/NetworkManager.addin.xml
 
+PROJECT_REFERENCES = \
+	Docky.Items \
+	Docky.Services
+
 REFERENCES =  \
 	System \
 	System.Core \
-	Mono.Cairo \
 	Mono.Posix \
-	$(DOCKY_ITEMS_LIBS) \
-	$(DOCKY_SERVICES_LIBS) \
+	$(MONO_CAIRO_LIBS) \
 	$(GLIB_SHARP_20_LIBS) \
 	$(NDESK_DBUS_10_LIBS) \
 	$(NDESK_DBUS_GLIB_10_LIBS) \

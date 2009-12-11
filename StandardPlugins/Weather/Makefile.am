@@ -28,8 +28,8 @@ RESOURCES = \
 
 PROJECT_REFERENCES = \
 	Docky.CairoHelper \
-	Docky.Services \
 	Docky.Items \
+	Docky.Services \
 	Docky.Widgets
 
 REFERENCES =  \
@@ -37,6 +37,6 @@ REFERENCES =  \
 	System.Core \
 	System.Web \
 	System.Xml \
-	Mono.Cairo \
 	Mono.Posix \
+	$(MONO_CAIRO_LIBS) \
 	$(GTK_SHARP_20_LIBS)

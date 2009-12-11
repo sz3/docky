@@ -24,13 +24,15 @@ RESOURCES = \
 	Resources/battery/battery_plugged.svg \
 	Resources/battery/battery_top.svg
 
+PROJECT_REFERENCES= \
+	Docky.CairoHelper \
+	Docky.Items \
+	Docky.Services
+
 REFERENCES =  \
 	System \
 	System.Core \
 	Mono.Posix \
 	$(MONO_CAIRO_LIBS) \
-	$(DOCKY_CAIRO_LIBS) \
-	$(DOCKY_ITEMS_LIBS) \
-	$(DOCKY_SERVICES_LIBS) \
 	$(NDESK_DBUS_10_LIBS) \
 	$(GTK_SHARP_20_LIBS)

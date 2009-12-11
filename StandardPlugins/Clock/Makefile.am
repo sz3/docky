@@ -14,13 +14,15 @@ FILES = \
 RESOURCES = \
 	Resources/Clock.addin.xml
 
+PROJECT_REFERENCES= \
+	Docky.CairoHelper \
+	Docky.Items \
+	Docky.Services
+
 REFERENCES =  \
 	System \
 	System.Core \
-	Mono.Cairo \
 	Mono.Posix \
-	$(DOCKY_CAIRO_LIBS) \
-	$(DOCKY_ITEMS_LIBS) \
-	$(DOCKY_SERVICES_LIBS) \
+	$(MONO_CAIRO_LIBS) \
 	$(LIBRSVG_SHARP_LIBS) \
 	$(GTK_SHARP_20_LIBS)

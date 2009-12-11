@@ -39,6 +39,9 @@ RESOURCES = \
 	Resources/Docky.Items.addin.xml
 
 PROJECT_REFERENCES= \
+	Docky.CairoHelper \
+	Docky.Services \
+	Docky.Windowing \
 	Docky.Zeitgeist
 
 REFERENCES =  \
@@ -46,9 +49,6 @@ REFERENCES =  \
 	System.Core \
 	Mono.Posix \
 	$(MONO_CAIRO_LIBS) \
-	$(DOCKY_CAIRO_LIBS) \
-	$(DOCKY_SERVICES_LIBS) \
-	$(DOCKY_WINDOWING_LIBS) \
 	$(GCONF_SHARP_20_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(GLIB_SHARP_20_LIBS) \

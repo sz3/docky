@@ -27,12 +27,14 @@ FILES = \
 	Gtk/MountOperation.cs \
 	GLibSharp/AsyncReadyCallbackNative.cs
 
+PROJECT_REFERENCES= \
+	Docky.CairoHelper
+        
 REFERENCES =  \
 	System \
 	System.Core \
 	Mono.Posix \
 	$(GIO_SHARP_LIBS) \
-	$(DOCKY_CAIRO_LIBS) \
 	$(MONO_CAIRO_LIBS) \
 	$(NDESK_DBUS_10_LIBS) \
 	$(NDESK_DBUS_GLIB_10_LIBS) \

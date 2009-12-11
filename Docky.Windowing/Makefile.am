@@ -18,11 +18,13 @@ FILES = \
     Windowing/DesktopFileChangedEventArgs.cs \
     Windowing/WindowMatcher.cs
 
+PROJECT_REFERENCES= \
+	Docky.Services
+	
 REFERENCES =  \
 	System \
 	System.Core \
 	Mono.Posix \
-	$(DOCKY_SERVICES_LIBS) \
 	$(GLIB_SHARP_20_LIBS) \
 	$(GIO_SHARP_LIBS) \
 	$(GTK_SHARP_20_LIBS) \

@@ -18,10 +18,11 @@ RESOURCES = \
 	Resources/NPR.addin.xml \
 	Resources/nprlogo.gif
 
-PROJECT_REFERENCES = 	Docky.CairoHelper \
-			Docky.Items \
-			Docky.Services \
-			Docky.Widgets
+PROJECT_REFERENCES = \
+	Docky.CairoHelper \
+	Docky.Items \
+	Docky.Services \
+	Docky.Widgets
 
 REFERENCES =  \
 	System \

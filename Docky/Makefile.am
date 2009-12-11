@@ -51,16 +51,19 @@ RESOURCES = \
 	Resources/preferences.svg \
 	Resources/tooltip.svg 
 
+PROJECT_REFERENCES= \
+	Docky.CairoHelper \
+	Docky.Items \
+	Docky.Services \
+	Docky.Windowing \
+	Docky.Zeitgeist
+
 REFERENCES =  \
 	System \
 	System.Core \
 	Mono.Posix \
 	Mono.GetOptions \
 	$(MONO_CAIRO_LIBS) \
-	$(DOCKY_CAIRO_LIBS) \
-	$(DOCKY_ITEMS_LIBS) \
-	$(DOCKY_SERVICES_LIBS) \
-	$(DOCKY_WINDOWING_LIBS) \
 	$(GLIB_SHARP_20_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(GNOME_DESKTOP_SHARP_20_LIBS) \
