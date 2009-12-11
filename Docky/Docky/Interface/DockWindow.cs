@@ -1881,6 +1881,8 @@ namespace Docky.Interface
 			
 			if (HoveredAcceptsDrop && HoveredItem == item && ExternalDragActive) {
 				lighten += .4;
+			} else if (HoveredItem == item && !ExternalDragActive && !InternalDragActive) {
+				lighten += .2;
 			}
 			
 			if ((item.State & ItemState.Wait) != 0) {
