@@ -43,10 +43,10 @@ class MostUsedProvider():
 			for event in events:
 				if counter < 5:
 					for subject in event.subjects:
-						if counter < 5 and exists(subject.uri):
+						if counter < 7 and exists(subject.uri):
 							uris.append(subject)
 							counter+=1
-						elif counter >= 5:
+						elif counter >= 7:
 							break
 						else:
 							print "skipping", subject.uri
@@ -76,7 +76,6 @@ class DockyUriItem():
 		
 		self.update_most_used ()
 		self.timer = glib.timeout_add (2 * 60 * 1000, self.handle_timeout)
-		self.update_timer = glib.timeout_add (20 * 60 * 1000, self.handle_update_timeout)
 	
 	
 	def dispose(self):
@@ -86,19 +85,12 @@ class DockyUriItem():
 			except:
 				break;
 		glib.source_remove (self.timer)
-		glib.source_remove (self.update_timer)
 	
 	def handle_timeout(self):
 		for k, v in self.id_map.iteritems():
 			self.iface.ConfirmItem (k)
 		return True
-		
-	def handle_update_timeout(self):
-		for menu_id, uri in self.id_map.iteritems():
-			self.iface.RemoveItem (k)
-		update_most_used ()
-		return True
-	
+
 	def update_most_used(self):
 		uri = self.iface.GetUri ();
 		self.mostusedprovider.get_directory_most_used (uri, self._handle_get_most_used)
