@@ -27,7 +27,7 @@ class MostUsedProvider():
 	def __init__(self):
 		self._zg = CLIENT
 
-	def get_directory_most_used( self, directory, handler):
+	def get_path_most_used( self, path, handler, is_directoy=True):
 		today = time.time()
 		delta = today - 14 * 86400
 
@@ -49,22 +49,27 @@ class MostUsedProvider():
 						elif counter >= 7:
 							break
 						else:
-							print "skipping", subject.uri
+							pass
+							#print "skipping", subject.uri
 				else:
 					break
-			handler(directory, uris)
+			handler( uris)
 
 		event = Event()
 		subject = Subject()
-		subject.set_origin(directory)
-		event.set_subjects([subject])
+		if is_directoy:
+			subject.set_origin(path)
+			event.set_subjects([subject])
+		else:
+			print "****", path
+			event.set_actor(path)
 		self._zg.find_event_ids_for_templates([event],_handle_find_events, [delta*1000, today*1000], num_events=100, result_type=5) 
 
 class DockyUriItem():
-	def __init__(self, path):
+	def __init__(self, path, is_directoy):
 		self.path = path
 		self.bus = dbus.SessionBus ()
-		
+		self.is_directoy = is_directoy
 		self.id_map = {}
 		
 		obj = self.bus.get_object (dockybus, self.path)
@@ -93,9 +98,11 @@ class DockyUriItem():
 
 	def update_most_used(self):
 		uri = self.iface.GetUri ();
-		self.mostusedprovider.get_directory_most_used (uri, self._handle_get_most_used)
+		if not self.is_directoy:
+			uri = self.iface.GetDesktopFile()
+		self.mostusedprovider.get_path_most_used (uri, self._handle_get_most_used, self.is_directoy)
 
-	def _handle_get_most_used(self, directory, uris):
+	def _handle_get_most_used(self, uris):
 		for subject in uris:
 			menu_id = self.iface.AddMenuItem (subject.text, "gtk-file", "Most used Items")
 			self.id_map[menu_id] = subject.uri
@@ -122,7 +129,9 @@ class DockySink():
 			obj = self.bus.get_object (dockybus, pathtoitem)
 			item = dbus.Interface (obj, itemiface)
 			if item.GetOwnsUri():
-				self.items[pathtoitem] = DockyUriItem (pathtoitem)
+				self.items[pathtoitem] = DockyUriItem (pathtoitem, True)
+			elif item.GetOwnsDesktopFile():
+				self.items[pathtoitem] = DockyUriItem (pathtoitem, False)
 	
 	def item_added(self, path):
 		if self.disposed:
@@ -130,7 +139,9 @@ class DockySink():
 		obj = self.bus.get_object (dockybus, path)
 		item = dbus.Interface (obj, itemiface)
 		if item.GetOwnsUri():
-			self.items[path] = DockyUriItem (path)
+			self.items[path] = DockyUriItem (path , True)
+		elif item.GetOwnsDesktopFile():
+			self.items[path] = DockyUriItem (path, False)
 
 	def item_removed(self, path):
 		if self.disposed:
