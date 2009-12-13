@@ -393,6 +393,11 @@ namespace Docky.Interface
 			get { return Preferences.Position; }
 		}
 		
+		bool Reflection {
+			get { return false; }
+		}
+		
+		
 		bool ZoomEnabled {
 			get { return !Preferences.PanelMode && Preferences.ZoomEnabled; }
 		}
@@ -461,7 +466,7 @@ namespace Docky.Interface
 		}
 		
 		int DockHeightBuffer {
-			get { return (Preferences.PanelMode) ? 3 : 7; }
+			get { return (Preferences.PanelMode) ? 3 : 7 + (Reflection ? 5 : 0); }
 		}
 		
 		int ItemWidthBuffer {
@@ -1934,6 +1939,8 @@ namespace Docky.Interface
 			
 			// The big expensive paint happens right here!
 			icon.ShowWithOptions (surface, center.Center, renderZoom, renderRotation, opacity);
+			if (Reflection)
+				icon.ShowAsReflection (surface, center.Center, renderZoom, renderRotation, opacity, Position);
 			
 			if (lighten > 0) {
 				surface.Context.Operator = Operator.Add;

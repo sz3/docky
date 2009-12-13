@@ -64,6 +64,51 @@ namespace Docky.CairoHelper
 			cr.IdentityMatrix ();
 		}
 		
+		public static void ShowAsReflection (this DockySurface self, DockySurface target, PointD point, double zoom, double rotation, double opacity, DockPosition position)
+		{
+			if (target == null)
+				throw new ArgumentNullException ("target");
+			
+			Cairo.Context cr = target.Context;
+			
+			switch (position) {
+			case DockPosition.Left:
+				point.X -= self.Width * zoom;
+				break;
+			case DockPosition.Top:
+				point.Y -= self.Height * zoom;
+				break;
+			case DockPosition.Right:
+				point.X += self.Width * zoom;
+				break;
+			case DockPosition.Bottom:
+				point.Y += self.Height * zoom;
+				break;
+			}
+			
+			double cos, sin;
+			cos = Math.Cos (rotation);
+			sin = Math.Sin (rotation);
+			Matrix m = new Matrix (cos, sin, 0 - sin, cos, point.X, point.Y);
+			cr.Transform (m);
+			
+			if (zoom != 1)
+				cr.Scale (zoom, zoom);
+			
+			if (position == DockPosition.Left || position == DockPosition.Right)
+				cr.Scale (-1, 1);
+			else
+				cr.Scale (1, -1);
+			
+			cr.SetSource (self.Internal, 
+				0 - self.Width / 2, 
+				0 - self.Height / 2);
+			
+			cr.PaintWithAlpha (opacity * .3);
+			
+			cr.IdentityMatrix ();
+		}
+		
 		public static void ShowAtEdge (this DockySurface self, DockySurface target, PointD point, DockPosition position)
 		{
 			if (target == null)
