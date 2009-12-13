@@ -10,7 +10,7 @@ import urllib
 import os
 
 from zeitgeist.client import ZeitgeistClient
-from zeitgeist.datamodel import Event, Subject, Interpretation, Manifestation
+from zeitgeist.datamodel import Event, Subject, Interpretation, Manifestation, StorageState
 
 dockypath  = '/org/gnome/Docky'
 dockybus   = 'org.gnome.Docky'
@@ -28,8 +28,8 @@ class MostUsedProvider():
 		self._zg = CLIENT
 
 	def get_path_most_used( self, path, handler, is_directoy=True):
-		today = time.time()
-		delta = today - 14 * 86400
+		today = time.time() * 1000
+		delta = (today - 14 * 86400000)
 
 		def exists(uri):
 		 	return not uri.startswith("file://") or os.path.exists(urllib.unquote(str(uri[7:])))
@@ -53,17 +53,19 @@ class MostUsedProvider():
 							#print "skipping", subject.uri
 				else:
 					break
+			if not is_directoy: print "****", path, " has ", len(uris)
 			handler( uris)
 
 		event = Event()
-		subject = Subject()
 		if is_directoy:
+			subject = Subject()
 			subject.set_origin(path)
 			event.set_subjects([subject])
+			self._zg.find_event_ids_for_templates([event],_handle_find_events, [delta, today], StorageState.Any, 0, 5) 
 		else:
-			print "****", path
 			event.set_actor(path)
-		self._zg.find_event_ids_for_templates([event],_handle_find_events, [delta*1000, today*1000], num_events=100, result_type=5) 
+			print path
+			self._zg.find_event_ids_for_templates([event],_handle_find_events, [delta, today], StorageState.Any, 0, 5) 
 
 class DockyUriItem():
 	def __init__(self, path, is_directoy):
