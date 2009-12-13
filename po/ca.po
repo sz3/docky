@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-12-09 12:45+0100\n"
-"PO-Revision-Date: 2009-12-06 12:55+0000\n"
-"Last-Translator: Rico Tzschichholz <Unknown>\n"
+"POT-Creation-Date: 2009-12-13 10:54+0100\n"
+"PO-Revision-Date: 2009-12-11 11:37+0000\n"
+"Last-Translator: BadChoice <Unknown>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-12-09 12:08+0000\n"
+"X-Launchpad-Export-Date: 2009-12-13 10:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:113
@@ -26,19 +26,55 @@ msgstr ""
 msgid "Drag any dock to move it."
 msgstr ""
 
-#: ../Docky/Docky/Items/DockyItem.cs:73
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:233
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:283
+#: ../Docky/Docky/Docky.cs:105
+msgid ""
+"Docky requires compositing to work properly.  Please enable compositing and "
+"restart docky."
+msgstr ""
+"El Docky necessita la composició d'escriptori per funcionar correctament. "
+"Sisplau, habilita la composició d'escriptori i renicicia el docky."
+
+#: ../Docky/Docky/Interface/DockPreferences.cs:312
+msgid ""
+"Causes launchers which currently manage more than one window to have an "
+"extra indicator under it."
+msgstr ""
+
+#: ../Docky/Docky/Interface/DockPreferences.cs:314
+msgid ""
+"When set, windows which do not already have launchers on a dock will be "
+"added to this dock."
+msgstr ""
+
+#: ../Docky/Docky/Interface/DockPreferences.cs:608
+msgid "<i>Always present, acts like a panel.</i>"
+msgstr "<i>Sempre present, actua com un panell</i>"
+
+#: ../Docky/Docky/Interface/DockPreferences.cs:611
+msgid "<i>Hides whenever the mouse is not over it.</i>"
+msgstr "<i>Oculta quan el ratolí no esta per sobre.</i>"
+
+#: ../Docky/Docky/Interface/DockPreferences.cs:614
+msgid "<i>Hides when dock obstructs the active application.</i>"
+msgstr ""
+
+#: ../Docky/Docky/Interface/DockPreferences.cs:617
+msgid "<i>Hides when dock obstructs any window.</i>"
+msgstr ""
+
+#: ../Docky/Docky/Items/DockyItem.cs:91
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:230
 msgid "_Settings"
-msgstr ""
+msgstr "_Paràmetres"
 
-#: ../Docky/Docky/Items/DockyItem.cs:74
+#: ../Docky/Docky/Items/DockyItem.cs:92
 msgid "_About"
-msgstr ""
+msgstr "_Quant a"
 
-#: ../Docky/Docky/Items/DockyItem.cs:75
+#: ../Docky/Docky/Items/DockyItem.cs:93
 msgid "_Quit Docky"
-msgstr ""
+msgstr "_Surt del Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:58
 msgid "Docky Configuration"
@@ -68,55 +104,55 @@ msgstr "Nou Dock"
 msgid "Delete Dock"
 msgstr "Elimina el Dock"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:78
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
 msgid "None"
 msgstr "Cap"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:79
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:81
 msgid "Autohide"
 msgstr "Auto ocultar"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:82
 msgid "Intellihide"
 msgstr "Ocultació Intel·ligent"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:81
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:83
 msgid "Window Dodge"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:96
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:97
 msgid "Fade On Hide"
 msgstr "Esvaeix al ocultar"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:126
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:140
 msgid "Icon Size:"
 msgstr "Mida de la icona:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:137
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:151
 msgid "Autohide:"
 msgstr "Auto Ocultar:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:147
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:160
 msgid "Indicate Multiple Windows"
 msgstr "Indica finestres múltiples"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:161
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:174
 msgid "Panel Mode"
-msgstr ""
+msgstr "Mode Panell"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:176
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:188
 msgid "Manage Windows Without Launcher"
-msgstr ""
+msgstr "Gestiona les finestres sense llançador"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:191
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:203
 msgid "Zoom:"
 msgstr "Ampliació:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:263
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:278
 msgid "<b>Inactive Plugins</b>"
 msgstr "<b>Extensions Inactives</b>"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:271
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:286
 msgid "<b>Active Plugins</b>"
 msgstr "<b>Extensions Actives</b>"
 
@@ -126,49 +162,52 @@ msgstr "Icona"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:186
 msgid "New _Window"
-msgstr ""
+msgstr "_Finestra nova"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:188
-#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:49
 #: ../StandardPlugins/Mounter/src/MountItem.cs:97
 msgid "_Open"
-msgstr ""
+msgstr "_Obrir"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:192
 msgid "Related Items"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:71
+msgid "Reset Color"
 msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:354
 msgid "_Pin to Dock"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:193
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:232
 msgid "Open"
-msgstr ""
+msgstr "Obre"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:233
 msgid "Open Containing Folder"
-msgstr ""
+msgstr "Obre la carpeta contenidora"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:244
 msgid "Unma_ximize"
-msgstr ""
+msgstr "Desma_ximitza"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:247
 msgid "Ma_ximize"
-msgstr ""
+msgstr "Ma_ximitza"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:252
 msgid "_Restore"
-msgstr ""
+msgstr "_Restaura"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:255
 msgid "Mi_nimize"
-msgstr ""
+msgstr "Mi_nimitza"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:259
 msgid "_Quit"
-msgstr ""
+msgstr "_Surt"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
@@ -204,25 +243,41 @@ msgstr "_Elimina"
 msgid "_Add"
 msgstr "_Afageix"
 
-#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:80
+#: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:87
+msgid "Password"
+msgstr "Contrasenya"
+
+#: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:108
+msgid "Username"
+msgstr "Nom d'usuari"
+
+#: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
+msgid "<i>Verify and save account information</i>"
+msgstr "<i>Verifica i desa la informació del compte</i>"
+
+#: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
+msgid "Don't have an account?"
+msgstr "No teniu un compte?"
+
+#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:84
 msgid "Computer"
-msgstr ""
+msgstr "Ordinador"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:329
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:418
 msgid "Di_gital Clock"
-msgstr ""
+msgstr "Rellotge Di_gital"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:335
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:424
 msgid "24-Hour _Clock"
-msgstr ""
+msgstr "_Rellotge de 24 Hores"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:341
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:430
 msgid "Show _Date"
-msgstr ""
+msgstr "Mostra la _Data"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:347
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:436
 msgid "Select _Theme"
-msgstr ""
+msgstr "Selecciona un _Tema"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
@@ -232,18 +287,31 @@ msgstr "Temes"
 msgid "Theme"
 msgstr "Tema"
 
+#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
+msgid "_Add Label"
+msgstr "_Afageix una etiqueta"
+
+#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:114
+msgid "Check e_very:"
+msgstr "Compro_va cada:"
+
+#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:124
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:187
+msgid "minutes"
+msgstr "minuts"
+
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:185
 msgid "Username or Password not set"
-msgstr ""
+msgstr "Nom d'usuari o paraula de pas no definits"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:235
 msgid "(no subject)"
-msgstr ""
+msgstr "(sense assumpte)"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:253
 #, csharp-format
 msgid "From: {0}"
-msgstr ""
+msgstr "Desde: {0}"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:264
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:268
@@ -264,38 +332,38 @@ msgstr "Error general"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:313
 msgid "GMail Configuration"
-msgstr ""
+msgstr "Configuració del GMail"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:79
 msgid "No unread mail"
-msgstr ""
+msgstr "No hi ha correu sense llegir"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:82
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} Missatge no llegit"
+msgstr[1] "{0} Missatges no llegits"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:103
 msgid "Checking mail..."
-msgstr ""
+msgstr "Comprovant el correu..."
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:212
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:188
 msgid "_View "
-msgstr ""
+msgstr "_Veure "
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:193
 msgid "_Compose Mail"
-msgstr ""
+msgstr "_Redactar un correu"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:225
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "New Mail"
-msgstr ""
+msgstr "Nou correu"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:239
-msgid "Check _Now"
-msgstr ""
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:215
+msgid "Check _Mail"
+msgstr "Comprovar el _Correu"
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
@@ -303,65 +371,53 @@ msgstr "Etiquetes"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
 msgid "GMail"
-msgstr ""
+msgstr "GMail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr ""
+msgstr "Inici de sessió"
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
 msgstr "De: "
 
-#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
-msgid "_Add Label"
-msgstr ""
-
-#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:114
-msgid "Check e_very:"
-msgstr ""
-
-#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:124
-msgid "minutes"
-msgstr ""
-
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Eject"
-msgstr ""
+msgstr "_Expulsa"
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Unmount"
-msgstr ""
+msgstr "_Desmunta"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:51
 msgid "Network Manager"
-msgstr ""
+msgstr "Gestor de xarxes"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:90
 msgid "Connecting..."
-msgstr ""
+msgstr "S'està connectant..."
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:99
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:164
 msgid "Disconnected"
-msgstr ""
+msgstr "Desconnectat"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:108
 #, csharp-format
 msgid "Connected: {0}"
-msgstr ""
+msgstr "Connectat: {0}"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:48
 msgid "My _Stations"
-msgstr ""
+msgstr "Les meves _Estacions"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:79
 msgid "S_earch"
-msgstr ""
+msgstr "_Cerca"
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
-msgstr ""
+msgstr "No s'ha trobat cap estació"
 
 #: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
@@ -378,7 +434,7 @@ msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:105
 msgid "Home Page"
-msgstr ""
+msgstr "Pàgina d'inici"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:112
 msgid "Program Schedule"
@@ -386,19 +442,23 @@ msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:119
 msgid "Donate"
+msgstr "Donació"
+
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:126
+msgid "Live Streams"
 msgstr ""
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:167
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:164
 msgid "Settings"
 msgstr "Configuració"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:76
 msgid "Clear the Recent Documents list?"
-msgstr ""
+msgstr "Voleu netejar la llista de documents recents?"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:78
 msgid "Clear Recent Documents"
-msgstr ""
+msgstr "Neteja la llista de documents recents"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:80
 msgid ""
@@ -406,41 +466,65 @@ msgid ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
+"Si netegeu la llista de documents recents, netejareu el següent:\n"
+"• Tots els elements de l'element de menú Llocs → Documents recents.\n"
+"• Tots els elements de la llista de documents recents de totes les "
+"aplicacions."
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
 msgid "_Clear Recent Documents..."
-msgstr ""
+msgstr "_Neteja la llista de documents recents..."
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:72
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:71
 msgid "No items in Trash"
-msgstr ""
+msgstr "Cap element a la Paperera"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:74
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} element a la Paperera"
+msgstr[1] "{0} elements a la Paperera"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:159
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:158
 msgid "_Open Trash"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:161
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:198
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:160
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:197
 msgid "Empty _Trash"
-msgstr ""
+msgstr "Buida la _paperera"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:183
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:182
 msgid "Empty all of the items from the trash?"
-msgstr ""
+msgstr "Voleu eliminar tots els elements de la paperera?"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:185
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
+
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:66
+msgid "_Weather Provider:"
+msgstr "Proveidor del _Temps"
+
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:106
+msgid "My _Locations"
+msgstr "Les meves _Localitzacions"
+
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:137
+msgid "_Search"
+msgstr "_Cerca"
+
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:177
+msgid "Automatically Update _Every"
+msgstr ""
+
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:221
+msgid "Use _Metric Units"
+msgstr "Utilitzar les unitats _Metriques"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:84
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:87
@@ -477,23 +561,23 @@ msgid "No results found."
 msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
 msgid "Fetching data..."
 msgstr "Obtenint dades..."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:269
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:216
 msgid "Radar _Map"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:274
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:221
 msgid "Forecasts"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:286
-msgid "_Reload Weather Data"
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:233
+msgid "Check _Weather"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:301
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:248
 msgid "Weather Configuration"
 msgstr ""
 
@@ -505,40 +589,32 @@ msgstr ""
 msgid "T_omorrow"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:339
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:346
 msgid "Humidity"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:341
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:348
 msgid "Temp"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:343
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:350
 msgid "Feels Like"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:345
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:352
 msgid "Wind"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:346
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:353
 msgid "Direction"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:348
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:355
 msgid "Sunrise"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:349
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:356
 msgid "Sunset"
-msgstr ""
-
-#: ../data/docky.desktop.in.h:1
-msgid "Docky"
-msgstr "Docky"
-
-#: ../data/docky.desktop.in.h:2
-msgid "The finest dock no money can buy."
 msgstr ""
 
 #~ msgid "Today"
@@ -553,9 +629,6 @@ msgstr ""
 #~ msgid "Reload Weather Data"
 #~ msgstr "Recarrega la informació del Temps"
 
-#~ msgid "_Search"
-#~ msgstr "_Cerca"
-
 #~ msgid "Move _Up"
 #~ msgstr "Mou am_unt"
 
@@ -564,15 +637,6 @@ msgstr ""
 
 #~ msgid "mins"
 #~ msgstr "mins."
-
-#~ msgid "Don't have an account?"
-#~ msgstr "No teniu un compte?"
-
-#~ msgid "Password"
-#~ msgstr "Contrasenya"
-
-#~ msgid "Username"
-#~ msgstr "Nom d'usuari"
 
 #~ msgid "Digital Clock"
 #~ msgstr "Rellotge digital"
@@ -585,3 +649,6 @@ msgstr ""
 
 #~ msgid "24-Hour Clock"
 #~ msgstr "Rellotge de 24-Hores"
+
+#~ msgid "Docky"
+#~ msgstr "Docky"

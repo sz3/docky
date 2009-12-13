@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-12-09 12:45+0100\n"
-"PO-Revision-Date: 2009-12-08 18:27+0000\n"
+"POT-Creation-Date: 2009-12-13 10:54+0100\n"
+"PO-Revision-Date: 2009-12-11 17:40+0000\n"
 "Last-Translator: NewPlayer <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-12-09 12:08+0000\n"
+"X-Launchpad-Export-Date: 2009-12-13 10:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:113
@@ -26,17 +26,51 @@ msgstr "A beállításokhoz kattintson valamelyik dokkra."
 msgid "Drag any dock to move it."
 msgstr ""
 
-#: ../Docky/Docky/Items/DockyItem.cs:73
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:233
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:283
+#: ../Docky/Docky/Docky.cs:105
+msgid ""
+"Docky requires compositing to work properly.  Please enable compositing and "
+"restart docky."
+msgstr ""
+
+#: ../Docky/Docky/Interface/DockPreferences.cs:312
+msgid ""
+"Causes launchers which currently manage more than one window to have an "
+"extra indicator under it."
+msgstr ""
+
+#: ../Docky/Docky/Interface/DockPreferences.cs:314
+msgid ""
+"When set, windows which do not already have launchers on a dock will be "
+"added to this dock."
+msgstr ""
+
+#: ../Docky/Docky/Interface/DockPreferences.cs:608
+msgid "<i>Always present, acts like a panel.</i>"
+msgstr ""
+
+#: ../Docky/Docky/Interface/DockPreferences.cs:611
+msgid "<i>Hides whenever the mouse is not over it.</i>"
+msgstr "<i>Elrejtés, amikor az egér nincsen fölötte.</i>"
+
+#: ../Docky/Docky/Interface/DockPreferences.cs:614
+msgid "<i>Hides when dock obstructs the active application.</i>"
+msgstr ""
+
+#: ../Docky/Docky/Interface/DockPreferences.cs:617
+msgid "<i>Hides when dock obstructs any window.</i>"
+msgstr ""
+
+#: ../Docky/Docky/Items/DockyItem.cs:91
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:230
 msgid "_Settings"
 msgstr "_Beállítások"
 
-#: ../Docky/Docky/Items/DockyItem.cs:74
+#: ../Docky/Docky/Items/DockyItem.cs:92
 msgid "_About"
 msgstr "_Névjegy"
 
-#: ../Docky/Docky/Items/DockyItem.cs:75
+#: ../Docky/Docky/Items/DockyItem.cs:93
 msgid "_Quit Docky"
 msgstr "_Kilépés a Docky-ból"
 
@@ -68,55 +102,55 @@ msgstr "Új dokk"
 msgid "Delete Dock"
 msgstr "Dokk törlése"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:78
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
 msgid "None"
 msgstr "Semmi"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:79
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:81
 msgid "Autohide"
 msgstr "Automatikus elrejtés"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:82
 msgid "Intellihide"
 msgstr "Intelligens elrejtés"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:81
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:83
 msgid "Window Dodge"
 msgstr "Ablak Dokkolása"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:96
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:97
 msgid "Fade On Hide"
 msgstr "Áttűnés elrejtéskor"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:126
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:140
 msgid "Icon Size:"
 msgstr "Ikonméret:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:137
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:151
 msgid "Autohide:"
 msgstr "Automatikus elrejtés:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:147
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:160
 msgid "Indicate Multiple Windows"
 msgstr "Többszörös ablakok jelzése"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:161
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:174
 msgid "Panel Mode"
 msgstr "Panel mód"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:176
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:188
 msgid "Manage Windows Without Launcher"
 msgstr "Indítóikon nélküli ablakok kezelése"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:191
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:203
 msgid "Zoom:"
 msgstr "Nagyítás:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:263
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:278
 msgid "<b>Inactive Plugins</b>"
 msgstr "Inaktív bővítmények"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:271
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:286
 msgid "<b>Active Plugins</b>"
 msgstr "Aktív bővítmények"
 
@@ -129,7 +163,6 @@ msgid "New _Window"
 msgstr "Új _ablak"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:188
-#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:49
 #: ../StandardPlugins/Mounter/src/MountItem.cs:97
 msgid "_Open"
 msgstr "_Megnyitás"
@@ -138,15 +171,19 @@ msgstr "_Megnyitás"
 msgid "Related Items"
 msgstr "Kapcsolódó elemek"
 
+#: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:71
+msgid "Reset Color"
+msgstr "Színek visszaállítása"
+
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:354
 msgid "_Pin to Dock"
 msgstr "Összefűzés dokk-ba"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:193
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:232
 msgid "Open"
 msgstr "Megnyitás"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:233
 msgid "Open Containing Folder"
 msgstr "Tartalmazó mappa megnyitása"
 
@@ -204,23 +241,39 @@ msgstr "_Eltávolítás"
 msgid "_Add"
 msgstr "_Hozzáadás"
 
-#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:80
+#: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:87
+msgid "Password"
+msgstr "Jelszó"
+
+#: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:108
+msgid "Username"
+msgstr "Felhasználónév"
+
+#: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
+msgid "<i>Verify and save account information</i>"
+msgstr "<i>Felhasználói fiók információinak ellenőrzése és mentése</i>"
+
+#: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
+msgid "Don't have an account?"
+msgstr "Nincs fiókja?"
+
+#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:84
 msgid "Computer"
 msgstr "Számítógép"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:329
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:418
 msgid "Di_gital Clock"
 msgstr "Di_gitális Óra"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:335
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:424
 msgid "24-Hour _Clock"
 msgstr "24-órás _Óra"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:341
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:430
 msgid "Show _Date"
 msgstr "Dátum _megjelenítése"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:347
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:436
 msgid "Select _Theme"
 msgstr "_Theme választása"
 
@@ -231,6 +284,19 @@ msgstr "Témák"
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
 msgid "Theme"
 msgstr "Téma"
+
+#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
+msgid "_Add Label"
+msgstr "Címke _Hozzáadás"
+
+#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:114
+msgid "Check e_very:"
+msgstr "Ellenőrzés m_inden:"
+
+#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:124
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:187
+msgid "minutes"
+msgstr "perc"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:185
 msgid "Username or Password not set"
@@ -281,21 +347,21 @@ msgstr[1] "olvasatlan üzenetek"
 msgid "Checking mail..."
 msgstr "E-mailek ellenőrzése..."
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:212
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:188
 msgid "_View "
 msgstr "_Nézet "
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:193
 msgid "_Compose Mail"
-msgstr ""
+msgstr "_Ellenörző E-mail"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:225
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "New Mail"
-msgstr ""
+msgstr "Új e-mail"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:239
-msgid "Check _Now"
-msgstr "Ellenőrzés _most"
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:215
+msgid "Check _Mail"
+msgstr "E-_Mail ellenőrzése"
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
@@ -312,18 +378,6 @@ msgstr "Bejelentkezés"
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
 msgstr "Feladó: "
-
-#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
-msgid "_Add Label"
-msgstr ""
-
-#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:114
-msgid "Check e_very:"
-msgstr ""
-
-#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:124
-msgid "minutes"
-msgstr ""
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Eject"
@@ -361,12 +415,12 @@ msgstr "K_eresés"
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
-msgstr ""
+msgstr "Nincs találat"
 
 #: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
-msgstr ""
+msgstr "Kérem ismételje meg a keresést."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:46
 msgid "Fetching Information..."
@@ -388,7 +442,11 @@ msgstr "Munkarend"
 msgid "Donate"
 msgstr "Támogatás"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:167
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:126
+msgid "Live Streams"
+msgstr ""
+
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:164
 msgid "Settings"
 msgstr "Beállítások"
 
@@ -414,36 +472,56 @@ msgstr ""
 msgid "_Clear Recent Documents..."
 msgstr "_Gyakori dokumentumok törlése"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:72
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:71
 msgid "No items in Trash"
 msgstr "Nincsen elem a Kukában"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:74
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
 msgstr[0] "{0} db elem a kukában"
 msgstr[1] "{0} db elem a kukában"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:159
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:158
 msgid "_Open Trash"
 msgstr "_Kuka megnyitása"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:161
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:198
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:160
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:197
 msgid "Empty _Trash"
 msgstr "_Kuka ürítése"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:183
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:182
 msgid "Empty all of the items from the trash?"
 msgstr "Törölni kívánja az összes elemet a Kukából?"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:185
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
+
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:66
+msgid "_Weather Provider:"
+msgstr ""
+
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:106
+msgid "My _Locations"
+msgstr "Én he_lyem"
+
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:137
+msgid "_Search"
+msgstr "_Keresés"
+
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:177
+msgid "Automatically Update _Every"
+msgstr "Automatikus _frissítés"
+
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:221
+msgid "Use _Metric Units"
+msgstr "_Metrikus mértékegység használata"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:84
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:87
@@ -479,26 +557,26 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
-msgstr ""
+msgstr "Nincs találat."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
 msgid "Fetching data..."
 msgstr "Adatok fogadása..."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:269
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:216
 msgid "Radar _Map"
 msgstr "Előre _jelzés"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:274
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:221
 msgid "Forecasts"
 msgstr "Előrejelzés"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:286
-msgid "_Reload Weather Data"
-msgstr "_Időjárási adatok újratöltése"
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:233
+msgid "Check _Weather"
+msgstr "Időjárás Ellenőrzése"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:301
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:248
 msgid "Weather Configuration"
 msgstr "Időjárás beállítás"
 
@@ -510,41 +588,33 @@ msgstr "_Ma"
 msgid "T_omorrow"
 msgstr "H_olnap"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:339
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:346
 msgid "Humidity"
 msgstr "Páratartalom"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:341
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:348
 msgid "Temp"
 msgstr "Átmeneti"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:343
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:350
 msgid "Feels Like"
 msgstr "Mintha"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:345
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:352
 msgid "Wind"
 msgstr "Szeles"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:346
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:353
 msgid "Direction"
 msgstr "Hivatkozás"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:348
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:355
 msgid "Sunrise"
 msgstr "Napfelkelte"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:349
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:356
 msgid "Sunset"
 msgstr "Napsütés"
-
-#: ../data/docky.desktop.in.h:1
-msgid "Docky"
-msgstr "Docky"
-
-#: ../data/docky.desktop.in.h:2
-msgid "The finest dock no money can buy."
-msgstr "A legjobb dokk, amit nem lehet pénzért megvenni."
 
 #~ msgid "Today"
 #~ msgstr "Ma"
@@ -558,18 +628,6 @@ msgstr "A legjobb dokk, amit nem lehet pénzért megvenni."
 #~ msgid "mins"
 #~ msgstr "perc"
 
-#~ msgid "Don't have an account?"
-#~ msgstr "Nincs fiókja?"
-
-#~ msgid "Password"
-#~ msgstr "Jelszó"
-
-#~ msgid "Username"
-#~ msgstr "Felhasználónév"
-
-#~ msgid "<i>Verify and save account information</i>"
-#~ msgstr "<i>Felhasználói fiók információinak ellenőrzése és mentése</i>"
-
 #~ msgid "Check Now"
 #~ msgstr "Ellenőrzés most"
 
@@ -582,8 +640,8 @@ msgstr "A legjobb dokk, amit nem lehet pénzért megvenni."
 #~ msgid "Show Date"
 #~ msgstr "Dátum megjelenítése"
 
-#~ msgid "_Search"
-#~ msgstr "_Keresés"
+#~ msgid "Docky"
+#~ msgstr "Docky"
 
 #~ msgid "Compose Mail"
 #~ msgstr "Levél írása"
@@ -597,9 +655,6 @@ msgstr "A legjobb dokk, amit nem lehet pénzért megvenni."
 #~ msgid "24-Hour Clock"
 #~ msgstr "24 órás formátum"
 
-#~ msgid "Use _Metric Units"
-#~ msgstr "_Metrikus mértékegység használata"
-
 #~ msgid "Add _Location"
 #~ msgstr "_Hely hozzáadása"
 
@@ -609,9 +664,6 @@ msgstr "A legjobb dokk, amit nem lehet pénzért megvenni."
 #~ msgid "Reload Weather Data"
 #~ msgstr "Időjárási adatok újratöltése"
 
-#~ msgid "Automatically Update _Every"
-#~ msgstr "Automatikus _frissítés"
-
 #~ msgid "Check _Every"
 #~ msgstr "_Ellenőrzés"
 
@@ -620,6 +672,9 @@ msgstr "A legjobb dokk, amit nem lehet pénzért megvenni."
 
 #~ msgid "Some information about the weather source."
 #~ msgstr "Információk az időjárásjelntés forrásáról."
+
+#~ msgid "The finest dock no money can buy."
+#~ msgstr "A legjobb dokk, amit nem lehet pénzért megvenni."
 
 #~ msgid "Select Theme"
 #~ msgstr "Válasszon témát"
@@ -631,11 +686,14 @@ msgstr "A legjobb dokk, amit nem lehet pénzért megvenni."
 #~ msgid "_Show Preferences"
 #~ msgstr "_Beállítások"
 
-#~ msgid "Reset Color"
-#~ msgstr "Színek visszaállítása"
-
 #~ msgid "Reset _Color"
 #~ msgstr "Színek_Visszaállítása"
 
 #~ msgid "_Reset Color"
 #~ msgstr "_Színek visszaállítása"
+
+#~ msgid "Check _Now"
+#~ msgstr "Ellenőrzés _most"
+
+#~ msgid "_Reload Weather Data"
+#~ msgstr "_Időjárási adatok újratöltése"
