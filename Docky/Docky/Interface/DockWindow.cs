@@ -27,6 +27,7 @@ using System.Text.RegularExpressions;
 using Cairo;
 using Gdk;
 using Gtk;
+using Mono.Unix;
 using Wnck;
 
 using Docky.Items;
@@ -152,6 +153,7 @@ namespace Docky.Interface
 		IDockPreferences preferences;
 		DockySurface main_buffer, background_buffer, icon_buffer, painter_buffer;
 		DockySurface normal_indicator_buffer, urgent_indicator_buffer;
+		DockySurface config_hover_buffer;
 		DockySurface wait_buffer;
 		AbstractDockItem hoveredItem;
 		AbstractDockItem lastClickedItem;
@@ -227,6 +229,8 @@ namespace Docky.Interface
 				if (active_glow == value)
 					return;
 				active_glow = value;
+				UpdateHoverText ();
+				SetTooltipVisibility ();
 				AnimatedDraw ();
 			}
 		}
@@ -312,9 +316,61 @@ namespace Docky.Interface
 			}
 		}
 		
+		void DrawConfigurationHover ()
+		{
+			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ()) {
+				layout.FontDescription = Style.FontDescription;
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (11);
+				layout.FontDescription.Weight = Pango.Weight.Bold;
+				layout.Ellipsize = Pango.EllipsizeMode.End;
+				layout.Width = Pango.Units.FromPixels (500);
+				
+				layout.SetText (Catalog.GetString ("Drag to reposition"));
+				
+				Pango.Rectangle inkRect, logicalRect;
+				layout.GetPixelExtents (out inkRect, out logicalRect);
+				
+				const int HoverTextHeight = 26;
+				int textWidth = inkRect.Width;
+				int textHeight = logicalRect.Height;
+				int buffer = HoverTextHeight - textHeight;
+				config_hover_buffer = new DockySurface (textWidth + buffer, HoverTextHeight, background_buffer);
+				
+				config_hover_buffer.Context.MoveTo (buffer / 2, buffer / 2);
+				Pango.CairoHelper.LayoutPath (config_hover_buffer.Context, layout);
+				config_hover_buffer.Context.Color = HoverTextManager.IsLight ? new Cairo.Color (0.1, 0.1, 0.1) : new Cairo.Color (1, 1, 1);
+				config_hover_buffer.Context.Fill ();
+			}
+		}
+		
 		void UpdateHoverText ()
 		{
-			if (hoveredItem != null && background_buffer != null) {
+			if (ActiveGlow) {
+				if (config_hover_buffer == null)
+					DrawConfigurationHover ();
+				
+				Gdk.Point point;
+				int offset = 8;
+				switch (Position) {
+				default:
+				case DockPosition.Top:
+					point = new Gdk.Point (window_position.X + Allocation.Width / 2, offset + window_position.Y + DockHeight);
+					break;
+				case DockPosition.Bottom:
+					point = new Gdk.Point (window_position.X + Allocation.Width / 2, window_position.Y + Allocation.Height - DockHeight - offset);
+					break;
+				case DockPosition.Left:
+					point = new Gdk.Point (offset + window_position.X + DockHeight, window_position.Y + Allocation.Height / 2);
+					break;
+				case DockPosition.Right:
+					point = new Gdk.Point (window_position.X + Allocation.Width - DockHeight - offset, window_position.Y + Allocation.Height / 2);
+					break;
+				}
+				
+				TextManager.Gravity = Position; // FIXME
+				TextManager.Monitor = Monitor;
+				TextManager.SetSurfaceAtPoint (config_hover_buffer, point);
+			} else if (hoveredItem != null && background_buffer != null) {
 				DrawValue loc = DrawValues[hoveredItem].MoveIn (Position, IconSize * (ZoomPercent + .1) - IconSize / 2);
 				
 				Gdk.Point point = new Gdk.Point ((int) loc.StaticCenter.X, (int) loc.StaticCenter.Y);
@@ -1037,11 +1093,11 @@ namespace Docky.Interface
 		
 		void SetTooltipVisibility ()
 		{
-			bool visible = HoveredItem != null && 
+			bool visible = (HoveredItem != null && 
 				!InternalDragActive && 
 				!Menu.Visible && 
 				!ConfigurationMode && 
-				Painter == null;
+				Painter == null) || ActiveGlow;
 			
 			if (visible)
 				TextManager.Show ();
@@ -1119,6 +1175,11 @@ namespace Docky.Interface
 			if (wait_buffer != null) {
 				wait_buffer.Dispose ();
 				wait_buffer = null;
+			}
+			
+			if (config_hover_buffer != null) {
+				config_hover_buffer.Dispose ();
+				config_hover_buffer = null;
 			}
 			
 			foreach (AbstractDockItem item in Items)
