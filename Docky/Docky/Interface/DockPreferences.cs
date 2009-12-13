@@ -487,13 +487,19 @@ namespace Docky.Interface
 		
 		void BuildOptions ()
 		{
-			Autohide = (AutohideType) Enum.Parse (typeof(AutohideType), 
-			                                      GetOption ("Autohide", AutohideType.None.ToString ()));
+			try {
+				Autohide = (AutohideType) Enum.Parse (typeof(AutohideType), 
+													  GetOption ("Autohide", AutohideType.None.ToString ()));
+			} catch {
+				Autohide = AutohideType.None;
+			}
 			
-			DockPosition position = (DockPosition) Enum.Parse (typeof(DockPosition), 
-			                                                   GetOption ("Position", DockPosition.Bottom.ToString ()));
-			
-			Position = position;
+			try {
+				Position = (DockPosition) Enum.Parse (typeof(DockPosition), 
+													   GetOption ("Position", DockPosition.Bottom.ToString ()));
+			} catch {
+				Position = DockPosition.Bottom;
+			}
 			
 			if (WindowManager)
 				DefaultProvider.SetWindowManager ();
