@@ -53,7 +53,6 @@ class MostUsedProvider():
 							#print "skipping", subject.uri
 				else:
 					break
-			if not is_directoy: print "****", path, " has ", len(uris)
 			handler( uris)
 
 		event = Event()
@@ -64,14 +63,12 @@ class MostUsedProvider():
 			self._zg.find_event_ids_for_templates([event],_handle_find_events, [delta, today], StorageState.Any, 0, 5) 
 		else:
 			event.set_actor(path)
-			print path
 			self._zg.find_event_ids_for_templates([event],_handle_find_events, [delta, today], StorageState.Any, 0, 5) 
 
-class DockyUriItem():
-	def __init__(self, path, is_directoy):
+class DockyItem():
+	def __init__(self, path):
 		self.path = path
 		self.bus = dbus.SessionBus ()
-		self.is_directoy = is_directoy
 		self.id_map = {}
 		
 		obj = self.bus.get_object (dockybus, self.path)
@@ -99,14 +96,19 @@ class DockyUriItem():
 		return True
 
 	def update_most_used(self):
-		uri = self.iface.GetUri ();
-		if not self.is_directoy:
+		uri = ""
+		if self.iface.GetOwnsUri ():
+			uri = self.iface.GetUri ();
+		elif self.iface.GetOwnsDesktopFile ():
 			uri = self.iface.GetDesktopFile()
-		self.mostusedprovider.get_path_most_used (uri, self._handle_get_most_used, self.is_directoy)
+		else:
+			return
+			
+		self.mostusedprovider.get_path_most_used (uri, self._handle_get_most_used, self.iface.GetOwnsUri ())
 
 	def _handle_get_most_used(self, uris):
 		for subject in uris:
-			menu_id = self.iface.AddMenuItem (subject.text, "gtk-file", "Most used Items")
+			menu_id = self.iface.AddMenuItem (subject.text, "gtk-file", "Most Used Items")
 			self.id_map[menu_id] = subject.uri
 		
 	def menu_pressed_signal(self, menu_id):
@@ -130,20 +132,16 @@ class DockySink():
 		for pathtoitem in paths:
 			obj = self.bus.get_object (dockybus, pathtoitem)
 			item = dbus.Interface (obj, itemiface)
-			if item.GetOwnsUri():
-				self.items[pathtoitem] = DockyUriItem (pathtoitem, True)
-			elif item.GetOwnsDesktopFile():
-				self.items[pathtoitem] = DockyUriItem (pathtoitem, False)
+			if item.GetOwnsUri() or item.GetOwnsDesktopFile():
+				self.items[pathtoitem] = DockyItem (pathtoitem)
 	
 	def item_added(self, path):
 		if self.disposed:
 			return;
 		obj = self.bus.get_object (dockybus, path)
 		item = dbus.Interface (obj, itemiface)
-		if item.GetOwnsUri():
-			self.items[path] = DockyUriItem (path , True)
-		elif item.GetOwnsDesktopFile():
-			self.items[path] = DockyUriItem (path, False)
+		if item.GetOwnsUri() or item.GetOwnsDesktopFile ():
+			self.items[path] = DockyItem (path)
 
 	def item_removed(self, path):
 		if self.disposed:
