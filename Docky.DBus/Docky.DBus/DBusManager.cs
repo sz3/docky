@@ -107,7 +107,14 @@ namespace Docky.DBus
 			item_dict.Remove (item);
 			
 			ObjectPath path = new ObjectPath (PathForItem (item));
-			Bus.Session.Unregister (path);
+			
+			try {
+				Bus.Session.Unregister (path);
+			} catch (System.Reflection.TargetInvocationException e) {
+				Log<DBusManager>.Error ("Could not unregister: " + path);
+				Log<DBusManager>.Debug (e.StackTrace);
+				return;
+			}
 			
 			docky.OnItemRemoved (PathForItem (item));
 		}
