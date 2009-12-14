@@ -135,6 +135,9 @@ namespace Docky.Services
 		// load an icon specifying the width and height
 		public Gdk.Pixbuf LoadIcon (string names, int width, int height)
 		{
+			if (names == null)
+				names = "";
+			
 			List<string> iconNames = names.Split (':').Where (i => !string.IsNullOrEmpty (i)).ToList ();
 			// add the MissingIconIcon as a last resort icon.
 			iconNames.Add (MissingIconIcon);
