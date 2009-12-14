@@ -110,10 +110,6 @@
       <Project>{888FCD95-7C79-45C4-A744-9C840DF4B9B0}</Project>
       <Name>Docky.Windowing</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Docky.Zeitgeist\Docky.Zeitgeist.csproj">
-      <Project>{ECABA30A-6CC5-4CD3-A1DB-88E12884527B}</Project>
-      <Name>Docky.Zeitgeist</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\close.svg">

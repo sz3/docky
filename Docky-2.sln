@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docky.CairoHelper", "Docky.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docky.Windowing", "Docky.Windowing\Docky.Windowing.csproj", "{888FCD95-7C79-45C4-A744-9C840DF4B9B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docky.Zeitgeist", "Docky.Zeitgeist\Docky.Zeitgeist.csproj", "{ECABA30A-6CC5-4CD3-A1DB-88E12884527B}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StandardPlugins", "StandardPlugins", "{8D4EE2FA-9CF2-4890-B14A-1BA8752404FE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks", "StandardPlugins\Bookmarks\Bookmarks.csproj", "{4AC9784E-7AAA-467D-BF8F-D15B8FB88708}"
@@ -115,10 +113,6 @@ Global
 		{C65612E7-55E9-4B63-BB47-5DFD4ACE80E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C65612E7-55E9-4B63-BB47-5DFD4ACE80E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C65612E7-55E9-4B63-BB47-5DFD4ACE80E5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ECABA30A-6CC5-4CD3-A1DB-88E12884527B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ECABA30A-6CC5-4CD3-A1DB-88E12884527B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ECABA30A-6CC5-4CD3-A1DB-88E12884527B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ECABA30A-6CC5-4CD3-A1DB-88E12884527B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FF0B1BB8-6069-4074-BF42-A138D1F99D89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FF0B1BB8-6069-4074-BF42-A138D1F99D89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF0B1BB8-6069-4074-BF42-A138D1F99D89}.Release|Any CPU.ActiveCfg = Release|Any CPU

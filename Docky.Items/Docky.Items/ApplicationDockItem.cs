@@ -30,7 +30,6 @@ using Wnck;
 using Docky.Menus;
 using Docky.Services;
 using Docky.Windowing;
-using Docky.Zeitgeist;
 
 namespace Docky.Items
 {
@@ -55,9 +54,6 @@ namespace Docky.Items
 			return new ApplicationDockItem (desktopItem);
 		}
 		
-		ZeitgeistResult[] related_uris = new ZeitgeistResult[0];
-		object related_lock = new Object ();
-		
 		bool can_manage_windows;
 		uint timer;
 		IEnumerable<string> mimes;
@@ -78,12 +74,6 @@ namespace Docky.Items
 			
 			UpdateInfo ();
 			UpdateWindows ();
-			UpdateRelated ();
-			
-			timer = GLib.Timeout.Add (10 * 60 * 1000, delegate {
-				UpdateRelated ();
-				return true;
-			});
 			
 			WindowMatcher.DesktopFileChanged += delegate(object sender, DesktopFileChangedEventArgs e) {
 				if (e.File.Path == item.Location) {
@@ -151,34 +141,6 @@ namespace Docky.Items
 				Windows = Enumerable.Empty<Wnck.Window> ();
 		}
 		
-		void UpdateRelated ()
-		{
-			if (mimes.Any ()) {
-				Thread th = new Thread ((ThreadStart) delegate {
-					Zeitgeist.ZeitgeistFilter filter = new Zeitgeist.ZeitgeistFilter ();
-					filter.MimeTypes.AddRange (mimes);
-					
-					ZeitgeistResult[] uris = ZeitgeistProxy.Default.FindEvents (
-						DateTime.Now.AddDays (-14), 
-						DateTime.Now, 
-						8, 
-						false, 
-						"mostused",
-						filter.AsSingle ())
-						.Where (res => res.Uri.Contains ("://") &&
-									(!res.Uri.StartsWith ("file://") || System.IO.File.Exists (new Uri (res.Uri).LocalPath)))
-						.Take (4)
-						.ToArray ();
-					
-					lock (related_lock) {
-						related_uris = uris;
-					}
-				});
-				th.Priority = ThreadPriority.BelowNormal;
-				th.Start ();
-			}
-		}
-		
 		protected override MenuList OnGetMenuItems ()
 		{
 			MenuList list = base.OnGetMenuItems ();
@@ -187,20 +149,6 @@ namespace Docky.Items
 			else
 				list[MenuListContainer.Actions].Insert (0, new MenuItem (Catalog.GetString ("_Open"), RunIcon, (o, a) => Launch ()));
 
-			if (related_uris.Any ()) {
-				
-				list.SetContainerTitle (MenuListContainer.RelatedItems, Mono.Unix.Catalog.GetString ("Related Items"));
-				lock (related_lock) {
-					foreach (ZeitgeistResult result in related_uris) {
-						RelatedFileMenuItem item = new RelatedFileMenuItem (result.Uri);
-						if (!string.IsNullOrEmpty (result.Text))
-							item.Text = result.Text;
-						item.Clicked += ItemClicked;
-						list[MenuListContainer.RelatedItems].Add (item);
-					}
-				}
-			}
-				
 			return list;
 		}
 

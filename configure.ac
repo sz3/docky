@@ -186,7 +186,6 @@ Docky.Widgets/Makefile
 Docky.Services/Makefile
 Docky.Services/AssemblyInfo.cs
 Docky.Windowing/Makefile
-Docky.Zeitgeist/Makefile
 Docky/docky
 Docky/AssemblyInfo.cs
 StandardPlugins/Makefile
