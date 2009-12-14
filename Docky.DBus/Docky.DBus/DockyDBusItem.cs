@@ -26,13 +26,13 @@ using Docky.Menus;
 
 namespace Docky.DBus
 {
-	public struct Tuple
+	public struct ItemTuple
 	{
 		public string Name;
 		public string Icon;
 		public string Title;
 		
-		public Tuple (string name, string icon, string title)
+		public ItemTuple (string name, string icon, string title)
 		{
 			Name = name;
 			Icon = icon;
@@ -246,13 +246,13 @@ namespace Docky.DBus
 			(owner as IconDockItem).SetRemoteIcon ("");
 		}
 		
-		public Tuple GetItem (uint item)
+		public ItemTuple GetItem (uint item)
 		{
 			if (!items.ContainsKey (item))
-				return new Tuple ("", "", "");
+				return new ItemTuple ("", "", "");
 			
 			RemoteMenuEntry entry = items[item];
-			return new Tuple (entry.Text, entry.Icon, entry.Title);
+			return new ItemTuple (entry.Text, entry.Icon, entry.Title);
 		}
 		
 		#endregion

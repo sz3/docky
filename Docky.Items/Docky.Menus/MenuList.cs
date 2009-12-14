@@ -107,14 +107,12 @@ namespace Docky.Menus
 			
 			foreach (KeyValuePair<MenuListContainer, List<MenuItem>> kvp in list)
 			{
-				MenuListContainer container = kvp.Key;
-				result[container].AddRange (kvp.Value);
+				result[kvp.Key].AddRange (kvp.Value);
 			}
 			
 			foreach (KeyValuePair<MenuListContainer, List<MenuItem>> kvp in other.list)
 			{
-				MenuListContainer container = kvp.Key;
-				result[container].AddRange (kvp.Value);
+				result[kvp.Key].AddRange (kvp.Value);
 			}
 			
 			// copy other first so any conflicts are resolved with this copy winning

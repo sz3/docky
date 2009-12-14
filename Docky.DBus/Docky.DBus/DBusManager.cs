@@ -40,18 +40,21 @@ namespace Docky.DBus
 		static DBusManager manager;
 		public static DBusManager Default {
 			get {
-				if (manager == null)
-					manager = new DBusManager ();
 				return manager;
 			}
 		}
+		
+		static DBusManager ()
+		{
+			manager = new DBusManager ();
+		}
 
 		DockyDBus docky;
-		Dictionary<AbstractDockItem, DockyDBusItem> items;
+		Dictionary<AbstractDockItem, DockyDBusItem> item_dict;
 		
 		internal IEnumerable<AbstractDockItem> Items {
 			get {
-				return items.Keys;
+				return item_dict.Keys;
 			}
 		}
 		
@@ -68,7 +71,7 @@ namespace Docky.DBus
 				return;
 			}
 			
-			items = new Dictionary<AbstractDockItem, DockyDBusItem> ();
+			item_dict = new Dictionary<AbstractDockItem, DockyDBusItem> ();
 			
 			ObjectPath dockyPath = new ObjectPath (DockyPath);
 			docky = new DockyDBus ();
@@ -83,13 +86,13 @@ namespace Docky.DBus
 		
 		public void RegisterItem (AbstractDockItem item)
 		{
-			if (items.ContainsKey (item))
+			if (item_dict.ContainsKey (item))
 				return;
 			
 			string path = PathForItem (item);
 			DockyDBusItem dbusitem = new DockyDBusItem (item);
 			
-			items[item] = dbusitem;
+			item_dict[item] = dbusitem;
 			Bus.Session.Register (new ObjectPath (path), dbusitem);
 			
 			docky.OnItemAdded (path);
@@ -97,11 +100,11 @@ namespace Docky.DBus
 		
 		public void UnregisterItem (AbstractDockItem item)
 		{
-			if (!items.ContainsKey (item))
+			if (!item_dict.ContainsKey (item))
 				return;
 			
-			items[item].Dispose ();
-			items.Remove (item);
+			item_dict[item].Dispose ();
+			item_dict.Remove (item);
 			
 			ObjectPath path = new ObjectPath (PathForItem (item));
 			Bus.Session.Unregister (path);
