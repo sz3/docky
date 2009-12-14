@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2009 Jason Smith, Robert Dyer, Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -70,13 +70,15 @@ namespace Docky.Windowing
 				return new [] {
 					// These are XDG variables...
 					"XDG_DATA_HOME",
-					"XDG_DATA_DIRS"
-				}.SelectMany (v => XdgEnvironmentPaths (v))
+					"XDG_DATA_DIRS",
+					// Crossover apps
+					"CX_APPS",
+				}.SelectMany (v => ExpandPathVar (v))
 				 .Where (d => Directory.Exists (d));
 			}
 		}
 		
-		static IEnumerable<string> XdgEnvironmentPaths (string xdgVar)
+		static IEnumerable<string> ExpandPathVar (string xdgVar)
 		{
 			string envPath = Environment.GetEnvironmentVariable (xdgVar);
 			
@@ -91,6 +93,12 @@ namespace Docky.Windowing
 				case "XDG_DATA_DIRS":
 					yield return "/usr/local/share/applications";
 					yield return "/usr/share/applications";
+					break;
+				case "CX_APPS":
+					yield return Path.Combine (
+						Environment.GetFolderPath (Environment.SpecialFolder.Personal),
+						".cxoffice"
+					);
 					break;
 				}
 			} else {
@@ -544,6 +552,9 @@ namespace Docky.Windowing
 					// remove the trailing " and anything after it
 					if (vexec.Contains ("\""))
 					    vexec = vexec.Substring (0, vexec.IndexOf ("\""));
+				// for crossover apps
+				} else if (exec.Contains (".cxoffice") && item.HasAttribute ("X-Created-By") && item.GetString ("X-Created-By").Contains ("cxoffice")) {
+					Console.WriteLine ("CXOFFICE: {0}", exec);
 				} else {
 					string [] parts = exec.Split (' ');
 					
