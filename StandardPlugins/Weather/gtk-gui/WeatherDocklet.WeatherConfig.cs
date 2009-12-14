@@ -161,7 +161,7 @@ namespace WeatherDocklet {
             // Container child GtkViewport.Gtk.Container+ContainerChild
             this.results_view = new Docky.Widgets.TileView();
             this.results_view.Name = "results_view";
-            this.results_view.IconSize = 0;
+            this.results_view.IconSize = 24;
             w17.Add(this.results_view);
             this.scrolledwindow1.Add(w17);
             this.vbox1.Add(this.scrolledwindow1);
