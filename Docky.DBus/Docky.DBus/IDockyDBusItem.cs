@@ -59,6 +59,6 @@ namespace Docky.DBus
 		void ResetText ();
 		void ResetIcon ();
 		
-		Tuple GetItem (uint item);
+		ItemTuple GetItem (uint item);
 	}
 }
