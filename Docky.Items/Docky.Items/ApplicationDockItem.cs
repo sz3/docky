@@ -55,7 +55,6 @@ namespace Docky.Items
 		}
 		
 		bool can_manage_windows;
-		uint timer;
 		IEnumerable<string> mimes;
 		
 		public DesktopItem OwnedItem { get; protected set; }
@@ -203,7 +202,6 @@ namespace Docky.Items
 		
 		public override void Dispose ()
 		{
-			GLib.Source.Remove (timer);
 			Wnck.Screen.Default.WindowOpened -= WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed -= WnckScreenDefaultWindowClosed;
 			base.Dispose ();
