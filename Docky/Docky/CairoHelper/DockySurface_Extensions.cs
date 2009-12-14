@@ -64,7 +64,8 @@ namespace Docky.CairoHelper
 			cr.IdentityMatrix ();
 		}
 		
-		public static void ShowAsReflection (this DockySurface self, DockySurface target, PointD point, double zoom, double rotation, double opacity, DockPosition position)
+		public static void ShowAsReflection (this DockySurface self, DockySurface target, PointD point, double zoom, 
+			double rotation, double opacity, double height, DockPosition position)
 		{
 			if (target == null)
 				throw new ArgumentNullException ("target");
@@ -73,16 +74,16 @@ namespace Docky.CairoHelper
 			
 			switch (position) {
 			case DockPosition.Left:
-				point.X -= self.Width * zoom;
+				point.X -= self.Width * zoom + height;
 				break;
 			case DockPosition.Top:
-				point.Y -= self.Height * zoom;
+				point.Y -= self.Height * zoom + height;
 				break;
 			case DockPosition.Right:
-				point.X += self.Width * zoom;
+				point.X += self.Width * zoom + height;
 				break;
 			case DockPosition.Bottom:
-				point.Y += self.Height * zoom;
+				point.Y += self.Height * zoom + height;
 				break;
 			}
 			
@@ -139,14 +140,16 @@ namespace Docky.CairoHelper
 			cr.Paint ();
 		}
 		
-		public static void TileOntoSurface (this DockySurface self, DockySurface target, Gdk.Rectangle area, int edgeBuffer, DockPosition orientation)
+		public static void TileOntoSurface (this DockySurface self, DockySurface target, Gdk.Rectangle area, int edgeBuffer, double tilt, DockPosition orientation)
 		{
 			if (orientation == DockPosition.Left || orientation == DockPosition.Right) {
+				
 				int x = area.X;
 				if (orientation == DockPosition.Left)
 					x -= self.Width - area.Width;
 				
 				Cairo.Context cr = target.Context;
+				
 				// draw left edge
 				cr.Rectangle (area.X, area.Y, area.Width, edgeBuffer);
 				cr.SetSource (self.Internal, x, area.Y);
@@ -166,16 +169,28 @@ namespace Docky.CairoHelper
 				cr.Rectangle (area.X, position, area.Width, edgeBuffer);
 				cr.SetSource (self.Internal, x, area.Y + area.Height - self.Height);
 				cr.Fill ();
+				
 			} else {
+				if (tilt != 1) {
+					area.Y += (int) (area.Height * tilt);
+					area.Height -= (int) (area.Height * tilt);
+				}
+				
 				int y = area.Y;
 				if (orientation == DockPosition.Top)
 					y -= self.Height - area.Height;
 				
 				Cairo.Context cr = target.Context;
+				cr.Rectangle (area.X - 100, area.Y, edgeBuffer + 100, area.Height);
+				
+				Matrix m = new Matrix (1, 0, -tilt, 1, 0, y);
+				cr.Transform (m);
+				
 				// draw left edge
-				cr.Rectangle (area.X, area.Y, edgeBuffer, area.Height);
-				cr.SetSource (self.Internal, area.X, y);
+				cr.SetSource (self.Internal, area.X, 0);
 				cr.Fill ();
+				
+				cr.IdentityMatrix ();
 				
 				int maxMiddleMove = self.Width - 2 * edgeBuffer;
 				int position = area.X + edgeBuffer;
@@ -188,9 +203,15 @@ namespace Docky.CairoHelper
 					position += width;
 				}
 				
-				cr.Rectangle (position, area.Y, edgeBuffer, area.Height);
-				cr.SetSource (self.Internal, area.X + area.Width - self.Width, y);
+				cr.Rectangle (position, area.Y, edgeBuffer + 100, area.Height);
+				
+				m = new Matrix (1, 0, tilt, 1, 0, y);
+				cr.Transform (m);
+				
+				cr.SetSource (self.Internal, area.X + area.Width - self.Width, 0);
 				cr.Fill ();
+
+				cr.IdentityMatrix ();
 			}
 		}
 		

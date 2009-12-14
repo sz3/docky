@@ -393,8 +393,8 @@ namespace Docky.Interface
 			get { return Preferences.Position; }
 		}
 		
-		bool Reflection {
-			get { return false; }
+		bool ThreeDimensional {
+			get { return Position == DockPosition.Bottom && true; }
 		}
 		
 		
@@ -466,7 +466,7 @@ namespace Docky.Interface
 		}
 		
 		int DockHeightBuffer {
-			get { return (Preferences.PanelMode) ? 3 : 7 + (Reflection ? 5 : 0); }
+			get { return (Preferences.PanelMode) ? 3 : 7 + (ThreeDimensional ? 5 : 0); }
 		}
 		
 		int ItemWidthBuffer {
@@ -1939,8 +1939,10 @@ namespace Docky.Interface
 			
 			// The big expensive paint happens right here!
 			icon.ShowWithOptions (surface, center.Center, renderZoom, renderRotation, opacity);
-			if (Reflection)
-				icon.ShowAsReflection (surface, center.Center, renderZoom, renderRotation, opacity, Position);
+			if (ThreeDimensional) {
+				double offset = 2 * Math.Max (Math.Abs (val.Center.X - center.Center.X), Math.Abs (val.Center.Y - center.Center.Y));
+				icon.ShowAsReflection (surface, center.Center, renderZoom, renderRotation, opacity, offset, Position);
+			}
 			
 			if (lighten > 0) {
 				surface.Context.Operator = Operator.Add;
@@ -2169,7 +2171,8 @@ namespace Docky.Interface
 				background.Dispose ();
 			}
 			
-			background_buffer.TileOntoSurface (surface, backgroundArea, 50, Position);
+			double tilt = ThreeDimensional ? .6 : 1;
+			background_buffer.TileOntoSurface (surface, backgroundArea, 50, .6, Position);
 		}
 		
 		protected override void OnStyleSet (Style previous_style)
