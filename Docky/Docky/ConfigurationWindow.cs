@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -26,17 +26,15 @@ using Cairo;
 using Gdk;
 using Gnome;
 using Gtk;
+using Mono.Unix;
 
 using Docky.Interface;
 using Docky.Services;
 
 namespace Docky
 {
-
-
 	public partial class ConfigurationWindow : Gtk.Window
 	{
-		
 		Dock activeDock;
 		string AutoStartKey = "Hidden";
 		DesktopItem autostartfile;
@@ -47,7 +45,7 @@ namespace Docky
 				if (activeDock == value)
 					return;
 				
-				if (activeDock != null)
+				if (activeDock != null && value != null)
 					activeDock.UnsetActiveGlow ();
 				
 				activeDock = value;
