@@ -312,7 +312,8 @@ namespace Docky.Interface
 				SetHoveredAcceptsDrop ();
 				OnHoveredItemChanged (last);
 				
-				UpdateHoverText ();
+				if (value != null)
+					UpdateHoverText ();
 				SetTooltipVisibility ();
 			}
 		}
@@ -1295,7 +1296,12 @@ namespace Docky.Interface
 			}
 			
 			SetStruts ();
-			UpdateHoverText ();
+			
+			// move the hover after we redraw
+			GLib.Idle.Add (delegate {
+				UpdateHoverText ();
+				return false;
+			});
 		}
 		
 		void UpdateMonitorGeometry ()

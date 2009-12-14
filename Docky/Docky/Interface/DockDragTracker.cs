@@ -216,27 +216,34 @@ namespace Docky.Interface
 			
 			Gdk.Rectangle geo = Owner.Screen.GetMonitorGeometry (monitor);
 			
-			Gdk.Rectangle left = new Gdk.Rectangle (geo.X, geo.Y + 64, 64, geo.Height - 64 * 2);
-			Gdk.Rectangle top = new Gdk.Rectangle (geo.X + 64, geo.Y, geo.Width - 64 * 2, 64);
-			Gdk.Rectangle right = new Gdk.Rectangle (geo.X + geo.Width - 64, geo.Y + 64, 64, geo.Height - 64 * 2);
-			Gdk.Rectangle bottom = new Gdk.Rectangle (geo.X + 64, geo.Y + geo.Height - 64, geo.Width - 64 * 2, 64);
+			int activeRegion = Math.Min (geo.Height / 3, geo.Width / 3);
+			Gdk.Rectangle left = new Gdk.Rectangle (geo.X, geo.Y + activeRegion, activeRegion, geo.Height - activeRegion * 2);
+			Gdk.Rectangle top = new Gdk.Rectangle (geo.X + activeRegion, geo.Y, geo.Width - activeRegion * 2, activeRegion);
+			Gdk.Rectangle right = new Gdk.Rectangle (geo.X + geo.Width - activeRegion, geo.Y + activeRegion, activeRegion, geo.Height - activeRegion * 2);
+			Gdk.Rectangle bottom = new Gdk.Rectangle (geo.X + activeRegion, geo.Y + geo.Height - activeRegion, geo.Width - activeRegion * 2, activeRegion);
 			
 			DockPosition target = DockPosition.Left;
-			if (left.Contains (cursor)) {
-				target = DockPosition.Left;
-			} else if (top.Contains (cursor)) {
+			if (top.Contains (cursor)) {
 				target = DockPosition.Top;
-			} else if (right.Contains (cursor)) {
-				target = DockPosition.Right;
 			} else if (bottom.Contains (cursor)) {
 				target = DockPosition.Bottom;
+			} else if (left.Contains (cursor)) {
+				target = DockPosition.Left;
+			} else if (right.Contains (cursor)) {
+				target = DockPosition.Right;
 			} else {
 				return;
 			}
 			
 			IDockPreferences prefs = Owner.Preferences;
 			if (prefs.Position != target || prefs.MonitorNumber != monitor) {
-				if (Docky.Controller.PositionsAvailableForDock (monitor).Contains (target)) {
+				Dock d = Docky.Controller.DocksForMonitor (monitor).FirstOrDefault (dock => dock.Preferences.Position == target);
+				if (d == null) {
+					prefs.MonitorNumber = monitor;
+					prefs.Position = target;
+				} else {
+					d.Preferences.MonitorNumber = prefs.MonitorNumber;
+					d.Preferences.Position = prefs.Position;
 					prefs.MonitorNumber = monitor;
 					prefs.Position = target;
 				}
