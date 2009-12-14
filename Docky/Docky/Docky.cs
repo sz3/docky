@@ -140,7 +140,7 @@ namespace Docky
 				"Jason Smith <jassmith@gmail.com>",
 				"Robert Dyer <psybers@gmail.com>",
 				"Chris Szikszoy <chris@szikszoy.com>",
-				"Rico Tzschichholz",
+				"Rico Tzschichholz <ricotz@t-online.de>",
 				"Seif Lofty <seif@lotfy.com>",
 				"Chris Halse Rogers <raof@ubuntu.com>"
 			};
