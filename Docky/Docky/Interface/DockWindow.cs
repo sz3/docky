@@ -2023,7 +2023,7 @@ namespace Docky.Interface
 				surface.Context.Operator = Operator.Over;
 			}
 			
-			if ((item.State & ItemState.Active) == ItemState.Active) {
+			if ((item.State & ItemState.Active) == ItemState.Active && !ThreeDimensional) {
 				Gdk.Rectangle area;
 				
 				if (VerticalDock) {
