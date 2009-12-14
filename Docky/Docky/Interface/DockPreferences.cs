@@ -505,6 +505,7 @@ namespace Docky.Interface
 				DefaultProvider.SetWindowManager ();
 			
 			autohide_box.Active = (int) Autohide;
+			UpdateAutohideDescription ();
 			fade_on_hide_check.Sensitive = (int) Autohide > 0;
 			
 			panel_mode_button.Active = PanelMode;
@@ -607,7 +608,7 @@ namespace Docky.Interface
 				.Select (i => i.UniqueID ());
 		}
 		
-		void OnAutohideChanged ()
+		void UpdateAutohideDescription ()
 		{
 			switch (autohide_box.Active) {
 			case 0:
@@ -623,7 +624,11 @@ namespace Docky.Interface
 				hide_desc.Markup = Mono.Unix.Catalog.GetString ("<i>Hides when dock obstructs any window.</i>");
 				break;
 			}
-				                                              
+		}
+		
+		void OnAutohideChanged ()
+		{
+			UpdateAutohideDescription ();
 			if (AutohideChanged != null)
 				AutohideChanged (this, EventArgs.Empty);
 		}
