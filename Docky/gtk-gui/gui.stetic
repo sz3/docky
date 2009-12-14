@@ -57,7 +57,7 @@ Window Dodge</property>
                 <property name="MemberName" />
                 <property name="Tooltip" translatable="yes">Fade out dock instead of slide off screen</property>
                 <property name="CanFocus">True</property>
-                <property name="Label" translatable="yes">Fade On Hide</property>
+                <property name="Label" translatable="yes">_Fade On Hide</property>
                 <property name="DrawIndicator">True</property>
                 <property name="HasLabel">True</property>
                 <property name="UseUnderline">True</property>
@@ -128,7 +128,10 @@ Window Dodge</property>
                 <property name="MemberName" />
                 <property name="Xalign">1</property>
                 <property name="Yalign">0</property>
-                <property name="LabelProp" translatable="yes">Icon Size:</property>
+                <property name="LabelProp" translatable="yes">_Icon Size:</property>
+                <property name="MnemonicWidget">icon_scale</property>
+                <property name="CanFocus">True</property>
+                <property name="UseUnderline">True</property>
               </widget>
               <packing>
                 <property name="TopAttach">2</property>
@@ -148,7 +151,10 @@ Window Dodge</property>
               <widget class="Gtk.Label" id="label3">
                 <property name="MemberName" />
                 <property name="Xalign">1</property>
-                <property name="LabelProp" translatable="yes">Autohide:</property>
+                <property name="LabelProp" translatable="yes">_Hiding:</property>
+                <property name="MnemonicWidget">autohide_box</property>
+                <property name="CanFocus">True</property>
+                <property name="UseUnderline">True</property>
               </widget>
               <packing>
                 <property name="AutoSize">True</property>
@@ -167,7 +173,7 @@ Window Dodge</property>
                 <property name="MemberName" />
                 <property name="Tooltip" translatable="yes" />
                 <property name="CanFocus">True</property>
-                <property name="Label" translatable="yes">Indicate Multiple Windows</property>
+                <property name="Label" translatable="yes">Indicat_e Multiple Windows</property>
                 <property name="DrawIndicator">True</property>
                 <property name="HasLabel">True</property>
                 <property name="UseUnderline">True</property>
@@ -192,7 +198,7 @@ Window Dodge</property>
               <widget class="Gtk.CheckButton" id="panel_mode_button">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
-                <property name="Label" translatable="yes">Panel Mode</property>
+                <property name="Label" translatable="yes">_Panel Mode</property>
                 <property name="DrawIndicator">True</property>
                 <property name="HasLabel">True</property>
                 <property name="UseUnderline">True</property>
@@ -218,7 +224,7 @@ Window Dodge</property>
                 <property name="MemberName" />
                 <property name="Tooltip" translatable="yes" />
                 <property name="CanFocus">True</property>
-                <property name="Label" translatable="yes">Manage Windows Without Launcher</property>
+                <property name="Label" translatable="yes">_Manage Windows Without Launcher</property>
                 <property name="DrawIndicator">True</property>
                 <property name="HasLabel">True</property>
                 <property name="UseUnderline">True</property>
@@ -244,7 +250,7 @@ Window Dodge</property>
               <widget class="Gtk.CheckButton" id="zoom_checkbutton">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
-                <property name="Label" translatable="yes">Zoom:</property>
+                <property name="Label" translatable="yes">_Zoom:</property>
                 <property name="DrawIndicator">True</property>
                 <property name="HasLabel">True</property>
                 <property name="UseUnderline">True</property>
@@ -520,7 +526,7 @@ Window Dodge</property>
                           <widget class="Gtk.CheckButton" id="start_with_computer_checkbutton">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
-                            <property name="Label" translatable="yes">Start When Computer Starts</property>
+                            <property name="Label" translatable="yes">_Start When Computer Starts</property>
                             <property name="DrawIndicator">True</property>
                             <property name="HasLabel">True</property>
                             <property name="UseUnderline">True</property>
@@ -540,7 +546,10 @@ Window Dodge</property>
                             <child>
                               <widget class="Gtk.Label" id="label2">
                                 <property name="MemberName" />
-                                <property name="LabelProp" translatable="yes">Theme:</property>
+                                <property name="LabelProp" translatable="yes">_Theme:</property>
+                                <property name="MnemonicWidget">theme_combo</property>
+                                <property name="CanFocus">True</property>
+                                <property name="UseUnderline">True</property>
                               </widget>
                               <packing>
                                 <property name="Position">0</property>
@@ -646,7 +655,7 @@ Window Dodge</property>
                     <property name="CanFocus">True</property>
                     <property name="Type">TextAndIcon</property>
                     <property name="Icon">stock:gtk-add Menu</property>
-                    <property name="Label" translatable="yes">New Dock</property>
+                    <property name="Label" translatable="yes">_New Dock</property>
                     <property name="UseUnderline">True</property>
                     <property name="BorderWidth">5</property>
                     <signal name="Clicked" handler="OnNewDockButtonClicked" />
@@ -664,7 +673,7 @@ Window Dodge</property>
                     <property name="CanFocus">True</property>
                     <property name="Type">TextAndIcon</property>
                     <property name="Icon">stock:gtk-delete Menu</property>
-                    <property name="Label" translatable="yes">Delete Dock</property>
+                    <property name="Label" translatable="yes">_Delete Dock</property>
                     <property name="UseUnderline">True</property>
                     <property name="BorderWidth">5</property>
                     <signal name="Clicked" handler="OnDeleteDockButtonClicked" />

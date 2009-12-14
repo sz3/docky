@@ -83,7 +83,7 @@ namespace Docky {
             this.start_with_computer_checkbutton = new Gtk.CheckButton();
             this.start_with_computer_checkbutton.CanFocus = true;
             this.start_with_computer_checkbutton.Name = "start_with_computer_checkbutton";
-            this.start_with_computer_checkbutton.Label = Mono.Unix.Catalog.GetString("Start When Computer Starts");
+            this.start_with_computer_checkbutton.Label = Mono.Unix.Catalog.GetString("_Start When Computer Starts");
             this.start_with_computer_checkbutton.DrawIndicator = true;
             this.start_with_computer_checkbutton.UseUnderline = true;
             this.vbox3.Add(this.start_with_computer_checkbutton);
@@ -97,8 +97,10 @@ namespace Docky {
             this.hbox4.Spacing = 6;
             // Container child hbox4.Gtk.Box+BoxChild
             this.label2 = new Gtk.Label();
+            this.label2.CanFocus = true;
             this.label2.Name = "label2";
-            this.label2.LabelProp = Mono.Unix.Catalog.GetString("Theme:");
+            this.label2.LabelProp = Mono.Unix.Catalog.GetString("_Theme:");
+            this.label2.UseUnderline = true;
             this.hbox4.Add(this.label2);
             Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(this.hbox4[this.label2]));
             w2.Position = 0;
@@ -176,7 +178,7 @@ namespace Docky {
             w12.Add(w13);
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w15 = new Gtk.Label();
-            w15.LabelProp = Mono.Unix.Catalog.GetString("New Dock");
+            w15.LabelProp = Mono.Unix.Catalog.GetString("_New Dock");
             w15.UseUnderline = true;
             w12.Add(w15);
             w11.Add(w12);
@@ -203,7 +205,7 @@ namespace Docky {
             w21.Add(w22);
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w24 = new Gtk.Label();
-            w24.LabelProp = Mono.Unix.Catalog.GetString("Delete Dock");
+            w24.LabelProp = Mono.Unix.Catalog.GetString("_Delete Dock");
             w24.UseUnderline = true;
             w21.Add(w24);
             w20.Add(w21);
@@ -247,6 +249,7 @@ namespace Docky {
             }
             this.DefaultWidth = 488;
             this.DefaultHeight = 482;
+            this.label2.MnemonicWidget = this.theme_combo;
             this.Show();
             this.start_with_computer_checkbutton.Toggled += new System.EventHandler(this.OnStartWithComputerCheckbuttonToggled);
             this.theme_combo.Changed += new System.EventHandler(this.OnThemeComboChanged);
