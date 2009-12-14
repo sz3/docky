@@ -102,7 +102,6 @@ namespace Docky
 			Gtk.Application.Run ();
 			Gdk.Threads.Leave ();
 			
-			DBusManager.Default.Shutdown ();
 			Controller.Dispose ();
 			PluginManager.Shutdown ();
 			Gnome.Vfs.Vfs.Shutdown ();
@@ -160,6 +159,7 @@ namespace Docky
 		
 		public static void Quit ()
 		{
+			DBusManager.Default.Shutdown ();
 			Gtk.Application.Quit ();
 		}
 	}
