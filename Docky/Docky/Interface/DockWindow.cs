@@ -1285,6 +1285,7 @@ namespace Docky.Interface
 			}
 			
 			SetStruts ();
+			UpdateHoverText ();
 		}
 		
 		void UpdateMonitorGeometry ()
