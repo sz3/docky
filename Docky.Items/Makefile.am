@@ -15,6 +15,7 @@ FILES = \
 	Docky.Menus/RelatedFileMenuItem.cs \
 	Docky.Menus/SeparatorMenuItem.cs \
 	Docky.Menus/WindowMenuItem.cs \
+	Docky.Menus/IconMenuItem.cs \
 	Docky.Items/WindowDockItem.cs \
 	Docky.Items/AbstractDockItem.cs \
 	Docky.Items/AbstractDockItemProvider.cs \

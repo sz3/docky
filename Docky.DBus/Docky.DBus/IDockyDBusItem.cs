@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smithm, Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -47,6 +47,8 @@ namespace Docky.DBus
 		event MenuItemActivatedHandler MenuItemActivated;
 
 		uint AddMenuItem (string name, string icon, string title);
+		uint AddFileMenuItem (string uri, string title);
+		
 		void RemoveItem (uint item);
 		void ConfirmItem (uint item);
 		

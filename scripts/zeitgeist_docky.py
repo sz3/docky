@@ -83,11 +83,8 @@ class DockyZGItem(DockyItem):
 
 	def _handle_get_most_used(self, uris):
 		for subject in uris:
-			menu_id = self.iface.AddMenuItem(subject.text, "gtk-file", "Most Used Items")
+			menu_id = self.iface.AddFileMenuItem(subject.uri, "Most Used Items")
 			self.id_map[menu_id] = subject.uri
-		
-	def menu_pressed(self, menu_id):
-		os.spawnlp(os.P_NOWAIT, "xdg-open", "xdg-open", self.id_map[menu_id])
 
 class DockyZGSink(DockySink):
 	def item_path_found(self, pathtoitem, item):

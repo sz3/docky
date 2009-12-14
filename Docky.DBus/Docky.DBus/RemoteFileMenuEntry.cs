@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,21 +17,33 @@
 
 using System;
 
+using GLib;
+
 using Docky.Menus;
+using Docky.Services;
 
 namespace Docky.DBus
 {
 
-
-	public class RemoteMenuEntry : IconMenuItem
+	public class RemoteFileMenuEntry : RemoteMenuEntry
 	{
-		public uint ID { get; private set; }
-		public string Title { get; private set; }
 
-		public RemoteMenuEntry (uint id, string name, string icon, string groupTitle) : base(name, icon)
+		public RemoteFileMenuEntry (uint id, GLib.File file, string groupTitle) : base (id, file.Basename, "", groupTitle)
 		{
-			ID = id;
-			Title = groupTitle;
+			Clicked += delegate {
+				DockServices.System.Open (file);
+			};
+			
+			// only check the icon if it's mounted (ie: .Path != null)
+			if (!string.IsNullOrEmpty (file.Path)) {
+				string thumbnailPath = file.QueryStringAttr ("thumbnail::path");
+				if (string.IsNullOrEmpty (thumbnailPath))
+					Icon = DockServices.Drawing.IconFromGIcon (file.Icon ());
+				else
+					Icon = thumbnailPath;
+			} else {
+				Icon = "gtk-file";
+			}
 		}
 	}
 }
