@@ -198,7 +198,8 @@ namespace Docky.Interface
 		public void Hide ()
 		{
 			Visible = false;
-			window.Hide ();
+			if (window != null)
+				window.Hide ();
 		}
 		
 		static DockySurface[] GetSlices (DockySurface model)
