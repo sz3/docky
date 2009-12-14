@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -26,17 +26,15 @@ using Cairo;
 using Gdk;
 using Gnome;
 using Gtk;
+using Mono.Unix;
 
 using Docky.Interface;
 using Docky.Services;
 
 namespace Docky
 {
-
-
 	public partial class ConfigurationWindow : Gtk.Window
 	{
-		
 		Dock activeDock;
 		string AutoStartKey = "Hidden";
 		DesktopItem autostartfile;
@@ -47,7 +45,7 @@ namespace Docky
 				if (activeDock == value)
 					return;
 				
-				if (activeDock != null)
+				if (activeDock != null && value != null)
 					activeDock.UnsetActiveGlow ();
 				
 				activeDock = value;
@@ -185,12 +183,41 @@ namespace Docky
 				return;
 			
 			if (ActiveDock != null) {
-				Docky.Controller.DeleteDock (ActiveDock);
-				if (Docky.Controller.Docks.Count () == 1)
-					ActiveDock = Docky.Controller.Docks.First ();
-				else
-					ActiveDock = null;
-				SetupConfigAlignment ();
+				Gtk.MessageDialog md = new Gtk.MessageDialog (null, 
+						  0,
+						  Gtk.MessageType.Warning, 
+						  Gtk.ButtonsType.None,
+						  "<b><big>" + Catalog.GetString ("Delete the currently selected dock?") + "</big></b>");
+				md.Icon = DockServices.Drawing.LoadIcon ("docky", 22);
+				md.SecondaryText = Catalog.GetString ("If you choose to delete the dock, all settings\n" +
+					"for the deleted dock will be permanently lost.");
+				md.Modal = true;
+				md.KeepAbove = true;
+				md.Stick ();
+				
+				Gtk.Button cancel_button = new Gtk.Button();
+				cancel_button.CanFocus = true;
+				cancel_button.CanDefault = true;
+				cancel_button.Name = "cancel_button";
+				cancel_button.UseStock = true;
+				cancel_button.UseUnderline = true;
+				cancel_button.Label = "gtk-cancel";
+				cancel_button.Show ();
+				md.AddActionWidget (cancel_button, Gtk.ResponseType.Cancel);
+				md.AddButton (Catalog.GetString ("_Delete Dock"), Gtk.ResponseType.Ok);
+				md.DefaultResponse = Gtk.ResponseType.Cancel;
+			
+				if ((ResponseType)md.Run () == Gtk.ResponseType.Ok) {
+					Docky.Controller.DeleteDock (ActiveDock);
+					if (Docky.Controller.Docks.Count () == 1)
+						ActiveDock = Docky.Controller.Docks.First ();
+					else
+						ActiveDock = null;
+					SetupConfigAlignment ();
+				}
+				
+				md.Destroy ();
+				
 			}
 			CheckButtons ();
 		}

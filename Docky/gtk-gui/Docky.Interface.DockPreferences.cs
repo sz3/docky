@@ -94,7 +94,7 @@ namespace Docky.Interface {
             this.fade_on_hide_check.TooltipMarkup = "Fade out dock instead of slide off screen";
             this.fade_on_hide_check.CanFocus = true;
             this.fade_on_hide_check.Name = "fade_on_hide_check";
-            this.fade_on_hide_check.Label = Mono.Unix.Catalog.GetString("Fade On Hide");
+            this.fade_on_hide_check.Label = Mono.Unix.Catalog.GetString("_Fade On Hide");
             this.fade_on_hide_check.DrawIndicator = true;
             this.fade_on_hide_check.UseUnderline = true;
             this.table3.Add(this.fade_on_hide_check);
@@ -134,10 +134,12 @@ namespace Docky.Interface {
             w4.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table3.Gtk.Table+TableChild
             this.label1 = new Gtk.Label();
+            this.label1.CanFocus = true;
             this.label1.Name = "label1";
             this.label1.Xalign = 1F;
             this.label1.Yalign = 0F;
-            this.label1.LabelProp = Mono.Unix.Catalog.GetString("Icon Size:");
+            this.label1.LabelProp = Mono.Unix.Catalog.GetString("_Icon Size:");
+            this.label1.UseUnderline = true;
             this.table3.Add(this.label1);
             Gtk.Table.TableChild w5 = ((Gtk.Table.TableChild)(this.table3[this.label1]));
             w5.TopAttach = ((uint)(2));
@@ -146,9 +148,11 @@ namespace Docky.Interface {
             w5.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table3.Gtk.Table+TableChild
             this.label3 = new Gtk.Label();
+            this.label3.CanFocus = true;
             this.label3.Name = "label3";
             this.label3.Xalign = 1F;
-            this.label3.LabelProp = Mono.Unix.Catalog.GetString("Autohide:");
+            this.label3.LabelProp = Mono.Unix.Catalog.GetString("_Hiding:");
+            this.label3.UseUnderline = true;
             this.table3.Add(this.label3);
             Gtk.Table.TableChild w6 = ((Gtk.Table.TableChild)(this.table3[this.label3]));
             w6.XOptions = ((Gtk.AttachOptions)(4));
@@ -157,7 +161,7 @@ namespace Docky.Interface {
             this.multiple_window_indicator_check = new Gtk.CheckButton();
             this.multiple_window_indicator_check.CanFocus = true;
             this.multiple_window_indicator_check.Name = "multiple_window_indicator_check";
-            this.multiple_window_indicator_check.Label = Mono.Unix.Catalog.GetString("Indicate Multiple Windows");
+            this.multiple_window_indicator_check.Label = Mono.Unix.Catalog.GetString("Indicat_e Multiple Windows");
             this.multiple_window_indicator_check.DrawIndicator = true;
             this.multiple_window_indicator_check.UseUnderline = true;
             this.table3.Add(this.multiple_window_indicator_check);
@@ -171,7 +175,7 @@ namespace Docky.Interface {
             this.panel_mode_button = new Gtk.CheckButton();
             this.panel_mode_button.CanFocus = true;
             this.panel_mode_button.Name = "panel_mode_button";
-            this.panel_mode_button.Label = Mono.Unix.Catalog.GetString("Panel Mode");
+            this.panel_mode_button.Label = Mono.Unix.Catalog.GetString("_Panel Mode");
             this.panel_mode_button.DrawIndicator = true;
             this.panel_mode_button.UseUnderline = true;
             this.table3.Add(this.panel_mode_button);
@@ -185,7 +189,7 @@ namespace Docky.Interface {
             this.window_manager_check = new Gtk.CheckButton();
             this.window_manager_check.CanFocus = true;
             this.window_manager_check.Name = "window_manager_check";
-            this.window_manager_check.Label = Mono.Unix.Catalog.GetString("Manage Windows Without Launcher");
+            this.window_manager_check.Label = Mono.Unix.Catalog.GetString("_Manage Windows Without Launcher");
             this.window_manager_check.DrawIndicator = true;
             this.window_manager_check.UseUnderline = true;
             this.window_manager_check.Xalign = 0F;
@@ -200,7 +204,7 @@ namespace Docky.Interface {
             this.zoom_checkbutton = new Gtk.CheckButton();
             this.zoom_checkbutton.CanFocus = true;
             this.zoom_checkbutton.Name = "zoom_checkbutton";
-            this.zoom_checkbutton.Label = Mono.Unix.Catalog.GetString("Zoom:");
+            this.zoom_checkbutton.Label = Mono.Unix.Catalog.GetString("_Zoom:");
             this.zoom_checkbutton.DrawIndicator = true;
             this.zoom_checkbutton.UseUnderline = true;
             this.zoom_checkbutton.Xalign = 1F;
@@ -336,6 +340,8 @@ namespace Docky.Interface {
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
+            this.label1.MnemonicWidget = this.icon_scale;
+            this.label3.MnemonicWidget = this.autohide_box;
             this.Hide();
             this.window_manager_check.Toggled += new System.EventHandler(this.OnWindowManagerCheckToggled);
             this.panel_mode_button.Toggled += new System.EventHandler(this.OnPanelModeButtonToggled);

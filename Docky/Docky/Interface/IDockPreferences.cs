@@ -61,6 +61,8 @@ namespace Docky.Interface
 		
 		bool IndicateMultipleWindows { get; set; }
 		
+		bool ThreeDimensional { get; set; }
+		
 		bool ZoomEnabled { get; set; }
 				
 		double ZoomPercent { get; set; }
