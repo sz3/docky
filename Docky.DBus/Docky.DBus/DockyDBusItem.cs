@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -20,6 +20,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+
+using GLib;
 
 using Docky.Items;
 using Docky.Menus;
@@ -173,8 +175,26 @@ namespace Docky.DBus
 			RemoteMenuEntry rem = new RemoteMenuEntry (number, name, icon, title);
 			rem.Clicked += HandleActivated;
 			
-			items[number] = rem;
-			update_time[number] = DateTime.UtcNow;
+			AddToList (rem, number);
+			
+			return number;
+		}
+		
+		public uint AddFileMenuItem (string uri, string title)
+		{			
+			uint number = GetRandomID ();
+			
+			RemoteFileMenuEntry rem = new RemoteFileMenuEntry (number, FileFactory.NewForUri (uri), title);
+			
+			AddToList (rem, number);
+			
+			return number;
+		}
+		
+		private void AddToList (RemoteMenuEntry entry, uint id)
+		{
+			items[id] = entry;
+			update_time[id] = DateTime.UtcNow;
 			
 			//Insert items into list... this is stupid but whatever fix later
 			foreach (MenuItem item in items.Values)
@@ -191,8 +211,6 @@ namespace Docky.DBus
 				}
 				container++;
 			}
-			
-			return number;
 		}
 		
 		public void RemoveItem (uint item)

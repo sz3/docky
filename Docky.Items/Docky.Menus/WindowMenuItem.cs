@@ -25,7 +25,7 @@ namespace Docky.Menus
 {
 
 
-	public class WindowMenuItem : MenuItem
+	public class WindowMenuItem : IconMenuItem
 	{
 		Wnck.Window window;
 		
@@ -35,7 +35,6 @@ namespace Docky.Menus
 			this.window = window;
 			
 			this.Clicked += HandleClicked;
-			this.ShowIcons = true;
 		}
 		
 		public WindowMenuItem (Wnck.Window window, Pixbuf icon) : this (window, "")

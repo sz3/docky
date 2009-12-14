@@ -47,6 +47,10 @@
     <Reference Include="wnck-sharp, Version=2.20.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <Package>wnck-sharp-2.20</Package>
     </Reference>
+    <Reference Include="gio-sharp, Version=2.14.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\build\gio-sharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Docky.DBus\" />
@@ -58,6 +62,7 @@
     <Compile Include="Docky.DBus\DockyDBusItem.cs" />
     <Compile Include="Docky.DBus\DockyDBus.cs" />
     <Compile Include="Docky.DBus\RemoteMenuEntry.cs" />
+    <Compile Include="Docky.DBus\RemoteFileMenuEntry.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Docky.Services\Docky.Services.csproj">

@@ -10,7 +10,8 @@ FILES = \
 	Docky.DBus/DockyDBusItem.cs \
 	Docky.DBus/IDockyDBus.cs \
 	Docky.DBus/IDockyDBusItem.cs \
-	Docky.DBus/RemoteMenuEntry.cs
+	Docky.DBus/RemoteMenuEntry.cs \
+	Docky.DBus/RemoteFileMenuEntry.cs
 
 PROJECT_REFERENCES = \
 	Docky.Items \
@@ -21,6 +22,7 @@ REFERENCES =  \
 	System \
 	System.Core \
 	$(GLIB_SHARP_20_LIBS) \
+	$(GIO_SHARP_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(WNCK_SHARP_10_LIBS) \
 	$(NDESK_DBUS_10_LIBS) \
