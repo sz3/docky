@@ -45,12 +45,24 @@ namespace Docky.Menus
 		
  		public bool Selected { get; set; }
 		
-		public bool MenuShowingIcons { get; set; }
+		bool menu_icons = false;
+		public bool MenuShowingIcons {
+			get {
+				return menu_icons;
+			}
+			set {
+				if (menu_icons == value)
+					return;
+				menu_icons = value;
+				SetSize ();
+			}
+		}
 		
 		public Cairo.Color TextColor { get; set; }
 		
-		public int TextWidth { get; protected set; }
-				
+		int TextWidth { get; set; }
+		public int RequestedWidth { get; protected set; }
+		
 		DockySurface icon_surface, emblem_surface;
 		
 		internal MenuItemWidget (MenuItem item) : base()
@@ -70,6 +82,15 @@ namespace Docky.Menus
 			CalcTextWidth ();
 		}
 		
+		void SetSize ()
+		{
+			RequestedWidth = TextWidth + 2 * Padding + 1;
+			if (MenuShowingIcons)
+				RequestedWidth += MenuHeight + Padding;
+			
+			SetSizeRequest (RequestedWidth, MenuHeight);
+		}
+		
 		void CalcTextWidth ()
 		{
 			char accel;
@@ -84,11 +105,10 @@ namespace Docky.Menus
 			Pango.Rectangle logical, ink;
 			layout.GetPixelExtents (out ink, out logical);
 			
-			HasTooltip = logical.Width > MaxWidth;
-			TextWidth = Math.Min (MaxWidth, Math.Max (MinWidth, logical.Width)) + 2 * Padding + 1;
-			if (item.ShowIcons)
-				TextWidth += MenuHeight + Padding;
-			SetSizeRequest (TextWidth, MenuHeight);
+			TextWidth = Math.Min (MaxWidth, Math.Max (MinWidth, logical.Width));
+			HasTooltip = TextWidth < logical.Width;
+			
+			SetSize ();
 		}
 
 		void ItemDisabledChanged (object sender, EventArgs e)
@@ -228,27 +248,24 @@ namespace Docky.Menus
 				if (item.ShowIcons) {
 					PlaceSurface (cr, icon_surface, allocation);
 					cr.PaintWithAlpha (item.Disabled ? 0.5 : 1);
-				}
-				
-				if (item.Bold && item.ShowIcons) {
-					cr.Operator = Operator.Add;
-					PlaceSurface (cr, icon_surface, allocation);
-					cr.PaintWithAlpha (.8);
-					cr.Operator = Operator.Over;
-				}
-				
-				if (item.ShowIcons && !string.IsNullOrEmpty (item.Emblem)) {
-					PlaceSurface (cr, emblem_surface, allocation);
-					cr.Paint ();
+					
+					if (item.Bold) {
+						cr.Operator = Operator.Add;
+						PlaceSurface (cr, icon_surface, allocation);
+						cr.PaintWithAlpha (.8);
+						cr.Operator = Operator.Over;
+					}
+					
+					if (!string.IsNullOrEmpty (item.Emblem)) {
+						PlaceSurface (cr, emblem_surface, allocation);
+						cr.Paint ();
+					}
 				}
 			
 				Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
 				char accel;
 				layout.SetMarkupWithAccel (item.Text, '_', out accel);
-				if (item.ShowIcons)
-					layout.Width = Pango.Units.FromPixels (allocation.Width - allocation.Height - 3 * Padding - 1);
-				else
-					layout.Width = Pango.Units.FromPixels (allocation.Width - 2 * Padding - 1);
+				layout.Width = Pango.Units.FromPixels (TextWidth);
 				layout.FontDescription = Style.FontDescription;
 				layout.Ellipsize = Pango.EllipsizeMode.End;
 				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (FontSize);
@@ -257,11 +274,9 @@ namespace Docky.Menus
 				Pango.Rectangle logical, ink;
 				layout.GetPixelExtents (out ink, out logical);
 				
-				int offset;
-				if (item.ShowIcons || MenuShowingIcons)
-					offset = allocation.Height + 2 * Padding;
-				else
-					offset = Padding;
+				int offset = Padding;
+				if (MenuShowingIcons)
+					offset += MenuHeight + Padding;
 				cr.MoveTo (allocation.X + offset, allocation.Y + (allocation.Height - logical.Height) / 2);
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.Color = TextColor.SetAlpha (item.Disabled ? 0.5 : 1);

@@ -153,7 +153,6 @@ namespace Docky.Menus
 			
 			VBox vbox = new VBox ();
 			Container.Add (vbox);
-			int width = 1;
 			
 			Cairo.Color textColor;
 			if (IsLight) {
@@ -171,6 +170,7 @@ namespace Docky.Menus
 			}
 			
 			bool first = true;
+			int width = 1;
 			foreach (MenuItem item in items.DisplayItems) {
 				if (item is SeparatorMenuItem) {
 					SeparatorWidget widget = new SeparatorWidget ((item as SeparatorMenuItem).Title);
@@ -190,7 +190,7 @@ namespace Docky.Menus
 					first = false;
 					vbox.PackStart (menuItem, false, false, 0);
 					
-					width = Math.Max (width, menuItem.TextWidth);
+					width = Math.Max (width, menuItem.RequestedWidth);
 				}
 			}
 			vbox.SetSizeRequest (width, -1);
