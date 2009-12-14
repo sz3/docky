@@ -20,13 +20,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 using Mono.Unix;
 
-using Cairo;
 using Gdk;
 using Gtk;
 
+using Docky.DBus;
 using Docky.Windowing;
 using Docky.Services;
 
@@ -87,16 +88,35 @@ namespace Docky
 				CheckComposite ();
 			};
 			
+			DBusManager.Default.Initialize ();
 			PluginManager.Initialize ();
 			Controller.Initialize ();
+			
+			
+			GLib.Idle.Add (delegate {
+				LaunchHelpers ();
+				return false;
+			});
 			
 			Gdk.Threads.Enter ();
 			Gtk.Application.Run ();
 			Gdk.Threads.Leave ();
 			
+			DBusManager.Default.Shutdown ();
 			Controller.Dispose ();
 			PluginManager.Shutdown ();
 			Gnome.Vfs.Vfs.Shutdown ();
+		}
+		
+		static void LaunchHelpers ()
+		{
+			string directory = Path.Combine (DockServices.System.SystemDataFolder, "helpers");
+			
+			if (!Directory.Exists (directory))
+				return;
+			
+			foreach (string file in Directory.GetFiles (directory))
+				DockServices.System.Execute (file);
 		}
 		
 		static void CheckComposite ()
@@ -133,6 +153,11 @@ namespace Docky
 				about.Destroy ();
 			};
 			
+		}
+		
+		public static void Quit ()
+		{
+			Gtk.Application.Quit ();
 		}
 	}
 }

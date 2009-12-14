@@ -35,6 +35,12 @@ namespace Docky.Windowing
 		
 		public string Location { get; private set; }
 		
+		public string DesktopID {
+			get {
+				return Path.GetFileNameWithoutExtension (Location);
+			}
+		}
+		
 		public DesktopItem (string path)
 		{
 			Location = path;

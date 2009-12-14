@@ -30,6 +30,7 @@ using Gtk;
 using Mono.Unix;
 using Wnck;
 
+using Docky.DBus;
 using Docky.Items;
 using Docky.CairoHelper;
 using Docky.Menus;
@@ -448,6 +449,11 @@ namespace Docky.Interface
 			get { return Preferences.Position; }
 		}
 		
+		bool ThreeDimensional {
+			get { return Position == DockPosition.Bottom && Preferences.ThreeDimensional; }
+		}
+		
+		
 		bool ZoomEnabled {
 			get { return !Preferences.PanelMode && Preferences.ZoomEnabled; }
 		}
@@ -516,7 +522,7 @@ namespace Docky.Interface
 		}
 		
 		int DockHeightBuffer {
-			get { return (Preferences.PanelMode) ? 3 : 7; }
+			get { return (Preferences.PanelMode) ? 3 : 7 + (ThreeDimensional ? 5 : 0); }
 		}
 		
 		int ItemWidthBuffer {
@@ -799,6 +805,8 @@ namespace Docky.Interface
 			item.HoverTextChanged += ItemHoverTextChanged;
 			item.PaintNeeded += ItemPaintNeeded;
 			item.PainterRequest += ItemPainterRequest;
+			
+			DBusManager.Default.RegisterItem (item);
 		}
 
 		void UnregisterItem (AbstractDockItem item)
@@ -807,6 +815,8 @@ namespace Docky.Interface
 			item.PaintNeeded -= ItemPaintNeeded;
 			item.PainterRequest -= ItemPainterRequest;
 			DrawValues.Remove (item);
+			
+			DBusManager.Default.UnregisterItem (item);
 		}
 		
 		void ItemHoverTextChanged (object sender, EventArgs e)
@@ -1991,6 +2001,10 @@ namespace Docky.Interface
 			
 			// The big expensive paint happens right here!
 			icon.ShowWithOptions (surface, center.Center, renderZoom, renderRotation, opacity);
+			if (ThreeDimensional) {
+				double offset = 2 * Math.Max (Math.Abs (val.Center.X - center.Center.X), Math.Abs (val.Center.Y - center.Center.Y));
+				icon.ShowAsReflection (surface, center.Center, renderZoom, renderRotation, opacity, offset, Position);
+			}
 			
 			if (lighten > 0) {
 				surface.Context.Operator = Operator.Add;
@@ -2009,7 +2023,7 @@ namespace Docky.Interface
 				surface.Context.Operator = Operator.Over;
 			}
 			
-			if ((item.State & ItemState.Active) == ItemState.Active) {
+			if ((item.State & ItemState.Active) == ItemState.Active && !ThreeDimensional) {
 				Gdk.Rectangle area;
 				
 				if (VerticalDock) {
@@ -2219,7 +2233,8 @@ namespace Docky.Interface
 				background.Dispose ();
 			}
 			
-			background_buffer.TileOntoSurface (surface, backgroundArea, 50, Position);
+			double tilt = ThreeDimensional ? .6 : 0;
+			background_buffer.TileOntoSurface (surface, backgroundArea, 50, tilt, Position);
 		}
 		
 		protected override void OnStyleSet (Style previous_style)

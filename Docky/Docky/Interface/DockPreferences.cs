@@ -62,6 +62,7 @@ namespace Docky.Interface
 		public event EventHandler FadeOnHideChanged;
 		public event EventHandler FadeOpacityChanged;
 		public event EventHandler IndicatorSettingChanged;
+		public event EventHandler ThreeDimensionalChanged;
 		public event EventHandler ZoomEnabledChanged;
 		public event EventHandler ZoomPercentChanged;
 		
@@ -185,6 +186,22 @@ namespace Docky.Interface
 			}
 		}
 		
+		bool? three_dimensional;
+		public bool ThreeDimensional {
+			get {
+				if (!three_dimensional.HasValue)
+					three_dimensional = GetOption<bool?> ("ThreeDimensional", false);
+				return three_dimensional.Value;
+			}
+			set {
+				if (three_dimensional == value)
+					return;
+				three_dimensional = value;
+				SetOption<bool?> ("ThreeDimensional", three_dimensional.Value);
+				OnThreeDimensionalChanged ();
+			}
+		}
+		
 		bool? zoom_enabled;
 		public bool ZoomEnabled {
 			get {
@@ -288,6 +305,7 @@ namespace Docky.Interface
 			SetOption<int?> ("MonitorNumber", 0);
 			SetOption<string[]> ("Plugins", new string[0]);
 			SetOption<string[]> ("SortList", new string[0]);
+			SetOption<bool?> ("ThreeDimensional", false);
 			SetOption<bool?> ("WindowManager", false);
 			SetOption<bool?> ("ZoomEnabled", true);
 			SetOption<double?> ("ZoomPercent", 2.0);
@@ -668,7 +686,13 @@ namespace Docky.Interface
 			if (PanelModeChanged != null)
 				PanelModeChanged (this, EventArgs.Empty);
 		}
-				
+			
+		void OnThreeDimensionalChanged ()
+		{
+			if (ThreeDimensionalChanged != null)
+				ThreeDimensionalChanged (this, EventArgs.Empty);
+		}
+		
 		void OnZoomEnabledChanged ()
 		{
 			if (ZoomEnabledChanged != null)

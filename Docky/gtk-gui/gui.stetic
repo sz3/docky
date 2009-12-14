@@ -11,6 +11,7 @@
     <widget-library name="../../Docky.Services/bin/Debug/Docky.Services.dll" />
     <widget-library name="../../Docky.Items/bin/Debug/Docky.Items.dll" />
     <widget-library name="../../Docky.Windowing/bin/Debug/Docky.Windowing.dll" />
+    <widget-library name="../../Docky.DBus/bin/Debug/Docky.DBus.dll" />
     <widget-library name="../bin/Debug/Docky.exe" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="Docky.Interface.DockPreferences" design-size="411 356">
@@ -126,12 +127,12 @@ Window Dodge</property>
             <child>
               <widget class="Gtk.Label" id="label1">
                 <property name="MemberName" />
+                <property name="CanFocus">True</property>
                 <property name="Xalign">1</property>
                 <property name="Yalign">0</property>
                 <property name="LabelProp" translatable="yes">_Icon Size:</property>
-                <property name="MnemonicWidget">icon_scale</property>
-                <property name="CanFocus">True</property>
                 <property name="UseUnderline">True</property>
+                <property name="MnemonicWidget">icon_scale</property>
               </widget>
               <packing>
                 <property name="TopAttach">2</property>
@@ -150,11 +151,11 @@ Window Dodge</property>
             <child>
               <widget class="Gtk.Label" id="label3">
                 <property name="MemberName" />
+                <property name="CanFocus">True</property>
                 <property name="Xalign">1</property>
                 <property name="LabelProp" translatable="yes">_Hiding:</property>
-                <property name="MnemonicWidget">autohide_box</property>
-                <property name="CanFocus">True</property>
                 <property name="UseUnderline">True</property>
+                <property name="MnemonicWidget">autohide_box</property>
               </widget>
               <packing>
                 <property name="AutoSize">True</property>

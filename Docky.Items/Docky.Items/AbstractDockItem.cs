@@ -43,6 +43,7 @@ namespace Docky.Items
 	public abstract class AbstractDockItem : IDisposable
 	{
 		string hover_text;
+		string remote_text;
 		bool[] redraw;
 		DockySurface text_buffer;
 		DockySurface[] icon_buffers;
@@ -76,7 +77,7 @@ namespace Docky.Items
 		/// </summary>
 		public ItemState State {
 			get { return state; }
-			protected set {
+			set {
 				if (state == value)
 					return;
 				
@@ -151,7 +152,7 @@ namespace Docky.Items
 		/// </summary>
 		public string HoverText {
 			get {
-				return hover_text;
+				return string.IsNullOrEmpty (remote_text) ? hover_text : remote_text;
 			}
 			protected set {
 				if (hover_text == value)
@@ -193,6 +194,14 @@ namespace Docky.Items
 			internal set;
 		}
 		
+		/// <summary>
+		/// 
+		/// </summary>
+		public Docky.Menus.MenuList RemoteMenuItems {
+			get;
+			private set;
+		}
+		
 		public const int HoverTextHeight = 26;
 		
 		protected int IconSize { get; private set; }
@@ -202,15 +211,23 @@ namespace Docky.Items
 		public AbstractDockItem ()
 		{
 			ScalableRendering = true;
-			icon_buffers = new DockySurface [2];
-			badgeColors = new Cairo.Color [2];
-			redraw = new bool [2];
+			icon_buffers = new DockySurface[2];
+			badgeColors = new Cairo.Color[2];
+			redraw = new bool[2];
 			state_times = new Dictionary<ItemState, DateTime> ();
-			foreach (ItemState val in Enum.GetValues (typeof (ItemState)))
-				state_times [val] = new DateTime (0);
+			foreach (ItemState val in Enum.GetValues (typeof(ItemState)))
+				state_times[val] = new DateTime (0);
 			Gtk.IconTheme.Default.Changed += HandleIconThemeChanged;
+			RemoteMenuItems = new Docky.Menus.MenuList ();
 			
 			AppDomain.CurrentDomain.ProcessExit += HandleProcessExit;
+		}
+		
+		public void SetRemoteText (string text)
+		{
+			remote_text = text;
+			text_buffer = ResetBuffer (text_buffer);
+			OnHoverTextChanged ();
 		}
 
 		void HandleProcessExit (object sender, EventArgs e)
@@ -733,7 +750,7 @@ namespace Docky.Items
 		public Docky.Menus.MenuList GetMenuItems ()
 		{
 			try {
-				return OnGetMenuItems ();
+				return OnGetMenuItems ().Combine (RemoteMenuItems);
 			} catch (Exception e) {
 				Log<AbstractDockItem>.Error (e.Message);
 				Log<AbstractDockItem>.Debug (e.StackTrace);
