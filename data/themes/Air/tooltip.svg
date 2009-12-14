@@ -41,7 +41,7 @@
      id="base"
      showgrid="false"
      inkscape:zoom="14.25641"
-     inkscape:cx="12.682752"
+     inkscape:cx="0.89857913"
      inkscape:cy="13"
      inkscape:window-x="0"
      inkscape:window-y="24"
@@ -56,5 +56,5 @@
      x="0.50000006"
      y="0.50000006"
      id="rect2400"
-     style="opacity:0.90000000000000002;fill:#ffffff;fill-opacity:0.70588237;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.00000011999999994;stroke-linecap:square;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+     style="opacity:1;fill:#ffffff;fill-opacity:0.78431374;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.00000011999999994;stroke-linecap:square;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
 </svg>
