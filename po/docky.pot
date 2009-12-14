@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-13 10:54+0100\n"
+"POT-Creation-Date: 2009-12-14 13:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,46 +17,65 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:113
+#: ../Docky/Docky/ConfigurationWindow.cs:111
 msgid "Click on any dock to configure."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:114
+#: ../Docky/Docky/ConfigurationWindow.cs:112
 msgid "Drag any dock to move it."
 msgstr ""
 
-#: ../Docky/Docky/Docky.cs:105
+#: ../Docky/Docky/ConfigurationWindow.cs:190
+msgid "Delete the currently selected dock?"
+msgstr ""
+
+#: ../Docky/Docky/ConfigurationWindow.cs:192
+msgid ""
+"If you choose to delete the dock, all settings\n"
+"for the deleted dock will be permanently lost."
+msgstr ""
+
+#: ../Docky/Docky/ConfigurationWindow.cs:207
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:208
+msgid "_Delete Dock"
+msgstr ""
+
+#: ../Docky/Docky/Docky.cs:124
 msgid ""
 "Docky requires compositing to work properly.  Please enable compositing and "
 "restart docky."
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:312
+#: ../Docky/Docky/Interface/DockPreferences.cs:330
 msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:314
+#: ../Docky/Docky/Interface/DockPreferences.cs:332
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:608
-msgid "<i>Always present, acts like a panel.</i>"
+#: ../Docky/Docky/Interface/DockPreferences.cs:633
+msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:611
+#: ../Docky/Docky/Interface/DockPreferences.cs:636
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:614
+#: ../Docky/Docky/Interface/DockPreferences.cs:639
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:617
+#: ../Docky/Docky/Interface/DockPreferences.cs:642
 msgid "<i>Hides when dock obstructs any window.</i>"
+msgstr ""
+
+#: ../Docky/Docky/Interface/DockWindow.cs:330
+msgid "Drag to reposition"
 msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:91
@@ -78,27 +97,23 @@ msgid "Docky Configuration"
 msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:86
-msgid "Start When Computer Starts"
+msgid "_Start When Computer Starts"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:101
-msgid "Theme:"
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:102
+msgid "_Theme:"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:124
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:126
 msgid "<b>General Options</b>"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:145
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:147
 msgid "<b>Dock Configuration</b>"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:179
-msgid "New Dock"
-msgstr ""
-
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:206
-msgid "Delete Dock"
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:181
+msgid "_New Dock"
 msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
@@ -118,56 +133,52 @@ msgid "Window Dodge"
 msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:97
-msgid "Fade On Hide"
+msgid "_Fade On Hide"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:140
-msgid "Icon Size:"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:141
+msgid "_Icon Size:"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:151
-msgid "Autohide:"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:154
+msgid "_Hiding:"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:160
-msgid "Indicate Multiple Windows"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
+msgid "Indicat_e Multiple Windows"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:174
-msgid "Panel Mode"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
+msgid "_Panel Mode"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:188
-msgid "Manage Windows Without Launcher"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:192
+msgid "_Manage Windows Without Launcher"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:203
-msgid "Zoom:"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:207
+msgid "_Zoom:"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:278
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:282
 msgid "<b>Inactive Plugins</b>"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:286
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:290
 msgid "<b>Active Plugins</b>"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:102
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:91
 msgid "Icon"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:186
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:147
 msgid "New _Window"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:188
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:149
 #: ../StandardPlugins/Mounter/src/MountItem.cs:97
 msgid "_Open"
-msgstr ""
-
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:192
-msgid "Related Items"
 msgstr ""
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:71
