@@ -140,7 +140,10 @@ namespace Docky
 			about.Authors = new[] {
 				"Jason Smith <jassmith@gmail.com>",
 				"Robert Dyer <psybers@gmail.com>",
-				"Chris Szikszoy <chris@szikszoy.com>"
+				"Chris Szikszoy <chris@szikszoy.com>",
+				"Rico Tzschichholz",
+				"Seif Lofty <seif@lotfy.com>",
+				"Chris Halse Rogers <raof@ubuntu.com>"
 			};
 			about.Artists = new[] { 
 				"Daniel Foré <daniel.p.fore@gmail.com>",
