@@ -44,7 +44,7 @@ namespace Docky.DBus
 	
 	public class DockyDBusItem : IDockyDBusItem, IDisposable
 	{
-		
+		DateTime last_update;
 		uint timer;
 		Dictionary<uint, RemoteMenuEntry> items;
 		Dictionary<uint, DateTime> update_time;
@@ -61,6 +61,12 @@ namespace Docky.DBus
 			update_time = new Dictionary<uint, DateTime> ();
 			
 			timer = GLib.Timeout.Add (4 * 60 * 1000, delegate {
+				if ((DateTime.UtcNow - last_update).TotalMinutes > 6) {
+					last_update = DateTime.UtcNow;
+					return true;
+				}
+				last_update = DateTime.UtcNow;
+				
 				foreach (uint i in update_time
 					.Where (kvp => (DateTime.UtcNow - kvp.Value).TotalMinutes > 5)
 					.Select (kvp => kvp.Key))
