@@ -9,8 +9,11 @@ import sys
 import urllib
 import os
 
-from zeitgeist.client import ZeitgeistClient
-from zeitgeist.datamodel import Event, Subject, Interpretation, Manifestation, StorageState
+try:
+	from zeitgeist.client import ZeitgeistClient
+	from zeitgeist.datamodel import Event, Subject, Interpretation, Manifestation, StorageState
+except ImportError, e:
+	exit()
 
 dockypath  = '/org/gnome/Docky'
 dockybus   = 'org.gnome.Docky'
