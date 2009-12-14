@@ -41,9 +41,10 @@ namespace Docky.DBus
 					Icon = DockServices.Drawing.IconFromGIcon (file.Icon ());
 				else
 					Icon = thumbnailPath;
-			} else {
-				Icon = "gtk-file";
 			}
+			
+			if (string.IsNullOrEmpty (Icon))
+				Icon = "gtk-file";
 		}
 	}
 }
