@@ -86,7 +86,7 @@ class DockyZGItem(DockyItem):
 			menu_id = self.iface.AddMenuItem(subject.text, "gtk-file", "Most Used Items")
 			self.id_map[menu_id] = subject.uri
 		
-	def menu_pressed_signal(self, menu_id):
+	def menu_pressed(self, menu_id):
 		os.spawnlp(os.P_NOWAIT, "xdg-open", "xdg-open", self.id_map[menu_id])
 
 class DockyZGSink(DockySink):

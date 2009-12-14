@@ -27,6 +27,10 @@ class DockyItem():
 		
 		self.timer = glib.timeout_add(2 * 60 * 1000, self.handle_timeout)
 	
+	def menu_pressed_signal(self, menu_id):
+		if self.id_map.has_key(menu_id):
+			self.menu_pressed(menu_id)
+	
 	def dispose(self):
 		for k, v in self.id_map.iteritems():
 			try:
