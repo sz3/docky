@@ -65,7 +65,7 @@ namespace Docky.Painters
 		
 		uint slideTimer;
 		int slideCounter;
-		int slideSteps = 280;
+		int slideSteps = 140;
 		
 		private int LastPage { get; set; }
 		
