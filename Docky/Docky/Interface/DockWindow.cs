@@ -1883,7 +1883,7 @@ namespace Docky.Interface
 					0, 
 					0, 
 					dockArea.Width - PainterBufferSize, 
-					dockArea.Height - 2 * DockHeightBuffer);
+					dockArea.Height - 2 * DockWidthBuffer);
 				
 				if (Painter.Allocation != allocation)
 					Painter.SetAllocation (allocation);
