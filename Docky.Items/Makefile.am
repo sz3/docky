@@ -33,10 +33,15 @@ FILES = \
 	Docky.Items/WnckDockItem.cs
 
 RESOURCES = \
+	Resources/apply.svg \
 	Resources/close.svg \
 	Resources/maximize.svg \
 	Resources/minimize.svg \
+	Resources/painterleft.svg \
+	Resources/painterright.svg \
+	Resources/pause.svg \
 	Resources/pin.svg \
+	Resources/play.svg \
 	Resources/run.svg \
 	Resources/Docky.Items.addin.xml
 

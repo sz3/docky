@@ -114,6 +114,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\apply.svg">
+      <LogicalName>apply.svg</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\close.svg">
       <LogicalName>close.svg</LogicalName>
     </EmbeddedResource>
@@ -122,6 +125,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\minimize.svg">
       <LogicalName>minimize.svg</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\painterleft.svg">
+      <LogicalName>painterleft.svg</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\painterright.svg">
+      <LogicalName>painterright.svg</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\pause.svg">
+      <LogicalName>pause.svg</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\pin.svg">
+      <LogicalName>pin.svg</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\play.svg">
+      <LogicalName>play.svg</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\run.svg">
       <LogicalName>run.svg</LogicalName>

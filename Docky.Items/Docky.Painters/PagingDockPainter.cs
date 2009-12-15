@@ -32,6 +32,9 @@ namespace Docky.Painters
 		protected const int BUTTON_SIZE = 24;
 		protected const int ICON_SIZE = 16;
 		
+		protected string prevButtonIcon = "painterleft.svg@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName;
+		protected string nextButtonIcon = "painterright.svg@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName;
+		
 		private Gdk.Rectangle prevButtonRect;
 		private Gdk.Rectangle nextButtonRect;
 		
@@ -136,7 +139,7 @@ namespace Docky.Painters
 		
 		void DrawButtonsBuffer ()
 		{
-			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("go-previous", ICON_SIZE))
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (prevButtonIcon, ICON_SIZE))
 			{
 				Gdk.CairoHelper.SetSourcePixbuf (buttonBuffer.Context, pbuf,
 						prevButtonRect.X + (prevButtonRect.Width - ICON_SIZE) / 2,
@@ -151,7 +154,7 @@ namespace Docky.Painters
 					buttonBuffer.Context.Operator = Operator.Over;
 				}
 			}
-			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("go-next", ICON_SIZE))
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (nextButtonIcon, ICON_SIZE))
 			{
 				Gdk.CairoHelper.SetSourcePixbuf (buttonBuffer.Context, pbuf,
 						nextButtonRect.X + (nextButtonRect.Width - ICON_SIZE) / 2,
