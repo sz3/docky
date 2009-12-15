@@ -94,6 +94,7 @@
     <Compile Include="Docky.Items\AbstractDockItemProvider.cs" />
     <Compile Include="Docky.Menus\RelatedFileMenuItem.cs" />
     <Compile Include="Docky.Painters\AbstractDockPainter.cs" />
+    <Compile Include="Docky.Painters\PagingDockPainter.cs" />
     <Compile Include="Docky.Items\PainterRequestEventArgs.cs" />
     <Compile Include="Docky.Menus\MenuList.cs" />
     <Compile Include="Docky.Menus\IconMenuItem.cs" />

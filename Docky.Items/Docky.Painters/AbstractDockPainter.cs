@@ -140,6 +140,20 @@ namespace Docky.Painters
 		{
 		}
 		
+		public void MotionNotify (int x, int y, Gdk.ModifierType mod)
+		{
+			try {
+				OnMotionNotify (x, y, mod);
+			} catch (Exception e) {
+				Log<AbstractDockPainter>.Error (e.Message);
+				Log<AbstractDockPainter>.Debug (e.StackTrace);
+			}
+		}
+		
+		internal virtual void OnMotionNotify (int x, int y, Gdk.ModifierType mod)
+		{
+		}
+		
 		public void ButtonPressed (int x, int y, Gdk.ModifierType mod)
 		{
 			try {

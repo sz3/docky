@@ -512,8 +512,11 @@ namespace Docky.Interface
 						dockWidth - PainterBufferSize, 
 						IconSize);
 					
-					if (Painter.Allocation != allocation)
+					if (Painter.Allocation != allocation) {
 						Painter.SetAllocation (allocation);
+						allocation.Width = Painter.MinimumWidth;
+						Painter.SetAllocation (allocation);
+					}
 					
 					return Painter.MinimumWidth + PainterBufferSize;
 				}
@@ -949,6 +952,19 @@ namespace Docky.Interface
 		{
 			if (!ConfigurationMode)
 				CursorTracker.SendManualUpdate (evnt);
+			
+			if (Painter != null) {
+				int x, y;
+				
+				x = LocalCursor.X - painter_area.X;
+				y = LocalCursor.Y - painter_area.Y;
+				
+				if (painter_area.Contains (LocalCursor))
+					Painter.MotionNotify (x, y, evnt.State);
+				else
+					Painter.MotionNotify (-1, -1, ModifierType.None);
+			}
+			
 			return base.OnMotionNotifyEvent (evnt);
 		}
 		
@@ -963,6 +979,10 @@ namespace Docky.Interface
 		{
 			if (!ConfigurationMode)
 				CursorTracker.SendManualUpdate (evnt);
+			
+			if (Painter != null)
+				Painter.MotionNotify (-1, -1, ModifierType.None);
+			
 			return base.OnLeaveNotifyEvent (evnt);
 		}
 		

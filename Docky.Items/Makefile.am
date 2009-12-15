@@ -8,6 +8,7 @@ PKG_CONFIG_FILES = docky.items.pc
 
 FILES = \
 	Docky.Painters/AbstractDockPainter.cs \
+	Docky.Painters/PagingDockPainter.cs \
 	Docky.Items/Enumerable_Extensions.cs \
 	Docky.Items/ItemState.cs \
 	Docky.Menus/MenuItem.cs \

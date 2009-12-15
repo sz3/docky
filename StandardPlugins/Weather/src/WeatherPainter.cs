@@ -31,7 +31,7 @@ namespace WeatherDocklet
 	/// <summary>
 	/// A painter that displays information about weather forecasts.
 	/// </summary>
-	public class WeatherPainter : AbstractDockPainter
+	public class WeatherPainter : PagingDockPainter
 	{
 		/// <value>
 		/// The color to draw most text in.
@@ -48,28 +48,10 @@ namespace WeatherDocklet
 		/// </value>
 		static readonly Cairo.Color colorLow = new Cairo.Color (0.427, 0.714, 0.945, 1);
 		
-		/// <value>
-		/// Indicates the current page the painter should show.
-		/// </value>
-		int Page { get; set; }
-		
-		/// <value>
-		/// The number of pages for this painter.
-		/// </value>
-		const int pages = 3;
-		
-		/// <value>
-		/// Buffers for each page of the painter.
-		/// </value>
-		DockySurface[] buffers = new DockySurface [pages];
-		
 		/// <summary>
 		/// Creates a new weather painter object.
 		/// </summary>
-		/// <param name="docklet">
-		/// A <see cref="WeatherDocklet"/> that owns this painter.
-		/// </param>
-		public WeatherPainter (WeatherDocklet docklet) : base ()
+		public WeatherPainter () : base (3)
 		{
 		}
 		
@@ -81,45 +63,28 @@ namespace WeatherDocklet
 		
 		public override int MinimumWidth {
 			get {
-				return 2 * WeatherController.Weather.ForecastDays * Math.Max (MinimumHeight, Allocation.Height);
+				return 2 * BUTTON_SIZE + 2 * WeatherController.Weather.ForecastDays * Math.Max (MinimumHeight, Allocation.Height);
 			}
 		}
 		
 		#region IDockPainter implementation 
 		
-		protected override void PaintSurface (DockySurface surface)
+		protected override void DrawPageOnSurface (int page, DockySurface surface)
 		{
-			surface.Clear ();
-			
-			lock (buffers) {
-				// ensure the buffer size matches
-				if (buffers [Page] != null)
-					if (surface.Width != buffers [Page].Width || surface.Height != buffers [Page].Height)
-						ResetBuffers ();
+			switch (page)
+			{
+				default:
+				case 0:
+					DrawCurrentCondition (surface.Context);
+					break;
 				
-				// the buffer is empty
-				if (buffers [Page] == null) {
-					buffers [Page] = new DockySurface (surface.Width, surface.Height, surface);
-					
-					switch (Page)
-					{
-						default:
-						case 0:
-							DrawCurrentCondition (buffers [Page].Context);
-							break;
-						
-						case 1:
-							DrawForecast (buffers [Page].Context);
-							break;
-						
-						case 2:
-							DrawTempGraph (buffers [Page].Context);
-							break;
-					}
-				}
+				case 1:
+					DrawForecast (surface.Context);
+					break;
 				
-				// use the buffer
-				buffers [Page].Internal.Show (surface.Context, 0, 0);
+				case 2:
+					DrawTempGraph (surface.Context);
+					break;
 			}
 		}
 		
@@ -133,7 +98,7 @@ namespace WeatherDocklet
 		/// </param>
 		void DrawForecast (Cairo.Context cr)
 		{
-			int xOffset = 0;
+			int xOffset = BUTTON_SIZE;
 			
 			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
 			Pango.Rectangle inkRect, logicalRect;
@@ -234,14 +199,14 @@ namespace WeatherDocklet
 			cr.Color = colorHigh;
 			layout.SetText (string.Format ("{0}{1}", max, WeatherUnits.TempUnit));
 			layout.GetPixelExtents (out inkRect, out logicalRect);
-			cr.MoveTo (Allocation.Width - Allocation.Height + (Allocation.Height - inkRect.Width) / 2, Allocation.Height / 6 - logicalRect.Height / 2);
+			cr.MoveTo (Allocation.Width - Allocation.Height + (Allocation.Height - inkRect.Width) / 2 - BUTTON_SIZE, Allocation.Height / 6 - logicalRect.Height / 2);
 			Pango.CairoHelper.LayoutPath (cr, layout);
 			cr.Fill ();
 			
 			cr.Color = colorLow;
 			layout.SetText (string.Format ("{0}{1}", min, WeatherUnits.TempUnit));
 			layout.GetPixelExtents (out inkRect, out logicalRect);
-			cr.MoveTo (Allocation.Width - Allocation.Height + (Allocation.Height - inkRect.Width) / 2, Allocation.Height * 6 / 9 - logicalRect.Height / 2);
+			cr.MoveTo (Allocation.Width - Allocation.Height + (Allocation.Height - inkRect.Width) / 2 - BUTTON_SIZE, Allocation.Height * 6 / 9 - logicalRect.Height / 2);
 			Pango.CairoHelper.LayoutPath (cr, layout);
 			cr.Fill ();
 			
@@ -253,7 +218,7 @@ namespace WeatherDocklet
 			{
 				layout.SetText (WeatherController.Weather.Forecasts [day].dow);
 				layout.GetPixelExtents (out inkRect, out logicalRect);
-				cr.MoveTo (day * Allocation.Height * 2 + (Allocation.Height - inkRect.Width) / 2, Allocation.Height * 8 / 9 - logicalRect.Height / 2);
+				cr.MoveTo (BUTTON_SIZE + day * Allocation.Height * 2 + (Allocation.Height - inkRect.Width) / 2, Allocation.Height * 8 / 9 - logicalRect.Height / 2);
 				Pango.CairoHelper.LayoutPath (cr, layout);
 			}
 			cr.Fill ();
@@ -266,13 +231,13 @@ namespace WeatherDocklet
 			
 			int lines = 5;
 			for (int line = 0; line < lines - 1; line++) {
-				cr.MoveTo (Allocation.Height / 4, 4.5 + Allocation.Height * line / lines);
-				cr.LineTo ((2 * WeatherController.Weather.ForecastDays - 1) * Allocation.Height - Allocation.Height / 4, 4.5 + Allocation.Height * line / lines);
+				cr.MoveTo (BUTTON_SIZE + Allocation.Height / 4, 4.5 + Allocation.Height * line / lines);
+				cr.LineTo (BUTTON_SIZE + (2 * WeatherController.Weather.ForecastDays - 1) * Allocation.Height - Allocation.Height / 4, 4.5 + Allocation.Height * line / lines);
 				cr.Stroke ();
 			}
 			for (int line = 0; ; line++) {
-				double x = Allocation.Height / 2 + line * 2 * Allocation.Height - 0.5;
-				if (x >= (2 * WeatherController.Weather.ForecastDays - 1) * Allocation.Height - Allocation.Height / 4)
+				double x = BUTTON_SIZE + Allocation.Height / 2 + line * 2 * Allocation.Height - 0.5;
+				if (x >= BUTTON_SIZE + (2 * WeatherController.Weather.ForecastDays - 1) * Allocation.Height - Allocation.Height / 4)
 					break;
 				cr.MoveTo (x, 4.5);
 				cr.LineTo (x, 4.5 + Allocation.Height * (lines - 2) / lines);
@@ -285,16 +250,16 @@ namespace WeatherDocklet
 			
 			// high temp graph
 			cr.Color = colorHigh;
-			cr.MoveTo (Allocation.Height / 2, 5 + height * (max - WeatherController.Weather.Forecasts [0].high));
+			cr.MoveTo (BUTTON_SIZE + Allocation.Height / 2, 5 + height * (max - WeatherController.Weather.Forecasts [0].high));
 			for (int day = 1; day < WeatherController.Weather.ForecastDays; day++)
-				cr.LineTo (day * Allocation.Height * 2 + Allocation.Height / 2, 5 + height * (max - WeatherController.Weather.Forecasts [day].high));
+				cr.LineTo (BUTTON_SIZE + day * Allocation.Height * 2 + Allocation.Height / 2, 5 + height * (max - WeatherController.Weather.Forecasts [day].high));
 			cr.Stroke ();
 			
 			// low temp graph
 			cr.Color = colorLow;
-			cr.MoveTo (Allocation.Height / 2, 5 + height * (max - WeatherController.Weather.Forecasts [0].low));
+			cr.MoveTo (BUTTON_SIZE + Allocation.Height / 2, 5 + height * (max - WeatherController.Weather.Forecasts [0].low));
 			for (int day = 1; day < WeatherController.Weather.ForecastDays; day++)
-				cr.LineTo (day * Allocation.Height * 2 + Allocation.Height / 2, 5 + height * (max - WeatherController.Weather.Forecasts [day].low));
+				cr.LineTo (BUTTON_SIZE + day * Allocation.Height * 2 + Allocation.Height / 2, 5 + height * (max - WeatherController.Weather.Forecasts [day].low));
 			cr.Stroke ();
 			
 			// high temp points
@@ -309,11 +274,11 @@ namespace WeatherDocklet
 		void DrawDataPoint (Cairo.Context cr, int cellWidth, double height, int max, int day, int temp)
 		{
 			cr.Color = new Cairo.Color (0, 0, 0, 0.4);
-			cr.Arc (day * cellWidth * 2 + cellWidth / 2 + 2, 7 + height * (max - temp), 3, 0, 2 * Math.PI);
+			cr.Arc (BUTTON_SIZE + day * cellWidth * 2 + cellWidth / 2 + 2, 7 + height * (max - temp), 3, 0, 2 * Math.PI);
 			cr.Fill ();
 			
 			cr.Color = colorTitle;
-			cr.Arc (day * cellWidth * 2 + cellWidth / 2, 5 + height * (max - temp), 3, 0, 2 * Math.PI);
+			cr.Arc (BUTTON_SIZE + day * cellWidth * 2 + cellWidth / 2, 5 + height * (max - temp), 3, 0, 2 * Math.PI);
 			cr.Fill ();
 		}
 		
@@ -339,7 +304,7 @@ namespace WeatherDocklet
 			
 			layout.SetText (WeatherController.Weather.City);
 			layout.GetPixelExtents (out inkRect, out logicalRect);
-			cr.MoveTo (0, Allocation.Height / 3.5 - logicalRect.Height / 2);
+			cr.MoveTo (BUTTON_SIZE, Allocation.Height / 3.5 - logicalRect.Height / 2);
 			Pango.CairoHelper.LayoutPath (cr, layout);
 			cr.Fill ();
 			
@@ -358,7 +323,7 @@ namespace WeatherDocklet
 		
 		void DrawCondition (Cairo.Context cr, int column, int row, string label, string val)
 		{
-			int xWidth = Allocation.Width / 8;
+			int xWidth = (Allocation.Width - 2 * BUTTON_SIZE) / 8;
 			
 			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
 			Pango.Rectangle inkRect, logicalRect;
@@ -373,7 +338,7 @@ namespace WeatherDocklet
 			else
 				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 4));
 			
-			int xOffset = (column - 1) * 2 * xWidth;
+			int xOffset = BUTTON_SIZE + (column - 1) * 2 * xWidth;
 			int yOffset = row == 1 ? Allocation.Height : (int) (Allocation.Height * 2.5);
 			yOffset = (int) (yOffset / 3.5);
 			
@@ -393,81 +358,12 @@ namespace WeatherDocklet
 		}
 		
 		/// <summary>
-		/// Moves to the next page in the painter, making it refresh.
-		/// </summary>
-		void NextPage ()
-		{
-			if (Page < pages - 1)
-				Page++;
-			else
-				Page = 0;
-			
-			QueueRepaint ();
-		}
-		
-		/// <summary>
-		/// Moves to the previous page in the painter, making it refresh.
-		/// </summary>
-		void PreviousPage ()
-		{
-			if (Page > 0)
-				Page--;
-			else
-				Page = pages - 1;
-			
-			QueueRepaint ();
-		}
-		
-		protected override void OnButtonReleased (int x, int y, Gdk.ModifierType mod)
-		{
-			NextPage ();
-		}
-		
-		protected override void OnScrolled (Gdk.ScrollDirection direction, int x, int y, Gdk.ModifierType type)
-		{
-			if (direction == Gdk.ScrollDirection.Down)
-				NextPage ();
-			else
-				PreviousPage ();
-		}
-		
-		protected override void OnShown ()
-		{
-			if (Page != 0)
-				ResetBuffers ();
-			Page = 0;
-			ResetBuffers ();
-			QueueRepaint ();
-		}
-		
-		/// <summary>
 		/// Called when new weather data arrives, to purge the buffers and redraw.
 		/// </summary>
 		public void WeatherChanged ()
 		{
 			ResetBuffers ();
 			QueueRepaint ();
-		}
-		
-		/// <summary>
-		/// Frees all painter buffers.
-		/// </summary>
-		private void ResetBuffers ()
-		{
-			lock (buffers) {
-				for (int i = 0; i < buffers.Length; i++)
-					if (buffers [i] != null)
-					{
-						buffers [i].Dispose ();
-						buffers [i] = null;
-					}
-			}
-		}
-		
-		public override void Dispose ()
-		{
-			ResetBuffers ();
-			base.Dispose ();
 		}
 	}
 }
