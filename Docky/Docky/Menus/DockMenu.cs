@@ -47,6 +47,8 @@ namespace Docky.Menus
 		static int TotalWidth = SvgWidth + 2 * ShadowSize;
 		static int MinSize = SliceSize * 2 + TailWidth;
 		
+		static int tailOffset;
+		
 		enum Slice {
 			Top,
 			Left,
@@ -230,12 +232,7 @@ namespace Docky.Menus
 
 		void DockyControllerThemeChanged (object sender, EventArgs e)
 		{
-			if (menu_slices != null) {
-				foreach (DockySurface s in menu_slices) {
-					s.Dispose ();
-				}
-				menu_slices = null;
-			}
+			ResetSlices ();
 			
 			ResetBackgroundBuffer ();
 			
@@ -253,30 +250,49 @@ namespace Docky.Menus
 		void Reposition ()
 		{
 			Gdk.Rectangle monitor_geo = Screen.GetMonitorGeometry (Monitor);
-			int x, y;
+			int oldX, oldY, x, y;
 			
 			switch (Orientation) {
 			default:
 			case DockPosition.Bottom:
-				x = Anchor.X - allocation.Width / 2;
-				y = Anchor.Y - allocation.Height;
+				oldX = Anchor.X - allocation.Width / 2;
+				oldY = Anchor.Y - allocation.Height;
 				break;
 			case DockPosition.Top:
-				x = Anchor.X - allocation.Width / 2;
-				y = Anchor.Y;
+				oldX = Anchor.X - allocation.Width / 2;
+				oldY = Anchor.Y;
 				break;
 			case DockPosition.Left:
-				x = Anchor.X;
-				y = Anchor.Y - allocation.Height / 2;
+				oldX = Anchor.X;
+				oldY = Anchor.Y - allocation.Height / 2;
 				break;
 			case DockPosition.Right:
-				x = Anchor.X - allocation.Width;
-				y = Anchor.Y - allocation.Height / 2;
+				oldX = Anchor.X - allocation.Width;
+				oldY = Anchor.Y - allocation.Height / 2;
 				break;
 			}
 			
-			x = Math.Max (0, Math.Min (x, monitor_geo.X + monitor_geo.Width - allocation.Width));
-			y = Math.Max (0, Math.Min (y, monitor_geo.Y + monitor_geo.Height - allocation.Height));
+			// this magic keeps the menu on screen and makes the tail still point to the item
+			switch (Orientation) {
+			default:
+			case DockPosition.Bottom:
+			case DockPosition.Top:
+				y = oldY;
+				x = Math.Max (0, Math.Min (oldX, monitor_geo.X + monitor_geo.Width - allocation.Width));
+				tailOffset = x - oldX;
+				break;
+			
+			case DockPosition.Left:
+			case DockPosition.Right:
+				x = oldX;
+				y = Math.Max (0, Math.Min (oldY, monitor_geo.Y + monitor_geo.Height - allocation.Height));
+				tailOffset = y - oldY;
+			
+				// rotation breaks this
+				if (Orientation == DockPosition.Right)
+					tailOffset = oldY - y;
+				break;
+			}
 			
 			Move (x, y);
 		}
@@ -344,6 +360,15 @@ namespace Docky.Menus
 			}
 		}
 		
+		void ResetSlices ()
+		{
+			if (menu_slices != null) {
+				foreach (DockySurface s in menu_slices)
+					s.Dispose ();
+				menu_slices = null;
+			}
+		}
+		
 		void DrawBackground (DockySurface surface)
 		{
 			// This method is just annoying enough to turn into a loop that its hardly worth it
@@ -356,8 +381,18 @@ namespace Docky.Menus
 			int right = surface.Width;
 			int leftMiddle = left + SliceSize;
 			int rightMiddle = right - SliceSize;
-			int leftTailMiddle = middle - (TailWidth / 2);
-			int rightTailMiddle = middle + (TailWidth / 2);
+			int leftTailMiddle = middle - (TailWidth / 2) - tailOffset;
+			int rightTailMiddle = middle + (TailWidth / 2) - tailOffset;
+			
+			// keep the tail on the menu
+			if (leftTailMiddle < SliceSize) {
+				leftTailMiddle = SliceSize;
+				rightTailMiddle = leftTailMiddle + TailWidth;
+			}
+			if (rightTailMiddle > right - SliceSize) {
+				rightTailMiddle = right - SliceSize;
+				leftTailMiddle = rightTailMiddle - TailWidth;
+			}
 			
 			// top to bottom
 			int top = 0;
@@ -507,12 +542,7 @@ namespace Docky.Menus
 		
 		public override void Dispose ()
 		{
-			if (menu_slices != null) {
-				foreach (DockySurface s in menu_slices) {
-					s.Dispose ();
-				}
-				menu_slices = null;
-			}
+			ResetSlices ();
 			
 			ResetBackgroundBuffer ();
 			
