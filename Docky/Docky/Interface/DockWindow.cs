@@ -486,7 +486,7 @@ namespace Docky.Interface
 			get {
 				int height = IconSize;
 				if (Painter != null)
-					height = Math.Max (IconSize, Painter.MinimumHeight);
+					return Math.Max (IconSize, Painter.MinimumHeight) + 2 * DockWidthBuffer;
 				return height + 2 * DockHeightBuffer;
 			}
 		}
@@ -510,7 +510,7 @@ namespace Docky.Interface
 						0, 
 						0, 
 						dockWidth - PainterBufferSize, 
-						IconSize);
+						DockHeight - 2 * DockWidthBuffer);
 					
 					if (Painter.Allocation != allocation) {
 						Painter.SetAllocation (allocation);
