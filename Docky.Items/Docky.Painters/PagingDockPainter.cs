@@ -58,7 +58,7 @@ namespace Docky.Painters
 					GLib.Source.Remove (slideTimer);
 				
 				slideCounter = 0;
-				slideTimer = GLib.Timeout.Add (5, delegate {
+				slideTimer = GLib.Timeout.Add (10, delegate {
 					slideCounter++;
 					QueueRepaint ();
 					return slideCounter < slideSteps;
@@ -68,7 +68,7 @@ namespace Docky.Painters
 		
 		uint slideTimer;
 		int slideCounter;
-		int slideSteps = 140;
+		int slideSteps = 70;
 		
 		private int LastPage { get; set; }
 		
@@ -112,6 +112,8 @@ namespace Docky.Painters
 				}
 			}
 			
+			if (buttonBuffer != null && (buttonBuffer.Width != surface.Width || buttonBuffer.Height != surface.Height))
+				ResetButtons ();
 			if (buttonBuffer == null) {
 				buttonBuffer = new DockySurface (surface.Width, surface.Height, surface);
 				DrawButtonsBuffer ();
