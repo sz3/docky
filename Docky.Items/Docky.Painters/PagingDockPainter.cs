@@ -29,7 +29,8 @@ namespace Docky.Painters
 {
 	public class PagingDockPainter : AbstractDockPainter
 	{
-		protected const int BUTTON_SIZE = 16;
+		protected const int BUTTON_SIZE = 24;
+		protected const int ICON_SIZE = 16;
 		
 		private Gdk.Rectangle prevButtonRect;
 		private Gdk.Rectangle nextButtonRect;
@@ -135,24 +136,32 @@ namespace Docky.Painters
 		
 		void DrawButtonsBuffer ()
 		{
-			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("go-previous", BUTTON_SIZE))
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("go-previous", ICON_SIZE))
 			{
-				Gdk.CairoHelper.SetSourcePixbuf (buttonBuffer.Context, pbuf, prevButtonRect.X, prevButtonRect.Y);
+				Gdk.CairoHelper.SetSourcePixbuf (buttonBuffer.Context, pbuf,
+						prevButtonRect.X + (prevButtonRect.Width - ICON_SIZE) / 2,
+						prevButtonRect.Y + (prevButtonRect.Height - ICON_SIZE) / 2);
 				buttonBuffer.Context.Paint ();
 				if (prevHovered) {
 					buttonBuffer.Context.Operator = Operator.Add;
-					Gdk.CairoHelper.SetSourcePixbuf (buttonBuffer.Context, pbuf, prevButtonRect.X, prevButtonRect.Y);
+					Gdk.CairoHelper.SetSourcePixbuf (buttonBuffer.Context, pbuf,
+							prevButtonRect.X + (prevButtonRect.Width - ICON_SIZE) / 2,
+							prevButtonRect.Y + (prevButtonRect.Height - ICON_SIZE) / 2);
 					buttonBuffer.Context.Paint ();
 					buttonBuffer.Context.Operator = Operator.Over;
 				}
 			}
-			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("go-next", BUTTON_SIZE))
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("go-next", ICON_SIZE))
 			{
-				Gdk.CairoHelper.SetSourcePixbuf (buttonBuffer.Context, pbuf, nextButtonRect.X, nextButtonRect.Y);
+				Gdk.CairoHelper.SetSourcePixbuf (buttonBuffer.Context, pbuf,
+						nextButtonRect.X + (nextButtonRect.Width - ICON_SIZE) / 2,
+						nextButtonRect.Y + (nextButtonRect.Height - ICON_SIZE) / 2);
 				buttonBuffer.Context.Paint ();
 				if (nextHovered) {
 					buttonBuffer.Context.Operator = Operator.Add;
-					Gdk.CairoHelper.SetSourcePixbuf (buttonBuffer.Context, pbuf, nextButtonRect.X, nextButtonRect.Y);
+					Gdk.CairoHelper.SetSourcePixbuf (buttonBuffer.Context, pbuf,
+							nextButtonRect.X + (nextButtonRect.Width - ICON_SIZE) / 2,
+							nextButtonRect.Y + (nextButtonRect.Height - ICON_SIZE) / 2);
 					buttonBuffer.Context.Paint ();
 					buttonBuffer.Context.Operator = Operator.Over;
 				}
@@ -165,8 +174,8 @@ namespace Docky.Painters
 		
 		protected override void OnAllocationSet (Gdk.Rectangle allocation)
 		{
-			prevButtonRect = new Gdk.Rectangle (0, allocation.Height - BUTTON_SIZE, BUTTON_SIZE, BUTTON_SIZE);
-			nextButtonRect = new Gdk.Rectangle (allocation.Width - BUTTON_SIZE, allocation.Height - BUTTON_SIZE, BUTTON_SIZE, BUTTON_SIZE);
+			prevButtonRect = new Gdk.Rectangle (0, 0, BUTTON_SIZE, allocation.Height);
+			nextButtonRect = new Gdk.Rectangle (allocation.Width - BUTTON_SIZE, 0, BUTTON_SIZE, allocation.Height);
 		}
 		
 		internal override void OnMotionNotify (int x, int y, Gdk.ModifierType mod)

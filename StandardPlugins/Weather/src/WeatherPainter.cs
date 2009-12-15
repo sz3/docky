@@ -304,7 +304,7 @@ namespace WeatherDocklet
 			
 			layout.SetText (WeatherController.Weather.City);
 			layout.GetPixelExtents (out inkRect, out logicalRect);
-			cr.MoveTo (BUTTON_SIZE, Allocation.Height / 3.5 - logicalRect.Height / 2);
+			cr.MoveTo (2 * BUTTON_SIZE, Allocation.Height / 3.5 - logicalRect.Height / 2);
 			Pango.CairoHelper.LayoutPath (cr, layout);
 			cr.Fill ();
 			
@@ -323,7 +323,7 @@ namespace WeatherDocklet
 		
 		void DrawCondition (Cairo.Context cr, int column, int row, string label, string val)
 		{
-			int xWidth = (Allocation.Width - 2 * BUTTON_SIZE) / 8;
+			int xWidth = (Allocation.Width - 4 * BUTTON_SIZE) / 8;
 			
 			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
 			Pango.Rectangle inkRect, logicalRect;
@@ -338,7 +338,7 @@ namespace WeatherDocklet
 			else
 				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 4));
 			
-			int xOffset = BUTTON_SIZE + (column - 1) * 2 * xWidth;
+			int xOffset = 2 * BUTTON_SIZE + (column - 1) * 2 * xWidth;
 			int yOffset = row == 1 ? Allocation.Height : (int) (Allocation.Height * 2.5);
 			yOffset = (int) (yOffset / 3.5);
 			
