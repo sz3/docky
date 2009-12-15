@@ -152,7 +152,7 @@ namespace Docky.Painters
 					Gdk.CairoHelper.SetSourcePixbuf (buttonBuffer.Context, pbuf,
 							prevButtonRect.X + (prevButtonRect.Width - ICON_SIZE) / 2,
 							prevButtonRect.Y + (prevButtonRect.Height - ICON_SIZE) / 2);
-					buttonBuffer.Context.Paint ();
+					buttonBuffer.Context.PaintWithAlpha (0.4);
 					buttonBuffer.Context.Operator = Operator.Over;
 				}
 			}
@@ -167,7 +167,7 @@ namespace Docky.Painters
 					Gdk.CairoHelper.SetSourcePixbuf (buttonBuffer.Context, pbuf,
 							nextButtonRect.X + (nextButtonRect.Width - ICON_SIZE) / 2,
 							nextButtonRect.Y + (nextButtonRect.Height - ICON_SIZE) / 2);
-					buttonBuffer.Context.Paint ();
+					buttonBuffer.Context.PaintWithAlpha (0.4);
 					buttonBuffer.Context.Operator = Operator.Over;
 				}
 			}
