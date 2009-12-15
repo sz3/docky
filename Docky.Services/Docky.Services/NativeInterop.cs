@@ -47,7 +47,7 @@ namespace Docky.Services
 		
 		[DllImport("gio-2.0")]
 		private static extern bool g_mount_eject_with_operation_finish (IntPtr mount, IntPtr result, out IntPtr error);
-		
+
 		public static string StrUri (File file)
 		{
 			try {
@@ -120,10 +120,9 @@ namespace Docky.Services
 				IntPtr error = IntPtr.Zero;
 				bool success = g_mount_eject_with_operation_finish (mount.Handle, result == null ? IntPtr.Zero : 
 				((result is GLib.Object) ? (result as GLib.Object).Handle : (result as GLib.AsyncResultAdapter).Handle), out error);
-				bool ret = success;
 				if (error != IntPtr.Zero)
 					throw new GLib.GException (error);
-				return ret;
+				return success;
 			} catch (DllNotFoundException e) {
 				Log<NativeInterop>.Fatal ("Could not find gio-2.0, please report immediately.");
 				Log<NativeInterop>.Info (e.StackTrace);
@@ -140,10 +139,9 @@ namespace Docky.Services
 			try {
 				IntPtr error = IntPtr.Zero;
 				bool success = g_mount_unmount_with_operation_finish (mount.Handle, result == null ? IntPtr.Zero : ((result is GLib.Object) ? (result as GLib.Object).Handle : (result as GLib.AsyncResultAdapter).Handle), out error);
-				bool ret = success;
 				if (error != IntPtr.Zero)
 					throw new GLib.GException (error);
-				return ret;
+				return success;
 			} catch (DllNotFoundException e) {
 				Log<NativeInterop>.Fatal ("Could not find gio-2.0, please report immediately.");
 				Log<NativeInterop>.Info (e.StackTrace);

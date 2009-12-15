@@ -188,27 +188,8 @@ namespace Docky.Windowing
 		}
 		
 		public void Launch (IEnumerable<string> uris)
-		{
-			GLib.DesktopAppInfo dai = GLib.DesktopAppInfo.NewFromFilename (Location);
-			
-			string[] uriList = uris.Where (uri => uri != null).ToArray ();
-			if (!uriList.Any ()) {
-				dai.Launch (null, null);
-				return;
-			} else {
-				if (dai.SupportsUris) {
-					GLib.List glist = new GLib.List (uriList as object[], typeof(string), false, true);
-					dai.LaunchUris (glist, null);
-					glist.Dispose ();
-				} else if (dai.SupportsFiles) {
-					GLib.File[] files = uriList.Select (uri => GLib.FileFactory.NewForUri (uri)).ToArray ();
-					GLib.List glist = new GLib.List (files as object[], typeof(GLib.File), false, true);
-					dai.Launch (glist, null);
-					glist.Dispose ();
-				}
-			}
-			
-			dai.Dispose ();
+		{	
+			DockServices.System.Open (GLib.DesktopAppInfo.NewFromFilename (Location), uris.Select (uri => GLib.FileFactory.NewForUri (uri)));
 		}
 		
 		#region IDisposable implementation

@@ -224,6 +224,12 @@ namespace Docky.Services
 		
 		public void Open (IEnumerable<GLib.File> files)
 		{
+			// null forces the default handler
+			Open (null, files);
+		}
+		
+		public void Open (AppInfo app, IEnumerable<GLib.File> files)
+		{
 			List<GLib.File> noMountNeeded = new List<GLib.File> ();
 			
 			// before we try to use the files, make sure they are mounted
@@ -238,22 +244,32 @@ namespace Docky.Services
 					}
 				}
 				// try to mount, if successful launch, otherwise (it's possibly already mounted) try to launch anyways
-				f.MountWithActionAndFallback (() => Launch (new [] {f}), () => Launch (new [] {f}));
+				f.MountWithActionAndFallback (() => Launch (app, new [] {f}), () => Launch (app, new [] {f}));
 			}
 
-			if (noMountNeeded.Any ())
-				Launch (noMountNeeded);
+			Launch (app, noMountNeeded);
 		}
-
-		void Launch (IEnumerable<GLib.File> files)
-		{			
-			AppInfo app = files.First ().QueryDefaultHandler (null);
+		
+		void Launch (AppInfo app, IEnumerable<GLib.File> files)
+		{
+			// if we weren't given an app info, query the file for the default handler
+			if (app == null)
+				app = files.First ().QueryDefaultHandler (null);
 			
 			GLib.List launchList;
 			
 			if (app != null) {
+				if (files.Count () == 0) {
+					try {
+						app.Launch (null, null);
+					} catch (GException e) {
+						Log.Notify (string.Format ("Error running: {0}", app.Name), Gtk.Stock.DialogWarning, e.Message);
+						Log<SystemService>.Error (e.Message);
+						Log<SystemService>.Info (e.StackTrace);
+					}
+					return;
 				// check if the app supports files or Uris
-				if (app.SupportsFiles) {
+				} else if (app.SupportsFiles) {
 					launchList = new GLib.List (typeof (GLib.File));
 					foreach (GLib.File f in files)
 						launchList.Append (f);
@@ -262,6 +278,7 @@ namespace Docky.Services
 						if (app.Launch (launchList, null))
 							return;
 					} catch (GLib.GException e) {
+						Log.Notify (string.Format ("Error running: {0}", app.Name), Gtk.Stock.DialogWarning, e.Message);
 						Log<SystemService>.Error (e.Message);
 						Log<SystemService>.Info (e.StackTrace);
 					}
@@ -275,7 +292,7 @@ namespace Docky.Services
 						} catch (UriFormatException) { 
 							string uri = f.StringUri ();
 							if (string.IsNullOrEmpty (uri)) {
-								Log<SystemService>.Warn ("Failed to retrieve URI for {0}.  It will be skipped.", f.ParsedName);
+								Log<SystemService>.Warn ("Failed to retrieve URI for {0}.  It will be skipped.", f.Path);
 								continue;
 							}
 							launchList.Append (uri);
@@ -285,6 +302,7 @@ namespace Docky.Services
 						if (app.LaunchUris (launchList, null))
 							return;
 					} catch (GLib.GException e) {
+						Log.Notify (string.Format ("Error running: {0}", app.Name), Gtk.Stock.DialogWarning, e.Message);
 						Log<SystemService>.Error (e.Message);
 						Log<SystemService>.Info (e.StackTrace);
 					}
@@ -295,7 +313,6 @@ namespace Docky.Services
 			// fall back on xdg-open
 			Open (files.Select (f => f.StringUri ()));
 		}
-
 		
 		public void Execute (string executable)
 		{
