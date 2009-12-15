@@ -296,7 +296,7 @@ namespace WeatherDocklet
 			layout.FontDescription = new Gtk.Style().FontDescription;
 			layout.FontDescription.Weight = Pango.Weight.Bold;
 			layout.Ellipsize = Pango.EllipsizeMode.None;
-			layout.Width = Pango.Units.FromPixels ((int) (Allocation.Width / 4));
+			layout.Width = Pango.Units.FromPixels ((int) ((Allocation.Width - 4 * BUTTON_SIZE) / 4.5));
 			
 			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 3));
 			
@@ -334,9 +334,9 @@ namespace WeatherDocklet
 			layout.Width = Pango.Units.FromPixels (xWidth);
 			
 			if (WeatherController.Weather.ForecastDays < 6)
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 6));
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 6.5));
 			else
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 4));
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 4.5));
 			
 			int xOffset = 2 * BUTTON_SIZE + (column - 1) * 2 * xWidth;
 			int yOffset = row == 1 ? Allocation.Height : (int) (Allocation.Height * 2.5);
