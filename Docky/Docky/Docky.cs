@@ -142,7 +142,8 @@ namespace Docky
 				"Chris Szikszoy <chris@szikszoy.com>",
 				"Rico Tzschichholz <ricotz@t-online.de>",
 				"Seif Lofty <seif@lotfy.com>",
-				"Chris Halse Rogers <raof@ubuntu.com>"
+				"Chris Halse Rogers <raof@ubuntu.com>",
+				"Alex Launi <alex.launi@gmail.com>"
 			};
 			about.Artists = new[] { 
 				"Daniel Foré <daniel.p.fore@gmail.com>",
