@@ -314,23 +314,27 @@ namespace Docky.Services
 		
 		public void Execute (string executable)
 		{
-			if (System.IO.File.Exists (executable)) {
-				System.Diagnostics.Process proc = new System.Diagnostics.Process ();
-				proc.StartInfo.FileName = executable;
-				proc.StartInfo.UseShellExecute = false;
-				proc.Start ();
-			} else {
-				System.Diagnostics.Process proc;
-				if (executable.Contains (" ")) {
-					string[] args = executable.Split (' ');
-					
-					Log<SystemService>.Debug ("Calling: " + args[0] + " \"" + executable.Substring (args[0].Length + 1) + "\"");
-					proc = System.Diagnostics.Process.Start (args[0], "\"" + executable.Substring (args[0].Length + 1) + "\"");
+			try {
+				if (System.IO.File.Exists (executable)) {
+					System.Diagnostics.Process proc = new System.Diagnostics.Process ();
+					proc.StartInfo.FileName = executable;
+					proc.StartInfo.UseShellExecute = false;
+					proc.Start ();
 				} else {
-					Log<SystemService>.Debug ("Calling: " + executable);
-					proc = System.Diagnostics.Process.Start (executable);
+					System.Diagnostics.Process proc;
+					if (executable.Contains (" ")) {
+						string[] args = executable.Split (' ');
+						
+						Log<SystemService>.Debug ("Calling: " + args[0] + " \"" + executable.Substring (args[0].Length + 1) + "\"");
+						proc = System.Diagnostics.Process.Start (args[0], "\"" + executable.Substring (args[0].Length + 1) + "\"");
+					} else {
+						Log<SystemService>.Debug ("Calling: " + executable);
+						proc = System.Diagnostics.Process.Start (executable);
+					}
+					proc.Dispose ();
 				}
-				proc.Dispose ();
+			} catch {
+				// FIXME
 			}
 		}
 		

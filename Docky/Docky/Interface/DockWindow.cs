@@ -2025,7 +2025,7 @@ namespace Docky.Interface
 			if ((item.State & ItemState.Wait) != 0) {
 				darken += .5;
 			} else if (Menu.Visible && HoveredItem == item) {
-				darken += .2;
+				darken += .4;
 			}
 			
 			if ((item.State & ItemState.Urgent) == ItemState.Urgent && 
