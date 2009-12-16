@@ -247,6 +247,8 @@ namespace Docky.Interface
 					return;
 				config_mode = value;
 				DragTracker.RepositionMode = config_mode;
+				if (value)
+					DragTracker.DragDisabled = false;
 				update_screen_regions = true;
 				
 				SetTooltipVisibility ();
@@ -1172,7 +1174,7 @@ namespace Docky.Interface
 		internal void SetHoveredAcceptsDrop ()
 		{
 			HoveredAcceptsDrop = false;
-			if (HoveredItem != null && Painter == null)
+			if (HoveredItem != null && Painter == null && !ConfigurationMode)
 				DragTracker.DragDisabled = HoveredItem is INonPersistedItem;
 			if (HoveredItem != null && ExternalDragActive) {
 				if (DragTracker.DragData != null && HoveredItem.CanAcceptDrop (DragTracker.DragData)) {
@@ -2018,7 +2020,7 @@ namespace Docky.Interface
 			
 			if (HoveredAcceptsDrop && HoveredItem == item && ExternalDragActive) {
 				lighten += .4;
-			} else if (!ZoomEnabled && !Menu.Visible && HoveredItem == item && !ExternalDragActive && !InternalDragActive) {
+			} else if (!ZoomEnabled && !Menu.Visible && HoveredItem == item && !ExternalDragActive && !InternalDragActive && !ConfigurationMode) {
 				lighten += .2;
 			}
 			
