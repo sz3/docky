@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -37,7 +37,6 @@ using Docky.Xlib;
 
 namespace Docky.Interface
 {
-
 	internal class DockDragTracker : IDisposable
 	{
 		Gdk.Window proxy_window;

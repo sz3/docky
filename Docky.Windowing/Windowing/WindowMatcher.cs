@@ -409,8 +409,6 @@ namespace Docky.Windowing
 				if (cmdline == null)
 					yield break;
 				
-				cmdline = cmdline.ToLower ();
-				
 				string [] result = cmdline.Split (Convert.ToChar (0x0)) [0].Split (' ');
 
 				if (result.Count () < 4)
@@ -437,7 +435,7 @@ namespace Docky.Windowing
 			if (cmdline == null)
 				yield break;
 			
-			cmdline = cmdline.Trim ().ToLower ();
+			cmdline = cmdline.Trim ();
 						
 			string [] result = cmdline.Split (Convert.ToChar (0x0));
 			
@@ -530,7 +528,7 @@ namespace Docky.Windowing
 				if (item.HasAttribute ("X-Docky-NoMatch") && item.GetBool ("X-Docky-NoMatch"))
 					continue;
 				
-				string exec = item.GetString ("Exec");
+				string exec = item.GetString ("Exec").Trim ();
 				string vexec = null;
 				
 				if (exec.StartsWith ("ooffice") && exec.Contains (' ')) {
@@ -540,7 +538,7 @@ namespace Docky.Windowing
 						exec.StartsWith ("wine ")) {
 					int startIndex = exec.IndexOf ("wine ") + 5; // length of 'wine '
 					// CommandLineForPid already splits based on \\ and takes the last entry, so do the same here
-					vexec = exec.Substring (startIndex).Split (new [] {@"\\"}, StringSplitOptions.RemoveEmptyEntries).Last ().ToLower ();
+					vexec = exec.Substring (startIndex).Split (new [] {@"\\"}, StringSplitOptions.RemoveEmptyEntries).Last ();
 					// remove the trailing " and anything after it
 					if (vexec.Contains ("\""))
 					    vexec = vexec.Substring (0, vexec.IndexOf ("\""));
@@ -555,6 +553,14 @@ namespace Docky.Windowing
 					}).Last ())
 						.Where (part => !prefix_filters.Any (f => f.IsMatch (part)))
 						.FirstOrDefault ();
+					
+					// for AIR apps
+					if (vexec.Contains ('\'')) {
+						string strippedExec = vexec.Replace ("'", "");
+						if (!result.ContainsKey (strippedExec))
+							result [strippedExec] = new List<string> ();
+						result [strippedExec].Add (file);
+					}
 				}
 				
 				if (vexec == null)
