@@ -128,7 +128,7 @@ namespace Docky.Interface
 		 * normal
 		 * *****************************************/
 		
-		public event EventHandler<HoveredItemChangedArgs> HoveredItemChanged;
+		
 		
 		const int UrgentBounceHeight = 80;
 		const int LaunchBounceHeight = 30;
@@ -143,6 +143,7 @@ namespace Docky.Interface
 		const int WaitArmsPerGroup = 8;
 		
 		readonly TimeSpan BaseAnimationTime = new TimeSpan (0, 0, 0, 0, 150);
+		readonly TimeSpan PainterAnimationTime = new TimeSpan (0, 0, 0, 0, 350);
 		readonly TimeSpan BounceTime = new TimeSpan (0, 0, 0, 0, 600);
 		
 		DateTime hidden_change_time;
@@ -439,10 +440,13 @@ namespace Docky.Interface
 			get { return 2 * IconSize + 3 * DockWidthBuffer; }
 		}
 		
-		double PainterVisibility {
+		/// <summary>
+		/// Only valid durring a rendering sequence
+		/// </summary>
+		double PainterOpacity {
 			get {
 				double progress =
-					Math.Min (1, (DateTime.UtcNow - painter_change_time).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds);
+					Math.Min (1, ((rendering ? render_time : DateTime.UtcNow) - painter_change_time).TotalMilliseconds / PainterAnimationTime.TotalMilliseconds);
 				if (Painter != null)
 					return progress;
 				return 1 - progress;
@@ -472,14 +476,14 @@ namespace Docky.Interface
 		
 		
 		bool ZoomEnabled {
-			get { return !Preferences.PanelMode && Preferences.ZoomEnabled; }
+			get { return !Preferences.PanelMode && Preferences.ZoomEnabled && !ConfigurationMode; }
 		}
 		
 		double ZoomPercent {
 			get {
 				if (!ZoomEnabled)
 					return 1;
-				return (Preferences.IconSize * Preferences.ZoomPercent) / MaxIconSize;
+				return 1 + (1 - PainterOpacity) * (((Preferences.IconSize * Preferences.ZoomPercent) / MaxIconSize) - 1);
 			}
 		}
 		#endregion
@@ -521,23 +525,30 @@ namespace Docky.Interface
 						(1 - Math.Min (1, (DateTime.UtcNow - remove_time).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds)));
 				}
 				
-				if (Painter != null) {
-					Gdk.Rectangle allocation = new Gdk.Rectangle (
-						0, 
-						0, 
-						dockWidth - PainterBufferSize, 
-						DockHeight - 2 * DockWidthBuffer);
-					
-					if (Painter.Allocation != allocation) {
-						Painter.SetAllocation (allocation);
-						allocation.Width = Painter.MinimumWidth;
-						Painter.SetAllocation (allocation);
-					}
-					
-					return Painter.MinimumWidth + PainterBufferSize;
+				return dockWidth;
+			}
+		}
+		
+		int last_painter_width;
+		int PainterDockWidth {
+			get {
+				if (Painter == null)
+					return last_painter_width;
+				
+				Gdk.Rectangle allocation = new Gdk.Rectangle (
+					0, 
+					0, 
+					DockWidth - PainterBufferSize, 
+					DockHeight - 2 * DockWidthBuffer);
+				
+				if (Painter.Allocation != allocation) {
+					Painter.SetAllocation (allocation);
+					allocation.Width = Painter.MinimumWidth;
+					Painter.SetAllocation (allocation);
 				}
 				
-				return dockWidth;
+				last_painter_width = Painter.MinimumWidth + PainterBufferSize;
+				return last_painter_width;
 			}
 		}
 		
@@ -597,10 +608,6 @@ namespace Docky.Interface
 				if (!DockHovered) {
 					zoom = 1 - zoom;
 				}
-				
-				// FIXME: Very harsh
-				if (Painter != null || ConfigurationMode)
-					zoom = 0;
 				
 				if (rendering)
 					zoom_in_buffer = zoom;
@@ -675,7 +682,7 @@ namespace Docky.Interface
 			AnimationState.AddCondition (Animations.ItemsChanged,
 				                         () => ((DateTime.UtcNow - items_change_time) < BaseAnimationTime));
 			AnimationState.AddCondition (Animations.PainterChanged,
-			                             () => ((DateTime.UtcNow - painter_change_time) < BaseAnimationTime));
+			                             () => ((DateTime.UtcNow - painter_change_time) < PainterAnimationTime));
 			AnimationState.AddCondition (Animations.Bounce, BouncingItems);
 			AnimationState.AddCondition (Animations.Waiting, WaitingItems);
 		}
@@ -1740,6 +1747,23 @@ namespace Docky.Interface
 			dockArea = new Gdk.Rectangle (0, 0, 0, 0);
 			staticArea = StaticDockArea (surface);
 			
+			int dockStart;
+			int dockWidth;
+			if (VerticalDock) {
+				dockStart = first.Y - DockWidthBuffer;
+				dockWidth = (last.Y + last.Height + DockWidthBuffer) - dockStart;
+			} else {
+				dockStart = first.X - DockWidthBuffer;
+				dockWidth = (last.X + last.Width + DockWidthBuffer) - dockStart;
+			}
+			
+			if (PainterOpacity > 0) {
+				// we are in a transition state
+				int difference = (int) ((dockWidth - PainterDockWidth) * PainterOpacity);
+				dockWidth -= difference;
+				dockStart += difference / 2;
+			}
+			
 			int hotAreaSize;
 			if ((!Preferences.FadeOnHide || Preferences.FadeOpacity == 0) && AutohideManager.Hidden && !ConfigurationMode) {
 				hotAreaSize = 1;
@@ -1751,9 +1775,9 @@ namespace Docky.Interface
 			
 			switch (Position) {
 			case DockPosition.Top:
-				dockArea.X = first.X - DockWidthBuffer;
+				dockArea.X = dockStart;
 				dockArea.Y = 0;
-				dockArea.Width = (last.X + last.Width + DockWidthBuffer) - dockArea.X;
+				dockArea.Width = dockWidth;
 				dockArea.Height = DockHeight;
 				
 				cursorArea = new Gdk.Rectangle (staticArea.X,
@@ -1763,9 +1787,9 @@ namespace Docky.Interface
 				break;
 			case DockPosition.Left:
 				dockArea.X = 0;
-				dockArea.Y = first.Y - DockWidthBuffer;
+				dockArea.Y = dockStart;
 				dockArea.Width = DockHeight;
-				dockArea.Height = (last.Y + last.Height + DockWidthBuffer) - dockArea.Y;
+				dockArea.Height = dockWidth;
 				
 				cursorArea = new Gdk.Rectangle (dockArea.X,
 				                                staticArea.Y,
@@ -1774,9 +1798,9 @@ namespace Docky.Interface
 				break;
 			case DockPosition.Right:
 				dockArea.X = surface.Width - DockHeight;
-				dockArea.Y = first.Y - DockWidthBuffer;
+				dockArea.Y = dockStart;
 				dockArea.Width = DockHeight;
-				dockArea.Height = (last.Y + last.Height + DockWidthBuffer) - dockArea.Y;
+				dockArea.Height = dockWidth;
 				
 				cursorArea = new Gdk.Rectangle (dockArea.X + dockArea.Width - hotAreaSize,
 				                                staticArea.Y,
@@ -1785,9 +1809,9 @@ namespace Docky.Interface
 				break;
 			default:
 			case DockPosition.Bottom:
-				dockArea.X = first.X - DockWidthBuffer;
+				dockArea.X = dockStart;
 				dockArea.Y = surface.Height - DockHeight;
-				dockArea.Width = (last.X + last.Width + DockWidthBuffer) - dockArea.X;
+				dockArea.Width = dockWidth;
 				dockArea.Height = DockHeight;
 				
 				cursorArea = new Gdk.Rectangle (staticArea.X,
@@ -1796,10 +1820,6 @@ namespace Docky.Interface
 				                                hotAreaSize);
 				break;
 			}
-			
-			// Force dock area to not resize when painter is showing
-			if (Painter != null)
-				dockArea = staticArea;
 		}
 		
 		void DrawDock (DockySurface surface)
@@ -1828,7 +1848,8 @@ namespace Docky.Interface
 				DrawDockBackground (surface, dockArea);
 			}
 				
-			if (Painter == null) {
+			double painterVisibility = PainterOpacity;
+			if (painterVisibility < 1) {
 			
 				if (icon_buffer == null || icon_buffer.Width != surface.Width || icon_buffer.Height != surface.Height) {
 					if (icon_buffer != null)
@@ -1841,9 +1862,12 @@ namespace Docky.Interface
 					DrawItem (icon_buffer, dockArea, adi);
 				}
 			
-				icon_buffer.Internal.Show (surface.Context, 0, 0);
+				surface.Context.SetSource (icon_buffer.Internal, 0, 0);
+				surface.Context.PaintWithAlpha (1 - painterVisibility);
 			
-			} else {
+			} 
+			
+			if (Painter != null && painterVisibility > 0) {
 				DrawPainter (surface, dockArea);
 			}
 			
@@ -1894,18 +1918,9 @@ namespace Docky.Interface
 				repaint_painter = true;
 			}
 			
-			if (repaint_painter) {
+			if (repaint_painter || PainterOpacity != 1) {
 				painter_buffer.ResetContext ();
 				painter_buffer.Clear ();
-				
-				Gdk.Rectangle allocation = new Gdk.Rectangle (
-					0, 
-					0, 
-					dockArea.Width - PainterBufferSize, 
-					dockArea.Height - 2 * DockWidthBuffer);
-				
-				if (Painter.Allocation != allocation)
-					Painter.SetAllocation (allocation);
 				
 				DockySurface painterSurface = Painter.GetSurface (surface);
 			
@@ -1945,7 +1960,7 @@ namespace Docky.Interface
 			}
 			
 			surface.Context.SetSource (painter_buffer.Internal, 0, 0);
-			surface.Context.PaintWithAlpha (PainterVisibility);
+			surface.Context.PaintWithAlpha (PainterOpacity);
 		}
 		
 		void SetDockOpacity (DockySurface surface)
@@ -2282,6 +2297,7 @@ namespace Docky.Interface
 			}
 			
 			double tilt = ThreeDimensional ? .6 : 0;
+			tilt *= 1 - PainterOpacity;
 			background_buffer.TileOntoSurface (surface, backgroundArea, 50, tilt, Position);
 		}
 		
@@ -2441,5 +2457,7 @@ namespace Docky.Interface
 			Destroy ();
 			base.Dispose ();
 		}
+		
+		public event EventHandler<HoveredItemChangedArgs> HoveredItemChanged;
 	}
 }
