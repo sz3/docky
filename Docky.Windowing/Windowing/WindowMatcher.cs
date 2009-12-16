@@ -550,6 +550,19 @@ namespace Docky.Windowing
 				// for crossover apps
 				} else if (exec.Contains (".cxoffice") && item.HasAttribute ("X-Created-By") && item.GetString ("X-Created-By").Contains ("cxoffice")) {
 					// PROCESS CX APPS
+					// The exec is actually another file that uses exec to launch the actual app.
+					GLib.File launcher = GLib.FileFactory.NewForPath (exec);
+					using (GLib.DataInputStream stream = new GLib.DataInputStream (launcher.Read (null))) {
+						uint len;
+						string line;
+						while ((line = stream.ReadLine (out len, null)) != null) {
+							Console.WriteLine (line);
+							if (line.StartsWith ("exec")) {
+								Console.WriteLine (line);
+								break;
+							}
+						}
+					}
 				} else {
 					string [] parts = exec.Split (' ');
 					
