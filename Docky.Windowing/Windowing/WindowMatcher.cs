@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2009 Jason Smith, Robert Dyer, Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,13 +16,13 @@
 // 
 
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 using System.Runtime.Serialization.Formatters.Binary;
 
 using Wnck;
@@ -45,23 +45,11 @@ namespace Docky.Windowing
 		static IEnumerable<string> DesktopFiles {
 			get {
 				return DesktopFileDirectories
-					.SelectMany (dir => FindDesktopFiles (dir));
+					.SelectMany (dir => GLib.FileFactory.NewForPath (dir).SubDirs ())
+					.Union (DesktopFileDirectories.Select (f => GLib.FileFactory.NewForPath (f)))
+					.SelectMany (file => file.GetFiles (".desktop"))
+					.Select (desktop => desktop.Path);
 			}
-		}
-		
-		static IEnumerable<string> FindDesktopFiles (string dir) {
-			IEnumerable<string> files;
-			
-			try {
-				files = Directory.GetFiles (dir, "*.desktop");
-			} catch {
-				return Enumerable.Empty<string> ();
-			}
-			
-			foreach (string subdir in Directory.GetDirectories (dir))
-				files = files.Union (FindDesktopFiles (subdir));
-			
-			return files;
 		}
 		
 		static IEnumerable<string> DesktopFileDirectories
@@ -70,13 +58,15 @@ namespace Docky.Windowing
 				return new [] {
 					// These are XDG variables...
 					"XDG_DATA_HOME",
-					"XDG_DATA_DIRS"
-				}.SelectMany (v => XdgEnvironmentPaths (v))
+					"XDG_DATA_DIRS",
+					// Crossover apps
+					"CX_APPS",
+				}.SelectMany (v => ExpandPathVar (v))
 				 .Where (d => Directory.Exists (d));
 			}
 		}
 		
-		static IEnumerable<string> XdgEnvironmentPaths (string xdgVar)
+		static IEnumerable<string> ExpandPathVar (string xdgVar)
 		{
 			string envPath = Environment.GetEnvironmentVariable (xdgVar);
 			
@@ -85,12 +75,18 @@ namespace Docky.Windowing
 				case "XDG_DATA_HOME":
 					yield return Path.Combine (
 						Environment.GetFolderPath (Environment.SpecialFolder.Personal),
-						".local/share/applications"
+						new [] {".local", "share", "applications"}.Aggregate ((w, s) => Path.Combine (w, s))
 					);
 					break;
 				case "XDG_DATA_DIRS":
-					yield return "/usr/local/share/applications";
-					yield return "/usr/share/applications";
+					yield return new [] {"usr", "local", "share", "applications"}.Aggregate ((w, s) => Path.Combine (w,s));
+					yield return new [] {"usr", "share", "applications"}.Aggregate ((w, s) => Path.Combine (w, s));
+					break;
+				case "CX_APPS":
+					yield return Path.Combine (
+						Environment.GetFolderPath (Environment.SpecialFolder.Personal),
+						".cxoffice"
+					);
 					break;
 				}
 			} else {
@@ -542,6 +538,9 @@ namespace Docky.Windowing
 					// remove the trailing " and anything after it
 					if (vexec.Contains ("\""))
 					    vexec = vexec.Substring (0, vexec.IndexOf ("\""));
+				// for crossover apps
+				} else if (exec.Contains (".cxoffice") && item.HasAttribute ("X-Created-By") && item.GetString ("X-Created-By").Contains ("cxoffice")) {
+					// PROCESS CX APPS
 				} else {
 					string [] parts = exec.Split (' ');
 					

@@ -91,6 +91,29 @@ namespace Docky.Services
 			return dirs.AsEnumerable ();
 		}
 		
+		// gets all files under the given GLib.File (directory) with the extension of extension	
+		public static IEnumerable<GLib.File> GetFiles (this GLib.File file, string extension)
+		{
+			FileEnumerator enumerator = file.EnumerateChildren ("standard::type,standard::name", FileQueryInfoFlags.NofollowSymlinks, null);
+			
+			if (enumerator == null)
+				return Enumerable.Empty <GLib.File> ();
+			
+			FileInfo info;
+			List<GLib.File> files = new List<GLib.File> ();
+			
+			while ((info = enumerator.NextFile ()) != null) {
+				File child = file.GetChild (info.Name);
+				
+				if (info.FileType == FileType.Directory)
+					continue;
+				
+				if (child.Basename.EndsWith (extension))
+					files.Add (child);
+			}
+			return files.AsEnumerable ();
+		}
+		
 		// This is the recursive equivalent to GLib.File.Delete ()
 		public static void Delete_Recurse (this GLib.File file)
 		{
