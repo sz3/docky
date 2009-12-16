@@ -42,14 +42,20 @@ namespace Docky.Windowing
 		
 		public static WindowMatcher Default { get; protected set; }
 		
-		static IEnumerable<string> DesktopFiles {
+		static List<string> desktop_files;
+		static IEnumerable<string> DesktopFiles { 
 			get {
-				return DesktopFileDirectories
-					.SelectMany (dir => GLib.FileFactory.NewForPath (dir).SubDirs ())
-					.Union (DesktopFileDirectories.Select (f => GLib.FileFactory.NewForPath (f)))
-					.SelectMany (file => file.GetFiles (".desktop"))
-					.Select (desktop => desktop.Path);
+				return desktop_files.AsEnumerable ();
 			}
+		}
+		
+		static List<string> BuildDesktopFilesList ()
+		{
+			return DesktopFileDirectories
+				.SelectMany (dir => GLib.FileFactory.NewForPath (dir).SubDirs ())
+				.Union (DesktopFileDirectories.Select (f => GLib.FileFactory.NewForPath (f)))
+				.SelectMany (file => file.GetFiles (".desktop"))
+				.Select (desktop => desktop.Path).ToList ();
 		}
 		
 		static IEnumerable<string> DesktopFileDirectories
@@ -125,6 +131,8 @@ namespace Docky.Windowing
 			screen = Wnck.Screen.Default;
 			prefix_filters = BuildPrefixFilters ();
 			
+			desktop_files = BuildDesktopFilesList ();
+			
 			exec_to_desktop_files = DeserializeExecStrings ();
 			
 			if (exec_to_desktop_files == null) {
@@ -134,6 +142,7 @@ namespace Docky.Windowing
 				// rebuild after 2 minutes just to be sure we are up to date
 				GLib.Timeout.Add (2 * 60 * 1000, delegate {
 					lock (update_lock) {
+						desktop_files = BuildDesktopFilesList ();
 						exec_to_desktop_files = BuildExecStrings ();
 						SerializeExecStrings ();
 					}

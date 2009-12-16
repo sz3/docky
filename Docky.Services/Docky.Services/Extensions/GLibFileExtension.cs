@@ -72,7 +72,7 @@ namespace Docky.Services
 		// Recursively list all of the subdirs for a given directory
 		public static IEnumerable<GLib.File> SubDirs (this GLib.File file)
 		{
-			FileEnumerator enumerator = file.EnumerateChildren ("standard::type,standard::name", FileQueryInfoFlags.NofollowSymlinks, null);
+			FileEnumerator enumerator = file.EnumerateChildren ("standard::type,standard::name,access::can-read", FileQueryInfoFlags.NofollowSymlinks, null);
 			
 			if (enumerator == null)
 				return Enumerable.Empty <GLib.File> ();
@@ -83,7 +83,7 @@ namespace Docky.Services
 			while ((info = enumerator.NextFile ()) != null) {
 				File child = file.GetChild (info.Name);
 				
-				if (info.FileType == FileType.Directory) {
+				if (info.FileType == FileType.Directory && info.GetAttributeBoolean ("access::can-read")) {
 					dirs.Add (child);
 					dirs = dirs.Union (SubDirs (child)).ToList ();
 				}
