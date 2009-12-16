@@ -212,7 +212,7 @@ namespace Docky.Painters
 			}
 		}
 		
-		protected void NextPage ()
+		public void NextPage ()
 		{
 			if (Page < NumPages - 1)
 				Page++;
@@ -220,7 +220,7 @@ namespace Docky.Painters
 				Page = 0;
 		}
 		
-		protected void PreviousPage ()
+		public void PreviousPage ()
 		{
 			if (Page > 0)
 				Page--;

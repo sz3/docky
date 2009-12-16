@@ -969,8 +969,15 @@ namespace Docky.Interface
 		
 		protected override bool OnKeyPressEvent (EventKey evnt)
 		{
-			if (evnt.Key == Gdk.Key.Escape)
+			if (evnt.Key == Gdk.Key.Escape) {
 				HidePainter ();
+			} else if (Painter is PagingDockPainter) {
+				if (evnt.Key == Gdk.Key.Left)
+					(Painter as PagingDockPainter).PreviousPage ();
+				else if (evnt.Key == Gdk.Key.Right)
+					(Painter as PagingDockPainter).NextPage ();
+			}
+			
 			return base.OnKeyPressEvent (evnt);
 		}
 		
