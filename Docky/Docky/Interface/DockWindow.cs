@@ -1716,18 +1716,20 @@ namespace Docky.Interface
 		{	
 			Gdk.Rectangle area = Gdk.Rectangle.Zero;
 			
+			int dockWidth = Painter != null ? PainterDockWidth : DockWidth;
+			
 			switch (Position) {
 			case DockPosition.Top:
-				area = new Gdk.Rectangle ((surface.Width - DockWidth) / 2, 0, DockWidth, DockHeight);
+				area = new Gdk.Rectangle ((surface.Width - dockWidth) / 2, 0, dockWidth, DockHeight);
 				break;
 			case DockPosition.Left:
-				area = new Gdk.Rectangle (0, (surface.Height - DockWidth) / 2, DockHeight, DockWidth);
+				area = new Gdk.Rectangle (0, (surface.Height - dockWidth) / 2, DockHeight, dockWidth);
 				break;
 			case DockPosition.Right:
-				area = new Gdk.Rectangle (surface.Width - DockHeight, (surface.Height - DockWidth) / 2, DockHeight, DockWidth);
+				area = new Gdk.Rectangle (surface.Width - DockHeight, (surface.Height - dockWidth) / 2, DockHeight, dockWidth);
 				break;
 			case DockPosition.Bottom:
-				area = new Gdk.Rectangle ((surface.Width - DockWidth) / 2, surface.Height - DockHeight, DockWidth, DockHeight);
+				area = new Gdk.Rectangle ((surface.Width - dockWidth) / 2, surface.Height - DockHeight, dockWidth, DockHeight);
 				break;
 			}
 			
