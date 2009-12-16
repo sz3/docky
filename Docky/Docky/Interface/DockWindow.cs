@@ -130,17 +130,17 @@ namespace Docky.Interface
 		
 		public event EventHandler<HoveredItemChangedArgs> HoveredItemChanged;
 		
-		const int UrgentBounceHeight  = 80;
-		const int LaunchBounceHeight  = 30;
-		const int DockWidthBuffer     = 5;
-		const int BackgroundWidth     = 1000;
-		const int BackgroundHeight    = 150;
+		const int UrgentBounceHeight = 80;
+		const int LaunchBounceHeight = 30;
+		const int DockWidthBuffer = 5;
+		const int BackgroundWidth = 1000;
+		const int BackgroundHeight = 150;
 		const int NormalIndicatorSize = 20;
 		const int UrgentIndicatorSize = 26;
-		const int GlowSize            = 30;
+		const int GlowSize = 30;
 		
-		const int WaitGroups          = 3;
-		const int WaitArmsPerGroup    = 8;
+		const int WaitGroups = 3;
+		const int WaitArmsPerGroup = 8;
 		
 		readonly TimeSpan BaseAnimationTime = new TimeSpan (0, 0, 0, 0, 150);
 		readonly TimeSpan BounceTime = new TimeSpan (0, 0, 0, 0, 600);
@@ -148,6 +148,7 @@ namespace Docky.Interface
 		DateTime hidden_change_time;
 		DateTime dock_hovered_change_time;
 		DateTime items_change_time;
+		DateTime painter_change_time;
 		DateTime render_time;
 		DateTime remove_time;
 		
@@ -426,11 +427,26 @@ namespace Docky.Interface
 
 		AbstractDockPainter Painter {
 			get { return painter; }
-			set { painter = value; }
+			set { 
+				if (painter == value)
+					return;
+				painter_change_time = DateTime.UtcNow;
+				painter = value; 
+			}
 		}
 		
 		int PainterBufferSize {
 			get { return 2 * IconSize + 3 * DockWidthBuffer; }
+		}
+		
+		double PainterVisibility {
+			get {
+				double progress =
+					Math.Min (1, (DateTime.UtcNow - painter_change_time).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds);
+				if (Painter != null)
+					return progress;
+				return 1 - progress;
+			}
 		}
 		
 		internal int IconSize {
@@ -658,6 +674,8 @@ namespace Docky.Interface
 			                             () => ((DateTime.UtcNow - hidden_change_time) < BaseAnimationTime));
 			AnimationState.AddCondition (Animations.ItemsChanged,
 				                         () => ((DateTime.UtcNow - items_change_time) < BaseAnimationTime));
+			AnimationState.AddCondition (Animations.PainterChanged,
+			                             () => ((DateTime.UtcNow - painter_change_time) < BaseAnimationTime));
 			AnimationState.AddCondition (Animations.Bounce, BouncingItems);
 			AnimationState.AddCondition (Animations.Waiting, WaitingItems);
 		}
@@ -1926,7 +1944,8 @@ namespace Docky.Interface
 				repaint_painter = false;
 			}
 			
-			painter_buffer.Internal.Show (surface.Context, 0, 0);
+			surface.Context.SetSource (painter_buffer.Internal, 0, 0);
+			surface.Context.PaintWithAlpha (PainterVisibility);
 		}
 		
 		void SetDockOpacity (DockySurface surface)
