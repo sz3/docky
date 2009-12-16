@@ -685,6 +685,7 @@ namespace Docky.Interface
 		void HandleMenuHidden (object sender, EventArgs e)
 		{
 			SetTooltipVisibility ();
+			AnimatedDraw ();
 		}
 
 		void HandleMenuShown (object sender, EventArgs e)
@@ -1974,12 +1975,14 @@ namespace Docky.Interface
 			
 			if (HoveredAcceptsDrop && HoveredItem == item && ExternalDragActive) {
 				lighten += .4;
-			} else if (!ZoomEnabled && HoveredItem == item && !ExternalDragActive && !InternalDragActive) {
+			} else if (!ZoomEnabled && !Menu.Visible && HoveredItem == item && !ExternalDragActive && !InternalDragActive) {
 				lighten += .2;
 			}
 			
 			if ((item.State & ItemState.Wait) != 0) {
 				darken += .5;
+			} else if (Menu.Visible && HoveredItem == item) {
+				darken += .2;
 			}
 			
 			if ((item.State & ItemState.Urgent) == ItemState.Urgent && 
