@@ -110,7 +110,7 @@ namespace Docky.DBus
 			
 			try {
 				Bus.Session.Unregister (path);
-			} catch (System.Reflection.TargetInvocationException e) {
+			} catch {
 				Log<DBusManager>.Error ("Could not unregister: " + path);
 				Log<DBusManager>.Debug (e.StackTrace);
 				return;
