@@ -1172,7 +1172,7 @@ namespace Docky.Interface
 		internal void SetHoveredAcceptsDrop ()
 		{
 			HoveredAcceptsDrop = false;
-			if (HoveredItem != null)
+			if (HoveredItem != null && Painter == null)
 				DragTracker.DragDisabled = HoveredItem is INonPersistedItem;
 			if (HoveredItem != null && ExternalDragActive) {
 				if (DragTracker.DragData != null && HoveredItem.CanAcceptDrop (DragTracker.DragData)) {
