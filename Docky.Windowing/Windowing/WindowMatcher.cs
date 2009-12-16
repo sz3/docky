@@ -563,7 +563,7 @@ namespace Docky.Windowing
 						.FirstOrDefault ();
 					
 					// for AIR apps
-					if (vexec.Contains ('\'')) {
+					if (vexec != null && vexec.Contains ('\'')) {
 						string strippedExec = vexec.Replace ("'", "");
 						if (!result.ContainsKey (strippedExec))
 							result [strippedExec] = new List<string> ();
