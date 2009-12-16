@@ -551,21 +551,30 @@ namespace Docky.Windowing
 				} else if (exec.Contains (".cxoffice") && item.HasAttribute ("X-Created-By") && item.GetString ("X-Created-By").Contains ("cxoffice")) {
 					// PROCESS CX APPS
 					// The exec is actually another file that uses exec to launch the actual app.
-					Console.WriteLine (exec);
 					exec = exec.Replace ("\"", "");
 					GLib.File launcher = GLib.FileFactory.NewForPath (exec);
-					Console.WriteLine ("{0} {1}", launcher.Path, launcher.Exists);
+					string execLine;
 					using (GLib.DataInputStream stream = new GLib.DataInputStream (launcher.Read (null))) {
 						ulong len;
 						string line;
 						while ((line = stream.ReadLine (out len, null)) != null) {
-							Console.WriteLine (line);
 							if (line.StartsWith ("exec")) {
-								Console.WriteLine (line);
+								execLine = line;
 								break;
 							}
 						}
 					}
+					
+					// get the relevant part from the execLine
+					string [] parts = execLine.Split (new [] {'\"'});
+					if (parts.Any (part => part.StartsWith ("C:"))) {
+					    vexec = parts.First (part => part.StartsWith ("C:"));
+						vexec = vexec.Split (new [] {'/'}).Last ();
+						Console.WriteLine (vexec);
+					} else {
+						continue;
+					}
+					
 				} else {
 					string [] parts = exec.Split (' ');
 					
