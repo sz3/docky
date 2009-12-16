@@ -100,6 +100,7 @@ namespace Docky.Painters
 			lock (buffers) {
 				if (slideCounter > 0 && slideCounter < slideSteps) {
 					double offset = Allocation.Width * Math.Log (slideCounter) / Math.Log (slideSteps);
+					
 					if ((LastPage > Page && !(LastPage == NumPages - 1 && Page == 0)) || (LastPage == 0 && Page == NumPages - 1)) {
 						ShowBuffer (surface, Page, offset - Allocation.Width);
 						ShowBuffer (surface, LastPage, offset);
@@ -107,6 +108,21 @@ namespace Docky.Painters
 						ShowBuffer (surface, Page, Allocation.Width - offset);
 						ShowBuffer (surface, LastPage, 0 - offset);
 					}
+					
+					// fade out the edges during a slide
+					Gradient linpat = new LinearGradient(0, surface.Height / 2, surface.Width, surface.Height / 2);
+					linpat.AddColorStop(0, new Color(1, 1, 1, 1));
+					linpat.AddColorStop(2 * (double) BUTTON_SIZE / surface.Width, new Color(1, 1, 1, 0));
+					linpat.AddColorStop(1 - 2 * (double) BUTTON_SIZE / surface.Width, new Color(1, 1, 1, 0));
+					linpat.AddColorStop(1, new Color(1, 1, 1, 1));
+						
+					surface.Context.Save();
+					surface.Context.Operator = Operator.Source;
+					surface.Context.Color = new Cairo.Color (0, 0, 0, 0);
+					surface.Context.Mask (linpat);
+					surface.Context.PaintWithAlpha (0);
+					surface.Context.Restore ();
+					linpat.Destroy ();
 				} else {
 					ShowBuffer (surface, Page, 0);
 				}
