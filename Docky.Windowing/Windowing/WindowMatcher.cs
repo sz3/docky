@@ -66,7 +66,7 @@ namespace Docky.Windowing
 					"XDG_DATA_HOME",
 					"XDG_DATA_DIRS",
 					// Crossover apps
-					//"CX_APPS",
+					"CX_APPS",
 				}.SelectMany (v => ExpandPathVar (v))
 				 .Where (d => Directory.Exists (d));
 			}

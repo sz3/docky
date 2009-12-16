@@ -88,6 +88,8 @@ namespace Docky.Services
 					dirs = dirs.Union (SubDirs (child)).ToList ();
 				}
 			}
+			
+			enumerator.Close ();
 			return dirs.AsEnumerable ();
 		}
 		
@@ -111,6 +113,8 @@ namespace Docky.Services
 				if (child.Basename.EndsWith (extension))
 					files.Add (child);
 			}
+			
+			enumerator.Close ();
 			return files.AsEnumerable ();
 		}
 		
@@ -133,6 +137,7 @@ namespace Docky.Services
 				if (info.GetAttributeBoolean ("access::can-delete"))
 					child.Delete (null);
 			}
+			enumerator.Close ();
 		}
 		
 		// This is the recursive equivalent of GLib.File.Copy ()
@@ -189,6 +194,7 @@ namespace Docky.Services
 					copiedBytes += info.Size;
 				}
 			}
+			enumerator.Close ();
 		}
 		
 		// will recurse and get the total size in bytes
@@ -215,6 +221,8 @@ namespace Docky.Services
 				else
 					size += info.Size;
 			}
+			
+			enumerator.Close ();
 			return size;
 		}
 		
