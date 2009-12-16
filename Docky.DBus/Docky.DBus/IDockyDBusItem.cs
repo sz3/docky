@@ -35,6 +35,7 @@ namespace Docky.DBus
 		bool Attention { get; }
 		bool Wait { get; }
 		
+		string BadgeText { get; set; }
 		string Text { get; set; }
 		string Icon { get; set; }
 		
@@ -58,6 +59,7 @@ namespace Docky.DBus
 		void SetWaiting ();
 		void UnsetWaiting ();
 		
+		void ResetBadgeText ();
 		void ResetText ();
 		void ResetIcon ();
 		

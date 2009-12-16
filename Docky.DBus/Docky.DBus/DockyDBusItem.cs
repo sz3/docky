@@ -102,6 +102,15 @@ namespace Docky.DBus
 			}
 		}
 		
+		public string BadgeText {
+			get {
+				return owner.BadgeText;
+			}
+			set {
+				owner.SetRemoteBadgeText (value);
+			}
+		}
+		
 		public string Text {
 			get {
 				return owner.HoverText;
@@ -109,7 +118,6 @@ namespace Docky.DBus
 			set {
 				owner.SetRemoteText (value);
 			}
-		
 		}
 		
 		public string Icon {
@@ -255,6 +263,11 @@ namespace Docky.DBus
 		public void UnsetWaiting ()
 		{
 			owner.State &= ~ItemState.Wait;
+		}
+		
+		public void ResetBadgeText ()
+		{
+			owner.SetRemoteBadgeText ("");
 		}
 		
 		public void ResetText ()

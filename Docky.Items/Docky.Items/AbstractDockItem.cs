@@ -42,8 +42,8 @@ namespace Docky.Items
 	
 	public abstract class AbstractDockItem : IDisposable
 	{
-		string hover_text;
-		string remote_text;
+		string hover_text, remote_text;
+		string badge_text, remote_badge_text;
 		bool[] redraw;
 		DockySurface text_buffer;
 		DockySurface[] icon_buffers;
@@ -176,7 +176,17 @@ namespace Docky.Items
 		/// <summary>
 		/// The text displayed over a badge
 		/// </summary>
-		protected string BadgeText { get; set; }
+		public string BadgeText {
+			get {
+				return string.IsNullOrEmpty (remote_badge_text) ? badge_text : remote_badge_text;
+			}
+			protected set {
+				if (badge_text == value)
+					return;
+				badge_text = value;
+				QueueRedraw ();
+			}
+		}
 		
 		/// <summary>
 		/// The position of the icon, non-providers should not modify this value!
@@ -223,6 +233,12 @@ namespace Docky.Items
 			AppDomain.CurrentDomain.ProcessExit += HandleProcessExit;
 		}
 		
+		public void SetRemoteBadgeText (string text)
+		{
+			remote_badge_text = text;
+			QueueRedraw ();
+		}
+
 		public void SetRemoteText (string text)
 		{
 			remote_text = text;
