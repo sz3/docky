@@ -551,7 +551,10 @@ namespace Docky.Windowing
 				} else if (exec.Contains (".cxoffice") && item.HasAttribute ("X-Created-By") && item.GetString ("X-Created-By").Contains ("cxoffice")) {
 					// PROCESS CX APPS
 					// The exec is actually another file that uses exec to launch the actual app.
+					Console.WriteLine (exec);
+					exec = exec.Replace ("\"", "");
 					GLib.File launcher = GLib.FileFactory.NewForPath (exec);
+					Console.WriteLine ("{0} {1}", launcher.Path, launcher.Exists);
 					using (GLib.DataInputStream stream = new GLib.DataInputStream (launcher.Read (null))) {
 						ulong len;
 						string line;
