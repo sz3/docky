@@ -553,7 +553,7 @@ namespace Docky.Windowing
 					// The exec is actually another file that uses exec to launch the actual app.
 					GLib.File launcher = GLib.FileFactory.NewForPath (exec);
 					using (GLib.DataInputStream stream = new GLib.DataInputStream (launcher.Read (null))) {
-						uint len;
+						ulong len;
 						string line;
 						while ((line = stream.ReadLine (out len, null)) != null) {
 							Console.WriteLine (line);
