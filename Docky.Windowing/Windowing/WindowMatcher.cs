@@ -553,7 +553,7 @@ namespace Docky.Windowing
 					// The exec is actually another file that uses exec to launch the actual app.
 					exec = exec.Replace ("\"", "");
 					GLib.File launcher = GLib.FileFactory.NewForPath (exec);
-					string execLine;
+					string execLine = "";
 					using (GLib.DataInputStream stream = new GLib.DataInputStream (launcher.Read (null))) {
 						ulong len;
 						string line;
@@ -564,6 +564,9 @@ namespace Docky.Windowing
 							}
 						}
 					}
+	
+					if (string.IsNullOrEmpty (execLine))
+						continue;
 					
 					// get the relevant part from the execLine
 					string [] parts = execLine.Split (new [] {'\"'});
