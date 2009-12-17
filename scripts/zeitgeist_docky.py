@@ -10,12 +10,6 @@ import sys
 import urllib
 import os
 
-import locale
-import gettext
-locale.setlocale(locale.LC_ALL, '')
-gettext.bindtextdomain('docky', 'locale')
-gettext.textdomain('locale')
-
 from zeitgeist_journal import Window
 
 try:
@@ -99,7 +93,7 @@ class DockyZGItem(DockyItem):
 
 	def _handle_get_most_used(self, uris):
 		for subject in uris:
-			menu_id = self.iface.AddFileMenuItem(subject.uri, gettext("Most Used Items"))
+			menu_id = self.iface.AddFileMenuItem(subject.uri,"Most Used Items")
 			self.id_map[menu_id] = subject.uri
 		if len(uris) > 0:
 			menu_id = self.iface.AddMenuItem("Journal", "", "")
