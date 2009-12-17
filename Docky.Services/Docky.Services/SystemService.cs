@@ -256,15 +256,15 @@ namespace Docky.Services
 				}
 			}
 
-			if (noMountNeeded.Any ())
+			if (noMountNeeded.Any () || !files.Any ())
 				Launch (app, noMountNeeded);
 		}
 		
 		void Launch (AppInfo app, IEnumerable<GLib.File> files)
 		{
 			// if we weren't given an app info, query the file for the default handler
-			if (app == null)
-				app = files.ToList ().First ().QueryDefaultHandler (null);
+			if (app == null && files.Any ())
+				app = files.First ().QueryDefaultHandler (null);
 						
 			GLib.List launchList;
 			
