@@ -229,7 +229,7 @@ namespace Docky.Services
 		public void Open (AppInfo app, IEnumerable<GLib.File> files)
 		{
 			List<GLib.File> noMountNeeded = new List<GLib.File> ();
-			
+
 			// before we try to use the files, make sure they are mounted
 			foreach (GLib.File f in files) {
 				// if the path isn't empty, 
@@ -241,18 +241,33 @@ namespace Docky.Services
 						continue;
 					}
 				}
-				// try to mount, if successful launch, otherwise (it's possibly already mounted) try to launch anyways
-				f.MountWithActionAndFallback (() => Launch (app, new [] {f}), () => Launch (app, new [] {f}));
+				// if the file has no path, there are 2 possibilities
+				// either it's a "fake" file, like computer:// or trash://
+				// or it's a mountable file that isn't mounted
+				// this launches the "fake" files":
+				try {
+					GLib.AppInfoAdapter.LaunchDefaultForUri (f.StringUri (), null);
+				// FIXME: until we use a more recent Gtk# (one that exposes the GException code
+				// we'll just have to silently fail and assume it's an unmounted but mountable file
+				} catch { 
+					// otherwise:
+					// try to mount, if successful launch, otherwise (it's possibly already mounted) try to launch anyways
+					f.MountWithActionAndFallback (() => Launch (app, new [] {f}), () => Launch (app, new [] {f}));				
+				}
 			}
 
-			Launch (app, noMountNeeded);
+			if (noMountNeeded.Any ())
+				Launch (app, noMountNeeded);
 		}
 		
 		void Launch (AppInfo app, IEnumerable<GLib.File> files)
 		{
 			// if we weren't given an app info, query the file for the default handler
 			if (app == null)
-				app = files.First ().QueryDefaultHandler (null);
+				app = files.ToList ().First ().QueryDefaultHandler (null);
+			
+			
+			Console.WriteLine (app == null);
 			
 			GLib.List launchList;
 			
