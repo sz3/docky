@@ -1922,6 +1922,8 @@ namespace Docky.Interface
 		
 		void DrawPainter (DockySurface surface, Gdk.Rectangle dockArea)
 		{
+			double painterOpacity = PainterOpacity;
+			
 			if (painter_buffer == null || painter_buffer.Width != surface.Width || painter_buffer.Height != surface.Height) {
 				if (painter_buffer != null)
 					painter_buffer.Dispose ();
@@ -1929,7 +1931,7 @@ namespace Docky.Interface
 				repaint_painter = true;
 			}
 			
-			if (repaint_painter || PainterOpacity != 1) {
+			if (repaint_painter || painterOpacity != 1) {
 				painter_buffer.ResetContext ();
 				painter_buffer.Clear ();
 				
@@ -1947,19 +1949,19 @@ namespace Docky.Interface
 				switch (Position) {
 				default:
 				case DockPosition.Top:
-					point = new PointD(dockArea.X + IconSize + DockWidthBuffer,
+					point = new PointD (dockArea.X + IconSize + DockWidthBuffer,
 						dockArea.Y + DockHeightBuffer + IconSize);
 					break;
 				case DockPosition.Left:
-					point = new PointD(dockArea.X + DockHeightBuffer + IconSize,
+					point = new PointD (dockArea.X + DockHeightBuffer + IconSize,
 						dockArea.Y + IconSize + DockWidthBuffer);
 					break;
 				case DockPosition.Bottom:
-					point = new PointD(dockArea.X + IconSize + DockWidthBuffer,
+					point = new PointD (dockArea.X + IconSize + DockWidthBuffer,
 						dockArea.Y + dockArea.Height - DockHeightBuffer - IconSize);
 					break;
 				case DockPosition.Right:
-					point = new PointD(dockArea.X + dockArea.Height - DockHeightBuffer - IconSize,
+					point = new PointD (dockArea.X + dockArea.Height - DockHeightBuffer - IconSize,
 						dockArea.Y + IconSize + DockWidthBuffer);
 					break;
 				}
@@ -1971,7 +1973,11 @@ namespace Docky.Interface
 			}
 			
 			surface.Context.SetSource (painter_buffer.Internal, 0, 0);
-			surface.Context.PaintWithAlpha (PainterOpacity);
+			surface.Context.PaintWithAlpha (painterOpacity);
+			
+			// Ensure we repaint the next time around
+			if (painterOpacity < 1)
+				repaint_painter = true;
 		}
 		
 		void SetDockOpacity (DockySurface surface)
