@@ -10,9 +10,8 @@ import sys
 import urllib
 import os
 
-from zeitgeist_journal import Window
-
 try:
+	from zeitgeist_journal import Window
 	from docky.docky import DockyItem, DockySink
 	from zeitgeist.client import ZeitgeistClient
 	from zeitgeist.datamodel import Event, Subject, Interpretation, Manifestation, StorageState
