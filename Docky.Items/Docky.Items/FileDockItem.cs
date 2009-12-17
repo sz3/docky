@@ -153,7 +153,7 @@ namespace Docky.Items
 					long fileSize = file.GetSize ();
 					ulong freeSpace = OwnedFile.QueryULongAttr (FilesystemFreeKey);
 					if ((ulong) fileSize > freeSpace)
-						throw new Exception (Catalog.GetString ("Not enough free spacce on destination."));
+						throw new Exception (Catalog.GetString ("Not enough free space on destination."));
 					
 					string ownedFSID = OwnedFile.QueryStringAttr (FilesystemIDKey);
 					string destFSID = file.QueryStringAttr (FilesystemIDKey);
