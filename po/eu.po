@@ -7,26 +7,43 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-12-13 10:54+0100\n"
-"PO-Revision-Date: 2009-12-11 23:53+0000\n"
+"POT-Creation-Date: 2009-12-17 10:53+0100\n"
+"PO-Revision-Date: 2009-12-15 18:55+0000\n"
 "Last-Translator: Ibai Oihanguren <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-12-13 10:08+0000\n"
+"X-Launchpad-Export-Date: 2009-12-17 10:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:113
+#: ../Docky/Docky/ConfigurationWindow.cs:111
 msgid "Click on any dock to configure."
 msgstr "Klikatu edozein dock konfiguratzeko."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:114
+#: ../Docky/Docky/ConfigurationWindow.cs:112
 msgid "Drag any dock to move it."
 msgstr "Arrastatu edozein dock mugitzeko."
 
-#: ../Docky/Docky/Docky.cs:105
+#: ../Docky/Docky/ConfigurationWindow.cs:190
+msgid "Delete the currently selected dock?"
+msgstr "Hautatutako dock-a ezabatu?"
+
+#: ../Docky/Docky/ConfigurationWindow.cs:192
+msgid ""
+"If you choose to delete the dock, all settings\n"
+"for the deleted dock will be permanently lost."
+msgstr ""
+"Dock-a ezabatzea aukeratzen baduzu, dock horrekin\n"
+"lotutako ezarpen guztiak betiko galduko dira."
+
+#: ../Docky/Docky/ConfigurationWindow.cs:207
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:208
+msgid "_Delete Dock"
+msgstr "E_zabatu dock-a"
+
+#: ../Docky/Docky/Docky.cs:124
 msgid ""
 "Docky requires compositing to work properly.  Please enable compositing and "
 "restart docky."
@@ -34,14 +51,14 @@ msgstr ""
 "Dockyk compositing behar du behar bezala funtzionatzeko. Gaitu compositing "
 "eta berrabiarazi Docky."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:312
+#: ../Docky/Docky/Interface/DockPreferences.cs:330
 msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
 msgstr ""
 "Leiho bat baino gehiagodun abiarazleen azpian adierazle bat bistaratu."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:314
+#: ../Docky/Docky/Interface/DockPreferences.cs:332
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
@@ -49,21 +66,35 @@ msgstr ""
 "Aukera hau aktibatzean, abiarazlerik ez duten leihoak dock honetan "
 "bistaratuko dira."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:608
-msgid "<i>Always present, acts like a panel.</i>"
-msgstr "<i>Beti ikusgai, panel bat balitz bezala.</i>"
+#: ../Docky/Docky/Interface/DockPreferences.cs:633
+msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
+msgstr ""
+"<i>Beti ikusgai; maximizatutako leihoek ez dute dock-a ezkutatzen.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:611
+#: ../Docky/Docky/Interface/DockPreferences.cs:636
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Sagua gainean ez duenero ezkutatzen da.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:614
+#: ../Docky/Docky/Interface/DockPreferences.cs:639
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Aplikazio aktibo bat eragozten duenean ezkutatzen da.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:617
+#: ../Docky/Docky/Interface/DockPreferences.cs:642
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Edozein leiho eragozten duenean ezkutatzen da.</i>"
+
+#: ../Docky/Docky/Interface/DockWindow.cs:359
+msgid "Drag to reposition"
+msgstr "Arrastatu lekuz aldatzeko"
+
+#: ../Docky/Docky/Interface/DockWindow.cs:365
+msgid "Drop to open"
+msgstr ""
+
+#: ../Docky/Docky/Interface/DockWindow.cs:369
+#: ../Docky/Docky/Interface/DockWindow.cs:383
+msgid "Drop to add to dock"
+msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:91
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
@@ -84,28 +115,24 @@ msgid "Docky Configuration"
 msgstr "Dockyren konfigurazioa"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:86
-msgid "Start When Computer Starts"
-msgstr "Abiarazi konputagailua martxan jartzean"
+msgid "_Start When Computer Starts"
+msgstr "_Abiarazi ordenagailua pizterakoan"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:101
-msgid "Theme:"
-msgstr "Gaia:"
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:102
+msgid "_Theme:"
+msgstr "_Gaia:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:124
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:126
 msgid "<b>General Options</b>"
 msgstr "<b>Aukera orokorrak</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:145
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:147
 msgid "<b>Dock Configuration</b>"
 msgstr "Dock-aren konfigurazioa"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:179
-msgid "New Dock"
-msgstr "Dock berria"
-
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:206
-msgid "Delete Dock"
-msgstr "Dock-a ezabatu"
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:181
+msgid "_New Dock"
+msgstr "Dock _berria"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
 msgid "None"
@@ -124,57 +151,53 @@ msgid "Window Dodge"
 msgstr "Leihoak ekidin"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:97
-msgid "Fade On Hide"
-msgstr "Pixkanaka desagertu"
+msgid "_Fade On Hide"
+msgstr "_Pixkanaka desagertu"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:140
-msgid "Icon Size:"
-msgstr "Ikonoen tamaina:"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:141
+msgid "_Icon Size:"
+msgstr "_Ikonoen tamaina"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:151
-msgid "Autohide:"
-msgstr "Ezkutatu:"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:154
+msgid "_Hiding:"
+msgstr "_Ezkutatu:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:160
-msgid "Indicate Multiple Windows"
-msgstr "Adierazi leiho batetik gora daudenean"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
+msgid "Indicat_e Multiple Windows"
+msgstr "A_dierazi leiho bat baino gehiago daudenean"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:174
-msgid "Panel Mode"
-msgstr "Panel modua"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
+msgid "_Panel Mode"
+msgstr "Panel _modua"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:188
-msgid "Manage Windows Without Launcher"
-msgstr "Kudeatu abiarazle gabeko leihoak"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:192
+msgid "_Manage Windows Without Launcher"
+msgstr "Abiarazle gabeko leihoak _kudeatu"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:203
-msgid "Zoom:"
-msgstr "Zoom-a:"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:207
+msgid "_Zoom:"
+msgstr "Z_oom-a"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:278
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:282
 msgid "<b>Inactive Plugins</b>"
 msgstr "<b>Plugin ez-aktiboak</b>"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:286
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:290
 msgid "<b>Active Plugins</b>"
 msgstr "<b>Plugin aktiboak</b>"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:102
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:91
 msgid "Icon"
 msgstr "Ikonoa"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:186
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:147
 msgid "New _Window"
 msgstr "Leiho _berria"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:188
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:149
 #: ../StandardPlugins/Mounter/src/MountItem.cs:97
 msgid "_Open"
 msgstr "_Ireki"
-
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:192
-msgid "Related Items"
-msgstr "Erlazionatutako elementuak"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:71
 msgid "Reset Color"
@@ -184,11 +207,34 @@ msgstr "Berrezarri kolorea"
 msgid "_Pin to Dock"
 msgstr "I_tsatsi dock-era"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:232
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:156
+msgid "Not enough free space on destination."
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:168
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:170
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:190
+msgid "Complete"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:176
+msgid "Moving"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:182
+msgid "Copying"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:195
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:196
+msgid "Error performing drop action"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:240
 msgid "Open"
 msgstr "Ireki"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:233
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:241
 msgid "Open Containing Folder"
 msgstr "Ireki karpeta"
 
@@ -449,7 +495,7 @@ msgstr "Dohaintza egin"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:126
 msgid "Live Streams"
-msgstr ""
+msgstr "Zuzeneko seinaleak"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:164
 msgid "Settings"
@@ -525,7 +571,7 @@ msgstr "Bi_latu"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:177
 msgid "Automatically Update _Every"
-msgstr "Automatikoki eguneratzeko _maiztasuna:"
+msgstr "Eguneratu _automatikoki:"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:221
 msgid "Use _Metric Units"
@@ -604,31 +650,31 @@ msgstr "_Gaur"
 msgid "T_omorrow"
 msgstr "_Bihar"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:346
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:311
 msgid "Humidity"
 msgstr "Hezetasuna"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:348
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:313
 msgid "Temp"
 msgstr "Tenperatura"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:350
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:315
 msgid "Feels Like"
 msgstr "Sentsazioa"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:352
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:317
 msgid "Wind"
 msgstr "Haizea"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:353
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:318
 msgid "Direction"
 msgstr "Norantza"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:355
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:320
 msgid "Sunrise"
 msgstr "Egunsentia"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:356
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:321
 msgid "Sunset"
 msgstr "Ilunsentia"
 
@@ -709,11 +755,41 @@ msgstr "Ilunsentia"
 #~ msgid "24-Hour Clock"
 #~ msgstr "24 orduko erlojua"
 
+#~ msgid "Start When Computer Starts"
+#~ msgstr "Abiarazi konputagailua martxan jartzean"
+
+#~ msgid "Theme:"
+#~ msgstr "Gaia:"
+
+#~ msgid "New Dock"
+#~ msgstr "Dock berria"
+
+#~ msgid "Icon Size:"
+#~ msgstr "Ikonoen tamaina:"
+
+#~ msgid "Fade On Hide"
+#~ msgstr "Pixkanaka desagertu"
+
+#~ msgid "Indicate Multiple Windows"
+#~ msgstr "Adierazi leiho batetik gora daudenean"
+
+#~ msgid "Autohide:"
+#~ msgstr "Ezkutatu:"
+
+#~ msgid "Manage Windows Without Launcher"
+#~ msgstr "Kudeatu abiarazle gabeko leihoak"
+
 #~ msgid "Defenestraphobia"
 #~ msgstr "Defenestraphobia"
 
+#~ msgid "Delete Dock"
+#~ msgstr "Dock-a ezabatu"
+
 #~ msgid "The finest dock no money can buy."
 #~ msgstr "Diruz erosi ezin daitekeen dock-ik ederrena."
+
+#~ msgid "Zoom:"
+#~ msgstr "Zoom-a:"
 
 #~ msgid "Name"
 #~ msgstr "Izena"
@@ -724,6 +800,9 @@ msgstr "Ilunsentia"
 #, csharp-format
 #~ msgid "{0}'s Forecast"
 #~ msgstr "{0} (aurrikuspena)"
+
+#~ msgid "Panel Mode"
+#~ msgstr "Panel modua"
 
 #~ msgid "_Show Preferences"
 #~ msgstr "_Erakutsi hobespenak"
@@ -781,3 +860,9 @@ msgstr "Ilunsentia"
 
 #~ msgid "Weather Underground"
 #~ msgstr "Weather Underground"
+
+#~ msgid "Related Items"
+#~ msgstr "Erlazionatutako elementuak"
+
+#~ msgid "<i>Always present, acts like a panel.</i>"
+#~ msgstr "<i>Beti ikusgai, panel bat balitz bezala.</i>"

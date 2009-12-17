@@ -7,26 +7,43 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: Rico Tzschichholz <ricotz@t-online.de>\n"
-"POT-Creation-Date: 2009-12-13 10:54+0100\n"
-"PO-Revision-Date: 2009-12-10 22:23+0000\n"
+"POT-Creation-Date: 2009-12-17 10:53+0100\n"
+"PO-Revision-Date: 2009-12-17 10:10+0000\n"
 "Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-12-13 10:08+0000\n"
+"X-Launchpad-Export-Date: 2009-12-17 10:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:113
+#: ../Docky/Docky/ConfigurationWindow.cs:111
 msgid "Click on any dock to configure."
 msgstr "Wähle ein Dock zur Einstellung aus"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:114
+#: ../Docky/Docky/ConfigurationWindow.cs:112
 msgid "Drag any dock to move it."
 msgstr "Ziehe ein Docky um es zu bewegen."
 
-#: ../Docky/Docky/Docky.cs:105
+#: ../Docky/Docky/ConfigurationWindow.cs:190
+msgid "Delete the currently selected dock?"
+msgstr "Lösche das derzeit ausgewählte Dock?"
+
+#: ../Docky/Docky/ConfigurationWindow.cs:192
+msgid ""
+"If you choose to delete the dock, all settings\n"
+"for the deleted dock will be permanently lost."
+msgstr ""
+"Wenn Sie das gewählte Dock löschen wollen, werden alle Einstellungen dieses "
+"Docks verloren gehen."
+
+#: ../Docky/Docky/ConfigurationWindow.cs:207
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:208
+msgid "_Delete Dock"
+msgstr "_Lösche Dock"
+
+#: ../Docky/Docky/Docky.cs:124
 msgid ""
 "Docky requires compositing to work properly.  Please enable compositing and "
 "restart docky."
@@ -34,7 +51,7 @@ msgstr ""
 "Docky benötigt einen Composition-Manager um korrekt zu arbeiten. Bitte "
 "aktivieren Sie einen Composition-Manager und starten Sie Docky neu."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:312
+#: ../Docky/Docky/Interface/DockPreferences.cs:330
 msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
@@ -42,7 +59,7 @@ msgstr ""
 "Unter Startern, die mehr als ein Fenster verwalten, erscheint ein "
 "Extrahinweis."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:314
+#: ../Docky/Docky/Interface/DockPreferences.cs:332
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
@@ -50,22 +67,36 @@ msgstr ""
 "Fenster, die keinem bestehenden Starter zugeordnet werden können, werden "
 "diesem Dock hinzugefügt."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:608
-msgid "<i>Always present, acts like a panel.</i>"
-msgstr "<i>Immer sichtbar, verhält sich wie eine Panel</i>"
+#: ../Docky/Docky/Interface/DockPreferences.cs:633
+msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
+msgstr ""
+"<i>Niemals verstecken, maximierte Fenster überdecken das Dock nicht.<i/>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:611
+#: ../Docky/Docky/Interface/DockPreferences.cs:636
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Versteckt sich immer, wenn kein Mauscursor es berührt.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:614
+#: ../Docky/Docky/Interface/DockPreferences.cs:639
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr ""
 "<i>Versteckt sich, wenn es das aktive Anwendungsfenster behindert.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:617
+#: ../Docky/Docky/Interface/DockPreferences.cs:642
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Versteckt sich, wenn es ein Anwendungsfenster behindert.</i>"
+
+#: ../Docky/Docky/Interface/DockWindow.cs:359
+msgid "Drag to reposition"
+msgstr "Ziehe um zuverschieben"
+
+#: ../Docky/Docky/Interface/DockWindow.cs:365
+msgid "Drop to open"
+msgstr ""
+
+#: ../Docky/Docky/Interface/DockWindow.cs:369
+#: ../Docky/Docky/Interface/DockWindow.cs:383
+msgid "Drop to add to dock"
+msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:91
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
@@ -86,32 +117,28 @@ msgid "Docky Configuration"
 msgstr "Docky Konfiguration"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:86
-msgid "Start When Computer Starts"
-msgstr "Automatisch mit Computer starten"
+msgid "_Start When Computer Starts"
+msgstr "_Automatisch mit Computer starten"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:101
-msgid "Theme:"
-msgstr "Thema:"
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:102
+msgid "_Theme:"
+msgstr "_Thema:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:124
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:126
 msgid "<b>General Options</b>"
 msgstr "<b>Allgemeine Optionen</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:145
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:147
 msgid "<b>Dock Configuration</b>"
 msgstr "<b>Dock Einstellungen</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:179
-msgid "New Dock"
-msgstr "Neues Dock"
-
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:206
-msgid "Delete Dock"
-msgstr "Lösche Dock"
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:181
+msgid "_New Dock"
+msgstr "_Neues Dock"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
 msgid "None"
-msgstr "Nein"
+msgstr "Niemals"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:81
 msgid "Autohide"
@@ -126,57 +153,53 @@ msgid "Window Dodge"
 msgstr "Fenstern ausweichen"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:97
-msgid "Fade On Hide"
-msgstr "Ausblenden"
+msgid "_Fade On Hide"
+msgstr "Aus_blenden"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:140
-msgid "Icon Size:"
-msgstr "Icongröße"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:141
+msgid "_Icon Size:"
+msgstr "_Icongröße:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:151
-msgid "Autohide:"
-msgstr "Verstecken:"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:154
+msgid "_Hiding:"
+msgstr "_Verstecken:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:160
-msgid "Indicate Multiple Windows"
-msgstr "Hinweis bei mehreren Fenstern"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
+msgid "Indicat_e Multiple Windows"
+msgstr "Hinweis bei mehreren _Fenstern"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:174
-msgid "Panel Mode"
-msgstr "Panel-Modus"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
+msgid "_Panel Mode"
+msgstr "_Panel-Modus"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:188
-msgid "Manage Windows Without Launcher"
-msgstr "Verwalte Fenster ohne Starter"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:192
+msgid "_Manage Windows Without Launcher"
+msgstr "_Verwalte Fenster ohne Starter"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:203
-msgid "Zoom:"
-msgstr "Zoom:"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:207
+msgid "_Zoom:"
+msgstr "_Zoom:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:278
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:282
 msgid "<b>Inactive Plugins</b>"
 msgstr "<b>Inaktive Plugins</b>"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:286
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:290
 msgid "<b>Active Plugins</b>"
 msgstr "<b>Aktive Plugins</b>"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:102
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:91
 msgid "Icon"
 msgstr "Icon"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:186
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:147
 msgid "New _Window"
 msgstr "_Neues Fenster"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:188
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:149
 #: ../StandardPlugins/Mounter/src/MountItem.cs:97
 msgid "_Open"
 msgstr "_Öffnen"
-
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:192
-msgid "Related Items"
-msgstr "Verwandte Elemente"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:71
 msgid "Reset Color"
@@ -186,11 +209,34 @@ msgstr "Farbe zurücksetzen"
 msgid "_Pin to Dock"
 msgstr "An Dock _binden"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:232
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:156
+msgid "Not enough free space on destination."
+msgstr "Nicht genügend freier Speicherplatz auf Zieldatenträger."
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:168
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:170
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:190
+msgid "Complete"
+msgstr "Fertig"
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:176
+msgid "Moving"
+msgstr "Verschiebe"
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:182
+msgid "Copying"
+msgstr "Kopiere"
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:195
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:196
+msgid "Error performing drop action"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:240
 msgid "Open"
 msgstr "Öffnen"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:233
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:241
 msgid "Open Containing Folder"
 msgstr "Öffne Ordner"
 
@@ -599,31 +645,31 @@ msgstr "_Heute"
 msgid "T_omorrow"
 msgstr "_Morgen"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:346
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:311
 msgid "Humidity"
 msgstr "Luftfeuchtigkeit"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:348
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:313
 msgid "Temp"
 msgstr "Temperatur"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:350
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:315
 msgid "Feels Like"
 msgstr "gefühlte"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:352
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:317
 msgid "Wind"
 msgstr "Wind"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:353
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:318
 msgid "Direction"
 msgstr "Richtung"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:355
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:320
 msgid "Sunrise"
 msgstr "Sonnenaufgang"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:356
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:321
 msgid "Sunset"
 msgstr "Sonnenuntergang"
 
@@ -648,8 +694,38 @@ msgstr "Sonnenuntergang"
 #~ msgid "Check _Every"
 #~ msgstr "Über_prüfe alle"
 
+#~ msgid "Start When Computer Starts"
+#~ msgstr "Automatisch mit Computer starten"
+
+#~ msgid "Theme:"
+#~ msgstr "Thema:"
+
+#~ msgid "New Dock"
+#~ msgstr "Neues Dock"
+
+#~ msgid "Delete Dock"
+#~ msgstr "Lösche Dock"
+
+#~ msgid "Fade On Hide"
+#~ msgstr "Ausblenden"
+
+#~ msgid "Icon Size:"
+#~ msgstr "Icongröße"
+
+#~ msgid "Indicate Multiple Windows"
+#~ msgstr "Hinweis bei mehreren Fenstern"
+
+#~ msgid "Manage Windows Without Launcher"
+#~ msgstr "Verwalte Fenster ohne Starter"
+
+#~ msgid "Zoom:"
+#~ msgstr "Zoom:"
+
 #~ msgid "Docky"
 #~ msgstr "Docky"
+
+#~ msgid "Autohide:"
+#~ msgstr "Verstecken:"
 
 #, csharp-format
 #~ msgid "{0}'s Forecast"
@@ -669,6 +745,9 @@ msgstr "Sonnenuntergang"
 
 #~ msgid "_Reload Weather Data"
 #~ msgstr "_Aktualisiere Wetterdaten"
+
+#~ msgid "Panel Mode"
+#~ msgstr "Panel-Modus"
 
 #~ msgid "Config"
 #~ msgstr "Einstellung"
@@ -706,3 +785,9 @@ msgstr "Sonnenuntergang"
 
 #~ msgid "Fade out dock instead of slide off screen"
 #~ msgstr "Dock wird ausgeblendet anstatt ausgerollt"
+
+#~ msgid "Related Items"
+#~ msgstr "Verwandte Elemente"
+
+#~ msgid "<i>Always present, acts like a panel.</i>"
+#~ msgstr "<i>Immer sichtbar, verhält sich wie eine Panel</i>"
