@@ -31,7 +31,6 @@ namespace Docky.Services
 		[DllImport("libc")]
 		private static extern int prctl (int option, byte[] arg2, IntPtr arg3, IntPtr arg4, IntPtr arg5);
 		
-		
 		// these next 4 methods are not yet in GIO#.  The methods in GIO# (Unmount, Eject, UnmountFinish, EjectFinish)
 		// have been marked as deprecated since 2.22.  Once GIO# gets these methods we can remove these.
 		[DllImport("gio-2.0")]

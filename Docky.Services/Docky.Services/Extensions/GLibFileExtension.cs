@@ -39,7 +39,14 @@ namespace Docky.Services
 		
 		public static FileInfo QueryInfoSimple (this GLib.File file, string attribute)
 		{
-			FileInfo info = file.QueryInfo (attribute, FileQueryInfoFlags.None, null);
+			FileInfo info;
+			if (attribute.StartsWith ("filesystem::")) {
+				Console.WriteLine ("Getting fs info :: {0}", attribute);
+			    info = file.QueryFilesystemInfo (attribute, null);
+			} else {
+				Console.WriteLine ("Getting regular info :: {0}", attribute);
+				info = file.QueryInfo (attribute, FileQueryInfoFlags.None, null);
+			}
 			return info;
 		}
 		
@@ -61,6 +68,11 @@ namespace Docky.Services
 		public static bool QueryBoolAttr (this GLib.File file, string attribute)
 		{
 			return file.QueryInfoSimple (attribute).GetAttributeBoolean (attribute);
+		}
+		
+		public static ulong QueryULongAttr (this GLib.File file, string attribute)
+		{
+			return file.QueryInfoSimple (attribute).GetAttributeULong (attribute);
 		}
 		
 		public static FileType QueryFileType (this GLib.File file)

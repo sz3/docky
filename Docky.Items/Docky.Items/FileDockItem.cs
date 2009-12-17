@@ -53,6 +53,7 @@ namespace Docky.Items
 		
 		const string ThumbnailPathKey = "thumbnail::path";
 		const string FilesystemIDKey = "id::filesystem";
+		const string FilesystemFreeKey = "filesystem::free";
 		string uri;
 		bool is_folder;
 		string forced_hover_text = null;
@@ -143,36 +144,42 @@ namespace Docky.Items
 		protected override bool OnAcceptDrop (IEnumerable<string> uris)
 		{
 			Notification note = null;
-			foreach (string uri in uris) {
+			foreach (File file in uris.Select (uri => FileFactory.NewForUri (uri))) {
 				try {
-					File file = FileFactory.NewForUri (uri);
 					if (!file.Exists)
 						continue;
+					
+					// gather some information first
+					long fileSize = file.GetSize ();
+					ulong freeSpace = OwnedFile.QueryULongAttr (FilesystemFreeKey);
+					if ((ulong) fileSize > freeSpace)
+						throw new Exception (Catalog.GetString ("Not enough free spacce on destination."));
 					
 					string ownedFSID = OwnedFile.QueryStringAttr (FilesystemIDKey);
 					string destFSID = file.QueryStringAttr (FilesystemIDKey);
 					
 					string nameAfterMove = NewFileName (OwnedFile, file);
+					
 					DockServices.System.RunOnThread (()=> {
 						
 						bool performing = true;
 						long cur = 0, tot = 10;
 						
-						note = Docky.Services.Log.Notify ("", DockServices.Drawing.IconFromGIcon (file.Icon ()), "{0}% Complete.", cur / tot);
+						note = Docky.Services.Log.Notify ("", DockServices.Drawing.IconFromGIcon (file.Icon ()), "{0}% " + Catalog.GetString ("Complete") + "...", cur / tot);
 						GLib.Timeout.Add (250, () => {
-							note.Body = string.Format ("{0}% Complete.", string.Format ("{0:00.0}", ((float) Math.Min (cur, tot) / tot) * 100));
+							note.Body = string.Format ("{0}% ", string.Format ("{0:00.0}", ((float) Math.Min (cur, tot) / tot) * 100)) + Catalog.GetString ("Complete") + "...";
 							return performing;
 						});
 						
 						// check the filesystem IDs, if they are the same, we move, otherwise we copy.
 						if (ownedFSID == destFSID) {
-							note.Summary = string.Format ("Moving {0}", file.Basename);
+							note.Summary = Catalog.GetString ("Moving") + string.Format (" {0}...", file.Basename);
 							file.Move (OwnedFile.GetChild (nameAfterMove), FileCopyFlags.NofollowSymlinks | FileCopyFlags.AllMetadata | FileCopyFlags.NoFallbackForMove, null, (current, total) => {
 								cur = current;
 								tot = total;
 							});
 						} else {
-							note.Summary = string.Format ("Copying {0}", file.Basename);
+							note.Summary = Catalog.GetString ("Copying") + string.Format (" {0}...", file.Basename);
 							file.Copy_Recurse (OwnedFile.GetChild (nameAfterMove), 0, (current, total) => {
 								cur = current;
 								tot = total;
@@ -180,12 +187,13 @@ namespace Docky.Items
 						}
 						
 						performing = false;
-						note.Body = "100% Complete.";
+						note.Body = string.Format ("100% {0}.", Catalog.GetString ("Complete"));
 					});
 					// until we use a new version of GTK# which supports getting the GLib.Error code
 					// this is about the best we can do.
 				} catch (Exception e) {
-					Log<FileDockItem>.Error ("Error performing drop action: {0}", e.Message);
+					Docky.Services.Log.Notify (Catalog.GetString ("Error performing drop action"), Gtk.Stock.DialogError, e.Message);
+					Log<FileDockItem>.Error ("{0}: {1}", Catalog.GetString ("Error performing drop action"), e.Message);
 					Log<FileDockItem>.Debug (e.StackTrace);
 					
 					if (note != null)
