@@ -1995,7 +1995,7 @@ namespace Docky.Interface
 		
 		void DrawItem (DockySurface surface, Gdk.Rectangle dockArea, AbstractDockItem item)
 		{
-			if (DragTracker.DragItem == item)
+			if (DragTracker.DragItem == item || (ThreeDimensional && item is SeparatorItem))
 				return;
 			
 			double zoomOffset = ZoomedIconSize / (double) IconSize;
