@@ -44,6 +44,9 @@ class DockyItem():
 			self.iface.ConfirmItem(k)
 		return True
 
+	def menu_pressed(self, menu_id):
+		pass
+
 class DockySink():
 	def __init__(self):
 		self.bus = dbus.SessionBus()
