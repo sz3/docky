@@ -549,7 +549,35 @@ namespace Docky.Windowing
 					    vexec = vexec.Substring (0, vexec.IndexOf ("\""));
 				// for crossover apps
 				} else if (exec.Contains (".cxoffice") && item.HasAttribute ("X-Created-By") && item.GetString ("X-Created-By").Contains ("cxoffice")) {
-					// PROCESS CX APPS
+					// The exec is actually another file that uses exec to launch the actual app.
+					exec = exec.Replace ("\"", "");
+					GLib.File launcher = GLib.FileFactory.NewForPath (exec);
+					string execLine = "";
+					using (GLib.DataInputStream stream = new GLib.DataInputStream (launcher.Read (null))) {
+						ulong len;
+						string line;
+						while ((line = stream.ReadLine (out len, null)) != null) {
+							if (line.StartsWith ("exec")) {
+								execLine = line;
+								break;
+							}
+						}
+					}
+	
+					// if no exec line was found, bail
+					if (string.IsNullOrEmpty (execLine))
+						continue;
+					
+					// get the relevant part from the execLine
+					string [] parts = execLine.Split (new [] {'\"'});
+					// find the part that contains C:/path/to/app.lnk
+					if (parts.Any (part => part.StartsWith ("C:"))) {
+					    vexec = parts.First (part => part.StartsWith ("C:"));
+						// and take only app.lnk (this is what is exposed to ps -ef)
+						vexec = vexec.Split (new [] {'/'}).Last ();
+					} else {
+						continue;
+					}
 				} else {
 					string [] parts = exec.Split (' ');
 					
