@@ -20,6 +20,14 @@ except ImportError, e:
 
 try:
 	CLIENT = ZeitgeistClient()
+	version = CLIENT.get_version()
+	MIN_VERSION = [0, 2, 99]
+	for i in xrange(3):
+		if version[i] < MIN_VERSION[i]:
+			print "PLEASE USE ZEITGEIST 0.3.0 or above"
+			exit()
+		
+
 except RuntimeError, e:
 	print "Unable to connect to Zeitgeist, won't send events. Reason: '%s'" %e
 	exit()
