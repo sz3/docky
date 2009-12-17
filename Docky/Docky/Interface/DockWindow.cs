@@ -508,7 +508,7 @@ namespace Docky.Interface
 			get {
 				int height = IconSize;
 				if (Painter != null)
-					return Math.Max (IconSize, Painter.MinimumHeight) + 2 * DockWidthBuffer;
+					return Math.Max (IconSize, Painter.MinimumHeight) + 2 * DockHeightBuffer;
 				return height + 2 * DockHeightBuffer;
 			}
 		}
