@@ -558,7 +558,7 @@ namespace Docky.Interface
 		}
 		
 		int DockWidthBuffer {
-			get { return Painter != null ? DockHeightBuffer : 5; }
+			get { return 5; }
 		}
 		
 		int ItemWidthBuffer {
