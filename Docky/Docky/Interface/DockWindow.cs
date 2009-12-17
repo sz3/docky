@@ -338,9 +338,9 @@ namespace Docky.Interface
 				int textWidth = inkRect.Width;
 				int textHeight = logicalRect.Height;
 				int buffer = HoverTextHeight - textHeight;
-				surface = new DockySurface (textWidth + buffer, HoverTextHeight, background_buffer);
+				surface = new DockySurface (Math.Max (HoverTextHeight, textWidth + buffer), HoverTextHeight, background_buffer);
 				
-				surface.Context.MoveTo (buffer / 2, buffer / 2);
+				surface.Context.MoveTo ((surface.Width - textWidth) / 2, buffer / 2);
 				Pango.CairoHelper.LayoutPath (surface.Context, layout);
 				surface.Context.Color = HoverTextManager.IsLight ? new Cairo.Color (0.1, 0.1, 0.1) : new Cairo.Color (1, 1, 1);
 				surface.Context.Fill ();
