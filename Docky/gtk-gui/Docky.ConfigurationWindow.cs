@@ -222,41 +222,28 @@ namespace Docky {
             this.hbox3.Add(this.vbox4);
             Gtk.Box.BoxChild w29 = ((Gtk.Box.BoxChild)(this.hbox3[this.vbox4]));
             w29.Position = 2;
-            this.hbox2.Add(this.hbox3);
-            Gtk.Box.BoxChild w30 = ((Gtk.Box.BoxChild)(this.hbox2[this.hbox3]));
-            w30.Position = 0;
-            // Container child hbox2.Gtk.Box+BoxChild
+            // Container child hbox3.Gtk.Box+BoxChild
             this.close_button = new Gtk.Button();
+            this.close_button.WidthRequest = 100;
             this.close_button.CanFocus = true;
             this.close_button.Name = "close_button";
+            this.close_button.UseStock = true;
             this.close_button.UseUnderline = true;
             this.close_button.BorderWidth = ((uint)(5));
-            // Container child close_button.Gtk.Container+ContainerChild
-            Gtk.Alignment w31 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            // Container child GtkAlignment.Gtk.Container+ContainerChild
-            Gtk.HBox w32 = new Gtk.HBox();
-            w32.Spacing = 2;
-            // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Image w33 = new Gtk.Image();
-            w33.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-close", Gtk.IconSize.Menu, 16);
-            w32.Add(w33);
-            // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Label w35 = new Gtk.Label();
-            w35.LabelProp = Mono.Unix.Catalog.GetString("_Close");
-            w35.UseUnderline = true;
-            w32.Add(w35);
-            w31.Add(w32);
-            this.close_button.Add(w31);
-            this.hbox2.Add(this.close_button);
-            Gtk.Box.BoxChild w39 = ((Gtk.Box.BoxChild)(this.hbox2[this.close_button]));
-            w39.Position = 1;
-            w39.Expand = false;
-            w39.Fill = false;
+            this.close_button.Label = "gtk-close";
+            this.hbox3.Add(this.close_button);
+            Gtk.Box.BoxChild w30 = ((Gtk.Box.BoxChild)(this.hbox3[this.close_button]));
+            w30.Position = 3;
+            w30.Expand = false;
+            w30.Fill = false;
+            this.hbox2.Add(this.hbox3);
+            Gtk.Box.BoxChild w31 = ((Gtk.Box.BoxChild)(this.hbox2[this.hbox3]));
+            w31.Position = 0;
             this.vbox1.Add(this.hbox2);
-            Gtk.Box.BoxChild w40 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox2]));
-            w40.Position = 1;
-            w40.Expand = false;
-            w40.Fill = false;
+            Gtk.Box.BoxChild w32 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox2]));
+            w32.Position = 1;
+            w32.Expand = false;
+            w32.Fill = false;
             this.Add(this.vbox1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();
