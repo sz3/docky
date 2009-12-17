@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-14 13:20+0100\n"
+"POT-Creation-Date: 2009-12-17 10:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,8 +74,17 @@ msgstr ""
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:330
+#: ../Docky/Docky/Interface/DockWindow.cs:359
 msgid "Drag to reposition"
+msgstr ""
+
+#: ../Docky/Docky/Interface/DockWindow.cs:365
+msgid "Drop to open"
+msgstr ""
+
+#: ../Docky/Docky/Interface/DockWindow.cs:369
+#: ../Docky/Docky/Interface/DockWindow.cs:383
+msgid "Drop to add to dock"
 msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:91
@@ -189,11 +198,34 @@ msgstr ""
 msgid "_Pin to Dock"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:232
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:156
+msgid "Not enough free space on destination."
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:168
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:170
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:190
+msgid "Complete"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:176
+msgid "Moving"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:182
+msgid "Copying"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:195
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:196
+msgid "Error performing drop action"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:240
 msgid "Open"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:233
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:241
 msgid "Open Containing Folder"
 msgstr ""
 
@@ -593,30 +625,34 @@ msgstr ""
 msgid "T_omorrow"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:346
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:311
 msgid "Humidity"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:348
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:313
 msgid "Temp"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:350
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:315
 msgid "Feels Like"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:352
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:317
 msgid "Wind"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:353
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:318
 msgid "Direction"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:355
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:320
 msgid "Sunrise"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:356
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:321
 msgid "Sunset"
+msgstr ""
+
+#: ../scripts/zeitgeist_docky.py:102
+msgid "Most Used Items"
 msgstr ""
