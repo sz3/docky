@@ -229,20 +229,34 @@ namespace Docky {
             this.close_button = new Gtk.Button();
             this.close_button.CanFocus = true;
             this.close_button.Name = "close_button";
-            this.close_button.UseStock = true;
             this.close_button.UseUnderline = true;
             this.close_button.BorderWidth = ((uint)(5));
-            this.close_button.Label = "gtk-close";
+            // Container child close_button.Gtk.Container+ContainerChild
+            Gtk.Alignment w31 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
+            Gtk.HBox w32 = new Gtk.HBox();
+            w32.Spacing = 2;
+            // Container child GtkHBox.Gtk.Container+ContainerChild
+            Gtk.Image w33 = new Gtk.Image();
+            w33.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-close", Gtk.IconSize.Menu, 16);
+            w32.Add(w33);
+            // Container child GtkHBox.Gtk.Container+ContainerChild
+            Gtk.Label w35 = new Gtk.Label();
+            w35.LabelProp = Mono.Unix.Catalog.GetString("_Close");
+            w35.UseUnderline = true;
+            w32.Add(w35);
+            w31.Add(w32);
+            this.close_button.Add(w31);
             this.hbox2.Add(this.close_button);
-            Gtk.Box.BoxChild w31 = ((Gtk.Box.BoxChild)(this.hbox2[this.close_button]));
-            w31.Position = 1;
-            w31.Expand = false;
-            w31.Fill = false;
+            Gtk.Box.BoxChild w39 = ((Gtk.Box.BoxChild)(this.hbox2[this.close_button]));
+            w39.Position = 1;
+            w39.Expand = false;
+            w39.Fill = false;
             this.vbox1.Add(this.hbox2);
-            Gtk.Box.BoxChild w32 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox2]));
-            w32.Position = 1;
-            w32.Expand = false;
-            w32.Fill = false;
+            Gtk.Box.BoxChild w40 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox2]));
+            w40.Position = 1;
+            w40.Expand = false;
+            w40.Fill = false;
             this.Add(this.vbox1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();

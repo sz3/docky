@@ -8,6 +8,10 @@
     <widget-library name="Mono.Addins.Gui, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
     <widget-library name="wnck-sharp, Version=2.20.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <widget-library name="gnomedesktop-sharp, Version=2.20.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <widget-library name="../../Docky.Services/bin/Debug/Docky.Services.dll" />
+    <widget-library name="../../Docky.Items/bin/Debug/Docky.Items.dll" />
+    <widget-library name="../../Docky.Windowing/bin/Debug/Docky.Windowing.dll" />
+    <widget-library name="../../Docky.DBus/bin/Debug/Docky.DBus.dll" />
     <widget-library name="../bin/Debug/Docky.exe" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="Docky.Interface.DockPreferences" design-size="411 356">
@@ -543,10 +547,10 @@ Window Dodge</property>
                             <child>
                               <widget class="Gtk.Label" id="label2">
                                 <property name="MemberName" />
-                                <property name="LabelProp" translatable="yes">_Theme:</property>
-                                <property name="MnemonicWidget">theme_combo</property>
                                 <property name="CanFocus">True</property>
+                                <property name="LabelProp" translatable="yes">_Theme:</property>
                                 <property name="UseUnderline">True</property>
+                                <property name="MnemonicWidget">theme_combo</property>
                               </widget>
                               <packing>
                                 <property name="Position">0</property>
@@ -711,12 +715,12 @@ Window Dodge</property>
               <widget class="Gtk.Button" id="close_button">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
-                <property name="UseStock">True</property>
-                <property name="Type">StockItem</property>
-                <property name="StockId">gtk-close</property>
+                <property name="Type">TextAndIcon</property>
+                <property name="Icon">stock:gtk-close Menu</property>
+                <property name="Label" translatable="yes">_Close</property>
+                <property name="UseUnderline">True</property>
                 <property name="BorderWidth">5</property>
                 <signal name="Clicked" handler="OnCloseButtonClicked" />
-                <property name="label">gtk-close</property>
               </widget>
               <packing>
                 <property name="Position">1</property>
