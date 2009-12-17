@@ -265,10 +265,7 @@ namespace Docky.Services
 			// if we weren't given an app info, query the file for the default handler
 			if (app == null)
 				app = files.ToList ().First ().QueryDefaultHandler (null);
-			
-			
-			Console.WriteLine (app == null);
-			
+						
 			GLib.List launchList;
 			
 			if (app != null) {
