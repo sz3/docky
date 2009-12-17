@@ -132,7 +132,6 @@ namespace Docky.Interface
 		
 		const int UrgentBounceHeight = 80;
 		const int LaunchBounceHeight = 30;
-		const int DockWidthBuffer = 5;
 		const int BackgroundWidth = 1000;
 		const int BackgroundHeight = 150;
 		const int NormalIndicatorSize = 20;
@@ -556,6 +555,10 @@ namespace Docky.Interface
 		
 		int DockHeightBuffer {
 			get { return (Preferences.PanelMode) ? 3 : 7 + (ThreeDimensional ? 5 : 0); }
+		}
+		
+		int DockWidthBuffer {
+			get { return Painter != null ? DockHeightBuffer : 5; }
 		}
 		
 		int ItemWidthBuffer {
