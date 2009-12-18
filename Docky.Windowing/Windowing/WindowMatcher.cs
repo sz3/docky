@@ -453,8 +453,10 @@ namespace Docky.Windowing
 				yield return sanitizedCmd;
 				
 				// some wine apps are launched via a shell script that sets the proc name to "app.exe"
-				if (sanitizedCmd.EndsWith (".exe"))
-					yield return sanitizedCmd.Split (new [] {".exe"}, StringSplitOptions.None)[0];
+				// a lot of apps have a script 'foo' which does 'exec foo-bin'
+				foreach (string s in new [] {".exe", "-bin"})
+					if (sanitizedCmd.EndsWith (s))
+						yield return sanitizedCmd.Substring (0, sanitizedCmd.Length - s.Length);
 			}
 			
 			// return the entire cmdline last as a last ditch effort to find a match
