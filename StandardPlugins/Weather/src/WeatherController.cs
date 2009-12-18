@@ -46,12 +46,12 @@ namespace WeatherDocklet
 		/// <value>
 		/// A <see cref="System.Collections.Generic.Dictionary"/> of all weather sources.
 		/// </value>
-		public static Dictionary<string, AbstractWeatherSource> Sources { get; protected set; }
+		public static Dictionary<string, AbstractWeatherSource> Sources { get; private set; }
 		
 		/// <value>
 		/// The current weather source.
 		/// </value>
-		public static IWeatherSource Weather { get; protected set; }
+		public static IWeatherSource Weather { get; private set; }
 		
 		/// <value>
 		/// How frequently the weather should reload automatically.
