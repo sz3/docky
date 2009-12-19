@@ -16,6 +16,7 @@
 // 
 
 using System;
+using System.Text.RegularExpressions;
 
 using Mono.Unix;
 
@@ -37,7 +38,8 @@ namespace Docky
 				SetProps ();
 			};
 			
-			Name = Helper.File.Basename;
+			Name = ((string) Helper.File.Basename).Split ('.')[0];
+			Name = Regex.Replace (Name, "_(?<char>.)", " $1");
 			Description = Helper.File.Path;			
 			SubDescriptionTitle = Catalog.GetString ("Status");
 			Icon = DockServices.Drawing.IconFromGIcon (Helper.File.Icon ());
