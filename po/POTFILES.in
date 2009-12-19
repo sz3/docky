@@ -1,5 +1,6 @@
 Docky/Docky/ConfigurationWindow.cs
 Docky/Docky/Docky.cs
+Docky/Docky/HelperTile.cs
 Docky/Docky/Interface/DockPreferences.cs
 Docky/Docky/Interface/DockWindow.cs
 Docky/Docky/Items/DockyItem.cs

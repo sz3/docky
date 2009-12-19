@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-17 10:53+0100\n"
+"POT-Creation-Date: 2009-12-19 07:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,26 +17,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:111
+#: ../Docky/Docky/ConfigurationWindow.cs:130
 msgid "Click on any dock to configure."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:112
+#: ../Docky/Docky/ConfigurationWindow.cs:131
 msgid "Drag any dock to move it."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:190
+#: ../Docky/Docky/ConfigurationWindow.cs:211
 msgid "Delete the currently selected dock?"
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:192
+#: ../Docky/Docky/ConfigurationWindow.cs:213
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:207
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:208
+#: ../Docky/Docky/ConfigurationWindow.cs:228
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:282
 msgid "_Delete Dock"
 msgstr ""
 
@@ -44,6 +44,18 @@ msgstr ""
 msgid ""
 "Docky requires compositing to work properly.  Please enable compositing and "
 "restart docky."
+msgstr ""
+
+#: ../Docky/Docky/HelperTile.cs:44
+msgid "Status"
+msgstr ""
+
+#: ../Docky/Docky/HelperTile.cs:52
+msgid "Running"
+msgstr ""
+
+#: ../Docky/Docky/HelperTile.cs:52
+msgid "Stopped"
 msgstr ""
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:330
@@ -101,27 +113,35 @@ msgstr ""
 msgid "_Quit Docky"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:58
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:74
 msgid "Docky Configuration"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:86
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:118
 msgid "_Start When Computer Starts"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:102
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:134
 msgid "_Theme:"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:126
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:158
 msgid "<b>General Options</b>"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:147
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:179
 msgid "<b>Dock Configuration</b>"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:181
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:193
+msgid "Docks"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:224
+msgid "Extensions"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:255
 msgid "_New Dock"
 msgstr ""
 
@@ -190,7 +210,7 @@ msgstr ""
 msgid "_Open"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:71
+#: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:69
 msgid "Reset Color"
 msgstr ""
 
@@ -221,11 +241,11 @@ msgstr ""
 msgid "Error performing drop action"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:240
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:218
 msgid "Open"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:241
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:219
 msgid "Open Containing Folder"
 msgstr ""
 
@@ -275,11 +295,11 @@ msgstr ""
 msgid "Account validation succeeded!"
 msgstr ""
 
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:129
+#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:157
 msgid "_Remove"
 msgstr ""
 
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:143
+#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:171
 msgid "_Add"
 msgstr ""
 
