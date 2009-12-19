@@ -83,7 +83,7 @@ namespace Docky {
             this.notebook1 = new Gtk.Notebook();
             this.notebook1.CanFocus = true;
             this.notebook1.Name = "notebook1";
-            this.notebook1.CurrentPage = 1;
+            this.notebook1.CurrentPage = 0;
             // Container child notebook1.Gtk.Notebook+NotebookChild
             this.vbox2 = new Gtk.VBox();
             this.vbox2.Name = "vbox2";
@@ -102,7 +102,7 @@ namespace Docky {
             // Container child vbox6.Gtk.Box+BoxChild
             this.frame1 = new Gtk.Frame();
             this.frame1.Name = "frame1";
-            this.frame1.ShadowType = ((Gtk.ShadowType)(2));
+            this.frame1.ShadowType = ((Gtk.ShadowType)(0));
             // Container child frame1.Gtk.Container+ContainerChild
             this.GtkAlignment = new Gtk.Alignment(0F, 0F, 1F, 1F);
             this.GtkAlignment.Name = "GtkAlignment";
@@ -166,7 +166,7 @@ namespace Docky {
             // Container child vbox6.Gtk.Box+BoxChild
             this.frame3 = new Gtk.Frame();
             this.frame3.Name = "frame3";
-            this.frame3.ShadowType = ((Gtk.ShadowType)(2));
+            this.frame3.ShadowType = ((Gtk.ShadowType)(0));
             // Container child frame3.Gtk.Container+ContainerChild
             this.config_alignment = new Gtk.Alignment(0F, 0F, 1F, 1F);
             this.config_alignment.Name = "config_alignment";
@@ -221,7 +221,7 @@ namespace Docky {
             // Notebook tab
             this.label2 = new Gtk.Label();
             this.label2.Name = "label2";
-            this.label2.LabelProp = Mono.Unix.Catalog.GetString("Scripts");
+            this.label2.LabelProp = Mono.Unix.Catalog.GetString("Extensions");
             this.notebook1.SetTabLabel(this.alignment3, this.label2);
             this.label2.ShowAll();
             this.vbox1.Add(this.notebook1);
