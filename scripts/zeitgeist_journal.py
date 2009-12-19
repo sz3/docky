@@ -1,10 +1,10 @@
+#!/usr/bin/env python
 # -.- coding: utf-8 -.-
 
 # Zeitgeist
 #
 # Copyright © 2009 Seif Lotfy <seif@lotfy.com>
 # Copyright © 2009 Siegfried Gevatter <siegfried@gevatter.com>
-# Copyright © 2007 Alex Graveley <alex@beatniksoftware.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,9 +24,33 @@ import gobject
 import sys
 import urllib
 import datetime
+import time
 import os
 import gtk
 import gnome.ui
+import atexit
+
+try:
+	from docky.docky import DockyItem, DockySink
+	from zeitgeist.client import ZeitgeistClient
+	from zeitgeist.datamodel import Event, Subject, Interpretation, Manifestation, StorageState
+	from signal import signal, SIGTERM
+	from sys import exit
+except ImportError, e:
+	exit()
+
+try:
+	CLIENT = ZeitgeistClient()
+	version = CLIENT.get_version()
+	MIN_VERSION = [0, 2, 99]
+	for i in xrange(3):
+		if version[i] < MIN_VERSION[i]:
+			print "PLEASE USE ZEITGEIST 0.3.0 or above"
+			exit()
+
+except RuntimeError, e:
+	print "Unable to connect to Zeitgeist, won't send events. Reason: '%s'" %e
+	exit()
 
 INTERPRETATION = {
 		"http://zeitgeist-project.com/schema/1.0/core#VisitEvent":"OPENED",
@@ -452,4 +476,38 @@ class DataIconView(gtk.TreeView):
 								event.subjects[0].text,
 								event])
 
+class DockyJournalItem(DockyItem):
+	def __init__(self, path):
+		DockyItem.__init__(self, path)
+		menu_id = self.iface.AddMenuItem("Journal", "document-open-recent", "")
+		self.id_map[menu_id] = "Journal"
+		self.uri = ""
+		if self.iface.GetOwnsUri():
+			self.uri = self.iface.GetUri()
+		else:
+			self.uri = self.iface.GetDesktopFile()
 
+	def menu_pressed(self, menu_id):
+		if self.id_map[menu_id] == "Journal":
+			window = Window(CLIENT)
+			window.load_events(0, time.time(), self.uri)
+			
+class DockyJournalSink(DockySink):
+	def item_path_found(self, pathtoitem, item):
+		if item.GetOwnsUri() or item.GetOwnsDesktopFile():
+			self.items[pathtoitem] = DockyJournalItem(pathtoitem)
+
+dockysink = DockyJournalSink()
+
+def cleanup ():
+	dockysink.dispose ()
+
+if __name__ == "__main__":
+	mainloop = gobject.MainLoop(is_running=True)
+
+	atexit.register (cleanup)
+	
+	signal(SIGTERM, lambda signum, stack_frame: exit(1))
+
+	while mainloop.is_running():
+	    mainloop.run()

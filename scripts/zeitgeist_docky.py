@@ -12,7 +12,6 @@ import urllib
 import os
 
 try:
-	from zeitgeist_journal import Window
 	from docky.docky import DockyItem, DockySink
 	from zeitgeist.client import ZeitgeistClient
 	from zeitgeist.datamodel import Event, Subject, Interpretation, Manifestation, StorageState
@@ -97,13 +96,6 @@ class DockyZGItem(DockyItem):
 		for subject in uris:
 			menu_id = self.iface.AddFileMenuItem(subject.uri,"Most Used Items")
 			self.id_map[menu_id] = subject.uri
-		if len(uris) > 0:
-			menu_id = self.iface.AddMenuItem("Journal", "", "")
-			self.id_map[menu_id] = "Journal"
-
-	def menu_pressed(self, menu_id):
-		window = Window(CLIENT)
-		window.load_events(0, time.time(), self.uri)
 
 class DockyZGSink(DockySink):
 	def item_path_found(self, pathtoitem, item):
