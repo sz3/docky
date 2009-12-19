@@ -1744,17 +1744,18 @@ namespace Docky.Interface
 		void UpdateMaxIconSize ()
 		{
 			int dockWidth = DockWidth;
+			int maxWidth = VerticalDock ? monitor_geo.Height : monitor_geo.Width;
 			
-			if (dockWidth > monitor_geo.Width) {
+			if (dockWidth > maxWidth) {
 				// MaxIconSize is too large, must fix
 				MaxIconSize = Preferences.IconSize;
-				while (dockWidth > monitor_geo.Width) {
+				while (dockWidth > maxWidth) {
 					MaxIconSize--;
 					dockWidth = DockWidth;
 				}
 			} else if (MaxIconSize < Preferences.IconSize) {
 				// Perhaps MaxIconSize is too small, lets find out!
-				while (dockWidth < monitor_geo.Width && MaxIconSize <= Preferences.IconSize) {
+				while (dockWidth < maxWidth && MaxIconSize <= Preferences.IconSize) {
 					MaxIconSize++;
 					dockWidth = DockWidth;
 				}
