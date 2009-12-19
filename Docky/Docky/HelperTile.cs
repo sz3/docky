@@ -38,6 +38,8 @@ namespace Docky
 				SetProps ();
 			};
 			
+			ButtonStateDisabledText = "Enable";
+			ButtonStateEnabledText = "Disable";
 			Name = ((string) Helper.File.Basename).Split ('.')[0];
 			Name = Regex.Replace (Name, "_(?<char>.)", " $1");
 			Description = Helper.File.Path;
