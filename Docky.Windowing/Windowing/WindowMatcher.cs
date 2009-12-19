@@ -118,6 +118,17 @@ namespace Docky.Windowing
 			}
 		}
 		
+		static IEnumerable<string> SuffixStrings {
+			get {
+				// some wine apps are launched via a shell script that sets the proc name to "app.exe"
+				yield return ".exe";
+				// some apps have a script 'foo' which does 'exec foo-bin'
+				yield return "-bin";
+				// some python apps have a script 'foo' for 'python foo.py'
+				yield return ".py";
+			}
+		}
+		
 		object update_lock;
 		
 		Dictionary<Wnck.Window, List<string>> window_to_desktop_files;
@@ -452,9 +463,8 @@ namespace Docky.Windowing
 				
 				yield return sanitizedCmd;
 				
-				// some wine apps are launched via a shell script that sets the proc name to "app.exe"
-				// a lot of apps have a script 'foo' which does 'exec foo-bin'
-				foreach (string s in new [] {".exe", "-bin"})
+				// if it ends with a special suffix, strip the suffix and return an additional result
+				foreach (string s in SuffixStrings)
 					if (sanitizedCmd.EndsWith (s))
 						yield return sanitizedCmd.Substring (0, sanitizedCmd.Length - s.Length);
 			}
