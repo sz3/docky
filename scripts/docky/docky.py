@@ -40,7 +40,6 @@ class DockyItem():
 				self.iface.RemoveItem(k)
 			except:
 				break;
-		glib.source_remove(self.timer)
 	
 	def menu_pressed(self, menu_id):
 		pass
