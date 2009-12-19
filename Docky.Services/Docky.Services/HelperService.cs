@@ -56,7 +56,11 @@ namespace Docky.Services
 		{
 			prefs = DockServices.Preferences.Get<HelperService> ();
 			Helpers = new List<Helper> ();
-			Refresh ();
+			
+			GLib.Timeout.Add (2000, delegate {
+				Refresh ();
+				return false;
+			});
 		}
 		
 		void Refresh ()
