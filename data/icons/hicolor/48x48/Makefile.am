@@ -1,2 +1,4 @@
-SUBDIRS=apps
+SUBDIRS= \
+	apps \
+	mimetypes 
 
