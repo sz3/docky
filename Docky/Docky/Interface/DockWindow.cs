@@ -508,7 +508,7 @@ namespace Docky.Interface
 			get {
 				if (!ZoomEnabled)
 					return 1;
-				return 1 + (1 - PainterOpacity) * (((Preferences.IconSize * Preferences.ZoomPercent) / MaxIconSize) - 1);
+				return (Preferences.IconSize * Preferences.ZoomPercent) / MaxIconSize;
 			}
 		}
 		#endregion
@@ -634,9 +634,12 @@ namespace Docky.Interface
 				
 				double zoom = Math.Min (1, (render_time - dock_hovered_change_time).TotalMilliseconds / 
 				                        BaseAnimationTime.TotalMilliseconds);
+				
 				if (!DockHovered) {
 					zoom = 1 - zoom;
 				}
+				
+				zoom *= 1 - PainterOpacity;
 				
 				if (rendering)
 					zoom_in_buffer = zoom;
