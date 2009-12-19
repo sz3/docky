@@ -50,6 +50,7 @@ RESOURCES = \
 	Resources/close.svg \
 	Resources/menu.svg \
 	Resources/preferences.svg \
+	Resources/stretch_separator.svg\
 	Resources/tooltip.svg 
 
 PROJECT_REFERENCES= \
