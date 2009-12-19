@@ -25,7 +25,7 @@
         <child>
           <widget class="Gtk.Table" id="table3">
             <property name="MemberName" />
-            <property name="NRows">7</property>
+            <property name="NRows">8</property>
             <property name="NColumns">3</property>
             <property name="RowSpacing">6</property>
             <property name="ColumnSpacing">6</property>
@@ -182,8 +182,8 @@ Window Dodge</property>
                 <signal name="Toggled" handler="OnMultipleWindowIndicatorCheckToggled" />
               </widget>
               <packing>
-                <property name="TopAttach">5</property>
-                <property name="BottomAttach">6</property>
+                <property name="TopAttach">6</property>
+                <property name="BottomAttach">7</property>
                 <property name="RightAttach">3</property>
                 <property name="AutoSize">True</property>
                 <property name="XOptions">Fill</property>
@@ -222,6 +222,31 @@ Window Dodge</property>
               </packing>
             </child>
             <child>
+              <widget class="Gtk.CheckButton" id="threedee_check">
+                <property name="MemberName" />
+                <property name="CanFocus">True</property>
+                <property name="Label" translatable="yes">3D Background</property>
+                <property name="DrawIndicator">True</property>
+                <property name="HasLabel">True</property>
+                <property name="UseUnderline">True</property>
+                <signal name="Toggled" handler="OnThreedeeCheckToggled" />
+              </widget>
+              <packing>
+                <property name="TopAttach">5</property>
+                <property name="BottomAttach">6</property>
+                <property name="RightAttach">3</property>
+                <property name="AutoSize">True</property>
+                <property name="XOptions">Fill</property>
+                <property name="YOptions">Fill</property>
+                <property name="XExpand">False</property>
+                <property name="XFill">True</property>
+                <property name="XShrink">False</property>
+                <property name="YExpand">False</property>
+                <property name="YFill">True</property>
+                <property name="YShrink">False</property>
+              </packing>
+            </child>
+            <child>
               <widget class="Gtk.CheckButton" id="window_manager_check">
                 <property name="MemberName" />
                 <property name="Tooltip" translatable="yes" />
@@ -234,8 +259,8 @@ Window Dodge</property>
                 <signal name="Toggled" handler="OnWindowManagerCheckToggled" />
               </widget>
               <packing>
-                <property name="TopAttach">6</property>
-                <property name="BottomAttach">7</property>
+                <property name="TopAttach">7</property>
+                <property name="BottomAttach">8</property>
                 <property name="RightAttach">3</property>
                 <property name="AutoSize">True</property>
                 <property name="XOptions">Fill</property>

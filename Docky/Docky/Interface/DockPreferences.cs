@@ -149,6 +149,7 @@ namespace Docky.Interface
 				position = value;
 				SetOption<string> ("Position", position.ToString ());
 				OnPositionChanged ();
+				threedee_check.Sensitive = position == DockPosition.Bottom;
 			}
 		}
 		
@@ -533,6 +534,8 @@ namespace Docky.Interface
 			zoom_scale.Sensitive = !PanelMode && ZoomEnabled;
 			icon_scale.Value = IconSize;
 			fade_on_hide_check.Active = FadeOnHide;
+			threedee_check.Active = ThreeDimensional;
+			threedee_check.Sensitive = Position == DockPosition.Bottom;
 			multiple_window_indicator_check.Active = IndicateMultipleWindows;
 			
 			
@@ -724,6 +727,12 @@ namespace Docky.Interface
 			panel_mode_button.Active = PanelMode;
 			zoom_scale.Sensitive = !PanelMode && ZoomEnabled;
 			zoom_checkbutton.Sensitive = !PanelMode;
+		}
+		
+		protected virtual void OnThreedeeCheckToggled (object sender, System.EventArgs e)
+		{
+			ThreeDimensional = threedee_check.Active;
+			threedee_check.Active = ThreeDimensional;
 		}
 		
 		void OnActiveViewAddinOrderChanged (object sender, AddinOrderChangedArgs e)

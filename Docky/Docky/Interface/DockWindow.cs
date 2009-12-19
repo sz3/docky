@@ -914,6 +914,7 @@ namespace Docky.Interface
 			preferences.PanelModeChanged += PreferencesPanelModeChanged;
 			preferences.IconSizeChanged += PreferencesIconSizeChanged;
 			preferences.PositionChanged += PreferencesPositionChanged;
+			preferences.ThreeDimensionalChanged += PreferencesThreeDimensionalChanged;
 			preferences.ZoomEnabledChanged += PreferencesZoomEnabledChanged;
 			preferences.ZoomPercentChanged += PreferencesZoomPercentChanged;
 			
@@ -944,6 +945,11 @@ namespace Docky.Interface
 			foreach (AbstractDockItemProvider provider in e.RemovedProviders)
 				UnregisterItemProvider (provider);
 			UpdateCollectionBuffer ();
+			AnimatedDraw ();
+		}
+		
+		void PreferencesThreeDimensionalChanged (object sender, EventArgs e)
+		{
 			AnimatedDraw ();
 		}
 

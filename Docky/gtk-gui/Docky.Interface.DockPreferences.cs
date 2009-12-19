@@ -33,6 +33,8 @@ namespace Docky.Interface {
         
         private Gtk.CheckButton panel_mode_button;
         
+        private Gtk.CheckButton threedee_check;
+        
         private Gtk.CheckButton window_manager_check;
         
         private Gtk.CheckButton zoom_checkbutton;
@@ -66,10 +68,9 @@ namespace Docky.Interface {
             this.Name = "Docky.Interface.DockPreferences";
             // Container child Docky.Interface.DockPreferences.Gtk.Container+ContainerChild
             this.vbox1 = new Gtk.VBox();
-            this.vbox1.Name = "vbox1";
             this.vbox1.Spacing = 6;
             // Container child vbox1.Gtk.Box+BoxChild
-            this.table3 = new Gtk.Table(((uint)(7)), ((uint)(3)), false);
+            this.table3 = new Gtk.Table(((uint)(8)), ((uint)(3)), false);
             this.table3.Name = "table3";
             this.table3.RowSpacing = ((uint)(6));
             this.table3.ColumnSpacing = ((uint)(6));
@@ -164,8 +165,8 @@ namespace Docky.Interface {
             this.multiple_window_indicator_check.UseUnderline = true;
             this.table3.Add(this.multiple_window_indicator_check);
             Gtk.Table.TableChild w7 = ((Gtk.Table.TableChild)(this.table3[this.multiple_window_indicator_check]));
-            w7.TopAttach = ((uint)(5));
-            w7.BottomAttach = ((uint)(6));
+            w7.TopAttach = ((uint)(6));
+            w7.BottomAttach = ((uint)(7));
             w7.RightAttach = ((uint)(3));
             w7.XOptions = ((Gtk.AttachOptions)(4));
             w7.YOptions = ((Gtk.AttachOptions)(4));
@@ -184,6 +185,20 @@ namespace Docky.Interface {
             w8.XOptions = ((Gtk.AttachOptions)(4));
             w8.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table3.Gtk.Table+TableChild
+            this.threedee_check = new Gtk.CheckButton();
+            this.threedee_check.CanFocus = true;
+            this.threedee_check.Name = "threedee_check";
+            this.threedee_check.Label = Mono.Unix.Catalog.GetString("3D Background");
+            this.threedee_check.DrawIndicator = true;
+            this.threedee_check.UseUnderline = true;
+            this.table3.Add(this.threedee_check);
+            Gtk.Table.TableChild w9 = ((Gtk.Table.TableChild)(this.table3[this.threedee_check]));
+            w9.TopAttach = ((uint)(5));
+            w9.BottomAttach = ((uint)(6));
+            w9.RightAttach = ((uint)(3));
+            w9.XOptions = ((Gtk.AttachOptions)(4));
+            w9.YOptions = ((Gtk.AttachOptions)(4));
+            // Container child table3.Gtk.Table+TableChild
             this.window_manager_check = new Gtk.CheckButton();
             this.window_manager_check.CanFocus = true;
             this.window_manager_check.Name = "window_manager_check";
@@ -192,12 +207,12 @@ namespace Docky.Interface {
             this.window_manager_check.UseUnderline = true;
             this.window_manager_check.Xalign = 0F;
             this.table3.Add(this.window_manager_check);
-            Gtk.Table.TableChild w9 = ((Gtk.Table.TableChild)(this.table3[this.window_manager_check]));
-            w9.TopAttach = ((uint)(6));
-            w9.BottomAttach = ((uint)(7));
-            w9.RightAttach = ((uint)(3));
-            w9.XOptions = ((Gtk.AttachOptions)(4));
-            w9.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w10 = ((Gtk.Table.TableChild)(this.table3[this.window_manager_check]));
+            w10.TopAttach = ((uint)(7));
+            w10.BottomAttach = ((uint)(8));
+            w10.RightAttach = ((uint)(3));
+            w10.XOptions = ((Gtk.AttachOptions)(4));
+            w10.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table3.Gtk.Table+TableChild
             this.zoom_checkbutton = new Gtk.CheckButton();
             this.zoom_checkbutton.CanFocus = true;
@@ -207,11 +222,11 @@ namespace Docky.Interface {
             this.zoom_checkbutton.UseUnderline = true;
             this.zoom_checkbutton.Xalign = 1F;
             this.table3.Add(this.zoom_checkbutton);
-            Gtk.Table.TableChild w10 = ((Gtk.Table.TableChild)(this.table3[this.zoom_checkbutton]));
-            w10.TopAttach = ((uint)(3));
-            w10.BottomAttach = ((uint)(4));
-            w10.XOptions = ((Gtk.AttachOptions)(4));
-            w10.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w11 = ((Gtk.Table.TableChild)(this.table3[this.zoom_checkbutton]));
+            w11.TopAttach = ((uint)(3));
+            w11.BottomAttach = ((uint)(4));
+            w11.XOptions = ((Gtk.AttachOptions)(4));
+            w11.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table3.Gtk.Table+TableChild
             this.zoom_scale = new Gtk.HScale(null);
             this.zoom_scale.CanFocus = true;
@@ -225,18 +240,18 @@ namespace Docky.Interface {
             this.zoom_scale.Digits = 2;
             this.zoom_scale.ValuePos = ((Gtk.PositionType)(0));
             this.table3.Add(this.zoom_scale);
-            Gtk.Table.TableChild w11 = ((Gtk.Table.TableChild)(this.table3[this.zoom_scale]));
-            w11.TopAttach = ((uint)(3));
-            w11.BottomAttach = ((uint)(4));
-            w11.LeftAttach = ((uint)(1));
-            w11.RightAttach = ((uint)(3));
-            w11.XOptions = ((Gtk.AttachOptions)(4));
-            w11.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w12 = ((Gtk.Table.TableChild)(this.table3[this.zoom_scale]));
+            w12.TopAttach = ((uint)(3));
+            w12.BottomAttach = ((uint)(4));
+            w12.LeftAttach = ((uint)(1));
+            w12.RightAttach = ((uint)(3));
+            w12.XOptions = ((Gtk.AttachOptions)(4));
+            w12.YOptions = ((Gtk.AttachOptions)(4));
             this.vbox1.Add(this.table3);
-            Gtk.Box.BoxChild w12 = ((Gtk.Box.BoxChild)(this.vbox1[this.table3]));
-            w12.Position = 0;
-            w12.Expand = false;
-            w12.Fill = false;
+            Gtk.Box.BoxChild w13 = ((Gtk.Box.BoxChild)(this.vbox1[this.table3]));
+            w13.Position = 0;
+            w13.Expand = false;
+            w13.Fill = false;
             // Container child vbox1.Gtk.Box+BoxChild
             this.table2 = new Gtk.Table(((uint)(2)), ((uint)(3)), false);
             this.table2.Name = "table2";
@@ -249,12 +264,12 @@ namespace Docky.Interface {
             this.active_scroll.HscrollbarPolicy = ((Gtk.PolicyType)(2));
             this.active_scroll.ShadowType = ((Gtk.ShadowType)(1));
             this.table2.Add(this.active_scroll);
-            Gtk.Table.TableChild w13 = ((Gtk.Table.TableChild)(this.table2[this.active_scroll]));
-            w13.TopAttach = ((uint)(1));
-            w13.BottomAttach = ((uint)(2));
-            w13.LeftAttach = ((uint)(2));
-            w13.RightAttach = ((uint)(3));
-            w13.XOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w14 = ((Gtk.Table.TableChild)(this.table2[this.active_scroll]));
+            w14.TopAttach = ((uint)(1));
+            w14.BottomAttach = ((uint)(2));
+            w14.LeftAttach = ((uint)(2));
+            w14.RightAttach = ((uint)(3));
+            w14.XOptions = ((Gtk.AttachOptions)(4));
             // Container child table2.Gtk.Table+TableChild
             this.inactive_scroll = new Gtk.ScrolledWindow();
             this.inactive_scroll.CanFocus = true;
@@ -262,28 +277,28 @@ namespace Docky.Interface {
             this.inactive_scroll.HscrollbarPolicy = ((Gtk.PolicyType)(2));
             this.inactive_scroll.ShadowType = ((Gtk.ShadowType)(1));
             this.table2.Add(this.inactive_scroll);
-            Gtk.Table.TableChild w14 = ((Gtk.Table.TableChild)(this.table2[this.inactive_scroll]));
-            w14.TopAttach = ((uint)(1));
-            w14.BottomAttach = ((uint)(2));
-            w14.XOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w15 = ((Gtk.Table.TableChild)(this.table2[this.inactive_scroll]));
+            w15.TopAttach = ((uint)(1));
+            w15.BottomAttach = ((uint)(2));
+            w15.XOptions = ((Gtk.AttachOptions)(4));
             // Container child table2.Gtk.Table+TableChild
             this.label5 = new Gtk.Label();
             this.label5.Name = "label5";
             this.label5.LabelProp = Mono.Unix.Catalog.GetString("<b>Inactive Plugins</b>");
             this.label5.UseMarkup = true;
             this.table2.Add(this.label5);
-            Gtk.Table.TableChild w15 = ((Gtk.Table.TableChild)(this.table2[this.label5]));
-            w15.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w16 = ((Gtk.Table.TableChild)(this.table2[this.label5]));
+            w16.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table2.Gtk.Table+TableChild
             this.label6 = new Gtk.Label();
             this.label6.Name = "label6";
             this.label6.LabelProp = Mono.Unix.Catalog.GetString("<b>Active Plugins</b>");
             this.label6.UseMarkup = true;
             this.table2.Add(this.label6);
-            Gtk.Table.TableChild w16 = ((Gtk.Table.TableChild)(this.table2[this.label6]));
-            w16.LeftAttach = ((uint)(2));
-            w16.RightAttach = ((uint)(3));
-            w16.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w17 = ((Gtk.Table.TableChild)(this.table2[this.label6]));
+            w17.LeftAttach = ((uint)(2));
+            w17.RightAttach = ((uint)(3));
+            w17.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table2.Gtk.Table+TableChild
             this.vbox2 = new Gtk.VBox();
             this.vbox2.Name = "vbox2";
@@ -300,8 +315,8 @@ namespace Docky.Interface {
             this.enable_plugin_button.Add(this.asdf);
             this.enable_plugin_button.Label = null;
             this.vbox2.Add(this.enable_plugin_button);
-            Gtk.Box.BoxChild w18 = ((Gtk.Box.BoxChild)(this.vbox2[this.enable_plugin_button]));
-            w18.Position = 0;
+            Gtk.Box.BoxChild w19 = ((Gtk.Box.BoxChild)(this.vbox2[this.enable_plugin_button]));
+            w19.Position = 0;
             // Container child vbox2.Gtk.Box+BoxChild
             this.disable_plugin_button = new Gtk.Button();
             this.disable_plugin_button.CanFocus = true;
@@ -314,18 +329,18 @@ namespace Docky.Interface {
             this.disable_plugin_button.Add(this.image3);
             this.disable_plugin_button.Label = null;
             this.vbox2.Add(this.disable_plugin_button);
-            Gtk.Box.BoxChild w20 = ((Gtk.Box.BoxChild)(this.vbox2[this.disable_plugin_button]));
-            w20.Position = 2;
+            Gtk.Box.BoxChild w21 = ((Gtk.Box.BoxChild)(this.vbox2[this.disable_plugin_button]));
+            w21.Position = 2;
             this.table2.Add(this.vbox2);
-            Gtk.Table.TableChild w21 = ((Gtk.Table.TableChild)(this.table2[this.vbox2]));
-            w21.TopAttach = ((uint)(1));
-            w21.BottomAttach = ((uint)(2));
-            w21.LeftAttach = ((uint)(1));
-            w21.RightAttach = ((uint)(2));
-            w21.XOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w22 = ((Gtk.Table.TableChild)(this.table2[this.vbox2]));
+            w22.TopAttach = ((uint)(1));
+            w22.BottomAttach = ((uint)(2));
+            w22.LeftAttach = ((uint)(1));
+            w22.RightAttach = ((uint)(2));
+            w22.XOptions = ((Gtk.AttachOptions)(4));
             this.vbox1.Add(this.table2);
-            Gtk.Box.BoxChild w22 = ((Gtk.Box.BoxChild)(this.vbox1[this.table2]));
-            w22.Position = 1;
+            Gtk.Box.BoxChild w23 = ((Gtk.Box.BoxChild)(this.vbox1[this.table2]));
+            w23.Position = 1;
             this.Add(this.vbox1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();
@@ -334,6 +349,7 @@ namespace Docky.Interface {
             this.label3.MnemonicWidget = this.autohide_box;
             this.Hide();
             this.window_manager_check.Toggled += new System.EventHandler(this.OnWindowManagerCheckToggled);
+            this.threedee_check.Toggled += new System.EventHandler(this.OnThreedeeCheckToggled);
             this.panel_mode_button.Toggled += new System.EventHandler(this.OnPanelModeButtonToggled);
             this.multiple_window_indicator_check.Toggled += new System.EventHandler(this.OnMultipleWindowIndicatorCheckToggled);
             this.enable_plugin_button.Clicked += new System.EventHandler(this.OnEnablePluginButtonClicked);

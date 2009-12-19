@@ -38,6 +38,7 @@ namespace Docky.Interface
 		event EventHandler PanelModeChanged;
 		event EventHandler FadeOnHideChanged;
 		event EventHandler FadeOpacityChanged;
+		event EventHandler ThreeDimensionalChanged;
 		event EventHandler ZoomEnabledChanged;
 		event EventHandler ZoomPercentChanged;
 		
