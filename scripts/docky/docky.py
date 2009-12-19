@@ -24,12 +24,15 @@ class DockyItem():
 		self.iface = dbus.Interface(obj, itemiface)
 	
 		self.bus.add_signal_receiver(self.menu_pressed_signal, "MenuItemActivated", itemiface, dockybus, self.path)
+		self.bus.add_signal_receiver(self.item_confirmation_needed, "ItemConfirmationNeeded", itemiface, dockybus, self.path)
 		
-		self.timer = glib.timeout_add(2 * 60 * 1000, self.handle_timeout)
-	
 	def menu_pressed_signal(self, menu_id):
 		if self.id_map.has_key(menu_id):
 			self.menu_pressed(menu_id)
+	
+	def item_confirmation_needed (self):
+		for k,v in self.id_map.iteritems():
+			self.iface.ConfirmItem(k)
 	
 	def dispose(self):
 		for k, v in self.id_map.iteritems():
@@ -39,11 +42,6 @@ class DockyItem():
 				break;
 		glib.source_remove(self.timer)
 	
-	def handle_timeout(self):
-		for k, v in self.id_map.iteritems():
-			self.iface.ConfirmItem(k)
-		return True
-
 	def menu_pressed(self, menu_id):
 		pass
 
