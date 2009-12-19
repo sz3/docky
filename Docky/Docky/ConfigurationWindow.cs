@@ -30,14 +30,22 @@ using Mono.Unix;
 
 using Docky.Interface;
 using Docky.Services;
+using Docky.Widgets;
 
 namespace Docky
 {
+	enum Pages : uint {
+		Docks = 0,
+		Helpers,
+		NPages
+	}
+	
 	public partial class ConfigurationWindow : Gtk.Window
 	{
 		Dock activeDock;
 		string AutoStartKey = "Hidden";
 		DesktopItem autostartfile;
+		TileView HelpersTileview;
 		
 		Dock ActiveDock {
 			get { return activeDock; }
@@ -79,7 +87,18 @@ namespace Docky
 			
 			CheckButtons ();
 			
+			notebook1.CurrentPage = 0;
+					
 			ShowAll ();
+		}
+		
+		void PopulateScriptView ()
+		{
+			if (HelpersTileview == null) {
+				HelpersTileview = new TileView ();
+				HelpersTileview.IconSize = 48;
+				scrolledwindow1.AddWithViewport (HelpersTileview);
+			}
 		}
 		
 		protected override bool OnDeleteEvent (Event evnt)
@@ -142,6 +161,8 @@ namespace Docky
 			
 			KeepAbove = true;
 			Stick ();
+			
+			PopulateScriptView ();
 			
 			base.OnShown ();
 		}
@@ -311,6 +332,18 @@ namespace Docky
 		protected virtual void OnStartWithComputerCheckbuttonToggled (object sender, System.EventArgs e)
 		{
 			SetAutoStartEnabled (start_with_computer_checkbutton.Active);
+		}
+
+		[GLib.ConnectBefore]
+		protected virtual void OnPageSwitch (object o, Gtk.SwitchPageArgs args)
+		{
+			if (args.PageNum == (uint) Pages.Helpers) {
+				HelpersTileview.Clear ();
+				foreach (Helper helper in DockServices.Helpers.Helpers)
+				{
+					HelpersTileview.AppendTile (new HelperTile (helper));
+				}
+			}
 		}
 	
 	}

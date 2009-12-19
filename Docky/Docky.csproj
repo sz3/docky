@@ -78,6 +78,7 @@
     <Compile Include="Docky\Interface\PoofWindow.cs" />
     <Compile Include="Docky\Interface\HoverTextManager.cs" />
     <Compile Include="gtk-gui\Docky.ConfigurationWindow.cs" />
+    <Compile Include="Docky\HelperTile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Addins, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
@@ -158,6 +159,10 @@
     <ProjectReference Include="..\Docky.DBus\Docky.DBus.csproj">
       <Project>{487D3B93-FAAF-4734-B337-85810A60ACCF}</Project>
       <Name>Docky.DBus</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Docky.Widgets\Docky.Widgets.csproj">
+      <Project>{9CF2F475-7848-4333-9A35-93E8224653B3}</Project>
+      <Name>Docky.Widgets</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

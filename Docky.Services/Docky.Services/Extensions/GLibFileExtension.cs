@@ -71,7 +71,7 @@ namespace Docky.Services
 		{
 			return file.QueryInfoSimple (attribute).GetAttributeULong (attribute);
 		}
-		
+
 		public static FileType QueryFileType (this GLib.File file)
 		{
 			return file.QueryInfoSimple ("standard::type").FileType;
@@ -80,6 +80,12 @@ namespace Docky.Services
 		
 		// Recursively list all of the subdirs for a given directory
 		public static IEnumerable<GLib.File> SubDirs (this GLib.File file)
+		{
+			return file.SubDirs (true);
+		}
+		
+		// list all of the subdirs for a given directory
+		public static IEnumerable<GLib.File> SubDirs (this GLib.File file, bool recurse)
 		{
 			FileEnumerator enumerator = file.EnumerateChildren ("standard::type,standard::name,access::can-read", FileQueryInfoFlags.NofollowSymlinks, null);
 			
@@ -94,7 +100,8 @@ namespace Docky.Services
 				
 				if (info.FileType == FileType.Directory && info.GetAttributeBoolean ("access::can-read")) {
 					dirs.Add (child);
-					dirs = dirs.Union (SubDirs (child)).ToList ();
+					if (recurse)
+						dirs = dirs.Union (child.SubDirs ()).ToList ();
 				}
 			}
 			
@@ -165,6 +172,28 @@ namespace Docky.Services
 			if (dir.GetFiles ().Count () > 0 || dir.GetDirectories ().Count () > 0)
 				return true;
 			return false;
+		}
+		
+		public static string NewFileName (this GLib.File fileToMove, File dest)
+		{
+			string name, ext;
+						
+			if (fileToMove.Basename.Split ('.').Count() > 1) {
+				name = fileToMove.Basename.Split ('.').First ();
+				ext = fileToMove.Basename.Substring (fileToMove.Basename.IndexOf ('.'));
+			} else {
+				name = fileToMove.Basename;
+				ext = "";
+			}
+			if (dest.GetChild (fileToMove.Basename).Exists) {
+				int i = 1;
+				while (dest.GetChild (string.Format ("{0} ({1}){2}", name, i, ext)).Exists) {
+					i++;
+				}
+				return string.Format ("{0} ({1}){2}", name, i, ext);
+			} else {
+				return fileToMove.Basename;
+			}
 		}
 		
 		static void Recursive_Copy (GLib.File source, GLib.File dest, ref long copiedBytes, long totalBytes, FileProgressCallback progress_cb)

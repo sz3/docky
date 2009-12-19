@@ -41,12 +41,12 @@ namespace Docky.Widgets
 		private Button add_remove_button;
 		private Box button_box;
 		
+		#region tile items
 		private Label title;
-		
 		private Image tileImage;
-		
 		private WrapLabel description;
         private WrapLabel subDesc;
+		#endregion
 		
 		private int IconSize { get; set; }
 		
@@ -62,16 +62,45 @@ namespace Docky.Widgets
 			OwnedObject = obj;	
 			
 			OwnedObject.IconUpdated += delegate {
-				Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (OwnedObject.Icon, IconSize);
-				pbuf = DockServices.Drawing.AddHueShift (pbuf, OwnedObject.HueShift);
-				tileImage.Pixbuf = pbuf;
-				pbuf.Dispose ();
-				tileImage.Show ();
+				SetImage ();
+			};
+			
+			OwnedObject.TextUpdated += delegate {
+				SetText ();
 			};
 			
 			IconSize = iconSize;
 			
 			BuildTile ();
+		}
+		
+		private void SetImage ()
+		{
+			Gdk.Pixbuf pbuf;
+			if (OwnedObject.ForcePixbuf == null)
+				pbuf = DockServices.Drawing.LoadIcon (OwnedObject.Icon, IconSize);
+			else 
+				pbuf = OwnedObject.ForcePixbuf.ScaleSimple (IconSize, IconSize, Gdk.InterpType.Nearest);
+			pbuf = DockServices.Drawing.AddHueShift (pbuf, OwnedObject.HueShift);
+			tileImage.Pixbuf = pbuf;
+			pbuf.Dispose ();
+			tileImage.Show ();
+		}
+		
+		private void SetText ()
+		{
+			title.Markup = String.Format ("<b>{0}</b>", GLib.Markup.EscapeText (OwnedObject.Name));
+			
+			description.Text = OwnedObject.Description;
+			
+			if (!string.IsNullOrEmpty (OwnedObject.SubDescriptionText) &&
+			    !string.IsNullOrEmpty (OwnedObject.SubDescriptionTitle))			
+				subDesc.Markup = String.Format (
+				                                "<small><b>{0}</b> <i>{1}</i></small>", 
+				                                GLib.Markup.EscapeText (OwnedObject.SubDescriptionTitle),
+				                                GLib.Markup.EscapeText (OwnedObject.SubDescriptionText)
+				                                );
+			
 		}
 		
 		private void BuildTile ()
@@ -81,19 +110,14 @@ namespace Docky.Widgets
 			ColumnSpacing = 5;
 			
 			tileImage = new Image ();
-			Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (OwnedObject.Icon, IconSize);
-			pbuf = DockServices.Drawing.AddHueShift (pbuf, OwnedObject.HueShift);
-			tileImage.Pixbuf = pbuf;
-			pbuf.Dispose ();
+			SetImage ();
 			
-			tileImage.Show ();
 			tileImage.Yalign = 0.0f;
 			Attach (tileImage, 0, 1, 0, 3, AttachOptions.Shrink, AttachOptions.Fill | AttachOptions.Expand, 0, 0);
 			
             title = new Label ();
             title.Show ();
             title.Xalign = 0.0f;
-            title.Markup = String.Format ("<b>{0}</b>", GLib.Markup.EscapeText (OwnedObject.Name));
 						
 			Attach (title, 1, 3, 0, 1, 
 			        AttachOptions.Expand | AttachOptions.Fill, 
@@ -101,7 +125,6 @@ namespace Docky.Widgets
 			
 			description = new WrapLabel ();
 			description.Show ();
-			description.Text = OwnedObject.Description;
 			description.Wrap = false;
 			
 			Attach (description, 1, 3, 1, 2,
@@ -110,19 +133,13 @@ namespace Docky.Widgets
 			
 			
 			subDesc = new WrapLabel ();
-			
-			if (!string.IsNullOrEmpty (OwnedObject.SubDescriptionText) &&
-			    !string.IsNullOrEmpty (OwnedObject.SubDescriptionTitle))			
-				subDesc.Markup = String.Format (
-				                                "<small><b>{0}</b> <i>{1}</i></small>", 
-				                                GLib.Markup.EscapeText (OwnedObject.SubDescriptionTitle),
-				                                GLib.Markup.EscapeText (OwnedObject.SubDescriptionText)
-				                                );
 			subDesc.Show ();
 
 			Attach (subDesc, 1, 2, 2, 3,
 			        AttachOptions.Expand | AttachOptions.Fill, 
 			        AttachOptions.Expand | AttachOptions.Fill,  0, 4);
+			
+			SetText ();
 
 			button_box = new VBox ();
 			HBox box = new HBox ();

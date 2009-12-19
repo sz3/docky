@@ -101,6 +101,9 @@
     <Compile Include="GLibSharp\AsyncReadyCallbackNative.cs" />
     <Compile Include="Docky.Services\Extensions\GLibMountExtension.cs" />
     <Compile Include="Gtk\MountOperation.cs" />
+    <Compile Include="Docky.Services\HelperService.cs" />
+    <Compile Include="Docky.Services\Helper.cs" />
+    <Compile Include="Docky.Services\HelperStatusChangedEventArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

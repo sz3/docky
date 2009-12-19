@@ -158,7 +158,7 @@ namespace Docky.Items
 					string ownedFSID = OwnedFile.QueryStringAttr (FilesystemIDKey);
 					string destFSID = file.QueryStringAttr (FilesystemIDKey);
 					
-					string nameAfterMove = NewFileName (OwnedFile, file);
+					string nameAfterMove = file.NewFileName (OwnedFile);
 					
 					DockServices.System.RunOnThread (()=> {
 						
@@ -201,28 +201,6 @@ namespace Docky.Items
 				}
 			}			
 			return true;
-		}
-		
-		string NewFileName (File dest, File fileToMove)
-		{
-			string name, ext;
-						
-			if (fileToMove.Basename.Split ('.').Count() > 1) {
-				name = fileToMove.Basename.Split ('.').First ();
-				ext = fileToMove.Basename.Substring (fileToMove.Basename.IndexOf ('.'));
-			} else {
-				name = fileToMove.Basename;
-				ext = "";
-			}
-			if (dest.GetChild (fileToMove.Basename).Exists) {
-				int i = 1;
-				while (dest.GetChild (string.Format ("{0} ({1}){2}", name, i, ext)).Exists) {
-					i++;
-				}
-				return string.Format ("{0} ({1}){2}", name, i, ext);
-			} else {
-				return fileToMove.Basename;
-			}
 		}
 		
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)

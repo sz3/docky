@@ -20,7 +20,6 @@ using System.Linq;
 using System.Text;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text.RegularExpressions;
 
 using Gdk;
 using Gtk;
@@ -36,20 +35,19 @@ namespace Docky.Items
 	public abstract class ColoredIconDockItem : IconDockItem
 	{
 		static IPreferences prefs = DockServices.Preferences.Get <ColoredIconDockItem> ();
-		static Regex hueRegex = new Regex ("[^a-zA-Z0-9]");
 		
 		int? shift;
 		public int HueShift {
 			get {
 				if (!shift.HasValue)
-					HueShift = prefs.Get<int> (hueRegex.Replace (UniqueID (), "_"), 0);
+					HueShift = prefs.Get<int> (prefs.SanitizeKey (UniqueID ()), 0);
 				return shift.Value;
 			}
 			protected set {
 				if (shift.HasValue && shift.Value == value)
 					return;
 				shift = value;
-				prefs.Set<int> (hueRegex.Replace (UniqueID (), "_"), value);
+				prefs.Set<int> (prefs.SanitizeKey (UniqueID ()), value);
 				
 				OnIconUpdated ();
 				QueueRedraw ();

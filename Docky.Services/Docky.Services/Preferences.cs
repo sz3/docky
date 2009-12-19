@@ -22,6 +22,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 using GConf;
 using Gnome.Keyring;
@@ -33,7 +34,7 @@ namespace Docky.Services
 		where TOwner : class
 	{
 		#region IPreferences - based on GConf
-		
+		static Regex nameRegex = new Regex ("[^a-zA-Z0-9]");
 		static Client client = new Client ();
 		
 		readonly string GConfPrefix = "/apps/docky-2/" + typeof (TOwner).FullName.Replace (".", "/");
@@ -77,6 +78,11 @@ namespace Docky.Services
 			if (key.StartsWith ("/"))
 				return key;
 			return string.Format ("{0}/{1}", prefix, key);
+		}
+		
+		public string SanitizeKey (string key)
+		{
+			return nameRegex.Replace (key, "_");
 		}
 		
 		#endregion

@@ -94,7 +94,7 @@ namespace Docky
 			
 			
 			GLib.Idle.Add (delegate {
-				LaunchHelpers ();
+				//LaunchHelpers ();
 				return false;
 			});
 			
@@ -110,7 +110,7 @@ namespace Docky
 		static void LaunchHelpers ()
 		{
 			string directory = Path.Combine (DockServices.System.SystemDataFolder, "helpers");
-			
+						
 			if (!Directory.Exists (directory))
 				return;
 			
@@ -137,16 +137,16 @@ namespace Docky
 			about.Copyright = "Copyright \xa9 2009 Docky Developers";
 			about.Comments = "Docky. Simply Powerful.";
 			about.Authors = new[] {
-				"Jason Smith <jassmith@gmail.com>",
-				"Robert Dyer <psybers@gmail.com>",
-				"Chris Szikszoy <chris@szikszoy.com>",
+				"Jason Smith <jason@o-docky.com>",
+				"Robert Dyer <roberet@o-docky.com>",
+				"Chris Szikszoy <chris@go-docky.com>",
 				"Rico Tzschichholz <ricotz@t-online.de>",
 				"Seif Lofty <seif@lotfy.com>",
 				"Chris Halse Rogers <raof@ubuntu.com>",
 				"Alex Launi <alex.launi@gmail.com>"
 			};
 			about.Artists = new[] { 
-				"Daniel Foré <daniel.p.fore@gmail.com>",
+				"Daniel Foré <bunny@go-docky.com>",
 			};
 			
 			about.ShowAll ();

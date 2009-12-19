@@ -26,5 +26,7 @@ namespace Docky.Services
 		
 		bool Set<T> (string name, T val);
 		bool SetSecure<T> (string name, T val);
+		
+		string SanitizeKey (string key);
 	}
 }

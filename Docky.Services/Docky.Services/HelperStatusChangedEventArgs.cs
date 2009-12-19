@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,29 +17,22 @@
 
 using System;
 
+using GLib;
+
 namespace Docky.Services
 {
 
-
-	public class DockServices
+	public class HelperStatusChangedEventArgs : EventArgs
 	{
-		public static DrawingService Drawing { get; private set; }
+		public File File { get; private set; }
+		public bool Enabled { get; private set; }
+		public bool IsRunning { get; private set; }
 		
-		public static PreferencesService Preferences { get; private set; }
-		
-		public static SystemService System { get; private set; }
-		
-		public static HelperService Helpers { get; private set; }
-		
-		static DockServices ()
+		public HelperStatusChangedEventArgs (File file, bool enabled, bool isRunning)
 		{
-			Drawing       = new DrawingService ();
-			Preferences   = new PreferencesService ();
-			System        = new SystemService ();
-			Helpers       = new HelperService ();
-			NotificationService.Initialize ();
-			
-			Log<DockServices>.Info ("Dock services initialized.");
+			this.File = file;
+			this.Enabled = enabled;
+			this.IsRunning = isRunning;
 		}
 	}
 }

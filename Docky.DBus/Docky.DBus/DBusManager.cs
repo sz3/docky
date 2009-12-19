@@ -77,6 +77,18 @@ namespace Docky.DBus
 			docky = new DockyDBus ();
 			
 			bus.Register (dockyPath, docky);
+			
+			DockServices.Helpers.HelperStatusChanged += delegate(object sender, HelperStatusChangedEventArgs e) {
+				// if a script has stopped running, trigger a refresh
+				if (!e.IsRunning)
+					ForceRefresh ();
+			};
+		}
+		
+		public void ForceRefresh ()
+		{
+			foreach (DockyDBusItem item in item_dict.Values)
+				item.TriggerConfirmation ();
 		}
 		
 		public void Shutdown ()

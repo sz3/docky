@@ -25,11 +25,19 @@ namespace Docky.Widgets
 	public abstract class AbstractTileObject
 	{
 		public event EventHandler IconUpdated;
+		public event EventHandler TextUpdated;
 		
 		void OnIconUpdated ()
 		{
 			if (IconUpdated != null)
 				IconUpdated (this, EventArgs.Empty);
+		}
+		
+		void OnTextUpdated ()
+		{
+			if (TextUpdated != null)
+				TextUpdated (this, EventArgs.Empty);
+			
 		}
 
 		string icon;
@@ -37,6 +45,9 @@ namespace Docky.Widgets
 			get {
 				if (icon == null)
 					icon = "";
+				// if we set an icon, clear the forced pixbuf
+				if (ForcePixbuf != null)
+					ForcePixbuf = null;
 				return icon;
 			}
 			protected set {
@@ -62,6 +73,19 @@ namespace Docky.Widgets
 			}
 		}
 		
+		Gdk.Pixbuf force_pbuf;
+		public virtual Gdk.Pixbuf ForcePixbuf {
+			get {
+				return force_pbuf;
+			}
+			protected set {
+				if (force_pbuf == value)
+					return;
+				force_pbuf = value;
+				OnIconUpdated ();
+			}
+		}
+		
 		string desc;
 		public virtual string Description {
 			get { 
@@ -73,6 +97,7 @@ namespace Docky.Widgets
 				if (desc == value)
 					return;
 				desc = value;
+				OnTextUpdated ();
 			}
 		}		
 		
@@ -87,6 +112,7 @@ namespace Docky.Widgets
 				if (name == value)
 					return;
 				name = value;
+				OnTextUpdated ();
 			}
 		}		
 		
@@ -105,6 +131,7 @@ namespace Docky.Widgets
 				if (sub_desc_title == value)
 					return;
 				sub_desc_title = value;
+				OnTextUpdated ();
 			}
 		}
 		
@@ -119,6 +146,7 @@ namespace Docky.Widgets
 				if (sub_desc_text == value)
 					return;
 				sub_desc_text = value;
+				OnTextUpdated ();
 			}
 		}
 		

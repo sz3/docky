@@ -16,6 +16,7 @@ FILES = \
 	Docky/Docky.cs \
 	Docky/UserArgs.cs \
 	Docky/PluginManager.cs \
+	Docky/HelperTile.cs \
 	Docky/CairoHelper/DockySurface_Extensions.cs \
 	Docky/Interface/AddinTreeView.cs \
 	Docky/Interface/AnimationState.cs \
@@ -56,7 +57,8 @@ PROJECT_REFERENCES= \
 	Docky.DBus \
 	Docky.Items \
 	Docky.Services \
-	Docky.Windowing
+	Docky.Windowing \
+	Docky.Widgets
 
 REFERENCES =  \
 	System \

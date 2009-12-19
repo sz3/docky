@@ -563,11 +563,13 @@ namespace Docky.Windowing
 				} else if (exec.Contains (".cxoffice") && item.HasAttribute ("X-Created-By") && item.GetString ("X-Created-By").Contains ("cxoffice")) {
 					// The exec is actually another file that uses exec to launch the actual app.
 					exec = exec.Replace ("\"", "");
+					
 					GLib.File launcher = GLib.FileFactory.NewForPath (exec);
 					if (!launcher.Exists) {
 						Log<WindowMatcher>.Warn ("Crossover launcher decoded as: {0}, but does not exist.", launcher.Path);
 						continue;
 					}
+					
 					string execLine = "";
 					using (GLib.DataInputStream stream = new GLib.DataInputStream (launcher.Read (null))) {
 						ulong len;
