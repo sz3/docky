@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import atexit
 import gobject
 import time
 import glib
@@ -15,6 +16,8 @@ try:
 	from docky.docky import DockyItem, DockySink
 	from zeitgeist.client import ZeitgeistClient
 	from zeitgeist.datamodel import Event, Subject, Interpretation, Manifestation, StorageState
+	from signal import signal, SIGTERM
+	from sys import exit
 except ImportError, e:
 	exit()
 
@@ -31,7 +34,7 @@ try:
 except RuntimeError, e:
 	print "Unable to connect to Zeitgeist, won't send events. Reason: '%s'" %e
 	exit()
-
+	
 class MostUsedProvider():
 	def __init__(self):
 		self._zg = CLIENT
@@ -107,16 +110,17 @@ class DockyZGSink(DockySink):
 		if item.GetOwnsUri() or item.GetOwnsDesktopFile():
 			self.items[pathtoitem] = DockyZGItem(pathtoitem)
 
+dockysink = DockyZGSink()
+
+def cleanup ():
+	dockysink.dispose ()
 
 if __name__ == "__main__":
-	dockysink = DockyZGSink()
 	mainloop = gobject.MainLoop(is_running=True)
 
+	atexit.register (cleanup)
+	
+	signal(SIGTERM, lambda signum, stack_frame: exit(1))
+
 	while mainloop.is_running():
-		print 'running'
-		try:
-		    mainloop.run()
-		except KeyboardInterrupt:
-		    dockysink.dispose ()
-		    gobject.idle_add(quit, 1)
-		print 'done\n\n'
+	    mainloop.run()
