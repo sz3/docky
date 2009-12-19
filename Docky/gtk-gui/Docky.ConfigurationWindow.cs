@@ -322,7 +322,7 @@ namespace Docky {
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
-            this.DefaultWidth = 488;
+            this.DefaultWidth = 449;
             this.DefaultHeight = 482;
             this.label3.MnemonicWidget = this.theme_combo;
             this.Show();
