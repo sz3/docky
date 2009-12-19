@@ -25,7 +25,7 @@ namespace Docky.DBus
 	public delegate void MenuItemActivatedHandler (uint menuHandle);
 	
 	public delegate void DockItemActivatedHandler (uint menuHandle, uint button);
-
+	
 	[Interface ("org.gnome.Docky.Item")]
 	public interface IDockyDBusItem
 	{
@@ -44,6 +44,8 @@ namespace Docky.DBus
 		string Uri { get; }
 		
 		uint[] Items { get; }
+		
+		event Action ItemConfirmationNeeded;
 		
 		event MenuItemActivatedHandler MenuItemActivated;
 

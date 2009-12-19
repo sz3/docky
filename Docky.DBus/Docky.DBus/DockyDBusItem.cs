@@ -61,18 +61,23 @@ namespace Docky.DBus
 			update_time = new Dictionary<uint, DateTime> ();
 			
 			timer = GLib.Timeout.Add (4 * 60 * 1000, delegate {
-				if ((DateTime.UtcNow - last_update).TotalMinutes > 6) {
-					last_update = DateTime.UtcNow;
-					return true;
-				}
-				last_update = DateTime.UtcNow;
-				
-				foreach (uint i in update_time
-					.Where (kvp => (DateTime.UtcNow - kvp.Value).TotalMinutes > 5)
-					.Select (kvp => kvp.Key))
-					
-					RemoveItem (i);
+				TriggerConfirmation ();
 				return true;
+			});
+		}
+		
+		public void TriggerConfirmation ()
+		{
+			if (ItemConfirmationNeeded != null)
+				ItemConfirmationNeeded ();
+			
+			GLib.Timeout.Add (30 * 1000, delegate {
+				foreach (uint i in update_time
+					.Where (kvp => (DateTime.UtcNow - kvp.Value).TotalMinutes > 1)
+					.Select (kvp => kvp.Key))
+					RemoveItem (i);
+				
+				return false;
 			});
 		}
 		
@@ -95,6 +100,8 @@ namespace Docky.DBus
 		
 		#region IDockyDBusMenus implementation
 		public event MenuItemActivatedHandler MenuItemActivated;
+		
+		public event Action ItemConfirmationNeeded;
 		
 		public string Name {
 			get {
