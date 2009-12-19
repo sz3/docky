@@ -41,7 +41,7 @@ namespace Docky.Menus
 			get {
 				if (!show_icons.HasValue)
 					show_icons = (bool) new GConf.Client ().Get ("/desktop/gnome/interface/menus_have_icons");
-				return show_icons.Value;
+				return (ForcePixbuf != null || !string.IsNullOrEmpty (Icon)) && show_icons.Value;
 			}
 			protected set {
 				if (show_icons.HasValue && show_icons.Value == value)
