@@ -140,7 +140,9 @@ namespace Docky.Services
 		{
 			if (Proc == null || !IsRunning)
 				return;
-			Proc.Kill ();
+			
+			// Use the kill program to send off a sigterm instead of a sigkill
+			System.Diagnostics.Process.Start ("kill", Proc.Id.ToString ());
 			Log<Helper>.Info ("Stopping {0}", File.Basename);
 		}
 	}
