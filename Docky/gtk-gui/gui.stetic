@@ -310,17 +310,6 @@ Window Dodge</property>
           </packing>
         </child>
         <child>
-          <widget class="Gtk.HSeparator" id="hseparator1">
-            <property name="MemberName" />
-          </widget>
-          <packing>
-            <property name="Position">1</property>
-            <property name="AutoSize">True</property>
-            <property name="Expand">False</property>
-            <property name="Fill">False</property>
-          </packing>
-        </child>
-        <child>
           <widget class="Gtk.Table" id="table2">
             <property name="MemberName" />
             <property name="NRows">2</property>
@@ -489,7 +478,7 @@ Window Dodge</property>
             </child>
           </widget>
           <packing>
-            <property name="Position">2</property>
+            <property name="Position">1</property>
             <property name="AutoSize">True</property>
           </packing>
         </child>
