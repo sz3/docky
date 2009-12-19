@@ -621,7 +621,6 @@ Window Dodge</property>
                                 <property name="Yalign">0</property>
                                 <property name="LeftPadding">12</property>
                                 <property name="RightPadding">10</property>
-                                <property name="BottomPadding">10</property>
                                 <child>
                                   <placeholder />
                                 </child>

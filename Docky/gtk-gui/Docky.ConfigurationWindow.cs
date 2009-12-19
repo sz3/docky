@@ -172,7 +172,6 @@ namespace Docky {
             this.config_alignment.Name = "config_alignment";
             this.config_alignment.LeftPadding = ((uint)(12));
             this.config_alignment.RightPadding = ((uint)(10));
-            this.config_alignment.BottomPadding = ((uint)(10));
             this.frame3.Add(this.config_alignment);
             this.GtkLabel6 = new Gtk.Label();
             this.GtkLabel6.Name = "GtkLabel6";
