@@ -2129,11 +2129,12 @@ namespace Docky.Interface
 			}
 			
 			// The big expensive paint happens right here!
-			icon.ShowWithOptions (surface, center.Center, renderZoom, renderRotation, opacity);
 			if (ThreeDimensional) {
 				double offset = 2 * Math.Max (Math.Abs (val.Center.X - center.Center.X), Math.Abs (val.Center.Y - center.Center.Y));
+				offset -= .07 * IconSize * renderZoom;
 				icon.ShowAsReflection (surface, center.Center, renderZoom, renderRotation, opacity, offset, Position);
 			}
+			icon.ShowWithOptions (surface, center.Center, renderZoom, renderRotation, opacity);
 			
 			if (lighten > 0) {
 				surface.Context.Operator = Operator.Add;
