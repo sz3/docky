@@ -25,7 +25,7 @@ class DockyTerminalItem(DockyItem):
 
 	def menu_pressed(self, menu_id):
 		if self.id_map[menu_id] == "Open Terminal Here":
-			os.system ("gnome-terminal --working-directory=" + self.path)
+			os.system ("gnome-terminal --working-directory=\"" + self.path + "\"")
 		
 	def add_menu_item(self, name, icon):
 		menu_id = self.iface.AddMenuItem(name, icon, "actions")
