@@ -614,13 +614,15 @@ namespace Docky.Items
 			layout.Ellipsize = Pango.EllipsizeMode.None;
 			layout.FontDescription = new Gtk.Style().FontDescription;
 			layout.FontDescription.Weight = Pango.Weight.Bold;
-			int fontSize = IsSmall ? 0 : 2;
-			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (surface.Height / (fontSize + 2 * BadgeText.Length));
-			
-			layout.SetText (BadgeText);
 			
 			Pango.Rectangle inkRect, logicalRect;
-			layout.GetPixelExtents (out inkRect, out logicalRect);
+			int tsize = 3;
+			do {
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (tsize);
+				layout.SetText (BadgeText);
+				layout.GetPixelExtents (out inkRect, out logicalRect);
+				tsize++;
+			} while (Math.Max (logicalRect.Width, logicalRect.Height) < surface.Height / (IsSmall ? 1 : 2) - 8);
 			
 			int size = Math.Max (logicalRect.Width, logicalRect.Height);
 			int padding = 4;
