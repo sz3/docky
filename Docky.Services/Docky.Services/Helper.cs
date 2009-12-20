@@ -68,7 +68,6 @@ namespace Docky.Services
 		
 		public Helper (File file)
 		{
-			Console.WriteLine ("Constructing for: {0}", file.Basename);
 			prefs = DockServices.Preferences.Get<HelperService> ();
 			this.File = file;
 			

@@ -114,17 +114,24 @@ namespace Docky.Services
 			return Helpers.First (h => h.File.Path == helperFile.Path);
 		}
 		
-		public bool InstallHelper (string uri)
+		public bool InstallHelper (string path, out Helper installedHelper)
 		{
-			File file = FileFactory.NewForPath (uri);
+			File file = FileFactory.NewForPath (path);
+			
+			// WARN: This is _only_ valid if this method returns true
+			installedHelper = null;
+			
 			if (!file.Exists)
 				return false;
 			
 			Log<HelperService>.Info ("Trying to install: {0}", file.Path);
 			
 			try {
-				if (file.Move (UserScriptsDir.GetChild (file.NewFileName (UserScriptsDir)), FileCopyFlags.AllMetadata, null, null)) {
+				File destFile = UserScriptsDir.GetChild (file.NewFileName (UserScriptsDir));
+				if (file.Move (destFile, FileCopyFlags.AllMetadata, null, null)) {
 					Refresh ();
+					//GLib
+					installedHelper = LookupHelper (destFile);
 					return true;
 				}
 			} catch (Exception e) {

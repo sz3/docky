@@ -92,12 +92,6 @@ namespace Docky
 			PluginManager.Initialize ();
 			Controller.Initialize ();
 			
-			
-			GLib.Idle.Add (delegate {
-				//LaunchHelpers ();
-				return false;
-			});
-			
 			Gdk.Threads.Enter ();
 			Gtk.Application.Run ();
 			Gdk.Threads.Leave ();
@@ -105,17 +99,6 @@ namespace Docky
 			Controller.Dispose ();
 			PluginManager.Shutdown ();
 			Gnome.Vfs.Vfs.Shutdown ();
-		}
-		
-		static void LaunchHelpers ()
-		{
-			string directory = Path.Combine (DockServices.System.SystemDataFolder, "helpers");
-						
-			if (!Directory.Exists (directory))
-				return;
-			
-			foreach (string file in Directory.GetFiles (directory))
-				DockServices.System.Execute (file);
 		}
 		
 		static void CheckComposite ()

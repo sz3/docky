@@ -67,6 +67,7 @@ REFERENCES =  \
 	Mono.Posix \
 	Mono.GetOptions \
 	$(MONO_CAIRO_LIBS) \
+	$(GIO_SHARP_LIBS) \
 	$(GLIB_SHARP_20_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(GNOME_DESKTOP_SHARP_20_LIBS) \

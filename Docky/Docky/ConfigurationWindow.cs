@@ -24,6 +24,7 @@ using System.Text;
 
 using Cairo;
 using Gdk;
+using GLib;
 using Gnome;
 using Gtk;
 using Mono.Unix;
@@ -46,6 +47,8 @@ namespace Docky
 		string AutoStartKey = "Hidden";
 		DesktopItem autostartfile;
 		TileView HelpersTileview;
+		Widgets.SearchEntry InstallScriptEntry;
+		GLib.File ExtensionToInstall;
 		
 		Dock ActiveDock {
 			get { return activeDock; }
@@ -88,6 +91,16 @@ namespace Docky
 			CheckButtons ();
 			
 			notebook1.CurrentPage = 0;
+			
+			InstallScriptEntry = new Widgets.SearchEntry ();
+			InstallScriptEntry.EmptyMessage = "Click to browse...";
+			InstallScriptEntry.InnerEntry.ButtonPressEvent += OnScriptLocationClicked;
+			InstallScriptEntry.InnerEntry.Changed += delegate {
+				install_btn.Sensitive = !string.IsNullOrEmpty (InstallScriptEntry.InnerEntry.Text);
+			};
+			InstallScriptEntry.Ready = true;
+			InstallScriptEntry.Show ();
+			hbox1.PackStart (InstallScriptEntry, true, true, 2);			
 					
 			ShowAll ();
 		}
@@ -146,6 +159,22 @@ namespace Docky
 			}
 			config_alignment.ShowAll ();
 		}
+		
+		[GLib.ConnectBefore]
+		protected virtual void OnScriptLocationClicked (object o, ButtonPressEventArgs args)
+		{
+			if (!string.IsNullOrEmpty (InstallScriptEntry.InnerEntry.Text))
+				return;
+			
+			Gtk.FileChooserDialog script_chooser = new Gtk.FileChooserDialog ("Extension", this, FileChooserAction.Open, Gtk.Stock.Cancel, ResponseType.Cancel, Catalog.GetString ("_Select"), ResponseType.Ok);
+			if ((ResponseType) script_chooser.Run () == ResponseType.Ok) {
+				GLib.File file = GLib.FileFactory.NewForPath (script_chooser.Filename);
+				InstallScriptEntry.InnerEntry.Text = file.Basename;
+				ExtensionToInstall = file;
+			}
+
+			script_chooser.Destroy ();
+		}
 
 		protected override void OnShown ()
 		{
@@ -163,6 +192,9 @@ namespace Docky
 			Stick ();
 			
 			PopulateScriptView ();
+			
+			if (InstallScriptEntry != null)
+				InstallScriptEntry.InnerEntry.Text = "";
 			
 			base.OnShown ();
 		}
@@ -343,6 +375,17 @@ namespace Docky
 				{
 					HelpersTileview.AppendTile (new HelperTile (helper));
 				}
+			}
+		}
+
+		protected virtual void OnInstallClicked (object sender, System.EventArgs e)
+		{
+			if (ExtensionToInstall == null)
+				return;
+			Helper installedHelper;
+			if (DockServices.Helpers.InstallHelper (ExtensionToInstall.Path, out installedHelper)) {
+				HelpersTileview.AppendTile (new HelperTile (installedHelper));
+				InstallScriptEntry.InnerEntry.Text = "";
 			}
 		}
 	
