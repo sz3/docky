@@ -17,15 +17,10 @@ class DockyBansheeItem(DockyItem):
 	def __init__(self, path):
 		DockyItem.__init__(self, path)
 		
-		menu_id = self.iface.AddMenuItem ("Previous", "media-skip-backward", "actions")
-		self.id_map[menu_id] = "Previous"
-		
-		menu_id = self.iface.AddMenuItem ("Toggle Playing", "media-playback-start", "actions")
-		self.id_map[menu_id] = "Toggle Playing"
-		
-		menu_id = self.iface.AddMenuItem ("Next", "media-skip-forward", "actions")
-		self.id_map[menu_id] = "Next"
-		
+		self.add_menu_item("Previous", "media-skip-backward")
+		self.add_menu_item("Play/Pause", "media-playback-start")
+		self.add_menu_item("Next", "media-skip-forward")
+
 	def menu_pressed(self, menu_id):
 		if self.id_map[menu_id] == "Toggle Playing":
 			os.system ("banshee --toggle-playing")
@@ -33,6 +28,10 @@ class DockyBansheeItem(DockyItem):
 			os.system ("banshee --next")
 		elif self.id_map[menu_id] == "Previous":
 			os.system ("banshee --previous")
+		
+	def add_menu_item(self, name, icon):
+		menu_id = self.iface.AddMenuItem(name, icon, "actions")
+		self.id_map[menu_id] = name
 			
 class DockyBansheeSink(DockySink):
 	def item_path_found(self, pathtoitem, item):
