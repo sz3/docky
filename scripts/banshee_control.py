@@ -23,6 +23,7 @@ controlpath = "/org/bansheeproject/Banshee/PlaybackController"
 controliface = "org.bansheeproject.Banshee.PlaybackController"
 
 enable_art_icon = False;
+enable_badge_text = False;
 
 class DockyBansheeItem(DockyItem):
 	def __init__(self, path):
@@ -78,14 +79,16 @@ class DockyBansheeItem(DockyItem):
 				self.iface.ResetIcon()
 	
 	def update_badge(self):
+		if not enable_badge_text:
+			return True
 		if self.banshee_is_playing():
-			position = self.player.GetPosition() / 1000
+			position = (self.player.GetLength () - self.player.GetPosition()) / 1000
 			string = '%i:%02i' % (position / 60, position % 60)
 
 			self.iface.SetBadgeText(string)
 		else:
 			self.iface.ResetBadgeText()
-		return True;
+		return True
 	
 	def menu_pressed(self, menu_id):
 		if self.id_map[menu_id] == "Play":
