@@ -250,7 +250,7 @@ namespace Docky.DBus
 					break;
 				}
 				
-				foreach (MenuItem item in itemGroup) {
+				foreach (MenuItem item in itemGroup.OrderBy (i => i.Text)) {
 					owner.RemoteMenuItems[container].Add (item);
 				}
 				_container++;
