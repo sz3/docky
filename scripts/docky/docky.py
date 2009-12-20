@@ -35,6 +35,9 @@ class DockyItem():
 			self.iface.ConfirmItem(k)
 	
 	def dispose(self):
+		self.iface.ResetText()
+		self.iface.ResetBadgeText()
+		self.iface.ResetIcon()
 		for k, v in self.id_map.iteritems():
 			try:
 				self.iface.RemoveItem(k)
