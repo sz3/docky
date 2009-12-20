@@ -64,12 +64,12 @@ class DockyPidginItem(DockyItem):
 	
 		if self.pidgin.IsConnected():
 			if self.pidgin.IsAway():
-				self.add_menu_item ("Set Away", "/usr/share/pixmaps/pidgin/status/16/away.png", "actions", "Away")
+				self.add_menu_item ("Set Away", "/usr/share/pixmaps/pidgin/status/16/away.png", "", "Away")
 			else:
 				self.add_menu_item ("Set Available", "/usr/share/pixmaps/pidgin/status/16/available.png", "actions", "Connect")
-			self.add_menu_item ("Disconnect", "/usr/share/pixmaps/pidgin/status/16/offline.png", "actions", "Disconnect")
+			self.add_menu_item ("Disconnect", "/usr/share/pixmaps/pidgin/status/16/offline.png", "", "Disconnect")
 		else:
-			self.add_menu_item ("Connect", "/usr/share/pixmaps/pidgin/status/16/available.png", "actions", "Connect")
+			self.add_menu_item ("Connect", "/usr/share/pixmaps/pidgin/status/16/available.png", "", "Connect")
 		
 	
 	def menu_pressed(self, menu_id):

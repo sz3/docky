@@ -30,7 +30,7 @@ class DockyBansheeItem(DockyItem):
 			os.system ("banshee --previous")
 		
 	def add_menu_item(self, name, icon):
-		menu_id = self.iface.AddMenuItem(name, icon, "actions")
+		menu_id = self.iface.AddMenuItem(name, icon, "")
 		self.id_map[menu_id] = name
 			
 class DockyBansheeSink(DockySink):
