@@ -22,7 +22,7 @@ class DockyBansheeItem(DockyItem):
 		self.add_menu_item("Next", "media-skip-forward")
 
 	def menu_pressed(self, menu_id):
-		if self.id_map[menu_id] == "Toggle Playing":
+		if self.id_map[menu_id] == "Play/Pause":
 			os.system ("banshee --toggle-playing")
 		elif self.id_map[menu_id] == "Next":
 			os.system ("banshee --next")
