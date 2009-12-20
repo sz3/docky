@@ -32,7 +32,7 @@ using Docky.Services;
 
 namespace Trash
 {
-	public class TrashDockItem : FileDockItem
+	public class TrashDockItem : IconDockItem
 	{
 		uint ItemsInTrash {
 			get {
@@ -47,9 +47,11 @@ namespace Trash
 		}
 		
 		FileMonitor TrashMonitor { get; set; }
+		public File OwnedFile { get; private set; }
 		
-		public TrashDockItem () : base ("trash://")
+		public TrashDockItem ()
 		{
+			OwnedFile = FileFactory.NewForUri ("trash://");
 			Update ();
 		
 			TrashMonitor = OwnedFile.Monitor (FileMonitorFlags.None, null);
