@@ -221,16 +221,39 @@ namespace Docky.DBus
 			foreach (MenuItem item in items.Values)
 				owner.RemoteMenuItems.Remove (item);
 			
-			MenuListContainer container = MenuListContainer.Footer + 1;
+			MenuListContainer _container = MenuListContainer.Footer + 1;
 			var groupedItems = items.Values
 				.GroupBy (rmi => rmi.Title);
 			
 			foreach (var itemGroup in groupedItems) {
-				owner.RemoteMenuItems.SetContainerTitle (container, itemGroup.Key);
+				MenuListContainer container;
+				
+				switch (itemGroup.Key.ToLower ()) {
+				case "actions":
+					container = MenuListContainer.Actions;
+					break;
+				case "relateditems":
+					container = MenuListContainer.RelatedItems;
+					break;
+				case "windows":
+					container = MenuListContainer.Windows;
+					break;
+				case "header":
+					container = MenuListContainer.Header;
+					break;
+				case "footer":
+					container = MenuListContainer.Footer;
+					break;
+				default:
+					container = _container;
+					owner.RemoteMenuItems.SetContainerTitle (container, itemGroup.Key);
+					break;
+				}
+				
 				foreach (MenuItem item in itemGroup) {
 					owner.RemoteMenuItems[container].Add (item);
 				}
-				container++;
+				_container++;
 			}
 		}
 		

@@ -17,13 +17,13 @@ class DockyBansheeItem(DockyItem):
 	def __init__(self, path):
 		DockyItem.__init__(self, path)
 		
-		menu_id = self.iface.AddMenuItem ("Previous", "media-skip-backward", "Banshee Controls")
+		menu_id = self.iface.AddMenuItem ("Previous", "media-skip-backward", "actions")
 		self.id_map[menu_id] = "Previous"
 		
-		menu_id = self.iface.AddMenuItem ("Toggle Playing", "media-playback-start", "Banshee Controls")
+		menu_id = self.iface.AddMenuItem ("Toggle Playing", "media-playback-start", "actions")
 		self.id_map[menu_id] = "Toggle Playing"
 		
-		menu_id = self.iface.AddMenuItem ("Next", "media-skip-forward", "Banshee Controls")
+		menu_id = self.iface.AddMenuItem ("Next", "media-skip-forward", "actions")
 		self.id_map[menu_id] = "Next"
 		
 	def menu_pressed(self, menu_id):
