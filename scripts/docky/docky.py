@@ -82,7 +82,6 @@ class DockySink():
 			del self.items[path]
 	
 	def shut_down(self):
-		self.dispose()
 		gobject.idle_add(quit, 1)
 	
 	def dispose(self):
