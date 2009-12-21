@@ -239,6 +239,7 @@ data/themes/Grayscale/Makefile
 data/themes/Air/Makefile
 data/themes/HUD/Makefile
 data/themes/Smoke/Makefile
+data/themes/Glass/Makefile
 m4/Makefile
 po/Makefile.in
 ])
