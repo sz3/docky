@@ -501,7 +501,7 @@ namespace Docky.Interface
 		
 		
 		bool ZoomEnabled {
-			get { return !Preferences.PanelMode && Preferences.ZoomEnabled && !ConfigurationMode; }
+			get { return !Preferences.PanelMode && Preferences.ZoomEnabled; }
 		}
 		
 		double ZoomPercent {
@@ -626,6 +626,9 @@ namespace Docky.Interface
 		
 		double ZoomIn {
 			get {
+				if (ConfigurationMode)
+					return 0;
+				
 				// we buffer this value during renders since it will be checked many times and we dont need to 
 				// recalculate it each time
 				if (zoom_in_buffer.HasValue && rendering) {
