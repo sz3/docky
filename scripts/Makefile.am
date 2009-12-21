@@ -3,6 +3,7 @@ dist_script_SCRIPTS = zeitgeist_docky.py	\
 		      zeitgeist_journal.py	\
 		      open_terminal_here.py	\
 		      pidgin_control.py		\
+		      tomboy_menus.py		\
 		      banshee_control.py
 
 SUBDIRS = docky

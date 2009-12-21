@@ -64,14 +64,13 @@ class DockyBansheeItem(DockyItem):
 			self.update_icon()
 	
 	def init_banshee_objects(self):
-		bus = dbus.SessionBus()
-		obj = bus.get_object(bansheebus, playerpath)
+		obj = self.bus.get_object(bansheebus, playerpath)
 		self.player = dbus.Interface(obj, playeriface)
 		
-		obj = bus.get_object(bansheebus, controlpath)
+		obj = self.bus.get_object(bansheebus, controlpath)
 		self.control = dbus.Interface(obj, controliface)
 		
-		bus.add_signal_receiver(self.event_changed, "EventChanged",  playeriface, bansheebus, playerpath)
+		self.bus.add_signal_receiver(self.event_changed, "EventChanged",  playeriface, bansheebus, playerpath)
 
 	def clear_menu_buttons(self):
 		for k, v in self.id_map.iteritems():

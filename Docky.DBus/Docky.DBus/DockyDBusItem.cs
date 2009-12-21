@@ -223,7 +223,8 @@ namespace Docky.DBus
 			
 			MenuListContainer _container = MenuListContainer.Footer + 1;
 			var groupedItems = items.Values
-				.GroupBy (rmi => rmi.Title);
+				.GroupBy (rmi => rmi.Title)
+				.OrderBy (g => g.Key);
 			
 			foreach (var itemGroup in groupedItems) {
 				MenuListContainer container;
