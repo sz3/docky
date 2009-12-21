@@ -40,8 +40,6 @@ class DockyBansheeItem(DockyItem):
 		self.bus_interface = dbus.Interface(obj, "org.freedesktop.DBus")
 		
 		self.bus_interface.ListNames (reply_handler=self.list_names_handler, error_handler=self.list_names_error_handler)
-
-		
 	
 	def list_names_handler(self, names):
 		if bansheebus in names:
