@@ -1,4 +1,4 @@
-# Basque translation for docky
+# Croatian translation for docky
 # Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the docky package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
@@ -8,23 +8,24 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-12-21 10:58+0100\n"
-"PO-Revision-Date: 2009-12-19 13:21+0000\n"
-"Last-Translator: Ibai Oihanguren <Unknown>\n"
-"Language-Team: Basque <eu@li.org>\n"
+"PO-Revision-Date: 2009-12-19 17:22+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Croatian <hr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Launchpad-Export-Date: 2009-12-21 11:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:143
 msgid "Click on any dock to configure."
-msgstr "Klikatu edozein dock konfiguratzeko."
+msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:144
 msgid "Drag any dock to move it."
-msgstr "Arrastatu edozein dock mugitzeko."
+msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:169
 msgid "_Select"
@@ -32,123 +33,115 @@ msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:243
 msgid "Delete the currently selected dock?"
-msgstr "Hautatutako dock-a ezabatu?"
+msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:245
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
-"Dock-a ezabatzea aukeratzen baduzu, dock horrekin\n"
-"lotutako ezarpen guztiak betiko galduko dira."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:260
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:322
 msgid "_Delete Dock"
-msgstr "E_zabatu dock-a"
+msgstr ""
 
 #: ../Docky/Docky/Docky.cs:107
 msgid ""
 "Docky requires compositing to work properly.  Please enable compositing and "
 "restart docky."
 msgstr ""
-"Dockyk compositing behar du behar bezala funtzionatzeko. Gaitu compositing "
-"eta berrabiarazi Docky."
 
 #: ../Docky/Docky/HelperTile.cs:46
 msgid "Status"
-msgstr "Egoera"
+msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:54
 msgid "Running"
-msgstr "Martxan"
+msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:54
 msgid "Stopped"
-msgstr "Geldituta"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:331
 msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
 msgstr ""
-"Leiho bat baino gehiagodun abiarazleen azpian adierazle bat bistaratu."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:333
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
-"Aukera hau aktibatzean, abiarazlerik ez duten leihoak dock honetan "
-"bistaratuko dira."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:636
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
-"<i>Beti ikusgai; maximizatutako leihoek ez dute dock-a ezkutatzen.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:639
 msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr "<i>Sagua gainean ez duenero ezkutatzen da.</i>"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:642
 msgid "<i>Hides when dock obstructs the active application.</i>"
-msgstr "<i>Aplikazio aktibo bat eragozten duenean ezkutatzen da.</i>"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:645
 msgid "<i>Hides when dock obstructs any window.</i>"
-msgstr "<i>Edozein leiho eragozten duenean ezkutatzen da.</i>"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockWindow.cs:359
 msgid "Drag to reposition"
-msgstr "Arrastatu lekuz aldatzeko"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockWindow.cs:365
 msgid "Drop to open"
-msgstr "Jaregin irekitzeko"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockWindow.cs:369
 #: ../Docky/Docky/Interface/DockWindow.cs:383
 msgid "Drop to add to dock"
-msgstr "Jaregin dock-era itsasteko"
+msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:91
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:230
 msgid "_Settings"
-msgstr "_Ezarpenak"
+msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:92
 msgid "_About"
-msgstr "_Honi buruz"
+msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:93
 msgid "_Quit Docky"
-msgstr "_Itxi Docky"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:78
 msgid "Docky Configuration"
-msgstr "Dockyren konfigurazioa"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:122
 msgid "_Start When Computer Starts"
-msgstr "_Abiarazi ordenagailua pizterakoan"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:138
 msgid "_Theme:"
-msgstr "_Gaia:"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:162
 msgid "<b>General Options</b>"
-msgstr "<b>Aukera orokorrak</b>"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:182
 msgid "<b>Dock Configuration</b>"
-msgstr "Dock-aren konfigurazioa"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:196
 msgid "Docks"
-msgstr "Dock-ak"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "_Install"
@@ -156,47 +149,47 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
 msgid "Extensions"
-msgstr "Hedapenak"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:295
 msgid "_New Dock"
-msgstr "Dock _berria"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
 msgid "None"
-msgstr "Inoiz ez"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:81
 msgid "Autohide"
-msgstr "Automatikoki ezkutatu"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:82
 msgid "Intellihide"
-msgstr "Adimentsuki ezkutatu"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:83
 msgid "Window Dodge"
-msgstr "Leihoak ekidin"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:97
 msgid "_Fade On Hide"
-msgstr "_Pixkanaka desagertu"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:141
 msgid "_Icon Size:"
-msgstr "_Ikonoen tamaina"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:154
 msgid "_Hiding:"
-msgstr "_Ezkutatu:"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
 msgid "Indicat_e Multiple Windows"
-msgstr "A_dierazi leiho bat baino gehiago daudenean"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
 msgid "_Panel Mode"
-msgstr "Panel _modua"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:192
 msgid "3D Background"
@@ -204,342 +197,342 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:206
 msgid "_Manage Windows Without Launcher"
-msgstr "Abiarazle gabeko leihoak _kudeatu"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:221
 msgid "_Zoom:"
-msgstr "Z_oom-a"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:288
 msgid "<b>Inactive Plugins</b>"
-msgstr "<b>Plugin ez-aktiboak</b>"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:296
 msgid "<b>Active Plugins</b>"
-msgstr "<b>Plugin aktiboak</b>"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:91
 msgid "Icon"
-msgstr "Ikonoa"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:147
 msgid "New _Window"
-msgstr "Leiho _berria"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:149
 #: ../StandardPlugins/Mounter/src/MountItem.cs:97
 msgid "_Open"
-msgstr "_Ireki"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:69
 msgid "Reset Color"
-msgstr "Berrezarri kolorea"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:354
 msgid "_Pin to Dock"
-msgstr "I_tsatsi dock-era"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:156
 msgid "Not enough free space on destination."
-msgstr "Ez dago nahikoa leku libre helburuan."
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:168
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:170
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:190
 msgid "Complete"
-msgstr "Osatuta"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:176
 msgid "Moving"
-msgstr "Mugitzen"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:182
 msgid "Copying"
-msgstr "Kopiatzen"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:195
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:196
 msgid "Error performing drop action"
-msgstr "Errorea jaregiten saiatzean"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:218
 msgid "Open"
-msgstr "Ireki"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:219
 msgid "Open Containing Folder"
-msgstr "Ireki karpeta"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:244
 msgid "Unma_ximize"
-msgstr "Desmaximi_zatu"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:247
 msgid "Ma_ximize"
-msgstr "_Maximizatu"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:252
 msgid "_Restore"
-msgstr "_Leheneratu"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:255
 msgid "Mi_nimize"
-msgstr "I_konotu"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:259
 msgid "_Quit"
-msgstr "It_xi"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
 msgid "Sign up for {0}"
-msgstr "{0}en izena eman"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:44
 msgid "Validating..."
-msgstr "Egiaztatzen..."
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:45
 #, csharp-format
 msgid "Don't have {0}?"
-msgstr "Ez daukazu {0} konturik?"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:46
 msgid "Account validation failed!"
-msgstr "Kontuaren egiaztaketak huts egin du"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:47
 msgid "Verify and save account information"
-msgstr "Egiaztatu eta gorde kontuaren informazioa"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:48
 msgid "Account validation succeeded!"
-msgstr "Kontua behar bezala egiaztatu da"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:157
 msgid "_Remove"
-msgstr "_Kendu"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:171
 msgid "_Add"
-msgstr "_Gehitu"
+msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:87
 msgid "Password"
-msgstr "Pasahitza"
+msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:108
 msgid "Username"
-msgstr "Erabiltzailea"
+msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
 msgid "<i>Verify and save account information</i>"
-msgstr "<i>Kontuaren informazioa egiaztatu eta gorde</li>"
+msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
 msgid "Don't have an account?"
-msgstr "Ez daukazu konturik?"
+msgstr ""
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:84
 msgid "Computer"
-msgstr "Ordenagailua"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:418
 msgid "Di_gital Clock"
-msgstr "Erlo_ju digitala"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:424
 msgid "24-Hour _Clock"
-msgstr "24 _orduko modua"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:430
 msgid "Show _Date"
-msgstr "Erakutsi _data"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:436
 msgid "Select _Theme"
-msgstr "Aukeratu _gaia"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
-msgstr "Gaiak"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
 msgid "Theme"
-msgstr "Gaia"
+msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
 msgid "_Add Label"
-msgstr "_Gehitu etiketa"
+msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:114
 msgid "Check e_very:"
-msgstr "Begiratu mezu berririk dagoen:"
+msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:124
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:187
 msgid "minutes"
-msgstr "minuturo"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:185
 msgid "Username or Password not set"
-msgstr "Erabiltzaile-izena edo pasahitza falta da"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:235
 msgid "(no subject)"
-msgstr "(gairik gabea)"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:253
 #, csharp-format
 msgid "From: {0}"
-msgstr "Nork: {0}"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:264
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:268
 msgid "Feed Error"
-msgstr "Jario errorea"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 msgid "Invalid Username"
-msgstr "Okerreko erabiltzaile-izena"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:277
 msgid "Network Error"
-msgstr "Sareko errorea"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:282
 msgid "General Error"
-msgstr "Errore orokorra"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:313
 msgid "GMail Configuration"
-msgstr "GMailen konfigurazioa"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:79
 msgid "No unread mail"
-msgstr "Mezu berririk ez"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:82
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
-msgstr[0] "Mezu berri {0}"
-msgstr[1] "{0} mezu berri"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:103
 msgid "Checking mail..."
-msgstr "Mezuak begiratzen..."
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:188
 msgid "_View "
-msgstr "_Ikusi "
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:193
 msgid "_Compose Mail"
-msgstr "_Sortu mezua"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "New Mail"
-msgstr "Mezu berria"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:215
 msgid "Check _Mail"
-msgstr "_Begiratu posta"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
-msgstr "Etiketak"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
 msgid "GMail"
-msgstr "GMail"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr "Saio-hasiera"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
-msgstr "Nork: "
+msgstr ""
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Eject"
-msgstr "_Egotzi"
+msgstr ""
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Unmount"
-msgstr "_Desmuntatu"
+msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:51
 msgid "Network Manager"
-msgstr "Sare-kudeatzailea"
+msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:90
 msgid "Connecting..."
-msgstr "Konektatzen..."
+msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:99
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:164
 msgid "Disconnected"
-msgstr "Deskonektatuta"
+msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:108
 #, csharp-format
 msgid "Connected: {0}"
-msgstr "Konektatuta: {0}"
+msgstr ""
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:48
 msgid "My _Stations"
-msgstr "Nire _irrati-estazioak"
+msgstr ""
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:79
 msgid "S_earch"
-msgstr "_Bilatu"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
-msgstr "Ez da irrati-estaziorik aurkitu."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
-msgstr "Saiatu berriro bilaketa egiten."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:46
 msgid "Fetching Information..."
-msgstr "Informazioa eskuratzen..."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:66
 msgid "Click to add NPR stations."
-msgstr "Klikatu NPR irrati-estazioak gehitzeko."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:105
 msgid "Home Page"
-msgstr "Webgunea"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:112
 msgid "Program Schedule"
-msgstr "Programazioa"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:119
 msgid "Donate"
-msgstr "Dohaintza egin"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:126
 msgid "Live Streams"
-msgstr "Zuzeneko seinaleak"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:164
 msgid "Settings"
-msgstr "Ezarpenak"
+msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:76
 msgid "Clear the Recent Documents list?"
-msgstr "Garbitu azken dokumentuen zerrenda?"
+msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:78
 msgid "Clear Recent Documents"
-msgstr "Garbitu azken dokumentuak"
+msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:80
 msgid ""
@@ -547,37 +540,34 @@ msgid ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
-"Azken dokumentuen zerrenda garbitzen baduzu, ondorengoa ere garbituko da:\n"
-" • 'Lekuak → Azken dokumentuak' menuko elementu guztiak.\n"
-" • Aplikazio guztietako azken dokumentuen zerrendako elementu guztiak."
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
 msgid "_Clear Recent Documents..."
-msgstr "_Garbitu azken dokumentuak..."
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
 msgid "No items in Trash"
-msgstr "Zakarrontzia hutsik dago"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:75
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
-msgstr[0] "Elementu {0} zakarrontzian"
-msgstr[1] "{0} elementu zakarrontzian"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:160
 msgid "_Open Trash"
-msgstr "_Ireki zakarrontzia"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:162
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:199
 msgid "Empty _Trash"
-msgstr "_Hustu zakarrontzia"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
 msgid "Empty all of the items from the trash?"
-msgstr "Zakarrontziko elementu guztiak betiko ezabatu?"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:186
 msgid ""
@@ -585,48 +575,42 @@ msgid ""
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
-"Zakarrontzia hustea erabakitzen baduzu, bertako\n"
-"elementu guztiak betiko galduko dira. Kontuan izan\n"
-"elementu hauek banaka ere ezaba ditzakezula."
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:66
 msgid "_Weather Provider:"
-msgstr "Eguraldi _hornitzailea"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:106
 msgid "My _Locations"
-msgstr "Nire _kokalekuak"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:137
 msgid "_Search"
-msgstr "Bi_latu"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:177
 msgid "Automatically Update _Every"
-msgstr "Eguneratu _automatikoki:"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:221
 msgid "Use _Metric Units"
-msgstr "_Erabili unitate metrikoak"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:84
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:87
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:92
 msgid "Invalid Weather Location"
-msgstr "Kokaleku baliogabea"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:90
 msgid "Network Error: "
-msgstr "Sareko errorea: "
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:54
 msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
 msgstr ""
-"Googlek hornitutako eguraldi informazioa. Iturri honetatik informazioa "
-"eskuratzeko AEBetako posta kodea edo 'Herria, Estatua' eredua erabili behar "
-"da."
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:59
 msgid ""
@@ -635,266 +619,70 @@ msgid ""
 "website.  To find your code, look up your forecast on their site and the "
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
-"The Weather Channelek hornitutako copyrightdun informazioa. Iturri honetatik "
-"informazioa eskuratzeko AEBetako posta kodea edo webguneko kode berezia "
-"behar da. Zure kodea eskuratzeko, ikusi zure kokalekuko aurrikuspena, kodea "
-"URLan '/local/'en ondoren dator (adibidez AAXX0000)."
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:54
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
 msgstr ""
-"Weather Undergroundek hornitutako copyrightdun informazioa. Iturri honetatik "
-"informazioa eskuratzeko AEBetako posta kodea edo 'Herria, Estatua' eredua "
-"erabili behar da."
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
-msgstr "Ez da ezer aurkitu."
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
 msgid "Fetching data..."
-msgstr "Datuak eskuratzen..."
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:216
 msgid "Radar _Map"
-msgstr "Radar-_mapa"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:221
 msgid "Forecasts"
-msgstr "Aurrikuspenak"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:233
 msgid "Check _Weather"
-msgstr "_Begiratu eguraldia"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:248
 msgid "Weather Configuration"
-msgstr "Eguraldiaren konfigurazioa"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:87
 msgid "_Today"
-msgstr "_Gaur"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:90
 msgid "T_omorrow"
-msgstr "_Bihar"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:311
 msgid "Humidity"
-msgstr "Hezetasuna"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:313
 msgid "Temp"
-msgstr "Tenperatura"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:315
 msgid "Feels Like"
-msgstr "Sentsazioa"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:317
 msgid "Wind"
-msgstr "Haizea"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:318
 msgid "Direction"
-msgstr "Norantza"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:320
 msgid "Sunrise"
-msgstr "Egunsentia"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:321
 msgid "Sunset"
-msgstr "Ilunsentia"
-
-#~ msgid "Today"
-#~ msgstr "Gaur"
-
-#~ msgid "Tomorrow"
-#~ msgstr "Bihar"
-
-#~ msgid "_Weather Provider"
-#~ msgstr "_Hornitzailea"
-
-#~ msgid "'s Forecast"
-#~ msgstr "- Aurrikuspenak"
-
-#~ msgid "Radar Map"
-#~ msgstr "Radar-mapa"
-
-#~ msgid "Reload Weather Data"
-#~ msgstr "Birkargatu eguraldi informazioa"
-
-#~ msgid "Add _Location"
-#~ msgstr "Gehi_tu kokalekua"
-
-#~ msgid "Some information about the weather source."
-#~ msgstr "Eguraldi aurrikuspenaren jatorriari buruzko informazioa"
-
-#~ msgid "Move _Up"
-#~ msgstr "Eraman _gora"
-
-#~ msgid "Move _Down"
-#~ msgstr "Eraman _behera"
-
-#~ msgid "mins"
-#~ msgstr "min"
-
-#~ msgid "Add _Label"
-#~ msgstr "_Etiketa gehitu"
-
-#~ msgid ""
-#~ "<big><b>Empty all of the items from the trash?</b></big>\n"
-#~ "\n"
-#~ "If you choose to empty the trash, all items in it\n"
-#~ "will be permanently lost. Please note that you\n"
-#~ "can also delete them separately."
-#~ msgstr ""
-#~ "<big><b>Zakarrontziko elementu guztiak hustu?</b></big>\n"
-#~ "\n"
-#~ "Zakarrontzia husten baduzu, bertan dauden\n"
-#~ "elementu guztiak galduko dira, betirako.\n"
-#~ "Gogora ezazu banaka ere ezabatu\n"
-#~ "ditzakezula."
-
-#~ msgid "Check _Every"
-#~ msgstr "Mezurik dagoen _begiratu"
-
-#~ msgid "Compose Mail"
-#~ msgstr "Idatzi mezu berria"
-
-#~ msgid "View "
-#~ msgstr "Ikusi "
-
-#~ msgid "Check Now"
-#~ msgstr "Begiratu orain"
-
-#~ msgid "Digital Clock"
-#~ msgstr "Erloju digitala"
-
-#~ msgid "Exec"
-#~ msgstr "Exekutatu"
-
-#~ msgid "Select Theme"
-#~ msgstr "Hautatu gaia"
-
-#~ msgid "Show Date"
-#~ msgstr "Erakutsi data"
-
-#~ msgid "24-Hour Clock"
-#~ msgstr "24 orduko erlojua"
-
-#~ msgid "Start When Computer Starts"
-#~ msgstr "Abiarazi konputagailua martxan jartzean"
-
-#~ msgid "Theme:"
-#~ msgstr "Gaia:"
-
-#~ msgid "New Dock"
-#~ msgstr "Dock berria"
-
-#~ msgid "Icon Size:"
-#~ msgstr "Ikonoen tamaina:"
-
-#~ msgid "Fade On Hide"
-#~ msgstr "Pixkanaka desagertu"
-
-#~ msgid "Indicate Multiple Windows"
-#~ msgstr "Adierazi leiho batetik gora daudenean"
-
-#~ msgid "Autohide:"
-#~ msgstr "Ezkutatu:"
-
-#~ msgid "Manage Windows Without Launcher"
-#~ msgstr "Kudeatu abiarazle gabeko leihoak"
-
-#~ msgid "Defenestraphobia"
-#~ msgstr "Defenestraphobia"
-
-#~ msgid "Delete Dock"
-#~ msgstr "Dock-a ezabatu"
-
-#~ msgid "The finest dock no money can buy."
-#~ msgstr "Diruz erosi ezin daitekeen dock-ik ederrena."
-
-#~ msgid "Zoom:"
-#~ msgstr "Zoom-a:"
-
-#~ msgid "Name"
-#~ msgstr "Izena"
-
-#~ msgid "Docky"
-#~ msgstr "Docky"
-
-#, csharp-format
-#~ msgid "{0}'s Forecast"
-#~ msgstr "{0} (aurrikuspena)"
-
-#~ msgid "Panel Mode"
-#~ msgstr "Panel modua"
-
-#~ msgid "_Show Preferences"
-#~ msgstr "_Erakutsi hobespenak"
-
-#~ msgid ""
-#~ "None : Always present, acts like a panel.\n"
-#~ "Autohide : Hides whenever the mouse is not over it.\n"
-#~ "Intellihide : Hides when dock obstructs the active application.\n"
-#~ "Window Dodge : Hides when dock obstructs any window."
-#~ msgstr ""
-#~ "Inoiz ez: beti gainean, panel bat balitz bezala.\n"
-#~ "Automatikoki ezkutatu: sagua gainean ez duenero ezkutatzen da.\n"
-#~ "Adimentsuki ezkutatu: aplikazio aktibo bat oztopatzen duenean ezkutatzen "
-#~ "da.\n"
-#~ "Leihoak ekidin: edozein leiho oztopatzen duenean ezkutatzen da."
-
-#~ msgid "Fade out dock instead of slide off screen"
-#~ msgstr "Desagertarazi dock-a pixkanaka, pantailatik arrastatu beharrean"
-
-#~ msgid "Reset _Color"
-#~ msgstr "Kolorea _berrezarri"
-
-#~ msgid "_Reset Color"
-#~ msgstr "_Kolorea berrezarri"
-
-#~ msgid "Inbox"
-#~ msgstr "Sarrera-ontzia"
-
-#~ msgid "Check _Now"
-#~ msgstr "_Begiratu orain"
-
-#~ msgid "Config"
-#~ msgstr "Konfigurazioa"
-
-#~ msgid "iGoogle"
-#~ msgstr "iGoogle"
-
-#~ msgid "No results found"
-#~ msgstr "Ez da emaitzarik aurkitu"
-
-#~ msgid "Locations"
-#~ msgstr "Kokalekuak"
-
-#~ msgid "Search Results"
-#~ msgstr "Bilaketaren emaitzak"
-
-#~ msgid "Currently searching..."
-#~ msgstr "Kokalekuen bila..."
-
-#~ msgid "Weather Channel"
-#~ msgstr "Weather Channel"
-
-#~ msgid "_Reload Weather Data"
-#~ msgstr "_Birkargatu eguraldiaren informazioa"
-
-#~ msgid "Weather Underground"
-#~ msgstr "Weather Underground"
-
-#~ msgid "Related Items"
-#~ msgstr "Erlazionatutako elementuak"
-
-#~ msgid "<i>Always present, acts like a panel.</i>"
-#~ msgstr "<i>Beti ikusgai, panel bat balitz bezala.</i>"
+msgstr ""

@@ -7,30 +7,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-12-17 10:53+0100\n"
-"PO-Revision-Date: 2009-12-15 22:00+0000\n"
+"POT-Creation-Date: 2009-12-21 10:58+0100\n"
+"PO-Revision-Date: 2009-12-21 00:10+0000\n"
 "Last-Translator: Daniel Nylander <yeager@ubuntu.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-12-17 10:56+0000\n"
+"X-Launchpad-Export-Date: 2009-12-21 11:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:111
+#: ../Docky/Docky/ConfigurationWindow.cs:143
 msgid "Click on any dock to configure."
 msgstr "Klicka på en docka för att konfigurera den."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:112
+#: ../Docky/Docky/ConfigurationWindow.cs:144
 msgid "Drag any dock to move it."
 msgstr "Dra i en docka för att flytta den."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:190
+#: ../Docky/Docky/ConfigurationWindow.cs:169
+msgid "_Select"
+msgstr ""
+
+#: ../Docky/Docky/ConfigurationWindow.cs:243
 msgid "Delete the currently selected dock?"
 msgstr "Ta bort den markerade dockan?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:192
+#: ../Docky/Docky/ConfigurationWindow.cs:245
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -38,12 +42,12 @@ msgstr ""
 "Om du väljer att ta bort dockan så kommer alla\n"
 "inställningar för den borttagna dockan att förloras."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:207
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:208
+#: ../Docky/Docky/ConfigurationWindow.cs:260
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:322
 msgid "_Delete Dock"
 msgstr "_Ta bort docka"
 
-#: ../Docky/Docky/Docky.cs:124
+#: ../Docky/Docky/Docky.cs:107
 msgid ""
 "Docky requires compositing to work properly.  Please enable compositing and "
 "restart docky."
@@ -51,7 +55,19 @@ msgstr ""
 "Docky kräver att compositing för att fungera korrekt. Aktivera compositing "
 "och starta om Docky."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:330
+#: ../Docky/Docky/HelperTile.cs:46
+msgid "Status"
+msgstr "Status"
+
+#: ../Docky/Docky/HelperTile.cs:54
+msgid "Running"
+msgstr "Kör"
+
+#: ../Docky/Docky/HelperTile.cs:54
+msgid "Stopped"
+msgstr "Stoppad"
+
+#: ../Docky/Docky/Interface/DockPreferences.cs:331
 msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
@@ -59,7 +75,7 @@ msgstr ""
 "Gör så att programstartare som hanterar fler än ett fönster har en extra "
 "indikator under sig."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:332
+#: ../Docky/Docky/Interface/DockPreferences.cs:333
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
@@ -67,19 +83,19 @@ msgstr ""
 "Fönster som inte redan har en ikon på någon docka kommer att läggas till i "
 "denna docka."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:633
+#: ../Docky/Docky/Interface/DockPreferences.cs:636
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr "<i>Dölj aldrig; maximerade fönster överlappar inte dockan.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:636
+#: ../Docky/Docky/Interface/DockPreferences.cs:639
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Döljer sig när muspekaren inte är över den.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:639
+#: ../Docky/Docky/Interface/DockPreferences.cs:642
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Döljer sig när dockan är i vägen för det aktiva programmet.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:642
+#: ../Docky/Docky/Interface/DockPreferences.cs:645
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Döljer sig när dockan är i vägen för något fönster.</i>"
 
@@ -89,12 +105,12 @@ msgstr "Dra för att ändra position"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:365
 msgid "Drop to open"
-msgstr ""
+msgstr "Släpp för att öppna"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:369
 #: ../Docky/Docky/Interface/DockWindow.cs:383
 msgid "Drop to add to dock"
-msgstr ""
+msgstr "Släpp för att lägga till i dockan"
 
 #: ../Docky/Docky/Items/DockyItem.cs:91
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
@@ -110,27 +126,39 @@ msgstr "_Om"
 msgid "_Quit Docky"
 msgstr "A_vsluta Docky"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:58
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:78
 msgid "Docky Configuration"
 msgstr "Konfigurera Docky"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:86
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:122
 msgid "_Start When Computer Starts"
 msgstr "_Starta när datorn startar"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:102
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:138
 msgid "_Theme:"
 msgstr "_Tema:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:126
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:162
 msgid "<b>General Options</b>"
 msgstr "<b>Allmänna alternativ</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:147
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:182
 msgid "<b>Dock Configuration</b>"
 msgstr "<b>Dockinställningar</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:181
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:196
+msgid "Docks"
+msgstr "Dockor"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
+msgid "_Install"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
+msgid "Extensions"
+msgstr "Tillägg"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:295
 msgid "_New Dock"
 msgstr "_Ny docka"
 
@@ -171,20 +199,24 @@ msgid "_Panel Mode"
 msgstr "_Panelläge"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:192
+msgid "3D Background"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:206
 msgid "_Manage Windows Without Launcher"
 msgstr "_Hantera fönster utan programstartare"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:207
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:221
 msgid "_Zoom:"
 msgstr "_Zoom:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:282
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:288
 msgid "<b>Inactive Plugins</b>"
-msgstr "<b>Inaktiverade insticksmoduler</b>"
+msgstr "<b>Inaktiva insticksmoduler</b>"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:290
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:296
 msgid "<b>Active Plugins</b>"
-msgstr "<b>Aktiverade insticksmoduler</b>"
+msgstr "<b>Aktiva insticksmoduler</b>"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:91
 msgid "Icon"
@@ -199,7 +231,7 @@ msgstr "Nytt _fönster"
 msgid "_Open"
 msgstr "_Öppna"
 
-#: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:71
+#: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:69
 msgid "Reset Color"
 msgstr "Nollställ färg"
 
@@ -209,32 +241,32 @@ msgstr "_Nåla fast i dockan"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:156
 msgid "Not enough free space on destination."
-msgstr ""
+msgstr "Det finns inte tillräckligt med utrymme på målet."
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:168
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:170
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:190
 msgid "Complete"
-msgstr ""
+msgstr "Färdig"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:176
 msgid "Moving"
-msgstr ""
+msgstr "Flyttar"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:182
 msgid "Copying"
-msgstr ""
+msgstr "Kopierar"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:195
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:196
 msgid "Error performing drop action"
-msgstr ""
+msgstr "Ett fel uppstod när objektet släpptes"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:240
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:218
 msgid "Open"
 msgstr "Öppna"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:241
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:219
 msgid "Open Containing Folder"
 msgstr "Öppna mappen med filen"
 
@@ -284,11 +316,11 @@ msgstr "Verifiera och spara kontoinformationen"
 msgid "Account validation succeeded!"
 msgstr "Kontovalideringen lyckades!"
 
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:129
+#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:157
 msgid "_Remove"
 msgstr "_Ta bort"
 
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:143
+#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:171
 msgid "_Add"
 msgstr "_Lägg till"
 
@@ -523,31 +555,31 @@ msgstr ""
 msgid "_Clear Recent Documents..."
 msgstr "_Töm Senaste dokument..."
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:71
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
 msgid "No items in Trash"
 msgstr "Papperskorgen är tom"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:75
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
 msgstr[0] "{0} objekt i papperskorgen"
 msgstr[1] "{0} objekt i papperskorgen"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:158
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:160
 msgid "_Open Trash"
 msgstr "_Öppna papperskorgen"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:160
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:197
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:162
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:199
 msgid "Empty _Trash"
 msgstr "Töm _papperskorgen"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:182
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
 msgid "Empty all of the items from the trash?"
 msgstr "Ta bort alla objekt i papperskorgen?"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:186
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"

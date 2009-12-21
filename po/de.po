@@ -7,43 +7,47 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: Rico Tzschichholz <ricotz@t-online.de>\n"
-"POT-Creation-Date: 2009-12-17 10:53+0100\n"
-"PO-Revision-Date: 2009-12-17 10:10+0000\n"
-"Last-Translator: Rico Tzschichholz <Unknown>\n"
+"POT-Creation-Date: 2009-12-21 10:58+0100\n"
+"PO-Revision-Date: 2009-12-20 13:47+0000\n"
+"Last-Translator: Martin Lettner <m.lettner@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-12-17 10:56+0000\n"
+"X-Launchpad-Export-Date: 2009-12-21 11:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:111
+#: ../Docky/Docky/ConfigurationWindow.cs:143
 msgid "Click on any dock to configure."
-msgstr "Wähle ein Dock zur Einstellung aus"
+msgstr "Klicken Sie auf ein Dock um dessen Einstellungen zu ändern."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:112
+#: ../Docky/Docky/ConfigurationWindow.cs:144
 msgid "Drag any dock to move it."
-msgstr "Ziehe ein Docky um es zu bewegen."
+msgstr "Ziehen Sie ein Dock um es zu verschieben."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:190
+#: ../Docky/Docky/ConfigurationWindow.cs:169
+msgid "_Select"
+msgstr ""
+
+#: ../Docky/Docky/ConfigurationWindow.cs:243
 msgid "Delete the currently selected dock?"
-msgstr "Lösche das derzeit ausgewählte Dock?"
+msgstr "Das ausgewählte Dock löschen?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:192
+#: ../Docky/Docky/ConfigurationWindow.cs:245
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
-"Wenn Sie das gewählte Dock löschen wollen, werden alle Einstellungen dieses "
-"Docks verloren gehen."
+"Wenn Sie das gewählte Dock löschen,\n"
+"werden alle Einstellungen dieses Docks verloren gehen."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:207
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:208
+#: ../Docky/Docky/ConfigurationWindow.cs:260
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:322
 msgid "_Delete Dock"
-msgstr "_Lösche Dock"
+msgstr "Dock _löschen"
 
-#: ../Docky/Docky/Docky.cs:124
+#: ../Docky/Docky/Docky.cs:107
 msgid ""
 "Docky requires compositing to work properly.  Please enable compositing and "
 "restart docky."
@@ -51,7 +55,19 @@ msgstr ""
 "Docky benötigt einen Composition-Manager um korrekt zu arbeiten. Bitte "
 "aktivieren Sie einen Composition-Manager und starten Sie Docky neu."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:330
+#: ../Docky/Docky/HelperTile.cs:46
+msgid "Status"
+msgstr "Status"
+
+#: ../Docky/Docky/HelperTile.cs:54
+msgid "Running"
+msgstr "Läuft"
+
+#: ../Docky/Docky/HelperTile.cs:54
+msgid "Stopped"
+msgstr "Gestoppt"
+
+#: ../Docky/Docky/Interface/DockPreferences.cs:331
 msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
@@ -59,7 +75,7 @@ msgstr ""
 "Unter Startern, die mehr als ein Fenster verwalten, erscheint ein "
 "Extrahinweis."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:332
+#: ../Docky/Docky/Interface/DockPreferences.cs:333
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
@@ -67,36 +83,37 @@ msgstr ""
 "Fenster, die keinem bestehenden Starter zugeordnet werden können, werden "
 "diesem Dock hinzugefügt."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:633
+#: ../Docky/Docky/Interface/DockPreferences.cs:636
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 "<i>Niemals verstecken, maximierte Fenster überdecken das Dock nicht.<i/>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:636
-msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr "<i>Versteckt sich immer, wenn kein Mauscursor es berührt.</i>"
-
 #: ../Docky/Docky/Interface/DockPreferences.cs:639
+msgid "<i>Hides whenever the mouse is not over it.</i>"
+msgstr ""
+"<i>Versteckt sich immer, wenn sich kein Mauscursor darüber befindet.</i>"
+
+#: ../Docky/Docky/Interface/DockPreferences.cs:642
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr ""
 "<i>Versteckt sich, wenn es das aktive Anwendungsfenster behindert.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:642
+#: ../Docky/Docky/Interface/DockPreferences.cs:645
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Versteckt sich, wenn es ein Anwendungsfenster behindert.</i>"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:359
 msgid "Drag to reposition"
-msgstr "Ziehe um zuverschieben"
+msgstr "Ziehen um zu verschieben"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:365
 msgid "Drop to open"
-msgstr ""
+msgstr "Auslassen um zu öffnen"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:369
 #: ../Docky/Docky/Interface/DockWindow.cs:383
 msgid "Drop to add to dock"
-msgstr ""
+msgstr "Auslassen um zum Dock hinzuzufügen"
 
 #: ../Docky/Docky/Items/DockyItem.cs:91
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
@@ -110,47 +127,59 @@ msgstr "_Info"
 
 #: ../Docky/Docky/Items/DockyItem.cs:93
 msgid "_Quit Docky"
-msgstr "_Beende Docky"
+msgstr "Docky _beenden"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:58
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:78
 msgid "Docky Configuration"
-msgstr "Docky Konfiguration"
+msgstr "Docky Einstellungen"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:86
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:122
 msgid "_Start When Computer Starts"
 msgstr "_Automatisch mit Computer starten"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:102
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:138
 msgid "_Theme:"
-msgstr "_Thema:"
+msgstr "_Erscheinungsbild:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:126
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:162
 msgid "<b>General Options</b>"
-msgstr "<b>Allgemeine Optionen</b>"
+msgstr "<b>Allgemeine Einstellungen</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:147
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:182
 msgid "<b>Dock Configuration</b>"
 msgstr "<b>Dock Einstellungen</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:181
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:196
+msgid "Docks"
+msgstr "Docks"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
+msgid "_Install"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
+msgid "Extensions"
+msgstr "Erweiterungen"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:295
 msgid "_New Dock"
 msgstr "_Neues Dock"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
 msgid "None"
-msgstr "Niemals"
+msgstr "Nie verbergen"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:81
 msgid "Autohide"
-msgstr "Automatisches Ausblenden"
+msgstr "Immer verbergen"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:82
 msgid "Intellihide"
-msgstr "Intelligentes Ausblenden"
+msgstr "Aktivem Fenster ausweichen"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:83
 msgid "Window Dodge"
-msgstr "Fenstern ausweichen"
+msgstr "Allen Fenstern ausweichen"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:97
 msgid "_Fade On Hide"
@@ -158,39 +187,43 @@ msgstr "Aus_blenden"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:141
 msgid "_Icon Size:"
-msgstr "_Icongröße:"
+msgstr "_Symbolgröße"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:154
 msgid "_Hiding:"
-msgstr "_Verstecken:"
+msgstr "_Verbergen:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
 msgid "Indicat_e Multiple Windows"
-msgstr "Hinweis bei mehreren _Fenstern"
+msgstr "Hinweis bei _mehreren Fenstern"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
 msgid "_Panel Mode"
 msgstr "_Panel-Modus"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:192
+msgid "3D Background"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:206
 msgid "_Manage Windows Without Launcher"
-msgstr "_Verwalte Fenster ohne Starter"
+msgstr "_Fenster ohne Starter verwalten"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:207
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:221
 msgid "_Zoom:"
-msgstr "_Zoom:"
+msgstr "Ver_größerung:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:282
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:288
 msgid "<b>Inactive Plugins</b>"
 msgstr "<b>Inaktive Plugins</b>"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:290
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:296
 msgid "<b>Active Plugins</b>"
 msgstr "<b>Aktive Plugins</b>"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:91
 msgid "Icon"
-msgstr "Icon"
+msgstr "Symbol"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:147
 msgid "New _Window"
@@ -201,13 +234,13 @@ msgstr "_Neues Fenster"
 msgid "_Open"
 msgstr "_Öffnen"
 
-#: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:71
+#: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:69
 msgid "Reset Color"
 msgstr "Farbe zurücksetzen"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:354
 msgid "_Pin to Dock"
-msgstr "An Dock _binden"
+msgstr "An Dock _anheften"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:156
 msgid "Not enough free space on destination."
@@ -217,32 +250,32 @@ msgstr "Nicht genügend freier Speicherplatz auf Zieldatenträger."
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:170
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:190
 msgid "Complete"
-msgstr "Fertig"
+msgstr "Abgeschlossen"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:176
 msgid "Moving"
-msgstr "Verschiebe"
+msgstr "Verschieben …"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:182
 msgid "Copying"
-msgstr "Kopiere"
+msgstr "Kopieren …"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:195
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:196
 msgid "Error performing drop action"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:240
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:218
 msgid "Open"
 msgstr "Öffnen"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:241
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:219
 msgid "Open Containing Folder"
-msgstr "Öffne Ordner"
+msgstr "Beinhaltenden Ordner öffnen"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:244
 msgid "Unma_ximize"
-msgstr "Entma_ximieren"
+msgstr "_Wiederherstellen"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:247
 msgid "Ma_ximize"
@@ -267,30 +300,30 @@ msgstr "Registrieren für {0}"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:44
 msgid "Validating..."
-msgstr "Überprüfung..."
+msgstr "Überprüfen …"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:45
 #, csharp-format
 msgid "Don't have {0}?"
-msgstr "Benutzen sie {0} noch nicht?"
+msgstr "Besitzen Sie {0} nicht?"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:46
 msgid "Account validation failed!"
-msgstr "Kontoüberprüfung fehlgeschlagen!"
+msgstr "Überprüfung des Benutzerkontos fehlgeschlagen!"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:47
 msgid "Verify and save account information"
-msgstr "Prüfe und speichere Kontoinformation"
+msgstr "Kontoinformationen prüfen und speichern"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:48
 msgid "Account validation succeeded!"
-msgstr "Kontoüberprüfung erfolgreich!"
+msgstr "Überprüfung des Benutzerkontos erfolgreich!"
 
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:129
+#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:157
 msgid "_Remove"
 msgstr "_Entfernen"
 
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:143
+#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:171
 msgid "_Add"
 msgstr "_Hinzufügen"
 
@@ -304,7 +337,7 @@ msgstr "Benutzername"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
 msgid "<i>Verify and save account information</i>"
-msgstr "<i>Prüfe und speichere Kontoinformationen</i>"
+msgstr "<i>Kontoinformationen prüfen und speichern</i>"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
 msgid "Don't have an account?"
@@ -344,7 +377,7 @@ msgstr "Label _hinzufügen"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:114
 msgid "Check e_very:"
-msgstr "_Prüfe aller:"
+msgstr "_Aktualisieren alle:"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:124
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:187
@@ -367,7 +400,7 @@ msgstr "Von: {0}"
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:264
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:268
 msgid "Feed Error"
-msgstr "Feedfehler"
+msgstr "Feed-Fehler"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 msgid "Invalid Username"
@@ -398,7 +431,7 @@ msgstr[1] "{0} ungelesene Nachrichten"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:103
 msgid "Checking mail..."
-msgstr "Nachrichten werden gesucht..."
+msgstr "Auf neue Nachrichten prüfen …"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:188
 msgid "_View "
@@ -406,15 +439,15 @@ msgstr "_Zeige "
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:193
 msgid "_Compose Mail"
-msgstr "_Schreibe Email"
+msgstr "E-Mail _verfassen"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "New Mail"
-msgstr "Neue Mail"
+msgstr "Neue E-Mail"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:215
 msgid "Check _Mail"
-msgstr ""
+msgstr "Auf neue Nachrichten _prüfen"
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
@@ -446,12 +479,12 @@ msgstr "Netzwerk-Manager"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:90
 msgid "Connecting..."
-msgstr "Verbindungsaufbau..."
+msgstr "Verbindungsaufbau …"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:99
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:164
 msgid "Disconnected"
-msgstr "Nicht verbunden"
+msgstr "Verbindung getrennt"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:108
 #, csharp-format
@@ -473,15 +506,15 @@ msgstr "Keine Sender gefunden."
 #: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
-msgstr "Bitte versuchen Sie Ihre Suche erneut"
+msgstr "Bitte versuchen Sie Ihre Suche erneut."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:46
 msgid "Fetching Information..."
-msgstr "Lade Informationen"
+msgstr "Informationen werden geladen …"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:66
 msgid "Click to add NPR stations."
-msgstr "Klicke um NPR Sender hinzuzufügen"
+msgstr "Klicken um NPR Sender hinzuzufügen."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:105
 msgid "Home Page"
@@ -497,7 +530,7 @@ msgstr "Spenden"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:126
 msgid "Live Streams"
-msgstr ""
+msgstr "Live-Streams"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:164
 msgid "Settings"
@@ -523,36 +556,36 @@ msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
 msgid "_Clear Recent Documents..."
-msgstr "_Liste der zuletzt geöffneten Dokumente löschen..."
+msgstr "_Liste der zuletzt geöffneten Dokumente löschen …"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:71
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
 msgid "No items in Trash"
 msgstr "Keine Dateien im Müll"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:75
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
 msgstr[0] "{0} Datei im Müll"
 msgstr[1] "{0} Dateien im Müll"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:158
-msgid "_Open Trash"
-msgstr "_Öffne Müll"
-
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:160
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:197
+msgid "_Open Trash"
+msgstr "Müll _öffnen"
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:162
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:199
 msgid "Empty _Trash"
 msgstr "_Müll leeren"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:182
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
 msgid "Empty all of the items from the trash?"
 msgstr ""
 "Sind sie sicher, dass Sie alle\n"
 "Objekte im Müll dauerhaft löschen\n"
 "wollen?"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:186
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
@@ -576,11 +609,11 @@ msgstr "_Suchen"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:177
 msgid "Automatically Update _Every"
-msgstr "_Automatisches Aktualisieren aller"
+msgstr "_Automatisch aktualisieren alle"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:221
 msgid "Use _Metric Units"
-msgstr "Benutze metrische Werte"
+msgstr "Metrische Einheiten verwenden"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:84
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:87
@@ -619,7 +652,7 @@ msgstr "Keine Ergebnisse gefunden."
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
 msgid "Fetching data..."
-msgstr "Aktualisiere..."
+msgstr "Aktualisieren …"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:216
 msgid "Radar _Map"
@@ -631,11 +664,11 @@ msgstr "Vorhersagen"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:233
 msgid "Check _Weather"
-msgstr ""
+msgstr "Wetterinformationen aktualisieren"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:248
 msgid "Weather Configuration"
-msgstr "Weather Konfiguration"
+msgstr "Wetter-Konfiguration"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:87
 msgid "_Today"
