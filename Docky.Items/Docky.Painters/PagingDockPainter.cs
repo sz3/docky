@@ -240,9 +240,9 @@ namespace Docky.Painters
 		
 		protected override void OnScrolled (Gdk.ScrollDirection direction, int x, int y, Gdk.ModifierType type)
 		{
-			if (direction == Gdk.ScrollDirection.Down)
+			if (direction == Gdk.ScrollDirection.Down || direction == Gdk.ScrollDirection.Right)
 				NextPage ();
-			else
+			else if (direction == Gdk.ScrollDirection.Up || direction == Gdk.ScrollDirection.Left)
 				PreviousPage ();
 		}
 		
