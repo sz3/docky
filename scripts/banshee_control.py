@@ -28,13 +28,43 @@ enable_badge_text = False;
 class DockyBansheeItem(DockyItem):
 	def __init__(self, path):
 		DockyItem.__init__(self, path)
+		self.timer = 0
+		self.player = None
+		self.control = None
+		
+		self.bus.add_signal_receiver(self.name_owner_changed_cb,
+                                             dbus_interface='org.freedesktop.DBus',
+                                             signal_name='NameOwnerChanged')
+                                             
+		obj = self.bus.get_object ("org.freedesktop.DBus", "/org/freedesktop/DBus")
+		self.bus_interface = dbus.Interface(obj, "org.freedesktop.DBus")
+		
+		self.bus_interface.ListNames (reply_handler=self.list_names_handler, error_handler=self.list_names_error_handler)
 
-		self.init_banshee_objects()
-		self.set_menu_buttons()
-		self.update_icon()
 		
-		self.timer = gobject.timeout_add (1000, self.update_badge)
-		
+	
+	def list_names_handler(self, names):
+		if bansheebus in names:
+			self.init_banshee_objects()
+			self.set_menu_buttons()
+			self.update_icon()
+
+	def list_names_error_handler(self, error):
+		print "error getting bus names - %s" % str(error)
+	
+	def name_owner_changed_cb(self, name, old_owner, new_owner):
+		if name == bansheebus:
+			if new_owner:
+				self.init_banshee_objects()
+				self.timer = gobject.timeout_add (1000, self.update_badge)
+			else:
+				self.player = None
+				self.control = None
+				if self.timer > 0:
+					gobject.source_remove (self.timer)
+			self.set_menu_buttons()
+			self.update_icon()
+	
 	def init_banshee_objects(self):
 		bus = dbus.SessionBus()
 		obj = bus.get_object(bansheebus, playerpath)
@@ -54,6 +84,10 @@ class DockyBansheeItem(DockyItem):
 	
 	def set_menu_buttons(self):
 		self.clear_menu_buttons()
+		
+		if not self.player:
+			return
+
 		self.add_menu_item("Previous", "media-skip-backward")
 		
 		if self.banshee_is_playing():
@@ -71,7 +105,7 @@ class DockyBansheeItem(DockyItem):
 			self.update_icon()
 			
 	def update_icon(self):
-		if enable_art_icon:
+		if enable_art_icon and self.player:
 			arturl = self.get_album_art_path()
 			if os.path.exists(arturl):
 				self.iface.SetIcon(arturl)
@@ -79,8 +113,11 @@ class DockyBansheeItem(DockyItem):
 				self.iface.ResetIcon()
 	
 	def update_badge(self):
+		if not self.player:
+			return False
 		if not enable_badge_text:
 			return True
+		
 		if self.banshee_is_playing():
 			position = (self.player.GetLength () - self.player.GetPosition()) / 1000
 			string = '%i:%02i' % (position / 60, position % 60)
@@ -105,21 +142,29 @@ class DockyBansheeItem(DockyItem):
 		self.id_map[menu_id] = name
 		
 	def banshee_play(self):
-		self.player.Play()
+		if self.player:
+			self.player.Play()
 		
 	def banshee_pause(self):
-		self.player.Pause()
+		if self.player:
+			self.player.Pause()
 	
 	def banshee_next(self):
-		self.control.Next(False)
+		if self.control:
+			self.control.Next(False)
 		
 	def banshee_prev(self):
-		self.control.Previous(False)
+		if self.control:
+			self.control.Previous(False)
 		
 	def banshee_is_playing(self):
-		return self.player.GetCurrentState() == "playing"
+		if self.player:
+			return self.player.GetCurrentState() == "playing"
+		return False
 	
 	def get_album_art_path(self):
+		if not self.player:
+			return ""
 		user = os.getenv("USER")
 		arturl = '/home/'
 		arturl += user
