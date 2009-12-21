@@ -67,7 +67,7 @@ namespace Clock
 		{
 			if (direction == Gdk.ScrollDirection.Up)
 				StartDate = StartDate.AddDays (-7);
-			else
+			else if (direction == Gdk.ScrollDirection.Down)
 				StartDate = StartDate.AddDays (7);
 		}
 		
