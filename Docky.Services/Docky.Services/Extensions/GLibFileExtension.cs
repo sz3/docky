@@ -26,9 +26,10 @@ namespace Docky.Services
 	public static class GLibFileExtension
 	{
 		static Dictionary<File, List<Action>> MountActions;
-		
+
 		static GLibFileExtension ()
 		{
+			// setup the mount actions dict
 			MountActions = new Dictionary<File, List<Action>> ();
 		}
 		
@@ -75,7 +76,6 @@ namespace Docky.Services
 		public static FileType QueryFileType (this GLib.File file)
 		{
 			return file.QueryInfoSimple ("standard::type").FileType;
-			
 		}
 		
 		// Recursively list all of the subdirs for a given directory

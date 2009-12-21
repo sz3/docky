@@ -138,7 +138,7 @@ namespace Docky.Services
 			if (names == null)
 				names = "";
 			
-			List<string> iconNames = names.Split (':').Where (i => !string.IsNullOrEmpty (i)).ToList ();
+			List<string> iconNames = names.Split (new [] { ";;"}, StringSplitOptions.RemoveEmptyEntries).ToList ();
 			// add the MissingIconIcon as a last resort icon.
 			iconNames.Add (MissingIconIcon);
 			
@@ -322,13 +322,14 @@ namespace Docky.Services
 
 			string home = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 			name = name.Replace ("~", home);
+			GLib.File iconFile = (name.StartsWith ("/")) ? FileFactory.NewForPath (name) : FileFactory.NewForUri (name);
 			try {
 				if (width <= 0 || height <= 0)
-					pixbuf = new Pixbuf (name);
+					pixbuf = new Pixbuf (iconFile.Path);
 				else
-					pixbuf = new Pixbuf (name, width, height, true);
+					pixbuf = new Pixbuf (iconFile.Path, width, height, true);
 			} catch (Exception e) {
-				Log<DrawingService>.Warn ("Error loading icon from file '" + name + "': " + e.Message);
+				Log<DrawingService>.Warn ("Error loading icon from file '" + iconFile.Path + "': " + e.Message);
 				Log<DrawingService>.Debug (e.StackTrace);
 				pixbuf = null;
 			}

@@ -54,6 +54,7 @@ namespace Docky.Items
 		const string ThumbnailPathKey = "thumbnail::path";
 		const string FilesystemIDKey = "id::filesystem";
 		const string FilesystemFreeKey = "filesystem::free";
+		const string CustomIconKey = "metadata::custom-icon";
 		string uri;
 		bool is_folder;
 		string forced_hover_text = null;
@@ -96,17 +97,20 @@ namespace Docky.Items
 			
 			// only check the icon if it's mounted (ie: .Path != null)
 			if (!string.IsNullOrEmpty (OwnedFile.Path)) {
+				string customIconPath = OwnedFile.QueryStringAttr (CustomIconKey);
 				string thumbnailPath = OwnedFile.QueryStringAttr (ThumbnailPathKey);
-				if (string.IsNullOrEmpty (thumbnailPath))
-					SetIconFromGIcon (OwnedFile.Icon ());
-				else
+				if (!string.IsNullOrEmpty (customIconPath))
+					Icon = customIconPath;
+				else if (!string.IsNullOrEmpty (thumbnailPath))
 					Icon = thumbnailPath;
+				else
+					SetIconFromGIcon (OwnedFile.Icon ());
 			} else if (!string.IsNullOrEmpty (backup_icon)) {
 				Icon = backup_icon;
 			} else {
 				Icon = "";
 			}
-			
+
 			if (string.IsNullOrEmpty (forced_hover_text))
 			    HoverText = OwnedFile.Basename;
 			else
