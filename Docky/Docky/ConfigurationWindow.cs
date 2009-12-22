@@ -93,7 +93,7 @@ namespace Docky
 			notebook1.CurrentPage = 0;
 			
 			InstallScriptEntry = new Widgets.SearchEntry ();
-			InstallScriptEntry.EmptyMessage = "Click to browse...";
+			InstallScriptEntry.EmptyMessage = Catalog.GetString ("Click to browse...");
 			InstallScriptEntry.InnerEntry.ButtonPressEvent += OnScriptLocationClicked;
 			InstallScriptEntry.InnerEntry.Changed += delegate {
 				install_btn.Sensitive = !string.IsNullOrEmpty (InstallScriptEntry.InnerEntry.Text);
