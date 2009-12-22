@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-12-21 10:58+0100\n"
+"POT-Creation-Date: 2009-12-22 08:00+0100\n"
 "PO-Revision-Date: 2009-11-29 02:06+0000\n"
 "Last-Translator: Robert Dyer <Unknown>\n"
 "Language-Team: Galician <gl@li.org>\n"
@@ -15,8 +15,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-12-21 11:12+0000\n"
+"X-Launchpad-Export-Date: 2009-12-22 17:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
+
+#: ../Docky/Docky/ConfigurationWindow.cs:96
+msgid "Click to browse..."
+msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:143
 msgid "Click on any dock to configure."
@@ -49,6 +53,14 @@ msgstr ""
 msgid ""
 "Docky requires compositing to work properly.  Please enable compositing and "
 "restart docky."
+msgstr ""
+
+#: ../Docky/Docky/HelperTile.cs:41
+msgid "Enable"
+msgstr ""
+
+#: ../Docky/Docky/HelperTile.cs:42
+msgid "Disable"
 msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:46
@@ -231,34 +243,34 @@ msgstr ""
 msgid "_Pin to Dock"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:156
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:160
 msgid "Not enough free space on destination."
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:168
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:170
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:190
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:172
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:174
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
 msgid "Complete"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:176
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:180
 msgid "Moving"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:182
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:186
 msgid "Copying"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:195
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:196
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:199
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:200
 msgid "Error performing drop action"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:218
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:222
 msgid "Open"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:219
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:223
 msgid "Open Containing Folder"
 msgstr ""
 

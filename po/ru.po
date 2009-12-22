@@ -7,21 +7,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-12-21 10:58+0100\n"
-"PO-Revision-Date: 2009-11-21 16:53+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2009-12-22 08:00+0100\n"
+"PO-Revision-Date: 2009-12-21 20:03+0000\n"
+"Last-Translator: Alexander Semyonov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2009-12-21 11:12+0000\n"
+"X-Launchpad-Export-Date: 2009-12-22 17:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
+
+#: ../Docky/Docky/ConfigurationWindow.cs:96
+msgid "Click to browse..."
+msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:143
 msgid "Click on any dock to configure."
-msgstr ""
+msgstr "Нажмите на док для его настройки"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:144
 msgid "Drag any dock to move it."
@@ -33,36 +37,48 @@ msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:243
 msgid "Delete the currently selected dock?"
-msgstr ""
+msgstr "Удалить выбранный док?"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:245
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
+"Если вы удалите док, \n"
+"все его настройки исчезнут."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:260
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:322
 msgid "_Delete Dock"
-msgstr ""
+msgstr "_Удалить док"
 
 #: ../Docky/Docky/Docky.cs:107
 msgid ""
 "Docky requires compositing to work properly.  Please enable compositing and "
 "restart docky."
 msgstr ""
+"Для правильной работы Docky необходим композитный менеджер окон. Пожалуйста "
+"включите его и перезапустите Docky."
+
+#: ../Docky/Docky/HelperTile.cs:41
+msgid "Enable"
+msgstr ""
+
+#: ../Docky/Docky/HelperTile.cs:42
+msgid "Disable"
+msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:46
 msgid "Status"
-msgstr ""
+msgstr "Состояние"
 
 #: ../Docky/Docky/HelperTile.cs:54
 msgid "Running"
-msgstr ""
+msgstr "Выполняется"
 
 #: ../Docky/Docky/HelperTile.cs:54
 msgid "Stopped"
-msgstr ""
+msgstr "Остановлено"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:331
 msgid ""
@@ -78,19 +94,19 @@ msgstr ""
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:636
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
-msgstr ""
+msgstr "<i>Видна все время, развернутые окна не перекрывают док.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:639
 msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr ""
+msgstr "<i>Исчезает, если курсор не над ним.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:642
 msgid "<i>Hides when dock obstructs the active application.</i>"
-msgstr ""
+msgstr "<i>Исчезает, если док перекрывает активное приложение.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:645
 msgid "<i>Hides when dock obstructs any window.</i>"
-msgstr ""
+msgstr "<i>Исчезает, если док перекрывает любое окно.</i>"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:359
 msgid "Drag to reposition"
@@ -109,7 +125,7 @@ msgstr ""
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:230
 msgid "_Settings"
-msgstr ""
+msgstr "_Параметры"
 
 #: ../Docky/Docky/Items/DockyItem.cs:92
 msgid "_About"
@@ -232,34 +248,34 @@ msgstr ""
 msgid "_Pin to Dock"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:156
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:160
 msgid "Not enough free space on destination."
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:168
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:170
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:190
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:172
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:174
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
 msgid "Complete"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:176
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:180
 msgid "Moving"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:182
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:186
 msgid "Copying"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:195
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:196
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:199
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:200
 msgid "Error performing drop action"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:218
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:222
 msgid "Open"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:219
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:223
 msgid "Open Containing Folder"
 msgstr ""
 

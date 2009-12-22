@@ -7,16 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-12-21 10:58+0100\n"
-"PO-Revision-Date: 2009-12-21 00:10+0000\n"
+"POT-Creation-Date: 2009-12-22 08:00+0100\n"
+"PO-Revision-Date: 2009-12-22 09:22+0000\n"
 "Last-Translator: Daniel Nylander <yeager@ubuntu.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-12-21 11:12+0000\n"
+"X-Launchpad-Export-Date: 2009-12-22 17:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
+
+#: ../Docky/Docky/ConfigurationWindow.cs:96
+msgid "Click to browse..."
+msgstr "Klicka för att bläddra..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:143
 msgid "Click on any dock to configure."
@@ -28,7 +32,7 @@ msgstr "Dra i en docka för att flytta den."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:169
 msgid "_Select"
-msgstr ""
+msgstr "_Välj"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:243
 msgid "Delete the currently selected dock?"
@@ -54,6 +58,14 @@ msgid ""
 msgstr ""
 "Docky kräver att compositing för att fungera korrekt. Aktivera compositing "
 "och starta om Docky."
+
+#: ../Docky/Docky/HelperTile.cs:41
+msgid "Enable"
+msgstr "Aktivera"
+
+#: ../Docky/Docky/HelperTile.cs:42
+msgid "Disable"
+msgstr "Inaktivera"
 
 #: ../Docky/Docky/HelperTile.cs:46
 msgid "Status"
@@ -152,7 +164,7 @@ msgstr "Dockor"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "_Install"
-msgstr ""
+msgstr "_Installera"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
 msgid "Extensions"
@@ -200,7 +212,7 @@ msgstr "_Panelläge"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:192
 msgid "3D Background"
-msgstr ""
+msgstr "3D-bakgrund"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:206
 msgid "_Manage Windows Without Launcher"
@@ -239,34 +251,34 @@ msgstr "Nollställ färg"
 msgid "_Pin to Dock"
 msgstr "_Nåla fast i dockan"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:156
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:160
 msgid "Not enough free space on destination."
 msgstr "Det finns inte tillräckligt med utrymme på målet."
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:168
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:170
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:190
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:172
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:174
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
 msgid "Complete"
 msgstr "Färdig"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:176
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:180
 msgid "Moving"
 msgstr "Flyttar"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:182
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:186
 msgid "Copying"
 msgstr "Kopierar"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:195
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:196
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:199
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:200
 msgid "Error performing drop action"
 msgstr "Ett fel uppstod när objektet släpptes"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:218
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:222
 msgid "Open"
 msgstr "Öppna"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:219
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:223
 msgid "Open Containing Folder"
 msgstr "Öppna mappen med filen"
 

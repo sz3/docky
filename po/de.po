@@ -7,16 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: Rico Tzschichholz <ricotz@t-online.de>\n"
-"POT-Creation-Date: 2009-12-21 10:58+0100\n"
-"PO-Revision-Date: 2009-12-20 13:47+0000\n"
-"Last-Translator: Martin Lettner <m.lettner@gmail.com>\n"
+"POT-Creation-Date: 2009-12-22 08:00+0100\n"
+"PO-Revision-Date: 2009-12-22 15:49+0000\n"
+"Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-12-21 11:12+0000\n"
+"X-Launchpad-Export-Date: 2009-12-22 17:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
+
+#: ../Docky/Docky/ConfigurationWindow.cs:96
+msgid "Click to browse..."
+msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:143
 msgid "Click on any dock to configure."
@@ -28,7 +32,7 @@ msgstr "Ziehen Sie ein Dock um es zu verschieben."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:169
 msgid "_Select"
-msgstr ""
+msgstr "_Auswählen"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:243
 msgid "Delete the currently selected dock?"
@@ -54,6 +58,14 @@ msgid ""
 msgstr ""
 "Docky benötigt einen Composition-Manager um korrekt zu arbeiten. Bitte "
 "aktivieren Sie einen Composition-Manager und starten Sie Docky neu."
+
+#: ../Docky/Docky/HelperTile.cs:41
+msgid "Enable"
+msgstr "Aktivieren"
+
+#: ../Docky/Docky/HelperTile.cs:42
+msgid "Disable"
+msgstr "Deaktivieren"
 
 #: ../Docky/Docky/HelperTile.cs:46
 msgid "Status"
@@ -155,7 +167,7 @@ msgstr "Docks"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "_Install"
-msgstr ""
+msgstr "_Installieren"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
 msgid "Extensions"
@@ -203,7 +215,7 @@ msgstr "_Panel-Modus"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:192
 msgid "3D Background"
-msgstr ""
+msgstr "3D Hintergrund"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:206
 msgid "_Manage Windows Without Launcher"
@@ -242,34 +254,34 @@ msgstr "Farbe zurücksetzen"
 msgid "_Pin to Dock"
 msgstr "An Dock _anheften"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:156
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:160
 msgid "Not enough free space on destination."
 msgstr "Nicht genügend freier Speicherplatz auf Zieldatenträger."
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:168
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:170
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:190
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:172
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:174
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
 msgid "Complete"
 msgstr "Abgeschlossen"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:176
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:180
 msgid "Moving"
 msgstr "Verschieben …"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:182
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:186
 msgid "Copying"
 msgstr "Kopieren …"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:195
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:196
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:199
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:200
 msgid "Error performing drop action"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:218
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:222
 msgid "Open"
 msgstr "Öffnen"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:219
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:223
 msgid "Open Containing Folder"
 msgstr "Beinhaltenden Ordner öffnen"
 
@@ -630,6 +642,8 @@ msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
 msgstr ""
+"Wetterdaten werden von Google bereitgestellt. Diese Quelle benötigt die Orte "
+"als US Zip Code oder als 'Stadt, Land'."
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:59
 msgid ""
@@ -644,6 +658,8 @@ msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
 msgstr ""
+"Wetterdaten werden von Weather Underground bereitgestellt. Diese Quelle "
+"benötigt die Orte als US Zip Code oder als 'Stadt, Land'."
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
