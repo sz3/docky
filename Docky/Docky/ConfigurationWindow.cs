@@ -379,7 +379,8 @@ namespace Docky
 		{
 			string query = ExtenSearch.InnerEntry.Text.ToLower ();
 			IEnumerable<HelperTile> tiles = DockServices.Helpers.Helpers.Select (h => new HelperTile (h))
-				.Where (h => h.Name.ToLower ().Contains (query) || h.Description.ToLower ().Contains (query));
+				.Where (h => h.Name.ToLower ().Contains (query) || h.Description.ToLower ().Contains (query))
+				.OrderBy (t => t.Name);
 			
 			if (exten_show_cmb.Active == (uint) ShowStates.Enabled)
 				tiles = tiles.Where (h => h.Enabled);
