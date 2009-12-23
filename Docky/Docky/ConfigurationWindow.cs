@@ -41,14 +41,20 @@ namespace Docky
 		NPages
 	}
 	
+	enum ShowStates : uint {
+		All = 0,
+		Enabled,
+		Disabled,
+		NStates
+	}
+	
 	public partial class ConfigurationWindow : Gtk.Window
 	{
 		Dock activeDock;
 		string AutoStartKey = "Hidden";
 		DesktopItem autostartfile;
 		TileView HelpersTileview;
-		Widgets.SearchEntry InstallScriptEntry;
-		GLib.File ExtensionToInstall;
+		Widgets.SearchEntry ExtenSearch;
 		
 		Dock ActiveDock {
 			get { return activeDock; }
@@ -91,27 +97,21 @@ namespace Docky
 			CheckButtons ();
 			
 			notebook1.CurrentPage = 0;
-			
-			InstallScriptEntry = new Widgets.SearchEntry ();
-			InstallScriptEntry.EmptyMessage = Catalog.GetString ("Click to browse...");
-			InstallScriptEntry.InnerEntry.ButtonPressEvent += OnScriptLocationClicked;
-			InstallScriptEntry.InnerEntry.Changed += delegate {
-				install_btn.Sensitive = !string.IsNullOrEmpty (InstallScriptEntry.InnerEntry.Text);
+
+			ExtenSearch = new SearchEntry ();
+			ExtenSearch.EmptyMessage = Catalog.GetString ("Search Extensions...");
+			ExtenSearch.InnerEntry.Changed += delegate {
+				RefreshExtensions ();
 			};
-			InstallScriptEntry.Ready = true;
-			InstallScriptEntry.Show ();
-			hbox1.PackStart (InstallScriptEntry, true, true, 2);			
+			ExtenSearch.Ready = true;
+			ExtenSearch.Show ();
+			hbox5.PackStart (ExtenSearch, true, true, 2);
+			
+			HelpersTileview = new TileView ();
+			HelpersTileview.IconSize = 48;
+			scrolledwindow1.AddWithViewport (HelpersTileview);
 					
 			ShowAll ();
-		}
-		
-		void PopulateScriptView ()
-		{
-			if (HelpersTileview == null) {
-				HelpersTileview = new TileView ();
-				HelpersTileview.IconSize = 48;
-				scrolledwindow1.AddWithViewport (HelpersTileview);
-			}
 		}
 		
 		protected override bool OnDeleteEvent (Event evnt)
@@ -159,22 +159,6 @@ namespace Docky
 			}
 			config_alignment.ShowAll ();
 		}
-		
-		[GLib.ConnectBefore]
-		protected virtual void OnScriptLocationClicked (object o, ButtonPressEventArgs args)
-		{
-			if (!string.IsNullOrEmpty (InstallScriptEntry.InnerEntry.Text))
-				return;
-			
-			Gtk.FileChooserDialog script_chooser = new Gtk.FileChooserDialog ("Extension", this, FileChooserAction.Open, Gtk.Stock.Cancel, ResponseType.Cancel, Catalog.GetString ("_Select"), ResponseType.Ok);
-			if ((ResponseType) script_chooser.Run () == ResponseType.Ok) {
-				GLib.File file = GLib.FileFactory.NewForPath (script_chooser.Filename);
-				InstallScriptEntry.InnerEntry.Text = file.Basename;
-				ExtensionToInstall = file;
-			}
-
-			script_chooser.Destroy ();
-		}
 
 		protected override void OnShown ()
 		{
@@ -190,12 +174,7 @@ namespace Docky
 			
 			KeepAbove = true;
 			Stick ();
-			
-			PopulateScriptView ();
-			
-			if (InstallScriptEntry != null)
-				InstallScriptEntry.InnerEntry.Text = "";
-			
+
 			base.OnShown ();
 		}
 
@@ -369,25 +348,49 @@ namespace Docky
 		[GLib.ConnectBefore]
 		protected virtual void OnPageSwitch (object o, Gtk.SwitchPageArgs args)
 		{
-			if (args.PageNum == (uint) Pages.Helpers) {
-				HelpersTileview.Clear ();
-				foreach (Helper helper in DockServices.Helpers.Helpers)
-				{
-					HelpersTileview.AppendTile (new HelperTile (helper));
-				}
-			}
+			if (args.PageNum == (uint) Pages.Helpers)
+				RefreshExtensions ();
 		}
 
 		protected virtual void OnInstallClicked (object sender, System.EventArgs e)
 		{
-			if (ExtensionToInstall == null)
+			GLib.File file = null;
+			Gtk.FileChooserDialog script_chooser = new Gtk.FileChooserDialog ("Extension", this, FileChooserAction.Open, Gtk.Stock.Cancel, ResponseType.Cancel, Catalog.GetString ("_Select"), ResponseType.Ok);
+			
+			if ((ResponseType) script_chooser.Run () == ResponseType.Ok)
+				file = GLib.FileFactory.NewForPath (script_chooser.Filename);
+
+			script_chooser.Destroy ();
+			
+			if (file == null)
 				return;
+			
 			Helper installedHelper;
-			if (DockServices.Helpers.InstallHelper (ExtensionToInstall.Path, out installedHelper)) {
-				HelpersTileview.AppendTile (new HelperTile (installedHelper));
-				InstallScriptEntry.InnerEntry.Text = "";
+			if (DockServices.Helpers.InstallHelper (file.Path, out installedHelper))
+				RefreshExtensions ();
+		}
+
+		protected virtual void OnShowExtenChanged (object sender, System.EventArgs e)
+		{
+			RefreshExtensions ();
+		}
+		
+		void RefreshExtensions ()
+		{
+			string query = ExtenSearch.InnerEntry.Text.ToLower ();
+			IEnumerable<HelperTile> tiles = DockServices.Helpers.Helpers.Select (h => new HelperTile (h))
+				.Where (h => h.Name.ToLower ().Contains (query) || h.Description.ToLower ().Contains (query));
+			
+			if (exten_show_cmb.Active == (uint) ShowStates.Enabled)
+				tiles = tiles.Where (h => h.Enabled);
+			else if (exten_show_cmb.Active == (uint) ShowStates.Disabled)
+				tiles = tiles.Where (h => !h.Enabled);
+			
+			HelpersTileview.Clear ();
+			foreach (HelperTile helper in tiles)
+			{
+				HelpersTileview.AppendTile (helper);
 			}
 		}
-	
 	}
 }

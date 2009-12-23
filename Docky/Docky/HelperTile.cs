@@ -29,7 +29,7 @@ namespace Docky
 
 	public class HelperTile : AbstractTileObject
 	{
-		Helper Helper { get; set; }
+		public Helper Helper { get; private set; }
 
 		public HelperTile (Helper helper)
 		{

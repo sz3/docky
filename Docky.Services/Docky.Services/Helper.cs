@@ -26,6 +26,9 @@ namespace Docky.Services
 	public class Helper
 	{
 		public File File { get; private set; }
+		
+		public bool IsUser { get; private set; }
+		
 		bool? is_running;
 		public bool IsRunning {
 			get {
@@ -70,6 +73,7 @@ namespace Docky.Services
 		{
 			prefs = DockServices.Preferences.Get<HelperService> ();
 			this.File = file;
+			this.IsUser = file.Path.StartsWith ("/home/");
 			
 			if (Enabled)
 				Start ();
