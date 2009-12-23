@@ -38,6 +38,7 @@ REFERENCES =  \
 	System \
 	System.Core \
 	Mono.Posix \
+	ICSharpCode.SharpZipLib \
 	$(GIO_SHARP_LIBS) \
 	$(MONO_CAIRO_LIBS) \
 	$(NDESK_DBUS_10_LIBS) \

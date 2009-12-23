@@ -159,6 +159,11 @@ namespace Docky.Widgets
 			add_remove_button.Add (label);
 			add_remove_button.Clicked += OnAddRemoveClicked;
 			
+			foreach (Button b in OwnedObject.ExtraButtons) {
+				box.PackStart (b, false, false, 0);
+				b.Show ();
+			}
+			
 			if (OwnedObject.ShowActionButton)
 				box.PackStart (add_remove_button, false, false, 0);
 			

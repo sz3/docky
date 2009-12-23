@@ -56,6 +56,15 @@ namespace Docky
 					ForcePixbuf = helper.Data.Icon;
 			}
 			
+			if (helper.IsUser) {
+				Gtk.Button uninstall_btn = new Gtk.Button ();
+				uninstall_btn.Label = Catalog.GetString ("Uninstall");
+				uninstall_btn.Clicked += delegate {
+					DockServices.Helpers.UninstallHelper (helper);
+				};
+				AddUserButton (uninstall_btn);
+			}
+			
 			SetProps ();
 		}
 		

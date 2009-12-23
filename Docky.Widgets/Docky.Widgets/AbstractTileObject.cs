@@ -16,6 +16,7 @@
 // 
 
 using System;
+using System.Collections.Generic;
 
 using Mono.Unix;
 
@@ -37,7 +38,11 @@ namespace Docky.Widgets
 		{
 			if (TextUpdated != null)
 				TextUpdated (this, EventArgs.Empty);
-			
+		}
+		
+		public AbstractTileObject ()
+		{
+			ExtraButtons = new List<Gtk.Button> ();
 		}
 
 		string icon;
@@ -204,6 +209,12 @@ namespace Docky.Widgets
 					return;
 				enabled = value;
 			}
+		}
+		
+		internal List<Gtk.Button> ExtraButtons;
+		
+		public void AddUserButton (Gtk.Button button) {
+			ExtraButtons.Add (button);
 		}
 	}
 }

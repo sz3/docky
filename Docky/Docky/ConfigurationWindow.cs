@@ -110,6 +110,10 @@ namespace Docky
 			HelpersTileview = new TileView ();
 			HelpersTileview.IconSize = 48;
 			scrolledwindow1.AddWithViewport (HelpersTileview);
+			
+			DockServices.Helpers.HelperUninstalled += delegate {
+				RefreshExtensions ();
+			};
 					
 			ShowAll ();
 		}
@@ -356,6 +360,10 @@ namespace Docky
 		{
 			GLib.File file = null;
 			Gtk.FileChooserDialog script_chooser = new Gtk.FileChooserDialog ("Extension", this, FileChooserAction.Open, Gtk.Stock.Cancel, ResponseType.Cancel, Catalog.GetString ("_Select"), ResponseType.Ok);
+			FileFilter filter = new FileFilter ();
+			filter.AddPattern ("*.tar");
+			filter.Name = Catalog.GetString (".tar Archives");
+			script_chooser.AddFilter (filter);
 			
 			if ((ResponseType) script_chooser.Run () == ResponseType.Ok)
 				file = GLib.FileFactory.NewForPath (script_chooser.Filename);
@@ -366,8 +374,11 @@ namespace Docky
 				return;
 			
 			Helper installedHelper;
-			if (DockServices.Helpers.InstallHelper (file.Path, out installedHelper))
-				RefreshExtensions ();
+			if (DockServices.Helpers.InstallHelper (file.Path, out installedHelper)) {
+				installedHelper.Data.DataReady += delegate {
+					RefreshExtensions ();
+				};
+			}
 		}
 
 		protected virtual void OnShowExtenChanged (object sender, System.EventArgs e)

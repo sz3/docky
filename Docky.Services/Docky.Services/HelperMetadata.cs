@@ -32,13 +32,25 @@ namespace Docky.Services
 		public string Name { get; private set; }
 		public string Description { get; private set; }
 		public Pixbuf Icon { get; private set; }
+		public File IconFile { get; private set; }
+		public File DataFile { get; private set; }
+		
+		public event EventHandler DataReady;
 
 		public HelperMetadata (File dataFile)
 		{
-			dataFile.ReadAsync (0, null, DataReady);
+			DataFile = dataFile;
+			IconFile = null;
+			dataFile.ReadAsync (0, null, DataRead);
 		}
 		
-		void DataReady (GLib.Object obj, GLib.AsyncResult res) 
+		void OnDataReady ()
+		{
+			if (DataReady != null)
+				DataReady (this, null);
+		}
+		
+		void DataRead (GLib.Object obj, GLib.AsyncResult res) 
 		{
 			File file = FileAdapter.GetObject (obj);
 
@@ -55,13 +67,16 @@ namespace Docky.Services
 					else if (line.StartsWith (DescTag))
 						Description = data;
 					else if (line.StartsWith (IconTag)) {
-						if (data.StartsWith ("./"))
-							Icon = DockServices.Drawing.LoadIcon (file.Parent.GetChild (data.Substring (2)).Path);
-						else
+						if (data.StartsWith ("./")) {
+							IconFile = file.Parent.GetChild (data.Substring (2));
+							Icon = DockServices.Drawing.LoadIcon (IconFile.Path);
+						} else {
 							Icon = DockServices.Drawing.LoadIcon (data, 128);
+						}
 					}
 				}
 			}
+			OnDataReady ();
 		}
 	}
 }

@@ -22,6 +22,9 @@ using System.Collections.Generic;
 
 using GLib;
 
+using ICSharpCode.SharpZipLib;
+using ICSharpCode.SharpZipLib.Tar;
+
 namespace Docky.Services
 {
 
@@ -38,6 +41,7 @@ namespace Docky.Services
 		}.Where (dir => dir.Exists);
 		
 		public event EventHandler<HelperStatusChangedEventArgs> HelperStatusChanged;
+		public event EventHandler HelperUninstalled;
 		
 		public bool ShowOutput {
 			get {
@@ -84,7 +88,6 @@ namespace Docky.Services
 			}
 		}
 
-
 		void FetchHelpers ()
 		{			
 			Helpers = HelperDirs
@@ -107,6 +110,12 @@ namespace Docky.Services
 				HelperStatusChanged (this, args);
 		}
 		
+		void OnHelperDeleted ()
+		{
+			if (HelperUninstalled != null)
+				HelperUninstalled (this, EventArgs.Empty);
+		}
+		
 		Helper LookupHelper (File helperFile)
 		{
 			if (!Helpers.Any (h => h.File.Path == helperFile.Path))
@@ -124,19 +133,53 @@ namespace Docky.Services
 			
 			if (!file.Exists)
 				return false;
+			if (!UserScriptsDir.Exists)
+				UserScriptsDir.MakeDirectory (null);
+			if (!UserMetaDir.Exists)
+				UserMetaDir.MakeDirectory (null);
 			
 			Log<HelperService>.Info ("Trying to install: {0}", file.Path);
 			
 			try {
-				File destFile = UserScriptsDir.GetChild (file.NewFileName (UserScriptsDir));
-				if (file.Move (destFile, FileCopyFlags.AllMetadata, null, null)) {
-					Refresh ();
-					//GLib
-					installedHelper = LookupHelper (destFile);
-					return true;
-				}
+				TarArchive ar = TarArchive.CreateInputTarArchive (new IO.FileStream (file.Path, IO.FileMode.Open));
+				ar.ExtractContents (UserScriptsDir.Path);
+			} catch (Exception e) {
+				Log<HelperService>.Error ("Error trying to unpack '{0}': {1}", file.Path, e.Message);
+				Log<HelperService>.Debug (e.StackTrace);
+				return false;
+			}
+			
+			try {
+				List<Helper> currentHelpers = Helpers.ToList ();
+				Refresh ();
+				installedHelper = Helpers.Except (currentHelpers).First ();
+				return true;
 			} catch (Exception e) {
 				Log<HelperService>.Error ("Error trying to install helper '{0}': {1}", file.Path, e.Message);
+				Log<HelperService>.Debug (e.StackTrace);
+			}
+			
+			return false;
+		}
+		
+		public bool UninstallHelper (Helper helper)
+		{
+			Log<HelperService>.Info ("Trying to unininstall: {0}", helper.File.Path);
+			
+			try {
+				helper.File.Delete ();
+				if (helper.Data != null) {
+					if (helper.Data.DataFile.Exists)
+						helper.Data.DataFile.Delete ();
+					if (helper.Data.IconFile != null && helper.Data.IconFile.Exists)
+						helper.Data.IconFile.Delete ();
+				}
+				Refresh ();
+				OnHelperDeleted ();
+				return true;
+			} catch (Exception e) {
+				Log<HelperService>.Error ("Error trying to uninstall helper '{0}': {1}", helper.File.Path, e.Message);
+				Log<HelperService>.Debug (e.StackTrace);
 			}
 			
 			return false;
