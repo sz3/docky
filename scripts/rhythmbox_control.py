@@ -130,11 +130,11 @@ class DockyRhythmboxItem(DockyItem):
 			self.player.playPause(True)
 		
 	def rhythmbox_next(self):
-		if self.control:
+		if self.player:
 			self.player.next()
 		
 	def rhythmbox_prev(self):
-		if self.control:
+		if self.player:
 			self.player.previous()
 		
 	def rhythmbox_is_playing(self):
