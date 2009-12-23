@@ -104,7 +104,7 @@ namespace Docky.Items
 			if (forced_pixbuf == null)
 				pbuf = DockServices.Drawing.LoadIcon (Icon, surface.Width, surface.Height);
 			else
-				pbuf = DockServices.Drawing.ARScale (surface.Width, surface.Height, forced_pixbuf);
+				pbuf = DockServices.Drawing.ARScale (surface.Width, surface.Height, forced_pixbuf.Copy ());
 			
 			pbuf = ProcessPixbuf (pbuf);
 
