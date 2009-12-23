@@ -84,6 +84,8 @@ namespace Docky.Widgets
 			else
 				pbuf = OwnedObject.ForcePixbuf;
 			pbuf = DockServices.Drawing.AddHueShift (pbuf, OwnedObject.HueShift);
+			if (!OwnedObject.Enabled)
+				pbuf.SaturateAndPixelate (pbuf, -1f, true);
 			tileImage.Pixbuf = pbuf;
 			pbuf.Dispose ();
 			tileImage.Show ();
@@ -211,6 +213,7 @@ namespace Docky.Widgets
 			bool enabled = OwnedObject.Enabled;
 			bool sensitive = enabled || (!enabled && State == StateType.Selected);
 			
+			SetImage ();
 			title.Sensitive = sensitive;
 			description.Sensitive = sensitive;
 			description.Wrap = State == StateType.Selected;
