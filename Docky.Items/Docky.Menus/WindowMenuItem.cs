@@ -30,7 +30,7 @@ namespace Docky.Menus
 		public WindowMenuItem (Wnck.Window window, string icon) : base(window.Name, icon)
 		{
 			Bold = window.NeedsAttention ();
-			window = window;
+			this.window = window;
 			Clicked += HandleClicked;
 			Mnemonic = null;
 		}
