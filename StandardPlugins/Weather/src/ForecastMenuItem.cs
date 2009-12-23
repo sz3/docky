@@ -25,7 +25,7 @@ namespace WeatherDocklet
 	/// <summary>
 	/// A menu button that launches the day's forecast.
 	/// </summary>
-	public class ForecastMenuItem : MenuItem
+	public class ForecastMenuItem : IconMenuItem
 	{
 		int i;
 		
