@@ -4,6 +4,7 @@ dist_script_SCRIPTS = zeitgeist_docky.py	\
 		      open_terminal_here.py	\
 		      pidgin_control.py		\
 		      tomboy_menus.py		\
+		      rhythmbox_control.py	\
 		      banshee_control.py
 
 SUBDIRS = 	docky \
