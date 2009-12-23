@@ -6,4 +6,5 @@ dist_script_SCRIPTS = zeitgeist_docky.py	\
 		      tomboy_menus.py		\
 		      banshee_control.py
 
-SUBDIRS = docky
+SUBDIRS = 	docky \
+			metadata

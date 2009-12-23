@@ -27,15 +27,16 @@ namespace Docky.Services
 
 	public class HelperService
 	{
-		static File UserScriptsDir = GLib.FileFactory.NewForPath (DockServices.System.UserDataFolder).GetChild ("helpers");
-		static File SysScriptsDir = GLib.FileFactory.NewForPath (DockServices.System.SystemDataFolder).GetChild ("helpers");
+		public static File UserScriptsDir = GLib.FileFactory.NewForPath (DockServices.System.UserDataFolder).GetChild ("helpers");
+		public static File UserMetaDir = HelperService.UserScriptsDir.GetChild ("metadata");
+		public static File SysScriptsDir = GLib.FileFactory.NewForPath (DockServices.System.SystemDataFolder).GetChild ("helpers");
+		public static File SysMetaDir = HelperService.SysScriptsDir.GetChild ("metadata");
 		
 		IEnumerable<GLib.File> HelperDirs = new [] {
 			UserScriptsDir,
 			SysScriptsDir,
 		}.Where (dir => dir.Exists);
 		
-		//public List<Helper> Helpers { get; private set; }
 		public event EventHandler<HelperStatusChangedEventArgs> HelperStatusChanged;
 		
 		public bool ShowOutput {

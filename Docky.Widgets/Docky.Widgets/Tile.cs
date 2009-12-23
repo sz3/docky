@@ -79,8 +79,10 @@ namespace Docky.Widgets
 			Gdk.Pixbuf pbuf;
 			if (OwnedObject.ForcePixbuf == null)
 				pbuf = DockServices.Drawing.LoadIcon (OwnedObject.Icon, IconSize);
-			else 
-				pbuf = OwnedObject.ForcePixbuf.ScaleSimple (IconSize, IconSize, Gdk.InterpType.Nearest);
+			else if (OwnedObject.ForcePixbuf.Width != IconSize || OwnedObject.ForcePixbuf.Height != IconSize)
+				pbuf = OwnedObject.ForcePixbuf.ScaleSimple (IconSize, IconSize, Gdk.InterpType.Bilinear);
+			else
+				pbuf = OwnedObject.ForcePixbuf;
 			pbuf = DockServices.Drawing.AddHueShift (pbuf, OwnedObject.HueShift);
 			tileImage.Pixbuf = pbuf;
 			pbuf.Dispose ();

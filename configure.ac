@@ -178,6 +178,7 @@ lib/gio-sharp/generator/Makefile
 lib/gio-sharp/gio/Makefile
 scripts/Makefile
 scripts/docky/Makefile
+scripts/metadata/Makefile
 Docky/Makefile
 Docky.CairoHelper/Makefile
 Docky.DBus/Makefile

@@ -1,0 +1,3 @@
+NAME="Open Termianl Here"
+DESCRIPTION="Opens a terminal at the selected location"
+ICON="gnome-terminal"

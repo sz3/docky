@@ -23,6 +23,7 @@ FILES = \
 	Docky.Services/HelperService.cs \
 	Docky.Services/Helper.cs \
 	Docky.Services/HelperStatusChangedEventArgs.cs \
+	Docky.Services/HelperMetadata.cs \
 	Docky.Services/DrawingService.cs \
 	Docky.Services/NotificationService.cs \
 	Docky.Services/Preferences.cs \

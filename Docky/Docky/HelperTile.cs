@@ -40,11 +40,21 @@ namespace Docky
 			
 			ButtonStateDisabledText = Catalog.GetString ("Enable");
 			ButtonStateEnabledText = Catalog.GetString ("Disable");
+			SubDescriptionTitle = Catalog.GetString ("Status");
+			
 			Name = ((string) Helper.File.Basename).Split ('.')[0];
 			Name = Regex.Replace (Name, "_(?<char>.)", " $1");
 			Description = Helper.File.Path;
-			SubDescriptionTitle = Catalog.GetString ("Status");
 			Icon = "extension";
+			
+			if (helper.Data != null) {
+				if (!string.IsNullOrEmpty (helper.Data.Name))
+					Name = helper.Data.Name;
+				if (!string.IsNullOrEmpty (helper.Data.Description))
+					Description = helper.Data.Description;
+				if (helper.Data.Icon != null)
+					ForcePixbuf = helper.Data.Icon;
+			}
 			
 			SetProps ();
 		}

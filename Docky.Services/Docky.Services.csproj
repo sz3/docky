@@ -104,6 +104,7 @@
     <Compile Include="Docky.Services\HelperService.cs" />
     <Compile Include="Docky.Services\Helper.cs" />
     <Compile Include="Docky.Services\HelperStatusChangedEventArgs.cs" />
+    <Compile Include="Docky.Services\HelperMetadata.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

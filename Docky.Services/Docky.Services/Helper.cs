@@ -22,11 +22,11 @@ using GLib;
 
 namespace Docky.Services
 {
-
+	
 	public class Helper
 	{
 		public File File { get; private set; }
-		
+		public HelperMetadata Data { get; private set; }
 		public bool IsUser { get; private set; }
 		
 		bool? is_running;
@@ -74,6 +74,17 @@ namespace Docky.Services
 			prefs = DockServices.Preferences.Get<HelperService> ();
 			this.File = file;
 			this.IsUser = file.Path.StartsWith ("/home/");
+			
+			GLib.File DataFile;
+			if (IsUser)
+				DataFile = HelperService.UserMetaDir;
+			else
+				DataFile = HelperService.SysMetaDir;
+			
+			DataFile = DataFile.GetChild (File.Basename + ".info");
+			
+			if (DataFile.Exists)
+				Data = new HelperMetadata (DataFile);
 			
 			if (Enabled)
 				Start ();
