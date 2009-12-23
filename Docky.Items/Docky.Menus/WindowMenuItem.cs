@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -23,8 +23,6 @@ using Docky.Windowing;
 
 namespace Docky.Menus
 {
-
-
 	public class WindowMenuItem : IconMenuItem
 	{
 		Wnck.Window window;
@@ -32,9 +30,9 @@ namespace Docky.Menus
 		public WindowMenuItem (Wnck.Window window, string icon) : base(window.Name, icon)
 		{
 			Bold = window.NeedsAttention ();
-			this.window = window;
-			
-			this.Clicked += HandleClicked;
+			window = window;
+			Clicked += HandleClicked;
+			Mnemonic = null;
 		}
 		
 		public WindowMenuItem (Wnck.Window window, Pixbuf icon) : this (window, "")

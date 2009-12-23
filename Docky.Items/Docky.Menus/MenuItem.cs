@@ -62,7 +62,7 @@ namespace Docky.Menus
 			}
 		}
 		
-		public char? Mnemonic { get; protected set; }
+		public char? Mnemonic { get; set; }
 		
 		string text;
 		public string Text {

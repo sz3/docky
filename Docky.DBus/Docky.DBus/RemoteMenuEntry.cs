@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -21,8 +21,6 @@ using Docky.Menus;
 
 namespace Docky.DBus
 {
-
-
 	public class RemoteMenuEntry : IconMenuItem
 	{
 		public uint ID { get; private set; }
@@ -32,6 +30,7 @@ namespace Docky.DBus
 		{
 			ID = id;
 			Title = groupTitle;
+			Mnemonic = null;
 		}
 	}
 }
