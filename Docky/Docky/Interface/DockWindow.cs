@@ -351,6 +351,7 @@ namespace Docky.Interface
 		
 		void UpdateHoverText ()
 		{
+			int top = (int) (IconSize * (ZoomPercent + .2));
 			Gdk.Point point = new Gdk.Point (-1, -1);
 			DockySurface hover = null;
 			
@@ -358,6 +359,7 @@ namespace Docky.Interface
 				if (config_hover_buffer == null)
 					config_hover_buffer = DrawHoverText (config_hover_buffer, Catalog.GetString ("Drag to reposition"));
 				hover = config_hover_buffer;
+				top = IconSize + 15;
 			} else if (hoveredItem != null && background_buffer != null) {
 				if (ExternalDragActive) {
 					if (DragTracker.ItemAcceptsDrop ()) {
@@ -389,7 +391,6 @@ namespace Docky.Interface
 			// default centers it on the dock
 			if (point.X == -1 && point.Y == -1) {
 				int offset = 8;
-				int top = (int) (IconSize * (ZoomPercent + .2));
 				switch (Position) {
 				default:
 				case DockPosition.Top:
