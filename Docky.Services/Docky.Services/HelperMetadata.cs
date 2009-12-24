@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Chris Szikszoy
+//  Copyright (C) 2009 Chris Szikszoy, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -22,7 +22,6 @@ using Gdk;
 
 namespace Docky.Services
 {
-
 	public class HelperMetadata
 	{
 		const string NameTag = "NAME=";
@@ -62,16 +61,17 @@ namespace Docky.Services
 					int dataEnd = line.LastIndexOf ("\"");
 					string data = line.Substring (dataStart, dataEnd - dataStart);
 					
-					if (line.StartsWith (NameTag))
+					if (line.StartsWith (NameTag)) {
 						Name = data;
-					else if (line.StartsWith (DescTag))
+					} else if (line.StartsWith (DescTag)) {
 						Description = data;
-					else if (line.StartsWith (IconTag)) {
+					} else if (line.StartsWith (IconTag)) {
 						if (data.StartsWith ("./")) {
 							IconFile = file.Parent.GetChild (data.Substring (2));
-							Icon = DockServices.Drawing.LoadIcon (IconFile.Path);
+							if (IconFile.Exists)
+								Icon = DockServices.Drawing.LoadIcon (IconFile.Path + ";;extension");
 						} else {
-							Icon = DockServices.Drawing.LoadIcon (data, 128);
+							Icon = DockServices.Drawing.LoadIcon (data + ";;extension", 128);
 						}
 					}
 				}
