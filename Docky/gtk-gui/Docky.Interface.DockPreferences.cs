@@ -285,7 +285,7 @@ namespace Docky.Interface {
             // Container child table2.Gtk.Table+TableChild
             this.label5 = new Gtk.Label();
             this.label5.Name = "label5";
-            this.label5.LabelProp = Mono.Unix.Catalog.GetString("<b>Inactive Plugins</b>");
+            this.label5.LabelProp = Mono.Unix.Catalog.GetString("<b>Inactive Docklets</b>");
             this.label5.UseMarkup = true;
             this.table2.Add(this.label5);
             Gtk.Table.TableChild w16 = ((Gtk.Table.TableChild)(this.table2[this.label5]));
@@ -293,7 +293,7 @@ namespace Docky.Interface {
             // Container child table2.Gtk.Table+TableChild
             this.label6 = new Gtk.Label();
             this.label6.Name = "label6";
-            this.label6.LabelProp = Mono.Unix.Catalog.GetString("<b>Active Plugins</b>");
+            this.label6.LabelProp = Mono.Unix.Catalog.GetString("<b>Active Docklets</b>");
             this.label6.UseMarkup = true;
             this.table2.Add(this.label6);
             Gtk.Table.TableChild w17 = ((Gtk.Table.TableChild)(this.table2[this.label6]));

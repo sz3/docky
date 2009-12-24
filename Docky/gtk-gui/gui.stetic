@@ -407,7 +407,7 @@ Window Dodge</property>
             <child>
               <widget class="Gtk.Label" id="label5">
                 <property name="MemberName" />
-                <property name="LabelProp" translatable="yes">&lt;b&gt;Inactive Plugins&lt;/b&gt;</property>
+                <property name="LabelProp" translatable="yes">&lt;b&gt;Inactive Docklets&lt;/b&gt;</property>
                 <property name="UseMarkup">True</property>
               </widget>
               <packing>
@@ -424,7 +424,7 @@ Window Dodge</property>
             <child>
               <widget class="Gtk.Label" id="label6">
                 <property name="MemberName" />
-                <property name="LabelProp" translatable="yes">&lt;b&gt;Active Plugins&lt;/b&gt;</property>
+                <property name="LabelProp" translatable="yes">&lt;b&gt;Active Docklets&lt;/b&gt;</property>
                 <property name="UseMarkup">True</property>
               </widget>
               <packing>
@@ -779,7 +779,7 @@ Disabled</property>
             <child>
               <widget class="Gtk.Label" id="label2">
                 <property name="MemberName" />
-                <property name="LabelProp" translatable="yes">Extensions</property>
+                <property name="LabelProp" translatable="yes">Helpers</property>
               </widget>
               <packing>
                 <property name="type">tab</property>

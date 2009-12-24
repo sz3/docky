@@ -274,7 +274,7 @@ namespace Docky {
             // Notebook tab
             this.label2 = new Gtk.Label();
             this.label2.Name = "label2";
-            this.label2.LabelProp = Mono.Unix.Catalog.GetString("Extensions");
+            this.label2.LabelProp = Mono.Unix.Catalog.GetString("Helpers");
             this.notebook1.SetTabLabel(this.alignment3, this.label2);
             this.label2.ShowAll();
             this.vbox1.Add(this.notebook1);

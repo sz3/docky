@@ -99,7 +99,7 @@ namespace Docky
 			notebook1.CurrentPage = 0;
 
 			ExtenSearch = new SearchEntry ();
-			ExtenSearch.EmptyMessage = Catalog.GetString ("Search Extensions...");
+			ExtenSearch.EmptyMessage = Catalog.GetString ("Search Helpers...");
 			ExtenSearch.InnerEntry.Changed += delegate {
 				RefreshExtensions ();
 			};
@@ -359,7 +359,7 @@ namespace Docky
 		protected virtual void OnInstallClicked (object sender, System.EventArgs e)
 		{
 			GLib.File file = null;
-			Gtk.FileChooserDialog script_chooser = new Gtk.FileChooserDialog ("Extension", this, FileChooserAction.Open, Gtk.Stock.Cancel, ResponseType.Cancel, Catalog.GetString ("_Select"), ResponseType.Ok);
+			Gtk.FileChooserDialog script_chooser = new Gtk.FileChooserDialog ("Helpers", this, FileChooserAction.Open, Gtk.Stock.Cancel, ResponseType.Cancel, Catalog.GetString ("_Select"), ResponseType.Ok);
 			FileFilter filter = new FileFilter ();
 			filter.AddPattern ("*.tar");
 			filter.Name = Catalog.GetString (".tar Archives");
