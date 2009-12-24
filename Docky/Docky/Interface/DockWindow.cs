@@ -1961,10 +1961,11 @@ namespace Docky.Interface
 			
 			SetInputMask (cursorArea);
 			
-			dockArea.X += window_position.X;
-			dockArea.Y += window_position.Y;
-			dockArea.Intersect (monitor_geo);
-			AutohideManager.SetIntersectArea (dockArea);
+			Gdk.Rectangle staticArea = StaticDockArea (surface);
+			staticArea.X += window_position.X;
+			staticArea.Y += window_position.Y;
+			staticArea.Intersect (monitor_geo);
+			AutohideManager.SetIntersectArea (staticArea);
 			
 			cursorArea.X += window_position.X;
 			cursorArea.Y += window_position.Y;
