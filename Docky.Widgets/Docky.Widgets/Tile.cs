@@ -85,7 +85,7 @@ namespace Docky.Widgets
 				pbuf = OwnedObject.ForcePixbuf;
 			pbuf = DockServices.Drawing.AddHueShift (pbuf, OwnedObject.HueShift);
 			if (!OwnedObject.Enabled)
-				pbuf.SaturateAndPixelate (pbuf, -1f, true);
+				pbuf = DockServices.Drawing.MonochromePixbuf (pbuf);
 			tileImage.Pixbuf = pbuf;
 			pbuf.Dispose ();
 			tileImage.Show ();
