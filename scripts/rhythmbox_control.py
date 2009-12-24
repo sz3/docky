@@ -19,6 +19,9 @@ rhythmboxbus = "org.gnome.Rhythmbox"
 playerpath = "/org/gnome/Rhythmbox/Player"
 playeriface = "org.gnome.Rhythmbox.Player"
 
+shellpath = "/org/gnome/Rhythmbox/Shell"
+shelliface = "org.gnome.Rhythmbox.Shell"
+
 enable_badge_text = True;
 
 class DockyRhythmboxItem(DockyItem):
@@ -26,7 +29,10 @@ class DockyRhythmboxItem(DockyItem):
 		DockyItem.__init__(self, path)
 
 		self.player = None
+		self.shell = None
+
 		self.elapsed_secs = 0
+		self.songinfo = ""
 
 		self.bus.add_signal_receiver(self.name_owner_changed_cb,
                                              dbus_interface='org.freedesktop.DBus',
@@ -43,9 +49,12 @@ class DockyRhythmboxItem(DockyItem):
 			self.set_menu_buttons()
 			self.update_icon()
 			self.update_badge()
+			self.update_text()
+	
 			
 	def list_names_error_handler(self, error):
 		print "error getting bus names - %s" % str(error)
+	
 	
 	def name_owner_changed_cb(self, name, old_owner, new_owner):
 		if name == rhythmboxbus:
@@ -53,16 +62,26 @@ class DockyRhythmboxItem(DockyItem):
 				self.init_rhythmbox_objects()
 			else:
 				self.player = None
+				self.shell = None
 			self.set_menu_buttons()
 			self.update_icon()
 			self.update_badge()
+			self.update_text()
+	
 	
 	def init_rhythmbox_objects(self):
 		obj = self.bus.get_object(rhythmboxbus, playerpath)
 		self.player = dbus.Interface(obj, playeriface)
 
+		obj = self.bus.get_object(rhythmboxbus, shellpath)
+		self.shell = dbus.Interface(obj, shelliface)
+
+		if self.player and self.shell:
+			self.update_songinfo(self.player.getPlayingUri())
+
 		self.bus.add_signal_receiver(self.signal_playingChanged, "playingChanged",  playeriface, rhythmboxbus, playerpath)
 		self.bus.add_signal_receiver(self.signal_elapsedChanged, "elapsedChanged",  playeriface, rhythmboxbus, playerpath)
+		self.bus.add_signal_receiver(self.signal_playingUriChanged, "playingUriChanged",  playeriface, rhythmboxbus, playerpath)
 
 	def clear_menu_buttons(self):
 		for k, v in self.id_map.iteritems():
@@ -87,10 +106,22 @@ class DockyRhythmboxItem(DockyItem):
 	def signal_playingChanged(self, state):
 		self.set_menu_buttons()
 		self.update_icon()
+		self.update_text()
 
 	def signal_elapsedChanged(self, value):
 		self.elapsed_secs = value
 		self.update_badge()
+
+	def signal_playingUriChanged(self, newuri):
+		self.update_songinfo(newuri)
+		self.update_text()
+
+	def update_songinfo(self, uri):
+		if self.shell:
+			song = dict(self.shell.getSongProperties(uri))
+			self.songinfo = '%s - %s (%i:%02i)' % (song.get("artist", "Unknown"), song.get("title", "Unknown"), song.get("duration") / 60, song.get("duration") % 60)
+		else:
+			self.songinfo = "Info not available..."
 
 	def update_icon(self):
 		#if not self.player:
@@ -101,6 +132,15 @@ class DockyRhythmboxItem(DockyItem):
 		#	self.iface.SetIcon("media-playback-pause")
 		return
 	
+	def update_text(self):
+		if not self.shell or not self.player:
+			self.iface.ResetText()
+
+		if self.rhythmbox_is_playing():
+			self.iface.SetText(self.songinfo)
+		else:
+			self.iface.ResetText()
+
 	def update_badge(self):
 		if not self.player:
 			self.iface.ResetBadgeText()
@@ -113,7 +153,6 @@ class DockyRhythmboxItem(DockyItem):
 			self.iface.SetBadgeText(string)
 		else:
 			self.iface.ResetBadgeText()
-		return True
 	
 	def menu_pressed(self, menu_id):
 		if self.id_map[menu_id] == "Play":
