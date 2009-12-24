@@ -24,9 +24,10 @@ enable_badge_text = True;
 class DockyRhythmboxItem(DockyItem):
 	def __init__(self, path):
 		DockyItem.__init__(self, path)
-		self.timer = 0
+
 		self.player = None
-		
+		self.elapsed_secs = 0
+
 		self.bus.add_signal_receiver(self.name_owner_changed_cb,
                                              dbus_interface='org.freedesktop.DBus',
                                              signal_name='NameOwnerChanged')
@@ -41,7 +42,8 @@ class DockyRhythmboxItem(DockyItem):
 			self.init_rhythmbox_objects()
 			self.set_menu_buttons()
 			self.update_icon()
-
+			self.update_badge()
+			
 	def list_names_error_handler(self, error):
 		print "error getting bus names - %s" % str(error)
 	
@@ -49,18 +51,16 @@ class DockyRhythmboxItem(DockyItem):
 		if name == rhythmboxbus:
 			if new_owner:
 				self.init_rhythmbox_objects()
-				self.timer = gobject.timeout_add (1000, self.update_badge)
 			else:
 				self.player = None
-				if self.timer > 0:
-					gobject.source_remove (self.timer)
 			self.set_menu_buttons()
 			self.update_icon()
+			self.update_badge()
 	
 	def init_rhythmbox_objects(self):
 		obj = self.bus.get_object(rhythmboxbus, playerpath)
 		self.player = dbus.Interface(obj, playeriface)
-		
+
 		self.bus.add_signal_receiver(self.signal_playingChanged, "playingChanged",  playeriface, rhythmboxbus, playerpath)
 		self.bus.add_signal_receiver(self.signal_elapsedChanged, "elapsedChanged",  playeriface, rhythmboxbus, playerpath)
 
@@ -73,39 +73,43 @@ class DockyRhythmboxItem(DockyItem):
 	
 	def set_menu_buttons(self):
 		self.clear_menu_buttons()
-		
+				
 		if not self.player:
 			return
-
+			
 		self.add_menu_item("Previous", "media-skip-backward")
-		
 		if self.rhythmbox_is_playing():
 			self.add_menu_item("Pause", "media-playback-pause")
 		else:
 			self.add_menu_item("Play", "media-playback-start")
-			
 		self.add_menu_item("Next", "media-skip-forward")
 	
 	def signal_playingChanged(self, state):
 		self.set_menu_buttons()
+		self.update_icon()
 
 	def signal_elapsedChanged(self, value):
+		self.elapsed_secs = value
 		self.update_badge()
-			
+
 	def update_icon(self):
-		#self.iface.ResetIcon()
+		#if not self.player:
+		#	self.iface.ResetIcon()
+		#if self.rhythmbox_is_playing(): 
+		#	self.iface.SetIcon("media-playback-start")
+		#else:
+		#	self.iface.SetIcon("media-playback-pause")
 		return
 	
 	def update_badge(self):
 		if not self.player:
-			return False
+			self.iface.ResetBadgeText()
+		
 		if not enable_badge_text:
 			return True
 		
 		if self.rhythmbox_is_playing():
-			position = self.player.getElapsed ()
-			string = '%i:%02i' % (position / 60, position % 60)
-
+			string = '%i:%02i' % (self.elapsed_secs / 60, self.elapsed_secs % 60)
 			self.iface.SetBadgeText(string)
 		else:
 			self.iface.ResetBadgeText()
@@ -136,12 +140,12 @@ class DockyRhythmboxItem(DockyItem):
 	def rhythmbox_prev(self):
 		if self.player:
 			self.player.previous()
-		
+	
 	def rhythmbox_is_playing(self):
 		if self.player:
 			return self.player.getPlaying() == 1
-		return False
-	
+		return False				
+		
 class DockyRhythmboxSink(DockySink):
 	def item_path_found(self, pathtoitem, item):
 		if item.GetOwnsDesktopFile() and item.GetDesktopFile().endswith ("rhythmbox.desktop"):
