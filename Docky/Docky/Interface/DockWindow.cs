@@ -360,11 +360,11 @@ namespace Docky.Interface
 				hover = config_hover_buffer;
 			} else if (hoveredItem != null && background_buffer != null) {
 				if (ExternalDragActive) {
-					if (HoveredAcceptsDrop) {
+					if (DragTracker.ItemAcceptsDrop ()) {
 						if (launch_hover_buffer == null)
 							launch_hover_buffer = DrawHoverText (launch_hover_buffer, Catalog.GetString ("Drop to open"));
 						hover = launch_hover_buffer;
-					} else {
+					} else if (DragTracker.ProviderAcceptsDrop ()) {
 						if (drop_hover_buffer == null)
 							drop_hover_buffer = DrawHoverText (drop_hover_buffer, Catalog.GetString ("Drop to add to dock"));
 						hover = drop_hover_buffer;
@@ -378,7 +378,7 @@ namespace Docky.Interface
 					point.X += window_position.X;
 					point.Y += window_position.Y;
 				}
-			} else if (hoveredItem == null && ExternalDragActive) {
+			} else if (hoveredItem == null && ExternalDragActive && DragTracker.ProviderAcceptsDrop ()) {
 				if (drop_hover_buffer == null)
 					drop_hover_buffer = DrawHoverText (drop_hover_buffer, Catalog.GetString ("Drop to add to dock"));
 				hover = drop_hover_buffer;

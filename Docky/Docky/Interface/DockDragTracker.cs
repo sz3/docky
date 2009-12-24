@@ -272,6 +272,36 @@ namespace Docky.Interface
 			Gdk.Drag.Status (args.Context, DragAction.Copy, Gtk.Global.CurrentEventTime);
 			args.RetVal = true;
 		}
+		
+		public bool ItemAcceptsDrop ()
+		{
+			if (drag_data == null)
+				return false;
+			
+			AbstractDockItem item = Owner.HoveredItem;
+			
+			if (!drag_is_desktop_file && item != null && item.CanAcceptDrop (drag_data))
+				return true;
+			
+			return false;
+		}
+		
+		public bool ProviderAcceptsDrop ()
+		{
+			if (drag_data == null)
+				return false;
+			
+			foreach (string s in drag_data) {
+				if (Owner.HoveredProvider != null && Owner.HoveredProvider.CanAcceptDrop (s)) {
+					return true;
+				} else if (Owner.Preferences.DefaultProvider.CanAcceptDrop (s)) {
+					return true;
+				}
+			}
+			
+			// cant accept anything!
+			return false;
+		}
 
 		/// <summary>
 		/// Emitted on the drop site when the user drops data on the widget.
@@ -286,7 +316,7 @@ namespace Docky.Interface
 			
 			AbstractDockItem item = Owner.HoveredItem;
 			
-			if (!drag_is_desktop_file && item != null && item.CanAcceptDrop (drag_data)) {
+			if (ItemAcceptsDrop ()) {
 				item.AcceptDrop (drag_data);
 			} else {
 				AbstractDockItem rightMost = Owner.RightMostItem;
