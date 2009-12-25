@@ -117,11 +117,14 @@ class DockyRhythmboxItem(DockyItem):
 		self.update_text()
 
 	def update_songinfo(self, uri):
-		if self.shell and os.path.exists(uri):
-			song = dict(self.shell.getSongProperties(uri))
-			self.songinfo = '%s - %s (%i:%02i)' % (song.get("artist", "Unknown"), song.get("title", "Unknown"), song.get("duration") / 60, song.get("duration") % 60)
-		else:
-			self.songinfo = None
+		if self.shell:
+			try:
+				song = dict(self.shell.getSongProperties(uri))
+				self.songinfo = '%s - %s (%i:%02i)' % (song.get("artist", "Unknown"), song.get("title", "Unknown"), song.get("duration") / 60, song.get("duration") % 60)
+			except:
+				self.songinfo = None
+			return
+		self.songinfo = None
 
 	def update_icon(self):
 		#if not self.player:
