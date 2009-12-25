@@ -32,7 +32,7 @@ class DockyRhythmboxItem(DockyItem):
 		self.shell = None
 
 		self.elapsed_secs = 0
-		self.songinfo = ""
+		self.songinfo = None
 
 		self.bus.add_signal_receiver(self.name_owner_changed_cb,
                                              dbus_interface='org.freedesktop.DBus',
@@ -76,12 +76,12 @@ class DockyRhythmboxItem(DockyItem):
 		obj = self.bus.get_object(rhythmboxbus, shellpath)
 		self.shell = dbus.Interface(obj, shelliface)
 
-		if self.player and self.shell:
-			self.update_songinfo(self.player.getPlayingUri())
-
 		self.bus.add_signal_receiver(self.signal_playingChanged, "playingChanged",  playeriface, rhythmboxbus, playerpath)
 		self.bus.add_signal_receiver(self.signal_elapsedChanged, "elapsedChanged",  playeriface, rhythmboxbus, playerpath)
 		self.bus.add_signal_receiver(self.signal_playingUriChanged, "playingUriChanged",  playeriface, rhythmboxbus, playerpath)
+
+		if self.player and self.shell:
+			self.update_songinfo(self.player.getPlayingUri())
 
 	def clear_menu_buttons(self):
 		for k, v in self.id_map.iteritems():
@@ -117,11 +117,11 @@ class DockyRhythmboxItem(DockyItem):
 		self.update_text()
 
 	def update_songinfo(self, uri):
-		if self.shell:
+		if self.shell and os.path.exists(uri):
 			song = dict(self.shell.getSongProperties(uri))
 			self.songinfo = '%s - %s (%i:%02i)' % (song.get("artist", "Unknown"), song.get("title", "Unknown"), song.get("duration") / 60, song.get("duration") % 60)
 		else:
-			self.songinfo = "Info not available..."
+			self.songinfo = None
 
 	def update_icon(self):
 		#if not self.player:
@@ -136,7 +136,7 @@ class DockyRhythmboxItem(DockyItem):
 		if not self.shell or not self.player:
 			self.iface.ResetText()
 
-		if self.rhythmbox_is_playing():
+		if self.rhythmbox_is_playing() and self.songinfo:
 			self.iface.SetText(self.songinfo)
 		else:
 			self.iface.ResetText()
@@ -182,8 +182,11 @@ class DockyRhythmboxItem(DockyItem):
 	
 	def rhythmbox_is_playing(self):
 		if self.player:
-			return self.player.getPlaying() == 1
-		return False				
+			try:
+				return self.player.getPlaying() == 1
+			except dbus.DBusException, e:
+				return False		
+		return False
 		
 class DockyRhythmboxSink(DockySink):
 	def item_path_found(self, pathtoitem, item):
