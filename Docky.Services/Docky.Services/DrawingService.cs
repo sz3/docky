@@ -1,4 +1,4 @@
-//  
+	//  
 //  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
@@ -40,12 +40,38 @@ namespace Docky.Services
 		{
 		}
 		
+		/// <summary>
+		/// An empty pixbuf
+		/// </summary>
+		public Pixbuf EmptyPixbuf {
+			get {
+				Pixbuf pb = new Pixbuf (Colorspace.Rgb, true, 8, 1, 1);
+				pb.Fill (0x00000000);
+				return pb;
+			}
+		}
+		
+		/// <summary>
+		/// Returns a pango layout consistent with the current theme.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="Pango.Layout"/>
+		/// </returns>
 		public Pango.Layout ThemedPangoLayout ()
 		{
 			Pango.Context context = Gdk.PangoHelper.ContextGetForScreen (Gdk.Screen.Default);
 			return new Pango.Layout (context);
 		}
 		
+		/// <summary>
+		/// Determines whether or not the icon is light or dark.
+		/// </summary>
+		/// <param name="icon">
+		/// A <see cref="System.String"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="System.Boolean"/>
+		/// </returns>
 		public bool IsIconLight (string icon) {
 			int light = 0;
 			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (icon)) {
@@ -72,53 +98,34 @@ namespace Docky.Services
 			return light > 0;
 		}
 		
-		public Gdk.Pixbuf MonochromePixbuf (Gdk.Pixbuf pbuf)
+		/// <summary>
+		/// Returns a monochrome version of the supplied pixbuf.
+		/// </summary>
+		/// <param name="pbuf">
+		/// A <see cref="Gdk.Pixbuf"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="Gdk.Pixbuf"/>
+		/// </returns>
+		public Gdk.Pixbuf MonochromePixbuf (Gdk.Pixbuf source)
 		{
-			unsafe {
-				double a, r, g, b;
-				byte* pixels = (byte*) pbuf.Pixels;
-				for (int i = 0; i < pbuf.Height * pbuf.Width; i++) {
-					r = (double) pixels[0];
-					g = (double) pixels[1];
-					b = (double) pixels[2];
-					a = (double) pixels[3];
-					
-					Cairo.Color color = new Cairo.Color (r / byte.MaxValue, 
-						g / byte.MaxValue, 
-						b / byte.MaxValue,
-						a / byte.MaxValue);
-				
-					color = color.DarkenBySaturation (0.5).SetSaturation (0);
-					
-					pixels[0] = (byte) (color.R * byte.MaxValue);
-					pixels[1] = (byte) (color.G * byte.MaxValue);
-					pixels[2] = (byte) (color.B * byte.MaxValue);
-					pixels[3] = (byte) (color.A * byte.MaxValue);
-					
-					pixels += 4;
-				}
-			}
-			
-			return pbuf;
-		}
-		
-		public Gdk.Pixbuf AddHueShift (Gdk.Pixbuf source, double shift)
-		{
-			if (shift != 0) {
+			try {
+				Gdk.Pixbuf monochrome = source;
 				unsafe {
 					double a, r, g, b;
-					byte* pixels = (byte*) source.Pixels;
-					for (int i = 0; i < source.Height * source.Width; i++) {
+					byte* pixels = (byte*) monochrome.Pixels;
+					for (int i = 0; i < monochrome.Height * monochrome.Width; i++) {
 						r = (double) pixels[0];
 						g = (double) pixels[1];
 						b = (double) pixels[2];
 						a = (double) pixels[3];
 						
 						Cairo.Color color = new Cairo.Color (r / byte.MaxValue, 
-							g / byte.MaxValue, 
-							b / byte.MaxValue,
-							a / byte.MaxValue);
-						color = color.AddHue (shift);
+						                                     g / byte.MaxValue, 
+						                                     b / byte.MaxValue,
+						                                     a / byte.MaxValue);
+						
+						color = color.DarkenBySaturation (0.5).SetSaturation (0);
 						
 						pixels[0] = (byte) (color.R * byte.MaxValue);
 						pixels[1] = (byte) (color.G * byte.MaxValue);
@@ -128,11 +135,82 @@ namespace Docky.Services
 						pixels += 4;
 					}
 				}
+				source = monochrome.Copy ();
+				monochrome.Dispose ();
+			} catch (Exception e) {
+				Log<DrawingService>.Error ("Error monochroming pixbuf: {0}", e.Message);
+				Log<DrawingService>.Debug (e.StackTrace);
 			}
+			
 			return source;
 		}
 		
-		// load an icon specifying the width and height
+		/// <summary>
+		/// Adds a hue shift to the supplpied pixbuf.
+		/// </summary>
+		/// <param name="source">
+		/// A <see cref="Gdk.Pixbuf"/>
+		/// </param>
+		/// <param name="shift">
+		/// A <see cref="System.Double"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="Gdk.Pixbuf"/>
+		/// </returns>
+		public Gdk.Pixbuf AddHueShift (Gdk.Pixbuf source, double shift)
+		{
+			try {
+				Gdk.Pixbuf shifted = source;
+				if (shift != 0) {
+					unsafe {
+						double a, r, g, b;
+						byte* pixels = (byte*) shifted.Pixels;
+						for (int i = 0; i < shifted.Height * shifted.Width; i++) {
+							r = (double) pixels[0];
+							g = (double) pixels[1];
+							b = (double) pixels[2];
+							a = (double) pixels[3];
+							
+							Cairo.Color color = new Cairo.Color (r / byte.MaxValue, 
+								g / byte.MaxValue, 
+								b / byte.MaxValue,
+								a / byte.MaxValue);
+							color = color.AddHue (shift);
+							
+							pixels[0] = (byte) (color.R * byte.MaxValue);
+							pixels[1] = (byte) (color.G * byte.MaxValue);
+							pixels[2] = (byte) (color.B * byte.MaxValue);
+							pixels[3] = (byte) (color.A * byte.MaxValue);
+							
+							pixels += 4;
+						}
+					}
+				}
+				source = shifted.Copy ();
+				shifted.Dispose ();
+			} catch (Exception e) {
+				Log<DrawingService>.Error ("Error adding hue shift: {0}", e.Message);
+				Log<DrawingService>.Debug (e.StackTrace);
+			}
+			
+			return source;
+		}
+		
+		/// <summary>
+		/// Load an icon specifying the width and height.
+		/// </summary>
+		/// <param name="names">
+		/// A <see cref="System.String"/>
+		/// </param>
+		/// <param name="width">
+		/// A <see cref="System.Int32"/>
+		/// </param>
+		/// <param name="height">
+		/// A <see cref="System.Int32"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="Gdk.Pixbuf"/>
+		/// </returns>
 		public Gdk.Pixbuf LoadIcon (string names, int width, int height)
 		{
 			if (names == null)
@@ -182,35 +260,68 @@ namespace Docky.Services
 			}
 			
 			if (pixbuf != null) {
-				if (width != -1 && height != -1 && width != pixbuf.Width && height != pixbuf.Height)
+				if (width != -1 && height != -1 && (width != pixbuf.Width || height != pixbuf.Height))
 					pixbuf = ARScale (width, height, pixbuf);
 				return pixbuf;
 			}		
 			
-			// If all else fails, use the UnknownPixbuf.
-			return UnknownPixbuf ();
+			// If all else fails, use an empty pixbuf.
+			return EmptyPixbuf;
 		}
 
-		// load a square icon with the given size
+		/// <summary>
+		/// Load an icon specifying only the size.  Size will be  used for both width and height.
+		/// </summary>
+		/// <param name="names">
+		/// A <see cref="System.String"/>
+		/// </param>
+		/// <param name="size">
+		/// A <see cref="System.Int32"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="Gdk.Pixbuf"/>
+		/// </returns>
 		public Gdk.Pixbuf LoadIcon (string names, int size)
 		{
 			return LoadIcon (names, size, size);
 		}
 		
-		// load the icon at its native size
-		// note that when this is used on icons that are not files or resources
-		// an exception will be thrown
+		/// <summary>
+		/// Load an icon at its native size.  Note when this is used on icons that are not files or resources 
+		/// an exception will be thrown.
+		/// </summary>
+		/// <param name="names">
+		/// A <see cref="System.String"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="Gdk.Pixbuf"/>
+		/// </returns>
 		public Gdk.Pixbuf LoadIcon (string names)
 		{
 			return LoadIcon (names, -1);
 		}
 		
+		/// <summary>
+		/// Scale a pixbuf to the desired width or height maintaining the aspect ratio of the supplied pixbuf.
+		/// Note that due to maintaining the aspect ratio, the returned pixbuf may not have the exact width AND height as is specified.
+		/// Though it is guaranteed that one of these measurements will be correct.
+		/// </summary>
+		/// <param name="width">
+		/// A <see cref="System.Int32"/>
+		/// </param>
+		/// <param name="height">
+		/// A <see cref="System.Int32"/>
+		/// </param>
+		/// <param name="pixbuf">
+		/// A <see cref="Pixbuf"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="Pixbuf"/>
+		/// </returns>
 		public Pixbuf ARScale (int width, int height, Pixbuf pixbuf)
 		{			
 			double xScale = (double) width / (double) pixbuf.Width;
-//			xScale = Math.Min (1, xScale);
 			double yScale = (double) height / (double) pixbuf.Height;
-//			yScale = Math.Min (1,yScale);
 			double scale = Math.Min (xScale, yScale);
 			
 			Pixbuf temp = pixbuf;
@@ -222,6 +333,15 @@ namespace Docky.Services
 			return pixbuf;
 		}
 		
+		/// <summary>
+		/// Returns the string name of the supplied icon.
+		/// </summary>
+		/// <param name="icon">
+		/// A <see cref="GLib.Icon"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="System.String"/>
+		/// </returns>
 		public string IconFromGIcon (GLib.Icon icon)
 		{
 			if (icon is ThemedIcon) {
@@ -239,6 +359,18 @@ namespace Docky.Services
 			return "";
 		}
 		
+		/// <summary>
+		/// Returns a new color which is the result of blending the two supplied colors.
+		/// </summary>
+		/// <param name="a">
+		/// A <see cref="Gdk.Color"/>
+		/// </param>
+		/// <param name="b">
+		/// A <see cref="Gdk.Color"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="Gdk.Color"/>
+		/// </returns>
 		public Gdk.Color ColorBlend (Gdk.Color a, Gdk.Color b)
         {
             // at some point, might be nice to allow any blend?
@@ -269,14 +401,7 @@ namespace Docky.Services
             Gdk.Color color = new Gdk.Color ((byte)blR, (byte)blG, (byte)blB);
             Gdk.Colormap.System.AllocColor (ref color, true, true);
             return color;
-        }		
-		
-		Pixbuf UnknownPixbuf () 
-		{
-			Pixbuf pb = new Pixbuf (Colorspace.Rgb, true, 8, 1, 1);
-			pb.Fill (0x00000000);
-			return pb;
-		}
+        }
 		
 		bool IconIsEmbeddedResource (string name)
 		{

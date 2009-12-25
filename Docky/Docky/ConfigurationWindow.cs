@@ -399,8 +399,7 @@ namespace Docky
 				tiles = tiles.Where (h => !h.Enabled);
 			
 			HelpersTileview.Clear ();
-			foreach (HelperTile helper in tiles)
-			{
+			foreach (HelperTile helper in tiles) {
 				HelpersTileview.AppendTile (helper);
 			}
 		}

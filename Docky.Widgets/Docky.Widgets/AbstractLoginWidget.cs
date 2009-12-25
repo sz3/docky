@@ -36,7 +36,7 @@ namespace Docky.Widgets
 	/// about delegates or any complex concepts.
 	/// </summary>
 	[System.ComponentModel.ToolboxItem(true)]
-	public abstract partial class AbstractLoginWidget :   Bin
+	public abstract partial class AbstractLoginWidget : Bin
 	{
 		const string ValidatingFormat = "<i>{0}</i>";
 		
@@ -78,7 +78,7 @@ namespace Docky.Widgets
 
 		// give our subclasses access to certain properties of our widgets
 		/// <value>
-		/// Give access to the text in the username entry box
+		/// The text in the username entry box
 		/// </value>
 		protected string Username { 
 			get { return username_entry.InnerEntry.Text; }
@@ -86,7 +86,7 @@ namespace Docky.Widgets
 		}
 
 		/// <value>
-		/// gives access to the text in the password entry box
+		/// The text in the password entry box
 		/// </value>
 		protected string Password { 
 			get { return password_entry.InnerEntry.Text; }
@@ -94,7 +94,7 @@ namespace Docky.Widgets
 		}
 
 		/// <value>
-		/// gives access to the label next to the username entry box
+		/// The label next to the username entry box
 		/// </value>
 		protected string UsernameLabel { 
 			get { return username_lbl.Text; }
@@ -102,7 +102,7 @@ namespace Docky.Widgets
 		}
 
 		/// <summary>
-		/// gives access to the label next to the password entry box
+		/// The label next to the password entry box
 		/// </summary>
 		protected string PasswordLabel { 
 			get { return password_lbl.Text; }
@@ -110,7 +110,7 @@ namespace Docky.Widgets
 		}
 
 		/// <value>
-		/// gives access to the label above the validate button
+		/// The label above the validate button
 		/// </value>
 		protected string ValidateLabel { 
 			get { return validate_lbl.Text; }

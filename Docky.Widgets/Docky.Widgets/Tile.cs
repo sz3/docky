@@ -76,19 +76,28 @@ namespace Docky.Widgets
 		
 		private void SetImage ()
 		{
-			Gdk.Pixbuf pbuf;
-			if (OwnedObject.ForcePixbuf == null)
-				pbuf = DockServices.Drawing.LoadIcon (OwnedObject.Icon, IconSize);
-			else if (OwnedObject.ForcePixbuf.Width != IconSize || OwnedObject.ForcePixbuf.Height != IconSize)
-				pbuf = OwnedObject.ForcePixbuf.ScaleSimple (IconSize, IconSize, Gdk.InterpType.Bilinear);
-			else
-				pbuf = OwnedObject.ForcePixbuf;
-			pbuf = DockServices.Drawing.AddHueShift (pbuf, OwnedObject.HueShift);
-			if (!OwnedObject.Enabled)
-				pbuf = DockServices.Drawing.MonochromePixbuf (pbuf);
-			tileImage.Pixbuf = pbuf;
-			pbuf.Dispose ();
-			tileImage.Show ();
+			Gdk.Pixbuf pbuf = DockServices.Drawing.EmptyPixbuf;
+			try {
+				if (OwnedObject.ForcePixbuf != null) {
+					pbuf = OwnedObject.ForcePixbuf.Copy ();
+					if (pbuf.Width != IconSize || pbuf.Height != IconSize)
+						pbuf = DockServices.Drawing.ARScale (IconSize, IconSize, pbuf);
+				} else {
+					pbuf = DockServices.Drawing.LoadIcon (OwnedObject.Icon, IconSize);
+				}
+
+				pbuf = DockServices.Drawing.AddHueShift (pbuf, OwnedObject.HueShift);
+				if (!OwnedObject.Enabled)
+					pbuf = DockServices.Drawing.MonochromePixbuf (pbuf);
+			} catch (Exception e) {
+				Log<Tile>.Error ("Error loading pixbuf for {0} tile: {1}", OwnedObject.Name, e.Message);
+				Log<Tile>.Debug (e.StackTrace);
+				pbuf = DockServices.Drawing.EmptyPixbuf;
+			} finally {
+				tileImage.Pixbuf = pbuf;
+				pbuf.Dispose ();
+				tileImage.Show ();
+			}
 		}
 		
 		private void SetText ()
@@ -99,12 +108,8 @@ namespace Docky.Widgets
 			
 			if (!string.IsNullOrEmpty (OwnedObject.SubDescriptionText) &&
 			    !string.IsNullOrEmpty (OwnedObject.SubDescriptionTitle))			
-				subDesc.Markup = String.Format (
-				                                "<small><b>{0}</b> <i>{1}</i></small>", 
-				                                GLib.Markup.EscapeText (OwnedObject.SubDescriptionTitle),
-				                                GLib.Markup.EscapeText (OwnedObject.SubDescriptionText)
-				                                );
-			
+				subDesc.Markup = String.Format ("<small><b>{0}</b> <i>{1}</i></small>", 
+					GLib.Markup.EscapeText (OwnedObject.SubDescriptionTitle), GLib.Markup.EscapeText (OwnedObject.SubDescriptionText));
 		}
 		
 		private void BuildTile ()
@@ -114,7 +119,6 @@ namespace Docky.Widgets
 			ColumnSpacing = 5;
 			
 			tileImage = new Image ();
-			SetImage ();
 			
 			tileImage.Yalign = 0.0f;
 			Attach (tileImage, 0, 1, 0, 3, AttachOptions.Shrink, AttachOptions.Fill | AttachOptions.Expand, 0, 0);

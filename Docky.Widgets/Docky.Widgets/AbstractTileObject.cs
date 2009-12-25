@@ -25,7 +25,13 @@ namespace Docky.Widgets
 
 	public abstract class AbstractTileObject
 	{
+		/// <summary>
+		/// Triggered when the icon for this tile is updated
+		/// </summary>
 		public event EventHandler IconUpdated;
+		/// <summary>
+		/// Triggered when any text field for this tile is updated
+		/// </summary>
 		public event EventHandler TextUpdated;
 		
 		void OnIconUpdated ()
@@ -45,24 +51,30 @@ namespace Docky.Widgets
 			ExtraButtons = new List<Gtk.Button> ();
 		}
 
+		/// <summary>
+		/// The icon for the tile
+		/// </summary>
 		string icon;
 		public virtual string Icon {
 			get {
 				if (icon == null)
 					icon = "";
-				// if we set an icon, clear the forced pixbuf
-				if (ForcePixbuf != null)
-					ForcePixbuf = null;
 				return icon;
 			}
 			protected set {
 				if (icon == value)
 					return;
+				// if we set an icon, clear the forced pixbuf
+				if (ForcePixbuf != null)
+					ForcePixbuf = null;
 				icon = value;
 				OnIconUpdated ();
 			}
 		}
 		
+		/// <summary>
+		/// The hue shift to be applied to the icon
+		/// </summary>
 		int? shift;
 		public virtual int HueShift {
 			get {
@@ -78,6 +90,10 @@ namespace Docky.Widgets
 			}
 		}
 		
+		/// <summary>
+		/// Manually specified pixbuf to be used instead of the icon
+		/// Note: If set this will override the Icon property.
+		/// </summary>
 		Gdk.Pixbuf force_pbuf;
 		public virtual Gdk.Pixbuf ForcePixbuf {
 			get {
@@ -91,6 +107,9 @@ namespace Docky.Widgets
 			}
 		}
 		
+		/// <summary>
+		/// Description of this tile
+		/// </summary>
 		string desc;
 		public virtual string Description {
 			get { 
@@ -106,6 +125,9 @@ namespace Docky.Widgets
 			}
 		}		
 		
+		/// <summary>
+		/// Name of this tile
+		/// </summary>
 		string name;
 		public virtual string Name {
 			get { 
@@ -120,11 +142,14 @@ namespace Docky.Widgets
 				OnTextUpdated ();
 			}
 		}		
-		
+
 		public virtual void OnActiveChanged ()
 		{
 		}
 		
+		/// <summary>
+		/// Subdescription title
+		/// </summary>
 		string sub_desc_title;
 		public virtual string SubDescriptionTitle {
 			get { 
@@ -140,6 +165,9 @@ namespace Docky.Widgets
 			}
 		}
 		
+		/// <summary>
+		/// Subdescription text
+		/// </summary>
 		string sub_desc_text;
 		public virtual string SubDescriptionText {
 			get { 
@@ -155,6 +183,9 @@ namespace Docky.Widgets
 			}
 		}
 		
+		/// <summary>
+		/// Text shown on the button when the tile is enabled
+		/// </summary>
 		string enabled_text;
 		public virtual string ButtonStateEnabledText {
 			get { 
@@ -168,7 +199,10 @@ namespace Docky.Widgets
 				enabled_text = value;
 			}
 		}
-		
+	 
+		/// <summary>
+		/// Text shown on the button when the tile is disabled
+		/// </summary>
 		string disabled_text;
 		public virtual string ButtonStateDisabledText {
 			get { 
@@ -183,6 +217,9 @@ namespace Docky.Widgets
 			}
 		}
 		
+		/// <summary>
+		/// Whether or not the button should be shown on the tile
+		/// </summary>
 		bool? show_button;
 		public virtual bool ShowActionButton {
 			get { 
@@ -197,6 +234,9 @@ namespace Docky.Widgets
 			}
 		}
 		
+		/// <summary>
+		/// State of the tile
+		/// </summary>
 		bool? enabled;
 		public virtual bool Enabled {
 			get { 
@@ -213,6 +253,12 @@ namespace Docky.Widgets
 		
 		internal List<Gtk.Button> ExtraButtons;
 		
+		/// <summary>
+		/// Adds extra buttons to the tile
+		/// </summary>
+		/// <param name="button">
+		/// A <see cref="Gtk.Button"/>
+		/// </param>
 		public void AddUserButton (Gtk.Button button) {
 			ExtraButtons.Add (button);
 		}
