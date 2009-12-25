@@ -102,6 +102,9 @@ class DockyBansheeItem(DockyItem):
 			self.update_icon()
 			
 	def update_icon(self):
+		if not self.player:
+			self.iface.ResetIcon()
+			
 		if enable_art_icon and self.player:
 			arturl = self.get_album_art_path()
 			if os.path.exists(arturl):
