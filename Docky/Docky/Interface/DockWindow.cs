@@ -1537,10 +1537,6 @@ namespace Docky.Interface
 			Gdk.Point cursor = LocalCursor;
 			Gdk.Point localCursor = cursor;
 			
-			// screen shift sucks
-			cursor.X -= monitor_geo.X;
-			cursor.Y -= monitor_geo.Y;
-			
 			// "relocate" our cursor to be on the top
 			switch (Position) {
 			case DockPosition.Top:
