@@ -7,38 +7,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-12-22 08:00+0100\n"
-"PO-Revision-Date: 2009-12-22 12:22+0000\n"
+"POT-Creation-Date: 2009-12-25 13:28+0100\n"
+"PO-Revision-Date: 2009-12-25 17:10+0000\n"
 "Last-Translator: Sebastián Porta <sebastianporta@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-12-22 17:36+0000\n"
+"X-Launchpad-Export-Date: 2009-12-27 12:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:96
-msgid "Click to browse..."
-msgstr "Clic para buscar..."
+#: ../Docky/Docky/ConfigurationWindow.cs:102
+msgid "Search Helpers..."
+msgstr "Buscar Ayudantes..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:143
+#: ../Docky/Docky/ConfigurationWindow.cs:147
 msgid "Click on any dock to configure."
 msgstr "Selecciona cualquier dock para configurar."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:144
+#: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Drag any dock to move it."
 msgstr "Arrastra cualquier dock para moverlo."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:169
-msgid "_Select"
-msgstr "_Seleccionar"
-
-#: ../Docky/Docky/ConfigurationWindow.cs:243
+#: ../Docky/Docky/ConfigurationWindow.cs:226
 msgid "Delete the currently selected dock?"
 msgstr "¿Borrar el dock actualmente seleccionado?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:245
+#: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -46,10 +42,18 @@ msgstr ""
 "Si eliges borrar el dock, todas las configuraciones\n"
 "para el dock eliminado se perderán permanentemente."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:260
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:322
+#: ../Docky/Docky/ConfigurationWindow.cs:243
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:335
 msgid "_Delete Dock"
 msgstr "_Borrar Dock"
+
+#: ../Docky/Docky/ConfigurationWindow.cs:362
+msgid "_Select"
+msgstr "_Seleccionar"
+
+#: ../Docky/Docky/ConfigurationWindow.cs:365
+msgid ".tar Archives"
+msgstr "Archivos .tar"
 
 #: ../Docky/Docky/Docky.cs:107
 msgid ""
@@ -67,15 +71,19 @@ msgstr "Activar"
 msgid "Disable"
 msgstr "Desactivar"
 
-#: ../Docky/Docky/HelperTile.cs:46
+#: ../Docky/Docky/HelperTile.cs:43
 msgid "Status"
 msgstr "Estado"
 
-#: ../Docky/Docky/HelperTile.cs:54
+#: ../Docky/Docky/HelperTile.cs:61
+msgid "Uninstall"
+msgstr "Desinstalar"
+
+#: ../Docky/Docky/HelperTile.cs:73
 msgid "Running"
 msgstr "Ejecutando"
 
-#: ../Docky/Docky/HelperTile.cs:54
+#: ../Docky/Docky/HelperTile.cs:73
 msgid "Stopped"
 msgstr "Detenido"
 
@@ -111,16 +119,16 @@ msgstr "<i>Se esconde cuando el dock obstruye la aplicación activa.</i>"
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Se esconde cuando el dock obstruye cualquier ventana.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:359
+#: ../Docky/Docky/Interface/DockWindow.cs:360
 msgid "Drag to reposition"
 msgstr "Arrastrar para reposicionar"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:365
+#: ../Docky/Docky/Interface/DockWindow.cs:367
 msgid "Drop to open"
 msgstr "Soltar para abrir"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:369
-#: ../Docky/Docky/Interface/DockWindow.cs:383
+#: ../Docky/Docky/Interface/DockWindow.cs:371
+#: ../Docky/Docky/Interface/DockWindow.cs:385
 msgid "Drop to add to dock"
 msgstr "Soltar para agregar al dock"
 
@@ -138,39 +146,51 @@ msgstr "_Acerca de"
 msgid "_Quit Docky"
 msgstr "_Cerrar Docky"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:78
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:80
 msgid "Docky Configuration"
 msgstr "Configuración de Docky"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:122
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:124
 msgid "_Start When Computer Starts"
 msgstr "_Iniciar Cuando Inicia la Computadora"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:138
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:140
 msgid "_Theme:"
 msgstr "_Tema:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:162
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:164
 msgid "<b>General Options</b>"
 msgstr "<b>Opciones Generales</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:182
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:184
 msgid "<b>Dock Configuration</b>"
 msgstr "<b>Configuración del Dock</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:196
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:198
 msgid "Docks"
 msgstr "Docks"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:219
+msgid "All"
+msgstr "Todas"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:220
+msgid "Enabled"
+msgstr "Activado"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:221
+msgid "Disabled"
+msgstr "Desactivado"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:245
 msgid "_Install"
 msgstr "_Instalar"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
-msgid "Extensions"
-msgstr "Extensiones"
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:277
+msgid "Helpers"
+msgstr "Ayudantes"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:295
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:308
 msgid "_New Dock"
 msgstr "_Nuevo Dock"
 
@@ -223,12 +243,12 @@ msgid "_Zoom:"
 msgstr "_Zoom:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:288
-msgid "<b>Inactive Plugins</b>"
-msgstr "<b>Plugins Inactivos</b>"
+msgid "<b>Inactive Docklets</b>"
+msgstr "<b>Docklets Inactivos</b>"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:296
-msgid "<b>Active Plugins</b>"
-msgstr "<b>Plugins Activos</b>"
+msgid "<b>Active Docklets</b>"
+msgstr "<b>Docklets Activos</b>"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:91
 msgid "Icon"
@@ -328,11 +348,11 @@ msgstr "Verificar y guardar la información de la cuenta"
 msgid "Account validation succeeded!"
 msgstr "¡La cuenta se validó correctament!"
 
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:157
+#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:193
 msgid "_Remove"
 msgstr "_Quitar"
 
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:171
+#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:210
 msgid "_Add"
 msgstr "_Añadir"
 
@@ -823,6 +843,12 @@ msgstr "Ocaso"
 #~ msgid "Zoom:"
 #~ msgstr "Zoom:"
 
+#~ msgid "<b>Active Plugins</b>"
+#~ msgstr "<b>Plugins Activos</b>"
+
+#~ msgid "<b>Inactive Plugins</b>"
+#~ msgstr "<b>Plugins Inactivos</b>"
+
 #~ msgid "Name"
 #~ msgstr "Nombre"
 
@@ -895,3 +921,9 @@ msgstr "Ocaso"
 
 #~ msgid "<i>Always present, acts like a panel.</i>"
 #~ msgstr "<i>Siempre presente, actua como una panel.</i>"
+
+#~ msgid "Extensions"
+#~ msgstr "Extensiones"
+
+#~ msgid "Click to browse..."
+#~ msgstr "Clic para buscar..."

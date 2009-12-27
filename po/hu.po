@@ -7,47 +7,51 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-12-22 08:00+0100\n"
-"PO-Revision-Date: 2009-12-21 23:56+0000\n"
+"POT-Creation-Date: 2009-12-25 13:28+0100\n"
+"PO-Revision-Date: 2009-12-23 11:59+0000\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-12-22 17:36+0000\n"
+"X-Launchpad-Export-Date: 2009-12-27 12:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:96
-msgid "Click to browse..."
+#: ../Docky/Docky/ConfigurationWindow.cs:102
+msgid "Search Helpers..."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:143
+#: ../Docky/Docky/ConfigurationWindow.cs:147
 msgid "Click on any dock to configure."
 msgstr "A beállításokhoz kattintson valamelyik dokkra."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:144
+#: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Drag any dock to move it."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:169
-msgid "_Select"
-msgstr "_Kiválasztás"
-
-#: ../Docky/Docky/ConfigurationWindow.cs:243
+#: ../Docky/Docky/ConfigurationWindow.cs:226
 msgid "Delete the currently selected dock?"
 msgstr "Törli a jelenleg kijelőlt dokkot?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:245
+#: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:260
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:322
+#: ../Docky/Docky/ConfigurationWindow.cs:243
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:335
 msgid "_Delete Dock"
 msgstr "_Dokk törlése"
+
+#: ../Docky/Docky/ConfigurationWindow.cs:362
+msgid "_Select"
+msgstr "_Kiválasztás"
+
+#: ../Docky/Docky/ConfigurationWindow.cs:365
+msgid ".tar Archives"
+msgstr ""
 
 #: ../Docky/Docky/Docky.cs:107
 msgid ""
@@ -57,21 +61,25 @@ msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:41
 msgid "Enable"
-msgstr ""
+msgstr "Engedélyezés"
 
 #: ../Docky/Docky/HelperTile.cs:42
 msgid "Disable"
-msgstr ""
+msgstr "Letiltás"
 
-#: ../Docky/Docky/HelperTile.cs:46
+#: ../Docky/Docky/HelperTile.cs:43
 msgid "Status"
 msgstr "Állapot"
 
-#: ../Docky/Docky/HelperTile.cs:54
+#: ../Docky/Docky/HelperTile.cs:61
+msgid "Uninstall"
+msgstr ""
+
+#: ../Docky/Docky/HelperTile.cs:73
 msgid "Running"
 msgstr "Fut"
 
-#: ../Docky/Docky/HelperTile.cs:54
+#: ../Docky/Docky/HelperTile.cs:73
 msgid "Stopped"
 msgstr "Leállítva"
 
@@ -103,16 +111,16 @@ msgstr ""
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:359
+#: ../Docky/Docky/Interface/DockWindow.cs:360
 msgid "Drag to reposition"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:365
+#: ../Docky/Docky/Interface/DockWindow.cs:367
 msgid "Drop to open"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:369
-#: ../Docky/Docky/Interface/DockWindow.cs:383
+#: ../Docky/Docky/Interface/DockWindow.cs:371
+#: ../Docky/Docky/Interface/DockWindow.cs:385
 msgid "Drop to add to dock"
 msgstr ""
 
@@ -130,39 +138,51 @@ msgstr "_Névjegy"
 msgid "_Quit Docky"
 msgstr "_Kilépés a Docky-ból"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:78
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:80
 msgid "Docky Configuration"
 msgstr "Docky beállításai"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:122
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:124
 msgid "_Start When Computer Starts"
 msgstr "_Indítás a számítógép indulásakor"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:138
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:140
 msgid "_Theme:"
 msgstr "_Téma:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:162
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:164
 msgid "<b>General Options</b>"
 msgstr "<b>Általános beállítások</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:182
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:184
 msgid "<b>Dock Configuration</b>"
 msgstr "<b>Dokkbeállítások</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:196
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:198
 msgid "Docks"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:219
+msgid "All"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:220
+msgid "Enabled"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:221
+msgid "Disabled"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:245
 msgid "_Install"
 msgstr "_Telepítés"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
-msgid "Extensions"
-msgstr "Kiterjesztések"
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:277
+msgid "Helpers"
+msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:295
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:308
 msgid "_New Dock"
 msgstr "_Új dokk"
 
@@ -215,12 +235,12 @@ msgid "_Zoom:"
 msgstr "_Nagyítás:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:288
-msgid "<b>Inactive Plugins</b>"
-msgstr "<b>Inaktív bővítmények</b>"
+msgid "<b>Inactive Docklets</b>"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:296
-msgid "<b>Active Plugins</b>"
-msgstr "<b>Aktív bővítmények</b>"
+msgid "<b>Active Docklets</b>"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:91
 msgid "Icon"
@@ -320,11 +340,11 @@ msgstr "Fiókinformációk ellenőrzése és mentése"
 msgid "Account validation succeeded!"
 msgstr "A fiók ellenőrzése sikeres!"
 
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:157
+#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:193
 msgid "_Remove"
 msgstr "_Eltávolítás"
 
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:171
+#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:210
 msgid "_Add"
 msgstr "_Hozzáadás"
 
@@ -626,7 +646,7 @@ msgid ""
 "specified as US Zip Code or 'City, Country'."
 msgstr ""
 "Az időjárási adatokat a Google szolgáltatja. Ehhez a helyet az US Zip "
-"kóddal, vagy 'Város, Állam' formában kell megadnia."
+"kóddal, vagy „Város, Állam” formában kell megadnia."
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:59
 msgid ""
@@ -635,12 +655,18 @@ msgid ""
 "website.  To find your code, look up your forecast on their site and the "
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
+"Az időjárási adatokat a Weather Channel szolgáltatja. Ehhez a helyet az US "
+"Zip kóddal, vagya weboldalról származó egyedi kódként kell megadnia. A kód "
+"meghatározásához keresse meg az Ön előrejelzését az oldalon; a kód az URL "
+"„/local/” utáni része és ehhez hasonló: AAXX0000."
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:54
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
 msgstr ""
+"Az időjárási adatokat a Weather Underground szolgáltatja. Ehhez a helyet az "
+"US Zip kóddal, vagy „Város, Állam” formában kell megadnia."
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
@@ -820,3 +846,12 @@ msgstr "Naplemente"
 
 #~ msgid "Related Items"
 #~ msgstr "Kapcsolódó elemek"
+
+#~ msgid "Extensions"
+#~ msgstr "Kiterjesztések"
+
+#~ msgid "<b>Active Plugins</b>"
+#~ msgstr "<b>Aktív bővítmények</b>"
+
+#~ msgid "<b>Inactive Plugins</b>"
+#~ msgstr "<b>Inaktív bővítmények</b>"

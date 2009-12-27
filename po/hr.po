@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-12-22 08:00+0100\n"
-"PO-Revision-Date: 2009-12-22 17:13+0000\n"
+"POT-Creation-Date: 2009-12-25 13:28+0100\n"
+"PO-Revision-Date: 2009-12-23 11:59+0000\n"
 "Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,30 +16,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2009-12-22 17:36+0000\n"
+"X-Launchpad-Export-Date: 2009-12-27 12:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:96
-msgid "Click to browse..."
-msgstr "Kliknite za pregledavanje..."
+#: ../Docky/Docky/ConfigurationWindow.cs:102
+msgid "Search Helpers..."
+msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:143
+#: ../Docky/Docky/ConfigurationWindow.cs:147
 msgid "Click on any dock to configure."
 msgstr "Kliknite na bilo koji dok kako biste ga podesili."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:144
+#: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Drag any dock to move it."
 msgstr "Povucite bilo koji dok kako biste ga pomaknuli."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:169
-msgid "_Select"
-msgstr "_Odaberite"
-
-#: ../Docky/Docky/ConfigurationWindow.cs:243
+#: ../Docky/Docky/ConfigurationWindow.cs:226
 msgid "Delete the currently selected dock?"
 msgstr "Želite li obrisati trenutno odabrani dok?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:245
+#: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -47,10 +43,18 @@ msgstr ""
 "Ako obrišete dok, sve spremljene postavke\n"
 " obrisanog doka će biti trajno izgubljene."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:260
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:322
+#: ../Docky/Docky/ConfigurationWindow.cs:243
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:335
 msgid "_Delete Dock"
 msgstr "_Obriši Dok"
+
+#: ../Docky/Docky/ConfigurationWindow.cs:362
+msgid "_Select"
+msgstr "_Odaberite"
+
+#: ../Docky/Docky/ConfigurationWindow.cs:365
+msgid ".tar Archives"
+msgstr ""
 
 #: ../Docky/Docky/Docky.cs:107
 msgid ""
@@ -68,15 +72,19 @@ msgstr "Uključi"
 msgid "Disable"
 msgstr "Isključi"
 
-#: ../Docky/Docky/HelperTile.cs:46
+#: ../Docky/Docky/HelperTile.cs:43
 msgid "Status"
 msgstr "Status"
 
-#: ../Docky/Docky/HelperTile.cs:54
+#: ../Docky/Docky/HelperTile.cs:61
+msgid "Uninstall"
+msgstr ""
+
+#: ../Docky/Docky/HelperTile.cs:73
 msgid "Running"
 msgstr "Izvršavanje"
 
-#: ../Docky/Docky/HelperTile.cs:54
+#: ../Docky/Docky/HelperTile.cs:73
 msgid "Stopped"
 msgstr "Zaustavljeno"
 
@@ -113,16 +121,16 @@ msgstr "<i>Skriva se kada dok zakloni trenutno aktivnu applikaciju</i>"
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Skriva se kada dok zaklanja bilo koji prozor</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:359
+#: ../Docky/Docky/Interface/DockWindow.cs:360
 msgid "Drag to reposition"
 msgstr "Vucite kako bi ste pomaknuli dok"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:365
+#: ../Docky/Docky/Interface/DockWindow.cs:367
 msgid "Drop to open"
 msgstr "Ispustite da otvorite"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:369
-#: ../Docky/Docky/Interface/DockWindow.cs:383
+#: ../Docky/Docky/Interface/DockWindow.cs:371
+#: ../Docky/Docky/Interface/DockWindow.cs:385
 msgid "Drop to add to dock"
 msgstr "Ispustite da biste dodali na dok"
 
@@ -140,39 +148,51 @@ msgstr "_O programu"
 msgid "_Quit Docky"
 msgstr "Ugasite Docky-a"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:78
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:80
 msgid "Docky Configuration"
 msgstr "Postavke Docky-a"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:122
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:124
 msgid "_Start When Computer Starts"
 msgstr "_Pokreni kada se računalo pokrene"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:138
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:140
 msgid "_Theme:"
 msgstr "_Tema:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:162
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:164
 msgid "<b>General Options</b>"
 msgstr "<b>Opće postavke</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:182
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:184
 msgid "<b>Dock Configuration</b>"
 msgstr "<b>Postavke Doka</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:196
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:198
 msgid "Docks"
 msgstr "Dokovi"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:219
+msgid "All"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:220
+msgid "Enabled"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:221
+msgid "Disabled"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:245
 msgid "_Install"
 msgstr "_Instaliraj"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
-msgid "Extensions"
-msgstr "Nastavci"
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:277
+msgid "Helpers"
+msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:295
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:308
 msgid "_New Dock"
 msgstr "_Novi Dok"
 
@@ -225,12 +245,12 @@ msgid "_Zoom:"
 msgstr "_Uvećaj"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:288
-msgid "<b>Inactive Plugins</b>"
-msgstr "<b>Neaktivne ekstenzije</b>"
+msgid "<b>Inactive Docklets</b>"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:296
-msgid "<b>Active Plugins</b>"
-msgstr "<b>Aktivne ekstenzije</b>"
+msgid "<b>Active Docklets</b>"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:91
 msgid "Icon"
@@ -330,11 +350,11 @@ msgstr "Provjeri i spremi korisničke informacije"
 msgid "Account validation succeeded!"
 msgstr "Provjera korisničkog računa uspjela!"
 
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:157
+#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:193
 msgid "_Remove"
 msgstr "_Ukloni"
 
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:171
+#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:210
 msgid "_Add"
 msgstr "_Dodaj"
 
@@ -439,6 +459,7 @@ msgid "{0} unread message"
 msgid_plural "{0} unread messages"
 msgstr[0] "{0} nepročitana poruka"
 msgstr[1] "{0} nepročitane poruke"
+msgstr[2] "none"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:103
 msgid "Checking mail..."
@@ -579,6 +600,7 @@ msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
 msgstr[0] "{0} predmet u Smeću"
 msgstr[1] "{0} predmeta u Smeću"
+msgstr[2] "none"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:160
 msgid "_Open Trash"
@@ -722,3 +744,12 @@ msgstr "Izlazak sunca"
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:321
 msgid "Sunset"
 msgstr "Zalazak sunca"
+
+#~ msgid "Extensions"
+#~ msgstr "Nastavci"
+
+#~ msgid "<b>Active Plugins</b>"
+#~ msgstr "<b>Aktivne ekstenzije</b>"
+
+#~ msgid "<b>Inactive Plugins</b>"
+#~ msgstr "<b>Neaktivne ekstenzije</b>"
