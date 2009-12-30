@@ -156,10 +156,25 @@ class DockyRhythmboxItem(DockyItem):
 	def get_album_art_path(self):
 		if not self.player:
 			return ""
+		arturl = ""
 
-		user = os.getenv("USER")
-		arturl = '/home/%s/.cache/rhythmbox/covers/%s.jpg' % (user, self.cover_basename)
+		#1. Look in song folder
+		#TODO need to replace some things, this is very weird
+		coverdir = os.path.dirname(self.player.getPlayingUri()).replace("file://", "").replace("%20", " ")
+		covernames = ["cover.jpg", "cover.png", "album.jpg", "album.png", "albumart.jpg", 
+			"albumart.png", ".folder.jpg", ".folder.png", "folder.jpg", "folder.png"]
+		for covername in covernames:
+			arturl = os.path.join(coverdir, covername)
+			if os.path.isfile(arturl):
+				return arturl
 
+		#2. Check rhythmbox dbus song properties
+		if self.shell and self.shell.getSongProperties(self.player.getPlayingUri()).has_key("rb:coverArt-uri"):
+			arturl = self.shell.getSongProperties(self.player.getPlayingUri()).get("rb:coverArt-uri")
+			return arturl
+
+		#3. Look for cached cover
+		arturl = os.path.expanduser("~/.cache/rhythmbox/covers/%s.jpg" % self.cover_basename)
 		return arturl
 	
 	def update_text(self):
