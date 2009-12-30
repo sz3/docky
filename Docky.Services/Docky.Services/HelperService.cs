@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Chris Szikszoy
+//  Copyright (C) 2009 Chris Szikszoy, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -27,7 +27,19 @@ using ICSharpCode.SharpZipLib.Tar;
 
 namespace Docky.Services
 {
-
+	class HelperComparer : IEqualityComparer<Helper>
+	{
+		public bool Equals (Helper x, Helper y)
+		{
+			return x.File.Basename == y.File.Basename;
+		}
+		
+		public int GetHashCode (Helper h)
+		{
+			return h.File.Basename.GetHashCode ();
+		}
+	}
+	
 	public class HelperService
 	{
 		public static File UserScriptsDir = GLib.FileFactory.NewForPath (DockServices.System.UserDataFolder).GetChild ("helpers");
@@ -62,49 +74,34 @@ namespace Docky.Services
 			prefs = DockServices.Preferences.Get<HelperService> ();
 			Helpers = new List<Helper> ();
 			
-			GLib.Timeout.Add (2000, delegate {
-				Refresh ();
-				return false;
-			});
-		}
-		
-		void Refresh ()
-		{
-			// fetch a list of helpers
-			FetchHelpers ();
-			
 			// set up the file monitors to watch our script directories
-			SetupDirMonitors ();
-		}
-
-		void SetupDirMonitors ()
-		{
 			foreach (File dir in HelperDirs) {
 				FileMonitor mon = dir.Monitor (0, null);
 				mon.RateLimit = 5000;
 				mon.Changed += delegate(object o, ChangedArgs args) {
-					FetchHelpers ();
+					UpdateHelpers ();
 				};
 			}
+			
+			GLib.Timeout.Add (2000, delegate {
+				UpdateHelpers ();
+				return false;
+			});
 		}
 
-		void FetchHelpers ()
-		{			
+		void UpdateHelpers ()
+		{
+			Helpers = Helpers.Where (h => h.File.Exists).ToList ();
+			
 			Helpers = HelperDirs
 				.SelectMany (d => d.GetFiles (""))
 				.Where (file => !file.Basename.EndsWith ("~"))
 				.Select (hf => LookupHelper (hf))
+				.Distinct (new HelperComparer ())
 				.ToList ();
-			
-			foreach (Helper s in Helpers) {
-				s.HelperStatusChanged += delegate(object sender, HelperStatusChangedEventArgs e) {
-					Console.WriteLine ("Helper event: {0} {1} {2}", e.File.Basename, e.Enabled, e.IsRunning);
-					OnHelperStatusChanged (e);
-				};
-			}
 		}
 		
-		void OnHelperStatusChanged (HelperStatusChangedEventArgs args)
+		void OnHelperStatusChanged (object o, HelperStatusChangedEventArgs args)
 		{
 			if (HelperStatusChanged != null)
 				HelperStatusChanged (this, args);
@@ -118,8 +115,12 @@ namespace Docky.Services
 		
 		Helper LookupHelper (File helperFile)
 		{
-			if (!Helpers.Any (h => h.File.Path == helperFile.Path))
-				Helpers.Add (new Helper (helperFile));
+			if (!Helpers.Any (h => h.File.Path == helperFile.Path)) {
+				Helper h = new Helper (helperFile);
+				h.HelperStatusChanged += OnHelperStatusChanged;
+				Helpers.Add (h);
+				return h;
+			}
 			
 			return Helpers.First (h => h.File.Path == helperFile.Path);
 		}
@@ -151,7 +152,7 @@ namespace Docky.Services
 			
 			try {
 				List<Helper> currentHelpers = Helpers.ToList ();
-				Refresh ();
+				UpdateHelpers ();
 				installedHelper = Helpers.Except (currentHelpers).First ();
 				return true;
 			} catch (Exception e) {
@@ -174,7 +175,7 @@ namespace Docky.Services
 					if (helper.Data.IconFile != null && helper.Data.IconFile.Exists)
 						helper.Data.IconFile.Delete ();
 				}
-				Refresh ();
+				UpdateHelpers ();
 				OnHelperDeleted ();
 				return true;
 			} catch (Exception e) {
