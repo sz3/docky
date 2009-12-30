@@ -324,6 +324,8 @@ namespace Docky.Services
 			double yScale = (double) height / (double) pixbuf.Height;
 			double scale = Math.Min (xScale, yScale);
 			
+			if (scale == 1) return pixbuf;
+			
 			Pixbuf temp = pixbuf;
 			pixbuf = temp.ScaleSimple ((int) (temp.Width * scale),
 			                           (int) (temp.Height * scale),
