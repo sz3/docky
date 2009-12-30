@@ -129,7 +129,7 @@ class DockyRhythmboxItem(DockyItem):
 				else:
 					self.songinfo = '%s - %s' % (song.get("artist", "Unknown"), song.get("title", "Unknown"))
 				self.cover_basename = "%s - %s" % (song.get("artist"), song.get("album"))
-			except:
+			except dbus.DBusException, e:
 				self.duration_secs = 0
 				self.songinfo = None
 				self.cover_basename = ""

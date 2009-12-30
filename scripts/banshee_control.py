@@ -125,10 +125,10 @@ class DockyBansheeItem(DockyItem):
 				song = self.player.GetCurrentTrack()
 				self.duration_secs = self.player.GetLength() / 1000
 				if self.duration_secs > 0:
-					self.songinfo = '%s - %s (%i:%02i)' % (song.get("artist", "Unknown"), song.get("name", "Unknown"), duration / 60, duration % 60)
+					self.songinfo = '%s - %s (%i:%02i)' % (song.get("artist", "Unknown"), song.get("name", "Unknown"), self.duration_secs / 60, self.duration_secs % 60)
 				else:
 					self.songinfo = '%s - %s' % (song.get("artist", "Unknown"), song.get("name", "Unknown"))
-			except Exception, e:
+			except dbus.DBusException, e:
 				self.duration_secs = 0
 				self.songinfo = None
 			return
@@ -157,9 +157,7 @@ class DockyBansheeItem(DockyItem):
 		if not self.player or not artwork_id:
 			return ""
 
-		user = os.getenv("USER")
-		arturl = '/home/%s/.cache/album-art/%s.jpg' % (user, artwork_id)
-
+		arturl = os.path.expanduser("~/.cache/album-art/%s.jpg" % artwork_id)
 		return arturl
 
 	def update_text(self):
