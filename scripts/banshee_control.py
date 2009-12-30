@@ -32,6 +32,8 @@ class DockyBansheeItem(DockyItem):
 		self.player = None
 		self.control = None
 		
+		self.songinfo = None
+		
 		self.bus.add_signal_receiver(self.name_owner_changed_cb,
                                              dbus_interface='org.freedesktop.DBus',
                                              signal_name='NameOwnerChanged')
@@ -46,6 +48,7 @@ class DockyBansheeItem(DockyItem):
 			self.init_banshee_objects()
 			self.set_menu_buttons()
 			self.update_icon()
+			self.update_text()			
 			self.update_badge()
 
 	def list_names_error_handler(self, error):
@@ -63,6 +66,7 @@ class DockyBansheeItem(DockyItem):
 					gobject.source_remove (self.timer)
 			self.set_menu_buttons()
 			self.update_icon()
+			self.update_text()			
 			self.update_badge()
 	
 	def init_banshee_objects(self):
@@ -74,6 +78,9 @@ class DockyBansheeItem(DockyItem):
 		
 		self.bus.add_signal_receiver(self.signal_EventChanged, "EventChanged",  playeriface, bansheebus, playerpath)
 		self.bus.add_signal_receiver(self.signal_StateChanged, "StateChanged",  playeriface, bansheebus, playerpath)
+
+		if self.player:
+			self.update_songinfo()
 
 	def clear_menu_buttons(self):
 		for k, v in self.id_map.iteritems():
@@ -99,10 +106,28 @@ class DockyBansheeItem(DockyItem):
 		#print "EventChanged: %s - %s = %s" % (event, st, value)	
 		if (event == "trackinfoupdated"):
 			self.update_icon()
+			self.update_songinfo();
+			self.update_text()
+			self.update_badge()
 
 	def signal_StateChanged(self, state):
 		#print "StateChanged: %s" % (state)	
 		self.set_menu_buttons()
+		self.update_text()
+			
+	def update_songinfo(self):
+		if self.player:
+			try:
+				song = self.player.GetCurrentTrack()
+				for s in song:
+					print s
+				duration = self.player.GetLength() / 1000
+				self.songinfo = '%s - %s (%i:%02i)' % (song.get("artist", "Unknown"), song.get("name", "Unknown"), duration / 60, duration % 60)
+			except Exception, e:
+				print "update_songinfo(): %s" % e
+				self.songinfo = None
+			return
+		self.songinfo = None
 	
 	def update_icon(self):
 		if not self.player:
@@ -119,6 +144,15 @@ class DockyBansheeItem(DockyItem):
 			else:
 				self.iface.ResetIcon()
 		return True
+
+	def update_text(self):
+		if not self.player:
+			self.iface.ResetText()
+
+		if self.banshee_is_playing() and self.songinfo:
+			self.iface.SetText(self.songinfo)
+		else:
+			self.iface.ResetText()
 	
 	def update_badge(self):
 		if not self.player:
@@ -176,14 +210,14 @@ class DockyBansheeItem(DockyItem):
 		return False
 	
 	def get_album_art_path(self):
-		if not self.player or not self.player.GetCurrentTrack().get("artwork-id"):
+		artwork_id = self.player.GetCurrentTrack().get("artwork-id")
+
+		if not self.player or not artwork_id:
 			return ""
+
 		user = os.getenv("USER")
-		arturl = '/home/'
-		arturl += user
-		arturl += '/.cache/album-art/'
-		arturl += self.player.GetCurrentTrack().get("artwork-id")
-		arturl += '.jpg'
+		arturl = '/home/%s/.cache/album-art/%s.jpg' % (user, artwork_id)
+
 		return arturl
 	
 class DockyBansheeSink(DockySink):
