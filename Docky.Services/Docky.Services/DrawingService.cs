@@ -34,7 +34,7 @@ namespace Docky.Services
 {
 	public class DrawingService
 	{
-		const string MissingIconIcon = "application-default-icon";
+		const string MissingIconIcon = "application-default-icon;;application-x-executable";
 		
 		internal DrawingService ()
 		{
@@ -218,7 +218,7 @@ namespace Docky.Services
 			
 			List<string> iconNames = names.Split (new [] { ";;"}, StringSplitOptions.RemoveEmptyEntries).ToList ();
 			// add the MissingIconIcon as a last resort icon.
-			iconNames.Add (MissingIconIcon);
+			iconNames = iconNames.Union (MissingIconIcon.Split (new [] { ";;"}, StringSplitOptions.RemoveEmptyEntries)).ToList ();
 			
 			Gdk.Pixbuf pixbuf = null;
 			
