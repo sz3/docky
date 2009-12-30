@@ -35,6 +35,7 @@ class DockyRhythmboxItem(DockyItem):
 		self.elapsed_secs = 0
 		self.duration_secs = 0
 		self.songinfo = None
+		self.cover_basename = ""
 
 		self.bus.add_signal_receiver(self.name_owner_changed_cb,
                                              dbus_interface='org.freedesktop.DBus',
@@ -127,9 +128,11 @@ class DockyRhythmboxItem(DockyItem):
 					self.songinfo = '%s - %s (%i:%02i)' % (song.get("artist", "Unknown"), song.get("title", "Unknown"), song.get("duration") / 60, song.get("duration") % 60)
 				else:
 					self.songinfo = '%s - %s' % (song.get("artist", "Unknown"), song.get("title", "Unknown"))
+				self.cover_basename = "%s - %s" % (song.get("artist"), song.get("album"))
 			except:
 				self.duration_secs = 0
 				self.songinfo = None
+				self.cover_basename = ""
 			return
 		self.duration_secs = 0
 		self.songinfo = None
@@ -151,13 +154,11 @@ class DockyRhythmboxItem(DockyItem):
 		return True
 		
 	def get_album_art_path(self):
-		artwork_id = None #self.player.getSongProperties(uri).get("artwork-id")
-
-		if not self.player or not artwork_id:
+		if not self.player:
 			return ""
 
 		user = os.getenv("USER")
-		arturl = '/home/%s/.cache/rhythmbox/covers/%s.jpg' % (user, artwork_id)
+		arturl = '/home/%s/.cache/rhythmbox/covers/%s.jpg' % (user, self.cover_basename)
 
 		return arturl
 	
