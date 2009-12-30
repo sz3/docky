@@ -22,6 +22,7 @@ playeriface = "org.gnome.Rhythmbox.Player"
 shellpath = "/org/gnome/Rhythmbox/Shell"
 shelliface = "org.gnome.Rhythmbox.Shell"
 
+enable_art_icon = True;
 enable_badge_text = True;
 
 class DockyRhythmboxItem(DockyItem):
@@ -32,7 +33,7 @@ class DockyRhythmboxItem(DockyItem):
 		self.shell = None
 
 		self.elapsed_secs = 0
-		self.duraction_secs = 0
+		self.duration_secs = 0
 		self.songinfo = None
 
 		self.bus.add_signal_receiver(self.name_owner_changed_cb,
@@ -48,9 +49,9 @@ class DockyRhythmboxItem(DockyItem):
 		if rhythmboxbus in names:
 			self.init_rhythmbox_objects()
 			self.set_menu_buttons()
-			self.update_icon()
 			self.update_text()
 			self.update_badge()
+			self.update_icon()
 	
 			
 	def list_names_error_handler(self, error):
@@ -65,9 +66,9 @@ class DockyRhythmboxItem(DockyItem):
 				self.player = None
 				self.shell = None
 			self.set_menu_buttons()
-			self.update_icon()
 			self.update_text()
 			self.update_badge()
+			self.update_icon()
 	
 	
 	def init_rhythmbox_objects(self):
@@ -106,8 +107,8 @@ class DockyRhythmboxItem(DockyItem):
 	
 	def signal_playingChanged(self, state):
 		self.set_menu_buttons()
-		self.update_icon()
 		self.update_text()
+		self.update_icon()
 
 	def signal_elapsedChanged(self, value):
 		self.elapsed_secs = value
@@ -121,23 +122,44 @@ class DockyRhythmboxItem(DockyItem):
 		if self.shell:
 			try:
 				song = dict(self.shell.getSongProperties(uri))
-				self.duraction_secs = song.get("duration")
-				self.songinfo = '%s - %s (%i:%02i)' % (song.get("artist", "Unknown"), song.get("title", "Unknown"), song.get("duration") / 60, song.get("duration") % 60)
+				self.duration_secs = song.get("duration")
+				if self.duration_secs > 0:
+					self.songinfo = '%s - %s (%i:%02i)' % (song.get("artist", "Unknown"), song.get("title", "Unknown"), song.get("duration") / 60, song.get("duration") % 60)
+				else:
+					self.songinfo = '%s - %s' % (song.get("artist", "Unknown"), song.get("title", "Unknown"))
 			except:
-				self.duraction_secs = 0
+				self.duration_secs = 0
 				self.songinfo = None
 			return
-		self.duraction_secs = 0
+		self.duration_secs = 0
 		self.songinfo = None
 
 	def update_icon(self):
-		#if not self.player:
-		#	self.iface.ResetIcon()
-		#if self.rhythmbox_is_playing(): 
-		#	self.iface.SetIcon("media-playback-start")
-		#else:
-		#	self.iface.SetIcon("media-playback-pause")
-		return
+		if not self.player:
+			self.iface.ResetIcon()
+			return False
+			
+		if not enable_art_icon:
+			return True
+		
+		if self.player:
+			arturl = self.get_album_art_path()
+			if os.path.exists(arturl):
+				self.iface.SetIcon(arturl)
+			else:
+				self.iface.ResetIcon()
+		return True
+		
+	def get_album_art_path(self):
+		artwork_id = None #self.player.getSongProperties(uri).get("artwork-id")
+
+		if not self.player or not artwork_id:
+			return ""
+
+		user = os.getenv("USER")
+		arturl = '/home/%s/.cache/rhythmbox/covers/%s.jpg' % (user, artwork_id)
+
+		return arturl
 	
 	def update_text(self):
 		if not self.shell or not self.player:
@@ -156,9 +178,11 @@ class DockyRhythmboxItem(DockyItem):
 			return True
 		
 		if self.rhythmbox_is_playing():
-			if self.duraction_secs == 0:
-				self.update_songinfo(self.player.getPlayingUri())
-			position = self.duraction_secs - self.elapsed_secs
+			#if song length is 0 then counting up instead of down
+			if self.duration_secs > 0:
+				position = self.duration_secs - self.elapsed_secs
+			else:
+				position = self.elapsed_secs
 			string = '%i:%02i' % (position / 60, position % 60)
 			self.iface.SetBadgeText(string)
 		else:
