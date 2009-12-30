@@ -58,16 +58,16 @@ class DockyBansheeItem(DockyItem):
 		if name == bansheebus:
 			if new_owner:
 				self.init_banshee_objects()
-				self.timer = gobject.timeout_add (1000, self.update_badge)
 			else:
 				self.player = None
 				self.control = None
 				if self.timer > 0:
 					gobject.source_remove (self.timer)
-			self.set_menu_buttons()
-			self.update_icon()
-			self.update_text()			
-			self.update_badge()
+					self.timer = 0
+				self.set_menu_buttons()
+				self.update_icon()
+				self.update_text()			
+				self.update_badge()
 	
 	def init_banshee_objects(self):
 		obj = self.bus.get_object(bansheebus, playerpath)
@@ -81,6 +81,9 @@ class DockyBansheeItem(DockyItem):
 
 		if self.player:
 			self.update_songinfo()
+
+		if not self.timer > 0:
+			self.timer = gobject.timeout_add (1000, self.update_badge)
 
 	def clear_menu_buttons(self):
 		for k, v in self.id_map.iteritems():
@@ -103,7 +106,7 @@ class DockyBansheeItem(DockyItem):
 		self.add_menu_item("Next", "media-skip-forward")
 	
 	def signal_EventChanged(self, event, st, value):
-		#print "EventChanged: %s - %s = %s" % (event, st, value)	
+		#print "EventChanged: %s" % (event)	
 		if (event == "trackinfoupdated"):
 			self.update_icon()
 			self.update_songinfo();
@@ -122,7 +125,6 @@ class DockyBansheeItem(DockyItem):
 				duration = self.player.GetLength() / 1000
 				self.songinfo = '%s - %s (%i:%02i)' % (song.get("artist", "Unknown"), song.get("name", "Unknown"), duration / 60, duration % 60)
 			except Exception, e:
-				print "update_songinfo(): %s" % e
 				self.songinfo = None
 			return
 		self.songinfo = None
