@@ -32,6 +32,7 @@ class DockyRhythmboxItem(DockyItem):
 		self.shell = None
 
 		self.elapsed_secs = 0
+		self.duraction_secs = 0
 		self.songinfo = None
 
 		self.bus.add_signal_receiver(self.name_owner_changed_cb,
@@ -48,8 +49,8 @@ class DockyRhythmboxItem(DockyItem):
 			self.init_rhythmbox_objects()
 			self.set_menu_buttons()
 			self.update_icon()
-			self.update_badge()
 			self.update_text()
+			self.update_badge()
 	
 			
 	def list_names_error_handler(self, error):
@@ -65,8 +66,8 @@ class DockyRhythmboxItem(DockyItem):
 				self.shell = None
 			self.set_menu_buttons()
 			self.update_icon()
-			self.update_badge()
 			self.update_text()
+			self.update_badge()
 	
 	
 	def init_rhythmbox_objects(self):
@@ -120,10 +121,13 @@ class DockyRhythmboxItem(DockyItem):
 		if self.shell:
 			try:
 				song = dict(self.shell.getSongProperties(uri))
+				self.duraction_secs = song.get("duration")
 				self.songinfo = '%s - %s (%i:%02i)' % (song.get("artist", "Unknown"), song.get("title", "Unknown"), song.get("duration") / 60, song.get("duration") % 60)
 			except:
+				self.duraction_secs = 0
 				self.songinfo = None
 			return
+		self.duraction_secs = 0
 		self.songinfo = None
 
 	def update_icon(self):
@@ -152,7 +156,10 @@ class DockyRhythmboxItem(DockyItem):
 			return True
 		
 		if self.rhythmbox_is_playing():
-			string = '%i:%02i' % (self.elapsed_secs / 60, self.elapsed_secs % 60)
+			if self.duraction_secs == 0:
+				self.update_songinfo(self.player.getPlayingUri())
+			position = self.duraction_secs - self.elapsed_secs
+			string = '%i:%02i' % (position / 60, position % 60)
 			self.iface.SetBadgeText(string)
 		else:
 			self.iface.ResetBadgeText()

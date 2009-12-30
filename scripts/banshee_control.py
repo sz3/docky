@@ -22,8 +22,8 @@ playeriface = "org.bansheeproject.Banshee.PlayerEngine"
 controlpath = "/org/bansheeproject/Banshee/PlaybackController"
 controliface = "org.bansheeproject.Banshee.PlaybackController"
 
-enable_art_icon = False;
-enable_badge_text = False;
+enable_art_icon = True;
+enable_badge_text = True;
 
 class DockyBansheeItem(DockyItem):
 	def __init__(self, path):
@@ -46,6 +46,7 @@ class DockyBansheeItem(DockyItem):
 			self.init_banshee_objects()
 			self.set_menu_buttons()
 			self.update_icon()
+			self.update_badge()
 
 	def list_names_error_handler(self, error):
 		print "error getting bus names - %s" % str(error)
@@ -62,6 +63,7 @@ class DockyBansheeItem(DockyItem):
 					gobject.source_remove (self.timer)
 			self.set_menu_buttons()
 			self.update_icon()
+			self.update_badge()
 	
 	def init_banshee_objects(self):
 		obj = self.bus.get_object(bansheebus, playerpath)
@@ -70,7 +72,8 @@ class DockyBansheeItem(DockyItem):
 		obj = self.bus.get_object(bansheebus, controlpath)
 		self.control = dbus.Interface(obj, controliface)
 		
-		self.bus.add_signal_receiver(self.event_changed, "EventChanged",  playeriface, bansheebus, playerpath)
+		self.bus.add_signal_receiver(self.signal_EventChanged, "EventChanged",  playeriface, bansheebus, playerpath)
+		self.bus.add_signal_receiver(self.signal_StateChanged, "StateChanged",  playeriface, bansheebus, playerpath)
 
 	def clear_menu_buttons(self):
 		for k, v in self.id_map.iteritems():
@@ -86,35 +89,42 @@ class DockyBansheeItem(DockyItem):
 			return
 
 		self.add_menu_item("Previous", "media-skip-backward")
-		
 		if self.banshee_is_playing():
 			self.add_menu_item("Pause", "media-playback-pause")
 		else:
 			self.add_menu_item("Play", "media-playback-start")
-			
 		self.add_menu_item("Next", "media-skip-forward")
 	
-	def event_changed(self, state, st, value):
-		if (state == "statechange"):
-			self.set_menu_buttons()
-		elif (state == "trackinfoupdated"):
-			self.set_menu_buttons()
+	def signal_EventChanged(self, event, st, value):
+		#print "EventChanged: %s - %s = %s" % (event, st, value)	
+		if (event == "trackinfoupdated"):
 			self.update_icon()
-			
+
+	def signal_StateChanged(self, state):
+		#print "StateChanged: %s" % (state)	
+		self.set_menu_buttons()
+	
 	def update_icon(self):
 		if not self.player:
 			self.iface.ResetIcon()
+			return False
 			
-		if enable_art_icon and self.player:
+		if not enable_art_icon:
+			return True
+		
+		if self.player:
 			arturl = self.get_album_art_path()
 			if os.path.exists(arturl):
 				self.iface.SetIcon(arturl)
 			else:
 				self.iface.ResetIcon()
+		return True
 	
 	def update_badge(self):
 		if not self.player:
+			self.iface.ResetBadgeText()
 			return False
+
 		if not enable_badge_text:
 			return True
 		
@@ -159,7 +169,10 @@ class DockyBansheeItem(DockyItem):
 		
 	def banshee_is_playing(self):
 		if self.player:
-			return self.player.GetCurrentState() == "playing"
+			try:
+				return self.player.GetCurrentState() == "playing"
+			except dbus.DBusException, e:
+				return False
 		return False
 	
 	def get_album_art_path(self):
@@ -189,4 +202,5 @@ if __name__ == "__main__":
 	atexit.register (cleanup)
 	signal(SIGTERM, lambda signum, stack_frame: exit(1))
 
-	mainloop.run()
+	while mainloop.is_running():
+		mainloop.run()
