@@ -163,7 +163,7 @@ class DockyBansheeItem(DockyItem):
 		return False
 	
 	def get_album_art_path(self):
-		if not self.player:
+		if not self.player or not self.player.GetCurrentTrack().get("artwork-id"):
 			return ""
 		user = os.getenv("USER")
 		arturl = '/home/'
