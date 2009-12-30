@@ -149,6 +149,7 @@ namespace Docky.Interface
 		DateTime dock_hovered_change_time;
 		DateTime items_change_time;
 		DateTime painter_change_time;
+		DateTime threedimensional_change_time;
 		DateTime render_time;
 		DateTime remove_time;
 		
@@ -719,6 +720,8 @@ namespace Docky.Interface
 				                         () => ((DateTime.UtcNow - items_change_time) < BaseAnimationTime));
 			AnimationState.AddCondition (Animations.PainterChanged,
 			                             () => ((DateTime.UtcNow - painter_change_time) < PainterAnimationTime));
+			AnimationState.AddCondition (Animations.ThreeDimensionalChanged,
+			                             () => ((DateTime.UtcNow - threedimensional_change_time) < BaseAnimationTime));
 			AnimationState.AddCondition (Animations.Bounce, BouncingItems);
 			AnimationState.AddCondition (Animations.Waiting, WaitingItems);
 		}
@@ -954,6 +957,7 @@ namespace Docky.Interface
 		
 		void PreferencesThreeDimensionalChanged (object sender, EventArgs e)
 		{
+			threedimensional_change_time = DateTime.UtcNow;
 			AnimatedDraw ();
 		}
 
@@ -2364,8 +2368,10 @@ namespace Docky.Interface
 				background.Dispose ();
 			}
 			
-			double tilt = ThreeDimensional ? .6 : 0;
+			double tilt = .6;
 			tilt *= 1 - PainterOpacity;
+			double tiltanim = Math.Min (1, ((rendering ? render_time : DateTime.UtcNow) - threedimensional_change_time).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds);
+			tilt *= ThreeDimensional ? tiltanim : 1 - tiltanim;
 			background_buffer.TileOntoSurface (surface, backgroundArea, 50, tilt, Position);
 		}
 		
