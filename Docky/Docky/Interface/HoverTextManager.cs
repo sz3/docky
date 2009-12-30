@@ -153,10 +153,11 @@ namespace Docky.Interface
 			center.X = Math.Max (0, Math.Min (center.X, monitor_geo.X + monitor_geo.Width - surface.Width));
 			center.Y = Math.Max (0, Math.Min (center.Y, monitor_geo.Y + monitor_geo.Height - surface.Height));
 			
+			window.QueueDraw ();
 			window.Move (center.X, center.Y);
 			timer = GLib.Timeout.Add (100, delegate {
-				window.Move (center.X, center.Y);
 				window.QueueDraw ();
+				window.Move (center.X, center.Y);
 				timer = 0;
 				return false;
 			});
