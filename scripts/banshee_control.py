@@ -119,8 +119,6 @@ class DockyBansheeItem(DockyItem):
 		if self.player:
 			try:
 				song = self.player.GetCurrentTrack()
-				for s in song:
-					print s
 				duration = self.player.GetLength() / 1000
 				self.songinfo = '%s - %s (%i:%02i)' % (song.get("artist", "Unknown"), song.get("name", "Unknown"), duration / 60, duration % 60)
 			except Exception, e:
