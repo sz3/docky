@@ -2298,7 +2298,7 @@ namespace Docky.Interface
 											(double) gdkColor.Green / ushort.MaxValue,
 											(double) gdkColor.Blue / ushort.MaxValue,
 											1.0);
-			return CreateIndicatorBuffer (UrgentIndicatorSize, color.AddHue (150).SetSaturation (1));
+			return CreateIndicatorBuffer (UrgentIndicatorSize, color.AddHue (Docky.Controller.UrgentHueShift).SetSaturation (1));
 		}
 		
 		DockySurface CreateIndicatorBuffer (int size, Cairo.Color color)

@@ -83,6 +83,19 @@ namespace Docky
 			}
 		}
 		
+		public int UrgentHueShift {
+			get {
+				return prefs.Get<int> ("UrgentHue", 150);
+			}
+			set {
+				if (UrgentHueShift == value)
+					return;
+				// clamp to -180 .. 180
+				int hue = Math.Max (-180, Math.Min (180, value));
+				prefs.Set ("UrgentHue", hue);
+			}
+		}
+		
 		public IEnumerable<string> DockThemes {
 			get {
 				yield return DefaultTheme;
