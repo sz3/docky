@@ -117,13 +117,13 @@ namespace Docky
 			about.Website = "http://launchpad.net/docky";
 			about.WebsiteLabel = "Website";
 			Gtk.AboutDialog.SetUrlHook ((dialog, link) => DockServices.System.Open (link));
-			about.Copyright = "Copyright \xa9 2009 Docky Developers";
+			about.Copyright = "Copyright \xa9 2009-2010 Docky Developers";
 			about.Comments = "Docky. Simply Powerful.";
 			about.Authors = new[] {
-				"Jason Smith <jason@o-docky.com>",
-				"Robert Dyer <roberet@o-docky.com>",
+				"Jason Smith <jason@go-docky.com>",
+				"Robert Dyer <robert@go-docky.com>",
 				"Chris Szikszoy <chris@go-docky.com>",
-				"Rico Tzschichholz <ricotz@t-online.de>",
+				"Rico Tzschichholz <rtz@go-docky.com>",
 				"Seif Lofty <seif@lotfy.com>",
 				"Chris Halse Rogers <raof@ubuntu.com>",
 				"Alex Launi <alex.launi@gmail.com>"
@@ -131,6 +131,65 @@ namespace Docky
 			about.Artists = new[] { 
 				"Daniel Foré <bunny@go-docky.com>",
 			};
+			about.TranslatorCredits = 
+				"Basque\n" +
+				" Ibai Oihanguren (https://launchpad.net/~ibai-oihanguren)\n" +
+				
+				"Bengali\n" +
+				" Scio (https://launchpad.net/~scio)\n" +
+
+				"Catalan\n" +
+				" BadChoice (https://launchpad.net/~guitarboy000)\n" +
+
+				"Croatian\n" +
+				" zekopeko (https://launchpad.net/~zekopeko)\n" +
+
+				"French\n" +
+				" Hugo M. (https://launchpad.net/~spirit-power)\n" +
+				" Kévin Gomez (https://launchpad.net/~geek63)\n" +
+				" Pierre Slamich (https://launchpad.net/~pierre-slamich)\n" +
+				" Simon Richard (https://launchpad.net/~saymonz)\n" +
+				" alienworkshop (https://launchpad.net/~alienworkshop)\n" +
+				" maxime Cheval (https://launchpad.net/~arkahys)\n" +
+
+				"Galician\n" +
+				" Indalecio Freiría Santos (https://launchpad.net/~ifreiria)\n" +
+
+				"German\n" +
+				" Mark Parigger (https://launchpad.net/~mark-climber)\n" +
+				" Martin Lettner (https://launchpad.net/~m.lettner)\n" +
+				" augias (https://launchpad.net/~augias)\n" +
+				" fiction (https://launchpad.net/~moradin-web)\n" +
+				" pheder (https://launchpad.net/~pheder)\n" +
+				" tai (https://launchpad.net/~agent00tai)\n" +
+
+				"Hungarian\n" +
+				" Bognár András (https://launchpad.net/~bognarandras)\n" +
+				" Gabor Kelemen (https://launchpad.net/~kelemeng)\n" +
+				" NewPlayer (https://launchpad.net/~newplayer)\n" +
+
+				"Icelandic\n" +
+				" Baldur (https://launchpad.net/~baldurpet)\n" +
+
+				"Italian\n" +
+				" Blaster (https://launchpad.net/~dottorblaster)\n" +
+				" MastroPino (https://launchpad.net/~mastropino)\n" +
+				" Quizzlo (https://launchpad.net/~marcopaolone)\n" +
+
+				"Polish\n" +
+				" 313 (https://launchpad.net/~tenotoja)\n" +
+				" Adrian Grzemski (https://launchpad.net/~adrian-grzemski)\n" +
+				" EuGene (https://launchpad.net/~eugenewolfe)\n" +
+
+				"Russian\n" +
+				" Sergey Sedov (https://launchpad.net/~serg-sedov)\n" +
+
+				"Spanish\n" +
+				" Sebastián Porta (https://launchpad.net/~sebastianporta)\n" +
+
+				"Swedish\n" +
+				" Daniel Nylander (https://launchpad.net/~yeager)\n";
+			
 			
 			about.ShowAll ();
 			
