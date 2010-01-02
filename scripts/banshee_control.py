@@ -107,15 +107,20 @@ class DockyBansheeItem(DockyItem):
 		self.add_menu_item("Next", "media-skip-forward")
 	
 	def signal_EventChanged(self, event, st, value):
-		#print "EventChanged: %s" % (event)	
-		if (event == "trackinfoupdated"):
+		print "EventChanged: %s" % (event)	
+		if (event in ["startofstream", "trackinfoupdated"]):
 			self.update_songinfo();
 			self.update_text()
 			self.update_badge()
 			self.update_icon()
+		elif (event in ["endofstream"]):
+			self.update_icon()
+			self.update_text()
+		elif (event in ["seek"]):
+			self.update_badge()
 
 	def signal_StateChanged(self, state):
-		#print "StateChanged: %s" % (state)	
+		print "StateChanged: %s" % (state)	
 		self.set_menu_buttons()
 		self.update_text()
 			
@@ -143,12 +148,14 @@ class DockyBansheeItem(DockyItem):
 		if not enable_art_icon:
 			return True
 		
-		if self.player:
+		if self.banshee_is_playing():
 			arturl = self.get_album_art_path()
 			if os.path.exists(arturl):
 				self.iface.SetIcon(arturl)
 			else:
 				self.iface.ResetIcon()
+		else:
+			self.iface.ResetIcon()
 		return True
 
 	def get_album_art_path(self):

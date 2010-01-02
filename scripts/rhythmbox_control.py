@@ -145,12 +145,14 @@ class DockyRhythmboxItem(DockyItem):
 		if not enable_art_icon:
 			return True
 		
-		if self.player:
+		if self.rhythmbox_is_playing():
 			arturl = self.get_album_art_path()
 			if os.path.isfile(arturl):
 				self.iface.SetIcon(arturl)
 			else:
 				self.iface.ResetIcon()
+		else:
+			self.iface.ResetIcon()
 		return True
 		
 	def get_album_art_path(self):
