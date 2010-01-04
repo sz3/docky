@@ -1,4 +1,2 @@
-scriptdir = $(datadir)/docky/helpers/docky
-
-dist_script_SCRIPTS = __init__.py \
+pkgpython_PYTHON = __init__.py \
 		docky.py
