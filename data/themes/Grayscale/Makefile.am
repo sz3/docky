@@ -1,5 +1,6 @@
 grayscalethemedir = $(datadir)/docky/themes/Grayscale
 grayscaletheme_DATA = background.svg \
+		badge.svg \
 		menu.svg \
 		tooltip.svg
 
