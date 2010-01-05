@@ -120,6 +120,8 @@ namespace Docky.Interface
 			return DateTime.UtcNow;
 		}
 		
+		static DockyItem DockyItem { get; set; }
+		
 		/*******************************************
 		 * Note to reader:
 		 * All values labeled X or width reference x or width as thought of from a horizontally positioned dock.
@@ -268,7 +270,7 @@ namespace Docky.Interface
 				if (collection_backend.Count == 0) {
 					update_screen_regions = true;
 					if (Preferences.DefaultProvider.IsWindowManager)
-						collection_backend.Add (new DockyItem ());
+						collection_backend.Add (DockyItem);
 					
 					bool priorItems = false;
 					bool separatorNeeded = false;
@@ -661,6 +663,11 @@ namespace Docky.Interface
 		}
 
 		#endregion
+		
+		static DockWindow ()
+		{
+			DockyItem = new DockyItem ();
+		}
 	
 		public DockWindow () : base(Gtk.WindowType.Toplevel)
 		{
@@ -871,7 +878,7 @@ namespace Docky.Interface
 		
 		void RegisterItem (AbstractDockItem item)
 		{
-			item.SetStyle (Style);
+			//item.SetStyle (Style);
 			item.HoverTextChanged += ItemHoverTextChanged;
 			item.PaintNeeded += ItemPaintNeeded;
 			item.PainterRequest += ItemPainterRequest;
@@ -1117,26 +1124,24 @@ namespace Docky.Interface
 			} else if (HoveredItem != null) {
 				lastClickedItem = HoveredItem;
 			} else if (button == MenuButton.Right) {
-				using (AbstractDockItem dockyItem = new DockyItem ()) {
-					switch (Position) {
-					case DockPosition.Bottom:
-						Menu.Anchor = new Gdk.Point (LocalCursor.X + window_position.X, window_position.Y + Allocation.Height - DockHeight + 10);
-						break;
-					case DockPosition.Top:
-						Menu.Anchor = new Gdk.Point (LocalCursor.X + window_position.X, window_position.Y + DockHeight - 10);
-						break;
-					case DockPosition.Left:
-						Menu.Anchor = new Gdk.Point (window_position.X + DockHeight - 10, LocalCursor.Y + window_position.Y);
-						break;
-					case DockPosition.Right:
-						Menu.Anchor = new Gdk.Point (window_position.X + Allocation.Width - DockHeight + 10, LocalCursor.Y + window_position.Y);
-						break;
-					}
-					Menu.Orientation = Position;
-					Menu.Monitor = Monitor;
-					Menu.SetItems (dockyItem.GetMenuItems ());
-					Menu.Show ();
+				switch (Position) {
+				case DockPosition.Bottom:
+					Menu.Anchor = new Gdk.Point (LocalCursor.X + window_position.X, window_position.Y + Allocation.Height - DockHeight + 10);
+					break;
+				case DockPosition.Top:
+					Menu.Anchor = new Gdk.Point (LocalCursor.X + window_position.X, window_position.Y + DockHeight - 10);
+					break;
+				case DockPosition.Left:
+					Menu.Anchor = new Gdk.Point (window_position.X + DockHeight - 10, LocalCursor.Y + window_position.Y);
+					break;
+				case DockPosition.Right:
+					Menu.Anchor = new Gdk.Point (window_position.X + Allocation.Width - DockHeight + 10, LocalCursor.Y + window_position.Y);
+					break;
 				}
+				Menu.Orientation = Position;
+				Menu.Monitor = Monitor;
+				Menu.SetItems (DockyItem.GetMenuItems ());
+				Menu.Show ();
 			}
 			
 			return base.OnButtonPressEvent (evnt);

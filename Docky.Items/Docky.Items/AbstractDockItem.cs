@@ -789,8 +789,8 @@ namespace Docky.Items
 			try {
 				OnStyleSet (style);
 			} catch (Exception e) {
-				Log<AbstractDockPainter>.Error (e.Message);
-				Log<AbstractDockPainter>.Debug (e.StackTrace);
+				Log<AbstractDockItem>.Error (e.Message);
+				Log<AbstractDockItem>.Debug (e.StackTrace);
 			}
 			Gdk.Color gdkColor = Style.Backgrounds [(int) StateType.Selected];
 			badgeColors [0] = new Cairo.Color ((double) gdkColor.Red / ushort.MaxValue,

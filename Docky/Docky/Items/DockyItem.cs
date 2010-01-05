@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2009 Jason Smith, Robert Dyer, Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -26,16 +26,30 @@ using Gdk;
 using Mono.Unix;
 
 using Docky.Menus;
+using Docky.Services;
 
 namespace Docky.Items
 {
 	internal class DockyItem : ColoredIconDockItem, INonPersistedItem
 	{
+		int ThemeHue { get; set; }
+		
 		public DockyItem ()
 		{
 			Indicator = ActivityIndicator.Single;
 			HoverText = "Docky";
 			Icon = "docky";
+			
+			Docky.Controller.DockHueChanged += delegate {
+				SetHue ();
+			};
+		}
+		
+		void SetHue ()
+		{
+			HueShift = (Docky.Controller.DockyHueShift == 0) ? ThemeHue : Docky.Controller.DockyHueShift;
+			OnIconUpdated ();
+			QueueRedraw ();
 		}
 		
 		protected string AboutIcon {
@@ -63,7 +77,8 @@ namespace Docky.Items
 											(double) gdkColor.Green / ushort.MaxValue,
 											(double) gdkColor.Blue / ushort.MaxValue,
 											1.0).GetHue ();
-			HueShift = (((hue - 202) % 360) + 360) % 360;
+			ThemeHue = (((hue - 202) % 360) + 360) % 360;
+			SetHue ();
 		}
 		
 		public override string UniqueID ()

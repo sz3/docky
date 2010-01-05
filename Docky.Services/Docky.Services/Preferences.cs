@@ -40,7 +40,7 @@ namespace Docky.Services
 		readonly string GConfPrefix = "/apps/docky-2/" + typeof (TOwner).FullName.Replace (".", "/");
 		
 		public T Get<T> (string key, T def)
-		{			
+		{
 			object result;
 			try {
 				result = client.Get (AbsolutePathForKey (key, GConfPrefix));
@@ -83,6 +83,11 @@ namespace Docky.Services
 		public string SanitizeKey (string key)
 		{
 			return nameRegex.Replace (key, "_");
+		}
+		
+		public void AddNotify (string key, Action action)
+		{
+			client.AddNotify (AbsolutePathForKey (key, GConfPrefix), (o, args) => action.Invoke ());
 		}
 		
 		#endregion

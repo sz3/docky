@@ -49,6 +49,7 @@ namespace Docky
 		List<Dock> docks;
 		
 		public event EventHandler ThemeChanged;
+		public event EventHandler DockHueChanged;
 		
 		public IEnumerable<Dock> Docks { 
 			get { return docks.AsEnumerable (); }
@@ -96,6 +97,19 @@ namespace Docky
 			}
 		}
 		
+		public int DockyHueShift {
+			get {
+				return prefs.Get<int> ("ManualDockyHue", 0);
+			}
+			set {
+				if (DockyHueShift == value)
+					return;
+				// clamp to 0 .. 360
+				int hue = Math.Max (0, Math.Min (360, value));
+				prefs.Set ("ManualDockyHue", hue);
+			}
+		}
+		
 		public IEnumerable<string> DockThemes {
 			get {
 				yield return DefaultTheme;
@@ -116,7 +130,7 @@ namespace Docky
 				if (DockTheme == value)
 					return;
 				prefs.Set ("Theme", value);
-				Log.Info ("Setting theme: " + value);
+				Log<DockController>.Info ("Setting theme: " + value);
 				if (ThemeChanged != null)
 					ThemeChanged (this, EventArgs.Empty);
 			}
@@ -158,7 +172,9 @@ namespace Docky
 			docks = new List<Dock> ();
 			prefs = DockServices.Preferences.Get<DockController> ();
 			
-			Log.Info ("Setting theme: " + DockTheme);
+			prefs.AddNotify ("ManualDockyHue", OnDockyHueChanged);
+			
+			Log<DockController>.Info ("Setting theme: " + DockTheme);
 			
 			DetectMonitors ();
 			CreateDocks ();
@@ -170,6 +186,12 @@ namespace Docky
 				EnsurePluginState ();
 				return false;
 			});
+		}
+		
+		void OnDockyHueChanged ()
+		{
+			if (DockHueChanged != null)
+				DockHueChanged (this, EventArgs.Empty);
 		}
 		
 		void DetectMonitors ()
