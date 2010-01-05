@@ -46,6 +46,7 @@ FILES = \
 RESOURCES = \
 	gtk-gui/gui.stetic \
 	Resources/about.svg \
+	Resources/badge.svg \
 	Resources/classic.svg \
 	Resources/close.svg \
 	Resources/menu.svg \
