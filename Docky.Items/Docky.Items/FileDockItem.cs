@@ -99,8 +99,16 @@ namespace Docky.Items
 			if (!string.IsNullOrEmpty (OwnedFile.Path)) {
 				string customIconPath = OwnedFile.QueryStringAttr (CustomIconKey);
 				string thumbnailPath = OwnedFile.QueryStringAttr (ThumbnailPathKey);
-				if (!string.IsNullOrEmpty (customIconPath))
+				
+				// if the icon lives inside the folder (or one of its subdirs) then this
+				// is actually a relative path... not a file uri.
+				// we need to make this a file:// uri regardless.
+				if (!string.IsNullOrEmpty (customIconPath)) {
+					if (!customIconPath.StartsWith ("file://")) {
+						customIconPath = System.IO.Path.Combine (OwnedFile.StringUri (), customIconPath);
+					}
 					Icon = customIconPath;
+				}
 				else if (!string.IsNullOrEmpty (thumbnailPath))
 					Icon = thumbnailPath;
 				else
