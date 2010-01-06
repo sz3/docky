@@ -55,10 +55,11 @@ namespace Docky.Items
 		const string FilesystemIDKey = "id::filesystem";
 		const string FilesystemFreeKey = "filesystem::free";
 		const string CustomIconKey = "metadata::custom-icon";
+		const string EmblemsKey = "metadata::emblems";
 		string uri;
 		bool is_folder;
-		string forced_hover_text = null;
-		string backup_icon = null;
+		string forced_hover_text;
+		string backup_icon;
 		
 		public string Uri {
 			get { return uri; }
@@ -73,10 +74,9 @@ namespace Docky.Items
 			
 			// update this file on successful mount
 			OwnedFile.AddMountAction (() => {
-				SetIconFromGIcon (OwnedFile.Icon ());
+				UpdateInfo ();
 				OnPaintNeeded ();
 			});
-			
 			UpdateInfo ();
 		}
 		
@@ -99,6 +99,8 @@ namespace Docky.Items
 			if (!string.IsNullOrEmpty (OwnedFile.Path)) {
 				string customIconPath = OwnedFile.QueryStringAttr (CustomIconKey);
 				string thumbnailPath = OwnedFile.QueryStringAttr (ThumbnailPathKey);
+				// emblems are returned as [ e1, e2, e3 ], get those into a nice trimmed string array
+				string rawEmblems = OwnedFile.QueryStringAttr (EmblemsKey);
 				
 				// if the icon lives inside the folder (or one of its subdirs) then this
 				// is actually a relative path... not a file uri.
@@ -113,6 +115,22 @@ namespace Docky.Items
 					Icon = thumbnailPath;
 				else
 					SetIconFromGIcon (OwnedFile.Icon ());
+				
+				if (!string.IsNullOrEmpty (rawEmblems)) {
+					rawEmblems = rawEmblems.Replace ("[", "").Replace ("]", "");
+					
+					int [] emblemPositions = { 2, 1, 0, 3};
+					int i=0;
+					rawEmblems.Split (new [] {','})
+						.Select (e => e.Trim ())
+						.Reverse ()
+						.Take (4)
+						.ToList ()
+						.ForEach (e => {
+								AddEmblem (new IconEmblem (emblemPositions[i], string.Format ("emblem-{0}", e), 128));
+								i++;
+							});
+				}
 			} else if (!string.IsNullOrEmpty (backup_icon)) {
 				Icon = backup_icon;
 			} else {

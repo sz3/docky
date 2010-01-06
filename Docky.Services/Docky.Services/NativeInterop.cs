@@ -46,6 +46,10 @@ namespace Docky.Services
 		
 		[DllImport("gio-2.0")]
 		private static extern bool g_mount_eject_with_operation_finish (IntPtr mount, IntPtr result, out IntPtr error);
+		
+		// GTK# seems not to have lookup_by_gicon... I need it...
+		[DllImport("libgtk-x11-2.0", CallingConvention = CallingConvention.Cdecl)]
+		private static extern IntPtr gtk_icon_theme_lookup_by_gicon (IntPtr icon_theme, IntPtr icon, int size, int flags);
 
 		public static string StrUri (File file)
 		{
@@ -149,6 +153,25 @@ namespace Docky.Services
 				Log<NativeInterop>.Error ("Failed to unmount with operation finish name: {0}", e.Message);
 				Log<NativeInterop>.Info (e.StackTrace);
 				return false;
+			}
+		}
+		
+		public static Gtk.IconInfo IconThemeLookUpByGIcon (Gtk.IconTheme theme, GLib.Icon icon, int size, int flags)
+		{
+			try {
+				IntPtr raw_ret = gtk_icon_theme_lookup_by_gicon(theme.Handle, 
+				    icon == null ? IntPtr.Zero : ((icon is GLib.Object) ? (icon as GLib.Object).Handle : (icon as GLib.IconAdapter).Handle),
+				    size, (int) flags);
+				Gtk.IconInfo ret = raw_ret == IntPtr.Zero ? null : (Gtk.IconInfo) GLib.Opaque.GetOpaque (raw_ret, typeof (Gtk.IconInfo), true);
+				return ret;
+			} catch (DllNotFoundException e) {
+				Log<NativeInterop>.Fatal ("Could not find gtk-2.0, please report immediately.");
+				Log<NativeInterop>.Info (e.StackTrace);
+				return null;
+			} catch (Exception e) {
+				Log<NativeInterop>.Error ("Failed to lookup by GIcon: {0}", e.Message);
+				Log<NativeInterop>.Info (e.StackTrace);
+				return null;
 			}
 		}
 	}

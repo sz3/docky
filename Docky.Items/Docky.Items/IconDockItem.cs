@@ -74,6 +74,8 @@ namespace Docky.Items
 			}
 		}
 		
+		List<IconEmblem> Emblems;
+		
 		protected void SetIconFromGIcon (GLib.Icon gIcon)
 		{
 			Icon = DockServices.Drawing.IconFromGIcon (gIcon);
@@ -86,7 +88,29 @@ namespace Docky.Items
 		
 		public IconDockItem ()
 		{
+			Emblems = new List<IconEmblem> ();
 			Icon = "";
+		}
+		
+		public void AddEmblem (IconEmblem emblem)
+		{
+			// remove current emblems at this position
+			if (Emblems.Any (e => e.Position == emblem.Position))
+				Emblems.RemoveAll (e => e.Position == emblem.Position);
+			// add the new emblem
+			Emblems.Add (emblem);
+			QueueRedraw ();
+			emblem.Changed += delegate {
+				QueueRedraw ();
+			};
+		}
+		
+		public void RemoveEmblem (IconEmblem emblem)
+		{
+			if (Emblems.Contains (emblem)) {
+				Emblems.Remove (emblem);
+				QueueRedraw ();
+			}
 		}
 		
 		public void SetRemoteIcon (string icon)
@@ -114,6 +138,32 @@ namespace Docky.Items
 			                                 (surface.Height - pbuf.Height) / 2);
 			surface.Context.Paint ();
 			
+			// draw the emblems
+			foreach (IconEmblem emblem in Emblems) {
+				Pixbuf p = emblem.GetPixbuf (surface.Width, surface.Height);
+				int x, y;
+				switch (emblem.Position) {
+				case 1:
+					x = surface.Width - p.Width;
+					y = 0;
+					break;
+				case 2:
+					x = surface.Width - p.Width;
+					y = surface.Height - p.Height;
+					break;
+				case 3:
+					x = 0;
+					y = surface.Height - p.Height;
+					break;
+				default:
+					x = y = 0;
+					break;
+				}
+				Gdk.CairoHelper.SetSourcePixbuf (surface.Context, p, x, y);
+				surface.Context.Paint ();
+				p.Dispose ();
+			}
+
 			pbuf.Dispose ();
 			
 			try {

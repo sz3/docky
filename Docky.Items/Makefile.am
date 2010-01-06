@@ -30,7 +30,8 @@ FILES = \
 	Docky.Items/FileApplicationProvider.cs \
 	Docky.Items/IconDockItem.cs \
 	Docky.Items/ColoredIconDockItem.cs \
-	Docky.Items/WnckDockItem.cs
+	Docky.Items/WnckDockItem.cs \
+	Docky.Items/IconEmblem.cs
 
 RESOURCES = \
 	Resources/apply.svg \
