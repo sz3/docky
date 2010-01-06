@@ -878,7 +878,7 @@ namespace Docky.Interface
 		
 		void RegisterItem (AbstractDockItem item)
 		{
-			//item.SetStyle (Style);
+			item.SetStyle (Style);
 			item.HoverTextChanged += ItemHoverTextChanged;
 			item.PaintNeeded += ItemPaintNeeded;
 			item.PainterRequest += ItemPainterRequest;

@@ -84,12 +84,7 @@ namespace Docky.Services
 		{
 			return nameRegex.Replace (key, "_");
 		}
-		
-		public void AddNotify (string key, Action action)
-		{
-			client.AddNotify (AbsolutePathForKey (key, GConfPrefix), (o, args) => action.Invoke ());
-		}
-		
+
 		#endregion
 		
 		#region IPreferences - secure, based on Gnome Keyring
