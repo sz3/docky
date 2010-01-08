@@ -256,7 +256,7 @@ namespace Docky.Items
 							(o, a) => WindowControl.MinimizeWindows (ManagedWindows)));
 				}
 				
-				list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Quit"), CloseIcon, 
+				list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Close All"), CloseIcon, 
 						(o, a) => WindowControl.CloseWindows (ManagedWindows)));
 				
 				foreach (Wnck.Window window in ManagedWindows) {
