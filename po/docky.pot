@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-25 13:28+0100\n"
+"POT-Creation-Date: 2010-01-08 11:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,30 +110,30 @@ msgstr ""
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:360
+#: ../Docky/Docky/Interface/DockWindow.cs:363
 msgid "Drag to reposition"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:367
+#: ../Docky/Docky/Interface/DockWindow.cs:370
 msgid "Drop to open"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:371
-#: ../Docky/Docky/Interface/DockWindow.cs:385
+#: ../Docky/Docky/Interface/DockWindow.cs:374
+#: ../Docky/Docky/Interface/DockWindow.cs:388
 msgid "Drop to add to dock"
 msgstr ""
 
-#: ../Docky/Docky/Items/DockyItem.cs:91
+#: ../Docky/Docky/Items/DockyItem.cs:93
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:230
 msgid "_Settings"
 msgstr ""
 
-#: ../Docky/Docky/Items/DockyItem.cs:92
+#: ../Docky/Docky/Items/DockyItem.cs:94
 msgid "_About"
 msgstr ""
 
-#: ../Docky/Docky/Items/DockyItem.cs:93
+#: ../Docky/Docky/Items/DockyItem.cs:95
 msgid "_Quit Docky"
 msgstr ""
 
@@ -262,34 +262,34 @@ msgstr ""
 msgid "_Pin to Dock"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:160
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:186
 msgid "Not enough free space on destination."
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:172
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:174
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:198
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:200
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:220
 msgid "Complete"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:180
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:206
 msgid "Moving"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:186
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:212
 msgid "Copying"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:199
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:200
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:225
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:226
 msgid "Error performing drop action"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:222
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:248
 msgid "Open"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:223
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:249
 msgid "Open Containing Folder"
 msgstr ""
 
@@ -310,7 +310,7 @@ msgid "Mi_nimize"
 msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:259
-msgid "_Quit"
+msgid "_Close All"
 msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
