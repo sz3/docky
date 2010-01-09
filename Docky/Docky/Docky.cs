@@ -103,8 +103,12 @@ namespace Docky
 		
 		static void CheckComposite ()
 		{
-			if (!Gdk.Screen.Default.IsComposited)
-				Log.Notify (Catalog.GetString ("Docky requires compositing to work properly.  Please enable compositing and restart docky."));
+			GLib.Timeout.Add (2000, delegate {
+				if (!Gdk.Screen.Default.IsComposited)
+					Log.Notify (Catalog.GetString ("Docky requires compositing to work properly. " +
+						"Please enable compositing and restart docky."));
+				return false;
+			});
 		}
 		
 		public static void ShowAbout ()
