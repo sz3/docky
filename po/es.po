@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-12-25 13:28+0100\n"
-"PO-Revision-Date: 2009-12-25 17:10+0000\n"
+"POT-Creation-Date: 2010-01-08 11:02+0100\n"
+"PO-Revision-Date: 2010-01-08 12:21+0000\n"
 "Last-Translator: Sebastián Porta <sebastianporta@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-12-27 12:28+0000\n"
+"X-Launchpad-Export-Date: 2010-01-09 08:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:102
@@ -119,30 +119,30 @@ msgstr "<i>Se esconde cuando el dock obstruye la aplicación activa.</i>"
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Se esconde cuando el dock obstruye cualquier ventana.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:360
+#: ../Docky/Docky/Interface/DockWindow.cs:363
 msgid "Drag to reposition"
 msgstr "Arrastrar para reposicionar"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:367
+#: ../Docky/Docky/Interface/DockWindow.cs:370
 msgid "Drop to open"
 msgstr "Soltar para abrir"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:371
-#: ../Docky/Docky/Interface/DockWindow.cs:385
+#: ../Docky/Docky/Interface/DockWindow.cs:374
+#: ../Docky/Docky/Interface/DockWindow.cs:388
 msgid "Drop to add to dock"
 msgstr "Soltar para agregar al dock"
 
-#: ../Docky/Docky/Items/DockyItem.cs:91
+#: ../Docky/Docky/Items/DockyItem.cs:93
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:230
 msgid "_Settings"
 msgstr "_Ajustes"
 
-#: ../Docky/Docky/Items/DockyItem.cs:92
+#: ../Docky/Docky/Items/DockyItem.cs:94
 msgid "_About"
 msgstr "_Acerca de"
 
-#: ../Docky/Docky/Items/DockyItem.cs:93
+#: ../Docky/Docky/Items/DockyItem.cs:95
 msgid "_Quit Docky"
 msgstr "_Cerrar Docky"
 
@@ -271,34 +271,34 @@ msgstr "Restaurar Color"
 msgid "_Pin to Dock"
 msgstr "_Anclar al Dock"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:160
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:186
 msgid "Not enough free space on destination."
 msgstr "No hay suficiente espacio en el destino."
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:172
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:174
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:198
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:200
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:220
 msgid "Complete"
 msgstr "Completo"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:180
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:206
 msgid "Moving"
 msgstr "Moviendo"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:186
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:212
 msgid "Copying"
 msgstr "Copiando"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:199
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:200
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:225
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:226
 msgid "Error performing drop action"
 msgstr "Error el ejecutar la acción de soltar"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:222
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:248
 msgid "Open"
 msgstr "Abrir"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:223
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:249
 msgid "Open Containing Folder"
 msgstr "Abrir Carpeta Contenedora"
 
@@ -319,8 +319,8 @@ msgid "Mi_nimize"
 msgstr "Mi_nimizar"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:259
-msgid "_Quit"
-msgstr "_Salir"
+msgid "_Close All"
+msgstr "_Cerrar Todas"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
@@ -559,7 +559,7 @@ msgstr "Donar"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:126
 msgid "Live Streams"
-msgstr ""
+msgstr "Emisiones en directo"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:164
 msgid "Settings"
@@ -876,6 +876,9 @@ msgstr "Ocaso"
 
 #~ msgid "Reset _Color"
 #~ msgstr "Restaurar _Color"
+
+#~ msgid "_Quit"
+#~ msgstr "_Salir"
 
 #~ msgid "Inbox"
 #~ msgstr "Bandeja de Entrada"
