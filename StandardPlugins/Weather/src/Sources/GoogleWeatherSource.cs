@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Web;
 using System.Xml;
+using System.Globalization;
 
 using Mono.Unix;
 
@@ -175,9 +176,9 @@ namespace WeatherDocklet
 			XmlNodeList nodelist = xml.SelectNodes ("current_observation/display_location");
 			XmlNode item = nodelist.Item (0);
 			double dbl;
-			Double.TryParse (item.SelectSingleNode ("latitude").InnerText, out dbl);
+			Double.TryParse(item.SelectSingleNode ("latitude").InnerText, NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out dbl);
 			Latitude = dbl;
-			Double.TryParse (item.SelectSingleNode ("longitude").InnerText, out dbl);
+			Double.TryParse (item.SelectSingleNode ("longitude").InnerText, NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out dbl);
 			Longitude = dbl;
 			SunRise = WeatherController.Sunrise(Latitude, Longitude);
 			SunSet = WeatherController.Sunset(Latitude, Longitude);
@@ -191,9 +192,12 @@ namespace WeatherDocklet
 		
 		protected override void ShowRadar (string location)
 		{
-			DockServices.System.Open ("http://www.wunderground.com/wundermap/?lat=" + Latitude + "&lon=" + Longitude +
-										 "&zoom=7&type=map&units=" + (WeatherPreferences.Metric ? "metric" : "english") +
-										 "&rad=1&rad.num=1&rad.spd=25&rad.opa=75&rad.stm=0&rad.type=N0R&rad.smo=1&rad.mrg=0&wxsn=0&svr=1&svr.opa=70&cams=0&sat=0&riv=0&mm=0&hur=0&fire=0&tor=0&ndfd=0&pix=0");
+			string lat = Latitude.ToString(CultureInfo.GetCultureInfo("en-US"));
+			string lon = Longitude.ToString(CultureInfo.GetCultureInfo("en-US"));
+			
+			DockServices.System.Open ("http://www.wunderground.com/wundermap/?lat=" + lat + "&lon=" + lon +
+										 "&zoom=8&type=hyb&units=" + (WeatherPreferences.Metric ? "metric" : "english") +
+										 "&rad=0&wxsn=0&svr=0&cams=0&sat=1&sat.num=1&sat.spd=25&sat.opa=85&sat.gtt1=109&sat.gtt2=108&sat.type=IR4&riv=0&mm=0&hur=0");
 		}
 		
 		public override IEnumerable<string> SearchLocation (string origLocation)

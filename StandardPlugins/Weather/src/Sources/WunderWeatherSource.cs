@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Web;
 using System.Xml;
+using System.Globalization;
 
 using Mono.Unix;
 
@@ -58,7 +59,11 @@ namespace WeatherDocklet
 
 		protected override string FeedUrl {
 			get {
-				return "http://api.wunderground.com/auto/wui/geo/WXCurrentObXML/index.xml?query=" + WeatherController.EncodedCurrentLocation;
+				if (WeatherController.EncodedCurrentLocation.StartsWith("PWS.")) {
+					return "http://api.wunderground.com/weatherstation/WXCurrentObXML.asp?ID=" + WeatherController.EncodedCurrentLocation.Substring(4);
+				} else {
+					return "http://api.wunderground.com/auto/wui/geo/WXCurrentObXML/index.xml?query=" + WeatherController.EncodedCurrentLocation;
+				}
 			}
 		}
 		
@@ -67,13 +72,25 @@ namespace WeatherDocklet
 		/// </value>
 		protected string FeedForecastUrl {
 			get {
-				return "http://api.wunderground.com/auto/wui/geo/ForecastXML/index.xml?query=" + WeatherController.EncodedCurrentLocation;
+				if (WeatherController.EncodedCurrentLocation.StartsWith("PWS.")) {
+					string lat = Latitude.ToString(CultureInfo.GetCultureInfo("en-US"));
+					string lon = Longitude.ToString(CultureInfo.GetCultureInfo("en-US"));
+					return "http://api.wunderground.com/auto/wui/geo/ForecastXML/index.xml?query="  + lat +","+ lon;
+				} else {
+					return "http://api.wunderground.com/auto/wui/geo/ForecastXML/index.xml?query=" + WeatherController.EncodedCurrentLocation;
+				}
 			}
 		}
 		
 		protected override string ForecastUrl {
 			get {
-				return "http://www.wunderground.com/cgi-bin/findweather/getForecast?query="  + WeatherController.EncodedCurrentLocation + "&hourly=1&yday=";
+				if (WeatherController.EncodedCurrentLocation.StartsWith("PWS.")) {
+					string lat = Latitude.ToString(CultureInfo.GetCultureInfo("en-US"));
+					string lon = Longitude.ToString(CultureInfo.GetCultureInfo("en-US"));
+					return "http://www.wunderground.com/cgi-bin/findweather/getForecast?query="  + lat +","+ lon + "&hourly=1&yday=";
+				} else {
+					return "http://www.wunderground.com/cgi-bin/findweather/getForecast?query="  + WeatherController.EncodedCurrentLocation + "&hourly=1&yday=";
+				}
 			}
 		}
 		
@@ -146,13 +163,20 @@ namespace WeatherDocklet
 		
 		protected override void ParseXml (XmlDocument xml)
 		{
-			XmlNodeList nodelist = xml.SelectNodes ("current_observation/display_location");
+			XmlNodeList nodelist;
+			
+			if (WeatherController.EncodedCurrentLocation.StartsWith("PWS.")) {
+				nodelist = xml.SelectNodes ("current_observation/location");
+			} else {
+				nodelist = xml.SelectNodes ("current_observation/display_location");
+			}
+			
 			XmlNode item = nodelist.Item (0);
 			City = item.SelectSingleNode ("city").InnerText;
 			double dbl;
-			Double.TryParse (item.SelectSingleNode ("latitude").InnerText, out dbl);
+			Double.TryParse(item.SelectSingleNode ("latitude").InnerText, NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out dbl);
 			Latitude = dbl;
-			Double.TryParse (item.SelectSingleNode ("longitude").InnerText, out dbl);
+			Double.TryParse (item.SelectSingleNode ("longitude").InnerText, NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out dbl);
 			Longitude = dbl;
 			SunRise = WeatherController.Sunrise(Latitude, Longitude);
 			SunSet = WeatherController.Sunset(Latitude, Longitude);
@@ -161,13 +185,20 @@ namespace WeatherDocklet
 			item = nodelist.Item (0);
 			
 			int temp;
-			Int32.TryParse (item.SelectSingleNode ("temp_f").InnerText, out temp);
-			Temp = temp;
+			
+			if (WeatherController.EncodedCurrentLocation.StartsWith("PWS.")) {
+				double tmp;
+				Double.TryParse(item.SelectSingleNode ("temp_f").InnerText, NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out tmp);
+				Temp = (int)tmp;
+			} else {
+				Int32.TryParse (item.SelectSingleNode ("temp_f").InnerText, out temp);
+				Temp = temp;
+			}
 
-			if (!item.SelectSingleNode ("heat_index_f").InnerText.Equals ("NA")) {
+			if (!item.SelectSingleNode ("heat_index_f").InnerText.Equals ("NA") && item.SelectSingleNode ("heat_index_f").InnerText.Length > 0) {
 				Int32.TryParse (item.SelectSingleNode ("heat_index_f").InnerText, out temp);
 				FeelsLike = temp;
-			} else if (!item.SelectSingleNode ("windchill_f").InnerText.Equals ("NA")) {
+			} else if (!item.SelectSingleNode ("windchill_f").InnerText.Equals ("NA") && item.SelectSingleNode ("windchill_f").InnerText.Length > 0) {
 				Int32.TryParse (item.SelectSingleNode ("windchill_f").InnerText, out temp);
 				FeelsLike = temp;
 			} else
@@ -179,7 +210,16 @@ namespace WeatherDocklet
 			
 			Humidity = item.SelectSingleNode ("relative_humidity").InnerText;
 			
+			if (WeatherController.EncodedCurrentLocation.StartsWith("PWS.")) {
+				string lat = Latitude.ToString(CultureInfo.GetCultureInfo("en-US"));
+				string lon = Longitude.ToString(CultureInfo.GetCultureInfo("en-US"));
+				xml = FetchXml("http://api.wunderground.com/auto/wui/geo/WXCurrentObXML/index.xml?query="+lat+","+lon);
+				nodelist = xml.SelectNodes ("current_observation");
+				item = nodelist.Item (0);
+			}
+			
 			Condition = item.SelectSingleNode ("weather").InnerText;
+
 			Image = GetImage (item.SelectSingleNode ("icon").InnerText, true);
 		}
 		
@@ -217,9 +257,12 @@ namespace WeatherDocklet
 		
 		protected override void ShowRadar (string location)
 		{
-			DockServices.System.Open ("http://www.wunderground.com/wundermap/?lat=" + Latitude + "&lon=" + Longitude +
-										 "&zoom=7&type=map&units=" + (WeatherPreferences.Metric ? "metric" : "english") +
-										 "&rad=1&rad.num=1&rad.spd=25&rad.opa=75&rad.stm=0&rad.type=N0R&rad.smo=1&rad.mrg=0&wxsn=0&svr=1&svr.opa=70&cams=0&sat=0&riv=0&mm=0&hur=0&fire=0&tor=0&ndfd=0&pix=0");
+			string lat = Latitude.ToString(CultureInfo.GetCultureInfo("en-US"));
+			string lon = Longitude.ToString(CultureInfo.GetCultureInfo("en-US"));
+			
+			DockServices.System.Open ("http://www.wunderground.com/wundermap/?lat=" + lat + "&lon=" + lon +
+										 "&zoom=8&type=hyb&units=" + (WeatherPreferences.Metric ? "metric" : "english") +
+										 "&rad=0&wxsn=0&svr=0&cams=0&sat=1&sat.num=1&sat.spd=25&sat.opa=85&sat.gtt1=109&sat.gtt2=108&sat.type=IR4&riv=0&mm=0&hur=0");
 		}
 		
 		public override IEnumerable<string> SearchLocation (string origLocation)
@@ -266,6 +309,27 @@ namespace WeatherDocklet
 				{
 					yield return loc;
 					yield return origLocation;
+				}
+				
+				nodelist = xml.SelectNodes ("location/nearby_weather_stations/pws/station");
+				for (int i = 0; i < nodelist.Count; i++)
+				{
+					string name = nodelist.Item (i).SelectSingleNode ("neighborhood").InnerText;
+					city = nodelist.Item (i).SelectSingleNode ("city").InnerText;
+					state = nodelist.Item (i).SelectSingleNode ("state").InnerText;
+					country = nodelist.Item (i).SelectSingleNode ("country").InnerText;
+					string id = nodelist.Item (i).SelectSingleNode ("id").InnerText;
+					
+					loc = city;
+					if (state.Length > 0)
+						loc += ", " + state;
+					if (country.Length > 0)
+						loc += ", " + country;
+					if (name.Length > 0)
+						loc += " ("+name+")";
+					
+					yield return loc;
+					yield return "PWS."+id;
 				}
 			}
 			

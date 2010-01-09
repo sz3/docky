@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Web;
 using System.Xml;
+using System.Globalization;
 
 using Mono.Unix;
 
@@ -148,9 +149,9 @@ namespace WeatherDocklet
 			XmlNodeList nodelist = xml.SelectNodes ("weather/loc");
 			XmlNode item = nodelist.Item (0);
 			double dbl;
-			Double.TryParse (item.SelectSingleNode ("lat").InnerText, out dbl);
+			Double.TryParse(item.SelectSingleNode ("lat").InnerText, NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out dbl);
 			Latitude = dbl;
-			Double.TryParse (item.SelectSingleNode ("lon").InnerText, out dbl);
+			Double.TryParse (item.SelectSingleNode ("lon").InnerText, NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out dbl);
 			Longitude = dbl;
 			SunRise = DateTime.Parse (item.SelectSingleNode ("sunr").InnerText);
 			SunSet = DateTime.Parse (item.SelectSingleNode ("suns").InnerText);
