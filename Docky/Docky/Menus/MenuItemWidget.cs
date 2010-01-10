@@ -103,7 +103,7 @@ namespace Docky.Menus
 			layout.FontDescription = Style.FontDescription;
 			layout.Ellipsize = Pango.EllipsizeMode.End;
 			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (FontSize);
-			layout.FontDescription.Weight = Pango.Weight.Normal;
+			layout.FontDescription.Weight = Pango.Weight.Bold;
 			
 			Pango.Rectangle logical, ink;
 			layout.GetPixelExtents (out ink, out logical);
@@ -275,7 +275,7 @@ namespace Docky.Menus
 				layout.FontDescription = Style.FontDescription;
 				layout.Ellipsize = Pango.EllipsizeMode.End;
 				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (FontSize);
-				layout.FontDescription.Weight = Pango.Weight.Normal;
+				layout.FontDescription.Weight = Pango.Weight.Bold;
 				
 				Pango.Rectangle logical, ink;
 				layout.GetPixelExtents (out ink, out logical);
