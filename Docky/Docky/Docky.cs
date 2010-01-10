@@ -139,6 +139,14 @@ namespace Docky
 				"Basque\n" +
 				" Ibai Oihanguren (https://launchpad.net/~ibai-oihanguren)\n" +
 				
+				"Brazilian Portuguese\n" +
+				" André Gondim (https://launchpad.net/~andregondim)\n" +
+				" Fabio S Monteiro (https://launchpad.net/~fabiomonteiro)\n" +
+				" Glauco Vinicius (https://launchpad.net/~glaucovinicius)\n" +
+				" Lindeval (https://launchpad.net/~lindeval)\n" +
+				" Thiago Bellini (https://launchpad.net/~roxthiaguin)\n" +
+				" Victor Mello (https://launchpad.net/~victormmello)\n" +
+
 				"Bengali\n" +
 				" Scio (https://launchpad.net/~scio)\n" +
 
