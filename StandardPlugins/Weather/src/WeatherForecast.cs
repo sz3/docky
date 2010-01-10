@@ -16,6 +16,7 @@
 // 
 
 using System;
+using System.Globalization;
 using Mono.Unix;
 
 namespace WeatherDocklet
@@ -67,7 +68,7 @@ namespace WeatherDocklet
 		public static string DayName (string dow)
 		{
 			DayOfWeek day = DayOfWeek.Sunday;
-			
+
 			if (dow.Equals ("Mon"))
 				day = DayOfWeek.Monday;
 			else if (dow.Equals ("Tue"))
@@ -91,5 +92,37 @@ namespace WeatherDocklet
 
 			return DateTime.Now.AddDays (day - DateTime.Now.DayOfWeek).ToString ("dddd");
 		}
+
+		/// <summary>
+		/// Takes a short name for a day and returns the short name.
+		/// </summary>
+		/// <param name="dow">
+		/// A <see cref="System.string"/> indicating the short name for the day.
+		/// </param>
+		/// <returns>
+		/// A <see cref="System.string"/> of the day's short name.
+		/// </returns>
+		public static string DayShortName (string dow)
+		{
+			DayOfWeek day = DayOfWeek.Sunday;
+
+			if (dow.Equals ("Mon"))
+				day = DayOfWeek.Monday;
+			else if (dow.Equals ("Tue"))
+				day = DayOfWeek.Tuesday;
+			else if (dow.Equals ("Wed"))
+				day = DayOfWeek.Wednesday;
+			else if (dow.Equals ("Thu"))
+				day = DayOfWeek.Thursday;
+			else if (dow.Equals ("Fri"))
+				day = DayOfWeek.Friday;
+			else if (dow.Equals ("Sat"))
+				day = DayOfWeek.Saturday;
+			else if (dow.Equals ("Sun"))
+				day = DayOfWeek.Sunday;
+
+			return DateTime.Now.AddDays (day - DateTime.Now.DayOfWeek).ToString ("ddd");
+		}
+
 	}
 }

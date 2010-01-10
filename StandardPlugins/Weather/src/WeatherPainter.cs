@@ -113,7 +113,7 @@ namespace WeatherDocklet
 				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 5));
 				
 				cr.Color = colorTitle;
-				layout.SetText (string.Format ("{0}", WeatherController.Weather.Forecasts [day].dow));
+				layout.SetText (string.Format ("{0}", WeatherForecast.DayShortName (WeatherController.Weather.Forecasts [day].dow)));
 				layout.GetPixelExtents (out inkRect, out logicalRect);
 				cr.MoveTo (xOffset + (Allocation.Height - inkRect.Width) / 2, 0);
 				Pango.CairoHelper.LayoutPath (cr, layout);
@@ -216,7 +216,7 @@ namespace WeatherDocklet
 			cr.Color = colorTitle;
 			for (int day = 0; day < WeatherController.Weather.ForecastDays; day++)
 			{
-				layout.SetText (WeatherController.Weather.Forecasts [day].dow);
+				layout.SetText (WeatherForecast.DayShortName (WeatherController.Weather.Forecasts [day].dow));
 				layout.GetPixelExtents (out inkRect, out logicalRect);
 				cr.MoveTo (BUTTON_SIZE + day * Allocation.Height * 2 + (Allocation.Height - inkRect.Width) / 2, Allocation.Height * 8 / 9 - logicalRect.Height / 2);
 				Pango.CairoHelper.LayoutPath (cr, layout);
@@ -333,21 +333,26 @@ namespace WeatherDocklet
 			layout.Ellipsize = Pango.EllipsizeMode.None;
 			layout.Width = Pango.Units.FromPixels (xWidth);
 			
-			if (WeatherController.Weather.ForecastDays < 6)
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 6.5));
-			else
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 4.5));
-			
 			int xOffset = 2 * BUTTON_SIZE + (column - 1) * 2 * xWidth;
 			int yOffset = row == 1 ? Allocation.Height : (int) (Allocation.Height * 2.5);
 			yOffset = (int) (yOffset / 3.5);
 			
+			if (WeatherController.Weather.ForecastDays < 6)
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 8.0));
+			else
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 6.0));
+
 			cr.Color = new Cairo.Color (1, 1, 1, 0.9);
 			layout.SetText (label);
 			layout.GetPixelExtents (out inkRect, out logicalRect);
 			cr.MoveTo (xOffset + (xWidth - inkRect.Width) / 2, yOffset - logicalRect.Height / 2);
 			Pango.CairoHelper.LayoutPath (cr, layout);
 			cr.Fill ();
+
+			if (WeatherController.Weather.ForecastDays < 6)
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 6.5));
+			else
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 4.5));
 			
 			cr.Color = new Cairo.Color (1, 1, 1, 0.7);
 			layout.SetText (val);
