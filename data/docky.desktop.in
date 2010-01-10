@@ -1,7 +1,7 @@
 [Desktop Entry]
 _Name=Docky
 Type=Application
-Exec=docky --debug
+Exec=docky
 Terminal=false
 Icon=docky
 _Comment=The finest dock no money can buy.
