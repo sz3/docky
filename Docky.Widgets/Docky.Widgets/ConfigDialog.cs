@@ -24,7 +24,7 @@ using Gtk;
 namespace Docky.Widgets
 {
 	public class ConfigDialog : Dialog
-	{		
+	{
 		public ConfigDialog (string windowTitle, IEnumerable<Widget> widgets) : this (windowTitle, widgets, 350, 400)
 		{
 		}
@@ -40,6 +40,16 @@ namespace Docky.Widgets
 			IconName = Stock.Preferences;
 			Title = windowTitle;
 			
+			if (widgets.Any ())
+				AddWidgets (widgets);
+			
+			this.AddAutoTranslateButton ("gtk-close", ResponseType.Close);
+			
+			SetDefaultSize (width, height);
+		}
+		
+		public void AddWidgets (IEnumerable<Widget> widgets)
+		{
 			if (widgets.Count () > 1) {				
 				Notebook notebook = new Notebook ();
 				
@@ -56,10 +66,6 @@ namespace Docky.Widgets
 			}
 			
 			VBox.ShowAll ();
-			
-			this.AddAutoTranslateButton ("gtk-close", ResponseType.Close);
-			
-			SetDefaultSize (width, height);
 		}
 		
 		protected override void OnClose ()

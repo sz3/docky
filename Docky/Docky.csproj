@@ -79,6 +79,7 @@
     <Compile Include="Docky\Interface\HoverTextManager.cs" />
     <Compile Include="Docky\HelperTile.cs" />
     <Compile Include="gtk-gui\Docky.ConfigurationWindow.cs" />
+    <Compile Include="Docky\DockletTile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Addins, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">

@@ -5,6 +5,8 @@
 	isroot="false"
 	defaultEnabled="false"
 	name="Mounter"
+	description="Access to mounted volumes"
+	author="Chris Szikszoy"
 >
  
  	<Dependencies>

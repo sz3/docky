@@ -74,7 +74,9 @@ namespace Docky.Interface
 		
 		string GetName ();
 		
-		void DisableDocklet (AbstractDockItemProvider provider);
+		void RemoveProvider (AbstractDockItemProvider provider);
+		
+		void AddProvider (AbstractDockItemProvider Provider);
 		
 		void SyncPreferences ();
 		

@@ -34,7 +34,6 @@ using Docky.Services;
 namespace Docky
 {
 
-
 	public static class Docky
 	{
 

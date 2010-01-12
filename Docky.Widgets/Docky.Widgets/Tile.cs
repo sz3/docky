@@ -69,10 +69,29 @@ namespace Docky.Widgets
 				SetText ();
 			};
 			
+			OwnedObject.ButtonsUpdated += delegate {
+				UpdateButtons ();
+			};
+			
 			IconSize = iconSize;
 			
 			BuildTile ();
 		}
+
+		void UpdateButtons ()
+		{
+			foreach (Widget w in button_box.Children)
+				button_box.Remove (w);
+			
+			foreach (Button b in OwnedObject.ExtraButtons) {
+				button_box.PackStart (b, false, false, 0);
+				b.Show ();
+			}
+			
+			if (OwnedObject.ShowActionButton && add_remove_button != null)
+				button_box.PackStart (add_remove_button, false, false, 0);
+		}
+
 		
 		private void SetImage ()
 		{
@@ -149,11 +168,8 @@ namespace Docky.Widgets
 			
 			SetText ();
 
-			button_box = new VBox ();
-			HBox box = new HBox ();
-			box.Spacing = 3;
-			
-			button_box.PackEnd (box, false, false, 0);
+			button_box = new HBox ();
+			button_box.Spacing = 3;
 			
 			Pango.FontDescription font = PangoContext.FontDescription.Copy ();
 			font.Size = (int)(font.Size * Pango.Scale.Small);
@@ -164,14 +180,8 @@ namespace Docky.Widgets
 			add_remove_button.UseUnderline = true;
 			add_remove_button.Add (label);
 			add_remove_button.Clicked += OnAddRemoveClicked;
-			
-			foreach (Button b in OwnedObject.ExtraButtons) {
-				box.PackStart (b, false, false, 0);
-				b.Show ();
-			}
-			
-			if (OwnedObject.ShowActionButton)
-				box.PackStart (add_remove_button, false, false, 0);
+
+			UpdateButtons ();
 			
 			Attach (button_box, 2, 3, 2, 3, 
 			        AttachOptions.Shrink, 

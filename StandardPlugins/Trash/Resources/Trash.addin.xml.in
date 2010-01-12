@@ -5,6 +5,8 @@
 	isroot="false"
 	defaultEnabled="false"
 	name="Trash"
+	description="TRASH TRASH TRASH TRASH!!!"
+	author="Chris Szikszoy"
 >
  
  	<Dependencies>

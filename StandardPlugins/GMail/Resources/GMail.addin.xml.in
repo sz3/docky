@@ -5,10 +5,13 @@
 	isroot="false"
 	defaultEnabled="false"
 	name="GMail"
+	description="Check GMail"
+	author="Robert Dyer"
 >
  
  	<Dependencies>
 		<Addin id="Items" version="1.0" />
+		<Addin id="Widgets" version="1.0" />
 	</Dependencies>
  
 	<Runtime>
@@ -18,5 +21,9 @@
 	<Extension path="/Docky/ItemProvider">
 		<ItemProvider type="GMail.GMailItemProvider" />
 	</Extension>	
+
+	<Extension path="/Docky/Configuration">
+		<Configuration type="GMail.GMailConfigDialog" />
+	</Extension>
 
 </Addin>

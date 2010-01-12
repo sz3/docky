@@ -69,6 +69,7 @@
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="Docky.Widgets\AbstractLoginWidget.cs" />
     <Compile Include="gtk-gui\Docky.Widgets.AbstractLoginWidget.cs" />
+    <Compile Include="Docky.Widgets\IConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Docky.Widgets\" />

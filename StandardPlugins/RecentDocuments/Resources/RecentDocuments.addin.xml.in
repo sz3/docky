@@ -5,6 +5,8 @@
 	isroot="false"
 	defaultEnabled="false"
 	name="Recent Documents"
+	description="Access to your recent documents"
+	author="Chris Szikszoy"
 >
  
  	<Dependencies>

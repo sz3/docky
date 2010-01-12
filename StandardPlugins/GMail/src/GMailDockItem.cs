@@ -28,7 +28,6 @@ using Docky.CairoHelper;
 using Docky.Items;
 using Docky.Menus;
 using Docky.Services;
-
 using Docky.Widgets;
 
 namespace GMail
@@ -51,6 +50,7 @@ namespace GMail
 		public static string DefaultLabel { get { return "Inbox"; } }
 		
 		GMailItemProvider parent;
+		ConfigDialog config;
 				
 		public GMailDockItem (string label, GMailItemProvider parent)
 		{
@@ -209,7 +209,9 @@ namespace GMail
 			items.Add (new MenuItem (Catalog.GetString ("_Settings"),
 					Gtk.Stock.Preferences,
 					delegate {
-						GMailAtom.ShowConfig ();
+						if (config == null)
+							config = new GMailConfigDialog ();
+						config.Show ();
 					}));
 			
 			items.Add (new MenuItem (Catalog.GetString ("Check _Mail"),

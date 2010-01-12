@@ -5,6 +5,8 @@
 	isroot="false"
 	defaultEnabled="false"
 	name="Network Manager"
+	description="Manage your networks!"
+	author="Chris Szikszoy"
 >
  
  	<Dependencies>

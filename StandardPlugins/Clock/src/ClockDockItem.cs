@@ -30,10 +30,11 @@ using Docky.CairoHelper;
 using Docky.Items;
 using Docky.Menus;
 using Docky.Services;
+using Docky.Widgets;
 
 namespace Clock
 {
-	public class ClockDockItem : AbstractDockItem
+	public class ClockDockItem : AbstractDockItem, IConfig
 	{
 		int minute;
 		CalendarPainter painter;
@@ -435,11 +436,16 @@ namespace Clock
 			
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Select _Theme"), "preferences-desktop-theme", (o, a) => 
 			{ 
-				if (ClockThemeSelector.instance == null)
-					ClockThemeSelector.instance = new ClockThemeSelector (this);
-				ClockThemeSelector.instance.Show (); 
+				ShowSettings ();
 			}, ShowDigital));
 			return list;
+		}
+		
+		public void ShowSettings ()
+		{
+			if (ClockThemeSelector.instance == null)
+					ClockThemeSelector.instance = new ClockThemeSelector (this);
+				ClockThemeSelector.instance.Show (); 
 		}
 		
 		public override void Dispose ()

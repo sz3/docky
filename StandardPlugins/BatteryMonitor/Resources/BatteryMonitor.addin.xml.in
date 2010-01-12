@@ -5,6 +5,8 @@
 	isroot="false"
 	defaultEnabled="false"
 	name="Battery Monitor"
+	description="Monitor your battery."
+	author="Jason Smith"
 >
  
  	<Dependencies>

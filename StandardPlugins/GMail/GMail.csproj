@@ -57,6 +57,7 @@
     <Compile Include="src\GMailLabelConfig.cs" />
     <Compile Include="src\GMailLabel.cs" />
     <Compile Include="gtk-gui\GMail.GMailLabelConfig.cs" />
+    <Compile Include="src\GMailConfigDialog.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

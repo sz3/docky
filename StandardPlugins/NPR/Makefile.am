@@ -11,6 +11,7 @@ FILES = \
 	src/StationUrl.cs \
 	src/StationSearchWidget.cs \
 	src/StationDockItem.cs \
+	src/NPRConfigDialog.cs \
 	gtk-gui/NPR.StationSearchWidget.cs \
 	gtk-gui/generated.cs
 

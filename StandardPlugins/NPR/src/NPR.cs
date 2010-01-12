@@ -27,7 +27,6 @@ using System.Collections.Specialized;
 using System.Collections.Generic;
 
 using Docky.Services;
-using Docky.Widgets;
 
 namespace NPR
 {
@@ -38,12 +37,9 @@ namespace NPR
 		const string stationsUrl = "http://api.npr.org/stations";
 		
 		static IPreferences prefs;
-		static StationSearchWidget stationSearchWidget;
 		static List<Station> Stations;
-		static ConfigDialog config;
 		
 		public static EventHandler<StationsUpdatedEventArgs> StationsUpdated;
-		public static ConfigDialog Config;
 		
 		public static int[] MyStations {
 			get {
@@ -129,18 +125,6 @@ namespace NPR
 			Station station = new Station (id);
 			Stations.Add (station);
 			return station;
-		}
-		
-		public static void ShowConfig ()
-		{
-			if (config == null) {
-				stationSearchWidget = new StationSearchWidget ();
-				config = new ConfigDialog ("NPR", new [] {stationSearchWidget});
-				config.Shown += delegate {
-					stationSearchWidget.ShowMyStations ();
-				};
-			}
-			config.Show ();
 		}
 	}
 }

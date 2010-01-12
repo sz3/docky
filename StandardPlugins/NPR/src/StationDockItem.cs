@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using Docky.Menus;
 using Docky.Items;
 using Docky.Services;
+using Docky.Widgets;
 
 using Mono.Unix;
 
@@ -33,6 +34,7 @@ namespace NPR
 	{
 		
 		public Station OwnedStation;
+		static ConfigDialog config;
 		
 		private bool IsReady {
 			get {
@@ -81,7 +83,7 @@ namespace NPR
 				if (IsReady)
 					DockServices.System.Open (OwnedStation.StationUrls.First (u => u.UrlType == StationUrlType.OrgHomePage).Target);
 				else
-					NPR.ShowConfig ();
+					ShowConfig ();
 				return ClickAnimation.Bounce;
 			}
 			
@@ -163,11 +165,16 @@ namespace NPR
 						
 			list[MenuListContainer.Footer].Add (new MenuItem (Catalog.GetString ("Settings"),
 					Gtk.Stock.Preferences,
-					delegate {
-						NPR.ShowConfig ();
-					}));
+					delegate { ShowConfig (); }));
 			return list;
 		}
 		#endregion
+		
+		void ShowConfig ()
+		{
+			if (config == null)
+				config = new NPRConfigDialog ();
+			config.Show ();	
+		}
 	}
 }

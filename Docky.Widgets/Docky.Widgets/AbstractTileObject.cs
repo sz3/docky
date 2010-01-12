@@ -33,7 +33,11 @@ namespace Docky.Widgets
 		/// Triggered when any text field for this tile is updated
 		/// </summary>
 		public event EventHandler TextUpdated;
-		
+		/// <summary>
+		/// Triggered when a button is updated (Show changed, added, or removed)
+		/// </summary>
+		public event EventHandler ButtonsUpdated;
+
 		void OnIconUpdated ()
 		{
 			if (IconUpdated != null)
@@ -44,6 +48,12 @@ namespace Docky.Widgets
 		{
 			if (TextUpdated != null)
 				TextUpdated (this, EventArgs.Empty);
+		}
+		
+		void OnButtonsUpdated ()
+		{
+			if (ButtonsUpdated != null)
+				ButtonsUpdated (this, EventArgs.Empty);
 		}
 		
 		public AbstractTileObject ()
@@ -231,6 +241,7 @@ namespace Docky.Widgets
 				if (show_button.HasValue && show_button.Value == value)
 					return;
 				show_button = value;
+				OnButtonsUpdated ();
 			}
 		}
 		
@@ -260,7 +271,23 @@ namespace Docky.Widgets
 		/// A <see cref="Gtk.Button"/>
 		/// </param>
 		public void AddUserButton (Gtk.Button button) {
-			ExtraButtons.Add (button);
+			if (!ExtraButtons.Contains (button)) {
+				ExtraButtons.Add (button);
+				OnButtonsUpdated ();
+			}
+		}
+		
+		/// <summary>
+		/// Removes extra buttons from the tile
+		/// </summary>
+		/// <param name="button">
+		/// A <see cref="Gtk.Button"/>
+		/// </param>
+		public void RemoveUserButton (Gtk.Button button) {
+			if (ExtraButtons.Contains (button)) {
+				ExtraButtons.Remove (button);
+				OnButtonsUpdated ();
+			}
 		}
 	}
 }

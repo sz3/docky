@@ -58,6 +58,7 @@
     <Compile Include="src\StationDockItem.cs" />
     <Compile Include="src\StationSearchWidget.cs" />
     <Compile Include="gtk-gui\NPR.StationSearchWidget.cs" />
+    <Compile Include="src\NPRConfigDialog.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

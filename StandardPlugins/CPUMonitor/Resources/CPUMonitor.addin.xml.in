@@ -5,6 +5,8 @@
 	isroot="false"
 	defaultEnabled="false"
 	name="CPU Monitor"
+	description="Keep an eye on that CPU. And when it gets out of line..."
+	author="Jason Smith"
 >
  
  	<Dependencies>

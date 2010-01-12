@@ -194,7 +194,7 @@ namespace Docky.Menus
 				}
 			}
 			vbox.SetSizeRequest (width, -1);
-			
+						
 			Container.ShowAll ();
 		}
 		

@@ -228,7 +228,11 @@ namespace WeatherDocklet
 				}
 			
 			list[MenuListContainer.CustomOne].Add (new MenuItem (Catalog.GetString ("_Settings"), Gtk.Stock.Preferences, 
-					delegate { ShowConfig (); }));
+					delegate {
+						if (Config == null)
+							Config = new WeatherConfigDialog ();
+						Config.Show ();
+					}));
 			
 			list[MenuListContainer.CustomOne].Add (new MenuItem (Catalog.GetString ("Check _Weather"), Gtk.Stock.Refresh,
 					delegate {
@@ -239,18 +243,6 @@ namespace WeatherDocklet
 					}));
 			
 			return list;
-		}
-		
-		void ShowConfig ()
-		{
-			if (Config == null) {
-				WeatherConfig locations = new WeatherConfig ();
-				Config = new ConfigDialog (Catalog.GetString ("Weather Configuration"), new Gtk.Widget [] { locations }, 400, 500);
-				Config.Shown += delegate {
-					locations.ShowMyLocations ();
-				};
-			}
-			Config.Show ();
 		}
 		
 		public override void Dispose ()

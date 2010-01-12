@@ -13,6 +13,7 @@ FILES = \
 	src/GMailLoginConfig.cs \
 	src/GMailLabel.cs \
 	src/GMailLabelConfig.cs \
+	src/GMailConfigDialog.cs \
 	gtk-gui/GMail.GMailLabelConfig.cs \
 	gtk-gui/generated.cs
 

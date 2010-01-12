@@ -26,8 +26,12 @@ FILES = \
 	Docky.Widgets/WrapLabel.cs \
 	Docky.Widgets/ListOnlyTileView.cs \
 	Docky.Widgets/AbstractLoginWidget.cs \
+	Docky.Widgets/IConfig.cs \
 	gtk-gui/Docky.Widgets.AbstractLoginWidget.cs \
 	gtk-gui/generated.cs
+
+RESOURCES = \
+	Resources/Docky.Widgets.addin.xml
 
 PROJECT_REFERENCES= \
 	Docky.Services

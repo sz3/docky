@@ -488,15 +488,23 @@ namespace Docky.Interface
 			return name;
 		}
 		
-		public void DisableDocklet (AbstractDockItemProvider provider)
+		public void RemoveProvider (AbstractDockItemProvider provider)
 		{
-			PluginManager.Disable (provider);
 			item_providers.Remove (provider);
 			
 			OnItemProvidersChanged (null, provider.AsSingle ());
 			SyncPlugins ();
 			
 			PopulateTreeViews ();
+		}
+		
+		public void AddProvider (AbstractDockItemProvider provider)
+		{
+			item_providers.Add (provider);
+			provider.AddedToDock ();
+			
+			OnItemProvidersChanged (provider.AsSingle (), null);
+			SyncPlugins ();
 		}
 		
 		public void SyncPreferences ()

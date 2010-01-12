@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2010 Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -32,33 +33,42 @@ using Mono.Unix;
 using Docky.Interface;
 using Docky.Services;
 using Docky.Widgets;
+using Docky.Items;
 
 namespace Docky
 {
 	enum Pages : uint {
 		Docks = 0,
+		Docklets,
 		Helpers,
 		NPages
 	}
 	
-	enum ShowStates : uint {
+	enum HelperShowStates : uint {
 		All = 0,
 		Enabled,
 		Disabled,
 		NStates
 	}
 	
+	enum DockletShowStates : uint {
+		All = 0,
+		Active,
+		Disabled,
+		NStates
+	}
+	
 	public partial class ConfigurationWindow : Gtk.Window
 	{
-		Dock activeDock;
 		string AutoStartKey = "Hidden";
 		DesktopItem autostartfile;
-		TileView HelpersTileview;
-		Widgets.SearchEntry ExtenSearch;
+		TileView HelpersTileview, DockletsTileview;
+		Widgets.SearchEntry HelperSearch, DockletSearch;
 		
-		Dock ActiveDock {
+		static Dock activeDock;
+		public static Dock ActiveDock {
 			get { return activeDock; }
-			set {
+			private set {
 				if (activeDock == value)
 					return;
 				
@@ -96,24 +106,45 @@ namespace Docky
 			
 			CheckButtons ();
 			
-			notebook1.CurrentPage = 0;
+			config_notebook.CurrentPage = (int) Pages.Docks;
 
-			ExtenSearch = new SearchEntry ();
-			ExtenSearch.EmptyMessage = Catalog.GetString ("Search Helpers...");
-			ExtenSearch.InnerEntry.Changed += delegate {
-				RefreshExtensions ();
+			// setup docklets {
+			DockletSearch = new SearchEntry ();
+			DockletSearch.EmptyMessage = Catalog.GetString ("Search Docklets...");
+			DockletSearch.InnerEntry.Changed += delegate {
+				RefreshDocklets ();
 			};
-			ExtenSearch.Ready = true;
-			ExtenSearch.Show ();
-			hbox5.PackStart (ExtenSearch, true, true, 2);
+			DockletSearch.Ready = true;
+			DockletSearch.Show ();
+			hbox1.PackStart (DockletSearch, true, true, 2);
+			
+			DockletsTileview = new TileView ();
+			DockletsTileview.IconSize = 48;
+			docklet_scroll.AddWithViewport (DockletsTileview);
+			
+			PluginManager.AddinStateChanged += delegate(object sender, AddinStateChangedEventArgs e) {
+				Console.WriteLine ("{0} state: {1}", e.Addin.Name, e.State);
+			};
+			// }
+			
+			// setup helpers {
+			HelperSearch = new SearchEntry ();
+			HelperSearch.EmptyMessage = Catalog.GetString ("Search Helpers...");
+			HelperSearch.InnerEntry.Changed += delegate {
+				RefreshHelpers ();
+			};
+			HelperSearch.Ready = true;
+			HelperSearch.Show ();
+			hbox5.PackStart (HelperSearch, true, true, 2);
 			
 			HelpersTileview = new TileView ();
 			HelpersTileview.IconSize = 48;
-			scrolledwindow1.AddWithViewport (HelpersTileview);
+			helper_scroll.AddWithViewport (HelpersTileview);
 			
 			DockServices.Helpers.HelperUninstalled += delegate {
-				RefreshExtensions ();
+				RefreshHelpers ();
 			};
+			// }
 					
 			ShowAll ();
 		}
@@ -190,6 +221,8 @@ namespace Docky
 				ActiveDock = dock;
 				SetupConfigAlignment ();
 				CheckButtons ();
+				if (config_notebook.Page == (int)Pages.Docklets)
+					RefreshDocklets ();
 			}
 		}
 
@@ -353,7 +386,9 @@ namespace Docky
 		protected virtual void OnPageSwitch (object o, Gtk.SwitchPageArgs args)
 		{
 			if (args.PageNum == (uint) Pages.Helpers)
-				RefreshExtensions ();
+				RefreshHelpers ();
+			else if (args.PageNum ==  (uint) Pages.Docklets)
+				RefreshDocklets ();
 		}
 
 		protected virtual void OnInstallClicked (object sender, System.EventArgs e)
@@ -376,31 +411,69 @@ namespace Docky
 			Helper installedHelper;
 			if (DockServices.Helpers.InstallHelper (file.Path, out installedHelper)) {
 				installedHelper.Data.DataReady += delegate {
-					RefreshExtensions ();
+					RefreshHelpers ();
 				};
 			}
 		}
 
-		protected virtual void OnShowExtenChanged (object sender, System.EventArgs e)
+		protected virtual void OnShowHelperChanged (object sender, System.EventArgs e)
 		{
-			RefreshExtensions ();
+			RefreshHelpers ();
 		}
 		
-		void RefreshExtensions ()
+		protected virtual void OnShowDockletChanged (object sender, System.EventArgs e)
 		{
-			string query = ExtenSearch.InnerEntry.Text.ToLower ();
+			RefreshDocklets ();
+		}
+		
+		void RefreshHelpers ()
+		{
+			string query = HelperSearch.InnerEntry.Text.ToLower ();
 			IEnumerable<HelperTile> tiles = DockServices.Helpers.Helpers.Select (h => new HelperTile (h))
 				.Where (h => h.Name.ToLower ().Contains (query) || h.Description.ToLower ().Contains (query))
 				.OrderBy (t => t.Name);
 			
-			if (exten_show_cmb.Active == (uint) ShowStates.Enabled)
+			if (helper_show_cmb.Active == (uint) HelperShowStates.Enabled)
 				tiles = tiles.Where (h => h.Enabled);
-			else if (exten_show_cmb.Active == (uint) ShowStates.Disabled)
+			else if (helper_show_cmb.Active == (uint) HelperShowStates.Disabled)
 				tiles = tiles.Where (h => !h.Enabled);
 			
 			HelpersTileview.Clear ();
 			foreach (HelperTile helper in tiles) {
 				HelpersTileview.AppendTile (helper);
+			}
+		}
+		
+		void RefreshDocklets ()
+		{
+			if (ActiveDock == null)
+				return;
+			
+			string query = DockletSearch.InnerEntry.Text.ToLower ();
+			// build a list of DockletTiles, starting with the currently active tiles for the active dock,
+			// and the available addins
+			List<DockletTile> tiles = new List<DockletTile> ();
+			
+			foreach (AbstractDockItemProvider provider in ActiveDock.Preferences.ItemProviders) {
+				string providerID = PluginManager.AddinIDFromProvider (provider);
+				if (string.IsNullOrEmpty (providerID))
+				    continue;
+
+				tiles.Add (new DockletTile (providerID, provider));
+			}
+			
+			tiles = tiles.Concat (PluginManager.AvailableProviderIDs.Select (id => new DockletTile (id))).ToList ();
+			
+			if (docklet_show_cmb.Active == (int) DockletShowStates.Active)
+				tiles = tiles.Where (t => t.Enabled).ToList ();
+			else if (docklet_show_cmb.Active == (int) DockletShowStates.Disabled)
+				tiles = tiles.Where (t => !t.Enabled).ToList ();
+			
+			tiles = tiles.Where (t => t.Description.ToLower ().Contains (query) || t.Name.ToLower ().Contains (query)).ToList ();
+			
+			DockletsTileview.Clear ();
+			foreach (DockletTile docklet in tiles) {
+				DockletsTileview.AppendTile (docklet);
 			}
 		}
 	}

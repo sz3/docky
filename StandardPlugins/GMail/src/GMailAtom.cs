@@ -65,9 +65,7 @@ namespace GMail
 	/// <summary>
 	/// </summary>
 	public class GMailAtom
-	{
-		static ConfigDialog config;
-		
+	{		
 		static event EventHandler ResetNeeded;
 		
 		public static void SettingsChanged ()
@@ -305,15 +303,6 @@ namespace GMail
 			State = GMailState.Error;
 			if (GMailFailed != null)
 				GMailFailed (null, new GMailErrorArgs (error));
-		}
-		
-		public static void ShowConfig ()
-		{
-			if (config == null) {
-				config = new ConfigDialog (Catalog.GetString ("GMail Configuration"),
-								new Gtk.Widget [] { new GMailLoginConfig (), new GMailLabelConfig ()});
-			}
-			config.Show ();
 		}
 	}
 }

@@ -185,7 +185,6 @@ Docky/Makefile
 Docky.CairoHelper/Makefile
 Docky.DBus/Makefile
 Docky.Items/Makefile
-Docky.Items/Resources/Docky.Items.addin.xml
 Docky.Widgets/Makefile
 Docky.Services/Makefile
 Docky.Services/AssemblyInfo.cs

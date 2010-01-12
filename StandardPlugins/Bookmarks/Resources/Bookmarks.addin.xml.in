@@ -5,6 +5,8 @@
 	isroot="false"
 	defaultEnabled="false"
 	name="Bookmarks"
+	description="Manage bookmarks"
+	author="Chris Szikszoy"
 >
  
  	<Dependencies>

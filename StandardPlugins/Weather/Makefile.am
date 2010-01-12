@@ -19,6 +19,7 @@ FILES = \
 	src/WeatherPainter.cs \
 	src/WeatherErrorArgs.cs \
 	src/WeatherConfig.cs \
+	src/WeatherConfigDialog.cs \
 	src/WeatherTile.cs \
 	gtk-gui/WeatherDocklet.WeatherConfig.cs \
 	gtk-gui/generated.cs

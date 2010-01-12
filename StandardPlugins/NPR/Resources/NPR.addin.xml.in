@@ -5,10 +5,13 @@
 	isroot="false"
 	defaultEnabled="false"
 	name="NPR"
+	description="Listen to NPR streaming radio"
+	author="Chris Szikszoy"
 >
- 
+
  	<Dependencies>
 		<Addin id="Items" version="1.0" />
+		<Addin id="Widgets" version="1.0" />
 	</Dependencies>
  
 	<Runtime>
@@ -17,6 +20,10 @@
 	
 	<Extension path="/Docky/ItemProvider">
 		<ItemProvider type="NPR.NPRItemProvider" />
-	</Extension>	
+	</Extension>
+
+	<Extension path="/Docky/Configuration">
+		<Configuration type="NPR.NPRConfigDialog" />
+	</Extension>
 
 </Addin>

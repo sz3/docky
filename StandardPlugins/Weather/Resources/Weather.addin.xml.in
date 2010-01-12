@@ -5,10 +5,13 @@
 	isroot="false"
 	defaultEnabled="false"
 	name="Weather"
+	description="Check the weather!"
+	author="Robert Dyer"
 >
  
  	<Dependencies>
 		<Addin id="Items" version="1.0" />
+		<Addin id="Widgets" version="1.0" />
 	</Dependencies>
  
 	<Runtime>
@@ -18,5 +21,9 @@
 	<Extension path="/Docky/ItemProvider">
 		<ItemProvider type="WeatherDocklet.WeatherItemProvider" />
 	</Extension>	
+
+	<Extension path="/Docky/Configuration">
+		<Configuration type="WeatherDocklet.WeatherConfigDialog" />
+	</Extension>
 
 </Addin>

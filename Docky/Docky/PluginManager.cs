@@ -27,11 +27,22 @@ using Mono.Addins.Setup;
 
 using Docky.Items;
 using Docky.Services;
+using Docky.Widgets;
 
 namespace Docky
 {
-
-
+	public class AddinStateChangedEventArgs : EventArgs
+	{
+		public Addin Addin { get; private set; }
+		public bool State { get; private set; }
+		
+		public AddinStateChangedEventArgs (Addin addin, bool state)
+		{
+			Addin = addin;
+			State = state;
+		}
+	}
+	
 	public class PluginManager
 	{
 		public static readonly string DefaultPluginIcon = "folder_tar";
@@ -41,6 +52,9 @@ namespace Docky
 		const string DefaultAddinsDirectory = "addins";
 		
 		const string IPExtensionPath = "/Docky/ItemProvider";
+		const string ConfigExtensionPath = "/Docky/Configuration";
+		
+		public static event EventHandler<AddinStateChangedEventArgs> AddinStateChanged;
 
 		//// <value>
 		/// Directory where Docky saves its Mono.Addins repository cache.
@@ -76,16 +90,24 @@ namespace Docky
 		{
 			AddinManager.Shutdown ();
 		}
+		
+		static void OnStateChanged (Addin addin, bool enabled)
+		{
+			if (AddinStateChanged != null)
+				AddinStateChanged (null, new AddinStateChangedEventArgs (addin, enabled));
+		}
 
 		static void AddinManagerAddinLoaded (object sender, AddinEventArgs args)
 		{
 			Addin addin = AddinFromID (args.AddinId);
+			OnStateChanged (addin, true);
 			Log<PluginManager>.Info ("Loaded \"{0}\".", addin.Name);
 		}
 
 		static void AddinManagerAddinUnloaded (object sender, AddinEventArgs args)
 		{
 			Addin addin = AddinFromID (args.AddinId);
+			OnStateChanged (addin, false);
 			Log<PluginManager>.Info ("Unloaded \"{0}\".", addin.Name);
 		}
 		
@@ -94,19 +116,20 @@ namespace Docky
 			return AddinManager.Registry.GetAddin (id);
 		}
 		
-		public static void Enable (Addin addin)
+		public static AbstractDockItemProvider Enable (Addin addin)
 		{
-			SetAddinEnabled (addin, true);
+			addin.Enabled = true;
+			return ItemProviderFromAddin (addin.Id);
 		}
 		
-		public static void Enable (string id)
+		public static AbstractDockItemProvider Enable (string id)
 		{
-			Enable (AddinFromID (id));
+			return Enable (AddinFromID (id));
 		}
 		
 		public static void Disable (Addin addin)
 		{
-			SetAddinEnabled (addin, false);
+			addin.Enabled = false;
 		}
 		
 		public static void Disable (string id)
@@ -117,12 +140,6 @@ namespace Docky
 		public static void Disable (AbstractDockItemProvider provider)
 		{
 			Disable (AddinIDFromProvider (provider));
-		}
-		
-		static void SetAddinEnabled (Addin addin, bool enabled)
-		{
-			if (addin != null)
-				addin.Enabled = enabled;
 		}
 		
 		public static IEnumerable<Addin> AllAddins {
@@ -145,23 +162,25 @@ namespace Docky
 			manual.ToList ().ForEach (dll => File.Delete (dll));
 		}
 		
+		static T ObjectFromAddin<T> (string extensionPath, string addinID) where T : class
+		{
+			IEnumerable<TypeExtensionNode> nodes = AddinManager.GetExtensionNodes (extensionPath)
+				.OfType<TypeExtensionNode> ()
+				.Where (a => Addin.GetIdName (a.Addin.Id) == Addin.GetIdName (addinID));
+			
+			if (nodes.Any ())
+				return nodes.First ().GetInstance () as T;
+			return null;
+		}
+		
 		public static AbstractDockItemProvider ItemProviderFromAddin (string addinID)
 		{
-			foreach (TypeExtensionNode node in AddinManager.GetExtensionNodes (IPExtensionPath)) {
-				object provider;
-				
-				try {
-					provider = node.GetInstance ();
-				} catch (Exception) {
-					continue;
-				}
-				
-				if (Addin.GetIdName (addinID) == Addin.GetIdName (node.Addin.Id))
-				    return provider as AbstractDockItemProvider;
-			}
-			
-			// shouldn't happen
-			return null;
+			return ObjectFromAddin<AbstractDockItemProvider> (IPExtensionPath, addinID);
+		}
+
+		public static ConfigDialog ConfigForAddin (string addinID)
+		{
+			return  ObjectFromAddin<ConfigDialog> (ConfigExtensionPath, addinID);
 		}
 		
 		public static string AddinIDFromProvider (AbstractDockItemProvider provider)

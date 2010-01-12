@@ -521,10 +521,11 @@ Window Dodge</property>
       <widget class="Gtk.VBox" id="vbox1">
         <property name="MemberName" />
         <child>
-          <widget class="Gtk.Notebook" id="notebook1">
+          <widget class="Gtk.Notebook" id="config_notebook">
             <property name="MemberName" />
             <property name="CanFocus">True</property>
             <property name="CurrentPage">1</property>
+            <property name="Scrollable">True</property>
             <signal name="SwitchPage" handler="OnPageSwitch" />
             <child>
               <widget class="Gtk.VBox" id="vbox2">
@@ -687,6 +688,93 @@ Window Dodge</property>
               </packing>
             </child>
             <child>
+              <widget class="Gtk.Alignment" id="alignment2">
+                <property name="MemberName" />
+                <property name="LeftPadding">7</property>
+                <property name="TopPadding">7</property>
+                <property name="RightPadding">7</property>
+                <property name="BottomPadding">7</property>
+                <property name="BorderWidth">7</property>
+                <child>
+                  <widget class="Gtk.VBox" id="vbox7">
+                    <property name="MemberName" />
+                    <property name="Spacing">6</property>
+                    <child>
+                      <widget class="Gtk.HBox" id="hbox1">
+                        <property name="MemberName" />
+                        <property name="Spacing">6</property>
+                        <child>
+                          <widget class="Gtk.ComboBox" id="docklet_show_cmb">
+                            <property name="MemberName" />
+                            <property name="IsTextCombo">True</property>
+                            <property name="Items" translatable="yes">All
+Enabled
+Disabled</property>
+                            <property name="Active">0</property>
+                            <signal name="Changed" handler="OnShowDockletChanged" />
+                          </widget>
+                          <packing>
+                            <property name="Position">0</property>
+                            <property name="AutoSize">True</property>
+                            <property name="Expand">False</property>
+                            <property name="Fill">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <placeholder />
+                        </child>
+                        <child>
+                          <placeholder />
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="Position">0</property>
+                        <property name="AutoSize">True</property>
+                        <property name="Expand">False</property>
+                        <property name="Fill">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.ScrolledWindow" id="docklet_scroll">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="HscrollbarPolicy">Never</property>
+                        <property name="ShadowType">In</property>
+                        <child>
+                          <widget class="Gtk.Viewport" id="GtkViewport1">
+                            <property name="MemberName" />
+                            <property name="ShadowType">None</property>
+                            <child>
+                              <placeholder />
+                            </child>
+                          </widget>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="Position">1</property>
+                        <property name="AutoSize">True</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <placeholder />
+                    </child>
+                  </widget>
+                </child>
+              </widget>
+              <packing>
+                <property name="Position">1</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.Label" id="label2">
+                <property name="MemberName" />
+                <property name="LabelProp" translatable="yes">Docklets</property>
+              </widget>
+              <packing>
+                <property name="type">tab</property>
+              </packing>
+            </child>
+            <child>
               <widget class="Gtk.Alignment" id="alignment3">
                 <property name="MemberName" />
                 <property name="LeftPadding">7</property>
@@ -703,14 +791,14 @@ Window Dodge</property>
                         <property name="MemberName" />
                         <property name="Spacing">6</property>
                         <child>
-                          <widget class="Gtk.ComboBox" id="exten_show_cmb">
+                          <widget class="Gtk.ComboBox" id="helper_show_cmb">
                             <property name="MemberName" />
                             <property name="IsTextCombo">True</property>
                             <property name="Items" translatable="yes">All
 Enabled
 Disabled</property>
                             <property name="Active">0</property>
-                            <signal name="Changed" handler="OnShowExtenChanged" />
+                            <signal name="Changed" handler="OnShowHelperChanged" />
                           </widget>
                           <packing>
                             <property name="Position">0</property>
@@ -749,7 +837,7 @@ Disabled</property>
                       </packing>
                     </child>
                     <child>
-                      <widget class="Gtk.ScrolledWindow" id="scrolledwindow1">
+                      <widget class="Gtk.ScrolledWindow" id="helper_scroll">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="HscrollbarPolicy">Never</property>
@@ -773,11 +861,11 @@ Disabled</property>
                 </child>
               </widget>
               <packing>
-                <property name="Position">1</property>
+                <property name="Position">2</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.Label" id="label2">
+              <widget class="Gtk.Label" id="label4">
                 <property name="MemberName" />
                 <property name="LabelProp" translatable="yes">Helpers</property>
               </widget>

@@ -17,6 +17,7 @@ FILES = \
 	Docky/UserArgs.cs \
 	Docky/PluginManager.cs \
 	Docky/HelperTile.cs \
+	Docky/DockletTile.cs \
 	Docky/CairoHelper/DockySurface_Extensions.cs \
 	Docky/Interface/AddinTreeView.cs \
 	Docky/Interface/AnimationState.cs \

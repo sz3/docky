@@ -38,8 +38,8 @@ namespace Docky
 				SetProps ();
 			};
 			
-			ButtonStateDisabledText = Catalog.GetString ("Enable");
-			ButtonStateEnabledText = Catalog.GetString ("Disable");
+			ButtonStateDisabledText = Catalog.GetString ("_Enable");
+			ButtonStateEnabledText = Catalog.GetString ("_Disable");
 			SubDescriptionTitle = Catalog.GetString ("Status");
 			
 			Name = ((string) Helper.File.Basename).Split ('.')[0];
