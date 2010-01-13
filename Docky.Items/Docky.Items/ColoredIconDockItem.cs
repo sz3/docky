@@ -56,11 +56,8 @@ namespace Docky.Items
 		
 		public ColoredIconDockItem ()
 		{
-			ShiftModifierRequired = true;
 		}
-		
-		protected bool ShiftModifierRequired { get; set; }
-		
+				
 		protected override Gdk.Pixbuf ProcessPixbuf (Gdk.Pixbuf pbuf)
 		{
 			return DockServices.Drawing.AddHueShift (pbuf, HueShift);
@@ -75,7 +72,7 @@ namespace Docky.Items
 		
 		protected override void OnScrolled (ScrollDirection direction, ModifierType mod)
 		{
-			if (ShiftModifierRequired && mod != ModifierType.ShiftMask)
+			if (mod != ModifierType.ShiftMask)
 				return;
 			
 			int shift = HueShift;
