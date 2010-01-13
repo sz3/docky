@@ -42,7 +42,7 @@ class DockyItem():
 	
 		self.bus.add_signal_receiver(self.menu_pressed_signal, "MenuItemActivated", itemiface, dockybus, self.path)
 		self.bus.add_signal_receiver(self.item_confirmation_needed, "ItemConfirmationNeeded", itemiface, dockybus, self.path)
-		
+
 	def menu_pressed_signal(self, menu_id):
 		if self.id_map.has_key(menu_id):
 			self.menu_pressed(menu_id)
@@ -52,14 +52,15 @@ class DockyItem():
 			self.iface.ConfirmItem(k)
 	
 	def dispose(self):
-		self.iface.ResetText()
-		self.iface.ResetBadgeText()
-		self.iface.ResetIcon()
-		for k, v in self.id_map.iteritems():
-			try:
+		try:
+			self.iface.ResetText()
+			self.iface.ResetBadgeText()
+			self.iface.ResetIcon()
+			for k, v in self.id_map.iteritems():
 				self.iface.RemoveItem(k)
-			except:
-				break;
+		except dbus.DBusException, e:
+			#print "DockyItem(): %s" % e
+			return
 	
 	def menu_pressed(self, menu_id):
 		pass
@@ -70,8 +71,12 @@ class DockySink():
 		self.items = {}
 		self.disposed = False;
 
-		obj = self.bus.get_object(dockybus, dockypath)
-		self._iface = dbus.Interface(obj, dockyiface)
+		try:
+			obj = self.bus.get_object(dockybus, dockypath)
+			self._iface = dbus.Interface(obj, dockyiface)
+		except dbus.DBusException, e:
+			print "DockySink(): %s" % e
+			sys.exit(0)
 
 		paths = self._iface.DockItemPaths()
 		
@@ -83,7 +88,14 @@ class DockySink():
 			obj = self.bus.get_object(dockybus, pathtoitem)
 			item = dbus.Interface(obj, itemiface)
 			self.item_path_found(pathtoitem, item)
-	
+
+		self.bus.add_signal_receiver(self.name_owner_changed_cb, dbus_interface='org.freedesktop.DBus', signal_name='NameOwnerChanged')
+
+	def name_owner_changed_cb(self, name, old_owner, new_owner):
+		if name == dockybus and not new_owner:
+			print "DockyDBus %s is gone, quitting now..." % name
+			self.shut_down()				
+
 	def item_added(self, path):
 		if self.disposed:
 			return;
