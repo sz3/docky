@@ -217,17 +217,21 @@ class DockyRhythmboxItem(DockyItem):
 		if overlay == 0:
 			return picfile
 
+		try:
+			pb = gtk.gdk.pixbuf_new_from_file(picfile)
+		except Exception, e:
+			print e
+			return picfile
+		
 		pb_result = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8, 250, 250)
 		pb_result.fill(0x00000000)
 
 		if overlay == 1:
-			pb = gtk.gdk.pixbuf_new_from_file_at_size(picfile, 200, 200)
 			overlayfile = os.path.join(DOCKY_DATADIR, "albumoverlay_jewel.png")
-			pb.composite(pb_result, 30, 21, 200, 200, 30, 21, 1, 1, gtk.gdk.INTERP_BILINEAR, 255)
+			pb.composite(pb_result, 30, 21, 200, 200, 30, 21, 200.0/pb.get_width(), 200.0/pb.get_height(), gtk.gdk.INTERP_BILINEAR, 255)
 		elif overlay == 2:
-			pb = gtk.gdk.pixbuf_new_from_file_at_size(picfile, 190, 190)
 			overlayfile = os.path.join(DOCKY_DATADIR, "albumoverlay_vinyl.png")
-			pb.composite(pb_result, 3, 26, 190, 190, 3, 26, 1, 1, gtk.gdk.INTERP_BILINEAR, 255)
+			pb.composite(pb_result, 3, 26, 190, 190, 3, 26, 190.0/pb.get_width(), 190.0/pb.get_height(), gtk.gdk.INTERP_BILINEAR, 255)
 		else:
 			return picfile
 
