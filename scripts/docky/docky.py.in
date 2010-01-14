@@ -31,6 +31,8 @@ dockybus   = 'org.gnome.Docky'
 dockyiface = 'org.gnome.Docky'
 itemiface  = 'org.gnome.Docky.Item'
 
+DOCKY_DATADIR = "@expanded_datadir@/@PACKAGE@"
+
 class DockyItem():
 	def __init__(self, path):
 		self.path = path
