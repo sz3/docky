@@ -32,6 +32,7 @@ try:
 	from signal import signal, SIGTERM
 	from sys import exit
 except ImportError, e:
+	print e
 	exit()
 
 rhythmboxbus = "org.gnome.Rhythmbox"
