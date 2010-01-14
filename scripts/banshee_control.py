@@ -26,7 +26,9 @@ import sys
 import os
 
 try:
+	import gtk
 	from docky.docky import DockyItem, DockySink
+	from docky.docky import DOCKY_DATADIR
 	from signal import signal, SIGTERM
 	from sys import exit
 except ImportError, e:
@@ -42,6 +44,11 @@ controliface = "org.bansheeproject.Banshee.PlaybackController"
 enable_art_icon = True;
 enable_badge_text = True;
 
+album_art_tmpfile = "/tmp/docky_%s_banshee_helper.png" % os.getenv('USERNAME')
+
+# 0 - none, 1- jewel, 2 - vinyl)
+overlay = 2
+
 class DockyBansheeItem(DockyItem):
 	def __init__(self, path):
 		DockyItem.__init__(self, path)
@@ -51,7 +58,8 @@ class DockyBansheeItem(DockyItem):
 		
 		self.duration_secs = 0
 		self.songinfo = None
-		
+		self.current_arturl = ""
+				
 		self.bus.add_signal_receiver(self.name_owner_changed_cb,
                                              dbus_interface='org.freedesktop.DBus',
                                              signal_name='NameOwnerChanged')
@@ -159,6 +167,7 @@ class DockyBansheeItem(DockyItem):
 	
 	def update_icon(self):
 		if not self.player:
+			self.current_arturl = ""
 			self.iface.ResetIcon()
 			return False
 			
@@ -167,14 +176,19 @@ class DockyBansheeItem(DockyItem):
 		
 		if self.banshee_is_playing():
 			arturl = self.get_album_art_path()
-			if os.path.exists(arturl):
-				self.iface.SetIcon(arturl)
-			else:
-				self.iface.ResetIcon()
+			if not self.current_arturl == arturl:
+				# Add overlay to cover
+				if os.path.isfile(arturl):
+					self.current_arturl = arturl
+					self.iface.SetIcon(self.get_album_art_overlay_path(arturl))
+				else:
+					self.current_arturl = ""
+					self.iface.ResetIcon()
 		else:
+			self.current_arturl = ""
 			self.iface.ResetIcon()
 		return True
-
+		
 	def get_album_art_path(self):
 		artwork_id = self.player.GetCurrentTrack().get("artwork-id")
 
@@ -183,6 +197,30 @@ class DockyBansheeItem(DockyItem):
 
 		arturl = os.path.expanduser("~/.cache/album-art/%s.jpg" % artwork_id)
 		return arturl
+
+	def get_album_art_overlay_path(self, picfile):
+		if overlay == 0:
+			return picfile
+
+		pb_result = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8, 250, 250)
+		pb_result.fill(0x00000000)
+
+		if overlay == 1:
+			pb = gtk.gdk.pixbuf_new_from_file_at_size(picfile, 200, 200)
+			overlayfile = os.path.join(DOCKY_DATADIR, "albumoverlay_jewel.png")
+			pb.composite(pb_result, 30, 21, 200, 200, 30, 21, 1, 1, gtk.gdk.INTERP_BILINEAR, 255)
+		elif overlay == 2:
+			pb = gtk.gdk.pixbuf_new_from_file_at_size(picfile, 190, 190)
+			overlayfile = os.path.join(DOCKY_DATADIR, "albumoverlay_vinyl.png")
+			pb.composite(pb_result, 3, 26, 190, 190, 3, 26, 1, 1, gtk.gdk.INTERP_BILINEAR, 255)
+		else:
+			return picfile
+
+		pb_overlay = gtk.gdk.pixbuf_new_from_file_at_size(overlayfile, 250, 250)
+		pb_overlay.composite(pb_result, 0, 0, 250, 250, 0, 0, 1, 1, gtk.gdk.INTERP_BILINEAR, 255)
+		pb_result.save(album_art_tmpfile, "png", {})
+		
+		return album_art_tmpfile
 
 	def update_text(self):
 		if not self.player:
