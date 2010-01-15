@@ -72,6 +72,9 @@ namespace Docky.Items
 		
 		protected override void OnScrolled (ScrollDirection direction, ModifierType mod)
 		{
+			mod &= ~ModifierType.Mod2Mask; // Ignore NumLock
+			mod &= ~ModifierType.LockMask; // Ignore CapsLock
+			
 			if (mod != ModifierType.ShiftMask)
 				return;
 			
