@@ -40,9 +40,9 @@ except ImportError, e:
 try:
 	CLIENT = ZeitgeistClient()
 	version = [int(x) for x in CLIENT.get_version()]
-	MIN_VERSION = [0, 2, 99, 0]
+	MIN_VERSION = [0, 3, 1, 0]
 	if version < MIN_VERSION:
-		print "PLEASE USE ZEITGEIST 0.3.0 or above"
+		print "PLEASE USE ZEITGEIST 0.3.1 or above"
 		exit()
 		
 
@@ -87,10 +87,10 @@ class MostUsedProvider():
 			subject = Subject()
 			subject.set_origin(path)
 			event.set_subjects([subject])
-			self._zg.find_event_ids_for_templates([event],_handle_find_events, [delta, today], StorageState.Any, 0, 4) 
+			self._zg.find_events_for_templates([event],_handle_get_events, [delta, today], StorageState.Any, 0, 4) 
 		else:
 			event.set_actor(path)
-			self._zg.find_event_ids_for_templates([event],_handle_find_events, [delta, today], StorageState.Any, 0, 4) 
+			self._zg.find_events_for_templates([event],_handle_get_events, [delta, today], StorageState.Any, 0, 4) 
 
 class DockyZGItem(DockyItem):
 	def __init__(self, path):
