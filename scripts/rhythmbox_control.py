@@ -27,6 +27,7 @@ import os
 
 try:
 	import gtk
+	import urllib2
 	from docky.docky import DockyItem, DockySink
 	from docky.docky import DOCKY_DATADIR
 	from signal import signal, SIGTERM
@@ -196,7 +197,7 @@ class DockyRhythmboxItem(DockyItem):
 
 		#1. Look in song folder
 		#TODO need to replace some things, this is very weird
-		coverdir = os.path.dirname(playinguri).replace("file://", "").replace("%20", " ")
+		coverdir = os.path.dirname(urllib2.unquote(playinguri).replace("file://", ""))
 		covernames = ["cover.jpg", "cover.png", "album.jpg", "album.png", "albumart.jpg", 
 			"albumart.png", ".folder.jpg", ".folder.png", "folder.jpg", "folder.png"]
 		for covername in covernames:
