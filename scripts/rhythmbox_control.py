@@ -72,6 +72,10 @@ class DockyRhythmboxItem(DockyItem):
 		self.bus_interface = dbus.Interface(obj, "org.freedesktop.DBus")
 		
 		self.bus_interface.ListNames (reply_handler=self.list_names_handler, error_handler=self.list_names_error_handler)
+
+		self.bus.add_signal_receiver(self.signal_playingChanged, "playingChanged",  playeriface, rhythmboxbus, playerpath)
+		self.bus.add_signal_receiver(self.signal_elapsedChanged, "elapsedChanged",  playeriface, rhythmboxbus, playerpath)
+		self.bus.add_signal_receiver(self.signal_playingUriChanged, "playingUriChanged",  playeriface, rhythmboxbus, playerpath)
 	
 	def list_names_handler(self, names):
 		if rhythmboxbus in names:
@@ -105,10 +109,6 @@ class DockyRhythmboxItem(DockyItem):
 
 		obj = self.bus.get_object(rhythmboxbus, shellpath)
 		self.shell = dbus.Interface(obj, shelliface)
-
-		self.bus.add_signal_receiver(self.signal_playingChanged, "playingChanged",  playeriface, rhythmboxbus, playerpath)
-		self.bus.add_signal_receiver(self.signal_elapsedChanged, "elapsedChanged",  playeriface, rhythmboxbus, playerpath)
-		self.bus.add_signal_receiver(self.signal_playingUriChanged, "playingUriChanged",  playeriface, rhythmboxbus, playerpath)
 
 		if self.player and self.shell:
 			self.update_songinfo(self.player.getPlayingUri())

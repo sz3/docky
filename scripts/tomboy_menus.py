@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #  
-#  Copyright (C) 2009 Jason Smith
+#  Copyright (C) 2009-2010 Jason Smith, Rico Tzschichholz
 # 
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -50,6 +50,10 @@ class DockyTomboyItem(DockyItem):
 		
 		self.bus_interface.ListNames (reply_handler=self.list_names_handler, error_handler=self.list_names_error_handler)
 	
+		self.bus.add_signal_receiver(self.note_added, "NoteAdded", tomboyiface, tomboybus, tomboypath)
+		self.bus.add_signal_receiver(self.note_deleted, "NoteDeleted", tomboyiface, tomboybus, tomboypath)
+		self.bus.add_signal_receiver(self.note_changed, "NoteChanged", tomboyiface, tomboybus, tomboypath)
+	
 	def list_names_handler(self, names):
 		if tomboybus in names:
 			self.init_tomboy_objects()
@@ -71,10 +75,6 @@ class DockyTomboyItem(DockyItem):
 		obj = self.bus.get_object(tomboybus, tomboypath)
 		self.tomboy = dbus.Interface(obj, tomboyiface)
 		
-		self.bus.add_signal_receiver(self.note_added, dbus_interface=tomboyiface, signal_name="NoteAdded")
-		self.bus.add_signal_receiver(self.note_deleted, dbus_interface=tomboyiface, signal_name="NoteDeleted")
-		self.bus.add_signal_receiver(self.note_changed, dbus_interface=tomboyiface, signal_name="NoteChanged")
-	
 	def note_added (self, note):
 		self.set_menu_buttons()
 		

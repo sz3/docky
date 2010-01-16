@@ -70,6 +70,9 @@ class DockyBansheeItem(DockyItem):
 		
 		self.bus_interface.ListNames (reply_handler=self.list_names_handler, error_handler=self.list_names_error_handler)
 	
+		self.bus.add_signal_receiver(self.signal_EventChanged, "EventChanged",  playeriface, bansheebus, playerpath)
+		self.bus.add_signal_receiver(self.signal_StateChanged, "StateChanged",  playeriface, bansheebus, playerpath)
+
 	def list_names_handler(self, names):
 		if bansheebus in names:
 			self.init_banshee_objects()
@@ -103,9 +106,6 @@ class DockyBansheeItem(DockyItem):
 		obj = self.bus.get_object(bansheebus, controlpath)
 		self.control = dbus.Interface(obj, controliface)
 		
-		self.bus.add_signal_receiver(self.signal_EventChanged, "EventChanged",  playeriface, bansheebus, playerpath)
-		self.bus.add_signal_receiver(self.signal_StateChanged, "StateChanged",  playeriface, bansheebus, playerpath)
-
 		if self.player:
 			self.update_songinfo()
 
