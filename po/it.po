@@ -7,34 +7,38 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-08 11:02+0100\n"
-"PO-Revision-Date: 2010-01-09 08:39+0000\n"
-"Last-Translator: Rico Tzschichholz <Unknown>\n"
+"POT-Creation-Date: 2010-01-13 11:18+0100\n"
+"PO-Revision-Date: 2010-01-15 22:42+0000\n"
+"Last-Translator: Quizzlo <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-01-09 08:52+0000\n"
+"X-Launchpad-Export-Date: 2010-01-17 11:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:102
+#: ../Docky/Docky/ConfigurationWindow.cs:113
+msgid "Search Docklets..."
+msgstr "Cerca docklet..."
+
+#: ../Docky/Docky/ConfigurationWindow.cs:132
 msgid "Search Helpers..."
 msgstr "Cerca assistenti..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:147
+#: ../Docky/Docky/ConfigurationWindow.cs:178
 msgid "Click on any dock to configure."
 msgstr "Clicca su una dock per configurarla."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:148
+#: ../Docky/Docky/ConfigurationWindow.cs:179
 msgid "Drag any dock to move it."
 msgstr "Trascina una dock per spostarla."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:226
+#: ../Docky/Docky/ConfigurationWindow.cs:259
 msgid "Delete the currently selected dock?"
 msgstr "Eliminare la dock selezionata?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:228
+#: ../Docky/Docky/ConfigurationWindow.cs:261
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -43,34 +47,53 @@ msgstr ""
 "impostazioni per la dock eliminata verranno\n"
 "definitivamente perse."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:243
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:335
+#: ../Docky/Docky/ConfigurationWindow.cs:276
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:400
 msgid "_Delete Dock"
 msgstr "_Elimina dock"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:362
+#: ../Docky/Docky/ConfigurationWindow.cs:397
 msgid "_Select"
 msgstr "_Seleziona"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:365
+#: ../Docky/Docky/ConfigurationWindow.cs:400
 msgid ".tar Archives"
 msgstr "Archivi .tar"
 
+#: ../Docky/Docky/DockletTile.cs:46
+#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:220
+msgid "_Add"
+msgstr "A_ggiungi"
+
+#: ../Docky/Docky/DockletTile.cs:47
+#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:203
+msgid "_Remove"
+msgstr "_Rimuovi"
+
+#: ../Docky/Docky/DockletTile.cs:48
+msgid "Author"
+msgstr "Autore"
+
+#: ../Docky/Docky/DockletTile.cs:55
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:166
+msgid "Settings"
+msgstr "Impostazioni"
+
 #: ../Docky/Docky/Docky.cs:107
 msgid ""
-"Docky requires compositing to work properly.  Please enable compositing and "
+"Docky requires compositing to work properly. Please enable compositing and "
 "restart docky."
 msgstr ""
 "Docky richiede il compositing per funzionare correttamente. Per favore "
-"abilitare il compositing e riavviare Docky."
+"abilitare il compositing e riavviare docky."
 
 #: ../Docky/Docky/HelperTile.cs:41
-msgid "Enable"
-msgstr "Abilita"
+msgid "_Enable"
+msgstr "_Abilita"
 
 #: ../Docky/Docky/HelperTile.cs:42
-msgid "Disable"
-msgstr "Disabilita"
+msgid "_Disable"
+msgstr "_Disabilita"
 
 #: ../Docky/Docky/HelperTile.cs:43
 msgid "Status"
@@ -104,21 +127,21 @@ msgstr ""
 "Quando impostato, le finestre che non hanno ancora un lanciatore su una dock "
 "verranno aggiunte a questa dock."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:636
+#: ../Docky/Docky/Interface/DockPreferences.cs:644
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 "<i>Non si nasconde; le finestre massimizzate non si sovrappongono alla "
 "dock.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:639
+#: ../Docky/Docky/Interface/DockPreferences.cs:647
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Si nasconde quando il cursore del mouse si allontana.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:642
+#: ../Docky/Docky/Interface/DockPreferences.cs:650
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Si nasconde quando la dock ostruisce l'applicazione attiva.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:645
+#: ../Docky/Docky/Interface/DockPreferences.cs:653
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Si nasconde quando la dock ostruisce qualsiasi finestra.</i>"
 
@@ -149,51 +172,58 @@ msgstr "_Informazioni"
 msgid "_Quit Docky"
 msgstr "_Esci da Docky"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:80
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:92
 msgid "Docky Configuration"
 msgstr "Configurazione di Docky"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:124
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:137
 msgid "_Start When Computer Starts"
 msgstr "_Esegui all'avvio del computer"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:140
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:153
 msgid "_Theme:"
 msgstr "_Tema:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:164
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:177
 msgid "<b>General Options</b>"
 msgstr "<b>Opzioni generali</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:184
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:197
 msgid "<b>Dock Configuration</b>"
 msgstr "<b>Configurazione dock</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:198
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:211
 msgid "Docks"
 msgstr "Dock"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:219
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:232
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:284
 msgid "All"
 msgstr "Tutti"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:220
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:233
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:285
 msgid "Enabled"
 msgstr "Abilitati"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:221
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:234
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:286
 msgid "Disabled"
 msgstr "Disabilitati"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:245
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
+msgid "Docklets"
+msgstr "Docklet"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:310
 msgid "_Install"
 msgstr "_Installa"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:277
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:342
 msgid "Helpers"
 msgstr "Assistenti"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:308
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:373
 msgid "_New Dock"
 msgstr "_Nuova dock"
 
@@ -351,14 +381,6 @@ msgstr "Verifica e salva le informazioni dell'account"
 msgid "Account validation succeeded!"
 msgstr "Convalida dell'account riuscita!"
 
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:193
-msgid "_Remove"
-msgstr "_Rimuovi"
-
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:210
-msgid "_Add"
-msgstr "A_ggiungi"
-
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:87
 msgid "Password"
 msgstr "Password"
@@ -379,19 +401,19 @@ msgstr "Non possiedi un account?"
 msgid "Computer"
 msgstr "Computer"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:418
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:419
 msgid "Di_gital Clock"
 msgstr "_Orologio Digitale"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:424
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:425
 msgid "24-Hour _Clock"
 msgstr "Orologio _24 Ore"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:430
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "Show _Date"
 msgstr "Mostra _data"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:436
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
 msgid "Select _Theme"
 msgstr "Seleziona _tema"
 
@@ -416,37 +438,37 @@ msgstr "_Controlla ogni:"
 msgid "minutes"
 msgstr "minuti"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:185
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:183
 msgid "Username or Password not set"
 msgstr "Nome utente o password non impostati"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:235
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:233
 msgid "(no subject)"
 msgstr "(nessun oggetto)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:253
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:251
 #, csharp-format
 msgid "From: {0}"
 msgstr "Da: {0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:264
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:268
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:262
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:266
 msgid "Feed Error"
 msgstr "Errore feed"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:273
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:271
 msgid "Invalid Username"
 msgstr "Nome utente non valido"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:277
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:275
 msgid "Network Error"
 msgstr "Errore di rete"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:282
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:280
 msgid "General Error"
 msgstr "Errore generale"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:313
+#: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
 msgid "GMail Configuration"
 msgstr "Configurazione di GMail"
 
@@ -477,7 +499,7 @@ msgstr "_Scrivi messaggio"
 msgid "New Mail"
 msgstr "Nuovo messaggio"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:215
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
 msgid "Check _Mail"
 msgstr "Controlla _messaggi"
 
@@ -540,33 +562,29 @@ msgstr "Nessuna stazione trovata."
 msgid "Please try your search again."
 msgstr "Per favore prova ancora la tua ricerca."
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:46
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:48
 msgid "Fetching Information..."
 msgstr "Prelevamento informazioni..."
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:66
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:68
 msgid "Click to add NPR stations."
 msgstr "Clicca per aggiungere stazioni NPR."
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:105
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:107
 msgid "Home Page"
 msgstr "Sito Web"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:112
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:114
 msgid "Program Schedule"
 msgstr "Pianificazione programma"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:119
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:121
 msgid "Donate"
 msgstr "Fai una donazione"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:126
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:128
 msgid "Live Streams"
 msgstr "Stream Live"
-
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:164
-msgid "Settings"
-msgstr "Impostazioni"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:76
 msgid "Clear the Recent Documents list?"
@@ -655,7 +673,7 @@ msgstr "Località meteo non valida"
 msgid "Network Error: "
 msgstr "Errore rete: "
 
-#: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:54
+#: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
@@ -663,7 +681,7 @@ msgstr ""
 "Dati meteo forniti da Google. Questa fonte richiede che la località sia "
 "specificata come C.A.P. USA oppure 'Città, Paese'."
 
-#: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:59
+#: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
 "Weather data provided by and copyright The Weather Channel.  This source "
 "requires locations to be specified as US Zip Code or a unique code from the "
@@ -675,7 +693,7 @@ msgstr ""
 "Per trovare il codice, cercare la localita all'interno del sito; il codice "
 "si trova nell'URL dopo '/local/' ed è simile a AAXX0000."
 
-#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:54
+#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
@@ -686,6 +704,10 @@ msgstr ""
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
 msgstr "Nessun risultato trovato."
+
+#: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
+msgid "Weather Configuration"
+msgstr "Configurazione meteo"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
@@ -700,19 +722,15 @@ msgstr "_Mappa radar"
 msgid "Forecasts"
 msgstr "Previsioni"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:233
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:237
 msgid "Check _Weather"
 msgstr "Controlla _meteo"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:248
-msgid "Weather Configuration"
-msgstr "Configurazione meteo"
-
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:87
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
 msgid "_Today"
 msgstr "_oggi"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:90
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
 msgid "T_omorrow"
 msgstr "_domani"
 
@@ -901,11 +919,24 @@ msgstr "Tramonto"
 #~ msgid "Related Items"
 #~ msgstr "Elementi correlati"
 
+#~ msgid ""
+#~ "Docky requires compositing to work properly.  Please enable compositing and "
+#~ "restart docky."
+#~ msgstr ""
+#~ "Docky richiede il compositing per funzionare correttamente. Per favore "
+#~ "abilitare il compositing e riavviare Docky."
+
 #~ msgid "<i>Always present, acts like a panel.</i>"
 #~ msgstr "<i>Sempre presente, si comporta come un pannello.</i>"
 
 #~ msgid "Extensions"
 #~ msgstr "Estensioni"
+
+#~ msgid "Disable"
+#~ msgstr "Disabilita"
+
+#~ msgid "Enable"
+#~ msgstr "Abilita"
 
 #~ msgid "Click to browse..."
 #~ msgstr "Clicca per sfogliare..."
