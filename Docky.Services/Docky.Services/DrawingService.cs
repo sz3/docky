@@ -70,6 +70,54 @@ namespace Docky.Services
 		// http://developer.gimp.org/api/2.0/gdk-pixbuf/gdk-pixbuf-gdk-pixbuf.html#GdkPixbuf--bits-per-sample
 		
 		/// <summary>
+		/// Applies a color transformation to each pixel in a pixbuf.
+		/// </summary>
+		/// <param name="source">
+		/// A <see cref="Gdk.Pixbuf"/>
+		/// </param>
+		/// <param name="colorTransform">
+		/// A <see cref="Func<Cairo.Color, Cairo.Color>"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="Gdk.Pixbuf"/>
+		/// </returns>
+		public Gdk.Pixbuf PixelColorTransform (Gdk.Pixbuf source, Func<Cairo.Color, Cairo.Color> colorTransform)
+		{
+			try {
+				int offset = (source.HasAlpha) ? 4 : 3;
+				Gdk.Pixbuf transform = source.Copy ();
+				unsafe {
+					double a, r, g, b;
+					byte* pixels = (byte*) transform.Pixels;
+					for (int i = 0; i < transform.Height * transform.Width; i++) {
+						r = (double) pixels[0];
+						g = (double) pixels[1];
+						b = (double) pixels[2];
+						
+						Cairo.Color color = new Cairo.Color (r / byte.MaxValue, 
+						                                     g / byte.MaxValue, 
+						                                     b / byte.MaxValue);
+						
+						color = colorTransform.Invoke (color);
+												
+						pixels[0] = (byte) (color.R * byte.MaxValue);
+						pixels[1] = (byte) (color.G * byte.MaxValue);
+						pixels[2] = (byte) (color.B * byte.MaxValue);
+						
+						pixels += offset;
+					}
+				}
+				source = transform.Copy ();
+				transform.Dispose ();
+			} catch (Exception e) {
+				Log<DrawingService>.Error ("Error transforming pixbuf: {0}", e.Message);
+				Log<DrawingService>.Debug (e.StackTrace);
+			}
+			
+			return source;
+		}
+		
+		/// <summary>
 		/// Determines whether or not the icon is light or dark.
 		/// </summary>
 		/// <param name="icon">
@@ -104,6 +152,7 @@ namespace Docky.Services
 			
 			return light > 0;
 		}
+		#endregion
 
 		/// <summary>
 		/// Returns a monochrome version of the supplied pixbuf.
@@ -116,38 +165,7 @@ namespace Docky.Services
 		/// </returns>
 		public Gdk.Pixbuf MonochromePixbuf (Gdk.Pixbuf source)
 		{
-			try {
-				int offset = (source.HasAlpha) ? 4 : 3;
-				Gdk.Pixbuf monochrome = source;
-				unsafe {
-					double a, r, g, b;
-					byte* pixels = (byte*) monochrome.Pixels;
-					for (int i = 0; i < monochrome.Height * monochrome.Width; i++) {
-						r = (double) pixels[0];
-						g = (double) pixels[1];
-						b = (double) pixels[2];
-						
-						Cairo.Color color = new Cairo.Color (r / byte.MaxValue, 
-						                                     g / byte.MaxValue, 
-						                                     b / byte.MaxValue);
-						
-						color = color.DarkenBySaturation (0.5).SetSaturation (0);
-						
-						pixels[0] = (byte) (color.R * byte.MaxValue);
-						pixels[1] = (byte) (color.G * byte.MaxValue);
-						pixels[2] = (byte) (color.B * byte.MaxValue);
-						
-						pixels += offset;
-					}
-				}
-				source = monochrome.Copy ();
-				monochrome.Dispose ();
-			} catch (Exception e) {
-				Log<DrawingService>.Error ("Error monochroming pixbuf: {0}", e.Message);
-				Log<DrawingService>.Debug (e.StackTrace);
-			}
-			
-			return source;
+			return PixelColorTransform (source, (c) => c.DarkenBySaturation (0.5).SetSaturation (0));
 		}
 		
 		/// <summary>
@@ -164,42 +182,10 @@ namespace Docky.Services
 		/// </returns>
 		public Gdk.Pixbuf AddHueShift (Gdk.Pixbuf source, double shift)
 		{
-			try {
-				int offset = (source.HasAlpha) ? 4 : 3;
-				Gdk.Pixbuf shifted = source;
-				if (shift != 0) {
-					unsafe {
-						double a, r, g, b;
-						byte* pixels = (byte*) shifted.Pixels;
-						for (int i = 0; i < shifted.Height * shifted.Width; i++) {
-							r = (double) pixels[0];
-							g = (double) pixels[1];
-							b = (double) pixels[2];
-							
-							Cairo.Color color = new Cairo.Color (r / byte.MaxValue, 
-								g / byte.MaxValue, 
-								b / byte.MaxValue);
-							
-							color = color.AddHue (shift);
-							
-							pixels[0] = (byte) (color.R * byte.MaxValue);
-							pixels[1] = (byte) (color.G * byte.MaxValue);
-							pixels[2] = (byte) (color.B * byte.MaxValue);
-							
-							pixels += offset;
-						}
-					}
-				}
-				source = shifted.Copy ();
-				shifted.Dispose ();
-			} catch (Exception e) {
-				Log<DrawingService>.Error ("Error adding hue shift: {0}", e.Message);
-				Log<DrawingService>.Debug (e.StackTrace);
-			}
-			
+			if (shift != 0)
+				return PixelColorTransform (source, (c) => c.AddHue (shift));
 			return source;
 		}
-		#endregion
 		
 		/// <summary>
 		/// Load an icon specifying the width and height.
