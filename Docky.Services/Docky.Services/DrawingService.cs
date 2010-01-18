@@ -63,6 +63,12 @@ namespace Docky.Services
 			return new Pango.Layout (context);
 		}
 		
+		#region unsafe pixbuf methods
+		
+		// these methods all assume that the BitsPerSample is 8 (byte).  Pixbuf documentation
+		// states that values from 1-16 are allowed, but currently only 8 bit samples are supported.
+		// http://developer.gimp.org/api/2.0/gdk-pixbuf/gdk-pixbuf-gdk-pixbuf.html#GdkPixbuf--bits-per-sample
+		
 		/// <summary>
 		/// Determines whether or not the icon is light or dark.
 		/// </summary>
@@ -75,29 +81,30 @@ namespace Docky.Services
 		public bool IsIconLight (string icon) {
 			int light = 0;
 			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (icon)) {
+				int offset = (pixbuf.HasAlpha) ? 4 : 3;
 				unsafe {
 					byte* pixelPtr = (byte*) pixbuf.Pixels;
 					for (int i = 0; i < pixbuf.Height; i++) {
 						for (int j = 0; j < pixbuf.Width; j++) {
 							byte max = Math.Max (pixelPtr[0], Math.Max (pixelPtr[1], pixelPtr[2]));
 							
-							if (pixelPtr[3] > 0) {
+							if ((pixbuf.HasAlpha && pixelPtr[3] > 0) || (!pixbuf.HasAlpha)) {
 								if (max > byte.MaxValue / 2)
 									light++;
 								else
 									light--;
 							}
 							
-							pixelPtr += 4;
+							pixelPtr += offset;
 						}
-						pixelPtr += pixbuf.Rowstride - pixbuf.Width * 4;
+						pixelPtr += pixbuf.Rowstride - pixbuf.Width * offset;
 					}
 				}
 			}
 			
 			return light > 0;
 		}
-		
+
 		/// <summary>
 		/// Returns a monochrome version of the supplied pixbuf.
 		/// </summary>
@@ -110,6 +117,7 @@ namespace Docky.Services
 		public Gdk.Pixbuf MonochromePixbuf (Gdk.Pixbuf source)
 		{
 			try {
+				int offset = (source.HasAlpha) ? 4 : 3;
 				Gdk.Pixbuf monochrome = source;
 				unsafe {
 					double a, r, g, b;
@@ -118,21 +126,18 @@ namespace Docky.Services
 						r = (double) pixels[0];
 						g = (double) pixels[1];
 						b = (double) pixels[2];
-						a = (double) pixels[3];
 						
 						Cairo.Color color = new Cairo.Color (r / byte.MaxValue, 
 						                                     g / byte.MaxValue, 
-						                                     b / byte.MaxValue,
-						                                     a / byte.MaxValue);
+						                                     b / byte.MaxValue);
 						
 						color = color.DarkenBySaturation (0.5).SetSaturation (0);
 						
 						pixels[0] = (byte) (color.R * byte.MaxValue);
 						pixels[1] = (byte) (color.G * byte.MaxValue);
 						pixels[2] = (byte) (color.B * byte.MaxValue);
-						pixels[3] = (byte) (color.A * byte.MaxValue);
 						
-						pixels += 4;
+						pixels += offset;
 					}
 				}
 				source = monochrome.Copy ();
@@ -160,6 +165,7 @@ namespace Docky.Services
 		public Gdk.Pixbuf AddHueShift (Gdk.Pixbuf source, double shift)
 		{
 			try {
+				int offset = (source.HasAlpha) ? 4 : 3;
 				Gdk.Pixbuf shifted = source;
 				if (shift != 0) {
 					unsafe {
@@ -169,20 +175,18 @@ namespace Docky.Services
 							r = (double) pixels[0];
 							g = (double) pixels[1];
 							b = (double) pixels[2];
-							a = (double) pixels[3];
 							
 							Cairo.Color color = new Cairo.Color (r / byte.MaxValue, 
 								g / byte.MaxValue, 
-								b / byte.MaxValue,
-								a / byte.MaxValue);
+								b / byte.MaxValue);
+							
 							color = color.AddHue (shift);
 							
 							pixels[0] = (byte) (color.R * byte.MaxValue);
 							pixels[1] = (byte) (color.G * byte.MaxValue);
 							pixels[2] = (byte) (color.B * byte.MaxValue);
-							pixels[3] = (byte) (color.A * byte.MaxValue);
 							
-							pixels += 4;
+							pixels += offset;
 						}
 					}
 				}
@@ -195,6 +199,7 @@ namespace Docky.Services
 			
 			return source;
 		}
+		#endregion
 		
 		/// <summary>
 		/// Load an icon specifying the width and height.
