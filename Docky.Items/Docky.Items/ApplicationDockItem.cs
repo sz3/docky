@@ -88,7 +88,7 @@ namespace Docky.Items
 		void UpdateInfo ()
 		{
 			if (OwnedItem.HasAttribute ("Icon"))
-				Icon = OwnedItem.GetString ("Icon");
+				Icon = OwnedItem.GetLocaleString ("Icon");
 			
 			if (OwnedItem.HasAttribute ("X-GNOME-FullName")) {
 				HoverText = OwnedItem.GetLocaleString ("X-GNOME-FullName");
