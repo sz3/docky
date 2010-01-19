@@ -55,7 +55,7 @@ class DockyGajimItem(DockyItem):
 		
 		self.bus_interface.ListNames (reply_handler=self.list_names_handler, error_handler=self.list_names_error_handler)
 
-		self.bus.add_signal_receiver(self.signal_new_message, "NewMessage", gajimiface, gajimibus, gajimpath)
+		self.bus.add_signal_receiver(self.signal_new_message, "NewMessage", gajimiface, gajimbus, gajimpath)
 
 	def list_names_handler(self, names):
 		if gajimbus in names:
