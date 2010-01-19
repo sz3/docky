@@ -19,6 +19,8 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
+using GLib;
+
 using Notifications;
 
 namespace Docky.Services.Logging
@@ -42,11 +44,50 @@ namespace Docky.Services.Logging
 
 		static bool Writing { get; set; }
 		static ICollection<LogCall> PendingLogCalls { get; set; }
+		static readonly string[] domains = new string[] {
+			"Gtk",
+			"Gdk",
+			"GLib",
+			"GLib-GObject",
+			"Pango",
+			"GdkPixbuf"
+		};
 
 		static LogBase ()
 		{
 			Writing = false;
 			PendingLogCalls = new LinkedList<LogCall> ();
+			
+			foreach (string domain in domains)
+				GLib.Log.SetLogHandler (domain, LogLevelFlags.All, GLibLogFunc);
+		}
+		
+		static void GLibLogFunc (string domain, LogLevelFlags level, string message)
+		{
+			LogLevel docky_log_level;
+			
+			switch (level) {
+			case LogLevelFlags.Critical:
+				docky_log_level = LogLevel.Fatal;
+				break;
+			case LogLevelFlags.Error:
+				docky_log_level = LogLevel.Error;
+				break;
+			case LogLevelFlags.Warning:
+				docky_log_level = LogLevel.Warn;
+				break;
+			case LogLevelFlags.Info:
+			case LogLevelFlags.Message:
+				docky_log_level = LogLevel.Info;
+				break;
+			case LogLevelFlags.Debug:
+				docky_log_level = LogLevel.Debug;
+				break;
+			default:
+				docky_log_level = LogLevel.Warn;
+				break;
+			}
+			Write (docky_log_level, "[{0}] {1}", domain, message);
 		}
 
 		public static void Write (LogLevel level, string msg, params object[] args)

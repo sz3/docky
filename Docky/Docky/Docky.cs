@@ -59,6 +59,12 @@ namespace Docky
 		
 		public static void Main (string[] args)
 		{
+			// output the version number & system info
+			Log.DisplayLevel = LogLevel.Info;
+			Log.Info ("Docky version: {0}", AssemblyInfo.VersionDetails);
+			Log.Info ("Kernel version: {0}", System.Environment.OSVersion.Version);
+			Log.Info ("CLR version: {0}", System.Environment.Version);
+			
 			//Init gtk and GLib related
 			Catalog.Init ("docky", AssemblyInfo.LocaleDirectory);
 			Gdk.Threads.Init ();
@@ -68,12 +74,6 @@ namespace Docky
 			GLib.GType.Init ();
 			
 			Wnck.Global.ClientType = Wnck.ClientType.Pager;
-			
-			// output the version number & system info
-			Log.DisplayLevel = LogLevel.Info;
-			Log.Info ("Docky version: {0}", AssemblyInfo.VersionDetails);
-			Log.Info ("Kernel version: {0}", System.Environment.OSVersion.Version);
-			Log.Info ("CLR version: {0}", System.Environment.Version);
 			
 			// process the command line args
 			CommandLinePreferences = new UserArgs (args);
