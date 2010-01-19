@@ -560,7 +560,7 @@ namespace Docky.Windowing
 					if (vexec.Contains ("\""))
 					    vexec = vexec.Substring (0, vexec.IndexOf ("\""));
 				// for crossover apps
-				} else if (exec.Contains (".cxoffice") && item.HasAttribute ("X-Created-By") && item.GetString ("X-Created-By").Contains ("cxoffice")) {
+				} else if (exec.Contains (".cxoffice") || (item.HasAttribute ("X-Created-By") && item.GetString ("X-Created-By").Contains ("cxoffice"))) {
 					// The exec is actually another file that uses exec to launch the actual app.
 					exec = exec.Replace ("\"", "");
 					
