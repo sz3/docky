@@ -59,6 +59,9 @@ namespace Docky
 		
 		public static void Main (string[] args)
 		{
+			// process the command line args
+			CommandLinePreferences = new UserArgs (args);			
+			
 			// output the version number & system info
 			Log.DisplayLevel = LogLevel.Info;
 			Log.Info ("Docky version: {0}", AssemblyInfo.VersionDetails);
@@ -74,9 +77,6 @@ namespace Docky
 			GLib.GType.Init ();
 			
 			Wnck.Global.ClientType = Wnck.ClientType.Pager;
-			
-			// process the command line args
-			CommandLinePreferences = new UserArgs (args);
 			
 			// set process name
 			DockServices.System.SetProcessName ("docky");
