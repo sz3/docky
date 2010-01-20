@@ -36,7 +36,6 @@ namespace WeatherDocklet
 		{
 			locations = new WeatherConfig ();
 			AddWidgets (locations.AsSingle ().Cast<Gtk.Widget> ());
-			Console.WriteLine ("constructing weather");
 		}
 		
 		protected override void OnShown ()

@@ -157,7 +157,7 @@ namespace RecentDocuments
 				if (!f.OwnedFile.Exists)
 					continue;
 
-				MenuItem item = new MenuItem (f.OwnedFile.Basename, f.Icon, (o, a) => DockServices.System.Open (f.OwnedFile));
+				MenuItem item = new IconMenuItem (f.OwnedFile.Basename, f.Icon, (o, a) => DockServices.System.Open (f.OwnedFile));
 				item.Mnemonic = null;
 				list[MenuListContainer.RelatedItems].Add (item);
 			}
