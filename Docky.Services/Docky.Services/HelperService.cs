@@ -48,7 +48,7 @@ namespace Docky.Services
 		public static File SysMetaDir = HelperService.SysScriptsDir.GetChild ("metadata");
 		
 		IEnumerable<GLib.File> HelperDirs = new [] {
-			//UserScriptsDir,
+			UserScriptsDir,
 			SysScriptsDir,
 		}.Where (dir => dir.Exists).Distinct ();
 		

@@ -78,8 +78,10 @@ namespace Docky
 		
 		IEnumerable<GLib.File> ThemeContainerFolders {
 			get {
-				yield return DockServices.Paths.SystemDataFolder.GetChild ("themes");
-				yield return DockServices.Paths.UserDataFolder.GetChild ("themes");
+				return new [] {
+					DockServices.Paths.SystemDataFolder.GetChild ("themes"),
+					DockServices.Paths.UserDataFolder.GetChild ("themes"),
+				}.Where (d => d.Exists).Distinct ();
 			}
 		}
 		
