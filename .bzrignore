@@ -32,3 +32,4 @@ po/.intltool-merge-cache
 Docky.Windowing/Docky.Windowing.dll.config
 *.gmo
 py-compile
+scripts/docky/docky.py
