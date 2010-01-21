@@ -494,13 +494,13 @@ namespace Docky.Windowing
 			if (exec_to_desktop_files == null)
 				return;
 			
-			string file = Path.Combine (DockServices.System.UserDataFolder, "ExecStrings");
+			GLib.File file = DockServices.Paths.UserDataFolder.GetChild ("ExecStrings");
 			
-			if (File.Exists (file))
-				File.Delete (file);
+			if (file.Exists)
+				file.Delete ();
 			
 			try {
-				using (FileStream stream = new FileStream (file, FileMode.OpenOrCreate)) {
+				using (FileStream stream = new FileStream (file.Path, FileMode.OpenOrCreate)) {
 					BinaryFormatter formatter = new BinaryFormatter ();
 					formatter.Serialize (stream, exec_to_desktop_files);
 				}
@@ -511,15 +511,15 @@ namespace Docky.Windowing
 		
 		Dictionary<string, List<string>> DeserializeExecStrings ()
 		{
-			string file = Path.Combine (DockServices.System.UserDataFolder, "ExecStrings");
+			GLib.File file = DockServices.Paths.UserDataFolder.GetChild ("ExecStrings");
 			
-			if (!File.Exists (file))
+			if (!file.Exists)
 				return null;
 			
 			Dictionary<string, List<string>> result;
 			
 			try {
-				using (FileStream stream = new FileStream (file, FileMode.Open)) {
+				using (FileStream stream = new FileStream (file.Path, FileMode.Open)) {
 					BinaryFormatter formatter = new BinaryFormatter ();
 					result = (Dictionary<string, List<string>>) formatter.Deserialize (stream);
 				}

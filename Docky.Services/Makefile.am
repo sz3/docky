@@ -29,6 +29,7 @@ FILES = \
 	Docky.Services/NotificationService.cs \
 	Docky.Services/Preferences.cs \
 	Docky.Services/NativeInterop.cs \
+	Docky.Services/PathsService.cs \
 	Gtk/MountOperation.cs \
 	GLibSharp/AsyncReadyCallbackNative.cs
 

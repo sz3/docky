@@ -90,7 +90,7 @@ namespace Docky.Services
 			FileEnumerator enumerator = file.EnumerateChildren ("standard::type,standard::name,access::can-read", FileQueryInfoFlags.NofollowSymlinks, null);
 			
 			if (enumerator == null)
-				return Enumerable.Empty <GLib.File> ();
+				return Enumerable.Empty<GLib.File> ();
 			
 			FileInfo info;
 			List<GLib.File> dirs = new List<GLib.File> ();
@@ -105,8 +105,15 @@ namespace Docky.Services
 				}
 			}
 			
+			if (info != null)
+				info.Dispose ();
 			enumerator.Close (null);
 			return dirs.AsEnumerable ();
+		}
+		
+		public static IEnumerable<GLib.File> GetFiles (this GLib.File file)
+		{
+			return file.GetFiles ("");
 		}
 		
 		// gets all files under the given GLib.File (directory) with the extension of extension	
@@ -115,7 +122,7 @@ namespace Docky.Services
 			FileEnumerator enumerator = file.EnumerateChildren ("standard::type,standard::name", FileQueryInfoFlags.NofollowSymlinks, null);
 			
 			if (enumerator == null)
-				return Enumerable.Empty <GLib.File> ();
+				return Enumerable.Empty<GLib.File> ();
 			
 			FileInfo info;
 			List<GLib.File> files = new List<GLib.File> ();
@@ -130,6 +137,8 @@ namespace Docky.Services
 					files.Add (child);
 			}
 			
+			if (info != null)
+				info.Dispose ();
 			enumerator.Close (null);
 			return files.AsEnumerable ();
 		}
@@ -146,13 +155,16 @@ namespace Docky.Services
 			
 			while ((info = enumerator.NextFile ()) != null) {
 				File child = file.GetChild (info.Name);
-
+				
 				if (info.FileType == FileType.Directory)
 					Delete_Recurse (child);
-
+				
 				if (info.GetAttributeBoolean ("access::can-delete"))
 					child.Delete (null);
 			}
+			
+			if (info != null)
+				info.Dispose ();
 			enumerator.Close (null);
 		}
 		
@@ -177,7 +189,7 @@ namespace Docky.Services
 		public static string NewFileName (this GLib.File fileToMove, File dest)
 		{
 			string name, ext;
-						
+			
 			if (fileToMove.Basename.Split ('.').Count() > 1) {
 				name = fileToMove.Basename.Split ('.').First ();
 				ext = fileToMove.Basename.Substring (fileToMove.Basename.IndexOf ('.'));
@@ -197,14 +209,14 @@ namespace Docky.Services
 		}
 		
 		static void Recursive_Copy (GLib.File source, GLib.File dest, ref long copiedBytes, long totalBytes, FileProgressCallback progress_cb)
-		{			
+		{
 			if (source.QueryFileType () != FileType.Directory) {
 				source.Copy (dest, FileCopyFlags.AllMetadata | FileCopyFlags.NofollowSymlinks, null, (current, total) => {
-					progress_cb.Invoke (current, totalBytes);
-				});
+					 progress_cb.Invoke (current, totalBytes);
+				 });
 				return;
 			}
-	
+			
 			FileEnumerator enumerator = source.EnumerateChildren ("standard::type,standard::name,standard::size", FileQueryInfoFlags.NofollowSymlinks, null);
 			
 			if (enumerator == null)
@@ -214,7 +226,7 @@ namespace Docky.Services
 			
 			while ((info = enumerator.NextFile ()) != null) {
 				File child = source.GetChild (info.Name);
-
+				
 				if (info.FileType == FileType.Directory) {
 					// copy all of the children
 					Recursive_Copy (child, dest.GetChild (info.Name), ref copiedBytes, totalBytes, progress_cb);
@@ -227,22 +239,25 @@ namespace Docky.Services
 					long copied = copiedBytes;
 					// copy
 					child.Copy (dest.GetChild (info.Name), FileCopyFlags.AllMetadata | FileCopyFlags.NofollowSymlinks, null, (current, total) => {
-						progress_cb.Invoke (copied + current, totalBytes);
-					});
+						 progress_cb.Invoke (copied + current, totalBytes);
+					 });
 					copiedBytes += info.Size;
 				}
 			}
+			
+			if (info != null)
+				info.Dispose ();
 			enumerator.Close (null);
 		}
 		
 		// will recurse and get the total size in bytes
-		public static long GetSize(this GLib.File file)
+		public static long GetSize (this GLib.File file)
 		{
 			FileInfo fileInfo = file.QueryInfo ("standard::type,standard::size", FileQueryInfoFlags.NofollowSymlinks, null);
 			
 			if (fileInfo.FileType != FileType.Directory)
 				return fileInfo.Size;
-				
+			
 			long size = 0;
 			FileEnumerator enumerator = file.EnumerateChildren ("standard::type,standard::name,standard::size", FileQueryInfoFlags.NofollowSymlinks, null);
 			
@@ -260,6 +275,8 @@ namespace Docky.Services
 					size += info.Size;
 			}
 			
+			if (info != null)
+				info.Dispose ();
 			enumerator.Close (null);
 			return size;
 		}

@@ -42,13 +42,13 @@ namespace Docky.Services
 	
 	public class HelperService
 	{
-		public static File UserScriptsDir = GLib.FileFactory.NewForPath (DockServices.System.UserDataFolder).GetChild ("helpers");
+		public static File UserScriptsDir = DockServices.Paths.UserDataFolder.GetChild ("helpers");
 		public static File UserMetaDir = HelperService.UserScriptsDir.GetChild ("metadata");
-		public static File SysScriptsDir = GLib.FileFactory.NewForPath (DockServices.System.SystemDataFolder).GetChild ("helpers");
+		public static File SysScriptsDir = DockServices.Paths.SystemDataFolder.GetChild ("helpers");
 		public static File SysMetaDir = HelperService.SysScriptsDir.GetChild ("metadata");
 		
 		IEnumerable<GLib.File> HelperDirs = new [] {
-			UserScriptsDir,
+			//UserScriptsDir,
 			SysScriptsDir,
 		}.Where (dir => dir.Exists).Distinct ();
 		

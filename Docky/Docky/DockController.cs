@@ -76,10 +76,10 @@ namespace Docky
 			return docks.Where (d => d.Preferences.MonitorNumber == monitorNumber);
 		}
 		
-		IEnumerable<string> ThemeContainerFolders {
+		IEnumerable<GLib.File> ThemeContainerFolders {
 			get {
-				yield return Path.Combine (DockServices.System.SystemDataFolder, "themes");
-				yield return Path.Combine (DockServices.System.UserDataFolder, "themes");
+				yield return DockServices.Paths.SystemDataFolder.GetChild ("themes");
+				yield return DockServices.Paths.UserDataFolder.GetChild ("themes");
 			}
 		}
 		
@@ -99,10 +99,8 @@ namespace Docky
 		public IEnumerable<string> DockThemes {
 			get {
 				yield return DefaultTheme;
-				foreach (string dir in ThemeContainerFolders) {
-					if (!Directory.Exists (dir))
-						continue;
-					foreach (string s in Directory.GetDirectories (dir))
+				foreach (GLib.File dir in ThemeContainerFolders.Where (f => f.Exists)) {
+					foreach (string s in Directory.GetDirectories (dir.Path))
 						yield return Path.GetFileName (s);
 				}
 			}
@@ -206,28 +204,14 @@ namespace Docky
 				mon.PossiblePositions = positions;
 			}
 		}
-		
-		string FolderForTheme (string theme)
-		{
-			foreach (string dir in ThemeContainerFolders) {
-				if (!Directory.Exists (dir))
-					continue;
-				foreach (string subdir in Directory.GetDirectories (dir)) {
-					if (Path.GetFileName (subdir) == theme)
-						return subdir;
-				}
-			}
-			return null;
-		}
-		
+
 		string ThemedSvg (string svgName, string def)
 		{
-			string themeFolder = FolderForTheme (DockTheme);
+			GLib.File themeFolder = ThemeContainerFolders.SelectMany (f => f.SubDirs (false)).First (th => th.Basename == DockTheme);
 			
 			if (DockTheme != DefaultTheme && themeFolder != null) {
-				string path = Path.Combine (themeFolder, svgName);
-				if (File.Exists (path))
-					return path;
+				if (themeFolder.GetChild (svgName).Exists)
+					return themeFolder.GetChild (svgName).Path;
 			}
 			return def + "@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName;
 		}

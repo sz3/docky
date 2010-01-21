@@ -87,7 +87,7 @@ namespace Docky.Services
 				int offset = (source.HasAlpha) ? 4 : 3;
 				Gdk.Pixbuf transform = source.Copy ();
 				unsafe {
-					double a, r, g, b;
+					double r, g, b;
 					byte* pixels = (byte*) transform.Pixels;
 					for (int i = 0; i < transform.Height * transform.Width; i++) {
 						r = (double) pixels[0];

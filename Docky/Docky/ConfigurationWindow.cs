@@ -61,7 +61,7 @@ namespace Docky
 	public partial class ConfigurationWindow : Gtk.Window
 	{
 		string AutoStartKey = "Hidden";
-		DesktopItem autostartfile;
+		DesktopItem auto_start_item;
 		TileView HelpersTileview, DockletsTileview;
 		Widgets.SearchEntry HelperSearch, DockletSearch;
 		
@@ -321,57 +321,52 @@ namespace Docky
 		string AutoStartFileName {
 			get { return System.IO.Path.Combine (AutoStartDir, "docky.desktop"); }
 		}
-
-		string AutoStartUri {
-			get { return Gnome.Vfs.Uri.GetUriFromLocalPath (AutoStartFileName); }
-		}
-
-		DesktopItem AutoStartFile {
+		
+		DesktopItem AutoStartItem {
 			get {
-				if (autostartfile != null)
-					return autostartfile;
+				if (auto_start_item != null)
+					return auto_start_item;
+				
+				GLib.File file = DockServices.Paths.AutoStartFile;
 				
 				try {
-					autostartfile = DesktopItem.NewFromUri (AutoStartUri, DesktopItemLoadFlags.NoTranslations);
+					auto_start_item = DesktopItem.NewFromFile (file.Path, DesktopItemLoadFlags.NoTranslations);
 				} catch (GLib.GException loadException) {
-					Log<DockPlacementWidget>.Info ("Unable to load existing autostart file: {0}", loadException.Message);
-					Log<DockPlacementWidget>.Info ("Writing new autostart file to {0}", AutoStartFileName);
-					autostartfile = DesktopItem.NewFromFile (System.IO.Path.Combine (AssemblyInfo.InstallData, "applications/docky.desktop"), DesktopItemLoadFlags.NoTranslations);
+					Log<ConfigurationWindow>.Info ("Unable to load existing autostart file: {0}", loadException.Message);
+					Log<ConfigurationWindow>.Info ("Writing new autostart file to {0}", file.Path);
+					Console.WriteLine (System.IO.Path.Combine (AssemblyInfo.InstallData, "applications/docky.desktop"));
+					auto_start_item = DesktopItem.NewFromFile (System.IO.Path.Combine (AssemblyInfo.InstallData, "applications/docky.desktop"), DesktopItemLoadFlags.NoTranslations);
 					try {
-						if (!Directory.Exists (AutoStartDir))
-							Directory.CreateDirectory (AutoStartDir);
+						if (!file.Parent.Exists)
+							file.Parent.MakeDirectoryWithParents (null);						
 						
-						autostartfile.Save (AutoStartUri, true);
-						autostartfile.Location = AutoStartUri;
+						auto_start_item.Save (file.StringUri (), true);
+						auto_start_item.Location = file.StringUri ();
 					} catch (Exception e) {
-						Log<DockPlacementWidget>.Error ("Failed to write initial autostart file: {0}", e.Message);
+						Log<ConfigurationWindow>.Error ("Failed to write initial autostart file: {0}", e.Message);
 					}
 				}
-				return autostartfile;
+				return auto_start_item;
 			}
 		}
 
 		bool IsAutoStartEnabled ()
 		{
-			DesktopItem autostart = AutoStartFile;
-			
-			if (!autostart.Exists ()) {
-				Log<SystemService>.Error ("Could not open autostart file {0}", AutoStartUri);
+			if (!AutoStartItem.Exists ()) {
+				Log<SystemService>.Error ("Could not open autostart file {0}", DockServices.Paths.AutoStartFile.Path);
 			}
 			
-			if (autostart.AttrExists (AutoStartKey)) {
-				return !String.Equals (autostart.GetString (AutoStartKey), "true", StringComparison.OrdinalIgnoreCase);
+			if (AutoStartItem.AttrExists (AutoStartKey)) {
+				return !String.Equals (AutoStartItem.GetString (AutoStartKey), "true", StringComparison.OrdinalIgnoreCase);
 			}
 			return false;
 		}
 
 		void SetAutoStartEnabled (bool enabled)
 		{
-			DesktopItem autostart = AutoStartFile;
-			
-			autostart.SetBoolean (AutoStartKey, !enabled);
+			AutoStartItem.SetBoolean (AutoStartKey, !enabled);
 			try {
-				autostart.Save (null, true);
+				AutoStartItem.Save (null, true);
 			} catch (Exception e) {
 				Log<SystemService>.Error ("Failed to update autostart file: {0}", e.Message);
 			}

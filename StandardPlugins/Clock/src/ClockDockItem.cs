@@ -91,7 +91,7 @@ namespace Clock
 		
 		public string ThemeFolder {
 			get {
-				return System.IO.Path.Combine (DockServices.System.SystemDataFolder, "ClockTheme");
+				return DockServices.Paths.SystemDataFolder.GetChild ("ClockTheme").Path;
 			}
 		}
 		

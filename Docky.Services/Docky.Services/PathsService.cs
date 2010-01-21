@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2010 Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -14,35 +14,26 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
-
 using System;
+
+using GLib;
 
 namespace Docky.Services
 {
-
-
-	public class DockServices
+	public class PathsService
 	{
-		public static DrawingService Drawing { get; private set; }
+
+		public File SystemDataFolder {
+			get { return FileFactory.NewForPath (AssemblyInfo.DataDirectory).GetChild ("docky"); }
+		}
+
+		public File UserDataFolder {
+			get { return FileFactory.NewForPath (Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData)).GetChild ("docky"); }
+		}
 		
-		public static PreferencesService Preferences { get; private set; }
-		
-		public static SystemService System { get; private set; }
-		
-		public static HelperService Helpers { get; private set; }
-		
-		public static PathsService Paths { get; private set; }
-		
-		static DockServices ()
-		{
-			Paths = new PathsService ();
-			Drawing = new DrawingService ();
-			Preferences = new PreferencesService ();
-			System = new SystemService ();
-			Helpers = new HelperService ();
-			NotificationService.Initialize ();
-			
-			Log<DockServices>.Info ("Dock services initialized.");
+		public File AutoStartFile {
+			get { return FileFactory.NewForPath (Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData)).GetChild ("autostart").GetChild ("docky.desktop"); }
 		}
 	}
 }
+
