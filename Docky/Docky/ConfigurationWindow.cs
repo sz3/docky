@@ -334,7 +334,6 @@ namespace Docky
 				} catch (GLib.GException loadException) {
 					Log<ConfigurationWindow>.Info ("Unable to load existing autostart file: {0}", loadException.Message);
 					Log<ConfigurationWindow>.Info ("Writing new autostart file to {0}", file.Path);
-					Console.WriteLine (System.IO.Path.Combine (AssemblyInfo.InstallData, "applications/docky.desktop"));
 					auto_start_item = DesktopItem.NewFromFile (System.IO.Path.Combine (AssemblyInfo.InstallData, "applications/docky.desktop"), DesktopItemLoadFlags.NoTranslations);
 					try {
 						if (!file.Parent.Exists)

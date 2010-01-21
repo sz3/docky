@@ -50,7 +50,7 @@ namespace Docky.Services
 		IEnumerable<GLib.File> HelperDirs = new [] {
 			UserScriptsDir,
 			SysScriptsDir,
-		}.Where (dir => dir.Exists).Distinct ();
+		}.Where (dir => dir.Exists).Distinct (new FileEqualityComparer ());
 		
 		public event EventHandler<HelperStatusChangedEventArgs> HelperStatusChanged;
 		public event EventHandler HelperUninstalled;

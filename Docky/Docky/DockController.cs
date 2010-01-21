@@ -81,7 +81,7 @@ namespace Docky
 				return new [] {
 					DockServices.Paths.SystemDataFolder.GetChild ("themes"),
 					DockServices.Paths.UserDataFolder.GetChild ("themes"),
-				}.Where (d => d.Exists).Distinct ();
+				}.Where (d => d.Exists).Distinct (new FileEqualityComparer ());
 			}
 		}
 		

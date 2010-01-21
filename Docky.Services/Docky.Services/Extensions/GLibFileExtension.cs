@@ -22,6 +22,20 @@ using GLib;
 
 namespace Docky.Services
 {
+	
+	public class FileEqualityComparer : IEqualityComparer<GLib.File>
+	{
+		public bool Equals (File file, File other)
+		{
+			return file.Path == other.Path;
+		}
+
+
+		public int GetHashCode (File file)
+		{
+			return file.Path.GetHashCode ();
+		}
+	}
 
 	public static class GLibFileExtension
 	{
