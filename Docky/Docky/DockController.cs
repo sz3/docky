@@ -209,7 +209,9 @@ namespace Docky
 
 		string ThemedSvg (string svgName, string def)
 		{
-			GLib.File themeFolder = ThemeContainerFolders.SelectMany (f => f.SubDirs (false)).First (th => th.Basename == DockTheme);
+			GLib.File themeFolder = ThemeContainerFolders
+				.SelectMany (f => f.SubDirs (false))
+				.FirstOrDefault (th => th.Basename == DockTheme);
 			
 			if (DockTheme != DefaultTheme && themeFolder != null) {
 				if (themeFolder.GetChild (svgName).Exists)
