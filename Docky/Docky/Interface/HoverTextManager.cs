@@ -75,9 +75,7 @@ namespace Docky.Interface
 			
 			window.SetCompositeColormap ();
 			window.ExposeEvent += HandleWindowExposeEvent;
-			
-			Wnck.Screen.Default.ActiveWindowChanged += HandleWnckScreenDefaultActiveWindowChanged;
-			
+						
 			Docky.Controller.ThemeChanged += DockyControllerThemeChanged;
 		}
 		
@@ -92,31 +90,7 @@ namespace Docky.Interface
 			ResetBackgroundBuffer ();
 			SetLight ();
 		}
-		
-		void HandleWnckScreenDefaultActiveWindowChanged (object o, Wnck.ActiveWindowChangedArgs args)
-		{
-			if (args.PreviousWindow != null)
-				args.PreviousWindow.GeometryChanged -= HandleWnckScreenDefaultActiveWindowGeometryChanged;
-			if (Wnck.Screen.Default.ActiveWindow != null)
-				Wnck.Screen.Default.ActiveWindow.GeometryChanged += HandleWnckScreenDefaultActiveWindowGeometryChanged;
-		}
 
-		void HandleWnckScreenDefaultActiveWindowGeometryChanged (object sender, EventArgs e)
-		{
-			Wnck.Window active = sender as Wnck.Window;
-			if (active == null)
-				return;
-
-			// some 'fullscreen' windows are actually a pixel or two short of being true fullscreen
-			Gdk.Rectangle monitor_geo = window.Screen.GetMonitorGeometry (Monitor);
-			Gdk.Rectangle window_geo = active.EasyGeometry ();
-			window_geo.Inflate (2, 2);
-			
-			fullscreen = active.IsFullscreen || (window_geo.Height >= monitor_geo.Height && window_geo.Width >= monitor_geo.Width);
-			if (fullscreen && window != null)
-				window.Hide ();
-		}
-		
 		public void SetSurfaceAtPoint (DockySurface surface, Gdk.Point point)
 		{
 			if (surface == currentSurface && point == currentPoint) {
@@ -255,7 +229,7 @@ namespace Docky.Interface
 		public void Dispose ()
 		{
 			currentSurface = null;
-			Wnck.Screen.Default.ActiveWindowChanged -= HandleWnckScreenDefaultActiveWindowChanged;
+
 			if (window != null) {
 				window.Destroy ();
 				window.Dispose ();

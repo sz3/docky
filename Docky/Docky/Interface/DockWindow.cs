@@ -1014,8 +1014,9 @@ namespace Docky.Interface
 		
 		void OnHoveredItemChanged (AbstractDockItem lastItem)
 		{
-			if (HoveredItemChanged != null)
+			if (HoveredItemChanged != null) {
 				HoveredItemChanged (this, new HoveredItemChangedArgs (lastItem));
+			}
 		}
 		#endregion
 		
@@ -1215,7 +1216,7 @@ namespace Docky.Interface
 							!Menu.Visible && !ConfigurationMode && Painter == null) ||
 							ActiveGlow ||
 							(ExternalDragActive && DockHovered && !(hoveredItem is INonPersistedItem));
-			
+						
 			if (visible)
 				TextManager.Show ();
 			else
@@ -1724,7 +1725,7 @@ namespace Docky.Interface
 				val.HoverArea = hoverArea;
 				DrawValues[adi] = val;
 
-				if (hoverArea.Contains (localCursor)) {
+				if (hoverArea.Contains (localCursor) && !AutohideManager.Hidden) {
 					HoveredItem = adi;
 					hoveredItemSet = true;
 				}

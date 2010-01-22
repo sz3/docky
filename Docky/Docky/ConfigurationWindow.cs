@@ -121,10 +121,6 @@ namespace Docky
 			DockletsTileview = new TileView ();
 			DockletsTileview.IconSize = 48;
 			docklet_scroll.AddWithViewport (DockletsTileview);
-			
-			PluginManager.AddinStateChanged += delegate(object sender, AddinStateChangedEventArgs e) {
-				Console.WriteLine ("{0} state: {1}", e.Addin.Name, e.State);
-			};
 			// }
 			
 			// setup helpers {
