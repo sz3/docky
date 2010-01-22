@@ -864,7 +864,11 @@ namespace Docky.Interface
 			foreach (AbstractDockItemProvider adip in item_providers.Where (adip => adip != DefaultProvider)) {
 				PluginManager.Disable (adip);
 			}
+			
+			foreach (AbstractDockItemProvider provider in item_providers)
+				provider.Dispose ();
 			item_providers = new List<AbstractDockItemProvider> ();
+			FileApplicationProvider.WindowManager.UpdateTransientItems ();
 			
 			SyncPlugins ();
 		}

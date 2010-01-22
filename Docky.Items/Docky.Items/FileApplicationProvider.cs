@@ -275,6 +275,7 @@ namespace Docky.Items
 		{
 			transient_items.Remove (item);
 			items.Add (new Uri (item.OwnedItem.Location).AbsoluteUri, item);
+			Items = InternalItems;
 		}
 		
 		public void SetWindowManager ()
@@ -372,13 +373,10 @@ namespace Docky.Items
 			Items = Enumerable.Empty<AbstractDockItem> ();
 			foreach (AbstractDockItem adi in old_items)
 				adi.Dispose ();
+			
+			Providers.Remove (this);
 		}
 		
 		#endregion
-
-		~FileApplicationProvider ()
-		{
-			Providers.Remove (this);
-		}
 	}
 }
