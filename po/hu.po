@@ -7,65 +7,90 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-01-08 11:02+0100\n"
-"PO-Revision-Date: 2010-01-04 07:03+0000\n"
-"Last-Translator: NewPlayer <Unknown>\n"
+"POT-Creation-Date: 2010-01-13 11:18+0100\n"
+"PO-Revision-Date: 2010-01-19 17:33+0000\n"
+"Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-01-09 08:52+0000\n"
+"X-Launchpad-Export-Date: 2010-01-22 17:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:102
-msgid "Search Helpers..."
-msgstr "Keresés..."
+#: ../Docky/Docky/ConfigurationWindow.cs:113
+msgid "Search Docklets..."
+msgstr "Dockletek keresése…"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:147
+#: ../Docky/Docky/ConfigurationWindow.cs:132
+msgid "Search Helpers..."
+msgstr "Segédek keresése…"
+
+#: ../Docky/Docky/ConfigurationWindow.cs:178
 msgid "Click on any dock to configure."
 msgstr "A beállításokhoz kattintson valamelyik dokkra."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:148
+#: ../Docky/Docky/ConfigurationWindow.cs:179
 msgid "Drag any dock to move it."
-msgstr ""
+msgstr "Húzza a dokkot a mozgatásához."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:226
+#: ../Docky/Docky/ConfigurationWindow.cs:259
 msgid "Delete the currently selected dock?"
 msgstr "Törli a jelenleg kijelőlt dokkot?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:228
+#: ../Docky/Docky/ConfigurationWindow.cs:261
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
+"Ha a dokk törlését választja, minden rá\n"
+"vonatkozó beállítás el fog veszni."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:243
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:335
+#: ../Docky/Docky/ConfigurationWindow.cs:276
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:400
 msgid "_Delete Dock"
 msgstr "_Dokk törlése"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:362
+#: ../Docky/Docky/ConfigurationWindow.cs:397
 msgid "_Select"
 msgstr "_Kiválasztás"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:365
+#: ../Docky/Docky/ConfigurationWindow.cs:400
 msgid ".tar Archives"
-msgstr ""
+msgstr ".tar archívumok"
+
+#: ../Docky/Docky/DockletTile.cs:46
+#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:220
+msgid "_Add"
+msgstr "_Hozzáadás"
+
+#: ../Docky/Docky/DockletTile.cs:47
+#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:203
+msgid "_Remove"
+msgstr "_Eltávolítás"
+
+#: ../Docky/Docky/DockletTile.cs:48
+msgid "Author"
+msgstr "Szerző"
+
+#: ../Docky/Docky/DockletTile.cs:55
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:166
+msgid "Settings"
+msgstr "Beállítások"
 
 #: ../Docky/Docky/Docky.cs:107
 msgid ""
-"Docky requires compositing to work properly.  Please enable compositing and "
+"Docky requires compositing to work properly. Please enable compositing and "
 "restart docky."
 msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:41
-msgid "Enable"
-msgstr "Engedélyezés"
+msgid "_Enable"
+msgstr "_Engedélyezés"
 
 #: ../Docky/Docky/HelperTile.cs:42
-msgid "Disable"
-msgstr "Letiltás"
+msgid "_Disable"
+msgstr "_Letiltás"
 
 #: ../Docky/Docky/HelperTile.cs:43
 msgid "Status"
@@ -95,21 +120,22 @@ msgid ""
 "added to this dock."
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:636
+#: ../Docky/Docky/Interface/DockPreferences.cs:644
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
+"<i>Soha nem rejti el; a teljes méretű ablakok nem fedik el a dokkot.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:639
+#: ../Docky/Docky/Interface/DockPreferences.cs:647
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Elrejti, amikor az egér nincs fölötte.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:642
+#: ../Docky/Docky/Interface/DockPreferences.cs:650
 msgid "<i>Hides when dock obstructs the active application.</i>"
-msgstr ""
+msgstr "<i>Elrejti, amint a dokk elfedi az aktív alkalmazást.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:645
+#: ../Docky/Docky/Interface/DockPreferences.cs:653
 msgid "<i>Hides when dock obstructs any window.</i>"
-msgstr ""
+msgstr "<i>Elrejti, amint a dokk elfedi bármely ablakot.</i>"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:363
 msgid "Drag to reposition"
@@ -138,51 +164,58 @@ msgstr "_Névjegy"
 msgid "_Quit Docky"
 msgstr "_Kilépés a Docky-ból"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:80
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:92
 msgid "Docky Configuration"
 msgstr "Docky beállításai"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:124
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:137
 msgid "_Start When Computer Starts"
 msgstr "_Indítás a számítógép indulásakor"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:140
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:153
 msgid "_Theme:"
 msgstr "_Téma:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:164
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:177
 msgid "<b>General Options</b>"
 msgstr "<b>Általános beállítások</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:184
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:197
 msgid "<b>Dock Configuration</b>"
 msgstr "<b>Dokkbeállítások</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:198
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:211
 msgid "Docks"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:219
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:232
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:284
 msgid "All"
 msgstr "Összes"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:220
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:233
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:285
 msgid "Enabled"
 msgstr "Engedélyezett"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:221
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:234
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:286
 msgid "Disabled"
 msgstr "Kikapcsolt"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:245
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
+msgid "Docklets"
+msgstr "Dockletek"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:310
 msgid "_Install"
 msgstr "_Telepítés"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:277
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:342
 msgid "Helpers"
 msgstr "Segédek"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:308
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:373
 msgid "_New Dock"
 msgstr "_Új dokk"
 
@@ -204,7 +237,7 @@ msgstr "Ablak dokkolása"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:97
 msgid "_Fade On Hide"
-msgstr ""
+msgstr "Áttűnés _elrejtéskor"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:141
 msgid "_Icon Size:"
@@ -216,11 +249,11 @@ msgstr "_Elrejtés:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
 msgid "Indicat_e Multiple Windows"
-msgstr ""
+msgstr "_Több azonos ablak jelzése"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
 msgid "_Panel Mode"
-msgstr ""
+msgstr "_Panel mód"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:192
 msgid "3D Background"
@@ -236,11 +269,11 @@ msgstr "_Nagyítás:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:288
 msgid "<b>Inactive Docklets</b>"
-msgstr ""
+msgstr "<b>Inaktív dockletek</b>"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:296
 msgid "<b>Active Docklets</b>"
-msgstr ""
+msgstr "<b>Aktív dockletek</b>"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:91
 msgid "Icon"
@@ -340,14 +373,6 @@ msgstr "Fiókinformációk ellenőrzése és mentése"
 msgid "Account validation succeeded!"
 msgstr "A fiók ellenőrzése sikeres!"
 
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:193
-msgid "_Remove"
-msgstr "_Eltávolítás"
-
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:210
-msgid "_Add"
-msgstr "_Hozzáadás"
-
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:87
 msgid "Password"
 msgstr "Jelszó"
@@ -368,19 +393,19 @@ msgstr "Nincs fiókja?"
 msgid "Computer"
 msgstr "Számítógép"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:418
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:419
 msgid "Di_gital Clock"
 msgstr "Di_gitális óra"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:424
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:425
 msgid "24-Hour _Clock"
 msgstr "2_4-órás óra"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:430
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "Show _Date"
 msgstr "Dátum _megjelenítése"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:436
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
 msgid "Select _Theme"
 msgstr "_Téma kiválasztása"
 
@@ -405,37 +430,37 @@ msgstr "Ellenőrzés m_inden:"
 msgid "minutes"
 msgstr "percben"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:185
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:183
 msgid "Username or Password not set"
 msgstr "A felhasználónév vagy jelszó nincs megadva"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:235
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:233
 msgid "(no subject)"
 msgstr "(nincs tárgy)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:253
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:251
 #, csharp-format
 msgid "From: {0}"
 msgstr "Feladó: {0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:264
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:268
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:262
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:266
 msgid "Feed Error"
 msgstr "Hírforráshiba"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:273
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:271
 msgid "Invalid Username"
 msgstr "Érvénytelen felhasználónév"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:277
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:275
 msgid "Network Error"
 msgstr "Hálózati hiba"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:282
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:280
 msgid "General Error"
 msgstr "Általános hiba"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:313
+#: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
 msgid "GMail Configuration"
 msgstr "GMail beállítása"
 
@@ -452,7 +477,7 @@ msgstr[1] "{0} olvasatlan üzenet"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:103
 msgid "Checking mail..."
-msgstr "E-mailek ellenőrzése..."
+msgstr "E-mailek ellenőrzése…"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:188
 msgid "_View "
@@ -466,7 +491,7 @@ msgstr "_Levélírás"
 msgid "New Mail"
 msgstr "Új e-mail"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:215
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
 msgid "Check _Mail"
 msgstr "E-_mail ellenőrzése"
 
@@ -529,33 +554,29 @@ msgstr "Nincs találat"
 msgid "Please try your search again."
 msgstr "Ismételje meg a keresést."
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:46
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:48
 msgid "Fetching Information..."
-msgstr "Információk lekérése..."
+msgstr "Információk lekérése…"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:66
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:68
 msgid "Click to add NPR stations."
 msgstr "NPR állomás hozzáadása"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:105
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:107
 msgid "Home Page"
 msgstr "Honlap"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:112
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:114
 msgid "Program Schedule"
 msgstr "Munkarend"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:119
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:121
 msgid "Donate"
 msgstr "Támogatás"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:126
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:128
 msgid "Live Streams"
 msgstr ""
-
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:164
-msgid "Settings"
-msgstr "Beállítások"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:76
 msgid "Clear the Recent Documents list?"
@@ -577,7 +598,7 @@ msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
 msgid "_Clear Recent Documents..."
-msgstr "_Legutóbbi dokumentumok törlése..."
+msgstr "_Legutóbbi dokumentumok törlése…"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
 msgid "No items in Trash"
@@ -612,7 +633,7 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:66
 msgid "_Weather Provider:"
-msgstr ""
+msgstr "_Időjárásjelentés-szolgáltató:"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:106
 msgid "My _Locations"
@@ -640,7 +661,7 @@ msgstr "Érvénytelen hely"
 msgid "Network Error: "
 msgstr "Hálózati hiba: "
 
-#: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:54
+#: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
@@ -648,7 +669,7 @@ msgstr ""
 "Az időjárási adatokat a Google szolgáltatja. Ehhez a helyet az US Zip "
 "kóddal, vagy „Város, Állam” formában kell megadnia."
 
-#: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:59
+#: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
 "Weather data provided by and copyright The Weather Channel.  This source "
 "requires locations to be specified as US Zip Code or a unique code from the "
@@ -660,7 +681,7 @@ msgstr ""
 "meghatározásához keresse meg az Ön előrejelzését az oldalon; a kód az URL "
 "„/local/” utáni része és ehhez hasonló: AAXX0000."
 
-#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:54
+#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
@@ -672,10 +693,14 @@ msgstr ""
 msgid "No results found."
 msgstr "Nincs találat."
 
+#: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
+msgid "Weather Configuration"
+msgstr "Időjárás beállításai"
+
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
 msgid "Fetching data..."
-msgstr "Adatok lekérése..."
+msgstr "Adatok lekérése…"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:216
 msgid "Radar _Map"
@@ -685,19 +710,15 @@ msgstr "Ra_dartérkép"
 msgid "Forecasts"
 msgstr "Előrejelzés"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:233
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:237
 msgid "Check _Weather"
 msgstr "Időjárás _ellenőrzése"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:248
-msgid "Weather Configuration"
-msgstr "Időjárás beállításai"
-
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:87
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
 msgid "_Today"
 msgstr "_Ma"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:90
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
 msgid "T_omorrow"
 msgstr "H_olnap"
 
@@ -858,3 +879,9 @@ msgstr "Naplemente"
 
 #~ msgid "<b>Inactive Plugins</b>"
 #~ msgstr "<b>Inaktív bővítmények</b>"
+
+#~ msgid "Disable"
+#~ msgstr "Letiltás"
+
+#~ msgid "Enable"
+#~ msgstr "Engedélyezés"
