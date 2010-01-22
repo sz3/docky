@@ -24,6 +24,7 @@ using System.Text;
 using Cairo;
 using Gdk;
 using Gtk;
+using Wnck;
 
 using Docky.CairoHelper;
 using Docky.Items;
@@ -106,7 +107,12 @@ namespace Docky.Interface
 			if (active == null)
 				return;
 
-			fullscreen = active.IsFullscreen;
+			// some 'fullscreen' windows are actually a pixel or two short of being true fullscreen
+			Gdk.Rectangle monitor_geo = window.Screen.GetMonitorGeometry (Monitor);
+			Gdk.Rectangle window_geo = active.EasyGeometry ();
+			window_geo.Inflate (2, 2);
+			
+			fullscreen = active.IsFullscreen || (window_geo.Height >= monitor_geo.Height && window_geo.Width >= monitor_geo.Width);
 			if (fullscreen && window != null)
 				window.Hide ();
 		}
