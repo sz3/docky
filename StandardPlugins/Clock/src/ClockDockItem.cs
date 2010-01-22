@@ -450,7 +450,7 @@ namespace Clock
 		
 		public override void Dispose ()
 		{
-			if (ClockThemeSelector.instance == null) {
+			if (ClockThemeSelector.instance != null) {
 				ClockThemeSelector.instance.Destroy ();
 				ClockThemeSelector.instance = null;
 			}
