@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #  
-#  Copyright (C) 2009 Jason Smith
+#  Copyright (C) 2009-2010 Jason Smith, Rico Tzschichholz
 # 
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -65,20 +65,54 @@ class PidginSink():
 class DockyPidginItem(DockyItem):
 	def __init__(self, path):
 		DockyItem.__init__(self, path)
+		self.pidgin = None
+		
+		self.bus.add_signal_receiver(self.name_owner_changed_cb,
+				dbus_interface='org.freedesktop.DBus',
+				signal_name='NameOwnerChanged')
+		
+		obj = self.bus.get_object ("org.freedesktop.DBus", "/org/freedesktop/DBus")
+		self.bus_interface = dbus.Interface(obj, "org.freedesktop.DBus")
+		
+		self.bus_interface.ListNames (reply_handler=self.list_names_handler, error_handler=self.list_names_error_handler)
+
+		self.bus.add_signal_receiver(self.status_changed, "AccountStatusChanged", pidginitem, pidginbus, pidginpath)
+
+	def list_names_handler(self, names):
+		if pidginbus in names:
+			self.pidgin = PidginSink()
+			self.set_menu_buttons()
+
+	def list_names_error_handler(self, error):
+		print "error getting bus names - %s" % str(error)
+	
+	def name_owner_changed_cb(self, name, old_owner, new_owner):
+		if name == pidginbus:
+			if new_owner:
+				self.pidgin = PidginSink()
+			else:
+				self.pidgin = None
+			self.set_menu_buttons()
+	
+	def init_pidgin_objects(self):
 		self.pidgin = PidginSink()
-		dbus.SessionBus ().add_signal_receiver(self.status_changed, "AccountStatusChanged", pidginitem, pidginbus, pidginpath)
-		self.set_menu_items()
-	
+
 	def status_changed(self, a, b, c):
-		self.set_menu_items()
+		self.set_menu_buttons()
 	
-	def set_menu_items(self):
+	def clear_menu_buttons(self):
 		for k, v in self.id_map.iteritems():
 			try:
 				self.iface.RemoveItem(k)
 			except:
-				break;
+				break;	
 	
+	def set_menu_buttons(self):
+		self.clear_menu_buttons()
+				
+		if not self.pidgin or not self.iface:
+			return
+
 		if self.pidgin.IsConnected():
 			if self.pidgin.IsAway():
 				self.add_menu_item ("Set Away", "/usr/share/pixmaps/pidgin/status/16/away.png", "", "Away")
@@ -102,7 +136,8 @@ class DockyPidginItem(DockyItem):
 	def add_menu_item(self, name, icon, group, ident):
 		menu_id = self.iface.AddMenuItem(name, icon, group)
 		self.id_map[menu_id] = ident
-			
+		
+	
 class DockyPidginSink(DockySink):
 	def item_path_found(self, pathtoitem, item):
 		if item.GetOwnsDesktopFile() and item.GetDesktopFile().endswith ("pidgin.desktop"):
