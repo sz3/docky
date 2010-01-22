@@ -274,6 +274,7 @@ namespace Docky.Items
 		public void PinToDock (ApplicationDockItem item)
 		{
 			transient_items.Remove (item);
+			Items = InternalItems;
 			items.Add (new Uri (item.OwnedItem.Location).AbsoluteUri, item);
 			Items = InternalItems;
 		}
