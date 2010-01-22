@@ -152,7 +152,7 @@ namespace WeatherDocklet
 			if (reloadImmediately)
 				Weather.ReloadWeatherData ();
 			
-			UpdateTimer = GLib.Timeout.Add (WeatherPreferences.Timeout * 60 * 1000, () => { Weather.ReloadWeatherData (); return true; });
+			UpdateTimer = GLib.Timeout.Add (WeatherPreferences.Timeout * 60 * 1000, () => { if (DockServices.System.NetworkConnected) Weather.ReloadWeatherData (); return true; });
 		}
 		
 		/// <summary>

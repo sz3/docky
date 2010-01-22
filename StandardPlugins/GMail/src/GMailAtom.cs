@@ -137,7 +137,7 @@ namespace GMail
 			
 			CheckGMail ();
 			
-			UpdateTimer = GLib.Timeout.Add (GMailPreferences.RefreshRate * 60 * 1000, () => { CheckGMail (); return true; });
+			UpdateTimer = GLib.Timeout.Add (GMailPreferences.RefreshRate * 60 * 1000, () => { if (DockServices.System.NetworkConnected) CheckGMail (); return true; });
 		}
 		
 		public void StopTimer ()
