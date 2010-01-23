@@ -2134,19 +2134,23 @@ namespace Docky.Interface
 			}
 
 			//Draw UrgentGlow which is visible when Docky is hidden and an item need attention
-			if (item.Indicator != ActivityIndicator.None 
-			    && !AnimationState.AnimationNeeded
-			    && AutohideManager.Hidden) {
+			//FIXME urgent_glow_buffer needs to be visible in FadeOnHide mode
+			if (item.Indicator != ActivityIndicator.None && !AnimationState.AnimationNeeded
+			    && AutohideManager.Hidden && !ConfigurationMode) {
 				
 				if (urgent_glow_buffer == null)
 					urgent_glow_buffer = CreateUrgentGlowBuffer ();
 
-				Cairo.PointD pos = val.Center;
-				pos.Y -= (int) IconSize / 2;
+				DrawValue glowloc;
+				if (preferences.FadeOnHide) {
+					glowloc = val.MoveIn (Position, - IconSize * val.Zoom / 2);
+				} else {
+					glowloc = val.MoveIn (Position, IconSize * val.Zoom / 2);
+				}
 				
 				if ((item.State & ItemState.Urgent) == ItemState.Urgent) {
 					urgent_glow_buffer.ShowWithOptions (surface, 
-					                                    pos,
+					                                    glowloc.Center,
 					                                    1, 0, 1);
 				}
 			}
