@@ -157,7 +157,7 @@ namespace Docky.Interface
 		
 		IDockPreferences preferences;
 		DockySurface main_buffer, background_buffer, icon_buffer, painter_buffer;
-		DockySurface normal_indicator_buffer, urgent_indicator_buffer;
+		DockySurface normal_indicator_buffer, urgent_indicator_buffer, urgent_glow_buffer;
 		DockySurface config_hover_buffer, drop_hover_buffer, launch_hover_buffer;
 		DockySurface wait_buffer;
 		AbstractDockItem hoveredItem;
@@ -1289,6 +1289,11 @@ namespace Docky.Interface
 				urgent_indicator_buffer.Dispose ();
 				urgent_indicator_buffer = null;
 			}
+
+			if (urgent_glow_buffer != null) {
+				urgent_glow_buffer.Dispose ();
+				urgent_glow_buffer = null;
+			}
 			
 			if (wait_buffer != null) {
 				wait_buffer.Dispose ();
@@ -2127,6 +2132,24 @@ namespace Docky.Interface
 					break;
 				}
 			}
+
+			//Draw UrgentGlow which is visible when Docky is hidden and an item need attention
+			if (item.Indicator != ActivityIndicator.None 
+			    && !AnimationState.AnimationNeeded
+			    && AutohideManager.Hidden) {
+				
+				if (urgent_glow_buffer == null)
+					urgent_glow_buffer = CreateUrgentGlowBuffer ();
+
+				Cairo.PointD pos = val.Center;
+				pos.Y -= (int) IconSize / 2;
+				
+				if ((item.State & ItemState.Urgent) == ItemState.Urgent) {
+					urgent_glow_buffer.ShowWithOptions (surface, 
+					                                    pos,
+					                                    1, 0, 1);
+				}
+			}
 			
 			if (item.Zoom) {
 				if (item.ScalableRendering && center.Zoom == 1) {
@@ -2289,6 +2312,7 @@ namespace Docky.Interface
 		
 		DockySurface CreateNormalIndicatorBuffer ()
 		{
+			// FIXME: create gconf value
 			Gdk.Color gdkColor = Style.Backgrounds [(int) StateType.Selected].SetMinimumValue (90);
 			Cairo.Color color = new Cairo.Color ((double) gdkColor.Red / ushort.MaxValue,
 											(double) gdkColor.Green / ushort.MaxValue,
@@ -2299,6 +2323,7 @@ namespace Docky.Interface
 		
 		DockySurface CreateUrgentIndicatorBuffer ()
 		{
+			// FIXME: create gconf value
 			Gdk.Color gdkColor = Style.Backgrounds [(int) StateType.Selected].SetMinimumValue (90);
 			Cairo.Color color = new Cairo.Color ((double) gdkColor.Red / ushort.MaxValue,
 											(double) gdkColor.Green / ushort.MaxValue,
@@ -2334,7 +2359,43 @@ namespace Docky.Interface
 			
 			return surface;
 		}
-		
+
+		DockySurface CreateUrgentGlowBuffer ()
+		{
+			// FIXME: create gconf value
+			Gdk.Color gdkColor = Style.Backgrounds [(int) StateType.Selected].SetMinimumValue (90);
+			Cairo.Color color = new Cairo.Color ((double) gdkColor.Red / ushort.MaxValue,
+											(double) gdkColor.Green / ushort.MaxValue,
+											(double) gdkColor.Blue / ushort.MaxValue,
+											1.0);
+			color = color.AddHue (Docky.Controller.UrgentHueShift).SetSaturation (1);
+			
+			int size = (int) 2.5 * IconSize;
+			
+			DockySurface surface = new DockySurface (size, size, background_buffer);
+			surface.Clear ();
+			
+			Cairo.Context cr = surface.Context;
+			
+			double x = size / 2;
+			double y = x;
+				
+			cr.MoveTo (x, y);
+			cr.Arc (x, y, size / 2, 0, Math.PI * 2);
+				
+			RadialGradient rg = new RadialGradient (x, y, 0, x, y, size / 2);
+			rg.AddColorStop (0, new Cairo.Color (1, 1, 1, 1));
+			rg.AddColorStop (.33, color.SetAlpha (.66));
+			rg.AddColorStop (.66, color.SetAlpha (.33));
+			rg.AddColorStop (1.0, color.SetAlpha (0.0));
+			
+			cr.Pattern = rg;
+			cr.Fill ();
+			rg.Destroy ();
+			
+			return surface;
+		}
+
 		void DrawDockBackground (DockySurface surface, Gdk.Rectangle backgroundArea)
 		{
 			if (background_buffer == null) {
