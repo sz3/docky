@@ -85,8 +85,8 @@ namespace Docky.Windowing
 					);
 					break;
 				case "XDG_DATA_DIRS":
-					yield return new [] {"usr", "local", "share", "applications"}.Aggregate ((w, s) => Path.Combine (w,s));
-					yield return new [] {"usr", "share", "applications"}.Aggregate ((w, s) => Path.Combine (w, s));
+					yield return new [] {"/usr", "local", "share", "applications"}.Aggregate ((w, s) => Path.Combine (w,s));
+					yield return new [] {"/usr", "share", "applications"}.Aggregate ((w, s) => Path.Combine (w, s));
 					break;
 				case "CX_APPS":
 					yield return Path.Combine (
