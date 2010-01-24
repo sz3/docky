@@ -1971,6 +1971,28 @@ namespace Docky.Interface
 			if (DockOpacity < 1)
 				SetDockOpacity (surface);
 			
+			//Draw UrgentGlow which is visible when Docky is hidden and an item need attention
+			if (!AnimationState.AnimationNeeded && AutohideManager.Hidden && !ConfigurationMode) {
+				foreach (AbstractDockItem adi in Items) {
+					if (adi.Indicator != ActivityIndicator.None 
+					    && (adi.State & ItemState.Urgent) == ItemState.Urgent) {
+						
+						if (urgent_glow_buffer == null)
+							urgent_glow_buffer = CreateUrgentGlowBuffer ();
+		
+						DrawValue val = DrawValues [adi];
+						DrawValue glowloc;
+						if (preferences.FadeOnHide) {
+							glowloc = val.MoveIn (Position, IconSize * val.Zoom / 2 - DockHeight);
+						} else {
+							glowloc = val.MoveIn (Position, IconSize * val.Zoom / 2);
+						}
+
+						urgent_glow_buffer.ShowWithOptions (surface, glowloc.Center, 1, 0, 1);
+					}
+				}
+			}
+			
 			SetInputMask (cursorArea);
 			
 			Gdk.Rectangle staticArea = StaticDockArea (surface);
@@ -2133,28 +2155,6 @@ namespace Docky.Interface
 				}
 			}
 
-			//Draw UrgentGlow which is visible when Docky is hidden and an item need attention
-			//FIXME urgent_glow_buffer needs to be visible in FadeOnHide mode
-			if (item.Indicator != ActivityIndicator.None && !AnimationState.AnimationNeeded
-			    && AutohideManager.Hidden && !ConfigurationMode) {
-				
-				if (urgent_glow_buffer == null)
-					urgent_glow_buffer = CreateUrgentGlowBuffer ();
-
-				DrawValue glowloc;
-				if (preferences.FadeOnHide) {
-					glowloc = val.MoveIn (Position, - IconSize * val.Zoom / 2);
-				} else {
-					glowloc = val.MoveIn (Position, IconSize * val.Zoom / 2);
-				}
-				
-				if ((item.State & ItemState.Urgent) == ItemState.Urgent) {
-					urgent_glow_buffer.ShowWithOptions (surface, 
-					                                    glowloc.Center,
-					                                    1, 0, 1);
-				}
-			}
-			
 			if (item.Zoom) {
 				if (item.ScalableRendering && center.Zoom == 1) {
 					icon = item.IconSurface (surface, IconSize, IconSize);
