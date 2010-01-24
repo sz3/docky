@@ -1972,10 +1972,15 @@ namespace Docky.Interface
 				SetDockOpacity (surface);
 			
 			//Draw UrgentGlow which is visible when Docky is hidden and an item need attention
-			if (!AnimationState.AnimationNeeded && AutohideManager.Hidden && !ConfigurationMode) {
+			if (!AnimationState.AnimationNeeded && AutohideManager.Hidden 
+			    && (!Preferences.FadeOnHide || Preferences.FadeOpacity == 0)
+			    && !ConfigurationMode) {
+
 				foreach (AbstractDockItem adi in Items) {
 					if (adi.Indicator != ActivityIndicator.None 
-					    && (adi.State & ItemState.Urgent) == ItemState.Urgent) {
+					    && (adi.State & ItemState.Urgent) == ItemState.Urgent
+					    //only show when dock wasnt visible after itemstate got urgent
+					    && adi.StateSetTime(ItemState.Urgent) >= hidden_change_time) {
 						
 						if (urgent_glow_buffer == null)
 							urgent_glow_buffer = CreateUrgentGlowBuffer ();
