@@ -1998,9 +1998,7 @@ namespace Docky.Interface
 
 				foreach (AbstractDockItem adi in Items) {
 					if (adi.Indicator != ActivityIndicator.None 
-					    && (adi.State & ItemState.Urgent) == ItemState.Urgent
-					    //only show when dock wasnt visible after itemstate got urgent
-					    && adi.StateSetTime(ItemState.Urgent) >= hidden_change_time) {
+					    && (adi.State & ItemState.Urgent) == ItemState.Urgent) {
 						
 						if (urgent_glow_buffer == null)
 							urgent_glow_buffer = CreateUrgentGlowBuffer ();
