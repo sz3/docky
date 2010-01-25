@@ -1972,15 +1972,11 @@ namespace Docky.Interface
 				SetDockOpacity (surface);
 			
 			//Draw UrgentGlow which is visible when Docky is hidden and an item need attention
-			if (!AnimationState.AnimationNeeded && AutohideManager.Hidden 
-			    && (!Preferences.FadeOnHide || Preferences.FadeOpacity == 0)
-			    && !ConfigurationMode) {
-
+			if (AutohideManager.Hidden && !ConfigurationMode
+				&& (!Preferences.FadeOnHide || Preferences.FadeOpacity == 0)) {
 				foreach (AbstractDockItem adi in Items) {
 					if (adi.Indicator != ActivityIndicator.None 
-					    && (adi.State & ItemState.Urgent) == ItemState.Urgent
-					    //only show when dock wasnt visible after itemstate got urgent
-					    && adi.StateSetTime(ItemState.Urgent) >= hidden_change_time) {
+					    && (adi.State & ItemState.Urgent) == ItemState.Urgent) {
 						
 						if (urgent_glow_buffer == null)
 							urgent_glow_buffer = CreateUrgentGlowBuffer ();
@@ -1992,8 +1988,12 @@ namespace Docky.Interface
 						} else {
 							glowloc = val.MoveIn (Position, IconSize * val.Zoom / 2);
 						}
+						
+						double opacity = (render_time - adi.StateSetTime (ItemState.Urgent)).TotalMilliseconds / BounceTime.TotalMilliseconds;
 
-						urgent_glow_buffer.ShowWithOptions (surface, glowloc.Center, 1, 0, 1);
+						opacity = Math.Min (opacity, 1);
+						
+						urgent_glow_buffer.ShowWithOptions (surface, glowloc.Center, 1, 0, opacity);
 					}
 				}
 			}
