@@ -2107,22 +2107,22 @@ namespace Docky.Interface
 			
 			//create slide animation by adjusting DrawValue before drawing
 			//we could handle longer distances, but 1 is enough
-			if ((render_time - item.StateSetTime(ItemState.Slide)) < SlideTime
+			if ((render_time - item.StateSetTime (ItemState.Slide)) < SlideTime
 			    && Math.Abs(item.LastPosition - item.Position) == 1 ) {
 				
-				double slideProgress = (render_time - item.StateSetTime(ItemState.Slide)).TotalMilliseconds / SlideTime.TotalMilliseconds;
+				double slideProgress = (render_time - item.StateSetTime (ItemState.Slide)).TotalMilliseconds / SlideTime.TotalMilliseconds;
 
-				double move = Math.Abs(item.LastPosition - item.Position) * (IconSize * val.Zoom + ItemWidthBuffer) 
+				double move = Math.Abs (item.LastPosition - item.Position) * (IconSize * val.Zoom + ItemWidthBuffer) 
 					//draw the anitmation backwards cause item has already moved
 					* (1 - slideProgress);
                 
 				if (item.LastPosition > item.Position)
-					move = -move;
+					move *= -1;
 
 				switch (Position) {
 				case DockPosition.Top:
 				case DockPosition.Left:
-					move = -move;
+					move *= -1;
 					break;
 				default:
 				//case DockPosition.Right:

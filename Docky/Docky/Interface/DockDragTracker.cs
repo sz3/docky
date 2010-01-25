@@ -468,12 +468,12 @@ namespace Docky.Interface
 				
 				// drag right
 				if (drag_item.Position < destPos) {
-					foreach (AbstractDockItem adi in ProviderForItem(drag_item).Items
+					foreach (AbstractDockItem adi in ProviderForItem (drag_item).Items
 										.Where (i => i.Position > drag_item.Position && i.Position <= destPos))
 						adi.Position--;
 				// drag left
 				} else if (drag_item.Position > destPos) {
-					foreach (AbstractDockItem adi in ProviderForItem(drag_item).Items
+					foreach (AbstractDockItem adi in ProviderForItem (drag_item).Items
 										.Where (i => i.Position < drag_item.Position && i.Position >= destPos))
 						adi.Position++;
 				}
