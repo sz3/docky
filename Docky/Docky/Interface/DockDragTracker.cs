@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2009-2010 Jason Smith, Robert Dyer, Rico Tzschichholz
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -468,12 +468,12 @@ namespace Docky.Interface
 				
 				// drag right
 				if (drag_item.Position < destPos) {
-					foreach (AbstractDockItem adi in Owner.Items
+					foreach (AbstractDockItem adi in ProviderForItem(drag_item).Items
 										.Where (i => i.Position > drag_item.Position && i.Position <= destPos))
 						adi.Position--;
 				// drag left
 				} else if (drag_item.Position > destPos) {
-					foreach (AbstractDockItem adi in Owner.Items
+					foreach (AbstractDockItem adi in ProviderForItem(drag_item).Items
 										.Where (i => i.Position < drag_item.Position && i.Position >= destPos))
 						adi.Position++;
 				}

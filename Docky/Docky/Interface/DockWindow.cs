@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2009-2010 Jason Smith, Robert Dyer, Rico Tzschichhholz
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -146,6 +146,7 @@ namespace Docky.Interface
 		readonly TimeSpan BaseAnimationTime = new TimeSpan (0, 0, 0, 0, 150);
 		readonly TimeSpan PainterAnimationTime = new TimeSpan (0, 0, 0, 0, 350);
 		readonly TimeSpan BounceTime = new TimeSpan (0, 0, 0, 0, 600);
+		readonly TimeSpan SlideTime = new TimeSpan (0, 0, 0, 0, 200);
 		
 		DateTime hidden_change_time;
 		DateTime dock_hovered_change_time;
@@ -731,6 +732,7 @@ namespace Docky.Interface
 			                             () => ((DateTime.UtcNow - threedimensional_change_time) < BaseAnimationTime));
 			AnimationState.AddCondition (Animations.Bounce, BouncingItems);
 			AnimationState.AddCondition (Animations.Waiting, WaitingItems);
+			AnimationState.AddCondition (Animations.Slide, SlidingItems);
 		}
 		
 		bool BouncingItems ()
@@ -753,6 +755,17 @@ namespace Docky.Interface
 			return false;
 		}
 
+		bool SlidingItems ()
+		{
+			DateTime now = DateTime.UtcNow;
+			
+			foreach (AbstractDockItem adi in Items) {
+				if (now - adi.StateSetTime (ItemState.Slide) < SlideTime)
+					return true;
+			}
+			return false;
+		}
+		
 		void HandleMenuHidden (object sender, EventArgs e)
 		{
 			SetTooltipVisibility ();
@@ -1972,9 +1985,8 @@ namespace Docky.Interface
 				SetDockOpacity (surface);
 			
 			//Draw UrgentGlow which is visible when Docky is hidden and an item need attention
-			if (!AnimationState.AnimationNeeded && AutohideManager.Hidden 
-			    && (!Preferences.FadeOnHide || Preferences.FadeOpacity == 0)
-			    && !ConfigurationMode) {
+			if (AutohideManager.Hidden && !ConfigurationMode
+				&& (!Preferences.FadeOnHide || Preferences.FadeOpacity == 0)) {
 
 				foreach (AbstractDockItem adi in Items) {
 					if (adi.Indicator != ActivityIndicator.None 
@@ -1993,7 +2005,11 @@ namespace Docky.Interface
 							glowloc = val.MoveIn (Position, IconSize * val.Zoom / 2);
 						}
 
-						urgent_glow_buffer.ShowWithOptions (surface, glowloc.Center, 1, 0, 1);
+						double opacity = (render_time - adi.StateSetTime (ItemState.Urgent)).TotalMilliseconds / BounceTime.TotalMilliseconds;
+ 
+						opacity = Math.Min (opacity, 1);
+						
+						urgent_glow_buffer.ShowWithOptions (surface, glowloc.Center, 1, 0, opacity);
 					}
 				}
 			}
@@ -2093,6 +2109,36 @@ namespace Docky.Interface
 			double zoomOffset = ZoomedIconSize / (double) IconSize;
 			
 			DrawValue val = DrawValues [item];
+			
+			//create slide animation by adjusting DrawValue before drawing
+			//we could handle longer distances, but 1 is enough
+			if ((render_time - item.StateSetTime(ItemState.Slide)) < SlideTime
+			    && Math.Abs(item.LastPosition - item.Position) == 1 ) {
+				
+				double slideProgress = (render_time - item.StateSetTime(ItemState.Slide)).TotalMilliseconds / SlideTime.TotalMilliseconds;
+
+				double move = Math.Abs(item.LastPosition - item.Position) * (IconSize * val.Zoom + ItemWidthBuffer) 
+					//draw the anitmation backwards cause item has already moved
+					* (1 - slideProgress);
+                
+				if (item.LastPosition > item.Position)
+					move = -move;
+
+				switch (Position) {
+				case DockPosition.Top:
+				case DockPosition.Left:
+					move = -move;
+					break;
+				default:
+				//case DockPosition.Right:
+				//case DockPosition.Bottom:
+				//	move = move;
+					break;
+				}
+				
+				val = val.MoveRight (Position, move);
+			}
+
 			DrawValue center = val;
 			
 			double clickAnimationProgress = 0;
