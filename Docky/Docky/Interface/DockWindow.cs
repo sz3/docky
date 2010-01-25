@@ -2547,11 +2547,9 @@ namespace Docky.Interface
 				cr.Paint ();
 				rendering = false;
 				
-				//now we can set the new HoveredItem
-				if (next_hoveredItem != null) {
-					HoveredItem = next_hoveredItem;
-					next_hoveredItem = null;
-				}
+				//now after rendering we can set the new HoveredItem
+				HoveredItem = next_hoveredItem;
+				next_hoveredItem = null;
 			}
 			
 			return false;
