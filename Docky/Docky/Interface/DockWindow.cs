@@ -161,6 +161,7 @@ namespace Docky.Interface
 		DockySurface normal_indicator_buffer, urgent_indicator_buffer, urgent_glow_buffer;
 		DockySurface config_hover_buffer, drop_hover_buffer, launch_hover_buffer;
 		DockySurface wait_buffer;
+		AbstractDockItem next_hoveredItem;
 		AbstractDockItem hoveredItem;
 		AbstractDockItem lastClickedItem;
 		AbstractDockPainter painter;
@@ -1551,7 +1552,6 @@ namespace Docky.Interface
 			int width;
 			int height;
 			double zoom;
-			bool hoveredItemSet = false;
 			
 			// our width and height switch around if we have a veritcal dock
 			if (!VerticalDock) {
@@ -1744,8 +1744,8 @@ namespace Docky.Interface
 				DrawValues[adi] = val;
 
 				if (hoverArea.Contains (localCursor) && !AutohideManager.Hidden) {
-					HoveredItem = adi;
-					hoveredItemSet = true;
+					//keep the hovereditem in mind, but don't change it while rendering
+					next_hoveredItem = adi;
 				}
 				
 				if (update_screen_regions) {
@@ -1763,18 +1763,7 @@ namespace Docky.Interface
 				index++;
 			}
 			
-			//FIXME fixes first frame of DND animation
-			if (DragTracker.DragItem != null && DrawValues.ContainsKey(DragTracker.DragItem)
-				&& HoveredItem != null && DrawValues.ContainsKey(HoveredItem)
-				&& DragTracker.DragItem.Owner == HoveredItem.Owner) {
-				
-				DrawValues[HoveredItem] = DrawValues[DragTracker.DragItem];
-			}
-			
 			update_screen_regions = false;
-			
-			if (!hoveredItemSet)
-				HoveredItem = null;
 		}
 		
 		void UpdateMaxIconSize ()
@@ -2557,6 +2546,12 @@ namespace Docky.Interface
 				
 				cr.Paint ();
 				rendering = false;
+				
+				//now we can set the new HoveredItem
+				if (next_hoveredItem != null) {
+					HoveredItem = next_hoveredItem;
+					next_hoveredItem = null;
+				}
 			}
 			
 			return false;
