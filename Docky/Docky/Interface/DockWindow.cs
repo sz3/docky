@@ -1763,6 +1763,14 @@ namespace Docky.Interface
 				index++;
 			}
 			
+			//FIXME fixes first frame of DND animation
+			if (DragTracker.DragItem != null && DrawValues.ContainsKey(DragTracker.DragItem)
+				&& HoveredItem != null && DrawValues.ContainsKey(HoveredItem)
+				&& DragTracker.DragItem.Owner == HoveredItem.Owner) {
+				
+				DrawValues[HoveredItem] = DrawValues[DragTracker.DragItem];
+			}
+			
 			update_screen_regions = false;
 			
 			if (!hoveredItemSet)
