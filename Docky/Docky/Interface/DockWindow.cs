@@ -733,7 +733,7 @@ namespace Docky.Interface
 			                             () => ((DateTime.UtcNow - threedimensional_change_time) < BaseAnimationTime));
 			AnimationState.AddCondition (Animations.Bounce, BouncingItems);
 			AnimationState.AddCondition (Animations.Waiting, WaitingItems);
-			AnimationState.AddCondition (Animations.Slide, SlidingItems);
+			AnimationState.AddCondition (Animations.ItemsMoved, MovingItems);
 		}
 		
 		bool BouncingItems ()
@@ -756,12 +756,12 @@ namespace Docky.Interface
 			return false;
 		}
 
-		bool SlidingItems ()
+		bool MovingItems ()
 		{
 			DateTime now = DateTime.UtcNow;
 			
 			foreach (AbstractDockItem adi in Items) {
-				if (now - adi.StateSetTime (ItemState.Slide) < SlideTime)
+				if (now - adi.StateSetTime (ItemState.Move) < SlideTime)
 					return true;
 			}
 			return false;
@@ -2107,28 +2107,17 @@ namespace Docky.Interface
 			
 			//create slide animation by adjusting DrawValue before drawing
 			//we could handle longer distances, but 1 is enough
-			if ((render_time - item.StateSetTime (ItemState.Slide)) < SlideTime
+			if ((render_time - item.StateSetTime (ItemState.Move)) < SlideTime
 			    && Math.Abs(item.LastPosition - item.Position) == 1 ) {
 				
-				double slideProgress = (render_time - item.StateSetTime (ItemState.Slide)).TotalMilliseconds / SlideTime.TotalMilliseconds;
+				double slideProgress = (render_time - item.StateSetTime (ItemState.Move)).TotalMilliseconds / SlideTime.TotalMilliseconds;
 
-				double move = Math.Abs (item.LastPosition - item.Position) * (IconSize * val.Zoom + ItemWidthBuffer) 
+				double move = (item.Position - item.LastPosition) * (IconSize * val.Zoom + ItemWidthBuffer) 
 					//draw the anitmation backwards cause item has already moved
 					* (1 - slideProgress);
                 
-				if (item.LastPosition > item.Position)
+				if (Position == DockPosition.Top || Position == DockPosition.Left) {
 					move *= -1;
-
-				switch (Position) {
-				case DockPosition.Top:
-				case DockPosition.Left:
-					move *= -1;
-					break;
-				default:
-				//case DockPosition.Right:
-				//case DockPosition.Bottom:
-				//	move = move;
-					break;
 				}
 				
 				val = val.MoveRight (Position, move);

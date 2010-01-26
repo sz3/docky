@@ -199,7 +199,7 @@ namespace Docky.Items
 			set {
 				LastPosition = position;
 				position = value;
-				SetStateTime (ItemState.Slide, DateTime.UtcNow);
+				SetStateTime (ItemState.Move, DateTime.UtcNow);
 			}
 		}
 		
