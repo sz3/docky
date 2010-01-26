@@ -26,5 +26,6 @@ namespace Docky.Items
 		Active = 1 << 0,
 		Urgent = 1 << 1,
 		Wait   = 1 << 2,
+		Move   = 1 << 3,
 	}
 }

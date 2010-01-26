@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2009-2010 Jason Smith, Robert Dyer, Rico Tzschichhholz
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -146,6 +146,7 @@ namespace Docky.Interface
 		readonly TimeSpan BaseAnimationTime = new TimeSpan (0, 0, 0, 0, 150);
 		readonly TimeSpan PainterAnimationTime = new TimeSpan (0, 0, 0, 0, 350);
 		readonly TimeSpan BounceTime = new TimeSpan (0, 0, 0, 0, 600);
+		readonly TimeSpan SlideTime = new TimeSpan (0, 0, 0, 0, 200);
 		
 		DateTime hidden_change_time;
 		DateTime dock_hovered_change_time;
@@ -160,6 +161,7 @@ namespace Docky.Interface
 		DockySurface normal_indicator_buffer, urgent_indicator_buffer, urgent_glow_buffer;
 		DockySurface config_hover_buffer, drop_hover_buffer, launch_hover_buffer;
 		DockySurface wait_buffer;
+		AbstractDockItem next_hoveredItem;
 		AbstractDockItem hoveredItem;
 		AbstractDockItem lastClickedItem;
 		AbstractDockPainter painter;
@@ -731,6 +733,7 @@ namespace Docky.Interface
 			                             () => ((DateTime.UtcNow - threedimensional_change_time) < BaseAnimationTime));
 			AnimationState.AddCondition (Animations.Bounce, BouncingItems);
 			AnimationState.AddCondition (Animations.Waiting, WaitingItems);
+			AnimationState.AddCondition (Animations.ItemsMoved, MovingItems);
 		}
 		
 		bool BouncingItems ()
@@ -753,6 +756,17 @@ namespace Docky.Interface
 			return false;
 		}
 
+		bool MovingItems ()
+		{
+			DateTime now = DateTime.UtcNow;
+			
+			foreach (AbstractDockItem adi in Items) {
+				if (now - adi.StateSetTime (ItemState.Move) < SlideTime)
+					return true;
+			}
+			return false;
+		}
+		
 		void HandleMenuHidden (object sender, EventArgs e)
 		{
 			SetTooltipVisibility ();
@@ -1538,7 +1552,6 @@ namespace Docky.Interface
 			int width;
 			int height;
 			double zoom;
-			bool hoveredItemSet = false;
 			
 			// our width and height switch around if we have a veritcal dock
 			if (!VerticalDock) {
@@ -1731,8 +1744,8 @@ namespace Docky.Interface
 				DrawValues[adi] = val;
 
 				if (hoverArea.Contains (localCursor) && !AutohideManager.Hidden) {
-					HoveredItem = adi;
-					hoveredItemSet = true;
+					//keep the hovereditem in mind, but don't change it while rendering
+					next_hoveredItem = adi;
 				}
 				
 				if (update_screen_regions) {
@@ -1751,9 +1764,6 @@ namespace Docky.Interface
 			}
 			
 			update_screen_regions = false;
-			
-			if (!hoveredItemSet)
-				HoveredItem = null;
 		}
 		
 		void UpdateMaxIconSize ()
@@ -1974,6 +1984,7 @@ namespace Docky.Interface
 			//Draw UrgentGlow which is visible when Docky is hidden and an item need attention
 			if (AutohideManager.Hidden && !ConfigurationMode
 				&& (!Preferences.FadeOnHide || Preferences.FadeOpacity == 0)) {
+
 				foreach (AbstractDockItem adi in Items) {
 					if (adi.Indicator != ActivityIndicator.None 
 					    && (adi.State & ItemState.Urgent) == ItemState.Urgent) {
@@ -1988,9 +1999,9 @@ namespace Docky.Interface
 						} else {
 							glowloc = val.MoveIn (Position, IconSize * val.Zoom / 2);
 						}
-						
-						double opacity = (render_time - adi.StateSetTime (ItemState.Urgent)).TotalMilliseconds / BounceTime.TotalMilliseconds;
 
+						double opacity = (render_time - adi.StateSetTime (ItemState.Urgent)).TotalMilliseconds / BounceTime.TotalMilliseconds;
+ 
 						opacity = Math.Min (opacity, 1);
 						
 						urgent_glow_buffer.ShowWithOptions (surface, glowloc.Center, 1, 0, opacity);
@@ -2093,6 +2104,25 @@ namespace Docky.Interface
 			double zoomOffset = ZoomedIconSize / (double) IconSize;
 			
 			DrawValue val = DrawValues [item];
+			
+			//create slide animation by adjusting DrawValue before drawing
+			//we could handle longer distances, but 1 is enough
+			if ((render_time - item.StateSetTime (ItemState.Move)) < SlideTime
+			    && Math.Abs(item.LastPosition - item.Position) == 1 ) {
+				
+				double slideProgress = (render_time - item.StateSetTime (ItemState.Move)).TotalMilliseconds / SlideTime.TotalMilliseconds;
+
+				double move = (item.Position - item.LastPosition) * (IconSize * val.Zoom + ItemWidthBuffer) 
+					//draw the anitmation backwards cause item has already moved
+					* (1 - slideProgress);
+                
+				if (Position == DockPosition.Top || Position == DockPosition.Left) {
+					move *= -1;
+				}
+				
+				val = val.MoveRight (Position, move);
+			}
+
 			DrawValue center = val;
 			
 			double clickAnimationProgress = 0;
@@ -2505,6 +2535,10 @@ namespace Docky.Interface
 				
 				cr.Paint ();
 				rendering = false;
+				
+				//now after rendering we can set the new HoveredItem
+				HoveredItem = next_hoveredItem;
+				next_hoveredItem = null;
 			}
 			
 			return false;

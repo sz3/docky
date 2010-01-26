@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2009-2010 Jason Smith, Robert Dyer, Rico Tzschichholz
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -191,9 +191,26 @@ namespace Docky.Items
 		/// <summary>
 		/// The position of the icon, non-providers should not modify this value!
 		/// </summary>
+		int position;
 		public int Position {
-			get;
-			set;
+			get { 
+				return position; 
+			}
+			set {
+				LastPosition = position;
+				position = value;
+				SetStateTime (ItemState.Move, DateTime.UtcNow);
+			}
+		}
+		
+		int last_position;
+		public int LastPosition {
+			get {
+				return last_position;
+			}
+			private set {
+				last_position = value;
+			}
 		}
 		
 		/// <summary>
