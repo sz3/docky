@@ -91,6 +91,7 @@ namespace WeatherDocklet
 			image_map.Add ("clear", "weather-clear");
 			image_map.Add ("cloudy", "weather-few-clouds");
 			image_map.Add ("fair", "weather-clear");
+			image_map.Add ("fair  and  windy", "weather-clear");
 			image_map.Add ("fog", "weather-fog");
 			image_map.Add ("few showers", "weather-showers-scattered");
 			image_map.Add ("haze", "weather-fog");
@@ -99,11 +100,11 @@ namespace WeatherDocklet
 			image_map.Add ("light rain", "weather-showers-scattered");
 			image_map.Add ("light snow  and  Wind", "weather-snow");
 			image_map.Add ("mostly cloudy", "weather-few-clouds");
-			image_map.Add ("mostly cloudy  and  Windy", "weather-few-clouds");
+			image_map.Add ("mostly cloudy  and  windy", "weather-few-clouds");
 			image_map.Add ("mostly sunny", "weather-clear");
 			image_map.Add ("partly cloudy", "weather-few-clouds");
 			image_map.Add ("partly cloudy / Wind", "weather-few-clouds");
-			image_map.Add ("partly cloudy  and  Windy", "weather-few-clouds");
+			image_map.Add ("partly cloudy  and  windy", "weather-few-clouds");
 			image_map.Add ("pm showers", "weather-showers");
 			image_map.Add ("pm t-storms", "weather-storm");
 			image_map.Add ("rain", "weather-showers");
