@@ -731,36 +731,20 @@ namespace Docky.Interface
 			                             () => ((DateTime.UtcNow - painter_change_time) < PainterAnimationTime));
 			AnimationState.AddCondition (Animations.ThreeDimensionalChanged,
 			                             () => ((DateTime.UtcNow - threedimensional_change_time) < BaseAnimationTime));
-			AnimationState.AddCondition (Animations.Bounce, BouncingItems);
-			AnimationState.AddCondition (Animations.Waiting, WaitingItems);
-			AnimationState.AddCondition (Animations.ItemsMoved, MovingItems);
+			AnimationState.AddCondition (Animations.ItemStatesChanged, ItemsWithStateChange);
 		}
 		
-		bool BouncingItems ()
-		{
+		bool ItemsWithStateChange () {
 			DateTime now = DateTime.UtcNow;
 			
 			foreach (AbstractDockItem adi in Items) {
+				//Bounceing Items
 				if ((now - adi.LastClick) < BounceTime || (now - adi.StateSetTime (ItemState.Urgent)) < BounceTime)
 					return true;
-			}
-			return false;
-		}
-		
-		bool WaitingItems ()
-		{
-			foreach (AbstractDockItem adi in Items)
+				//Waiting Items
 				if ((adi.State & ItemState.Wait) != 0)
 					return true;
-			
-			return false;
-		}
-
-		bool MovingItems ()
-		{
-			DateTime now = DateTime.UtcNow;
-			
-			foreach (AbstractDockItem adi in Items) {
+				//Moving Items
 				if (now - adi.StateSetTime (ItemState.Move) < SlideTime)
 					return true;
 			}

@@ -28,12 +28,10 @@ namespace Docky.Interface
 	public enum Animations {
 		HideChanged,
 		DockHoveredChanged,
-		Bounce,
-		Waiting,
 		ItemsChanged,
 		PainterChanged,
 		ThreeDimensionalChanged,
-		ItemsMoved
+		ItemStatesChanged
 	}
 	
 	public class AnimationState : IDisposable
