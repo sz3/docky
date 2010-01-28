@@ -128,7 +128,7 @@ namespace Docky.Items
 			return item.GetMenuItems ();
 		}
 		
-		void OnItemsChanged (IEnumerable<AbstractDockItem> added, IEnumerable<AbstractDockItem> removed)
+		protected void OnItemsChanged (IEnumerable<AbstractDockItem> added, IEnumerable<AbstractDockItem> removed)
 		{
 			if (ItemsChanged != null)
 				ItemsChanged (this, new ItemsChangedArgs (added, removed));
