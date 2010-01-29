@@ -7,81 +7,106 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-01-08 11:02+0100\n"
-"PO-Revision-Date: 2009-11-29 02:06+0000\n"
-"Last-Translator: Robert Dyer <Unknown>\n"
+"POT-Creation-Date: 2010-01-13 11:18+0100\n"
+"PO-Revision-Date: 2010-01-26 01:39+0000\n"
+"Last-Translator: Francisco Diéguez <Unknown>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-01-09 08:52+0000\n"
+"X-Launchpad-Export-Date: 2010-01-29 16:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:102
+#: ../Docky/Docky/ConfigurationWindow.cs:113
+msgid "Search Docklets..."
+msgstr "Buscar Docklets..."
+
+#: ../Docky/Docky/ConfigurationWindow.cs:132
 msgid "Search Helpers..."
-msgstr ""
+msgstr "Buscar axudantes..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:147
+#: ../Docky/Docky/ConfigurationWindow.cs:178
 msgid "Click on any dock to configure."
-msgstr "Selecciona calquera dock para configurar."
+msgstr "Prema en calquera dock para configurala"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:148
+#: ../Docky/Docky/ConfigurationWindow.cs:179
 msgid "Drag any dock to move it."
-msgstr ""
+msgstr "Arrastre calqueira dock para movela."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:226
+#: ../Docky/Docky/ConfigurationWindow.cs:259
 msgid "Delete the currently selected dock?"
-msgstr ""
+msgstr "Desexa eliminar a dock seleccionada actualmente?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:228
+#: ../Docky/Docky/ConfigurationWindow.cs:261
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:243
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:335
+#: ../Docky/Docky/ConfigurationWindow.cs:276
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:400
 msgid "_Delete Dock"
-msgstr ""
+msgstr "_Eliminar dock"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:362
+#: ../Docky/Docky/ConfigurationWindow.cs:397
 msgid "_Select"
-msgstr ""
+msgstr "_Seleccionar"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:365
+#: ../Docky/Docky/ConfigurationWindow.cs:400
 msgid ".tar Archives"
-msgstr ""
+msgstr "Arquivos .tar"
+
+#: ../Docky/Docky/DockletTile.cs:46
+#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:220
+msgid "_Add"
+msgstr "_Engadir"
+
+#: ../Docky/Docky/DockletTile.cs:47
+#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:203
+msgid "_Remove"
+msgstr "_Eliminar"
+
+#: ../Docky/Docky/DockletTile.cs:48
+msgid "Author"
+msgstr "Autor"
+
+#: ../Docky/Docky/DockletTile.cs:55
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:166
+msgid "Settings"
+msgstr "Configuración"
 
 #: ../Docky/Docky/Docky.cs:107
 msgid ""
-"Docky requires compositing to work properly.  Please enable compositing and "
+"Docky requires compositing to work properly. Please enable compositing and "
 "restart docky."
 msgstr ""
+"Dock require a composición para funcionar correctamente. Active a "
+"composición e reinicie docky."
 
 #: ../Docky/Docky/HelperTile.cs:41
-msgid "Enable"
-msgstr ""
+msgid "_Enable"
+msgstr "_Activar"
 
 #: ../Docky/Docky/HelperTile.cs:42
-msgid "Disable"
-msgstr ""
+msgid "_Disable"
+msgstr "_Desactivar"
 
 #: ../Docky/Docky/HelperTile.cs:43
 msgid "Status"
-msgstr ""
+msgstr "Estado"
 
 #: ../Docky/Docky/HelperTile.cs:61
 msgid "Uninstall"
-msgstr ""
+msgstr "Desinstalar"
 
 #: ../Docky/Docky/HelperTile.cs:73
 msgid "Running"
-msgstr ""
+msgstr "En execución"
 
 #: ../Docky/Docky/HelperTile.cs:73
 msgid "Stopped"
-msgstr ""
+msgstr "Detido"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:331
 msgid ""
@@ -95,100 +120,107 @@ msgid ""
 "added to this dock."
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:636
+#: ../Docky/Docky/Interface/DockPreferences.cs:644
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:639
+#: ../Docky/Docky/Interface/DockPreferences.cs:647
 msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr ""
+msgstr "<i>Agóchase cando o rato non está sobre ela.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:642
+#: ../Docky/Docky/Interface/DockPreferences.cs:650
 msgid "<i>Hides when dock obstructs the active application.</i>"
-msgstr ""
+msgstr "<i>Agóchase cando o dock obstrúe o aplicativo activo.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:645
+#: ../Docky/Docky/Interface/DockPreferences.cs:653
 msgid "<i>Hides when dock obstructs any window.</i>"
-msgstr ""
+msgstr "<i>Agóchase cando o dock obstrúe calquera xanela.</i>"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:363
 msgid "Drag to reposition"
-msgstr ""
+msgstr "Arrastrar para reposicionar"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:370
 msgid "Drop to open"
-msgstr ""
+msgstr "Soltar para abrir"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:374
 #: ../Docky/Docky/Interface/DockWindow.cs:388
 msgid "Drop to add to dock"
-msgstr ""
+msgstr "Soltar para engadir á dock"
 
 #: ../Docky/Docky/Items/DockyItem.cs:93
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:230
 msgid "_Settings"
-msgstr ""
+msgstr "_Configuracións"
 
 #: ../Docky/Docky/Items/DockyItem.cs:94
 msgid "_About"
-msgstr ""
+msgstr "_Sobre"
 
 #: ../Docky/Docky/Items/DockyItem.cs:95
 msgid "_Quit Docky"
-msgstr ""
+msgstr "_Saír de Docky"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:80
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:92
 msgid "Docky Configuration"
 msgstr "Configuración de Docky"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:124
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:137
 msgid "_Start When Computer Starts"
-msgstr ""
+msgstr "_Iniciar cando arrinque o computador"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:140
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:153
 msgid "_Theme:"
-msgstr ""
+msgstr "_Tema:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:164
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:177
 msgid "<b>General Options</b>"
 msgstr "<b>Opcións xerais</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:184
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:197
 msgid "<b>Dock Configuration</b>"
-msgstr "<b>Configuración do Dock</b>"
+msgstr "<b>Configuración da Dock</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:198
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:211
 msgid "Docks"
-msgstr ""
+msgstr "Docks"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:219
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:232
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:284
 msgid "All"
-msgstr ""
+msgstr "Todo"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:220
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:233
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:285
 msgid "Enabled"
-msgstr ""
+msgstr "Activado"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:221
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:234
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:286
 msgid "Disabled"
-msgstr ""
+msgstr "Desactivado"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:245
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
+msgid "Docklets"
+msgstr "Docklets"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:310
 msgid "_Install"
-msgstr ""
+msgstr "_Instalar"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:277
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:342
 msgid "Helpers"
-msgstr ""
+msgstr "Axudantes"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:308
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:373
 msgid "_New Dock"
-msgstr ""
+msgstr "_Nova dock"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
 msgid "None"
-msgstr "Ningún"
+msgstr "Ningunha"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:81
 msgid "Autohide"
@@ -208,111 +240,111 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:141
 msgid "_Icon Size:"
-msgstr ""
+msgstr "Tamaño das _iconas"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:154
 msgid "_Hiding:"
-msgstr ""
+msgstr "_Ocultación:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
 msgid "Indicat_e Multiple Windows"
-msgstr ""
+msgstr "Indic_a múltiples xanelas"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
 msgid "_Panel Mode"
-msgstr ""
+msgstr "Modo _panel"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:192
 msgid "3D Background"
-msgstr ""
+msgstr "Fondo en 3D"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:206
 msgid "_Manage Windows Without Launcher"
-msgstr ""
+msgstr "_Xestionar as xanelas sen o lanzador"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:221
 msgid "_Zoom:"
-msgstr ""
+msgstr "_Ampliación:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:288
 msgid "<b>Inactive Docklets</b>"
-msgstr ""
+msgstr "<b>Docklets inactivos</b>"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:296
 msgid "<b>Active Docklets</b>"
-msgstr ""
+msgstr "<b>Docklets activos</b>"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:91
 msgid "Icon"
-msgstr ""
+msgstr "Icona"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:147
 msgid "New _Window"
-msgstr ""
+msgstr "Nova _xanela"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:149
 #: ../StandardPlugins/Mounter/src/MountItem.cs:97
 msgid "_Open"
-msgstr ""
+msgstr "_Abrir"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:69
 msgid "Reset Color"
-msgstr ""
+msgstr "Restabelecer cor"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:354
 msgid "_Pin to Dock"
-msgstr ""
+msgstr "_Aclar á Dock"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:186
 msgid "Not enough free space on destination."
-msgstr ""
+msgstr "Non hai suficiente espazo no destino."
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:198
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:200
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:220
 msgid "Complete"
-msgstr ""
+msgstr "Completada"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:206
 msgid "Moving"
-msgstr ""
+msgstr "Movendo"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:212
 msgid "Copying"
-msgstr ""
+msgstr "Copiando"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:225
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:226
 msgid "Error performing drop action"
-msgstr ""
+msgstr "Produciuse un erro na acción de soltar"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:248
 msgid "Open"
-msgstr ""
+msgstr "Abrir"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:249
 msgid "Open Containing Folder"
-msgstr ""
+msgstr "Abrir o cartafol contedor"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:244
 msgid "Unma_ximize"
-msgstr ""
+msgstr "Res_taurar"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:247
 msgid "Ma_ximize"
-msgstr ""
+msgstr "Ma_ximizar"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:252
 msgid "_Restore"
-msgstr ""
+msgstr "_Restaurar"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:255
 msgid "Mi_nimize"
-msgstr ""
+msgstr "Mi_nimizar"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:259
 msgid "_Close All"
-msgstr ""
+msgstr "_Pechar todas"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
@@ -321,7 +353,7 @@ msgstr "Rexístrese para {0}"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:44
 msgid "Validating..."
-msgstr "A validar..."
+msgstr "Validando..."
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:45
 #, csharp-format
@@ -330,7 +362,7 @@ msgstr "Non ten {0}?"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:46
 msgid "Account validation failed!"
-msgstr "Houbo un fallo ao validar a conta!"
+msgstr "Produciuse un fallo ao validar a conta!"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:47
 msgid "Verify and save account information"
@@ -339,14 +371,6 @@ msgstr "<i>Verificar e gardar a información da conta</i>"
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:48
 msgid "Account validation succeeded!"
 msgstr "Conta validada correctamente!"
-
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:193
-msgid "_Remove"
-msgstr "_Eliminar"
-
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:210
-msgid "_Add"
-msgstr "_Engadir"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:87
 msgid "Password"
@@ -362,27 +386,27 @@ msgstr "<i>Verificar e gardar a información da conta</i>"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
 msgid "Don't have an account?"
-msgstr "Non tes unha conta?"
+msgstr "Non ten unha conta?"
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:84
 msgid "Computer"
-msgstr ""
+msgstr "Computador"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:418
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:419
 msgid "Di_gital Clock"
-msgstr ""
+msgstr "Reloxo di_xital"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:424
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:425
 msgid "24-Hour _Clock"
-msgstr ""
+msgstr "_Reloxo de 24 horas"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:430
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "Show _Date"
-msgstr ""
+msgstr "Mostrar _data"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:436
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
 msgid "Select _Theme"
-msgstr ""
+msgstr "Seleccionar _tema"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
@@ -394,50 +418,50 @@ msgstr "Tema"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
 msgid "_Add Label"
-msgstr ""
+msgstr "_Engadir etiqueta"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:114
 msgid "Check e_very:"
-msgstr ""
+msgstr "Comprobar ca_da:"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:124
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:187
 msgid "minutes"
-msgstr ""
+msgstr "minutos"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:185
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:183
 msgid "Username or Password not set"
 msgstr "Nome de usuario ou contrasinal non configurados"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:235
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:233
 msgid "(no subject)"
-msgstr ""
+msgstr "(sen asunto)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:253
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:251
 #, csharp-format
 msgid "From: {0}"
 msgstr "De: {0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:264
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:268
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:262
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:266
 msgid "Feed Error"
-msgstr "Erro de subministro"
+msgstr "Produciuse un erro na fonte"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:273
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:271
 msgid "Invalid Username"
-msgstr "Nome de usuario inválido"
+msgstr "Nome de usuario incorrecto"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:277
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:275
 msgid "Network Error"
 msgstr "Erro de Conexión"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:282
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:280
 msgid "General Error"
 msgstr "Erro xeral"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:313
+#: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
 msgid "GMail Configuration"
-msgstr ""
+msgstr "Configuración de GMail"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:79
 msgid "No unread mail"
@@ -456,19 +480,19 @@ msgstr "Comprobando o correo..."
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:188
 msgid "_View "
-msgstr ""
+msgstr "_Ver "
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:193
 msgid "_Compose Mail"
-msgstr ""
+msgstr "_Redarctar mail"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "New Mail"
-msgstr ""
+msgstr "Correo novo"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:215
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
 msgid "Check _Mail"
-msgstr ""
+msgstr "Comprobar _correo"
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
@@ -476,11 +500,11 @@ msgstr "Etiquetas"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
 msgid "GMail"
-msgstr ""
+msgstr "GMail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr ""
+msgstr "Iniciar sesión"
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
@@ -488,82 +512,78 @@ msgstr "De: "
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Eject"
-msgstr ""
+msgstr "E_xpulsar"
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Unmount"
-msgstr ""
+msgstr "_Desmontar"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:51
 msgid "Network Manager"
-msgstr ""
+msgstr "Xestor de rede"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:90
 msgid "Connecting..."
-msgstr ""
+msgstr "Conectando..."
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:99
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:164
 msgid "Disconnected"
-msgstr ""
+msgstr "Desconectado"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:108
 #, csharp-format
 msgid "Connected: {0}"
-msgstr ""
+msgstr "Conectado: {0}"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:48
 msgid "My _Stations"
-msgstr ""
+msgstr "As miñas estacións"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:79
 msgid "S_earch"
-msgstr ""
+msgstr "_Buscar"
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
-msgstr ""
+msgstr "Non se atopou ningunha estación."
 
 #: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
-msgstr ""
+msgstr "Tente buscar de novo."
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:46
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:48
 msgid "Fetching Information..."
-msgstr ""
+msgstr "Obtendo información..."
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:66
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:68
 msgid "Click to add NPR stations."
-msgstr ""
+msgstr "Prema para engadiro estacións NPR."
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:105
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:107
 msgid "Home Page"
-msgstr ""
+msgstr "Páxina de inicio"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:112
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:114
 msgid "Program Schedule"
-msgstr ""
+msgstr "Planificación do programa"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:119
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:121
 msgid "Donate"
-msgstr ""
+msgstr "Doar"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:126
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:128
 msgid "Live Streams"
-msgstr ""
-
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:164
-msgid "Settings"
-msgstr "Configuración"
+msgstr "Fluxos en vivo"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:76
 msgid "Clear the Recent Documents list?"
-msgstr ""
+msgstr "Quere limpar a lista de documentos recentes?"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:78
 msgid "Clear Recent Documents"
-msgstr ""
+msgstr "Limpar a lista de documentos recentes"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:80
 msgid ""
@@ -571,34 +591,37 @@ msgid ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
+"Se limpa a lista de documentos recentes limparase o seguinte:\n"
+"• Todos os elementos da opción do menú Lugares →  Documentos recentes.\n"
+"• Todos os elementos da lista de documentos recentes de todos os aplicativos."
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
 msgid "_Clear Recent Documents..."
-msgstr ""
+msgstr "_Limpar os documentos recentes..."
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
 msgid "No items in Trash"
-msgstr ""
+msgstr "Non hai elementos no Lixo"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:75
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} elemento no Lixo"
+msgstr[1] "{0} elementos no Lixo"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:160
 msgid "_Open Trash"
-msgstr ""
+msgstr "_Abrir o lixo"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:162
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:199
 msgid "Empty _Trash"
-msgstr ""
+msgstr "Baleirar o _lixo"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
 msgid "Empty all of the items from the trash?"
-msgstr ""
+msgstr "Quere eliminar todos os elementos do lixo?"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:186
 msgid ""
@@ -609,11 +632,11 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:66
 msgid "_Weather Provider:"
-msgstr ""
+msgstr "Fornecedor do _Tempo:"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:106
 msgid "My _Locations"
-msgstr ""
+msgstr "As miñas _localizacións"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:137
 msgid "_Search"
@@ -637,13 +660,16 @@ msgstr "Lugar invalido do clima"
 msgid "Network Error: "
 msgstr "Erro de rede: "
 
-#: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:54
+#: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
 msgstr ""
+"Datos do tempo fornecidos por Goolge. Esta fonte require que as "
+"localizacións sexan especificadas como un código postal de Estados Unidos ou "
+"'Cidade, País'."
 
-#: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:59
+#: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
 "Weather data provided by and copyright The Weather Channel.  This source "
 "requires locations to be specified as US Zip Code or a unique code from the "
@@ -651,15 +677,22 @@ msgid ""
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:54
+#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
 msgstr ""
+"Datos do tempo fornecidos e con dereitos de autor de Weather Underground. "
+"Esta fonte require que as localizacións sexan especificadas como un código "
+"postal de Estados Unidos ou 'Cidade, País'."
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
-msgstr ""
+msgstr "Non se atopou ningún resultado."
+
+#: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
+msgid "Weather Configuration"
+msgstr "Configuración do tempo"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
@@ -668,27 +701,23 @@ msgstr "Recibindo datos..."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:216
 msgid "Radar _Map"
-msgstr ""
+msgstr "_Mada de radar"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:221
 msgid "Forecasts"
-msgstr ""
+msgstr "Prognóstico"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:233
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:237
 msgid "Check _Weather"
-msgstr ""
+msgstr "Comprobar _tempo"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:248
-msgid "Weather Configuration"
-msgstr ""
-
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:87
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
 msgid "_Today"
-msgstr ""
+msgstr "_Hoxe"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:90
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
 msgid "T_omorrow"
-msgstr ""
+msgstr "_Mañán"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:311
 msgid "Humidity"

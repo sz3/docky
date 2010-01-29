@@ -1,193 +1,187 @@
-# Brazilian Portuguese translation for docky
-# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# Korean translation for docky
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the docky package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-01-13 11:18+0100\n"
-"PO-Revision-Date: 2010-01-24 23:56+0000\n"
-"Last-Translator: André Gondim <andregondim@ubuntu.com>\n"
-"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"PO-Revision-Date: 2010-01-27 14:29+0000\n"
+"Last-Translator: Cedna <sptcedna@gmail.com>\n"
+"Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Launchpad-Export-Date: 2010-01-29 16:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:113
 msgid "Search Docklets..."
-msgstr "Procurar Docklets..."
+msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:132
 msgid "Search Helpers..."
-msgstr "Procurar Ajudantes..."
+msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:178
 msgid "Click on any dock to configure."
-msgstr "Clique em algum dock para configura-lo."
+msgstr "설정하고 싶은 dock를 클릭해 주십시오."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:179
 msgid "Drag any dock to move it."
-msgstr "Arraste qualquer Dock para movê-lo"
+msgstr "이동하고 싶은 dock를 드래그 해 주십시오."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:259
 msgid "Delete the currently selected dock?"
-msgstr "Deletar o dock atualmente selecionado?"
+msgstr "현재 선택된 dock를 삭제 하시겠습니까?"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:261
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
-msgstr ""
-"Se você escolher em deletar o dock selecionado, todas as configurações\n"
-"pertencentes ao mesmo serão permanentemente perdidas."
+msgstr "만약 삭제를 선택 한다면, 해당되는 삭제할 dock의 모든 설정을 잃게 될 것 입니다."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:276
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:400
 msgid "_Delete Dock"
-msgstr "_Deletar Dock"
+msgstr "삭제 (_D)"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:397
 msgid "_Select"
-msgstr "_Selecionar"
+msgstr "선택 (_S)"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:400
 msgid ".tar Archives"
-msgstr "Arquivos .tar"
+msgstr ".tar 압축 파일"
 
 #: ../Docky/Docky/DockletTile.cs:46
 #: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:220
 msgid "_Add"
-msgstr "_Adicionar"
+msgstr "더하기 (_A)"
 
 #: ../Docky/Docky/DockletTile.cs:47
 #: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:203
 msgid "_Remove"
-msgstr "_Remover"
+msgstr "제거 (_R)"
 
 #: ../Docky/Docky/DockletTile.cs:48
 msgid "Author"
-msgstr "Autor"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:55
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:166
 msgid "Settings"
-msgstr "Configurações"
+msgstr "설정"
 
 #: ../Docky/Docky/Docky.cs:107
 msgid ""
 "Docky requires compositing to work properly. Please enable compositing and "
 "restart docky."
 msgstr ""
-"Docky precisa dos efeitos visuais para funcionar perfeitamente. Por favor, "
-"habilite os efeitos visuais e reinicie o docky."
+"Docky는 동작하기 위해서 opengl 화면 효과가 가능한 창 관리자를 필요로 합니다. 창 관리자의 컴포지팅 기능을 활성화 한 후 "
+"Docky를 다시 실행하길 부탁드립니다."
 
 #: ../Docky/Docky/HelperTile.cs:41
 msgid "_Enable"
-msgstr "_Habilitar"
+msgstr "활성화 (_E)"
 
 #: ../Docky/Docky/HelperTile.cs:42
 msgid "_Disable"
-msgstr "_Desabilitar"
+msgstr "비 활성화 (_D)"
 
 #: ../Docky/Docky/HelperTile.cs:43
 msgid "Status"
-msgstr "Status"
+msgstr "상태"
 
 #: ../Docky/Docky/HelperTile.cs:61
 msgid "Uninstall"
-msgstr "Desinstalar"
+msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:73
 msgid "Running"
-msgstr "Executando"
+msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:73
 msgid "Stopped"
-msgstr "Parado"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:331
 msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
 msgstr ""
-"Faz os lançadores que possuem no momento mais de uma janela exibir um "
-"indicador extra a baixo do mesmo."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:333
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
-"Quando marcado, janelas que no momento não possuem lançadores no dock serão "
-"adicionadas ao mesmo."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:644
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
-msgstr "<i>Nunca esconde; Janelas maximizadas não sobrepõem o dock</i>"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:647
 msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr "<i>Esconde sempre que o mouse não estiver sobre ele.</i>"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:650
 msgid "<i>Hides when dock obstructs the active application.</i>"
-msgstr "<i>Esconde quando o dock obstrui a aplicação ativa.</i>"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:653
 msgid "<i>Hides when dock obstructs any window.</i>"
-msgstr "<i>Esconde quando o dock obstrui qualquer janela.</i>"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockWindow.cs:363
 msgid "Drag to reposition"
-msgstr "Arraste para reposicionar"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockWindow.cs:370
 msgid "Drop to open"
-msgstr "Solte para abrir"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockWindow.cs:374
 #: ../Docky/Docky/Interface/DockWindow.cs:388
 msgid "Drop to add to dock"
-msgstr "Solte para adicionar ao dock"
+msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:93
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:230
 msgid "_Settings"
-msgstr "_Configurações"
+msgstr "설정 (_S)"
 
 #: ../Docky/Docky/Items/DockyItem.cs:94
 msgid "_About"
-msgstr "_Sobre"
+msgstr "Docky 정보 (_A)"
 
 #: ../Docky/Docky/Items/DockyItem.cs:95
 msgid "_Quit Docky"
-msgstr "_Fechar o Docky"
+msgstr "Docky 종료 (_Q)"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:92
 msgid "Docky Configuration"
-msgstr "Configuração do Docky"
+msgstr "Docky 설정"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:137
 msgid "_Start When Computer Starts"
-msgstr "Iniciar no Início da _Sessão"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:153
 msgid "_Theme:"
-msgstr "_Tema:"
+msgstr "테마 (_T):"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:177
 msgid "<b>General Options</b>"
-msgstr "<b>Opções gerais</b>"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:197
 msgid "<b>Dock Configuration</b>"
-msgstr "<b>Configurações do Dock</b>"
+msgstr "<b>Dock 설정</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:211
 msgid "Docks"
@@ -196,313 +190,313 @@ msgstr "Docks"
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:232
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:284
 msgid "All"
-msgstr "Todos"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:233
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:285
 msgid "Enabled"
-msgstr "Habilitado"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:234
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:286
 msgid "Disabled"
-msgstr "Desabilitado"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
 msgid "Docklets"
-msgstr "Docklets"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:310
 msgid "_Install"
-msgstr "_Instalar"
+msgstr "설치 (_I)"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:342
 msgid "Helpers"
-msgstr "Ajudantes"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:373
 msgid "_New Dock"
-msgstr "_Novo Dock"
+msgstr "새 Dock (_N)"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
 msgid "None"
-msgstr "Nenhum"
+msgstr "사용 안함"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:81
 msgid "Autohide"
-msgstr "Ocultar automaticamente"
+msgstr "자동 숨기기"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:82
 msgid "Intellihide"
-msgstr "Ocultar Inteligentemente"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:83
 msgid "Window Dodge"
-msgstr "Desviar das Janelas"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:97
 msgid "_Fade On Hide"
-msgstr "_Desvanecer ao Ocultar"
+msgstr "숨길때 페이드 효과 사용 (_F)"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:141
 msgid "_Icon Size:"
-msgstr "Tamanho dos _Ícones:"
+msgstr "아이콘 크기 (_I)"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:154
 msgid "_Hiding:"
-msgstr "_Ocultando:"
+msgstr "숨기기 (_H):"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
 msgid "Indicat_e Multiple Windows"
-msgstr "Indicar Múltiplas Jan_elas"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
 msgid "_Panel Mode"
-msgstr "Modo _Painel"
+msgstr "패널 모드 (_P)"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:192
 msgid "3D Background"
-msgstr "Plano de Fundo 3D"
+msgstr "3D 배경 효과"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:206
 msgid "_Manage Windows Without Launcher"
-msgstr "_Gerenciar Janelas sem Lançador"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:221
 msgid "_Zoom:"
-msgstr "_Zoom:"
+msgstr "확대 (_Z):"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:288
 msgid "<b>Inactive Docklets</b>"
-msgstr "<b>Docklets Inativos</b>"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:296
 msgid "<b>Active Docklets</b>"
-msgstr "<b>Docklets Ativos</b>"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:91
 msgid "Icon"
-msgstr "Ícone"
+msgstr "아이콘"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:147
 msgid "New _Window"
-msgstr "Nova _janela"
+msgstr "새 창으로 열기 (_W)"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:149
 #: ../StandardPlugins/Mounter/src/MountItem.cs:97
 msgid "_Open"
-msgstr "_Abrir"
+msgstr "열기 (_O)"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:69
 msgid "Reset Color"
-msgstr "Resetar a Cor"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:354
 msgid "_Pin to Dock"
-msgstr "F_ixar no Dock"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:186
 msgid "Not enough free space on destination."
-msgstr "Não há espaço suficiente no destino."
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:198
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:200
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:220
 msgid "Complete"
-msgstr "Completo"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:206
 msgid "Moving"
-msgstr "Movendo"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:212
 msgid "Copying"
-msgstr "Copiando"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:225
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:226
 msgid "Error performing drop action"
-msgstr "Erro ao realizar a ação de soltar"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:248
 msgid "Open"
-msgstr "Abrir"
+msgstr "열기"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:249
 msgid "Open Containing Folder"
-msgstr "Abrir a Pasta que o Contém"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:244
 msgid "Unma_ximize"
-msgstr "Desfazer Ma_ximizar"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:247
 msgid "Ma_ximize"
-msgstr "Ma_ximizar"
+msgstr "최대화 (_X)"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:252
 msgid "_Restore"
-msgstr "_Restaurar"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:255
 msgid "Mi_nimize"
-msgstr "Mi_nimizar"
+msgstr "최소화 (_N)"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:259
 msgid "_Close All"
-msgstr "Fe_char Todos"
+msgstr "모두 닫기 (_C)"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
 msgid "Sign up for {0}"
-msgstr "Registre-se para {0}"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:44
 msgid "Validating..."
-msgstr "Validando..."
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:45
 #, csharp-format
 msgid "Don't have {0}?"
-msgstr "Não tem {0}?"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:46
 msgid "Account validation failed!"
-msgstr "Validação da conta falhou!"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:47
 msgid "Verify and save account information"
-msgstr "Verificar e salvar informações da conta"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:48
 msgid "Account validation succeeded!"
-msgstr "Conta validada com sucesso!"
+msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:87
 msgid "Password"
-msgstr "Senha"
+msgstr "비밀 번호"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:108
 msgid "Username"
-msgstr "Nome de usuário"
+msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
 msgid "<i>Verify and save account information</i>"
-msgstr "<i>Verificar e salvar as informações da conta</i>"
+msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
 msgid "Don't have an account?"
-msgstr "Não possui uma conta?"
+msgstr ""
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:84
 msgid "Computer"
-msgstr "Computador"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:419
 msgid "Di_gital Clock"
-msgstr "Relógio Di_gital"
+msgstr "디지털 시계 (_G)"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:425
 msgid "24-Hour _Clock"
-msgstr "Relógio 24-horas"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "Show _Date"
-msgstr "Mostrar _Data"
+msgstr "날짜 표시 (_D)"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
 msgid "Select _Theme"
-msgstr "Selecionar _Tema"
+msgstr "테마 선택 (_T)"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
-msgstr "Temas"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
 msgid "Theme"
-msgstr "Tema"
+msgstr "테마"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
 msgid "_Add Label"
-msgstr "_Adicionar Rótulo"
+msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:114
 msgid "Check e_very:"
-msgstr "_Checar a cada:"
+msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:124
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:187
 msgid "minutes"
-msgstr "minutos"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:183
 msgid "Username or Password not set"
-msgstr "Nome de Usuário e Senha não informados"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:233
 msgid "(no subject)"
-msgstr "(sem assunto)"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:251
 #, csharp-format
 msgid "From: {0}"
-msgstr "De: {0}"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:262
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:266
 msgid "Feed Error"
-msgstr "Erro na Fonte"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:271
 msgid "Invalid Username"
-msgstr "Usuário Inválido"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:275
 msgid "Network Error"
-msgstr "Erro de Rede"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:280
 msgid "General Error"
-msgstr "Erro geral"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
 msgid "GMail Configuration"
-msgstr "Configuração GMail"
+msgstr "GMail 설정"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:79
 msgid "No unread mail"
-msgstr "Sem e-mails não lidos"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:82
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
-msgstr[0] "{0} mensagen não lida"
-msgstr[1] "{0} mensagens não lidas"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:103
 msgid "Checking mail..."
-msgstr "Verificando e-mail..."
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:188
 msgid "_View "
-msgstr "_Ver "
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:193
 msgid "_Compose Mail"
-msgstr "_Compor E-mail"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "New Mail"
-msgstr "Novo e-mail"
+msgstr "새 메일"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
 msgid "Check _Mail"
-msgstr "Checar e-_mail"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
-msgstr "Rótulos"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
 msgid "GMail"
@@ -510,86 +504,86 @@ msgstr "GMail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr "Login"
+msgstr "로그인"
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
-msgstr "De: "
+msgstr ""
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Eject"
-msgstr "_Ejetar"
+msgstr ""
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Unmount"
-msgstr "_Desmontar"
+msgstr "마운트 해제 (_U)"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:51
 msgid "Network Manager"
-msgstr "Gerenciador de rede"
+msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:90
 msgid "Connecting..."
-msgstr "Conectando..."
+msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:99
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:164
 msgid "Disconnected"
-msgstr "Desconectado"
+msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:108
 #, csharp-format
 msgid "Connected: {0}"
-msgstr "Conectado: {0}"
+msgstr ""
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:48
 msgid "My _Stations"
-msgstr "Minhas E_stações"
+msgstr ""
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:79
 msgid "S_earch"
-msgstr "Pesqui_sar"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
-msgstr "Nenhuma estação encontrada."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
-msgstr "Por favor, tente a sua busca de novo."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:48
 msgid "Fetching Information..."
-msgstr "Obtendo a Informação..."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:68
 msgid "Click to add NPR stations."
-msgstr "Clique para adicionar estações NPR."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:107
 msgid "Home Page"
-msgstr "Página Inicial"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:114
 msgid "Program Schedule"
-msgstr "Efetuar agendamento"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:121
 msgid "Donate"
-msgstr "Doar"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:128
 msgid "Live Streams"
-msgstr "Transmissão ao Vivo"
+msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:76
 msgid "Clear the Recent Documents list?"
-msgstr "Limpar a lista de documentos recentes?"
+msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:78
 msgid "Clear Recent Documents"
-msgstr "Limpar documentos recentes"
+msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:80
 msgid ""
@@ -597,37 +591,34 @@ msgid ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
-"Se você limpar a lista de documentos recentes, você limpará:\n"
-"• Todos os itens do menu Locais → Documentos recentes.\n"
-"• Todos os itens da lista de documentos recentes em todas as aplicações."
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
 msgid "_Clear Recent Documents..."
-msgstr "Limpar Documentos Re_centes..."
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
 msgid "No items in Trash"
-msgstr "Nenhum item na lixeira"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:75
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
-msgstr[0] "{0} item na Lixeira"
-msgstr[1] "{0} itens na Lixeira"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:160
 msgid "_Open Trash"
-msgstr "_Abrir a lixeira"
+msgstr "휴지통 열기 (_O)"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:162
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:199
 msgid "Empty _Trash"
-msgstr "Esvaziar _lixeira"
+msgstr "휴지통 비우기 (_T)"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
 msgid "Empty all of the items from the trash?"
-msgstr "Esvaziar todos os itens da lixeira?"
+msgstr "휴지통에 들어 있는 모든 항목을 비우시겠습니까?"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:186
 msgid ""
@@ -635,47 +626,42 @@ msgid ""
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
-"Se você escolher em limpar a lixeira, todos os itens nela\n"
-"serão permanentemente perdidos. Por favor, note que você\n"
-"pode também deleta-los separadamente."
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:66
 msgid "_Weather Provider:"
-msgstr "_Provedor de Metereologia:"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:106
 msgid "My _Locations"
-msgstr "Meus _Locais"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:137
 msgid "_Search"
-msgstr "Pesqui_sar"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:177
 msgid "Automatically Update _Every"
-msgstr "Atuali_zar Automaticamente a cada"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:221
 msgid "Use _Metric Units"
-msgstr "Usar Sistema _Métrico"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:84
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:87
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:92
 msgid "Invalid Weather Location"
-msgstr "Localização de Metereologia Inválida"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:90
 msgid "Network Error: "
-msgstr "Erro de Conexão: "
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
 msgstr ""
-"Dados de Metereologia provida pelo Google. Esta fonte requer que as "
-"localizações sejam especificadas como Código US Zip ou 'Cidade, País'."
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
@@ -684,89 +670,70 @@ msgid ""
 "website.  To find your code, look up your forecast on their site and the "
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
-"Dados do clima são providos por The Weather Channel. Esta fonte requer que "
-"as localizações sejam especificadas pelo CEP dos EUA ou por um código único "
-"do sitio web. Para encontrar seu código, procure sua previsão do tempo no "
-"sitio e o código estará na URL após '/local/' e se parecerá com AAXX0000."
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
 msgstr ""
-"Dados de Metereologia provida pelo Weather Underground. Esta fonte requer "
-"que as localizações sejam especificadas como Código US Zip ou 'Cidade, País'."
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
-msgstr "Nenhum resultado encontrado."
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
-msgstr "Configuração do Clima"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
 msgid "Fetching data..."
-msgstr "Obtendo dados..."
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:216
 msgid "Radar _Map"
-msgstr "_Mapa do Radar"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:221
 msgid "Forecasts"
-msgstr "Previsões de Clima"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:237
 msgid "Check _Weather"
-msgstr "_Checar Clima"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
 msgid "_Today"
-msgstr "_Hoje"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
 msgid "T_omorrow"
-msgstr "_Amanhã"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:311
 msgid "Humidity"
-msgstr "Umidade"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:313
 msgid "Temp"
-msgstr "Temp"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:315
 msgid "Feels Like"
-msgstr "Parece que"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:317
 msgid "Wind"
-msgstr "Vento"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:318
 msgid "Direction"
-msgstr "Direção"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:320
 msgid "Sunrise"
-msgstr "Nascer-do-sol"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:321
 msgid "Sunset"
-msgstr "Pôr-do-sol"
-
-#~ msgid ""
-#~ "Docky requires compositing to work properly.  Please enable compositing and "
-#~ "restart docky."
-#~ msgstr ""
-#~ "O Docky necessita dos efeitos \"compositing\" para funcionar devidamente. "
-#~ "Por favor, habilite o \"compositing\" e depois reinicie o docky."
-
-#~ msgid "Enable"
-#~ msgstr "Habilitar"
-
-#~ msgid "Disable"
-#~ msgstr "Desabilitar"
+msgstr ""
