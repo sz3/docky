@@ -42,9 +42,9 @@ except ImportError, e:
 try:
 	CLIENT = ZeitgeistClient()
 	version = [int(x) for x in CLIENT.get_version()]
-	MIN_VERSION = [0, 2, 99, 0]
+	MIN_VERSION = [0, 3, 1, 0]
 	if version < MIN_VERSION:
-		print "PLEASE USE ZEITGEIST 0.3.0 or above"
+		print "PLEASE USE ZEITGEIST 0.3.1 or above"
 		exit()
 
 except RuntimeError, e:
@@ -413,7 +413,7 @@ class Window(gtk.Window):
 		
 		event = Event()
 		event.set_actor(actor)
-		self._zg.find_event_ids_for_templates([event],_handle_find_events, [0, 0], StorageState.Any, 0, 0) 
+		self._zg.find_events_for_templates([event],_handle_get_events, [start, end], StorageState.Any, 0, 4) 
 
 
 class DataIconView(gtk.TreeView):
@@ -489,7 +489,7 @@ class DockyJournalItem(DockyItem):
 	def menu_pressed(self, menu_id):
 		if self.id_map[menu_id] == "Journal":
 			window = Window(CLIENT)
-			window.load_events(0, time.time(), self.uri)
+			window.load_events(0, time.time() * 1000, self.uri)
 			
 class DockyJournalSink(DockySink):
 	def item_path_found(self, pathtoitem, item):
