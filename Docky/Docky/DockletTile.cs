@@ -75,6 +75,9 @@ namespace Docky
 		
 		public override void OnActiveChanged ()
 		{
+			if (ConfigurationWindow.ActiveDock == null)
+				return;
+			
 			Enabled = !Enabled;
 			
 			if (Enabled) {
