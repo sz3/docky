@@ -31,6 +31,7 @@ namespace Docky.Interface
 		ItemsChanged,
 		PainterChanged,
 		ThreeDimensionalChanged,
+		PanelChanged,
 		ItemStatesChanged
 	}
 	

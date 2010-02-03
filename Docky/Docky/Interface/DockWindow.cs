@@ -145,6 +145,7 @@ namespace Docky.Interface
 		
 		readonly TimeSpan BaseAnimationTime = new TimeSpan (0, 0, 0, 0, 150);
 		readonly TimeSpan PainterAnimationTime = new TimeSpan (0, 0, 0, 0, 350);
+		readonly TimeSpan PanelAnimationTime = new TimeSpan (0, 0, 0, 0, 300);
 		readonly TimeSpan BounceTime = new TimeSpan (0, 0, 0, 0, 600);
 		readonly TimeSpan SlideTime = new TimeSpan (0, 0, 0, 0, 200);
 		
@@ -153,6 +154,7 @@ namespace Docky.Interface
 		DateTime items_change_time;
 		DateTime painter_change_time;
 		DateTime threedimensional_change_time;
+		DateTime panel_change_time;
 		DateTime render_time;
 		DateTime remove_time;
 		
@@ -535,10 +537,9 @@ namespace Docky.Interface
 		
 		int DockHeight {
 			get {
-				int height = IconSize;
 				if (Painter != null)
 					return Math.Max (IconSize, Painter.MinimumHeight) + 2 * DockHeightBuffer;
-				return height + 2 * DockHeightBuffer;
+				return IconSize + 2 * DockHeightBuffer;
 			}
 		}
 		
@@ -731,6 +732,8 @@ namespace Docky.Interface
 			                             () => ((DateTime.UtcNow - painter_change_time) < PainterAnimationTime));
 			AnimationState.AddCondition (Animations.ThreeDimensionalChanged,
 			                             () => ((DateTime.UtcNow - threedimensional_change_time) < BaseAnimationTime));
+			AnimationState.AddCondition (Animations.PanelChanged,
+			                             () => ((DateTime.UtcNow - panel_change_time) < PanelAnimationTime));
 			AnimationState.AddCondition (Animations.ItemStatesChanged, ItemsWithStateChange);
 		}
 		
@@ -1001,7 +1004,9 @@ namespace Docky.Interface
 
 		void PreferencesPanelModeChanged (object sender, EventArgs e)
 		{
-			Reconfigure ();
+			panel_change_time = DateTime.UtcNow;
+			ResetBuffers ();
+			AnimatedDraw ();
 		}
 
 		void PreferencesAutohideChanged (object sender, EventArgs e)
@@ -1722,27 +1727,33 @@ namespace Docky.Interface
 				}
 				
 				// split the icons into left/right aligned for panel mode
-				if (Preferences.PanelMode) {
-					int offset = 0;
-					switch (Position) {
-					default:
-					case DockPosition.Top:
-						offset = monitor_geo.X + (monitor_geo.Width - DockWidth) / 2;
-						val = val.MoveRight (Position, rightAlign ? offset : -offset);
-						break;
-					case DockPosition.Bottom:
-						offset = monitor_geo.X + (monitor_geo.Width - DockWidth) / 2;
-						val = val.MoveRight (Position, rightAlign ? -offset : offset);
-						break;
-					case DockPosition.Left:
-						offset = monitor_geo.Y + (monitor_geo.Height - DockWidth) / 2;
-						val = val.MoveRight (Position, rightAlign ? offset : -offset);
-						break;
-					case DockPosition.Right:
-						offset = monitor_geo.Y + (monitor_geo.Height - DockWidth) / 2;
-						val = val.MoveRight (Position, rightAlign ? -offset : offset);
-						break;
-					}
+				int panel_offset = 0;
+				if (VerticalDock)
+					panel_offset = monitor_geo.Y + (monitor_geo.Height - DockWidth) / 2;
+				else
+					panel_offset = monitor_geo.X + (monitor_geo.Width - DockWidth) / 2;
+				
+				double panelanim = Math.Min (1, ((rendering ? render_time : DateTime.UtcNow) - panel_change_time).TotalMilliseconds / PanelAnimationTime.TotalMilliseconds);
+				
+				if (panelanim < 1) {
+					if (Preferences.PanelMode)
+						panel_offset = (int) (panel_offset * panelanim);
+					else
+						panel_offset = panel_offset - (int) (panel_offset * panelanim);
+				} else if (!Preferences.PanelMode) {
+					panel_offset = 0;
+				}
+				
+				switch (Position) {
+				default:
+				case DockPosition.Left:
+				case DockPosition.Top:
+					val = val.MoveRight (Position, rightAlign ? panel_offset : -panel_offset);
+					break;
+				case DockPosition.Right:
+				case DockPosition.Bottom:
+					val = val.MoveRight (Position, rightAlign ? -panel_offset : panel_offset);
+					break;
 				}
 				
 				Gdk.Rectangle hoverArea = DrawRegionForItemValue (adi, val);
@@ -1934,12 +1945,15 @@ namespace Docky.Interface
 			
 			if (Preferences.PanelMode) {
 				Gdk.Rectangle panelArea = dockArea;
-				if (VerticalDock) {
-					panelArea.Y = -100;
-					panelArea.Height = Height + 200;
-				} else {
-					panelArea.X = -100;
-					panelArea.Width = Width + 200;
+				double panelanim = Math.Min (1, ((rendering ? render_time : DateTime.UtcNow) - panel_change_time).TotalMilliseconds / PanelAnimationTime.TotalMilliseconds);
+				if (panelanim == 1) {
+					if (VerticalDock) {
+						panelArea.Y = -100;
+						panelArea.Height = Height + 200;
+					} else {
+						panelArea.X = -100;
+						panelArea.Width = Width + 200;
+					}
 				}
 				DrawDockBackground (surface, panelArea);
 			} else {
