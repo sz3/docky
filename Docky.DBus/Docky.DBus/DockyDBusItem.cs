@@ -336,7 +336,8 @@ namespace Docky.DBus
 		#region IDisposable implementation
 		public void Dispose ()
 		{
-			GLib.Source.Remove (timer);
+			if (timer > 0)
+				GLib.Source.Remove (timer);
 		}
 		
 		#endregion

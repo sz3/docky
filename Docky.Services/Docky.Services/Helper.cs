@@ -29,6 +29,8 @@ namespace Docky.Services
 		public HelperMetadata Data { get; private set; }
 		public bool IsUser { get; private set; }
 		
+		uint alive_timer = 0;
+		
 		bool? is_running;
 		public bool IsRunning {
 			get {
@@ -140,7 +142,9 @@ namespace Docky.Services
 			IsRunning = true;
 			
 			// check if the process is alive every 10 seconds.  I can't figure out a better way to do this...
-			GLib.Timeout.Add (1000*10, delegate {
+			if (alive_timer > 0)
+				GLib.Source.Remove (alive_timer);
+			alive_timer = GLib.Timeout.Add (1000*10, delegate {
 				if (!FileFactory.NewForPath ("/proc").GetChild (Proc.Id.ToString ()).Exists) {
 					IsRunning = false;
 					return false;
@@ -152,6 +156,9 @@ namespace Docky.Services
 		
 		void Stop ()
 		{
+			if (alive_timer > 0)
+				GLib.Source.Remove (alive_timer);
+			
 			if (Proc == null || !IsRunning)
 				return;
 			

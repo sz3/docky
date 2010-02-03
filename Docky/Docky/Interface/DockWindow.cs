@@ -1461,9 +1461,8 @@ namespace Docky.Interface
 		#region Drawing
 		internal void AnimatedDraw ()
 		{
-			if (0 < animation_timer) {
+			if (animation_timer > 0) 
 				return;
-			}
 			
 			// the presense of this queue draw has caused some confusion, so I will explain.
 			// first its here to draw the "first frame".  Without it, we have a 16ms delay till that happens,
@@ -1483,7 +1482,10 @@ namespace Docky.Interface
 			
 			//reset the timer to 0 so that the next time AnimatedDraw is called we fall back into
 			//the draw loop.
+			if (animation_timer > 0)
+				GLib.Source.Remove (animation_timer);
 			animation_timer = 0;
+
 			return false;
 		}
 		

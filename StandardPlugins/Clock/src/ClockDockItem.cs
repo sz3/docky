@@ -36,6 +36,8 @@ namespace Clock
 {
 	public class ClockDockItem : AbstractDockItem, IConfig
 	{
+		uint timer;
+		
 		int minute;
 		CalendarPainter painter;
 		
@@ -144,7 +146,7 @@ namespace Clock
 			painter = new CalendarPainter ();
 			CheckForThemes ();
 			
-			GLib.Timeout.Add (1000, ClockUpdateTimer);
+			timer = GLib.Timeout.Add (1000, ClockUpdateTimer);
 		}
 		
 		public override bool Square {
@@ -454,6 +456,8 @@ namespace Clock
 				ClockThemeSelector.instance.Destroy ();
 				ClockThemeSelector.instance = null;
 			}
+			if (timer > 0)
+				GLib.Source.Remove (timer);
 			base.Dispose ();
 		}
 	}

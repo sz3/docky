@@ -143,7 +143,7 @@ namespace WeatherDocklet
 		/// </param>
 		public static void ResetTimer (bool reloadImmediately)
 		{
-			if (UpdateTimer != 0)
+			if (UpdateTimer > 0)
 				GLib.Source.Remove (UpdateTimer);
 			
 			if (CurrentLocation == "" || !DockServices.System.NetworkConnected)

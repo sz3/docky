@@ -177,7 +177,9 @@ namespace Docky.Widgets
         private bool OnTimeout ()
         {
             if (!Playing || this.actors.Count == 0) {
-                timeout_id = 0;
+				if (timeout_id > 0)
+					GLib.Source.Remove (timeout_id);
+				timeout_id = 0;
                 return false;
             }
             

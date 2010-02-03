@@ -184,11 +184,11 @@ namespace Docky.Widgets
             ShowHideButtons();
 
             if(changed_timeout_id > 0) {
-                GLib.Source.Remove(changed_timeout_id);
+                GLib.Source.Remove (changed_timeout_id);
             }
 
             if (Ready)
-                changed_timeout_id = GLib.Timeout.Add(25, OnChangedTimeout);
+                changed_timeout_id = GLib.Timeout.Add (25, OnChangedTimeout);
         }
 
         private bool OnChangedTimeout()

@@ -185,7 +185,8 @@ namespace BatteryMonitor
 		public override void Dispose ()
 		{
 			DockServices.System.BatteryStateChanged -= HandleBatteryStateChanged;
-			GLib.Source.Remove (timer);
+			if (timer > 0)
+				GLib.Source.Remove (timer);
 			base.Dispose ();
 		}
 	}

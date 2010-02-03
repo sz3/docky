@@ -31,6 +31,8 @@ namespace NetworkManagerDocklet
 {
 	public class NetworkManagerDocklet : IconDockItem
 	{
+		uint timer;
+		
 		IEnumerable<WirelessAccessPoint> ActiveAccessPoints {
 			get {
 				return NM.DevManager.NetworkDevices.OfType<WirelessDevice> ()
@@ -51,7 +53,7 @@ namespace NetworkManagerDocklet
 			HoverText = Catalog.GetString ("Network Manager");
 			Icon = SetDockletIcon ();
 			
-			GLib.Timeout.Add (10 * 1000, delegate {
+			timer = GLib.Timeout.Add (10 * 1000, delegate {
 				ReDraw ();
 				return true;
 			});
@@ -213,6 +215,13 @@ namespace NetworkManagerDocklet
 				item.Emblem = "nm-secure-lock";
 			
 			return item;
+		}
+		
+		public override void Dispose ()
+		{
+			if (timer > 0)
+				GLib.Source.Remove (timer);
+			base.Dispose ();
 		}
 	}
 }
