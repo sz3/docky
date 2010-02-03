@@ -573,13 +573,48 @@ namespace Docky.Interface
 			if (FirstRun) {
 				WindowManager = true;
 				
-				Launchers = new[] {
-					"file:///usr/share/applications/banshee-1.desktop",
-					"file:///usr/share/applications/gnome-terminal.desktop",
-					"file:///usr/share/applications/pidgin.desktop",
-					"file:///usr/share/applications/xchat.desktop",
+				// TODO optimize this better, right now we try to find files and
+				// pick the first one we find (which sorta works)
+				// ideally, we should query the system for the 'default web browser'
+				// etc and then use that
+				
+				// browser
+				string launcher_browser = new[] {
 					"file:///usr/share/applications/firefox.desktop",
-				}.Where (s => System.IO.File.Exists (new Uri (s).LocalPath));
+					"file:///usr/share/applications/chromium-browser.desktop",
+					"file:///usr/local/share/applications/google-chrome.desktop",
+					"file:///usr/share/applications/epiphany.desktop",
+					"file:///usr/share/applications/kde4/konqbrowser.desktop",
+				}.Where (s => System.IO.File.Exists (new Uri (s).LocalPath)).FirstOrDefault ();
+				
+				// terminal
+				string launcher_terminal = new[] {
+					"file:///usr/share/applications/terminator.desktop",
+					"file:///usr/share/applications/gnome-terminal.desktop",
+					"file:///usr/share/applications/kde4/konsole.desktop",
+				}.Where (s => System.IO.File.Exists (new Uri (s).LocalPath)).FirstOrDefault ();
+				
+				// music player
+				string launcher_music = new[] {
+					"file:///usr/share/applications/exaile.desktop",
+					"file:///usr/share/applications/songbird.desktop",
+					"file:///usr/share/applications/banshee-1.desktop",
+					"file:///usr/share/applications/rhythmbox.desktop",
+					"file:///usr/share/applications/kde4/amarok.desktop",
+				}.Where (s => System.IO.File.Exists (new Uri (s).LocalPath)).FirstOrDefault ();
+				
+				// IM client
+				string launcher_im = new[] {
+					"file:///usr/share/applications/pidgin.desktop",
+					"file:///usr/share/applications/empathy.desktop",
+				}.Where (s => System.IO.File.Exists (new Uri (s).LocalPath)).FirstOrDefault ();
+				
+				Launchers = new[] {
+					launcher_browser,
+					launcher_terminal,
+					launcher_music,
+					launcher_im,
+				}.Where (s => !String.IsNullOrEmpty (s));
 				
 				FirstRun = false;
 			}
