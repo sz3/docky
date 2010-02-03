@@ -54,7 +54,8 @@ namespace Docky
 			
 			ConfigButton = new Gtk.Button (Catalog.GetString ("Settings"));
 			ConfigButton.Clicked += delegate {
-				PluginManager.ConfigForAddin  (Addin.Id).Show ();
+				if (PluginManager.ConfigForAddin  (Addin.Id) != null)
+					PluginManager.ConfigForAddin  (Addin.Id).Show ();
 			};
 			
 			UpdateInfo ();
