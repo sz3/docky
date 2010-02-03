@@ -2,7 +2,8 @@
 
 #  
 #  Copyright (C) 2009-2010 Jason Smith, Rico Tzschichholz
-# 
+#                2010 Lukasz Piepiora
+#
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation, either version 3 of the License, or
@@ -75,13 +76,16 @@ class DockyPidginItem(DockyItem):
 		self.bus_interface = dbus.Interface(obj, "org.freedesktop.DBus")
 		
 		self.bus_interface.ListNames (reply_handler=self.list_names_handler, error_handler=self.list_names_error_handler)
-
+		
 		self.bus.add_signal_receiver(self.status_changed, "AccountStatusChanged", pidginitem, pidginbus, pidginpath)
+		self.bus.add_signal_receiver(self.new_chat_or_message, "ReceivedImMsg", pidginitem, pidginbus, pidginpath)
+		self.bus.add_signal_receiver(self.new_chat_or_message, "ReceivedChatMsg", pidginitem, pidginbus, pidginpath)
 
 	def list_names_handler(self, names):
 		if pidginbus in names:
 			self.pidgin = PidginSink()
 			self.set_menu_buttons()
+			self.update_badge()
 
 	def list_names_error_handler(self, error):
 		print "error getting bus names - %s" % str(error)
@@ -93,12 +97,17 @@ class DockyPidginItem(DockyItem):
 			else:
 				self.pidgin = None
 			self.set_menu_buttons()
+			self.update_badge()
 	
 	def init_pidgin_objects(self):
 		self.pidgin = PidginSink()
 
 	def status_changed(self, a, b, c):
 		self.set_menu_buttons()
+		self.update_badge()
+	
+	def new_chat_or_message(self, account, sender, message, conv, flags):
+		self.update_badge()
 	
 	def clear_menu_buttons(self):
 		for k, v in self.id_map.iteritems():
@@ -122,6 +131,20 @@ class DockyPidginItem(DockyItem):
 		else:
 			self.add_menu_item ("Connect", "/usr/share/pixmaps/pidgin/status/16/available.png", "", "Connect")
 		
+	def update_badge(self):
+		if not self.pidgin:
+			self.iface.ResetBadgeText()
+			return False
+		
+		convs = self.pidgin.iface.PurpleGetConversations()
+		count = 0
+		for conv in convs:
+			count = count + self.pidgin.iface.PurpleConversationGetData(conv, "unseen-count")
+		if count:
+			self.iface.SetBadgeText("%s" % count)
+		else:
+			self.iface.ResetBadgeText()
+		return True
 	
 	def menu_pressed(self, menu_id):
 		menu_id = self.id_map[menu_id]
