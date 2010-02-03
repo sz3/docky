@@ -1581,7 +1581,7 @@ namespace Docky.Interface
 			Gdk.Point center = new Gdk.Point (startX, midline);
 			
 			int index = 0;
-			bool rightAlign = Items.First ().Owner != Preferences.DefaultProvider;
+			bool rightAlign = (Items.First ().Owner != Preferences.DefaultProvider && Items.First () != DockyItem);
 			foreach (AbstractDockItem adi in Items) {
 				if (adi is SeparatorItem)
 					rightAlign = true;
