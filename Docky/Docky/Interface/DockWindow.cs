@@ -1586,7 +1586,7 @@ namespace Docky.Interface
 			Gdk.Point center = new Gdk.Point (startX, midline);
 			
 			int index = 0;
-			bool rightAlign = (Items.First ().Owner != Preferences.DefaultProvider && Items.First () != DockyItem);
+			bool rightAlign = (Items [0].Owner != Preferences.DefaultProvider && Items [0] != DockyItem);
 			foreach (AbstractDockItem adi in Items) {
 				if (adi is SeparatorItem)
 					rightAlign = true;
@@ -1858,12 +1858,33 @@ namespace Docky.Interface
 			
 			int dockStart;
 			int dockWidth;
+			bool hasLeft = Items [0].Owner == Preferences.DefaultProvider || Items [0] == DockyItem;
+			bool hasRight = Items [Items.Count - 1].Owner != Preferences.DefaultProvider && Items [Items.Count - 1] != DockyItem && !(Items [Items.Count - 1] is SpacingItem);
+			double panelanim = Math.Min (1, ((rendering ? render_time : DateTime.UtcNow) - panel_change_time).TotalMilliseconds / PanelAnimationTime.TotalMilliseconds);
 			if (VerticalDock) {
 				dockStart = first.Y - DockWidthBuffer;
 				dockWidth = (last.Y + last.Height + DockWidthBuffer) - dockStart;
+				if (panelanim < 1) {
+					int difference = 2 * ((dockStart + dockWidth / 2) - (monitor_geo.Y + monitor_geo.Height / 2));
+					if (!hasLeft) {
+						dockStart -= difference;
+						dockWidth += difference;
+					}
+					if (!hasRight)
+						dockWidth -= difference;
+				}
 			} else {
 				dockStart = first.X - DockWidthBuffer;
 				dockWidth = (last.X + last.Width + DockWidthBuffer) - dockStart;
+				if (panelanim < 1) {
+					int difference = 2 * ((dockStart + dockWidth / 2) - (monitor_geo.X + monitor_geo.Width / 2));
+					if (!hasLeft) {
+						dockStart -= difference;
+						dockWidth += difference;
+					}
+					if (!hasRight)
+						dockWidth -= difference;
+				}
 			}
 			
 			if (PainterOpacity > 0) {
