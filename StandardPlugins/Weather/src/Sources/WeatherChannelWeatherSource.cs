@@ -98,12 +98,12 @@ namespace WeatherDocklet
 			image_map.Add ("heavy rain", "weather-showers");
 			image_map.Add ("isolated t-storms", "weather-storm");
 			image_map.Add ("light rain", "weather-showers-scattered");
-			image_map.Add ("light snow  and  Wind", "weather-snow");
+			image_map.Add ("light snow  and  wind", "weather-snow");
 			image_map.Add ("mostly cloudy", "weather-few-clouds");
 			image_map.Add ("mostly cloudy  and  windy", "weather-few-clouds");
 			image_map.Add ("mostly sunny", "weather-clear");
 			image_map.Add ("partly cloudy", "weather-few-clouds");
-			image_map.Add ("partly cloudy / Wind", "weather-few-clouds");
+			image_map.Add ("partly cloudy / wind", "weather-few-clouds");
 			image_map.Add ("partly cloudy  and  windy", "weather-few-clouds");
 			image_map.Add ("pm showers", "weather-showers");
 			image_map.Add ("pm t-storms", "weather-storm");
@@ -115,11 +115,12 @@ namespace WeatherDocklet
 			image_map.Add ("scattered strong storms / wind", "weather-storm");
 			image_map.Add ("scattered t-storms", "weather-storm");
 			image_map.Add ("showers", "weather-showers");
-			image_map.Add ("showers / Wind", "weather-showers");
+			image_map.Add ("showers / wind", "weather-showers");
 			image_map.Add ("sunny", "weather-clear");
 			image_map.Add ("t-showers", "weather-storm");
 			image_map.Add ("t-storms", "weather-storm");
 			image_map.Add ("thunder in the vicinity", "weather-storm");
+			image_map.Add ("wintry mix", "weather-snow");
 			
 			// currently unused icons
 			//image_map.Add ("", "weather-overcast");
