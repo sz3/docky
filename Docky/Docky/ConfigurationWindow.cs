@@ -150,6 +150,7 @@ namespace Docky
 			Hide ();
 			ActiveDock = null;
 			SetupConfigAlignment ();
+			RefreshDocklets ();
 			return true;
 		}
 
@@ -158,6 +159,7 @@ namespace Docky
 			Hide ();
 			ActiveDock = null;
 			SetupConfigAlignment ();
+			RefreshDocklets ();
 		}
 		
 		void SetupConfigAlignment ()
@@ -201,6 +203,7 @@ namespace Docky
 			if (Docky.Controller.Docks.Count () == 1) {
 				ActiveDock = Docky.Controller.Docks.First ();
 				SetupConfigAlignment ();
+				RefreshDocklets ();
 			}
 			
 			KeepAbove = true;
@@ -216,9 +219,8 @@ namespace Docky
 			if (ActiveDock != dock) {
 				ActiveDock = dock;
 				SetupConfigAlignment ();
+				RefreshDocklets ();
 				CheckButtons ();
-				if (config_notebook.Page == (int)Pages.Docklets)
-					RefreshDocklets ();
 			}
 		}
 
@@ -238,6 +240,7 @@ namespace Docky
 			if (Docky.Controller.NumDocks == 1) {
 				ActiveDock = null;
 				SetupConfigAlignment ();
+				RefreshDocklets ();
 				CheckButtons ();
 			}
 		}
@@ -279,6 +282,7 @@ namespace Docky
 					else
 						ActiveDock = null;
 					SetupConfigAlignment ();
+					RefreshDocklets ();
 				}
 				
 				md.Destroy ();
@@ -296,6 +300,7 @@ namespace Docky
 				newDock.EnterConfigurationMode ();
 				ActiveDock = newDock;
 				SetupConfigAlignment ();
+				RefreshDocklets ();
 			}
 			CheckButtons ();
 		}
@@ -436,6 +441,10 @@ namespace Docky
 		
 		void RefreshDocklets ()
 		{
+			if (config_notebook.Page != (int)Pages.Docklets)
+				return;
+			
+			DockletsTileview.Clear ();
 			if (ActiveDock == null)
 				return;
 			
@@ -461,7 +470,6 @@ namespace Docky
 			
 			tiles = tiles.Where (t => t.Description.ToLower ().Contains (query) || t.Name.ToLower ().Contains (query)).ToList ();
 			
-			DockletsTileview.Clear ();
 			foreach (DockletTile docklet in tiles) {
 				DockletsTileview.AppendTile (docklet);
 			}
