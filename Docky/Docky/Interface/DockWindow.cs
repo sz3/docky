@@ -1581,7 +1581,10 @@ namespace Docky.Interface
 			Gdk.Point center = new Gdk.Point (startX, midline);
 			
 			int index = 0;
+			bool rightAlign = Items.First ().Owner != Preferences.DefaultProvider;
 			foreach (AbstractDockItem adi in Items) {
+				if (adi is SeparatorItem)
+					rightAlign = true;
 				
 				// used to handle remove animation
 				if (remove_index != 0 && remove_index < index && remove_index > index - 1) {
@@ -1716,6 +1719,30 @@ namespace Docky.Interface
 					val.Center.Y = (height - 1) - val.Center.Y;
 					val.StaticCenter.Y = (height - 1) - val.StaticCenter.Y;
 					break;
+				}
+				
+				// split the icons into left/right aligned for panel mode
+				if (Preferences.PanelMode) {
+					int offset = 0;
+					switch (Position) {
+					default:
+					case DockPosition.Top:
+						offset = monitor_geo.X + (monitor_geo.Width - DockWidth) / 2;
+						val = val.MoveRight (Position, rightAlign ? offset : -offset);
+						break;
+					case DockPosition.Bottom:
+						offset = monitor_geo.X + (monitor_geo.Width - DockWidth) / 2;
+						val = val.MoveRight (Position, rightAlign ? -offset : offset);
+						break;
+					case DockPosition.Left:
+						offset = monitor_geo.Y + (monitor_geo.Height - DockWidth) / 2;
+						val = val.MoveRight (Position, rightAlign ? offset : -offset);
+						break;
+					case DockPosition.Right:
+						offset = monitor_geo.Y + (monitor_geo.Height - DockWidth) / 2;
+						val = val.MoveRight (Position, rightAlign ? -offset : offset);
+						break;
+					}
 				}
 				
 				Gdk.Rectangle hoverArea = DrawRegionForItemValue (adi, val);
