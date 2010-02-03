@@ -191,6 +191,8 @@ namespace Docky.Interface
 		uint animation_timer;
 		uint icon_size_timer;
 		
+		public event EventHandler<HoveredItemChangedArgs> HoveredItemChanged;
+		
 		public int Width { get; private set; }
 		
 		public int Height { get; private set; }
@@ -676,7 +678,7 @@ namespace Docky.Interface
 		{
 			DrawValues = new Dictionary<AbstractDockItem, DrawValue> ();
 			Menu = new DockItemMenu (this);
-			Menu.Shown += HandleMenuShown;
+			Menu.Shown  += HandleMenuShown;
 			Menu.Hidden += HandleMenuHidden;
 			
 			TextManager = new HoverTextManager ();
@@ -707,7 +709,7 @@ namespace Docky.Interface
 					          Gdk.EventMask.PointerMotionMask |
 			                  Gdk.EventMask.ScrollMask));
 			
-			Realized += HandleRealized;
+			Realized                      += HandleRealized;
 			Docky.Controller.ThemeChanged += DockyControllerThemeChanged;
 			
 			// fix for nvidia bug
@@ -741,14 +743,14 @@ namespace Docky.Interface
 			DateTime now = DateTime.UtcNow;
 			
 			foreach (AbstractDockItem adi in Items) {
-				//Bounceing Items
-				if ((now - adi.LastClick) < BounceTime || (now - adi.StateSetTime (ItemState.Urgent)) < BounceTime)
-					return true;
 				//Waiting Items
 				if ((adi.State & ItemState.Wait) != 0)
 					return true;
 				//Moving Items
 				if (now - adi.StateSetTime (ItemState.Move) < SlideTime)
+					return true;
+				//Bouncing Items
+				if ((now - adi.LastClick) < BounceTime || (now - adi.StateSetTime (ItemState.Urgent)) < BounceTime)
 					return true;
 			}
 			return false;
@@ -782,7 +784,7 @@ namespace Docky.Interface
 			AutohideManager = new AutohideManager (Screen);
 			AutohideManager.Behavior = Preferences.Autohide;
 			
-			AutohideManager.HiddenChanged += HandleHiddenChanged;
+			AutohideManager.HiddenChanged      += HandleHiddenChanged;
 			AutohideManager.DockHoveredChanged += HandleDockHoveredChanged;
 			
 			Screen.SizeChanged += ScreenSizeChanged;
@@ -881,8 +883,8 @@ namespace Docky.Interface
 		{
 			item.SetStyle (Style);
 			item.HoverTextChanged += ItemHoverTextChanged;
-			item.PaintNeeded += ItemPaintNeeded;
-			item.PainterRequest += ItemPainterRequest;
+			item.PaintNeeded      += ItemPaintNeeded;
+			item.PainterRequest   += ItemPainterRequest;
 			
 			DBusManager.Default.RegisterItem (item);
 		}
@@ -890,8 +892,8 @@ namespace Docky.Interface
 		void UnregisterItem (AbstractDockItem item)
 		{
 			item.HoverTextChanged -= ItemHoverTextChanged;
-			item.PaintNeeded -= ItemPaintNeeded;
-			item.PainterRequest -= ItemPainterRequest;
+			item.PaintNeeded      -= ItemPaintNeeded;
+			item.PainterRequest   -= ItemPainterRequest;
 			DrawValues.Remove (item);
 			
 			DBusManager.Default.UnregisterItem (item);
@@ -925,15 +927,14 @@ namespace Docky.Interface
 		
 		void RegisterPreferencesEvents (IDockPreferences preferences)
 		{
-			preferences.AutohideChanged += PreferencesAutohideChanged;
-			preferences.PanelModeChanged += PreferencesPanelModeChanged;
-			preferences.IconSizeChanged += PreferencesIconSizeChanged;
-			preferences.PositionChanged += PreferencesPositionChanged;
+			preferences.AutohideChanged         += PreferencesAutohideChanged;
+			preferences.PanelModeChanged        += PreferencesPanelModeChanged;
+			preferences.IconSizeChanged         += PreferencesIconSizeChanged;
+			preferences.PositionChanged         += PreferencesPositionChanged;
 			preferences.ThreeDimensionalChanged += PreferencesThreeDimensionalChanged;
-			preferences.ZoomEnabledChanged += PreferencesZoomEnabledChanged;
-			preferences.ZoomPercentChanged += PreferencesZoomPercentChanged;
-			
-			preferences.ItemProvidersChanged += PreferencesItemProvidersChanged;
+			preferences.ZoomEnabledChanged      += PreferencesZoomEnabledChanged;
+			preferences.ZoomPercentChanged      += PreferencesZoomPercentChanged;
+			preferences.ItemProvidersChanged    += PreferencesItemProvidersChanged;
 			
 			foreach (AbstractDockItemProvider provider in preferences.ItemProviders)
 				RegisterItemProvider (provider);
@@ -941,14 +942,15 @@ namespace Docky.Interface
 
 		void UnregisterPreferencesEvents (IDockPreferences preferences)
 		{
-			preferences.AutohideChanged -= PreferencesAutohideChanged;
-			preferences.PanelModeChanged -= PreferencesPanelModeChanged;
-			preferences.IconSizeChanged -= PreferencesIconSizeChanged;
-			preferences.PositionChanged -= PreferencesPositionChanged;
-			preferences.ZoomEnabledChanged -= PreferencesZoomEnabledChanged;
-			preferences.ZoomPercentChanged -= PreferencesZoomPercentChanged;
+			preferences.AutohideChanged         -= PreferencesAutohideChanged;
+			preferences.PanelModeChanged        -= PreferencesPanelModeChanged;
+			preferences.IconSizeChanged         -= PreferencesIconSizeChanged;
+			preferences.PositionChanged         -= PreferencesPositionChanged;
+			preferences.ThreeDimensionalChanged -= PreferencesThreeDimensionalChanged;
+			preferences.ZoomEnabledChanged      -= PreferencesZoomEnabledChanged;
+			preferences.ZoomPercentChanged      -= PreferencesZoomPercentChanged;
+			preferences.ItemProvidersChanged    -= PreferencesItemProvidersChanged;
 			
-			preferences.ItemProvidersChanged -= PreferencesItemProvidersChanged;
 			foreach (AbstractDockItemProvider provider in preferences.ItemProviders)
 				UnregisterItemProvider (provider);
 		}
@@ -1158,7 +1160,6 @@ namespace Docky.Interface
 			if (InternalDragActive || ConfigurationMode)
 				return base.OnButtonPressEvent (evnt);
 			
-			
 			if (Painter != null) {
 				int x, y;
 				
@@ -1216,7 +1217,7 @@ namespace Docky.Interface
 		void SetTooltipVisibility ()
 		{
 			bool visible = (HoveredItem != null && !InternalDragActive && !ExternalDragActive &&
-							!Menu.Visible && !ConfigurationMode && Painter == null) ||
+								!Menu.Visible && !ConfigurationMode && Painter == null) ||
 							ActiveGlow ||
 							(ExternalDragActive && DockHovered && !(hoveredItem is INonPersistedItem));
 						
@@ -1229,13 +1230,12 @@ namespace Docky.Interface
 		internal void SetHoveredAcceptsDrop ()
 		{
 			HoveredAcceptsDrop = false;
+			
 			if (HoveredItem != null && Painter == null && !ConfigurationMode)
 				DragTracker.DragDisabled = HoveredItem is INonPersistedItem;
-			if (HoveredItem != null && ExternalDragActive) {
-				if (DragTracker.DragData != null && HoveredItem.CanAcceptDrop (DragTracker.DragData)) {
-					HoveredAcceptsDrop = true;
-				}
-			}
+			
+			if (HoveredItem != null && ExternalDragActive && DragTracker.DragData != null && HoveredItem.CanAcceptDrop (DragTracker.DragData))
+				HoveredAcceptsDrop = true;
 		}
 		
 		internal void UpdateCollectionBuffer ()
@@ -1504,28 +1504,25 @@ namespace Docky.Interface
 		
 		Gdk.Rectangle DrawRegionForItemValue (AbstractDockItem item, DrawValue val)
 		{
-			if (item.Square) {
-				return new Gdk.Rectangle ((int) (val.Center.X - (IconSize * val.Zoom / 2)),
-					(int) (val.Center.Y - (IconSize * val.Zoom / 2)),
-					(int) (IconSize * val.Zoom),
-					(int) (IconSize * val.Zoom));
-			} else {
+			int width = IconSize, height = IconSize;
+			
+			if (!item.Square) {
 				DockySurface surface = item.IconSurface (main_buffer, IconSize, IconSize);
 				
-				int width = surface.Width;
-				int height = surface.Height;
+				width = surface.Width;
+					height = surface.Height;
 				
 				if (item.RotateWithDock && VerticalDock) {
 					int tmp = width;
 					width = height;
 					height = tmp;
 				}
-				
-				return new Gdk.Rectangle ((int) (val.Center.X - (width * val.Zoom / 2)),
-					(int) (val.Center.Y - (height * val.Zoom / 2)),
-					(int) (width * val.Zoom),
-					(int) (height * val.Zoom));
 			}
+			
+			return new Gdk.Rectangle ((int) (val.Center.X - (width * val.Zoom / 2)),
+				(int) (val.Center.Y - (height * val.Zoom / 2)),
+				(int) (width * val.Zoom),
+				(int) (height * val.Zoom));
 		}
 		
 		/// <summary>
@@ -1536,7 +1533,6 @@ namespace Docky.Interface
 		/// </param>
 		void UpdateDrawRegionsForSurface (DockySurface surface)
 		{
-			
 			// first we do the math as if this is a top dock, to do this we need to set
 			// up some "pretend" variables. we pretend we are a top dock because 0,0 is
 			// at the top.
@@ -1966,8 +1962,8 @@ namespace Docky.Interface
 			
 			if (Preferences.PanelMode) {
 				Gdk.Rectangle panelArea = dockArea;
-				double panelanim = Math.Min (1, ((rendering ? render_time : DateTime.UtcNow) - panel_change_time).TotalMilliseconds / PanelAnimationTime.TotalMilliseconds);
-				if (panelanim == 1) {
+				double panelAnim = Math.Min (1, ((rendering ? render_time : DateTime.UtcNow) - panel_change_time).TotalMilliseconds / PanelAnimationTime.TotalMilliseconds);
+				if (panelAnim == 1) {
 					if (VerticalDock) {
 						panelArea.Y = -100;
 						panelArea.Height = Height + 200;
@@ -2030,13 +2026,9 @@ namespace Docky.Interface
 				SetDockOpacity (surface);
 			
 			//Draw UrgentGlow which is visible when Docky is hidden and an item need attention
-			if (AutohideManager.Hidden && !ConfigurationMode
-				&& (!Preferences.FadeOnHide || Preferences.FadeOpacity == 0)) {
-
+			if (AutohideManager.Hidden && !ConfigurationMode && (!Preferences.FadeOnHide || Preferences.FadeOpacity == 0)) {
 				foreach (AbstractDockItem adi in Items) {
-					if (adi.Indicator != ActivityIndicator.None 
-					    && (adi.State & ItemState.Urgent) == ItemState.Urgent) {
-						
+					if (adi.Indicator != ActivityIndicator.None && (adi.State & ItemState.Urgent) == ItemState.Urgent) {
 						if (urgent_glow_buffer == null)
 							urgent_glow_buffer = CreateUrgentGlowBuffer ();
 		
@@ -2093,7 +2085,6 @@ namespace Docky.Interface
 					painterSurface.Width,
 					painterSurface.Height);
 				
-				
 				painterSurface.Internal.Show (painter_buffer.Context, painter_area.X, painter_area.Y);
 			
 				PointD point;
@@ -2135,6 +2126,7 @@ namespace Docky.Interface
 		{
 			if (!Preferences.FadeOnHide)
 				return;
+			
 			surface.Context.Save ();
 			
 			surface.Context.Color = new Cairo.Color (0, 0, 0, 0);
@@ -2257,12 +2249,14 @@ namespace Docky.Interface
 			}
 			icon.ShowWithOptions (surface, center.Center, renderZoom, renderRotation, opacity);
 			
+			// glow the icon
 			if (lighten > 0) {
 				surface.Context.Operator = Operator.Add;
 				icon.ShowWithOptions (surface, center.Center, renderZoom, renderRotation, opacity * lighten);
 				surface.Context.Operator = Operator.Over;
 			}
 			
+			// darken the icon
 			if (darken > 0) {
 				Gdk.Rectangle area = DrawRegionForItemValue (item, center);
 				surface.Context.Rectangle (area.X, area.Y, area.Height, area.Width);
@@ -2274,6 +2268,7 @@ namespace Docky.Interface
 				surface.Context.Operator = Operator.Over;
 			}
 			
+			// draw the active glow
 			if ((item.State & ItemState.Active) == ItemState.Active && !ThreeDimensional) {
 				Gdk.Rectangle area;
 				
@@ -2296,15 +2291,16 @@ namespace Docky.Interface
 				surface.Context.Operator = Operator.Over;
 			}
 			
+			// draw the wait spinner
 			if ((item.State & ItemState.Wait) != 0) {
-				int rotate = ((int) ((DateTime.UtcNow - item.StateSetTime (ItemState.Wait)).TotalMilliseconds / 80)) % (WaitArmsPerGroup * WaitGroups);
-				
 				if (wait_buffer == null)
 					wait_buffer = CreateWaitBuffer ();
 				
+				int rotate = ((int) ((DateTime.UtcNow - item.StateSetTime (ItemState.Wait)).TotalMilliseconds / 80)) % (WaitArmsPerGroup * WaitGroups);
 				wait_buffer.ShowWithOptions (surface, center.Center, center.Zoom, rotate * 2 * Math.PI / (WaitArmsPerGroup * WaitGroups), 1);
 			}
 			
+			// draw the normal/urgent indicator(s)
 			if (item.Indicator != ActivityIndicator.None) {
 				if (normal_indicator_buffer == null)
 					normal_indicator_buffer = CreateNormalIndicatorBuffer ();
@@ -2548,7 +2544,6 @@ namespace Docky.Interface
 			}
 			
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
-				
 				render_time = DateTime.UtcNow;
 				rendering = true;
 				zoom_in_buffer = null;
@@ -2595,6 +2590,7 @@ namespace Docky.Interface
 		#endregion
 		
 		#region XServer Related
+		
 		void SetInputMask (Gdk.Rectangle area)
 		{
 			if (!IsRealized || current_mask_area == area)
@@ -2606,13 +2602,13 @@ namespace Docky.Interface
 				return;
 			}
 
-			using (Gdk.Pixmap pixmap = new Gdk.Pixmap (null, area.Width, area.Height, 1))
-			using (Context cr = Gdk.CairoHelper.Create (pixmap)) {
-			
-				cr.Color = new Cairo.Color (0, 0, 0, 1);
-				cr.Paint ();
-				
-				InputShapeCombineMask (pixmap, area.X, area.Y);
+			using (Gdk.Pixmap pixmap = new Gdk.Pixmap (null, area.Width, area.Height, 1)) {
+				using (Context cr = Gdk.CairoHelper.Create (pixmap)) {
+					cr.Color = new Cairo.Color (0, 0, 0, 1);
+					cr.Paint ();
+					
+					InputShapeCombineMask (pixmap, area.X, area.Y);
+				}
 			}
 		}
 		
@@ -2661,6 +2657,11 @@ namespace Docky.Interface
 		
 		public override void Dispose ()
 		{
+			if (animation_timer > 0)
+				GLib.Source.Remove (animation_timer);
+			if (icon_size_timer > 0)
+				GLib.Source.Remove (icon_size_timer);
+			
 			if (Menu != null)
 				Menu.Dispose ();
 			
@@ -2671,13 +2672,10 @@ namespace Docky.Interface
 			DragTracker.Dispose ();
 			
 			CursorTracker.CursorPositionChanged -= HandleCursorPositionChanged;
-			AutohideManager.HiddenChanged -= HandleHiddenChanged;
-			AutohideManager.DockHoveredChanged -= HandleDockHoveredChanged;
-			Screen.SizeChanged -= ScreenSizeChanged;
-			Docky.Controller.ThemeChanged -= DockyControllerThemeChanged;
-			
-			if (animation_timer > 0)
-				GLib.Source.Remove (animation_timer);
+			AutohideManager.HiddenChanged       -= HandleHiddenChanged;
+			AutohideManager.DockHoveredChanged  -= HandleDockHoveredChanged;
+			Screen.SizeChanged                  -= ScreenSizeChanged;
+			Docky.Controller.ThemeChanged       -= DockyControllerThemeChanged;
 			
 			// clear out our separators
 			foreach (AbstractDockItem adi in Items.Where (adi => adi is INonPersistedItem))
@@ -2689,7 +2687,5 @@ namespace Docky.Interface
 			Destroy ();
 			base.Dispose ();
 		}
-		
-		public event EventHandler<HoveredItemChangedArgs> HoveredItemChanged;
 	}
 }
