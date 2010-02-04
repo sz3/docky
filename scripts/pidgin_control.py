@@ -78,8 +78,6 @@ class DockyPidginItem(DockyItem):
 		self.bus_interface.ListNames (reply_handler=self.list_names_handler, error_handler=self.list_names_error_handler)
 		
 		self.bus.add_signal_receiver(self.status_changed, "AccountStatusChanged", pidginitem, pidginbus, pidginpath)
-		self.bus.add_signal_receiver(self.new_chat_or_message, "ReceivedImMsg", pidginitem, pidginbus, pidginpath)
-		self.bus.add_signal_receiver(self.new_chat_or_message, "ReceivedChatMsg", pidginitem, pidginbus, pidginpath)
 		self.bus.add_signal_receiver(self.conversation_updated, "ConversationUpdated", pidginitem, pidginbus, pidginpath)
 
 	def list_names_handler(self, names):
@@ -105,9 +103,6 @@ class DockyPidginItem(DockyItem):
 
 	def status_changed(self, a, b, c):
 		self.set_menu_buttons()
-		self.update_badge()
-	
-	def new_chat_or_message(self, account, sender, message, conv, flags):
 		self.update_badge()
 	
 	def conversation_updated(self, conv, type):
