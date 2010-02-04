@@ -1861,32 +1861,27 @@ namespace Docky.Interface
 			
 			int dockStart;
 			int dockWidth;
-			bool hasLeft = Items [0].Owner == Preferences.DefaultProvider || Items [0] == DockyItem;
-			bool hasRight = Items [Items.Count - 1].Owner != Preferences.DefaultProvider && Items [Items.Count - 1] != DockyItem && !(Items [Items.Count - 1] is SpacingItem);
 			if (VerticalDock) {
 				dockStart = first.Y - DockWidthBuffer;
 				dockWidth = (last.Y + last.Height + DockWidthBuffer) - dockStart;
-				if (PanelModeToggleProgress < 1) {
-					int difference = 2 * ((dockStart + dockWidth / 2) - (monitor_geo.Height / 2));
-					if (!hasLeft) {
-						dockStart -= difference;
-						dockWidth += difference;
-					}
-					if (!hasRight)
-						dockWidth -= difference;
-				}
 			} else {
 				dockStart = first.X - DockWidthBuffer;
 				dockWidth = (last.X + last.Width + DockWidthBuffer) - dockStart;
-				if (PanelModeToggleProgress < 1) {
-					int difference = 2 * ((dockStart + dockWidth / 2) - (monitor_geo.Width / 2));
-					if (!hasLeft) {
-						dockStart -= difference;
-						dockWidth += difference;
-					}
-					if (!hasRight)
-						dockWidth -= difference;
+			}
+			
+			// update the dock area to animate the panel toggle
+			if (PanelModeToggleProgress < 1) {
+				int difference = 2 * ((dockStart + dockWidth / 2) - ((VerticalDock ? monitor_geo.Height : monitor_geo.Width) / 2));
+				// no left items
+				if (Items [0].Owner != Preferences.DefaultProvider && Items [0] != DockyItem) {
+					dockStart -= difference;
+					dockWidth += difference;
 				}
+				// no right items
+				if (Items [Items.Count - 1].Owner == Preferences.DefaultProvider ||
+					Items [Items.Count - 1] == DockyItem ||
+					Items [Items.Count - 1] is SpacingItem)
+					dockWidth -= difference;
 			}
 			
 			if (PainterOpacity > 0) {
