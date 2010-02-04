@@ -84,7 +84,7 @@ class DockyPidginItem(DockyItem):
 
 	def list_names_handler(self, names):
 		if pidginbus in names:
-			self.pidgin = PidginSink()
+			self.init_pidgin_objects()
 			self.set_menu_buttons()
 			self.update_badge()
 
@@ -94,7 +94,7 @@ class DockyPidginItem(DockyItem):
 	def name_owner_changed_cb(self, name, old_owner, new_owner):
 		if name == pidginbus:
 			if new_owner:
-				self.pidgin = PidginSink()
+				self.init_pidgin_objects()
 			else:
 				self.pidgin = None
 				if self.timer > 0:
