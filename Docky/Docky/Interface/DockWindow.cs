@@ -1725,9 +1725,9 @@ namespace Docky.Interface
 				// split the icons into left/right aligned for panel mode
 				int panel_offset = 0;
 				if (VerticalDock)
-					panel_offset = monitor_geo.Y + (monitor_geo.Height - DockWidth) / 2;
+					panel_offset = (monitor_geo.Height - DockWidth) / 2;
 				else
-					panel_offset = monitor_geo.X + (monitor_geo.Width - DockWidth) / 2;
+					panel_offset = (monitor_geo.Width - DockWidth) / 2;
 				
 				double panelanim = Math.Min (1, ((rendering ? render_time : DateTime.UtcNow) - panel_change_time).TotalMilliseconds / PanelAnimationTime.TotalMilliseconds);
 				
@@ -1861,7 +1861,7 @@ namespace Docky.Interface
 				dockStart = first.Y - DockWidthBuffer;
 				dockWidth = (last.Y + last.Height + DockWidthBuffer) - dockStart;
 				if (panelanim < 1) {
-					int difference = 2 * ((dockStart + dockWidth / 2) - (monitor_geo.Y + monitor_geo.Height / 2));
+					int difference = 2 * ((dockStart + dockWidth / 2) - (monitor_geo.Height / 2));
 					if (!hasLeft) {
 						dockStart -= difference;
 						dockWidth += difference;
@@ -1873,7 +1873,7 @@ namespace Docky.Interface
 				dockStart = first.X - DockWidthBuffer;
 				dockWidth = (last.X + last.Width + DockWidthBuffer) - dockStart;
 				if (panelanim < 1) {
-					int difference = 2 * ((dockStart + dockWidth / 2) - (monitor_geo.X + monitor_geo.Width / 2));
+					int difference = 2 * ((dockStart + dockWidth / 2) - (monitor_geo.Width / 2));
 					if (!hasLeft) {
 						dockStart -= difference;
 						dockWidth += difference;
