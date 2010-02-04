@@ -66,6 +66,7 @@ class PidginSink():
 class DockyPidginItem(DockyItem):
 	def __init__(self, path):
 		DockyItem.__init__(self, path)
+		self.timer = 0
 		self.pidgin = None
 		
 		self.bus.add_signal_receiver(self.name_owner_changed_cb,
@@ -96,11 +97,17 @@ class DockyPidginItem(DockyItem):
 				self.pidgin = PidginSink()
 			else:
 				self.pidgin = None
+				if self.timer > 0:
+					gobject.source_remove (self.timer)
+					self.timer = 0
 			self.set_menu_buttons()
 			self.update_badge()
 	
 	def init_pidgin_objects(self):
 		self.pidgin = PidginSink()
+
+		if not self.timer > 0:
+			self.timer = gobject.timeout_add (5000, self.update_badge)
 
 	def status_changed(self, a, b, c):
 		self.set_menu_buttons()
