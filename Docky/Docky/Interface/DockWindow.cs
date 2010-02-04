@@ -626,6 +626,12 @@ namespace Docky.Interface
 				return 1 - progress;
 			}
 		}
+
+		double PanelModeToggleProgress {
+			get {
+				return Math.Min (1, ((rendering ? render_time : DateTime.UtcNow) - panel_change_time).TotalMilliseconds / PanelAnimationTime.TotalMilliseconds);
+			}
+		}
 		
 		double DockOpacity {
 			get {
@@ -1579,6 +1585,24 @@ namespace Docky.Interface
 			// the left most edge of the first dock item
 			int startX = ((width - DockWidth) / 2) + DockWidthBuffer;
 			
+			// this offset is used to split the icons into left/right aligned for panel mode
+			int panel_item_offset = 0;
+			double panelanim = PanelModeToggleProgress;
+			if (VerticalDock)
+				panel_item_offset = (monitor_geo.Height - DockWidth) / 2;
+			else
+				panel_item_offset = (monitor_geo.Width - DockWidth) / 2;
+			
+			if (panelanim >= 1) {
+				if (!Preferences.PanelMode)
+					panel_item_offset = 0;
+			} else {
+				if (Preferences.PanelMode)
+					panel_item_offset = (int) (panel_item_offset * panelanim);
+				else
+					panel_item_offset = panel_item_offset - (int) (panel_item_offset * panelanim);
+			}
+			
 			Gdk.Point center = new Gdk.Point (startX, midline);
 			
 			int index = 0;
@@ -1723,32 +1747,15 @@ namespace Docky.Interface
 				}
 				
 				// split the icons into left/right aligned for panel mode
-				int panel_offset = 0;
-				if (VerticalDock)
-					panel_offset = (monitor_geo.Height - DockWidth) / 2;
-				else
-					panel_offset = (monitor_geo.Width - DockWidth) / 2;
-				
-				double panelanim = Math.Min (1, ((rendering ? render_time : DateTime.UtcNow) - panel_change_time).TotalMilliseconds / PanelAnimationTime.TotalMilliseconds);
-				
-				if (panelanim < 1) {
-					if (Preferences.PanelMode)
-						panel_offset = (int) (panel_offset * panelanim);
-					else
-						panel_offset = panel_offset - (int) (panel_offset * panelanim);
-				} else if (!Preferences.PanelMode) {
-					panel_offset = 0;
-				}
-				
 				switch (Position) {
 				default:
 				case DockPosition.Left:
 				case DockPosition.Top:
-					val = val.MoveRight (Position, rightAlign ? panel_offset : -panel_offset);
+					val = val.MoveRight (Position, rightAlign ? panel_item_offset : -panel_item_offset);
 					break;
 				case DockPosition.Right:
 				case DockPosition.Bottom:
-					val = val.MoveRight (Position, rightAlign ? -panel_offset : panel_offset);
+					val = val.MoveRight (Position, rightAlign ? -panel_item_offset : panel_item_offset);
 					break;
 				}
 				
@@ -1856,11 +1863,10 @@ namespace Docky.Interface
 			int dockWidth;
 			bool hasLeft = Items [0].Owner == Preferences.DefaultProvider || Items [0] == DockyItem;
 			bool hasRight = Items [Items.Count - 1].Owner != Preferences.DefaultProvider && Items [Items.Count - 1] != DockyItem && !(Items [Items.Count - 1] is SpacingItem);
-			double panelanim = Math.Min (1, ((rendering ? render_time : DateTime.UtcNow) - panel_change_time).TotalMilliseconds / PanelAnimationTime.TotalMilliseconds);
 			if (VerticalDock) {
 				dockStart = first.Y - DockWidthBuffer;
 				dockWidth = (last.Y + last.Height + DockWidthBuffer) - dockStart;
-				if (panelanim < 1) {
+				if (PanelModeToggleProgress < 1) {
 					int difference = 2 * ((dockStart + dockWidth / 2) - (monitor_geo.Height / 2));
 					if (!hasLeft) {
 						dockStart -= difference;
@@ -1872,7 +1878,7 @@ namespace Docky.Interface
 			} else {
 				dockStart = first.X - DockWidthBuffer;
 				dockWidth = (last.X + last.Width + DockWidthBuffer) - dockStart;
-				if (panelanim < 1) {
+				if (PanelModeToggleProgress < 1) {
 					int difference = 2 * ((dockStart + dockWidth / 2) - (monitor_geo.Width / 2));
 					if (!hasLeft) {
 						dockStart -= difference;
@@ -1962,8 +1968,7 @@ namespace Docky.Interface
 			
 			if (Preferences.PanelMode) {
 				Gdk.Rectangle panelArea = dockArea;
-				double panelAnim = Math.Min (1, ((rendering ? render_time : DateTime.UtcNow) - panel_change_time).TotalMilliseconds / PanelAnimationTime.TotalMilliseconds);
-				if (panelAnim == 1) {
+				if (PanelModeToggleProgress == 1) {
 					if (VerticalDock) {
 						panelArea.Y = -100;
 						panelArea.Height = Height + 200;
