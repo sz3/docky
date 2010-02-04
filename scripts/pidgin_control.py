@@ -66,7 +66,6 @@ class PidginSink():
 class DockyPidginItem(DockyItem):
 	def __init__(self, path):
 		DockyItem.__init__(self, path)
-		self.timer = 0
 		self.pidgin = None
 		
 		self.bus.add_signal_receiver(self.name_owner_changed_cb,
@@ -81,6 +80,7 @@ class DockyPidginItem(DockyItem):
 		self.bus.add_signal_receiver(self.status_changed, "AccountStatusChanged", pidginitem, pidginbus, pidginpath)
 		self.bus.add_signal_receiver(self.new_chat_or_message, "ReceivedImMsg", pidginitem, pidginbus, pidginpath)
 		self.bus.add_signal_receiver(self.new_chat_or_message, "ReceivedChatMsg", pidginitem, pidginbus, pidginpath)
+		self.bus.add_signal_receiver(self.conversation_updated, "ConversationUpdated", pidginitem, pidginbus, pidginpath)
 
 	def list_names_handler(self, names):
 		if pidginbus in names:
@@ -97,17 +97,11 @@ class DockyPidginItem(DockyItem):
 				self.init_pidgin_objects()
 			else:
 				self.pidgin = None
-				if self.timer > 0:
-					gobject.source_remove (self.timer)
-					self.timer = 0
 			self.set_menu_buttons()
 			self.update_badge()
 	
 	def init_pidgin_objects(self):
 		self.pidgin = PidginSink()
-
-		if not self.timer > 0:
-			self.timer = gobject.timeout_add (5000, self.update_badge)
 
 	def status_changed(self, a, b, c):
 		self.set_menu_buttons()
@@ -116,6 +110,9 @@ class DockyPidginItem(DockyItem):
 	def new_chat_or_message(self, account, sender, message, conv, flags):
 		self.update_badge()
 	
+	def conversation_updated(self, conv, type):
+		self.update_badge()
+
 	def clear_menu_buttons(self):
 		for k, v in self.id_map.iteritems():
 			try:
