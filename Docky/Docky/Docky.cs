@@ -48,15 +48,6 @@ namespace Docky
 			}
 		}
 		
-		static ConfigurationWindow config;
-		internal static ConfigurationWindow Config {
-			get {
-				if (config == null)
-					config = new ConfigurationWindow ();
-				return config;
-			}
-		}
-		
 		public static void Main (string[] args)
 		{
 			// process the command line args

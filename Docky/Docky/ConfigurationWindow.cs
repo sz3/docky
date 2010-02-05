@@ -65,24 +65,34 @@ namespace Docky
 		TileView HelpersTileview, DockletsTileview;
 		Widgets.SearchEntry HelperSearch, DockletSearch;
 		
+		internal static ConfigurationWindow Instance { get; private set; }
+		
+		static ConfigurationWindow () {
+			Instance = new ConfigurationWindow ();
+		}
+		
 		static Dock activeDock;
-		public static Dock ActiveDock {
+		public Dock ActiveDock {
 			get { return activeDock; }
 			private set {
 				if (activeDock == value)
 					return;
 				
-				if (activeDock != null && value != null)
+				if (activeDock != null)
 					activeDock.UnsetActiveGlow ();
+				
+				if (value != null)
+					value.SetActiveGlow ();
 				
 				activeDock = value;
 				
-				if (activeDock != null)
-					activeDock.SetActiveGlow ();
+				RefreshDocklets ();
+				SetupConfigAlignment ();
+				CheckButtons ();
 			}
 		}
 		
-		public ConfigurationWindow () : base(Gtk.WindowType.Toplevel)
+		private ConfigurationWindow () : base(Gtk.WindowType.Toplevel)
 		{
 			this.Build ();
 			
@@ -100,14 +110,8 @@ namespace Docky
 			if (Docky.Controller.Docks.Count () == 1)
 				ActiveDock = Docky.Controller.Docks.First ();
 			
-			SetupConfigAlignment ();
-			
 			start_with_computer_checkbutton.Active = IsAutoStartEnabled ();
 			
-			CheckButtons ();
-			
-			config_notebook.CurrentPage = (int) Pages.Docks;
-
 			// setup docklets {
 			DockletSearch = new SearchEntry ();
 			DockletSearch.EmptyMessage = Catalog.GetString ("Search Docklets...");
@@ -141,7 +145,7 @@ namespace Docky
 				RefreshHelpers ();
 			};
 			// }
-					
+			
 			ShowAll ();
 		}
 		
@@ -149,8 +153,6 @@ namespace Docky
 		{
 			Hide ();
 			ActiveDock = null;
-			SetupConfigAlignment ();
-			RefreshDocklets ();
 			return true;
 		}
 
@@ -158,8 +160,6 @@ namespace Docky
 		{
 			Hide ();
 			ActiveDock = null;
-			SetupConfigAlignment ();
-			RefreshDocklets ();
 		}
 		
 		void SetupConfigAlignment ()
@@ -200,11 +200,8 @@ namespace Docky
 				dock.ConfigurationClick += HandleDockConfigurationClick;
 			}
 			
-			if (Docky.Controller.Docks.Count () == 1) {
+			if (Docky.Controller.Docks.Count () == 1)
 				ActiveDock = Docky.Controller.Docks.First ();
-				SetupConfigAlignment ();
-				RefreshDocklets ();
-			}
 			
 			KeepAbove = true;
 			Stick ();
@@ -214,14 +211,7 @@ namespace Docky
 
 		void HandleDockConfigurationClick (object sender, EventArgs e)
 		{
-			Dock dock = sender as Dock;
-			
-			if (ActiveDock != dock) {
-				ActiveDock = dock;
-				SetupConfigAlignment ();
-				RefreshDocklets ();
-				CheckButtons ();
-			}
+			ActiveDock = sender as Dock;
 		}
 
 		protected override void OnHidden ()
@@ -237,12 +227,8 @@ namespace Docky
 		protected virtual void OnThemeComboChanged (object sender, System.EventArgs e)
 		{
 			Docky.Controller.DockTheme = theme_combo.ActiveText;
-			if (Docky.Controller.NumDocks == 1) {
+			if (Docky.Controller.NumDocks == 1)
 				ActiveDock = null;
-				SetupConfigAlignment ();
-				RefreshDocklets ();
-				CheckButtons ();
-			}
 		}
 	
 		protected virtual void OnDeleteDockButtonClicked (object sender, System.EventArgs e)
@@ -281,14 +267,10 @@ namespace Docky
 						ActiveDock = Docky.Controller.Docks.First ();
 					else
 						ActiveDock = null;
-					SetupConfigAlignment ();
-					RefreshDocklets ();
 				}
 				
 				md.Destroy ();
-				
 			}
-			CheckButtons ();
 		}
 		
 		protected virtual void OnNewDockButtonClicked (object sender, System.EventArgs e)
@@ -299,10 +281,7 @@ namespace Docky
 				newDock.ConfigurationClick += HandleDockConfigurationClick;
 				newDock.EnterConfigurationMode ();
 				ActiveDock = newDock;
-				SetupConfigAlignment ();
-				RefreshDocklets ();
 			}
-			CheckButtons ();
 		}
 		
 		void CheckButtons ()
@@ -380,9 +359,9 @@ namespace Docky
 		[GLib.ConnectBefore]
 		protected virtual void OnPageSwitch (object o, Gtk.SwitchPageArgs args)
 		{
-			if (args.PageNum == (uint) Pages.Helpers)
+			if (args.PageNum == (int)Pages.Helpers)
 				RefreshHelpers ();
-			else if (args.PageNum ==  (uint) Pages.Docklets)
+			if (args.PageNum == (int)Pages.Docklets)
 				RefreshDocklets ();
 		}
 
@@ -441,10 +420,10 @@ namespace Docky
 		
 		void RefreshDocklets ()
 		{
-			if (config_notebook.Page != (int)Pages.Docklets)
+			if (DockletsTileview == null)
 				return;
-			
 			DockletsTileview.Clear ();
+			
 			if (ActiveDock == null)
 				return;
 			

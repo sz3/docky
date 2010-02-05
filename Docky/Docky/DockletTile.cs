@@ -54,8 +54,8 @@ namespace Docky
 			
 			ConfigButton = new Gtk.Button (Catalog.GetString ("Settings"));
 			ConfigButton.Clicked += delegate {
-				if (PluginManager.ConfigForAddin  (Addin.Id) != null)
-					PluginManager.ConfigForAddin  (Addin.Id).Show ();
+				if (PluginManager.ConfigForAddin (Addin.Id) != null)
+					PluginManager.ConfigForAddin (Addin.Id).Show ();
 			};
 			
 			UpdateInfo ();
@@ -76,17 +76,17 @@ namespace Docky
 		
 		public override void OnActiveChanged ()
 		{
-			if (ConfigurationWindow.ActiveDock == null)
+			if (ConfigurationWindow.Instance.ActiveDock == null)
 				return;
 			
 			Enabled = !Enabled;
 			
 			if (Enabled) {
 				Provider = PluginManager.Enable (Addin);
-				ConfigurationWindow.ActiveDock.Preferences.AddProvider (Provider);
+				ConfigurationWindow.Instance.ActiveDock.Preferences.AddProvider (Provider);
 			} else {
 				PluginManager.Disable (Addin);
-				ConfigurationWindow.ActiveDock.Preferences.RemoveProvider (Provider);
+				ConfigurationWindow.Instance.ActiveDock.Preferences.RemoveProvider (Provider);
 				Provider = null;
 			}
 			
