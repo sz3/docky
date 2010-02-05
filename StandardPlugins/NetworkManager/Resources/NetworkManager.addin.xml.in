@@ -6,7 +6,7 @@
 	defaultEnabled="false"
 	name="Network Manager"
 	description="Manage your networks!"
-	author="Chris Szikszoy"
+	author="Chris Szikszoy, Jason Smith"
 >
  
  	<Dependencies>

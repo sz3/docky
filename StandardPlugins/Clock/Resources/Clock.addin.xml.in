@@ -6,7 +6,7 @@
 	defaultEnabled="false"
 	name="Clock"
 	description="What time is it?"
-	author="Jason Smith"
+	author="Jason Smith, Robert Dyer"
 >
  
  	<Dependencies>

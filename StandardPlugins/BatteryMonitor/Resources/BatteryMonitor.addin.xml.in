@@ -6,7 +6,7 @@
 	defaultEnabled="false"
 	name="Battery Monitor"
 	description="Monitor your battery."
-	author="Jason Smith"
+	author="Jason Smith, Robert Dyer"
 >
  
  	<Dependencies>

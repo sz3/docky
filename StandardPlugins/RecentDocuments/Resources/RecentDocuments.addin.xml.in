@@ -6,7 +6,7 @@
 	defaultEnabled="false"
 	name="Recent Documents"
 	description="Access to your recent documents"
-	author="Chris Szikszoy"
+	author="Chris Szikszoy, Robert Dyer"
 >
  
  	<Dependencies>
