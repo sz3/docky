@@ -174,7 +174,7 @@ namespace Docky
 				HBox hboxTop = new HBox ();
 				HBox hboxBottom = new HBox ();
 				Label label1 = new Gtk.Label (Mono.Unix.Catalog.GetString ("Click on any dock to configure."));
-				Label label2 = new Gtk.Label (Mono.Unix.Catalog.GetString ("Drag any dock to move it."));
+				Label label2 = new Gtk.Label (Mono.Unix.Catalog.GetString ("Drag any dock to reposition."));
 				
 				vbox.Add (hboxTop);
 				vbox.Add (label1);
@@ -202,6 +202,8 @@ namespace Docky
 			
 			if (Docky.Controller.Docks.Count () == 1)
 				ActiveDock = Docky.Controller.Docks.First ();
+			
+			config_notebook.CurrentPage = (int) Pages.Docks;
 			
 			KeepAbove = true;
 			Stick ();
