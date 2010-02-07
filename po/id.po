@@ -1,99 +1,98 @@
-# Croatian translation for docky
-# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# Indonesian translation for docky
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the docky package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-01-13 11:18+0100\n"
-"PO-Revision-Date: 2010-02-04 18:53+0000\n"
-"Last-Translator: Saša Teković <Unknown>\n"
-"Language-Team: Croatian <hr@li.org>\n"
+"PO-Revision-Date: 2010-02-06 03:47+0000\n"
+"Last-Translator: Fakhrul Rijal <frijal@gmail.com>\n"
+"Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Launchpad-Export-Date: 2010-02-07 19:24+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:113
 msgid "Search Docklets..."
-msgstr "Pretraži docklete..."
+msgstr "Cari di Docklets..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:132
 msgid "Search Helpers..."
-msgstr "Pretraži pomagače..."
+msgstr "Cari Penolong..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:178
 msgid "Click on any dock to configure."
-msgstr "Kliknite na bilo koji dock kako biste ga podesili."
+msgstr "Klik Pada Dock untuk pengaturan."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:179
 msgid "Drag any dock to move it."
-msgstr "Povucite bilo koji dock kako biste ga pomaknuli."
+msgstr "Geser sembarang dock untuk memindahkannya."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:259
 msgid "Delete the currently selected dock?"
-msgstr "Želite li obrisati trenutno odabrani dock?"
+msgstr "Hapus dock yang dipilih?"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:261
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
-"Ako obrišete dock, sve postavke\n"
-" obrisanog docka bit će trajno izgubljene."
+"Jika memilih untuk menghapus dock, semua setelan\n"
+"untuk dok tersebut akan ikut terhapus."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:276
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:400
 msgid "_Delete Dock"
-msgstr "_Obriši dock"
+msgstr "_Hapus Dock"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:397
 msgid "_Select"
-msgstr "_Odaberi"
+msgstr "_Pilih"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:400
 msgid ".tar Archives"
-msgstr ".tar arhive"
+msgstr ".tar Paket"
 
 #: ../Docky/Docky/DockletTile.cs:46
 #: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:220
 msgid "_Add"
-msgstr "_Dodaj"
+msgstr "Tamb_ah"
 
 #: ../Docky/Docky/DockletTile.cs:47
 #: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:203
 msgid "_Remove"
-msgstr "_Ukloni"
+msgstr "_Hapus"
 
 #: ../Docky/Docky/DockletTile.cs:48
 msgid "Author"
-msgstr "Autor"
+msgstr "Pembuat"
 
 #: ../Docky/Docky/DockletTile.cs:55
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:166
 msgid "Settings"
-msgstr "Postavke"
+msgstr "Pengaturan"
 
 #: ../Docky/Docky/Docky.cs:107
 msgid ""
 "Docky requires compositing to work properly. Please enable compositing and "
 "restart docky."
 msgstr ""
-"Za ispravan rad, Docky zahtijeva kompoziciju. Molim omogućite kompoziciju i "
-"ponovno pokrenite docky."
+"Docky membutuhkan efek agar bisa sempurna. Silakan aktifkan efek dan "
+"hidupkan kembali docky."
 
 #: ../Docky/Docky/HelperTile.cs:41
 msgid "_Enable"
-msgstr "_Omogući"
+msgstr "_Aktif"
 
 #: ../Docky/Docky/HelperTile.cs:42
 msgid "_Disable"
-msgstr "O_nemogući"
+msgstr "_Tidak Aktif"
 
 #: ../Docky/Docky/HelperTile.cs:43
 msgid "Status"
@@ -101,498 +100,492 @@ msgstr "Status"
 
 #: ../Docky/Docky/HelperTile.cs:61
 msgid "Uninstall"
-msgstr "Ukloni"
+msgstr "Hilangkan"
 
 #: ../Docky/Docky/HelperTile.cs:73
 msgid "Running"
-msgstr "Izvršavanje"
+msgstr "Berjalan"
 
 #: ../Docky/Docky/HelperTile.cs:73
 msgid "Stopped"
-msgstr "Zaustavljeno"
+msgstr "Berhenti"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:331
 msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
 msgstr ""
-"Starteri koji imaju više od jednog prozora imati će dodatni indikator ispod "
-"prateće sličice."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:333
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
-"Ako je aktivirano, prozori koji već nemaju pokretače na docku bit će dodani "
-"istome."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:644
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
-"<i>Nikad se ne skriva; povećani prozori se ne preklapaju s dockom.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:647
 msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr "<i>Skriva se kad god pokazivač nije iznad docka.</i>"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:650
 msgid "<i>Hides when dock obstructs the active application.</i>"
-msgstr "<i>Skriva se kada dock zakloni aktivnu aplikaciju.</i>"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:653
 msgid "<i>Hides when dock obstructs any window.</i>"
-msgstr "<i>Skriva se kada dock zaklanja bilo koji prozor.</i>"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockWindow.cs:363
 msgid "Drag to reposition"
-msgstr "Povucite za premještanje"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockWindow.cs:370
 msgid "Drop to open"
-msgstr "Ispustite da otvorite"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockWindow.cs:374
 #: ../Docky/Docky/Interface/DockWindow.cs:388
 msgid "Drop to add to dock"
-msgstr "Ispustite da biste dodali na dock"
+msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:93
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:230
 msgid "_Settings"
-msgstr "_Postavke"
+msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:94
 msgid "_About"
-msgstr "_O programu"
+msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:95
 msgid "_Quit Docky"
-msgstr "Ugasite Docky-a"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:92
 msgid "Docky Configuration"
-msgstr "Postavke Docky-a"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:137
 msgid "_Start When Computer Starts"
-msgstr "_Pokreni kada se računalo pokrene"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:153
 msgid "_Theme:"
-msgstr "_Tema:"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:177
 msgid "<b>General Options</b>"
-msgstr "<b>Opće postavke</b>"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:197
 msgid "<b>Dock Configuration</b>"
-msgstr "<b>Postavke docka</b>"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:211
 msgid "Docks"
-msgstr "Dockovi"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:232
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:284
 msgid "All"
-msgstr "Svi"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:233
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:285
 msgid "Enabled"
-msgstr "Omogućeno"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:234
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:286
 msgid "Disabled"
-msgstr "Isključeno"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
 msgid "Docklets"
-msgstr "Dockleti"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:310
 msgid "_Install"
-msgstr "_Instaliraj"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:342
 msgid "Helpers"
-msgstr "Pomagači"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:373
 msgid "_New Dock"
-msgstr "_Novi dock"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
 msgid "None"
-msgstr "Niti jedan"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:81
 msgid "Autohide"
-msgstr "Automatsko skrivanje"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:82
 msgid "Intellihide"
-msgstr "Pametno skrivanje"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:83
 msgid "Window Dodge"
-msgstr "Izbjegavanje Prozora"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:97
 msgid "_Fade On Hide"
-msgstr "_Iščezni kada se sakriješ"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:141
 msgid "_Icon Size:"
-msgstr "_Veličina Ikona"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:154
 msgid "_Hiding:"
-msgstr "_Skrivanje"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
 msgid "Indicat_e Multiple Windows"
-msgstr "Prikaž_i Višestruke Prozore"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
 msgid "_Panel Mode"
-msgstr "_Mode ploče"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:192
 msgid "3D Background"
-msgstr "3D Pozadina"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:206
 msgid "_Manage Windows Without Launcher"
-msgstr "_Upravljaj Prozorima koji nemaju startere."
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:221
 msgid "_Zoom:"
-msgstr "_Uvećaj"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:288
 msgid "<b>Inactive Docklets</b>"
-msgstr "<b>Neaktivni dockleti</b>"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:296
 msgid "<b>Active Docklets</b>"
-msgstr "<b>Aktivni dockleti</b>"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:91
 msgid "Icon"
-msgstr "Sličica"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:147
 msgid "New _Window"
-msgstr "Novi _prozor"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:149
 #: ../StandardPlugins/Mounter/src/MountItem.cs:97
 msgid "_Open"
-msgstr "_Otvori"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:69
 msgid "Reset Color"
-msgstr "Vrati izvornu boju"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:354
 msgid "_Pin to Dock"
-msgstr "_Pričvrsti na dock"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:186
 msgid "Not enough free space on destination."
-msgstr "Nedovoljno prostora na destinaciji."
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:198
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:200
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:220
 msgid "Complete"
-msgstr "Završeno"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:206
 msgid "Moving"
-msgstr "Premještanje"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:212
 msgid "Copying"
-msgstr "Dupliciranje"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:225
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:226
 msgid "Error performing drop action"
-msgstr "Pogreška pri operaciji otpuštanja"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:248
 msgid "Open"
-msgstr "Otvoreno"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:249
 msgid "Open Containing Folder"
-msgstr "Otvori mapu koja sadrži"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:244
 msgid "Unma_ximize"
-msgstr "Vrati sa _maksimiziranoga"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:247
 msgid "Ma_ximize"
-msgstr "Po_većaj"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:252
 msgid "_Restore"
-msgstr "Vrati u izvorno stanje"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:255
 msgid "Mi_nimize"
-msgstr "Mi_nimiziraj"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:259
 msgid "_Close All"
-msgstr "_Zatvori sve"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
 msgid "Sign up for {0}"
-msgstr "Prijavite se za {0}"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:44
 msgid "Validating..."
-msgstr "Provjeravam valjanost..."
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:45
 #, csharp-format
 msgid "Don't have {0}?"
-msgstr "Nemate {0}?"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:46
 msgid "Account validation failed!"
-msgstr "Provjera valjanosti korisničkog računa nije uspjela!"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:47
 msgid "Verify and save account information"
-msgstr "Provjeri i spremi korisničke informacije"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:48
 msgid "Account validation succeeded!"
-msgstr "Provjera korisničkog računa uspjela!"
+msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:87
 msgid "Password"
-msgstr "Lozinka:"
+msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:108
 msgid "Username"
-msgstr "Korisničko ime"
+msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
 msgid "<i>Verify and save account information</i>"
-msgstr "<i>Provjeri i snimi korisničke informacije</i>"
+msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
 msgid "Don't have an account?"
-msgstr "Nemate korisnički račun?"
+msgstr ""
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:84
 msgid "Computer"
-msgstr "Računalo"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:419
 msgid "Di_gital Clock"
-msgstr "Di_gitalni Sat"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:425
 msgid "24-Hour _Clock"
-msgstr "24-satni sat"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "Show _Date"
-msgstr "Prikaži _Datum"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
 msgid "Select _Theme"
-msgstr "Izaberi _Temu"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
-msgstr "Teme"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
 msgid "Theme"
-msgstr "Tema"
+msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
 msgid "_Add Label"
-msgstr "_Dodaj labelu"
+msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:114
 msgid "Check e_very:"
-msgstr "Provjeri s_vakih:"
+msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:124
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:187
 msgid "minutes"
-msgstr "minute"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:183
 msgid "Username or Password not set"
-msgstr "Korisničko ime ili Lozinka nisu podešeni"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:233
 msgid "(no subject)"
-msgstr "(bez naslova)"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:251
 #, csharp-format
 msgid "From: {0}"
-msgstr "Od: {0}"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:262
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:266
 msgid "Feed Error"
-msgstr "Pogreška"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:271
 msgid "Invalid Username"
-msgstr "Neispravno korisničko ime"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:275
 msgid "Network Error"
-msgstr "Mrežna Pogeška"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:280
 msgid "General Error"
-msgstr "Opća pogreška"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
 msgid "GMail Configuration"
-msgstr "Postavke GMail pošte"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:79
 msgid "No unread mail"
-msgstr "Nema nepročitane pošte"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:82
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
-msgstr[0] "{0} nepročitana poruka"
-msgstr[1] "{0} nepročitane poruke"
-msgstr[2] "none"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:103
 msgid "Checking mail..."
-msgstr "Provjeravam poštanski pretinac..."
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:188
 msgid "_View "
-msgstr "_Pogled "
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:193
 msgid "_Compose Mail"
-msgstr "_Sastavi poštu"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "New Mail"
-msgstr "Nova pošta"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
 msgid "Check _Mail"
-msgstr "Provjeri _poštanski pretinac"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
-msgstr "Labele"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
 msgid "GMail"
-msgstr "GMail"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr "Prijava"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
-msgstr "Od: "
+msgstr ""
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Eject"
-msgstr "_Izbaci"
+msgstr ""
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Unmount"
-msgstr "_Odmontiraj"
+msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:51
 msgid "Network Manager"
-msgstr "Mrežni Upravitelj"
+msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:90
 msgid "Connecting..."
-msgstr "Povezivanje..."
+msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:99
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:164
 msgid "Disconnected"
-msgstr "Prekinuta veza"
+msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:108
 #, csharp-format
 msgid "Connected: {0}"
-msgstr "Spojen: {0}"
+msgstr ""
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:48
 msgid "My _Stations"
-msgstr "Moje _Stanice"
+msgstr ""
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:79
 msgid "S_earch"
-msgstr "T_raži"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
-msgstr "Nijedna stanica nije pronađena"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
-msgstr "Molimo ponovite svoju potragu"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:48
 msgid "Fetching Information..."
-msgstr "Dohvaćam Informacije..."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:68
 msgid "Click to add NPR stations."
-msgstr "Kliknite da dodate NPR radio stanice"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:107
 msgid "Home Page"
-msgstr "Početna stranica"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:114
 msgid "Program Schedule"
-msgstr "Programski Raspored"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:121
 msgid "Donate"
-msgstr "Donirajte"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:128
 msgid "Live Streams"
-msgstr "Prijenosi"
+msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:76
 msgid "Clear the Recent Documents list?"
-msgstr "Očistiti popis skorašnjih dokumenata?"
+msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:78
 msgid "Clear Recent Documents"
-msgstr "Očisti skorašnje dokumente"
+msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:80
 msgid ""
@@ -600,38 +593,34 @@ msgid ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
-"Ako obrišete popis skorašnjih dokumenata, sljedeće će biti obrisano:\n"
-"• Sve iz Mjesta → Nedavni Dokumenti izbornika.\n"
-"• Sve stavke iz popisa skorašnjih dokumenata u svim programima."
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
 msgid "_Clear Recent Documents..."
-msgstr "_Očisti skorašnje dokumente..."
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
 msgid "No items in Trash"
-msgstr "Nema predmeta u Smeću"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:75
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
-msgstr[0] "{0} predmet u Smeću"
-msgstr[1] "{0} predmeta u Smeću"
-msgstr[2] "none"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:160
 msgid "_Open Trash"
-msgstr "_Otvori smeće"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:162
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:199
 msgid "Empty _Trash"
-msgstr "Isprazni _smeće"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
 msgid "Empty all of the items from the trash?"
-msgstr "Isprazniti sve stavke iz smeća?"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:186
 msgid ""
@@ -639,46 +628,42 @@ msgid ""
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
-"Ukoliko odlučite isprazniti smeće, sav njegov sadržaj biti će trajno "
-"uklonjen. Imajte na umu da je moguće brisati ih i pojedinačno."
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:66
 msgid "_Weather Provider:"
-msgstr "_Pružatelj Vremenske Prognoze:"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:106
 msgid "My _Locations"
-msgstr "Moje _Lokacije"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:137
 msgid "_Search"
-msgstr "_Traži"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:177
 msgid "Automatically Update _Every"
-msgstr "Automatski Ažuriraj _Svakih"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:221
 msgid "Use _Metric Units"
-msgstr "Koristi _Metričke Jedinice?"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:84
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:87
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:92
 msgid "Invalid Weather Location"
-msgstr "Neispravna Vremenska Lokacija"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:90
 msgid "Network Error: "
-msgstr "Mrežna pogrješka: "
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
 msgstr ""
-"Vremenski podaci preuzeti od Googla.   Ovaj izvor traži da lokacije budu "
-"dane kao SAD Poštanska Adresa ili u formatu 'Grad, Država'."
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
@@ -687,103 +672,70 @@ msgid ""
 "website.  To find your code, look up your forecast on their site and the "
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
-"Vremenski podaci dani i autorska prava pripadaju The Weather Channel.   Ovaj "
-"izvor traži da lokacije budu dane kao SAD Poštanska Adresa ili kao unikatni "
-"kod koji se može preuzeti sa Internet stranice The Weather Channel-a. Kako "
-"bih ste pronašli traženi kod, pronađite prognozu za svoje područje i "
-"pogledajte Internet adresu u svom pregledniku. Kod će biti u adresi u "
-"formatu sličnom ovome: AAXX0000."
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
 msgstr ""
-"Vremenski podaci dani i autorska prava od Weather Underground.  Ovaj izvor "
-"traži da lokacije bude dane kao SAD Poštanska Adresa ili 'Grad, Država'"
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
-msgstr "Nije pronađen nijedan rezultat."
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
-msgstr "Postavke Vremena"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
 msgid "Fetching data..."
-msgstr "Dohvaćam podatke..."
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:216
 msgid "Radar _Map"
-msgstr "Radarska _Karta"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:221
 msgid "Forecasts"
-msgstr "Prognoze"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:237
 msgid "Check _Weather"
-msgstr "Provjeri _Vrijeme"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
 msgid "_Today"
-msgstr "_Danas"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
 msgid "T_omorrow"
-msgstr "S_utra"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:311
 msgid "Humidity"
-msgstr "Vlažnost"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:313
 msgid "Temp"
-msgstr "Temp"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:315
 msgid "Feels Like"
-msgstr "Osjeća se kao"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:317
 msgid "Wind"
-msgstr "Vjetar"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:318
 msgid "Direction"
-msgstr "Smjer"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:320
 msgid "Sunrise"
-msgstr "Izlazak sunca"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:321
 msgid "Sunset"
-msgstr "Zalazak sunca"
-
-#~ msgid "Extensions"
-#~ msgstr "Nastavci"
-
-#~ msgid "<b>Active Plugins</b>"
-#~ msgstr "<b>Aktivne ekstenzije</b>"
-
-#~ msgid "<b>Inactive Plugins</b>"
-#~ msgstr "<b>Neaktivne ekstenzije</b>"
-
-#~ msgid "_Quit"
-#~ msgstr "_Izađi"
-
-#~ msgid ""
-#~ "Docky requires compositing to work properly.  Please enable compositing and "
-#~ "restart docky."
-#~ msgstr ""
-#~ "Docky treba compositng kako bi funkcionirao pravilno.  Molimo vas uključite "
-#~ "compositing i ponovno pokrenite Docky."
-
-#~ msgid "Disable"
-#~ msgstr "Isključi"
-
-#~ msgid "Enable"
-#~ msgstr "Uključi"
+msgstr ""
