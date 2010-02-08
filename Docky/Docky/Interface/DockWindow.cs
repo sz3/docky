@@ -550,7 +550,7 @@ namespace Docky.Interface
 				if (GdkWindow == null)
 					return 0;
 				
-				int dockWidth = Items.Sum (adi => (int) ((adi.Square ? IconSize : adi.IconSurface (background_buffer, IconSize, IconSize).Width) * 
+				int dockWidth = Items.Sum (adi => (int) ((adi.Square ? IconSize : adi.IconSurface (background_buffer, IconSize, IconSize, ThreeDimensional).Width) * 
 						Math.Min (1, (DateTime.UtcNow - adi.AddTime).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds)));
 				dockWidth += 2 * DockWidthBuffer + (Items.Count - 1) * ItemWidthBuffer;
 				
@@ -974,6 +974,7 @@ namespace Docky.Interface
 		void PreferencesThreeDimensionalChanged (object sender, EventArgs e)
 		{
 			threedimensional_change_time = DateTime.UtcNow;
+			ResetBuffers ();
 			AnimatedDraw ();
 		}
 
@@ -1513,7 +1514,7 @@ namespace Docky.Interface
 			int width = IconSize, height = IconSize;
 			
 			if (!item.Square) {
-				DockySurface surface = item.IconSurface (main_buffer, IconSize, IconSize);
+				DockySurface surface = item.IconSurface (main_buffer, IconSize, IconSize, ThreeDimensional);
 				
 				width = surface.Width;
 					height = surface.Height;
@@ -1629,7 +1630,7 @@ namespace Docky.Interface
 				if (adi.Square) {
 					halfSize = iconSize / 2.0;
 				} else {
-					DockySurface icon = adi.IconSurface (surface, iconSize, IconSize);
+					DockySurface icon = adi.IconSurface (surface, iconSize, IconSize, ThreeDimensional);
 					
 					// yeah I am pretty sure...
 					if (adi.RotateWithDock || !VerticalDock) {
@@ -2108,7 +2109,7 @@ namespace Docky.Interface
 					break;
 				}
 				
-				DockySurface icon = painterOwner.IconSurface (painter_buffer, 2 * IconSize, IconSize);
+				DockySurface icon = painterOwner.IconSurface (painter_buffer, 2 * IconSize, IconSize, ThreeDimensional);
 				icon.ShowWithOptions (painter_buffer, point, 1, 0, 1);
 				
 				repaint_painter = false;
@@ -2138,7 +2139,7 @@ namespace Docky.Interface
 		
 		void DrawItem (DockySurface surface, Gdk.Rectangle dockArea, AbstractDockItem item)
 		{
-			if (DragTracker.DragItem == item || (ThreeDimensional && item is SeparatorItem))
+			if (DragTracker.DragItem == item)
 				return;
 			
 			double zoomOffset = ZoomedIconSize / (double) IconSize;
@@ -2230,22 +2231,22 @@ namespace Docky.Interface
 				}
 			}
 
-			if (item.Zoom) {
-				if (item.ScalableRendering && center.Zoom == 1) {
-					icon = item.IconSurface (surface, IconSize, IconSize);
-				} else {
-					icon = item.IconSurface (surface, ZoomedIconSize, IconSize);
-					renderZoom = center.Zoom / zoomOffset;
-				}
+			if (item.Zoom && !(item.ScalableRendering && center.Zoom == 1)) {
+				icon = item.IconSurface (surface, ZoomedIconSize, IconSize, ThreeDimensional);
+				renderZoom = center.Zoom / zoomOffset;
 			} else {
-				icon = item.IconSurface (surface, IconSize, IconSize);
+				icon = item.IconSurface (surface, IconSize, IconSize, ThreeDimensional);
 			}
 			
 			// The big expensive paint happens right here!
 			if (ThreeDimensional) {
-				double offset = 2 * Math.Max (Math.Abs (val.Center.X - center.Center.X), Math.Abs (val.Center.Y - center.Center.Y));
-				offset -= .07 * IconSize * renderZoom;
-				icon.ShowAsReflection (surface, center.Center, renderZoom, renderRotation, opacity, offset, Position);
+				if (item is SeparatorItem) {
+					center = center.MoveIn (Position, -DockHeightBuffer);
+				} else {
+					double offset = 2 * Math.Max (Math.Abs (val.Center.X - center.Center.X), Math.Abs (val.Center.Y - center.Center.Y));
+					offset -= .07 * IconSize * renderZoom;
+					icon.ShowAsReflection (surface, center.Center, renderZoom, renderRotation, opacity, offset, Position);
+				}
 			}
 			icon.ShowWithOptions (surface, center.Center, renderZoom, renderRotation, opacity);
 			

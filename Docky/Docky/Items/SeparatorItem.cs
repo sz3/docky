@@ -63,6 +63,30 @@ namespace Docky.Items
 			return new DockySurface ((int) (size * .2), size, model);
 		}
 		
+		protected override void PaintIconSurface3d (DockySurface surface)
+		{
+			surface.Context.LineCap = LineCap.Round;
+			surface.Context.LineWidth = 1;
+			
+			int num_seps = 1 + surface.Height / 24;
+			int height = (int) (surface.Height * 0.5);
+			int spacing = (height - 2 * num_seps) / (num_seps + 1);
+			double vertOffset = surface.Height - (height - 2 * num_seps - (num_seps + 1) * spacing) / 2;
+			
+			for (int i = 1; i <= num_seps; i++) {
+				double offset = 0.6 * i;
+				surface.Context.Color = new Cairo.Color (0, 0, 0, 0.5);
+				surface.Context.MoveTo (offset, vertOffset - spacing * i - 1.5);
+				surface.Context.LineTo (surface.Width - offset, vertOffset - spacing * i - 1.5);
+				surface.Context.Stroke ();
+				
+				surface.Context.Color = new Cairo.Color (1, 1, 1, 0.5);
+				surface.Context.MoveTo (offset, vertOffset - spacing * i - 0.5);
+				surface.Context.LineTo (surface.Width - offset, vertOffset - spacing * i - 0.5);
+				surface.Context.Stroke ();
+			}
+		}
+		
 		protected override void PaintIconSurface (DockySurface surface)
 		{
 			surface.Context.LineWidth = 1;
@@ -87,7 +111,6 @@ namespace Docky.Items
 			surface.Context.Pattern = rg;
 			surface.Context.Stroke ();
 			rg.Destroy ();
-			
 		}
 	}
 }
