@@ -77,12 +77,12 @@ namespace Docky.Items
 				double offset = 0.6 * i;
 				surface.Context.Color = new Cairo.Color (0, 0, 0, 0.5);
 				surface.Context.MoveTo (offset, vertOffset - spacing * i - 1.5);
-				surface.Context.LineTo (surface.Width - offset, vertOffset - spacing * i - 1);
+				surface.Context.LineTo (surface.Width - offset, vertOffset - spacing * i - 1.5);
 				surface.Context.Stroke ();
 				
 				surface.Context.Color = new Cairo.Color (1, 1, 1, 0.5);
 				surface.Context.MoveTo (offset, vertOffset - spacing * i - 0.5);
-				surface.Context.LineTo (surface.Width - offset, vertOffset - spacing * i - 0.75);
+				surface.Context.LineTo (surface.Width - offset, vertOffset - spacing * i - 0.5);
 				surface.Context.Stroke ();
 			}
 		}
