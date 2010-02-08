@@ -68,10 +68,10 @@ namespace Docky.Items
 			surface.Context.LineCap = LineCap.Round;
 			surface.Context.LineWidth = 1;
 			
-			int num_seps = surface.Height / 24;
+			int num_seps = 1 + surface.Height / 24;
 			int height = (int) (surface.Height * 0.5);
 			int spacing = (height - 2 * num_seps) / (num_seps + 1);
-			double vertOffset = surface.Height;
+			double vertOffset = surface.Height - (surface.Height - height - 2 * num_seps - (num_seps + 1) * spacing) / 2;
 			
 			for (int i = 1; i <= num_seps; i++) {
 				double offset = 0.6 * i;
