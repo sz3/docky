@@ -601,7 +601,7 @@ namespace Docky.Items
 			icon_buffers [i].ResetContext ();
 			
 			try {
-				if (threeDimHeight > 0)
+				if (threeDimHeight < icon_buffers [i].Height)
 					PaintIconSurface3d (icon_buffers [i], threeDimHeight);
 				else
 					PaintIconSurface (icon_buffers [i]);
