@@ -71,17 +71,17 @@ namespace Docky.Items
 			int num_seps = 1 + surface.Height / 24;
 			int height = (int) (surface.Height * 0.5);
 			int spacing = (height - 2 * num_seps) / (num_seps + 1);
-			double vertOffset = surface.Height - (surface.Height - height - 2 * num_seps - (num_seps + 1) * spacing) / 2;
+			double vertOffset = surface.Height - (height - 2 * num_seps - (num_seps + 1) * spacing) / 2;
 			
 			for (int i = 1; i <= num_seps; i++) {
 				double offset = 0.6 * i;
-				surface.Context.Color = new Cairo.Color (1, 1, 1, 0.6);
-				surface.Context.MoveTo (offset, vertOffset - spacing * i - 1);
+				surface.Context.Color = new Cairo.Color (0, 0, 0, 0.5);
+				surface.Context.MoveTo (offset, vertOffset - spacing * i - 1.5);
 				surface.Context.LineTo (surface.Width - offset, vertOffset - spacing * i - 1);
 				surface.Context.Stroke ();
 				
-				surface.Context.Color = new Cairo.Color (0, 0, 0, 0.3);
-				surface.Context.MoveTo (offset, vertOffset - spacing * i - 0.75);
+				surface.Context.Color = new Cairo.Color (1, 1, 1, 0.5);
+				surface.Context.MoveTo (offset, vertOffset - spacing * i - 0.5);
 				surface.Context.LineTo (surface.Width - offset, vertOffset - spacing * i - 0.75);
 				surface.Context.Stroke ();
 			}
