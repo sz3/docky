@@ -63,17 +63,18 @@ namespace Docky.Items
 			return new DockySurface ((int) (size * .2), size, model);
 		}
 		
-		protected override void PaintIconSurface3d (DockySurface surface)
+		protected override void PaintIconSurface3d (DockySurface surface, int height)
 		{
 			surface.Context.LineCap = LineCap.Round;
 			surface.Context.LineWidth = 1;
 			
 			int num_seps = 1 + surface.Height / 24;
-			int height = (int) (surface.Height * 0.5);
-			int spacing = (height - 2 * num_seps) / (num_seps + 1);
-			double vertOffset = surface.Height - (height - 2 * num_seps - (num_seps + 1) * spacing) / 2;
+			int num_spaces = num_seps - 1;
+			int spacing = 6;
 			
-			for (int i = 1; i <= num_seps; i++) {
+			double vertOffset = surface.Height - (height - 2 * num_seps - num_spaces * spacing) / 2;
+			
+			for (int i = 0; i < num_seps; i++) {
 				double offset = 0.6 * i;
 				surface.Context.Color = new Cairo.Color (0, 0, 0, 0.5);
 				surface.Context.MoveTo (offset, vertOffset - spacing * i - 1.5);

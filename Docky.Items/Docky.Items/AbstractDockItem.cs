@@ -555,7 +555,7 @@ namespace Docky.Items
 		/// <returns>
 		/// A <see cref="DockySurface"/>
 		/// </returns>
-		public DockySurface IconSurface (DockySurface model, int size, int iconSize, bool threeDimensional)
+		public DockySurface IconSurface (DockySurface model, int size, int iconSize, int threeDimHeight)
 		{
 			IconSize = iconSize;
 			
@@ -601,8 +601,8 @@ namespace Docky.Items
 			icon_buffers [i].ResetContext ();
 			
 			try {
-				if (threeDimensional)
-					PaintIconSurface3d (icon_buffers [i]);
+				if (threeDimHeight > 0)
+					PaintIconSurface3d (icon_buffers [i], threeDimHeight);
 				else
 					PaintIconSurface (icon_buffers [i]);
 			} catch (Exception e) {
@@ -624,7 +624,7 @@ namespace Docky.Items
 		
 		protected abstract void PaintIconSurface (DockySurface surface);
 		
-		protected virtual void PaintIconSurface3d (DockySurface surface)
+		protected virtual void PaintIconSurface3d (DockySurface surface, int threeDimHeight)
 		{
 			PaintIconSurface (surface);
 		}

@@ -550,7 +550,7 @@ namespace Docky.Interface
 				if (GdkWindow == null)
 					return 0;
 				
-				int dockWidth = Items.Sum (adi => (int) ((adi.Square ? IconSize : adi.IconSurface (background_buffer, IconSize, IconSize, ThreeDimensional).Width) * 
+				int dockWidth = Items.Sum (adi => (int) ((adi.Square ? IconSize : adi.IconSurface (background_buffer, IconSize, IconSize, ThreeDimensional ? (int) (0.4 * DockHeight) : DockHeight).Width) * 
 						Math.Min (1, (DateTime.UtcNow - adi.AddTime).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds)));
 				dockWidth += 2 * DockWidthBuffer + (Items.Count - 1) * ItemWidthBuffer;
 				
@@ -1514,7 +1514,7 @@ namespace Docky.Interface
 			int width = IconSize, height = IconSize;
 			
 			if (!item.Square) {
-				DockySurface surface = item.IconSurface (main_buffer, IconSize, IconSize, ThreeDimensional);
+				DockySurface surface = item.IconSurface (main_buffer, IconSize, IconSize, ThreeDimensional ? (int) (0.4 * DockHeight) : DockHeight);
 				
 				width = surface.Width;
 					height = surface.Height;
@@ -1630,7 +1630,7 @@ namespace Docky.Interface
 				if (adi.Square) {
 					halfSize = iconSize / 2.0;
 				} else {
-					DockySurface icon = adi.IconSurface (surface, iconSize, IconSize, ThreeDimensional);
+					DockySurface icon = adi.IconSurface (surface, iconSize, IconSize, ThreeDimensional ? (int) (0.4 * DockHeight) : DockHeight);
 					
 					// yeah I am pretty sure...
 					if (adi.RotateWithDock || !VerticalDock) {
@@ -2109,7 +2109,7 @@ namespace Docky.Interface
 					break;
 				}
 				
-				DockySurface icon = painterOwner.IconSurface (painter_buffer, 2 * IconSize, IconSize, ThreeDimensional);
+				DockySurface icon = painterOwner.IconSurface (painter_buffer, 2 * IconSize, IconSize, ThreeDimensional ? (int) (0.4 * DockHeight) : DockHeight);
 				icon.ShowWithOptions (painter_buffer, point, 1, 0, 1);
 				
 				repaint_painter = false;
@@ -2232,10 +2232,10 @@ namespace Docky.Interface
 			}
 
 			if (item.Zoom && !(item.ScalableRendering && center.Zoom == 1)) {
-				icon = item.IconSurface (surface, ZoomedIconSize, IconSize, ThreeDimensional);
+				icon = item.IconSurface (surface, ZoomedIconSize, IconSize, ThreeDimensional ? (int) (0.4 * DockHeight) : DockHeight);
 				renderZoom = center.Zoom / zoomOffset;
 			} else {
-				icon = item.IconSurface (surface, IconSize, IconSize, ThreeDimensional);
+				icon = item.IconSurface (surface, IconSize, IconSize, ThreeDimensional ? (int) (0.4 * DockHeight) : DockHeight);
 			}
 			
 			// The big expensive paint happens right here!
