@@ -66,20 +66,22 @@ namespace Docky.Items
 		protected override void PaintIconSurface3d (DockySurface surface)
 		{
 			surface.Context.LineCap = LineCap.Round;
-			int spacing = surface.Height >= 48 ? 8 : 4;
 			surface.Context.LineWidth = surface.Height >= 48 ? 2 : 1;
-			int num_seps = (int) Math.Ceiling ((surface.Height - (int) (surface.Height * 0.6)) / (double)spacing) - 1;
+			int spacing = surface.Height >= 48 ? 8 : 4;
+			int height = (int) (surface.Height * 0.5);
+			int num_seps = (int) Math.Ceiling (height / (double)spacing) - 1;
+			double vertOffset = surface.Height - (surface.Height - height - (num_seps - 1) * spacing) / 2 + surface.Context.LineWidth;
 			
 			for (int i = 0; i < num_seps; i++) {
 				double offset = 0.6 * i;
 				surface.Context.Color = new Cairo.Color (1, 1, 1, 0.6);
-				surface.Context.MoveTo (offset, surface.Height - spacing * i - 1);
-				surface.Context.LineTo (surface.Width - offset, surface.Height - spacing * i - 1);
+				surface.Context.MoveTo (offset, vertOffset - spacing * i - 1);
+				surface.Context.LineTo (surface.Width - offset, vertOffset - spacing * i - 1);
 				surface.Context.Stroke ();
 				
 				surface.Context.Color = new Cairo.Color (0, 0, 0, 0.3);
-				surface.Context.MoveTo (offset, surface.Height - spacing * i - 0.75);
-				surface.Context.LineTo (surface.Width - offset, surface.Height - spacing * i - 0.75);
+				surface.Context.MoveTo (offset, vertOffset - spacing * i - 0.75);
+				surface.Context.LineTo (surface.Width - offset, vertOffset - spacing * i - 0.75);
 				surface.Context.Stroke ();
 			}
 		}

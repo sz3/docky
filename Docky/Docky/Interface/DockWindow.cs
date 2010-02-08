@@ -2241,7 +2241,7 @@ namespace Docky.Interface
 			// The big expensive paint happens right here!
 			if (ThreeDimensional) {
 				if (item is SeparatorItem) {
-					center = center.MoveIn (Position, DockHeightBuffer / -2);
+					center = center.MoveIn (Position, -DockHeightBuffer);
 				} else {
 					double offset = 2 * Math.Max (Math.Abs (val.Center.X - center.Center.X), Math.Abs (val.Center.Y - center.Center.Y));
 					offset -= .07 * IconSize * renderZoom;
