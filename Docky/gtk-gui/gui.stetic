@@ -225,7 +225,7 @@ Window Dodge</property>
               <widget class="Gtk.CheckButton" id="threedee_check">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
-                <property name="Label" translatable="yes">3D Background</property>
+                <property name="Label" translatable="yes">3D Back_ground</property>
                 <property name="DrawIndicator">True</property>
                 <property name="HasLabel">True</property>
                 <property name="UseUnderline">True</property>

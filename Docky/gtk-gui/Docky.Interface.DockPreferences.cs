@@ -189,7 +189,7 @@ namespace Docky.Interface {
             this.threedee_check = new Gtk.CheckButton();
             this.threedee_check.CanFocus = true;
             this.threedee_check.Name = "threedee_check";
-            this.threedee_check.Label = Mono.Unix.Catalog.GetString("3D Background");
+            this.threedee_check.Label = Mono.Unix.Catalog.GetString("3D Back_ground");
             this.threedee_check.DrawIndicator = true;
             this.threedee_check.UseUnderline = true;
             this.table3.Add(this.threedee_check);
