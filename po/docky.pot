@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-13 11:18+0100\n"
+"POT-Creation-Date: 2010-02-08 07:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:113
+#: ../Docky/Docky/ConfigurationWindow.cs:117
 msgid "Search Docklets..."
 msgstr ""
 
@@ -25,34 +25,34 @@ msgstr ""
 msgid "Search Helpers..."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:178
+#: ../Docky/Docky/ConfigurationWindow.cs:176
 msgid "Click on any dock to configure."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:179
-msgid "Drag any dock to move it."
+#: ../Docky/Docky/ConfigurationWindow.cs:177
+msgid "Drag any dock to reposition."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:259
+#: ../Docky/Docky/ConfigurationWindow.cs:246
 msgid "Delete the currently selected dock?"
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:261
+#: ../Docky/Docky/ConfigurationWindow.cs:248
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:276
+#: ../Docky/Docky/ConfigurationWindow.cs:263
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:400
 msgid "_Delete Dock"
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:397
+#: ../Docky/Docky/ConfigurationWindow.cs:373
 msgid "_Select"
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:400
+#: ../Docky/Docky/ConfigurationWindow.cs:376
 msgid ".tar Archives"
 msgstr ""
 
@@ -75,7 +75,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: ../Docky/Docky/Docky.cs:107
+#: ../Docky/Docky/Docky.cs:98
 msgid ""
 "Docky requires compositing to work properly. Please enable compositing and "
 "restart docky."
@@ -117,32 +117,32 @@ msgid ""
 "added to this dock."
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:644
+#: ../Docky/Docky/Interface/DockPreferences.cs:679
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:647
+#: ../Docky/Docky/Interface/DockPreferences.cs:682
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:650
+#: ../Docky/Docky/Interface/DockPreferences.cs:685
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:653
+#: ../Docky/Docky/Interface/DockPreferences.cs:688
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:363
+#: ../Docky/Docky/Interface/DockWindow.cs:369
 msgid "Drag to reposition"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:370
+#: ../Docky/Docky/Interface/DockWindow.cs:376
 msgid "Drop to open"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:374
-#: ../Docky/Docky/Interface/DockWindow.cs:388
+#: ../Docky/Docky/Interface/DockWindow.cs:380
+#: ../Docky/Docky/Interface/DockWindow.cs:394
 msgid "Drop to add to dock"
 msgstr ""
 
@@ -252,7 +252,7 @@ msgid "_Panel Mode"
 msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:192
-msgid "3D Background"
+msgid "3D Back_ground"
 msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:206
@@ -271,10 +271,6 @@ msgstr ""
 msgid "<b>Active Docklets</b>"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:91
-msgid "Icon"
-msgstr ""
-
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:147
 msgid "New _Window"
 msgstr ""
@@ -288,7 +284,7 @@ msgstr ""
 msgid "Reset Color"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:354
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:356
 msgid "_Pin to Dock"
 msgstr ""
 
@@ -389,19 +385,19 @@ msgstr ""
 msgid "Computer"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:419
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:421
 msgid "Di_gital Clock"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:425
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:427
 msgid "24-Hour _Clock"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:433
 msgid "Show _Date"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:439
 msgid "Select _Theme"
 msgstr ""
 
@@ -515,20 +511,20 @@ msgstr ""
 msgid "_Unmount"
 msgstr ""
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:51
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:53
 msgid "Network Manager"
 msgstr ""
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:90
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
 msgstr ""
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:99
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:164
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:101
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:166
 msgid "Disconnected"
 msgstr ""
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:108
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
 msgid "Connected: {0}"
 msgstr ""
