@@ -194,7 +194,7 @@ namespace Docky.Interface
 				drag_item = null;
 			
 			if (drag_item != null) {
-				pbuf = Owner.HoveredItem.IconSurface (new DockySurface (1, 1), Owner.ZoomedIconSize, Owner.IconSize).LoadToPixbuf ();
+				pbuf = Owner.HoveredItem.IconSurface (new DockySurface (1, 1), Owner.ZoomedIconSize, Owner.IconSize, false).LoadToPixbuf ();
 			} else {
 				pbuf = new Gdk.Pixbuf (Gdk.Colorspace.Rgb, true, 8, 1, 1);
 			}
