@@ -6,6 +6,7 @@ dist_script_SCRIPTS = zeitgeist_docky.py	\
 		      tomboy_menus.py		\
 		      rhythmbox_control.py	\
 		      liferea_badge.py		\
+		      gtg_menus.py		\
 		      gajim_badge.py		\
 		      deluge_badge.py		\
 		      banshee_control.py
