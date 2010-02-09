@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -29,8 +29,6 @@ using Docky.CairoHelper;
 
 namespace Docky.Items
 {
-
-
 	internal class SeparatorItem : AbstractDockItem, INonPersistedItem
 	{
 		public override bool RotateWithDock {
@@ -38,15 +36,11 @@ namespace Docky.Items
 		}
 		
 		public override bool Square {
-			get {
-				return false;
-			}
+			get { return false; }
 		}
 		
 		public override bool Zoom {
-			get {
-				return false;
-			}
+			get { return false; }
 		}
 		
 		public SeparatorItem ()
@@ -68,23 +62,26 @@ namespace Docky.Items
 			surface.Context.LineCap = LineCap.Round;
 			surface.Context.LineWidth = 1;
 			
-			int num_seps = 1 + surface.Height / 24;
+			int num_seps = 1 + surface.Height / 18;
 			int num_spaces = num_seps - 1;
-			int spacing = 6;
+			int spacing = 3;
 			
 			double vertOffset = surface.Height - (height - 2 * num_seps - num_spaces * spacing) / 2;
 			
 			for (int i = 0; i < num_seps; i++) {
 				double offset = 0.6 * i;
-				surface.Context.Color = new Cairo.Color (0, 0, 0, 0.5);
-				surface.Context.MoveTo (offset, vertOffset - spacing * i - 1.5);
-				surface.Context.LineTo (surface.Width - offset, vertOffset - spacing * i - 1.5);
-				surface.Context.Stroke ();
 				
 				surface.Context.Color = new Cairo.Color (1, 1, 1, 0.5);
-				surface.Context.MoveTo (offset, vertOffset - spacing * i - 0.5);
-				surface.Context.LineTo (surface.Width - offset, vertOffset - spacing * i - 0.5);
+				surface.Context.MoveTo (offset, vertOffset - 0.5);
+				surface.Context.LineTo (surface.Width - offset, vertOffset - 0.5);
 				surface.Context.Stroke ();
+				
+				surface.Context.Color = new Cairo.Color (0, 0, 0, 0.5);
+				surface.Context.MoveTo (offset, vertOffset - 1.5);
+				surface.Context.LineTo (surface.Width - offset, vertOffset - 1.5);
+				surface.Context.Stroke ();
+				
+				vertOffset -= spacing + 2;
 			}
 		}
 		
