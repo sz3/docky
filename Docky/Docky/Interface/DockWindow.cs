@@ -1837,7 +1837,7 @@ namespace Docky.Interface
 				break;
 			}
 			
-			if (Preferences.PanelMode && Painter == null) {
+			if (Preferences.PanelMode) {
 				if (VerticalDock) {
 					area.Y = 0;
 					area.Height = surface.Height;
@@ -1893,7 +1893,7 @@ namespace Docky.Interface
 			}
 			
 			int hotAreaSize;
-			if ((!Preferences.FadeOnHide || Preferences.FadeOpacity == 0) && AutohideManager.Hidden && !ConfigurationMode) {
+			if ((!Preferences.FadeOnHide || Preferences.FadeOpacity == 0) && Painter == null && AutohideManager.Hidden && !ConfigurationMode) {
 				hotAreaSize = 1;
 			} else if (DockHovered && !ConfigurationMode) {
 				hotAreaSize = (int) (ZoomedDockHeight * 1.3);
