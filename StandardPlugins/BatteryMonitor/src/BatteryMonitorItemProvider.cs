@@ -63,8 +63,10 @@ namespace BatteryMonitor
 		
 		public BatteryMonitorItemProvider ()
 		{
-			Hidden = false;
+			hidden = false;
 			battery = new BatteryMonitorProcItem (this);
+			if (!hidden)
+				Items = battery.AsSingle<AbstractDockItem> ();
 		}
 	}
 }
