@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-08 07:45+0100\n"
+"POT-Creation-Date: 2010-02-08 19:35-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -379,6 +379,28 @@ msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
 msgid "Don't have an account?"
+msgstr ""
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:154
+msgid "No Battery Found"
+msgstr ""
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:166
+#, csharp-format
+msgid "{0} hour"
+msgid_plural "{0} hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:168
+#, csharp-format
+msgid "{0} minute"
+msgid_plural "{0} minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:169
+msgid "remaining "
 msgstr ""
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:84
