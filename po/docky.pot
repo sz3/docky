@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-08 19:35-0600\n"
+"POT-Creation-Date: 2010-02-08 19:55-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -381,25 +381,29 @@ msgstr ""
 msgid "Don't have an account?"
 msgstr ""
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:154
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:153
 msgid "No Battery Found"
 msgstr ""
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:166
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:170
 #, csharp-format
 msgid "{0} hour"
 msgid_plural "{0} hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:168
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:172
 #, csharp-format
 msgid "{0} minute"
 msgid_plural "{0} minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:169
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:174
+msgid "until charged "
+msgstr ""
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:176
 msgid "remaining "
 msgstr ""
 

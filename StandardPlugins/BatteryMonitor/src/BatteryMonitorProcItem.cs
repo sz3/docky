@@ -116,6 +116,7 @@ namespace BatteryMonitor
 		{
 			string capacity = null;
 			string rate = null;
+			bool charging = false;
 			
 			current_capacity = 0;
 			current_rate = 0;
@@ -123,7 +124,6 @@ namespace BatteryMonitor
 			
 			foreach (DirectoryInfo battDir in basePath.GetDirectories ()) {
 				string path = BattBasePath + "/" + battDir.Name + "/" + BattStatePath;
-				bool charging = false;
 				if (System.IO.File.Exists (path)) {
 					try {
 						using (StreamReader reader = new StreamReader (path)) {
@@ -143,8 +143,7 @@ namespace BatteryMonitor
 					
 					try {
 						current_capacity += Convert.ToInt32 (number_regex.Matches (capacity) [0].Value);
-						if (!charging)
-							current_rate += Convert.ToInt32 (number_regex.Matches (rate) [0].Value);
+						current_rate += Convert.ToInt32 (number_regex.Matches (rate) [0].Value);
 					} catch { }
 				}
 			}
@@ -158,20 +157,29 @@ namespace BatteryMonitor
 				if (current_rate == 0) {
 					HoverText = string.Format ("{0:0.0}%", Capacity * 100);
 				} else {
-					double time = (double) current_capacity / (double) current_rate;
+					double time;
+					if (charging)
+						time = (double) (max_capacity - current_capacity) / (double) current_rate;
+					else
+						time = (double) current_capacity / (double) current_rate;
 					int hours = (int) time;
 					int mins = (int) (60 * (time - hours));
 					
+					HoverText = "";
 					if (hours > 0)
 						HoverText += string.Format (Catalog.GetPluralString ("{0} hour", "{0} hours", hours), hours) + " ";
 					if (mins > 0)
 						HoverText += string.Format (Catalog.GetPluralString ("{0} minute", "{0} minutes", mins), mins) + " ";
-					HoverText += Catalog.GetString ("remaining ");
+					if (charging)
+						HoverText += Catalog.GetString ("until charged ");
+					else
+						HoverText += Catalog.GetString ("remaining ");
+					
 					HoverText += string.Format ("({0:0.0}%)", Capacity * 100);
 				}
 			}
 			
-			bool hidden = max_capacity == -1 || !DockServices.System.OnBattery || Capacity > .98 || Capacity < .01;
+			bool hidden = max_capacity == -1 || /*!DockServices.System.OnBattery ||*/ Capacity > .98 || Capacity < .01;
 			
 			if (hidden && !(owner as BatteryMonitorItemProvider).Hidden)
 				Log<BatteryMonitorProcItem>.Debug ("Hiding battery item (capacity=" + Capacity +
