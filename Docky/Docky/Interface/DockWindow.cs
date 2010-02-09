@@ -368,7 +368,7 @@ namespace Docky.Interface
 				if (config_hover_buffer == null)
 					config_hover_buffer = DrawHoverText (config_hover_buffer, Catalog.GetString ("Drag to reposition"));
 				hover = config_hover_buffer;
-				top = IconSize + 15;
+				top = IconSize + 2 * DockHeightBuffer;
 			} else if (hoveredItem != null && background_buffer != null) {
 				if (ExternalDragActive) {
 					if (DragTracker.ItemAcceptsDrop ()) {
