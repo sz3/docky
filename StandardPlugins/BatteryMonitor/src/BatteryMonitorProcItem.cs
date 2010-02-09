@@ -24,6 +24,7 @@ using System.Text.RegularExpressions;
 using Cairo;
 using Gdk;
 using GLib;
+using Mono.Unix;
 using NDesk.DBus;
 
 using Docky.CairoHelper;
@@ -45,6 +46,7 @@ namespace BatteryMonitor
 		
 		int max_capacity;
 		int current_capacity;
+		int current_rate;
 		uint timer;
 		
 		Regex number_regex;
@@ -113,12 +115,15 @@ namespace BatteryMonitor
 		bool UpdateBattStat ()
 		{
 			string capacity = null;
+			string rate = null;
 			
 			current_capacity = 0;
+			current_rate = 0;
 			DirectoryInfo basePath = new DirectoryInfo (BattBasePath);
 			
 			foreach (DirectoryInfo battDir in basePath.GetDirectories ()) {
 				string path = BattBasePath + "/" + battDir.Name + "/" + BattStatePath;
+				bool charging = false;
 				if (System.IO.File.Exists (path)) {
 					try {
 						using (StreamReader reader = new StreamReader (path)) {
@@ -127,7 +132,10 @@ namespace BatteryMonitor
 								
 								if (line.StartsWith ("remaining capacity")) {
 									capacity = line;
-									break;
+								} else if (line.StartsWith ("present rate")) {
+									rate = line;
+								} else if (line.EndsWith ("charging")) {
+									charging = true;
 								}
 							}
 						}
@@ -135,16 +143,32 @@ namespace BatteryMonitor
 					
 					try {
 						current_capacity += Convert.ToInt32 (number_regex.Matches (capacity) [0].Value);
+						if (!charging)
+							current_rate += Convert.ToInt32 (number_regex.Matches (rate) [0].Value);
 					} catch { }
 				}
 			}
 			
 			if (current_capacity == 0) {
 				max_capacity = -1;
-				HoverText = "No Battery Found";
+				HoverText = Catalog.GetString ("No Battery Found");
 			} else {
 				GetBatteryCapacity ();
-				HoverText = string.Format ("{0:0.0}%", Capacity * 100);
+				
+				if (current_rate == 0) {
+					HoverText = string.Format ("{0:0.0}%", Capacity * 100);
+				} else {
+					double time = (double) current_capacity / (double) current_rate;
+					int hours = (int) time;
+					int mins = (int) (60 * (time - hours));
+					
+					if (hours > 0)
+						HoverText += string.Format (Catalog.GetPluralString ("{0} hour", "{0} hours", hours), hours) + " ";
+					if (mins > 0)
+						HoverText += string.Format (Catalog.GetPluralString ("{0} minute", "{0} minutes", mins), mins) + " ";
+					HoverText += Catalog.GetString ("remaining ");
+					HoverText += string.Format ("({0:0.0}%)", Capacity * 100);
+				}
 			}
 			
 			bool hidden = max_capacity == -1 || !DockServices.System.OnBattery || Capacity > .98 || Capacity < .01;
