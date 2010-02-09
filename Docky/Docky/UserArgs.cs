@@ -28,8 +28,6 @@ namespace Docky
 {
 	public class UserArgs : Options
 	{
-		public LogLevel Logging { get; protected set; }
-		
 		[Option ("Disable cursor polling (for testing)", 'p', "disable-polling")]
 		public bool NoPollCursor;
 		
@@ -50,6 +48,8 @@ namespace Docky
 
 		public UserArgs (string[] args)
 		{
+			Log.DisplayLevel = LogLevel.Warn;
+			
 			ParsingMode = OptionsParsingMode.GNU_DoubleDash;
 			ProcessArgs (args);
 			
@@ -57,8 +57,7 @@ namespace Docky
 			if (MaxSize == 0)
 				MaxSize = int.MaxValue;
 			MaxSize = Math.Max (MaxSize, 500);
-			Logging = LogLevel.Warn;
-			if (NvidiaMode)
+			if (NvidiaMode && BufferTime == 0)
 				BufferTime = 10;
 			// if the debug option was passed, set it to debug
 			// otherwise leave it to the default, which is warn
