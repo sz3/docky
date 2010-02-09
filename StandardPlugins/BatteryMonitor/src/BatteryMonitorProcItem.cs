@@ -134,9 +134,12 @@ namespace BatteryMonitor
 									capacity = line;
 								} else if (line.StartsWith ("present rate")) {
 									rate = line;
-								} else if (line.EndsWith ("charging")) {
-									charging = true;
-								}
+								} else if (line.StartsWith ("charging state")) {
+									if (line.EndsWith ("discharging"))
+										charging = false;
+									else
+										charging = true;
+ 								}
 							}
 						}
 					} catch (IOException) {}
