@@ -344,16 +344,22 @@ namespace Docky.Windowing
 			if (window.ClassGroup != null) {
 				if (WindowIsOpenOffice (window)) {
 					string title = window.Name;
-					if (title.Contains ("Writer"))
+					if (title.Contains ("Writer")) {
 						command_line.Add ("ooffice-writer");
-					else if (title.Contains ("Draw"))
+						command_line.Add ("openoffice.org3-writer");
+					} else if (title.Contains ("Draw")) {
 						command_line.Add ("ooffice-draw");
-					else if (title.Contains ("Impress"))
+						command_line.Add ("openoffice.org3-draw");
+					} else if (title.Contains ("Impress")) {
 						command_line.Add ("ooffice-impress");
-					else if (title.Contains ("Calc"))
+						command_line.Add ("openoffice.org3-impress");
+					} else if (title.Contains ("Calc")) {
 						command_line.Add ("ooffice-calc");
-					else if (title.Contains ("Math"))
+						command_line.Add ("openoffice.org3-calc");
+					} else if (title.Contains ("Math")) {
 						command_line.Add ("ooffice-math");
+						command_line.Add ("openoffice.org3-math");
+					}
 				} else if (window.ClassGroup.ResClass == "Wine") {
 					// we can match Wine apps normally so don't do anything here
 				} else {
@@ -550,6 +556,8 @@ namespace Docky.Windowing
 				
 				if (exec.StartsWith ("ooffice") && exec.Contains (' ')) {
 					vexec = "ooffice" + exec.Split (' ') [1];
+				} else if (exec.StartsWith ("openoffice.org3") && exec.Contains (' ')) {
+					vexec = "openoffice.org3" + exec.Split (' ') [1];
 				// for wine apps
 				} else if ((exec.StartsWith ("env WINEPREFIX=") && exec.Contains (" wine ")) ||
 						exec.StartsWith ("wine ")) {
