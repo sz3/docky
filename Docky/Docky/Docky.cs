@@ -143,6 +143,13 @@ namespace Docky
 				"Catalan\n" +
 				" BadChoice (https://launchpad.net/~guitarboy000)\n" +
 
+				"Chinese (Simplified)\n" +
+				" Chen Tao (https://edge.launchpad.net/~pro711)\n" +
+				" G.S.Alex (https://edge.launchpad.net/~g.s.alex)\n" +
+				" fighterlyt (https://edge.launchpad.net/~fighter-lyt)\n" +
+				" skatiger (https://edge.launchpad.net/~skatiger)\n" +
+				" 冯超 (https://edge.launchpad.net/~rainofchaos)\n" +
+
 				"Croatian\n" +
 				" zekopeko (https://launchpad.net/~zekopeko)\n" +
 
@@ -178,6 +185,9 @@ namespace Docky
 				" MastroPino (https://launchpad.net/~mastropino)\n" +
 				" Quizzlo (https://launchpad.net/~marcopaolone)\n" +
 
+				"Indonesian\n" +
+				" Fakhrul Rijal (https://launchpad.net/~frijal)\n" +
+					
 				"Polish\n" +
 				" 313 (https://launchpad.net/~tenotoja)\n" +
 				" Adrian Grzemski (https://launchpad.net/~adrian-grzemski)\n" +

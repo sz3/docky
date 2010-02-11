@@ -1,196 +1,187 @@
-# German translation for docky
-# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# Chinese (Simplified) translation for docky
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the docky package.
-# Rico Tzschichholz <ricotz@t-online.de>, 2009.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
-"Report-Msgid-Bugs-To: Rico Tzschichholz <ricotz@t-online.de>\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-02-08 19:55-0600\n"
-"PO-Revision-Date: 2010-02-09 08:54+0000\n"
-"Last-Translator: Rico Tzschichholz <Unknown>\n"
-"Language-Team: German <de@li.org>\n"
+"PO-Revision-Date: 2010-02-10 09:27+0000\n"
+"Last-Translator: 冯超 <rainofchaos@gmail.com>\n"
+"Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Launchpad-Export-Date: 2010-02-11 07:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:117
 msgid "Search Docklets..."
-msgstr "Docklets durchsuchen …"
+msgstr "搜索小部件..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:132
 msgid "Search Helpers..."
-msgstr "Erweiterungen durchsuchen …"
+msgstr "搜索帮助 ..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:176
 msgid "Click on any dock to configure."
-msgstr "Klicken Sie auf ein Dock um dessen Einstellungen zu ändern."
+msgstr "点击任一面板进行设置"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:177
 msgid "Drag any dock to reposition."
-msgstr "Ziehe ein Dock um zu verschieben"
+msgstr "用拖拽移动位置。"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:246
 msgid "Delete the currently selected dock?"
-msgstr "Das ausgewählte Dock löschen?"
+msgstr "删除当前选中的面板"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:248
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
-"Wenn Sie das gewählte Dock löschen,\n"
-"werden alle Einstellungen dieses Docks verloren gehen."
+"如果您选择删除面板，那么该面板的所有配置将\n"
+"会永久消失。"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:263
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:400
 msgid "_Delete Dock"
-msgstr "Dock _löschen"
+msgstr "删除面板(_D)"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:373
 msgid "_Select"
-msgstr "_Auswählen"
+msgstr "选择(_S)"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:376
 msgid ".tar Archives"
-msgstr ".tar Archiv"
+msgstr ".tar 格式的归档文件"
 
 #: ../Docky/Docky/DockletTile.cs:46
 #: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:220
 msgid "_Add"
-msgstr "_Hinzufügen"
+msgstr "添加(_A)"
 
 #: ../Docky/Docky/DockletTile.cs:47
 #: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:203
 msgid "_Remove"
-msgstr "_Entfernen"
+msgstr "删除(_R)"
 
 #: ../Docky/Docky/DockletTile.cs:48
 msgid "Author"
-msgstr "Autor"
+msgstr "作者"
 
 #: ../Docky/Docky/DockletTile.cs:55
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:166
 msgid "Settings"
-msgstr "Einstellungen"
+msgstr "设置"
 
 #: ../Docky/Docky/Docky.cs:98
 msgid ""
 "Docky requires compositing to work properly. Please enable compositing and "
 "restart docky."
-msgstr ""
-"Docky benötigt einen Composition-Manager um korrekt zu arbeiten. Bitte "
-"aktivieren Sie einen Composition-Manager und starten Sie Docky neu."
+msgstr "Docky 需要混合窗口管理器才能工作。请启用混合窗口管理器后重新启动 Docky。"
 
 #: ../Docky/Docky/HelperTile.cs:41
 msgid "_Enable"
-msgstr "_Aktivieren"
+msgstr "启用(_E)"
 
 #: ../Docky/Docky/HelperTile.cs:42
 msgid "_Disable"
-msgstr "_Deaktivieren"
+msgstr "禁用(_D)"
 
 #: ../Docky/Docky/HelperTile.cs:43
 msgid "Status"
-msgstr "Status"
+msgstr "状态"
 
 #: ../Docky/Docky/HelperTile.cs:61
 msgid "Uninstall"
-msgstr "Deinstallieren"
+msgstr "卸载"
 
 #: ../Docky/Docky/HelperTile.cs:73
 msgid "Running"
-msgstr "Läuft"
+msgstr "正在运行"
 
 #: ../Docky/Docky/HelperTile.cs:73
 msgid "Stopped"
-msgstr "Gestoppt"
+msgstr "已停止"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:331
 msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
-msgstr ""
-"Unter Startern, die mehr als ein Fenster verwalten, erscheint ein "
-"Extrahinweis."
+msgstr "对于拥有多个窗口的启动器，在其下方做出额外的标记。"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:333
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
-msgstr ""
-"Fenster, die keinem bestehenden Starter zugeordnet werden können, werden "
-"diesem Dock hinzugefügt."
+msgstr "如果选中此项，没有启动器的窗口将会被显示在这个 dock 上。"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:679
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
-msgstr ""
-"<i>Niemals verstecken, maximierte Fenster überdecken das Dock nicht.<i/>"
+msgstr "<i>从不隐藏；最大化的窗口将不会覆盖在 Dock 上。</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:682
 msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr ""
-"<i>Versteckt sich immer, wenn sich kein Mauscursor darüber befindet.</i>"
+msgstr "<i>鼠标移开后自动隐藏。</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:685
 msgid "<i>Hides when dock obstructs the active application.</i>"
-msgstr ""
-"<i>Versteckt sich, wenn es das aktive Anwendungsfenster behindert.</i>"
+msgstr "<i>当 dock 阻挡了当前的程序时将会隐藏。</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:688
 msgid "<i>Hides when dock obstructs any window.</i>"
-msgstr "<i>Versteckt sich, wenn es ein Anwendungsfenster behindert.</i>"
+msgstr "<i>当 dock 阻挡了任何窗口时，将会隐藏。</i>"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:369
 msgid "Drag to reposition"
-msgstr "Ziehen um zu verschieben"
+msgstr "通过拖动改变位置"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:376
 msgid "Drop to open"
-msgstr "Loslassen um zu öffnen"
+msgstr "松开鼠标以开启"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:380
 #: ../Docky/Docky/Interface/DockWindow.cs:394
 msgid "Drop to add to dock"
-msgstr "Loslassen um zum Dock hinzuzufügen"
+msgstr "拖动添加到 dock 上"
 
 #: ../Docky/Docky/Items/DockyItem.cs:93
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:230
 msgid "_Settings"
-msgstr "_Einstellungen"
+msgstr "设置(_S)"
 
 #: ../Docky/Docky/Items/DockyItem.cs:94
 msgid "_About"
-msgstr "_Info"
+msgstr "关于(_A)"
 
 #: ../Docky/Docky/Items/DockyItem.cs:95
 msgid "_Quit Docky"
-msgstr "Docky _beenden"
+msgstr "退出 Docky (_Q)"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:92
 msgid "Docky Configuration"
-msgstr "Docky Einstellungen"
+msgstr "Docky 设置"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:137
 msgid "_Start When Computer Starts"
-msgstr "_Automatisch mit Computer starten"
+msgstr "开机时自动启动(_S)"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:153
 msgid "_Theme:"
-msgstr "_Erscheinungsbild:"
+msgstr "主题(_T)："
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:177
 msgid "<b>General Options</b>"
-msgstr "<b>Allgemeine Einstellungen</b>"
+msgstr "<b>常规选项</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:197
 msgid "<b>Dock Configuration</b>"
-msgstr "<b>Dock Einstellungen</b>"
+msgstr "<b>Dock 设置</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:211
 msgid "Docks"
@@ -199,17 +190,17 @@ msgstr "Docks"
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:232
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:284
 msgid "All"
-msgstr "Alle"
+msgstr "全部"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:233
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:285
 msgid "Enabled"
-msgstr "Aktiviert"
+msgstr "已启用"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:234
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:286
 msgid "Disabled"
-msgstr "Deaktiviert"
+msgstr "已禁用"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
 msgid "Docklets"
@@ -217,404 +208,401 @@ msgstr "Docklets"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:310
 msgid "_Install"
-msgstr "_Installieren"
+msgstr "安装(_I)"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:342
 msgid "Helpers"
-msgstr "Erweiterungen"
+msgstr "辅助组件"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:373
 msgid "_New Dock"
-msgstr "_Neues Dock"
+msgstr "新建 Dock(_N)"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
 msgid "None"
-msgstr "Nie verbergen"
+msgstr "无"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:81
 msgid "Autohide"
-msgstr "Immer verbergen"
+msgstr "自动隐藏"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:82
 msgid "Intellihide"
-msgstr "Aktivem Fenster ausweichen"
+msgstr "智能隐藏"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:83
 msgid "Window Dodge"
-msgstr "Allen Fenstern ausweichen"
+msgstr "窗口闪避"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:97
 msgid "_Fade On Hide"
-msgstr "Aus_blenden"
+msgstr "淡出式隐藏"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:141
 msgid "_Icon Size:"
-msgstr "_Symbolgröße"
+msgstr "图标大小(_I)："
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:154
 msgid "_Hiding:"
-msgstr "_Verbergen:"
+msgstr "隐藏(_H)："
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
 msgid "Indicat_e Multiple Windows"
-msgstr "Hinweis bei _mehreren Fenstern"
+msgstr "表示多重窗口(_e)"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
 msgid "_Panel Mode"
-msgstr "_Panel-Modus"
+msgstr "面板模式(_P)"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:192
 msgid "3D Back_ground"
-msgstr "3D Hinter_grund"
+msgstr "三维背景(_G)"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:206
 msgid "_Manage Windows Without Launcher"
-msgstr "_Fenster ohne Starter verwalten"
+msgstr "管理没有启动器的窗口(_M)"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:221
 msgid "_Zoom:"
-msgstr "Ver_größerung:"
+msgstr "缩放(_Z)："
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:288
 msgid "<b>Inactive Docklets</b>"
-msgstr "<b>Inaktive Docklets</b>"
+msgstr "<b>未激活的停靠组件</b>"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:296
 msgid "<b>Active Docklets</b>"
-msgstr "<b>Aktive Docklets</b>"
+msgstr "<b>已激活的停靠组件</b>"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:147
 msgid "New _Window"
-msgstr "_Neues Fenster"
+msgstr "新建窗口(_W)"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:149
 #: ../StandardPlugins/Mounter/src/MountItem.cs:97
 msgid "_Open"
-msgstr "_Öffnen"
+msgstr "打开(_O)"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:69
 msgid "Reset Color"
-msgstr "Farbe zurücksetzen"
+msgstr "重置颜色"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:356
 msgid "_Pin to Dock"
-msgstr "An Dock _anheften"
+msgstr "锁定到 Dock (_P)"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:186
 msgid "Not enough free space on destination."
-msgstr "Nicht genügend freier Speicherplatz auf Zieldatenträger."
+msgstr "目标处没有足够的空余空间。"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:198
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:200
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:220
 msgid "Complete"
-msgstr "Abgeschlossen"
+msgstr "完成"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:206
 msgid "Moving"
-msgstr "Verschieben …"
+msgstr "正在移动"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:212
 msgid "Copying"
-msgstr "Kopieren …"
+msgstr "正在复制"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:225
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:226
 msgid "Error performing drop action"
-msgstr "Fehler beim Ausführen der Auslass-Aktion"
+msgstr "执行拖放动作出错"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:248
 msgid "Open"
-msgstr "Öffnen"
+msgstr "打开"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:249
 msgid "Open Containing Folder"
-msgstr "Beinhaltenden Ordner öffnen"
+msgstr "打开其所在的文件夹"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:244
 msgid "Unma_ximize"
-msgstr "Dema_ximieren"
+msgstr "取消最大化(_X)"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:247
 msgid "Ma_ximize"
-msgstr "Ma_ximieren"
+msgstr "最大化(_X)"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:252
 msgid "_Restore"
-msgstr "_Wiederherstellen"
+msgstr "还原(_R)"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:255
 msgid "Mi_nimize"
-msgstr "Mi_nimieren"
+msgstr "最小化(_N)"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:259
 msgid "_Close All"
-msgstr "Alle schließen"
+msgstr "全部关闭(_C)"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
 msgid "Sign up for {0}"
-msgstr "Registrieren für {0}"
+msgstr "注册 {0}"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:44
 msgid "Validating..."
-msgstr "Überprüfen …"
+msgstr "验证中..."
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:45
 #, csharp-format
 msgid "Don't have {0}?"
-msgstr "Besitzen Sie {0} nicht?"
+msgstr "没有 {0}？"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:46
 msgid "Account validation failed!"
-msgstr "Überprüfung des Benutzerkontos fehlgeschlagen!"
+msgstr "账户验证失败！"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:47
 msgid "Verify and save account information"
-msgstr "Kontoinformationen prüfen und speichern"
+msgstr "验证并保存账户信息"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:48
 msgid "Account validation succeeded!"
-msgstr "Überprüfung des Benutzerkontos erfolgreich!"
+msgstr "账户验证成功！"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:87
 msgid "Password"
-msgstr "Passwort"
+msgstr "密码"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:108
 msgid "Username"
-msgstr "Benutzername"
+msgstr "用户名"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
 msgid "<i>Verify and save account information</i>"
-msgstr "<i>Kontoinformationen prüfen und speichern</i>"
+msgstr "<i>验证并保存帐户信息</i>"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
 msgid "Don't have an account?"
-msgstr "Noch kein Konto?"
+msgstr "还没有账号？"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:153
 msgid "No Battery Found"
-msgstr "Keine Batterie gefunden"
+msgstr "未找到电池"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:170
 #, csharp-format
 msgid "{0} hour"
 msgid_plural "{0} hours"
-msgstr[0] "{0} Stunde"
-msgstr[1] "{0} Stunden"
+msgstr[0] "{0} 个小时"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:172
 #, csharp-format
 msgid "{0} minute"
 msgid_plural "{0} minutes"
-msgstr[0] "{0} Minute"
-msgstr[1] "{0} Minuten"
+msgstr[0] "{0} 分钟"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:174
 msgid "until charged "
-msgstr "bis vollständig geladen "
+msgstr "直到充电完成 "
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:176
 msgid "remaining "
-msgstr "verbleibend "
+msgstr "重命名 "
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:84
 msgid "Computer"
-msgstr "Rechner"
+msgstr "计算机"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:421
 msgid "Di_gital Clock"
-msgstr "Di_gitale Uhr"
+msgstr "数字时钟 (_G)"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:427
 msgid "24-Hour _Clock"
-msgstr "24-Stunden _Uhr"
+msgstr "24小时时钟(_C)"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:433
 msgid "Show _Date"
-msgstr "_Datum anzeigen"
+msgstr "显示日期(_D)"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:439
 msgid "Select _Theme"
-msgstr "_Thema wählen"
+msgstr "选择主题(_T)"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
-msgstr "Themen"
+msgstr "主题"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
 msgid "Theme"
-msgstr "Thema"
+msgstr "主题"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
 msgid "_Add Label"
-msgstr "Label _hinzufügen"
+msgstr "添加标签(_A)"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:114
 msgid "Check e_very:"
-msgstr "_Aktualisieren alle:"
+msgstr "全部检查(_v)"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:124
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:187
 msgid "minutes"
-msgstr "Minuten"
+msgstr "分钟"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:183
 msgid "Username or Password not set"
-msgstr "Benutzer oder Passwort nicht gesetzt"
+msgstr "用户名或密码未设置"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:233
 msgid "(no subject)"
-msgstr "(kein Betreff)"
+msgstr "(无主题)"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:251
 #, csharp-format
 msgid "From: {0}"
-msgstr "Von: {0}"
+msgstr "来自:{0}"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:262
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:266
 msgid "Feed Error"
-msgstr "Feed-Fehler"
+msgstr "源错误"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:271
 msgid "Invalid Username"
-msgstr "Ungültiger Benutzername"
+msgstr "用户名无效"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:275
 msgid "Network Error"
-msgstr "Netzwerkfehler"
+msgstr "网络错误"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:280
 msgid "General Error"
-msgstr "Allgemeiner Fehler"
+msgstr "一般错误"
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
 msgid "GMail Configuration"
-msgstr "GMail Konfiguration"
+msgstr "GMail 配置"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:79
 msgid "No unread mail"
-msgstr "Keine ungelesenen Nachrichten"
+msgstr "无未读邮件"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:82
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
-msgstr[0] "{0} ungelesene Nachricht"
-msgstr[1] "{0} ungelesene Nachrichten"
+msgstr[0] "{0} 封未读邮件"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:103
 msgid "Checking mail..."
-msgstr "Auf neue Nachrichten prüfen …"
+msgstr "正在检查邮件 ..."
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:188
 msgid "_View "
-msgstr "_Zeige "
+msgstr "查看(_V) "
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:193
 msgid "_Compose Mail"
-msgstr "E-Mail _verfassen"
+msgstr "写邮件(_C)"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "New Mail"
-msgstr "Neue E-Mail"
+msgstr "新邮件"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
 msgid "Check _Mail"
-msgstr "Auf neue Nachrichten _prüfen"
+msgstr "检查邮件(_M)"
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
-msgstr "Labels"
+msgstr "标签"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
 msgid "GMail"
-msgstr "Google Mail"
+msgstr "GMail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr "Anmeldung"
+msgstr "登录"
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
-msgstr "Von: "
+msgstr "来自： "
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Eject"
-msgstr "Aus_werfen"
+msgstr "弹出(_E)"
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Unmount"
-msgstr "_Aushängen"
+msgstr "卸载(_U)"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:53
 msgid "Network Manager"
-msgstr "Netzwerk-Manager"
+msgstr "网络管理器"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
-msgstr "Verbindungsaufbau …"
+msgstr "正在连接..."
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:101
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:166
 msgid "Disconnected"
-msgstr "Verbindung getrennt"
+msgstr "连接已断开"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
 msgid "Connected: {0}"
-msgstr "Verbunden: {0}"
+msgstr "已连接: {0}"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:48
 msgid "My _Stations"
-msgstr "Meine _Sender"
+msgstr "我的电台(_S)"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:79
 msgid "S_earch"
-msgstr "S_uchen"
+msgstr "搜索(_E)"
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
-msgstr "Keine Sender gefunden."
+msgstr "没有找到电台。"
 
 #: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
-msgstr "Bitte versuchen Sie Ihre Suche erneut."
+msgstr "请尝试重新搜索。"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:48
 msgid "Fetching Information..."
-msgstr "Informationen werden geladen …"
+msgstr "获取信息..."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:68
 msgid "Click to add NPR stations."
-msgstr "Klicken um NPR Sender hinzuzufügen."
+msgstr "点击添加 NPR 电台。"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:107
 msgid "Home Page"
-msgstr "Webseite"
+msgstr "主页"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:114
 msgid "Program Schedule"
-msgstr "Programmverzeichnis"
+msgstr "程序调度"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:121
 msgid "Donate"
-msgstr "Spenden"
+msgstr "捐赠"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:128
 msgid "Live Streams"
-msgstr "Live-Streams"
+msgstr "实时流媒体"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:76
 msgid "Clear the Recent Documents list?"
-msgstr "Liste der zuletzt geöffneten Dokumente löschen?"
+msgstr "清除文档历史？"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:78
 msgid "Clear Recent Documents"
-msgstr "Liste der zuletzt geöffneten Dokumente löschen"
+msgstr "清除最近文档历史"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:80
 msgid ""
@@ -622,40 +610,37 @@ msgid ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
-"Das Leeren der Liste der zuletzt geöffneten Dokumente betrifft:\n"
-"• Alle Einträge im Menü Orte → Zuletzt geöffnete Dokumente.\n"
-"• Die Liste der zuletzt geöffneten Dokumente in allen Anwendungen."
+"如果您清除最近的文档列表，您将清除下列内容：\n"
+"\n"
+"• 位置 -> 最近文档菜单项中的全部项目。\n"
+"• 全部应用程序的最近文档列表中的全部项目。"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
 msgid "_Clear Recent Documents..."
-msgstr "_Liste der zuletzt geöffneten Dokumente löschen …"
+msgstr "清除最近的文档列表(_C)..."
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
 msgid "No items in Trash"
-msgstr "Keine Dateien im Müll"
+msgstr "回收站中没有项目"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:75
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
-msgstr[0] "{0} Datei im Müll"
-msgstr[1] "{0} Dateien im Müll"
+msgstr[0] "回收站中有 {0} 个项目"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:160
 msgid "_Open Trash"
-msgstr "Müll _öffnen"
+msgstr "打开回收站(_O)"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:162
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:199
 msgid "Empty _Trash"
-msgstr "_Müll leeren"
+msgstr "清空回收站(_T)"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
 msgid "Empty all of the items from the trash?"
-msgstr ""
-"Sind sie sicher, dass Sie alle\n"
-"Objekte im Müll dauerhaft löschen\n"
-"wollen?"
+msgstr "确定清空回收站中的全部项目吗?"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:186
 msgid ""
@@ -663,47 +648,44 @@ msgid ""
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
-"Falls Sie den Müll leeren, werden darin enthaltene\n"
-"Objekte dauerhaft gelöscht. Beachten Sie, dass\n"
-"Sie auch einzelne Objekte löschen können."
+"如果您选择清空回收站，所有的项目都将会被永久的删除。\n"
+"请注意您也可以单独的删除其中的特定项目。"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:66
 msgid "_Weather Provider:"
-msgstr "_Wetterdienste:"
+msgstr "天气信息提供(_W)："
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:106
 msgid "My _Locations"
-msgstr "Meine _Standorte"
+msgstr "我的位置(_L) :"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:137
 msgid "_Search"
-msgstr "_Suchen"
+msgstr "查找(_S)"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:177
 msgid "Automatically Update _Every"
-msgstr "_Automatisch aktualisieren alle"
+msgstr "自动更新间隔(_E)"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:221
 msgid "Use _Metric Units"
-msgstr "Metrische Einheiten verwenden"
+msgstr "使用公制单位(_M)"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:84
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:87
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:92
 msgid "Invalid Weather Location"
-msgstr "Ungültiger Standort"
+msgstr "无效的位置"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:90
 msgid "Network Error: "
-msgstr "Netzwerkfehler: "
+msgstr "网络错误： "
 
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
-msgstr ""
-"Wetterdaten werden von Google bereitgestellt. Diese Quelle benötigt die Orte "
-"als US Zip Code oder als 'Stadt, Land'."
+msgstr "由 Google 提供天气信息。这个来源要求位置信息表示为区号或者英文的\"城市,国家\"。"
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
@@ -712,230 +694,73 @@ msgid ""
 "website.  To find your code, look up your forecast on their site and the "
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
-"Wetterdaten werden von Weather Underground bereitgestellt. Diese Quelle "
-"benötigt die Orte als US Zip Code oder als eindeutigen Code. Um den "
-"richtigen Code zu finden, machen Sie eine Anfrage auf deren Website, der "
-"Code wird dann in der Adressleiste nach »/local/« angefügt und kann so "
-"aussehen: AAXX0000."
+"由 The Weather Channel "
+"提供天气信息，并保留所有权利。这个来源要求位置信息表示为区号或者从网站上获取的唯一编号。在它们的网站上查询您当地的天气信息，URL地址中 "
+"'/local/' 后面的部分就是您的地址代码。例如 AAXX0000 。"
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
-msgstr ""
-"Wetterdaten werden von Weather Underground bereitgestellt. Diese Quelle "
-"benötigt die Orte als US Zip Code oder als 'Stadt, Land'."
+msgstr "由  Weather Underground 提供天气信息，并保留所有权利。这个来源要求位置信息表示为区号或者英文的\"城市,国家\"。"
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
-msgstr "Keine Ergebnisse gefunden."
+msgstr "无搜索结果。"
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
-msgstr "Wetter-Konfiguration"
+msgstr "天气配置"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
 msgid "Fetching data..."
-msgstr "Aktualisieren …"
+msgstr "正在更新数据..."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:216
 msgid "Radar _Map"
-msgstr "_Radarkarte"
+msgstr "雷达图(_M)"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:221
 msgid "Forecasts"
-msgstr "Vorhersagen"
+msgstr "预报"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:237
 msgid "Check _Weather"
-msgstr "Wetterinformationen aktualisieren"
+msgstr "检查天气(_W)"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
 msgid "_Today"
-msgstr "_Heute"
+msgstr "今天(_T)"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
 msgid "T_omorrow"
-msgstr "_Morgen"
+msgstr "明天(_O)"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:311
 msgid "Humidity"
-msgstr "Luftfeuchtigkeit"
+msgstr "湿度"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:313
 msgid "Temp"
-msgstr "Temperatur"
+msgstr "温度"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:315
 msgid "Feels Like"
-msgstr "gefühlte"
+msgstr "体感温度"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:317
 msgid "Wind"
-msgstr "Wind"
+msgstr "风速"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:318
 msgid "Direction"
-msgstr "Richtung"
+msgstr "风向"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:320
 msgid "Sunrise"
-msgstr "Sonnenaufgang"
+msgstr "日出"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:321
 msgid "Sunset"
-msgstr "Sonnenuntergang"
-
-#~ msgid "_Weather Provider"
-#~ msgstr "_Wetterdienst"
-
-#~ msgid "Some information about the weather source."
-#~ msgstr "Einige Informationen über die Wetterdatenquelle"
-
-#~ msgid "Move _Up"
-#~ msgstr "Nach _oben"
-
-#~ msgid "Move _Down"
-#~ msgstr "Nach _unten"
-
-#~ msgid "Add _Location"
-#~ msgstr "Neuer Standort"
-
-#~ msgid "mins"
-#~ msgstr "min"
-
-#~ msgid "Check _Every"
-#~ msgstr "Über_prüfe alle"
-
-#~ msgid "Start When Computer Starts"
-#~ msgstr "Automatisch mit Computer starten"
-
-#~ msgid "Theme:"
-#~ msgstr "Thema:"
-
-#~ msgid "New Dock"
-#~ msgstr "Neues Dock"
-
-#~ msgid "Delete Dock"
-#~ msgstr "Lösche Dock"
-
-#~ msgid "Fade On Hide"
-#~ msgstr "Ausblenden"
-
-#~ msgid "Icon Size:"
-#~ msgstr "Icongröße"
-
-#~ msgid "Indicate Multiple Windows"
-#~ msgstr "Hinweis bei mehreren Fenstern"
-
-#~ msgid "Manage Windows Without Launcher"
-#~ msgstr "Verwalte Fenster ohne Starter"
-
-#~ msgid "Zoom:"
-#~ msgstr "Zoom:"
-
-#~ msgid "Docky"
-#~ msgstr "Docky"
-
-#~ msgid "<b>Active Plugins</b>"
-#~ msgstr "<b>Aktive Plugins</b>"
-
-#~ msgid "<b>Inactive Plugins</b>"
-#~ msgstr "<b>Inaktive Plugins</b>"
-
-#~ msgid "Autohide:"
-#~ msgstr "Verstecken:"
-
-#, csharp-format
-#~ msgid "{0}'s Forecast"
-#~ msgstr "{0}s Vorhersage"
-
-#~ msgid "_Show Preferences"
-#~ msgstr "Zeige _Einstellungen"
-
-#~ msgid "_Quit"
-#~ msgstr "_Beenden"
-
-#~ msgid "Reset _Color"
-#~ msgstr "Farbe _zurücksetzen"
-
-#~ msgid "Check _Now"
-#~ msgstr "_Jetzt aktualisieren"
-
-#~ msgid "_Reset Color"
-#~ msgstr "Farbe _zurücksetzen"
-
-#~ msgid "_Reload Weather Data"
-#~ msgstr "_Aktualisiere Wetterdaten"
-
-#~ msgid "Panel Mode"
-#~ msgstr "Panel-Modus"
-
-#~ msgid "Config"
-#~ msgstr "Einstellung"
-
-#~ msgid "Inbox"
-#~ msgstr "Posteingang"
-
-#~ msgid "Locations"
-#~ msgstr "Standorte"
-
-#~ msgid "Search Results"
-#~ msgstr "Suchergebnisse"
-
-#~ msgid "Currently searching..."
-#~ msgstr "Suche läuft..."
-
-#~ msgid "No results found"
-#~ msgstr "Kein Ergebnis gefunden"
-
-#~ msgid "Add _Label"
-#~ msgstr "Label anfügen"
-
-#~ msgid ""
-#~ "None : Always present, acts like a panel.\n"
-#~ "Autohide : Hides whenever the mouse is not over it.\n"
-#~ "Intellihide : Hides when dock obstructs the active application.\n"
-#~ "Window Dodge : Hides when dock obstructs any window."
-#~ msgstr ""
-#~ "Nein: Immer sichtbar, verhält sich wie eine Panel\n"
-#~ "Automatisches Ausblenden: Versteckt sich immer, wenn kein Mauscursor es "
-#~ "berührt.\n"
-#~ "Intelligentes Ausblenden: Versteckt sich, wenn es das aktive "
-#~ "Anwendungsfenster behindert.\n"
-#~ "Fenstern ausweichen: Versteckt sich, wenn es ein Anwendungsfenster behindert."
-
-#~ msgid "Fade out dock instead of slide off screen"
-#~ msgstr "Dock wird ausgeblendet anstatt ausgerollt"
-
-#~ msgid "Related Items"
-#~ msgstr "Verwandte Elemente"
-
-#~ msgid "<i>Always present, acts like a panel.</i>"
-#~ msgstr "<i>Immer sichtbar, verhält sich wie eine Panel</i>"
-
-#~ msgid ""
-#~ "Docky requires compositing to work properly.  Please enable compositing and "
-#~ "restart docky."
-#~ msgstr ""
-#~ "Docky benötigt einen Composition-Manager um korrekt zu arbeiten. Bitte "
-#~ "aktivieren Sie einen Composition-Manager und starten Sie Docky neu."
-
-#~ msgid "Drag any dock to move it."
-#~ msgstr "Ziehen Sie ein Dock um es zu verschieben."
-
-#~ msgid "Extensions"
-#~ msgstr "Erweiterungen"
-
-#~ msgid "Icon"
-#~ msgstr "Symbol"
-
-#~ msgid "Disable"
-#~ msgstr "Deaktivieren"
-
-#~ msgid "Enable"
-#~ msgstr "Aktivieren"
-
-#~ msgid "3D Background"
-#~ msgstr "3D Hintergrund"
+msgstr "日落"
