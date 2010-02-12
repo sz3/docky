@@ -111,7 +111,8 @@ namespace Docky.Windowing
 				yield return "ruby";
 				yield return "padsp";
 				yield return "aoss";
-				yield return "python(\\d.\\d)?";
+				yield return "python(\\d+.\\d+)?";
+				yield return "wish(\\d+\\.\\d+)?";
 				yield return "(ba)?sh";
 				yield return "-.*";
 				yield return "*.\\.desktop";
