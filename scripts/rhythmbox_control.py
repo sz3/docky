@@ -36,6 +36,20 @@ except ImportError, e:
 	print e
 	exit()
 
+enable_art_icon = True;
+enable_badge_text = True;
+
+art_icon_from_tag = True
+try:
+	import mutagen.mp3
+	import mutagen.mp4
+	from mutagen.id3 import ID3
+	#from mutagen.flac import FLAC
+except	ImportError, e:
+	print "python-mutagen not available - art-icon from id3v2 tag turned off"
+	art_icon_from_tag = False
+
+
 rhythmboxbus = "org.gnome.Rhythmbox"
 playerpath = "/org/gnome/Rhythmbox/Player"
 playeriface = "org.gnome.Rhythmbox.Player"
@@ -43,10 +57,8 @@ playeriface = "org.gnome.Rhythmbox.Player"
 shellpath = "/org/gnome/Rhythmbox/Shell"
 shelliface = "org.gnome.Rhythmbox.Shell"
 
-enable_art_icon = True;
-enable_badge_text = True;
-
 album_art_tmpfile = "/tmp/docky_%s_rhythmbox_helper.png" % os.getenv('USERNAME')
+album_art_file = "/tmp/docky_%s_rhythmbox_helper.original.png" % os.getenv('USERNAME')
 
 # 0 - none, 1- jewel, 2 - vinyl)
 overlay = 2
@@ -194,10 +206,11 @@ class DockyRhythmboxItem(DockyItem):
 
 		arturl = ""
 		playinguri = self.player.getPlayingUri()
+		filename = urllib2.unquote(playinguri).replace("file://", "");
 
 		#1. Look in song folder
 		#TODO need to replace some things, this is very weird
-		coverdir = os.path.dirname(urllib2.unquote(playinguri).replace("file://", ""))
+		coverdir = os.path.dirname(filename)
 		covernames = ["cover.jpg", "cover.png", "album.jpg", "album.png", "albumart.jpg", 
 			"albumart.png", ".folder.jpg", ".folder.png", "folder.jpg", "folder.png"]
 		for covername in covernames:
@@ -213,6 +226,53 @@ class DockyRhythmboxItem(DockyItem):
 		#3. Look for cached cover
 		arturl = os.path.expanduser("~/.cache/rhythmbox/covers/%s.jpg" % self.cover_basename)
 
+		#4. Look for image in tags
+		if art_icon_from_tag:
+			image_data = None
+			loader = gtk.gdk.PixbufLoader()
+			properties = self.shell.getSongProperties(playinguri)
+			mimetype = properties["mimetype"]
+			if mimetype == "application/x-id3":
+				try:
+					f = ID3(filename)
+				except:
+					print "No ID3 tags in %s" % filename
+					return arturl
+				apicframes = f.getall("APIC")
+				if len(apicframes) >= 1:
+					frame = apicframes[0]
+					image_data = frame.data
+					
+			elif mimetype == "audio/x-aac":
+				try:
+					f = mutagen.mp4.MP4(filename)
+				except:
+					print "MP4 couldn't open %s" % filename
+					return arturl
+					
+				if "covr" in f.tags:
+					covertag = f.tags["covr"][0]
+					image_data = covertag
+					
+			elif mimetype == "audio/x-flac":
+				#f = FLAC(filename)
+				print "cover from FLAC not implemented"
+					
+			if image_data:
+				try:
+					loader.write(image_data)
+					loader.close()
+					pixbuf = loader.get_pixbuf()
+					pixbuf.scale_simple(250, 250, gtk.gdk.INTERP_NEAREST).save(album_art_file, "png", {})
+					return album_art_file
+				except Exception, e:
+					print "problem with image_data from %s" % filename
+					print e
+			try:
+				loader.close()
+			except:
+				return arturl
+			
 		return arturl
 	
 	def get_album_art_overlay_path(self, picfile):
