@@ -73,7 +73,6 @@
     <Compile Include="Docky\Menus\SeparatorWidget.cs" />
     <Compile Include="gtk-gui\Docky.Interface.DockPreferences.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Docky\Interface\AddinTreeView.cs" />
     <Compile Include="Docky\Interface\DockDragTracker.cs" />
     <Compile Include="Docky\Interface\PoofWindow.cs" />
     <Compile Include="Docky\Interface\HoverTextManager.cs" />

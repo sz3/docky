@@ -19,7 +19,6 @@ FILES = \
 	Docky/HelperTile.cs \
 	Docky/DockletTile.cs \
 	Docky/CairoHelper/DockySurface_Extensions.cs \
-	Docky/Interface/AddinTreeView.cs \
 	Docky/Interface/AnimationState.cs \
 	Docky/Interface/AutohideManager.cs \
 	Docky/Interface/AutohideType.cs \

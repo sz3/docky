@@ -45,7 +45,7 @@ namespace Docky
 	
 	public class PluginManager
 	{
-		public static readonly string DefaultPluginIcon = "folder_tar";
+		public static readonly string DefaultPluginIcon = "package";
 		
 		const string PluginsDirectory = "plugins";
 		const string ApplicationDirectory = "docky";

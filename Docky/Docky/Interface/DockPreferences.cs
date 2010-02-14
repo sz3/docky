@@ -52,9 +52,7 @@ namespace Docky.Interface
 		IPreferences prefs;
 		string name;
 		List<AbstractDockItemProvider> item_providers;
-		
-		AddinTreeView inactive_view, active_view;
-		
+				
 		public event EventHandler PositionChanged;
 		public event EventHandler PanelModeChanged;
 		public event EventHandler IconSizeChanged;
@@ -349,92 +347,15 @@ namespace Docky.Interface
 			zoom_checkbutton.Toggled += ZoomCheckbuttonToggled;
 			autohide_box.Changed += AutohideBoxChanged;
 			fade_on_hide_check.Toggled += FadeOnHideToggled;
-		
-			
-			// TreeViews
-			inactive_view = new AddinTreeView (false);
-			inactive_view.ButtonPressEvent += OnInactiveViewDoubleClicked;
-			inactive_scroll.Add (inactive_view);
-			
-			active_view = new AddinTreeView (true);
-			active_view.ButtonPressEvent += OnActiveViewDoubleClicked;
-			active_view.AddinOrderChanged += OnActiveViewAddinOrderChanged;
-			active_scroll.Add (active_view);
-			
-			// drag + drop for addin install
-			TargetEntry addin = new TargetEntry ("text/uri-list", 0, 0);
-
-			inactive_view.EnableModelDragDest (new [] {addin}, DragAction.Copy);
-			inactive_view.DragDataReceived += HandleInactiveViewDragDataReceived;
-			
-			// more or less happens every time the visiblity of the widget changes.
-			// kind of a dirty hack, good refactoring candidate
-			Mapped += delegate {
-				PopulateTreeViews ();
-			};
-			
-			Shown += delegate {
-				PopulateTreeViews ();
-			};
 			
 			DefaultProvider.ItemsChanged += HandleDefaultProviderItemsChanged;
 			
 			ShowAll ();
-	
 		}
 
 		void HandleDefaultProviderItemsChanged (object sender, ItemsChangedArgs e)
 		{
 			Launchers = DefaultProvider.Uris;
-		}
-
-		void HandleInactiveViewDragDataReceived (object o, DragDataReceivedArgs args)
-		{
-			string data;
-			
-			data = Encoding.UTF8.GetString (args.SelectionData.Data);
-			// Sometimes we get a null at the end, and it crashes us.
-			data = data.TrimEnd ('\0');
-			
-			foreach (string uri in data.Split (new [] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries)) {
-				string file, path, filename;
-				
-				if (string.IsNullOrEmpty (uri))
-					continue;
-				
-				file = uri.Remove (0, 7); // 7 is the length of file://
-				filename = System.IO.Path.GetFileName (file);
-				
-				if (!file.EndsWith (".dll"))
-					continue;
-				
-				try {
-					if (!Directory.Exists (PluginManager.UserAddinInstallationDirectory))
-						Directory.CreateDirectory (PluginManager.UserAddinInstallationDirectory);
-					
-					path = System.IO.Path.Combine (PluginManager.UserAddinInstallationDirectory, filename);
-					File.Copy (file, path, true);
-					
-				} catch (Exception e) {
-					Log.Error ("{0} failed to process '{1}': {2}", name, uri, e.Message);
-					Log.Info (e.StackTrace);
-				}
-			}
-			
-			PluginManager.InstallLocalPlugins ();
-			PopulateTreeViews ();
-		}
-		
-		void PopulateTreeViews ()
-		{
-			active_view.Clear ();
-			inactive_view.Clear ();
-
-			foreach (string id in PluginManager.AvailableProviderIDs)
-				inactive_view.Add (new AddinTreeNode (id));
-			
-			foreach (AbstractDockItemProvider provider in ItemProviders.Where (p => p != DefaultProvider))
-				active_view.Add (new AddinTreeNode (provider));
 		}
 		
 		void AutohideBoxChanged (object sender, EventArgs e)
@@ -494,8 +415,6 @@ namespace Docky.Interface
 			
 			OnItemProvidersChanged (null, provider.AsSingle ());
 			SyncPlugins ();
-			
-			PopulateTreeViews ();
 		}
 		
 		public void AddProvider (AbstractDockItemProvider provider)
@@ -777,109 +696,7 @@ namespace Docky.Interface
 			ThreeDimensional = threedee_check.Active;
 			threedee_check.Active = ThreeDimensional;
 		}
-		
-		void OnActiveViewAddinOrderChanged (object sender, AddinOrderChangedArgs e)
-		{
-			item_providers = item_providers
-				.OrderBy (adip => e.NewOrder
-					.Select (a => a.Provider)
-					.ToList ()
-					.IndexOf (adip))
-				.ToList ();
-			
-			SyncPlugins ();	
-			OnItemProvidersChanged (null, null);
-		}
 
-		[GLib.ConnectBefore]
-		protected virtual void OnActiveViewDoubleClicked (object sender, ButtonPressEventArgs e)
-		{
-			if (e.Event.Type == EventType.TwoButtonPress)
-				OnDisablePluginButtonClicked (sender, e);
-		}
-
-		protected virtual void OnDisablePluginButtonClicked (object sender, System.EventArgs e)
-		{
-			if (inactive_view.SelectedAddin != null)
-				return;
-			
-			AddinTreeNode node = active_view.SelectedAddin as AddinTreeNode;
-			
-			if (node == null)
-				return;
-			
-			DisableAddin (node);
-		}
-		
-		private void DisableAddin (AddinTreeNode node)
-		{
-			// disable this addin
-			PluginManager.Disable (node.AddinID);
-			
-			// remove it from the active addins list
-			active_view.Remove (node);
-			
-			// remove it from the dock
-			item_providers.Remove (node.Provider);
-			OnItemProvidersChanged (null, node.Provider.AsSingle ());
-			
-			node.Provider = null;
-			
-			// add it back to the list of available addins
-			inactive_view.Add (node);
-
-			SyncPlugins ();
-		}		
-		
-		[GLib.ConnectBefore]
-		protected virtual void OnInactiveViewDoubleClicked (object sender, ButtonPressEventArgs e)
-		{
-			if (e.Event.Type == EventType.TwoButtonPress)
-				OnEnablePluginButtonClicked (sender, e);
-		}
-		
-		protected virtual void OnEnablePluginButtonClicked (object sender, System.EventArgs e)
-		{
-			if (inactive_view.SelectedAddin == null)
-				return;
-			
-			AddinTreeNode node = inactive_view.SelectedAddin as AddinTreeNode;
-			
-			if (node == null)
-				return;
-			
-			EnableAddin (node);
-		}
-		
-		private void EnableAddin (AddinTreeNode node)
-		{
-			// enable the addin
-			PluginManager.Enable (node.AddinID);
-			
-			// create the object
-			AbstractDockItemProvider provider = PluginManager.ItemProviderFromAddin (node.AddinID);
-			
-			node.Provider = provider;
-			
-			if (provider == null) {
-				Log<DockPreferences>.Warn ("Could not enable {0}: Item was null", node.Name);
-				return;
-			}
-			
-			// remove this addin from the inactive list
-			inactive_view.Remove (node);
-			
-			// add this provider to the list of enabled providers and trigger ProvidersChanged
-			item_providers.Add (provider);
-			provider.AddedToDock ();
-			OnItemProvidersChanged (provider.AsSingle (), null);
-			
-			// Add the node to the enabled providers treeview
-			active_view.Add (node);
-			
-			SyncPlugins ();	
-		}
-		
 		void OnItemProvidersChanged (IEnumerable<AbstractDockItemProvider> addedProviders, IEnumerable<AbstractDockItemProvider> removedProviders)
 		{
 			if (ItemProvidersChanged != null) {
