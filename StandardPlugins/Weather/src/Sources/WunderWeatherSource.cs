@@ -260,9 +260,9 @@ namespace WeatherDocklet
 			string lat = Latitude.ToString(CultureInfo.GetCultureInfo("en-US"));
 			string lon = Longitude.ToString(CultureInfo.GetCultureInfo("en-US"));
 			
-			DockServices.System.Open ("http://www.wunderground.com/wundermap/?lat=" + lat + "&lon=" + lon +
-										 "&zoom=8&type=hyb&units=" + (WeatherPreferences.Metric ? "metric" : "english") +
-										 "&rad=0&wxsn=0&svr=0&cams=0&sat=1&sat.num=1&sat.spd=25&sat.opa=85&sat.gtt1=109&sat.gtt2=108&sat.type=IR4&riv=0&mm=0&hur=0");
+			DockServices.System.Open ("http://www.wunderground.com/cgi-bin/findweather/getForecast?brand=wxmap&query=" +
+										lat + "," + lon + "&lat=" + lat + "&lon=" + lon +
+										"&wxsn=0&units=" + (WeatherPreferences.Metric ? "metric" : "english"));
 		}
 		
 		public override IEnumerable<string> SearchLocation (string origLocation)
