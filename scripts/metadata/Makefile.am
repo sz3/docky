@@ -1,6 +1,6 @@
 scriptdir = $(datadir)/docky/helpers/metadata
 
-dist_script_SCRIPTS = \
+dist_script_DATA = \
 	banshee_control.py.info \
 	deluge_badge.py.info \
 	gajim_badge.py.info \
