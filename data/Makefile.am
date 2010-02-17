@@ -1,7 +1,9 @@
 SUBDIRS = icons themes
 
-EXTRA_DIST = docky.desktop.in \
-	     poof.png
+EXTRA_DIST = 	docky.desktop.in \
+		albumoverlay_jewel.png \
+		albumoverlay_vinyl.png \
+	     	poof.png
 CLEANFILES = docky.desktop
 
 applicationsdir = $(datadir)/applications
