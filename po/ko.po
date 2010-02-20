@@ -1,24 +1,24 @@
 # Korean translation for docky
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the docky package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# Cedna <sptcedna@gmail.com>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-01-13 11:18+0100\n"
-"PO-Revision-Date: 2010-01-27 14:29+0000\n"
+"POT-Creation-Date: 2010-02-08 19:55-0600\n"
+"PO-Revision-Date: 2010-02-12 00:18+0000\n"
 "Last-Translator: Cedna <sptcedna@gmail.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-01-29 16:32+0000\n"
+"X-Launchpad-Export-Date: 2010-02-20 14:20+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:113
+#: ../Docky/Docky/ConfigurationWindow.cs:117
 msgid "Search Docklets..."
 msgstr ""
 
@@ -26,34 +26,34 @@ msgstr ""
 msgid "Search Helpers..."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:178
+#: ../Docky/Docky/ConfigurationWindow.cs:176
 msgid "Click on any dock to configure."
 msgstr "설정하고 싶은 dock를 클릭해 주십시오."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:179
-msgid "Drag any dock to move it."
-msgstr "이동하고 싶은 dock를 드래그 해 주십시오."
+#: ../Docky/Docky/ConfigurationWindow.cs:177
+msgid "Drag any dock to reposition."
+msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:259
+#: ../Docky/Docky/ConfigurationWindow.cs:246
 msgid "Delete the currently selected dock?"
 msgstr "현재 선택된 dock를 삭제 하시겠습니까?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:261
+#: ../Docky/Docky/ConfigurationWindow.cs:248
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr "만약 삭제를 선택 한다면, 해당되는 삭제할 dock의 모든 설정을 잃게 될 것 입니다."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:276
+#: ../Docky/Docky/ConfigurationWindow.cs:263
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:400
 msgid "_Delete Dock"
 msgstr "삭제 (_D)"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:397
+#: ../Docky/Docky/ConfigurationWindow.cs:373
 msgid "_Select"
 msgstr "선택 (_S)"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:400
+#: ../Docky/Docky/ConfigurationWindow.cs:376
 msgid ".tar Archives"
 msgstr ".tar 압축 파일"
 
@@ -76,13 +76,12 @@ msgstr ""
 msgid "Settings"
 msgstr "설정"
 
-#: ../Docky/Docky/Docky.cs:107
+#: ../Docky/Docky/Docky.cs:98
 msgid ""
 "Docky requires compositing to work properly. Please enable compositing and "
 "restart docky."
 msgstr ""
-"Docky는 동작하기 위해서 opengl 화면 효과가 가능한 창 관리자를 필요로 합니다. 창 관리자의 컴포지팅 기능을 활성화 한 후 "
-"Docky를 다시 실행하길 부탁드립니다."
+"Docky가 동작하기 위해선 opengl 컴포지팅이 필요합니다. 창 관리자의 컴포지팅을 활성화 한 뒤 다시 Docky를 실핼 시키십시오."
 
 #: ../Docky/Docky/HelperTile.cs:41
 msgid "_Enable"
@@ -120,32 +119,32 @@ msgid ""
 "added to this dock."
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:644
+#: ../Docky/Docky/Interface/DockPreferences.cs:679
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
-msgstr ""
+msgstr "<i>최대화된 창이 dock를 덮어도 숨기지 않습니다</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:647
+#: ../Docky/Docky/Interface/DockPreferences.cs:682
 msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr ""
+msgstr "<i>마우스가 dock위에 위치해 있지 않을때 숨깁니다.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:650
+#: ../Docky/Docky/Interface/DockPreferences.cs:685
 msgid "<i>Hides when dock obstructs the active application.</i>"
-msgstr ""
+msgstr "<i>활성화된 어플리케이션의 창이 dock를 일부라도 덮을때 숨깁니다.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:653
+#: ../Docky/Docky/Interface/DockPreferences.cs:688
 msgid "<i>Hides when dock obstructs any window.</i>"
-msgstr ""
+msgstr "<i>활성화 관계 없이 어느 창이든 dock를 일부라도 덮는다면 숨깁니다.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:363
+#: ../Docky/Docky/Interface/DockWindow.cs:369
 msgid "Drag to reposition"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:370
+#: ../Docky/Docky/Interface/DockWindow.cs:376
 msgid "Drop to open"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:374
-#: ../Docky/Docky/Interface/DockWindow.cs:388
+#: ../Docky/Docky/Interface/DockWindow.cs:380
+#: ../Docky/Docky/Interface/DockWindow.cs:394
 msgid "Drop to add to dock"
 msgstr ""
 
@@ -169,7 +168,7 @@ msgstr "Docky 설정"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:137
 msgid "_Start When Computer Starts"
-msgstr ""
+msgstr "부팅 시 Docky 자동 실행 (_S)"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:153
 msgid "_Theme:"
@@ -255,8 +254,8 @@ msgid "_Panel Mode"
 msgstr "패널 모드 (_P)"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:192
-msgid "3D Background"
-msgstr "3D 배경 효과"
+msgid "3D Back_ground"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:206
 msgid "_Manage Windows Without Launcher"
@@ -274,10 +273,6 @@ msgstr ""
 msgid "<b>Active Docklets</b>"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:91
-msgid "Icon"
-msgstr "아이콘"
-
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:147
 msgid "New _Window"
 msgstr "새 창으로 열기 (_W)"
@@ -291,7 +286,7 @@ msgstr "열기 (_O)"
 msgid "Reset Color"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:354
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:356
 msgid "_Pin to Dock"
 msgstr ""
 
@@ -388,23 +383,49 @@ msgstr ""
 msgid "Don't have an account?"
 msgstr ""
 
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:153
+msgid "No Battery Found"
+msgstr ""
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:170
+#, csharp-format
+msgid "{0} hour"
+msgid_plural "{0} hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:172
+#, csharp-format
+msgid "{0} minute"
+msgid_plural "{0} minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:174
+msgid "until charged "
+msgstr ""
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:176
+msgid "remaining "
+msgstr ""
+
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:84
 msgid "Computer"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:419
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:421
 msgid "Di_gital Clock"
 msgstr "디지털 시계 (_G)"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:425
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:427
 msgid "24-Hour _Clock"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:433
 msgid "Show _Date"
 msgstr "날짜 표시 (_D)"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:439
 msgid "Select _Theme"
 msgstr "테마 선택 (_T)"
 
@@ -518,20 +539,20 @@ msgstr ""
 msgid "_Unmount"
 msgstr "마운트 해제 (_U)"
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:51
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:53
 msgid "Network Manager"
 msgstr ""
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:90
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
 msgstr ""
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:99
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:164
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:101
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:166
 msgid "Disconnected"
 msgstr ""
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:108
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
 msgid "Connected: {0}"
 msgstr ""
@@ -737,3 +758,12 @@ msgstr ""
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:321
 msgid "Sunset"
 msgstr ""
+
+#~ msgid "Icon"
+#~ msgstr "아이콘"
+
+#~ msgid "3D Background"
+#~ msgstr "3D 배경 효과"
+
+#~ msgid "Drag any dock to move it."
+#~ msgstr "이동하고 싶은 dock를 드래그 해 주십시오."
