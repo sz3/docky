@@ -24,7 +24,7 @@ REFERENCES =  \
 	System \
 	System.Core \
 	Mono.Posix \
-	$(GIO_SHARP_LIBS) \	
+	$(GIO_SHARP_LIBS) \
 	$(MONO_CAIRO_LIBS) \
 	$(LIBRSVG_SHARP_LIBS) \
 	$(GTK_SHARP_20_LIBS)
