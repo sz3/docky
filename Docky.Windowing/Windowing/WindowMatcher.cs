@@ -110,6 +110,7 @@ namespace Docky.Windowing
 				yield return "mono";
 				yield return "ruby";
 				yield return "padsp";
+				yield return "perl";
 				yield return "aoss";
 				yield return "python(\\d+.\\d+)?";
 				yield return "wish(\\d+\\.\\d+)?";
