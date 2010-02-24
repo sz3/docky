@@ -71,6 +71,12 @@ namespace Clock
 				StartDate = StartDate.AddDays (7);
 		}
 		
+		public override int MinimumHeight {
+			get {
+				return 60;
+			}
+		}
+		
 		public override int MinimumWidth {
 			get {
 				return 630;
