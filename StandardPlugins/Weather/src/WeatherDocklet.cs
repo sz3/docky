@@ -138,6 +138,7 @@ namespace WeatherDocklet
 				Status = WeatherDockletStatus.Normal;
 				State &= ~ItemState.Wait;
 				QueueRedraw ();
+				if (painter != null) painter.WeatherChanged ();
 			});
 		}
 		

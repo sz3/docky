@@ -104,6 +104,8 @@ namespace WeatherDocklet
 		/// </returns>
 		public static string DayShortName (string dow)
 		{
+			if (string.IsNullOrEmpty (dow)) return "";
+
 			DayOfWeek day = DayOfWeek.Sunday;
 
 			if (dow.Equals ("Mon"))
