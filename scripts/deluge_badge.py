@@ -37,23 +37,20 @@ except ImportError, e:
 
 ShowUploadRate = False
 
-def bytes2ratestr(bytes):
-	if bytes >= 1073741824:
-		scaled_bytes = round((bytes / 1073741824.0), 2)
-		unit = 'GB'
-	elif bytes >= 1048576:
-		scaled_bytes = round((bytes / 1048576.0), 1)
-		if scaled_bytes >= 100:
-			scaled_bytes = int(scaled_bytes)
-		unit = 'MB'
-	elif bytes >= 1024:
-		scaled_bytes = int(bytes / 1024)
-		unit = 'kB'
-	else:
-		scaled_bytes = round((bytes / 1024.0), 1)
-		unit = 'kB'
 
-	return str(scaled_bytes) + unit
+def bytes2ratestr(bytes):
+	for factor, suffix in (
+		(1024 ** 5, 'P'),
+		(1024 ** 4, 'T'), 
+		(1024 ** 3, 'G'), 
+		(1024 ** 2, 'M'), 
+		(1024 ** 1, 'K'),
+		(1024 ** 0, 'B')):
+		if bytes >= factor:
+			break
+	amount = int(bytes / factor)
+	return str(amount) + suffix
+	
 
 class DockyLifereaItem(DockyItem):
 	def __init__(self, path):
