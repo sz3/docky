@@ -821,6 +821,8 @@ namespace Docky.Interface
 			DragTracker.EnsureDragAndDropProxy ();
 			SetTooltipVisibility ();
 			AnimatedDraw ();
+			
+			DragTracker.doDragHover();
 		}
 
 		void HandleHiddenChanged (object sender, EventArgs e)

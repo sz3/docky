@@ -540,6 +540,16 @@ namespace Docky.Items
 		protected virtual void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
 		{
 		}
+		
+		public void DragHover()
+		{
+			try {
+				OnScrolled (ScrollDirection.Down, Gdk.ModifierType.None);
+			} catch (Exception e) {
+				Log<AbstractDockItem>.Error (e.Message);
+				Log<AbstractDockItem>.Debug (e.StackTrace);
+			}	
+		}
 		#endregion
 		
 		#region Buffer Handling

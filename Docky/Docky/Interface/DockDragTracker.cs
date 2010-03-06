@@ -47,6 +47,7 @@ namespace Docky.Interface
 		bool repo_mode = false;
 		bool drag_disabled = false;
 		int marker = 0;
+		uint drag_hover_timer;
 		
 		AbstractDockItem drag_item;
 		
@@ -482,6 +483,24 @@ namespace Docky.Interface
 				Owner.UpdateCollectionBuffer ();
 				Owner.Preferences.SyncPreferences ();
 			}
+			if(drag_data != null){ // don't want to work with a timerout if its not necessary
+				doDragHover();
+			}
+		}
+		
+		public void doDragHover(){
+			if(drag_hover_timer > 0){
+				GLib.Source.Remove(drag_hover_timer);	
+			}
+			drag_hover_timer = GLib.Timeout.Add(1500, delegate{
+				if(drag_data != null){// here because of a drag.
+					AbstractDockItem item = Owner.HoveredItem;
+					if (item != null)
+						item.DragHover();
+				    drag_hover_timer = 0;
+				}
+				return false;	
+			});
 		}
 		
 		AbstractDockItemProvider ProviderForItem (AbstractDockItem item)
