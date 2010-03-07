@@ -60,8 +60,7 @@ namespace Docky
 	
 	public partial class ConfigurationWindow : Gtk.Window
 	{
-		string AutoStartKey = "Hidden";
-		DesktopItem auto_start_item;
+
 		TileView HelpersTileview, DockletsTileview;
 		Widgets.SearchEntry HelperSearch, DockletSearch;
 		
@@ -109,8 +108,10 @@ namespace Docky
 			
 			if (Docky.Controller.Docks.Count () == 1)
 				ActiveDock = Docky.Controller.Docks.First ();
-			
-			start_with_computer_checkbutton.Active = IsAutoStartEnabled ();
+
+			start_with_computer_checkbutton.Sensitive = DesktopFile.Exists;
+			if (start_with_computer_checkbutton.Sensitive)
+				start_with_computer_checkbutton.Active = AutoStart;
 			
 			// setup docklets {
 			DockletSearch = new SearchEntry ();
@@ -296,66 +297,72 @@ namespace Docky
 			new_dock_button.Sensitive = (spotsAvailable == 0) ? false : true;
 		}
 
-		string AutoStartDir {
-			get { return System.IO.Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData), "autostart"); }
+		GLib.File DesktopFile
+		{
+			get { return FileFactory.NewForPath (System.IO.Path.Combine (AssemblyInfo.InstallData, "applications/docky.desktop")); }
 		}
 
-		string AutoStartFileName {
-			get { return System.IO.Path.Combine (AutoStartDir, "docky.desktop"); }
-		}
-		
-		DesktopItem AutoStartItem {
+		DesktopItem autostart_item;
+		bool AutoStart 
+		{
 			get {
-				if (auto_start_item != null)
-					return auto_start_item;
-				
-				GLib.File file = DockServices.Paths.AutoStartFile;
-				
-				try {
-					auto_start_item = DesktopItem.NewFromFile (file.Path, DesktopItemLoadFlags.NoTranslations);
-				} catch (GLib.GException loadException) {
-					Log<ConfigurationWindow>.Info ("Unable to load existing autostart file: {0}", loadException.Message);
-					Log<ConfigurationWindow>.Info ("Writing new autostart file to {0}", file.Path);
-					auto_start_item = DesktopItem.NewFromFile (System.IO.Path.Combine (AssemblyInfo.InstallData, "applications/docky.desktop"), DesktopItemLoadFlags.NoTranslations);
+				if (autostart_item == null) {
+					
+					GLib.File autostart_file = DockServices.Paths.AutoStartFile;
+					
 					try {
-						if (!file.Parent.Exists)
-							file.Parent.MakeDirectoryWithParents (null);						
+						autostart_item = DesktopItem.NewFromFile (autostart_file.Path, DesktopItemLoadFlags.NoTranslations);
+						if (autostart_item.AttrExists ("Hidden"))
+							return !String.Equals (autostart_item.GetString ("Hidden"), "true", StringComparison.OrdinalIgnoreCase);
 						
-						auto_start_item.Save (file.StringUri (), true);
-						auto_start_item.Location = file.StringUri ();
-					} catch (Exception e) {
-						Log<ConfigurationWindow>.Error ("Failed to write initial autostart file: {0}", e.Message);
+					} catch (GLib.GException loadException) {
+						Log<ConfigurationWindow>.Info ("Unable to load existing autostart file: {0}", loadException.Message);					
+						Log<SystemService>.Error ("Could not open autostart file {0}", autostart_file.Path);
+						
+						GLib.File desktop_file = DesktopFile;
+						
+						if (desktop_file.Exists) {
+							Log<ConfigurationWindow>.Info ("Writing new autostart file to {0}", autostart_file.Path);
+							autostart_item = DesktopItem.NewFromFile (desktop_file.Path, DesktopItemLoadFlags.NoTranslations);
+							try {
+								if (!autostart_file.Parent.Exists)
+									autostart_file.Parent.MakeDirectoryWithParents (null);						
+						
+								autostart_item.Save (autostart_file.StringUri (), true);
+								autostart_item.Location = autostart_file.StringUri ();
+								return true;
+								
+							} catch (Exception e) {
+								Log<ConfigurationWindow>.Error ("Failed to write initial autostart file: {0}", e.Message);
+							}
+						}
+						return false;
 					}
 				}
-				return auto_start_item;
+				if (autostart_item.AttrExists ("Hidden"))
+					return !String.Equals (autostart_item.GetString ("Hidden"), "true", StringComparison.OrdinalIgnoreCase);
+				else
+					return true;
 			}
-		}
-
-		bool IsAutoStartEnabled ()
-		{
-			if (!AutoStartItem.Exists ()) {
-				Log<SystemService>.Error ("Could not open autostart file {0}", DockServices.Paths.AutoStartFile.Path);
-			}
-			
-			if (AutoStartItem.AttrExists (AutoStartKey)) {
-				return !String.Equals (AutoStartItem.GetString (AutoStartKey), "true", StringComparison.OrdinalIgnoreCase);
-			}
-			return false;
-		}
-
-		void SetAutoStartEnabled (bool enabled)
-		{
-			AutoStartItem.SetBoolean (AutoStartKey, !enabled);
-			try {
-				AutoStartItem.Save (null, true);
-			} catch (Exception e) {
-				Log<SystemService>.Error ("Failed to update autostart file: {0}", e.Message);
+			set {
+				if (autostart_item == null) {
+					// Initialize AutoStart
+					bool autostart = AutoStart;
+				}
+				if (autostart_item != null) {
+					autostart_item.SetBoolean ("Hidden", !value);
+					try {
+						autostart_item.Save (null, true);
+					} catch (Exception e) {
+						Log<SystemService>.Error ("Failed to update autostart file: {0}", e.Message);
+					}
+				}
 			}
 		}
 		
 		protected virtual void OnStartWithComputerCheckbuttonToggled (object sender, System.EventArgs e)
 		{
-			SetAutoStartEnabled (start_with_computer_checkbutton.Active);
+			AutoStart = start_with_computer_checkbutton.Active;
 		}
 
 		[GLib.ConnectBefore]
