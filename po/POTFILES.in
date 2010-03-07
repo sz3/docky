@@ -19,6 +19,7 @@ StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs
 StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs
 StandardPlugins/Clock/src/ClockDockItem.cs
 StandardPlugins/Clock/src/ClockThemeSelector.cs
+StandardPlugins/Desktop/src/DesktopDockItem.cs
 StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs
 StandardPlugins/GMail/src/GMailAtom.cs
 StandardPlugins/GMail/src/GMailConfigDialog.cs
