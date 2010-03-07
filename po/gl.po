@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-01-13 11:18+0100\n"
-"PO-Revision-Date: 2010-01-26 01:39+0000\n"
+"POT-Creation-Date: 2010-02-08 19:55-0600\n"
+"PO-Revision-Date: 2010-03-07 02:48+0000\n"
 "Last-Translator: Francisco Diéguez <Unknown>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-01-29 16:32+0000\n"
+"X-Launchpad-Export-Date: 2010-03-07 15:20+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:113
+#: ../Docky/Docky/ConfigurationWindow.cs:117
 msgid "Search Docklets..."
 msgstr "Buscar Docklets..."
 
@@ -26,34 +26,36 @@ msgstr "Buscar Docklets..."
 msgid "Search Helpers..."
 msgstr "Buscar axudantes..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:178
+#: ../Docky/Docky/ConfigurationWindow.cs:176
 msgid "Click on any dock to configure."
 msgstr "Prema en calquera dock para configurala"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:179
-msgid "Drag any dock to move it."
-msgstr "Arrastre calqueira dock para movela."
+#: ../Docky/Docky/ConfigurationWindow.cs:177
+msgid "Drag any dock to reposition."
+msgstr "Arrastre calquera dock para reposicionalo."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:259
+#: ../Docky/Docky/ConfigurationWindow.cs:246
 msgid "Delete the currently selected dock?"
 msgstr "Desexa eliminar a dock seleccionada actualmente?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:261
+#: ../Docky/Docky/ConfigurationWindow.cs:248
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
+"Se selecciona eliminar o dock, todas as configuracións\n"
+"para a dock eliminada perderanse permanentemente."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:276
+#: ../Docky/Docky/ConfigurationWindow.cs:263
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:400
 msgid "_Delete Dock"
 msgstr "_Eliminar dock"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:397
+#: ../Docky/Docky/ConfigurationWindow.cs:373
 msgid "_Select"
 msgstr "_Seleccionar"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:400
+#: ../Docky/Docky/ConfigurationWindow.cs:376
 msgid ".tar Archives"
 msgstr "Arquivos .tar"
 
@@ -76,7 +78,7 @@ msgstr "Autor"
 msgid "Settings"
 msgstr "Configuración"
 
-#: ../Docky/Docky/Docky.cs:107
+#: ../Docky/Docky/Docky.cs:98
 msgid ""
 "Docky requires compositing to work properly. Please enable compositing and "
 "restart docky."
@@ -113,39 +115,44 @@ msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
 msgstr ""
+"Causa que os lanzadores que actualmente xestionan máis dunha xanela teñan un "
+"indicador adicional debaixo deles."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:333
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
+"Cando está estabelecido, as xanelas que non teñen lanzadores nun dock se "
+"engada á dock."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:644
+#: ../Docky/Docky/Interface/DockPreferences.cs:679
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
+"<i>Non ocultar nunca; as xanelas maximizadas non sobrepoñen á dock.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:647
+#: ../Docky/Docky/Interface/DockPreferences.cs:682
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Agóchase cando o rato non está sobre ela.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:650
+#: ../Docky/Docky/Interface/DockPreferences.cs:685
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Agóchase cando o dock obstrúe o aplicativo activo.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:653
+#: ../Docky/Docky/Interface/DockPreferences.cs:688
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Agóchase cando o dock obstrúe calquera xanela.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:363
+#: ../Docky/Docky/Interface/DockWindow.cs:369
 msgid "Drag to reposition"
 msgstr "Arrastrar para reposicionar"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:370
+#: ../Docky/Docky/Interface/DockWindow.cs:376
 msgid "Drop to open"
 msgstr "Soltar para abrir"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:374
-#: ../Docky/Docky/Interface/DockWindow.cs:388
+#: ../Docky/Docky/Interface/DockWindow.cs:380
+#: ../Docky/Docky/Interface/DockWindow.cs:394
 msgid "Drop to add to dock"
 msgstr "Soltar para engadir á dock"
 
@@ -236,7 +243,7 @@ msgstr "Esquivar xanela"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:97
 msgid "_Fade On Hide"
-msgstr ""
+msgstr "_Fundir ao agochar"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:141
 msgid "_Icon Size:"
@@ -255,8 +262,8 @@ msgid "_Panel Mode"
 msgstr "Modo _panel"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:192
-msgid "3D Background"
-msgstr "Fondo en 3D"
+msgid "3D Back_ground"
+msgstr "Fo_ndo en 3D"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:206
 msgid "_Manage Windows Without Launcher"
@@ -274,10 +281,6 @@ msgstr "<b>Docklets inactivos</b>"
 msgid "<b>Active Docklets</b>"
 msgstr "<b>Docklets activos</b>"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:91
-msgid "Icon"
-msgstr "Icona"
-
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:147
 msgid "New _Window"
 msgstr "Nova _xanela"
@@ -291,7 +294,7 @@ msgstr "_Abrir"
 msgid "Reset Color"
 msgstr "Restabelecer cor"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:354
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:356
 msgid "_Pin to Dock"
 msgstr "_Aclar á Dock"
 
@@ -388,23 +391,49 @@ msgstr "<i>Verificar e gardar a información da conta</i>"
 msgid "Don't have an account?"
 msgstr "Non ten unha conta?"
 
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:153
+msgid "No Battery Found"
+msgstr "Non se encontrou unha batería"
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:170
+#, csharp-format
+msgid "{0} hour"
+msgid_plural "{0} hours"
+msgstr[0] "{0} hora"
+msgstr[1] "{0} horas"
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:172
+#, csharp-format
+msgid "{0} minute"
+msgid_plural "{0} minutes"
+msgstr[0] "{0} minuto"
+msgstr[1] "{0} minutos"
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:174
+msgid "until charged "
+msgstr "até que estea cargada "
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:176
+msgid "remaining "
+msgstr "falta "
+
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:84
 msgid "Computer"
 msgstr "Computador"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:419
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:421
 msgid "Di_gital Clock"
 msgstr "Reloxo di_xital"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:425
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:427
 msgid "24-Hour _Clock"
 msgstr "_Reloxo de 24 horas"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:433
 msgid "Show _Date"
 msgstr "Mostrar _data"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:439
 msgid "Select _Theme"
 msgstr "Seleccionar _tema"
 
@@ -518,20 +547,20 @@ msgstr "E_xpulsar"
 msgid "_Unmount"
 msgstr "_Desmontar"
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:51
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:53
 msgid "Network Manager"
 msgstr "Xestor de rede"
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:90
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
 msgstr "Conectando..."
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:99
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:164
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:101
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:166
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:108
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
 msgid "Connected: {0}"
 msgstr "Conectado: {0}"
@@ -629,6 +658,9 @@ msgid ""
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
+"Se selecciona baleirar o lixo, todos os elementos nela\n"
+"perderanse de forma permanente. Teña en conta que\n"
+"vostede pode eliminalos de forma separada."
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:66
 msgid "_Weather Provider:"
@@ -676,6 +708,11 @@ msgid ""
 "website.  To find your code, look up your forecast on their site and the "
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
+"Os datos do tempo son fornecidos e ten os dereitos de autor The Weather "
+"Channel. Esta orixe require que as localizacións sexan especificadas co "
+"código postal de Estados Unidos ou un código único desde o seu sitio web. "
+"Para buscar o seu código, vote unha ollada á súa predición de tempo no seu "
+"sitio, o código está na URL despois de '/local/', semella como AAXX0000."
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
 msgid ""
@@ -849,3 +886,12 @@ msgstr "Entre lusco e fusco"
 
 #~ msgid "Add _Label"
 #~ msgstr "Engadir _etiqueta"
+
+#~ msgid "Drag any dock to move it."
+#~ msgstr "Arrastre calqueira dock para movela."
+
+#~ msgid "Icon"
+#~ msgstr "Icona"
+
+#~ msgid "3D Background"
+#~ msgstr "Fondo en 3D"
