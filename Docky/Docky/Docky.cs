@@ -52,7 +52,7 @@ namespace Docky
 		{
 			// output the version number & system info
 			Log.DisplayLevel = LogLevel.Info;
-			Log.Info ("Docky version: {0}", AssemblyInfo.VersionDetails);
+			Log.Info ("Docky version: {0} {1}", AssemblyInfo.DisplayVersion, AssemblyInfo.VersionDetails);
 			Log.Info ("Kernel version: {0}", System.Environment.OSVersion.Version);
 			Log.Info ("CLR version: {0}", System.Environment.Version);
 			
