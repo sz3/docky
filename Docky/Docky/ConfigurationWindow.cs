@@ -302,6 +302,7 @@ namespace Docky
 			get { return FileFactory.NewForPath (System.IO.Path.Combine (AssemblyInfo.InstallData, "applications/docky.desktop")); }
 		}
 
+		const string AutoStartKey = "Hidden";
 		DesktopItem autostart_item;
 		bool AutoStart 
 		{
@@ -312,8 +313,8 @@ namespace Docky
 					
 					try {
 						autostart_item = DesktopItem.NewFromFile (autostart_file.Path, DesktopItemLoadFlags.NoTranslations);
-						if (autostart_item.AttrExists ("Hidden"))
-							return !String.Equals (autostart_item.GetString ("Hidden"), "true", StringComparison.OrdinalIgnoreCase);
+						if (autostart_item.AttrExists (AutoStartKey))
+							return !String.Equals (autostart_item.GetString (AutoStartKey), "true", StringComparison.OrdinalIgnoreCase);
 						
 					} catch (GLib.GException loadException) {
 						Log<ConfigurationWindow>.Info ("Unable to load existing autostart file: {0}", loadException.Message);					
@@ -339,8 +340,8 @@ namespace Docky
 						return false;
 					}
 				}
-				if (autostart_item.AttrExists ("Hidden"))
-					return !String.Equals (autostart_item.GetString ("Hidden"), "true", StringComparison.OrdinalIgnoreCase);
+				if (autostart_item.AttrExists (AutoStartKey))
+					return !String.Equals (autostart_item.GetString (AutoStartKey), "true", StringComparison.OrdinalIgnoreCase);
 				else
 					return true;
 			}
@@ -350,7 +351,7 @@ namespace Docky
 					bool autostart = AutoStart;
 				}
 				if (autostart_item != null) {
-					autostart_item.SetBoolean ("Hidden", !value);
+					autostart_item.SetBoolean (AutoStartKey, !value);
 					try {
 						autostart_item.Save (null, true);
 					} catch (Exception e) {

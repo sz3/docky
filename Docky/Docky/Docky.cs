@@ -144,14 +144,19 @@ namespace Docky
 				" BadChoice (https://launchpad.net/~guitarboy000)\n" +
 
 				"Chinese (Simplified)\n" +
-				" Chen Tao (https://edge.launchpad.net/~pro711)\n" +
-				" G.S.Alex (https://edge.launchpad.net/~g.s.alex)\n" +
-				" fighterlyt (https://edge.launchpad.net/~fighter-lyt)\n" +
-				" skatiger (https://edge.launchpad.net/~skatiger)\n" +
-				" 冯超 (https://edge.launchpad.net/~rainofchaos)\n" +
+				" Chen Tao (https://launchpad.net/~pro711)\n" +
+				" G.S.Alex (https://launchpad.net/~g.s.alex)\n" +
+				" fighterlyt (https://launchpad.net/~fighter-lyt)\n" +
+				" skatiger (https://launchpad.net/~skatiger)\n" +
+				" 冯超 (https://launchpad.net/~rainofchaos)\n" +
 
 				"Croatian\n" +
 				" zekopeko (https://launchpad.net/~zekopeko)\n" +
+
+				"English (United Kingdom)\n" +
+				" Daniel Bell (https://launchpad.net/~danielbell)\n" +
+				" Joel Auterson (https://launchpad.net/~joel-auterson)\n" +
+				" SteVe Cook (https://launchpad.net/~yorvyk)\n" +
 
 				"French\n" +
 				" Hugo M. (https://launchpad.net/~spirit-power)\n" +
@@ -171,6 +176,9 @@ namespace Docky
 				" fiction (https://launchpad.net/~moradin-web)\n" +
 				" pheder (https://launchpad.net/~pheder)\n" +
 				" tai (https://launchpad.net/~agent00tai)\n" +
+
+				"Hindi\n" +
+				" Bilal Akhtar (https://launchpad.net/~bilalakhtar96)\n" +
 
 				"Hungarian\n" +
 				" Bognár András (https://launchpad.net/~bognarandras)\n" +
