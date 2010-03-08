@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-02-08 19:55-0600\n"
+"POT-Creation-Date: 2010-03-08 14:52+0100\n"
 "PO-Revision-Date: 2010-02-26 23:47+0000\n"
 "Last-Translator: NewPlayer <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -15,30 +15,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-03-07 15:20+0000\n"
+"X-Launchpad-Export-Date: 2010-03-08 15:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:117
+#: ../Docky/Docky/ConfigurationWindow.cs:118
 msgid "Search Docklets..."
 msgstr "Dockletek keresése…"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:132
+#: ../Docky/Docky/ConfigurationWindow.cs:133
 msgid "Search Helpers..."
 msgstr "Segédek keresése…"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:176
+#: ../Docky/Docky/ConfigurationWindow.cs:177
 msgid "Click on any dock to configure."
 msgstr "A beállításokhoz kattintson valamelyik dokkra."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:177
+#: ../Docky/Docky/ConfigurationWindow.cs:178
 msgid "Drag any dock to reposition."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:246
+#: ../Docky/Docky/ConfigurationWindow.cs:247
 msgid "Delete the currently selected dock?"
 msgstr "Törli a jelenleg kijelőlt dokkot?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:248
+#: ../Docky/Docky/ConfigurationWindow.cs:249
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -46,16 +46,16 @@ msgstr ""
 "Ha a dokk törlését választja, minden rá\n"
 "vonatkozó beállítás el fog veszni."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:263
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:400
+#: ../Docky/Docky/ConfigurationWindow.cs:264
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:392
 msgid "_Delete Dock"
 msgstr "_Dokk törlése"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:373
+#: ../Docky/Docky/ConfigurationWindow.cs:381
 msgid "_Select"
 msgstr "_Kiválasztás"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:376
+#: ../Docky/Docky/ConfigurationWindow.cs:384
 msgid ".tar Archives"
 msgstr ".tar archívumok"
 
@@ -110,32 +110,32 @@ msgstr "Fut"
 msgid "Stopped"
 msgstr "Leállítva"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:331
+#: ../Docky/Docky/Interface/DockPreferences.cs:329
 msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:333
+#: ../Docky/Docky/Interface/DockPreferences.cs:331
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:679
+#: ../Docky/Docky/Interface/DockPreferences.cs:598
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 "<i>Soha nem rejti el; a teljes méretű ablakok nem fedik el a dokkot.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:682
+#: ../Docky/Docky/Interface/DockPreferences.cs:601
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Elrejti, amikor az egér nincs fölötte.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:685
+#: ../Docky/Docky/Interface/DockPreferences.cs:604
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Elrejti, amint a dokk elfedi az aktív alkalmazást.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:688
+#: ../Docky/Docky/Interface/DockPreferences.cs:607
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Elrejti, amint a dokk elfedi bármely ablakot.</i>"
 
@@ -154,7 +154,7 @@ msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:93
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:230
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "_Settings"
 msgstr "_Beállítások"
 
@@ -166,116 +166,108 @@ msgstr "_Névjegy"
 msgid "_Quit Docky"
 msgstr "_Kilépés a Docky-ból"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:92
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:84
 msgid "Docky Configuration"
 msgstr "Docky beállításai"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:137
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:129
 msgid "_Start When Computer Starts"
 msgstr "_Indítás a számítógép indulásakor"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:153
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:145
 msgid "_Theme:"
 msgstr "_Téma:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:177
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:169
 msgid "<b>General Options</b>"
 msgstr "<b>Általános beállítások</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:197
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:189
 msgid "<b>Dock Configuration</b>"
 msgstr "<b>Dokkbeállítások</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:211
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:203
 msgid "Docks"
 msgstr "Dokkok"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:232
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:284
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:224
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:276
 msgid "All"
 msgstr "Összes"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:233
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:285
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:225
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:277
 msgid "Enabled"
 msgstr "Engedélyezett"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:234
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:286
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:226
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:278
 msgid "Disabled"
 msgstr "Kikapcsolt"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:255
 msgid "Docklets"
 msgstr "Dockletek"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:310
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:302
 msgid "_Install"
 msgstr "_Telepítés"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:342
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:334
 msgid "Helpers"
 msgstr "Segédek"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:373
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:365
 msgid "_New Dock"
 msgstr "_Új dokk"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:52
 msgid "None"
 msgstr "Nincs"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:81
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:53
 msgid "Autohide"
 msgstr "Automatikus elrejtés"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:82
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:54
 msgid "Intellihide"
 msgstr "Intelligens elrejtés"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:83
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:55
 msgid "Window Dodge"
 msgstr "Ablak dokkolása"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:97
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:69
 msgid "_Fade On Hide"
 msgstr "Áttűnés _elrejtéskor"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:141
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:113
 msgid "_Icon Size:"
 msgstr "_Ikonméret:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:154
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:126
 msgid "_Hiding:"
 msgstr "_Elrejtés:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:136
 msgid "Indicat_e Multiple Windows"
 msgstr "_Több azonos ablak jelzése"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:150
 msgid "_Panel Mode"
 msgstr "_Panel mód"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:192
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
 msgid "3D Back_ground"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:206
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
 msgid "_Manage Windows Without Launcher"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:221
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:193
 msgid "_Zoom:"
 msgstr "_Nagyítás:"
-
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:288
-msgid "<b>Inactive Docklets</b>"
-msgstr "<b>Inaktív dockletek</b>"
-
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:296
-msgid "<b>Active Docklets</b>"
-msgstr "<b>Aktív dockletek</b>"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:147
 msgid "New _Window"
@@ -387,29 +379,29 @@ msgstr "<i>Felhasználói fiók információinak ellenőrzése és mentése</i>"
 msgid "Don't have an account?"
 msgstr "Nincs fiókja?"
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:153
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:156
 msgid "No Battery Found"
 msgstr ""
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:170
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:173
 #, csharp-format
 msgid "{0} hour"
 msgid_plural "{0} hours"
 msgstr[0] "{0} óra"
 msgstr[1] "{0} óra"
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:172
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:175
 #, csharp-format
 msgid "{0} minute"
 msgid_plural "{0} minutes"
 msgstr[0] "{0} perc"
 msgstr[1] "{0} perc"
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:174
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:177
 msgid "until charged "
 msgstr ""
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:176
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:179
 msgid "remaining "
 msgstr ""
 
@@ -440,6 +432,10 @@ msgstr "Témák"
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
 msgid "Theme"
 msgstr "Téma"
+
+#: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:44
+msgid "Show Desktop"
+msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
 msgid "_Add Label"
@@ -729,15 +725,15 @@ msgstr "Időjárás beállításai"
 msgid "Fetching data..."
 msgstr "Adatok lekérése…"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:216
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:217
 msgid "Radar _Map"
 msgstr "Ra_dartérkép"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:221
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:222
 msgid "Forecasts"
 msgstr "Előrejelzés"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:237
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:238
 msgid "Check _Weather"
 msgstr "Időjárás _ellenőrzése"
 
@@ -918,6 +914,12 @@ msgstr "Naplemente"
 
 #~ msgid "3D Background"
 #~ msgstr "3D Háttér"
+
+#~ msgid "<b>Active Docklets</b>"
+#~ msgstr "<b>Aktív dockletek</b>"
+
+#~ msgid "<b>Inactive Docklets</b>"
+#~ msgstr "<b>Inaktív dockletek</b>"
 
 #~ msgid "Drag any dock to move it."
 #~ msgstr "Húzza a dokkot a mozgatásához."
