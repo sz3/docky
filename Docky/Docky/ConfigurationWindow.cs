@@ -147,6 +147,8 @@ namespace Docky
 			};
 			// }
 			
+			SetupConfigAlignment();
+			
 			ShowAll ();
 		}
 		
