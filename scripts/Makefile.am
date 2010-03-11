@@ -3,6 +3,7 @@ scriptdir = $(datadir)/docky/helpers
 dist_script_SCRIPTS = \
 	banshee_control.py	\
 	deluge_badge.py		\
+	emesene_control.py	\
 	gajim_badge.py		\
 	gtg_menus.py		\
 	liferea_badge.py	\
