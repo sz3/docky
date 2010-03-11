@@ -135,6 +135,7 @@ namespace WeatherDocklet
 			ResetTimer (true);
 		}
 		
+		static uint reload_timer = 0;
 		/// <summary>
 		/// Resets the weather timer and immediately reloads if needed.
 		/// </summary>
@@ -149,10 +150,24 @@ namespace WeatherDocklet
 			if (CurrentLocation == "" || !DockServices.System.NetworkConnected)
 				return;
 
-			if (reloadImmediately)
-				Weather.ReloadWeatherData ();
-			
-			UpdateTimer = GLib.Timeout.Add (WeatherPreferences.Timeout * 60 * 1000, () => { if (DockServices.System.NetworkConnected) Weather.ReloadWeatherData (); return true; });
+			if (reloadImmediately && DockServices.System.NetworkConnected) 
+			{
+				//FIXME This is more a workaround than a fix
+				//Limit a reload triggering to every 2s, within this timespan the trigger is renewed
+				if (reload_timer > 0)
+					GLib.Source.Remove (reload_timer);
+				reload_timer = GLib.Timeout.Add ( 2000, () => {
+					Weather.ReloadWeatherData ();
+					reload_timer = 0;
+					return false;
+				});
+			}
+				
+			UpdateTimer = GLib.Timeout.Add (WeatherPreferences.Timeout * 60 * 1000, () => {
+				if (DockServices.System.NetworkConnected) 
+					Weather.ReloadWeatherData (); 
+				return true; 
+			});
 		}
 		
 		/// <summary>
@@ -202,7 +217,7 @@ namespace WeatherDocklet
 		/// </param>
 		static void HandleTimeoutChanged (object sender, EventArgs e)
 		{
-			ResetTimer ();
+			ResetTimer (false);
 		}
 		
 		/// <summary>
