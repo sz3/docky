@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #  
-#  Copyright (C) 2010 Tom Blacknight, Rico Tzschichholz
+#  Copyright (C) 2010 Tom Cowell, Rico Tzschichholz
 # 
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
