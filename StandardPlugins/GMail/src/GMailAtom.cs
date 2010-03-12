@@ -88,6 +88,8 @@ namespace GMail
 				return UnreadCount > 0 && State != GMailState.Error;
 			}
 		}
+
+		bool IsChecking { get; set; }
 		
 		public GMailAtom (string label)
 		{
@@ -130,21 +132,22 @@ namespace GMail
 		
 		public void ResetTimer ()
 		{
-			StopTimer ();
+			if (UpdateTimer > 0) {
+				GLib.Source.Remove (UpdateTimer);
+				UpdateTimer = 0;
+			}
 			
 			if (!DockServices.System.NetworkConnected)
 				return;
 			
-			CheckGMail ();
+			if (!IsChecking)
+				CheckGMail ();
 			
-			UpdateTimer = GLib.Timeout.Add (GMailPreferences.RefreshRate * 60 * 1000, () => { if (DockServices.System.NetworkConnected) CheckGMail (); return true; });
-		}
-		
-		public void StopTimer ()
-		{
-			if (UpdateTimer > 0)
-				GLib.Source.Remove (UpdateTimer);
-			UpdateTimer = 0;
+			UpdateTimer = GLib.Timeout.Add (GMailPreferences.RefreshRate * 60 * 1000, () => { 
+				if (!IsChecking && DockServices.System.NetworkConnected) 
+					CheckGMail (); 
+				return true; 
+			});
 		}
 		
 		public string CurrentLabel { get; protected set; }
@@ -285,6 +288,7 @@ namespace GMail
 		
 		void OnGMailChecked ()
 		{
+			IsChecking = false;
 			State = GMailState.Normal;
 			if (GMailChecked != null)
 				GMailChecked (null, EventArgs.Empty);
@@ -292,6 +296,7 @@ namespace GMail
 		
 		void OnGMailChecking ()
 		{
+			IsChecking = true;
 			if (State != GMailState.ManualReload)
 				State = GMailState.Reloading;
 			if (GMailChecking != null)
@@ -300,6 +305,7 @@ namespace GMail
 		
 		void OnGMailFailed (string error)
 		{
+			IsChecking = false;
 			State = GMailState.Error;
 			if (GMailFailed != null)
 				GMailFailed (null, new GMailErrorArgs (error));
