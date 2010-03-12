@@ -137,7 +137,6 @@ namespace WeatherDocklet
 			ResetTimer (true);
 		}
 		
-		static uint reload_timer = 0;
 		/// <summary>
 		/// Resets the weather timer and immediately reloads if needed.
 		/// </summary>
@@ -154,8 +153,10 @@ namespace WeatherDocklet
 			if (CurrentLocation == "" || !DockServices.System.NetworkConnected)
 				return;
 
-			if (reloadImmediately && !IsReloading) 
+			if (reloadImmediately && !IsReloading) {
+				IsReloading = true;
 				Weather.ReloadWeatherData ();
+			}
 				
 			UpdateTimer = GLib.Timeout.Add (WeatherPreferences.Timeout * 60 * 1000, () => {
 				if (!IsReloading && DockServices.System.NetworkConnected) 
