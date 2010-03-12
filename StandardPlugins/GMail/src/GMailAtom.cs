@@ -140,8 +140,10 @@ namespace GMail
 			if (!DockServices.System.NetworkConnected)
 				return;
 			
-			if (!IsChecking)
+			if (!IsChecking) {
+				IsChecking = true;
 				CheckGMail ();
+			}
 			
 			UpdateTimer = GLib.Timeout.Add (GMailPreferences.RefreshRate * 60 * 1000, () => { 
 				if (!IsChecking && DockServices.System.NetworkConnected) 
