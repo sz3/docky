@@ -166,6 +166,7 @@ namespace GMail
 				
 				Log<GMailAtom>.Info ("Fetching Atom feed: " + url);
 				HttpWebRequest request = (HttpWebRequest)WebRequest.Create (url);
+				request.Timeout = 60000;
 				request.UserAgent = @"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.10) Gecko/2009042523 Ubuntu/9.04 (jaunty) Firefox/3.0.10";
 				request.Credentials = new NetworkCredential (username, password);
 				// FIXME: remove when ServicePointManager.ServerCertificateValidationCallback implemented in mono
@@ -202,7 +203,7 @@ namespace GMail
 					
 					Log<GMailAtom>.Info ("Fetching Atom feed: " + url);
 					HttpWebRequest request = (HttpWebRequest)WebRequest.Create (url);
-					request.Timeout = 15000;
+					request.Timeout = 60000;
 					request.UserAgent = @"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.10) Gecko/2009042523 Ubuntu/9.04 (jaunty) Firefox/3.0.10";
 					request.Credentials = new NetworkCredential (GMailPreferences.User, GMailPreferences.Password);
 					// remove when ServicePointManager.ServerCertificateValidationCallback implemented in mono
