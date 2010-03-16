@@ -106,7 +106,7 @@ namespace Mounter
 		// determine if the mount should be handled or not
 		bool IsTrash (Mount m)
 		{			
-			return m == null || (m.Volume == null && m.Root.Path.Contains ("cdda"));
+			return m == null || m.Root == null || m.Root.Path = null || (m.Volume == null && m.Root.Path.Contains ("cdda"));
 		}
 		
 		public override bool ItemCanBeRemoved (AbstractDockItem item)
