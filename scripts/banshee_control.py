@@ -196,7 +196,10 @@ class DockyBansheeItem(DockyItem):
 		if not self.player or not artwork_id:
 			return ""
 
-		arturl = os.path.expanduser("~/.cache/album-art/%s.jpg" % artwork_id)
+		arturl = os.path.expanduser("~/.cache/media-art/%s.jpg" % artwork_id)
+		if not os.path.isfile(arturl):
+			arturl = os.path.expanduser("~/.cache/album-art/%s.jpg" % artwork_id)
+
 		return arturl
 
 	def get_album_art_overlay_path(self, picfile):
