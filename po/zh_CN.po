@@ -8,56 +8,56 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-08 14:52+0100\n"
-"PO-Revision-Date: 2010-03-06 02:55+0000\n"
+"PO-Revision-Date: 2010-03-09 13:49+0000\n"
 "Last-Translator: Xhacker Liu <liu.dongyuan@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-03-08 15:12+0000\n"
+"X-Launchpad-Export-Date: 2010-03-17 07:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:118
+#: ../Docky/Docky/ConfigurationWindow.cs:117
 msgid "Search Docklets..."
 msgstr "搜索小部件..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:133
+#: ../Docky/Docky/ConfigurationWindow.cs:132
 msgid "Search Helpers..."
-msgstr "搜索辅助组件 ..."
+msgstr "搜索帮助 ..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:177
+#: ../Docky/Docky/ConfigurationWindow.cs:178
 msgid "Click on any dock to configure."
 msgstr "点击任一面板进行设置"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:178
+#: ../Docky/Docky/ConfigurationWindow.cs:179
 msgid "Drag any dock to reposition."
 msgstr "用拖拽移动位置。"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:247
+#: ../Docky/Docky/ConfigurationWindow.cs:248
 msgid "Delete the currently selected dock?"
-msgstr "删除当前选中的 dock？"
+msgstr "删除当前选中的面板"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:249
+#: ../Docky/Docky/ConfigurationWindow.cs:250
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
-"如果您选择删除 dock，那么这个 dock 的所有配置\n"
+"如果您选择删除面板，那么该面板的所有配置将\n"
 "会永久消失。"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:264
+#: ../Docky/Docky/ConfigurationWindow.cs:265
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:392
 msgid "_Delete Dock"
-msgstr "删除 dock (_D)"
+msgstr "删除面板(_D)"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:381
+#: ../Docky/Docky/ConfigurationWindow.cs:375
 msgid "_Select"
 msgstr "选择(_S)"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:384
+#: ../Docky/Docky/ConfigurationWindow.cs:378
 msgid ".tar Archives"
-msgstr ".tar 归档文件"
+msgstr ".tar 格式的归档文件"
 
 #: ../Docky/Docky/DockletTile.cs:46
 #: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:220
@@ -204,7 +204,7 @@ msgstr "已禁用"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:255
 msgid "Docklets"
-msgstr "小部件"
+msgstr "Docklets"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:302
 msgid "_Install"
@@ -236,7 +236,7 @@ msgstr "窗口闪避"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:69
 msgid "_Fade On Hide"
-msgstr "淡出式隐藏(_F)"
+msgstr "淡出式隐藏"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:113
 msgid "_Icon Size:"
@@ -248,7 +248,7 @@ msgstr "隐藏(_H)："
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:136
 msgid "Indicat_e Multiple Windows"
-msgstr "表示多重窗口(_E)"
+msgstr "表示多重窗口(_e)"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:150
 msgid "_Panel Mode"
@@ -285,7 +285,7 @@ msgstr "锁定到 Dock (_P)"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:186
 msgid "Not enough free space on destination."
-msgstr "目标处没有足够的空间。"
+msgstr "目标处没有足够的空余空间。"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:198
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:200
@@ -304,7 +304,7 @@ msgstr "正在复制"
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:225
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:226
 msgid "Error performing drop action"
-msgstr "执行拖放操作出错"
+msgstr "执行拖放动作出错"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:248
 msgid "Open"
@@ -312,7 +312,7 @@ msgstr "打开"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:249
 msgid "Open Containing Folder"
-msgstr "打开所在的文件夹"
+msgstr "打开其所在的文件夹"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:244
 msgid "Unma_ximize"
@@ -398,7 +398,7 @@ msgstr "直到充电完成 "
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:179
 msgid "remaining "
-msgstr "剩余 "
+msgstr "重命名 "
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:84
 msgid "Computer"
@@ -406,7 +406,7 @@ msgstr "计算机"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:421
 msgid "Di_gital Clock"
-msgstr "数字时钟(_G)"
+msgstr "数字时钟 (_G)"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:427
 msgid "24-Hour _Clock"
@@ -445,33 +445,33 @@ msgstr "全部检查(_v)"
 msgid "minutes"
 msgstr "分钟"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:183
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:189
 msgid "Username or Password not set"
 msgstr "用户名或密码未设置"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:233
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:240
 msgid "(no subject)"
 msgstr "(无主题)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:251
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:258
 #, csharp-format
 msgid "From: {0}"
-msgstr "来自：{0}"
+msgstr "来自:{0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:262
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:266
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:269
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 msgid "Feed Error"
-msgstr "Feed 错误"
+msgstr "源错误"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:271
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:278
 msgid "Invalid Username"
 msgstr "用户名无效"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:275
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:282
 msgid "Network Error"
 msgstr "网络错误"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:280
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 msgid "General Error"
 msgstr "一般错误"
 
@@ -491,7 +491,7 @@ msgstr[0] "{0} 封未读邮件"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:103
 msgid "Checking mail..."
-msgstr "正在检查邮件..."
+msgstr "正在检查邮件 ..."
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:188
 msgid "_View "
@@ -636,7 +636,7 @@ msgstr "清空回收站(_T)"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
 msgid "Empty all of the items from the trash?"
-msgstr "删除回收站里的所有项目？"
+msgstr "确定清空回收站中的全部项目吗?"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:186
 msgid ""
@@ -649,7 +649,7 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:66
 msgid "_Weather Provider:"
-msgstr "天气信息提供者(_W)："
+msgstr "天气信息提供(_W)："
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:106
 msgid "My _Locations"
@@ -681,7 +681,7 @@ msgstr "网络错误： "
 msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
-msgstr "由 Google 提供天气信息。这个来源要求位置信息表示为美国区号或者英文的“城市, 国家”。"
+msgstr "由 Google 提供天气信息。这个来源要求位置信息表示为区号或者英文的\"城市,国家\"。"
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
@@ -691,15 +691,14 @@ msgid ""
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
 "由 The Weather Channel "
-"提供天气信息，并保留所有权利。这个来源要求位置信息表示为美国区号或者从网站上获取的唯一编号。在它们的网站上查询您当地的天气信息，URL地址中“/local"
-"/”后面的部分就是您的地址代码。例如 AAXX0000 。"
+"提供天气信息，并保留所有权利。这个来源要求位置信息表示为区号或者从网站上获取的唯一编号。在它们的网站上查询您当地的天气信息，URL地址中 "
+"'/local/' 后面的部分就是您的地址代码。例如 AAXX0000 。"
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
-msgstr ""
-"由  Weather Underground 提供天气信息，并保留所有权利。这个来源要求位置信息表示为美国区号或者英文的“城市, 国家”。"
+msgstr "由  Weather Underground 提供天气信息，并保留所有权利。这个来源要求位置信息表示为区号或者英文的\"城市,国家\"。"
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
@@ -707,7 +706,7 @@ msgstr "无搜索结果。"
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
-msgstr "天气设置"
+msgstr "天气配置"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
@@ -761,3 +760,9 @@ msgstr "日出"
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:321
 msgid "Sunset"
 msgstr "日落"
+
+#~ msgid "<b>Active Docklets</b>"
+#~ msgstr "<b>已激活的停靠组件</b>"
+
+#~ msgid "<b>Inactive Docklets</b>"
+#~ msgstr "<b>未激活的停靠组件</b>"

@@ -8,52 +8,52 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-08 14:52+0100\n"
-"PO-Revision-Date: 2010-02-20 16:27+0000\n"
+"PO-Revision-Date: 2010-03-09 15:03+0000\n"
 "Last-Translator: Cedna <sptcedna@gmail.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-03-08 15:12+0000\n"
+"X-Launchpad-Export-Date: 2010-03-17 07:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:118
+#: ../Docky/Docky/ConfigurationWindow.cs:117
 msgid "Search Docklets..."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:133
+#: ../Docky/Docky/ConfigurationWindow.cs:132
 msgid "Search Helpers..."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:177
+#: ../Docky/Docky/ConfigurationWindow.cs:178
 msgid "Click on any dock to configure."
 msgstr "설정하고 싶은 dock를 클릭해 주십시오."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:178
+#: ../Docky/Docky/ConfigurationWindow.cs:179
 msgid "Drag any dock to reposition."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:247
+#: ../Docky/Docky/ConfigurationWindow.cs:248
 msgid "Delete the currently selected dock?"
 msgstr "현재 선택된 dock를 삭제 하시겠습니까?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:249
+#: ../Docky/Docky/ConfigurationWindow.cs:250
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr "만약 삭제를 선택 한다면, 해당되는 삭제할 dock의 모든 설정을 잃게 될 것 입니다."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:264
+#: ../Docky/Docky/ConfigurationWindow.cs:265
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:392
 msgid "_Delete Dock"
 msgstr "삭제 (_D)"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:381
+#: ../Docky/Docky/ConfigurationWindow.cs:375
 msgid "_Select"
 msgstr "선택 (_S)"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:384
+#: ../Docky/Docky/ConfigurationWindow.cs:378
 msgid ".tar Archives"
 msgstr ".tar 압축 파일"
 
@@ -81,7 +81,8 @@ msgid ""
 "Docky requires compositing to work properly. Please enable compositing and "
 "restart docky."
 msgstr ""
-"Docky가 동작하기 위해선 opengl 컴포지팅이 필요합니다. 창 관리자의 컴포지팅을 활성화 한 뒤 다시 Docky를 실핼 시키십시오."
+"Docky는 동작하기 위해서 opengl 화면 효과가 가능한 창 관리자를 필요로 합니다. 창 관리자의 컴포지팅 기능을 활성화 한 후 "
+"Docky를 다시 실행하길 부탁드립니다."
 
 #: ../Docky/Docky/HelperTile.cs:41
 msgid "_Enable"
@@ -168,7 +169,7 @@ msgstr "Docky 설정"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:129
 msgid "_Start When Computer Starts"
-msgstr "부팅 시 Docky 자동 실행 (_S)"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:145
 msgid "_Theme:"
@@ -446,33 +447,33 @@ msgstr ""
 msgid "minutes"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:183
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:189
 msgid "Username or Password not set"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:233
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:240
 msgid "(no subject)"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:251
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:258
 #, csharp-format
 msgid "From: {0}"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:262
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:266
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:269
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 msgid "Feed Error"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:271
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:278
 msgid "Invalid Username"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:275
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:282
 msgid "Network Error"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:280
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 msgid "General Error"
 msgstr ""
 

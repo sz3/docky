@@ -8,37 +8,37 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-08 14:52+0100\n"
-"PO-Revision-Date: 2010-01-13 18:09+0000\n"
+"PO-Revision-Date: 2010-03-09 13:23+0000\n"
 "Last-Translator: Sebastián Porta <sebastianporta@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-03-08 15:12+0000\n"
+"X-Launchpad-Export-Date: 2010-03-17 07:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:118
+#: ../Docky/Docky/ConfigurationWindow.cs:117
 msgid "Search Docklets..."
 msgstr "Buscar Docklets..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:133
+#: ../Docky/Docky/ConfigurationWindow.cs:132
 msgid "Search Helpers..."
 msgstr "Buscar Ayudantes..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:177
+#: ../Docky/Docky/ConfigurationWindow.cs:178
 msgid "Click on any dock to configure."
 msgstr "Selecciona cualquier dock para configurar."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:178
+#: ../Docky/Docky/ConfigurationWindow.cs:179
 msgid "Drag any dock to reposition."
-msgstr ""
+msgstr "Arrastra cualquier dock para reposicionarlo"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:247
+#: ../Docky/Docky/ConfigurationWindow.cs:248
 msgid "Delete the currently selected dock?"
 msgstr "¿Borrar el dock actualmente seleccionado?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:249
+#: ../Docky/Docky/ConfigurationWindow.cs:250
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -46,16 +46,16 @@ msgstr ""
 "Si eliges borrar el dock, todas las configuraciones\n"
 "para el dock eliminado se perderán permanentemente."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:264
+#: ../Docky/Docky/ConfigurationWindow.cs:265
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:392
 msgid "_Delete Dock"
 msgstr "_Borrar Dock"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:381
+#: ../Docky/Docky/ConfigurationWindow.cs:375
 msgid "_Select"
 msgstr "_Seleccionar"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:384
+#: ../Docky/Docky/ConfigurationWindow.cs:378
 msgid ".tar Archives"
 msgstr "Archivos .tar"
 
@@ -210,7 +210,7 @@ msgstr "Desactivado"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:255
 msgid "Docklets"
-msgstr ""
+msgstr "Docklets"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:302
 msgid "_Install"
@@ -262,7 +262,7 @@ msgstr "Modo _Panel"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
 msgid "3D Back_ground"
-msgstr ""
+msgstr "Fondo_3D"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
 msgid "_Manage Windows Without Launcher"
@@ -384,7 +384,7 @@ msgstr "¿No tiene una cuenta?"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:156
 msgid "No Battery Found"
-msgstr ""
+msgstr "No Se Encontró Batería"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:173
 #, csharp-format
@@ -438,7 +438,7 @@ msgstr "Tema"
 
 #: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:44
 msgid "Show Desktop"
-msgstr ""
+msgstr "Mostrar el escritorio"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
 msgid "_Add Label"
@@ -453,33 +453,33 @@ msgstr "Comprobar _Cada"
 msgid "minutes"
 msgstr "minutos"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:183
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:189
 msgid "Username or Password not set"
 msgstr "Nombre de Usuario o Contraseña no configurados"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:233
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:240
 msgid "(no subject)"
 msgstr "(sin asunto)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:251
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:258
 #, csharp-format
 msgid "From: {0}"
 msgstr "De: {0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:262
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:266
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:269
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 msgid "Feed Error"
 msgstr "Error de Suministro"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:271
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:278
 msgid "Invalid Username"
 msgstr "Nombre de Usuario Inválido"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:275
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:282
 msgid "Network Error"
 msgstr "Error de Red"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:280
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 msgid "General Error"
 msgstr "Error General"
 

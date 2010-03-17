@@ -129,6 +129,9 @@ namespace Docky
 				"Basque\n" +
 				" Ibai Oihanguren (https://launchpad.net/~ibai-oihanguren)\n" +
 				
+				"Bengali\n" +
+				" Scio (https://launchpad.net/~scio)\n" +
+
 				"Brazilian Portuguese\n" +
 				" André Gondim (https://launchpad.net/~andregondim)\n" +
 				" Fabio S Monteiro (https://launchpad.net/~fabiomonteiro)\n" +
@@ -136,9 +139,6 @@ namespace Docky
 				" Lindeval (https://launchpad.net/~lindeval)\n" +
 				" Thiago Bellini (https://launchpad.net/~roxthiaguin)\n" +
 				" Victor Mello (https://launchpad.net/~victormmello)\n" +
-
-				"Bengali\n" +
-				" Scio (https://launchpad.net/~scio)\n" +
 
 				"Catalan\n" +
 				" BadChoice (https://launchpad.net/~guitarboy000)\n" +
@@ -177,6 +177,9 @@ namespace Docky
 				" pheder (https://launchpad.net/~pheder)\n" +
 				" tai (https://launchpad.net/~agent00tai)\n" +
 
+				"Hebrew\n" +
+				" IsraeliHawk (https://launchpad.net/~uri.shabtay)\n" +
+
 				"Hindi\n" +
 				" Bilal Akhtar (https://launchpad.net/~bilalakhtar96)\n" +
 
@@ -188,14 +191,17 @@ namespace Docky
 				"Icelandic\n" +
 				" Baldur (https://launchpad.net/~baldurpet)\n" +
 
+				"Indonesian\n" +
+				" Fakhrul Rijal (https://launchpad.net/~frijal)\n" +
+					
 				"Italian\n" +
 				" Blaster (https://launchpad.net/~dottorblaster)\n" +
 				" MastroPino (https://launchpad.net/~mastropino)\n" +
 				" Quizzlo (https://launchpad.net/~marcopaolone)\n" +
 
-				"Indonesian\n" +
-				" Fakhrul Rijal (https://launchpad.net/~frijal)\n" +
-					
+				"Korean\n" +
+				" Cedna (https://launchpad.net/~cedna)\n" +
+
 				"Polish\n" +
 				" 313 (https://launchpad.net/~tenotoja)\n" +
 				" Adrian Grzemski (https://launchpad.net/~adrian-grzemski)\n" +
@@ -208,7 +214,13 @@ namespace Docky
 				" Sebastián Porta (https://launchpad.net/~sebastianporta)\n" +
 
 				"Swedish\n" +
-				" Daniel Nylander (https://launchpad.net/~yeager)\n";
+				" Daniel Nylander (https://launchpad.net/~yeager)\n" +
+
+				"Turkish\n" +
+				" Yalçın Can (https://launchpad.net/~echza)\n" +
+
+				"Ukrainian\n" +
+				" naker.ua (https://launchpad.net/~naker-ua)\n";
 			
 			
 			about.ShowAll ();
