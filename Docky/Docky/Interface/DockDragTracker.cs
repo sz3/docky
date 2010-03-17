@@ -484,25 +484,25 @@ namespace Docky.Interface
 				Owner.UpdateCollectionBuffer ();
 				Owner.Preferences.SyncPreferences ();
 			}
-			if(drag_data != null){ // don't want to work with a timerout if its not necessary
-				doDragHover();
-			}
+			
+			doDragHover();
 		}
 		
-		public void doDragHover(){
-			if(drag_hover_timer > 0){
-				GLib.Source.Remove(drag_hover_timer);	
-			}
-			drag_hover_timer = GLib.Timeout.Add(1500, delegate{
-				if(drag_data != null){// here because of a drag.
+		private void doDragHover()
+		{
+			GLib.Source.Remove(drag_hover_timer);
+			if(drag_data != null){
+				drag_hover_timer = GLib.Timeout.Add(1500, delegate{
 					AbstractDockItem item = Owner.HoveredItem;
 					if (item != null)
-						item.DragHover();
-				    drag_hover_timer = 0;
-				}
-				return false;	
-			});
+						item.Scrolled(ScrollDirection.Down, Gdk.ModifierType.None);
+					// keep going to handle multiple applications of the same type, 
+					// if the drag is on and still hovering over an item.
+					return drag_data != null && item != null;
+				});
+			}
 		}
+			
 		
 		AbstractDockItemProvider ProviderForItem (AbstractDockItem item)
 		{
@@ -527,6 +527,9 @@ namespace Docky.Interface
 			}
 			
 			if (Owner.DockHovered) {
+				// this is done to do a DragHover when it so happens to be 
+				// the first time the cursor moves into the dock.
+				doDragHover();
 				if (proxy_window == null)
 					return;
 				proxy_window = null;
