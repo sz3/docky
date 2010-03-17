@@ -94,6 +94,7 @@ namespace RecentDocuments
 				
 				RecentDocs.AddRange (recent_items.Cast<Gtk.RecentInfo> ()
 				                     .Where (it => it.Exists ())
+									 .OrderByDescending (f => f.Modified)
 				                     .Take (NumRecentDocs)
 				                     .Select (f => FileDockItem.NewFromUri (f.Uri)));
 			}

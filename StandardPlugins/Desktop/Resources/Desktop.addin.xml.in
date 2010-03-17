@@ -1,12 +1,12 @@
 <Addin 
-	id="Trash"
+	id="Desktop"
 	namespace="Docky"
 	version="1.0"
 	isroot="false"
 	defaultEnabled="false"
-	name="Trash"
-	description="Have a look at your trash!"
-	author="Chris Szikszoy, Robert Dyer"
+	name="Desktop"
+	description="Show Desktop Toggler"
+	author="Rico Tzschichholz"
 >
  
  	<Dependencies>
@@ -14,11 +14,11 @@
 	</Dependencies>
  
 	<Runtime>
-		<Import assembly="Trash.dll"/>
+		<Import assembly="Desktop.dll"/>
 	</Runtime>
 	
 	<Extension path="/Docky/ItemProvider">
-		<ItemProvider type="Trash.TrashItemProvider" />	
+		<ItemProvider type="Desktop.DesktopItemProvider" />
 	</Extension>	
 
 </Addin>

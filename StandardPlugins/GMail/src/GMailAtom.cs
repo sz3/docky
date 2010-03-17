@@ -88,6 +88,8 @@ namespace GMail
 				return UnreadCount > 0 && State != GMailState.Error;
 			}
 		}
+
+		bool IsChecking { get; set; }
 		
 		public GMailAtom (string label)
 		{
@@ -130,21 +132,24 @@ namespace GMail
 		
 		public void ResetTimer ()
 		{
-			StopTimer ();
+			if (UpdateTimer > 0) {
+				GLib.Source.Remove (UpdateTimer);
+				UpdateTimer = 0;
+			}
 			
 			if (!DockServices.System.NetworkConnected)
 				return;
 			
-			CheckGMail ();
+			if (!IsChecking) {
+				IsChecking = true;
+				CheckGMail ();
+			}
 			
-			UpdateTimer = GLib.Timeout.Add (GMailPreferences.RefreshRate * 60 * 1000, () => { if (DockServices.System.NetworkConnected) CheckGMail (); return true; });
-		}
-		
-		public void StopTimer ()
-		{
-			if (UpdateTimer > 0)
-				GLib.Source.Remove (UpdateTimer);
-			UpdateTimer = 0;
+			UpdateTimer = GLib.Timeout.Add (GMailPreferences.RefreshRate * 60 * 1000, () => { 
+				if (!IsChecking && DockServices.System.NetworkConnected) 
+					CheckGMail (); 
+				return true; 
+			});
 		}
 		
 		public string CurrentLabel { get; protected set; }
@@ -161,6 +166,7 @@ namespace GMail
 				
 				Log<GMailAtom>.Info ("Fetching Atom feed: " + url);
 				HttpWebRequest request = (HttpWebRequest)WebRequest.Create (url);
+				request.Timeout = 60000;
 				request.UserAgent = @"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.10) Gecko/2009042523 Ubuntu/9.04 (jaunty) Firefox/3.0.10";
 				request.Credentials = new NetworkCredential (username, password);
 				// FIXME: remove when ServicePointManager.ServerCertificateValidationCallback implemented in mono
@@ -197,6 +203,7 @@ namespace GMail
 					
 					Log<GMailAtom>.Info ("Fetching Atom feed: " + url);
 					HttpWebRequest request = (HttpWebRequest)WebRequest.Create (url);
+					request.Timeout = 60000;
 					request.UserAgent = @"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.10) Gecko/2009042523 Ubuntu/9.04 (jaunty) Firefox/3.0.10";
 					request.Credentials = new NetworkCredential (GMailPreferences.User, GMailPreferences.Password);
 					// remove when ServicePointManager.ServerCertificateValidationCallback implemented in mono
@@ -285,6 +292,7 @@ namespace GMail
 		
 		void OnGMailChecked ()
 		{
+			IsChecking = false;
 			State = GMailState.Normal;
 			if (GMailChecked != null)
 				GMailChecked (null, EventArgs.Empty);
@@ -292,6 +300,7 @@ namespace GMail
 		
 		void OnGMailChecking ()
 		{
+			IsChecking = true;
 			if (State != GMailState.ManualReload)
 				State = GMailState.Reloading;
 			if (GMailChecking != null)
@@ -300,6 +309,7 @@ namespace GMail
 		
 		void OnGMailFailed (string error)
 		{
+			IsChecking = false;
 			State = GMailState.Error;
 			if (GMailFailed != null)
 				GMailFailed (null, new GMailErrorArgs (error));

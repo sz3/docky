@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-02-08 19:55-0600\n"
-"PO-Revision-Date: 2010-02-16 19:00+0000\n"
+"POT-Creation-Date: 2010-03-08 14:52+0100\n"
+"PO-Revision-Date: 2010-02-20 16:27+0000\n"
 "Last-Translator: André Gondim <andregondim@ubuntu.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2010-02-20 14:20+0000\n"
+"X-Launchpad-Export-Date: 2010-03-17 07:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:117
@@ -26,19 +26,19 @@ msgstr "Procurar Docklets..."
 msgid "Search Helpers..."
 msgstr "Procurar Ajudantes..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:176
+#: ../Docky/Docky/ConfigurationWindow.cs:178
 msgid "Click on any dock to configure."
 msgstr "Clique em algum dock para configura-lo."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:177
+#: ../Docky/Docky/ConfigurationWindow.cs:179
 msgid "Drag any dock to reposition."
 msgstr "Arraste qualquer dock para reposiciona-lo."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:246
+#: ../Docky/Docky/ConfigurationWindow.cs:248
 msgid "Delete the currently selected dock?"
 msgstr "Deletar o dock atualmente selecionado?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:248
+#: ../Docky/Docky/ConfigurationWindow.cs:250
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -46,16 +46,16 @@ msgstr ""
 "Se você escolher em deletar o dock selecionado, todas as configurações\n"
 "pertencentes ao mesmo serão permanentemente perdidas."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:263
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:400
+#: ../Docky/Docky/ConfigurationWindow.cs:265
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:392
 msgid "_Delete Dock"
 msgstr "_Deletar Dock"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:373
+#: ../Docky/Docky/ConfigurationWindow.cs:375
 msgid "_Select"
 msgstr "_Selecionar"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:376
+#: ../Docky/Docky/ConfigurationWindow.cs:378
 msgid ".tar Archives"
 msgstr "Arquivos .tar"
 
@@ -110,7 +110,7 @@ msgstr "Executando"
 msgid "Stopped"
 msgstr "Parado"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:331
+#: ../Docky/Docky/Interface/DockPreferences.cs:329
 msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
@@ -118,7 +118,7 @@ msgstr ""
 "Faz os lançadores que possuem no momento mais de uma janela exibir um "
 "indicador extra a baixo do mesmo."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:333
+#: ../Docky/Docky/Interface/DockPreferences.cs:331
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
@@ -126,19 +126,19 @@ msgstr ""
 "Quando marcado, janelas que no momento não possuem lançadores no dock serão "
 "adicionadas ao mesmo."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:679
+#: ../Docky/Docky/Interface/DockPreferences.cs:598
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr "<i>Nunca esconde; Janelas maximizadas não sobrepõem o dock</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:682
+#: ../Docky/Docky/Interface/DockPreferences.cs:601
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Esconde sempre que o mouse não estiver sobre ele.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:685
+#: ../Docky/Docky/Interface/DockPreferences.cs:604
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Esconde quando o dock obstrui a aplicação ativa.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:688
+#: ../Docky/Docky/Interface/DockPreferences.cs:607
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Esconde quando o dock obstrui qualquer janela.</i>"
 
@@ -157,7 +157,7 @@ msgstr "Solte para adicionar ao dock"
 
 #: ../Docky/Docky/Items/DockyItem.cs:93
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:230
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "_Settings"
 msgstr "_Configurações"
 
@@ -169,116 +169,108 @@ msgstr "_Sobre"
 msgid "_Quit Docky"
 msgstr "_Fechar o Docky"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:92
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:84
 msgid "Docky Configuration"
 msgstr "Configuração do Docky"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:137
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:129
 msgid "_Start When Computer Starts"
 msgstr "Iniciar no Início da _Sessão"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:153
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:145
 msgid "_Theme:"
 msgstr "_Tema:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:177
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:169
 msgid "<b>General Options</b>"
 msgstr "<b>Opções gerais</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:197
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:189
 msgid "<b>Dock Configuration</b>"
 msgstr "<b>Configurações do Dock</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:211
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:203
 msgid "Docks"
 msgstr "Docks"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:232
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:284
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:224
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:276
 msgid "All"
 msgstr "Todos"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:233
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:285
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:225
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:277
 msgid "Enabled"
 msgstr "Habilitado"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:234
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:286
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:226
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:278
 msgid "Disabled"
 msgstr "Desabilitado"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:255
 msgid "Docklets"
 msgstr "Docklets"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:310
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:302
 msgid "_Install"
 msgstr "_Instalar"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:342
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:334
 msgid "Helpers"
 msgstr "Ajudantes"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:373
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:365
 msgid "_New Dock"
 msgstr "_Novo Dock"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:52
 msgid "None"
 msgstr "Nenhum"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:81
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:53
 msgid "Autohide"
 msgstr "Ocultar automaticamente"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:82
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:54
 msgid "Intellihide"
 msgstr "Ocultar Inteligentemente"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:83
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:55
 msgid "Window Dodge"
 msgstr "Desviar das Janelas"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:97
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:69
 msgid "_Fade On Hide"
 msgstr "_Desvanecer ao Ocultar"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:141
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:113
 msgid "_Icon Size:"
 msgstr "Tamanho dos _Ícones:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:154
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:126
 msgid "_Hiding:"
 msgstr "_Ocultando:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:136
 msgid "Indicat_e Multiple Windows"
 msgstr "Indicar Múltiplas Jan_elas"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:150
 msgid "_Panel Mode"
 msgstr "Modo _Painel"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:192
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
 msgid "3D Back_ground"
 msgstr "_Fundo 3D"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:206
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
 msgid "_Manage Windows Without Launcher"
 msgstr "_Gerenciar Janelas sem Lançador"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:221
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:193
 msgid "_Zoom:"
 msgstr "_Zoom:"
-
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:288
-msgid "<b>Inactive Docklets</b>"
-msgstr "<b>Docklets Inativos</b>"
-
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:296
-msgid "<b>Active Docklets</b>"
-msgstr "<b>Docklets Ativos</b>"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:147
 msgid "New _Window"
@@ -390,29 +382,29 @@ msgstr "<i>Verificar e salvar as informações da conta</i>"
 msgid "Don't have an account?"
 msgstr "Não possui uma conta?"
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:153
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:156
 msgid "No Battery Found"
 msgstr "Nenhuma bateria encontrada"
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:170
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:173
 #, csharp-format
 msgid "{0} hour"
 msgid_plural "{0} hours"
 msgstr[0] "{0} hora"
 msgstr[1] "{0} horas"
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:172
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:175
 #, csharp-format
 msgid "{0} minute"
 msgid_plural "{0} minutes"
 msgstr[0] "{0} minuto"
 msgstr[1] "{0} minutos"
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:174
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:177
 msgid "until charged "
 msgstr "até estar completamente carregada "
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:176
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:179
 msgid "remaining "
 msgstr "restante "
 
@@ -444,6 +436,10 @@ msgstr "Temas"
 msgid "Theme"
 msgstr "Tema"
 
+#: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:44
+msgid "Show Desktop"
+msgstr ""
+
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
 msgid "_Add Label"
 msgstr "_Adicionar Rótulo"
@@ -457,33 +453,33 @@ msgstr "_Checar a cada:"
 msgid "minutes"
 msgstr "minutos"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:183
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:189
 msgid "Username or Password not set"
 msgstr "Nome de Usuário e Senha não informados"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:233
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:240
 msgid "(no subject)"
 msgstr "(sem assunto)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:251
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:258
 #, csharp-format
 msgid "From: {0}"
 msgstr "De: {0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:262
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:266
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:269
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 msgid "Feed Error"
 msgstr "Erro na Fonte"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:271
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:278
 msgid "Invalid Username"
 msgstr "Usuário Inválido"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:275
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:282
 msgid "Network Error"
 msgstr "Erro de Rede"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:280
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 msgid "General Error"
 msgstr "Erro geral"
 
@@ -732,15 +728,15 @@ msgstr "Configuração do Clima"
 msgid "Fetching data..."
 msgstr "Obtendo dados..."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:216
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:217
 msgid "Radar _Map"
 msgstr "_Mapa do Radar"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:221
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:222
 msgid "Forecasts"
 msgstr "Previsões de Clima"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:237
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:238
 msgid "Check _Weather"
 msgstr "_Checar Clima"
 
@@ -795,6 +791,12 @@ msgstr "Pôr-do-sol"
 
 #~ msgid "Icon"
 #~ msgstr "Ícone"
+
+#~ msgid "<b>Active Docklets</b>"
+#~ msgstr "<b>Docklets Ativos</b>"
+
+#~ msgid "<b>Inactive Docklets</b>"
+#~ msgstr "<b>Docklets Inativos</b>"
 
 #~ msgid "Disable"
 #~ msgstr "Desabilitar"

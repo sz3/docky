@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #  
-#  Copyright (C) 2010 Rico Tzschichholz
+#  Copyright (C) 2010 Tom Cowell, Rico Tzschichholz
 # 
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -19,9 +19,9 @@
 
 import atexit
 import gobject
+import glib
 import dbus
 import dbus.glib
-import glib
 import sys
 import os
 
@@ -33,79 +33,73 @@ except ImportError, e:
 	print e
 	exit()
 
-lifereabus = "org.gnome.feed.Reader"
-readerpath = "/org/gnome/feed/Reader"
-readeriface = "org.gnome.feed.Reader"
-	
-class DockyLifereaItem(DockyItem):
+emesenebus = "org.emesene.dbus"
+emesenepath = "/org/emesene/dbus"
+emeseneiface = "org.emesene.dbus"
+
+class DockyEmeseneItem(DockyItem):
 	def __init__(self, path):
 		DockyItem.__init__(self, path)
-		self.timer = 0
-		self.reader = None
-				
-		self.bus.add_signal_receiver(self.name_owner_changed_cb,
-                                             dbus_interface='org.freedesktop.DBus',
-                                             signal_name='NameOwnerChanged')
-                                             
-		obj = self.bus.get_object ("org.freedesktop.DBus", "/org/freedesktop/DBus")
+		self.emesene = None
+
+		self.bus.add_signal_receiver(self.name_owner_changed_cb, dbus_interface='org.freedesktop.DBus', signal_name = 'NameOwnerChanged')
+		obj = self.bus.get_object("org.freedesktop.DBus", "/org/freedesktop/DBus")
 		self.bus_interface = dbus.Interface(obj, "org.freedesktop.DBus")
-		
+
 		self.bus_interface.ListNames (reply_handler=self.list_names_handler, error_handler=self.list_names_error_handler)
 
+		self.bus.add_signal_receiver(self.conversation_updated, "unread_messages", emeseneiface, emesenebus, emesenepath)
+	
 	def list_names_handler(self, names):
-		if lifereabus in names:
-			self.init_liferea_objects()
+		if emesenebus in names:
+			self.init_emesene_objects()
 			self.update_badge()
 
 	def list_names_error_handler(self, error):
 		print "error getting bus names - %s" % str(error)
-	
+
 	def name_owner_changed_cb(self, name, old_owner, new_owner):
-		if name == lifereabus:
+		if name == emesenebus:
 			if new_owner:
-				self.init_liferea_objects()
+				self.init_emesene_objects()
 			else:
-				self.reader = None
-				if self.timer > 0:
-					gobject.source_remove (self.timer)
-					self.timer = 0
+				self.emesene = None
 				self.update_badge()
-	
-	def init_liferea_objects(self):
-		obj = self.bus.get_object(lifereabus, readerpath)
-		self.reader = dbus.Interface(obj, readeriface)
-		
-		if not self.timer > 0:
-			self.timer = gobject.timeout_add (10000, self.update_badge)
+
+	def init_emesene_objects(self):
+		obj = self.bus.get_object(emesenebus, emesenepath)
+		self.emesene = dbus.Interface(obj, emeseneiface)
+
+	def conversation_updated(self, count):
+		self.update_badge()
 
 	def update_badge(self):
-		if not self.reader:
+		if not self.emesene:
 			self.iface.ResetBadgeText()
 			return False
-		
-		items_unread = self.reader.GetUnreadItems()
-		#items_new = self.reader.GetNewItems()
-		if items_unread > 0:
-			self.iface.SetBadgeText("%s" % items_unread)
+
+		count = self.emesene.get_message_count()
+		if count > 0:
+			self.iface.SetBadgeText("%s" % count)
 		else:
 			self.iface.ResetBadgeText()
-			
-		return True
 
-class DockyLifereaSink(DockySink):
+		return True		
+
+class DockyEmeseneSink(DockySink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetOwnsDesktopFile() and item.GetDesktopFile().endswith ("liferea.desktop"):
-			self.items[pathtoitem] = DockyLifereaItem(pathtoitem)
+		if item.GetOwnsDesktopFile() and item.GetDesktopFile().endswith ("emesene.desktop"):
+			self.items[pathtoitem] = DockyEmeseneItem(pathtoitem)
 
-dockysink = DockyLifereaSink()
+emesenesink = DockyEmeseneSink()
 
-def cleanup ():
-	dockysink.dispose ()
+def cleanup():
+	emesenesink.dispose()
 
 if __name__ == "__main__":
 	mainloop = gobject.MainLoop(is_running=True)
-
+	
 	atexit.register (cleanup)
 	signal(SIGTERM, lambda signum, stack_frame: exit(1))
-
+	
 	mainloop.run()

@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-01-13 11:18+0100\n"
-"PO-Revision-Date: 2010-01-15 20:01+0000\n"
+"POT-Creation-Date: 2010-03-08 14:52+0100\n"
+"PO-Revision-Date: 2010-01-17 13:01+0000\n"
 "Last-Translator: Siegfried Gevatter <rainct@ubuntu.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-01-17 11:52+0000\n"
+"X-Launchpad-Export-Date: 2010-03-17 07:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:113
+#: ../Docky/Docky/ConfigurationWindow.cs:117
 msgid "Search Docklets..."
 msgstr "Cerca miniaplicacions..."
 
@@ -31,14 +31,14 @@ msgid "Click on any dock to configure."
 msgstr "Feu clic sobre qualsevol plafó per a configurar-lo."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:179
-msgid "Drag any dock to move it."
-msgstr "Arrossegueu qualsevol plafó per a moure'l."
+msgid "Drag any dock to reposition."
+msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:259
+#: ../Docky/Docky/ConfigurationWindow.cs:248
 msgid "Delete the currently selected dock?"
 msgstr "Esteu segur que voleu eliminar el plafó seŀlecionat?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:261
+#: ../Docky/Docky/ConfigurationWindow.cs:250
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -46,16 +46,16 @@ msgstr ""
 "Si trieu eliminar el plafó, tota la configuració\n"
 "per al plafó eliminat es perdrà de forma permanent."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:276
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:400
+#: ../Docky/Docky/ConfigurationWindow.cs:265
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:392
 msgid "_Delete Dock"
 msgstr "_Esborra el plafó"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:397
+#: ../Docky/Docky/ConfigurationWindow.cs:375
 msgid "_Select"
 msgstr "_Selecciona"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:400
+#: ../Docky/Docky/ConfigurationWindow.cs:378
 msgid ".tar Archives"
 msgstr "Fitxers .tar"
 
@@ -78,7 +78,7 @@ msgstr "Autor"
 msgid "Settings"
 msgstr "Configuració"
 
-#: ../Docky/Docky/Docky.cs:107
+#: ../Docky/Docky/Docky.cs:98
 msgid ""
 "Docky requires compositing to work properly. Please enable compositing and "
 "restart docky."
@@ -110,50 +110,50 @@ msgstr "Executant-se"
 msgid "Stopped"
 msgstr "Aturat"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:331
+#: ../Docky/Docky/Interface/DockPreferences.cs:329
 msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:333
+#: ../Docky/Docky/Interface/DockPreferences.cs:331
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:644
+#: ../Docky/Docky/Interface/DockPreferences.cs:598
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:647
+#: ../Docky/Docky/Interface/DockPreferences.cs:601
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Oculta quan el ratolí no esta per sobre.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:650
+#: ../Docky/Docky/Interface/DockPreferences.cs:604
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:653
+#: ../Docky/Docky/Interface/DockPreferences.cs:607
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:363
+#: ../Docky/Docky/Interface/DockWindow.cs:369
 msgid "Drag to reposition"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:370
+#: ../Docky/Docky/Interface/DockWindow.cs:376
 msgid "Drop to open"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:374
-#: ../Docky/Docky/Interface/DockWindow.cs:388
+#: ../Docky/Docky/Interface/DockWindow.cs:380
+#: ../Docky/Docky/Interface/DockWindow.cs:394
 msgid "Drop to add to dock"
 msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:93
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:230
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "_Settings"
 msgstr "_Paràmetres"
 
@@ -165,120 +165,108 @@ msgstr "_Quant a"
 msgid "_Quit Docky"
 msgstr "_Surt del Docky"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:92
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:84
 msgid "Docky Configuration"
 msgstr "Configuració del Docky"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:137
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:129
 msgid "_Start When Computer Starts"
 msgstr "_Inicia automàticament amb l'inici de sessió"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:153
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:145
 msgid "_Theme:"
 msgstr "_Tema:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:177
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:169
 msgid "<b>General Options</b>"
 msgstr "<b>Opcions generals</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:197
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:189
 msgid "<b>Dock Configuration</b>"
 msgstr "<b>Configuració del Docky</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:211
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:203
 msgid "Docks"
 msgstr "Plafons"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:232
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:284
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:224
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:276
 msgid "All"
 msgstr "Tots"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:233
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:285
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:225
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:277
 msgid "Enabled"
 msgstr "Activat"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:234
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:286
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:226
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:278
 msgid "Disabled"
 msgstr "Desactivat"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:255
 msgid "Docklets"
 msgstr "Miniaplicacions"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:310
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:302
 msgid "_Install"
 msgstr "_Instaŀla"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:342
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:334
 msgid "Helpers"
 msgstr "Ajudants"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:373
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:365
 msgid "_New Dock"
 msgstr "_Afegeix un plafó"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:52
 msgid "None"
 msgstr "Cap"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:81
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:53
 msgid "Autohide"
 msgstr "Ocultació automàtica"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:82
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:54
 msgid "Intellihide"
 msgstr "Ocultació inteŀligent"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:83
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:55
 msgid "Window Dodge"
 msgstr "Esquiva les finestres"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:97
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:69
 msgid "_Fade On Hide"
 msgstr "_Esvaeix al amagar"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:141
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:113
 msgid "_Icon Size:"
 msgstr "_Mida de les icones:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:154
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:126
 msgid "_Hiding:"
 msgstr "_Ocultació:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:136
 msgid "Indicat_e Multiple Windows"
 msgstr "_Indica múltiples finestres"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:150
 msgid "_Panel Mode"
 msgstr "Mode _taulell"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:192
-msgid "3D Background"
-msgstr "Fons tridimensional"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
+msgid "3D Back_ground"
+msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:206
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
 msgid "_Manage Windows Without Launcher"
 msgstr "_Gestiona finestres sense llançadora"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:221
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:193
 msgid "_Zoom:"
 msgstr "_Ampliació:"
-
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:288
-msgid "<b>Inactive Docklets</b>"
-msgstr "<b>Miniaplicacions inactives</b>"
-
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:296
-msgid "<b>Active Docklets</b>"
-msgstr "<b>Miniaplicacions actives</b>"
-
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:91
-msgid "Icon"
-msgstr "Icona"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:147
 msgid "New _Window"
@@ -293,7 +281,7 @@ msgstr "_Obre"
 msgid "Reset Color"
 msgstr "Reinicialitza el color"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:354
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:356
 msgid "_Pin to Dock"
 msgstr "_Fixa al plafó"
 
@@ -390,23 +378,49 @@ msgstr "<i>Verifica i desa la informació del compte</i>"
 msgid "Don't have an account?"
 msgstr "No teniu un compte?"
 
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:156
+msgid "No Battery Found"
+msgstr ""
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:173
+#, csharp-format
+msgid "{0} hour"
+msgid_plural "{0} hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:175
+#, csharp-format
+msgid "{0} minute"
+msgid_plural "{0} minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:177
+msgid "until charged "
+msgstr ""
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:179
+msgid "remaining "
+msgstr ""
+
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:84
 msgid "Computer"
 msgstr "Ordinador"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:419
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:421
 msgid "Di_gital Clock"
 msgstr "Rellotge Di_gital"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:425
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:427
 msgid "24-Hour _Clock"
 msgstr "_Rellotge de 24 Hores"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:433
 msgid "Show _Date"
 msgstr "Mostra la _Data"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:439
 msgid "Select _Theme"
 msgstr "Selecciona un _Tema"
 
@@ -417,6 +431,10 @@ msgstr "Temes"
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
 msgid "Theme"
 msgstr "Tema"
+
+#: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:44
+msgid "Show Desktop"
+msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
 msgid "_Add Label"
@@ -431,33 +449,33 @@ msgstr "Compro_va cada:"
 msgid "minutes"
 msgstr "minuts"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:183
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:189
 msgid "Username or Password not set"
 msgstr "Nom d'usuari o paraula de pas no definits"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:233
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:240
 msgid "(no subject)"
 msgstr "(sense assumpte)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:251
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:258
 #, csharp-format
 msgid "From: {0}"
 msgstr "Desde: {0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:262
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:266
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:269
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 msgid "Feed Error"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:271
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:278
 msgid "Invalid Username"
 msgstr "El nom d'usuari no és vàlid"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:275
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:282
 msgid "Network Error"
 msgstr "Error de connexió"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:280
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 msgid "General Error"
 msgstr "Error general"
 
@@ -520,20 +538,20 @@ msgstr "_Expulsa"
 msgid "_Unmount"
 msgstr "_Desmunta"
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:51
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:53
 msgid "Network Manager"
 msgstr "Gestor de xarxes"
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:90
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
 msgstr "S'està connectant..."
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:99
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:164
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:101
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:166
 msgid "Disconnected"
 msgstr "Desconnectat"
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:108
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
 msgid "Connected: {0}"
 msgstr "Connectat: {0}"
@@ -696,15 +714,15 @@ msgstr ""
 msgid "Fetching data..."
 msgstr "Obtenint dades..."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:216
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:217
 msgid "Radar _Map"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:221
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:222
 msgid "Forecasts"
 msgstr "Previsions"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:237
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:238
 msgid "Check _Weather"
 msgstr "Comprova el _temps"
 
@@ -801,6 +819,9 @@ msgstr "Posta del Sol"
 #~ msgid "Delete Dock"
 #~ msgstr "Elimina el Dock"
 
+#~ msgid "Icon"
+#~ msgstr "Icona"
+
 #~ msgid "Zoom:"
 #~ msgstr "Ampliació:"
 
@@ -831,3 +852,15 @@ msgstr "Posta del Sol"
 
 #~ msgid "_Quit"
 #~ msgstr "_Surt"
+
+#~ msgid "Drag any dock to move it."
+#~ msgstr "Arrossegueu qualsevol plafó per a moure'l."
+
+#~ msgid "<b>Active Docklets</b>"
+#~ msgstr "<b>Miniaplicacions actives</b>"
+
+#~ msgid "<b>Inactive Docklets</b>"
+#~ msgstr "<b>Miniaplicacions inactives</b>"
+
+#~ msgid "3D Background"
+#~ msgstr "Fons tridimensional"

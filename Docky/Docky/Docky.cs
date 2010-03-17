@@ -52,7 +52,7 @@ namespace Docky
 		{
 			// output the version number & system info
 			Log.DisplayLevel = LogLevel.Info;
-			Log.Info ("Docky version: {0}", AssemblyInfo.VersionDetails);
+			Log.Info ("Docky version: {0} {1}", AssemblyInfo.DisplayVersion, AssemblyInfo.VersionDetails);
 			Log.Info ("Kernel version: {0}", System.Environment.OSVersion.Version);
 			Log.Info ("CLR version: {0}", System.Environment.Version);
 			
@@ -129,6 +129,9 @@ namespace Docky
 				"Basque\n" +
 				" Ibai Oihanguren (https://launchpad.net/~ibai-oihanguren)\n" +
 				
+				"Bengali\n" +
+				" Scio (https://launchpad.net/~scio)\n" +
+
 				"Brazilian Portuguese\n" +
 				" André Gondim (https://launchpad.net/~andregondim)\n" +
 				" Fabio S Monteiro (https://launchpad.net/~fabiomonteiro)\n" +
@@ -137,21 +140,23 @@ namespace Docky
 				" Thiago Bellini (https://launchpad.net/~roxthiaguin)\n" +
 				" Victor Mello (https://launchpad.net/~victormmello)\n" +
 
-				"Bengali\n" +
-				" Scio (https://launchpad.net/~scio)\n" +
-
 				"Catalan\n" +
 				" BadChoice (https://launchpad.net/~guitarboy000)\n" +
 
 				"Chinese (Simplified)\n" +
-				" Chen Tao (https://edge.launchpad.net/~pro711)\n" +
-				" G.S.Alex (https://edge.launchpad.net/~g.s.alex)\n" +
-				" fighterlyt (https://edge.launchpad.net/~fighter-lyt)\n" +
-				" skatiger (https://edge.launchpad.net/~skatiger)\n" +
-				" 冯超 (https://edge.launchpad.net/~rainofchaos)\n" +
+				" Chen Tao (https://launchpad.net/~pro711)\n" +
+				" G.S.Alex (https://launchpad.net/~g.s.alex)\n" +
+				" fighterlyt (https://launchpad.net/~fighter-lyt)\n" +
+				" skatiger (https://launchpad.net/~skatiger)\n" +
+				" 冯超 (https://launchpad.net/~rainofchaos)\n" +
 
 				"Croatian\n" +
 				" zekopeko (https://launchpad.net/~zekopeko)\n" +
+
+				"English (United Kingdom)\n" +
+				" Daniel Bell (https://launchpad.net/~danielbell)\n" +
+				" Joel Auterson (https://launchpad.net/~joel-auterson)\n" +
+				" SteVe Cook (https://launchpad.net/~yorvyk)\n" +
 
 				"French\n" +
 				" Hugo M. (https://launchpad.net/~spirit-power)\n" +
@@ -172,6 +177,12 @@ namespace Docky
 				" pheder (https://launchpad.net/~pheder)\n" +
 				" tai (https://launchpad.net/~agent00tai)\n" +
 
+				"Hebrew\n" +
+				" IsraeliHawk (https://launchpad.net/~uri.shabtay)\n" +
+
+				"Hindi\n" +
+				" Bilal Akhtar (https://launchpad.net/~bilalakhtar96)\n" +
+
 				"Hungarian\n" +
 				" Bognár András (https://launchpad.net/~bognarandras)\n" +
 				" Gabor Kelemen (https://launchpad.net/~kelemeng)\n" +
@@ -180,14 +191,17 @@ namespace Docky
 				"Icelandic\n" +
 				" Baldur (https://launchpad.net/~baldurpet)\n" +
 
+				"Indonesian\n" +
+				" Fakhrul Rijal (https://launchpad.net/~frijal)\n" +
+					
 				"Italian\n" +
 				" Blaster (https://launchpad.net/~dottorblaster)\n" +
 				" MastroPino (https://launchpad.net/~mastropino)\n" +
 				" Quizzlo (https://launchpad.net/~marcopaolone)\n" +
 
-				"Indonesian\n" +
-				" Fakhrul Rijal (https://launchpad.net/~frijal)\n" +
-					
+				"Korean\n" +
+				" Cedna (https://launchpad.net/~cedna)\n" +
+
 				"Polish\n" +
 				" 313 (https://launchpad.net/~tenotoja)\n" +
 				" Adrian Grzemski (https://launchpad.net/~adrian-grzemski)\n" +
@@ -200,7 +214,13 @@ namespace Docky
 				" Sebastián Porta (https://launchpad.net/~sebastianporta)\n" +
 
 				"Swedish\n" +
-				" Daniel Nylander (https://launchpad.net/~yeager)\n";
+				" Daniel Nylander (https://launchpad.net/~yeager)\n" +
+
+				"Turkish\n" +
+				" Yalçın Can (https://launchpad.net/~echza)\n" +
+
+				"Ukrainian\n" +
+				" naker.ua (https://launchpad.net/~naker-ua)\n";
 			
 			
 			about.ShowAll ();

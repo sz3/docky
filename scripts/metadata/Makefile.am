@@ -3,6 +3,7 @@ scriptdir = $(datadir)/docky/helpers/metadata
 dist_script_DATA = \
 	banshee_control.py.info	\
 	deluge_badge.py.info	\
+	emesene_control.py.info \
 	gajim_badge.py.info	\
 	gtg_menus.py.info	\
 	liferea_badge.py.info	\

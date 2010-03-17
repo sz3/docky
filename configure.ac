@@ -204,6 +204,8 @@ StandardPlugins/Clock/Themes/Default/Makefile
 StandardPlugins/Clock/Themes/Default24/Makefile
 StandardPlugins/CPUMonitor/Makefile
 StandardPlugins/CPUMonitor/Resources/CPUMonitor.addin.xml
+StandardPlugins/Desktop/Makefile
+StandardPlugins/Desktop/Resources/Desktop.addin.xml
 StandardPlugins/GMail/Makefile
 StandardPlugins/GMail/Resources/GMail.addin.xml
 StandardPlugins/Mounter/Makefile

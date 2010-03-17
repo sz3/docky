@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-01-13 11:18+0100\n"
-"PO-Revision-Date: 2010-01-17 14:25+0000\n"
+"POT-Creation-Date: 2010-03-08 14:52+0100\n"
+"PO-Revision-Date: 2010-01-22 19:18+0000\n"
 "Last-Translator: Daniel Nylander <yeager@ubuntu.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-01-22 17:28+0000\n"
+"X-Launchpad-Export-Date: 2010-03-17 07:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:113
+#: ../Docky/Docky/ConfigurationWindow.cs:117
 msgid "Search Docklets..."
 msgstr "Sök dockprogram..."
 
@@ -31,14 +31,14 @@ msgid "Click on any dock to configure."
 msgstr "Klicka på en docka för att konfigurera den."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:179
-msgid "Drag any dock to move it."
-msgstr "Dra i en docka för att flytta den."
+msgid "Drag any dock to reposition."
+msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:259
+#: ../Docky/Docky/ConfigurationWindow.cs:248
 msgid "Delete the currently selected dock?"
 msgstr "Ta bort den markerade dockan?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:261
+#: ../Docky/Docky/ConfigurationWindow.cs:250
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -46,16 +46,16 @@ msgstr ""
 "Om du väljer att ta bort dockan så kommer alla\n"
 "inställningar för den borttagna dockan att förloras."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:276
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:400
+#: ../Docky/Docky/ConfigurationWindow.cs:265
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:392
 msgid "_Delete Dock"
 msgstr "_Ta bort docka"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:397
+#: ../Docky/Docky/ConfigurationWindow.cs:375
 msgid "_Select"
 msgstr "_Välj"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:400
+#: ../Docky/Docky/ConfigurationWindow.cs:378
 msgid ".tar Archives"
 msgstr ".tar-arkiv"
 
@@ -78,7 +78,7 @@ msgstr "Upphovsman"
 msgid "Settings"
 msgstr "Inställningar"
 
-#: ../Docky/Docky/Docky.cs:107
+#: ../Docky/Docky/Docky.cs:98
 msgid ""
 "Docky requires compositing to work properly. Please enable compositing and "
 "restart docky."
@@ -110,7 +110,7 @@ msgstr "Kör"
 msgid "Stopped"
 msgstr "Stoppad"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:331
+#: ../Docky/Docky/Interface/DockPreferences.cs:329
 msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
@@ -118,7 +118,7 @@ msgstr ""
 "Gör så att programstartare som hanterar fler än ett fönster har en extra "
 "indikator under sig."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:333
+#: ../Docky/Docky/Interface/DockPreferences.cs:331
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
@@ -126,38 +126,38 @@ msgstr ""
 "Fönster som inte redan har en ikon på någon docka kommer att läggas till i "
 "denna docka."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:644
+#: ../Docky/Docky/Interface/DockPreferences.cs:598
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr "<i>Dölj aldrig; maximerade fönster överlappar inte dockan.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:647
+#: ../Docky/Docky/Interface/DockPreferences.cs:601
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Döljer sig när muspekaren inte är över den.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:650
+#: ../Docky/Docky/Interface/DockPreferences.cs:604
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Döljer sig när dockan är i vägen för det aktiva programmet.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:653
+#: ../Docky/Docky/Interface/DockPreferences.cs:607
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Döljer sig när dockan är i vägen för något fönster.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:363
+#: ../Docky/Docky/Interface/DockWindow.cs:369
 msgid "Drag to reposition"
 msgstr "Dra för att ändra position"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:370
+#: ../Docky/Docky/Interface/DockWindow.cs:376
 msgid "Drop to open"
 msgstr "Släpp för att öppna"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:374
-#: ../Docky/Docky/Interface/DockWindow.cs:388
+#: ../Docky/Docky/Interface/DockWindow.cs:380
+#: ../Docky/Docky/Interface/DockWindow.cs:394
 msgid "Drop to add to dock"
 msgstr "Släpp för att lägga till i dockan"
 
 #: ../Docky/Docky/Items/DockyItem.cs:93
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:230
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "_Settings"
 msgstr "_Inställningar"
 
@@ -169,120 +169,108 @@ msgstr "_Om"
 msgid "_Quit Docky"
 msgstr "A_vsluta Docky"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:92
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:84
 msgid "Docky Configuration"
 msgstr "Konfigurera Docky"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:137
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:129
 msgid "_Start When Computer Starts"
 msgstr "_Starta när datorn startar"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:153
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:145
 msgid "_Theme:"
 msgstr "_Tema:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:177
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:169
 msgid "<b>General Options</b>"
 msgstr "<b>Allmänna alternativ</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:197
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:189
 msgid "<b>Dock Configuration</b>"
 msgstr "<b>Dockinställningar</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:211
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:203
 msgid "Docks"
 msgstr "Dockor"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:232
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:284
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:224
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:276
 msgid "All"
 msgstr "Alla"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:233
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:285
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:225
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:277
 msgid "Enabled"
 msgstr "Aktiverad"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:234
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:286
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:226
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:278
 msgid "Disabled"
 msgstr "Inaktiverad"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:255
 msgid "Docklets"
 msgstr "Dockprogram"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:310
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:302
 msgid "_Install"
 msgstr "_Installera"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:342
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:334
 msgid "Helpers"
 msgstr "Hjälpare"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:373
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:365
 msgid "_New Dock"
 msgstr "_Ny docka"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:80
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:52
 msgid "None"
 msgstr "Ingen"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:81
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:53
 msgid "Autohide"
 msgstr "Dölj automatiskt"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:82
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:54
 msgid "Intellihide"
 msgstr "Dölj smart"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:83
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:55
 msgid "Window Dodge"
 msgstr "Undvik fönster"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:97
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:69
 msgid "_Fade On Hide"
 msgstr "_Tona vid döljande"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:141
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:113
 msgid "_Icon Size:"
 msgstr "_Ikonstorlek:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:154
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:126
 msgid "_Hiding:"
 msgstr "_Dölj:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:136
 msgid "Indicat_e Multiple Windows"
 msgstr "Indike_ra flera fönster"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:150
 msgid "_Panel Mode"
 msgstr "_Panelläge"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:192
-msgid "3D Background"
-msgstr "3D-bakgrund"
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
+msgid "3D Back_ground"
+msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:206
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
 msgid "_Manage Windows Without Launcher"
 msgstr "_Hantera fönster utan programstartare"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:221
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:193
 msgid "_Zoom:"
 msgstr "_Zoom:"
-
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:288
-msgid "<b>Inactive Docklets</b>"
-msgstr "<b>Inaktiva docklets</b>"
-
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:296
-msgid "<b>Active Docklets</b>"
-msgstr "<b>Aktiva docklets</b>"
-
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:91
-msgid "Icon"
-msgstr "Ikon"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:147
 msgid "New _Window"
@@ -297,7 +285,7 @@ msgstr "_Öppna"
 msgid "Reset Color"
 msgstr "Nollställ färg"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:354
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:356
 msgid "_Pin to Dock"
 msgstr "_Nåla fast i dockan"
 
@@ -394,23 +382,49 @@ msgstr "<i>Verifiera och spara kontoinformation</i>"
 msgid "Don't have an account?"
 msgstr "Har du inte ett konto?"
 
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:156
+msgid "No Battery Found"
+msgstr ""
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:173
+#, csharp-format
+msgid "{0} hour"
+msgid_plural "{0} hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:175
+#, csharp-format
+msgid "{0} minute"
+msgid_plural "{0} minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:177
+msgid "until charged "
+msgstr ""
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:179
+msgid "remaining "
+msgstr ""
+
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:84
 msgid "Computer"
 msgstr "Dator"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:419
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:421
 msgid "Di_gital Clock"
 msgstr "Di_gital klocka"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:425
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:427
 msgid "24-Hour _Clock"
 msgstr "24-timmars_klocka"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:433
 msgid "Show _Date"
 msgstr "Visa _datum"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:439
 msgid "Select _Theme"
 msgstr "Välj _tema"
 
@@ -421,6 +435,10 @@ msgstr "Teman"
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
 msgid "Theme"
 msgstr "Tema"
+
+#: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:44
+msgid "Show Desktop"
+msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
 msgid "_Add Label"
@@ -435,33 +453,33 @@ msgstr "Kontr_ollera var:"
 msgid "minutes"
 msgstr "minuter"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:183
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:189
 msgid "Username or Password not set"
 msgstr "Användarnamn och lösenord har inte angivits"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:233
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:240
 msgid "(no subject)"
 msgstr "(inget ämne)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:251
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:258
 #, csharp-format
 msgid "From: {0}"
 msgstr "Från: {0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:262
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:266
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:269
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 msgid "Feed Error"
 msgstr "Fel i webbkanal"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:271
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:278
 msgid "Invalid Username"
 msgstr "Ogiltigt användarnamn"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:275
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:282
 msgid "Network Error"
 msgstr "Nätverksfel"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:280
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 msgid "General Error"
 msgstr "Allmänt fel"
 
@@ -524,20 +542,20 @@ msgstr "Mata _ut"
 msgid "_Unmount"
 msgstr "_Avmontera"
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:51
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:53
 msgid "Network Manager"
 msgstr "Nätverkshanterare"
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:90
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
 msgstr "Ansluter..."
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:99
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:164
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:101
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:166
 msgid "Disconnected"
 msgstr "Frånkopplad"
 
-#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:108
+#: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
 msgid "Connected: {0}"
 msgstr "Ansluten: {0}"
@@ -712,15 +730,15 @@ msgstr "Väderkonfiguration"
 msgid "Fetching data..."
 msgstr "Hämtar data..."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:216
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:217
 msgid "Radar _Map"
 msgstr "Radarka_rta"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:221
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:222
 msgid "Forecasts"
 msgstr "Prognoser"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:237
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:238
 msgid "Check _Weather"
 msgstr "Kontrollera _vädret"
 
@@ -760,6 +778,9 @@ msgstr "Soluppgång"
 msgid "Sunset"
 msgstr "Solnedgång"
 
+#~ msgid "Drag any dock to move it."
+#~ msgstr "Dra i en docka för att flytta den."
+
 #~ msgid "Theme:"
 #~ msgstr "Tema:"
 
@@ -768,6 +789,9 @@ msgstr "Solnedgång"
 
 #~ msgid "Icon Size:"
 #~ msgstr "Ikonstorlek:"
+
+#~ msgid "Icon"
+#~ msgstr "Ikon"
 
 #~ msgid "Indicate Multiple Windows"
 #~ msgstr "Indikera flera fönster"
@@ -827,8 +851,17 @@ msgstr "Solnedgång"
 #~ msgid "Disable"
 #~ msgstr "Inaktivera"
 
+#~ msgid "3D Background"
+#~ msgstr "3D-bakgrund"
+
 #~ msgid "Enable"
 #~ msgstr "Aktivera"
 
 #~ msgid "Click to browse..."
 #~ msgstr "Klicka för att bläddra..."
+
+#~ msgid "<b>Active Docklets</b>"
+#~ msgstr "<b>Aktiva docklets</b>"
+
+#~ msgid "<b>Inactive Docklets</b>"
+#~ msgstr "<b>Inaktiva docklets</b>"

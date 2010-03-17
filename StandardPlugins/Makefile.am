@@ -2,6 +2,7 @@ SUBDIRS = \
 	BatteryMonitor \
 	Bookmarks \
 	Clock \
+	Desktop \
 	CPUMonitor \
 	GMail \
 	Mounter \
@@ -15,6 +16,7 @@ DIST_SUBDIRS = \
 	BatteryMonitor \
 	Bookmarks \
 	Clock \
+	Desktop \
 	CPUMonitor \
 	GMail \
 	Mounter \

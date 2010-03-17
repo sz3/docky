@@ -101,6 +101,8 @@ namespace WeatherDocklet
 			DockServices.System.ConnectionStatusChanged += HandleStateChanged;
 		}
 		
+		static bool IsReloading { get; set; }
+		
 		/// <summary>
 		/// Uses the next location for weather.
 		/// </summary>
@@ -143,16 +145,24 @@ namespace WeatherDocklet
 		/// </param>
 		public static void ResetTimer (bool reloadImmediately)
 		{
-			if (UpdateTimer > 0)
+			if (UpdateTimer > 0) {
 				GLib.Source.Remove (UpdateTimer);
+				UpdateTimer = 0;
+			}
 			
 			if (CurrentLocation == "" || !DockServices.System.NetworkConnected)
 				return;
 
-			if (reloadImmediately)
+			if (reloadImmediately && !IsReloading) {
+				IsReloading = true;
 				Weather.ReloadWeatherData ();
-			
-			UpdateTimer = GLib.Timeout.Add (WeatherPreferences.Timeout * 60 * 1000, () => { if (DockServices.System.NetworkConnected) Weather.ReloadWeatherData (); return true; });
+			}
+				
+			UpdateTimer = GLib.Timeout.Add (WeatherPreferences.Timeout * 60 * 1000, () => {
+				if (!IsReloading && DockServices.System.NetworkConnected) 
+					Weather.ReloadWeatherData (); 
+				return true; 
+			});
 		}
 		
 		/// <summary>
@@ -255,6 +265,7 @@ namespace WeatherDocklet
 		/// </summary>
 		static void HandleWeatherReloading ()
 		{
+			IsReloading = true;
 			if (WeatherReloading != null)
 				WeatherReloading ();
 		}
@@ -264,6 +275,7 @@ namespace WeatherDocklet
 		/// </summary>
 		static void HandleWeatherError (object sender, WeatherErrorArgs e)
 		{
+			IsReloading = false;
 			if (WeatherError != null)
 				WeatherError (sender, e);
 		}
@@ -273,6 +285,7 @@ namespace WeatherDocklet
 		/// </summary>
 		static void HandleWeatherUpdated ()
 		{
+			IsReloading = false;
 			if (WeatherUpdated != null)
 				WeatherUpdated ();
 		}

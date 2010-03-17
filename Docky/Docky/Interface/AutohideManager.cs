@@ -102,7 +102,7 @@ namespace Docky.Interface
 				return;
 			cursor_area = area;
 			DockHovered = cursor_area.Contains (tracker.Cursor) 
-				&& (screen.ActiveWindow == null || (screen.ActiveWindow != null && !screen.ActiveWindow.IsFullscreen));
+				&& (screen.ActiveWindow == null || !screen.ActiveWindow.IsFullscreen || !WindowIntersectingOther);
 			SetHidden ();
 			
 		}
@@ -119,7 +119,7 @@ namespace Docky.Interface
 		void HandleCursorPositionChanged (object sender, CursorPostionChangedArgs args)
 		{
 			DockHovered = cursor_area.Contains (tracker.Cursor)
-				&& (screen.ActiveWindow == null || (screen.ActiveWindow != null && !screen.ActiveWindow.IsFullscreen));
+				&& (screen.ActiveWindow == null || !screen.ActiveWindow.IsFullscreen || !WindowIntersectingOther);
 			SetHidden ();
 		}
 

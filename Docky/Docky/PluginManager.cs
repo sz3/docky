@@ -77,8 +77,16 @@ namespace Docky
 		public static void Initialize ()
 		{
 			// Initialize Mono.Addins.
-			AddinManager.Initialize (UserPluginsDirectory);
-			
+			try {
+				AddinManager.Initialize (UserPluginsDirectory);
+			} catch (InvalidOperationException e) {
+				Log<PluginManager>.Error ("AddinManager.Initialize: {0}", e.Message);
+				Log<PluginManager>.Warn ("Rebuild Addin.Registry and reinitialize AddinManager");
+				AddinManager.Registry.Rebuild (null);
+				AddinManager.Shutdown ();
+				AddinManager.Initialize (UserPluginsDirectory);
+			}
+
 			AddinManager.Registry.Update (null);
 			
 			// Add feedback when addin is loaded or unloaded

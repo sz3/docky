@@ -366,6 +366,7 @@ namespace Docky.Interface
 						poof = true;
 					} else if (provider != null && provider.Items.Count () == 1) {
 						// it is safe to disable plugin
+						PluginManager.Disable (provider);
 						Owner.Preferences.RemoveProvider (provider);
 						poof = true;
 					}
