@@ -123,6 +123,8 @@ namespace Docky.Services
 		const string PowerManagementPath = "/org/freedesktop/PowerManagement";
 		const string DeviceKitPowerName = "org.freedesktop.DeviceKit.Power";
 		const string DeviceKitPowerPath = "/org/freedesktop/DeviceKit/Power";
+		const string UPowerName = "org.freedesktop.UPower";
+		const string UPowerPath = "/org/freedesktop/UPower";
 		
 		delegate void BoolDelegate (bool val);
 		
@@ -138,11 +140,18 @@ namespace Docky.Services
 		{
 			event Action Changed;
 		}
+
+		[Interface(UPowerName)]
+		interface IUPower : org.freedesktop.DBus.Properties
+		{
+			event Action Changed;
+		}
 		
 		bool on_battery;
 		
 		IPowerManagement power;
 		IDeviceKitPower devicekit;
+		IUPower upower;
 		
 		void InitializeBattery ()
 		{
@@ -151,7 +160,12 @@ namespace Docky.Services
 			on_battery = false;
 			try {
 				BusG.Init ();
-				if (Bus.System.NameHasOwner (DeviceKitPowerName)) {
+				if (Bus.System.NameHasOwner (UPowerName)) {
+					upower = Bus.System.GetObject<IUPower> (UPowerName, new ObjectPath (UPowerPath));
+					upower.Changed += HandleUPowerChanged;
+					HandleUPowerChanged ();
+					Log<SystemService>.Debug ("Using org.freedesktop.UPower for battery information");
+				} else if (Bus.System.NameHasOwner (DeviceKitPowerName)) {
 					devicekit = Bus.System.GetObject<IDeviceKitPower> (DeviceKitPowerName, new ObjectPath (DeviceKitPowerPath));
 					devicekit.Changed += HandleDeviceKitChanged;
 					HandleDeviceKitChanged ();
@@ -185,7 +199,17 @@ namespace Docky.Services
 				OnBatteryStateChanged ();
 			}
 		}
-		
+
+		void HandleUPowerChanged ()
+		{
+			bool newState = (bool) upower.Get (UPowerName, "OnBattery");
+			
+			if (on_battery != newState) {
+				on_battery = newState;
+				OnBatteryStateChanged ();
+			}
+		}
+
 		#endregion
 		
 		public void Email (string address)
