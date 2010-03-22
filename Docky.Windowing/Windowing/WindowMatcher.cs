@@ -135,6 +135,7 @@ namespace Docky.Windowing
 		
 		Dictionary<Wnck.Window, List<string>> window_to_desktop_files;
 		Dictionary<string, List<string>> exec_to_desktop_files;
+		Dictionary<string, string> class_to_desktop_files;
 		List<Regex> prefix_filters;
 		Wnck.Screen screen;
 		
@@ -146,18 +147,23 @@ namespace Docky.Windowing
 			
 			desktop_files = BuildDesktopFilesList ();
 			
-			exec_to_desktop_files = DeserializeExecStrings ();
+			exec_to_desktop_files = (Dictionary<string, List<string>>) DeserializeStrings ("ExecStrings");
+			class_to_desktop_files = (Dictionary<string, string>) DeserializeStrings ("ClassStrings");
 			
 			if (exec_to_desktop_files == null) {
 				exec_to_desktop_files = BuildExecStrings ();
-				SerializeExecStrings ();
+				class_to_desktop_files = BuildClassStrings ();
+				SerializeStrings (exec_to_desktop_files, "ExecStrings");
+				SerializeStrings (class_to_desktop_files, "ClassStrings");
 			} else {
 				// rebuild after 2 minutes just to be sure we are up to date
 				GLib.Timeout.Add (2 * 60 * 1000, delegate {
 					lock (update_lock) {
 						desktop_files = BuildDesktopFilesList ();
 						exec_to_desktop_files = BuildExecStrings ();
-						SerializeExecStrings ();
+						class_to_desktop_files = BuildClassStrings ();
+						SerializeStrings (exec_to_desktop_files, "ExecStrings");
+						SerializeStrings (class_to_desktop_files, "ClassStrings");
 					}
 					return false;
 				});
@@ -206,7 +212,9 @@ namespace Docky.Windowing
 						// reload our dictionary of exec strings						
 						lock (update_lock) {
 							exec_to_desktop_files = BuildExecStrings ();
-							SerializeExecStrings ();
+							class_to_desktop_files = BuildClassStrings ();
+							SerializeStrings (exec_to_desktop_files, "ExecStrings");
+							SerializeStrings (class_to_desktop_files, "ClassStrings");
 						}
 						
 						// Make sure to trigger event on main thread
@@ -319,6 +327,11 @@ namespace Docky.Windowing
 			int pid = window.Pid;
 			if (pid <= 1) {
 				if (window.ClassGroup != null && !string.IsNullOrEmpty (window.ClassGroup.ResClass)) {
+					if (class_to_desktop_files.ContainsKey (window.ClassGroup.ResClass)) {
+						yield return class_to_desktop_files [window.ClassGroup.ResClass];
+						yield break;
+					}
+					
 					IEnumerable<string> matches = DesktopFilesForDesktopID (window.ClassGroup.ResClass);
 					if (matches.Any ()) {
 						foreach (string s in matches) {
@@ -497,12 +510,12 @@ namespace Docky.Windowing
 			return name.Substring (6);
 		}
 		
-		void SerializeExecStrings ()
+		void SerializeStrings (object o, string name)
 		{
-			if (exec_to_desktop_files == null)
+			if (o == null)
 				return;
 			
-			GLib.File file = DockServices.Paths.UserDataFolder.GetChild ("ExecStrings");
+			GLib.File file = DockServices.Paths.UserDataFolder.GetChild (name);
 			
 			if (file.Exists)
 				file.Delete ();
@@ -510,26 +523,26 @@ namespace Docky.Windowing
 			try {
 				using (FileStream stream = new FileStream (file.Path, FileMode.OpenOrCreate)) {
 					BinaryFormatter formatter = new BinaryFormatter ();
-					formatter.Serialize (stream, exec_to_desktop_files);
+					formatter.Serialize (stream, o);
 				}
 			} catch {
 				return;
 			}
 		}
 		
-		Dictionary<string, List<string>> DeserializeExecStrings ()
+		object DeserializeStrings (string name)
 		{
-			GLib.File file = DockServices.Paths.UserDataFolder.GetChild ("ExecStrings");
+			GLib.File file = DockServices.Paths.UserDataFolder.GetChild (name);
 			
 			if (!file.Exists)
 				return null;
 			
-			Dictionary<string, List<string>> result;
+			object result;
 			
 			try {
 				using (FileStream stream = new FileStream (file.Path, FileMode.Open)) {
 					BinaryFormatter formatter = new BinaryFormatter ();
-					result = (Dictionary<string, List<string>>) formatter.Deserialize (stream);
+					result = formatter.Deserialize (stream);
 				}
 			} catch {
 				return null;
@@ -538,102 +551,125 @@ namespace Docky.Windowing
 			return result;
 		}
 		
+		Dictionary<string, string> BuildClassStrings ()
+		{
+			Dictionary<string, string> result = new Dictionary<string, string> ();
+			
+			foreach (string file in DesktopFiles) {
+				using (DesktopItem item = new DesktopItem (file)) {
+					if (item == null || !item.HasAttribute ("StartupWMClass"))
+						continue;
+					
+					if (item.HasAttribute ("NoDisplay") && item.GetBool ("NoDisplay"))
+						continue;
+					
+					if (item.HasAttribute ("X-Docky-NoMatch") && item.GetBool ("X-Docky-NoMatch"))
+						continue;
+					
+					string cls = item.GetString ("StartupWMClass").Trim ();
+					result [cls] = file;
+				}
+			}
+			
+			return result;
+		}
+				
 		Dictionary<string, List<string>> BuildExecStrings ()
 		{
 			Dictionary<string, List<string>> result = new Dictionary<string, List<string>> ();
 			
 			foreach (string file in DesktopFiles) {
-				DesktopItem item = new DesktopItem (file);
-				if (item == null || !item.HasAttribute ("Exec"))
-					continue;
-				
-				if (item.HasAttribute ("NoDisplay") && item.GetBool ("NoDisplay"))
-					continue;
-				
-				if (item.HasAttribute ("X-Docky-NoMatch") && item.GetBool ("X-Docky-NoMatch"))
-					continue;
-				
-				string exec = item.GetString ("Exec").Trim ();
-				string vexec = null;
-				
-				if (exec.StartsWith ("ooffice") && exec.Contains (' ')) {
-					vexec = "ooffice" + exec.Split (' ') [1];
-				} else if (exec.StartsWith ("openoffice.org3") && exec.Contains (' ')) {
-					vexec = "openoffice.org3" + exec.Split (' ') [1];
-				// for wine apps
-				} else if ((exec.StartsWith ("env WINEPREFIX=") && exec.Contains (" wine ")) ||
-						exec.StartsWith ("wine ")) {
-					int startIndex = exec.IndexOf ("wine ") + 5; // length of 'wine '
-					// CommandLineForPid already splits based on \\ and takes the last entry, so do the same here
-					vexec = exec.Substring (startIndex).Split (new [] {@"\\"}, StringSplitOptions.RemoveEmptyEntries).Last ();
-					// remove the trailing " and anything after it
-					if (vexec.Contains ("\""))
-					    vexec = vexec.Substring (0, vexec.IndexOf ("\""));
-				// for crossover apps
-				} else if (exec.Contains (".cxoffice") || (item.HasAttribute ("X-Created-By") && item.GetString ("X-Created-By").Contains ("cxoffice"))) {
-					// The exec is actually another file that uses exec to launch the actual app.
-					exec = exec.Replace ("\"", "");
-					
-					GLib.File launcher = GLib.FileFactory.NewForPath (exec);
-					if (!launcher.Exists) {
-						Log<WindowMatcher>.Warn ("Crossover launcher decoded as: {0}, but does not exist.", launcher.Path);
+				using (DesktopItem item = new DesktopItem (file)) {
+					if (item == null || !item.HasAttribute ("Exec"))
 						continue;
-					}
 					
-					string execLine = "";
-					using (GLib.DataInputStream stream = new GLib.DataInputStream (launcher.Read (null))) {
-						ulong len;
-						string line;
-						while ((line = stream.ReadLine (out len, null)) != null) {
-							if (line.StartsWith ("exec")) {
-								execLine = line;
-								break;
+					if (item.HasAttribute ("NoDisplay") && item.GetBool ("NoDisplay"))
+						continue;
+					
+					if (item.HasAttribute ("X-Docky-NoMatch") && item.GetBool ("X-Docky-NoMatch"))
+						continue;
+					
+					string exec = item.GetString ("Exec").Trim ();
+					string vexec = null;
+					
+					if (exec.StartsWith ("ooffice") && exec.Contains (' ')) {
+						vexec = "ooffice" + exec.Split (' ') [1];
+					} else if (exec.StartsWith ("openoffice.org3") && exec.Contains (' ')) {
+						vexec = "openoffice.org3" + exec.Split (' ') [1];
+					// for wine apps
+					} else if ((exec.StartsWith ("env WINEPREFIX=") && exec.Contains (" wine ")) ||
+							exec.StartsWith ("wine ")) {
+						int startIndex = exec.IndexOf ("wine ") + 5; // length of 'wine '
+						// CommandLineForPid already splits based on \\ and takes the last entry, so do the same here
+						vexec = exec.Substring (startIndex).Split (new [] {@"\\"}, StringSplitOptions.RemoveEmptyEntries).Last ();
+						// remove the trailing " and anything after it
+						if (vexec.Contains ("\""))
+							vexec = vexec.Substring (0, vexec.IndexOf ("\""));
+					// for crossover apps
+					} else if (exec.Contains (".cxoffice") || (item.HasAttribute ("X-Created-By") && item.GetString ("X-Created-By").Contains ("cxoffice"))) {
+						// The exec is actually another file that uses exec to launch the actual app.
+						exec = exec.Replace ("\"", "");
+						
+						GLib.File launcher = GLib.FileFactory.NewForPath (exec);
+						if (!launcher.Exists) {
+							Log<WindowMatcher>.Warn ("Crossover launcher decoded as: {0}, but does not exist.", launcher.Path);
+							continue;
+						}
+						
+						string execLine = "";
+						using (GLib.DataInputStream stream = new GLib.DataInputStream (launcher.Read (null))) {
+							ulong len;
+							string line;
+							while ((line = stream.ReadLine (out len, null)) != null) {
+								if (line.StartsWith ("exec")) {
+									execLine = line;
+									break;
+								}
 							}
 						}
-					}
-	
-					// if no exec line was found, bail
-					if (string.IsNullOrEmpty (execLine))
-						continue;
-					
-					// get the relevant part from the execLine
-					string [] parts = execLine.Split (new [] {'\"'});
-					// find the part that contains C:/path/to/app.lnk
-					if (parts.Any (part => part.StartsWith ("C:"))) {
-					    vexec = parts.First (part => part.StartsWith ("C:"));
-						// and take only app.lnk (this is what is exposed to ps -ef)
-						vexec = vexec.Split (new [] {'/'}).Last ();
+		
+						// if no exec line was found, bail
+						if (string.IsNullOrEmpty (execLine))
+							continue;
+						
+						// get the relevant part from the execLine
+						string [] parts = execLine.Split (new [] {'\"'});
+						// find the part that contains C:/path/to/app.lnk
+						if (parts.Any (part => part.StartsWith ("C:"))) {
+							vexec = parts.First (part => part.StartsWith ("C:"));
+							// and take only app.lnk (this is what is exposed to ps -ef)
+							vexec = vexec.Split (new [] {'/'}).Last ();
+						} else {
+							continue;
+						}
 					} else {
+						string [] parts = exec.Split (' ');
+						
+						vexec = parts
+							.DefaultIfEmpty (null)
+							.Select (part => part.Split (new [] {
+							'/',
+							'\\'
+						}).Last ())
+							.Where (part => !prefix_filters.Any (f => f.IsMatch (part)))
+							.FirstOrDefault ();
+						
+						// for AIR apps
+						if (vexec != null && vexec.Contains ('\'')) {
+							string strippedExec = vexec.Replace ("'", "");
+							if (!result.ContainsKey (strippedExec))
+								result [strippedExec] = new List<string> ();
+							result [strippedExec].Add (file);
+						}
+					}
+					
+					if (vexec == null)
 						continue;
-					}
-				} else {
-					string [] parts = exec.Split (' ');
 					
-					vexec = parts
-						.DefaultIfEmpty (null)
-						.Select (part => part.Split (new [] {
-						'/',
-						'\\'
-					}).Last ())
-						.Where (part => !prefix_filters.Any (f => f.IsMatch (part)))
-						.FirstOrDefault ();
-					
-					// for AIR apps
-					if (vexec != null && vexec.Contains ('\'')) {
-						string strippedExec = vexec.Replace ("'", "");
-						if (!result.ContainsKey (strippedExec))
-							result [strippedExec] = new List<string> ();
-						result [strippedExec].Add (file);
-					}
+					if (!result.ContainsKey (vexec))
+						result [vexec] = new List<string> ();
+					result [vexec].Add (file);
 				}
-				
-				if (vexec == null)
-					continue;
-				
-				if (!result.ContainsKey (vexec))
-					result [vexec] = new List<string> ();
-				result [vexec].Add (file);
-				item.Dispose ();
 			}
 			
 			return result;
