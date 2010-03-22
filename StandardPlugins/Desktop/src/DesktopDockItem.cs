@@ -37,19 +37,12 @@ namespace Desktop
 	public class DesktopDockItem : IconDockItem
 	{
 		
-		Wnck.Pager pager;
-		
 		public DesktopDockItem ()
 		{
 			HoverText = Catalog.GetString ("Show Desktop");
 			Icon = "desktop";
 		}
 
-		void HandleViewportsChanged (object sender, EventArgs args)
-		{
-			OnPaintNeeded ();
-		}
-		
 		public override string UniqueID ()
 		{
 			return "Desktop";
