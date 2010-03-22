@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-08 14:52+0100\n"
-"PO-Revision-Date: 2010-03-09 13:19+0000\n"
-"Last-Translator: Rico Tzschichholz <Unknown>\n"
+"PO-Revision-Date: 2010-03-19 19:39+0000\n"
+"Last-Translator: Sergey Sedov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-03-17 07:56+0000\n"
+"X-Launchpad-Export-Date: 2010-03-22 07:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:117
@@ -25,7 +25,7 @@ msgstr "Поиск доклетов"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:132
 msgid "Search Helpers..."
-msgstr ""
+msgstr "Поиск дополнений..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:178
 msgid "Click on any dock to configure."
@@ -72,7 +72,7 @@ msgstr "_Удалить"
 
 #: ../Docky/Docky/DockletTile.cs:48
 msgid "Author"
-msgstr ""
+msgstr "Автор"
 
 #: ../Docky/Docky/DockletTile.cs:55
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:166
@@ -116,6 +116,8 @@ msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
 msgstr ""
+"На значках для запуска, которые имеют более одного активного окна есть "
+"специальный индикатор."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:331
 msgid ""
@@ -143,16 +145,16 @@ msgstr "<i>Исчезает, если панель перекрывает люб
 
 #: ../Docky/Docky/Interface/DockWindow.cs:369
 msgid "Drag to reposition"
-msgstr ""
+msgstr "Перетащите для изменения местоположения"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:376
 msgid "Drop to open"
-msgstr ""
+msgstr "Перетащите для открытия"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:380
 #: ../Docky/Docky/Interface/DockWindow.cs:394
 msgid "Drop to add to dock"
-msgstr ""
+msgstr "Перетащите, чтобы добавить на панель"
 
 #: ../Docky/Docky/Items/DockyItem.cs:93
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
@@ -217,7 +219,7 @@ msgstr "_Установить"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:334
 msgid "Helpers"
-msgstr ""
+msgstr "Дополнения"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:365
 msgid "_New Dock"
@@ -233,7 +235,7 @@ msgstr "Автоматически скрывать"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:54
 msgid "Intellihide"
-msgstr ""
+msgstr "Интеллектуальное скрытие"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:55
 msgid "Window Dodge"
@@ -249,7 +251,7 @@ msgstr "_Размер значков:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:126
 msgid "_Hiding:"
-msgstr ""
+msgstr "_Скрытие:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:136
 msgid "Indicat_e Multiple Windows"
@@ -265,7 +267,7 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
 msgid "_Manage Windows Without Launcher"
-msgstr ""
+msgstr "_Отображение приложений не имеющих ярлыков"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:193
 msgid "_Zoom:"
@@ -309,7 +311,7 @@ msgstr "Копирование"
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:225
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:226
 msgid "Error performing drop action"
-msgstr ""
+msgstr "Ошибка при перетаскивании"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:248
 msgid "Open"
@@ -321,7 +323,7 @@ msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:244
 msgid "Unma_ximize"
-msgstr ""
+msgstr "Восстановить окно"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:247
 msgid "Ma_ximize"
@@ -337,7 +339,7 @@ msgstr "_Свернуть"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:259
 msgid "_Close All"
-msgstr ""
+msgstr "_Закрыть все"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
@@ -383,21 +385,23 @@ msgstr "Еще не зарегистрированы?"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:156
 msgid "No Battery Found"
-msgstr ""
+msgstr "Батарея не найдена"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:173
 #, csharp-format
 msgid "{0} hour"
 msgid_plural "{0} hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} час"
+msgstr[1] "{0} часа"
+msgstr[2] "{0} часов"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:175
 #, csharp-format
 msgid "{0} minute"
 msgid_plural "{0} minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} минута"
+msgstr[1] "{0} минуты"
+msgstr[2] "{0} минут"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:177
 msgid "until charged "
@@ -405,7 +409,7 @@ msgstr ""
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:179
 msgid "remaining "
-msgstr ""
+msgstr "осталось "
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:84
 msgid "Computer"
@@ -417,7 +421,7 @@ msgstr "Ци_фровые часы"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:427
 msgid "24-Hour _Clock"
-msgstr ""
+msgstr "24-часовый режим"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:433
 msgid "Show _Date"
@@ -425,7 +429,7 @@ msgstr "Показывать _дату"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:439
 msgid "Select _Theme"
-msgstr ""
+msgstr "Выбрать _тему"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
@@ -437,7 +441,7 @@ msgstr "Тема"
 
 #: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:44
 msgid "Show Desktop"
-msgstr ""
+msgstr "Показать рабочий стол"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
 msgid "_Add Label"
@@ -558,7 +562,7 @@ msgstr "Отключено"
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
 msgid "Connected: {0}"
-msgstr ""
+msgstr "Подключен: {0}"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:48
 msgid "My _Stations"
@@ -607,7 +611,7 @@ msgstr "Очистить список недавно использовавши�
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:78
 msgid "Clear Recent Documents"
-msgstr ""
+msgstr "Очистить список недавно открытых документов"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:80
 msgid ""
@@ -615,10 +619,13 @@ msgid ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
+"При очистке списка недавно открытых документов будут удалены:\n"
+"• Все элементы из меню Переход → Недавние документы.\n"
+"• Все элементы из списков недавно открытых документов во всех приложениях."
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
 msgid "_Clear Recent Documents..."
-msgstr ""
+msgstr "_Очистить недавно открытые документы"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
 msgid "No items in Trash"
@@ -628,8 +635,9 @@ msgstr "В корзине пусто"
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} элемент в корзине"
+msgstr[1] "{0} элемента в корзине"
+msgstr[2] "{0} элементов в корзине"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:160
 msgid "_Open Trash"
@@ -689,6 +697,8 @@ msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
 msgstr ""
+"Данные о погоде предоставляются компанией Google. Этот источник требует "
+"указать местоположение через US Zip Code или в виде 'Город, страна'"
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
@@ -703,6 +713,9 @@ msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
 msgstr ""
+"Данные о погоде предоставляются и принадлежат компании Weather Underground. "
+"Этот источник требует указать местоположение через US Zip Code или в виде "
+"'Город, страна'."
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
