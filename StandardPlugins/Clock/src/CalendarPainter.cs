@@ -31,8 +31,6 @@ namespace Clock
 {
 	public class CalendarPainter : PagingDockPainter
 	{
-		const double lowlight = .25;
-		
 		int LineHeight { get; set; }
 		
 		public DateTime StartDate { get; set; }
@@ -184,7 +182,7 @@ namespace Clock
 				if (day.Month == CalendarStartDate.AddDays (6).Month)
 					cr.Color = new Cairo.Color (1, 1, 1);
 				else
-					cr.Color = new Cairo.Color (1, 1, 1, .8);
+					cr.Color = new Cairo.Color (1, 1, 1, 0.5);
 				
 				if (day.Date == DateTime.Today)
 				{
@@ -205,7 +203,7 @@ namespace Clock
 				cr.Fill ();
 			}
 			
-			cr.Color = new Cairo.Color (1, 1, 1, lowlight);
+			cr.Color = new Cairo.Color (1, 1, 1, 0.4);
 			int woy = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear (lineStart.AddDays (6), 
 																		 DateTimeFormatInfo.CurrentInfo.CalendarWeekRule, 
 																		 DateTimeFormatInfo.CurrentInfo.FirstDayOfWeek);
