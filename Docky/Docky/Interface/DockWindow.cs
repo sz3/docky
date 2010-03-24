@@ -149,7 +149,7 @@ namespace Docky.Interface
 		readonly TimeSpan BounceTime = new TimeSpan (0, 0, 0, 0, 600);
 		readonly TimeSpan SlideTime = new TimeSpan (0, 0, 0, 0, 200);
 		readonly TimeSpan PulseTime = new TimeSpan (0, 0, 0, 0, 2000);
-		readonly TimeSpan GlowTime = new TimeSpan (0, 0, 0, 0, 14000);
+		readonly TimeSpan GlowTime = new TimeSpan (0, 0, 0, 0, 10000);
 		
 		DateTime hidden_change_time;
 		DateTime dock_hovered_change_time;
