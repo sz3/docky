@@ -150,7 +150,7 @@ namespace Docky.Windowing
 			exec_to_desktop_files = (Dictionary<string, List<string>>) DeserializeStrings ("ExecStrings");
 			class_to_desktop_files = (Dictionary<string, string>) DeserializeStrings ("ClassStrings");
 			
-			if (exec_to_desktop_files == null) {
+			if (exec_to_desktop_files == null || class_to_desktop_files == null) {
 				exec_to_desktop_files = BuildExecStrings ();
 				class_to_desktop_files = BuildClassStrings ();
 				SerializeStrings (exec_to_desktop_files, "ExecStrings");
