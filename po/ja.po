@@ -7,38 +7,38 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-03-08 14:52+0100\n"
-"PO-Revision-Date: 2010-03-20 10:43+0000\n"
+"POT-Creation-Date: 2010-03-24 19:54+0100\n"
+"PO-Revision-Date: 2010-03-25 12:43+0000\n"
 "Last-Translator: kawaji <jiro.kawada@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-03-22 07:44+0000\n"
+"X-Launchpad-Export-Date: 2010-03-27 17:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:117
+#: ../Docky/Docky/ConfigurationWindow.cs:118
 msgid "Search Docklets..."
 msgstr "ドックレットの検索..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:132
+#: ../Docky/Docky/ConfigurationWindow.cs:133
 msgid "Search Helpers..."
 msgstr "ヘルパーの検索..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:178
+#: ../Docky/Docky/ConfigurationWindow.cs:179
 msgid "Click on any dock to configure."
 msgstr "設定変更したいドックをクリック。"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:179
+#: ../Docky/Docky/ConfigurationWindow.cs:180
 msgid "Drag any dock to reposition."
 msgstr "ドックを移動させるにはドラッグ。"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:248
+#: ../Docky/Docky/ConfigurationWindow.cs:249
 msgid "Delete the currently selected dock?"
 msgstr "現在選択中のドックを削除しますか？"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:250
+#: ../Docky/Docky/ConfigurationWindow.cs:251
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -46,16 +46,16 @@ msgstr ""
 "ドックの削除を選択すると、\n"
 "削除するドックに関わる全ての設定が完全に失われます。"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:265
+#: ../Docky/Docky/ConfigurationWindow.cs:266
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:392
 msgid "_Delete Dock"
 msgstr "ドック削除(_D)"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:375
+#: ../Docky/Docky/ConfigurationWindow.cs:383
 msgid "_Select"
 msgstr "選択(_S)"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:378
+#: ../Docky/Docky/ConfigurationWindow.cs:386
 msgid ".tar Archives"
 msgstr ".tar 書庫"
 
@@ -136,16 +136,16 @@ msgstr "<i>ドックがアクティブなアプリケーションを邪魔する
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>ドックがウィンドウ全般を邪魔する時に隠します。</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:369
+#: ../Docky/Docky/Interface/DockWindow.cs:371
 msgid "Drag to reposition"
 msgstr "ドラッグして再配置"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:376
+#: ../Docky/Docky/Interface/DockWindow.cs:378
 msgid "Drop to open"
 msgstr "ドロップして開く"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:380
-#: ../Docky/Docky/Interface/DockWindow.cs:394
+#: ../Docky/Docky/Interface/DockWindow.cs:382
+#: ../Docky/Docky/Interface/DockWindow.cs:396
 msgid "Drop to add to dock"
 msgstr "ドロップしてドックに追加"
 
@@ -428,7 +428,7 @@ msgstr "テーマ"
 msgid "Theme"
 msgstr "テーマ"
 
-#: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:44
+#: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:42
 msgid "Show Desktop"
 msgstr "デスクトップの表示"
 
@@ -594,11 +594,11 @@ msgstr "ライブ・ストリーム"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:76
 msgid "Clear the Recent Documents list?"
-msgstr "最近開いたドキュメントの履歴を消去しますか？"
+msgstr "最近開いたドキュメントの一覧をクリアしますか？"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:78
 msgid "Clear Recent Documents"
-msgstr "最近開いたドキュメントの履歴消去"
+msgstr "最近開いたドキュメントのクリア"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:80
 msgid ""
@@ -606,13 +606,63 @@ msgid ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
-"最近開いたドキュメントの履歴を消去すると、以下が消去されます。:\n"
-"・メニュー「場所」→「最近開いたドキュメント」の履歴すべて\n"
-"・すべてのアプリケーションの最近開いたドキュメントの履歴すべて"
+"最近開いたドキュメントの一覧をクリアすると、次が消去されます:\n"
+"•「場所」→「最近開いたドキュメント」メニューにある全てのエントリ\n"
+"• アプリケーションで記録した「最近開いた…」の全てのエントリ"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
 msgid "_Clear Recent Documents..."
-msgstr "最近開いたドキュメントの履歴消去(C)..."
+msgstr "最近開いたドキュメントのクリア(C)..."
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:134
+msgid "Lock Screen"
+msgstr "画面のロック"
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:141
+msgid "Log Out..."
+msgstr "ログアウト..."
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:143
+msgid "Log Out"
+msgstr "ログアウト"
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:144
+msgid ""
+"Are you sure you want to close all programs and log out of the computer?"
+msgstr "本当に全てのプログラムを閉じてコンピュータをログアウトさせますか?"
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:150
+msgid "Suspend"
+msgstr "サスペンド"
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
+msgid "Hibernate"
+msgstr "ハイバネート"
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:167
+msgid "Restart..."
+msgstr "再起動..."
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:169
+msgid "Restart"
+msgstr "再起動"
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:170
+msgid "Are you sure you want to close all programs and restart the computer?"
+msgstr "本当に全てのプログラムを閉じてコンピュータを再起動させますか?"
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
+msgid "Shut Down..."
+msgstr "シャットダウン..."
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
+msgid "Shut Down"
+msgstr "シャットダウン"
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
+msgid ""
+"Are you sure you want to close all programs and shut down the computer?"
+msgstr "本当に全てのプログラムを閉じてコンピュータをシャットダウンさせますか?"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
 msgid "No items in Trash"
@@ -644,8 +694,8 @@ msgid ""
 "can also delete them separately."
 msgstr ""
 "ゴミ箱を空にする選択を行うと、\n"
-"ゴミ箱内のすべてのアイテムが完全に失われます。\n"
-"アイテムの個別削除も可能なことを覚えておいてください。"
+"ゴミ箱内の全てのアイテムが完全に失われます。\n"
+"アイテムの個別削除も可能であることに留意してください。"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:66
 msgid "_Weather Provider:"
