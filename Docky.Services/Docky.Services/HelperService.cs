@@ -95,7 +95,7 @@ namespace Docky.Services
 			
 			Helpers = HelperDirs
 				.SelectMany (d => d.GetFiles (""))
-				.Where (file => !(file.Basename.EndsWith ("~") || (file.Basename.EndsWith ("pyc"))))
+				.Where (file => !(file.Basename.EndsWith ("~")))
 				.Select (hf => LookupHelper (hf))
 				.Distinct (new HelperComparer ())
 				.ToList ();
