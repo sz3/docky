@@ -36,11 +36,16 @@ namespace Docky.Menus
 		
 		public bool Bold { get; set;}
 		
+		static bool defaultShowIcons;
+		static MenuItem () {
+			defaultShowIcons = (bool) new GConf.Client ().Get ("/desktop/gnome/interface/menus_have_icons");
+		}
+		
 		bool? show_icons;
 		public bool ShowIcons { 
 			get {
 				if (!show_icons.HasValue)
-					show_icons = (bool) new GConf.Client ().Get ("/desktop/gnome/interface/menus_have_icons");
+					show_icons = defaultShowIcons;
 				return (ForcePixbuf != null || !string.IsNullOrEmpty (Icon)) && show_icons.Value;
 			}
 			protected set {
