@@ -65,7 +65,8 @@ namespace Docky.Items
 											(double) gdkColor.Green / ushort.MaxValue,
 											(double) gdkColor.Blue / ushort.MaxValue,
 											1.0).GetHue ();
-			HueShift = (((hue - 202) % 360) + 360) % 360;
+			if (HueShift >= 0)
+				HueShift = (((hue - 202) % 360) + 360) % 360;
 		}
 		
 		public override string UniqueID ()
