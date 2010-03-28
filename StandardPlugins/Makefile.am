@@ -9,6 +9,7 @@ SUBDIRS = \
 	NetworkManager \
 	NPR \
 	RecentDocuments \
+	SessionManager \
 	Trash \
 	Weather
 
@@ -23,5 +24,6 @@ DIST_SUBDIRS = \
 	NetworkManager \
 	NPR \
 	RecentDocuments \
+	SessionManager \
 	Trash \
 	Weather

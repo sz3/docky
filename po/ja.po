@@ -1,530 +1,517 @@
-# Russian translation for docky
-# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# Japanese translation for docky
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the docky package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-24 19:54+0100\n"
-"PO-Revision-Date: 2010-03-22 08:43+0000\n"
-"Last-Translator: Rico Tzschichholz <Unknown>\n"
-"Language-Team: Russian <ru@li.org>\n"
+"PO-Revision-Date: 2010-03-25 12:43+0000\n"
+"Last-Translator: kawaji <jiro.kawada@gmail.com>\n"
+"Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Launchpad-Export-Date: 2010-03-27 17:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:118
 msgid "Search Docklets..."
-msgstr "Поиск доклетов"
+msgstr "ドックレットの検索..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
 msgid "Search Helpers..."
-msgstr "Поиск дополнений..."
+msgstr "ヘルパーの検索..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:179
 msgid "Click on any dock to configure."
-msgstr "Нажмите на панель для её настройки"
+msgstr "設定変更したいドックをクリック。"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:180
 msgid "Drag any dock to reposition."
-msgstr ""
+msgstr "ドックを移動させるにはドラッグ。"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:249
 msgid "Delete the currently selected dock?"
-msgstr "Удалить выбранную панель?"
+msgstr "現在選択中のドックを削除しますか？"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:251
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
-"Если вы удалите панель, \n"
-"все ей настройки исчезнут."
+"ドックの削除を選択すると、\n"
+"削除するドックに関わる全ての設定が完全に失われます。"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:266
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:392
 msgid "_Delete Dock"
-msgstr "_Удалить панель"
+msgstr "ドック削除(_D)"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:383
 msgid "_Select"
-msgstr ""
+msgstr "選択(_S)"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:386
 msgid ".tar Archives"
-msgstr "архивы .tar"
+msgstr ".tar 書庫"
 
 #: ../Docky/Docky/DockletTile.cs:46
 #: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:220
 msgid "_Add"
-msgstr "_Добавить"
+msgstr "追加(_A)"
 
 #: ../Docky/Docky/DockletTile.cs:47
 #: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:203
 msgid "_Remove"
-msgstr "_Удалить"
+msgstr "削除(_R)"
 
 #: ../Docky/Docky/DockletTile.cs:48
 msgid "Author"
-msgstr "Автор"
+msgstr "作成者"
 
 #: ../Docky/Docky/DockletTile.cs:55
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:166
 msgid "Settings"
-msgstr "Настройки"
+msgstr "設定"
 
 #: ../Docky/Docky/Docky.cs:98
 msgid ""
 "Docky requires compositing to work properly. Please enable compositing and "
 "restart docky."
-msgstr ""
-"Для корректной работы Docky требуется композитный режим. Пожалуйста, "
-"включите композитный режим и перезапустите Docky."
+msgstr "Docky の正常動作にはコンポジットが必要です。コンポジットを有効にして Docky を再起動してください。"
 
 #: ../Docky/Docky/HelperTile.cs:41
 msgid "_Enable"
-msgstr "_Включить"
+msgstr "有効化(_E)"
 
 #: ../Docky/Docky/HelperTile.cs:42
 msgid "_Disable"
-msgstr "_Отключить"
+msgstr "無効化(_D)"
 
 #: ../Docky/Docky/HelperTile.cs:43
 msgid "Status"
-msgstr "Состояние"
+msgstr "状態"
 
 #: ../Docky/Docky/HelperTile.cs:61
 msgid "Uninstall"
-msgstr "Удалить"
+msgstr "アンインストール"
 
 #: ../Docky/Docky/HelperTile.cs:73
 msgid "Running"
-msgstr "Выполняется"
+msgstr "稼動中"
 
 #: ../Docky/Docky/HelperTile.cs:73
 msgid "Stopped"
-msgstr "Остановлено"
+msgstr "停止"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:329
 msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
-msgstr ""
-"На значках для запуска, которые имеют более одного активного окна есть "
-"специальный индикатор."
+msgstr "現在複数のウィンドウを管理しているランチャー下に、追加のインジケータを表示します。"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:331
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
-msgstr ""
-"При выборе этого, окна, у которых еще нет значков запуска на панели, будут "
-"добавлены к текущей активной панели."
+msgstr "有効にすると、いずれのドックにもランチャーを有していないウィンドウは、このドックに追加されるようになります。"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:598
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
-msgstr "<i>Видна все время, развернутые окна не перекрывают панель.</i>"
+msgstr "<i>常時表示: ウィンドウを最大化してもドックには重なりません。</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:601
 msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr "<i>Исчезает, если курсор не над ним.</i>"
+msgstr "<i>マウスが置かれない間は常に隠れた状態になります。</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:604
 msgid "<i>Hides when dock obstructs the active application.</i>"
-msgstr "<i>Исчезает, если панель перекрывает активное приложение.</i>"
+msgstr "<i>ドックがアクティブなアプリケーションを邪魔する時に隠します。</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:607
 msgid "<i>Hides when dock obstructs any window.</i>"
-msgstr "<i>Исчезает, если панель перекрывает любое окно.</i>"
+msgstr "<i>ドックがウィンドウ全般を邪魔する時に隠します。</i>"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:371
 msgid "Drag to reposition"
-msgstr "Перетащите для изменения местоположения"
+msgstr "ドラッグして再配置"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:378
 msgid "Drop to open"
-msgstr "Перетащите для открытия"
+msgstr "ドロップして開く"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:382
 #: ../Docky/Docky/Interface/DockWindow.cs:396
 msgid "Drop to add to dock"
-msgstr "Перетащите, чтобы добавить на панель"
+msgstr "ドロップしてドックに追加"
 
 #: ../Docky/Docky/Items/DockyItem.cs:93
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "_Settings"
-msgstr "_Параметры"
+msgstr "設定(_S)"
 
 #: ../Docky/Docky/Items/DockyItem.cs:94
 msgid "_About"
-msgstr "_О программе"
+msgstr "情報(_A)"
 
 #: ../Docky/Docky/Items/DockyItem.cs:95
 msgid "_Quit Docky"
-msgstr "_Закрыть Docky"
+msgstr "Docky 終了(_Q)"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:84
 msgid "Docky Configuration"
-msgstr "Настройка Docky"
+msgstr "Docky の設定"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:129
 msgid "_Start When Computer Starts"
-msgstr "_Запустить вместе с системой"
+msgstr "コンピュータ起動時に起動(_S)"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:145
 msgid "_Theme:"
-msgstr "_Тема:"
+msgstr "テーマ(_T):"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:169
 msgid "<b>General Options</b>"
-msgstr "<b>Основные настройки</b>"
+msgstr "<b>全般オプション</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:189
 msgid "<b>Dock Configuration</b>"
-msgstr "<b>Настройки панели</b>"
+msgstr "<b>ドック設定</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:203
 msgid "Docks"
-msgstr "Панели"
+msgstr "ドック"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:224
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:276
 msgid "All"
-msgstr "Все"
+msgstr "全て"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:225
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:277
 msgid "Enabled"
-msgstr "Включённые"
+msgstr "有効状態"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:226
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:278
 msgid "Disabled"
-msgstr "Выключенные"
+msgstr "無効状態"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:255
 msgid "Docklets"
-msgstr "Доклеты"
+msgstr "ドックレット"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:302
 msgid "_Install"
-msgstr "_Установить"
+msgstr "インストール(_I)"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:334
 msgid "Helpers"
-msgstr "Дополнения"
+msgstr "ヘルパー"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:365
 msgid "_New Dock"
-msgstr "_Новая панель"
+msgstr "新規ドック(_N)"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:52
 msgid "None"
-msgstr ""
+msgstr "なし"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:53
 msgid "Autohide"
-msgstr "Автоматически скрывать"
+msgstr "自動的に隠す"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:54
 msgid "Intellihide"
-msgstr "Интеллектуальное скрытие"
+msgstr "賢く隠す"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:55
 msgid "Window Dodge"
-msgstr ""
+msgstr "ウィンドウ回避"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:69
 msgid "_Fade On Hide"
-msgstr ""
+msgstr "隠す時にフェード(_F)"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:113
 msgid "_Icon Size:"
-msgstr "_Размер значков:"
+msgstr "アイコンの大きさ(_I):"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:126
 msgid "_Hiding:"
-msgstr "_Скрытие:"
+msgstr "隠す方法(_H):"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:136
 msgid "Indicat_e Multiple Windows"
-msgstr ""
+msgstr "複数ウィンドウを示す目印(_E)"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:150
 msgid "_Panel Mode"
-msgstr "_Режим панели"
+msgstr "パネルモード(_P)"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
 msgid "3D Back_ground"
-msgstr ""
+msgstr "3D背景(_G)"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
 msgid "_Manage Windows Without Launcher"
-msgstr "_Отображение приложений не имеющих ярлыков"
+msgstr "ランチャーを有していないウィンドウを管理(_M)"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:193
 msgid "_Zoom:"
-msgstr "_Масштаб:"
+msgstr "ズーム(_Z):"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:147
 msgid "New _Window"
-msgstr "Новое _окно"
+msgstr "新規ウィンドウ(_W)"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:149
 #: ../StandardPlugins/Mounter/src/MountItem.cs:97
 msgid "_Open"
-msgstr "_Открыть"
+msgstr "開く(_O)"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:69
 msgid "Reset Color"
-msgstr "Восстановить цвет"
+msgstr "色を元に戻す"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:356
 msgid "_Pin to Dock"
-msgstr "_Прикрепить к панели"
+msgstr "ドックに作成配置(_P)"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:186
 msgid "Not enough free space on destination."
-msgstr ""
+msgstr "目的の場所に十分な空きスペースがありません。"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:198
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:200
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:220
 msgid "Complete"
-msgstr "Выполнено"
+msgstr "完了"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:206
 msgid "Moving"
-msgstr "Перемещение"
+msgstr "移動中"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:212
 msgid "Copying"
-msgstr "Копирование"
+msgstr "コピー中"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:225
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:226
 msgid "Error performing drop action"
-msgstr "Ошибка при перетаскивании"
+msgstr "ドロップ・アクション実行でエラー"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:248
 msgid "Open"
-msgstr "Открыть"
+msgstr "開く"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:249
 msgid "Open Containing Folder"
-msgstr ""
+msgstr "親フォルダを開く"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:244
 msgid "Unma_ximize"
-msgstr "Восстановить окно"
+msgstr "最大化解除(_X)"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:247
 msgid "Ma_ximize"
-msgstr "_Развернуть"
+msgstr "最大化(_X)"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:252
 msgid "_Restore"
-msgstr "_Восстановить"
+msgstr "元に戻す(_R)"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:255
 msgid "Mi_nimize"
-msgstr "_Свернуть"
+msgstr "最小化(_N)"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:259
 msgid "_Close All"
-msgstr "_Закрыть все"
+msgstr "全て閉じる(_C)"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
 msgid "Sign up for {0}"
-msgstr "Зарегистрироваться в {0}"
+msgstr "{0} にサインアップ"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:44
 msgid "Validating..."
-msgstr "Проверка..."
+msgstr "有効性確認中..."
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:45
 #, csharp-format
 msgid "Don't have {0}?"
-msgstr "Не имеете {0}?"
+msgstr "{0} アカウントを持っていない？"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:46
 msgid "Account validation failed!"
-msgstr "Ошибка при проверке аккаунта!"
+msgstr "アカウントの有効性確認に失敗！"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:47
 msgid "Verify and save account information"
-msgstr "Проверка и сохранение информации об аккаунте"
+msgstr "アカウント情報の有効性確認と保存"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:48
 msgid "Account validation succeeded!"
-msgstr "Проверка аккаунта пройдена!"
+msgstr "アカウントの有効性確認に成功しました！"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:87
 msgid "Password"
-msgstr "Пароль"
+msgstr "パスワード"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:108
 msgid "Username"
-msgstr "Пользователь"
+msgstr "ユーザー名"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
 msgid "<i>Verify and save account information</i>"
-msgstr "<i>Проверить и сохранить информацию об аккаунте</i>"
+msgstr "<i>アカウント情報の有効性確認と保存</i>"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
 msgid "Don't have an account?"
-msgstr "Еще не зарегистрированы?"
+msgstr "アカウントを持っていない？"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:156
 msgid "No Battery Found"
-msgstr "Батарея не найдена"
+msgstr "バッテリーが見つかりません"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:173
 #, csharp-format
 msgid "{0} hour"
 msgid_plural "{0} hours"
-msgstr[0] "{0} час"
-msgstr[1] "{0} часа"
-msgstr[2] "{0} часов"
+msgstr[0] "{0} 時間"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:175
 #, csharp-format
 msgid "{0} minute"
 msgid_plural "{0} minutes"
-msgstr[0] "{0} минута"
-msgstr[1] "{0} минуты"
-msgstr[2] "{0} минут"
+msgstr[0] "{0} 分"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:177
 msgid "until charged "
-msgstr ""
+msgstr "で充電完了 "
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:179
 msgid "remaining "
-msgstr "осталось "
+msgstr "残り "
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:84
 msgid "Computer"
-msgstr "Компьютер"
+msgstr "コンピュータ"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:421
 msgid "Di_gital Clock"
-msgstr "Ци_фровые часы"
+msgstr "デジタル時計(_G)"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:427
 msgid "24-Hour _Clock"
-msgstr "24-часовый режим"
+msgstr "24時間時計(_C)"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:433
 msgid "Show _Date"
-msgstr "Показывать _дату"
+msgstr "日付表示(_D)"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:439
 msgid "Select _Theme"
-msgstr "Выбрать _тему"
+msgstr "テーマ選択(_T)"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
-msgstr "Темы"
+msgstr "テーマ"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
 msgid "Theme"
-msgstr "Тема"
+msgstr "テーマ"
 
 #: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:42
 msgid "Show Desktop"
-msgstr "Показать рабочий стол"
+msgstr "デスクトップの表示"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
 msgid "_Add Label"
-msgstr "_Добавить метку"
+msgstr "ラベル追加(_A)"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:114
 msgid "Check e_very:"
-msgstr "Проверять к_аждые:"
+msgstr "チェック間隔(_V)"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:124
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:187
 msgid "minutes"
-msgstr "мин."
+msgstr "分"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:189
 msgid "Username or Password not set"
-msgstr "Пользователь или Пароль не установлены"
+msgstr "ユーザー名またはパスワードの設定なし"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:240
 msgid "(no subject)"
-msgstr "(без темы)"
+msgstr "（件名なし）"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:258
 #, csharp-format
 msgid "From: {0}"
-msgstr "От: {0}"
+msgstr "差出人: {0}"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:269
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 msgid "Feed Error"
-msgstr "Ошибка ленты"
+msgstr "フィードエラー"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:278
 msgid "Invalid Username"
-msgstr "Неверное имя пользователя"
+msgstr "無効なユーザー名"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:282
 msgid "Network Error"
-msgstr "Ошибка сети"
+msgstr "ネットワークエラー"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 msgid "General Error"
-msgstr "Общая ошибка"
+msgstr "一般エラー"
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
 msgid "GMail Configuration"
-msgstr "Настройки GMail"
+msgstr "GMail の設定"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:79
 msgid "No unread mail"
-msgstr "Нет непрочитанных писем"
+msgstr "未読メールなし"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:82
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
-msgstr[0] "{0} непрочитанное сообщение"
-msgstr[1] "{0} непрочитанных сообщения"
-msgstr[2] "{0} непрочитанных сообщений"
+msgstr[0] "{0} 未読メッセージ"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:103
 msgid "Checking mail..."
-msgstr "Проверка почты..."
+msgstr "メールチェック中..."
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:188
 msgid "_View "
-msgstr ""
+msgstr "表示(_V) "
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:193
 msgid "_Compose Mail"
-msgstr ""
+msgstr "メール作成(_C)"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "New Mail"
-msgstr "Новая почта"
+msgstr "新着メール"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
 msgid "Check _Mail"
-msgstr "Проверить _почту"
+msgstr "メールチェック(_M)"
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
-msgstr "Метки"
+msgstr "ラベル"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
 msgid "GMail"
@@ -532,86 +519,86 @@ msgstr "GMail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr ""
+msgstr "ログイン"
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
-msgstr "От: "
+msgstr "差出人: "
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Eject"
-msgstr "_Извлечь"
+msgstr "取り出す(_E)"
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Unmount"
-msgstr "_Отключить"
+msgstr "アンマウント(_U)"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:53
 msgid "Network Manager"
-msgstr "Менеджер сети"
+msgstr "ネットワーク・マネージャ"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
-msgstr "Подключение..."
+msgstr "接続試行中..."
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:101
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:166
 msgid "Disconnected"
-msgstr "Отключено"
+msgstr "切断状態"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
 msgid "Connected: {0}"
-msgstr "Подключен: {0}"
+msgstr "接続済: {0}"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:48
 msgid "My _Stations"
-msgstr ""
+msgstr "登録した放送局(_S)"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:79
 msgid "S_earch"
-msgstr "П_оиск"
+msgstr "検索(_S)"
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
-msgstr "Станции не найдены"
+msgstr "放送局がみつかりません。"
 
 #: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
-msgstr "Пожалуйста, повторите поиск."
+msgstr "再検索してみてください。"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:48
 msgid "Fetching Information..."
-msgstr "Получение информации..."
+msgstr "情報取得中..."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:68
 msgid "Click to add NPR stations."
-msgstr "Нажмите, чтобы добавить NPR-станции."
+msgstr "クリックしてNPR局を追加。"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:107
 msgid "Home Page"
-msgstr "Домашняя страница"
+msgstr "ホームページ"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:114
 msgid "Program Schedule"
-msgstr "Расписание программы"
+msgstr "番組スケジュール"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:121
 msgid "Donate"
-msgstr "Пожертвовать"
+msgstr "寄付"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:128
 msgid "Live Streams"
-msgstr ""
+msgstr "ライブ・ストリーム"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:76
 msgid "Clear the Recent Documents list?"
-msgstr "Очистить список недавно использовавшихся документов?"
+msgstr "最近開いたドキュメントの一覧をクリアしますか？"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:78
 msgid "Clear Recent Documents"
-msgstr "Очистить список недавно открытых документов"
+msgstr "最近開いたドキュメントのクリア"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:80
 msgid ""
@@ -619,88 +606,86 @@ msgid ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
-"При очистке списка недавно открытых документов будут удалены:\n"
-"• Все элементы из меню Переход → Недавние документы.\n"
-"• Все элементы из списков недавно открытых документов во всех приложениях."
+"最近開いたドキュメントの一覧をクリアすると、次が消去されます:\n"
+"•「場所」→「最近開いたドキュメント」メニューにある全てのエントリ\n"
+"• アプリケーションで記録した「最近開いた…」の全てのエントリ"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
 msgid "_Clear Recent Documents..."
-msgstr "_Очистить недавно открытые документы"
+msgstr "最近開いたドキュメントのクリア(C)..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:134
 msgid "Lock Screen"
-msgstr ""
+msgstr "画面のロック"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:141
 msgid "Log Out..."
-msgstr ""
+msgstr "ログアウト..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:143
 msgid "Log Out"
-msgstr ""
+msgstr "ログアウト"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:144
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
-msgstr ""
+msgstr "本当に全てのプログラムを閉じてコンピュータをログアウトさせますか?"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:150
 msgid "Suspend"
-msgstr ""
+msgstr "サスペンド"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
 msgid "Hibernate"
-msgstr ""
+msgstr "ハイバネート"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:167
 msgid "Restart..."
-msgstr ""
+msgstr "再起動..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:169
 msgid "Restart"
-msgstr ""
+msgstr "再起動"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:170
 msgid "Are you sure you want to close all programs and restart the computer?"
-msgstr ""
+msgstr "本当に全てのプログラムを閉じてコンピュータを再起動させますか?"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
 msgid "Shut Down..."
-msgstr ""
+msgstr "シャットダウン..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
 msgid "Shut Down"
-msgstr ""
+msgstr "シャットダウン"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
-msgstr ""
+msgstr "本当に全てのプログラムを閉じてコンピュータをシャットダウンさせますか?"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
 msgid "No items in Trash"
-msgstr "В корзине пусто"
+msgstr "ゴミ箱にアイテムなし"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:75
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
-msgstr[0] "{0} элемент в корзине"
-msgstr[1] "{0} элемента в корзине"
-msgstr[2] "{0} элементов в корзине"
+msgstr[0] "ゴミ箱に {0} アイテム"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:160
 msgid "_Open Trash"
-msgstr "_Открыть корзину"
+msgstr "ゴミ箱を開く(_O)"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:162
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:199
 msgid "Empty _Trash"
-msgstr "О_чистить корзину"
+msgstr "ゴミ箱を空にする(_T)"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
 msgid "Empty all of the items from the trash?"
-msgstr "Удалить все файлы из корзины?"
+msgstr "ゴミ箱を空にしますか？"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:186
 msgid ""
@@ -708,47 +693,45 @@ msgid ""
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
-"Если вы очистите корзину, все элементы в ней\n"
-"будут удалены безвозвратно. Учтите, что вы\n"
-"можете также удалить их по одному."
+"ゴミ箱を空にする選択を行うと、\n"
+"ゴミ箱内の全てのアイテムが完全に失われます。\n"
+"アイテムの個別削除も可能であることに留意してください。"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:66
 msgid "_Weather Provider:"
-msgstr "_Служба погоды:"
+msgstr "天気予報の提供元 :"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:106
 msgid "My _Locations"
-msgstr "Мое _местоположение"
+msgstr "登録した場所(_L)"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:137
 msgid "_Search"
-msgstr "_Поиск"
+msgstr "検索(_S)"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:177
 msgid "Automatically Update _Every"
-msgstr "Обновлять _каждые"
+msgstr "自動的に更新する間隔(_E)"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:221
 msgid "Use _Metric Units"
-msgstr "Использовать _метрическую систему"
+msgstr "メートル単位を使用(_M)"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:84
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:87
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:92
 msgid "Invalid Weather Location"
-msgstr "Не могу проверить погоду для этого места"
+msgstr "無効な天気予報場所の指定"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:90
 msgid "Network Error: "
-msgstr "Проблема с сетью: "
+msgstr "ネットワークエラー: "
 
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
-msgstr ""
-"Данные о погоде предоставляются компанией Google. Этот источник требует "
-"указать местоположение через US Zip Code или в виде 'Город, страна'"
+msgstr "Google 提供の天気予報データです。この提供元では、米国の郵便番号または「都市名、国名」での場所指定が必要です。"
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
@@ -757,98 +740,74 @@ msgid ""
 "website.  To find your code, look up your forecast on their site and the "
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
+"The Weather Channel "
+"著作提供の天気予報データです。この提供元では、米国の郵便番号または当該ウェブサイトで使用されている識別コードでの場所指定が必要です。識別コードを得るには、"
+"サイトで自分の所在地の天気予報を調べます。URL の '/local/' の後に続く AAXX000 の様になっている部分が識別コードです。"
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
 msgstr ""
-"Данные о погоде предоставляются и принадлежат компании Weather Underground. "
-"Этот источник требует указать местоположение через US Zip Code или в виде "
-"'Город, страна'."
+"Weather Underground 著作提供の天気予報データです。この提供元では、米国の郵便番号または「都市名、国名」での場所指定が必要です。"
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
-msgstr "Ничего не найдено."
+msgstr "検索結果はありません。"
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
-msgstr "Конфигурация модуля \"Погода\""
+msgstr "天気予報の設定"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
 msgid "Fetching data..."
-msgstr "Загружаю данные..."
+msgstr "データ取得中..."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:217
 msgid "Radar _Map"
-msgstr ""
+msgstr "レーダーマップ(_M)"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:222
 msgid "Forecasts"
-msgstr "Сводка погоды"
+msgstr "予報"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:238
 msgid "Check _Weather"
-msgstr "Проверить _погоду"
+msgstr "予報更新(_W)"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
 msgid "_Today"
-msgstr "_Сегодня"
+msgstr "今日(_T)"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
 msgid "T_omorrow"
-msgstr "З_автра"
+msgstr "明日(_O)"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:311
 msgid "Humidity"
-msgstr "Влажность"
+msgstr "湿度"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:313
 msgid "Temp"
-msgstr "Температура"
+msgstr "気温"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:315
 msgid "Feels Like"
-msgstr "Ощущается как"
+msgstr "体感温度"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:317
 msgid "Wind"
-msgstr "Ветер"
+msgstr "風速"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:318
 msgid "Direction"
-msgstr "Направление"
+msgstr "風向き"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:320
 msgid "Sunrise"
-msgstr "Восход солнца"
+msgstr "日の出"
 
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:321
 msgid "Sunset"
-msgstr "Закат"
-
-#~ msgid ""
-#~ "Docky requires compositing to work properly.  Please enable compositing and "
-#~ "restart docky."
-#~ msgstr ""
-#~ "Для правильной работы Docky необходим композитный менеджер окон. Пожалуйста "
-#~ "включите его и перезапустите Docky."
-
-#~ msgid "Disable"
-#~ msgstr "Выключить"
-
-#~ msgid "Enable"
-#~ msgstr "Включить"
-
-#~ msgid "Drag any dock to move it."
-#~ msgstr "Перетащите любую панель для изменения её положения."
-
-#~ msgid "3D Background"
-#~ msgstr "фон 3D"
-
-#~ msgid "Icon"
-#~ msgstr "Значок"
-
-#~ msgid "_Quit"
-#~ msgstr "В_ыход"
+msgstr "日の入り"

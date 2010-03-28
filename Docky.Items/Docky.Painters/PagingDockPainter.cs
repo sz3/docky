@@ -53,6 +53,7 @@ namespace Docky.Painters
 					return;
 				LastPage = page;
 				page = value;
+				OnPageChanged ();
 				
 				if (slideTimer > 0)
 					GLib.Source.Remove (slideTimer);
@@ -63,6 +64,12 @@ namespace Docky.Painters
 					QueueRepaint ();
 					return slideCounter < slideSteps;
 				});
+			}
+		}
+		
+		protected bool MovedLeft {
+			get {
+				return (LastPage > Page && !(LastPage == NumPages - 1 && Page == 0)) || (LastPage == 0 && Page == NumPages - 1);
 			}
 		}
 		
@@ -101,7 +108,7 @@ namespace Docky.Painters
 				if (slideCounter > 0 && slideCounter < slideSteps) {
 					double offset = Allocation.Width * Math.Log (slideCounter) / Math.Log (slideSteps);
 					
-					if ((LastPage > Page && !(LastPage == NumPages - 1 && Page == 0)) || (LastPage == 0 && Page == NumPages - 1)) {
+					if (MovedLeft) {
 						ShowBuffer (surface, Page, offset - Allocation.Width);
 						ShowBuffer (surface, LastPage, offset);
 					} else {
@@ -278,6 +285,10 @@ namespace Docky.Painters
 		{
 			ResetBuffers ();
 			base.Dispose ();
+		}
+		
+		protected virtual void OnPageChanged ()
+		{
 		}
 	}
 }

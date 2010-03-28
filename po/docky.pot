@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-08 14:52+0100\n"
+"POT-Creation-Date: 2010-03-24 19:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,34 +25,34 @@ msgstr ""
 msgid "Search Helpers..."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:177
+#: ../Docky/Docky/ConfigurationWindow.cs:179
 msgid "Click on any dock to configure."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:178
+#: ../Docky/Docky/ConfigurationWindow.cs:180
 msgid "Drag any dock to reposition."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:247
+#: ../Docky/Docky/ConfigurationWindow.cs:249
 msgid "Delete the currently selected dock?"
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:249
+#: ../Docky/Docky/ConfigurationWindow.cs:251
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:264
+#: ../Docky/Docky/ConfigurationWindow.cs:266
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:392
 msgid "_Delete Dock"
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:381
+#: ../Docky/Docky/ConfigurationWindow.cs:383
 msgid "_Select"
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:384
+#: ../Docky/Docky/ConfigurationWindow.cs:386
 msgid ".tar Archives"
 msgstr ""
 
@@ -133,16 +133,16 @@ msgstr ""
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:369
+#: ../Docky/Docky/Interface/DockWindow.cs:371
 msgid "Drag to reposition"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:376
+#: ../Docky/Docky/Interface/DockWindow.cs:378
 msgid "Drop to open"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:380
-#: ../Docky/Docky/Interface/DockWindow.cs:394
+#: ../Docky/Docky/Interface/DockWindow.cs:382
+#: ../Docky/Docky/Interface/DockWindow.cs:396
 msgid "Drop to add to dock"
 msgstr ""
 
@@ -427,7 +427,7 @@ msgstr ""
 msgid "Theme"
 msgstr ""
 
-#: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:44
+#: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:42
 msgid "Show Desktop"
 msgstr ""
 
@@ -444,33 +444,33 @@ msgstr ""
 msgid "minutes"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:183
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:189
 msgid "Username or Password not set"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:233
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:240
 msgid "(no subject)"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:251
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:258
 #, csharp-format
 msgid "From: {0}"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:262
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:266
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:269
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 msgid "Feed Error"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:271
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:278
 msgid "Invalid Username"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:275
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:282
 msgid "Network Error"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:280
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 msgid "General Error"
 msgstr ""
 
@@ -609,6 +609,55 @@ msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
 msgid "_Clear Recent Documents..."
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:134
+msgid "Lock Screen"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:141
+msgid "Log Out..."
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:143
+msgid "Log Out"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:144
+msgid ""
+"Are you sure you want to close all programs and log out of the computer?"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:150
+msgid "Suspend"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
+msgid "Hibernate"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:167
+msgid "Restart..."
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:169
+msgid "Restart"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:170
+msgid "Are you sure you want to close all programs and restart the computer?"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
+msgid "Shut Down..."
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
+msgid "Shut Down"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
+msgid "Are you sure you want to close all programs and shut down the computer?"
 msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:73

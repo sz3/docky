@@ -7,55 +7,55 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-03-08 14:52+0100\n"
-"PO-Revision-Date: 2010-03-09 14:49+0000\n"
-"Last-Translator: Rico Tzschichholz <Unknown>\n"
+"POT-Creation-Date: 2010-03-24 19:54+0100\n"
+"PO-Revision-Date: 2010-03-27 13:53+0000\n"
+"Last-Translator: EuGene <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-03-17 07:56+0000\n"
+"X-Launchpad-Export-Date: 2010-03-27 17:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:117
+#: ../Docky/Docky/ConfigurationWindow.cs:118
 msgid "Search Docklets..."
-msgstr ""
+msgstr "Szukaj Docklet'u"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:132
+#: ../Docky/Docky/ConfigurationWindow.cs:133
 msgid "Search Helpers..."
 msgstr "Wyszukaj Dodatki"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:178
+#: ../Docky/Docky/ConfigurationWindow.cs:179
 msgid "Click on any dock to configure."
 msgstr "Kliknij na panel, aby go skonfigurować"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:179
+#: ../Docky/Docky/ConfigurationWindow.cs:180
 msgid "Drag any dock to reposition."
-msgstr ""
+msgstr "Złap dowolny Dock aby zmienić jego położenie."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:248
+#: ../Docky/Docky/ConfigurationWindow.cs:249
 msgid "Delete the currently selected dock?"
 msgstr "Usunąć aktualnie wybrany Dock?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:250
+#: ../Docky/Docky/ConfigurationWindow.cs:251
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
 "Jeśli usuniesz Dock, wszystkie jego ustawienia zostaną bezpowrotnie utracone."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:265
+#: ../Docky/Docky/ConfigurationWindow.cs:266
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:392
 msgid "_Delete Dock"
 msgstr "Usuń Dock"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:375
+#: ../Docky/Docky/ConfigurationWindow.cs:383
 msgid "_Select"
 msgstr "_Wybierz"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:378
+#: ../Docky/Docky/ConfigurationWindow.cs:386
 msgid ".tar Archives"
 msgstr "Archiwum .tar"
 
@@ -71,7 +71,7 @@ msgstr "Usuń"
 
 #: ../Docky/Docky/DockletTile.cs:48
 msgid "Author"
-msgstr ""
+msgstr "O Autorze"
 
 #: ../Docky/Docky/DockletTile.cs:55
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:166
@@ -83,14 +83,16 @@ msgid ""
 "Docky requires compositing to work properly. Please enable compositing and "
 "restart docky."
 msgstr ""
+"Aby działać poprawnie, Docky wymaga sprzętowej akceleracji obrazu. Włącz "
+"akcelerację i zrestartuj Docky."
 
 #: ../Docky/Docky/HelperTile.cs:41
 msgid "_Enable"
-msgstr ""
+msgstr "Włącz"
 
 #: ../Docky/Docky/HelperTile.cs:42
 msgid "_Disable"
-msgstr ""
+msgstr "Wyłącz"
 
 #: ../Docky/Docky/HelperTile.cs:43
 msgid "Status"
@@ -113,12 +115,16 @@ msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
 msgstr ""
+"Powoduje, że aktywatory, które zarządzają więcej niż jednym oknem, posiadają "
+"pod sobą dodatkowe oznaczenie."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:331
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
+"Aktywacja tej opcji powoduje, że okno, które nie ma aktywatora na panelu "
+"zostanie automatycznie dodane."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:598
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
@@ -138,16 +144,16 @@ msgstr "<i>Ukryje się, jeśli Dock przesłania aktywną aplikację.</i>"
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Ukryje się, jeśli Dock przesłania jakiekolwiek okno.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:369
+#: ../Docky/Docky/Interface/DockWindow.cs:371
 msgid "Drag to reposition"
 msgstr "Przenieś, aby zmienić pozycję."
 
-#: ../Docky/Docky/Interface/DockWindow.cs:376
+#: ../Docky/Docky/Interface/DockWindow.cs:378
 msgid "Drop to open"
 msgstr "Upuść aby otworzyć"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:380
-#: ../Docky/Docky/Interface/DockWindow.cs:394
+#: ../Docky/Docky/Interface/DockWindow.cs:382
+#: ../Docky/Docky/Interface/DockWindow.cs:396
 msgid "Drop to add to dock"
 msgstr "Upuść, aby dodać do Dock'a"
 
@@ -206,7 +212,7 @@ msgstr "Wyłączone"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:255
 msgid "Docklets"
-msgstr ""
+msgstr "Docklety"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:302
 msgid "_Install"
@@ -250,7 +256,7 @@ msgstr "Ukrywanie"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:136
 msgid "Indicat_e Multiple Windows"
-msgstr ""
+msgstr "Wyróżnij wielookienkowe aplikacje"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:150
 msgid "_Panel Mode"
@@ -258,83 +264,83 @@ msgstr "Wyświetlanie jako panel"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
 msgid "3D Back_ground"
-msgstr ""
+msgstr "Tło 3D"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
 msgid "_Manage Windows Without Launcher"
-msgstr ""
+msgstr "Zarządzaj oknami bez aktywatora"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:193
 msgid "_Zoom:"
-msgstr ""
+msgstr "Powiększenie"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:147
 msgid "New _Window"
-msgstr ""
+msgstr "Nowe okno"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:149
 #: ../StandardPlugins/Mounter/src/MountItem.cs:97
 msgid "_Open"
-msgstr ""
+msgstr "Otwórz"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:69
 msgid "Reset Color"
-msgstr ""
+msgstr "Resetuj kolor"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:356
 msgid "_Pin to Dock"
-msgstr ""
+msgstr "Przypnij do panelu"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:186
 msgid "Not enough free space on destination."
-msgstr ""
+msgstr "Za mało wolnego miejsca w miejscu docelowym."
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:198
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:200
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:220
 msgid "Complete"
-msgstr ""
+msgstr "Gotowe"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:206
 msgid "Moving"
-msgstr ""
+msgstr "Przenoszenie"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:212
 msgid "Copying"
-msgstr ""
+msgstr "Kopiowanie"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:225
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:226
 msgid "Error performing drop action"
-msgstr ""
+msgstr "Błąd przy upuszczaniu"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:248
 msgid "Open"
-msgstr ""
+msgstr "Otwórz"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:249
 msgid "Open Containing Folder"
-msgstr ""
+msgstr "Otwórz folder zawierający"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:244
 msgid "Unma_ximize"
-msgstr ""
+msgstr "Cofnij maksymalizację"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:247
 msgid "Ma_ximize"
-msgstr ""
+msgstr "Maksymalizuj"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:252
 msgid "_Restore"
-msgstr ""
+msgstr "Przywróć"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:255
 msgid "Mi_nimize"
-msgstr ""
+msgstr "Minimalizuj"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:259
 msgid "_Close All"
-msgstr ""
+msgstr "Zamknij wszystko"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
@@ -380,49 +386,51 @@ msgstr "Nie masz jeszcze konta?"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:156
 msgid "No Battery Found"
-msgstr ""
+msgstr "Nie znaleziono baterii"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:173
 #, csharp-format
 msgid "{0} hour"
 msgid_plural "{0} hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} godzina"
+msgstr[1] "{0} godziny"
+msgstr[2] "{0} godzin"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:175
 #, csharp-format
 msgid "{0} minute"
 msgid_plural "{0} minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} minuta"
+msgstr[1] "{0} minuty"
+msgstr[2] "{0} minut"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:177
 msgid "until charged "
-msgstr ""
+msgstr "do naładowania "
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:179
 msgid "remaining "
-msgstr ""
+msgstr "pozostało "
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:84
 msgid "Computer"
-msgstr ""
+msgstr "Komputer"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:421
 msgid "Di_gital Clock"
-msgstr ""
+msgstr "Zegar cyfrowy"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:427
 msgid "24-Hour _Clock"
-msgstr ""
+msgstr "Zegar 24-godzinny"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:433
 msgid "Show _Date"
-msgstr ""
+msgstr "Pokaż datę"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:439
 msgid "Select _Theme"
-msgstr ""
+msgstr "Wybierz motyw"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
@@ -432,22 +440,22 @@ msgstr "Style"
 msgid "Theme"
 msgstr "Styl"
 
-#: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:44
+#: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:42
 msgid "Show Desktop"
-msgstr ""
+msgstr "Pokaż Pulpit"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
 msgid "_Add Label"
-msgstr ""
+msgstr "Dodaj etykietę"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:114
 msgid "Check e_very:"
-msgstr ""
+msgstr "Sprawdzaj co:"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:124
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:187
 msgid "minutes"
-msgstr ""
+msgstr "minut(a/y)"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:189
 msgid "Username or Password not set"
@@ -455,7 +463,7 @@ msgstr "Login lub hasło nie ustawione"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:240
 msgid "(no subject)"
-msgstr ""
+msgstr "(brak tematu)"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:258
 #, csharp-format
@@ -481,7 +489,7 @@ msgstr "Błąd ogólny"
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
 msgid "GMail Configuration"
-msgstr ""
+msgstr "Konfiguracja GMail'a"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:79
 msgid "No unread mail"
@@ -500,19 +508,19 @@ msgstr "Sprawdzanie poczty..."
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:188
 msgid "_View "
-msgstr ""
+msgstr "Widok "
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:193
 msgid "_Compose Mail"
-msgstr ""
+msgstr "Utwórz wiadomość"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "New Mail"
-msgstr ""
+msgstr "Nowa wiadomość"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
 msgid "Check _Mail"
-msgstr ""
+msgstr "Sprawdź pocztę"
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
@@ -520,11 +528,11 @@ msgstr "Etykiety"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
 msgid "GMail"
-msgstr ""
+msgstr "GMail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr ""
+msgstr "Login"
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
@@ -532,24 +540,24 @@ msgstr "Od: "
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Eject"
-msgstr ""
+msgstr "Wysuń"
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Unmount"
-msgstr ""
+msgstr "Odmontuj"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:53
 msgid "Network Manager"
-msgstr ""
+msgstr "Menedżer połączeń"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
-msgstr ""
+msgstr "Łączenie..."
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:101
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:166
 msgid "Disconnected"
-msgstr ""
+msgstr "Rozłączony"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
@@ -614,6 +622,56 @@ msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
 msgid "_Clear Recent Documents..."
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:134
+msgid "Lock Screen"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:141
+msgid "Log Out..."
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:143
+msgid "Log Out"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:144
+msgid ""
+"Are you sure you want to close all programs and log out of the computer?"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:150
+msgid "Suspend"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
+msgid "Hibernate"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:167
+msgid "Restart..."
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:169
+msgid "Restart"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:170
+msgid "Are you sure you want to close all programs and restart the computer?"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
+msgid "Shut Down..."
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
+msgid "Shut Down"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
+msgid ""
+"Are you sure you want to close all programs and shut down the computer?"
 msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:73

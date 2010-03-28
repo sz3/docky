@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-03-08 14:52+0100\n"
+"POT-Creation-Date: 2010-03-24 19:54+0100\n"
 "PO-Revision-Date: 2010-01-22 19:18+0000\n"
 "Last-Translator: Daniel Nylander <yeager@ubuntu.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -15,30 +15,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-03-17 07:56+0000\n"
+"X-Launchpad-Export-Date: 2010-03-27 17:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:117
+#: ../Docky/Docky/ConfigurationWindow.cs:118
 msgid "Search Docklets..."
 msgstr "Sök dockprogram..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:132
+#: ../Docky/Docky/ConfigurationWindow.cs:133
 msgid "Search Helpers..."
 msgstr "Sök hjälpare..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:178
+#: ../Docky/Docky/ConfigurationWindow.cs:179
 msgid "Click on any dock to configure."
 msgstr "Klicka på en docka för att konfigurera den."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:179
+#: ../Docky/Docky/ConfigurationWindow.cs:180
 msgid "Drag any dock to reposition."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:248
+#: ../Docky/Docky/ConfigurationWindow.cs:249
 msgid "Delete the currently selected dock?"
 msgstr "Ta bort den markerade dockan?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:250
+#: ../Docky/Docky/ConfigurationWindow.cs:251
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -46,16 +46,16 @@ msgstr ""
 "Om du väljer att ta bort dockan så kommer alla\n"
 "inställningar för den borttagna dockan att förloras."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:265
+#: ../Docky/Docky/ConfigurationWindow.cs:266
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:392
 msgid "_Delete Dock"
 msgstr "_Ta bort docka"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:375
+#: ../Docky/Docky/ConfigurationWindow.cs:383
 msgid "_Select"
 msgstr "_Välj"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:378
+#: ../Docky/Docky/ConfigurationWindow.cs:386
 msgid ".tar Archives"
 msgstr ".tar-arkiv"
 
@@ -142,16 +142,16 @@ msgstr "<i>Döljer sig när dockan är i vägen för det aktiva programmet.</i>"
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Döljer sig när dockan är i vägen för något fönster.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:369
+#: ../Docky/Docky/Interface/DockWindow.cs:371
 msgid "Drag to reposition"
 msgstr "Dra för att ändra position"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:376
+#: ../Docky/Docky/Interface/DockWindow.cs:378
 msgid "Drop to open"
 msgstr "Släpp för att öppna"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:380
-#: ../Docky/Docky/Interface/DockWindow.cs:394
+#: ../Docky/Docky/Interface/DockWindow.cs:382
+#: ../Docky/Docky/Interface/DockWindow.cs:396
 msgid "Drop to add to dock"
 msgstr "Släpp för att lägga till i dockan"
 
@@ -436,7 +436,7 @@ msgstr "Teman"
 msgid "Theme"
 msgstr "Tema"
 
-#: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:44
+#: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:42
 msgid "Show Desktop"
 msgstr ""
 
@@ -622,6 +622,56 @@ msgstr ""
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
 msgid "_Clear Recent Documents..."
 msgstr "_Töm Senaste dokument..."
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:134
+msgid "Lock Screen"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:141
+msgid "Log Out..."
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:143
+msgid "Log Out"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:144
+msgid ""
+"Are you sure you want to close all programs and log out of the computer?"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:150
+msgid "Suspend"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
+msgid "Hibernate"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:167
+msgid "Restart..."
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:169
+msgid "Restart"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:170
+msgid "Are you sure you want to close all programs and restart the computer?"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
+msgid "Shut Down..."
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
+msgid "Shut Down"
+msgstr ""
+
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
+msgid ""
+"Are you sure you want to close all programs and shut down the computer?"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
 msgid "No items in Trash"

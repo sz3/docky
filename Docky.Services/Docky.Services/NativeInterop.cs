@@ -54,10 +54,7 @@ namespace Docky.Services
 		public static string StrUri (File file)
 		{
 			try {
-				IntPtr str_uri = g_file_get_uri (file.Handle);
-				string uri = Marshal.PtrToStringAuto (str_uri);
-				GLib.Marshaller.Free (str_uri);
-				return uri;
+				return GLib.Marshaller.PtrToStringGFree (g_file_get_uri (file.Handle));
 			} catch (DllNotFoundException e) {
 				Log<NativeInterop>.Fatal ("Could not find gio-2.0, please report immediately.");
 				Log<NativeInterop>.Info (e.StackTrace);

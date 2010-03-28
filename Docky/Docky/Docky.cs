@@ -199,6 +199,9 @@ namespace Docky
 				" MastroPino (https://launchpad.net/~mastropino)\n" +
 				" Quizzlo (https://launchpad.net/~marcopaolone)\n" +
 
+				"Japanese\n" +
+				" kawaji (https://launchpad.net/~jiro-kawada)\n" +
+
 				"Korean\n" +
 				" Cedna (https://launchpad.net/~cedna)\n" +
 

@@ -75,15 +75,15 @@ namespace WeatherDocklet
 			{
 				default:
 				case 0:
-					DrawCurrentCondition (surface.Context);
-					break;
-				
-				case 1:
 					DrawForecast (surface.Context);
 					break;
 				
-				case 2:
+				case 1:
 					DrawTempGraph (surface.Context);
+					break;
+				
+				case 2:
+					DrawCurrentCondition (surface.Context);
 					break;
 			}
 		}

@@ -148,8 +148,8 @@ namespace Docky.Interface
 		readonly TimeSpan PanelAnimationTime = new TimeSpan (0, 0, 0, 0, 300);
 		readonly TimeSpan BounceTime = new TimeSpan (0, 0, 0, 0, 600);
 		readonly TimeSpan SlideTime = new TimeSpan (0, 0, 0, 0, 200);
-		readonly TimeSpan PulseTime = new TimeSpan (0, 0, 0, 0, 1250);
-		readonly TimeSpan GlowTime = new TimeSpan (0, 0, 0, 0, 20000);
+		readonly TimeSpan PulseTime = new TimeSpan (0, 0, 0, 0, 2000);
+		readonly TimeSpan GlowTime = new TimeSpan (0, 0, 0, 0, 10000);
 		
 		DateTime hidden_change_time;
 		DateTime dock_hovered_change_time;
@@ -277,16 +277,21 @@ namespace Docky.Interface
 			get {
 				if (collection_backend.Count == 0) {
 					update_screen_regions = true;
-					if (Preferences.DefaultProvider.IsWindowManager)
-						collection_backend.Add (DockyItem);
-					
 					bool priorItems = false;
 					bool separatorNeeded = false;
+					
+					if (Preferences.DefaultProvider.IsWindowManager) {
+						collection_backend.Add (DockyItem);
+					
+						if (!Preferences.DefaultProvider.Items.Any())
+							collection_backend.Add (new SeparatorItem ());
+					}
+					
 					foreach (AbstractDockItemProvider provider in ItemProviders) {
 						if (!provider.Items.Any ())
 							continue;
 						
-						if (provider.Separated && priorItems || separatorNeeded)
+						if ((provider.Separated && priorItems) || separatorNeeded)
 							collection_backend.Add (new SeparatorItem ());
 					
 						collection_backend.AddRange (provider.Items.OrderBy (i => i.Position));
@@ -2040,18 +2045,9 @@ namespace Docky.Interface
 			//Draw UrgentGlow which is visible when Docky is hidden and an item need attention
 			if (AutohideManager.Hidden && !ConfigurationMode && (!Preferences.FadeOnHide || Preferences.FadeOpacity == 0)) {
 				foreach (AbstractDockItem adi in Items) {
-					if (adi.Indicator != ActivityIndicator.None && (adi.State & ItemState.Urgent) == ItemState.Urgent) {
+					if (adi.Indicator != ActivityIndicator.None && (adi.State & ItemState.Urgent) == ItemState.Urgent &&
+					    (render_time - adi.StateSetTime (ItemState.Urgent)).TotalMilliseconds < GlowTime.TotalMilliseconds) {
 						
-						double opacity = 0;
-						
-						if ((render_time - adi.StateSetTime (ItemState.Urgent)).TotalMilliseconds < GlowTime.TotalMilliseconds) {
-							
- 							opacity = 0.2 + (0.7 * (Math.Sin ((render_time - adi.StateSetTime (ItemState.Urgent)).TotalMilliseconds / PulseTime.TotalMilliseconds * Math.PI) + 1) / 2);
-							
-						} else
-							continue;
-						
-							
 						if (urgent_glow_buffer == null)
 							urgent_glow_buffer = CreateUrgentGlowBuffer ();
 		
@@ -2063,6 +2059,7 @@ namespace Docky.Interface
 							glowloc = val.MoveIn (Position, IconSize * val.Zoom / 2);
 						}
 
+						double opacity = 0.2 + (0.75 * (Math.Sin ((render_time - adi.StateSetTime (ItemState.Urgent)).TotalMilliseconds / PulseTime.TotalMilliseconds * 2 * Math.PI) + 1) / 2);
 						
 						urgent_glow_buffer.ShowWithOptions (surface, glowloc.Center, 1, 0, opacity);
 					}
