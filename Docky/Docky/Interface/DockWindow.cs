@@ -277,16 +277,21 @@ namespace Docky.Interface
 			get {
 				if (collection_backend.Count == 0) {
 					update_screen_regions = true;
-					if (Preferences.DefaultProvider.IsWindowManager)
-						collection_backend.Add (DockyItem);
-					
 					bool priorItems = false;
 					bool separatorNeeded = false;
+					
+					if (Preferences.DefaultProvider.IsWindowManager) {
+						collection_backend.Add (DockyItem);
+					
+						if (!Preferences.DefaultProvider.Items.Any())
+							collection_backend.Add (new SeparatorItem ());
+					}
+					
 					foreach (AbstractDockItemProvider provider in ItemProviders) {
 						if (!provider.Items.Any ())
 							continue;
 						
-						if (provider.Separated && priorItems || separatorNeeded)
+						if ((provider.Separated && priorItems) || separatorNeeded)
 							collection_backend.Add (new SeparatorItem ());
 					
 						collection_backend.AddRange (provider.Items.OrderBy (i => i.Position));
