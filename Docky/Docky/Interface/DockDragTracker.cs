@@ -47,6 +47,7 @@ namespace Docky.Interface
 		bool repo_mode = false;
 		bool drag_disabled = false;
 		int marker = 0;
+		uint drag_hover_timer;
 		
 		AbstractDockItem drag_item;
 		
@@ -483,6 +484,21 @@ namespace Docky.Interface
 				Owner.UpdateCollectionBuffer ();
 				Owner.Preferences.SyncPreferences ();
 			}
+			
+			if (drag_hover_timer > 0) {
+				GLib.Source.Remove (drag_hover_timer);
+				drag_hover_timer = 0;
+			}
+			
+			if (drag_data != null)
+				drag_hover_timer = GLib.Timeout.Add (1500, delegate {
+					AbstractDockItem item = Owner.HoveredItem;
+					if (item != null)
+						item.Scrolled (ScrollDirection.Down, Gdk.ModifierType.None);
+					// keep going to handle multiple applications of the same type, 
+					// if the drag is on and still hovering over an item.
+					return drag_data != null && item != null;
+				});
 		}
 		
 		AbstractDockItemProvider ProviderForItem (AbstractDockItem item)
