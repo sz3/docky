@@ -2104,29 +2104,33 @@ namespace Docky.Interface
 				
 				painterSurface.Internal.Show (painter_buffer.Context, painter_area.X, painter_area.Y);
 			
-				PointD point;
+				int offset = IconSize + DockHeightBuffer;
+				if (dockArea.Height > 2 * IconSize)
+					offset += (dockArea.Height - 2 * IconSize) / 2;
+				
+				PointD center;
 				switch (Position) {
 				default:
 				case DockPosition.Top:
-					point = new PointD (dockArea.X + IconSize + DockWidthBuffer,
-						dockArea.Y + DockHeightBuffer + IconSize);
-					break;
-				case DockPosition.Left:
-					point = new PointD (dockArea.X + DockHeightBuffer + IconSize,
-						dockArea.Y + IconSize + DockWidthBuffer);
+					center = new PointD (dockArea.X + IconSize + DockWidthBuffer,
+						dockArea.Y + offset);
 					break;
 				case DockPosition.Bottom:
-					point = new PointD (dockArea.X + IconSize + DockWidthBuffer,
-						dockArea.Y + dockArea.Height - DockHeightBuffer - IconSize);
+					center = new PointD (dockArea.X + IconSize + DockWidthBuffer,
+						dockArea.Y + dockArea.Height - offset);
+					break;
+				case DockPosition.Left:
+					center = new PointD (dockArea.X + offset,
+						dockArea.Y + IconSize + DockWidthBuffer);
 					break;
 				case DockPosition.Right:
-					point = new PointD (dockArea.X + dockArea.Height - DockHeightBuffer - IconSize,
+					center = new PointD (dockArea.X + dockArea.Height - offset,
 						dockArea.Y + IconSize + DockWidthBuffer);
 					break;
 				}
 				
 				DockySurface icon = painterOwner.IconSurface (painter_buffer, 2 * IconSize, IconSize, VisibleDockHeight);
-				icon.ShowWithOptions (painter_buffer, point, 1, 0, 1);
+				icon.ShowWithOptions (painter_buffer, center, 1, 0, 1);
 				
 				repaint_painter = false;
 			}
