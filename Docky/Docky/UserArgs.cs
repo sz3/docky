@@ -54,6 +54,7 @@ namespace Docky
 			ProcessArgs (args);
 			
 			// defaults
+			NvidiaMode |= DockServices.System.HasNvidia;
 			if (MaxSize == 0)
 				MaxSize = int.MaxValue;
 			MaxSize = Math.Max (MaxSize, 500);
@@ -63,6 +64,12 @@ namespace Docky
 			// otherwise leave it to the default, which is warn
 			if (Debug)
 				Log.DisplayLevel = LogLevel.Debug;
+			
+			// log the parsed user args
+			Log<UserArgs>.Debug ("BufferTime = " + BufferTime);
+			Log<UserArgs>.Debug ("MaxSize = " + MaxSize);
+			Log<UserArgs>.Debug ("NetbookMode = " + NetbookMode);
+			Log<UserArgs>.Debug ("NoPollCursor = " + NoPollCursor);
 		}
 	}
 }

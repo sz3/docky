@@ -56,9 +56,6 @@ namespace Docky
 			Log.Info ("Kernel version: {0}", System.Environment.OSVersion.Version);
 			Log.Info ("CLR version: {0}", System.Environment.Version);
 			
-			// process the command line args
-			CommandLinePreferences = new UserArgs (args);			
-			
 			//Init gtk and GLib related
 			Catalog.Init ("docky", AssemblyInfo.LocaleDirectory);
 			Gdk.Threads.Init ();
@@ -66,6 +63,9 @@ namespace Docky
 			Gtk.Application.Init ("Docky", ref args);
 			Gnome.Vfs.Vfs.Initialize ();
 			GLib.GType.Init ();
+			
+			// process the command line args
+			CommandLinePreferences = new UserArgs (args);			
 			
 			Wnck.Global.ClientType = Wnck.ClientType.Pager;
 			
