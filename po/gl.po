@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-24 19:54+0100\n"
-"PO-Revision-Date: 2010-03-19 14:04+0000\n"
-"Last-Translator: Francisco Diéguez <Unknown>\n"
+"PO-Revision-Date: 2010-03-30 09:04+0000\n"
+"Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-03-27 17:48+0000\n"
+"X-Launchpad-Export-Date: 2010-03-30 17:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:118
@@ -626,53 +626,56 @@ msgstr "_Limpar os documentos recentes..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:134
 msgid "Lock Screen"
-msgstr ""
+msgstr "Bloquear a pantalla"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:141
 msgid "Log Out..."
-msgstr ""
+msgstr "Saír da sesión..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:143
 msgid "Log Out"
-msgstr ""
+msgstr "Saír da sesión"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:144
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
 msgstr ""
+"Ten certeza de que desexa pechar todos os programas e sair da sesión?"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:150
 msgid "Suspend"
-msgstr ""
+msgstr "Suspender"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
 msgid "Hibernate"
-msgstr ""
+msgstr "Hibernar"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:167
 msgid "Restart..."
-msgstr ""
+msgstr "Reiniciar..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:169
 msgid "Restart"
-msgstr ""
+msgstr "Reiniciar"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:170
 msgid "Are you sure you want to close all programs and restart the computer?"
 msgstr ""
+"Ten certeza de que desexa pechar todos os programas e reiniciar o computador?"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
 msgid "Shut Down..."
-msgstr ""
+msgstr "Apagar..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
 msgid "Shut Down"
-msgstr ""
+msgstr "Apagar"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
 msgstr ""
+"Ten certeza de que desexa pechar todos os programas e apagar o computador?"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
 msgid "No items in Trash"

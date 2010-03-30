@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: Rico Tzschichholz <ricotz@t-online.de>\n"
 "POT-Creation-Date: 2010-03-24 19:54+0100\n"
-"PO-Revision-Date: 2010-03-24 19:40+0000\n"
-"Last-Translator: Rico Tzschichholz <Unknown>\n"
+"PO-Revision-Date: 2010-03-30 08:20+0000\n"
+"Last-Translator: Martin Lettner <m.lettner@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-03-27 17:48+0000\n"
+"X-Launchpad-Export-Date: 2010-03-30 17:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:118
@@ -32,7 +32,7 @@ msgstr "Klicken Sie auf ein Dock um dessen Einstellungen zu ändern."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:180
 msgid "Drag any dock to reposition."
-msgstr "Ziehe ein Dock um zu verschieben"
+msgstr "Ziehen Sie ein Dock um es neu zu positionieren."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:249
 msgid "Delete the currently selected dock?"
@@ -116,7 +116,7 @@ msgid ""
 "extra indicator under it."
 msgstr ""
 "Unter Startern, die mehr als ein Fenster verwalten, erscheint ein "
-"Extrahinweis."
+"zusätzlicher Hinweis."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:331
 msgid ""
@@ -134,7 +134,7 @@ msgstr ""
 #: ../Docky/Docky/Interface/DockPreferences.cs:601
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr ""
-"<i>Versteckt sich immer, wenn sich kein Mauscursor darüber befindet.</i>"
+"<i>Versteckt sich immer, wenn sich kein Mauszeiger darüber befindet.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:604
 msgid "<i>Hides when dock obstructs the active application.</i>"
@@ -147,7 +147,7 @@ msgstr "<i>Versteckt sich, wenn es ein Anwendungsfenster behindert.</i>"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:371
 msgid "Drag to reposition"
-msgstr "Ziehen um zu verschieben"
+msgstr "Ziehen um neu zu positionieren"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:378
 msgid "Drop to open"
@@ -294,7 +294,8 @@ msgstr "An Dock _anheften"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:186
 msgid "Not enough free space on destination."
-msgstr "Nicht genügend freier Speicherplatz auf Zieldatenträger."
+msgstr ""
+"Auf dem Zieldatenträger ist nicht genügend freier Speicherplatz vorhanden."
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:198
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:200
@@ -341,7 +342,7 @@ msgstr "Mi_nimieren"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:259
 msgid "_Close All"
-msgstr "Alle schließen"
+msgstr "_Alle schließen"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
@@ -387,7 +388,7 @@ msgstr "Noch kein Konto?"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:156
 msgid "No Battery Found"
-msgstr "Keine Batterie gefunden"
+msgstr "Es kann kein Akku gefunden werden"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:173
 #, csharp-format

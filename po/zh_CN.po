@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-03-27 17:48+0000\n"
+"X-Launchpad-Export-Date: 2010-03-30 17:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:118
@@ -24,7 +24,7 @@ msgstr "搜索小部件..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
 msgid "Search Helpers..."
-msgstr "搜索帮助 ..."
+msgstr "搜索辅助组件 ..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:179
 msgid "Click on any dock to configure."
@@ -36,7 +36,7 @@ msgstr "用拖拽移动位置。"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:249
 msgid "Delete the currently selected dock?"
-msgstr "删除当前选中的面板"
+msgstr "删除当前选中的面板?"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:251
 msgid ""
@@ -236,7 +236,7 @@ msgstr "窗口闪避"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:69
 msgid "_Fade On Hide"
-msgstr "淡出式隐藏"
+msgstr "淡出式隐藏(_F)"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:113
 msgid "_Icon Size:"
@@ -248,7 +248,7 @@ msgstr "隐藏(_H)："
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:136
 msgid "Indicat_e Multiple Windows"
-msgstr "表示多重窗口(_e)"
+msgstr "表示多重窗口(_E)"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:150
 msgid "_Panel Mode"
@@ -398,7 +398,7 @@ msgstr "直到充电完成 "
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:179
 msgid "remaining "
-msgstr "重命名 "
+msgstr "剩余 "
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:84
 msgid "Computer"
@@ -461,7 +461,7 @@ msgstr "来自:{0}"
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:269
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 msgid "Feed Error"
-msgstr "源错误"
+msgstr "Feed 错误"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:278
 msgid "Invalid Username"
@@ -686,7 +686,7 @@ msgstr "清空回收站(_T)"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
 msgid "Empty all of the items from the trash?"
-msgstr "确定清空回收站中的全部项目吗?"
+msgstr "删除回收站里的所有项目？"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:186
 msgid ""
@@ -699,7 +699,7 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:66
 msgid "_Weather Provider:"
-msgstr "天气信息提供(_W)："
+msgstr "天气信息提供者(_W)："
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:106
 msgid "My _Locations"
@@ -731,7 +731,7 @@ msgstr "网络错误： "
 msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
-msgstr "由 Google 提供天气信息。这个来源要求位置信息表示为区号或者英文的\"城市,国家\"。"
+msgstr "由 Google 提供天气信息。这个来源要求位置信息表示为美国区号或者英文的“城市, 国家”。"
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
@@ -741,14 +741,15 @@ msgid ""
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
 "由 The Weather Channel "
-"提供天气信息，并保留所有权利。这个来源要求位置信息表示为区号或者从网站上获取的唯一编号。在它们的网站上查询您当地的天气信息，URL地址中 "
-"'/local/' 后面的部分就是您的地址代码。例如 AAXX0000 。"
+"提供天气信息，并保留所有权利。这个来源要求位置信息表示为美国区号或者从网站上获取的唯一编号。在它们的网站上查询您当地的天气信息，URL地址中“/local"
+"/”后面的部分就是您的地址代码。例如 AAXX0000 。"
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
-msgstr "由  Weather Underground 提供天气信息，并保留所有权利。这个来源要求位置信息表示为区号或者英文的\"城市,国家\"。"
+msgstr ""
+"由  Weather Underground 提供天气信息，并保留所有权利。这个来源要求位置信息表示为美国区号或者英文的“城市, 国家”。"
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
