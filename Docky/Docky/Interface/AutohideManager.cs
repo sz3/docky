@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -101,10 +101,14 @@ namespace Docky.Interface
 			if (cursor_area == area)
 				return;
 			cursor_area = area;
-			DockHovered = cursor_area.Contains (tracker.Cursor) 
-				&& (screen.ActiveWindow == null || !screen.ActiveWindow.IsFullscreen || !WindowIntersectingOther);
+			SetDockHovered ();
 			SetHidden ();
-			
+		}
+		
+		void SetDockHovered ()
+		{
+			DockHovered = cursor_area.Contains (tracker.Cursor) 
+				&& (screen.ActiveWindow == null || !screen.ActiveWindow.IsFullscreen || !screen.ActiveWindow.EasyGeometry().IntersectsWith (intersect_area));
 		}
 		
 		public void SetIntersectArea (Gdk.Rectangle area)
@@ -118,8 +122,7 @@ namespace Docky.Interface
 		
 		void HandleCursorPositionChanged (object sender, CursorPostionChangedArgs args)
 		{
-			DockHovered = cursor_area.Contains (tracker.Cursor)
-				&& (screen.ActiveWindow == null || !screen.ActiveWindow.IsFullscreen || !WindowIntersectingOther);
+			SetDockHovered ();
 			SetHidden ();
 		}
 
