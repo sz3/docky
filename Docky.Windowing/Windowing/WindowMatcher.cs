@@ -325,7 +325,10 @@ namespace Docky.Windowing
 		IEnumerable<string> FindDesktopFileForWindowOrDefault (Wnck.Window window)
 		{
 			// use the StartupWMClass as the definitive match
-			if (window.ClassGroup != null && !string.IsNullOrEmpty (window.ClassGroup.ResClass) && class_to_desktop_files.ContainsKey (window.ClassGroup.ResClass)) {
+			if (window.ClassGroup != null
+				&& !string.IsNullOrEmpty (window.ClassGroup.ResClass)
+				&& window.ClassGroup.ResClass != "Wine"
+				&& class_to_desktop_files.ContainsKey (window.ClassGroup.ResClass)) {
 				yield return class_to_desktop_files [window.ClassGroup.ResClass];
 				yield break;
 			}
