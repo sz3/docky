@@ -209,9 +209,9 @@ namespace SessionManager
 			} else if (devicekit != null) {
 				if (GetBoolean (devicekit, DeviceKitPowerName, "CanHibernate"))
 					devicekit.Hibernate ();
+			} else {
+				Log<SystemManager>.Debug ("No power bus available");
 			}
-			
-			Log<SystemManager>.Debug ("No power bus available");
 		}
 
 		public bool CanSuspend ()
@@ -233,9 +233,9 @@ namespace SessionManager
 			} else if (devicekit != null) {
 				if (GetBoolean (devicekit, DeviceKitPowerName, "CanSuspend"))
 					devicekit.Suspend ();
+			} else {
+				Log<SystemManager>.Debug ("No power bus available");
 			}
-			
-			Log<SystemManager>.Debug ("No power bus available");
 		}
 
 		public bool OnBattery ()
@@ -274,9 +274,9 @@ namespace SessionManager
 			if (consolekit != null) {
 				if (consolekit.CanRestart ())
 					consolekit.Restart ();
+			} else {
+				Log<SystemManager>.Debug ("No consolekit bus available");
 			}
-			
-			Log<SystemManager>.Debug ("No consolekit bus available");
 		}
 
 		public bool CanStop ()
@@ -293,9 +293,9 @@ namespace SessionManager
 			if (consolekit != null) {
 				if (consolekit.CanStop ())
 					consolekit.Stop ();
+			} else {
+				Log<SystemManager>.Debug ("No consolekit bus available");
 			}
-			
-			Log<SystemManager>.Debug ("No consolekit bus available");
 		}
 		
 		public void LockScreen ()
