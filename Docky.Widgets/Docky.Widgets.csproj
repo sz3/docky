@@ -50,7 +50,6 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Docky.Widgets\ConfigDialog.cs" />
-    <Compile Include="Docky.Widgets\ExtensionMethods.cs" />
     <Compile Include="Docky.Widgets\WrapLabel.cs" />
     <Compile Include="Docky.Widgets\AnimatedBox.cs" />
     <Compile Include="Docky.Widgets\AnimatedHBox.cs" />

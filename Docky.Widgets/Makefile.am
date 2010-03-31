@@ -16,7 +16,6 @@ FILES = \
 	Docky.Widgets/AnimatedWidget.cs \
 	Docky.Widgets/Choreographer.cs \
 	Docky.Widgets/ConfigDialog.cs \
-	Docky.Widgets/ExtensionMethods.cs \
 	Docky.Widgets/SingleActorStage.cs \
 	Docky.Widgets/SearchEntry.cs \
 	Docky.Widgets/HoverImageButton.cs \

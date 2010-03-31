@@ -340,10 +340,6 @@ namespace Docky
 					return true;
 			}
 			set {
-				if (autostart_item == null) {
-					// Initialize AutoStart
-					bool autostart = AutoStart;
-				}
 				if (autostart_item != null) {
 					autostart_item.SetBoolean (AutoStartKey, !value);
 					try {
@@ -357,7 +353,8 @@ namespace Docky
 		
 		protected virtual void OnStartWithComputerCheckbuttonToggled (object sender, System.EventArgs e)
 		{
-			AutoStart = start_with_computer_checkbutton.Active;
+			if (AutoStart != start_with_computer_checkbutton.Active)
+				AutoStart = start_with_computer_checkbutton.Active;
 		}
 
 		[GLib.ConnectBefore]

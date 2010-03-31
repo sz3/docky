@@ -44,7 +44,6 @@ namespace Docky.DBus
 	
 	public class DockyDBusItem : IDockyDBusItem, IDisposable
 	{
-		DateTime last_update;
 		uint timer;
 		Dictionary<uint, RemoteMenuEntry> items;
 		Dictionary<uint, DateTime> update_time;

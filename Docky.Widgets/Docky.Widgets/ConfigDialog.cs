@@ -43,7 +43,7 @@ namespace Docky.Widgets
 			if (widgets.Any ())
 				AddWidgets (widgets);
 			
-			this.AddAutoTranslateButton ("gtk-close", ResponseType.Close);
+			AddButton ("gtk-close", ResponseType.Close);
 			
 			SetDefaultSize (width, height);
 		}

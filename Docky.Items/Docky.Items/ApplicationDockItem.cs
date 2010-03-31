@@ -150,15 +150,6 @@ namespace Docky.Items
 
 			return list;
 		}
-
-		void ItemClicked (object sender, EventArgs e)
-		{
-			RelatedFileMenuItem item = sender as RelatedFileMenuItem;
-			if (item == null)
-				return;
-			
-			LaunchWithFiles (item.Uri.AsSingle ());
-		}
 		
 		protected override bool OnCanAcceptDrop (IEnumerable<string> uris)
 		{

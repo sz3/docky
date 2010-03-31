@@ -42,7 +42,6 @@ namespace Docky.Interface
 		Gdk.Point currentPoint;
 		DockySurface currentSurface;
 		uint timer;
-		bool fullscreen;
 		
 		static DockySurface [] slices;
 		DockySurface background_buffer;
@@ -142,7 +141,7 @@ namespace Docky.Interface
 				return false;
 			});
 			
-			if (Visible && !fullscreen)
+			if (Visible)
 				window.Show ();
 		}
 
@@ -172,7 +171,7 @@ namespace Docky.Interface
 		public void Show ()
 		{
 			Visible = true;
-			if (currentSurface != null && !fullscreen)
+			if (currentSurface != null)
 				window.Show ();
 		}
 		

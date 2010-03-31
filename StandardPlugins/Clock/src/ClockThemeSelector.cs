@@ -54,14 +54,7 @@ namespace Clock
 			Title = Catalog.GetString ("Themes");
 			IconName = Gtk.Stock.Preferences;
 			
-            Gtk.Button close_button = new Gtk.Button();
-            close_button.CanFocus = true;
-            close_button.Name = "close_button";
-            close_button.UseStock = true;
-            close_button.UseUnderline = true;
-            close_button.BorderWidth = ((uint)(5));
-            close_button.Label = "gtk-close";
-			AddActionWidget (close_button, ResponseType.Close);
+			AddButton (Stock.Close, ResponseType.Close);
 			
 			labelTreeView.Model = labelTreeStore;
 			labelTreeView.HeadersVisible = false;
