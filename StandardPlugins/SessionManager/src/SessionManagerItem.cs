@@ -79,6 +79,7 @@ namespace SessionManager
 			if (system_manager.CanRestart ()) {
 				HoverText = restart.hover_text;
 				Icon = restart.icon;
+				current_index = SessionDockItems.IndexOf (restart);
 				QueueRedraw ();
 				State &= ~ItemState.Urgent;
 				State |= ItemState.Urgent;
