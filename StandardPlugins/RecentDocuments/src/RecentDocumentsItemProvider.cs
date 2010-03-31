@@ -82,23 +82,8 @@ namespace RecentDocuments
 				"\u2022 All items from the recent documents list in all applications.");
 			md.Modal = false;
 			
-            Gtk.Button cancel_button = new Gtk.Button();
-            cancel_button.CanFocus = true;
-            cancel_button.Name = "cancel_button";
-            cancel_button.UseStock = true;
-            cancel_button.UseUnderline = true;
-            cancel_button.Label = "gtk-cancel";
-			cancel_button.Show ();
-			md.AddActionWidget (cancel_button, ResponseType.Cancel);
-            Gtk.Button clear_button = new Gtk.Button();
-            clear_button.CanFocus = true;
-            clear_button.CanDefault = true;
-            clear_button.Name = "clear_button";
-            clear_button.UseStock = true;
-            clear_button.UseUnderline = true;
-            clear_button.Label = "gtk-clear";
-			clear_button.Show ();
-			md.AddActionWidget (clear_button, ResponseType.Ok);
+			md.AddButton (Gtk.Stock.Cancel, Gtk.ResponseType.Cancel);
+			md.AddButton (Gtk.Stock.Clear, Gtk.ResponseType.Ok);
 			md.DefaultResponse = Gtk.ResponseType.Ok;
 
 			md.Response += (o, args) => {

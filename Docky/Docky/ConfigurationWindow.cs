@@ -254,17 +254,9 @@ namespace Docky
 				md.KeepAbove = true;
 				md.Stick ();
 				
-				Gtk.Button cancel_button = new Gtk.Button();
-				cancel_button.CanFocus = true;
-				cancel_button.CanDefault = true;
-				cancel_button.Name = "cancel_button";
-				cancel_button.UseStock = true;
-				cancel_button.UseUnderline = true;
-				cancel_button.Label = "gtk-cancel";
-				cancel_button.Show ();
-				md.AddActionWidget (cancel_button, Gtk.ResponseType.Cancel);
+				md.AddButton (Gtk.Stock.Cancel, Gtk.ResponseType.Cancel);
 				md.AddButton (Catalog.GetString ("_Delete Dock"), Gtk.ResponseType.Ok);
-				md.DefaultResponse = Gtk.ResponseType.Cancel;
+				md.DefaultResponse = Gtk.ResponseType.Ok;
 			
 				if ((ResponseType)md.Run () == Gtk.ResponseType.Ok) {
 					Docky.Controller.DeleteDock (ActiveDock);

@@ -188,14 +188,7 @@ namespace Trash
 					"can also delete them separately.");
 				md.Modal = false;
 				
-				Gtk.Button cancel_button = new Gtk.Button();
-				cancel_button.CanFocus = true;
-				cancel_button.Name = "cancel_button";
-				cancel_button.UseStock = true;
-				cancel_button.UseUnderline = true;
-				cancel_button.Label = "gtk-cancel";
-				cancel_button.Show ();
-				md.AddActionWidget (cancel_button, Gtk.ResponseType.Cancel);
+				md.AddButton (Gtk.Stock.Cancel, Gtk.ResponseType.Cancel);
 				md.AddButton (Catalog.GetString ("Empty _Trash"), Gtk.ResponseType.Ok);
 				md.DefaultResponse = Gtk.ResponseType.Ok;
 

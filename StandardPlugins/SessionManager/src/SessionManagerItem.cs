@@ -177,6 +177,7 @@ namespace SessionManager
 				
 				md.AddButton (Gtk.Stock.Cancel, Gtk.ResponseType.Cancel);
 				md.AddButton (title, Gtk.ResponseType.Ok);
+				md.DefaultResponse = Gtk.ResponseType.Ok;
 				
 				md.Response += (o, args) => { 
 					if (args.ResponseId == Gtk.ResponseType.Ok)
