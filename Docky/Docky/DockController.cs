@@ -98,6 +98,21 @@ namespace Docky
 			}
 		}
 		
+		TimeSpan glow;
+		int? glowSeconds;
+		public TimeSpan GlowTime {
+			get {
+				if (!glowSeconds.HasValue) {
+					glowSeconds = prefs.Get<int> ("GlowTime", 10);
+					if (glowSeconds.Value < 0)
+						glow = new TimeSpan (100, 0, 0, 0, 0);
+					else
+						glow = new TimeSpan (0, 0, 0, 0, glowSeconds.Value * 1000);
+				}
+				return glow;
+			}
+		}
+		
 		public IEnumerable<string> DockThemes {
 			get {
 				yield return DefaultTheme;

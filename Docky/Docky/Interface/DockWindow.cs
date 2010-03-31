@@ -149,7 +149,6 @@ namespace Docky.Interface
 		readonly TimeSpan BounceTime = new TimeSpan (0, 0, 0, 0, 600);
 		readonly TimeSpan SlideTime = new TimeSpan (0, 0, 0, 0, 200);
 		readonly TimeSpan PulseTime = new TimeSpan (0, 0, 0, 0, 2000);
-		readonly TimeSpan GlowTime = new TimeSpan (0, 0, 0, 0, 10000);
 		
 		DateTime hidden_change_time;
 		DateTime dock_hovered_change_time;
@@ -772,7 +771,7 @@ namespace Docky.Interface
 				if ((now - adi.LastClick) < BounceTime || (now - adi.StateSetTime (ItemState.Urgent)) < BounceTime)
 					return true;
 				//Glowing Items
-				if ((now - adi.StateSetTime (ItemState.Urgent)) < GlowTime)
+				if ((now - adi.StateSetTime (ItemState.Urgent)) < Docky.Controller.GlowTime)
 					return true;
 			}
 			return false;
@@ -2045,21 +2044,21 @@ namespace Docky.Interface
 			//Draw UrgentGlow which is visible when Docky is hidden and an item need attention
 			if (AutohideManager.Hidden && !ConfigurationMode && (!Preferences.FadeOnHide || Preferences.FadeOpacity == 0)) {
 				foreach (AbstractDockItem adi in Items) {
+					double diff = (render_time - adi.StateSetTime (ItemState.Urgent)).TotalMilliseconds;
 					if (adi.Indicator != ActivityIndicator.None && (adi.State & ItemState.Urgent) == ItemState.Urgent &&
-					    (render_time - adi.StateSetTime (ItemState.Urgent)).TotalMilliseconds < GlowTime.TotalMilliseconds) {
+					    (Docky.Controller.GlowTime.Days > 0 || diff < Docky.Controller.GlowTime.TotalMilliseconds)) {
 						
 						if (urgent_glow_buffer == null)
 							urgent_glow_buffer = CreateUrgentGlowBuffer ();
 		
 						DrawValue val = DrawValues [adi];
 						DrawValue glowloc;
-						if (preferences.FadeOnHide) {
+						if (preferences.FadeOnHide)
 							glowloc = val.MoveIn (Position, IconSize * val.Zoom / 2 - DockHeight);
-						} else {
+						else
 							glowloc = val.MoveIn (Position, IconSize * val.Zoom / 2);
-						}
 
-						double opacity = 0.2 + (0.75 * (Math.Sin ((render_time - adi.StateSetTime (ItemState.Urgent)).TotalMilliseconds / PulseTime.TotalMilliseconds * 2 * Math.PI) + 1) / 2);
+						double opacity = 0.2 + (0.75 * (Math.Sin (diff / PulseTime.TotalMilliseconds * 2 * Math.PI) + 1) / 2);
 						
 						urgent_glow_buffer.ShowWithOptions (surface, glowloc.Center, 1, 0, opacity);
 					}
