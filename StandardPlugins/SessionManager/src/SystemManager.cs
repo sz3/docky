@@ -31,10 +31,8 @@ using Docky.Services;
 
 namespace SessionManager
 {
-
 	public class SystemManager
 	{
-
 		const string SessionBusName = "org.freedesktop.DBus";
 		const string SessionBusPath = "/org/freedesktop/DBus";
 		const string SystemBusName = "org.freedesktop.DBus";
@@ -52,7 +50,6 @@ namespace SessionManager
 		const string ConsoleKitPath = "/org/freedesktop/ConsoleKit/Manager";
 		const string ConsoleKitIface = "org.freedesktop.ConsoleKit.Manager";
 
-		IBus SessionBus;
 		IBus SystemBus;
 
 		FileMonitor reboot_required_monitor;
@@ -106,7 +103,6 @@ namespace SessionManager
 		IUPower upower;
 		IConsoleKit consolekit;
 		
-		
 		private static SystemManager instance;
 
 		public static SystemManager GetInstance ()
@@ -118,14 +114,10 @@ namespace SessionManager
 
 		private SystemManager ()
 		{
-			//BusG.Init ();
-			
 			try {
-				//SessionBus = Bus.Session.GetObject<IBus> (SessionBusName, new ObjectPath (SessionBusPath));
 				SystemBus = Bus.System.GetObject<IBus> (SystemBusName, new ObjectPath (SystemBusPath));
 				
 				SystemBus.NameOwnerChanged += delegate(string name, string old_owner, string new_owner) {
-					
 					if (name != UPowerName && name != DeviceKitPowerName && name != ConsoleKitName)
 						return;
 
@@ -152,17 +144,14 @@ namespace SessionManager
 				reboot_required_monitor = reboot_required_file.Monitor (FileMonitorFlags.None, null);
 				reboot_required_monitor.RateLimit = 10000;
 				reboot_required_monitor.Changed += HandleRebootRequired;
-
 			} catch (Exception e) {
 				Log<SessionManagerItem>.Error (e.Message);
 			}
-			
 		}
 		
 		void Initialize ()
 		{
 			try {
-				
 				if (upower == null && Bus.System.NameHasOwner (UPowerName)) {
 					upower = Bus.System.GetObject<IUPower> (UPowerName, new ObjectPath (UPowerPath));
 					upower.Changed += HandleCapabilitiesChanged;
@@ -177,7 +166,6 @@ namespace SessionManager
 					consolekit = Bus.System.GetObject<IConsoleKit> (ConsoleKitName, new ObjectPath (ConsoleKitPath));
 					Log<SystemManager>.Debug ("Using ConsoleKit.Manager dbus service");
 				}
-				
 			} catch (Exception e) {
 				Log<SystemService>.Error ("Could not initialize needed dbus service: '{0}'", e.Message);
 				Log<SystemService>.Info (e.StackTrace);
@@ -204,13 +192,12 @@ namespace SessionManager
 		
 		public bool CanHibernate ()
 		{
-			if (upower != null) {
+			if (upower != null)
 				return GetBoolean (upower, UPowerName, "CanHibernate") && upower.HibernateAllowed ();
-			} else if (devicekit != null) {
+			else if (devicekit != null)
 				return GetBoolean (devicekit, DeviceKitPowerName, "CanHibernate");
-			} else {
-				Log<SystemManager>.Debug ("No power bus available");
-			}
+			
+			Log<SystemManager>.Debug ("No power bus available");
 			return false;
 		}
 
@@ -222,20 +209,19 @@ namespace SessionManager
 			} else if (devicekit != null) {
 				if (GetBoolean (devicekit, DeviceKitPowerName, "CanHibernate"))
 					devicekit.Hibernate ();
-			} else {
-				Log<SystemManager>.Debug ("No power bus available");
 			}
+			
+			Log<SystemManager>.Debug ("No power bus available");
 		}
 
 		public bool CanSuspend ()
 		{
-			if (upower != null) {
+			if (upower != null)
 				return GetBoolean (upower, UPowerName, "CanSuspend") && upower.SuspendAllowed ();
-			} else if (devicekit != null) {
+			else if (devicekit != null)
 				return GetBoolean (devicekit, DeviceKitPowerName, "CanSuspend");
-			} else {
-				Log<SystemManager>.Debug ("No power bus available");
-			}
+			
+			Log<SystemManager>.Debug ("No power bus available");
 			return false;
 		}
 
@@ -247,42 +233,39 @@ namespace SessionManager
 			} else if (devicekit != null) {
 				if (GetBoolean (devicekit, DeviceKitPowerName, "CanSuspend"))
 					devicekit.Suspend ();
-			} else {
-				Log<SystemManager>.Debug ("No power bus available");
 			}
+			
+			Log<SystemManager>.Debug ("No power bus available");
 		}
 
 		public bool OnBattery ()
 		{
-			if (upower != null) {
+			if (upower != null)
 				return GetBoolean (upower, UPowerName, "OnBattery");
-			} else if (devicekit != null) {
+			else if (devicekit != null)
 				return GetBoolean (devicekit, DeviceKitPowerName, "OnBattery");
-			} else{
-				Log<SystemManager>.Debug ("No power bus available");
-			}
+			
+			Log<SystemManager>.Debug ("No power bus available");
 			return false;
 		}
 		
 		public bool OnLowBattery ()
 		{
-			if (upower != null) {
+			if (upower != null)
 				return GetBoolean (upower, UPowerName, "OnLowBattery");
-			} else if (devicekit != null) {
+			else if (devicekit != null)
 				return false;
-			} else{
-				Log<SystemManager>.Debug ("No power bus available");
-			}
+			
+			Log<SystemManager>.Debug ("No power bus available");
 			return false;
 		}
 		
 		public bool CanRestart ()
 		{
-			if (consolekit != null) {
+			if (consolekit != null)
 				return consolekit.CanRestart ();
-			} else {
-				Log<SystemManager>.Debug ("No consolekit bus available");
-			}
+			
+			Log<SystemManager>.Debug ("No consolekit bus available");
 			return false;
 		}
 
@@ -291,18 +274,17 @@ namespace SessionManager
 			if (consolekit != null) {
 				if (consolekit.CanRestart ())
 					consolekit.Restart ();
-			} else {
-				Log<SystemManager>.Debug ("No consolekit bus available");
 			}
+			
+			Log<SystemManager>.Debug ("No consolekit bus available");
 		}
 
 		public bool CanStop ()
 		{
-			if (consolekit != null) {
+			if (consolekit != null)
 				return consolekit.CanStop ();
-			} else {
-				Log<SystemManager>.Debug ("No consolekit bus available");
-			}
+			
+			Log<SystemManager>.Debug ("No consolekit bus available");
 			return false;
 		}
 
@@ -311,11 +293,19 @@ namespace SessionManager
 			if (consolekit != null) {
 				if (consolekit.CanStop ())
 					consolekit.Stop ();
-			} else {
-				Log<SystemManager>.Debug ("No consolekit bus available");
 			}
+			
+			Log<SystemManager>.Debug ("No consolekit bus available");
 		}
 		
+		public void LockScreen ()
+		{
+			DockServices.System.Execute ("gnome-screensaver-command --lock");
+		}
 		
+		public void LogOut ()
+		{
+			DockServices.System.Execute ("gnome-session-save --logout");
+		}
 	}
 }

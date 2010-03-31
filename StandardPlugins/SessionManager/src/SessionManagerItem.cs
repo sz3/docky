@@ -125,69 +125,49 @@ namespace SessionManager
 				SessionMenuItems.Add (shutdown);
 				SessionDockItems.Add (shutdown);
 			}
-			
 		}
 		
 		void BuildMenuEntries () 
 		{
-			
 			lockscreen = new SessionManagerEntry ("system-lock-screen", Catalog.GetString ("Lock Screen"), () => { 
-				
-				Console.WriteLine ("Lock Screen now...");
-				DockServices.System.Execute ("gnome-screensaver-command --lock");
-				
+				system_manager.LockScreen ();
 			});
 			
 			logout = new SessionManagerEntry ("system-log-out", Catalog.GetString ("Log Out..."), () => { 
-				
 				ShowConfirmationDialog (Catalog.GetString ("Log Out"), 
 				                        Catalog.GetString ("Are you sure you want to close all programs and log out of the computer?"), 
 				                        "system-log-out", 
-				                        () => DockServices.System.Execute ("gnome-session-save --logout"));
-				
+				                        system_manager.LogOut);
 			});
 
 			suspend = new SessionManagerEntry ("system-suspend", Catalog.GetString ("Suspend"), () => { 
-				
-				Console.WriteLine ("Suspend now...");
-				DockServices.System.Execute ("gnome-screensaver-command --lock");
+				system_manager.LockScreen ();
 				system_manager.Suspend (); 
-				
 			});
 			
 			hibernate = new SessionManagerEntry ("system-hibernate", Catalog.GetString ("Hibernate"), () => { 
-				
-				Console.WriteLine ("Hibernate now...");
-				DockServices.System.Execute ("gnome-screensaver-command --lock");
+				system_manager.LockScreen ();
 				system_manager.Hibernate (); 
-				
 			});
 			
 
 			restart = new SessionManagerEntry ("system-restart", Catalog.GetString ("Restart..."), () => { 
-                
 				ShowConfirmationDialog (Catalog.GetString ("Restart"), 
 				                        Catalog.GetString ("Are you sure you want to close all programs and restart the computer?"), 
 				                        "system-restart", 
 				                        () => system_manager.Restart ());
-                
 			});
 			
 			shutdown = new SessionManagerEntry ("system-shutdown", Catalog.GetString ("Shut Down..."), () => { 
-                
 				ShowConfirmationDialog (Catalog.GetString ("Shut Down"), 
 				                        Catalog.GetString ("Are you sure you want to close all programs and shut down the computer?"), 
 				                        "system-shutdown", 
 				                        () => system_manager.Stop ());
-                
 			});
-			
 		}
 
 		void ShowConfirmationDialog (string title, string text, string icon_name, Action action)
 		{
-				Console.WriteLine ("Calling {0}", title);
-				
 				Gtk.MessageDialog md = new Gtk.MessageDialog (null, 0, Gtk.MessageType.Question, Gtk.ButtonsType.None, text);
 				
 				md.Title = title;
@@ -199,11 +179,8 @@ namespace SessionManager
 				md.AddButton (title, Gtk.ResponseType.Ok);
 				
 				md.Response += (o, args) => { 
-					
-					if (args.ResponseId == Gtk.ResponseType.Ok) {
-						Console.WriteLine ("{0} now...", title);
+					if (args.ResponseId == Gtk.ResponseType.Ok)
 						action.Invoke ();
-					}
 					md.Destroy ();
 				};
 				
@@ -243,10 +220,9 @@ namespace SessionManager
 				if (current_index == 0)
 					current_index = SessionDockItems.Count;
 				current_index = (current_index - 1) % SessionDockItems.Count;
-			} else if (direction == Gdk.ScrollDirection.Down || direction == Gdk.ScrollDirection.Right) {
+			} else {
 				current_index = (current_index + 1) % SessionDockItems.Count;
-			} else
-				return;
+			}
 			
 			HoverText = SessionDockItems[current_index].hover_text;
 			Icon = SessionDockItems[current_index].icon;
