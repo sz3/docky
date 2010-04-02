@@ -111,10 +111,12 @@ namespace SessionManager
 			
 			if (system_manager.CanSuspend ()) {
 				SessionMenuItems.Add (suspend);
+				SessionDockItems.Add (suspend);
 			}
 			
 			if (system_manager.CanHibernate ()) {
 				SessionMenuItems.Add (hibernate);
+				SessionDockItems.Add (hibernate);
 			}
 			
 			if (system_manager.CanRestart ()) {
