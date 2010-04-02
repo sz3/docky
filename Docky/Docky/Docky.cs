@@ -108,7 +108,7 @@ namespace Docky
 			about.Version = AssemblyInfo.DisplayVersion + "\n" + AssemblyInfo.VersionDetails;
 			about.IconName = "docky";
 			about.LogoIconName = "docky";
-			about.Website = "http://launchpad.net/docky";
+			about.Website = "http://www.go-docky.com/";
 			about.WebsiteLabel = "Website";
 			Gtk.AboutDialog.SetUrlHook ((dialog, link) => DockServices.System.Open (link));
 			about.Copyright = "Copyright \xa9 2009-2010 Docky Developers";
