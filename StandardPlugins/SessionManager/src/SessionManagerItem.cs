@@ -48,7 +48,23 @@ namespace SessionManager
 
 	public class SessionManagerItem : IconDockItem
 	{
-		int current_index = 0;
+		static IPreferences prefs = DockServices.Preferences.Get <SessionManagerItem> ();
+		
+		int? current;
+		int CurrentIndex {
+			get {
+				if (!current.HasValue) {
+					current = prefs.Get<int> ("CurrentIndex", 0);
+					if (current > SessionDockItems.Count - 1)
+						CurrentIndex = 0;
+				}
+				return current.Value;
+			}
+			set {
+				prefs.Set<int> ("CurrentIndex", value);
+				current = value;
+			}
+		}
 
 		SystemManager system_manager = SystemManager.GetInstance ();
 
@@ -70,8 +86,8 @@ namespace SessionManager
 			system_manager.CapabilitiesChanged += HandlePowermanagerCapabilitiesChanged;
 			system_manager.RebootRequired += HandleRebootRequired;
 			
-			HoverText = SessionDockItems[current_index].hover_text;
-			Icon = SessionDockItems[current_index].icon;
+			HoverText = SessionDockItems[CurrentIndex].hover_text;
+			Icon = SessionDockItems[CurrentIndex].icon;
 		}
 
 		void HandleRebootRequired (object sender, EventArgs e)
@@ -79,7 +95,7 @@ namespace SessionManager
 			if (system_manager.CanRestart ()) {
 				HoverText = restart.hover_text;
 				Icon = restart.icon;
-				current_index = SessionDockItems.IndexOf (restart);
+				CurrentIndex = SessionDockItems.IndexOf (restart);
 				QueueRedraw ();
 				State &= ~ItemState.Urgent;
 				State |= ItemState.Urgent;
@@ -90,8 +106,8 @@ namespace SessionManager
 		{
 			GenerateSessionItems ();
 			
-			HoverText = SessionDockItems[current_index].hover_text;
-			Icon = SessionDockItems[current_index].icon;
+			HoverText = SessionDockItems[CurrentIndex].hover_text;
+			Icon = SessionDockItems[CurrentIndex].icon;
 
 			QueueRedraw ();
 		}
@@ -100,8 +116,6 @@ namespace SessionManager
 		{
 			SessionMenuItems = new List<SessionManagerEntry> ();
 			SessionDockItems = new List<SessionManagerEntry> ();
-			
-			current_index = 0;
 			
 			SessionMenuItems.Add (lockscreen);
 			SessionDockItems.Add (lockscreen);
@@ -199,7 +213,7 @@ namespace SessionManager
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
 			if (button == 1) {
-				SessionDockItems[current_index].action.Invoke ();
+				SessionDockItems[CurrentIndex].action.Invoke ();
 				return ClickAnimation.Bounce;
 			}
 			
@@ -221,15 +235,15 @@ namespace SessionManager
 		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
 		{
 			if (direction == Gdk.ScrollDirection.Up || direction == Gdk.ScrollDirection.Left) {
-				if (current_index == 0)
-					current_index = SessionDockItems.Count;
-				current_index = (current_index - 1) % SessionDockItems.Count;
+				if (CurrentIndex == 0)
+					CurrentIndex = SessionDockItems.Count;
+				CurrentIndex = (CurrentIndex - 1) % SessionDockItems.Count;
 			} else {
-				current_index = (current_index + 1) % SessionDockItems.Count;
+				CurrentIndex = (CurrentIndex + 1) % SessionDockItems.Count;
 			}
 			
-			HoverText = SessionDockItems[current_index].hover_text;
-			Icon = SessionDockItems[current_index].icon;
+			HoverText = SessionDockItems[CurrentIndex].hover_text;
+			Icon = SessionDockItems[CurrentIndex].icon;
 			
 			QueueRedraw ();
 		}
