@@ -229,7 +229,7 @@ namespace Docky.Interface
 				RegisterPreferencesEvents (value);
 				
 				// Initialize value
-				MaxIconSize = preferences.IconSize;
+				UpdateMaxIconSize ();
 			}
 		}
 		
@@ -816,6 +816,8 @@ namespace Docky.Interface
 		void ScreenSizeChanged (object sender, EventArgs e)
 		{
 			Reconfigure ();
+			UpdateMaxIconSize ();
+			AnimatedDraw ();
 		}
 
 		void HandleDockHoveredChanged (object sender, EventArgs e)
@@ -871,6 +873,8 @@ namespace Docky.Interface
 			
 			foreach (AbstractDockItem item in provider.Items)
 				RegisterItem (item);
+			
+			UpdateMaxIconSize ();
 		}
 		
 		void UnregisterItemProvider (AbstractDockItemProvider provider)
@@ -879,6 +883,8 @@ namespace Docky.Interface
 			
 			foreach (AbstractDockItem item in provider.Items)
 				UnregisterItem (item);
+			
+			UpdateMaxIconSize ();
 		}
 		
 		void ProviderItemsChanged (object sender, ItemsChangedArgs args)
@@ -896,6 +902,7 @@ namespace Docky.Interface
 			}
 			
 			UpdateCollectionBuffer ();
+			UpdateMaxIconSize ();
 			
 			AnimatedDraw ();
 		}
@@ -1012,17 +1019,8 @@ namespace Docky.Interface
 
 		void PreferencesIconSizeChanged (object sender, EventArgs e)
 		{
-			MaxIconSize = Preferences.IconSize;
-			
-			if (icon_size_timer > 0)
-				GLib.Source.Remove (icon_size_timer);
-			
-			icon_size_timer = GLib.Timeout.Add (1000, delegate {
-				Reconfigure ();
-				icon_size_timer = 0;
-				return false;
-			});
-			
+			Reconfigure ();
+			UpdateMaxIconSize ();
 			AnimatedDraw ();
 		}
 
@@ -1811,24 +1809,37 @@ namespace Docky.Interface
 		
 		void UpdateMaxIconSize ()
 		{
-			int dockWidth = DockWidth;
-			int maxWidth = VerticalDock ? monitor_geo.Height : monitor_geo.Width;
+			if (Painter != null)
+				return;
 			
-			if (dockWidth > maxWidth) {
-				// MaxIconSize is too large, must fix
-				MaxIconSize = Preferences.IconSize;
-				while (dockWidth > maxWidth) {
+			MaxIconSize = Preferences.IconSize;
+			
+			if (icon_size_timer > 0)
+				GLib.Source.Remove (icon_size_timer);
+			
+			icon_size_timer = GLib.Timeout.Add (1000, delegate {
+				int dockWidth = DockWidth;
+				int maxWidth = VerticalDock ? monitor_geo.Height : monitor_geo.Width;
+				
+				if (dockWidth > maxWidth) {
+					// MaxIconSize is too large, must fix
+					MaxIconSize = Preferences.IconSize;
+					while (dockWidth > maxWidth) {
+						MaxIconSize--;
+						dockWidth = DockWidth;
+					}
+				} else if (MaxIconSize < Preferences.IconSize) {
+					// Perhaps MaxIconSize is too small, lets find out!
+					while (dockWidth < maxWidth && MaxIconSize <= Preferences.IconSize) {
+						MaxIconSize++;
+						dockWidth = DockWidth;
+					}
 					MaxIconSize--;
-					dockWidth = DockWidth;
 				}
-			} else if (MaxIconSize < Preferences.IconSize) {
-				// Perhaps MaxIconSize is too small, lets find out!
-				while (dockWidth < maxWidth && MaxIconSize <= Preferences.IconSize) {
-					MaxIconSize++;
-					dockWidth = DockWidth;
-				}
-				MaxIconSize--;
-			}
+				AnimatedDraw ();
+				icon_size_timer = 0;
+				return false;
+			});
 		}
 		
 		Gdk.Rectangle StaticDockArea (DockySurface surface)
@@ -1968,9 +1979,6 @@ namespace Docky.Interface
 		void DrawDock (DockySurface surface)
 		{
 			surface.Clear ();
-			
-			if (Painter == null)
-				UpdateMaxIconSize ();
 			
 			UpdateDrawRegionsForSurface (surface);
 			
