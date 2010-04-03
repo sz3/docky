@@ -1106,6 +1106,8 @@ namespace Docky.Interface
 			if (InternalDragActive || ConfigurationMode)
 				return base.OnButtonPressEvent (evnt);
 			
+			lastClickedItem = null;
+			
 			MenuButton button;
 			switch (evnt.Button) {
 			case 1:
@@ -1130,44 +1132,29 @@ namespace Docky.Interface
 				
 				if (painter_area.Contains (LocalCursor))
 					Painter.ButtonPressed (x, y, evnt.State);
-			} else if (HoveredItem != null && (button & HoveredItem.MenuButton) == button) {
-				MenuList list;
-				
-				if (HoveredItem.Owner != null)
-					list = HoveredItem.Owner.GetMenuItems (HoveredItem);
-				else
-					list = HoveredItem.GetMenuItems ();
-				
-				if (list.Any ()) {
-					DrawValue val = DrawValues[HoveredItem];
-					val = val.MoveIn (Position, ZoomedIconSize / 2.15);
-					Menu.Anchor = new Gdk.Point ((int) val.Center.X + window_position.X, (int) val.Center.Y + window_position.Y + 5);
-					Menu.Orientation = Position;
-					Menu.Monitor = Monitor;
-					Menu.SetItems (list);
-					Menu.Show ();
+			} else if (HoveredItem != null && !(HoveredItem is SeparatorItem)) {
+				if ((button & HoveredItem.MenuButton) == button) {
+					MenuList list;
+					
+					if (HoveredItem.Owner != null)
+						list = HoveredItem.Owner.GetMenuItems (HoveredItem);
+					else
+						list = HoveredItem.GetMenuItems ();
+					
+					if (list.Any ()) {
+						DrawValue val = DrawValues[HoveredItem];
+						val = val.MoveIn (Position, ZoomedIconSize / 2.15);
+						Menu.Anchor = new Gdk.Point ((int) val.Center.X + window_position.X, (int) val.Center.Y + window_position.Y + 5);
+						Menu.Orientation = Position;
+						Menu.Monitor = Monitor;
+						Menu.SetItems (list);
+						Menu.Show ();
+					}
+				} else {
+					lastClickedItem = HoveredItem;
 				}
-			} else if (HoveredItem != null) {
-				lastClickedItem = HoveredItem;
 			} else if (button == MenuButton.Right) {
-				switch (Position) {
-				case DockPosition.Bottom:
-					Menu.Anchor = new Gdk.Point (LocalCursor.X + window_position.X, window_position.Y + Allocation.Height - DockHeight + 10);
-					break;
-				case DockPosition.Top:
-					Menu.Anchor = new Gdk.Point (LocalCursor.X + window_position.X, window_position.Y + DockHeight - 10);
-					break;
-				case DockPosition.Left:
-					Menu.Anchor = new Gdk.Point (window_position.X + DockHeight - 10, LocalCursor.Y + window_position.Y);
-					break;
-				case DockPosition.Right:
-					Menu.Anchor = new Gdk.Point (window_position.X + Allocation.Width - DockHeight + 10, LocalCursor.Y + window_position.Y);
-					break;
-				}
-				Menu.Orientation = Position;
-				Menu.Monitor = Monitor;
-				Menu.SetItems (DockyItem.GetMenuItems ());
-				Menu.Show ();
+				ShowDockyItemMenu ();
 			}
 			
 			return base.OnButtonPressEvent (evnt);
@@ -1180,6 +1167,22 @@ namespace Docky.Interface
 			if (InternalDragActive || ConfigurationMode)
 				return base.OnButtonPressEvent (evnt);
 			
+			MenuButton button;
+			switch (evnt.Button) {
+			case 1:
+				button = MenuButton.Left;
+				break;
+			case 2:
+				button = MenuButton.Middle;
+				break;
+			case 3:
+				button = MenuButton.Right;
+				break;
+			default:
+				button = MenuButton.None;
+				break;
+			}
+			
 			if (Painter != null) {
 				int x, y;
 				
@@ -1190,7 +1193,7 @@ namespace Docky.Interface
 					HidePainter ();
 				else
 					Painter.ButtonReleased (x, y, evnt.State);
-			} else if (HoveredItem != null && lastClickedItem == HoveredItem) {
+			} else if (HoveredItem != null && !(HoveredItem is SeparatorItem) && lastClickedItem == HoveredItem) {
 				double x, y;
 				Gdk.Rectangle region = DrawRegionForItem (HoveredItem);
 					
@@ -1199,9 +1202,33 @@ namespace Docky.Interface
 				
 				HoveredItem.Clicked (evnt.Button, evnt.State, x, y);
 				AnimatedDraw ();
+			} else if (button == MenuButton.Right) {
+				ShowDockyItemMenu ();
 			}
 			
 			return base.OnButtonReleaseEvent (evnt);
+		}
+		
+		void ShowDockyItemMenu ()
+		{
+			switch (Position) {
+			case DockPosition.Bottom:
+				Menu.Anchor = new Gdk.Point (LocalCursor.X + window_position.X, window_position.Y + Allocation.Height - DockHeight + 10);
+				break;
+			case DockPosition.Top:
+				Menu.Anchor = new Gdk.Point (LocalCursor.X + window_position.X, window_position.Y + DockHeight - 10);
+				break;
+			case DockPosition.Left:
+				Menu.Anchor = new Gdk.Point (window_position.X + DockHeight - 10, LocalCursor.Y + window_position.Y);
+				break;
+			case DockPosition.Right:
+				Menu.Anchor = new Gdk.Point (window_position.X + Allocation.Width - DockHeight + 10, LocalCursor.Y + window_position.Y);
+				break;
+			}
+			Menu.Orientation = Position;
+			Menu.Monitor = Monitor;
+			Menu.SetItems (DockyItem.GetMenuItems ());
+			Menu.Show ();
 		}
 
 		protected override bool OnScrollEvent (EventScroll evnt)
