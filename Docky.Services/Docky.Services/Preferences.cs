@@ -88,7 +88,7 @@ namespace Docky.Services
 		#endregion
 		
 		#region IPreferences - secure, based on Gnome Keyring
-		object KeyringLock;
+		object KeyringLock = new Object ();
 		
 		readonly string ErrorSavingMessage = "Error saving {0} : '{0}'";
 		readonly string KeyNotFoundMessage = "Key \"{0}\" not found in keyring";
@@ -98,18 +98,16 @@ namespace Docky.Services
 
 		public bool SetSecure<T> (string key, T val)
 		{
-			if (typeof (T) != typeof (string))
-				throw new NotImplementedException ("Unimplemented for non string values");
-
-			Hashtable keyData;
-			
 			lock (KeyringLock) {
+				if (typeof (T) != typeof (string))
+					throw new NotImplementedException ("Unimplemented for non string values");
+				
 				if (!Ring.Available) {
 					Log.Error (KeyringUnavailableMessage);
 					return false;
 				}
 				
-				keyData = new Hashtable ();
+				Hashtable keyData = new Hashtable ();
 				keyData [AbsolutePathForKey (key, DefaultRootPath)] = key;
 				
 				try {
@@ -119,22 +117,20 @@ namespace Docky.Services
 					Log.Info (e.StackTrace);
 					return false;
 				}
+				
+				return true;
 			}
-
-			return true;
 		}
 
 		public T GetSecure<T> (string key, T def)
 		{
-			Hashtable keyData;
-			
 			lock (KeyringLock) {
 				if (!Ring.Available) {
 					Log.Error (KeyringUnavailableMessage);
 					return def;
 				}
 				
-				keyData = new Hashtable ();
+				Hashtable keyData = new Hashtable ();
 				keyData [AbsolutePathForKey (key, DefaultRootPath)] = key;
 				
 				try {
@@ -147,9 +143,9 @@ namespace Docky.Services
 				} catch (KeyringException) {
 					Log.Error (KeyNotFoundMessage, AbsolutePathForKey (key, DefaultRootPath));
 				}
+				
+				return def;
 			}
-
-			return def;
 		}
 		#endregion
 	}
