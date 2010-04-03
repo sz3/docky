@@ -816,6 +816,7 @@ namespace Docky.Interface
 		void ScreenSizeChanged (object sender, EventArgs e)
 		{
 			Reconfigure ();
+			UpdateMaxIconSize ();
 		}
 
 		void HandleDockHoveredChanged (object sender, EventArgs e)
@@ -896,6 +897,7 @@ namespace Docky.Interface
 			}
 			
 			UpdateCollectionBuffer ();
+			UpdateMaxIconSize ();
 			
 			AnimatedDraw ();
 		}
@@ -1019,6 +1021,7 @@ namespace Docky.Interface
 			
 			icon_size_timer = GLib.Timeout.Add (1000, delegate {
 				Reconfigure ();
+				UpdateMaxIconSize ();
 				icon_size_timer = 0;
 				return false;
 			});
@@ -1811,6 +1814,9 @@ namespace Docky.Interface
 		
 		void UpdateMaxIconSize ()
 		{
+			if (Painter != null)
+				return;
+			
 			int dockWidth = DockWidth;
 			int maxWidth = VerticalDock ? monitor_geo.Height : monitor_geo.Width;
 			
@@ -1968,9 +1974,6 @@ namespace Docky.Interface
 		void DrawDock (DockySurface surface)
 		{
 			surface.Clear ();
-			
-			if (Painter == null)
-				UpdateMaxIconSize ();
 			
 			UpdateDrawRegionsForSurface (surface);
 			
