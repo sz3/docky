@@ -88,6 +88,7 @@ namespace Docky.Services
 		#endregion
 		
 		#region IPreferences - secure, based on Gnome Keyring
+		object KeyringLock;
 		
 		readonly string ErrorSavingMessage = "Error saving {0} : '{0}'";
 		readonly string KeyNotFoundMessage = "Key \"{0}\" not found in keyring";
@@ -102,20 +103,22 @@ namespace Docky.Services
 
 			Hashtable keyData;
 			
-			if (!Ring.Available) {
-				Log.Error (KeyringUnavailableMessage);
-				return false;
-			}
-
-			keyData = new Hashtable ();
-			keyData [AbsolutePathForKey (key, DefaultRootPath)] = key;
-			
-			try {
-				Ring.CreateItem (Ring.GetDefaultKeyring (), ItemType.GenericSecret, AbsolutePathForKey (key, DefaultRootPath), keyData, val.ToString (), true);
-			} catch (KeyringException e) {
-				Log.Error (ErrorSavingMessage, key, e.Message);
-				Log.Info (e.StackTrace);
-				return false;
+			lock (KeyringLock) {
+				if (!Ring.Available) {
+					Log.Error (KeyringUnavailableMessage);
+					return false;
+				}
+				
+				keyData = new Hashtable ();
+				keyData [AbsolutePathForKey (key, DefaultRootPath)] = key;
+				
+				try {
+					Ring.CreateItem (Ring.GetDefaultKeyring (), ItemType.GenericSecret, AbsolutePathForKey (key, DefaultRootPath), keyData, val.ToString (), true);
+				} catch (KeyringException e) {
+					Log.Error (ErrorSavingMessage, key, e.Message);
+					Log.Info (e.StackTrace);
+					return false;
+				}
 			}
 
 			return true;
@@ -125,23 +128,25 @@ namespace Docky.Services
 		{
 			Hashtable keyData;
 			
-			if (!Ring.Available) {
-				Log.Error (KeyringUnavailableMessage);
-				return def;
-			}
-
-			keyData = new Hashtable ();
-			keyData [AbsolutePathForKey (key, DefaultRootPath)] = key;
-			
-			try {
-				foreach (ItemData item in Ring.Find (ItemType.GenericSecret, keyData)) {
-					if (!item.Attributes.ContainsKey (AbsolutePathForKey (key, DefaultRootPath))) continue;
-
-					string secureValue = item.Secret;
-					return (T) Convert.ChangeType (secureValue, typeof (T));
+			lock (KeyringLock) {
+				if (!Ring.Available) {
+					Log.Error (KeyringUnavailableMessage);
+					return def;
 				}
-			} catch (KeyringException) {
-				Log.Error (KeyNotFoundMessage, AbsolutePathForKey (key, DefaultRootPath));
+				
+				keyData = new Hashtable ();
+				keyData [AbsolutePathForKey (key, DefaultRootPath)] = key;
+				
+				try {
+					foreach (ItemData item in Ring.Find (ItemType.GenericSecret, keyData)) {
+						if (!item.Attributes.ContainsKey (AbsolutePathForKey (key, DefaultRootPath))) continue;
+
+						string secureValue = item.Secret;
+						return (T) Convert.ChangeType (secureValue, typeof (T));
+					}
+				} catch (KeyringException) {
+					Log.Error (KeyNotFoundMessage, AbsolutePathForKey (key, DefaultRootPath));
+				}
 			}
 
 			return def;
