@@ -815,7 +815,6 @@ namespace Docky.Interface
 
 		void ScreenSizeChanged (object sender, EventArgs e)
 		{
-			Reconfigure ();
 			UpdateMaxIconSize ();
 		}
 
@@ -1020,7 +1019,6 @@ namespace Docky.Interface
 				GLib.Source.Remove (icon_size_timer);
 			
 			icon_size_timer = GLib.Timeout.Add (1000, delegate {
-				Reconfigure ();
 				UpdateMaxIconSize ();
 				icon_size_timer = 0;
 				return false;
@@ -1816,6 +1814,8 @@ namespace Docky.Interface
 		{
 			if (Painter != null)
 				return;
+			
+			Reconfigure ();
 			
 			int dockWidth = DockWidth;
 			int maxWidth = VerticalDock ? monitor_geo.Height : monitor_geo.Width;
