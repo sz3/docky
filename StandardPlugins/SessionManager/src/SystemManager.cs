@@ -96,7 +96,11 @@ namespace SessionManager
 
 		bool GetBoolean (org.freedesktop.DBus.Properties dbusobj, string path, string propname) 
 		{
-			return Boolean.Parse (dbusobj.Get (path, propname).ToString ());
+			try {
+				return Boolean.Parse (dbusobj.Get (path, propname).ToString ());
+			} catch (Exception) {
+				return false;
+			}
 		}
 		
 		IDeviceKitPower devicekit;
