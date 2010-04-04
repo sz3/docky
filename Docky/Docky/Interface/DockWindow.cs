@@ -279,7 +279,7 @@ namespace Docky.Interface
 					bool priorItems = false;
 					bool separatorNeeded = false;
 					
-					if (Preferences.DefaultProvider.IsWindowManager) {
+					if (Preferences.DefaultProvider.IsWindowManager && Docky.Controller.ShowDockyItem) {
 						collection_backend.Add (DockyItem);
 					
 						if (!Preferences.DefaultProvider.Items.Any())
