@@ -147,7 +147,13 @@ namespace GMail
 		/// <value>
 		/// </value>
 		public static DateTime LastChecked {
- 			get { return DateTime.Parse (prefs.Get<string> (LastCheckedKey, DateTime.Now.ToString ())); }
+ 			get {
+				try {
+					return DateTime.Parse (prefs.Get<string> (LastCheckedKey, DateTime.Now.ToString ()));
+				} catch (Exception) {
+					return DateTime.Now;
+				}
+			}
  			set { prefs.Set<string> (LastCheckedKey, value.ToString ()); OnLastCheckedChanged (); }
  		}
 		
