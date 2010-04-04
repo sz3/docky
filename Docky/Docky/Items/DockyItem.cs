@@ -32,6 +32,7 @@ namespace Docky.Items
 {
 	internal class DockyItem : ColoredIconDockItem, INonPersistedItem
 	{
+		static IPreferences prefs = DockServices.Preferences.Get <DockyItem> ();
 		
 		public DockyItem ()
 		{
@@ -81,7 +82,12 @@ namespace Docky.Items
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
 			if (button == 1) {
-				ConfigurationWindow.Instance.Show ();
+				string command = prefs.Get<string> ("DockyItemCommand", "");
+				if (string.IsNullOrEmpty (command))
+					ConfigurationWindow.Instance.Show ();
+				else
+					DockServices.System.Execute (command);
+				
 				return ClickAnimation.Bounce;
 			}
 			return ClickAnimation.None;
