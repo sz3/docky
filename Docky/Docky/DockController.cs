@@ -113,15 +113,6 @@ namespace Docky
 			}
 		}
 		
-		bool? docky_item;
-		public bool ShowDockyItem {
-			get {
-				if (!docky_item.HasValue)
-					docky_item = prefs.Get<bool> ("ShowDockyItem", true);
-				return docky_item.Value;
-			}
-		}
-		
 		public IEnumerable<string> DockThemes {
 			get {
 				yield return DefaultTheme;

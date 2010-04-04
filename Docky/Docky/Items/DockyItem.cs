@@ -34,6 +34,15 @@ namespace Docky.Items
 	{
 		static IPreferences prefs = DockServices.Preferences.Get <DockyItem> ();
 		
+		bool? docky_item;
+		public bool Show {
+			get {
+				if (!docky_item.HasValue)
+					docky_item = prefs.Get<bool> ("ShowDockyItem", true);
+				return docky_item.Value;
+			}
+		}
+		
 		public DockyItem ()
 		{
 			Indicator = ActivityIndicator.Single;
