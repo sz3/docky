@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Chris Szikszoy, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -54,17 +54,8 @@ namespace RecentDocuments
 		
 		public RecentDocumentsItemProvider ()
 		{
-			docs = new RecentDocumentsItem (this);
-			UpdateItems ();
-			Gtk.RecentManager.Default.Changed += delegate { UpdateItems (); };
-		}
-		
-		public void UpdateItems ()
-		{
-			if ((docs == null || docs.CurrentFile == null) && Items.Count () == 1)
-				Items = Enumerable.Empty<AbstractDockItem> ();
-			if (docs != null && docs.CurrentFile != null && Items.Count () == 0)
-				Items = docs.AsSingle<AbstractDockItem> ();
+			docs = new RecentDocumentsItem ();
+			Items = docs.AsSingle<AbstractDockItem> ();
 		}
 		
 		void ClearRecent ()
@@ -98,7 +89,7 @@ namespace RecentDocuments
 		public override MenuList GetMenuItems (AbstractDockItem item)
 		{
 			MenuList list = base.GetMenuItems (item);
-			list[MenuListContainer.Footer].Add (new Docky.Menus.MenuItem (Catalog.GetString ("_Clear Recent Documents..."), "edit-clear", (o, a) => ClearRecent ()));
+			list[MenuListContainer.Footer].Add (new Docky.Menus.MenuItem (Catalog.GetString ("_Clear Recent Documents..."), "edit-clear", (o, a) => ClearRecent (), docs.RecentDocs.Count == 0));
 			return list;
 		}
 	}

@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Chris Szikszoy, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -30,7 +30,6 @@ namespace RecentDocuments
 {
 	public class RecentDocumentsItem : IconDockItem
 	{
-
 		#region AbstractDockItem implementation
 		
 		public override string UniqueID ()
@@ -42,12 +41,10 @@ namespace RecentDocuments
 		
 		const int NumRecentDocs = 7;
 		
-		List<FileDockItem> RecentDocs;
+		internal List<FileDockItem> RecentDocs;
 		
 		FileDockItem currentFile;
 		FileMonitor watcher;
-		
-		RecentDocumentsItemProvider recentOwner;
 		
 		public FileDockItem CurrentFile {
 			get {
@@ -75,13 +72,13 @@ namespace RecentDocuments
 			RefreshRecentDocs ();
 		}
 		
-		public RecentDocumentsItem (RecentDocumentsItemProvider recentOwner)
+		public RecentDocumentsItem ()
 		{
-			this.recentOwner = recentOwner;
 			RecentDocs = new List<FileDockItem> ();
 			
 			Gtk.RecentManager.Default.Changed += delegate { RefreshRecentDocs (); };
 			
+			CurrentFile = null;
 			RefreshRecentDocs ();
 		}
 		
@@ -100,21 +97,23 @@ namespace RecentDocuments
 			}
 			
 			UpdateInfo ();
-			recentOwner.UpdateItems ();
 		}
 		
 		void UpdateInfo ()
 		{
-			if (RecentDocs.Count() == 0) {
+			if (RecentDocs.Count() == 0)
 				CurrentFile = null;
-				return;
-			}
 			
-			if (CurrentFile == null || RecentDocs.IndexOf (CurrentFile) == -1)
+			if (CurrentFile != null && RecentDocs.IndexOf (CurrentFile) == -1)
 				CurrentFile = RecentDocs.First ();
 			
-			Icon = CurrentFile.Icon;
-			HoverText = CurrentFile.HoverText;
+			if (CurrentFile == null) {
+				Icon = "folder-recent;;document-open-recent";
+				HoverText = "Recent Documents";
+			} else {
+				Icon = CurrentFile.Icon;
+				HoverText = CurrentFile.HoverText;
+			}
 			QueueRedraw ();
 		}
 		
@@ -135,13 +134,17 @@ namespace RecentDocuments
 			else
 				currentIndex %= offset;
 			
-			CurrentFile = RecentDocs.ElementAt (currentIndex);
+			try {
+				CurrentFile = RecentDocs.ElementAt (currentIndex);
+			} catch (Exception) {
+				CurrentFile = null;
+			}
 			UpdateInfo ();
 		}
 		
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
-			if (button == 1) {
+			if (button == 1 && CurrentFile != null) {
 				DockServices.System.Open (CurrentFile.OwnedFile);
 				return ClickAnimation.Bounce;
 			}
