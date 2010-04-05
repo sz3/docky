@@ -159,12 +159,12 @@ namespace Docky.Services
 			if (alive_timer > 0)
 				GLib.Source.Remove (alive_timer);
 			
-			if (Proc == null || !IsRunning)
-				return;
-			
 			// Use the kill program to send off a sigterm instead of a sigkill
-			System.Diagnostics.Process.Start ("kill", Proc.Id.ToString ());
+			if (Proc != null)
+				System.Diagnostics.Process.Start ("kill", Proc.Id.ToString ());
+			
 			Log<Helper>.Info ("Stopping {0}", File.Basename);
+			IsRunning = false;
 		}
 	}
 }
