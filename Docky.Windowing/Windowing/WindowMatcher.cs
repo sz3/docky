@@ -37,15 +37,17 @@ namespace Docky.Windowing
 		
 		static WindowMatcher ()
 		{
+			custom_desktop_files = new List<string> ();
 			Default = new WindowMatcher ();
 		}
 		
 		public static WindowMatcher Default { get; protected set; }
 		
+		static List<string> custom_desktop_files;
 		static List<string> desktop_files;
 		static IEnumerable<string> DesktopFiles { 
 			get {
-				return desktop_files.AsEnumerable ();
+				return custom_desktop_files.Union (desktop_files).AsEnumerable ();
 			}
 		}
 		
@@ -139,6 +141,14 @@ namespace Docky.Windowing
 		List<Regex> prefix_filters;
 		Wnck.Screen screen;
 		
+		void DesktopFilesChanged ()
+		{
+			exec_to_desktop_files = BuildExecStrings ();
+			class_to_desktop_files = BuildClassStrings ();
+			SerializeStrings (exec_to_desktop_files, "ExecStrings");
+			SerializeStrings (class_to_desktop_files, "ClassStrings");
+		}
+		
 		WindowMatcher ()
 		{
 			update_lock = new object ();
@@ -151,19 +161,13 @@ namespace Docky.Windowing
 			class_to_desktop_files = (Dictionary<string, string>) DeserializeStrings ("ClassStrings");
 			
 			if (exec_to_desktop_files == null || class_to_desktop_files == null) {
-				exec_to_desktop_files = BuildExecStrings ();
-				class_to_desktop_files = BuildClassStrings ();
-				SerializeStrings (exec_to_desktop_files, "ExecStrings");
-				SerializeStrings (class_to_desktop_files, "ClassStrings");
+				DesktopFilesChanged ();
 			} else {
 				// rebuild after 2 minutes just to be sure we are up to date
 				GLib.Timeout.Add (2 * 60 * 1000, delegate {
 					lock (update_lock) {
 						desktop_files = BuildDesktopFilesList ();
-						exec_to_desktop_files = BuildExecStrings ();
-						class_to_desktop_files = BuildClassStrings ();
-						SerializeStrings (exec_to_desktop_files, "ExecStrings");
-						SerializeStrings (class_to_desktop_files, "ClassStrings");
+						DesktopFilesChanged ();
 					}
 					return false;
 				});
@@ -181,6 +185,15 @@ namespace Docky.Windowing
 			
 			screen.WindowOpened += WnckScreenDefaultWindowOpened;
 			screen.WindowClosed += WnckScreenDefaultWindowClosed;
+		}
+		
+		public void RegisterDesktopFile (string file)
+		{
+			if (DesktopFiles.Contains (file))
+				return;
+			
+			custom_desktop_files.Add (file);
+			DesktopFilesChanged ();
 		}
 		
 		void MonitorDesktopFileDirs (GLib.File dir)
@@ -211,10 +224,7 @@ namespace Docky.Windowing
 							return;
 						// reload our dictionary of exec strings						
 						lock (update_lock) {
-							exec_to_desktop_files = BuildExecStrings ();
-							class_to_desktop_files = BuildClassStrings ();
-							SerializeStrings (exec_to_desktop_files, "ExecStrings");
-							SerializeStrings (class_to_desktop_files, "ClassStrings");
+							DesktopFilesChanged ();
 						}
 						
 						// Make sure to trigger event on main thread

@@ -69,6 +69,7 @@ namespace Docky.Items
 		private ApplicationDockItem (DesktopItem item)
 		{
 			OwnedItem = item;
+			WindowMatcher.Default.RegisterDesktopFile (OwnedItem.Location);
 			can_manage_windows = true;
 			
 			UpdateInfo ();
