@@ -290,56 +290,60 @@ namespace WeatherDocklet
 		/// </param>
 		void DrawCurrentCondition (Cairo.Context cr)
 		{
-			int titleSize = 0;
 			int ySpacing = 2;
-			int iconHeight = Allocation.Height - titleSize - ySpacing;
-			int xSpacing = (Allocation.Width - 2 * BUTTON_SIZE - 9 * iconHeight) / 7;
-			int xPos = BUTTON_SIZE + xSpacing;
+			int iconSize = Allocation.Height - 2 * ySpacing;
+			int xSpacing = (Allocation.Width - 2 * BUTTON_SIZE - 9 * iconSize) / 7;
+			
+			int topYPos = Allocation.Height / 3;
+			int botYPos = 2 * topYPos;
+			
+			int xPos = BUTTON_SIZE + (int) (1.5 * xSpacing);
 			
 			// draw the temp
-			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (DockServices.Paths.SystemDataFolder.GetChild ("temp.svg").Path, iconHeight))
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (DockServices.Paths.SystemDataFolder.GetChild ("temp.svg").Path, iconSize))
 			{
-				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, xPos, titleSize + ySpacing);
+				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, xPos, ySpacing);
 				cr.Paint ();
 			}
-			xPos += iconHeight;
+			xPos += iconSize;
 			
 			if (!WeatherController.Weather.SupportsFeelsLike)
-				DrawConditionText (cr, xPos, 2 * iconHeight, Allocation.Height / 4, WeatherController.Weather.Temp + WeatherUnits.TempUnit);
+				DrawConditionText (cr, xPos, 2 * iconSize, topYPos, WeatherController.Weather.Temp + WeatherUnits.TempUnit);
 			else
-				DrawConditionText (cr, xPos, 2 * iconHeight, Allocation.Height / 4, WeatherController.Weather.Temp + WeatherUnits.TempUnit + " (" + WeatherController.Weather.FeelsLike + WeatherUnits.TempUnit + ")");
+				DrawConditionText (cr, xPos, 2 * iconSize, topYPos, WeatherController.Weather.Temp + WeatherUnits.TempUnit + " (" + WeatherController.Weather.FeelsLike + WeatherUnits.TempUnit + ")");
 			
 
 			// draw humidity
 			string humidity = String.Format (Catalog.GetString ("{0} humidity"), WeatherController.Weather.Humidity);
-			DrawConditionText (cr, xPos, 2 * iconHeight, 3 * Allocation.Height / 4, humidity);
-			xPos += 2 * (iconHeight + xSpacing);
+			DrawConditionText (cr, xPos, 2 * iconSize, botYPos, humidity);
+			
+			xPos += 2 * (iconSize + xSpacing);
 			
 
 			// draw the wind
-			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (DockServices.Paths.SystemDataFolder.GetChild ("wind.svg").Path, iconHeight))
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (DockServices.Paths.SystemDataFolder.GetChild ("wind.svg").Path, iconSize))
 			{
-				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, xPos, titleSize + ySpacing);
+				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, xPos, ySpacing);
 				cr.Paint ();
 			}
-			xPos += iconHeight;
+			xPos += iconSize;
 			
-			DrawConditionText (cr, xPos, 2 * iconHeight, Allocation.Height / 4, WeatherController.Weather.Wind + " " + WeatherUnits.WindUnit);
-			DrawConditionText (cr, xPos, 2 * iconHeight, 3 * Allocation.Height / 4, WeatherController.Weather.WindDirection);
-			xPos += 2 * (iconHeight + xSpacing);
+			DrawConditionText (cr, xPos, 2 * iconSize, topYPos, WeatherController.Weather.Wind + " " + WeatherUnits.WindUnit);
+			DrawConditionText (cr, xPos, 2 * iconSize, botYPos, WeatherController.Weather.WindDirection);
+			
+			xPos += 2 * (iconSize + xSpacing);
 
 			
 			// draw sun
-			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (DockServices.Paths.SystemDataFolder.GetChild ("sun.svg").Path, iconHeight))
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (DockServices.Paths.SystemDataFolder.GetChild ("sun.svg").Path, iconSize))
 			{
-				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, xPos, titleSize + ySpacing);
+				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, xPos, ySpacing);
 				cr.Paint ();
 			}
-			xPos += iconHeight;
+			xPos += iconSize;
 			
-			DrawConditionText (cr, xPos, 2 * iconHeight, Allocation.Height / 4, WeatherController.Weather.SunRise.ToShortTimeString ());
-			DrawConditionText (cr, xPos, 2 * iconHeight, 3 * Allocation.Height / 4, WeatherController.Weather.SunSet.ToShortTimeString ());
-			xPos += 2 * (iconHeight + xSpacing);
+			DrawConditionText (cr, xPos, 2 * iconSize, topYPos, WeatherController.Weather.SunRise.ToShortTimeString ());
+			DrawConditionText (cr, xPos, 2 * iconSize, botYPos, WeatherController.Weather.SunSet.ToShortTimeString ());
 		}
 		
 		void DrawConditionText (Cairo.Context cr, int x, int xWidth, int yCenter, string text)
@@ -353,7 +357,7 @@ namespace WeatherDocklet
 			layout.Width = Pango.Units.FromPixels (Allocation.Width - BUTTON_SIZE - x);
 			
 			if (WeatherController.Weather.ForecastDays < 6)
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 5.5));
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 5));
 			else
 				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 3.5));
 			
