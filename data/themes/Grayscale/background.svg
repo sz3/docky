@@ -30,7 +30,7 @@
   </metadata>
   <sodipodi:namedview
      inkscape:window-height="789"
-     inkscape:window-width="1440"
+     inkscape:window-width="1438"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      guidetolerance="10.0"
@@ -41,14 +41,21 @@
      pagecolor="#ffffff"
      id="base"
      showgrid="false"
-     inkscape:zoom="0.50074534"
-     inkscape:cx="300.93145"
-     inkscape:cy="109.55718"
+     inkscape:zoom="1"
+     inkscape:cx="345"
+     inkscape:cy="75"
      inkscape:window-x="0"
      inkscape:window-y="24"
      inkscape:current-layer="svg2" />
   <defs
      id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 75 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="1000 : 75 : 1"
+       inkscape:persp3d-origin="500 : 50 : 1"
+       id="perspective16" />
     <linearGradient
        id="linearGradient3159">
       <stop
@@ -83,7 +90,7 @@
        x1="500"
        y1="0"
        x2="500"
-       y2="75.25"
+       y2="113.25"
        id="linearGradient3181"
        xlink:href="#linearGradient3159"
        gradientUnits="userSpaceOnUse" />
@@ -91,7 +98,7 @@
   <path
      d="M 999.5,150 L 999.5,5.93607 C 999.5,2.9996655 997.00033,0.5 994.01877,0.5 L 6,0.5 C 2.5867104,0.5 0.5,2.9469231 0.5,6 L 0.5,150"
      id="rect2396"
-     style="opacity:1;fill:url(#linearGradient3181);fill-opacity:1;stroke:#8c8c8c;stroke-width:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+     style="opacity:1;fill:url(#linearGradient3181);fill-opacity:1;stroke:#787878;stroke-width:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
   <path
      d="M 998.5,150 L 998.5,5.93607 C 998.5,3.6509317 996.50015,1.5 994.01877,1.5 L 6,1.5 C 3.3337857,1.5 1.49997,3.2581783 1.49997,6 L 1.49997,150"
      id="path3171"
