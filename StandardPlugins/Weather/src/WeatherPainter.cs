@@ -290,69 +290,77 @@ namespace WeatherDocklet
 		/// </param>
 		void DrawCurrentCondition (Cairo.Context cr)
 		{
-			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-			Pango.Rectangle inkRect, logicalRect;
+			int titleSize = 0;
+			int ySpacing = 2;
+			int iconHeight = Allocation.Height - titleSize - ySpacing;
+			int xSpacing = (Allocation.Width - 2 * BUTTON_SIZE - 9 * iconHeight) / 7;
+			int xPos = BUTTON_SIZE + xSpacing;
 			
-			layout.FontDescription = new Gtk.Style().FontDescription;
-			layout.FontDescription.Weight = Pango.Weight.Bold;
-			layout.Ellipsize = Pango.EllipsizeMode.None;
-			layout.Width = Pango.Units.FromPixels ((int) ((Allocation.Width - 4 * BUTTON_SIZE) / 4.5));
+			// draw the temp
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (DockServices.Paths.SystemDataFolder.GetChild ("temp.svg").Path, iconHeight))
+			{
+				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, xPos, titleSize + ySpacing);
+				cr.Paint ();
+			}
+			xPos += iconHeight + xSpacing;
 			
-			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 3));
+			if (!WeatherController.Weather.SupportsFeelsLike)
+				DrawConditionText (cr, xPos, 2 * iconHeight, Allocation.Height / 4, WeatherController.Weather.Temp + WeatherUnits.TempUnit);
+			else
+				DrawConditionText (cr, xPos, 2 * iconHeight, Allocation.Height / 4, WeatherController.Weather.Temp + WeatherUnits.TempUnit + " (" + WeatherController.Weather.FeelsLike + WeatherUnits.TempUnit + ")");
 			
-			cr.Color = new Cairo.Color (1, 1, 1, 1);
+
+			// draw humidity
+			string humidity = String.Format (Catalog.GetString ("{0} humidity"), WeatherController.Weather.Humidity);
+			DrawConditionText (cr, xPos, 2 * iconHeight, 3 * Allocation.Height / 4, humidity);
+			xPos += 2 * iconHeight + xSpacing;
 			
-			layout.SetText (WeatherController.Weather.City);
-			layout.GetPixelExtents (out inkRect, out logicalRect);
-			cr.MoveTo (2 * BUTTON_SIZE, Allocation.Height / 3.5 - logicalRect.Height / 2);
-			Pango.CairoHelper.LayoutPath (cr, layout);
-			cr.Fill ();
+
+			// draw the wind
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (DockServices.Paths.SystemDataFolder.GetChild ("wind.svg").Path, iconHeight))
+			{
+				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, xPos, titleSize + ySpacing);
+				cr.Paint ();
+			}
+			xPos += iconHeight + xSpacing;
 			
-			DrawCondition (cr, WeatherController.Weather.SupportsFeelsLike ? 1 : 2, 2, Catalog.GetString ("Humidity"), WeatherController.Weather.Humidity);
+			DrawConditionText (cr, xPos, 2 * iconHeight, Allocation.Height / 4, WeatherController.Weather.Wind + " " + WeatherUnits.WindUnit);
+			DrawConditionText (cr, xPos, 2 * iconHeight, 3 * Allocation.Height / 4, WeatherController.Weather.WindDirection);
+			xPos += 2 * iconHeight + xSpacing;
+
 			
-			DrawCondition (cr, 2, 1, Catalog.GetString ("Temp"), WeatherController.Weather.Temp + WeatherUnits.TempUnit);
-			if (WeatherController.Weather.SupportsFeelsLike)
-				DrawCondition (cr, 2, 2, Catalog.GetString ("Feels Like"), WeatherController.Weather.FeelsLike + WeatherUnits.TempUnit);
+			// draw sun
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (DockServices.Paths.SystemDataFolder.GetChild ("sun.svg").Path, iconHeight))
+			{
+				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, xPos, titleSize + ySpacing);
+				cr.Paint ();
+			}
+			xPos += iconHeight + xSpacing;
 			
-			DrawCondition (cr, 3, 1, Catalog.GetString ("Wind"), WeatherController.Weather.Wind + " " + WeatherUnits.WindUnit);
-			DrawCondition (cr, 3, 2, Catalog.GetString ("Direction"), WeatherController.Weather.WindDirection);
-			
-			DrawCondition (cr, 4, 1, Catalog.GetString ("Sunrise"), WeatherController.Weather.SunRise.ToShortTimeString ());
-			DrawCondition (cr, 4, 2, Catalog.GetString ("Sunset"), WeatherController.Weather.SunSet.ToShortTimeString ());
+			DrawConditionText (cr, xPos, 2 * iconHeight, Allocation.Height / 4, WeatherController.Weather.SunRise.ToShortTimeString ());
+			DrawConditionText (cr, xPos, 2 * iconHeight, 3 * Allocation.Height / 4, WeatherController.Weather.SunSet.ToShortTimeString ());
+			xPos += 2 * iconHeight + xSpacing;
 		}
 		
-		void DrawCondition (Cairo.Context cr, int column, int row, string label, string val)
+		void DrawConditionText (Cairo.Context cr, int x, int xWidth, int yCenter, string text)
 		{
-			int xWidth = (Allocation.Width - 4 * BUTTON_SIZE) / 8;
-			
 			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
 			Pango.Rectangle inkRect, logicalRect;
 			
 			layout.FontDescription = new Gtk.Style().FontDescription;
 			layout.FontDescription.Weight = Pango.Weight.Bold;
 			layout.Ellipsize = Pango.EllipsizeMode.None;
-			layout.Width = Pango.Units.FromPixels (xWidth);
+			layout.Width = Pango.Units.FromPixels (Allocation.Width - BUTTON_SIZE - x);
 			
 			if (WeatherController.Weather.ForecastDays < 6)
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 6.5));
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 5.5));
 			else
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 4.5));
-			
-			int xOffset = 2 * BUTTON_SIZE + (column - 1) * 2 * xWidth;
-			int yOffset = row == 1 ? Allocation.Height : (int) (Allocation.Height * 2.5);
-			yOffset = (int) (yOffset / 3.5);
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 3.5));
 			
 			cr.Color = new Cairo.Color (1, 1, 1, 0.9);
-			layout.SetText (label);
+			layout.SetText (text);
 			layout.GetPixelExtents (out inkRect, out logicalRect);
-			cr.MoveTo (xOffset + (xWidth - inkRect.Width) / 2, yOffset - logicalRect.Height / 2);
-			Pango.CairoHelper.LayoutPath (cr, layout);
-			cr.Fill ();
-			
-			cr.Color = new Cairo.Color (1, 1, 1, 0.7);
-			layout.SetText (val);
-			layout.GetPixelExtents (out inkRect, out logicalRect);
-			cr.MoveTo (xOffset + xWidth + (xWidth - inkRect.Width) / 2, yOffset - logicalRect.Height / 2);
+			cr.MoveTo (x + (xWidth - inkRect.Width) / 2, yCenter - logicalRect.Height / 2);
 			Pango.CairoHelper.LayoutPath (cr, layout);
 			cr.Fill ();
 		}
