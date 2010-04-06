@@ -74,15 +74,16 @@ namespace Docky.Items
 			UpdateInfo ();
 			UpdateWindows ();
 			
-			WindowMatcher.DesktopFileChanged += delegate(object sender, DesktopFileChangedEventArgs e) {
-				if (e.File.Path == item.Location) {
-					UpdateInfo ();
-				}
-			};
+			WindowMatcher.DesktopFileChanged += HandleDesktopFileChanged;
 			
 			Wnck.Screen.Default.WindowOpened += WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
 			Wnck.Screen.Default.ActiveWindowChanged += WnckScreenDefaultWindowChanged;
+		}
+		
+		void HandleDesktopFileChanged (object sender, DesktopFileChangedEventArgs e) {
+			if (e.File.Path == OwnedItem.Location)
+				UpdateInfo ();
 		}
 		
 		void UpdateInfo ()
@@ -193,8 +194,10 @@ namespace Docky.Items
 		
 		public override void Dispose ()
 		{
+			WindowMatcher.DesktopFileChanged -= HandleDesktopFileChanged;
 			Wnck.Screen.Default.WindowOpened -= WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed -= WnckScreenDefaultWindowClosed;
+			Wnck.Screen.Default.ActiveWindowChanged -= WnckScreenDefaultWindowChanged;
 			base.Dispose ();
 		}
 	}
