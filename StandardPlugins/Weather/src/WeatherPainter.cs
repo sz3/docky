@@ -302,7 +302,7 @@ namespace WeatherDocklet
 				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, xPos, titleSize + ySpacing);
 				cr.Paint ();
 			}
-			xPos += iconHeight + xSpacing;
+			xPos += iconHeight;
 			
 			if (!WeatherController.Weather.SupportsFeelsLike)
 				DrawConditionText (cr, xPos, 2 * iconHeight, Allocation.Height / 4, WeatherController.Weather.Temp + WeatherUnits.TempUnit);
@@ -313,7 +313,7 @@ namespace WeatherDocklet
 			// draw humidity
 			string humidity = String.Format (Catalog.GetString ("{0} humidity"), WeatherController.Weather.Humidity);
 			DrawConditionText (cr, xPos, 2 * iconHeight, 3 * Allocation.Height / 4, humidity);
-			xPos += 2 * iconHeight + xSpacing;
+			xPos += 2 * (iconHeight + xSpacing);
 			
 
 			// draw the wind
@@ -322,11 +322,11 @@ namespace WeatherDocklet
 				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, xPos, titleSize + ySpacing);
 				cr.Paint ();
 			}
-			xPos += iconHeight + xSpacing;
+			xPos += iconHeight;
 			
 			DrawConditionText (cr, xPos, 2 * iconHeight, Allocation.Height / 4, WeatherController.Weather.Wind + " " + WeatherUnits.WindUnit);
 			DrawConditionText (cr, xPos, 2 * iconHeight, 3 * Allocation.Height / 4, WeatherController.Weather.WindDirection);
-			xPos += 2 * iconHeight + xSpacing;
+			xPos += 2 * (iconHeight + xSpacing);
 
 			
 			// draw sun
@@ -335,11 +335,11 @@ namespace WeatherDocklet
 				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, xPos, titleSize + ySpacing);
 				cr.Paint ();
 			}
-			xPos += iconHeight + xSpacing;
+			xPos += iconHeight;
 			
 			DrawConditionText (cr, xPos, 2 * iconHeight, Allocation.Height / 4, WeatherController.Weather.SunRise.ToShortTimeString ());
 			DrawConditionText (cr, xPos, 2 * iconHeight, 3 * Allocation.Height / 4, WeatherController.Weather.SunSet.ToShortTimeString ());
-			xPos += 2 * iconHeight + xSpacing;
+			xPos += 2 * (iconHeight + xSpacing);
 		}
 		
 		void DrawConditionText (Cairo.Context cr, int x, int xWidth, int yCenter, string text)
