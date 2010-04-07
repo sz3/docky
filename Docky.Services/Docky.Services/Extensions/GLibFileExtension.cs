@@ -259,13 +259,13 @@ namespace Docky.Services
 			foreach (GLib.File subdir in source.SubDirs ()) {
 				dest.GetChild (subdir.Basename).MakeDirectoryWithParents (null);
 				// if it's a directory, continue the recursion
-				Recursive_Copy (subdir, dest.GetChild (subdir.Basename), ref copiedBytes, totalBytes, progress_cb);
+				Recursive_Copy (subdir, dest.GetChild (subdir.Basename), flags, ref copiedBytes, totalBytes, progress_cb);
 			}
 			
 			foreach (File child in source.GetFiles ()) {
 				long copied = copiedBytes;
 				
-				child.Copy (dest.GetChild (child.Basename), FileCopyFlags.AllMetadata | FileCopyFlags.NofollowSymlinks, null, (current, total) => {
+				child.Copy (dest.GetChild (child.Basename), flags, null, (current, total) => {
 					progress_cb.Invoke (copied + current, totalBytes);
 				});
 				copiedBytes += child.GetSize ();

@@ -99,8 +99,6 @@ namespace Docky.Items
 			if (!string.IsNullOrEmpty (OwnedFile.Path)) {
 				string customIconPath = OwnedFile.QueryInfo<string> (CustomIconKey);
 				string thumbnailPath = OwnedFile.QueryInfo<string> (ThumbnailPathKey);
-				// FIXME no longer needed...
-				// emblems are returned as [ e1, e2, e3 ], get those into a nice trimmed string array
 				string[] emblems = OwnedFile.QueryInfo<string[]> (EmblemsKey);
 				
 				// if the icon lives inside the folder (or one of its subdirs) then this
@@ -117,16 +115,11 @@ namespace Docky.Items
 				else
 					Icon = OwnedFile.Icon ();
 				
-				// process emblems...
-				/*
-				if (!string.IsNullOrEmpty (rawEmblems)) {
-					rawEmblems = rawEmblems.Replace ("[", "").Replace ("]", "");
-					
+				// process the emblems
+				if (emblems.Length != 0) {
 					int [] emblemPositions = { 2, 1, 0, 3};
 					int i=0;
-					rawEmblems.Split (new [] {','})
-						.Select (e => e.Trim ())
-						.Reverse ()
+					emblems.Reverse ()
 						.Take (4)
 						.ToList ()
 						.ForEach (e => {
@@ -134,7 +127,6 @@ namespace Docky.Items
 								i++;
 							});
 				}
-				*/
 			} else if (!string.IsNullOrEmpty (backup_icon)) {
 				Icon = backup_icon;
 			} else {
