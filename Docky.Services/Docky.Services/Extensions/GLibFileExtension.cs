@@ -183,7 +183,7 @@ namespace Docky.Services
 				return;
 			}
 			
-			IEnumerable<GLib.File> files = GetFiles (file, "").Union (SubDirs (file));
+			IEnumerable<GLib.File> files = file.GetFiles ("").Union (file.SubDirs ());
 			
 			foreach (File f in files) {
 				if (f.QueryInfo<bool> ("access::can-delete"))
