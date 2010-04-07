@@ -159,7 +159,7 @@ namespace Docky.Items
 				return false;
 			
 			foreach (string uri in uris) {
-				string mime = GLib.FileFactory.NewForUri (uri).QueryStringAttr ("standard::content-type");
+				string mime = GLib.FileFactory.NewForUri (uri).QueryInfo<string> ("standard::content-type");
 				if (mimes.Any (m => GLib.Content.TypeIsA (mime, m) || GLib.Content.TypeEquals (mime, m)))
 					return true;
 			}

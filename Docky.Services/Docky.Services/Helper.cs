@@ -101,9 +101,9 @@ namespace Docky.Services
 		void Start ()
 		{	
 			// if the execute bits aren't set, try to set
-			if (!File.QueryBoolAttr ("access::can-execute")) {
+			if (!File.QueryInfo<bool> ("access::can-execute")) {
 				Log<Helper>.Debug ("Execute permissions are not currently set for '{0}', attempting to set them.", File.Path);
-				uint currentPerm = File.QueryUintAttr ("unix::mode");
+				uint currentPerm = File.QueryInfo<uint> ("unix::mode");
 				try {
 					File.SetAttributeUint32 ("unix::mode", currentPerm | X_PERM, 0, null);
 				// if we can't log the error, and disable this script

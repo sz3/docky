@@ -15,6 +15,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
 using System;
+using IO = System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -29,7 +30,6 @@ namespace Docky.Services
 		{
 			return file.Path == other.Path;
 		}
-
 
 		public int GetHashCode (File file)
 		{
@@ -52,44 +52,77 @@ namespace Docky.Services
 			return NativeInterop.StrUri (file);
 		}
 		
-		public static FileInfo QueryInfoSimple (this GLib.File file, string attribute)
+		public static T QueryInfo<T> (this GLib.File file, string attribute)
 		{
-			FileInfo info;
-			if (attribute.StartsWith ("filesystem::"))
-				info = file.QueryFilesystemInfo (attribute, null);
-			else
-				info = file.QueryInfo (attribute, FileQueryInfoFlags.None, null);
-			return info;
+			IntPtr info = NativeInterop.GFileQueryInfo (file, attribute, FileQueryInfoFlags.None, null);
+						
+			Type returnType = typeof(T);
+			object ret;
+			
+			if (returnType == typeof(bool)) {
+				ret = QueryBoolAttr (info, attribute);
+			} else if (returnType == typeof(string)) {
+				ret = QueryStringAttr (info, attribute);
+			} else if (returnType == typeof(string[])) {
+				ret = QueryStringVAttr (info, attribute);
+			} else if (returnType == typeof(uint)) {
+				ret = QueryUIntAttr (info, attribute);
+			} else if (returnType == typeof(ulong)) {
+				ret = QueryULongAttr (info, attribute);
+			} else {
+				ret = default(T);
+			}
+			
+			NativeInterop.GObjectUnref (info);
+			
+			return (T) ret;
 		}
 		
-		public static GLib.Icon Icon (this GLib.File file)
+		public static string Icon (this GLib.File file)
 		{
-			return file.QueryInfoSimple ("standard::icon").Icon;
+			IntPtr info = NativeInterop.GFileQueryInfo (file, "standard::icon", FileQueryInfoFlags.None, null);
+			GLib.Icon icon = NativeInterop.GFileInfoIcon (info);
+			string iconName = DockServices.Drawing.IconFromGIcon (icon);
+			NativeInterop.GObjectUnref (info);
+			return iconName;
 		}
 		
-		public static string QueryStringAttr (this GLib.File file, string attribute)
+		static long Size (this GLib.File file)
 		{
-			return file.QueryInfoSimple (attribute).GetAttributeAsString (attribute);
+			IntPtr info = NativeInterop.GFileQueryInfo (file, "standard::size", FileQueryInfoFlags.None, null);
+			long size = NativeInterop.GFileInfoSize (info);
+			NativeInterop.GObjectUnref (info);
+			return size;
 		}
 		
-		public static uint QueryUintAttr (this GLib.File file, string attribute)
+		static string QueryStringAttr (IntPtr info, string attribute)
 		{
-			return file.QueryInfoSimple (attribute).GetAttributeUInt (attribute);
-		}		
-		
-		public static bool QueryBoolAttr (this GLib.File file, string attribute)
+			return NativeInterop.GFileInfoQueryString (info, attribute);
+		}
+			
+		static string[] QueryStringVAttr (IntPtr info, string Attribute)
 		{
-			return file.QueryInfoSimple (attribute).GetAttributeBoolean (attribute);
+			return NativeInterop.GFileInfoQueryStringV (info, Attribute);
 		}
 		
-		public static ulong QueryULongAttr (this GLib.File file, string attribute)
+		static uint QueryUIntAttr (IntPtr info, string attribute)
 		{
-			return file.QueryInfoSimple (attribute).GetAttributeULong (attribute);
+			return NativeInterop.GFileInfoQueryUInt (info, attribute);
+		}
+		
+		static bool QueryBoolAttr (IntPtr info, string attribute)
+		{
+			return NativeInterop.GFileInfoQueryBool (info, attribute);
+		}
+		
+		static ulong QueryULongAttr (IntPtr info, string attribute)
+		{
+			return NativeInterop.GFileInfoQueryULong (info, attribute);
 		}
 
 		public static FileType QueryFileType (this GLib.File file)
 		{
-			return file.QueryInfoSimple ("standard::type").FileType;
+			return file.QueryFileType (0, null);
 		}
 		
 		// Recursively list all of the subdirs for a given directory
@@ -101,28 +134,11 @@ namespace Docky.Services
 		// list all of the subdirs for a given directory
 		public static IEnumerable<GLib.File> SubDirs (this GLib.File file, bool recurse)
 		{
-			FileEnumerator enumerator = file.EnumerateChildren ("standard::type,standard::name,access::can-read", FileQueryInfoFlags.NofollowSymlinks, null);
-			
-			if (enumerator == null)
+			if (!IO.Directory.Exists (file.Path))
 				return Enumerable.Empty<GLib.File> ();
 			
-			FileInfo info;
-			List<GLib.File> dirs = new List<GLib.File> ();
-			
-			while ((info = enumerator.NextFile ()) != null) {
-				File child = file.GetChild (info.Name);
-				
-				if (info.FileType == FileType.Directory && info.GetAttributeBoolean ("access::can-read")) {
-					dirs.Add (child);
-					if (recurse)
-						dirs = dirs.Union (child.SubDirs ()).ToList ();
-				}
-			}
-			
-			if (info != null)
-				info.Dispose ();
-			enumerator.Close (null);
-			return dirs.AsEnumerable ();
+			return IO.Directory.GetDirectories (file.Path, "*", recurse == false ? IO.SearchOption.TopDirectoryOnly : IO.SearchOption.AllDirectories)
+				.Select (subdir => GLib.FileFactory.NewForPath (subdir));
 		}
 		
 		public static IEnumerable<GLib.File> GetFiles (this GLib.File file)
@@ -133,67 +149,76 @@ namespace Docky.Services
 		// gets all files under the given GLib.File (directory) with the extension of extension	
 		public static IEnumerable<GLib.File> GetFiles (this GLib.File file, string extension)
 		{
-			FileEnumerator enumerator = file.EnumerateChildren ("standard::type,standard::name", FileQueryInfoFlags.NofollowSymlinks, null);
-			
-			if (enumerator == null)
+			if (!IO.Directory.Exists (file.Path))
 				return Enumerable.Empty<GLib.File> ();
 			
-			FileInfo info;
-			List<GLib.File> files = new List<GLib.File> ();
-			
-			while ((info = enumerator.NextFile ()) != null) {
-				File child = file.GetChild (info.Name);
-				
-				if (info.FileType == FileType.Directory)
-					continue;
-				
-				if (child.Basename.EndsWith (extension))
-					files.Add (child);
-			}
-			
-			if (info != null)
-				info.Dispose ();
-			enumerator.Close (null);
-			return files.AsEnumerable ();
+			return IO.Directory.GetFiles (file.Path, string.Format ("*{0}", extension))
+				.Select (f => GLib.FileFactory.NewForPath (f));
 		}
 		
-		// This is the recursive equivalent to GLib.File.Delete ()
+		/// <summary>
+		/// Recursive equivalent to GLib.File.Delete () when called on a directory.
+		/// Functionally equivalent to GLib.File.Delete when called on files.
+		/// </summary>
+		/// <param name="file">
+		/// A <see cref="GLib.File"/>
+		/// </param>
 		public static void Delete_Recurse (this GLib.File file)
 		{
-			FileEnumerator enumerator = file.EnumerateChildren ("standard::type,standard::name,access::can-delete", FileQueryInfoFlags.NofollowSymlinks, null);
-			
-			if (enumerator == null)
+			if (IO.File.Exists (file.Path)) {
+				file.Delete ();
 				return;
-			
-			FileInfo info;
-			
-			while ((info = enumerator.NextFile ()) != null) {
-				File child = file.GetChild (info.Name);
-				
-				if (info.FileType == FileType.Directory)
-					Delete_Recurse (child);
-				
-				if (info.GetAttributeBoolean ("access::can-delete"))
-					child.Delete (null);
 			}
 			
-			if (info != null)
-				info.Dispose ();
-			enumerator.Close (null);
+			IEnumerable<GLib.File> files = IO.Directory.GetFiles (file.Path, "*", IO.SearchOption.AllDirectories)
+				.Select (f => FileFactory.NewForPath (f));
+			
+			foreach (File f in files) {
+				if (f.QueryInfo<bool> ("access::can-delete"))
+					f.Delete ();
+			}
 		}
 		
 		// This is the recursive equivalent of GLib.File.Copy ()
+		/// <summary>
+		/// Recursive equivalent to GLib.File.Copy () when called on a directory.
+		/// Functionally equivalent to GLib.File.Copy () when called on files.
+		/// </summary>
+		/// <param name="source">
+		/// A <see cref="GLib.File"/>
+		/// </param>
+		/// <param name="dest">
+		/// A <see cref="GLib.File"/>
+		/// </param>
+		/// <param name="flags">
+		/// A <see cref="FileCopyFlags"/>
+		/// </param>
+		/// <param name="progress_cb">
+		/// A <see cref="FileProgressCallback"/>
+		/// </param>
 		public static void Copy_Recurse (this GLib.File source, GLib.File dest, FileCopyFlags flags, FileProgressCallback progress_cb)
 		{
 			long totalBytes = source.GetSize ();
 			long copiedBytes = 0;
 			
-			Recursive_Copy (source, dest, ref copiedBytes, totalBytes, progress_cb);
+			Recursive_Copy (source, dest, flags, ref copiedBytes, totalBytes, progress_cb);
 		}
 		
+		/// <summary>
+		/// Indicates whether or not a directory has files.
+		/// </summary>
+		/// <remarks>
+		/// Will return false if called on a file.
+		/// </remarks>
+		/// <param name="file">
+		/// A <see cref="GLib.File"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="System.Boolean"/>
+		/// </returns>
 		public static bool DirectoryHasFiles (this GLib.File file)
 		{
-			System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo (file.Path);
+			IO.DirectoryInfo dir = new IO.DirectoryInfo (file.Path);
 			
 			if (dir.GetFiles ().Count () > 0 || dir.GetDirectories ().Count () > 0)
 				return true;
@@ -222,79 +247,66 @@ namespace Docky.Services
 			}
 		}
 		
-		static void Recursive_Copy (GLib.File source, GLib.File dest, ref long copiedBytes, long totalBytes, FileProgressCallback progress_cb)
+		static void Recursive_Copy (GLib.File source, GLib.File dest, FileCopyFlags flags, ref long copiedBytes, long totalBytes, FileProgressCallback progress_cb)
 		{
-			if (source.QueryFileType () != FileType.Directory) {
-				source.Copy (dest, FileCopyFlags.AllMetadata | FileCopyFlags.NofollowSymlinks, null, (current, total) => {
-					 progress_cb.Invoke (current, totalBytes);
-				 });
+			if (IO.File.Exists (source.Path)) {
+				source.Copy (dest, flags, null, (current, total) => { 
+					progress_cb.Invoke (current, totalBytes); 
+				});
 				return;
 			}
 			
-			FileEnumerator enumerator = source.EnumerateChildren ("standard::type,standard::name,standard::size", FileQueryInfoFlags.NofollowSymlinks, null);
+			foreach (GLib.File subdir in source.SubDirs ()) {
+				dest.GetChild (subdir.Basename).MakeDirectoryWithParents (null);
+				// if it's a directory, continue the recursion
+				Recursive_Copy (subdir, dest.GetChild (subdir.Basename), flags, ref copiedBytes, totalBytes, progress_cb);
+			}
 			
-			if (enumerator == null)
-				return;
-			
-			FileInfo info;
-			
-			while ((info = enumerator.NextFile ()) != null) {
-				File child = source.GetChild (info.Name);
+			foreach (File child in source.GetFiles ()) {
+				long copied = copiedBytes;
 				
-				if (info.FileType == FileType.Directory) {
-					// copy all of the children
-					Recursive_Copy (child, dest.GetChild (info.Name), ref copiedBytes, totalBytes, progress_cb);
-				} else {
-					// first create the directory at the destination if it doesn't exist
-					if (!dest.Exists)
-						dest.MakeDirectoryWithParents (null);
-					// this looks crazy making variables here, assigning in the delegate, then reassigning to
-					// copiedBytes, but c# won't let me use out or ref vars in a delegate func.
-					long copied = copiedBytes;
-					// copy
-					child.Copy (dest.GetChild (info.Name), FileCopyFlags.AllMetadata | FileCopyFlags.NofollowSymlinks, null, (current, total) => {
-						 progress_cb.Invoke (copied + current, totalBytes);
-					 });
-					copiedBytes += info.Size;
-				}
+				child.Copy (dest.GetChild (child.Basename), flags, null, (current, total) => {
+					progress_cb.Invoke (copied + current, totalBytes);
+				});
+				copiedBytes += child.GetSize ();
 			}
-			
-			if (info != null)
-				info.Dispose ();
-			enumerator.Close (null);
 		}
 		
 		// will recurse and get the total size in bytes
+		/// <summary>
+		/// Returns the size in bytes of this file.  If called on a directory will return the size
+		/// of all subsequent files recursively.
+		/// </summary>
+		/// <param name="file">
+		/// A <see cref="GLib.File"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="System.Int64"/>
+		/// </returns>
 		public static long GetSize (this GLib.File file)
 		{
-			FileInfo fileInfo = file.QueryInfo ("standard::type,standard::size", FileQueryInfoFlags.NofollowSymlinks, null);
+			// if file is a regular file (not a directory), return the size
+			if (IO.File.Exists (file.Path))
+				return file.Size ();
 			
-			if (fileInfo.FileType != FileType.Directory)
-				return fileInfo.Size;
-			
+			// otherwise treat it as a directory, and aggregate the size of all files in all subdirs (recursive)
 			long size = 0;
-			FileEnumerator enumerator = file.EnumerateChildren ("standard::type,standard::name,standard::size", FileQueryInfoFlags.NofollowSymlinks, null);
-			
-			if (enumerator == null)
-				return 0;
-			
-			FileInfo info;
-			
-			while ((info = enumerator.NextFile ()) != null) {
-				File child = file.GetChild (info.Name);
-				
-				if (info.FileType == FileType.Directory)
-					size += GetSize (child);
-				else
-					size += info.Size;
-			}
-			
-			if (info != null)
-				info.Dispose ();
-			enumerator.Close (null);
+			IEnumerable<GLib.File> files = IO.Directory.GetFiles (file.Path, "*", IO.SearchOption.AllDirectories)
+				.Select (f => FileFactory.NewForPath (f));
+			foreach (File f in files)
+				size += f.GetSize ();
 			return size;
 		}
 		
+		/// <summary>
+		/// The newline string for a particular input stream.
+		/// </summary>
+		/// <param name="stream">
+		/// A <see cref="GLib.DataInputStream"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="System.String"/>
+		/// </returns>
 		public static string NewLineString (this GLib.DataInputStream stream)
 		{
 			switch (stream.NewlineType) {
@@ -310,6 +322,18 @@ namespace Docky.Services
 			}
 		}
 		
+		/// <summary>
+		/// Tries to mount a file with success and failure action callbacks.
+		/// </summary>
+		/// <param name="file">
+		/// A <see cref="GLib.File"/>
+		/// </param>
+		/// <param name="success">
+		/// A <see cref="Action"/> invoked when the mount was successful.
+		/// </param>
+		/// <param name="failed">
+		/// A <see cref="Action"/> invoked when the mount failed.
+		/// </param>
 		public static void MountWithActionAndFallback (this GLib.File file, Action success, Action failed)
 		{
 			// In rare instances creating a Gtk.MountOperation can fail so let's try to create it first
@@ -347,6 +371,15 @@ namespace Docky.Services
 			});
 		}
 		
+		/// <summary>
+		/// Add an action that gets invoked when a file gets mounted.
+		/// </summary>
+		/// <param name="file">
+		/// A <see cref="GLib.File"/>
+		/// </param>
+		/// <param name="action">
+		/// A <see cref="Action"/>
+		/// </param>
 		public static void AddMountAction (this GLib.File file, Action action)
 		{
 			if (!MountActions.ContainsKey (file))
@@ -354,6 +387,15 @@ namespace Docky.Services
 			MountActions [file].Add (action);
 		}
 		
+		/// <summary>
+		/// Removes an action from the mount actions list for this file.
+		/// </summary>
+		/// <param name="file">
+		/// A <see cref="GLib.File"/>
+		/// </param>
+		/// <param name="action">
+		/// A <see cref="Action"/>
+		/// </param>
 		public static void RemoveAction (this GLib.File file, Action action)
 		{
 			if (MountActions.ContainsKey (file) && MountActions [file].Contains (action))

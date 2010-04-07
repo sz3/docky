@@ -50,7 +50,8 @@ namespace Docky.Services.Logging
 			"GLib",
 			"GLib-GObject",
 			"Pango",
-			"GdkPixbuf"
+			"GdkPixbuf",
+			"GLib-GIO",
 		};
 
 		static LogBase ()

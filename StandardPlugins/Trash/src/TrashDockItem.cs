@@ -36,7 +36,7 @@ namespace Trash
 	{
 		uint ItemsInTrash {
 			get {
-				return OwnedFile.QueryUintAttr ("trash::item-count");
+				return OwnedFile.QueryInfo<uint> ("trash::item-count");
 			}
 		}
 		
@@ -74,7 +74,7 @@ namespace Trash
 			else
 				HoverText = string.Format (Catalog.GetPluralString ("{0} item in Trash", "{0} items in Trash", (int) itemsInTrash), itemsInTrash);
 			
-			SetIconFromGIcon (OwnedFile.Icon ());
+			Icon = OwnedFile.Icon ();
 		}
 		
 		public override string UniqueID ()

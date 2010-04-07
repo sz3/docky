@@ -97,10 +97,9 @@ namespace Docky.Items
 			
 			// only check the icon if it's mounted (ie: .Path != null)
 			if (!string.IsNullOrEmpty (OwnedFile.Path)) {
-				string customIconPath = OwnedFile.QueryStringAttr (CustomIconKey);
-				string thumbnailPath = OwnedFile.QueryStringAttr (ThumbnailPathKey);
-				// emblems are returned as [ e1, e2, e3 ], get those into a nice trimmed string array
-				string rawEmblems = OwnedFile.QueryStringAttr (EmblemsKey);
+				string customIconPath = OwnedFile.QueryInfo<string> (CustomIconKey);
+				string thumbnailPath = OwnedFile.QueryInfo<string> (ThumbnailPathKey);
+				string[] emblems = OwnedFile.QueryInfo<string[]> (EmblemsKey);
 				
 				// if the icon lives inside the folder (or one of its subdirs) then this
 				// is actually a relative path... not a file uri.
@@ -114,16 +113,13 @@ namespace Docky.Items
 				else if (!string.IsNullOrEmpty (thumbnailPath))
 					Icon = thumbnailPath;
 				else
-					SetIconFromGIcon (OwnedFile.Icon ());
+					Icon = OwnedFile.Icon ();
 				
-				if (!string.IsNullOrEmpty (rawEmblems)) {
-					rawEmblems = rawEmblems.Replace ("[", "").Replace ("]", "");
-					
+				// process the emblems
+				if (emblems.Length != 0) {
 					int [] emblemPositions = { 2, 1, 0, 3};
 					int i=0;
-					rawEmblems.Split (new [] {','})
-						.Select (e => e.Trim ())
-						.Reverse ()
+					emblems.Reverse ()
 						.Take (4)
 						.ToList ()
 						.ForEach (e => {
@@ -162,7 +158,7 @@ namespace Docky.Items
 			bool can_write;
 			// this could fail if we try to call it on an unmounted location
 			try {
-				can_write = OwnedFile.QueryBoolAttr ("access::can-write");
+				can_write = OwnedFile.QueryInfo<bool> ("access::can-write");
 			} catch {
 				can_write = false;
 			}
@@ -181,12 +177,12 @@ namespace Docky.Items
 					
 					// gather some information first
 					long fileSize = file.GetSize ();
-					ulong freeSpace = OwnedFile.QueryULongAttr (FilesystemFreeKey);
+					ulong freeSpace = OwnedFile.QueryInfo<ulong> (FilesystemFreeKey);
 					if ((ulong) fileSize > freeSpace)
 						throw new Exception (Catalog.GetString ("Not enough free space on destination."));
 					
-					string ownedFSID = OwnedFile.QueryStringAttr (FilesystemIDKey);
-					string destFSID = file.QueryStringAttr (FilesystemIDKey);
+					string ownedFSID = OwnedFile.QueryInfo<string> (FilesystemIDKey);
+					string destFSID = file.QueryInfo<string> (FilesystemIDKey);
 					
 					string nameAfterMove = file.NewFileName (OwnedFile);
 					
@@ -195,7 +191,7 @@ namespace Docky.Items
 						bool performing = true;
 						long cur = 0, tot = 10;
 						
-						note = Docky.Services.Log.Notify ("", DockServices.Drawing.IconFromGIcon (file.Icon ()), "{0}% " + Catalog.GetString ("Complete") + "...", cur / tot);
+						note = Docky.Services.Log.Notify ("", file.Icon (), "{0}% " + Catalog.GetString ("Complete") + "...", cur / tot);
 						GLib.Timeout.Add (250, () => {
 							note.Body = string.Format ("{0}% ", string.Format ("{0:00.0}", ((float) Math.Min (cur, tot) / tot) * 100)) + Catalog.GetString ("Complete") + "...";
 							return performing;

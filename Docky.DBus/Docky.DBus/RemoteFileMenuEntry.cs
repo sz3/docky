@@ -28,7 +28,7 @@ namespace Docky.DBus
 	public class RemoteFileMenuEntry : RemoteMenuEntry
 	{
 
-		public RemoteFileMenuEntry (uint id, GLib.File file, string groupTitle) : base (id, file.Basename, "", groupTitle)
+		public RemoteFileMenuEntry (uint id, GLib.File file, string groupTitle) : base(id, file.Basename, "", groupTitle)
 		{
 			Clicked += delegate {
 				DockServices.System.Open (file);
@@ -36,11 +36,11 @@ namespace Docky.DBus
 			
 			// only check the icon if it's mounted (ie: .Path != null)
 			if (!string.IsNullOrEmpty (file.Path)) {
-				string thumbnailPath = file.QueryStringAttr ("thumbnail::path");
-				if (string.IsNullOrEmpty (thumbnailPath))
-					Icon = DockServices.Drawing.IconFromGIcon (file.Icon ());
-				else
+				string thumbnailPath = file.QueryInfo<string> ("thumbnail::path");
+				if (!string.IsNullOrEmpty (thumbnailPath))
 					Icon = thumbnailPath;
+				else
+					Icon = file.Icon ();
 			}
 			
 			if (string.IsNullOrEmpty (Icon))
