@@ -53,9 +53,7 @@ namespace GMail
 		
 		protected virtual void AddLabelClicked (object sender, System.EventArgs e)
 		{			
-			// GMail's atom feed doesnt like the '/' character
-			// and needs it as '-'
-			string newLabel = label_entry.InnerEntry.Text.Replace ("/", "-").Trim ();
+			string newLabel = label_entry.InnerEntry.Text.Trim ();
 			
 			label_entry.InnerEntry.Text = "";
 			

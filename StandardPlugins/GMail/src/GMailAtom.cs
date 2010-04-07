@@ -199,7 +199,8 @@ namespace GMail
 					string url = "https://mail.google.com/a/" + domain;
 					if (domain.Equals ("gmail.com") || domain.Equals ("googlemail.com"))
 						url = "https://mail.google.com/mail";
-					url += "/feed/atom/" + HttpUtility.UrlEncode (CurrentLabel);
+					// GMail's atom feed prefers to encode labels using '-'
+					url += "/feed/atom/" + HttpUtility.UrlEncode (string.Join ("-", CurrentLabel.Split (new char[]{'/', ' '})));
 					
 					Log<GMailAtom>.Info ("Fetching Atom feed: " + url);
 					HttpWebRequest request = (HttpWebRequest)WebRequest.Create (url);

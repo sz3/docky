@@ -147,7 +147,7 @@ namespace GMail
 			else
 				url += "a/" + domain;
 			
-			url += "/\\#";
+			url += "/#";
 
 			// going to a custom label
 			if (Atom.CurrentLabel != DefaultLabel)
