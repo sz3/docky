@@ -72,13 +72,12 @@ namespace WeatherDocklet
 			painter = new WeatherPainter ();
 			
 			Status = WeatherDockletStatus.Initializing;
-			State |= ItemState.Wait;
 			
 			WeatherController.WeatherReloading += HandleWeatherReloading;
 			WeatherController.WeatherError += HandleWeatherError;
 			WeatherController.WeatherUpdated += HandleWeatherUpdated;
 			
-			HoverText = Catalog.GetString ("Fetching data...");
+			HoverText = Catalog.GetString ("Click to add a location.");
 			Icon = "weather-few-clouds";
 		}
 		
@@ -242,13 +241,14 @@ namespace WeatherDocklet
 						Config.Show ();
 					}));
 			
-			list[MenuListContainer.CustomOne].Add (new MenuItem (Catalog.GetString ("Check _Weather"), Gtk.Stock.Refresh,
-					delegate {
-						Status = WeatherDockletStatus.ManualReload;
-						State |= ItemState.Wait;
-						QueueRedraw ();
-						WeatherController.ResetTimer ();
-					}));
+			if (WeatherController.CurrentLocation != "")
+				list[MenuListContainer.CustomOne].Add (new MenuItem (Catalog.GetString ("Check _Weather"), Gtk.Stock.Refresh,
+						delegate {
+							Status = WeatherDockletStatus.ManualReload;
+							State |= ItemState.Wait;
+							QueueRedraw ();
+							WeatherController.ResetTimer ();
+						}));
 			
 			return list;
 		}
