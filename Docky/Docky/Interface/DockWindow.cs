@@ -1193,15 +1193,17 @@ namespace Docky.Interface
 					HidePainter ();
 				else
 					Painter.ButtonReleased (x, y, evnt.State);
-			} else if (HoveredItem != null && !(HoveredItem is SeparatorItem) && lastClickedItem == HoveredItem) {
-				double x, y;
-				Gdk.Rectangle region = DrawRegionForItem (HoveredItem);
+			} else if (HoveredItem != null && !(HoveredItem is SeparatorItem)) {
+				if (lastClickedItem == HoveredItem) {
+					double x, y;
+					Gdk.Rectangle region = DrawRegionForItem (HoveredItem);
+						
+					x = ((Cursor.X + window_position.X) - region.X) / (double) region.Height;
+					y = ((Cursor.Y + window_position.Y) - region.Y) / (double) region.Width;
 					
-				x = ((Cursor.X + window_position.X) - region.X) / (double) region.Height;
-				y = ((Cursor.Y + window_position.Y) - region.Y) / (double) region.Width;
-				
-				HoveredItem.Clicked (evnt.Button, evnt.State, x, y);
-				AnimatedDraw ();
+					HoveredItem.Clicked (evnt.Button, evnt.State, x, y);
+					AnimatedDraw ();
+				}
 			} else if (button == MenuButton.Right) {
 				ShowDockyItemMenu ();
 			}
