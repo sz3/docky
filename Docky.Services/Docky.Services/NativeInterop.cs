@@ -107,9 +107,9 @@ namespace Docky.Services
 		
 		#endregion
 		
-		static readonly string GIO_NOT_FOUND = "Could not find gio-2.0, please report immediately.";
-		static readonly string GOBJECT_NOT_FOUND = "Could not find gobject-2.0, please report immediately.";
-		static readonly string GTK_NOT_FOUND = "Could not find gtk-2.0, please report immediately.";
+		const string GIO_NOT_FOUND = "Could not find gio-2.0, please report immediately.";
+		const string GOBJECT_NOT_FOUND = "Could not find gobject-2.0, please report immediately.";
+		const string GTK_NOT_FOUND = "Could not find gtk-2.0, please report immediately.";
 		
 		public static string StrUri (File file)
 		{
