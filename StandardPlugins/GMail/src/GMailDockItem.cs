@@ -190,27 +190,29 @@ namespace GMail
 			
 			UpdateAttention (false);
 			
-			List<MenuItem> items = new List<MenuItem> () { 
-				new MenuItem (Catalog.GetString ("_View ") + Atom.CurrentLabel,
+			List<MenuItem> items = new List<MenuItem> ();
+			
+			if (!string.IsNullOrEmpty (GMailPreferences.User) && !string.IsNullOrEmpty (GMailPreferences.Password)) {
+				items.Add (new MenuItem (Catalog.GetString ("_View ") + Atom.CurrentLabel,
 					"gmail",
 					delegate {
 						Clicked (1, Gdk.ModifierType.None, 0, 0);
-					}), 
-				new MenuItem (Catalog.GetString ("_Compose Mail"),
+					}));
+				items.Add (new MenuItem (Catalog.GetString ("_Compose Mail"),
 					"mail-message-new",
 					delegate {
 						DockServices.System.Open ("https://mail.google.com/mail/#compose");
-					}),
-			};
-			
-			if (Atom.HasUnread) {
-				items.Add (new SeparatorMenuItem (Catalog.GetString ("New Mail")));
+					}));
 				
-				foreach (UnreadMessage message in Atom.Messages.Take (10))
-					items.Add (new GMailMenuItem (message, "gmail"));
+				if (Atom.HasUnread) {
+					items.Add (new SeparatorMenuItem (Catalog.GetString ("New Mail")));
+					
+					foreach (UnreadMessage message in Atom.Messages.Take (10))
+						items.Add (new GMailMenuItem (message, "gmail"));
+				}
+				
+				items.Add (new SeparatorMenuItem ());
 			}
-			
-			items.Add (new SeparatorMenuItem ());
 			
 			items.Add (new MenuItem (Catalog.GetString ("_Settings"),
 					Gtk.Stock.Preferences,
@@ -220,11 +222,12 @@ namespace GMail
 						config.Show ();
 					}));
 			
-			items.Add (new MenuItem (Catalog.GetString ("Check _Mail"),
-					Gtk.Stock.Refresh,
-					delegate {
-						Atom.ResetTimer (true);
-					}));
+			if (!string.IsNullOrEmpty (GMailPreferences.User) && !string.IsNullOrEmpty (GMailPreferences.Password))
+				items.Add (new MenuItem (Catalog.GetString ("Check _Mail"),
+						Gtk.Stock.Refresh,
+						delegate {
+							Atom.ResetTimer (true);
+						}));
 			
 			list[MenuListContainer.Actions].InsertRange (0, items);
 			
