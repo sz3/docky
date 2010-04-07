@@ -186,7 +186,7 @@ namespace GMail
 		void CheckGMail ()
 		{
 			if (string.IsNullOrEmpty (GMailPreferences.User) || string.IsNullOrEmpty (GMailPreferences.Password)) {
-				OnGMailFailed (Catalog.GetString ("Username or Password not set"));
+				OnGMailFailed (Catalog.GetString ("Click to set username and password."));
 				return;
 			}
 
