@@ -16,14 +16,17 @@
 // 
 
 using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 using GLib;
 
+using Mono.Unix;
+
 namespace Docky.Services
 {
 	
-	public class NativeInterop
+	internal class NativeInterop
 	{		
 		[DllImport ("gio-2.0")]
 		private static extern IntPtr g_file_get_uri (IntPtr fileHandle);
@@ -51,128 +54,286 @@ namespace Docky.Services
 		[DllImport("libgtk-x11-2.0", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr gtk_icon_theme_lookup_by_gicon (IntPtr icon_theme, IntPtr icon, int size, int flags);
 
+		#region Workaround for GLib.FileInfo leaks...
+		
+		// some attributes must be looked up as bytestrings, not strings
+		static readonly string [] BYTE_STRING_VALS = new string [] {
+			"thumbnail::path",
+			"standard::name",
+			"standard::symlink-target",
+		};
+		
+		[DllImport("libgio-2.0")]
+		static extern int g_file_info_get_attribute_type(IntPtr raw, string attribute);
+		
+		[DllImport("libgobject-2.0")]
+		private static extern IntPtr g_object_ref (IntPtr @object);
+		
+		[DllImport("libgobject-2.0")]
+		private static extern void g_object_unref (IntPtr @object);
+		
+		[DllImport("libgobject-2.0")]
+		private static extern IntPtr g_file_info_get_name (IntPtr info);
+		
+		[DllImport("gio-2.0")]
+		private static extern IntPtr g_file_query_info (IntPtr file, string attributes, int flags, IntPtr cancellable, out IntPtr error);
+
+		[DllImport("gio-2.0")]
+		private static extern IntPtr g_file_query_filesystem_info(IntPtr file, string attributes, IntPtr cancellable, out IntPtr error);
+		
+		[DllImport("gio-2.0")]
+		private static extern IntPtr g_file_info_get_attribute_string (IntPtr info, string attribute);
+		
+		[DllImport("gio-2.0")]
+		private static extern IntPtr g_file_info_get_attribute_stringv (IntPtr info, string attribute);
+				
+		[DllImport("gio-2.0")]
+		private static extern IntPtr g_file_info_get_attribute_byte_string (IntPtr info, string attribute);
+		
+		[DllImport("gio-2.0")]
+		static extern uint g_file_info_get_attribute_uint32 (IntPtr info, string attribute);
+		
+		[DllImport("gio-2.0")]
+		static extern ulong g_file_info_get_attribute_uint64 (IntPtr info, string attribute);
+		
+		[DllImport("gio-2.0")]
+		static extern bool g_file_info_get_attribute_boolean (IntPtr info, string attribute);
+		
+		[DllImport("gio-2.0")]
+		static extern long g_file_info_get_size (IntPtr info);
+		
+		[DllImport("gio-2.0")]
+		static extern IntPtr g_file_info_get_icon (IntPtr info);
+		
+		#endregion
+		
+		const string GIO_NOT_FOUND = Catalog.GetString ("Could not find gio-2.0, please report immediately.");
+		const string GOBJECT_NOT_FOUND = Catalog.GetString ("Could not find gobject-2.0, please report immediately.");
+		const string GTK_NOT_FOUND = Catalog.GetString ("Could not find gtk-2.0, please report immediately.");
+		
 		public static string StrUri (File file)
 		{
-			try {
+			return NativeHelper<string> (() => {
 				return GLib.Marshaller.PtrToStringGFree (g_file_get_uri (file.Handle));
-			} catch (DllNotFoundException e) {
-				Log<NativeInterop>.Fatal ("Could not find gio-2.0, please report immediately.");
-				Log<NativeInterop>.Info (e.StackTrace);
-				return "";
-			} catch (Exception e) {
-				Log<NativeInterop>.Error ("Failed to retrieve uri for file '{0}': {1}", file.Basename, e.Message);
-				Log<NativeInterop>.Info (e.StackTrace);
-				return "";
-			}
+			}, GIO_NOT_FOUND, 
+			string.Format ("Failed to retrieve uri for file '{0}': ", file.Path) + "{0}");
 		}
 
 		public static int prctl (int option, string arg2)
 		{
-			try {
+			return NativeHelper<int> (() => {
 				return prctl (option, System.Text.Encoding.ASCII.GetBytes (arg2 + "\0"), IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
-			} catch (DllNotFoundException e) {
-				Log<NativeInterop>.Fatal ("Could not find libc, please report immediately.");
-				Log<NativeInterop>.Info (e.StackTrace);
-				return -1;
-			} catch (Exception e) {
-				Log<NativeInterop>.Error ("Failed to set process name: {0}", e.Message);
-				Log<NativeInterop>.Info (e.StackTrace);
-				return -1;
-			}
+			}, -1, "Could not find libc, please report immediately.",
+			"Failed to set process name: {0}");
 		}
 		
 		public static void UnmountWithOperation (Mount mount, MountUnmountFlags flags, MountOperation op, 
 			Cancellable cancellable, AsyncReadyCallback cb)
 		{
-			try {
+			NativeHelper (() =>
+			{
 				GLibSharp.AsyncReadyCallbackWrapper cb_wrapper = new GLibSharp.AsyncReadyCallbackWrapper (cb);
 				g_mount_unmount_with_operation (mount.Handle, (int) flags, op == null ? IntPtr.Zero : op.Handle, 
 				cancellable == null ? IntPtr.Zero : cancellable.Handle, cb_wrapper.NativeDelegate, IntPtr.Zero);
-			} catch (DllNotFoundException e) {
-				Log<NativeInterop>.Fatal ("Could not find gio-2.0, please report immediately.");
-				Log<NativeInterop>.Info (e.StackTrace);
-				return;
-			} catch (Exception e) {
-				Log<NativeInterop>.Error ("Failed to unmount with operation name: {0}", e.Message);
-				Log<NativeInterop>.Info (e.StackTrace);
-				return;
-			}
+			}, GIO_NOT_FOUND,
+			"Failed to unmount with operation: {0}");
 		}
 		
 		public static void EjectWithOperation (Mount mount, MountUnmountFlags flags, MountOperation op, 
 			Cancellable cancellable, AsyncReadyCallback cb)
 		{
-			try {
+			NativeHelper (() =>
+			{
 				GLibSharp.AsyncReadyCallbackWrapper cb_wrapper = new GLibSharp.AsyncReadyCallbackWrapper (cb);
 				g_mount_eject_with_operation (mount.Handle, (int) flags, op == null ? IntPtr.Zero : op.Handle, 
 				cancellable == null ? IntPtr.Zero : cancellable.Handle, cb_wrapper.NativeDelegate, IntPtr.Zero);
-			} catch (DllNotFoundException e) {
-				Log<NativeInterop>.Fatal ("Could not find gio-2.0, please report immediately.");
-				Log<NativeInterop>.Info (e.StackTrace);
-				return;
-			} catch (Exception e) {
-				Log<NativeInterop>.Error ("Failed to eject with operation name: {0}", e.Message);
-				Log<NativeInterop>.Info (e.StackTrace);
-				return;
-			}
+			}, GIO_NOT_FOUND,
+			"Failed to eject with operation name: {0}");
 		}
 		
 		public static bool EjectWithOperationFinish (Mount mount, AsyncResult result)
 		{
-			try {
+			return NativeHelper<bool> (() =>
+			{
 				IntPtr error = IntPtr.Zero;
 				bool success = g_mount_eject_with_operation_finish (mount.Handle, result == null ? IntPtr.Zero : 
 				((result is GLib.Object) ? (result as GLib.Object).Handle : (result as GLib.AsyncResultAdapter).Handle), out error);
 				if (error != IntPtr.Zero)
 					throw new GLib.GException (error);
 				return success;
-			} catch (DllNotFoundException e) {
-				Log<NativeInterop>.Fatal ("Could not find gio-2.0, please report immediately.");
-				Log<NativeInterop>.Info (e.StackTrace);
-				return false;
-			} catch (Exception e) {
-				Log<NativeInterop>.Error ("Failed to eject with operation finish name: {0}", e.Message);
-				Log<NativeInterop>.Info (e.StackTrace);
-				return false;
-			}
+			}, false, GIO_NOT_FOUND,
+			"Failed to eject with operation finish name: {0}");
 		}
 		
 		public static bool UnmountWithOperation (Mount mount, AsyncResult result)
 		{
-			try {
+			return NativeHelper<bool> (() =>
+			{
 				IntPtr error = IntPtr.Zero;
 				bool success = g_mount_unmount_with_operation_finish (mount.Handle, result == null ? IntPtr.Zero : ((result is GLib.Object) ? (result as GLib.Object).Handle : (result as GLib.AsyncResultAdapter).Handle), out error);
 				if (error != IntPtr.Zero)
 					throw new GLib.GException (error);
 				return success;
-			} catch (DllNotFoundException e) {
-				Log<NativeInterop>.Fatal ("Could not find gio-2.0, please report immediately.");
-				Log<NativeInterop>.Info (e.StackTrace);
-				return false;
-			} catch (Exception e) {
-				Log<NativeInterop>.Error ("Failed to unmount with operation finish name: {0}", e.Message);
-				Log<NativeInterop>.Info (e.StackTrace);
-				return false;
-			}
+			}, false, GIO_NOT_FOUND,
+			"Failed to unmount with operation finish name: {0}");
 		}
 		
 		public static Gtk.IconInfo IconThemeLookUpByGIcon (Gtk.IconTheme theme, GLib.Icon icon, int size, int flags)
 		{
-			try {
-				IntPtr raw_ret = gtk_icon_theme_lookup_by_gicon(theme.Handle, 
+			return NativeHelper<Gtk.IconInfo> (() =>
+			{
+				IntPtr raw_ret = gtk_icon_theme_lookup_by_gicon (theme.Handle, 
 				    icon == null ? IntPtr.Zero : ((icon is GLib.Object) ? (icon as GLib.Object).Handle : (icon as GLib.IconAdapter).Handle),
 				    size, (int) flags);
-				Gtk.IconInfo ret = raw_ret == IntPtr.Zero ? null : (Gtk.IconInfo) GLib.Opaque.GetOpaque (raw_ret, typeof (Gtk.IconInfo), true);
+				Gtk.IconInfo ret = raw_ret == IntPtr.Zero ? null : (Gtk.IconInfo) GLib.Opaque.GetOpaque (raw_ret, typeof(Gtk.IconInfo), true);
+				return ret;
+			}, null, GTK_NOT_FOUND,
+			"Failed to lookup by GIcon: {0}");
+		}
+		
+		#region Workaround for GLib.FileInfo leaks...
+		
+		public static IntPtr GFileQueryInfo (GLib.File file, string attributes, FileQueryInfoFlags flags, Cancellable cancellable)
+		{
+			return NativeHelper<IntPtr> (() =>
+			{
+				IntPtr error;
+				IntPtr info;
+				if (attributes.StartsWith ("filesystem::"))
+					info = g_file_query_filesystem_info (file.Handle, attributes,
+					cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
+				else
+					info = g_file_query_info (file.Handle, attributes, (int) flags, 
+					cancellable == null ? IntPtr.Zero : cancellable.Handle, out error);
+				
+				if (error != IntPtr.Zero)
+					throw new GException (error);
+				return info;
+			}, IntPtr.Zero, GIO_NOT_FOUND,
+			string.Format ("Failed to query info for '{0}': ", file.Path) + "{0}");
+		}
+		
+		public static int GFileInfoQueryAttributeType (IntPtr info, string attribute)
+		{
+			return NativeHelper<int> (() =>
+			{
+				int type = g_file_info_get_attribute_type (info, attribute);
+				return type;
+			}, GIO_NOT_FOUND,
+			string.Format ("Failed to query attribute type '{0}': ", attribute) + "{0}");
+		}
+		
+		public static string GFileInfoQueryString (IntPtr info, string attribute)
+		{
+			return NativeHelper<string> (() =>
+			{
+				IntPtr str;
+				if (BYTE_STRING_VALS.Any (s => attribute.StartsWith (s)))
+					str = g_file_info_get_attribute_byte_string (info, attribute);
+				else
+					str = g_file_info_get_attribute_string (info, attribute);
+				return GLib.Marshaller.Utf8PtrToString (str);
+			}, GIO_NOT_FOUND,
+			string.Format ("Failed to query string '{0}': ", attribute) + "{0}");
+		}
+		
+		public static string[] GFileInfoQueryStringV (IntPtr info, string attribute)
+		{
+			return NativeHelper<string[]> (() =>
+			{
+				IntPtr strv;
+				strv = g_file_info_get_attribute_stringv (info, attribute);
+				return GLib.Marshaller.NullTermPtrToStringArray (strv, false);
+			}, GIO_NOT_FOUND,
+			string.Format ("Failed to query stringv '{0}': ", attribute) + "{0}");
+		}
+		
+		public static uint GFileInfoQueryUInt (IntPtr info, string attribute)
+		{
+			return NativeHelper<uint> (() =>
+			{
+				return g_file_info_get_attribute_uint32 (info, attribute);
+			}, GIO_NOT_FOUND,
+			string.Format ("Failed to query uint '{0}': ", attribute) + "{0}");
+		}
+		
+		public static ulong GFileInfoQueryULong (IntPtr info, string attribute)
+		{
+			return NativeHelper<ulong> (() =>
+			{
+				return g_file_info_get_attribute_uint64 (info, attribute);
+			}, GIO_NOT_FOUND,
+			string.Format ("Failed to query uint '{0}': ", attribute) + "{0}");
+		}		
+		
+		public static bool GFileInfoQueryBool (IntPtr info, string attribute)
+		{
+			return NativeHelper<bool> (() =>
+			{
+				return g_file_info_get_attribute_boolean (info, attribute);
+			}, GIO_NOT_FOUND,
+			string.Format ("Failed to query bool '{0}': ", attribute) + "{0}");
+		}
+		
+		public static Icon GFileInfoIcon (IntPtr info)
+		{
+			return NativeHelper<Icon> (() =>
+			{
+				IntPtr icon = g_file_info_get_icon (info);
+				return IconAdapter.GetObject (g_object_ref (icon), false);
+			}, GIO_NOT_FOUND,
+			"Failed to query icon {0}");
+		}
+		
+		public static long GFileInfoSize (IntPtr info)
+		{
+			return NativeHelper<long> (() =>
+			{
+				return g_file_info_get_size (info);
+			}, GIO_NOT_FOUND,
+			"Failed to query icon {0}");
+		}
+		
+		public static void GObjectUnref (IntPtr objectHandle)
+		{
+			NativeHelper (() =>
+			{
+				if (objectHandle == IntPtr.Zero)
+					return;
+				g_object_unref (objectHandle);
+			}, GOBJECT_NOT_FOUND,
+			"Could not unref object: {0}");
+		}
+		
+		#endregion
+	
+		static T NativeHelper<T> (Func<T> act, T errorReturn, string notFound, string error)
+		{
+			try {
+				T ret = act.Invoke ();
 				return ret;
 			} catch (DllNotFoundException e) {
-				Log<NativeInterop>.Fatal ("Could not find gtk-2.0, please report immediately.");
+				Log<NativeInterop>.Fatal (notFound);
 				Log<NativeInterop>.Info (e.StackTrace);
-				return null;
+				return errorReturn;
 			} catch (Exception e) {
-				Log<NativeInterop>.Error ("Failed to lookup by GIcon: {0}", e.Message);
+				Log<NativeInterop>.Error (error, e.Message);
 				Log<NativeInterop>.Info (e.StackTrace);
-				return null;
+				return errorReturn;
 			}
+		}
+		
+		static void NativeHelper (Action act, string notFound, string error)
+		{
+			NativeHelper<int> (() => {
+				act.Invoke ();
+				return -1;
+			}, notFound, error);
+		}
+		
+		static T NativeHelper<T> (Func<T> act, string notFound, string error)
+		{
+			return NativeHelper<T> (act, default(T), notFound, error);
 		}
 	}
 }
