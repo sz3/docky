@@ -137,8 +137,21 @@ namespace Docky.Services
 			if (!IO.Directory.Exists (file.Path))
 				return Enumerable.Empty<GLib.File> ();
 			
-			return IO.Directory.GetDirectories (file.Path, "*", recurse == false ? IO.SearchOption.TopDirectoryOnly : IO.SearchOption.AllDirectories)
-				.Select (subdir => GLib.FileFactory.NewForPath (subdir));
+			return SubDirs (file.Path);
+		}
+		
+		public static IEnumerable<GLib.File> SubDirs (string path)
+		{
+			List<GLib.File> dirs = new List<GLib.File> () { GLib.FileFactory.NewForPath (path) };
+			
+			try {
+				foreach (string d in IO.Directory.GetDirectories (path))
+					dirs = dirs.Union (SubDirs (d)).ToList ();	
+			} catch {
+				return Enumerable.Empty<GLib.File> ();
+			}
+			
+			return dirs;
 		}
 		
 		public static IEnumerable<GLib.File> GetFiles (this GLib.File file)
@@ -170,8 +183,7 @@ namespace Docky.Services
 				return;
 			}
 			
-			IEnumerable<GLib.File> files = IO.Directory.GetFiles (file.Path, "*", IO.SearchOption.AllDirectories)
-				.Select (f => FileFactory.NewForPath (f));
+			IEnumerable<GLib.File> files = GetFiles (file, "").Union (SubDirs (file));
 			
 			foreach (File f in files) {
 				if (f.QueryInfo<bool> ("access::can-delete"))
