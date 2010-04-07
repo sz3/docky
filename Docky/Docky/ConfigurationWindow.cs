@@ -77,11 +77,15 @@ namespace Docky
 				if (activeDock == value)
 					return;
 				
-				if (activeDock != null)
+				if (activeDock != null) {
 					activeDock.UnsetActiveGlow ();
+					activeDock.Preferences.ItemProvidersChanged -= HandleItemProvidersChanged;
+				}
 				
-				if (value != null)
+				if (value != null) {
 					value.SetActiveGlow ();
+					value.Preferences.ItemProvidersChanged += HandleItemProvidersChanged;
+				}
 				
 				activeDock = value;
 				
@@ -89,6 +93,17 @@ namespace Docky
 				SetupConfigAlignment ();
 				CheckButtons ();
 			}
+		}
+		
+		void HandleItemProvidersChanged (object o, ItemProvidersChangedEventArgs args)
+		{
+			RefreshDocklets ();
+		}
+		
+		public override void Dispose ()
+		{
+			ActiveDock = null;
+			base.Dispose ();
 		}
 		
 		private ConfigurationWindow () : base(Gtk.WindowType.Toplevel)
@@ -423,6 +438,12 @@ namespace Docky
 		{
 			if (DockletsTileview == null)
 				return;
+			
+			AbstractDockItemProvider selectedProvider = null;
+			DockletTile selectedTile = (DockletTile) DockletsTileview.CurrentTile ();
+			if (selectedTile != null)
+				selectedProvider = selectedTile.Provider;
+			
 			DockletsTileview.Clear ();
 			
 			if (ActiveDock == null)
@@ -432,6 +453,7 @@ namespace Docky
 			// build a list of DockletTiles, starting with the currently active tiles for the active dock,
 			// and the available addins
 			List<DockletTile> tiles = new List<DockletTile> ();
+			DockletTile currentTile = null;
 			
 			foreach (AbstractDockItemProvider provider in ActiveDock.Preferences.ItemProviders) {
 				string providerID = PluginManager.AddinIDFromProvider (provider);
@@ -439,6 +461,8 @@ namespace Docky
 				    continue;
 
 				tiles.Add (new DockletTile (providerID, provider));
+				if (provider == selectedProvider)
+					currentTile = tiles.Last ();
 			}
 			
 			tiles = tiles.Concat (PluginManager.AvailableProviderIDs.Select (id => new DockletTile (id))).ToList ();
@@ -450,9 +474,11 @@ namespace Docky
 			
 			tiles = tiles.Where (t => t.Description.ToLower ().Contains (query) || t.Name.ToLower ().Contains (query)).ToList ();
 			
-			foreach (DockletTile docklet in tiles) {
+			foreach (DockletTile docklet in tiles)
 				DockletsTileview.AppendTile (docklet);
-			}
+			
+			if (currentTile != null)
+				DockletsTileview.Select (tiles.IndexOf (currentTile));
 		}
 	}
 }

@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -77,6 +77,14 @@ namespace Docky.Interface
 		void RemoveProvider (AbstractDockItemProvider provider);
 		
 		void AddProvider (AbstractDockItemProvider Provider);
+		
+		bool ProviderCanMoveUp (AbstractDockItemProvider provider);
+		
+		bool ProviderCanMoveDown (AbstractDockItemProvider provider);
+		
+		void MoveProviderUp (AbstractDockItemProvider provider);
+		
+		void MoveProviderDown (AbstractDockItemProvider provider);
 		
 		void SyncPreferences ();
 		

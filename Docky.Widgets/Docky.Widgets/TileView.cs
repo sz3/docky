@@ -96,6 +96,13 @@ namespace Docky.Widgets
 			selected_index = -1;
 		}		
 		
+		public virtual AbstractTileObject CurrentTile ()
+		{
+			if (selected_index >= 0 && selected_index < tiles.Count)
+				return tiles[selected_index].OwnedObject;
+			return null;
+		}
+		
 		public virtual void AppendTile (AbstractTileObject tileObject)
 		{			
 			Tile tile = new Tile (tileObject, IconSize);
@@ -213,7 +220,7 @@ namespace Docky.Widgets
 			return base.OnKeyPressEvent (evnt);
 		}
 		
-		private void Select (int index)
+		public void Select (int index)
 		{
 			if (index >= 0 && index < tiles.Count) {
 				selected_index = index;

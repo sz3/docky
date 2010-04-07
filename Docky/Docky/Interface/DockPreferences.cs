@@ -426,6 +426,42 @@ namespace Docky.Interface
 			SyncPlugins ();
 		}
 		
+		public bool ProviderCanMoveUp (AbstractDockItemProvider provider)
+		{
+			return provider != ItemProviders.Where (p => p != DefaultProvider).First ();
+		}
+		
+		public bool ProviderCanMoveDown (AbstractDockItemProvider provider)
+		{
+			return provider != ItemProviders.Where (p => p != DefaultProvider).Last ();
+		}
+		
+		public void MoveProviderUp (AbstractDockItemProvider provider)
+		{
+			int index = item_providers.IndexOf (provider);
+			if (index < 1) return;
+			
+			AbstractDockItemProvider temp = item_providers [index - 1];
+			item_providers [index - 1] = provider;
+			item_providers [index] = temp;
+			
+			OnItemProvidersChanged (null, null);
+			SyncPlugins ();
+		}
+		
+		public void MoveProviderDown (AbstractDockItemProvider provider)
+		{
+			int index = item_providers.IndexOf (provider);
+			if (index < 0 || index > item_providers.Count - 2) return;
+			
+			AbstractDockItemProvider temp = item_providers [index + 1];
+			item_providers [index + 1] = provider;
+			item_providers [index] = temp;
+			
+			OnItemProvidersChanged (null, null);
+			SyncPlugins ();
+		}
+		
 		public void SyncPreferences ()
 		{
 			UpdateSortList ();
@@ -708,7 +744,7 @@ namespace Docky.Interface
 		{
 			Plugins = ItemProviders.Where (p => p != DefaultProvider).Select (p => p.Name);
 		}
-
+		
 		public void FreeProviders ()
 		{
 			OnItemProvidersChanged (null, item_providers);

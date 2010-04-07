@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2010 Chris Szikszoy
+//  Copyright (C) 2010 Chris Szikszoy, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -33,6 +33,8 @@ namespace Docky
 		public Addin Addin { get; private set; }
 		public AbstractDockItemProvider Provider { get; private set; }
 		Gtk.Button ConfigButton;
+		Gtk.Button UpButton;
+		Gtk.Button DownButton;
 
 		public DockletTile (string addinID) : this (addinID, null)
 		{
@@ -52,10 +54,21 @@ namespace Docky
 			Description = Addin.Description.Description;
 			SubDescriptionText = Addin.Description.Author;
 			
-			ConfigButton = new Gtk.Button (Catalog.GetString ("Settings"));
+			ConfigButton = new Gtk.Button (Catalog.GetString ("_Settings"));
 			ConfigButton.Clicked += delegate {
 				if (PluginManager.ConfigForAddin (Addin.Id) != null)
 					PluginManager.ConfigForAddin (Addin.Id).Show ();
+			};
+			
+			UpButton = new Gtk.Button (Catalog.GetString ("_Up"));
+			UpButton.Clicked += delegate {
+				ConfigurationWindow.Instance.ActiveDock.Preferences.MoveProviderUp (Provider);
+				UpdateInfo ();
+			};
+			DownButton = new Gtk.Button (Catalog.GetString ("D_own"));
+			DownButton.Clicked += delegate {
+				ConfigurationWindow.Instance.ActiveDock.Preferences.MoveProviderDown (Provider);
+				UpdateInfo ();
 			};
 			
 			UpdateInfo ();
@@ -67,6 +80,21 @@ namespace Docky
 				AddUserButton (ConfigButton);
 			else
 				RemoveUserButton (ConfigButton);
+			
+			if (Enabled) {
+				if (ConfigurationWindow.Instance.ActiveDock.Preferences.ProviderCanMoveUp (Provider))
+					AddUserButton (UpButton);
+				else
+					RemoveUserButton (UpButton);
+				
+				if (ConfigurationWindow.Instance.ActiveDock.Preferences.ProviderCanMoveDown (Provider))
+					AddUserButton (DownButton);
+				else
+					RemoveUserButton (DownButton);
+			} else {
+				RemoveUserButton (UpButton);
+				RemoveUserButton (DownButton);
+			}
 			
 			if (Provider == null)
 				Icon = PluginManager.DefaultPluginIcon;
