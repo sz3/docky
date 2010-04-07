@@ -188,8 +188,15 @@ namespace WeatherDocklet
 		
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
-			if (button == 1)
-				ShowPainter (painter);
+			if (button == 1) {
+				if (WeatherPreferences.Location.Length == 0) {
+					if (Config == null)
+						Config = new WeatherConfigDialog ();
+					Config.Show ();
+				} else {
+					ShowPainter (painter);
+				}
+			}
 			return ClickAnimation.None;
 		}
 		

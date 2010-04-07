@@ -159,10 +159,16 @@ namespace GMail
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
 			if (button == 1) {
-				UpdateAttention (false);
-				
-				OpenInbox ();
-				return ClickAnimation.Bounce;
+				if (string.IsNullOrEmpty (GMailPreferences.User) || string.IsNullOrEmpty (GMailPreferences.Password)) {
+					if (config == null)
+						config = new GMailConfigDialog ();
+					config.Show ();
+				} else {
+					UpdateAttention (false);
+					
+					OpenInbox ();
+					return ClickAnimation.Bounce;
+				}
 			}
 			
 			return ClickAnimation.None;
