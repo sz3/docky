@@ -178,17 +178,26 @@ namespace Docky.Services
 		/// </param>
 		public static void Delete_Recurse (this GLib.File file)
 		{
-			if (IO.File.Exists (file.Path)) {
-				file.Delete ();
+			FileEnumerator enumerator = file.EnumerateChildren ("standard::type,standard::name,access::can-delete", FileQueryInfoFlags.NofollowSymlinks, null);
+			
+			if (enumerator == null)
 				return;
+			
+			FileInfo info;
+			
+			while ((info = enumerator.NextFile ()) != null) {
+				File child = file.GetChild (info.Name);
+				
+				if (info.FileType == FileType.Directory)
+					Delete_Recurse (child);
+				
+				if (info.GetAttributeBoolean ("access::can-delete"))
+					child.Delete (null);
 			}
 			
-			IEnumerable<GLib.File> files = file.GetFiles ("").Union (file.SubDirs ());
-			
-			foreach (File f in files) {
-				if (f.QueryInfo<bool> ("access::can-delete"))
-					f.Delete ();
-			}
+			if (info != null)
+				info.Dispose ();
+			enumerator.Close (null);
 		}
 		
 		// This is the recursive equivalent of GLib.File.Copy ()
