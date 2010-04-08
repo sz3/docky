@@ -131,7 +131,7 @@ namespace Docky.Windowing
 				// some python apps have a script 'foo' for 'python foo.py'
 				yield return ".py";
 				// some apps append versions, such as '-1' or '-3.0'
-				yield return "-\\d+(\\.\\d+)?";
+				yield return "(-)?\\d+(\\.\\d+)?";
 			}
 		}
 		
