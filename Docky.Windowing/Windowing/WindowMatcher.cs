@@ -130,6 +130,8 @@ namespace Docky.Windowing
 				yield return "-bin";
 				// some python apps have a script 'foo' for 'python foo.py'
 				yield return ".py";
+				// some apps append versions, such as '-1' or '-3.0'
+				yield return "-\\d+(\\.\\d+)?";
 			}
 		}
 		
@@ -139,6 +141,7 @@ namespace Docky.Windowing
 		Dictionary<string, List<string>> exec_to_desktop_files;
 		Dictionary<string, string> class_to_desktop_files;
 		List<Regex> prefix_filters;
+		List<Regex> suffix_filters;
 		Wnck.Screen screen;
 		
 		void DesktopFilesChanged ()
@@ -154,6 +157,7 @@ namespace Docky.Windowing
 			update_lock = new object ();
 			screen = Wnck.Screen.Default;
 			prefix_filters = BuildPrefixFilters ();
+			suffix_filters = BuildSuffixFilters ();
 			
 			desktop_files = BuildDesktopFilesList ();
 			
@@ -494,9 +498,9 @@ namespace Docky.Windowing
 				yield return sanitizedCmd;
 				
 				// if it ends with a special suffix, strip the suffix and return an additional result
-				foreach (string s in SuffixStrings)
-					if (sanitizedCmd.EndsWith (s))
-						yield return sanitizedCmd.Substring (0, sanitizedCmd.Length - s.Length);
+				foreach (Regex f in suffix_filters)
+					if (f.IsMatch (sanitizedCmd))
+						yield return f.Replace (sanitizedCmd, "");
 			}
 			
 			// return the entire cmdline last as a last ditch effort to find a match
@@ -677,6 +681,13 @@ namespace Docky.Windowing
 						continue;
 					
 					result [vexec].Add (file);
+					foreach (Regex f in suffix_filters)
+						if (f.IsMatch (vexec)) {
+							string vexecStripped = f.Replace (vexec, "");
+							if (!result.ContainsKey (vexecStripped))
+								result [vexecStripped] = new List<string> ();
+							result [vexecStripped].Add (file);
+						}
 				}
 			}
 			
@@ -686,6 +697,11 @@ namespace Docky.Windowing
 		List<Regex> BuildPrefixFilters ()
 		{
 			return new List<Regex> (PrefixStrings.Select (s => new Regex ("^" + s + "$")));
+		}
+		
+		List<Regex> BuildSuffixFilters ()
+		{
+			return new List<Regex> (SuffixStrings.Select (s => new Regex (s + "$")));
 		}
 	}
 }
