@@ -142,19 +142,13 @@ namespace Docky.Services
 				if ((IO.File.GetAttributes (file.Path) & IO.FileAttributes.ReparsePoint) != 0)
 					return Enumerable.Empty<GLib.File> ();
 				
-				List<GLib.File> dirs;
-				
 				// get all dirs contained in this dir
-				dirs = IO.Directory.GetDirectories (file.Path)
+				List<GLib.File> dirs = IO.Directory.GetDirectories (file.Path)
 							.Select (d => GLib.FileFactory.NewForPath (d)).ToList ();
 				
 				// if we are recursing, for each dir we found get its subdirs
-				if (recurse) {
-					List<GLib.File> subdirs = new List<GLib.File> ();
-					foreach (GLib.File f in dirs)
-						subdirs.AddRange (f.SubDirs (true));
-					dirs.AddRange (subdirs);
-				}
+				if (recurse)
+					dirs.AddRange (dirs.SelectMany (d => d.SubDirs (true)));
 				
 				return dirs;
 			} catch {
