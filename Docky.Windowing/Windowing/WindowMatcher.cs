@@ -376,7 +376,7 @@ namespace Docky.Windowing
 			// if we have a classname that matches a desktopid we have a winner
 			if (window.ClassGroup != null) {
 				if (WindowIsOpenOffice (window)) {
-					string title = window.Name;
+					string title = window.Name.Trim ();
 					if (title.EndsWith ("Writer")) {
 						command_line.Add ("ooffice-writer");
 					} else if (title.EndsWith ("Draw")) {
