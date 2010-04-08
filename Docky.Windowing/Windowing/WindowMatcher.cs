@@ -373,15 +373,15 @@ namespace Docky.Windowing
 			if (window.ClassGroup != null) {
 				if (WindowIsOpenOffice (window)) {
 					string title = window.Name;
-					if (title.Contains ("Writer")) {
+					if (title.EndsWith ("Writer")) {
 						command_line.Add ("ooffice-writer");
-					} else if (title.Contains ("Draw")) {
+					} else if (title.EndsWith ("Draw")) {
 						command_line.Add ("ooffice-draw");
-					} else if (title.Contains ("Impress")) {
+					} else if (title.EndsWith ("Impress")) {
 						command_line.Add ("ooffice-impress");
-					} else if (title.Contains ("Calc")) {
+					} else if (title.EndsWith ("Calc")) {
 						command_line.Add ("ooffice-calc");
-					} else if (title.Contains ("Math")) {
+					} else if (title.EndsWith ("Math")) {
 						command_line.Add ("ooffice-math");
 					}
 				} else if (window.ClassGroup.ResClass == "Wine") {
