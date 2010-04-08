@@ -165,8 +165,12 @@ namespace Docky.Services
 			if (!IO.Directory.Exists (file.Path))
 				return Enumerable.Empty<GLib.File> ();
 			
-			return IO.Directory.GetFiles (file.Path, string.Format ("*{0}", extension))
-				.Select (f => GLib.FileFactory.NewForPath (f));
+			try {
+				return IO.Directory.GetFiles (file.Path, string.Format ("*{0}", extension))
+					.Select (f => GLib.FileFactory.NewForPath (f));
+			} catch {
+				return Enumerable.Empty<GLib.File> ();
+			}
 		}
 		
 		/// <summary>
