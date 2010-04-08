@@ -137,21 +137,29 @@ namespace Docky.Services
 			if (!IO.Directory.Exists (file.Path))
 				return Enumerable.Empty<GLib.File> ();
 			
-			return SubDirs (file.Path);
-		}
-		
-		public static IEnumerable<GLib.File> SubDirs (string path)
-		{
-			List<GLib.File> dirs = new List<GLib.File> () { GLib.FileFactory.NewForPath (path) };
-			
 			try {
-				foreach (string d in IO.Directory.GetDirectories (path))
-					dirs = dirs.Union (SubDirs (d)).ToList ();	
+				// ignore symlinks
+				if ((IO.File.GetAttributes (file.Path) & IO.FileAttributes.ReparsePoint) != 0)
+					return Enumerable.Empty<GLib.File> ();
+				
+				List<GLib.File> dirs;
+				
+				// get all dirs contained in this dir
+				dirs = IO.Directory.GetDirectories (file.Path)
+							.Select (d => GLib.FileFactory.NewForPath (d)).ToList ();
+				
+				// if we are recursing, for each dir we found get its subdirs
+				if (recurse) {
+					List<GLib.File> subdirs = new List<GLib.File> ();
+					foreach (GLib.File f in dirs)
+						subdirs.AddRange (f.SubDirs (true));
+					dirs.AddRange (subdirs);
+				}
+				
+				return dirs;
 			} catch {
 				return Enumerable.Empty<GLib.File> ();
 			}
-			
-			return dirs;
 		}
 		
 		public static IEnumerable<GLib.File> GetFiles (this GLib.File file)
