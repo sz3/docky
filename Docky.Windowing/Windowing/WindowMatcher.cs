@@ -592,8 +592,6 @@ namespace Docky.Windowing
 					if (item == null || !item.HasAttribute ("Exec"))
 						continue;
 					
-					bool noDisplay = item.HasAttribute ("NoDisplay") && item.GetBool ("NoDisplay");
-					
 					if (item.HasAttribute ("X-Docky-NoMatch") && item.GetBool ("X-Docky-NoMatch"))
 						continue;
 					
@@ -675,7 +673,7 @@ namespace Docky.Windowing
 					
 					if (!result.ContainsKey (vexec))
 						result [vexec] = new List<string> ();
-					else if (noDisplay)
+					else if (item.HasAttribute ("NoDisplay") && item.GetBool ("NoDisplay"))
 						continue;
 					
 					result [vexec].Add (file);
