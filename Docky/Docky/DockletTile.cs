@@ -54,18 +54,18 @@ namespace Docky
 			Description = Addin.Description.Description;
 			SubDescriptionText = Addin.Description.Author;
 			
-			ConfigButton = new Gtk.Button (Catalog.GetString ("_Settings"));
+			ConfigButton = new Gtk.Button (Gtk.Stock.Preferences);
 			ConfigButton.Clicked += delegate {
 				if (PluginManager.ConfigForAddin (Addin.Id) != null)
 					PluginManager.ConfigForAddin (Addin.Id).Show ();
 			};
 			
-			UpButton = new Gtk.Button (Catalog.GetString ("_Up"));
+			UpButton = new Gtk.Button (Gtk.Stock.GoUp);
 			UpButton.Clicked += delegate {
 				ConfigurationWindow.Instance.ActiveDock.Preferences.MoveProviderUp (Provider);
 				UpdateInfo ();
 			};
-			DownButton = new Gtk.Button (Catalog.GetString ("D_own"));
+			DownButton = new Gtk.Button (Gtk.Stock.GoDown);
 			DownButton.Clicked += delegate {
 				ConfigurationWindow.Instance.ActiveDock.Preferences.MoveProviderDown (Provider);
 				UpdateInfo ();

@@ -57,8 +57,7 @@ namespace Docky
 			}
 			
 			if (helper.IsUser) {
-				Gtk.Button uninstall_btn = new Gtk.Button ();
-				uninstall_btn.Label = Catalog.GetString ("Uninstall");
+				Gtk.Button uninstall_btn = new Gtk.Button (Catalog.GetString ("Uninstall"));
 				uninstall_btn.Clicked += delegate {
 					DockServices.Helpers.UninstallHelper (helper);
 				};

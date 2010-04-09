@@ -43,7 +43,7 @@ namespace Docky.Widgets
 			if (widgets.Any ())
 				AddWidgets (widgets);
 			
-			AddButton ("gtk-close", ResponseType.Close);
+			AddButton (Gtk.Stock.Close, Gtk.ResponseType.Close);
 			
 			SetDefaultSize (width, height);
 		}

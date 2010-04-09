@@ -111,7 +111,7 @@ namespace Docky.Services
 				ButtonsType.None, EmptyTrashMessage);
 			dialog.Title = EmptyTrashTitle;
 			dialog.AddButton ("Do _not Empty Trash", ResponseType.Reject);
-			dialog.AddButton ("_Cancel", ResponseType.Cancel);
+			dialog.AddButton (Gtk.Stock.Cancel, ResponseType.Cancel);
 			dialog.AddButton ("Empty _Trash", ResponseType.Accept);
 			dialog.DefaultResponse = ResponseType.Accept;
 			dialog.SkipTaskbarHint = true;
