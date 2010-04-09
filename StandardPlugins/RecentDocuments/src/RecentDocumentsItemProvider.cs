@@ -39,7 +39,7 @@ namespace RecentDocuments
 		
 		public override string Icon {
 			get {
-				return "document-open-recent";
+				return "folder-recent;;document-open-recent";
 			}
 		}
 		

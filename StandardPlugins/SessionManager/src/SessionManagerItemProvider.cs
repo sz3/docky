@@ -38,7 +38,7 @@ namespace SessionManager
 
 		public override string Icon {
 			get { 
-				return "gnome-session"; 
+				return "session-properties"; 
 			}
 		}
 
