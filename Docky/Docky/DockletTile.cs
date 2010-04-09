@@ -60,12 +60,14 @@ namespace Docky
 					PluginManager.ConfigForAddin (Addin.Id).Show ();
 			};
 			
-			UpButton = new Gtk.Button (Gtk.Stock.GoUp);
+			UpButton = new Gtk.Button ();
+			UpButton.Image = new Gtk.Image (Gtk.Stock.GoUp, Gtk.IconSize.Button);
 			UpButton.Clicked += delegate {
 				ConfigurationWindow.Instance.ActiveDock.Preferences.MoveProviderUp (Provider);
 				UpdateInfo ();
 			};
-			DownButton = new Gtk.Button (Gtk.Stock.GoDown);
+			DownButton = new Gtk.Button ();
+			DownButton.Image = new Gtk.Image (Gtk.Stock.GoDown, Gtk.IconSize.Button);
 			DownButton.Clicked += delegate {
 				ConfigurationWindow.Instance.ActiveDock.Preferences.MoveProviderDown (Provider);
 				UpdateInfo ();
