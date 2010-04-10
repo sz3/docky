@@ -60,8 +60,8 @@ namespace Docky.Widgets
 		
 		public Tile (AbstractTileObject obj, int iconSize) : base(3, 3, false)
 		{
-			Add = new Image (Gtk.Stock.Add, Gtk.IconSize.SmallToolbar);
-			Remove = new Image (Gtk.Stock.Delete, Gtk.IconSize.SmallToolbar);
+			Add = new Image (obj.AddButtonStock, Gtk.IconSize.SmallToolbar);
+			Remove = new Image (obj.RemoveButtonStock, Gtk.IconSize.SmallToolbar);
 			
 			OwnedObject = obj;	
 			

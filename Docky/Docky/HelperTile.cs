@@ -38,8 +38,7 @@ namespace Docky
 				SetProps ();
 			};
 			
-			ButtonStateDisabledText = Catalog.GetString ("_Enable");
-			ButtonStateEnabledText = Catalog.GetString ("_Disable");
+			AddButtonStock = Gtk.Stock.Execute;
 			SubDescriptionTitle = Catalog.GetString ("Status");
 			
 			Name = ((string) Helper.File.Basename).Split ('.')[0];

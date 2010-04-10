@@ -46,8 +46,6 @@ namespace Docky
 			Addin = PluginManager.AddinFromID (addinID);
 			Provider = provider;
 			
-			ButtonStateDisabledText = Catalog.GetString ("_Add");
-			ButtonStateEnabledText = Catalog.GetString ("_Remove");
 			SubDescriptionTitle = Catalog.GetString ("Author");
 			Enabled = Addin.Enabled;
 			

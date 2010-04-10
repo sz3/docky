@@ -192,41 +192,7 @@ namespace Docky.Widgets
 				OnTextUpdated ();
 			}
 		}
-		
-		/// <summary>
-		/// Text shown on the button when the tile is enabled
-		/// </summary>
-		string enabled_text;
-		public virtual string ButtonStateEnabledText {
-			get { 
-				if (enabled_text == null)
-					enabled_text = Catalog.GetString ("_Remove");
-				return enabled_text;
-			}
-			protected set {
-				if (enabled_text == value)
-					return;
-				enabled_text = value;
-			}
-		}
-	 
-		/// <summary>
-		/// Text shown on the button when the tile is disabled
-		/// </summary>
-		string disabled_text;
-		public virtual string ButtonStateDisabledText {
-			get { 
-				if (disabled_text == null)
-					disabled_text = Catalog.GetString ("_Add");
-				return disabled_text;
-			}
-			protected set {
-				if (disabled_text == value)
-					return;
-				disabled_text = value;
-			}
-		}
-		
+
 		/// <summary>
 		/// Whether or not the button should be shown on the tile
 		/// </summary>
@@ -250,7 +216,7 @@ namespace Docky.Widgets
 		/// </summary>
 		bool? enabled;
 		public virtual bool Enabled {
-			get { 
+			get {
 				if (!enabled.HasValue)
 					enabled = false;
 				return enabled.Value;
@@ -259,6 +225,34 @@ namespace Docky.Widgets
 				if (enabled.HasValue && enabled.Value == value)
 					return;
 				enabled = value;
+			}
+		}
+		
+		string add_button_stock;
+		public virtual string AddButtonStock {
+			get {
+				if (add_button_stock == null)
+					add_button_stock = Gtk.Stock.Add;
+				return add_button_stock;
+			}
+			protected set {
+				if (add_button_stock == value)
+					return;
+				add_button_stock = value;
+			}
+		}
+		
+		string remove_button_stock;
+		public virtual string RemoveButtonStock {
+			get {
+				if (remove_button_stock == null)
+					remove_button_stock = Gtk.Stock.Delete;
+				return remove_button_stock;
+			}
+			protected set {
+				if (remove_button_stock == value)
+					return;
+				remove_button_stock = value;
 			}
 		}
 		
