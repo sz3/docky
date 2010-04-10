@@ -174,15 +174,8 @@ namespace Docky.Widgets
 
 			button_box = new HBox ();
 			button_box.Spacing = 3;
-			
-			//Pango.FontDescription font = PangoContext.FontDescription.Copy ();
-			//font.Size = (int)(font.Size * Pango.Scale.Small);
-			
-			//Label label = new Label ();
-			//label.ModifyFont (font);
+						
 			add_remove_button = new Button ();
-			//add_remove_button.UseUnderline = true;
-			//add_remove_button.Add (label);
 			add_remove_button.Clicked += OnAddRemoveClicked;
 
 			UpdateButtons ();
@@ -237,7 +230,6 @@ namespace Docky.Widgets
 			description.Wrap = State == StateType.Selected;
 			subDesc.Visible = State == StateType.Selected;
 			add_remove_button.Image = enabled ? Remove : Add;
-			//add_remove_button.Label = enabled ? OwnedObject.ButtonStateEnabledText : OwnedObject.ButtonStateDisabledText;
 		}
 		
 		public void Select (bool select)
