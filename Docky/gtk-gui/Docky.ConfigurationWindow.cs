@@ -81,7 +81,7 @@ namespace Docky
 			global::Stetic.Gui.Initialize (this);
 			// Widget Docky.ConfigurationWindow
 			this.Name = "Docky.ConfigurationWindow";
-			this.Title = global::Mono.Unix.Catalog.GetString ("Docky Configuration");
+			this.Title = global::Mono.Unix.Catalog.GetString ("Docky Settings");
 			this.Icon = global::Stetic.IconLoader.LoadIcon (this, "gtk-preferences", global::Gtk.IconSize.Menu);
 			this.TypeHint = ((global::Gdk.WindowTypeHint)(1));
 			this.WindowPosition = ((global::Gtk.WindowPosition)(1));
