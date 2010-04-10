@@ -24,6 +24,7 @@ using Mono.Addins;
 using Docky.Widgets;
 using Docky.Items;
 using Docky.Services;
+using Docky.Interface;
 
 namespace Docky
 {
@@ -54,20 +55,23 @@ namespace Docky
 			Description = Addin.Description.Description;
 			SubDescriptionText = Addin.Description.Author;
 			
-			ConfigButton = new Gtk.Button (Gtk.Stock.Preferences);
+			ConfigButton = new Gtk.Button ();
+			ConfigButton.Image = new Gtk.Image (Gtk.Stock.Preferences, Gtk.IconSize.SmallToolbar);
 			ConfigButton.Clicked += delegate {
 				if (PluginManager.ConfigForAddin (Addin.Id) != null)
 					PluginManager.ConfigForAddin (Addin.Id).Show ();
 			};
 			
 			UpButton = new Gtk.Button ();
-			UpButton.Image = new Gtk.Image (Gtk.Stock.GoUp, Gtk.IconSize.Button);
+			UpButton.Image = new Gtk.Image ((ConfigurationWindow.Instance.ActiveDock.Preferences.IsVertical) ? 
+				Gtk.Stock.GoUp : Gtk.Stock.GoBack, Gtk.IconSize.SmallToolbar);
 			UpButton.Clicked += delegate {
 				ConfigurationWindow.Instance.ActiveDock.Preferences.MoveProviderUp (Provider);
 				UpdateInfo ();
 			};
 			DownButton = new Gtk.Button ();
-			DownButton.Image = new Gtk.Image (Gtk.Stock.GoDown, Gtk.IconSize.Button);
+			DownButton.Image = new Gtk.Image ((ConfigurationWindow.Instance.ActiveDock.Preferences.IsVertical) ? 
+				Gtk.Stock.GoDown : Gtk.Stock.GoForward, Gtk.IconSize.SmallToolbar);
 			DownButton.Clicked += delegate {
 				ConfigurationWindow.Instance.ActiveDock.Preferences.MoveProviderDown (Provider);
 				UpdateInfo ();
@@ -78,11 +82,6 @@ namespace Docky
 		
 		void UpdateInfo ()
 		{
-			if (Enabled && PluginManager.ConfigForAddin (Addin.Id) != null)
-				AddUserButton (ConfigButton);
-			else
-				RemoveUserButton (ConfigButton);
-			
 			if (Enabled) {
 				if (ConfigurationWindow.Instance.ActiveDock.Preferences.ProviderCanMoveUp (Provider))
 					AddUserButton (UpButton);
@@ -97,6 +96,11 @@ namespace Docky
 				RemoveUserButton (UpButton);
 				RemoveUserButton (DownButton);
 			}
+			
+			if (Enabled && PluginManager.ConfigForAddin (Addin.Id) != null)
+				AddUserButton (ConfigButton);
+			else
+				RemoveUserButton (ConfigButton);			
 			
 			if (Provider == null)
 				Icon = PluginManager.DefaultPluginIcon;

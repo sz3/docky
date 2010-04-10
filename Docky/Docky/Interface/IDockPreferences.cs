@@ -56,6 +56,8 @@ namespace Docky.Interface
 		
 		double FadeOpacity { get; set; }
 		
+		bool IsVertical { get; }
+		
 		DockPosition Position { get; set; }
 		
 		int IconSize { get; set; }

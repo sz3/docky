@@ -46,6 +46,7 @@ namespace Docky.Widgets
 		private Image tileImage;
 		private WrapLabel description;
         private WrapLabel subDesc;
+		private Image Add, Remove;
 		#endregion
 		
 		private int IconSize { get; set; }
@@ -57,8 +58,11 @@ namespace Docky.Widgets
 
 		public event EventHandler ActiveChanged;
 		
-		public Tile (AbstractTileObject obj, int iconSize) : base (3, 3, false)
+		public Tile (AbstractTileObject obj, int iconSize) : base(3, 3, false)
 		{
+			Add = new Image (Gtk.Stock.Add, Gtk.IconSize.SmallToolbar);
+			Remove = new Image (Gtk.Stock.Delete, Gtk.IconSize.SmallToolbar);
+			
 			OwnedObject = obj;	
 			
 			OwnedObject.IconUpdated += delegate {
@@ -171,14 +175,14 @@ namespace Docky.Widgets
 			button_box = new HBox ();
 			button_box.Spacing = 3;
 			
-			Pango.FontDescription font = PangoContext.FontDescription.Copy ();
-			font.Size = (int)(font.Size * Pango.Scale.Small);
+			//Pango.FontDescription font = PangoContext.FontDescription.Copy ();
+			//font.Size = (int)(font.Size * Pango.Scale.Small);
 			
-			Label label = new Label ();
-			label.ModifyFont (font);
+			//Label label = new Label ();
+			//label.ModifyFont (font);
 			add_remove_button = new Button ();
-			add_remove_button.UseUnderline = true;
-			add_remove_button.Add (label);
+			//add_remove_button.UseUnderline = true;
+			//add_remove_button.Add (label);
 			add_remove_button.Clicked += OnAddRemoveClicked;
 
 			UpdateButtons ();
@@ -232,7 +236,8 @@ namespace Docky.Widgets
 			description.Sensitive = sensitive;
 			description.Wrap = State == StateType.Selected;
 			subDesc.Visible = State == StateType.Selected;
-			add_remove_button.Label = enabled ? OwnedObject.ButtonStateEnabledText : OwnedObject.ButtonStateDisabledText;
+			add_remove_button.Image = enabled ? Remove : Add;
+			//add_remove_button.Label = enabled ? OwnedObject.ButtonStateEnabledText : OwnedObject.ButtonStateDisabledText;
 		}
 		
 		public void Select (bool select)

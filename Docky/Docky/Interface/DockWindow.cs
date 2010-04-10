@@ -432,7 +432,7 @@ namespace Docky.Interface
 			get {
 				return Items
 					.Where (adi => !(adi is INonPersistedItem) && DrawValues.ContainsKey (adi))
-					.OrderBy (adi => Math.Abs (VerticalDock ? DrawValues[adi].Center.Y - LocalCursor.Y : DrawValues[adi].Center.X - LocalCursor.X))
+					.OrderBy (adi => Math.Abs (Preferences.IsVertical ? DrawValues[adi].Center.Y - LocalCursor.Y : DrawValues[adi].Center.X - LocalCursor.X))
 					.DefaultIfEmpty (null)
 					.FirstOrDefault ();
 			}
@@ -442,8 +442,8 @@ namespace Docky.Interface
 			get {
 				return Items
 					.Where (adi => !(adi is INonPersistedItem) && DrawValues.ContainsKey (adi))
-					.Where (adi => (VerticalDock ? DrawValues[adi].Center.Y - LocalCursor.Y : DrawValues[adi].Center.X - LocalCursor.X) > 0)
-					.OrderBy (adi => Math.Abs (VerticalDock ? DrawValues[adi].Center.Y - LocalCursor.Y : DrawValues[adi].Center.X - LocalCursor.X))
+					.Where (adi => (Preferences.IsVertical ? DrawValues[adi].Center.Y - LocalCursor.Y : DrawValues[adi].Center.X - LocalCursor.X) > 0)
+					.OrderBy (adi => Math.Abs (Preferences.IsVertical ? DrawValues[adi].Center.Y - LocalCursor.Y : DrawValues[adi].Center.X - LocalCursor.X))
 					.DefaultIfEmpty (null)
 					.FirstOrDefault ();
 			}
@@ -608,10 +608,6 @@ namespace Docky.Interface
 		
 		int ItemWidthBuffer {
 			get { return (int) (0.08 * IconSize); }
-		}
-		
-		bool VerticalDock {
-			get { return Position == DockPosition.Left || Position == DockPosition.Right; }
 		}
 		
 		/// <summary>
@@ -1375,7 +1371,7 @@ namespace Docky.Interface
 		#region Painters
 		void ShowPainter (AbstractDockItem owner, AbstractDockPainter painter)
 		{
-			if (Painter != null || owner == null || painter == null || (!painter.SupportsVertical && VerticalDock))
+			if (Painter != null || owner == null || painter == null || (!painter.SupportsVertical && Preferences.IsVertical))
 				return;
 			
 			Painter = painter;
@@ -1487,7 +1483,7 @@ namespace Docky.Interface
 		{
 			UpdateMonitorGeometry ();
 			
-			if (VerticalDock) {
+			if (Preferences.IsVertical) {
 				Height = Math.Min (Docky.CommandLinePreferences.MaxSize, monitor_geo.Height);
 				Width = DockHeightBuffer + ZoomedIconSize + UrgentBounceHeight;
 			} else {
@@ -1561,7 +1557,7 @@ namespace Docky.Interface
 				width = surface.Width;
 					height = surface.Height;
 				
-				if (item.RotateWithDock && VerticalDock) {
+				if (item.RotateWithDock && Preferences.IsVertical) {
 					int tmp = width;
 					width = height;
 					height = tmp;
@@ -1590,7 +1586,7 @@ namespace Docky.Interface
 			double zoom;
 			
 			// our width and height switch around if we have a veritcal dock
-			if (!VerticalDock) {
+			if (!Preferences.IsVertical) {
 				width = surface.Width;
 				height = surface.Height;
 			} else {
@@ -1631,7 +1627,7 @@ namespace Docky.Interface
 			// this offset is used to split the icons into left/right aligned for panel mode
 			int panel_item_offset = 0;
 			double panelanim = PanelModeToggleProgress;
-			if (VerticalDock)
+			if (Preferences.IsVertical)
 				panel_item_offset = (monitor_geo.Height - DockWidth) / 2;
 			else
 				panel_item_offset = (monitor_geo.Width - DockWidth) / 2;
@@ -1675,7 +1671,7 @@ namespace Docky.Interface
 					DockySurface icon = adi.IconSurface (surface, iconSize, IconSize, VisibleDockHeight);
 					
 					// yeah I am pretty sure...
-					if (adi.RotateWithDock || !VerticalDock) {
+					if (adi.RotateWithDock || !Preferences.IsVertical) {
 						halfSize = icon.Width / 2.0;
 					} else {
 						halfSize = icon.Height / 2.0;
@@ -1804,7 +1800,7 @@ namespace Docky.Interface
 				
 				Gdk.Rectangle hoverArea = DrawRegionForItemValue (adi, val);
 				
-				if (VerticalDock) {
+				if (Preferences.IsVertical) {
 					hoverArea.Inflate ((int) (ZoomedDockHeight * .3), ItemWidthBuffer / 2);
 				} else {
 					hoverArea.Inflate (ItemWidthBuffer / 2, (int) (ZoomedDockHeight * .3));
@@ -1848,7 +1844,7 @@ namespace Docky.Interface
 			
 			icon_size_timer = GLib.Timeout.Add (1000, delegate {
 				int dockWidth = DockWidth;
-				int maxWidth = VerticalDock ? monitor_geo.Height : monitor_geo.Width;
+				int maxWidth = Preferences.IsVertical ? monitor_geo.Height : monitor_geo.Width;
 				
 				if (dockWidth > maxWidth) {
 					// MaxIconSize is too large, must fix
@@ -1893,7 +1889,7 @@ namespace Docky.Interface
 			}
 			
 			if (Preferences.PanelMode) {
-				if (VerticalDock) {
+				if (Preferences.IsVertical) {
 					area.Y = 0;
 					area.Height = surface.Height;
 				} else {
@@ -1917,7 +1913,7 @@ namespace Docky.Interface
 			
 			int dockStart;
 			int dockWidth;
-			if (VerticalDock) {
+			if (Preferences.IsVertical) {
 				dockStart = first.Y - DockWidthBuffer;
 				dockWidth = (last.Y + last.Height + DockWidthBuffer) - dockStart;
 			} else {
@@ -1927,7 +1923,7 @@ namespace Docky.Interface
 			
 			// update the dock area to animate the panel toggle
 			if (PanelModeToggleProgress < 1) {
-				int difference = 2 * ((dockStart + dockWidth / 2) - ((VerticalDock ? monitor_geo.Height : monitor_geo.Width) / 2));
+				int difference = 2 * ((dockStart + dockWidth / 2) - ((Preferences.IsVertical ? monitor_geo.Height : monitor_geo.Width) / 2));
 				// no left items
 				if (Items [0].Owner != Preferences.DefaultProvider && Items [0] != DockyItem) {
 					dockStart -= difference;
@@ -2017,7 +2013,7 @@ namespace Docky.Interface
 			if (Preferences.PanelMode) {
 				Gdk.Rectangle panelArea = dockArea;
 				if (PanelModeToggleProgress == 1) {
-					if (VerticalDock) {
+					if (Preferences.IsVertical) {
 						panelArea.Y = -100;
 						panelArea.Height = Height + 200;
 					} else {
@@ -2329,7 +2325,7 @@ namespace Docky.Interface
 			if ((item.State & ItemState.Active) == ItemState.Active && !ThreeDimensional) {
 				Gdk.Rectangle area;
 				
-				if (VerticalDock) {
+				if (Preferences.IsVertical) {
 					area = new Gdk.Rectangle (
 						dockArea.X, 
 						(int) (val.Center.Y - (IconSize * val.Zoom) / 2) - ItemWidthBuffer / 2,
@@ -2539,7 +2535,7 @@ namespace Docky.Interface
 		void DrawDockBackground (DockySurface surface, Gdk.Rectangle backgroundArea)
 		{
 			if (background_buffer == null) {
-				if (VerticalDock) {
+				if (Preferences.IsVertical) {
 					background_buffer = new DockySurface (BackgroundHeight, BackgroundWidth, surface);
 				} else {
 					background_buffer = new DockySurface (BackgroundWidth, BackgroundHeight, surface);

@@ -127,7 +127,7 @@ namespace Docky.Interface
 			get {
 				if (!fade_opacity.HasValue)
 					fade_opacity = GetOption<double> ("FadeOpacity", 0);
-				return fade_opacity.Value; 
+				return fade_opacity.Value;
 			}
 			set {
 				if (fade_opacity == value)
@@ -136,6 +136,10 @@ namespace Docky.Interface
 				SetOption<double> ("FadeOpacity", fade_opacity.Value);
 				OnFadeOpacityChanged ();
 			}
+		}
+		
+		public bool IsVertical {
+			get { return Position == DockPosition.Left || Position == DockPosition.Right; }
 		}
 		
 		DockPosition position;
