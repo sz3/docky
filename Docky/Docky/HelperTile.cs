@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Chris Szikszoy
+//  Copyright (C) 2009 Chris Szikszoy, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -73,6 +73,10 @@ namespace Docky
 			AddUserButton (HelpButton);
 			
 			SetProps ();
+			
+			HelpButton.TooltipMarkup = Catalog.GetString ("About this helper");
+			AddButtonTooltip = Catalog.GetString ("Enable this helper");
+			RemoveButtonTooltip = Catalog.GetString ("Disable this helper");
 		}
 		
 		void SetProps ()

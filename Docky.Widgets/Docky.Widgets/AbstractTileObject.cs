@@ -256,6 +256,10 @@ namespace Docky.Widgets
 			}
 		}
 		
+		public string AddButtonTooltip { get; protected set; }
+		
+		public string RemoveButtonTooltip { get; protected set; }
+		
 		internal List<Gtk.Button> ExtraButtons;
 		
 		/// <summary>

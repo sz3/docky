@@ -230,6 +230,7 @@ namespace Docky.Widgets
 			description.Wrap = State == StateType.Selected;
 			subDesc.Visible = State == StateType.Selected;
 			add_remove_button.Image = enabled ? RemoveImage : AddImage;
+			add_remove_button.TooltipMarkup = enabled ? OwnedObject.RemoveButtonTooltip : OwnedObject.AddButtonTooltip;
 		}
 		
 		public void Select (bool select)

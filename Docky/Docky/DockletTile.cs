@@ -70,21 +70,33 @@ namespace Docky
 			};
 			
 			UpButton = new Gtk.Button ();
-			UpButton.Image = new Gtk.Image ((ConfigurationWindow.Instance.ActiveDock.Preferences.IsVertical) ? 
-				Gtk.Stock.GoUp : Gtk.Stock.GoBack, Gtk.IconSize.SmallToolbar);
 			UpButton.Clicked += delegate {
 				ConfigurationWindow.Instance.ActiveDock.Preferences.MoveProviderUp (Provider);
 				UpdateInfo ();
 			};
 			DownButton = new Gtk.Button ();
-			DownButton.Image = new Gtk.Image ((ConfigurationWindow.Instance.ActiveDock.Preferences.IsVertical) ? 
-				Gtk.Stock.GoDown : Gtk.Stock.GoForward, Gtk.IconSize.SmallToolbar);
 			DownButton.Clicked += delegate {
 				ConfigurationWindow.Instance.ActiveDock.Preferences.MoveProviderDown (Provider);
 				UpdateInfo ();
 			};
 			
 			UpdateInfo ();
+			
+			if (ConfigurationWindow.Instance.ActiveDock.Preferences.IsVertical) {
+				UpButton.Image = new Gtk.Image (Gtk.Stock.GoUp, Gtk.IconSize.SmallToolbar);
+				DownButton.Image = new Gtk.Image (Gtk.Stock.GoDown, Gtk.IconSize.SmallToolbar);
+				UpButton.TooltipMarkup = Catalog.GetString ("Move this docklet up on the selected dock");
+				DownButton.TooltipMarkup = Catalog.GetString ("Move this docklet down on the selected dock");
+			} else {
+				UpButton.Image = new Gtk.Image (Gtk.Stock.GoBack, Gtk.IconSize.SmallToolbar);
+				DownButton.Image = new Gtk.Image (Gtk.Stock.GoForward, Gtk.IconSize.SmallToolbar);
+				UpButton.TooltipMarkup = Catalog.GetString ("Move this docklet left on the selected dock");
+				DownButton.TooltipMarkup = Catalog.GetString ("Move this docklet right on the selected dock");
+			}
+			ConfigButton.TooltipMarkup = Catalog.GetString ("Configure this docklet");
+			HelpButton.TooltipMarkup = Catalog.GetString ("About this docklet");
+			AddButtonTooltip = Catalog.GetString ("Add this docklet to the selected dock");
+			RemoveButtonTooltip = Catalog.GetString ("Remove this docklet from the selected dock");
 		}
 		
 		void UpdateInfo ()
