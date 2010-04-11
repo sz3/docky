@@ -46,7 +46,7 @@ namespace Docky.Widgets
 		private Image tileImage;
 		private WrapLabel description;
         private WrapLabel subDesc;
-		private Image Add, Remove;
+		private Image AddImage, RemoveImage;
 		#endregion
 		
 		private int IconSize { get; set; }
@@ -60,8 +60,8 @@ namespace Docky.Widgets
 		
 		public Tile (AbstractTileObject obj, int iconSize) : base(3, 3, false)
 		{
-			Add = new Image (obj.AddButtonStock, Gtk.IconSize.SmallToolbar);
-			Remove = new Image (obj.RemoveButtonStock, Gtk.IconSize.SmallToolbar);
+			AddImage = new Image (obj.AddButtonStock, Gtk.IconSize.SmallToolbar);
+			RemoveImage = new Image (obj.RemoveButtonStock, Gtk.IconSize.SmallToolbar);
 			
 			OwnedObject = obj;	
 			
@@ -229,7 +229,7 @@ namespace Docky.Widgets
 			description.Sensitive = sensitive;
 			description.Wrap = State == StateType.Selected;
 			subDesc.Visible = State == StateType.Selected;
-			add_remove_button.Image = enabled ? Remove : Add;
+			add_remove_button.Image = enabled ? RemoveImage : AddImage;
 		}
 		
 		public void Select (bool select)
