@@ -227,6 +227,7 @@ namespace Docky {
             this.vbox7.Spacing = 6;
             // Container child vbox7.Gtk.Box+BoxChild
             this.hbox1 = new Gtk.HBox();
+            this.hbox1.Name = "hbox1";
             this.hbox1.Spacing = 6;
             // Container child hbox1.Gtk.Box+BoxChild
             this.docklet_show_cmb = Gtk.ComboBox.NewText();
@@ -356,7 +357,6 @@ namespace Docky {
             this.help_button = new Gtk.Button();
             this.help_button.CanFocus = true;
             this.help_button.Name = "help_button";
-            this.help_button.UseUnderline = true;
             this.help_button.BorderWidth = ((uint)(5));
             // Container child help_button.Gtk.Container+ContainerChild
             Gtk.Alignment w33 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
@@ -369,8 +369,6 @@ namespace Docky {
             w34.Add(w35);
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w37 = new Gtk.Label();
-            w37.LabelProp = Mono.Unix.Catalog.GetString("_Help");
-            w37.UseUnderline = true;
             w34.Add(w37);
             w33.Add(w34);
             this.help_button.Add(w33);
@@ -476,6 +474,7 @@ namespace Docky {
             this.docklet_show_cmb.Changed += new System.EventHandler(this.OnShowDockletChanged);
             this.helper_show_cmb.Changed += new System.EventHandler(this.OnShowHelperChanged);
             this.install_btn.Clicked += new System.EventHandler(this.OnInstallClicked);
+            this.help_button.Clicked += new System.EventHandler(this.OnHelpClicked);
             this.new_dock_button.Clicked += new System.EventHandler(this.OnNewDockButtonClicked);
             this.delete_dock_button.Clicked += new System.EventHandler(this.OnDeleteDockButtonClicked);
             this.close_button.Clicked += new System.EventHandler(this.OnCloseButtonClicked);
