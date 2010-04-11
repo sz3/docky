@@ -484,6 +484,7 @@ namespace Docky
 		
 		protected virtual void OnHelpClicked (object sender, System.EventArgs e)
 		{
+			DockServices.System.Open ("http://wiki.go-docky.com/index.php?title=Settings_dialog");
 		}
 	}
 }
