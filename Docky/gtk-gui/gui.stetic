@@ -714,9 +714,9 @@ Disabled</property>
                     <property name="CanFocus">True</property>
                     <property name="Type">TextAndIcon</property>
                     <property name="Icon">stock:gtk-help Menu</property>
-                    <property name="Label" translatable="yes">_Help</property>
-                    <property name="UseUnderline">True</property>
+                    <property name="Label" translatable="yes" />
                     <property name="BorderWidth">5</property>
+                    <signal name="Clicked" handler="OnHelpClicked" />
                   </widget>
                   <packing>
                     <property name="Position">0</property>

@@ -458,7 +458,8 @@ namespace Docky
 			foreach (AbstractDockItemProvider provider in ActiveDock.Preferences.ItemProviders) {
 				string providerID = PluginManager.AddinIDFromProvider (provider);
 				if (string.IsNullOrEmpty (providerID))
-				    continue;
+					continue;
+			
 
 				tiles.Add (new DockletTile (providerID, provider));
 				if (provider == selectedProvider)
@@ -479,6 +480,10 @@ namespace Docky
 			
 			if (currentTile != null)
 				DockletsTileview.Select (tiles.IndexOf (currentTile));
+		}
+		
+		protected virtual void OnHelpClicked (object sender, System.EventArgs e)
+		{
 		}
 	}
 }
