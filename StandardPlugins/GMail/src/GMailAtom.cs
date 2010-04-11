@@ -291,7 +291,7 @@ namespace GMail
 						Gtk.Application.Invoke (delegate {
 							OnGMailFailed (Catalog.GetString ("Network Error"));
 						});
-				} catch (ObjectDisposedException e) {
+				} catch (ObjectDisposedException) {
 					Gtk.Application.Invoke (delegate {
 						OnGMailFailed (Catalog.GetString ("Network Error"));
 					});
