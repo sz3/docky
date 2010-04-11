@@ -242,11 +242,12 @@ data/icons/hicolor/128x128/Makefile
 data/icons/hicolor/128x128/apps/Makefile
 data/icons/hicolor/Makefile
 data/themes/Makefile
-data/themes/Grayscale/Makefile
 data/themes/Air/Makefile
+data/themes/Glass/Makefile
+data/themes/Grayscale/Makefile
 data/themes/HUD/Makefile
 data/themes/Smoke/Makefile
-data/themes/Glass/Makefile
+data/themes/Transparent/Makefile
 m4/Makefile
 po/Makefile.in
 ])
