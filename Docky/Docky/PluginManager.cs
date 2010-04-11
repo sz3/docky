@@ -22,8 +22,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 using Mono.Addins;
-using Mono.Addins.Gui;
-using Mono.Addins.Setup;
+//using Mono.Addins.Gui;
+//using Mono.Addins.Setup;
 
 using Docky.Items;
 using Docky.Services;

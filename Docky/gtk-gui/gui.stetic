@@ -5,11 +5,13 @@
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="Mono.Addins.Gui, Version=0.4.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
     <widget-library name="wnck-sharp, Version=2.20.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <widget-library name="gnomedesktop-sharp, Version=2.20.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <widget-library name="../../Docky.Services/bin/Debug/Docky.Services.dll" />
+    <widget-library name="../../Docky.Items/bin/Debug/Docky.Items.dll" />
     <widget-library name="../../Docky.Windowing/bin/Debug/Docky.Windowing.dll" />
+    <widget-library name="../../Docky.DBus/bin/Debug/Docky.DBus.dll" />
+    <widget-library name="../../Docky.Widgets/bin/Debug/Docky.Widgets.dll" />
     <widget-library name="../bin/Debug/Docky.exe" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="Docky.Interface.DockPreferences" design-size="411 356">
