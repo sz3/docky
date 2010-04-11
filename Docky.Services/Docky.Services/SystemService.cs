@@ -362,20 +362,20 @@ namespace Docky.Services
 			}
 		}
 		
-		public void RunOnThread (Action action, TimeSpan delay)
+		public System.Threading.Thread RunOnThread (Action action, TimeSpan delay)
 		{
-			RunOnThread (() => {
+			return RunOnThread (() => {
 				System.Threading.Thread.Sleep (delay);
 				action ();
 			});
 		}
 		
-		public void RunOnThread (Action action, int delay)
+		public System.Threading.Thread RunOnThread (Action action, int delay)
 		{
-			RunOnThread (action, new TimeSpan (0, 0, 0, 0, delay));
+			return RunOnThread (action, new TimeSpan (0, 0, 0, 0, delay));
 		}
 		
-		public void RunOnThread (Action action)
+		public System.Threading.Thread RunOnThread (Action action)
 		{
 			System.Threading.Thread newThread = new System.Threading.Thread (() =>
 			{
@@ -390,6 +390,7 @@ namespace Docky.Services
 			
 			newThread.IsBackground = true;
 			newThread.Start ();
+			return newThread;
 		}
 		
 		public void RunOnMainThread (Action action)

@@ -870,6 +870,8 @@ namespace Docky.Interface
 			foreach (AbstractDockItem item in provider.Items)
 				RegisterItem (item);
 			
+			provider.Registered ();
+			
 			UpdateMaxIconSize ();
 		}
 		
@@ -879,6 +881,8 @@ namespace Docky.Interface
 			
 			foreach (AbstractDockItem item in provider.Items)
 				UnregisterItem (item);
+			
+			provider.Unregistered ();
 			
 			UpdateMaxIconSize ();
 		}

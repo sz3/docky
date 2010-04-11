@@ -101,15 +101,20 @@ namespace GMail
 			else
 				AddItem (newLabels.Except (currentLabels).First());
 
-			AddedToDock ();
+			Registered ();
 		}
 		
-		public override void AddedToDock ()
+		public override void Registered ()
 		{
 			GLib.Idle.Add (delegate {
 				items.ForEach (adi => (adi as GMailDockItem).Atom.ResetTimer (true));
 				return false;
 			});
+		}
+		
+		public override void Unregistered ()
+		{
+			items.ForEach (adi => (adi as GMailDockItem).Atom.StopTimer ());
 		}
 	}
 }

@@ -134,7 +134,11 @@ namespace Docky.Items
 				ItemsChanged (this, new ItemsChangedArgs (added, removed));
 		}
 		
-		public virtual void AddedToDock ()
+		public virtual void Registered ()
+		{
+		}
+		
+		public virtual void Unregistered ()
 		{
 		}
 		

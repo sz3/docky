@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading;
 using System.Web;
 using System.Xml;
 
@@ -68,9 +69,17 @@ namespace WeatherDocklet
 		public event EventHandler<WeatherErrorArgs> WeatherError;
 		public event Action WeatherUpdated;
 		
+		public Thread checkerThread;
+		
+		public void StopReload ()
+		{
+			if (checkerThread != null)
+				checkerThread.Abort ();
+		}
+		
 		public void ReloadWeatherData ()
 		{
-			DockServices.System.RunOnThread (() => {
+			checkerThread = DockServices.System.RunOnThread (() => {
 				try {
 					OnWeatherReloading ();
 	
@@ -80,6 +89,8 @@ namespace WeatherDocklet
 						ConvertResults ();
 					
 					OnWeatherUpdated ();
+				} catch (ThreadAbortException) {
+					// shutting down, do nothing
 				} catch (NullReferenceException e) {
 					OnWeatherError (Catalog.GetString ("Invalid Weather Location"));
 					Log<AbstractWeatherSource>.Debug (Name + ": " + e.StackTrace);

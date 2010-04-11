@@ -424,7 +424,6 @@ namespace Docky.Interface
 		public void AddProvider (AbstractDockItemProvider provider)
 		{
 			item_providers.Add (provider);
-			provider.AddedToDock ();
 			
 			OnItemProvidersChanged (provider.AsSingle (), null);
 			SyncPlugins ();
@@ -595,10 +594,8 @@ namespace Docky.Interface
 					.DefaultIfEmpty (null)
 					.FirstOrDefault ();
 				
-				if (provider != null) {
+				if (provider != null)
 					item_providers.Add (provider);
-					provider.AddedToDock ();
-				}
 			}
 			
 			List<string> sortList = SortList.ToList ();

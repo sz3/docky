@@ -131,6 +131,8 @@ namespace WeatherDocklet
 		/// </summary>
 		void ReloadWeatherData ();
 		
+		void StopReload ();
+		
 		/// <summary>
 		/// Displays the radar in the default browser using this weather source's specified URL.
 		/// </summary>

@@ -102,6 +102,8 @@ namespace GMail
 			ResetNeeded += HandleNeedReset;
 		}
 		
+		Thread checkerThread;
+		
 		public void Dispose ()
 		{
 			DockServices.System.ConnectionStatusChanged -= HandleNeedReset;
@@ -130,12 +132,19 @@ namespace GMail
 			ResetTimer ();
 		}
 		
+		public void StopTimer ()
+		{
+			if (UpdateTimer > 0)
+				GLib.Source.Remove (UpdateTimer);
+			UpdateTimer = 0;
+			
+			if (checkerThread != null)
+				checkerThread.Abort ();
+		}
+			
 		public void ResetTimer ()
 		{
-			if (UpdateTimer > 0) {
-				GLib.Source.Remove (UpdateTimer);
-				UpdateTimer = 0;
-			}
+			StopTimer ();
 			
 			if (!DockServices.System.NetworkConnected)
 				return;
@@ -190,7 +199,7 @@ namespace GMail
 				return;
 			}
 
-			DockServices.System.RunOnThread (() => {
+			checkerThread = DockServices.System.RunOnThread (() => {
 				try {
 					Gtk.Application.Invoke (delegate { OnGMailChecking (); });
 
