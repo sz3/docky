@@ -30,6 +30,7 @@ namespace Docky
 	public class HelperTile : AbstractTileObject
 	{
 		public Helper Helper { get; private set; }
+		Gtk.Button HelpButton;
 
 		public HelperTile (Helper helper)
 		{
@@ -62,6 +63,14 @@ namespace Docky
 				};
 				AddUserButton (uninstall_btn);
 			}
+			HelpButton = new Gtk.Button ();
+			HelpButton.Image = new Gtk.Image (Gtk.Stock.Help, Gtk.IconSize.SmallToolbar);
+			HelpButton.Clicked += delegate {
+				string id = ((string) Helper.File.Basename).Split ('.')[0];
+				id = char.ToUpper (id[0]) + id.Substring (1).ToLower ();
+				DockServices.System.Open ("http://wiki.go-docky.com/index.php?title=" + id + "_Helper");
+			};
+			AddUserButton (HelpButton);
 			
 			SetProps ();
 		}
