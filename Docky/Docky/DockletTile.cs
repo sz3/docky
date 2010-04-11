@@ -36,6 +36,7 @@ namespace Docky
 		Gtk.Button ConfigButton;
 		Gtk.Button UpButton;
 		Gtk.Button DownButton;
+		Gtk.Button HelpButton;
 
 		public DockletTile (string addinID) : this (addinID, null)
 		{
@@ -52,6 +53,14 @@ namespace Docky
 			Name = Addin.Name;
 			Description = Addin.Description.Description;
 			SubDescriptionText = Addin.Description.Author;
+			
+			HelpButton = new Gtk.Button ();
+			HelpButton.Image = new Gtk.Image (Gtk.Stock.Help, Gtk.IconSize.SmallToolbar);
+			HelpButton.Clicked += delegate {
+				string id = Addin.Id.Substring (0, Addin.Id.IndexOf (","));
+				id = id.Substring (id.IndexOf (".") + 1);
+				DockServices.System.Open ("http://wiki.go-docky.com/index.php?title=" + id + "_Docklet");
+			};
 			
 			ConfigButton = new Gtk.Button ();
 			ConfigButton.Image = new Gtk.Image (Gtk.Stock.Preferences, Gtk.IconSize.SmallToolbar);
@@ -80,6 +89,8 @@ namespace Docky
 		
 		void UpdateInfo ()
 		{
+			RemoveUserButton (HelpButton);
+			
 			if (Enabled) {
 				if (ConfigurationWindow.Instance.ActiveDock.Preferences.ProviderCanMoveUp (Provider))
 					AddUserButton (UpButton);
@@ -99,6 +110,8 @@ namespace Docky
 				AddUserButton (ConfigButton);
 			else
 				RemoveUserButton (ConfigButton);			
+			
+			AddUserButton (HelpButton);
 			
 			if (Provider == null)
 				Icon = PluginManager.DefaultPluginIcon;
