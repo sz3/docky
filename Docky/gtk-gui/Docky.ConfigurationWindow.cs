@@ -57,6 +57,8 @@ namespace Docky {
         
         private Gtk.ComboBox docklet_show_cmb;
         
+        private Gtk.Alignment docklet_alignment;
+        
         private Gtk.ScrolledWindow docklet_scroll;
         
         private Gtk.Label label2;
@@ -98,11 +100,12 @@ namespace Docky {
             this.BorderWidth = ((uint)(2));
             // Container child Docky.ConfigurationWindow.Gtk.Container+ContainerChild
             this.vbox1 = new Gtk.VBox();
+            this.vbox1.Name = "vbox1";
             // Container child vbox1.Gtk.Box+BoxChild
             this.config_notebook = new Gtk.Notebook();
             this.config_notebook.CanFocus = true;
             this.config_notebook.Name = "config_notebook";
-            this.config_notebook.CurrentPage = 0;
+            this.config_notebook.CurrentPage = 1;
             this.config_notebook.Scrollable = true;
             // Container child config_notebook.Gtk.Notebook+NotebookChild
             this.vbox2 = new Gtk.VBox();
@@ -272,17 +275,21 @@ namespace Docky {
             w23.Expand = false;
             w23.Fill = false;
             // Container child vbox7.Gtk.Box+BoxChild
+            this.docklet_alignment = new Gtk.Alignment(0F, 0F, 1F, 1F);
+            this.docklet_alignment.Name = "docklet_alignment";
+            // Container child docklet_alignment.Gtk.Container+ContainerChild
             this.docklet_scroll = new Gtk.ScrolledWindow();
             this.docklet_scroll.CanFocus = true;
             this.docklet_scroll.Name = "docklet_scroll";
             this.docklet_scroll.HscrollbarPolicy = ((Gtk.PolicyType)(2));
-            this.vbox7.Add(this.docklet_scroll);
-            Gtk.Box.BoxChild w24 = ((Gtk.Box.BoxChild)(this.vbox7[this.docklet_scroll]));
-            w24.Position = 1;
+            this.docklet_alignment.Add(this.docklet_scroll);
+            this.vbox7.Add(this.docklet_alignment);
+            Gtk.Box.BoxChild w25 = ((Gtk.Box.BoxChild)(this.vbox7[this.docklet_alignment]));
+            w25.Position = 1;
             this.alignment2.Add(this.vbox7);
             this.config_notebook.Add(this.alignment2);
-            Gtk.Notebook.NotebookChild w26 = ((Gtk.Notebook.NotebookChild)(this.config_notebook[this.alignment2]));
-            w26.Position = 1;
+            Gtk.Notebook.NotebookChild w27 = ((Gtk.Notebook.NotebookChild)(this.config_notebook[this.alignment2]));
+            w27.Position = 1;
             // Notebook tab
             this.label2 = new Gtk.Label();
             this.label2.Name = "label2";
@@ -313,54 +320,54 @@ namespace Docky {
             this.helper_show_cmb.Name = "helper_show_cmb";
             this.helper_show_cmb.Active = 0;
             this.hbox5.Add(this.helper_show_cmb);
-            Gtk.Box.BoxChild w27 = ((Gtk.Box.BoxChild)(this.hbox5[this.helper_show_cmb]));
-            w27.Position = 0;
-            w27.Expand = false;
-            w27.Fill = false;
+            Gtk.Box.BoxChild w28 = ((Gtk.Box.BoxChild)(this.hbox5[this.helper_show_cmb]));
+            w28.Position = 0;
+            w28.Expand = false;
+            w28.Fill = false;
             // Container child hbox5.Gtk.Box+BoxChild
             this.install_btn = new Gtk.Button();
             this.install_btn.CanFocus = true;
             this.install_btn.Name = "install_btn";
             this.install_btn.UseUnderline = true;
             // Container child install_btn.Gtk.Container+ContainerChild
-            Gtk.Alignment w28 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
+            Gtk.Alignment w29 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
             // Container child GtkAlignment.Gtk.Container+ContainerChild
-            Gtk.HBox w29 = new Gtk.HBox();
-            w29.Spacing = 2;
+            Gtk.HBox w30 = new Gtk.HBox();
+            w30.Spacing = 2;
             // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Image w30 = new Gtk.Image();
-            w30.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-execute", Gtk.IconSize.Menu, 16);
+            Gtk.Image w31 = new Gtk.Image();
+            w31.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-execute", Gtk.IconSize.Menu, 16);
+            w30.Add(w31);
+            // Container child GtkHBox.Gtk.Container+ContainerChild
+            Gtk.Label w33 = new Gtk.Label();
+            w33.LabelProp = Mono.Unix.Catalog.GetString("_Install");
+            w33.UseUnderline = true;
+            w30.Add(w33);
             w29.Add(w30);
-            // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Label w32 = new Gtk.Label();
-            w32.LabelProp = Mono.Unix.Catalog.GetString("_Install");
-            w32.UseUnderline = true;
-            w29.Add(w32);
-            w28.Add(w29);
-            this.install_btn.Add(w28);
+            this.install_btn.Add(w29);
             this.hbox5.Add(this.install_btn);
-            Gtk.Box.BoxChild w36 = ((Gtk.Box.BoxChild)(this.hbox5[this.install_btn]));
-            w36.PackType = ((Gtk.PackType)(1));
-            w36.Position = 1;
-            w36.Expand = false;
-            w36.Fill = false;
-            this.vbox5.Add(this.hbox5);
-            Gtk.Box.BoxChild w37 = ((Gtk.Box.BoxChild)(this.vbox5[this.hbox5]));
-            w37.Position = 0;
+            Gtk.Box.BoxChild w37 = ((Gtk.Box.BoxChild)(this.hbox5[this.install_btn]));
+            w37.PackType = ((Gtk.PackType)(1));
+            w37.Position = 1;
             w37.Expand = false;
             w37.Fill = false;
+            this.vbox5.Add(this.hbox5);
+            Gtk.Box.BoxChild w38 = ((Gtk.Box.BoxChild)(this.vbox5[this.hbox5]));
+            w38.Position = 0;
+            w38.Expand = false;
+            w38.Fill = false;
             // Container child vbox5.Gtk.Box+BoxChild
             this.helper_scroll = new Gtk.ScrolledWindow();
             this.helper_scroll.CanFocus = true;
             this.helper_scroll.Name = "helper_scroll";
             this.helper_scroll.HscrollbarPolicy = ((Gtk.PolicyType)(2));
             this.vbox5.Add(this.helper_scroll);
-            Gtk.Box.BoxChild w38 = ((Gtk.Box.BoxChild)(this.vbox5[this.helper_scroll]));
-            w38.Position = 1;
+            Gtk.Box.BoxChild w39 = ((Gtk.Box.BoxChild)(this.vbox5[this.helper_scroll]));
+            w39.Position = 1;
             this.alignment3.Add(this.vbox5);
             this.config_notebook.Add(this.alignment3);
-            Gtk.Notebook.NotebookChild w40 = ((Gtk.Notebook.NotebookChild)(this.config_notebook[this.alignment3]));
-            w40.Position = 2;
+            Gtk.Notebook.NotebookChild w41 = ((Gtk.Notebook.NotebookChild)(this.config_notebook[this.alignment3]));
+            w41.Position = 2;
             // Notebook tab
             this.label4 = new Gtk.Label();
             this.label4.Name = "label4";
@@ -368,8 +375,8 @@ namespace Docky {
             this.config_notebook.SetTabLabel(this.alignment3, this.label4);
             this.label4.ShowAll();
             this.vbox1.Add(this.config_notebook);
-            Gtk.Box.BoxChild w41 = ((Gtk.Box.BoxChild)(this.vbox1[this.config_notebook]));
-            w41.Position = 0;
+            Gtk.Box.BoxChild w42 = ((Gtk.Box.BoxChild)(this.vbox1[this.config_notebook]));
+            w42.Position = 0;
             // Container child vbox1.Gtk.Box+BoxChild
             this.hbox2 = new Gtk.HBox();
             this.hbox2.Name = "hbox2";
@@ -384,24 +391,24 @@ namespace Docky {
             this.help_button.Name = "help_button";
             this.help_button.BorderWidth = ((uint)(5));
             // Container child help_button.Gtk.Container+ContainerChild
-            Gtk.Alignment w42 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
+            Gtk.Alignment w43 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
             // Container child GtkAlignment.Gtk.Container+ContainerChild
-            Gtk.HBox w43 = new Gtk.HBox();
-            w43.Spacing = 2;
+            Gtk.HBox w44 = new Gtk.HBox();
+            w44.Spacing = 2;
             // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Image w44 = new Gtk.Image();
-            w44.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-help", Gtk.IconSize.Menu, 16);
+            Gtk.Image w45 = new Gtk.Image();
+            w45.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-help", Gtk.IconSize.Menu, 16);
+            w44.Add(w45);
+            // Container child GtkHBox.Gtk.Container+ContainerChild
+            Gtk.Label w47 = new Gtk.Label();
+            w44.Add(w47);
             w43.Add(w44);
-            // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Label w46 = new Gtk.Label();
-            w43.Add(w46);
-            w42.Add(w43);
-            this.help_button.Add(w42);
+            this.help_button.Add(w43);
             this.hbox3.Add(this.help_button);
-            Gtk.Box.BoxChild w50 = ((Gtk.Box.BoxChild)(this.hbox3[this.help_button]));
-            w50.Position = 0;
-            w50.Expand = false;
-            w50.Fill = false;
+            Gtk.Box.BoxChild w51 = ((Gtk.Box.BoxChild)(this.hbox3[this.help_button]));
+            w51.Position = 0;
+            w51.Expand = false;
+            w51.Fill = false;
             // Container child hbox3.Gtk.Box+BoxChild
             this.new_dock_button = new Gtk.Button();
             this.new_dock_button.CanFocus = true;
@@ -409,26 +416,26 @@ namespace Docky {
             this.new_dock_button.UseUnderline = true;
             this.new_dock_button.BorderWidth = ((uint)(5));
             // Container child new_dock_button.Gtk.Container+ContainerChild
-            Gtk.Alignment w51 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
+            Gtk.Alignment w52 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
             // Container child GtkAlignment.Gtk.Container+ContainerChild
-            Gtk.HBox w52 = new Gtk.HBox();
-            w52.Spacing = 2;
+            Gtk.HBox w53 = new Gtk.HBox();
+            w53.Spacing = 2;
             // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Image w53 = new Gtk.Image();
-            w53.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-add", Gtk.IconSize.Menu, 16);
+            Gtk.Image w54 = new Gtk.Image();
+            w54.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-add", Gtk.IconSize.Menu, 16);
+            w53.Add(w54);
+            // Container child GtkHBox.Gtk.Container+ContainerChild
+            Gtk.Label w56 = new Gtk.Label();
+            w56.LabelProp = Mono.Unix.Catalog.GetString("_New Dock");
+            w56.UseUnderline = true;
+            w53.Add(w56);
             w52.Add(w53);
-            // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Label w55 = new Gtk.Label();
-            w55.LabelProp = Mono.Unix.Catalog.GetString("_New Dock");
-            w55.UseUnderline = true;
-            w52.Add(w55);
-            w51.Add(w52);
-            this.new_dock_button.Add(w51);
+            this.new_dock_button.Add(w52);
             this.hbox3.Add(this.new_dock_button);
-            Gtk.Box.BoxChild w59 = ((Gtk.Box.BoxChild)(this.hbox3[this.new_dock_button]));
-            w59.Position = 1;
-            w59.Expand = false;
-            w59.Fill = false;
+            Gtk.Box.BoxChild w60 = ((Gtk.Box.BoxChild)(this.hbox3[this.new_dock_button]));
+            w60.Position = 1;
+            w60.Expand = false;
+            w60.Fill = false;
             // Container child hbox3.Gtk.Box+BoxChild
             this.delete_dock_button = new Gtk.Button();
             this.delete_dock_button.CanFocus = true;
@@ -436,26 +443,26 @@ namespace Docky {
             this.delete_dock_button.UseUnderline = true;
             this.delete_dock_button.BorderWidth = ((uint)(5));
             // Container child delete_dock_button.Gtk.Container+ContainerChild
-            Gtk.Alignment w60 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
+            Gtk.Alignment w61 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
             // Container child GtkAlignment.Gtk.Container+ContainerChild
-            Gtk.HBox w61 = new Gtk.HBox();
-            w61.Spacing = 2;
+            Gtk.HBox w62 = new Gtk.HBox();
+            w62.Spacing = 2;
             // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Image w62 = new Gtk.Image();
-            w62.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-delete", Gtk.IconSize.Menu, 16);
+            Gtk.Image w63 = new Gtk.Image();
+            w63.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-delete", Gtk.IconSize.Menu, 16);
+            w62.Add(w63);
+            // Container child GtkHBox.Gtk.Container+ContainerChild
+            Gtk.Label w65 = new Gtk.Label();
+            w65.LabelProp = Mono.Unix.Catalog.GetString("_Delete Dock");
+            w65.UseUnderline = true;
+            w62.Add(w65);
             w61.Add(w62);
-            // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Label w64 = new Gtk.Label();
-            w64.LabelProp = Mono.Unix.Catalog.GetString("_Delete Dock");
-            w64.UseUnderline = true;
-            w61.Add(w64);
-            w60.Add(w61);
-            this.delete_dock_button.Add(w60);
+            this.delete_dock_button.Add(w61);
             this.hbox3.Add(this.delete_dock_button);
-            Gtk.Box.BoxChild w68 = ((Gtk.Box.BoxChild)(this.hbox3[this.delete_dock_button]));
-            w68.Position = 2;
-            w68.Expand = false;
-            w68.Fill = false;
+            Gtk.Box.BoxChild w69 = ((Gtk.Box.BoxChild)(this.hbox3[this.delete_dock_button]));
+            w69.Position = 2;
+            w69.Expand = false;
+            w69.Fill = false;
             // Container child hbox3.Gtk.Box+BoxChild
             this.close_button = new Gtk.Button();
             this.close_button.WidthRequest = 100;
@@ -466,19 +473,19 @@ namespace Docky {
             this.close_button.BorderWidth = ((uint)(5));
             this.close_button.Label = "gtk-close";
             this.hbox3.Add(this.close_button);
-            Gtk.Box.BoxChild w69 = ((Gtk.Box.BoxChild)(this.hbox3[this.close_button]));
-            w69.PackType = ((Gtk.PackType)(1));
-            w69.Position = 3;
-            w69.Expand = false;
-            w69.Fill = false;
+            Gtk.Box.BoxChild w70 = ((Gtk.Box.BoxChild)(this.hbox3[this.close_button]));
+            w70.PackType = ((Gtk.PackType)(1));
+            w70.Position = 3;
+            w70.Expand = false;
+            w70.Fill = false;
             this.hbox2.Add(this.hbox3);
-            Gtk.Box.BoxChild w70 = ((Gtk.Box.BoxChild)(this.hbox2[this.hbox3]));
-            w70.Position = 0;
+            Gtk.Box.BoxChild w71 = ((Gtk.Box.BoxChild)(this.hbox2[this.hbox3]));
+            w71.Position = 0;
             this.vbox1.Add(this.hbox2);
-            Gtk.Box.BoxChild w71 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox2]));
-            w71.Position = 1;
-            w71.Expand = false;
-            w71.Fill = false;
+            Gtk.Box.BoxChild w72 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox2]));
+            w72.Position = 1;
+            w72.Expand = false;
+            w72.Fill = false;
             this.Add(this.vbox1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();

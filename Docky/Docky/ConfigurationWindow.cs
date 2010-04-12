@@ -89,8 +89,8 @@ namespace Docky
 				
 				activeDock = value;
 				
-				RefreshDocklets ();
 				SetupConfigAlignment ();
+				RefreshDocklets ();
 				CheckButtons ();
 			}
 		}
@@ -182,33 +182,44 @@ namespace Docky
 		
 		void SetupConfigAlignment ()
 		{
-			if (config_alignment.Child != null) {
+			if (config_alignment.Child != null)
 				config_alignment.Remove (config_alignment.Child);
-			}
+			
+			if (docklet_alignment.Child != null)
+				docklet_alignment.Remove (docklet_alignment.Child);
 			
 			if (ActiveDock == null) {
-				VBox vbox = new VBox ();
-				
-				HBox hboxTop = new HBox ();
-				HBox hboxBottom = new HBox ();
-				Label label1 = new Gtk.Label (Mono.Unix.Catalog.GetString ("Click on any dock to configure."));
-				Label label2 = new Gtk.Label (Mono.Unix.Catalog.GetString ("Drag any dock to reposition."));
-				
-				vbox.Add (hboxTop);
-				vbox.Add (label1);
-				vbox.Add (label2);
-				vbox.Add (hboxBottom);
-				
-				vbox.SetChildPacking (hboxTop, true, true, 0, PackType.Start);
-				vbox.SetChildPacking (label1, false, false, 0, PackType.Start);
-				vbox.SetChildPacking (label2, false, false, 0, PackType.Start);
-				vbox.SetChildPacking (hboxBottom, true, true, 0, PackType.Start);
-				
-				config_alignment.Add (vbox);
+				config_alignment.Add (MakeInfoBox ());
+				docklet_alignment.Add (MakeInfoBox ());
 			} else {
 				config_alignment.Add (ActiveDock.PreferencesWidget);
+				docklet_alignment.Add (docklet_scroll);
 			}
+			
 			config_alignment.ShowAll ();
+			docklet_alignment.ShowAll ();
+		}
+		
+		VBox MakeInfoBox ()
+		{
+			VBox vbox = new VBox ();
+			
+			HBox hboxTop = new HBox ();
+			HBox hboxBottom = new HBox ();
+			Label label1 = new Gtk.Label (Mono.Unix.Catalog.GetString ("Click on any dock to configure."));
+			Label label2 = new Gtk.Label (Mono.Unix.Catalog.GetString ("Drag any dock to reposition."));
+			
+			vbox.Add (hboxTop);
+			vbox.Add (label1);
+			vbox.Add (label2);
+			vbox.Add (hboxBottom);
+			
+			vbox.SetChildPacking (hboxTop, true, true, 0, PackType.Start);
+			vbox.SetChildPacking (label1, false, false, 0, PackType.Start);
+			vbox.SetChildPacking (label2, false, false, 0, PackType.Start);
+			vbox.SetChildPacking (hboxBottom, true, true, 0, PackType.Start);
+			
+			return vbox;
 		}
 
 		protected override void OnShown ()

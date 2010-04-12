@@ -350,7 +350,7 @@ Window Dodge</property>
           <widget class="Gtk.Notebook" id="config_notebook">
             <property name="MemberName" />
             <property name="CanFocus">True</property>
-            <property name="CurrentPage">0</property>
+            <property name="CurrentPage">1</property>
             <property name="Scrollable">True</property>
             <signal name="SwitchPage" handler="OnPageSwitch" />
             <child>
@@ -572,16 +572,23 @@ Disabled</property>
                       </packing>
                     </child>
                     <child>
-                      <widget class="Gtk.ScrolledWindow" id="docklet_scroll">
+                      <widget class="Gtk.Alignment" id="docklet_alignment">
                         <property name="MemberName" />
-                        <property name="CanFocus">True</property>
-                        <property name="HscrollbarPolicy">Never</property>
+                        <property name="Xalign">0</property>
+                        <property name="Yalign">0</property>
                         <child>
-                          <widget class="Gtk.Viewport" id="GtkViewport1">
+                          <widget class="Gtk.ScrolledWindow" id="docklet_scroll">
                             <property name="MemberName" />
-                            <property name="ShadowType">None</property>
+                            <property name="CanFocus">True</property>
+                            <property name="HscrollbarPolicy">Never</property>
                             <child>
-                              <placeholder />
+                              <widget class="Gtk.Viewport" id="GtkViewport1">
+                                <property name="MemberName" />
+                                <property name="ShadowType">None</property>
+                                <child>
+                                  <placeholder />
+                                </child>
+                              </widget>
                             </child>
                           </widget>
                         </child>
