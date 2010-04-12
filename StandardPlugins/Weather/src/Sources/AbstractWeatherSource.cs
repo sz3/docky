@@ -242,10 +242,11 @@ namespace WeatherDocklet
 		protected XmlDocument FetchXml (string url)
 		{
 			Log<AbstractWeatherSource>.Debug (Name + ": Fetching XML file '" + url + "'");
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create (url);
+			HttpWebRequest request = (HttpWebRequest) WebRequest.Create (url);
 			request.Timeout = 60000;
-			request.UserAgent = @"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.10) Gecko/2009042523 Ubuntu/9.04 (jaunty) Firefox/3.0.10";
-			
+			request.UserAgent = DockServices.System.UserAgent;
+			if (DockServices.System.UseProxy)
+				request.Proxy = DockServices.System.Proxy;
 			XmlDocument xml = new XmlDocument ();
 			using (HttpWebResponse response = (HttpWebResponse)request.GetResponse ())
 				try {

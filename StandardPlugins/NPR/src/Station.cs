@@ -97,17 +97,17 @@ namespace NPR
 			string logo = stationElement.Elements ("image").First (el => el.Attribute ("type").Value == "logo").Value;
 			GLib.File l = FileFactory.NewForUri (logo);
 			LogoFile = System.IO.Path.Combine (System.IO.Path.GetTempPath (), l.Basename);
-			
-			try {
-				GLib.File dest = FileFactory.NewForPath (LogoFile);
-				if (dest.Exists) {
-					Finish ();
-					return;
-				}
-				
-				l.Copy (dest, 0, new Cancellable (), null);
-			} catch {
+			if (System.IO.File.Exists (LogoFile)) {
+				Finish ();
+				return;
 			}
+			
+			WebClient cl = new WebClient ();
+			cl.Headers.Add ("user-agent", DockServices.System.UserAgent);
+			if (DockServices.System.UseProxy)
+				cl.Proxy = DockServices.System.Proxy;
+			
+			cl.DownloadFile (logo, LogoFile);
 			
 			Finish ();
 		}
@@ -121,8 +121,9 @@ namespace NPR
 				// if we get to this point, the logofile will load just fine
 				Icon = LogoFile;
 			} catch {
-				// delete the bad logofile
-				System.IO.File.Delete (LogoFile);
+				// delete the bad logofile, if it exists
+				if (System.IO.File.Exists (LogoFile))
+					System.IO.File.Delete (LogoFile);
 				Icon = DefaultLogo;
 			}
 			
@@ -149,6 +150,9 @@ namespace NPR
 			DockServices.System.RunOnThread (() => {
 				try {
 					WebClient cl = new WebClient ();
+					cl.Headers.Add ("user-agent", DockServices.System.UserAgent);
+					if (DockServices.System.UseProxy)
+						cl.Proxy = DockServices.System.Proxy;
 					string tempPath = System.IO.Path.GetTempPath ();
 					string filename = url.Split (new [] {'/'}).Last ();
 					filename = System.IO.Path.Combine (tempPath, filename);

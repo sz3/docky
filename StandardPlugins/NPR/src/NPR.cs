@@ -92,7 +92,26 @@ namespace NPR
 		
 		static XElement APIReturn (string url, NameValueCollection query)
 		{
+			// we only have to go through this song and dance if we're using a proxy.
+			if (DockServices.System.UseProxy) {
+				HttpWebRequest request = (HttpWebRequest) WebRequest.Create (BuildQueryString (url, query));
+				request.Timeout = 60000;
+				request.UserAgent = DockServices.System.UserAgent;
+				request.Proxy = DockServices.System.Proxy;
+				
+				XElement xml;
+				using (HttpWebResponse response = (HttpWebResponse)request.GetResponse ()) {
+					try {
+						using (TextReader reader = new StreamReader (response.GetResponseStream ()))
+							xml = XElement.Load (reader);
+					} finally {
+						response.Close ();
+					}
+				}
+				return xml;
+			} else {
 				return XElement.Load (BuildQueryString (url, query));
+			}
 		}
 		
 		public static IEnumerable<Station> SearchStations (string zip) 

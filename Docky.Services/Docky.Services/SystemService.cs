@@ -23,6 +23,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using System.Net;
 
 using GLib;
 
@@ -39,7 +40,22 @@ namespace Docky.Services
 			InitializeNetwork ();
 		}
 		
+		internal void Dispose ()
+		{
+			GConf.RemoveNotify (PROXY, ProxySettingsChanged);
+		}
+		
+		IPreferences GConf = DockServices.Preferences.Get <SystemService> ();
+		
 		#region Network
+		
+		const string PROXY = "/system/http_proxy";
+		const string PROXY_USE_PROXY = PROXY + "/" + "use_http_proxy";
+		const string PROXY_HOST = PROXY + "/" + "host";
+		const string PROXY_PORT = PROXY + "/" + "port";
+		const string PROXY_USER = PROXY + "/" + "authentication_user";
+		const string PROXY_PASSWORD = PROXY + "/" + "authentication_password";
+		const string PROXY_BYPASS_LIST = PROXY + "/" + "ignore_hosts";
 		
 		void InitializeNetwork ()
 		{
@@ -56,6 +72,9 @@ namespace Docky.Services
 				Log<SystemService>.Error ("Could not initialize Network Manager dbus: '{0}'", e.Message);
 				Log<SystemService>.Info (e.StackTrace);
 			}
+			
+			GConf.AddNotify (PROXY, ProxySettingsChanged);
+			Proxy = GetWebProxy ();
 		}		
 		
 		public event EventHandler<ConnectionStatusChangeEventArgs> ConnectionStatusChanged;
@@ -92,14 +111,66 @@ namespace Docky.Services
 		}
 		
 		NetworkState State {
-			get	{ 
+			get {
 				try {
-					return (NetworkState) Enum.ToObject (typeof (NetworkState), network.Get (NetworkManagerName, "State"));
+					return (NetworkState) Enum.ToObject (typeof(NetworkState), network.Get (NetworkManagerName, "State"));
 				} catch (Exception) {
 					return NetworkState.Unknown;
 				}
 			}
-		}		
+		}
+		
+		public string UserAgent {
+			get {
+				return @"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2) Gecko/20100308 Ubuntu/10.04 (lucid) Firefox/3.6";
+			}
+		}
+		
+		void ProxySettingsChanged (object sender, GConf.NotifyEventArgs args)
+		{
+			Proxy = GetWebProxy ();
+		}
+		
+		public bool UseProxy {
+			get {
+				return GConf.Get<bool> (PROXY_USE_PROXY, false);
+			}
+		}
+
+		public WebProxy Proxy { get; private set; }
+		
+		WebProxy GetWebProxy ()
+		{
+			WebProxy proxy;
+			
+			if (!UseProxy)
+				return null;
+			
+			try {
+				string proxyUri = string.Format ("http://{0}:{1}", GConf.Get<string> (PROXY_HOST, ""),
+					GConf.Get<int> (PROXY_PORT, 0).ToString ());
+				
+				proxy = new WebProxy (proxyUri);
+				string[] bypassList = GConf.Get<string[]> (PROXY_BYPASS_LIST, new[] { "" });
+				if (bypassList != null) {
+					foreach (string host in bypassList) {
+						if (host.Contains ("*.local")) {
+							proxy.BypassProxyOnLocal = true;
+							continue;
+						}
+						proxy.BypassArrayList.Add (string.Format ("http://{0}", host));
+					}
+				}
+				proxy.Credentials = new NetworkCredential (GConf.Get<string> (PROXY_USER, ""),
+					GConf.Get<string> ( PROXY_PASSWORD, ""));
+			} catch (Exception e) {
+				Log.Error ("Error creating web proxy, {0}", e.Message);
+				Log.Debug (e.StackTrace);
+				return null;
+			}
+			
+			return proxy;
+		}
 		
 		#endregion
 		

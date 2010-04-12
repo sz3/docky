@@ -44,5 +44,10 @@ namespace Docky.Services
 			
 			Log<DockServices>.Info ("Dock services initialized.");
 		}
+		
+		public static void Dispose ()
+		{
+			System.Dispose ();
+		}
 	}
 }

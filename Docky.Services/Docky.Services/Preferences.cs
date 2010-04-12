@@ -84,6 +84,26 @@ namespace Docky.Services
 		{
 			return nameRegex.Replace (key, "_");
 		}
+		
+		public void AddNotify (string path, NotifyEventHandler handler)
+		{
+			try {
+				client.AddNotify (path, handler);
+			} catch (Exception e) {
+				Log.Error ("Error removing notification handler, {0}", e.Message);
+				Log.Debug (e.StackTrace);
+			}
+		}
+		
+		public void RemoveNotify (string path, NotifyEventHandler handler)
+		{
+			try {
+				client.RemoveNotify (path, handler);
+			} catch (Exception e) {
+				Log.Error ("Error removing notification handler, {0}", e.Message);
+				Log.Debug (e.StackTrace);
+			}
+		}
 
 		#endregion
 		

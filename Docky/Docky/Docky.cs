@@ -65,7 +65,7 @@ namespace Docky
 			GLib.GType.Init ();
 			
 			// process the command line args
-			CommandLinePreferences = new UserArgs (args);			
+			CommandLinePreferences = new UserArgs (args);
 			
 			Wnck.Global.ClientType = Wnck.ClientType.Pager;
 			
@@ -87,6 +87,7 @@ namespace Docky
 			Gdk.Threads.Leave ();
 			
 			Controller.Dispose ();
+			DockServices.Dispose ();
 			PluginManager.Shutdown ();
 			Gnome.Vfs.Vfs.Shutdown ();
 		}

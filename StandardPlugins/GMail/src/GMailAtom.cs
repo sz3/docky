@@ -166,18 +166,20 @@ namespace GMail
 		public static bool ValidateCredentials (string username, string password)
 		{
 			try {
-				String[] login = username.Split (new char[] {'@'});
-				string domain = login.Length > 1 ? login [1] : "gmail.com";
+				String[] login = username.Split (new char[] { '@' });
+				string domain = login.Length > 1 ? login[1] : "gmail.com";
 				string url = "https://mail.google.com/a/" + domain;
 				if (domain.Equals ("gmail.com") || domain.Equals ("googlemail.com"))
 					url = "https://mail.google.com/mail";
 				url += "/feed/atom/";
 				
 				Log<GMailAtom>.Info ("Fetching Atom feed: " + url);
-				HttpWebRequest request = (HttpWebRequest)WebRequest.Create (url);
+				HttpWebRequest request = (HttpWebRequest) WebRequest.Create (url);
 				request.Timeout = 60000;
-				request.UserAgent = @"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.10) Gecko/2009042523 Ubuntu/9.04 (jaunty) Firefox/3.0.10";
+				request.UserAgent = DockServices.System.UserAgent;
 				request.Credentials = new NetworkCredential (username, password);
+				if (DockServices.System.UseProxy)
+					request.Proxy = DockServices.System.Proxy;
 				// FIXME: remove when ServicePointManager.ServerCertificateValidationCallback implemented in mono
 				System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 				
@@ -203,8 +205,8 @@ namespace GMail
 				try {
 					Gtk.Application.Invoke (delegate { OnGMailChecking (); });
 
-					String[] login = GMailPreferences.User.Split (new char[] {'@'});
-					string domain = login.Length > 1 ? login [1] : "gmail.com";
+					String[] login = GMailPreferences.User.Split (new char[] { '@' });
+					string domain = login.Length > 1 ? login[1] : "gmail.com";
 					string url = "https://mail.google.com/a/" + domain;
 					if (domain.Equals ("gmail.com") || domain.Equals ("googlemail.com"))
 						url = "https://mail.google.com/mail";
@@ -212,11 +214,13 @@ namespace GMail
 					url += "/feed/atom/" + HttpUtility.UrlEncode (string.Join ("-", CurrentLabel.Split (new char[]{'/', ' '})));
 					
 					Log<GMailAtom>.Info ("Fetching Atom feed: " + url);
-					HttpWebRequest request = (HttpWebRequest)WebRequest.Create (url);
+					HttpWebRequest request = (HttpWebRequest) WebRequest.Create (url);
 					request.Timeout = 60000;
-					request.UserAgent = @"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.10) Gecko/2009042523 Ubuntu/9.04 (jaunty) Firefox/3.0.10";
+					request.UserAgent = DockServices.System.UserAgent;
 					request.Credentials = new NetworkCredential (GMailPreferences.User, GMailPreferences.Password);
-					// remove when ServicePointManager.ServerCertificateValidationCallback implemented in mono
+					if (DockServices.System.UseProxy)
+						request.Proxy = DockServices.System.Proxy;
+					// FIXME remove when ServicePointManager.ServerCertificateValidationCallback implemented in mono
 					System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 					
 					XmlDocument xml = new XmlDocument ();
