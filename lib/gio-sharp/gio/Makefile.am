@@ -1,5 +1,3 @@
-include $(top_srcdir)/build.rules.core.mk
-
 UNSAFE = -unsafe
 DEBUG = -debug
 
