@@ -54,7 +54,6 @@ namespace WeatherDocklet {
             this.Name = "WeatherDocklet.WeatherConfig";
             // Container child WeatherDocklet.WeatherConfig.Gtk.Container+ContainerChild
             this.vbox1 = new Gtk.VBox();
-            this.vbox1.Name = "vbox1";
             this.vbox1.Spacing = 6;
             // Container child vbox1.Gtk.Box+BoxChild
             this.hbox1 = new Gtk.HBox();

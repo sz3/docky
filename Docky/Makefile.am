@@ -67,6 +67,7 @@ REFERENCES =  \
 	System.Core \
 	Mono.Posix \
 	Mono.GetOptions \
+	ICSharpCode.SharpZipLib \
 	$(MONO_CAIRO_LIBS) \
 	$(GIO_SHARP_LIBS) \
 	$(GLIB_SHARP_20_LIBS) \

@@ -350,7 +350,7 @@ Window Dodge</property>
           <widget class="Gtk.Notebook" id="config_notebook">
             <property name="MemberName" />
             <property name="CanFocus">True</property>
-            <property name="CurrentPage">2</property>
+            <property name="CurrentPage">0</property>
             <property name="Scrollable">True</property>
             <signal name="SwitchPage" handler="OnPageSwitch" />
             <child>
@@ -427,6 +427,23 @@ Window Dodge</property>
                                           </widget>
                                           <packing>
                                             <property name="Position">1</property>
+                                            <property name="AutoSize">True</property>
+                                            <property name="Expand">False</property>
+                                            <property name="Fill">False</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <widget class="Gtk.Button" id="install_theme_btn">
+                                            <property name="MemberName" />
+                                            <property name="CanFocus">True</property>
+                                            <property name="Type">TextAndIcon</property>
+                                            <property name="Icon">stock:gtk-execute Menu</property>
+                                            <property name="Label" translatable="yes">_Install</property>
+                                            <property name="UseUnderline">True</property>
+                                            <signal name="Clicked" handler="OnInstallThemeClicked" />
+                                          </widget>
+                                          <packing>
+                                            <property name="Position">2</property>
                                             <property name="AutoSize">True</property>
                                             <property name="Expand">False</property>
                                             <property name="Fill">False</property>
@@ -546,12 +563,6 @@ Disabled</property>
                             <property name="Fill">False</property>
                           </packing>
                         </child>
-                        <child>
-                          <placeholder />
-                        </child>
-                        <child>
-                          <placeholder />
-                        </child>
                       </widget>
                       <packing>
                         <property name="Position">0</property>
@@ -630,9 +641,6 @@ Disabled</property>
                           </packing>
                         </child>
                         <child>
-                          <placeholder />
-                        </child>
-                        <child>
                           <widget class="Gtk.Button" id="install_btn">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
@@ -644,7 +652,7 @@ Disabled</property>
                           </widget>
                           <packing>
                             <property name="PackType">End</property>
-                            <property name="Position">2</property>
+                            <property name="Position">1</property>
                             <property name="AutoSize">True</property>
                             <property name="Expand">False</property>
                             <property name="Fill">False</property>
@@ -762,25 +770,6 @@ Disabled</property>
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.VBox" id="vbox4">
-                    <property name="MemberName" />
-                    <property name="Spacing">6</property>
-                    <child>
-                      <placeholder />
-                    </child>
-                    <child>
-                      <placeholder />
-                    </child>
-                    <child>
-                      <placeholder />
-                    </child>
-                  </widget>
-                  <packing>
-                    <property name="Position">3</property>
-                    <property name="AutoSize">True</property>
-                  </packing>
-                </child>
-                <child>
                   <widget class="Gtk.Button" id="close_button">
                     <property name="MemberName" />
                     <property name="WidthRequest">100</property>
@@ -793,7 +782,8 @@ Disabled</property>
                     <property name="label">gtk-close</property>
                   </widget>
                   <packing>
-                    <property name="Position">4</property>
+                    <property name="PackType">End</property>
+                    <property name="Position">3</property>
                     <property name="AutoSize">True</property>
                     <property name="Expand">False</property>
                     <property name="Fill">False</property>
@@ -802,7 +792,7 @@ Disabled</property>
               </widget>
               <packing>
                 <property name="Position">0</property>
-                <property name="AutoSize">True</property>
+                <property name="AutoSize">False</property>
               </packing>
             </child>
           </widget>

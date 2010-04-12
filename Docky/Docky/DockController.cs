@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -26,6 +26,9 @@ using Gdk;
 using Gtk;
 
 using Mono.Unix;
+
+using ICSharpCode.SharpZipLib;
+using ICSharpCode.SharpZipLib.Tar;
 
 using Docky.Items;
 using Docky.Interface;
@@ -233,6 +236,35 @@ namespace Docky
 					return themeFolder.GetChild (svgName).Path;
 			}
 			return def + "@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName;
+		}
+		
+		public string InstallTheme (GLib.File file)
+		{
+			if (!file.Exists)
+				return null;
+			
+			if (!DockServices.Paths.UserDataFolder.Exists)
+				DockServices.Paths.UserDataFolder.MakeDirectory (null);
+			GLib.File themeDir = DockServices.Paths.UserDataFolder.GetChild ("themes");
+			if (!themeDir.Exists)
+				themeDir.MakeDirectory (null);
+			
+			Log<DockController>.Info ("Trying to install theme: {0}", file.Path);
+			
+			try {
+				List<string> oldThemes = DockThemes.ToList ();
+				TarArchive ar = TarArchive.CreateInputTarArchive (new System.IO.FileStream (file.Path, System.IO.FileMode.Open));
+				ar.ExtractContents (themeDir.Path);
+				List<string> newThemes = DockThemes.ToList ();
+				newThemes.RemoveAll (f => oldThemes.Contains (f));
+				if (newThemes.Count == 1)
+					return newThemes [0];
+				return null;
+			} catch (Exception e) {
+				Log<DockController>.Error ("Error trying to unpack '{0}': {1}", file.Path, e.Message);
+				Log<DockController>.Debug (e.StackTrace);
+				return null;
+			}
 		}
 		
 		public Dock CreateDock ()

@@ -113,7 +113,7 @@ namespace Docky
 			SkipTaskbarHint = true;
 			
 			int i = 0;
-			foreach (string theme in Docky.Controller.DockThemes) {
+			foreach (string theme in Docky.Controller.DockThemes.Distinct ()) {
 				theme_combo.AppendText (theme);
 				if (Docky.Controller.DockTheme == theme) {
 					theme_combo.Active = i;
@@ -404,6 +404,28 @@ namespace Docky
 					RefreshHelpers ();
 				};
 			}
+		}
+		
+		protected virtual void OnInstallThemeClicked (object sender, System.EventArgs e)
+		{
+			GLib.File file = null;
+			Gtk.FileChooserDialog script_chooser = new Gtk.FileChooserDialog ("Themes", this, FileChooserAction.Open, Gtk.Stock.Cancel, ResponseType.Cancel, Catalog.GetString ("_Select"), ResponseType.Ok);
+			FileFilter filter = new FileFilter ();
+			filter.AddPattern ("*.tar");
+			filter.Name = Catalog.GetString (".tar Archives");
+			script_chooser.AddFilter (filter);
+			
+			if ((ResponseType) script_chooser.Run () == ResponseType.Ok)
+				file = GLib.FileFactory.NewForPath (script_chooser.Filename);
+
+			script_chooser.Destroy ();
+			
+			if (file == null)
+				return;
+			
+			string theme = Docky.Controller.InstallTheme (file);
+			if (theme != null)
+				theme_combo.AppendText (theme);
 		}
 
 		protected virtual void OnShowHelperChanged (object sender, System.EventArgs e)

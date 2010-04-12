@@ -72,9 +72,6 @@ namespace Docky.Services
 		[DllImport("libgobject-2.0")]
 		private static extern void g_object_unref (IntPtr @object);
 		
-		[DllImport("libgobject-2.0")]
-		private static extern IntPtr g_file_info_get_name (IntPtr info);
-		
 		[DllImport("gio-2.0")]
 		private static extern IntPtr g_file_query_info (IntPtr file, string attributes, int flags, IntPtr cancellable, out IntPtr error);
 
