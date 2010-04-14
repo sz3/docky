@@ -7,38 +7,38 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-03-24 19:54+0100\n"
-"PO-Revision-Date: 2010-03-09 13:49+0000\n"
+"POT-Creation-Date: 2010-04-14 07:17+0200\n"
+"PO-Revision-Date: 2010-03-30 19:37+0000\n"
 "Last-Translator: Xhacker Liu <liu.dongyuan@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-03-30 17:44+0000\n"
+"X-Launchpad-Export-Date: 2010-04-14 09:04+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:118
+#: ../Docky/Docky/ConfigurationWindow.cs:133
 msgid "Search Docklets..."
 msgstr "搜索小部件..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:133
+#: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Search Helpers..."
 msgstr "搜索辅助组件 ..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:179
+#: ../Docky/Docky/ConfigurationWindow.cs:209
 msgid "Click on any dock to configure."
 msgstr "点击任一面板进行设置"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:180
+#: ../Docky/Docky/ConfigurationWindow.cs:210
 msgid "Drag any dock to reposition."
 msgstr "用拖拽移动位置。"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:249
+#: ../Docky/Docky/ConfigurationWindow.cs:275
 msgid "Delete the currently selected dock?"
 msgstr "删除当前选中的面板?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:251
+#: ../Docky/Docky/ConfigurationWindow.cs:277
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -46,231 +46,255 @@ msgstr ""
 "如果您选择删除面板，那么该面板的所有配置将\n"
 "会永久消失。"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:266
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:392
+#: ../Docky/Docky/ConfigurationWindow.cs:284
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:456
 msgid "_Delete Dock"
 msgstr "删除面板(_D)"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:383
+#: ../Docky/Docky/ConfigurationWindow.cs:398
+#: ../Docky/Docky/ConfigurationWindow.cs:423
 msgid "_Select"
 msgstr "选择(_S)"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:386
+#: ../Docky/Docky/ConfigurationWindow.cs:401
+#: ../Docky/Docky/ConfigurationWindow.cs:426
 msgid ".tar Archives"
 msgstr ".tar 格式的归档文件"
 
-#: ../Docky/Docky/DockletTile.cs:46
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:220
-msgid "_Add"
-msgstr "添加(_A)"
-
-#: ../Docky/Docky/DockletTile.cs:47
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:203
-msgid "_Remove"
-msgstr "删除(_R)"
-
-#: ../Docky/Docky/DockletTile.cs:48
+#: ../Docky/Docky/DockletTile.cs:50
 msgid "Author"
 msgstr "作者"
 
-#: ../Docky/Docky/DockletTile.cs:55
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:166
-msgid "Settings"
-msgstr "设置"
+#: ../Docky/Docky/DockletTile.cs:88
+msgid "Move this docklet up on the selected dock"
+msgstr ""
 
-#: ../Docky/Docky/Docky.cs:98
+#: ../Docky/Docky/DockletTile.cs:89
+msgid "Move this docklet down on the selected dock"
+msgstr ""
+
+#: ../Docky/Docky/DockletTile.cs:93
+msgid "Move this docklet left on the selected dock"
+msgstr ""
+
+#: ../Docky/Docky/DockletTile.cs:94
+msgid "Move this docklet right on the selected dock"
+msgstr ""
+
+#: ../Docky/Docky/DockletTile.cs:96
+msgid "Configure this docklet"
+msgstr ""
+
+#: ../Docky/Docky/DockletTile.cs:97
+msgid "About this docklet"
+msgstr ""
+
+#: ../Docky/Docky/DockletTile.cs:98
+msgid "Add this docklet to the selected dock"
+msgstr ""
+
+#: ../Docky/Docky/DockletTile.cs:99
+msgid "Remove this docklet from the selected dock"
+msgstr ""
+
+#: ../Docky/Docky/Docky.cs:99
 msgid ""
 "Docky requires compositing to work properly. Please enable compositing and "
 "restart docky."
 msgstr "Docky 需要混合窗口管理器才能工作。请启用混合窗口管理器后重新启动 Docky。"
 
-#: ../Docky/Docky/HelperTile.cs:41
-msgid "_Enable"
-msgstr "启用(_E)"
-
-#: ../Docky/Docky/HelperTile.cs:42
-msgid "_Disable"
-msgstr "禁用(_D)"
-
 #: ../Docky/Docky/HelperTile.cs:43
 msgid "Status"
 msgstr "状态"
 
-#: ../Docky/Docky/HelperTile.cs:61
+#: ../Docky/Docky/HelperTile.cs:60
 msgid "Uninstall"
 msgstr "卸载"
 
-#: ../Docky/Docky/HelperTile.cs:73
+#: ../Docky/Docky/HelperTile.cs:77
+msgid "About this helper"
+msgstr ""
+
+#: ../Docky/Docky/HelperTile.cs:78
+msgid "Enable this helper"
+msgstr ""
+
+#: ../Docky/Docky/HelperTile.cs:79
+msgid "Disable this helper"
+msgstr ""
+
+#: ../Docky/Docky/HelperTile.cs:84
 msgid "Running"
 msgstr "正在运行"
 
-#: ../Docky/Docky/HelperTile.cs:73
+#: ../Docky/Docky/HelperTile.cs:84
 msgid "Stopped"
 msgstr "已停止"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:329
+#: ../Docky/Docky/Interface/DockPreferences.cs:333
 msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
 msgstr "对于拥有多个窗口的启动器，在其下方做出额外的标记。"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:331
+#: ../Docky/Docky/Interface/DockPreferences.cs:335
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr "如果选中此项，没有启动器的窗口将会被显示在这个 dock 上。"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:598
+#: ../Docky/Docky/Interface/DockPreferences.cs:635
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr "<i>从不隐藏；最大化的窗口将不会覆盖在 Dock 上。</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:601
+#: ../Docky/Docky/Interface/DockPreferences.cs:638
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>鼠标移开后自动隐藏。</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:604
+#: ../Docky/Docky/Interface/DockPreferences.cs:641
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>当 dock 阻挡了当前的程序时将会隐藏。</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:607
+#: ../Docky/Docky/Interface/DockPreferences.cs:644
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>当 dock 阻挡了任何窗口时，将会隐藏。</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:371
+#: ../Docky/Docky/Interface/DockWindow.cs:375
 msgid "Drag to reposition"
 msgstr "通过拖动改变位置"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:378
+#: ../Docky/Docky/Interface/DockWindow.cs:382
 msgid "Drop to open"
 msgstr "松开鼠标以开启"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:382
-#: ../Docky/Docky/Interface/DockWindow.cs:396
+#: ../Docky/Docky/Interface/DockWindow.cs:386
+#: ../Docky/Docky/Interface/DockWindow.cs:400
 msgid "Drop to add to dock"
 msgstr "拖动添加到 dock 上"
 
-#: ../Docky/Docky/Items/DockyItem.cs:93
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
+#: ../Docky/Docky/Items/DockyItem.cs:109
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:237
 msgid "_Settings"
 msgstr "设置(_S)"
 
-#: ../Docky/Docky/Items/DockyItem.cs:94
+#: ../Docky/Docky/Items/DockyItem.cs:110
 msgid "_About"
 msgstr "关于(_A)"
 
-#: ../Docky/Docky/Items/DockyItem.cs:95
+#: ../Docky/Docky/Items/DockyItem.cs:111
 msgid "_Quit Docky"
 msgstr "退出 Docky (_Q)"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:84
-msgid "Docky Configuration"
-msgstr "Docky 设置"
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
+msgid "Docky Settings"
+msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:129
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
 msgid "_Start When Computer Starts"
 msgstr "开机时自动启动(_S)"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:145
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
 msgstr "主题(_T)："
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:169
-msgid "<b>General Options</b>"
-msgstr "<b>常规选项</b>"
-
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:189
-msgid "<b>Dock Configuration</b>"
-msgstr "<b>Dock 设置</b>"
-
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:203
-msgid "Docks"
-msgstr "Docks"
-
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:224
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:276
-msgid "All"
-msgstr "全部"
-
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:225
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:277
-msgid "Enabled"
-msgstr "已启用"
-
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:226
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:278
-msgid "Disabled"
-msgstr "已禁用"
-
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:255
-msgid "Docklets"
-msgstr "Docklets"
-
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:302
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:343
 msgid "_Install"
 msgstr "安装(_I)"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:334
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
+msgid "<b>General Options</b>"
+msgstr "<b>常规选项</b>"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
+msgid "<b>Dock Configuration</b>"
+msgstr "<b>Dock 设置</b>"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
+msgid "Docks"
+msgstr "Docks"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
+msgid "All"
+msgstr "全部"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
+msgid "Enabled"
+msgstr "已启用"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
+msgid "Disabled"
+msgstr "已禁用"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
+msgid "Docklets"
+msgstr "Docklets"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:374
 msgid "Helpers"
 msgstr "辅助组件"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:365
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:429
 msgid "_New Dock"
 msgstr "新建 Dock(_N)"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:52
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "None"
 msgstr "无"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:53
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Autohide"
 msgstr "自动隐藏"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:54
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:62
 msgid "Intellihide"
 msgstr "智能隐藏"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:55
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:63
 msgid "Window Dodge"
 msgstr "窗口闪避"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:69
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
 msgid "_Fade On Hide"
 msgstr "淡出式隐藏(_F)"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:113
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:121
 msgid "_Icon Size:"
 msgstr "图标大小(_I)："
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:126
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:134
 msgid "_Hiding:"
 msgstr "隐藏(_H)："
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:136
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:144
 msgid "Indicat_e Multiple Windows"
 msgstr "表示多重窗口(_E)"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:150
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:158
 msgid "_Panel Mode"
 msgstr "面板模式(_P)"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:172
 msgid "3D Back_ground"
 msgstr "三维背景(_G)"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:186
 msgid "_Manage Windows Without Launcher"
 msgstr "管理没有启动器的窗口(_M)"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:193
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:201
 msgid "_Zoom:"
 msgstr "缩放(_Z)："
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:147
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:149
 msgid "New _Window"
 msgstr "新建窗口(_W)"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:149
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:151
 #: ../StandardPlugins/Mounter/src/MountItem.cs:97
 msgid "_Open"
 msgstr "打开(_O)"
@@ -283,34 +307,34 @@ msgstr "重置颜色"
 msgid "_Pin to Dock"
 msgstr "锁定到 Dock (_P)"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:186
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:182
 msgid "Not enough free space on destination."
 msgstr "目标处没有足够的空余空间。"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:198
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:200
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:220
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:196
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:216
 msgid "Complete"
 msgstr "完成"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:206
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:202
 msgid "Moving"
 msgstr "正在移动"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:212
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:208
 msgid "Copying"
 msgstr "正在复制"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:225
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:226
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:221
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:222
 msgid "Error performing drop action"
 msgstr "执行拖放动作出错"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:248
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:244
 msgid "Open"
 msgstr "打开"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:249
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:245
 msgid "Open Containing Folder"
 msgstr "打开其所在的文件夹"
 
@@ -424,7 +448,7 @@ msgstr "选择主题(_T)"
 msgid "Themes"
 msgstr "主题"
 
-#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
+#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:62
 msgid "Theme"
 msgstr "主题"
 
@@ -432,46 +456,47 @@ msgstr "主题"
 msgid "Show Desktop"
 msgstr ""
 
-#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
+#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
 msgid "_Add Label"
 msgstr "添加标签(_A)"
 
-#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:114
+#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:113
 msgid "Check e_very:"
 msgstr "全部检查(_v)"
 
-#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:124
-#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:187
+#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:123
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:186
 msgid "minutes"
 msgstr "分钟"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:189
-msgid "Username or Password not set"
-msgstr "用户名或密码未设置"
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:200
+msgid "Click to set username and password."
+msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:240
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:254
 msgid "(no subject)"
 msgstr "(无主题)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:258
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:272
 #, csharp-format
 msgid "From: {0}"
 msgstr "来自:{0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:269
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:273
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:283
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 msgid "Feed Error"
 msgstr "Feed 错误"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:278
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:292
 msgid "Invalid Username"
 msgstr "用户名无效"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:282
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:296
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:300
 msgid "Network Error"
 msgstr "网络错误"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:287
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:305
 msgid "General Error"
 msgstr "一般错误"
 
@@ -493,19 +518,19 @@ msgstr[0] "{0} 封未读邮件"
 msgid "Checking mail..."
 msgstr "正在检查邮件 ..."
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:188
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:196
 msgid "_View "
 msgstr "查看(_V) "
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:193
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "_Compose Mail"
 msgstr "写邮件(_C)"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:208
 msgid "New Mail"
 msgstr "新邮件"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:226
 msgid "Check _Mail"
 msgstr "检查邮件(_M)"
 
@@ -551,11 +576,11 @@ msgstr "连接已断开"
 msgid "Connected: {0}"
 msgstr "已连接: {0}"
 
-#: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:48
+#: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:47
 msgid "My _Stations"
 msgstr "我的电台(_S)"
 
-#: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:79
+#: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:78
 msgid "S_earch"
 msgstr "搜索(_E)"
 
@@ -592,15 +617,19 @@ msgstr "捐赠"
 msgid "Live Streams"
 msgstr "实时流媒体"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:76
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:166
+msgid "Settings"
+msgstr "设置"
+
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:67
 msgid "Clear the Recent Documents list?"
 msgstr "清除文档历史？"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:78
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:69
 msgid "Clear Recent Documents"
 msgstr "清除最近文档历史"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:80
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:71
 msgid ""
 "If you clear the Recent Documents list, you clear the following:\n"
 "• All items from the Places → Recent Documents menu item.\n"
@@ -611,56 +640,56 @@ msgstr ""
 "• 位置 -> 最近文档菜单项中的全部项目。\n"
 "• 全部应用程序的最近文档列表中的全部项目。"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:92
 msgid "_Clear Recent Documents..."
 msgstr "清除最近的文档列表(_C)..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:134
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:149
 msgid "Lock Screen"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:141
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
 msgid "Log Out..."
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:143
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:154
 msgid "Log Out"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:144
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:155
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:150
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:160
 msgid "Suspend"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:165
 msgid "Hibernate"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:167
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:171
 msgid "Restart..."
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:169
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:172
 msgid "Restart"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:170
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:173
 msgid "Are you sure you want to close all programs and restart the computer?"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
 msgid "Shut Down..."
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
 msgid "Shut Down"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:180
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
 msgstr ""
@@ -680,7 +709,7 @@ msgid "_Open Trash"
 msgstr "打开回收站(_O)"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:162
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:199
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:192
 msgid "Empty _Trash"
 msgstr "清空回收站(_T)"
 
@@ -697,33 +726,33 @@ msgstr ""
 "如果您选择清空回收站，所有的项目都将会被永久的删除。\n"
 "请注意您也可以单独的删除其中的特定项目。"
 
-#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:66
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:65
 msgid "_Weather Provider:"
 msgstr "天气信息提供者(_W)："
 
-#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:106
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:105
 msgid "My _Locations"
 msgstr "我的位置(_L) :"
 
-#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:137
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:136
 msgid "_Search"
 msgstr "查找(_S)"
 
-#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:177
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:176
 msgid "Automatically Update _Every"
 msgstr "自动更新间隔(_E)"
 
-#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:221
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:220
 msgid "Use _Metric Units"
 msgstr "使用公制单位(_M)"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:84
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:87
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:92
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:95
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:98
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:103
 msgid "Invalid Weather Location"
 msgstr "无效的位置"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:90
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:101
 msgid "Network Error: "
 msgstr "网络错误： "
 
@@ -759,20 +788,23 @@ msgstr "无搜索结果。"
 msgid "Weather Configuration"
 msgstr "天气配置"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
+msgid "Click to add a location."
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
 msgid "Fetching data..."
 msgstr "正在更新数据..."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:217
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:223
 msgid "Radar _Map"
 msgstr "雷达图(_M)"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:222
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:228
 msgid "Forecasts"
 msgstr "预报"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:238
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:245
 msgid "Check _Weather"
 msgstr "检查天气(_W)"
 
@@ -784,33 +816,50 @@ msgstr "今天(_T)"
 msgid "T_omorrow"
 msgstr "明天(_O)"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:311
-msgid "Humidity"
-msgstr "湿度"
-
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:313
-msgid "Temp"
-msgstr "温度"
-
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:315
-msgid "Feels Like"
-msgstr "体感温度"
-
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:317
-msgid "Wind"
-msgstr "风速"
-
+#. draw humidity
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:318
-msgid "Direction"
-msgstr "风向"
+#, csharp-format
+msgid "{0} humidity"
+msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:320
-msgid "Sunrise"
-msgstr "日出"
+#~ msgid "Docky Configuration"
+#~ msgstr "Docky 设置"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:321
-msgid "Sunset"
-msgstr "日落"
+#~ msgid "_Add"
+#~ msgstr "添加(_A)"
+
+#~ msgid "Username or Password not set"
+#~ msgstr "用户名或密码未设置"
+
+#~ msgid "Temp"
+#~ msgstr "温度"
+
+#~ msgid "Humidity"
+#~ msgstr "湿度"
+
+#~ msgid "Wind"
+#~ msgstr "风速"
+
+#~ msgid "Sunrise"
+#~ msgstr "日出"
+
+#~ msgid "Sunset"
+#~ msgstr "日落"
+
+#~ msgid "Direction"
+#~ msgstr "风向"
+
+#~ msgid "_Disable"
+#~ msgstr "禁用(_D)"
+
+#~ msgid "_Enable"
+#~ msgstr "启用(_E)"
+
+#~ msgid "Feels Like"
+#~ msgstr "体感温度"
+
+#~ msgid "_Remove"
+#~ msgstr "删除(_R)"
 
 #~ msgid "<b>Active Docklets</b>"
 #~ msgstr "<b>已激活的停靠组件</b>"

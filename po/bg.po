@@ -7,38 +7,38 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-03-24 19:54+0100\n"
-"PO-Revision-Date: 2010-03-30 03:25+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-04-14 07:17+0200\n"
+"PO-Revision-Date: 2010-03-30 19:32+0000\n"
+"Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-03-30 17:44+0000\n"
+"X-Launchpad-Export-Date: 2010-04-14 09:04+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:118
+#: ../Docky/Docky/ConfigurationWindow.cs:133
 msgid "Search Docklets..."
 msgstr "Търсене на доклети..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:133
+#: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Search Helpers..."
 msgstr "Търсене на помощници..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:179
+#: ../Docky/Docky/ConfigurationWindow.cs:209
 msgid "Click on any dock to configure."
 msgstr "Шракнете върху някой док за конфигуриране."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:180
+#: ../Docky/Docky/ConfigurationWindow.cs:210
 msgid "Drag any dock to reposition."
 msgstr "Влачете дока за да го позиционирате."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:249
+#: ../Docky/Docky/ConfigurationWindow.cs:275
 msgid "Delete the currently selected dock?"
 msgstr "Изтриване на текущо изпрания док?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:251
+#: ../Docky/Docky/ConfigurationWindow.cs:277
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -46,232 +46,262 @@ msgstr ""
 "Ако изберете да изтриете дока, всички настройки\n"
 "за него ще бъдат завинаги изгубени."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:266
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:392
+#: ../Docky/Docky/ConfigurationWindow.cs:284
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:456
 msgid "_Delete Dock"
 msgstr "_Изтриване"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:383
+#: ../Docky/Docky/ConfigurationWindow.cs:398
+#: ../Docky/Docky/ConfigurationWindow.cs:423
 msgid "_Select"
 msgstr "_Избор"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:386
+#: ../Docky/Docky/ConfigurationWindow.cs:401
+#: ../Docky/Docky/ConfigurationWindow.cs:426
 msgid ".tar Archives"
 msgstr ".tar архиви"
 
-#: ../Docky/Docky/DockletTile.cs:46
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:220
-msgid "_Add"
-msgstr "_Добавяне"
-
-#: ../Docky/Docky/DockletTile.cs:47
-#: ../Docky.Widgets/Docky.Widgets/AbstractTileObject.cs:203
-msgid "_Remove"
-msgstr "_Премахване"
-
-#: ../Docky/Docky/DockletTile.cs:48
+#: ../Docky/Docky/DockletTile.cs:50
 msgid "Author"
 msgstr "Автор"
 
-#: ../Docky/Docky/DockletTile.cs:55
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:166
-msgid "Settings"
-msgstr "Настройки"
+#: ../Docky/Docky/DockletTile.cs:88
+msgid "Move this docklet up on the selected dock"
+msgstr ""
 
-#: ../Docky/Docky/Docky.cs:98
+#: ../Docky/Docky/DockletTile.cs:89
+msgid "Move this docklet down on the selected dock"
+msgstr ""
+
+#: ../Docky/Docky/DockletTile.cs:93
+msgid "Move this docklet left on the selected dock"
+msgstr ""
+
+#: ../Docky/Docky/DockletTile.cs:94
+msgid "Move this docklet right on the selected dock"
+msgstr ""
+
+#: ../Docky/Docky/DockletTile.cs:96
+msgid "Configure this docklet"
+msgstr ""
+
+#: ../Docky/Docky/DockletTile.cs:97
+msgid "About this docklet"
+msgstr ""
+
+#: ../Docky/Docky/DockletTile.cs:98
+msgid "Add this docklet to the selected dock"
+msgstr ""
+
+#: ../Docky/Docky/DockletTile.cs:99
+msgid "Remove this docklet from the selected dock"
+msgstr ""
+
+#: ../Docky/Docky/Docky.cs:99
 msgid ""
 "Docky requires compositing to work properly. Please enable compositing and "
 "restart docky."
 msgstr ""
-
-#: ../Docky/Docky/HelperTile.cs:41
-msgid "_Enable"
-msgstr "_Разрешаване"
-
-#: ../Docky/Docky/HelperTile.cs:42
-msgid "_Disable"
-msgstr "_Забраняване"
+"Доки изисква композитирането да работи. Моля разрешете композитирането и "
+"рестартирайте Доки."
 
 #: ../Docky/Docky/HelperTile.cs:43
 msgid "Status"
 msgstr "Състояние"
 
-#: ../Docky/Docky/HelperTile.cs:61
+#: ../Docky/Docky/HelperTile.cs:60
 msgid "Uninstall"
 msgstr "Деинсталиране"
 
-#: ../Docky/Docky/HelperTile.cs:73
+#: ../Docky/Docky/HelperTile.cs:77
+msgid "About this helper"
+msgstr ""
+
+#: ../Docky/Docky/HelperTile.cs:78
+msgid "Enable this helper"
+msgstr ""
+
+#: ../Docky/Docky/HelperTile.cs:79
+msgid "Disable this helper"
+msgstr ""
+
+#: ../Docky/Docky/HelperTile.cs:84
 msgid "Running"
 msgstr "Изпълнява се"
 
-#: ../Docky/Docky/HelperTile.cs:73
+#: ../Docky/Docky/HelperTile.cs:84
 msgid "Stopped"
 msgstr "Спрян"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:329
+#: ../Docky/Docky/Interface/DockPreferences.cs:333
 msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
 msgstr ""
+"Предизвиква стартерите на прогками, които в момента управляват повече от "
+"един прозорец да имат допълнителен индикатор под него."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:331
+#: ../Docky/Docky/Interface/DockPreferences.cs:335
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
+"Когато е настроено, прозорци, които все още нямат стартер на програма на "
+"дока ще бъдат добавени към него."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:598
+#: ../Docky/Docky/Interface/DockPreferences.cs:635
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 "<i>Не се скрива никога; максимизираните прозорци не препокриват дока.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:601
+#: ../Docky/Docky/Interface/DockPreferences.cs:638
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Скрива се когато мишката не е върху него.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:604
+#: ../Docky/Docky/Interface/DockPreferences.cs:641
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Скрива се когато дока пречи на активно приложение.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:607
+#: ../Docky/Docky/Interface/DockPreferences.cs:644
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Скрива се, когато дока пречи на някой прозорец.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:371
+#: ../Docky/Docky/Interface/DockWindow.cs:375
 msgid "Drag to reposition"
 msgstr "Влачете за позициониране"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:378
-msgid "Drop to open"
-msgstr ""
-
 #: ../Docky/Docky/Interface/DockWindow.cs:382
-#: ../Docky/Docky/Interface/DockWindow.cs:396
-msgid "Drop to add to dock"
-msgstr ""
+msgid "Drop to open"
+msgstr "Отпуснете за отваряне"
 
-#: ../Docky/Docky/Items/DockyItem.cs:93
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:209
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
+#: ../Docky/Docky/Interface/DockWindow.cs:386
+#: ../Docky/Docky/Interface/DockWindow.cs:400
+msgid "Drop to add to dock"
+msgstr "Отпуснете за да добавите към док"
+
+#: ../Docky/Docky/Items/DockyItem.cs:109
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:237
 msgid "_Settings"
 msgstr "_Настройки"
 
-#: ../Docky/Docky/Items/DockyItem.cs:94
+#: ../Docky/Docky/Items/DockyItem.cs:110
 msgid "_About"
 msgstr "_За програмата"
 
-#: ../Docky/Docky/Items/DockyItem.cs:95
+#: ../Docky/Docky/Items/DockyItem.cs:111
 msgid "_Quit Docky"
 msgstr "_Затвори Доки"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:84
-msgid "Docky Configuration"
-msgstr "Конфигурация на Доки"
-
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:129
-msgid "_Start When Computer Starts"
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
+msgid "Docky Settings"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:145
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
+msgid "_Start When Computer Starts"
+msgstr "_Стартиране когато компютъра стартира"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
 msgstr "_Тема:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:169
-msgid "<b>General Options</b>"
-msgstr "<b>Общи настройки</b>"
-
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:189
-msgid "<b>Dock Configuration</b>"
-msgstr "<b>Конфигурация на док</b>"
-
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:203
-msgid "Docks"
-msgstr "Докове"
-
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:224
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:276
-msgid "All"
-msgstr "Всички"
-
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:225
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:277
-msgid "Enabled"
-msgstr "Разрешен"
-
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:226
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:278
-msgid "Disabled"
-msgstr "Забранен"
-
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:255
-msgid "Docklets"
-msgstr "Доклети"
-
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:302
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:343
 msgid "_Install"
 msgstr "_Инсталиране"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:334
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
+msgid "<b>General Options</b>"
+msgstr "<b>Общи настройки</b>"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
+msgid "<b>Dock Configuration</b>"
+msgstr "<b>Конфигурация на док</b>"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
+msgid "Docks"
+msgstr "Докове"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
+msgid "All"
+msgstr "Всички"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
+msgid "Enabled"
+msgstr "Разрешен"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
+msgid "Disabled"
+msgstr "Забранен"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
+msgid "Docklets"
+msgstr "Доклети"
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:374
 msgid "Helpers"
 msgstr "Помощници"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:365
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:429
 msgid "_New Dock"
 msgstr "_Нов док"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:52
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "None"
 msgstr "Никакво"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:53
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Autohide"
 msgstr "Автоматично скриване"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:54
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:62
 msgid "Intellihide"
 msgstr "Интелигентно скриване"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:55
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:63
 msgid "Window Dodge"
-msgstr ""
+msgstr "Скриване на прозорец"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:69
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
 msgid "_Fade On Hide"
 msgstr "_Избледняване при скриване"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:113
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:121
 msgid "_Icon Size:"
 msgstr "Размер на _иконите:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:126
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:134
 msgid "_Hiding:"
 msgstr "_Скриване:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:136
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:144
 msgid "Indicat_e Multiple Windows"
-msgstr ""
+msgstr "Показва_не на много прозорци"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:150
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:158
 msgid "_Panel Mode"
 msgstr "_Панелен режим"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:164
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:172
 msgid "3D Back_ground"
 msgstr "3D _Фон"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:178
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:186
 msgid "_Manage Windows Without Launcher"
 msgstr "_Управление на прозорци без стартираща програма"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:193
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:201
 msgid "_Zoom:"
 msgstr "_Увеличение:"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:147
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:149
 msgid "New _Window"
 msgstr "Нов _прозорец"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:149
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:151
 #: ../StandardPlugins/Mounter/src/MountItem.cs:97
 msgid "_Open"
 msgstr "_Отваряне"
@@ -282,36 +312,36 @@ msgstr "Промяна на цвета"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:356
 msgid "_Pin to Dock"
-msgstr ""
+msgstr "_Закрепване за док"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:186
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:182
 msgid "Not enough free space on destination."
 msgstr "Недостатъчно свободно място на дестинацията."
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:198
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:200
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:220
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:196
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:216
 msgid "Complete"
 msgstr "Завършен"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:206
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:202
 msgid "Moving"
 msgstr "Преместване"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:212
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:208
 msgid "Copying"
 msgstr "Копиране"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:225
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:226
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:221
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:222
 msgid "Error performing drop action"
-msgstr ""
+msgstr "Грешка при осъществяване на пускащото действие"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:248
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:244
 msgid "Open"
 msgstr "Отваряне"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:249
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:245
 msgid "Open Containing Folder"
 msgstr "Отваряне на съдържащата папка"
 
@@ -427,7 +457,7 @@ msgstr "Избиране на _Тема"
 msgid "Themes"
 msgstr "Теми"
 
-#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
+#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:62
 msgid "Theme"
 msgstr "Тема"
 
@@ -435,46 +465,47 @@ msgstr "Тема"
 msgid "Show Desktop"
 msgstr ""
 
-#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:75
+#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
 msgid "_Add Label"
 msgstr "_Добавяне на етикет"
 
-#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:114
+#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:113
 msgid "Check e_very:"
 msgstr "Проверка на вс_еки"
 
-#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:124
-#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:187
+#: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:123
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:186
 msgid "minutes"
 msgstr "минути"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:189
-msgid "Username or Password not set"
-msgstr "Потребителско име и парола не са зададени"
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:200
+msgid "Click to set username and password."
+msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:240
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:254
 msgid "(no subject)"
 msgstr "(няма тема)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:258
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:272
 #, csharp-format
 msgid "From: {0}"
 msgstr "От: {0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:269
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:273
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:283
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 msgid "Feed Error"
-msgstr ""
+msgstr "Грешка на фийда"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:278
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:292
 msgid "Invalid Username"
 msgstr "Невалидно потребителско име"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:282
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:296
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:300
 msgid "Network Error"
 msgstr "Мрежова грешка"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:287
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:305
 msgid "General Error"
 msgstr "Обща грешка"
 
@@ -497,19 +528,19 @@ msgstr[1] "{0} непрочетени съобщения"
 msgid "Checking mail..."
 msgstr "Проверка на поща..."
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:188
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:196
 msgid "_View "
 msgstr "_Изглед "
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:193
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "_Compose Mail"
 msgstr "_Нов мейл"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:208
 msgid "New Mail"
 msgstr "Ново писмо"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:226
 msgid "Check _Mail"
 msgstr "Проверка на _поща"
 
@@ -555,11 +586,11 @@ msgstr "Разкачен"
 msgid "Connected: {0}"
 msgstr "Свързани: {0}"
 
-#: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:48
+#: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:47
 msgid "My _Stations"
-msgstr ""
+msgstr "Мои _станции"
 
-#: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:79
+#: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:78
 msgid "S_earch"
 msgstr "_Търсене"
 
@@ -594,17 +625,21 @@ msgstr "Направи дарение"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:128
 msgid "Live Streams"
-msgstr ""
+msgstr "Потоци на живи предавания"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:76
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:166
+msgid "Settings"
+msgstr "Настройки"
+
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:67
 msgid "Clear the Recent Documents list?"
 msgstr "Да бъде ли изчистен списъка със скоро отваряните документи?"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:78
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:69
 msgid "Clear Recent Documents"
 msgstr "Изчистване на \"скорошни документи\""
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:80
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:71
 msgid ""
 "If you clear the Recent Documents list, you clear the following:\n"
 "• All items from the Places → Recent Documents menu item.\n"
@@ -615,77 +650,77 @@ msgstr ""
 "• Всички обекти в менюто „Места“ → „Скоро отваряни документи“.\n"
 "• Всички записи за последните отваряни документи в програмите."
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:92
 msgid "_Clear Recent Documents..."
 msgstr "_Изчистване на скоро отваряни документи..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:134
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:149
 msgid "Lock Screen"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:141
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
 msgid "Log Out..."
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:143
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:154
 msgid "Log Out"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:144
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:155
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:150
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:160
 msgid "Suspend"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:165
 msgid "Hibernate"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:167
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:171
 msgid "Restart..."
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:169
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:172
 msgid "Restart"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:170
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:173
 msgid "Are you sure you want to close all programs and restart the computer?"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
 msgid "Shut Down..."
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
 msgid "Shut Down"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:180
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
 msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
 msgid "No items in Trash"
-msgstr ""
+msgstr "Няма обекти в Кошче"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:75
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} обект в Кошче"
+msgstr[1] "{0} обекти в Кошче"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:160
 msgid "_Open Trash"
 msgstr "_Отваряне на кошче"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:162
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:199
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:192
 msgid "Empty _Trash"
 msgstr "Изпразване на _кошче"
 
@@ -703,33 +738,33 @@ msgstr ""
 "ще бъдат изгубени. Имайте в предвид, че\n"
 "също така можете да ги изтриете поотделно."
 
-#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:66
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:65
 msgid "_Weather Provider:"
 msgstr "_Доставчик на информация за време:"
 
-#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:106
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:105
 msgid "My _Locations"
 msgstr "Мои _Локации"
 
-#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:137
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:136
 msgid "_Search"
 msgstr "_Търсене"
 
-#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:177
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:176
 msgid "Automatically Update _Every"
 msgstr "Автомотично обновяване на _всеки"
 
-#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:221
+#: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:220
 msgid "Use _Metric Units"
 msgstr "Да се използват _метрични мерни единици"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:84
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:87
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:92
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:95
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:98
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:103
 msgid "Invalid Weather Location"
 msgstr "Невалидна локация за метеорологична информация"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:90
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:101
 msgid "Network Error: "
 msgstr "Мрежова грешка: "
 
@@ -769,57 +804,77 @@ msgstr "Няма намерени резултати."
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
+msgstr "Настройки за времето"
+
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
+msgid "Click to add a location."
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
 msgid "Fetching data..."
-msgstr ""
+msgstr "Получаване на данни..."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:217
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:223
 msgid "Radar _Map"
-msgstr ""
+msgstr "Радарна _Карта"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:222
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:228
 msgid "Forecasts"
-msgstr ""
+msgstr "Прогнози"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:238
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:245
 msgid "Check _Weather"
-msgstr ""
+msgstr "Проверка на _Времето"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
 msgid "_Today"
-msgstr ""
+msgstr "_Днес"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
 msgid "T_omorrow"
-msgstr ""
+msgstr "У_тре"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:311
-msgid "Humidity"
-msgstr ""
-
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:313
-msgid "Temp"
-msgstr ""
-
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:315
-msgid "Feels Like"
-msgstr ""
-
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:317
-msgid "Wind"
-msgstr ""
-
+#. draw humidity
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:318
-msgid "Direction"
+#, csharp-format
+msgid "{0} humidity"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:320
-msgid "Sunrise"
-msgstr ""
+#~ msgid "_Add"
+#~ msgstr "_Добавяне"
 
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:321
-msgid "Sunset"
-msgstr ""
+#~ msgid "_Remove"
+#~ msgstr "_Премахване"
+
+#~ msgid "_Disable"
+#~ msgstr "_Забраняване"
+
+#~ msgid "_Enable"
+#~ msgstr "_Разрешаване"
+
+#~ msgid "Docky Configuration"
+#~ msgstr "Конфигурация на Доки"
+
+#~ msgid "Username or Password not set"
+#~ msgstr "Потребителско име и парола не са зададени"
+
+#~ msgid "Sunrise"
+#~ msgstr "Изгрев"
+
+#~ msgid "Wind"
+#~ msgstr "Вятър"
+
+#~ msgid "Temp"
+#~ msgstr "Температура"
+
+#~ msgid "Feels Like"
+#~ msgstr "Усеща се като"
+
+#~ msgid "Humidity"
+#~ msgstr "Влажност"
+
+#~ msgid "Sunset"
+#~ msgstr "Залез"
+
+#~ msgid "Direction"
+#~ msgstr "Посока"
