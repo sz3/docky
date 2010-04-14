@@ -127,105 +127,96 @@ namespace Docky
 				"Daniel Foré <bunny@go-docky.com>",
 			};
 			about.TranslatorCredits = 
+				"Asturian\n" +
+				" Xuacu Saturio\n" +
+
 				"Basque\n" +
-				" Ibai Oihanguren (https://launchpad.net/~ibai-oihanguren)\n" +
+				" Ibai Oihanguren\n" +
 				
 				"Bengali\n" +
-				" Scio (https://launchpad.net/~scio)\n" +
+				" Scio\n" +
 
 				"Brazilian Portuguese\n" +
-				" André Gondim (https://launchpad.net/~andregondim)\n" +
-				" Fabio S Monteiro (https://launchpad.net/~fabiomonteiro)\n" +
-				" Glauco Vinicius (https://launchpad.net/~glaucovinicius)\n" +
-				" Lindeval (https://launchpad.net/~lindeval)\n" +
-				" Thiago Bellini (https://launchpad.net/~roxthiaguin)\n" +
-				" Victor Mello (https://launchpad.net/~victormmello)\n" +
+				" André Gondim, Fabio S Monteiro, Flávio Etrusco, Glauco Vinicius\n" +
+				" Lindeval, Thiago Bellini, Victor Mello\n" +
+
+				"Bulgarian\n" +
+				" Boyan Sotirov, Krasimir Chonov\n" +
 
 				"Catalan\n" +
-				" BadChoice (https://launchpad.net/~guitarboy000)\n" +
+				" BadChoice, Siegfried Gevatter\n" +
 
 				"Chinese (Simplified)\n" +
-				" Chen Tao (https://launchpad.net/~pro711)\n" +
-				" G.S.Alex (https://launchpad.net/~g.s.alex)\n" +
-				" fighterlyt (https://launchpad.net/~fighter-lyt)\n" +
-				" skatiger (https://launchpad.net/~skatiger)\n" +
-				" 冯超 (https://launchpad.net/~rainofchaos)\n" +
+				" Chen Tao, G.S.Alex, Xhacker Liu, fighterlyt, lhquark, skatiger, 冯超\n" +
 
 				"Croatian\n" +
-				" zekopeko (https://launchpad.net/~zekopeko)\n" +
+				" Saša Teković, zekopeko\n" +
 
 				"English (United Kingdom)\n" +
-				" Daniel Bell (https://launchpad.net/~danielbell)\n" +
-				" Joel Auterson (https://launchpad.net/~joel-auterson)\n" +
-				" SteVe Cook (https://launchpad.net/~yorvyk)\n" +
+				" Alex Denvir, Daniel Bell, David Wood, Joel Auterson, SteVe Cook\n" +
+
+				"Finnish\n" +
+				" Jiri Grönroos\n" +
 
 				"French\n" +
-				" Hugo M. (https://launchpad.net/~spirit-power)\n" +
-				" Kévin Gomez (https://launchpad.net/~geek63)\n" +
-				" Pierre Slamich (https://launchpad.net/~pierre-slamich)\n" +
-				" Simon Richard (https://launchpad.net/~saymonz)\n" +
-				" alienworkshop (https://launchpad.net/~alienworkshop)\n" +
-				" maxime Cheval (https://launchpad.net/~arkahys)\n" +
+				" Hugo M., Kévin Gomez, Pierre Slamich\n" +
+				" Simon Richard, alienworkshop, maxime Cheval\n" +
 
 				"Galician\n" +
-				" Indalecio Freiría Santos (https://launchpad.net/~ifreiria)\n" +
+				" Francisco Diéguez, Indalecio Freiría Santos, Miguel Anxo Bouzada, NaNo\n" +
 
 				"German\n" +
-				" Mark Parigger (https://launchpad.net/~mark-climber)\n" +
-				" Martin Lettner (https://launchpad.net/~m.lettner)\n" +
-				" augias (https://launchpad.net/~augias)\n" +
-				" fiction (https://launchpad.net/~moradin-web)\n" +
-				" pheder (https://launchpad.net/~pheder)\n" +
-				" tai (https://launchpad.net/~agent00tai)\n" +
+				" Cephinux, Gabriel Shahzad, Jan-Christoph Borchardt, Mark Parigger\n" + 
+				" Martin Lettner, augias, fiction, pheder, tai\n" +
 
 				"Hebrew\n" +
-				" IsraeliHawk (https://launchpad.net/~uri.shabtay)\n" +
+				" Uri Shabtay\n" +
 
 				"Hindi\n" +
-				" Bilal Akhtar (https://launchpad.net/~bilalakhtar96)\n" +
+				" Bilal Akhtar\n" +
 
 				"Hungarian\n" +
-				" Bognár András (https://launchpad.net/~bognarandras)\n" +
-				" Gabor Kelemen (https://launchpad.net/~kelemeng)\n" +
-				" NewPlayer (https://launchpad.net/~newplayer)\n" +
+				" Bognár András, Gabor Kelemen, Jezsoviczki Ádám, NewPlayer\n" +
 
 				"Icelandic\n" +
-				" Baldur (https://launchpad.net/~baldurpet)\n" +
+				" Baldur, Sveinn í Felli\n" +
 
 				"Indonesian\n" +
-				" Fakhrul Rijal (https://launchpad.net/~frijal)\n" +
+				" Andika Triwidada, Fakhrul Rijal\n" +
 					
 				"Italian\n" +
-				" Blaster (https://launchpad.net/~dottorblaster)\n" +
-				" MastroPino (https://launchpad.net/~mastropino)\n" +
-				" Quizzlo (https://launchpad.net/~marcopaolone)\n" +
+				" Andrea Amoroso, Blaster, Ivan, MastroPino, Michele, Milo Casagrande, Quizzlo\n" +
 
 				"Japanese\n" +
-				" kawaji (https://launchpad.net/~jiro-kawada)\n" +
-
+				" kawaji\n" +
+					
 				"Korean\n" +
-				" Cedna (https://launchpad.net/~cedna)\n" +
-
+				" Bugbear5, Cedna\n" +
+					
 				"Polish\n" +
-				" 313 (https://launchpad.net/~tenotoja)\n" +
-				" Adrian Grzemski (https://launchpad.net/~adrian-grzemski)\n" +
-				" EuGene (https://launchpad.net/~eugenewolfe)\n" +
+				" 313, Adrian Grzemski, EuGene, Rafał Szalecki, Stanisław Gackowski, bumper, emol007\n" +
+
+				"Romanian\n" +
+				" Adi Roiban, George Dumitrescu\n" +
 
 				"Russian\n" +
-				" Sergey Sedov (https://launchpad.net/~serg-sedov)\n" +
+				" Alexander Semyonov, Alexey Nedilko, Andrey Sitnik, Artem Yakimenko\n" +
+				" Dmitriy Bobylev, Ivan, Phenomen, Sergey Demurin, Sergey Sedov\n" +
+				" SochiX, Vladimir, legin, sX11\n" +
 
 				"Spanish\n" +
-				" Sebastián Porta (https://launchpad.net/~sebastianporta)\n" +
+				" Alejandro Navarro, David, DiegoJ, Edgardo Fredz, FAMM, Fuerteventura\n" +
+				" Gus, José A. Fuentes Santiago, Julián Alarcón, Malq, Martín V.\n" +
+				" Omar Campagne, Ricardo Pérez López, Sebastián Porta, alvin23, augias, elXATU\n" +
 
 				"Swedish\n" +
-				" Daniel Nylander (https://launchpad.net/~yeager)\n" +
-
-				"Turkish\n" +
-				" Yalçın Can (https://launchpad.net/~echza)\n" +
-
-				"Ukrainian\n" +
-				" naker.ua (https://launchpad.net/~naker-ua)\n";
+				" Daniel Nylander, Rovanion, riiga\n" +
 			
+				"Turkish\n" +
+				" Yalçın Can, Yiğit Ateş\n" +
+			
+				"Ukrainian\n" +
+				" naker.ua\n";
 			
 			about.ShowAll ();
 			
