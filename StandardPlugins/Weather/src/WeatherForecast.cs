@@ -29,12 +29,32 @@ namespace WeatherDocklet
 		/// <summary>
 		/// The high value for the forecast day.
 		/// </summary>
-		public int high;
+		private int thigh;
+		public int high { 
+			get {
+				if (!AbstractWeatherSource.UseMetric)
+					return thigh;
+				return AbstractWeatherSource.ConvertFtoC (thigh);
+			}
+			set {
+				thigh = value;
+			}
+		}	
 		
 		/// <summary>
 		/// The low value for the forecast day.
 		/// </summary>
-		public int low;
+		private int tlow;
+		public int low { 
+			get {
+				if (!AbstractWeatherSource.UseMetric)
+					return tlow;
+				return AbstractWeatherSource.ConvertFtoC (tlow);
+			}
+			set {
+				tlow = value;
+			}
+		}
 		
 		/// <summary>
 		/// The day of the week (3 char string, ex: Mon, Tue, etc).

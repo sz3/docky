@@ -196,11 +196,13 @@ namespace WeatherDocklet
 				if (item == null)
 					break;
 				
-				Int32.TryParse (item.SelectSingleNode ("hi").InnerText, out Forecasts [i].high);
-				Int32.TryParse (item.SelectSingleNode ("low").InnerText, out Forecasts [i].low);
+				Int32.TryParse (item.SelectSingleNode ("hi").InnerText, out temp);
+				Forecasts [i].high = temp; 
+				Int32.TryParse (item.SelectSingleNode ("low").InnerText, out temp);
+				Forecasts [i].low = temp;
 				Forecasts [i].condition = item.SelectSingleNode ("part").SelectSingleNode ("t").InnerText;
 				Forecasts [i].dow = item.Attributes ["t"].InnerText.Substring (0, 3);
-				Forecasts [i].image = GetImage (Forecasts[i].condition, false);
+				Forecasts [i].image = GetImage (Forecasts [i].condition, false);
 				int ppcp = 0;
 				Int32.TryParse (item.SelectSingleNode ("part").SelectSingleNode ("ppcp").InnerText, out ppcp);
 				Forecasts [i].chanceOf = ppcp < 60 && ppcp > 30;

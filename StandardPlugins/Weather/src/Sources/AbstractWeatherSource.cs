@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Robert Dyer
+//  Copyright (C) 2009-2010 Robert Dyer, Rico Tzschichholz
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -28,17 +28,47 @@ using Docky.Services;
 
 namespace WeatherDocklet
 {
-	/// <summary>
-	/// The base class for all weather sources.
-	/// </summary>
-	public abstract class AbstractWeatherSource : IWeatherSource
+	public abstract class AbstractWeatherSource
 	{
-		/// <value>
-		/// A map that maps conditions to icon names.
-		/// </value>
-		protected abstract Dictionary<string, string> ImageMap { get; }
+		public class WeatherCachedXMLData {
+			
+			public XmlDocument Data {
+				get; private set;
+			}
+			
+			public DateTime Time {
+				get; private set;
+			}
 
-		#region IWeatherSource implementation
+			public string Url {
+				get; private set;
+			}
+			
+			public WeatherCachedXMLData (string url, XmlDocument data) {
+				Url = url;
+				Data = data;
+				Time = DateTime.Now;
+			}
+		}
+
+		const int MAXXMLCACHEAGE = 5 * 60 * 1000;
+		static List<WeatherCachedXMLData> xml_cache = new List<WeatherCachedXMLData> ();
+		
+		public abstract string Name { get; }
+		public abstract string About { get; }
+		
+		static bool? use_metric;
+		public static bool UseMetric {
+			get {
+				if (use_metric.HasValue)
+					return use_metric.Value;
+				use_metric = false;
+				return false;
+			}
+			set {
+				use_metric = value;
+			}
+		}
 
 		public abstract int ForecastDays { get; }
 
@@ -49,62 +79,117 @@ namespace WeatherDocklet
 		
 		public DateTime SunRise { get; protected set; }
 		public DateTime SunSet { get; protected set; }
-		
-		public int Temp { get; protected set; }
-		public int FeelsLike { get; protected set; }
+
+		int temp = 0;
+		public int Temp { 
+			get {
+				if (!UseMetric)
+					return temp;
+				return ConvertFtoC (temp);
+			}
+			protected set {
+				temp = value;
+			}
+		}
+
+		int feelslike = 0;
+		public int FeelsLike { 
+			get {
+				if (!UseMetric)
+					return feelslike;
+				return ConvertFtoC (feelslike);
+			}
+			protected set {
+				feelslike = value;
+			}
+		}
+
+		int wind = 0;
+		public int Wind { 
+			get {
+				if (!UseMetric)
+					return wind;
+				return ConvertMphToKmh (wind);
+			} 
+			protected set {
+				wind = value;
+			}
+		}
+
+		public bool ShowFeelsLike { get { return temp != feelslike; } }
+
 		public string Condition { get; protected set; }
-		public int Wind { get; protected set; }
 		public string WindDirection { get; protected set; }
 		public string Humidity { get; protected set; }
 		public string Image { get; protected set; }
 		
 		public WeatherForecast[] Forecasts { get; protected set; }
-		
-		public abstract string Name { get; }
-		public abstract string About { get; }
-		
-		public bool SupportsFeelsLike { get { return Temp != FeelsLike; } }
-		
+
+		protected abstract Dictionary<string, string> ImageMap { get; }
+
 		public event Action WeatherReloading;
-		public event EventHandler<WeatherErrorArgs> WeatherError;
 		public event Action WeatherUpdated;
+		public event EventHandler<WeatherErrorArgs> WeatherError;
 		
-		public Thread checkerThread;
+		Thread checkerThread = null;
 		
-		public void StopReload ()
-		{
-			if (checkerThread != null)
-				checkerThread.Abort ();
+		public bool IsBusy {
+			get {
+				return checkerThread != null && checkerThread.IsAlive;
+			}
 		}
 		
-		public void ReloadWeatherData ()
+		/// <summary>
+		/// Creates a new weather source object.
+		/// </summary>
+		protected AbstractWeatherSource ()
 		{
+			Image = DefaultImage;
+			Forecasts = new WeatherForecast [ForecastDays];
+			for (int i = 0; i < ForecastDays; i++)
+				Forecasts [i].image = DefaultImage;
+			
+			GLib.Timeout.Add (60 * 60 * 1000, () => {
+				xml_cache.RemoveAll (data => ((DateTime.Now - data.Time).TotalMilliseconds > MAXXMLCACHEAGE));
+				return true; 
+			});
+		}
+		
+		public void StartReload ()
+		{
+			//stop running thread if there is one, this shouldnt happen
+			StopReload ();
+
 			checkerThread = DockServices.System.RunOnThread (() => {
 				try {
 					OnWeatherReloading ();
 	
 					FetchData ();
 					
-					if (WeatherPreferences.Metric)
-						ConvertResults ();
-					
 					OnWeatherUpdated ();
+
 				} catch (ThreadAbortException) {
-					// shutting down, do nothing
+					Log<AbstractWeatherSource>.Debug (Name + ": Reload aborted");
+					//restore Dockitem state
+					OnWeatherUpdated ();
 				} catch (NullReferenceException e) {
 					OnWeatherError (Catalog.GetString ("Invalid Weather Location"));
-					Log<AbstractWeatherSource>.Debug (Name + ": " + e.StackTrace);
+					Log<AbstractWeatherSource>.Debug (Name + ": " + e.Message + e.StackTrace);
 				} catch (XmlException e) {
-					OnWeatherError (Catalog.GetString ("Invalid Weather Location"));
-					Log<AbstractWeatherSource>.Debug (Name + ": " + e.StackTrace);
+					OnWeatherError (Catalog.GetString ("Invalid XML Weather Data"));
+					Log<AbstractWeatherSource>.Debug (Name + ": " + e.Message + e.StackTrace);
 				} catch (WebException e) {
-					OnWeatherError (Catalog.GetString ("Network Error: " + e.Message));
-				} catch (Exception e) {
-					OnWeatherError (Catalog.GetString ("Invalid Weather Location"));
-					Log<AbstractWeatherSource>.Error (Name + ": " + e.ToString ());
-					Log<AbstractWeatherSource>.Debug (Name + ": " + e.StackTrace);
+					OnWeatherError (Catalog.GetString ("Network Error: ") + e.Message);
 				}
 			});
+
+		}
+
+		public void StopReload ()
+		{
+			if (checkerThread != null) {
+				checkerThread.Abort ();
+			}
 		}
 		
 		public void ShowRadar ()
@@ -124,19 +209,6 @@ namespace WeatherDocklet
 		
 		public abstract IEnumerable<string> SearchLocation (string location);
 		
-		#endregion
-		
-		/// <summary>
-		/// Creates a new weather source object.
-		/// </summary>
-		protected AbstractWeatherSource ()
-		{
-			Image = DefaultImage;
-			Forecasts = new WeatherForecast [ForecastDays];
-			for (int i = 0; i < ForecastDays; i++)
-				Forecasts [i].image = DefaultImage;
-		}
-		
 		/// <value>
 		/// The URL to retrieve weather data from.
 		/// </value>
@@ -155,7 +227,7 @@ namespace WeatherDocklet
 		/// <value>
 		/// The default image name.
 		/// </value>
-		protected static string DefaultImage {
+		public static string DefaultImage {
 			get {
 				return Gtk.Stock.DialogQuestion;
 			}
@@ -242,6 +314,12 @@ namespace WeatherDocklet
 		protected XmlDocument FetchXml (string url)
 		{
 			Log<AbstractWeatherSource>.Debug (Name + ": Fetching XML file '" + url + "'");
+			WeatherCachedXMLData cacheddata = xml_cache.Find (data => (data.Url == url && (DateTime.Now - data.Time).TotalMilliseconds < MAXXMLCACHEAGE));
+			if (cacheddata != null) {
+				Log<AbstractWeatherSource>.Debug (Name + ": Use Cached XML file '" + url + "'");
+				return cacheddata.Data;
+			}
+			
 			HttpWebRequest request = (HttpWebRequest) WebRequest.Create (url);
 			request.Timeout = 60000;
 			request.UserAgent = DockServices.System.UserAgent;
@@ -253,6 +331,9 @@ namespace WeatherDocklet
 					xml.Load (response.GetResponseStream ());
 				} finally {
 					response.Close ();
+					
+					xml_cache.RemoveAll (data => data.Url == url);
+					xml_cache.Add (new WeatherCachedXMLData (url, xml));
 				}
 			
 			return xml;
@@ -303,21 +384,37 @@ namespace WeatherDocklet
 			if (WeatherReloading != null)
 				DockServices.System.RunOnMainThread (WeatherReloading);
 		}
+
 		
-		/// <summary>
-		/// If results need to be in metric, converts them to metric.
-		/// </summary>
-		protected void ConvertResults ()
-		{
-			Temp = WeatherUnits.ConvertFtoC (Temp);
-			FeelsLike = WeatherUnits.ConvertFtoC (FeelsLike);
-			Wind = WeatherUnits.ConvertMphToKmh (Wind);
-			
-			for (int i = 0; i < ForecastDays; i++)
-			{
-				Forecasts [i].high = WeatherUnits.ConvertFtoC (Forecasts [i].high);
-				Forecasts [i].low = WeatherUnits.ConvertFtoC (Forecasts [i].low);
+		const string TEMP_C = "\u2103";
+		const string TEMP_F = "\u2109";
+		public static string TempUnit { 
+			get {
+				if (UseMetric)
+					return TEMP_C;
+				return TEMP_F;
 			}
 		}
+		
+		const string WIND_KMH = "km/h";
+		const string WIND_MPH = "mph";
+		public static string WindUnit {
+			get {
+				if (UseMetric)
+					return WIND_KMH;
+				return WIND_MPH;
+			}
+		}
+		
+		public static int ConvertFtoC (int F)
+		{
+			return (int) Math.Round ((double) (F - 32) * 5 / 9);
+		}
+		
+		public static int ConvertMphToKmh (int Mph)
+		{
+			return (int) Math.Round ((double) Mph * 1.609344);
+		}		
+		
 	}
 }

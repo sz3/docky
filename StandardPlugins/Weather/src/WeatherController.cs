@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Robert Dyer
+//  Copyright (C) 2009-2010 Robert Dyer, Rico Tzschichholz
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -51,7 +51,7 @@ namespace WeatherDocklet
 		/// <value>
 		/// The current weather source.
 		/// </value>
-		public static IWeatherSource Weather { get; private set; }
+		public static AbstractWeatherSource Weather { get; private set; }
 		
 		/// <value>
 		/// How frequently the weather should reload automatically.
@@ -63,10 +63,10 @@ namespace WeatherDocklet
 		/// </value>
 		public static string CurrentLocation {
 			get {
-				if (CurrentLocationIndex >= WeatherPreferences.Location.Length || CurrentLocationIndex < 0)
+				if (CurrentLocationIndex >= WeatherPreferences.Locations.Length || CurrentLocationIndex < 0)
 					return "";
 				else
-					return WeatherPreferences.Location [CurrentLocationIndex];
+					return WeatherPreferences.Locations [CurrentLocationIndex];
 			}
 		}
 		
@@ -91,9 +91,8 @@ namespace WeatherDocklet
 			Sources.Add (WunderWeatherSource.GetInstance ().Name, WunderWeatherSource.GetInstance ());
 			
 			ResetWeatherSource ();
-			UpdateUnits ();
 			
-			WeatherPreferences.LocationChanged += HandleLocationChanged;
+			WeatherPreferences.LocationsChanged += HandleLocationsChanged;
 			WeatherPreferences.SourceChanged += HandleSourceChanged;
 			WeatherPreferences.TimeoutChanged += HandleTimeoutChanged;
 			WeatherPreferences.MetricChanged += HandleMetricChanged;
@@ -101,14 +100,12 @@ namespace WeatherDocklet
 			DockServices.System.ConnectionStatusChanged += HandleStateChanged;
 		}
 		
-		static bool IsReloading { get; set; }
-		
 		/// <summary>
 		/// Uses the next location for weather.
 		/// </summary>
 		public static void NextLocation ()
 		{
-			if (CurrentLocationIndex >= WeatherPreferences.Location.Length - 1)
+			if (CurrentLocationIndex >= WeatherPreferences.Locations.Length - 1)
 				CurrentLocationIndex = 0;
 			else
 				CurrentLocationIndex++;
@@ -122,7 +119,7 @@ namespace WeatherDocklet
 		public static void PreviousLocation ()
 		{
 			if (CurrentLocationIndex == 0)
-				CurrentLocationIndex = WeatherPreferences.Location.Length - 1;
+				CurrentLocationIndex = WeatherPreferences.Locations.Length - 1;
 			else
 				CurrentLocationIndex--;
 			
@@ -150,14 +147,13 @@ namespace WeatherDocklet
 			if (CurrentLocation == "" || !DockServices.System.NetworkConnected)
 				return;
 
-			if (reloadImmediately && !IsReloading) {
-				IsReloading = true;
-				Weather.ReloadWeatherData ();
+			if (reloadImmediately && !Weather.IsBusy) {
+				Weather.StartReload ();
 			}
 				
 			UpdateTimer = GLib.Timeout.Add (WeatherPreferences.Timeout * 60 * 1000, () => {
-				if (!IsReloading && DockServices.System.NetworkConnected) 
-					Weather.ReloadWeatherData (); 
+				if (!Weather.IsBusy && DockServices.System.NetworkConnected) 
+					Weather.StartReload (); 
 				return true; 
 			});
 		}
@@ -167,8 +163,6 @@ namespace WeatherDocklet
 			if (UpdateTimer > 0)
 				GLib.Source.Remove (UpdateTimer);
 			UpdateTimer = 0;
-			
-			Weather.StopReload ();
 		}
 		
 		/// <summary>
@@ -187,6 +181,8 @@ namespace WeatherDocklet
 				Weather = Sources [WeatherPreferences.Source];
 			else
 				Weather = Sources [WunderWeatherSource.GetInstance ().Name];
+			
+			AbstractWeatherSource.UseMetric = WeatherPreferences.Metric;
 			
 			Weather.WeatherReloading += HandleWeatherReloading;
 			Weather.WeatherError += HandleWeatherError;
@@ -218,7 +214,7 @@ namespace WeatherDocklet
 		/// </param>
 		static void HandleTimeoutChanged (object sender, EventArgs e)
 		{
-			ResetTimer ();
+			ResetTimer (false);
 		}
 		
 		/// <summary>
@@ -245,7 +241,7 @@ namespace WeatherDocklet
 		/// <param name="e">
 		/// Ignored
 		/// </param>
-		static void HandleLocationChanged (object sender, EventArgs e)
+		static void HandleLocationsChanged (object sender, EventArgs e)
 		{
 			CurrentLocationIndex = 0;
 			ResetTimer ();
@@ -262,8 +258,8 @@ namespace WeatherDocklet
 		/// </param>
 		static void HandleMetricChanged (object sender, EventArgs e)
 		{
-			UpdateUnits ();
-			ResetTimer ();
+			AbstractWeatherSource.UseMetric = WeatherPreferences.Metric;
+			HandleWeatherUpdated ();
 		}
 		
 		/// <summary>
@@ -271,7 +267,6 @@ namespace WeatherDocklet
 		/// </summary>
 		static void HandleWeatherReloading ()
 		{
-			IsReloading = true;
 			if (WeatherReloading != null)
 				WeatherReloading ();
 		}
@@ -281,7 +276,6 @@ namespace WeatherDocklet
 		/// </summary>
 		static void HandleWeatherError (object sender, WeatherErrorArgs e)
 		{
-			IsReloading = false;
 			if (WeatherError != null)
 				WeatherError (sender, e);
 		}
@@ -291,28 +285,10 @@ namespace WeatherDocklet
 		/// </summary>
 		static void HandleWeatherUpdated ()
 		{
-			IsReloading = false;
 			if (WeatherUpdated != null)
 				WeatherUpdated ();
 		}
-		
-		/// <summary>
-		/// Sets all unit names.
-		/// </summary>
-		static void UpdateUnits ()
-		{
-			if (WeatherPreferences.Metric)
-			{
-				WeatherUnits.TempUnit = "\u2103";
-				WeatherUnits.WindUnit = "km/h";
-			}
-			else
-			{
-				WeatherUnits.TempUnit = "\u2109";
-				WeatherUnits.WindUnit = "mph";
-			}
-		}
-		
+
 		public static DateTime Sunrise (double latitude, double longitude)
 		{
 			DateTime riseTime = DateTime.Now, setTime = DateTime.Now;

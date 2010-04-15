@@ -233,14 +233,18 @@ namespace WeatherDocklet
 		{
 			XmlNodeList nodelist = xml.SelectNodes ("forecast/simpleforecast/forecastday");
 			
+			int temp;
+			
 			for (int i = 0; i < ForecastDays; i++)
 			{
 				XmlNode item = nodelist.Item (i);
 				if (item == null)
 					break;
 				
-				Int32.TryParse (item.SelectSingleNode ("high").SelectSingleNode ("fahrenheit").InnerText, out Forecasts [i].high);
-				Int32.TryParse (item.SelectSingleNode ("low").SelectSingleNode ("fahrenheit").InnerText, out Forecasts [i].low);
+				Int32.TryParse (item.SelectSingleNode ("high").SelectSingleNode ("fahrenheit").InnerText, out temp);
+				Forecasts [i].high = temp; 
+				Int32.TryParse (item.SelectSingleNode ("low").SelectSingleNode ("fahrenheit").InnerText, out temp);
+				Forecasts [i].low = temp;
 				Forecasts [i].condition = item.SelectSingleNode ("conditions").InnerText;
 				Forecasts [i].dow = item.SelectSingleNode ("date").SelectSingleNode ("weekday").InnerText;
 				Forecasts [i].dow = Forecasts [i].dow.Substring (0, 3);

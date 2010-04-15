@@ -59,23 +59,23 @@ namespace WeatherDocklet
 		/// <value>
 		/// Indicates the Location preference changed.
 		/// </value>
-		public static event EventHandler LocationChanged;
+		public static event EventHandler LocationsChanged;
 		
 		/// <value>
 		/// Called to indicate the Location preference changed.
 		/// </value>
-		public static void OnLocationChanged ()
+		public static void OnLocationsChanged ()
 		{
-			if (LocationChanged != null)
-				LocationChanged (null, EventArgs.Empty);
+			if (LocationsChanged != null)
+				LocationsChanged (null, EventArgs.Empty);
 		}
 		
 		/// <value>
 		/// The current weather location.
 		/// </value>
-		public static string[] Location {
- 			get { return prefs.Get<string[]> (LocationKey, new string[] {"50014"}); }
- 			set { prefs.Set<string[]> (LocationKey, value); OnLocationChanged (); }
+		public static string[] Locations {
+ 			get { return prefs.Get<string[]> (LocationKey, new string[] {}); }
+ 			set { prefs.Set<string[]> (LocationKey, value); OnLocationsChanged (); }
  		}
 		
 		/// <value>

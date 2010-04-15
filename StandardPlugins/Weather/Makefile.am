@@ -6,7 +6,6 @@ ASSEMBLY = Weather
 FILES = \
 	src/ForecastMenuItem.cs \
 	src/WeatherForecast.cs \
-	src/IWeatherSource.cs \
 	src/Sources/AbstractWeatherSource.cs \
 	src/Sources/WeatherChannelWeatherSource.cs \
 	src/Sources/GoogleWeatherSource.cs \
@@ -14,7 +13,6 @@ FILES = \
 	src/WeatherItemProvider.cs \
 	src/WeatherPreferences.cs \
 	src/WeatherController.cs \
-	src/WeatherUnits.cs \
 	src/WeatherDocklet.cs \
 	src/WeatherPainter.cs \
 	src/WeatherErrorArgs.cs \

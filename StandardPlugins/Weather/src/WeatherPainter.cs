@@ -120,14 +120,14 @@ namespace WeatherDocklet
 				cr.Fill ();
 				
 				cr.Color = colorHigh;
-				layout.SetText (string.Format ("{0}{1}", WeatherController.Weather.Forecasts [day].high, WeatherUnits.TempUnit));
+				layout.SetText (string.Format ("{0}{1}", WeatherController.Weather.Forecasts [day].high, AbstractWeatherSource.TempUnit));
 				layout.GetPixelExtents (out inkRect, out logicalRect);
 				cr.MoveTo (xOffset + (Allocation.Height - inkRect.Width) / 2, Allocation.Height / 2 - logicalRect.Height / 2);
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.Fill ();
 				
 				cr.Color = colorLow;
-				layout.SetText (string.Format ("{0}{1}", WeatherController.Weather.Forecasts [day].low, WeatherUnits.TempUnit));
+				layout.SetText (string.Format ("{0}{1}", WeatherController.Weather.Forecasts [day].low, AbstractWeatherSource.TempUnit));
 				layout.GetPixelExtents (out inkRect, out logicalRect);
 				cr.MoveTo (xOffset + (Allocation.Height - inkRect.Width) / 2, Allocation.Height - logicalRect.Height);
 				Pango.CairoHelper.LayoutPath (cr, layout);
@@ -197,14 +197,14 @@ namespace WeatherDocklet
 			// high/low temp
 			layout.Width = Pango.Units.FromPixels (Allocation.Height);
 			cr.Color = colorHigh;
-			layout.SetText (string.Format ("{0}{1}", max, WeatherUnits.TempUnit));
+			layout.SetText (string.Format ("{0}{1}", max, AbstractWeatherSource.TempUnit));
 			layout.GetPixelExtents (out inkRect, out logicalRect);
 			cr.MoveTo (Allocation.Width - Allocation.Height + (Allocation.Height - inkRect.Width) / 2 - BUTTON_SIZE, Allocation.Height / 6 - logicalRect.Height / 2);
 			Pango.CairoHelper.LayoutPath (cr, layout);
 			cr.Fill ();
 			
 			cr.Color = colorLow;
-			layout.SetText (string.Format ("{0}{1}", min, WeatherUnits.TempUnit));
+			layout.SetText (string.Format ("{0}{1}", min, AbstractWeatherSource.TempUnit));
 			layout.GetPixelExtents (out inkRect, out logicalRect);
 			cr.MoveTo (Allocation.Width - Allocation.Height + (Allocation.Height - inkRect.Width) / 2 - BUTTON_SIZE, Allocation.Height * 6 / 9 - logicalRect.Height / 2);
 			Pango.CairoHelper.LayoutPath (cr, layout);
@@ -308,10 +308,10 @@ namespace WeatherDocklet
 			}
 			xPos += iconSize;
 			
-			if (!WeatherController.Weather.SupportsFeelsLike)
-				DrawConditionText (cr, xPos, textWidth, topYPos, WeatherController.Weather.Temp + WeatherUnits.TempUnit);
+			if (!WeatherController.Weather.ShowFeelsLike)
+				DrawConditionText (cr, xPos, textWidth, topYPos, WeatherController.Weather.Temp + AbstractWeatherSource.TempUnit);
 			else
-				DrawConditionText (cr, xPos, textWidth, topYPos, WeatherController.Weather.Temp + WeatherUnits.TempUnit + " (" + WeatherController.Weather.FeelsLike + WeatherUnits.TempUnit + ")");
+				DrawConditionText (cr, xPos, textWidth, topYPos, WeatherController.Weather.Temp + AbstractWeatherSource.TempUnit + " (" + WeatherController.Weather.FeelsLike + AbstractWeatherSource.TempUnit + ")");
 			
 
 			// draw humidity
@@ -329,7 +329,7 @@ namespace WeatherDocklet
 			}
 			xPos += iconSize;
 			
-			DrawConditionText (cr, xPos, textWidth, topYPos, WeatherController.Weather.Wind + " " + WeatherUnits.WindUnit);
+			DrawConditionText (cr, xPos, textWidth, topYPos, WeatherController.Weather.Wind + " " + AbstractWeatherSource.WindUnit);
 			DrawConditionText (cr, xPos, textWidth, botYPos, WeatherController.Weather.WindDirection);
 			
 			xPos += textWidth + 2 * xSpacing;

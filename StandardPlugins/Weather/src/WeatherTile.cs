@@ -35,19 +35,19 @@ namespace WeatherDocklet
 			locationCode = code;
 			if (location != code)
 				Description = code;
-			Enabled = WeatherPreferences.Location.Contains (code);
+			Enabled = WeatherPreferences.Locations.Contains (code);
 		}
 		
 		public override void OnActiveChanged ()
 		{
-			List<string> currentLocations = WeatherPreferences.Location.ToList ();
+			List<string> currentLocations = WeatherPreferences.Locations.ToList ();
 			if (Enabled) {
 				currentLocations.Remove (locationCode);
 			} else {
 				currentLocations.Add (locationCode);
 			}
 			
-			WeatherPreferences.Location = currentLocations.ToArray ();
+			WeatherPreferences.Locations = currentLocations.ToArray ();
 			
 			Enabled = !Enabled;
 			base.OnActiveChanged ();

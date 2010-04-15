@@ -54,7 +54,7 @@ namespace WeatherDocklet
 		{
 			location_code.InnerEntry.Text = "";
 			results_view.Clear ();
-			foreach (string location in WeatherPreferences.Location)
+			foreach (string location in WeatherPreferences.Locations)
 				results_view.AppendTile (new WeatherTile (location, location));
 		}
 		

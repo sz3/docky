@@ -124,20 +124,23 @@ namespace WeatherDocklet
 		void HandleWeatherUpdated ()
 		{
 			Gtk.Application.Invoke (delegate {
-				IWeatherSource weather = WeatherController.Weather;
+				AbstractWeatherSource weather = WeatherController.Weather;
 				
 				string feelsLike = "";
-				if (weather.SupportsFeelsLike)
-					feelsLike = " (" + weather.FeelsLike + WeatherUnits.TempUnit + ")";
+				if (weather.ShowFeelsLike)
+					feelsLike = " (" + weather.FeelsLike + AbstractWeatherSource.TempUnit + ")";
 				
 				HoverText = weather.Condition + "   " +
-					weather.Temp + WeatherUnits.TempUnit + feelsLike +
+					weather.Temp + AbstractWeatherSource.TempUnit + feelsLike +
 					"   " + weather.City;
 				Icon = WeatherController.Weather.Image;
 				Status = WeatherDockletStatus.Normal;
 				State &= ~ItemState.Wait;
+				
 				QueueRedraw ();
-				if (painter != null) painter.WeatherChanged ();
+				
+				if (painter != null) 
+					painter.WeatherChanged ();
 			});
 		}
 		
@@ -159,7 +162,7 @@ namespace WeatherDocklet
 			Pango.Rectangle inkRect, logicalRect;
 			
 			layout.Width = Pango.Units.FromPixels (size);
-			layout.SetText (WeatherController.Weather.Temp + WeatherUnits.TempUnit);
+			layout.SetText (WeatherController.Weather.Temp + AbstractWeatherSource.TempUnit);
 			if (IsSmall)
 				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (size / 2.5));
 			else
@@ -188,7 +191,7 @@ namespace WeatherDocklet
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
 			if (button == 1) {
-				if (WeatherPreferences.Location.Length == 0) {
+				if (WeatherPreferences.Locations.Length == 0) {
 					if (Config == null)
 						Config = new WeatherConfigDialog ();
 					Config.Show ();
@@ -201,7 +204,7 @@ namespace WeatherDocklet
 		
 		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
 		{
-			if (WeatherPreferences.Location.Length <= 1)
+			if (WeatherPreferences.Locations.Length <= 1)
 				return;
 
 			Status = WeatherDockletStatus.ManualReload;
@@ -227,11 +230,10 @@ namespace WeatherDocklet
 			
 			list.SetContainerTitle (MenuListContainer.Actions, Mono.Unix.Catalog.GetString ("Forecasts"));
 			for (int i = 0; i < WeatherController.Weather.ForecastDays; i++)
-				if (WeatherController.Weather.Forecasts[i].dow != null)
+				if (WeatherController.Weather.Forecasts [i].dow != null)
 				{
 					list[MenuListContainer.Actions].Add (new ForecastMenuItem (i,
-							string.Format ("{0}", WeatherForecast.DayName (WeatherController.Weather.Forecasts[i].dow)),
-							WeatherController.Weather.Forecasts[i].image));
+							string.Format ("{0}", WeatherForecast.DayName (WeatherController.Weather.Forecasts [i].dow)), WeatherController.Weather.Forecasts [i].image));
 				}
 			
 			list[MenuListContainer.CustomOne].Add (new MenuItem (Catalog.GetString ("_Settings"), Gtk.Stock.Preferences, 
