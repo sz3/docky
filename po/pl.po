@@ -8,20 +8,20 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-14 07:17+0200\n"
-"PO-Revision-Date: 2010-03-30 19:20+0000\n"
-"Last-Translator: Rico Tzschichholz <Unknown>\n"
+"PO-Revision-Date: 2010-04-20 08:55+0000\n"
+"Last-Translator: EuGene <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-04-14 09:04+0000\n"
+"X-Launchpad-Export-Date: 2010-04-23 06:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
 msgid "Search Docklets..."
-msgstr "Szukaj Docklet'u"
+msgstr "Szukaj Dockletu"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Search Helpers..."
@@ -67,35 +67,35 @@ msgstr "O Autorze"
 
 #: ../Docky/Docky/DockletTile.cs:88
 msgid "Move this docklet up on the selected dock"
-msgstr ""
+msgstr "Przesuń ten docklet w górę, na wybrany dock"
 
 #: ../Docky/Docky/DockletTile.cs:89
 msgid "Move this docklet down on the selected dock"
-msgstr ""
+msgstr "Przesuń ten docklet w dół, na wybrany dock"
 
 #: ../Docky/Docky/DockletTile.cs:93
 msgid "Move this docklet left on the selected dock"
-msgstr ""
+msgstr "Przesuń ten docklet w lewo, na wybrany dock"
 
 #: ../Docky/Docky/DockletTile.cs:94
 msgid "Move this docklet right on the selected dock"
-msgstr ""
+msgstr "Przesuń ten docklet w prawo, na wybrany dock"
 
 #: ../Docky/Docky/DockletTile.cs:96
 msgid "Configure this docklet"
-msgstr ""
+msgstr "Konfiguracja dockletu"
 
 #: ../Docky/Docky/DockletTile.cs:97
 msgid "About this docklet"
-msgstr ""
+msgstr "O tym docklecie"
 
 #: ../Docky/Docky/DockletTile.cs:98
 msgid "Add this docklet to the selected dock"
-msgstr ""
+msgstr "Dodaj docklet do wybranego docku"
 
 #: ../Docky/Docky/DockletTile.cs:99
 msgid "Remove this docklet from the selected dock"
-msgstr ""
+msgstr "Usuń docklet z wybranego docku"
 
 #: ../Docky/Docky/Docky.cs:99
 msgid ""
@@ -115,15 +115,15 @@ msgstr "Odinstaluj"
 
 #: ../Docky/Docky/HelperTile.cs:77
 msgid "About this helper"
-msgstr ""
+msgstr "O tym wspomagaczu"
 
 #: ../Docky/Docky/HelperTile.cs:78
 msgid "Enable this helper"
-msgstr ""
+msgstr "Włącz ten wspomagacz"
 
 #: ../Docky/Docky/HelperTile.cs:79
 msgid "Disable this helper"
-msgstr ""
+msgstr "Wyłącz ten wspomagacz"
 
 #: ../Docky/Docky/HelperTile.cs:84
 msgid "Running"
@@ -196,7 +196,7 @@ msgstr "Zamknij"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
 msgid "Docky Settings"
-msgstr ""
+msgstr "Ustawienia Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
 msgid "_Start When Computer Starts"
@@ -483,7 +483,7 @@ msgstr "minut(a/y)"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:200
 msgid "Click to set username and password."
-msgstr ""
+msgstr "Kliknij abu ustalić nazwę użytkownika i hasło."
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:254
 msgid "(no subject)"
@@ -587,32 +587,32 @@ msgstr "Rozłączony"
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
 msgid "Connected: {0}"
-msgstr ""
+msgstr "Połączony: {0}"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:47
 msgid "My _Stations"
-msgstr ""
+msgstr "Moje stacje pogodowe."
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:78
 msgid "S_earch"
-msgstr ""
+msgstr "Szukaj"
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
-msgstr ""
+msgstr "Nie znaleziono stacji pogodowych."
 
 #: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
-msgstr ""
+msgstr "Spróbuj wyszukać ponownie."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:48
 msgid "Fetching Information..."
-msgstr ""
+msgstr "Zbieranie informacji..."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:68
 msgid "Click to add NPR stations."
-msgstr ""
+msgstr "Nacijnij, aby dodać stacje NPR"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:107
 msgid "Home Page"

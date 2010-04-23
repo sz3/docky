@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-14 07:17+0200\n"
-"PO-Revision-Date: 2010-03-30 19:26+0000\n"
-"Last-Translator: Sebastián Porta <sebastianporta@gmail.com>\n"
+"PO-Revision-Date: 2010-04-22 13:35+0000\n"
+"Last-Translator: Paco Molinero <paco@byasl.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-04-14 09:04+0000\n"
+"X-Launchpad-Export-Date: 2010-04-23 06:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
@@ -28,11 +28,11 @@ msgstr "Buscar ayudantes..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:209
 msgid "Click on any dock to configure."
-msgstr "Seleccione el dock a configurar."
+msgstr "Seleccionar cualquier dock para configurar."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:210
 msgid "Drag any dock to reposition."
-msgstr "Arrastre cualquier dock para reposicionarlo."
+msgstr "Arrastrar cualquier dock para reposicionarlo."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:275
 msgid "Delete the currently selected dock?"
@@ -67,43 +67,43 @@ msgstr "Autor"
 
 #: ../Docky/Docky/DockletTile.cs:88
 msgid "Move this docklet up on the selected dock"
-msgstr ""
+msgstr "Mueve este docklet hacia arriba en el dock seleccionado"
 
 #: ../Docky/Docky/DockletTile.cs:89
 msgid "Move this docklet down on the selected dock"
-msgstr ""
+msgstr "Mueve este docklet hacia abajo en el dock seleccionado"
 
 #: ../Docky/Docky/DockletTile.cs:93
 msgid "Move this docklet left on the selected dock"
-msgstr ""
+msgstr "Mueve este docklet a la izquierda en el dock seleccionado"
 
 #: ../Docky/Docky/DockletTile.cs:94
 msgid "Move this docklet right on the selected dock"
-msgstr ""
+msgstr "Mueve este docklet a la derecha en el dock seleccionado"
 
 #: ../Docky/Docky/DockletTile.cs:96
 msgid "Configure this docklet"
-msgstr ""
+msgstr "Configurar este docklet"
 
 #: ../Docky/Docky/DockletTile.cs:97
 msgid "About this docklet"
-msgstr ""
+msgstr "Acerca de este docklet"
 
 #: ../Docky/Docky/DockletTile.cs:98
 msgid "Add this docklet to the selected dock"
-msgstr ""
+msgstr "Añadir este docklet al dock seleccionado"
 
 #: ../Docky/Docky/DockletTile.cs:99
 msgid "Remove this docklet from the selected dock"
-msgstr ""
+msgstr "Eliminar este docklet del dock seleccionado"
 
 #: ../Docky/Docky/Docky.cs:99
 msgid ""
 "Docky requires compositing to work properly. Please enable compositing and "
 "restart docky."
 msgstr ""
-"Docky requiere composición para funcionar correctamente. Por favor habilite "
-"la composición y reinicie Docky."
+"Docky requiere composición para funcionar correctamente. Por favor active la "
+"composición y reinicie Docky."
 
 #: ../Docky/Docky/HelperTile.cs:43
 msgid "Status"
@@ -115,19 +115,19 @@ msgstr "Desinstalar"
 
 #: ../Docky/Docky/HelperTile.cs:77
 msgid "About this helper"
-msgstr ""
+msgstr "Sobre este ayudante"
 
 #: ../Docky/Docky/HelperTile.cs:78
 msgid "Enable this helper"
-msgstr ""
+msgstr "Activar este ayudante"
 
 #: ../Docky/Docky/HelperTile.cs:79
 msgid "Disable this helper"
-msgstr ""
+msgstr "Desactivar este ayudante"
 
 #: ../Docky/Docky/HelperTile.cs:84
 msgid "Running"
-msgstr "Funcionando"
+msgstr "En ejecución"
 
 #: ../Docky/Docky/HelperTile.cs:84
 msgid "Stopped"
@@ -146,8 +146,8 @@ msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
-"Cuando está activado, las ventanas que no tienen lanzadores serán agregadas "
-"a ese dock."
+"Cuando está activado, las ventanas que no tienen lanzadores se añadirán a "
+"ese dock."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:635
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
@@ -155,7 +155,7 @@ msgstr "<i>Nunca se esconde; las ventanas maximizadas no cubren el dock.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:638
 msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr "<i>Se esconde cuando el ratón no está sobre el.</i>"
+msgstr "<i>Se esconde cuando el ratón no está sobre él.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:641
 msgid "<i>Hides when dock obstructs the active application.</i>"
@@ -176,13 +176,13 @@ msgstr "Soltar para abrir"
 #: ../Docky/Docky/Interface/DockWindow.cs:386
 #: ../Docky/Docky/Interface/DockWindow.cs:400
 msgid "Drop to add to dock"
-msgstr "Soltar para agregar al dock"
+msgstr "Soltar para añadir al dock"
 
 #: ../Docky/Docky/Items/DockyItem.cs:109
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:237
 msgid "_Settings"
-msgstr "_Ajustes"
+msgstr "_Configuración"
 
 #: ../Docky/Docky/Items/DockyItem.cs:110
 msgid "_About"
@@ -194,7 +194,7 @@ msgstr "_Cerrar Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
 msgid "Docky Settings"
-msgstr ""
+msgstr "Configuración de Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
 msgid "_Start When Computer Starts"
@@ -254,7 +254,7 @@ msgstr "Ninguno"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Autohide"
-msgstr "Autoocultar"
+msgstr "Ocultar automáticamente"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:62
 msgid "Intellihide"
@@ -334,7 +334,7 @@ msgstr "Copiando"
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:221
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:222
 msgid "Error performing drop action"
-msgstr "Error el ejecutar la acción de soltar"
+msgstr "Error al soltar"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:244
 msgid "Open"
@@ -367,7 +367,7 @@ msgstr "Cerrar _todo"
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
 msgid "Sign up for {0}"
-msgstr "Inscribirse en {0}"
+msgstr "Registrarse en {0}"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:44
 msgid "Validating..."
@@ -479,7 +479,7 @@ msgstr "minutos"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:200
 msgid "Click to set username and password."
-msgstr ""
+msgstr "Pulse para establecer el nombre de usuario y la contraseña."
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:254
 msgid "(no subject)"
@@ -537,7 +537,7 @@ msgstr "_Redactar correo"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:208
 msgid "New Mail"
-msgstr "Nuevo correo"
+msgstr "Correo nuevo"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:226
 msgid "Check _Mail"
@@ -655,53 +655,55 @@ msgstr "_Vaciar documentos recientes..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:149
 msgid "Lock Screen"
-msgstr ""
+msgstr "Bloquear la pantalla"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
 msgid "Log Out..."
-msgstr ""
+msgstr "Cerrando sesión..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:154
 msgid "Log Out"
-msgstr ""
+msgstr "Cerrar Sesión"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:155
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
 msgstr ""
+"¿Seguro que desea cerrar todos los programas y finalizar su sesión en el "
+"equipo?"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:160
 msgid "Suspend"
-msgstr ""
+msgstr "Suspender"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:165
 msgid "Hibernate"
-msgstr ""
+msgstr "Hibernar"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:171
 msgid "Restart..."
-msgstr ""
+msgstr "Reiniciar..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:172
 msgid "Restart"
-msgstr ""
+msgstr "Reiniciar"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:173
 msgid "Are you sure you want to close all programs and restart the computer?"
-msgstr ""
+msgstr "¿Seguro que desea cerrar todos los programas y reiniciar el equipo?"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
 msgid "Shut Down..."
-msgstr ""
+msgstr "Apagando..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
 msgid "Shut Down"
-msgstr ""
+msgstr "Apagar"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:180
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
-msgstr ""
+msgstr "¿Seguro que desea cerrar todos los programas y apagar el equipo?"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
 msgid "No items in Trash"
@@ -772,8 +774,8 @@ msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
 msgstr ""
-"Datos meteorológicos proporcionados por Google. Requiere que los lugares "
-"sean especificados como un código postal de EE.UU. o como «Ciudad, País»."
+"Datos meteorológicos proporcionados por Google. Requiere que los lugares se "
+"especifiquen como un código postal de EE.UU. o como «Ciudad, País»."
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
@@ -783,9 +785,9 @@ msgid ""
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
 "Datos meteorológicos proporcionados por The Weather Channel©. Requiere que "
-"los lugares sean especificados como un código postal de EE.UU. o como un "
-"código único del sitio web. Para saber el código, busque el pronóstico en su "
-"página web y encontrará el código en la URL, después de «/local/» como algo "
+"los lugares se especifiquen como un código postal de EE.UU. o como un código "
+"único del sitio web. Para saber el código, busque el pronóstico en su página "
+"web y encontrará el código en la URL, después de «/local/» como algo "
 "parecido a AAXX0000."
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
@@ -794,8 +796,8 @@ msgid ""
 "requires locations to be specified as US Zip Code or 'City, Country'."
 msgstr ""
 "Datos meteorológicos proporcionados por Weather Underground©. Requiere que "
-"los lugares sean especificados como un código postal de EE.UU. o como "
-"«Ciudad, País»."
+"los lugares se especifiquen como un código postal de EE.UU. o como «Ciudad, "
+"País»."
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
@@ -807,11 +809,11 @@ msgstr "Configuración de meteorología"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
 msgid "Click to add a location."
-msgstr ""
+msgstr "Pulse para añadir una nueva ubicación."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
 msgid "Fetching data..."
-msgstr "Recibiendo datos..."
+msgstr "Obteniendo datos..."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:223
 msgid "Radar _Map"
@@ -837,7 +839,7 @@ msgstr "M_añana"
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:318
 #, csharp-format
 msgid "{0} humidity"
-msgstr ""
+msgstr "{0} humedad"
 
 #~ msgid "Tomorrow"
 #~ msgstr "Mañana"
@@ -868,9 +870,6 @@ msgstr ""
 
 #~ msgid "_Add"
 #~ msgstr "_Añadir"
-
-#~ msgid "_Remove"
-#~ msgstr "_Quitar"
 
 #~ msgid "Add _Label"
 #~ msgstr "Agregar _Etiqueta"
