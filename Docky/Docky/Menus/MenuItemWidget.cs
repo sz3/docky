@@ -305,6 +305,7 @@ namespace Docky.Menus
 			item.IconChanged -= ItemIconChanged;
 			item.TextChanged -= ItemTextChanged;
 			item.DisabledChanged -= ItemDisabledChanged;
+			item.Dispose ();
 			item = null;
 			
 			base.Dispose ();

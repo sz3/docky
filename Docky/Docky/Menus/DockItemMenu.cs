@@ -145,11 +145,9 @@ namespace Docky.Menus
 		{
 			if (Container.Child != null) {
 				foreach (Gtk.Widget widget in (Container.Child as VBox).Children) {
-					if (widget is MenuItemWidget) {
+					if (widget is MenuItemWidget)
 						(widget as MenuItemWidget).SelectedChanged -= HandleSelectedChanged;
-						(widget as MenuItemWidget).Dispose ();
-					} else 
-						widget.Dispose ();
+					widget.Dispose ();
 					widget.Destroy ();
 				}
 				Container.Remove (Container.Child);
@@ -206,11 +204,9 @@ namespace Docky.Menus
 		{
 			if (Container != null && Container.Child != null && (Container.Child as VBox).Children != null) {
 				foreach (Gtk.Widget widget in (Container.Child as VBox).Children) {
-					if (widget is MenuItemWidget) {
+					if (widget is MenuItemWidget)
 						(widget as MenuItemWidget).SelectedChanged -= HandleSelectedChanged;
-						(widget as MenuItemWidget).Dispose ();
-					} else 
-						widget.Dispose ();
+					widget.Dispose ();
 					widget.Destroy ();
 				}
 			}
