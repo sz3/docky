@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #  
-#  Copyright (C) 2009 Jason Smith, Seif Lofty
+#  Copyright (C) 2009 Jason Smith, Seif Lotfy
 # 
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -40,9 +40,9 @@ except ImportError, e:
 try:
 	CLIENT = ZeitgeistClient()
 	version = [int(x) for x in CLIENT.get_version()]
-	MIN_VERSION = [0, 3, 1, 0]
+	MIN_VERSION = [0, 3, 2, 0]
 	if version < MIN_VERSION:
-		print "PLEASE USE ZEITGEIST 0.3.1 or above"
+		print "PLEASE USE ZEITGEIST 0.3.2 or above"
 		exit()
 		
 
@@ -53,6 +53,7 @@ except RuntimeError, e:
 class MostUsedProvider():
 	def __init__(self):
 		self._zg = CLIENT
+		self.results = []
 
 	def get_path_most_used(self, path, handler, is_directoy=True):
 		today = time.time() * 1000
@@ -66,31 +67,44 @@ class MostUsedProvider():
 
 		def _handle_get_events(events):
 			uris = []
-			counter = 0
+			uris2 = []
+			uris_counter = {}
 			for event in events:
-				if counter < 5:
-					for subject in event.subjects:
-						if counter < 5 and exists(subject.uri):
-							uris.append(subject)
-							counter+=1
-						elif counter >= 5:
-							break
-						else:
-							pass
-							#print "skipping", subject.uri
-				else:
-					break
-			handler(uris)
+				for subject in event.subjects:
+					if exists(subject.uri):
+						if not subject.uri in uris:
+							uris.append(subject.uri)
+							uris_counter[subject.uri] = 0
+						uris_counter[subject.uri] += 1
+						
+			counter = []
+			for k, v in uris_counter.iteritems():
+				counter.append((v, k))
+			counter.sort(reverse = True)
+
+			recent =[]
+			temp = [i[1] for i in counter]
+			for uri in uris:
+				if not uri in temp[0:5]:
+					recent.append(uri)
+
+			results = []
+			results.append(recent[0:5])
+
+			results.append(counter[0:5])
+			handler(results)
 		
 		event = Event()
 		if is_directoy:
 			subject = Subject()
 			subject.set_origin(path)
 			event.set_subjects([subject])
-			self._zg.find_events_for_templates([event],_handle_get_events, [delta, today], StorageState.Any, 0, 4) 
+			self._zg.find_events_for_templates([event],_handle_get_events, [delta, today], StorageState.Any, 0, 0) 
 		else:
+			path = "application://" + path.split("/")[-1]
 			event.set_actor(path)
-			self._zg.find_events_for_templates([event],_handle_get_events, [delta, today], StorageState.Any, 0, 4) 
+			self._zg.find_events_for_templates([event],_handle_get_events, [delta, today], StorageState.Any, 0, 0)  
+
 
 class DockyZGItem(DockyItem):
 	def __init__(self, path):
@@ -108,10 +122,20 @@ class DockyZGItem(DockyItem):
 			return
 		self.mostusedprovider.get_path_most_used (self.uri, self._handle_get_most_used, self.iface.GetOwnsUri ())
 
-	def _handle_get_most_used(self, uris):
-		for subject in uris:
-			menu_id = self.iface.AddFileMenuItem(subject.uri,"Most Used Items")
-			self.id_map[menu_id] = subject.uri
+	def _handle_get_most_used(self, results):
+		uris = results[0]
+		uris.reverse()
+		if len(uris) > 0:
+			for subject in uris:
+				menu_id = self.iface.AddFileMenuItem(subject ,"Other Recently Used Items")
+				self.id_map[menu_id] = subject
+		uris = results[1]
+		uris.reverse()
+		if len(uris) > 0:
+			for subject in uris:
+				print subject
+				menu_id = self.iface.AddFileMenuItem(subject[1], "Most Used Items")
+				self.id_map[menu_id] = subject
 
 class DockyZGSink(DockySink):
 	def item_path_found(self, pathtoitem, item):
