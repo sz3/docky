@@ -145,7 +145,11 @@ namespace Docky.Menus
 		{
 			if (Container.Child != null) {
 				foreach (Gtk.Widget widget in (Container.Child as VBox).Children) {
-					widget.Dispose ();
+					if (widget is MenuItemWidget) {
+						(widget as MenuItemWidget).SelectedChanged -= HandleSelectedChanged;
+						(widget as MenuItemWidget).Dispose ();
+					} else 
+						widget.Dispose ();
 					widget.Destroy ();
 				}
 				Container.Remove (Container.Child);
@@ -194,16 +198,22 @@ namespace Docky.Menus
 				}
 			}
 			vbox.SetSizeRequest (width, -1);
-						
+			
 			Container.ShowAll ();
 		}
 		
 		public override void Dispose ()
 		{
-			if (Container != null && Container.Child != null && (Container.Child as VBox).Children != null)
-				foreach (Gtk.Widget widget in (Container.Child as VBox).Children)
-					if (widget is MenuItemWidget)
+			if (Container != null && Container.Child != null && (Container.Child as VBox).Children != null) {
+				foreach (Gtk.Widget widget in (Container.Child as VBox).Children) {
+					if (widget is MenuItemWidget) {
 						(widget as MenuItemWidget).SelectedChanged -= HandleSelectedChanged;
+						(widget as MenuItemWidget).Dispose ();
+					} else 
+						widget.Dispose ();
+					widget.Destroy ();
+				}
+			}
 			
 			base.Dispose ();
 		}

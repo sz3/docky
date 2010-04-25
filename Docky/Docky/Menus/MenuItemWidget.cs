@@ -296,9 +296,17 @@ namespace Docky.Menus
 		{
 			if (icon_surface != null)
 				icon_surface.Dispose ();
+			icon_surface = null;
 			
 			if (emblem_surface != null)
 				emblem_surface.Dispose ();
+			emblem_surface = null;
+			
+			item.IconChanged -= ItemIconChanged;
+			item.TextChanged -= ItemTextChanged;
+			item.DisabledChanged -= ItemDisabledChanged;
+			item = null;
+			
 			base.Dispose ();
 		}
 	}

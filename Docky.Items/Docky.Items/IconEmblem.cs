@@ -118,5 +118,12 @@ namespace Docky.Items
 			if (Changed != null)
 				Changed (this, EventArgs.Empty);
 		}
+		
+		public void Dispose ()
+		{
+			if (forced_pixbuf != null)
+				forced_pixbuf.Dispose ();
+			forced_pixbuf = null;
+		}
 	}
 }

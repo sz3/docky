@@ -98,5 +98,13 @@ namespace Docky.Items
 				Windows = Enumerable.Empty<Wnck.Window> ();
 			}
 		}
+		
+		public override void Dispose ()
+		{
+			Wnck.Screen.Default.WindowOpened -= WnckScreenDefaultWindowOpened;
+			Wnck.Screen.Default.WindowClosed -= WnckScreenDefaultWindowClosed;
+			
+			base.Dispose ();
+		}		
 	}
 }

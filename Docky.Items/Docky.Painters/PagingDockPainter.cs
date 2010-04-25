@@ -265,8 +265,7 @@ namespace Docky.Painters
 		{
 			lock (buffers) {
 				for (int i = 0; i < buffers.Length; i++)
-					if (buffers [i] != null)
-					{
+					if (buffers [i] != null) {
 						buffers [i].Dispose ();
 						buffers [i] = null;
 					}

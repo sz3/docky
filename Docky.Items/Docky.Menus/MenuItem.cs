@@ -27,7 +27,7 @@ using Gdk;
 namespace Docky.Menus
 {
 
-	public class MenuItem
+	public class MenuItem : IDisposable
 	{
 		public event EventHandler DisabledChanged;
 		public event EventHandler TextChanged;
@@ -152,5 +152,19 @@ namespace Docky.Menus
 		{
 			Clicked += onClicked;
 		}
+
+		#region IDisposable implementation
+		public void Dispose ()
+		{
+			if (forced_pixbuf != null)
+				forced_pixbuf.Dispose ();
+			forced_pixbuf = null;
+			
+			Clicked = null;
+			IconChanged = null;
+			DisabledChanged = null;
+			TextChanged = null;
+		}
+		#endregion
 	}
 }

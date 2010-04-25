@@ -104,7 +104,6 @@ namespace Docky.Items
 		
 		protected override MenuList OnGetMenuItems ()
 		{
-			// intentionally dont inherit
 			MenuList list = new MenuList ();
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Settings"), PrefsIcon, (o, a) => ConfigurationWindow.Instance.Show ()));
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_About"), AboutIcon, (o, a) => Docky.ShowAbout ()));

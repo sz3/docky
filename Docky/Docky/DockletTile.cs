@@ -149,5 +149,13 @@ namespace Docky
 			
 			UpdateInfo ();
 		}
+		
+		public override void Dispose ()
+		{
+			Addin = null;
+			Provider = null;
+			
+			base.Dispose ();
+		}
 	}
 }

@@ -1,3 +1,19 @@
+//  
+//  Copyright (C) 2010 Rico Tzschichholz
+// 
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+// 
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+// 
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// 
 //
 // AddinView.cs
 //
@@ -68,12 +84,33 @@ namespace Docky.Widgets
 		
 		public void Clear ()
 		{
+			tiles.ForEach (tile => {
+				tile.Hide ();
+				tile.ActiveChanged -= OnTileActiveChanged;
+				tile.SizeAllocated -= OnTileSizeAllocated;
+				tile.Owner = null;
+			});
 			tiles.Clear ();
+			
 			foreach (Widget child in box.Children) {
 				box.Remove (child);
+				child.Dispose ();
+				child.Destroy ();
 			}
 		}
 		
+		public virtual void AppendTile (AbstractTileObject tileObject)
+		{			
+			Tile tile = new Tile (tileObject, IconSize);
+			tile.Owner = this;
+			tile.ActiveChanged += OnTileActiveChanged;
+			tile.SizeAllocated += OnTileSizeAllocated;
+			tile.Show ();
+			tiles.Add (tile);
+			
+			box.PackStart (tile, false, false, 0);
+		}		
+
 		public virtual void RemoveTile (AbstractTileObject tileObject)
 		{
 			Tile tile = tiles.First (t => t.OwnedObject == tileObject);
@@ -83,7 +120,15 @@ namespace Docky.Widgets
 	
 			if (selected_index == tiles.IndexOf (tile))
 				ClearSelection ();
+	
+			tile.Hide ();
+			tile.ActiveChanged -= OnTileActiveChanged;
+			tile.SizeAllocated -= OnTileSizeAllocated;
+			tile.Owner = null;
+			tile.Dispose ();
+			tile.Destroy ();
 			
+			tiles.Remove (tile);
 			box.Remove (tile);
 		}
 		
@@ -103,18 +148,6 @@ namespace Docky.Widgets
 			return null;
 		}
 		
-		public virtual void AppendTile (AbstractTileObject tileObject)
-		{			
-			Tile tile = new Tile (tileObject, IconSize);
-			tile.Owner = this;
-			tile.ActiveChanged += OnTileActiveChanged;
-			tile.SizeAllocated += OnTileSizeAllocated;
-			tile.Show ();
-			tiles.Add (tile);
-			
-			box.PackStart (tile, false, false, 0);
-		}		
-
 		private bool changing_styles = false;
 		
 		protected override void OnStyleSet (Style previous_style)
@@ -235,5 +268,17 @@ namespace Docky.Widgets
 			
 			QueueResize ();
 		}
+		
+		public override void Dispose ()
+		{
+			Clear ();
+		
+			if (box != null) {
+				box.Dispose ();
+				box.Destroy ();
+			}
+			
+			base.Dispose ();
+		}		
 	}
 }
