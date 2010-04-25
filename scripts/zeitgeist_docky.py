@@ -87,7 +87,6 @@ class MostUsedProvider():
 			for uri in uris:
 				if not uri in temp[0:5]:
 					recent.append(uri)
-
 			results = []
 			results.append(recent[0:5])
 
@@ -124,13 +123,11 @@ class DockyZGItem(DockyItem):
 
 	def _handle_get_most_used(self, results):
 		uris = results[0]
-		uris.reverse()
 		if len(uris) > 0:
 			for subject in uris:
 				menu_id = self.iface.AddFileMenuItem(subject ,"Other Recently Used Items")
 				self.id_map[menu_id] = subject
 		uris = results[1]
-		uris.reverse()
 		if len(uris) > 0:
 			for subject in uris:
 				print subject
