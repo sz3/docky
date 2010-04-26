@@ -67,15 +67,15 @@ class MostUsedProvider():
 
 		def _handle_get_events(events):
 			uris = []
-			uris2 = []
 			uris_counter = {}
+
+			print "*** Events: ", len(events)
 			for event in events:
 				for subject in event.subjects:
 					if exists(subject.uri):
 						if not subject.uri in uris:
 							uris.append(subject.uri)
 							uris_counter[subject.uri] = 0
-						uris_counter[subject.uri] += 1
 						
 			counter = []
 			for k, v in uris_counter.iteritems():
@@ -87,6 +87,7 @@ class MostUsedProvider():
 			for uri in uris:
 				if not uri in temp[0:5]:
 					recent.append(uri)
+					
 			results = []
 			results.append(recent[0:5])
 
