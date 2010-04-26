@@ -46,6 +46,7 @@ namespace Docky.Menus
 			Clicked += onClicked;
 		}
 		#endregion
+		
 		#region pixbuf icon constructors
 		public IconMenuItem (string text, Pixbuf icon, bool disabled) : this (text, "", disabled)
 		{

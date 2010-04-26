@@ -23,7 +23,7 @@ using Mono.Unix;
 namespace Docky.Widgets
 {
 
-	public abstract class AbstractTileObject
+	public abstract class AbstractTileObject : IDisposable
 	{
 		/// <summary>
 		/// Triggered when the icon for this tile is updated
@@ -287,5 +287,20 @@ namespace Docky.Widgets
 				OnButtonsUpdated ();
 			}
 		}
+		
+		#region IDisposable implementation
+		public virtual void Dispose ()
+		{
+			if (force_pbuf != null)
+				force_pbuf.Dispose ();
+			force_pbuf = null;
+			
+			ExtraButtons.ForEach (button => {
+				button.Dispose ();
+				button.Destroy ();
+			});
+			ExtraButtons.Clear ();
+		}
+		#endregion
 	}
 }

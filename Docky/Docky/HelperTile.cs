@@ -35,9 +35,7 @@ namespace Docky
 		public HelperTile (Helper helper)
 		{
 			this.Helper = helper;
-			Helper.HelperStatusChanged += delegate(object sender, HelperStatusChangedEventArgs e) {
-				SetProps ();
-			};
+			Helper.HelperStatusChanged += HandleHelperHelperStatusChanged;
 			
 			AddButtonStock = Gtk.Stock.Execute;
 			SubDescriptionTitle = Catalog.GetString ("Status");
@@ -78,7 +76,7 @@ namespace Docky
 			AddButtonTooltip = Catalog.GetString ("Enable this helper");
 			RemoveButtonTooltip = Catalog.GetString ("Disable this helper");
 		}
-		
+
 		void SetProps ()
 		{
 			SubDescriptionText = Helper.IsRunning ? Catalog.GetString ("Running") : Catalog.GetString ("Stopped");
@@ -90,5 +88,18 @@ namespace Docky
 			Helper.Enabled = !Enabled;
 			SetProps ();
 		}
+		
+		void HandleHelperHelperStatusChanged (object sender, HelperStatusChangedEventArgs e)
+		{
+			SetProps ();
+		}
+		
+		public override void Dispose ()
+		{
+			Helper.HelperStatusChanged -= HandleHelperHelperStatusChanged;
+			Helper = null;
+			
+			base.Dispose ();
+		}		
 	}
 }

@@ -130,7 +130,6 @@ class DockyZGItem(DockyItem):
 		uris = results[1]
 		if len(uris) > 0:
 			for subject in uris:
-				print subject
 				menu_id = self.iface.AddFileMenuItem(subject[1], "Most Used Items")
 				self.id_map[menu_id] = subject
 

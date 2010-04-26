@@ -188,5 +188,18 @@ namespace Docky.Items
 			if (IconUpdated != null)
 				IconUpdated (this, EventArgs.Empty);
 		}
+		
+		public override void Dispose ()
+		{
+			if (Emblems.Any ())
+				Emblems.ForEach (emblem => emblem.Dispose ());
+			Emblems.Clear ();
+			
+			if (forced_pixbuf != null)
+				forced_pixbuf.Dispose ();
+			forced_pixbuf = null;
+			
+			base.Dispose ();
+		}				
 	}
 }

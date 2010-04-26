@@ -540,6 +540,13 @@ namespace Docky.Widgets
         }
         
 #endregion
-        
+
+		public override void Dispose ()
+		{
+			stage.ActorStep -= OnActorStep;
+			border_stage.Iteration -= OnBorderIteration;
+			
+			base.Dispose ();
+		}
     }
 }

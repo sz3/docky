@@ -1,3 +1,19 @@
+//  
+//  Copyright (C) 2010 Rico Tzschichholz
+// 
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+// 
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+// 
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// 
 //
 // Tile.cs
 //
@@ -65,17 +81,9 @@ namespace Docky.Widgets
 			
 			OwnedObject = obj;	
 			
-			OwnedObject.IconUpdated += delegate {
-				SetImage ();
-			};
-			
-			OwnedObject.TextUpdated += delegate {
-				SetText ();
-			};
-			
-			OwnedObject.ButtonsUpdated += delegate {
-				UpdateButtons ();
-			};
+			OwnedObject.IconUpdated += HandleOwnedObjectIconUpdated;
+			OwnedObject.TextUpdated += HandleOwnedObjectTextUpdated;
+			OwnedObject.ButtonsUpdated += HandleOwnedObjectButtonsUpdated;
 			
 			IconSize = iconSize;
 			
@@ -244,6 +252,32 @@ namespace Docky.Widgets
 			button_box.State = StateType.Normal;
 			UpdateState ();
 			QueueResize ();
+		}
+		
+		void HandleOwnedObjectButtonsUpdated (object sender, EventArgs e)
+		{
+			UpdateButtons ();
+		}
+
+		void HandleOwnedObjectTextUpdated (object sender, EventArgs e)
+		{
+			SetText ();
+		}
+
+		void HandleOwnedObjectIconUpdated (object sender, EventArgs e)
+		{
+			SetImage ();
+		}
+
+		public override void Dispose ()
+		{
+			OwnedObject.IconUpdated -= HandleOwnedObjectIconUpdated;
+			OwnedObject.TextUpdated -= HandleOwnedObjectTextUpdated;
+			OwnedObject.ButtonsUpdated -= HandleOwnedObjectButtonsUpdated;
+			
+			OwnedObject = null;
+
+			base.Dispose ();
 		}
 	}
 }

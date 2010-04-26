@@ -33,7 +33,7 @@ namespace Docky.Menus
 		Footer,
 	}
 	
-	public class MenuList
+	public class MenuList : IDisposable
 	{
 		Dictionary<MenuListContainer, List<MenuItem>> list;
 		Dictionary<MenuListContainer, string> titles;
@@ -126,5 +126,17 @@ namespace Docky.Menus
 			
 			return result;
 		}
+
+		#region IDisposable implementation
+		public void Dispose ()
+		{
+			foreach (List<MenuItem> sublist in list.Values) 
+				sublist.Clear ();
+			list.Clear ();
+			titles.Clear ();
+			list = null;
+			titles = null;
+		}
+		#endregion
 	}
 }
