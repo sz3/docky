@@ -119,7 +119,7 @@ namespace Docky
 				"Robert Dyer <robert@go-docky.com>",
 				"Chris Szikszoy <chris@go-docky.com>",
 				"Rico Tzschichholz <rtz@go-docky.com>",
-				"Seif Lofty <seif@lotfy.com>",
+				"Seif Lotfy <seif@lotfy.com>",
 				"Chris Halse Rogers <raof@ubuntu.com>",
 				"Alex Launi <alex.launi@gmail.com>"
 			};
