@@ -284,15 +284,10 @@ namespace Docky.Services
 		}
 
 		#endregion
-		
-		public void Email (string address)
-		{
-			Execute ("xdg-email " + address);
-		}
-		
+
 		public void Open (string uri)
 		{
-			Execute ("xdg-open " + uri);
+			Open (GLib.FileFactory.NewForUri (uri));
 		}
 		
 		public void Open (IEnumerable<string> uris)

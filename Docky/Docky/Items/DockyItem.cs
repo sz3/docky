@@ -68,6 +68,12 @@ namespace Docky.Items
 			}
 		}
 		
+		protected string HelpIcon {
+			get {
+				return "[monochrome]help.svg@" + GetType ().Assembly.FullName;
+			}
+		}
+		
 		protected override void OnStyleSet (Gtk.Style style)
 		{
 			Gdk.Color gdkColor = Style.Backgrounds [(int) Gtk.StateType.Selected];
@@ -107,6 +113,7 @@ namespace Docky.Items
 			MenuList list = new MenuList ();
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Settings"), PrefsIcon, (o, a) => ConfigurationWindow.Instance.Show ()));
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_About"), AboutIcon, (o, a) => Docky.ShowAbout ()));
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Help"), HelpIcon, (o, a) => DockServices.System.Open ("http://wiki.go-docky.com")));
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Quit Docky"), CloseIcon, (o, a) => Docky.Quit ()));
 			return list;
 		}
