@@ -51,6 +51,7 @@ namespace Docky.Services
 		
 		const string PROXY = "/system/http_proxy";
 		const string PROXY_USE_PROXY = PROXY + "/" + "use_http_proxy";
+		const string PROXY_USE_AUTH = PROXY + "/" + "use_authentication";
 		const string PROXY_HOST = PROXY + "/" + "host";
 		const string PROXY_PORT = PROXY + "/" + "port";
 		const string PROXY_USER = PROXY + "/" + "authentication_user";
@@ -75,7 +76,7 @@ namespace Docky.Services
 			
 			GConf.AddNotify (PROXY, ProxySettingsChanged);
 			Proxy = GetWebProxy ();
-		}		
+		}
 		
 		public event EventHandler<ConnectionStatusChangeEventArgs> ConnectionStatusChanged;
 		
@@ -161,8 +162,9 @@ namespace Docky.Services
 						proxy.BypassArrayList.Add (string.Format ("http://{0}", host));
 					}
 				}
-				proxy.Credentials = new NetworkCredential (GConf.Get<string> (PROXY_USER, ""),
-					GConf.Get<string> ( PROXY_PASSWORD, ""));
+				if (GConf.Get<bool> (PROXY_USE_AUTH, false))
+					proxy.Credentials = new NetworkCredential (GConf.Get<string> (PROXY_USER, ""),
+						GConf.Get<string> (PROXY_PASSWORD, ""));
 			} catch (Exception e) {
 				Log.Error ("Error creating web proxy, {0}", e.Message);
 				Log.Debug (e.StackTrace);
