@@ -49,6 +49,7 @@ RESOURCES = \
 	Resources/badge.svg \
 	Resources/classic.svg \
 	Resources/close.svg \
+	Resources/help.svg \
 	Resources/menu.svg \
 	Resources/preferences.svg \
 	Resources/stretch_separator.svg\
