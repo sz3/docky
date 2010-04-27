@@ -775,14 +775,16 @@ namespace Docky.Interface
 		
 		void HandleMenuHidden (object sender, EventArgs e)
 		{
+			update_screen_regions = true;
 			SetTooltipVisibility ();
 			AnimatedDraw ();
 		}
 
 		void HandleMenuShown (object sender, EventArgs e)
 		{
-			AnimatedDraw ();
+			update_screen_regions = true;
 			SetTooltipVisibility ();
+			AnimatedDraw ();
 		}
 
 		void DockyControllerThemeChanged (object sender, EventArgs e)
@@ -1822,7 +1824,7 @@ namespace Docky.Interface
 					Gdk.Rectangle region = hoverArea;
 					region.X += window_position.X;
 					region.Y += window_position.Y;
-					if (ConfigurationMode || Painter != null)
+					if (Menu.Visible || ConfigurationMode || Painter != null)
 						adi.SetScreenRegion (Screen, new Gdk.Rectangle (0, 0, 0, 0));
 					else
 						adi.SetScreenRegion (Screen, region);
