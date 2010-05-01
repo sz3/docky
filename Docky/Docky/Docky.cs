@@ -92,12 +92,20 @@ namespace Docky
 			Gnome.Vfs.Vfs.Shutdown ();
 		}
 		
+		static uint checkCompositeTimer = 0;
+		
 		static void CheckComposite ()
 		{
-			GLib.Timeout.Add (2000, delegate {
+			if (checkCompositeTimer != 0) {
+				GLib.Source.Remove (checkCompositeTimer);
+				checkCompositeTimer = 0;
+			}
+			
+			checkCompositeTimer = GLib.Timeout.Add (2000, delegate {
 				if (!Gdk.Screen.Default.IsComposited)
 					Log.Notify (Catalog.GetString ("Docky requires compositing to work properly. " +
 						"Please enable compositing and restart docky."));
+				checkCompositeTimer = 0;
 				return false;
 			});
 		}
