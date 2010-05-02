@@ -629,11 +629,17 @@ namespace Docky.Windowing
 						using (GLib.DataInputStream stream = new GLib.DataInputStream (launcher.Read (null))) {
 							ulong len;
 							string line;
-							while ((line = stream.ReadLine (out len, null)) != null) {
-								if (line.StartsWith ("exec")) {
-									execLine = line;
-									break;
+							try {
+								while ((line = stream.ReadLine (out len, null)) != null) {
+									if (line.StartsWith ("exec")) {
+										execLine = line;
+										break;
+									}
 								}
+							} catch (Exception e) {
+								Log<WindowMatcher>.Error (e.Message);
+								Log<WindowMatcher>.Error (e.StackTrace);
+								continue;
 							}
 						}
 		
