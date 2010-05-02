@@ -39,11 +39,15 @@ class DockyItem():
 		self.bus = dbus.SessionBus()
 		self.id_map = {}
 		
-		obj = self.bus.get_object(dockybus, self.path)
-		self.iface = dbus.Interface(obj, itemiface)
-	
-		self.bus.add_signal_receiver(self.menu_pressed_signal, "MenuItemActivated", itemiface, dockybus, self.path)
-		self.bus.add_signal_receiver(self.item_confirmation_needed, "ItemConfirmationNeeded", itemiface, dockybus, self.path)
+		try:
+			obj = self.bus.get_object(dockybus, self.path)
+			self.iface = dbus.Interface(obj, itemiface)
+
+			self.bus.add_signal_receiver(self.menu_pressed_signal, "MenuItemActivated", itemiface, dockybus, self.path)
+			self.bus.add_signal_receiver(self.item_confirmation_needed, "ItemConfirmationNeeded", itemiface, dockybus, self.path)
+		except dbus.DBusException, e:
+			print "DockyItem(): %s" % e
+			sys.exit(0)
 
 	def menu_pressed_signal(self, menu_id):
 		if self.id_map.has_key(menu_id):
@@ -76,22 +80,22 @@ class DockySink():
 		try:
 			obj = self.bus.get_object(dockybus, dockypath)
 			self._iface = dbus.Interface(obj, dockyiface)
+
+			paths = self._iface.DockItemPaths()
+
+			self.bus.add_signal_receiver(self.item_added,   "ItemAdded",    dockyiface, dockybus, dockypath)
+			self.bus.add_signal_receiver(self.item_removed, "ItemRemoved",  dockyiface, dockybus, dockypath)
+			self.bus.add_signal_receiver(self.shut_down,    "ShuttingDown", dockyiface, dockybus, dockypath)
+
+			for pathtoitem in paths:
+				obj = self.bus.get_object(dockybus, pathtoitem)
+				item = dbus.Interface(obj, itemiface)
+				self.item_path_found(pathtoitem, item)
+
+			self.bus.add_signal_receiver(self.name_owner_changed_cb, dbus_interface='org.freedesktop.DBus', signal_name='NameOwnerChanged')
 		except dbus.DBusException, e:
 			print "DockySink(): %s" % e
 			sys.exit(0)
-
-		paths = self._iface.DockItemPaths()
-		
-		self.bus.add_signal_receiver(self.item_added,   "ItemAdded",    dockyiface, dockybus, dockypath)
-		self.bus.add_signal_receiver(self.item_removed, "ItemRemoved",  dockyiface, dockybus, dockypath)
-		self.bus.add_signal_receiver(self.shut_down,    "ShuttingDown", dockyiface, dockybus, dockypath)
-		
-		for pathtoitem in paths:
-			obj = self.bus.get_object(dockybus, pathtoitem)
-			item = dbus.Interface(obj, itemiface)
-			self.item_path_found(pathtoitem, item)
-
-		self.bus.add_signal_receiver(self.name_owner_changed_cb, dbus_interface='org.freedesktop.DBus', signal_name='NameOwnerChanged')
 
 	def name_owner_changed_cb(self, name, old_owner, new_owner):
 		if name == dockybus and not new_owner:
