@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-14 07:17+0200\n"
-"PO-Revision-Date: 2010-03-27 18:21+0000\n"
+"PO-Revision-Date: 2010-04-30 16:12+0000\n"
 "Last-Translator: Uri Shabtay <ushabtay@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-04-14 09:04+0000\n"
+"X-Launchpad-Export-Date: 2010-05-02 14:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
@@ -67,41 +67,42 @@ msgstr "יוצר"
 
 #: ../Docky/Docky/DockletTile.cs:88
 msgid "Move this docklet up on the selected dock"
-msgstr ""
+msgstr "הזז כלי עזר זה מעלה בדוק הנבחר"
 
 #: ../Docky/Docky/DockletTile.cs:89
 msgid "Move this docklet down on the selected dock"
-msgstr ""
+msgstr "הזז כלי עזר זה מטה בדוק הנבחר"
 
 #: ../Docky/Docky/DockletTile.cs:93
 msgid "Move this docklet left on the selected dock"
-msgstr ""
+msgstr "הזז כלי עזר זה שמאלה בדוק הנבחר"
 
 #: ../Docky/Docky/DockletTile.cs:94
 msgid "Move this docklet right on the selected dock"
-msgstr ""
+msgstr "הזז כלי עזר זה ימינה בדוק הנבחר"
 
 #: ../Docky/Docky/DockletTile.cs:96
 msgid "Configure this docklet"
-msgstr ""
+msgstr "עצב כלי עזר זה"
 
 #: ../Docky/Docky/DockletTile.cs:97
 msgid "About this docklet"
-msgstr ""
+msgstr "אודות כלי עזר זה"
 
 #: ../Docky/Docky/DockletTile.cs:98
 msgid "Add this docklet to the selected dock"
-msgstr ""
+msgstr "הוסף כלי עזר זה לדוק הנבחר"
 
 #: ../Docky/Docky/DockletTile.cs:99
 msgid "Remove this docklet from the selected dock"
-msgstr ""
+msgstr "הסר כלי עזר זה בדוק הנבחר"
 
 #: ../Docky/Docky/Docky.cs:99
 msgid ""
 "Docky requires compositing to work properly. Please enable compositing and "
 "restart docky."
 msgstr ""
+"Docky דורש compositing בכדי לעבוד כהלכה. אנא הפעל compositing ואתחל את Docky."
 
 #: ../Docky/Docky/HelperTile.cs:43
 msgid "Status"
@@ -113,15 +114,15 @@ msgstr "הסר"
 
 #: ../Docky/Docky/HelperTile.cs:77
 msgid "About this helper"
-msgstr ""
+msgstr "אודות כלי עזר זה"
 
 #: ../Docky/Docky/HelperTile.cs:78
 msgid "Enable this helper"
-msgstr ""
+msgstr "הפעל כלי עזר זה"
 
 #: ../Docky/Docky/HelperTile.cs:79
 msgid "Disable this helper"
-msgstr ""
+msgstr "נטרל כלי עזר זה"
 
 #: ../Docky/Docky/HelperTile.cs:84
 msgid "Running"
@@ -135,7 +136,7 @@ msgstr "מופסק"
 msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
-msgstr ""
+msgstr "גורם למשגרים שכרגע מריצים יותר מחלון אחד להיות עם מחוון נוסף תחתיהם."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:335
 msgid ""
@@ -188,11 +189,11 @@ msgstr "_צא מדוקי"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
 msgid "Docky Settings"
-msgstr ""
+msgstr "הגדרות Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
 msgid "_Start When Computer Starts"
-msgstr ""
+msgstr "התחל בעת הפעלת המחשב"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
@@ -213,7 +214,7 @@ msgstr "<b>הגדרות דוקי</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
-msgstr ""
+msgstr "סרגלי דוק"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
@@ -232,11 +233,11 @@ msgstr "כבוי"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
 msgid "Docklets"
-msgstr ""
+msgstr "Docklets"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:374
 msgid "Helpers"
-msgstr ""
+msgstr "עזרים"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:429
 msgid "_New Dock"
@@ -248,19 +249,19 @@ msgstr "ללא"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Autohide"
-msgstr ""
+msgstr "הסתרה אוטומטית"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:62
 msgid "Intellihide"
-msgstr ""
+msgstr "הסתרה חכמה"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:63
 msgid "Window Dodge"
-msgstr ""
+msgstr "התחמקות מחלונות"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
 msgid "_Fade On Hide"
-msgstr ""
+msgstr "_עמעם בהסתרה"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:121
 msgid "_Icon Size:"
@@ -268,11 +269,11 @@ msgstr "_גודל הסמן:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:134
 msgid "_Hiding:"
-msgstr ""
+msgstr "_הסתרה:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:144
 msgid "Indicat_e Multiple Windows"
-msgstr ""
+msgstr "ציין כאשר יש מספר חלונות"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:158
 msgid "_Panel Mode"
@@ -305,7 +306,7 @@ msgstr "איפוס הצבעים"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:356
 msgid "_Pin to Dock"
-msgstr ""
+msgstr "_הדק אל הדוק"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:182
 msgid "Not enough free space on destination."
@@ -328,7 +329,7 @@ msgstr "מעתיק"
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:221
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:222
 msgid "Error performing drop action"
-msgstr ""
+msgstr "שגיאה בביצוע פעולת גרירה"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:244
 msgid "Open"
@@ -336,7 +337,7 @@ msgstr "פתח"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:245
 msgid "Open Containing Folder"
-msgstr ""
+msgstr "פתח תיקייה מכילה"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:244
 msgid "Unma_ximize"
@@ -473,7 +474,7 @@ msgstr "דקות"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:200
 msgid "Click to set username and password."
-msgstr ""
+msgstr "לחץ להגדרת שם משתמש וסיסמא"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:254
 msgid "(no subject)"
@@ -482,12 +483,12 @@ msgstr "(ללא נושא)"
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:272
 #, csharp-format
 msgid "From: {0}"
-msgstr ""
+msgstr "מ: {0}"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:283
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 msgid "Feed Error"
-msgstr ""
+msgstr "שגיאת הזנה"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:292
 msgid "Invalid Username"
@@ -508,97 +509,97 @@ msgstr "הגדרות GMail"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:79
 msgid "No unread mail"
-msgstr ""
+msgstr "אין דואר שלא נקרא"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:82
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} הודעה חדשה"
+msgstr[1] "{0} הודעות חדשות"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:103
 msgid "Checking mail..."
-msgstr ""
+msgstr "בודק דואר..."
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:196
 msgid "_View "
-msgstr ""
+msgstr "_צפה "
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "_Compose Mail"
-msgstr ""
+msgstr "_כתוב הודעה חדשה"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:208
 msgid "New Mail"
-msgstr ""
+msgstr "דואר חדש"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:226
 msgid "Check _Mail"
-msgstr ""
+msgstr "בדוק_דואר"
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
-msgstr ""
+msgstr "תוויות"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
 msgid "GMail"
-msgstr ""
+msgstr "GMail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr ""
+msgstr "התחברות"
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
-msgstr ""
+msgstr "מ: "
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Eject"
-msgstr ""
+msgstr "_הוצא"
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Unmount"
-msgstr ""
+msgstr "_נתק"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:53
 msgid "Network Manager"
-msgstr ""
+msgstr "מנהל הרשת"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
-msgstr ""
+msgstr "מתחבר..."
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:101
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:166
 msgid "Disconnected"
-msgstr ""
+msgstr "מנותק"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
 msgid "Connected: {0}"
-msgstr ""
+msgstr "מחובר: {0}"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:47
 msgid "My _Stations"
-msgstr ""
+msgstr "התחנות _שלי"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:78
 msgid "S_earch"
-msgstr ""
+msgstr "ח_יפוש"
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
-msgstr ""
+msgstr "לא נמצאו תחנות."
 
 #: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
-msgstr ""
+msgstr "אנא נסו לחפש שוב."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:48
 msgid "Fetching Information..."
-msgstr ""
+msgstr "מושך מידע..."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:68
 msgid "Click to add NPR stations."
@@ -606,19 +607,19 @@ msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:107
 msgid "Home Page"
-msgstr ""
+msgstr "דף הבית"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:114
 msgid "Program Schedule"
-msgstr ""
+msgstr "לוח זמני התכנית"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:121
 msgid "Donate"
-msgstr ""
+msgstr "תרום"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:128
 msgid "Live Streams"
-msgstr ""
+msgstr "שידורים חיים"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:166
 msgid "Settings"
@@ -626,11 +627,11 @@ msgstr "הגדרות"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:67
 msgid "Clear the Recent Documents list?"
-msgstr ""
+msgstr "האם לנקות את רשימת המסמכים אחרונים?"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:69
 msgid "Clear Recent Documents"
-msgstr ""
+msgstr "נקה מסמכים אחרונים"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:71
 msgid ""
@@ -638,84 +639,87 @@ msgid ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
+"ניקוי רשימת מסמכים אחרונים יביא לניקוי:\n"
+"• כל הפריטים מתפריט מקומות <-- מסמכים אחרונים.\n"
+"• כל הפריטים מרשימת מסמכים אחרונים של כל הישומים."
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:92
 msgid "_Clear Recent Documents..."
-msgstr ""
+msgstr "_נקה מסמכים אחרונים..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:149
 msgid "Lock Screen"
-msgstr ""
+msgstr "נעל מסך"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
 msgid "Log Out..."
-msgstr ""
+msgstr "ניתוק..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:154
 msgid "Log Out"
-msgstr ""
+msgstr "ניתוק"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:155
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
-msgstr ""
+msgstr "האם ברצונך לסגור את כל התכניות ולהתנתק מהמחשב?"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:160
 msgid "Suspend"
-msgstr ""
+msgstr "השהיה"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:165
 msgid "Hibernate"
-msgstr ""
+msgstr "תרדמת"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:171
 msgid "Restart..."
-msgstr ""
+msgstr "הפעלה מחדש..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:172
 msgid "Restart"
-msgstr ""
+msgstr "הפעלה מחדש"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:173
 msgid "Are you sure you want to close all programs and restart the computer?"
-msgstr ""
+msgstr "האם ברצונך לסגור את כל התכניות ולהפעיל את המחשב מחדש?"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
 msgid "Shut Down..."
-msgstr ""
+msgstr "כיבוי..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
 msgid "Shut Down"
-msgstr ""
+msgstr "כיבוי"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:180
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
-msgstr ""
+msgstr "האם לסגור את כל התכניות ולכבות את המחשב?"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
 msgid "No items in Trash"
-msgstr ""
+msgstr "אין פריטים באשפה"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:75
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} פריט באשפה"
+msgstr[1] "{0} פריטים באשפה"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:160
 msgid "_Open Trash"
-msgstr ""
+msgstr "_פתיחת האשפה"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:162
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:192
 msgid "Empty _Trash"
-msgstr ""
+msgstr "רוקן _אשפה"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
 msgid "Empty all of the items from the trash?"
-msgstr ""
+msgstr "האם לרוקן את כל הפריטים מהאשפה?"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:186
 msgid ""
@@ -726,33 +730,33 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:65
 msgid "_Weather Provider:"
-msgstr ""
+msgstr "_ספק מזג אוויר:"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:105
 msgid "My _Locations"
-msgstr ""
+msgstr "המקומות_שלי"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:136
 msgid "_Search"
-msgstr ""
+msgstr "_חיפוש"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:176
 msgid "Automatically Update _Every"
-msgstr ""
+msgstr "עדכן אוטומטית _כל"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:220
 msgid "Use _Metric Units"
-msgstr ""
+msgstr "השתמש _ביחידות השיטה העשרונית"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:95
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:98
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:103
 msgid "Invalid Weather Location"
-msgstr ""
+msgstr "מיקום מזג אוויר שגוי"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:101
 msgid "Network Error: "
-msgstr ""
+msgstr "שגיאת רשת "
 
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""

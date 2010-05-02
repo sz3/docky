@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-14 07:17+0200\n"
-"PO-Revision-Date: 2010-04-22 13:35+0000\n"
+"PO-Revision-Date: 2010-05-02 04:57+0000\n"
 "Last-Translator: Paco Molinero <paco@byasl.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-04-23 06:28+0000\n"
+"X-Launchpad-Export-Date: 2010-05-02 14:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
@@ -49,7 +49,7 @@ msgstr ""
 #: ../Docky/Docky/ConfigurationWindow.cs:284
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:456
 msgid "_Delete Dock"
-msgstr "_Borrar dock"
+msgstr "_Eliminar Dock"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:398
 #: ../Docky/Docky/ConfigurationWindow.cs:423
@@ -67,19 +67,19 @@ msgstr "Autor"
 
 #: ../Docky/Docky/DockletTile.cs:88
 msgid "Move this docklet up on the selected dock"
-msgstr "Mueve este docklet hacia arriba en el dock seleccionado"
+msgstr "Mover este docklet hacia arriba en el dock seleccionado"
 
 #: ../Docky/Docky/DockletTile.cs:89
 msgid "Move this docklet down on the selected dock"
-msgstr "Mueve este docklet hacia abajo en el dock seleccionado"
+msgstr "Mover este docklet hacia abajo en el dock seleccionado"
 
 #: ../Docky/Docky/DockletTile.cs:93
 msgid "Move this docklet left on the selected dock"
-msgstr "Mueve este docklet a la izquierda en el dock seleccionado"
+msgstr "Mover este docklet a la izquierda en el dock seleccionado"
 
 #: ../Docky/Docky/DockletTile.cs:94
 msgid "Move this docklet right on the selected dock"
-msgstr "Mueve este docklet a la derecha en el dock seleccionado"
+msgstr "Mover este docklet a la derecha en el dock seleccionado"
 
 #: ../Docky/Docky/DockletTile.cs:96
 msgid "Configure this docklet"
@@ -95,14 +95,14 @@ msgstr "Añadir este docklet al dock seleccionado"
 
 #: ../Docky/Docky/DockletTile.cs:99
 msgid "Remove this docklet from the selected dock"
-msgstr "Eliminar este docklet del dock seleccionado"
+msgstr "Quitar este docklet del dock seleccionado"
 
 #: ../Docky/Docky/Docky.cs:99
 msgid ""
 "Docky requires compositing to work properly. Please enable compositing and "
 "restart docky."
 msgstr ""
-"Docky requiere composición para funcionar correctamente. Por favor active la "
+"Docky requiere composición para funcionar correctamente. Active la "
 "composición y reinicie Docky."
 
 #: ../Docky/Docky/HelperTile.cs:43
@@ -115,7 +115,7 @@ msgstr "Desinstalar"
 
 #: ../Docky/Docky/HelperTile.cs:77
 msgid "About this helper"
-msgstr "Sobre este ayudante"
+msgstr "Acerca de este ayudante"
 
 #: ../Docky/Docky/HelperTile.cs:78
 msgid "Enable this helper"
@@ -190,7 +190,7 @@ msgstr "Acerca _de"
 
 #: ../Docky/Docky/Items/DockyItem.cs:111
 msgid "_Quit Docky"
-msgstr "_Cerrar Docky"
+msgstr "_Salir de Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
 msgid "Docky Settings"
@@ -215,7 +215,7 @@ msgstr "<b>Opciones generales</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
-msgstr "<b>Configuración del Dock</b>"
+msgstr "<b>Configuración del dock</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
@@ -286,7 +286,7 @@ msgstr "_Modo panel"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:172
 msgid "3D Back_ground"
-msgstr "Fondo_3D"
+msgstr "Fondo _3D"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:186
 msgid "_Manage Windows Without Launcher"
@@ -321,7 +321,7 @@ msgstr "No hay suficiente espacio en el destino."
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:196
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:216
 msgid "Complete"
-msgstr "Completo"
+msgstr "Completado"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:202
 msgid "Moving"
@@ -438,11 +438,11 @@ msgstr "Equipo"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:421
 msgid "Di_gital Clock"
-msgstr "Reloj di_gital"
+msgstr "Reloj d_igital"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:427
 msgid "24-Hour _Clock"
-msgstr "_Reloj de 24 Horas"
+msgstr "_Reloj de 24 horas"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:433
 msgid "Show _Date"
@@ -470,7 +470,7 @@ msgstr "_Añadir etiqueta"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:113
 msgid "Check e_very:"
-msgstr "Compro_bar cada"
+msgstr "Compro_bar cada:"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:123
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:186
@@ -549,7 +549,7 @@ msgstr "Etiquetas"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
 msgid "GMail"
-msgstr "GMail"
+msgstr "Gmail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
@@ -694,7 +694,7 @@ msgstr "¿Seguro que desea cerrar todos los programas y reiniciar el equipo?"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
 msgid "Shut Down..."
-msgstr "Apagando..."
+msgstr "Apagar..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
 msgid "Shut Down"
@@ -718,16 +718,16 @@ msgstr[1] "{0} elementos en la papelera"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:160
 msgid "_Open Trash"
-msgstr "_Abrir papelera"
+msgstr "_Abrir la papelera"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:162
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:192
 msgid "Empty _Trash"
-msgstr "V_aciar la papelera"
+msgstr "_Vaciar papelera"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
 msgid "Empty all of the items from the trash?"
-msgstr "¿Borrar todos los elementos de la papelera?"
+msgstr "¿Vaciar todos los elementos de la papelera?"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:186
 msgid ""
@@ -775,7 +775,7 @@ msgid ""
 "specified as US Zip Code or 'City, Country'."
 msgstr ""
 "Datos meteorológicos proporcionados por Google. Requiere que los lugares se "
-"especifiquen como un código postal de EE.UU. o como «Ciudad, País»."
+"especifiquen como un código postal de EE. UU. o como «Ciudad, País»."
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
@@ -785,9 +785,9 @@ msgid ""
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
 "Datos meteorológicos proporcionados por The Weather Channel©. Requiere que "
-"los lugares se especifiquen como un código postal de EE.UU. o como un código "
-"único del sitio web. Para saber el código, busque el pronóstico en su página "
-"web y encontrará el código en la URL, después de «/local/» como algo "
+"los lugares se especifiquen como un código postal de EE. UU. o como un "
+"código único del sitio web. Para saber el código, busque el pronóstico en su "
+"página web y encontrará el código en el URL, después de «/local/» como algo "
 "parecido a AAXX0000."
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
@@ -796,7 +796,7 @@ msgid ""
 "requires locations to be specified as US Zip Code or 'City, Country'."
 msgstr ""
 "Datos meteorológicos proporcionados por Weather Underground©. Requiere que "
-"los lugares se especifiquen como un código postal de EE.UU. o como «Ciudad, "
+"los lugares se especifiquen como un código postal de EE. UU. o como «Ciudad, "
 "País»."
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90

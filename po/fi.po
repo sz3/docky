@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-14 07:17+0200\n"
-"PO-Revision-Date: 2010-04-20 08:46+0000\n"
+"PO-Revision-Date: 2010-04-24 09:29+0000\n"
 "Last-Translator: Jiri Grönroos <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-04-23 06:28+0000\n"
+"X-Launchpad-Export-Date: 2010-05-02 14:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
@@ -44,7 +44,7 @@ msgid ""
 "for the deleted dock will be permanently lost."
 msgstr ""
 "Jos päätät poistaa telakan, kaikki\n"
-"poistettavan telakan asetukset menetetään."
+"kyseisen telakan asetukset menetetään."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:284
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:456
@@ -308,7 +308,7 @@ msgstr "_Avaa"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:69
 msgid "Reset Color"
-msgstr ""
+msgstr "Poista asetettu väri"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:356
 msgid "_Pin to Dock"
@@ -784,6 +784,11 @@ msgid ""
 "website.  To find your code, look up your forecast on their site and the "
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
+"Säätiedot ja niiden tekijänoikeudet kuuluvat The Weather Channelille. "
+"Määritä paikkakunta yhdysvaltalaisella postinumerolla (zip) tai palvelun "
+"sivulta saatavalla tunnisteella. Tunniste löytyy katsomalla sivustolta "
+"halutun paikkakunnan säätiedot. Paikkakunnan tunniste sijaitsee verkko-"
+"osoitteessa, ja se on muotoa AAXX0000."
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
 msgid ""
@@ -812,7 +817,7 @@ msgstr "Haetaan tietoja..."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:223
 msgid "Radar _Map"
-msgstr ""
+msgstr "Tut_kakartta"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:228
 msgid "Forecasts"
@@ -834,7 +839,7 @@ msgstr "_Huomenna"
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:318
 #, csharp-format
 msgid "{0} humidity"
-msgstr ""
+msgstr "{0} ilmankosteus"
 
 #~ msgid "_Add"
 #~ msgstr "_Lisää"

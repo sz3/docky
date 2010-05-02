@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-04-14 07:17+0200\n"
-"PO-Revision-Date: 2010-03-30 19:19+0000\n"
+"PO-Revision-Date: 2010-05-02 07:13+0000\n"
 "Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-04-14 09:04+0000\n"
+"X-Launchpad-Export-Date: 2010-05-02 14:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
 msgid "Search Docklets..."
-msgstr "Buscar Docklets..."
+msgstr "Buscar engadidos de doca..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Search Helpers..."
@@ -28,28 +28,28 @@ msgstr "Buscar axudantes..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:209
 msgid "Click on any dock to configure."
-msgstr "Prema en calquera dock para configurala"
+msgstr "Prema en calquera doca para configurala"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:210
 msgid "Drag any dock to reposition."
-msgstr "Arrastre calquera dock para reposicionalo."
+msgstr "Arrastre calquera doca para reposicionala."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:275
 msgid "Delete the currently selected dock?"
-msgstr "Desexa eliminar a dock seleccionada actualmente?"
+msgstr "Desexa eliminar a doca seleccionada actualmente?"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:277
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
-"Se selecciona eliminar o dock, todas as configuracións\n"
-"para a dock eliminada perderanse permanentemente."
+"Se selecciona eliminar a doca, todas as configuracións\n"
+"para a doca eliminada perderanse permanentemente."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:284
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:456
 msgid "_Delete Dock"
-msgstr "_Eliminar dock"
+msgstr "_Eliminar a doca"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:398
 #: ../Docky/Docky/ConfigurationWindow.cs:423
@@ -67,43 +67,43 @@ msgstr "Autor"
 
 #: ../Docky/Docky/DockletTile.cs:88
 msgid "Move this docklet up on the selected dock"
-msgstr ""
+msgstr "Mover este engadido cara arriba na doca seleccionada"
 
 #: ../Docky/Docky/DockletTile.cs:89
 msgid "Move this docklet down on the selected dock"
-msgstr ""
+msgstr "Mover este engadido cara abaixo na doca seleccionada"
 
 #: ../Docky/Docky/DockletTile.cs:93
 msgid "Move this docklet left on the selected dock"
-msgstr ""
+msgstr "Mover este engadido á esquerda na doca seleccionada"
 
 #: ../Docky/Docky/DockletTile.cs:94
 msgid "Move this docklet right on the selected dock"
-msgstr ""
+msgstr "Mover este engadido á dereita na doca seleccionada"
 
 #: ../Docky/Docky/DockletTile.cs:96
 msgid "Configure this docklet"
-msgstr ""
+msgstr "Configurar este engadido"
 
 #: ../Docky/Docky/DockletTile.cs:97
 msgid "About this docklet"
-msgstr ""
+msgstr "Sobre este engadido de doca"
 
 #: ../Docky/Docky/DockletTile.cs:98
 msgid "Add this docklet to the selected dock"
-msgstr ""
+msgstr "Engadir este engadido á doca seleccionada"
 
 #: ../Docky/Docky/DockletTile.cs:99
 msgid "Remove this docklet from the selected dock"
-msgstr ""
+msgstr "Eliminar este engadido da doca seleccionada"
 
 #: ../Docky/Docky/Docky.cs:99
 msgid ""
 "Docky requires compositing to work properly. Please enable compositing and "
 "restart docky."
 msgstr ""
-"Dock require a composición para funcionar correctamente. Active a "
-"composición e reinicie docky."
+"Docky require a composición para funcionar correctamente. Active a "
+"composición e reinicie Docky."
 
 #: ../Docky/Docky/HelperTile.cs:43
 msgid "Status"
@@ -115,15 +115,15 @@ msgstr "Desinstalar"
 
 #: ../Docky/Docky/HelperTile.cs:77
 msgid "About this helper"
-msgstr ""
+msgstr "Sobre este axudante"
 
 #: ../Docky/Docky/HelperTile.cs:78
 msgid "Enable this helper"
-msgstr ""
+msgstr "Activar este axudante"
 
 #: ../Docky/Docky/HelperTile.cs:79
 msgid "Disable this helper"
-msgstr ""
+msgstr "Desactivar este axudante"
 
 #: ../Docky/Docky/HelperTile.cs:84
 msgid "Running"
@@ -138,21 +138,21 @@ msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
 msgstr ""
-"Causa que os lanzadores que actualmente xestionan máis dunha xanela teñan un "
-"indicador adicional debaixo deles."
+"Causa que os iniciadores que actualmente xestionan máis dunha xanela teñan "
+"un indicador adicional debaixo deles."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:335
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
-"Cando está estabelecido, as xanelas que non teñen lanzadores nun dock se "
-"engada á dock."
+"Cando está estabelecido, as xanelas que non teñen xa iniciadores nunha doca "
+"engadiránse a esta doca."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:635
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
-"<i>Non ocultar nunca; as xanelas maximizadas non sobrepoñen á dock.</i>"
+"<i>Non ocultar nunca; as xanelas maximizadas non se sobrepoñen á doca.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:638
 msgid "<i>Hides whenever the mouse is not over it.</i>"
@@ -160,11 +160,11 @@ msgstr "<i>Agóchase cando o rato non está sobre ela.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:641
 msgid "<i>Hides when dock obstructs the active application.</i>"
-msgstr "<i>Agóchase cando o dock obstrúe o aplicativo activo.</i>"
+msgstr "<i>Agóchase cando a doca obstrúe o aplicativo activo.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:644
 msgid "<i>Hides when dock obstructs any window.</i>"
-msgstr "<i>Agóchase cando o dock obstrúe calquera xanela.</i>"
+msgstr "<i>Agóchase cando a doca obstrúe calquera xanela.</i>"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:375
 msgid "Drag to reposition"
@@ -177,7 +177,7 @@ msgstr "Soltar para abrir"
 #: ../Docky/Docky/Interface/DockWindow.cs:386
 #: ../Docky/Docky/Interface/DockWindow.cs:400
 msgid "Drop to add to dock"
-msgstr "Soltar para engadir á dock"
+msgstr "Soltar para engadir á doca"
 
 #: ../Docky/Docky/Items/DockyItem.cs:109
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
@@ -195,11 +195,11 @@ msgstr "_Saír de Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
 msgid "Docky Settings"
-msgstr ""
+msgstr "Configuracións de Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
 msgid "_Start When Computer Starts"
-msgstr "_Iniciar cando arrinque o computador"
+msgstr "_Iniciar cando arranque o computador"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
@@ -216,11 +216,11 @@ msgstr "<b>Opcións xerais</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
-msgstr "<b>Configuración da Dock</b>"
+msgstr "<b>Configuración da doca</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
-msgstr "Docks"
+msgstr "Docas"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
@@ -239,7 +239,7 @@ msgstr "Desactivado"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
 msgid "Docklets"
-msgstr "Docklets"
+msgstr "Engadidos de doca"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:374
 msgid "Helpers"
@@ -247,7 +247,7 @@ msgstr "Axudantes"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:429
 msgid "_New Dock"
-msgstr "_Nova dock"
+msgstr "_Nova doca"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "None"
@@ -267,7 +267,7 @@ msgstr "Esquivar xanela"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
 msgid "_Fade On Hide"
-msgstr "_Fundir ao agochar"
+msgstr "_Fundir ao ocultar"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:121
 msgid "_Icon Size:"
@@ -291,7 +291,7 @@ msgstr "Fo_ndo en 3D"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:186
 msgid "_Manage Windows Without Launcher"
-msgstr "_Xestionar as xanelas sen o lanzador"
+msgstr "_Xestionar as xanelas sen o iniciador"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:201
 msgid "_Zoom:"
@@ -308,11 +308,11 @@ msgstr "_Abrir"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:69
 msgid "Reset Color"
-msgstr "Restabelecer cor"
+msgstr "Restabelecer a cor"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:356
 msgid "_Pin to Dock"
-msgstr "_Aclar á Dock"
+msgstr "_Ancorar á doca"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:182
 msgid "Not enough free space on destination."
@@ -463,7 +463,7 @@ msgstr "Tema"
 
 #: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:42
 msgid "Show Desktop"
-msgstr "Mostrar escritorio"
+msgstr "Mostrar o escritorio"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
 msgid "_Add Label"
@@ -480,7 +480,7 @@ msgstr "minutos"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:200
 msgid "Click to set username and password."
-msgstr ""
+msgstr "Prema para estabelecer un nome de usuario e contrasinal"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:254
 msgid "(no subject)"
@@ -503,7 +503,7 @@ msgstr "Nome de usuario incorrecto"
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:296
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:300
 msgid "Network Error"
-msgstr "Erro de Conexión"
+msgstr "Erro de rede"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:305
 msgid "General Error"
@@ -596,20 +596,20 @@ msgstr "_Buscar"
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
-msgstr "Non se atopou ningunha estación."
+msgstr "Non se encontrou ningunha estación."
 
 #: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
-msgstr "Tente buscar de novo."
+msgstr "Tente a buscar de novo."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:48
 msgid "Fetching Information..."
-msgstr "Obtendo información..."
+msgstr "Obtendo a información..."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:68
 msgid "Click to add NPR stations."
-msgstr "Prema para engadiro estacións NPR."
+msgstr "Prema para engadir estacións NPR."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:107
 msgid "Home Page"
@@ -742,7 +742,7 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:65
 msgid "_Weather Provider:"
-msgstr "Fornecedor do _Tempo:"
+msgstr "Fornecedor do _tempo:"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:105
 msgid "My _Locations"
@@ -775,8 +775,8 @@ msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
 msgstr ""
-"Datos do tempo fornecidos por Goolge. Esta fonte require que as "
-"localizacións sexan especificadas como un código postal de Estados Unidos ou "
+"Datos do tempo fornecidos por Google. Esta fonte require que as "
+"localizacións se especifiquen como un código postal de Estados Unidos ou "
 "'Cidade, País'."
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
@@ -803,7 +803,7 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
-msgstr "Non se atopou ningún resultado."
+msgstr "Non se encontrou ningún resultado."
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
@@ -811,7 +811,7 @@ msgstr "Configuración do tempo"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
 msgid "Click to add a location."
-msgstr ""
+msgstr "Prema para engadir unha localización."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
 msgid "Fetching data..."
@@ -823,11 +823,11 @@ msgstr "_Mada de radar"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:228
 msgid "Forecasts"
-msgstr "Prognóstico"
+msgstr "Pronóstico"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:245
 msgid "Check _Weather"
-msgstr "Comprobar _tempo"
+msgstr "Comprobar o _tempo"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
 msgid "_Today"
@@ -841,7 +841,7 @@ msgstr "_Mañán"
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:318
 #, csharp-format
 msgid "{0} humidity"
-msgstr ""
+msgstr "{0} humidade"
 
 #~ msgid "Docky Configuration"
 #~ msgstr "Configuración de Docky"
