@@ -418,19 +418,19 @@ namespace Clock
 		protected override MenuList OnGetMenuItems ()
 		{
 			MenuList list = base.OnGetMenuItems ();
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Di_gital Clock"), ShowDigital ? "gtk-apply" : "gtk-remove", (o, a) =>
+			list[MenuListContainer.Actions].Add (new IconMenuItem (Catalog.GetString ("Di_gital Clock"), ShowDigital ? "gtk-apply" : "gtk-remove", (o, a) =>
 			{
 				ShowDigital = !ShowDigital;
 				QueueRedraw ();
 			}));
 			
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("24-Hour _Clock"), ShowMilitary ? "gtk-apply" : "gtk-remove", (o, a) =>
+			list[MenuListContainer.Actions].Add (new IconMenuItem (Catalog.GetString ("24-Hour _Clock"), ShowMilitary ? "gtk-apply" : "gtk-remove", (o, a) =>
 			{
 				ShowMilitary = !ShowMilitary;
 				QueueRedraw ();
 			}, !ShowDigital));
 			
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Show _Date"), ShowDate ? "gtk-apply" : "gtk-remove", (o, a) =>
+			list[MenuListContainer.Actions].Add (new IconMenuItem (Catalog.GetString ("Show _Date"), ShowDate ? "gtk-apply" : "gtk-remove", (o, a) =>
 			{
 				ShowDate = !ShowDate;
 				QueueRedraw ();
