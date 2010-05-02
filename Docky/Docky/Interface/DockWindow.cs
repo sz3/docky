@@ -1029,8 +1029,7 @@ namespace Docky.Interface
 		void PreferencesPanelModeChanged (object sender, EventArgs e)
 		{
 			panel_change_time = DateTime.UtcNow;
-			ResetBuffers ();
-			AnimatedDraw ();
+			Reconfigure ();
 		}
 
 		void PreferencesAutohideChanged (object sender, EventArgs e)
@@ -1145,8 +1144,8 @@ namespace Docky.Interface
 					
 					if (list.Any ()) {
 						DrawValue val = DrawValues[HoveredItem];
-						val = val.MoveIn (Position, ZoomedIconSize / 2.15);
-						Menu.Anchor = new Gdk.Point ((int) val.Center.X + window_position.X, (int) val.Center.Y + window_position.Y + 5);
+						val = val.MoveIn (Position, ZoomedIconSize / 2 + DockHeightBuffer);
+						Menu.Anchor = new Gdk.Point ((int) val.Center.X + window_position.X, (int) val.Center.Y + window_position.Y);
 						Menu.Orientation = Position;
 						Menu.Monitor = Monitor;
 						Menu.SetItems (list);
@@ -1489,12 +1488,20 @@ namespace Docky.Interface
 		{
 			UpdateMonitorGeometry ();
 			
+			int height = ZoomedDockHeight;
+			int width = Math.Min (Docky.CommandLinePreferences.MaxSize, Preferences.IsVertical ? monitor_geo.Height : monitor_geo.Width);
+			
+			if (Gdk.Screen.Default.IsComposited)
+				height += DockHeightBuffer + UrgentBounceHeight;
+			else if (!Preferences.PanelMode)
+				width = Math.Min (DockWidth, width);
+			
 			if (Preferences.IsVertical) {
-				Height = Math.Min (Docky.CommandLinePreferences.MaxSize, monitor_geo.Height);
-				Width = DockHeightBuffer + ZoomedIconSize + UrgentBounceHeight;
+				Width = height;
+				Height = width;
 			} else {
-				Width = Math.Min (Docky.CommandLinePreferences.MaxSize, monitor_geo.Width);
-				Height = DockHeightBuffer + ZoomedIconSize + UrgentBounceHeight;
+				Width = width;
+				Height = height;
 			}
 			
 			if (Docky.CommandLinePreferences.NetbookMode) {
@@ -2233,6 +2240,8 @@ namespace Docky.Interface
 			
 				switch (item.ClickAnimation) {
 				case ClickAnimation.Bounce:
+					if (!Gdk.Screen.Default.IsComposited)
+						break;
 					double move = Math.Abs (Math.Sin (2 * Math.PI * clickAnimationProgress) * LaunchBounceHeight);
 					center = center.MoveIn (Position, move);
 					break;
@@ -2257,7 +2266,8 @@ namespace Docky.Interface
 				darken += .4;
 			}
 			
-			if ((item.State & ItemState.Urgent) == ItemState.Urgent && 
+			if (Gdk.Screen.Default.IsComposited &&
+				(item.State & ItemState.Urgent) == ItemState.Urgent && 
 				(render_time - item.StateSetTime (ItemState.Urgent)) < BounceTime) {
 				double urgentProgress = (render_time - item.StateSetTime (ItemState.Urgent)).TotalMilliseconds / BounceTime.TotalMilliseconds;
 				

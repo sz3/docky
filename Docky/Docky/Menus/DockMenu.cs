@@ -35,17 +35,50 @@ namespace Docky.Menus
 {
 	public class DockMenu : Gtk.Window
 	{
-		const int TailSize   = 20;
-		const int TailWidth  = 30;
-		const int SvgWidth   = 100;
-		const int SvgHeight  = 120;
-		const int ShadowSize = 12;
+		// the size of the entire image
+		const int SvgWidth     = 100;
+		const int SvgHeight    = 120;
 		
-		static int SliceSize = ShadowSize + 12;
-		static int Padding = ShadowSize + 4;
+		// the size of the tail slice
+		const int TailHeight   = 20;
+		const int TailWidth    = 30;
+		
+		const int SliceSize    = 24;
+		
+		// size of the blur/shadow
+		static int ShadowSize  = 12;
+		
+		// internal padding for the menu
+		// aka, distance from slice edge to menuitems
+		static int Padding     = ShadowSize + 4;
+		
+		// the minimum size of the windo's width
+		// so slices dont overlap
+		static int MinSize     = (ShadowSize + SliceSize) * 2 + TailWidth;
+		
+		// the size of the drawn menu
 		static int TotalHeight = SvgHeight + 2 * ShadowSize;
-		static int TotalWidth = SvgWidth + 2 * ShadowSize;
-		static int MinSize = SliceSize * 2 + TailWidth;
+		static int TotalWidth  = SvgWidth  + 2 * ShadowSize;
+		
+		static DockMenu ()
+		{
+			SetSizes ();
+		}
+		
+		static void SetSizes ()
+		{
+			ShadowSize  = Gdk.Screen.Default.IsComposited ? 12 : 0;
+			Padding     = ShadowSize + 4;
+			TotalHeight = SvgHeight + 2 * ShadowSize;
+			TotalWidth  = SvgWidth + 2 * ShadowSize;
+			MinSize     = (ShadowSize + SliceSize) * 2 + TailWidth;
+		}
+		
+		void HandleCompositedChanged (object o, EventArgs args) {
+			SetSizes ();
+			SetPadding ();
+			ResetSlices ();
+		}
 		
 		static int tailOffset;
 		
@@ -85,23 +118,24 @@ namespace Docky.Menus
 			}
 			
 			Gdk.Rectangle extents;
-			using (DockySurface shadow = main.CreateMask (0, out extents)) {
-				shadow.GaussianBlur (ShadowSize);
-				shadow.Context.Operator = Operator.DestOut;
-				for (int i = 0; i < 4; i++) {
-					shadow.Context.SetSource (main.Internal);
-					shadow.Context.Paint ();
+			if (ShadowSize > 0)
+				using (DockySurface shadow = main.CreateMask (0, out extents)) {
+					shadow.GaussianBlur (ShadowSize);
+					shadow.Context.Operator = Operator.DestOut;
+					for (int i = 0; i < 4; i++) {
+						shadow.Context.SetSource (main.Internal);
+						shadow.Context.Paint ();
+					}
+					
+					main.Context.Operator = Operator.DestOver;
+					main.Context.SetSource (shadow.Internal);
+					main.Context.PaintWithAlpha (1);
+					main.Context.Operator = Operator.Over;
 				}
-				
-				main.Context.Operator = Operator.DestOver;
-				main.Context.SetSource (shadow.Internal);
-				main.Context.PaintWithAlpha (1);
-				main.Context.Operator = Operator.Over;
-			}
 			
 			int middleWidth = TotalWidth - 2 * SliceSize;
-			int middleHeight = TotalHeight - 2 * SliceSize - TailSize;
-			int tailSliceSize = TailSize + SliceSize;
+			int middleHeight = TotalHeight - 2 * SliceSize - TailHeight;
+			int tailSliceSize = TailHeight + SliceSize;
 			int tailSideSize = (middleWidth - TailWidth) / 2;
 			
 			DockySurface[] results = new DockySurface[11];
@@ -228,6 +262,7 @@ namespace Docky.Menus
 			SetPadding ();
 			
 			Docky.Controller.ThemeChanged += DockyControllerThemeChanged;
+			Gdk.Screen.Default.CompositedChanged += HandleCompositedChanged;
 		}
 
 		void DockyControllerThemeChanged (object sender, EventArgs e)
@@ -241,10 +276,10 @@ namespace Docky.Menus
 		
 		void SetPadding ()
 		{
-			(Container as Alignment).LeftPadding   = Orientation == DockPosition.Left   ? (uint) (TailSize + Padding) : (uint) Padding;
-			(Container as Alignment).RightPadding  = Orientation == DockPosition.Right  ? (uint) (TailSize + Padding) : (uint) Padding;
-			(Container as Alignment).TopPadding    = Orientation == DockPosition.Top    ? (uint) (TailSize + Padding) : (uint) Padding;
-			(Container as Alignment).BottomPadding = Orientation == DockPosition.Bottom ? (uint) (TailSize + Padding) : (uint) Padding;
+			(Container as Alignment).LeftPadding   = Orientation == DockPosition.Left   ? (uint) (TailHeight + Padding) : (uint) Padding;
+			(Container as Alignment).RightPadding  = Orientation == DockPosition.Right  ? (uint) (TailHeight + Padding) : (uint) Padding;
+			(Container as Alignment).TopPadding    = Orientation == DockPosition.Top    ? (uint) (TailHeight + Padding) : (uint) Padding;
+			(Container as Alignment).BottomPadding = Orientation == DockPosition.Bottom ? (uint) (TailHeight + Padding) : (uint) Padding;
 		}
 		
 		void Reposition ()
@@ -398,7 +433,7 @@ namespace Docky.Menus
 			int top = 0;
 			int bottom = surface.Height;
 			int topMiddle = top + SliceSize;
-			int bottomMiddle = bottom - (SliceSize + TailSize);
+			int bottomMiddle = bottom - (SliceSize + TailHeight);
 			
 			int yTop = top;
 			int yBottom = topMiddle - top;
@@ -542,6 +577,9 @@ namespace Docky.Menus
 		
 		public override void Dispose ()
 		{
+			Docky.Controller.ThemeChanged -= DockyControllerThemeChanged;
+			Gdk.Screen.Default.CompositedChanged -= HandleCompositedChanged;
+			
 			ResetSlices ();
 			
 			ResetBackgroundBuffer ();

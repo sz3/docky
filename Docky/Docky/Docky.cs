@@ -104,7 +104,7 @@ namespace Docky
 			checkCompositeTimer = GLib.Timeout.Add (2000, delegate {
 				if (!Gdk.Screen.Default.IsComposited)
 					Log.Notify (Catalog.GetString ("Docky requires compositing to work properly. " +
-						"Please enable compositing and restart docky."));
+						"Certain options are disabled and themes/animations will look incorrect. "));
 				checkCompositeTimer = 0;
 				return false;
 			});

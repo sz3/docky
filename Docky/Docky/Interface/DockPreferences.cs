@@ -151,7 +151,7 @@ namespace Docky.Interface
 				position = value;
 				SetOption<string> ("Position", position.ToString ());
 				OnPositionChanged ();
-				threedee_check.Sensitive = position == DockPosition.Bottom;
+				threedee_check.Sensitive = Position == DockPosition.Bottom && Gdk.Screen.Default.IsComposited;
 			}
 		}
 		
@@ -220,7 +220,7 @@ namespace Docky.Interface
 				OnZoomEnabledChanged ();
 			}
 		}
-				
+		
 		double? zoom_percent;
 		public double ZoomPercent {
 			get {
@@ -346,6 +346,7 @@ namespace Docky.Interface
 			BuildItemProviders ();
 			BuildOptions ();
 			
+			Gdk.Screen.Default.CompositedChanged += HandleCompositedChanged;
 			icon_scale.ValueChanged += IconScaleValueChanged;
 			zoom_scale.ValueChanged += ZoomScaleValueChanged;
 			zoom_checkbutton.Toggled += ZoomCheckbuttonToggled;
@@ -357,6 +358,48 @@ namespace Docky.Interface
 			ShowAll ();
 		}
 
+		void HandleCompositedChanged (object o, EventArgs args) {
+			// disable zoom
+			if (!Gdk.Screen.Default.IsComposited)
+				zoom_enabled = false;
+			else
+				zoom_enabled = GetOption<bool?> ("ZoomEnabled", true);
+			
+			OnZoomEnabledChanged ();
+			
+			zoom_checkbutton.Sensitive = !PanelMode && Gdk.Screen.Default.IsComposited;
+			zoom_scale.Sensitive = zoom_checkbutton.Sensitive && zoom_checkbutton.Active;
+			zoom_checkbutton.Active = ZoomEnabled && Gdk.Screen.Default.IsComposited;
+			
+			// disable 3d
+			if (!Gdk.Screen.Default.IsComposited)
+				three_dimensional = false;
+			else
+				three_dimensional = GetOption<bool?> ("ThreeDimensional", false);
+			
+			OnThreeDimensionalChanged ();
+			
+			threedee_check.Sensitive = Position == DockPosition.Bottom && Gdk.Screen.Default.IsComposited;
+			threedee_check.Active = ThreeDimensional && Gdk.Screen.Default.IsComposited;
+			
+			// disable hiding
+			if (!Gdk.Screen.Default.IsComposited)
+				hide_type = AutohideType.None;
+			else
+				try {
+					hide_type = (AutohideType) Enum.Parse (typeof(AutohideType), 
+														  GetOption ("Autohide", AutohideType.None.ToString ()));
+				} catch {
+					hide_type = AutohideType.None;
+				}
+			
+			OnAutohideChanged ();
+			
+			autohide_box.Sensitive = Gdk.Screen.Default.IsComposited;
+			autohide_box.Active = (int) Autohide;
+			fade_on_hide_check.Sensitive = (int) Autohide > 0 && Gdk.Screen.Default.IsComposited;
+		}
+		
 		void HandleDefaultProviderItemsChanged (object sender, ItemsChangedArgs e)
 		{
 			Launchers = DefaultProvider.Uris;
@@ -383,7 +426,8 @@ namespace Docky.Interface
 			
 			// may seem odd but its just a check
 			zoom_checkbutton.Active = ZoomEnabled;
-			zoom_scale.Sensitive = ZoomEnabled;
+			zoom_checkbutton.Sensitive = !PanelMode && Gdk.Screen.Default.IsComposited;
+			zoom_scale.Sensitive = zoom_checkbutton.Sensitive && zoom_checkbutton.Active;
 		}
 
 		void ZoomScaleValueChanged (object sender, EventArgs e)
@@ -490,18 +534,19 @@ namespace Docky.Interface
 				DefaultProvider.SetWindowManager ();
 			
 			autohide_box.Active = (int) Autohide;
+			autohide_box.Sensitive = Gdk.Screen.Default.IsComposited;
 			UpdateAutohideDescription ();
-			fade_on_hide_check.Sensitive = (int) Autohide > 0;
+			fade_on_hide_check.Sensitive = (int) Autohide > 0 && Gdk.Screen.Default.IsComposited;
 			
 			panel_mode_button.Active = PanelMode;
-			zoom_checkbutton.Active = ZoomEnabled;
-			zoom_checkbutton.Sensitive = !PanelMode;
+			zoom_checkbutton.Active = ZoomEnabled && Gdk.Screen.Default.IsComposited;
+			zoom_checkbutton.Sensitive = !PanelMode && Gdk.Screen.Default.IsComposited;
 			zoom_scale.Value = ZoomPercent;
-			zoom_scale.Sensitive = !PanelMode && ZoomEnabled;
+			zoom_scale.Sensitive = zoom_checkbutton.Sensitive && zoom_checkbutton.Active;
 			icon_scale.Value = IconSize;
 			fade_on_hide_check.Active = FadeOnHide;
-			threedee_check.Active = ThreeDimensional;
-			threedee_check.Sensitive = Position == DockPosition.Bottom;
+			threedee_check.Active = ThreeDimensional && Gdk.Screen.Default.IsComposited;
+			threedee_check.Sensitive = Position == DockPosition.Bottom && Gdk.Screen.Default.IsComposited;
 			multiple_window_indicator_check.Active = IndicateMultipleWindows;
 			
 			
@@ -509,6 +554,13 @@ namespace Docky.Interface
 			DefaultProvider.WindowManagerChanged += delegate {
 				WindowManager = window_manager_check.Active = DefaultProvider.IsWindowManager;
 			};
+			
+			if (!Gdk.Screen.Default.IsComposited) {
+				zoom_enabled = false;
+				three_dimensional = false;
+				hide_type = AutohideType.None;
+				autohide_box.Active = (int) Autohide;
+			}
 		}
 		
 		T GetOption<T> (string key, T def)
@@ -724,8 +776,8 @@ namespace Docky.Interface
 		{
 			PanelMode = panel_mode_button.Active;
 			panel_mode_button.Active = PanelMode;
-			zoom_scale.Sensitive = !PanelMode && ZoomEnabled;
-			zoom_checkbutton.Sensitive = !PanelMode;
+			zoom_checkbutton.Sensitive = !PanelMode && Gdk.Screen.Default.IsComposited;
+			zoom_scale.Sensitive = zoom_checkbutton.Sensitive && zoom_checkbutton.Active;
 		}
 		
 		protected virtual void OnThreedeeCheckToggled (object sender, System.EventArgs e)
@@ -764,6 +816,14 @@ namespace Docky.Interface
 		
 		public override void Dispose ()
 		{
+			Gdk.Screen.Default.CompositedChanged -= HandleCompositedChanged;
+			icon_scale.ValueChanged -= IconScaleValueChanged;
+			zoom_scale.ValueChanged -= ZoomScaleValueChanged;
+			zoom_checkbutton.Toggled -= ZoomCheckbuttonToggled;
+			autohide_box.Changed -= AutohideBoxChanged;
+			fade_on_hide_check.Toggled -= FadeOnHideToggled;
+			DefaultProvider.ItemsChanged -= HandleDefaultProviderItemsChanged;
+			
 			SyncPlugins ();
 			SyncPreferences ();
 			UpdateSortList ();
