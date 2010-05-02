@@ -39,6 +39,17 @@ namespace RecentDocuments
 		
 		#endregion
 		
+		static IPreferences prefs = DockServices.Preferences.Get <RecentDocumentsItem> ();
+		
+		bool? _alwaysShowRecent;
+		bool AlwaysShowRecent {
+			get {
+				if (!_alwaysShowRecent.HasValue)
+					_alwaysShowRecent = prefs.Get<bool> ("AlwaysShowRecent", false);
+				return _alwaysShowRecent.Value;
+			}
+		}
+		
 		const int NumRecentDocs = 7;
 		
 		internal List<FileDockItem> RecentDocs;
@@ -104,7 +115,7 @@ namespace RecentDocuments
 			if (RecentDocs.Count() == 0)
 				CurrentFile = null;
 			
-			if (CurrentFile != null && RecentDocs.IndexOf (CurrentFile) == -1)
+			if (AlwaysShowRecent || (CurrentFile != null && RecentDocs.IndexOf (CurrentFile) == -1))
 				CurrentFile = RecentDocs.First ();
 			
 			if (CurrentFile == null) {
