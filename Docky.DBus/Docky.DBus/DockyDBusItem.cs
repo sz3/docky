@@ -87,7 +87,7 @@ namespace Docky.DBus
 			uint number;
 			
 			do {
-				// should we ever get 100,000 items in here, I hope we crash, though we will likely get an infinite loop
+				//FIXME should we ever get 100,000 items in here, I hope we crash, though we will likely get an infinite loop
 				number = (uint) rand.Next (0, 100000);
 			} while (known_ids.BinarySearch (number) >= 0);
 			
@@ -216,7 +216,7 @@ namespace Docky.DBus
 			items[id] = entry;
 			update_time[id] = DateTime.UtcNow;
 			
-			//Insert items into list... this is stupid but whatever fix later
+			//TODO Insert items into list... this is stupid but whatever fix later
 			foreach (MenuItem item in items.Values)
 				owner.RemoteMenuItems.Remove (item);
 			
@@ -262,6 +262,8 @@ namespace Docky.DBus
 			
 			if (items.ContainsKey (item)) {
 				RemoteMenuEntry entry = items[item];
+				entry.Clicked -= HandleActivated;
+				
 				items.Remove (item);
 				
 				owner.RemoteMenuItems.Remove (entry);
@@ -332,13 +334,24 @@ namespace Docky.DBus
 			if (MenuItemActivated != null)
 				MenuItemActivated ((sender as RemoteMenuEntry).ID);
 		}
+		
 		#region IDisposable implementation
 		public void Dispose ()
 		{
 			if (timer > 0)
 				GLib.Source.Remove (timer);
+			
+			known_ids.Clear ();
+			update_time.Clear ();
+			
+			foreach (RemoteMenuEntry m in items.Values) {
+				m.Clicked -= HandleActivated;
+				m.Dispose ();
+			}
+			items.Clear ();
+			
+			owner = null;
 		}
-		
 		#endregion
 	}
 }

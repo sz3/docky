@@ -634,69 +634,71 @@ namespace Docky.Items
 			if (string.IsNullOrEmpty (BadgeText))
 				return;
 			
-			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-			layout.Width = Pango.Units.FromPixels (surface.Height / 2);
-			layout.Ellipsize = Pango.EllipsizeMode.None;
-			layout.FontDescription = new Gtk.Style().FontDescription;
-			layout.FontDescription.Weight = Pango.Weight.Bold;
-			
-			Pango.Rectangle inkRect, logicalRect;
-			int tsize = 3;
-			do {
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (tsize);
-				layout.SetText (BadgeText);
-				layout.GetPixelExtents (out inkRect, out logicalRect);
-				tsize++;
-			} while (Math.Max (logicalRect.Width, logicalRect.Height) < surface.Height / (IsSmall ? 1 : 2) - 8);
-			
-			int size = Math.Max (logicalRect.Width, logicalRect.Height);
-			int padding = 4;
-			int lineWidth = 2;
-			int x = surface.Width - size / 2 - padding - lineWidth;
-			int y = size / 2 + padding + lineWidth;
-			
-			if (!IsSmall) {
-				// draw outline shadow
-				surface.Context.LineWidth = lineWidth;
-				surface.Context.Color = new Cairo.Color (0, 0, 0, 0.5);
-				surface.Context.Arc (x, y + 1, size / 2 + padding, 0, Math.PI * 2);
-				surface.Context.Stroke ();
+			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ())
+			{
+				layout.Width = Pango.Units.FromPixels (surface.Height / 2);
+				layout.Ellipsize = Pango.EllipsizeMode.None;
+				layout.FontDescription = new Gtk.Style ().FontDescription;
+				layout.FontDescription.Weight = Pango.Weight.Bold;
 				
-				// draw filled gradient
-				RadialGradient rg = new RadialGradient (x, lineWidth, 0, x, lineWidth, size + 2 * padding);
-				rg.AddColorStop (0, badgeColors [0]);
-				rg.AddColorStop (1.0, badgeColors [1]);
+				Pango.Rectangle inkRect, logicalRect;
+				int tsize = 3;
+				do {
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (tsize);
+					layout.SetText (BadgeText);
+					layout.GetPixelExtents (out inkRect, out logicalRect);
+					tsize++;
+				} while (Math.Max (logicalRect.Width, logicalRect.Height) < surface.Height / (IsSmall ? 1 : 2) - 8);
 				
-				surface.Context.Pattern = rg;
-				surface.Context.Arc (x, y, size / 2 + padding, 0, Math.PI * 2);
-				surface.Context.Fill ();
-				rg.Destroy ();
+				int size = Math.Max (logicalRect.Width, logicalRect.Height);
+				int padding = 4;
+				int lineWidth = 2;
+				int x = surface.Width - size / 2 - padding - lineWidth;
+				int y = size / 2 + padding + lineWidth;
 				
-				// draw outline
+				if (!IsSmall) {
+					// draw outline shadow
+					surface.Context.LineWidth = lineWidth;
+					surface.Context.Color = new Cairo.Color (0, 0, 0, 0.5);
+					surface.Context.Arc (x, y + 1, size / 2 + padding, 0, Math.PI * 2);
+					surface.Context.Stroke ();
+					
+					// draw filled gradient
+					RadialGradient rg = new RadialGradient (x, lineWidth, 0, x, lineWidth, size + 2 * padding);
+					rg.AddColorStop (0, badgeColors [0]);
+					rg.AddColorStop (1.0, badgeColors [1]);
+					
+					surface.Context.Pattern = rg;
+					surface.Context.Arc (x, y, size / 2 + padding, 0, Math.PI * 2);
+					surface.Context.Fill ();
+					rg.Destroy ();
+					
+					// draw outline
+					surface.Context.Color = new Cairo.Color (1, 1, 1, 1);
+					surface.Context.Arc (x, y, size / 2 + padding, 0, Math.PI * 2);
+					surface.Context.Stroke ();
+					
+					surface.Context.LineWidth = lineWidth / 2;
+					surface.Context.Color = badgeColors [1];
+					surface.Context.Arc (x, y, size / 2 + padding - lineWidth, 0, Math.PI * 2);
+					surface.Context.Stroke ();
+					
+					surface.Context.Color = new Cairo.Color (0, 0, 0, 0.2);
+				} else {
+					x = surface.Width - logicalRect.Width / 2;
+					y = logicalRect.Height / 2;
+					surface.Context.Color = new Cairo.Color (0, 0, 0, 0.6);
+				}
+				
+				// draw text
+				surface.Context.MoveTo (x - logicalRect.Width / 2, y - logicalRect.Height / 2);
+				
+				Pango.CairoHelper.LayoutPath (surface.Context, layout);
+				surface.Context.LineWidth = 2;
+				surface.Context.StrokePreserve ();
 				surface.Context.Color = new Cairo.Color (1, 1, 1, 1);
-				surface.Context.Arc (x, y, size / 2 + padding, 0, Math.PI * 2);
-				surface.Context.Stroke ();
-				
-				surface.Context.LineWidth = lineWidth / 2;
-				surface.Context.Color = badgeColors [1];
-				surface.Context.Arc (x, y, size / 2 + padding - lineWidth, 0, Math.PI * 2);
-				surface.Context.Stroke ();
-				
-				surface.Context.Color = new Cairo.Color (0, 0, 0, 0.2);
-			} else {
-				x = surface.Width - logicalRect.Width / 2;
-				y = logicalRect.Height / 2;
-				surface.Context.Color = new Cairo.Color (0, 0, 0, 0.6);
+				surface.Context.Fill ();
 			}
-			
-			// draw text
-			surface.Context.MoveTo (x - logicalRect.Width / 2, y - logicalRect.Height / 2);
-			
-			Pango.CairoHelper.LayoutPath (surface.Context, layout);
-			surface.Context.LineWidth = 2;
-			surface.Context.StrokePreserve ();
-			surface.Context.Color = new Cairo.Color (1, 1, 1, 1);
-			surface.Context.Fill ();
 		}
 		
 		/// <summary>
@@ -718,32 +720,31 @@ namespace Docky.Items
 			
 			if (text_buffer == null) {
 			
-				Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-				
-				layout.FontDescription = style.FontDescription;
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (11);
-				layout.FontDescription.Weight = Pango.Weight.Bold;
-				layout.Ellipsize = Pango.EllipsizeMode.End;
-				layout.Width = Pango.Units.FromPixels (500);
-				
-				layout.SetText (HoverText);
-				
-				Pango.Rectangle inkRect, logicalRect;
-				layout.GetPixelExtents (out inkRect, out logicalRect);
-				
-				int textWidth = inkRect.Width;
-				int textHeight = logicalRect.Height;
-				int buffer = HoverTextHeight - textHeight;
-				text_buffer = new DockySurface (Math.Max (HoverTextHeight, textWidth + buffer), HoverTextHeight, model);
-				
-				Cairo.Context cr = text_buffer.Context;
-				
-				cr.MoveTo ((text_buffer.Width - textWidth) / 2, buffer / 2);
-				Pango.CairoHelper.LayoutPath (cr, layout);
-				cr.Color = isLight ? new Cairo.Color (0.1, 0.1, 0.1) : new Cairo.Color (1, 1, 1);
-				cr.Fill ();
-				
-				layout.Dispose ();
+				using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ())
+				{
+					layout.FontDescription = style.FontDescription;
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (11);
+					layout.FontDescription.Weight = Pango.Weight.Bold;
+					layout.Ellipsize = Pango.EllipsizeMode.End;
+					layout.Width = Pango.Units.FromPixels (500);
+					
+					layout.SetText (HoverText);
+					
+					Pango.Rectangle inkRect, logicalRect;
+					layout.GetPixelExtents (out inkRect, out logicalRect);
+					
+					int textWidth = inkRect.Width;
+					int textHeight = logicalRect.Height;
+					int buffer = HoverTextHeight - textHeight;
+					text_buffer = new DockySurface (Math.Max (HoverTextHeight, textWidth + buffer), HoverTextHeight, model);
+					
+					Cairo.Context cr = text_buffer.Context;
+					
+					cr.MoveTo ((text_buffer.Width - textWidth) / 2, buffer / 2);
+					Pango.CairoHelper.LayoutPath (cr, layout);
+					cr.Color = isLight ? new Cairo.Color (0.1, 0.1, 0.1) : new Cairo.Color (1, 1, 1);
+					cr.Fill ();
+				}
 			}
 			
 			return text_buffer;

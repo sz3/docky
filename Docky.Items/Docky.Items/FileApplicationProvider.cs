@@ -89,14 +89,17 @@ namespace Docky.Items
 			// update the transient items when something happens in a desktop file directory
 			// It is possible that a .desktop file was created for a window that didn't have one before,
 			// this would associate that desktop file with the existing window.
-			WindowMatcher.DesktopFileChanged += delegate {
-				UpdateTransientItems ();
-			};
+			WindowMatcher.DesktopFileChanged += HandleWindowMatcherDesktopFileChanged;
 			
 			Wnck.Screen.Default.WindowOpened += WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
 			Wnck.Screen.Default.ViewportsChanged += WnckScreenDefaultViewportsChanged;
 			Wnck.Screen.Default.ActiveWorkspaceChanged += WnckScreenDefaultActiveWorkspaceChanged;
+		}
+
+		void HandleWindowMatcherDesktopFileChanged (object sender, DesktopFileChangedEventArgs e)
+		{
+			UpdateTransientItems ();
 		}
 
 		void WnckScreenDefaultActiveWorkspaceChanged (object o, ActiveWorkspaceChangedArgs args)
@@ -361,6 +364,8 @@ namespace Docky.Items
 		
 		public override void Dispose ()
 		{
+			WindowMatcher.DesktopFileChanged -= HandleWindowMatcherDesktopFileChanged;
+			
 			Wnck.Screen.Default.WindowOpened -= WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed -= WnckScreenDefaultWindowClosed;
 			Wnck.Screen.Default.ViewportsChanged -= WnckScreenDefaultViewportsChanged;

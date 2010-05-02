@@ -1568,7 +1568,7 @@ namespace Docky.Interface
 				DockySurface surface = item.IconSurface (main_buffer, IconSize, IconSize, VisibleDockHeight);
 				
 				width = surface.Width;
-					height = surface.Height;
+				height = surface.Height;
 				
 				if (item.RotateWithDock && Preferences.IsVertical) {
 					int tmp = width;

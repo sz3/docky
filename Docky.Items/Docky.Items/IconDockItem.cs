@@ -99,15 +99,19 @@ namespace Docky.Items
 				Emblems.RemoveAll (e => e.Position == emblem.Position);
 			// add the new emblem
 			Emblems.Add (emblem);
+			emblem.Changed += HandleEmblemChanged;
 			QueueRedraw ();
-			emblem.Changed += delegate {
-				QueueRedraw ();
-			};
+		}
+
+		void HandleEmblemChanged (object sender, EventArgs e)
+		{
+			QueueRedraw ();
 		}
 		
 		public void RemoveEmblem (IconEmblem emblem)
 		{
 			if (Emblems.Contains (emblem)) {
+				emblem.Changed -= HandleEmblemChanged;
 				Emblems.Remove (emblem);
 				QueueRedraw ();
 			}
@@ -192,7 +196,10 @@ namespace Docky.Items
 		public override void Dispose ()
 		{
 			if (Emblems.Any ())
-				Emblems.ForEach (emblem => emblem.Dispose ());
+				Emblems.ForEach (emblem => {
+					emblem.Changed -= HandleEmblemChanged;
+					emblem.Dispose ();
+				});
 			Emblems.Clear ();
 			
 			if (forced_pixbuf != null)
