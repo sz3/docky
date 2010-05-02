@@ -278,6 +278,8 @@ namespace GMail
 					
 					messages = tmp;
 					Gtk.Application.Invoke (delegate { OnGMailChecked (); });
+				} catch (ThreadAbortException) {
+					// do nothing
 				} catch (NullReferenceException) {
 					Gtk.Application.Invoke (delegate {
 						OnGMailFailed (Catalog.GetString ("Feed Error"));
