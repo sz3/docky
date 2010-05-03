@@ -189,7 +189,12 @@ namespace Docky.Windowing
 		
 		public void Launch (IEnumerable<string> uris)
 		{	
-			DockServices.System.Open (GLib.DesktopAppInfo.NewFromFilename (Location), uris.Select (uri => GLib.FileFactory.NewForUri (uri)));
+			if (!File.Exists (Location))
+				return;
+			
+			using (GLib.DesktopAppInfo appinfo = GLib.DesktopAppInfo.NewFromFilename (Location)) {
+				DockServices.System.Open (appinfo, uris.Select (uri => GLib.FileFactory.NewForUri (uri)));
+			}
 		}
 		
 		#region IDisposable implementation
