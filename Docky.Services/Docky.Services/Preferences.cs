@@ -23,6 +23,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 using GConf;
 using Gnome.Keyring;
@@ -45,12 +46,12 @@ namespace Docky.Services
 			try {
 				result = client.Get (AbsolutePathForKey (key, GConfPrefix));
 			} catch (GConf.NoSuchKeyException) {
-				Log.Debug ("Key {0} does not exist, creating.", key);
+				Log<Preferences<TOwner>>.Debug ("Key {0} does not exist, creating.", key);
 				Set<T> (key, def);
 				return def;
 			} catch (Exception e) {
-				Log.Error ("Failed to get gconf value for {0} : '{1}'", key, e.Message);
-				Log.Info (e.StackTrace);
+				Log<Preferences<TOwner>>.Error ("Failed to get gconf value for {0} : '{1}'", key, e.Message);
+				Log<Preferences<TOwner>>.Info (e.StackTrace);
 				return def;
 			}
 			
@@ -66,8 +67,8 @@ namespace Docky.Services
 			try {
 				client.Set (AbsolutePathForKey (key, GConfPrefix), val);
 			} catch (Exception e) {
-				Log.Error ("Encountered error setting GConf key {0}: '{1}'", key, e.Message);
-				Log.Info (e.StackTrace);
+				Log<Preferences<TOwner>>.Error ("Encountered error setting GConf key {0}: '{1}'", key, e.Message);
+				Log<Preferences<TOwner>>.Info (e.StackTrace);
 				success = false;
 			}
 			return success;
@@ -90,8 +91,8 @@ namespace Docky.Services
 			try {
 				client.AddNotify (path, handler);
 			} catch (Exception e) {
-				Log.Error ("Error removing notification handler, {0}", e.Message);
-				Log.Debug (e.StackTrace);
+				Log<Preferences<TOwner>>.Error ("Error removing notification handler, {0}", e.Message);
+				Log<Preferences<TOwner>>.Debug (e.StackTrace);
 			}
 		}
 		
@@ -100,73 +101,92 @@ namespace Docky.Services
 			try {
 				client.RemoveNotify (path, handler);
 			} catch (Exception e) {
-				Log.Error ("Error removing notification handler, {0}", e.Message);
-				Log.Debug (e.StackTrace);
+				Log<Preferences<TOwner>>.Error ("Error removing notification handler, {0}", e.Message);
+				Log<Preferences<TOwner>>.Debug (e.StackTrace);
 			}
 		}
 
 		#endregion
 		
 		#region IPreferences - secure, based on Gnome Keyring
-		object KeyringLock = new Object ();
+		
+		AutoResetEvent autoEvent = new AutoResetEvent(false);
 		
 		readonly string ErrorSavingMessage = "Error saving {0} : '{0}'";
 		readonly string KeyNotFoundMessage = "Key \"{0}\" not found in keyring";
 		readonly string KeyringUnavailableMessage = "gnome-keyring-daemon could not be reached!";
 		
-		const string DefaultRootPath = "docky";
+		readonly string GnomeKeyringPrefix = "docky-2/" + typeof (TOwner).FullName.Replace (".", "/");
 
 		public bool SetSecure<T> (string key, T val)
 		{
-			lock (KeyringLock) {
-				if (typeof (T) != typeof (string))
-					throw new NotImplementedException ("Unimplemented for non string values");
+			if (typeof (T) != typeof (string))
+				throw new NotImplementedException ("Unimplemented for non string values");
+			
+			bool success = false;
+			
+			lock (autoEvent) {
+				DockServices.System.RunOnMainThread (() => {
+					try {
+						if (!Ring.Available) {
+							Log<Preferences<TOwner>>.Error (KeyringUnavailableMessage);
+							return;
+						}
+						
+						Hashtable keyData = new Hashtable ();
+						keyData [AbsolutePathForKey (key, GnomeKeyringPrefix)] = key;
+					
+						Ring.CreateItem (Ring.GetDefaultKeyring (), ItemType.GenericSecret, AbsolutePathForKey (key, GnomeKeyringPrefix), keyData, val.ToString (), true);
+						success = true;
+					} catch (KeyringException e) {
+						Log<Preferences<TOwner>>.Error (ErrorSavingMessage, key, e.Message);
+						Log<Preferences<TOwner>>.Info (e.StackTrace);
+					} finally {
+						autoEvent.Set ();
+					}
+				});
 				
-				if (!Ring.Available) {
-					Log.Error (KeyringUnavailableMessage);
-					return false;
-				}
-				
-				Hashtable keyData = new Hashtable ();
-				keyData [AbsolutePathForKey (key, DefaultRootPath)] = key;
-				
-				try {
-					Ring.CreateItem (Ring.GetDefaultKeyring (), ItemType.GenericSecret, AbsolutePathForKey (key, DefaultRootPath), keyData, val.ToString (), true);
-				} catch (KeyringException e) {
-					Log.Error (ErrorSavingMessage, key, e.Message);
-					Log.Info (e.StackTrace);
-					return false;
-				}
-				
-				return true;
+				autoEvent.WaitOne (1000);
 			}
+			
+			return success;
 		}
 
 		public T GetSecure<T> (string key, T def)
 		{
-			lock (KeyringLock) {
-				if (!Ring.Available) {
-					Log.Error (KeyringUnavailableMessage);
-					return def;
-				}
-				
-				Hashtable keyData = new Hashtable ();
-				keyData [AbsolutePathForKey (key, DefaultRootPath)] = key;
-				
-				try {
-					foreach (ItemData item in Ring.Find (ItemType.GenericSecret, keyData)) {
-						if (!item.Attributes.ContainsKey (AbsolutePathForKey (key, DefaultRootPath))) continue;
+			T val = def;
+			
+			lock (autoEvent) {
+				DockServices.System.RunOnMainThread (() => {
+					try {
+						if (!Ring.Available) {
+							Log<Preferences<TOwner>>.Error (KeyringUnavailableMessage);
+							return;
+						}
+						
+						Hashtable keyData = new Hashtable ();
+						keyData [AbsolutePathForKey (key, GnomeKeyringPrefix)] = key;
+						
+						foreach (ItemData item in Ring.Find (ItemType.GenericSecret, keyData)) {
+							if (!item.Attributes.ContainsKey (AbsolutePathForKey (key, GnomeKeyringPrefix))) continue;
 
-						string secureValue = item.Secret;
-						return (T) Convert.ChangeType (secureValue, typeof (T));
+							val = (T) Convert.ChangeType (item.Secret, typeof (T));
+							return;
+						}
+					} catch (KeyringException e) {
+						Log<Preferences<TOwner>>.Error (KeyNotFoundMessage, AbsolutePathForKey (key, GnomeKeyringPrefix), e.Message);
+						Log<Preferences<TOwner>>.Info (e.StackTrace);
+					} finally {
+						autoEvent.Set ();
 					}
-				} catch (KeyringException) {
-					Log.Error (KeyNotFoundMessage, AbsolutePathForKey (key, DefaultRootPath));
-				}
+				});
 				
-				return def;
+				autoEvent.WaitOne (1000);
 			}
+			
+			return val;
 		}
+		
 		#endregion
 	}
 }

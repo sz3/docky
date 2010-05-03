@@ -196,12 +196,15 @@ namespace GMail
 		
 		void CheckGMail ()
 		{
-			if (string.IsNullOrEmpty (GMailPreferences.User) || string.IsNullOrEmpty (GMailPreferences.Password)) {
-				OnGMailFailed (Catalog.GetString ("Click to set username and password."));
-				return;
-			}
-
 			checkerThread = DockServices.System.RunOnThread (() => {
+				string password = GMailPreferences.Password;
+				if (string.IsNullOrEmpty (GMailPreferences.User) || string.IsNullOrEmpty (password)) {
+					Gtk.Application.Invoke (delegate {
+						OnGMailFailed (Catalog.GetString ("Click to set username and password."));
+					});
+					return;
+				}
+
 				try {
 					Gtk.Application.Invoke (delegate { OnGMailChecking (); });
 
@@ -217,7 +220,7 @@ namespace GMail
 					HttpWebRequest request = (HttpWebRequest) WebRequest.Create (url);
 					request.Timeout = 60000;
 					request.UserAgent = DockServices.System.UserAgent;
-					request.Credentials = new NetworkCredential (GMailPreferences.User, GMailPreferences.Password);
+					request.Credentials = new NetworkCredential (GMailPreferences.User, password);
 					if (DockServices.System.UseProxy)
 						request.Proxy = DockServices.System.Proxy;
 					// FIXME remove when ServicePointManager.ServerCertificateValidationCallback implemented in mono
