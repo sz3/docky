@@ -34,6 +34,8 @@ namespace Docky.Services
 {
 	public class SystemService
 	{
+		public static System.Threading.Thread MainThread { get; set; }
+		
 		internal SystemService ()
 		{
 			InitializeBattery ();
@@ -463,14 +465,17 @@ namespace Docky.Services
 		
 		public void RunOnMainThread (Action action)
 		{
-			Gtk.Application.Invoke ((sender, arg) => {
-				try {
-					action ();
-				} catch (Exception e) {
-					Log<SystemService>.Error ("Error in RunOnMainThread: {0}", e.Message);
-					Log<SystemService>.Debug (e.StackTrace);
-				}
-			});
+			if (System.Threading.Thread.CurrentThread.Equals (MainThread))
+				action ();
+			else
+				Gtk.Application.Invoke ((sender, arg) => {
+					try {
+						action ();
+					} catch (Exception e) {
+						Log<SystemService>.Error ("Error in RunOnMainThread: {0}", e.Message);
+						Log<SystemService>.Debug (e.StackTrace);
+					}
+				});
 		}
 		
 		public void RunOnMainThread (Action action, int delay)

@@ -196,15 +196,13 @@ namespace GMail
 		
 		void CheckGMail ()
 		{
+			string password = GMailPreferences.Password;
+			if (string.IsNullOrEmpty (GMailPreferences.User) || string.IsNullOrEmpty (password)) {
+				OnGMailFailed (Catalog.GetString ("Click to set username and password."));
+				return;
+			}
+			
 			checkerThread = DockServices.System.RunOnThread (() => {
-				string password = GMailPreferences.Password;
-				if (string.IsNullOrEmpty (GMailPreferences.User) || string.IsNullOrEmpty (password)) {
-					Gtk.Application.Invoke (delegate {
-						OnGMailFailed (Catalog.GetString ("Click to set username and password."));
-					});
-					return;
-				}
-
 				try {
 					Gtk.Application.Invoke (delegate { OnGMailChecking (); });
 

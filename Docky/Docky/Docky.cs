@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.IO;
 
 using Mono.Unix;
@@ -71,6 +72,9 @@ namespace Docky
 			
 			// set process name
 			DockServices.System.SetProcessName ("docky");
+			
+			// cache main thread
+			SystemService.MainThread = Thread.CurrentThread;
 			
 			// check compositing
 			CheckComposite ();
