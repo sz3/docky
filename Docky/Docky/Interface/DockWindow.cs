@@ -261,6 +261,10 @@ namespace Docky.Interface
 				update_screen_regions = true;
 				
 				SetTooltipVisibility ();
+				if (background_buffer != null) {
+					background_buffer.Dispose ();
+					background_buffer = null;
+				}
 				AnimatedDraw ();
 			}
 		}
@@ -2555,6 +2559,12 @@ namespace Docky.Interface
 					background_buffer = new DockySurface (BackgroundHeight, BackgroundWidth, surface);
 				} else {
 					background_buffer = new DockySurface (BackgroundWidth, BackgroundHeight, surface);
+				}
+				
+				if (ConfigurationMode) {
+					background_buffer.Context.Rectangle (0, 0, BackgroundWidth, BackgroundHeight);
+					background_buffer.Context.Color = new Cairo.Color (1, 1, 1, 0.10);
+					background_buffer.Context.Fill ();
 				}
 				
 				Gdk.Pixbuf background = DockServices.Drawing.LoadIcon (Docky.Controller.BackgroundSvg);
