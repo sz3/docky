@@ -82,11 +82,7 @@ namespace Docky.Items
 			else
 				HoverText = ManagedWindows.First ().Name;
 			
-
-			if (base_window.WindowType == Wnck.WindowType.Dialog)
-				SetIconFromPixbuf (base_window.Icon);
-			else
-				Icon = base_window.IconName.ToLower ();
+			SetIconFromPixbuf (base_window.Icon);
 		}
 		
 		void UpdateWindows (Wnck.Window baseWindow)
