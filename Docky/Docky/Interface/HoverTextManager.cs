@@ -69,6 +69,7 @@ namespace Docky.Interface
 			window.SkipTaskbarHint = true;
 			window.Resizable = false;
 			window.CanFocus = false;
+			window.KeepAbove = true;
 			window.TypeHint = WindowTypeHint.Dock;
 			window.Stick ();
 			
