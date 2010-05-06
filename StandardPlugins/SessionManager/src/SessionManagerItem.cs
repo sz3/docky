@@ -61,7 +61,6 @@ namespace SessionManager
 				return current.Value;
 			}
 			set {
-				prefs.Set<int> ("CurrentIndex", value);
 				current = value;
 			}
 		}
@@ -241,6 +240,8 @@ namespace SessionManager
 			} else {
 				CurrentIndex = (CurrentIndex + 1) % SessionDockItems.Count;
 			}
+			
+			prefs.Set<int> ("CurrentIndex", CurrentIndex);
 			
 			HoverText = SessionDockItems[CurrentIndex].hover_text;
 			Icon = SessionDockItems[CurrentIndex].icon;
