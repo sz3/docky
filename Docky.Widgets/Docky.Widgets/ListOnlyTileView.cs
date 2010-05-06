@@ -36,11 +36,11 @@ namespace Docky.Widgets
 		
 		public override void OnTileActiveChanged (object o, EventArgs args)
 		{
+			base.OnTileActiveChanged (o, args);
+			
 			Tile t = o as Tile;
 			
 			RemoveTile (t.OwnedObject);
-			
-			base.OnTileActiveChanged (o, args);
 		}
 	}
 }
