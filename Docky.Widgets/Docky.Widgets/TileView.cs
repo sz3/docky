@@ -125,11 +125,11 @@ namespace Docky.Widgets
 			tile.ActiveChanged -= OnTileActiveChanged;
 			tile.SizeAllocated -= OnTileSizeAllocated;
 			tile.Owner = null;
-			tile.Dispose ();
-			tile.Destroy ();
 			
 			tiles.Remove (tile);
 			box.Remove (tile);
+			tile.Dispose ();
+			tile.Destroy ();
 		}
 		
 		public virtual void ClearSelection ()
