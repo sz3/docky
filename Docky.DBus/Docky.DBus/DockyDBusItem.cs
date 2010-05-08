@@ -169,7 +169,7 @@ namespace Docky.DBus
 		public string DesktopFile {
 			get {
 				if (owner is ApplicationDockItem)
-					return (owner as ApplicationDockItem).OwnedItem.Location;
+					return (owner as ApplicationDockItem).OwnedItem.Path;
 				return "";
 			}
 		}

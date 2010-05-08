@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009-2010 Jason Smith, Rico Tzschichholz
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -23,141 +23,149 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
+using GLib;
+
 using Docky.Services;
 
 namespace Docky.Windowing
 {
-
-
 	public class DesktopItem : IDisposable
 	{
-		static string[] LocaleEnvVariables = new [] {"LC_ALL", "LC_MESSAGES", "LANG", "LANGUAGE"};
+		public static Regex keyValueRegex = new Regex (
+			@"(^(\s)*(?<Key>([^\=^\n]+))[\s^\n]*\=(\s)*(?<Value>([^\n]+(\n){0,1})))",
+			RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled | 
+			RegexOptions.CultureInvariant
+		);
+		public static Regex sectionRegex = new Regex (
+			@"(^(\[)*(?<Section>([^\]^\n]+))\]$)" ,
+			RegexOptions.Compiled | RegexOptions.CultureInvariant
+		);
+		public static Regex localizedKeyRegex = new Regex (
+			@"(^(\s)*(?<PureKey>([^\[^\n]+))\[(?<Locale>([^\]^\n]+))\])" ,
+			RegexOptions.Compiled | RegexOptions.CultureInvariant
+		);
+
+		static IEnumerable<string> locales = PostfixStringsForLocale (WindowMatcher.Locale);
 		
-		public string Location { get; private set; }
+#region Delayed change propagation
+		public event EventHandler HasChanged;
+		private uint trigger_changed_timer = 0;
+		private object onchanged_lock = new object ();
+		protected void OnChanged ()
+		{
+			if (HasChanged != null)
+				lock (onchanged_lock) {
+					// collect changes within 2500ms then trigger events
+					if (trigger_changed_timer == 0) {
+						trigger_changed_timer = GLib.Timeout.Add (2500, delegate {
+							trigger_changed_timer = 0;
+							if (HasChanged != null)
+								HasChanged (this, null);
+							return false;
+						});
+					}
+				}
+		}
+#endregion
+
+		public Dictionary<string, string> Values { get; set; }
+
+		private GLib.DesktopAppInfo appinfo;
 		
-		public string DesktopID {
+		private GLib.FileMonitor monitor;
+		private GLib.File file;
+		public GLib.File File { 
 			get {
-				return Path.GetFileNameWithoutExtension (Location);
+				return file;
+			}
+			private set {
+				file = value;
+				if (monitor != null) {
+					monitor.Changed -= HandleFileChanged;
+				}
+				monitor = file.Monitor (GLib.FileMonitorFlags.None, null);
+				monitor.RateLimit = 2500;
+				monitor.Changed += HandleFileChanged;
 			}
 		}
-		
-		public DesktopItem (string path)
+
+		void HandleFileChanged (object o, ChangedArgs args)
 		{
-			Location = path;
+			Log<DesktopItem>.Debug ("file {0} changed", File.Path);
+
+			Values = GetValuesFromFile ();
+			
+			OnChanged ();
 		}
 		
+		public string Path 
+		{ 
+			get { return File.Path; }
+		}
+		
+		public Uri Uri 
+		{
+			get { return File.Uri; }
+		}
+
+		public string DesktopID 
+		{
+			get { return System.IO.Path.GetFileNameWithoutExtension (Path); }
+		}
+
+		public DesktopItem (GLib.File file, bool load_file)
+		{
+			if (file == null)
+				throw new ArgumentNullException ("DesktopItem can't be initialized with a null file object");
+			
+			File = file;
+			
+			appinfo = GLib.DesktopAppInfo.NewFromFilename (file.Path);
+			
+			if (load_file)
+				Values = GetValuesFromFile ();
+			else
+				Values = new Dictionary<string, string> ();
+		}
+
+		public DesktopItem (GLib.File file) : this (file, true)
+		{
+		}
+		
+		public DesktopItem (Uri uri) : this (GLib.FileFactory.NewForUri (uri))
+		{
+		}
+
+		public DesktopItem (string path) : this (GLib.FileFactory.NewForPath (path))
+		{
+		}
+
 		public bool HasAttribute (string key)
 		{
-			if (!File.Exists (Location))
-				return false;
-			
-			StreamReader reader;
-			try {
-				reader = new StreamReader (Location);
-			} catch (Exception e) {
-				Log<DesktopItem>.Error (e.Message);
-				return false;
-			}
-			
-			Regex regex = new Regex ("^" + key + "\\s*=\\s*");
-			
-			bool result = false;
-			string line;
-			while (!reader.EndOfStream) {
-				line = reader.ReadLine ();
-				
-				if (regex.IsMatch (line)) {
-					result = true;
-					break;
-				}
-			}
-			
-			reader.Dispose ();
-			
-			return result;
+			return Values.ContainsKey (key);
 		}
-		
+
 		public string GetString (string key)
 		{
-			if (!File.Exists (Location))
-				return null;
-			
-			StreamReader reader;
-			try {
-				reader = new StreamReader (Location);
-			} catch (Exception e) {
-				Log<DesktopItem>.Error (e.Message);
-				return null;
-			}
-			
-			key = Regex.Escape (key);
-			Regex regex = new Regex ("^" + key + "\\s*=\\s*");
-			
-			string result = null;
-			string line;
-			while (!reader.EndOfStream) {
-				line = reader.ReadLine ();
-				
-				if (regex.IsMatch (line)) {
-					Match match = regex.Matches (line)[0];
-					result = line.Remove (match.Index, match.Length);
-					break;
-				}
-			}
-			
-			reader.Dispose ();
-			
-			return result;
+			string result;
+			if (Values.TryGetValue (key, out result))
+				return result;
+			return null;
 		}
 		
-		IEnumerable<string> PostfixStringsForLocale (string locale)
+		public void SetString (string key, string val) 
 		{
-			if (string.IsNullOrEmpty (locale) || locale.Length < 2)
-				yield break;
-			
-			if (locale.Contains (".")) {
-				locale = Regex.Replace (locale, @"\..+(?<end>@*)", "${end}");
+			string result;
+			if (Values.TryGetValue (key, out result)) {
+				if (result.Equals (val))
+					return;
+				Values.Remove (key);
 			}
-			yield return locale;
+			Values.Add (key, val);
 			
-			if (locale.Contains ("@")) {
-				string noMod = Regex.Replace (locale, @"@*", "");
-				yield return noMod;
-			}
-			
-			if (locale.Contains ("_")) {
-				string noCountry = Regex.Replace (locale, @"_..", "");
-				yield return noCountry;
-			}
-			
-			yield return locale.Substring (0, 2);
+			OnChanged ();
 		}
-		
-		public string GetLocaleString (string key)
-		{
-			string locale = null;
-			
-			foreach (string env in LocaleEnvVariables) {
-				locale = Environment.GetEnvironmentVariable (env);
-				if (!string.IsNullOrEmpty (locale) && locale.Length >= 2)
-					break;
-			}
-			
-			// short circuit out of here, we cant find locale
-			if (string.IsNullOrEmpty (locale) || locale.Length < 2)
-				return GetString (key);
-			
-			string result = null;
-			
-			foreach (string postfix in PostfixStringsForLocale (locale)) {
-				result = GetString (string.Format ("{0}[{1}]", key, postfix));
-				if (result != null)
-					return result;
-			}
-			
-			return GetString (key);
-		}
-		
+
 		public IEnumerable<string> GetStrings (string key)
 		{
 			string result = GetString (key);
@@ -166,7 +174,7 @@ namespace Docky.Windowing
 			
 			return result.Split (';');
 		}
-		
+
 		public bool GetBool (string key)
 		{
 			string result = GetString (key);
@@ -179,29 +187,119 @@ namespace Docky.Windowing
 				throw new ArgumentException ();
 			}
 		}
-		
+
 		public double GetDouble (string key)
 		{
 			string result = GetString (key);
 			
 			return Convert.ToDouble (result);
 		}
-		
-		public void Launch (IEnumerable<string> uris)
-		{	
-			if (!File.Exists (Location))
-				return;
+
+		Dictionary<string, string> GetValuesFromFile ()
+		{
+			Dictionary<string, string> result = new Dictionary<string, string> ();
+
+			if (!File.Exists)
+				return result;
 			
-			using (GLib.DesktopAppInfo appinfo = GLib.DesktopAppInfo.NewFromFilename (Location)) {
-				DockServices.System.Open (appinfo, uris.Select (uri => GLib.FileFactory.NewForUri (uri)));
+			try {
+				using (StreamReader reader = new StreamReader (Path))
+				{
+					bool desktop_entry_found = false;
+					Match match;
+					string line;
+
+					while ((line = reader.ReadLine ()) != null) {
+						
+						if (line.Trim ().Length <= 0)
+							continue;
+						
+						if (!desktop_entry_found) {
+							
+							match = sectionRegex.Match (line);
+							if (match.Success) {
+								string section = match.Groups["Section"].Value;
+								desktop_entry_found = string.Equals (section, "Desktop Entry");
+							}
+							
+						} else {
+							
+							//Only add unlocalized values and values matching the current locale
+							match = keyValueRegex.Match (line);
+							if (match.Success) {
+								string key = match.Groups["Key"].Value;
+								string val = match.Groups["Value"].Value;
+								if (!string.IsNullOrEmpty (key) && !string.IsNullOrEmpty (val) && !result.ContainsKey (key)) {
+									match = localizedKeyRegex.Match (key);
+									if (match.Success) {
+										if (locales.Contains (match.Groups["Locale"].Value)) {
+											//Remove existing value in favour of this localized one
+											result.Remove (match.Groups["PureKey"].Value);
+											result.Add (match.Groups["PureKey"].Value, val);
+										}
+									} else {
+										if (!result.ContainsKey (key))
+											result.Add (key, val);
+									}
+								}
+								
+							} else if (sectionRegex.Match(line).Success)
+								break;
+						}
+					}
+					reader.Close ();
+				}
+
+			} catch (Exception e) {
+				Log<DesktopItem>.Error (e.Message);
+				Log<DesktopItem>.Error (e.StackTrace);
 			}
+
+			return result;
 		}
-		
+
+		static IEnumerable<string> PostfixStringsForLocale (string locale)
+		{
+			if (string.IsNullOrEmpty (locale) || locale.Length < 2)
+				yield break;
+			
+			if (locale.Contains (".")) {
+				locale = Regex.Replace (locale, "\\..+(?<end>@*)", "${end}");
+			}
+			yield return locale;
+			
+			if (locale.Contains ("@")) {
+				string noMod = Regex.Replace (locale, "@*", "");
+				yield return noMod;
+			}
+			
+			if (locale.Contains ("_")) {
+				string noCountry = Regex.Replace (locale, "_..", "");
+				yield return noCountry;
+			}
+			
+			yield return locale.Substring (0, 2);
+		}
+
+		public void Launch (IEnumerable<string> uris)
+		{
+			if (File.Exists)
+				DockServices.System.Open (appinfo, uris.Select (uri => GLib.FileFactory.NewForUri (uri)));
+		}
+
 		#region IDisposable implementation
 		public void Dispose ()
 		{
+			Values.Clear ();
+
+			appinfo.Dispose ();
+			
+			if (monitor != null) {
+				monitor.Changed -= HandleFileChanged;
+				monitor.Dispose ();
+			}
 		}
 		#endregion
-
+		
 	}
 }

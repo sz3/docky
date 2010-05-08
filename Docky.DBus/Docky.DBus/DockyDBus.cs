@@ -57,7 +57,7 @@ namespace Docky.DBus
 		{
 			return DBusManager.Default.Items
 				.OfType<ApplicationDockItem> ()
-				.Where (adi => adi.OwnedItem.Location == path)
+				.Where (adi => adi.OwnedItem.Path == path)
 				.Select (adi => DBusManager.Default.PathForItem (adi))
 				.DefaultIfEmpty ("")
 				.FirstOrDefault ();

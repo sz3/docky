@@ -37,27 +37,27 @@ namespace Docky.Items
 	{
 		public static ApplicationDockItem NewFromUri (string uri)
 		{
-			DesktopItem desktopItem;
-			string filename = Gnome.Vfs.Global.GetLocalPathFromUri (uri);
-			
 			try {
-				desktopItem = new DesktopItem (filename);
+				string filename = Gnome.Vfs.Global.GetLocalPathFromUri (uri);
+				DesktopItem desktopItem = WindowMatcher.Default.DesktopItemForDesktopFile (filename);
+				
+				if (desktopItem == null)
+					desktopItem = new DesktopItem (filename);
+
+				return new ApplicationDockItem (desktopItem);
+				
 			} catch (Exception e) {
 				Log<ApplicationDockItem>.Error (e.Message);
 				Log<ApplicationDockItem>.Debug (e.StackTrace);
-				return null;
 			}
-			
-			if (desktopItem == null)
-				return null;
-			
-			return new ApplicationDockItem (desktopItem);
+
+			return null;
 		}
 		
 		bool can_manage_windows;
 		IEnumerable<string> mimes;
 		
-		public DesktopItem OwnedItem { get; protected set; }
+		public DesktopItem OwnedItem { get; private set; }
 	
 		public override string ShortName {
 			get {
@@ -66,38 +66,38 @@ namespace Docky.Items
 			}
 		}
 		
-		private ApplicationDockItem (DesktopItem item)
+		public ApplicationDockItem (DesktopItem item)
 		{
 			OwnedItem = item;
-			WindowMatcher.Default.RegisterDesktopFile (OwnedItem.Location);
+			WindowMatcher.Default.RegisterDesktopItem (OwnedItem);
 			can_manage_windows = true;
 			
 			UpdateInfo ();
 			UpdateWindows ();
 			
-			WindowMatcher.DesktopFileChanged += HandleDesktopFileChanged;
+			OwnedItem.HasChanged += HandleOwnedItemHasChanged;
 			
 			Wnck.Screen.Default.WindowOpened += WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
 			Wnck.Screen.Default.ActiveWindowChanged += WnckScreenDefaultWindowChanged;
 		}
-		
-		void HandleDesktopFileChanged (object sender, DesktopFileChangedEventArgs e) {
-			if (e.File.Path == OwnedItem.Location)
-				UpdateInfo ();
+
+		void HandleOwnedItemHasChanged (object sender, EventArgs e)
+		{
+			UpdateInfo ();
 		}
 		
 		void UpdateInfo ()
 		{
 			if (OwnedItem.HasAttribute ("Icon"))
-				Icon = OwnedItem.GetLocaleString ("Icon");
+				Icon = OwnedItem.GetString ("Icon");
 			
 			if (OwnedItem.HasAttribute ("X-GNOME-FullName")) {
-				HoverText = OwnedItem.GetLocaleString ("X-GNOME-FullName");
+				HoverText = OwnedItem.GetString ("X-GNOME-FullName");
 			} else if (OwnedItem.HasAttribute ("Name")) {
-				HoverText = OwnedItem.GetLocaleString ("Name");
+				HoverText = OwnedItem.GetString ("Name");
 			} else {
-				HoverText = System.IO.Path.GetFileNameWithoutExtension (OwnedItem.Location);
+				HoverText = System.IO.Path.GetFileNameWithoutExtension (OwnedItem.Path);
 			}
 			
 			if (OwnedItem.HasAttribute ("MimeType")) {
@@ -113,7 +113,7 @@ namespace Docky.Items
 		
 		public override string UniqueID ()
 		{
-			return OwnedItem.Location;
+			return OwnedItem.Path;
 		}
 		
 		void WnckScreenDefaultWindowClosed (object o, WindowClosedArgs args)
@@ -137,9 +137,15 @@ namespace Docky.Items
 		void UpdateWindows ()
 		{
 			if (can_manage_windows)
-				Windows = WindowMatcher.Default.WindowsForDesktopFile (OwnedItem.Location);
+				Windows = WindowMatcher.Default.WindowsForDesktopItem (OwnedItem);
 			else
 				Windows = Enumerable.Empty<Wnck.Window> ();
+		}
+		
+		public void RecollectWindows () 
+		{
+			UpdateWindows ();
+			OnPaintNeeded ();
 		}
 		
 		protected override MenuList OnGetMenuItems ()
@@ -195,10 +201,13 @@ namespace Docky.Items
 		
 		public override void Dispose ()
 		{
-			WindowMatcher.DesktopFileChanged -= HandleDesktopFileChanged;
+			if (OwnedItem != null)
+				OwnedItem.HasChanged -= HandleOwnedItemHasChanged;
+
 			Wnck.Screen.Default.WindowOpened -= WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed -= WnckScreenDefaultWindowClosed;
 			Wnck.Screen.Default.ActiveWindowChanged -= WnckScreenDefaultWindowChanged;
+			
 			base.Dispose ();
 		}
 	}

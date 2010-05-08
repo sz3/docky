@@ -22,7 +22,8 @@ namespace Docky.Services
 {
 	public class PathsService
 	{
-
+		static readonly File home_folder = FileFactory.NewForPath (Environment.GetEnvironmentVariable ("HOME"));
+		
 		public File SystemDataFolder {
 			get { return FileFactory.NewForPath (AssemblyInfo.DataDirectory).GetChild ("docky"); }
 		}
@@ -31,6 +32,25 @@ namespace Docky.Services
 			get { return FileFactory.NewForPath (Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData)).GetChild ("docky"); }
 		}
 		
+		File user_cache_folder;
+		public File UserCacheFolder {
+			get { 
+				if (user_cache_folder != null)  
+					return user_cache_folder;
+				
+				string xdg_cache_home = Environment.GetEnvironmentVariable ("XDG_CACHE_HOME");
+				if (!string.IsNullOrEmpty (xdg_cache_home))
+					user_cache_folder = FileFactory.NewForPath (xdg_cache_home).GetChild ("docky");
+				else
+					user_cache_folder = home_folder.GetChild (".cache").GetChild ("docky");
+				
+				if (!user_cache_folder.Exists)
+					user_cache_folder.MakeDirectoryWithParents (null);
+				
+				return user_cache_folder;
+			}
+		}
+
 		public File AutoStartFile {
 			get { return FileFactory.NewForPath (Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData)).GetChild ("autostart").GetChild ("docky.desktop"); }
 		}
