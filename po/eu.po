@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-04-14 07:17+0200\n"
-"PO-Revision-Date: 2010-04-14 20:55+0000\n"
-"Last-Translator: Ibai Oihanguren <Unknown>\n"
+"POT-Creation-Date: 2010-05-06 10:50+0200\n"
+"PO-Revision-Date: 2010-04-23 07:27+0000\n"
+"Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-04-23 06:28+0000\n"
+"X-Launchpad-Export-Date: 2010-05-09 09:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
@@ -97,39 +97,37 @@ msgstr "Gehitu docklet hau hautatutako dock-era"
 msgid "Remove this docklet from the selected dock"
 msgstr "Kendu docklet hau hautatutako dock-etik"
 
-#: ../Docky/Docky/Docky.cs:99
+#: ../Docky/Docky/Docky.cs:110
 msgid ""
-"Docky requires compositing to work properly. Please enable compositing and "
-"restart docky."
+"Docky requires compositing to work properly. Certain options are disabled "
+"and themes/animations will look incorrect. "
 msgstr ""
-"Docky-k compositing behar du egoki funtzionatzeko. Aktibatu compositing eta "
-"berrabiarazi Docky."
 
-#: ../Docky/Docky/HelperTile.cs:43
+#: ../Docky/Docky/HelperTile.cs:41
 msgid "Status"
 msgstr "Egoera"
 
-#: ../Docky/Docky/HelperTile.cs:60
+#: ../Docky/Docky/HelperTile.cs:58
 msgid "Uninstall"
 msgstr "Desinstalatu"
 
-#: ../Docky/Docky/HelperTile.cs:77
+#: ../Docky/Docky/HelperTile.cs:75
 msgid "About this helper"
 msgstr "Hedapen honi buruz"
 
-#: ../Docky/Docky/HelperTile.cs:78
+#: ../Docky/Docky/HelperTile.cs:76
 msgid "Enable this helper"
 msgstr "Gaitu hedapen hau"
 
-#: ../Docky/Docky/HelperTile.cs:79
+#: ../Docky/Docky/HelperTile.cs:77
 msgid "Disable this helper"
 msgstr "Ezgaitu hedapen hau"
 
-#: ../Docky/Docky/HelperTile.cs:84
+#: ../Docky/Docky/HelperTile.cs:82
 msgid "Running"
 msgstr "Martxan"
 
-#: ../Docky/Docky/HelperTile.cs:84
+#: ../Docky/Docky/HelperTile.cs:82
 msgid "Stopped"
 msgstr "Geldituta"
 
@@ -148,47 +146,51 @@ msgstr ""
 "Aukera hau aktibatzean, abiarazlerik ez duten leihoak dock honetan "
 "bistaratuko dira."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:635
+#: ../Docky/Docky/Interface/DockPreferences.cs:687
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 "<i>Beti ikusgai; maximizatutako leihoek ez dute dock-a ezkutatzen.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:638
+#: ../Docky/Docky/Interface/DockPreferences.cs:690
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Sagua gainean ez duenero ezkutatzen da.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:641
+#: ../Docky/Docky/Interface/DockPreferences.cs:693
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Aplikazio aktibo bat eragozten duenean ezkutatzen da.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:644
+#: ../Docky/Docky/Interface/DockPreferences.cs:696
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Edozein leiho eragozten duenean ezkutatzen da.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:375
+#: ../Docky/Docky/Interface/DockWindow.cs:379
 msgid "Drag to reposition"
 msgstr "Arrastatu lekuz aldatzeko"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:382
+#: ../Docky/Docky/Interface/DockWindow.cs:386
 msgid "Drop to open"
 msgstr "Jaregin irekitzeko"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:386
-#: ../Docky/Docky/Interface/DockWindow.cs:400
+#: ../Docky/Docky/Interface/DockWindow.cs:390
+#: ../Docky/Docky/Interface/DockWindow.cs:404
 msgid "Drop to add to dock"
 msgstr "Jaregin dock-era itsasteko"
 
-#: ../Docky/Docky/Items/DockyItem.cs:109
+#: ../Docky/Docky/Items/DockyItem.cs:114
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:237
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:239
 msgid "_Settings"
 msgstr "_Ezarpenak"
 
-#: ../Docky/Docky/Items/DockyItem.cs:110
+#: ../Docky/Docky/Items/DockyItem.cs:115
 msgid "_About"
 msgstr "_Honi buruz"
 
-#: ../Docky/Docky/Items/DockyItem.cs:111
+#: ../Docky/Docky/Items/DockyItem.cs:116
+msgid "_Help"
+msgstr ""
+
+#: ../Docky/Docky/Items/DockyItem.cs:117
 msgid "_Quit Docky"
 msgstr "_Itxi Docky"
 
@@ -309,7 +311,7 @@ msgstr "_Ireki"
 msgid "Reset Color"
 msgstr "Berrezarri kolorea"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:356
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:359
 msgid "_Pin to Dock"
 msgstr "I_tsatsi dock-era"
 
@@ -477,34 +479,34 @@ msgstr "Begiratu mezu berririk dagoen:"
 msgid "minutes"
 msgstr "minuturo"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:200
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:201
 msgid "Click to set username and password."
 msgstr "Klikatu erabiltzaile-izena eta pasahitza sartzeko."
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:254
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:255
 msgid "(no subject)"
 msgstr "(gairik gabea)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:272
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 #, csharp-format
 msgid "From: {0}"
 msgstr "Nork: {0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:283
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:287
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:286
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:290
 msgid "Feed Error"
 msgstr "Jario errorea"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:292
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:295
 msgid "Invalid Username"
 msgstr "Okerreko erabiltzaile-izena"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:296
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:300
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:299
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:303
 msgid "Network Error"
 msgstr "Sareko errorea"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:305
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:308
 msgid "General Error"
 msgstr "Errore orokorra"
 
@@ -757,13 +759,15 @@ msgstr "Eguneratu _automatikoki:"
 msgid "Use _Metric Units"
 msgstr "_Erabili unitate metrikoak"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:95
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:98
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:103
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:176
 msgid "Invalid Weather Location"
 msgstr "Kokaleku baliogabea"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:101
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:179
+msgid "Invalid XML Weather Data"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:182
 msgid "Network Error: "
 msgstr "Sareko errorea: "
 
@@ -813,23 +817,23 @@ msgstr "Klikatu kokalekua gehitzeko."
 msgid "Fetching data..."
 msgstr "Datuak eskuratzen..."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:223
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:226
 msgid "Radar _Map"
 msgstr "Radar-_mapa"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:228
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Forecasts"
 msgstr "Aurrikuspenak"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:245
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:247
 msgid "Check _Weather"
 msgstr "_Begiratu eguraldia"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
 msgid "_Today"
 msgstr "_Gaur"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
 msgid "T_omorrow"
 msgstr "_Bihar"
 
@@ -1106,3 +1110,10 @@ msgstr "{0} hezetasuna"
 
 #~ msgid "_Enable"
 #~ msgstr "_Aktibatu"
+
+#~ msgid ""
+#~ "Docky requires compositing to work properly. Please enable compositing and "
+#~ "restart docky."
+#~ msgstr ""
+#~ "Docky-k compositing behar du egoki funtzionatzeko. Aktibatu compositing eta "
+#~ "berrabiarazi Docky."

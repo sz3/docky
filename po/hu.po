@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-04-14 07:17+0200\n"
-"PO-Revision-Date: 2010-04-06 12:08+0000\n"
+"POT-Creation-Date: 2010-05-06 10:50+0200\n"
+"PO-Revision-Date: 2010-05-03 06:14+0000\n"
 "Last-Translator: NewPlayer <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-04-14 09:04+0000\n"
+"X-Launchpad-Export-Date: 2010-05-09 09:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
@@ -32,7 +32,7 @@ msgstr "A beállításokhoz kattintson valamelyik dokkra."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:210
 msgid "Drag any dock to reposition."
-msgstr ""
+msgstr "Ragadja meg bármelyik dokkot az áthelyezéshez"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:275
 msgid "Delete the currently selected dock?"
@@ -97,39 +97,37 @@ msgstr ""
 msgid "Remove this docklet from the selected dock"
 msgstr ""
 
-#: ../Docky/Docky/Docky.cs:99
+#: ../Docky/Docky/Docky.cs:110
 msgid ""
-"Docky requires compositing to work properly. Please enable compositing and "
-"restart docky."
+"Docky requires compositing to work properly. Certain options are disabled "
+"and themes/animations will look incorrect. "
 msgstr ""
-"A docky megfelelő működéséhez engedélyezze a vizuális effektusokat "
-"(compositing), majd indítsa újra a dockyt."
 
-#: ../Docky/Docky/HelperTile.cs:43
+#: ../Docky/Docky/HelperTile.cs:41
 msgid "Status"
 msgstr "Állapot"
 
-#: ../Docky/Docky/HelperTile.cs:60
+#: ../Docky/Docky/HelperTile.cs:58
 msgid "Uninstall"
 msgstr "Eltávolítás"
 
-#: ../Docky/Docky/HelperTile.cs:77
+#: ../Docky/Docky/HelperTile.cs:75
 msgid "About this helper"
-msgstr ""
+msgstr "Információ a segédről"
 
-#: ../Docky/Docky/HelperTile.cs:78
+#: ../Docky/Docky/HelperTile.cs:76
 msgid "Enable this helper"
-msgstr ""
+msgstr "Segéd engedélyezése"
 
-#: ../Docky/Docky/HelperTile.cs:79
+#: ../Docky/Docky/HelperTile.cs:77
 msgid "Disable this helper"
-msgstr ""
+msgstr "Segéd tíltása"
 
-#: ../Docky/Docky/HelperTile.cs:84
+#: ../Docky/Docky/HelperTile.cs:82
 msgid "Running"
 msgstr "Fut"
 
-#: ../Docky/Docky/HelperTile.cs:84
+#: ../Docky/Docky/HelperTile.cs:82
 msgid "Stopped"
 msgstr "Leállítva"
 
@@ -138,54 +136,62 @@ msgid ""
 "Causes launchers which currently manage more than one window to have an "
 "extra indicator under it."
 msgstr ""
+"Azok az indítóikonok, amelyek jelenleg több mint egy ablakot kezelnek, egy "
+"extra jelet kapnak."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:335
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
+"Ha beállítja, az ablakok, amelyek még nem rendelkeznek indítóikonnal a "
+"dokkon, hozzáadódnak a dokkhoz."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:635
+#: ../Docky/Docky/Interface/DockPreferences.cs:687
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 "<i>Soha nem rejti el; a teljes méretű ablakok nem fedik el a dokkot.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:638
+#: ../Docky/Docky/Interface/DockPreferences.cs:690
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Elrejti, amikor az egér nincs fölötte.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:641
+#: ../Docky/Docky/Interface/DockPreferences.cs:693
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Elrejti, amint a dokk elfedi az aktív alkalmazást.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:644
+#: ../Docky/Docky/Interface/DockPreferences.cs:696
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Elrejti, amint a dokk elfedi bármely ablakot.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:375
+#: ../Docky/Docky/Interface/DockWindow.cs:379
 msgid "Drag to reposition"
 msgstr "Fogja meg az áthelyezéshez"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:382
-msgid "Drop to open"
-msgstr ""
-
 #: ../Docky/Docky/Interface/DockWindow.cs:386
-#: ../Docky/Docky/Interface/DockWindow.cs:400
-msgid "Drop to add to dock"
-msgstr ""
+msgid "Drop to open"
+msgstr "Ragadja meg a kinyitáshoz"
 
-#: ../Docky/Docky/Items/DockyItem.cs:109
+#: ../Docky/Docky/Interface/DockWindow.cs:390
+#: ../Docky/Docky/Interface/DockWindow.cs:404
+msgid "Drop to add to dock"
+msgstr "Ragadja meg a dokkon való elhelyezéshez"
+
+#: ../Docky/Docky/Items/DockyItem.cs:114
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:237
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:239
 msgid "_Settings"
 msgstr "_Beállítások"
 
-#: ../Docky/Docky/Items/DockyItem.cs:110
+#: ../Docky/Docky/Items/DockyItem.cs:115
 msgid "_About"
 msgstr "_Névjegy"
 
-#: ../Docky/Docky/Items/DockyItem.cs:111
+#: ../Docky/Docky/Items/DockyItem.cs:116
+msgid "_Help"
+msgstr ""
+
+#: ../Docky/Docky/Items/DockyItem.cs:117
 msgid "_Quit Docky"
 msgstr "_Kilépés a Docky-ból"
 
@@ -287,7 +293,7 @@ msgstr "3D Háttér"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:186
 msgid "_Manage Windows Without Launcher"
-msgstr ""
+msgstr "_Ablakok kezelése indítóikon nélkül"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:201
 msgid "_Zoom:"
@@ -306,7 +312,7 @@ msgstr "_Megnyitás"
 msgid "Reset Color"
 msgstr "Színek visszaállítása"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:356
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:359
 msgid "_Pin to Dock"
 msgstr "Zárolás dokkhoz"
 
@@ -331,7 +337,7 @@ msgstr "Másolás"
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:221
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:222
 msgid "Error performing drop action"
-msgstr ""
+msgstr "Hiba az elhelyező művelet végrehajtása közben"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:244
 msgid "Open"
@@ -423,11 +429,11 @@ msgstr[1] "{0} perc"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:177
 msgid "until charged "
-msgstr ""
+msgstr "amíg tölt "
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:179
 msgid "remaining "
-msgstr ""
+msgstr "maradékok "
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:84
 msgid "Computer"
@@ -474,34 +480,34 @@ msgstr "Ellenőrzés m_inden:"
 msgid "minutes"
 msgstr "percben"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:200
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:201
 msgid "Click to set username and password."
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:254
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:255
 msgid "(no subject)"
 msgstr "(nincs tárgy)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:272
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 #, csharp-format
 msgid "From: {0}"
 msgstr "Feladó: {0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:283
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:287
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:286
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:290
 msgid "Feed Error"
 msgstr "Hírforráshiba"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:292
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:295
 msgid "Invalid Username"
 msgstr "Érvénytelen felhasználónév"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:296
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:300
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:299
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:303
 msgid "Network Error"
 msgstr "Hálózati hiba"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:305
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:308
 msgid "General Error"
 msgstr "Általános hiba"
 
@@ -621,7 +627,7 @@ msgstr "Támogatás"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:128
 msgid "Live Streams"
-msgstr ""
+msgstr "Élő Adások"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:166
 msgid "Settings"
@@ -755,13 +761,15 @@ msgstr "Automatikus _frissítés"
 msgid "Use _Metric Units"
 msgstr "_Metrikus mértékegység használata"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:95
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:98
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:103
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:176
 msgid "Invalid Weather Location"
 msgstr "Érvénytelen hely"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:101
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:179
+msgid "Invalid XML Weather Data"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:182
 msgid "Network Error: "
 msgstr "Hálózati hiba: "
 
@@ -809,23 +817,23 @@ msgstr ""
 msgid "Fetching data..."
 msgstr "Adatok lekérése…"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:223
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:226
 msgid "Radar _Map"
 msgstr "Ra_dartérkép"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:228
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Forecasts"
 msgstr "Előrejelzés"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:245
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:247
 msgid "Check _Weather"
 msgstr "Időjárás _ellenőrzése"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
 msgid "_Today"
 msgstr "_Ma"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
 msgid "T_omorrow"
 msgstr "H_olnap"
 
@@ -833,7 +841,7 @@ msgstr "H_olnap"
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:318
 #, csharp-format
 msgid "{0} humidity"
-msgstr ""
+msgstr "{0} páratartalom"
 
 #~ msgid "Today"
 #~ msgstr "Ma"
@@ -1024,3 +1032,10 @@ msgstr ""
 
 #~ msgid "Drag any dock to move it."
 #~ msgstr "Húzza a dokkot a mozgatásához."
+
+#~ msgid ""
+#~ "Docky requires compositing to work properly. Please enable compositing and "
+#~ "restart docky."
+#~ msgstr ""
+#~ "A docky megfelelő működéséhez engedélyezze a vizuális effektusokat "
+#~ "(compositing), majd indítsa újra a dockyt."

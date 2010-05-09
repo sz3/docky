@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-04-14 07:17+0200\n"
+"POT-Creation-Date: 2010-05-06 10:50+0200\n"
 "PO-Revision-Date: 2010-03-27 18:18+0000\n"
 "Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Croatian <hr@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-05-02 14:56+0000\n"
+"X-Launchpad-Export-Date: 2010-05-09 09:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
@@ -98,39 +98,37 @@ msgstr ""
 msgid "Remove this docklet from the selected dock"
 msgstr ""
 
-#: ../Docky/Docky/Docky.cs:99
+#: ../Docky/Docky/Docky.cs:110
 msgid ""
-"Docky requires compositing to work properly. Please enable compositing and "
-"restart docky."
+"Docky requires compositing to work properly. Certain options are disabled "
+"and themes/animations will look incorrect. "
 msgstr ""
-"Za ispravan rad, Docky zahtijeva vizualne efekte. Molim omogućite vizualne "
-"efekte i ponovno pokrenite docky."
 
-#: ../Docky/Docky/HelperTile.cs:43
+#: ../Docky/Docky/HelperTile.cs:41
 msgid "Status"
 msgstr "Status"
 
-#: ../Docky/Docky/HelperTile.cs:60
+#: ../Docky/Docky/HelperTile.cs:58
 msgid "Uninstall"
 msgstr "Ukloni"
 
-#: ../Docky/Docky/HelperTile.cs:77
+#: ../Docky/Docky/HelperTile.cs:75
 msgid "About this helper"
 msgstr ""
 
-#: ../Docky/Docky/HelperTile.cs:78
+#: ../Docky/Docky/HelperTile.cs:76
 msgid "Enable this helper"
 msgstr ""
 
-#: ../Docky/Docky/HelperTile.cs:79
+#: ../Docky/Docky/HelperTile.cs:77
 msgid "Disable this helper"
 msgstr ""
 
-#: ../Docky/Docky/HelperTile.cs:84
+#: ../Docky/Docky/HelperTile.cs:82
 msgid "Running"
 msgstr "Izvršavanje"
 
-#: ../Docky/Docky/HelperTile.cs:84
+#: ../Docky/Docky/HelperTile.cs:82
 msgid "Stopped"
 msgstr "Zaustavljeno"
 
@@ -150,47 +148,51 @@ msgstr ""
 "Ako je aktivirano, prozori koji već nemaju pokretače na doku bit će dodani "
 "istome."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:635
+#: ../Docky/Docky/Interface/DockPreferences.cs:687
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 "<i>Nikad se ne skriva; povećani prozori se ne preklapaju s dokom.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:638
+#: ../Docky/Docky/Interface/DockPreferences.cs:690
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Skriva se kad god pokazivač nije iznad doka.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:641
+#: ../Docky/Docky/Interface/DockPreferences.cs:693
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Skriva se kada dok zakloni aktivnu aplikaciju.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:644
+#: ../Docky/Docky/Interface/DockPreferences.cs:696
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Skriva se kada dok zaklanja bilo koji prozor.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:375
+#: ../Docky/Docky/Interface/DockWindow.cs:379
 msgid "Drag to reposition"
 msgstr "Povucite za premještanje"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:382
+#: ../Docky/Docky/Interface/DockWindow.cs:386
 msgid "Drop to open"
 msgstr "Ispustite da otvorite"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:386
-#: ../Docky/Docky/Interface/DockWindow.cs:400
+#: ../Docky/Docky/Interface/DockWindow.cs:390
+#: ../Docky/Docky/Interface/DockWindow.cs:404
 msgid "Drop to add to dock"
 msgstr "Ispustite da biste dodali na dok"
 
-#: ../Docky/Docky/Items/DockyItem.cs:109
+#: ../Docky/Docky/Items/DockyItem.cs:114
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:237
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:239
 msgid "_Settings"
 msgstr "_Postavke"
 
-#: ../Docky/Docky/Items/DockyItem.cs:110
+#: ../Docky/Docky/Items/DockyItem.cs:115
 msgid "_About"
 msgstr "_O programu"
 
-#: ../Docky/Docky/Items/DockyItem.cs:111
+#: ../Docky/Docky/Items/DockyItem.cs:116
+msgid "_Help"
+msgstr ""
+
+#: ../Docky/Docky/Items/DockyItem.cs:117
 msgid "_Quit Docky"
 msgstr "_Zatvori Docky"
 
@@ -311,7 +313,7 @@ msgstr "_Otvori"
 msgid "Reset Color"
 msgstr "Vrati izvornu boju"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:356
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:359
 msgid "_Pin to Dock"
 msgstr "_Pričvrsti na dok"
 
@@ -481,34 +483,34 @@ msgstr "Provjeri s_vakih:"
 msgid "minutes"
 msgstr "minute"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:200
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:201
 msgid "Click to set username and password."
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:254
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:255
 msgid "(no subject)"
 msgstr "(bez naslova)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:272
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 #, csharp-format
 msgid "From: {0}"
 msgstr "Od: {0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:283
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:287
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:286
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:290
 msgid "Feed Error"
 msgstr "Pogreška"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:292
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:295
 msgid "Invalid Username"
 msgstr "Neispravno korisničko ime"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:296
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:300
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:299
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:303
 msgid "Network Error"
 msgstr "Mrežna Pogeška"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:305
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:308
 msgid "General Error"
 msgstr "Opća pogreška"
 
@@ -764,13 +766,15 @@ msgstr "Automatski Ažuriraj _Svakih"
 msgid "Use _Metric Units"
 msgstr "Koristi _Metričke Jedinice?"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:95
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:98
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:103
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:176
 msgid "Invalid Weather Location"
 msgstr "Neispravna Vremenska Lokacija"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:101
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:179
+msgid "Invalid XML Weather Data"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:182
 msgid "Network Error: "
 msgstr "Mrežna pogrješka: "
 
@@ -820,23 +824,23 @@ msgstr ""
 msgid "Fetching data..."
 msgstr "Dohvaćam podatke..."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:223
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:226
 msgid "Radar _Map"
 msgstr "Radarska _Karta"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:228
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Forecasts"
 msgstr "Prognoze"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:245
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:247
 msgid "Check _Weather"
 msgstr "Provjeri _Vrijeme"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
 msgid "_Today"
 msgstr "_Danas"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
 msgid "T_omorrow"
 msgstr "S_utra"
 
@@ -924,3 +928,10 @@ msgstr ""
 
 #~ msgid "Docky Configuration"
 #~ msgstr "Postavke Dockyja"
+
+#~ msgid ""
+#~ "Docky requires compositing to work properly. Please enable compositing and "
+#~ "restart docky."
+#~ msgstr ""
+#~ "Za ispravan rad, Docky zahtijeva vizualne efekte. Molim omogućite vizualne "
+#~ "efekte i ponovno pokrenite docky."

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-04-14 07:17+0200\n"
-"PO-Revision-Date: 2010-04-21 08:18+0000\n"
-"Last-Translator: Bugbear5 <Unknown>\n"
+"POT-Creation-Date: 2010-05-06 10:50+0200\n"
+"PO-Revision-Date: 2010-04-23 07:27+0000\n"
+"Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-04-23 06:28+0000\n"
+"X-Launchpad-Export-Date: 2010-05-09 09:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
@@ -95,37 +95,37 @@ msgstr "이 독클릿을 선택된 독에 추가합니다"
 msgid "Remove this docklet from the selected dock"
 msgstr "이 독클릿을 선택된 독으로부터 제거합니다"
 
-#: ../Docky/Docky/Docky.cs:99
+#: ../Docky/Docky/Docky.cs:110
 msgid ""
-"Docky requires compositing to work properly. Please enable compositing and "
-"restart docky."
-msgstr "Docky를 실행하려면 창 합성(compositing)이 필요합니다. 창 합성을 활성화하고 Docky를 재시작해주십시오."
+"Docky requires compositing to work properly. Certain options are disabled "
+"and themes/animations will look incorrect. "
+msgstr ""
 
-#: ../Docky/Docky/HelperTile.cs:43
+#: ../Docky/Docky/HelperTile.cs:41
 msgid "Status"
 msgstr "상태"
 
-#: ../Docky/Docky/HelperTile.cs:60
+#: ../Docky/Docky/HelperTile.cs:58
 msgid "Uninstall"
 msgstr "제거"
 
-#: ../Docky/Docky/HelperTile.cs:77
+#: ../Docky/Docky/HelperTile.cs:75
 msgid "About this helper"
 msgstr "이 도우미에 대하여"
 
-#: ../Docky/Docky/HelperTile.cs:78
+#: ../Docky/Docky/HelperTile.cs:76
 msgid "Enable this helper"
 msgstr "이 도우미를 활성화"
 
-#: ../Docky/Docky/HelperTile.cs:79
+#: ../Docky/Docky/HelperTile.cs:77
 msgid "Disable this helper"
 msgstr "이 도우미를 비활성화"
 
-#: ../Docky/Docky/HelperTile.cs:84
+#: ../Docky/Docky/HelperTile.cs:82
 msgid "Running"
 msgstr "실행 중"
 
-#: ../Docky/Docky/HelperTile.cs:84
+#: ../Docky/Docky/HelperTile.cs:82
 msgid "Stopped"
 msgstr "정지됨"
 
@@ -141,46 +141,50 @@ msgid ""
 "added to this dock."
 msgstr "설정하면, Dock에 런처를 갖고 있지 않은 창도 이 Dock에 추가됩니다."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:635
+#: ../Docky/Docky/Interface/DockPreferences.cs:687
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr "<i>최대화된 창이 dock를 덮어도 숨기지 않습니다</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:638
+#: ../Docky/Docky/Interface/DockPreferences.cs:690
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>마우스가 dock위에 위치해 있지 않을때 숨깁니다.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:641
+#: ../Docky/Docky/Interface/DockPreferences.cs:693
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>활성화된 어플리케이션의 창이 dock를 일부라도 덮을때 숨깁니다.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:644
+#: ../Docky/Docky/Interface/DockPreferences.cs:696
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>활성화 관계 없이 어느 창이든 dock를 일부라도 덮는다면 숨깁니다.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:375
+#: ../Docky/Docky/Interface/DockWindow.cs:379
 msgid "Drag to reposition"
 msgstr "드래그하여 옮기기"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:382
+#: ../Docky/Docky/Interface/DockWindow.cs:386
 msgid "Drop to open"
 msgstr "드래그해서 열기"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:386
-#: ../Docky/Docky/Interface/DockWindow.cs:400
+#: ../Docky/Docky/Interface/DockWindow.cs:390
+#: ../Docky/Docky/Interface/DockWindow.cs:404
 msgid "Drop to add to dock"
 msgstr "드래그하여 Dock에 추가"
 
-#: ../Docky/Docky/Items/DockyItem.cs:109
+#: ../Docky/Docky/Items/DockyItem.cs:114
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:237
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:239
 msgid "_Settings"
 msgstr "설정 (_S)"
 
-#: ../Docky/Docky/Items/DockyItem.cs:110
+#: ../Docky/Docky/Items/DockyItem.cs:115
 msgid "_About"
 msgstr "Docky 정보 (_A)"
 
-#: ../Docky/Docky/Items/DockyItem.cs:111
+#: ../Docky/Docky/Items/DockyItem.cs:116
+msgid "_Help"
+msgstr ""
+
+#: ../Docky/Docky/Items/DockyItem.cs:117
 msgid "_Quit Docky"
 msgstr "Docky 종료 (_Q)"
 
@@ -301,7 +305,7 @@ msgstr "열기 (_O)"
 msgid "Reset Color"
 msgstr "색깔 초기화"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:356
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:359
 msgid "_Pin to Dock"
 msgstr "Dock에 고정(_P)"
 
@@ -467,34 +471,34 @@ msgstr "매 분마다 체크(_v):"
 msgid "minutes"
 msgstr "분"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:200
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:201
 msgid "Click to set username and password."
 msgstr "클릭하여 사용자 이름과 암호를 설정합니다."
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:254
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:255
 msgid "(no subject)"
 msgstr "(제목 없음)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:272
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 #, csharp-format
 msgid "From: {0}"
 msgstr "보낸이: {0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:283
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:287
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:286
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:290
 msgid "Feed Error"
 msgstr "피드 에러"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:292
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:295
 msgid "Invalid Username"
 msgstr "잘못된 사용자 이름"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:296
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:300
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:299
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:303
 msgid "Network Error"
 msgstr "네트워크 오류"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:305
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:308
 msgid "General Error"
 msgstr "일반 에러"
 
@@ -744,13 +748,15 @@ msgstr "매 분마다 자동으로 업데이트(_E)"
 msgid "Use _Metric Units"
 msgstr "미터법 표기 사용(_M)"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:95
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:98
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:103
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:176
 msgid "Invalid Weather Location"
 msgstr "잘못된 날씨 위치"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:101
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:179
+msgid "Invalid XML Weather Data"
+msgstr ""
+
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:182
 msgid "Network Error: "
 msgstr "네트워크 에러: "
 
@@ -795,23 +801,23 @@ msgstr "클릭하여 위치를 추가합니다."
 msgid "Fetching data..."
 msgstr "데이터를 불러오는 중..."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:223
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:226
 msgid "Radar _Map"
 msgstr "레이더 지도(_M)"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:228
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Forecasts"
 msgstr "일기예보"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:245
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:247
 msgid "Check _Weather"
 msgstr "날씨 확인(_W)"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
 msgid "_Today"
 msgstr "오늘(_T)"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
 msgid "T_omorrow"
 msgstr "내일(_O)"
 
@@ -868,3 +874,8 @@ msgstr "{0} 습도"
 
 #~ msgid "Direction"
 #~ msgstr "방향"
+
+#~ msgid ""
+#~ "Docky requires compositing to work properly. Please enable compositing and "
+#~ "restart docky."
+#~ msgstr "Docky를 실행하려면 창 합성(compositing)이 필요합니다. 창 합성을 활성화하고 Docky를 재시작해주십시오."

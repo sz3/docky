@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-04-14 07:17+0200\n"
-"PO-Revision-Date: 2010-04-24 03:14+0000\n"
+"POT-Creation-Date: 2010-05-06 10:50+0200\n"
+"PO-Revision-Date: 2010-05-06 12:28+0000\n"
 "Last-Translator: kawaji <jiro.kawada@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-05-02 14:56+0000\n"
+"X-Launchpad-Export-Date: 2010-05-09 09:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
@@ -97,37 +97,37 @@ msgstr "このドックレットを選択ドックに追加"
 msgid "Remove this docklet from the selected dock"
 msgstr "このドックレットを選択ドックから削除"
 
-#: ../Docky/Docky/Docky.cs:99
+#: ../Docky/Docky/Docky.cs:110
 msgid ""
-"Docky requires compositing to work properly. Please enable compositing and "
-"restart docky."
-msgstr "Docky の正常動作にはコンポジットが必要です。コンポジットを有効にして Docky を再起動してください。"
+"Docky requires compositing to work properly. Certain options are disabled "
+"and themes/animations will look incorrect. "
+msgstr "Docky の正常動作にはコンポジットが必要です。特定のオプションが無効化され、テーマやアニメーションが正しく表示されなくなります。 "
 
-#: ../Docky/Docky/HelperTile.cs:43
+#: ../Docky/Docky/HelperTile.cs:41
 msgid "Status"
 msgstr "状態"
 
-#: ../Docky/Docky/HelperTile.cs:60
+#: ../Docky/Docky/HelperTile.cs:58
 msgid "Uninstall"
 msgstr "アンインストール"
 
-#: ../Docky/Docky/HelperTile.cs:77
+#: ../Docky/Docky/HelperTile.cs:75
 msgid "About this helper"
 msgstr "このヘルパーについて"
 
-#: ../Docky/Docky/HelperTile.cs:78
+#: ../Docky/Docky/HelperTile.cs:76
 msgid "Enable this helper"
 msgstr "このヘルパーを有効化"
 
-#: ../Docky/Docky/HelperTile.cs:79
+#: ../Docky/Docky/HelperTile.cs:77
 msgid "Disable this helper"
 msgstr "このヘルパーを無効化"
 
-#: ../Docky/Docky/HelperTile.cs:84
+#: ../Docky/Docky/HelperTile.cs:82
 msgid "Running"
 msgstr "稼動中"
 
-#: ../Docky/Docky/HelperTile.cs:84
+#: ../Docky/Docky/HelperTile.cs:82
 msgid "Stopped"
 msgstr "停止"
 
@@ -143,46 +143,50 @@ msgid ""
 "added to this dock."
 msgstr "有効にすると、いずれのドックにもランチャーを有していないウィンドウは、このドックに追加されるようになります。"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:635
+#: ../Docky/Docky/Interface/DockPreferences.cs:687
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr "<i>常時表示: ウィンドウを最大化してもドックには重なりません。</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:638
+#: ../Docky/Docky/Interface/DockPreferences.cs:690
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>マウスが置かれない間は常に隠れた状態になります。</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:641
+#: ../Docky/Docky/Interface/DockPreferences.cs:693
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>ドックがアクティブなアプリケーションを邪魔する時に隠します。</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:644
+#: ../Docky/Docky/Interface/DockPreferences.cs:696
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>ドックがウィンドウ全般を邪魔する時に隠します。</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:375
+#: ../Docky/Docky/Interface/DockWindow.cs:379
 msgid "Drag to reposition"
 msgstr "ドラッグして再配置"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:382
+#: ../Docky/Docky/Interface/DockWindow.cs:386
 msgid "Drop to open"
 msgstr "ドロップして開く"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:386
-#: ../Docky/Docky/Interface/DockWindow.cs:400
+#: ../Docky/Docky/Interface/DockWindow.cs:390
+#: ../Docky/Docky/Interface/DockWindow.cs:404
 msgid "Drop to add to dock"
 msgstr "ドロップしてドックに追加"
 
-#: ../Docky/Docky/Items/DockyItem.cs:109
+#: ../Docky/Docky/Items/DockyItem.cs:114
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:237
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:239
 msgid "_Settings"
 msgstr "設定(_S)"
 
-#: ../Docky/Docky/Items/DockyItem.cs:110
+#: ../Docky/Docky/Items/DockyItem.cs:115
 msgid "_About"
 msgstr "情報(_A)"
 
-#: ../Docky/Docky/Items/DockyItem.cs:111
+#: ../Docky/Docky/Items/DockyItem.cs:116
+msgid "_Help"
+msgstr "ヘルプ(_H)"
+
+#: ../Docky/Docky/Items/DockyItem.cs:117
 msgid "_Quit Docky"
 msgstr "Docky 終了(_Q)"
 
@@ -303,7 +307,7 @@ msgstr "開く(_O)"
 msgid "Reset Color"
 msgstr "色を元に戻す"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:356
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:359
 msgid "_Pin to Dock"
 msgstr "ドックに作成配置(_P)"
 
@@ -469,34 +473,34 @@ msgstr "チェック間隔(_V)"
 msgid "minutes"
 msgstr "分"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:200
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:201
 msgid "Click to set username and password."
 msgstr "クリックしてユーザー名とパスワードを設定します。"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:254
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:255
 msgid "(no subject)"
 msgstr "（件名なし）"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:272
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 #, csharp-format
 msgid "From: {0}"
 msgstr "差出人: {0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:283
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:287
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:286
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:290
 msgid "Feed Error"
 msgstr "フィードエラー"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:292
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:295
 msgid "Invalid Username"
 msgstr "無効なユーザー名"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:296
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:300
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:299
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:303
 msgid "Network Error"
 msgstr "ネットワークエラー"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:305
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:308
 msgid "General Error"
 msgstr "一般エラー"
 
@@ -746,13 +750,15 @@ msgstr "自動的に更新する間隔(_E)"
 msgid "Use _Metric Units"
 msgstr "メートル単位を使用(_M)"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:95
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:98
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:103
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:176
 msgid "Invalid Weather Location"
 msgstr "無効な天気予報場所の指定"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:101
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:179
+msgid "Invalid XML Weather Data"
+msgstr "不正な XML 天気予報データ"
+
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:182
 msgid "Network Error: "
 msgstr "ネットワークエラー: "
 
@@ -796,23 +802,23 @@ msgstr "クリックして場所を追加します。"
 msgid "Fetching data..."
 msgstr "データ取得中..."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:223
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:226
 msgid "Radar _Map"
 msgstr "レーダーマップ(_M)"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:228
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Forecasts"
 msgstr "予報"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:245
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:247
 msgid "Check _Weather"
 msgstr "予報更新(_W)"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
 msgid "_Today"
 msgstr "今日(_T)"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
 msgid "T_omorrow"
 msgstr "明日(_O)"
 
@@ -830,6 +836,11 @@ msgstr "湿度 {0}"
 
 #~ msgid "_Enable"
 #~ msgstr "有効化(_E)"
+
+#~ msgid ""
+#~ "Docky requires compositing to work properly. Please enable compositing and "
+#~ "restart docky."
+#~ msgstr "Docky の正常動作にはコンポジットが必要です。コンポジットを有効にして Docky を再起動してください。"
 
 #~ msgid "_Remove"
 #~ msgstr "削除(_R)"
