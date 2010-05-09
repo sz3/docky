@@ -256,6 +256,9 @@ namespace Docky.Windowing
 
 		void ProcessAndMergeSystemCacheFile (string cache_file, List<DesktopItem> items)
 		{
+			if (!GLib.FileFactory.NewForPath (cache_file).Exists)
+			    return;
+			
 			Log<WindowMatcher>.Debug ("Processing {0}", cache_file);
 			
 			try {
