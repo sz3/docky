@@ -60,6 +60,7 @@ class DockyBansheeItem(DockyItem):
 		self.duration_secs = 0
 		self.songinfo = None
 		self.current_arturl = ""
+		self.current_arturl_mtime = 0
 				
 		self.bus.add_signal_receiver(self.name_owner_changed_cb,
                                              dbus_interface='org.freedesktop.DBus',
@@ -177,14 +178,16 @@ class DockyBansheeItem(DockyItem):
 		
 		if self.banshee_is_playing():
 			arturl = self.get_album_art_path()
-			if not self.current_arturl == arturl:
-				# Add overlay to cover
-				if os.path.isfile(arturl):
-					self.current_arturl = arturl
-					self.iface.SetIcon(self.get_album_art_overlay_path(arturl))
-				else:
-					self.current_arturl = ""
-					self.iface.ResetIcon()
+			# Add overlay to cover
+			if os.path.isfile(arturl):
+				if self.current_arturl == arturl and self.current_arturl_mtime == os.stat(arturl).st_mtime:
+					return True
+				self.current_arturl = arturl
+				self.current_arturl_mtime = os.stat(arturl).st_mtime
+				self.iface.SetIcon(self.get_album_art_overlay_path(arturl))
+			else:
+				self.current_arturl = ""
+				self.iface.ResetIcon()
 		else:
 			self.current_arturl = ""
 			self.iface.ResetIcon()

@@ -75,6 +75,7 @@ class DockyRhythmboxItem(DockyItem):
 		self.songinfo = None
 		self.cover_basename = ""
 		self.current_arturl = ""
+		self.current_arturl_mtime = 0
 
 		self.bus.add_signal_receiver(self.name_owner_changed_cb,
                                              dbus_interface='org.freedesktop.DBus',
@@ -187,14 +188,16 @@ class DockyRhythmboxItem(DockyItem):
 		
 		if self.rhythmbox_is_playing():
 			arturl = self.get_album_art_path()
-			if not self.current_arturl == arturl:
-				# Add overlay to cover
-				if os.path.isfile(arturl):
-					self.current_arturl = arturl
-					self.iface.SetIcon(self.get_album_art_overlay_path(arturl))
-				else:
-					self.current_arturl = ""
-					self.iface.ResetIcon()
+			# Add overlay to cover
+			if os.path.isfile(arturl):
+				if self.current_arturl == arturl and self.current_arturl_mtime == os.stat(arturl).st_mtime:
+					return True
+				self.current_arturl = arturl
+				self.current_arturl_mtime = os.stat(arturl).st_mtime
+				self.iface.SetIcon(self.get_album_art_overlay_path(arturl))
+			else:
+				self.current_arturl = ""
+				self.iface.ResetIcon()
 		else:
 			self.current_arturl = ""
 			self.iface.ResetIcon()
@@ -211,8 +214,11 @@ class DockyRhythmboxItem(DockyItem):
 		#1. Look in song folder
 		#TODO need to replace some things, this is very weird
 		coverdir = os.path.dirname(filename)
-		covernames = ["cover.jpg", "cover.png", "album.jpg", "album.png", "albumart.jpg", 
-			"albumart.png", ".folder.jpg", ".folder.png", "folder.jpg", "folder.png"]
+		covernames = ["cover.jpg", "cover.png", "Cover.jpg", "Cover.png", 
+			"album.jpg", "album.png", "Album.jpg", "Album.png", 
+			"albumart.jpg", "albumart.png", "Albumart.jpg", "Albumart.png", 
+			".folder.jpg", ".folder.png", ".Folder.jpg", ".Folder.png", 
+			"folder.jpg", "folder.png", "Folder.jpg", "Folder.png"]
 		for covername in covernames:
 			arturl = os.path.join(coverdir, covername)
 			if os.path.isfile(arturl):
