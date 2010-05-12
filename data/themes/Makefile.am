@@ -1,1 +1,1 @@
-SUBDIRS = Grayscale Air Glass HUD Smoke Transparent
+SUBDIRS = Grayscale Air Glass HUD Matte Smoke Transparent

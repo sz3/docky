@@ -246,6 +246,7 @@ data/themes/Air/Makefile
 data/themes/Glass/Makefile
 data/themes/Grayscale/Makefile
 data/themes/HUD/Makefile
+data/themes/Matte/Makefile
 data/themes/Smoke/Makefile
 data/themes/Transparent/Makefile
 m4/Makefile
