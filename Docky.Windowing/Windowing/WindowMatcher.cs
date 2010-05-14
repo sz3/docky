@@ -533,7 +533,7 @@ namespace Docky.Windowing
 			return window_to_desktop_items.TryGetValue (window, out items);
 		}
 		
-		bool WindowIsOpenOffice (Wnck.Window window)
+		public bool WindowIsOpenOffice (Wnck.Window window)
 		{
 			return window.ClassGroup != null && window.ClassGroup.Name.ToLower ().StartsWith ("openoffice");
 		}

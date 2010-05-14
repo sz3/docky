@@ -123,10 +123,13 @@ namespace Docky.Items
 					UpdateTransientItems ();
 				} else {
 					// handle applications which set their proper (matchable) window title very late,
-					// like OpenOffice
 					// their windows will be monitored for name changes (give up after 5 seconds)
+					uint matching_timeout = 5000;
+					// wait for OpenOffice up to 1min to startup before giving up
+					if (WindowMatcher.Default.WindowIsOpenOffice (args.Window))
+						matching_timeout = 60000;
 					args.Window.NameChanged += HandleUnmatchedWindowNameChanged;
-					GLib.Timeout.Add (5000, delegate {
+					GLib.Timeout.Add (matching_timeout, delegate {
 						if (!WindowMatcher.Default.WindowIsReadyForMatch (args.Window)) {
 							args.Window.NameChanged -= HandleUnmatchedWindowNameChanged;
 							UpdateTransientItems ();
