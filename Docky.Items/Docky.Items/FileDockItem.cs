@@ -155,15 +155,15 @@ namespace Docky.Items
 
 		protected override bool OnCanAcceptDrop (IEnumerable<string> uris)
 		{
-			bool can_write;
-			// this could fail if we try to call it on an unmounted location
+			bool can_write = false;
+			
 			try {
-				can_write = OwnedFile.QueryInfo<bool> ("access::can-write");
+				if (!string.IsNullOrEmpty (OwnedFile.Path))
+					can_write = OwnedFile.QueryInfo<bool> ("access::can-write");
 			} catch {
-				can_write = false;
 			}
 			
-			// only accept the drop if it's a folder, and we can write to it.
+			// only accept the drop if it's a folder, and we can write to it
 			return is_folder && can_write;
 		}
 
