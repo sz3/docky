@@ -112,11 +112,13 @@ namespace RecentDocuments
 		
 		void UpdateInfo ()
 		{
-			if (RecentDocs.Count() == 0)
-				CurrentFile = null;
-			
-			if (AlwaysShowRecent || (CurrentFile != null && RecentDocs.IndexOf (CurrentFile) == -1))
-				CurrentFile = RecentDocs.First ();
+			lock (RecentDocs) {
+				if (RecentDocs.Count() == 0)
+					CurrentFile = null;
+				
+				if (AlwaysShowRecent || (CurrentFile != null && RecentDocs.IndexOf (CurrentFile) == -1))
+					CurrentFile = RecentDocs.First ();
+			}
 			
 			if (CurrentFile == null) {
 				Icon = "folder-recent;;document-open-recent";
@@ -167,14 +169,16 @@ namespace RecentDocuments
 		{
 			MenuList list = base.OnGetMenuItems ();
 			
-			foreach (FileDockItem _f in RecentDocs) {
-				FileDockItem f = _f;
-				if (!f.OwnedFile.Exists)
-					continue;
+			lock (RecentDocs) {
+				foreach (FileDockItem _f in RecentDocs) {
+					FileDockItem f = _f;
+					if (!f.OwnedFile.Exists)
+						continue;
 
-				MenuItem item = new IconMenuItem (f.OwnedFile.Basename, f.Icon, (o, a) => DockServices.System.Open (f.OwnedFile));
-				item.Mnemonic = null;
-				list[MenuListContainer.RelatedItems].Add (item);
+					MenuItem item = new IconMenuItem (f.OwnedFile.Basename, f.Icon, (o, a) => DockServices.System.Open (f.OwnedFile));
+					item.Mnemonic = null;
+					list[MenuListContainer.RelatedItems].Add (item);
+				}
 			}
 			
 			// check to make sure our right click menu has the same number of items as RecentDocs
