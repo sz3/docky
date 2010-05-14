@@ -117,7 +117,7 @@
               <widget class="Gtk.SpinButton" id="check_interval">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
-                <property name="Upper">100</property>
+                <property name="Upper">1440</property>
                 <property name="Lower">2</property>
                 <property name="PageIncrement">10</property>
                 <property name="StepIncrement">1</property>

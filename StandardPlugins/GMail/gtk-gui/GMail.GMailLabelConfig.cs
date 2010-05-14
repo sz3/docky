@@ -128,7 +128,7 @@ namespace GMail {
             w17.Expand = false;
             w17.Fill = false;
             // Container child hbox2.Gtk.Box+BoxChild
-            this.check_interval = new Gtk.SpinButton(2, 100, 1);
+            this.check_interval = new Gtk.SpinButton(2, 1440, 1);
             this.check_interval.CanFocus = true;
             this.check_interval.Name = "check_interval";
             this.check_interval.Adjustment.PageIncrement = 10;
