@@ -53,7 +53,11 @@ namespace WeatherDocklet
 		/// </value>
 		public static string Source {
  			get { return prefs.Get<string> (SourceKey, WunderWeatherSource.GetInstance ().Name); }
- 			set { prefs.Set<string> (SourceKey, value); OnSourceChanged (); }
+ 			set {
+				if (value == Source) return;
+				prefs.Set<string> (SourceKey, value);
+				OnSourceChanged ();
+			}
  		}
 		
 		/// <value>
@@ -75,7 +79,11 @@ namespace WeatherDocklet
 		/// </value>
 		public static string[] Locations {
  			get { return prefs.Get<string[]> (LocationKey, new string[] {}); }
- 			set { prefs.Set<string[]> (LocationKey, value); OnLocationsChanged (); }
+ 			set {
+				if (value == Locations) return;
+				prefs.Set<string[]> (LocationKey, value);
+				OnLocationsChanged ();
+			}
  		}
 		
 		/// <value>
@@ -97,7 +105,11 @@ namespace WeatherDocklet
 		/// </value>
 		public static uint Timeout {
  			get { return (uint) prefs.Get<int> (TimeoutKey, 30); }
- 			set { prefs.Set<int> (TimeoutKey, (int) value); OnTimeoutChanged (); }
+ 			set {
+				if (value == Timeout) return;
+				prefs.Set<int> (TimeoutKey, (int) value);
+				OnTimeoutChanged ();
+			}
  		}
 		
 		/// <value>
@@ -124,7 +136,11 @@ namespace WeatherDocklet
 				if (!MetricDefault.HasValue)
 					MetricDefault = RegionInfo.CurrentRegion != null && RegionInfo.CurrentRegion.IsMetric;
 				return prefs.Get<bool> (MetricKey, false); }
- 			set { prefs.Set<bool> (MetricKey, value); OnMetricChanged (); }
+ 			set {
+				if (value == Metric) return;
+				prefs.Set<bool> (MetricKey, value);
+				OnMetricChanged ();
+			}
  		}
 	}
 }
