@@ -809,7 +809,7 @@ namespace Docky.Interface
 			foreach (AbstractDockItemProvider provider in item_providers)
 				provider.Dispose ();
 			item_providers = new List<AbstractDockItemProvider> ();
-			FileApplicationProvider.WindowManager.UpdateTransientItems ();
+			FileApplicationProvider.WindowManager.UpdateTransientItems (true);
 			
 			SyncPlugins ();
 		}

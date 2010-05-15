@@ -451,11 +451,14 @@ namespace Docky.Windowing
 				window_to_desktop_items.Remove (args.Window);
 		}
 		
-		void SetupWindow (Wnck.Window window)
+		bool SetupWindow (Wnck.Window window)
 		{
 			IEnumerable<DesktopItem> items = DesktopItemsForWindow (window);
-			if (items.Any ())
+			if (items.Any ()) {
 				window_to_desktop_items [window] = items.ToList ();
+				return true;
+			} else
+				return false;
 		}
 		#endregion
 
@@ -505,11 +508,8 @@ namespace Docky.Windowing
 		{
 			if (!WindowIsOpenOffice (window))
 				return true;
-			
-			SetupWindow (window);
 
-			List<DesktopItem> items;
-			return window_to_desktop_items.TryGetValue (window, out items);
+			return SetupWindow (window);
 		}
 		
 		public bool WindowIsOpenOffice (Wnck.Window window)
@@ -570,9 +570,6 @@ namespace Docky.Windowing
 		{
 			if (window == null)
 				throw new ArgumentNullException ("window");
-			
-			if (WindowIsOpenOffice (window))
-				SetupWindow (window);
 			
 			List<DesktopItem> item;
 			if (window_to_desktop_items.TryGetValue (window, out item))

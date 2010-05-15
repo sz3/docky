@@ -99,17 +99,17 @@ namespace Docky.Items
 
 		void HandleWindowMatcherDesktopFileChanged (object sender, DesktopFileChangedEventArgs e)
 		{
-			UpdateTransientItems ();
+			UpdateTransientItems (false);
 		}
 
 		void WnckScreenDefaultActiveWorkspaceChanged (object o, ActiveWorkspaceChangedArgs args)
 		{
-			UpdateTransientItems ();
+			UpdateTransientItems (false);
 		}
 
 		void WnckScreenDefaultViewportsChanged (object o, EventArgs args)
 		{
-			UpdateTransientItems ();
+			UpdateTransientItems (false);
 		}
 		
 		void WnckScreenDefaultWindowOpened (object o, WindowOpenedArgs args)
@@ -120,7 +120,7 @@ namespace Docky.Items
 			// ensure we run last (more or less) so that all icons can update first
 			GLib.Timeout.Add (150, delegate {
 				if (WindowMatcher.Default.WindowIsReadyForMatch (args.Window)) {
-					UpdateTransientItems ();
+					UpdateTransientItems (true);
 				} else {
 					// handle applications which set their proper (matchable) window title very late,
 					// their windows will be monitored for name changes (give up after 5 seconds)
@@ -132,7 +132,7 @@ namespace Docky.Items
 					GLib.Timeout.Add (matching_timeout, delegate {
 						if (!WindowMatcher.Default.WindowIsReadyForMatch (args.Window)) {
 							args.Window.NameChanged -= HandleUnmatchedWindowNameChanged;
-							UpdateTransientItems ();
+							UpdateTransientItems (true);
 						}
 						return false;
 					});
@@ -146,7 +146,7 @@ namespace Docky.Items
 			Wnck.Window window = (sender as Wnck.Window);
 			if (WindowMatcher.Default.WindowIsReadyForMatch (window)) {
 				window.NameChanged -= HandleUnmatchedWindowNameChanged;
-				UpdateTransientItems ();
+				UpdateTransientItems (true);
 			}
 		}
 
@@ -157,11 +157,12 @@ namespace Docky.Items
 			
 			// we dont need to delay in this case as icons owning extra windows
 			// is a non-event
-			UpdateTransientItems ();
+			UpdateTransientItems (true);
 		}
 		
-		public void UpdateTransientItems ()
+		public void UpdateTransientItems (bool handle_unmanaged_windows)
 		{
+			// if we are not a window-manager-provider then remove transient items
 			if (!IsWindowManager) {
 				if (transient_items.Any ()) {
 					List<AbstractDockItem> old_transient_items = transient_items;
@@ -174,59 +175,55 @@ namespace Docky.Items
 				}
 				return;
 			}
-			// we will need a list of these bad boys we can mess with
-			List<Wnck.Window> windows = UnmanagedWindows.ToList ();
-			
-			DesktopItem desktop_item;
-			WnckDockItem item;
-			foreach (Wnck.Window window in windows) {
-				if (transient_items.Where (adi => adi is WnckDockItem)
-					.Cast<WnckDockItem> ()
-					.SelectMany (wdi => wdi.Windows)
-					.Contains (window))
-					continue;
-				
-				desktop_item = WindowMatcher.Default.DesktopItemForWindow (window);
-				
-				if (desktop_item != null) {
-					//This fixes WindowMatching for OpenOffice which is a bit slow setting up its window title
-					//Check if a existing ApplicationDockItem already uses this DesktopItem
-					ApplicationDockItem appdi;
-					if ((appdi = transient_items
-						.Where (adi => (adi is ApplicationDockItem && (adi as ApplicationDockItem).OwnedItem == desktop_item))
-						.Cast<ApplicationDockItem> ()
-						.FirstOrDefault ()) != null) {
-						
-						//Try again to gain this missing window
-						appdi.RecollectWindows ();
+
+			if (handle_unmanaged_windows) {
+				// handle unmanaged windows
+				DesktopItem desktop_item;
+				WnckDockItem item;
+				foreach (Wnck.Window window in UnmanagedWindows) {
+					if (transient_items.Where (adi => adi is WnckDockItem)
+						.Cast<WnckDockItem> ()
+						.SelectMany (wdi => wdi.Windows)
+						.Contains (window))
 						continue;
+					
+					desktop_item = WindowMatcher.Default.DesktopItemForWindow (window);
+					
+					if (desktop_item != null) {
+						//This fixes WindowMatching for OpenOffice which is a bit slow setting up its window title
+						//Check if a existing ApplicationDockItem already uses this DesktopItem
+						ApplicationDockItem appdi;
+						if ((appdi = transient_items
+							.Where (adi => (adi is ApplicationDockItem && (adi as ApplicationDockItem).OwnedItem == desktop_item))
+							.Cast<ApplicationDockItem> ()
+							.FirstOrDefault ()) != null) {
+							
+							//Try again to gain this missing window
+							appdi.RecollectWindows ();
+							continue;
+						}
+						
+						item = new ApplicationDockItem (desktop_item);
+					} else {
+						item = new WindowDockItem (window);
 					}
 					
-					item = new ApplicationDockItem (desktop_item);
-				} else {
-					item = new WindowDockItem (window);
+					transient_items.Add (item);
+					item.WindowsChanged += HandleTransientWindowsChanged;
 				}
-				
-				if (!item.ManagedWindows.Any ()) {
-					item.Dispose ();
-					continue;
-				}
-				
-				transient_items.Add (item);
-				item.WindowsChanged += HandleTransientWindowsChanged;
 			}
 			
 			// remove old transient items
 			List<WnckDockItem> removed_transient_items = new List<WnckDockItem> ();
-			
 			foreach (WnckDockItem wdi in transient_items.Where (adi => adi is WnckDockItem).Cast<WnckDockItem> ()) {
 				foreach (Wnck.Window window in ManagedWindows)
 					if (wdi.Windows.Contains (window)) {
 						removed_transient_items.Add (wdi);
 						continue;
 					}
+				if (!wdi.ManagedWindows.Any ())
+					removed_transient_items.Add (wdi);
 			}
-			
 			RemoveTransientItems (removed_transient_items);
 		}
 		
@@ -295,7 +292,7 @@ namespace Docky.Items
 			
 			
 			Items = InternalItems;
-			UpdateTransientItems ();
+			UpdateTransientItems (true);
 			
 			return item;
 		}
@@ -331,7 +328,7 @@ namespace Docky.Items
 		
 		void OnWindowManagerChanged ()
 		{
-			UpdateTransientItems ();
+			UpdateTransientItems (false);
 			if (WindowManagerChanged != null)
 				WindowManagerChanged (this, EventArgs.Empty);
 		}
@@ -372,7 +369,7 @@ namespace Docky.Items
 			item.Dispose ();
 			
 			// this is so if the launcher has open windows and we manage those...
-			UpdateTransientItems ();
+			UpdateTransientItems (true);
 			return true;
 		}
 		
