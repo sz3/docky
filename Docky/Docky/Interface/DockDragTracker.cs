@@ -101,11 +101,10 @@ namespace Docky.Interface
 					return;
 				repo_mode = value;
 				
-				if (repo_mode) {
+				if (repo_mode)
 					DisableDragTo ();
-				} else {
+				else
 					EnableDragTo ();
-				}
 			}
 		}
 		
@@ -194,19 +193,17 @@ namespace Docky.Interface
 			if (drag_item is INonPersistedItem || RepositionMode)
 				drag_item = null;
 			
-			if (drag_item != null) {
+			if (drag_item != null)
 				pbuf = Owner.HoveredItem.IconSurface (new DockySurface (1, 1), Owner.ZoomedIconSize, Owner.IconSize, 0).LoadToPixbuf ();
-			} else {
+			else
 				pbuf = new Gdk.Pixbuf (Gdk.Colorspace.Rgb, true, 8, 1, 1);
-			}
 			
 			Gtk.Drag.SetIconPixbuf (args.Context, pbuf, pbuf.Width / 2, pbuf.Height / 2);
 			pbuf.Dispose ();
 			
 			// Set up a cursor tracker so we can move the window on the fly
-			if (RepositionMode) {
+			if (RepositionMode)
 				Owner.CursorTracker.CursorPositionChanged += HandleCursorPositionChanged;
-			}
 		}
 
 		void HandleCursorPositionChanged (object sender, CursorPostionChangedArgs e)
@@ -222,18 +219,17 @@ namespace Docky.Interface
 			Gdk.Rectangle right = new Gdk.Rectangle (geo.X + geo.Width - activeRegion, geo.Y + activeRegion, activeRegion, geo.Height - activeRegion * 2);
 			Gdk.Rectangle bottom = new Gdk.Rectangle (geo.X + activeRegion, geo.Y + geo.Height - activeRegion, geo.Width - activeRegion * 2, activeRegion);
 			
-			DockPosition target = DockPosition.Left;
-			if (top.Contains (cursor)) {
+			DockPosition target;
+			if (top.Contains (cursor))
 				target = DockPosition.Top;
-			} else if (bottom.Contains (cursor)) {
+			else if (bottom.Contains (cursor))
 				target = DockPosition.Bottom;
-			} else if (left.Contains (cursor)) {
+			else if (left.Contains (cursor))
 				target = DockPosition.Left;
-			} else if (right.Contains (cursor)) {
+			else if (right.Contains (cursor))
 				target = DockPosition.Right;
-			} else {
+			else
 				return;
-			}
 			
 			IDockPreferences prefs = Owner.Preferences;
 			if (prefs.Position != target || prefs.MonitorNumber != monitor) {
@@ -292,13 +288,11 @@ namespace Docky.Interface
 			if (drag_data == null)
 				return false;
 			
-			foreach (string s in drag_data) {
-				if (Owner.HoveredProvider != null && Owner.HoveredProvider.CanAcceptDrop (s)) {
+			foreach (string s in drag_data)
+				if (Owner.HoveredProvider != null && Owner.HoveredProvider.CanAcceptDrop (s))
 					return true;
-				} else if (Owner.Preferences.DefaultProvider.CanAcceptDrop (s)) {
+				else if (Owner.Preferences.DefaultProvider.CanAcceptDrop (s))
 					return true;
-				}
-			}
 			
 			// cant accept anything!
 			return false;
@@ -325,14 +319,13 @@ namespace Docky.Interface
 			
 				foreach (string s in drag_data) {
 					AbstractDockItemProvider provider;
-					if (Owner.HoveredProvider != null && Owner.HoveredProvider.CanAcceptDrop (s)) {
+					if (Owner.HoveredProvider != null && Owner.HoveredProvider.CanAcceptDrop (s))
 						provider = Owner.HoveredProvider;
-					} else if (Owner.Preferences.DefaultProvider.CanAcceptDrop (s)) {
+					else if (Owner.Preferences.DefaultProvider.CanAcceptDrop (s))
 						provider = Owner.Preferences.DefaultProvider;
-					} else {
+					else
 						// nothing will take it, continue!
 						continue;
-					}
 					
 					provider.AcceptDrop (s, newPosition);
 					
@@ -418,9 +411,7 @@ namespace Docky.Interface
 			if (RepositionMode)
 				return;
 			
-			if (!InternalDragActive) {
-				ExternalDragActive = true;
-			}
+			ExternalDragActive = !InternalDragActive;
 			
 			if (marker != args.Context.GetHashCode ()) {
 				marker = args.Context.GetHashCode ();
@@ -471,12 +462,12 @@ namespace Docky.Interface
 				// drag right
 				if (drag_item.Position < destPos) {
 					foreach (AbstractDockItem adi in ProviderForItem (drag_item).Items
-										.Where (i => i.Position > drag_item.Position && i.Position <= destPos))
+								.Where (i => i.Position > drag_item.Position && i.Position <= destPos))
 						adi.Position--;
 				// drag left
 				} else if (drag_item.Position > destPos) {
 					foreach (AbstractDockItem adi in ProviderForItem (drag_item).Items
-										.Where (i => i.Position < drag_item.Position && i.Position >= destPos))
+								.Where (i => i.Position < drag_item.Position && i.Position >= destPos))
 						adi.Position++;
 				}
 				drag_item.Position = destPos;
@@ -490,14 +481,12 @@ namespace Docky.Interface
 				drag_hover_timer = 0;
 			}
 			
-			if (drag_data != null)
+			if (ExternalDragActive && drag_data != null)
 				drag_hover_timer = GLib.Timeout.Add (1500, delegate {
 					AbstractDockItem item = Owner.HoveredItem;
 					if (item != null)
 						item.Scrolled (ScrollDirection.Down, Gdk.ModifierType.None);
-					// keep going to handle multiple applications of the same type, 
-					// if the drag is on and still hovering over an item.
-					return drag_data != null && item != null;
+					return true;
 				});
 		}
 		
@@ -519,9 +508,8 @@ namespace Docky.Interface
 		public void EnsureDragAndDropProxy ()
 		{
 			// having a proxy window here is VERY bad ju-ju
-			if (InternalDragActive) {
+			if (InternalDragActive)
 				return;
-			}
 			
 			if (Owner.DockHovered) {
 				if (proxy_window == null)

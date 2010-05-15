@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -34,8 +34,6 @@ using Docky.Windowing;
 
 namespace Docky.Items
 {
-
-
 	public abstract class WnckDockItem : IconDockItem
 	{
 		public event EventHandler WindowsChanged;
@@ -111,16 +109,14 @@ namespace Docky.Items
 		
 		void RegisterWindows (IEnumerable<Wnck.Window> windows)
 		{
-			foreach (Wnck.Window window in windows) {
+			foreach (Wnck.Window window in windows)
 				window.StateChanged += WindowStateChanged;
-			}
 		}
 
 		void UnregisterWindows (IEnumerable<Wnck.Window> windows)
 		{
-			foreach (Wnck.Window window in windows) {
+			foreach (Wnck.Window window in windows)
 				window.StateChanged -= WindowStateChanged;
-			}
 		}
 		
 		void WindowStateChanged (object o, StateChangedArgs args)
@@ -136,25 +132,23 @@ namespace Docky.Items
 		void SetIndicator ()
 		{
 			int count = ManagedWindows.Count ();
-			if (count > 1) {
+			
+			if (count > 1)
 				Indicator = ActivityIndicator.SinglePlus;
-			} else if (count == 1) {
+			else if (count == 1)
 				Indicator = ActivityIndicator.Single;
-			} else {
+			else
 				Indicator = ActivityIndicator.None;
-			}
 		}
 		
 		void SetState ()
 		{
 			ItemState state = 0;
 			
-			if (Windows.Any (w => w == Wnck.Screen.Default.ActiveWindow)) {
+			if (Windows.Any (w => w == Wnck.Screen.Default.ActiveWindow))
 				state |= ItemState.Active;
-			}
-			if (ManagedWindows.Any (w => w.NeedsAttention ())) {
+			if (ManagedWindows.Any (w => w.NeedsAttention ()))
 				state |= ItemState.Urgent;
-			}
 			
 			State = state;
 		}
@@ -196,9 +190,8 @@ namespace Docky.Items
 		
 		protected sealed override void OnSetScreenRegion (Gdk.Screen screen, Gdk.Rectangle region)
 		{
-			foreach (Wnck.Window w in ManagedWindows) {
+			foreach (Wnck.Window w in ManagedWindows)
 				w.SetIconGeometry (region.X, region.Y, region.Width, region.Height);
-			}
 		}
 		
 		protected override ClickAnimation OnClicked (uint button, ModifierType mod, double xPercent, double yPercent)
@@ -216,6 +209,7 @@ namespace Docky.Items
 				foreach (Wnck.Window window in windows) {
 					if (urgent && !window.NeedsAttention ())
 						continue;
+					
 					if (!window.IsSkipTasklist) {
 						WindowControl.IntelligentFocusOffViewportWindow (window, windows);
 						return ClickAnimation.Darken;
@@ -223,14 +217,13 @@ namespace Docky.Items
 				}
 			}
 			
-			if (windows.Any (w => w.IsMinimized && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace))) {
+			if (windows.Any (w => w.IsMinimized && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace)))
 				WindowControl.RestoreWindows (windows);
-			} else if (windows.Any (w => w.IsActive && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace)) ||
-						Windows.Any (w => w == Wnck.Screen.Default.ActiveWindow)) {
+			else if (windows.Any (w => w.IsActive && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace))
+					|| Windows.Any (w => w == Wnck.Screen.Default.ActiveWindow))
 				WindowControl.MinimizeWindows (windows);
-			} else {
+			else
 				WindowControl.FocusWindows (windows);
-			}
 			
 			return ClickAnimation.Darken;
 		}
@@ -240,28 +233,25 @@ namespace Docky.Items
 			MenuList list = base.OnGetMenuItems ();
 			
 			if (ManagedWindows.Any ()) {
-				if (ManagedWindows.Any (w => w.IsMaximized)) {
+				if (ManagedWindows.Any (w => w.IsMaximized))
 					list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Unma_ximize"), MaximizeIcon, 
 							(o, a) => WindowControl.UnmaximizeWindows (ManagedWindows)));
-				} else {
+				else
 					list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Ma_ximize"), MaximizeIcon, 
 							(o, a) => WindowControl.MaximizeWindows (ManagedWindows)));
-				}
 				
-				if (ManagedWindows.Any (w => w.IsMinimized)) {
+				if (ManagedWindows.Any (w => w.IsMinimized))
 					list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Restore"), MinimizeIcon, 
 							(o, a) => WindowControl.RestoreWindows (ManagedWindows)));
-				} else {
+				else
 					list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("Mi_nimize"), MinimizeIcon, 
 							(o, a) => WindowControl.MinimizeWindows (ManagedWindows)));
-				}
 				
 				list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Close All"), CloseIcon, 
 						(o, a) => WindowControl.CloseWindows (ManagedWindows)));
 				
-				foreach (Wnck.Window window in ManagedWindows) {
+				foreach (Wnck.Window window in ManagedWindows)
 					list[MenuListContainer.Windows].Add (new WindowMenuItem (window, window.Icon));
-				}
 			}
 			
 			return list;

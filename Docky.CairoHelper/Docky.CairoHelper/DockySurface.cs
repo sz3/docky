@@ -202,10 +202,7 @@ namespace Docky.CairoHelper
 
 		~DockySurface ()
 		{
-			// just to be safe
-			if (!disposed) {
-				Dispose ();
-			}
+			Dispose ();
 		}
 	}
 }

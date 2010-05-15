@@ -658,16 +658,14 @@ namespace Docky.Interface
 				
 				// we buffer this value during renders since it will be checked many times and we dont need to 
 				// recalculate it each time
-				if (zoom_in_buffer.HasValue && rendering) {
+				if (zoom_in_buffer.HasValue && rendering)
 					return zoom_in_buffer.Value;
-				}
 				
 				double zoom = Math.Min (1, (render_time - dock_hovered_change_time).TotalMilliseconds / 
 				                        BaseAnimationTime.TotalMilliseconds);
 				
-				if (!DockHovered) {
+				if (!DockHovered)
 					zoom = 1 - zoom;
-				}
 				
 				zoom *= 1 - PainterOpacity;
 				
@@ -678,10 +676,10 @@ namespace Docky.Interface
 			}
 		}
 		
-		int ZoomSize {
+		double ZoomSize {
 			get { 
 				// 330 chosen for its pleasant (to me) look
-				return (int) (330 * (IconSize / 64.0)); 
+				return 330 * IconSize / 128.0; 
 			}
 		}
 
@@ -1295,7 +1293,7 @@ namespace Docky.Interface
 		internal void UpdateCollectionBuffer ()
 		{
 			if (rendering) {
-				// resetting a durring a render is bad. Complete the render then reset.
+				// resetting during a render is bad. Complete the render, then reset.
 				GLib.Idle.Add (delegate {
 					// dispose of our separators as we made them ourselves,
 					// this could be a bit more elegant
@@ -1598,52 +1596,39 @@ namespace Docky.Interface
 			// first we do the math as if this is a top dock, to do this we need to set
 			// up some "pretend" variables. we pretend we are a top dock because 0,0 is
 			// at the top.
-			int width;
-			int height;
+			int width = surface.Width;
+			int height = surface.Height;
 			double zoom;
-			
-			// our width and height switch around if we have a veritcal dock
-			if (!Preferences.IsVertical) {
-				width = surface.Width;
-				height = surface.Height;
-			} else {
-				width = surface.Height;
-				height = surface.Width;
-			}
 			
 			Gdk.Point cursor = LocalCursor;
 			Gdk.Point localCursor = cursor;
 			
 			// "relocate" our cursor to be on the top
 			switch (Position) {
-			case DockPosition.Top:
-				;
-				break;
-			case DockPosition.Left:
-				int tmpY = cursor.Y;
-				cursor.Y = cursor.X;
-				cursor.X = width - (width - tmpY);
-				break;
 			case DockPosition.Right:
-				tmpY = cursor.Y;
 				cursor.X = (Width - 1) - cursor.X;
-				cursor.Y = cursor.X;
-				cursor.X = width - (width - tmpY);
 				break;
 			case DockPosition.Bottom:
 				cursor.Y = (Height - 1) - cursor.Y;
 				break;
+			default:
+				break;
 			}
 			
-			// the line along the dock width about which the center of unzoomed icons sit
-			int midline = DockHeight / 2;
-			
-			// the left most edge of the first dock item
-			int startX = ((width - DockWidth) / 2) + DockWidthBuffer;
+			if (Preferences.IsVertical) {
+				int tmpY = cursor.Y;
+				cursor.Y = cursor.X;
+				cursor.X = tmpY;
+				
+				// our width and height switch around if we have a veritcal dock
+				width = surface.Height;
+				height = surface.Width;
+			}
 			
 			// this offset is used to split the icons into left/right aligned for panel mode
-			int panel_item_offset = 0;
 			double panelanim = PanelModeToggleProgress;
+			int panel_item_offset;
+			
 			if (Preferences.IsVertical)
 				panel_item_offset = (monitor_geo.Height - DockWidth) / 2;
 			else
@@ -1656,162 +1641,148 @@ namespace Docky.Interface
 				if (Preferences.PanelMode)
 					panel_item_offset = (int) (panel_item_offset * panelanim);
 				else
-					panel_item_offset = panel_item_offset - (int) (panel_item_offset * panelanim);
+					panel_item_offset -= (int) (panel_item_offset * panelanim);
 			}
+			
+			// the line along the dock width about which the center of unzoomed icons sit
+			int midline = DockHeight / 2;
+			
+			// the left most edge of the first dock item
+			int startX = ((width - DockWidth) / 2) + DockWidthBuffer - panel_item_offset;
 			
 			Gdk.Point center = new Gdk.Point (startX, midline);
 			
-			int index = 0;
+			// right align docklets
 			bool rightAlign = (Items [0].Owner != Preferences.DefaultProvider && Items [0] != DockyItem);
+			if (rightAlign)
+				center.X += 2 * panel_item_offset;
+			
+			int index = 0;
 			foreach (AbstractDockItem adi in Items) {
-				if (adi is SeparatorItem)
+				// anything after the first separator is a docklet, and right aligned
+				if (!rightAlign && adi is SeparatorItem) {
 					rightAlign = true;
+					center.X += 2 * panel_item_offset;
+				}
 				
-				// used to handle remove animation
+				// used to handle remove animations
 				if (remove_index != 0 && remove_index < index && remove_index > index - 1) {
 					double removePercent = 1 - Math.Min (1, (DateTime.UtcNow - remove_time).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds);
-					if (removePercent == 0) {
+					if (removePercent == 0)
 						remove_index = 0;
-					} else {
+					else
 						center.X += (int) ((remove_size + ItemWidthBuffer) * removePercent);
-					}
 				}
 				
 				DrawValue val = new DrawValue ();
 				int iconSize = IconSize;
 				
-				// div by 2 may result in rounding errors? Will this render OK? Shorts WidthBuffer by 1?
-				double halfSize;
-				if (adi.Square) {
-					halfSize = iconSize / 2.0;
-				} else {
-					DockySurface icon = adi.IconSurface (surface, iconSize, IconSize, VisibleDockHeight);
-					
-					// yeah I am pretty sure...
-					if (adi.RotateWithDock || !Preferences.IsVertical) {
-						halfSize = icon.Width / 2.0;
-					} else {
-						halfSize = icon.Height / 2.0;
-					}
+				if (!adi.Square) {
+					DockySurface icon = adi.IconSurface (surface, iconSize, iconSize, VisibleDockHeight);
+					iconSize = (adi.RotateWithDock || !Preferences.IsVertical) ? icon.Width : icon.Height;
 				}
 				
+				// div by 2 may result in rounding errors? Will this render OK? Shorts WidthBuffer by 1?
+				double halfSize = iconSize / 2.0;
+				
+				// animate adding new icon
 				halfSize *= Math.Min (1, (DateTime.UtcNow - adi.AddTime).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds);
 				
 				// center now represents our midpoint
 				center.X += (int) Math.Floor (halfSize);
 				val.StaticCenter = new PointD (center.X, center.Y);
 				
-				if (ZoomPercent > 1) {
-					// get us some handy doubles with fancy names
-					double cursorPosition = cursor.X;
-					double centerPosition = center.X;
-					
-					// ZoomPercent is a number greater than 1.  It should never be less than one.
-					// ZoomIn is a range of 0 to 1. we need a number that is 1 when ZoomIn is 0, 
-					// and ZoomPercent when ZoomIn is 1.  Then we treat this as 
-					// if it were the ZoomPercent for the rest of the calculation
-					double zoomInPercent = 1 + (ZoomPercent - 1) * ZoomIn;
-					
-					// offset from the center of the true position, ranged between 0 and half of the zoom range
-					double offset = Math.Min (Math.Abs (cursorPosition - centerPosition), ZoomSize / 2);
-					
-					double offsetPercent;
-					if (ExternalDragActive) {
-						// Provide space for dropping between items
-						offset += ZoomedIconSize * (offset / (ZoomSize / 2.0));
-						offsetPercent = Math.Min (1, offset / (ZoomSize / 2.0 + ZoomedIconSize));
-					} else {
-						offsetPercent = offset / (ZoomSize / 2.0);
-					}
-					
-					if (offsetPercent > .99)
-						offsetPercent = 1;
+				// get us some handy doubles with fancy names
+				double cursorPosition = cursor.X;
+				double centerPosition = center.X;
+				
+				// ZoomPercent is a number greater than 1.  It should never be less than one.
+				// zoomInPercent is a range of 0 to 1. we need a number that is 1 when ZoomIn is 0,
+				// and ZoomPercent when ZoomIn is 1.  Then we treat this as if it were the
+				// ZoomPercent for the rest of the calculation
+				double zoomInPercent = 1 + (ZoomPercent - 1) * ZoomIn;
+				
+				// offset from the center of the true position, ranged between 0 and half of the zoom range
+				double offset = Math.Min (Math.Abs (cursorPosition - centerPosition), (int) ZoomSize);
+				
+				double offsetPercent;
+				if (ExternalDragActive) {
+					// Provide space for dropping between items
+					offset += offset * ZoomedIconSize / ZoomSize;
+					offsetPercent = Math.Min (1, offset / (ZoomSize + ZoomedIconSize));
+				} else {
+					offsetPercent = offset / ZoomSize;
+				}
+				
+				if (offsetPercent > .99)
+					offsetPercent = 1;
+				
+				// pull in our offset to make things less spaced out
+				// explaination since this is a bit tricky...
+				// we have three terms, basically offset = f(x) * h(x) * g(x)
+				// f(x) == offset identity
+				// h(x) == a number from 0 to DockPreference.ZoomPercent - 1.  This is used to get the smooth "zoom in" effect.
+				//         additionally serves to "curve" the offset based on the max zoom
+				// g(x) == a term used to move the ends of the zoom inward.  Precalculated that the edges should be 66% of the current
+				//         value. The center is 100%. (1 - offsetPercent) == 0,1 distance from center
+				// The .66 value comes from the area under the curve.  Dont ask me to explain it too much because it's too clever for me.
+
+				// for external drags with no zoom, we pretend there is actually a zoom of 200%
+				if (ExternalDragActive && ZoomPercent == 1)
+					offset *= 2.0 * ZoomIn / 3.0;
+				else
+					offset *= zoomInPercent - 1;
+				offset *= 1 - offsetPercent / 3;
+				
+				if (cursorPosition > centerPosition)
+					centerPosition -= offset;
+				else
+					centerPosition += offset;
+				
+				if (!adi.Zoom) {
+					val.Zoom = 1;
+					val.Center = new Cairo.PointD ((int) centerPosition, center.Y);
+				} else {
 					// zoom is calculated as 1 through target_zoom (default 2).  
 					// The larger your offset, the smaller your zoom
 					
-					// First we get the point on our curve that defines out current zoom
+					// First we get the point on our curve that defines our current zoom
 					// offset is always going to fall on a point on the curve >= 0
 					zoom = 1 - Math.Pow (offsetPercent, 2);
 					
-					// scale this to match out zoomInPercent
+					// scale this to match our zoomInPercent
 					zoom = 1 + zoom * (zoomInPercent - 1);
 					
-					// pull in our offset to make things less spaced out
-					// explaination since this is a bit tricky...
-					// we have three terms, basically offset = f(x) * h(x) * g(x)
-					// f(x) == offset identify
-					// h(x) == a number from 0 to DockPreference.ZoomPercent - 1.  This is used to get the smooth "zoom in" effect.
-					//         additionally serves to "curve" the offset based on the max zoom
-					// g(x) == a term used to move the ends of the zoom inward.  Precalculated that the edges should be 66% of the current
-					//         value. The center is 100%. (1 - offsetPercent) == 0,1 distance from center
-					// The .66 value comes from the area under the curve.  Dont as me to explain it too much because it's too clever for me
-					offset = offset * (zoomInPercent - 1) * (1 - offsetPercent / 3);
+					double zoomedCenterHeight = DockHeightBuffer + (iconSize * zoom / 2.0);
 					
+					if (zoom == 1)
+						centerPosition = Math.Round (centerPosition);
 					
-					if (cursorPosition > centerPosition) {
-						centerPosition -= offset;
-					} else {
-						centerPosition += offset;
-					}
-					
-					if (!adi.Zoom) {
-						val.Zoom = 1;
-						val.Center = new Cairo.PointD ((int) centerPosition, center.Y);
-					} else {
-						double zoomedCenterHeight = DockHeightBuffer + (iconSize * zoom / 2.0);
-						
-						if (zoom == 1)
-							centerPosition = Math.Round (centerPosition);
-						
-						val.Center = new Cairo.PointD (centerPosition, zoomedCenterHeight);
-						val.Zoom = zoom;
-					}
-				} else {
-					val.Zoom = 1;
-					val.Center = new PointD (center.X, center.Y);
+					val.Center = new Cairo.PointD (centerPosition, zoomedCenterHeight);
+					val.Zoom = zoom;
 				}
 				
 				// now we undo our transforms to the point
-				switch (Position) {
-				case DockPosition.Top:
-					;
-					break;
-				case DockPosition.Left:
+				if (Preferences.IsVertical) {
 					double tmpY = val.Center.Y;
 					val.Center.Y = val.Center.X;
-					val.Center.X = width - (width - tmpY);
+					val.Center.X = tmpY;
 					
 					tmpY = val.StaticCenter.Y;
 					val.StaticCenter.Y = val.StaticCenter.X;
-					val.StaticCenter.X = width - (width - tmpY);
-					break;
+					val.StaticCenter.X = tmpY;
+				}
+				
+				switch (Position) {
 				case DockPosition.Right:
-					tmpY = val.Center.Y;
-					val.Center.Y = val.Center.X;
-					val.Center.X = width - (width - tmpY);
 					val.Center.X = (height - 1) - val.Center.X;
-					
-					tmpY = val.StaticCenter.Y;
-					val.StaticCenter.Y = val.StaticCenter.X;
-					val.StaticCenter.X = width - (width - tmpY);
 					val.StaticCenter.X = (height - 1) - val.StaticCenter.X;
 					break;
 				case DockPosition.Bottom:
 					val.Center.Y = (height - 1) - val.Center.Y;
 					val.StaticCenter.Y = (height - 1) - val.StaticCenter.Y;
 					break;
-				}
-				
-				// split the icons into left/right aligned for panel mode
-				switch (Position) {
 				default:
-				case DockPosition.Left:
-				case DockPosition.Top:
-					val = val.MoveRight (Position, rightAlign ? panel_item_offset : -panel_item_offset);
-					break;
-				case DockPosition.Right:
-				case DockPosition.Bottom:
-					val = val.MoveRight (Position, rightAlign ? -panel_item_offset : panel_item_offset);
 					break;
 				}
 				
@@ -1819,30 +1790,44 @@ namespace Docky.Interface
 				
 				if (Preferences.IsVertical) {
 					hoverArea.Inflate ((int) (ZoomedDockHeight * .3), ItemWidthBuffer / 2);
+					hoverArea.Width += DockHeightBuffer;
 				} else {
 					hoverArea.Inflate (ItemWidthBuffer / 2, (int) (ZoomedDockHeight * .3));
+					hoverArea.Height += DockHeightBuffer;
+				}
+				
+				switch (Position) {
+				case DockPosition.Right:
+					hoverArea.X -= DockHeightBuffer;
+					break;
+				case DockPosition.Bottom:
+					hoverArea.Y -= DockHeightBuffer;
+					break;
+				default:
+					break;
 				}
 				
 				val.HoverArea = hoverArea;
 				DrawValues[adi] = val;
 
-				if (hoverArea.Contains (localCursor) && !AutohideManager.Hidden) {
-					//keep the hovereditem in mind, but don't change it while rendering
+				// keep the hovereditem in mind, but don't change it while rendering
+				if (hoverArea.Contains (localCursor) && !AutohideManager.Hidden)
 					next_hoveredItem = adi;
-				}
 				
 				if (update_screen_regions) {
-					Gdk.Rectangle region = hoverArea;
-					region.X += window_position.X;
-					region.Y += window_position.Y;
-					if (Menu.Visible || ConfigurationMode || Painter != null)
+					if (Menu.Visible || ConfigurationMode || Painter != null) {
 						adi.SetScreenRegion (Screen, new Gdk.Rectangle (0, 0, 0, 0));
-					else
+					} else {
+						Gdk.Rectangle region = hoverArea;
+						region.X += window_position.X;
+						region.Y += window_position.Y;
 						adi.SetScreenRegion (Screen, region);
+					}
 				}
 				
 				// move past midpoint to end of icon
 				center.X += (int) Math.Ceiling (halfSize) + ItemWidthBuffer;
+				
 				index++;
 			}
 			
