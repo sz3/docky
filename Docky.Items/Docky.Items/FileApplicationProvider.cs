@@ -95,9 +95,30 @@ namespace Docky.Items
 			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
 			Wnck.Screen.Default.ViewportsChanged += WnckScreenDefaultViewportsChanged;
 			Wnck.Screen.Default.ActiveWorkspaceChanged += WnckScreenDefaultActiveWorkspaceChanged;
+			Wnck.Screen.Default.ActiveWindowChanged += WnckScreenDefaultActiveWindowChanged;
+			if (Wnck.Screen.Default.ActiveWindow != null) {
+				prevActive = Wnck.Screen.Default.ActiveWindow;
+				prevActive.GeometryChanged += HandleActiveWindowGeometryChangedChanged;
+			}
 		}
 
 		void HandleWindowMatcherDesktopFileChanged (object sender, DesktopFileChangedEventArgs e)
+		{
+			UpdateTransientItems (false);
+		}
+		
+		Wnck.Window prevActive = null;
+		
+		void WnckScreenDefaultActiveWindowChanged (object o, ActiveWindowChangedArgs args)
+		{
+			if (prevActive != null)
+				prevActive.WorkspaceChanged -= HandleActiveWindowGeometryChangedChanged;
+			prevActive = Wnck.Screen.Default.ActiveWindow;
+			prevActive.GeometryChanged += HandleActiveWindowGeometryChangedChanged;
+			UpdateTransientItems (false);
+		}
+		
+		void HandleActiveWindowGeometryChangedChanged (object o, EventArgs args)
 		{
 			UpdateTransientItems (false);
 		}
@@ -393,6 +414,9 @@ namespace Docky.Items
 			Wnck.Screen.Default.WindowClosed -= WnckScreenDefaultWindowClosed;
 			Wnck.Screen.Default.ViewportsChanged -= WnckScreenDefaultViewportsChanged;
 			Wnck.Screen.Default.ActiveWorkspaceChanged -= WnckScreenDefaultActiveWorkspaceChanged;
+			Wnck.Screen.Default.ActiveWindowChanged -= WnckScreenDefaultActiveWindowChanged;
+			if (prevActive != null)
+				prevActive.WorkspaceChanged -= HandleActiveWindowGeometryChangedChanged;
 			
 			IEnumerable<AbstractDockItem> old_items = Items;
 			

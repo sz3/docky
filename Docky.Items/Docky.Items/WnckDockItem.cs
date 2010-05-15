@@ -61,12 +61,23 @@ namespace Docky.Items
 			}
 		}
 		
+		bool? currentDesktop;
+		bool CurrentDesktopOnly {
+			get {
+				if (!currentDesktop.HasValue)
+					currentDesktop = prefs.Get<bool> ("CurrentDesktopOnly", false);
+				return currentDesktop.Value;
+			}
+		}
+		
 		public IEnumerable<Wnck.Window> ManagedWindows {
 			get {
-				if (prefs.Get<bool> ("CurrentDesktopOnly", false))
-					return Windows.Where (w => !w.IsSkipTasklist && w.Workspace != null && Wnck.Screen.Default.ActiveWorkspace != null && w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace));
-				else
-					return Windows.Where (w => !w.IsSkipTasklist);
+				return Windows.Where (w => !w.IsSkipTasklist &&
+						(!CurrentDesktopOnly
+						|| (w.Workspace != null
+							&& Wnck.Screen.Default.ActiveWorkspace != null
+							&& w.IsInViewport (Wnck.Screen.Default.ActiveWorkspace))
+						));
 			}
 		}
 		
