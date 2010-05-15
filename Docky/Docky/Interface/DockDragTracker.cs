@@ -330,7 +330,7 @@ namespace Docky.Interface
 					provider.AcceptDrop (s, newPosition);
 					
 					if (FileApplicationProvider.WindowManager != null)
-						FileApplicationProvider.WindowManager.UpdateTransientItems (true);
+						FileApplicationProvider.WindowManager.UpdateTransientItems ();
 				}
 			}
 			
@@ -355,7 +355,7 @@ namespace Docky.Interface
 						// provider can manually remove
 						provider.RemoveItem (drag_item);
 						if (FileApplicationProvider.WindowManager != null)
-							FileApplicationProvider.WindowManager.UpdateTransientItems (true);
+							FileApplicationProvider.WindowManager.UpdateTransientItems ();
 						poof = true;
 					} else if (provider != null && provider.Items.Count () == 1) {
 						// it is safe to disable plugin
