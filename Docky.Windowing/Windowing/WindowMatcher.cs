@@ -34,7 +34,6 @@ namespace Docky.Windowing
 {
 	public class WindowMatcher
 	{
-		
 		public static event EventHandler<DesktopFileChangedEventArgs> DesktopFileChanged;
 		
 		static WindowMatcher ()
@@ -106,7 +105,7 @@ namespace Docky.Windowing
 			prefix_filters = BuildPrefixFilters ();
 			suffix_filters = BuildSuffixFilters ();
 			
-			//Load DesktopFilesCache from docky.desktop.[LANG].cache
+			// Load DesktopFilesCache from docky.desktop.[LANG].cache
 			desktop_items = LoadDesktopItemsCache (DockyDesktopFileCacheFile);
 			custom_desktop_items = new List<DesktopItem> ();
 			
@@ -114,33 +113,29 @@ namespace Docky.Windowing
 				Log<WindowMatcher>.Info ("Loading *.desktop files and regenerating cache. This may take some while...");
 				UpdateDesktopItemsList ();
 				ProcessAndMergeAllSystemCacheFiles (desktop_items);
-				
-				//Save DesktopFilesCache to docky.desktop.[LANG].cache
-				SaveDesktopItemsCache(DockyDesktopFileCacheFile, desktop_items);
+				SaveDesktopItemsCache();
 			}
 			DesktopItemsChanged ();
 
-			//Update desktop_items and save cache after 2 minutes just to be sure we are up to date
+			// Update desktop_items and save cache after 2 minutes just to be sure we are up to date
 			GLib.Timeout.Add (2 * 60 * 1000, delegate {
 				lock (update_lock) {
 					UpdateDesktopItemsList ();
 					ProcessAndMergeAllSystemCacheFiles (desktop_items);
 					DesktopItemsChanged ();
-					SaveDesktopItemsCache(DockyDesktopFileCacheFile, desktop_items);
+					SaveDesktopItemsCache();
 				}
 				return false;
 			});
 			
-			//Initialize window matching with currently available windows
+			// Initialize window matching with currently available windows
 			window_to_desktop_items = new Dictionary<Wnck.Window, List<DesktopItem>> ();
-			foreach (Wnck.Window w in screen.Windows) {
+			foreach (Wnck.Window w in screen.Windows)
 				SetupWindow (w);
-			}
 
-			//Set up monitors for cache files and desktop directories
-			foreach (GLib.File dir in DesktopFileDirectories.Select (d => GLib.FileFactory.NewForPath (d))) {
+			// Set up monitors for cache files and desktop directories
+			foreach (GLib.File dir in DesktopFileDirectories.Select (d => GLib.FileFactory.NewForPath (d)))
 				MonitorDesktopFileDirs (dir);
-			}
 			MonitorDesktopFileSystemCacheFiles ();
 			
 			screen.WindowOpened += WnckScreenDefaultWindowOpened;
@@ -204,9 +199,8 @@ namespace Docky.Windowing
 					break;
 				}
 			} else {
-				foreach (string dir in envPath.Split (':')) {
+				foreach (string dir in envPath.Split (':'))
 					yield return Path.Combine (dir, "applications");
-				}
 			}
 		}
 
@@ -218,7 +212,7 @@ namespace Docky.Windowing
 			List<GLib.File> known_desktop_files = desktop_items.Select (item => item.File).ToList ();
 			List<DesktopItem> new_items = new List<DesktopItem> ();
 
-			//Get desktop items for new "valid" desktop files
+			// Get desktop items for new "valid" desktop files
 			new_items = DesktopFileDirectories
 				.SelectMany (dir => GLib.FileFactory.NewForPath (dir).SubDirs ())
 				.Union (DesktopFileDirectories.Select (f => GLib.FileFactory.NewForPath (f)))
@@ -230,18 +224,13 @@ namespace Docky.Windowing
 			
 			desktop_items.AddRange (new_items);
 
-			if (new_items.Count () > 0) {
+			if (new_items.Count () > 0)
 				Log<WindowMatcher>.Debug ("{0} new applications found", new_items.Count ());
-			}
 
-			//Check file existence and remove unlinked items
+			// Check file existence and remove unlinked items
 			int removed = desktop_items.RemoveAll (item => !item.File.Exists);
 			if (removed > 0)
 				Log<WindowMatcher>.Debug ("{0} applications removed", removed);
-			
-			//Save changes immediately to cache file
-			if (removed > 0 || new_items.Count () > 0)
-				SaveDesktopItemsCache(DockyDesktopFileCacheFile, desktop_items);
 			
 			known_desktop_files.Clear ();
 			new_items.Clear ();
@@ -249,9 +238,8 @@ namespace Docky.Windowing
 		
 		void ProcessAndMergeAllSystemCacheFiles (List<DesktopItem> items)
 		{
-			foreach (string cache_file in DesktopFileSystemCacheFiles) {
+			foreach (string cache_file in DesktopFileSystemCacheFiles)
 				ProcessAndMergeSystemCacheFile (cache_file, items);
-			}
 		}
 
 		void ProcessAndMergeSystemCacheFile (string cache_file, List<DesktopItem> items)
@@ -262,19 +250,16 @@ namespace Docky.Windowing
 			Log<WindowMatcher>.Debug ("Processing {0}", cache_file);
 			
 			try {
-				using (StreamReader reader = new StreamReader (cache_file))
-				{
+				using (StreamReader reader = new StreamReader (cache_file)) {
 					DesktopItem desktop_item = null;
-					Match match;
 					string line;
 					
 					while ((line = reader.ReadLine ()) != null) {
-						
 						if (line.Trim ().Length <= 0)
 							continue;
 						
 						if (line.ElementAt (0) == '[') {
-							match = DesktopItem.sectionRegex.Match (line);
+							Match match = DesktopItem.sectionRegex.Match (line);
 							if (match.Success) {
 								string section = match.Groups["Section"].Value;
 								if (section != null) {
@@ -291,13 +276,12 @@ namespace Docky.Windowing
 								}
 							}
 						} else if (desktop_item != null) {
-							match = DesktopItem.keyValueRegex.Match (line);
+							Match match = DesktopItem.keyValueRegex.Match (line);
 							if (match.Success) {
 								string key = match.Groups["Key"].Value;
 								string val = match.Groups["Value"].Value;
-								if (!string.IsNullOrEmpty (key) && !string.IsNullOrEmpty (val)) {
+								if (!string.IsNullOrEmpty (key) && !string.IsNullOrEmpty (val))
 									desktop_item.SetString (key, val);
-								}
 								continue;
 							}
 						}
@@ -320,19 +304,16 @@ namespace Docky.Windowing
 			List<DesktopItem> items = new List<DesktopItem> ();
 			
 			try {
-				using (StreamReader reader = new StreamReader (filename))
-				{
+				using (StreamReader reader = new StreamReader (filename)) {
 					DesktopItem desktop_item = null;
-					Match match;
 					string line;
 					
 					while ((line = reader.ReadLine ()) != null) {
-						
 						if (line.Trim ().Length <= 0)
 							continue;
 						
 						if (line.ElementAt (0) == '[') {
-							match = DesktopItem.sectionRegex.Match (line);
+							Match match = DesktopItem.sectionRegex.Match (line);
 							if (match.Success) {
 								string section = match.Groups["Section"].Value;
 								if (section != null) {
@@ -343,13 +324,12 @@ namespace Docky.Windowing
 								continue;
 							}
 						} else if (desktop_item != null) {
-							match = DesktopItem.keyValueRegex.Match (line);
+							Match match = DesktopItem.keyValueRegex.Match (line);
 							if (match.Success) {
 								string key = match.Groups["Key"].Value;
 								string val = match.Groups["Value"].Value;
-								if (!string.IsNullOrEmpty (key) && !string.IsNullOrEmpty (val)) {
+								if (!string.IsNullOrEmpty (key) && !string.IsNullOrEmpty (val))
 									desktop_item.SetString (key, val);
-								}
 								continue;
 							}
 						}
@@ -365,20 +345,18 @@ namespace Docky.Windowing
 			return items;
 		}
 
-		void SaveDesktopItemsCache (string filename, List<DesktopItem> items)
+		void SaveDesktopItemsCache ()
 		{
-			Log<WindowMatcher>.Debug ("Saving {0}", filename);
+			Log<WindowMatcher>.Debug ("Saving {0}", DockyDesktopFileCacheFile);
 
 			try {
-				using (StreamWriter writer = new StreamWriter (filename, false))
-				{
-					foreach (DesktopItem item in items) {
+				using (StreamWriter writer = new StreamWriter (DockyDesktopFileCacheFile, false)) {
+					foreach (DesktopItem item in desktop_items) {
 						writer.WriteLine ("[{0}]", item.Path);
 						IDictionaryEnumerator enumerator = item.Values.GetEnumerator ();
 						enumerator.Reset();
-						while (enumerator.MoveNext()) {
+						while (enumerator.MoveNext())
 							writer.WriteLine ("{0}={1}", enumerator.Key, enumerator.Value);
-						}
 						writer.WriteLine ("");
 					}
 					writer.Close ();
@@ -436,6 +414,7 @@ namespace Docky.Windowing
 						lock (update_lock) {
 							UpdateDesktopItemsList ();
 							DesktopItemsChanged ();
+							SaveDesktopItemsCache();
 						}
 						
 						// Make sure to trigger event on main thread
@@ -564,8 +543,9 @@ namespace Docky.Windowing
 									yield return win;
 							else if (!string.IsNullOrEmpty (win.Name) && win.Name.Equals (window.Name)) 
 								yield return win;
-						} else if (win.Pid == window.Pid)
+						} else if (win.Pid == window.Pid) {
 							yield return win;
+						}
 				}
 			}
 			yield return window;
@@ -619,9 +599,9 @@ namespace Docky.Windowing
 		{
 			// use the StartupWMClass as the definitive match
 			if (window.ClassGroup != null
-				&& !string.IsNullOrEmpty (window.ClassGroup.ResClass)
-				&& window.ClassGroup.ResClass != "Wine"
-				&& class_to_desktop_items.ContainsKey (window.ClassGroup.ResClass)) {
+					&& !string.IsNullOrEmpty (window.ClassGroup.ResClass)
+					&& window.ClassGroup.ResClass != "Wine"
+					&& class_to_desktop_items.ContainsKey (window.ClassGroup.ResClass)) {
 				yield return class_to_desktop_items [window.ClassGroup.ResClass];
 				yield break;
 			}
@@ -630,11 +610,9 @@ namespace Docky.Windowing
 			if (pid <= 1) {
 				if (window.ClassGroup != null && !string.IsNullOrEmpty (window.ClassGroup.ResClass)) {
 					IEnumerable<DesktopItem> matches = DesktopItemsForDesktopID (window.ClassGroup.ResClass);
-					if (matches.Any ()) {
-						foreach (DesktopItem s in matches) {
+					if (matches.Any ())
+						foreach (DesktopItem s in matches)
 							yield return s;
-						}
-					}
 				}
 				yield break;
 			}
@@ -651,17 +629,16 @@ namespace Docky.Windowing
 			if (window.ClassGroup != null) {
 				if (WindowIsOpenOffice (window)) {
 					string title = window.Name.Trim ();
-					if (title.EndsWith ("Writer")) {
+					if (title.EndsWith ("Writer"))
 						command_line.Add ("ooffice-writer");
-					} else if (title.EndsWith ("Draw")) {
+					else if (title.EndsWith ("Draw"))
 						command_line.Add ("ooffice-draw");
-					} else if (title.EndsWith ("Impress")) {
+					else if (title.EndsWith ("Impress"))
 						command_line.Add ("ooffice-impress");
-					} else if (title.EndsWith ("Calc")) {
+					else if (title.EndsWith ("Calc"))
 						command_line.Add ("ooffice-calc");
-					} else if (title.EndsWith ("Math")) {
+					else if (title.EndsWith ("Math"))
 						command_line.Add ("ooffice-math");
-					}
 				} else if (window.ClassGroup.ResClass == "Wine") {
 					// we can match Wine apps normally so don't do anything here
 				} else {
@@ -691,8 +668,10 @@ namespace Docky.Windowing
 					// otherwise do a match on the commandline
 					command_line.AddRange (CommandLineForPid (pids.ElementAt (currentPid++))
 						.Select (cmd => cmd.Replace (@"\", @"\\")));
+					
 					if (command_line.Count () == 0)
 						continue;
+					
 					foreach (string cmd in command_line) {
 						if (exec_to_desktop_items.ContainsKey (cmd)) {
 							foreach (DesktopItem s in exec_to_desktop_items[cmd]) {
@@ -703,6 +682,7 @@ namespace Docky.Windowing
 							}
 						}
 					}
+					
 					// if we found a match, bail.
 					if (matched)
 						yield break;
@@ -936,6 +916,5 @@ namespace Docky.Windowing
 			return result;
 		}
 		#endregion
-		
 	}
 }
