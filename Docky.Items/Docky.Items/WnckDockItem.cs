@@ -61,8 +61,8 @@ namespace Docky.Items
 			}
 		}
 		
-		bool? currentDesktop;
-		bool CurrentDesktopOnly {
+		static bool? currentDesktop;
+		public static bool CurrentDesktopOnly {
 			get {
 				if (!currentDesktop.HasValue)
 					currentDesktop = prefs.Get<bool> ("CurrentDesktopOnly", false);
