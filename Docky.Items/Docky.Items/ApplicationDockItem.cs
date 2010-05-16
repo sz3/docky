@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -39,6 +40,9 @@ namespace Docky.Items
 		{
 			try {
 				string filename = Gnome.Vfs.Global.GetLocalPathFromUri (uri);
+				if (!File.Exists (filename))
+					return null;
+				
 				DesktopItem desktopItem = WindowMatcher.Default.DesktopItemForDesktopFile (filename);
 				
 				if (desktopItem == null)

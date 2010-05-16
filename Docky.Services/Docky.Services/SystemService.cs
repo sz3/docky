@@ -294,7 +294,7 @@ namespace Docky.Services
 		
 		public void Open (IEnumerable<string> uris)
 		{
-			uris.ToList ().ForEach (uri =>  Open (uri));
+			uris.ToList ().ForEach (uri => Open (uri));
 		}
 		
 		public void Open (GLib.File file)
@@ -318,7 +318,7 @@ namespace Docky.Services
 				// check if it's a local file or on VolumeMonitor's mount list.
 				// if it is, skip it.
 				if (!string.IsNullOrEmpty (f.Path)) {
-					if (f.IsNative ||VolumeMonitor.Default.Mounts.Any (m => f.Path.Contains (m.Root.Path))) {
+					if (f.IsNative || VolumeMonitor.Default.Mounts.Any (m => f.Path.Contains (m.Root.Path))) {
 						noMountNeeded.Add (f);
 						continue;
 					}
@@ -346,8 +346,12 @@ namespace Docky.Services
 		{
 			// if we weren't given an app info, query the file for the default handler
 			if (app == null && files.Any ())
-				app = files.First ().QueryDefaultHandler (null);
-						
+				try {
+					app = files.First ().QueryDefaultHandler (null);
+				} catch {
+					// file probably doesnt exist
+				}
+			
 			GLib.List launchList;
 			
 			if (app != null) {
@@ -402,8 +406,6 @@ namespace Docky.Services
 			}
 			
 			Log<SystemService>.Error ("Error opening files. The application doesn't support files/URIs or wasn't found.");
-			// fall back on xdg-open
-			Open (files.Select (f => f.StringUri ()));
 		}
 		
 		public void Execute (string executable)
@@ -428,7 +430,7 @@ namespace Docky.Services
 					proc.Dispose ();
 				}
 			} catch {
-				// FIXME
+				Log<SystemService>.Error ("Error executing '" + executable + "'");
 			}
 		}
 		

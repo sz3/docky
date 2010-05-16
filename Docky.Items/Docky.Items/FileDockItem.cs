@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2009 Jason Smith, Robert Dyer, Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using IO = System.IO;
 using System.Linq;
 using System.Text;
 
@@ -34,20 +35,21 @@ namespace Docky.Items
 	{
 		public static FileDockItem NewFromUri (string uri)
 		{
-			// FIXME: need to do something with this... .Exists will fail for non native files
-			// but they are still valid file items (like an unmounted ftp://... file)
-			// even File.QueryExists () will return false for valid files (ftp://) that aren't mounted.
-			/*
-			string path = Gnome.Vfs.Global.GetLocalPathFromUri (uri);
-			if (!Directory.Exists (path) && !File.Exists (path)) {
-				return null;
-			}
-			*/
-			return new FileDockItem (uri);
+			return NewFromUri (uri, null, null);
 		}
 		
 		public static FileDockItem NewFromUri (string uri, string force_hover_text, string backup_icon)
 		{
+			// FIXME: need to do something with this... .Exists will fail for non native files
+			// but they are still valid file items (like an unmounted ftp://... file)
+			// even File.QueryExists () will return false for valid files (ftp://) that aren't mounted.
+			
+			// for now we just attempt to figure out if it is a local file and check for its existance
+			if (uri.IndexOf ("file://") != -1 || uri.IndexOf ("://") == -1) {
+				string path = Gnome.Vfs.Global.GetLocalPathFromUri (uri);
+				if (!IO.Directory.Exists (path) && !IO.File.Exists (path))
+					return null;
+			}
 			return new FileDockItem (uri, force_hover_text, backup_icon);
 		}
 		
@@ -56,6 +58,7 @@ namespace Docky.Items
 		const string FilesystemFreeKey = "filesystem::free";
 		const string CustomIconKey = "metadata::custom-icon";
 		const string EmblemsKey = "metadata::emblems";
+		
 		string uri;
 		bool is_folder;
 		string forced_hover_text;
