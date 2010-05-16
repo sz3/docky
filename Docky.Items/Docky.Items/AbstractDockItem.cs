@@ -26,6 +26,8 @@ using Cairo;
 using Gdk;
 using Gtk;
 
+using Mono.Unix;
+
 using Docky;
 using Docky.CairoHelper;
 using Docky.Painters;
@@ -108,6 +110,13 @@ namespace Docky.Items
 		/// </summary>
 		public virtual MenuButton MenuButton {
 			get { return MenuButton.Right; }
+		}
+		
+		/// <summary>
+		/// The hover text shown when this item can accept a drop
+		/// </summary>
+		public virtual string DropText {
+			get { return string.Format (Catalog.GetString ("Drop to open with {0}"), HoverText); }
 		}
 		
 		/// <summary>

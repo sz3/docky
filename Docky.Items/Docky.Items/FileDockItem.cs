@@ -70,6 +70,10 @@ namespace Docky.Items
 		
 		public File OwnedFile { get; private set; }
 		
+		public override string DropText {
+			get { return string.Format (Catalog.GetString ("Drop to move to {0}"), HoverText); }
+		}
+		
 		protected FileDockItem (string uri)
 		{			
 			this.uri = uri;

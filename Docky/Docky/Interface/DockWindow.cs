@@ -382,8 +382,9 @@ namespace Docky.Interface
 			} else if (hoveredItem != null && background_buffer != null) {
 				if (ExternalDragActive) {
 					if (DragTracker.ItemAcceptsDrop ()) {
-						if (launch_hover_buffer == null)
-							launch_hover_buffer = DrawHoverText (launch_hover_buffer, Catalog.GetString ("Drop to open"));
+						if (launch_hover_buffer != null)
+							launch_hover_buffer.Dispose ();
+						launch_hover_buffer = DrawHoverText (launch_hover_buffer, hoveredItem.DropText);
 						hover = launch_hover_buffer;
 					} else if (DragTracker.ProviderAcceptsDrop ()) {
 						if (drop_hover_buffer == null)

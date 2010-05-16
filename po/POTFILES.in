@@ -7,6 +7,7 @@ Docky/Docky/Interface/DockWindow.cs
 Docky/Docky/Items/DockyItem.cs
 Docky/gtk-gui/Docky.ConfigurationWindow.cs
 Docky/gtk-gui/Docky.Interface.DockPreferences.cs
+Docky.Items/Docky.Items/AbstractDockItem.cs
 Docky.Items/Docky.Items/ApplicationDockItem.cs
 Docky.Items/Docky.Items/ColoredIconDockItem.cs
 Docky.Items/Docky.Items/FileApplicationProvider.cs
