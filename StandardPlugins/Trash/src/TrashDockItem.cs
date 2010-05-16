@@ -46,6 +46,10 @@ namespace Trash
 			}
 		}
 		
+		public override string DropText {
+			get { return Catalog.GetString ("Drop to move to Trash"); }
+		}
+		
 		FileMonitor TrashMonitor { get; set; }
 		public File OwnedFile { get; private set; }
 		
