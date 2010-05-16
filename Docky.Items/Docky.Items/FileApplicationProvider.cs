@@ -57,7 +57,7 @@ namespace Docky.Items
 		public event EventHandler WindowManagerChanged;
 		
 		Dictionary<string, AbstractDockItem> items;
-		List<AbstractDockItem> transient_items;
+		List<WnckDockItem> transient_items;
 		
 		public IEnumerable<string> Uris {
 			get { return items.Keys.AsEnumerable (); }
@@ -75,7 +75,7 @@ namespace Docky.Items
 		
 		IEnumerable<AbstractDockItem> InternalItems {
 			get {
-				return items.Values.Concat (transient_items);
+				return items.Values.Concat (transient_items.Cast<AbstractDockItem> ());
 			}
 		}
 		
@@ -84,7 +84,7 @@ namespace Docky.Items
 		public FileApplicationProvider ()
 		{
 			items = new Dictionary<string, AbstractDockItem> ();
-			transient_items = new List<AbstractDockItem> ();
+			transient_items = new List<WnckDockItem> ();
 			
 			Providers.Add (this);
 			
@@ -192,15 +192,7 @@ namespace Docky.Items
 		{
 			// if we are not a window-manager-provider then remove transient items
 			if (!IsWindowManager) {
-				if (transient_items.Any ()) {
-					List<AbstractDockItem> old_transient_items = transient_items;
-					
-					transient_items = new List<AbstractDockItem> ();
-					
-					Items = InternalItems;
-					foreach (AbstractDockItem adi in old_transient_items)
-						adi.Dispose ();
-				}
+				RemoveTransientItems (transient_items.ToList ());
 				return;
 			}
 
@@ -216,15 +208,15 @@ namespace Docky.Items
 				WnckDockItem item;
 				
 				if (desktop_item != null) {
-					//This fixes WindowMatching for OpenOffice which is a bit slow setting up its window title
-					//Check if a existing ApplicationDockItem already uses this DesktopItem
-					ApplicationDockItem appdi;
-					if ((appdi = transient_items
+					// This fixes WindowMatching for OpenOffice which is a bit slow setting up its window title
+					// Check if an existing ApplicationDockItem already uses this DesktopItem
+					ApplicationDockItem appdi = transient_items
 						.Where (adi => (adi is ApplicationDockItem && (adi as ApplicationDockItem).OwnedItem == desktop_item))
 						.Cast<ApplicationDockItem> ()
-						.FirstOrDefault ()) != null) {
-						
-						//Try again to gain this missing window
+						.FirstOrDefault ();
+					
+					// Try again to gain this missing window
+					if (appdi != null) {
 						appdi.RecollectWindows ();
 						continue;
 					}
@@ -428,7 +420,7 @@ namespace Docky.Items
 			IEnumerable<AbstractDockItem> old_items = Items;
 			
 			items = new Dictionary<string, AbstractDockItem> ();
-			transient_items = new List<AbstractDockItem> ();
+			transient_items = new List<WnckDockItem> ();
 			
 			Items = Enumerable.Empty<AbstractDockItem> ();
 			foreach (AbstractDockItem adi in old_items)
