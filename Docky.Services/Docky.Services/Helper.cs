@@ -156,24 +156,26 @@ namespace Docky.Services
 			
 			Log<Helper>.Info ("Stopping {0}", File.Basename);
 			
-			if (!Proc.HasExited) {
-				Proc.CancelErrorRead ();
-				Proc.CancelOutputRead ();
-				
-				Proc.Exited -= HandleExited;
-				Proc.CloseMainWindow ();
-				Proc.WaitForExit (200);
+			DockServices.System.RunOnThread (delegate {
 				if (!Proc.HasExited) {
-					Proc.Kill ();
-					Proc.WaitForExit (200);
+					Proc.CancelErrorRead ();
+					Proc.CancelOutputRead ();
+					
+					Proc.Exited -= HandleExited;
+					Proc.CloseMainWindow ();
+					Proc.WaitForExit (500);
+					if (!Proc.HasExited) {
+						Proc.Kill ();
+						Proc.WaitForExit (200);
+					}
+					Log<Helper>.Info ("{0} has exited (Code {1}).", File.Basename, Proc.ExitCode);
 				}
-				Log<Helper>.Info ("{0} has exited (Code {1}).", File.Basename, Proc.ExitCode);
-			}
-			
-			Proc.Dispose ();
-			Proc = null;
-			
-			IsRunning = false;
+				
+				Proc.Dispose ();
+				Proc = null;
+				
+				IsRunning = false;
+			});
 		}
 		
 		public void Dispose ()
