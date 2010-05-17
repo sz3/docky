@@ -7,57 +7,57 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-05-06 10:50+0200\n"
-"PO-Revision-Date: 2010-05-05 14:29+0000\n"
+"POT-Creation-Date: 2010-05-17 08:04+0200\n"
+"PO-Revision-Date: 2010-05-12 10:09+0000\n"
 "Last-Translator: Yiğit Ateş <yigitates52@gmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-05-09 09:08+0000\n"
+"X-Launchpad-Export-Date: 2010-05-17 06:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
 msgid "Search Docklets..."
-msgstr "Modülleri Araştır..."
+msgstr "Uygulamacıkları Ara..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Search Helpers..."
-msgstr "Yardımcıları Araştır..."
+msgstr "Yardımcıları Ara..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:209
+#: ../Docky/Docky/ConfigurationWindow.cs:212
 msgid "Click on any dock to configure."
-msgstr "Ayarlamak istediğiniz herhangi bir dock'a tıklayın."
+msgstr "Yapılandırmak için herhangi bir rıhtıma tıklayın."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:210
+#: ../Docky/Docky/ConfigurationWindow.cs:213
 msgid "Drag any dock to reposition."
-msgstr "Yeniden konumlandırmak istediğiniz dock'u sürükleyin."
+msgstr "Yeniden konumlandırmak için herhangi bir rıhtımı sürükleyin."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:275
+#: ../Docky/Docky/ConfigurationWindow.cs:278
 msgid "Delete the currently selected dock?"
-msgstr "Seçilmiş dock silinsin mi?"
+msgstr "Seçili rıhtım silinsin mi?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:277
+#: ../Docky/Docky/ConfigurationWindow.cs:280
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
-"Dock'u silmeyi seçerseniz, silinmiş dock için\n"
-"tüm ayarlar kalıcı olarak kaybedilecek."
+"Eğer rıhtımı silmeyi seçerseniz, silinen rıhtımın\n"
+"tüm ayarları kalıcı olarak kaybolacak."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:284
+#: ../Docky/Docky/ConfigurationWindow.cs:287
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:456
 msgid "_Delete Dock"
-msgstr "_Dock'u Sil"
-
-#: ../Docky/Docky/ConfigurationWindow.cs:398
-#: ../Docky/Docky/ConfigurationWindow.cs:423
-msgid "_Select"
-msgstr "_Seç"
+msgstr "Rıhtımı _Sil"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:401
 #: ../Docky/Docky/ConfigurationWindow.cs:426
+msgid "_Select"
+msgstr "_Seç"
+
+#: ../Docky/Docky/ConfigurationWindow.cs:404
+#: ../Docky/Docky/ConfigurationWindow.cs:429
 msgid ".tar Archives"
 msgstr ".tar Arşivleri"
 
@@ -67,41 +67,44 @@ msgstr "Yazar"
 
 #: ../Docky/Docky/DockletTile.cs:88
 msgid "Move this docklet up on the selected dock"
-msgstr ""
+msgstr "Bu uygulamacığı seçili rıhtımın üstüne taşı"
 
 #: ../Docky/Docky/DockletTile.cs:89
 msgid "Move this docklet down on the selected dock"
-msgstr ""
+msgstr "Bu uygulamacığı seçili rıhtımın altına taşı"
 
 #: ../Docky/Docky/DockletTile.cs:93
 msgid "Move this docklet left on the selected dock"
-msgstr ""
+msgstr "Bu uygulamacığı seçili rıhtımın soluna taşı"
 
 #: ../Docky/Docky/DockletTile.cs:94
 msgid "Move this docklet right on the selected dock"
-msgstr ""
+msgstr "Bu uygulamacığı seçili rıhtımın sağına taşı"
 
 #: ../Docky/Docky/DockletTile.cs:96
 msgid "Configure this docklet"
-msgstr ""
+msgstr "Bu uygulamacığı yapılandır"
 
 #: ../Docky/Docky/DockletTile.cs:97
 msgid "About this docklet"
-msgstr ""
+msgstr "Bu uygulamacık hakkında"
 
 #: ../Docky/Docky/DockletTile.cs:98
 msgid "Add this docklet to the selected dock"
-msgstr ""
+msgstr "Bu uygulamacığı seçili rıhtıma ekle"
 
 #: ../Docky/Docky/DockletTile.cs:99
 msgid "Remove this docklet from the selected dock"
-msgstr ""
+msgstr "Bu uygulamacığı seçili rıhtımdan kaldır"
 
 #: ../Docky/Docky/Docky.cs:110
 msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
 msgstr ""
+"Docky düzgün çalışmak için birleşiklik etkilerine ihtiyaç duyuyor. Bazı "
+"seçenekler devre dışı kalabilir ve temalar/animasyonlar düzgün "
+"görünmeyebilir. "
 
 #: ../Docky/Docky/HelperTile.cs:41
 msgid "Status"
@@ -117,7 +120,7 @@ msgstr "Bu yardımcı hakkında"
 
 #: ../Docky/Docky/HelperTile.cs:76
 msgid "Enable this helper"
-msgstr "Bu yardımcıyı aktifleştir"
+msgstr "Bu yardımcıyı etkinleştir"
 
 #: ../Docky/Docky/HelperTile.cs:77
 msgid "Disable this helper"
@@ -133,44 +136,38 @@ msgstr "Durduruldu"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:333
 msgid ""
-"Causes launchers which currently manage more than one window to have an "
-"extra indicator under it."
-msgstr ""
-
-#: ../Docky/Docky/Interface/DockPreferences.cs:335
-msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
+"Ayarlandığında, bir rıhtım üzerindeki başlatıcıya sahip olmayan pencereler "
+"bu rıhtıma eklenecek."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:687
+#: ../Docky/Docky/Interface/DockPreferences.cs:684
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
+"<i>Hiçbir zaman gizlemez; büyütülen pencereler rıhtımın üzerini "
+"kapatamaz.</i>"
+
+#: ../Docky/Docky/Interface/DockPreferences.cs:687
+msgid "<i>Hides whenever the mouse is not over it.</i>"
+msgstr "<i>Fare üzerinde olmadığında gizle.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:690
-msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr "<i>Fare üzerinde olmadığında sakla.</i>"
+msgid "<i>Hides when dock obstructs the active application.</i>"
+msgstr "<i>Rıhtım etkin uygulamayı engellediğinde gizle.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:693
-msgid "<i>Hides when dock obstructs the active application.</i>"
-msgstr ""
-
-#: ../Docky/Docky/Interface/DockPreferences.cs:696
 msgid "<i>Hides when dock obstructs any window.</i>"
-msgstr ""
+msgstr "<i>Rıhtım bir pencereyi engellediğinde gizle.</i>"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:379
 msgid "Drag to reposition"
 msgstr "Yeniden konumlandırmak için sürükleyin"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:386
-msgid "Drop to open"
-msgstr "Açmak için sürükleyin"
-
-#: ../Docky/Docky/Interface/DockWindow.cs:390
-#: ../Docky/Docky/Interface/DockWindow.cs:404
+#: ../Docky/Docky/Interface/DockWindow.cs:391
+#: ../Docky/Docky/Interface/DockWindow.cs:405
 msgid "Drop to add to dock"
-msgstr ""
+msgstr "Rıhtıma eklemek için bırakın"
 
 #: ../Docky/Docky/Items/DockyItem.cs:114
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
@@ -184,11 +181,11 @@ msgstr "_Hakkında"
 
 #: ../Docky/Docky/Items/DockyItem.cs:116
 msgid "_Help"
-msgstr ""
+msgstr "_Yardım"
 
 #: ../Docky/Docky/Items/DockyItem.cs:117
 msgid "_Quit Docky"
-msgstr "_Docky'den Çık"
+msgstr "Docky'den _Çık"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
 msgid "Docky Settings"
@@ -196,7 +193,7 @@ msgstr "Docky Ayarları"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
 msgid "_Start When Computer Starts"
-msgstr "_Bilgisayar Başladığında Başlat"
+msgstr "_Bilgisayar Açıldığında Başlat"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
@@ -213,16 +210,16 @@ msgstr "<b>Genel Seçenekler</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
-msgstr "<b>Dock Ayarları</b>"
+msgstr "<b>Rıhtım Yapılandırması</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
-msgstr "Dock'lar"
+msgstr "Rıhtımlar"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
 msgid "All"
-msgstr "Hepsi"
+msgstr "Tümü"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
@@ -236,7 +233,7 @@ msgstr "Etkisizleştirildi"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
 msgid "Docklets"
-msgstr "Modüller"
+msgstr "Uygulamacıklar"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:374
 msgid "Helpers"
@@ -244,61 +241,74 @@ msgstr "Yardımcılar"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:429
 msgid "_New Dock"
-msgstr "_Yeni Dock"
+msgstr "_Yeni Rıhtım"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
 msgid "None"
 msgstr "Hiçbiri"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
 msgid "Autohide"
 msgstr "Otomatik gizle"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:62
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "Intellihide"
 msgstr "Akıllı gizleme"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:63
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Window Dodge"
-msgstr "Pencere Kenarı"
+msgstr "Pencere Çekilmesi"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
 msgid "_Fade On Hide"
-msgstr ""
+msgstr "Gizlendiğinde _Soldur"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:121
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
 msgid "_Icon Size:"
-msgstr "Simge _Boyutu:"
+msgstr "_Simge Boyutu:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:134
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:132
 msgid "_Hiding:"
 msgstr "_Gizleniyor:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:144
-msgid "Indicat_e Multiple Windows"
-msgstr "Çoklu Pencereleri Beli_rt"
-
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:158
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
 msgid "_Panel Mode"
 msgstr "_Panel Modu"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:172
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
 msgid "3D Back_ground"
-msgstr "_3 Boyutlu Arkaplan"
+msgstr "3B Art_alan"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:186
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
 msgid "_Manage Windows Without Launcher"
 msgstr "Pencereleri Başlatıcı Olmadan _Yönet"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:201
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
 msgid "_Zoom:"
 msgstr "_Yakınlaştır:"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:149
+#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:119
+#, csharp-format
+msgid "Drop to open with {0}"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:97
+msgid "Icon"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:100
+msgid "X-GNOME-FullName"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:102
+msgid "Name"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:159
 msgid "New _Window"
 msgstr "Yeni _Pencere"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:151
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:161
 #: ../StandardPlugins/Mounter/src/MountItem.cs:97
 msgid "_Open"
 msgstr "_Aç"
@@ -307,58 +317,63 @@ msgstr "_Aç"
 msgid "Reset Color"
 msgstr "Rengi Sıfırla"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:359
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:399
 msgid "_Pin to Dock"
-msgstr "_Dock'a İğnele"
+msgstr "Rıhtıma _İğnele"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:182
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:74
+#, csharp-format
+msgid "Drop to move to {0}"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:189
 msgid "Not enough free space on destination."
 msgstr "Hedefte yeterli alan yok."
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:196
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:216
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:201
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:203
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:223
 msgid "Complete"
-msgstr "Tamamla"
+msgstr "Tamamlanmış"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:202
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:209
 msgid "Moving"
 msgstr "Taşınıyor"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:208
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:215
 msgid "Copying"
 msgstr "Kopyalanıyor"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:221
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:222
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:228
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:229
 msgid "Error performing drop action"
-msgstr "Çıkarma işlemi sırasında bir hata oluştu"
+msgstr "Bırakam eylemi sırasında bir hata oluştu"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:244
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:251
 msgid "Open"
 msgstr "Aç"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:245
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:252
 msgid "Open Containing Folder"
-msgstr "İçeren Klasörü Aç"
+msgstr "İçeren Dizini Aç"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:244
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:248
 msgid "Unma_ximize"
 msgstr "Büyüt_meyi geri al"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:247
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:251
 msgid "Ma_ximize"
-msgstr "_Büyüt"
-
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:252
-msgid "_Restore"
-msgstr "Ge_ri Yükle"
+msgstr "Bü_yüt"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:255
+msgid "_Restore"
+msgstr "_Geri Getir"
+
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:258
 msgid "Mi_nimize"
 msgstr "_Küçült"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:259
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:261
 msgid "_Close All"
 msgstr "_Tümünü Kapat"
 
@@ -390,7 +405,7 @@ msgstr "Hesap doğrulama başarılı oldu!"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:87
 msgid "Password"
-msgstr "Şifre"
+msgstr "Parola"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:108
 msgid "Username"
@@ -398,7 +413,7 @@ msgstr "Kullanıcı Adı"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
 msgid "<i>Verify and save account information</i>"
-msgstr "<i>Hesap bilgilerini onayla ve kaydet</i>"
+msgstr "<i>Hesap bilgilerini doğrula ve kaydet</i>"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
 msgid "Don't have an account?"
@@ -422,7 +437,7 @@ msgstr[0] "{0} dakika"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:177
 msgid "until charged "
-msgstr "şarj olana dek "
+msgstr "doldurulana kadar "
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:179
 msgid "remaining "
@@ -446,7 +461,7 @@ msgstr "Tarihi _Göster"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:439
 msgid "Select _Theme"
-msgstr "Temayı _Seç"
+msgstr "_Temayı Seç"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
@@ -484,7 +499,7 @@ msgstr "(konu yok)"
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 #, csharp-format
 msgid "From: {0}"
-msgstr ""
+msgstr "Gönderen: {0}"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:286
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:290
@@ -506,37 +521,37 @@ msgstr "Genel Hata"
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
 msgid "GMail Configuration"
-msgstr "GMail Ayarları"
+msgstr "GMail Yapılandırması"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:79
 msgid "No unread mail"
-msgstr "Okunmamış ileti yok"
+msgstr "Okunmamış posta yok"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:82
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
-msgstr[0] "{0} okunmamış mesaj"
+msgstr[0] "{0} okunmamış ileti"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:103
 msgid "Checking mail..."
-msgstr "E-posta kontrol ediliyor"
+msgstr "Posta kontrol ediliyor..."
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:196
 msgid "_View "
-msgstr "_Göster "
+msgstr "_Görüntüle "
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "_Compose Mail"
-msgstr "_E-posta Yaz"
+msgstr "Posta _Oluştur"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:208
 msgid "New Mail"
-msgstr "Yeni E-posta"
+msgstr "Yeni Posta"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:226
 msgid "Check _Mail"
-msgstr "_Postaları Kontrol Et"
+msgstr "_Postaları Denetle"
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
@@ -548,7 +563,7 @@ msgstr "GMail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr "Giriş"
+msgstr "Oturum aç"
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
@@ -556,7 +571,7 @@ msgstr "Gönderen: "
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Eject"
-msgstr "Çı_kar"
+msgstr "_Çıkart"
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:99
 msgid "_Unmount"
@@ -586,20 +601,20 @@ msgstr "İ_stasyonlarım"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:78
 msgid "S_earch"
-msgstr "_Ara"
+msgstr "A_ra"
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
-msgstr "İstasyon bulunamadı"
+msgstr "İstasyon bulunamadı."
 
 #: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
-msgstr "Lütfen aramanızı tekrar deneyin."
+msgstr "Lütfen aramanızı tekrarlayın."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:48
 msgid "Fetching Information..."
-msgstr "Veriler Getiriliyor..."
+msgstr "Bilgi Getiriliyor..."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:68
 msgid "Click to add NPR stations."
@@ -627,11 +642,11 @@ msgstr "Ayarlar"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:67
 msgid "Clear the Recent Documents list?"
-msgstr "Son Belgeler listesi temizlensin mi?"
+msgstr "Açılan Son Belgeler listesi temizlensin mi?"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:69
 msgid "Clear Recent Documents"
-msgstr "Son Kullanılan Belgeleri Temizle"
+msgstr "Açılan Son Belgeler Listesini Temizle"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:71
 msgid ""
@@ -639,103 +654,110 @@ msgid ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
-"Eğer Son Kullanılan Belgeler listesini temizlerseniz, aşağıdakiler de "
+"Eğer Açılan Son Belgeler listesini temizlerseniz, aşağıdakiler de "
 "temizlenir:\n"
 "\n"
-"• Yerler → Son Kullanılan Belgeler menüsündeki tüm öğeler.\n"
-"• Tüm uygulamalardaki son kullanılan belgeler listeleri."
+"• Yerler → Açılan Son Belgeler menüsündeki tüm öğeler.\n"
+"• Tüm uygulamalardaki açılan son belgeler listeleri."
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:92
 msgid "_Clear Recent Documents..."
-msgstr "_Son Dökümanları Temizle..."
+msgstr "Açılan Son Belgeler Listesini _Temizle..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:149
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:148
 msgid "Lock Screen"
 msgstr "Ekranı Kilitle"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:152
 msgid "Log Out..."
 msgstr "Oturumu Kapat..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:154
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
 msgid "Log Out"
 msgstr "Oturumu Kapat"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:155
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:154
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
 msgstr ""
 "Tüm programları sonlandırıp oturumu kapatmak istediğinize emin misiniz?"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:160
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:159
 msgid "Suspend"
 msgstr "Askıya Al"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:165
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:164
 msgid "Hibernate"
 msgstr "Hazırda Beklet"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:171
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:170
 msgid "Restart..."
 msgstr "Yeniden Başlat..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:172
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:171
 msgid "Restart"
 msgstr "Yeniden Başlat"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:173
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:172
 msgid "Are you sure you want to close all programs and restart the computer?"
 msgstr ""
 "Tüm programları sonlandırıp bilgisayarı yeniden başlatmak istediğinize emin "
 "misiniz?"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:177
 msgid "Shut Down..."
 msgstr "Kapat..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
 msgid "Shut Down"
 msgstr "Kapat"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:180
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
 msgstr ""
 "Tüm programları sonlandırıp bilgisayarı kapatmak istediğinize emin misiniz?"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:50
+msgid "Drop to move to Trash"
+msgstr ""
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:77
 msgid "No items in Trash"
 msgstr "Çöpünüz boş"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:75
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:79
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
 msgstr[0] "Çöpte {0} öğe"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:160
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:164
 msgid "_Open Trash"
 msgstr "Çöpü _Aç"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:162
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:192
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:166
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:196
 msgid "Empty _Trash"
 msgstr "Çöpü _Boşalt"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:188
 msgid "Empty all of the items from the trash?"
 msgstr "Çöpteki bütün öğeler boşaltılsın mı?"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:186
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:190
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
+"Eğer çöpü boşaltmayı seçerseniz, içerisindeki tüm öğeler\n"
+"kalıcı olarak yok olacak. Çöpteki öğeleri\n"
+"teker teker de silebilirsiniz."
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:65
 msgid "_Weather Provider:"
-msgstr "_Hava Durumu Verisi Sağlayıcı:"
+msgstr "_Hava Durumu Sağlayıcısı:"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:105
 msgid "My _Locations"
@@ -751,15 +773,15 @@ msgstr "Şu _Aralıkla Güncelle"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:220
 msgid "Use _Metric Units"
-msgstr "_Metrik Sistem Kullan"
+msgstr "_Metrik Birimleri Kullan"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:176
 msgid "Invalid Weather Location"
-msgstr "Geçersiz Konum"
+msgstr "Geçersiz Hava Konumu"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:179
 msgid "Invalid XML Weather Data"
-msgstr ""
+msgstr "Geçersiz XML Hava Verisi"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:182
 msgid "Network Error: "
@@ -770,6 +792,8 @@ msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
 msgstr ""
+"Hava durumu verileri Google tarafından sağlanmaktadır. Kaynak, Birleşik "
+"Devletler Zip Kodu veya 'Şehir,Ülke' şeklinde konum bilgisine ihtiyaç duyar."
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
@@ -778,12 +802,20 @@ msgid ""
 "website.  To find your code, look up your forecast on their site and the "
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
+"Hava durumu verileri The Weather Channel tarafından sağlanmakta ve telif "
+"haklarıyla korunmaktadır. Kaynak, Birleşik Devletler Zip Kodu veya web "
+"sitesinden özel bir koda ihtiyaç duyar. Gerekli kodu bulmak için, site "
+"üzerindeki hava tahmini sayfasının URL adresindeki '/yerel/' ve AAXX0000 "
+"gibi görünen kodlara bakabilirsiniz."
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
 msgstr ""
+"Hava durumu verileri Weather Underground tarafından sağlanmakta ve telif "
+"haklarıyla korunmaktadır. Kaynak, Birleşik Devletler Zip Kodu veya "
+"'Şehir,Ülke' şeklinde konum bilgisine ihtiyaç duyar."
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
@@ -791,7 +823,7 @@ msgstr "Sonuç bulunamadı."
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
-msgstr "Hava Durumu Ayarları"
+msgstr "Hava Durumu Yapılandırması"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
 msgid "Click to add a location."
@@ -811,7 +843,7 @@ msgstr "Hava Tahminleri"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:247
 msgid "Check _Weather"
-msgstr "Hava _Durumunu Kontrol Et"
+msgstr "_Hava Durumunu Denetle"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
 msgid "_Today"
@@ -819,7 +851,7 @@ msgstr "_Bugün"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
 msgid "T_omorrow"
-msgstr "Yarın"
+msgstr "Y_arın"
 
 #. draw humidity
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:318
@@ -869,3 +901,6 @@ msgstr "{0} nem"
 #~ msgstr ""
 #~ "Dock düzgün çalışabilmek için compositing'i gerektirir. Lütfen compositing'i "
 #~ "aktifleştirin ve docky'yi yeniden başlatın."
+
+#~ msgid "Indicat_e Multiple Windows"
+#~ msgstr "Çoklu Pencereleri Beli_rt"

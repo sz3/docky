@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-05-06 10:50+0200\n"
+"POT-Creation-Date: 2010-05-17 08:04+0200\n"
 "PO-Revision-Date: 2010-01-17 13:01+0000\n"
 "Last-Translator: Siegfried Gevatter <rainct@ubuntu.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-05-09 09:08+0000\n"
+"X-Launchpad-Export-Date: 2010-05-17 06:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
@@ -26,19 +26,19 @@ msgstr "Cerca miniaplicacions..."
 msgid "Search Helpers..."
 msgstr "Cerca ajudants..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:209
+#: ../Docky/Docky/ConfigurationWindow.cs:212
 msgid "Click on any dock to configure."
 msgstr "Feu clic sobre qualsevol plafó per a configurar-lo."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:210
+#: ../Docky/Docky/ConfigurationWindow.cs:213
 msgid "Drag any dock to reposition."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:275
+#: ../Docky/Docky/ConfigurationWindow.cs:278
 msgid "Delete the currently selected dock?"
 msgstr "Esteu segur que voleu eliminar el plafó seŀlecionat?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:277
+#: ../Docky/Docky/ConfigurationWindow.cs:280
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -46,18 +46,18 @@ msgstr ""
 "Si trieu eliminar el plafó, tota la configuració\n"
 "per al plafó eliminat es perdrà de forma permanent."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:284
+#: ../Docky/Docky/ConfigurationWindow.cs:287
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:456
 msgid "_Delete Dock"
 msgstr "_Esborra el plafó"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:398
-#: ../Docky/Docky/ConfigurationWindow.cs:423
+#: ../Docky/Docky/ConfigurationWindow.cs:401
+#: ../Docky/Docky/ConfigurationWindow.cs:426
 msgid "_Select"
 msgstr "_Selecciona"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:401
-#: ../Docky/Docky/ConfigurationWindow.cs:426
+#: ../Docky/Docky/ConfigurationWindow.cs:404
+#: ../Docky/Docky/ConfigurationWindow.cs:429
 msgid ".tar Archives"
 msgstr "Fitxers .tar"
 
@@ -133,29 +133,23 @@ msgstr "Aturat"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:333
 msgid ""
-"Causes launchers which currently manage more than one window to have an "
-"extra indicator under it."
-msgstr ""
-
-#: ../Docky/Docky/Interface/DockPreferences.cs:335
-msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:687
+#: ../Docky/Docky/Interface/DockPreferences.cs:684
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:690
+#: ../Docky/Docky/Interface/DockPreferences.cs:687
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Oculta quan el ratolí no esta per sobre.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:693
+#: ../Docky/Docky/Interface/DockPreferences.cs:690
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:696
+#: ../Docky/Docky/Interface/DockPreferences.cs:693
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr ""
 
@@ -163,12 +157,8 @@ msgstr ""
 msgid "Drag to reposition"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:386
-msgid "Drop to open"
-msgstr ""
-
-#: ../Docky/Docky/Interface/DockWindow.cs:390
-#: ../Docky/Docky/Interface/DockWindow.cs:404
+#: ../Docky/Docky/Interface/DockWindow.cs:391
+#: ../Docky/Docky/Interface/DockWindow.cs:405
 msgid "Drop to add to dock"
 msgstr ""
 
@@ -246,59 +236,72 @@ msgstr "Ajudants"
 msgid "_New Dock"
 msgstr "_Afegeix un plafó"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
 msgid "None"
 msgstr "Cap"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
 msgid "Autohide"
 msgstr "Ocultació automàtica"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:62
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "Intellihide"
 msgstr "Ocultació inteŀligent"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:63
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Window Dodge"
 msgstr "Esquiva les finestres"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
 msgid "_Fade On Hide"
 msgstr "_Esvaeix al amagar"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:121
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
 msgid "_Icon Size:"
 msgstr "_Mida de les icones:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:134
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:132
 msgid "_Hiding:"
 msgstr "_Ocultació:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:144
-msgid "Indicat_e Multiple Windows"
-msgstr "_Indica múltiples finestres"
-
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:158
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
 msgid "_Panel Mode"
 msgstr "Mode _taulell"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:172
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
 msgid "3D Back_ground"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:186
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
 msgid "_Manage Windows Without Launcher"
 msgstr "_Gestiona finestres sense llançadora"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:201
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
 msgid "_Zoom:"
 msgstr "_Ampliació:"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:149
+#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:119
+#, csharp-format
+msgid "Drop to open with {0}"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:97
+msgid "Icon"
+msgstr "Icona"
+
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:100
+msgid "X-GNOME-FullName"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:102
+msgid "Name"
+msgstr "Nom"
+
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:159
 msgid "New _Window"
 msgstr "_Finestra nova"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:151
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:161
 #: ../StandardPlugins/Mounter/src/MountItem.cs:97
 msgid "_Open"
 msgstr "_Obre"
@@ -307,58 +310,63 @@ msgstr "_Obre"
 msgid "Reset Color"
 msgstr "Reinicialitza el color"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:359
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:399
 msgid "_Pin to Dock"
 msgstr "_Fixa al plafó"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:182
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:74
+#, csharp-format
+msgid "Drop to move to {0}"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:189
 msgid "Not enough free space on destination."
 msgstr "No queda prou espai lliure al destí."
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:196
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:216
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:201
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:203
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:223
 msgid "Complete"
 msgstr "Complet"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:202
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:209
 msgid "Moving"
 msgstr "S'està movent"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:208
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:215
 msgid "Copying"
 msgstr "S'està copiant"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:221
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:222
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:228
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:229
 msgid "Error performing drop action"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:244
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:251
 msgid "Open"
 msgstr "Obre"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:245
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:252
 msgid "Open Containing Folder"
 msgstr "Obre la carpeta contenidora"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:244
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:248
 msgid "Unma_ximize"
 msgstr "Desma_ximitza"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:247
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:251
 msgid "Ma_ximize"
 msgstr "Ma_ximitza"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:252
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:255
 msgid "_Restore"
 msgstr "_Restaura"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:255
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:258
 msgid "Mi_nimize"
 msgstr "Mi_nimitza"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:259
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:261
 msgid "_Close All"
 msgstr "_Tanca-ho tot"
 
@@ -651,81 +659,85 @@ msgstr ""
 msgid "_Clear Recent Documents..."
 msgstr "_Neteja la llista de documents recents..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:149
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:148
 msgid "Lock Screen"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:152
 msgid "Log Out..."
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:154
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
 msgid "Log Out"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:155
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:154
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:160
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:159
 msgid "Suspend"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:165
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:164
 msgid "Hibernate"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:171
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:170
 msgid "Restart..."
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:172
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:171
 msgid "Restart"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:173
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:172
 msgid "Are you sure you want to close all programs and restart the computer?"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:177
 msgid "Shut Down..."
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
 msgid "Shut Down"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:180
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:50
+msgid "Drop to move to Trash"
+msgstr ""
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:77
 msgid "No items in Trash"
 msgstr "Cap element a la Paperera"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:75
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:79
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
 msgstr[0] "{0} element a la Paperera"
 msgstr[1] "{0} elements a la Paperera"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:160
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:164
 msgid "_Open Trash"
 msgstr "_Obre la paperera"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:162
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:192
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:166
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:196
 msgid "Empty _Trash"
 msgstr "Buida la _paperera"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:188
 msgid "Empty all of the items from the trash?"
 msgstr "Voleu eliminar tots els elements de la paperera?"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:186
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:190
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
@@ -889,9 +901,6 @@ msgstr ""
 #~ msgid "Delete Dock"
 #~ msgstr "Elimina el Dock"
 
-#~ msgid "Icon"
-#~ msgstr "Icona"
-
 #~ msgid "Zoom:"
 #~ msgstr "Ampliació:"
 
@@ -953,6 +962,9 @@ msgstr ""
 
 #~ msgid "3D Background"
 #~ msgstr "Fons tridimensional"
+
+#~ msgid "Indicat_e Multiple Windows"
+#~ msgstr "_Indica múltiples finestres"
 
 #~ msgid "Sunrise"
 #~ msgstr "Sortida del Sol"

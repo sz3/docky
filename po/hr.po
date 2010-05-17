@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-05-06 10:50+0200\n"
+"POT-Creation-Date: 2010-05-17 08:04+0200\n"
 "PO-Revision-Date: 2010-03-27 18:18+0000\n"
 "Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Croatian <hr@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-05-09 09:08+0000\n"
+"X-Launchpad-Export-Date: 2010-05-17 06:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
@@ -27,19 +27,19 @@ msgstr "Pretraži docklete..."
 msgid "Search Helpers..."
 msgstr "Pretraži pomagače..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:209
+#: ../Docky/Docky/ConfigurationWindow.cs:212
 msgid "Click on any dock to configure."
 msgstr "Kliknite na bilo koji dok kako biste ga podesili."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:210
+#: ../Docky/Docky/ConfigurationWindow.cs:213
 msgid "Drag any dock to reposition."
 msgstr "Povucite bilo koji dok da biste ga premjestili."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:275
+#: ../Docky/Docky/ConfigurationWindow.cs:278
 msgid "Delete the currently selected dock?"
 msgstr "Želite li obrisati trenutno odabrani dok?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:277
+#: ../Docky/Docky/ConfigurationWindow.cs:280
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -47,18 +47,18 @@ msgstr ""
 "Ako obrišete dok, sve njegove postavke\n"
 " bit će trajno izgubljene."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:284
+#: ../Docky/Docky/ConfigurationWindow.cs:287
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:456
 msgid "_Delete Dock"
 msgstr "_Obriši dok"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:398
-#: ../Docky/Docky/ConfigurationWindow.cs:423
+#: ../Docky/Docky/ConfigurationWindow.cs:401
+#: ../Docky/Docky/ConfigurationWindow.cs:426
 msgid "_Select"
 msgstr "_Odaberi"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:401
-#: ../Docky/Docky/ConfigurationWindow.cs:426
+#: ../Docky/Docky/ConfigurationWindow.cs:404
+#: ../Docky/Docky/ConfigurationWindow.cs:429
 msgid ".tar Archives"
 msgstr ".tar arhive"
 
@@ -134,34 +134,26 @@ msgstr "Zaustavljeno"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:333
 msgid ""
-"Causes launchers which currently manage more than one window to have an "
-"extra indicator under it."
-msgstr ""
-"Starteri koji imaju više od jednog prozora imati će dodatni indikator ispod "
-"prateće sličice."
-
-#: ../Docky/Docky/Interface/DockPreferences.cs:335
-msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
 "Ako je aktivirano, prozori koji već nemaju pokretače na doku bit će dodani "
 "istome."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:687
+#: ../Docky/Docky/Interface/DockPreferences.cs:684
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 "<i>Nikad se ne skriva; povećani prozori se ne preklapaju s dokom.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:690
+#: ../Docky/Docky/Interface/DockPreferences.cs:687
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Skriva se kad god pokazivač nije iznad doka.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:693
+#: ../Docky/Docky/Interface/DockPreferences.cs:690
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Skriva se kada dok zakloni aktivnu aplikaciju.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:696
+#: ../Docky/Docky/Interface/DockPreferences.cs:693
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Skriva se kada dok zaklanja bilo koji prozor.</i>"
 
@@ -169,12 +161,8 @@ msgstr "<i>Skriva se kada dok zaklanja bilo koji prozor.</i>"
 msgid "Drag to reposition"
 msgstr "Povucite za premještanje"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:386
-msgid "Drop to open"
-msgstr "Ispustite da otvorite"
-
-#: ../Docky/Docky/Interface/DockWindow.cs:390
-#: ../Docky/Docky/Interface/DockWindow.cs:404
+#: ../Docky/Docky/Interface/DockWindow.cs:391
+#: ../Docky/Docky/Interface/DockWindow.cs:405
 msgid "Drop to add to dock"
 msgstr "Ispustite da biste dodali na dok"
 
@@ -252,59 +240,72 @@ msgstr "Pomagači"
 msgid "_New Dock"
 msgstr "_Novi dok"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
 msgid "None"
 msgstr "Niti jedan"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
 msgid "Autohide"
 msgstr "Automatsko skrivanje"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:62
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "Intellihide"
 msgstr "Pametno skrivanje"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:63
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Window Dodge"
 msgstr "Izbjegavanje Prozora"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
 msgid "_Fade On Hide"
 msgstr "_Iščezni kada se sakriješ"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:121
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
 msgid "_Icon Size:"
 msgstr "_Veličina Ikona"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:134
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:132
 msgid "_Hiding:"
 msgstr "_Skrivanje"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:144
-msgid "Indicat_e Multiple Windows"
-msgstr "Prikaž_i Višestruke Prozore"
-
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:158
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
 msgid "_Panel Mode"
 msgstr "_Mode ploče"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:172
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
 msgid "3D Back_ground"
 msgstr "3D po_zadina"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:186
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
 msgid "_Manage Windows Without Launcher"
 msgstr "_Upravljaj Prozorima koji nemaju startere."
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:201
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
 msgid "_Zoom:"
 msgstr "_Uvećaj"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:149
+#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:119
+#, csharp-format
+msgid "Drop to open with {0}"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:97
+msgid "Icon"
+msgstr "Sličica"
+
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:100
+msgid "X-GNOME-FullName"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:102
+msgid "Name"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:159
 msgid "New _Window"
 msgstr "Novi _prozor"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:151
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:161
 #: ../StandardPlugins/Mounter/src/MountItem.cs:97
 msgid "_Open"
 msgstr "_Otvori"
@@ -313,58 +314,63 @@ msgstr "_Otvori"
 msgid "Reset Color"
 msgstr "Vrati izvornu boju"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:359
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:399
 msgid "_Pin to Dock"
 msgstr "_Pričvrsti na dok"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:182
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:74
+#, csharp-format
+msgid "Drop to move to {0}"
+msgstr ""
+
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:189
 msgid "Not enough free space on destination."
 msgstr "Nedovoljno prostora na destinaciji."
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:196
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:216
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:201
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:203
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:223
 msgid "Complete"
 msgstr "Završeno"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:202
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:209
 msgid "Moving"
 msgstr "Premještanje"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:208
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:215
 msgid "Copying"
 msgstr "Dupliciranje"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:221
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:222
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:228
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:229
 msgid "Error performing drop action"
 msgstr "Pogreška pri operaciji otpuštanja"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:244
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:251
 msgid "Open"
 msgstr "Otvoreno"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:245
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:252
 msgid "Open Containing Folder"
 msgstr "Otvori mapu koja sadrži"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:244
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:248
 msgid "Unma_ximize"
 msgstr "Vrati sa _maksimiziranoga"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:247
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:251
 msgid "Ma_ximize"
 msgstr "Po_većaj"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:252
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:255
 msgid "_Restore"
 msgstr "Vrati u izvorno stanje"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:255
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:258
 msgid "Mi_nimize"
 msgstr "Mi_nimiziraj"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:259
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:261
 msgid "_Close All"
 msgstr "_Zatvori sve"
 
@@ -659,64 +665,68 @@ msgstr ""
 msgid "_Clear Recent Documents..."
 msgstr "_Očisti skorašnje dokumente..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:149
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:148
 msgid "Lock Screen"
 msgstr "Zaključaj zaslon"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:152
 msgid "Log Out..."
 msgstr "Odjava..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:154
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
 msgid "Log Out"
 msgstr "Odjava"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:155
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:154
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
 msgstr "Jeste li sigurni da želite zatvoriti sve programe i odjaviti se?"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:160
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:159
 msgid "Suspend"
 msgstr "Stanje mirovanja"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:165
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:164
 msgid "Hibernate"
 msgstr "Hibernacija"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:171
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:170
 msgid "Restart..."
 msgstr "Ponovno pokretanje..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:172
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:171
 msgid "Restart"
 msgstr "Ponovno pokretanje"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:173
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:172
 msgid "Are you sure you want to close all programs and restart the computer?"
 msgstr ""
 "Jeste li sigurni da želite zatvoriti sve programe i ponovno pokrenuti "
 "računalo?"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:177
 msgid "Shut Down..."
 msgstr "Isključivanje..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
 msgid "Shut Down"
 msgstr "Isključivanje"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:180
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
 msgstr ""
 "Jeste li sigurni da želite zatvoriti sve programe i isključiti računalo?"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:73
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:50
+msgid "Drop to move to Trash"
+msgstr ""
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:77
 msgid "No items in Trash"
 msgstr "Nema predmeta u Smeću"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:75
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:79
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
@@ -724,20 +734,20 @@ msgstr[0] "{0} predmet u Smeću"
 msgstr[1] "{0} predmeta u Smeću"
 msgstr[2] "none"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:160
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:164
 msgid "_Open Trash"
 msgstr "_Otvori smeće"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:162
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:192
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:166
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:196
 msgid "Empty _Trash"
 msgstr "Isprazni _smeće"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:184
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:188
 msgid "Empty all of the items from the trash?"
 msgstr "Isprazniti sve stavke iz smeća?"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:186
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:190
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
@@ -850,11 +860,11 @@ msgstr "S_utra"
 msgid "{0} humidity"
 msgstr ""
 
+#~ msgid "Drop to open"
+#~ msgstr "Ispustite da otvorite"
+
 #~ msgid "Extensions"
 #~ msgstr "Nastavci"
-
-#~ msgid "Icon"
-#~ msgstr "Sličica"
 
 #~ msgid "<b>Active Plugins</b>"
 #~ msgstr "<b>Aktivne ekstenzije</b>"
@@ -901,6 +911,16 @@ msgstr ""
 #~ msgstr ""
 #~ "Docky treba compositng kako bi funkcionirao pravilno.  Molimo vas uključite "
 #~ "compositing i ponovno pokrenite Docky."
+
+#~ msgid ""
+#~ "Causes launchers which currently manage more than one window to have an "
+#~ "extra indicator under it."
+#~ msgstr ""
+#~ "Starteri koji imaju više od jednog prozora imati će dodatni indikator ispod "
+#~ "prateće sličice."
+
+#~ msgid "Indicat_e Multiple Windows"
+#~ msgstr "Prikaž_i Višestruke Prozore"
 
 #~ msgid "3D Background"
 #~ msgstr "3D Pozadina"
