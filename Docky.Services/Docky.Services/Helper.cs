@@ -132,17 +132,21 @@ namespace Docky.Services
 				if (DockServices.Helpers.ShowOutput && !string.IsNullOrEmpty (e.Data))
 					Log<Helper>.Info ("{0} :: {1}", File.Basename, e.Data);
 			};
-			Proc.Exited += delegate {
-				Log<Helper>.Info ("{0} has exited (Code {1}).", File.Basename, Proc.ExitCode);
-				Proc.Dispose ();
-				Proc = null;
-				IsRunning = false;
-			};
+			Proc.Exited += HandleExited;
 			
 			Proc.Start ();
 			Proc.BeginErrorReadLine ();
 			Proc.BeginOutputReadLine ();
 			IsRunning = true;
+		}
+		
+		void HandleExited (object o, EventArgs args)
+		{
+			Log<Helper>.Info ("{0} has exited (Code {1}).", File.Basename, Proc.ExitCode);
+			Proc.Exited -= HandleExited;
+			Proc.Dispose ();
+			Proc = null;
+			IsRunning = false;
 		}
 		
 		void Stop ()
@@ -156,6 +160,7 @@ namespace Docky.Services
 				Proc.CancelErrorRead ();
 				Proc.CancelOutputRead ();
 				
+				Proc.Exited -= HandleExited;
 				Proc.CloseMainWindow ();
 				Proc.WaitForExit (200);
 				if (!Proc.HasExited) {
