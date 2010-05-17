@@ -29,8 +29,6 @@ namespace Docky.Interface {
         
         private Gtk.Label label3;
         
-        private Gtk.CheckButton multiple_window_indicator_check;
-        
         private Gtk.CheckButton panel_mode_button;
         
         private Gtk.CheckButton threedee_check;
@@ -51,7 +49,7 @@ namespace Docky.Interface {
             this.vbox1.Name = "vbox1";
             this.vbox1.Spacing = 6;
             // Container child vbox1.Gtk.Box+BoxChild
-            this.table3 = new Gtk.Table(((uint)(8)), ((uint)(3)), false);
+            this.table3 = new Gtk.Table(((uint)(7)), ((uint)(3)), false);
             this.table3.Name = "table3";
             this.table3.RowSpacing = ((uint)(6));
             this.table3.ColumnSpacing = ((uint)(6));
@@ -138,20 +136,6 @@ namespace Docky.Interface {
             w6.XOptions = ((Gtk.AttachOptions)(4));
             w6.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table3.Gtk.Table+TableChild
-            this.multiple_window_indicator_check = new Gtk.CheckButton();
-            this.multiple_window_indicator_check.CanFocus = true;
-            this.multiple_window_indicator_check.Name = "multiple_window_indicator_check";
-            this.multiple_window_indicator_check.Label = Mono.Unix.Catalog.GetString("Indicat_e Multiple Windows");
-            this.multiple_window_indicator_check.DrawIndicator = true;
-            this.multiple_window_indicator_check.UseUnderline = true;
-            this.table3.Add(this.multiple_window_indicator_check);
-            Gtk.Table.TableChild w7 = ((Gtk.Table.TableChild)(this.table3[this.multiple_window_indicator_check]));
-            w7.TopAttach = ((uint)(6));
-            w7.BottomAttach = ((uint)(7));
-            w7.RightAttach = ((uint)(3));
-            w7.XOptions = ((Gtk.AttachOptions)(4));
-            w7.YOptions = ((Gtk.AttachOptions)(4));
-            // Container child table3.Gtk.Table+TableChild
             this.panel_mode_button = new Gtk.CheckButton();
             this.panel_mode_button.CanFocus = true;
             this.panel_mode_button.Name = "panel_mode_button";
@@ -159,12 +143,12 @@ namespace Docky.Interface {
             this.panel_mode_button.DrawIndicator = true;
             this.panel_mode_button.UseUnderline = true;
             this.table3.Add(this.panel_mode_button);
-            Gtk.Table.TableChild w8 = ((Gtk.Table.TableChild)(this.table3[this.panel_mode_button]));
-            w8.TopAttach = ((uint)(4));
-            w8.BottomAttach = ((uint)(5));
-            w8.RightAttach = ((uint)(3));
-            w8.XOptions = ((Gtk.AttachOptions)(4));
-            w8.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w7 = ((Gtk.Table.TableChild)(this.table3[this.panel_mode_button]));
+            w7.TopAttach = ((uint)(4));
+            w7.BottomAttach = ((uint)(5));
+            w7.RightAttach = ((uint)(3));
+            w7.XOptions = ((Gtk.AttachOptions)(4));
+            w7.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table3.Gtk.Table+TableChild
             this.threedee_check = new Gtk.CheckButton();
             this.threedee_check.CanFocus = true;
@@ -173,12 +157,12 @@ namespace Docky.Interface {
             this.threedee_check.DrawIndicator = true;
             this.threedee_check.UseUnderline = true;
             this.table3.Add(this.threedee_check);
-            Gtk.Table.TableChild w9 = ((Gtk.Table.TableChild)(this.table3[this.threedee_check]));
-            w9.TopAttach = ((uint)(5));
-            w9.BottomAttach = ((uint)(6));
-            w9.RightAttach = ((uint)(3));
-            w9.XOptions = ((Gtk.AttachOptions)(4));
-            w9.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w8 = ((Gtk.Table.TableChild)(this.table3[this.threedee_check]));
+            w8.TopAttach = ((uint)(5));
+            w8.BottomAttach = ((uint)(6));
+            w8.RightAttach = ((uint)(3));
+            w8.XOptions = ((Gtk.AttachOptions)(4));
+            w8.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table3.Gtk.Table+TableChild
             this.window_manager_check = new Gtk.CheckButton();
             this.window_manager_check.CanFocus = true;
@@ -188,12 +172,12 @@ namespace Docky.Interface {
             this.window_manager_check.UseUnderline = true;
             this.window_manager_check.Xalign = 0F;
             this.table3.Add(this.window_manager_check);
-            Gtk.Table.TableChild w10 = ((Gtk.Table.TableChild)(this.table3[this.window_manager_check]));
-            w10.TopAttach = ((uint)(7));
-            w10.BottomAttach = ((uint)(8));
-            w10.RightAttach = ((uint)(3));
-            w10.XOptions = ((Gtk.AttachOptions)(4));
-            w10.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w9 = ((Gtk.Table.TableChild)(this.table3[this.window_manager_check]));
+            w9.TopAttach = ((uint)(6));
+            w9.BottomAttach = ((uint)(7));
+            w9.RightAttach = ((uint)(3));
+            w9.XOptions = ((Gtk.AttachOptions)(4));
+            w9.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table3.Gtk.Table+TableChild
             this.zoom_checkbutton = new Gtk.CheckButton();
             this.zoom_checkbutton.CanFocus = true;
@@ -203,11 +187,11 @@ namespace Docky.Interface {
             this.zoom_checkbutton.UseUnderline = true;
             this.zoom_checkbutton.Xalign = 1F;
             this.table3.Add(this.zoom_checkbutton);
-            Gtk.Table.TableChild w11 = ((Gtk.Table.TableChild)(this.table3[this.zoom_checkbutton]));
-            w11.TopAttach = ((uint)(3));
-            w11.BottomAttach = ((uint)(4));
-            w11.XOptions = ((Gtk.AttachOptions)(4));
-            w11.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w10 = ((Gtk.Table.TableChild)(this.table3[this.zoom_checkbutton]));
+            w10.TopAttach = ((uint)(3));
+            w10.BottomAttach = ((uint)(4));
+            w10.XOptions = ((Gtk.AttachOptions)(4));
+            w10.YOptions = ((Gtk.AttachOptions)(4));
             // Container child table3.Gtk.Table+TableChild
             this.zoom_scale = new Gtk.HScale(null);
             this.zoom_scale.CanFocus = true;
@@ -221,18 +205,18 @@ namespace Docky.Interface {
             this.zoom_scale.Digits = 2;
             this.zoom_scale.ValuePos = ((Gtk.PositionType)(0));
             this.table3.Add(this.zoom_scale);
-            Gtk.Table.TableChild w12 = ((Gtk.Table.TableChild)(this.table3[this.zoom_scale]));
-            w12.TopAttach = ((uint)(3));
-            w12.BottomAttach = ((uint)(4));
-            w12.LeftAttach = ((uint)(1));
-            w12.RightAttach = ((uint)(3));
-            w12.XOptions = ((Gtk.AttachOptions)(4));
-            w12.YOptions = ((Gtk.AttachOptions)(4));
+            Gtk.Table.TableChild w11 = ((Gtk.Table.TableChild)(this.table3[this.zoom_scale]));
+            w11.TopAttach = ((uint)(3));
+            w11.BottomAttach = ((uint)(4));
+            w11.LeftAttach = ((uint)(1));
+            w11.RightAttach = ((uint)(3));
+            w11.XOptions = ((Gtk.AttachOptions)(4));
+            w11.YOptions = ((Gtk.AttachOptions)(4));
             this.vbox1.Add(this.table3);
-            Gtk.Box.BoxChild w13 = ((Gtk.Box.BoxChild)(this.vbox1[this.table3]));
-            w13.Position = 0;
-            w13.Expand = false;
-            w13.Fill = false;
+            Gtk.Box.BoxChild w12 = ((Gtk.Box.BoxChild)(this.vbox1[this.table3]));
+            w12.Position = 0;
+            w12.Expand = false;
+            w12.Fill = false;
             this.Add(this.vbox1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();
@@ -243,7 +227,6 @@ namespace Docky.Interface {
             this.window_manager_check.Toggled += new System.EventHandler(this.OnWindowManagerCheckToggled);
             this.threedee_check.Toggled += new System.EventHandler(this.OnThreedeeCheckToggled);
             this.panel_mode_button.Toggled += new System.EventHandler(this.OnPanelModeButtonToggled);
-            this.multiple_window_indicator_check.Toggled += new System.EventHandler(this.OnMultipleWindowIndicatorCheckToggled);
         }
     }
 }

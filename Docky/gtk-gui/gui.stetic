@@ -14,7 +14,7 @@
     <widget-library name="../../Docky.Widgets/bin/Debug/Docky.Widgets.dll" />
     <widget-library name="../bin/Debug/Docky.exe" internal="true" />
   </import>
-  <widget class="Gtk.Bin" id="Docky.Interface.DockPreferences" design-size="411 356">
+  <widget class="Gtk.Bin" id="Docky.Interface.DockPreferences" design-size="500 356">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <child>
@@ -24,7 +24,7 @@
         <child>
           <widget class="Gtk.Table" id="table3">
             <property name="MemberName" />
-            <property name="NRows">8</property>
+            <property name="NRows">7</property>
             <property name="NColumns">3</property>
             <property name="RowSpacing">6</property>
             <property name="ColumnSpacing">6</property>
@@ -170,32 +170,6 @@ Window Dodge</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.CheckButton" id="multiple_window_indicator_check">
-                <property name="MemberName" />
-                <property name="Tooltip" translatable="yes" />
-                <property name="CanFocus">True</property>
-                <property name="Label" translatable="yes">Indicat_e Multiple Windows</property>
-                <property name="DrawIndicator">True</property>
-                <property name="HasLabel">True</property>
-                <property name="UseUnderline">True</property>
-                <signal name="Toggled" handler="OnMultipleWindowIndicatorCheckToggled" />
-              </widget>
-              <packing>
-                <property name="TopAttach">6</property>
-                <property name="BottomAttach">7</property>
-                <property name="RightAttach">3</property>
-                <property name="AutoSize">True</property>
-                <property name="XOptions">Fill</property>
-                <property name="YOptions">Fill</property>
-                <property name="XExpand">False</property>
-                <property name="XFill">True</property>
-                <property name="XShrink">False</property>
-                <property name="YExpand">False</property>
-                <property name="YFill">True</property>
-                <property name="YShrink">False</property>
-              </packing>
-            </child>
-            <child>
               <widget class="Gtk.CheckButton" id="panel_mode_button">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
@@ -258,8 +232,8 @@ Window Dodge</property>
                 <signal name="Toggled" handler="OnWindowManagerCheckToggled" />
               </widget>
               <packing>
-                <property name="TopAttach">7</property>
-                <property name="BottomAttach">8</property>
+                <property name="TopAttach">6</property>
+                <property name="BottomAttach">7</property>
                 <property name="RightAttach">3</property>
                 <property name="AutoSize">True</property>
                 <property name="XOptions">Fill</property>

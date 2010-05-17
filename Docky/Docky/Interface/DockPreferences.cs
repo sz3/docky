@@ -177,7 +177,7 @@ namespace Docky.Interface
 		public bool IndicateMultipleWindows {
 			get {
 				if (!indicate_multiple_windows.HasValue)
-					indicate_multiple_windows = GetOption<bool?> ("IndicateMultipleWindows", false);
+					indicate_multiple_windows = GetOption<bool?> ("IndicateMultipleWindows", true);
 				return indicate_multiple_windows.Value;
 			}
 			set {
@@ -303,7 +303,7 @@ namespace Docky.Interface
 			SetOption<bool> ("FadeOnHide", false);
 			SetOption<double> ("FadeOpacity", 0);
 			SetOption<int?> ("IconSize", 48);
-			SetOption<bool?> ("IndicateMultipleWindows", false);
+			SetOption<bool?> ("IndicateMultipleWindows", true);
 			SetOption<string[]> ("Launchers", new string[0]);
 			SetOption<int?> ("MonitorNumber", 0);
 			SetOption<string[]> ("Plugins", new string[0]);
@@ -329,8 +329,6 @@ namespace Docky.Interface
 			this.Build ();
 			
 			// Manually set the tooltips <shakes fist at MD...>
-			multiple_window_indicator_check.TooltipMarkup = Mono.Unix.Catalog.GetString (
-			    "Causes launchers which currently manage more than one window to have an extra indicator under it.");
 			window_manager_check.TooltipMarkup = Mono.Unix.Catalog.GetString (
 			    "When set, windows which do not already have launchers on a dock will be added to this dock.");
 			
@@ -547,7 +545,6 @@ namespace Docky.Interface
 			fade_on_hide_check.Active = FadeOnHide;
 			threedee_check.Active = ThreeDimensional && Gdk.Screen.Default.IsComposited;
 			threedee_check.Sensitive = Position == DockPosition.Bottom && Gdk.Screen.Default.IsComposited;
-			multiple_window_indicator_check.Active = IndicateMultipleWindows;
 			
 			
 			window_manager_check.Active = DefaultProvider.IsWindowManager;
@@ -757,12 +754,6 @@ namespace Docky.Interface
 		{
 			if (ZoomPercentChanged != null)
 				ZoomPercentChanged (this, EventArgs.Empty);
-		}
-
-		protected virtual void OnMultipleWindowIndicatorCheckToggled (object sender, System.EventArgs e)
-		{
-			IndicateMultipleWindows = multiple_window_indicator_check.Active;
-			multiple_window_indicator_check.Active = IndicateMultipleWindows;
 		}
 		
 		protected virtual void OnWindowManagerCheckToggled (object sender, System.EventArgs e)
