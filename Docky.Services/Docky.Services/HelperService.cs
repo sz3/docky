@@ -53,6 +53,7 @@ namespace Docky.Services
 		}.Where (dir => dir.Exists).Distinct (new FileEqualityComparer ());
 		
 		public event EventHandler<HelperStatusChangedEventArgs> HelperStatusChanged;
+		public event EventHandler HelperInstalled;
 		public event EventHandler HelperUninstalled;
 		
 		public bool ShowOutput {
@@ -66,12 +67,12 @@ namespace Docky.Services
 			}
 		}
 
-		IPreferences prefs;
+		static IPreferences prefs = DockServices.Preferences.Get<HelperService> ();
+		
 		public List<Helper> Helpers { get; private set; }
 		
 		public HelperService ()
 		{
-			prefs = DockServices.Preferences.Get<HelperService> ();
 			Helpers = new List<Helper> ();
 			
 			// set up the file monitors to watch our script directories
@@ -91,6 +92,7 @@ namespace Docky.Services
 
 		void UpdateHelpers ()
 		{
+			List<Helper> old_helpers = Helpers.ToList ();
 			Helpers = Helpers.Where (h => h.File.Exists).ToList ();
 			
 			Helpers = HelperDirs
@@ -99,12 +101,37 @@ namespace Docky.Services
 				.Select (hf => LookupHelper (hf))
 				.Distinct (new HelperComparer ())
 				.ToList ();
+			
+			if (old_helpers.Count > 0) {
+				List<Helper> removed_helpers = old_helpers.Where (h => !Helpers.Contains (h)).ToList ();
+				if (removed_helpers.Count > 0) {
+					foreach (Helper h in removed_helpers) {
+						Log<HelperService>.Info ("Helper was removed: {0}", h.File.Path);
+						h.HelperStatusChanged -= OnHelperStatusChanged;
+						h.Dispose ();
+					}
+					OnHelperDeleted ();
+				}
+				
+				List<Helper> added_helpers = Helpers.Where (h => !old_helpers.Contains (h)).ToList ();
+				if (added_helpers.Count > 0) {
+					foreach (Helper h in added_helpers)
+						Log<HelperService>.Info ("New helper found: {0}", h.File.Path);
+					OnHelperAdded ();
+				}
+			}
 		}
 		
 		void OnHelperStatusChanged (object o, HelperStatusChangedEventArgs args)
 		{
 			if (HelperStatusChanged != null)
-				HelperStatusChanged (this, args);
+				HelperStatusChanged (o, args);
+		}
+		
+		void OnHelperAdded ()
+		{
+			if (HelperInstalled != null)
+				HelperInstalled (this, EventArgs.Empty);
 		}
 		
 		void OnHelperDeleted ()
@@ -151,9 +178,7 @@ namespace Docky.Services
 			}
 			
 			try {
-				List<Helper> currentHelpers = Helpers.ToList ();
 				UpdateHelpers ();
-				installedHelper = Helpers.Except (currentHelpers).First ();
 				return true;
 			} catch (Exception e) {
 				Log<HelperService>.Error ("Error trying to install helper '{0}': {1}", file.Path, e.Message);
@@ -176,7 +201,6 @@ namespace Docky.Services
 						helper.Data.IconFile.Delete ();
 				}
 				UpdateHelpers ();
-				OnHelperDeleted ();
 				return true;
 			} catch (Exception e) {
 				Log<HelperService>.Error ("Error trying to uninstall helper '{0}': {1}", helper.File.Path, e.Message);
@@ -184,6 +208,14 @@ namespace Docky.Services
 			}
 			
 			return false;
+		}
+		
+		public void Dispose ()
+		{
+			foreach (Helper h in Helpers) {
+				h.HelperStatusChanged -= OnHelperStatusChanged;
+				h.Dispose ();
+			}
 		}
 	}
 }

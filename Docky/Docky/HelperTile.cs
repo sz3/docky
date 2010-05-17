@@ -35,7 +35,7 @@ namespace Docky
 		public HelperTile (Helper helper)
 		{
 			this.Helper = helper;
-			Helper.HelperStatusChanged += HandleHelperHelperStatusChanged;
+			DockServices.Helpers.HelperStatusChanged += HandleHelperHelperStatusChanged;
 			
 			AddButtonStock = Gtk.Stock.Execute;
 			SubDescriptionTitle = Catalog.GetString ("Status");
@@ -96,7 +96,7 @@ namespace Docky
 		
 		public override void Dispose ()
 		{
-			Helper.HelperStatusChanged -= HandleHelperHelperStatusChanged;
+			DockServices.Helpers.HelperStatusChanged -= HandleHelperHelperStatusChanged;
 			Helper = null;
 			
 			base.Dispose ();

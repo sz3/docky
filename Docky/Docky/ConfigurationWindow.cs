@@ -157,6 +157,9 @@ namespace Docky
 			HelpersTileview.IconSize = 48;
 			helper_scroll.AddWithViewport (HelpersTileview);
 			
+			DockServices.Helpers.HelperInstalled += delegate {
+				RefreshHelpers ();
+			};
 			DockServices.Helpers.HelperUninstalled += delegate {
 				RefreshHelpers ();
 			};
