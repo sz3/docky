@@ -815,7 +815,7 @@ namespace Docky.Windowing
 				
 				// for openoffice
 				if (exec.Contains (' ') &&
-					(exec.StartsWith ("ooffice") || exec.StartsWith ("openoffice.org3") || exec.StartsWith ("soffice.bin"))) {
+					(exec.StartsWith ("ooffice") || exec.StartsWith ("openoffice") || exec.StartsWith ("soffice"))) {
 					vexec = "ooffice" + exec.Split (' ') [1];
 				
 				// for wine apps
