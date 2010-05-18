@@ -49,6 +49,22 @@ namespace GMail
 		
 		public static string DefaultLabel { get { return "Inbox"; } }
 		
+		string BaseUrl {
+			get {
+				string[] login = GMailPreferences.User.Split (new char[] {'@'});
+				string domain = login.Length > 1 ? login [1] : "gmail.com";
+				string url = "https://mail.google.com/";
+				
+				// add the domain
+				if (domain == "gmail.com" || domain == "googlemail.com")
+					url += "mail";
+				else
+					url += "a/" + domain;
+				
+				return url;
+			}
+		}
+		
 		GMailItemProvider parent;
 		ConfigDialog config;
 				
@@ -134,21 +150,11 @@ namespace GMail
 				surface.Context.PaintWithAlpha (.5);
 			}
 		}
-	
+		
 		void OpenInbox ()
 		{
-			string[] login = GMailPreferences.User.Split (new char[] {'@'});
-			string domain = login.Length > 1 ? login [1] : "gmail.com";
-			string url = "https://mail.google.com/";
+			String url = BaseUrl + "/#";
 			
-			// add the domain
-			if (domain == "gmail.com" || domain == "googlemail.com")
-				url += "mail";
-			else
-				url += "a/" + domain;
-			
-			url += "/#";
-
 			// going to a custom label
 			if (Atom.CurrentLabel != DefaultLabel)
 				url += "label/";
@@ -201,7 +207,7 @@ namespace GMail
 				items.Add (new MenuItem (Catalog.GetString ("_Compose Mail"),
 					"mail-message-new",
 					delegate {
-						DockServices.System.Open ("https://mail.google.com/mail/#compose");
+						DockServices.System.Open (BaseUrl + "/#compose");
 					}));
 				
 				if (Atom.HasUnread) {
