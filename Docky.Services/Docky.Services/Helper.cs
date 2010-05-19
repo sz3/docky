@@ -157,6 +157,10 @@ namespace Docky.Services
 			Log<Helper>.Info ("Stopping {0}", File.Basename);
 			
 			DockServices.System.RunOnThread (delegate {
+				// we check again because there is a bit of a race condition
+				if (Proc == null)
+					return;
+				
 				if (!Proc.HasExited) {
 					Proc.CancelErrorRead ();
 					Proc.CancelOutputRead ();
