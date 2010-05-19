@@ -45,7 +45,11 @@ namespace Docky.Services
 					user_cache_folder = home_folder.GetChild (".cache").GetChild ("docky");
 				
 				if (!user_cache_folder.Exists)
-					user_cache_folder.MakeDirectoryWithParents (null);
+					try {
+						user_cache_folder.MakeDirectoryWithParents (null);
+					} catch {
+						Log<PathsService>.Fatal ("Could not access the cache directory '" + user_cache_folder.Path + "' or create it.  Docky will not work properly unless this folder is writable.");
+					}
 				
 				return user_cache_folder;
 			}
