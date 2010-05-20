@@ -187,7 +187,6 @@ namespace Docky.Interface
 		/// </summary>
 		double remove_index;
 		int remove_size;
-		int maxIconSize;
 		
 		uint animation_timer;
 		uint icon_size_timer;
@@ -503,10 +502,7 @@ namespace Docky.Interface
 			get { return Math.Min (MaxIconSize, Preferences.IconSize); }
 		}
 		
-		int MaxIconSize {
-			get { return Math.Min (Preferences.IconSize, maxIconSize); }
-			set { maxIconSize = value; } 
-		}
+		int MaxIconSize { get; set; }
 		
 		int Monitor {
 			get { return Preferences.MonitorNumber; }
@@ -674,13 +670,6 @@ namespace Docky.Interface
 					zoom_in_buffer = zoom;
 				
 				return zoom;
-			}
-		}
-		
-		double ZoomSize {
-			get { 
-				// 330 chosen for its pleasant (to me) look
-				return 330 * IconSize / 128.0; 
 			}
 		}
 
@@ -1698,21 +1687,24 @@ namespace Docky.Interface
 				double centerPosition = center.X;
 				
 				// ZoomPercent is a number greater than 1.  It should never be less than one.
-				// zoomInPercent is a range of 0 to 1. we need a number that is 1 when ZoomIn is 0,
-				// and ZoomPercent when ZoomIn is 1.  Then we treat this as if it were the
-				// ZoomPercent for the rest of the calculation
+				
+				// zoomInPercent is a range of 1 to ZoomPercent.
+				// We need a number that is 1 when ZoomIn is 0, and ZoomPercent when ZoomIn is 1.
+				// Then we treat this as if it were the ZoomPercent for the rest of the calculation.
 				double zoomInPercent = 1 + (ZoomPercent - 1) * ZoomIn;
 				
-				// offset from the center of the true position, ranged between 0 and half of the zoom range
-				double offset = Math.Min (Math.Abs (cursorPosition - centerPosition), (int) ZoomSize);
+				double zoomSize = ZoomEnabled ? ZoomedIconSize : 2.0 * IconSize;
+				
+				// offset from the center of the true position, ranged between 0 and the zoom size
+				double offset = Math.Min (Math.Abs (cursorPosition - centerPosition), zoomSize);
 				
 				double offsetPercent;
 				if (ExternalDragActive) {
 					// Provide space for dropping between items
-					offset += offset * ZoomedIconSize / ZoomSize;
-					offsetPercent = Math.Min (1, offset / (ZoomSize + ZoomedIconSize));
+					offset += offset * zoomSize / IconSize;
+					offsetPercent = Math.Min (1, offset / (zoomSize + ZoomedIconSize));
 				} else {
-					offsetPercent = offset / ZoomSize;
+					offsetPercent = offset / zoomSize;
 				}
 				
 				if (offsetPercent > .99)
@@ -1727,10 +1719,10 @@ namespace Docky.Interface
 				// g(x) == a term used to move the ends of the zoom inward.  Precalculated that the edges should be 66% of the current
 				//         value. The center is 100%. (1 - offsetPercent) == 0,1 distance from center
 				// The .66 value comes from the area under the curve.  Dont ask me to explain it too much because it's too clever for me.
-
+				
 				// for external drags with no zoom, we pretend there is actually a zoom of 200%
 				if (ExternalDragActive && ZoomPercent == 1)
-					offset *= 2.0 * ZoomIn / 3.0;
+					offset *= ZoomIn / 2.0;
 				else
 					offset *= zoomInPercent - 1;
 				offset *= 1 - offsetPercent / 3;
