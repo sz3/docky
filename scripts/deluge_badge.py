@@ -52,7 +52,7 @@ def bytes2ratestr(bytes):
 	return str(amount) + suffix
 	
 
-class DockyLifereaItem(DockyItem):
+class DockyDelugeItem(DockyItem):
 	def __init__(self, path):
 		DockyItem.__init__(self, path)
 		
@@ -82,12 +82,12 @@ class DockyLifereaItem(DockyItem):
 			return False
 	
 
-class DockyLifereaSink(DockySink):
+class DockyDelugeSink(DockySink):
 	def item_path_found(self, pathtoitem, item):
 		if item.GetOwnsDesktopFile() and item.GetDesktopFile().endswith ("deluge.desktop"):
-			self.items[pathtoitem] = DockyLifereaItem(pathtoitem)
+			self.items[pathtoitem] = DockyDelugeItem(pathtoitem)
 
-dockysink = DockyLifereaSink()
+dockysink = DockyDelugeSink()
 
 def cleanup ():
 	dockysink.dispose ()
