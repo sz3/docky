@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-17 08:04+0200\n"
+"POT-Creation-Date: 2010-05-21 23:46-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -150,17 +150,17 @@ msgstr ""
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:379
+#: ../Docky/Docky/Interface/DockWindow.cs:378
 msgid "Drag to reposition"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:391
-#: ../Docky/Docky/Interface/DockWindow.cs:405
+#: ../Docky/Docky/Interface/DockWindow.cs:390
+#: ../Docky/Docky/Interface/DockWindow.cs:404
 msgid "Drop to add to dock"
 msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:114
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:223
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:239
 msgid "_Settings"
 msgstr ""
@@ -488,6 +488,11 @@ msgstr ""
 msgid "(no subject)"
 msgstr ""
 
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:269
+#, csharp-format
+msgid "You have {0} new, unread messages"
+msgstr ""
+
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 #, csharp-format
 msgid "From: {0}"
@@ -515,34 +520,34 @@ msgstr ""
 msgid "GMail Configuration"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:79
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 msgid "No unread mail"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:82
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:98
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:103
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:119
 msgid "Checking mail..."
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:196
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:202
 msgid "_View "
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:207
 msgid "_Compose Mail"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:208
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:214
 msgid "New Mail"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:226
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:232
 msgid "Check _Mail"
 msgstr ""
 
@@ -699,6 +704,46 @@ msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
 msgid "Are you sure you want to close all programs and shut down the computer?"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:75
+#, csharp-format
+msgid "A timer set for {0} has expired."
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:175
+msgid "Time remaining:"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:177
+msgid "Timer paused, time remaining:"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:61
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:65
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:70
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:126
+#, csharp-format
+msgid "Click to create a timer for {0}."
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:143
+msgid "Automatically _Start Timers"
 msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:50

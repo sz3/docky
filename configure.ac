@@ -218,6 +218,8 @@ StandardPlugins/RecentDocuments/Makefile
 StandardPlugins/RecentDocuments/Resources/RecentDocuments.addin.xml
 StandardPlugins/SessionManager/Makefile
 StandardPlugins/SessionManager/Resources/SessionManager.addin.xml
+StandardPlugins/Timer/Makefile
+StandardPlugins/Timer/Resources/Timer.addin.xml
 StandardPlugins/Trash/Makefile
 StandardPlugins/Trash/Resources/Trash.addin.xml
 StandardPlugins/Weather/Makefile

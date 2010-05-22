@@ -1,0 +1,150 @@
+//  
+//  Copyright (C) 2010 Robert Dyer
+// 
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+// 
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+// 
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// 
+
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+
+using Mono.Unix;
+
+using GConf;
+using GLib;
+
+using Docky.Items;
+using Docky.Menus;
+using Docky.Services;
+
+namespace Timer
+{
+	public class TimerMainDockItem : IconDockItem
+	{
+		static IPreferences prefs = DockServices.Preferences.Get<TimerMainDockItem> ();
+		
+		public override string UniqueID ()
+		{
+			return "TimerMainItem";
+		}
+		
+		static TimerMainDockItem ()
+		{
+			defaultTimer = (uint) prefs.Get<int> ("DefaultTimer", 60);
+			autoStart = prefs.Get<bool> ("AutoStartTimers", false);
+		}
+		
+		public static string TimeRemaining (uint remaining)
+		{
+			if (remaining == 0)
+				return "none";
+			
+			uint hours = (uint) (remaining / 3600);
+			uint mins = (uint) ((remaining - 3600 * hours) / 60);
+			uint secs = remaining - 3600 * hours - 60 * mins;
+			String text = "";
+			
+			if (hours > 0)
+				text += hours + " " + Catalog.GetPluralString ("hour", "hours", (int) hours);
+			if (mins > 0) {
+				if (text.Length > 0)
+					text += " ";
+				text += mins + " " + Catalog.GetPluralString ("minute", "minutes", (int) mins);
+			}
+			if (secs > 0) {
+				if (text.Length > 0)
+					text += " ";
+				text += secs + " " + Catalog.GetPluralString ("second", "seconds", (int) secs);
+			}
+			return text;
+		}
+		
+		static uint defaultTimer;
+		public static uint DefaultTimer {
+			get { return defaultTimer; }
+			set {
+				if (defaultTimer == value)
+					return;
+				defaultTimer = value;
+				prefs.Set<int> ("DefaultTimer", (int) value);
+			}
+		}
+		
+		static bool autoStart;
+		public static bool AutoStartTimers {
+			get { return autoStart; }
+			set {
+				if (autoStart == value)
+					return;
+				autoStart = value;
+				prefs.Set<bool> ("AutoStartTimers", value);
+			}
+		}
+		
+		TimerItemProvider provider;
+		
+		public TimerMainDockItem (TimerItemProvider provider)
+		{
+			this.provider = provider;
+			Icon = "clock";
+			UpdateHoverText ();
+		}
+
+		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
+		{
+			uint amount = 1;
+			
+			if ((mod & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask)
+				amount = 60;
+			else if ((mod & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask)
+				amount = 3600;
+			
+			if (direction == Gdk.ScrollDirection.Up || direction == Gdk.ScrollDirection.Right) {
+				DefaultTimer += amount;
+			} else if (DefaultTimer > amount) {
+				DefaultTimer -= amount;
+			}
+			
+			UpdateHoverText ();
+		}
+		
+		void UpdateHoverText ()
+		{
+			HoverText = string.Format (Catalog.GetString ("Click to create a timer for {0}."), TimeRemaining (DefaultTimer));
+		}
+		
+		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
+		{
+			if (button == 1) {
+				provider.NewTimer ();
+				return ClickAnimation.Bounce;
+			}
+			
+			return ClickAnimation.None;
+		}
+		
+		protected override MenuList OnGetMenuItems ()
+		{
+			MenuList list = base.OnGetMenuItems ();
+			
+			list[MenuListContainer.Actions].Add (new IconMenuItem (Catalog.GetString ("Automatically _Start Timers"), AutoStartTimers ? "gtk-apply" : "gtk-remove", delegate {
+				AutoStartTimers = !AutoStartTimers;
+			}));
+			
+			return list;
+		}
+	}
+}
