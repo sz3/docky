@@ -266,7 +266,7 @@ namespace GMail
 					
 					if (GMailPreferences.Notify) {
 						if (NewCount > 5)
-							Log.Notify (CurrentLabel, "gmail", "You have {0} new, unread messages", NewCount);
+							Log.Notify (CurrentLabel, "gmail", Catalog.GetString ("You have {0} new, unread messages"), NewCount);
 						else
 							foreach (UnreadMessage message in tmp)
 								if (message.SendDate > GMailPreferences.LastChecked)
