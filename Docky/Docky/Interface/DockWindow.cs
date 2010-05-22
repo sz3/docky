@@ -1667,13 +1667,13 @@ namespace Docky.Interface
 				DrawValue val = new DrawValue ();
 				int iconSize = IconSize;
 				
-				if (!adi.Square) {
-					DockySurface icon = adi.IconSurface (surface, iconSize, iconSize, VisibleDockHeight);
-					iconSize = (adi.RotateWithDock || !Preferences.IsVertical) ? icon.Width : icon.Height;
-				}
-				
 				// div by 2 may result in rounding errors? Will this render OK? Shorts WidthBuffer by 1?
 				double halfSize = iconSize / 2.0;
+				
+				if (!adi.Square) {
+					DockySurface icon = adi.IconSurface (surface, iconSize, iconSize, VisibleDockHeight);
+					halfSize = ((adi.RotateWithDock || !Preferences.IsVertical) ? icon.Width : icon.Height) / 2.0;
+				}
 				
 				// animate adding new icon
 				halfSize *= Math.Min (1, (DateTime.UtcNow - adi.AddTime).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds);
