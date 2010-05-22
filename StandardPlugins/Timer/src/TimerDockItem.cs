@@ -179,6 +179,22 @@ namespace Timer
 			HoverText = text + TimerMainDockItem.TimeRemaining (remaining);
 		}
 		
+		protected override MenuList OnGetMenuItems ()
+		{
+			MenuList list = base.OnGetMenuItems ();
+			
+			list[MenuListContainer.Actions].Add (new MenuItem (Running ? Catalog.GetString ("_Pause Timer") : Catalog.GetString ("_Start Timer"), "gtk-remove", delegate {
+				Toggle ();
+			}));
+			
+			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Remove Timer"), "gtk-remove", delegate {
+				if (Finished != null)
+					Finished (this, EventArgs.Empty);
+			}));
+			
+			return list;
+		}
+		
 		public override void Dispose ()
 		{
 			if (Running)
