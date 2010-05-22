@@ -18,6 +18,7 @@
 #
 
 import atexit
+import gconf
 import gobject
 import glib
 import sys
@@ -34,6 +35,12 @@ except ImportError, e:
 class DockyTerminalItem(DockyItem):
 	def __init__(self, path):
 		DockyItem.__init__(self, path)
+		
+		client = gconf.client_get_default()
+		self.terminal = client.get_string("/desktop/gnome/applications/terminal/exec")
+		if self.terminal == None:
+			self.terminal = "gnome-terminal"
+		
 		self.path = urllib.unquote(str(self.iface.GetUri ()[7:]))
 		if not os.path.isdir (self.path):
 			self.path = os.path.dirname (self.path)
@@ -42,7 +49,8 @@ class DockyTerminalItem(DockyItem):
 
 	def menu_pressed(self, menu_id):
 		if self.id_map[menu_id] == "Open Terminal Here":
-			os.system ("gnome-terminal --working-directory=\"" + self.path + "\"")
+			os.chdir(self.path);
+			os.system ('%s &' % self.terminal)
 		
 	def add_menu_item(self, name, icon):
 		menu_id = self.iface.AddMenuItem(name, icon, "actions")
