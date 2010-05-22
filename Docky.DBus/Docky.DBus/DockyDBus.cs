@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -25,10 +25,12 @@ using Docky.Items;
 
 namespace Docky.DBus
 {
-
-
 	public class DockyDBus : IDockyDBus
 	{
+		public event Action QuitCalled;
+		public event Action SettingsCalled;
+		public event Action AboutCalled;
+		
 		#region IDockyDBus implementation
 		public event ItemChangedHandler ItemAdded;
 		
@@ -76,18 +78,22 @@ namespace Docky.DBus
 		
 		public void ShowAbout ()
 		{
+			if (AboutCalled != null)
+				AboutCalled ();
 		}
 		
 		
 		public void ShowSettings ()
 		{
+			if (SettingsCalled != null)
+				SettingsCalled ();
 		}
 		
 		
 		public void Quit ()
 		{
-			// fixme
-			System.Environment.Exit (0);
+			if (QuitCalled != null)
+				QuitCalled ();
 		}
 		
 		#endregion

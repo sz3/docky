@@ -83,6 +83,15 @@ namespace Docky
 			};
 			
 			DBusManager.Default.Initialize ();
+			DBusManager.Default.QuitCalled += delegate {
+				Quit ();
+			};
+			DBusManager.Default.SettingsCalled += delegate {
+				ConfigurationWindow.Instance.Show ();
+			};
+			DBusManager.Default.AboutCalled += delegate {
+				ShowAbout ();
+			};
 			PluginManager.Initialize ();
 			Controller.Initialize ();
 			

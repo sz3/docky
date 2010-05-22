@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -30,12 +30,15 @@ using Docky.Services;
 
 namespace Docky.DBus
 {
-	
 	public class DBusManager
 	{
 		const string BusName        = "org.gnome.Docky";
 		const string DockyPath      = "/org/gnome/Docky";
 		const string ItemsPath      = "/org/gnome/Docky/Items";
+		
+		public event Action QuitCalled;
+		public event Action SettingsCalled;
+		public event Action AboutCalled;
 		
 		static DBusManager manager;
 		public static DBusManager Default {
@@ -75,6 +78,9 @@ namespace Docky.DBus
 			
 			ObjectPath dockyPath = new ObjectPath (DockyPath);
 			docky = new DockyDBus ();
+			docky.QuitCalled += HandleQuitCalled;
+			docky.SettingsCalled += HandleSettingsCalled;
+			docky.AboutCalled += HandleAboutCalled;
 			
 			bus.Register (dockyPath, docky);
 			
@@ -135,6 +141,24 @@ namespace Docky.DBus
 		{
 			
 			return ItemsPath + "/" + Math.Abs (item.UniqueID ().GetHashCode ());
+		}
+		
+		public void HandleAboutCalled ()
+		{
+			if (AboutCalled != null)
+				AboutCalled ();
+		}
+		
+		public void HandleSettingsCalled ()
+		{
+			if (SettingsCalled != null)
+				SettingsCalled ();
+		}
+		
+		public void HandleQuitCalled ()
+		{
+			if (QuitCalled != null)
+				QuitCalled ();
 		}
 	}
 }
