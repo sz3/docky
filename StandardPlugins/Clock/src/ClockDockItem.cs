@@ -193,24 +193,26 @@ namespace Clock
 			else
 				HoverText = DateTime.Now.ToString ("ddd, MMM dd h:mm tt");
 			
-			int size = Math.Min (surface.Width, surface.Height);
-			
-			if (ShowDigital && Square)
-				MakeSquareDigitalIcon (surface.Context, size);
-			else if (ShowDigital && !Square)
-				MakeRectangularDigitalIcon (surface.Context, size);
-			else
-				MakeAnalogIcon (surface.Context, size);
+			if (ShowDigital) {
+				if (Square)
+					MakeSquareDigitalIcon (surface);
+				else
+					MakeRectangularDigitalIcon (surface);
+			} else {
+				MakeAnalogIcon (surface.Context, Math.Min (surface.Width, surface.Height));
+			}
 		}
 		
-		void MakeSquareDigitalIcon (Context cr, int size)
+		void MakeSquareDigitalIcon (DockySurface surface)
 		{
+			Context cr = surface.Context;
+			
 			// useful sizes
-			int timeSize = size / 4;
-			int dateSize = size / 5;
-			int ampmSize = size / 5;
+			int timeSize = surface.Height / 4;
+			int dateSize = surface.Height / 5;
+			int ampmSize = surface.Height / 5;
 			int spacing = timeSize / 2;
-			int center = size / 2;
+			int center = surface.Height / 2;
 			
 			// shared by all text
 			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
@@ -218,7 +220,7 @@ namespace Clock
 			layout.FontDescription = new Gtk.Style().FontDescription;
 			layout.FontDescription.Weight = Pango.Weight.Bold;
 			layout.Ellipsize = Pango.EllipsizeMode.None;
-			layout.Width = Pango.Units.FromPixels (size);
+			layout.Width = Pango.Units.FromPixels (surface.Width);
 			
 			
 			// draw the time, outlined
@@ -233,7 +235,7 @@ namespace Clock
 			layout.GetPixelExtents (out inkRect, out logicalRect);
 			
 			int timeYOffset = ShowMilitary ? timeSize : timeSize / 2;
-			int timeXOffset = (size - inkRect.Width) / 2;
+			int timeXOffset = (surface.Width - inkRect.Width) / 2;
 			if (ShowDate)
 				cr.MoveTo (timeXOffset, timeYOffset);
 			else
@@ -252,7 +254,7 @@ namespace Clock
 				
 				layout.SetText (DateTime.Now.ToString ("MMM dd"));
 				layout.GetPixelExtents (out inkRect, out logicalRect);
-				cr.MoveTo ((size - inkRect.Width) / 2, size - spacing - dateSize);
+				cr.MoveTo ((surface.Width - inkRect.Width) / 2, surface.Height - spacing - dateSize);
 				
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.LineWidth = 2.5;
@@ -265,7 +267,7 @@ namespace Clock
 			if (!ShowMilitary) {
 				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (ampmSize);
 				
-				int yOffset = ShowDate ? center - spacing : size - spacing - ampmSize;
+				int yOffset = ShowDate ? center - spacing : surface.Height - spacing - ampmSize;
 				
 				// draw AM indicator
 				layout.SetText ("am");
@@ -285,12 +287,14 @@ namespace Clock
 			}
 		}
 		
-		void MakeRectangularDigitalIcon (Context cr, int size)
+		void MakeRectangularDigitalIcon (DockySurface surface)
 		{
+			Context cr = surface.Context;
+			
 			// useful sizes
-			int timeSize = size / 3;
-			int dateSize = size / 4;
-			int ampmSize = size / 4;
+			int timeSize = surface.Height / 3;
+			int dateSize = surface.Height / 4;
+			int ampmSize = surface.Height / 4;
 			int spacing = timeSize / 2;
 			
 			// shared by all text
@@ -299,7 +303,7 @@ namespace Clock
 			layout.FontDescription = new Gtk.Style().FontDescription;
 			layout.FontDescription.Weight = Pango.Weight.Bold;
 			layout.Ellipsize = Pango.EllipsizeMode.None;
-			layout.Width = Pango.Units.FromPixels (size);
+			layout.Width = Pango.Units.FromPixels (surface.Width);
 			
 			
 			// draw the time, outlined
@@ -316,7 +320,7 @@ namespace Clock
 			int timeYOffset = timeSize / 2;
 			if (!ShowDate)
 				timeYOffset += timeSize / 2;
-			cr.MoveTo (size - inkRect.Width / 2, timeYOffset);
+			cr.MoveTo ((surface.Width - inkRect.Width) / 2, timeYOffset);
 			
 			Pango.CairoHelper.LayoutPath (cr, layout);
 			cr.LineWidth = 2;
@@ -331,7 +335,7 @@ namespace Clock
 				
 				layout.SetText (DateTime.Now.ToString ("MMM dd"));
 				layout.GetPixelExtents (out inkRect, out logicalRect);
-				cr.MoveTo (size - inkRect.Width / 2, size - spacing - dateSize);
+				cr.MoveTo ((surface.Width - inkRect.Width) / 2, surface.Height - spacing - dateSize);
 				
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.Color = new Cairo.Color (0, 0, 0, 0.5);
@@ -352,7 +356,7 @@ namespace Clock
 				int yOffset = timeSize;
 				if (!ShowDate)
 					yOffset += timeSize / 2;
-				cr.MoveTo (2 * size - logicalRect.Width, yOffset - inkRect.Height);
+				cr.MoveTo (surface.Width - logicalRect.Width, yOffset - inkRect.Height);
 				
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.Color = new Cairo.Color (1, 1, 1, 0.8);
