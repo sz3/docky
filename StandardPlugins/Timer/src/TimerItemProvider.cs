@@ -66,12 +66,6 @@ namespace Timer
 			return true;
 		}
 		
-		public override bool Separated {
-			get {
-				return true;
-			}
-		}
-		
 		#endregion
 
 		List<AbstractDockItem> items;
