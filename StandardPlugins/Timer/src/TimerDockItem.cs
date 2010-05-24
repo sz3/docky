@@ -82,6 +82,8 @@ namespace Timer
 		
 		public TimerDockItem ()
 		{
+			ScalableRendering = false;
+			
 			id = id_counter++;
 			Remaining = Length = TimerMainDockItem.DefaultTimer;
 			LastRender = DateTime.UtcNow;
