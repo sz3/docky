@@ -54,13 +54,7 @@ namespace Timer
 		public override bool RemoveItem (AbstractDockItem item)
 		{
 			if (item is TimerMainDockItem) {
-				Items = Enumerable.Empty<AbstractDockItem> ();
-				foreach (AbstractDockItem adi in items) {
-					if (adi is TimerDockItem)
-						(adi as TimerDockItem).Finished -= HandleTimerFinished;
-					adi.Dispose ();
-				}
-				items = new List<AbstractDockItem> ();
+				Dispose ();
 			} else {
 				TimerDockItem timer = item as TimerDockItem;
 				timer.Finished -= HandleTimerFinished;

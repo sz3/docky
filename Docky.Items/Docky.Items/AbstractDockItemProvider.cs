@@ -40,6 +40,10 @@ namespace Docky.Items
 			get { return false; }
 		}
 		
+		public virtual bool AutoDisable {
+			get { return true; }
+		}
+		
 		IEnumerable<AbstractDockItem> items;
 		public IEnumerable<AbstractDockItem> Items {
 			get { return items; }

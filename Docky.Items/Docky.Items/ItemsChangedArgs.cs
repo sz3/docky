@@ -23,8 +23,8 @@ namespace Docky.Items
 {
 	public class ItemsChangedArgs : EventArgs
 	{
-		public IEnumerable<AbstractDockItem> AddedItems { get; set; }
-		public IEnumerable<AbstractDockItem> RemovedItems { get; set; }
+		public IEnumerable<AbstractDockItem> AddedItems { get; protected set; }
+		public IEnumerable<AbstractDockItem> RemovedItems { get; protected set; }
 
 		public ItemsChangedArgs ()
 		{

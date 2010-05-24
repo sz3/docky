@@ -749,16 +749,16 @@ namespace Docky.Interface
 			DateTime now = DateTime.UtcNow;
 			
 			foreach (AbstractDockItem adi in Items) {
-				//Waiting Items
+				// Waiting Items
 				if ((adi.State & ItemState.Wait) != 0)
 					return true;
-				//Moving Items
+				// Moving Items
 				if (now - adi.StateSetTime (ItemState.Move) < SlideTime)
 					return true;
-				//Bouncing Items
+				// Bouncing Items
 				if ((now - adi.LastClick) < BounceTime || (now - adi.StateSetTime (ItemState.Urgent)) < BounceTime)
 					return true;
-				//Glowing Items
+				// Glowing Items
 				if ((now - adi.StateSetTime (ItemState.Urgent)) < Docky.Controller.GlowTime)
 					return true;
 			}
@@ -883,22 +883,24 @@ namespace Docky.Interface
 		
 		void ProviderItemsChanged (object sender, ItemsChangedArgs args)
 		{
-			foreach (AbstractDockItem item in args.AddedItems) {
+			foreach (AbstractDockItem item in args.AddedItems)
 				RegisterItem (item);
-			}
 			
 			foreach (AbstractDockItem item in args.RemovedItems) {
 				remove_time = DateTime.UtcNow;
-				UnregisterItem (item);
-				
 				remove_index = Items.IndexOf (item) - .5;
 				remove_size = IconSize; //FIXME
+				
+				UnregisterItem (item);
 			}
 			
 			UpdateCollectionBuffer ();
-			UpdateMaxIconSize ();
-			
 			AnimatedDraw ();
+			
+			AbstractDockItemProvider provider = sender as AbstractDockItemProvider;
+			
+			if (provider.Items.Count () == 0 && provider.AutoDisable)
+				preferences.RemoveProvider (provider);
 		}
 		
 		void RegisterItem (AbstractDockItem item)
@@ -1506,7 +1508,6 @@ namespace Docky.Interface
 				
 				if (Height >= 1009 && Height <= 1024)
 					Height = 1026;
-				
 			}
 			
 			SetSizeRequest (Width, Height);
@@ -1525,7 +1526,7 @@ namespace Docky.Interface
 			QueueDraw ();
 			
 			if (AnimationState.AnimationNeeded)
-				animation_timer = GLib.Timeout.Add (1000/60, OnDrawTimeoutElapsed);
+				animation_timer = GLib.Timeout.Add (1000 / 60, OnDrawTimeoutElapsed);
 		}
 		
 		bool OnDrawTimeoutElapsed ()
@@ -1535,8 +1536,7 @@ namespace Docky.Interface
 			if (AnimationState.AnimationNeeded)
 				return true;
 			
-			//reset the timer to 0 so that the next time AnimatedDraw is called we fall back into
-			//the draw loop.
+			// reset the timer to 0 so that the next time AnimatedDraw is called we fall back into the draw loop.
 			if (animation_timer > 0)
 				GLib.Source.Remove (animation_timer);
 			animation_timer = 0;

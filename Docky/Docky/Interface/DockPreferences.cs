@@ -460,6 +460,10 @@ namespace Docky.Interface
 			item_providers.Remove (provider);
 			
 			OnItemProvidersChanged (null, provider.AsSingle ());
+			
+			PluginManager.Disable (provider);
+			provider.Dispose ();
+			
 			SyncPlugins ();
 		}
 		
@@ -793,12 +797,12 @@ namespace Docky.Interface
 		{
 			OnItemProvidersChanged (null, item_providers);
 			
-			foreach (AbstractDockItemProvider adip in item_providers.Where (adip => adip != DefaultProvider)) {
-				PluginManager.Disable (adip);
-			}
+			foreach (AbstractDockItemProvider provider in item_providers.Where (adip => adip != DefaultProvider))
+				PluginManager.Disable (provider);
 			
 			foreach (AbstractDockItemProvider provider in item_providers)
 				provider.Dispose ();
+			
 			item_providers = new List<AbstractDockItemProvider> ();
 			FileApplicationProvider.WindowManager.UpdateTransientItems ();
 			
