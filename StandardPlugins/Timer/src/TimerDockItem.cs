@@ -99,15 +99,16 @@ namespace Timer
 			int size = Math.Min (surface.Width, surface.Height);
 			double center = size / 2.0;
 			
-			double percent = (double) Remaining / (double) Length;
-			percent -= ((double) (DateTime.UtcNow - LastRender).TotalMilliseconds / 1000.0) * (1 / (double) Length);
+			// set from the svg files
+			double svgWidth = 48.0;
+			double centerRadius = 15.5;
 			
 			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("base.svg@" + GetType ().Assembly.FullName, size)) {
 				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, (surface.Width - pbuf.Width) / 2, (surface.Height - pbuf.Height) / 2);
 				cr.Paint ();
 			}
 			
-			cr.Translate (0, 1);
+			cr.Translate (0, size / svgWidth);
 			
 			Gdk.Color gtkColor = Style.Backgrounds [(int) StateType.Selected].SetMinimumValue (100);
 			Cairo.Color color = new Cairo.Color ((double) gtkColor.Red / ushort.MaxValue,
@@ -115,14 +116,17 @@ namespace Timer
 										(double) gtkColor.Blue / ushort.MaxValue,
 										1.0);
 			
+			double percent = (double) Remaining / (double) Length;
+			percent -= ((double) (DateTime.UtcNow - LastRender).TotalMilliseconds / 1000.0) * (1 / (double) Length);
+			
 			if (Remaining > 0) {
 				cr.MoveTo (center, center);
-				cr.Arc (center, center, size * 16 / 48, -Math.PI / 2.0, Math.PI * 2.0 * percent - Math.PI / 2.0);
+				cr.Arc (center, center, size * centerRadius / svgWidth, -Math.PI / 2.0, Math.PI * 2.0 * percent - Math.PI / 2.0);
 				cr.LineTo (center, center);
 				cr.Color = color;
 				cr.Fill ();
 			} else {
-				cr.Arc (center, center, size * 16 / 48, 0, 2.0 * Math.PI);
+				cr.Arc (center, center, size * centerRadius / svgWidth, 0, 2.0 * Math.PI);
 				cr.Color = color.AddHue (150).SetSaturation (1);
 				cr.Fill ();
 			}
@@ -142,7 +146,7 @@ namespace Timer
 			}
 			cr.Restore ();
 			
-			cr.Translate (0, -1);
+			cr.Translate (0, size / -svgWidth);
 			
 			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("overlay.svg@" + GetType ().Assembly.FullName, size)) {
 				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, (surface.Width - pbuf.Width) / 2, (surface.Height - pbuf.Height) / 2);
