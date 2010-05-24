@@ -9,7 +9,10 @@ FILES = \
 	src/TimerDockItem.cs
 
 RESOURCES = \
-	Resources/Timer.addin.xml
+	Resources/Timer.addin.xml \
+	Resources/icons/base.svg \
+	Resources/icons/hand.svg \
+	Resources/icons/overlay.svg
 
 PROJECT_REFERENCES = \
 	Docky.CairoHelper \

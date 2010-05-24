@@ -24,6 +24,7 @@ using System.Text;
 using Mono.Unix;
 
 using Cairo;
+using Gtk;
 
 using Docky.CairoHelper;
 using Docky.Items;
@@ -60,7 +61,7 @@ namespace Timer
 				QueueRedraw ();
 				
 				if (remaining == 0)
-					OnFinished ();
+					OnFinished (true, TimerMainDockItem.AutoDismissTimers);
 			}
 		}
 		
@@ -70,10 +71,12 @@ namespace Timer
 		
 		uint timer;
 		
-		void OnFinished ()
+		void OnFinished (bool notify, bool remove)
 		{
-			Log.Notify ("Docky Timer", "clock", string.Format (Catalog.GetString ("A timer set for {0} has expired."), TimerMainDockItem.TimeRemaining (Length)));
-			if (Finished != null)
+			if (notify)
+				Log.Notify ("Docky Timer", "clock", string.Format (Catalog.GetString ("A timer set for {0} has expired."), TimerMainDockItem.TimeRemaining (Length)));
+			
+			if (remove && Finished != null)
 				Finished (this, EventArgs.Empty);
 		}
 		
@@ -97,15 +100,52 @@ namespace Timer
 			double percent = (double) Remaining / (double) Length;
 			percent -= ((double) (DateTime.UtcNow - LastRender).TotalMilliseconds / 1000.0) * (1 / (double) Length);
 			
-			cr.Arc (center, center, center, -Math.PI / 2.0, 3.0 * Math.PI / 2.0);
-			cr.Color = new Cairo.Color (1, 0, 0, 1 - percent);
-			cr.Fill ();
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("base.svg@" + GetType ().Assembly.FullName, size)) {
+				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, (surface.Width - pbuf.Width) / 2, (surface.Height - pbuf.Height) / 2);
+				cr.Paint ();
+			}
 			
-			cr.MoveTo (center, center);
-			cr.Arc (center, center, center, -Math.PI / 2.0, Math.PI * 2.0 * percent - Math.PI / 2.0);
-			cr.LineTo (center, center);
-			cr.Color = new Cairo.Color (1, 1, 1, 0.8);
-			cr.Fill ();
+			cr.Translate (0, 1);
+			
+			Gdk.Color gtkColor = Style.Backgrounds [(int) StateType.Selected].SetMinimumValue (100);
+			Cairo.Color color = new Cairo.Color ((double) gtkColor.Red / ushort.MaxValue,
+										(double) gtkColor.Green / ushort.MaxValue,
+										(double) gtkColor.Blue / ushort.MaxValue,
+										1.0);
+			
+			if (Remaining > 0) {
+				cr.MoveTo (center, center);
+				cr.Arc (center, center, size * 16 / 48, -Math.PI / 2.0, Math.PI * 2.0 * percent - Math.PI / 2.0);
+				cr.LineTo (center, center);
+				cr.Color = color;
+				cr.Fill ();
+			} else {
+				cr.Arc (center, center, size * 16 / 48, 0, 2.0 * Math.PI);
+				cr.Color = color.AddHue (150).SetSaturation (1);
+				cr.Fill ();
+			}
+			
+			cr.Save ();
+			using (DockySurface hand = new DockySurface (surface.Width, surface.Height, surface)) {
+				using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("hand.svg@" + GetType ().Assembly.FullName, size)) {
+					Gdk.CairoHelper.SetSourcePixbuf (hand.Context, pbuf, (surface.Width - pbuf.Width) / 2, (surface.Height - pbuf.Height) / 2);
+					hand.Context.Paint ();
+				}
+				cr.Translate (hand.Width / 2.0, hand.Height / 2.0 + 1);
+				cr.Rotate (2.0 * Math.PI * percent);
+				cr.Translate (- hand.Width / 2.0, - (hand.Height / 2.0 + 1));
+				
+				cr.SetSource (hand.Internal);
+				cr.Paint ();
+			}
+			cr.Restore ();
+			
+			cr.Translate (0, -1);
+			
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("overlay.svg@" + GetType ().Assembly.FullName, size)) {
+				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, (surface.Width - pbuf.Width) / 2, (surface.Height - pbuf.Height) / 2);
+				cr.Paint ();
+			}
 		}
 		
 		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
@@ -131,8 +171,12 @@ namespace Timer
 		
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
-			if (button == 1)
-				Toggle ();
+			if (button == 1) {
+				if (Remaining > 0)
+					Toggle ();
+				else
+					OnFinished (false, true);
+			}
 			
 			return ClickAnimation.None;
 		}
@@ -183,11 +227,12 @@ namespace Timer
 		{
 			MenuList list = base.OnGetMenuItems ();
 			
-			list[MenuListContainer.Actions].Add (new MenuItem (Running ? Catalog.GetString ("_Pause Timer") : Catalog.GetString ("_Start Timer"), "gtk-remove", delegate {
-				Toggle ();
-			}));
+			if (Remaining > 0)
+				list[MenuListContainer.Actions].Add (new Docky.Menus.MenuItem (Running ? Catalog.GetString ("_Pause Timer") : Catalog.GetString ("_Start Timer"), Running ? "media-playback-pause" : "media-playback-start", delegate {
+					Toggle ();
+				}));
 			
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Remove Timer"), "gtk-remove", delegate {
+			list[MenuListContainer.Actions].Add (new Docky.Menus.MenuItem (Catalog.GetString ("_Remove Timer"), "gtk-remove", delegate {
 				if (Finished != null)
 					Finished (this, EventArgs.Empty);
 			}));

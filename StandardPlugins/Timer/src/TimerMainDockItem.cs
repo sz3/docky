@@ -45,6 +45,7 @@ namespace Timer
 		{
 			defaultTimer = (uint) prefs.Get<int> ("DefaultTimer", 60);
 			autoStart = prefs.Get<bool> ("AutoStartTimers", false);
+			autoDismiss = prefs.Get<bool> ("AutoDismissTimers", false);
 		}
 		
 		public static string TimeRemaining (uint remaining)
@@ -91,6 +92,17 @@ namespace Timer
 					return;
 				autoStart = value;
 				prefs.Set<bool> ("AutoStartTimers", value);
+			}
+		}
+		
+		static bool autoDismiss;
+		public static bool AutoDismissTimers {
+			get { return autoDismiss; }
+			set {
+				if (autoDismiss == value)
+					return;
+				autoDismiss = value;
+				prefs.Set<bool> ("AutoDismissTimers", value);
 			}
 		}
 		
@@ -142,6 +154,10 @@ namespace Timer
 			
 			list[MenuListContainer.Actions].Add (new IconMenuItem (Catalog.GetString ("Automatically _Start Timers"), AutoStartTimers ? "gtk-apply" : "gtk-remove", delegate {
 				AutoStartTimers = !AutoStartTimers;
+			}));
+			
+			list[MenuListContainer.Actions].Add (new IconMenuItem (Catalog.GetString ("Automatically _Dismiss Timers"), AutoDismissTimers ? "gtk-apply" : "gtk-remove", delegate {
+				AutoDismissTimers = !AutoDismissTimers;
 			}));
 			
 			return list;
