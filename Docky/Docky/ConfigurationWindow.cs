@@ -113,11 +113,10 @@ namespace Docky
 			SkipTaskbarHint = true;
 			
 			int i = 0;
-			foreach (string theme in Docky.Controller.DockThemes.Distinct ()) {
+			foreach (string theme in ThemeController.DockThemes.Distinct ()) {
 				theme_combo.AppendText (theme);
-				if (Docky.Controller.DockTheme == theme) {
+				if (ThemeController.DockTheme == theme)
 					theme_combo.Active = i;
-				}
 				i++;
 			}
 			
@@ -260,7 +259,7 @@ namespace Docky
 
 		protected virtual void OnThemeComboChanged (object sender, System.EventArgs e)
 		{
-			Docky.Controller.DockTheme = theme_combo.ActiveText;
+			ThemeController.DockTheme = theme_combo.ActiveText;
 			if (Docky.Controller.NumDocks == 1)
 				ActiveDock = null;
 		}
@@ -437,7 +436,7 @@ namespace Docky
 			if (file == null)
 				return;
 			
-			string theme = Docky.Controller.InstallTheme (file);
+			string theme = ThemeController.InstallTheme (file);
 			if (theme != null)
 				theme_combo.AppendText (theme);
 		}

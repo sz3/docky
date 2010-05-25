@@ -100,7 +100,7 @@ namespace Docky.Menus
 		
 		static void SetLight ()
 		{
-			IsLight = DockServices.Drawing.IsIconLight (Docky.Controller.MenuSvg);
+			IsLight = DockServices.Drawing.IsIconLight (ThemeController.MenuSvg);
 		}
 		
 		static DockySurface [] menu_slices;
@@ -112,7 +112,7 @@ namespace Docky.Menus
 			
 			DockySurface main = new DockySurface (TotalWidth, TotalHeight, model);
 			
-			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (Docky.Controller.MenuSvg)) {
+			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (ThemeController.MenuSvg)) {
 				Gdk.CairoHelper.SetSourcePixbuf (main.Context, pixbuf, ShadowSize, ShadowSize);
 				main.Context.Paint ();
 			}
@@ -261,7 +261,7 @@ namespace Docky.Menus
 			
 			SetPadding ();
 			
-			Docky.Controller.ThemeChanged += DockyControllerThemeChanged;
+			ThemeController.ThemeChanged += DockyControllerThemeChanged;
 			Gdk.Screen.Default.CompositedChanged += HandleCompositedChanged;
 		}
 
@@ -577,7 +577,7 @@ namespace Docky.Menus
 		
 		public override void Dispose ()
 		{
-			Docky.Controller.ThemeChanged -= DockyControllerThemeChanged;
+			ThemeController.ThemeChanged -= DockyControllerThemeChanged;
 			Gdk.Screen.Default.CompositedChanged -= HandleCompositedChanged;
 			
 			ResetSlices ();

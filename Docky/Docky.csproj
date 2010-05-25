@@ -45,6 +45,7 @@
     <Compile Include="Docky\Docky.cs" />
     <Compile Include="Docky\UserArgs.cs" />
     <Compile Include="Docky\DockController.cs" />
+    <Compile Include="Docky\ThemeController.cs" />
     <Compile Include="Docky\Interface\Dock.cs" />
     <Compile Include="Docky\Interface\DockPosition.cs" />
     <Compile Include="Docky\Interface\AutohideType.cs" />
@@ -169,8 +170,8 @@
     <EmbeddedResource Include="gtk-gui\gui.stetic">
       <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\classic.svg">
-      <LogicalName>classic.svg</LogicalName>
+    <EmbeddedResource Include="Resources\background.svg">
+      <LogicalName>background.svg</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\tooltip.svg">
       <LogicalName>tooltip.svg</LogicalName>
