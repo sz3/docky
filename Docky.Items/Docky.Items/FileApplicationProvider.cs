@@ -111,7 +111,7 @@ namespace Docky.Items
 		void WnckScreenDefaultActiveWindowChanged (object o, ActiveWindowChangedArgs args)
 		{
 			if (prevActive != null)
-				prevActive.WorkspaceChanged -= HandleActiveWindowGeometryChangedChanged;
+				prevActive.GeometryChanged -= HandleActiveWindowGeometryChangedChanged;
 			prevActive = Wnck.Screen.Default.ActiveWindow;
 			if (prevActive != null)
 				prevActive.GeometryChanged += HandleActiveWindowGeometryChangedChanged;
