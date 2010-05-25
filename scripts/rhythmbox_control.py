@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #  
-#  Copyright (C) 2009-2010 Jason Smith, Rico Tzschichholz
+#  Copyright (C) 2009-2010 Jason Smith, Rico Tzschichholz, Robert Dyer
 # 
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ import os
 try:
 	import gtk
 	import urllib2
-	from docky.docky import DockyItem, DockySink
+	from docky.dockmanager import DockManagerItem, DockManagerSink
 	from docky.docky import DOCKY_DATADIR
 	from signal import signal, SIGTERM
 	from sys import exit
@@ -63,9 +63,9 @@ album_art_file = "/tmp/docky_%s_rhythmbox_helper.original.png" % os.getenv('USER
 # 0 - none, 1- jewel, 2 - vinyl)
 overlay = 2
 
-class DockyRhythmboxItem(DockyItem):
-	def __init__(self, path):
-		DockyItem.__init__(self, path)
+class RhythmboxItem(DockManagerItem):
+	def __init__(self, sink, path):
+		DockManagerItem.__init__(self, sink, path)
 
 		self.player = None
 		self.shell = None
@@ -129,7 +129,7 @@ class DockyRhythmboxItem(DockyItem):
 	def clear_menu_buttons(self):
 		for k, v in self.id_map.iteritems():
 			try:
-				self.iface.RemoveItem(k)
+				self.iface.RemoveMenuItem(k)
 			except:
 				break;	
 	
@@ -180,7 +180,7 @@ class DockyRhythmboxItem(DockyItem):
 	def update_icon(self):
 		if not self.player:
 			self.current_arturl = ""
-			self.iface.ResetIcon()
+			self.reset_icon()
 			return False
 			
 		if not enable_art_icon:
@@ -194,13 +194,13 @@ class DockyRhythmboxItem(DockyItem):
 					return True
 				self.current_arturl = arturl
 				self.current_arturl_mtime = os.stat(arturl).st_mtime
-				self.iface.SetIcon(self.get_album_art_overlay_path(arturl))
+				self.set_icon(self.get_album_art_overlay_path(arturl))
 			else:
 				self.current_arturl = ""
-				self.iface.ResetIcon()
+				self.reset_icon()
 		else:
 			self.current_arturl = ""
-			self.iface.ResetIcon()
+			self.reset_icon()
 		return True
 		
 	def get_album_art_path(self):
@@ -311,16 +311,16 @@ class DockyRhythmboxItem(DockyItem):
 		
 	def update_text(self):
 		if not self.shell or not self.player:
-			self.iface.ResetText()
+			self.reset_tooltip()
 
 		if self.rhythmbox_is_playing() and self.songinfo:
-			self.iface.SetText(self.songinfo)
+			self.set_tooltip(self.songinfo)
 		else:
-			self.iface.ResetText()
+			self.reset_tooltip()
 
 	def update_badge(self):
 		if not self.player:
-			self.iface.ResetBadgeText()
+			self.reset_badge()
 		
 		if not enable_badge_text:
 			return True
@@ -332,9 +332,9 @@ class DockyRhythmboxItem(DockyItem):
 			else:
 				position = self.elapsed_secs
 			string = '%i:%02i' % (position / 60, position % 60)
-			self.iface.SetBadgeText(string)
+			self.set_badge(string)
 		else:
-			self.iface.ResetBadgeText()
+			self.reset_badge()
 	
 	def menu_pressed(self, menu_id):
 		if self.id_map[menu_id] == "Play":
@@ -345,10 +345,6 @@ class DockyRhythmboxItem(DockyItem):
 			self.rhythmbox_next()
 		elif self.id_map[menu_id] == "Previous":
 			self.rhythmbox_prev()
-		
-	def add_menu_item(self, name, icon):
-		menu_id = self.iface.AddMenuItem(name, icon, "")
-		self.id_map[menu_id] = name
 		
 	def rhythmbox_playPause(self):
 		if self.player:
@@ -370,15 +366,15 @@ class DockyRhythmboxItem(DockyItem):
 				return False		
 		return False
 		
-class DockyRhythmboxSink(DockySink):
+class RhythmboxSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetOwnsDesktopFile() and item.GetDesktopFile().endswith ("rhythmbox.desktop"):
-			self.items[pathtoitem] = DockyRhythmboxItem(pathtoitem)
+		if item.GetDesktopFile().endswith ("rhythmbox.desktop"):
+			self.items[pathtoitem] = RhythmboxItem(self, pathtoitem)
 
-dockysink = DockyRhythmboxSink()
+rhythmboxsink = RhythmboxSink()
 
 def cleanup ():
-	dockysink.dispose ()
+	rhythmboxsink.dispose ()
 
 if __name__ == "__main__":
 	mainloop = gobject.MainLoop(is_running=True)

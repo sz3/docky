@@ -32,74 +32,90 @@ namespace Docky.DBus
 {
 	public class DBusManager
 	{
+		#region The Private/non-standard Bus
+		
 		const string BusName        = "org.gnome.Docky";
 		const string DockyPath      = "/org/gnome/Docky";
 		const string ItemsPath      = "/org/gnome/Docky/Items";
-		
-		public event Action QuitCalled;
-		public event Action SettingsCalled;
-		public event Action AboutCalled;
-		
-		static DBusManager manager;
-		public static DBusManager Default {
-			get {
-				return manager;
-			}
-		}
-		
-		static DBusManager ()
-		{
-			manager = new DBusManager ();
-		}
 
 		DockyDBus docky;
-		Dictionary<AbstractDockItem, DockyDBusItem> item_dict;
 		
+		bool InitializePrivateBus (Bus bus)
+		{
+			if (bus.RequestName (BusName) != RequestNameReply.PrimaryOwner) {
+				Log<DBusManager>.Error ("Bus Name '" + BusName + "' is already owned");
+				return false;
+			}
+			
+			docky = new DockyDBus ();
+			docky.QuitCalled += HandleQuitCalled;
+			docky.SettingsCalled += HandleSettingsCalled;
+			docky.AboutCalled += HandleAboutCalled;
+			
+			ObjectPath dockyPath = new ObjectPath (DockyPath);
+			bus.Register (dockyPath, docky);
+			Log<DBusManager>.Debug ("DBus Registered: " + BusName);
+			
+			return true;
+		}
+		
+		public void HandleAboutCalled ()
+		{
+			if (AboutCalled != null)
+				AboutCalled ();
+		}
+		
+		public void HandleSettingsCalled ()
+		{
+			if (SettingsCalled != null)
+				SettingsCalled ();
+		}
+		
+		public void HandleQuitCalled ()
+		{
+			if (QuitCalled != null)
+				QuitCalled ();
+		}
+		
+		#endregion
+		
+		#region The Shared/standard Bus
+		
+		const string DockManagerBusName   = "org.freedesktop.DockManager";
+		const string DockManagerPath      = "/org/freedesktop/DockManager";
+		const string DockManagerItemsPath = "/org/freedesktop/DockManager/Item";
+
 		internal IEnumerable<AbstractDockItem> Items {
 			get {
 				return item_dict.Keys;
 			}
 		}
 		
-		private DBusManager ()
-		{
-		}
+		Dictionary<AbstractDockItem, DockManagerDBusItem> item_dict;
 		
-		public void Initialize ()
+		DockManagerDBus dock_manager;
+		
+		bool InitializeSharedBus (Bus bus)
 		{
-			Bus bus = Bus.Session;
-			
-			if (bus.RequestName (BusName) != RequestNameReply.PrimaryOwner) {
-				Log<DBusManager>.Error ("Bus Name is already owned");
-				return;
+			if (bus.RequestName (DockManagerBusName) != RequestNameReply.PrimaryOwner) {
+				Log<DBusManager>.Error ("Bus Name '" + DockManagerBusName + "' is already owned");
+				return false;
 			}
 			
-			item_dict = new Dictionary<AbstractDockItem, DockyDBusItem> ();
+			item_dict = new Dictionary<AbstractDockItem, DockManagerDBusItem> ();
 			
-			ObjectPath dockyPath = new ObjectPath (DockyPath);
-			docky = new DockyDBus ();
-			docky.QuitCalled += HandleQuitCalled;
-			docky.SettingsCalled += HandleSettingsCalled;
-			docky.AboutCalled += HandleAboutCalled;
+			dock_manager = new DockManagerDBus ();
 			
-			bus.Register (dockyPath, docky);
+			ObjectPath dockPath = new ObjectPath (DockManagerPath);
+			bus.Register (dockPath, dock_manager);
+			Log<DBusManager>.Debug ("DBus Registered: " + DockManagerBusName);
 			
-			DockServices.Helpers.HelperStatusChanged += delegate(object sender, HelperStatusChangedEventArgs e) {
-				// if a script has stopped running, trigger a refresh
-				if (!e.IsRunning)
-					ForceRefresh ();
-			};
+			return true;
 		}
 		
-		public void ForceRefresh ()
+		internal string PathForItem (AbstractDockItem item)
 		{
-			foreach (DockyDBusItem item in item_dict.Values)
-				item.TriggerConfirmation ();
-		}
-		
-		public void Shutdown ()
-		{
-			docky.Shutdown ();
+			return DockManagerItemsPath + Math.Abs (item.UniqueID ().GetHashCode ());
 		}
 		
 		public void RegisterItem (AbstractDockItem item)
@@ -107,13 +123,13 @@ namespace Docky.DBus
 			if (item_dict.ContainsKey (item))
 				return;
 			
-			string path = PathForItem (item);
-			DockyDBusItem dbusitem = new DockyDBusItem (item);
-			
+			DockManagerDBusItem dbusitem = new DockManagerDBusItem (item);
 			item_dict[item] = dbusitem;
+			
+			string path = PathForItem (item);
 			Bus.Session.Register (new ObjectPath (path), dbusitem);
 			
-			docky.OnItemAdded (path);
+			dock_manager.OnItemAdded (path);
 		}
 		
 		public void UnregisterItem (AbstractDockItem item)
@@ -134,31 +150,53 @@ namespace Docky.DBus
 				return;
 			}
 			
-			docky.OnItemRemoved (PathForItem (item));
+			dock_manager.OnItemRemoved (PathForItem (item));
 		}
 		
-		internal string PathForItem (AbstractDockItem item)
+		#endregion
+		
+		public event Action QuitCalled;
+		public event Action SettingsCalled;
+		public event Action AboutCalled;
+		
+		public static DBusManager Default { get; protected set; }
+		
+		static DBusManager ()
 		{
+			Default = new DBusManager ();
+		}
+		
+		private DBusManager () { }
+		
+		public void Initialize ()
+		{
+			Bus bus = Bus.Session;
 			
-			return ItemsPath + "/" + Math.Abs (item.UniqueID ().GetHashCode ());
+			if (!(InitializePrivateBus (bus) | InitializeSharedBus (bus)))
+				return;
+			
+			DockServices.Helpers.HelperStatusChanged += delegate(object sender, HelperStatusChangedEventArgs e) {
+				// if a script has stopped running, trigger a refresh
+				if (!e.IsRunning)
+					ForceRefresh ();
+			};
 		}
 		
-		public void HandleAboutCalled ()
+		public void ForceRefresh ()
 		{
-			if (AboutCalled != null)
-				AboutCalled ();
+			foreach (DockManagerDBusItem item in item_dict.Values)
+				item.TriggerConfirmation ();
 		}
 		
-		public void HandleSettingsCalled ()
+		public void Shutdown ()
 		{
-			if (SettingsCalled != null)
-				SettingsCalled ();
-		}
-		
-		public void HandleQuitCalled ()
-		{
-			if (QuitCalled != null)
-				QuitCalled ();
+			if (docky != null) {
+				docky.QuitCalled -= HandleQuitCalled;
+				docky.SettingsCalled -= HandleSettingsCalled;
+				docky.AboutCalled -= HandleAboutCalled;
+				
+				docky.Shutdown ();
+			}
 		}
 	}
 }

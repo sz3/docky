@@ -2,7 +2,7 @@
 
 #  
 #  Copyright (C) 2009-2010 Jason Smith, Rico Tzschichholz
-#                2010 Lukasz Piepiora
+#                2010 Lukasz Piepiora, Robert Dyer
 #
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -27,17 +27,19 @@ import sys
 import os
 
 try:
-	from docky.docky import DockyItem, DockySink
+	from docky.dockmanager import DockManagerItem, DockManagerSink
 	from signal import signal, SIGTERM
 	from sys import exit
 except ImportError, e:
 	exit()
 
+
 pidginbus = "im.pidgin.purple.PurpleService"
 pidginpath = "/im/pidgin/purple/PurpleObject"
 pidginitem = "im.pidgin.purple.PurpleInterface"
 
-class PidginSink():
+
+class PidginDBus():
 	def __init__(self):
 		bus = dbus.SessionBus()
 		obj = bus.get_object (pidginbus, pidginpath)
@@ -62,10 +64,11 @@ class PidginSink():
 	def Away(self):
 		new_status = self.iface.PurpleSavedstatusNew("", 5)
 		self.iface.PurpleSavedstatusActivate(new_status)
-		
-class DockyPidginItem(DockyItem):
-	def __init__(self, path):
-		DockyItem.__init__(self, path)
+
+
+class PidginItem(DockManagerItem):
+	def __init__(self, sink, path):
+		DockManagerItem.__init__(self, sink, path)
 		self.pidgin = None
 		
 		self.bus.add_signal_receiver(self.name_owner_changed_cb,
@@ -99,7 +102,7 @@ class DockyPidginItem(DockyItem):
 			self.update_badge()
 	
 	def init_pidgin_objects(self):
-		self.pidgin = PidginSink()
+		self.pidgin = PidginDBus()
 
 	def status_changed(self, a, b, c):
 		self.set_menu_buttons()
@@ -111,7 +114,7 @@ class DockyPidginItem(DockyItem):
 	def clear_menu_buttons(self):
 		for k, v in self.id_map.iteritems():
 			try:
-				self.iface.RemoveItem(k)
+				self.iface.RemoveMenuItem(k)
 			except:
 				break;	
 	
@@ -123,16 +126,16 @@ class DockyPidginItem(DockyItem):
 
 		if self.pidgin.IsConnected():
 			if self.pidgin.IsAway():
-				self.add_menu_item ("Set Away", "/usr/share/pixmaps/pidgin/status/16/away.png", "", "Away")
+				self.add_menu_item ("Set Away", "/usr/share/pixmaps/pidgin/status/16/away.png", "")
 			else:
-				self.add_menu_item ("Set Available", "/usr/share/pixmaps/pidgin/status/16/available.png", "", "Connect")
-			self.add_menu_item ("Disconnect", "/usr/share/pixmaps/pidgin/status/16/offline.png", "", "Disconnect")
+				self.add_menu_item ("Set Available", "/usr/share/pixmaps/pidgin/status/16/available.png", "")
+			self.add_menu_item ("Disconnect", "/usr/share/pixmaps/pidgin/status/16/offline.png", "")
 		else:
-			self.add_menu_item ("Connect", "/usr/share/pixmaps/pidgin/status/16/available.png", "", "Connect")
+			self.add_menu_item ("Connect", "/usr/share/pixmaps/pidgin/status/16/available.png", "")
 		
 	def update_badge(self):
 		if not self.pidgin:
-			self.iface.ResetBadgeText()
+			self.reset_badge()
 			return False
 		
 		convs = self.pidgin.iface.PurpleGetConversations()
@@ -140,35 +143,32 @@ class DockyPidginItem(DockyItem):
 		for conv in convs:
 			count = count + self.pidgin.iface.PurpleConversationGetData(conv, "unseen-count")
 		if count:
-			self.iface.SetBadgeText("%s" % count)
+			self.set_badge("%s" % count)
 		else:
-			self.iface.ResetBadgeText()
+			self.reset_badge()
 		return True
 	
 	def menu_pressed(self, menu_id):
 		menu_id = self.id_map[menu_id]
 		
-		if menu_id == "Connect":
-			self.pidgin.Available()
-		elif menu_id == "Disconnect":
+		if menu_id == "Disconnect":
 			self.pidgin.Disconnect()
-		elif menu_id == "Away":
+		elif menu_id == "Set Away":
 			self.pidgin.Away()
-				
-	def add_menu_item(self, name, icon, group, ident):
-		menu_id = self.iface.AddMenuItem(name, icon, group)
-		self.id_map[menu_id] = ident
+		else:
+			self.pidgin.Available()
 		
 	
-class DockyPidginSink(DockySink):
+class PidginSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetOwnsDesktopFile() and item.GetDesktopFile().endswith ("pidgin.desktop"):
-			self.items[pathtoitem] = DockyPidginItem(pathtoitem)
+		if item.GetDesktopFile().endswith ("pidgin.desktop"):
+			self.items[pathtoitem] = PidginItem(self, pathtoitem)
 
-dockysink = DockyPidginSink()
+
+pidginsink = PidginSink()
 
 def cleanup ():
-	dockysink.dispose ()
+	pidginsink.dispose ()
 
 if __name__ == "__main__":
 	mainloop = gobject.MainLoop(is_running=True)

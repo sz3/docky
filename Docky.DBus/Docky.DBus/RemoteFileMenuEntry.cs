@@ -24,10 +24,8 @@ using Docky.Services;
 
 namespace Docky.DBus
 {
-
 	public class RemoteFileMenuEntry : RemoteMenuEntry
 	{
-
 		public RemoteFileMenuEntry (uint id, GLib.File file, string groupTitle) : base(id, file.Basename, "", groupTitle)
 		{
 			Clicked += delegate {

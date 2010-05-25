@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
 #  
-#  Copyright (C) 2010 Rico Tzschichholz
-#                2010 Stefan Bethge
+#  Copyright (C) 2010 Rico Tzschichholz, Stefan Bethge, Robert Dyer
 #
 #  Started from liferea_badge.py
 # 
@@ -29,7 +28,7 @@ import sys
 import os
 
 try:
-	from docky.docky import DockyItem, DockySink
+	from docky.dockmanager import DockManagerItem, DockManagerSink
 	from signal import signal, SIGTERM
 	from sys import exit
 except ImportError, e:
@@ -40,9 +39,9 @@ gajimbus = "org.gajim.dbus"
 gajimpath = "/org/gajim/dbus/RemoteObject"
 gajimiface = "org.gajim.dbus.RemoteInterface"
 	
-class DockyGajimItem(DockyItem):
-	def __init__(self, path):
-		DockyItem.__init__(self, path)
+class GajimItem(DockManagerItem):
+	def __init__(self, sink, path):
+		DockManagerItem.__init__(self, sink, path)
 		self.timer = 0
 		self.gajim = None
 		
@@ -88,26 +87,26 @@ class DockyGajimItem(DockyItem):
 
 	def update_badge(self):
 		if not self.gajim:
-			self.iface.ResetBadgeText()
+			self.reset_badge()
 			return False
 		
 		items_unread = self.gajim.get_unread_msgs_number()
 
 		if int(items_unread) > 0:
-			self.iface.SetBadgeText("%s" % items_unread)
+			self.set_badge("%s" % items_unread)
 		else:
-			self.iface.ResetBadgeText()
+			self.reset_badge()
 		return True
 
-class DockyGajimSink(DockySink):
+class GajimSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetOwnsDesktopFile() and item.GetDesktopFile().endswith ("gajim.desktop"):
-			self.items[pathtoitem] = DockyGajimItem(pathtoitem)
+		if item.GetDesktopFile().endswith ("gajim.desktop"):
+			self.items[pathtoitem] = DockManagerGajimItem(self, pathtoitem)
 
-dockysink = DockyGajimSink()
+gajimsink = GajimSink()
 
 def cleanup ():
-	dockysink.dispose ()
+	gajimsink.dispose ()
 
 if __name__ == "__main__":
 	mainloop = gobject.MainLoop(is_running=True)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #  
-#  Copyright (C) 2010 Rico Tzschichholz
+#  Copyright (C) 2010 Rico Tzschichholz, Robert Dyer
 # 
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ import sys
 import os
 
 try:
-	from docky.docky import DockyItem, DockySink
+	from docky.dockmanager import DockManagerItem, DockManagerSink
 	from signal import signal, SIGTERM
 	from sys import exit
 except ImportError, e:
@@ -37,9 +37,9 @@ lifereabus = "org.gnome.feed.Reader"
 readerpath = "/org/gnome/feed/Reader"
 readeriface = "org.gnome.feed.Reader"
 	
-class DockyLifereaItem(DockyItem):
-	def __init__(self, path):
-		DockyItem.__init__(self, path)
+class LifereaItem(DockManagerItem):
+	def __init__(self, sink, path):
+		DockManagerItem.__init__(self, sink, path)
 		self.timer = 0
 		self.reader = None
 				
@@ -80,27 +80,27 @@ class DockyLifereaItem(DockyItem):
 
 	def update_badge(self):
 		if not self.reader:
-			self.iface.ResetBadgeText()
+			self.reset_badge()
 			return False
 		
 		items_unread = self.reader.GetUnreadItems()
 		#items_new = self.reader.GetNewItems()
 		if items_unread > 0:
-			self.iface.SetBadgeText("%s" % items_unread)
+			self.set_badge("%s" % items_unread)
 		else:
-			self.iface.ResetBadgeText()
+			self.reset_badge()
 			
 		return True
 
-class DockyLifereaSink(DockySink):
+class LifereaSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetOwnsDesktopFile() and item.GetDesktopFile().endswith ("liferea.desktop"):
-			self.items[pathtoitem] = DockyLifereaItem(pathtoitem)
+		if item.GetDesktopFile().endswith ("liferea.desktop"):
+			self.items[pathtoitem] = LifereaItem(self, pathtoitem)
 
-dockysink = DockyLifereaSink()
+lifereasink = LifereaSink()
 
 def cleanup ():
-	dockysink.dispose ()
+	lifereasink.dispose ()
 
 if __name__ == "__main__":
 	mainloop = gobject.MainLoop(is_running=True)

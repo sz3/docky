@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith, Chris Szikszoy
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -23,6 +23,8 @@ using System.Text;
 
 using GLib;
 
+using NDesk.DBus;
+
 using Docky.Items;
 using Docky.Menus;
 
@@ -42,22 +44,19 @@ namespace Docky.DBus
 		}
 	}
 	
-	public class DockyDBusItem : IDockyDBusItem, IDisposable
+	public class DockManagerDBusItem : IDockManagerDBusItem, IDisposable
 	{
 		uint timer;
-		Dictionary<uint, RemoteMenuEntry> items;
-		Dictionary<uint, DateTime> update_time;
+		Dictionary<uint, RemoteMenuEntry> items = new Dictionary<uint, RemoteMenuEntry> ();
+		Dictionary<uint, DateTime> update_time = new Dictionary<uint, DateTime> ();
 		
-		List<uint> known_ids;
+		List<uint> known_ids = new List<uint> ();
 		
 		AbstractDockItem owner;
 		
-		public DockyDBusItem (AbstractDockItem item)
+		public DockManagerDBusItem (AbstractDockItem item)
 		{
 			owner = item;
-			known_ids = new List<uint> ();
-			items = new Dictionary<uint, RemoteMenuEntry> ();
-			update_time = new Dictionary<uint, DateTime> ();
 			
 			timer = GLib.Timeout.Add (4 * 60 * 1000, delegate {
 				TriggerConfirmation ();
@@ -74,7 +73,7 @@ namespace Docky.DBus
 				foreach (uint i in update_time
 					.Where (kvp => (DateTime.UtcNow - kvp.Value).TotalMinutes > 1)
 					.Select (kvp => kvp.Key))
-					RemoveItem (i);
+					RemoveMenuItem (i);
 				
 				return false;
 			});
@@ -97,75 +96,18 @@ namespace Docky.DBus
 			return number;
 		}
 		
-		#region IDockyDBusMenus implementation
-		public event MenuItemActivatedHandler MenuItemActivated;
-		
 		public event Action ItemConfirmationNeeded;
 		
-		public string Name {
-			get {
-				return owner.ShortName;
-			}
+		public void ConfirmItem (uint item)
+		{
+			update_time[item] = DateTime.UtcNow;
 		}
 		
-		public string BadgeText {
-			get {
-				return owner.BadgeText;
-			}
-			set {
-				owner.SetRemoteBadgeText (value);
-			}
-		}
+		#region IDockManagerDBusItem implementation
 		
-		public string Text {
-			get {
-				return owner.HoverText;
-			}
-			set {
-				owner.SetRemoteText (value);
-			}
-		}
+		public event MenuItemActivatedHandler MenuItemActivated;
 		
-		public string Icon {
-			get {
-				if (CanSetIcon)
-					return (owner as IconDockItem).Icon;
-				return "custom";
-			}
-			set {
-				if (!CanSetIcon)
-					return;
-				
-				(owner as IconDockItem).SetRemoteIcon (value);
-			}
-		}
-
-		public bool CanSetIcon {
-			get {
-				return owner is IconDockItem;
-			}
-		}
-		
-		public bool OwnsDesktopFile {
-			get {
-				return owner is ApplicationDockItem;
-			}
-		}
-		
-		public bool OwnsUri {
-			get {
-				return owner is FileDockItem;
-			}
-		}
-		
-		public bool Attention { 
-			get { return (owner.State & ItemState.Urgent) == ItemState.Urgent; }
-		}
-		
-		public bool Wait {
-			get { return (owner.State & ItemState.Wait) == ItemState.Wait; }
-		}
-		
+		[Property("org.freedesktop.DBus.Properties")]
 		public string DesktopFile {
 			get {
 				if (owner is ApplicationDockItem)
@@ -174,6 +116,7 @@ namespace Docky.DBus
 			}
 		}
 		
+		[Property("org.freedesktop.DBus.Properties")]
 		public string Uri {
 			get {
 				if (owner is FileDockItem)
@@ -182,34 +125,88 @@ namespace Docky.DBus
 			}
 		}
 		
-		public uint[] Items {
-			get {
-				return items.Keys.ToArray ();
+		public uint AddMenuItem (IDictionary<string, object> dict)
+		{
+			string uri = "";
+			if (dict.ContainsKey ("uri"))
+				uri = (string) dict ["uri"];
+			
+			string title = "";
+			if (dict.ContainsKey ("container-title"))
+				title = (string) dict ["container-title"];
+			
+			uint number = GetRandomID ();
+			
+			if (uri.Length > 0) {
+				RemoteFileMenuEntry rem = new RemoteFileMenuEntry (number, FileFactory.NewForUri (uri), title);
+				
+				AddToList (rem, number);
+			} else {
+				string label = "";
+				if (dict.ContainsKey ("label"))
+					label = (string) dict ["label"];
+				
+				string iconName = "";
+				if (dict.ContainsKey ("icon-name"))
+					iconName = (string) dict ["icon-name"];
+				
+				string iconFile = "";
+				if (dict.ContainsKey ("icon-file"))
+					iconFile = (string) dict ["icon-file"];
+				
+				RemoteMenuEntry rem;
+				if (iconFile.Length > 0)
+					rem = new RemoteMenuEntry (number, label, iconFile, title);
+				else
+					rem = new RemoteMenuEntry (number, label, iconName, title);
+				rem.Clicked += HandleActivated;
+				
+				AddToList (rem, number);
+			}
+			
+			return number;
+		}
+		
+		public void RemoveMenuItem (uint item)
+		{
+			if (items.ContainsKey (item)) {
+				RemoteMenuEntry entry = items[item];
+				entry.Clicked -= HandleActivated;
+				
+				items.Remove (item);
+				
+				owner.RemoteMenuItems.Remove (entry);
+			}
+			
+			known_ids.Remove (item);
+		}
+		
+		public void UpdateDockItem (IDictionary<string, object> dict)
+		{
+			foreach (string key in dict.Keys)
+			{
+				if (key == "tooltip") {
+					owner.SetRemoteText ((string) dict [key]);
+				} else if (key == "badge") {
+					owner.SetRemoteBadgeText ((string) dict [key]);
+				} else if (key == "icon-file") {
+					if (owner is IconDockItem)
+						(owner as IconDockItem).SetRemoteIcon ((string) dict [key]);
+				} else if (key == "attention") {
+					if ((bool) dict [key])
+						owner.State |= ItemState.Urgent;
+					else
+						owner.State &= ~ItemState.Urgent;
+				} else if (key == "waiting") {
+					if ((bool) dict [key])
+						owner.State |= ItemState.Wait;
+					else
+						owner.State &= ~ItemState.Wait;
+				}
 			}
 		}
 		
-		public uint AddMenuItem (string name, string icon, string title)
-		{
-			uint number = GetRandomID ();
-			
-			RemoteMenuEntry rem = new RemoteMenuEntry (number, name, icon, title);
-			rem.Clicked += HandleActivated;
-			
-			AddToList (rem, number);
-			
-			return number;
-		}
-		
-		public uint AddFileMenuItem (string uri, string title)
-		{			
-			uint number = GetRandomID ();
-			
-			RemoteFileMenuEntry rem = new RemoteFileMenuEntry (number, FileFactory.NewForUri (uri), title);
-			
-			AddToList (rem, number);
-			
-			return number;
-		}
+		#endregion
 		
 		private void AddToList (RemoteMenuEntry entry, uint id)
 		{
@@ -257,64 +254,6 @@ namespace Docky.DBus
 			}
 		}
 		
-		public void RemoveItem (uint item)
-		{
-			
-			if (items.ContainsKey (item)) {
-				RemoteMenuEntry entry = items[item];
-				entry.Clicked -= HandleActivated;
-				
-				items.Remove (item);
-				
-				owner.RemoteMenuItems.Remove (entry);
-			}
-			
-			known_ids.Remove (item);
-		}
-		
-		public void ConfirmItem (uint item)
-		{
-			update_time[item] = DateTime.UtcNow;
-		}
-		
-		public void SetAttention ()
-		{
-			owner.State |= ItemState.Urgent;
-		}
-		
-		public void UnsetAttention ()
-		{
-			owner.State &= ~ItemState.Urgent;
-		}
-
-		public void SetWaiting ()
-		{
-			owner.State |= ItemState.Wait;
-		}
-		
-		public void UnsetWaiting ()
-		{
-			owner.State &= ~ItemState.Wait;
-		}
-		
-		public void ResetBadgeText ()
-		{
-			owner.SetRemoteBadgeText ("");
-		}
-		
-		public void ResetText ()
-		{
-			owner.SetRemoteText ("");
-		}
-		
-		public void ResetIcon ()
-		{
-			if (!CanSetIcon)
-				return;
-			
-			(owner as IconDockItem).SetRemoteIcon ("");
-		}
-		
 		public ItemTuple GetItem (uint item)
 		{
 			if (!items.ContainsKey (item))
@@ -323,8 +262,6 @@ namespace Docky.DBus
 			RemoteMenuEntry entry = items[item];
 			return new ItemTuple (entry.Text, entry.Icon, entry.Title);
 		}
-		
-		#endregion
 			
 		void HandleActivated (object sender, EventArgs args)
 		{
@@ -336,6 +273,7 @@ namespace Docky.DBus
 		}
 		
 		#region IDisposable implementation
+		
 		public void Dispose ()
 		{
 			if (timer > 0)
@@ -352,6 +290,7 @@ namespace Docky.DBus
 			
 			owner = null;
 		}
+		
 		#endregion
 	}
 }

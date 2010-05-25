@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #  
-#  Copyright (C) 2010 Rico Tzschichholz
+#  Copyright (C) 2010 Rico Tzschichholz, Robert Dyer
 # 
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ import math
 
 try:
 	from deluge.ui.client import sclient
-	from docky.docky import DockyItem, DockySink
+	from docky.dockmanager import DockManagerItem, DockManagerSink
 	from signal import signal, SIGTERM
 	from sys import exit
 except ImportError, e:
@@ -52,9 +52,9 @@ def bytes2ratestr(bytes):
 	return str(amount) + suffix
 	
 
-class DockyDelugeItem(DockyItem):
-	def __init__(self, path):
-		DockyItem.__init__(self, path)
+class DelugeItem(DockManagerItem):
+	def __init__(self, sink, path):
+		DockManagerItem.__init__(self, sink, path)
 		
 		self.timer = 0
 		
@@ -72,25 +72,25 @@ class DockyDelugeItem(DockyItem):
 				rate = round(sclient.get_download_rate())
 	
 			if rate > 0:
-				self.iface.SetBadgeText("%s" % bytes2ratestr(rate))
+				self.set_badge("%s" % bytes2ratestr(rate))
 			else:
-				self.iface.ResetBadgeText()
+				self.reset_badge()
 			return True
 		except Exception, e:
 			print e
-			self.iface.ResetBadgeText()
+			self.reset_badge()
 			return False
 	
 
-class DockyDelugeSink(DockySink):
+class DelugeSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetOwnsDesktopFile() and item.GetDesktopFile().endswith ("deluge.desktop"):
-			self.items[pathtoitem] = DockyDelugeItem(pathtoitem)
+		if item.GetDesktopFile().endswith ("deluge.desktop"):
+			self.items[pathtoitem] = DelugeItem(self, pathtoitem)
 
-dockysink = DockyDelugeSink()
+delugesink = DelugeSink()
 
 def cleanup ():
-	dockysink.dispose ()
+	delugesink.dispose ()
 
 if __name__ == "__main__":
 	mainloop = gobject.MainLoop(is_running=True)

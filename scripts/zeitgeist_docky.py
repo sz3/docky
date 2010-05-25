@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #  
-#  Copyright (C) 2009 Jason Smith, Seif Lotfy
+#  Copyright (C) 2009 Jason Smith, Seif Lotfy, Robert Dyer
 # 
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ import urllib
 import os
 
 try:
-	from docky.docky import DockyItem, DockySink
+	from docky.dockmanager import DockManagerItem, DockManagerSink
 	from zeitgeist.client import ZeitgeistClient
 	from zeitgeist.datamodel import Event, Subject, Interpretation, Manifestation, StorageState
 	from signal import signal, SIGTERM
@@ -104,43 +104,41 @@ class MostUsedProvider():
 			self._zg.find_events_for_templates([event],_handle_get_events, [delta, today], StorageState.Any, 0, 0)  
 
 
-class DockyZGItem(DockyItem):
-	def __init__(self, path):
-		DockyItem.__init__(self, path)
+class ZGItem(DockManagerItem):
+	def __init__(self, sink, path):
+		DockManagerItem.__init__(self, sink, path)
 		self.mostusedprovider = MostUsedProvider()
 		self.update_most_used()
 	
 	def update_most_used(self):
 		self.uri = ""
-		if self.iface.GetOwnsUri():
+		if self.iface.GetUri() != "":
 			self.uri = self.iface.GetUri();
-		elif self.iface.GetOwnsDesktopFile():
+		elif self.iface.GetDesktopFile() != "":
 			self.uri = self.iface.GetDesktopFile()
 		else:
 			return
-		self.mostusedprovider.get_path_most_used (self.uri, self._handle_get_most_used, self.iface.GetOwnsUri ())
+		self.mostusedprovider.get_path_most_used (self.uri, self._handle_get_most_used, self.iface.GetUri () != "")
 
 	def _handle_get_most_used(self, results):
 		uris = results[0]
 		if len(uris) > 0:
 			for subject in uris:
-				menu_id = self.iface.AddFileMenuItem(subject ,"Other Recently Used Items")
-				self.id_map[menu_id] = subject
+				self.add_menu_item(subject ,"Other Recently Used Items")
 		uris = results[1]
 		if len(uris) > 0:
 			for subject in uris:
-				menu_id = self.iface.AddFileMenuItem(subject[1], "Most Used Items")
-				self.id_map[menu_id] = subject
+				self.add_menu_item(subject[1], "Most Used Items")
 
-class DockyZGSink(DockySink):
+class ZGSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetOwnsUri() or item.GetOwnsDesktopFile():
-			self.items[pathtoitem] = DockyZGItem(pathtoitem)
+		if item.GetUri() != "" or item.GetDesktopFile() != "":
+			self.items[pathtoitem] = ZGItem(self, pathtoitem)
 
-dockysink = DockyZGSink()
+zgsink = ZGSink()
 
 def cleanup ():
-	dockysink.dispose ()
+	zgsink.dispose ()
 
 if __name__ == "__main__":
 	mainloop = gobject.MainLoop(is_running=True)

@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smithm, Chris Szikszoy
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@
 // 
 
 using System;
+using System.Collections.Generic;
 
 using org.freedesktop.DBus;
 using NDesk.DBus;
@@ -24,47 +25,23 @@ namespace Docky.DBus
 {
 	public delegate void MenuItemActivatedHandler (uint menuHandle);
 	
-	public delegate void DockItemActivatedHandler (uint menuHandle, uint button);
-	
-	[Interface ("org.gnome.Docky.Item")]
-	public interface IDockyDBusItem
+	[Interface ("org.freedesktop.DockItem")]
+	public interface IDockManagerDBusItem
 	{
-		bool OwnsDesktopFile { get; }
-		bool OwnsUri { get; }
-		bool CanSetIcon { get; }
-		bool Attention { get; }
-		bool Wait { get; }
-		
-		string BadgeText { get; set; }
-		string Text { get; set; }
-		string Icon { get; set; }
-		
-		string Name { get; }
 		string DesktopFile { get; }
+		
 		string Uri { get; }
 		
-		uint[] Items { get; }
+		event MenuItemActivatedHandler MenuItemActivated;
 		
 		event Action ItemConfirmationNeeded;
-		
-		event MenuItemActivatedHandler MenuItemActivated;
 
-		uint AddMenuItem (string name, string icon, string title);
-		uint AddFileMenuItem (string uri, string title);
+		uint AddMenuItem (IDictionary<string, object> dict);
 		
-		void RemoveItem (uint item);
+		void RemoveMenuItem (uint item);
+		
+		void UpdateDockItem (IDictionary<string, object> dict);
+		
 		void ConfirmItem (uint item);
-		
-		void SetAttention ();
-		void UnsetAttention ();
-		
-		void SetWaiting ();
-		void UnsetWaiting ();
-		
-		void ResetBadgeText ();
-		void ResetText ();
-		void ResetIcon ();
-		
-		ItemTuple GetItem (uint item);
 	}
 }

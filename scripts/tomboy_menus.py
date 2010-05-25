@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #  
-#  Copyright (C) 2009-2010 Jason Smith, Rico Tzschichholz
+#  Copyright (C) 2009-2010 Jason Smith, Rico Tzschichholz, Robert Dyer
 # 
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ import sys
 import os
 
 try:
-	from docky.docky import DockyItem, DockySink
+	from docky.dockmanager import DockManagerItem, DockManagerSink
 	from signal import signal, SIGTERM
 	from sys import exit
 except ImportError, e:
@@ -36,9 +36,9 @@ tomboybus = "org.gnome.Tomboy"
 tomboypath = "/org/gnome/Tomboy/RemoteControl"
 tomboyiface = "org.gnome.Tomboy.RemoteControl"
 
-class DockyTomboyItem(DockyItem):
-	def __init__(self, path):
-		DockyItem.__init__(self, path)
+class TomboyItem(DockManagerItem):
+	def __init__(self, sink, path):
+		DockManagerItem.__init__(self, sink, path)
 		self.tomboy = None
 		
 		self.bus.add_signal_receiver(self.name_owner_changed_cb,
@@ -87,7 +87,7 @@ class DockyTomboyItem(DockyItem):
 	def clear_menu_buttons(self):
 		for k, v in self.id_map.iteritems():
 			try:
-				self.iface.RemoveItem(k)
+				self.iface.RemoveMenuItem(k)
 			except:
 				break;	
 	
@@ -97,11 +97,11 @@ class DockyTomboyItem(DockyItem):
 		if not self.tomboy:
 			return
 
-		self.add_menu_item ("Create New Note", "tomboy", "New", "Tomboy Controls")
-		self.add_menu_item ("Find Note...", "gtk-find", "Find", "Tomboy Controls")
+		self.add_menu_item ("Create New Note", "tomboy", "Tomboy Controls")
+		self.add_menu_item ("Find Note...", "gtk-find", "Tomboy Controls")
 		
 		for note in self.get_tomboy_menu_notes ():
-			self.add_menu_item (self.tomboy.GetNoteTitle(note), "tomboy", note, "Notes")
+			self.add_menu_item (self.tomboy.GetNoteTitle(note), "tomboy", "Notes")
 		
 	def get_tomboy_menu_notes(self):
 		notes = self.tomboy.ListAllNotes()
@@ -115,27 +115,25 @@ class DockyTomboyItem(DockyItem):
 		
 		menu_id = self.id_map[menu_id]
 		
-		if menu_id == "New":
+		if menu_id == "Create New Note":
 			newnote = self.tomboy.CreateNote()
 			self.tomboy.DisplayNote(newnote)
-		elif menu_id == "Find":
+		elif menu_id == "Find Note...":
 			self.tomboy.DisplaySearch()
 		else:
-			self.tomboy.DisplayNote(menu_id)
+			for note in self.get_tomboy_menu_notes ():
+				if menu_id == self.tomboy.GetNoteTitle(note):
+					self.tomboy.DisplayNote(note)
 		
-	def add_menu_item(self, name, icon, ident, title):
-		menu_id = self.iface.AddMenuItem(name, icon, title)
-		self.id_map[menu_id] = ident
-		
-class DockyTomboySink(DockySink):
+class TomboySink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetOwnsDesktopFile() and item.GetDesktopFile().endswith ("tomboy.desktop"):
-			self.items[pathtoitem] = DockyTomboyItem(pathtoitem)
+		if item.GetDesktopFile().endswith ("tomboy.desktop"):
+			self.items[pathtoitem] = TomboyItem(self, pathtoitem)
 
-dockysink = DockyTomboySink()
+tomboysink = TomboySink()
 
 def cleanup ():
-	dockysink.dispose ()
+	tomboysink.dispose ()
 
 if __name__ == "__main__":
 	mainloop = gobject.MainLoop(is_running=True)

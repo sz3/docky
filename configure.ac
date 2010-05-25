@@ -181,6 +181,7 @@ lib/gio-sharp/gio/Makefile
 scripts/Makefile
 scripts/docky/Makefile
 scripts/docky/docky.py
+scripts/dockmanager/Makefile
 scripts/metadata/Makefile
 Docky/Makefile
 Docky.CairoHelper/Makefile

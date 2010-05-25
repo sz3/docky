@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #  
-#  Copyright (C) 2010 Dan Korostelev, Rico Tzschichholz
+#  Copyright (C) 2010 Dan Korostelev, Rico Tzschichholz, Robert Dyer
 # 
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ import dbus
 import gobject
 
 try:
-	from docky.docky import DockyItem, DockySink
+	from docky.dockmanager import DockManagerItem, DockManagerSink
 	from signal import signal, SIGTERM
 	from sys import exit
 	import urllib2
@@ -50,10 +50,9 @@ def bytes2ratestr(bytes):
 	return str(amount) + suffix
 
 
-class DockyTransmissionItem(DockyItem):
-
-	def __init__(self, path):
-		DockyItem.__init__(self, path)
+class TransmissionItem(DockManagerItem):
+	def __init__(self, sink, path):
+		DockManagerItem.__init__(self, sink, path)
 		self.request = urllib2.Request(transmissionrpcurl+'?method=session-stats')
 		self.timer = 0
 
@@ -82,7 +81,7 @@ class DockyTransmissionItem(DockyItem):
 		else:
 			# transmission stopped, stop polling and remove badge
 			self.stop_polling()
-			self.iface.ResetBadgeText()
+			self.reset_badge()
 
 	def update_badge(self):
 		try:
@@ -97,21 +96,21 @@ class DockyTransmissionItem(DockyItem):
 			#Select Download Speed
 			speed = result['arguments']['downloadSpeed']
 			if speed:
-				self.iface.SetBadgeText(bytes2ratestr(speed))
+				self.set_badge(bytes2ratestr(speed))
 			else:
-				self.iface.ResetBadgeText()
+				self.reset_badge()
 			return True
 		except Exception as e:
 			self.stop_polling()
-			self.iface.ResetBadgeText()
+			self.reset_badge()
 
 
-class DockyTransmissionSink(DockySink):
+class TransmissionSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetOwnsDesktopFile() and item.GetDesktopFile().endswith("transmission.desktop"):
-			self.items[pathtoitem] = DockyTransmissionItem(pathtoitem)
+		if item.GetDesktopFile().endswith("transmission.desktop"):
+			self.items[pathtoitem] = TransmissionItem(self, pathtoitem)
 
-transmissionsink = DockyTransmissionSink()
+transmissionsink = TransmissionSink()
 
 def cleanup ():
 	transmissionsink.dispose ()

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #  
-#  Copyright (C) 2009-2010 Jason Smith, Rico Tzschichholz
+#  Copyright (C) 2009-2010 Jason Smith, Rico Tzschichholz, Robert Dyer
 # 
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ import os
 
 try:
 	import gtk
-	from docky.docky import DockyItem, DockySink
+	from docky.dockmanager import DockManagerItem, DockManagerSink
 	from docky.docky import DOCKY_DATADIR
 	from signal import signal, SIGTERM
 	from sys import exit
@@ -50,9 +50,9 @@ album_art_tmpfile = "/tmp/docky_%s_banshee_helper.png" % os.getenv('USERNAME')
 # 0 - none, 1- jewel, 2 - vinyl)
 overlay = 2
 
-class DockyBansheeItem(DockyItem):
-	def __init__(self, path):
-		DockyItem.__init__(self, path)
+class BansheeItem(DockManagerItem):
+	def __init__(self, sink, path):
+		DockManagerItem.__init__(self, sink, path)
 		self.timer = 0
 		self.player = None
 		self.control = None
@@ -116,7 +116,7 @@ class DockyBansheeItem(DockyItem):
 	def clear_menu_buttons(self):
 		for k, v in self.id_map.iteritems():
 			try:
-				self.iface.RemoveItem(k)
+				self.iface.RemoveMenuItem(k)
 			except:
 				break;	
 	
@@ -126,12 +126,12 @@ class DockyBansheeItem(DockyItem):
 		if not self.player:
 			return
 
-		self.add_menu_item("Previous", "media-skip-backward")
+		self.add_menu_item("Previous", "media-skip-backward", "")
 		if self.banshee_is_playing():
-			self.add_menu_item("Pause", "media-playback-pause")
+			self.add_menu_item("Pause", "media-playback-pause", "")
 		else:
-			self.add_menu_item("Play", "media-playback-start")
-		self.add_menu_item("Next", "media-skip-forward")
+			self.add_menu_item("Play", "media-playback-start", "")
+		self.add_menu_item("Next", "media-skip-forward", "")
 	
 	def signal_EventChanged(self, event, st, value):
 		print "EventChanged: %s" % (event)	
@@ -170,7 +170,7 @@ class DockyBansheeItem(DockyItem):
 	def update_icon(self):
 		if not self.player:
 			self.current_arturl = ""
-			self.iface.ResetIcon()
+			self.reset_icon()
 			return False
 			
 		if not enable_art_icon:
@@ -184,13 +184,13 @@ class DockyBansheeItem(DockyItem):
 					return True
 				self.current_arturl = arturl
 				self.current_arturl_mtime = os.stat(arturl).st_mtime
-				self.iface.SetIcon(self.get_album_art_overlay_path(arturl))
+				self.set_icon(self.get_album_art_overlay_path(arturl))
 			else:
 				self.current_arturl = ""
-				self.iface.ResetIcon()
+				self.reset_icon()
 		else:
 			self.current_arturl = ""
-			self.iface.ResetIcon()
+			self.reset_icon()
 		return True
 		
 	def get_album_art_path(self):
@@ -235,16 +235,16 @@ class DockyBansheeItem(DockyItem):
 
 	def update_text(self):
 		if not self.player:
-			self.iface.ResetText()
+			self.reset_tooltip()
 
 		if self.banshee_is_playing() and self.songinfo:
-			self.iface.SetText(self.songinfo)
+			self.set_tooltip(self.songinfo)
 		else:
-			self.iface.ResetText()
+			self.reset_tooltip()
 	
 	def update_badge(self):
 		if not self.player:
-			self.iface.ResetBadgeText()
+			self.reset_badge()
 			return False
 
 		if not enable_badge_text:
@@ -257,9 +257,9 @@ class DockyBansheeItem(DockyItem):
 			else:
 				position = self.player.GetPosition() / 1000
 			string = '%i:%02i' % (position / 60, position % 60)
-			self.iface.SetBadgeText(string)
+			self.set_badge(string)
 		else:
-			self.iface.ResetBadgeText()
+			self.reset_badge()
 		return True
 	
 	def menu_pressed(self, menu_id):
@@ -271,10 +271,6 @@ class DockyBansheeItem(DockyItem):
 			self.banshee_next()
 		elif self.id_map[menu_id] == "Previous":
 			self.banshee_prev()
-		
-	def add_menu_item(self, name, icon):
-		menu_id = self.iface.AddMenuItem(name, icon, "")
-		self.id_map[menu_id] = name
 		
 	def banshee_play(self):
 		if self.player:
@@ -301,15 +297,15 @@ class DockyBansheeItem(DockyItem):
 		return False
 	
 
-class DockyBansheeSink(DockySink):
+class BansheeSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetOwnsDesktopFile() and item.GetDesktopFile().endswith ("banshee-1.desktop"):
-			self.items[pathtoitem] = DockyBansheeItem(pathtoitem)
+		if item.GetDesktopFile().endswith ("banshee-1.desktop"):
+			self.items[pathtoitem] = BansheeItem(self, pathtoitem)
 
-dockysink = DockyBansheeSink()
+bansheesink = BansheeSink()
 
 def cleanup ():
-	dockysink.dispose ()
+	bansheesink.dispose ()
 
 if __name__ == "__main__":
 	mainloop = gobject.MainLoop(is_running=True)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #  
-#  Copyright (C) 2010 Tom Cowell, Rico Tzschichholz
+#  Copyright (C) 2010 Tom Cowell, Rico Tzschichholz, Robert Dyer
 # 
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ import sys
 import os
 
 try:
-	from docky.docky import DockyItem, DockySink
+	from docky.dockmanager import DockManagerItem, DockManagerSink
 	from signal import signal, SIGTERM
 	from sys import exit
 except ImportError, e:
@@ -37,9 +37,9 @@ emesenebus = "org.emesene.dbus"
 emesenepath = "/org/emesene/dbus"
 emeseneiface = "org.emesene.dbus"
 
-class DockyEmeseneItem(DockyItem):
-	def __init__(self, path):
-		DockyItem.__init__(self, path)
+class EmeseneItem(DockManagerItem):
+	def __init__(self, sink, path):
+		DockManagerItem.__init__(self, sink, path)
 		self.emesene = None
 
 		self.bus.add_signal_receiver(self.name_owner_changed_cb, dbus_interface='org.freedesktop.DBus', signal_name = 'NameOwnerChanged')
@@ -75,23 +75,23 @@ class DockyEmeseneItem(DockyItem):
 
 	def update_badge(self):
 		if not self.emesene:
-			self.iface.ResetBadgeText()
+			self.reset_badge()
 			return False
 
 		count = self.emesene.get_message_count()
 		if count > 0:
-			self.iface.SetBadgeText("%s" % count)
+			self.set_badge("%s" % count)
 		else:
-			self.iface.ResetBadgeText()
+			self.reset_badge()
 
 		return True		
 
-class DockyEmeseneSink(DockySink):
+class EmeseneSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetOwnsDesktopFile() and item.GetDesktopFile().endswith ("emesene.desktop"):
-			self.items[pathtoitem] = DockyEmeseneItem(pathtoitem)
+		if item.GetDesktopFile().endswith ("emesene.desktop"):
+			self.items[pathtoitem] = EmeseneItem(self, pathtoitem)
 
-emesenesink = DockyEmeseneSink()
+emesenesink = EmeseneSink()
 
 def cleanup():
 	emesenesink.dispose()

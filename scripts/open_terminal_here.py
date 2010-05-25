@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #  
-#  Copyright (C) 2009 Jason Smith
+#  Copyright (C) 2009 Jason Smith, Robert Dyer
 # 
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -26,15 +26,15 @@ import urllib
 import os
 
 try:
-	from docky.docky import DockyItem, DockySink
+	from docky.dockmanager import DockManagerItem, DockManagerSink
 	from signal import signal, SIGTERM
 	from sys import exit
 except ImportError, e:
 	exit()
 
-class DockyTerminalItem(DockyItem):
-	def __init__(self, path):
-		DockyItem.__init__(self, path)
+class TerminalItem(DockManagerItem):
+	def __init__(self, sink, path):
+		DockManagerItem.__init__(self, sink, path)
 		
 		client = gconf.client_get_default()
 		self.terminal = client.get_string("/desktop/gnome/applications/terminal/exec")
@@ -45,26 +45,22 @@ class DockyTerminalItem(DockyItem):
 		if not os.path.isdir (self.path):
 			self.path = os.path.dirname (self.path)
 		
-		self.add_menu_item("Open Terminal Here", "terminal")
+		self.add_menu_item("Open Terminal Here", "terminal", "actions")
 
 	def menu_pressed(self, menu_id):
 		if self.id_map[menu_id] == "Open Terminal Here":
 			os.chdir(self.path);
 			os.system ('%s &' % self.terminal)
-		
-	def add_menu_item(self, name, icon):
-		menu_id = self.iface.AddMenuItem(name, icon, "actions")
-		self.id_map[menu_id] = name
 			
-class DockyTerminalSink(DockySink):
+class TerminalSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetOwnsUri() and item.GetUri().startswith ("file://"):
-			self.items[pathtoitem] = DockyTerminalItem(pathtoitem)
+		if item.GetUri().startswith ("file://"):
+			self.items[pathtoitem] = TerminalItem(self, pathtoitem)
 
-dockysink = DockyTerminalSink()
+terminalsink = TerminalSink()
 
 def cleanup ():
-	dockysink.dispose ()
+	terminalsink.dispose ()
 
 if __name__ == "__main__":
 	mainloop = gobject.MainLoop(is_running=True)

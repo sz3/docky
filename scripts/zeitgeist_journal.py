@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 # -.- coding: utf-8 -.-
 
-# Zeitgeist
 #
-# Copyright © 2009 Seif Lotfy <seif@lotfy.com>
-# Copyright © 2009 Siegfried Gevatter <siegfried@gevatter.com>
+# Copyright (c) 2009 Seif Lotfy, Siegfried Gevatter
+# Copyright (c) 2010 Robert Dyer
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -31,7 +30,7 @@ import gnome.ui
 import atexit
 
 try:
-	from docky.docky import DockyItem, DockySink
+	from docky.dockmanager import DockManagerItem, DockManagerSink
 	from zeitgeist.client import ZeitgeistClient
 	from zeitgeist.datamodel import Event, Subject, Interpretation, Manifestation, StorageState
 	from signal import signal, SIGTERM
@@ -475,13 +474,13 @@ class DataIconView(gtk.TreeView):
 								event.subjects[0].text,
 								event])
 
-class DockyJournalItem(DockyItem):
-	def __init__(self, path):
-		DockyItem.__init__(self, path)
+class JournalItem(DockManagerItem):
+	def __init__(self, sink, path):
+		DockManagerItem.__init__(self, sink, path)
 		menu_id = self.iface.AddMenuItem("Journal", "document-open-recent", "")
 		self.id_map[menu_id] = "Journal"
 		self.uri = ""
-		if self.iface.GetOwnsUri():
+		if self.iface.GetUri() != "":
 			self.uri = self.iface.GetUri()
 		else:
 			self.uri = self.iface.GetDesktopFile()
@@ -491,15 +490,15 @@ class DockyJournalItem(DockyItem):
 			window = Window(CLIENT)
 			window.load_events(0, time.time() * 1000, self.uri)
 			
-class DockyJournalSink(DockySink):
+class JournalSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetOwnsUri() or item.GetOwnsDesktopFile():
-			self.items[pathtoitem] = DockyJournalItem(pathtoitem)
+		if item.GetUri() != "" or item.GetDesktopFile() != "":
+			self.items[pathtoitem] = JournalItem(self, pathtoitem)
 
-dockysink = DockyJournalSink()
+zgjournalsink = JournalSink()
 
 def cleanup ():
-	dockysink.dispose ()
+	zgjournalsink.dispose ()
 
 if __name__ == "__main__":
 	mainloop = gobject.MainLoop(is_running=True)

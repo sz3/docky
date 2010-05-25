@@ -17,4 +17,5 @@ dist_script_SCRIPTS = \
 
 SUBDIRS = \
 	docky \
+	dockmanager \
 	metadata

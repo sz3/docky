@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #  
-#  Copyright (C) 2010 Rico Tzschichholz
+#  Copyright (C) 2010 Rico Tzschichholz, Robert Dyer
 # 
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ import sys
 import os
 
 try:
-	from docky.docky import DockyItem, DockySink
+	from docky.dockmanager import DockManagerItem, DockManagerSink
 	from signal import signal, SIGTERM
 	from sys import exit
 except ImportError, e:
@@ -39,9 +39,9 @@ gtgbus = "org.GTG"
 gtgpath = "/org/GTG"
 gtgiface = "org.GTG"
 
-class DockyGTGItem(DockyItem):
-	def __init__(self, path):
-		DockyItem.__init__(self, path)
+class GTGItem(DockManagerItem):
+	def __init__(self, sink, path):
+		DockManagerItem.__init__(self, sink, path)
 		self.gtg = None
 		
 		self.bus.add_signal_receiver(self.name_owner_changed_cb,
@@ -76,7 +76,7 @@ class DockyGTGItem(DockyItem):
 	def clear_menu_buttons(self):
 		for k, v in self.id_map.iteritems():
 			try:
-				self.iface.RemoveItem(k)
+				self.iface.RemoveMenuItem(k)
 			except:
 				break;	
 	
@@ -86,8 +86,8 @@ class DockyGTGItem(DockyItem):
 		if not self.gtg:
 			return
 
-		self.add_menu_item ("New Task", "list-add", "NewTask", "Task Controls")
-		self.add_menu_item ("Open Tasks List", "gtg", "OpenWindow", "Task Controls")
+		self.add_menu_item ("New Task", "list-add", "Task Controls")
+		self.add_menu_item ("Open Tasks List", "gtg", "Task Controls")
 
 	def menu_pressed(self, menu_id):
 		if not menu_id in self.id_map:
@@ -95,26 +95,22 @@ class DockyGTGItem(DockyItem):
 		
 		menu_id = self.id_map[menu_id]
 		
-		if menu_id == "NewTask":
+		if menu_id == "New Task":
 			self.gtg.open_new_task()
-		elif menu_id == "OpenWindow":
+		elif menu_id == "Open Tasks List":
 			self.gtg.show_task_browser()
 		
-	def add_menu_item(self, name, icon, ident, title):
-		menu_id = self.iface.AddMenuItem(name, icon, title)
-		self.id_map[menu_id] = ident
 		
-		
-class DockyGTGSink(DockySink):
+class GTGSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetOwnsDesktopFile() and item.GetDesktopFile().endswith ("gtg.desktop"):
-			self.items[pathtoitem] = DockyGTGItem(pathtoitem)
+		if item.GetDesktopFile().endswith ("gtg.desktop"):
+			self.items[pathtoitem] = GTGItem(self, pathtoitem)
 
 
-dockysink = DockyGTGSink()
+gtgsink = GTGSink()
 
 def cleanup ():
-	dockysink.dispose ()
+	gtgsink.dispose ()
 
 if __name__ == "__main__":
 	mainloop = gobject.MainLoop(is_running=True)
