@@ -64,7 +64,7 @@ namespace Docky.Items
 		public DockyItem ()
 		{
 			Indicator = ActivityIndicator.Single;
-			HoverText = "Docky";
+			HoverText = prefs.Get<string> ("HoverText", "Docky");
 			Icon = "docky";
 		}
 		
