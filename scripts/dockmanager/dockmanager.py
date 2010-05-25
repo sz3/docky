@@ -53,11 +53,12 @@ class DockManagerItem():
 			sys.exit(0)
 		
 	def add_menu_item(self, name, icon):
-		add_menu_item(self, name, icon, "")
+		return add_menu_item(self, name, icon, "")
 	
 	def add_menu_item(self, name, icon, group):
 		menu_id = self.iface.AddMenuItem({"label":name, "icon-name":icon, "container-title":group})
 		self.id_map[menu_id] = name
+		return menu_id
 
 	def menu_pressed_signal(self, menu_id):
 		if self.id_map.has_key(menu_id):

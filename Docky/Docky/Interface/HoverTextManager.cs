@@ -129,8 +129,8 @@ namespace Docky.Interface
 				GLib.Source.Remove (timer);
 			
 			Gdk.Rectangle monitor_geo = window.Screen.GetMonitorGeometry (Monitor);
-			center.X = Math.Max (0, Math.Min (center.X, monitor_geo.X + monitor_geo.Width - surface.Width));
-			center.Y = Math.Max (0, Math.Min (center.Y, monitor_geo.Y + monitor_geo.Height - surface.Height));
+			center.X = Math.Max (monitor_geo.X, Math.Min (center.X, monitor_geo.X + monitor_geo.Width - surface.Width));
+			center.Y = Math.Max (monitor_geo.Y, Math.Min (center.Y, monitor_geo.Y + monitor_geo.Height - surface.Height));
 			
 			window.QueueDraw ();
 			window.Move (center.X, center.Y);

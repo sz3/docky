@@ -316,8 +316,11 @@ namespace Docky.Items
 		
 		public void PinToDock (ApplicationDockItem item)
 		{
-			Insert (item.OwnedItem.Uri.AbsoluteUri);
-			RemoveTransientItems (item.AsSingle <WnckDockItem>());
+			item.WindowsChanged -= HandleTransientWindowsChanged;
+			transient_items.Remove (item);
+			items.Add (item.OwnedItem.Uri.AbsoluteUri, item);
+
+			OnItemsChanged (null, null);
 		}
 		
 		public void SetWindowManager ()

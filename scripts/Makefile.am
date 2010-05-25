@@ -12,6 +12,7 @@ dist_script_SCRIPTS = \
 	rhythmbox_control.py	\
 	tomboy_menus.py		\
 	transmission_badge.py	\
+	tsclient_menus.py	\
 	zeitgeist_docky.py	\
 	zeitgeist_journal.py
 

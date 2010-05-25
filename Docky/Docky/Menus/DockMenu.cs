@@ -313,14 +313,14 @@ namespace Docky.Menus
 			case DockPosition.Bottom:
 			case DockPosition.Top:
 				y = oldY;
-				x = Math.Max (0, Math.Min (oldX, monitor_geo.X + monitor_geo.Width - allocation.Width));
+				x = Math.Max (monitor_geo.X, Math.Min (oldX, monitor_geo.X + monitor_geo.Width - allocation.Width));
 				tailOffset = x - oldX;
 				break;
 			
 			case DockPosition.Left:
 			case DockPosition.Right:
 				x = oldX;
-				y = Math.Max (0, Math.Min (oldY, monitor_geo.Y + monitor_geo.Height - allocation.Height));
+				y = Math.Max (monitor_geo.Y, Math.Min (oldY, monitor_geo.Y + monitor_geo.Height - allocation.Height));
 				tailOffset = y - oldY;
 			
 				// rotation breaks this
