@@ -94,12 +94,12 @@ namespace Docky.Items
 		void UpdateInfo ()
 		{
 			if (OwnedItem.HasAttribute ("Icon"))
-				Icon = OwnedItem.GetString ("Icon");
+				Icon = OwnedItem.GetString (("Icon"));
 			
 			if (OwnedItem.HasAttribute ("X-GNOME-FullName")) {
-				HoverText = OwnedItem.GetString ("X-GNOME-FullName");
+				HoverText = OwnedItem.GetString (("X-GNOME-FullName"));
 			} else if (OwnedItem.HasAttribute ("Name")) {
-				HoverText = OwnedItem.GetString ("Name");
+				HoverText = OwnedItem.GetString (("Name"));
 			} else {
 				HoverText = System.IO.Path.GetFileNameWithoutExtension (OwnedItem.Path);
 			}
