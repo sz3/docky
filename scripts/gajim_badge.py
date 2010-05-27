@@ -100,7 +100,7 @@ class GajimItem(DockManagerItem):
 
 class GajimSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetDesktopFile().endswith ("gajim.desktop"):
+		if item.Get("org.freedesktop.DockItem", "DesktopFile", dbus_interface="org.freedesktop.DBus.Properties").endswith ("gajim.desktop"):
 			self.items[pathtoitem] = DockManagerGajimItem(self, pathtoitem)
 
 gajimsink = GajimSink()

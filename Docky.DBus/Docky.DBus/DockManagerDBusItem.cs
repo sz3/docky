@@ -17,12 +17,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 
 using GLib;
 
+using org.freedesktop.DBus;
 using NDesk.DBus;
 
 using Docky.Items;
@@ -53,6 +52,22 @@ namespace Docky.DBus
 		List<uint> known_ids = new List<uint> ();
 		
 		AbstractDockItem owner;
+		
+		string DesktopFile {
+			get {
+				if (owner is ApplicationDockItem)
+					return (owner as ApplicationDockItem).OwnedItem.Path;
+				return "";
+			}
+		}
+		
+		string Uri {
+			get {
+				if (owner is FileDockItem)
+					return (owner as FileDockItem).Uri;
+				return "";
+			}
+		}
 		
 		public DockManagerDBusItem (AbstractDockItem item)
 		{
@@ -105,25 +120,42 @@ namespace Docky.DBus
 		
 		#region IDockManagerDBusItem implementation
 		
+		public object Get (string iface, string property)
+		{
+			if (iface != "org.freedesktop.DockItem")
+				return null;
+			
+			if (property == "DesktopFile")
+				return DesktopFile;
+			
+			if (property == "Uri")
+				return Uri;
+			
+			return null;
+		}
+		
+		public void Set (string iface, string property, object val)
+		{
+		}
+		
+		public IDictionary<string,object> GetAll (string iface)
+		{
+			if (iface != "org.freedesktop.DockItem")
+				return null;
+			
+			Dictionary<string, object> items = new Dictionary<string, object> ();
+			
+			items["DesktopFile"] = DesktopFile;
+			items["Uri"] = Uri;
+			
+			return items;
+		}
+		
+		#endregion
+		
+		#region IDockManagerDBusItem implementation
+		
 		public event MenuItemActivatedHandler MenuItemActivated;
-		
-		[Property("org.freedesktop.DBus.Properties")]
-		public string DesktopFile {
-			get {
-				if (owner is ApplicationDockItem)
-					return (owner as ApplicationDockItem).OwnedItem.Path;
-				return "";
-			}
-		}
-		
-		[Property("org.freedesktop.DBus.Properties")]
-		public string Uri {
-			get {
-				if (owner is FileDockItem)
-					return (owner as FileDockItem).Uri;
-				return "";
-			}
-		}
 		
 		public uint AddMenuItem (IDictionary<string, object> dict)
 		{

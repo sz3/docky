@@ -86,10 +86,7 @@ class TomboyItem(DockManagerItem):
 	
 	def clear_menu_buttons(self):
 		for k, v in self.id_map.iteritems():
-			try:
-				self.iface.RemoveMenuItem(k)
-			except:
-				break;	
+			remove_menu_item(k)
 	
 	def set_menu_buttons(self):
 		self.clear_menu_buttons()
@@ -127,7 +124,7 @@ class TomboyItem(DockManagerItem):
 		
 class TomboySink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetDesktopFile().endswith ("tomboy.desktop"):
+		if item.Get("org.freedesktop.DockItem", "DesktopFile", dbus_interface="org.freedesktop.DBus.Properties").endswith ("tomboy.desktop"):
 			self.items[pathtoitem] = TomboyItem(self, pathtoitem)
 
 tomboysink = TomboySink()

@@ -13,7 +13,7 @@ dist_script_SCRIPTS = \
 	tomboy_menus.py		\
 	transmission_badge.py	\
 	tsclient_menus.py	\
-	zeitgeist_docky.py	\
+	zeitgeist_menus.py	\
 	zeitgeist_journal.py
 
 SUBDIRS = \

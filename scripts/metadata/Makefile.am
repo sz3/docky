@@ -13,5 +13,5 @@ dist_script_DATA = \
 	tomboy_menus.py.info	\
 	transmission_badge.py.info	\
 	tsclient_menus.py.info	\
-	zeitgeist_docky.py.info	\
+	zeitgeist_menus.py.info	\
 	zeitgeist_journal.py.info

@@ -26,12 +26,8 @@ namespace Docky.DBus
 	public delegate void MenuItemActivatedHandler (uint menuHandle);
 	
 	[Interface ("org.freedesktop.DockItem")]
-	public interface IDockManagerDBusItem
+	public interface IDockManagerDBusItem : Properties
 	{
-		string DesktopFile { get; }
-		
-		string Uri { get; }
-		
 		event MenuItemActivatedHandler MenuItemActivated;
 		
 		event Action ItemConfirmationNeeded;

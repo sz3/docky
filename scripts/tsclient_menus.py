@@ -63,7 +63,7 @@ class TsclientItem(DockManagerItem):
 
 	def remove_file(self, name):
 		if name[-4:] == ".rdp":
-			self.iface.RemoveMenuItem(self.file_map[name])
+			remove_menu_item(self.file_map[name])
 			del self.file_map[name]
 
 	def menu_pressed(self, menu_id):
@@ -119,7 +119,7 @@ if monitor_with_inotify:
 
 class TsclientSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetDesktopFile().endswith("tsclient.desktop"):
+		if item.Get("org.freedesktop.DockItem", "DesktopFile", dbus_interface="org.freedesktop.DBus.Properties").endswith("tsclient.desktop"):
 			self.items[pathtoitem] = TsclientItem(self, pathtoitem)
 
 tscsink = TsclientSink()

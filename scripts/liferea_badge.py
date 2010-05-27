@@ -94,7 +94,7 @@ class LifereaItem(DockManagerItem):
 
 class LifereaSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetDesktopFile().endswith ("liferea.desktop"):
+		if item.Get("org.freedesktop.DockItem", "DesktopFile", dbus_interface="org.freedesktop.DBus.Properties").endswith ("liferea.desktop"):
 			self.items[pathtoitem] = LifereaItem(self, pathtoitem)
 
 lifereasink = LifereaSink()

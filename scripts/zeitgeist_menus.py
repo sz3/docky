@@ -27,6 +27,7 @@ import dbus.glib
 import sys
 import urllib
 import os
+import subprocess
 
 try:
 	from docky.dockmanager import DockManagerItem, DockManagerSink
@@ -111,14 +112,18 @@ class ZGItem(DockManagerItem):
 		self.update_most_used()
 	
 	def update_most_used(self):
-		self.uri = ""
-		if self.iface.GetUri() != "":
-			self.uri = self.iface.GetUri();
-		elif self.iface.GetDesktopFile() != "":
-			self.uri = self.iface.GetDesktopFile()
-		else:
+		has_uri = True
+		self.uri = self.iface.Get("org.freedesktop.DockItem", "Uri", dbus_interface="org.freedesktop.DBus.Properties")
+		
+		if not self.uri:
+			has_uri = False
+			self.uri = self.iface.Get("org.freedesktop.DockItem", "DesktopFile", dbus_interface="org.freedesktop.DBus.Properties")
+			self.uri = 'application://%s' % self.uri[self.uri.rfind('/')+1:]
+		
+		if not self.uri:
 			return
-		self.mostusedprovider.get_path_most_used (self.uri, self._handle_get_most_used, self.iface.GetUri () != "")
+		
+		self.mostusedprovider.get_path_most_used (self.uri, self._handle_get_most_used, hasUri)
 
 	def _handle_get_most_used(self, results):
 		uris = results[0]
@@ -130,10 +135,16 @@ class ZGItem(DockManagerItem):
 			for subject in uris:
 				self.add_menu_item(subject[1], "Most Used Items")
 
+	def menu_pressed(self, menu_id):
+		uri = self.id_map[menu_id][1]
+		subprocess.Popen(['xdg-open', uri])
+
+
 class ZGSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetUri() != "" or item.GetDesktopFile() != "":
+		if item.Get("org.freedesktop.DockItem", "Uri", dbus_interface="org.freedesktop.DBus.Properties") != "" or item.Get("org.freedesktop.DockItem", "DesktopFile", dbus_interface="org.freedesktop.DBus.Properties") != "":
 			self.items[pathtoitem] = ZGItem(self, pathtoitem)
+
 
 zgsink = ZGSink()
 

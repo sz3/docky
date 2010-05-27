@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #  
-#  Copyright (C) 2010 Dan Korostelev, Rico Tzschichholz, Robert Dyer
+#  Copyright (C) 2010 Dan Korostelev, Rico Tzschichholz, Robert Dyer, Michal Hruby
 # 
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -66,8 +66,13 @@ class TransmissionItem(DockManagerItem):
 
 	def start_polling(self):
 		if not self.timer > 0:
-			self.timer = gobject.timeout_add(UPDATE_DELAY, self.update_badge)
+			self.timer = gobject.timeout_add(UPDATE_DELAY, self.refresh_item)
 
+	def refresh_item(self):
+		self.update_badge()
+		self.update_progress()
+		return True
+	
 	def stop_polling(self):
 		if self.timer > 0:
 			gobject.source_remove(self.timer)
@@ -83,15 +88,22 @@ class TransmissionItem(DockManagerItem):
 			self.stop_polling()
 			self.reset_badge()
 
+	def get_transmission_data(self)
+		response = None
+		
+		for i in range(2): # first try can be getting session id
+			try:
+				response = urllib2.urlopen(self.request)
+				break # if no error, we don't need second try
+			except urllib2.HTTPError, e:
+				if e.code == 409 and 'X-Transmission-Session-Id' in e.headers:
+					self.request.add_header('X-Transmission-Session-Id', e.headers['X-Transmission-Session-Id'])
+		
+		return response
+	
 	def update_badge(self):
 		try:
-			for i in range(2): # first try can be getting session id
-				try:
-					response = urllib2.urlopen(self.request)
-					break # if no error, we don't need second try
-				except urllib2.HTTPError, e:
-					if e.code == 409 and 'X-Transmission-Session-Id' in e.headers:
-						self.request.add_header('X-Transmission-Session-Id', e.headers['X-Transmission-Session-Id'])
+			response = self.get_transmission_data()
 			result = json.load(response)
 			#Select Download Speed
 			speed = result['arguments']['downloadSpeed']
@@ -99,15 +111,40 @@ class TransmissionItem(DockManagerItem):
 				self.set_badge(bytes2ratestr(speed))
 			else:
 				self.reset_badge()
-			return True
 		except Exception as e:
 			self.stop_polling()
 			self.reset_badge()
+	
+	def update_progress(self):
+		try:
+			request = urllib2.Request(transmissionrpcurl)
+			req_info = {'method':'torrent-get', 'arguments':{'fields':['percentDone', 'status']}}
+			request.add_data(json.dumps(req_info))
+			response = self.get_transmission_data(request)
+			result = json.load(response)
+
+			percents = result['arguments']['torrents']
+			total_percent = num_download = 0
+			TR_STATUS_DOWNLOADING = 4
+
+			for torrent in percents:
+				if torrent['status'] & TR_STATUS_DOWNLOADING != 0:
+					num_download += 1
+					total_percent += torrent['percentDone']
+
+			progress = -1
+			if (num_download > 0):
+				progress = int(total_percent / num_download * 100)
+
+			self.iface.UpdateDockItem({'progress': progress})
+		except Exception as e:
+			self.stop_polling()
+			self.iface.UpdateDockItem({'progress': -1})
 
 
 class TransmissionSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetDesktopFile().endswith("transmission.desktop"):
+		if item.Get("org.freedesktop.DockItem", "DesktopFile", dbus_interface="org.freedesktop.DBus.Properties").endswith("transmission.desktop"):
 			self.items[pathtoitem] = TransmissionItem(self, pathtoitem)
 
 transmissionsink = TransmissionSink()

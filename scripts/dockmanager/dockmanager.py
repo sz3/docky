@@ -56,9 +56,28 @@ class DockManagerItem():
 		return add_menu_item(self, name, icon, "")
 	
 	def add_menu_item(self, name, icon, group):
-		menu_id = self.iface.AddMenuItem({"label":name, "icon-name":icon, "container-title":group})
+		try:
+			menu_id = self.iface.AddMenuItem({"label":name, "icon-name":icon, "container-title":group})
+		except dbus.DBusException, e:
+			return None
 		self.id_map[menu_id] = name
 		return menu_id
+
+	def add_menu_item_uri(self, uri, group):
+		try:
+			menu_id = self.iface.AddMenuItem({"uri":uri, "container-title":group})
+		except dbus.DBusException, e:
+			return None
+		self.id_map[menu_id] = uri
+		return menu_id
+
+	def remove_menu_item(self, menu_id):
+		if menu_id in self.id_map:
+			try:
+				self.iface.RemoveMenuItem(menu_id)
+			except dbus.DBusException, e:
+				return None
+			del self.id_map[menu_id]
 
 	def menu_pressed_signal(self, menu_id):
 		if self.id_map.has_key(menu_id):
@@ -69,53 +88,77 @@ class DockManagerItem():
 	
 	def item_confirmation_needed(self):
 		if "x-docky-uses-timeout" in self.sink.capabilities:
-			for k,v in self.id_map.iteritems():
-				self.iface.ConfirmItem(k)
+			for menu_id, title in self.id_map.iteritems():
+				try:
+					self.iface.ConfirmItem(menu_id)
+				except dbus.DBusException, e:
+					pass
 	
 	def set_tooltip(self, text):
 		if ("dock-item-tooltip" in self.sink.capabilities):
-			self.iface.UpdateDockItem({"tooltip":text})
+			try:
+				self.iface.UpdateDockItem({"tooltip":text})
+			except dbus.DBusException, e:
+				pass
 	
 	def reset_tooltip(self):
 		self.set_tooltip("")
 	
 	def set_badge(self, text):
 		if ("dock-item-badge" in self.sink.capabilities):
-			self.iface.UpdateDockItem({"badge":text})
+			try:
+				self.iface.UpdateDockItem({"badge":text})
+			except dbus.DBusException, e:
+				pass
 	
 	def reset_badge(self):
 		self.set_badge("")
 	
 	def set_icon(self, icon):
 		if ("dock-item-icon-file" in self.sink.capabilities):
-			self.iface.UpdateDockItem({"icon-file":icon})
+			try:
+				self.iface.UpdateDockItem({"icon-file":icon})
+			except dbus.DBusException, e:
+				pass
 	
 	def reset_icon(self):
 		self.set_icon("")
 	
 	def set_attention(self):
 		if ("dock-item-attention" in self.sink.capabilities):
-			self.iface.UpdateDockItem({"attention":True})
+			try:
+				self.iface.UpdateDockItem({"attention":True})
+			except dbus.DBusException, e:
+				pass
 	
 	def unset_attention(self):
 		if ("dock-item-attention" in self.sink.capabilities):
-			self.iface.UpdateDockItem({"attention":False})
+			try:
+				self.iface.UpdateDockItem({"attention":False})
+			except dbus.DBusException, e:
+				pass
 	
 	def set_waiting(self):
 		if ("dock-item-waiting" in self.sink.capabilities):
-			self.iface.UpdateDockItem({"waiting":True})
+			try:
+				self.iface.UpdateDockItem({"waiting":True})
+			except dbus.DBusException, e:
+				pass
 	
 	def unset_waiting(self):
 		if ("dock-item-waiting" in self.sink.capabilities):
-			self.iface.UpdateDockItem({"waiting":False})
+			try:
+				self.iface.UpdateDockItem({"waiting":False})
+			except dbus.DBusException, e:
+				pass
 	
 	def dispose(self):
 		try:
 			self.reset_tooltip()
 			self.reset_badge()
 			self.reset_icon()
-			for k, v in self.id_map.iteritems():
-				self.iface.RemoveMenuItem(k)
+			for menu_id, title in self.id_map.iteritems():
+				self.iface.RemoveMenuItem(menu_id)
 		except dbus.DBusException, e:
 			return
 
@@ -123,33 +166,29 @@ class DockManagerItem():
 class DockManagerSink():
 	def __init__(self):
 		self.bus = dbus.SessionBus()
+		self.capabilities = []
 		self.items = {}
 
 		try:
 			obj = self.bus.get_object(dockmanagerbus, dockmanagerpath)
-			self._iface = dbus.Interface(obj, dockmanageriface)
+			iface = dbus.Interface(obj, dockmanageriface)
 
-			paths = self._iface.GetItems()
-			self.capabilities = self._iface.GetCapabilities()
+			self.capabilities = iface.GetCapabilities()
+
+			for pathtoitem in iface.GetItems():
+				self.item_added(pathtoitem)
 
 			self.bus.add_signal_receiver(self.item_added,   "ItemAdded",   dockmanageriface, dockmanagerbus, dockmanagerpath)
 			self.bus.add_signal_receiver(self.item_removed, "ItemRemoved", dockmanageriface, dockmanagerbus, dockmanagerpath)
-
-			for pathtoitem in paths:
-				obj = self.bus.get_object(dockmanagerbus, pathtoitem)
-				item = dbus.Interface(obj, itemiface)
-				self.item_path_found(pathtoitem, item)
 
 			self.bus.add_signal_receiver(self.name_owner_changed_cb, dbus_interface='org.freedesktop.DBus', signal_name='NameOwnerChanged')
 		except dbus.DBusException, e:
 			print "DockManagerSink(): %s" % e
 			sys.exit(0)
 
-	def name_owner_changed_cb(self, name, old_owner, new_owner):
-		if name == dockmanagerbus and not new_owner:
-			print "DockManagerDBus %s is gone, quitting now..." % name
-			self.shut_down()				
-
+	def item_path_found(self, path, item):
+		pass
+	
 	def item_added(self, path):
 		obj = self.bus.get_object(dockmanagerbus, path)
 		item = dbus.Interface(obj, itemiface)
@@ -159,13 +198,18 @@ class DockManagerSink():
 		if path in self.items:
 			self.items[path].dispose()
 			del self.items[path]
-	
-	def shut_down(self):
-		gobject.idle_add(quit, 1)
+
+	def name_owner_changed_cb(self, name, old_owner, new_owner):
+		if name == dockmanagerbus and not new_owner:
+			print "DockManagerDBus %s is gone, quitting now..." % name
+			self.shut_down()				
 	
 	def dispose(self):
 		self.bus.remove_signal_receiver(self.item_added,   "ItemAdded",   dockmanageriface, dockmanagerbus, dockmanagerpath)
 		self.bus.remove_signal_receiver(self.item_removed, "ItemRemoved", dockmanageriface, dockmanagerbus, dockmanagerpath)
-		for path, item in self.items.iteritems():
-			item.dispose()
+		for path in self.items:
+			item_removed(path)
+	
+	def shut_down(self):
+		gobject.idle_add(quit, 1)
 

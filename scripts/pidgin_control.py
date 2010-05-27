@@ -113,10 +113,7 @@ class PidginItem(DockManagerItem):
 
 	def clear_menu_buttons(self):
 		for k, v in self.id_map.iteritems():
-			try:
-				self.iface.RemoveMenuItem(k)
-			except:
-				break;	
+			remove_menu_item(k)
 	
 	def set_menu_buttons(self):
 		self.clear_menu_buttons()
@@ -161,7 +158,7 @@ class PidginItem(DockManagerItem):
 	
 class PidginSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetDesktopFile().endswith ("pidgin.desktop"):
+		if item.Get("org.freedesktop.DockItem", "DesktopFile", dbus_interface="org.freedesktop.DBus.Properties").endswith ("pidgin.desktop"):
 			self.items[pathtoitem] = PidginItem(self, pathtoitem)
 
 

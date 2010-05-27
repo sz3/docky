@@ -128,10 +128,7 @@ class RhythmboxItem(DockManagerItem):
 
 	def clear_menu_buttons(self):
 		for k, v in self.id_map.iteritems():
-			try:
-				self.iface.RemoveMenuItem(k)
-			except:
-				break;	
+			remove_menu_item(k)
 	
 	def set_menu_buttons(self):
 		self.clear_menu_buttons()
@@ -368,7 +365,7 @@ class RhythmboxItem(DockManagerItem):
 		
 class RhythmboxSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetDesktopFile().endswith ("rhythmbox.desktop"):
+		if item.Get("org.freedesktop.DockItem", "DesktopFile", dbus_interface="org.freedesktop.DBus.Properties").endswith ("rhythmbox.desktop"):
 			self.items[pathtoitem] = RhythmboxItem(self, pathtoitem)
 
 rhythmboxsink = RhythmboxSink()

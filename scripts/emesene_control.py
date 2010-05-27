@@ -88,7 +88,7 @@ class EmeseneItem(DockManagerItem):
 
 class EmeseneSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetDesktopFile().endswith ("emesene.desktop"):
+		if item.Get("org.freedesktop.DockItem", "DesktopFile", dbus_interface="org.freedesktop.DBus.Properties").endswith ("emesene.desktop"):
 			self.items[pathtoitem] = EmeseneItem(self, pathtoitem)
 
 emesenesink = EmeseneSink()

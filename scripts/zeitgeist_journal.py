@@ -474,26 +474,28 @@ class DataIconView(gtk.TreeView):
 								event.subjects[0].text,
 								event])
 
+
 class JournalItem(DockManagerItem):
 	def __init__(self, sink, path):
 		DockManagerItem.__init__(self, sink, path)
 		menu_id = self.iface.AddMenuItem("Journal", "document-open-recent", "")
 		self.id_map[menu_id] = "Journal"
-		self.uri = ""
-		if self.iface.GetUri() != "":
-			self.uri = self.iface.GetUri()
-		else:
-			self.uri = self.iface.GetDesktopFile()
+		self.uri = self.iface.Get("org.freedesktop.DockItem", "Uri", dbus_interface="org.freedesktop.DBus.Properties")
+		if not self.uri:
+			self.uri = self.iface.Get("org.freedesktop.DockItem", "DesktopFile", dbus_interface="org.freedesktop.DBus.Properties")
+			self.uri = 'application://%s' % self.uri[self.uri.rfind('/')+1:]
 
 	def menu_pressed(self, menu_id):
 		if self.id_map[menu_id] == "Journal":
 			window = Window(CLIENT)
 			window.load_events(0, time.time() * 1000, self.uri)
-			
+
+
 class JournalSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetUri() != "" or item.GetDesktopFile() != "":
+		if item.Get("org.freedesktop.DockItem", "Uri", dbus_interface="org.freedesktop.DBus.Properties") or item.Get("org.freedesktop.DockItem", "DesktopFile", dbus_interface="org.freedesktop.DBus.Properties"):
 			self.items[pathtoitem] = JournalItem(self, pathtoitem)
+
 
 zgjournalsink = JournalSink()
 

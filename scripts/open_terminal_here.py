@@ -41,7 +41,7 @@ class TerminalItem(DockManagerItem):
 		if self.terminal == None:
 			self.terminal = "gnome-terminal"
 		
-		self.path = urllib.unquote(str(self.iface.GetUri ()[7:]))
+		self.path = urllib.unquote(str(self.iface.Get("org.freedesktop.DockItem", "Uri", dbus_interface="org.freedesktop.DBus.Properties")[7:]))
 		if not os.path.isdir (self.path):
 			self.path = os.path.dirname (self.path)
 		
@@ -54,7 +54,7 @@ class TerminalItem(DockManagerItem):
 			
 class TerminalSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetUri().startswith ("file://"):
+		if item.Get("org.freedesktop.DockItem", "Uri", dbus_interface="org.freedesktop.DBus.Properties").startswith ("file://"):
 			self.items[pathtoitem] = TerminalItem(self, pathtoitem)
 
 terminalsink = TerminalSink()

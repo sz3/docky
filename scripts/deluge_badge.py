@@ -84,7 +84,7 @@ class DelugeItem(DockManagerItem):
 
 class DelugeSink(DockManagerSink):
 	def item_path_found(self, pathtoitem, item):
-		if item.GetDesktopFile().endswith ("deluge.desktop"):
+		if item.Get("org.freedesktop.DockItem", "DesktopFile", dbus_interface="org.freedesktop.DBus.Properties").endswith ("deluge.desktop"):
 			self.items[pathtoitem] = DelugeItem(self, pathtoitem)
 
 delugesink = DelugeSink()
