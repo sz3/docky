@@ -1,8 +1,6 @@
 SUBDIRS = icons themes
 
 EXTRA_DIST = docky.desktop.in \
-	albumoverlay_jewel.png \
-	albumoverlay_vinyl.png \
 	sun.svg \
 	wind.svg \
 	temp.svg \
@@ -19,8 +17,6 @@ poofdir = $(datadir)/docky
 poof_DATA = poof.png \
 	sun.svg \
 	wind.svg \
-	temp.svg \
-	albumoverlay_jewel.png \
-	albumoverlay_vinyl.png
+	temp.svg
 
 @INTLTOOL_DESKTOP_RULE@
