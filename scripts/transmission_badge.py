@@ -88,7 +88,7 @@ class TransmissionItem(DockManagerItem):
 			self.stop_polling()
 			self.reset_badge()
 
-	def get_transmission_data(self)
+	def get_transmission_data(self):
 		response = None
 		
 		for i in range(2): # first try can be getting session id
