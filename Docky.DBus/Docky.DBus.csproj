@@ -58,8 +58,10 @@
   <ItemGroup>
     <Compile Include="Docky.DBus\DBusManager.cs" />
     <Compile Include="Docky.DBus\IDockyDBus.cs" />
-    <Compile Include="Docky.DBus\IDockyDBusItem.cs" />
-    <Compile Include="Docky.DBus\DockyDBusItem.cs" />
+    <Compile Include="Docky.DBus\IDockManagerDBus.cs" />
+    <Compile Include="Docky.DBus\IDockManagerDBusItem.cs" />
+    <Compile Include="Docky.DBus\DockManagerDBus.cs" />
+    <Compile Include="Docky.DBus\DockManagerDBusItem.cs" />
     <Compile Include="Docky.DBus\DockyDBus.cs" />
     <Compile Include="Docky.DBus\RemoteMenuEntry.cs" />
     <Compile Include="Docky.DBus\RemoteFileMenuEntry.cs" />
