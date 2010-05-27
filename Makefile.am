@@ -5,7 +5,6 @@ ACLOCAL_AMFLAGS = -I m4 -I m4/shamrock
 SUBDIRS = \
 	. \
 	data \
-	scripts \
 	lib \
 	po \
 	Docky.CairoHelper \
