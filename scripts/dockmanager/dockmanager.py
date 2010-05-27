@@ -208,7 +208,7 @@ class DockManagerSink():
 		self.bus.remove_signal_receiver(self.item_added,   "ItemAdded",   dockmanageriface, dockmanagerbus, dockmanagerpath)
 		self.bus.remove_signal_receiver(self.item_removed, "ItemRemoved", dockmanageriface, dockmanagerbus, dockmanagerpath)
 		for path in self.items:
-			item_removed(path)
+			self.item_removed(path)
 	
 	def shut_down(self):
 		gobject.idle_add(quit, 1)

@@ -123,7 +123,7 @@ class ZGItem(DockManagerItem):
 		if not self.uri:
 			return
 		
-		self.mostusedprovider.get_path_most_used (self.uri, self._handle_get_most_used, hasUri)
+		self.mostusedprovider.get_path_most_used (self.uri, self._handle_get_most_used, has_uri)
 
 	def _handle_get_most_used(self, results):
 		uris = results[0]
