@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Chris Szikszoy
+//  Copyright (C) 2009 Chris Szikszoy, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -25,7 +25,6 @@ using Notifications;
 
 namespace Docky.Services.Logging
 {
-	
 	public abstract class LogBase
 	{
 		class LogCall
@@ -95,7 +94,8 @@ namespace Docky.Services.Logging
 		{
 			if (level < DisplayLevel) return;
 			
-			msg = string.Format (msg, args);
+			if (args.Length > 0)
+				msg = string.Format (msg, args);
 			if (Writing) {
 				// In the process of logging, another log call has been made.
 				// We need to avoid the infinite regress this may cause.
@@ -129,7 +129,10 @@ namespace Docky.Services.Logging
 			if (string.IsNullOrEmpty (sender))
 				title = "Docky";
 			
-			return NotificationService.Notify (title, string.Format (msg, args), icon);
+			if (args.Length > 0)
+				msg = string.Format (msg, args);
+			
+			return NotificationService.Notify (title, msg, icon);
 		}
 	}
 }

@@ -21,7 +21,6 @@ using Notifications;
 
 namespace Docky.Services
 {
-	
 	public enum LogLevel {
 		Debug,
 		Info,
@@ -33,7 +32,6 @@ namespace Docky.Services
 
 	public class Log : Logging.LogBase
 	{
-
 		public static void Debug (string msg, params object [] args)
 		{
 			Write (LogLevel.Debug, msg, args);
