@@ -1832,8 +1832,6 @@ namespace Docky.Interface
 			if (Painter != null)
 				return;
 			
-			MaxIconSize = Preferences.IconSize;
-			
 			if (icon_size_timer > 0)
 				GLib.Source.Remove (icon_size_timer);
 			
