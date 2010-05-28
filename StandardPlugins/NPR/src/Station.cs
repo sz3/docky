@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Chris Szikszoy
+//  Copyright (C) 2009 Chris Szikszoy, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -65,23 +65,34 @@ namespace NPR
 		{
 			IsLoaded = false;
 			Icon = DefaultLogo = "nprlogo.gif@" + GetType ().Assembly.FullName;
+			DockServices.System.ConnectionStatusChanged += HandleConnectionStatusChanged;
+			ID = id;
 			
-			if (id > 0) {
+			if (ID > 0) {
 				DockServices.System.RunOnThread (() => {
-					LoadDataFromXElement (NPR.StationXElement (id));
+					LoadDataFromXElement (NPR.StationXElement (ID));
 				});
 				// this is how we create our "null" station entry
 			} else {
-				ID = id;
 				Name = Catalog.GetString ("No stations found.");
 				Description = Catalog.GetString ("Please try your search again.");
 				ShowActionButton = false;
 				IsLoaded = true;
 			}
 		}
+		
+		void HandleConnectionStatusChanged (object o, EventArgs args)
+		{
+			DockServices.System.RunOnThread (() => {
+				LoadDataFromXElement (NPR.StationXElement (ID));
+			});
+		}
 
 		void LoadDataFromXElement (XElement stationElement)
 		{
+			if (!DockServices.System.NetworkConnected)
+				return;
+			
 			IsSetUp = false;
 			
 			Name = stationElement.Element ("name").Value;
@@ -97,17 +108,14 @@ namespace NPR
 			string logo = stationElement.Elements ("image").First (el => el.Attribute ("type").Value == "logo").Value;
 			GLib.File l = FileFactory.NewForUri (logo);
 			LogoFile = System.IO.Path.Combine (System.IO.Path.GetTempPath (), l.Basename);
-			if (System.IO.File.Exists (LogoFile)) {
-				Finish ();
-				return;
+			if (!System.IO.File.Exists (LogoFile)) {
+				WebClient cl = new WebClient ();
+				cl.Headers.Add ("user-agent", DockServices.System.UserAgent);
+				if (DockServices.System.UseProxy)
+					cl.Proxy = DockServices.System.Proxy;
+				
+				cl.DownloadFile (logo, LogoFile);
 			}
-			
-			WebClient cl = new WebClient ();
-			cl.Headers.Add ("user-agent", DockServices.System.UserAgent);
-			if (DockServices.System.UseProxy)
-				cl.Proxy = DockServices.System.Proxy;
-			
-			cl.DownloadFile (logo, LogoFile);
 			
 			Finish ();
 		}
@@ -173,5 +181,10 @@ namespace NPR
 			});
 		}
 
+		public override void Dispose ()
+		{
+			DockServices.System.ConnectionStatusChanged -= HandleConnectionStatusChanged;
+			base.Dispose ();
+		}
 	}
 }

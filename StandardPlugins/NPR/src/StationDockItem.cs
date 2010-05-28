@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -29,10 +29,8 @@ using Mono.Unix;
 
 namespace NPR
 {
-
 	public class StationDockItem : IconDockItem
 	{
-		
 		public Station OwnedStation;
 		static ConfigDialog config;
 		
@@ -175,6 +173,12 @@ namespace NPR
 			if (config == null)
 				config = new NPRConfigDialog ();
 			config.Show ();	
+		}
+		
+		public override void Dispose ()
+		{
+			OwnedStation.Dispose ();
+			base.Dispose ();
 		}
 	}
 }
