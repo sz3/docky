@@ -79,8 +79,6 @@ namespace Docky.Items
 			}
 		}
 		
-		Wnck.Window prevActive = null;
-		
 		bool longMatchInProgress = false;
 		
 		public FileApplicationProvider ()
@@ -102,9 +100,8 @@ namespace Docky.Items
 				Wnck.Screen.Default.ViewportsChanged += WnckScreenDefaultViewportsChanged;
 				Wnck.Screen.Default.ActiveWorkspaceChanged += WnckScreenDefaultActiveWorkspaceChanged;
 				Wnck.Screen.Default.ActiveWindowChanged += WnckScreenDefaultActiveWindowChanged;
-				prevActive = Wnck.Screen.Default.ActiveWindow;
-				if (prevActive != null)
-					prevActive.GeometryChanged += HandleActiveWindowGeometryChangedChanged;
+				if (Wnck.Screen.Default.ActiveWindow != null)
+					Wnck.Screen.Default.ActiveWindow.GeometryChanged += HandleActiveWindowGeometryChangedChanged;
 			}
 		}
 		
@@ -112,11 +109,10 @@ namespace Docky.Items
 		
 		void WnckScreenDefaultActiveWindowChanged (object o, ActiveWindowChangedArgs args)
 		{
-			if (prevActive != null)
-				prevActive.GeometryChanged -= HandleActiveWindowGeometryChangedChanged;
-			prevActive = Wnck.Screen.Default.ActiveWindow;
-			if (prevActive != null)
-				prevActive.GeometryChanged += HandleActiveWindowGeometryChangedChanged;
+			if (args.PreviousWindow != null)
+				args.PreviousWindow.GeometryChanged -= HandleActiveWindowGeometryChangedChanged;
+			if (Wnck.Screen.Default.ActiveWindow != null)
+				Wnck.Screen.Default.ActiveWindow.GeometryChanged += HandleActiveWindowGeometryChangedChanged;
 			UpdateTransientItems ();
 		}
 		
@@ -424,8 +420,8 @@ namespace Docky.Items
 				Wnck.Screen.Default.ViewportsChanged -= WnckScreenDefaultViewportsChanged;
 				Wnck.Screen.Default.ActiveWorkspaceChanged -= WnckScreenDefaultActiveWorkspaceChanged;
 				Wnck.Screen.Default.ActiveWindowChanged -= WnckScreenDefaultActiveWindowChanged;
-				if (prevActive != null)
-					prevActive.GeometryChanged -= HandleActiveWindowGeometryChangedChanged;
+				if (Wnck.Screen.Default.ActiveWindow != null)
+					Wnck.Screen.Default.ActiveWindow.GeometryChanged -= HandleActiveWindowGeometryChangedChanged;
 			}
 			
 			IEnumerable<AbstractDockItem> old_items = Items;
