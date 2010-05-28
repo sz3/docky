@@ -228,6 +228,7 @@ namespace Docky.Interface
 				RegisterPreferencesEvents (value);
 				
 				// Initialize value
+				MaxIconSize = Preferences.IconSize;
 				UpdateMaxIconSize ();
 			}
 		}
