@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -22,15 +22,25 @@ using NDesk.DBus;
 
 namespace Docky.DBus
 {
-	[Interface("org.gnome.Docky")]
-	public interface IDockyDBus
+	public delegate void ItemChangedHandler (string path);
+
+	[Interface("org.freedesktop.DockManager")]
+	public interface IDockManagerDBus
 	{
-		event Action ShuttingDown;
+		event ItemChangedHandler ItemAdded;
 		
-		void ShowAbout ();
+		event ItemChangedHandler ItemRemoved;
 		
-		void ShowSettings ();
+		string[] GetCapabilities ();
 		
-		void Quit ();
+		string[] GetItems ();
+		
+		string[] GetItemsByName (string name);
+		
+		string[] GetItemsByDesktopFile (string path);
+		
+		string[] GetItemsByPID (uint id);
+		
+		string GetItemByXid (uint xid);
 	}
 }

@@ -32,49 +32,8 @@ namespace Docky.DBus
 		public event Action AboutCalled;
 		
 		#region IDockyDBus implementation
-		public event ItemChangedHandler ItemAdded;
-		
-		public event ItemChangedHandler ItemRemoved;
 		
 		public event Action ShuttingDown;
-		
-		public string[] DockItemPaths ()
-		{
-			return DBusManager.Default.Items
-				.Select (adi => DBusManager.Default.PathForItem (adi))
-				.ToArray ();
-		}
-
-		public string DockItemPathForDesktopID (string id)
-		{
-			return DBusManager.Default.Items
-				.OfType<ApplicationDockItem> ()
-				.Where (adi => adi.OwnedItem.DesktopID == id)
-				.Select (adi => DBusManager.Default.PathForItem (adi))
-				.DefaultIfEmpty ("")
-				.FirstOrDefault ();
-		}
-
-		public string DockItemPathForDesktopFile (string path)
-		{
-			return DBusManager.Default.Items
-				.OfType<ApplicationDockItem> ()
-				.Where (adi => adi.OwnedItem.Path == path)
-				.Select (adi => DBusManager.Default.PathForItem (adi))
-				.DefaultIfEmpty ("")
-				.FirstOrDefault ();
-		}
-		
-		public string DockItemPathForWindowXID (uint xid)
-		{
-			return DBusManager.Default.Items
-				.OfType<WnckDockItem> ()
-				.Where (wdi => wdi.Windows.Any (w => (uint) w.Xid == xid))
-				.Select (wdi => DBusManager.Default.PathForItem (wdi))
-				.DefaultIfEmpty ("")
-				.FirstOrDefault ();
-		}
-		
 		
 		public void ShowAbout ()
 		{
@@ -82,13 +41,11 @@ namespace Docky.DBus
 				AboutCalled ();
 		}
 		
-		
 		public void ShowSettings ()
 		{
 			if (SettingsCalled != null)
 				SettingsCalled ();
 		}
-		
 		
 		public void Quit ()
 		{
@@ -97,27 +54,11 @@ namespace Docky.DBus
 		}
 		
 		#endregion
-
-		public DockyDBus ()
-		{
-		}
 		
 		public void Shutdown ()
 		{
 			if (ShuttingDown != null)
 				ShuttingDown ();
-		}
-		
-		public void OnItemAdded (string path)
-		{
-			if (ItemAdded != null)
-				ItemAdded (path);
-		}
-		
-		public void OnItemRemoved (string path)
-		{
-			if (ItemRemoved != null)
-				ItemRemoved (path);
 		}
 	}
 }

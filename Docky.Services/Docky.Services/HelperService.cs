@@ -42,13 +42,21 @@ namespace Docky.Services
 	
 	public class HelperService
 	{
-		public static File UserScriptsDir = DockServices.Paths.UserDataFolder.GetChild ("helpers");
-		public static File UserMetaDir = HelperService.UserScriptsDir.GetChild ("metadata");
-		public static File SysScriptsDir = DockServices.Paths.SystemDataFolder.GetChild ("helpers");
-		public static File SysMetaDir = HelperService.SysScriptsDir.GetChild ("metadata");
+		public static File UserDir = DockServices.Paths.UserDataFolder;
+		public static File UserMetaDir = UserDir.GetChild ("metadata");
+		static File UserScriptsDir = UserDir.GetChild ("scripts");
+		
+		public static File SysDir = FileFactory.NewForPath ("/usr/share/dockmanager/");
+		public static File SysMetaDir = SysDir.GetChild ("metadata");
+		static File SysScriptsDir = SysDir.GetChild ("scripts");
+		
+		public static File SysLocalDir = FileFactory.NewForPath ("/usr/local/share/dockmanager/");
+		public static File SysLocalMetaDir = SysLocalDir.GetChild ("metadata");
+		static File SysLocalScriptsDir = SysLocalDir.GetChild ("scripts");
 		
 		IEnumerable<GLib.File> HelperDirs = new [] {
 			UserScriptsDir,
+			SysLocalScriptsDir,
 			SysScriptsDir,
 		}.Where (dir => dir.Exists).Distinct (new FileEqualityComparer ());
 		

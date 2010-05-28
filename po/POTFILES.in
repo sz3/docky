@@ -46,4 +46,3 @@ StandardPlugins/Weather/src/WeatherConfigDialog.cs
 StandardPlugins/Weather/src/WeatherDocklet.cs
 StandardPlugins/Weather/src/WeatherForecast.cs
 StandardPlugins/Weather/src/WeatherPainter.cs
-scripts/zeitgeist_docky.py
