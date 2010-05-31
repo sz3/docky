@@ -42,17 +42,17 @@ namespace Docky.Services
 	
 	public class HelperService
 	{
-		public static File UserDir = DockServices.Paths.UserDataFolder;
-		public static File UserMetaDir = UserDir.GetChild ("metadata");
+		public static File UserDir = DockServices.Paths.DockManagerUserDataFolder;
 		static File UserScriptsDir = UserDir.GetChild ("scripts");
+		public static File UserMetaDir = UserScriptsDir.GetChild ("metadata");
 		
 		public static File SysDir = FileFactory.NewForPath ("/usr/share/dockmanager/");
-		public static File SysMetaDir = SysDir.GetChild ("metadata");
 		static File SysScriptsDir = SysDir.GetChild ("scripts");
+		public static File SysMetaDir = SysScriptsDir.GetChild ("metadata");
 		
 		public static File SysLocalDir = FileFactory.NewForPath ("/usr/local/share/dockmanager/");
-		public static File SysLocalMetaDir = SysLocalDir.GetChild ("metadata");
 		static File SysLocalScriptsDir = SysLocalDir.GetChild ("scripts");
+		public static File SysLocalMetaDir = SysLocalScriptsDir.GetChild ("metadata");
 		
 		IEnumerable<GLib.File> HelperDirs = new [] {
 			UserScriptsDir,
@@ -160,15 +160,14 @@ namespace Docky.Services
 			return Helpers.First (h => h.File.Path == helperFile.Path);
 		}
 		
-		public bool InstallHelper (string path, out Helper installedHelper)
+		public bool InstallHelper (string path)
 		{
 			File file = FileFactory.NewForPath (path);
 			
-			// WARN: This is _only_ valid if this method returns true
-			installedHelper = null;
-			
 			if (!file.Exists)
 				return false;
+			if (!UserDir.Exists)
+				UserDir.MakeDirectory (null);
 			if (!UserScriptsDir.Exists)
 				UserScriptsDir.MakeDirectory (null);
 			if (!UserMetaDir.Exists)

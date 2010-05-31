@@ -412,11 +412,7 @@ namespace Docky
 				return;
 			
 			Helper installedHelper;
-			if (DockServices.Helpers.InstallHelper (file.Path, out installedHelper)) {
-				installedHelper.Data.DataReady += delegate {
-					RefreshHelpers ();
-				};
-			}
+			DockServices.Helpers.InstallHelper (file.Path);
 		}
 		
 		protected virtual void OnInstallThemeClicked (object sender, System.EventArgs e)
