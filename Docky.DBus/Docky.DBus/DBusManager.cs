@@ -120,7 +120,7 @@ namespace Docky.DBus
 		
 		public void RegisterItem (AbstractDockItem item)
 		{
-			if (item_dict.ContainsKey (item))
+			if (item_dict == null || item_dict.ContainsKey (item))
 				return;
 			
 			DockManagerDBusItem dbusitem = new DockManagerDBusItem (item);
@@ -134,7 +134,7 @@ namespace Docky.DBus
 		
 		public void UnregisterItem (AbstractDockItem item)
 		{
-			if (!item_dict.ContainsKey (item))
+			if (item_dict == null || !item_dict.ContainsKey (item))
 				return;
 			
 			item_dict[item].Dispose ();
@@ -184,6 +184,9 @@ namespace Docky.DBus
 		
 		public void ForceRefresh ()
 		{
+			if (item_dict == null)
+				return;
+			
 			foreach (DockManagerDBusItem item in item_dict.Values)
 				item.TriggerConfirmation ();
 		}

@@ -176,36 +176,43 @@ namespace Docky.Items
 
 		protected override bool OnAcceptDrop (IEnumerable<string> uris)
 		{
-			Notification note = null;
+			// verify there is enough space to move/copy everything
+			long fileSize = 0;
+			
 			foreach (File file in uris.Select (uri => FileFactory.NewForUri (uri))) {
-				try {
-					if (!file.Exists)
-						continue;
+				if (!file.Exists)
+					continue;
+				fileSize += file.GetSize ();
+			}
+			
+			if ((ulong) fileSize > OwnedFile.QueryInfo<ulong> (FilesystemFreeKey)) {
+				Docky.Services.Log.Notify (Catalog.GetString ("Error performing drop action"), Gtk.Stock.DialogError, Catalog.GetString ("Not enough free space on destination."));
+				return true;
+			}
+			
+			// do the move/copy
+			string ownedFSID = OwnedFile.QueryInfo<string> (FilesystemIDKey);
+			
+			foreach (File file in uris.Select (uri => FileFactory.NewForUri (uri))) {
+				if (!file.Exists)
+					continue;
+				
+				DockServices.System.RunOnThread (()=> {
+					bool performing = true;
+					long cur = 0, tot = 10;
 					
-					// gather some information first
-					long fileSize = file.GetSize ();
-					ulong freeSpace = OwnedFile.QueryInfo<ulong> (FilesystemFreeKey);
-					if ((ulong) fileSize > freeSpace)
-						throw new Exception (Catalog.GetString ("Not enough free space on destination."));
+					Notification note = Docky.Services.Log.Notify ("", file.Icon (), "{0}% " + Catalog.GetString ("Complete") + "...", cur / tot);
 					
-					string ownedFSID = OwnedFile.QueryInfo<string> (FilesystemIDKey);
-					string destFSID = file.QueryInfo<string> (FilesystemIDKey);
+					GLib.Timeout.Add (250, () => {
+						note.Body = string.Format ("{0}% ", string.Format ("{0:00.0}", ((float) Math.Min (cur, tot) / tot) * 100)) + Catalog.GetString ("Complete") + "...";
+						return performing;
+					});
 					
 					string nameAfterMove = file.NewFileName (OwnedFile);
 					
-					DockServices.System.RunOnThread (()=> {
-						
-						bool performing = true;
-						long cur = 0, tot = 10;
-						
-						note = Docky.Services.Log.Notify ("", file.Icon (), "{0}% " + Catalog.GetString ("Complete") + "...", cur / tot);
-						GLib.Timeout.Add (250, () => {
-							note.Body = string.Format ("{0}% ", string.Format ("{0:00.0}", ((float) Math.Min (cur, tot) / tot) * 100)) + Catalog.GetString ("Complete") + "...";
-							return performing;
-						});
-						
+					try {
 						// check the filesystem IDs, if they are the same, we move, otherwise we copy.
-						if (ownedFSID == destFSID) {
+						if (ownedFSID == file.QueryInfo<string> (FilesystemIDKey)) {
 							note.Summary = Catalog.GetString ("Moving") + string.Format (" {0}...", file.Basename);
 							file.Move (OwnedFile.GetChild (nameAfterMove), FileCopyFlags.NofollowSymlinks | FileCopyFlags.AllMetadata | FileCopyFlags.NoFallbackForMove, null, (current, total) => {
 								cur = current;
@@ -218,20 +225,22 @@ namespace Docky.Items
 								tot = total;
 							});
 						}
+					} catch (Exception e) {
+						// until we use a new version of GTK# which supports getting the GLib.Error code
+						// this is about the best we can do.
+						Docky.Services.Log.Notify (Catalog.GetString ("Error performing drop action"), Gtk.Stock.DialogError, e.Message);
+						Log<FileDockItem>.Error ("{0}: {1}", Catalog.GetString ("Error performing drop action"), e.Message);
+						Log<FileDockItem>.Debug ("Error moving file '" + file.Path + "' to '" + OwnedFile.GetChild (nameAfterMove) + "'");
+						Log<FileDockItem>.Debug (e.StackTrace);
 						
 						performing = false;
-						note.Body = string.Format ("100% {0}.", Catalog.GetString ("Complete"));
-					});
-					// until we use a new version of GTK# which supports getting the GLib.Error code
-					// this is about the best we can do.
-				} catch (Exception e) {
-					Docky.Services.Log.Notify (Catalog.GetString ("Error performing drop action"), Gtk.Stock.DialogError, e.Message);
-					Log<FileDockItem>.Error ("{0}: {1}", Catalog.GetString ("Error performing drop action"), e.Message);
-					Log<FileDockItem>.Debug (e.StackTrace);
-					
-					if (note != null)
 						note.Close ();
-				}
+						return;
+					}
+					
+					performing = false;
+					note.Body = string.Format ("100% {0}.", Catalog.GetString ("Complete"));
+				});
 			}			
 			return true;
 		}
