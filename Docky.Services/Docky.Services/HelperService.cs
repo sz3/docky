@@ -44,15 +44,15 @@ namespace Docky.Services
 	{
 		public static File UserDir = DockServices.Paths.DockManagerUserDataFolder;
 		static File UserScriptsDir = UserDir.GetChild ("scripts");
-		public static File UserMetaDir = UserScriptsDir.GetChild ("metadata");
+		public static File UserMetaDir = UserDir.GetChild ("metadata");
 		
 		public static File SysDir = FileFactory.NewForPath ("/usr/share/dockmanager/");
 		static File SysScriptsDir = SysDir.GetChild ("scripts");
-		public static File SysMetaDir = SysScriptsDir.GetChild ("metadata");
+		public static File SysMetaDir = SysDir.GetChild ("metadata");
 		
 		public static File SysLocalDir = FileFactory.NewForPath ("/usr/local/share/dockmanager/");
 		static File SysLocalScriptsDir = SysLocalDir.GetChild ("scripts");
-		public static File SysLocalMetaDir = SysLocalScriptsDir.GetChild ("metadata");
+		public static File SysLocalMetaDir = SysLocalDir.GetChild ("metadata");
 		
 		IEnumerable<GLib.File> HelperDirs = new [] {
 			UserScriptsDir,
