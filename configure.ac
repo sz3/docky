@@ -80,6 +80,7 @@ SHAMROCK_EXPAND_DATADIR
 PKG_CHECK_MODULES([GCONF_SHARP_20], [gconf-sharp-2.0])
 PKG_CHECK_MODULES([GLADE_SHARP_20], [glade-sharp-2.0])
 PKG_CHECK_MODULES([GLIB_SHARP_20], [glib-sharp-2.0])
+PKG_CHECK_MODULES([GIO_SHARP], [gio-sharp-2.0])
 PKG_CHECK_MODULES([GNOME_DESKTOP_SHARP_20], [gnome-desktop-sharp-2.0])
 PKG_CHECK_MODULES([GNOME_KEYRING_SHARP], [gnome-keyring-sharp-1.0])
 PKG_CHECK_MODULES([GNOME_SHARP_20], [gnome-sharp-2.0])
@@ -98,7 +99,7 @@ PKG_CHECK_MODULES([WNCK_SHARP_10], [wnck-sharp-1.0])
 
 dnl check for native libraries (ones that are p/invoked)
 GTK_REQUIRED_VERSION=2.14.3
-GLIB_REQUIRED_VERSION=2.18.1
+GLIB_REQUIRED_VERSION=2.22
 PKG_CHECK_MODULES(GIO, gio-2.0 >= $GLIB_REQUIRED_VERSION)
 PKG_CHECK_MODULES(GTK, gtk+-2.0 >= $GTK_REQUIRED_VERSION)
 PKG_CHECK_MODULES(GLIB, gobject-2.0 >= $GLIB_REQUIRED_VERSION)
@@ -107,6 +108,7 @@ PKG_CHECK_MODULES(GLIB, gobject-2.0 >= $GLIB_REQUIRED_VERSION)
 AC_SUBST([GCONF_SHARP_20_LIBS])
 AC_SUBST([GLADE_SHARP_20_LIBS])
 AC_SUBST([GLIB_SHARP_20_LIBS])
+AC_SUBST([GIO_SHARP_LIBS])
 AC_SUBST([GNOME_DESKTOP_SHARP_20_LIBS])
 AC_SUBST([GNOME_KEYRING_SHARP_LIBS])
 AC_SUBST([GNOME_SHARP_20_LIBS])
@@ -138,8 +140,6 @@ AC_SUBST([DOCKY_WIDGETS_LIBS])
 DOCKY_WINDOWING_LIBS="-r:$(pwd)/build/Docky.Windowing.dll"
 AC_SUBST([DOCKY_WINDOWING_LIBS])
 
-GIO_SHARP_LIBS="-r:$(pwd)/build/gio-sharp.dll"
-AC_SUBST([GIO_SHARP_LIBS])
 
 PKG_CHECK_MODULES([NUNIT], [nunit], have_nunit=yes, have_nunit=no)
 AM_CONDITIONAL(HAVE_NUNIT, test "$have_nunit" = "yes")
@@ -174,10 +174,6 @@ fi
 dnl }}}
 
 AC_CONFIG_FILES([
-lib/Makefile
-lib/gio-sharp/Makefile
-lib/gio-sharp/generator/Makefile
-lib/gio-sharp/gio/Makefile
 Docky/Makefile
 Docky.CairoHelper/Makefile
 Docky.DBus/Makefile
