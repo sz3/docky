@@ -322,6 +322,9 @@ namespace Docky.Items
 		
 		public void PinToDock (ApplicationDockItem item)
 		{
+			if (items.ContainsKey (item.OwnedItem.Uri.AbsoluteUri))
+				return;
+			
 			item.WindowsChanged -= HandleTransientWindowsChanged;
 			transient_items.Remove (item);
 			items.Add (item.OwnedItem.Uri.AbsoluteUri, item);
