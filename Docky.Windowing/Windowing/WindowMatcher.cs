@@ -566,10 +566,9 @@ namespace Docky.Windowing
 			if (item == null)
 				throw new ArgumentNullException ("DesktopItem item");
 			
-			foreach (KeyValuePair<Wnck.Window, List<DesktopItem>> kvp in window_to_desktop_items) {
+			foreach (KeyValuePair<Wnck.Window, List<DesktopItem>> kvp in window_to_desktop_items)
 				if (kvp.Value.Any (df => df == item))
 					yield return kvp.Key;
-			}
 		}
 		
 		public IEnumerable<Wnck.Window> SimilarWindows (Wnck.Window window)
@@ -578,20 +577,23 @@ namespace Docky.Windowing
 				throw new ArgumentNullException ("Wnck.Window window");
 			
 			//TODO perhaps make it a bit smarter
-			if (!window_to_desktop_items.ContainsKey (window)) {
+			if (!window_to_desktop_items.ContainsKey (window))
 				foreach (Wnck.Window win in UnmatchedWindows) {
-					if (win != window)
-						if (window.Pid <= 1) {
-							if (window.ClassGroup != null && !string.IsNullOrEmpty (window.ClassGroup.ResClass))
-								if (win.ClassGroup.ResClass.Equals (window.ClassGroup.ResClass))
-									yield return win;
-							else if (!string.IsNullOrEmpty (win.Name) && win.Name.Equals (window.Name)) 
-								yield return win;
-						} else if (win.Pid == window.Pid) {
+					if (win == window)
+						continue;
+					
+					if (win.Pid == window.Pid)
+						yield return win;
+					else if (window.Pid <= 1) {
+						if (window.ClassGroup != null
+								&& !string.IsNullOrEmpty (window.ClassGroup.ResClass)
+								&& win.ClassGroup.ResClass.Equals (window.ClassGroup.ResClass))
 							yield return win;
-						}
+						else if (!string.IsNullOrEmpty (win.Name) && win.Name.Equals (window.Name)) 
+							yield return win;
+					}
 				}
-			}
+			
 			yield return window;
 		}
 
