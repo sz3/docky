@@ -48,10 +48,15 @@ namespace Docky.Items
 		public IEnumerable<Wnck.Window> Windows {
 			get { return windows; }
 			protected set {
-				UnregisterWindows (windows.Where (w => !value.Contains (w)));
-				RegisterWindows (value.Where (w => !windows.Contains (w)));
+				IEnumerable<Wnck.Window> tmp = value.Where (w => w.WindowType != Wnck.WindowType.Desktop &&
+					w.WindowType != Wnck.WindowType.Dock &&
+					w.WindowType != Wnck.WindowType.Splashscreen &&
+					w.WindowType != Wnck.WindowType.Menu);
 				
-				windows = value.ToArray ();
+				UnregisterWindows (windows.Where (w => !tmp.Contains (w)));
+				RegisterWindows (tmp.Where (w => !windows.Contains (w)));
+				
+				windows = tmp.ToArray ();
 				
 				SetIndicator ();
 				SetState ();
