@@ -2574,7 +2574,7 @@ namespace Docky.Interface
 				background.Dispose ();
 			}
 			
-			double tilt = .6;
+			double tilt = .6 - (double) DockHeightBuffer / (double) backgroundArea.Height;
 			tilt *= 1 - PainterOpacity;
 			double tiltanim = Math.Min (1, ((rendering ? render_time : DateTime.UtcNow) - threedimensional_change_time).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds);
 			tilt *= ThreeDimensional ? tiltanim : 1 - tiltanim;
