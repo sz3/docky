@@ -411,7 +411,6 @@ namespace Docky
 			if (file == null)
 				return;
 			
-			Helper installedHelper;
 			DockServices.Helpers.InstallHelper (file.Path);
 		}
 		
