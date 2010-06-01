@@ -509,7 +509,7 @@ namespace Docky.Windowing
 		#region Window Matching
 		static IEnumerable<string> PrefixStrings {
 			get {
-				yield return "gksu";
+				yield return "gksu(do)?";
 				yield return "sudo";
 				yield return "java";
 				yield return "mono";
