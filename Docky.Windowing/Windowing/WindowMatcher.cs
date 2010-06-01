@@ -586,7 +586,9 @@ namespace Docky.Windowing
 						yield return win;
 					else if (window.Pid <= 1) {
 						if (window.ClassGroup != null
+								&& win.ClassGroup != null
 								&& !string.IsNullOrEmpty (window.ClassGroup.ResClass)
+								&& !string.IsNullOrEmpty (win.ClassGroup.ResClass)
 								&& win.ClassGroup.ResClass.Equals (window.ClassGroup.ResClass))
 							yield return win;
 						else if (!string.IsNullOrEmpty (win.Name) && win.Name.Equals (window.Name)) 
