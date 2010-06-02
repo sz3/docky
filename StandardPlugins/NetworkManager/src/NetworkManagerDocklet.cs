@@ -122,15 +122,15 @@ namespace NetworkManagerDocklet
 		
 		string APIconFromStrength (byte strength)
 		{
-			string icon = "gnome-netstatus-{0}";
+			string icon = "network-wireless-connected-{0};;gnome-netstatus-{1}";
 			if (strength >= 75)
-				icon = string.Format (icon, "75-100");
+				icon = string.Format (icon, "100", "75-100");
 			else if (strength >= 50)
-				icon = string.Format (icon, "50-74");
+				icon = string.Format (icon, "50", "50-74");
 			else if (strength >= 25)
-				icon = string.Format (icon, "25-49");
+				icon = string.Format (icon, "25", "25-49");
 			else
-				icon = string.Format (icon, "0-24");
+				icon = string.Format (icon, "00", "0-24");
 			return icon;
 		}
 
