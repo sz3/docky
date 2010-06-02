@@ -103,6 +103,9 @@ namespace Docky
 				
 				Log<ThemeController>.Info ("Setting theme: " + value);
 				BackgroundSvg = ThemedSvg ("background.svg");
+				Background3dSvg = ThemedSvg ("background3d.svg");
+				if (Background3dSvg.IndexOf ("@") != -1)
+					Background3dSvg = ThemedSvg ("background.svg");
 				MenuSvg = ThemedSvg ("menu.svg");
 				TooltipSvg = ThemedSvg ("tooltip.svg");
 				
@@ -112,6 +115,8 @@ namespace Docky
 		}
 		
 		public static string BackgroundSvg { get; protected set; }
+		
+		public static string Background3dSvg { get; protected set; }
 		
 		public static string MenuSvg { get; protected set; }
 		

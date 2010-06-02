@@ -2544,7 +2544,7 @@ namespace Docky.Interface
 					background_buffer.Context.Fill ();
 				}
 				
-				Gdk.Pixbuf background = DockServices.Drawing.LoadIcon (ThemeController.BackgroundSvg);
+				Gdk.Pixbuf background = DockServices.Drawing.LoadIcon (ThreeDimensional ? ThemeController.Background3dSvg : ThemeController.BackgroundSvg);
 				Gdk.Pixbuf tmp;
 				
 				switch (Position) {
