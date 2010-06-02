@@ -164,7 +164,43 @@ namespace Trash
 				new MenuItem (Catalog.GetString ("_Open Trash"), Icon, (o, a) => OpenTrash ()));
 			list[MenuListContainer.Actions].Add (
 				new MenuItem (Catalog.GetString ("Empty _Trash"), "gtk-clear", (o, a) => EmptyTrash (), !TrashFull));
+			list.SetContainerTitle (MenuListContainer.CustomOne, Catalog.GetString ("Restore Files"));
+			
+			FileEnumerator enumerator = OwnedFile.EnumerateChildren ("standard::type,standard::name", FileQueryInfoFlags.NofollowSymlinks, null);
+			List<File> files = new List<File> ();
+			
+			if (enumerator != null) {
+				FileInfo info;
+				
+				while ((info = enumerator.NextFile ()) != null) {
+					files.Add (OwnedFile.GetChild (info.Name));
+					info.Dispose ();
+				}
+				
+				if (info != null)
+					info.Dispose ();
+				enumerator.Close (null);
+			}
+			
+			/* FIXME
+				- this code should work, but GetFiles() currently uses .net IO instead of GIO
+				  when this starts working, the enumeration block above can go away too
+			foreach (File _f in OwnedFile.GetFiles ().OrderByDescending (f => f.QueryInfo<string> ("trash::deletion-date")).Take (5)) {
+			*/
+			foreach (File _f in files.OrderByDescending (f => f.QueryInfo<string> ("trash::deletion-date")).Take (5)) {
+				File f = _f;
+				MenuItem item = new IconMenuItem (f.Basename, f.Icon (), (o, a) => RestoreFile (f));
+				item.Mnemonic = null;
+				list[MenuListContainer.CustomOne].Add (item);
+			}
+			
 			return list;
+		}
+		
+		void RestoreFile (File f)
+		{
+			File destFile = FileFactory.NewForPath (f.QueryInfo<string> ("trash::orig-path"));
+			f.Move (destFile, FileCopyFlags.NofollowSymlinks | FileCopyFlags.AllMetadata | FileCopyFlags.NoFallbackForMove, null, null);
 		}
 		
 		void OpenTrash ()
