@@ -124,7 +124,7 @@ namespace NetworkManagerDocklet
 		{
 			string icon = "network-wireless-connected-{0};;gnome-netstatus-{1}";
 			if (strength >= 75)
-				icon = string.Format (icon, "100", "75-100");
+				icon = string.Format (icon, "75", "75-100");
 			else if (strength >= 50)
 				icon = string.Format (icon, "50", "50-74");
 			else if (strength >= 25)
