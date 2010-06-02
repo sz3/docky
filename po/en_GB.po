@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-05-17 08:04+0200\n"
-"PO-Revision-Date: 2010-05-09 15:12+0000\n"
-"Last-Translator: Alex Denvir <coldfff@blueyonder.co.uk>\n"
+"POT-Creation-Date: 2010-06-02 22:46+0200\n"
+"PO-Revision-Date: 2010-05-17 23:13+0000\n"
+"Last-Translator: Steven Rose <launchpad@stevey.eu>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-05-17 06:28+0000\n"
+"X-Launchpad-Export-Date: 2010-06-02 21:21+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
@@ -47,17 +47,17 @@ msgstr ""
 "for the deleted dock will be permanently lost."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:287
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:456
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
 msgstr "_Delete Dock"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:401
-#: ../Docky/Docky/ConfigurationWindow.cs:426
+#: ../Docky/Docky/ConfigurationWindow.cs:421
 msgid "_Select"
 msgstr "_Select"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:404
-#: ../Docky/Docky/ConfigurationWindow.cs:429
+#: ../Docky/Docky/ConfigurationWindow.cs:424
 msgid ".tar Archives"
 msgstr ".tar Archives"
 
@@ -97,7 +97,7 @@ msgstr "Add this docklet to the selected dock"
 msgid "Remove this docklet from the selected dock"
 msgstr "Remove this docklet from the selected dock"
 
-#: ../Docky/Docky/Docky.cs:110
+#: ../Docky/Docky/Docky.cs:121
 msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
@@ -164,21 +164,21 @@ msgstr "Drag to reposition"
 msgid "Drop to add to dock"
 msgstr "Drop to add to dock"
 
-#: ../Docky/Docky/Items/DockyItem.cs:114
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
+#: ../Docky/Docky/Items/DockyItem.cs:133
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:223
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:239
 msgid "_Settings"
 msgstr "_Settings"
 
-#: ../Docky/Docky/Items/DockyItem.cs:115
+#: ../Docky/Docky/Items/DockyItem.cs:134
 msgid "_About"
 msgstr "_About"
 
-#: ../Docky/Docky/Items/DockyItem.cs:116
+#: ../Docky/Docky/Items/DockyItem.cs:135
 msgid "_Help"
 msgstr ""
 
-#: ../Docky/Docky/Items/DockyItem.cs:117
+#: ../Docky/Docky/Items/DockyItem.cs:137
 msgid "_Quit Docky"
 msgstr "_Quit Docky"
 
@@ -195,7 +195,7 @@ msgid "_Theme:"
 msgstr "_Theme:"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:343
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
 msgid "_Install"
 msgstr "_Install"
 
@@ -212,7 +212,7 @@ msgid "Docks"
 msgstr "Docks"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
 msgid "All"
 msgstr "All"
 
@@ -230,11 +230,15 @@ msgstr "Disabled"
 msgid "Docklets"
 msgstr "Docklets"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:374
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
+msgid "Usable"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
 msgstr "Helpers"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:429
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
 msgid "_New Dock"
 msgstr "_New Dock"
 
@@ -282,21 +286,9 @@ msgstr "_Manage Windows Without Launcher"
 msgid "_Zoom:"
 msgstr "_Zoom:"
 
-#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:119
+#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:115
 #, csharp-format
 msgid "Drop to open with {0}"
-msgstr ""
-
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:97
-msgid "Icon"
-msgstr ""
-
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:100
-msgid "X-GNOME-FullName"
-msgstr ""
-
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:102
-msgid "Name"
 msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:159
@@ -312,7 +304,7 @@ msgstr "_Open"
 msgid "Reset Color"
 msgstr "Reset Colour"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:399
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:409
 msgid "_Pin to Dock"
 msgstr "_Pin to Dock"
 
@@ -321,54 +313,56 @@ msgstr "_Pin to Dock"
 msgid "Drop to move to {0}"
 msgstr ""
 
+#. until we use a new version of GTK# which supports getting the GLib.Error code
+#. this is about the best we can do.
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:189
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:234
+msgid "Error performing drop action"
+msgstr "Error performing drop action"
+
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:189
 msgid "Not enough free space on destination."
 msgstr "Not enough free space on destination."
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:201
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:203
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:223
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:206
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:209
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:241
 msgid "Complete"
 msgstr "Complete"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:209
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:219
 msgid "Moving"
 msgstr "Moving"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:215
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:225
 msgid "Copying"
 msgstr "Copying"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:228
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:229
-msgid "Error performing drop action"
-msgstr "Error performing drop action"
-
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:251
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:259
 msgid "Open"
 msgstr "Open"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:252
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:260
 msgid "Open Containing Folder"
 msgstr "Open Containing Folder"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:248
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:253
 msgid "Unma_ximize"
 msgstr "Unma_ximise"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:251
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:256
 msgid "Ma_ximize"
 msgstr "Ma_ximise"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:255
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:260
 msgid "_Restore"
 msgstr "_Restore"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:258
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:263
 msgid "Mi_nimize"
 msgstr "Mi_nimise"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:261
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:266
 msgid "_Close All"
 msgstr "_Close All"
 
@@ -444,19 +438,19 @@ msgstr "remaining "
 msgid "Computer"
 msgstr "Computer"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:421
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:425
 msgid "Di_gital Clock"
 msgstr "Di_gital Clock"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:427
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "24-Hour _Clock"
 msgstr "24-Hour_Clock"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:433
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
 msgid "Show _Date"
 msgstr "Show _Date"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:439
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:443
 msgid "Select _Theme"
 msgstr "Select _Theme"
 
@@ -493,6 +487,11 @@ msgstr "Click to set username and password."
 msgid "(no subject)"
 msgstr "(no subject)"
 
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:269
+#, csharp-format
+msgid "You have {0} new, unread messages"
+msgstr ""
+
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 #, csharp-format
 msgid "From: {0}"
@@ -520,34 +519,34 @@ msgstr "General Error"
 msgid "GMail Configuration"
 msgstr "GMail Configuration"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:79
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 msgid "No unread mail"
 msgstr "No unread mail"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:82
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:98
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
 msgstr[0] "{0} unread message"
 msgstr[1] "{0} unread messages"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:103
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:119
 msgid "Checking mail..."
 msgstr "Checking mail..."
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:196
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:202
 msgid "_View "
 msgstr "_View "
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:207
 msgid "_Compose Mail"
 msgstr "_Compose Mail"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:208
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:214
 msgid "New Mail"
 msgstr "New Mail"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:226
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:232
 msgid "Check _Mail"
 msgstr "Check _Mail"
 
@@ -601,40 +600,40 @@ msgstr "My _Stations"
 msgid "S_earch"
 msgstr "S_earch"
 
-#: ../StandardPlugins/NPR/src/Station.cs:76
+#: ../StandardPlugins/NPR/src/Station.cs:77
 msgid "No stations found."
 msgstr "No stations found."
 
-#: ../StandardPlugins/NPR/src/Station.cs:77
+#: ../StandardPlugins/NPR/src/Station.cs:78
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
 msgstr "Please try your search again."
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:48
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:46
 msgid "Fetching Information..."
 msgstr "Fetching Information..."
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:68
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:66
 msgid "Click to add NPR stations."
 msgstr "Click to add NPR stations."
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:107
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:105
 msgid "Home Page"
 msgstr "Home Page"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:114
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:112
 msgid "Program Schedule"
 msgstr "Programme Schedule"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:121
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:119
 msgid "Donate"
 msgstr "Donate"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:128
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:126
 msgid "Live Streams"
 msgstr "Live Streams"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:166
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:164
 msgid "Settings"
 msgstr "Settings"
 
@@ -733,15 +732,19 @@ msgid "_Open Trash"
 msgstr "_Open the Deleted Items folder"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:166
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:196
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:232
 msgid "Empty _Trash"
 msgstr "Empty _Deleted Items"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:188
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:167
+msgid "Restore Files"
+msgstr ""
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:224
 msgid "Empty all of the items from the trash?"
 msgstr "Empty everything from the Deleted Items folder?"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:190
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:226
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"

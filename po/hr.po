@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-05-17 08:04+0200\n"
+"POT-Creation-Date: 2010-06-02 22:46+0200\n"
 "PO-Revision-Date: 2010-03-27 18:18+0000\n"
 "Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Croatian <hr@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-05-17 06:28+0000\n"
+"X-Launchpad-Export-Date: 2010-06-02 21:21+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
@@ -48,17 +48,17 @@ msgstr ""
 " bit će trajno izgubljene."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:287
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:456
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
 msgstr "_Obriši dok"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:401
-#: ../Docky/Docky/ConfigurationWindow.cs:426
+#: ../Docky/Docky/ConfigurationWindow.cs:421
 msgid "_Select"
 msgstr "_Odaberi"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:404
-#: ../Docky/Docky/ConfigurationWindow.cs:429
+#: ../Docky/Docky/ConfigurationWindow.cs:424
 msgid ".tar Archives"
 msgstr ".tar arhive"
 
@@ -98,7 +98,7 @@ msgstr ""
 msgid "Remove this docklet from the selected dock"
 msgstr ""
 
-#: ../Docky/Docky/Docky.cs:110
+#: ../Docky/Docky/Docky.cs:121
 msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
@@ -166,21 +166,21 @@ msgstr "Povucite za premještanje"
 msgid "Drop to add to dock"
 msgstr "Ispustite da biste dodali na dok"
 
-#: ../Docky/Docky/Items/DockyItem.cs:114
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
+#: ../Docky/Docky/Items/DockyItem.cs:133
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:223
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:239
 msgid "_Settings"
 msgstr "_Postavke"
 
-#: ../Docky/Docky/Items/DockyItem.cs:115
+#: ../Docky/Docky/Items/DockyItem.cs:134
 msgid "_About"
 msgstr "_O programu"
 
-#: ../Docky/Docky/Items/DockyItem.cs:116
+#: ../Docky/Docky/Items/DockyItem.cs:135
 msgid "_Help"
 msgstr ""
 
-#: ../Docky/Docky/Items/DockyItem.cs:117
+#: ../Docky/Docky/Items/DockyItem.cs:137
 msgid "_Quit Docky"
 msgstr "_Zatvori Docky"
 
@@ -197,7 +197,7 @@ msgid "_Theme:"
 msgstr "_Tema:"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:343
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
 msgid "_Install"
 msgstr "_Instaliraj"
 
@@ -214,7 +214,7 @@ msgid "Docks"
 msgstr "Dokovi"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
 msgid "All"
 msgstr "Svi"
 
@@ -232,11 +232,15 @@ msgstr "Isključeno"
 msgid "Docklets"
 msgstr "Dockleti"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:374
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
+msgid "Usable"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
 msgstr "Pomagači"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:429
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
 msgid "_New Dock"
 msgstr "_Novi dok"
 
@@ -284,21 +288,9 @@ msgstr "_Upravljaj Prozorima koji nemaju startere."
 msgid "_Zoom:"
 msgstr "_Uvećaj"
 
-#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:119
+#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:115
 #, csharp-format
 msgid "Drop to open with {0}"
-msgstr ""
-
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:97
-msgid "Icon"
-msgstr "Sličica"
-
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:100
-msgid "X-GNOME-FullName"
-msgstr ""
-
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:102
-msgid "Name"
 msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:159
@@ -314,7 +306,7 @@ msgstr "_Otvori"
 msgid "Reset Color"
 msgstr "Vrati izvornu boju"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:399
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:409
 msgid "_Pin to Dock"
 msgstr "_Pričvrsti na dok"
 
@@ -323,54 +315,56 @@ msgstr "_Pričvrsti na dok"
 msgid "Drop to move to {0}"
 msgstr ""
 
+#. until we use a new version of GTK# which supports getting the GLib.Error code
+#. this is about the best we can do.
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:189
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:234
+msgid "Error performing drop action"
+msgstr "Pogreška pri operaciji otpuštanja"
+
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:189
 msgid "Not enough free space on destination."
 msgstr "Nedovoljno prostora na destinaciji."
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:201
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:203
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:223
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:206
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:209
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:241
 msgid "Complete"
 msgstr "Završeno"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:209
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:219
 msgid "Moving"
 msgstr "Premještanje"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:215
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:225
 msgid "Copying"
 msgstr "Dupliciranje"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:228
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:229
-msgid "Error performing drop action"
-msgstr "Pogreška pri operaciji otpuštanja"
-
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:251
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:259
 msgid "Open"
 msgstr "Otvoreno"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:252
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:260
 msgid "Open Containing Folder"
 msgstr "Otvori mapu koja sadrži"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:248
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:253
 msgid "Unma_ximize"
 msgstr "Vrati sa _maksimiziranoga"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:251
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:256
 msgid "Ma_ximize"
 msgstr "Po_većaj"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:255
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:260
 msgid "_Restore"
 msgstr "Vrati u izvorno stanje"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:258
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:263
 msgid "Mi_nimize"
 msgstr "Mi_nimiziraj"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:261
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:266
 msgid "_Close All"
 msgstr "_Zatvori sve"
 
@@ -448,19 +442,19 @@ msgstr "preostalo "
 msgid "Computer"
 msgstr "Računalo"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:421
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:425
 msgid "Di_gital Clock"
 msgstr "Di_gitalni Sat"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:427
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "24-Hour _Clock"
 msgstr "24-satni sat"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:433
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
 msgid "Show _Date"
 msgstr "Prikaži _Datum"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:439
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:443
 msgid "Select _Theme"
 msgstr "Izaberi _Temu"
 
@@ -497,6 +491,11 @@ msgstr ""
 msgid "(no subject)"
 msgstr "(bez naslova)"
 
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:269
+#, csharp-format
+msgid "You have {0} new, unread messages"
+msgstr ""
+
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 #, csharp-format
 msgid "From: {0}"
@@ -524,11 +523,11 @@ msgstr "Opća pogreška"
 msgid "GMail Configuration"
 msgstr "Postavke GMail pošte"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:79
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 msgid "No unread mail"
 msgstr "Nema nepročitane pošte"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:82
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:98
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
@@ -536,23 +535,23 @@ msgstr[0] "{0} nepročitana poruka"
 msgstr[1] "{0} nepročitane poruke"
 msgstr[2] "none"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:103
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:119
 msgid "Checking mail..."
 msgstr "Provjeravam poštanski pretinac..."
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:196
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:202
 msgid "_View "
 msgstr "_Pogled "
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:207
 msgid "_Compose Mail"
 msgstr "_Sastavi poštu"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:208
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:214
 msgid "New Mail"
 msgstr "Nova pošta"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:226
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:232
 msgid "Check _Mail"
 msgstr "Provjeri _poštanski pretinac"
 
@@ -606,40 +605,40 @@ msgstr "Moje _Stanice"
 msgid "S_earch"
 msgstr "T_raži"
 
-#: ../StandardPlugins/NPR/src/Station.cs:76
+#: ../StandardPlugins/NPR/src/Station.cs:77
 msgid "No stations found."
 msgstr "Nijedna stanica nije pronađena"
 
-#: ../StandardPlugins/NPR/src/Station.cs:77
+#: ../StandardPlugins/NPR/src/Station.cs:78
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
 msgstr "Molimo ponovite svoju potragu"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:48
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:46
 msgid "Fetching Information..."
 msgstr "Dohvaćam Informacije..."
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:68
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:66
 msgid "Click to add NPR stations."
 msgstr "Kliknite da dodate NPR radio stanice"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:107
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:105
 msgid "Home Page"
 msgstr "Početna stranica"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:114
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:112
 msgid "Program Schedule"
 msgstr "Programski Raspored"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:121
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:119
 msgid "Donate"
 msgstr "Donirajte"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:128
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:126
 msgid "Live Streams"
 msgstr "Prijenosi"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:166
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:164
 msgid "Settings"
 msgstr "Postavke"
 
@@ -739,15 +738,19 @@ msgid "_Open Trash"
 msgstr "_Otvori smeće"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:166
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:196
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:232
 msgid "Empty _Trash"
 msgstr "Isprazni _smeće"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:188
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:167
+msgid "Restore Files"
+msgstr ""
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:224
 msgid "Empty all of the items from the trash?"
 msgstr "Isprazniti sve stavke iz smeća?"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:190
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:226
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
@@ -865,6 +868,9 @@ msgstr ""
 
 #~ msgid "Extensions"
 #~ msgstr "Nastavci"
+
+#~ msgid "Icon"
+#~ msgstr "Sličica"
 
 #~ msgid "<b>Active Plugins</b>"
 #~ msgstr "<b>Aktivne ekstenzije</b>"
