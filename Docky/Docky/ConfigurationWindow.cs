@@ -45,9 +45,10 @@ namespace Docky
 	}
 	
 	enum HelperShowStates : uint {
-		All = 0,
+		Usable = 0,
 		Enabled,
 		Disabled,
+		All,
 		NStates
 	}
 	
@@ -453,15 +454,16 @@ namespace Docky
 				.Where (h => h.Name.ToLower ().Contains (query) || h.Description.ToLower ().Contains (query))
 				.OrderBy (t => t.Name);
 			
-			if (helper_show_cmb.Active == (uint) HelperShowStates.Enabled)
+			if (helper_show_cmb.Active == (uint) HelperShowStates.Usable)
+				tiles = tiles.Where (h => h.Helper.IsAppAvailable);
+			else if (helper_show_cmb.Active == (uint) HelperShowStates.Enabled)
 				tiles = tiles.Where (h => h.Enabled);
 			else if (helper_show_cmb.Active == (uint) HelperShowStates.Disabled)
 				tiles = tiles.Where (h => !h.Enabled);
 			
 			HelpersTileview.Clear ();
-			foreach (HelperTile helper in tiles) {
+			foreach (HelperTile helper in tiles)
 				HelpersTileview.AppendTile (helper);
-			}
 		}
 		
 		void RefreshDocklets ()

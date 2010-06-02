@@ -314,9 +314,10 @@ namespace Docky {
             this.hbox5.Spacing = 6;
             // Container child hbox5.Gtk.Box+BoxChild
             this.helper_show_cmb = Gtk.ComboBox.NewText();
-            this.helper_show_cmb.AppendText(Mono.Unix.Catalog.GetString("All"));
+            this.helper_show_cmb.AppendText(Mono.Unix.Catalog.GetString("Usable"));
             this.helper_show_cmb.AppendText(Mono.Unix.Catalog.GetString("Enabled"));
             this.helper_show_cmb.AppendText(Mono.Unix.Catalog.GetString("Disabled"));
+            this.helper_show_cmb.AppendText(Mono.Unix.Catalog.GetString("All"));
             this.helper_show_cmb.Name = "helper_show_cmb";
             this.helper_show_cmb.Active = 0;
             this.hbox5.Add(this.helper_show_cmb);

@@ -30,6 +30,14 @@ namespace Docky.Services
 		
 		public bool IsUser { get; private set; }
 		
+		public bool IsAppAvailable {
+			get {
+				if (Data == null)
+					return true;
+				return GLib.FileFactory.NewForPath (Data.AppUri).Exists;
+			}
+		}
+		
 		bool? is_running;
 		public bool IsRunning {
 			get {

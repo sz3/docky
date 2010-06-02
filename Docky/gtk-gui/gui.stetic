@@ -608,9 +608,10 @@ Disabled</property>
                           <widget class="Gtk.ComboBox" id="helper_show_cmb">
                             <property name="MemberName" />
                             <property name="IsTextCombo">True</property>
-                            <property name="Items" translatable="yes">All
+                            <property name="Items" translatable="yes">Usable
 Enabled
-Disabled</property>
+Disabled
+All</property>
                             <property name="Active">0</property>
                             <signal name="Changed" handler="OnShowHelperChanged" />
                           </widget>
