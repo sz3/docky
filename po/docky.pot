@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-26 13:03+0200\n"
+"POT-Creation-Date: 2010-06-02 22:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,44 +17,44 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:132
+#: ../Docky/Docky/ConfigurationWindow.cs:133
 msgid "Search Docklets..."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:147
+#: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Search Helpers..."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:211
+#: ../Docky/Docky/ConfigurationWindow.cs:212
 msgid "Click on any dock to configure."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:212
+#: ../Docky/Docky/ConfigurationWindow.cs:213
 msgid "Drag any dock to reposition."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:277
+#: ../Docky/Docky/ConfigurationWindow.cs:278
 msgid "Delete the currently selected dock?"
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:279
+#: ../Docky/Docky/ConfigurationWindow.cs:280
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:286
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:456
+#: ../Docky/Docky/ConfigurationWindow.cs:287
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:400
-#: ../Docky/Docky/ConfigurationWindow.cs:425
+#: ../Docky/Docky/ConfigurationWindow.cs:401
+#: ../Docky/Docky/ConfigurationWindow.cs:421
 msgid "_Select"
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:403
-#: ../Docky/Docky/ConfigurationWindow.cs:428
+#: ../Docky/Docky/ConfigurationWindow.cs:404
+#: ../Docky/Docky/ConfigurationWindow.cs:424
 msgid ".tar Archives"
 msgstr ""
 
@@ -94,7 +94,7 @@ msgstr ""
 msgid "Remove this docklet from the selected dock"
 msgstr ""
 
-#: ../Docky/Docky/Docky.cs:120
+#: ../Docky/Docky/Docky.cs:121
 msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
@@ -150,12 +150,12 @@ msgstr ""
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:378
+#: ../Docky/Docky/Interface/DockWindow.cs:379
 msgid "Drag to reposition"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:390
-#: ../Docky/Docky/Interface/DockWindow.cs:404
+#: ../Docky/Docky/Interface/DockWindow.cs:391
+#: ../Docky/Docky/Interface/DockWindow.cs:405
 msgid "Drop to add to dock"
 msgstr ""
 
@@ -190,7 +190,7 @@ msgid "_Theme:"
 msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:343
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
 msgid "_Install"
 msgstr ""
 
@@ -207,7 +207,7 @@ msgid "Docks"
 msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
 msgid "All"
 msgstr ""
 
@@ -225,11 +225,15 @@ msgstr ""
 msgid "Docklets"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:374
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
+msgid "Usable"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:429
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
 msgid "_New Dock"
 msgstr ""
 
@@ -277,7 +281,7 @@ msgstr ""
 msgid "_Zoom:"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:119
+#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:115
 #, csharp-format
 msgid "Drop to open with {0}"
 msgstr ""
@@ -295,7 +299,7 @@ msgstr ""
 msgid "Reset Color"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:410
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:409
 msgid "_Pin to Dock"
 msgstr ""
 
@@ -304,54 +308,56 @@ msgstr ""
 msgid "Drop to move to {0}"
 msgstr ""
 
+#. until we use a new version of GTK# which supports getting the GLib.Error code
+#. this is about the best we can do.
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:189
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:234
+msgid "Error performing drop action"
+msgstr ""
+
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:189
 msgid "Not enough free space on destination."
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:201
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:203
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:223
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:206
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:209
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:241
 msgid "Complete"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:209
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:219
 msgid "Moving"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:215
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:225
 msgid "Copying"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:228
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:229
-msgid "Error performing drop action"
-msgstr ""
-
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:251
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:259
 msgid "Open"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:252
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:260
 msgid "Open Containing Folder"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:248
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:253
 msgid "Unma_ximize"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:251
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:256
 msgid "Ma_ximize"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:255
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:260
 msgid "_Restore"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:258
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:263
 msgid "Mi_nimize"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:261
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:266
 msgid "_Close All"
 msgstr ""
 
@@ -589,40 +595,40 @@ msgstr ""
 msgid "S_earch"
 msgstr ""
 
-#: ../StandardPlugins/NPR/src/Station.cs:76
+#: ../StandardPlugins/NPR/src/Station.cs:77
 msgid "No stations found."
 msgstr ""
 
-#: ../StandardPlugins/NPR/src/Station.cs:77
+#: ../StandardPlugins/NPR/src/Station.cs:78
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
 msgstr ""
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:48
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:46
 msgid "Fetching Information..."
 msgstr ""
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:68
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:66
 msgid "Click to add NPR stations."
 msgstr ""
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:107
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:105
 msgid "Home Page"
 msgstr ""
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:114
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:112
 msgid "Program Schedule"
 msgstr ""
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:121
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:119
 msgid "Donate"
 msgstr ""
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:128
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:126
 msgid "Live Streams"
 msgstr ""
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:166
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:164
 msgid "Settings"
 msgstr ""
 
@@ -714,15 +720,19 @@ msgid "_Open Trash"
 msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:166
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:196
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:232
 msgid "Empty _Trash"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:188
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:167
+msgid "Restore Files"
+msgstr ""
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:224
 msgid "Empty all of the items from the trash?"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:190
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:226
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
