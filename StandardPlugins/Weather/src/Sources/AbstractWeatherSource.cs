@@ -179,7 +179,7 @@ namespace WeatherDocklet
 					OnWeatherError (Catalog.GetString ("Invalid XML Weather Data"));
 					Log<AbstractWeatherSource>.Debug (Name + ": " + e.Message + e.StackTrace);
 				} catch (WebException e) {
-					OnWeatherError (Catalog.GetString ("Network Error: ") + e.Message);
+					OnWeatherError (Catalog.GetString ("Network Error"));
 				}
 			});
 
