@@ -228,6 +228,7 @@ namespace Docky.Interface
 				RegisterPreferencesEvents (value);
 				
 				// Initialize value
+				MaxIconSize = Preferences.IconSize;
 				UpdateMaxIconSize ();
 			}
 		}
@@ -716,7 +717,7 @@ namespace Docky.Interface
 			                  Gdk.EventMask.ScrollMask));
 			
 			Realized                      += HandleRealized;
-			Docky.Controller.ThemeChanged += DockyControllerThemeChanged;
+			ThemeController.ThemeChanged += DockyControllerThemeChanged;
 			
 			// fix for nvidia bug
 			if (Docky.CommandLinePreferences.BufferTime > 0)
@@ -749,17 +750,17 @@ namespace Docky.Interface
 			DateTime now = DateTime.UtcNow;
 			
 			foreach (AbstractDockItem adi in Items) {
-				// Waiting Items
+				//Waiting Items
 				if ((adi.State & ItemState.Wait) != 0)
 					return true;
-				// Moving Items
+				//Moving Items
 				if (now - adi.StateSetTime (ItemState.Move) < SlideTime)
 					return true;
-				// Bouncing Items
+				//Bouncing Items
 				if ((now - adi.LastClick) < BounceTime || (now - adi.StateSetTime (ItemState.Urgent)) < BounceTime)
 					return true;
-				// Glowing Items
-				if ((now - adi.StateSetTime (ItemState.Urgent)) < Docky.Controller.GlowTime)
+				//Glowing Items
+				if ((now - adi.StateSetTime (ItemState.Urgent)) < ThemeController.GlowTime)
 					return true;
 			}
 			return false;
@@ -883,24 +884,22 @@ namespace Docky.Interface
 		
 		void ProviderItemsChanged (object sender, ItemsChangedArgs args)
 		{
-			foreach (AbstractDockItem item in args.AddedItems)
+			foreach (AbstractDockItem item in args.AddedItems) {
 				RegisterItem (item);
+			}
 			
 			foreach (AbstractDockItem item in args.RemovedItems) {
 				remove_time = DateTime.UtcNow;
+				UnregisterItem (item);
+				
 				remove_index = Items.IndexOf (item) - .5;
 				remove_size = IconSize; //FIXME
-				
-				UnregisterItem (item);
 			}
 			
 			UpdateCollectionBuffer ();
+			UpdateMaxIconSize ();
+			
 			AnimatedDraw ();
-			
-			AbstractDockItemProvider provider = sender as AbstractDockItemProvider;
-			
-			if (provider.Items.Count () == 0 && provider.AutoDisable)
-				preferences.RemoveProvider (provider);
 		}
 		
 		void RegisterItem (AbstractDockItem item)
@@ -1508,6 +1507,7 @@ namespace Docky.Interface
 				
 				if (Height >= 1009 && Height <= 1024)
 					Height = 1026;
+				
 			}
 			
 			SetSizeRequest (Width, Height);
@@ -1526,7 +1526,7 @@ namespace Docky.Interface
 			QueueDraw ();
 			
 			if (AnimationState.AnimationNeeded)
-				animation_timer = GLib.Timeout.Add (1000 / 60, OnDrawTimeoutElapsed);
+				animation_timer = GLib.Timeout.Add (1000/60, OnDrawTimeoutElapsed);
 		}
 		
 		bool OnDrawTimeoutElapsed ()
@@ -1536,7 +1536,8 @@ namespace Docky.Interface
 			if (AnimationState.AnimationNeeded)
 				return true;
 			
-			// reset the timer to 0 so that the next time AnimatedDraw is called we fall back into the draw loop.
+			//reset the timer to 0 so that the next time AnimatedDraw is called we fall back into
+			//the draw loop.
 			if (animation_timer > 0)
 				GLib.Source.Remove (animation_timer);
 			animation_timer = 0;
@@ -1832,8 +1833,6 @@ namespace Docky.Interface
 			if (Painter != null)
 				return;
 			
-			MaxIconSize = Preferences.IconSize;
-			
 			if (icon_size_timer > 0)
 				GLib.Source.Remove (icon_size_timer);
 			
@@ -2074,7 +2073,7 @@ namespace Docky.Interface
 				foreach (AbstractDockItem adi in Items) {
 					double diff = (render_time - adi.StateSetTime (ItemState.Urgent)).TotalMilliseconds;
 					if (adi.Indicator != ActivityIndicator.None && (adi.State & ItemState.Urgent) == ItemState.Urgent &&
-					    (Docky.Controller.GlowTime.Days > 0 || diff < Docky.Controller.GlowTime.TotalMilliseconds)) {
+					    (ThemeController.GlowTime.Days > 0 || diff < ThemeController.GlowTime.TotalMilliseconds)) {
 						
 						if (urgent_glow_buffer == null)
 							urgent_glow_buffer = CreateUrgentGlowBuffer ();
@@ -2463,7 +2462,7 @@ namespace Docky.Interface
 											(double) gdkColor.Green / ushort.MaxValue,
 											(double) gdkColor.Blue / ushort.MaxValue,
 											1.0);
-			return CreateIndicatorBuffer (UrgentIndicatorSize, color.AddHue (Docky.Controller.UrgentHueShift).SetSaturation (1));
+			return CreateIndicatorBuffer (UrgentIndicatorSize, color.AddHue (ThemeController.UrgentHueShift).SetSaturation (1));
 		}
 		
 		DockySurface CreateIndicatorBuffer (int size, Cairo.Color color)
@@ -2502,7 +2501,7 @@ namespace Docky.Interface
 											(double) gdkColor.Green / ushort.MaxValue,
 											(double) gdkColor.Blue / ushort.MaxValue,
 											1.0);
-			color = color.AddHue (Docky.Controller.UrgentHueShift).SetSaturation (1);
+			color = color.AddHue (ThemeController.UrgentHueShift).SetSaturation (1);
 			
 			int size = (int) 2.5 * IconSize;
 			
@@ -2545,7 +2544,7 @@ namespace Docky.Interface
 					background_buffer.Context.Fill ();
 				}
 				
-				Gdk.Pixbuf background = DockServices.Drawing.LoadIcon (Docky.Controller.BackgroundSvg);
+				Gdk.Pixbuf background = DockServices.Drawing.LoadIcon (ThreeDimensional ? ThemeController.Background3dSvg : ThemeController.BackgroundSvg);
 				Gdk.Pixbuf tmp;
 				
 				switch (Position) {
@@ -2575,7 +2574,7 @@ namespace Docky.Interface
 				background.Dispose ();
 			}
 			
-			double tilt = .6;
+			double tilt = .6 - (double) DockHeightBuffer / (double) backgroundArea.Height;
 			tilt *= 1 - PainterOpacity;
 			double tiltanim = Math.Min (1, ((rendering ? render_time : DateTime.UtcNow) - threedimensional_change_time).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds);
 			tilt *= ThreeDimensional ? tiltanim : 1 - tiltanim;
@@ -2732,7 +2731,7 @@ namespace Docky.Interface
 			AutohideManager.HiddenChanged       -= HandleHiddenChanged;
 			AutohideManager.DockHoveredChanged  -= HandleDockHoveredChanged;
 			Screen.SizeChanged                  -= ScreenSizeChanged;
-			Docky.Controller.ThemeChanged       -= DockyControllerThemeChanged;
+			ThemeController.ThemeChanged        -= DockyControllerThemeChanged;
 			
 			// clear out our separators
 			foreach (AbstractDockItem adi in Items.Where (adi => adi is INonPersistedItem))
