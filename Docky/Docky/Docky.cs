@@ -59,6 +59,7 @@ namespace Docky
 			
 			//Init gtk and GLib related
 			Catalog.Init ("docky", AssemblyInfo.LocaleDirectory);
+			if (!GLib.Thread.Supported) GLib.Thread.Init ();
 			Gdk.Threads.Init ();
 			NDesk.DBus.BusG.Init ();
 			Gtk.Application.Init ("Docky", ref args);
@@ -83,7 +84,17 @@ namespace Docky
 			};
 			
 			DBusManager.Default.Initialize ();
+			DBusManager.Default.QuitCalled += delegate {
+				Quit ();
+			};
+			DBusManager.Default.SettingsCalled += delegate {
+				ConfigurationWindow.Instance.Show ();
+			};
+			DBusManager.Default.AboutCalled += delegate {
+				ShowAbout ();
+			};
 			PluginManager.Initialize ();
+			ThemeController.Initialize ();
 			Controller.Initialize ();
 			
 			Gdk.Threads.Enter ();

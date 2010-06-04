@@ -41,6 +41,8 @@ namespace Docky.Interface
 	{
 		Gdk.Window proxy_window;
 		
+		static IPreferences prefs = DockServices.Preferences.Get <DockDragTracker> ();
+		
 		bool drag_known;
 		bool drag_data_requested;
 		bool drag_is_desktop_file;
@@ -54,6 +56,8 @@ namespace Docky.Interface
 		IEnumerable<string> drag_data;
 		
 		public DockWindow Owner { get; private set; }
+		
+		static bool lockDrags = prefs.Get<bool> ("LockDrags", false);
 		
 		bool externalDragActive;
 		public bool ExternalDragActive {
@@ -75,10 +79,10 @@ namespace Docky.Interface
 		
 		public bool DragDisabled {
 			get {
-				return drag_disabled;
+				return lockDrags || drag_disabled;
 			}
 			set {
-				if (drag_disabled == value)
+				if (lockDrags || drag_disabled == value)
 					return;
 				drag_disabled = value;
 				
@@ -122,7 +126,8 @@ namespace Docky.Interface
 			RegisterDragEvents ();
 			
 			EnableDragTo ();
-			EnableDragFrom ();
+			if (!lockDrags)
+				EnableDragFrom ();
 			
 			Owner.HoveredItemChanged += HandleHoveredItemChanged;
 		}

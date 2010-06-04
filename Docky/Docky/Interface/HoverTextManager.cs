@@ -50,7 +50,7 @@ namespace Docky.Interface
 		
 		static void SetLight ()
 		{
-			IsLight = DockServices.Drawing.IsIconLight (Docky.Controller.TooltipSvg);
+			IsLight = DockServices.Drawing.IsIconLight (ThemeController.TooltipSvg);
 		}
 		
 		public int Monitor { get; set; }
@@ -75,7 +75,7 @@ namespace Docky.Interface
 			window.SetCompositeColormap ();
 			window.ExposeEvent += HandleWindowExposeEvent;
 						
-			Docky.Controller.ThemeChanged += DockyControllerThemeChanged;
+			ThemeController.ThemeChanged += DockyControllerThemeChanged;
 		}
 		
 		void DockyControllerThemeChanged (object sender, EventArgs e)
@@ -129,8 +129,8 @@ namespace Docky.Interface
 				GLib.Source.Remove (timer);
 			
 			Gdk.Rectangle monitor_geo = window.Screen.GetMonitorGeometry (Monitor);
-			center.X = Math.Max (0, Math.Min (center.X, monitor_geo.X + monitor_geo.Width - surface.Width));
-			center.Y = Math.Max (0, Math.Min (center.Y, monitor_geo.Y + monitor_geo.Height - surface.Height));
+			center.X = Math.Max (monitor_geo.X, Math.Min (center.X, monitor_geo.X + monitor_geo.Width - surface.Width));
+			center.Y = Math.Max (monitor_geo.Y, Math.Min (center.Y, monitor_geo.Y + monitor_geo.Height - surface.Height));
 			
 			window.QueueDraw ();
 			window.Move (center.X, center.Y);
@@ -189,7 +189,7 @@ namespace Docky.Interface
 			
 			DockySurface main = new DockySurface (3 * AbstractDockItem.HoverTextHeight / 2, AbstractDockItem.HoverTextHeight, model);
 			
-			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (Docky.Controller.TooltipSvg)) {
+			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (ThemeController.TooltipSvg)) {
 				Gdk.CairoHelper.SetSourcePixbuf (main.Context, pixbuf, 0, 0);
 				main.Context.Paint ();
 			}
@@ -227,6 +227,9 @@ namespace Docky.Interface
 		#region IDisposable implementation
 		public void Dispose ()
 		{
+			window.ExposeEvent -= HandleWindowExposeEvent;
+			ThemeController.ThemeChanged -= DockyControllerThemeChanged;
+			
 			currentSurface = null;
 
 			if (window != null) {

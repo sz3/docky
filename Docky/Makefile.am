@@ -16,6 +16,7 @@ FILES = \
 	Docky/Docky.cs \
 	Docky/UserArgs.cs \
 	Docky/PluginManager.cs \
+	Docky/ThemeController.cs \
 	Docky/HelperTile.cs \
 	Docky/DockletTile.cs \
 	Docky/CairoHelper/DockySurface_Extensions.cs \
@@ -47,7 +48,7 @@ RESOURCES = \
 	gtk-gui/gui.stetic \
 	Resources/about.svg \
 	Resources/badge.svg \
-	Resources/classic.svg \
+	Resources/background.svg \
 	Resources/close.svg \
 	Resources/help.svg \
 	Resources/menu.svg \

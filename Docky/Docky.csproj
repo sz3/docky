@@ -45,6 +45,7 @@
     <Compile Include="Docky\Docky.cs" />
     <Compile Include="Docky\UserArgs.cs" />
     <Compile Include="Docky\DockController.cs" />
+    <Compile Include="Docky\ThemeController.cs" />
     <Compile Include="Docky\Interface\Dock.cs" />
     <Compile Include="Docky\Interface\DockPosition.cs" />
     <Compile Include="Docky\Interface\AutohideType.cs" />
@@ -134,8 +135,7 @@
     </Reference>
     <Reference Include="Mono.GetOptions" />
     <Reference Include="gio-sharp, Version=2.14.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\build\gio-sharp.dll</HintPath>
+      <Package>gio-sharp-2.0</Package>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib" />
   </ItemGroup>
@@ -169,8 +169,8 @@
     <EmbeddedResource Include="gtk-gui\gui.stetic">
       <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\classic.svg">
-      <LogicalName>classic.svg</LogicalName>
+    <EmbeddedResource Include="Resources\background.svg">
+      <LogicalName>background.svg</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\tooltip.svg">
       <LogicalName>tooltip.svg</LogicalName>

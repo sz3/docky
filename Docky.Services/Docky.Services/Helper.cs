@@ -30,6 +30,14 @@ namespace Docky.Services
 		
 		public bool IsUser { get; private set; }
 		
+		public bool IsAppAvailable {
+			get {
+				if (Data != null && !string.IsNullOrEmpty (Data.AppUri))
+					return GLib.FileFactory.NewForPath (Data.AppUri).Exists;
+				return true;
+			}
+		}
+		
 		bool? is_running;
 		public bool IsRunning {
 			get {
@@ -74,13 +82,15 @@ namespace Docky.Services
 		public Helper (File file)
 		{
 			File = file;
-			IsUser = file.Path.StartsWith ("/home/");
+			IsUser = file.Path.StartsWith (HelperService.UserDir.Path);
 			
 			GLib.File DataFile;
 			if (IsUser)
 				DataFile = HelperService.UserMetaDir;
-			else
+			else if (file.Path.StartsWith (HelperService.SysDir.Path))
 				DataFile = HelperService.SysMetaDir;
+			else
+				DataFile = HelperService.SysLocalMetaDir;
 			
 			DataFile = DataFile.GetChild (File.Basename + ".info");
 			

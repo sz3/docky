@@ -27,11 +27,13 @@ namespace Docky.Services
 		const string NameTag = "NAME=";
 		const string DescTag = "DESCRIPTION=";
 		const string IconTag = "ICON=";
+		const string AppUriTag = "APPURI=";
 		
 		public string Name { get; private set; }
 		public string Description { get; private set; }
 		public Pixbuf Icon { get; private set; }
 		public File IconFile { get; private set; }
+		public string AppUri { get; private set; }
 		public File DataFile { get; private set; }
 		
 		public event EventHandler DataReady;
@@ -65,6 +67,8 @@ namespace Docky.Services
 						Name = data;
 					} else if (line.StartsWith (DescTag)) {
 						Description = data;
+					} else if (line.StartsWith (AppUriTag)) {
+						AppUri = data;
 					} else if (line.StartsWith (IconTag)) {
 						if (data.StartsWith ("./")) {
 							IconFile = file.Parent.GetChild (data.Substring (2));

@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,21 +16,28 @@
 // 
 
 using System;
+using System.Collections.Generic;
 
 using org.freedesktop.DBus;
 using NDesk.DBus;
 
 namespace Docky.DBus
 {
-	[Interface("org.gnome.Docky")]
-	public interface IDockyDBus
+	public delegate void MenuItemActivatedHandler (uint menuHandle);
+	
+	[Interface ("org.freedesktop.DockItem")]
+	public interface IDockManagerDBusItem : Properties
 	{
-		event Action ShuttingDown;
+		event MenuItemActivatedHandler MenuItemActivated;
 		
-		void ShowAbout ();
+		event Action ItemConfirmationNeeded;
+
+		uint AddMenuItem (IDictionary<string, object> dict);
 		
-		void ShowSettings ();
+		void RemoveMenuItem (uint item);
 		
-		void Quit ();
+		void UpdateDockItem (IDictionary<string, object> dict);
+		
+		void ConfirmItem (uint item);
 	}
 }

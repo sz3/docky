@@ -49,14 +49,15 @@ namespace Docky.Items
 					return;
 				icon = value;
 				
-				using (Gtk.IconInfo info = Gtk.IconTheme.Default.LookupIcon (icon, 48, Gtk.IconLookupFlags.ForceSvg)) {
-					if (info != null && info.Filename != null && info.Filename.EndsWith (".svg")) {
-						icon = info.Filename;
-						ScalableRendering = true;
-					} else {
-						ScalableRendering = false;
+				if (icon != null)
+					using (Gtk.IconInfo info = Gtk.IconTheme.Default.LookupIcon (icon, 48, Gtk.IconLookupFlags.ForceSvg)) {
+						if (info != null && info.Filename != null && info.Filename.EndsWith (".svg")) {
+							icon = info.Filename;
+							ScalableRendering = true;
+						} else {
+							ScalableRendering = false;
+						}
 					}
-				}
 				
 				OnIconUpdated ();
 				QueueRedraw ();

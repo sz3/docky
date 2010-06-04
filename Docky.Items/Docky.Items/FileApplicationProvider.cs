@@ -79,7 +79,7 @@ namespace Docky.Items
 			}
 		}
 		
-		Wnck.Window prevActive = null;
+		bool longMatchInProgress = false;
 		
 		public FileApplicationProvider ()
 		{
@@ -100,9 +100,8 @@ namespace Docky.Items
 				Wnck.Screen.Default.ViewportsChanged += WnckScreenDefaultViewportsChanged;
 				Wnck.Screen.Default.ActiveWorkspaceChanged += WnckScreenDefaultActiveWorkspaceChanged;
 				Wnck.Screen.Default.ActiveWindowChanged += WnckScreenDefaultActiveWindowChanged;
-				prevActive = Wnck.Screen.Default.ActiveWindow;
-				if (prevActive != null)
-					prevActive.GeometryChanged += HandleActiveWindowGeometryChangedChanged;
+				if (Wnck.Screen.Default.ActiveWindow != null)
+					Wnck.Screen.Default.ActiveWindow.GeometryChanged += HandleActiveWindowGeometryChangedChanged;
 			}
 		}
 		
@@ -110,11 +109,10 @@ namespace Docky.Items
 		
 		void WnckScreenDefaultActiveWindowChanged (object o, ActiveWindowChangedArgs args)
 		{
-			if (prevActive != null)
-				prevActive.WorkspaceChanged -= HandleActiveWindowGeometryChangedChanged;
-			prevActive = Wnck.Screen.Default.ActiveWindow;
-			if (prevActive != null)
-				prevActive.GeometryChanged += HandleActiveWindowGeometryChangedChanged;
+			if (args.PreviousWindow != null)
+				args.PreviousWindow.GeometryChanged -= HandleActiveWindowGeometryChangedChanged;
+			if (Wnck.Screen.Default.ActiveWindow != null)
+				Wnck.Screen.Default.ActiveWindow.GeometryChanged += HandleActiveWindowGeometryChangedChanged;
 			UpdateTransientItems ();
 		}
 		
@@ -145,9 +143,12 @@ namespace Docky.Items
 			if (args.Window.IsSkipTasklist)
 				return;
 			
+			longMatchInProgress = !WindowMatcher.Default.WindowIsReadyForMatch (args.Window);
+			
 			// ensure we run last (more or less) so that all icons can update first
 			GLib.Timeout.Add (150, delegate {
 				if (WindowMatcher.Default.WindowIsReadyForMatch (args.Window)) {
+					longMatchInProgress = false;
 					UpdateTransientItems ();
 				} else {
 					// handle applications which set their proper (matchable) window title very late,
@@ -160,6 +161,7 @@ namespace Docky.Items
 					GLib.Timeout.Add (matching_timeout, delegate {
 						if (!WindowMatcher.Default.WindowIsReadyForMatch (args.Window)) {
 							args.Window.NameChanged -= HandleUnmatchedWindowNameChanged;
+							longMatchInProgress = false;
 							UpdateTransientItems ();
 						}
 						return false;
@@ -174,6 +176,7 @@ namespace Docky.Items
 			Wnck.Window window = (sender as Wnck.Window);
 			if (WindowMatcher.Default.WindowIsReadyForMatch (window)) {
 				window.NameChanged -= HandleUnmatchedWindowNameChanged;
+				longMatchInProgress = false;
 				UpdateTransientItems ();
 			}
 		}
@@ -195,6 +198,9 @@ namespace Docky.Items
 				RemoveTransientItems (transient_items.ToList ());
 				return;
 			}
+
+			if (longMatchInProgress)
+				return;
 
 			// handle unmanaged windows
 			foreach (Wnck.Window window in UnmanagedWindows) {
@@ -316,6 +322,10 @@ namespace Docky.Items
 		
 		public void PinToDock (ApplicationDockItem item)
 		{
+			if (items.ContainsKey (item.OwnedItem.Uri.AbsoluteUri))
+				return;
+			
+			item.WindowsChanged -= HandleTransientWindowsChanged;
 			transient_items.Remove (item);
 			items.Add (item.OwnedItem.Uri.AbsoluteUri, item);
 
@@ -413,8 +423,8 @@ namespace Docky.Items
 				Wnck.Screen.Default.ViewportsChanged -= WnckScreenDefaultViewportsChanged;
 				Wnck.Screen.Default.ActiveWorkspaceChanged -= WnckScreenDefaultActiveWorkspaceChanged;
 				Wnck.Screen.Default.ActiveWindowChanged -= WnckScreenDefaultActiveWindowChanged;
-				if (prevActive != null)
-					prevActive.GeometryChanged -= HandleActiveWindowGeometryChangedChanged;
+				if (Wnck.Screen.Default.ActiveWindow != null)
+					Wnck.Screen.Default.ActiveWindow.GeometryChanged -= HandleActiveWindowGeometryChangedChanged;
 			}
 			
 			IEnumerable<AbstractDockItem> old_items = Items;

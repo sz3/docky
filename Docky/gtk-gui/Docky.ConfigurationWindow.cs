@@ -138,7 +138,7 @@ namespace Docky {
             this.start_with_computer_checkbutton = new Gtk.CheckButton();
             this.start_with_computer_checkbutton.CanFocus = true;
             this.start_with_computer_checkbutton.Name = "start_with_computer_checkbutton";
-            this.start_with_computer_checkbutton.Label = Mono.Unix.Catalog.GetString("_Start When Computer Starts");
+            this.start_with_computer_checkbutton.Label = Mono.Unix.Catalog.GetString("_Start When User Logs In");
             this.start_with_computer_checkbutton.DrawIndicator = true;
             this.start_with_computer_checkbutton.UseUnderline = true;
             this.vbox3.Add(this.start_with_computer_checkbutton);
@@ -314,9 +314,10 @@ namespace Docky {
             this.hbox5.Spacing = 6;
             // Container child hbox5.Gtk.Box+BoxChild
             this.helper_show_cmb = Gtk.ComboBox.NewText();
-            this.helper_show_cmb.AppendText(Mono.Unix.Catalog.GetString("All"));
+            this.helper_show_cmb.AppendText(Mono.Unix.Catalog.GetString("Usable"));
             this.helper_show_cmb.AppendText(Mono.Unix.Catalog.GetString("Enabled"));
             this.helper_show_cmb.AppendText(Mono.Unix.Catalog.GetString("Disabled"));
+            this.helper_show_cmb.AppendText(Mono.Unix.Catalog.GetString("All"));
             this.helper_show_cmb.Name = "helper_show_cmb";
             this.helper_show_cmb.Active = 0;
             this.hbox5.Add(this.helper_show_cmb);
@@ -490,8 +491,8 @@ namespace Docky {
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
-            this.DefaultWidth = 449;
-            this.DefaultHeight = 482;
+            this.DefaultWidth = 420;
+            this.DefaultHeight = 430;
             this.label3.MnemonicWidget = this.theme_combo;
             this.Show();
             this.config_notebook.SwitchPage += new Gtk.SwitchPageHandler(this.OnPageSwitch);

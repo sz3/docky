@@ -1,4 +1,4 @@
-	//  
+//  
 //  Copyright (C) 2009 Jason Smith, Robert Dyer, Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
@@ -231,7 +231,7 @@ namespace Docky.Services
 				if (width <= 0 || height <= 0)
 					throw new ArgumentException ("Width / Height must be greater than 0 if icon is not a file or embedded resource");
 				
-				// Try to load icon from defaul theme.
+				// Try to load icon from default theme.
 				pixbuf = IconFromTheme (name, Math.Max (width, height), IconTheme.Default);
 				if (pixbuf != null)
 					break;
@@ -245,7 +245,6 @@ namespace Docky.Services
 				
 				// After this point, we assume that the caller's icon cannot be found,
 				// so we warn and continue, trying the next in the list
-				
 				if (name != iconNames.Last ())
 					Log<DrawingService>.Info ("Could not find '{0}', using fallback of '{1}'.", name, iconNames[ iconNames.IndexOf (name) + 1]);
 			}
@@ -340,7 +339,7 @@ namespace Docky.Services
 			if (icon is ThemedIcon) {
 				ThemedIcon themeIcon = new ThemedIcon (icon.Handle);
 				
-				// if the icon exists in the theme, this will return the relevent ion
+				// if the icon exists in the theme, this will return the relevent icon
 				if (themeIcon.Names.Any ())
 					return themeIcon.Names.FirstOrDefault (n => IconTheme.Default.HasIcon (n));
 			} else if (icon is FileIcon) {
@@ -460,18 +459,16 @@ namespace Docky.Services
 			string name_noext = name;
 			
 			// We may have to remove the extension.
-			if (name.Contains (".")) {
+			if (name.Contains ("."))
 				name_noext = name.Remove (name.LastIndexOf ("."));
-			}
 			
 			try {
-				if (theme.HasIcon (name)) {  
+				if (theme.HasIcon (name))
 					pixbuf = theme.LoadIcon (name, size, 0);
-				} else if (theme.HasIcon (name_noext)) { 
+				else if (theme.HasIcon (name_noext))
 					pixbuf = theme.LoadIcon (name_noext, size, 0);
-				} else if (name == "gnome-mime-text-plain" && theme.HasIcon ("gnome-mime-text")) { 
+				else if (name == "gnome-mime-text-plain" && theme.HasIcon ("gnome-mime-text"))
 					pixbuf = theme.LoadIcon ("gnome-mime-text", size, 0);
-				}
 			} catch (Exception e) {
 				Log<DrawingService>.Warn ("Error loading themed icon '" + name + "': " + e.Message);
 				Log<DrawingService>.Debug (e.StackTrace);

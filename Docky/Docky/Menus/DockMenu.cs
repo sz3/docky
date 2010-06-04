@@ -100,7 +100,7 @@ namespace Docky.Menus
 		
 		static void SetLight ()
 		{
-			IsLight = DockServices.Drawing.IsIconLight (Docky.Controller.MenuSvg);
+			IsLight = DockServices.Drawing.IsIconLight (ThemeController.MenuSvg);
 		}
 		
 		static DockySurface [] menu_slices;
@@ -112,7 +112,7 @@ namespace Docky.Menus
 			
 			DockySurface main = new DockySurface (TotalWidth, TotalHeight, model);
 			
-			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (Docky.Controller.MenuSvg)) {
+			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (ThemeController.MenuSvg)) {
 				Gdk.CairoHelper.SetSourcePixbuf (main.Context, pixbuf, ShadowSize, ShadowSize);
 				main.Context.Paint ();
 			}
@@ -261,7 +261,7 @@ namespace Docky.Menus
 			
 			SetPadding ();
 			
-			Docky.Controller.ThemeChanged += DockyControllerThemeChanged;
+			ThemeController.ThemeChanged += DockyControllerThemeChanged;
 			Gdk.Screen.Default.CompositedChanged += HandleCompositedChanged;
 		}
 
@@ -313,14 +313,14 @@ namespace Docky.Menus
 			case DockPosition.Bottom:
 			case DockPosition.Top:
 				y = oldY;
-				x = Math.Max (0, Math.Min (oldX, monitor_geo.X + monitor_geo.Width - allocation.Width));
+				x = Math.Max (monitor_geo.X, Math.Min (oldX, monitor_geo.X + monitor_geo.Width - allocation.Width));
 				tailOffset = x - oldX;
 				break;
 			
 			case DockPosition.Left:
 			case DockPosition.Right:
 				x = oldX;
-				y = Math.Max (0, Math.Min (oldY, monitor_geo.Y + monitor_geo.Height - allocation.Height));
+				y = Math.Max (monitor_geo.Y, Math.Min (oldY, monitor_geo.Y + monitor_geo.Height - allocation.Height));
 				tailOffset = y - oldY;
 			
 				// rotation breaks this
@@ -577,7 +577,7 @@ namespace Docky.Menus
 		
 		public override void Dispose ()
 		{
-			Docky.Controller.ThemeChanged -= DockyControllerThemeChanged;
+			ThemeController.ThemeChanged -= DockyControllerThemeChanged;
 			Gdk.Screen.Default.CompositedChanged -= HandleCompositedChanged;
 			
 			ResetSlices ();

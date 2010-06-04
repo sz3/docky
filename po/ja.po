@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-05-17 08:04+0200\n"
-"PO-Revision-Date: 2010-05-09 15:13+0000\n"
+"POT-Creation-Date: 2010-06-02 22:46+0200\n"
+"PO-Revision-Date: 2010-05-18 02:57+0000\n"
 "Last-Translator: kawaji <jiro.kawada@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-05-17 06:28+0000\n"
+"X-Launchpad-Export-Date: 2010-06-02 21:21+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
@@ -47,17 +47,17 @@ msgstr ""
 "削除するドックに関わる全ての設定が完全に失われます。"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:287
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:456
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
 msgstr "ドック削除(_D)"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:401
-#: ../Docky/Docky/ConfigurationWindow.cs:426
+#: ../Docky/Docky/ConfigurationWindow.cs:421
 msgid "_Select"
 msgstr "選択(_S)"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:404
-#: ../Docky/Docky/ConfigurationWindow.cs:429
+#: ../Docky/Docky/ConfigurationWindow.cs:424
 msgid ".tar Archives"
 msgstr ".tar 書庫"
 
@@ -97,7 +97,7 @@ msgstr "このドックレットを選択ドックに追加"
 msgid "Remove this docklet from the selected dock"
 msgstr "このドックレットを選択ドックから削除"
 
-#: ../Docky/Docky/Docky.cs:110
+#: ../Docky/Docky/Docky.cs:121
 msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
@@ -162,21 +162,21 @@ msgstr "ドラッグして再配置"
 msgid "Drop to add to dock"
 msgstr "ドロップしてドックに追加"
 
-#: ../Docky/Docky/Items/DockyItem.cs:114
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:217
+#: ../Docky/Docky/Items/DockyItem.cs:133
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:223
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:239
 msgid "_Settings"
 msgstr "設定(_S)"
 
-#: ../Docky/Docky/Items/DockyItem.cs:115
+#: ../Docky/Docky/Items/DockyItem.cs:134
 msgid "_About"
 msgstr "情報(_A)"
 
-#: ../Docky/Docky/Items/DockyItem.cs:116
+#: ../Docky/Docky/Items/DockyItem.cs:135
 msgid "_Help"
 msgstr "ヘルプ(_H)"
 
-#: ../Docky/Docky/Items/DockyItem.cs:117
+#: ../Docky/Docky/Items/DockyItem.cs:137
 msgid "_Quit Docky"
 msgstr "Docky 終了(_Q)"
 
@@ -193,7 +193,7 @@ msgid "_Theme:"
 msgstr "テーマ(_T):"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:343
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
 msgid "_Install"
 msgstr "インストール(_I)"
 
@@ -210,7 +210,7 @@ msgid "Docks"
 msgstr "ドック"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
 msgid "All"
 msgstr "全て"
 
@@ -228,11 +228,15 @@ msgstr "無効状態"
 msgid "Docklets"
 msgstr "ドックレット"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:374
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
+msgid "Usable"
+msgstr ""
+
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
 msgstr "ヘルパー"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:429
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
 msgid "_New Dock"
 msgstr "新規ドック(_N)"
 
@@ -280,22 +284,10 @@ msgstr "ランチャーを有していないウィンドウを管理(_M)"
 msgid "_Zoom:"
 msgstr "ズーム(_Z):"
 
-#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:119
+#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:115
 #, csharp-format
 msgid "Drop to open with {0}"
-msgstr ""
-
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:97
-msgid "Icon"
-msgstr "アイコン"
-
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:100
-msgid "X-GNOME-FullName"
-msgstr ""
-
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:102
-msgid "Name"
-msgstr ""
+msgstr "ドロップして {0} で開く"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:159
 msgid "New _Window"
@@ -310,63 +302,65 @@ msgstr "開く(_O)"
 msgid "Reset Color"
 msgstr "色を元に戻す"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:399
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:409
 msgid "_Pin to Dock"
 msgstr "ドックに作成配置(_P)"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:74
 #, csharp-format
 msgid "Drop to move to {0}"
-msgstr ""
+msgstr "ドロッップして {0} へ移動"
+
+#. until we use a new version of GTK# which supports getting the GLib.Error code
+#. this is about the best we can do.
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:189
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:234
+msgid "Error performing drop action"
+msgstr "ドロップ・アクション実行でエラー"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:189
 msgid "Not enough free space on destination."
 msgstr "目的の場所に十分な空きスペースがありません。"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:201
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:203
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:223
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:206
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:209
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:241
 msgid "Complete"
 msgstr "完了"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:209
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:219
 msgid "Moving"
 msgstr "移動中"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:215
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:225
 msgid "Copying"
 msgstr "コピー中"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:228
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:229
-msgid "Error performing drop action"
-msgstr "ドロップ・アクション実行でエラー"
-
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:251
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:259
 msgid "Open"
 msgstr "開く"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:252
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:260
 msgid "Open Containing Folder"
 msgstr "親フォルダを開く"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:248
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:253
 msgid "Unma_ximize"
 msgstr "最大化解除(_X)"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:251
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:256
 msgid "Ma_ximize"
 msgstr "最大化(_X)"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:255
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:260
 msgid "_Restore"
 msgstr "元に戻す(_R)"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:258
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:263
 msgid "Mi_nimize"
 msgstr "最小化(_N)"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:261
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:266
 msgid "_Close All"
 msgstr "全て閉じる(_C)"
 
@@ -440,19 +434,19 @@ msgstr "残り "
 msgid "Computer"
 msgstr "コンピュータ"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:421
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:425
 msgid "Di_gital Clock"
 msgstr "デジタル時計(_G)"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:427
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "24-Hour _Clock"
 msgstr "24時間時計(_C)"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:433
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
 msgid "Show _Date"
 msgstr "日付表示(_D)"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:439
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:443
 msgid "Select _Theme"
 msgstr "テーマ選択(_T)"
 
@@ -489,6 +483,11 @@ msgstr "クリックしてユーザー名とパスワードを設定します。
 msgid "(no subject)"
 msgstr "（件名なし）"
 
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:269
+#, csharp-format
+msgid "You have {0} new, unread messages"
+msgstr ""
+
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:273
 #, csharp-format
 msgid "From: {0}"
@@ -516,33 +515,33 @@ msgstr "一般エラー"
 msgid "GMail Configuration"
 msgstr "GMail の設定"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:79
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 msgid "No unread mail"
 msgstr "未読メールなし"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:82
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:98
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
 msgstr[0] "{0} 未読メッセージ"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:103
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:119
 msgid "Checking mail..."
 msgstr "メールチェック中..."
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:196
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:202
 msgid "_View "
 msgstr "表示(_V) "
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:207
 msgid "_Compose Mail"
 msgstr "メール作成(_C)"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:208
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:214
 msgid "New Mail"
 msgstr "新着メール"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:226
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:232
 msgid "Check _Mail"
 msgstr "メールチェック(_M)"
 
@@ -596,40 +595,40 @@ msgstr "登録した放送局(_S)"
 msgid "S_earch"
 msgstr "検索(_S)"
 
-#: ../StandardPlugins/NPR/src/Station.cs:76
+#: ../StandardPlugins/NPR/src/Station.cs:77
 msgid "No stations found."
 msgstr "放送局がみつかりません。"
 
-#: ../StandardPlugins/NPR/src/Station.cs:77
+#: ../StandardPlugins/NPR/src/Station.cs:78
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
 msgstr "再検索してみてください。"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:48
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:46
 msgid "Fetching Information..."
 msgstr "情報取得中..."
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:68
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:66
 msgid "Click to add NPR stations."
 msgstr "クリックしてNPR局を追加します。"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:107
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:105
 msgid "Home Page"
 msgstr "ホームページ"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:114
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:112
 msgid "Program Schedule"
 msgstr "番組スケジュール"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:121
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:119
 msgid "Donate"
 msgstr "寄付"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:128
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:126
 msgid "Live Streams"
 msgstr "ライブ・ストリーム"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:166
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:164
 msgid "Settings"
 msgstr "設定"
 
@@ -707,7 +706,7 @@ msgstr "本当に全てのプログラムを閉じてコンピュータをシャ
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:50
 msgid "Drop to move to Trash"
-msgstr ""
+msgstr "ドロップしてゴミ箱へ移動"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:77
 msgid "No items in Trash"
@@ -724,15 +723,19 @@ msgid "_Open Trash"
 msgstr "ゴミ箱を開く(_O)"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:166
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:196
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:232
 msgid "Empty _Trash"
 msgstr "ゴミ箱を空にする(_T)"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:188
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:167
+msgid "Restore Files"
+msgstr ""
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:224
 msgid "Empty all of the items from the trash?"
 msgstr "ゴミ箱を空にしますか？"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:190
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:226
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
@@ -867,6 +870,9 @@ msgstr "湿度 {0}"
 
 #~ msgid "Docky Configuration"
 #~ msgstr "Docky の設定"
+
+#~ msgid "Icon"
+#~ msgstr "アイコン"
 
 #~ msgid "Indicat_e Multiple Windows"
 #~ msgstr "複数ウィンドウを示す目印(_E)"

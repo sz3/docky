@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -25,93 +25,40 @@ using Docky.Items;
 
 namespace Docky.DBus
 {
-
-
 	public class DockyDBus : IDockyDBus
 	{
-		#region IDockyDBus implementation
-		public event ItemChangedHandler ItemAdded;
+		public event Action QuitCalled;
+		public event Action SettingsCalled;
+		public event Action AboutCalled;
 		
-		public event ItemChangedHandler ItemRemoved;
+		#region IDockyDBus implementation
 		
 		public event Action ShuttingDown;
 		
-		public string[] DockItemPaths ()
-		{
-			return DBusManager.Default.Items
-				.Select (adi => DBusManager.Default.PathForItem (adi))
-				.ToArray ();
-		}
-
-		public string DockItemPathForDesktopID (string id)
-		{
-			return DBusManager.Default.Items
-				.OfType<ApplicationDockItem> ()
-				.Where (adi => adi.OwnedItem.DesktopID == id)
-				.Select (adi => DBusManager.Default.PathForItem (adi))
-				.DefaultIfEmpty ("")
-				.FirstOrDefault ();
-		}
-
-		public string DockItemPathForDesktopFile (string path)
-		{
-			return DBusManager.Default.Items
-				.OfType<ApplicationDockItem> ()
-				.Where (adi => adi.OwnedItem.Path == path)
-				.Select (adi => DBusManager.Default.PathForItem (adi))
-				.DefaultIfEmpty ("")
-				.FirstOrDefault ();
-		}
-		
-		public string DockItemPathForWindowXID (uint xid)
-		{
-			return DBusManager.Default.Items
-				.OfType<WnckDockItem> ()
-				.Where (wdi => wdi.Windows.Any (w => (uint) w.Xid == xid))
-				.Select (wdi => DBusManager.Default.PathForItem (wdi))
-				.DefaultIfEmpty ("")
-				.FirstOrDefault ();
-		}
-		
-		
 		public void ShowAbout ()
 		{
+			if (AboutCalled != null)
+				AboutCalled ();
 		}
-		
 		
 		public void ShowSettings ()
 		{
+			if (SettingsCalled != null)
+				SettingsCalled ();
 		}
-		
 		
 		public void Quit ()
 		{
-			// fixme
-			System.Environment.Exit (0);
+			if (QuitCalled != null)
+				QuitCalled ();
 		}
 		
 		#endregion
-
-		public DockyDBus ()
-		{
-		}
 		
 		public void Shutdown ()
 		{
 			if (ShuttingDown != null)
 				ShuttingDown ();
-		}
-		
-		public void OnItemAdded (string path)
-		{
-			if (ItemAdded != null)
-				ItemAdded (path);
-		}
-		
-		public void OnItemRemoved (string path)
-		{
-			if (ItemRemoved != null)
-				ItemRemoved (path);
 		}
 	}
 }

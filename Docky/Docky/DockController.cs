@@ -36,7 +36,6 @@ using Docky.Services;
 
 namespace Docky
 {
-	
 	class DockMonitor
 	{
 		public Rectangle Geo { get; set; }
@@ -46,13 +45,9 @@ namespace Docky
 
 	internal class DockController : IDisposable
 	{
-		const string DefaultTheme = "Classic";
-		
 		IPreferences prefs;
+		
 		List<Dock> docks;
-		
-		public event EventHandler ThemeChanged;
-		
 		public IEnumerable<Dock> Docks { 
 			get { return docks.AsEnumerable (); }
 		}
@@ -79,85 +74,6 @@ namespace Docky
 			return docks.Where (d => d.Preferences.MonitorNumber == monitorNumber);
 		}
 		
-		IEnumerable<GLib.File> ThemeContainerFolders {
-			get {
-				return new [] {
-					DockServices.Paths.SystemDataFolder.GetChild ("themes"),
-					DockServices.Paths.UserDataFolder.GetChild ("themes"),
-				}.Where (d => d.Exists).Distinct (new FileEqualityComparer ());
-			}
-		}
-		
-		public int UrgentHueShift {
-			get {
-				return prefs.Get<int> ("UrgentHue", 150);
-			}
-			set {
-				if (UrgentHueShift == value)
-					return;
-				// clamp to -180 .. 180
-				int hue = Math.Max (-180, Math.Min (180, value));
-				prefs.Set ("UrgentHue", hue);
-			}
-		}
-		
-		TimeSpan glow;
-		int? glowSeconds;
-		public TimeSpan GlowTime {
-			get {
-				if (!glowSeconds.HasValue) {
-					glowSeconds = prefs.Get<int> ("GlowTime", 10);
-					if (glowSeconds.Value < 0)
-						glow = new TimeSpan (100, 0, 0, 0, 0);
-					else
-						glow = new TimeSpan (0, 0, 0, 0, glowSeconds.Value * 1000);
-				}
-				return glow;
-			}
-		}
-		
-		public IEnumerable<string> DockThemes {
-			get {
-				yield return DefaultTheme;
-				foreach (GLib.File dir in ThemeContainerFolders.Where (f => f.Exists)) {
-					foreach (string s in Directory.GetDirectories (dir.Path))
-						yield return Path.GetFileName (s);
-				}
-			}
-		}
-		
-		public string DockTheme {
-			get {
-				return prefs.Get ("Theme", DefaultTheme);
-			}
-			set {
-				if (DockTheme == value)
-					return;
-				prefs.Set ("Theme", value);
-				Log<DockController>.Info ("Setting theme: " + value);
-				if (ThemeChanged != null)
-					ThemeChanged (this, EventArgs.Empty);
-			}
-		}
-		
-		public string BackgroundSvg {
-			get {
-				return ThemedSvg ("background.svg", "classic.svg");
-			}
-		}
-		
-		public string MenuSvg {
-			get {
-				return ThemedSvg ("menu.svg", "menu.svg");
-			}
-		}
-		
-		public string TooltipSvg {
-			get {
-				return ThemedSvg ("tooltip.svg", "tooltip.svg");
-			}
-		}
-		
 		IEnumerable<string> DockNames {
 			get {
 				return prefs.Get<string []> ("ActiveDocks", new [] {"Dock1"}).AsEnumerable ().Take (4);
@@ -167,16 +83,10 @@ namespace Docky
 			}
 		}
 		
-		public DockController ()
-		{
-		}
-		
 		public void Initialize ()
 		{
 			docks = new List<Dock> ();
 			prefs = DockServices.Preferences.Get<DockController> ();
-			
-			Log<DockController>.Info ("Setting theme: " + DockTheme);
 			
 			DetectMonitors ();
 			CreateDocks ();
@@ -222,48 +132,6 @@ namespace Docky
 					positions.Add (DockPosition.Bottom);
 				
 				mon.PossiblePositions = positions;
-			}
-		}
-
-		string ThemedSvg (string svgName, string def)
-		{
-			GLib.File themeFolder = ThemeContainerFolders
-				.SelectMany (f => f.SubDirs (false))
-				.FirstOrDefault (th => th.Basename == DockTheme);
-			
-			if (DockTheme != DefaultTheme && themeFolder != null) {
-				if (themeFolder.GetChild (svgName).Exists)
-					return themeFolder.GetChild (svgName).Path;
-			}
-			return def + "@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName;
-		}
-		
-		public string InstallTheme (GLib.File file)
-		{
-			if (!file.Exists)
-				return null;
-			
-			if (!DockServices.Paths.UserDataFolder.Exists)
-				DockServices.Paths.UserDataFolder.MakeDirectory (null);
-			GLib.File themeDir = DockServices.Paths.UserDataFolder.GetChild ("themes");
-			if (!themeDir.Exists)
-				themeDir.MakeDirectory (null);
-			
-			Log<DockController>.Info ("Trying to install theme: {0}", file.Path);
-			
-			try {
-				List<string> oldThemes = DockThemes.ToList ();
-				TarArchive ar = TarArchive.CreateInputTarArchive (new System.IO.FileStream (file.Path, System.IO.FileMode.Open));
-				ar.ExtractContents (themeDir.Path);
-				List<string> newThemes = DockThemes.ToList ();
-				newThemes.RemoveAll (f => oldThemes.Contains (f));
-				if (newThemes.Count == 1)
-					return newThemes [0];
-				return null;
-			} catch (Exception e) {
-				Log<DockController>.Error ("Error trying to unpack '{0}': {1}", file.Path, e.Message);
-				Log<DockController>.Debug (e.StackTrace);
-				return null;
 			}
 		}
 		
@@ -338,6 +206,7 @@ namespace Docky
 				}
 			}
 		}
+		
 		#region IDisposable implementation
 		public void Dispose ()
 		{

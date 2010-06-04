@@ -30,8 +30,6 @@ using Docky.Services;
 
 namespace Docky.Interface
 {
-
-
 	public class AutohideManager : IDisposable
 	{
 		public event EventHandler HiddenChanged;
@@ -208,9 +206,8 @@ namespace Docky.Interface
 			
 			try {
 				foreach (Wnck.Window window in screen.Windows.Where (w => IsIntersectableWindow (w))) {
-					if (Behavior == AutohideType.Intellihide && activeWindow != null && activeWindow.Pid != window.Pid) {
+					if (Behavior == AutohideType.Intellihide && activeWindow != null && activeWindow.Pid != window.Pid)
 						continue;
-					}
 					
 					if (window.EasyGeometry ().IntersectsWith (adjustedDockArea)) {
 						intersect = true;

@@ -28,6 +28,10 @@ namespace Docky.Services
 			get { return FileFactory.NewForPath (AssemblyInfo.DataDirectory).GetChild ("docky"); }
 		}
 
+		public File DockManagerUserDataFolder {
+			get { return FileFactory.NewForPath (Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData)).GetChild ("dockmanager"); }
+		}
+
 		public File UserDataFolder {
 			get { return FileFactory.NewForPath (Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData)).GetChild ("docky"); }
 		}

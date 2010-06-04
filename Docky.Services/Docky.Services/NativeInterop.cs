@@ -59,6 +59,7 @@ namespace Docky.Services
 		// some attributes must be looked up as bytestrings, not strings
 		static readonly string [] BYTE_STRING_VALS = new string [] {
 			"thumbnail::path",
+			"trash::orig-path",
 			"standard::name",
 			"standard::symlink-target",
 		};

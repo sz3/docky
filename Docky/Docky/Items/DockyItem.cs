@@ -43,10 +43,28 @@ namespace Docky.Items
 			}
 		}
 		
+		bool? show_settings;
+		public bool ShowSettings {
+			get {
+				if (!show_settings.HasValue)
+					show_settings = prefs.Get<bool> ("ShowSettings", true);
+				return show_settings.Value;
+			}
+		}
+		
+		bool? show_quit;
+		public bool ShowQuit {
+			get {
+				if (!show_quit.HasValue)
+					show_quit= prefs.Get<bool> ("ShowQuit", true);
+				return show_quit.Value;
+			}
+		}
+		
 		public DockyItem ()
 		{
 			Indicator = ActivityIndicator.Single;
-			HoverText = "Docky";
+			HoverText = prefs.Get<string> ("HoverText", "Docky");
 			Icon = "docky";
 		}
 		
@@ -111,10 +129,12 @@ namespace Docky.Items
 		protected override MenuList OnGetMenuItems ()
 		{
 			MenuList list = new MenuList ();
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Settings"), PrefsIcon, (o, a) => ConfigurationWindow.Instance.Show ()));
+			if (ShowSettings)
+				list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Settings"), PrefsIcon, (o, a) => ConfigurationWindow.Instance.Show ()));
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_About"), AboutIcon, (o, a) => Docky.ShowAbout ()));
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Help"), HelpIcon, (o, a) => DockServices.System.Open ("http://wiki.go-docky.com")));
-			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Quit Docky"), CloseIcon, (o, a) => Docky.Quit ()));
+			if (ShowQuit)
+				list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Quit Docky"), CloseIcon, (o, a) => Docky.Quit ()));
 			return list;
 		}
 

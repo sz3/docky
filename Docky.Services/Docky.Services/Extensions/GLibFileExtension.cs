@@ -199,6 +199,8 @@ namespace Docky.Services
 				
 				if (info.GetAttributeBoolean ("access::can-delete"))
 					child.Delete (null);
+				
+				info.Dispose ();
 			}
 			
 			if (info != null)

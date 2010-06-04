@@ -1,2 +1,3 @@
 data/docky.desktop.in
+Docky.DBus/Docky.DBus/DockManagerDBus.cs
 Docky.Windowing/Windowing/WindowMatcher.cs

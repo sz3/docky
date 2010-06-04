@@ -94,16 +94,12 @@ namespace Docky.Items
 		/// <summary>
 		/// The time at which the item was added (and made visible) in the item provider
 		/// </summary>
-		public DateTime AddTime {
-			get; internal set;
-		}
+		public DateTime AddTime { get; internal set; }
 		
 		/// <summary>
 		/// The last time this item was clicked
 		/// </summary>
-		public DateTime LastClick {
-			get; private set;
-		}
+		public DateTime LastClick { get; private set; }
 		
 		/// <summary>
 		/// Which mouse buttons trigger the menu
@@ -122,18 +118,13 @@ namespace Docky.Items
 		/// <summary>
 		/// The animation with which the item wishes to display
 		/// </summary>
-		public ClickAnimation ClickAnimation {
-			get; private set;
-		}
+		public ClickAnimation ClickAnimation { get; private set; }
 		
 		/// <summary>
 		/// Determines if the item will be rendered at multiple sizes when zoomed. Not advised for icons who
 		/// use a themed icon as this may look different at different sizes
 		/// </summary>
-		public virtual bool ScalableRendering {
-			get;
-			protected set;
-		}
+		public virtual bool ScalableRendering { get; protected set; }
 		
 		/// <summary>
 		/// Causes an items "upward" orientation to always face in if true
@@ -177,9 +168,7 @@ namespace Docky.Items
 		/// Future use for displaying a header in menus
 		/// </summary>
 		public virtual string ShortName {
-			get {
-				return HoverText;
-			}
+			get { return HoverText; }
 		}
 		
 		/// <summary>
@@ -212,31 +201,17 @@ namespace Docky.Items
 			}
 		}
 		
-		int last_position;
-		public int LastPosition {
-			get {
-				return last_position;
-			}
-			private set {
-				last_position = value;
-			}
-		}
+		public int LastPosition { get; private set; }
 		
 		/// <summary>
 		/// The owning provider of the item
 		/// </summary>
-		public AbstractDockItemProvider Owner {
-			get;
-			internal set;
-		}
+		public AbstractDockItemProvider Owner { get; internal set; }
 		
 		/// <summary>
 		/// 
 		/// </summary>
-		public Docky.Menus.MenuList RemoteMenuItems {
-			get;
-			private set;
-		}
+		public Docky.Menus.MenuList RemoteMenuItems { get; private set; }
 		
 		public const int HoverTextHeight = 26;
 		
@@ -293,10 +268,9 @@ namespace Docky.Items
 		
 		void SetStateTime (ItemState state, DateTime time)
 		{
-			foreach (ItemState i in Enum.GetValues (typeof(ItemState)).Cast<ItemState> ()) {
+			foreach (ItemState i in Enum.GetValues (typeof(ItemState)).Cast<ItemState> ())
 				if ((state & i) == i)
 					state_times [i] = time;
-			}
 		}
 		
 		/// <summary>
@@ -491,9 +465,11 @@ namespace Docky.Items
 		{
 			return false;
 		}
+		
 		#endregion
 		
 		#region Input Handling
+		
 		/// <summary>
 		/// Called by owning Dock when the item is clicked
 		/// </summary>
@@ -549,9 +525,11 @@ namespace Docky.Items
 		protected virtual void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
 		{
 		}
+		
 		#endregion
 		
 		#region Buffer Handling
+		
 		/// <summary>
 		/// Returns the <see cref="DockySurface"/> which holds the visual representation of the item.
 		/// </summary>
@@ -573,9 +551,8 @@ namespace Docky.Items
 				if (icon_buffers[j] == null || redraw[j])
 					continue;
 				
-				if (icon_buffers[j].Height == size) {
+				if (icon_buffers[j].Height == size)
 					return icon_buffers[j];
-				}
 			}
 			
 			// Find the buffer most similar to the requested size so as to reduce cache thrashing
@@ -728,7 +705,6 @@ namespace Docky.Items
 				return null;
 			
 			if (text_buffer == null) {
-			
 				using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ())
 				{
 					layout.FontDescription = style.FontDescription;
@@ -774,9 +750,8 @@ namespace Docky.Items
 			// try to ensure we dont clobber the buffers
 			// during an already in-progress repaint
 			GLib.Idle.Add (delegate {
-				if (!Square) {
+				if (!Square)
 					ResetBuffers ();
-				}
 				for (int i = 0; i < redraw.Length; i++)
 					redraw [i] = true;
 				OnPaintNeeded ();
@@ -786,12 +761,12 @@ namespace Docky.Items
 		
 		DockySurface ResetBuffer (DockySurface buffer)
 		{
-			if (buffer != null) {
+			if (buffer != null)
 				buffer.Dispose ();
-			}
 			
 			return null;
 		}
+		
 		#endregion
 		
 		/// <summary>
@@ -878,19 +853,18 @@ namespace Docky.Items
 		
 		protected void ShowPainter (AbstractDockPainter painter)
 		{
-			if (PainterRequest != null && painter != null) {
+			if (PainterRequest != null && painter != null)
 				PainterRequest (this, new PainterRequestEventArgs (this, painter, ShowHideType.Show));
-			}
 		}
 		
 		protected void HidePainter (AbstractDockPainter painter)
 		{
-			if (PainterRequest != null && painter != null) {
+			if (PainterRequest != null && painter != null)
 				PainterRequest (this, new PainterRequestEventArgs (this, painter, ShowHideType.Hide));
-			}
 		}
 
 		#region IDisposable implementation
+		
 		public virtual void Dispose ()
 		{
 			AppDomain.CurrentDomain.ProcessExit -= HandleProcessExit;
@@ -899,6 +873,5 @@ namespace Docky.Items
 		}
 
 		#endregion
-
 	}
 }

@@ -6,10 +6,12 @@ TARGET = library
 
 FILES = \
 	Docky.DBus/DBusManager.cs \
+	Docky.DBus/DockManagerDBus.cs \
+	Docky.DBus/DockManagerDBusItem.cs \
 	Docky.DBus/DockyDBus.cs \
-	Docky.DBus/DockyDBusItem.cs \
+	Docky.DBus/IDockManagerDBus.cs \
+	Docky.DBus/IDockManagerDBusItem.cs \
 	Docky.DBus/IDockyDBus.cs \
-	Docky.DBus/IDockyDBusItem.cs \
 	Docky.DBus/RemoteMenuEntry.cs \
 	Docky.DBus/RemoteFileMenuEntry.cs
 

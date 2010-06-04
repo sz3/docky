@@ -86,6 +86,7 @@ namespace Docky.Windowing
 		Dictionary<Wnck.Window, List<DesktopItem>> window_to_desktop_items;
 		Dictionary<string, List<DesktopItem>> exec_to_desktop_items;
 		Dictionary<string, DesktopItem> class_to_desktop_items;
+		Dictionary<string, string> remap_items;
 		readonly List<Regex> prefix_filters;
 		readonly List<Regex> suffix_filters;
 		
@@ -104,6 +105,11 @@ namespace Docky.Windowing
 			update_lock = new object ();
 			prefix_filters = BuildPrefixFilters ();
 			suffix_filters = BuildSuffixFilters ();
+			
+			Log<WindowMatcher>.Debug ("Loading Remaps..");
+			remap_items = new Dictionary<string, string> ();
+			LoadRemaps (DockServices.Paths.SystemDataFolder.GetChild ("remaps.ini"));
+			LoadRemaps (DockServices.Paths.UserDataFolder.GetChild ("remaps.ini"));
 			
 			// Load DesktopFilesCache from docky.desktop.[LANG].cache
 			desktop_items = LoadDesktopItemsCache (DockyDesktopFileCacheFile);
@@ -294,6 +300,44 @@ namespace Docky.Windowing
 			}
 		}
 
+		void LoadRemaps (GLib.File file)
+		{
+			if (!file.Exists)
+				return;
+			
+			Regex keyValueRegex = new Regex (
+				@"(^(\s)*(?<Key>([^\=^\n]+))[\s^\n]*\=(\s)*(?<Value>([^\n]+(\n){0,1})))",
+				RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled | 
+				RegexOptions.CultureInvariant
+			);
+			
+			try {
+				using (StreamReader reader = new StreamReader (file.Path)) {
+					string line;
+					
+					while ((line = reader.ReadLine ()) != null) {
+						line = line.Trim ();
+						if (line.Length <= 0 || line.Substring (0, 1) == "#")
+							continue;
+						
+						Match match = keyValueRegex.Match (line);
+						if (match.Success) {
+							string key = match.Groups["Key"].Value;
+							string val = match.Groups["Value"].Value;
+							if (!string.IsNullOrEmpty (key)) {
+								remap_items[key] = val;
+								Log<WindowMatcher>.Debug ("Remapping '" + key + "' to '" + val + "'");
+							}
+						}
+					}
+					reader.Close ();
+				}
+			} catch (Exception e) {
+				Log<WindowMatcher>.Error (e.Message);
+				Log<WindowMatcher>.Error (e.StackTrace);
+			}
+		}
+		
 		List<DesktopItem> LoadDesktopItemsCache (string filename)
 		{
 			if (!GLib.FileFactory.NewForPath (filename).Exists)
@@ -465,7 +509,7 @@ namespace Docky.Windowing
 		#region Window Matching
 		static IEnumerable<string> PrefixStrings {
 			get {
-				yield return "gksu";
+				yield return "gksu(do)?";
 				yield return "sudo";
 				yield return "java";
 				yield return "mono";
@@ -522,10 +566,9 @@ namespace Docky.Windowing
 			if (item == null)
 				throw new ArgumentNullException ("DesktopItem item");
 			
-			foreach (KeyValuePair<Wnck.Window, List<DesktopItem>> kvp in window_to_desktop_items) {
+			foreach (KeyValuePair<Wnck.Window, List<DesktopItem>> kvp in window_to_desktop_items)
 				if (kvp.Value.Any (df => df == item))
 					yield return kvp.Key;
-			}
 		}
 		
 		public IEnumerable<Wnck.Window> SimilarWindows (Wnck.Window window)
@@ -534,20 +577,25 @@ namespace Docky.Windowing
 				throw new ArgumentNullException ("Wnck.Window window");
 			
 			//TODO perhaps make it a bit smarter
-			if (!window_to_desktop_items.ContainsKey (window)) {
+			if (!window_to_desktop_items.ContainsKey (window))
 				foreach (Wnck.Window win in UnmatchedWindows) {
-					if (win != window)
-						if (window.Pid <= 1) {
-							if (window.ClassGroup != null && !string.IsNullOrEmpty (window.ClassGroup.ResClass))
-								if (win.ClassGroup.ResClass.Equals (window.ClassGroup.ResClass))
-									yield return win;
-							else if (!string.IsNullOrEmpty (win.Name) && win.Name.Equals (window.Name)) 
-								yield return win;
-						} else if (win.Pid == window.Pid) {
+					if (win == window)
+						continue;
+					
+					if (win.Pid == window.Pid)
+						yield return win;
+					else if (window.Pid <= 1) {
+						if (window.ClassGroup != null
+								&& win.ClassGroup != null
+								&& !string.IsNullOrEmpty (window.ClassGroup.ResClass)
+								&& !string.IsNullOrEmpty (win.ClassGroup.ResClass)
+								&& win.ClassGroup.ResClass.Equals (window.ClassGroup.ResClass))
 							yield return win;
-						}
+						else if (!string.IsNullOrEmpty (win.Name) && win.Name.Equals (window.Name)) 
+							yield return win;
+					}
 				}
-			}
+			
 			yield return window;
 		}
 
@@ -746,6 +794,9 @@ namespace Docky.Windowing
 				.Where (s => !string.IsNullOrEmpty (s) && !prefix_filters.Any (f => f.IsMatch (s)))) {
 				
 				yield return sanitizedCmd;
+				
+				if (remap_items.ContainsKey (sanitizedCmd))
+					yield return remap_items [sanitizedCmd];
 				
 				// if it ends with a special suffix, strip the suffix and return an additional result
 				foreach (Regex f in suffix_filters)
