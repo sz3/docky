@@ -2538,13 +2538,13 @@ namespace Docky.Interface
 		void DrawDockBackground (DockySurface surface, Gdk.Rectangle backgroundArea)
 		{
 			if (background_buffer == null) {
-				if (Preferences.IsVertical) {
+				if (Preferences.IsVertical)
 					background_buffer = new DockySurface (BackgroundHeight, BackgroundWidth, surface);
-				} else {
+				else
 					background_buffer = new DockySurface (BackgroundWidth, BackgroundHeight, surface);
-				}
 				
-				if (ConfigurationMode) {
+				// FIXME we should probably compute if the theme is transparent, but for now this works
+				if (ConfigurationMode && ThemeController.DockTheme.Equals ("Transparent")) {
 					background_buffer.Context.Rectangle (0, 0, BackgroundWidth, BackgroundHeight);
 					background_buffer.Context.Color = new Cairo.Color (1, 1, 1, 0.10);
 					background_buffer.Context.Fill ();
