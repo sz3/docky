@@ -44,11 +44,6 @@ namespace Timer
 			base.Dispose ();
 		}
 		
-		public override bool ItemCanBeRemoved (AbstractDockItem item)
-		{
-			return true;
-		}
-		
 		public override bool RemoveItem (AbstractDockItem item)
 		{
 			if (item is TimerMainDockItem) {

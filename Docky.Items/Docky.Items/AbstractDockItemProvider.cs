@@ -119,12 +119,18 @@ namespace Docky.Items
 		
 		public virtual bool ItemCanBeRemoved (AbstractDockItem item)
 		{
-			return false;
+			return true;
 		}
 		
 		public virtual bool RemoveItem (AbstractDockItem item)
 		{
-			return false;
+			if (!ItemCanBeRemoved (item))
+				return false;
+			
+			IEnumerable<AbstractDockItem> saved = Items.Where (adi => adi != item).ToArray ();
+			Items = saved;
+			item.Dispose ();
+			return true;
 		}
 		
 		public virtual MenuList GetMenuItems (AbstractDockItem item)

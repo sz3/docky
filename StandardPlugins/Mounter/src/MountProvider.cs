@@ -106,18 +106,10 @@ namespace Mounter
 			return m == null || (m.Volume == null && m.Root != null && m.Root.Path != null && m.Root.Path.Contains ("cdda"));
 		}
 		
-		public override bool ItemCanBeRemoved (AbstractDockItem item)
-		{
-			return (item is MountItem);
-		}
-		
 		public override bool RemoveItem (AbstractDockItem item)
 		{
-			Mounts.Remove (item as MountItem);
-			SetItems ();
 			(item as MountItem).UnMount ();
-			
-			return true;
+			return base.RemoveItem (item);
 		}
 	}
 }
