@@ -283,6 +283,7 @@ namespace Docky.Painters
 		public override void Dispose ()
 		{
 			ResetBuffers ();
+			ResetButtons ();
 			base.Dispose ();
 		}
 		
