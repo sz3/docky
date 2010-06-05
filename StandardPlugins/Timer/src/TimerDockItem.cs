@@ -65,6 +65,19 @@ namespace Timer
 			}
 		}
 		
+		string label = null;
+		string Label {
+			get {
+				if (string.IsNullOrEmpty (label))
+					return "";
+				return label + " - ";
+			}
+			set {
+				label = value;
+				UpdateHoverText ();
+			}
+		}
+		
 		DateTime LastRender { get; set; }
 		
 		bool Running { get; set; }
@@ -226,7 +239,39 @@ namespace Timer
 			else
 				text = Catalog.GetString ("Timer paused, time remaining:") + " ";
 			
-			HoverText = text + TimerMainDockItem.TimeRemaining (remaining);
+			HoverText = Label + text + TimerMainDockItem.TimeRemaining (remaining);
+		}
+		
+		void SetLabel ()
+		{
+			Gtk.MessageDialog md = new Gtk.MessageDialog (null, 
+					  0,
+					  Gtk.MessageType.Question, 
+					  Gtk.ButtonsType.None,
+					  "<b>" + Catalog.GetString ("Set the timer's label to:") + "</b>");
+			md.Title = "Docky Timer";
+			md.Icon = DockServices.Drawing.LoadIcon ("docky", 22);
+			md.Modal = false;
+			
+			md.AddButton (Gtk.Stock.Cancel, Gtk.ResponseType.Cancel);
+			md.AddButton (Catalog.GetString ("_Set Label"), Gtk.ResponseType.Ok);
+			md.DefaultResponse = Gtk.ResponseType.Ok;
+			
+			Gtk.Entry labelEntry = new Gtk.Entry ("" + label);
+			labelEntry.Activated += delegate {
+				Label = labelEntry.Text;
+				md.Destroy ();
+			};
+			labelEntry.Show ();
+			md.VBox.PackEnd (labelEntry);
+
+			md.Response += (o, args) => {
+				if (args.ResponseId != Gtk.ResponseType.Cancel)
+					Label = labelEntry.Text;
+				md.Destroy ();
+			};
+			
+			md.Show ();
 		}
 		
 		protected override MenuList OnGetMenuItems ()
@@ -241,6 +286,10 @@ namespace Timer
 			list[MenuListContainer.Actions].Add (new Docky.Menus.MenuItem (Catalog.GetString ("_Remove Timer"), "gtk-remove", delegate {
 				if (Finished != null)
 					Finished (this, EventArgs.Empty);
+			}));
+			
+			list[MenuListContainer.Actions].Add (new Docky.Menus.MenuItem (Catalog.GetString ("_Set Label"), "gtk-edit", delegate {
+				SetLabel ();
 			}));
 			
 			return list;
