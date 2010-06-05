@@ -417,7 +417,10 @@ namespace Docky.Services
 				if (asm == null)
 					throw new ArgumentNullException ("Could not find assembly '{0}'.", assemblyName);
 				
-				pixbuf = new Pixbuf (asm, resource, width, height);
+				if (width <= 0 || height <= 0)
+					pixbuf = new Pixbuf (asm, resource);
+				else
+					pixbuf = new Pixbuf (asm, resource, width, height);
 			} catch (Exception e) {
 				Log<DrawingService>.Warn ("Failed to load icon resource {0} from assembly {1}: {2}",
 				                         resource, assemblyName, e.Message); 
