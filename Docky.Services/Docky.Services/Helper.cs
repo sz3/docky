@@ -32,8 +32,13 @@ namespace Docky.Services
 		
 		public bool IsAppAvailable {
 			get {
-				if (Data != null && !string.IsNullOrEmpty (Data.AppUri))
-					return GLib.FileFactory.NewForPath (Data.AppUri).Exists;
+				if (Data != null && !string.IsNullOrEmpty (Data.AppUri)) {
+					foreach (string path in Environment.GetEnvironmentVariable ("PATH").Split (':'))
+						if (GLib.FileFactory.NewForPath (path + "/" + Data.AppUri).Exists)
+							return true;
+					
+					return false;
+				}
 				return true;
 			}
 		}
