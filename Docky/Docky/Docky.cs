@@ -144,100 +144,134 @@ namespace Docky
 				"Rico Tzschichholz <rtz@go-docky.com>",
 				"Seif Lotfy <seif@lotfy.com>",
 				"Chris Halse Rogers <raof@ubuntu.com>",
-				"Alex Launi <alex.launi@gmail.com>"
+				"Alex Launi <alex.launi@gmail.com>",
 			};
 			about.Artists = new[] { 
 				"Daniel Foré <bunny@go-docky.com>",
 			};
+			about.Documenters = new[] {
+				"Sven Mauhar <zekopeko@gmail.com>",
+				"Robert Dyer <robert@go-docky.com>",
+				"Daniel Foré <bunny@go-docky.com>",
+				"Chris Szikszoy <chris@go-docky.com>",
+				"Rico Tzschichholz <rtz@go-docky.com>",
+			};
 			about.TranslatorCredits = 
 				"Asturian\n" +
 				" Xuacu Saturio\n" +
-
+				"\n" +
+				
 				"Basque\n" +
 				" Ibai Oihanguren\n" +
+				"\n" +
 				
 				"Bengali\n" +
 				" Scio\n" +
-
+				"\n" +
+				
 				"Brazilian Portuguese\n" +
 				" André Gondim, Fabio S Monteiro, Flávio Etrusco, Glauco Vinicius\n" +
 				" Lindeval, Thiago Bellini, Victor Mello\n" +
-
+				"\n" +
+				
 				"Bulgarian\n" +
 				" Boyan Sotirov, Krasimir Chonov\n" +
-
+				"\n" +
+				
 				"Catalan\n" +
 				" BadChoice, Siegfried Gevatter\n" +
-
+				"\n" +
+				
 				"Chinese (Simplified)\n" +
 				" Chen Tao, G.S.Alex, Xhacker Liu, fighterlyt, lhquark, skatiger, 冯超\n" +
-
+				"\n" +
+				
 				"Croatian\n" +
 				" Saša Teković, zekopeko\n" +
-
+				"\n" +
+				
 				"English (United Kingdom)\n" +
 				" Alex Denvir, Daniel Bell, David Wood, Joel Auterson, SteVe Cook\n" +
-
+				"\n" +
+				
 				"Finnish\n" +
 				" Jiri Grönroos\n" +
-
+				"\n" +
+				
 				"French\n" +
 				" Hugo M., Kévin Gomez, Pierre Slamich\n" +
 				" Simon Richard, alienworkshop, maxime Cheval\n" +
-
+				"\n" +
+				
 				"Galician\n" +
 				" Francisco Diéguez, Indalecio Freiría Santos, Miguel Anxo Bouzada, NaNo\n" +
-
+				"\n" +
+				
 				"German\n" +
 				" Cephinux, Gabriel Shahzad, Jan-Christoph Borchardt, Mark Parigger\n" + 
 				" Martin Lettner, augias, fiction, pheder, tai\n" +
-
+				"\n" +
+				
 				"Hebrew\n" +
 				" Uri Shabtay\n" +
-
+				"\n" +
+				
 				"Hindi\n" +
 				" Bilal Akhtar\n" +
-
+				"\n" +
+				
 				"Hungarian\n" +
 				" Bognár András, Gabor Kelemen, Jezsoviczki Ádám, NewPlayer\n" +
-
+				"\n" +
+				
 				"Icelandic\n" +
 				" Baldur, Sveinn í Felli\n" +
-
+				"\n" +
+				
 				"Indonesian\n" +
 				" Andika Triwidada, Fakhrul Rijal\n" +
-					
+				"\n" +
+				
 				"Italian\n" +
 				" Andrea Amoroso, Blaster, Ivan, MastroPino, Michele, Milo Casagrande, Quizzlo\n" +
-
+				"\n" +
+				
 				"Japanese\n" +
 				" kawaji\n" +
-					
+				"\n" +
+				
 				"Korean\n" +
 				" Bugbear5, Cedna\n" +
-					
+				"\n" +
+				
 				"Polish\n" +
 				" 313, Adrian Grzemski, EuGene, Rafał Szalecki, Stanisław Gackowski, bumper, emol007\n" +
-
+				"\n" +
+				
 				"Romanian\n" +
 				" Adi Roiban, George Dumitrescu\n" +
-
+				"\n" +
+				
 				"Russian\n" +
 				" Alexander Semyonov, Alexey Nedilko, Andrey Sitnik, Artem Yakimenko\n" +
 				" Dmitriy Bobylev, Ivan, Phenomen, Sergey Demurin, Sergey Sedov\n" +
 				" SochiX, Vladimir, legin, sX11\n" +
-
+				"\n" +
+				
 				"Spanish\n" +
 				" Alejandro Navarro, David, DiegoJ, Edgardo Fredz, FAMM, Fuerteventura\n" +
 				" Gus, José A. Fuentes Santiago, Julián Alarcón, Malq, Martín V.\n" +
 				" Omar Campagne, Ricardo Pérez López, Sebastián Porta, alvin23, augias, elXATU\n" +
-
+				"\n" +
+				
 				"Swedish\n" +
 				" Daniel Nylander, Rovanion, riiga\n" +
-			
+				"\n" +
+				
 				"Turkish\n" +
 				" Yalçın Can, Yiğit Ateş\n" +
-			
+				"\n" +
+				
 				"Ukrainian\n" +
 				" naker.ua\n";
 			
