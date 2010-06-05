@@ -316,11 +316,10 @@ namespace Docky.Services
 			
 			if (scale == 1) return pixbuf;
 			
-			Pixbuf temp = pixbuf;
-			pixbuf = temp.ScaleSimple ((int) (temp.Width * scale),
-			                           (int) (temp.Height * scale),
-			                           InterpType.Hyper);
-			temp.Dispose ();
+			using (Pixbuf temp = pixbuf)
+				pixbuf = temp.ScaleSimple ((int) (temp.Width * scale),
+										   (int) (temp.Height * scale),
+										   InterpType.Hyper);
 			
 			return pixbuf;
 		}
@@ -418,12 +417,7 @@ namespace Docky.Services
 				if (asm == null)
 					throw new ArgumentNullException ("Could not find assembly '{0}'.", assemblyName);
 				
-				pixbuf = new Pixbuf (asm, resource);
-				
-				// now scale the pixbuf but keep the aspect ratio
-				if (width > 0 && height > 0)
-					pixbuf = ARScale (width, height, pixbuf);
-				
+				pixbuf = new Pixbuf (asm, resource, width, height);
 			} catch (Exception e) {
 				Log<DrawingService>.Warn ("Failed to load icon resource {0} from assembly {1}: {2}",
 				                         resource, assemblyName, e.Message); 
