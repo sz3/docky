@@ -34,7 +34,6 @@ using System.Text.RegularExpressions;
 
 namespace Docky.Interface
 {
-
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class DockPreferences : Gtk.Bin, IDockPreferences
 	{
@@ -459,8 +458,10 @@ namespace Docky.Interface
 		{
 			item_providers.Remove (provider);
 			
+			PluginManager.Disable (provider);
+			provider.Dispose ();
+			
 			OnItemProvidersChanged (null, provider.AsSingle ());
-			SyncPlugins ();
 		}
 		
 		public void AddProvider (AbstractDockItemProvider provider)
@@ -468,7 +469,6 @@ namespace Docky.Interface
 			item_providers.Add (provider);
 			
 			OnItemProvidersChanged (provider.AsSingle (), null);
-			SyncPlugins ();
 		}
 		
 		public bool ProviderCanMoveUp (AbstractDockItemProvider provider)
@@ -491,7 +491,6 @@ namespace Docky.Interface
 			item_providers [index] = temp;
 			
 			OnItemProvidersChanged (null, null);
-			SyncPlugins ();
 		}
 		
 		public void MoveProviderDown (AbstractDockItemProvider provider)
@@ -504,7 +503,6 @@ namespace Docky.Interface
 			item_providers [index] = temp;
 			
 			OnItemProvidersChanged (null, null);
-			SyncPlugins ();
 		}
 		
 		public void SyncPreferences ()
@@ -779,9 +777,9 @@ namespace Docky.Interface
 
 		void OnItemProvidersChanged (IEnumerable<AbstractDockItemProvider> addedProviders, IEnumerable<AbstractDockItemProvider> removedProviders)
 		{
-			if (ItemProvidersChanged != null) {
+			SyncPlugins ();
+			if (ItemProvidersChanged != null)
 				ItemProvidersChanged (this, new ItemProvidersChangedEventArgs (addedProviders, removedProviders));
-			}
 		}
 		
 		void SyncPlugins ()
@@ -789,20 +787,18 @@ namespace Docky.Interface
 			Plugins = ItemProviders.Where (p => p != DefaultProvider).Select (p => p.Name);
 		}
 		
-		public void FreeProviders ()
+		void FreeProviders ()
 		{
 			OnItemProvidersChanged (null, item_providers);
 			
-			foreach (AbstractDockItemProvider adip in item_providers.Where (adip => adip != DefaultProvider)) {
-				PluginManager.Disable (adip);
-			}
+			foreach (AbstractDockItemProvider provider in item_providers.Where (adip => adip != DefaultProvider))
+				PluginManager.Disable (provider);
 			
 			foreach (AbstractDockItemProvider provider in item_providers)
 				provider.Dispose ();
+			
 			item_providers = new List<AbstractDockItemProvider> ();
 			FileApplicationProvider.WindowManager.UpdateTransientItems ();
-			
-			SyncPlugins ();
 		}
 		
 		public override void Dispose ()
@@ -815,6 +811,7 @@ namespace Docky.Interface
 			fade_on_hide_check.Toggled -= FadeOnHideToggled;
 			DefaultProvider.ItemsChanged -= HandleDefaultProviderItemsChanged;
 			
+			FreeProviders ();
 			SyncPlugins ();
 			SyncPreferences ();
 			UpdateSortList ();

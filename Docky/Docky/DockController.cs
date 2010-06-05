@@ -167,7 +167,6 @@ namespace Docky
 			docks.Remove (dock);
 			if (dock.Preferences.DefaultProvider.IsWindowManager)
 				docks.First ().Preferences.DefaultProvider.SetWindowManager ();
-			dock.Preferences.FreeProviders ();
 			dock.Preferences.ResetPreferences ();
 			dock.Dispose ();
 			DockNames = DockNames.Where (s => s != dock.Preferences.GetName ());

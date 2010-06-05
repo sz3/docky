@@ -91,7 +91,5 @@ namespace Docky.Interface
 		void SyncPreferences ();
 		
 		void ResetPreferences ();
-		
-		void FreeProviders ();
 	}
 }
