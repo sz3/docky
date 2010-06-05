@@ -142,6 +142,7 @@ namespace Docky
 				Provider = PluginManager.Enable (Addin);
 				ConfigurationWindow.Instance.ActiveDock.Preferences.AddProvider (Provider);
 			} else {
+				PluginManager.Disable (Addin);
 				ConfigurationWindow.Instance.ActiveDock.Preferences.RemoveProvider (Provider);
 				Provider = null;
 			}

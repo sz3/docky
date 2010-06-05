@@ -34,6 +34,11 @@ namespace NetworkManagerDocklet
 		
 		public override string Icon { get { return "nm-device-wired"; } }
 		
+		public override void Dispose ()
+		{
+			manager.Dispose ();
+		}
+		
 		#endregion
 
 		NetworkManagerDocklet manager;

@@ -24,6 +24,7 @@ namespace Desktop
 {
 	public class DesktopItemProvider : AbstractDockItemProvider
 	{
+
 		List<AbstractDockItem> items;
 
 		#region IDockItemProvider implementation
@@ -47,5 +48,16 @@ namespace Desktop
 			items.Add (desktop);
 			Items = items;
 		}
+		
+		#region IDisposable implementation
+
+		public override void Dispose ()
+		{
+			foreach (AbstractDockItem item in items)
+				item.Dispose ();
+		}
+		
+		#endregion
+
 	}
 }

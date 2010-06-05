@@ -414,8 +414,6 @@ namespace Docky.Items
 		
 		public override void Dispose ()
 		{
-			base.Dispose ();
-			
 			WindowMatcher.DesktopFileChanged -= HandleWindowMatcherDesktopFileChanged;
 			
 			Wnck.Screen.Default.WindowOpened -= WnckScreenDefaultWindowOpened;

@@ -900,12 +900,6 @@ namespace Docky.Interface
 			UpdateMaxIconSize ();
 			
 			AnimatedDraw ();
-			
-			// if the provider has no more items and its set to auto disable, remove it from the dock
-			AbstractDockItemProvider provider = sender as AbstractDockItemProvider;
-			
-			if (provider.Items.Count () == 0 && provider.AutoDisable)
-				preferences.RemoveProvider (provider);
 		}
 		
 		void RegisterItem (AbstractDockItem item)

@@ -41,7 +41,7 @@ namespace Timer
 				if (adi is TimerDockItem)
 					(adi as TimerDockItem).Finished -= HandleTimerFinished;
 			
-			base.Dispose ();
+			//base.Dispose ();
 		}
 		
 		public override bool ItemCanBeRemoved (AbstractDockItem item)

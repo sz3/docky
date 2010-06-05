@@ -36,6 +36,13 @@ namespace NPR
 		
 		public override string Icon { get { return "nprlogo.gif@" + GetType ().Assembly.FullName; } }
 		
+		public override void Dispose ()
+		{
+			items.ForEach (adi => {
+				adi.Dispose ();
+			});
+		}
+		
 		#endregion
 		
 		List<AbstractDockItem> items = new List<AbstractDockItem> ();

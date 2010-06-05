@@ -34,6 +34,11 @@ namespace CPUMonitor
 		
 		public override string Icon { get { return "system"; } }
 		
+		public override void Dispose ()
+		{
+			monitor.Dispose ();
+		}
+		
 		#endregion
 
 		CPUMonitorDockItem monitor;

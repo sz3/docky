@@ -491,7 +491,8 @@ namespace Docky
 				string providerID = PluginManager.AddinIDFromProvider (provider);
 				if (string.IsNullOrEmpty (providerID))
 					continue;
-				
+			
+
 				tiles.Add (new DockletTile (providerID, provider));
 				if (provider == selectedProvider)
 					currentTile = tiles.Last ();

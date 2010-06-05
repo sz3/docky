@@ -230,6 +230,15 @@ namespace Bookmarks
 			}
 		}
 		
+		public override void Dispose ()
+		{
+			Items = Enumerable.Empty<AbstractDockItem> ();
+			foreach (AbstractDockItem item in items)
+				item.Dispose ();
+			computer.Dispose ();
+			home.Dispose();
+		}
+		
 		#endregion
 	}
 }

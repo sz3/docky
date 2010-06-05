@@ -40,10 +40,6 @@ namespace Docky.Items
 			get { return false; }
 		}
 		
-		public virtual bool AutoDisable {
-			get { return !disposing && true; }
-		}
-		
 		IEnumerable<AbstractDockItem> items;
 		public IEnumerable<AbstractDockItem> Items {
 			get { return items; }
@@ -146,14 +142,6 @@ namespace Docky.Items
 		{
 		}
 		
-		bool disposing = false;
-		
-		public virtual void Dispose ()
-		{
-			disposing = true;
-			
-			foreach (AbstractDockItem adi in Items)
-				adi.Dispose ();
-		}
+		public abstract void Dispose ();
 	}
 }

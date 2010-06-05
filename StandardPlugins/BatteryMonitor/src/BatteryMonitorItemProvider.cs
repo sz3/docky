@@ -35,8 +35,9 @@ namespace BatteryMonitor
 		
 		public override string Icon { get { return "battery"; } }
 		
-		public override bool AutoDisable {
-			get { return false; }
+		public override void Dispose ()
+		{
+			battery.Dispose ();
 		}
 		
 		#endregion
