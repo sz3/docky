@@ -79,7 +79,7 @@ namespace Docky.Items
 			}
 		}
 		
-		public virtual bool AutoDisable { get { return false; } }
+		public override bool AutoDisable { get { return false; } }
 		
 		bool longMatchInProgress = false;
 		
