@@ -26,7 +26,6 @@ using Docky.Services;
 
 namespace Mounter
 {
-	
 	public class MountProvider : AbstractDockItemProvider
 	{
 		
@@ -38,13 +37,11 @@ namespace Mounter
 			}
 		}
 		
-		public override string Icon { get { return "drive-removable-media-usb;;drive-removable-media"; } }
-		
-		public override void Dispose ()
-		{
-			foreach (MountItem m in Mounts)
-				m.Dispose ();
+		public override bool AutoDisable {
+			get { return false; }
 		}
+		
+		public override string Icon { get { return "drive-removable-media-usb;;drive-removable-media"; } }
 		
 		#endregion
 		

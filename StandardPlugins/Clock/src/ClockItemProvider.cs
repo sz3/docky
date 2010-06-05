@@ -34,11 +34,6 @@ namespace Clock
 		
 		public override string Icon { get { return "clock"; } }
 		
-		public override void Dispose ()
-		{
-			clock.Dispose ();
-		}
-		
 		#endregion
 
 		ClockDockItem clock;
