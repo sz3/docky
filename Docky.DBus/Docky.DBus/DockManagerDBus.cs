@@ -50,7 +50,7 @@ namespace Docky.DBus
 				"menu-item-icon-file",
 				"menu-item-container-title",
 				
-				"x-docky-uses-timeout"
+				"x-docky-uses-menu-confirmation"
 			};
 		}
 		
