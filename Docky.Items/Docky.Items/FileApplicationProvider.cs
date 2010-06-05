@@ -79,6 +79,8 @@ namespace Docky.Items
 			}
 		}
 		
+		public virtual bool AutoDisable { get { return false; } }
+		
 		bool longMatchInProgress = false;
 		
 		public FileApplicationProvider ()
