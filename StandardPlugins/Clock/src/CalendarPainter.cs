@@ -65,7 +65,7 @@ namespace Clock
 			DateTime[] months = new DateTime[3];
 			months [0] = months [1] = months [2] = CalendarStartDate;
 			
-			switch (Page)
+			switch (page)
 			{
 				default:
 				case 0:
