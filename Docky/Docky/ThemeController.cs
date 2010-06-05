@@ -105,7 +105,7 @@ namespace Docky
 				BackgroundSvg = ThemedSvg ("background.svg");
 				Background3dSvg = ThemedSvg ("background3d.svg");
 				if (Background3dSvg.IndexOf ("@") != -1)
-					Background3dSvg = ThemedSvg ("background.svg");
+					Background3dSvg = BackgroundSvg;
 				MenuSvg = ThemedSvg ("menu.svg");
 				TooltipSvg = ThemedSvg ("tooltip.svg");
 				
