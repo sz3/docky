@@ -303,10 +303,10 @@ namespace Docky.Interface
 						separatorNeeded = provider.Separated;
 					}
 					
-					for (int i = collection_backend.Count; i < 2; i++) {
+					for (int i = collection_backend.Count; i < 2; i++)
 						collection_backend.Add (new SpacingItem ());
-					}
 				}
+				
 				return collection_frontend;
 			}
 		}
@@ -2545,8 +2545,8 @@ namespace Docky.Interface
 				
 				// FIXME we should probably compute if the theme is transparent, but for now this works
 				if (ConfigurationMode && ThemeController.DockTheme.Equals ("Transparent")) {
-					background_buffer.Context.Rectangle (0, 0, BackgroundWidth, BackgroundHeight);
-					background_buffer.Context.Color = new Cairo.Color (1, 1, 1, 0.10);
+					background_buffer.Context.Rectangle (0, 0, background_buffer.Width, background_buffer.Height);
+					background_buffer.Context.Color = new Cairo.Color (1, 1, 1, Items.Where (adi => !(adi is SpacingItem)).Count () == 0 ? 0.10 : 0.04);
 					background_buffer.Context.Fill ();
 				}
 				
