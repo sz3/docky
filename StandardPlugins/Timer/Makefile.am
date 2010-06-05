@@ -10,6 +10,7 @@ FILES = \
 
 RESOURCES = \
 	Resources/Timer.addin.xml \
+	Resources/icons/timer.svg \
 	Resources/icons/base.svg \
 	Resources/icons/hand.svg \
 	Resources/icons/overlay.svg

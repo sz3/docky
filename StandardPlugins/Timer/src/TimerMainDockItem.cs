@@ -111,7 +111,7 @@ namespace Timer
 		public TimerMainDockItem (TimerItemProvider provider)
 		{
 			this.provider = provider;
-			Icon = "clock";
+			Icon = "timer.svg@" + GetType ().Assembly.FullName;
 			UpdateHoverText ();
 		}
 

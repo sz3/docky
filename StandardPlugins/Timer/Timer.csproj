@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Timer.addin.xml" />
+    <None Include="Resources\icons\timer.svg" />
     <None Include="Resources\icons\base.svg" />
     <None Include="Resources\icons\hand.svg" />
     <None Include="Resources\icons\overlay.svg" />

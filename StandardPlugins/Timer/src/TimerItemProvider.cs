@@ -33,7 +33,7 @@ namespace Timer
 			}
 		}
 		
-		public override string Icon { get { return "clock"; } }
+		public override string Icon { get { return "timer.svg@" + GetType ().Assembly.FullName; } }
 		
 		public override void Dispose ()
 		{

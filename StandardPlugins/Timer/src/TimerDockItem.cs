@@ -101,7 +101,7 @@ namespace Timer
 			
 			// set from the svg files
 			double svgWidth = 48.0;
-			double centerRadius = 15.5;
+			double centerRadius = 16;
 			
 			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("base.svg@" + GetType ().Assembly.FullName, size)) {
 				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, (surface.Width - pbuf.Width) / 2, (surface.Height - pbuf.Height) / 2);
