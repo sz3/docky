@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009-2010 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -34,10 +34,8 @@ using Docky.Services;
 
 namespace Docky
 {
-
 	public static class Docky
 	{
-
 		public static UserArgs CommandLinePreferences { get; private set; }
 		
 		static DockController controller;
@@ -132,7 +130,7 @@ namespace Docky
 			about.Version = AssemblyInfo.DisplayVersion + "\n" + AssemblyInfo.VersionDetails;
 			about.IconName = "docky";
 			about.LogoIconName = "docky";
-			about.Website = "http://www.go-docky.com/";
+			about.Website = "https://launchpad.net/docky";
 			about.WebsiteLabel = "Website";
 			Gtk.AboutDialog.SetUrlHook ((dialog, link) => DockServices.System.Open (link));
 			about.Copyright = "Copyright \xa9 2009-2010 Docky Developers";
