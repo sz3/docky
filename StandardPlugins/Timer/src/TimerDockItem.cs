@@ -87,7 +87,7 @@ namespace Timer
 		void OnFinished (bool notify, bool remove)
 		{
 			if (notify)
-				Log.Notify ("Docky Timer", "clock", string.Format (Catalog.GetString ("A timer set for {0} has expired."), TimerMainDockItem.TimeRemaining (Length)));
+				Log.Notify (Label + "Docky Timer", "clock", string.Format (Catalog.GetString ("A timer set for {0} has expired."), TimerMainDockItem.TimeRemaining (Length)));
 			
 			if (remove && Finished != null)
 				Finished (this, EventArgs.Empty);
