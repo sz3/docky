@@ -15,30 +15,88 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 using GLib;
 
 namespace Docky.Services
 {
+	/// <summary>
+	/// This class provides all paths used in Docky.
+	///
+	/// It follows the XDG Base Directory specification.  For more information see:
+	///   http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html 
+	/// </summary>
 	public class PathsService
 	{
+		#region XDG Base Directory independent paths
+		
+		/// <summary>
+		/// User's home folder - $HOME
+		/// </summary>
+		public File HomeFolder { get; protected set; }
+		
+		/// <summary>
+		/// Docky's installed data directory - defaults to /usr/share/docky for PPA
+		/// </summary>
 		public File SystemDataFolder { get; protected set; }
 		
-		public File DockManagerUserDataFolder { get; protected set; }
+		#endregion
 		
-		public File UserDataFolder { get; protected set; }
 		
+		#region XDG Base Directory paths
+		
+		/// <summary>
+		/// $XDG_DATA_HOME - defaults to $HOME/.local/share
+		/// </summary>
+		public File XdgDataHomeFolder { get; protected set; }
+		
+		/// <summary>
+		/// $XDG_CACHE_HOME - defaults to $HOME/.cache
+		/// </summary>
+		public File XdgCacheHomeFolder { get; protected set; }
+		
+		/// <summary>
+		/// $XDG_DATA_DIRS - defaults to /usr/local/share/:/usr/share/
+		/// </summary>
+		public IEnumerable<File> XdgDataDirFolders { get; protected set; }
+		
+		
+		/// <summary>
+		/// defaults to XdgCacheHomeFolder/docky
+		/// </summary>
 		public File UserCacheFolder { get; protected set; }
 		
+		/// <summary>
+		/// defaults to XdgDataHomeFolder/docky
+		/// </summary>
+		public File UserDataFolder { get; protected set; }
+		
+		/// <summary>
+		/// defaults to XdgDataHomeFolder/dockmanager
+		/// </summary>
+		public File DockManagerUserDataFolder { get; protected set; }
+		
+		
+		/// <summary>
+		/// Path to the autostart file - defaults to 
+		/// </summary>
 		public File AutoStartFile { get; protected set; }
+		
+		#endregion
+		
 		
 		public PathsService ()
 		{
 			// get environment-based settings
-			File env_home         = FileFactory.NewForPath (Environment.GetEnvironmentVariable ("HOME"));
-			File env_data_home    = FileFactory.NewForPath (Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData));
-			File env_data         = FileFactory.NewForPath (Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData));
+			File env_home         = FileFactory.NewForPath (Environment.GetFolderPath (Environment.SpecialFolder.Personal));
 			File env_data_install = FileFactory.NewForPath (AssemblyInfo.DataDirectory);
+			
+			
+			// set the non-XDG Base Directory specified directories to use
+			HomeFolder       = env_home;
+			SystemDataFolder = env_data_install.GetChild ("docky");
 			
 			
 			// get XDG Base Directory settings
@@ -48,37 +106,37 @@ namespace Docky.Services
 			
 			
 			// determine directories based on XDG with fallbacks
-			File cache_folder;
-			if (!string.IsNullOrEmpty (xdg_cache_home))
-				cache_folder = FileFactory.NewForPath (xdg_cache_home);
+			if (string.IsNullOrEmpty (xdg_cache_home))
+				XdgCacheHomeFolder = HomeFolder.GetChild (".cache");
 			else
-				cache_folder = env_home.GetChild (".cache");
+				XdgCacheHomeFolder = FileFactory.NewForPath (xdg_cache_home);
 			
-			File data_folder;
-			if (!string.IsNullOrEmpty (xdg_data_home))
-				data_folder = FileFactory.NewForPath (xdg_data_home);
+			if (string.IsNullOrEmpty (xdg_data_home))
+				XdgDataHomeFolder = HomeFolder.GetChild (".local").GetChild ("share");
 			else
-				data_folder = env_data_home;
+				XdgDataHomeFolder = FileFactory.NewForPath (xdg_data_home);
+			
+			if (string.IsNullOrEmpty (xdg_data_dirs))
+				XdgDataDirFolders = new [] { GLib.FileFactory.NewForPath ("/usr/local/share"), GLib.FileFactory.NewForPath ("/usr/share") };
+			else
+				XdgDataDirFolders = xdg_data_dirs.Split (':').Select (d => GLib.FileFactory.NewForPath (d));
 			
 			
 			// set the XDG Base Directory specified directories to use
-			UserCacheFolder           = cache_folder.GetChild ("docky");
-			DockManagerUserDataFolder = data_folder.GetChild ("dockmanager");
-			UserDataFolder            = data_folder.GetChild ("docky");
-			
-			
-			// set the non-XDG Base Directory specified directories to use
-			SystemDataFolder = env_data_install.GetChild ("docky");
-			AutoStartFile    = env_data.GetChild ("autostart").GetChild ("docky.desktop");
+			UserCacheFolder           = XdgCacheHomeFolder.GetChild ("docky");
+			UserDataFolder            = XdgDataHomeFolder.GetChild ("docky");
+			DockManagerUserDataFolder = XdgDataHomeFolder.GetChild ("dockmanager");
+			AutoStartFile             = XdgDataHomeFolder.GetChild ("autostart").GetChild ("docky.desktop");
 			
 			
 			// ensure all writable directories exist
 			EnsureDirectoryExists (UserCacheFolder);
-			EnsureDirectoryExists (DockManagerUserDataFolder);
 			EnsureDirectoryExists (UserDataFolder);
+			EnsureDirectoryExists (DockManagerUserDataFolder);
+			EnsureDirectoryExists (XdgDataHomeFolder.GetChild ("autostart"));
 		}
 		
-		static void EnsureDirectoryExists (File dir)
+		void EnsureDirectoryExists (File dir)
 		{
 			if (!dir.Exists)
 				try {

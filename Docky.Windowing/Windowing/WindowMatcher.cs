@@ -140,7 +140,7 @@ namespace Docky.Windowing
 				SetupWindow (w);
 
 			// Set up monitors for cache files and desktop directories
-			foreach (GLib.File dir in DesktopFileDirectories.Select (d => GLib.FileFactory.NewForPath (d)))
+			foreach (GLib.File dir in DesktopFileDirectories)
 				MonitorDesktopFileDirs (dir);
 			MonitorDesktopFileSystemCacheFiles ();
 			
@@ -149,12 +149,12 @@ namespace Docky.Windowing
 		}
 
 		#region Handle DesktopItems
-		static IEnumerable<string> DesktopFileSystemCacheFiles
+		static IEnumerable<GLib.File> DesktopFileSystemCacheFiles
 		{
 			get {
 				return DesktopFileDirectories
-					.Select (d => Path.Combine (d, string.Format ("desktop.{0}.cache", Locale)))
-					.Where (f => File.Exists (f));
+					.Select (d => d.GetChild (string.Format ("desktop.{0}.cache", Locale)))
+					.Where (f => f.Exists);
 			}
 		}
 		
@@ -167,49 +167,18 @@ namespace Docky.Windowing
 			}
 		}
 			
-		static IEnumerable<string> DesktopFileDirectories
+		static IEnumerable<GLib.File> DesktopFileDirectories
 		{
 			get {
-				return new [] {
-					// These are XDG variables...
-					"XDG_DATA_HOME",
-					"XDG_DATA_DIRS",
-					// Crossover apps
-					"CX_APPS",
-				}.SelectMany (v => ExpandPathVar (v))
-				 .Where (d => Directory.Exists (d));
+				return DockServices.Paths.XdgDataDirFolders.Select (d => d.GetChild ("applications"))
+					.Union(new [] {
+						DockServices.Paths.XdgDataHomeFolder.GetChild ("applications"),
+						GLib.FileFactory.NewForPath (Environment.GetEnvironmentVariable ("CX_APPS") + "/.cxoffice"),
+					})
+					.Where (d => d.Exists);
 			}
 		}
 		
-		static IEnumerable<string> ExpandPathVar (string xdgVar)
-		{
-			string envPath = Environment.GetEnvironmentVariable (xdgVar);
-			
-			if (string.IsNullOrEmpty (envPath)) {
-				switch (xdgVar) {
-				case "XDG_DATA_HOME":
-					yield return Path.Combine (
-						Environment.GetFolderPath (Environment.SpecialFolder.Personal),
-						new [] {".local", "share", "applications"}.Aggregate ((w, s) => Path.Combine (w, s))
-					);
-					break;
-				case "XDG_DATA_DIRS":
-					yield return new [] {"/usr", "local", "share", "applications"}.Aggregate ((w, s) => Path.Combine (w,s));
-					yield return new [] {"/usr", "share", "applications"}.Aggregate ((w, s) => Path.Combine (w, s));
-					break;
-				case "CX_APPS":
-					yield return Path.Combine (
-						Environment.GetFolderPath (Environment.SpecialFolder.Personal),
-						".cxoffice"
-					);
-					break;
-				}
-			} else {
-				foreach (string dir in envPath.Split (':'))
-					yield return Path.Combine (dir, "applications");
-			}
-		}
-
 		void UpdateDesktopItemsList ()
 		{
 			if (desktop_items == null)
@@ -220,8 +189,8 @@ namespace Docky.Windowing
 
 			// Get desktop items for new "valid" desktop files
 			new_items = DesktopFileDirectories
-				.SelectMany (dir => GLib.FileFactory.NewForPath (dir).SubDirs ())
-				.Union (DesktopFileDirectories.Select (f => GLib.FileFactory.NewForPath (f)))
+				.SelectMany (dir => dir.SubDirs ())
+				.Union (DesktopFileDirectories)
 				.SelectMany (file => file.GetFiles (".desktop"))
 				.Where (file => !known_desktop_files.Exists (known_file => (known_file.Path == file.Path)))
 				.Select (file => new DesktopItem (file))
@@ -244,19 +213,19 @@ namespace Docky.Windowing
 		
 		void ProcessAndMergeAllSystemCacheFiles (List<DesktopItem> items)
 		{
-			foreach (string cache_file in DesktopFileSystemCacheFiles)
+			foreach (GLib.File cache_file in DesktopFileSystemCacheFiles)
 				ProcessAndMergeSystemCacheFile (cache_file, items);
 		}
 
-		void ProcessAndMergeSystemCacheFile (string cache_file, List<DesktopItem> items)
+		void ProcessAndMergeSystemCacheFile (GLib.File cache_file, List<DesktopItem> items)
 		{
-			if (!GLib.FileFactory.NewForPath (cache_file).Exists)
+			if (!cache_file.Exists)
 			    return;
 			
-			Log<WindowMatcher>.Debug ("Processing {0}", cache_file);
+			Log<WindowMatcher>.Debug ("Processing {0}", cache_file.Path);
 			
 			try {
-				using (StreamReader reader = new StreamReader (cache_file)) {
+				using (StreamReader reader = new StreamReader (cache_file.Path)) {
 					DesktopItem desktop_item = null;
 					string line;
 					
@@ -269,9 +238,7 @@ namespace Docky.Windowing
 							if (match.Success) {
 								string section = match.Groups["Section"].Value;
 								if (section != null) {
-									GLib.File file = GLib.FileFactory
-										.NewForPath (Path.Combine (Path.GetDirectoryName (cache_file), 
-										                           string.Format ("{0}.desktop", section)));
+									GLib.File file = cache_file.GetChild (string.Format ("{0}.desktop", section));
 									desktop_item = items.First (item => item.File.Path == file.Path);
 									if (desktop_item == null && file.Exists) {
 										desktop_item = new DesktopItem (file);
@@ -413,14 +380,13 @@ namespace Docky.Windowing
 
 		void MonitorDesktopFileSystemCacheFiles ()
 		{
-			foreach (string filename in DesktopFileSystemCacheFiles) {
-				GLib.File file = GLib.FileFactory.NewForPath (filename);
+			foreach (GLib.File file in DesktopFileSystemCacheFiles) {
 				GLib.FileMonitor mon = file.Monitor (GLib.FileMonitorFlags.None, null);
 				mon.RateLimit = 2500;
 				mon.Changed += delegate {
 					DockServices.System.RunOnThread (() => {
 						lock (update_lock) {
-							ProcessAndMergeSystemCacheFile (file.Path, desktop_items);
+							ProcessAndMergeSystemCacheFile (file, desktop_items);
 							DesktopItemsChanged ();
 						}   
 					});
