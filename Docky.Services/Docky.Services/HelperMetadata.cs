@@ -80,7 +80,7 @@ namespace Docky.Services
 						} else if (key.Equals (AppUriTag)) {
 							AppUri = val;
 						} else if (key.Equals (IconTag)) {
-							if (val.StartsWith ("./")) {
+							if (val.StartsWith ("./") && val.Length > 2) {
 								IconFile = file.Parent.GetChild (val.Substring (2));
 								if (IconFile.Exists)
 									Icon = DockServices.Drawing.LoadIcon (IconFile.Path + ";;extension");
