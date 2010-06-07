@@ -238,7 +238,7 @@ namespace Docky.Windowing
 							if (match.Success) {
 								string section = match.Groups["Section"].Value;
 								if (section != null) {
-									GLib.File file = cache_file.GetChild (string.Format ("{0}.desktop", section));
+									GLib.File file = cache_file.Parent.GetChild (string.Format ("{0}.desktop", section));
 									desktop_item = items.First (item => item.File.Path == file.Path);
 									if (desktop_item == null && file.Exists) {
 										desktop_item = new DesktopItem (file);
