@@ -48,9 +48,6 @@ AC_HEADER_STDC
 
 SHAMROCK_FIND_C_SHARP_3_0_COMPILER
 
-dnl check for python
-AM_PATH_PYTHON
-
 dnl Find gconftool-2
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 AM_GCONF_SOURCE_2
