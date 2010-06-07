@@ -1198,8 +1198,8 @@ namespace Docky.Interface
 					double x, y;
 					Gdk.Rectangle region = DrawRegionForItem (HoveredItem);
 						
-					x = ((Cursor.X + window_position.X) - region.X) / (double) region.Height;
-					y = ((Cursor.Y + window_position.Y) - region.Y) / (double) region.Width;
+					x = ((Cursor.X + window_position.X) - region.X) / (double) region.Width;
+					y = ((Cursor.Y - window_position.Y) - region.Y) / (double) region.Height;
 					
 					HoveredItem.Clicked (evnt.Button, evnt.State, x, y);
 					AnimatedDraw ();
