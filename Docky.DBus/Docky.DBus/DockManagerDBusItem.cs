@@ -81,8 +81,8 @@ namespace Docky.DBus
 		
 		public void TriggerConfirmation ()
 		{
-			if (ItemConfirmationNeeded != null)
-				ItemConfirmationNeeded ();
+			if (MenuItemConfirmationNeeded != null)
+				MenuItemConfirmationNeeded ();
 			
 			GLib.Timeout.Add (30 * 1000, delegate {
 				foreach (uint i in update_time
@@ -111,9 +111,9 @@ namespace Docky.DBus
 			return number;
 		}
 		
-		public event Action ItemConfirmationNeeded;
+		public event Action MenuItemConfirmationNeeded;
 		
-		public void ConfirmItem (uint item)
+		public void ConfirmMenuItem (uint item)
 		{
 			update_time[item] = DateTime.UtcNow;
 		}

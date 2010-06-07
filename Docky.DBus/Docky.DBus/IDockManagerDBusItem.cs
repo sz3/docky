@@ -29,8 +29,6 @@ namespace Docky.DBus
 	public interface IDockManagerDBusItem : Properties
 	{
 		event MenuItemActivatedHandler MenuItemActivated;
-		
-		event Action ItemConfirmationNeeded;
 
 		uint AddMenuItem (IDictionary<string, object> dict);
 		
@@ -38,6 +36,10 @@ namespace Docky.DBus
 		
 		void UpdateDockItem (IDictionary<string, object> dict);
 		
-		void ConfirmItem (uint item);
+		// Docky-specific interface extensions
+		
+		event Action MenuItemConfirmationNeeded;
+		
+		void ConfirmMenuItem (uint item);
 	}
 }

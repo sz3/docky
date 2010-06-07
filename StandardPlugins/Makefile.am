@@ -10,6 +10,7 @@ SUBDIRS = \
 	NPR \
 	RecentDocuments \
 	SessionManager \
+	Timer \
 	Trash \
 	Weather
 
@@ -25,5 +26,6 @@ DIST_SUBDIRS = \
 	NPR \
 	RecentDocuments \
 	SessionManager \
+	Timer \
 	Trash \
 	Weather

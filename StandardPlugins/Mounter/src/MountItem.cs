@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Chris Szikszoy
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -29,10 +30,8 @@ using Docky.Services;
 
 namespace Mounter
 {
-	
 	public class MountItem : FileDockItem
 	{
-		
 		#region IconDockItem implementation
 		
 		public override string UniqueID ()
@@ -42,6 +41,8 @@ namespace Mounter
 		
 		#endregion
 		
+		public Mount Mnt { get; private set; }
+		
 		public MountItem (Mount mount) : base (mount.Root.StringUri ())
 		{
 			Mnt = mount;
@@ -50,10 +51,13 @@ namespace Mounter
 			
 			HoverText = Mnt.Name;
 			
-			Mnt.Changed += (o, a) => SetIconFromGIcon (Mnt.Icon);
+			Mnt.Changed += HandleMountChanged;
 		}
 		
-		public Mount Mnt { get; private set; }
+		void HandleMountChanged (object o, EventArgs args)
+		{
+			SetIconFromGIcon (Mnt.Icon);
+		}
 		
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
@@ -94,13 +98,20 @@ namespace Mounter
 		protected override MenuList OnGetMenuItems ()
 		{
 			MenuList list = new MenuList ();
+			
 			list[MenuListContainer.Actions].Add (new MenuItem (Catalog.GetString ("_Open"), Icon, (o, a) => Open ()));
-			if (Mnt.CanEject () || Mnt.CanUnmount) {
-				string removeLabel = (Mnt.CanEject ()) ? Catalog.GetString ("_Eject") : Catalog.GetString ("_Unmount");
-				list[MenuListContainer.Actions].Add (new MenuItem (removeLabel, "media-eject", (o, a) => UnMount ()));
-			}
+			
+			if (Mnt.CanEject () || Mnt.CanUnmount)
+				list[MenuListContainer.Actions].Add (new MenuItem (Mnt.CanEject () ? Catalog.GetString ("_Eject") : Catalog.GetString ("_Unmount"), "media-eject", (o, a) => UnMount ()));
 			
 			return list;
+		}
+		
+		public override void Dispose ()
+		{
+			Mnt.Changed -= HandleMountChanged;
+			
+			base.Dispose ();
 		}
 	}
 }

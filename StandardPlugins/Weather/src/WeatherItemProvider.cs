@@ -40,11 +40,6 @@ namespace WeatherDocklet
 		
 		public override string Icon { get { return "weather-clear"; } }
 		
-		public override void Dispose ()
-		{
-			item.Dispose ();
-		}
-		
 		#endregion
 		
 		AbstractDockItem item;

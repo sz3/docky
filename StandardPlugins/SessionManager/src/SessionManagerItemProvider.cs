@@ -51,18 +51,5 @@ namespace SessionManager
 			session_manager = new SessionManagerItem ();
 			Items = session_manager.AsSingle<AbstractDockItem> ();
 		}
-
-		#region IDisposable implementation
-
-		public override void Dispose ()
-		{
-			session_manager.Dispose ();
-		}
-		
-		#endregion
-		
-		
 	}
-	
-	
 }

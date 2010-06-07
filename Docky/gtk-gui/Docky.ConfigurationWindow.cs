@@ -138,7 +138,7 @@ namespace Docky {
             this.start_with_computer_checkbutton = new Gtk.CheckButton();
             this.start_with_computer_checkbutton.CanFocus = true;
             this.start_with_computer_checkbutton.Name = "start_with_computer_checkbutton";
-            this.start_with_computer_checkbutton.Label = Mono.Unix.Catalog.GetString("_Start When Computer Starts");
+            this.start_with_computer_checkbutton.Label = Mono.Unix.Catalog.GetString("_Start When User Logs In");
             this.start_with_computer_checkbutton.DrawIndicator = true;
             this.start_with_computer_checkbutton.UseUnderline = true;
             this.vbox3.Add(this.start_with_computer_checkbutton);

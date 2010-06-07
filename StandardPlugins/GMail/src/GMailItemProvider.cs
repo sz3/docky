@@ -25,7 +25,6 @@ namespace GMail
 {
 	public class GMailItemProvider : AbstractDockItemProvider
 	{
-		
 		#region IDockItemProvider implementation
 		
 		public override string Name {
@@ -35,11 +34,6 @@ namespace GMail
 		}
 		
 		public override string Icon { get { return "gmail"; } }
-		
-		public override void Dispose ()
-		{
-			items.ForEach (adi => (RemoveItem (adi as GMailDockItem)));
-		}
 		
 		#endregion
 		

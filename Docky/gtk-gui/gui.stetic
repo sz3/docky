@@ -360,7 +360,7 @@ Window Dodge</property>
                                       <widget class="Gtk.CheckButton" id="start_with_computer_checkbutton">
                                         <property name="MemberName" />
                                         <property name="CanFocus">True</property>
-                                        <property name="Label" translatable="yes">_Start When Computer Starts</property>
+                                        <property name="Label" translatable="yes">_Start When User Logs In</property>
                                         <property name="DrawIndicator">True</property>
                                         <property name="HasLabel">True</property>
                                         <property name="UseUnderline">True</property>

@@ -79,6 +79,8 @@ namespace Docky.Items
 			}
 		}
 		
+		public override bool AutoDisable { get { return false; } }
+		
 		bool longMatchInProgress = false;
 		
 		public FileApplicationProvider ()
@@ -299,11 +301,10 @@ namespace Docky.Items
 			AbstractDockItem item;
 			
 			try {
-				if (uri.EndsWith (".desktop")) {
+				if (uri.EndsWith (".desktop"))
 					item = ApplicationDockItem.NewFromUri (uri);
-				} else {
+				else
 					item = FileDockItem.NewFromUri (uri);
-				}
 			} catch {
 				item = null;
 			}
@@ -378,12 +379,11 @@ namespace Docky.Items
 				return false;
 			
 			string key = null;
-			foreach (KeyValuePair<string, AbstractDockItem> kvp in items) {
+			foreach (KeyValuePair<string, AbstractDockItem> kvp in items)
 				if (kvp.Value == item) {
 					key = kvp.Key;
 					break;
 				}
-			}
 			
 			// this should never happen...
 			if (key == null)
@@ -404,16 +404,17 @@ namespace Docky.Items
 		{
 			MenuList list = base.GetMenuItems (item);
 			
-			if (item is ApplicationDockItem && !items.ContainsValue (item)) {
+			if (item is ApplicationDockItem && !items.ContainsValue (item))
 				list[MenuListContainer.Actions].Insert (0, 
 					new MenuItem (Catalog.GetString ("_Pin to Dock"), "[monochrome]pin.svg@" + GetType ().Assembly.FullName, (o, a) => PinToDock (item as ApplicationDockItem)));
-			}
 			
 			return list;
 		}
 		
 		public override void Dispose ()
 		{
+			base.Dispose ();
+			
 			WindowMatcher.DesktopFileChanged -= HandleWindowMatcherDesktopFileChanged;
 			
 			Wnck.Screen.Default.WindowOpened -= WnckScreenDefaultWindowOpened;
@@ -426,15 +427,6 @@ namespace Docky.Items
 				if (Wnck.Screen.Default.ActiveWindow != null)
 					Wnck.Screen.Default.ActiveWindow.GeometryChanged -= HandleActiveWindowGeometryChangedChanged;
 			}
-			
-			IEnumerable<AbstractDockItem> old_items = Items;
-			
-			items = new Dictionary<string, AbstractDockItem> ();
-			transient_items = new List<WnckDockItem> ();
-			
-			Items = Enumerable.Empty<AbstractDockItem> ();
-			foreach (AbstractDockItem adi in old_items)
-				adi.Dispose ();
 			
 			Providers.Remove (this);
 		}

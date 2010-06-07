@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Chris Szikszoy
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -26,35 +27,30 @@ using Docky.Services;
 
 namespace Mounter
 {
-	
 	public class MountProvider : AbstractDockItemProvider
 	{
-		
 		#region AbstractDockItemProvider implementation
 		
 		public override string Name {
-			get {
-				return "Mount";
-			}
+			get { return "Mount"; }
 		}
 		
-		public override string Icon { get { return "drive-removable-media-usb;;drive-removable-media"; } }
+		public override bool AutoDisable {
+			get { return false; }
+		}
 		
-		public override void Dispose ()
-		{
-			foreach (MountItem m in Mounts)
-				m.Dispose ();
+		public override string Icon {
+			get { return "drive-removable-media-usb;;drive-removable-media"; }
 		}
 		
 		#endregion
 		
-		List<MountItem> Mounts;
+		List<MountItem> Mounts = new List<MountItem> ();
+		
 		public VolumeMonitor Monitor { get; private set; }
 		
 		public MountProvider ()
 		{
-			Mounts = new List<MountItem> ();
-			
 			Monitor = VolumeMonitor.Default;
 
 			foreach (Mount m in Monitor.Mounts) {
@@ -67,11 +63,6 @@ namespace Mounter
 			Monitor.MountAdded += HandleMountAdded;
 			Monitor.MountRemoved += HandleMountRemoved;
 		
-			SetItems ();
-		}
-		
-		void SetItems ()
-		{
 			Items = Mounts.Cast<AbstractDockItem> ();
 		}
 		
@@ -83,10 +74,9 @@ namespace Mounter
 			if (IsTrash (m))
 				return;
 			
-			MountItem newMnt = new MountItem (m);
-			Mounts.Add (newMnt);
-			SetItems ();
+			Mounts.Add (new MountItem (m));
 			Log<MountProvider>.Info ("{0} mounted.", m.Name);
+			Items = Mounts.Cast<AbstractDockItem> ();
 		}		
 		
 		void HandleMountRemoved (object o, MountRemovedArgs args)
@@ -96,9 +86,11 @@ namespace Mounter
 			
 			if (!IsTrash (m) && Mounts.Any (d => d.Mnt.Handle == m.Handle)) {
 				MountItem mntToRemove = Mounts.First (d => d.Mnt.Handle == m.Handle);
+				
 				Mounts.Remove (mntToRemove);
-				SetItems ();
+				Items = Mounts.Cast<AbstractDockItem> ();
 				mntToRemove.Dispose ();
+				
 				Log<MountProvider>.Info ("{0} unmounted.", m.Name);
 			}
 		}
@@ -109,18 +101,18 @@ namespace Mounter
 			return m == null || (m.Volume == null && m.Root != null && m.Root.Path != null && m.Root.Path.Contains ("cdda"));
 		}
 		
-		public override bool ItemCanBeRemoved (AbstractDockItem item)
-		{
-			return (item is MountItem);
-		}
-		
 		public override bool RemoveItem (AbstractDockItem item)
 		{
-			Mounts.Remove (item as MountItem);
-			SetItems ();
 			(item as MountItem).UnMount ();
+			return base.RemoveItem (item);
+		}
+		
+		public override void Dispose ()
+		{
+			base.Dispose ();
 			
-			return true;
+			Monitor.MountAdded -= HandleMountAdded;
+			Monitor.MountRemoved -= HandleMountRemoved;
 		}
 	}
 }

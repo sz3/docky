@@ -27,21 +27,18 @@ using Docky.Services;
 
 namespace Docky.Painters
 {
-	public class PagingDockPainter : AbstractDockPainter
+	public abstract class PagingDockPainter : AbstractDockPainter
 	{
 		protected const int BUTTON_SIZE = 24;
 		protected const int ICON_SIZE = 16;
 		
-		protected string prevButtonIcon = "painterleft.svg@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName;
-		protected string nextButtonIcon = "painterright.svg@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName;
+		Gdk.Rectangle prevButtonRect;
+		Gdk.Rectangle nextButtonRect;
 		
-		private Gdk.Rectangle prevButtonRect;
-		private Gdk.Rectangle nextButtonRect;
+		bool prevHovered = false;
+		bool nextHovered = false;
 		
-		private bool prevHovered;
-		private bool nextHovered;
-		
-		private int page;
+		int page;
 		
 		/// <value>
 		/// Indicates the current page the painter should show.
@@ -73,29 +70,26 @@ namespace Docky.Painters
 			}
 		}
 		
-		uint slideTimer;
-		int slideCounter;
+		uint slideTimer = 0;
+		int slideCounter = 0;
 		int slideSteps = 40;
 		
-		private int LastPage { get; set; }
+		int LastPage { get; set; }
 		
 		/// <value>
 		/// The number of pages for this painter.
 		/// </value>
 		protected int NumPages { get; private set; }
 		
-		private DockySurface[] buffers;
+		DockySurface[] buffers;
 		
-		private DockySurface buttonBuffer;
+		DockySurface buttonBuffer;
 		
 		public PagingDockPainter (int pages) : base ()
 		{
 			NumPages = pages;
 			buffers = new DockySurface [NumPages];
-			slideTimer = 0;
-			slideCounter = 0;
 			Page = 0;
-			prevHovered = nextHovered = false;
 		}
 		
 		#region IDockPainter implementation 
@@ -135,21 +129,23 @@ namespace Docky.Painters
 				}
 			}
 			
+			// overlay the prev/next arrow buttons
 			if (buttonBuffer != null && (buttonBuffer.Width != surface.Width || buttonBuffer.Height != surface.Height))
 				ResetButtons ();
+			
 			if (buttonBuffer == null) {
 				buttonBuffer = new DockySurface (surface.Width, surface.Height, surface);
 				DrawButtonsBuffer ();
 			}
+			
 			buttonBuffer.Internal.Show (surface.Context, 0, 0);
 		}
 		
 		void ShowBuffer (DockySurface surface, int page, double x)
 		{
 			// ensure the buffer size matches
-			if (buffers [page] != null)
-				if (surface.Width != buffers [page].Width || surface.Height != buffers [page].Height)
-					ResetBuffers ();
+			if (buffers [page] != null && (surface.Width != buffers [page].Width || surface.Height != buffers [page].Height))
+				ResetBuffers ();
 			
 			// the buffer is empty
 			if (buffers [page] == null) {
@@ -164,41 +160,33 @@ namespace Docky.Painters
 		
 		void DrawButtonsBuffer ()
 		{
-			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (prevButtonIcon, ICON_SIZE))
+			DrawButton ("painterleft.svg@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName,
+				prevButtonRect, prevHovered);
+			DrawButton ("painterright.svg@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName,
+				nextButtonRect, nextHovered);
+		}
+		
+		void DrawButton (string buttonIcon, Gdk.Rectangle buttonRect, bool buttonHovered)
+		{
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (buttonIcon, ICON_SIZE))
 			{
 				Gdk.CairoHelper.SetSourcePixbuf (buttonBuffer.Context, pbuf,
-						prevButtonRect.X + (prevButtonRect.Width - ICON_SIZE) / 2,
-						prevButtonRect.Y + (prevButtonRect.Height - ICON_SIZE) / 2);
+						buttonRect.X + (buttonRect.Width - ICON_SIZE) / 2,
+						buttonRect.Y + (buttonRect.Height - ICON_SIZE) / 2);
 				buttonBuffer.Context.Paint ();
-				if (prevHovered) {
+				
+				if (buttonHovered) {
 					buttonBuffer.Context.Operator = Operator.Add;
 					Gdk.CairoHelper.SetSourcePixbuf (buttonBuffer.Context, pbuf,
-							prevButtonRect.X + (prevButtonRect.Width - ICON_SIZE) / 2,
-							prevButtonRect.Y + (prevButtonRect.Height - ICON_SIZE) / 2);
-					buttonBuffer.Context.PaintWithAlpha (0.4);
-					buttonBuffer.Context.Operator = Operator.Over;
-				}
-			}
-			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (nextButtonIcon, ICON_SIZE))
-			{
-				Gdk.CairoHelper.SetSourcePixbuf (buttonBuffer.Context, pbuf,
-						nextButtonRect.X + (nextButtonRect.Width - ICON_SIZE) / 2,
-						nextButtonRect.Y + (nextButtonRect.Height - ICON_SIZE) / 2);
-				buttonBuffer.Context.Paint ();
-				if (nextHovered) {
-					buttonBuffer.Context.Operator = Operator.Add;
-					Gdk.CairoHelper.SetSourcePixbuf (buttonBuffer.Context, pbuf,
-							nextButtonRect.X + (nextButtonRect.Width - ICON_SIZE) / 2,
-							nextButtonRect.Y + (nextButtonRect.Height - ICON_SIZE) / 2);
+							buttonRect.X + (buttonRect.Width - ICON_SIZE) / 2,
+							buttonRect.Y + (buttonRect.Height - ICON_SIZE) / 2);
 					buttonBuffer.Context.PaintWithAlpha (0.4);
 					buttonBuffer.Context.Operator = Operator.Over;
 				}
 			}
 		}
 		
-		protected virtual void DrawPageOnSurface (int page, DockySurface surface)
-		{
-		}
+		protected abstract void DrawPageOnSurface (int page, DockySurface surface);
 		
 		protected override void OnAllocationSet (Gdk.Rectangle allocation)
 		{
@@ -249,7 +237,7 @@ namespace Docky.Painters
 		{
 			if (direction == Gdk.ScrollDirection.Down || direction == Gdk.ScrollDirection.Right)
 				NextPage ();
-			else if (direction == Gdk.ScrollDirection.Up || direction == Gdk.ScrollDirection.Left)
+			else
 				PreviousPage ();
 		}
 		
@@ -272,7 +260,7 @@ namespace Docky.Painters
 			}
 		}
 		
-		private void ResetButtons ()
+		void ResetButtons ()
 		{
 			if (buttonBuffer != null) {
 				buttonBuffer.Dispose ();
@@ -283,6 +271,7 @@ namespace Docky.Painters
 		public override void Dispose ()
 		{
 			ResetBuffers ();
+			ResetButtons ();
 			base.Dispose ();
 		}
 		

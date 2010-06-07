@@ -43,11 +43,6 @@ namespace RecentDocuments
 			}
 		}
 		
-		public override void Dispose ()
-		{
-			docs.Dispose ();
-		}
-		
 		#endregion
 		
 		RecentDocumentsItem docs;
