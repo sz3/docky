@@ -620,8 +620,10 @@ namespace Docky.Windowing
 				throw new ArgumentNullException ("window");
 			
 			List<DesktopItem> item;
-			if (window_to_desktop_items.TryGetValue (window, out item))
+			if (window_to_desktop_items.TryGetValue (window, out item)) {
+				Console.WriteLine ("{0} matches for {1}", item.Count (), window.Name);
 				return item.FirstOrDefault ();
+			}
 			
 			return null;
 		}
