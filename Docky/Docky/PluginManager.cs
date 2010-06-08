@@ -47,10 +47,6 @@ namespace Docky
 	{
 		public static readonly string DefaultPluginIcon = "package";
 		
-		const string PluginsDirectory = "plugins";
-		const string ApplicationDirectory = "docky";
-		const string DefaultAddinsDirectory = "addins";
-		
 		const string IPExtensionPath = "/Docky/ItemProvider";
 		const string ConfigExtensionPath = "/Docky/Configuration";
 		
@@ -59,15 +55,12 @@ namespace Docky
 		//// <value>
 		/// Directory where Docky saves its Mono.Addins repository cache.
 		/// </value>
-		public static string UserPluginsDirectory {
-			get {
-				string userData = Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData);
-				return Path.Combine (Path.Combine (userData, ApplicationDirectory), PluginsDirectory);
-			}
+		public static GLib.File UserPluginsDirectory {
+			get { return DockServices.Paths.UserDataFolder.GetChild ("plugins"); }
 		}
 		
-		public static string UserAddinInstallationDirectory {
-			get { return Path.Combine (UserPluginsDirectory, DefaultAddinsDirectory); }
+		public static GLib.File UserAddinInstallationDirectory {
+			get { return UserPluginsDirectory.GetChild ("addins"); }
 		}
 			
 		/// <summary>
@@ -78,13 +71,13 @@ namespace Docky
 		{
 			// Initialize Mono.Addins.
 			try {
-				AddinManager.Initialize (UserPluginsDirectory);
+				AddinManager.Initialize (UserPluginsDirectory.Path);
 			} catch (InvalidOperationException e) {
 				Log<PluginManager>.Error ("AddinManager.Initialize: {0}", e.Message);
 				Log<PluginManager>.Warn ("Rebuild Addin.Registry and reinitialize AddinManager");
 				AddinManager.Registry.Rebuild (null);
 				AddinManager.Shutdown ();
-				AddinManager.Initialize (UserPluginsDirectory);
+				AddinManager.Initialize (UserPluginsDirectory.Path);
 			}
 
 			AddinManager.Registry.Update (null);
@@ -160,8 +153,7 @@ namespace Docky
 		{	
 			IEnumerable<string> manual;
 			
-			manual = Directory.GetFiles (UserAddinInstallationDirectory, "*.dll")
-				.Select (s => Path.GetFileName (s));
+			manual = UserAddinInstallationDirectory.GetFiles ("*.dll").Select (f => f.Basename);
 					
 			manual.ToList ().ForEach (dll => Log<PluginManager>.Info ("Installing {0}", dll));
 			
