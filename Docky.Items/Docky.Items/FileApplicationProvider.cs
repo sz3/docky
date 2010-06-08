@@ -218,7 +218,7 @@ namespace Docky.Items
 				if (desktop_item != null) {
 					// This fixes WindowMatching for OpenOffice which is a bit slow setting up its window title
 					// Check if an existing ApplicationDockItem already uses this DesktopItem
-					ApplicationDockItem appdi = transient_items
+					ApplicationDockItem appdi = InternalItems
 						.Where (adi => (adi is ApplicationDockItem && (adi as ApplicationDockItem).OwnedItem == desktop_item))
 						.Cast<ApplicationDockItem> ()
 						.FirstOrDefault ();

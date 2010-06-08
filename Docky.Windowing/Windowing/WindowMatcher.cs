@@ -585,10 +585,12 @@ namespace Docky.Windowing
 			if (window == null)
 				throw new ArgumentNullException ("window");
 			
-			List<DesktopItem> item;
-			if (window_to_desktop_items.TryGetValue (window, out item)) {
-				Console.WriteLine ("{0} matches for {1}", item.Count (), window.Name);
-				return item.FirstOrDefault ();
+			List<DesktopItem> matches;
+			if (window_to_desktop_items.TryGetValue (window, out matches)) {
+				DesktopItem useritem = matches.Find (item => item.File.Path.StartsWith (DockServices.Paths.HomeFolder.Path));
+				if (useritem != null)
+					return useritem;
+				return matches.FirstOrDefault ();
 			}
 			
 			return null;
