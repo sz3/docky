@@ -30,21 +30,17 @@ using Mono.Unix;
 using ICSharpCode.SharpZipLib;
 using ICSharpCode.SharpZipLib.Tar;
 
-using Docky.Items;
-using Docky.Interface;
-using Docky.Services;
-
-namespace Docky
+namespace Docky.Services
 {
-	internal class ThemeController
+	public class ThemeService
 	{
-		static readonly string DefaultTheme = "Classic";
+		readonly string DefaultTheme = "Classic";
 		
-		static IPreferences prefs;
+		IPreferences prefs;
 		
-		public static event EventHandler ThemeChanged;
+		public event EventHandler ThemeChanged;
 		
-		static IEnumerable<GLib.File> ThemeContainerFolders {
+		IEnumerable<GLib.File> ThemeContainerFolders {
 			get {
 				return new [] {
 					DockServices.Paths.SystemDataFolder.GetChild ("themes"),
@@ -53,7 +49,7 @@ namespace Docky
 			}
 		}
 		
-		public static IEnumerable<string> DockThemes {
+		public IEnumerable<string> DockThemes {
 			get {
 				yield return DefaultTheme;
 				
@@ -63,7 +59,7 @@ namespace Docky
 			}
 		}
 		
-		public static int UrgentHueShift {
+		public int UrgentHueShift {
 			get {
 				return prefs.Get<int> ("UrgentHue", 150);
 			}
@@ -76,9 +72,9 @@ namespace Docky
 			}
 		}
 		
-		static TimeSpan glow;
-		static int? glowSeconds;
-		public static TimeSpan GlowTime {
+		TimeSpan glow;
+		int? glowSeconds;
+		public TimeSpan GlowTime {
 			get {
 				if (!glowSeconds.HasValue) {
 					glowSeconds = prefs.Get<int> ("GlowTime", 10);
@@ -91,8 +87,8 @@ namespace Docky
 			}
 		}
 		
-		static string theme;
-		public static string DockTheme {
+		string theme;
+		public string DockTheme {
 			get { return theme; }
 			set {
 				if (theme == value)
@@ -101,7 +97,7 @@ namespace Docky
 				theme = value;
 				prefs.Set ("Theme", theme);
 				
-				Log<ThemeController>.Info ("Setting theme: " + value);
+				Log<ThemeService>.Info ("Setting theme: " + value);
 				BackgroundSvg = ThemedSvg ("background.svg");
 				Background3dSvg = ThemedSvg ("background3d.svg");
 				if (Background3dSvg.IndexOf ("@") != -1)
@@ -114,22 +110,22 @@ namespace Docky
 			}
 		}
 		
-		public static string BackgroundSvg { get; protected set; }
+		public string BackgroundSvg { get; protected set; }
 		
-		public static string Background3dSvg { get; protected set; }
+		public string Background3dSvg { get; protected set; }
 		
-		public static string MenuSvg { get; protected set; }
+		public string MenuSvg { get; protected set; }
 		
-		public static string TooltipSvg { get; protected set; }
+		public string TooltipSvg { get; protected set; }
 		
-		public static void Initialize ()
+		public void Initialize ()
 		{
-			prefs = DockServices.Preferences.Get<ThemeController> ();
+			prefs = DockServices.Preferences.Get<ThemeService> ();
 			
 			DockTheme = prefs.Get ("Theme", DefaultTheme);
 		}
 
-		static string ThemedSvg (string svgName)
+		string ThemedSvg (string svgName)
 		{
 			if (DockTheme != DefaultTheme) {
 				GLib.File themeFolder = ThemeContainerFolders
@@ -143,7 +139,7 @@ namespace Docky
 			return svgName + "@" + System.Reflection.Assembly.GetExecutingAssembly ().FullName;
 		}
 		
-		public static string InstallTheme (GLib.File file)
+		public string InstallTheme (GLib.File file)
 		{
 			if (!file.Exists)
 				return null;
@@ -155,7 +151,7 @@ namespace Docky
 			if (!themeDir.Exists)
 				themeDir.MakeDirectory (null);
 			
-			Log<ThemeController>.Info ("Trying to install theme: {0}", file.Path);
+			Log<ThemeService>.Info ("Trying to install theme: {0}", file.Path);
 			
 			try {
 				List<string> oldThemes = DockThemes.ToList ();
@@ -167,8 +163,8 @@ namespace Docky
 					return newThemes [0];
 				return null;
 			} catch (Exception e) {
-				Log<ThemeController>.Error ("Error trying to unpack '{0}': {1}", file.Path, e.Message);
-				Log<ThemeController>.Debug (e.StackTrace);
+				Log<ThemeService>.Error ("Error trying to unpack '{0}': {1}", file.Path, e.Message);
+				Log<ThemeService>.Debug (e.StackTrace);
 				return null;
 			}
 		}

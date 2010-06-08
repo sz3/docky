@@ -717,7 +717,7 @@ namespace Docky.Interface
 			                  Gdk.EventMask.ScrollMask));
 			
 			Realized                      += HandleRealized;
-			ThemeController.ThemeChanged += DockyControllerThemeChanged;
+			DockServices.Theme.ThemeChanged += DockyControllerThemeChanged;
 			
 			// fix for nvidia bug
 			if (Docky.CommandLinePreferences.BufferTime > 0)
@@ -760,7 +760,7 @@ namespace Docky.Interface
 				if ((now - adi.LastClick) < BounceTime || (now - adi.StateSetTime (ItemState.Urgent)) < BounceTime)
 					return true;
 				//Glowing Items
-				if ((now - adi.StateSetTime (ItemState.Urgent)) < ThemeController.GlowTime)
+				if ((now - adi.StateSetTime (ItemState.Urgent)) < DockServices.Theme.GlowTime)
 					return true;
 			}
 			return false;
@@ -2079,7 +2079,7 @@ namespace Docky.Interface
 				foreach (AbstractDockItem adi in Items) {
 					double diff = (render_time - adi.StateSetTime (ItemState.Urgent)).TotalMilliseconds;
 					if (adi.Indicator != ActivityIndicator.None && (adi.State & ItemState.Urgent) == ItemState.Urgent &&
-					    (ThemeController.GlowTime.Days > 0 || diff < ThemeController.GlowTime.TotalMilliseconds)) {
+					    (DockServices.Theme.GlowTime.Days > 0 || diff < DockServices.Theme.GlowTime.TotalMilliseconds)) {
 						
 						if (urgent_glow_buffer == null)
 							urgent_glow_buffer = CreateUrgentGlowBuffer ();
@@ -2468,7 +2468,7 @@ namespace Docky.Interface
 											(double) gdkColor.Green / ushort.MaxValue,
 											(double) gdkColor.Blue / ushort.MaxValue,
 											1.0);
-			return CreateIndicatorBuffer (UrgentIndicatorSize, color.AddHue (ThemeController.UrgentHueShift).SetSaturation (1));
+			return CreateIndicatorBuffer (UrgentIndicatorSize, color.AddHue (DockServices.Theme.UrgentHueShift).SetSaturation (1));
 		}
 		
 		DockySurface CreateIndicatorBuffer (int size, Cairo.Color color)
@@ -2507,7 +2507,7 @@ namespace Docky.Interface
 											(double) gdkColor.Green / ushort.MaxValue,
 											(double) gdkColor.Blue / ushort.MaxValue,
 											1.0);
-			color = color.AddHue (ThemeController.UrgentHueShift).SetSaturation (1);
+			color = color.AddHue (DockServices.Theme.UrgentHueShift).SetSaturation (1);
 			
 			int size = (int) 2.5 * IconSize;
 			
@@ -2544,13 +2544,13 @@ namespace Docky.Interface
 					background_buffer = new DockySurface (BackgroundWidth, BackgroundHeight, surface);
 				
 				// FIXME we should probably compute if the theme is transparent, but for now this works
-				if (ConfigurationMode && ThemeController.DockTheme.Equals ("Transparent")) {
+				if (ConfigurationMode && DockServices.Theme.DockTheme.Equals ("Transparent")) {
 					background_buffer.Context.Rectangle (0, 0, background_buffer.Width, background_buffer.Height);
 					background_buffer.Context.Color = new Cairo.Color (1, 1, 1, Items.Where (adi => !(adi is SpacingItem)).Count () == 0 ? 0.10 : 0.04);
 					background_buffer.Context.Fill ();
 				}
 				
-				Gdk.Pixbuf background = DockServices.Drawing.LoadIcon (ThreeDimensional ? ThemeController.Background3dSvg : ThemeController.BackgroundSvg);
+				Gdk.Pixbuf background = DockServices.Drawing.LoadIcon (ThreeDimensional ? DockServices.Theme.Background3dSvg : DockServices.Theme.BackgroundSvg);
 				Gdk.Pixbuf tmp;
 				
 				switch (Position) {
@@ -2737,7 +2737,7 @@ namespace Docky.Interface
 			AutohideManager.HiddenChanged       -= HandleHiddenChanged;
 			AutohideManager.DockHoveredChanged  -= HandleDockHoveredChanged;
 			Screen.SizeChanged                  -= ScreenSizeChanged;
-			ThemeController.ThemeChanged        -= DockyControllerThemeChanged;
+			DockServices.Theme.ThemeChanged        -= DockyControllerThemeChanged;
 			
 			// clear out our separators
 			foreach (AbstractDockItem adi in Items.Where (adi => adi is INonPersistedItem))

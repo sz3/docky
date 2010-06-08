@@ -50,7 +50,7 @@ namespace Docky.Interface
 		
 		static void SetLight ()
 		{
-			IsLight = DockServices.Drawing.IsIconLight (ThemeController.TooltipSvg);
+			IsLight = DockServices.Drawing.IsIconLight (DockServices.Theme.TooltipSvg);
 		}
 		
 		public int Monitor { get; set; }
@@ -75,7 +75,7 @@ namespace Docky.Interface
 			window.SetCompositeColormap ();
 			window.ExposeEvent += HandleWindowExposeEvent;
 						
-			ThemeController.ThemeChanged += DockyControllerThemeChanged;
+			DockServices.Theme.ThemeChanged += DockyControllerThemeChanged;
 		}
 		
 		void DockyControllerThemeChanged (object sender, EventArgs e)
@@ -189,7 +189,7 @@ namespace Docky.Interface
 			
 			DockySurface main = new DockySurface (3 * AbstractDockItem.HoverTextHeight / 2, AbstractDockItem.HoverTextHeight, model);
 			
-			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (ThemeController.TooltipSvg)) {
+			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (DockServices.Theme.TooltipSvg)) {
 				Gdk.CairoHelper.SetSourcePixbuf (main.Context, pixbuf, 0, 0);
 				main.Context.Paint ();
 			}
@@ -228,7 +228,7 @@ namespace Docky.Interface
 		public void Dispose ()
 		{
 			window.ExposeEvent -= HandleWindowExposeEvent;
-			ThemeController.ThemeChanged -= DockyControllerThemeChanged;
+			DockServices.Theme.ThemeChanged -= DockyControllerThemeChanged;
 			
 			currentSurface = null;
 

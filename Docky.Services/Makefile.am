@@ -21,6 +21,7 @@ FILES = \
  	Docky.Services/PreferencesService.cs \
 	Docky.Services/DockServices.cs \
 	Docky.Services/SystemService.cs \
+	Docky.Services/ThemeService.cs \
 	Docky.Services/HelperService.cs \
 	Docky.Services/Helper.cs \
 	Docky.Services/HelperStatusChangedEventArgs.cs \
@@ -32,6 +33,11 @@ FILES = \
 	Docky.Services/PathsService.cs \
 	Gtk/MountOperation.cs \
 	GLibSharp/AsyncReadyCallbackNative.cs
+
+RESOURCES = \
+	Resources/background.svg \
+	Resources/menu.svg \
+	Resources/tooltip.svg 
 
 PROJECT_REFERENCES= \
 	Docky.CairoHelper

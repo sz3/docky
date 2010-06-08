@@ -92,7 +92,7 @@ namespace Docky
 				ShowAbout ();
 			};
 			PluginManager.Initialize ();
-			ThemeController.Initialize ();
+			DockServices.Theme.Initialize ();
 			Controller.Initialize ();
 			
 			Gdk.Threads.Enter ();

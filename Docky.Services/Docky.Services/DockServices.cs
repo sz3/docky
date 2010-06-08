@@ -31,6 +31,8 @@ namespace Docky.Services
 		
 		public static PathsService Paths { get; private set; }
 		
+		public static ThemeService Theme { get; private set; }
+		
 		static DockServices ()
 		{
 			Paths = new PathsService ();
@@ -38,7 +40,9 @@ namespace Docky.Services
 			Preferences = new PreferencesService ();
 			System = new SystemService ();
 			Helpers = new HelperService ();
+			Theme = new ThemeService ();
 			NotificationService.Initialize ();
+			Theme.Initialize ();
 			
 			Log<DockServices>.Info ("Dock services initialized.");
 		}
