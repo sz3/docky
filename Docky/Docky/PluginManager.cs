@@ -47,10 +47,6 @@ namespace Docky
 	{
 		public static readonly string DefaultPluginIcon = "package";
 		
-		const string PluginsDirectory = "plugins";
-		const string ApplicationDirectory = "docky";
-		const string DefaultAddinsDirectory = "addins";
-		
 		const string IPExtensionPath = "/Docky/ItemProvider";
 		const string ConfigExtensionPath = "/Docky/Configuration";
 		
@@ -60,11 +56,11 @@ namespace Docky
 		/// Directory where Docky saves its Mono.Addins repository cache.
 		/// </value>
 		public static GLib.File UserPluginsDirectory {
-			get { return DockServices.Paths.UserDataFolder.GetChild (PluginsDirectory); }
+			get { return DockServices.Paths.UserDataFolder.GetChild ("plugins"); }
 		}
 		
 		public static GLib.File UserAddinInstallationDirectory {
-			get { return UserPluginsDirectory.GetChild (DefaultAddinsDirectory); }
+			get { return UserPluginsDirectory.GetChild ("addins"); }
 		}
 			
 		/// <summary>
