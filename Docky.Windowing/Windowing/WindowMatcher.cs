@@ -173,7 +173,7 @@ namespace Docky.Windowing
 				return DockServices.Paths.XdgDataDirFolders.Select (d => d.GetChild ("applications"))
 					.Union(new [] {
 						DockServices.Paths.XdgDataHomeFolder.GetChild ("applications"),
-						GLib.FileFactory.NewForPath (Environment.GetEnvironmentVariable ("CX_APPS") + "/.cxoffice"),
+						DockServices.Paths.HomeFolder.GetChild (".cxoffice"),
 					})
 					.Where (d => d.Exists);
 			}
