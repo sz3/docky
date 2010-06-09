@@ -209,6 +209,9 @@ namespace WorkspaceSwitcher
 			HoverText = Catalog.GetString ("Switch Desks");
 			Icon = "workspace-switcher";
 			
+			UpdateDesks ();
+			UpdateItem ();
+			
 			Wnck.Screen.Default.ActiveWorkspaceChanged += HandleWnckScreenDefaultActiveWorkspaceChanged;;
 			Wnck.Screen.Default.ViewportsChanged += HandleWnckScreenDefaultViewportsChanged;
 			Wnck.Screen.Default.WorkspaceCreated += HandleWnckScreenDefaultWorkspaceCreated;
