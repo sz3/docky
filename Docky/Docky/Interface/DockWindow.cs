@@ -1195,13 +1195,40 @@ namespace Docky.Interface
 					Painter.ButtonReleased (x, y, evnt.State);
 			} else if (HoveredItem != null && !(HoveredItem is SeparatorItem)) {
 				if (lastClickedItem == HoveredItem) {
-					double x, y;
+					double x = 0, y = 0;
 					Gdk.Rectangle region = DrawRegionForItem (HoveredItem);
-						
-					x = ((Cursor.X + window_position.X) - region.X) / (double) region.Width;
-					y = ((Cursor.Y - window_position.Y) - region.Y) / (double) region.Height;
+					
+					switch (Position) {
+					case DockPosition.Top:
+						x = 1 - ((Cursor.X + window_position.X) - region.X) / (double) region.Width;
+						y = 1 - ((Cursor.Y - window_position.Y) - region.Y) / (double) region.Height;
+						break;
+					case DockPosition.Bottom:
+						x = ((Cursor.X + window_position.X) - region.X) / (double) region.Width;
+						y = ((Cursor.Y - window_position.Y) - region.Y) / (double) region.Height;
+						break;
+					case DockPosition.Left:
+						if (HoveredItem.RotateWithDock) {
+							y = ((Cursor.X - window_position.X) - region.X) / (double) region.Width;
+							x = 1 - ((Cursor.Y - window_position.Y) - region.Y) / (double) region.Height;
+						} else {
+							x = ((Cursor.X - window_position.X) - region.X) / (double) region.Width;
+							y = ((Cursor.Y - window_position.Y) - region.Y) / (double) region.Height;
+						}
+						break;
+					case DockPosition.Right:
+						if (HoveredItem.RotateWithDock) {
+							y = 1 - ((Cursor.X - window_position.X) - region.X) / (double) region.Width;
+							x = ((Cursor.Y - window_position.Y) - region.Y) / (double) region.Height;
+						} else {
+							x = ((Cursor.X - window_position.X) - region.X) / (double) region.Width;
+							y = ((Cursor.Y - window_position.Y) - region.Y) / (double) region.Height;
+						}
+						break;
+					}
 					
 					HoveredItem.Clicked (evnt.Button, evnt.State, x, y);
+
 					AnimatedDraw ();
 				}
 			} else if (button == MenuButton.Right) {

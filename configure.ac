@@ -213,6 +213,8 @@ StandardPlugins/Trash/Makefile
 StandardPlugins/Trash/Resources/Trash.addin.xml
 StandardPlugins/Weather/Makefile
 StandardPlugins/Weather/Resources/Weather.addin.xml
+StandardPlugins/WorkspaceSwitcher/Makefile
+StandardPlugins/WorkspaceSwitcher/Resources/WorkspaceSwitcher.addin.xml
 Makefile
 data/Makefile
 data/icons/Makefile

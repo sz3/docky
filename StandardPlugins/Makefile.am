@@ -12,7 +12,8 @@ SUBDIRS = \
 	SessionManager \
 	Timer \
 	Trash \
-	Weather
+	Weather \
+	WorkspaceSwitcher
 
 DIST_SUBDIRS = \
 	BatteryMonitor \
@@ -28,4 +29,6 @@ DIST_SUBDIRS = \
 	SessionManager \
 	Timer \
 	Trash \
-	Weather
+	Weather \
+	WorkspaceSwitcher
+
