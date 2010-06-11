@@ -64,6 +64,8 @@ namespace Docky.Items
 			set {
 				if (forced_pixbuf == value)
 					return;
+				if (value == null)
+					forced_pixbuf.Dispose ();
 				forced_pixbuf = value;
 				QueueRedraw ();
 			}
