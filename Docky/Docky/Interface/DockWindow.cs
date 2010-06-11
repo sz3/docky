@@ -1195,36 +1195,28 @@ namespace Docky.Interface
 					Painter.ButtonReleased (x, y, evnt.State);
 			} else if (HoveredItem != null && !(HoveredItem is SeparatorItem)) {
 				if (lastClickedItem == HoveredItem) {
-					double x = 0, y = 0;
 					Gdk.Rectangle region = DrawRegionForItem (HoveredItem);
 					
-					switch (Position) {
-					case DockPosition.Top:
-						x = 1 - ((Cursor.X + window_position.X) - region.X) / (double) region.Width;
-						y = 1 - ((Cursor.Y - window_position.Y) - region.Y) / (double) region.Height;
-						break;
-					case DockPosition.Bottom:
-						x = ((Cursor.X + window_position.X) - region.X) / (double) region.Width;
-						y = ((Cursor.Y - window_position.Y) - region.Y) / (double) region.Height;
-						break;
-					case DockPosition.Left:
-						if (HoveredItem.RotateWithDock) {
-							y = ((Cursor.X - window_position.X) - region.X) / (double) region.Width;
-							x = 1 - ((Cursor.Y - window_position.Y) - region.Y) / (double) region.Height;
-						} else {
-							x = ((Cursor.X - window_position.X) - region.X) / (double) region.Width;
-							y = ((Cursor.Y - window_position.Y) - region.Y) / (double) region.Height;
-						}
-						break;
-					case DockPosition.Right:
-						if (HoveredItem.RotateWithDock) {
-							y = 1 - ((Cursor.X - window_position.X) - region.X) / (double) region.Width;
-							x = ((Cursor.Y - window_position.Y) - region.Y) / (double) region.Height;
-						} else {
-							x = ((Cursor.X - window_position.X) - region.X) / (double) region.Width;
-							y = ((Cursor.Y - window_position.Y) - region.Y) / (double) region.Height;
-						}
-						break;
+					double x;
+					double y = Math.Min (1, Math.Max (0, (Cursor.Y - window_position.Y - region.Y) / (double) region.Height));
+					
+					if (Preferences.IsVertical)
+						x = Math.Min (1, Math.Max (0, (Cursor.X - window_position.X - region.X) / (double) region.Width));
+					else
+						x = Math.Min (1, Math.Max (0, (Cursor.X + window_position.X - region.X) / (double) region.Width));
+					
+					if (Position == DockPosition.Top) {
+						x = 1 - x;
+						y = 1 - y;
+					} else if (HoveredItem.RotateWithDock && Preferences.IsVertical) {
+						double tmp = x;
+						x = y;
+						y = tmp;
+						
+						if (Position == DockPosition.Left)
+							y = 1 - y;
+						else
+							x = 1 - x;
 					}
 					
 					HoveredItem.Clicked (evnt.Button, evnt.State, x, y);
