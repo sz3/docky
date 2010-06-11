@@ -811,7 +811,10 @@ namespace Docky.Windowing
 					continue;
 				
 				string cls = item.GetString ("StartupWMClass").Trim ();
-				result [cls] = item;
+				// we only want exactly 1 launcher, and so if we already have one we use that
+				// otherwise it will prefer global over local launchers
+				if (!result.ContainsKey (cls))
+					result [cls] = item;
 			}
 			
 			return result;
