@@ -47,7 +47,10 @@ namespace NPR
 			
 			OwnedStation = station;			
 			
-			Icon = OwnedStation.Icon;
+			if (OwnedStation.Icon.IndexOf ("@") != -1)
+				ForcePixbuf = DockServices.Drawing.LoadIcon (OwnedStation.Icon, IconSize, -1);
+			else
+				Icon = OwnedStation.Icon;
 			
 			OwnedStation.FinishedLoading += delegate {
 				SetInfo ();
@@ -59,7 +62,11 @@ namespace NPR
 		
 		void SetInfo () 
 		{
-			Icon = OwnedStation.Icon;
+			ForcePixbuf = null;
+			if (OwnedStation.Icon.IndexOf ("@") != -1)
+				ForcePixbuf = DockServices.Drawing.LoadIcon (OwnedStation.Icon, IconSize, -1);
+			else
+				Icon = OwnedStation.Icon;
 			string hover = (string.IsNullOrEmpty (OwnedStation.Description)) ? 
 				OwnedStation.Name : string.Format ("{0} : {1}", OwnedStation.Name, OwnedStation.Description);
 			if (OwnedStation.ID < 1)
