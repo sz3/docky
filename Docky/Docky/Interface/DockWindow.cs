@@ -1205,18 +1205,20 @@ namespace Docky.Interface
 					else
 						x = Math.Min (1, Math.Max (0, (Cursor.X + window_position.X - region.X) / (double) region.Width));
 					
-					if (Position == DockPosition.Top) {
-						x = 1 - x;
-						y = 1 - y;
-					} else if (HoveredItem.RotateWithDock && Preferences.IsVertical) {
-						double tmp = x;
-						x = y;
-						y = tmp;
-						
-						if (Position == DockPosition.Left)
-							y = 1 - y;
-						else
+					if (HoveredItem.RotateWithDock) {
+						if (Position == DockPosition.Top) {
 							x = 1 - x;
+							y = 1 - y;
+						} else if (Preferences.IsVertical) {
+							double tmp = x;
+							x = y;
+							y = tmp;
+							
+							if (Position == DockPosition.Left)
+								y = 1 - y;
+							else
+								x = 1 - x;
+						}
 					}
 					
 					HoveredItem.Clicked (evnt.Button, evnt.State, x, y);
