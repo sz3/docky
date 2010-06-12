@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Chris Szikszoy
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -73,20 +74,18 @@ namespace NPR
 			StationDockItem sdi = items.Cast <StationDockItem> ().Where (s => s.OwnedStation == station).First ();
 			
 			items.Remove (sdi);
-			Items = items;
-			
-			sdi.Dispose ();
 			
 			MaybeAddNullStation ();
 			
+			Items = items;
+			
+			sdi.Dispose ();
 		}
 		
 		void MaybeAddNullStation ()
 		{
 			if (items.Count () == 0)
 				items.Add (new StationDockItem (NPR.LookupStation (-1)));
-			
-			Items = items;
 		}
 		
 		public void ReloadStations ()
@@ -94,12 +93,12 @@ namespace NPR
 			items.Clear ();
 			
 			NPR.MyStations.ToList ().ForEach (s => {
-				items.Add (new StationDockItem (NPR.LookupStation (s)));				
+				items.Add (new StationDockItem (NPR.LookupStation (s)));
 			});
-				
-			Items = items;
 			
 			MaybeAddNullStation ();
+				
+			Items = items;
 		}
 	}
 }
