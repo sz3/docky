@@ -1,5 +1,6 @@
 //  
 // Copyright (C) 2009 Robert Dyer
+// Copyright (C) 2010 Robert Dyer
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,9 +31,6 @@ using Mono.Unix;
 using Docky.Services;
 using Docky.Widgets;
 
-// disable the warning message about System.Net.ServicePointManager.CertificatePolicy being obsolete
-#pragma warning disable 618
-
 namespace GMail
 {
 	public enum GMailState
@@ -42,15 +40,6 @@ namespace GMail
 		ManualReload,
 		Error
 	}
-	
-	// remove when ServicePointManager.ServerCertificateValidationCallback implemented in mono
-	class CertHandler : System.Net.ICertificatePolicy
-	{
-		public bool CheckValidationResult(System.Net.ServicePoint srvPoint, System.Security.Cryptography.X509Certificates.X509Certificate certificate, System.Net.WebRequest request, int certificateProblem)
-		{
-                return true;
-		}
-	} 
 	
 	public struct UnreadMessage
 	{
@@ -96,19 +85,11 @@ namespace GMail
 			CurrentLabel = label;
 			State = GMailState.ManualReload;
 			DockServices.System.ConnectionStatusChanged += HandleNeedReset;
-			// this is not implemented in mono yet
-//			ServicePointManager.ServerCertificateValidationCallback +=
-//				(sender, cert, chain, errors) => { return true; };
+			ServicePointManager.ServerCertificateValidationCallback += delegate { return true; };
 			ResetNeeded += HandleNeedReset;
 		}
 		
 		Thread checkerThread;
-		
-		public void Dispose ()
-		{
-			DockServices.System.ConnectionStatusChanged -= HandleNeedReset;
-			ResetNeeded -= HandleNeedReset;
-		}
 		
 		void HandleNeedReset (object o, EventArgs state)
 		{
@@ -180,8 +161,6 @@ namespace GMail
 				request.Credentials = new NetworkCredential (username, password);
 				if (DockServices.System.UseProxy)
 					request.Proxy = DockServices.System.Proxy;
-				// FIXME: remove when ServicePointManager.ServerCertificateValidationCallback implemented in mono
-				System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 				
 				using (HttpWebResponse response = (HttpWebResponse)request.GetResponse ())
 					try { } finally {
@@ -221,8 +200,6 @@ namespace GMail
 					request.Credentials = new NetworkCredential (GMailPreferences.User, password);
 					if (DockServices.System.UseProxy)
 						request.Proxy = DockServices.System.Proxy;
-					// FIXME remove when ServicePointManager.ServerCertificateValidationCallback implemented in mono
-					System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 					
 					XmlDocument xml = new XmlDocument ();
 					XmlNamespaceManager nsmgr = new XmlNamespaceManager (xml.NameTable);
@@ -334,6 +311,13 @@ namespace GMail
 			State = GMailState.Error;
 			if (GMailFailed != null)
 				GMailFailed (null, new GMailErrorArgs (error));
+		}
+		
+		public void Dispose ()
+		{
+			StopTimer ();
+			DockServices.System.ConnectionStatusChanged -= HandleNeedReset;
+			ResetNeeded -= HandleNeedReset;
 		}
 	}
 }
