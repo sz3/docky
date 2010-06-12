@@ -45,7 +45,6 @@
     <Compile Include="Docky\Docky.cs" />
     <Compile Include="Docky\UserArgs.cs" />
     <Compile Include="Docky\DockController.cs" />
-    <Compile Include="Docky\ThemeController.cs" />
     <Compile Include="Docky\Interface\Dock.cs" />
     <Compile Include="Docky\Interface\DockPosition.cs" />
     <Compile Include="Docky\Interface\AutohideType.cs" />
