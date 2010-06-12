@@ -62,7 +62,6 @@ namespace NPR
 		
 		void SetInfo () 
 		{
-			ForcePixbuf = null;
 			if (OwnedStation.ForcePixbuf != null)
 				ForcePixbuf = OwnedStation.ForcePixbuf.Copy ();
 			else

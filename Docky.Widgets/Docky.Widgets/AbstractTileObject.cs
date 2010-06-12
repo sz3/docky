@@ -112,7 +112,7 @@ namespace Docky.Widgets
 			protected set {
 				if (force_pbuf == value)
 					return;
-				if (value == null)
+				if (force_pbuf != null)
 					force_pbuf.Dispose ();
 				force_pbuf = value;
 				OnIconUpdated ();

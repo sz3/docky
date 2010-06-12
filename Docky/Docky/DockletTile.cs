@@ -125,7 +125,6 @@ namespace Docky
 			
 			AddUserButton (HelpButton);
 			
-			ForcePixbuf = null;
 			if (Provider == null)
 				Icon = PluginManager.DefaultPluginIcon;
 			else if (Provider.Icon.IndexOf ("@") == -1)
