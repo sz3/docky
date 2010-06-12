@@ -201,7 +201,8 @@ namespace Docky.Services
 		public void Dispose ()
 		{
 			Stop ();
-			Data.Dispose ();
+			if (Data != null)
+				Data.Dispose ();
 		}
 	}
 }
