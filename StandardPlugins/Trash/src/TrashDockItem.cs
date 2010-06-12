@@ -160,10 +160,7 @@ namespace Trash
 		{
 			// intentionally dont inherit
 			MenuList list = new MenuList ();
-			list[MenuListContainer.Actions].Add (
-				new MenuItem (Catalog.GetString ("_Open Trash"), Icon, (o, a) => OpenTrash ()));
-			list[MenuListContainer.Actions].Add (
-				new MenuItem (Catalog.GetString ("Empty _Trash"), "gtk-clear", (o, a) => EmptyTrash (), !TrashFull));
+			
 			list.SetContainerTitle (MenuListContainer.CustomOne, Catalog.GetString ("Restore Files"));
 			
 			FileEnumerator enumerator = OwnedFile.EnumerateChildren ("standard::type,standard::name", FileQueryInfoFlags.NofollowSymlinks, null);
@@ -193,6 +190,11 @@ namespace Trash
 				item.Mnemonic = null;
 				list[MenuListContainer.CustomOne].Add (item);
 			}
+			
+			list[MenuListContainer.CustomTwo].Add (
+				new MenuItem (Catalog.GetString ("_Open Trash"), Icon, (o, a) => OpenTrash ()));
+			list[MenuListContainer.CustomTwo].Add (
+				new MenuItem (Catalog.GetString ("Empty _Trash"), "gtk-clear", (o, a) => EmptyTrash (), !TrashFull));
 			
 			return list;
 		}

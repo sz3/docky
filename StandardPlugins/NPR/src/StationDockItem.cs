@@ -47,7 +47,10 @@ namespace NPR
 			
 			OwnedStation = station;			
 			
-			Icon = OwnedStation.Icon;
+			if (OwnedStation.ForcePixbuf != null)
+				ForcePixbuf = OwnedStation.ForcePixbuf.Copy ();
+			else
+				Icon = OwnedStation.Icon;
 			
 			OwnedStation.FinishedLoading += delegate {
 				SetInfo ();
@@ -59,7 +62,10 @@ namespace NPR
 		
 		void SetInfo () 
 		{
-			Icon = OwnedStation.Icon;
+			if (OwnedStation.ForcePixbuf != null)
+				ForcePixbuf = OwnedStation.ForcePixbuf.Copy ();
+			else
+				Icon = OwnedStation.Icon;
 			string hover = (string.IsNullOrEmpty (OwnedStation.Description)) ? 
 				OwnedStation.Name : string.Format ("{0} : {1}", OwnedStation.Name, OwnedStation.Description);
 			if (OwnedStation.ID < 1)

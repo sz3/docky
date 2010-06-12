@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Chris Szikszoy
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -21,6 +22,8 @@ using System.Collections.Generic;
 
 using NDesk.DBus;
 using org.freedesktop.DBus;
+
+using Docky.Services;
 
 namespace NetworkManagerDocklet
 {
@@ -71,34 +74,44 @@ namespace NetworkManagerDocklet
 		{
 			lock (SystemConnections) {
 				SystemConnections.Clear ();
-				foreach (string con in SystemConnectionManager.BusObject.ListConnections ())
-				{
-					NetworkConnection connection = new NetworkConnection (SystemBus, con, ConnectionOwner.System);
-					if (connection.Settings.ContainsKey ("802-11-wireless"))
-						connection = new WirelessConnection (SystemBus, con, ConnectionOwner.System);
-					else if (connection.Settings.ContainsKey ("802-3-ethernet"))
-						connection = new WiredConnection (SystemBus, con, ConnectionOwner.System);
-					else 
-						continue;
-					//connection.ConnectionRemoved += OnNetworkConnectionRemoved;
-					SystemConnections.Add (connection);
+				try {
+					foreach (string con in SystemConnectionManager.BusObject.ListConnections ())
+					{
+						NetworkConnection connection = new NetworkConnection (SystemBus, con, ConnectionOwner.System);
+						if (connection.Settings.ContainsKey ("802-11-wireless"))
+							connection = new WirelessConnection (SystemBus, con, ConnectionOwner.System);
+						else if (connection.Settings.ContainsKey ("802-3-ethernet"))
+							connection = new WiredConnection (SystemBus, con, ConnectionOwner.System);
+						else 
+							continue;
+						//connection.ConnectionRemoved += OnNetworkConnectionRemoved;
+						SystemConnections.Add (connection);
+					}
+				} catch (Exception e) {
+					Log<ConnectionManager>.Error (e.Message);
+					Log<ConnectionManager>.Debug (e.StackTrace);
 				}
 			}
 			
 			lock (UserConnections) {
 				UserConnections.Clear ();
-				foreach (string con in UserConnectionManager.BusObject.ListConnections ())
-				{
-					NetworkConnection connection = new NetworkConnection (UserBus, con, ConnectionOwner.User);
-					if (connection.Settings.ContainsKey ("802-11-wireless"))
-						connection = new WirelessConnection (UserBus, con, ConnectionOwner.User);
-					else if (connection.Settings.ContainsKey ("802-3-ethernet"))
-						connection = new WiredConnection (UserBus, con, ConnectionOwner.User);
-					else 
-						continue;
-					
-					//connection.ConnectionRemoved += OnNetworkConnectionRemoved;
-					UserConnections.Add (connection);
+				try {
+					foreach (string con in UserConnectionManager.BusObject.ListConnections ())
+					{
+						NetworkConnection connection = new NetworkConnection (UserBus, con, ConnectionOwner.User);
+						if (connection.Settings.ContainsKey ("802-11-wireless"))
+							connection = new WirelessConnection (UserBus, con, ConnectionOwner.User);
+						else if (connection.Settings.ContainsKey ("802-3-ethernet"))
+							connection = new WiredConnection (UserBus, con, ConnectionOwner.User);
+						else 
+							continue;
+						
+						//connection.ConnectionRemoved += OnNetworkConnectionRemoved;
+						UserConnections.Add (connection);
+					}
+				} catch (Exception e) {
+					Log<ConnectionManager>.Error (e.Message);
+					Log<ConnectionManager>.Debug (e.StackTrace);
 				}
 			}
 		}

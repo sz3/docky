@@ -64,8 +64,7 @@ namespace NPR
 		public Station (int id)
 		{
 			IsLoaded = false;
-			Icon = DefaultLogo = "nprlogo.gif@" + GetType ().Assembly.FullName;
-			DockServices.System.ConnectionStatusChanged += HandleConnectionStatusChanged;
+			ForcePixbuf = DockServices.Drawing.LoadIcon ("nprlogo.gif@" + GetType ().Assembly.FullName, 128, -1);
 			ID = id;
 			
 			if (ID > 0) {
@@ -132,7 +131,7 @@ namespace NPR
 				// delete the bad logofile, if it exists
 				if (System.IO.File.Exists (LogoFile))
 					System.IO.File.Delete (LogoFile);
-				Icon = DefaultLogo;
+				ForcePixbuf = DockServices.Drawing.LoadIcon ("nprlogo.gif@" + GetType ().Assembly.FullName, 128, -1);
 			}
 			
 			IsLoaded = true;

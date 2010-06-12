@@ -22,8 +22,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 using Mono.Addins;
-//using Mono.Addins.Gui;
-//using Mono.Addins.Setup;
 
 using Docky.Items;
 using Docky.Services;
@@ -212,7 +210,7 @@ namespace Docky
 		// this will return a list of Provider IDs that are currently not used by any docks
 		public static IEnumerable<string> AvailableProviderIDs {
 			get {
-				return AllAddins .Where (a => !a.Enabled).Select (a => Addin.GetIdName (a.Id));
+				return AllAddins.Where (a => !a.Enabled).Select (a => Addin.GetIdName (a.Id));
 			}
 		}
 	}

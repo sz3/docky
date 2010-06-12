@@ -1,5 +1,6 @@
 //  
 // Copyright (C) 2009 Robert Dyer
+// Copyright (C) 2010 Robert Dyer
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,9 +31,6 @@ using Mono.Unix;
 using Docky.Services;
 using Docky.Widgets;
 
-// disable the warning message about System.Net.ServicePointManager.CertificatePolicy being obsolete
-#pragma warning disable 618
-
 namespace GMail
 {
 	public enum GMailState
@@ -42,15 +40,6 @@ namespace GMail
 		ManualReload,
 		Error
 	}
-	
-	// remove when ServicePointManager.ServerCertificateValidationCallback implemented in mono
-	class CertHandler : System.Net.ICertificatePolicy
-	{
-		public bool CheckValidationResult(System.Net.ServicePoint srvPoint, System.Security.Cryptography.X509Certificates.X509Certificate certificate, System.Net.WebRequest request, int certificateProblem)
-		{
-                return true;
-		}
-	} 
 	
 	public struct UnreadMessage
 	{
@@ -84,9 +73,7 @@ namespace GMail
 		public int NewCount { get; protected set; }
 		
 		public bool HasUnread {
-			get {
-				return UnreadCount > 0 && State != GMailState.Error;
-			}
+			get { return UnreadCount > 0 && State != GMailState.Error; }
 		}
 
 		bool IsChecking { get; set; }
@@ -95,20 +82,14 @@ namespace GMail
 		{
 			CurrentLabel = label;
 			State = GMailState.ManualReload;
+			
+			ServicePointManager.ServerCertificateValidationCallback += delegate { return true; };
+			
 			DockServices.System.ConnectionStatusChanged += HandleNeedReset;
-			// this is not implemented in mono yet
-//			ServicePointManager.ServerCertificateValidationCallback +=
-//				(sender, cert, chain, errors) => { return true; };
 			ResetNeeded += HandleNeedReset;
 		}
 		
 		Thread checkerThread;
-		
-		public void Dispose ()
-		{
-			DockServices.System.ConnectionStatusChanged -= HandleNeedReset;
-			ResetNeeded -= HandleNeedReset;
-		}
 		
 		void HandleNeedReset (object o, EventArgs state)
 		{
@@ -118,9 +99,7 @@ namespace GMail
 		List<UnreadMessage> messages = new List<UnreadMessage> ();
 		
 		public IEnumerable<UnreadMessage> Messages {
-			get {
-				return messages as IEnumerable<UnreadMessage>;
-			}
+			get { return messages as IEnumerable<UnreadMessage>; }
 		}
 		
 		uint UpdateTimer { get; set; }
@@ -146,17 +125,10 @@ namespace GMail
 		{
 			StopTimer ();
 			
-			if (!DockServices.System.NetworkConnected)
-				return;
-			
-			if (!IsChecking) {
-				IsChecking = true;
-				CheckGMail ();
-			}
+			CheckGMail ();
 			
 			UpdateTimer = GLib.Timeout.Add (GMailPreferences.RefreshRate * 60 * 1000, () => { 
-				if (!IsChecking && DockServices.System.NetworkConnected) 
-					CheckGMail (); 
+				CheckGMail (); 
 				return true; 
 			});
 		}
@@ -180,8 +152,6 @@ namespace GMail
 				request.Credentials = new NetworkCredential (username, password);
 				if (DockServices.System.UseProxy)
 					request.Proxy = DockServices.System.Proxy;
-				// FIXME: remove when ServicePointManager.ServerCertificateValidationCallback implemented in mono
-				System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 				
 				using (HttpWebResponse response = (HttpWebResponse)request.GetResponse ())
 					try { } finally {
@@ -196,11 +166,16 @@ namespace GMail
 		
 		void CheckGMail ()
 		{
+			if (IsChecking || !DockServices.System.NetworkConnected)
+				return;
+			
 			string password = GMailPreferences.Password;
 			if (string.IsNullOrEmpty (GMailPreferences.User) || string.IsNullOrEmpty (password)) {
 				OnGMailFailed (Catalog.GetString ("Click to set username and password."));
 				return;
 			}
+			
+			IsChecking = true;
 			
 			checkerThread = DockServices.System.RunOnThread (() => {
 				try {
@@ -221,8 +196,6 @@ namespace GMail
 					request.Credentials = new NetworkCredential (GMailPreferences.User, password);
 					if (DockServices.System.UseProxy)
 						request.Proxy = DockServices.System.Proxy;
-					// FIXME remove when ServicePointManager.ServerCertificateValidationCallback implemented in mono
-					System.Net.ServicePointManager.CertificatePolicy = new CertHandler ();
 					
 					XmlDocument xml = new XmlDocument ();
 					XmlNamespaceManager nsmgr = new XmlNamespaceManager (xml.NameTable);
@@ -280,7 +253,7 @@ namespace GMail
 					messages = tmp;
 					Gtk.Application.Invoke (delegate { OnGMailChecked (); });
 				} catch (ThreadAbortException) {
-					// do nothing
+					Log<GMailAtom>.Debug ("Stoping Atom thread");
 				} catch (NullReferenceException) {
 					Gtk.Application.Invoke (delegate {
 						OnGMailFailed (Catalog.GetString ("Feed Error"));
@@ -307,13 +280,14 @@ namespace GMail
 					Gtk.Application.Invoke (delegate {
 						OnGMailFailed (Catalog.GetString ("General Error"));
 					});
+				} finally {
+					IsChecking = false;
 				}
 			});
 		}
 		
 		void OnGMailChecked ()
 		{
-			IsChecking = false;
 			State = GMailState.Normal;
 			if (GMailChecked != null)
 				GMailChecked (null, EventArgs.Empty);
@@ -321,7 +295,6 @@ namespace GMail
 		
 		void OnGMailChecking ()
 		{
-			IsChecking = true;
 			if (State != GMailState.ManualReload)
 				State = GMailState.Reloading;
 			if (GMailChecking != null)
@@ -330,10 +303,16 @@ namespace GMail
 		
 		void OnGMailFailed (string error)
 		{
-			IsChecking = false;
 			State = GMailState.Error;
 			if (GMailFailed != null)
 				GMailFailed (null, new GMailErrorArgs (error));
+		}
+		
+		public void Dispose ()
+		{
+			StopTimer ();
+			DockServices.System.ConnectionStatusChanged -= HandleNeedReset;
+			ResetNeeded -= HandleNeedReset;
 		}
 	}
 }

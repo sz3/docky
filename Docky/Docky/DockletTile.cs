@@ -127,8 +127,10 @@ namespace Docky
 			
 			if (Provider == null)
 				Icon = PluginManager.DefaultPluginIcon;
-			else
+			else if (Provider.Icon.IndexOf ("@") == -1)
 				Icon = Provider.Icon;
+			else
+				ForcePixbuf = DockServices.Drawing.LoadIcon (Provider.Icon, 128, -1);
 		}
 		
 		public override void OnActiveChanged ()
