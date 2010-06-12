@@ -73,9 +73,7 @@ namespace GMail
 		public int NewCount { get; protected set; }
 		
 		public bool HasUnread {
-			get {
-				return UnreadCount > 0 && State != GMailState.Error;
-			}
+			get { return UnreadCount > 0 && State != GMailState.Error; }
 		}
 
 		bool IsChecking { get; set; }
@@ -84,8 +82,10 @@ namespace GMail
 		{
 			CurrentLabel = label;
 			State = GMailState.ManualReload;
-			DockServices.System.ConnectionStatusChanged += HandleNeedReset;
+			
 			ServicePointManager.ServerCertificateValidationCallback += delegate { return true; };
+			
+			DockServices.System.ConnectionStatusChanged += HandleNeedReset;
 			ResetNeeded += HandleNeedReset;
 		}
 		
@@ -99,9 +99,7 @@ namespace GMail
 		List<UnreadMessage> messages = new List<UnreadMessage> ();
 		
 		public IEnumerable<UnreadMessage> Messages {
-			get {
-				return messages as IEnumerable<UnreadMessage>;
-			}
+			get { return messages as IEnumerable<UnreadMessage>; }
 		}
 		
 		uint UpdateTimer { get; set; }
@@ -127,17 +125,10 @@ namespace GMail
 		{
 			StopTimer ();
 			
-			if (!DockServices.System.NetworkConnected)
-				return;
-			
-			if (!IsChecking) {
-				IsChecking = true;
-				CheckGMail ();
-			}
+			CheckGMail ();
 			
 			UpdateTimer = GLib.Timeout.Add (GMailPreferences.RefreshRate * 60 * 1000, () => { 
-				if (!IsChecking && DockServices.System.NetworkConnected) 
-					CheckGMail (); 
+				CheckGMail (); 
 				return true; 
 			});
 		}
@@ -175,11 +166,16 @@ namespace GMail
 		
 		void CheckGMail ()
 		{
+			if (IsChecking || !DockServices.System.NetworkConnected)
+				return;
+			
 			string password = GMailPreferences.Password;
 			if (string.IsNullOrEmpty (GMailPreferences.User) || string.IsNullOrEmpty (password)) {
 				OnGMailFailed (Catalog.GetString ("Click to set username and password."));
 				return;
 			}
+			
+			IsChecking = true;
 			
 			checkerThread = DockServices.System.RunOnThread (() => {
 				try {
@@ -257,7 +253,7 @@ namespace GMail
 					messages = tmp;
 					Gtk.Application.Invoke (delegate { OnGMailChecked (); });
 				} catch (ThreadAbortException) {
-					// do nothing
+					Log<GMailAtom>.Debug ("Stoping Atom thread");
 				} catch (NullReferenceException) {
 					Gtk.Application.Invoke (delegate {
 						OnGMailFailed (Catalog.GetString ("Feed Error"));
@@ -284,13 +280,14 @@ namespace GMail
 					Gtk.Application.Invoke (delegate {
 						OnGMailFailed (Catalog.GetString ("General Error"));
 					});
+				} finally {
+					IsChecking = false;
 				}
 			});
 		}
 		
 		void OnGMailChecked ()
 		{
-			IsChecking = false;
 			State = GMailState.Normal;
 			if (GMailChecked != null)
 				GMailChecked (null, EventArgs.Empty);
@@ -298,7 +295,6 @@ namespace GMail
 		
 		void OnGMailChecking ()
 		{
-			IsChecking = true;
 			if (State != GMailState.ManualReload)
 				State = GMailState.Reloading;
 			if (GMailChecking != null)
@@ -307,7 +303,6 @@ namespace GMail
 		
 		void OnGMailFailed (string error)
 		{
-			IsChecking = false;
 			State = GMailState.Error;
 			if (GMailFailed != null)
 				GMailFailed (null, new GMailErrorArgs (error));
