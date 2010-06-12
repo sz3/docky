@@ -2295,10 +2295,10 @@ namespace Docky.Interface
 					renderRotation = Math.PI;
 					break;
 				case DockPosition.Left:
-					renderRotation = Math.PI * 1.5;
+					renderRotation = Math.PI * .5;
 					break;
 				case DockPosition.Right:
-					renderRotation = Math.PI * .5;
+					renderRotation = Math.PI * 1.5;
 					break;
 				default:
 				case DockPosition.Bottom:
