@@ -27,19 +27,6 @@ using ICSharpCode.SharpZipLib.Tar;
 
 namespace Docky.Services
 {
-	class HelperComparer : IEqualityComparer<Helper>
-	{
-		public bool Equals (Helper x, Helper y)
-		{
-			return x.File.Basename == y.File.Basename;
-		}
-		
-		public int GetHashCode (Helper h)
-		{
-			return h.File.Basename.GetHashCode ();
-		}
-	}
-	
 	public class HelperService
 	{
 		public static File UserDir = DockServices.Paths.DockManagerUserDataFolder;
@@ -77,18 +64,44 @@ namespace Docky.Services
 
 		static IPreferences prefs = DockServices.Preferences.Get<HelperService> ();
 		
-		public List<Helper> Helpers { get; private set; }
+		List<Helper> helpers;
+		public List<Helper> Helpers {
+			get { return helpers; }
+			private set {
+				IEnumerable<Helper> added = value.Where (h => !helpers.Contains (h));
+				IEnumerable<Helper> removed = helpers.Where (h => !value.Contains (h));
+				
+				if (!added.Any () && !removed.Any ())
+					return;
+
+				foreach (Helper h in removed) {
+					Log<HelperService>.Info ("Helper removed: {0}", h.File.Path);
+					h.HelperStatusChanged -= OnHelperStatusChanged;
+					h.Dispose ();
+				}
+
+				foreach (Helper h in added) {
+					Log<HelperService>.Info ("Helper added: {0}", h.File.Path);
+					h.HelperStatusChanged += OnHelperStatusChanged;
+				}
+				
+				helpers = value;
+
+				OnHelpersChanged (added, removed);
+			}
+		}
 		
 		public HelperService ()
 		{
-			Helpers = new List<Helper> ();
+			helpers = new List<Helper> ();
 			
 			// set up the file monitors to watch our script directories
 			foreach (File dir in HelperDirs) {
 				FileMonitor mon = dir.Monitor (0, null);
 				mon.RateLimit = 5000;
 				mon.Changed += delegate(object o, ChangedArgs args) {
-					UpdateHelpers ();
+					if (args.EventType == FileMonitorEvent.Created || args.EventType == FileMonitorEvent.Deleted)
+						UpdateHelpers ();
 				};
 			}
 			
@@ -100,34 +113,33 @@ namespace Docky.Services
 
 		void UpdateHelpers ()
 		{
-			List<Helper> old_helpers = Helpers.ToList ();
-			Helpers = Helpers.Where (h => h.File.Exists).ToList ();
+			List<Helper> helpers = Helpers.ToList ();
 			
-			Helpers = HelperDirs
+			//Remove deleted helpers
+			helpers.RemoveAll (h => !h.File.Exists);
+			
+			//Find new helper files and filter them:
+			// get all files in helpers directories
+			// remove all files which already have a helper and don't overrule their files
+			// remove all files which are overruled by other files
+			List<File> new_files = HelperDirs
 				.SelectMany (d => d.GetFiles (""))
-				.Where (file => !(file.Basename.EndsWith ("~")))
-				.Select (hf => LookupHelper (hf))
-				.Distinct (new HelperComparer ())
+				.Where (file => !file.Basename.EndsWith ("~"))
 				.ToList ();
+			new_files.RemoveAll (file => helpers.Exists (h => h.File.Path == file.Path || (h.File.Basename == file.Basename 
+					&& h.File.Path != file.Path && h.File.Path.StartsWith (DockServices.Paths.DockManagerUserDataFolder.Path))));
+			new_files.RemoveAll (file => new_files.Exists (f => f.Basename == file.Basename 
+					&& f.Path != file.Path && !file.Path.StartsWith (DockServices.Paths.DockManagerUserDataFolder.Path)));
+
+			//Remove system-helpers which are overruled by new user-helpers
+			helpers.RemoveAll (helper => new_files.Exists (f => f.Basename == helper.File.Basename));
+
+			//Create and Add new helpers
+			helpers.AddRange (new_files.Select (f => new Helper (f)).ToList ());
+
+			new_files.Clear ();
 			
-			if (old_helpers.Count > 0) {
-				List<Helper> removed_helpers = old_helpers.Where (h => !Helpers.Contains (h)).ToList ();
-				if (removed_helpers.Count > 0) {
-					foreach (Helper h in removed_helpers) {
-						Log<HelperService>.Info ("Helper was removed: {0}", h.File.Path);
-						h.HelperStatusChanged -= OnHelperStatusChanged;
-						h.Dispose ();
-					}
-					OnHelperDeleted ();
-				}
-				
-				List<Helper> added_helpers = Helpers.Where (h => !old_helpers.Contains (h)).ToList ();
-				if (added_helpers.Count > 0) {
-					foreach (Helper h in added_helpers)
-						Log<HelperService>.Info ("New helper found: {0}", h.File.Path);
-					OnHelperAdded ();
-				}
-			}
+			Helpers = helpers;
 		}
 		
 		void OnHelperStatusChanged (object o, HelperStatusChangedEventArgs args)
@@ -136,28 +148,13 @@ namespace Docky.Services
 				HelperStatusChanged (o, args);
 		}
 		
-		void OnHelperAdded ()
+		void OnHelpersChanged (IEnumerable<Helper> added, IEnumerable<Helper> removed)
 		{
-			if (HelperInstalled != null)
+			if (added.Any () &&  HelperInstalled != null)
 				HelperInstalled (this, EventArgs.Empty);
-		}
-		
-		void OnHelperDeleted ()
-		{
-			if (HelperUninstalled != null)
-				HelperUninstalled (this, EventArgs.Empty);
-		}
-		
-		Helper LookupHelper (File helperFile)
-		{
-			if (!Helpers.Any (h => h.File.Path == helperFile.Path)) {
-				Helper h = new Helper (helperFile);
-				h.HelperStatusChanged += OnHelperStatusChanged;
-				Helpers.Add (h);
-				return h;
-			}
 			
-			return Helpers.First (h => h.File.Path == helperFile.Path);
+			if (removed.Any () && HelperUninstalled != null)
+				HelperUninstalled (this, EventArgs.Empty);
 		}
 		
 		public bool InstallHelper (string path)
