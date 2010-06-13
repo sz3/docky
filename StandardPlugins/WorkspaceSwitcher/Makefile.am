@@ -4,6 +4,7 @@ include $(top_srcdir)/build.rules.docklets.mk
 ASSEMBLY = WorkspaceSwitcher
 
 FILES = \
+	src/Desk.cs \
 	src/WorkspaceSwitcherDockItem.cs \
 	src/WorkspaceSwitcherItemProvider.cs
 	
