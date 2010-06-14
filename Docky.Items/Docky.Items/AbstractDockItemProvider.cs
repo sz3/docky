@@ -68,6 +68,8 @@ namespace Docky.Items
 				OnItemsChanged (added, removed);
 			}
 		}
+
+		public bool IsOnVerticalDock = false;
 		
 		protected AbstractDockItemProvider ()
 		{

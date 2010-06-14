@@ -63,10 +63,6 @@ namespace WorkspaceSwitcher
 			}
 		}
 		
-		public override bool RotateWithDock {
-			get { return true; }
-		}
-		
 		public override bool Square {
 			get { return false; }
 		}
@@ -283,7 +279,10 @@ namespace WorkspaceSwitcher
 			else
 				width = Math.Min (IconSize * 4,	(int)(size * DeskGrid.GetLength (0)));
 			
-			return new DockySurface (width, size, model);
+			if (Owner.IsOnVerticalDock)
+				return new DockySurface (size, width, model);
+			else
+				return new DockySurface (width, size, model);
 		}		
 		
 		protected override void PaintIconSurface (DockySurface surface)

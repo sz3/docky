@@ -467,6 +467,7 @@ namespace Docky.Interface
 		public void AddProvider (AbstractDockItemProvider provider)
 		{
 			item_providers.Add (provider);
+			provider.IsOnVerticalDock = IsVertical;
 			
 			OnItemProvidersChanged (provider.AsSingle (), null);
 		}
@@ -714,6 +715,8 @@ namespace Docky.Interface
 		
 		void OnPositionChanged ()
 		{
+			item_providers.ForEach (provider => provider.IsOnVerticalDock = IsVertical);
+			
 			if (PositionChanged != null)
 				PositionChanged (this, EventArgs.Empty);
 		}
