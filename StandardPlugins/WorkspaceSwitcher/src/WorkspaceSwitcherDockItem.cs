@@ -275,9 +275,9 @@ namespace WorkspaceSwitcher
 			int width;
 			
 			if (UseRotatedDeskGrid)
-				width = Math.Min (IconSize * 4,	(int)(size * DeskGrid.GetLength (1)));
+				width = Math.Min (IconSize * 3,	Math.Max (IconSize, (int)(size * DeskGrid.GetLength (1) * .5)));
 			else
-				width = Math.Min (IconSize * 4,	(int)(size * DeskGrid.GetLength (0)));
+				width = Math.Min (IconSize * 3,	Math.Max (IconSize, (int)(size * DeskGrid.GetLength (0) * .5)));
 			
 			if (Owner.IsOnVerticalDock)
 				return new DockySurface (size, width, model);
