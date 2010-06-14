@@ -97,7 +97,8 @@ namespace Docky.Services
 		
 		public void Dispose ()
 		{
-			Icon.Dispose ();
+			if (Icon != null)
+				Icon.Dispose ();
 		}
 	}
 }
