@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -29,8 +30,6 @@ using Docky.Services;
 
 namespace Docky.Menus
 {
-
-
 	public class SeparatorWidget : EventBox
 	{
 		string title;
@@ -68,25 +67,25 @@ namespace Docky.Menus
 				int xMiddle = x + width / 2;
 				double yMiddle = Allocation.Y + Allocation.Height / 2.0;
 				
-				if (!string.IsNullOrEmpty (title)) {
-					Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-					layout.SetText (title);
-					layout.Width = Pango.Units.FromPixels (Allocation.Width - Allocation.Height);
-					layout.FontDescription = Style.FontDescription;
-					layout.Ellipsize = Pango.EllipsizeMode.End;
-					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (8);
-					layout.FontDescription.Weight = Pango.Weight.Bold;
-					
-					Pango.Rectangle logical, ink;
-					layout.GetPixelExtents (out ink, out logical);
-					
-					cr.MoveTo (Allocation.X + 2, Allocation.Y + (Allocation.Height - logical.Height) / 2);
-					Pango.CairoHelper.LayoutPath (cr, layout);
-					cr.Color = TextColor.SetAlpha (.6);
-					cr.Fill ();
-					
-					x += logical.Width + 5;
-				}
+				if (!string.IsNullOrEmpty (title))
+					using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ()) {
+						layout.SetText (title);
+						layout.Width = Pango.Units.FromPixels (Allocation.Width - Allocation.Height);
+						layout.FontDescription = Style.FontDescription;
+						layout.Ellipsize = Pango.EllipsizeMode.End;
+						layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (8);
+						layout.FontDescription.Weight = Pango.Weight.Bold;
+						
+						Pango.Rectangle logical, ink;
+						layout.GetPixelExtents (out ink, out logical);
+						
+						cr.MoveTo (Allocation.X + 2, Allocation.Y + (Allocation.Height - logical.Height) / 2);
+						Pango.CairoHelper.LayoutPath (cr, layout);
+						cr.Color = TextColor.SetAlpha (.6);
+						cr.Fill ();
+						
+						x += logical.Width + 5;
+					}
 				
 				if (DrawLine) {
 					cr.MoveTo (x, yMiddle);
