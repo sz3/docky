@@ -420,9 +420,15 @@ namespace Docky.Services
 					System.Diagnostics.Process proc;
 					if (executable.Contains (" ")) {
 						string[] args = executable.Split (' ');
+						string arguments = "";
 						
-						Log<SystemService>.Debug ("Calling: " + args[0] + " \"" + executable.Substring (args[0].Length + 1) + "\"");
-						proc = System.Diagnostics.Process.Start (args[0], "\"" + executable.Substring (args[0].Length + 1) + "\"");
+						for (int i = 1; i < args.Length; i++) {
+							if (i > 1) arguments += " ";
+							arguments += args[i];
+						}
+						
+						Log<SystemService>.Debug ("Calling: " + args[0] + " " + arguments);
+						proc = System.Diagnostics.Process.Start (args[0], arguments);
 					} else {
 						Log<SystemService>.Debug ("Calling: " + executable);
 						proc = System.Diagnostics.Process.Start (executable);

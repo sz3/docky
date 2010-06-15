@@ -86,8 +86,10 @@ namespace Timer
 		
 		void OnFinished (bool notify, bool remove)
 		{
-			if (notify)
+			if (notify) {
 				Log.Notify (Label + "Docky Timer", "clock", string.Format (Catalog.GetString ("A timer set for {0} has expired."), TimerMainDockItem.TimeRemaining (Length)));
+				DockServices.System.Execute ("canberra-gtk-play -i \"system-ready\"");
+			}
 			
 			if (remove && Finished != null)
 				Finished (this, EventArgs.Empty);
