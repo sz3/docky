@@ -155,13 +155,13 @@ namespace Docky.Widgets
             }
         }
         
-        public void Dispose()
+        public override void Dispose()
         {
             if (layout != null) {
                 layout.Dispose ();
             }
-			
-			base.Dispose ();
+            
+            base.Dispose ();
         }
     }
 }

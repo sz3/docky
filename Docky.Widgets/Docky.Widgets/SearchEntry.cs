@@ -515,7 +515,7 @@ namespace Docky.Widgets
                 return ret;
             }
             
-            public void Dispose ()
+            public override void Dispose ()
             {
                 parent.StyleSet -= OnParentStyleSet;
 
