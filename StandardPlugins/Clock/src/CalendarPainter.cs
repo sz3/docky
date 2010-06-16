@@ -128,6 +128,9 @@ namespace Clock
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.Fill ();
 				cr.Restore ();
+				
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
 			}
 		}
 		
@@ -157,6 +160,9 @@ namespace Clock
 					cr.Fill ();
 					day = day.AddDays (1);
 				}
+				
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
 			}
 		}
 		
@@ -215,6 +221,9 @@ namespace Clock
 				
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.Fill ();
+				
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
 			}
 		}
 		

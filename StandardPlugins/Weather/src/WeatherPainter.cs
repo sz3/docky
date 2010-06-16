@@ -160,6 +160,9 @@ namespace WeatherDocklet
 					
 					xOffset += 2 * (Allocation.Height);
 				}
+				
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
 			}
 		}
 		
@@ -225,6 +228,9 @@ namespace WeatherDocklet
 				}
 				cr.Fill ();
 				cr.Save ();
+				
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
 			}
 			
 			// draw tick lines
@@ -371,6 +377,9 @@ namespace WeatherDocklet
 				cr.MoveTo (x + (xWidth - logicalRect.Width) / 2, yCenter - logicalRect.Height / 2);
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.Fill ();
+				
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
 			}
 		}
 		

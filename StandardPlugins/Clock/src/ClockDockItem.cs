@@ -285,6 +285,9 @@ namespace Clock
 					Pango.CairoHelper.LayoutPath (cr, layout);
 					cr.Fill ();
 				}
+				
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
 			}
 		}
 		
@@ -362,6 +365,9 @@ namespace Clock
 					cr.Color = new Cairo.Color (1, 1, 1, 0.8);
 					cr.Fill ();
 				}
+				
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
 			}
 		}
 		

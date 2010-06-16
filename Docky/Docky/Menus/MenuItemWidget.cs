@@ -112,6 +112,8 @@ namespace Docky.Menus
 				
 				TextWidth = Math.Min (MaxWidth, Math.Max (MinWidth, logical.Width));
 				HasTooltip = TextWidth < logical.Width;
+				
+				layout.Context.Dispose ();
 			}
 			
 			SetSize ();
@@ -290,6 +292,8 @@ namespace Docky.Menus
 					Pango.CairoHelper.LayoutPath (cr, layout);
 					cr.Color = TextColor.SetAlpha (item.Disabled ? 0.5 : 1);
 					cr.Fill ();
+					
+					layout.Context.Dispose ();
 				}
 			}
 			

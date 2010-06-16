@@ -85,6 +85,8 @@ namespace Docky.Menus
 						cr.Fill ();
 						
 						x += logical.Width + 5;
+						
+						layout.Context.Dispose ();
 					}
 				
 				if (DrawLine) {

@@ -684,6 +684,9 @@ namespace Docky.Items
 				surface.Context.StrokePreserve ();
 				surface.Context.Color = new Cairo.Color (1, 1, 1, 1);
 				surface.Context.Fill ();
+				
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
 			}
 		}
 		
@@ -729,6 +732,8 @@ namespace Docky.Items
 					Pango.CairoHelper.LayoutPath (cr, layout);
 					cr.Color = isLight ? new Cairo.Color (0.1, 0.1, 0.1) : new Cairo.Color (1, 1, 1);
 					cr.Fill ();
+					
+					layout.Context.Dispose ();
 				}
 			}
 			
