@@ -154,30 +154,35 @@ namespace WeatherDocklet
 			int size = Math.Min (surface.Width, surface.Height);
 			Context cr = surface.Context;
 			
-			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-			layout.FontDescription = new Gtk.Style().FontDescription;
-			layout.FontDescription.Weight = Pango.Weight.Bold;
-			layout.Ellipsize = Pango.EllipsizeMode.None;
-			
-			Pango.Rectangle inkRect, logicalRect;
-			
-			layout.Width = Pango.Units.FromPixels (size);
-			layout.SetText (WeatherController.Weather.Temp + AbstractWeatherSource.TempUnit);
-			if (IsSmall)
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (size / 2.5));
-			else
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (size / 3.5));
-			
-			layout.GetPixelExtents (out inkRect, out logicalRect);
-			cr.MoveTo ((size - inkRect.Width) / 2, size - logicalRect.Height);
-			
-			Pango.CairoHelper.LayoutPath (cr, layout);
-			cr.LineWidth = 2;
-			cr.Color = new Cairo.Color (0, 0, 0, 0.8);
-			cr.StrokePreserve ();
-			
-			cr.Color = new Cairo.Color (1, 1, 1, 0.8);
-			cr.Fill ();
+			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ())
+			{
+				layout.FontDescription = new Gtk.Style().FontDescription;
+				layout.FontDescription.Weight = Pango.Weight.Bold;
+				layout.Ellipsize = Pango.EllipsizeMode.None;
+				
+				Pango.Rectangle inkRect, logicalRect;
+				
+				layout.Width = Pango.Units.FromPixels (size);
+				layout.SetText (WeatherController.Weather.Temp + AbstractWeatherSource.TempUnit);
+				if (IsSmall)
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (size / 2.5));
+				else
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (size / 3.5));
+				
+				layout.GetPixelExtents (out inkRect, out logicalRect);
+				cr.MoveTo ((size - inkRect.Width) / 2, size - logicalRect.Height);
+				
+				Pango.CairoHelper.LayoutPath (cr, layout);
+				cr.LineWidth = 2;
+				cr.Color = new Cairo.Color (0, 0, 0, 0.8);
+				cr.StrokePreserve ();
+				
+				cr.Color = new Cairo.Color (1, 1, 1, 0.8);
+				cr.Fill ();
+				
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();				
+			}
 		}
 		
 		protected override Gdk.Pixbuf ProcessPixbuf (Gdk.Pixbuf pbuf)
