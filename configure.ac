@@ -138,21 +138,18 @@ DOCKY_WINDOWING_LIBS="-r:$(pwd)/build/Docky.Windowing.dll"
 AC_SUBST([DOCKY_WINDOWING_LIBS])
 
 
-PKG_CHECK_MODULES([NUNIT], [nunit], have_nunit=yes, have_nunit=no)
-AM_CONDITIONAL(HAVE_NUNIT, test "$have_nunit" = "yes")
-if test "$have_nunit" != "yes" ; then
-   NUNIT_LIBS=
-fi
-AC_SUBST([NUNIT_LIBS])
-
 dnl {{{ enable debug release configuration
 AC_ARG_ENABLE(debug,
 	AC_HELP_STRING([--enable-debug],
-		[Use 'DEBUG' Configuration [default=YES]]),
+		[Use 'DEBUG' Configuration [default=NO]]),
 		enable_debug=yes, enable_debug=no)
 AM_CONDITIONAL(ENABLE_DEBUG, test "x$enable_debug" = "xyes")
 if test "x$enable_debug" = "xyes" ; then
 	CONFIG_REQUESTED="yes"
+	MONO_DEBUG_ARGS="--debug"
+	AC_SUBST(MONO_DEBUG_ARGS)
+	DOCKY_DEBUG_ARGS="--debug"
+	AC_SUBST(DOCKY_DEBUG_ARGS)
 fi
 dnl }}}
 
@@ -161,7 +158,7 @@ AC_ARG_ENABLE(release,
 	AC_HELP_STRING([--enable-release],
 		[Use 'RELEASE' Configuration [default=NO]]),
 		enable_release=yes, enable_release=no)
-AM_CONDITIONAL(ENABLE_RELEASE, test x$enable_release = xyes)
+AM_CONDITIONAL(ENABLE_RELEASE, test "x$enable_release" = "xyes")
 if test "x$enable_release" = "xyes" ; then
 	CONFIG_REQUESTED="yes"
 fi
@@ -256,7 +253,7 @@ ${PACKAGE}-${VERSION}
     Mono Runtime:       ${MONO}
 
   Build/Development
+    Debug Build:        ${enable_debug}
     Release Build:      ${enable_release}
-    NUnit:              ${have_nunit}
 
 EOF
