@@ -194,14 +194,12 @@ namespace Clock
 			else
 				HoverText = DateTime.Now.ToString ("ddd, MMM dd h:mm tt");
 			
-			if (ShowDigital) {
-				if (Square)
-					MakeSquareDigitalIcon (surface);
-				else
-					MakeRectangularDigitalIcon (surface);
-			} else {
+			if (!ShowDigital)
 				MakeAnalogIcon (surface.Context, Math.Min (surface.Width, surface.Height));
-			}
+			else if (Square)
+				MakeSquareDigitalIcon (surface);
+			else
+				MakeRectangularDigitalIcon (surface);
 		}
 		
 		void MakeSquareDigitalIcon (DockySurface surface)
@@ -457,8 +455,8 @@ namespace Clock
 		public void ShowSettings ()
 		{
 			if (ClockThemeSelector.instance == null)
-					ClockThemeSelector.instance = new ClockThemeSelector (this);
-				ClockThemeSelector.instance.Show (); 
+				ClockThemeSelector.instance = new ClockThemeSelector (this);
+			ClockThemeSelector.instance.Show (); 
 		}
 		
 		public override void Dispose ()
@@ -467,6 +465,7 @@ namespace Clock
 				ClockThemeSelector.instance.Destroy ();
 				ClockThemeSelector.instance = null;
 			}
+			painter.Dispose ();
 			if (timer > 0)
 				GLib.Source.Remove (timer);
 			base.Dispose ();
