@@ -383,13 +383,14 @@ namespace Docky.Windowing
 			foreach (GLib.File file in DesktopFileSystemCacheFiles) {
 				GLib.FileMonitor mon = file.Monitor (GLib.FileMonitorFlags.None, null);
 				mon.RateLimit = 2500;
-				mon.Changed += delegate {
-					DockServices.System.RunOnThread (() => {
-						lock (update_lock) {
-							ProcessAndMergeSystemCacheFile (file, desktop_items);
-							DesktopItemsChanged ();
-						}   
-					});
+				mon.Changed += delegate(object o, GLib.ChangedArgs args) {
+					if (args.EventType == GLib.FileMonitorEvent.ChangesDoneHint)
+						DockServices.System.RunOnThread (() => {
+							lock (update_lock) {
+								ProcessAndMergeSystemCacheFile (file, desktop_items);
+								DesktopItemsChanged ();
+							}   
+						});
 				};
 			}
 		}
@@ -673,8 +674,6 @@ namespace Docky.Windowing
 					string name = NameForPid (pids.ElementAt (currentPid));
 					if (exec_to_desktop_items.ContainsKey (name)) {
 						foreach (DesktopItem s in exec_to_desktop_items[name]) {
-							//if (string.IsNullOrEmpty (s))
-							//	continue;
 							yield return s;
 							matched = true;
 						}
@@ -690,12 +689,12 @@ namespace Docky.Windowing
 					foreach (string cmd in command_line) {
 						if (exec_to_desktop_items.ContainsKey (cmd)) {
 							foreach (DesktopItem s in exec_to_desktop_items[cmd]) {
-								//if (string.IsNullOrEmpty (s))
-								//	continue;
 								yield return s;
 								matched = true;
 							}
 						}
+						if (matched)
+							break;
 					}
 					
 					// if we found a match, bail.
