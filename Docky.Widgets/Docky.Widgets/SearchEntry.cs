@@ -524,6 +524,8 @@ namespace Docky.Widgets
                         layout.FontDescription.Dispose ();
                     layout.Dispose ();
                 }
+                
+                base.Dispose ();
             }
         }
     }
