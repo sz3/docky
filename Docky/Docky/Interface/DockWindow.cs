@@ -2662,6 +2662,9 @@ namespace Docky.Interface
 				}
 				
 				cr.Paint ();
+
+				(cr.Target as IDisposable).Dispose ();
+
 				rendering = false;
 				
 				//now after rendering we can set the new HoveredItem

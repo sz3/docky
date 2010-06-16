@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2010 Rico Tzschichholz
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -562,6 +563,8 @@ namespace Docky.Menus
 				
 				cr.Operator = Operator.Source;
 				background_buffer.Internal.Show (cr, 0, 0);
+
+				(cr.Target as IDisposable).Dispose ();
 			}
 			
 			return base.OnExposeEvent (evnt);
