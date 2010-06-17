@@ -57,10 +57,11 @@ namespace Docky
 			Icon = PluginManager.DefaultPluginIcon;
 			
 			if (PluginManager.AddinMetadata[Addin].ContainsKey ("icon")) {
-				string addinIcon = PluginManager.AddinMetadata[Addin]["icon"];
-				if (addinIcon.EndsWith ("@"))
-					addinIcon += PluginManager.AddinMetadata[Addin]["AssemblyFullName"];
-				Icon = string.Format ("{0};;{1}", addinIcon, Icon);
+				if (PluginManager.AddinMetadata[Addin]["icon"].EndsWith ("@"))
+					ForcePixbuf = DockServices.Drawing.LoadIcon (PluginManager.AddinMetadata[Addin]["icon"] + 
+						PluginManager.AddinMetadata[Addin]["AssemblyFullName"], 128, -1);
+				else
+					Icon = string.Format ("{0};;{1}", PluginManager.AddinMetadata[Addin]["icon"], Icon);
 			}
 				
 			HelpButton = new Gtk.Button ();
@@ -133,15 +134,6 @@ namespace Docky
 				RemoveUserButton (ConfigButton);
 			
 			AddUserButton (HelpButton);
-			
-			/*
-			if (Provider == null)
-				Icon = PluginManager.DefaultPluginIcon;
-			else if (Provider.Icon.IndexOf ("@") == -1)
-				Icon = Provider.Icon;
-			else
-				ForcePixbuf = DockServices.Drawing.LoadIcon (Provider.Icon, 128, -1);
-			*/
 		}
 		
 		public override void OnActiveChanged ()
