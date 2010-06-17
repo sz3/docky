@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -105,29 +106,32 @@ namespace Clock
 		{
 			string month = StartDate.ToString ("MMMM").ToUpper ();
 			
-			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-			
-			layout.FontDescription = new Gtk.Style().FontDescription;
-			layout.FontDescription.Weight = Pango.Weight.Bold;
-			layout.Ellipsize = Pango.EllipsizeMode.None;
-			layout.Width = Pango.Units.FromPixels (Allocation.Height);
-			if (month.Length > 8)
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (0.9 * Allocation.Height / 6));
-			else
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (Allocation.Height / 6);
-			
-			cr.Save ();
-			cr.Color = new Cairo.Color (1, 1, 1, .5);
-			layout.SetText (month);
-			
-			Pango.Rectangle inkRect, logicalRect;
-			layout.GetPixelExtents (out inkRect, out logicalRect);
-			cr.Rotate (Math.PI / -2.0);
-			cr.MoveTo ((Allocation.Height - inkRect.Width) / 2 - Allocation.Height, Allocation.Width / 9 - logicalRect.Height);
-			
-			Pango.CairoHelper.LayoutPath (cr, layout);
-			cr.Fill ();
-			cr.Restore ();
+			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ()) {
+				layout.FontDescription = new Gtk.Style().FontDescription;
+				layout.FontDescription.Weight = Pango.Weight.Bold;
+				layout.Ellipsize = Pango.EllipsizeMode.None;
+				layout.Width = Pango.Units.FromPixels (Allocation.Height);
+				if (month.Length > 8)
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (0.9 * Allocation.Height / 6));
+				else
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (Allocation.Height / 6);
+				
+				cr.Save ();
+				cr.Color = new Cairo.Color (1, 1, 1, .5);
+				layout.SetText (month);
+				
+				Pango.Rectangle inkRect, logicalRect;
+				layout.GetPixelExtents (out inkRect, out logicalRect);
+				cr.Rotate (Math.PI / -2.0);
+				cr.MoveTo ((Allocation.Height - inkRect.Width) / 2 - Allocation.Height, Allocation.Width / 9 - logicalRect.Height);
+				
+				Pango.CairoHelper.LayoutPath (cr, layout);
+				cr.Fill ();
+				cr.Restore ();
+				
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
+			}
 		}
 		
 		void RenderHeader (Context cr, DateTime start)
@@ -137,25 +141,28 @@ namespace Clock
 			
 			DateTime day = CalendarStartDate;
 			
-			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-			
-			layout.FontDescription = new Gtk.Style().FontDescription;
-			layout.FontDescription.Weight = Pango.Weight.Bold;
-			layout.Ellipsize = Pango.EllipsizeMode.None;
-			layout.Width = Pango.Units.FromPixels (offsetSize);
-			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (0.625 * LineHeight));
-			
-			cr.Color = new Cairo.Color (1, 1, 1, .5);
-			for (int i = 0; i < 7; i++) {
-				layout.SetText (day.ToString ("ddd").ToUpper ());
+			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ()) {
+				layout.FontDescription = new Gtk.Style().FontDescription;
+				layout.FontDescription.Weight = Pango.Weight.Bold;
+				layout.Ellipsize = Pango.EllipsizeMode.None;
+				layout.Width = Pango.Units.FromPixels (offsetSize);
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (0.625 * LineHeight));
 				
-				Pango.Rectangle inkRect, logicalRect;
-				layout.GetPixelExtents (out inkRect, out logicalRect);
-				cr.MoveTo (offsetSize + offsetSize * i + (offsetSize - inkRect.Width) / 2, centerLine - logicalRect.Height);
+				cr.Color = new Cairo.Color (1, 1, 1, .5);
+				for (int i = 0; i < 7; i++) {
+					layout.SetText (day.ToString ("ddd").ToUpper ());
+					
+					Pango.Rectangle inkRect, logicalRect;
+					layout.GetPixelExtents (out inkRect, out logicalRect);
+					cr.MoveTo (offsetSize + offsetSize * i + (offsetSize - inkRect.Width) / 2, centerLine - logicalRect.Height);
+					
+					Pango.CairoHelper.LayoutPath (cr, layout);
+					cr.Fill ();
+					day = day.AddDays (1);
+				}
 				
-				Pango.CairoHelper.LayoutPath (cr, layout);
-				cr.Fill ();
-				day = day.AddDays (1);
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
 			}
 		}
 		
@@ -166,54 +173,58 @@ namespace Clock
 			int centerLine = LineHeight + LineHeight * line + ((Allocation.Height % LineHeight) / 2);
 			int dayOffset = 0;
 			
-			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-			Pango.Rectangle inkRect, logicalRect;
-			
-			layout.FontDescription = new Gtk.Style().FontDescription;
-			layout.Ellipsize = Pango.EllipsizeMode.None;
-			layout.Width = Pango.Units.FromPixels (offsetSize);
-			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (0.625 * LineHeight));
-			
-			for (int i = 0; i < 7; i++) {
-				layout.FontDescription.Weight = Pango.Weight.Normal;
+			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ()) {
+				Pango.Rectangle inkRect, logicalRect;
 				
-				DateTime day = lineStart.AddDays (dayOffset);
+				layout.FontDescription = new Gtk.Style().FontDescription;
+				layout.Ellipsize = Pango.EllipsizeMode.None;
+				layout.Width = Pango.Units.FromPixels (offsetSize);
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (0.625 * LineHeight));
 				
-				if (day.Month == CalendarStartDate.AddDays (6).Month)
-					cr.Color = new Cairo.Color (1, 1, 1);
-				else
-					cr.Color = new Cairo.Color (1, 1, 1, 0.5);
-				
-				if (day.Date == DateTime.Today)
-				{
-					layout.FontDescription.Weight = Pango.Weight.Bold;
-					Gdk.Color color = Style.Backgrounds [(int) StateType.Selected].SetMinimumValue (100);
-					cr.Color = new Cairo.Color ((double) color.Red / ushort.MaxValue,
-												(double) color.Green / ushort.MaxValue,
-												(double) color.Blue / ushort.MaxValue,
-												1.0);
+				for (int i = 0; i < 7; i++) {
+					layout.FontDescription.Weight = Pango.Weight.Normal;
+					
+					DateTime day = lineStart.AddDays (dayOffset);
+					
+					if (day.Month == CalendarStartDate.AddDays (6).Month)
+						cr.Color = new Cairo.Color (1, 1, 1);
+					else
+						cr.Color = new Cairo.Color (1, 1, 1, 0.5);
+					
+					if (day.Date == DateTime.Today)
+					{
+						layout.FontDescription.Weight = Pango.Weight.Bold;
+						Gdk.Color color = Style.Backgrounds [(int) StateType.Selected].SetMinimumValue (100);
+						cr.Color = new Cairo.Color ((double) color.Red / ushort.MaxValue,
+													(double) color.Green / ushort.MaxValue,
+													(double) color.Blue / ushort.MaxValue,
+													1.0);
+					}
+					dayOffset++;
+					
+					layout.SetText (string.Format ("{0:00}", day.Day));
+					layout.GetPixelExtents (out inkRect, out logicalRect);
+					cr.MoveTo (offsetSize + offsetSize * i + (offsetSize - inkRect.Width) / 2, centerLine - logicalRect.Height);
+					
+					Pango.CairoHelper.LayoutPath (cr, layout);
+					cr.Fill ();
 				}
-				dayOffset++;
 				
-				layout.SetText (string.Format ("{0:00}", day.Day));
+				cr.Color = new Cairo.Color (1, 1, 1, 0.4);
+				int woy = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear (lineStart.AddDays (6), 
+																			 DateTimeFormatInfo.CurrentInfo.CalendarWeekRule, 
+																			 DateTimeFormatInfo.CurrentInfo.FirstDayOfWeek);
+				layout.FontDescription.Weight = Pango.Weight.Bold;
+				layout.SetText (string.Format ("W{0:00}", woy));
 				layout.GetPixelExtents (out inkRect, out logicalRect);
-				cr.MoveTo (offsetSize + offsetSize * i + (offsetSize - inkRect.Width) / 2, centerLine - logicalRect.Height);
+				cr.MoveTo (offsetSize * 8, centerLine - logicalRect.Height);
 				
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.Fill ();
+				
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
 			}
-			
-			cr.Color = new Cairo.Color (1, 1, 1, 0.4);
-			int woy = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear (lineStart.AddDays (6), 
-																		 DateTimeFormatInfo.CurrentInfo.CalendarWeekRule, 
-																		 DateTimeFormatInfo.CurrentInfo.FirstDayOfWeek);
-			layout.FontDescription.Weight = Pango.Weight.Bold;
-			layout.SetText (string.Format ("W{0:00}", woy));
-			layout.GetPixelExtents (out inkRect, out logicalRect);
-			cr.MoveTo (offsetSize * 8, centerLine - logicalRect.Height);
-			
-			Pango.CairoHelper.LayoutPath (cr, layout);
-			cr.Fill ();
 		}
 		
 		protected override void OnShown ()

@@ -363,6 +363,8 @@ namespace Docky.Interface
 				Pango.CairoHelper.LayoutPath (surface.Context, layout);
 				surface.Context.Color = HoverTextManager.IsLight ? new Cairo.Color (0.1, 0.1, 0.1) : new Cairo.Color (1, 1, 1);
 				surface.Context.Fill ();
+				
+				layout.Context.Dispose ();
 			}
 			
 			return surface;
@@ -2660,6 +2662,9 @@ namespace Docky.Interface
 				}
 				
 				cr.Paint ();
+
+				(cr.Target as IDisposable).Dispose ();
+
 				rendering = false;
 				
 				//now after rendering we can set the new HoveredItem

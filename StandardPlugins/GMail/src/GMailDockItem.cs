@@ -209,6 +209,11 @@ namespace GMail
 					delegate {
 						DockServices.System.Open (BaseUrl + "/#compose");
 					}));
+				items.Add (new MenuItem (Catalog.GetString ("View C_ontacts"),
+					"addressbook",
+					delegate {
+						DockServices.System.Open (BaseUrl + "/#contacts");
+					}));
 				
 				if (Atom.HasUnread) {
 					items.Add (new SeparatorMenuItem (Catalog.GetString ("New Mail")));
