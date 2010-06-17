@@ -32,8 +32,6 @@ namespace CPUMonitor
 			}
 		}
 		
-		public override string Icon { get { return "system"; } }
-		
 		#endregion
 
 		CPUMonitorDockItem monitor;

@@ -7,6 +7,7 @@
 	name="Desktop"
 	description="Show Desktop Toggler"
 	author="Rico Tzschichholz"
+	icon="desktop"
 >
  
  	<Dependencies>

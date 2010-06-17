@@ -7,6 +7,7 @@
 	name="GMail"
 	description="Check GMail"
 	author="Robert Dyer"
+	icon="gmail"
 >
  
  	<Dependencies>

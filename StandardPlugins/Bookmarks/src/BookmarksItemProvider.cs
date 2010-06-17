@@ -145,10 +145,7 @@ namespace Bookmarks
 			get {
 				return "Bookmark Items";
 			}
-		}
-		
-		public override string Icon { get { return "folder-home;;user-home"; } }
-		
+		}		
 		
 		protected override bool OnCanAcceptDrop (string uri)
 		{

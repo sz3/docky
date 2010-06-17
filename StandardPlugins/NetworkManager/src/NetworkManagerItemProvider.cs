@@ -32,8 +32,6 @@ namespace NetworkManagerDocklet
 			}
 		}
 		
-		public override string Icon { get { return "nm-device-wired"; } }
-		
 		#endregion
 
 		NetworkManagerDocklet manager;

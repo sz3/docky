@@ -7,6 +7,7 @@
 	name="Recent Documents"
 	description="Access to your recent documents"
 	author="Chris Szikszoy, Robert Dyer"
+	icon="folder-recent;;document-open-recent"
 >
  
  	<Dependencies>

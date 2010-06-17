@@ -7,6 +7,7 @@
 	name="Clock"
 	description="What time is it?"
 	author="Jason Smith, Robert Dyer"
+	icon="clock"
 >
  
  	<Dependencies>

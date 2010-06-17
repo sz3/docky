@@ -37,12 +37,6 @@ namespace RecentDocuments
 			}
 		}
 		
-		public override string Icon {
-			get {
-				return "folder-recent;;document-open-recent";
-			}
-		}
-		
 		#endregion
 		
 		RecentDocumentsItem docs;

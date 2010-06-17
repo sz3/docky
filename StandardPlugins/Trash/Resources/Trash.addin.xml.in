@@ -7,6 +7,7 @@
 	name="Trash"
 	description="Have a look at your trash!"
 	author="Chris Szikszoy, Robert Dyer"
+	icon="trashcan_full"
 >
  
  	<Dependencies>

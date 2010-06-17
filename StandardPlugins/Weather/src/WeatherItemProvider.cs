@@ -38,8 +38,6 @@ namespace WeatherDocklet
 			}
 		}
 		
-		public override string Icon { get { return "weather-clear"; } }
-		
 		#endregion
 		
 		AbstractDockItem item;
