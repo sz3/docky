@@ -337,10 +337,14 @@ namespace Docky
 				if (!AddinMetadata.ContainsKey (addin))
 					AddinMetadata[addin] = new Dictionary<string, string> ();
 				
-				AddinMetadata[addin]["AssemblyFullName"] = addinAssembly.FullName;
-				
 				foreach (XmlAttribute a in addinManifest.SelectSingleNode ("/Addin").Attributes)
-					AddinMetadata [addin] [a.Name] = a.Value;
+					AddinMetadata [addin] [a.Name] = a.Value;	
+			}
+			
+			AddinMetadata [addin] ["AssemblyFullName"] = addinAssembly.FullName;
+			
+			if (AddinMetadata [addin].ContainsKey ("icon") && AddinMetadata [addin] ["icon"].EndsWith ("@")) {
+				AddinMetadata [addin] ["icon"] = string.Format ("{0}{1}", AddinMetadata [addin] ["icon"], addinAssembly.FullName);
 			}
 		}
 	}

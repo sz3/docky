@@ -56,12 +56,11 @@ namespace Docky
 			
 			Icon = PluginManager.DefaultPluginIcon;
 			
-			if (PluginManager.AddinMetadata[Addin].ContainsKey ("icon")) {
-				if (PluginManager.AddinMetadata[Addin]["icon"].EndsWith ("@"))
-					ForcePixbuf = DockServices.Drawing.LoadIcon (PluginManager.AddinMetadata[Addin]["icon"] + 
-						PluginManager.AddinMetadata[Addin]["AssemblyFullName"], 128, -1);
+			if (PluginManager.AddinMetadata [Addin].ContainsKey ("icon")) {
+				if (PluginManager.AddinMetadata [Addin] ["icon"].Contains ("@"))
+					ForcePixbuf = DockServices.Drawing.LoadIcon (PluginManager.AddinMetadata [Addin] ["icon"], 128, -1);
 				else
-					Icon = string.Format ("{0};;{1}", PluginManager.AddinMetadata[Addin]["icon"], Icon);
+					Icon = string.Format ("{0};;{1}", PluginManager.AddinMetadata [Addin] ["icon"], Icon);
 			}
 				
 			HelpButton = new Gtk.Button ();
