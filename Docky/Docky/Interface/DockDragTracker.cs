@@ -58,6 +58,8 @@ namespace Docky.Interface
 		public DockWindow Owner { get; private set; }
 		
 		static bool lockDrags = prefs.Get<bool> ("LockDrags", false);
+		static bool providersAcceptDrops = prefs.Get<bool> ("ProvidersAcceptDrops", true);
+
 		
 		bool externalDragActive;
 		public bool ExternalDragActive {
@@ -318,7 +320,7 @@ namespace Docky.Interface
 			
 			if (ItemAcceptsDrop ()) {
 				item.AcceptDrop (drag_data);
-			} else {
+			} else if (providersAcceptDrops) {
 				AbstractDockItem rightMost = Owner.RightMostItem;
 				int newPosition = rightMost != null ? rightMost.Position : 0;
 			

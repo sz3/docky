@@ -27,6 +27,7 @@ using Mono.Unix;
 using Wnck;
 
 using Docky.Menus;
+using Docky.Services;
 using Docky.Windowing;
 
 namespace Docky.Items
@@ -35,6 +36,9 @@ namespace Docky.Items
 	{
 		public static FileApplicationProvider WindowManager;
 		static List<FileApplicationProvider> Providers = new List<FileApplicationProvider> ();
+		
+		static IPreferences prefs = DockServices.Preferences.Get <FileApplicationProvider> ();
+		static bool allowPinToDock = prefs.Get<bool> ("AllowPinToDock", true);
 		
 		internal static IEnumerable<Wnck.Window> ManagedWindows {
 			get {
@@ -402,7 +406,7 @@ namespace Docky.Items
 		{
 			MenuList list = base.GetMenuItems (item);
 			
-			if (item is ApplicationDockItem && !items.ContainsValue (item))
+			if (item is ApplicationDockItem && !items.ContainsValue (item) && allowPinToDock)
 				list[MenuListContainer.Actions].Insert (0, 
 					new MenuItem (Catalog.GetString ("_Pin to Dock"), "[monochrome]pin.svg@" + GetType ().Assembly.FullName, (o, a) => PinToDock (item as ApplicationDockItem)));
 			
