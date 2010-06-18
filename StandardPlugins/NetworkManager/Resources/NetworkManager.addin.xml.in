@@ -7,6 +7,7 @@
 	name="Network Manager"
 	description="Manage your networks!"
 	author="Chris Szikszoy, Jason Smith"
+	icon="nm-device-wired"
 >
  
  	<Dependencies>

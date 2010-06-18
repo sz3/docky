@@ -7,6 +7,7 @@
 	name="Battery Monitor"
 	description="Monitor your battery."
 	author="Jason Smith, Robert Dyer"
+	icon="battery"
 >
  
  	<Dependencies>

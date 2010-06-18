@@ -54,6 +54,15 @@ namespace Docky
 			Description = Addin.Description.Description;
 			SubDescriptionText = Addin.Description.Author;
 			
+			Icon = PluginManager.DefaultPluginIcon;
+			
+			if (PluginManager.AddinMetadata [Addin].ContainsKey ("icon")) {
+				if (PluginManager.AddinMetadata [Addin] ["icon"].Contains ("@"))
+					ForcePixbuf = DockServices.Drawing.LoadIcon (PluginManager.AddinMetadata [Addin] ["icon"], 128, -1);
+				else
+					Icon = string.Format ("{0};;{1}", PluginManager.AddinMetadata [Addin] ["icon"], Icon);
+			}
+				
 			HelpButton = new Gtk.Button ();
 			HelpButton.Image = new Gtk.Image (Gtk.Stock.Help, Gtk.IconSize.SmallToolbar);
 			HelpButton.Clicked += delegate {
@@ -121,16 +130,9 @@ namespace Docky
 			if (Enabled && PluginManager.ConfigForAddin (Addin.Id) != null)
 				AddUserButton (ConfigButton);
 			else
-				RemoveUserButton (ConfigButton);			
+				RemoveUserButton (ConfigButton);
 			
 			AddUserButton (HelpButton);
-			
-			if (Provider == null)
-				Icon = PluginManager.DefaultPluginIcon;
-			else if (Provider.Icon.IndexOf ("@") == -1)
-				Icon = Provider.Icon;
-			else
-				ForcePixbuf = DockServices.Drawing.LoadIcon (Provider.Icon, 128, -1);
 		}
 		
 		public override void OnActiveChanged ()

@@ -62,6 +62,7 @@ PROJECT_REFERENCES= \
 
 REFERENCES =  \
 	System \
+	System.Xml \
 	System.Core \
 	Mono.Posix \
 	Mono.GetOptions \

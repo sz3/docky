@@ -7,6 +7,7 @@
 	name="Bookmarks"
 	description="Manage bookmarks"
 	author="Chris Szikszoy"
+	icon="folder-home;;user-home"
 >
  
  	<Dependencies>

@@ -39,10 +39,6 @@ namespace Mounter
 			get { return false; }
 		}
 		
-		public override string Icon {
-			get { return "drive-removable-media-usb;;drive-removable-media"; }
-		}
-		
 		#endregion
 		
 		List<MountItem> Mounts = new List<MountItem> ();

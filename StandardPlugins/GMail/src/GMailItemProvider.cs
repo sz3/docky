@@ -33,8 +33,6 @@ namespace GMail
 			}
 		}
 		
-		public override string Icon { get { return "gmail"; } }
-		
 		#endregion
 		
 		public void ItemVisibilityChanged (AbstractDockItem item, bool newVisible)
