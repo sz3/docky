@@ -842,8 +842,8 @@ namespace Docky.Windowing
 					vexec = "ooffice" + exec.Split (' ') [1];
 				
 				// for wine apps
-				} else if ((exec.StartsWith ("env WINEPREFIX=") && exec.Contains (" wine ")) ||
-						exec.StartsWith ("wine ")) {
+				} else if ((exec.Contains ("env WINEPREFIX=") && exec.Contains (" wine ")) ||
+						exec.Contains ("wine ")) {
 					int startIndex = exec.IndexOf ("wine ") + 5; // length of 'wine '
 					// CommandLineForPid already splits based on \\ and takes the last entry, so do the same here
 					vexec = exec.Substring (startIndex).Split (new [] {@"\\"}, StringSplitOptions.RemoveEmptyEntries).Last ();
