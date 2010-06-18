@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -35,6 +36,9 @@ namespace Docky.Interface
 		public event EventHandler HiddenChanged;
 		public event EventHandler DockHoveredChanged;
 		
+		static IPreferences prefs = DockServices.Preferences.Get <AutohideManager> ();
+		static uint unhideDelay = (uint) prefs.Get<int> ("UnhideDelay", 0);
+		
 		Gdk.Rectangle cursor_area, intersect_area, last_known_geo;
 		Wnck.Screen screen;
 		CursorTracker tracker;
@@ -44,17 +48,20 @@ namespace Docky.Interface
 		
 		bool WindowIntersectingOther { get; set; }
 		
-		bool dockHoverd;
+		bool dockHovered;
 		public bool DockHovered {
-			get { return dockHoverd; }
+			get { return dockHovered; }
 			private set {
-				if (dockHoverd == value)
+				if (dockHovered == value)
 					return;
 				
-				dockHoverd = value;
+				dockHovered = value;
+				
 				OnDockHoveredChanged ();
 			}
 		}
+		
+		uint event_timer = 0;
 		
 		bool hidden;
 		public bool Hidden {
@@ -63,8 +70,20 @@ namespace Docky.Interface
 				if (hidden == value)
 					return;
 				
-				hidden = value; 
-				OnHiddenChanged ();
+				if (!hidden || !DockHovered || unhideDelay == 0) {
+					hidden = value; 
+					
+					OnHiddenChanged ();
+				} else {
+					if (event_timer > 0)
+						return;
+					event_timer = GLib.Timeout.Add (unhideDelay, delegate {
+						hidden = value; 
+						OnHiddenChanged ();
+						event_timer = 0;
+						return false;
+					});
+				}
 			} 
 		}
 		
@@ -76,9 +95,8 @@ namespace Docky.Interface
 					return;
 				
 				behavior = value; 
-				if (behavior == AutohideType.None) {
-					Hidden = false;
-				}
+				
+				SetHidden ();
 			} 
 		}
 		
@@ -258,6 +276,9 @@ namespace Docky.Interface
 		#region IDisposable implementation
 		public void Dispose ()
 		{
+			if (event_timer > 0)
+				GLib.Source.Remove (event_timer);
+			
 			if (screen != null) {
 				screen.ActiveWindowChanged -= HandleActiveWindowChanged;
 				if (screen.ActiveWindow != null)
