@@ -132,7 +132,8 @@ namespace Timer
 										1.0);
 			
 			double percent = (double) Remaining / (double) Length;
-			percent -= ((double) (DateTime.UtcNow - LastRender).TotalMilliseconds / 1000.0) * (1 / (double) Length);
+			if (Running)
+				percent -= ((double) (DateTime.UtcNow - LastRender).TotalMilliseconds / 1000.0) / (double) Length;
 			
 			if (Remaining > 0) {
 				cr.MoveTo (center, center);
