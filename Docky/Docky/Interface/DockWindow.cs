@@ -2647,16 +2647,16 @@ namespace Docky.Interface
 				} else {
 					switch (Position) {
 					case DockPosition.Top:
-						cr.SetSource (main_buffer.Internal, 0, 0 - HideOffset * DockHeight);
+						cr.SetSource (main_buffer.Internal, 0, 0 - HideOffset * ZoomedDockHeight);
 						break;
 					case DockPosition.Left:
-						cr.SetSource (main_buffer.Internal, 0 - HideOffset * DockHeight, 0);
+						cr.SetSource (main_buffer.Internal, 0 - HideOffset * ZoomedDockHeight, 0);
 						break;
 					case DockPosition.Right:
-						cr.SetSource (main_buffer.Internal, HideOffset * DockHeight, 0);
+						cr.SetSource (main_buffer.Internal, HideOffset * ZoomedDockHeight, 0);
 						break;
 					case DockPosition.Bottom:
-						cr.SetSource (main_buffer.Internal, 0, HideOffset * DockHeight);
+						cr.SetSource (main_buffer.Internal, 0, HideOffset * ZoomedDockHeight);
 						break;
 					}
 				}
