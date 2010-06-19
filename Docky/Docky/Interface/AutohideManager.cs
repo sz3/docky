@@ -67,6 +67,11 @@ namespace Docky.Interface
 		public bool Hidden {
 			get { return hidden; } 
 			private set { 
+				if (value && event_timer > 0) {
+					GLib.Source.Remove (event_timer);
+					event_timer = 0;
+				}
+				
 				if (hidden == value)
 					return;
 				
