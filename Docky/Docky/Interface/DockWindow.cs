@@ -2063,18 +2063,16 @@ namespace Docky.Interface
 				}
 				
 				icon_buffer.Clear ();
-				foreach (AbstractDockItem adi in Items) {
+				foreach (AbstractDockItem adi in Items)
 					DrawItem (icon_buffer, dockArea, adi);
-				}
 			
 				surface.Context.SetSource (icon_buffer.Internal, 0, 0);
 				surface.Context.PaintWithAlpha (1 - painterVisibility);
 			
 			} 
 			
-			if (Painter != null && painterVisibility > 0) {
+			if (Painter != null && painterVisibility > 0)
 				DrawPainter (surface, dockArea);
-			}
 			
 			if (ActiveGlow) {
 				Gdk.Color color = Style.BaseColors[(int) Gtk.StateType.Selected];
@@ -2101,7 +2099,7 @@ namespace Docky.Interface
 			if (DockOpacity < 1)
 				SetDockOpacity (surface);
 			
-			//Draw UrgentGlow which is visible when Docky is hidden and an item need attention
+			// Draw UrgentGlow which is visible when Docky is hidden and an item need attention
 			if (AutohideManager.Hidden && !ConfigurationMode && (!Preferences.FadeOnHide || Preferences.FadeOpacity == 0)) {
 				foreach (AbstractDockItem adi in Items) {
 					double diff = (render_time - adi.StateSetTime (ItemState.Urgent)).TotalMilliseconds;
@@ -2113,10 +2111,10 @@ namespace Docky.Interface
 		
 						DrawValue val = DrawValues [adi];
 						DrawValue glowloc;
-						if (preferences.FadeOnHide)
-							glowloc = val.MoveIn (Position, IconSize * val.Zoom / 2 - DockHeight);
+						if (Preferences.FadeOnHide)
+							glowloc = val.MoveIn (Position, -urgent_glow_buffer.Height / 2 + DockHeightBuffer);
 						else
-							glowloc = val.MoveIn (Position, IconSize * val.Zoom / 2);
+							glowloc = val.MoveIn (Position, -urgent_glow_buffer.Height / 2 + DockHeightBuffer + ZoomedDockHeight);
 
 						double opacity = 0.2 + (0.75 * (Math.Sin (diff / PulseTime.TotalMilliseconds * 2 * Math.PI) + 1) / 2);
 						
