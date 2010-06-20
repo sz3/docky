@@ -34,6 +34,9 @@ namespace Docky.Items
 {
 	public class FileApplicationProvider : AbstractDockItemProvider
 	{
+		/// <summary>
+		/// The window manager.
+		/// </summary>
 		public static FileApplicationProvider WindowManager;
 		static List<FileApplicationProvider> Providers = new List<FileApplicationProvider> ();
 		
@@ -58,15 +61,30 @@ namespace Docky.Items
 			}
 		}
 		
+		/// <summary>
+		/// Occurs when window manager changed.
+		/// </summary>
 		public event EventHandler WindowManagerChanged;
 		
 		Dictionary<string, AbstractDockItem> items;
 		List<WnckDockItem> transient_items;
 		
+		/// <summary>
+		/// Gets the uris.
+		/// </summary>
+		/// <value>
+		/// The uris.
+		/// </value>
 		public IEnumerable<string> Uris {
 			get { return items.Keys.AsEnumerable (); }
 		}
 		
+		/// <summary>
+		/// Gets a value indicating whether this instance is window manager.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> if this instance is window manager; otherwise, <c>false</c>.
+		/// </value>
 		public bool IsWindowManager {
 			get { return WindowManager == this; }
 		}
@@ -83,10 +101,19 @@ namespace Docky.Items
 			}
 		}
 		
+		/// <summary>
+		/// Gets a value indicating whether this <see cref="Docky.Items.FileApplicationProvider"/> can be automaically disabled.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> if auto disable; otherwise, <c>false</c>.
+		/// </value>
 		public override bool AutoDisable { get { return false; } }
 		
 		bool longMatchInProgress = false;
 		
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Docky.Items.FileApplicationProvider"/> class.
+		/// </summary>
 		public FileApplicationProvider ()
 		{
 			items = new Dictionary<string, AbstractDockItem> ();
@@ -197,6 +224,9 @@ namespace Docky.Items
 			UpdateTransientItems ();
 		}
 		
+		/// <summary>
+		/// Updates the transient items.
+		/// </summary>
 		public void UpdateTransientItems ()
 		{
 			// if we are not a window-manager-provider then remove transient items
@@ -279,16 +309,37 @@ namespace Docky.Items
 				RemoveTransientItems (item.AsSingle ());
 		}
 		
+		/// <summary>
+		/// Raises the can accept drop event.
+		/// </summary>
+		/// <param name='uri'>
+		/// If set to <c>true</c> URI.
+		/// </param>
 		protected override bool OnCanAcceptDrop (string uri)
 		{
 			return true;
 		}
 
+		/// <summary>
+		/// Raises the accept drop event.
+		/// </summary>
+		/// <param name='uri'>
+		/// URI.
+		/// </param>
 		protected override AbstractDockItem OnAcceptDrop (string uri)
 		{
 			return Insert (uri);
 		}
 		
+		/// <summary>
+		/// Inserts the item.
+		/// </summary>
+		/// <returns>
+		/// Whether or not the item was inserted onto the dock.
+		/// </returns>
+		/// <param name='uri'>
+		/// The URIfor the 
+		/// </param>
 		public bool InsertItem (string uri)
 		{
 			return Insert (uri) != null;
@@ -325,6 +376,12 @@ namespace Docky.Items
 			return item;
 		}
 		
+		/// <summary>
+		/// Pins an <see cref="Docky.Items.ApplicationDockItem"/> to the dock.
+		/// </summary>
+		/// <param name='item'>
+		/// Item.
+		/// </param>
 		public void PinToDock (ApplicationDockItem item)
 		{
 			if (items.ContainsKey (item.OwnedItem.Uri.AbsoluteUri))
@@ -337,6 +394,9 @@ namespace Docky.Items
 			OnItemsChanged (null, null);
 		}
 		
+		/// <summary>
+		/// Sets this <see cref="Docky.Items.FileApplicationProvider"/> as the window manager.
+		/// </summary>
 		public void SetWindowManager ()
 		{
 			if (WindowManager == this)
@@ -349,6 +409,9 @@ namespace Docky.Items
 			OnWindowManagerChanged ();
 		}
 		
+		/// <summary>
+		/// Unsets this <see cref="Docky.Items.FileApplicationProvider"/> as the window manager.
+		/// </summary>
 		public void UnsetWindowManager ()
 		{
 			if (WindowManager != this)
