@@ -186,7 +186,8 @@ namespace Docky.Items
 
 		protected override ClickAnimation OnClicked (uint button, ModifierType mod, double xPercent, double yPercent)
 		{
-			if ((!ManagedWindows.Any () && button == 1) || button == 2) {
+			if ((!ManagedWindows.Any () && button == 1) || button == 2 || 
+				(button == 1 && (mod & ModifierType.ControlMask) == ModifierType.ControlMask)) {
 				Launch ();
 				return ClickAnimation.Bounce;
 			}
