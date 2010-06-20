@@ -759,7 +759,11 @@ namespace Docky.Interface
 				if (now - adi.StateSetTime (ItemState.Move) < SlideTime)
 					return true;
 				//Bouncing Items
-				if ((now - adi.LastClick) < BounceTime || (now - adi.StateSetTime (ItemState.Urgent)) < BounceTime)
+				if ((now - adi.LastClick) < BounceTime)
+					return true;
+				if ((adi.State & ItemState.Urgent) != ItemState.Urgent)
+					continue;
+				if ((now - adi.StateSetTime (ItemState.Urgent)) < BounceTime)
 					return true;
 				//Glowing Items
 				if ((now - adi.StateSetTime (ItemState.Urgent)) < DockServices.Theme.GlowTime)
