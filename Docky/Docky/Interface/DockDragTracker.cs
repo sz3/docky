@@ -292,7 +292,7 @@ namespace Docky.Interface
 		
 		public bool ProviderAcceptsDrop ()
 		{
-			if (drag_data == null)
+			if (drag_data == null || !providersAcceptDrops)
 				return false;
 			
 			foreach (string s in drag_data)
