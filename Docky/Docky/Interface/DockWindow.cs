@@ -1740,7 +1740,7 @@ namespace Docky.Interface
 				double offset = Math.Min (Math.Abs (cursorPosition - centerPosition), zoomSize);
 				
 				double offsetPercent;
-				if (ExternalDragActive) {
+				if (ExternalDragActive && DragTracker.ProviderAcceptsDrop ()) {
 					// Provide space for dropping between items
 					offset += offset * zoomSize / IconSize;
 					offsetPercent = Math.Min (1, offset / (zoomSize + ZoomedIconSize));
@@ -1762,7 +1762,7 @@ namespace Docky.Interface
 				// The .66 value comes from the area under the curve.  Dont ask me to explain it too much because it's too clever for me.
 				
 				// for external drags with no zoom, we pretend there is actually a zoom of 200%
-				if (ExternalDragActive && ZoomPercent == 1)
+				if (ExternalDragActive && ZoomPercent == 1 && DragTracker.ProviderAcceptsDrop ())
 					offset *= ZoomIn / 2.0;
 				else
 					offset *= zoomInPercent - 1;
