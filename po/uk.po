@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-06-02 22:46+0200\n"
-"PO-Revision-Date: 2010-05-26 16:10+0000\n"
+"POT-Creation-Date: 2010-06-12 21:06+0200\n"
+"PO-Revision-Date: 2010-06-02 21:46+0000\n"
 "Last-Translator: Sergiy Gavrylov <sergiovana@bigmir.net>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,30 +16,30 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-06-02 21:21+0000\n"
+"X-Launchpad-Export-Date: 2010-06-22 08:24+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:133
+#: ../Docky/Docky/ConfigurationWindow.cs:117
 msgid "Search Docklets..."
 msgstr "Знайти Доклети..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:148
+#: ../Docky/Docky/ConfigurationWindow.cs:132
 msgid "Search Helpers..."
 msgstr "Помічники пошуку..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:212
+#: ../Docky/Docky/ConfigurationWindow.cs:196
 msgid "Click on any dock to configure."
 msgstr "Позначте будь-який док для налаштування."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:213
+#: ../Docky/Docky/ConfigurationWindow.cs:197
 msgid "Drag any dock to reposition."
 msgstr "Перетягніть будь який док для переміщення."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:278
+#: ../Docky/Docky/ConfigurationWindow.cs:262
 msgid "Delete the currently selected dock?"
 msgstr "Вилучити вибраний док?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:280
+#: ../Docky/Docky/ConfigurationWindow.cs:264
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -47,22 +47,20 @@ msgstr ""
 "Якщо Ви оберете вилучення доку, всі налаштування \n"
 "для цього доку будуть безповоротньо втрачені."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:287
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
+#: ../Docky/Docky/ConfigurationWindow.cs:279
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:405
 msgid "_Delete Dock"
 msgstr "_Вилучити Док"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:401
-#: ../Docky/Docky/ConfigurationWindow.cs:421
+#: ../Docky/Docky/ConfigurationWindow.cs:381
 msgid "_Select"
 msgstr "_Вибрати"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:404
-#: ../Docky/Docky/ConfigurationWindow.cs:424
+#: ../Docky/Docky/ConfigurationWindow.cs:384
 msgid ".tar Archives"
 msgstr ".tar Архіви"
 
-#: ../Docky/Docky/DockletTile.cs:50
+#: ../Docky/Docky/DockletTile.cs:48
 msgid "Author"
 msgstr "Автор"
 
@@ -98,7 +96,7 @@ msgstr "Додати цей доклет до вибраного доку"
 msgid "Remove this docklet from the selected dock"
 msgstr "Вилучити цей доклет з вибраного доку"
 
-#: ../Docky/Docky/Docky.cs:121
+#: ../Docky/Docky/Docky.cs:119
 msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
@@ -108,7 +106,7 @@ msgstr ""
 msgid "Status"
 msgstr "Статус"
 
-#: ../Docky/Docky/HelperTile.cs:58
+#: ../Docky/Docky/HelperTile.cs:59
 msgid "Uninstall"
 msgstr "Видалити"
 
@@ -124,52 +122,52 @@ msgstr ""
 msgid "Disable this helper"
 msgstr ""
 
-#: ../Docky/Docky/HelperTile.cs:82
+#: ../Docky/Docky/HelperTile.cs:71
 msgid "Running"
 msgstr "Виконується"
 
-#: ../Docky/Docky/HelperTile.cs:82
+#: ../Docky/Docky/HelperTile.cs:71
 msgid "Stopped"
 msgstr "Зупинено"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:333
+#: ../Docky/Docky/Interface/DockPreferences.cs:331
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:684
+#: ../Docky/Docky/Interface/DockPreferences.cs:595
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr "<i>Завжди выдображати; максимізовані вікна не перекривають док.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:687
+#: ../Docky/Docky/Interface/DockPreferences.cs:598
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:690
+#: ../Docky/Docky/Interface/DockPreferences.cs:601
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Приховується, коли док заважає активному додатку.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:693
+#: ../Docky/Docky/Interface/DockPreferences.cs:604
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Приховується, коли док заважає будь-якому вікну.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:379
+#: ../Docky/Docky/Interface/DockWindow.cs:382
 msgid "Drag to reposition"
 msgstr "Перетягніть, що змінити розташування"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:391
-#: ../Docky/Docky/Interface/DockWindow.cs:405
+#: ../Docky/Docky/Interface/DockWindow.cs:394
+#: ../Docky/Docky/Interface/DockWindow.cs:408
 msgid "Drop to add to dock"
 msgstr ""
 
-#: ../Docky/Docky/Items/DockyItem.cs:133
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:223
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:239
+#: ../Docky/Docky/Items/DockyItem.cs:93
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:215
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "_Settings"
 msgstr "_Налаштування"
 
-#: ../Docky/Docky/Items/DockyItem.cs:134
+#: ../Docky/Docky/Items/DockyItem.cs:94
 msgid "_About"
 msgstr "_Про програму"
 
@@ -177,7 +175,7 @@ msgstr "_Про програму"
 msgid "_Help"
 msgstr "_Довідка"
 
-#: ../Docky/Docky/Items/DockyItem.cs:137
+#: ../Docky/Docky/Items/DockyItem.cs:95
 msgid "_Quit Docky"
 msgstr "_Вихід з  Docky"
 
@@ -186,46 +184,45 @@ msgid "Docky Settings"
 msgstr "Налаштування Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
-msgid "_Start When Computer Starts"
+msgid "_Start When User Logs In"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:155
 msgid "_Theme:"
 msgstr "_Тема:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:315
 msgid "_Install"
 msgstr "_Встановити"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:179
 msgid "<b>General Options</b>"
 msgstr "<b>Загалні налаштування</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:199
 msgid "<b>Dock Configuration</b>"
 msgstr "<b>Налаштування Dock</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:213
 msgid "Docks"
 msgstr "Доки"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:234
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:289
 msgid "All"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:235
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:290
 msgid "Enabled"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:236
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:291
 msgid "Disabled"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:268
 msgid "Docklets"
 msgstr "Доклети"
 
@@ -233,69 +230,69 @@ msgstr "Доклети"
 msgid "Usable"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:347
 msgid "Helpers"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:378
 msgid "_New Dock"
 msgstr "_Новий Док"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "None"
 msgstr "Нічого"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Autohide"
 msgstr "Автоматичне приховування"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:62
 msgid "Intellihide"
 msgstr "«Розумне» приховування"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:63
 msgid "Window Dodge"
 msgstr "Край вікна"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
 msgid "_Fade On Hide"
 msgstr "_Згасати при приховуванні"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:121
 msgid "_Icon Size:"
 msgstr "_Розмір значків:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:132
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:134
 msgid "_Hiding:"
 msgstr "_Приховування:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:158
 msgid "_Panel Mode"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:172
 msgid "3D Back_ground"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:186
 msgid "_Manage Windows Without Launcher"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:201
 msgid "_Zoom:"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:115
+#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:119
 #, csharp-format
 msgid "Drop to open with {0}"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:159
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:156
 msgid "New _Window"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:161
-#: ../StandardPlugins/Mounter/src/MountItem.cs:97
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:158
+#: ../StandardPlugins/Mounter/src/MountItem.cs:102
 msgid "_Open"
 msgstr ""
 
@@ -303,7 +300,7 @@ msgstr ""
 msgid "Reset Color"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:409
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:431
 msgid "_Pin to Dock"
 msgstr ""
 
@@ -345,23 +342,23 @@ msgstr ""
 msgid "Open Containing Folder"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:253
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:260
 msgid "Unma_ximize"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:256
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:263
 msgid "Ma_ximize"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:260
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:268
 msgid "_Restore"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:263
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:271
 msgid "Mi_nimize"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:266
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:275
 msgid "_Close All"
 msgstr ""
 
@@ -437,19 +434,19 @@ msgstr ""
 msgid "Computer"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:425
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:430
 msgid "Di_gital Clock"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:436
 msgid "24-Hour _Clock"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:442
 msgid "Show _Date"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:443
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:448
 msgid "Select _Theme"
 msgstr ""
 
@@ -457,7 +454,7 @@ msgstr ""
 msgid "Themes"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:62
+#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
 msgid "Theme"
 msgstr ""
 
@@ -478,39 +475,39 @@ msgstr ""
 msgid "minutes"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:201
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:174
 msgid "Click to set username and password."
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:255
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:230
 msgid "(no subject)"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:269
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:244
 #, csharp-format
 msgid "You have {0} new, unread messages"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:273
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:248
 #, csharp-format
 msgid "From: {0}"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:286
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:290
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:261
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:265
 msgid "Feed Error"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:295
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:270
 msgid "Invalid Username"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:299
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:303
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:274
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:278
 msgid "Network Error"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:308
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:283
 msgid "General Error"
 msgstr ""
 
@@ -533,19 +530,19 @@ msgstr[1] ""
 msgid "Checking mail..."
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:202
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:194
 msgid "_View "
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:207
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:199
 msgid "_Compose Mail"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:214
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:207
 msgid "New Mail"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:232
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:223
 msgid "Check _Mail"
 msgstr ""
 
@@ -565,11 +562,11 @@ msgstr ""
 msgid "From: "
 msgstr ""
 
-#: ../StandardPlugins/Mounter/src/MountItem.cs:99
+#: ../StandardPlugins/Mounter/src/MountItem.cs:105
 msgid "_Eject"
 msgstr ""
 
-#: ../StandardPlugins/Mounter/src/MountItem.cs:99
+#: ../StandardPlugins/Mounter/src/MountItem.cs:105
 msgid "_Unmount"
 msgstr ""
 
@@ -599,11 +596,11 @@ msgstr ""
 msgid "S_earch"
 msgstr ""
 
-#: ../StandardPlugins/NPR/src/Station.cs:77
+#: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
 msgstr ""
 
-#: ../StandardPlugins/NPR/src/Station.cs:78
+#: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
 msgstr ""
@@ -612,46 +609,47 @@ msgstr ""
 msgid "Fetching Information..."
 msgstr ""
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:66
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:72
 msgid "Click to add NPR stations."
 msgstr ""
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:105
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:111
 msgid "Home Page"
 msgstr ""
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:112
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:118
 msgid "Program Schedule"
 msgstr ""
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:119
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:125
 msgid "Donate"
 msgstr ""
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:126
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:132
 msgid "Live Streams"
 msgstr ""
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:164
+#: ../Docky/Docky/DockletTile.cs:55
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:170
 msgid "Settings"
 msgstr "Параметри"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:67
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:76
 msgid "Clear the Recent Documents list?"
 msgstr ""
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:69
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:78
 msgid "Clear Recent Documents"
 msgstr ""
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:71
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:80
 msgid ""
 "If you clear the Recent Documents list, you clear the following:\n"
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:92
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
 msgid "_Clear Recent Documents..."
 msgstr ""
 
@@ -705,6 +703,71 @@ msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
 msgstr ""
 
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:90
+#, csharp-format
+msgid "A timer set for {0} has expired."
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:238
+msgid "Time remaining:"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:240
+msgid "Timer paused, time remaining:"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:251
+msgid "Set the timer's label to:"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:257
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:291
+msgid "_Set Label"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:282
+msgid "_Pause Timer"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:282
+msgid "_Start Timer"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:286
+msgid "_Remove Timer"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:62
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:66
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:71
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:138
+#, csharp-format
+msgid "Click to create a timer for {0}."
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:155
+msgid "Automatically _Start Timers"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:159
+msgid "Automatically _Dismiss Timers"
+msgstr ""
+
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:50
 msgid "Drop to move to Trash"
 msgstr ""
@@ -721,23 +784,23 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:164
+msgid "Restore Files"
+msgstr ""
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:164
 msgid "_Open Trash"
 msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:166
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:232
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:203
 msgid "Empty _Trash"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:167
-msgid "Restore Files"
-msgstr ""
-
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:224
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:188
 msgid "Empty all of the items from the trash?"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:226
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:190
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
@@ -764,16 +827,14 @@ msgstr ""
 msgid "Use _Metric Units"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:176
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:95
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:98
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:103
 msgid "Invalid Weather Location"
 msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:179
 msgid "Invalid XML Weather Data"
-msgstr ""
-
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:182
-msgid "Network Error: "
 msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
@@ -808,27 +869,28 @@ msgstr ""
 msgid "Click to add a location."
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
 msgid "Fetching data..."
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:226
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:222
 msgid "Radar _Map"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:227
 msgid "Forecasts"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:247
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:243
 msgid "Check _Weather"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
 msgid "_Today"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
 msgid "T_omorrow"
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-12 21:06+0200\n"
+"POT-Creation-Date: 2010-06-22 10:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,35 +62,35 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
-#: ../Docky/Docky/DockletTile.cs:88
+#: ../Docky/Docky/DockletTile.cs:97
 msgid "Move this docklet up on the selected dock"
 msgstr ""
 
-#: ../Docky/Docky/DockletTile.cs:89
+#: ../Docky/Docky/DockletTile.cs:98
 msgid "Move this docklet down on the selected dock"
 msgstr ""
 
-#: ../Docky/Docky/DockletTile.cs:93
+#: ../Docky/Docky/DockletTile.cs:102
 msgid "Move this docklet left on the selected dock"
 msgstr ""
 
-#: ../Docky/Docky/DockletTile.cs:94
+#: ../Docky/Docky/DockletTile.cs:103
 msgid "Move this docklet right on the selected dock"
 msgstr ""
 
-#: ../Docky/Docky/DockletTile.cs:96
+#: ../Docky/Docky/DockletTile.cs:105
 msgid "Configure this docklet"
 msgstr ""
 
-#: ../Docky/Docky/DockletTile.cs:97
+#: ../Docky/Docky/DockletTile.cs:106
 msgid "About this docklet"
 msgstr ""
 
-#: ../Docky/Docky/DockletTile.cs:98
+#: ../Docky/Docky/DockletTile.cs:107
 msgid "Add this docklet to the selected dock"
 msgstr ""
 
-#: ../Docky/Docky/DockletTile.cs:99
+#: ../Docky/Docky/DockletTile.cs:108
 msgid "Remove this docklet from the selected dock"
 msgstr ""
 
@@ -150,18 +150,18 @@ msgstr ""
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:379
+#: ../Docky/Docky/Interface/DockWindow.cs:381
 msgid "Drag to reposition"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:391
-#: ../Docky/Docky/Interface/DockWindow.cs:405
+#: ../Docky/Docky/Interface/DockWindow.cs:393
+#: ../Docky/Docky/Interface/DockWindow.cs:407
 msgid "Drop to add to dock"
 msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:133
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:223
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:239
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:228
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:244
 msgid "_Settings"
 msgstr ""
 
@@ -299,7 +299,7 @@ msgstr ""
 msgid "Reset Color"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:409
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:474
 msgid "_Pin to Dock"
 msgstr ""
 
@@ -433,19 +433,19 @@ msgstr ""
 msgid "Computer"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:425
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:430
 msgid "Di_gital Clock"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:436
 msgid "24-Hour _Clock"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:442
 msgid "Show _Date"
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:443
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:448
 msgid "Select _Theme"
 msgstr ""
 
@@ -538,11 +538,15 @@ msgstr ""
 msgid "_Compose Mail"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:214
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:212
+msgid "View C_ontacts"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:219
 msgid "New Mail"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:232
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:237
 msgid "Check _Mail"
 msgstr ""
 
@@ -633,22 +637,22 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:62
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:56
 msgid "Clear the Recent Documents list?"
 msgstr ""
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:64
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:58
 msgid "Clear Recent Documents"
 msgstr ""
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:66
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:60
 msgid ""
 "If you clear the Recent Documents list, you clear the following:\n"
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:87
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:81
 msgid "_Clear Recent Documents..."
 msgstr ""
 
@@ -706,32 +710,32 @@ msgstr ""
 msgid "A timer set for {0} has expired."
 msgstr ""
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:238
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:236
 msgid "Time remaining:"
 msgstr ""
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:240
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:238
 msgid "Timer paused, time remaining:"
 msgstr ""
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:251
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:249
 msgid "Set the timer's label to:"
 msgstr ""
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:257
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:291
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:255
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:289
 msgid "_Set Label"
 msgstr ""
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:282
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:280
 msgid "_Pause Timer"
 msgstr ""
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:282
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:280
 msgid "_Start Timer"
 msgstr ""
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:286
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:284
 msgid "_Remove Timer"
 msgstr ""
 
@@ -869,15 +873,15 @@ msgstr ""
 msgid "Fetching data..."
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:226
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Radar _Map"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "Forecasts"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:247
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:252
 msgid "Check _Weather"
 msgstr ""
 
@@ -890,7 +894,7 @@ msgid "T_omorrow"
 msgstr ""
 
 #. draw humidity
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:318
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:327
 #, csharp-format
 msgid "{0} humidity"
 msgstr ""
