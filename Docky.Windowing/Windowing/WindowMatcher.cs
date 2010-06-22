@@ -418,6 +418,7 @@ namespace Docky.Windowing
 						// if a new directory was created, make sure we watch that dir as well
 						if (file.QueryFileType (GLib.FileQueryInfoFlags.NofollowSymlinks, null) == GLib.FileType.Directory)
 							MonitorDesktopFileDirs (file);
+						
 						// we only care about .desktop files
 						if (!file.Path.EndsWith (".desktop"))
 							return;
@@ -430,9 +431,8 @@ namespace Docky.Windowing
 						
 						// Make sure to trigger event on main thread
 						DockServices.System.RunOnMainThread (() => {
-							if (DesktopFileChanged != null) {
+							if (DesktopFileChanged != null)
 								DesktopFileChanged (this, new DesktopFileChangedEventArgs (args.EventType, file, otherFile));
-							}
 						});
 					});
 				};

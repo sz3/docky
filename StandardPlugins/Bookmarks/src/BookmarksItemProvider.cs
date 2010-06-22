@@ -77,6 +77,8 @@ namespace Bookmarks
 			}
 		}
 		
+		FileMonitor watcher;
+		
 		public BookmarksItemProvider ()
 		{
 			items = new List<AbstractDockItem> ();
@@ -87,7 +89,7 @@ namespace Bookmarks
 		
 			UpdateItems ();
 			
-			FileMonitor watcher = FileMonitor.File (BookmarksFile, FileMonitorFlags.None, null);
+			watcher = FileMonitor.File (BookmarksFile, FileMonitorFlags.None, null);
 			
 			watcher.Changed += WatcherChanged;
 		}
@@ -228,5 +230,13 @@ namespace Bookmarks
 		}
 		
 		#endregion
+		
+		public override void Dispose ()
+		{
+			watcher.Cancel ();
+			watcher.Changed -= WatcherChanged;
+			watcher.Dispose ();
+			base.Dispose ();
+		}
 	}
 }

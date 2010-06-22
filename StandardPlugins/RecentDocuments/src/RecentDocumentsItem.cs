@@ -68,6 +68,7 @@ namespace RecentDocuments
 				
 				if (watcher != null) {
 					watcher.Changed -= WatcherChanged;
+					watcher.Dispose ();
 					watcher = null;
 				}
 				
@@ -192,6 +193,7 @@ namespace RecentDocuments
 		public override void Dispose ()
 		{
 			if (watcher != null) {
+				watcher.Cancel ();
 				watcher.Changed -= WatcherChanged;
 				watcher.Dispose ();
 			}

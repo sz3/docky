@@ -311,5 +311,12 @@ namespace SessionManager
 		{
 			DockServices.System.Execute ("gnome-session-save --logout");
 		}
+		
+		public void Dispose ()
+		{
+			reboot_required_monitor.Cancel ();
+			reboot_required_monitor.Changed -= HandleRebootRequired;
+			reboot_required_monitor.Dispose ();
+		}
 	}
 }

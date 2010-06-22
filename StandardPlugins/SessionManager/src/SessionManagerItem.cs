@@ -254,6 +254,7 @@ namespace SessionManager
 		{
 			system_manager.CapabilitiesChanged -= HandlePowermanagerCapabilitiesChanged;
 			system_manager.RebootRequired -= HandleRebootRequired;
+			system_manager.Dispose ();
 			
 			base.Dispose ();
 		}
