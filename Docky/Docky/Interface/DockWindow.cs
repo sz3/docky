@@ -718,8 +718,9 @@ namespace Docky.Interface
 					          Gdk.EventMask.PointerMotionMask |
 			                  Gdk.EventMask.ScrollMask));
 			
-			Realized                      += HandleRealized;
-			DockServices.Theme.ThemeChanged += DockyControllerThemeChanged;
+			Wnck.Screen.Default.WindowOpened += HandleWindowOpened;
+			Realized                         += HandleRealized;
+			DockServices.Theme.ThemeChanged  += DockyControllerThemeChanged;
 			
 			// fix for nvidia bug
 			if (Docky.CommandLinePreferences.BufferTime > 0)
@@ -1282,6 +1283,12 @@ namespace Docky.Interface
 		#endregion
 		
 		#region Misc.
+		void HandleWindowOpened (object o, WindowOpenedArgs args)
+		{
+			update_screen_regions = true;
+			AnimatedDraw ();
+		}
+		
 		void Reconfigure ()
 		{
 			SetSizeRequest ();
@@ -2765,7 +2772,8 @@ namespace Docky.Interface
 			AutohideManager.HiddenChanged       -= HandleHiddenChanged;
 			AutohideManager.DockHoveredChanged  -= HandleDockHoveredChanged;
 			Screen.SizeChanged                  -= ScreenSizeChanged;
-			DockServices.Theme.ThemeChanged        -= DockyControllerThemeChanged;
+			DockServices.Theme.ThemeChanged     -= DockyControllerThemeChanged;
+			Wnck.Screen.Default.WindowOpened    += HandleWindowOpened;
 			
 			// clear out our separators
 			foreach (AbstractDockItem adi in Items.Where (adi => adi is INonPersistedItem))
