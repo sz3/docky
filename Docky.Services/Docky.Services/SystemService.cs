@@ -509,34 +509,26 @@ namespace Docky.Services
 			NativeInterop.prctl (15 /* PR_SET_NAME */, name);
 		}
 		
-		bool? nvidia;
 		public bool HasNvidia {
 			get {
-				if (nvidia.HasValue)
-					return nvidia.Value;
-				nvidia = false;
-				
 				string logFile = "/var/log/Xorg.0.log";
 				if (!System.IO.File.Exists (logFile))
 					return false;
 				
 				try {
 					using (StreamReader reader = new StreamReader (logFile)) {
-						while (!reader.EndOfStream) {
-							string line = reader.ReadLine ();
-							
-							if (line.Contains ("Module nvidia: vendor=\"NVIDIA Corporation\"")) {
-								nvidia = true;
-								break;
-							}
+						string line;
+						while ((line = reader.ReadLine ()) != null) {
+							if (line.Contains ("Module nvidia: vendor=\"NVIDIA Corporation\""))
+								return true;
 						}
 					}
 				} catch (Exception e) {
-					Log<SystemService>.Warn (e.Message);
+					Log<SystemService>.Warn ("Error encountered while trying to detect if an Nvidia graphics card is present: {0}", e.Message);
 					return false;
 				}
 				
-				return nvidia.Value;
+				return false;
 			}
 		}
 	}
