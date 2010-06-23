@@ -112,14 +112,14 @@ namespace Docky.Widgets
 				if (OwnedObject.ForcePixbuf != null) {
 					pbuf = OwnedObject.ForcePixbuf.Copy ();
 					if (pbuf.Width != IconSize || pbuf.Height != IconSize)
-						pbuf = DockServices.Drawing.ARScale (IconSize, IconSize, pbuf);
+						pbuf.ARScale (IconSize, IconSize);
 				} else {
 					pbuf = DockServices.Drawing.LoadIcon (OwnedObject.Icon, IconSize);
 				}
 
-				pbuf = DockServices.Drawing.AddHueShift (pbuf, OwnedObject.HueShift);
+				pbuf.AddHueShift (OwnedObject.HueShift);
 				if (!OwnedObject.Enabled)
-					pbuf = DockServices.Drawing.MonochromePixbuf (pbuf);
+					pbuf.MonochromePixbuf ();
 			} catch (Exception e) {
 				Log<Tile>.Error ("Error loading pixbuf for {0} tile: {1}", OwnedObject.Name, e.Message);
 				Log<Tile>.Debug (e.StackTrace);

@@ -105,11 +105,8 @@ namespace Docky.Items
 			if (p == null)
 				p = DockServices.Drawing.LoadIcon (Icon, IconSize);
 			// constrain the icon to PercentOfParent if needed,
-			if (p.Width > (int) (parentWidth * PercentOfParent) ||
-			    p.Height > (int) (parentHeight * PercentOfParent))
-				p = DockServices.Drawing.ARScale ((int) (parentWidth * PercentOfParent),
-				                                  (int) (parentHeight * PercentOfParent),
-				                                  p);
+			if (p.Width > (int) (parentWidth * PercentOfParent) || p.Height > (int) (parentHeight * PercentOfParent))
+				p.ARScale ((int) (parentWidth * PercentOfParent), (int) (parentHeight * PercentOfParent));
 			return p;
 		}
 		

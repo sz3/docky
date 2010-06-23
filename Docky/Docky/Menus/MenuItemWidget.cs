@@ -194,7 +194,8 @@ namespace Docky.Menus
 		DockySurface LoadIcon (Pixbuf icon, int size)
 		{
 			DockySurface surface;
-			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.ARScale (size, size, icon)) {
+			using (Gdk.Pixbuf pixbuf = icon.Copy ()) {
+				pixbuf.ARScale (size, size);
 				surface = new DockySurface (pixbuf.Width, pixbuf.Height);
 				Gdk.CairoHelper.SetSourcePixbuf (surface.Context, pixbuf, 0, 0);
 				surface.Context.Paint ();
@@ -205,9 +206,8 @@ namespace Docky.Menus
 		DockySurface LoadIcon (string icon, int size)
 		{
 			bool monochrome = icon.StartsWith ("[monochrome]");
-			if (monochrome) {
+			if (monochrome)
 				icon = icon.Substring ("[monochrome]".Length);
-			}
 			
 			DockySurface surface = LoadIcon (DockServices.Drawing.LoadIcon (icon, size), size);
 			

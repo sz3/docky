@@ -70,55 +70,6 @@ namespace Docky.Services
 		// http://developer.gimp.org/api/2.0/gdk-pixbuf/gdk-pixbuf-gdk-pixbuf.html#GdkPixbuf--bits-per-sample
 		
 		/// <summary>
-		/// Applies a color transformation to each pixel in a pixbuf.
-		/// </summary>
-		/// <param name="source">
-		/// A <see cref="Gdk.Pixbuf"/>
-		/// </param>
-		/// <param name="colorTransform">
-		/// A <see cref="Func<Cairo.Color, Cairo.Color>"/>
-		/// </param>
-		/// <returns>
-		/// A <see cref="Gdk.Pixbuf"/>
-		/// </returns>
-		public Gdk.Pixbuf PixelColorTransform (Gdk.Pixbuf source, Func<Cairo.Color, Cairo.Color> colorTransform)
-		{
-			try {
-				int offset = (source.HasAlpha) ? 4 : 3;
-				Gdk.Pixbuf transform = source.Copy ();
-				unsafe {
-					double r, g, b;
-					byte* pixels = (byte*) transform.Pixels;
-					for (int i = 0; i < transform.Height * transform.Width; i++) {
-						r = (double) pixels[0];
-						g = (double) pixels[1];
-						b = (double) pixels[2];
-						
-						Cairo.Color color = new Cairo.Color (r / byte.MaxValue, 
-						                                     g / byte.MaxValue, 
-						                                     b / byte.MaxValue);
-						
-						color = colorTransform.Invoke (color);
-												
-						pixels[0] = (byte) (color.R * byte.MaxValue);
-						pixels[1] = (byte) (color.G * byte.MaxValue);
-						pixels[2] = (byte) (color.B * byte.MaxValue);
-						
-						pixels += offset;
-					}
-				}
-				source.Dispose ();
-				source = transform.Copy ();
-				transform.Dispose ();
-			} catch (Exception e) {
-				Log<DrawingService>.Error ("Error transforming pixbuf: {0}", e.Message);
-				Log<DrawingService>.Debug (e.StackTrace);
-			}
-			
-			return source;
-		}
-		
-		/// <summary>
 		/// Determines whether or not the icon is light or dark.
 		/// </summary>
 		/// <param name="icon">
@@ -153,40 +104,8 @@ namespace Docky.Services
 			
 			return light > 0;
 		}
-		#endregion
-
-		/// <summary>
-		/// Returns a monochrome version of the supplied pixbuf.
-		/// </summary>
-		/// <param name="pbuf">
-		/// A <see cref="Gdk.Pixbuf"/>
-		/// </param>
-		/// <returns>
-		/// A <see cref="Gdk.Pixbuf"/>
-		/// </returns>
-		public Gdk.Pixbuf MonochromePixbuf (Gdk.Pixbuf source)
-		{
-			return PixelColorTransform (source, (c) => c.DarkenBySaturation (0.5).SetSaturation (0));
-		}
 		
-		/// <summary>
-		/// Adds a hue shift to the supplpied pixbuf.
-		/// </summary>
-		/// <param name="source">
-		/// A <see cref="Gdk.Pixbuf"/>
-		/// </param>
-		/// <param name="shift">
-		/// A <see cref="System.Double"/>
-		/// </param>
-		/// <returns>
-		/// A <see cref="Gdk.Pixbuf"/>
-		/// </returns>
-		public Gdk.Pixbuf AddHueShift (Gdk.Pixbuf source, double shift)
-		{
-			if (shift != 0)
-				return PixelColorTransform (source, (c) => c.AddHue (shift));
-			return source;
-		}
+		#endregion
 		
 		/// <summary>
 		/// Load an icon specifying the width and height.
@@ -252,7 +171,7 @@ namespace Docky.Services
 			
 			if (pixbuf != null) {
 				if (width != -1 && height != -1 && (width != pixbuf.Width || height != pixbuf.Height))
-					pixbuf = ARScale (width, height, pixbuf);
+					pixbuf.ARScale (width, height);
 				return pixbuf;
 			}		
 			
@@ -290,39 +209,6 @@ namespace Docky.Services
 		public Gdk.Pixbuf LoadIcon (string names)
 		{
 			return LoadIcon (names, -1);
-		}
-		
-		/// <summary>
-		/// Scale a pixbuf to the desired width or height maintaining the aspect ratio of the supplied pixbuf.
-		/// Note that due to maintaining the aspect ratio, the returned pixbuf may not have the exact width AND height as is specified.
-		/// Though it is guaranteed that one of these measurements will be correct.
-		/// </summary>
-		/// <param name="width">
-		/// A <see cref="System.Int32"/>
-		/// </param>
-		/// <param name="height">
-		/// A <see cref="System.Int32"/>
-		/// </param>
-		/// <param name="pixbuf">
-		/// A <see cref="Pixbuf"/>
-		/// </param>
-		/// <returns>
-		/// A <see cref="Pixbuf"/>
-		/// </returns>
-		public Pixbuf ARScale (int width, int height, Pixbuf pixbuf)
-		{			
-			double xScale = (double) width / (double) pixbuf.Width;
-			double yScale = (double) height / (double) pixbuf.Height;
-			double scale = Math.Min (xScale, yScale);
-			
-			if (scale == 1) return pixbuf;
-			
-			using (Pixbuf temp = pixbuf)
-				pixbuf = temp.ScaleSimple ((int) (temp.Width * scale),
-										   (int) (temp.Height * scale),
-										   InterpType.Hyper);
-			
-			return pixbuf;
 		}
 		
 		/// <summary>
