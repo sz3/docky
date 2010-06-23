@@ -107,6 +107,7 @@ namespace Docky.Services
 						pixels += offset;
 					}
 				}
+				source.Dispose ();
 				source = transform.Copy ();
 				transform.Dispose ();
 			} catch (Exception e) {
