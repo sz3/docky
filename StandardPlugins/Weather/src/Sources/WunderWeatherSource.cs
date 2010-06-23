@@ -190,9 +190,11 @@ namespace WeatherDocklet
 				double tmp;
 				Double.TryParse(item.SelectSingleNode ("temp_f").InnerText, NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out tmp);
 				Temp = (int)tmp;
+				FeelsLike = (int)tmp;
 			} else {
 				Int32.TryParse (item.SelectSingleNode ("temp_f").InnerText, out temp);
 				Temp = temp;
+				FeelsLike = temp;
 			}
 
 			if (!item.SelectSingleNode ("heat_index_f").InnerText.Equals ("NA") && item.SelectSingleNode ("heat_index_f").InnerText.Length > 0) {
@@ -201,8 +203,7 @@ namespace WeatherDocklet
 			} else if (!item.SelectSingleNode ("windchill_f").InnerText.Equals ("NA") && item.SelectSingleNode ("windchill_f").InnerText.Length > 0) {
 				Int32.TryParse (item.SelectSingleNode ("windchill_f").InnerText, out temp);
 				FeelsLike = temp;
-			} else
-				FeelsLike = Temp;
+			}
 			
 			Int32.TryParse (item.SelectSingleNode ("wind_mph").InnerText, out temp);
 			Wind = temp;
