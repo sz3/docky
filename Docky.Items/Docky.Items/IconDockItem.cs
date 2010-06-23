@@ -66,7 +66,7 @@ namespace Docky.Items
 					return;
 				if (forced_pixbuf != null)
 					forced_pixbuf.Dispose ();
-				forced_pixbuf = value;
+				forced_pixbuf = value.Copy ();
 				QueueRedraw ();
 			}
 		}
@@ -80,7 +80,7 @@ namespace Docky.Items
 		
 		protected void SetIconFromPixbuf (Pixbuf pbuf)
 		{
-			forced_pixbuf = pbuf;
+			ForcePixbuf = pbuf;
 		}
 		
 		public IconDockItem ()
