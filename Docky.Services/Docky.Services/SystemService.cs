@@ -440,6 +440,14 @@ namespace Docky.Services
 			}
 		}
 		
+		public bool IsValidExecutable (string Executable)
+		{
+			foreach (string path in Environment.GetEnvironmentVariable ("PATH").Split (':'))
+				if (GLib.FileFactory.NewForPath (path + "/" + Executable).Exists)
+					return true;
+			return false;
+		}
+		
 		public System.Threading.Thread RunOnThread (Action action, TimeSpan delay)
 		{
 			return RunOnThread (() => {

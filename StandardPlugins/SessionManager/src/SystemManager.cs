@@ -33,11 +33,6 @@ namespace SessionManager
 {
 	public class SystemManager
 	{
-		const string SessionBusName = "org.freedesktop.DBus";
-		const string SessionBusPath = "/org/freedesktop/DBus";
-		const string SystemBusName = "org.freedesktop.DBus";
-		const string SystemBusPath = "/org/freedesktop/DBus";
-
 		const string UPowerName = "org.freedesktop.UPower";
 		const string UPowerPath = "/org/freedesktop/UPower";
 		const string UPowerIface = "org.freedesktop.UPower";
@@ -119,7 +114,7 @@ namespace SessionManager
 		private SystemManager ()
 		{
 			try {
-				SystemBus = Bus.System.GetObject<IBus> (SystemBusName, new ObjectPath (SystemBusPath));
+				SystemBus = Bus.System.GetObject<IBus> ("org.freedesktop.DBus", new ObjectPath ("/org/freedesktop/DBus"));
 				
 				SystemBus.NameOwnerChanged += delegate(string name, string old_owner, string new_owner) {
 					if (name != UPowerName && name != DeviceKitPowerName && name != ConsoleKitName)
@@ -302,9 +297,19 @@ namespace SessionManager
 			}
 		}
 		
+		public bool CanLockScreen ()
+		{
+			return DockServices.System.IsValidExecutable ("gnome-screensaver-command");
+		}
+		
 		public void LockScreen ()
 		{
 			DockServices.System.Execute ("gnome-screensaver-command --lock");
+		}
+		
+		public bool CanLogOut ()
+		{
+			return DockServices.System.IsValidExecutable ("gnome-session-save");
 		}
 		
 		public void LogOut ()
