@@ -419,12 +419,10 @@ namespace Docky.Services
 					proc.Start ();
 					proc.Dispose ();
 				} else {
-					int pos = -1;
-					executable = executable.Trim ();
-					if ((pos = executable.IndexOf (' ')) >= 0) {
-						string command = executable.Substring (0, pos);
-						string arguments = executable.Substring (pos + 1);
-						proc = System.Diagnostics.Process.Start (command, arguments);
+					string [] parts = executable.Split (new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+					if (parts.Length > 1) {
+						string arguments = parts.AsEnumerable ().Skip (1).Aggregate ((args, arg) => args + " " + arg);
+						proc = System.Diagnostics.Process.Start (parts [0], arguments);
 					} else {
 						proc = System.Diagnostics.Process.Start (executable);
 					}
