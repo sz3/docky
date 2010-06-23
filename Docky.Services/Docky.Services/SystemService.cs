@@ -421,7 +421,7 @@ namespace Docky.Services
 				} else {
 					string[] parts = executable.Split (new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
 					if (parts.Length > 1) {
-						string arguments = parts.AsEnumerable ().Except (new[] { parts[0] }).Aggregate ((args, arg) => args + " " + arg);
+						string arguments = parts.AsEnumerable ().Skip (1).Aggregate ((args, arg) => args + " " + arg);
 						proc = System.Diagnostics.Process.Start (parts[0], arguments);
 					} else {
 						proc = System.Diagnostics.Process.Start (executable);
