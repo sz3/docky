@@ -411,32 +411,26 @@ namespace Docky.Services
 		public void Execute (string executable)
 		{
 			try {
+				System.Diagnostics.Process proc;
 				if (System.IO.File.Exists (executable)) {
-					System.Diagnostics.Process proc = new System.Diagnostics.Process ();
+					proc = new System.Diagnostics.Process ();
 					proc.StartInfo.FileName = executable;
 					proc.StartInfo.UseShellExecute = false;
 					proc.Start ();
+					proc.Dispose ();
 				} else {
-					System.Diagnostics.Process proc;
-					if (executable.Contains (" ")) {
-						string[] args = executable.Split (' ');
-						string arguments = "";
-						
-						for (int i = 1; i < args.Length; i++) {
-							if (i > 1) arguments += " ";
-							arguments += args[i];
-						}
-						
-						Log<SystemService>.Debug ("Calling: " + args[0] + " " + arguments);
-						proc = System.Diagnostics.Process.Start (args[0], arguments);
+					string[] parts = executable.Split (new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+					if (parts.Length > 1) {
+						string arguments = parts.AsEnumerable ().Except (new[] { parts[0] }).Aggregate ((args, arg) => args + " " + arg);
+						proc = System.Diagnostics.Process.Start (parts[0], arguments);
 					} else {
-						Log<SystemService>.Debug ("Calling: " + executable);
 						proc = System.Diagnostics.Process.Start (executable);
 					}
+					Log<SystemService>.Debug ("Calling: '{0}'", executable);
 					proc.Dispose ();
 				}
 			} catch {
-				Log<SystemService>.Error ("Error executing '" + executable + "'");
+				Log<SystemService>.Error ("Error executing '{0}'", executable);
 			}
 		}
 		
