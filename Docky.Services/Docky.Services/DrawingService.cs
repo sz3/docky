@@ -171,7 +171,7 @@ namespace Docky.Services
 			
 			if (pixbuf != null) {
 				if (width != -1 && height != -1 && (width != pixbuf.Width || height != pixbuf.Height))
-					pixbuf.ARScale (width, height);
+					pixbuf = pixbuf.ARScale (width, height);
 				return pixbuf;
 			}		
 			

@@ -112,7 +112,7 @@ namespace Docky.Widgets
 				if (OwnedObject.ForcePixbuf != null) {
 					pbuf = OwnedObject.ForcePixbuf.Copy ();
 					if (pbuf.Width != IconSize || pbuf.Height != IconSize)
-						pbuf.ARScale (IconSize, IconSize);
+						pbuf = pbuf.ARScale (IconSize, IconSize);
 				} else {
 					pbuf = DockServices.Drawing.LoadIcon (OwnedObject.Icon, IconSize);
 				}

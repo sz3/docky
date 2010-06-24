@@ -194,8 +194,7 @@ namespace Docky.Menus
 		DockySurface LoadIcon (Pixbuf icon, int size)
 		{
 			DockySurface surface;
-			using (Gdk.Pixbuf pixbuf = icon.Copy ()) {
-				pixbuf.ARScale (size, size);
+			using (Gdk.Pixbuf pixbuf = icon.Copy ().ARScale (size, size)) {
 				surface = new DockySurface (pixbuf.Width, pixbuf.Height);
 				Gdk.CairoHelper.SetSourcePixbuf (surface.Context, pixbuf, 0, 0);
 				surface.Context.Paint ();

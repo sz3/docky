@@ -110,7 +110,6 @@ namespace Docky.Services
 		/// A <see cref="Pixbuf"/>
 		/// </param>
 		/// <returns>
-		/// A reference to the input Pixbuf (the 'this' reference).
 		/// </returns>
 		public static Pixbuf ARScale (this Pixbuf source, int width, int height)
 		{			
@@ -119,11 +118,14 @@ namespace Docky.Services
 			double scale = Math.Min (xScale, yScale);
 			
 			if (scale != 1)
-				source = source.ScaleSimple ((int) (source.Width * scale),
-										   (int) (source.Height * scale),
-										   InterpType.Hyper);
+				return source;
 			
-			return source;
+			Pixbuf tmp = source.ScaleSimple ((int) (source.Width * scale),
+											   (int) (source.Height * scale),
+											   InterpType.Hyper);
+			source.Dispose ();
+			
+			return tmp;
 		}
 	}
 }
