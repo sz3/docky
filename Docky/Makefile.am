@@ -10,6 +10,7 @@ FILES = \
 	gtk-gui/Docky.Interface.DockPreferences.cs \
 	gtk-gui/Docky.ConfigurationWindow.cs \
 	Gtk/Widget_Extensions.cs \
+	Mono/Options.cs \
 	Docky/ConfigurationWindow.cs \
 	Docky/DockController.cs \
 	Docky/DockPlacementWidget.cs \
@@ -65,7 +66,6 @@ REFERENCES =  \
 	System.Xml \
 	System.Core \
 	Mono.Posix \
-	Mono.GetOptions \
 	ICSharpCode.SharpZipLib \
 	$(MONO_CAIRO_LIBS) \
 	$(GIO_SHARP_LIBS) \
@@ -91,4 +91,4 @@ EXTRA_DIST += docky.in Docky.addins
 module_DATA += Docky.addins
 bin_SCRIPTS = docky
 
-MCS_FLAGS += -unsafe
+MCS_FLAGS += -d:LINQ -unsafe
