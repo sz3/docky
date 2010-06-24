@@ -595,7 +595,6 @@ namespace Docky.Interface
 				
 				if (Painter.Allocation != allocation) {
 					Painter.SetAllocation (allocation);
-					allocation.Width = Painter.MinimumWidth;
 					allocation.Width = Math.Min (maxWidth - PainterBufferSize, Painter.MinimumWidth);
 					Painter.SetAllocation (allocation);
 				}

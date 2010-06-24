@@ -124,14 +124,14 @@ namespace WeatherDocklet
 					cr.Color = colorHigh;
 					layout.SetText (string.Format ("{0}{1}", WeatherController.Weather.Forecasts [day].high, AbstractWeatherSource.TempUnit));
 					layout.GetPixelExtents (out inkRect, out logicalRect);
-					cr.MoveTo (xOffset + (cellWidth - inkRect.Width) / 2, cellWidth / 2 - logicalRect.Height / 2);
+					cr.MoveTo (xOffset + (cellWidth - inkRect.Width) / 2, Allocation.Height / 2 - logicalRect.Height / 2);
 					Pango.CairoHelper.LayoutPath (cr, layout);
 					cr.Fill ();
 					
 					cr.Color = colorLow;
 					layout.SetText (string.Format ("{0}{1}", WeatherController.Weather.Forecasts [day].low, AbstractWeatherSource.TempUnit));
 					layout.GetPixelExtents (out inkRect, out logicalRect);
-					cr.MoveTo (xOffset + (cellWidth - inkRect.Width) / 2, cellWidth - logicalRect.Height);
+					cr.MoveTo (xOffset + (cellWidth - inkRect.Width) / 2, Allocation.Height - logicalRect.Height);
 					Pango.CairoHelper.LayoutPath (cr, layout);
 					cr.Fill ();
 					
@@ -148,7 +148,7 @@ namespace WeatherDocklet
 						layout.SetText ("?");
 						
 						layout.GetPixelExtents (out inkRect, out logicalRect);
-						cr.MoveTo (xOffset + cellWidth + (cellWidth - inkRect.Width) / 2, cellWidth / 2 - logicalRect.Height / 2);
+						cr.MoveTo (xOffset + cellWidth + (cellWidth - inkRect.Width) / 2, Allocation.Height / 2 - logicalRect.Height / 2);
 						
 						cr.LineWidth = 4;
 						cr.Color = new Cairo.Color (0, 0, 0, 0.3);
