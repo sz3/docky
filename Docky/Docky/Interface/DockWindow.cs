@@ -591,13 +591,16 @@ namespace Docky.Interface
 					DockWidth - PainterBufferSize, 
 					DockHeight - 2 * DockWidthBuffer);
 				
+				int maxWidth = Preferences.IsVertical ? monitor_geo.Height : monitor_geo.Width;
+				
 				if (Painter.Allocation != allocation) {
 					Painter.SetAllocation (allocation);
 					allocation.Width = Painter.MinimumWidth;
+					allocation.Width = Math.Min (maxWidth - PainterBufferSize, Painter.MinimumWidth);
 					Painter.SetAllocation (allocation);
 				}
 				
-				last_painter_width = Painter.MinimumWidth + PainterBufferSize;
+				last_painter_width = Math.Min (maxWidth, Painter.MinimumWidth + PainterBufferSize);
 				return last_painter_width;
 			}
 		}
