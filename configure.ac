@@ -143,8 +143,8 @@ dnl {{{ run with heapshot
 AC_ARG_ENABLE(heap-shot,
 	AC_HELP_STRING([--enable-heap-shot],
 		[Run with heap-shot [default=NO]]),
-		heap_shot=yes, heap_shot=no)
-AM_CONDITIONAL(ENABLE_HEAP_SHOT, test "x$heap_shot" = "xyes")
+		enable_heap_shot=yes, enable_heap_shot=no)
+AM_CONDITIONAL(ENABLE_HEAP_SHOT, test "x$enable_heap_shot" = "xyes")
 if test -z "$ENABLE_HEAP_SHOT_TRUE" ; then
 	CONFIG_REQUESTED="yes"
 	MONO_DEBUG_ARGS+="--profile=heap-shot "
