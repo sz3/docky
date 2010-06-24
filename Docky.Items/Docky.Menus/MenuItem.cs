@@ -38,7 +38,8 @@ namespace Docky.Menus
 		
 		static bool defaultShowIcons;
 		static MenuItem () {
-			defaultShowIcons = (bool) new GConf.Client ().Get ("/desktop/gnome/interface/menus_have_icons");
+			object o = new GConf.Client ().Get ("/desktop/gnome/interface/menus_have_icons");
+			defaultShowIcons = o != null && o is bool && (bool) o;
 		}
 		
 		bool? show_icons;
