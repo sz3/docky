@@ -19,15 +19,70 @@ using System;
 
 using Docky.Services;
 
-using Mono.GetOptions;
-
-// disable the warning message about Mono.GetOptions.Options being obsolete
-#pragma warning disable 618
+using Mono.Options;
 
 namespace Docky
 {
-	public class UserArgs : Options
+	public class UserArgs
 	{
+		
+		public static bool NoPollCursor { get; private set; }
+		public static int MaxSize { get; private set; }
+		public static bool NetbookMode { get; private set; }
+		public static bool NvidiaMode { get; private set; }
+		public static uint BufferTime { get; private set; }
+		public static bool HelpShown { get; private set; }
+		
+		static OptionSet Options { get; set; }
+
+		public static void Parse (string[] args)
+		{
+			Options = new OptionSet () {
+				{ "p|disable-polling", "Disable cursor polling (for testing)", val => NoPollCursor = true },
+				{ "m|max-size=", "Maximum window dimension (min 500)", (int max) => {
+						if (max != null)
+							MaxSize = Math.Max (max, 500);
+						else
+							MaxSize = int.MaxValue;
+					} },
+				{ "d|debug", "Enable debug logging", debug => {
+						Log.DisplayLevel = (debug == null) ? LogLevel.Warn : LogLevel.Debug;
+					} },
+				{ "n|netbook", "Netbook mode", netbook => NetbookMode = true },
+				{ "nv|nvidia", "Nvidia mode (for Nvidia cards that lag after a while).  Equivalent to '-b 10'.",
+					nv => {
+						NvidiaMode = true;
+						BufferTime = 10;
+					} },
+				{ "b|buffer-time=", "Maximum time (in minutes) to keep buffers", (uint buf) => {
+						if (!NvidiaMode)
+							BufferTime = buf;
+					} },
+				{ "h|?|help", "Show this help list", help => ShowHelp () },
+			};
+			
+			try {
+				Options.Parse (args);
+			} catch (OptionException ex) {
+				Log<UserArgs>.Error ("Error parsing options: {0}", ex.Message);
+				ShowHelp ();
+			}
+			
+			// log the parsed user args
+			Log<UserArgs>.Debug ("BufferTime = " + BufferTime);
+			Log<UserArgs>.Debug ("MaxSize = " + MaxSize);
+			Log<UserArgs>.Debug ("NetbookMode = " + NetbookMode);
+			Log<UserArgs>.Debug ("NoPollCursor = " + NoPollCursor);
+		}
+		
+		public static void ShowHelp ()
+		{
+			Console.WriteLine ("usage: docky [options]");
+			Console.WriteLine ();
+			Options.WriteOptionDescriptions (Console.Out);
+			HelpShown = true;
+		}
+		/*
 		[Option ("Disable cursor polling (for testing)", 'p', "disable-polling")]
 		public bool NoPollCursor;
 		
@@ -71,5 +126,6 @@ namespace Docky
 			Log<UserArgs>.Debug ("NetbookMode = " + NetbookMode);
 			Log<UserArgs>.Debug ("NoPollCursor = " + NoPollCursor);
 		}
+		*/
 	}
 }

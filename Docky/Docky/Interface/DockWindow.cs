@@ -723,8 +723,8 @@ namespace Docky.Interface
 			DockServices.Theme.ThemeChanged  += DockyControllerThemeChanged;
 			
 			// fix for nvidia bug
-			if (Docky.CommandLinePreferences.BufferTime > 0)
-				GLib.Timeout.Add (Docky.CommandLinePreferences.BufferTime * 60 * 1000, delegate {
+			if (UserArgs.BufferTime > 0)
+				GLib.Timeout.Add (UserArgs.BufferTime * 60 * 1000, delegate {
 					ResetBuffers ();
 					return true;
 				});
@@ -1522,7 +1522,7 @@ namespace Docky.Interface
 			UpdateMonitorGeometry ();
 			
 			int height = ZoomedDockHeight;
-			int width = Math.Min (Docky.CommandLinePreferences.MaxSize, Preferences.IsVertical ? monitor_geo.Height : monitor_geo.Width);
+			int width = Math.Min (UserArgs.MaxSize, Preferences.IsVertical ? monitor_geo.Height : monitor_geo.Width);
 			
 			if (Gdk.Screen.Default.IsComposited)
 				height += DockHeightBuffer + UrgentBounceHeight;
@@ -1537,7 +1537,7 @@ namespace Docky.Interface
 				Height = height;
 			}
 			
-			if (Docky.CommandLinePreferences.NetbookMode) {
+			if (UserArgs.NetbookMode) {
 				// Currently the intel i945 series of cards (used on netbooks frequently) will 
 				// for some mystical reason get terrible drawing performance if the window is
 				// between 1009 pixels and 1024 pixels in width OR height. We just pad it out an extra

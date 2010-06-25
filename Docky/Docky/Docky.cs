@@ -57,7 +57,8 @@ namespace Docky
 			
 			//Init gtk and GLib related
 			Catalog.Init ("docky", AssemblyInfo.LocaleDirectory);
-			if (!GLib.Thread.Supported) GLib.Thread.Init ();
+			if (!GLib.Thread.Supported)
+				GLib.Thread.Init ();
 			Gdk.Threads.Init ();
 			NDesk.DBus.BusG.Init ();
 			Gtk.Application.Init ("Docky", ref args);
@@ -65,7 +66,10 @@ namespace Docky
 			GLib.GType.Init ();
 			
 			// process the command line args
-			CommandLinePreferences = new UserArgs (args);
+			UserArgs.Parse (args);
+			if (UserArgs.HelpShown)
+				return;
+			//CommandLinePreferences = new UserArgs (args);
 			
 			Wnck.Global.ClientType = Wnck.ClientType.Pager;
 			
@@ -106,7 +110,6 @@ namespace Docky
 		}
 		
 		static uint checkCompositeTimer = 0;
-		
 		static void CheckComposite ()
 		{
 			if (checkCompositeTimer != 0) {
