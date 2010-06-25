@@ -69,30 +69,36 @@ namespace Mounter
 			return ClickAnimation.None;
 		}
 		
-		public void UnMount ()
+		public bool UnMount ()
 		{
+			bool successful = false;
 			if (Mnt.CanEject ())
 				Mnt.EjectWithOperation (MountUnmountFlags.Force, new Gtk.MountOperation (null), null, (s, result) =>
 				{
 					try {
 						if (!Mnt.EjectWithOperationFinish (result))
 							Log<MountItem>.Error ("Failed to eject {0}", Mnt.Name);
+						else
+							successful = true;
 					} catch (Exception e) {
 						Log<MountItem>.Error ("An error when ejecting {0} was encountered: {1}", Mnt.Name, e.Message);
 						Log<MountItem>.Debug (e.StackTrace);
 					}
 				});
-			else
+			else if (Mnt.CanUnmount)
 				Mnt.UnmountWithOperation (MountUnmountFlags.Force, new Gtk.MountOperation (null), null, (s, result) =>
 				{
 					try {
 						if (!Mnt.UnmountWithOperationFinish (result))
 							Log<MountItem>.Error ("Failed to unmount {0}", Mnt.Name);
+						else
+							successful = true;
 					} catch (Exception e) {
 						Log<MountItem>.Error ("An error when unmounting {0} was encountered: {1}", Mnt.Name, e.Message);
 						Log<MountItem>.Debug (e.StackTrace);
 					}
 				});
+			return successful;
 		}
 		
 		protected override MenuList OnGetMenuItems ()

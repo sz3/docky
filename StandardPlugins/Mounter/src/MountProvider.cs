@@ -99,8 +99,9 @@ namespace Mounter
 		
 		public override bool RemoveItem (AbstractDockItem item)
 		{
-			(item as MountItem).UnMount ();
-			return base.RemoveItem (item);
+			if ((item as MountItem).UnMount ())
+				return base.RemoveItem (item);
+			return false;
 		}
 		
 		public override void Dispose ()
