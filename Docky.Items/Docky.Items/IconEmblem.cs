@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2010 Chris Szikszoy
+//  Copyright (C) 2010 Chris Szikszoy, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -23,22 +23,19 @@ using Docky.Services;
 
 namespace Docky.Items
 {
-
 	public class IconEmblem
 	{
-		
 		public event EventHandler Changed;
 		
 		string icon;
 		public string Icon {
 			get { return icon; }
 			protected set {
-				// if we set this, clear the forced pixbuf
-				if (forced_pixbuf != null)
-					forced_pixbuf = null;
 				if (icon == value)
 					return;
 				icon = value;
+				// if we set this, clear the forced pixbuf
+				ForcePixbuf = null;
 				OnChanged ();
 			}
 		}		
@@ -49,6 +46,8 @@ namespace Docky.Items
 			set {
 				if (forced_pixbuf == value)
 					return;
+				if (forced_pixbuf != null)
+					forced_pixbuf.Dispose ();
 				forced_pixbuf = value;
 				OnChanged ();
 			}
@@ -84,7 +83,7 @@ namespace Docky.Items
 		{
 			Position = position;
 			IconSize = size;
-			ForcePixbuf = icon;
+			ForcePixbuf = icon.Copy ();
 		}
 		
 		public IconEmblem (int position, GLib.Icon icon, int size)

@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Jason Smith, Robert Dyer, Chris Szikszoy
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -42,12 +43,12 @@ namespace Docky.Items
 		public string Icon {
 			get { return string.IsNullOrEmpty (remote_icon) ? icon : remote_icon; }
 			protected set {
-				// if we set this, clear the forced pixbuf
-				if (forced_pixbuf != null)
-					forced_pixbuf = null;
 				if (icon == value)
 					return;
 				icon = value;
+				
+				// if we set this, clear the forced pixbuf
+				ForcePixbuf = null;
 				
 				if (icon != null)
 					using (Gtk.IconInfo info = Gtk.IconTheme.Default.LookupIcon (icon, 48, Gtk.IconLookupFlags.ForceSvg))
@@ -66,7 +67,7 @@ namespace Docky.Items
 					return;
 				if (forced_pixbuf != null)
 					forced_pixbuf.Dispose ();
-				forced_pixbuf = value.Copy ();
+				forced_pixbuf = value;
 				QueueRedraw ();
 			}
 		}
@@ -80,7 +81,7 @@ namespace Docky.Items
 		
 		protected void SetIconFromPixbuf (Pixbuf pbuf)
 		{
-			ForcePixbuf = pbuf;
+			ForcePixbuf = pbuf.Copy ();
 		}
 		
 		public IconDockItem ()
@@ -92,8 +93,8 @@ namespace Docky.Items
 		public void AddEmblem (IconEmblem emblem)
 		{
 			// remove current emblems at this position
-			if (Emblems.Any (e => e.Position == emblem.Position))
-				Emblems.RemoveAll (e => e.Position == emblem.Position);
+			foreach (IconEmblem e in Emblems.Where (e => e.Position == emblem.Position).ToList ())
+				RemoveEmblem (e);
 			// add the new emblem
 			Emblems.Add (emblem);
 			emblem.Changed += HandleEmblemChanged;
@@ -110,6 +111,7 @@ namespace Docky.Items
 			if (Emblems.Contains (emblem)) {
 				emblem.Changed -= HandleEmblemChanged;
 				Emblems.Remove (emblem);
+				emblem.Dispose ();
 				QueueRedraw ();
 			}
 		}
@@ -126,10 +128,10 @@ namespace Docky.Items
 		{			
 			Gdk.Pixbuf pbuf;
 			
-			if (forced_pixbuf == null)
+			if (ForcePixbuf == null) {
 				pbuf = DockServices.Drawing.LoadIcon (Icon, surface.Width, surface.Height);
-			else {
-				pbuf = forced_pixbuf.Copy ();
+			} else {
+				pbuf = ForcePixbuf.Copy ();
 				pbuf = pbuf.ARScale (surface.Width, surface.Height);
 			}
 			
@@ -142,30 +144,29 @@ namespace Docky.Items
 			surface.Context.Paint ();
 			
 			// draw the emblems
-			foreach (IconEmblem emblem in Emblems) {
-				Pixbuf p = emblem.GetPixbuf (surface.Width, surface.Height);
-				int x, y;
-				switch (emblem.Position) {
-				case 1:
-					x = surface.Width - p.Width;
-					y = 0;
-					break;
-				case 2:
-					x = surface.Width - p.Width;
-					y = surface.Height - p.Height;
-					break;
-				case 3:
-					x = 0;
-					y = surface.Height - p.Height;
-					break;
-				default:
-					x = y = 0;
-					break;
+			foreach (IconEmblem emblem in Emblems)
+				using (Pixbuf p = emblem.GetPixbuf (surface.Width, surface.Height)) {
+					int x, y;
+					switch (emblem.Position) {
+					case 1:
+						x = surface.Width - p.Width;
+						y = 0;
+						break;
+					case 2:
+						x = surface.Width - p.Width;
+						y = surface.Height - p.Height;
+						break;
+					case 3:
+						x = 0;
+						y = surface.Height - p.Height;
+						break;
+					default:
+						x = y = 0;
+						break;
+					}
+					Gdk.CairoHelper.SetSourcePixbuf (surface.Context, p, x, y);
+					surface.Context.Paint ();
 				}
-				Gdk.CairoHelper.SetSourcePixbuf (surface.Context, p, x, y);
-				surface.Context.Paint ();
-				p.Dispose ();
-			}
 
 			pbuf.Dispose ();
 			
