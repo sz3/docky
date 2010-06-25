@@ -69,7 +69,6 @@ namespace Docky
 			UserArgs.Parse (args);
 			if (UserArgs.HelpShown)
 				return;
-			//CommandLinePreferences = new UserArgs (args);
 			
 			Wnck.Global.ClientType = Wnck.ClientType.Pager;
 			
