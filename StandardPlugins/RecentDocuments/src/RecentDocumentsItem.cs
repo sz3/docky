@@ -68,6 +68,7 @@ namespace RecentDocuments
 				currentFile = value;
 				
 				if (watcher != null) {
+					watcher.Cancel ();
 					watcher.Changed -= WatcherChanged;
 					watcher.Dispose ();
 					watcher = null;
