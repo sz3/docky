@@ -25,7 +25,6 @@ namespace Docky
 {
 	public class UserArgs
 	{
-		
 		public static bool NoPollCursor { get; private set; }
 		public static int MaxSize { get; private set; }
 		public static bool NetbookMode { get; private set; }
@@ -37,14 +36,11 @@ namespace Docky
 
 		public static void Parse (string[] args)
 		{
+			MaxSize = int.MaxValue;
+			
 			Options = new OptionSet () {
 				{ "p|disable-polling", "Disable cursor polling (for testing)", val => NoPollCursor = true },
-				{ "m|max-size=", "Maximum window dimension (min 500)", (int max) => {
-						if (max != null)
-							MaxSize = Math.Max (max, 500);
-						else
-							MaxSize = int.MaxValue;
-					} },
+				{ "m|max-size=", "Maximum window dimension (min 500)", (int max) => MaxSize = Math.Max (max, 500) },
 				{ "d|debug", "Enable debug logging", debug => {
 						Log.DisplayLevel = (debug == null) ? LogLevel.Warn : LogLevel.Debug;
 					} },
@@ -82,50 +78,5 @@ namespace Docky
 			Options.WriteOptionDescriptions (Console.Out);
 			HelpShown = true;
 		}
-		/*
-		[Option ("Disable cursor polling (for testing)", 'p', "disable-polling")]
-		public bool NoPollCursor;
-		
-		[Option ("Maximum window dimension (min 500)", 'm', "max-size")]
-		public int MaxSize;
-		
-		[Option ("Enable debug level logging", 'd', "debug")]
-		public bool Debug;
-		
-		[Option ("Netbook mode", 'n', "netbook")]
-		public bool NetbookMode;
-		
-		[Option ("Nvidia mode (for Nvidia cards that lag after awhile) [-b 10]", "nvidia")]
-		public bool NvidiaMode;
-		
-		[Option ("Maximum time (in minutes) to keep buffers", 'b', "buffer-time")]
-		public uint BufferTime;
-
-		public UserArgs (string[] args)
-		{
-			Log.DisplayLevel = LogLevel.Warn;
-			
-			ParsingMode = OptionsParsingMode.GNU_DoubleDash;
-			ProcessArgs (args);
-			
-			// defaults
-			NvidiaMode |= DockServices.System.HasNvidia;
-			if (MaxSize == 0)
-				MaxSize = int.MaxValue;
-			MaxSize = Math.Max (MaxSize, 500);
-			if (NvidiaMode && BufferTime == 0)
-				BufferTime = 10;
-			// if the debug option was passed, set it to debug
-			// otherwise leave it to the default, which is warn
-			if (Debug)
-				Log.DisplayLevel = LogLevel.Debug;
-			
-			// log the parsed user args
-			Log<UserArgs>.Debug ("BufferTime = " + BufferTime);
-			Log<UserArgs>.Debug ("MaxSize = " + MaxSize);
-			Log<UserArgs>.Debug ("NetbookMode = " + NetbookMode);
-			Log<UserArgs>.Debug ("NoPollCursor = " + NoPollCursor);
-		}
-		*/
 	}
 }
