@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Chris Szikszoy, Robert Dyer
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -99,6 +100,8 @@ namespace RecentDocuments
 			GLib.List recent_items = new GLib.List (Gtk.RecentManager.Default.Items.Handle, typeof(Gtk.RecentInfo));
 			
 			lock (RecentDocs) {
+				foreach (FileDockItem f in RecentDocs)
+					f.Dispose ();
 				RecentDocs.Clear ();
 				
 				RecentDocs.AddRange (recent_items.Cast<Gtk.RecentInfo> ()
@@ -192,6 +195,9 @@ namespace RecentDocuments
 
 		public override void Dispose ()
 		{
+			foreach (FileDockItem f in RecentDocs)
+				f.Dispose ();
+			RecentDocs.Clear ();
 			if (watcher != null) {
 				watcher.Cancel ();
 				watcher.Changed -= WatcherChanged;
