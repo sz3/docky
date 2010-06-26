@@ -254,11 +254,13 @@ namespace GMail
 					Gtk.Application.Invoke (delegate { OnGMailChecked (); });
 				} catch (ThreadAbortException) {
 					Log<GMailAtom>.Debug ("Stoping Atom thread");
-				} catch (NullReferenceException) {
+				} catch (NullReferenceException e) {
+					Log<GMailAtom>.Debug (e.ToString ());
 					Gtk.Application.Invoke (delegate {
 						OnGMailFailed (Catalog.GetString ("Feed Error"));
 					});
-				} catch (XmlException) {
+				} catch (XmlException e) {
+					Log<GMailAtom>.Debug (e.ToString ());
 					Gtk.Application.Invoke (delegate {
 						OnGMailFailed (Catalog.GetString ("Feed Error"));
 					});
