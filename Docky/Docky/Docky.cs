@@ -65,7 +65,8 @@ namespace Docky
 			GLib.GType.Init ();
 			
 			// process the command line args
-			CommandLinePreferences = new UserArgs (args);
+			if (!UserArgs.Parse (args))
+				return;
 			
 			Wnck.Global.ClientType = Wnck.ClientType.Pager;
 			

@@ -17,7 +17,6 @@
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using Mono.GetOptions;
 
 // Information about this assembly is defined by the following
 // attributes.
@@ -32,13 +31,6 @@ using Mono.GetOptions;
 [assembly: AssemblyCopyright("GPL")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-
-[assembly: Mono.About ("For more information, please visit http://launchpad.net/docky/")]
-[assembly: Mono.Author ("Daniel For\u0233 <daniel.p.fore@gmail.com>")]
-[assembly: Mono.Author ("Chris Szikszoy <chris@szikszoy.com>")]
-[assembly: Mono.Author ("Robert Dyer <psybers@gmail.com>")]
-[assembly: Mono.Author ("Jason Smith <jassmith@gmail.com>")]
-[assembly: Mono.UsageComplement ("")]
 
 // The assembly version has following format:
 //
