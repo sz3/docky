@@ -1,6 +1,6 @@
 //  
 //  Copyright (C) 2009 Jason Smith, Robert Dyer
-//  Copyright (C) 2010 Rico Tzschichholz
+//  Copyright (C) 2010 Robert Dyer, Rico Tzschichholz
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -33,14 +33,12 @@ using Docky.Services;
 
 namespace Docky.Interface
 {
-
 	public class HoverTextManager : IDisposable
 	{
 		public DockPosition Gravity { get; set; }
+		
 		public bool Visible { 
-			get {
-				return window != null && window.Visible;
-			}
+			get { return window != null && window.Visible; }
 		}
 		
 		Gtk.Window window;
@@ -85,9 +83,8 @@ namespace Docky.Interface
 		void DockyControllerThemeChanged (object sender, EventArgs e)
 		{
 			if (slices != null) {
-				foreach (DockySurface s in slices) {
+				foreach (DockySurface s in slices)
 					s.Dispose ();
-				}
 				slices = null;
 			}
 			ResetBackgroundBuffer ();
@@ -136,8 +133,6 @@ namespace Docky.Interface
 			if (Visible)
 				window.QueueDraw ();
 			window.Move (center.X, center.Y);
-			
-			Show ();
 		}
 
 		void HandleWindowExposeEvent (object o, ExposeEventArgs args)
@@ -173,7 +168,7 @@ namespace Docky.Interface
 		
 		public void Hide ()
 		{
-			if (window != null && window.Visible)
+			if (Visible)
 				window.Hide ();
 		}
 		
@@ -233,9 +228,8 @@ namespace Docky.Interface
 				window = null;
 			}
 			if (slices != null) {
-				foreach (DockySurface s in slices) {
+				foreach (DockySurface s in slices)
 					s.Dispose ();
-				}
 				slices = null;
 			}
 			ResetBackgroundBuffer ();
