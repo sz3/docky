@@ -52,22 +52,6 @@ dnl Find gconftool-2
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 AM_GCONF_SOURCE_2
 
-dnl find gapi2-fixup
-AC_PATH_PROG(GAPI2FIXUP, gapi2-fixup, no)
-if test ! -x "$GAPI2FIXUP"; then
-   AC_MSG_ERROR([No gapi post-processor found])
-fi
-
-AC_PATH_PROG(GAPI2PARSER, gapi2-parser, no)
-if test ! -x "$GAPI2PARSER"; then
-   AC_MSG_ERROR([No gapi parser found])
-fi
-
-AC_PATH_PROG(GAPI2CODEGEN, gapi2-codegen, no)
-if test ! -x "$GAPI2CODEGEN"; then
-   AC_MSG_ERROR([No gapi code generator found])
-fi
-
 dnl Expansions
 SHAMROCK_EXPAND_LIBDIR
 SHAMROCK_EXPAND_BINDIR
@@ -98,7 +82,6 @@ GLIB_REQUIRED_VERSION=2.22
 PKG_CHECK_MODULES(GIO, gio-2.0 >= $GLIB_REQUIRED_VERSION)
 PKG_CHECK_MODULES(GTK, gtk+-2.0 >= $GTK_REQUIRED_VERSION)
 PKG_CHECK_MODULES(GLIB, gobject-2.0 >= $GLIB_REQUIRED_VERSION)
-
 
 AC_SUBST([GCONF_SHARP_20_LIBS])
 AC_SUBST([GLADE_SHARP_20_LIBS])
