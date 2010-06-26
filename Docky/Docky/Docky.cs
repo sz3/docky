@@ -24,6 +24,7 @@ using System.Threading;
 using System.IO;
 
 using Mono.Unix;
+using NDesk.DBus;
 
 using Gdk;
 using Gtk;
@@ -71,6 +72,10 @@ namespace Docky
 			
 			// set process name
 			DockServices.System.SetProcessName ("docky");
+			if (CheckForInstance ()) {
+				Log.Error ("Another Docky instance was detected - exiting.");
+				return;
+			}
 			
 			// cache main thread
 			SystemService.MainThread = Thread.CurrentThread;
@@ -106,6 +111,11 @@ namespace Docky
 		}
 		
 		static uint checkCompositeTimer = 0;
+		
+		static bool CheckForInstance ()
+		{
+			return Bus.Session.NameHasOwner ("org.gnome.Docky");
+		}
 		
 		static void CheckComposite ()
 		{
