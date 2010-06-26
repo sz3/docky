@@ -25,6 +25,7 @@ namespace Docky
 {
 	public class UserArgs
 	{
+		const int FORCE_BUFFER_REFRESH = 10;
 		public static bool NoPollCursor { get; private set; }
 		public static int MaxSize { get; private set; }
 		public static bool NetbookMode { get; private set; }
@@ -47,7 +48,7 @@ namespace Docky
 				{ "nv|nvidia", "Nvidia mode (for Nvidia cards that lag after a while).  Equivalent to '-b 10'.",
 					nv => {
 						if (BufferTime == 0)
-							BufferTime = 10;
+							BufferTime = FORCE_BUFFER_REFRESH;
 					} },
 				{ "b|buffer-time=", "Maximum time (in minutes) to keep buffers", (uint buf) => BufferTime = buf },
 				{ "h|?|help", "Show this help list", help => ShowHelp () },
@@ -66,7 +67,7 @@ namespace Docky
 			// if the buffer time wasn't explicity set, and a Nvidia card is present,
 			// force the buffer refresh time to 10 minutes
 			if (DockServices.System.HasNvidia && BufferTime == 0)
-				BufferTime = 10;
+				BufferTime = FORCE_BUFFER_REFRESH;
 			
 			// log the parsed user args
 			Log<UserArgs>.Debug ("BufferTime = " + BufferTime);
