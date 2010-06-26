@@ -1528,7 +1528,6 @@ namespace Docky.Interface
 			UpdateMonitorGeometry ();
 			
 			int height = ZoomedDockHeight;
-			int width = Math.Min (UserArgs.MaxSize, Preferences.IsVertical ? monitor_geo.Height : monitor_geo.Width);
 			if (Painter != null)
 				height += ZoomedIconSize;
 			int width = Math.Min (UserArgs.MaxSize, Preferences.IsVertical ? monitor_geo.Height : monitor_geo.Width);

@@ -48,12 +48,10 @@ namespace Docky
 				{ "nv|nvidia", "Nvidia mode (for Nvidia cards that lag after a while).  Equivalent to '-b 10'.",
 					nv => {
 						NvidiaMode = true;
-						BufferTime = 10;
+						if (BufferTime == 0)
+							BufferTime = 10;
 					} },
-				{ "b|buffer-time=", "Maximum time (in minutes) to keep buffers", (uint buf) => {
-						if (!NvidiaMode)
-							BufferTime = buf;
-					} },
+				{ "b|buffer-time=", "Maximum time (in minutes) to keep buffers", (uint buf) => BufferTime = buf },
 				{ "h|?|help", "Show this help list", help => ShowHelp () },
 			};
 			
