@@ -591,13 +591,15 @@ namespace Docky.Interface
 					DockWidth - PainterBufferSize, 
 					DockHeight - 2 * DockWidthBuffer);
 				
+				int maxWidth = Preferences.IsVertical ? monitor_geo.Height : monitor_geo.Width;
+				
 				if (Painter.Allocation != allocation) {
 					Painter.SetAllocation (allocation);
-					allocation.Width = Painter.MinimumWidth;
+					allocation.Width = Math.Min (maxWidth - PainterBufferSize, Painter.MinimumWidth);
 					Painter.SetAllocation (allocation);
 				}
 				
-				last_painter_width = Painter.MinimumWidth + PainterBufferSize;
+				last_painter_width = Math.Min (maxWidth, Painter.MinimumWidth + PainterBufferSize);
 				return last_painter_width;
 			}
 		}
@@ -1424,6 +1426,8 @@ namespace Docky.Interface
 			SetTooltipVisibility ();
 			Painter.SetStyle (Style);
 			
+			SetSizeRequest ();
+			
 			Painter.Shown ();
 			Keyboard.Grab (GdkWindow, true, Gtk.Global.CurrentEventTime);
 			AnimatedDraw ();
@@ -1443,6 +1447,8 @@ namespace Docky.Interface
 			Painter.Hidden ();
 			Painter = null;
 			Keyboard.Ungrab (Gtk.Global.CurrentEventTime);
+			
+			SetSizeRequest ();
 			
 			SetTooltipVisibility ();
 			AnimatedDraw ();
@@ -1522,6 +1528,9 @@ namespace Docky.Interface
 			UpdateMonitorGeometry ();
 			
 			int height = ZoomedDockHeight;
+			int width = Math.Min (UserArgs.MaxSize, Preferences.IsVertical ? monitor_geo.Height : monitor_geo.Width);
+			if (Painter != null)
+				height += ZoomedIconSize;
 			int width = Math.Min (UserArgs.MaxSize, Preferences.IsVertical ? monitor_geo.Height : monitor_geo.Width);
 			
 			if (Gdk.Screen.Default.IsComposited)

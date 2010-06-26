@@ -190,7 +190,7 @@ namespace WeatherDocklet
 			if (Status != WeatherDockletStatus.Error && Status != WeatherDockletStatus.Initializing)
 				return pbuf;
 			
-			return DockServices.Drawing.MonochromePixbuf (pbuf);
+			return pbuf.MonochromePixbuf ();
 		}
 		
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)

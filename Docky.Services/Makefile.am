@@ -10,6 +10,7 @@ FILES = \
 	AssemblyInfo.cs \
 	Docky.Services/Extensions/GLibFileExtension.cs \
 	Docky.Services/Extensions/GLibMountExtension.cs \
+	Docky.Services/Extensions/GdkPixbufExtension.cs \
 	Docky.Services/Extensions/GtkIconThemeExtension.cs \
 	Docky.Services/Logging/ConsoleCrayon.cs \
 	Docky.Services/Logging/LogBase.cs \

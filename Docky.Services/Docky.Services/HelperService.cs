@@ -180,7 +180,7 @@ namespace Docky.Services
 			
 			try {
 				TarArchive ar = TarArchive.CreateInputTarArchive (new IO.FileStream (file.Path, IO.FileMode.Open));
-				ar.ExtractContents (UserScriptsDir.Path);
+				ar.ExtractContents (UserDir.Path);
 			} catch (Exception e) {
 				Log<HelperService>.Error ("Error trying to unpack '{0}': {1}", file.Path, e.Message);
 				Log<HelperService>.Debug (e.StackTrace);

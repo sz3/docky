@@ -134,6 +134,19 @@ AC_SUBST([DOCKY_WIDGETS_LIBS])
 DOCKY_WINDOWING_LIBS="-r:$(pwd)/build/Docky.Windowing.dll"
 AC_SUBST([DOCKY_WINDOWING_LIBS])
 
+AM_CONDITIONAL(CONFIG_REQUESTED, test -z "")
+
+dnl {{{ run with heapshot
+AC_ARG_ENABLE(heap-shot,
+	AC_HELP_STRING([--enable-heap-shot],
+		[Run with heap-shot [default=NO]]),
+		enable_heap_shot=yes, enable_heap_shot=no)
+AM_CONDITIONAL(ENABLE_HEAP_SHOT, test "x$enable_heap_shot" = "xyes")
+if test -z "$ENABLE_HEAP_SHOT_TRUE" ; then
+	CONFIG_REQUESTED="yes"
+	MONO_DEBUG_ARGS+="--profile=heap-shot "
+fi
+dnl }}}
 
 dnl {{{ enable debug release configuration
 AC_ARG_ENABLE(debug,
@@ -141,12 +154,10 @@ AC_ARG_ENABLE(debug,
 		[Use 'DEBUG' Configuration [default=NO]]),
 		enable_debug=yes, enable_debug=no)
 AM_CONDITIONAL(ENABLE_DEBUG, test "x$enable_debug" = "xyes")
-if test "x$enable_debug" = "xyes" ; then
+if test -z "$ENABLE_DEBUG_TRUE" ; then
 	CONFIG_REQUESTED="yes"
-	MONO_DEBUG_ARGS="--debug"
-	AC_SUBST(MONO_DEBUG_ARGS)
-	DOCKY_DEBUG_ARGS="--debug"
-	AC_SUBST(DOCKY_DEBUG_ARGS)
+	MONO_DEBUG_ARGS+="--debug "
+	DOCKY_DEBUG_ARGS+="--debug "
 fi
 dnl }}}
 
@@ -156,13 +167,16 @@ AC_ARG_ENABLE(release,
 		[Use 'RELEASE' Configuration [default=NO]]),
 		enable_release=yes, enable_release=no)
 AM_CONDITIONAL(ENABLE_RELEASE, test "x$enable_release" = "xyes")
-if test "x$enable_release" = "xyes" ; then
+if test -z "$ENABLE_RELEASE_TRUE" ; then
 	CONFIG_REQUESTED="yes"
 fi
-if test -z "$CONFIG_REQUESTED" ; then
-	AM_CONDITIONAL(ENABLE_DEBUG, true)
-fi
 dnl }}}
+
+if test -z "$CONFIG_REQUESTED" ; then
+	AM_CONDITIONAL(CONFIG_REQUESTED, true)
+	AC_SUBST(MONO_DEBUG_ARGS)
+	AC_SUBST(DOCKY_DEBUG_ARGS)
+fi
 
 AC_CONFIG_FILES([
 Docky/Makefile
@@ -250,7 +264,8 @@ ${PACKAGE}-${VERSION}
     Mono Runtime:       ${MONO}
 
   Build/Development
-    Debug Build:        ${enable_debug}
     Release Build:      ${enable_release}
+    Debug Build:        ${enable_debug}
+    Use HeapShot:       ${enable_heap_shot}
 
 EOF
