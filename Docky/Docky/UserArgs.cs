@@ -26,12 +26,37 @@ namespace Docky
 	public class UserArgs
 	{
 		const int FORCE_BUFFER_REFRESH = 10;
-		public static bool NoPollCursor { get; private set; }
-		public static int MaxSize { get; private set; }
-		public static bool NetbookMode { get; private set; }
-		public static uint BufferTime { get; private set; }
-		public static bool HelpShown { get; private set; }
 		
+		/// <summary>
+		/// Gets or sets a value indicating whether cursor polling should be disabled.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> cursor polling should be disabled; otherwise, <c>false</c>.
+		/// </value>
+		public static bool NoPollCursor { get; private set; }
+		/// <summary>
+		/// Gets or sets the maximum dock window size.
+		/// </summary>
+		/// <value>
+		/// The max size of the dock window.
+		/// </value>
+		public static int MaxSize { get; private set; }
+		/// <summary>
+		/// Gets or sets a value indicating whether Docky should run in netbook mode.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> if netbook mode; otherwise, <c>false</c>.
+		/// </value>
+		public static bool NetbookMode { get; private set; }
+		/// <summary>
+		/// The number of minutes to keep buffers.
+		/// </summary>
+		/// <value>
+		/// The buffer refresh interval.
+		/// </value>
+		public static uint BufferTime { get; private set; }
+		
+		static bool HelpShown { get; set; }
 		static OptionSet Options { get; set; }
 		
 		static UserArgs ()
@@ -54,8 +79,17 @@ namespace Docky
 				{ "h|?|help", "Show this help list", help => ShowHelp () },
 			};
 		}
-
-		public static void Parse (string[] args)
+		
+		/// <summary>
+		/// Parse the specified command line args.
+		/// </summary>
+		/// <param name='args'>
+		/// The arguments to parse.
+		/// </param>
+		/// <returns>
+		/// <c>true</c> if help was shown, otherwise <c>false</c>.
+		/// </returns>
+		public static bool Parse (string[] args)
 		{
 			try {
 				Options.Parse (args);
@@ -74,9 +108,12 @@ namespace Docky
 			Log<UserArgs>.Debug ("MaxSize = " + MaxSize);
 			Log<UserArgs>.Debug ("NetbookMode = " + NetbookMode);
 			Log<UserArgs>.Debug ("NoPollCursor = " + NoPollCursor);
+			
+			// if the help was shown, return false, alerting the main thread to exit
+			return !HelpShown;
 		}
 		
-		public static void ShowHelp ()
+		static void ShowHelp ()
 		{
 			Console.WriteLine ("usage: docky [options]");
 			Console.WriteLine ();
