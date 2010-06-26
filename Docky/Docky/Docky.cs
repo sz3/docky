@@ -24,7 +24,6 @@ using System.Threading;
 using System.IO;
 
 using Mono.Unix;
-using NDesk.DBus;
 
 using Gdk;
 using Gtk;
@@ -58,9 +57,9 @@ namespace Docky
 			
 			//Init gtk and GLib related
 			Catalog.Init ("docky", AssemblyInfo.LocaleDirectory);
-			if (!GLib.Thread.Supported) GLib.Thread.Init ();
+			if (!GLib.Thread.Supported)
+				GLib.Thread.Init ();
 			Gdk.Threads.Init ();
-			NDesk.DBus.BusG.Init ();
 			Gtk.Application.Init ("Docky", ref args);
 			Gnome.Vfs.Vfs.Initialize ();
 			GLib.GType.Init ();
@@ -72,10 +71,6 @@ namespace Docky
 			
 			// set process name
 			DockServices.System.SetProcessName ("docky");
-			if (CheckForInstance ()) {
-				Log.Error ("Another Docky instance was detected - exiting.");
-				return;
-			}
 			
 			// cache main thread
 			SystemService.MainThread = Thread.CurrentThread;
@@ -86,7 +81,11 @@ namespace Docky
 				CheckComposite ();
 			};
 			
-			DBusManager.Default.Initialize ();
+			if (!DBusManager.Default.Initialize ()) {
+				Log.Fatal ("Another Docky instance was detected - exiting.");
+				return;	
+			}
+				
 			DBusManager.Default.QuitCalled += delegate {
 				Quit ();
 			};
@@ -111,12 +110,6 @@ namespace Docky
 		}
 		
 		static uint checkCompositeTimer = 0;
-		
-		static bool CheckForInstance ()
-		{
-			return Bus.Session.NameHasOwner ("org.gnome.Docky");
-		}
-		
 		static void CheckComposite ()
 		{
 			if (checkCompositeTimer != 0) {

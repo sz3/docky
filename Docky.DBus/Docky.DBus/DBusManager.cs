@@ -43,7 +43,7 @@ namespace Docky.DBus
 		bool InitializePrivateBus (Bus bus)
 		{
 			if (bus.RequestName (BusName) != RequestNameReply.PrimaryOwner) {
-				Log<DBusManager>.Error ("Bus Name '" + BusName + "' is already owned");
+				Log<DBusManager>.Error ("Bus Name '{0}' is already owned", BusName);
 				return false;
 			}
 			
@@ -54,7 +54,7 @@ namespace Docky.DBus
 			
 			ObjectPath dockyPath = new ObjectPath (DockyPath);
 			bus.Register (dockyPath, docky);
-			Log<DBusManager>.Debug ("DBus Registered: " + BusName);
+			Log<DBusManager>.Debug ("DBus Registered: {0}", BusName);
 			
 			return true;
 		}
@@ -95,11 +95,11 @@ namespace Docky.DBus
 		
 		DockManagerDBus dock_manager;
 		
-		bool InitializeSharedBus (Bus bus)
+		void InitializeSharedBus (Bus bus)
 		{
 			if (bus.RequestName (DockManagerBusName) != RequestNameReply.PrimaryOwner) {
-				Log<DBusManager>.Error ("Bus Name '" + DockManagerBusName + "' is already owned");
-				return false;
+				Log<DBusManager>.Warn ("Bus Name '{0}' is already owned", DockManagerBusName);
+				return;
 			}
 			
 			item_dict = new Dictionary<AbstractDockItem, DockManagerDBusItem> ();
@@ -108,9 +108,7 @@ namespace Docky.DBus
 			
 			ObjectPath dockPath = new ObjectPath (DockManagerPath);
 			bus.Register (dockPath, dock_manager);
-			Log<DBusManager>.Debug ("DBus Registered: " + DockManagerBusName);
-			
-			return true;
+			Log<DBusManager>.Debug ("DBus Registered: {0}", DockManagerBusName);
 		}
 		
 		internal string PathForItem (AbstractDockItem item)
@@ -145,7 +143,7 @@ namespace Docky.DBus
 			try {
 				Bus.Session.Unregister (path);
 			} catch (Exception e) {
-				Log<DBusManager>.Error ("Could not unregister: " + path);
+				Log<DBusManager>.Error ("Could not unregister: {0}", path);
 				Log<DBusManager>.Debug (e.StackTrace);
 				return;
 			}
@@ -168,18 +166,24 @@ namespace Docky.DBus
 		
 		private DBusManager () { }
 		
-		public void Initialize ()
+		public bool Initialize ()
 		{
+			NDesk.DBus.BusG.Init ();
+			
 			Bus bus = Bus.Session;
 			
-			if (!(InitializePrivateBus (bus) | InitializeSharedBus (bus)))
-				return;
+			if (!InitializePrivateBus (bus))
+				return false;
+			
+			InitializeSharedBus (bus);
 			
 			DockServices.Helpers.HelperStatusChanged += delegate(object sender, HelperStatusChangedEventArgs e) {
 				// if a script has stopped running, trigger a refresh
 				if (!e.IsRunning)
 					ForceRefresh ();
 			};
+			
+			return true;
 		}
 		
 		public void ForceRefresh ()
