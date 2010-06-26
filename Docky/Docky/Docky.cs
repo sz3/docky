@@ -60,7 +60,6 @@ namespace Docky
 			if (!GLib.Thread.Supported)
 				GLib.Thread.Init ();
 			Gdk.Threads.Init ();
-			NDesk.DBus.BusG.Init ();
 			Gtk.Application.Init ("Docky", ref args);
 			Gnome.Vfs.Vfs.Initialize ();
 			GLib.GType.Init ();
@@ -84,7 +83,11 @@ namespace Docky
 				CheckComposite ();
 			};
 			
-			DBusManager.Default.Initialize ();
+			if (!DBusManager.Default.Initialize ()) {
+				Log.Fatal ("Another Docky instance was detected - exiting.");
+				return;	
+			}
+				
 			DBusManager.Default.QuitCalled += delegate {
 				Quit ();
 			};
