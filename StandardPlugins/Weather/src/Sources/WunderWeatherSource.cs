@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Robert Dyer
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -154,22 +155,18 @@ namespace WeatherDocklet
 		
 		protected override void FetchData ()
 		{
-			XmlDocument xml = FetchXml (FeedUrl);
-			ParseXml (xml);
-			
-			xml = FetchXml (FeedForecastUrl);
-			ParseXmlForecast (xml);
+			FetchAndParse (FeedUrl, ParseXml);
+			FetchAndParse (FeedForecastUrl, ParseXmlForecast);
 		}
 		
 		protected override void ParseXml (XmlDocument xml)
 		{
 			XmlNodeList nodelist;
 			
-			if (WeatherController.EncodedCurrentLocation.StartsWith("PWS.")) {
+			if (WeatherController.EncodedCurrentLocation.StartsWith("PWS."))
 				nodelist = xml.SelectNodes ("current_observation/location");
-			} else {
+			else
 				nodelist = xml.SelectNodes ("current_observation/display_location");
-			}
 			
 			XmlNode item = nodelist.Item (0);
 			City = item.SelectSingleNode ("city").InnerText;
