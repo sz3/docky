@@ -28,13 +28,12 @@ namespace Docky
 		public static bool NoPollCursor { get; private set; }
 		public static int MaxSize { get; private set; }
 		public static bool NetbookMode { get; private set; }
-		public static bool NvidiaMode { get; private set; }
 		public static uint BufferTime { get; private set; }
 		public static bool HelpShown { get; private set; }
 		
 		static OptionSet Options { get; set; }
-
-		public static void Parse (string[] args)
+		
+		static UserArgs ()
 		{
 			MaxSize = int.MaxValue;
 			
@@ -47,20 +46,27 @@ namespace Docky
 				{ "n|netbook", "Netbook mode", netbook => NetbookMode = true },
 				{ "nv|nvidia", "Nvidia mode (for Nvidia cards that lag after a while).  Equivalent to '-b 10'.",
 					nv => {
-						NvidiaMode = true;
 						if (BufferTime == 0)
 							BufferTime = 10;
 					} },
 				{ "b|buffer-time=", "Maximum time (in minutes) to keep buffers", (uint buf) => BufferTime = buf },
 				{ "h|?|help", "Show this help list", help => ShowHelp () },
 			};
-			
+		}
+
+		public static void Parse (string[] args)
+		{
 			try {
 				Options.Parse (args);
 			} catch (OptionException ex) {
 				Log<UserArgs>.Error ("Error parsing options: {0}", ex.Message);
 				ShowHelp ();
 			}
+			
+			// if the buffer time wasn't explicity set, and a Nvidia card is present,
+			// force the buffer refresh time to 10 minutes
+			if (DockServices.System.HasNvidia && BufferTime == 0)
+				BufferTime = 10;
 			
 			// log the parsed user args
 			Log<UserArgs>.Debug ("BufferTime = " + BufferTime);
