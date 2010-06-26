@@ -127,6 +127,7 @@ namespace Docky.Items
 					int [] emblemPositions = { 2, 1, 0, 3};
 					int i=0;
 					emblems.Reverse ()
+						.Where (e => !string.IsNullOrEmpty (e))
 						.Take (4)
 						.ToList ()
 						.ForEach (e => {
