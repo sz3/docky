@@ -186,6 +186,8 @@ namespace Docky.Interface
 		{
 			Owner.CursorTracker.RequestHighResolution (this);
 			InternalDragActive = true;
+			Keyboard.Grab (Owner.GdkWindow, true, Gtk.Global.CurrentEventTime);
+			drag_canceled = false;
 			
 			if (proxy_window != null) {
 				EnableDragTo ();
@@ -344,6 +346,8 @@ namespace Docky.Interface
 			ExternalDragActive = false;
 		}
 		
+		bool drag_canceled;
+		
 		/// <summary>
 		/// Emitted on the drag source when the drag finishes
 		/// </summary>
@@ -352,7 +356,7 @@ namespace Docky.Interface
 			if (RepositionMode)
 				Owner.CursorTracker.CursorPositionChanged -= HandleCursorPositionChanged;
 			
-			if (drag_item != null) {
+			if (!drag_canceled && drag_item != null) {
 				if (!Owner.DockHovered) {
 					// Remove from dock
 					AbstractDockItemProvider provider = ProviderForItem (drag_item);
@@ -381,6 +385,7 @@ namespace Docky.Interface
 			
 			InternalDragActive = false;
 			drag_item = null;
+			Keyboard.Ungrab (Gtk.Global.CurrentEventTime);
 			
 			Owner.AnimatedDraw ();
 			Owner.CursorTracker.CancelHighResolution (this);
@@ -399,7 +404,8 @@ namespace Docky.Interface
 		/// </summary>
 		void HandleDragFailed (object o, DragFailedArgs args)
 		{
-			args.RetVal = true;
+			drag_canceled = args.DragResult == DragResult.UserCancelled;
+			args.RetVal = !drag_canceled;
 		}
 
 		/// <summary>
