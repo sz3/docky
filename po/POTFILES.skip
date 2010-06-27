@@ -1,3 +1,4 @@
 data/docky.desktop.in
+Docky/Mono/Options.cs
 Docky.DBus/Docky.DBus/DockManagerDBus.cs
 Docky.Windowing/Windowing/WindowMatcher.cs
