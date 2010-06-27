@@ -50,6 +50,7 @@ namespace Docky.Interface
 		bool drag_disabled = false;
 		int marker = 0;
 		uint drag_hover_timer;
+		IDictionary<AbstractDockItem, int> original_item_pos = new Dictionary<AbstractDockItem, int> ();
 		
 		AbstractDockItem drag_item;
 		
@@ -196,6 +197,9 @@ namespace Docky.Interface
 			
 			Gdk.Pixbuf pbuf;
 			drag_item = Owner.HoveredItem;
+			original_item_pos.Clear ();
+			foreach (AbstractDockItem adi in ProviderForItem (drag_item).Items)
+				original_item_pos [adi] = adi.Position;
 			
 			// If we are in Reposition Mode or over a non-draggable item
 			// dont drag it!
@@ -405,6 +409,15 @@ namespace Docky.Interface
 		void HandleDragFailed (object o, DragFailedArgs args)
 		{
 			drag_canceled = args.DragResult == DragResult.UserCancelled;
+			
+			if (drag_canceled) {
+				foreach (KeyValuePair<AbstractDockItem, int> kvp in original_item_pos)
+					kvp.Key.Position = kvp.Value;
+				
+				Owner.UpdateCollectionBuffer ();
+				Owner.Preferences.SyncPreferences ();
+			}
+			
 			args.RetVal = !drag_canceled;
 		}
 
