@@ -38,7 +38,7 @@ namespace Docky.DBus
 				//"dock-item-message",
 				"dock-item-tooltip",
 				"dock-item-badge",
-				//"dock-item-progress",
+				"dock-item-progress",
 				//"dock-item-visible",
 				"dock-item-icon-file",
 				"dock-item-attention",

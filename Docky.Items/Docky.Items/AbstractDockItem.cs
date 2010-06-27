@@ -148,6 +148,11 @@ namespace Docky.Items
 		}
 		
 		/// <summary>
+		/// The progress (0 to 100) for the item.  If it is negative it should not be shown.
+		/// </summary>
+		public int Progress { get; set; }
+		
+		/// <summary>
 		/// The text displayed when an item is hovered
 		/// </summary>
 		public string HoverText {
@@ -222,6 +227,8 @@ namespace Docky.Items
 		public AbstractDockItem ()
 		{
 			ScalableRendering = true;
+			Progress = -1;
+			BadgeText = "";
 			icon_buffers = new DockySurface[2];
 			badgeColors = new Cairo.Color[2];
 			redraw = new bool[2];
@@ -597,6 +604,8 @@ namespace Docky.Items
 			}
 			
 			PaintBadgeSurface (icon_buffers [i]);
+			PaintMessagesSurface (icon_buffers [i]);
+			PaintProgressSurface (icon_buffers [i]);
 			
 			redraw [i] = false;
 			
@@ -613,6 +622,94 @@ namespace Docky.Items
 		protected virtual void PaintIconSurface3d (DockySurface surface, int threeDimHeight)
 		{
 			PaintIconSurface (surface);
+		}
+		
+		void PaintMessagesSurface (DockySurface surface)
+		{
+			//PaintMessage (surface, "down", "132kB", 2);
+			//PaintMessage (surface, "up", "12kB", 3);
+		}
+		
+		void PaintMessage (DockySurface surface, string icon, string message, int slot)
+		{
+			surface.Context.LineWidth = 0.5;
+			
+			double yOffset = slot * surface.Height / 4.0;
+			surface.Context.RoundedRectangle (2, yOffset, surface.Width - 4, surface.Height / 4.0 - 2, 2.0);
+			surface.Context.Color = new Cairo.Color (1, 1, 1, 0.9);
+			surface.Context.StrokePreserve ();
+			surface.Context.Color = new Cairo.Color (0, 0, 0, 0.7);
+			surface.Context.Fill ();
+			
+			int iconSize = 0;
+			if (!string.IsNullOrEmpty (icon)) {
+				iconSize = surface.Height / 4 - 4;
+				
+				using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (icon, iconSize, iconSize)) {
+					Gdk.CairoHelper.SetSourcePixbuf (surface.Context, 
+													 pbuf, 
+													 4 + (iconSize - pbuf.Width) / 2, 
+													 1 + yOffset + (iconSize - pbuf.Height) / 2);
+					surface.Context.Paint ();
+				}
+			}
+			
+			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ())
+			{
+				layout.Width = Pango.Units.FromPixels (surface.Width - iconSize - 8);
+				layout.Ellipsize = Pango.EllipsizeMode.None;
+				layout.FontDescription = new Gtk.Style ().FontDescription;
+				layout.FontDescription.Weight = Pango.Weight.Normal;
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (surface.Height / 4 - 6);
+				layout.SetText (message);
+				
+				Pango.Rectangle inkRect, logicalRect;
+				layout.GetPixelExtents (out inkRect, out logicalRect);
+				
+				surface.Context.MoveTo (surface.Width - 4 - logicalRect.Width, yOffset + (surface.Height / 4.0 - 2 - logicalRect.Height) / 2);
+				
+				Pango.CairoHelper.LayoutPath (surface.Context, layout);
+				surface.Context.LineWidth = 2;
+				surface.Context.StrokePreserve ();
+				surface.Context.Color = new Cairo.Color (1, 1, 1, 1);
+				surface.Context.Fill ();
+				
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
+			}
+		}
+		
+		void PaintProgressSurface (DockySurface surface)
+		{
+			if (Progress < 0)
+				return;
+			
+			double center = surface.Width / 4.0;
+			surface.Context.MoveTo (center, center);
+			surface.Context.Arc (center, center, center, -Math.PI / 2.0, Math.PI * 2.0 * Progress / 100.0- Math.PI / 2.0);
+			surface.Context.LineTo (center, center);
+			surface.Context.Color = badgeColors [1];
+			surface.Context.StrokePreserve ();
+			surface.Context.Color = badgeColors [0];
+			surface.Context.Fill ();
+			/*
+			double lineSize = surface.Width / 9.0;
+			
+			double yOffset = lineSize + (100 - Progress) * (surface.Height - 2 * lineSize) / 100.0;
+			
+			surface.Context.LineWidth = lineSize;
+			surface.Context.LineCap = LineCap.Round;
+			
+			surface.Context.MoveTo (1 + lineSize, 1 + yOffset);
+			surface.Context.LineTo (1 + lineSize, 1 + surface.Height - lineSize);
+			surface.Context.Color = badgeColors [1];
+			surface.Context.Stroke ();
+			
+			surface.Context.MoveTo (lineSize, yOffset);
+			surface.Context.LineTo (lineSize, surface.Height - lineSize);
+			surface.Context.Color = badgeColors [0];
+			surface.Context.Stroke ();
+			*/
 		}
 		
 		void PaintBadgeSurface (DockySurface surface)
