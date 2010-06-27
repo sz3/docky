@@ -875,7 +875,6 @@ namespace Docky.Items
 			AppDomain.CurrentDomain.ProcessExit -= HandleProcessExit;
 			Gtk.IconTheme.Default.Changed -= HandleIconThemeChanged;
 			ResetBuffers ();
-			RemoteMenuItems.Dispose ();
 		}
 
 		#endregion
