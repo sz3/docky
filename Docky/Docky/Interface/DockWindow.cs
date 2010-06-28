@@ -1624,10 +1624,16 @@ namespace Docky.Interface
 			}
 			
 			if (hoverRegion)
-				return new Gdk.Rectangle ((int) (val.StaticCenter.X - width / 2),
-					(int) (val.Center.Y - (height * val.Zoom / 2)),
-					width,
-					(int) (height * val.Zoom));
+				if (Preferences.IsVertical)
+					return new Gdk.Rectangle ((int) (val.Center.X - (width * val.Zoom / 2)),
+						(int) (val.StaticCenter.Y - height / 2),
+						(int) (width * val.Zoom),
+						height);
+				else
+					return new Gdk.Rectangle ((int) (val.StaticCenter.X - width / 2),
+						(int) (val.Center.Y - (height * val.Zoom / 2)),
+						width,
+						(int) (height * val.Zoom));
 			
 			return new Gdk.Rectangle ((int) (val.Center.X - (width * val.Zoom / 2)),
 				(int) (val.Center.Y - (height * val.Zoom / 2)),
