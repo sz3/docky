@@ -150,7 +150,7 @@ namespace Docky.Items
 		/// <summary>
 		/// The progress (0 to 100) for the item.  If it is negative it should not be shown.
 		/// </summary>
-		public int Progress { get; set; }
+		public double Progress { get; set; }
 		
 		/// <summary>
 		/// The text displayed when an item is hovered
@@ -227,7 +227,8 @@ namespace Docky.Items
 		public AbstractDockItem ()
 		{
 			ScalableRendering = true;
-			Progress = -1;
+			Random rnd = new Random ();
+			Progress = rnd.Next (0, 100) / 100.0;
 			BadgeText = "";
 			icon_buffers = new DockySurface[2];
 			badgeColors = new Cairo.Color[2];
@@ -684,32 +685,96 @@ namespace Docky.Items
 			if (Progress < 0)
 				return;
 			
-			double center = surface.Width / 4.0;
-			surface.Context.MoveTo (center, center);
-			surface.Context.Arc (center, center, center, -Math.PI / 2.0, Math.PI * 2.0 * Progress / 100.0- Math.PI / 2.0);
-			surface.Context.LineTo (center, center);
-			surface.Context.Color = badgeColors [1];
-			surface.Context.StrokePreserve ();
-			surface.Context.Color = badgeColors [0];
-			surface.Context.Fill ();
-			/*
-			double lineSize = surface.Width / 9.0;
+			double padding = 2.0;
+			double width = surface.Width - 2 * padding;
+			double height = Math.Min (26.0, 0.18 * surface.Height);
+			double x = padding;
+			double y = surface.Height - height - padding;
 			
-			double yOffset = lineSize + (100 - Progress) * (surface.Height - 2 * lineSize) / 100.0;
-			
+			double lineSize = 1.0;
 			surface.Context.LineWidth = lineSize;
-			surface.Context.LineCap = LineCap.Round;
 			
-			surface.Context.MoveTo (1 + lineSize, 1 + yOffset);
-			surface.Context.LineTo (1 + lineSize, 1 + surface.Height - lineSize);
-			surface.Context.Color = badgeColors [1];
-			surface.Context.Stroke ();
+			// draw the outer stroke
+			x += lineSize / 2.0;
+			y += lineSize / 2.0;
+			width -= lineSize;
+			height -= lineSize;
 			
-			surface.Context.MoveTo (lineSize, yOffset);
-			surface.Context.LineTo (lineSize, surface.Height - lineSize);
-			surface.Context.Color = badgeColors [0];
+			LinearGradient outer_stroke = new LinearGradient (0, y, 0, y + height);
+			outer_stroke.AddColorStop (0, new Cairo.Color (0, 0, 0, 0.3));
+			outer_stroke.AddColorStop (1, new Cairo.Color (1, 1, 1, 0.3));
+			
+			DrawRoundedLine (surface, x, y, width, height, true, true, outer_stroke, null);
+			outer_stroke.Destroy ();
+			
+			// draw the finished stroke/fill
+			x += lineSize;
+			y += lineSize;
+			width -= 2 * lineSize;
+			height -= 2 * lineSize;
+			double finishedWidth = Progress * width - lineSize / 2.0;
+			
+			LinearGradient finished_stroke = new LinearGradient (0, y, 0, y + height);
+			finished_stroke.AddColorStop (0, new Cairo.Color (67 / 255.0, 165 / 255.0, 226 / 255.0, 1));
+			finished_stroke.AddColorStop (1, new Cairo.Color (32 / 255.0, 94 / 255.0, 136 / 255.0, 1));
+			LinearGradient finished_fill = new LinearGradient (0, y, 0, y + height);
+			finished_fill.AddColorStop (0, new Cairo.Color (91 / 255.0, 174 / 255.0, 226 / 255.0, 1));
+			finished_fill.AddColorStop (1, new Cairo.Color (35 / 255.0, 115 / 255.0, 164 / 255.0, 1));
+			
+			DrawRoundedLine (surface, x, y, finishedWidth, height, true, false, finished_stroke, finished_fill);
+			finished_stroke.Destroy ();
+			finished_fill.Destroy ();
+			
+			// draw the remaining stroke/fill
+			LinearGradient remaining_stroke = new LinearGradient (0, y, 0, y + height);
+			remaining_stroke.AddColorStop (0, new Cairo.Color (82 / 255.0, 82 / 255.0, 82 / 255.0, 1));
+			remaining_stroke.AddColorStop (1, new Cairo.Color (148 / 255.0, 148 / 255.0, 148 / 255.0, 1));
+			LinearGradient remaining_fill = new LinearGradient (0, y, 0, y + height);
+			remaining_fill.AddColorStop (0, new Cairo.Color (106 / 255.0, 106 / 255.0, 106 / 255.0, 1));
+			remaining_fill.AddColorStop (1, new Cairo.Color (159 / 255.0, 159 / 255.0, 159 / 255.0, 1));
+			
+			DrawRoundedLine (surface, x + finishedWidth + lineSize, y, width - finishedWidth, height, false, true, remaining_stroke, remaining_fill);
+			remaining_stroke.Destroy ();
+			remaining_fill.Destroy ();
+			
+			// draw the highlight on the finished part
+			x += lineSize;
+			y += lineSize;
+			width -= lineSize;
+			height -= 2 * lineSize;
+			
+			LinearGradient finished_highlight = new LinearGradient (0, y, 0, y + height);
+			finished_highlight.AddColorStop (0, new Cairo.Color (1, 1, 1, 0.3));
+			finished_highlight.AddColorStop (0.2, new Cairo.Color (1, 1, 1, 0));
+			
+			DrawRoundedLine (surface, x, y, finishedWidth, height, true, false, finished_highlight, null);
+			finished_highlight.Destroy ();
+		}
+		
+		void DrawRoundedLine (DockySurface surface, double x, double y, double width, double height, bool roundLeft, bool roundRight, Gradient stroke, Gradient fill)
+		{
+			double leftRadius = roundLeft ? height / 2.0 : 0.0;
+			double rightRadius = roundRight ? height / 2.0 : 0.0;
+			
+			surface.Context.MoveTo (x + width - rightRadius, y);
+			surface.Context.LineTo (x + leftRadius, y);
+			if (roundLeft)
+				surface.Context.ArcNegative (x + leftRadius, y + height / 2.0, leftRadius, -Math.PI / 2.0, Math.PI / 2.0);
+			else
+				surface.Context.LineTo (x, y + height);
+			surface.Context.LineTo (x + width - rightRadius, y + height);
+			if (roundRight)
+				surface.Context.ArcNegative (x + width - rightRadius, y + height / 2.0, rightRadius, Math.PI / 2.0, -Math.PI / 2.0);
+			else
+				surface.Context.LineTo (x + width, y);
+			surface.Context.ClosePath ();
+			
+			if (fill != null) {
+				surface.Context.Pattern = fill;
+				surface.Context.FillPreserve ();
+			}
+			surface.Context.Pattern = stroke;
 			surface.Context.Stroke ();
-			*/
 		}
 		
 		void PaintBadgeSurface (DockySurface surface)
