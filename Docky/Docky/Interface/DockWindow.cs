@@ -1897,11 +1897,12 @@ namespace Docky.Interface
 					}
 				} else if (MaxIconSize < Preferences.IconSize) {
 					// Perhaps MaxIconSize is too small, lets find out!
-					while (dockWidth < maxWidth && MaxIconSize <= Preferences.IconSize) {
+					while (dockWidth < maxWidth && MaxIconSize < Preferences.IconSize) {
 						MaxIconSize++;
 						dockWidth = DockWidth;
 					}
-					MaxIconSize--;
+				} else {
+					MaxIconSize = Preferences.IconSize;
 				}
 				AnimatedDraw ();
 				icon_size_timer = 0;

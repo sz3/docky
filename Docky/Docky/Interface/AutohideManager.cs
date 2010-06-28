@@ -38,6 +38,7 @@ namespace Docky.Interface
 		
 		static IPreferences prefs = DockServices.Preferences.Get <AutohideManager> ();
 		static uint unhideDelay = (uint) prefs.Get<int> ("UnhideDelay", 0);
+		static uint updateDelay = (uint) prefs.Get<int> ("UpdateDelay", 200);
 		
 		Gdk.Rectangle cursor_area, intersect_area, last_known_geo;
 		Wnck.Screen screen;
@@ -156,7 +157,7 @@ namespace Docky.Interface
 			if (timer_activewindow > 0)
 				return;
 
-			timer_activewindow = GLib.Timeout.Add (200, delegate {
+			timer_activewindow = GLib.Timeout.Add (updateDelay, delegate {
 				SetupActiveWindow ();
 				UpdateWindowIntersect ();
 				timer_activewindow = 0;
@@ -200,7 +201,7 @@ namespace Docky.Interface
 			if (timer_geometry > 0)
 				return;
 			
-			timer_geometry = GLib.Timeout.Add (200, delegate {
+			timer_geometry = GLib.Timeout.Add (updateDelay, delegate {
 				UpdateWindowIntersect ();
 				timer_geometry = 0;
 				return false;
