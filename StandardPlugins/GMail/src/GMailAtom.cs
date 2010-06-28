@@ -217,7 +217,9 @@ namespace GMail
 						
 						UnreadMessage message = new UnreadMessage ();
 						message.Topic = HttpUtility.HtmlDecode (item.SelectSingleNode ("atom:title", nsmgr).InnerText);
-						message.FromName = HttpUtility.HtmlDecode (item.SelectSingleNode ("atom:author/atom:name", nsmgr).InnerText);
+						XmlNode from = item.SelectSingleNode ("atom:author/atom:name", nsmgr);
+						if (from != null)
+							message.FromName = HttpUtility.HtmlDecode (from.InnerText);
 						message.FromEmail = item.SelectSingleNode ("atom:author/atom:email", nsmgr).InnerText;
 						message.From = message.FromName + " <" + message.FromEmail + ">";
 						try {
