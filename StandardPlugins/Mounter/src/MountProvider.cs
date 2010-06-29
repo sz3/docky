@@ -80,7 +80,7 @@ namespace Mounter
 			// FIXME: due to a bug in GIO#, this will crash when trying to get args.Mount
 			Mount m = MountAdapter.GetObject (args.Args[0] as GLib.Object);
 			
-			if (!IsTrash (m) && Mounts.Any (d => d.Mnt.Handle == m.Handle)) {
+			if (Mounts.Any (d => d.Mnt.Handle == m.Handle)) {
 				MountItem mntToRemove = Mounts.First (d => d.Mnt.Handle == m.Handle);
 				
 				Mounts.Remove (mntToRemove);
