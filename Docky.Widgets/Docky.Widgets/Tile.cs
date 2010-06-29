@@ -271,10 +271,36 @@ namespace Docky.Widgets
 
 		public override void Dispose ()
 		{
+			AddImage.Dispose ();
+			RemoveImage.Dispose ();
+			
+			foreach (Gtk.Widget widget in button_box.Children)
+				button_box.Remove (widget);
+			button_box.Dispose ();
+			button_box.Destroy ();
+
+			add_remove_button.Clicked -= OnAddRemoveClicked;
+			add_remove_button.Dispose ();
+			add_remove_button.Destroy ();
+			
+			Remove (title);
+			title.Dispose ();
+			title.Destroy ();
+			Remove (tileImage);
+			tileImage.Dispose ();
+			tileImage.Destroy ();
+			Remove (description);
+			description.Dispose ();
+			description.Destroy ();
+			Remove (subDesc);
+			subDesc.Dispose ();
+			subDesc.Destroy ();
+			
 			OwnedObject.IconUpdated -= HandleOwnedObjectIconUpdated;
 			OwnedObject.TextUpdated -= HandleOwnedObjectTextUpdated;
 			OwnedObject.ButtonsUpdated -= HandleOwnedObjectButtonsUpdated;
 			
+			Owner = null;
 			OwnedObject = null;
 
 			base.Dispose ();

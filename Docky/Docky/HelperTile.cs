@@ -31,11 +31,12 @@ namespace Docky
 	{
 		public Helper Helper { get; private set; }
 		Gtk.Button HelpButton;
-
+		Gtk.Button UninstallButton;
+		
 		public HelperTile (Helper helper)
 		{
 			this.Helper = helper;
-			DockServices.Helpers.HelperStatusChanged += HandleHelperHelperStatusChanged;
+			DockServices.Helpers.HelperStatusChanged += HandleHelperStatusChanged;
 			
 			AddButtonStock = Gtk.Stock.Execute;
 			SubDescriptionTitle = Catalog.GetString ("Status");
@@ -51,23 +52,18 @@ namespace Docky
 				if (!string.IsNullOrEmpty (helper.Data.Description))
 					Description = helper.Data.Description;
 				if (helper.Data.Icon != null)
-					ForcePixbuf = helper.Data.Icon;
+					ForcePixbuf = helper.Data.Icon.Copy ();
 			}
 			
 			if (helper.IsUser) {
-				Gtk.Button uninstall_btn = new Gtk.Button (Catalog.GetString ("Uninstall"));
-				uninstall_btn.Clicked += delegate {
-					DockServices.Helpers.UninstallHelper (helper);
-				};
-				AddUserButton (uninstall_btn);
+				UninstallButton = new Gtk.Button (Catalog.GetString ("Uninstall"));
+				UninstallButton.Clicked += HandleUninstallButtonClicked;
+				AddUserButton (UninstallButton);
 			}
+
 			HelpButton = new Gtk.Button ();
 			HelpButton.Image = new Gtk.Image (Gtk.Stock.Help, Gtk.IconSize.SmallToolbar);
-			HelpButton.Clicked += delegate {
-				string id = ((string) Helper.File.Basename).Split ('.')[0];
-				id = char.ToUpper (id[0]) + id.Substring (1).ToLower ();
-				DockServices.System.Open ("http://wiki.go-docky.com/index.php?title=" + id + "_Helper");
-			};
+			HelpButton.Clicked += HandleHelpButtonClicked;
 			AddUserButton (HelpButton);
 			
 			SetProps ();
@@ -76,7 +72,19 @@ namespace Docky
 			AddButtonTooltip = Catalog.GetString ("Enable this helper");
 			RemoveButtonTooltip = Catalog.GetString ("Disable this helper");
 		}
-
+		
+		void HandleHelpButtonClicked (object sender, EventArgs e)
+		{
+			string id = ((string) Helper.File.Basename).Split ('.')[0];
+			id = char.ToUpper (id[0]) + id.Substring (1).ToLower ();
+			DockServices.System.Open ("http://wiki.go-docky.com/index.php?title=" + id + "_Helper");
+		}
+		
+		void HandleUninstallButtonClicked (object sender, EventArgs e)
+		{
+			DockServices.Helpers.UninstallHelper (Helper);
+		}
+		
 		void SetProps ()
 		{
 			SubDescriptionText = Helper.IsRunning ? Catalog.GetString ("Running") : Catalog.GetString ("Stopped");
@@ -89,15 +97,25 @@ namespace Docky
 			SetProps ();
 		}
 		
-		void HandleHelperHelperStatusChanged (object sender, HelperStatusChangedEventArgs e)
+		void HandleHelperStatusChanged (object sender, HelperStatusChangedEventArgs e)
 		{
 			SetProps ();
 		}
 		
 		public override void Dispose ()
 		{
-			DockServices.Helpers.HelperStatusChanged -= HandleHelperHelperStatusChanged;
+			DockServices.Helpers.HelperStatusChanged -= HandleHelperStatusChanged;
 			Helper = null;
+
+			HelpButton.Clicked -= HandleHelpButtonClicked;
+			HelpButton.Dispose ();
+			HelpButton.Destroy ();
+
+			if (UninstallButton != null) {
+				UninstallButton.Clicked -= HandleUninstallButtonClicked;
+				UninstallButton.Dispose ();
+				UninstallButton.Destroy ();
+			}
 			
 			base.Dispose ();
 		}		
