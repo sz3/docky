@@ -2797,7 +2797,7 @@ namespace Docky.Interface
 			Wnck.Screen.Default.WindowOpened    -= HandleWindowOpened;
 			
 			// clear out our separators
-			foreach (AbstractDockItem adi in Items.Where (adi => adi is INonPersistedItem))
+			foreach (AbstractDockItem adi in Items.Where (adi => adi is INonPersistedItem && adi != DockyItem))
 				adi.Dispose ();
 			
 			ResetBuffers ();
