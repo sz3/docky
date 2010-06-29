@@ -276,6 +276,7 @@ namespace Docky.Items
 		public override void Dispose ()
 		{
 			Wnck.Screen.Default.ActiveWindowChanged -= WnckScreenDefaultActiveWindowChanged;
+			Wnck.Screen.Default.WindowClosed -= WnckScreenDefaultWindowClosed;
 			UnregisterWindows (Windows);
 			
 			base.Dispose ();
