@@ -1330,14 +1330,14 @@ namespace Docky.Interface
 				GLib.Idle.Add (delegate {
 					// dispose of our separators as we made them ourselves,
 					// this could be a bit more elegant
-					foreach (AbstractDockItem item in Items.Where (adi => adi is INonPersistedItem))
+					foreach (AbstractDockItem item in Items.Where (adi => adi is INonPersistedItem && adi != DockyItem))
 						item.Dispose ();
 					
 					collection_backend.Clear ();
 					return false;
 				});
 			} else {
-				foreach (AbstractDockItem item in Items.Where (adi => adi is INonPersistedItem))
+				foreach (AbstractDockItem item in Items.Where (adi => adi is INonPersistedItem && adi != DockyItem))
 					item.Dispose ();
 				
 				collection_backend.Clear ();
