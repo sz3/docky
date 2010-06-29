@@ -1330,15 +1330,19 @@ namespace Docky.Interface
 				GLib.Idle.Add (delegate {
 					// dispose of our separators as we made them ourselves,
 					// this could be a bit more elegant
-					foreach (AbstractDockItem item in Items.Where (adi => adi is INonPersistedItem && adi != DockyItem))
+					foreach (AbstractDockItem item in Items.Where (adi => adi is INonPersistedItem && adi != DockyItem)) {
+						DrawValues.Remove (item);
 						item.Dispose ();
+					}
 					
 					collection_backend.Clear ();
 					return false;
 				});
 			} else {
-				foreach (AbstractDockItem item in Items.Where (adi => adi is INonPersistedItem && adi != DockyItem))
+				foreach (AbstractDockItem item in Items.Where (adi => adi is INonPersistedItem && adi != DockyItem)) {
+					DrawValues.Remove (item);
 					item.Dispose ();
+				}
 				
 				collection_backend.Clear ();
 			}
@@ -2797,8 +2801,10 @@ namespace Docky.Interface
 			Wnck.Screen.Default.WindowOpened    -= HandleWindowOpened;
 			
 			// clear out our separators
-			foreach (AbstractDockItem adi in Items.Where (adi => adi is INonPersistedItem && adi != DockyItem))
+			foreach (AbstractDockItem adi in Items.Where (adi => adi is INonPersistedItem && adi != DockyItem)) {
+				DrawValues.Remove (adi);
 				adi.Dispose ();
+			}
 			
 			ResetBuffers ();
 			
