@@ -141,7 +141,7 @@ namespace Docky
 				RemoveUserButton (DownButton);
 			}
 			
-			if (Enabled && PluginManager.ConfigForAddin (Addin.Id) != null)
+			if (Enabled && Addin != null && PluginManager.ConfigForAddin (Addin.Id) != null)
 				AddUserButton (ConfigButton);
 			else
 				RemoveUserButton (ConfigButton);
