@@ -45,9 +45,12 @@ namespace WorkspaceSwitcher
 		
 		bool UseRotatedDeskGrid {
 			get {
+				if (Owner == null || DeskGrid != null)
+					return false;
+
 				// True if the layout has only one column and multiple rows
-				return (DeskGrid != null && DeskGrid.GetLength (0) == 1 && DeskGrid.GetLength (1) > 1);
-				//return (DeskGrid != null && DeskGrid.GetLength (0) < DeskGrid.GetLength (1));
+				return (!Owner.IsOnVerticalDock && DeskGrid.GetLength (0) == 1 && DeskGrid.GetLength (1) > 1)
+					|| (Owner.IsOnVerticalDock && DeskGrid.GetLength (0) > 1 && DeskGrid.GetLength (1) == 1);
 			}
 		}
 		
@@ -272,17 +275,14 @@ namespace WorkspaceSwitcher
 				return new DockySurface (size, size, model);
 			
 			//double ratio = (double) Wnck.Screen.Default.Width / Wnck.Screen.Default.Height;
-			int width;
+			int height = size, width = size;
 			
-			if (UseRotatedDeskGrid)
-				width = Math.Min (IconSize * 3,	Math.Max (IconSize, (int)(size * DeskGrid.GetLength (1) * .5)));
+			if (Owner != null && Owner.IsOnVerticalDock)
+				height = Math.Min (IconSize * 3, Math.Max (size, (int) (size * DeskGrid.GetLength (1) * .5)));
 			else
-				width = Math.Min (IconSize * 3,	Math.Max (IconSize, (int)(size * DeskGrid.GetLength (0) * .5)));
+				width = Math.Min (IconSize * 3, Math.Max (size, (int) (size * DeskGrid.GetLength (0) * .5)));
 			
-			if (Owner.IsOnVerticalDock)
-				return new DockySurface (size, width, model);
-			else
-				return new DockySurface (width, size, model);
+			return new DockySurface (height, width, model);
 		}		
 		
 		protected override void PaintIconSurface (DockySurface surface)
@@ -350,15 +350,9 @@ namespace WorkspaceSwitcher
 			double boxWidth, boxHeight;
 			Cairo.Rectangle area;
 			
-			if (UseRotatedDeskGrid) {
-				boxWidth = (width - 2 * Border) / DeskGrid.GetLength (1);
-				boxHeight = (height - 2 * Border) / DeskGrid.GetLength (0);
-				area = new Cairo.Rectangle (boxWidth * row + Border, boxHeight * column + Border, boxWidth, boxHeight);
-			} else {
-				boxWidth = (width - 2 * Border) / DeskGrid.GetLength (0);
-				boxHeight = (height - 2 * Border) / DeskGrid.GetLength (1);
-				area = new Cairo.Rectangle (boxWidth * column + Border, boxHeight * row + Border, boxWidth, boxHeight);
-			}
+			boxWidth = (width - 2 * Border) / DeskGrid.GetLength (0);
+			boxHeight = (height - 2 * Border) / DeskGrid.GetLength (1);
+			area = new Cairo.Rectangle (boxWidth * column + Border, boxHeight * row + Border, boxWidth, boxHeight);
 			
 			return area;
 		}

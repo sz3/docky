@@ -32,8 +32,6 @@ namespace WorkspaceSwitcher
 			}
 		}
 		
-		public override string Icon { get { return "workspace-switcher"; } }
-		
 		#endregion
 
 		WorkspaceSwitcherDockItem workspaceswitcher;

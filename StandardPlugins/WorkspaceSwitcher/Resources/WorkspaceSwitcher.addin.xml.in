@@ -7,6 +7,7 @@
 	name="Workspace Switcher"
 	description="Switch between your Desks"
 	author="Rico Tzschichholz"
+	icon="workspace-switcher"
 >
  
  	<Dependencies>

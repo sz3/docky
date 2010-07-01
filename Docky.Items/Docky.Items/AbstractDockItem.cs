@@ -551,7 +551,9 @@ namespace Docky.Items
 				if (icon_buffers[j] == null || redraw[j])
 					continue;
 				
-				if (icon_buffers[j].Height == size)
+				if (icon_buffers[j].Height == size 
+				    || (Owner != null && Owner.IsOnVerticalDock && icon_buffers[j].Width == size))
+					
 					return icon_buffers[j];
 			}
 			
