@@ -22,17 +22,18 @@ using Mono.Unix;
 
 namespace Docky.Widgets
 {
-
 	public abstract class AbstractTileObject : IDisposable
 	{
 		/// <summary>
 		/// Triggered when the icon for this tile is updated
 		/// </summary>
 		public event EventHandler IconUpdated;
+		
 		/// <summary>
 		/// Triggered when any text field for this tile is updated
 		/// </summary>
 		public event EventHandler TextUpdated;
+		
 		/// <summary>
 		/// Triggered when a button is updated (Show changed, added, or removed)
 		/// </summary>
@@ -56,15 +57,21 @@ namespace Docky.Widgets
 				ButtonsUpdated (this, EventArgs.Empty);
 		}
 		
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Docky.Widgets.AbstractTileObject"/> class.
+		/// </summary>
 		public AbstractTileObject ()
 		{
 			ExtraButtons = new List<Gtk.Button> ();
 		}
 
-		/// <summary>
-		/// The icon for the tile
-		/// </summary>
 		string icon;
+		/// <summary>
+		/// Gets or sets the icon for the tile.
+		/// </summary>
+		/// <value>
+		/// The icon.
+		/// </value>
 		public virtual string Icon {
 			get {
 				if (icon == null)
@@ -82,10 +89,13 @@ namespace Docky.Widgets
 			}
 		}
 		
-		/// <summary>
-		/// The hue shift to be applied to the icon
-		/// </summary>
 		int? shift;
+		/// <summary>
+		/// Gets or sets the hue shift to be applied to the icon.
+		/// </summary>
+		/// <value>
+		/// The hue shift.
+		/// </value>
 		public virtual int HueShift {
 			get {
 				if (!shift.HasValue)
@@ -100,11 +110,14 @@ namespace Docky.Widgets
 			}
 		}
 		
+		Gdk.Pixbuf force_pbuf;
 		/// <summary>
-		/// Manually specified pixbuf to be used instead of the icon
+		/// Gets or sets the pixbuf to be used for the icon.
 		/// Note: If set this will override the Icon property.
 		/// </summary>
-		Gdk.Pixbuf force_pbuf;
+		/// <value>
+		/// The force pixbuf.
+		/// </value>
 		public virtual Gdk.Pixbuf ForcePixbuf {
 			get {
 				return force_pbuf;
@@ -119,10 +132,13 @@ namespace Docky.Widgets
 			}
 		}
 		
-		/// <summary>
-		/// Description of this tile
-		/// </summary>
 		string desc;
+		/// <summary>
+		/// Gets or sets the description of this tile.
+		/// </summary>
+		/// <value>
+		/// The description.
+		/// </value>
 		public virtual string Description {
 			get { 
 				if (desc == null)
@@ -136,11 +152,14 @@ namespace Docky.Widgets
 				OnTextUpdated ();
 			}
 		}		
-		
-		/// <summary>
-		/// Name of this tile
-		/// </summary>
+
 		string name;
+		/// <summary>
+		/// Gets or sets the name of this tile.
+		/// </summary>
+		/// <value>
+		/// The name.
+		/// </value>
 		public virtual string Name {
 			get { 
 				if (name == null)
@@ -155,14 +174,20 @@ namespace Docky.Widgets
 			}
 		}		
 
+		/// <summary>
+		/// Raises the active changed event.
+		/// </summary>
 		public virtual void OnActiveChanged ()
 		{
 		}
 		
-		/// <summary>
-		/// Subdescription title
-		/// </summary>
 		string sub_desc_title;
+		/// <summary>
+		/// Gets or sets the sub description title.
+		/// </summary>
+		/// <value>
+		/// The sub description title.
+		/// </value>
 		public virtual string SubDescriptionTitle {
 			get { 
 				if (sub_desc_title == null)
@@ -177,10 +202,13 @@ namespace Docky.Widgets
 			}
 		}
 		
-		/// <summary>
-		/// Subdescription text
-		/// </summary>
 		string sub_desc_text;
+		/// <summary>
+		/// Gets or sets the sub description text.
+		/// </summary>
+		/// <value>
+		/// The sub description text.
+		/// </value>
 		public virtual string SubDescriptionText {
 			get { 
 				if (sub_desc_text == null)
@@ -195,10 +223,14 @@ namespace Docky.Widgets
 			}
 		}
 
-		/// <summary>
-		/// Whether or not the button should be shown on the tile
-		/// </summary>
 		bool? show_button;
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="Docky.Widgets.AbstractTileObject"/> 
+		/// should show the action button.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> if show action button; otherwise, <c>false</c>.
+		/// </value>
 		public virtual bool ShowActionButton {
 			get { 
 				if (!show_button.HasValue)
@@ -213,10 +245,13 @@ namespace Docky.Widgets
 			}
 		}
 		
-		/// <summary>
-		/// State of the tile
-		/// </summary>
 		bool? enabled;
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="Docky.Widgets.AbstractTileObject"/> is enabled.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> if enabled; otherwise, <c>false</c>.
+		/// </value>
 		public virtual bool Enabled {
 			get {
 				if (!enabled.HasValue)
@@ -231,6 +266,12 @@ namespace Docky.Widgets
 		}
 		
 		string add_button_stock;
+		/// <summary>
+		/// Gets or sets the add button stock.
+		/// </summary>
+		/// <value>
+		/// The add button stock.
+		/// </value>
 		public virtual string AddButtonStock {
 			get {
 				if (add_button_stock == null)
@@ -245,6 +286,12 @@ namespace Docky.Widgets
 		}
 		
 		string remove_button_stock;
+		/// <summary>
+		/// Gets or sets the remove button stock.
+		/// </summary>
+		/// <value>
+		/// The remove button stock.
+		/// </value>
 		public virtual string RemoveButtonStock {
 			get {
 				if (remove_button_stock == null)
@@ -258,8 +305,20 @@ namespace Docky.Widgets
 			}
 		}
 		
+		/// <summary>
+		/// Gets or sets the add button tooltip.
+		/// </summary>
+		/// <value>
+		/// The add button tooltip.
+		/// </value>
 		public string AddButtonTooltip { get; protected set; }
 		
+		/// <summary>
+		/// Gets or sets the remove button tooltip.
+		/// </summary>
+		/// <value>
+		/// The remove button tooltip.
+		/// </value>
 		public string RemoveButtonTooltip { get; protected set; }
 		
 		internal List<Gtk.Button> ExtraButtons;
@@ -291,6 +350,16 @@ namespace Docky.Widgets
 		}
 		
 		#region IDisposable implementation
+		/// <summary>
+		/// Releases all resource used by the <see cref="Docky.Widgets.AbstractTileObject"/> object.
+		/// </summary>
+		/// <remarks>
+		/// Call <see cref="Dispose"/> when you are finished using the <see cref="Docky.Widgets.AbstractTileObject"/>. The
+		/// <see cref="Dispose"/> method leaves the <see cref="Docky.Widgets.AbstractTileObject"/> in an unusable state. After
+		/// calling <see cref="Dispose"/>, you must release all references to the
+		/// <see cref="Docky.Widgets.AbstractTileObject"/> so the garbage collector can reclaim the memory that the
+		/// <see cref="Docky.Widgets.AbstractTileObject"/> was occupying.
+		/// </remarks>
 		public virtual void Dispose ()
 		{
 			if (force_pbuf != null)

@@ -167,12 +167,12 @@ namespace WeatherDocklet
 			int temp;
 			Int32.TryParse (item.SelectSingleNode ("tmp").InnerText, out temp);
 			Temp = temp;
+			FeelsLike = temp;
 			
 			if (!item.SelectSingleNode ("flik").InnerText.Equals ("N/A")) {
 				Int32.TryParse (item.SelectSingleNode ("flik").InnerText, out temp);
 				FeelsLike = temp;
-			} else
-				FeelsLike = Temp;
+			}
 			
 			Int32.TryParse(item.SelectSingleNode ("wind").SelectSingleNode ("s").InnerText, out temp);
 			Wind = temp;

@@ -138,8 +138,7 @@ namespace GMail
 			if (Atom.State != GMailState.Error)
 				return pbuf;
 			
-			
-			return DockServices.Drawing.MonochromePixbuf (pbuf);
+			return pbuf.MonochromePixbuf ();
 		}
 		
 		protected override void PostProcessIconSurface (DockySurface surface)

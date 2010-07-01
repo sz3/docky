@@ -411,27 +411,37 @@ namespace Docky.Services
 		public void Execute (string executable)
 		{
 			try {
+				System.Diagnostics.Process proc;
 				if (System.IO.File.Exists (executable)) {
-					System.Diagnostics.Process proc = new System.Diagnostics.Process ();
+					proc = new System.Diagnostics.Process ();
 					proc.StartInfo.FileName = executable;
 					proc.StartInfo.UseShellExecute = false;
 					proc.Start ();
+					proc.Dispose ();
 				} else {
-					System.Diagnostics.Process proc;
-					if (executable.Contains (" ")) {
-						string[] args = executable.Split (' ');
-						
-						Log<SystemService>.Debug ("Calling: " + args[0] + " \"" + executable.Substring (args[0].Length + 1) + "\"");
-						proc = System.Diagnostics.Process.Start (args[0], "\"" + executable.Substring (args[0].Length + 1) + "\"");
+					int pos = -1;
+					executable = executable.Trim ();
+					if ((pos = executable.IndexOf (' ')) >= 0) {
+						string command = executable.Substring (0, pos);
+						string arguments = executable.Substring (pos + 1);
+						proc = System.Diagnostics.Process.Start (command, arguments);
 					} else {
-						Log<SystemService>.Debug ("Calling: " + executable);
 						proc = System.Diagnostics.Process.Start (executable);
 					}
+					Log<SystemService>.Debug ("Calling: '{0}'", executable);
 					proc.Dispose ();
 				}
 			} catch {
-				Log<SystemService>.Error ("Error executing '" + executable + "'");
+				Log<SystemService>.Error ("Error executing '{0}'", executable);
 			}
+		}
+		
+		public bool IsValidExecutable (string Executable)
+		{
+			foreach (string path in Environment.GetEnvironmentVariable ("PATH").Split (':'))
+				if (GLib.FileFactory.NewForPath (path + "/" + Executable).Exists)
+					return true;
+			return false;
 		}
 		
 		public System.Threading.Thread RunOnThread (Action action, TimeSpan delay)
@@ -495,34 +505,26 @@ namespace Docky.Services
 			NativeInterop.prctl (15 /* PR_SET_NAME */, name);
 		}
 		
-		bool? nvidia;
 		public bool HasNvidia {
 			get {
-				if (nvidia.HasValue)
-					return nvidia.Value;
-				nvidia = false;
-				
 				string logFile = "/var/log/Xorg.0.log";
 				if (!System.IO.File.Exists (logFile))
 					return false;
 				
 				try {
 					using (StreamReader reader = new StreamReader (logFile)) {
-						while (!reader.EndOfStream) {
-							string line = reader.ReadLine ();
-							
-							if (line.Contains ("Module nvidia: vendor=\"NVIDIA Corporation\"")) {
-								nvidia = true;
-								break;
-							}
+						string line;
+						while ((line = reader.ReadLine ()) != null) {
+							if (line.Contains ("Module nvidia: vendor=\"NVIDIA Corporation\""))
+								return true;
 						}
 					}
 				} catch (Exception e) {
-					Log<SystemService>.Warn (e.Message);
+					Log<SystemService>.Warn ("Error encountered while trying to detect if an Nvidia graphics card is present: {0}", e.Message);
 					return false;
 				}
 				
-				return nvidia.Value;
+				return false;
 			}
 		}
 	}

@@ -36,12 +36,6 @@ namespace SessionManager
 			}
 		}
 
-		public override string Icon {
-			get { 
-				return "session-properties"; 
-			}
-		}
-
 		#endregion
 
 		SessionManagerItem session_manager;

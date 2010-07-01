@@ -1,4 +1,4 @@
-# Turkish translation for docky
+# Lithuanian translation for docky
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the docky package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,192 +8,184 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-06-28 07:25+0200\n"
-"PO-Revision-Date: 2010-06-24 05:09+0000\n"
-"Last-Translator: Yiğit Ateş <yigitates52@gmail.com>\n"
-"Language-Team: Turkish <tr@li.org>\n"
+"PO-Revision-Date: 2010-06-26 15:32+0000\n"
+"Last-Translator: Mantas Kriaučiūnas <mantas@akl.lt>\n"
+"Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"(n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Launchpad-Export-Date: 2010-06-28 05:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
 msgid "Search Docklets..."
-msgstr "Uygulamacıkları Ara..."
+msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Search Helpers..."
-msgstr "Yardımcıları Ara..."
+msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:212
 msgid "Click on any dock to configure."
-msgstr "Yapılandırmak için herhangi bir rıhtıma tıklayın."
+msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:213
 msgid "Drag any dock to reposition."
-msgstr "Yeniden konumlandırmak için herhangi bir rıhtımı sürükleyin."
+msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:278
 msgid "Delete the currently selected dock?"
-msgstr "Seçili rıhtım silinsin mi?"
+msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:280
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
-"Eğer rıhtımı silmeyi seçerseniz, silinen rıhtımın\n"
-"tüm ayarları kalıcı olarak kaybolacak."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:287
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
-msgstr "Rıhtımı _Sil"
+msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:401
 #: ../Docky/Docky/ConfigurationWindow.cs:421
 msgid "_Select"
-msgstr "_Seç"
+msgstr "_Pasirinkti"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:404
 #: ../Docky/Docky/ConfigurationWindow.cs:424
 msgid ".tar Archives"
-msgstr ".tar Arşivleri"
+msgstr ".tar archyvai"
 
 #: ../Docky/Docky/DockletTile.cs:50
 msgid "Author"
-msgstr "Yazar"
+msgstr "Autorius"
 
 #: ../Docky/Docky/DockletTile.cs:97
 msgid "Move this docklet up on the selected dock"
-msgstr "Bu uygulamacığı seçili rıhtımın üstüne taşı"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:98
 msgid "Move this docklet down on the selected dock"
-msgstr "Bu uygulamacığı seçili rıhtımın altına taşı"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:102
 msgid "Move this docklet left on the selected dock"
-msgstr "Bu uygulamacığı seçili rıhtımın soluna taşı"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:103
 msgid "Move this docklet right on the selected dock"
-msgstr "Bu uygulamacığı seçili rıhtımın sağına taşı"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:105
 msgid "Configure this docklet"
-msgstr "Bu uygulamacığı yapılandır"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:106
 msgid "About this docklet"
-msgstr "Bu uygulamacık hakkında"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:107
 msgid "Add this docklet to the selected dock"
-msgstr "Bu uygulamacığı seçili rıhtıma ekle"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:108
 msgid "Remove this docklet from the selected dock"
-msgstr "Bu uygulamacığı seçili rıhtımdan kaldır"
+msgstr ""
 
 #: ../Docky/Docky/Docky.cs:123
 msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
 msgstr ""
-"Docky düzgün çalışmak için birleşiklik etkilerine ihtiyaç duyuyor. Bazı "
-"seçenekler devre dışı kalabilir ve temalar/animasyonlar düzgün "
-"görünmeyebilir. "
 
 #: ../Docky/Docky/HelperTile.cs:41
 msgid "Status"
-msgstr "Durum"
+msgstr "Būklė"
 
 #: ../Docky/Docky/HelperTile.cs:58
 msgid "Uninstall"
-msgstr "Kaldır"
+msgstr "Išdiegti"
 
 #: ../Docky/Docky/HelperTile.cs:75
 msgid "About this helper"
-msgstr "Bu yardımcı hakkında"
+msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:76
 msgid "Enable this helper"
-msgstr "Bu yardımcıyı etkinleştir"
+msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:77
 msgid "Disable this helper"
-msgstr "Bu yardımcıyı etkisizleştir"
+msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:82
 msgid "Running"
-msgstr "Çalışıyor"
+msgstr "Veikia"
 
 #: ../Docky/Docky/HelperTile.cs:82
 msgid "Stopped"
-msgstr "Durduruldu"
+msgstr "Sustabdytas"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:332
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
-"Ayarlandığında, bir rıhtım üzerindeki başlatıcıya sahip olmayan pencereler "
-"bu rıhtıma eklenecek."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:682
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
-"<i>Hiçbir zaman gizlemez; büyütülen pencereler rıhtımın üzerini "
-"kapatamaz.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:685
 msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr "<i>Fare üzerinde olmadığında gizle.</i>"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:688
 msgid "<i>Hides when dock obstructs the active application.</i>"
-msgstr "<i>Rıhtım etkin uygulamayı engellediğinde gizle.</i>"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:691
 msgid "<i>Hides when dock obstructs any window.</i>"
-msgstr "<i>Rıhtım bir pencereyi engellediğinde gizle.</i>"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockWindow.cs:381
 msgid "Drag to reposition"
-msgstr "Yeniden konumlandırmak için sürükleyin"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockWindow.cs:393
 #: ../Docky/Docky/Interface/DockWindow.cs:407
 msgid "Drop to add to dock"
-msgstr "Rıhtıma eklemek için bırakın"
+msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:133
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:244
 msgid "_Settings"
-msgstr "_Ayarlar"
+msgstr "_Nustatymai"
 
 #: ../Docky/Docky/Items/DockyItem.cs:134
 msgid "_About"
-msgstr "_Hakkında"
+msgstr "_Apie"
 
 #: ../Docky/Docky/Items/DockyItem.cs:135
 msgid "_Help"
-msgstr "_Yardım"
+msgstr "_Pagalba"
 
 #: ../Docky/Docky/Items/DockyItem.cs:137
 msgid "_Quit Docky"
-msgstr "Docky'den _Çık"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
 msgid "Docky Settings"
-msgstr "Docky Ayarları"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
 msgid "_Start When User Logs In"
-msgstr "Kullanıcı Oturum Açtığında _Başlat"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
@@ -202,264 +194,266 @@ msgstr "_Tema:"
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
 msgid "_Install"
-msgstr "_Kur"
+msgstr "Į_diegti"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
 msgid "<b>General Options</b>"
-msgstr "<b>Genel Seçenekler</b>"
+msgstr "<b>Bendri nustatymai</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
-msgstr "<b>Rıhtım Yapılandırması</b>"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
-msgstr "Rıhtımlar"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
 msgid "All"
-msgstr "Tümü"
+msgstr "Visi"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
 msgid "Enabled"
-msgstr "Etkin"
+msgstr "Įjungti"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
 msgid "Disabled"
-msgstr "Etkin Olmayan"
+msgstr "Išjungti"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
 msgid "Docklets"
-msgstr "Uygulamacıklar"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
 msgid "Usable"
-msgstr "Kullanılabilir"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
-msgstr "Yardımcılar"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
 msgid "_New Dock"
-msgstr "_Yeni Rıhtım"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
 msgid "None"
-msgstr "Hiçbiri"
+msgstr "Jokio"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
 msgid "Autohide"
-msgstr "Otomatik gizle"
+msgstr "Slėptis automatiškai"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "Intellihide"
-msgstr "Akıllı gizleme"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Window Dodge"
-msgstr "Pencere Çekilmesi"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
 msgid "_Fade On Hide"
-msgstr "Gizlendiğinde _Soldur"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
 msgid "_Icon Size:"
-msgstr "_Simge Boyutu:"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:132
 msgid "_Hiding:"
-msgstr "_Gizleniyor:"
+msgstr "_Slėpimasis:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
 msgid "_Panel Mode"
-msgstr "_Panel Kipi"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
 msgid "3D Back_ground"
-msgstr "3B Art_alan"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
 msgid "_Manage Windows Without Launcher"
-msgstr "Pencereleri Başlatıcı Olmadan _Yönet"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
 msgid "_Zoom:"
-msgstr "_Yakınlaştır:"
+msgstr "_Mastelis:"
 
 #: ../Docky.Items/Docky.Items/AbstractDockItem.cs:115
 #, csharp-format
 msgid "Drop to open with {0}"
-msgstr "{0} ile açmak için bırakın"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:159
 msgid "New _Window"
-msgstr "Yeni _Pencere"
+msgstr "Naujas _langas"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:161
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
-msgstr "_Aç"
+msgstr "_Atverti"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:69
 msgid "Reset Color"
-msgstr "Rengi Sıfırla"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:477
 msgid "_Pin to Dock"
-msgstr "Rıhtıma _İğnele"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:74
 #, csharp-format
 msgid "Drop to move to {0}"
-msgstr "{0} konumuna taşımak için bırakın"
+msgstr ""
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:190
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:235
 msgid "Error performing drop action"
-msgstr "Bırakam eylemi sırasında bir hata oluştu"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:190
 msgid "Not enough free space on destination."
-msgstr "Hedefte yeterli alan yok."
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:207
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:210
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:242
 msgid "Complete"
-msgstr "Tamamlanmış"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:220
 msgid "Moving"
-msgstr "Taşınıyor"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:226
 msgid "Copying"
-msgstr "Kopyalanıyor"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:260
 msgid "Open"
-msgstr "Aç"
+msgstr "Atverti"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:261
 msgid "Open Containing Folder"
-msgstr "İçeren Dizini Aç"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:253
 msgid "Unma_ximize"
-msgstr "Büyüt_meyi geri al"
+msgstr "_Grąžinti iš išdidinimo"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:256
 msgid "Ma_ximize"
-msgstr "Bü_yüt"
+msgstr "Iš_didinti"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:260
 msgid "_Restore"
-msgstr "_Geri Getir"
+msgstr "_Atstatyti"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:263
 msgid "Mi_nimize"
-msgstr "_Küçült"
+msgstr "_Sumažinti"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:266
 msgid "_Close All"
-msgstr "_Tümünü Kapat"
+msgstr "_Užverti visus"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
 msgid "Sign up for {0}"
-msgstr "{0} için kaydolun"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:44
 msgid "Validating..."
-msgstr "Doğrulanıyor..."
+msgstr "Tikrinama..."
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:45
 #, csharp-format
 msgid "Don't have {0}?"
-msgstr "{0} yok mu?"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:46
 msgid "Account validation failed!"
-msgstr "Hesap doğrulama başarısız oldu!"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:47
 msgid "Verify and save account information"
-msgstr "Hesap bilgisini doğrula ve kaydet"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:48
 msgid "Account validation succeeded!"
-msgstr "Hesap doğrulama başarılı oldu!"
+msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:87
 msgid "Password"
-msgstr "Parola"
+msgstr "Slaptažodis"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:108
 msgid "Username"
-msgstr "Kullanıcı Adı"
+msgstr "Naudotojo vardas"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
 msgid "<i>Verify and save account information</i>"
-msgstr "<i>Hesap bilgilerini doğrula ve kaydet</i>"
+msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
 msgid "Don't have an account?"
-msgstr "Bir hesabınız yok mu?"
+msgstr ""
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:156
 msgid "No Battery Found"
-msgstr "Pil Bulunamadı"
+msgstr ""
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:173
 #, csharp-format
 msgid "{0} hour"
 msgid_plural "{0} hours"
-msgstr[0] "{0} saat"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:175
 #, csharp-format
 msgid "{0} minute"
 msgid_plural "{0} minutes"
-msgstr[0] "{0} dakika"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:177
 msgid "until charged "
-msgstr "doldurulana kadar "
+msgstr ""
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:179
 msgid "remaining "
-msgstr "kalan "
+msgstr ""
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:86
 msgid "Computer"
-msgstr "Bilgisayar"
+msgstr "Kompiuteris"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:430
 msgid "Di_gital Clock"
-msgstr "Di_jital Saat"
+msgstr "Skaitmeninis _laikrodis"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:436
 msgid "24-Hour _Clock"
-msgstr "24'lük _Saat"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:442
 msgid "Show _Date"
-msgstr "Tarihi _Göster"
+msgstr "Rodyti _datą"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:448
 msgid "Select _Theme"
-msgstr "_Temayı Seç"
+msgstr "Pasirinkite _Temą"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
-msgstr "Temalar"
+msgstr "Temos"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:62
 msgid "Theme"
@@ -467,190 +461,191 @@ msgstr "Tema"
 
 #: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:42
 msgid "Show Desktop"
-msgstr "Masaüstünü Göster"
+msgstr "Rodyti darbastalį"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
 msgid "_Add Label"
-msgstr "Etiket _Ekle"
+msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:113
 msgid "Check e_very:"
-msgstr "Denetim _süresi:"
+msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:123
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:186
 msgid "minutes"
-msgstr "dakikalar"
+msgstr "min."
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:174
 msgid "Click to set username and password."
-msgstr "Kullanıcı adı ve parolayı ayarlamak için tıklayın."
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:228
 msgid "(no subject)"
-msgstr "(konu yok)"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:242
 #, csharp-format
 msgid "You have {0} new, unread messages"
-msgstr "{0} yeni, okunmamış iletiniz var"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:246
 #, csharp-format
 msgid "From: {0}"
-msgstr "Gönderen: {0}"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:259
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:263
 msgid "Feed Error"
-msgstr "Besleme Hatası"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:268
 msgid "Invalid Username"
-msgstr "Geçersiz Kullanıcı Adı"
+msgstr "Neteisingas naudotojo vardas"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:272
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:276
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:174
 msgid "Network Error"
-msgstr "Ağ Hatası"
+msgstr "Tinklo klaida"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:281
 msgid "General Error"
-msgstr "Genel Hata"
+msgstr "Bendra klaida"
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
 msgid "GMail Configuration"
-msgstr "GMail Yapılandırması"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 msgid "No unread mail"
-msgstr "Okunmamış posta yok"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:98
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
-msgstr[0] "{0} okunmamış ileti"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:119
 msgid "Checking mail..."
-msgstr "Posta kontrol ediliyor..."
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "_View "
-msgstr "_Görüntüle "
+msgstr "_Rodyti "
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
 msgid "_Compose Mail"
-msgstr "Posta _Oluştur"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:211
 msgid "View C_ontacts"
-msgstr "K_işileri Görüntüle"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
 msgid "New Mail"
-msgstr "Yeni Posta"
+msgstr "Naujas laiškas"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:236
 msgid "Check _Mail"
-msgstr "_Postaları Denetle"
+msgstr "_Tikrinti paštą"
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
-msgstr "Etiketler"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
 msgid "GMail"
-msgstr "GMail"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr "Oturum aç"
+msgstr "Prisijungti"
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
-msgstr "Gönderen: "
+msgstr "Nuo: "
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Eject"
-msgstr "_Çıkart"
+msgstr "_Išimti"
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Unmount"
-msgstr "_Ayır"
+msgstr "_Atjungti"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:53
 msgid "Network Manager"
-msgstr "Ağ Yöneticisi"
+msgstr "Tinklo tvarkytuvė"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
-msgstr "Bağlanıyor..."
+msgstr "Jungiamasi..."
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:101
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:166
 msgid "Disconnected"
-msgstr "Bağlantı kesildi"
+msgstr "Atsijungta"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
 msgid "Connected: {0}"
-msgstr "Bağlandı: {0}"
+msgstr ""
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:47
 msgid "My _Stations"
-msgstr "İ_stasyonlarım"
+msgstr ""
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:78
 msgid "S_earch"
-msgstr "A_ra"
+msgstr "_Paieška"
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
-msgstr "İstasyon bulunamadı."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
-msgstr "Lütfen aramanızı tekrarlayın."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:46
 msgid "Fetching Information..."
-msgstr "Bilgi Getiriliyor..."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:72
 msgid "Click to add NPR stations."
-msgstr "NPR istasyonlarını eklemek için tıklayın."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:111
 msgid "Home Page"
-msgstr "Ana Sayfa"
+msgstr "Namų puslapis"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:118
 msgid "Program Schedule"
-msgstr "Program Zamanlama"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:125
 msgid "Donate"
-msgstr "Bağışta Bulunun"
+msgstr "Paaukoti"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:132
 msgid "Live Streams"
-msgstr "Canlı Akışlar"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:170
 msgid "Settings"
-msgstr "Ayarlar"
+msgstr "Nustatymai"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:56
 msgid "Clear the Recent Documents list?"
-msgstr "Açılan Son Belgeler listesi temizlensin mi?"
+msgstr "Išvalyti paskutiniųjų dokumentų sąrašą?"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:58
 msgid "Clear Recent Documents"
-msgstr "Açılan Son Belgeler Listesini Temizle"
+msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:60
 msgid ""
@@ -658,162 +653,163 @@ msgid ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
-"Eğer Açılan Son Belgeler listesini temizlerseniz, aşağıdakiler de "
-"temizlenir:\n"
-"\n"
-"• Yerler → Açılan Son Belgeler menüsündeki tüm öğeler.\n"
-"• Tüm uygulamalardaki açılan son belgeler listeleri."
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:81
 msgid "_Clear Recent Documents..."
-msgstr "Açılan Son Belgeler Listesini _Temizle..."
+msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:152
 msgid "Lock Screen"
-msgstr "Ekranı Kilitle"
+msgstr "Užrakinti ekraną"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:156
 msgid "Log Out..."
-msgstr "Oturumu Kapat..."
+msgstr "Atsijungti..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:157
 msgid "Log Out"
-msgstr "Oturumu Kapat"
+msgstr "Atsijungti"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
 msgstr ""
-"Tüm programları sonlandırıp oturumu kapatmak istediğinize emin misiniz?"
+"Ar tikrai norite išjungti visas programas ir atsijungti nuo dabartinio "
+"seanso?"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:163
 msgid "Suspend"
-msgstr "Askıya Al"
+msgstr "Užmigdyti"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:168
 msgid "Hibernate"
-msgstr "Hazırda Beklet"
+msgstr "Hibernuoti"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:174
 msgid "Restart..."
-msgstr "Yeniden Başlat..."
+msgstr "Paleisti iš naujo..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:175
 msgid "Restart"
-msgstr "Yeniden Başlat"
+msgstr "Paleisti iš naujo"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
 msgid "Are you sure you want to close all programs and restart the computer?"
 msgstr ""
-"Tüm programları sonlandırıp bilgisayarı yeniden başlatmak istediğinize emin "
-"misiniz?"
+"Ar tikrai norite išjungti visas programas ir paleisti kompiuterį iš naujo?"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:181
 msgid "Shut Down..."
-msgstr "Kapat..."
+msgstr "Išjungti..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:182
 msgid "Shut Down"
-msgstr "Kapat"
+msgstr "Išjungti"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:183
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
-msgstr ""
-"Tüm programları sonlandırıp bilgisayarı kapatmak istediğinize emin misiniz?"
+msgstr "Ar tikrai norite uždaryti visas programas ir išjungti kompiuterį?"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:90
 #, csharp-format
 msgid "A timer set for {0} has expired."
-msgstr "{0} için ayarlanan zamanlayıcı sona erdi."
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:236
 msgid "Time remaining:"
-msgstr "Kalan süre:"
+msgstr "Liko laiko:"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:238
 msgid "Timer paused, time remaining:"
-msgstr "Zamanlayıcı durdu, kalan süre:"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:249
 msgid "Set the timer's label to:"
-msgstr "Zamanlayıcı etiketini ayarla:"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:255
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:289
 msgid "_Set Label"
-msgstr "Etiket _Ata"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:280
 msgid "_Pause Timer"
-msgstr "Zamanlayıcıyı _Durdur"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:280
 msgid "_Start Timer"
-msgstr "Zamanlayıcıyı _Başlat"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:284
 msgid "_Remove Timer"
-msgstr "Zamanlayıcıyı _Kaldır"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:62
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] "saat"
+msgstr[0] "valanda"
+msgstr[1] "valandos"
+msgstr[2] "valandų"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:66
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] "dakika"
+msgstr[0] "minutė"
+msgstr[1] "minutės"
+msgstr[2] "minučių"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:71
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] "saniye"
+msgstr[0] "sekundė"
+msgstr[1] "sekundės"
+msgstr[2] "sekundžių"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:138
 #, csharp-format
 msgid "Click to create a timer for {0}."
-msgstr "{0} için bir zamanlayıcı oluşturmak için tıklayın."
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:155
 msgid "Automatically _Start Timers"
-msgstr "Zamanlayıcıları Otomatik Olarak _Başlat"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:159
 msgid "Automatically _Dismiss Timers"
-msgstr "Zamanlayıcıları Otomatik Olarak _Sonlandır"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:50
 msgid "Drop to move to Trash"
-msgstr "Çöpe taşımak için bırakın"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:77
 msgid "No items in Trash"
-msgstr "Çöpünüz boş"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:79
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
-msgstr[0] "Çöpte {0} öğe"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:164
 msgid "Restore Files"
-msgstr "Dosyaları Geri Getir"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:195
 msgid "_Open Trash"
-msgstr "Çöpü _Aç"
+msgstr "_Atverti šiukšlinę"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:197
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:234
 msgid "Empty _Trash"
-msgstr "Çöpü _Boşalt"
+msgstr "Iš_valyti šiukšlinę"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:226
 msgid "Empty all of the items from the trash?"
-msgstr "Çöpteki bütün öğeler boşaltılsın mı?"
+msgstr "Ištrinti visus elementus iš šiukšlinės?"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:228
 msgid ""
@@ -821,41 +817,36 @@ msgid ""
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
-"Eğer çöpü boşaltmayı seçerseniz, içerisindeki tüm öğeler\n"
-"kalıcı olarak yok olacak. Çöpteki öğeleri\n"
-"teker teker de silebilirsiniz."
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:65
 msgid "_Weather Provider:"
-msgstr "_Hava Durumu Sağlayıcısı:"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:105
 msgid "My _Locations"
-msgstr "_Konumlarım"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:136
 msgid "_Search"
-msgstr "_Ara"
+msgstr "_Ieškoti"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:176
 msgid "Automatically Update _Every"
-msgstr "Şu _Aralıkla Güncelle"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:220
 msgid "Use _Metric Units"
-msgstr "_Metrik Birimleri Kullan"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:171
 msgid "Invalid Weather Location"
-msgstr "Geçersiz Hava Konumu"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
 msgstr ""
-"Hava durumu verileri Google tarafından sağlanmaktadır. Kaynak, Birleşik "
-"Devletler Zip Kodu veya 'Şehir,Ülke' şeklinde konum bilgisine ihtiyaç duyar."
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
@@ -864,121 +855,51 @@ msgid ""
 "website.  To find your code, look up your forecast on their site and the "
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
-"Hava durumu verileri The Weather Channel tarafından sağlanmakta ve telif "
-"haklarıyla korunmaktadır. Kaynak, Birleşik Devletler Zip Kodu veya web "
-"sitesinden özel bir koda ihtiyaç duyar. Gerekli kodu bulmak için, site "
-"üzerindeki hava tahmini sayfasının URL adresindeki '/yerel/' ve AAXX0000 "
-"gibi görünen kodlara bakabilirsiniz."
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:56
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
 msgstr ""
-"Hava durumu verileri Weather Underground tarafından sağlanmakta ve telif "
-"haklarıyla korunmaktadır. Kaynak, Birleşik Devletler Zip Kodu veya "
-"'Şehir,Ülke' şeklinde konum bilgisine ihtiyaç duyar."
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
-msgstr "Sonuç bulunamadı."
+msgstr "Nieko nerasta."
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
-msgstr "Hava Durumu Yapılandırması"
+msgstr "Orų prognozės konfigūracija"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
 msgid "Click to add a location."
-msgstr "Bir konum eklemek için tıklayın."
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
 msgid "Fetching data..."
-msgstr "Veriler getiriliyor..."
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Radar _Map"
-msgstr "Radar _Haritası"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "Forecasts"
-msgstr "Hava Tahminleri"
+msgstr "Orų prognozės"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:252
 msgid "Check _Weather"
-msgstr "_Hava Durumunu Denetle"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
 msgid "_Today"
-msgstr "_Bugün"
+msgstr "Š_iandien"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
 msgid "T_omorrow"
-msgstr "Y_arın"
+msgstr "_Rytoj"
 
 #. draw humidity
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:328
 #, csharp-format
 msgid "{0} humidity"
-msgstr "{0} nem"
-
-#~ msgid "_Add"
-#~ msgstr "_Ekle"
-
-#~ msgid "_Disable"
-#~ msgstr "_Etkisizleştir"
-
-#~ msgid "_Enable"
-#~ msgstr "_Etkinleştir"
-
-#~ msgid "_Remove"
-#~ msgstr "_Kaldır"
-
-#~ msgid "Docky Configuration"
-#~ msgstr "Docky Ayarları"
-
-#~ msgid "Username or Password not set"
-#~ msgstr "Kullanıcı adı ve Şifre ayarlanmadı"
-
-#~ msgid "Network Error: "
-#~ msgstr "Ağ Hatası: "
-
-#~ msgid "Sunrise"
-#~ msgstr "Gün Doğumu"
-
-#~ msgid "Sunset"
-#~ msgstr "Gün Batımı"
-
-#~ msgid "Wind"
-#~ msgstr "Rüzgar"
-
-#~ msgid "Direction"
-#~ msgstr "Yön"
-
-#~ msgid "Temp"
-#~ msgstr "Sıcaklık"
-
-#~ msgid "Humidity"
-#~ msgstr "Nem"
-
-#~ msgid ""
-#~ "Docky requires compositing to work properly. Please enable compositing and "
-#~ "restart docky."
-#~ msgstr ""
-#~ "Dock düzgün çalışabilmek için compositing'i gerektirir. Lütfen compositing'i "
-#~ "aktifleştirin ve docky'yi yeniden başlatın."
-
-#~ msgid "Indicat_e Multiple Windows"
-#~ msgstr "Çoklu Pencereleri Beli_rt"
-
-#~ msgid "_Start When Computer Starts"
-#~ msgstr "_Bilgisayar Açıldığında Başlat"
-
-#~ msgid "Invalid XML Weather Data"
-#~ msgstr "Geçersiz XML Hava Verisi"
-
-#~ msgid ""
-#~ "Causes launchers which currently manage more than one window to have an "
-#~ "extra indicator under it."
-#~ msgstr ""
-#~ "Birden fazla pencereyi yöneten başlatıcıların alt kısmına fazladan bir "
-#~ "belirteç ekler."
+msgstr ""

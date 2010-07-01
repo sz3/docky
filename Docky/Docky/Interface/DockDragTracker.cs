@@ -50,6 +50,7 @@ namespace Docky.Interface
 		bool drag_disabled = false;
 		int marker = 0;
 		uint drag_hover_timer;
+		IDictionary<AbstractDockItem, int> original_item_pos = new Dictionary<AbstractDockItem, int> ();
 		
 		AbstractDockItem drag_item;
 		
@@ -58,6 +59,8 @@ namespace Docky.Interface
 		public DockWindow Owner { get; private set; }
 		
 		static bool lockDrags = prefs.Get<bool> ("LockDrags", false);
+		static bool providersAcceptDrops = prefs.Get<bool> ("ProvidersAcceptDrops", true);
+
 		
 		bool externalDragActive;
 		public bool ExternalDragActive {
@@ -184,6 +187,8 @@ namespace Docky.Interface
 		{
 			Owner.CursorTracker.RequestHighResolution (this);
 			InternalDragActive = true;
+			Keyboard.Grab (Owner.GdkWindow, true, Gtk.Global.CurrentEventTime);
+			drag_canceled = false;
 			
 			if (proxy_window != null) {
 				EnableDragTo ();
@@ -192,16 +197,21 @@ namespace Docky.Interface
 			
 			Gdk.Pixbuf pbuf;
 			drag_item = Owner.HoveredItem;
+			original_item_pos.Clear ();
 			
 			// If we are in Reposition Mode or over a non-draggable item
 			// dont drag it!
 			if (drag_item is INonPersistedItem || RepositionMode)
 				drag_item = null;
 			
-			if (drag_item != null)
+			if (drag_item != null) {
+				foreach (AbstractDockItem adi in ProviderForItem (drag_item).Items)
+					original_item_pos [adi] = adi.Position;
+				
 				pbuf = Owner.HoveredItem.IconSurface (new DockySurface (1, 1), Owner.ZoomedIconSize, Owner.IconSize, 0).LoadToPixbuf ();
-			else
+			} else {
 				pbuf = new Gdk.Pixbuf (Gdk.Colorspace.Rgb, true, 8, 1, 1);
+			}
 			
 			Gtk.Drag.SetIconPixbuf (args.Context, pbuf, pbuf.Width / 2, pbuf.Height / 2);
 			pbuf.Dispose ();
@@ -290,7 +300,7 @@ namespace Docky.Interface
 		
 		public bool ProviderAcceptsDrop ()
 		{
-			if (drag_data == null)
+			if (drag_data == null || !providersAcceptDrops)
 				return false;
 			
 			foreach (string s in drag_data)
@@ -318,7 +328,7 @@ namespace Docky.Interface
 			
 			if (ItemAcceptsDrop ()) {
 				item.AcceptDrop (drag_data);
-			} else {
+			} else if (providersAcceptDrops) {
 				AbstractDockItem rightMost = Owner.RightMostItem;
 				int newPosition = rightMost != null ? rightMost.Position : 0;
 			
@@ -342,6 +352,8 @@ namespace Docky.Interface
 			ExternalDragActive = false;
 		}
 		
+		bool drag_canceled;
+		
 		/// <summary>
 		/// Emitted on the drag source when the drag finishes
 		/// </summary>
@@ -350,7 +362,7 @@ namespace Docky.Interface
 			if (RepositionMode)
 				Owner.CursorTracker.CursorPositionChanged -= HandleCursorPositionChanged;
 			
-			if (drag_item != null) {
+			if (!drag_canceled && drag_item != null) {
 				if (!Owner.DockHovered) {
 					// Remove from dock
 					AbstractDockItemProvider provider = ProviderForItem (drag_item);
@@ -379,6 +391,7 @@ namespace Docky.Interface
 			
 			InternalDragActive = false;
 			drag_item = null;
+			Keyboard.Ungrab (Gtk.Global.CurrentEventTime);
 			
 			Owner.AnimatedDraw ();
 			Owner.CursorTracker.CancelHighResolution (this);
@@ -397,7 +410,17 @@ namespace Docky.Interface
 		/// </summary>
 		void HandleDragFailed (object o, DragFailedArgs args)
 		{
-			args.RetVal = true;
+			drag_canceled = args.DragResult == DragResult.UserCancelled;
+			
+			if (drag_canceled) {
+				foreach (KeyValuePair<AbstractDockItem, int> kvp in original_item_pos)
+					kvp.Key.Position = kvp.Value;
+				
+				Owner.UpdateCollectionBuffer ();
+				Owner.Preferences.SyncPreferences ();
+			}
+			
+			args.RetVal = !drag_canceled;
 		}
 
 		/// <summary>

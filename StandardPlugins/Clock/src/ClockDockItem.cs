@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -193,14 +194,12 @@ namespace Clock
 			else
 				HoverText = DateTime.Now.ToString ("ddd, MMM dd h:mm tt");
 			
-			if (ShowDigital) {
-				if (Square)
-					MakeSquareDigitalIcon (surface);
-				else
-					MakeRectangularDigitalIcon (surface);
-			} else {
+			if (!ShowDigital)
 				MakeAnalogIcon (surface.Context, Math.Min (surface.Width, surface.Height));
-			}
+			else if (Square)
+				MakeSquareDigitalIcon (surface);
+			else
+				MakeRectangularDigitalIcon (surface);
 		}
 		
 		void MakeSquareDigitalIcon (DockySurface surface)
@@ -215,75 +214,78 @@ namespace Clock
 			int center = surface.Height / 2;
 			
 			// shared by all text
-			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-			
-			layout.FontDescription = new Gtk.Style().FontDescription;
-			layout.FontDescription.Weight = Pango.Weight.Bold;
-			layout.Ellipsize = Pango.EllipsizeMode.None;
-			layout.Width = Pango.Units.FromPixels (surface.Width);
-			
-			
-			// draw the time, outlined
-			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (timeSize);
-			
-			if (ShowMilitary)
-				layout.SetText (DateTime.Now.ToString ("HH:mm"));
-			else
-				layout.SetText (DateTime.Now.ToString ("h:mm"));
-			
-			Pango.Rectangle inkRect, logicalRect;
-			layout.GetPixelExtents (out inkRect, out logicalRect);
-			
-			int timeYOffset = ShowMilitary ? timeSize : timeSize / 2;
-			int timeXOffset = (surface.Width - inkRect.Width) / 2;
-			if (ShowDate)
-				cr.MoveTo (timeXOffset, timeYOffset);
-			else
-				cr.MoveTo (timeXOffset, timeYOffset + timeSize / 2);
-			
-			Pango.CairoHelper.LayoutPath (cr, layout);
-			cr.LineWidth = 3;
-			cr.Color = new Cairo.Color (0, 0, 0, 0.5);
-			cr.StrokePreserve ();
-			cr.Color = new Cairo.Color (1, 1, 1, 0.8);
-			cr.Fill ();
-			
-			// draw the date, outlined
-			if (ShowDate) {
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (dateSize);
+			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ()) {
+				layout.FontDescription = new Gtk.Style().FontDescription;
+				layout.FontDescription.Weight = Pango.Weight.Bold;
+				layout.Ellipsize = Pango.EllipsizeMode.None;
+				layout.Width = Pango.Units.FromPixels (surface.Width);
 				
-				layout.SetText (DateTime.Now.ToString ("MMM dd"));
+				
+				// draw the time, outlined
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (timeSize);
+				
+				if (ShowMilitary)
+					layout.SetText (DateTime.Now.ToString ("HH:mm"));
+				else
+					layout.SetText (DateTime.Now.ToString ("h:mm"));
+				
+				Pango.Rectangle inkRect, logicalRect;
 				layout.GetPixelExtents (out inkRect, out logicalRect);
-				cr.MoveTo ((surface.Width - inkRect.Width) / 2, surface.Height - spacing - dateSize);
+				
+				int timeYOffset = ShowMilitary ? timeSize : timeSize / 2;
+				int timeXOffset = (surface.Width - inkRect.Width) / 2;
+				if (ShowDate)
+					cr.MoveTo (timeXOffset, timeYOffset);
+				else
+					cr.MoveTo (timeXOffset, timeYOffset + timeSize / 2);
 				
 				Pango.CairoHelper.LayoutPath (cr, layout);
-				cr.LineWidth = 2.5;
+				cr.LineWidth = 3;
 				cr.Color = new Cairo.Color (0, 0, 0, 0.5);
 				cr.StrokePreserve ();
 				cr.Color = new Cairo.Color (1, 1, 1, 0.8);
 				cr.Fill ();
-			}
-			
-			if (!ShowMilitary) {
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (ampmSize);
 				
-				int yOffset = ShowDate ? center - spacing : surface.Height - spacing - ampmSize;
+				// draw the date, outlined
+				if (ShowDate) {
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (dateSize);
+					
+					layout.SetText (DateTime.Now.ToString ("MMM dd"));
+					layout.GetPixelExtents (out inkRect, out logicalRect);
+					cr.MoveTo ((surface.Width - inkRect.Width) / 2, surface.Height - spacing - dateSize);
+					
+					Pango.CairoHelper.LayoutPath (cr, layout);
+					cr.LineWidth = 2.5;
+					cr.Color = new Cairo.Color (0, 0, 0, 0.5);
+					cr.StrokePreserve ();
+					cr.Color = new Cairo.Color (1, 1, 1, 0.8);
+					cr.Fill ();
+				}
 				
-				// draw AM indicator
-				layout.SetText ("am");
-				cr.Color = new Cairo.Color (1, 1, 1, DateTime.Now.Hour < 12 ? 0.8 : 0.2);
-				layout.GetPixelExtents (out inkRect, out logicalRect);
-				cr.MoveTo ((center - inkRect.Width) / 2, yOffset);
-				Pango.CairoHelper.LayoutPath (cr, layout);
-				cr.Fill ();
+				if (!ShowMilitary) {
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (ampmSize);
+					
+					int yOffset = ShowDate ? center - spacing : surface.Height - spacing - ampmSize;
+					
+					// draw AM indicator
+					layout.SetText ("am");
+					cr.Color = new Cairo.Color (1, 1, 1, DateTime.Now.Hour < 12 ? 0.8 : 0.2);
+					layout.GetPixelExtents (out inkRect, out logicalRect);
+					cr.MoveTo ((center - inkRect.Width) / 2, yOffset);
+					Pango.CairoHelper.LayoutPath (cr, layout);
+					cr.Fill ();
+					
+					// draw PM indicator
+					layout.SetText ("pm");
+					cr.Color = new Cairo.Color (1, 1, 1, DateTime.Now.Hour > 11 ? 0.8 : 0.2);
+					layout.GetPixelExtents (out inkRect, out logicalRect);
+					cr.MoveTo (center + (center - inkRect.Width) / 2, yOffset);
+					Pango.CairoHelper.LayoutPath (cr, layout);
+					cr.Fill ();
+				}
 				
-				// draw PM indicator
-				layout.SetText ("pm");
-				cr.Color = new Cairo.Color (1, 1, 1, DateTime.Now.Hour > 11 ? 0.8 : 0.2);
-				layout.GetPixelExtents (out inkRect, out logicalRect);
-				cr.MoveTo (center + (center - inkRect.Width) / 2, yOffset);
-				Pango.CairoHelper.LayoutPath (cr, layout);
-				cr.Fill ();
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
 			}
 		}
 		
@@ -298,69 +300,72 @@ namespace Clock
 			int spacing = timeSize / 2;
 			
 			// shared by all text
-			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-			
-			layout.FontDescription = new Gtk.Style().FontDescription;
-			layout.FontDescription.Weight = Pango.Weight.Bold;
-			layout.Ellipsize = Pango.EllipsizeMode.None;
-			layout.Width = Pango.Units.FromPixels (surface.Width);
-			
-			
-			// draw the time, outlined
-			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (timeSize);
-			
-			if (ShowMilitary)
-				layout.SetText (DateTime.Now.ToString ("HH:mm"));
-			else
-				layout.SetText (DateTime.Now.ToString ("h:mm"));
-			
-			Pango.Rectangle inkRect, logicalRect;
-			layout.GetPixelExtents (out inkRect, out logicalRect);
-			
-			int timeYOffset = timeSize / 2;
-			if (!ShowDate)
-				timeYOffset += timeSize / 2;
-			cr.MoveTo ((surface.Width - inkRect.Width) / 2, timeYOffset);
-			
-			Pango.CairoHelper.LayoutPath (cr, layout);
-			cr.LineWidth = 2;
-			cr.Color = new Cairo.Color (0, 0, 0, 0.5);
-			cr.StrokePreserve ();
-			cr.Color = new Cairo.Color (1, 1, 1, 0.8);
-			cr.Fill ();
-			
-			// draw the date, outlined
-			if (ShowDate) {
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (dateSize);
+			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ()) {
+				layout.FontDescription = new Gtk.Style().FontDescription;
+				layout.FontDescription.Weight = Pango.Weight.Bold;
+				layout.Ellipsize = Pango.EllipsizeMode.None;
+				layout.Width = Pango.Units.FromPixels (surface.Width);
 				
-				layout.SetText (DateTime.Now.ToString ("MMM dd"));
+				
+				// draw the time, outlined
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (timeSize);
+				
+				if (ShowMilitary)
+					layout.SetText (DateTime.Now.ToString ("HH:mm"));
+				else
+					layout.SetText (DateTime.Now.ToString ("h:mm"));
+				
+				Pango.Rectangle inkRect, logicalRect;
 				layout.GetPixelExtents (out inkRect, out logicalRect);
-				cr.MoveTo ((surface.Width - inkRect.Width) / 2, surface.Height - spacing - dateSize);
+				
+				int timeYOffset = timeSize / 2;
+				if (!ShowDate)
+					timeYOffset += timeSize / 2;
+				cr.MoveTo ((surface.Width - inkRect.Width) / 2, timeYOffset);
 				
 				Pango.CairoHelper.LayoutPath (cr, layout);
+				cr.LineWidth = 2;
 				cr.Color = new Cairo.Color (0, 0, 0, 0.5);
 				cr.StrokePreserve ();
 				cr.Color = new Cairo.Color (1, 1, 1, 0.8);
 				cr.Fill ();
-			}
-			
-			if (!ShowMilitary) {
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (ampmSize);
 				
-				if (DateTime.Now.Hour < 12)
-					layout.SetText ("am");
-				else
-					layout.SetText ("pm");
+				// draw the date, outlined
+				if (ShowDate) {
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (dateSize);
+					
+					layout.SetText (DateTime.Now.ToString ("MMM dd"));
+					layout.GetPixelExtents (out inkRect, out logicalRect);
+					cr.MoveTo ((surface.Width - inkRect.Width) / 2, surface.Height - spacing - dateSize);
+					
+					Pango.CairoHelper.LayoutPath (cr, layout);
+					cr.Color = new Cairo.Color (0, 0, 0, 0.5);
+					cr.StrokePreserve ();
+					cr.Color = new Cairo.Color (1, 1, 1, 0.8);
+					cr.Fill ();
+				}
 				
-				layout.GetPixelExtents (out inkRect, out logicalRect);
-				int yOffset = timeSize;
-				if (!ShowDate)
-					yOffset += timeSize / 2;
-				cr.MoveTo (surface.Width - logicalRect.Width, yOffset - inkRect.Height);
+				if (!ShowMilitary) {
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (ampmSize);
+					
+					if (DateTime.Now.Hour < 12)
+						layout.SetText ("am");
+					else
+						layout.SetText ("pm");
+					
+					layout.GetPixelExtents (out inkRect, out logicalRect);
+					int yOffset = timeSize;
+					if (!ShowDate)
+						yOffset += timeSize / 2;
+					cr.MoveTo (surface.Width - logicalRect.Width, yOffset - inkRect.Height);
+					
+					Pango.CairoHelper.LayoutPath (cr, layout);
+					cr.Color = new Cairo.Color (1, 1, 1, 0.8);
+					cr.Fill ();
+				}
 				
-				Pango.CairoHelper.LayoutPath (cr, layout);
-				cr.Color = new Cairo.Color (1, 1, 1, 0.8);
-				cr.Fill ();
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
 			}
 		}
 		
@@ -450,8 +455,8 @@ namespace Clock
 		public void ShowSettings ()
 		{
 			if (ClockThemeSelector.instance == null)
-					ClockThemeSelector.instance = new ClockThemeSelector (this);
-				ClockThemeSelector.instance.Show (); 
+				ClockThemeSelector.instance = new ClockThemeSelector (this);
+			ClockThemeSelector.instance.Show (); 
 		}
 		
 		public override void Dispose ()
@@ -460,6 +465,7 @@ namespace Clock
 				ClockThemeSelector.instance.Destroy ();
 				ClockThemeSelector.instance = null;
 			}
+			painter.Dispose ();
 			if (timer > 0)
 				GLib.Source.Remove (timer);
 			base.Dispose ();

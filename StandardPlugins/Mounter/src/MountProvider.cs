@@ -39,10 +39,6 @@ namespace Mounter
 			get { return false; }
 		}
 		
-		public override string Icon {
-			get { return "drive-removable-media-usb;;drive-removable-media"; }
-		}
-		
 		#endregion
 		
 		List<MountItem> Mounts = new List<MountItem> ();
@@ -84,7 +80,7 @@ namespace Mounter
 			// FIXME: due to a bug in GIO#, this will crash when trying to get args.Mount
 			Mount m = MountAdapter.GetObject (args.Args[0] as GLib.Object);
 			
-			if (!IsTrash (m) && Mounts.Any (d => d.Mnt.Handle == m.Handle)) {
+			if (Mounts.Any (d => d.Mnt.Handle == m.Handle)) {
 				MountItem mntToRemove = Mounts.First (d => d.Mnt.Handle == m.Handle);
 				
 				Mounts.Remove (mntToRemove);
@@ -97,14 +93,17 @@ namespace Mounter
 		
 		// determine if the mount should be handled or not
 		bool IsTrash (Mount m)
-		{			
-			return m == null || (m.Volume == null && m.Root != null && m.Root.Path != null && m.Root.Path.Contains ("cdda"));
+		{
+			return m == null
+				|| (m.Root != null && Mounts.Find (mnt => mnt.Mnt.Root != null && mnt.Mnt.Root.StringUri () == m.Root.StringUri ()) != null)
+				|| (m.Root == null && Mounts.Find (mnt => mnt.Mnt.Root == null && mnt.Mnt.Handle == m.Handle) != null);
 		}
 		
 		public override bool RemoveItem (AbstractDockItem item)
 		{
-			(item as MountItem).UnMount ();
-			return base.RemoveItem (item);
+			if ((item as MountItem).UnMount ())
+				return base.RemoveItem (item);
+			return false;
 		}
 		
 		public override void Dispose ()

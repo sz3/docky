@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Chris Szikszoy, Robert Dyer
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -50,6 +51,8 @@ namespace RecentDocuments
 			}
 		}
 		
+		public bool CanClear { get; protected set; }
+		
 		const int NumRecentDocs = 7;
 		
 		internal List<FileDockItem> RecentDocs;
@@ -67,7 +70,9 @@ namespace RecentDocuments
 				currentFile = value;
 				
 				if (watcher != null) {
+					watcher.Cancel ();
 					watcher.Changed -= WatcherChanged;
+					watcher.Dispose ();
 					watcher = null;
 				}
 				
@@ -96,8 +101,11 @@ namespace RecentDocuments
 		void RefreshRecentDocs ()
 		{
 			GLib.List recent_items = new GLib.List (Gtk.RecentManager.Default.Items.Handle, typeof(Gtk.RecentInfo));
+			CanClear = recent_items.Cast<Gtk.RecentInfo> ().Count () != 0;
 			
 			lock (RecentDocs) {
+				foreach (FileDockItem f in RecentDocs)
+					f.Dispose ();
 				RecentDocs.Clear ();
 				
 				RecentDocs.AddRange (recent_items.Cast<Gtk.RecentInfo> ()
@@ -191,7 +199,11 @@ namespace RecentDocuments
 
 		public override void Dispose ()
 		{
+			foreach (FileDockItem f in RecentDocs)
+				f.Dispose ();
+			RecentDocs.Clear ();
 			if (watcher != null) {
+				watcher.Cancel ();
 				watcher.Changed -= WatcherChanged;
 				watcher.Dispose ();
 			}

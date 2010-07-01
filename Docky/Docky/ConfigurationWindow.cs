@@ -65,6 +65,9 @@ namespace Docky
 		TileView HelpersTileview, DockletsTileview;
 		Widgets.SearchEntry HelperSearch, DockletSearch;
 		
+		List<HelperTile> helpertiles;
+		List<DockletTile> docklettiles;
+		
 		internal static ConfigurationWindow Instance { get; private set; }
 		
 		static ConfigurationWindow () {
@@ -104,6 +107,16 @@ namespace Docky
 		public override void Dispose ()
 		{
 			ActiveDock = null;
+			if (HelpersTileview != null)
+				HelpersTileview.Clear ();
+			if (DockletsTileview != null)
+				DockletsTileview.Clear ();
+			
+			helpertiles.ForEach (to => to.Dispose ());
+			helpertiles.Clear ();
+			docklettiles.ForEach (to => to.Dispose ());
+			docklettiles.Clear ();
+			
 			base.Dispose ();
 		}
 		
@@ -129,6 +142,7 @@ namespace Docky
 				start_with_computer_checkbutton.Active = AutoStart;
 			
 			// setup docklets {
+			docklettiles = new List<DockletTile> ();
 			DockletSearch = new SearchEntry ();
 			DockletSearch.EmptyMessage = Catalog.GetString ("Search Docklets...");
 			DockletSearch.InnerEntry.Changed += delegate {
@@ -144,6 +158,7 @@ namespace Docky
 			// }
 			
 			// setup helpers {
+			helpertiles = new List<HelperTile> ();
 			HelperSearch = new SearchEntry ();
 			HelperSearch.EmptyMessage = Catalog.GetString ("Search Helpers...");
 			HelperSearch.InnerEntry.Changed += delegate {
@@ -288,6 +303,8 @@ namespace Docky
 				md.DefaultResponse = Gtk.ResponseType.Ok;
 			
 				if ((ResponseType)md.Run () == Gtk.ResponseType.Ok) {
+					ActiveDock.ConfigurationClick -= HandleDockConfigurationClick;
+					ActiveDock.LeaveConfigurationMode ();
 					Docky.Controller.DeleteDock (ActiveDock);
 					if (Docky.Controller.Docks.Count () == 1)
 						ActiveDock = Docky.Controller.Docks.First ();
@@ -449,21 +466,35 @@ namespace Docky
 		
 		void RefreshHelpers ()
 		{
+			if (HelpersTileview == null)
+				return;
+
+			HelpersTileview.Clear ();
+
+			List<Helper> helpers = DockServices.Helpers.Helpers;
+			
+			foreach (HelperTile tileobject in helpertiles.Where (to => !helpers.Contains (to.Helper))) {
+				helpertiles.Remove (tileobject);
+				tileobject.Dispose ();					
+			}
+			helpertiles = helpers.Where (helper => !helpertiles.Exists (to => helper == to.Helper))
+				.Select (h => new HelperTile (h))
+				.Union (helpertiles).ToList ();
+
 			string query = HelperSearch.InnerEntry.Text.ToLower ();
-			IEnumerable<HelperTile> tiles = DockServices.Helpers.Helpers.Select (h => new HelperTile (h))
-				.Where (h => h.Name.ToLower ().Contains (query) || h.Description.ToLower ().Contains (query))
-				.OrderBy (t => t.Name);
+			IEnumerable<HelperTile> showinghelpertiles = helpertiles
+				.Where (hto => hto.Name.ToLower ().Contains (query) || hto.Description.ToLower ().Contains (query))
+				.OrderBy (hto => hto.Name);
 			
 			if (helper_show_cmb.Active == (uint) HelperShowStates.Usable)
-				tiles = tiles.Where (h => h.Helper.IsAppAvailable);
+				showinghelpertiles = showinghelpertiles.Where (hto => hto.Helper.IsAppAvailable);
 			else if (helper_show_cmb.Active == (uint) HelperShowStates.Enabled)
-				tiles = tiles.Where (h => h.Enabled);
+				showinghelpertiles = showinghelpertiles.Where (hto => hto.Enabled);
 			else if (helper_show_cmb.Active == (uint) HelperShowStates.Disabled)
-				tiles = tiles.Where (h => !h.Enabled);
+				showinghelpertiles = showinghelpertiles.Where (hto => !hto.Enabled);
 			
-			HelpersTileview.Clear ();
-			foreach (HelperTile helper in tiles)
-				HelpersTileview.AppendTile (helper);
+			foreach (HelperTile tileobject in showinghelpertiles)
+				HelpersTileview.AppendTile (tileobject);
 		}
 		
 		void RefreshDocklets ()
@@ -477,6 +508,8 @@ namespace Docky
 				selectedProvider = selectedTile.Provider;
 			
 			DockletsTileview.Clear ();
+			docklettiles.ForEach (tile => tile.Dispose ());
+			docklettiles.Clear ();
 			
 			if (ActiveDock == null)
 				return;
@@ -484,7 +517,6 @@ namespace Docky
 			string query = DockletSearch.InnerEntry.Text.ToLower ();
 			// build a list of DockletTiles, starting with the currently active tiles for the active dock,
 			// and the available addins
-			List<DockletTile> tiles = new List<DockletTile> ();
 			DockletTile currentTile = null;
 			
 			foreach (AbstractDockItemProvider provider in ActiveDock.Preferences.ItemProviders) {
@@ -492,25 +524,25 @@ namespace Docky
 				if (string.IsNullOrEmpty (providerID))
 					continue;
 				
-				tiles.Add (new DockletTile (providerID, provider));
+				docklettiles.Add (new DockletTile (providerID, provider));
 				if (provider == selectedProvider)
-					currentTile = tiles.Last ();
+					currentTile = docklettiles.Last ();
 			}
 			
-			tiles = tiles.Concat (PluginManager.AvailableProviderIDs.Select (id => new DockletTile (id))).ToList ();
+			docklettiles = docklettiles.Concat (PluginManager.AvailableProviderIDs.Select (id => new DockletTile (id))).ToList ();
 			
 			if (docklet_show_cmb.Active == (int) DockletShowStates.Active)
-				tiles = tiles.Where (t => t.Enabled).ToList ();
+				docklettiles = docklettiles.Where (t => t.Enabled).ToList ();
 			else if (docklet_show_cmb.Active == (int) DockletShowStates.Disabled)
-				tiles = tiles.Where (t => !t.Enabled).ToList ();
+				docklettiles = docklettiles.Where (t => !t.Enabled).ToList ();
 			
-			tiles = tiles.Where (t => t.Description.ToLower ().Contains (query) || t.Name.ToLower ().Contains (query)).ToList ();
+			docklettiles = docklettiles.Where (t => t.Description.ToLower ().Contains (query) || t.Name.ToLower ().Contains (query)).ToList ();
 			
-			foreach (DockletTile docklet in tiles)
+			foreach (DockletTile docklet in docklettiles)
 				DockletsTileview.AppendTile (docklet);
 			
 			if (currentTile != null)
-				DockletsTileview.Select (tiles.IndexOf (currentTile));
+				DockletsTileview.Select (docklettiles.IndexOf (currentTile));
 		}
 		
 		protected virtual void OnHelpClicked (object sender, System.EventArgs e)

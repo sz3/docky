@@ -1,5 +1,6 @@
 //  
-//  Copyright (C) 2009-2010 Robert Dyer, Rico Tzschichholz
+//  Copyright (C) 2009 Robert Dyer
+//  Copyright (C) 2010 Robert Dyer, Rico Tzschichholz
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -30,28 +31,23 @@ namespace WeatherDocklet
 {
 	public abstract class AbstractWeatherSource
 	{
-		public class WeatherCachedXMLData {
+		public class WeatherCachedXMLData
+		{
+			public XmlDocument Data { get; private set; }
 			
-			public XmlDocument Data {
-				get; private set;
-			}
-			
-			public DateTime Time {
-				get; private set;
-			}
+			public DateTime Time { get; private set; }
 
-			public string Url {
-				get; private set;
-			}
+			public string Url { get; private set; }
 			
-			public WeatherCachedXMLData (string url, XmlDocument data) {
+			public WeatherCachedXMLData (string url, XmlDocument data)
+			{
 				Url = url;
 				Data = data;
 				Time = DateTime.Now;
 			}
 		}
 
-		const int MAXXMLCACHEAGE = 5 * 60 * 1000;
+		const int MAXXMLCACHEAGE = 60 * 60 * 1000;
 		static List<WeatherCachedXMLData> xml_cache = new List<WeatherCachedXMLData> ();
 		
 		public abstract string Name { get; }
@@ -60,10 +56,9 @@ namespace WeatherDocklet
 		static bool? use_metric;
 		public static bool UseMetric {
 			get {
-				if (use_metric.HasValue)
-					return use_metric.Value;
-				use_metric = false;
-				return false;
+				if (!use_metric.HasValue)
+					use_metric = false;
+				return use_metric.Value;
 			}
 			set {
 				use_metric = value;
@@ -116,7 +111,9 @@ namespace WeatherDocklet
 			}
 		}
 
-		public bool ShowFeelsLike { get { return temp != feelslike; } }
+		public bool ShowFeelsLike {
+			get { return temp != feelslike; }
+		}
 
 		public string Condition { get; protected set; }
 		public string WindDirection { get; protected set; }
@@ -134,9 +131,7 @@ namespace WeatherDocklet
 		Thread checkerThread = null;
 		
 		public bool IsBusy {
-			get {
-				return checkerThread != null && checkerThread.IsAlive;
-			}
+			get { return checkerThread != null && checkerThread.IsAlive; }
 		}
 		
 		/// <summary>
@@ -149,7 +144,7 @@ namespace WeatherDocklet
 			for (int i = 0; i < ForecastDays; i++)
 				Forecasts [i].image = DefaultImage;
 			
-			GLib.Timeout.Add (60 * 60 * 1000, () => {
+			GLib.Timeout.Add (MAXXMLCACHEAGE, () => {
 				xml_cache.RemoveAll (data => ((DateTime.Now - data.Time).TotalMilliseconds > MAXXMLCACHEAGE));
 				return true; 
 			});
@@ -157,7 +152,7 @@ namespace WeatherDocklet
 		
 		public void StartReload ()
 		{
-			//stop running thread if there is one, this shouldnt happen
+			// stop running thread if there is one, this shouldnt happen
 			StopReload ();
 
 			checkerThread = DockServices.System.RunOnThread (() => {
@@ -170,15 +165,12 @@ namespace WeatherDocklet
 
 				} catch (ThreadAbortException) {
 					Log<AbstractWeatherSource>.Debug (Name + ": Reload aborted");
-					//restore Dockitem state
+					// restore Dockitem state
 					OnWeatherUpdated ();
 				} catch (NullReferenceException e) {
 					OnWeatherError (Catalog.GetString ("Invalid Weather Location"));
 					Log<AbstractWeatherSource>.Debug (Name + ": " + e.Message + e.StackTrace);
-				} catch (XmlException e) {
-					OnWeatherError (Catalog.GetString ("Invalid XML Weather Data"));
-					Log<AbstractWeatherSource>.Debug (Name + ": " + e.Message + e.StackTrace);
-				} catch (WebException) {
+				} catch (Exception) {
 					OnWeatherError (Catalog.GetString ("Network Error"));
 				}
 			});
@@ -187,9 +179,8 @@ namespace WeatherDocklet
 
 		public void StopReload ()
 		{
-			if (checkerThread != null) {
+			if (checkerThread != null)
 				checkerThread.Abort ();
-			}
 		}
 		
 		public void ShowRadar ()
@@ -228,9 +219,7 @@ namespace WeatherDocklet
 		/// The default image name.
 		/// </value>
 		public static string DefaultImage {
-			get {
-				return Gtk.Stock.DialogQuestion;
-			}
+			get { return Gtk.Stock.DialogQuestion; }
 		}
 		
 		/// <summary>
@@ -298,8 +287,37 @@ namespace WeatherDocklet
 		/// </summary>
 		protected virtual void FetchData ()
 		{
-			XmlDocument xml = FetchXml (FeedUrl);
-			ParseXml (xml);
+			FetchAndParse (FeedUrl, ParseXml);
+		}
+		
+		protected delegate void XmlParser (XmlDocument xml);
+		
+		protected void FetchAndParse (string url, XmlParser parser)
+		{
+			XmlDocument xml = null;
+			WeatherCachedXMLData cacheddata = null;
+			
+			try {
+				xml = FetchXml (url);
+			} catch (Exception e) {
+				// the fetch failed, see if we have cached data to use instead
+				cacheddata = xml_cache.Find (data => (data.Url == url && (DateTime.Now - data.Time).TotalMilliseconds < MAXXMLCACHEAGE));
+				
+				// if we cant fetch data and have nothing cached, show an error
+				if (cacheddata == null)
+					throw e;
+				
+				Log<AbstractWeatherSource>.Debug (Name + ": Using cached XML file '" + url + "'");
+				xml = cacheddata.Data;
+			}
+			
+			parser (xml);
+			
+			// if we didnt use the cached data, then cache the fetched XML
+			if (cacheddata == null) {
+				xml_cache.RemoveAll (data => data.Url == url);
+				xml_cache.Add (new WeatherCachedXMLData (url, xml));
+			}
 		}
 		
 		/// <summary>
@@ -314,26 +332,19 @@ namespace WeatherDocklet
 		protected XmlDocument FetchXml (string url)
 		{
 			Log<AbstractWeatherSource>.Debug (Name + ": Fetching XML file '" + url + "'");
-			WeatherCachedXMLData cacheddata = xml_cache.Find (data => (data.Url == url && (DateTime.Now - data.Time).TotalMilliseconds < MAXXMLCACHEAGE));
-			if (cacheddata != null) {
-				Log<AbstractWeatherSource>.Debug (Name + ": Use Cached XML file '" + url + "'");
-				return cacheddata.Data;
-			}
 			
 			HttpWebRequest request = (HttpWebRequest) WebRequest.Create (url);
 			request.Timeout = 60000;
 			request.UserAgent = DockServices.System.UserAgent;
 			if (DockServices.System.UseProxy)
 				request.Proxy = DockServices.System.Proxy;
+			
 			XmlDocument xml = new XmlDocument ();
 			using (HttpWebResponse response = (HttpWebResponse)request.GetResponse ())
 				try {
 					xml.Load (response.GetResponseStream ());
 				} finally {
 					response.Close ();
-					
-					xml_cache.RemoveAll (data => data.Url == url);
-					xml_cache.Add (new WeatherCachedXMLData (url, xml));
 				}
 			
 			return xml;
@@ -415,6 +426,5 @@ namespace WeatherDocklet
 		{
 			return (int) Math.Round ((double) Mph * 1.609344);
 		}		
-		
 	}
 }

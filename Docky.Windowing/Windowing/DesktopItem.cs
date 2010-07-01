@@ -81,7 +81,9 @@ namespace Docky.Windowing
 			private set {
 				file = value;
 				if (monitor != null) {
+					monitor.Cancel ();
 					monitor.Changed -= HandleFileChanged;
+					monitor.Dispose ();
 				}
 				monitor = file.Monitor (GLib.FileMonitorFlags.None, null);
 				monitor.RateLimit = 2500;
@@ -295,6 +297,7 @@ namespace Docky.Windowing
 			appinfo.Dispose ();
 			
 			if (monitor != null) {
+				monitor.Cancel ();
 				monitor.Changed -= HandleFileChanged;
 				monitor.Dispose ();
 			}

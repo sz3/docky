@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2010 Robert Dyer, Rico Tzschichholz
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -32,16 +33,17 @@ using Docky.Services;
 
 namespace Docky.Interface
 {
-
 	public class HoverTextManager : IDisposable
 	{
 		public DockPosition Gravity { get; set; }
-		public bool Visible { get; private set; }
+		
+		public bool Visible { 
+			get { return window != null && window.Visible; }
+		}
 		
 		Gtk.Window window;
 		Gdk.Point currentPoint;
 		DockySurface currentSurface;
-		uint timer;
 		
 		static DockySurface [] slices;
 		DockySurface background_buffer;
@@ -81,9 +83,8 @@ namespace Docky.Interface
 		void DockyControllerThemeChanged (object sender, EventArgs e)
 		{
 			if (slices != null) {
-				foreach (DockySurface s in slices) {
+				foreach (DockySurface s in slices)
 					s.Dispose ();
-				}
 				slices = null;
 			}
 			ResetBackgroundBuffer ();
@@ -102,7 +103,7 @@ namespace Docky.Interface
 			currentPoint = point;
 			
 			if (surface == null) {
-				window.Hide ();
+				Hide ();
 				return;
 			}
 			
@@ -125,24 +126,13 @@ namespace Docky.Interface
 				break;
 			}
 			
-			if (timer > 0)
-				GLib.Source.Remove (timer);
-			
 			Gdk.Rectangle monitor_geo = window.Screen.GetMonitorGeometry (Monitor);
 			center.X = Math.Max (monitor_geo.X, Math.Min (center.X, monitor_geo.X + monitor_geo.Width - surface.Width));
 			center.Y = Math.Max (monitor_geo.Y, Math.Min (center.Y, monitor_geo.Y + monitor_geo.Height - surface.Height));
 			
-			window.QueueDraw ();
-			window.Move (center.X, center.Y);
-			timer = GLib.Timeout.Add (100, delegate {
-				window.QueueDraw ();
-				window.Move (center.X, center.Y);
-				timer = 0;
-				return false;
-			});
-			
 			if (Visible)
-				window.Show ();
+				window.QueueDraw ();
+			window.Move (center.X, center.Y);
 		}
 
 		void HandleWindowExposeEvent (object o, ExposeEventArgs args)
@@ -165,20 +155,20 @@ namespace Docky.Interface
 				}
 				
 				cr.Paint ();
+
+				(cr.Target as IDisposable).Dispose ();
 			}
 		}
 		
 		public void Show ()
 		{
-			Visible = true;
-			if (currentSurface != null)
+			if (currentSurface != null && window != null && !window.Visible)
 				window.Show ();
 		}
 		
 		public void Hide ()
 		{
-			Visible = false;
-			if (window != null)
+			if (Visible)
 				window.Hide ();
 		}
 		
@@ -238,9 +228,8 @@ namespace Docky.Interface
 				window = null;
 			}
 			if (slices != null) {
-				foreach (DockySurface s in slices) {
+				foreach (DockySurface s in slices)
 					s.Dispose ();
-				}
 				slices = null;
 			}
 			ResetBackgroundBuffer ();

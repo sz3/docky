@@ -91,6 +91,8 @@ namespace Docky.Services
 			}
 		}
 		
+		List<FileMonitor> monitors = new List<FileMonitor> ();
+		
 		public HelperService ()
 		{
 			helpers = new List<Helper> ();
@@ -98,17 +100,21 @@ namespace Docky.Services
 			// set up the file monitors to watch our script directories
 			foreach (File dir in HelperDirs) {
 				FileMonitor mon = dir.Monitor (0, null);
+				monitors.Add (mon);
 				mon.RateLimit = 5000;
-				mon.Changed += delegate(object o, ChangedArgs args) {
-					if (args.EventType == FileMonitorEvent.Created || args.EventType == FileMonitorEvent.Deleted)
-						UpdateHelpers ();
-				};
+				mon.Changed += HandleMonitorChanged;
 			}
 			
 			GLib.Timeout.Add (2000, delegate {
 				UpdateHelpers ();
 				return false;
 			});
+		}
+		
+		void HandleMonitorChanged (object o, ChangedArgs args)
+		{
+			if (args.EventType == FileMonitorEvent.Created || args.EventType == FileMonitorEvent.Deleted)
+				UpdateHelpers ();
 		}
 
 		void UpdateHelpers ()
@@ -174,7 +180,7 @@ namespace Docky.Services
 			
 			try {
 				TarArchive ar = TarArchive.CreateInputTarArchive (new IO.FileStream (file.Path, IO.FileMode.Open));
-				ar.ExtractContents (UserScriptsDir.Path);
+				ar.ExtractContents (UserDir.Path);
 			} catch (Exception e) {
 				Log<HelperService>.Error ("Error trying to unpack '{0}': {1}", file.Path, e.Message);
 				Log<HelperService>.Debug (e.StackTrace);
@@ -216,6 +222,12 @@ namespace Docky.Services
 		
 		public void Dispose ()
 		{
+			foreach (FileMonitor mon in monitors) {
+				mon.Cancel ();
+				mon.Changed -= HandleMonitorChanged;
+				mon.Dispose ();
+			}
+			
 			foreach (Helper h in Helpers) {
 				h.HelperStatusChanged -= OnHelperStatusChanged;
 				h.Dispose ();

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-06-02 22:46+0200\n"
+"POT-Creation-Date: 2010-06-28 07:25+0200\n"
 "PO-Revision-Date: 2010-05-17 23:13+0000\n"
 "Last-Translator: Steven Rose <launchpad@stevey.eu>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-06-02 21:21+0000\n"
+"X-Launchpad-Export-Date: 2010-06-28 05:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:133
@@ -65,39 +65,39 @@ msgstr ".tar Archives"
 msgid "Author"
 msgstr "Author"
 
-#: ../Docky/Docky/DockletTile.cs:88
+#: ../Docky/Docky/DockletTile.cs:97
 msgid "Move this docklet up on the selected dock"
 msgstr "Move this docklet up on the selected dock"
 
-#: ../Docky/Docky/DockletTile.cs:89
+#: ../Docky/Docky/DockletTile.cs:98
 msgid "Move this docklet down on the selected dock"
 msgstr "Move this docklet down on the selected dock"
 
-#: ../Docky/Docky/DockletTile.cs:93
+#: ../Docky/Docky/DockletTile.cs:102
 msgid "Move this docklet left on the selected dock"
 msgstr "Move this docklet left on the selected dock"
 
-#: ../Docky/Docky/DockletTile.cs:94
+#: ../Docky/Docky/DockletTile.cs:103
 msgid "Move this docklet right on the selected dock"
 msgstr "Move this docklet right on the selected dock"
 
-#: ../Docky/Docky/DockletTile.cs:96
+#: ../Docky/Docky/DockletTile.cs:105
 msgid "Configure this docklet"
 msgstr "Configure this docklet"
 
-#: ../Docky/Docky/DockletTile.cs:97
+#: ../Docky/Docky/DockletTile.cs:106
 msgid "About this docklet"
 msgstr "About this docklet"
 
-#: ../Docky/Docky/DockletTile.cs:98
+#: ../Docky/Docky/DockletTile.cs:107
 msgid "Add this docklet to the selected dock"
 msgstr "Add this docklet to the selected dock"
 
-#: ../Docky/Docky/DockletTile.cs:99
+#: ../Docky/Docky/DockletTile.cs:108
 msgid "Remove this docklet from the selected dock"
 msgstr "Remove this docklet from the selected dock"
 
-#: ../Docky/Docky/Docky.cs:121
+#: ../Docky/Docky/Docky.cs:123
 msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
@@ -131,7 +131,7 @@ msgstr "Running"
 msgid "Stopped"
 msgstr "Stopped"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:333
+#: ../Docky/Docky/Interface/DockPreferences.cs:332
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
@@ -139,34 +139,34 @@ msgstr ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:684
+#: ../Docky/Docky/Interface/DockPreferences.cs:682
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr "<i>Never hides; maximized windows do not overlap the dock.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:687
+#: ../Docky/Docky/Interface/DockPreferences.cs:685
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Hides whenever the mouse is not over it.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:690
+#: ../Docky/Docky/Interface/DockPreferences.cs:688
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Hides when dock obstructs the active application.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:693
+#: ../Docky/Docky/Interface/DockPreferences.cs:691
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Hides when dock obstructs any window.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:379
+#: ../Docky/Docky/Interface/DockWindow.cs:381
 msgid "Drag to reposition"
 msgstr "Drag to reposition"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:391
-#: ../Docky/Docky/Interface/DockWindow.cs:405
+#: ../Docky/Docky/Interface/DockWindow.cs:393
+#: ../Docky/Docky/Interface/DockWindow.cs:407
 msgid "Drop to add to dock"
 msgstr "Drop to add to dock"
 
 #: ../Docky/Docky/Items/DockyItem.cs:133
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:223
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:239
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:244
 msgid "_Settings"
 msgstr "_Settings"
 
@@ -187,8 +187,8 @@ msgid "Docky Settings"
 msgstr "Docky Settings"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
-msgid "_Start When Computer Starts"
-msgstr "_Start When Computer Starts"
+msgid "_Start When User Logs In"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
@@ -296,7 +296,7 @@ msgid "New _Window"
 msgstr "New _Window"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:161
-#: ../StandardPlugins/Mounter/src/MountItem.cs:97
+#: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
 msgstr "_Open"
 
@@ -304,7 +304,7 @@ msgstr "_Open"
 msgid "Reset Color"
 msgstr "Reset Colour"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:409
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:477
 msgid "_Pin to Dock"
 msgstr "_Pin to Dock"
 
@@ -315,34 +315,34 @@ msgstr ""
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:189
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:234
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:190
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:235
 msgid "Error performing drop action"
 msgstr "Error performing drop action"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:189
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:190
 msgid "Not enough free space on destination."
 msgstr "Not enough free space on destination."
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:206
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:209
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:241
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:207
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:210
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:242
 msgid "Complete"
 msgstr "Complete"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:219
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:220
 msgid "Moving"
 msgstr "Moving"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:225
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:226
 msgid "Copying"
 msgstr "Copying"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:259
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:260
 msgid "Open"
 msgstr "Open"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:260
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:261
 msgid "Open Containing Folder"
 msgstr "Open Containing Folder"
 
@@ -434,23 +434,23 @@ msgstr "until charged "
 msgid "remaining "
 msgstr "remaining "
 
-#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:84
+#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:86
 msgid "Computer"
 msgstr "Computer"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:425
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:430
 msgid "Di_gital Clock"
 msgstr "Di_gital Clock"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:436
 msgid "24-Hour _Clock"
 msgstr "24-Hour_Clock"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:442
 msgid "Show _Date"
 msgstr "Show _Date"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:443
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:448
 msgid "Select _Theme"
 msgstr "Select _Theme"
 
@@ -479,39 +479,40 @@ msgstr "Check e_very:"
 msgid "minutes"
 msgstr "minutes"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:201
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:174
 msgid "Click to set username and password."
 msgstr "Click to set username and password."
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:255
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:228
 msgid "(no subject)"
 msgstr "(no subject)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:269
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:242
 #, csharp-format
 msgid "You have {0} new, unread messages"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:273
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:246
 #, csharp-format
 msgid "From: {0}"
 msgstr "From: {0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:286
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:290
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:259
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:263
 msgid "Feed Error"
 msgstr "Feed Error"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:295
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:268
 msgid "Invalid Username"
 msgstr "Invalid Username"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:299
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:303
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:272
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:276
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:174
 msgid "Network Error"
 msgstr "Network Error"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:308
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:281
 msgid "General Error"
 msgstr "General Error"
 
@@ -534,19 +535,23 @@ msgstr[1] "{0} unread messages"
 msgid "Checking mail..."
 msgstr "Checking mail..."
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:202
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "_View "
 msgstr "_View "
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:207
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
 msgid "_Compose Mail"
 msgstr "_Compose Mail"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:214
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:211
+msgid "View C_ontacts"
+msgstr ""
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
 msgid "New Mail"
 msgstr "New Mail"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:232
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:236
 msgid "Check _Mail"
 msgstr "Check _Mail"
 
@@ -566,11 +571,11 @@ msgstr "Log-in"
 msgid "From: "
 msgstr "From: "
 
-#: ../StandardPlugins/Mounter/src/MountItem.cs:99
+#: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Eject"
 msgstr "_Eject"
 
-#: ../StandardPlugins/Mounter/src/MountItem.cs:99
+#: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Unmount"
 msgstr "_Unmount"
 
@@ -600,11 +605,11 @@ msgstr "My _Stations"
 msgid "S_earch"
 msgstr "S_earch"
 
-#: ../StandardPlugins/NPR/src/Station.cs:77
+#: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
 msgstr "No stations found."
 
-#: ../StandardPlugins/NPR/src/Station.cs:78
+#: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
 msgstr "Please try your search again."
@@ -613,39 +618,39 @@ msgstr "Please try your search again."
 msgid "Fetching Information..."
 msgstr "Fetching Information..."
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:66
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:72
 msgid "Click to add NPR stations."
 msgstr "Click to add NPR stations."
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:105
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:111
 msgid "Home Page"
 msgstr "Home Page"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:112
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:118
 msgid "Program Schedule"
 msgstr "Programme Schedule"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:119
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:125
 msgid "Donate"
 msgstr "Donate"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:126
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:132
 msgid "Live Streams"
 msgstr "Live Streams"
 
-#: ../StandardPlugins/NPR/src/StationDockItem.cs:164
+#: ../StandardPlugins/NPR/src/StationDockItem.cs:170
 msgid "Settings"
 msgstr "Settings"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:67
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:56
 msgid "Clear the Recent Documents list?"
 msgstr "Clear the Recent Documents list?"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:69
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:58
 msgid "Clear Recent Documents"
 msgstr "Clear Recent Documents"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:71
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:60
 msgid ""
 "If you clear the Recent Documents list, you clear the following:\n"
 "• All items from the Places → Recent Documents menu item.\n"
@@ -655,62 +660,127 @@ msgstr ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:92
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:81
 msgid "_Clear Recent Documents..."
 msgstr "_Clear Recent Documents..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:148
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:152
 msgid "Lock Screen"
 msgstr "Lock Screen"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:152
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:156
 msgid "Log Out..."
 msgstr "Log Out..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:157
 msgid "Log Out"
 msgstr "Log Out"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:154
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
 msgstr ""
 "Are you sure you want to close all programs and log out of the computer?"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:159
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:163
 msgid "Suspend"
 msgstr "Suspend"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:164
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:168
 msgid "Hibernate"
 msgstr "Hibernate"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:170
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:174
 msgid "Restart..."
 msgstr "Restart..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:171
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:175
 msgid "Restart"
 msgstr "Restart"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:172
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
 msgid "Are you sure you want to close all programs and restart the computer?"
 msgstr ""
 "Are you sure you want to close all programs and restart the computer?"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:177
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:181
 msgid "Shut Down..."
 msgstr "Shut Down..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:182
 msgid "Shut Down"
 msgstr "Shut Down"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:183
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
 msgstr ""
 "Are you sure you want to close all programs and shut down the computer?"
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:90
+#, csharp-format
+msgid "A timer set for {0} has expired."
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:236
+msgid "Time remaining:"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:238
+msgid "Timer paused, time remaining:"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:249
+msgid "Set the timer's label to:"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:255
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:289
+msgid "_Set Label"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:280
+msgid "_Pause Timer"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:280
+msgid "_Start Timer"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:284
+msgid "_Remove Timer"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:62
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:66
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:71
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:138
+#, csharp-format
+msgid "Click to create a timer for {0}."
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:155
+msgid "Automatically _Start Timers"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:159
+msgid "Automatically _Dismiss Timers"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:50
 msgid "Drop to move to Trash"
@@ -728,23 +798,23 @@ msgstr[0] "{0} item in Deleted Items"
 msgstr[1] "{0} items in Deleted Items"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:164
-msgid "_Open Trash"
-msgstr "_Open the Deleted Items folder"
-
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:166
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:232
-msgid "Empty _Trash"
-msgstr "Empty _Deleted Items"
-
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:167
 msgid "Restore Files"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:224
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:195
+msgid "_Open Trash"
+msgstr "_Open the Deleted Items folder"
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:197
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:234
+msgid "Empty _Trash"
+msgstr "Empty _Deleted Items"
+
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:226
 msgid "Empty all of the items from the trash?"
 msgstr "Empty everything from the Deleted Items folder?"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:226
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:228
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
@@ -774,17 +844,9 @@ msgstr "Automatically Update _Every"
 msgid "Use _Metric Units"
 msgstr "Use _Metric Units"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:176
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:171
 msgid "Invalid Weather Location"
 msgstr "Invalid Weather Location"
-
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:179
-msgid "Invalid XML Weather Data"
-msgstr ""
-
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:182
-msgid "Network Error: "
-msgstr "Network Error: "
 
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
@@ -806,7 +868,7 @@ msgstr ""
 "website. To find your code, look up your forecast on their site and the code "
 "is in the URL after '/local/' and looks like AAXX0000."
 
-#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
+#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:56
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
@@ -830,15 +892,15 @@ msgstr "Click to add a location."
 msgid "Fetching data..."
 msgstr "Fetching data..."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:226
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Radar _Map"
 msgstr "Radar _Map"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "Forecasts"
 msgstr "Forecasts"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:247
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:252
 msgid "Check _Weather"
 msgstr "Check _Weather"
 
@@ -851,13 +913,16 @@ msgid "T_omorrow"
 msgstr "T_omorrow"
 
 #. draw humidity
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:318
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:328
 #, csharp-format
 msgid "{0} humidity"
 msgstr "{0} humidity"
 
 #~ msgid "Docky Configuration"
 #~ msgstr "Docky Configuration"
+
+#~ msgid "_Start When Computer Starts"
+#~ msgstr "_Start When Computer Starts"
 
 #~ msgid "Indicat_e Multiple Windows"
 #~ msgstr "Indicat_e Multiple Windows"
@@ -870,6 +935,9 @@ msgstr "{0} humidity"
 
 #~ msgid "Username or Password not set"
 #~ msgstr "Username or Password not set"
+
+#~ msgid "Network Error: "
+#~ msgstr "Network Error: "
 
 #~ msgid "Sunrise"
 #~ msgstr "Sunrise"

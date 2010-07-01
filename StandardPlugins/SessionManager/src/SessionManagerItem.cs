@@ -116,11 +116,15 @@ namespace SessionManager
 			SessionMenuItems = new List<SessionManagerEntry> ();
 			SessionDockItems = new List<SessionManagerEntry> ();
 			
-			SessionMenuItems.Add (lockscreen);
-			SessionDockItems.Add (lockscreen);
+			if (system_manager.CanLockScreen ()) {
+				SessionMenuItems.Add (lockscreen);
+				SessionDockItems.Add (lockscreen);
+			}
 
-			SessionMenuItems.Add (logout);
-			SessionDockItems.Add (logout);
+			if (system_manager.CanLogOut ()) {
+				SessionMenuItems.Add (logout);
+				SessionDockItems.Add (logout);
+			}
 			
 			if (system_manager.CanSuspend ()) {
 				SessionMenuItems.Add (suspend);
@@ -254,6 +258,7 @@ namespace SessionManager
 		{
 			system_manager.CapabilitiesChanged -= HandlePowermanagerCapabilitiesChanged;
 			system_manager.RebootRequired -= HandleRebootRequired;
+			system_manager.Dispose ();
 			
 			base.Dispose ();
 		}

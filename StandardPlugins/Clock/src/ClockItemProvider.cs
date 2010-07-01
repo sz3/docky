@@ -32,8 +32,6 @@ namespace Clock
 			}
 		}
 		
-		public override string Icon { get { return "clock"; } }
-		
 		#endregion
 
 		ClockDockItem clock;

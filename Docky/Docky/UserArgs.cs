@@ -19,57 +19,106 @@ using System;
 
 using Docky.Services;
 
-using Mono.GetOptions;
-
-// disable the warning message about Mono.GetOptions.Options being obsolete
-#pragma warning disable 618
+using Mono.Options;
 
 namespace Docky
 {
-	public class UserArgs : Options
+	public class UserArgs
 	{
-		[Option ("Disable cursor polling (for testing)", 'p', "disable-polling")]
-		public bool NoPollCursor;
+		const int FORCE_BUFFER_REFRESH = 10;
 		
-		[Option ("Maximum window dimension (min 500)", 'm', "max-size")]
-		public int MaxSize;
+		/// <summary>
+		/// Gets or sets a value indicating whether cursor polling should be disabled.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> cursor polling should be disabled; otherwise, <c>false</c>.
+		/// </value>
+		public static bool NoPollCursor { get; private set; }
+		/// <summary>
+		/// Gets or sets the maximum dock window size.
+		/// </summary>
+		/// <value>
+		/// The max size of the dock window.
+		/// </value>
+		public static int MaxSize { get; private set; }
+		/// <summary>
+		/// Gets or sets a value indicating whether Docky should run in netbook mode.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> if netbook mode; otherwise, <c>false</c>.
+		/// </value>
+		public static bool NetbookMode { get; private set; }
+		/// <summary>
+		/// The number of minutes to keep buffers.
+		/// </summary>
+		/// <value>
+		/// The buffer refresh interval.
+		/// </value>
+		public static uint BufferTime { get; private set; }
 		
-		[Option ("Enable debug level logging", 'd', "debug")]
-		public bool Debug;
+		static bool HelpShown { get; set; }
+		static OptionSet Options { get; set; }
 		
-		[Option ("Netbook mode", 'n', "netbook")]
-		public bool NetbookMode;
-		
-		[Option ("Nvidia mode (for Nvidia cards that lag after awhile) [-b 10]", "nvidia")]
-		public bool NvidiaMode;
-		
-		[Option ("Maximum time (in minutes) to keep buffers", 'b', "buffer-time")]
-		public uint BufferTime;
-
-		public UserArgs (string[] args)
+		static UserArgs ()
 		{
-			Log.DisplayLevel = LogLevel.Warn;
+			MaxSize = int.MaxValue;
 			
-			ParsingMode = OptionsParsingMode.GNU_DoubleDash;
-			ProcessArgs (args);
+			Options = new OptionSet () {
+				{ "p|disable-polling", "Disable cursor polling (for testing)", val => NoPollCursor = true },
+				{ "m|max-size=", "Maximum window dimension (min 500)", (int max) => MaxSize = Math.Max (max, 500) },
+				{ "d|debug", "Enable debug logging", debug => {
+						Log.DisplayLevel = (debug == null) ? LogLevel.Warn : LogLevel.Debug;
+					} },
+				{ "n|netbook", "Netbook mode", netbook => NetbookMode = true },
+				{ "nv|nvidia", "Nvidia mode (for Nvidia cards that lag after a while).  Equivalent to '-b 10'.",
+					nv => {
+						if (BufferTime == 0)
+							BufferTime = FORCE_BUFFER_REFRESH;
+					} },
+				{ "b|buffer-time=", "Maximum time (in minutes) to keep buffers", (uint buf) => BufferTime = buf },
+				{ "h|?|help", "Show this help list", help => ShowHelp () },
+			};
+		}
+		
+		/// <summary>
+		/// Parse the specified command line args.
+		/// </summary>
+		/// <param name='args'>
+		/// The arguments to parse.
+		/// </param>
+		/// <returns>
+		/// <c>true</c> if help was shown, otherwise <c>false</c>.
+		/// </returns>
+		public static bool Parse (string[] args)
+		{
+			try {
+				Options.Parse (args);
+			} catch (OptionException ex) {
+				Log<UserArgs>.Error ("Error parsing options: {0}", ex.Message);
+				ShowHelp ();
+			}
 			
-			// defaults
-			NvidiaMode |= DockServices.System.HasNvidia;
-			if (MaxSize == 0)
-				MaxSize = int.MaxValue;
-			MaxSize = Math.Max (MaxSize, 500);
-			if (NvidiaMode && BufferTime == 0)
-				BufferTime = 10;
-			// if the debug option was passed, set it to debug
-			// otherwise leave it to the default, which is warn
-			if (Debug)
-				Log.DisplayLevel = LogLevel.Debug;
+			// if the buffer time wasn't explicity set, and a Nvidia card is present,
+			// force the buffer refresh time to 10 minutes
+			if (DockServices.System.HasNvidia && BufferTime == 0)
+				BufferTime = FORCE_BUFFER_REFRESH;
 			
 			// log the parsed user args
 			Log<UserArgs>.Debug ("BufferTime = " + BufferTime);
 			Log<UserArgs>.Debug ("MaxSize = " + MaxSize);
 			Log<UserArgs>.Debug ("NetbookMode = " + NetbookMode);
 			Log<UserArgs>.Debug ("NoPollCursor = " + NoPollCursor);
+			
+			// if the help was shown, return false, alerting the main thread to exit
+			return !HelpShown;
+		}
+		
+		static void ShowHelp ()
+		{
+			Console.WriteLine ("usage: docky [options]");
+			Console.WriteLine ();
+			Options.WriteOptionDescriptions (Console.Out);
+			HelpShown = true;
 		}
 	}
 }

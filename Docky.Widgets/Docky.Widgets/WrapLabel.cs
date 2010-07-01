@@ -34,7 +34,7 @@ using Gtk;
 
 namespace Docky.Widgets
 {
-	[System.ComponentModel.ToolboxItem(true)]
+    [System.ComponentModel.ToolboxItem(true)]
     public class WrapLabel : Widget
     {
         private string text;
@@ -153,6 +153,15 @@ namespace Docky.Widgets
                 text = value;
                 UpdateLayout ();
             }
-        }       
+        }
+        
+        public override void Dispose()
+        {
+            if (layout != null) {
+                layout.Dispose ();
+            }
+            
+            base.Dispose ();
+        }
     }
 }

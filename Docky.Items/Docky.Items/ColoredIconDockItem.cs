@@ -60,7 +60,7 @@ namespace Docky.Items
 				
 		protected override Gdk.Pixbuf ProcessPixbuf (Gdk.Pixbuf pbuf)
 		{
-			return DockServices.Drawing.AddHueShift (pbuf, HueShift >= 0 ? HueShift : -HueShift);
+			return pbuf.AddHueShift (HueShift >= 0 ? HueShift : -HueShift);
 		}
 		
 		protected override MenuList OnGetMenuItems ()
@@ -72,10 +72,7 @@ namespace Docky.Items
 		
 		protected override void OnScrolled (ScrollDirection direction, ModifierType mod)
 		{
-			mod &= ~ModifierType.Mod2Mask; // Ignore NumLock
-			mod &= ~ModifierType.LockMask; // Ignore CapsLock
-			
-			if (mod != ModifierType.ShiftMask)
+			if ((mod & ModifierType.ShiftMask) != ModifierType.ShiftMask)
 				return;
 			
 			int shift = HueShift;

@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 GNOME Do
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -99,65 +100,70 @@ namespace WeatherDocklet
 		void DrawForecast (Cairo.Context cr)
 		{
 			int xOffset = BUTTON_SIZE;
+			int cellWidth = (Allocation.Width - 2 * BUTTON_SIZE) / (WeatherController.Weather.ForecastDays * 2);
 			
-			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-			Pango.Rectangle inkRect, logicalRect;
-			
-			layout.FontDescription = new Gtk.Style().FontDescription;
-			layout.FontDescription.Weight = Pango.Weight.Bold;
-			layout.Ellipsize = Pango.EllipsizeMode.None;
-			layout.Width = Pango.Units.FromPixels (Allocation.Height);
-			
-			for (int day = 0; day < WeatherController.Weather.ForecastDays; day++)
-			{
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 5));
+			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ()) {
+				Pango.Rectangle inkRect, logicalRect;
 				
-				cr.Color = colorTitle;
-				layout.SetText (string.Format ("{0}", WeatherForecast.DayShortName (WeatherController.Weather.Forecasts [day].dow)));
-				layout.GetPixelExtents (out inkRect, out logicalRect);
-				cr.MoveTo (xOffset + (Allocation.Height - inkRect.Width) / 2, 0);
-				Pango.CairoHelper.LayoutPath (cr, layout);
-				cr.Fill ();
+				layout.FontDescription = new Gtk.Style().FontDescription;
+				layout.FontDescription.Weight = Pango.Weight.Bold;
+				layout.Ellipsize = Pango.EllipsizeMode.None;
+				layout.Width = Pango.Units.FromPixels (cellWidth);
 				
-				cr.Color = colorHigh;
-				layout.SetText (string.Format ("{0}{1}", WeatherController.Weather.Forecasts [day].high, AbstractWeatherSource.TempUnit));
-				layout.GetPixelExtents (out inkRect, out logicalRect);
-				cr.MoveTo (xOffset + (Allocation.Height - inkRect.Width) / 2, Allocation.Height / 2 - logicalRect.Height / 2);
-				Pango.CairoHelper.LayoutPath (cr, layout);
-				cr.Fill ();
-				
-				cr.Color = colorLow;
-				layout.SetText (string.Format ("{0}{1}", WeatherController.Weather.Forecasts [day].low, AbstractWeatherSource.TempUnit));
-				layout.GetPixelExtents (out inkRect, out logicalRect);
-				cr.MoveTo (xOffset + (Allocation.Height - inkRect.Width) / 2, Allocation.Height - logicalRect.Height);
-				Pango.CairoHelper.LayoutPath (cr, layout);
-				cr.Fill ();
-				
-				using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (WeatherController.Weather.Forecasts [day].image, Allocation.Height - 5))
+				for (int day = 0; day < WeatherController.Weather.ForecastDays; day++)
 				{
-					Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, xOffset + Allocation.Height + 2, 5);
-					cr.PaintWithAlpha (WeatherController.Weather.Forecasts [day].chanceOf ? .6 : 1);
-				}
-				
-				if (WeatherController.Weather.Forecasts [day].chanceOf)
-				{
-					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 2));
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (cellWidth / 5));
 					
-					layout.SetText ("?");
-					
+					cr.Color = colorTitle;
+					layout.SetText (string.Format ("{0}", WeatherForecast.DayShortName (WeatherController.Weather.Forecasts [day].dow)));
 					layout.GetPixelExtents (out inkRect, out logicalRect);
-					cr.MoveTo (xOffset + Allocation.Height + (Allocation.Height - inkRect.Width) / 2, Allocation.Height / 2 - logicalRect.Height / 2);
-					
-					cr.LineWidth = 4;
-					cr.Color = new Cairo.Color (0, 0, 0, 0.3);
+					cr.MoveTo (xOffset + (cellWidth - inkRect.Width) / 2, 0);
 					Pango.CairoHelper.LayoutPath (cr, layout);
-					cr.StrokePreserve ();
-					
-					cr.Color = new Cairo.Color (1, 1, 1, .6);
 					cr.Fill ();
+					
+					cr.Color = colorHigh;
+					layout.SetText (string.Format ("{0}{1}", WeatherController.Weather.Forecasts [day].high, AbstractWeatherSource.TempUnit));
+					layout.GetPixelExtents (out inkRect, out logicalRect);
+					cr.MoveTo (xOffset + (cellWidth - inkRect.Width) / 2, Allocation.Height / 2 - logicalRect.Height / 2);
+					Pango.CairoHelper.LayoutPath (cr, layout);
+					cr.Fill ();
+					
+					cr.Color = colorLow;
+					layout.SetText (string.Format ("{0}{1}", WeatherController.Weather.Forecasts [day].low, AbstractWeatherSource.TempUnit));
+					layout.GetPixelExtents (out inkRect, out logicalRect);
+					cr.MoveTo (xOffset + (cellWidth - inkRect.Width) / 2, Allocation.Height - logicalRect.Height);
+					Pango.CairoHelper.LayoutPath (cr, layout);
+					cr.Fill ();
+					
+					using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (WeatherController.Weather.Forecasts [day].image, cellWidth - 5))
+					{
+						Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, xOffset + cellWidth + 2, 5 + (Allocation.Height - cellWidth) / 2);
+						cr.PaintWithAlpha (WeatherController.Weather.Forecasts [day].chanceOf ? .6 : 1);
+					}
+					
+					if (WeatherController.Weather.Forecasts [day].chanceOf)
+					{
+						layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (cellWidth / 2));
+						
+						layout.SetText ("?");
+						
+						layout.GetPixelExtents (out inkRect, out logicalRect);
+						cr.MoveTo (xOffset + cellWidth + (cellWidth - inkRect.Width) / 2, Allocation.Height / 2 - logicalRect.Height / 2);
+						
+						cr.LineWidth = 4;
+						cr.Color = new Cairo.Color (0, 0, 0, 0.3);
+						Pango.CairoHelper.LayoutPath (cr, layout);
+						cr.StrokePreserve ();
+						
+						cr.Color = new Cairo.Color (1, 1, 1, .6);
+						cr.Fill ();
+					}
+					
+					xOffset += 2 * cellWidth;
 				}
 				
-				xOffset += 2 * (Allocation.Height);
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
 			}
 		}
 		
@@ -186,43 +192,47 @@ namespace WeatherDocklet
 			if (max <= min)
 				return;
 			
-			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-			Pango.Rectangle inkRect, logicalRect;
-			
-			layout.FontDescription = new Gtk.Style().FontDescription;
-			layout.FontDescription.Weight = Pango.Weight.Bold;
-			layout.Ellipsize = Pango.EllipsizeMode.None;
-			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 5));
-			
-			// high/low temp
-			layout.Width = Pango.Units.FromPixels (Allocation.Height);
-			cr.Color = colorHigh;
-			layout.SetText (string.Format ("{0}{1}", max, AbstractWeatherSource.TempUnit));
-			layout.GetPixelExtents (out inkRect, out logicalRect);
-			cr.MoveTo (Allocation.Width - Allocation.Height + (Allocation.Height - inkRect.Width) / 2 - BUTTON_SIZE, Allocation.Height / 6 - logicalRect.Height / 2);
-			Pango.CairoHelper.LayoutPath (cr, layout);
-			cr.Fill ();
-			
-			cr.Color = colorLow;
-			layout.SetText (string.Format ("{0}{1}", min, AbstractWeatherSource.TempUnit));
-			layout.GetPixelExtents (out inkRect, out logicalRect);
-			cr.MoveTo (Allocation.Width - Allocation.Height + (Allocation.Height - inkRect.Width) / 2 - BUTTON_SIZE, Allocation.Height * 6 / 9 - logicalRect.Height / 2);
-			Pango.CairoHelper.LayoutPath (cr, layout);
-			cr.Fill ();
-			
-			// day names
-			layout.Width = Pango.Units.FromPixels (2 * Allocation.Height);
-			
-			cr.Color = colorTitle;
-			for (int day = 0; day < WeatherController.Weather.ForecastDays; day++)
-			{
-				layout.SetText (WeatherForecast.DayShortName (WeatherController.Weather.Forecasts [day].dow));
+			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ()) {
+				Pango.Rectangle inkRect, logicalRect;
+				
+				layout.FontDescription = new Gtk.Style().FontDescription;
+				layout.FontDescription.Weight = Pango.Weight.Bold;
+				layout.Ellipsize = Pango.EllipsizeMode.None;
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 5));
+				
+				// high/low temp
+				layout.Width = Pango.Units.FromPixels (Allocation.Height);
+				cr.Color = colorHigh;
+				layout.SetText (string.Format ("{0}{1}", max, AbstractWeatherSource.TempUnit));
 				layout.GetPixelExtents (out inkRect, out logicalRect);
-				cr.MoveTo (BUTTON_SIZE + day * Allocation.Height * 2 + (Allocation.Height - inkRect.Width) / 2, Allocation.Height * 8 / 9 - logicalRect.Height / 2);
+				cr.MoveTo (Allocation.Width - Allocation.Height + (Allocation.Height - inkRect.Width) / 2 - BUTTON_SIZE, Allocation.Height / 6 - logicalRect.Height / 2);
 				Pango.CairoHelper.LayoutPath (cr, layout);
+				cr.Fill ();
+				
+				cr.Color = colorLow;
+				layout.SetText (string.Format ("{0}{1}", min, AbstractWeatherSource.TempUnit));
+				layout.GetPixelExtents (out inkRect, out logicalRect);
+				cr.MoveTo (Allocation.Width - Allocation.Height + (Allocation.Height - inkRect.Width) / 2 - BUTTON_SIZE, Allocation.Height * 6 / 9 - logicalRect.Height / 2);
+				Pango.CairoHelper.LayoutPath (cr, layout);
+				cr.Fill ();
+				
+				// day names
+				layout.Width = Pango.Units.FromPixels (2 * Allocation.Height);
+				
+				cr.Color = colorTitle;
+				for (int day = 0; day < WeatherController.Weather.ForecastDays; day++)
+				{
+					layout.SetText (WeatherForecast.DayShortName (WeatherController.Weather.Forecasts [day].dow));
+					layout.GetPixelExtents (out inkRect, out logicalRect);
+					cr.MoveTo (BUTTON_SIZE + day * Allocation.Height * 2 + (Allocation.Height - inkRect.Width) / 2, Allocation.Height * 8 / 9 - logicalRect.Height / 2);
+					Pango.CairoHelper.LayoutPath (cr, layout);
+				}
+				cr.Fill ();
+				cr.Save ();
+				
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
 			}
-			cr.Fill ();
-			cr.Save ();
 			
 			// draw tick lines
 			cr.Color = new Cairo.Color (0.627, 0.627, 0.627, .8);
@@ -349,25 +359,29 @@ namespace WeatherDocklet
 		
 		void DrawConditionText (Cairo.Context cr, int x, int xWidth, int yCenter, string text)
 		{
-			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-			Pango.Rectangle inkRect, logicalRect;
-			
-			layout.FontDescription = new Gtk.Style().FontDescription;
-			layout.FontDescription.Weight = Pango.Weight.Bold;
-			layout.Ellipsize = Pango.EllipsizeMode.None;
-			layout.Width = Pango.Units.FromPixels (Allocation.Width - BUTTON_SIZE - x);
-			
-			if (WeatherController.Weather.ForecastDays < 6)
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 5));
-			else
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 3.5));
-			
-			cr.Color = new Cairo.Color (1, 1, 1, 0.9);
-			layout.SetText (text);
-			layout.GetPixelExtents (out inkRect, out logicalRect);
-			cr.MoveTo (x + (xWidth - logicalRect.Width) / 2, yCenter - logicalRect.Height / 2);
-			Pango.CairoHelper.LayoutPath (cr, layout);
-			cr.Fill ();
+			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ()) {
+				Pango.Rectangle inkRect, logicalRect;
+				
+				layout.FontDescription = new Gtk.Style().FontDescription;
+				layout.FontDescription.Weight = Pango.Weight.Bold;
+				layout.Ellipsize = Pango.EllipsizeMode.None;
+				layout.Width = Pango.Units.FromPixels (Allocation.Width - BUTTON_SIZE - x);
+				
+				if (WeatherController.Weather.ForecastDays < 6)
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 5));
+				else
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Height / 3.5));
+				
+				cr.Color = new Cairo.Color (1, 1, 1, 0.9);
+				layout.SetText (text);
+				layout.GetPixelExtents (out inkRect, out logicalRect);
+				cr.MoveTo (x + (xWidth - logicalRect.Width) / 2, yCenter - logicalRect.Height / 2);
+				Pango.CairoHelper.LayoutPath (cr, layout);
+				cr.Fill ();
+				
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
+			}
 		}
 		
 		/// <summary>

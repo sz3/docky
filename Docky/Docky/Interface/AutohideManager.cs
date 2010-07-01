@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -35,35 +36,60 @@ namespace Docky.Interface
 		public event EventHandler HiddenChanged;
 		public event EventHandler DockHoveredChanged;
 		
+		static IPreferences prefs = DockServices.Preferences.Get <AutohideManager> ();
+		static uint unhideDelay = (uint) prefs.Get<int> ("UnhideDelay", 0);
+		static uint updateDelay = (uint) prefs.Get<int> ("UpdateDelay", 200);
+		
 		Gdk.Rectangle cursor_area, intersect_area, last_known_geo;
 		Wnck.Screen screen;
 		CursorTracker tracker;
 		int pid;
-		uint timer;
+		uint timer_activewindow;
+		uint timer_geometry;
 		
 		bool WindowIntersectingOther { get; set; }
 		
-		bool dockHoverd;
+		bool dockHovered;
 		public bool DockHovered {
-			get { return dockHoverd; }
+			get { return dockHovered; }
 			private set {
-				if (dockHoverd == value)
+				if (dockHovered == value)
 					return;
 				
-				dockHoverd = value;
+				dockHovered = value;
+				
 				OnDockHoveredChanged ();
 			}
 		}
+		
+		uint event_timer = 0;
 		
 		bool hidden;
 		public bool Hidden {
 			get { return hidden; } 
 			private set { 
+				if (value && event_timer > 0) {
+					GLib.Source.Remove (event_timer);
+					event_timer = 0;
+				}
+				
 				if (hidden == value)
 					return;
 				
-				hidden = value; 
-				OnHiddenChanged ();
+				if (!hidden || !DockHovered || unhideDelay == 0) {
+					hidden = value; 
+					
+					OnHiddenChanged ();
+				} else {
+					if (event_timer > 0)
+						return;
+					event_timer = GLib.Timeout.Add (unhideDelay, delegate {
+						hidden = value; 
+						OnHiddenChanged ();
+						event_timer = 0;
+						return false;
+					});
+				}
 			} 
 		}
 		
@@ -75,9 +101,8 @@ namespace Docky.Interface
 					return;
 				
 				behavior = value; 
-				if (behavior == AutohideType.None) {
-					Hidden = false;
-				}
+				
+				SetHidden ();
 			} 
 		}
 		
@@ -128,14 +153,14 @@ namespace Docky.Interface
 		{
 			if (args.PreviousWindow != null)
 				args.PreviousWindow.GeometryChanged -= HandleGeometryChanged;
-			
-			if (timer > 0)
-				GLib.Source.Remove (timer);
-			
-			timer = GLib.Timeout.Add (200, delegate {
+
+			if (timer_activewindow > 0)
+				return;
+
+			timer_activewindow = GLib.Timeout.Add (updateDelay, delegate {
 				SetupActiveWindow ();
 				UpdateWindowIntersect ();
-				timer = 0;
+				timer_activewindow = 0;
 				return false;
 			});
 		}
@@ -173,12 +198,12 @@ namespace Docky.Interface
 			
 			last_known_geo = geo;
 			
-			if (timer > 0)
-				GLib.Source.Remove (timer);
+			if (timer_geometry > 0)
+				return;
 			
-			timer = GLib.Timeout.Add (200, delegate {
+			timer_geometry = GLib.Timeout.Add (updateDelay, delegate {
 				UpdateWindowIntersect ();
-				timer = 0;
+				timer_geometry = 0;
 				return false;
 			});
 		}
@@ -257,6 +282,9 @@ namespace Docky.Interface
 		#region IDisposable implementation
 		public void Dispose ()
 		{
+			if (event_timer > 0)
+				GLib.Source.Remove (event_timer);
+			
 			if (screen != null) {
 				screen.ActiveWindowChanged -= HandleActiveWindowChanged;
 				if (screen.ActiveWindow != null)

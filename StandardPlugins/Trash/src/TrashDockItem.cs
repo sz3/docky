@@ -263,5 +263,14 @@ namespace Trash
 				OnPaintNeeded ();
 			});
 		}
+		
+		public override void Dispose ()
+		{
+			TrashMonitor.Cancel ();
+			TrashMonitor.Changed -= HandleChanged;
+			TrashMonitor.Dispose ();
+			
+			base.Dispose ();
+		}
 	}
 }

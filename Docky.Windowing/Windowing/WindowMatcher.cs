@@ -383,13 +383,14 @@ namespace Docky.Windowing
 			foreach (GLib.File file in DesktopFileSystemCacheFiles) {
 				GLib.FileMonitor mon = file.Monitor (GLib.FileMonitorFlags.None, null);
 				mon.RateLimit = 2500;
-				mon.Changed += delegate {
-					DockServices.System.RunOnThread (() => {
-						lock (update_lock) {
-							ProcessAndMergeSystemCacheFile (file, desktop_items);
-							DesktopItemsChanged ();
-						}   
-					});
+				mon.Changed += delegate(object o, GLib.ChangedArgs args) {
+					if (args.EventType == GLib.FileMonitorEvent.ChangesDoneHint)
+						DockServices.System.RunOnThread (() => {
+							lock (update_lock) {
+								ProcessAndMergeSystemCacheFile (file, desktop_items);
+								DesktopItemsChanged ();
+							}   
+						});
 				};
 			}
 		}
@@ -417,6 +418,7 @@ namespace Docky.Windowing
 						// if a new directory was created, make sure we watch that dir as well
 						if (file.QueryFileType (GLib.FileQueryInfoFlags.NofollowSymlinks, null) == GLib.FileType.Directory)
 							MonitorDesktopFileDirs (file);
+						
 						// we only care about .desktop files
 						if (!file.Path.EndsWith (".desktop"))
 							return;
@@ -429,9 +431,8 @@ namespace Docky.Windowing
 						
 						// Make sure to trigger event on main thread
 						DockServices.System.RunOnMainThread (() => {
-							if (DesktopFileChanged != null) {
+							if (DesktopFileChanged != null)
 								DesktopFileChanged (this, new DesktopFileChangedEventArgs (args.EventType, file, otherFile));
-							}
 						});
 					});
 				};
@@ -499,11 +500,11 @@ namespace Docky.Windowing
 		static IEnumerable<string> SuffixStrings {
 			get {
 				// some wine apps are launched via a shell script that sets the proc name to "app.exe"
-				yield return ".exe";
-				// some apps have a script 'foo' which does 'exec foo-bin'
-				yield return "-bin";
+				yield return "\\.exe";
+				// some apps have a script 'foo' which does 'exec foo-bin' or 'exec foo.bin'
+				yield return "[.-]bin";
 				// some python apps have a script 'foo' for 'python foo.py'
-				yield return ".py";
+				yield return "\\.py";
 				// some apps append versions, such as '-1' or '-3.0'
 				yield return "(-)?\\d+(\\.\\d+)?";
 			}
@@ -673,8 +674,6 @@ namespace Docky.Windowing
 					string name = NameForPid (pids.ElementAt (currentPid));
 					if (exec_to_desktop_items.ContainsKey (name)) {
 						foreach (DesktopItem s in exec_to_desktop_items[name]) {
-							//if (string.IsNullOrEmpty (s))
-							//	continue;
 							yield return s;
 							matched = true;
 						}
@@ -690,12 +689,12 @@ namespace Docky.Windowing
 					foreach (string cmd in command_line) {
 						if (exec_to_desktop_items.ContainsKey (cmd)) {
 							foreach (DesktopItem s in exec_to_desktop_items[cmd]) {
-								//if (string.IsNullOrEmpty (s))
-								//	continue;
 								yield return s;
 								matched = true;
 							}
 						}
+						if (matched)
+							break;
 					}
 					
 					// if we found a match, bail.
@@ -843,8 +842,8 @@ namespace Docky.Windowing
 					vexec = "ooffice" + exec.Split (' ') [1];
 				
 				// for wine apps
-				} else if ((exec.StartsWith ("env WINEPREFIX=") && exec.Contains (" wine ")) ||
-						exec.StartsWith ("wine ")) {
+				} else if ((exec.Contains ("env WINEPREFIX=") && exec.Contains (" wine ")) ||
+						exec.Contains ("wine ")) {
 					int startIndex = exec.IndexOf ("wine ") + 5; // length of 'wine '
 					// CommandLineForPid already splits based on \\ and takes the last entry, so do the same here
 					vexec = exec.Substring (startIndex).Split (new [] {@"\\"}, StringSplitOptions.RemoveEmptyEntries).Last ();

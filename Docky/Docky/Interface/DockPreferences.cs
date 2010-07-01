@@ -331,8 +331,8 @@ namespace Docky.Interface
 			window_manager_check.TooltipMarkup = Mono.Unix.Catalog.GetString (
 			    "When set, windows which do not already have launchers on a dock will be added to this dock.");
 			
-			icon_scale.Adjustment.SetBounds (24, 129, 1, 1, 1);
-			zoom_scale.Adjustment.SetBounds (1, 4.01, .01, .01, .01);
+			icon_scale.Adjustment.SetBounds (24, 129, 1, 12, 1);
+			zoom_scale.Adjustment.SetBounds (1, 4.01, .01, .1, .01);
 			
 			zoom_scale.FormatValue += delegate(object o, FormatValueArgs args) {
 				args.RetVal = string.Format ("{0:#}%", args.Value * 100);

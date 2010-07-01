@@ -34,8 +34,6 @@ namespace Desktop
 			}
 		}
 		
-		public override string Icon { get { return "desktop"; } }
-		
 		#endregion
 
 		DesktopDockItem desktop;

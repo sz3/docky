@@ -185,6 +185,7 @@ namespace Docky.Widgets
 
             if(changed_timeout_id > 0) {
                 GLib.Source.Remove (changed_timeout_id);
+                changed_timeout_id = 0;
             }
 
             if (Ready)
@@ -484,8 +485,6 @@ namespace Docky.Widgets
                 Gdk.Color color_b = parent.Style.Text(StateType.Normal);
                 text_gc.RgbFgColor = DockServices.Drawing.ColorBlend(color_a, color_b);
             }
-			
-			
 
             protected override bool OnExposeEvent(Gdk.EventExpose evnt)
             {
@@ -515,6 +514,19 @@ namespace Docky.Widgets
                 evnt.Window.DrawLayout(text_gc, 2, (SizeRequest().Height - height) / 2, layout);
 
                 return ret;
+            }
+            
+            public override void Dispose ()
+            {
+                parent.StyleSet -= OnParentStyleSet;
+
+                if (layout != null) {
+                    if (layout.FontDescription != null)
+                        layout.FontDescription.Dispose ();
+                    layout.Dispose ();
+                }
+                
+                base.Dispose ();
             }
         }
     }

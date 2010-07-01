@@ -86,8 +86,10 @@ namespace Timer
 		
 		void OnFinished (bool notify, bool remove)
 		{
-			if (notify)
+			if (notify) {
 				Log.Notify (Label + "Docky Timer", "clock", string.Format (Catalog.GetString ("A timer set for {0} has expired."), TimerMainDockItem.TimeRemaining (Length)));
+				DockServices.System.Execute ("canberra-gtk-play -i \"system-ready\"");
+			}
 			
 			if (remove && Finished != null)
 				Finished (this, EventArgs.Empty);
@@ -130,19 +132,19 @@ namespace Timer
 										1.0);
 			
 			double percent = (double) Remaining / (double) Length;
-			percent -= ((double) (DateTime.UtcNow - LastRender).TotalMilliseconds / 1000.0) * (1 / (double) Length);
+			if (Running)
+				percent -= ((double) (DateTime.UtcNow - LastRender).TotalMilliseconds / 1000.0) / (double) Length;
 			
 			if (Remaining > 0) {
 				cr.MoveTo (center, center);
 				cr.Arc (center, center, size * centerRadius / svgWidth, -Math.PI / 2.0, Math.PI * 2.0 * percent - Math.PI / 2.0);
 				cr.LineTo (center, center);
 				cr.Color = color;
-				cr.Fill ();
 			} else {
 				cr.Arc (center, center, size * centerRadius / svgWidth, 0, 2.0 * Math.PI);
 				cr.Color = color.AddHue (150).SetSaturation (1);
-				cr.Fill ();
 			}
+			cr.Fill ();
 			
 			cr.Save ();
 			using (DockySurface hand = new DockySurface (surface.Width, surface.Height, surface)) {
@@ -177,15 +179,12 @@ namespace Timer
 				amount = 3600;
 			
 			if (direction == Gdk.ScrollDirection.Up || direction == Gdk.ScrollDirection.Right) {
-				Remaining += amount;
 				Length += amount;
+				Remaining += amount;
 			} else if (Remaining > amount) {
-				Remaining -= amount;
 				Length -= amount;
+				Remaining -= amount;
 			}
-			
-			UpdateHoverText ();
-			QueueRedraw ();
 		}
 		
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
@@ -214,16 +213,15 @@ namespace Timer
 					if (DateTime.UtcNow.Second != LastRender.Second) {
 						Remaining--;
 						LastRender = DateTime.UtcNow;
+					} else {
+						QueueRedraw ();
 					}
 					
-					QueueRedraw ();
+					if (Remaining > 0)
+						return true;
 					
-					if (Remaining == 0) {
-						timer = 0;
-						return false;
-					}
-					
-					return true;
+					timer = 0;
+					return false;
 				});
 			}
 			

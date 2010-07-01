@@ -52,27 +52,10 @@ dnl Find gconftool-2
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 AM_GCONF_SOURCE_2
 
-dnl find gapi2-fixup
-AC_PATH_PROG(GAPI2FIXUP, gapi2-fixup, no)
-if test ! -x "$GAPI2FIXUP"; then
-   AC_MSG_ERROR([No gapi post-processor found])
-fi
-
-AC_PATH_PROG(GAPI2PARSER, gapi2-parser, no)
-if test ! -x "$GAPI2PARSER"; then
-   AC_MSG_ERROR([No gapi parser found])
-fi
-
-AC_PATH_PROG(GAPI2CODEGEN, gapi2-codegen, no)
-if test ! -x "$GAPI2CODEGEN"; then
-   AC_MSG_ERROR([No gapi code generator found])
-fi
-
 dnl Expansions
 SHAMROCK_EXPAND_LIBDIR
 SHAMROCK_EXPAND_BINDIR
 SHAMROCK_EXPAND_DATADIR
-
 
 PKG_CHECK_MODULES([GCONF_SHARP_20], [gconf-sharp-2.0])
 PKG_CHECK_MODULES([GLADE_SHARP_20], [glade-sharp-2.0])
@@ -88,7 +71,6 @@ PKG_CHECK_MODULES([MONO_ADDINS], [mono-addins])
 PKG_CHECK_MODULES([MONO_ADDINS_GUI], [mono-addins-gui])
 PKG_CHECK_MODULES([MONO_ADDINS_SETUP], [mono-addins-setup])
 PKG_CHECK_MODULES([MONO_CAIRO], [mono-cairo])
-PKG_CHECK_MODULES([MONO_OPTIONS], [mono-options])
 PKG_CHECK_MODULES([NDESK_DBUS_10], [ndesk-dbus-1.0])
 PKG_CHECK_MODULES([NDESK_DBUS_GLIB_10], [ndesk-dbus-glib-1.0])
 PKG_CHECK_MODULES([NOTIFY_SHARP], [notify-sharp])
@@ -100,7 +82,6 @@ GLIB_REQUIRED_VERSION=2.22
 PKG_CHECK_MODULES(GIO, gio-2.0 >= $GLIB_REQUIRED_VERSION)
 PKG_CHECK_MODULES(GTK, gtk+-2.0 >= $GTK_REQUIRED_VERSION)
 PKG_CHECK_MODULES(GLIB, gobject-2.0 >= $GLIB_REQUIRED_VERSION)
-
 
 AC_SUBST([GCONF_SHARP_20_LIBS])
 AC_SUBST([GLADE_SHARP_20_LIBS])
@@ -119,7 +100,6 @@ AC_SUBST([MONO_ADDINS_SETUP_LIBS])
 MONO_CAIRO_LIBS="-r:Mono.Cairo"
 AC_SUBST([MONO_CAIRO_LIBS])
 
-AC_SUBST([MONO_OPTIONS_LIBS])
 AC_SUBST([NDESK_DBUS_10_LIBS])
 AC_SUBST([NDESK_DBUS_GLIB_10_LIBS])
 AC_SUBST([NOTIFY_SHARP_LIBS])
@@ -137,38 +117,50 @@ AC_SUBST([DOCKY_WIDGETS_LIBS])
 DOCKY_WINDOWING_LIBS="-r:$(pwd)/build/Docky.Windowing.dll"
 AC_SUBST([DOCKY_WINDOWING_LIBS])
 
+AM_CONDITIONAL(CONFIG_REQUESTED, test -z "")
 
-PKG_CHECK_MODULES([NUNIT], [nunit], have_nunit=yes, have_nunit=no)
-AM_CONDITIONAL(HAVE_NUNIT, test "$have_nunit" = "yes")
-if test "$have_nunit" != "yes" ; then
-   NUNIT_LIBS=
+dnl {{{ run with heapshot
+AC_ARG_ENABLE(heap-shot,
+	AC_HELP_STRING([--enable-heap-shot],
+		[Run with heap-shot [default=NO]]),
+		enable_heap_shot=yes, enable_heap_shot=no)
+AM_CONDITIONAL(ENABLE_HEAP_SHOT, test "x$enable_heap_shot" = "xyes")
+if test -z "$ENABLE_HEAP_SHOT_TRUE" ; then
+	CONFIG_REQUESTED="yes"
+	MONO_DEBUG_ARGS+="--profile=heap-shot "
 fi
-AC_SUBST([NUNIT_LIBS])
+dnl }}}
 
 dnl {{{ enable debug release configuration
 AC_ARG_ENABLE(debug,
 	AC_HELP_STRING([--enable-debug],
-		[Use 'DEBUG' Configuration [default=YES]]),
+		[Use 'DEBUG' Configuration [default=NO]]),
 		enable_debug=yes, enable_debug=no)
 AM_CONDITIONAL(ENABLE_DEBUG, test "x$enable_debug" = "xyes")
-if test "x$enable_debug" = "xyes" ; then
+if test -z "$ENABLE_DEBUG_TRUE" ; then
 	CONFIG_REQUESTED="yes"
+	MONO_DEBUG_ARGS+="--debug "
+	DOCKY_DEBUG_ARGS+="--debug "
 fi
 dnl }}}
+AM_CONDITIONAL(ENABLE_DEBUG, true)
 
 dnl {{{ enable release build configuration
 AC_ARG_ENABLE(release,
 	AC_HELP_STRING([--enable-release],
 		[Use 'RELEASE' Configuration [default=NO]]),
 		enable_release=yes, enable_release=no)
-AM_CONDITIONAL(ENABLE_RELEASE, test x$enable_release = xyes)
-if test "x$enable_release" = "xyes" ; then
+AM_CONDITIONAL(ENABLE_RELEASE, test "x$enable_release" = "xyes")
+if test -z "$ENABLE_RELEASE_TRUE" ; then
 	CONFIG_REQUESTED="yes"
 fi
-if test -z "$CONFIG_REQUESTED" ; then
-	AM_CONDITIONAL(ENABLE_DEBUG, true)
-fi
 dnl }}}
+
+if test -z "$CONFIG_REQUESTED" ; then
+	AM_CONDITIONAL(CONFIG_REQUESTED, true)
+	AC_SUBST(MONO_DEBUG_ARGS)
+	AC_SUBST(DOCKY_DEBUG_ARGS)
+fi
 
 AC_CONFIG_FILES([
 Docky/Makefile
@@ -259,6 +251,7 @@ ${PACKAGE}-${VERSION}
 
   Build/Development
     Release Build:      ${enable_release}
-    NUnit:              ${have_nunit}
+    Debug Build:        ${enable_debug}
+    Use HeapShot:       ${enable_heap_shot}
 
 EOF

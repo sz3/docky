@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -93,23 +94,27 @@ namespace Docky.Menus
 		
 		void CalcTextWidth ()
 		{
-			char accel;
-			Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-			if (item.Mnemonic.HasValue)
-				layout.SetMarkupWithAccel (item.Text, '_', out accel);
-			else
-				layout.SetMarkup (item.Text);
-			layout.Width = Pango.Units.FromPixels (2 * MaxWidth);
-			layout.FontDescription = Style.FontDescription;
-			layout.Ellipsize = Pango.EllipsizeMode.End;
-			layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (FontSize);
-			layout.FontDescription.Weight = Pango.Weight.Bold;
-			
-			Pango.Rectangle logical, ink;
-			layout.GetPixelExtents (out ink, out logical);
-			
-			TextWidth = Math.Min (MaxWidth, Math.Max (MinWidth, logical.Width));
-			HasTooltip = TextWidth < logical.Width;
+			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ()) {
+				char accel;
+				
+				if (item.Mnemonic.HasValue)
+					layout.SetMarkupWithAccel (item.Text, '_', out accel);
+				else
+					layout.SetMarkup (item.Text);
+				layout.Width = Pango.Units.FromPixels (2 * MaxWidth);
+				layout.FontDescription = Style.FontDescription;
+				layout.Ellipsize = Pango.EllipsizeMode.End;
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (FontSize);
+				layout.FontDescription.Weight = Pango.Weight.Bold;
+				
+				Pango.Rectangle logical, ink;
+				layout.GetPixelExtents (out ink, out logical);
+				
+				TextWidth = Math.Min (MaxWidth, Math.Max (MinWidth, logical.Width));
+				HasTooltip = TextWidth < logical.Width;
+				
+				layout.Context.Dispose ();
+			}
 			
 			SetSize ();
 		}
@@ -189,7 +194,7 @@ namespace Docky.Menus
 		DockySurface LoadIcon (Pixbuf icon, int size)
 		{
 			DockySurface surface;
-			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.ARScale (size, size, icon)) {
+			using (Gdk.Pixbuf pixbuf = icon.Copy ().ARScale (size, size)) {
 				surface = new DockySurface (pixbuf.Width, pixbuf.Height);
 				Gdk.CairoHelper.SetSourcePixbuf (surface.Context, pixbuf, 0, 0);
 				surface.Context.Paint ();
@@ -200,9 +205,8 @@ namespace Docky.Menus
 		DockySurface LoadIcon (string icon, int size)
 		{
 			bool monochrome = icon.StartsWith ("[monochrome]");
-			if (monochrome) {
+			if (monochrome)
 				icon = icon.Substring ("[monochrome]".Length);
-			}
 			
 			DockySurface surface = LoadIcon (DockServices.Drawing.LoadIcon (icon, size), size);
 			
@@ -265,28 +269,31 @@ namespace Docky.Menus
 					}
 				}
 			
-				Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ();
-				char accel;
-				if (item.Mnemonic.HasValue)
-					layout.SetMarkupWithAccel (item.Text, '_', out accel);
-				else
-					layout.SetMarkup (item.Text);
-				layout.Width = Pango.Units.FromPixels (TextWidth);
-				layout.FontDescription = Style.FontDescription;
-				layout.Ellipsize = Pango.EllipsizeMode.End;
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (FontSize);
-				layout.FontDescription.Weight = Pango.Weight.Bold;
-				
-				Pango.Rectangle logical, ink;
-				layout.GetPixelExtents (out ink, out logical);
-				
-				int offset = Padding;
-				if (MenuShowingIcons)
-					offset += MenuHeight + Padding;
-				cr.MoveTo (allocation.X + offset, allocation.Y + (allocation.Height - logical.Height) / 2);
-				Pango.CairoHelper.LayoutPath (cr, layout);
-				cr.Color = TextColor.SetAlpha (item.Disabled ? 0.5 : 1);
-				cr.Fill ();
+				using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ()) {
+					char accel;
+					if (item.Mnemonic.HasValue)
+						layout.SetMarkupWithAccel (item.Text, '_', out accel);
+					else
+						layout.SetMarkup (item.Text);
+					layout.Width = Pango.Units.FromPixels (TextWidth);
+					layout.FontDescription = Style.FontDescription;
+					layout.Ellipsize = Pango.EllipsizeMode.End;
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (FontSize);
+					layout.FontDescription.Weight = Pango.Weight.Bold;
+					
+					Pango.Rectangle logical, ink;
+					layout.GetPixelExtents (out ink, out logical);
+					
+					int offset = Padding;
+					if (MenuShowingIcons)
+						offset += MenuHeight + Padding;
+					cr.MoveTo (allocation.X + offset, allocation.Y + (allocation.Height - logical.Height) / 2);
+					Pango.CairoHelper.LayoutPath (cr, layout);
+					cr.Color = TextColor.SetAlpha (item.Disabled ? 0.5 : 1);
+					cr.Fill ();
+					
+					layout.Context.Dispose ();
+				}
 			}
 			
 			return true;

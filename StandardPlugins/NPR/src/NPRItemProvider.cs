@@ -35,8 +35,6 @@ namespace NPR
 			}
 		}
 		
-		public override string Icon { get { return "nprlogo.gif@" + GetType ().Assembly.FullName; } }
-		
 		#endregion
 		
 		List<AbstractDockItem> items = new List<AbstractDockItem> ();

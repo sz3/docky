@@ -20,10 +20,8 @@ using GLib;
 
 namespace Docky.Windowing
 {
-
 	public class DesktopFileChangedEventArgs : EventArgs
 	{
-
 		public FileMonitorEvent Event { get; private set; }
 		public File File { get; private set; }
 		public File OtherFile {get; private set; }

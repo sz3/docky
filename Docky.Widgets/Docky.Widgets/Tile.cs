@@ -112,14 +112,14 @@ namespace Docky.Widgets
 				if (OwnedObject.ForcePixbuf != null) {
 					pbuf = OwnedObject.ForcePixbuf.Copy ();
 					if (pbuf.Width != IconSize || pbuf.Height != IconSize)
-						pbuf = DockServices.Drawing.ARScale (IconSize, IconSize, pbuf);
+						pbuf = pbuf.ARScale (IconSize, IconSize);
 				} else {
 					pbuf = DockServices.Drawing.LoadIcon (OwnedObject.Icon, IconSize);
 				}
 
-				pbuf = DockServices.Drawing.AddHueShift (pbuf, OwnedObject.HueShift);
+				pbuf.AddHueShift (OwnedObject.HueShift);
 				if (!OwnedObject.Enabled)
-					pbuf = DockServices.Drawing.MonochromePixbuf (pbuf);
+					pbuf.MonochromePixbuf ();
 			} catch (Exception e) {
 				Log<Tile>.Error ("Error loading pixbuf for {0} tile: {1}", OwnedObject.Name, e.Message);
 				Log<Tile>.Debug (e.StackTrace);
@@ -271,10 +271,36 @@ namespace Docky.Widgets
 
 		public override void Dispose ()
 		{
+			AddImage.Dispose ();
+			RemoveImage.Dispose ();
+			
+			foreach (Gtk.Widget widget in button_box.Children)
+				button_box.Remove (widget);
+			button_box.Dispose ();
+			button_box.Destroy ();
+
+			add_remove_button.Clicked -= OnAddRemoveClicked;
+			add_remove_button.Dispose ();
+			add_remove_button.Destroy ();
+			
+			Remove (title);
+			title.Dispose ();
+			title.Destroy ();
+			Remove (tileImage);
+			tileImage.Dispose ();
+			tileImage.Destroy ();
+			Remove (description);
+			description.Dispose ();
+			description.Destroy ();
+			Remove (subDesc);
+			subDesc.Dispose ();
+			subDesc.Destroy ();
+			
 			OwnedObject.IconUpdated -= HandleOwnedObjectIconUpdated;
 			OwnedObject.TextUpdated -= HandleOwnedObjectTextUpdated;
 			OwnedObject.ButtonsUpdated -= HandleOwnedObjectButtonsUpdated;
 			
+			Owner = null;
 			OwnedObject = null;
 
 			base.Dispose ();

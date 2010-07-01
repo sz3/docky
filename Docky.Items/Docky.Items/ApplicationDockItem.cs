@@ -84,6 +84,12 @@ namespace Docky.Items
 			Wnck.Screen.Default.WindowOpened += WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
 			Wnck.Screen.Default.ActiveWindowChanged += WnckScreenDefaultWindowChanged;
+			if (CurrentDesktopOnly) {
+				Wnck.Screen.Default.ViewportsChanged += WnckScreenDefaultViewportsChanged;
+				Wnck.Screen.Default.ActiveWorkspaceChanged += WnckScreenDefaultActiveWorkspaceChanged;
+				if (Wnck.Screen.Default.ActiveWindow != null)
+					Wnck.Screen.Default.ActiveWindow.GeometryChanged += HandleActiveWindowGeometryChangedChanged;
+			}
 		}
 
 		void HandleOwnedItemHasChanged (object sender, EventArgs e)
@@ -96,23 +102,20 @@ namespace Docky.Items
 			if (OwnedItem.HasAttribute ("Icon"))
 				Icon = OwnedItem.GetString (("Icon"));
 			
-			if (OwnedItem.HasAttribute ("X-GNOME-FullName")) {
+			if (OwnedItem.HasAttribute ("X-GNOME-FullName"))
 				HoverText = OwnedItem.GetString (("X-GNOME-FullName"));
-			} else if (OwnedItem.HasAttribute ("Name")) {
+			else if (OwnedItem.HasAttribute ("Name"))
 				HoverText = OwnedItem.GetString (("Name"));
-			} else {
+			else
 				HoverText = System.IO.Path.GetFileNameWithoutExtension (OwnedItem.Path);
-			}
 			
-			if (OwnedItem.HasAttribute ("MimeType")) {
+			if (OwnedItem.HasAttribute ("MimeType"))
 				mimes = OwnedItem.GetStrings ("MimeType");
-			} else {
+			else
 				mimes = Enumerable.Empty<string> ();
-			}
 			
-			if (OwnedItem.HasAttribute ("X-Docky-NoMatch") && OwnedItem.GetBool ("X-Docky-NoMatch")) {
+			if (OwnedItem.HasAttribute ("X-Docky-NoMatch") && OwnedItem.GetBool ("X-Docky-NoMatch"))
 				can_manage_windows = false;
-			}
 		}
 		
 		public override string UniqueID ()
@@ -120,22 +123,34 @@ namespace Docky.Items
 			return OwnedItem.Path;
 		}
 		
+		void HandleActiveWindowGeometryChangedChanged (object o, EventArgs args)
+		{
+			UpdateWindows ();
+		}
+		
+		void WnckScreenDefaultActiveWorkspaceChanged (object o, ActiveWorkspaceChangedArgs args)
+		{
+			UpdateWindows ();
+		}
+		
+		void WnckScreenDefaultViewportsChanged (object o, EventArgs args)
+		{
+			UpdateWindows ();
+		}
+		
 		void WnckScreenDefaultWindowClosed (object o, WindowClosedArgs args)
 		{
 			UpdateWindows ();
-			OnPaintNeeded ();
 		}
 
 		void WnckScreenDefaultWindowOpened (object o, WindowOpenedArgs args)
 		{
 			UpdateWindows ();
-			OnPaintNeeded ();
 		}
 		
 		void WnckScreenDefaultWindowChanged (object o, ActiveWindowChangedArgs args)
 		{
 			UpdateWindows ();
-			OnPaintNeeded ();
 		}
 
 		void UpdateWindows ()
@@ -149,7 +164,6 @@ namespace Docky.Items
 		public void RecollectWindows () 
 		{
 			UpdateWindows ();
-			OnPaintNeeded ();
 		}
 		
 		protected override MenuList OnGetMenuItems ()
@@ -186,7 +200,8 @@ namespace Docky.Items
 
 		protected override ClickAnimation OnClicked (uint button, ModifierType mod, double xPercent, double yPercent)
 		{
-			if ((!ManagedWindows.Any () && button == 1) || button == 2) {
+			if ((!ManagedWindows.Any () && button == 1) || button == 2 || 
+				(button == 1 && (mod & ModifierType.ControlMask) == ModifierType.ControlMask)) {
 				Launch ();
 				return ClickAnimation.Bounce;
 			}
@@ -211,6 +226,12 @@ namespace Docky.Items
 			Wnck.Screen.Default.WindowOpened -= WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed -= WnckScreenDefaultWindowClosed;
 			Wnck.Screen.Default.ActiveWindowChanged -= WnckScreenDefaultWindowChanged;
+			if (CurrentDesktopOnly) {
+				Wnck.Screen.Default.ViewportsChanged -= WnckScreenDefaultViewportsChanged;
+				Wnck.Screen.Default.ActiveWorkspaceChanged -= WnckScreenDefaultActiveWorkspaceChanged;
+				if (Wnck.Screen.Default.ActiveWindow != null)
+					Wnck.Screen.Default.ActiveWindow.GeometryChanged -= HandleActiveWindowGeometryChangedChanged;
+			}
 			
 			base.Dispose ();
 		}
