@@ -69,6 +69,7 @@ namespace Docky.Items
 		}
 		
 		public File OwnedFile { get; private set; }
+		Action OnOwnedFileMount;
 		
 		public override string DropText {
 			get { return string.Format (Catalog.GetString ("Drop to move to {0}"), HoverText); }
@@ -79,11 +80,14 @@ namespace Docky.Items
 			this.uri = uri;
 			OwnedFile = FileFactory.NewForUri (uri);
 			
-			// update this file on successful mount
-			OwnedFile.AddMountAction (() => {
+			OnOwnedFileMount = new Action (() => {
 				UpdateInfo ();
 				OnPaintNeeded ();
 			});
+			
+			// update this file on successful mount
+			OwnedFile.AddMountAction (OnOwnedFileMount);
+			
 			UpdateInfo ();
 		}
 		
@@ -270,6 +274,14 @@ namespace Docky.Items
 		protected void OpenContainingFolder ()
 		{
 			DockServices.System.Open (OwnedFile.Parent);
+		}
+		
+		public override void Dispose ()
+		{
+			OwnedFile.RemoveAction (OnOwnedFileMount);
+			OwnedFile = null;
+			
+			base.Dispose ();
 		}
 	}
 }
