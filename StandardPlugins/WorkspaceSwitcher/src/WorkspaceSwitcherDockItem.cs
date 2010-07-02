@@ -94,17 +94,13 @@ namespace WorkspaceSwitcher
 			if (!AreMultipleDesksAvailable || DeskGrid == null)
 				return ClickAnimation.None;
 			
-			if (button == 1 && DeskGrid != null) {
-				for (int row=0; row < DeskGrid.GetLength (0); row++) {
-					for (int col=0; col < DeskGrid.GetLength (1); col++) {
-						Cairo.Rectangle area = DeskAreaOnIcon (1, 1, row, col);
-						if (xPercent >= area.X && xPercent < area.X + area.Width
-							    && yPercent >= area.Y && yPercent < area.Y + area.Height) {
-							DeskGrid [row,col].Activate ();
-							break;
-						}
-					}
-				}
+			if (button == 1 && DeskGrid != null && DeskGrid.GetLength (0) > 0 && DeskGrid.GetLength (1) > 0) {
+				double dx = 1.0 / DeskGrid.GetLength (0);
+				double dy = 1.0 / DeskGrid.GetLength (1);
+				int col = (int) (xPercent / dx);
+				int row = (int) (yPercent / dy);
+
+				DeskGrid [col,row].Activate ();
 			}
 			
 			return ClickAnimation.None;
