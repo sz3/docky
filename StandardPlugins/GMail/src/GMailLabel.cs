@@ -27,22 +27,26 @@ namespace GMail
 
 	public class GMailLabel : AbstractTileObject
 	{
-
+		GMailDockItem item;
+		
 		public GMailLabel (string labelName)
 		{
 			if (labelName == GMailDockItem.DefaultLabel)
 				ShowActionButton = false;
 			
 			Name = labelName;
-			GMailDockItem item = GMailItemProvider.items.First (adi => (adi as GMailDockItem).Atom.CurrentLabel == labelName) as GMailDockItem;
+			item = GMailItemProvider.items.First (adi => (adi as GMailDockItem).Atom.CurrentLabel == labelName) as GMailDockItem;
 
 			Icon = "gmail";
 			if (item != null) {
-				item.IconUpdated += delegate {
-					SetIcon (item);
-				};
+				item.IconUpdated += HandleItemIconUpdated;
 				SetIcon (item);
 			}
+		}
+
+		void HandleItemIconUpdated (object sender, EventArgs e)
+		{
+			SetIcon (item);
 		}
 		
 		void SetIcon (GMailDockItem item)
@@ -56,6 +60,14 @@ namespace GMail
 			List<string> labels = GMailPreferences.Labels.ToList ();
 			labels.Remove (Name);
 			GMailPreferences.Labels = labels.ToArray ();
+		}
+		
+		public override void Dispose ()
+		{
+			if (item != null)
+				item.IconUpdated -= HandleItemIconUpdated;
+			
+			base.Dispose ();
 		}
 	}
 }
