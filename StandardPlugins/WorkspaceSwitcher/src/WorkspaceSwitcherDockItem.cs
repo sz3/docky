@@ -93,8 +93,7 @@ namespace WorkspaceSwitcher
 		{
 			if (!AreMultipleDesksAvailable || DeskGrid == null)
 				return ClickAnimation.None;
-
-			//Console.WriteLine ("{0} , {1}", xPercent, yPercent);
+			
 			if (button == 1 && DeskGrid != null) {
 				for (int row=0; row < DeskGrid.GetLength (0); row++) {
 					for (int col=0; col < DeskGrid.GetLength (1); col++) {
@@ -107,6 +106,7 @@ namespace WorkspaceSwitcher
 					}
 				}
 			}
+			
 			return ClickAnimation.None;
 		}
 		
@@ -115,12 +115,9 @@ namespace WorkspaceSwitcher
 			if (!AreMultipleDesksAvailable || DeskGrid == null)
 				return;
 			
-			mod &= ~ModifierType.Mod2Mask; // Ignore NumLock
-			mod &= ~ModifierType.LockMask; // Ignore CapsLock
-			
 			switch (direction) {
 			case ScrollDirection.Down:
-				if (mod == ModifierType.ShiftMask || DeskGrid.GetLength (1) == 1)
+				if ((mod & ModifierType.ShiftMask == ModifierType.ShiftMask) || DeskGrid.GetLength (1) == 1)
 					SwitchDesk (Wnck.MotionDirection.Right);
 				else
 					SwitchDesk (Wnck.MotionDirection.Down);
@@ -129,7 +126,7 @@ namespace WorkspaceSwitcher
 				SwitchDesk (Wnck.MotionDirection.Right);
 				break;
 			case ScrollDirection.Up:
-				if (mod == ModifierType.ShiftMask || DeskGrid.GetLength (1) == 1)
+				if ((mod & ModifierType.ShiftMask == ModifierType.ShiftMask) || DeskGrid.GetLength (1) == 1)
 					SwitchDesk (Wnck.MotionDirection.Left);
 				else
 					SwitchDesk (Wnck.MotionDirection.Up);
@@ -155,13 +152,11 @@ namespace WorkspaceSwitcher
 		bool SwitchDesk (Wnck.MotionDirection direction)
 		{
 			Desk activedesk = Desks.Find (desk => desk.IsActive);
-
 			Desk nextdesk = activedesk.GetNeighbor (direction);
 			if (nextdesk != null) {
 				nextdesk.Activate ();
 				return true;
 			}
-			
 			return false;
 		}
 		
@@ -211,8 +206,6 @@ namespace WorkspaceSwitcher
 					}
 				}
 
-				//Console.WriteLine ("{0} Desks", Desks.Count ());
-				
 				Desk activedesk = Desks.Find (d => d.IsActive);
 				if (activedesk != null)
 					DeskGrid = activedesk.GetDeskGridLayout ();
@@ -225,12 +218,10 @@ namespace WorkspaceSwitcher
 		void UpdateItem ()
 		{
 			Desk activedesk = Desks.Find (desk => desk.IsActive);
-
-			if (activedesk != null) {
+			if (activedesk != null)
 				HoverText = activedesk.Name;
-			} else {
+			else
 				HoverText = Catalog.GetString ("Switch Desks");
-			}
 		}
 
 		#endregion
@@ -274,15 +265,14 @@ namespace WorkspaceSwitcher
 			if (DeskGrid == null) 
 				return new DockySurface (size, size, model);
 			
-			//double ratio = (double) Wnck.Screen.Default.Width / Wnck.Screen.Default.Height;
 			int height = size, width = size;
 			
 			if (Owner != null && Owner.IsOnVerticalDock)
-				height = Math.Min (IconSize * 3, Math.Max (size, (int) (size * DeskGrid.GetLength (1) * .5)));
+				height = Math.Min ((int) (IconSize * 2.5), Math.Max (size, (int) (size * DeskGrid.GetLength (1) * 0.5)));
 			else
-				width = Math.Min (IconSize * 3, Math.Max (size, (int) (size * DeskGrid.GetLength (0) * .5)));
+				width = Math.Min ((int) (IconSize * 2.5), Math.Max (size, (int) (size * DeskGrid.GetLength (0) * 0.5)));
 			
-			return new DockySurface (height, width, model);
+			return new DockySurface (width, height, model);
 		}		
 		
 		protected override void PaintIconSurface (DockySurface surface)
