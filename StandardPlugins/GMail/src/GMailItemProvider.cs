@@ -108,5 +108,12 @@ namespace GMail
 		{
 			items.ForEach (adi => (adi as GMailDockItem).Atom.StopTimer ());
 		}
+		
+		public override void Dispose ()
+		{
+			GMailPreferences.LabelsChanged -= HandleLabelsChanged;
+			
+			base.Dispose ();
+		}		
 	}
 }
