@@ -117,7 +117,7 @@ namespace WorkspaceSwitcher
 			
 			switch (direction) {
 			case ScrollDirection.Down:
-				if ((mod & ModifierType.ShiftMask == ModifierType.ShiftMask) || DeskGrid.GetLength (1) == 1)
+				if (((mod & ModifierType.ShiftMask) == ModifierType.ShiftMask) || DeskGrid.GetLength (1) == 1)
 					SwitchDesk (Wnck.MotionDirection.Right);
 				else
 					SwitchDesk (Wnck.MotionDirection.Down);
@@ -126,7 +126,7 @@ namespace WorkspaceSwitcher
 				SwitchDesk (Wnck.MotionDirection.Right);
 				break;
 			case ScrollDirection.Up:
-				if ((mod & ModifierType.ShiftMask == ModifierType.ShiftMask) || DeskGrid.GetLength (1) == 1)
+				if (((mod & ModifierType.ShiftMask) == ModifierType.ShiftMask) || DeskGrid.GetLength (1) == 1)
 					SwitchDesk (Wnck.MotionDirection.Left);
 				else
 					SwitchDesk (Wnck.MotionDirection.Up);
