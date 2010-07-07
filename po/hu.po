@@ -15,30 +15,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-06-28 05:44+0000\n"
+"X-Launchpad-Export-Date: 2010-07-07 13:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:133
+#: ../Docky/Docky/ConfigurationWindow.cs:146
 msgid "Search Docklets..."
 msgstr "Dockletek keresése…"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:148
+#: ../Docky/Docky/ConfigurationWindow.cs:162
 msgid "Search Helpers..."
 msgstr "Segédek keresése…"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:212
+#: ../Docky/Docky/ConfigurationWindow.cs:226
 msgid "Click on any dock to configure."
 msgstr "A beállításokhoz kattintson valamelyik dokkra."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:213
+#: ../Docky/Docky/ConfigurationWindow.cs:227
 msgid "Drag any dock to reposition."
 msgstr "Ragadja meg bármelyik dokkot az áthelyezéshez"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:278
+#: ../Docky/Docky/ConfigurationWindow.cs:292
 msgid "Delete the currently selected dock?"
 msgstr "Törli a jelenleg kijelőlt dokkot?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:280
+#: ../Docky/Docky/ConfigurationWindow.cs:294
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -46,22 +46,20 @@ msgstr ""
 "Ha a dokk törlését választja, minden rá\n"
 "vonatkozó beállítás el fog veszni."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:287
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
+#: ../Docky/Docky/ConfigurationWindow.cs:309
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:405
 msgid "_Delete Dock"
 msgstr "_Dokk törlése"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:401
-#: ../Docky/Docky/ConfigurationWindow.cs:421
+#: ../Docky/Docky/ConfigurationWindow.cs:413
 msgid "_Select"
 msgstr "_Kiválasztás"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:404
-#: ../Docky/Docky/ConfigurationWindow.cs:424
+#: ../Docky/Docky/ConfigurationWindow.cs:416
 msgid ".tar Archives"
 msgstr ".tar archívumok"
 
-#: ../Docky/Docky/DockletTile.cs:50
+#: ../Docky/Docky/DockletTile.cs:49
 msgid "Author"
 msgstr "Szerző"
 
@@ -103,11 +101,11 @@ msgid ""
 "and themes/animations will look incorrect. "
 msgstr ""
 
-#: ../Docky/Docky/HelperTile.cs:41
+#: ../Docky/Docky/HelperTile.cs:42
 msgid "Status"
 msgstr "Állapot"
 
-#: ../Docky/Docky/HelperTile.cs:58
+#: ../Docky/Docky/HelperTile.cs:59
 msgid "Uninstall"
 msgstr "Eltávolítás"
 
@@ -123,15 +121,15 @@ msgstr "Segéd engedélyezése"
 msgid "Disable this helper"
 msgstr "Segéd tíltása"
 
-#: ../Docky/Docky/HelperTile.cs:82
+#: ../Docky/Docky/HelperTile.cs:74
 msgid "Running"
 msgstr "Fut"
 
-#: ../Docky/Docky/HelperTile.cs:82
+#: ../Docky/Docky/HelperTile.cs:74
 msgid "Stopped"
 msgstr "Leállítva"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:332
+#: ../Docky/Docky/Interface/DockPreferences.cs:331
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
@@ -139,39 +137,39 @@ msgstr ""
 "Ha beállítja, az ablakok, amelyek még nem rendelkeznek indítóikonnal a "
 "dokkon, hozzáadódnak a dokkhoz."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:682
+#: ../Docky/Docky/Interface/DockPreferences.cs:595
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 "<i>Soha nem rejti el; a teljes méretű ablakok nem fedik el a dokkot.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:685
+#: ../Docky/Docky/Interface/DockPreferences.cs:598
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Elrejti, amikor az egér nincs fölötte.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:688
+#: ../Docky/Docky/Interface/DockPreferences.cs:601
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Elrejti, amint a dokk elfedi az aktív alkalmazást.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:691
+#: ../Docky/Docky/Interface/DockPreferences.cs:604
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Elrejti, amint a dokk elfedi bármely ablakot.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:381
+#: ../Docky/Docky/Interface/DockWindow.cs:382
 msgid "Drag to reposition"
 msgstr "Fogja meg az áthelyezéshez"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:393
-#: ../Docky/Docky/Interface/DockWindow.cs:407
+#: ../Docky/Docky/Interface/DockWindow.cs:394
+#: ../Docky/Docky/Interface/DockWindow.cs:408
 msgid "Drop to add to dock"
 msgstr "Ragadja meg a dokkon való elhelyezéshez"
 
-#: ../Docky/Docky/Items/DockyItem.cs:133
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:244
+#: ../Docky/Docky/Items/DockyItem.cs:93
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:214
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "_Settings"
 msgstr "_Beállítások"
 
-#: ../Docky/Docky/Items/DockyItem.cs:134
+#: ../Docky/Docky/Items/DockyItem.cs:94
 msgid "_About"
 msgstr "_Névjegy"
 
@@ -179,7 +177,7 @@ msgstr "_Névjegy"
 msgid "_Help"
 msgstr ""
 
-#: ../Docky/Docky/Items/DockyItem.cs:137
+#: ../Docky/Docky/Items/DockyItem.cs:95
 msgid "_Quit Docky"
 msgstr "_Kilépés a Docky-ból"
 
@@ -191,43 +189,42 @@ msgstr ""
 msgid "_Start When User Logs In"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:155
 msgid "_Theme:"
 msgstr "_Téma:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:315
 msgid "_Install"
 msgstr "_Telepítés"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:179
 msgid "<b>General Options</b>"
 msgstr "<b>Általános beállítások</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:199
 msgid "<b>Dock Configuration</b>"
 msgstr "<b>Dokkbeállítások</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:213
 msgid "Docks"
 msgstr "Dokkok"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:234
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:289
 msgid "All"
 msgstr "Összes"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:235
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:290
 msgid "Enabled"
 msgstr "Engedélyezett"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:236
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:291
 msgid "Disabled"
 msgstr "Kikapcsolt"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:268
 msgid "Docklets"
 msgstr "Dockletek"
 
@@ -235,68 +232,68 @@ msgstr "Dockletek"
 msgid "Usable"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:347
 msgid "Helpers"
 msgstr "Segédek"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:378
 msgid "_New Dock"
 msgstr "_Új dokk"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "None"
 msgstr "Nincs"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Autohide"
 msgstr "Automatikus elrejtés"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:62
 msgid "Intellihide"
 msgstr "Intelligens elrejtés"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:63
 msgid "Window Dodge"
 msgstr "Ablak dokkolása"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
 msgid "_Fade On Hide"
 msgstr "Áttűnés _elrejtéskor"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:121
 msgid "_Icon Size:"
 msgstr "_Ikonméret:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:132
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:134
 msgid "_Hiding:"
 msgstr "_Elrejtés:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:158
 msgid "_Panel Mode"
 msgstr "_Panel mód"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:172
 msgid "3D Back_ground"
 msgstr "3D Háttér"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:186
 msgid "_Manage Windows Without Launcher"
 msgstr "_Ablakok kezelése indítóikon nélkül"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:201
 msgid "_Zoom:"
 msgstr "_Nagyítás:"
 
-#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:115
+#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:119
 #, csharp-format
 msgid "Drop to open with {0}"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:159
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:173
 msgid "New _Window"
 msgstr "Új _ablak"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:161
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:175
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
 msgstr "_Megnyitás"
@@ -305,65 +302,65 @@ msgstr "_Megnyitás"
 msgid "Reset Color"
 msgstr "Színek visszaállítása"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:477
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:435
 msgid "_Pin to Dock"
 msgstr "Zárolás dokkhoz"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:74
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:75
 #, csharp-format
 msgid "Drop to move to {0}"
 msgstr ""
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:190
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:235
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:239
 msgid "Error performing drop action"
 msgstr "Hiba az elhelyező művelet végrehajtása közben"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:190
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
 msgid "Not enough free space on destination."
 msgstr "Nincs elég szabad hely a cél helyen."
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:207
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:210
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:242
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:211
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:214
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:246
 msgid "Complete"
 msgstr "Befejezve"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:220
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:224
 msgid "Moving"
 msgstr "Mozgatás"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:226
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:230
 msgid "Copying"
 msgstr "Másolás"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:260
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:264
 msgid "Open"
 msgstr "Megnyitás"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:261
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:265
 msgid "Open Containing Folder"
 msgstr "Tartalmazó mappa megnyitása"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:253
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
 msgid "Unma_ximize"
 msgstr "_Eredeti méret"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:256
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:267
 msgid "Ma_ximize"
 msgstr "Ma_ximalizálás"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:260
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:272
 msgid "_Restore"
 msgstr "_Helyreállítás"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:263
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:275
 msgid "Mi_nimize"
 msgstr "Mi_nimalizálás"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:266
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:279
 msgid "_Close All"
 msgstr "Összes bezárása"
 
@@ -459,7 +456,7 @@ msgstr "_Téma kiválasztása"
 msgid "Themes"
 msgstr "Témák"
 
-#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:62
+#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
 msgid "Theme"
 msgstr "Téma"
 
@@ -484,36 +481,35 @@ msgstr "percben"
 msgid "Click to set username and password."
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:228
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:230
 msgid "(no subject)"
 msgstr "(nincs tárgy)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:242
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:244
 #, csharp-format
 msgid "You have {0} new, unread messages"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:246
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:248
 #, csharp-format
 msgid "From: {0}"
 msgstr "Feladó: {0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:259
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:263
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:261
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:265
 msgid "Feed Error"
 msgstr "Hírforráshiba"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:268
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:270
 msgid "Invalid Username"
 msgstr "Érvénytelen felhasználónév"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:272
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:276
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:174
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:274
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:278
 msgid "Network Error"
 msgstr "Hálózati hiba"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:281
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:283
 msgid "General Error"
 msgstr "Általános hiba"
 
@@ -536,11 +532,11 @@ msgstr[1] "{0} olvasatlan üzenet"
 msgid "Checking mail..."
 msgstr "E-mailek ellenőrzése…"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:193
 msgid "_View "
 msgstr "_Nézet "
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:198
 msgid "_Compose Mail"
 msgstr "_Levélírás"
 
@@ -548,11 +544,11 @@ msgstr "_Levélírás"
 msgid "View C_ontacts"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
 msgid "New Mail"
 msgstr "Új e-mail"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:236
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:222
 msgid "Check _Mail"
 msgstr "E-_mail ellenőrzése"
 
@@ -639,19 +635,20 @@ msgstr "Támogatás"
 msgid "Live Streams"
 msgstr "Élő Adások"
 
+#: ../Docky/Docky/DockletTile.cs:56
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:170
 msgid "Settings"
 msgstr "Beállítások"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:56
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:76
 msgid "Clear the Recent Documents list?"
 msgstr "Törli a Legutóbbi dokumentumok listáját?"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:58
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:78
 msgid "Clear Recent Documents"
 msgstr "Legutóbbi dokumentumok törlése"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:60
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:80
 msgid ""
 "If you clear the Recent Documents list, you clear the following:\n"
 "• All items from the Places → Recent Documents menu item.\n"
@@ -661,7 +658,7 @@ msgstr ""
 "• Minden elemet a Helyek → Legutóbbi dokumentumok menüelemből.\n"
 "• Minden elemet az összes alkalmazás legutóbbi dokumentumainak listájából."
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:81
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
 msgid "_Clear Recent Documents..."
 msgstr "_Legutóbbi dokumentumok törlése…"
 
@@ -801,20 +798,20 @@ msgstr[1] "{0} elem a Kukában"
 msgid "Restore Files"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:195
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:164
 msgid "_Open Trash"
 msgstr "K_uka megnyitása"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:197
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:234
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:166
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:203
 msgid "Empty _Trash"
 msgstr "_Kuka ürítése"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:226
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:188
 msgid "Empty all of the items from the trash?"
 msgstr "Törölni kívánja az összes elemet a Kukából?"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:228
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:190
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
@@ -844,7 +841,9 @@ msgstr "Automatikus _frissítés"
 msgid "Use _Metric Units"
 msgstr "_Metrikus mértékegység használata"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:171
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:95
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:98
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:103
 msgid "Invalid Weather Location"
 msgstr "Érvénytelen hely"
 
@@ -868,7 +867,7 @@ msgstr ""
 "meghatározásához keresse meg az Ön előrejelzését az oldalon; a kód az URL "
 "„/local/” utáni része és ehhez hasonló: AAXX0000."
 
-#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:56
+#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
@@ -888,27 +887,28 @@ msgstr "Időjárás beállításai"
 msgid "Click to add a location."
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
 msgid "Fetching data..."
 msgstr "Adatok lekérése…"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:222
 msgid "Radar _Map"
 msgstr "Ra_dartérkép"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:227
 msgid "Forecasts"
 msgstr "Előrejelzés"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:252
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:243
 msgid "Check _Weather"
 msgstr "Időjárás _ellenőrzése"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
 msgid "_Today"
 msgstr "_Ma"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
 msgid "T_omorrow"
 msgstr "H_olnap"
 
