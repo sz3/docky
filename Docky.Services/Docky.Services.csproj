@@ -114,6 +114,7 @@
     <Compile Include="Docky.Services\Extensions\GtkIconThemeExtension.cs" />
     <Compile Include="Docky.Services\PathsService.cs" />
     <Compile Include="Docky.Services\ThemeService.cs" />
+    <Compile Include="Docky.Services\PreferencesChangedEventArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

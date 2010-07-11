@@ -1,5 +1,4 @@
 //  
-//  Copyright (C) 2009 Jason Smith
 //  Copyright (C) 2010 Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
@@ -20,23 +19,22 @@ using System;
 
 namespace Docky.Services
 {
-
-	public class PreferencesService
+	public class PreferencesChangedEventArgs : EventArgs
 	{
+		/// <summary>
+		/// The key of the changed preference.
+		/// </summary>
+		public string Key { get; private set; }
+		/// <summary>
+		/// The new value after the preference changed.
+		/// </summary>
+		public object Value { get; private set; }
 
-		internal PreferencesService ()
+		public PreferencesChangedEventArgs (string key, object newValue)
 		{
-		}
-		
-		public IPreferences Get<TOwner> ()
-			where TOwner : class
-		{
-			return new Preferences (typeof(TOwner).FullName.Replace (".", "/"));
-		}
-		
-		public IPreferences Get (string @base)
-		{
-			return new Preferences (@base);
+			Key = key;
+			Value = newValue;
 		}
 	}
 }
+

@@ -36,6 +36,12 @@ namespace Docky.Items
 	{
 		static IPreferences prefs = DockServices.Preferences.Get <ColoredIconDockItem> ();
 		
+		public string Key {
+			get {
+				return prefs.SanitizeKey (UniqueID ());
+			}
+		}
+		
 		int? shift;
 		public int HueShift {
 			get {
@@ -56,6 +62,10 @@ namespace Docky.Items
 		
 		public ColoredIconDockItem ()
 		{
+			prefs.Changed += delegate(object sender, PreferencesChangedEventArgs e) {
+				if (e.Key == Key)
+					Console.WriteLine ("my key is: '{0}'.  Changed was: '{1}'", Key, e.Key);
+			};
 		}
 				
 		protected override Gdk.Pixbuf ProcessPixbuf (Gdk.Pixbuf pbuf)

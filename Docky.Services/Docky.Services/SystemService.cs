@@ -44,7 +44,7 @@ namespace Docky.Services
 		
 		internal void Dispose ()
 		{
-			GConf.RemoveNotify (PROXY, ProxySettingsChanged);
+			//GConf.RemoveNotify (PROXY, ProxySettingsChanged);
 		}
 		
 		IPreferences GConf = DockServices.Preferences.Get <SystemService> ();
@@ -76,7 +76,7 @@ namespace Docky.Services
 				Log<SystemService>.Info (e.StackTrace);
 			}
 			
-			GConf.AddNotify (PROXY, ProxySettingsChanged);
+			//GConf.AddNotify (PROXY, ProxySettingsChanged);
 			Proxy = GetWebProxy ();
 		}
 		
@@ -404,7 +404,7 @@ namespace Docky.Services
 					}
 				}
 			}
-			
+
 			Log<SystemService>.Error ("Error opening files. The application doesn't support files/URIs or wasn't found.");
 		}
 		
