@@ -44,7 +44,7 @@ namespace WorkspaceSwitcher
 			}
 		}
 		
-		public bool IsVirual {
+		public bool IsVirtual {
 			get {
 				return Parent.IsVirtual;
 			}
