@@ -63,7 +63,8 @@ namespace Docky.Items
 				
 		protected override Gdk.Pixbuf ProcessPixbuf (Gdk.Pixbuf pbuf)
 		{
-			return pbuf.AddHueShift (HueShift >= 0 ? HueShift : -HueShift);
+			int shift = HueShift;
+			return pbuf.AddHueShift (shift >= 0 ? shift : -shift);
 		}
 		
 		protected override MenuList OnGetMenuItems ()
