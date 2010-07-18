@@ -622,6 +622,45 @@ namespace Docky.Items
 			if (string.IsNullOrEmpty (BadgeText))
 				return;
 			
+			int padding = 4;
+			int lineWidth = 2;
+			double size = (IsSmall ? 0.9 : 0.65) * Math.Min (surface.Width, surface.Height);
+			double x = surface.Width - size / 2;
+			double y = size / 2;
+			
+			if (!IsSmall) {
+				// draw outline shadow
+				surface.Context.LineWidth = lineWidth;
+				surface.Context.Color = new Cairo.Color (0, 0, 0, 0.5);
+				surface.Context.Arc (x, y + 1, size / 2 - lineWidth, 0, Math.PI * 2);
+				surface.Context.Stroke ();
+				
+				// draw filled gradient
+				RadialGradient rg = new RadialGradient (x, lineWidth, 0, x, lineWidth, size);
+				rg.AddColorStop (0, badgeColors [0]);
+				rg.AddColorStop (1.0, badgeColors [1]);
+				
+				surface.Context.Pattern = rg;
+				surface.Context.Arc (x, y, size / 2 - lineWidth, 0, Math.PI * 2);
+				surface.Context.Fill ();
+				rg.Destroy ();
+				
+				// draw outline
+				surface.Context.Color = new Cairo.Color (1, 1, 1, 1);
+				surface.Context.Arc (x, y, size / 2 - lineWidth, 0, Math.PI * 2);
+				surface.Context.Stroke ();
+				
+				surface.Context.LineWidth = lineWidth / 2;
+				surface.Context.Color = badgeColors [1];
+				surface.Context.Arc (x, y, size / 2 - 2 * lineWidth, 0, Math.PI * 2);
+				surface.Context.Stroke ();
+				
+				surface.Context.Color = new Cairo.Color (0, 0, 0, 0.2);
+			} else {
+				lineWidth = 0;
+				padding = 2;
+			}
+			
 			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ())
 			{
 				layout.Width = Pango.Units.FromPixels (surface.Height / 2);
@@ -630,62 +669,35 @@ namespace Docky.Items
 				layout.FontDescription.Weight = Pango.Weight.Bold;
 				
 				Pango.Rectangle inkRect, logicalRect;
-				int tsize = 3;
-				do {
-					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (tsize);
-					layout.SetText (BadgeText);
-					layout.GetPixelExtents (out inkRect, out logicalRect);
-					tsize++;
-				} while (Math.Max (logicalRect.Width, logicalRect.Height) < surface.Height / (IsSmall ? 1 : 2) - 8);
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (surface.Height / 2);
+				layout.SetText (BadgeText);
+				layout.GetPixelExtents (out inkRect, out logicalRect);
 				
-				int size = Math.Max (logicalRect.Width, logicalRect.Height);
-				int padding = 4;
-				int lineWidth = 2;
-				int x = surface.Width - size / 2 - padding - lineWidth;
-				int y = size / 2 + padding + lineWidth;
+				size -= 2 * padding + 2 * lineWidth;
+				
+				double scale = Math.Min (1, Math.Min (size / (double) logicalRect.Width, size / (double) logicalRect.Height));
 				
 				if (!IsSmall) {
-					// draw outline shadow
-					surface.Context.LineWidth = lineWidth;
-					surface.Context.Color = new Cairo.Color (0, 0, 0, 0.5);
-					surface.Context.Arc (x, y + 1, size / 2 + padding, 0, Math.PI * 2);
-					surface.Context.Stroke ();
-					
-					// draw filled gradient
-					RadialGradient rg = new RadialGradient (x, lineWidth, 0, x, lineWidth, size + 2 * padding);
-					rg.AddColorStop (0, badgeColors [0]);
-					rg.AddColorStop (1.0, badgeColors [1]);
-					
-					surface.Context.Pattern = rg;
-					surface.Context.Arc (x, y, size / 2 + padding, 0, Math.PI * 2);
-					surface.Context.Fill ();
-					rg.Destroy ();
-					
-					// draw outline
-					surface.Context.Color = new Cairo.Color (1, 1, 1, 1);
-					surface.Context.Arc (x, y, size / 2 + padding, 0, Math.PI * 2);
-					surface.Context.Stroke ();
-					
-					surface.Context.LineWidth = lineWidth / 2;
-					surface.Context.Color = badgeColors [1];
-					surface.Context.Arc (x, y, size / 2 + padding - lineWidth, 0, Math.PI * 2);
-					surface.Context.Stroke ();
-					
 					surface.Context.Color = new Cairo.Color (0, 0, 0, 0.2);
 				} else {
-					x = surface.Width - logicalRect.Width / 2;
-					y = logicalRect.Height / 2;
 					surface.Context.Color = new Cairo.Color (0, 0, 0, 0.6);
+					x = surface.Width - scale * logicalRect.Width / 2;
+					y = scale * logicalRect.Height / 2;
 				}
 				
-				// draw text
-				surface.Context.MoveTo (x - logicalRect.Width / 2, y - logicalRect.Height / 2);
+				surface.Context.MoveTo (x - scale * logicalRect.Width / 2, y - scale * logicalRect.Height / 2);
 				
-				Pango.CairoHelper.LayoutPath (surface.Context, layout);
+				// draw text
+				surface.Context.Save ();
+				if (scale < 1)
+					surface.Context.Scale (scale, scale);
+				
 				surface.Context.LineWidth = 2;
+				Pango.CairoHelper.LayoutPath (surface.Context, layout);
 				surface.Context.StrokePreserve ();
 				surface.Context.Color = new Cairo.Color (1, 1, 1, 1);
 				surface.Context.Fill ();
+				surface.Context.Restore ();
 				
 				layout.FontDescription.Dispose ();
 				layout.Context.Dispose ();
