@@ -53,11 +53,6 @@ namespace NPR
 					break;
 				}
 			};
-			// testing
-			IPreferences prefs = DockServices.Preferences.Get ("/system/proxy");
-			prefs.Changed += delegate(object sender, PreferencesChangedEventArgs e) {
-				Console.WriteLine ("Key was changed: {0}", e.Key);
-			};
 		}
 		
 		void AddStation (Station station)

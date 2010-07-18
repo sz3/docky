@@ -55,7 +55,6 @@ namespace Docky.Services
 			if (key.StartsWith (GConfPrefix))
 				key = key.Substring (GConfPrefix.Length + 1);
 
-			Console.WriteLine ("key '{0}' changed... to: {1}", key, args.Value);
 			if (Changed != null)
 				Changed (this, new PreferencesChangedEventArgs (key, args.Value));
 		}
@@ -63,7 +62,7 @@ namespace Docky.Services
 		public event EventHandler<PreferencesChangedEventArgs> Changed;
 		
 		#region IPreferences - based on GConf
-		static Regex nameRegex = new Regex ("[^a-zA-Z0-9]");
+		static Regex nameRegex = new Regex ("[^a-zA-Z0-9.]");
 		static Client client = new Client ();
 		
 		//readonly string GConfPrefix = "/apps/docky-2/" + typeof (TOwner).FullName.Replace (".", "/");

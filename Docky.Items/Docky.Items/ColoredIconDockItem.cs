@@ -36,35 +36,28 @@ namespace Docky.Items
 	{
 		static IPreferences prefs = DockServices.Preferences.Get <ColoredIconDockItem> ();
 		
-		public string Key {
+		string Key {
 			get {
 				return prefs.SanitizeKey (UniqueID ());
 			}
 		}
 		
-		int? shift;
 		public int HueShift {
 			get {
-				if (!shift.HasValue)
-					HueShift = prefs.Get<int> (prefs.SanitizeKey (UniqueID ()), 0);
-				return shift.Value;
+				return prefs.Get<int> (Key, 0);
 			}
-			protected set {
-				if (shift.HasValue && shift.Value == value)
-					return;
-				shift = value;
-				prefs.Set<int> (prefs.SanitizeKey (UniqueID ()), value);
-				
-				OnIconUpdated ();
-				QueueRedraw ();
+			set {
+				prefs.Set<int> (Key, value);
 			}
 		}
 		
 		public ColoredIconDockItem ()
 		{
 			prefs.Changed += delegate(object sender, PreferencesChangedEventArgs e) {
-				if (e.Key == Key)
-					Console.WriteLine ("my key is: '{0}'.  Changed was: '{1}'", Key, e.Key);
+				if (e.Key == Key) {
+					OnIconUpdated ();
+					QueueRedraw ();
+				}
 			};
 		}
 				
