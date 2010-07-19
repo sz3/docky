@@ -51,10 +51,11 @@ namespace Docky.Services
 		void HandleGConfChanged (object sender, GConf.NotifyEventArgs args)
 		{
 			string key = args.Key;
-
-			if (key.StartsWith (GConfPrefix))
+			
+			// check it against the GConf prefix as well, incase the GConf prefix is being unset
+			if (key.StartsWith (GConfPrefix) && key != GConfPrefix)
 				key = key.Substring (GConfPrefix.Length + 1);
-
+			
 			if (Changed != null)
 				Changed (this, new PreferencesChangedEventArgs (key, args.Value));
 		}
@@ -65,7 +66,6 @@ namespace Docky.Services
 		static Regex nameRegex = new Regex ("[^a-zA-Z0-9.]");
 		static Client client = new Client ();
 		
-		//readonly string GConfPrefix = "/apps/docky-2/" + typeof (TOwner).FullName.Replace (".", "/");
 		static readonly string GConfDockyBase = "/apps/docky-2";
 		string GConfPrefix { get; set; }
 		
