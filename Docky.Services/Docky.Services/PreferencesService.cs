@@ -34,9 +34,9 @@ namespace Docky.Services
 			return new Preferences (typeof(TOwner).FullName.Replace (".", "/"));
 		}
 		
-		public IPreferences Get (string @base)
+		public IPreferences Get (string basePath)
 		{
-			return new Preferences (@base);
+			return new Preferences (basePath);
 		}
 	}
 }

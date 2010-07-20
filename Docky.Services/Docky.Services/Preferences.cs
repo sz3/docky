@@ -63,7 +63,7 @@ namespace Docky.Services
 		public event EventHandler<PreferencesChangedEventArgs> Changed;
 		
 		#region IPreferences - based on GConf
-		static Regex nameRegex = new Regex ("[^a-zA-Z0-9.]");
+		static Regex nameRegex = new Regex ("[^a-zA-Z0-9]");
 		static Client client = new Client ();
 		
 		static readonly string GConfDockyBase = "/apps/docky-2";
