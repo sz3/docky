@@ -143,6 +143,7 @@ if test -z "$ENABLE_DEBUG_TRUE" ; then
 	DOCKY_DEBUG_ARGS+="--debug "
 fi
 dnl }}}
+AM_CONDITIONAL(ENABLE_DEBUG, true)
 
 dnl {{{ enable release build configuration
 AC_ARG_ENABLE(release,

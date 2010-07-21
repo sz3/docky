@@ -51,6 +51,8 @@ namespace RecentDocuments
 			}
 		}
 		
+		public bool CanClear { get; protected set; }
+		
 		const int NumRecentDocs = 7;
 		
 		internal List<FileDockItem> RecentDocs;
@@ -99,6 +101,7 @@ namespace RecentDocuments
 		void RefreshRecentDocs ()
 		{
 			GLib.List recent_items = new GLib.List (Gtk.RecentManager.Default.Items.Handle, typeof(Gtk.RecentInfo));
+			CanClear = recent_items.Cast<Gtk.RecentInfo> ().Count () != 0;
 			
 			lock (RecentDocs) {
 				foreach (FileDockItem f in RecentDocs)

@@ -198,18 +198,20 @@ namespace Docky.Interface
 			Gdk.Pixbuf pbuf;
 			drag_item = Owner.HoveredItem;
 			original_item_pos.Clear ();
-			foreach (AbstractDockItem adi in ProviderForItem (drag_item).Items)
-				original_item_pos [adi] = adi.Position;
 			
 			// If we are in Reposition Mode or over a non-draggable item
 			// dont drag it!
 			if (drag_item is INonPersistedItem || RepositionMode)
 				drag_item = null;
 			
-			if (drag_item != null)
+			if (drag_item != null) {
+				foreach (AbstractDockItem adi in ProviderForItem (drag_item).Items)
+					original_item_pos [adi] = adi.Position;
+				
 				pbuf = Owner.HoveredItem.IconSurface (new DockySurface (1, 1), Owner.ZoomedIconSize, Owner.IconSize, 0).LoadToPixbuf ();
-			else
+			} else {
 				pbuf = new Gdk.Pixbuf (Gdk.Colorspace.Rgb, true, 8, 1, 1);
+			}
 			
 			Gtk.Drag.SetIconPixbuf (args.Context, pbuf, pbuf.Width / 2, pbuf.Height / 2);
 			pbuf.Dispose ();

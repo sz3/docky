@@ -155,6 +155,8 @@ namespace Docky.Items
 				Indicator = ActivityIndicator.Single;
 			else
 				Indicator = ActivityIndicator.None;
+			
+			OnPaintNeeded ();
 		}
 		
 		void SetState ()
@@ -167,6 +169,8 @@ namespace Docky.Items
 				state |= ItemState.Urgent;
 			
 			State = state;
+			
+			OnPaintNeeded ();
 		}
 		
 		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
@@ -276,6 +280,7 @@ namespace Docky.Items
 		public override void Dispose ()
 		{
 			Wnck.Screen.Default.ActiveWindowChanged -= WnckScreenDefaultActiveWindowChanged;
+			Wnck.Screen.Default.WindowClosed -= WnckScreenDefaultWindowClosed;
 			UnregisterWindows (Windows);
 			
 			base.Dispose ();

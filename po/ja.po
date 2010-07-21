@@ -7,38 +7,38 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-06-12 21:06+0200\n"
-"PO-Revision-Date: 2010-05-18 02:57+0000\n"
+"POT-Creation-Date: 2010-06-28 07:25+0200\n"
+"PO-Revision-Date: 2010-06-28 06:51+0000\n"
 "Last-Translator: kawaji <jiro.kawada@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-06-22 08:24+0000\n"
+"X-Launchpad-Export-Date: 2010-07-07 13:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:117
+#: ../Docky/Docky/ConfigurationWindow.cs:146
 msgid "Search Docklets..."
 msgstr "ドックレットの検索..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:132
+#: ../Docky/Docky/ConfigurationWindow.cs:162
 msgid "Search Helpers..."
 msgstr "ヘルパーの検索..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:196
+#: ../Docky/Docky/ConfigurationWindow.cs:226
 msgid "Click on any dock to configure."
-msgstr "設定変更したいドックをクリック。"
+msgstr "設定変更したいドックをクリックしてください。"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:197
+#: ../Docky/Docky/ConfigurationWindow.cs:227
 msgid "Drag any dock to reposition."
-msgstr "ドックを移動させるにはドラッグ。"
+msgstr "ドックを移動させるにはドラッグします。"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:262
+#: ../Docky/Docky/ConfigurationWindow.cs:292
 msgid "Delete the currently selected dock?"
 msgstr "現在選択中のドックを削除しますか？"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:264
+#: ../Docky/Docky/ConfigurationWindow.cs:294
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -46,62 +46,62 @@ msgstr ""
 "ドックの削除を選択すると、\n"
 "削除するドックに関わる全ての設定が完全に失われます。"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:279
+#: ../Docky/Docky/ConfigurationWindow.cs:309
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:405
 msgid "_Delete Dock"
 msgstr "ドック削除(_D)"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:381
+#: ../Docky/Docky/ConfigurationWindow.cs:413
 msgid "_Select"
 msgstr "選択(_S)"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:384
+#: ../Docky/Docky/ConfigurationWindow.cs:416
 msgid ".tar Archives"
 msgstr ".tar 書庫"
 
-#: ../Docky/Docky/DockletTile.cs:48
+#: ../Docky/Docky/DockletTile.cs:49
 msgid "Author"
 msgstr "作成者"
 
-#: ../Docky/Docky/DockletTile.cs:88
+#: ../Docky/Docky/DockletTile.cs:97
 msgid "Move this docklet up on the selected dock"
 msgstr "このドックレットを選択ドック上の上方向に移動"
 
-#: ../Docky/Docky/DockletTile.cs:89
+#: ../Docky/Docky/DockletTile.cs:98
 msgid "Move this docklet down on the selected dock"
 msgstr "このドックレットを選択ドック上の下方向に移動"
 
-#: ../Docky/Docky/DockletTile.cs:93
+#: ../Docky/Docky/DockletTile.cs:102
 msgid "Move this docklet left on the selected dock"
 msgstr "このドックレットを選択ドック上の左方向に移動"
 
-#: ../Docky/Docky/DockletTile.cs:94
+#: ../Docky/Docky/DockletTile.cs:103
 msgid "Move this docklet right on the selected dock"
 msgstr "このドックレットを選択ドック上の右方向に移動"
 
-#: ../Docky/Docky/DockletTile.cs:96
+#: ../Docky/Docky/DockletTile.cs:105
 msgid "Configure this docklet"
 msgstr "このドックレットの設定を変更"
 
-#: ../Docky/Docky/DockletTile.cs:97
+#: ../Docky/Docky/DockletTile.cs:106
 msgid "About this docklet"
 msgstr "このドックレットについて"
 
-#: ../Docky/Docky/DockletTile.cs:98
+#: ../Docky/Docky/DockletTile.cs:107
 msgid "Add this docklet to the selected dock"
 msgstr "このドックレットを選択ドックに追加"
 
-#: ../Docky/Docky/DockletTile.cs:99
+#: ../Docky/Docky/DockletTile.cs:108
 msgid "Remove this docklet from the selected dock"
 msgstr "このドックレットを選択ドックから削除"
 
-#: ../Docky/Docky/Docky.cs:119
+#: ../Docky/Docky/Docky.cs:123
 msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
-msgstr "Docky の正常動作にはコンポジットが必要です。特定のオプションが無効化され、テーマやアニメーションが正しく表示されなくなります。 "
+msgstr "Docky の正常動作にはコンポジットが必要です。特定のオプションが現在無効なので、テーマやアニメーションは正しく表示されません。 "
 
-#: ../Docky/Docky/HelperTile.cs:41
+#: ../Docky/Docky/HelperTile.cs:42
 msgid "Status"
 msgstr "状態"
 
@@ -121,11 +121,11 @@ msgstr "このヘルパーを有効化"
 msgid "Disable this helper"
 msgstr "このヘルパーを無効化"
 
-#: ../Docky/Docky/HelperTile.cs:71
+#: ../Docky/Docky/HelperTile.cs:74
 msgid "Running"
 msgstr "稼動中"
 
-#: ../Docky/Docky/HelperTile.cs:71
+#: ../Docky/Docky/HelperTile.cs:74
 msgid "Stopped"
 msgstr "停止"
 
@@ -161,7 +161,7 @@ msgid "Drop to add to dock"
 msgstr "ドロップしてドックに追加"
 
 #: ../Docky/Docky/Items/DockyItem.cs:93
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:215
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:214
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "_Settings"
 msgstr "設定(_S)"
@@ -184,7 +184,7 @@ msgstr "Docky 設定"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
 msgid "_Start When User Logs In"
-msgstr ""
+msgstr "ユーザーログイン時に起動(_S)"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:155
 msgid "_Theme:"
@@ -227,7 +227,7 @@ msgstr "ドックレット"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
 msgid "Usable"
-msgstr ""
+msgstr "使用可能"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:347
 msgid "Helpers"
@@ -286,12 +286,12 @@ msgstr "ズーム(_Z):"
 msgid "Drop to open with {0}"
 msgstr "ドロップして {0} で開く"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:156
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:173
 msgid "New _Window"
 msgstr "新規ウィンドウ(_W)"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:158
-#: ../StandardPlugins/Mounter/src/MountItem.cs:102
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:175
+#: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
 msgstr "開く(_O)"
 
@@ -299,65 +299,65 @@ msgstr "開く(_O)"
 msgid "Reset Color"
 msgstr "色を元に戻す"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:431
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:435
 msgid "_Pin to Dock"
 msgstr "ドックに作成配置(_P)"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:74
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:75
 #, csharp-format
 msgid "Drop to move to {0}"
 msgstr "ドロッップして {0} へ移動"
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:189
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:234
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:239
 msgid "Error performing drop action"
-msgstr "ドロップ・アクション実行でエラー"
+msgstr "ドロップ・アクション実行にエラー"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:189
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
 msgid "Not enough free space on destination."
 msgstr "目的の場所に十分な空きスペースがありません。"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:206
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:209
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:241
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:211
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:214
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:246
 msgid "Complete"
 msgstr "完了"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:219
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:224
 msgid "Moving"
 msgstr "移動中"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:225
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:230
 msgid "Copying"
 msgstr "コピー中"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:259
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:264
 msgid "Open"
 msgstr "開く"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:260
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:265
 msgid "Open Containing Folder"
 msgstr "親フォルダを開く"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:260
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
 msgid "Unma_ximize"
 msgstr "最大化解除(_X)"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:263
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:267
 msgid "Ma_ximize"
 msgstr "最大化(_X)"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:268
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:272
 msgid "_Restore"
 msgstr "元に戻す(_R)"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:271
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:275
 msgid "Mi_nimize"
 msgstr "最小化(_N)"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:275
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:279
 msgid "_Close All"
 msgstr "全て閉じる(_C)"
 
@@ -427,7 +427,7 @@ msgstr "で充電完了 "
 msgid "remaining "
 msgstr "残り "
 
-#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:84
+#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:86
 msgid "Computer"
 msgstr "コンピュータ"
 
@@ -474,7 +474,7 @@ msgstr "分"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:174
 msgid "Click to set username and password."
-msgstr "クリックしてユーザー名とパスワードを設定します。"
+msgstr "ユーザー名とパスワードを設定するにはクリックします。"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:230
 msgid "(no subject)"
@@ -483,7 +483,7 @@ msgstr "（件名なし）"
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:244
 #, csharp-format
 msgid "You have {0} new, unread messages"
-msgstr ""
+msgstr "未読の新着メッセージが {0} 通あります"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:248
 #, csharp-format
@@ -526,19 +526,23 @@ msgstr[0] "{0} 未読メッセージ"
 msgid "Checking mail..."
 msgstr "メールチェック中..."
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:194
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:193
 msgid "_View "
 msgstr "表示(_V) "
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:199
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:198
 msgid "_Compose Mail"
 msgstr "メール作成(_C)"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:207
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:211
+msgid "View C_ontacts"
+msgstr "連絡先を表示(_C)"
+
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
 msgid "New Mail"
 msgstr "新着メール"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:223
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:222
 msgid "Check _Mail"
 msgstr "メールチェック(_M)"
 
@@ -558,11 +562,11 @@ msgstr "ログイン"
 msgid "From: "
 msgstr "差出人: "
 
-#: ../StandardPlugins/Mounter/src/MountItem.cs:105
+#: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Eject"
 msgstr "取り出す(_E)"
 
-#: ../StandardPlugins/Mounter/src/MountItem.cs:105
+#: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Unmount"
 msgstr "アンマウント(_U)"
 
@@ -607,7 +611,7 @@ msgstr "情報取得中..."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:72
 msgid "Click to add NPR stations."
-msgstr "クリックしてNPR局を追加します。"
+msgstr "NPR局を追加するにはクリックします。"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:111
 msgid "Home Page"
@@ -625,7 +629,7 @@ msgstr "寄付"
 msgid "Live Streams"
 msgstr "ライブ・ストリーム"
 
-#: ../Docky/Docky/DockletTile.cs:55
+#: ../Docky/Docky/DockletTile.cs:56
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:170
 msgid "Settings"
 msgstr "設定"
@@ -652,52 +656,52 @@ msgstr ""
 msgid "_Clear Recent Documents..."
 msgstr "最近開いたドキュメントのクリア(C)..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:148
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:152
 msgid "Lock Screen"
 msgstr "画面のロック"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:152
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:156
 msgid "Log Out..."
 msgstr "ログアウト..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:157
 msgid "Log Out"
 msgstr "ログアウト"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:154
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
-msgstr "本当に全てのプログラムを閉じてコンピュータをログアウトさせますか?"
+msgstr "本当に全てのプログラムを閉じてコンピュータからログアウトしますか?"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:159
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:163
 msgid "Suspend"
 msgstr "サスペンド"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:164
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:168
 msgid "Hibernate"
 msgstr "ハイバネート"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:170
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:174
 msgid "Restart..."
 msgstr "再起動..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:171
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:175
 msgid "Restart"
 msgstr "再起動"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:172
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
 msgid "Are you sure you want to close all programs and restart the computer?"
 msgstr "本当に全てのプログラムを閉じてコンピュータを再起動させますか?"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:177
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:181
 msgid "Shut Down..."
 msgstr "シャットダウン..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:178
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:182
 msgid "Shut Down"
 msgstr "シャットダウン"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:179
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:183
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
 msgstr "本当に全てのプログラムを閉じてコンピュータをシャットダウンさせますか?"
@@ -705,67 +709,64 @@ msgstr "本当に全てのプログラムを閉じてコンピュータをシャ
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:90
 #, csharp-format
 msgid "A timer set for {0} has expired."
-msgstr ""
+msgstr "{0} に設定のタイマーが時間切れです。"
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:236
+msgid "Time remaining:"
+msgstr "残り時間:"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:238
-msgid "Time remaining:"
-msgstr ""
-
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:240
 msgid "Timer paused, time remaining:"
-msgstr ""
+msgstr "タイマーは一時停止中、残り時間:"
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:251
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:249
 msgid "Set the timer's label to:"
-msgstr ""
+msgstr "タイマーのラベルの設定:"
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:257
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:291
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:255
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:289
 msgid "_Set Label"
-msgstr ""
+msgstr "ラベル設定(_S)"
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:282
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:280
 msgid "_Pause Timer"
-msgstr ""
+msgstr "タイマー一時停止(_P)"
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:282
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:280
 msgid "_Start Timer"
-msgstr ""
+msgstr "タイマー開始(_S)"
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:286
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:284
 msgid "_Remove Timer"
-msgstr ""
+msgstr "タイマー削除(_R)"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:62
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "時間"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:66
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "分"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:71
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "秒"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:138
 #, csharp-format
 msgid "Click to create a timer for {0}."
-msgstr ""
+msgstr "{0} のタイマーを作成するにはクリックします。"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:155
 msgid "Automatically _Start Timers"
-msgstr ""
+msgstr "自動的にタイマー開始(_S)"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:159
 msgid "Automatically _Dismiss Timers"
-msgstr ""
+msgstr "自動的にタイマー削除(_D)"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:50
 msgid "Drop to move to Trash"
@@ -783,7 +784,7 @@ msgstr[0] "ゴミ箱に {0} アイテム"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:164
 msgid "Restore Files"
-msgstr ""
+msgstr "ファイルを元に戻す"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:164
 msgid "_Open Trash"
@@ -834,10 +835,6 @@ msgstr "メートル単位を使用(_M)"
 msgid "Invalid Weather Location"
 msgstr "無効な天気予報場所の指定"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:179
-msgid "Invalid XML Weather Data"
-msgstr "不正な XML 天気予報データ"
-
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
 "Weather data provided by Google.  This source requires locations to be "
@@ -872,7 +869,7 @@ msgstr "天気予報の設定"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
 msgid "Click to add a location."
-msgstr "クリックして場所を追加します。"
+msgstr "場所を追加するにはクリックします。"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
@@ -900,7 +897,7 @@ msgid "T_omorrow"
 msgstr "明日(_O)"
 
 #. draw humidity
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:318
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:328
 #, csharp-format
 msgid "{0} humidity"
 msgstr "湿度 {0}"
@@ -968,3 +965,6 @@ msgstr "湿度 {0}"
 
 #~ msgid "Network Error: "
 #~ msgstr "ネットワークエラー: "
+
+#~ msgid "Invalid XML Weather Data"
+#~ msgstr "不正な XML 天気予報データ"

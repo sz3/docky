@@ -78,7 +78,7 @@ namespace RecentDocuments
 		public override MenuList GetMenuItems (AbstractDockItem item)
 		{
 			MenuList list = base.GetMenuItems (item);
-			list[MenuListContainer.Footer].Add (new Docky.Menus.MenuItem (Catalog.GetString ("_Clear Recent Documents..."), "edit-clear", (o, a) => ClearRecent (), docs.RecentDocs.Count == 0));
+			list[MenuListContainer.Footer].Add (new Docky.Menus.MenuItem (Catalog.GetString ("_Clear Recent Documents..."), "edit-clear", (o, a) => ClearRecent (), !docs.CanClear));
 			return list;
 		}
 	}

@@ -185,6 +185,7 @@ namespace Docky.Widgets
 
             if(changed_timeout_id > 0) {
                 GLib.Source.Remove (changed_timeout_id);
+                changed_timeout_id = 0;
             }
 
             if (Ready)

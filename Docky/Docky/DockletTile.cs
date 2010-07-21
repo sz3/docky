@@ -33,6 +33,7 @@ namespace Docky
 	{
 		public Addin Addin { get; private set; }
 		public AbstractDockItemProvider Provider { get; private set; }
+		
 		Gtk.Button ConfigButton;
 		Gtk.Button UpButton;
 		Gtk.Button DownButton;
@@ -65,29 +66,17 @@ namespace Docky
 				
 			HelpButton = new Gtk.Button ();
 			HelpButton.Image = new Gtk.Image (Gtk.Stock.Help, Gtk.IconSize.SmallToolbar);
-			HelpButton.Clicked += delegate {
-				string id = Addin.Id.Substring (0, Addin.Id.IndexOf (","));
-				id = id.Substring (id.IndexOf (".") + 1);
-				DockServices.System.Open ("http://wiki.go-docky.com/index.php?title=" + id + "_Docklet");
-			};
+			HelpButton.Clicked += HandleHelpButtonClicked;
 			
 			ConfigButton = new Gtk.Button ();
 			ConfigButton.Image = new Gtk.Image (Gtk.Stock.Preferences, Gtk.IconSize.SmallToolbar);
-			ConfigButton.Clicked += delegate {
-				if (PluginManager.ConfigForAddin (Addin.Id) != null)
-					PluginManager.ConfigForAddin (Addin.Id).Show ();
-			};
+			ConfigButton.Clicked += HandleConfigButtonClicked;
 			
 			UpButton = new Gtk.Button ();
-			UpButton.Clicked += delegate {
-				ConfigurationWindow.Instance.ActiveDock.Preferences.MoveProviderUp (Provider);
-				UpdateInfo ();
-			};
+			UpButton.Clicked += HandleUpButtonClicked;
+			
 			DownButton = new Gtk.Button ();
-			DownButton.Clicked += delegate {
-				ConfigurationWindow.Instance.ActiveDock.Preferences.MoveProviderDown (Provider);
-				UpdateInfo ();
-			};
+			DownButton.Clicked += HandleDownButtonClicked;
 			
 			UpdateInfo ();
 			
@@ -106,6 +95,31 @@ namespace Docky
 			HelpButton.TooltipMarkup = Catalog.GetString ("About this docklet");
 			AddButtonTooltip = Catalog.GetString ("Add this docklet to the selected dock");
 			RemoveButtonTooltip = Catalog.GetString ("Remove this docklet from the selected dock");
+		}
+		
+		void HandleHelpButtonClicked (object sender, EventArgs e)
+		{
+			string id = Addin.Id.Substring (0, Addin.Id.IndexOf (","));
+			id = id.Substring (id.IndexOf (".") + 1);
+			DockServices.System.Open ("http://wiki.go-docky.com/index.php?title=" + id + "_Docklet");
+		}
+		
+		void HandleConfigButtonClicked (object sender, EventArgs e)
+		{
+			if (PluginManager.ConfigForAddin (Addin.Id) != null)
+				PluginManager.ConfigForAddin (Addin.Id).Show ();
+		}
+		
+		void HandleUpButtonClicked (object sender, EventArgs e)
+		{
+			ConfigurationWindow.Instance.ActiveDock.Preferences.MoveProviderUp (Provider);
+			UpdateInfo ();
+		}
+		
+		void HandleDownButtonClicked (object sender, EventArgs e)
+		{
+			ConfigurationWindow.Instance.ActiveDock.Preferences.MoveProviderDown (Provider);
+			UpdateInfo ();
 		}
 		
 		void UpdateInfo ()
@@ -127,7 +141,7 @@ namespace Docky
 				RemoveUserButton (DownButton);
 			}
 			
-			if (Enabled && PluginManager.ConfigForAddin (Addin.Id) != null)
+			if (Enabled && Addin != null && PluginManager.ConfigForAddin (Addin.Id) != null)
 				AddUserButton (ConfigButton);
 			else
 				RemoveUserButton (ConfigButton);
@@ -157,6 +171,19 @@ namespace Docky
 		{
 			Addin = null;
 			Provider = null;
+			
+			ConfigButton.Clicked -= HandleConfigButtonClicked;
+			ConfigButton.Dispose ();
+			ConfigButton.Destroy ();
+			UpButton.Clicked -= HandleUpButtonClicked;
+			UpButton.Dispose ();
+			UpButton.Destroy ();
+			DownButton.Clicked -= HandleDownButtonClicked;
+			DownButton.Dispose ();
+			DownButton.Destroy ();
+			HelpButton.Clicked -= HandleHelpButtonClicked;
+			HelpButton.Dispose ();
+			HelpButton.Destroy ();
 			
 			base.Dispose ();
 		}

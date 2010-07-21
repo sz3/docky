@@ -491,8 +491,8 @@ namespace Docky {
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
-            this.DefaultWidth = 420;
-            this.DefaultHeight = 430;
+            this.DefaultWidth = 380;
+            this.DefaultHeight = 390;
             this.label3.MnemonicWidget = this.theme_combo;
             this.Show();
             this.config_notebook.SwitchPage += new Gtk.SwitchPageHandler(this.OnPageSwitch);

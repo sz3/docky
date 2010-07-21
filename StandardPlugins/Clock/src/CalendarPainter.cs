@@ -111,10 +111,7 @@ namespace Clock
 				layout.FontDescription.Weight = Pango.Weight.Bold;
 				layout.Ellipsize = Pango.EllipsizeMode.None;
 				layout.Width = Pango.Units.FromPixels (Allocation.Height);
-				if (month.Length > 8)
-					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (0.9 * Allocation.Height / 6));
-				else
-					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (Allocation.Height / 6);
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (Allocation.Height / 6);
 				
 				cr.Save ();
 				cr.Color = new Cairo.Color (1, 1, 1, .5);
@@ -122,8 +119,12 @@ namespace Clock
 				
 				Pango.Rectangle inkRect, logicalRect;
 				layout.GetPixelExtents (out inkRect, out logicalRect);
+				double scale = Math.Min (1, Math.Min (Allocation.Height / (double) inkRect.Width, (Allocation.Width / 9.0) / (double) logicalRect.Height));
+				
 				cr.Rotate (Math.PI / -2.0);
-				cr.MoveTo ((Allocation.Height - inkRect.Width) / 2 - Allocation.Height, Allocation.Width / 9 - logicalRect.Height);
+				cr.MoveTo ((Allocation.Height - scale * inkRect.Width) / 2 - Allocation.Height, Allocation.Width / 9 - scale * logicalRect.Height);
+				if (scale < 1)
+					cr.Scale (scale, scale);
 				
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.Fill ();

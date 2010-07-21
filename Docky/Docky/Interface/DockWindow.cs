@@ -258,7 +258,7 @@ namespace Docky.Interface
 				DragTracker.RepositionMode = config_mode;
 				if (value)
 					DragTracker.DragDisabled = false;
-				update_screen_regions = true;
+				UpdateScreenRegions ();
 				
 				SetTooltipVisibility ();
 				if (background_buffer != null) {
@@ -279,7 +279,7 @@ namespace Docky.Interface
 		public ReadOnlyCollection<AbstractDockItem> Items {
 			get {
 				if (collection_backend.Count == 0) {
-					update_screen_regions = true;
+					UpdateScreenRegions ();
 					bool priorItems = false;
 					bool separatorNeeded = false;
 					
@@ -777,14 +777,14 @@ namespace Docky.Interface
 		
 		void HandleMenuHidden (object sender, EventArgs e)
 		{
-			update_screen_regions = true;
+			UpdateScreenRegions ();
 			SetTooltipVisibility ();
 			AnimatedDraw ();
 		}
 
 		void HandleMenuShown (object sender, EventArgs e)
 		{
-			update_screen_regions = true;
+			UpdateScreenRegions ();
 			SetTooltipVisibility ();
 			AnimatedDraw ();
 		}
@@ -1287,7 +1287,7 @@ namespace Docky.Interface
 		#region Misc.
 		void HandleWindowOpened (object o, WindowOpenedArgs args)
 		{
-			update_screen_regions = true;
+			UpdateScreenRegions ();
 			AnimatedDraw ();
 		}
 		
@@ -1330,15 +1330,19 @@ namespace Docky.Interface
 				GLib.Idle.Add (delegate {
 					// dispose of our separators as we made them ourselves,
 					// this could be a bit more elegant
-					foreach (AbstractDockItem item in Items.Where (adi => adi is INonPersistedItem))
+					foreach (AbstractDockItem item in Items.Where (adi => adi is INonPersistedItem && adi != DockyItem)) {
+						DrawValues.Remove (item);
 						item.Dispose ();
+					}
 					
 					collection_backend.Clear ();
 					return false;
 				});
 			} else {
-				foreach (AbstractDockItem item in Items.Where (adi => adi is INonPersistedItem))
+				foreach (AbstractDockItem item in Items.Where (adi => adi is INonPersistedItem && adi != DockyItem)) {
+					DrawValues.Remove (item);
 					item.Dispose ();
+				}
 				
 				collection_backend.Clear ();
 			}
@@ -1420,7 +1424,7 @@ namespace Docky.Interface
 			Painter.PaintNeeded += HandlePainterPaintNeeded;
 			
 			repaint_painter = true;
-			update_screen_regions = true;
+			UpdateScreenRegions ();
 			DragTracker.DragDisabled = true;
 			
 			SetTooltipVisibility ();
@@ -1442,7 +1446,7 @@ namespace Docky.Interface
 			Painter.PaintNeeded -= HandlePainterPaintNeeded;
 			
 			DragTracker.DragDisabled = false;
-			update_screen_regions = true;
+			UpdateScreenRegions ();
 			
 			Painter.Hidden ();
 			Painter = null;
@@ -1603,6 +1607,11 @@ namespace Docky.Interface
 		
 		Gdk.Rectangle DrawRegionForItemValue (AbstractDockItem item, DrawValue val)
 		{
+			return DrawRegionForItemValue (item, val, false);
+		}
+		
+		Gdk.Rectangle DrawRegionForItemValue (AbstractDockItem item, DrawValue val, bool hoverRegion)
+		{
 			int width = IconSize, height = IconSize;
 			
 			if (!item.Square) {
@@ -1617,6 +1626,18 @@ namespace Docky.Interface
 					height = tmp;
 				}
 			}
+			
+			if (hoverRegion)
+				if (Preferences.IsVertical)
+					return new Gdk.Rectangle ((int) (val.Center.X - (width * val.Zoom / 2)),
+						(int) (val.StaticCenter.Y - height / 2),
+						(int) (width * val.Zoom),
+						height);
+				else
+					return new Gdk.Rectangle ((int) (val.StaticCenter.X - width / 2),
+						(int) (val.Center.Y - (height * val.Zoom / 2)),
+						width,
+						(int) (height * val.Zoom));
 			
 			return new Gdk.Rectangle ((int) (val.Center.X - (width * val.Zoom / 2)),
 				(int) (val.Center.Y - (height * val.Zoom / 2)),
@@ -1828,7 +1849,7 @@ namespace Docky.Interface
 					break;
 				}
 				
-				Gdk.Rectangle hoverArea = DrawRegionForItemValue (adi, val);
+				Gdk.Rectangle hoverArea = DrawRegionForItemValue (adi, val, true);
 				
 				if (Preferences.IsVertical) {
 					hoverArea.Inflate ((int) (ZoomedDockHeight * .3), ItemWidthBuffer / 2);
@@ -1874,6 +1895,15 @@ namespace Docky.Interface
 			}
 			
 			update_screen_regions = false;
+		}
+		
+		void UpdateScreenRegions ()
+		{
+			GLib.Timeout.Add (10 + (uint) Math.Max (BaseAnimationTime.TotalMilliseconds, SlideTime.TotalMilliseconds), delegate {
+				update_screen_regions = true;
+				AnimatedDraw ();
+				return false;
+			});
 		}
 		
 		void UpdateMaxIconSize ()
@@ -2247,12 +2277,11 @@ namespace Docky.Interface
 				double slideProgress = (render_time - item.StateSetTime (ItemState.Move)).TotalMilliseconds / SlideTime.TotalMilliseconds;
 
 				double move = (item.Position - item.LastPosition) * (IconSize * val.Zoom + ItemWidthBuffer) 
-					//draw the anitmation backwards cause item has already moved
+					//draw the animation backwards cause item has already moved
 					* (1 - slideProgress);
                 
-				if (Position == DockPosition.Top || Position == DockPosition.Left) {
+				if (Position == DockPosition.Top || Position == DockPosition.Left)
 					move *= -1;
-				}
 				
 				val = val.MoveRight (Position, move);
 			}
@@ -2282,17 +2311,15 @@ namespace Docky.Interface
 				}
 			}
 			
-			if (HoveredAcceptsDrop && HoveredItem == item && ExternalDragActive) {
+			if (HoveredAcceptsDrop && HoveredItem == item && ExternalDragActive)
 				lighten += .4;
-			} else if (!ZoomEnabled && !Menu.Visible && HoveredItem == item && !ExternalDragActive && !InternalDragActive && !ConfigurationMode) {
+			else if (!ZoomEnabled && !Menu.Visible && HoveredItem == item && !ExternalDragActive && !InternalDragActive && !ConfigurationMode)
 				lighten += .2;
-			}
 			
-			if ((item.State & ItemState.Wait) != 0) {
+			if ((item.State & ItemState.Wait) != 0)
 				darken += .5;
-			} else if (Menu.Visible && HoveredItem == item) {
+			else if (Menu.Visible && HoveredItem == item)
 				darken += .4;
-			}
 			
 			if (Gdk.Screen.Default.IsComposited &&
 				(item.State & ItemState.Urgent) == ItemState.Urgent && 
@@ -2309,7 +2336,7 @@ namespace Docky.Interface
 			
 			double renderZoom = 1, renderRotation = 0;
 			
-			if (item.RotateWithDock) {
+			if (item.RotateWithDock)
 				switch (Position) {
 				case DockPosition.Top:
 					renderRotation = Math.PI;
@@ -2325,7 +2352,6 @@ namespace Docky.Interface
 					renderRotation = 0;
 					break;
 				}
-			}
 
 			if (item.Zoom && !(item.ScalableRendering && center.Zoom == 1)) {
 				icon = item.IconSurface (surface, ZoomedIconSize, IconSize, VisibleDockHeight);
@@ -2369,19 +2395,14 @@ namespace Docky.Interface
 			if ((item.State & ItemState.Active) == ItemState.Active && !ThreeDimensional) {
 				Gdk.Rectangle area;
 				
-				if (Preferences.IsVertical) {
+				if (Preferences.IsVertical)
 					area = new Gdk.Rectangle (
-						dockArea.X, 
-						(int) (val.Center.Y - (IconSize * val.Zoom) / 2) - ItemWidthBuffer / 2,
-						DockHeight,
-						(int) (IconSize * val.Zoom) + ItemWidthBuffer);
-				} else {
+						dockArea.X, (int) (val.Center.Y - (IconSize * val.Zoom) / 2) - ItemWidthBuffer / 2,
+						DockHeight, (int) (IconSize * val.Zoom) + ItemWidthBuffer);
+				else
 					area = new Gdk.Rectangle (
-						(int) (val.Center.X - (IconSize * val.Zoom) / 2) - ItemWidthBuffer / 2,
-						dockArea.Y, 
-						(int) (IconSize * val.Zoom) + ItemWidthBuffer,
-						DockHeight);
-				}
+						(int) (val.Center.X - (IconSize * val.Zoom) / 2) - ItemWidthBuffer / 2, dockArea.Y, 
+						(int) (IconSize * val.Zoom) + ItemWidthBuffer, DockHeight);
 				
 				surface.Context.Operator = Operator.DestOver;
 				DrawActiveIndicator (surface, area, item.AverageColor (), opacity);
@@ -2406,12 +2427,7 @@ namespace Docky.Interface
 				
 				DrawValue loc = val.MoveIn (Position, 1 - IconSize * val.Zoom / 2 - DockHeightBuffer);
 				
-				DockySurface indicator;
-				if ((item.State & ItemState.Urgent) == ItemState.Urgent) {
-					indicator = urgent_indicator_buffer;
-				} else {
-					indicator = normal_indicator_buffer;
-				}
+				DockySurface indicator = (item.State & ItemState.Urgent) == ItemState.Urgent ? urgent_indicator_buffer : normal_indicator_buffer;
 				
 				if (item.Indicator == ActivityIndicator.Single || !Preferences.IndicateMultipleWindows) {
 					indicator.ShowWithOptions (surface, loc.Center, 1, 0, 1);
@@ -2785,8 +2801,10 @@ namespace Docky.Interface
 			Wnck.Screen.Default.WindowOpened    -= HandleWindowOpened;
 			
 			// clear out our separators
-			foreach (AbstractDockItem adi in Items.Where (adi => adi is INonPersistedItem))
+			foreach (AbstractDockItem adi in Items.Where (adi => adi is INonPersistedItem && adi != DockyItem)) {
+				DrawValues.Remove (adi);
 				adi.Dispose ();
+			}
 			
 			ResetBuffers ();
 			

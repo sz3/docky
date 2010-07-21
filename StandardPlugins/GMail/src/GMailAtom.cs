@@ -217,8 +217,13 @@ namespace GMail
 						
 						UnreadMessage message = new UnreadMessage ();
 						message.Topic = HttpUtility.HtmlDecode (item.SelectSingleNode ("atom:title", nsmgr).InnerText);
-						message.FromName = HttpUtility.HtmlDecode (item.SelectSingleNode ("atom:author/atom:name", nsmgr).InnerText);
-						message.FromEmail = item.SelectSingleNode ("atom:author/atom:email", nsmgr).InnerText;
+						// apparently random mailing lists can have no author information - bug 595530
+						XmlNode from = item.SelectSingleNode ("atom:author/atom:name", nsmgr);
+						if (from != null)
+							message.FromName = HttpUtility.HtmlDecode (from.InnerText);
+						from = item.SelectSingleNode ("atom:author/atom:email", nsmgr);
+						if (from != null)
+							message.FromEmail = from.InnerText;
 						message.From = message.FromName + " <" + message.FromEmail + ">";
 						try {
 							message.SendDate = DateTime.Parse (item.SelectSingleNode ("atom:modified", nsmgr).InnerText);
@@ -254,11 +259,13 @@ namespace GMail
 					Gtk.Application.Invoke (delegate { OnGMailChecked (); });
 				} catch (ThreadAbortException) {
 					Log<GMailAtom>.Debug ("Stoping Atom thread");
-				} catch (NullReferenceException) {
+				} catch (NullReferenceException e) {
+					Log<GMailAtom>.Debug (e.ToString ());
 					Gtk.Application.Invoke (delegate {
 						OnGMailFailed (Catalog.GetString ("Feed Error"));
 					});
-				} catch (XmlException) {
+				} catch (XmlException e) {
+					Log<GMailAtom>.Debug (e.ToString ());
 					Gtk.Application.Invoke (delegate {
 						OnGMailFailed (Catalog.GetString ("Feed Error"));
 					});
