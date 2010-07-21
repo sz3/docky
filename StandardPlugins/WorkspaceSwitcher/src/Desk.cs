@@ -74,26 +74,41 @@ namespace WorkspaceSwitcher
 		{
 			Desk upperleft, next;
 			upperleft = this;
-			while ((next = upperleft.GetNeighbor (Wnck.MotionDirection.Up)) != null)
-				upperleft = next;
-			while ((next = upperleft.GetNeighbor (Wnck.MotionDirection.Left)) != null)
-				upperleft = next;
+			bool found = false;
+			while (!found) {
+				found = true;
+				if ((next = upperleft.GetNeighbor (Wnck.MotionDirection.Up)) != null) {
+					upperleft = next;
+					found = false;
+				}
+				if ((next = upperleft.GetNeighbor (Wnck.MotionDirection.Left)) != null) {
+					upperleft = next;
+					found = false;
+				}
+			}
 			return upperleft;
 		}
 		
 		Gdk.Point GetDeskGridSize ()
 		{
-			int cols = 1;
-			int rows = 1;
-			Desk bottomright, next;
-			next = GetUpperLeftDesk ();
-			while ((bottomright = next.GetNeighbor (Wnck.MotionDirection.Down)) != null) {
-				next = bottomright;
+			Desk upperleft, temp, next;
+			int rows = 1, cols = 1;
+			upperleft = GetUpperLeftDesk ();
+			if ((temp = upperleft.GetWrapNeighbor (MotionDirection.Up)) != null) {
+				next = temp;
 				rows++;
+				while ((temp = next.GetNeighbor (MotionDirection.Up)) != null && temp != upperleft) {
+					next = temp;
+					rows++;
+				}
 			}
-			while ((bottomright = next.GetNeighbor (Wnck.MotionDirection.Right)) != null) {
-				next = bottomright;
+			if ((temp = upperleft.GetWrapNeighbor (MotionDirection.Left)) != null) {
+				next = temp;
 				cols++;
+				while ((temp = next.GetNeighbor (MotionDirection.Left)) != null && temp != upperleft) {
+					next = temp;
+					cols++;
+				}
 			}
 			return new Gdk.Point (cols, rows);
 		}
@@ -115,7 +130,7 @@ namespace WorkspaceSwitcher
 					grid [x, y] = desk;
 				}
 				if (gridsize.Y - 1 > y) {
-					desk = grid [0, y].GetNeighbor (Wnck.MotionDirection.Down);
+					desk = (grid [0, y] != null ? grid [0, y].GetNeighbor (Wnck.MotionDirection.Down) : null);
 					grid [0, y+1] = desk;
 				}
 			}

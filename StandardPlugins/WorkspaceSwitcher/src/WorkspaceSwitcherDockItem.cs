@@ -294,21 +294,23 @@ namespace WorkspaceSwitcher
 			
 			for (int x = 0; x < cols; x++) {
 				for (int y = 0; y < rows; y++) {
-					Cairo.Rectangle area = DeskAreaOnIcon (surface.Width, surface.Height, x, y);
-					cr.Rectangle (area.X, area.Y, area.Width, area.Height);
-					cr.Pattern = lg;
-					cr.FillPreserve ();
-					if (DeskGrid[x,y].IsActive) {
-						cr.Color = selection_color;
-						cr.Fill ();
-						if (area.Width >= 16 && area.Height >= 16) {
-							using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("desktop", (int) area.Width, (int) area.Height)) {
-								Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, (int) area.X + (area.Width - pbuf.Width) / 2, (int) area.Y + (area.Height - pbuf.Height) / 2);
-								cr.Paint ();
+					if (DeskGrid[x,y] != null) {
+						Cairo.Rectangle area = DeskAreaOnIcon (surface.Width, surface.Height, x, y);
+						cr.Rectangle (area.X, area.Y, area.Width, area.Height);
+						cr.Pattern = lg;
+						cr.FillPreserve ();
+						if (DeskGrid[x,y].IsActive) {
+							cr.Color = selection_color;
+							cr.Fill ();
+							if (area.Width >= 16 && area.Height >= 16) {
+								using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon ("desktop", (int) area.Width, (int) area.Height)) {
+									Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, (int) area.X + (area.Width - pbuf.Width) / 2, (int) area.Y + (area.Height - pbuf.Height) / 2);
+									cr.Paint ();
+								}
 							}
 						}
+						cr.NewPath ();
 					}
-					cr.NewPath ();
 				}
 			}
 			
@@ -316,8 +318,10 @@ namespace WorkspaceSwitcher
 			
 			for (int x = 0; x < cols; x++) {
 				for (int y = 0; y < rows; y++) {
-					Cairo.Rectangle area = DeskAreaOnIcon (surface.Width, surface.Height, x, y);
-					cr.Rectangle (area.X, area.Y, area.Width, area.Height);
+					if (DeskGrid[x,y] != null) {
+						Cairo.Rectangle area = DeskAreaOnIcon (surface.Width, surface.Height, x, y);
+						cr.Rectangle (area.X, area.Y, area.Width, area.Height);
+					}
 				}
 			}
 			
