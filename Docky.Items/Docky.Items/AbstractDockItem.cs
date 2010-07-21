@@ -55,6 +55,11 @@ namespace Docky.Items
 		ItemState state;
 		Dictionary<ItemState, DateTime> state_times;
 		
+		const int MaxMessages = 3;
+		
+		string[] messages = new string[MaxMessages];
+		string[] messageIcons = new string[MaxMessages];
+		
 		public event EventHandler HoverTextChanged;
 		public event EventHandler<PaintNeededEventArgs> PaintNeeded;
 		public event EventHandler<PainterRequestEventArgs> PainterRequest;
@@ -226,6 +231,29 @@ namespace Docky.Items
 		/// 
 		/// </summary>
 		public Docky.Menus.MenuList RemoteMenuItems { get; private set; }
+		
+		public void SetMessage (string message)
+		{
+			if (message.IndexOf (";;") == -1) {
+				messages [0] = message;
+				QueueRedraw ();
+				return;
+			}
+			
+			string[] parts = message.Split (new [] {";;"}, StringSplitOptions.RemoveEmptyEntries);
+			int slot = 0;
+			Int32.TryParse (parts [0], out slot);
+			if (parts.Count () > 1)
+				messages [slot] = parts [1];
+			else
+				messages [slot] = "";
+			if (parts.Count () == 3)
+				messageIcons [slot] = parts [2];
+			else
+				messageIcons [slot] = "";
+			
+			QueueRedraw ();
+		}
 		
 		public const int HoverTextHeight = 26;
 		
@@ -635,16 +663,19 @@ namespace Docky.Items
 		
 		void PaintMessagesSurface (DockySurface surface)
 		{
-			//PaintMessage (surface, "down", "132kB", 2);
-			//PaintMessage (surface, "up", "12kB", 3);
+			int pos = 0;
+			for (int i = 0; i < MaxMessages; i++)
+				if (!string.IsNullOrEmpty (messages [i]))
+					PaintMessage (surface, messageIcons [i], messages [i], MaxMessages - 1 - pos++);
 		}
 		
 		void PaintMessage (DockySurface surface, string icon, string message, int slot)
 		{
 			surface.Context.LineWidth = 0.5;
 			
-			double yOffset = slot * surface.Height / 4.0;
-			surface.Context.RoundedRectangle (2, yOffset, surface.Width - 4, surface.Height / 4.0 - 2, 2.0);
+			double slotHeight = surface.Height / (double) MaxMessages;
+			double yOffset = slot * slotHeight;
+			surface.Context.RoundedRectangle (2, yOffset, surface.Width - 4, slotHeight - 2, 2.0);
 			surface.Context.Color = new Cairo.Color (1, 1, 1, 0.9);
 			surface.Context.StrokePreserve ();
 			surface.Context.Color = new Cairo.Color (0, 0, 0, 0.7);
@@ -652,7 +683,7 @@ namespace Docky.Items
 			
 			int iconSize = 0;
 			if (!string.IsNullOrEmpty (icon)) {
-				iconSize = surface.Height / 4 - 4;
+				iconSize = (int) slotHeight - 4;
 				
 				using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (icon, iconSize, iconSize)) {
 					Gdk.CairoHelper.SetSourcePixbuf (surface.Context, 
@@ -669,13 +700,13 @@ namespace Docky.Items
 				layout.Ellipsize = Pango.EllipsizeMode.None;
 				layout.FontDescription = new Gtk.Style ().FontDescription;
 				layout.FontDescription.Weight = Pango.Weight.Normal;
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (surface.Height / 4 - 6);
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) slotHeight - 6);
 				layout.SetText (message);
 				
 				Pango.Rectangle inkRect, logicalRect;
 				layout.GetPixelExtents (out inkRect, out logicalRect);
 				
-				surface.Context.MoveTo (surface.Width - 4 - logicalRect.Width, yOffset + (surface.Height / 4.0 - 2 - logicalRect.Height) / 2);
+				surface.Context.MoveTo (surface.Width - 4 - logicalRect.Width, yOffset + (slotHeight - 2 - logicalRect.Height) / 2);
 				
 				Pango.CairoHelper.LayoutPath (surface.Context, layout);
 				surface.Context.LineWidth = 2;

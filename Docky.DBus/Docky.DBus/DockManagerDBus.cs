@@ -35,7 +35,7 @@ namespace Docky.DBus
 		public string[] GetCapabilities ()
 		{
 			return new string[] {
-				//"dock-item-message",
+				"dock-item-message",
 				"dock-item-tooltip",
 				"dock-item-badge",
 				"dock-item-progress",
