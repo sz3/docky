@@ -42,6 +42,8 @@ namespace Docky.Items
 			get { return !disposing && true; }
 		}
 		
+		public bool IsOnVerticalDock { get; set; }
+
 		IEnumerable<AbstractDockItem> items;
 		public IEnumerable<AbstractDockItem> Items {
 			get { return items; }
@@ -66,10 +68,11 @@ namespace Docky.Items
 				OnItemsChanged (added, removed);
 			}
 		}
-		
+
 		protected AbstractDockItemProvider ()
 		{
 			items = Enumerable.Empty<AbstractDockItem> ();
+			IsOnVerticalDock = false;
 		}
 		
 		public bool CanAcceptDrop (string uri)
