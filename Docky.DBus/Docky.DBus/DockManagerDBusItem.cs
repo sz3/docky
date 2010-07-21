@@ -221,6 +221,10 @@ namespace Docky.DBus
 					owner.SetRemoteText ((string) dict [key]);
 				} else if (key == "badge") {
 					owner.SetRemoteBadgeText ((string) dict [key]);
+				} else if (key == "progress") {
+					owner.Progress = (double) dict [key];
+				} else if (key == "message") {
+					owner.SetMessage ((string) dict [key]);
 				} else if (key == "icon-file") {
 					if (owner is IconDockItem)
 						(owner as IconDockItem).SetRemoteIcon ((string) dict [key]);
