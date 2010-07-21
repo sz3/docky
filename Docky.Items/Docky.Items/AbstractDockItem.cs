@@ -236,7 +236,6 @@ namespace Docky.Items
 		public AbstractDockItem ()
 		{
 			ScalableRendering = true;
-			Random rnd = new Random ();
 			Progress = 0;
 			BadgeText = "";
 			icon_buffers = new DockySurface[2];
