@@ -33,6 +33,7 @@ namespace WorkspaceSwitcher
 		public Gdk.Rectangle Area { get; private set; }
 
 		Dictionary<Wnck.MotionDirection, Desk> neighbors;
+		Dictionary<Wnck.MotionDirection, Desk> wrapneighbors;
 		
 		static Wnck.MotionDirection OppositeDirection (Wnck.MotionDirection direction)
 		{
@@ -123,12 +124,37 @@ namespace WorkspaceSwitcher
 		{
 			Desk oldneighbor = GetNeighbor (direction);
 			if (oldneighbor != null && oldneighbor != newneighbor) {
-				oldneighbor.SetNeighbor (OppositeDirection (direction), null);
 				neighbors.Remove (direction);
+				if (oldneighbor.GetNeighbor (OppositeDirection (direction)) == this)
+					oldneighbor.SetNeighbor (OppositeDirection (direction), null);
 			}
 			if (oldneighbor != newneighbor && newneighbor != null) {
 				neighbors.Add (direction, newneighbor);
+				
+				if (GetNeighbor (OppositeDirection (direction)) == null) {
+					Desk oldwrapneighbor = newneighbor.GetWrapNeighbor (OppositeDirection (direction));
+					if (oldwrapneighbor != null) {
+						SetWrapNeighbor (OppositeDirection (direction), oldwrapneighbor);
+					} else {
+						SetWrapNeighbor (OppositeDirection (direction), newneighbor);
+					}
+				}
+				
 				newneighbor.SetNeighbor (OppositeDirection (direction), this);
+			}
+		}
+
+		public void SetWrapNeighbor (Wnck.MotionDirection direction, Desk newwrapneighbor)
+		{
+			Desk oldwrapneighbor = GetWrapNeighbor (direction);
+			if (oldwrapneighbor != null && oldwrapneighbor != newwrapneighbor) {
+				wrapneighbors.Remove (direction);
+				if (oldwrapneighbor.GetWrapNeighbor (OppositeDirection (direction)) == this)
+					oldwrapneighbor.SetWrapNeighbor (OppositeDirection (direction), null);
+			}
+			if (oldwrapneighbor != newwrapneighbor && newwrapneighbor != null) {
+				wrapneighbors.Add (direction, newwrapneighbor);
+				newwrapneighbor.SetWrapNeighbor (OppositeDirection (direction), this);
 			}
 		}
 		
@@ -136,6 +162,13 @@ namespace WorkspaceSwitcher
 		{
 			Desk desk;
 			neighbors.TryGetValue (direction, out desk);
+			return desk;
+		}
+
+		public Desk GetWrapNeighbor (Wnck.MotionDirection direction)
+		{
+			Desk desk;
+			wrapneighbors.TryGetValue (direction, out desk);
 			return desk;
 		}
 		
@@ -146,6 +179,7 @@ namespace WorkspaceSwitcher
 			Name = name;
 			Number = number;
 			neighbors = new Dictionary<MotionDirection, Desk> ();
+			wrapneighbors = new Dictionary<MotionDirection, Desk> ();
 		}
 		
 		public Desk (Workspace parent) : this (parent.Name, parent.Number, new Gdk.Rectangle (0, 0, parent.Width, parent.Height), parent)
@@ -155,6 +189,7 @@ namespace WorkspaceSwitcher
 		public void Dispose ()
 		{
 			neighbors.Clear ();
+			wrapneighbors.Clear ();
 		}
 	}
 }

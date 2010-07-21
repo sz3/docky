@@ -38,6 +38,8 @@ namespace WorkspaceSwitcher
 {
 	public class WorkspaceSwitcherDockItem : IconDockItem
 	{
+		static IPreferences prefs = DockServices.Preferences.Get<WorkspaceSwitcherDockItem> ();
+		
 		public event EventHandler DesksChanged;
 		
 		List<Desk> Desks = new List<Desk> ();
@@ -70,6 +72,15 @@ namespace WorkspaceSwitcher
 			get { return false; }
 		}
 		
+		bool? wrapped_scrolling;
+		bool WrappedScrolling {
+			get {
+				if (!wrapped_scrolling.HasValue)
+					wrapped_scrolling = prefs.Get<bool> ("WrappedScrolling", false);
+				return wrapped_scrolling.Value;
+			}
+		}
+				
 		public WorkspaceSwitcherDockItem ()
 		{
 			HoverText = Catalog.GetString ("Switch Desks");
@@ -152,6 +163,13 @@ namespace WorkspaceSwitcher
 			if (nextdesk != null) {
 				nextdesk.Activate ();
 				return true;
+			} else if (WrappedScrolling) {
+				// Here we handle how this should really work				
+				nextdesk = activedesk.GetWrapNeighbor (direction);
+				if (nextdesk != null) {
+					nextdesk.Activate ();
+					return true;
+				}
 			}
 			return false;
 		}
