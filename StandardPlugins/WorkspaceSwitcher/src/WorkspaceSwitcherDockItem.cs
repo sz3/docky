@@ -164,8 +164,29 @@ namespace WorkspaceSwitcher
 				nextdesk.Activate ();
 				return true;
 			} else if (WrappedScrolling) {
-				// Here we handle how this should really work				
-				nextdesk = activedesk.GetWrapNeighbor (direction);
+				// Walk through the columns or rows
+				switch (direction) {
+				case MotionDirection.Down:
+					nextdesk = activedesk.GetWrapNeighbor (MotionDirection.Down);
+					if (nextdesk != null)
+						nextdesk = nextdesk.GetNeighbor (MotionDirection.Right);
+					break;
+				case MotionDirection.Right:
+					nextdesk = activedesk.GetWrapNeighbor (MotionDirection.Right);
+					if (nextdesk != null)
+						nextdesk = nextdesk.GetNeighbor (MotionDirection.Down);
+					break;
+				case MotionDirection.Up:
+					nextdesk = activedesk.GetWrapNeighbor (MotionDirection.Up);
+					if (nextdesk != null)
+						nextdesk = nextdesk.GetNeighbor (MotionDirection.Left);
+					break;
+				case MotionDirection.Left:
+					nextdesk = activedesk.GetWrapNeighbor (MotionDirection.Left);
+					if (nextdesk != null)
+						nextdesk = nextdesk.GetNeighbor (MotionDirection.Up);
+					break;
+				}
 				if (nextdesk != null) {
 					nextdesk.Activate ();
 					return true;
