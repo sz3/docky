@@ -228,7 +228,7 @@ namespace Docky.Items
 		{
 			ScalableRendering = true;
 			Random rnd = new Random ();
-			Progress = rnd.Next (0, 100) / 100.0;
+			Progress = 0;
 			BadgeText = "";
 			icon_buffers = new DockySurface[2];
 			badgeColors = new Cairo.Color[2];
