@@ -150,7 +150,16 @@ namespace Docky.Items
 		/// <summary>
 		/// The progress (0 to 100) for the item.  If it is negative it should not be shown.
 		/// </summary>
-		public double Progress { get; set; }
+		double progress;
+		public double Progress {
+			get { return progress; }
+			set {
+				if (progress == value)
+					return;
+				progress = value;
+				QueueRedraw ();
+			}
+		}
 		
 		/// <summary>
 		/// The text displayed when an item is hovered
