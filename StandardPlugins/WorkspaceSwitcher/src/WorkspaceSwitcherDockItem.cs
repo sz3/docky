@@ -40,38 +40,6 @@ namespace WorkspaceSwitcher
 	{
 		static IPreferences prefs = DockServices.Preferences.Get<WorkspaceSwitcherDockItem> ();
 		
-		public event EventHandler DesksChanged;
-		
-		List<Desk> Desks = new List<Desk> ();
-		Desk[,] DeskGrid = null;
-		
-		bool UseRotatedDeskGrid {
-			get {
-				if (Owner == null || DeskGrid != null)
-					return false;
-
-				// True if the layout has only one column and multiple rows
-				return (!Owner.IsOnVerticalDock && DeskGrid.GetLength (0) == 1 && DeskGrid.GetLength (1) > 1)
-					|| (Owner.IsOnVerticalDock && DeskGrid.GetLength (0) > 1 && DeskGrid.GetLength (1) == 1);
-			}
-		}
-		
-		bool AreMultipleDesksAvailable {
-			get {
-				return Desks.Count () > 1;
-			}
-		}
-		
-		Desk ActiveDesk {
-			get {
-				return Desks.Find (d => d.IsActive);
-			}
-		}
-		
-		public override bool Square {
-			get { return false; }
-		}
-		
 		bool? wrapped_scrolling;
 		bool WrappedScrolling {
 			get {
@@ -81,6 +49,21 @@ namespace WorkspaceSwitcher
 			}
 		}
 				
+		public event EventHandler DesksChanged;
+		
+		List<Desk> Desks = new List<Desk> ();
+		Desk[,] DeskGrid = null;
+		
+		bool AreMultipleDesksAvailable {
+			get {
+				return Desks.Count () > 1;
+			}
+		}
+		
+		public override bool Square {
+			get { return false; }
+		}
+		
 		public WorkspaceSwitcherDockItem ()
 		{
 			HoverText = Catalog.GetString ("Switch Desks");
@@ -106,12 +89,10 @@ namespace WorkspaceSwitcher
 				return ClickAnimation.None;
 			
 			if (button == 1 && DeskGrid != null && DeskGrid.GetLength (0) > 0 && DeskGrid.GetLength (1) > 0) {
-				double dx = 1.0 / DeskGrid.GetLength (0);
-				double dy = 1.0 / DeskGrid.GetLength (1);
-				int col = (int) (xPercent / dx);
-				int row = (int) (yPercent / dy);
-
-				DeskGrid [col,row].Activate ();
+				int col = (int) (xPercent * DeskGrid.GetLength (0));
+				int row = (int) (yPercent * DeskGrid.GetLength (1));
+				if (DeskGrid [col,row] != null)
+					DeskGrid [col,row].Activate ();
 			}
 			
 			return ClickAnimation.None;
@@ -258,8 +239,9 @@ namespace WorkspaceSwitcher
 		
 		void HandleWnckScreenDefaultActiveWorkspaceChanged (object o, ActiveWorkspaceChangedArgs args)
 		{
-			if (ActiveDesk.Parent != args.PreviousWorkspace)
-				DeskGrid = ActiveDesk.GetDeskGridLayout ();
+			Desk activedesk = Desks.Find (desk => desk.IsActive);
+			if (activedesk != null && activedesk.Parent != args.PreviousWorkspace)
+				DeskGrid = activedesk.GetDeskGridLayout ();
 			UpdateItem ();
 			
 			QueueRedraw ();
