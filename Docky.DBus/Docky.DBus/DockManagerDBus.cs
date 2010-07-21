@@ -51,8 +51,8 @@ namespace Docky.DBus
 				"menu-item-container-title",
 				
 				"x-docky-uses-menu-confirmation",
-				"x-docky-messages-have-icons",
-				"x-docky-messages-have-slots",
+				"x-docky-message-has-icons",
+				"x-docky-message-has-slots",
 			};
 		}
 		
