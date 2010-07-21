@@ -35,7 +35,17 @@ namespace WorkspaceSwitcher
 		Dictionary<Wnck.MotionDirection, Desk> neighbors;
 		Dictionary<Wnck.MotionDirection, Desk> wrapneighbors;
 		
-		static Wnck.MotionDirection OppositeDirection (Wnck.MotionDirection direction)
+		public static Wnck.MotionDirection AlternateMovingDirection (Wnck.MotionDirection direction)
+		{
+			switch (direction) {
+			case MotionDirection.Down: return MotionDirection.Right;
+			case MotionDirection.Up: return MotionDirection.Left;
+			case MotionDirection.Left: return MotionDirection.Up;
+			case MotionDirection.Right: default: return MotionDirection.Down;
+			}
+		}
+
+		public static Wnck.MotionDirection OppositeDirection (Wnck.MotionDirection direction)
 		{
 			switch (direction) {
 			case MotionDirection.Down: return MotionDirection.Up;
@@ -73,8 +83,8 @@ namespace WorkspaceSwitcher
 		
 		Gdk.Point GetDeskGridSize ()
 		{
-			int cols = 1; 
-			int rows = 1; 
+			int cols = 1;
+			int rows = 1;
 			Desk bottomright, next;
 			next = GetUpperLeftDesk ();
 			while ((bottomright = next.GetNeighbor (Wnck.MotionDirection.Down)) != null) {

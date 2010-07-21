@@ -160,37 +160,16 @@ namespace WorkspaceSwitcher
 		{
 			Desk activedesk = Desks.Find (desk => desk.IsActive);
 			Desk nextdesk = activedesk.GetNeighbor (direction);
+			if (WrappedScrolling) {
+				// Walk through the columns/rows and jump between [1,1] and [n,m]
+				Desk tmp = activedesk.GetWrapNeighbor (direction);
+				if (tmp != null && (nextdesk = tmp.GetNeighbor (Desk.AlternateMovingDirection (direction))) == null)
+					if ((nextdesk = tmp.GetWrapNeighbor (Desk.AlternateMovingDirection (direction))) == null)
+						nextdesk = tmp;
+			}
 			if (nextdesk != null) {
 				nextdesk.Activate ();
 				return true;
-			} else if (WrappedScrolling) {
-				// Walk through the columns or rows
-				switch (direction) {
-				case MotionDirection.Down:
-					nextdesk = activedesk.GetWrapNeighbor (MotionDirection.Down);
-					if (nextdesk != null)
-						nextdesk = nextdesk.GetNeighbor (MotionDirection.Right);
-					break;
-				case MotionDirection.Right:
-					nextdesk = activedesk.GetWrapNeighbor (MotionDirection.Right);
-					if (nextdesk != null)
-						nextdesk = nextdesk.GetNeighbor (MotionDirection.Down);
-					break;
-				case MotionDirection.Up:
-					nextdesk = activedesk.GetWrapNeighbor (MotionDirection.Up);
-					if (nextdesk != null)
-						nextdesk = nextdesk.GetNeighbor (MotionDirection.Left);
-					break;
-				case MotionDirection.Left:
-					nextdesk = activedesk.GetWrapNeighbor (MotionDirection.Left);
-					if (nextdesk != null)
-						nextdesk = nextdesk.GetNeighbor (MotionDirection.Up);
-					break;
-				}
-				if (nextdesk != null) {
-					nextdesk.Activate ();
-					return true;
-				}
 			}
 			return false;
 		}
