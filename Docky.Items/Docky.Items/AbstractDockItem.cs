@@ -682,7 +682,7 @@ namespace Docky.Items
 		
 		void PaintProgressSurface (DockySurface surface)
 		{
-			if (Progress < 0)
+			if (Progress <= 0)
 				return;
 			
 			double padding = 2.0;
