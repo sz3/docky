@@ -15,15 +15,10 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
 
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 
 using Mono.Unix;
 
-using GConf;
 using GLib;
 
 using Docky.Items;
@@ -34,6 +29,14 @@ namespace Trash
 {
 	public class TrashDockItem : IconDockItem
 	{
+		
+		IPreferences trashPrefs = DockServices.Preferences.Get ("/apps/nautilus/preferences");
+		bool ConfirmTrashDelete {
+			get {
+				return trashPrefs.Get<bool> ("confirm_trash", true);
+			}
+		}
+		
 		uint ItemsInTrash {
 			get {
 				return OwnedFile.QueryInfo<uint> ("trash::item-count");
@@ -212,13 +215,7 @@ namespace Trash
 		
 		void EmptyTrash ()
 		{
-			bool confirm = true;
-			
-			try {
-				confirm = (bool) new Client ().Get ("/apps/nautilus/preferences/confirm_trash");
-			} catch {}
-			
-			if (confirm) {
+			if (ConfirmTrashDelete) {
 				Gtk.MessageDialog md = new Gtk.MessageDialog (null, 
 						  0,
 						  Gtk.MessageType.Warning, 
