@@ -36,35 +36,31 @@ namespace Docky.Items
 	{
 		static IPreferences prefs = DockServices.Preferences.Get <ColoredIconDockItem> ();
 		
-		string Key {
-			get {
-				return prefs.SanitizeKey (UniqueID ());
-			}
-		}
-		
+		int? shift;
 		public int HueShift {
 			get {
-				return prefs.Get<int> (Key, 0);
+				if (!shift.HasValue)
+					HueShift = prefs.Get<int> (prefs.SanitizeKey (UniqueID ()), 0);
+				return shift.Value;
 			}
-			set {
-				prefs.Set<int> (Key, value);
+			protected set {
+				if (shift.HasValue && shift.Value == value)
+					return;
+				shift = value;
+				prefs.Set<int> (prefs.SanitizeKey (UniqueID ()), value);
+				
+				OnIconUpdated ();
+				QueueRedraw ();
 			}
 		}
 		
 		public ColoredIconDockItem ()
 		{
-			prefs.Changed += delegate(object sender, PreferencesChangedEventArgs e) {
-				if (e.Key == Key) {
-					OnIconUpdated ();
-					QueueRedraw ();
-				}
-			};
 		}
 				
 		protected override Gdk.Pixbuf ProcessPixbuf (Gdk.Pixbuf pbuf)
 		{
-			int shift = HueShift;
-			return pbuf.AddHueShift (shift >= 0 ? shift : -shift);
+			return pbuf.AddHueShift (HueShift >= 0 ? HueShift : -HueShift);
 		}
 		
 		protected override MenuList OnGetMenuItems ()
