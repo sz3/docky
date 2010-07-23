@@ -28,11 +28,7 @@ namespace Docky.Services
 		bool SetSecure<T> (string name, T val);
 		
 		string SanitizeKey (string key);
-		
-		/*
-		void AddNotify (string path, GConf.NotifyEventHandler handler);
-		void RemoveNotify (string path, GConf.NotifyEventHandler handler);
-		*/
+
 		event EventHandler<PreferencesChangedEventArgs> Changed;
 	}
 }
