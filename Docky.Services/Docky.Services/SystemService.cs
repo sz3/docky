@@ -42,11 +42,10 @@ namespace Docky.Services
 			InitializeNetwork ();
 		}
 		
-		IPreferences GConf = DockServices.Preferences.Get (PROXY);
+		IPreferences GConf = DockServices.Preferences.Get ("/system/http_proxy");
 		
 		#region Network
 		
-		const string PROXY = "/system/http_proxy";
 		const string PROXY_USE_PROXY = "use_http_proxy";
 		const string PROXY_USE_AUTH = "use_authentication";
 		const string PROXY_HOST = "host";
@@ -138,12 +137,7 @@ namespace Docky.Services
 				return @"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2) Gecko/20100308 Ubuntu/10.04 (lucid) Firefox/3.6";
 			}
 		}
-		
-		void ProxySettingsChanged (object sender, GConf.NotifyEventArgs args)
-		{
-			Proxy = GetWebProxy ();
-		}
-		
+
 		public bool UseProxy {
 			get {
 				return GConf.Get<bool> (PROXY_USE_PROXY, false);
