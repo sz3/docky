@@ -42,23 +42,18 @@ namespace Docky.Services
 			InitializeNetwork ();
 		}
 		
-		internal void Dispose ()
-		{
-			//GConf.RemoveNotify (PROXY, ProxySettingsChanged);
-		}
-		
-		IPreferences GConf = DockServices.Preferences.Get <SystemService> ();
+		IPreferences GConf = DockServices.Preferences.Get (PROXY);
 		
 		#region Network
 		
 		const string PROXY = "/system/http_proxy";
-		const string PROXY_USE_PROXY = PROXY + "/" + "use_http_proxy";
-		const string PROXY_USE_AUTH = PROXY + "/" + "use_authentication";
-		const string PROXY_HOST = PROXY + "/" + "host";
-		const string PROXY_PORT = PROXY + "/" + "port";
-		const string PROXY_USER = PROXY + "/" + "authentication_user";
-		const string PROXY_PASSWORD = PROXY + "/" + "authentication_password";
-		const string PROXY_BYPASS_LIST = PROXY + "/" + "ignore_hosts";
+		const string PROXY_USE_PROXY = "use_http_proxy";
+		const string PROXY_USE_AUTH = "use_authentication";
+		const string PROXY_HOST = "host";
+		const string PROXY_PORT = "port";
+		const string PROXY_USER = "authentication_user";
+		const string PROXY_PASSWORD = "authentication_password";
+		const string PROXY_BYPASS_LIST = "ignore_hosts";
 		
 		void InitializeNetwork ()
 		{
@@ -76,7 +71,22 @@ namespace Docky.Services
 				Log<SystemService>.Info (e.StackTrace);
 			}
 			
-			//GConf.AddNotify (PROXY, ProxySettingsChanged);
+			// watch for changes on any of the proxy keys. If they change, reload the proxy
+			GConf.Changed += delegate(object sender, PreferencesChangedEventArgs e) {
+				switch (e.Key) {
+				case PROXY_HOST:
+				case PROXY_USER:
+				case PROXY_PASSWORD:
+				case PROXY_PORT:
+				case PROXY_USE_AUTH:
+				case PROXY_BYPASS_LIST:
+				case PROXY_USE_PROXY:
+					Proxy = GetWebProxy ();
+					break;
+				}
+				Proxy = GetWebProxy ();
+			};
+			
 			Proxy = GetWebProxy ();
 		}
 		
