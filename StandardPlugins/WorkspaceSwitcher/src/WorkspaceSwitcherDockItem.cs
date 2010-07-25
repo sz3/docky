@@ -264,9 +264,9 @@ namespace WorkspaceSwitcher
 			int height = size, width = size;
 			
 			if (Owner != null && Owner.IsOnVerticalDock)
-				height = Math.Min ((int) (IconSize * 2.5), Math.Max (size, (int) (size * DeskGrid.GetLength (1) * 0.5)));
+				height = Math.Min ((int) (size * 2.5), Math.Max (size, (int) (size * DeskGrid.GetLength (1) * 0.5)));
 			else
-				width = Math.Min ((int) (IconSize * 2.5), Math.Max (size, (int) (size * DeskGrid.GetLength (0) * 0.5)));
+				width = Math.Min ((int) (size * 2.5), Math.Max (size, (int) (size * DeskGrid.GetLength (0) * 0.5)));
 			
 			return new DockySurface (width, height, model);
 		}		
