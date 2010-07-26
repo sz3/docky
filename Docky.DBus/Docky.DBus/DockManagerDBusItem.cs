@@ -140,7 +140,7 @@ namespace Docky.DBus
 			
 			items ["DesktopFile"] = DesktopFile;
 			items ["Uri"] = Uri;
-			items ["PIDs"] = PIDS;
+			items ["PIDs"] = PIDs;
 			
 			return items;
 		}

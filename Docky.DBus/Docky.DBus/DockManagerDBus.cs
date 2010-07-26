@@ -53,6 +53,7 @@ namespace Docky.DBus
 				"x-docky-uses-menu-confirmation",
 				"x-docky-message-has-icons",
 				"x-docky-message-has-slots",
+				"x-docky-get-item-pids",
 			};
 		}
 		
