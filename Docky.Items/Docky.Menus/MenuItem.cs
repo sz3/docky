@@ -125,7 +125,7 @@ namespace Docky.Menus
 			}
 		}
 		
-		public uint ID { get; private set; }
+		public long TimeStamp { get; private set; }
 		
 		public void SendClick ()
 		{
@@ -147,7 +147,7 @@ namespace Docky.Menus
 			this.icon = icon;
 			Text = text;
 			this.disabled = disabled;
-			this.ID = (uint) (DateTime.Now - DockyEpoch).TotalMilliseconds;
+			this.TimeStamp = (DateTime.Now - DockyEpoch).Ticks;
 		}
 		
 		public MenuItem (string text, string icon, EventHandler onClicked) : this(text, icon)

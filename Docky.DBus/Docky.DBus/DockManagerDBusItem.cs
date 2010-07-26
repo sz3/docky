@@ -48,10 +48,7 @@ namespace Docky.DBus
 		uint timer;
 		Dictionary<uint, RemoteMenuEntry> items = new Dictionary<uint, RemoteMenuEntry> ();
 		Dictionary<uint, DateTime> update_time = new Dictionary<uint, DateTime> ();
-		
-		// date of the docky rev1 on launchpad, what we'll call the DockyEpoch
-		static DateTime DockyEpoch = new DateTime (2009, 9, 1, 0, 37, 37);
-		
+
 		List<uint> known_ids = new List<uint> ();
 		
 		AbstractDockItem owner;
@@ -99,7 +96,14 @@ namespace Docky.DBus
 		
 		uint GetID ()
 		{
-			uint number = (uint) (DateTime.Now - DockyEpoch).TotalMilliseconds;
+			Random rand = new Random ();
+			
+			uint number;
+			
+			do {
+				//FIXME should we ever get 100,000 items in here, I hope we crash, though we will likely get an infinite loop
+				number = (uint) rand.Next (0, 100000);
+			} while (known_ids.BinarySearch (number) >= 0);
 			
 			known_ids.Add (number);
 			known_ids.Sort ();
@@ -172,15 +176,15 @@ namespace Docky.DBus
 			} else {
 				string label = "";
 				if (dict.ContainsKey ("label"))
-					label = (string) dict ["label"];
+					label = (string) dict["label"];
 				
 				string iconName = "";
 				if (dict.ContainsKey ("icon-name"))
-					iconName = (string) dict ["icon-name"];
+					iconName = (string) dict["icon-name"];
 				
 				string iconFile = "";
 				if (dict.ContainsKey ("icon-file"))
-					iconFile = (string) dict ["icon-file"];
+					iconFile = (string) dict["icon-file"];
 				
 				RemoteMenuEntry rem;
 				if (iconFile.Length > 0)
@@ -197,6 +201,7 @@ namespace Docky.DBus
 		
 		public void RemoveMenuItem (uint item)
 		{
+			Console.WriteLine ("Asking to remove: {0}", item);
 			if (items.ContainsKey (item)) {
 				RemoteMenuEntry entry = items[item];
 				entry.Clicked -= HandleActivated;
@@ -279,7 +284,7 @@ namespace Docky.DBus
 					break;
 				}
 				
-				foreach (MenuItem item in itemGroup.OrderBy (i => i.ID)) {
+				foreach (MenuItem item in itemGroup.OrderBy (i => i.TimeStamp)) {
 					owner.RemoteMenuItems[container].Add (item);
 				}
 				_container++;
