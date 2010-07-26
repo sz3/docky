@@ -34,6 +34,9 @@ namespace Docky.Menus
 		public event EventHandler IconChanged;
 		public event EventHandler Clicked;
 		
+		// date of the docky rev1 on launchpad, what we'll call the DockyEpoch
+		static DateTime DockyEpoch = new DateTime (2009, 9, 1, 0, 37, 37);
+		
 		public bool Bold { get; set;}
 		
 		static bool defaultShowIcons;
@@ -122,6 +125,8 @@ namespace Docky.Menus
 			}
 		}
 		
+		public uint ID { get; private set; }
+		
 		public void SendClick ()
 		{
 			if (Clicked != null)
@@ -142,6 +147,7 @@ namespace Docky.Menus
 			this.icon = icon;
 			Text = text;
 			this.disabled = disabled;
+			this.ID = (uint) (DateTime.Now - DockyEpoch).TotalMilliseconds;
 		}
 		
 		public MenuItem (string text, string icon, EventHandler onClicked) : this(text, icon)

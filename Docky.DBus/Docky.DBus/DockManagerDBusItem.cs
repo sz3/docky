@@ -49,6 +49,9 @@ namespace Docky.DBus
 		Dictionary<uint, RemoteMenuEntry> items = new Dictionary<uint, RemoteMenuEntry> ();
 		Dictionary<uint, DateTime> update_time = new Dictionary<uint, DateTime> ();
 		
+		// date of the docky rev1 on launchpad, what we'll call the DockyEpoch
+		static DateTime DockyEpoch = new DateTime (2009, 9, 1, 0, 37, 37);
+		
 		List<uint> known_ids = new List<uint> ();
 		
 		AbstractDockItem owner;
@@ -94,16 +97,9 @@ namespace Docky.DBus
 			});
 		}
 		
-		uint GetRandomID ()
+		uint GetID ()
 		{
-			Random rand = new Random ();
-			
-			uint number;
-			
-			do {
-				//FIXME should we ever get 100,000 items in here, I hope we crash, though we will likely get an infinite loop
-				number = (uint) rand.Next (0, 100000);
-			} while (known_ids.BinarySearch (number) >= 0);
+			uint number = (uint) (DateTime.Now - DockyEpoch).TotalMilliseconds;
 			
 			known_ids.Add (number);
 			known_ids.Sort ();
@@ -161,13 +157,13 @@ namespace Docky.DBus
 		{
 			string uri = "";
 			if (dict.ContainsKey ("uri"))
-				uri = (string) dict ["uri"];
+				uri = (string) dict["uri"];
 			
 			string title = "";
 			if (dict.ContainsKey ("container-title"))
-				title = (string) dict ["container-title"];
+				title = (string) dict["container-title"];
 			
-			uint number = GetRandomID ();
+			uint number = GetID ();
 			
 			if (uri.Length > 0) {
 				RemoteFileMenuEntry rem = new RemoteFileMenuEntry (number, FileFactory.NewForUri (uri), title);
@@ -283,7 +279,7 @@ namespace Docky.DBus
 					break;
 				}
 				
-				foreach (MenuItem item in itemGroup.OrderBy (i => i.Text)) {
+				foreach (MenuItem item in itemGroup.OrderBy (i => i.ID)) {
 					owner.RemoteMenuItems[container].Add (item);
 				}
 				_container++;
