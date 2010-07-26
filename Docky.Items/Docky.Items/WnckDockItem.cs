@@ -74,7 +74,7 @@ namespace Docky.Items
 				return currentDesktop.Value;
 			}
 		}
-		
+
 		public IEnumerable<Wnck.Window> ManagedWindows {
 			get {
 				return Windows.Where (w => !w.IsSkipTasklist &&

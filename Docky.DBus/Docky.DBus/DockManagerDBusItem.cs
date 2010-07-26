@@ -218,28 +218,36 @@ namespace Docky.DBus
 			foreach (string key in dict.Keys)
 			{
 				if (key == "tooltip") {
-					owner.SetRemoteText ((string) dict [key]);
+					owner.SetRemoteText ((string) dict[key]);
 				} else if (key == "badge") {
-					owner.SetRemoteBadgeText ((string) dict [key]);
+					owner.SetRemoteBadgeText ((string) dict[key]);
 				} else if (key == "progress") {
-					owner.Progress = (double) dict [key];
+					owner.Progress = (double) dict[key];
 				} else if (key == "message") {
-					owner.SetMessage ((string) dict [key]);
+					owner.SetMessage ((string) dict[key]);
 				} else if (key == "icon-file") {
 					if (owner is IconDockItem)
-						(owner as IconDockItem).SetRemoteIcon ((string) dict [key]);
+						(owner as IconDockItem).SetRemoteIcon ((string) dict[key]);
 				} else if (key == "attention") {
-					if ((bool) dict [key])
+					if ((bool) dict[key])
 						owner.State |= ItemState.Urgent;
 					else
 						owner.State &= ~ItemState.Urgent;
 				} else if (key == "waiting") {
-					if ((bool) dict [key])
+					if ((bool) dict[key])
 						owner.State |= ItemState.Wait;
 					else
 						owner.State &= ~ItemState.Wait;
 				}
 			}
+		}
+		
+		public int[] PIDS ()
+		{
+			if (owner is WnckDockItem) {
+				return (owner as WnckDockItem).ManagedWindows.Select (w => w.Pid).DefaultIfEmpty (-1).ToArray ();
+			}
+			return new int[] { -1 };
 		}
 		
 		#endregion
