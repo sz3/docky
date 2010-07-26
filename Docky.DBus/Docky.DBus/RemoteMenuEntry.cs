@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2010 Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -26,9 +27,9 @@ namespace Docky.DBus
 		public uint ID { get; private set; }
 		public string Title { get; private set; }
 
-		public RemoteMenuEntry (uint id, string name, string icon, string groupTitle) : base(name, icon)
+		public RemoteMenuEntry (string name, string icon, string groupTitle) : base(name, icon)
 		{
-			ID = id;
+			ID = (uint) DateTime.Now.Ticks;
 			Title = groupTitle;
 			Mnemonic = null;
 		}
