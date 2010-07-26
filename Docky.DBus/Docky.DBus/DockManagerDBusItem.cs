@@ -69,6 +69,15 @@ namespace Docky.DBus
 			}
 		}
 		
+		int[] PIDS {
+			get {
+				if (owner is WnckDockItem) {
+					return (owner as WnckDockItem).ManagedWindows.Select (w => w.Pid).DefaultIfEmpty (-1).ToArray ();
+				}
+				return new int[] { -1 };
+			}
+		}
+		
 		public DockManagerDBusItem (AbstractDockItem item)
 		{
 			owner = item;
@@ -125,12 +134,15 @@ namespace Docky.DBus
 			if (iface != "org.freedesktop.DockItem")
 				return null;
 			
-			if (property == "DesktopFile")
+			switch (property) {
+			case "DesktopFile":
 				return DesktopFile;
-			
-			if (property == "Uri")
+			case "Uri":
 				return Uri;
-			
+			case "PIDS":
+				return PIDS;
+			}
+
 			return null;
 		}
 		
@@ -138,7 +150,7 @@ namespace Docky.DBus
 		{
 		}
 		
-		public IDictionary<string,object> GetAll (string iface)
+		public IDictionary<string, object> GetAll (string iface)
 		{
 			if (iface != "org.freedesktop.DockItem")
 				return null;
@@ -147,6 +159,7 @@ namespace Docky.DBus
 			
 			items ["DesktopFile"] = DesktopFile;
 			items ["Uri"] = Uri;
+			items ["PIDS"] = PIDS;
 			
 			return items;
 		}
@@ -240,14 +253,6 @@ namespace Docky.DBus
 						owner.State &= ~ItemState.Wait;
 				}
 			}
-		}
-		
-		public int[] PIDS ()
-		{
-			if (owner is WnckDockItem) {
-				return (owner as WnckDockItem).ManagedWindows.Select (w => w.Pid).DefaultIfEmpty (-1).ToArray ();
-			}
-			return new int[] { -1 };
 		}
 		
 		#endregion

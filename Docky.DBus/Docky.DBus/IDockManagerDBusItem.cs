@@ -41,7 +41,5 @@ namespace Docky.DBus
 		event Action MenuItemConfirmationNeeded;
 		
 		void ConfirmMenuItem (uint item);
-		
-		int[] PIDS ();
 	}
 }
