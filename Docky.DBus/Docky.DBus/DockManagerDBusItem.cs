@@ -150,7 +150,7 @@ namespace Docky.DBus
 		{
 		}
 		
-		public IDictionary<string,object> GetAll (string iface)
+		public IDictionary<string, object> GetAll (string iface)
 		{
 			if (iface != "org.freedesktop.DockItem")
 				return null;
@@ -159,6 +159,7 @@ namespace Docky.DBus
 			
 			items ["DesktopFile"] = DesktopFile;
 			items ["Uri"] = Uri;
+			items ["PIDS"] = PIDS;
 			
 			return items;
 		}
