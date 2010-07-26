@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2010 Robert Dyer
+//  Copyright (C) 2010 Robert Dyer, Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@ namespace Docky.DBus
 		uint timer;
 		Dictionary<uint, RemoteMenuEntry> items = new Dictionary<uint, RemoteMenuEntry> ();
 		Dictionary<uint, DateTime> update_time = new Dictionary<uint, DateTime> ();
-		
+
 		List<uint> known_ids = new List<uint> ();
 		
 		AbstractDockItem owner;
@@ -94,7 +94,7 @@ namespace Docky.DBus
 			});
 		}
 		
-		uint GetRandomID ()
+		uint GetID ()
 		{
 			Random rand = new Random ();
 			
@@ -145,8 +145,8 @@ namespace Docky.DBus
 			
 			Dictionary<string, object> items = new Dictionary<string, object> ();
 			
-			items["DesktopFile"] = DesktopFile;
-			items["Uri"] = Uri;
+			items ["DesktopFile"] = DesktopFile;
+			items ["Uri"] = Uri;
 			
 			return items;
 		}
@@ -167,7 +167,7 @@ namespace Docky.DBus
 			if (dict.ContainsKey ("container-title"))
 				title = (string) dict ["container-title"];
 			
-			uint number = GetRandomID ();
+			uint number = GetID ();
 			
 			if (uri.Length > 0) {
 				RemoteFileMenuEntry rem = new RemoteFileMenuEntry (number, FileFactory.NewForUri (uri), title);
@@ -202,7 +202,7 @@ namespace Docky.DBus
 		public void RemoveMenuItem (uint item)
 		{
 			if (items.ContainsKey (item)) {
-				RemoteMenuEntry entry = items[item];
+				RemoteMenuEntry entry = items [item];
 				entry.Clicked -= HandleActivated;
 				
 				items.Remove (item);
@@ -283,7 +283,7 @@ namespace Docky.DBus
 					break;
 				}
 				
-				foreach (MenuItem item in itemGroup.OrderBy (i => i.Text)) {
+				foreach (MenuItem item in itemGroup.OrderBy (i => i.TimeStamp)) {
 					owner.RemoteMenuItems[container].Add (item);
 				}
 				_container++;
