@@ -2395,7 +2395,7 @@ namespace Docky.Interface
 			// darken the icon
 			if (darken > 0) {
 				Gdk.Rectangle area = DrawRegionForItemValue (item, center);
-				surface.Context.Rectangle (area.X, area.Y, area.Height, area.Width);
+				surface.Context.Rectangle (area.X, area.Y, area.Width, area.Height);
 				
 				surface.Context.Color = new Cairo.Color (0, 0, 0, darken);
 				
