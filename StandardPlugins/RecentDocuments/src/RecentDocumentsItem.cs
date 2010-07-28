@@ -123,8 +123,7 @@ namespace RecentDocuments
 			lock (RecentDocs) {
 				if (RecentDocs.Count() == 0)
 					CurrentFile = null;
-				
-				if (AlwaysShowRecent || (CurrentFile != null && RecentDocs.IndexOf (CurrentFile) == -1))
+				else if (AlwaysShowRecent || (CurrentFile != null && RecentDocs.IndexOf (CurrentFile) == -1))
 					CurrentFile = RecentDocs.First ();
 			}
 			
