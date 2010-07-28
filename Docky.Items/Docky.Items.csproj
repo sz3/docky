@@ -59,9 +59,6 @@
     <Reference Include="gnome-sharp, Version=2.24.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <Package>gnome-sharp-2.0</Package>
     </Reference>
-    <Reference Include="gnome-vfs-sharp, Version=2.24.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>gnome-vfs-sharp-2.0</Package>
-    </Reference>
     <Reference Include="notify-sharp, Version=0.4.0.0, Culture=neutral, PublicKeyToken=2df29c54e245917a">
       <Package>notify-sharp</Package>
     </Reference>
@@ -99,7 +96,6 @@
     <Compile Include="Docky.Menus\WindowMenuItem.cs" />
     <Compile Include="Docky.Items\Enumerable_Extensions.cs" />
     <Compile Include="Docky.Items\AbstractDockItemProvider.cs" />
-    <Compile Include="Docky.Menus\RelatedFileMenuItem.cs" />
     <Compile Include="Docky.Painters\AbstractDockPainter.cs" />
     <Compile Include="Docky.Painters\PagingDockPainter.cs" />
     <Compile Include="Docky.Items\PainterRequestEventArgs.cs" />
