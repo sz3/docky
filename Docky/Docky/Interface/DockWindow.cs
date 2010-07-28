@@ -570,10 +570,9 @@ namespace Docky.Interface
 						Math.Min (1, (DateTime.UtcNow - adi.AddTime).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds)));
 				dockWidth += 2 * DockWidthBuffer + (Items.Count - 1) * ItemWidthBuffer;
 				
-				if (remove_index != 0) {
+				if (remove_index != 0)
 					dockWidth += (int) ((ItemWidthBuffer + remove_size) *
-						(1 - Math.Min (1, (DateTime.UtcNow - remove_time).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds)));
-				}
+							(1 - Math.Min (1, (DateTime.UtcNow - remove_time).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds)));
 				
 				return dockWidth;
 			}
@@ -877,6 +876,7 @@ namespace Docky.Interface
 			provider.Registered ();
 			
 			UpdateMaxIconSize ();
+			DelayedSetSizeRequest ();
 		}
 		
 		void UnregisterItemProvider (AbstractDockItemProvider provider)
@@ -889,13 +889,13 @@ namespace Docky.Interface
 			provider.Unregistered ();
 			
 			UpdateMaxIconSize ();
+			DelayedSetSizeRequest ();
 		}
 		
 		void ProviderItemsChanged (object sender, ItemsChangedArgs args)
 		{
-			foreach (AbstractDockItem item in args.AddedItems) {
+			foreach (AbstractDockItem item in args.AddedItems)
 				RegisterItem (item);
-			}
 			
 			foreach (AbstractDockItem item in args.RemovedItems) {
 				remove_time = DateTime.UtcNow;
@@ -907,6 +907,7 @@ namespace Docky.Interface
 			
 			UpdateCollectionBuffer ();
 			UpdateMaxIconSize ();
+			DelayedSetSizeRequest ();
 			
 			AnimatedDraw ();
 			
@@ -1527,19 +1528,31 @@ namespace Docky.Interface
 			monitor_geo = Screen.GetMonitorGeometry (Monitor);
 		}
 		
+		void DelayedSetSizeRequest ()
+		{
+			GLib.Timeout.Add ((uint) BaseAnimationTime.TotalMilliseconds, delegate {
+				SetSizeRequest ();
+				return false;
+			});
+		}
+		
 		void SetSizeRequest ()
 		{
 			UpdateMonitorGeometry ();
 			
 			int height = ZoomedDockHeight;
 			if (Painter != null)
-				height += ZoomedIconSize;
-			int width = Math.Min (UserArgs.MaxSize, Preferences.IsVertical ? monitor_geo.Height : monitor_geo.Width);
+				height = Math.Max (2 * IconSize + DockHeightBuffer, Painter.MinimumHeight + 2 * DockHeightBuffer);
+			else if (Gdk.Screen.Default.IsComposited)
+				height += UrgentBounceHeight;
 			
-			if (Gdk.Screen.Default.IsComposited)
-				height += DockHeightBuffer + UrgentBounceHeight;
-			else if (!Preferences.PanelMode)
-				width = Math.Min (DockWidth, width);
+			int width = Math.Min (UserArgs.MaxSize, Preferences.IsVertical ? monitor_geo.Height : monitor_geo.Width);
+			if (!Gdk.Screen.Default.IsComposited && !Preferences.PanelMode) {
+				if (Painter != null)
+					width = Math.Min (PainterDockWidth, width);
+				else
+					width = Math.Min (DockWidth, width);
+			}
 			
 			if (Preferences.IsVertical) {
 				Width = height;
