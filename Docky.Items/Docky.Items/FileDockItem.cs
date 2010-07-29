@@ -17,10 +17,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using IO = System.IO;
 using System.Linq;
-using System.Text;
 
 using GLib;
 using Mono.Unix;
@@ -43,13 +40,13 @@ namespace Docky.Items
 			// FIXME: need to do something with this... .Exists will fail for non native files
 			// but they are still valid file items (like an unmounted ftp://... file)
 			// even File.QueryExists () will return false for valid files (ftp://) that aren't mounted.
-			
+
 			// for now we just attempt to figure out if it is a local file and check for its existance
 			if (uri.IndexOf ("file://") != -1 || uri.IndexOf ("://") == -1) {
-				string path = Gnome.Vfs.Global.GetLocalPathFromUri (uri);
-				if (!IO.Directory.Exists (path) && !IO.File.Exists (path))
+				if (!GLib.FileFactory.NewForUri (uri).Exists)
 					return null;
 			}
+
 			return new FileDockItem (uri, force_hover_text, backup_icon);
 		}
 		

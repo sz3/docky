@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009-2010 Jason Smith, Robert Dyer
+//  Copyright (C) 2009-2010 Jason Smith, Robert Dyer, Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -15,21 +15,13 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.IO;
 
 using Mono.Unix;
 
-using Gdk;
 using Gtk;
 
 using Docky.DBus;
-using Docky.Windowing;
 using Docky.Services;
 
 namespace Docky
@@ -61,7 +53,6 @@ namespace Docky
 				GLib.Thread.Init ();
 			Gdk.Threads.Init ();
 			Gtk.Application.Init ("Docky", ref args);
-			Gnome.Vfs.Vfs.Initialize ();
 			GLib.GType.Init ();
 			
 			// process the command line args
@@ -107,7 +98,6 @@ namespace Docky
 			Controller.Dispose ();
 			DockServices.Dispose ();
 			PluginManager.Shutdown ();
-			Gnome.Vfs.Vfs.Shutdown ();
 		}
 		
 		static uint checkCompositeTimer = 0;
