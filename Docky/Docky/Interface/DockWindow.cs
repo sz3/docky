@@ -190,6 +190,7 @@ namespace Docky.Interface
 		
 		uint animation_timer;
 		uint icon_size_timer;
+		uint size_request_timer;
 		
 		public event EventHandler<HoveredItemChangedArgs> HoveredItemChanged;
 		
@@ -1530,7 +1531,11 @@ namespace Docky.Interface
 		
 		void DelayedSetSizeRequest ()
 		{
-			GLib.Timeout.Add ((uint) BaseAnimationTime.TotalMilliseconds, delegate {
+			if (size_request_timer > 0)
+				GLib.Source.Remove (size_request_timer);
+			
+			size_request_timer = GLib.Timeout.Add ((uint) BaseAnimationTime.TotalMilliseconds, delegate {
+				size_request_timer = 0;
 				SetSizeRequest ();
 				return false;
 			});
@@ -2792,6 +2797,8 @@ namespace Docky.Interface
 		
 		public override void Dispose ()
 		{
+			if (size_request_timer > 0)
+				GLib.Source.Remove (size_request_timer);
 			if (animation_timer > 0)
 				GLib.Source.Remove (animation_timer);
 			if (icon_size_timer > 0)
