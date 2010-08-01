@@ -32,6 +32,7 @@ FILES = \
 	Docky.Services/Preferences.cs \
 	Docky.Services/NativeInterop.cs \
 	Docky.Services/PathsService.cs \
+	Docky.Services/DesktopItemService.cs \
 	Docky.Services/PreferencesChangedEventArgs.cs \
 	Gtk/MountOperation.cs \
 	GLibSharp/AsyncReadyCallbackNative.cs
