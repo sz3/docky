@@ -32,6 +32,7 @@ using Mono.Unix;
 
 using Docky.Interface;
 using Docky.Services;
+using Docky.Services.Helpers;
 using Docky.Widgets;
 using Docky.Items;
 

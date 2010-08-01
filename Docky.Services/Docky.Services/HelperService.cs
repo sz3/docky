@@ -22,6 +22,8 @@ using System.Collections.Generic;
 
 using GLib;
 
+using Docky.Services.Helpers;
+
 using ICSharpCode.SharpZipLib;
 using ICSharpCode.SharpZipLib.Tar;
 

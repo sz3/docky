@@ -21,7 +21,7 @@ using Diag = System.Diagnostics;
 
 using GLib;
 
-namespace Docky.Services
+namespace Docky.Services.Helpers
 {
 	public class Helper
 	{

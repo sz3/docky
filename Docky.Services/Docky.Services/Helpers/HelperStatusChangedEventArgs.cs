@@ -19,7 +19,7 @@ using System;
 
 using GLib;
 
-namespace Docky.Services
+namespace Docky.Services.Helpers
 {
 
 	public class HelperStatusChangedEventArgs : EventArgs
