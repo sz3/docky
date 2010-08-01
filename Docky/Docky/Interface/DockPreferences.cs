@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith, Robert Dyer, Chris Szikszoy
+//  Copyright (C) 2009-2010 Jason Smith, Robert Dyer, Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -352,6 +352,9 @@ namespace Docky.Interface
 			
 			DefaultProvider.ItemsChanged += HandleDefaultProviderItemsChanged;
 			
+			if (FirstRun)
+				FirstRun = false;
+			
 			ShowAll ();
 		}
 
@@ -530,6 +533,14 @@ namespace Docky.Interface
 			if (WindowManager)
 				DefaultProvider.SetWindowManager ();
 			
+			// on first run, add default plugins to the dock
+			if (FirstRun) {
+				Log<DockPreferences> ("Adding default plugins.");
+				foreach (AbstractDockItemProvider provider in PluginManager.ItemProviders)
+					item_providers.Add (provider);
+				SyncPlugins ();
+			}
+			
 			autohide_box.Active = (int) Autohide;
 			autohide_box.Sensitive = Gdk.Screen.Default.IsComposited;
 			UpdateAutohideDescription ();
@@ -544,7 +555,6 @@ namespace Docky.Interface
 			fade_on_hide_check.Active = FadeOnHide;
 			threedee_check.Active = ThreeDimensional && Gdk.Screen.Default.IsComposited;
 			threedee_check.Sensitive = Position == DockPosition.Bottom && Gdk.Screen.Default.IsComposited;
-			
 			
 			window_manager_check.Active = DefaultProvider.IsWindowManager;
 			DefaultProvider.WindowManagerChanged += delegate {
@@ -621,8 +631,6 @@ namespace Docky.Interface
 					launcher_music,
 					launcher_im,
 				}.Where (s => !String.IsNullOrEmpty (s));
-				
-				FirstRun = false;
 			}
 			
 			foreach (string launcher in Launchers) {

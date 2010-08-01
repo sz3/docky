@@ -202,6 +202,7 @@ namespace Docky
 		{
 			foreach (AbstractDockItemProvider provider in PluginManager.ItemProviders) {
 				if (!docks.Any (d => d.Preferences.ItemProviders.Contains (provider))) {
+					Log<DockController>.Warn ("\"{0}\" seems to have been abaondoned... disabling.", provider.Name);
 					PluginManager.Disable (provider);
 				}
 			}
