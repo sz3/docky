@@ -143,7 +143,7 @@ namespace Docky.Services
 
 		public bool SetSecure<T> (string key, T val)
 		{
-			if (typeof (T) != typeof(string))
+			if (typeof (T) != typeof (string))
 				throw new NotImplementedException ("Unimplemented for non string values");
 			if (string.IsNullOrEmpty (GnomeKeyringPrefix))
 				throw new NotImplementedException ("Cannot use secure prefs for non-docky keys");
