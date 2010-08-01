@@ -33,6 +33,8 @@ namespace Docky.Services
 		
 		public static ThemeService Theme { get; private set; }
 		
+		public static DesktopItemService DesktopItems { get; private set; }
+		
 		static DockServices ()
 		{
 			Paths = new PathsService ();
@@ -41,6 +43,7 @@ namespace Docky.Services
 			System = new SystemService ();
 			Helpers = new HelperService ();
 			Theme = new ThemeService ();
+			DesktopItems = new DesktopItemService ();
 			NotificationService.Initialize ();
 			Theme.Initialize ();
 			

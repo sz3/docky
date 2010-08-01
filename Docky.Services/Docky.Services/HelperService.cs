@@ -93,7 +93,7 @@ namespace Docky.Services
 		
 		List<FileMonitor> monitors = new List<FileMonitor> ();
 		
-		public HelperService ()
+		internal HelperService ()
 		{
 			helpers = new List<Helper> ();
 			

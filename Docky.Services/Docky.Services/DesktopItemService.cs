@@ -23,7 +23,7 @@ using GLib;
 
 namespace Docky.Services
 {
-	internal class DesktopItemService
+	public class DesktopItemService
 	{
 		internal DesktopItemService ()
 		{
