@@ -27,6 +27,8 @@ using Gtk;
 
 using Mono.Unix;
 
+using Docky.Services.Prefs;
+
 using ICSharpCode.SharpZipLib;
 using ICSharpCode.SharpZipLib.Tar;
 

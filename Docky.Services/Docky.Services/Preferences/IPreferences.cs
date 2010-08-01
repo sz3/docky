@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2010 Chris Szikszoy
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,24 +17,18 @@
 
 using System;
 
-namespace Docky.Services
+namespace Docky.Services.Prefs
 {
-	public class PreferencesChangedEventArgs : EventArgs
+	public interface IPreferences
 	{
-		/// <summary>
-		/// The key of the changed preference.
-		/// </summary>
-		public string Key { get; private set; }
-		/// <summary>
-		/// The new value after the preference changed.
-		/// </summary>
-		public object Value { get; private set; }
+		T Get<T> (string name, T def);
+		T GetSecure<T> (string name, T def);
+		
+		bool Set<T> (string name, T val);
+		bool SetSecure<T> (string name, T val);
+		
+		string SanitizeKey (string key);
 
-		public PreferencesChangedEventArgs (string key, object newValue)
-		{
-			Key = key;
-			Value = newValue;
-		}
+		event EventHandler<PreferencesChangedEventArgs> Changed;
 	}
 }
-

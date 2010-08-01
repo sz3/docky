@@ -19,6 +19,8 @@
 using System;
 using Diag = System.Diagnostics;
 
+using Docky.Services.Prefs;
+
 using GLib;
 
 namespace Docky.Services.Helpers

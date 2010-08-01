@@ -17,6 +17,8 @@
 
 using System;
 
+using Docky.Services.Prefs;
+
 namespace Docky.Services
 {
 
@@ -30,7 +32,7 @@ namespace Docky.Services
 		public IPreferences Get<TOwner> ()
 			where TOwner : class
 		{
-			return new Preferences (typeof(TOwner).FullName.Replace (".", "/"));
+			return new Preferences (typeof (TOwner).FullName.Replace (".", "/"));
 		}
 		
 		public IPreferences Get (string basePath)

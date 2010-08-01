@@ -86,12 +86,10 @@
     <Reference Include="ICSharpCode.SharpZipLib" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Docky.Services\IPreferences.cs" />
     <Compile Include="Docky.Services\PreferencesService.cs" />
     <Compile Include="Docky.Services\DockServices.cs" />
     <Compile Include="Docky.Services\SystemService.cs" />
     <Compile Include="Docky.Services\DrawingService.cs" />
-    <Compile Include="Docky.Services\Preferences.cs" />
     <Compile Include="Docky.Services\NotificationService.cs" />
     <Compile Include="Docky.Services\ConnectionStatusChangeEventArgs.cs" />
     <Compile Include="Docky.Services\Logging\LogBase.cs" />
@@ -111,11 +109,13 @@
     <Compile Include="Docky.Services\Extensions\GtkIconThemeExtension.cs" />
     <Compile Include="Docky.Services\PathsService.cs" />
     <Compile Include="Docky.Services\ThemeService.cs" />
-    <Compile Include="Docky.Services\PreferencesChangedEventArgs.cs" />
     <Compile Include="Docky.Services\DesktopItemService.cs" />
     <Compile Include="Docky.Services\Helpers\Helper.cs" />
     <Compile Include="Docky.Services\Helpers\HelperMetadata.cs" />
     <Compile Include="Docky.Services\Helpers\HelperStatusChangedEventArgs.cs" />
+    <Compile Include="Docky.Services\Preferences\IPreferences.cs" />
+    <Compile Include="Docky.Services\Preferences\Preferences.cs" />
+    <Compile Include="Docky.Services\Preferences\PreferencesChangedEventArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -127,6 +127,7 @@
     <Folder Include="Docky.Services\Helpers\" />
     <Folder Include="Docky.Services\Helpers\" />
     <Folder Include="Docky.Services\Helpers\" />
+    <Folder Include="Docky.Services\Preferences\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">

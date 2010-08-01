@@ -27,6 +27,8 @@ using System.Net;
 
 using GLib;
 
+using Docky.Services.Prefs;
+
 using NDesk.DBus;
 using org.freedesktop.DBus;
 

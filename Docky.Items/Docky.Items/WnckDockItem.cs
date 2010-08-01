@@ -30,6 +30,7 @@ using Docky;
 using Docky.CairoHelper;
 using Docky.Menus;
 using Docky.Services;
+using Docky.Services.Prefs;
 using Docky.Windowing;
 
 namespace Docky.Items

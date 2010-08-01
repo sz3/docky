@@ -23,7 +23,7 @@ using System.Threading;
 using GConf;
 using Gnome.Keyring;
 
-namespace Docky.Services
+namespace Docky.Services.Prefs
 {
 	internal class Preferences : IPreferences
 	{

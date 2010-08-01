@@ -28,6 +28,7 @@ using Mono.Unix;
 
 using Docky.Menus;
 using Docky.Services;
+using Docky.Services.Prefs;
 using Docky.CairoHelper;
 
 namespace Docky.Items
