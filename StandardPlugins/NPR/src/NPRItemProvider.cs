@@ -43,7 +43,7 @@ namespace NPR
 		{
 			ReloadStations ();
 			
-			NPR.StationsUpdated += delegate(object sender, StationsUpdatedEventArgs args) {
+			NPR.StationsUpdated += delegate (object sender, StationsUpdatedEventArgs args) {
 				switch (args.UpdateAction) {
 				case StationUpdateAction.Added:
 					AddStation (args.Station);
