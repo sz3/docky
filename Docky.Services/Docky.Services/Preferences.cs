@@ -1,6 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith, Robert Dyer
-//  Copyright (C) 2010 Chris Szikszoy
+//  Copyright (C) 2009-2010 Jason Smith, Robert Dyer, Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,17 +17,11 @@
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 
 using GConf;
 using Gnome.Keyring;
-using Mono.Unix;
 
 namespace Docky.Services
 {
