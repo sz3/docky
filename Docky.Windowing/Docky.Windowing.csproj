@@ -62,8 +62,6 @@
     <Compile Include="Xlib\Xlib.cs" />
     <Compile Include="Windowing\Position.cs" />
     <Compile Include="Windowing\WindowMatcher.cs" />
-    <Compile Include="Windowing\DesktopItem.cs" />
-    <Compile Include="Windowing\DesktopFileChangedEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Wnck\" />
