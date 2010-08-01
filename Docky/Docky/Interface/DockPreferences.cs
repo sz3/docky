@@ -535,7 +535,7 @@ namespace Docky.Interface
 			
 			// on first run, add default plugins to the dock
 			if (FirstRun) {
-				Log<DockPreferences> ("Adding default plugins.");
+				Log<DockPreferences>.Info ("Adding default plugins.");
 				foreach (AbstractDockItemProvider provider in PluginManager.ItemProviders)
 					item_providers.Add (provider);
 				SyncPlugins ();

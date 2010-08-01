@@ -55,7 +55,6 @@ REFERENCES =  \
 	System.Core \
 	Mono.Posix \
 	$(MONO_CAIRO_LIBS) \
-	$(GCONF_SHARP_20_LIBS) \
 	$(GTK_SHARP_20_LIBS) \
 	$(GLIB_SHARP_20_LIBS) \
 	$(GIO_SHARP_LIBS) \

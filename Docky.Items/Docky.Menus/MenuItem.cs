@@ -22,8 +22,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
-using GConf;
 using Gdk;
+
+using Docky.Services;
 
 namespace Docky.Menus
 {
@@ -37,17 +38,19 @@ namespace Docky.Menus
 		
 		public bool Bold { get; set;}
 		
-		static bool defaultShowIcons;
-		static MenuItem () {
-			object o = new GConf.Client ().Get ("/desktop/gnome/interface/menus_have_icons");
-			defaultShowIcons = o != null && o is bool && (bool) o;
+		static IPreferences GnomeInterfacePrefs = DockServices.Preferences.Get ("/desktop/gnome/interface");
+		static bool DefaultShowIcons { get; set; }
+		
+		static MenuItem ()
+		{
+			DefaultShowIcons = GnomeInterfacePrefs.Get<bool> ("menus_have_icons", false);
 		}
 		
 		bool? show_icons;
 		public bool ShowIcons { 
 			get {
 				if (!show_icons.HasValue)
-					show_icons = defaultShowIcons;
+					show_icons = DefaultShowIcons;
 				return (ForcePixbuf != null || !string.IsNullOrEmpty (Icon)) && show_icons.Value;
 			}
 			protected set {

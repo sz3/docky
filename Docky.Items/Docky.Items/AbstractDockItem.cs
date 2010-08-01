@@ -395,6 +395,7 @@ namespace Docky.Items
 			double pixelCount = icon_buffers [0].Width * icon_buffers [0].Height * byte.MaxValue;
 			
 			sr.Destroy ();
+			sr.Dispose ();
 			
 			average_color = new Cairo.Color (rTotal / pixelCount, 
 			                                 gTotal / pixelCount, 

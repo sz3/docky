@@ -49,7 +49,6 @@ namespace Docky.Services
 		
 		public static void Dispose ()
 		{
-			System.Dispose ();
 			Helpers.Dispose ();
 		}
 	}

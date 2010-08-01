@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009-2010 Jason Smith, Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -20,7 +20,6 @@ using System;
 namespace Docky.Services
 {
 
-
 	public class PreferencesService
 	{
 
@@ -31,7 +30,12 @@ namespace Docky.Services
 		public IPreferences Get<TOwner> ()
 			where TOwner : class
 		{
-			return new Preferences<TOwner> ();
+			return new Preferences (typeof(TOwner).FullName.Replace (".", "/"));
+		}
+		
+		public IPreferences Get (string basePath)
+		{
+			return new Preferences (basePath);
 		}
 	}
 }
