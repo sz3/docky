@@ -190,6 +190,7 @@ namespace Docky.Interface
 		
 		uint animation_timer;
 		uint icon_size_timer;
+		uint size_request_timer;
 		
 		public event EventHandler<HoveredItemChangedArgs> HoveredItemChanged;
 		
@@ -570,10 +571,9 @@ namespace Docky.Interface
 						Math.Min (1, (DateTime.UtcNow - adi.AddTime).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds)));
 				dockWidth += 2 * DockWidthBuffer + (Items.Count - 1) * ItemWidthBuffer;
 				
-				if (remove_index != 0) {
+				if (remove_index != 0)
 					dockWidth += (int) ((ItemWidthBuffer + remove_size) *
-						(1 - Math.Min (1, (DateTime.UtcNow - remove_time).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds)));
-				}
+							(1 - Math.Min (1, (DateTime.UtcNow - remove_time).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds)));
 				
 				return dockWidth;
 			}
@@ -877,6 +877,7 @@ namespace Docky.Interface
 			provider.Registered ();
 			
 			UpdateMaxIconSize ();
+			DelayedSetSizeRequest ();
 		}
 		
 		void UnregisterItemProvider (AbstractDockItemProvider provider)
@@ -889,13 +890,13 @@ namespace Docky.Interface
 			provider.Unregistered ();
 			
 			UpdateMaxIconSize ();
+			DelayedSetSizeRequest ();
 		}
 		
 		void ProviderItemsChanged (object sender, ItemsChangedArgs args)
 		{
-			foreach (AbstractDockItem item in args.AddedItems) {
+			foreach (AbstractDockItem item in args.AddedItems)
 				RegisterItem (item);
-			}
 			
 			foreach (AbstractDockItem item in args.RemovedItems) {
 				remove_time = DateTime.UtcNow;
@@ -907,6 +908,7 @@ namespace Docky.Interface
 			
 			UpdateCollectionBuffer ();
 			UpdateMaxIconSize ();
+			DelayedSetSizeRequest ();
 			
 			AnimatedDraw ();
 			
@@ -1527,19 +1529,35 @@ namespace Docky.Interface
 			monitor_geo = Screen.GetMonitorGeometry (Monitor);
 		}
 		
+		void DelayedSetSizeRequest ()
+		{
+			if (size_request_timer > 0)
+				GLib.Source.Remove (size_request_timer);
+			
+			size_request_timer = GLib.Timeout.Add ((uint) BaseAnimationTime.TotalMilliseconds, delegate {
+				size_request_timer = 0;
+				SetSizeRequest ();
+				return false;
+			});
+		}
+		
 		void SetSizeRequest ()
 		{
 			UpdateMonitorGeometry ();
 			
 			int height = ZoomedDockHeight;
 			if (Painter != null)
-				height += ZoomedIconSize;
-			int width = Math.Min (UserArgs.MaxSize, Preferences.IsVertical ? monitor_geo.Height : monitor_geo.Width);
+				height = Math.Max (2 * IconSize + DockHeightBuffer, Painter.MinimumHeight + 2 * DockHeightBuffer);
+			else if (Gdk.Screen.Default.IsComposited)
+				height += UrgentBounceHeight;
 			
-			if (Gdk.Screen.Default.IsComposited)
-				height += DockHeightBuffer + UrgentBounceHeight;
-			else if (!Preferences.PanelMode)
-				width = Math.Min (DockWidth, width);
+			int width = Math.Min (UserArgs.MaxSize, Preferences.IsVertical ? monitor_geo.Height : monitor_geo.Width);
+			if (!Gdk.Screen.Default.IsComposited && !Preferences.PanelMode) {
+				if (Painter != null)
+					width = Math.Min (PainterDockWidth, width);
+				else
+					width = Math.Min (DockWidth, width);
+			}
 			
 			if (Preferences.IsVertical) {
 				Width = height;
@@ -2382,7 +2400,7 @@ namespace Docky.Interface
 			// darken the icon
 			if (darken > 0) {
 				Gdk.Rectangle area = DrawRegionForItemValue (item, center);
-				surface.Context.Rectangle (area.X, area.Y, area.Height, area.Width);
+				surface.Context.Rectangle (area.X, area.Y, area.Width, area.Height);
 				
 				surface.Context.Color = new Cairo.Color (0, 0, 0, darken);
 				
@@ -2779,6 +2797,8 @@ namespace Docky.Interface
 		
 		public override void Dispose ()
 		{
+			if (size_request_timer > 0)
+				GLib.Source.Remove (size_request_timer);
 			if (animation_timer > 0)
 				GLib.Source.Remove (animation_timer);
 			if (icon_size_timer > 0)

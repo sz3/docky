@@ -13,7 +13,6 @@ FILES = \
 	Docky.Items/ItemState.cs \
 	Docky.Menus/MenuItem.cs \
 	Docky.Menus/MenuList.cs \
-	Docky.Menus/RelatedFileMenuItem.cs \
 	Docky.Menus/SeparatorMenuItem.cs \
 	Docky.Menus/WindowMenuItem.cs \
 	Docky.Menus/IconMenuItem.cs \
@@ -61,8 +60,6 @@ REFERENCES =  \
 	$(GIO_SHARP_LIBS) \
 	$(LIBRSVG_SHARP_LIBS) \
 	$(WNCK_SHARP_10_LIBS) \
-	$(GNOME_SHARP_20_LIBS) \
-	$(NOTIFY_SHARP_LIBS) \
-	$(GNOME_VFS_SHARP_20_LIBS)
+	$(NOTIFY_SHARP_LIBS)
 	
 MCS_FLAGS += -unsafe

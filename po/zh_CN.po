@@ -7,38 +7,38 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-06-28 07:25+0200\n"
-"PO-Revision-Date: 2010-06-22 09:17+0000\n"
-"Last-Translator: lhquark <lhquark@yahoo.com.cn>\n"
+"POT-Creation-Date: 2010-07-22 07:29+0200\n"
+"PO-Revision-Date: 2010-07-18 16:33+0000\n"
+"Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-06-28 05:44+0000\n"
+"X-Launchpad-Export-Date: 2010-07-22 06:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:133
+#: ../Docky/Docky/ConfigurationWindow.cs:147
 msgid "Search Docklets..."
 msgstr "搜索小部件..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:148
+#: ../Docky/Docky/ConfigurationWindow.cs:163
 msgid "Search Helpers..."
 msgstr "搜索辅助组件 ..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:212
+#: ../Docky/Docky/ConfigurationWindow.cs:227
 msgid "Click on any dock to configure."
 msgstr "点击任一面板进行设置"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:213
+#: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid "Drag any dock to reposition."
 msgstr "用拖拽移动位置。"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:278
+#: ../Docky/Docky/ConfigurationWindow.cs:293
 msgid "Delete the currently selected dock?"
 msgstr "删除当前选中的面板?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:280
+#: ../Docky/Docky/ConfigurationWindow.cs:295
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -46,54 +46,54 @@ msgstr ""
 "如果您选择删除面板，那么该面板的所有配置将\n"
 "会永久消失。"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:287
+#: ../Docky/Docky/ConfigurationWindow.cs:302
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
 msgstr "删除面板(_D)"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:401
-#: ../Docky/Docky/ConfigurationWindow.cs:421
+#: ../Docky/Docky/ConfigurationWindow.cs:418
+#: ../Docky/Docky/ConfigurationWindow.cs:438
 msgid "_Select"
 msgstr "选择(_S)"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:404
-#: ../Docky/Docky/ConfigurationWindow.cs:424
+#: ../Docky/Docky/ConfigurationWindow.cs:421
+#: ../Docky/Docky/ConfigurationWindow.cs:441
 msgid ".tar Archives"
 msgstr ".tar 格式的归档文件"
 
-#: ../Docky/Docky/DockletTile.cs:50
+#: ../Docky/Docky/DockletTile.cs:51
 msgid "Author"
 msgstr "作者"
 
-#: ../Docky/Docky/DockletTile.cs:97
+#: ../Docky/Docky/DockletTile.cs:86
 msgid "Move this docklet up on the selected dock"
 msgstr "在选中的Dock中向上移动此小部件"
 
-#: ../Docky/Docky/DockletTile.cs:98
+#: ../Docky/Docky/DockletTile.cs:87
 msgid "Move this docklet down on the selected dock"
 msgstr "在选中的Dock中向下移动此小部件"
 
-#: ../Docky/Docky/DockletTile.cs:102
+#: ../Docky/Docky/DockletTile.cs:91
 msgid "Move this docklet left on the selected dock"
 msgstr "在选中的Dock中向左移动此小部件"
 
-#: ../Docky/Docky/DockletTile.cs:103
+#: ../Docky/Docky/DockletTile.cs:92
 msgid "Move this docklet right on the selected dock"
 msgstr "在选中的Dock中向右移动此小部件"
 
-#: ../Docky/Docky/DockletTile.cs:105
+#: ../Docky/Docky/DockletTile.cs:94
 msgid "Configure this docklet"
 msgstr "调整小部件设置"
 
-#: ../Docky/Docky/DockletTile.cs:106
+#: ../Docky/Docky/DockletTile.cs:95
 msgid "About this docklet"
 msgstr "关于这个小部件"
 
-#: ../Docky/Docky/DockletTile.cs:107
+#: ../Docky/Docky/DockletTile.cs:96
 msgid "Add this docklet to the selected dock"
 msgstr "在选中的Dock中添加该小部件"
 
-#: ../Docky/Docky/DockletTile.cs:108
+#: ../Docky/Docky/DockletTile.cs:97
 msgid "Remove this docklet from the selected dock"
 msgstr "将该小部件从选中的Dock中移除"
 
@@ -103,31 +103,31 @@ msgid ""
 "and themes/animations will look incorrect. "
 msgstr "Docky需要左面开启混合特效才能正常工作，否则，某些选项将被禁用，主题和动画特效无法正常工作。 "
 
-#: ../Docky/Docky/HelperTile.cs:41
+#: ../Docky/Docky/HelperTile.cs:42
 msgid "Status"
 msgstr "状态"
 
-#: ../Docky/Docky/HelperTile.cs:58
+#: ../Docky/Docky/HelperTile.cs:59
 msgid "Uninstall"
 msgstr "卸载"
 
-#: ../Docky/Docky/HelperTile.cs:75
+#: ../Docky/Docky/HelperTile.cs:71
 msgid "About this helper"
 msgstr "关于这个辅助部件"
 
-#: ../Docky/Docky/HelperTile.cs:76
+#: ../Docky/Docky/HelperTile.cs:72
 msgid "Enable this helper"
 msgstr "启用这个辅助部件"
 
-#: ../Docky/Docky/HelperTile.cs:77
+#: ../Docky/Docky/HelperTile.cs:73
 msgid "Disable this helper"
 msgstr "禁用这个辅助部件"
 
-#: ../Docky/Docky/HelperTile.cs:82
+#: ../Docky/Docky/HelperTile.cs:90
 msgid "Running"
 msgstr "正在运行"
 
-#: ../Docky/Docky/HelperTile.cs:82
+#: ../Docky/Docky/HelperTile.cs:90
 msgid "Stopped"
 msgstr "已停止"
 
@@ -137,19 +137,19 @@ msgid ""
 "added to this dock."
 msgstr "如果选中此项，没有启动器的窗口将会被显示在这个 dock 上。"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:682
+#: ../Docky/Docky/Interface/DockPreferences.cs:683
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr "<i>从不隐藏；最大化的窗口将不会覆盖在 Dock 上。</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:685
+#: ../Docky/Docky/Interface/DockPreferences.cs:686
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>鼠标移开后自动隐藏。</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:688
+#: ../Docky/Docky/Interface/DockPreferences.cs:689
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>当 dock 阻挡了当前的程序时将会隐藏。</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:691
+#: ../Docky/Docky/Interface/DockPreferences.cs:692
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>当 dock 阻挡了任何窗口时，将会隐藏。</i>"
 
@@ -174,7 +174,7 @@ msgstr "关于(_A)"
 
 #: ../Docky/Docky/Items/DockyItem.cs:135
 msgid "_Help"
-msgstr ""
+msgstr "帮助(_H)"
 
 #: ../Docky/Docky/Items/DockyItem.cs:137
 msgid "_Quit Docky"
@@ -186,7 +186,7 @@ msgstr "Docky 设置"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
 msgid "_Start When User Logs In"
-msgstr ""
+msgstr "登录时自动启动(_S)"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
@@ -230,7 +230,7 @@ msgstr "Docklets"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
 msgid "Usable"
-msgstr ""
+msgstr "可用"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
@@ -284,16 +284,16 @@ msgstr "管理没有启动器的窗口(_M)"
 msgid "_Zoom:"
 msgstr "缩放(_Z)："
 
-#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:115
+#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:120
 #, csharp-format
 msgid "Drop to open with {0}"
-msgstr ""
+msgstr "拖放以用 {0} 打开"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:159
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:173
 msgid "New _Window"
 msgstr "新建窗口(_W)"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:161
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:175
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
 msgstr "打开(_O)"
@@ -306,61 +306,61 @@ msgstr "重置颜色"
 msgid "_Pin to Dock"
 msgstr "锁定到 Dock (_P)"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:74
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:75
 #, csharp-format
 msgid "Drop to move to {0}"
-msgstr ""
+msgstr "拖放移动到 {0}"
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:190
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:235
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:239
 msgid "Error performing drop action"
 msgstr "执行拖放动作出错"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:190
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
 msgid "Not enough free space on destination."
 msgstr "目标处没有足够的空余空间。"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:207
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:210
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:242
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:211
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:214
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:246
 msgid "Complete"
 msgstr "完成"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:220
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:224
 msgid "Moving"
 msgstr "正在移动"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:226
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:230
 msgid "Copying"
 msgstr "正在复制"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:260
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:264
 msgid "Open"
 msgstr "打开"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:261
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:265
 msgid "Open Containing Folder"
 msgstr "打开其所在的文件夹"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:253
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:257
 msgid "Unma_ximize"
 msgstr "取消最大化(_X)"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:256
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:260
 msgid "Ma_ximize"
 msgstr "最大化(_X)"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:260
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
 msgid "_Restore"
 msgstr "还原(_R)"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:263
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:267
 msgid "Mi_nimize"
 msgstr "最小化(_N)"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:266
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:270
 msgid "_Close All"
 msgstr "全部关闭(_C)"
 
@@ -479,36 +479,36 @@ msgstr "分钟"
 msgid "Click to set username and password."
 msgstr "点击以设置用户名和密码"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:228
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:233
 msgid "(no subject)"
 msgstr "(无主题)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:242
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:247
 #, csharp-format
 msgid "You have {0} new, unread messages"
-msgstr ""
+msgstr "你有 {0} 个未读，新消息"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:246
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:251
 #, csharp-format
 msgid "From: {0}"
 msgstr "来自:{0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:259
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:263
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:265
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:270
 msgid "Feed Error"
 msgstr "Feed 错误"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:268
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:275
 msgid "Invalid Username"
 msgstr "用户名无效"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:272
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:276
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:279
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:283
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:174
 msgid "Network Error"
 msgstr "网络错误"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:281
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:288
 msgid "General Error"
 msgstr "一般错误"
 
@@ -540,7 +540,7 @@ msgstr "写邮件(_C)"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:211
 msgid "View C_ontacts"
-msgstr ""
+msgstr "查看通讯录(_O)"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
 msgid "New Mail"
@@ -713,71 +713,68 @@ msgstr "您确定要关闭所有程序并关闭计算机？"
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:90
 #, csharp-format
 msgid "A timer set for {0} has expired."
-msgstr ""
+msgstr "{0} 的计时器设置已过期"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:236
 msgid "Time remaining:"
-msgstr ""
+msgstr "剩余时间："
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:238
 msgid "Timer paused, time remaining:"
-msgstr ""
+msgstr "计时暂停，剩余时间："
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:249
 msgid "Set the timer's label to:"
-msgstr ""
+msgstr "将计时器的标签设置为："
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:255
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:289
 msgid "_Set Label"
-msgstr ""
+msgstr "设置标签(_S)"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:280
 msgid "_Pause Timer"
-msgstr ""
+msgstr "暂停计时器(_P)"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:280
 msgid "_Start Timer"
-msgstr ""
+msgstr "启动计时器(_S)"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:284
 msgid "_Remove Timer"
-msgstr ""
+msgstr "移除计时器(_R)"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:62
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "小时"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:66
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "分钟"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:71
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "秒"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:138
 #, csharp-format
 msgid "Click to create a timer for {0}."
-msgstr ""
+msgstr "单击创建一个 {0} 的计时器。"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:155
 msgid "Automatically _Start Timers"
-msgstr ""
+msgstr "自动启动计时器(_S)"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:159
 msgid "Automatically _Dismiss Timers"
-msgstr ""
+msgstr "计时完成后自动移除计时器(_D)"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:50
 msgid "Drop to move to Trash"
-msgstr ""
+msgstr "拖放至回收站"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:77
 msgid "No items in Trash"
@@ -791,7 +788,7 @@ msgstr[0] "回收站中有 {0} 个项目"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:164
 msgid "Restore Files"
-msgstr ""
+msgstr "撤销删除"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:195
 msgid "_Open Trash"
@@ -903,6 +900,19 @@ msgstr "明天(_O)"
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:328
 #, csharp-format
 msgid "{0} humidity"
+msgstr "{0} 湿度"
+
+#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:69
+#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:219
+msgid "Switch Desks"
+msgstr ""
+
+#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:170
+msgid "Desk"
+msgstr ""
+
+#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:172
+msgid "Virtual Desk"
 msgstr ""
 
 #~ msgid ""

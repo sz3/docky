@@ -55,6 +55,11 @@ namespace Docky.Items
 		ItemState state;
 		Dictionary<ItemState, DateTime> state_times;
 		
+		const int MaxMessages = 3;
+		
+		string[] messages = new string[MaxMessages];
+		string[] messageIcons = new string[MaxMessages];
+		
 		public event EventHandler HoverTextChanged;
 		public event EventHandler<PaintNeededEventArgs> PaintNeeded;
 		public event EventHandler<PainterRequestEventArgs> PainterRequest;
@@ -148,6 +153,20 @@ namespace Docky.Items
 		}
 		
 		/// <summary>
+		/// The progress (0 to 100) for the item.  If it is negative it should not be shown.
+		/// </summary>
+		double progress;
+		public double Progress {
+			get { return progress; }
+			set {
+				if (progress == value)
+					return;
+				progress = value;
+				QueueRedraw ();
+			}
+		}
+		
+		/// <summary>
 		/// The text displayed when an item is hovered
 		/// </summary>
 		public string HoverText {
@@ -213,6 +232,29 @@ namespace Docky.Items
 		/// </summary>
 		public Docky.Menus.MenuList RemoteMenuItems { get; private set; }
 		
+		public void SetMessage (string message)
+		{
+			if (message.IndexOf (";;") == -1) {
+				messages [0] = message;
+				QueueRedraw ();
+				return;
+			}
+			
+			string[] parts = message.Split (new [] {";;"}, StringSplitOptions.RemoveEmptyEntries);
+			int slot = 0;
+			Int32.TryParse (parts [0], out slot);
+			if (parts.Count () > 1)
+				messages [slot] = parts [1];
+			else
+				messages [slot] = "";
+			if (parts.Count () == 3)
+				messageIcons [slot] = parts [2];
+			else
+				messageIcons [slot] = "";
+			
+			QueueRedraw ();
+		}
+		
 		public const int HoverTextHeight = 26;
 		
 		protected int IconSize { get; private set; }
@@ -222,6 +264,8 @@ namespace Docky.Items
 		public AbstractDockItem ()
 		{
 			ScalableRendering = true;
+			Progress = 0;
+			BadgeText = "";
 			icon_buffers = new DockySurface[2];
 			badgeColors = new Cairo.Color[2];
 			redraw = new bool[2];
@@ -552,7 +596,9 @@ namespace Docky.Items
 				if (icon_buffers[j] == null || redraw[j])
 					continue;
 				
-				if (icon_buffers[j].Height == size)
+				if (icon_buffers[j].Height == size 
+				    || (Owner != null && Owner.IsOnVerticalDock && icon_buffers[j].Width == size))
+					
 					return icon_buffers[j];
 			}
 			
@@ -598,6 +644,8 @@ namespace Docky.Items
 			}
 			
 			PaintBadgeSurface (icon_buffers [i]);
+			PaintMessagesSurface (icon_buffers [i]);
+			PaintProgressSurface (icon_buffers [i]);
 			
 			redraw [i] = false;
 			
@@ -616,10 +664,204 @@ namespace Docky.Items
 			PaintIconSurface (surface);
 		}
 		
+		void PaintMessagesSurface (DockySurface surface)
+		{
+			int pos = 0;
+			for (int i = 0; i < MaxMessages; i++)
+				if (!string.IsNullOrEmpty (messages [i]))
+					PaintMessage (surface, messageIcons [i], messages [i], MaxMessages - 1 - pos++);
+		}
+		
+		void PaintMessage (DockySurface surface, string icon, string message, int slot)
+		{
+			surface.Context.LineWidth = 0.5;
+			
+			double slotHeight = surface.Height / (double) MaxMessages;
+			double yOffset = slot * slotHeight;
+			surface.Context.RoundedRectangle (2, yOffset, surface.Width - 4, slotHeight - 2, 2.0);
+			surface.Context.Color = new Cairo.Color (1, 1, 1, 0.9);
+			surface.Context.StrokePreserve ();
+			surface.Context.Color = new Cairo.Color (0, 0, 0, 0.7);
+			surface.Context.Fill ();
+			
+			int iconSize = 0;
+			if (!string.IsNullOrEmpty (icon)) {
+				iconSize = (int) slotHeight - 4;
+				
+				using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (icon, iconSize, iconSize)) {
+					Gdk.CairoHelper.SetSourcePixbuf (surface.Context, 
+													 pbuf, 
+													 4 + (iconSize - pbuf.Width) / 2, 
+													 1 + yOffset + (iconSize - pbuf.Height) / 2);
+					surface.Context.Paint ();
+				}
+			}
+			
+			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ())
+			{
+				layout.Width = Pango.Units.FromPixels (surface.Width - iconSize - 8);
+				layout.Ellipsize = Pango.EllipsizeMode.None;
+				layout.FontDescription = new Gtk.Style ().FontDescription;
+				layout.FontDescription.Weight = Pango.Weight.Normal;
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) slotHeight - 6);
+				layout.SetText (message);
+				
+				Pango.Rectangle inkRect, logicalRect;
+				layout.GetPixelExtents (out inkRect, out logicalRect);
+				
+				surface.Context.MoveTo (surface.Width - 4 - logicalRect.Width, yOffset + (slotHeight - 2 - logicalRect.Height) / 2);
+				
+				Pango.CairoHelper.LayoutPath (surface.Context, layout);
+				surface.Context.LineWidth = 2;
+				surface.Context.StrokePreserve ();
+				surface.Context.Color = new Cairo.Color (1, 1, 1, 1);
+				surface.Context.Fill ();
+				
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
+			}
+		}
+		
+		void PaintProgressSurface (DockySurface surface)
+		{
+			if (Progress <= 0)
+				return;
+			
+			double padding = 2.0;
+			double width = surface.Width - 2 * padding;
+			double height = Math.Min (26.0, 0.18 * surface.Height);
+			double x = padding;
+			double y = surface.Height - height - padding;
+			
+			double lineSize = 1.0;
+			surface.Context.LineWidth = lineSize;
+			
+			// draw the outer stroke
+			x += lineSize / 2.0;
+			y += lineSize / 2.0;
+			width -= lineSize;
+			height -= lineSize;
+			
+			LinearGradient outer_stroke = new LinearGradient (0, y, 0, y + height);
+			outer_stroke.AddColorStop (0, new Cairo.Color (0, 0, 0, 0.3));
+			outer_stroke.AddColorStop (1, new Cairo.Color (1, 1, 1, 0.3));
+			
+			DrawRoundedLine (surface, x, y, width, height, true, true, outer_stroke, null);
+			outer_stroke.Destroy ();
+			
+			// draw the finished stroke/fill
+			x += lineSize;
+			y += lineSize;
+			width -= 2 * lineSize;
+			height -= 2 * lineSize;
+			double finishedWidth = Progress * width - lineSize / 2.0;
+			
+			LinearGradient finished_stroke = new LinearGradient (0, y, 0, y + height);
+			finished_stroke.AddColorStop (0, new Cairo.Color (67 / 255.0, 165 / 255.0, 226 / 255.0, 1));
+			finished_stroke.AddColorStop (1, new Cairo.Color (32 / 255.0, 94 / 255.0, 136 / 255.0, 1));
+			LinearGradient finished_fill = new LinearGradient (0, y, 0, y + height);
+			finished_fill.AddColorStop (0, new Cairo.Color (91 / 255.0, 174 / 255.0, 226 / 255.0, 1));
+			finished_fill.AddColorStop (1, new Cairo.Color (35 / 255.0, 115 / 255.0, 164 / 255.0, 1));
+			
+			DrawRoundedLine (surface, x, y, finishedWidth, height, true, false, finished_stroke, finished_fill);
+			finished_stroke.Destroy ();
+			finished_fill.Destroy ();
+			
+			// draw the remaining stroke/fill
+			LinearGradient remaining_stroke = new LinearGradient (0, y, 0, y + height);
+			remaining_stroke.AddColorStop (0, new Cairo.Color (82 / 255.0, 82 / 255.0, 82 / 255.0, 1));
+			remaining_stroke.AddColorStop (1, new Cairo.Color (148 / 255.0, 148 / 255.0, 148 / 255.0, 1));
+			LinearGradient remaining_fill = new LinearGradient (0, y, 0, y + height);
+			remaining_fill.AddColorStop (0, new Cairo.Color (106 / 255.0, 106 / 255.0, 106 / 255.0, 1));
+			remaining_fill.AddColorStop (1, new Cairo.Color (159 / 255.0, 159 / 255.0, 159 / 255.0, 1));
+			
+			DrawRoundedLine (surface, x + finishedWidth + lineSize, y, width - finishedWidth, height, false, true, remaining_stroke, remaining_fill);
+			remaining_stroke.Destroy ();
+			remaining_fill.Destroy ();
+			
+			// draw the highlight on the finished part
+			x += lineSize;
+			y += lineSize;
+			width -= lineSize;
+			height -= 2 * lineSize;
+			
+			LinearGradient finished_highlight = new LinearGradient (0, y, 0, y + height);
+			finished_highlight.AddColorStop (0, new Cairo.Color (1, 1, 1, 0.3));
+			finished_highlight.AddColorStop (0.2, new Cairo.Color (1, 1, 1, 0));
+			
+			DrawRoundedLine (surface, x, y, finishedWidth, height, true, false, finished_highlight, null);
+			finished_highlight.Destroy ();
+		}
+		
+		void DrawRoundedLine (DockySurface surface, double x, double y, double width, double height, bool roundLeft, bool roundRight, Gradient stroke, Gradient fill)
+		{
+			double leftRadius = roundLeft ? height / 2.0 : 0.0;
+			double rightRadius = roundRight ? height / 2.0 : 0.0;
+			
+			surface.Context.MoveTo (x + width - rightRadius, y);
+			surface.Context.LineTo (x + leftRadius, y);
+			if (roundLeft)
+				surface.Context.ArcNegative (x + leftRadius, y + height / 2.0, leftRadius, -Math.PI / 2.0, Math.PI / 2.0);
+			else
+				surface.Context.LineTo (x, y + height);
+			surface.Context.LineTo (x + width - rightRadius, y + height);
+			if (roundRight)
+				surface.Context.ArcNegative (x + width - rightRadius, y + height / 2.0, rightRadius, Math.PI / 2.0, -Math.PI / 2.0);
+			else
+				surface.Context.LineTo (x + width, y);
+			surface.Context.ClosePath ();
+			
+			if (fill != null) {
+				surface.Context.Pattern = fill;
+				surface.Context.FillPreserve ();
+			}
+			surface.Context.Pattern = stroke;
+			surface.Context.Stroke ();
+		}
+		
 		void PaintBadgeSurface (DockySurface surface)
 		{
 			if (string.IsNullOrEmpty (BadgeText))
 				return;
+			
+			int padding = 4;
+			int lineWidth = 2;
+			double size = (IsSmall ? 0.9 : 0.65) * Math.Min (surface.Width, surface.Height);
+			double x = surface.Width - size / 2;
+			double y = size / 2;
+			
+			if (!IsSmall) {
+				// draw outline shadow
+				surface.Context.LineWidth = lineWidth;
+				surface.Context.Color = new Cairo.Color (0, 0, 0, 0.5);
+				surface.Context.Arc (x, y + 1, size / 2 - lineWidth, 0, Math.PI * 2);
+				surface.Context.Stroke ();
+				
+				// draw filled gradient
+				RadialGradient rg = new RadialGradient (x, lineWidth, 0, x, lineWidth, size);
+				rg.AddColorStop (0, badgeColors [0]);
+				rg.AddColorStop (1.0, badgeColors [1]);
+				
+				surface.Context.Pattern = rg;
+				surface.Context.Arc (x, y, size / 2 - lineWidth, 0, Math.PI * 2);
+				surface.Context.Fill ();
+				rg.Destroy ();
+				
+				// draw outline
+				surface.Context.Color = new Cairo.Color (1, 1, 1, 1);
+				surface.Context.Arc (x, y, size / 2 - lineWidth, 0, Math.PI * 2);
+				surface.Context.Stroke ();
+				
+				surface.Context.LineWidth = lineWidth / 2;
+				surface.Context.Color = badgeColors [1];
+				surface.Context.Arc (x, y, size / 2 - 2 * lineWidth, 0, Math.PI * 2);
+				surface.Context.Stroke ();
+				
+				surface.Context.Color = new Cairo.Color (0, 0, 0, 0.2);
+			} else {
+				lineWidth = 0;
+				padding = 2;
+			}
 			
 			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ())
 			{
@@ -629,62 +871,35 @@ namespace Docky.Items
 				layout.FontDescription.Weight = Pango.Weight.Bold;
 				
 				Pango.Rectangle inkRect, logicalRect;
-				int tsize = 3;
-				do {
-					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (tsize);
-					layout.SetText (BadgeText);
-					layout.GetPixelExtents (out inkRect, out logicalRect);
-					tsize++;
-				} while (Math.Max (logicalRect.Width, logicalRect.Height) < surface.Height / (IsSmall ? 1 : 2) - 8);
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (surface.Height / 2);
+				layout.SetText (BadgeText);
+				layout.GetPixelExtents (out inkRect, out logicalRect);
 				
-				int size = Math.Max (logicalRect.Width, logicalRect.Height);
-				int padding = 4;
-				int lineWidth = 2;
-				int x = surface.Width - size / 2 - padding - lineWidth;
-				int y = size / 2 + padding + lineWidth;
+				size -= 2 * padding + 2 * lineWidth;
+				
+				double scale = Math.Min (1, Math.Min (size / (double) logicalRect.Width, size / (double) logicalRect.Height));
 				
 				if (!IsSmall) {
-					// draw outline shadow
-					surface.Context.LineWidth = lineWidth;
-					surface.Context.Color = new Cairo.Color (0, 0, 0, 0.5);
-					surface.Context.Arc (x, y + 1, size / 2 + padding, 0, Math.PI * 2);
-					surface.Context.Stroke ();
-					
-					// draw filled gradient
-					RadialGradient rg = new RadialGradient (x, lineWidth, 0, x, lineWidth, size + 2 * padding);
-					rg.AddColorStop (0, badgeColors [0]);
-					rg.AddColorStop (1.0, badgeColors [1]);
-					
-					surface.Context.Pattern = rg;
-					surface.Context.Arc (x, y, size / 2 + padding, 0, Math.PI * 2);
-					surface.Context.Fill ();
-					rg.Destroy ();
-					
-					// draw outline
-					surface.Context.Color = new Cairo.Color (1, 1, 1, 1);
-					surface.Context.Arc (x, y, size / 2 + padding, 0, Math.PI * 2);
-					surface.Context.Stroke ();
-					
-					surface.Context.LineWidth = lineWidth / 2;
-					surface.Context.Color = badgeColors [1];
-					surface.Context.Arc (x, y, size / 2 + padding - lineWidth, 0, Math.PI * 2);
-					surface.Context.Stroke ();
-					
 					surface.Context.Color = new Cairo.Color (0, 0, 0, 0.2);
 				} else {
-					x = surface.Width - logicalRect.Width / 2;
-					y = logicalRect.Height / 2;
 					surface.Context.Color = new Cairo.Color (0, 0, 0, 0.6);
+					x = surface.Width - scale * logicalRect.Width / 2;
+					y = scale * logicalRect.Height / 2;
 				}
 				
-				// draw text
-				surface.Context.MoveTo (x - logicalRect.Width / 2, y - logicalRect.Height / 2);
+				surface.Context.MoveTo (x - scale * logicalRect.Width / 2, y - scale * logicalRect.Height / 2);
 				
-				Pango.CairoHelper.LayoutPath (surface.Context, layout);
+				// draw text
+				surface.Context.Save ();
+				if (scale < 1)
+					surface.Context.Scale (scale, scale);
+				
 				surface.Context.LineWidth = 2;
+				Pango.CairoHelper.LayoutPath (surface.Context, layout);
 				surface.Context.StrokePreserve ();
 				surface.Context.Color = new Cairo.Color (1, 1, 1, 1);
 				surface.Context.Fill ();
+				surface.Context.Restore ();
 				
 				layout.FontDescription.Dispose ();
 				layout.Context.Dispose ();
@@ -876,7 +1091,6 @@ namespace Docky.Items
 			AppDomain.CurrentDomain.ProcessExit -= HandleProcessExit;
 			Gtk.IconTheme.Default.Changed -= HandleIconThemeChanged;
 			ResetBuffers ();
-			RemoteMenuItems.Dispose ();
 		}
 
 		#endregion

@@ -1,549 +1,540 @@
-# Swedish translation for docky
-# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# Chinese (Hong Kong) translation for docky
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the docky package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-07-22 07:29+0200\n"
-"PO-Revision-Date: 2010-07-19 20:15+0000\n"
+"PO-Revision-Date: 2010-07-18 12:44+0000\n"
 "Last-Translator: Rico Tzschichholz <Unknown>\n"
-"Language-Team: Swedish <sv@li.org>\n"
+"Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Launchpad-Export-Date: 2010-07-22 06:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:147
 msgid "Search Docklets..."
-msgstr "Sök dockprogram..."
+msgstr "搜尋 Docklets ……"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:163
 msgid "Search Helpers..."
-msgstr "Sök hjälpare..."
+msgstr "搜尋小幫手……"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:227
 msgid "Click on any dock to configure."
-msgstr "Klicka på en docka för att konfigurera den."
+msgstr "點擊 Dock 就可更改設定。"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid "Drag any dock to reposition."
-msgstr "Drag en docka för att flytta på den."
+msgstr "拖曳就可更改位置。"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:293
 msgid "Delete the currently selected dock?"
-msgstr "Ta bort den markerade dockan?"
+msgstr "刪除目前點選了的 Dock ？"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:295
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
-msgstr ""
-"Om du väljer att ta bort dockan så kommer alla\n"
-"inställningar för den borttagna dockan att förloras."
+msgstr "若你刪除此 Dock ，一切有關設定將會永久刪除。"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:302
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
-msgstr "_Ta bort docka"
+msgstr "刪除 Dock（_D）"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:418
 #: ../Docky/Docky/ConfigurationWindow.cs:438
 msgid "_Select"
-msgstr "_Välj"
+msgstr "選取（_S）"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:421
 #: ../Docky/Docky/ConfigurationWindow.cs:441
 msgid ".tar Archives"
-msgstr ".tar-arkiv"
+msgstr ".tar 檔案"
 
 #: ../Docky/Docky/DockletTile.cs:51
 msgid "Author"
-msgstr "Upphovsman"
+msgstr "作者"
 
 #: ../Docky/Docky/DockletTile.cs:86
 msgid "Move this docklet up on the selected dock"
-msgstr "Flytta upp det här dockprogrammet i den markerade dockan"
+msgstr "在選取了的 Dock 中將此 Docklet 往上移"
 
 #: ../Docky/Docky/DockletTile.cs:87
 msgid "Move this docklet down on the selected dock"
-msgstr "Flytta ner det här dockprogrammet i den markerade dockan"
+msgstr "在選取了的 Dock 中將此 Docklet 往下移"
 
 #: ../Docky/Docky/DockletTile.cs:91
 msgid "Move this docklet left on the selected dock"
-msgstr "Flytta den här dockletten vänster på den markerade dockan"
+msgstr "在選取了的 Dock 中將此 Docklet 往左移"
 
 #: ../Docky/Docky/DockletTile.cs:92
 msgid "Move this docklet right on the selected dock"
-msgstr "Flytta den här dockletten höger på den markerade dockan"
+msgstr "在選取了的 Dock 中將此 Docklet 往右移"
 
 #: ../Docky/Docky/DockletTile.cs:94
 msgid "Configure this docklet"
-msgstr "Konfigurera denna docka"
+msgstr "設定此 Docklet"
 
 #: ../Docky/Docky/DockletTile.cs:95
 msgid "About this docklet"
-msgstr "Om denna docka"
+msgstr "有關此 Docklet"
 
 #: ../Docky/Docky/DockletTile.cs:96
 msgid "Add this docklet to the selected dock"
-msgstr "Lägg till det här dockprogrammet till valda dockan"
+msgstr "將此 Docklet 加到選取了的 Dock"
 
 #: ../Docky/Docky/DockletTile.cs:97
 msgid "Remove this docklet from the selected dock"
-msgstr "Ta bort den här dockletten från den markerade dockan"
+msgstr "從選取了的 Dock 中移除此 Docklet"
 
 #: ../Docky/Docky/Docky.cs:123
 msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
 msgstr ""
-"Docky kräver komposition för att fungera ordentligt. Vissa inställningar är "
-"avstängda och teman/animationer kommer se fel ut. "
 
 #: ../Docky/Docky/HelperTile.cs:42
 msgid "Status"
-msgstr "Status"
+msgstr "狀態"
 
 #: ../Docky/Docky/HelperTile.cs:59
 msgid "Uninstall"
-msgstr "Avinstallera"
+msgstr "移除"
 
 #: ../Docky/Docky/HelperTile.cs:71
 msgid "About this helper"
-msgstr "Om denna hjälpare"
+msgstr "有關此小幫手"
 
 #: ../Docky/Docky/HelperTile.cs:72
 msgid "Enable this helper"
-msgstr "Aktivera denna hjälpare"
+msgstr "啟用此小幫手"
 
 #: ../Docky/Docky/HelperTile.cs:73
 msgid "Disable this helper"
-msgstr "Inaktivera denna hjälpare"
+msgstr "停用此小幫手"
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Running"
-msgstr "Kör"
+msgstr "執行中"
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Stopped"
-msgstr "Stoppad"
+msgstr "已停止"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:332
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
-msgstr ""
-"Fönster som inte redan har en ikon på någon docka kommer att läggas till i "
-"denna docka."
+msgstr "若選取此選項，沒有啟動器的視窗會被加到此 Dock 上。"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:683
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
-msgstr "<i>Dölj aldrig; maximerade fönster överlappar inte dockan.</i>"
+msgstr "<i>永不隱藏；最大化了的視窗不會與 Dock 重疊。</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:686
 msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr "<i>Döljer sig när muspekaren inte är över den.</i>"
+msgstr "<i>滑鼠移開後即隱藏</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:689
 msgid "<i>Hides when dock obstructs the active application.</i>"
-msgstr "<i>Döljer sig när dockan är i vägen för det aktiva programmet.</i>"
+msgstr "<i>Docky 與目前使用中的軟件重疊時即隱藏。</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:692
 msgid "<i>Hides when dock obstructs any window.</i>"
-msgstr "<i>Döljer sig när dockan är i vägen för något fönster.</i>"
+msgstr "<i>Docky 與任何視窗重疊時即隱藏。</i>"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:381
 msgid "Drag to reposition"
-msgstr "Dra för att ändra position"
+msgstr "拖曳以更改位置"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:393
 #: ../Docky/Docky/Interface/DockWindow.cs:407
 msgid "Drop to add to dock"
-msgstr "Släpp för att lägga till i dockan"
+msgstr "放開滑鼠按鍵以加到 Dock 上"
 
 #: ../Docky/Docky/Items/DockyItem.cs:133
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:244
 msgid "_Settings"
-msgstr "_Inställningar"
+msgstr "設定（_S）"
 
 #: ../Docky/Docky/Items/DockyItem.cs:134
 msgid "_About"
-msgstr "_Om"
+msgstr "關於（_A）"
 
 #: ../Docky/Docky/Items/DockyItem.cs:135
 msgid "_Help"
-msgstr "_Hjälp"
+msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:137
 msgid "_Quit Docky"
-msgstr "A_vsluta Docky"
+msgstr "退出 Docky（_Q）"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
 msgid "Docky Settings"
-msgstr "Inställningar för Docky"
+msgstr "Docky 設定"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
 msgid "_Start When User Logs In"
-msgstr "_Starta när du loggar in"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
-msgstr "_Tema:"
+msgstr "主題（_T）："
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
 msgid "_Install"
-msgstr "_Installera"
+msgstr "安裝（_I）"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
 msgid "<b>General Options</b>"
-msgstr "<b>Allmänna alternativ</b>"
+msgstr "<b>一般選項</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
-msgstr "<b>Dockinställningar</b>"
+msgstr "<b>Dock 設定</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
-msgstr "Dockor"
+msgstr "Docks"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
 msgid "All"
-msgstr "Alla"
+msgstr "全部"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
 msgid "Enabled"
-msgstr "Aktiverad"
+msgstr "已啟用"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
 msgid "Disabled"
-msgstr "Inaktiverad"
+msgstr "已停用"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
 msgid "Docklets"
-msgstr "Dockprogram"
+msgstr "Docklets"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
 msgid "Usable"
-msgstr "Användbar"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
-msgstr "Hjälpare"
+msgstr "小幫手"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
 msgid "_New Dock"
-msgstr "_Ny docka"
+msgstr "開新 Dock （_N）"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
 msgid "None"
-msgstr "Ingen"
+msgstr "無"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
 msgid "Autohide"
-msgstr "Dölj automatiskt"
+msgstr "自動隱藏"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "Intellihide"
-msgstr "Dölj smart"
+msgstr "智能隱藏"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Window Dodge"
-msgstr "Undvik fönster"
+msgstr "視窗閃避"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
 msgid "_Fade On Hide"
-msgstr "_Tona vid döljande"
+msgstr "淡出隱藏（_F）"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
 msgid "_Icon Size:"
-msgstr "_Ikonstorlek:"
+msgstr "圖示大小（_I）"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:132
 msgid "_Hiding:"
-msgstr "_Dölj:"
+msgstr "隱藏（_H）"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
 msgid "_Panel Mode"
-msgstr "_Panelläge"
+msgstr "整列模式（_P）"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
 msgid "3D Back_ground"
-msgstr "3D-bak_grund"
+msgstr "三維背景（_G）"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
 msgid "_Manage Windows Without Launcher"
-msgstr "_Hantera fönster utan programstartare"
+msgstr "管理沒有啟動器的視窗（_M）"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
 msgid "_Zoom:"
-msgstr "_Zoom:"
+msgstr "縮放（_Z）"
 
 #: ../Docky.Items/Docky.Items/AbstractDockItem.cs:120
 #, csharp-format
 msgid "Drop to open with {0}"
-msgstr "Släpp för att öppna med {0}"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:173
 msgid "New _Window"
-msgstr "Nytt _fönster"
+msgstr "開新視窗（_W）"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:175
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
-msgstr "_Öppna"
+msgstr "開啟（_O）"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:69
 msgid "Reset Color"
-msgstr "Nollställ färg"
+msgstr "重置顏色"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:477
 msgid "_Pin to Dock"
-msgstr "_Nåla fast i dockan"
+msgstr "保留在 Dock 上（_P）"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:75
 #, csharp-format
 msgid "Drop to move to {0}"
-msgstr "Släpp för att flytta till {0}"
+msgstr ""
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:194
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:239
 msgid "Error performing drop action"
-msgstr "Ett fel uppstod när objektet släpptes"
+msgstr "拖曳時發生錯誤"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:194
 msgid "Not enough free space on destination."
-msgstr "Det finns inte tillräckligt med utrymme på målet."
+msgstr "目標位置不夠空間。"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:211
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:214
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:246
 msgid "Complete"
-msgstr "Färdig"
+msgstr "完成"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:224
 msgid "Moving"
-msgstr "Flyttar"
+msgstr "移動中"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:230
 msgid "Copying"
-msgstr "Kopierar"
+msgstr "複製中"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:264
 msgid "Open"
-msgstr "Öppna"
+msgstr "開啟"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:265
 msgid "Open Containing Folder"
-msgstr "Öppna mappen med filen"
+msgstr "開啟所在文件夾"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:257
 msgid "Unma_ximize"
-msgstr "Avma_ximera"
+msgstr "取消最大化（_x）"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:260
 msgid "Ma_ximize"
-msgstr "Ma_ximera"
+msgstr "最大化（_x）"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
 msgid "_Restore"
-msgstr "_Återställ"
+msgstr "還原（_R）"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:267
 msgid "Mi_nimize"
-msgstr "Mi_nimera"
+msgstr "最小化（_N）"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:270
 msgid "_Close All"
-msgstr "S_täng alla"
+msgstr "全部關閉（_C）"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
 msgid "Sign up for {0}"
-msgstr "Registrera dig för {0}"
+msgstr "注册 {0}"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:44
 msgid "Validating..."
-msgstr "Validerar..."
+msgstr "驗證中……"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:45
 #, csharp-format
 msgid "Don't have {0}?"
-msgstr "Har du inte {0}?"
+msgstr "没有 {0}？"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:46
 msgid "Account validation failed!"
-msgstr "Kontovalideringen misslyckades!"
+msgstr "帳戶驗證失敗！"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:47
 msgid "Verify and save account information"
-msgstr "Verifiera och spara kontoinformationen"
+msgstr "驗證並儲存帳戶資料"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:48
 msgid "Account validation succeeded!"
-msgstr "Kontovalideringen lyckades!"
+msgstr "帳戶驗證成功！"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:87
 msgid "Password"
-msgstr "Lösenord"
+msgstr "密碼"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:108
 msgid "Username"
-msgstr "Användarnamn"
+msgstr "用戶名稱"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
 msgid "<i>Verify and save account information</i>"
-msgstr "<i>Verifiera och spara kontoinformation</i>"
+msgstr "<i>驗證並儲存帳戶資料</i>"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
 msgid "Don't have an account?"
-msgstr "Har du inte ett konto?"
+msgstr "沒有帳號？"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:156
 msgid "No Battery Found"
-msgstr "Inget batteri hittades"
+msgstr "沒有電池"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:173
 #, csharp-format
 msgid "{0} hour"
 msgid_plural "{0} hours"
-msgstr[0] "{0} timme"
-msgstr[1] "{0} timmar"
+msgstr[0] "{0} 小時"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:175
 #, csharp-format
 msgid "{0} minute"
 msgid_plural "{0} minutes"
-msgstr[0] "{0} minut"
-msgstr[1] "{0} minuter"
+msgstr[0] "{0} 分"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:177
 msgid "until charged "
-msgstr "tills uppladdat "
+msgstr "直至充電完成 "
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:179
 msgid "remaining "
-msgstr "återstår "
+msgstr "剩餘 "
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:86
 msgid "Computer"
-msgstr "Dator"
+msgstr "電腦"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:430
 msgid "Di_gital Clock"
-msgstr "Di_gital klocka"
+msgstr "數碼時鐘（_G）"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:436
 msgid "24-Hour _Clock"
-msgstr "24-timmars_klocka"
+msgstr "廿四小時時鐘（_C）"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:442
 msgid "Show _Date"
-msgstr "Visa _datum"
+msgstr "顯示日期（_D）"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:448
 msgid "Select _Theme"
-msgstr "Välj _tema"
+msgstr "選擇主題（_T）"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
-msgstr "Teman"
+msgstr "主題"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:62
 msgid "Theme"
-msgstr "Tema"
+msgstr "主題"
 
 #: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:42
 msgid "Show Desktop"
-msgstr "Visa skrivbordet"
+msgstr "顯示桌面"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
 msgid "_Add Label"
-msgstr "_Lägg till etikett"
+msgstr "加上標籤（_A）"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:113
 msgid "Check e_very:"
-msgstr "Kontr_ollera var:"
+msgstr "全部檢查（_V）"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:123
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:186
 msgid "minutes"
-msgstr "minuter"
+msgstr "分鐘"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:174
 msgid "Click to set username and password."
-msgstr "Klicka för att ställa in användarnamn och lösenord."
+msgstr "點擊以設定用戶名稱及密碼。"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:233
 msgid "(no subject)"
-msgstr "(inget ämne)"
+msgstr "（沒有主題）"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:247
 #, csharp-format
 msgid "You have {0} new, unread messages"
-msgstr "Du har {0} nya olästa meddelanden"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:251
 #, csharp-format
 msgid "From: {0}"
-msgstr "Från: {0}"
+msgstr "來自：{0}"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:265
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:270
 msgid "Feed Error"
-msgstr "Fel i webbkanal"
+msgstr "Feed 錯誤"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:275
 msgid "Invalid Username"
-msgstr "Ogiltigt användarnamn"
+msgstr "用戶名稱無效"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:279
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:283
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:174
 msgid "Network Error"
-msgstr "Nätverksfel"
+msgstr "網絡錯誤"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:288
 msgid "General Error"
-msgstr "Allmänt fel"
+msgstr "一般錯誤"
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
 msgid "GMail Configuration"
-msgstr "Inställningar för GMail"
+msgstr "GMail 設定"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 msgid "No unread mail"
-msgstr "Inga olästa brev"
+msgstr "無未讀郵件"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:98
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
-msgstr[0] "{0} oläst meddelande"
-msgstr[1] "{0} olästa meddelanden"
+msgstr[0] "{0} 封未讀郵件"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:119
 msgid "Checking mail..."
-msgstr "Letar efter nya brev..."
+msgstr "查看有否新郵件……"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "_View "
-msgstr "_Visa "
+msgstr "查看（_V） "
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
 msgid "_Compose Mail"
-msgstr "S_kriv e-postmeddelande"
+msgstr "撰寫郵件（_C）"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:211
 msgid "View C_ontacts"
@@ -551,15 +542,15 @@ msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
 msgid "New Mail"
-msgstr "Ny e-post"
+msgstr "新郵件"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:236
 msgid "Check _Mail"
-msgstr "Kontrollera _e-post"
+msgstr "查看有否新郵件（_M）"
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
-msgstr "Etiketter"
+msgstr "標籤"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
 msgid "GMail"
@@ -567,90 +558,90 @@ msgstr "GMail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr "Logga in"
+msgstr "登入"
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
-msgstr "Från: "
+msgstr "來自： "
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Eject"
-msgstr "Mata _ut"
+msgstr "退出（_E）"
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Unmount"
-msgstr "_Avmontera"
+msgstr "卸載（_U）"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:53
 msgid "Network Manager"
-msgstr "Nätverkshanterare"
+msgstr "網絡管理員"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
-msgstr "Ansluter..."
+msgstr "連線中……"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:101
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:166
 msgid "Disconnected"
-msgstr "Frånkopplad"
+msgstr "已斷線"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
 msgid "Connected: {0}"
-msgstr "Ansluten: {0}"
+msgstr "已連接：{0}"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:47
 msgid "My _Stations"
-msgstr "Mina _stationer"
+msgstr "我的電台（_S）"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:78
 msgid "S_earch"
-msgstr "S_ök"
+msgstr "搜尋（_E）"
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
-msgstr "Inga stationer hittades."
+msgstr "沒有找到電台。"
 
 #: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
-msgstr "Prova att söka igen."
+msgstr "請再嘗試搜尋。"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:46
 msgid "Fetching Information..."
-msgstr "Hämtar information..."
+msgstr "獲取資料中……"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:72
 msgid "Click to add NPR stations."
-msgstr "Klicka för att lägga till NPR-stationer."
+msgstr "點擊以加入 NPR 電台。"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:111
 msgid "Home Page"
-msgstr "Webbsida"
+msgstr "首頁"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:118
 msgid "Program Schedule"
-msgstr "Programtablå"
+msgstr "節目時間表"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:125
 msgid "Donate"
-msgstr "Donera"
+msgstr "捐贈"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:132
 msgid "Live Streams"
-msgstr "Live-strömmar"
+msgstr "即時串流"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:170
 msgid "Settings"
-msgstr "Inställningar"
+msgstr "設定"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:56
 msgid "Clear the Recent Documents list?"
-msgstr "Töm Senaste dokument-listan?"
+msgstr "清除最近的文件存取記錄？"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:58
 msgid "Clear Recent Documents"
-msgstr "Töm senaste dokument"
+msgstr "清除最近的文件存取記錄"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:60
 msgid ""
@@ -658,64 +649,63 @@ msgid ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
-"Om du tömmer listan över senaste dokument så tömmer du följande:\n"
-"• Alla objekt från menyobjektet Platser → Senaste dokument.\n"
-"• Alla objekt från listan över senaste dokument i alla program."
+"當你清除最近的文件存取記錄時，以下項目會被清除：\n"
+"• 在「位置」中「最近存取文件」內所有項目。\n"
+"• 所有程式選單中最近存取文件的所有項目。"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:81
 msgid "_Clear Recent Documents..."
-msgstr "_Töm Senaste dokument..."
+msgstr "清除最近的文件存取記錄（_C）"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:152
 msgid "Lock Screen"
-msgstr "Lås skärmen"
+msgstr "鎖定螢幕"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:156
 msgid "Log Out..."
-msgstr "Logga ut..."
+msgstr "登出……"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:157
 msgid "Log Out"
-msgstr "Logga ut"
+msgstr "登出"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
-msgstr ""
-"Är du säker på att du vill stänga alla program och logga ut från datorn?"
+msgstr "你確定要關閉所有軟件並登出電腦？"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:163
 msgid "Suspend"
-msgstr "Vänteläge"
+msgstr "暫停"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:168
 msgid "Hibernate"
-msgstr "Viloläge"
+msgstr "休眠"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:174
 msgid "Restart..."
-msgstr "Starta om..."
+msgstr "重新啟動……"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:175
 msgid "Restart"
-msgstr "Starta om"
+msgstr "重新啟動"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
 msgid "Are you sure you want to close all programs and restart the computer?"
-msgstr "Är du säker på att du vill stänga alla program och starta om datorn?"
+msgstr "你確定要關閉所有軟件並重新啟動電腦？"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:181
 msgid "Shut Down..."
-msgstr "Stäng av..."
+msgstr "關機……"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:182
 msgid "Shut Down"
-msgstr "Stäng av"
+msgstr "關機"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:183
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
-msgstr "Är du säker på att du vill stänga alla program och stänga av datorn?"
+msgstr "你確定要關閉所有軟件並重新關閉電腦？"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:90
 #, csharp-format
@@ -724,15 +714,15 @@ msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:236
 msgid "Time remaining:"
-msgstr "Tid kvar:"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:238
 msgid "Timer paused, time remaining:"
-msgstr "Timer pausad, tid kvar:"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:249
 msgid "Set the timer's label to:"
-msgstr "Namnge timern:"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:255
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:289
@@ -754,20 +744,20 @@ msgstr ""
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:62
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] "timma"
-msgstr[1] "timmar"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:66
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] "minut"
-msgstr[1] "minuter"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:71
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] "sekund"
-msgstr[1] "sekunder"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:138
 #, csharp-format
@@ -784,35 +774,34 @@ msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:50
 msgid "Drop to move to Trash"
-msgstr "Släpp för att flytta till papperskorgen"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:77
 msgid "No items in Trash"
-msgstr "Papperskorgen är tom"
+msgstr "沒有東西在回收筒"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:79
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
-msgstr[0] "{0} objekt i papperskorgen"
-msgstr[1] "{0} objekt i papperskorgen"
+msgstr[0] "回收筒有 {0} 樣東西"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:164
 msgid "Restore Files"
-msgstr "Återställ filer"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:195
 msgid "_Open Trash"
-msgstr "_Öppna papperskorgen"
+msgstr "開啟回收筒（_O）"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:197
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:234
 msgid "Empty _Trash"
-msgstr "Töm _papperskorgen"
+msgstr "清空回收筒（_T）"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:226
 msgid "Empty all of the items from the trash?"
-msgstr "Ta bort alla objekt i papperskorgen?"
+msgstr "要清理回收筒內所有項目？"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:228
 msgid ""
@@ -820,41 +809,38 @@ msgid ""
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
-"Om du väljer att tömma papperskorgen så kommer\n"
-"allting i den att permanent gå förlorat. Observera att\n"
-"du även kan ta bort dem en och en."
+"若你清空回收筒，內裏所有項目會永久刪除。\n"
+"請注意，每個項目都可以單獨刪除。"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:65
 msgid "_Weather Provider:"
-msgstr "_Väderleverantör:"
+msgstr "天氣報告提供者（_W）"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:105
 msgid "My _Locations"
-msgstr "Mina _platser"
+msgstr "我的位置（_L）"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:136
 msgid "_Search"
-msgstr "_Sök"
+msgstr "搜尋（_S）"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:176
 msgid "Automatically Update _Every"
-msgstr "Uppdatera automatiskt _var"
+msgstr "自動更新頻率（_E）"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:220
 msgid "Use _Metric Units"
-msgstr "Använd _metriska enheter"
+msgstr "使用十進制單位（_M）"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:171
 msgid "Invalid Weather Location"
-msgstr "Ogiltig väderplats"
+msgstr "無效的天氣位置"
 
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
-msgstr ""
-"Väderdata tillhandahålls av Google. Denna källa kräver att platser anges med "
-"amerikanskt postnummer eller i formatet: \"Stad, Land\"."
+msgstr "天氣報告由 Google 提供。此資料來源規定位置必須以美國郵區號碼或「城市，國家」填寫。"
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
@@ -863,62 +849,57 @@ msgid ""
 "website.  To find your code, look up your forecast on their site and the "
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
-"Väderdata tillhandahålls av och ägs av The Weather Channel. Den här källan "
-"kräver att platser anges med amerikanskt postnummer eller en unik kod från "
-"deras webbsida. För att ta reda på din kod, sök reda på väderleksrapporten "
-"på deras webbsida och sedan står koden i adressfältet efter /local/ och kan "
-"se ut som så här: AAXX0000."
+"天氣報告由 The Weather Channel "
+"提供。版權所有。此資料來源規定位置必須以美國郵區號碼或該網站特定的地區編號填寫。你可以到該網站查詢天氣，而你的地區編號會在網址內，緊隨 /local/ "
+"其後，例如：AAXX0000 。"
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:56
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
-msgstr ""
-"Väderdata tillhandahålls av och ägs av Weather Underground. Denna källa "
-"kräver att platser anges med amerikanskt postnummer eller i formatet: "
-"\"Stad, Land\"."
+msgstr "天氣報告由 Weather Underground 提供。版權所有。此資料來源規定位置必須以美國郵區號碼或「城市，國家」填寫。"
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
-msgstr "Inga resultat hittades."
+msgstr "搜尋無結果。"
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
-msgstr "Väderkonfiguration"
+msgstr "天氣設定"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
 msgid "Click to add a location."
-msgstr "Klicka för att lägga till en plats."
+msgstr "點擊以加入位置。"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
 msgid "Fetching data..."
-msgstr "Hämtar data..."
+msgstr "正在獲取數據……"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Radar _Map"
-msgstr "Radarka_rta"
+msgstr "雷達圖（_M）"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "Forecasts"
-msgstr "Prognoser"
+msgstr "預測"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:252
 msgid "Check _Weather"
-msgstr "Kontrollera _vädret"
+msgstr "查看天氣（_W）"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
 msgid "_Today"
-msgstr "_Idag"
+msgstr "今日（_T）"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
 msgid "T_omorrow"
-msgstr "I_morgon"
+msgstr "明日（_O）"
 
 #. draw humidity
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:328
 #, csharp-format
 msgid "{0} humidity"
-msgstr "{0} luftfuktighet"
+msgstr "濕度 {0}"
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:69
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:219
@@ -932,156 +913,3 @@ msgstr ""
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:172
 msgid "Virtual Desk"
 msgstr ""
-
-#~ msgid "Drag any dock to move it."
-#~ msgstr "Dra i en docka för att flytta den."
-
-#~ msgid "Theme:"
-#~ msgstr "Tema:"
-
-#~ msgid "Delete Dock"
-#~ msgstr "Ta bort docka"
-
-#~ msgid "Icon Size:"
-#~ msgstr "Ikonstorlek:"
-
-#~ msgid "Icon"
-#~ msgstr "Ikon"
-
-#~ msgid "Indicate Multiple Windows"
-#~ msgstr "Indikera flera fönster"
-
-#~ msgid "Panel Mode"
-#~ msgstr "Panelläge"
-
-#~ msgid "_Remove"
-#~ msgstr "_Ta bort"
-
-#~ msgid "Docky Configuration"
-#~ msgstr "Konfigurera Docky"
-
-#~ msgid "Start When Computer Starts"
-#~ msgstr "Starta när datorn startar"
-
-#~ msgid "New Dock"
-#~ msgstr "Ny docka"
-
-#~ msgid "Zoom:"
-#~ msgstr "Zooma:"
-
-#~ msgid "Autohide:"
-#~ msgstr "Dölj automatiskt:"
-
-#~ msgid "Related Items"
-#~ msgstr "Relaterade objekt"
-
-#~ msgid "_Quit"
-#~ msgstr "A_vsluta"
-
-#~ msgid "Username or Password not set"
-#~ msgstr "Användarnamn och lösenord har inte angivits"
-
-#~ msgid "_Add"
-#~ msgstr "_Lägg till"
-
-#~ msgid "Network Error: "
-#~ msgstr "Nätverksfel: "
-
-#~ msgid "_Reload Weather Data"
-#~ msgstr "_Uppdatera väderdata"
-
-#~ msgid "Wind"
-#~ msgstr "Vind"
-
-#~ msgid "Direction"
-#~ msgstr "Riktning"
-
-#~ msgid "Temp"
-#~ msgstr "Temp"
-
-#~ msgid "Feels Like"
-#~ msgstr "Känns som"
-
-#~ msgid "Humidity"
-#~ msgstr "Luftfuktighet"
-
-#~ msgid "Sunrise"
-#~ msgstr "Soluppgång"
-
-#~ msgid "Docky"
-#~ msgstr "Docky"
-
-#~ msgid "Sunset"
-#~ msgstr "Solnedgång"
-
-#~ msgid "Fade On Hide"
-#~ msgstr "Tona ut dockan"
-
-#~ msgid "Manage Windows Without Launcher"
-#~ msgstr "Hantera fönster utan programstartare"
-
-#~ msgid "Check _Now"
-#~ msgstr "Kontrollera _nu"
-
-#~ msgid "<b>Active Plugins</b>"
-#~ msgstr "<b>Aktiva insticksmoduler</b>"
-
-#~ msgid "<b>Inactive Plugins</b>"
-#~ msgstr "<b>Inaktiva insticksmoduler</b>"
-
-#~ msgid "_Start When Computer Starts"
-#~ msgstr "_Starta när datorn startar"
-
-#~ msgid "Indicat_e Multiple Windows"
-#~ msgstr "Indike_ra flera fönster"
-
-#~ msgid ""
-#~ "Causes launchers which currently manage more than one window to have an "
-#~ "extra indicator under it."
-#~ msgstr ""
-#~ "Gör så att programstartare som hanterar fler än ett fönster har en extra "
-#~ "indikator under sig."
-
-#~ msgid ""
-#~ "Docky requires compositing to work properly.  Please enable compositing and "
-#~ "restart docky."
-#~ msgstr ""
-#~ "Docky kräver att compositing för att fungera korrekt. Aktivera compositing "
-#~ "och starta om Docky."
-
-#~ msgid "Drop to open"
-#~ msgstr "Släpp för att öppna"
-
-#~ msgid "Extensions"
-#~ msgstr "Tillägg"
-
-#~ msgid "Disable"
-#~ msgstr "Inaktivera"
-
-#~ msgid "3D Background"
-#~ msgstr "3D-bakgrund"
-
-#~ msgid "Enable"
-#~ msgstr "Aktivera"
-
-#~ msgid "Click to browse..."
-#~ msgstr "Klicka för att bläddra..."
-
-#~ msgid "<b>Active Docklets</b>"
-#~ msgstr "<b>Aktiva docklets</b>"
-
-#~ msgid "<b>Inactive Docklets</b>"
-#~ msgstr "<b>Inaktiva docklets</b>"
-
-#~ msgid "_Disable"
-#~ msgstr "_Inaktivera"
-
-#~ msgid "_Enable"
-#~ msgstr "_Aktivera"
-
-#~ msgid ""
-#~ "Docky requires compositing to work properly. Please enable compositing and "
-#~ "restart docky."
-#~ msgstr ""
-#~ "Docky kräver compositing för att fungera korrekt. Aktivera composition och "
-#~ "starta om docky."

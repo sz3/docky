@@ -58,13 +58,10 @@ SHAMROCK_EXPAND_BINDIR
 SHAMROCK_EXPAND_DATADIR
 
 PKG_CHECK_MODULES([GCONF_SHARP_20], [gconf-sharp-2.0])
-PKG_CHECK_MODULES([GLADE_SHARP_20], [glade-sharp-2.0])
 PKG_CHECK_MODULES([GLIB_SHARP_20], [glib-sharp-2.0])
 PKG_CHECK_MODULES([GIO_SHARP], [gio-sharp-2.0])
 PKG_CHECK_MODULES([GNOME_DESKTOP_SHARP_20], [gnome-desktop-sharp-2.0])
 PKG_CHECK_MODULES([GNOME_KEYRING_SHARP], [gnome-keyring-sharp-1.0])
-PKG_CHECK_MODULES([GNOME_SHARP_20], [gnome-sharp-2.0])
-PKG_CHECK_MODULES([GNOME_VFS_SHARP_20], [gnome-vfs-sharp-2.0])
 PKG_CHECK_MODULES([GTK_SHARP_20], [gtk-sharp-2.0])
 PKG_CHECK_MODULES([LIBRSVG_SHARP], [rsvg2-sharp-2.0])
 PKG_CHECK_MODULES([MONO_ADDINS], [mono-addins])
@@ -84,13 +81,10 @@ PKG_CHECK_MODULES(GTK, gtk+-2.0 >= $GTK_REQUIRED_VERSION)
 PKG_CHECK_MODULES(GLIB, gobject-2.0 >= $GLIB_REQUIRED_VERSION)
 
 AC_SUBST([GCONF_SHARP_20_LIBS])
-AC_SUBST([GLADE_SHARP_20_LIBS])
 AC_SUBST([GLIB_SHARP_20_LIBS])
 AC_SUBST([GIO_SHARP_LIBS])
 AC_SUBST([GNOME_DESKTOP_SHARP_20_LIBS])
 AC_SUBST([GNOME_KEYRING_SHARP_LIBS])
-AC_SUBST([GNOME_SHARP_20_LIBS])
-AC_SUBST([GNOME_VFS_SHARP_20_LIBS])
 AC_SUBST([GTK_SHARP_20_LIBS])
 AC_SUBST([LIBRSVG_SHARP_LIBS])
 AC_SUBST([MONO_ADDINS_LIBS])
@@ -205,6 +199,8 @@ StandardPlugins/Trash/Makefile
 StandardPlugins/Trash/Resources/Trash.addin.xml
 StandardPlugins/Weather/Makefile
 StandardPlugins/Weather/Resources/Weather.addin.xml
+StandardPlugins/WorkspaceSwitcher/Makefile
+StandardPlugins/WorkspaceSwitcher/Resources/WorkspaceSwitcher.addin.xml
 Makefile
 data/Makefile
 data/icons/Makefile

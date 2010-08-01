@@ -7,38 +7,38 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-06-28 07:25+0200\n"
-"PO-Revision-Date: 2010-06-24 05:09+0000\n"
+"POT-Creation-Date: 2010-07-22 07:29+0200\n"
+"PO-Revision-Date: 2010-07-07 14:58+0000\n"
 "Last-Translator: Yiğit Ateş <yigitates52@gmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-06-28 05:44+0000\n"
+"X-Launchpad-Export-Date: 2010-07-22 06:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:133
+#: ../Docky/Docky/ConfigurationWindow.cs:147
 msgid "Search Docklets..."
 msgstr "Uygulamacıkları Ara..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:148
+#: ../Docky/Docky/ConfigurationWindow.cs:163
 msgid "Search Helpers..."
 msgstr "Yardımcıları Ara..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:212
+#: ../Docky/Docky/ConfigurationWindow.cs:227
 msgid "Click on any dock to configure."
 msgstr "Yapılandırmak için herhangi bir rıhtıma tıklayın."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:213
+#: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid "Drag any dock to reposition."
 msgstr "Yeniden konumlandırmak için herhangi bir rıhtımı sürükleyin."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:278
+#: ../Docky/Docky/ConfigurationWindow.cs:293
 msgid "Delete the currently selected dock?"
 msgstr "Seçili rıhtım silinsin mi?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:280
+#: ../Docky/Docky/ConfigurationWindow.cs:295
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -46,54 +46,54 @@ msgstr ""
 "Eğer rıhtımı silmeyi seçerseniz, silinen rıhtımın\n"
 "tüm ayarları kalıcı olarak kaybolacak."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:287
+#: ../Docky/Docky/ConfigurationWindow.cs:302
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
 msgstr "Rıhtımı _Sil"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:401
-#: ../Docky/Docky/ConfigurationWindow.cs:421
+#: ../Docky/Docky/ConfigurationWindow.cs:418
+#: ../Docky/Docky/ConfigurationWindow.cs:438
 msgid "_Select"
 msgstr "_Seç"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:404
-#: ../Docky/Docky/ConfigurationWindow.cs:424
+#: ../Docky/Docky/ConfigurationWindow.cs:421
+#: ../Docky/Docky/ConfigurationWindow.cs:441
 msgid ".tar Archives"
 msgstr ".tar Arşivleri"
 
-#: ../Docky/Docky/DockletTile.cs:50
+#: ../Docky/Docky/DockletTile.cs:51
 msgid "Author"
 msgstr "Yazar"
 
-#: ../Docky/Docky/DockletTile.cs:97
+#: ../Docky/Docky/DockletTile.cs:86
 msgid "Move this docklet up on the selected dock"
 msgstr "Bu uygulamacığı seçili rıhtımın üstüne taşı"
 
-#: ../Docky/Docky/DockletTile.cs:98
+#: ../Docky/Docky/DockletTile.cs:87
 msgid "Move this docklet down on the selected dock"
 msgstr "Bu uygulamacığı seçili rıhtımın altına taşı"
 
-#: ../Docky/Docky/DockletTile.cs:102
+#: ../Docky/Docky/DockletTile.cs:91
 msgid "Move this docklet left on the selected dock"
 msgstr "Bu uygulamacığı seçili rıhtımın soluna taşı"
 
-#: ../Docky/Docky/DockletTile.cs:103
+#: ../Docky/Docky/DockletTile.cs:92
 msgid "Move this docklet right on the selected dock"
 msgstr "Bu uygulamacığı seçili rıhtımın sağına taşı"
 
-#: ../Docky/Docky/DockletTile.cs:105
+#: ../Docky/Docky/DockletTile.cs:94
 msgid "Configure this docklet"
 msgstr "Bu uygulamacığı yapılandır"
 
-#: ../Docky/Docky/DockletTile.cs:106
+#: ../Docky/Docky/DockletTile.cs:95
 msgid "About this docklet"
 msgstr "Bu uygulamacık hakkında"
 
-#: ../Docky/Docky/DockletTile.cs:107
+#: ../Docky/Docky/DockletTile.cs:96
 msgid "Add this docklet to the selected dock"
 msgstr "Bu uygulamacığı seçili rıhtıma ekle"
 
-#: ../Docky/Docky/DockletTile.cs:108
+#: ../Docky/Docky/DockletTile.cs:97
 msgid "Remove this docklet from the selected dock"
 msgstr "Bu uygulamacığı seçili rıhtımdan kaldır"
 
@@ -106,31 +106,31 @@ msgstr ""
 "seçenekler devre dışı kalabilir ve temalar/animasyonlar düzgün "
 "görünmeyebilir. "
 
-#: ../Docky/Docky/HelperTile.cs:41
+#: ../Docky/Docky/HelperTile.cs:42
 msgid "Status"
 msgstr "Durum"
 
-#: ../Docky/Docky/HelperTile.cs:58
+#: ../Docky/Docky/HelperTile.cs:59
 msgid "Uninstall"
 msgstr "Kaldır"
 
-#: ../Docky/Docky/HelperTile.cs:75
+#: ../Docky/Docky/HelperTile.cs:71
 msgid "About this helper"
 msgstr "Bu yardımcı hakkında"
 
-#: ../Docky/Docky/HelperTile.cs:76
+#: ../Docky/Docky/HelperTile.cs:72
 msgid "Enable this helper"
 msgstr "Bu yardımcıyı etkinleştir"
 
-#: ../Docky/Docky/HelperTile.cs:77
+#: ../Docky/Docky/HelperTile.cs:73
 msgid "Disable this helper"
 msgstr "Bu yardımcıyı etkisizleştir"
 
-#: ../Docky/Docky/HelperTile.cs:82
+#: ../Docky/Docky/HelperTile.cs:90
 msgid "Running"
 msgstr "Çalışıyor"
 
-#: ../Docky/Docky/HelperTile.cs:82
+#: ../Docky/Docky/HelperTile.cs:90
 msgid "Stopped"
 msgstr "Durduruldu"
 
@@ -142,21 +142,21 @@ msgstr ""
 "Ayarlandığında, bir rıhtım üzerindeki başlatıcıya sahip olmayan pencereler "
 "bu rıhtıma eklenecek."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:682
+#: ../Docky/Docky/Interface/DockPreferences.cs:683
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 "<i>Hiçbir zaman gizlemez; büyütülen pencereler rıhtımın üzerini "
 "kapatamaz.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:685
+#: ../Docky/Docky/Interface/DockPreferences.cs:686
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Fare üzerinde olmadığında gizle.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:688
+#: ../Docky/Docky/Interface/DockPreferences.cs:689
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Rıhtım etkin uygulamayı engellediğinde gizle.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:691
+#: ../Docky/Docky/Interface/DockPreferences.cs:692
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Rıhtım bir pencereyi engellediğinde gizle.</i>"
 
@@ -291,16 +291,16 @@ msgstr "Pencereleri Başlatıcı Olmadan _Yönet"
 msgid "_Zoom:"
 msgstr "_Yakınlaştır:"
 
-#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:115
+#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:120
 #, csharp-format
 msgid "Drop to open with {0}"
 msgstr "{0} ile açmak için bırakın"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:159
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:173
 msgid "New _Window"
 msgstr "Yeni _Pencere"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:161
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:175
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
 msgstr "_Aç"
@@ -313,61 +313,61 @@ msgstr "Rengi Sıfırla"
 msgid "_Pin to Dock"
 msgstr "Rıhtıma _İğnele"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:74
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:75
 #, csharp-format
 msgid "Drop to move to {0}"
 msgstr "{0} konumuna taşımak için bırakın"
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:190
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:235
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:239
 msgid "Error performing drop action"
 msgstr "Bırakam eylemi sırasında bir hata oluştu"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:190
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
 msgid "Not enough free space on destination."
 msgstr "Hedefte yeterli alan yok."
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:207
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:210
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:242
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:211
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:214
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:246
 msgid "Complete"
 msgstr "Tamamlanmış"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:220
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:224
 msgid "Moving"
 msgstr "Taşınıyor"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:226
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:230
 msgid "Copying"
 msgstr "Kopyalanıyor"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:260
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:264
 msgid "Open"
 msgstr "Aç"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:261
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:265
 msgid "Open Containing Folder"
 msgstr "İçeren Dizini Aç"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:253
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:257
 msgid "Unma_ximize"
 msgstr "Büyüt_meyi geri al"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:256
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:260
 msgid "Ma_ximize"
 msgstr "Bü_yüt"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:260
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
 msgid "_Restore"
 msgstr "_Geri Getir"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:263
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:267
 msgid "Mi_nimize"
 msgstr "_Küçült"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:266
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:270
 msgid "_Close All"
 msgstr "_Tümünü Kapat"
 
@@ -480,42 +480,42 @@ msgstr "Denetim _süresi:"
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:123
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:186
 msgid "minutes"
-msgstr "dakikalar"
+msgstr "dakika"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:174
 msgid "Click to set username and password."
 msgstr "Kullanıcı adı ve parolayı ayarlamak için tıklayın."
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:228
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:233
 msgid "(no subject)"
 msgstr "(konu yok)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:242
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:247
 #, csharp-format
 msgid "You have {0} new, unread messages"
 msgstr "{0} yeni, okunmamış iletiniz var"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:246
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:251
 #, csharp-format
 msgid "From: {0}"
 msgstr "Gönderen: {0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:259
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:263
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:265
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:270
 msgid "Feed Error"
 msgstr "Besleme Hatası"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:268
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:275
 msgid "Invalid Username"
 msgstr "Geçersiz Kullanıcı Adı"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:272
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:276
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:279
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:283
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:174
 msgid "Network Error"
 msgstr "Ağ Hatası"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:281
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:288
 msgid "General Error"
 msgstr "Genel Hata"
 
@@ -920,6 +920,19 @@ msgstr "Y_arın"
 #, csharp-format
 msgid "{0} humidity"
 msgstr "{0} nem"
+
+#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:69
+#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:219
+msgid "Switch Desks"
+msgstr ""
+
+#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:170
+msgid "Desk"
+msgstr ""
+
+#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:172
+msgid "Virtual Desk"
+msgstr ""
 
 #~ msgid "_Add"
 #~ msgstr "_Ekle"

@@ -17,13 +17,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
 
-using Cairo;
+using GLib;
 using Gdk;
 using Mono.Unix;
 using Wnck;
@@ -39,14 +36,14 @@ namespace Docky.Items
 		public static ApplicationDockItem NewFromUri (string uri)
 		{
 			try {
-				string filename = Gnome.Vfs.Global.GetLocalPathFromUri (uri);
-				if (!File.Exists (filename))
+				GLib.File file = FileFactory.NewForUri (uri);
+				if (!file.Exists)
 					return null;
 				
-				DesktopItem desktopItem = WindowMatcher.Default.DesktopItemForDesktopFile (filename);
+				DesktopItem desktopItem = WindowMatcher.Default.DesktopItemForDesktopFile (file.Path);
 				
 				if (desktopItem == null)
-					desktopItem = new DesktopItem (filename);
+					desktopItem = new DesktopItem (file.Path);
 
 				return new ApplicationDockItem (desktopItem);
 				

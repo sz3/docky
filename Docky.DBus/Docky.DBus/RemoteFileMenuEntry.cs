@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Chris Szikszoy
+//  Copyright (C) 2009, 2010 Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ namespace Docky.DBus
 {
 	public class RemoteFileMenuEntry : RemoteMenuEntry
 	{
-		public RemoteFileMenuEntry (uint id, GLib.File file, string groupTitle) : base(id, file.Basename, "", groupTitle)
+		public RemoteFileMenuEntry (GLib.File file, string groupTitle) : base (file.Basename, "", groupTitle)
 		{
 			Clicked += delegate {
 				DockServices.System.Open (file);

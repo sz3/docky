@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2010 Rico Tzschichholz
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,36 +17,29 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.IO;
-using System.Text;
 
-namespace Docky.Menus
+using Docky.Items;
+
+namespace WorkspaceSwitcher
 {
-
-
-	public class RelatedFileMenuItem : MenuItem
+	public class WorkspaceSwitcherItemProvider : AbstractDockItemProvider
 	{
-		public string Uri { get; private set; }
+		#region IDockItemProvider implementation
 		
-		public RelatedFileMenuItem (string uri)
+		public override string Name {
+			get {
+				return "WorkspaceSwitcher";
+			}
+		}
+		
+		#endregion
+
+		WorkspaceSwitcherDockItem workspaceswitcher;
+
+		public WorkspaceSwitcherItemProvider ()
 		{
-			Uri = uri;
-			
-			if (uri.StartsWith ("http")) {
-				Icon = "html";
-			} else {
-				Gnome.IconLookupResultFlags results;
-				Icon = Gnome.Icon.LookupSync (Gtk.IconTheme.Default, null, uri, null, 0, out results);
-			}
-			
-			if (uri.StartsWith ("file://")) {
-				Text = Path.GetFileName (Gnome.Vfs.Global.GetLocalPathFromUri (uri));
-			} else {
-				Uri u = new Uri (uri);
-				Text = System.Uri.UnescapeDataString (uri.Substring (u.Scheme.Length + 3));
-			}
+			workspaceswitcher = new WorkspaceSwitcherDockItem ();
+			Items = workspaceswitcher.AsSingle<AbstractDockItem> ();
 		}
 	}
 }

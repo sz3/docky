@@ -3,7 +3,7 @@
 	namespace="Docky"
 	version="1.0"
 	isroot="false"
-	defaultEnabled="false"
+	defaultEnabled="true"
 	name="Trash"
 	description="Have a look at your trash!"
 	author="Chris Szikszoy, Robert Dyer"

@@ -222,19 +222,21 @@ namespace Docky.Services
 		/// </returns>
 		public string IconFromGIcon (GLib.Icon icon)
 		{
+			string name = "";
 			if (icon is ThemedIcon) {
 				ThemedIcon themeIcon = new ThemedIcon (icon.Handle);
-				
 				// if the icon exists in the theme, this will return the relevent icon
 				if (themeIcon.Names.Any ())
-					return themeIcon.Names.FirstOrDefault (n => IconTheme.Default.HasIcon (n));
+					name = themeIcon.Names.FirstOrDefault (n => IconTheme.Default.HasIcon (n));
+				themeIcon.Dispose ();
+				
 			} else if (icon is FileIcon) {
 				// in some cases, devices provide their own icon.  This will use the device icon.
 				FileIcon iconFile = new FileIcon (icon.Handle);
-				
-				return iconFile.File.Path;
+				name = iconFile.File.Path;
+				iconFile.Dispose ();
 			}
-			return "";
+			return name;
 		}
 		
 		/// <summary>

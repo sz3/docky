@@ -35,10 +35,10 @@ namespace Docky.DBus
 		public string[] GetCapabilities ()
 		{
 			return new string[] {
-				//"dock-item-message",
+				"dock-item-message",
 				"dock-item-tooltip",
 				"dock-item-badge",
-				//"dock-item-progress",
+				"dock-item-progress",
 				//"dock-item-visible",
 				"dock-item-icon-file",
 				"dock-item-attention",
@@ -50,7 +50,10 @@ namespace Docky.DBus
 				"menu-item-icon-file",
 				"menu-item-container-title",
 				
-				"x-docky-uses-menu-confirmation"
+				"x-docky-uses-menu-confirmation",
+				"x-docky-message-has-icons",
+				"x-docky-message-has-slots",
+				"x-docky-get-item-pids",
 			};
 		}
 		

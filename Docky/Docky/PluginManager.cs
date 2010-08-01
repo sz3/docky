@@ -97,12 +97,14 @@ namespace Docky
 			// parse the addin config files for extended metadata
 			AddinMetadata = new Dictionary<Addin, Dictionary<string, string>> ();
 			DockServices.System.RunOnThread (() => {
-				AllAddins.ToList ().ForEach (a => ParseAddinConfig (a));	
+				AllAddins.ToList ().ForEach (a => ParseAddinConfig (a)); 
 			});
 			
 			// Add feedback when addin is loaded or unloaded
 			AddinManager.AddinLoaded += AddinManagerAddinLoaded;
 			AddinManager.AddinUnloaded += AddinManagerAddinUnloaded;
+			
+			Log<PluginManager>.Debug ("Plugin manager initialized.");
 		}
 		
 		/// <summary>

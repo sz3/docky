@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2010 Robert Dyer
+//  Copyright (C) 2010 Robert Dyer, Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -44,13 +44,11 @@ namespace Docky.DBus
 	}
 	
 	public class DockManagerDBusItem : IDockManagerDBusItem, IDisposable
-	{
+	{		
 		uint timer;
 		Dictionary<uint, RemoteMenuEntry> items = new Dictionary<uint, RemoteMenuEntry> ();
 		Dictionary<uint, DateTime> update_time = new Dictionary<uint, DateTime> ();
-		
-		List<uint> known_ids = new List<uint> ();
-		
+
 		AbstractDockItem owner;
 		
 		string DesktopFile {
@@ -66,6 +64,15 @@ namespace Docky.DBus
 				if (owner is FileDockItem)
 					return (owner as FileDockItem).Uri;
 				return "";
+			}
+		}
+		
+		int[] PIDs {
+			get {
+				if (owner is WnckDockItem) {
+					return (owner as WnckDockItem).ManagedWindows.Select (w => w.Pid).DefaultIfEmpty (-1).ToArray ();
+				}
+				return new int[] { -1 };
 			}
 		}
 		
@@ -94,28 +101,11 @@ namespace Docky.DBus
 			});
 		}
 		
-		uint GetRandomID ()
-		{
-			Random rand = new Random ();
-			
-			uint number;
-			
-			do {
-				//FIXME should we ever get 100,000 items in here, I hope we crash, though we will likely get an infinite loop
-				number = (uint) rand.Next (0, 100000);
-			} while (known_ids.BinarySearch (number) >= 0);
-			
-			known_ids.Add (number);
-			known_ids.Sort ();
-			
-			return number;
-		}
-		
 		public event Action MenuItemConfirmationNeeded;
 		
 		public void ConfirmMenuItem (uint item)
 		{
-			update_time[item] = DateTime.UtcNow;
+			update_time [item] = DateTime.UtcNow;
 		}
 		
 		#region IDockManagerDBusItem implementation
@@ -125,12 +115,15 @@ namespace Docky.DBus
 			if (iface != "org.freedesktop.DockItem")
 				return null;
 			
-			if (property == "DesktopFile")
+			switch (property) {
+			case "DesktopFile":
 				return DesktopFile;
-			
-			if (property == "Uri")
+			case "Uri":
 				return Uri;
-			
+			case "PIDs":
+				return PIDs;
+			}
+
 			return null;
 		}
 		
@@ -138,15 +131,16 @@ namespace Docky.DBus
 		{
 		}
 		
-		public IDictionary<string,object> GetAll (string iface)
+		public IDictionary<string, object> GetAll (string iface)
 		{
 			if (iface != "org.freedesktop.DockItem")
 				return null;
 			
 			Dictionary<string, object> items = new Dictionary<string, object> ();
 			
-			items["DesktopFile"] = DesktopFile;
-			items["Uri"] = Uri;
+			items ["DesktopFile"] = DesktopFile;
+			items ["Uri"] = Uri;
+			items ["PIDs"] = PIDs;
 			
 			return items;
 		}
@@ -167,12 +161,12 @@ namespace Docky.DBus
 			if (dict.ContainsKey ("container-title"))
 				title = (string) dict ["container-title"];
 			
-			uint number = GetRandomID ();
+			RemoteMenuEntry rem;
 			
 			if (uri.Length > 0) {
-				RemoteFileMenuEntry rem = new RemoteFileMenuEntry (number, FileFactory.NewForUri (uri), title);
+				 rem = new RemoteFileMenuEntry (FileFactory.NewForUri (uri), title);
 				
-				AddToList (rem, number);
+				AddToList (rem);
 			} else {
 				string label = "";
 				if (dict.ContainsKey ("label"))
@@ -185,32 +179,29 @@ namespace Docky.DBus
 				string iconFile = "";
 				if (dict.ContainsKey ("icon-file"))
 					iconFile = (string) dict ["icon-file"];
-				
-				RemoteMenuEntry rem;
+
 				if (iconFile.Length > 0)
-					rem = new RemoteMenuEntry (number, label, iconFile, title);
+					rem = new RemoteMenuEntry (label, iconFile, title);
 				else
-					rem = new RemoteMenuEntry (number, label, iconName, title);
+					rem = new RemoteMenuEntry (label, iconName, title);
 				rem.Clicked += HandleActivated;
 				
-				AddToList (rem, number);
+				AddToList (rem);
 			}
 			
-			return number;
+			return rem.ID;
 		}
 		
 		public void RemoveMenuItem (uint item)
 		{
 			if (items.ContainsKey (item)) {
-				RemoteMenuEntry entry = items[item];
+				RemoteMenuEntry entry = items [item];
 				entry.Clicked -= HandleActivated;
 				
 				items.Remove (item);
 				
 				owner.RemoteMenuItems.Remove (entry);
 			}
-			
-			known_ids.Remove (item);
 		}
 		
 		public void UpdateDockItem (IDictionary<string, object> dict)
@@ -221,6 +212,10 @@ namespace Docky.DBus
 					owner.SetRemoteText ((string) dict [key]);
 				} else if (key == "badge") {
 					owner.SetRemoteBadgeText ((string) dict [key]);
+				} else if (key == "progress") {
+					owner.Progress = (double) dict [key];
+				} else if (key == "message") {
+					owner.SetMessage ((string) dict [key]);
 				} else if (key == "icon-file") {
 					if (owner is IconDockItem)
 						(owner as IconDockItem).SetRemoteIcon ((string) dict [key]);
@@ -240,11 +235,11 @@ namespace Docky.DBus
 		
 		#endregion
 		
-		private void AddToList (RemoteMenuEntry entry, uint id)
+		private void AddToList (RemoteMenuEntry entry)
 		{
-			items[id] = entry;
-			update_time[id] = DateTime.UtcNow;
-			
+			items [entry.ID] = entry;
+			update_time [entry.ID] = DateTime.UtcNow;
+						
 			//TODO Insert items into list... this is stupid but whatever fix later
 			foreach (MenuItem item in items.Values)
 				owner.RemoteMenuItems.Remove (item);
@@ -279,8 +274,8 @@ namespace Docky.DBus
 					break;
 				}
 				
-				foreach (MenuItem item in itemGroup.OrderBy (i => i.Text)) {
-					owner.RemoteMenuItems[container].Add (item);
+				foreach (RemoteMenuEntry item in itemGroup.OrderBy (i => i.ID)) {
+					owner.RemoteMenuItems [container].Add (item);
 				}
 				_container++;
 			}
@@ -291,7 +286,7 @@ namespace Docky.DBus
 			if (!items.ContainsKey (item))
 				return new ItemTuple ("", "", "");
 			
-			RemoteMenuEntry entry = items[item];
+			RemoteMenuEntry entry = items [item];
 			return new ItemTuple (entry.Text, entry.Icon, entry.Title);
 		}
 			
@@ -311,7 +306,6 @@ namespace Docky.DBus
 			if (timer > 0)
 				GLib.Source.Remove (timer);
 			
-			known_ids.Clear ();
 			update_time.Clear ();
 			
 			foreach (RemoteMenuEntry m in items.Values) {
