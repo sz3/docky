@@ -8,15 +8,12 @@ PKG_CONFIG_FILES = docky.windowing.pc
 
 FILES = \
     AssemblyInfo.cs \
-    Wnck/Window_Extensions.cs \
-    Windowing/ClickAction.cs \
-    Windowing/DesktopItem.cs \
     Windowing/WindowControl.cs \
-    Xlib/X11Atoms.cs \
-    Xlib/Xlib.cs \
     Windowing/Position.cs \
-    Windowing/DesktopFileChangedEventArgs.cs \
-    Windowing/WindowMatcher.cs
+    Windowing/WindowMatcher.cs \
+	Wnck/Window_Extensions.cs \
+    Xlib/X11Atoms.cs \
+    Xlib/Xlib.cs
 
 PROJECT_REFERENCES= \
 	Docky.Services
