@@ -33,8 +33,7 @@ namespace Docky.Services.Applications
 	{
 		public static Regex keyValueRegex = new Regex (
 			@"(^(\s)*(?<Key>([^\=^\n]+))[\s^\n]*\=(\s)*(?<Value>([^\n]+(\n){0,1})))",
-			RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled | 
-			RegexOptions.CultureInvariant
+			RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled | RegexOptions.CultureInvariant
 		);
 		public static Regex sectionRegex = new Regex (
 			@"(^(\[)*(?<Section>([^\]^\n]+))\]$)" ,
@@ -53,7 +52,7 @@ namespace Docky.Services.Applications
 		private object onchanged_lock = new object ();
 		protected void OnChanged ()
 		{
-			if (HasChanged != null)
+			if (HasChanged != null) {
 				lock (onchanged_lock) {
 					// collect changes within 2500ms then trigger events
 					if (trigger_changed_timer == 0) {
@@ -65,16 +64,17 @@ namespace Docky.Services.Applications
 						});
 					}
 				}
+			}
 		}
 #endregion
 
 		public Dictionary<string, string> Values { get; set; }
 
-		private GLib.DesktopAppInfo appinfo;
+		GLib.DesktopAppInfo appinfo;
 		
-		private GLib.FileMonitor monitor;
-		private GLib.File file;
-		public GLib.File File { 
+		GLib.FileMonitor monitor;
+		GLib.File file;
+		public GLib.File File {
 			get {
 				return file;
 			}
@@ -100,18 +100,15 @@ namespace Docky.Services.Applications
 			OnChanged ();
 		}
 		
-		public string Path 
-		{ 
+		public string Path { 
 			get { return File.Path; }
 		}
 		
-		public Uri Uri 
-		{
+		public Uri Uri {
 			get { return File.Uri; }
 		}
 
-		public string DesktopID 
-		{
+		public string DesktopID {
 			get { return System.IO.Path.GetFileNameWithoutExtension (Path); }
 		}
 
@@ -260,7 +257,7 @@ namespace Docky.Services.Applications
 			return result;
 		}
 
-		static IEnumerable<string> PostfixStringsForLocale (string locale)
+		IEnumerable<string> PostfixStringsForLocale (string locale)
 		{
 			if (string.IsNullOrEmpty (locale) || locale.Length < 2)
 				yield break;

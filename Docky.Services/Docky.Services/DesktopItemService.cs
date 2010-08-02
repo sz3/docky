@@ -35,31 +35,36 @@ namespace Docky.Services
 		
 		object update_lock;
 		
+		// shorthand for all registered AND unregistered desktop items
 		public IEnumerable<DesktopItem> DesktopItems {
-			get { return DesktopItems.Union (UnregisteredItems).AsEnumerable (); }
+			get { return RegisteredItems.Union (UnregisteredItems).AsEnumerable (); }
 		}
 		
 		public Dictionary<string, string> Remaps { get; private set; }
-		List<DesktopItem> DesktopItems { get; set; }
+		List<DesktopItem> RegisteredItems { get; set; }
 		List<DesktopItem> UnregisteredItems { get; set; }
 		Dictionary<string, List<DesktopItem>> ItemsByExec { get; set; }
 		Dictionary<string, DesktopItem> ItemByClass { get; set; }
 		
+		// FIXME: need to make compile first
+		readonly List<Regex> prefix_filters;
+		readonly List<Regex> suffix_filters;
+		
 		internal DesktopItemService ()
 		{
 			update_lock = new object ();
-			//prefix_filters = BuildPrefixFilters ();
-			//suffix_filters = BuildSuffixFilters ();
+			prefix_filters = new List<Regex> ();
+			suffix_filters = new List<Regex> ();
 			
 			Remaps = new Dictionary<string, string> ();
 			LoadRemaps (DockServices.Paths.SystemDataFolder.GetChild ("remaps.ini"));
 			LoadRemaps (DockServices.Paths.UserDataFolder.GetChild ("remaps.ini"));
 			
 			// Load DesktopFilesCache from docky.desktop.[LANG].cache
-			DesktopItems = LoadDesktopItemsCache (DockyDesktopFileCacheFile);
+			RegisteredItems = LoadDesktopItemsCache (DockyDesktopFileCacheFile);
 			UnregisteredItems = new List<DesktopItem> ();
 			
-			if (DesktopItems == null || DesktopItems.Count () == 0) {
+			if (RegisteredItems == null || RegisteredItems.Count () == 0) {
 				Log<DesktopItemService>.Info ("Loading *.desktop files and regenerating cache. This may take a while...");
 				UpdateDesktopItemsList ();
 				ProcessAndMergeAllSystemCacheFiles ();
@@ -82,10 +87,19 @@ namespace Docky.Services
 			foreach (GLib.File dir in DesktopFileDirectories)
 				MonitorDesktopFileDirs (dir);
 			MonitorDesktopFileSystemCacheFiles ();
-		
 		}
 		
 		#region public API
+		
+		/// <summary>
+		/// Find all DesktopItems by specifying the exec.
+		/// </summary>
+		/// <returns>
+		/// A List of DesktopItems that use the supplied exec string.
+		/// </returns>
+		/// <param name='exec'>
+		/// An exec string.
+		/// </param>
 		public IEnumerable<DesktopItem> DesktopItemsFromExec (string exec)
 		{
 			if (ItemsByExec.ContainsKey (exec))
@@ -93,15 +107,48 @@ namespace Docky.Services
 			return Enumerable.Empty<DesktopItem> ();
 		}
 		
+		/// <summary>
+		/// Find a DesktopItem by specifying the class.
+		/// </summary>
+		/// <returns>
+		/// The DesktopItem, if any exists.
+		/// </returns>
+		/// <param name='class'>
+		/// The Window class from the .desktop file.
+		/// </param>
 		public DesktopItem DesktopItemFromClass (string @class)
 		{
 			if (ItemByClass.ContainsKey (@class))
-				return ItemByClass [@class];
+				return ItemByClass[@class];
+			return null;
+		}
+		
+		public IEnumerable<DesktopItem> DesktopItemsFromID (string id)
+		{
+			if (DesktopItems.Any (item => item.DesktopID.Equals (id, StringComparison.InvariantCultureIgnoreCase)))
+				return DesktopItems.Where (item => item.DesktopID.Equals (id, StringComparison.CurrentCultureIgnoreCase));
+			return null;
+		}
+		
+		/// <summary>
+		/// Find a DesktopItem by specifying a path to a .desktop file.
+		/// </summary>
+		/// <returns>
+		/// The DesktopItem, if any exists.
+		/// </returns>
+		/// <param name='file'>
+		/// A path to a .desktop file.
+		/// </param>
+		public DesktopItem DesktopItemFromDesktopFile (string file)
+		{
+			if (DesktopItems.Any (item => item.Path.Equals (file, StringComparison.InvariantCultureIgnoreCase)))
+				return DesktopItems.First (item => item.Path.Equals (file, StringComparison.CurrentCultureIgnoreCase));
 			return null;
 		}
 		
 		public void RegisterDesktopItem (DesktopItem item)
 		{
+			// check if this item is in either the registered or unregistered items
 			if (DesktopItems.Contains (item))
 				return;
 			
@@ -112,6 +159,7 @@ namespace Docky.Services
 			// FIXME: do we really need to reload _every_ desktop file here? Probably only need to process the new one..
 			DesktopItemsChanged ();
 		}
+		
 		#endregion
 
 		void DesktopItemsChanged ()
@@ -152,8 +200,8 @@ namespace Docky.Services
 		
 		void UpdateDesktopItemsList ()
 		{
-			if (DesktopItems == null)
-				DesktopItems = new List<DesktopItem> ();
+			if (RegisteredItems == null)
+				RegisteredItems = new List<DesktopItem> ();
 			
 			//List<GLib.File> knownDesktopFiles = DesktopItems.Select (item => item.File).ToList ();
 			List<DesktopItem> newItems = new List<DesktopItem> ();
@@ -169,13 +217,13 @@ namespace Docky.Services
 				.Where (item => item.Values.Any ())
 				.ToList ();
 			
-			DesktopItems.AddRange (newItems);
+			RegisteredItems.AddRange (newItems);
 
-			if (new_items.Count () > 0)
+			if (newItems.Count () > 0)
 				Log<DesktopItemService>.Debug ("{0} new applications found", newItems.Count ());
 
 			// Check file existence and remove unlinked items
-			int removed = DesktopItems.RemoveAll (item => !item.File.Exists);
+			int removed = RegisteredItems.RemoveAll (item => !item.File.Exists);
 			if (removed > 0)
 				Log<DesktopItemService>.Debug ("{0} applications removed", removed);
 		}
@@ -195,7 +243,7 @@ namespace Docky.Services
 			
 			try {
 				using (StreamReader reader = new StreamReader (cache.Path)) {
-					DesktopItem desktopItem;
+					DesktopItem desktopItem = null;
 					string line;
 					
 					while ((line = reader.ReadLine ()) != null) {
@@ -208,11 +256,11 @@ namespace Docky.Services
 								string section = match.Groups["Section"].Value;
 								if (section != null) {
 									GLib.File file = cache.Parent.GetChild (string.Format ("{0}.desktop", section));
-									desktopItem = items.First (item => item.File.Path == file.Path);
+									desktopItem = RegisteredItems.First (item => item.File.Path == file.Path);
 									if (desktopItem == null && file.Exists) {
 										desktopItem = new DesktopItem (file);
-										DesktopItems.Add (desktop_item);
-										Log<DesktopItemService>.Debug ("New application found: {0}", desktop_item.Path);
+										RegisteredItems.Add (desktopItem);
+										Log<DesktopItemService>.Debug ("New application found: {0}", desktopItem.Path);
 									}
 									continue;
 								}
@@ -334,7 +382,7 @@ namespace Docky.Services
 
 			try {
 				using (StreamWriter writer = new StreamWriter (DockyDesktopFileCacheFile, false)) {
-					foreach (DesktopItem item in DesktopItems) {
+					foreach (DesktopItem item in RegisteredItems) {
 						writer.WriteLine ("[{0}]", item.Path);
 						IDictionaryEnumerator enumerator = item.Values.GetEnumerator ();
 						enumerator.Reset ();

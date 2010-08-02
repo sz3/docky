@@ -189,20 +189,6 @@ namespace Docky.Windowing
 			yield return window;
 		}
 
-		public DesktopItem DesktopItemForDesktopFile (string file)
-		{
-			try {
-				return DesktopItems
-					.Where (df => df.Path.Equals (file, StringComparison.CurrentCultureIgnoreCase))
-					.DefaultIfEmpty (null)
-					.FirstOrDefault ();
-			} catch (Exception e) {
-				Docky.Services.Log<WindowMatcher>.Error (e.Message);
-				Docky.Services.Log<WindowMatcher>.Debug (e.StackTrace);
-			}
-			
-			return null;
-		}
 		
 		public DesktopItem DesktopItemForWindow (Wnck.Window window)
 		{
@@ -218,20 +204,6 @@ namespace Docky.Windowing
 			}
 			
 			return null;
-		}
-		
-		IEnumerable<DesktopItem> DesktopItemsForDesktopID (string id)
-		{
-			IEnumerable<DesktopItem> matches = Enumerable.Empty<DesktopItem> ();
-			try {
-				matches = DesktopItems
-					.Where (df => df.DesktopID.Equals (id, StringComparison.CurrentCultureIgnoreCase));
-			} catch (Exception e) {
-				Docky.Services.Log<WindowMatcher>.Error (e.Message);
-				Docky.Services.Log<WindowMatcher>.Debug (e.StackTrace);
-			}
-			
-			return matches;
 		}
 		
 		IEnumerable<DesktopItem> DesktopItemsForWindow (Wnck.Window window)
@@ -387,8 +359,8 @@ namespace Docky.Windowing
 				
 				yield return sanitizedCmd;
 				
-				if (remap_items.ContainsKey (sanitizedCmd))
-					yield return remap_items [sanitizedCmd];
+				if (DockServices.DesktopItems.Remaps.ContainsKey (sanitizedCmd))
+					yield return DockServices.DesktopItems.Remaps [sanitizedCmd];
 				
 				// if it ends with a special suffix, strip the suffix and return an additional result
 				foreach (Regex f in suffix_filters)
