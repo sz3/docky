@@ -27,7 +27,7 @@ using GLib;
 
 using Docky.Services;
 
-namespace Docky.Windowing
+namespace Docky.Services.Applications
 {
 	public class DesktopItem : IDisposable
 	{
@@ -45,7 +45,7 @@ namespace Docky.Windowing
 			RegexOptions.Compiled | RegexOptions.CultureInvariant
 		);
 
-		static IEnumerable<string> locales = PostfixStringsForLocale (WindowMatcher.Locale);
+		static IEnumerable<string> locales = PostfixStringsForLocale (DockServices.System.Locale);
 		
 #region Delayed change propagation
 		public event EventHandler HasChanged;

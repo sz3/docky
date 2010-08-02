@@ -29,12 +29,12 @@ using System.Text.RegularExpressions;
 using Wnck;
 
 using Docky.Services;
+using Docky.Services.Applications;
 
 namespace Docky.Windowing
 {
 	public class WindowMatcher
 	{
-		public static event EventHandler<DesktopFileChangedEventArgs> DesktopFileChanged;
 		
 		static WindowMatcher ()
 		{
@@ -43,413 +43,30 @@ namespace Docky.Windowing
 		
 		public static WindowMatcher Default { get; protected set; }
 		
-		List<DesktopItem> custom_desktop_items;
-		List<DesktopItem> desktop_items;
-		IEnumerable<DesktopItem> DesktopItems { 
-			get {
-				return custom_desktop_items.Union (desktop_items).AsEnumerable ();
-			}
-		}
-		
-		static string[] LocaleEnvVariables = new[] { "LC_ALL", "LC_MESSAGES", "LANG", "LANGUAGE" };
-		static string locale;
-		public static string Locale 
+		private WindowMatcher ()
 		{
-			get {
-				if (!string.IsNullOrEmpty (locale))
-					return locale;
+			// Initialize window matching with currently available windows
+			window_to_desktop_items = new Dictionary<Wnck.Window, List<DesktopItem>> ();
+
+			foreach (Wnck.Window w in Wnck.Screen.Default.Windows)
+				SetupWindow (w);
+
+			Wnck.Screen.Default.WindowOpened += WnckScreenDefaultWindowOpened;
+			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
 			
-				string loc;
-				foreach (string env in LocaleEnvVariables) {
-					loc = Environment.GetEnvironmentVariable (env);
-					if (!string.IsNullOrEmpty (loc) && loc.Length >= 2) {
-						locale = loc;
-						return locale;
-					}
-				}
-				
-				locale = "";
-				return locale;
-			}
+			Log<WindowMatcher>.Debug ("WindowMatcher initialized.");
 		}
 
+		
 		IEnumerable<Wnck.Window> UnmatchedWindows {
 			get {
 				IEnumerable<Wnck.Window> matched = window_to_desktop_items.Keys.Cast<Wnck.Window> ();
-				return Wnck.Screen.Default.Windows
-					.Where (w => !w.IsSkipTasklist && !matched.Contains (w));
+				return Wnck.Screen.Default.Windows.Where (w => !w.IsSkipTasklist && !matched.Contains (w));
 			}
 		}
-		
-		object update_lock;
 		
 		Dictionary<Wnck.Window, List<DesktopItem>> window_to_desktop_items;
-		Dictionary<string, List<DesktopItem>> exec_to_desktop_items;
-		Dictionary<string, DesktopItem> class_to_desktop_items;
-		Dictionary<string, string> remap_items;
-		readonly List<Regex> prefix_filters;
-		readonly List<Regex> suffix_filters;
 		
-		void DesktopItemsChanged ()
-		{
-			exec_to_desktop_items = BuildExecStrings ();
-			class_to_desktop_items = BuildClassStrings ();
-		}
-		
-		private WindowMatcher ()
-		{
-			Log<WindowMatcher>.Debug ("Initialize WindowMatcher");
-
-			Wnck.Screen screen = Wnck.Screen.Default;
-
-			update_lock = new object ();
-			prefix_filters = BuildPrefixFilters ();
-			suffix_filters = BuildSuffixFilters ();
-			
-			Log<WindowMatcher>.Debug ("Loading Remaps..");
-			remap_items = new Dictionary<string, string> ();
-			LoadRemaps (DockServices.Paths.SystemDataFolder.GetChild ("remaps.ini"));
-			LoadRemaps (DockServices.Paths.UserDataFolder.GetChild ("remaps.ini"));
-			
-			// Load DesktopFilesCache from docky.desktop.[LANG].cache
-			desktop_items = LoadDesktopItemsCache (DockyDesktopFileCacheFile);
-			custom_desktop_items = new List<DesktopItem> ();
-			
-			if (desktop_items == null || desktop_items.Count () == 0) {
-				Log<WindowMatcher>.Info ("Loading *.desktop files and regenerating cache. This may take some while...");
-				UpdateDesktopItemsList ();
-				ProcessAndMergeAllSystemCacheFiles (desktop_items);
-				SaveDesktopItemsCache();
-			}
-			DesktopItemsChanged ();
-
-			// Update desktop_items and save cache after 2 minutes just to be sure we are up to date
-			GLib.Timeout.Add (2 * 60 * 1000, delegate {
-				lock (update_lock) {
-					UpdateDesktopItemsList ();
-					ProcessAndMergeAllSystemCacheFiles (desktop_items);
-					DesktopItemsChanged ();
-					SaveDesktopItemsCache();
-				}
-				return false;
-			});
-			
-			// Initialize window matching with currently available windows
-			window_to_desktop_items = new Dictionary<Wnck.Window, List<DesktopItem>> ();
-			foreach (Wnck.Window w in screen.Windows)
-				SetupWindow (w);
-
-			// Set up monitors for cache files and desktop directories
-			foreach (GLib.File dir in DesktopFileDirectories)
-				MonitorDesktopFileDirs (dir);
-			MonitorDesktopFileSystemCacheFiles ();
-			
-			screen.WindowOpened += WnckScreenDefaultWindowOpened;
-			screen.WindowClosed += WnckScreenDefaultWindowClosed;
-		}
-
-		#region Handle DesktopItems
-		static IEnumerable<GLib.File> DesktopFileSystemCacheFiles
-		{
-			get {
-				return DesktopFileDirectories
-					.Select (d => d.GetChild (string.Format ("desktop.{0}.cache", Locale)))
-					.Where (f => f.Exists);
-			}
-		}
-		
-		static string DockyDesktopFileCacheFile
-		{
-			get {
-				if (!string.IsNullOrEmpty (Locale))
-					return DockServices.Paths.UserCacheFolder.GetChild (string.Format ("docky.desktop.{0}.cache", Locale)).Path;
-				return DockServices.Paths.UserCacheFolder.GetChild ("docky.desktop.cache").Path;
-			}
-		}
-			
-		static IEnumerable<GLib.File> DesktopFileDirectories
-		{
-			get {
-				return DockServices.Paths.XdgDataDirFolders.Select (d => d.GetChild ("applications"))
-					.Union(new [] {
-						DockServices.Paths.XdgDataHomeFolder.GetChild ("applications"),
-						DockServices.Paths.HomeFolder.GetChild (".cxoffice"),
-					})
-					.Where (d => d.Exists);
-			}
-		}
-		
-		void UpdateDesktopItemsList ()
-		{
-			if (desktop_items == null)
-				desktop_items = new List<DesktopItem> ();
-			
-			List<GLib.File> known_desktop_files = desktop_items.Select (item => item.File).ToList ();
-			List<DesktopItem> new_items = new List<DesktopItem> ();
-
-			// Get desktop items for new "valid" desktop files
-			new_items = DesktopFileDirectories
-				.SelectMany (dir => dir.SubDirs ())
-				.Union (DesktopFileDirectories)
-				.SelectMany (file => file.GetFiles (".desktop"))
-				.Where (file => !known_desktop_files.Exists (known_file => (known_file.Path == file.Path)))
-				.Select (file => new DesktopItem (file))
-				.Where (item => item.Values.Any ())
-				.ToList ();
-			
-			desktop_items.AddRange (new_items);
-
-			if (new_items.Count () > 0)
-				Log<WindowMatcher>.Debug ("{0} new applications found", new_items.Count ());
-
-			// Check file existence and remove unlinked items
-			int removed = desktop_items.RemoveAll (item => !item.File.Exists);
-			if (removed > 0)
-				Log<WindowMatcher>.Debug ("{0} applications removed", removed);
-			
-			known_desktop_files.Clear ();
-			new_items.Clear ();
-		}		
-		
-		void ProcessAndMergeAllSystemCacheFiles (List<DesktopItem> items)
-		{
-			foreach (GLib.File cache_file in DesktopFileSystemCacheFiles)
-				ProcessAndMergeSystemCacheFile (cache_file, items);
-		}
-
-		void ProcessAndMergeSystemCacheFile (GLib.File cache_file, List<DesktopItem> items)
-		{
-			if (!cache_file.Exists)
-			    return;
-			
-			Log<WindowMatcher>.Debug ("Processing {0}", cache_file.Path);
-			
-			try {
-				using (StreamReader reader = new StreamReader (cache_file.Path)) {
-					DesktopItem desktop_item = null;
-					string line;
-					
-					while ((line = reader.ReadLine ()) != null) {
-						if (line.Trim ().Length <= 0)
-							continue;
-						
-						if (line.ElementAt (0) == '[') {
-							Match match = DesktopItem.sectionRegex.Match (line);
-							if (match.Success) {
-								string section = match.Groups["Section"].Value;
-								if (section != null) {
-									GLib.File file = cache_file.Parent.GetChild (string.Format ("{0}.desktop", section));
-									desktop_item = items.First (item => item.File.Path == file.Path);
-									if (desktop_item == null && file.Exists) {
-										desktop_item = new DesktopItem (file);
-										items.Add (desktop_item);
-										Log<WindowMatcher>.Debug ("New application found: {0}", desktop_item.Path);
-									}
-									continue;
-								}
-							}
-						} else if (desktop_item != null) {
-							Match match = DesktopItem.keyValueRegex.Match (line);
-							if (match.Success) {
-								string key = match.Groups["Key"].Value;
-								string val = match.Groups["Value"].Value;
-								if (!string.IsNullOrEmpty (key) && !string.IsNullOrEmpty (val))
-									desktop_item.SetString (key, val);
-								continue;
-							}
-						}
-					}
-					reader.Close ();
-				}
-			} catch (Exception e) {
-				Log<WindowMatcher>.Error (e.Message);
-				Log<WindowMatcher>.Error (e.StackTrace);
-			}
-		}
-
-		void LoadRemaps (GLib.File file)
-		{
-			if (!file.Exists)
-				return;
-			
-			Regex keyValueRegex = new Regex (
-				@"(^(\s)*(?<Key>([^\=^\n]+))[\s^\n]*\=(\s)*(?<Value>([^\n]+(\n){0,1})))",
-				RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled | 
-				RegexOptions.CultureInvariant
-			);
-			
-			try {
-				using (StreamReader reader = new StreamReader (file.Path)) {
-					string line;
-					
-					while ((line = reader.ReadLine ()) != null) {
-						line = line.Trim ();
-						if (line.Length <= 0 || line.Substring (0, 1) == "#")
-							continue;
-						
-						Match match = keyValueRegex.Match (line);
-						if (match.Success) {
-							string key = match.Groups["Key"].Value;
-							string val = match.Groups["Value"].Value;
-							if (!string.IsNullOrEmpty (key)) {
-								remap_items[key] = val;
-								Log<WindowMatcher>.Debug ("Remapping '" + key + "' to '" + val + "'");
-							}
-						}
-					}
-					reader.Close ();
-				}
-			} catch (Exception e) {
-				Log<WindowMatcher>.Error (e.Message);
-				Log<WindowMatcher>.Error (e.StackTrace);
-			}
-		}
-		
-		List<DesktopItem> LoadDesktopItemsCache (string filename)
-		{
-			if (!GLib.FileFactory.NewForPath (filename).Exists)
-				return new List<DesktopItem> ();
-				
-			Log<WindowMatcher>.Debug ("Loading {0}", DockyDesktopFileCacheFile);
-			
-			List<DesktopItem> items = new List<DesktopItem> ();
-			
-			try {
-				using (StreamReader reader = new StreamReader (filename)) {
-					DesktopItem desktop_item = null;
-					string line;
-					
-					while ((line = reader.ReadLine ()) != null) {
-						if (line.Trim ().Length <= 0)
-							continue;
-						
-						if (line.ElementAt (0) == '[') {
-							Match match = DesktopItem.sectionRegex.Match (line);
-							if (match.Success) {
-								string section = match.Groups["Section"].Value;
-								if (section != null) {
-									GLib.File file = GLib.FileFactory.NewForPath (section);
-									desktop_item = new DesktopItem (file, false);
-									items.Add (desktop_item);
-								}
-								continue;
-							}
-						} else if (desktop_item != null) {
-							Match match = DesktopItem.keyValueRegex.Match (line);
-							if (match.Success) {
-								string key = match.Groups["Key"].Value;
-								string val = match.Groups["Value"].Value;
-								if (!string.IsNullOrEmpty (key) && !string.IsNullOrEmpty (val))
-									desktop_item.SetString (key, val);
-								continue;
-							}
-						}
-					}
-					reader.Close ();
-				}
-			} catch (Exception e) {
-				Log<WindowMatcher>.Error (e.Message);
-				Log<WindowMatcher>.Error (e.StackTrace);
-				return null;
-			}
-
-			return items;
-		}
-
-		void SaveDesktopItemsCache ()
-		{
-			Log<WindowMatcher>.Debug ("Saving {0}", DockyDesktopFileCacheFile);
-
-			try {
-				using (StreamWriter writer = new StreamWriter (DockyDesktopFileCacheFile, false)) {
-					foreach (DesktopItem item in desktop_items) {
-						writer.WriteLine ("[{0}]", item.Path);
-						IDictionaryEnumerator enumerator = item.Values.GetEnumerator ();
-						enumerator.Reset();
-						while (enumerator.MoveNext())
-							writer.WriteLine ("{0}={1}", enumerator.Key, enumerator.Value);
-						writer.WriteLine ("");
-					}
-					writer.Close ();
-				}
-			} catch (Exception e) {
-				Log<WindowMatcher>.Error (e.Message);
-				Log<WindowMatcher>.Error (e.StackTrace);
-			}
-		}
-
-		void MonitorDesktopFileSystemCacheFiles ()
-		{
-			foreach (GLib.File file in DesktopFileSystemCacheFiles) {
-				GLib.FileMonitor mon = file.Monitor (GLib.FileMonitorFlags.None, null);
-				mon.RateLimit = 2500;
-				mon.Changed += delegate(object o, GLib.ChangedArgs args) {
-					if (args.EventType == GLib.FileMonitorEvent.ChangesDoneHint)
-						DockServices.System.RunOnThread (() => {
-							lock (update_lock) {
-								ProcessAndMergeSystemCacheFile (file, desktop_items);
-								DesktopItemsChanged ();
-							}   
-						});
-				};
-			}
-		}
-		
-		void MonitorDesktopFileDirs (GLib.File dir)
-		{
-			// build a list of all the subdirectories
-			List<GLib.File> dirs = new List<GLib.File> () {dir};
-			try {
-				dirs = dirs.Union (dir.SubDirs ()).ToList ();	
-			} catch {}
-			
-			foreach (GLib.File d in dirs) {
-				GLib.FileMonitor mon = d.Monitor (GLib.FileMonitorFlags.None, null);
-				mon.RateLimit = 2500;
-				mon.Changed += delegate(object o, GLib.ChangedArgs args) {
-					// bug in GIO#, calling args.File or args.OtherFile crashes hard
-					GLib.File file = GLib.FileAdapter.GetObject ((GLib.Object) args.Args[0]);
-					GLib.File otherFile = GLib.FileAdapter.GetObject ((GLib.Object) args.Args[1]);
-
-					// according to GLib documentation, the change signal runs on the same
-					// thread that the monitor was created on.  Without running this part on a thread
-					// docky freezes up for about 500-800 ms while the .desktop files are parsed.
-					DockServices.System.RunOnThread (() => {
-						// if a new directory was created, make sure we watch that dir as well
-						if (file.QueryFileType (GLib.FileQueryInfoFlags.NofollowSymlinks, null) == GLib.FileType.Directory)
-							MonitorDesktopFileDirs (file);
-						
-						// we only care about .desktop files
-						if (!file.Path.EndsWith (".desktop"))
-							return;
-
-						lock (update_lock) {
-							UpdateDesktopItemsList ();
-							DesktopItemsChanged ();
-							SaveDesktopItemsCache();
-						}
-						
-						// Make sure to trigger event on main thread
-						DockServices.System.RunOnMainThread (() => {
-							if (DesktopFileChanged != null)
-								DesktopFileChanged (this, new DesktopFileChangedEventArgs (args.EventType, file, otherFile));
-						});
-					});
-				};
-			}
-		}
-
-		public void RegisterDesktopItem (DesktopItem item)
-		{
-			if (DesktopItems.Contains (item))
-				return;
-			
-			custom_desktop_items.Add (item);
-			
-			DesktopItemsChanged ();
-		}
-		#endregion
-
 		#region Window Setup
 		void WnckScreenDefaultWindowOpened (object o, WindowOpenedArgs args)
 		{
@@ -468,12 +85,17 @@ namespace Docky.Windowing
 			if (items.Any ()) {
 				window_to_desktop_items [window] = items.ToList ();
 				return true;
-			} else
+			} else {
 				return false;
+			}
 		}
 		#endregion
 
 		#region Window Matching
+		readonly List<Regex> prefix_filters;
+		readonly List<Regex> suffix_filters;
+		
+		/* exposed via DockServices.WindowMatching */
 		static IEnumerable<string> PrefixStrings {
 			get {
 				yield return "gksu(do)?";
@@ -497,6 +119,7 @@ namespace Docky.Windowing
 			return new List<Regex> (PrefixStrings.Select (s => new Regex ("^" + s + "$")));
 		}
 		
+		/* exposed via DockServices.WindowMatching */
 		static IEnumerable<string> SuffixStrings {
 			get {
 				// some wine apps are launched via a shell script that sets the proc name to "app.exe"
@@ -793,147 +416,6 @@ namespace Docky.Windowing
 				return "";
 			
 			return name.Substring (6);
-		}
-		
-		Dictionary<string, DesktopItem> BuildClassStrings ()
-		{
-			Dictionary<string, DesktopItem> result = new Dictionary<string, DesktopItem> ();
-			
-			foreach (DesktopItem item in DesktopItems) {
-				if (item == null || !item.HasAttribute ("StartupWMClass"))
-					continue;
-				
-				if (item.HasAttribute ("NoDisplay") && item.GetBool ("NoDisplay"))
-					continue;
-				
-				if (item.HasAttribute ("X-Docky-NoMatch") && item.GetBool ("X-Docky-NoMatch"))
-					continue;
-				
-				string cls = item.GetString ("StartupWMClass").Trim ();
-				// we only want exactly 1 launcher, and so if we already have one we use that
-				// otherwise it will prefer global over local launchers
-				if (!result.ContainsKey (cls))
-					result [cls] = item;
-			}
-			
-			return result;
-		}
-				
-		Dictionary<string, List<DesktopItem>> BuildExecStrings ()
-		{
-			Dictionary<string, List<DesktopItem>> result = new Dictionary<string, List<DesktopItem>> ();
-			
-			foreach (DesktopItem item in DesktopItems) {
-				if (item == null || !item.HasAttribute ("Exec"))
-					continue;
-				
-				if (item.HasAttribute ("NoDisplay") && item.GetBool ("NoDisplay"))
-					continue;
-				
-				if (item.HasAttribute ("X-Docky-NoMatch") && item.GetBool ("X-Docky-NoMatch"))
-					continue;
-				
-				string exec = item.GetString ("Exec").Trim ();
-				string vexec = null;
-				
-				// for openoffice
-				if (exec.Contains (' ') &&
-					(exec.StartsWith ("ooffice") || exec.StartsWith ("openoffice") || exec.StartsWith ("soffice"))) {
-					vexec = "ooffice" + exec.Split (' ') [1];
-				
-				// for wine apps
-				} else if ((exec.Contains ("env WINEPREFIX=") && exec.Contains (" wine ")) ||
-						exec.Contains ("wine ")) {
-					int startIndex = exec.IndexOf ("wine ") + 5; // length of 'wine '
-					// CommandLineForPid already splits based on \\ and takes the last entry, so do the same here
-					vexec = exec.Substring (startIndex).Split (new [] {@"\\"}, StringSplitOptions.RemoveEmptyEntries).Last ();
-					// remove the trailing " and anything after it
-					if (vexec.Contains ("\""))
-						vexec = vexec.Substring (0, vexec.IndexOf ("\""));
-
-				// for crossover apps
-				} else if (exec.Contains (".cxoffice") || (item.HasAttribute ("X-Created-By") && item.GetString ("X-Created-By").Contains ("cxoffice"))) {
-					// The exec is actually another file that uses exec to launch the actual app.
-					exec = exec.Replace ("\"", "");
-					
-					GLib.File launcher = GLib.FileFactory.NewForPath (exec);
-					if (!launcher.Exists) {
-						Log<WindowMatcher>.Warn ("Crossover launcher decoded as: {0}, but does not exist.", launcher.Path);
-						continue;
-					}
-					
-					string execLine = "";
-					using (GLib.DataInputStream stream = new GLib.DataInputStream (launcher.Read (null))) {
-						ulong len;
-						string line;
-						try {
-							while ((line = stream.ReadLine (out len, null)) != null) {
-								if (line.StartsWith ("exec")) {
-									execLine = line;
-									break;
-								}
-							}
-						} catch (Exception e) {
-							Log<WindowMatcher>.Error (e.Message);
-							Log<WindowMatcher>.Error (e.StackTrace);
-							continue;					
-						}
-					}
-	
-					// if no exec line was found, bail
-					if (string.IsNullOrEmpty (execLine))
-						continue;
-					
-					// get the relevant part from the execLine
-					string [] parts = execLine.Split (new [] {'\"'});
-					// find the part that contains C:/path/to/app.lnk
-					if (parts.Any (part => part.StartsWith ("C:"))) {
-						vexec = parts.First (part => part.StartsWith ("C:"));
-						// and take only app.lnk (this is what is exposed to ps -ef)
-						vexec = vexec.Split (new [] {'/'}).Last ();
-					} else {
-						continue;
-					}
-					
-				// other apps
-				} else {
-					string [] parts = exec.Split (' ');
-					
-					vexec = parts
-						.DefaultIfEmpty (null)
-						.Select (part => part.Split (new [] {
-						'/',
-						'\\'
-					}).Last ())
-						.Where (part => !prefix_filters.Any (f => f.IsMatch (part)))
-						.FirstOrDefault ();
-					
-					// for AIR apps
-					if (vexec != null && vexec.Contains ('\'')) {
-						string strippedExec = vexec.Replace ("'", "");
-						if (!result.ContainsKey (strippedExec))
-							result [strippedExec] = new List<DesktopItem> ();
-						result [strippedExec].Add (item);
-					}
-				}
-				
-				if (vexec == null)
-					continue;
-				
-				if (!result.ContainsKey (vexec))
-					result [vexec] = new List<DesktopItem> ();
-				
-				result [vexec].Add (item);
-				foreach (Regex f in suffix_filters)
-					if (f.IsMatch (vexec)) {
-						string vexecStripped = f.Replace (vexec, "");
-						if (!result.ContainsKey (vexecStripped))
-							result [vexecStripped] = new List<DesktopItem> ();
-						result [vexecStripped].Add (item);
-					}
-			}
-			
-			return result;
 		}
 		#endregion
 	}

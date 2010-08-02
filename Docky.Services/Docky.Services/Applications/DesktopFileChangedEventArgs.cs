@@ -18,7 +18,7 @@
 using System;
 using GLib;
 
-namespace Docky.Windowing
+namespace Docky.Services.Applications
 {
 	public class DesktopFileChangedEventArgs : EventArgs
 	{
