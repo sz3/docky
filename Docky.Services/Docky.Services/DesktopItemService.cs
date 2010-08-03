@@ -119,7 +119,7 @@ namespace Docky.Services
 		public DesktopItem DesktopItemFromClass (string @class)
 		{
 			if (ItemByClass.ContainsKey (@class))
-				return ItemByClass[@class];
+				return ItemByClass [@class];
 			return null;
 		}
 		
@@ -190,7 +190,7 @@ namespace Docky.Services
 		{
 			get {
 				return DockServices.Paths.XdgDataDirFolders.Select (d => d.GetChild ("applications"))
-					.Union(new [] {
+					.Union (new [] {
 						DockServices.Paths.XdgDataHomeFolder.GetChild ("applications"),
 						DockServices.Paths.HomeFolder.GetChild (".cxoffice"),
 					})
@@ -203,7 +203,6 @@ namespace Docky.Services
 			if (RegisteredItems == null)
 				RegisteredItems = new List<DesktopItem> ();
 			
-			//List<GLib.File> knownDesktopFiles = DesktopItems.Select (item => item.File).ToList ();
 			List<DesktopItem> newItems = new List<DesktopItem> ();
 
 			// Get desktop items for new "valid" desktop files
@@ -212,7 +211,6 @@ namespace Docky.Services
 				.Union (DesktopFileDirectories)
 				.SelectMany (file => file.GetFiles (".desktop"))
 				.Where (file => !DesktopItems.Any (existing => existing.File.Path == file.Path))
-				//.Where (file => !knownDesktopFiles.Exists (known => (known.Path == file.Path)))
 				.Select (file => new DesktopItem (file))
 				.Where (item => item.Values.Any ())
 				.ToList ();
@@ -253,7 +251,7 @@ namespace Docky.Services
 						if (line.ElementAt (0) == '[') {
 							Match match = DesktopItem.sectionRegex.Match (line);
 							if (match.Success) {
-								string section = match.Groups["Section"].Value;
+								string section = match.Groups ["Section"].Value;
 								if (section != null) {
 									GLib.File file = cache.Parent.GetChild (string.Format ("{0}.desktop", section));
 									desktopItem = RegisteredItems.First (item => item.File.Path == file.Path);
@@ -430,8 +428,8 @@ namespace Docky.Services
 				mon.RateLimit = 2500;
 				mon.Changed += delegate(object o, GLib.ChangedArgs args) {
 					// bug in GIO#, calling args.File or args.OtherFile crashes hard
-					GLib.File file = GLib.FileAdapter.GetObject ((GLib.Object) args.Args[0]);
-					GLib.File otherFile = GLib.FileAdapter.GetObject ((GLib.Object) args.Args[1]);
+					GLib.File file = GLib.FileAdapter.GetObject ((GLib.Object) args.Args [0]);
+					GLib.File otherFile = GLib.FileAdapter.GetObject ((GLib.Object) args.Args [1]);
 
 					// according to GLib documentation, the change signal runs on the same
 					// thread that the monitor was created on.  Without running this part on a thread
@@ -479,7 +477,7 @@ namespace Docky.Services
 				// we only want exactly 1 launcher, and so if we already have one we use that
 				// otherwise it will prefer global over local launchers
 				if (!ItemByClass.ContainsKey (cls))
-					ItemByClass[cls] = item;
+					ItemByClass [cls] = item;
 			}
 		}
 				
@@ -503,7 +501,7 @@ namespace Docky.Services
 				// for openoffice
 				if (exec.Contains (' ') &&
 					(exec.StartsWith ("ooffice") || exec.StartsWith ("openoffice") || exec.StartsWith ("soffice"))) {
-					vexec = "ooffice" + exec.Split (' ')[1];
+					vexec = "ooffice" + exec.Split (' ') [1];
 				
 				// for wine apps
 				} else if ((exec.Contains ("env WINEPREFIX=") && exec.Contains (" wine ")) ||
@@ -511,7 +509,7 @@ namespace Docky.Services
 					int startIndex = exec.IndexOf ("wine ") + 5;
 					// length of 'wine '
 					// CommandLineForPid already splits based on \\ and takes the last entry, so do the same here
-					vexec = exec.Substring (startIndex).Split (new[] { @"\\" }, StringSplitOptions.RemoveEmptyEntries).Last ();
+					vexec = exec.Substring (startIndex).Split (new [] { @"\\" }, StringSplitOptions.RemoveEmptyEntries).Last ();
 					// remove the trailing " and anything after it
 					if (vexec.Contains ("\""))
 						vexec = vexec.Substring (0, vexec.IndexOf ("\""));
@@ -550,23 +548,23 @@ namespace Docky.Services
 						continue;
 					
 					// get the relevant part from the execLine
-					string[] parts = execLine.Split (new[] { '\"' });
+					string [] parts = execLine.Split (new [] { '\"' });
 					// find the part that contains C:/path/to/app.lnk
 					if (parts.Any (part => part.StartsWith ("C:"))) {
 						vexec = parts.First (part => part.StartsWith ("C:"));
 						// and take only app.lnk (this is what is exposed to ps -ef)
-						vexec = vexec.Split (new[] { '/' }).Last ();
+						vexec = vexec.Split (new [] { '/' }).Last ();
 					} else {
 						continue;
 					}
 					
 				// other apps
 				} else {
-					string[] parts = exec.Split (' ');
+					string [] parts = exec.Split (' ');
 					
 					vexec = parts
 						.DefaultIfEmpty (null)
-						.Select (part => part.Split (new[] {
+						.Select (part => part.Split (new [] {
 						'/',
 						'\\'
 					}).Last ())
