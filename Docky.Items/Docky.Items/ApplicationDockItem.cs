@@ -70,7 +70,7 @@ namespace Docky.Items
 		public ApplicationDockItem (DesktopItem item)
 		{
 			OwnedItem = item;
-			WindowMatcher.Default.RegisterDesktopItem (OwnedItem);
+			DockServices.DesktopItems.RegisterDesktopItem (OwnedItem);
 			can_manage_windows = true;
 			
 			UpdateInfo ();

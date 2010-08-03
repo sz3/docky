@@ -20,8 +20,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Net;
 
@@ -44,12 +43,12 @@ namespace Docky.Services
 			InitializeNetwork ();
 		}
 		
-		readonly string[] LocaleEnvVariables = new[] { "LC_ALL", "LC_MESSAGES", "LANG", "LANGUAGE" };
+		#region Locale
 
 		public string Locale {
 			get {
 				string loc;
-				foreach (string env in LocaleEnvVariables) {
+				foreach (string env in new[] { "LC_ALL", "LC_MESSAGES", "LANG", "LANGUAGE" }) {
 					loc = Environment.GetEnvironmentVariable (env);
 					if (!string.IsNullOrEmpty (loc) && loc.Length >= 2) {
 						return loc;
@@ -58,6 +57,8 @@ namespace Docky.Services
 				return "";
 			}
 		}
+		
+		#endregion
 		
 		#region Network
 		

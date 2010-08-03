@@ -44,9 +44,14 @@ namespace Docky.Services.Applications
 			RegexOptions.Compiled | RegexOptions.CultureInvariant
 		);
 
-		static IEnumerable<string> locales = PostfixStringsForLocale (DockServices.System.Locale);
+		IEnumerable<string> Locales {
+			get {
+				return PostfixStringsForLocale (DockServices.System.Locale);
+			}
+		}
 		
-#region Delayed change propagation
+		#region Delayed change propagation
+		
 		public event EventHandler HasChanged;
 		private uint trigger_changed_timer = 0;
 		private object onchanged_lock = new object ();
@@ -66,7 +71,8 @@ namespace Docky.Services.Applications
 				}
 			}
 		}
-#endregion
+		
+		#endregion
 
 		public Dictionary<string, string> Values { get; set; }
 
@@ -89,15 +95,6 @@ namespace Docky.Services.Applications
 				monitor.RateLimit = 2500;
 				monitor.Changed += HandleFileChanged;
 			}
-		}
-
-		void HandleFileChanged (object o, ChangedArgs args)
-		{
-			Log<DesktopItem>.Debug ("file {0} changed", File.Path);
-
-			Values = GetValuesFromFile ();
-			
-			OnChanged ();
 		}
 		
 		public string Path { 
@@ -193,6 +190,12 @@ namespace Docky.Services.Applications
 			
 			return Convert.ToDouble (result);
 		}
+		
+		public void Launch (IEnumerable<string> uris)
+		{
+			if (File.Exists)
+				DockServices.System.Open (appinfo, uris.Select (uri => GLib.FileFactory.NewForUri (uri)));
+		}
 
 		Dictionary<string, string> GetValuesFromFile ()
 		{
@@ -220,7 +223,7 @@ namespace Docky.Services.Applications
 								string section = match.Groups["Section"].Value;
 								desktop_entry_found = string.Equals (section, "Desktop Entry");
 							}
-							
+						
 						} else {
 							
 							//Only add unlocalized values and values matching the current locale
@@ -231,7 +234,7 @@ namespace Docky.Services.Applications
 								if (!string.IsNullOrEmpty (key) && !string.IsNullOrEmpty (val) && !result.ContainsKey (key)) {
 									match = localizedKeyRegex.Match (key);
 									if (match.Success) {
-										if (locales.Contains (match.Groups["Locale"].Value)) {
+										if (Locales.Contains (match.Groups["Locale"].Value)) {
 											//Remove existing value in favour of this localized one
 											result.Remove (match.Groups["PureKey"].Value);
 											result.Add (match.Groups["PureKey"].Value, val);
@@ -241,8 +244,8 @@ namespace Docky.Services.Applications
 											result.Add (key, val);
 									}
 								}
-								
-							} else if (sectionRegex.Match(line).Success)
+							
+							} else if (sectionRegex.Match (line).Success)
 								break;
 						}
 					}
@@ -250,13 +253,13 @@ namespace Docky.Services.Applications
 				}
 
 			} catch (Exception e) {
-				Log<DesktopItem>.Error (e.Message);
+				Log<DesktopItem>.Error ("Failed getting values from desktop file '{0}' : {1}", Path, e.Message);
 				Log<DesktopItem>.Error (e.StackTrace);
 			}
 
 			return result;
 		}
-
+		
 		IEnumerable<string> PostfixStringsForLocale (string locale)
 		{
 			if (string.IsNullOrEmpty (locale) || locale.Length < 2)
@@ -279,14 +282,18 @@ namespace Docky.Services.Applications
 			
 			yield return locale.Substring (0, 2);
 		}
-
-		public void Launch (IEnumerable<string> uris)
+		
+		void HandleFileChanged (object o, ChangedArgs args)
 		{
-			if (File.Exists)
-				DockServices.System.Open (appinfo, uris.Select (uri => GLib.FileFactory.NewForUri (uri)));
+			Log<DesktopItem>.Debug ("file {0} changed", File.Path);
+			
+			Values = GetValuesFromFile ();
+			
+			OnChanged ();
 		}
 
 		#region IDisposable implementation
+		
 		public void Dispose ()
 		{
 			Values.Clear ();
@@ -299,6 +306,7 @@ namespace Docky.Services.Applications
 				monitor.Dispose ();
 			}
 		}
+		
 		#endregion
 		
 	}
