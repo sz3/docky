@@ -121,6 +121,9 @@
     <Compile Include="Docky.Services\Preferences\PreferencesChangedEventArgs.cs" />
     <Compile Include="Docky.Services\Applications\DesktopFileChangedEventArgs.cs" />
     <Compile Include="Docky.Services\Applications\DesktopItem.cs" />
+    <Compile Include="Docky.Services\Windows\Position.cs" />
+    <Compile Include="Docky.Services\Windows\WindowControl.cs" />
+    <Compile Include="Docky.Services\Windows\WindowMatcher.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -134,6 +137,7 @@
     <Folder Include="Docky.Services\Helpers\" />
     <Folder Include="Docky.Services\Preferences\" />
     <Folder Include="Docky.Services\Applications\" />
+    <Folder Include="Docky.Services\Windows\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">

@@ -92,8 +92,16 @@ namespace Docky.Windowing
 		#endregion
 
 		#region Window Matching
-		readonly List<Regex> prefix_filters;
-		readonly List<Regex> suffix_filters;
+		public List<Regex> PrefixFilters {
+			get {
+				return BuildPrefixFilters ();
+			}
+		}
+		public List<Regex> SuffixFilters {
+			get {
+				return BuildSuffixFilters ();
+			}
+		}
 		
 		/* exposed via DockServices.WindowMatching */
 		static IEnumerable<string> PrefixStrings {
@@ -351,7 +359,7 @@ namespace Docky.Windowing
 			foreach (string sanitizedCmd in result
 				.Select (s => s.Split (new []{'/', '\\'}).Last ())
 			    .Distinct ()
-				.Where (s => !string.IsNullOrEmpty (s) && !prefix_filters.Any (f => f.IsMatch (s)))) {
+				.Where (s => !string.IsNullOrEmpty (s) && !PrefixFilters.Any (f => f.IsMatch (s)))) {
 				
 				yield return sanitizedCmd;
 				
@@ -359,7 +367,7 @@ namespace Docky.Windowing
 					yield return DockServices.DesktopItems.Remaps [sanitizedCmd];
 				
 				// if it ends with a special suffix, strip the suffix and return an additional result
-				foreach (Regex f in suffix_filters)
+				foreach (Regex f in SuffixFilters)
 					if (f.IsMatch (sanitizedCmd))
 						yield return f.Replace (sanitizedCmd, "");
 			}

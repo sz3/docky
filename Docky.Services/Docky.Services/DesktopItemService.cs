@@ -45,17 +45,11 @@ namespace Docky.Services
 		List<DesktopItem> UnregisteredItems { get; set; }
 		Dictionary<string, List<DesktopItem>> ItemsByExec { get; set; }
 		Dictionary<string, DesktopItem> ItemByClass { get; set; }
-		
-		// FIXME: need to make compile first
-		readonly List<Regex> prefix_filters;
-		readonly List<Regex> suffix_filters;
-		
+
 		internal DesktopItemService ()
 		{
 			update_lock = new object ();
-			prefix_filters = new List<Regex> ();
-			suffix_filters = new List<Regex> ();
-			
+
 			Remaps = new Dictionary<string, string> ();
 			LoadRemaps (DockServices.Paths.SystemDataFolder.GetChild ("remaps.ini"));
 			LoadRemaps (DockServices.Paths.UserDataFolder.GetChild ("remaps.ini"));
@@ -565,7 +559,7 @@ namespace Docky.Services
 					vexec = parts
 						.DefaultIfEmpty (null)
 						.Select (part => part.Split (new[] { '/', '\\' }).Last ())
-						.Where (part => !prefix_filters.Any (f => f.IsMatch (part)))
+						.Where (part => !Docky..Any (f => f.IsMatch (part)))
 						.FirstOrDefault ();
 					
 					// for AIR apps
