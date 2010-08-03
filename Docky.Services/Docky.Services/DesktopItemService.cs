@@ -501,7 +501,7 @@ namespace Docky.Services
 				// for openoffice
 				if (exec.Contains (' ') &&
 					(exec.StartsWith ("ooffice") || exec.StartsWith ("openoffice") || exec.StartsWith ("soffice"))) {
-					vexec = "ooffice" + exec.Split (' ') [1];
+					vexec = "ooffice" + exec.Split (' ')[1];
 				
 				// for wine apps
 				} else if ((exec.Contains ("env WINEPREFIX=") && exec.Contains (" wine ")) ||
@@ -509,7 +509,7 @@ namespace Docky.Services
 					int startIndex = exec.IndexOf ("wine ") + 5;
 					// length of 'wine '
 					// CommandLineForPid already splits based on \\ and takes the last entry, so do the same here
-					vexec = exec.Substring (startIndex).Split (new [] { @"\\" }, StringSplitOptions.RemoveEmptyEntries).Last ();
+					vexec = exec.Substring (startIndex).Split (new[] { @"\\" }, StringSplitOptions.RemoveEmptyEntries).Last ();
 					// remove the trailing " and anything after it
 					if (vexec.Contains ("\""))
 						vexec = vexec.Substring (0, vexec.IndexOf ("\""));
@@ -548,26 +548,23 @@ namespace Docky.Services
 						continue;
 					
 					// get the relevant part from the execLine
-					string [] parts = execLine.Split (new [] { '\"' });
+					string[] parts = execLine.Split (new[] { '\"' });
 					// find the part that contains C:/path/to/app.lnk
 					if (parts.Any (part => part.StartsWith ("C:"))) {
 						vexec = parts.First (part => part.StartsWith ("C:"));
 						// and take only app.lnk (this is what is exposed to ps -ef)
-						vexec = vexec.Split (new [] { '/' }).Last ();
+						vexec = vexec.Split (new[] { '/' }).Last ();
 					} else {
 						continue;
 					}
 					
 				// other apps
 				} else {
-					string [] parts = exec.Split (' ');
+					string[] parts = exec.Split (' ');
 					
 					vexec = parts
 						.DefaultIfEmpty (null)
-						.Select (part => part.Split (new [] {
-						'/',
-						'\\'
-					}).Last ())
+						.Select (part => part.Split (new[] { '/', '\\' }).Last ())
 						.Where (part => !prefix_filters.Any (f => f.IsMatch (part)))
 						.FirstOrDefault ();
 					
