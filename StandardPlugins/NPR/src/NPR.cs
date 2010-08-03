@@ -19,7 +19,6 @@ using System;
 using System.Web;
 using System.Linq;
 using System.Net;
-using System.Xml;
 using System.Xml.Linq;
 using System.Text;
 using System.IO;
@@ -27,6 +26,7 @@ using System.Collections.Specialized;
 using System.Collections.Generic;
 
 using Docky.Services;
+using Docky.Services.Prefs;
 
 namespace NPR
 {

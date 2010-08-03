@@ -34,6 +34,7 @@ using Docky.Menus;
 using Docky.Painters;
 using Docky.Services;
 using Docky.Xlib;
+using Docky.Services.Prefs;
 
 namespace Docky.Interface
 {

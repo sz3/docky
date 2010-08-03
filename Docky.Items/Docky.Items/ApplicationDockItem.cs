@@ -27,6 +27,7 @@ using Wnck;
 
 using Docky.Menus;
 using Docky.Services;
+using Docky.Services.Applications;
 using Docky.Windowing;
 
 namespace Docky.Items
@@ -40,7 +41,7 @@ namespace Docky.Items
 				if (!file.Exists)
 					return null;
 				
-				DesktopItem desktopItem = WindowMatcher.Default.DesktopItemForDesktopFile (file.Path);
+				DesktopItem desktopItem = DockServices.DesktopItems.DesktopItemFromDesktopFile (file.Path);
 				
 				if (desktopItem == null)
 					desktopItem = new DesktopItem (file.Path);

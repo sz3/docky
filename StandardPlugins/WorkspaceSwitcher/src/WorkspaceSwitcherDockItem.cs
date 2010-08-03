@@ -33,6 +33,7 @@ using Docky.CairoHelper;
 using Docky.Items;
 using Docky.Menus;
 using Docky.Services;
+using Docky.Services.Prefs;
 
 namespace WorkspaceSwitcher
 {

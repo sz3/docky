@@ -28,6 +28,7 @@ using Gtk;
 using Wnck;
 
 using Docky.Services;
+using Docky.Services.Prefs;
 
 namespace Docky.Interface
 {

@@ -44,6 +44,7 @@ namespace Docky.Services
 			Helpers = new HelperService ();
 			Theme = new ThemeService ();
 			DesktopItems = new DesktopItemService ();
+			
 			NotificationService.Initialize ();
 			Theme.Initialize ();
 			

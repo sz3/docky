@@ -212,15 +212,15 @@ namespace Docky.Windowing
 			if (window.ClassGroup != null
 					&& !string.IsNullOrEmpty (window.ClassGroup.ResClass)
 					&& window.ClassGroup.ResClass != "Wine"
-					&& class_to_desktop_items.ContainsKey (window.ClassGroup.ResClass)) {
-				yield return class_to_desktop_items [window.ClassGroup.ResClass];
+					&& DockServices.DesktopItems.DesktopItemFromClass (window.ClassGroup.ResClass) != null) {
+				yield return DockServices.DesktopItems.DesktopItemFromClass (window.ClassGroup.ResClass);
 				yield break;
 			}
 			
 			int pid = window.Pid;
 			if (pid <= 1) {
 				if (window.ClassGroup != null && !string.IsNullOrEmpty (window.ClassGroup.ResClass)) {
-					IEnumerable<DesktopItem> matches = DesktopItemsForDesktopID (window.ClassGroup.ResClass);
+					IEnumerable<DesktopItem> matches = DockServices.DesktopItems.DesktopItemsFromID (window.ClassGroup.ResClass);
 					if (matches.Any ())
 						foreach (DesktopItem s in matches)
 							yield return s;
@@ -254,7 +254,7 @@ namespace Docky.Windowing
 					// we can match Wine apps normally so don't do anything here
 				} else {
 					string class_name = window.ClassGroup.ResClass.Replace (".", "");
-					IEnumerable<DesktopItem> matches = DesktopItemsForDesktopID (class_name);
+					IEnumerable<DesktopItem> matches = DockServices.DesktopItems.DesktopItemsFromID (class_name);
 					
 					foreach (DesktopItem s in matches) {
 						yield return s;
@@ -263,15 +263,13 @@ namespace Docky.Windowing
 				}
 			}
 	
-			lock (update_lock) {
+			//lock (update_lock) {
 				do {
 					// do a match on the process name
 					string name = NameForPid (pids.ElementAt (currentPid));
-					if (exec_to_desktop_items.ContainsKey (name)) {
-						foreach (DesktopItem s in exec_to_desktop_items[name]) {
-							yield return s;
-							matched = true;
-						}
+					foreach (DesktopItem s in DockServices.DesktopItems.DesktopItemsFromExec (name)) {
+						yield return s;
+						matched = true;
 					}
 					
 					// otherwise do a match on the commandline
@@ -282,11 +280,9 @@ namespace Docky.Windowing
 						continue;
 					
 					foreach (string cmd in command_line) {
-						if (exec_to_desktop_items.ContainsKey (cmd)) {
-							foreach (DesktopItem s in exec_to_desktop_items[cmd]) {
-								yield return s;
-								matched = true;
-							}
+						foreach (DesktopItem s in DockServices.DesktopItems.DesktopItemsFromExec (cmd)) {
+							yield return s;
+							matched = true;
 						}
 						if (matched)
 							break;
@@ -296,7 +292,7 @@ namespace Docky.Windowing
 					if (matched)
 						yield break;
 				} while (currentPid < pids.Count ());
-			}
+			//}
 			command_line.Clear ();
 			yield break;
 		}

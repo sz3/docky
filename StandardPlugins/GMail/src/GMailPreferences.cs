@@ -18,6 +18,7 @@
 using System;
 
 using Docky.Services;
+using Docky.Services.Prefs;
 
 namespace GMail
 {

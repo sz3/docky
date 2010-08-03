@@ -30,6 +30,7 @@ using Wnck;
 using Docky.Menus;
 using Docky.Services;
 using Docky.Services.Prefs;
+using Docky.Services.Applications;
 using Docky.Windowing;
 
 namespace Docky.Items
@@ -126,7 +127,7 @@ namespace Docky.Items
 			// update the transient items when something happens in a desktop file directory
 			// It is possible that a .desktop file was created for a window that didn't have one before,
 			// this would associate that desktop file with the existing window.
-			WindowMatcher.DesktopFileChanged += HandleWindowMatcherDesktopFileChanged;
+			DockServices.DesktopItems.DesktopFileChanged += HandleWindowMatcherDesktopFileChanged;
 			
 			Wnck.Screen.Default.WindowOpened += WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
@@ -484,7 +485,7 @@ namespace Docky.Items
 		{
 			base.Dispose ();
 			
-			WindowMatcher.DesktopFileChanged -= HandleWindowMatcherDesktopFileChanged;
+			DockServices.DesktopItems.DesktopFileChanged -= HandleWindowMatcherDesktopFileChanged;
 			
 			Wnck.Screen.Default.WindowOpened -= WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed -= WnckScreenDefaultWindowClosed;

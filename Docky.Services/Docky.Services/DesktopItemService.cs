@@ -31,7 +31,7 @@ namespace Docky.Services
 {
 	public class DesktopItemService
 	{
-		public static event EventHandler<DesktopFileChangedEventArgs> DesktopFileChanged;
+		public event EventHandler<DesktopFileChangedEventArgs> DesktopFileChanged;
 		
 		object update_lock;
 		
@@ -404,13 +404,15 @@ namespace Docky.Services
 				GLib.FileMonitor mon = file.Monitor (GLib.FileMonitorFlags.None, null);
 				mon.RateLimit = 2500;
 				mon.Changed += delegate(object o, GLib.ChangedArgs args) {
-					if (args.EventType == GLib.FileMonitorEvent.ChangesDoneHint)
-						DockServices.System.RunOnThread (() => {
+					if (args.EventType == GLib.FileMonitorEvent.ChangesDoneHint) {
+						DockServices.System.RunOnThread (() =>
+						{
 							lock (update_lock) {
 								ProcessAndMergeSystemCacheFile (file);
 								DesktopItemsChanged ();
-							}   
+							}
 						});
+					}
 				};
 			}
 		}

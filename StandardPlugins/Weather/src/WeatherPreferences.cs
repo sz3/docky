@@ -19,6 +19,7 @@ using System;
 using System.Globalization;
 
 using Docky.Services;
+using Docky.Services.Prefs;
 
 namespace WeatherDocklet
 {

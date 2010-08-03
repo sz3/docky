@@ -27,6 +27,7 @@ using Mono.Unix;
 
 using Docky.Menus;
 using Docky.Services;
+using Docky.Services.Prefs;
 
 namespace Docky.Items
 {
