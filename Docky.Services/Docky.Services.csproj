@@ -123,7 +123,7 @@
     <Compile Include="Docky.Services\Applications\DesktopItem.cs" />
     <Compile Include="Docky.Services\Windows\Position.cs" />
     <Compile Include="Docky.Services\Windows\WindowControl.cs" />
-    <Compile Include="Docky.Services\Windows\WindowMatcher.cs" />
+    <Compile Include="Docky.Services\WindowMatcherService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

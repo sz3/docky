@@ -22,9 +22,8 @@ using System.Linq;
 
 using Wnck;
 
-namespace Docky.Windowing
+namespace Docky.Services.Windows
 {
-	
 	
 	public static class WindowControl
 	{

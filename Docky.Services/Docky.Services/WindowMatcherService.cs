@@ -31,7 +31,7 @@ using Wnck;
 using Docky.Services;
 using Docky.Services.Applications;
 
-namespace Docky.Windowing
+namespace Docky.Services.Windows
 {
 	public class WindowMatcher
 	{

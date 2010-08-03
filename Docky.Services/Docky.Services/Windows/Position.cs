@@ -17,9 +17,8 @@
 
 using System;
 
-namespace Docky.Windowing
+namespace Docky.Services.Windows
 {
-	
 	
 	public enum Position {
 		Left = 0,
