@@ -31,7 +31,7 @@ using Docky.Menus;
 using Docky.Services;
 using Docky.Services.Prefs;
 using Docky.Services.Applications;
-using Docky.Windowing;
+using Docky.Services.Windows;
 
 namespace Docky.Items
 {
@@ -179,11 +179,11 @@ namespace Docky.Items
 			if (args.Window.IsSkipTasklist)
 				return;
 			
-			longMatchInProgress = !WindowMatcher.Default.WindowIsReadyForMatch (args.Window);
+			longMatchInProgress = !DockServices.WindowMatcher.WindowIsReadyForMatch (args.Window);
 			
 			// ensure we run last (more or less) so that all icons can update first
 			GLib.Timeout.Add (150, delegate {
-				if (WindowMatcher.Default.WindowIsReadyForMatch (args.Window)) {
+				if (DockServices.WindowMatcher.WindowIsReadyForMatch (args.Window)) {
 					longMatchInProgress = false;
 					UpdateTransientItems ();
 				} else {
@@ -191,11 +191,11 @@ namespace Docky.Items
 					// their windows will be monitored for name changes (give up after 5 seconds)
 					uint matching_timeout = 5000;
 					// wait for OpenOffice up to 1min to startup before giving up
-					if (WindowMatcher.Default.WindowIsOpenOffice (args.Window))
+					if (DockServices.WindowMatcher.WindowIsOpenOffice (args.Window))
 						matching_timeout = 60000;
 					args.Window.NameChanged += HandleUnmatchedWindowNameChanged;
 					GLib.Timeout.Add (matching_timeout, delegate {
-						if (!WindowMatcher.Default.WindowIsReadyForMatch (args.Window)) {
+						if (!DockServices.WindowMatcher.WindowIsReadyForMatch (args.Window)) {
 							args.Window.NameChanged -= HandleUnmatchedWindowNameChanged;
 							longMatchInProgress = false;
 							UpdateTransientItems ();
@@ -210,7 +210,7 @@ namespace Docky.Items
 		void HandleUnmatchedWindowNameChanged (object sender, EventArgs e)
 		{
 			Wnck.Window window = (sender as Wnck.Window);
-			if (WindowMatcher.Default.WindowIsReadyForMatch (window)) {
+			if (DockServices.WindowMatcher.WindowIsReadyForMatch (window)) {
 				window.NameChanged -= HandleUnmatchedWindowNameChanged;
 				longMatchInProgress = false;
 				UpdateTransientItems ();
@@ -249,14 +249,14 @@ namespace Docky.Items
 					.Contains (window))
 					continue;
 				
-				DesktopItem desktop_item = WindowMatcher.Default.DesktopItemForWindow (window);
+				DesktopItem desktopItem = DockServices.WindowMatcher.DesktopItemForWindow (window);
 				WnckDockItem item;
 				
-				if (desktop_item != null) {
+				if (desktopItem != null) {
 					// This fixes WindowMatching for OpenOffice which is a bit slow setting up its window title
 					// Check if an existing ApplicationDockItem already uses this DesktopItem
 					ApplicationDockItem appdi = InternalItems
-						.Where (adi => (adi is ApplicationDockItem && (adi as ApplicationDockItem).OwnedItem == desktop_item))
+						.Where (adi => (adi is ApplicationDockItem && (adi as ApplicationDockItem).OwnedItem == desktopItem))
 						.Cast<ApplicationDockItem> ()
 						.FirstOrDefault ();
 					
@@ -266,7 +266,7 @@ namespace Docky.Items
 						continue;
 					}
 					
-					item = new ApplicationDockItem (desktop_item);
+					item = new ApplicationDockItem (desktopItem);
 				} else {
 					item = new WindowDockItem (window);
 				}

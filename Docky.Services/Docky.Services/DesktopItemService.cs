@@ -558,8 +558,8 @@ namespace Docky.Services
 					
 					vexec = parts
 						.DefaultIfEmpty (null)
-						.Select (part => part.Split (new[] { '/', '\\' }).Last ())
-						.Where (part => !Docky..Any (f => f.IsMatch (part)))
+						.Select (part => part.Split ( new[] { '/', '\\' }).Last ())
+						.Where (part => !DockServices.WindowMatcher.PrefixFilters.Any (f => f.IsMatch (part)))
 						.FirstOrDefault ();
 					
 					// for AIR apps
@@ -575,7 +575,7 @@ namespace Docky.Services
 					ItemsByExec [vexec] = new List<DesktopItem> ();
 				
 				ItemsByExec [vexec].Add (item);
-				foreach (Regex f in suffix_filters) {
+				foreach (Regex f in DockServices.WindowMatcher.SuffixFilters) {
 					if (f.IsMatch (vexec)) {
 						string vexecStripped = f.Replace (vexec, "");
 						if (!ItemsByExec.ContainsKey (vexecStripped))

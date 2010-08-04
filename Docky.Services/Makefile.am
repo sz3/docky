@@ -20,6 +20,8 @@ FILES = \
 	Docky.Services/Logging/ConsoleCrayon.cs \
 	Docky.Services/Logging/ConsoleLog.cs \
 	Docky.Services/Logging/LogBase.cs \
+	Docky.Services/Windows/Position.cs \
+	Docky.Services/Windows/WindowControl.cs \
 	Docky.Services/Preferences/IPreferences.cs \
 	Docky.Services/Preferences/Preferences.cs \
 	Docky.Services/Preferences/PreferencesChangedEventArgs.cs \
@@ -36,6 +38,7 @@ FILES = \
  	Docky.Services/PreferencesService.cs \
 	Docky.Services/SystemService.cs \
 	Docky.Services/ThemeService.cs \
+	Docky.Services/WindowMatcherService.cs \
 	Gtk/MountOperation.cs \
 	GLibSharp/AsyncReadyCallbackNative.cs
 

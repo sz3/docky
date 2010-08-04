@@ -28,7 +28,7 @@ using Wnck;
 using Docky.Menus;
 using Docky.Services;
 using Docky.Services.Applications;
-using Docky.Windowing;
+using Docky.Services.Windows;
 
 namespace Docky.Items
 {
@@ -154,7 +154,7 @@ namespace Docky.Items
 		void UpdateWindows ()
 		{
 			if (can_manage_windows)
-				Windows = WindowMatcher.Default.WindowsForDesktopItem (OwnedItem);
+				Windows = DockServices.WindowMatcher.WindowsForDesktopItem (OwnedItem);
 			else
 				Windows = Enumerable.Empty<Wnck.Window> ();
 		}

@@ -22,12 +22,11 @@ using System.Runtime.InteropServices;
 using System.Linq;
 using System.Text;
 
-using Docky.Windowing;
 using Docky.Xlib;
+using Docky.Services.Windows;
 
 namespace Wnck
 {
-
 
 	public static class Window_Extensions
 	{

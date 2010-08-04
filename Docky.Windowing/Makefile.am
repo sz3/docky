@@ -8,9 +8,6 @@ PKG_CONFIG_FILES = docky.windowing.pc
 
 FILES = \
     AssemblyInfo.cs \
-    Windowing/WindowControl.cs \
-    Windowing/Position.cs \
-    Windowing/WindowMatcher.cs \
 	Wnck/Window_Extensions.cs \
     Xlib/X11Atoms.cs \
     Xlib/Xlib.cs

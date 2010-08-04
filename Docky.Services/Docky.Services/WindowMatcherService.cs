@@ -32,7 +32,7 @@ namespace Docky.Services
 	public class WindowMatcherService
 	{
 		
-		internal WindowMatcher ()
+		internal WindowMatcherService ()
 		{
 			// Initialize window matching with currently available windows
 			DesktopItemsByWindow = new Dictionary<Window, List<DesktopItem>> ();
@@ -69,7 +69,7 @@ namespace Docky.Services
 		public DesktopItem DesktopItemForWindow (Window window)
 		{
 			if (window == null)
-				throw new ArgumentNullException ("window");
+				throw new ArgumentNullException ("Window window cannot be null.");
 			
 			List<DesktopItem> matches;
 			if (DesktopItemsByWindow.TryGetValue (window, out matches)) {
@@ -91,6 +91,41 @@ namespace Docky.Services
 			get {
 				return BuildSuffixFilters ();
 			}
+		}
+		
+		public IEnumerable<Window> SimilarWindows (Window window)
+		{
+			if (window == null)
+				throw new ArgumentNullException ("Window cannot be null.");
+			
+			//TODO perhaps make it a bit smarter
+			if (!DesktopItemsByWindow.ContainsKey (window))
+				foreach (Window win in UnmatchedWindows) {
+					if (win == window)
+						continue;
+					
+					if (win.Pid == window.Pid)
+						yield return win; else if (window.Pid <= 1) {
+						if (window.ClassGroup != null && win.ClassGroup != null && !string.IsNullOrEmpty (window.ClassGroup.ResClass) && !string.IsNullOrEmpty (win.ClassGroup.ResClass) && win.ClassGroup.ResClass.Equals (window.ClassGroup.ResClass))
+							yield return win; else if (!string.IsNullOrEmpty (win.Name) && win.Name.Equals (window.Name))
+							yield return win;
+					}
+				}
+			
+			yield return window;
+		}
+		
+		public bool WindowIsReadyForMatch (Window window)
+		{
+			if (!WindowIsOpenOffice (window))
+				return true;
+			
+			return SetupWindow (window);
+		}
+		
+		public bool WindowIsOpenOffice (Window window)
+		{
+			return window.ClassGroup != null && window.ClassGroup.Name.ToLower ().StartsWith ("openoffice");
 		}
 
 		#endregion
@@ -158,15 +193,15 @@ namespace Docky.Services
 				if (WindowIsOpenOffice (window)) {
 					string title = window.Name.Trim ();
 					if (title.EndsWith ("Writer"))
-						command_line.Add ("ooffice-writer");
+						commandLine.Add ("ooffice-writer");
 					else if (title.EndsWith ("Draw"))
-						command_line.Add ("ooffice-draw");
+						commandLine.Add ("ooffice-draw");
 					else if (title.EndsWith ("Impress"))
-						command_line.Add ("ooffice-impress");
+						commandLine.Add ("ooffice-impress");
 					else if (title.EndsWith ("Calc"))
-						command_line.Add ("ooffice-calc");
+						commandLine.Add ("ooffice-calc");
 					else if (title.EndsWith ("Math"))
-						command_line.Add ("ooffice-math");
+						commandLine.Add ("ooffice-math");
 				} else if (window.ClassGroup.ResClass == "Wine") {
 					// we can match Wine apps normally so don't do anything here
 				} else {
@@ -195,7 +230,7 @@ namespace Docky.Services
 				if (commandLine.Count () == 0)
 					continue;
 				
-				foreach (string cmd in command_line) {
+				foreach (string cmd in commandLine) {
 					foreach (DesktopItem s in DockServices.DesktopItems.DesktopItemsFromExec (cmd)) {
 						yield return s;
 						matched = true;
@@ -210,47 +245,6 @@ namespace Docky.Services
 			} while (currentPid < pids.Count ());
 			
 			yield break;
-		}
-		
-		bool WindowIsReadyForMatch (Window window)
-		{
-			if (!WindowIsOpenOffice (window))
-				return true;
-
-			return SetupWindow (window);
-		}
-		
-		bool WindowIsOpenOffice (Window window)
-		{
-			return window.ClassGroup != null && window.ClassGroup.Name.ToLower ().StartsWith ("openoffice");
-		}
-		
-		IEnumerable<Window> SimilarWindows (Window window)
-		{
-			if (window == null)
-				throw new ArgumentNullException ("Window cannot be null.");
-			
-			//TODO perhaps make it a bit smarter
-			if (!DesktopItemsByWindow.ContainsKey (window))
-				foreach (Window win in UnmatchedWindows) {
-					if (win == window)
-						continue;
-					
-					if (win.Pid == window.Pid)
-						yield return win;
-					else if (window.Pid <= 1) {
-						if (window.ClassGroup != null
-								&& win.ClassGroup != null
-								&& !string.IsNullOrEmpty (window.ClassGroup.ResClass)
-								&& !string.IsNullOrEmpty (win.ClassGroup.ResClass)
-								&& win.ClassGroup.ResClass.Equals (window.ClassGroup.ResClass))
-							yield return win;
-						else if (!string.IsNullOrEmpty (win.Name) && win.Name.Equals (window.Name)) 
-							yield return win;
-					}
-				}
-			
-			yield return window;
 		}
 
 		IEnumerable<string> PrefixStrings {

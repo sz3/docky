@@ -56,11 +56,8 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Wnck\Window_Extensions.cs" />
-    <Compile Include="Windowing\WindowControl.cs" />
     <Compile Include="Xlib\X11Atoms.cs" />
     <Compile Include="Xlib\Xlib.cs" />
-    <Compile Include="Windowing\Position.cs" />
-    <Compile Include="Windowing\WindowMatcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Wnck\" />
