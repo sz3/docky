@@ -19,11 +19,7 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Collections;
-using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 
 using Wnck;
@@ -31,67 +27,61 @@ using Wnck;
 using Docky.Services;
 using Docky.Services.Applications;
 
-namespace Docky.Services.Windows
+namespace Docky.Services
 {
-	public class WindowMatcher
+	public class WindowMatcherService
 	{
 		
-		static WindowMatcher ()
-		{
-			Default = new WindowMatcher ();
-		}
-		
-		public static WindowMatcher Default { get; protected set; }
-		
-		private WindowMatcher ()
+		internal WindowMatcher ()
 		{
 			// Initialize window matching with currently available windows
-			window_to_desktop_items = new Dictionary<Wnck.Window, List<DesktopItem>> ();
+			DesktopItemsByWindow = new Dictionary<Window, List<DesktopItem>> ();
 
-			foreach (Wnck.Window w in Wnck.Screen.Default.Windows)
+			foreach (Window w in Wnck.Screen.Default.Windows)
 				SetupWindow (w);
 
 			Wnck.Screen.Default.WindowOpened += WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
-			
-			Log<WindowMatcher>.Debug ("WindowMatcher initialized.");
 		}
-
 		
-		IEnumerable<Wnck.Window> UnmatchedWindows {
+		IEnumerable<Window> UnmatchedWindows {
 			get {
-				IEnumerable<Wnck.Window> matched = window_to_desktop_items.Keys.Cast<Wnck.Window> ();
+				IEnumerable<Window> matched = DesktopItemsByWindow.Keys.Cast<Window> ();
 				return Wnck.Screen.Default.Windows.Where (w => !w.IsSkipTasklist && !matched.Contains (w));
 			}
 		}
 		
-		Dictionary<Wnck.Window, List<DesktopItem>> window_to_desktop_items;
+		Dictionary<Window, List<DesktopItem>> DesktopItemsByWindow;
 		
-		#region Window Setup
-		void WnckScreenDefaultWindowOpened (object o, WindowOpenedArgs args)
+		#region public API
+		
+		public IEnumerable<Window> WindowsForDesktopItem (DesktopItem item)
 		{
-			SetupWindow (args.Window);
-		}
+			if (item == null)
+				throw new ArgumentNullException ("DesktopItem item cannot be null.");
+			
 
-		void WnckScreenDefaultWindowClosed (object o, WindowClosedArgs args)
-		{
-			if (args.Window != null)
-				window_to_desktop_items.Remove (args.Window);
+			foreach (KeyValuePair<Window, List<DesktopItem>> kvp in DesktopItemsByWindow)
+				if (kvp.Value.Any (df => df == item))
+					yield return kvp.Key;
 		}
 		
-		bool SetupWindow (Wnck.Window window)
+		public DesktopItem DesktopItemForWindow (Window window)
 		{
-			IEnumerable<DesktopItem> items = DesktopItemsForWindow (window);
-			if (items.Any ()) {
-				window_to_desktop_items [window] = items.ToList ();
-				return true;
-			} else {
-				return false;
+			if (window == null)
+				throw new ArgumentNullException ("window");
+			
+			List<DesktopItem> matches;
+			if (DesktopItemsByWindow.TryGetValue (window, out matches)) {
+				DesktopItem useritem = matches.Find (item => item.File.Path.StartsWith (DockServices.Paths.HomeFolder.Path));
+				if (useritem != null)
+					return useritem;
+				return matches.FirstOrDefault ();
 			}
+			
+			return null;
 		}
-		#endregion
-
-		#region Window Matching
+		
 		public List<Regex> PrefixFilters {
 			get {
 				return BuildPrefixFilters ();
@@ -102,119 +92,38 @@ namespace Docky.Services.Windows
 				return BuildSuffixFilters ();
 			}
 		}
+
+		#endregion
 		
-		/* exposed via DockServices.WindowMatching */
-		static IEnumerable<string> PrefixStrings {
-			get {
-				yield return "gksu(do)?";
-				yield return "sudo";
-				yield return "java";
-				yield return "mono";
-				yield return "ruby";
-				yield return "padsp";
-				yield return "perl";
-				yield return "aoss";
-				yield return "python(\\d+.\\d+)?";
-				yield return "wish(\\d+\\.\\d+)?";
-				yield return "(ba)?sh";
-				yield return "-.*";
-				yield return "*.\\.desktop";
-			}
-		}
+		#region Window Setup
 		
-		List<Regex> BuildPrefixFilters ()
+		void WnckScreenDefaultWindowOpened (object o, WindowOpenedArgs args)
 		{
-			return new List<Regex> (PrefixStrings.Select (s => new Regex ("^" + s + "$")));
-		}
-		
-		/* exposed via DockServices.WindowMatching */
-		static IEnumerable<string> SuffixStrings {
-			get {
-				// some wine apps are launched via a shell script that sets the proc name to "app.exe"
-				yield return "\\.exe";
-				// some apps have a script 'foo' which does 'exec foo-bin' or 'exec foo.bin'
-				yield return "[.-]bin";
-				// some python apps have a script 'foo' for 'python foo.py'
-				yield return "\\.py";
-				// some apps append versions, such as '-1' or '-3.0'
-				yield return "(-)?\\d+(\\.\\d+)?";
-			}
+			SetupWindow (args.Window);
 		}
 
-		List<Regex> BuildSuffixFilters ()
+		void WnckScreenDefaultWindowClosed (object o, WindowClosedArgs args)
 		{
-			return new List<Regex> (SuffixStrings.Select (s => new Regex (s + "$")));
+			if (args.Window != null)
+				DesktopItemsByWindow.Remove (args.Window);
 		}
-
-		public bool WindowIsReadyForMatch (Wnck.Window window)
+		
+		bool SetupWindow (Window window)
 		{
-			if (!WindowIsOpenOffice (window))
+			IEnumerable<DesktopItem> items = DesktopItemsForWindow (window);
+			if (items.Any ()) {
+				DesktopItemsByWindow [window] = items.ToList ();
 				return true;
-
-			return SetupWindow (window);
-		}
-		
-		public bool WindowIsOpenOffice (Wnck.Window window)
-		{
-			return window.ClassGroup != null && window.ClassGroup.Name.ToLower ().StartsWith ("openoffice");
-		}
-		
-		public IEnumerable<Wnck.Window> WindowsForDesktopItem (DesktopItem item)
-		{
-			if (item == null)
-				throw new ArgumentNullException ("DesktopItem item");
-			
-			foreach (KeyValuePair<Wnck.Window, List<DesktopItem>> kvp in window_to_desktop_items)
-				if (kvp.Value.Any (df => df == item))
-					yield return kvp.Key;
-		}
-		
-		public IEnumerable<Wnck.Window> SimilarWindows (Wnck.Window window)
-		{
-			if (window == null)
-				throw new ArgumentNullException ("Wnck.Window window");
-			
-			//TODO perhaps make it a bit smarter
-			if (!window_to_desktop_items.ContainsKey (window))
-				foreach (Wnck.Window win in UnmatchedWindows) {
-					if (win == window)
-						continue;
-					
-					if (win.Pid == window.Pid)
-						yield return win;
-					else if (window.Pid <= 1) {
-						if (window.ClassGroup != null
-								&& win.ClassGroup != null
-								&& !string.IsNullOrEmpty (window.ClassGroup.ResClass)
-								&& !string.IsNullOrEmpty (win.ClassGroup.ResClass)
-								&& win.ClassGroup.ResClass.Equals (window.ClassGroup.ResClass))
-							yield return win;
-						else if (!string.IsNullOrEmpty (win.Name) && win.Name.Equals (window.Name)) 
-							yield return win;
-					}
-				}
-			
-			yield return window;
-		}
-
-		
-		public DesktopItem DesktopItemForWindow (Wnck.Window window)
-		{
-			if (window == null)
-				throw new ArgumentNullException ("window");
-			
-			List<DesktopItem> matches;
-			if (window_to_desktop_items.TryGetValue (window, out matches)) {
-				DesktopItem useritem = matches.Find (item => item.File.Path.StartsWith (DockServices.Paths.HomeFolder.Path));
-				if (useritem != null)
-					return useritem;
-				return matches.FirstOrDefault ();
+			} else {
+				return false;
 			}
-			
-			return null;
 		}
 		
-		IEnumerable<DesktopItem> DesktopItemsForWindow (Wnck.Window window)
+		#endregion
+
+		#region Window Matching
+		
+		IEnumerable<DesktopItem> DesktopItemsForWindow (Window window)
 		{
 			// use the StartupWMClass as the definitive match
 			if (window.ClassGroup != null
@@ -242,7 +151,7 @@ namespace Docky.Services.Windows
 			// get ppid and parents
 			IEnumerable<int> pids = PidAndParents (pid);
 			// this list holds a list of the command line parts from left (0) to right (n)
-			List<string> command_line = new List<string> ();
+			List<string> commandLine = new List<string> ();
 			
 			// if we have a classname that matches a desktopid we have a winner
 			if (window.ClassGroup != null) {
@@ -261,8 +170,8 @@ namespace Docky.Services.Windows
 				} else if (window.ClassGroup.ResClass == "Wine") {
 					// we can match Wine apps normally so don't do anything here
 				} else {
-					string class_name = window.ClassGroup.ResClass.Replace (".", "");
-					IEnumerable<DesktopItem> matches = DockServices.DesktopItems.DesktopItemsFromID (class_name);
+					string className = window.ClassGroup.ResClass.Replace (".", "");
+					IEnumerable<DesktopItem> matches = DockServices.DesktopItems.DesktopItemsFromID (className);
 					
 					foreach (DesktopItem s in matches) {
 						yield return s;
@@ -270,39 +179,119 @@ namespace Docky.Services.Windows
 					}
 				}
 			}
-	
-			//lock (update_lock) {
-				do {
-					// do a match on the process name
-					string name = NameForPid (pids.ElementAt (currentPid));
-					foreach (DesktopItem s in DockServices.DesktopItems.DesktopItemsFromExec (name)) {
+			
+			do {
+				// do a match on the process name
+				string name = NameForPid (pids.ElementAt (currentPid));
+				foreach (DesktopItem s in DockServices.DesktopItems.DesktopItemsFromExec (name)) {
+					yield return s;
+					matched = true;
+				}
+				
+					// otherwise do a match on the commandline
+				commandLine.AddRange (CommandLineForPid (pids.ElementAt (currentPid++))
+				.Select (cmd => cmd.Replace (@"\", @"\\")));
+				
+				if (commandLine.Count () == 0)
+					continue;
+				
+				foreach (string cmd in command_line) {
+					foreach (DesktopItem s in DockServices.DesktopItems.DesktopItemsFromExec (cmd)) {
 						yield return s;
 						matched = true;
 					}
-					
-					// otherwise do a match on the commandline
-					command_line.AddRange (CommandLineForPid (pids.ElementAt (currentPid++))
-						.Select (cmd => cmd.Replace (@"\", @"\\")));
-					
-					if (command_line.Count () == 0)
+					if (matched)
+						break;
+				}
+				
+				// if we found a match, bail.
+				if (matched)
+					yield break;
+			} while (currentPid < pids.Count ());
+			
+			yield break;
+		}
+		
+		bool WindowIsReadyForMatch (Window window)
+		{
+			if (!WindowIsOpenOffice (window))
+				return true;
+
+			return SetupWindow (window);
+		}
+		
+		bool WindowIsOpenOffice (Window window)
+		{
+			return window.ClassGroup != null && window.ClassGroup.Name.ToLower ().StartsWith ("openoffice");
+		}
+		
+		IEnumerable<Window> SimilarWindows (Window window)
+		{
+			if (window == null)
+				throw new ArgumentNullException ("Window cannot be null.");
+			
+			//TODO perhaps make it a bit smarter
+			if (!DesktopItemsByWindow.ContainsKey (window))
+				foreach (Window win in UnmatchedWindows) {
+					if (win == window)
 						continue;
 					
-					foreach (string cmd in command_line) {
-						foreach (DesktopItem s in DockServices.DesktopItems.DesktopItemsFromExec (cmd)) {
-							yield return s;
-							matched = true;
-						}
-						if (matched)
-							break;
+					if (win.Pid == window.Pid)
+						yield return win;
+					else if (window.Pid <= 1) {
+						if (window.ClassGroup != null
+								&& win.ClassGroup != null
+								&& !string.IsNullOrEmpty (window.ClassGroup.ResClass)
+								&& !string.IsNullOrEmpty (win.ClassGroup.ResClass)
+								&& win.ClassGroup.ResClass.Equals (window.ClassGroup.ResClass))
+							yield return win;
+						else if (!string.IsNullOrEmpty (win.Name) && win.Name.Equals (window.Name)) 
+							yield return win;
 					}
-					
-					// if we found a match, bail.
-					if (matched)
-						yield break;
-				} while (currentPid < pids.Count ());
-			//}
-			command_line.Clear ();
-			yield break;
+				}
+			
+			yield return window;
+		}
+
+		IEnumerable<string> PrefixStrings {
+			get {
+				yield return "gksu(do)?";
+				yield return "sudo";
+				yield return "java";
+				yield return "mono";
+				yield return "ruby";
+				yield return "padsp";
+				yield return "perl";
+				yield return "aoss";
+				yield return "python(\\d+.\\d+)?";
+				yield return "wish(\\d+\\.\\d+)?";
+				yield return "(ba)?sh";
+				yield return "-.*";
+				yield return "*.\\.desktop";
+			}
+		}
+		
+		List<Regex> BuildPrefixFilters ()
+		{
+			return new List<Regex> (PrefixStrings.Select (s => new Regex ("^" + s + "$")));
+		}
+		
+		IEnumerable<string> SuffixStrings {
+			get {
+				// some wine apps are launched via a shell script that sets the proc name to "app.exe"
+				yield return "\\.exe";
+				// some apps have a script 'foo' which does 'exec foo-bin' or 'exec foo.bin'
+				yield return "[.-]bin";
+				// some python apps have a script 'foo' for 'python foo.py'
+				yield return "\\.py";
+				// some apps append versions, such as '-1' or '-3.0'
+				yield return "(-)?\\d+(\\.\\d+)?";
+			}
+		}
+
+		List<Regex> BuildSuffixFilters ()
+		{
+			return new List<Regex> (SuffixStrings.Select (s => new Regex (s + "$")));
 		}
 		
 		IEnumerable<int> PidAndParents (int pid)
@@ -393,6 +382,7 @@ namespace Docky.Services.Windows
 			
 			return name.Substring (6);
 		}
+		
 		#endregion
 	}
 }

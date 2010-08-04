@@ -35,6 +35,8 @@ namespace Docky.Services
 		
 		public static DesktopItemService DesktopItems { get; private set; }
 		
+		public static WindowMatcherService WindowMatcher { get; private set; }
+		
 		static DockServices ()
 		{
 			Paths = new PathsService ();
@@ -44,6 +46,7 @@ namespace Docky.Services
 			Helpers = new HelperService ();
 			Theme = new ThemeService ();
 			DesktopItems = new DesktopItemService ();
+			WindowMatcher = new WindowMatcherService ();
 			
 			NotificationService.Initialize ();
 			Theme.Initialize ();
