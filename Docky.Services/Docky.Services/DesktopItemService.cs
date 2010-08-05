@@ -121,7 +121,7 @@ namespace Docky.Services
 		{
 			if (DesktopItems.Any (item => item.DesktopID.Equals (id, StringComparison.InvariantCultureIgnoreCase)))
 				return DesktopItems.Where (item => item.DesktopID.Equals (id, StringComparison.CurrentCultureIgnoreCase));
-			return null;
+			return Enumerable.Empty<DesktopItem> ();
 		}
 		
 		/// <summary>

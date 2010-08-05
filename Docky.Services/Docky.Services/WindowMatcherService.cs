@@ -208,7 +208,7 @@ namespace Docky.Services
 					string className = window.ClassGroup.ResClass.Replace (".", "");
 					IEnumerable<DesktopItem> matches = DockServices.DesktopItems.DesktopItemsFromID (className);
 					
-					if (matches != null) {
+					if (matches.Any ()) {
 						foreach (DesktopItem s in matches) {
 							yield return s;
 							matched = true;
