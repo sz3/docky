@@ -64,7 +64,7 @@ namespace Docky.Services.Xlib {
 		StaticGravity = 10,
 	}
 	
-	public static class Xlib {
+	public static class X {
 		const string libX11 = "X11";
 		const string libGdkX11 = "libgdk-x11-2.0";
 		

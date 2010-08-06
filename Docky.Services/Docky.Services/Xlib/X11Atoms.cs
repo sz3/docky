@@ -179,7 +179,7 @@ namespace Docky.Services.Xlib {
 
 
 		X11Atoms (Gdk.Display dsp) {
-			IntPtr display = Xlib.GdkDisplayXDisplay (dsp);
+			IntPtr display = X.GdkDisplayXDisplay (dsp);
 			// make sure this array stays in sync with the statements below
 			string [] atom_names = new string[] {
 				"WM_PROTOCOLS",
@@ -255,7 +255,7 @@ namespace Docky.Services.Xlib {
 
 			IntPtr[] atoms = new IntPtr [atom_names.Length];;
 
-			Xlib.XInternAtoms (display, atom_names, atom_names.Length, false, atoms);
+			X.XInternAtoms (display, atom_names, atom_names.Length, false, atoms);
 
 			int off = 0;
 			WM_PROTOCOLS = atoms [off++];

@@ -17,23 +17,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 
-using Cairo;
 using Gdk;
 using Gtk;
-using Wnck;
 
 using Docky.Items;
 using Docky.CairoHelper;
-using Docky.Menus;
-using Docky.Painters;
 using Docky.Services;
-using Docky.Xlib;
 using Docky.Services.Prefs;
 
 namespace Docky.Interface

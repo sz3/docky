@@ -21,6 +21,7 @@ using System.Runtime.InteropServices;
 using Wnck;
 
 using Docky.Services.Windows;
+using Docky.Services.Xlib;
 
 namespace Docky.Services
 {
@@ -71,12 +72,12 @@ namespace Docky.Services
 			
 			IntPtr window_handle = (IntPtr) window.Xid;
 			
-			display = Xlib.GdkDisplayXDisplay (Gdk.Screen.Default.Display);
+			display = X.GdkDisplayXDisplay (Gdk.Screen.Default.Display);
 			type = IntPtr.Zero;
 			
-			Xlib.XGetWindowProperty (display, window_handle, atom, (IntPtr) 0,
-			                                  (IntPtr) System.Int32.MaxValue, false, atoms.XA_CARDINAL, out type, out format,
-			                                  out nitems, out bytes_after, out prop_return);
+			X.XGetWindowProperty (display, window_handle, atom, (IntPtr) 0,
+				(IntPtr) System.Int32.MaxValue, false, atoms.XA_CARDINAL, out type, out format,
+				out nitems, out bytes_after, out prop_return);
 			
 			if (type == atoms.XA_CARDINAL && format == 32) {
 				extents = new int [(int) nitems];

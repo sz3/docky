@@ -7,7 +7,7 @@ TARGET = library
 PKG_CONFIG_FILES = docky.windowing.pc
 
 FILES = \
-    AssemblyInfo.cs \
+    AssemblyInfo.cs
 
 PROJECT_REFERENCES= \
 	Docky.Services
