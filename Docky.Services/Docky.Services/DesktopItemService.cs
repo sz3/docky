@@ -211,13 +211,19 @@ namespace Docky.Services
 			
 			RegisteredItems.AddRange (newItems);
 
-			if (newItems.Count () > 0)
-				Log<DesktopItemService>.Debug ("{0} new applications found", newItems.Count ());
+			if (newItems.Count () > 0) {
+				Log<DesktopItemService>.Debug ("{0} new application(s) found.", newItems.Count ());
+				foreach (DesktopItem item in newItems)
+					Log<DesktopItemService>.Debug ("Adding '{0}'.", item.Path);
+			}
 
 			// Check file existence and remove unlinked items
 			int removed = RegisteredItems.RemoveAll (item => !item.File.Exists);
-			if (removed > 0)
-				Log<DesktopItemService>.Debug ("{0} applications removed", removed);
+			if (removed > 0) {
+				Log<DesktopItemService>.Debug ("{0} application(s) removed.", removed);
+				foreach (DesktopItem item in removed)
+					Log<DesktopItemService>.Debug ("Removing '{0}'.", item.Path);
+			}
 		}
 		
 		void ProcessAndMergeAllSystemCacheFiles ()
