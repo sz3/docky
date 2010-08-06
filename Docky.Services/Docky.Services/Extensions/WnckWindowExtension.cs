@@ -18,14 +18,16 @@
 using System;
 using System.Runtime.InteropServices;
 
+using Wnck;
+
 using Docky.Services.Windows;
 
 namespace Docky.Services
 {
 
-	public static class WnckWindowExtensions
+	public static class WnckWindowExtension
 	{
-		public static int Area (this Wnck.Window self)
+		public static int Area (this Window self)
 		{
 			Gdk.Rectangle geo = self.EasyGeometry ();
 			return geo.Width * geo.Height;
@@ -38,8 +40,8 @@ namespace Docky.Services
 			return geo;
 		}
 		
-		public static void SetWorkaroundGeometry (this Wnck.Window window, WindowGravity gravity, WindowMoveResizeMask mask, 
-		                                     int x, int y, int width, int height)
+		public static void SetWorkaroundGeometry (this Window window, WindowGravity gravity, WindowMoveResizeMask mask, 
+			int x, int y, int width, int height)
 		{
 			// This is very weird.  Don't know when they will fix it. You must subtract the top and left
 			// frame extents from a move operation to get the window to actually show in the right spot.
@@ -52,12 +54,12 @@ namespace Docky.Services
 			window.SetGeometry (gravity, mask, x, y, width, height);
 		}
 		
-		public static int [] FrameExtents (this Wnck.Window window)
+		public static int [] FrameExtents (this Window window)
 		{
 			return GetCardinalProperty (window, X11Atoms.Instance._NET_FRAME_EXTENTS);
 		}
 		
-		public static int [] GetCardinalProperty (this Wnck.Window window, IntPtr atom)
+		public static int [] GetCardinalProperty (this Window window, IntPtr atom)
 		{
 			X11Atoms atoms = X11Atoms.Instance;
 			IntPtr display;

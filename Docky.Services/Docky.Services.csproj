@@ -125,6 +125,8 @@
     <Compile Include="Docky.Services\Windows\WindowControl.cs" />
     <Compile Include="Docky.Services\WindowMatcherService.cs" />
     <Compile Include="Docky.Services\Extensions\WnckWindowExtension.cs" />
+    <Compile Include="Docky.Services\Xlib\X11Atoms.cs" />
+    <Compile Include="Docky.Services\Xlib\Xlib.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -139,6 +141,7 @@
     <Folder Include="Docky.Services\Preferences\" />
     <Folder Include="Docky.Services\Applications\" />
     <Folder Include="Docky.Services\Windows\" />
+    <Folder Include="Docky.Services\Xlib\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">

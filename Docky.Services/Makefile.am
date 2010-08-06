@@ -21,11 +21,13 @@ FILES = \
 	Docky.Services/Logging/ConsoleCrayon.cs \
 	Docky.Services/Logging/ConsoleLog.cs \
 	Docky.Services/Logging/LogBase.cs \
-	Docky.Services/Windows/Position.cs \
-	Docky.Services/Windows/WindowControl.cs \
 	Docky.Services/Preferences/IPreferences.cs \
 	Docky.Services/Preferences/Preferences.cs \
 	Docky.Services/Preferences/PreferencesChangedEventArgs.cs \
+	Docky.Services/Windows/Position.cs \
+	Docky.Services/Windows/WindowControl.cs \
+	Docky.Services/Xlib/X11Atom.cs \
+	Docky.Services/Xlib/Xlib.cs \
 	Docky.Services/ConnectionStatusChangeEventArgs.cs \
 	Docky.Services/DesktopItemService.cs \
 	Docky.Services/DockServices.cs \

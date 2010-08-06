@@ -22,12 +22,9 @@
 //
 
 using System;
-using System.Text;
 using System.Runtime.InteropServices;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Docky.Xlib {
+namespace Docky.Services.Xlib {
 
 	public enum PropertyMode
 	{
@@ -69,7 +66,7 @@ namespace Docky.Xlib {
 	
 	public static class Xlib {
 		const string libX11 = "X11";
-		const string libGdkX11 = "libgdk-x11";
+		const string libGdkX11 = "libgdk-x11-2.0";
 		
 		[DllImport (libGdkX11)]
 		static extern IntPtr gdk_x11_drawable_get_xid (IntPtr handle);

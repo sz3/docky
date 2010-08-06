@@ -8,8 +8,6 @@ PKG_CONFIG_FILES = docky.windowing.pc
 
 FILES = \
     AssemblyInfo.cs \
-    Xlib/X11Atoms.cs \
-    Xlib/Xlib.cs
 
 PROJECT_REFERENCES= \
 	Docky.Services

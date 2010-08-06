@@ -23,7 +23,7 @@
 
 using System;
 
-namespace Docky.Xlib {
+namespace Docky.Services.Xlib {
 
 	public class X11Atoms {
 		
