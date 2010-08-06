@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Wnck\Window_Extensions.cs" />
     <Compile Include="Xlib\X11Atoms.cs" />
     <Compile Include="Xlib\Xlib.cs" />
   </ItemGroup>

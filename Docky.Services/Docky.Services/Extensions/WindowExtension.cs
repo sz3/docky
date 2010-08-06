@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009-2010 Jason Smith, Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -25,10 +25,10 @@ using System.Text;
 using Docky.Xlib;
 using Docky.Services.Windows;
 
-namespace Wnck
+namespace Docky.Services
 {
 
-	public static class Window_Extensions
+	public static class WnckWindowExtensions
 	{
 		public static int Area (this Wnck.Window self)
 		{
