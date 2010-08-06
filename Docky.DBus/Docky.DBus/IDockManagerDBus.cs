@@ -24,7 +24,7 @@ namespace Docky.DBus
 {
 	public delegate void ItemChangedHandler (string path);
 
-	[Interface("org.freedesktop.DockManager")]
+	[Interface(DBusManager.DockManagerBusName)]
 	public interface IDockManagerDBus
 	{
 		event ItemChangedHandler ItemAdded;

@@ -25,7 +25,7 @@ namespace Docky.DBus
 {
 	public delegate void MenuItemActivatedHandler (uint menuHandle);
 	
-	[Interface ("org.freedesktop.DockItem")]
+	[Interface (DBusManager.DockManagerItemBusName)]
 	public interface IDockManagerDBusItem : Properties
 	{
 		event MenuItemActivatedHandler MenuItemActivated;

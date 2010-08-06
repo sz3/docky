@@ -112,7 +112,7 @@ namespace Docky.DBus
 		
 		public object Get (string iface, string property)
 		{
-			if (iface != "org.freedesktop.DockItem")
+			if (iface != DBusManager.DockManagerItemBusName)
 				return null;
 			
 			switch (property) {
@@ -133,7 +133,7 @@ namespace Docky.DBus
 		
 		public IDictionary<string, object> GetAll (string iface)
 		{
-			if (iface != "org.freedesktop.DockItem")
+			if (iface != DBusManager.DockManagerItemBusName)
 				return null;
 			
 			Dictionary<string, object> items = new Dictionary<string, object> ();

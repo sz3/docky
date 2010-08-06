@@ -81,9 +81,14 @@ namespace Docky.DBus
 		
 		#region The Shared/standard Bus
 		
-		const string DockManagerBusName   = "org.freedesktop.DockManager";
-		const string DockManagerPath      = "/org/freedesktop/DockManager";
-		const string DockManagerItemsPath = "/org/freedesktop/DockManager/Item";
+		const string DockManagerBusRoot              = "net.launchpad";
+		const string DockManagerPathRoot             = "/net/launchpad";
+		
+		internal const string DockManagerBusName     = DockManagerBusRoot + ".DockManager";
+		const string DockManagerPath                 = DockManagerPathRoot + "/DockManager";
+		
+		internal const string DockManagerItemBusName = DockManagerBusRoot + ".DockItem";
+		const string DockManagerItemsPath            = DockManagerPath + "/Item";
 
 		internal IEnumerable<AbstractDockItem> Items {
 			get {
