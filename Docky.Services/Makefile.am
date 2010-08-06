@@ -17,6 +17,7 @@ FILES = \
 	Docky.Services/Extensions/GLibFileExtension.cs \
 	Docky.Services/Extensions/GLibMountExtension.cs \
 	Docky.Services/Extensions/GtkIconThemeExtension.cs \
+	Docky.Services/Extensions/WnckWindowExtension.cs \
 	Docky.Services/Logging/ConsoleCrayon.cs \
 	Docky.Services/Logging/ConsoleLog.cs \
 	Docky.Services/Logging/LogBase.cs \

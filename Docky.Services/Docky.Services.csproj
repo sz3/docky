@@ -124,7 +124,7 @@
     <Compile Include="Docky.Services\Windows\Position.cs" />
     <Compile Include="Docky.Services\Windows\WindowControl.cs" />
     <Compile Include="Docky.Services\WindowMatcherService.cs" />
-    <Compile Include="Docky.Services\Extensions\WindowExtension.cs" />
+    <Compile Include="Docky.Services\Extensions\WnckWindowExtension.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

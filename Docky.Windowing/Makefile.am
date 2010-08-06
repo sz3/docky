@@ -8,7 +8,6 @@ PKG_CONFIG_FILES = docky.windowing.pc
 
 FILES = \
     AssemblyInfo.cs \
-	Wnck/Window_Extensions.cs \
     Xlib/X11Atoms.cs \
     Xlib/Xlib.cs
 
