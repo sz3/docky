@@ -99,18 +99,6 @@ AC_SUBST([NDESK_DBUS_GLIB_10_LIBS])
 AC_SUBST([NOTIFY_SHARP_LIBS])
 AC_SUBST([WNCK_SHARP_10_LIBS])
 
-dnl Docky references
-DOCKY_CAIRO_LIBS="-r:$(pwd)/build/Docky.CairoHelper.dll"
-AC_SUBST([DOCKY_CAIRO_LIBS])
-DOCKY_ITEMS_LIBS="-r:$(pwd)/build/Docky.Items.dll"
-AC_SUBST([DOCKY_ITEMS_LIBS])
-DOCKY_SERVICES_LIBS="-r:$(pwd)/build/Docky.Services.dll"
-AC_SUBST([DOCKY_SERVICES_LIBS])
-DOCKY_WIDGETS_LIBS="-r:$(pwd)/build/Docky.Widgets.dll"
-AC_SUBST([DOCKY_WIDGETS_LIBS])
-DOCKY_WINDOWING_LIBS="-r:$(pwd)/build/Docky.Windowing.dll"
-AC_SUBST([DOCKY_WINDOWING_LIBS])
-
 AM_CONDITIONAL(CONFIG_REQUESTED, test -z "")
 
 dnl {{{ run with heapshot
@@ -164,7 +152,6 @@ Docky.Items/Makefile
 Docky.Widgets/Makefile
 Docky.Services/Makefile
 Docky.Services/AssemblyInfo.cs
-Docky.Windowing/Makefile
 Docky/docky
 Docky/AssemblyInfo.cs
 StandardPlugins/Makefile

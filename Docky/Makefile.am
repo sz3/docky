@@ -58,7 +58,6 @@ PROJECT_REFERENCES= \
 	Docky.DBus \
 	Docky.Items \
 	Docky.Services \
-	Docky.Windowing \
 	Docky.Widgets
 
 REFERENCES =  \

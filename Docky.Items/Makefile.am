@@ -47,8 +47,7 @@ RESOURCES = \
 
 PROJECT_REFERENCES= \
 	Docky.CairoHelper \
-	Docky.Services \
-	Docky.Windowing
+	Docky.Services
 
 REFERENCES =  \
 	System \

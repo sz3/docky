@@ -45,10 +45,6 @@
       <Project>{AB6E0EDD-6443-4F99-9EAC-DABC906F080D}</Project>
       <Name>Docky.Items</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Docky.Windowing\Docky.Windowing.csproj">
-      <Project>{888FCD95-7C79-45C4-A744-9C840DF4B9B0}</Project>
-      <Name>Docky.Windowing</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Docky.Services\Docky.Services.csproj">
       <Project>{8A6E0EDD-6443-4F99-9EAC-D9CC906F080D}</Project>
       <Name>Docky.Services</Name>
