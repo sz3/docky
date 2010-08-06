@@ -16,13 +16,8 @@
 // 
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Runtime.InteropServices;
-using System.Linq;
-using System.Text;
 
-using Docky.Xlib;
 using Docky.Services.Windows;
 
 namespace Docky.Services
