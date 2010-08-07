@@ -34,30 +34,27 @@ namespace Docky.Items
 	{
 		static IPreferences prefs = DockServices.Preferences.Get <DockyItem> ();
 		
-		bool? docky_item;
 		public bool Show {
 			get {
-				if (!docky_item.HasValue)
-					docky_item = prefs.Get<bool> ("ShowDockyItem", true);
-				return docky_item.Value;
+				return prefs.Get<bool> ("ShowDockyItem", true);
 			}
 		}
 		
-		bool? show_settings;
 		public bool ShowSettings {
 			get {
-				if (!show_settings.HasValue)
-					show_settings = prefs.Get<bool> ("ShowSettings", true);
-				return show_settings.Value;
+				return prefs.Get<bool> ("ShowSettings", true);
 			}
 		}
 		
-		bool? show_quit;
 		public bool ShowQuit {
 			get {
-				if (!show_quit.HasValue)
-					show_quit= prefs.Get<bool> ("ShowQuit", true);
-				return show_quit.Value;
+				return prefs.Get<bool> ("ShowQuit", true);
+			}
+		}
+		
+		public int Hue {
+			get {
+				return prefs.Get<int> ("Hue", 0);
 			}
 		}
 		
@@ -66,6 +63,7 @@ namespace Docky.Items
 			Indicator = ActivityIndicator.Single;
 			HoverText = prefs.Get<string> ("HoverText", "Docky");
 			Icon = "docky";
+			HueShift = Hue;
 		}
 		
 		protected string AboutIcon {
@@ -94,6 +92,10 @@ namespace Docky.Items
 		
 		protected override void OnStyleSet (Gtk.Style style)
 		{
+			// if we set a hue manually, we don't want to reset the hue when the style changes
+			if (Hue != 0)
+				return;
+			
 			Gdk.Color gdkColor = Style.Backgrounds [(int) Gtk.StateType.Selected];
 			int hue = (int) new Cairo.Color ((double) gdkColor.Red / ushort.MaxValue,
 											(double) gdkColor.Green / ushort.MaxValue,
@@ -107,11 +109,7 @@ namespace Docky.Items
 		{
 			return "DockyItem";
 		}
-		
-		protected override void OnScrolled (ScrollDirection direction, ModifierType mod)
-		{
-		}
-		
+
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
 			if (button == 1) {
