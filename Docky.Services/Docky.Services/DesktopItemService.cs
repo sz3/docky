@@ -219,11 +219,8 @@ namespace Docky.Services
 
 			// Check file existence and remove unlinked items
 			int removed = RegisteredItems.RemoveAll (item => !item.File.Exists);
-			if (removed > 0) {
+			if (removed > 0)
 				Log<DesktopItemService>.Debug ("{0} application(s) removed.", removed);
-				foreach (DesktopItem item in removed)
-					Log<DesktopItemService>.Debug ("Removing '{0}'.", item.Path);
-			}
 		}
 		
 		void ProcessAndMergeAllSystemCacheFiles ()
