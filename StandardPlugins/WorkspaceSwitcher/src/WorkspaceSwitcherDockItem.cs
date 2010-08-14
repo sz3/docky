@@ -45,7 +45,7 @@ namespace WorkspaceSwitcher
 		bool WrappedScrolling {
 			get {
 				if (!wrapped_scrolling.HasValue)
-					wrapped_scrolling = prefs.Get<bool> ("WrappedScrolling", false);
+					wrapped_scrolling = prefs.Get<bool> ("WrappedScrolling", true);
 				return wrapped_scrolling.Value;
 			}
 		}

@@ -153,12 +153,16 @@ namespace GMail
 				if (DockServices.System.UseProxy)
 					request.Proxy = DockServices.System.Proxy;
 				
-				using (HttpWebResponse response = (HttpWebResponse)request.GetResponse ())
+				using (HttpWebResponse response = (HttpWebResponse) request.GetResponse ())
 					try { } finally {
 						response.Close ();
 					}
 			} catch (WebException e) {
-				if (e.Message.IndexOf ("401") != -1) return false;
+				if (e.Message.IndexOf ("401") != -1)
+					Log<GMailAtom>.Error ("Invalid username: {0}", e.Message);
+				else
+					Log<GMailAtom>.Error ("Network error: {0}", e.Message);
+				return false;
 			} catch (Exception) { }
 			
 			return true;
@@ -260,16 +264,17 @@ namespace GMail
 				} catch (ThreadAbortException) {
 					Log<GMailAtom>.Debug ("Stoping Atom thread");
 				} catch (NullReferenceException e) {
-					Log<GMailAtom>.Debug (e.ToString ());
+					Log<GMailAtom>.Debug (e.Message);
 					Gtk.Application.Invoke (delegate {
 						OnGMailFailed (Catalog.GetString ("Feed Error"));
 					});
 				} catch (XmlException e) {
-					Log<GMailAtom>.Debug (e.ToString ());
+					Log<GMailAtom>.Error ("Error parsing XML: {0}", e.Message);
 					Gtk.Application.Invoke (delegate {
 						OnGMailFailed (Catalog.GetString ("Feed Error"));
 					});
 				} catch (WebException e) {
+					Log<GMailAtom>.Error ("Network error: {0}", e.Message);
 					if (e.Message.IndexOf ("401") != -1)
 						Gtk.Application.Invoke (delegate {
 							OnGMailFailed (Catalog.GetString ("Invalid Username"));
@@ -283,7 +288,7 @@ namespace GMail
 						OnGMailFailed (Catalog.GetString ("Network Error"));
 					});
 				} catch (Exception e) {
-					Log<GMailAtom>.Error (e.ToString ());
+					Log<GMailAtom>.Error (e.Message);
 					Gtk.Application.Invoke (delegate {
 						OnGMailFailed (Catalog.GetString ("General Error"));
 					});

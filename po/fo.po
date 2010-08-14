@@ -1,289 +1,286 @@
-# Korean translation for docky
+# Faroese translation for docky
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the docky package.
-# Cedna <sptcedna@gmail.com>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-07-22 07:29+0200\n"
-"PO-Revision-Date: 2010-08-02 16:00+0000\n"
-"Last-Translator: Cedna <Unknown>\n"
-"Language-Team: Korean <ko@li.org>\n"
+"PO-Revision-Date: 2010-08-04 18:11+0000\n"
+"Last-Translator: Gunleif Joensen <Unknown>\n"
+"Language-Team: Faroese <fo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Launchpad-Export-Date: 2010-08-05 04:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:147
 msgid "Search Docklets..."
-msgstr "Docklets 찾기..."
+msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:163
 msgid "Search Helpers..."
-msgstr "도우미 찾기..."
+msgstr "Leitingarhjálparir..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:227
 msgid "Click on any dock to configure."
-msgstr "설정하고 싶은 dock을 클릭해주세요."
+msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid "Drag any dock to reposition."
-msgstr "위치를 변경할 dock을 드래그해주세요."
+msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:293
 msgid "Delete the currently selected dock?"
-msgstr "현재 선택된 dock를 삭제 하시겠습니까?"
+msgstr "Strika tí valdu dokkina?"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:295
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
-msgstr "만약 삭제를 선택 한다면, 해당되는 삭제할 dock의 모든 설정을 잃게 될 것 입니다."
+msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:302
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
-msgstr "삭제 (_D)"
+msgstr "Strika _dokk"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:418
 #: ../Docky/Docky/ConfigurationWindow.cs:438
 msgid "_Select"
-msgstr "선택 (_S)"
+msgstr "_Vel"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:421
 #: ../Docky/Docky/ConfigurationWindow.cs:441
 msgid ".tar Archives"
-msgstr ".tar 압축 파일"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:51
 msgid "Author"
-msgstr "만든이"
+msgstr "Høvundi"
 
 #: ../Docky/Docky/DockletTile.cs:86
 msgid "Move this docklet up on the selected dock"
-msgstr "선택된 독에서 이 독클릿을 위로 움직입니다"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:87
 msgid "Move this docklet down on the selected dock"
-msgstr "선택된 독에서 이 독클릿을 아래로 움직입니다"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:91
 msgid "Move this docklet left on the selected dock"
-msgstr "선택된 독에서 이 독클릿을 왼쪽으로 움직입니다"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:92
 msgid "Move this docklet right on the selected dock"
-msgstr "선택된 독에서 이 독클릿을 오른쪽으로 움직입니다"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:94
 msgid "Configure this docklet"
-msgstr "이 독클릿 설정"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:95
 msgid "About this docklet"
-msgstr "이 독클릿에 대하여"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:96
 msgid "Add this docklet to the selected dock"
-msgstr "이 독클릿을 선택된 독에 추가합니다"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:97
 msgid "Remove this docklet from the selected dock"
-msgstr "이 독클릿을 선택된 독으로부터 제거합니다"
+msgstr ""
 
 #: ../Docky/Docky/Docky.cs:123
 msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
 msgstr ""
-"Docky의 모든 기능이 동작하기 위해선 컴포지팅(compositing, 각각의 단일 이미지들을 합성하는 시각적인 효과)를 필요로 "
-"합니다. 컴포지팅이 동작하지 않을 경우 컴포지팅을 필요로 하는 몇가지 옵션이 비활성화 되며, 여러 테마와 애니메이션 효과가 정상적으로 "
-"동작하지 않을 수 있습니다. "
 
 #: ../Docky/Docky/HelperTile.cs:42
 msgid "Status"
-msgstr "상태"
+msgstr "Standur"
 
 #: ../Docky/Docky/HelperTile.cs:59
 msgid "Uninstall"
-msgstr "제거"
+msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:71
 msgid "About this helper"
-msgstr "이 도우미에 대하여"
+msgstr "Um hendan hjálparan"
 
 #: ../Docky/Docky/HelperTile.cs:72
 msgid "Enable this helper"
-msgstr "이 도우미를 활성화"
+msgstr "Virkja hendan hjálparan"
 
 #: ../Docky/Docky/HelperTile.cs:73
 msgid "Disable this helper"
-msgstr "이 도우미를 비활성화"
+msgstr "Óvirkja hendan hjálparan"
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Running"
-msgstr "실행 중"
+msgstr "Koyrir"
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Stopped"
-msgstr "정지됨"
+msgstr "Stoppað"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:332
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
-msgstr "설정하면, Dock에 런처를 갖고 있지 않은 창도 이 Dock에 추가됩니다."
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:683
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
-msgstr "<i>최대화된 창이 dock를 덮어도 숨기지 않습니다</i>"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:686
 msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr "<i>마우스가 dock위에 위치해 있지 않을때 숨깁니다.</i>"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:689
 msgid "<i>Hides when dock obstructs the active application.</i>"
-msgstr "<i>활성화된 어플리케이션의 창이 dock를 일부라도 덮을때 숨깁니다.</i>"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:692
 msgid "<i>Hides when dock obstructs any window.</i>"
-msgstr "<i>활성화 관계 없이 어느 창이든 dock를 일부라도 덮는다면 숨깁니다.</i>"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockWindow.cs:381
 msgid "Drag to reposition"
-msgstr "드래그하여 옮기기"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockWindow.cs:393
 #: ../Docky/Docky/Interface/DockWindow.cs:407
 msgid "Drop to add to dock"
-msgstr "드래그하여 Dock에 추가"
+msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:133
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:244
 msgid "_Settings"
-msgstr "설정 (_S)"
+msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:134
 msgid "_About"
-msgstr "Docky 정보 (_A)"
+msgstr "_Um"
 
 #: ../Docky/Docky/Items/DockyItem.cs:135
 msgid "_Help"
-msgstr "도움말 (_H)"
+msgstr "_Hjálp"
 
 #: ../Docky/Docky/Items/DockyItem.cs:137
 msgid "_Quit Docky"
-msgstr "Docky 종료 (_Q)"
+msgstr "_Sløkk Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
 msgid "Docky Settings"
-msgstr "Docky 설정"
+msgstr "Docky innstillingar"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
 msgid "_Start When User Logs In"
-msgstr ""
+msgstr "_Byrja tá ið brúkarin innritar"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
-msgstr "테마 (_T):"
+msgstr "_Tema:"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
 msgid "_Install"
-msgstr "설치 (_I)"
+msgstr "_Legg inn"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
 msgid "<b>General Options</b>"
-msgstr "<b>일반 설정</b>"
+msgstr "<b>Vanligir Kostir</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
-msgstr "<b>Dock 설정</b>"
+msgstr "<b>Dokk samanseting</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
-msgstr "Docks"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
 msgid "All"
-msgstr "전체"
+msgstr "Alt"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
 msgid "Enabled"
-msgstr "사용함"
+msgstr "Sligið til"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
 msgid "Disabled"
-msgstr "사용 안 함"
+msgstr "Ógildað"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
 msgid "Docklets"
-msgstr "Docklets"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
 msgid "Usable"
-msgstr "사용가능"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
-msgstr "도우미"
+msgstr "Hjálparir"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
 msgid "_New Dock"
-msgstr "새 Dock (_N)"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
 msgid "None"
-msgstr "사용 안함"
+msgstr "Einki"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
 msgid "Autohide"
-msgstr "자동 숨기기"
+msgstr "Sjálvfjal"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "Intellihide"
-msgstr "똑똑하게 숨기기"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Window Dodge"
-msgstr "창은 무조건 피하기"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
 msgid "_Fade On Hide"
-msgstr "숨길때 페이드 효과 사용 (_F)"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
 msgid "_Icon Size:"
-msgstr "아이콘 크기 (_I)"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:132
 msgid "_Hiding:"
-msgstr "숨기기 (_H):"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
 msgid "_Panel Mode"
-msgstr "패널 모드 (_P)"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
 msgid "3D Back_ground"
-msgstr "3D 배경(_G)"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
 msgid "_Manage Windows Without Launcher"
-msgstr "바로가기 없는 창도 관리하기(_M)"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
 msgid "_Zoom:"
-msgstr "확대 (_Z):"
+msgstr "_Surra:"
 
 #: ../Docky.Items/Docky.Items/AbstractDockItem.cs:120
 #, csharp-format
@@ -292,20 +289,20 @@ msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:173
 msgid "New _Window"
-msgstr "새 창으로 열기 (_W)"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:175
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
-msgstr "열기 (_O)"
+msgstr "Lat _upp"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:69
 msgid "Reset Color"
-msgstr "색깔 초기화"
+msgstr "Tómstilla lit"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:477
 msgid "_Pin to Dock"
-msgstr "Dock에 고정(_P)"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:75
 #, csharp-format
@@ -317,227 +314,230 @@ msgstr ""
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:194
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:239
 msgid "Error performing drop action"
-msgstr "드래그하는 중 에러 발생"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:194
 msgid "Not enough free space on destination."
-msgstr "대상 공간에 빈공간이 충분하지 않습니다."
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:211
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:214
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:246
 msgid "Complete"
-msgstr "완료"
+msgstr "Fullgjørt"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:224
 msgid "Moving"
-msgstr "이동 중"
+msgstr "Flyti"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:230
 msgid "Copying"
-msgstr "복사 중"
+msgstr "Avriti"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:264
 msgid "Open"
-msgstr "열기"
+msgstr "Lat upp"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:265
 msgid "Open Containing Folder"
-msgstr "저장 폴더 열기"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:257
 msgid "Unma_ximize"
-msgstr "최대화 취소(_X)"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:260
 msgid "Ma_ximize"
-msgstr "최대화 (_X)"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
 msgid "_Restore"
-msgstr "복구(_R)"
+msgstr "Endu_rstovna"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:267
 msgid "Mi_nimize"
-msgstr "최소화 (_N)"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:270
 msgid "_Close All"
-msgstr "모두 닫기 (_C)"
+msgstr "Lat øll _aftur"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
 msgid "Sign up for {0}"
-msgstr "{0} 에 가입"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:44
 msgid "Validating..."
-msgstr "확인중..."
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:45
 #, csharp-format
 msgid "Don't have {0}?"
-msgstr "{0}이 없습니까?"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:46
 msgid "Account validation failed!"
-msgstr "계정 확인 실패!"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:47
 msgid "Verify and save account information"
-msgstr "계정 정보를 확인하고 저장하기"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:48
 msgid "Account validation succeeded!"
-msgstr "계정 확인 성공!"
+msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:87
 msgid "Password"
-msgstr "비밀 번호"
+msgstr "Atlát"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:108
 msgid "Username"
-msgstr "사용자 이름"
+msgstr "Brúkaranavn"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
 msgid "<i>Verify and save account information</i>"
-msgstr "<i>계정 정보를 확인하고 저장하기</I>"
+msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
 msgid "Don't have an account?"
-msgstr "계정이 없습니까?"
+msgstr "Hevur tú onga kontu?"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:156
 msgid "No Battery Found"
-msgstr "배터리를 찾을 수 없음"
+msgstr "Einki battarí funni"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:173
 #, csharp-format
 msgid "{0} hour"
 msgid_plural "{0} hours"
-msgstr[0] "{0}시간"
+msgstr[0] "{0} tími"
+msgstr[1] "{0} tímar"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:175
 #, csharp-format
 msgid "{0} minute"
 msgid_plural "{0} minutes"
-msgstr[0] "{0}분"
+msgstr[0] "{0} minuttur"
+msgstr[1] "{0} minuttir"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:177
 msgid "until charged "
-msgstr "충전되기까지 남음 "
+msgstr ""
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:179
 msgid "remaining "
-msgstr "남음 "
+msgstr "er eftir "
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:86
 msgid "Computer"
-msgstr "컴퓨터"
+msgstr "Telda"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:430
 msgid "Di_gital Clock"
-msgstr "디지털 시계 (_G)"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:436
 msgid "24-Hour _Clock"
-msgstr "24 시간 시계(_C)"
+msgstr "24-tíma _klokka"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:442
 msgid "Show _Date"
-msgstr "날짜 표시 (_D)"
+msgstr "Sýn _dato"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:448
 msgid "Select _Theme"
-msgstr "테마 선택 (_T)"
+msgstr "Vel _tema"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
-msgstr "테마"
+msgstr "Temur"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:62
 msgid "Theme"
-msgstr "테마"
+msgstr "Tema"
 
 #: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:42
 msgid "Show Desktop"
-msgstr "데스크톱 보이기"
+msgstr "Sýn skriviborð"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
 msgid "_Add Label"
-msgstr "라벨 추가(_A)"
+msgstr "Legg spj_aldur til"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:113
 msgid "Check e_very:"
-msgstr "매 분마다 체크(_v):"
+msgstr "Kanna h_vønn:"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:123
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:186
 msgid "minutes"
-msgstr "분"
+msgstr "minuttir"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:174
 msgid "Click to set username and password."
-msgstr "클릭하여 사용자 이름과 암호를 설정합니다."
+msgstr "Klikk til at velja brúkaranavn og atlát."
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:233
 msgid "(no subject)"
-msgstr "(제목 없음)"
+msgstr "(einki evni)"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:247
 #, csharp-format
 msgid "You have {0} new, unread messages"
-msgstr "{0} 개의 새로운 메세지가 있습니다."
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:251
 #, csharp-format
 msgid "From: {0}"
-msgstr "보낸이: {0}"
+msgstr "Úr: {0}"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:265
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:270
 msgid "Feed Error"
-msgstr "피드 에러"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:275
 msgid "Invalid Username"
-msgstr "잘못된 사용자 이름"
+msgstr "Ógyldugt brúkaranavn"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:279
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:283
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:174
 msgid "Network Error"
-msgstr "네트워크 오류"
+msgstr "Netbrek"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:288
 msgid "General Error"
-msgstr "일반 에러"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
 msgid "GMail Configuration"
-msgstr "GMail 설정"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 msgid "No unread mail"
-msgstr "읽지 않은 메일 없음"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:98
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
-msgstr[0] "{0} 개의 읽지 않은 메시지"
+msgstr[0] "{0} ólisið boð"
+msgstr[1] "{0} Ólisin boð"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:119
 msgid "Checking mail..."
-msgstr "메일 확인 중..."
+msgstr "Kanni t-post..."
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "_View "
-msgstr "보기(_V) "
+msgstr "_Vís "
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
 msgid "_Compose Mail"
-msgstr "메일 작성하기(_C)"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:211
 msgid "View C_ontacts"
@@ -545,15 +545,15 @@ msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
 msgid "New Mail"
-msgstr "새 메일"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:236
 msgid "Check _Mail"
-msgstr "메일 확인하기(_M)"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
-msgstr "라벨"
+msgstr "Spjøldur"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
 msgid "GMail"
@@ -561,90 +561,90 @@ msgstr "GMail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr "로그인"
+msgstr "Innrita"
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
-msgstr "보낸이: "
+msgstr "Frá: "
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Eject"
-msgstr "꺼내기(_E)"
+msgstr ""
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Unmount"
-msgstr "마운트 해제 (_U)"
+msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:53
 msgid "Network Manager"
-msgstr "네트워크 관리자"
+msgstr "Netumsiting"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
-msgstr "연결 중..."
+msgstr "Sambindi..."
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:101
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:166
 msgid "Disconnected"
-msgstr "연결 끊김"
+msgstr "Loyst sambinding"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
 msgid "Connected: {0}"
-msgstr "연결됨: {0}"
+msgstr ""
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:47
 msgid "My _Stations"
-msgstr "내 방송국(_S)"
+msgstr ""
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:78
 msgid "S_earch"
-msgstr "검색(_E)"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
-msgstr "방송국을 찾지 못했습니다."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
-msgstr "다시 검색을 해보시기 바랍니다."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:46
 msgid "Fetching Information..."
-msgstr "정보를 가져오는 중..."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:72
 msgid "Click to add NPR stations."
-msgstr "NPR 방송국을 추가하려면 클릭하십시오."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:111
 msgid "Home Page"
-msgstr "홈페이지"
+msgstr "Heimasíða"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:118
 msgid "Program Schedule"
-msgstr "프로그램 스케쥴"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:125
 msgid "Donate"
-msgstr "기부하기"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:132
 msgid "Live Streams"
-msgstr "라이브 스트림"
+msgstr "Beinleiðis streymar"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:170
 msgid "Settings"
-msgstr "설정"
+msgstr "Instillingar"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:56
 msgid "Clear the Recent Documents list?"
-msgstr "최근 문서 목록을 지우시겠습니까?"
+msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:58
 msgid "Clear Recent Documents"
-msgstr "최근 문서 지우기"
+msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:60
 msgid ""
@@ -652,63 +652,60 @@ msgid ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
-"최근 문서 목록을 지우면, 다음이 지워집니다:\n"
-"• 위치 → 최근 문서에 있는 모든 항목.\n"
-"• 모든 프로그램의 최근 문서 목록에 들어 있는 모든 항목."
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:81
 msgid "_Clear Recent Documents..."
-msgstr "최근 문서 지우기(_C)..."
+msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:152
 msgid "Lock Screen"
-msgstr "화면 잠그기"
+msgstr "Læs skíggjan"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:156
 msgid "Log Out..."
-msgstr "로그아웃..."
+msgstr "Útrita..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:157
 msgid "Log Out"
-msgstr "로그아웃"
+msgstr "Útrita"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
-msgstr "모든 프로그램을 닫고 컴퓨터를 로그아웃 하시겠습니까?"
+msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:163
 msgid "Suspend"
-msgstr "절전 모드"
+msgstr "Hvílustøða"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:168
 msgid "Hibernate"
-msgstr "최대 절전모드"
+msgstr "Dvala"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:174
 msgid "Restart..."
-msgstr "다시 시작..."
+msgstr "Endurbyrja..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:175
 msgid "Restart"
-msgstr "다시 시작"
+msgstr "Endurbyrja"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
 msgid "Are you sure you want to close all programs and restart the computer?"
-msgstr "모든 프로그램을 닫고 컴퓨터를 다시 시작하겠습니까?"
+msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:181
 msgid "Shut Down..."
-msgstr "컴퓨터 끄기..."
+msgstr "Sløkk..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:182
 msgid "Shut Down"
-msgstr "컴퓨터 끄기"
+msgstr "Sløkk"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:183
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
-msgstr "모든 프로그램을 닫고 컴퓨터를 종료 하시겠습니까?"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:90
 #, csharp-format
@@ -717,7 +714,7 @@ msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:236
 msgid "Time remaining:"
-msgstr "남은 시간:"
+msgstr "Tíð eftir:"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:238
 msgid "Timer paused, time remaining:"
@@ -747,20 +744,20 @@ msgstr ""
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:62
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "tími"
+msgstr[1] "tímar"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:66
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minuttur"
+msgstr[1] "minuttir"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:71
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "sekund"
+msgstr[1] "sekund"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:138
 #, csharp-format
@@ -781,30 +778,31 @@ msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:77
 msgid "No items in Trash"
-msgstr "휴지통이 비어있습니다."
+msgstr "Eingir liðir í ruskspannini"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:79
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
-msgstr[0] "휴지통 안에 {0} 개가 있습니다."
+msgstr[0] "{0} liður í ruskspannini"
+msgstr[1] "{0} liðir í ruskspannini"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:164
 msgid "Restore Files"
-msgstr "파일 복구"
+msgstr "Endurstovna fílur"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:195
 msgid "_Open Trash"
-msgstr "휴지통 열기 (_O)"
+msgstr "Lat ruskspannina upp"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:197
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:234
 msgid "Empty _Trash"
-msgstr "휴지통 비우기 (_T)"
+msgstr "Tøm ruskspannina"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:226
 msgid "Empty all of the items from the trash?"
-msgstr "휴지통에 들어 있는 모든 항목을 비우시겠습니까?"
+msgstr "Tøma allar liðirnir úr ruskspannini?"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:228
 msgid ""
@@ -812,39 +810,36 @@ msgid ""
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
-"만약 휴지통 비우기를 선택하시면 휴지통 안에 있는 \n"
-"모든 파일이 영구적으로 삭제될 것입니다. \n"
-"또한 부분적으로 삭제할 수도 있습니다."
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:65
 msgid "_Weather Provider:"
-msgstr "날씨 제공자(_W):"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:105
 msgid "My _Locations"
-msgstr "내 위치(_L):"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:136
 msgid "_Search"
-msgstr "검색(_S)"
+msgstr "_Leita"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:176
 msgid "Automatically Update _Every"
-msgstr "매 분마다 자동으로 업데이트(_E)"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:220
 msgid "Use _Metric Units"
-msgstr "미터법 표기 사용(_M)"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:171
 msgid "Invalid Weather Location"
-msgstr "잘못된 날씨 위치"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
-msgstr "구글이 제공하는 날씨 정보입니다. 이 정보는 US Zip 코드 혹은 '도시, 나라'로 구분된 위치 정보를 필요로 합니다."
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
@@ -853,142 +848,64 @@ msgid ""
 "website.  To find your code, look up your forecast on their site and the "
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
-"The Weather Channel이 제공하며 저작권을 갖고 있는 날씨 정보입니다. 이 정보는 US Zip 코드 혹은 웹사이트의 특정 "
-"코드로 구분된 위치 정보를 필요로 합니다. 사이트의 해당 지역의 예보에서 URL 뒤에 있는 AAXX0000과 같은 코드를 찾을 수 "
-"있습니다."
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:56
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
 msgstr ""
-"Weather Underground가 제공하며 저작권을 갖고 있는 날씨 정보입니다. 이 정보는 US Zip 코드 혹은 '도시, 나라'로 "
-"구분된 위치 정보를 필요로 합니다."
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
-msgstr "결과가 없습니다."
+msgstr "Eingi úrslit funnin."
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
-msgstr "날씨 설정"
+msgstr "Veður samanseting"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
 msgid "Click to add a location."
-msgstr "클릭하여 위치를 추가합니다."
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
 msgid "Fetching data..."
-msgstr "데이터를 불러오는 중..."
+msgstr "Heinti dátur..."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Radar _Map"
-msgstr "레이더 지도(_M)"
+msgstr "Radar _Kort"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "Forecasts"
-msgstr "일기예보"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:252
 msgid "Check _Weather"
-msgstr "날씨 확인(_W)"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
 msgid "_Today"
-msgstr "오늘(_T)"
+msgstr "Í _dag"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
 msgid "T_omorrow"
-msgstr "내일(_O)"
+msgstr "Í m_orgin"
 
 #. draw humidity
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:328
 #, csharp-format
 msgid "{0} humidity"
-msgstr "{0} 습도"
+msgstr ""
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:69
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:219
 msgid "Switch Desks"
-msgstr ""
+msgstr "Skift skriviborð"
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:170
 msgid "Desk"
-msgstr ""
+msgstr "Skriviborð"
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:172
 msgid "Virtual Desk"
-msgstr ""
-
-#~ msgid "_Disable"
-#~ msgstr "비 활성화 (_D)"
-
-#~ msgid "_Remove"
-#~ msgstr "제거 (_R)"
-
-#~ msgid "_Enable"
-#~ msgstr "활성화 (_E)"
-
-#~ msgid "_Add"
-#~ msgstr "더하기 (_A)"
-
-#~ msgid "Docky Configuration"
-#~ msgstr "Docky 설정"
-
-#~ msgid "Icon"
-#~ msgstr "아이콘"
-
-#~ msgid "3D Background"
-#~ msgstr "3D 배경 효과"
-
-#~ msgid "Drag any dock to move it."
-#~ msgstr "이동하고 싶은 dock를 드래그 해 주십시오."
-
-#~ msgid "_Start When Computer Starts"
-#~ msgstr "부팅 시 Docky 자동 실행 (_S)"
-
-#~ msgid ""
-#~ "Causes launchers which currently manage more than one window to have an "
-#~ "extra indicator under it."
-#~ msgstr "현재 런처가 관리하고 있는 창이 한 개 이상일 경우 런처 아래에 별도의 표시를 나타냅니다."
-
-#~ msgid "Drop to open"
-#~ msgstr "드래그해서 열기"
-
-#~ msgid "Username or Password not set"
-#~ msgstr "사용자 이름과 비밀번호가 없음"
-
-#~ msgid "Network Error: "
-#~ msgstr "네트워크 에러: "
-
-#~ msgid "Sunrise"
-#~ msgstr "일출"
-
-#~ msgid "Sunset"
-#~ msgstr "일몰"
-
-#~ msgid "Wind"
-#~ msgstr "바람"
-
-#~ msgid "Temp"
-#~ msgstr "온도"
-
-#~ msgid "Feels Like"
-#~ msgstr "체감 온도"
-
-#~ msgid "Humidity"
-#~ msgstr "습도"
-
-#~ msgid "Direction"
-#~ msgstr "방향"
-
-#~ msgid ""
-#~ "Docky requires compositing to work properly. Please enable compositing and "
-#~ "restart docky."
-#~ msgstr "Docky를 실행하려면 창 합성(compositing)이 필요합니다. 창 합성을 활성화하고 Docky를 재시작해주십시오."
-
-#~ msgid "Indicat_e Multiple Windows"
-#~ msgstr "여러 개의 창을 표시하기(_E)"
-
-#~ msgid "Invalid XML Weather Data"
-#~ msgstr "손상된 XML 날씨 데이터"
+msgstr "Tykisligt skriviborð"

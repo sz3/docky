@@ -116,6 +116,7 @@ namespace WeatherDocklet
 			image_map.Add ("scattered t-storms", "weather-storm");
 			image_map.Add ("showers", "weather-showers");
 			image_map.Add ("showers / wind", "weather-showers");
+			image_map.Add ("smoke", "weather-fog");
 			image_map.Add ("sunny", "weather-clear");
 			image_map.Add ("t-showers", "weather-storm");
 			image_map.Add ("t-storms", "weather-storm");
