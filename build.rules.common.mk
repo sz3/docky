@@ -23,7 +23,7 @@ OUTPUT_FILES = \
         $(ASSEMBLY_FILE) \
         $(ASSEMBLY_FILE).mdb
         
-MCS_FLAGS = $(MCS_LINQ_FLAG) -noconfig -codepage:utf8 -warn:4
+MCS_FLAGS = $(MCS_LINQ_FLAG) -noconfig -codepage:utf8 -warn:4 -warnaserror
 
 if ENABLE_DEBUG
 MCS_FLAGS += -debug -d:DEBUG

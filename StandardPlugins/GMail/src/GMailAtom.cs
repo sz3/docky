@@ -162,6 +162,9 @@ namespace GMail
 					Log<GMailAtom>.Error ("Invalid username: {0}", e.Message);
 				else
 					Log<GMailAtom>.Error ("Network error: {0}", e.Message);
+				HttpWebResponse response = (HttpWebResponse) e.Response;
+				Log<GMailAtom>.Debug ("Response status: {0} - {1}", response.StatusCode, response.StatusDescription);
+				
 				return false;
 			} catch (Exception) { }
 			
@@ -283,6 +286,8 @@ namespace GMail
 						Gtk.Application.Invoke (delegate {
 							OnGMailFailed (Catalog.GetString ("Network Error"));
 						});
+					HttpWebResponse response = (HttpWebResponse) e.Response;
+					Log<GMailAtom>.Debug ("Response status: {0} - {1}", response.StatusCode, response.StatusDescription);
 				} catch (ObjectDisposedException) {
 					Gtk.Application.Invoke (delegate {
 						OnGMailFailed (Catalog.GetString ("Network Error"));
