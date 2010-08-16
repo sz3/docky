@@ -84,14 +84,15 @@
       <Package>gio-sharp-2.0</Package>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib" />
+    <Reference Include="wnck-sharp, Version=2.20.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>wnck-sharp-1.0</Package>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Docky.Services\IPreferences.cs" />
     <Compile Include="Docky.Services\PreferencesService.cs" />
     <Compile Include="Docky.Services\DockServices.cs" />
     <Compile Include="Docky.Services\SystemService.cs" />
     <Compile Include="Docky.Services\DrawingService.cs" />
-    <Compile Include="Docky.Services\Preferences.cs" />
     <Compile Include="Docky.Services\NotificationService.cs" />
     <Compile Include="Docky.Services\ConnectionStatusChangeEventArgs.cs" />
     <Compile Include="Docky.Services\Logging\LogBase.cs" />
@@ -108,13 +109,24 @@
     <Compile Include="Docky.Services\Extensions\GLibMountExtension.cs" />
     <Compile Include="Gtk\MountOperation.cs" />
     <Compile Include="Docky.Services\HelperService.cs" />
-    <Compile Include="Docky.Services\Helper.cs" />
-    <Compile Include="Docky.Services\HelperStatusChangedEventArgs.cs" />
-    <Compile Include="Docky.Services\HelperMetadata.cs" />
     <Compile Include="Docky.Services\Extensions\GtkIconThemeExtension.cs" />
     <Compile Include="Docky.Services\PathsService.cs" />
     <Compile Include="Docky.Services\ThemeService.cs" />
-    <Compile Include="Docky.Services\PreferencesChangedEventArgs.cs" />
+    <Compile Include="Docky.Services\DesktopItemService.cs" />
+    <Compile Include="Docky.Services\Helpers\Helper.cs" />
+    <Compile Include="Docky.Services\Helpers\HelperMetadata.cs" />
+    <Compile Include="Docky.Services\Helpers\HelperStatusChangedEventArgs.cs" />
+    <Compile Include="Docky.Services\Preferences\IPreferences.cs" />
+    <Compile Include="Docky.Services\Preferences\Preferences.cs" />
+    <Compile Include="Docky.Services\Preferences\PreferencesChangedEventArgs.cs" />
+    <Compile Include="Docky.Services\Applications\DesktopFileChangedEventArgs.cs" />
+    <Compile Include="Docky.Services\Applications\DesktopItem.cs" />
+    <Compile Include="Docky.Services\Windows\Position.cs" />
+    <Compile Include="Docky.Services\Windows\WindowControl.cs" />
+    <Compile Include="Docky.Services\WindowMatcherService.cs" />
+    <Compile Include="Docky.Services\Extensions\WnckWindowExtension.cs" />
+    <Compile Include="Docky.Services\Xlib\X11Atoms.cs" />
+    <Compile Include="Docky.Services\Xlib\Xlib.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -122,6 +134,14 @@
     <Folder Include="Docky.Services\Logging\" />
     <Folder Include="Docky.Services\Extensions\" />
     <Folder Include="GLibSharp\" />
+    <Folder Include="Docky.Services\Helpers\" />
+    <Folder Include="Docky.Services\Helpers\" />
+    <Folder Include="Docky.Services\Helpers\" />
+    <Folder Include="Docky.Services\Helpers\" />
+    <Folder Include="Docky.Services\Preferences\" />
+    <Folder Include="Docky.Services\Applications\" />
+    <Folder Include="Docky.Services\Windows\" />
+    <Folder Include="Docky.Services\Xlib\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">

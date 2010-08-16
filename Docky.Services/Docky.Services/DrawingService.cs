@@ -36,10 +36,6 @@ namespace Docky.Services
 	{
 		const string MissingIconIcon = "application-default-icon;;application-x-executable";
 		
-		internal DrawingService ()
-		{
-		}
-		
 		/// <summary>
 		/// An empty pixbuf
 		/// </summary>

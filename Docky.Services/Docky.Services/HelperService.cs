@@ -22,6 +22,9 @@ using System.Collections.Generic;
 
 using GLib;
 
+using Docky.Services.Helpers;
+using Docky.Services.Prefs;
+
 using ICSharpCode.SharpZipLib;
 using ICSharpCode.SharpZipLib.Tar;
 
@@ -93,7 +96,7 @@ namespace Docky.Services
 		
 		List<FileMonitor> monitors = new List<FileMonitor> ();
 		
-		public HelperService ()
+		internal HelperService ()
 		{
 			helpers = new List<Helper> ();
 			

@@ -87,7 +87,7 @@ namespace Docky.Services
 		#endregion
 		
 		
-		public PathsService ()
+		internal PathsService ()
 		{
 			// get environment-based settings
 			File env_home         = FileFactory.NewForPath (Environment.GetFolderPath (Environment.SpecialFolder.Personal));
@@ -142,7 +142,7 @@ namespace Docky.Services
 				try {
 					dir.MakeDirectoryWithParents (null);
 				} catch {
-					Log<PathsService>.Fatal ("Could not access the directory '" + dir.Path + "' or create it.  Docky will not work properly unless this folder is writable.");
+					Log<PathsService>.Fatal ("Could not access the directory '{0}' or create it.  Docky will not work properly unless this folder is writable.", dir.Path);
 				}
 		}
 	}

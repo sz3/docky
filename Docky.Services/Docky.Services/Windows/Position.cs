@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Chris Szikszoy
+//  Copyright (C) 2009 GNOME Do
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,22 +17,13 @@
 
 using System;
 
-using GLib;
-
-namespace Docky.Services
+namespace Docky.Services.Windows
 {
-
-	public class HelperStatusChangedEventArgs : EventArgs
-	{
-		public File File { get; private set; }
-		public bool Enabled { get; private set; }
-		public bool IsRunning { get; private set; }
-		
-		public HelperStatusChangedEventArgs (File file, bool enabled, bool isRunning)
-		{
-			this.File = file;
-			this.Enabled = enabled;
-			this.IsRunning = isRunning;
-		}
+	
+	public enum Position {
+		Left = 0,
+		Right,
+		Top,
+		Bottom,
 	}
 }

@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 GNOME Do
+//  Copyright (C) 2009 Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,16 +16,21 @@
 // 
 
 using System;
+using GLib;
 
-namespace Docky.Windowing
+namespace Docky.Services.Applications
 {
-	
-	
-	public enum ClickAction
+	public class DesktopFileChangedEventArgs : EventArgs
 	{
-		Focus,
-		Minimize,
-		Restore,
-		None,
+		public FileMonitorEvent Event { get; private set; }
+		public File File { get; private set; }
+		public File OtherFile {get; private set; }
+		
+		public DesktopFileChangedEventArgs (FileMonitorEvent evnt, File file, File otherFile)
+		{
+			Event = evnt;
+			File = file;
+			OtherFile = otherFile;
+		}
 	}
 }

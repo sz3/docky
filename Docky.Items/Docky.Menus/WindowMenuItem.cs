@@ -19,7 +19,7 @@ using System;
 
 using Gdk;
 
-using Docky.Windowing;
+using Docky.Services.Windows;
 
 namespace Docky.Menus
 {

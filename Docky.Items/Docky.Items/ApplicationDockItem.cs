@@ -27,7 +27,8 @@ using Wnck;
 
 using Docky.Menus;
 using Docky.Services;
-using Docky.Windowing;
+using Docky.Services.Applications;
+using Docky.Services.Windows;
 
 namespace Docky.Items
 {
@@ -40,7 +41,7 @@ namespace Docky.Items
 				if (!file.Exists)
 					return null;
 				
-				DesktopItem desktopItem = WindowMatcher.Default.DesktopItemForDesktopFile (file.Path);
+				DesktopItem desktopItem = DockServices.DesktopItems.DesktopItemFromDesktopFile (file.Path);
 				
 				if (desktopItem == null)
 					desktopItem = new DesktopItem (file.Path);
@@ -70,7 +71,7 @@ namespace Docky.Items
 		public ApplicationDockItem (DesktopItem item)
 		{
 			OwnedItem = item;
-			WindowMatcher.Default.RegisterDesktopItem (OwnedItem);
+			DockServices.DesktopItems.RegisterDesktopItem (OwnedItem);
 			can_manage_windows = true;
 			
 			UpdateInfo ();
@@ -153,7 +154,7 @@ namespace Docky.Items
 		void UpdateWindows ()
 		{
 			if (can_manage_windows)
-				Windows = WindowMatcher.Default.WindowsForDesktopItem (OwnedItem);
+				Windows = DockServices.WindowMatcher.WindowsForDesktopItem (OwnedItem);
 			else
 				Windows = Enumerable.Empty<Wnck.Window> ();
 		}

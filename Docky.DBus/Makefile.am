@@ -17,7 +17,6 @@ FILES = \
 
 PROJECT_REFERENCES = \
 	Docky.Items \
-	Docky.Windowing \
 	Docky.Services
 
 REFERENCES =  \

@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2009 Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,18 +17,22 @@
 
 using System;
 
-namespace Docky.Services
-{
-	public interface IPreferences
-	{
-		T Get<T> (string name, T def);
-		T GetSecure<T> (string name, T def);
-		
-		bool Set<T> (string name, T val);
-		bool SetSecure<T> (string name, T val);
-		
-		string SanitizeKey (string key);
+using GLib;
 
-		event EventHandler<PreferencesChangedEventArgs> Changed;
+namespace Docky.Services.Helpers
+{
+
+	public class HelperStatusChangedEventArgs : EventArgs
+	{
+		public File File { get; private set; }
+		public bool Enabled { get; private set; }
+		public bool IsRunning { get; private set; }
+		
+		public HelperStatusChangedEventArgs (File file, bool enabled, bool isRunning)
+		{
+			this.File = file;
+			this.Enabled = enabled;
+			this.IsRunning = isRunning;
+		}
 	}
 }

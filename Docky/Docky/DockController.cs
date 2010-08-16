@@ -33,6 +33,7 @@ using ICSharpCode.SharpZipLib.Tar;
 using Docky.Items;
 using Docky.Interface;
 using Docky.Services;
+using Docky.Services.Prefs;
 
 namespace Docky
 {

@@ -23,6 +23,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Linq;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 
 using Cairo;
 using Gdk;
@@ -30,7 +31,7 @@ using Gtk;
 
 using Docky.Items;
 using Docky.Services;
-using System.Text.RegularExpressions;
+using Docky.Services.Prefs;
 
 namespace Docky.Interface
 {

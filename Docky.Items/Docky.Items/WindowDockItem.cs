@@ -26,7 +26,8 @@ using Gdk;
 using Wnck;
 
 using Docky.Menus;
-using Docky.Windowing;
+using Docky.Services;
+using Docky.Services.Windows;
 
 namespace Docky.Items
 {
@@ -88,7 +89,7 @@ namespace Docky.Items
 		void UpdateWindows (Wnck.Window baseWindow)
 		{
 			if (baseWindow != null) {
-				Windows = WindowMatcher.Default.SimilarWindows (baseWindow)
+				Windows = DockServices.WindowMatcher.SimilarWindows (baseWindow)
 					.Where (w => !FileApplicationProvider.ManagedWindows.Contains (w));
 			} else {
 				Windows = Enumerable.Empty<Wnck.Window> ();

@@ -22,7 +22,7 @@ using System.Text.RegularExpressions;
 using GLib;
 using Gdk;
 
-namespace Docky.Services
+namespace Docky.Services.Helpers
 {
 	public class HelperMetadata
 	{

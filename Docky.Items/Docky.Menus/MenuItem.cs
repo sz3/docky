@@ -25,6 +25,7 @@ using System.Text;
 using Gdk;
 
 using Docky.Services;
+using Docky.Services.Prefs;
 
 namespace Docky.Menus
 {

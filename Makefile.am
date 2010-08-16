@@ -9,7 +9,6 @@ SUBDIRS = \
 	Docky.CairoHelper \
 	Docky.Services \
 	Docky.Widgets \
-	Docky.Windowing \
 	Docky.Items \
 	Docky.DBus \
 	StandardPlugins \

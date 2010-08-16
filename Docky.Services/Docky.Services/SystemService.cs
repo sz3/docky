@@ -20,12 +20,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Net;
 
 using GLib;
+
+using Docky.Services.Prefs;
 
 using NDesk.DBus;
 using org.freedesktop.DBus;
@@ -34,7 +35,7 @@ namespace Docky.Services
 {
 	public class SystemService
 	{
-		public static System.Threading.Thread MainThread { get; set; }
+		public System.Threading.Thread MainThread { get; set; }
 		
 		internal SystemService ()
 		{
@@ -42,9 +43,26 @@ namespace Docky.Services
 			InitializeNetwork ();
 		}
 		
-		IPreferences GConf = DockServices.Preferences.Get ("/system/http_proxy");
+		#region Locale
+
+		public string Locale {
+			get {
+				string loc;
+				foreach (string env in new[] { "LC_ALL", "LC_MESSAGES", "LANG", "LANGUAGE" }) {
+					loc = Environment.GetEnvironmentVariable (env);
+					if (!string.IsNullOrEmpty (loc) && loc.Length >= 2) {
+						return loc;
+					}
+				}
+				return "";
+			}
+		}
+		
+		#endregion
 		
 		#region Network
+		
+		IPreferences NetworkSettings = DockServices.Preferences.Get ("/system/http_proxy");
 		
 		const string PROXY_USE_PROXY = "use_http_proxy";
 		const string PROXY_USE_AUTH = "use_authentication";
@@ -71,7 +89,7 @@ namespace Docky.Services
 			}
 			
 			// watch for changes on any of the proxy keys. If they change, reload the proxy
-			GConf.Changed += delegate(object sender, PreferencesChangedEventArgs e) {
+			NetworkSettings.Changed += delegate (object sender, PreferencesChangedEventArgs e) {
 				switch (e.Key) {
 				case PROXY_HOST:
 				case PROXY_USER:
@@ -140,7 +158,7 @@ namespace Docky.Services
 
 		public bool UseProxy {
 			get {
-				return GConf.Get<bool> (PROXY_USE_PROXY, false);
+				return NetworkSettings.Get<bool> (PROXY_USE_PROXY, false);
 			}
 		}
 
@@ -154,11 +172,11 @@ namespace Docky.Services
 				return null;
 			
 			try {
-				string proxyUri = string.Format ("http://{0}:{1}", GConf.Get<string> (PROXY_HOST, ""),
-					GConf.Get<int> (PROXY_PORT, 0).ToString ());
+				string proxyUri = string.Format ("http://{0}:{1}", NetworkSettings.Get<string> (PROXY_HOST, ""),
+					NetworkSettings.Get<int> (PROXY_PORT, 0).ToString ());
 				
 				proxy = new WebProxy (proxyUri);
-				string[] bypassList = GConf.Get<string[]> (PROXY_BYPASS_LIST, new[] { "" });
+				string[] bypassList = NetworkSettings.Get<string[]> (PROXY_BYPASS_LIST, new[] { "" });
 				if (bypassList != null) {
 					foreach (string host in bypassList) {
 						if (host.Contains ("*.local")) {
@@ -168,9 +186,9 @@ namespace Docky.Services
 						proxy.BypassArrayList.Add (string.Format ("http://{0}", host));
 					}
 				}
-				if (GConf.Get<bool> (PROXY_USE_AUTH, false))
-					proxy.Credentials = new NetworkCredential (GConf.Get<string> (PROXY_USER, ""),
-						GConf.Get<string> (PROXY_PASSWORD, ""));
+				if (NetworkSettings.Get<bool> (PROXY_USE_AUTH, false))
+					proxy.Credentials = new NetworkCredential (NetworkSettings.Get<string> (PROXY_USER, ""),
+						NetworkSettings.Get<string> (PROXY_PASSWORD, ""));
 			} catch (Exception e) {
 				Log.Error ("Error creating web proxy, {0}", e.Message);
 				Log.Debug (e.StackTrace);

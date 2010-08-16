@@ -65,7 +65,7 @@ namespace Docky
 			DockServices.System.SetProcessName ("docky");
 			
 			// cache main thread
-			SystemService.MainThread = Thread.CurrentThread;
+			DockServices.System.MainThread = Thread.CurrentThread;
 			
 			// check compositing
 			CheckComposite ();

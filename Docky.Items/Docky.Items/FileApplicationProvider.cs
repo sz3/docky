@@ -29,7 +29,9 @@ using Wnck;
 
 using Docky.Menus;
 using Docky.Services;
-using Docky.Windowing;
+using Docky.Services.Prefs;
+using Docky.Services.Applications;
+using Docky.Services.Windows;
 
 namespace Docky.Items
 {
@@ -125,7 +127,7 @@ namespace Docky.Items
 			// update the transient items when something happens in a desktop file directory
 			// It is possible that a .desktop file was created for a window that didn't have one before,
 			// this would associate that desktop file with the existing window.
-			WindowMatcher.DesktopFileChanged += HandleWindowMatcherDesktopFileChanged;
+			DockServices.DesktopItems.DesktopFileChanged += HandleWindowMatcherDesktopFileChanged;
 			
 			Wnck.Screen.Default.WindowOpened += WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
@@ -177,11 +179,11 @@ namespace Docky.Items
 			if (args.Window.IsSkipTasklist)
 				return;
 			
-			longMatchInProgress = !WindowMatcher.Default.WindowIsReadyForMatch (args.Window);
+			longMatchInProgress = !DockServices.WindowMatcher.WindowIsReadyForMatch (args.Window);
 			
 			// ensure we run last (more or less) so that all icons can update first
 			GLib.Timeout.Add (150, delegate {
-				if (WindowMatcher.Default.WindowIsReadyForMatch (args.Window)) {
+				if (DockServices.WindowMatcher.WindowIsReadyForMatch (args.Window)) {
 					longMatchInProgress = false;
 					UpdateTransientItems ();
 				} else {
@@ -189,11 +191,11 @@ namespace Docky.Items
 					// their windows will be monitored for name changes (give up after 5 seconds)
 					uint matching_timeout = 5000;
 					// wait for OpenOffice up to 1min to startup before giving up
-					if (WindowMatcher.Default.WindowIsOpenOffice (args.Window))
+					if (DockServices.WindowMatcher.WindowIsOpenOffice (args.Window))
 						matching_timeout = 60000;
 					args.Window.NameChanged += HandleUnmatchedWindowNameChanged;
 					GLib.Timeout.Add (matching_timeout, delegate {
-						if (!WindowMatcher.Default.WindowIsReadyForMatch (args.Window)) {
+						if (!DockServices.WindowMatcher.WindowIsReadyForMatch (args.Window)) {
 							args.Window.NameChanged -= HandleUnmatchedWindowNameChanged;
 							longMatchInProgress = false;
 							UpdateTransientItems ();
@@ -208,7 +210,7 @@ namespace Docky.Items
 		void HandleUnmatchedWindowNameChanged (object sender, EventArgs e)
 		{
 			Wnck.Window window = (sender as Wnck.Window);
-			if (WindowMatcher.Default.WindowIsReadyForMatch (window)) {
+			if (DockServices.WindowMatcher.WindowIsReadyForMatch (window)) {
 				window.NameChanged -= HandleUnmatchedWindowNameChanged;
 				longMatchInProgress = false;
 				UpdateTransientItems ();
@@ -247,14 +249,14 @@ namespace Docky.Items
 					.Contains (window))
 					continue;
 				
-				DesktopItem desktop_item = WindowMatcher.Default.DesktopItemForWindow (window);
+				DesktopItem desktopItem = DockServices.WindowMatcher.DesktopItemForWindow (window);
 				WnckDockItem item;
 				
-				if (desktop_item != null) {
+				if (desktopItem != null) {
 					// This fixes WindowMatching for OpenOffice which is a bit slow setting up its window title
 					// Check if an existing ApplicationDockItem already uses this DesktopItem
 					ApplicationDockItem appdi = InternalItems
-						.Where (adi => (adi is ApplicationDockItem && (adi as ApplicationDockItem).OwnedItem == desktop_item))
+						.Where (adi => (adi is ApplicationDockItem && (adi as ApplicationDockItem).OwnedItem == desktopItem))
 						.Cast<ApplicationDockItem> ()
 						.FirstOrDefault ();
 					
@@ -264,7 +266,7 @@ namespace Docky.Items
 						continue;
 					}
 					
-					item = new ApplicationDockItem (desktop_item);
+					item = new ApplicationDockItem (desktopItem);
 				} else {
 					item = new WindowDockItem (window);
 				}
@@ -483,7 +485,7 @@ namespace Docky.Items
 		{
 			base.Dispose ();
 			
-			WindowMatcher.DesktopFileChanged -= HandleWindowMatcherDesktopFileChanged;
+			DockServices.DesktopItems.DesktopFileChanged -= HandleWindowMatcherDesktopFileChanged;
 			
 			Wnck.Screen.Default.WindowOpened -= WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed -= WnckScreenDefaultWindowClosed;

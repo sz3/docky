@@ -182,7 +182,7 @@ namespace Docky.DBus
 			
 			InitializeSharedBus (bus);
 			
-			DockServices.Helpers.HelperStatusChanged += delegate(object sender, HelperStatusChangedEventArgs e) {
+			DockServices.Helpers.HelperStatusChanged += delegate(object sender, Docky.Services.Helpers.HelperStatusChangedEventArgs e) {
 				// if a script has stopped running, trigger a refresh
 				if (!e.IsRunning)
 					ForceRefresh ();

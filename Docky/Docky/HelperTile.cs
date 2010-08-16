@@ -22,10 +22,10 @@ using Mono.Unix;
 
 using Docky.Widgets;
 using Docky.Services;
+using Docky.Services.Helpers;
 
 namespace Docky
 {
-
 
 	public class HelperTile : AbstractTileObject
 	{

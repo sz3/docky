@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 GNOME Do
+//  Copyright (C) 2010 Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,14 +17,24 @@
 
 using System;
 
-namespace Docky.Windowing
+namespace Docky.Services.Prefs
 {
-	
-	
-	public enum Position {
-		Left = 0,
-		Right,
-		Top,
-		Bottom,
+	public class PreferencesChangedEventArgs : EventArgs
+	{
+		/// <summary>
+		/// The key of the changed preference.
+		/// </summary>
+		public string Key { get; private set; }
+		/// <summary>
+		/// The new value after the preference changed.
+		/// </summary>
+		public object Value { get; private set; }
+
+		public PreferencesChangedEventArgs (string key, object newValue)
+		{
+			Key = key;
+			Value = newValue;
+		}
 	}
 }
+

@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2009-2010 Jason Smith, Chris Szikszoy
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,22 +16,19 @@
 // 
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Runtime.InteropServices;
-using System.Linq;
-using System.Text;
 
-using Docky.Windowing;
-using Docky.Xlib;
+using Wnck;
 
-namespace Wnck
+using Docky.Services.Windows;
+using Docky.Services.Xlib;
+
+namespace Docky.Services
 {
 
-
-	public static class Window_Extensions
+	public static class WnckWindowExtension
 	{
-		public static int Area (this Wnck.Window self)
+		public static int Area (this Window self)
 		{
 			Gdk.Rectangle geo = self.EasyGeometry ();
 			return geo.Width * geo.Height;
@@ -44,8 +41,8 @@ namespace Wnck
 			return geo;
 		}
 		
-		public static void SetWorkaroundGeometry (this Wnck.Window window, WindowGravity gravity, WindowMoveResizeMask mask, 
-		                                     int x, int y, int width, int height)
+		public static void SetWorkaroundGeometry (this Window window, WindowGravity gravity, WindowMoveResizeMask mask, 
+			int x, int y, int width, int height)
 		{
 			// This is very weird.  Don't know when they will fix it. You must subtract the top and left
 			// frame extents from a move operation to get the window to actually show in the right spot.
@@ -58,12 +55,12 @@ namespace Wnck
 			window.SetGeometry (gravity, mask, x, y, width, height);
 		}
 		
-		public static int [] FrameExtents (this Wnck.Window window)
+		public static int [] FrameExtents (this Window window)
 		{
 			return GetCardinalProperty (window, X11Atoms.Instance._NET_FRAME_EXTENTS);
 		}
 		
-		public static int [] GetCardinalProperty (this Wnck.Window window, IntPtr atom)
+		public static int [] GetCardinalProperty (this Window window, IntPtr atom)
 		{
 			X11Atoms atoms = X11Atoms.Instance;
 			IntPtr display;
@@ -75,12 +72,12 @@ namespace Wnck
 			
 			IntPtr window_handle = (IntPtr) window.Xid;
 			
-			display = Xlib.GdkDisplayXDisplay (Gdk.Screen.Default.Display);
+			display = X.GdkDisplayXDisplay (Gdk.Screen.Default.Display);
 			type = IntPtr.Zero;
 			
-			Xlib.XGetWindowProperty (display, window_handle, atom, (IntPtr) 0,
-			                                  (IntPtr) System.Int32.MaxValue, false, atoms.XA_CARDINAL, out type, out format,
-			                                  out nitems, out bytes_after, out prop_return);
+			X.XGetWindowProperty (display, window_handle, atom, (IntPtr) 0,
+				(IntPtr) System.Int32.MaxValue, false, atoms.XA_CARDINAL, out type, out format,
+				out nitems, out bytes_after, out prop_return);
 			
 			if (type == atoms.XA_CARDINAL && format == 32) {
 				extents = new int [(int) nitems];

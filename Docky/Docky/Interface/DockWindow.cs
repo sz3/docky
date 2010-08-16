@@ -18,11 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
 
 using Cairo;
 using Gdk;
@@ -36,7 +32,7 @@ using Docky.CairoHelper;
 using Docky.Menus;
 using Docky.Painters;
 using Docky.Services;
-using Docky.Xlib;
+using Docky.Services.Xlib;
 
 namespace Docky.Interface
 {
@@ -2787,10 +2783,10 @@ namespace Docky.Interface
 			
 			IntPtr [] first_struts = new [] { struts [0], struts [1], struts [2], struts [3] };
 
-			Xlib.Xlib.XChangeProperty (GdkWindow, atoms._NET_WM_STRUT_PARTIAL, atoms.XA_CARDINAL,
+			X.XChangeProperty (GdkWindow, atoms._NET_WM_STRUT_PARTIAL, atoms.XA_CARDINAL,
 			                      (int) PropertyMode.PropModeReplace, struts);
 			
-			Xlib.Xlib.XChangeProperty (GdkWindow, atoms._NET_WM_STRUT, atoms.XA_CARDINAL, 
+			X.XChangeProperty (GdkWindow, atoms._NET_WM_STRUT, atoms.XA_CARDINAL, 
 			                      (int) PropertyMode.PropModeReplace, first_struts);
 		}
 		#endregion
