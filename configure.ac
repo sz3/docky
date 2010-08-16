@@ -101,6 +101,9 @@ AC_SUBST([WNCK_SHARP_10_LIBS])
 
 AM_CONDITIONAL(CONFIG_REQUESTED, test -z "")
 
+MCS_FLAGS="-noconfig -codepage:utf8 -warn:4"
+AC_SUBST([MCS_FLAGS])
+
 dnl {{{ run with heapshot
 AC_ARG_ENABLE(heap-shot,
 	AC_HELP_STRING([--enable-heap-shot],
@@ -123,6 +126,7 @@ if test -z "$ENABLE_DEBUG_TRUE" ; then
 	CONFIG_REQUESTED="yes"
 	MONO_DEBUG_ARGS+="--debug "
 	DOCKY_DEBUG_ARGS+="--debug "
+	MCS_FLAGS+=" -debug -d:DEBUG"
 fi
 dnl }}}
 AM_CONDITIONAL(ENABLE_DEBUG, true)
@@ -135,6 +139,7 @@ AC_ARG_ENABLE(release,
 AM_CONDITIONAL(ENABLE_RELEASE, test "x$enable_release" = "xyes")
 if test -z "$ENABLE_RELEASE_TRUE" ; then
 	CONFIG_REQUESTED="yes"
+	MCS_FLAGS+=" -warnaserror"
 fi
 dnl }}}
 
@@ -227,7 +232,7 @@ ${PACKAGE}-${VERSION}
 
   Build Environment
     Install Prefix:     ${prefix}
-    Mono C# Compiler:   ${MCS} ${GMCS_FLAGS}
+    Mono C# Compiler:   ${MCS} ${MCS_FLAGS}
     Mono Runtime:       ${MONO}
 
   Build/Development
