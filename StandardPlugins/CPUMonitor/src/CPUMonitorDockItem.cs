@@ -1,5 +1,6 @@
 //  
-//  Copyright (C) 2009 GNOME Do
+//  Copyright (C) 2009 Jason Smith, Robert Dyer
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -32,15 +33,13 @@ using Docky.Services;
 
 namespace CPUMonitor
 {
-	
-	
 	public class CPUMonitorDockItem : AbstractDockItem
 	{
 		const int UpdateMS = 1000;
 		const double RadiusPercent = .9;
 		
 		enum ProcFields {
-			User=0,     // normal processes executing in user mode
+			User = 0,   // normal processes executing in user mode
 			Nice,       // niced processes executing in user mode
 			System,     // processes executing in kernel mode
 			Idle,       // twiddling thunbs
@@ -59,17 +58,13 @@ namespace CPUMonitor
 		double CPUUtilization { get; set; }
 		double MemoryUtilization { get; set; }
 		
-		public override string UniqueID ()
-		{
-			return "CPUMonitor";
-		}
+		public override string UniqueID () { return "CPUMonitor"; }
 		
 		public CPUMonitorDockItem ()
 		{
 			regex = new Regex ("\\d+");
 			
-			DockServices.System.RunOnThread (() =>
-			{
+			DockServices.System.RunOnThread (() => {
 				while (!disposed) {
 					UpdateUtilization ();
 					System.Threading.Thread.Sleep (UpdateMS);
@@ -93,24 +88,25 @@ namespace CPUMonitor
 				string cpu_line = reader.ReadLine ();
 				MatchCollection collection = regex.Matches (cpu_line);
 				try {
-					long usage = Convert.ToInt64 (collection [(int) ProcFields.Idle].Value) +
-							     Convert.ToInt64 (collection [(int) ProcFields.IRQ].Value) +
-							     Convert.ToInt64 (collection [(int) ProcFields.Nice].Value) +
-							     Convert.ToInt64 (collection [(int) ProcFields.SoftIRQ].Value) +
-							     Convert.ToInt64 (collection [(int) ProcFields.System].Value) +
-							     Convert.ToInt64 (collection [(int) ProcFields.User].Value);
+					long usage = Convert.ToInt64 (collection [(int) ProcFields.User].Value) +
+								Convert.ToInt64 (collection [(int) ProcFields.Nice].Value) +
+								Convert.ToInt64 (collection [(int) ProcFields.System].Value) +
+								Convert.ToInt64 (collection [(int) ProcFields.Idle].Value) +
+								Convert.ToInt64 (collection [(int) ProcFields.IOWait].Value) +
+								Convert.ToInt64 (collection [(int) ProcFields.IRQ].Value) +
+								Convert.ToInt64 (collection [(int) ProcFields.SoftIRQ].Value);
+					long idle = Convert.ToInt64 (collection [(int) ProcFields.Idle].Value) +
+								Convert.ToInt64 (collection [(int) ProcFields.IOWait].Value);
 					
 					long usage_diff = usage - last_usage;
-					long idle = Convert.ToInt64 (collection [(int) ProcFields.Idle].Value) + 
-						        Convert.ToInt64 (collection [(int) ProcFields.IOWait].Value);
 					long idle_diff = idle - last_idle;
 					
 					last_idle = idle;
 					last_usage = usage;
+					
 					// average it for smoothing
 					if (usage_diff > 0)
 						CPUUtilization = Math.Max (0.01, Math.Round (((1 - (idle_diff / (double) usage_diff)) + CPUUtilization) / 2, 2));
-						
 				} catch {
 					CPUUtilization = 0.01;
 				}
@@ -146,6 +142,7 @@ namespace CPUMonitor
 			Cairo.Color base_color = new Cairo.Color (1, .3, .3, .5).SetHue (120 * (1 - CPUUtilization));
 			
 			double radius = Math.Max (Math.Min (CPUUtilization * 1.3, 1), .001);
+			
 			// draw underlay
 			cr.Arc (center, center, center * RadiusPercent, 0, Math.PI * 2);
 			cr.Color = new Cairo.Color (0, 0, 0, .5);
@@ -179,7 +176,7 @@ namespace CPUMonitor
 			cr.Fill ();
 			lg.Destroy ();
 			
-			//draw outer circles
+			// draw outer circles
 			cr.LineWidth = 1;
 			cr.Arc (center, center, center * RadiusPercent, 0, Math.PI * 2);
 			cr.Color = new Cairo.Color (1, 1, 1, .75);
