@@ -1,6 +1,51 @@
 <gconfschemafile>
 	<schemalist>
 		<schema>
+			<key>/schemas/apps/docky-2/Clock/ClockDockItem/ClockTheme</key>
+			<applyto>/apps/docky-2/Clock/ClockDockItem/ClockTheme</applyto>
+			<owner>docky</owner>
+			<type>string</type>
+			<default>default<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Clock/ClockDockItem/ShowDate</key>
+			<applyto>/apps/docky-2/Clock/ClockDockItem/ShowDate</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>false<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Clock/ClockDockItem/ShowDigital</key>
+			<applyto>/apps/docky-2/Clock/ClockDockItem/ShowDigital</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>false<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Clock/ClockDockItem/ShowMilitary</key>
+			<applyto>/apps/docky-2/Clock/ClockDockItem/ShowMilitary</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>false<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		
+		<schema>
 			<key>/schemas/apps/docky-2/Docky/DockController/ActiveDocks</key>
 			<applyto>/apps/docky-2/Docky/DockController/ActiveDocks</applyto>
 			<owner>docky</owner>
@@ -37,6 +82,388 @@
 		</schema>
 		
 		<schema>
+			<key>/schemas/apps/docky-2/Docky/Interface/DockDragTracker/LockDrags</key>
+			<applyto>/apps/docky-2/Docky/Interface/DockDragTracker/LockDrags</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>false<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Interface/DockDragTracker/ProvidersAcceptDrops</key>
+			<applyto>/apps/docky-2/Docky/Interface/DockDragTracker/ProvidersAcceptDrops</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>true<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Interface/DockPreferences/FirstRun</key>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/FirstRun</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>true<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Interface/DockPreferences/DockN/Autohide</key>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock1/Autohide</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock2/Autohide</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock3/Autohide</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock4/Autohide</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock5/Autohide</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock6/Autohide</applyto>
+			<owner>docky</owner>
+			<type>string</type>
+			<default>None<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Interface/DockPreferences/DockN/FadeOnHide</key>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock1/FadeOnHide</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock2/FadeOnHide</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock3/FadeOnHide</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock4/FadeOnHide</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock5/FadeOnHide</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock6/FadeOnHide</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>false<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Interface/DockPreferences/DockN/FadeOpacity</key>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock1/FadeOpacity</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock2/FadeOpacity</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock3/FadeOpacity</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock4/FadeOpacity</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock5/FadeOpacity</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock6/FadeOpacity</applyto>
+			<owner>docky</owner>
+			<type>int</type>
+			<default>0<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Interface/DockPreferences/DockN/IconSize</key>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock1/IconSize</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock2/IconSize</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock3/IconSize</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock4/IconSize</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock5/IconSize</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock6/IconSize</applyto>
+			<owner>docky</owner>
+			<type>int</type>
+			<default>48<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Interface/DockPreferences/DockN/IndicateMultipleWindows</key>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock1/</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock2/</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock3/</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock4/</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock5/</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock6/</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>true<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Interface/DockPreferences/DockN/Launchers</key>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock1/Launchers</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock2/Launchers</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock3/Launchers</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock4/Launchers</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock5/Launchers</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock6/Launchers</applyto>
+			<owner>docky</owner>
+			<type>list</type>
+			<list_type>string<list_type>
+			<default>[]<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Interface/DockPreferences/DockN/MonitorNumber</key>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock1/MonitorNumber</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock2/MonitorNumber</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock3/MonitorNumber</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock4/MonitorNumber</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock5/MonitorNumber</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock6/MonitorNumber</applyto>
+			<owner>docky</owner>
+			<type>int</type>
+			<default>0<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Interface/DockPreferences/DockN/PanelMode</key>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock1/PanelMode</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock2/PanelMode</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock3/PanelMode</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock4/PanelMode</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock5/PanelMode</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock6/PanelMode</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>false<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Interface/DockPreferences/DockN/Plugins</key>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock1/Plugins</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock2/Plugins</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock3/Plugins</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock4/Plugins</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock5/Plugins</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock6/Plugins</applyto>
+			<owner>docky</owner>
+			<type>list</type>
+			<list_type>string</list_type>
+			<default>[]<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Interface/DockPreferences/DockN/Position</key>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock1/Position</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock2/Position</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock3/Position</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock4/Position</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock5/Position</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock6/Position</applyto>
+			<owner>docky</owner>
+			<type>string</type>
+			<default>Bottom<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Interface/DockPreferences/DockN/SortList</key>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock1/SortList</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock2/SortList</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock3/SortList</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock4/SortList</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock5/SortList</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock6/SortList</applyto>
+			<owner>docky</owner>
+			<type>list</type>
+			<list_type>string<list_type>
+			<default>[]<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Interface/DockPreferences/DockN/ThreeDimensional</key>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock1/ThreeDimensional</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock2/ThreeDimensional</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock3/ThreeDimensional</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock4/ThreeDimensional</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock5/ThreeDimensional</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock6/ThreeDimensional</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>false<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Interface/DockPreferences/DockN/WindowManager</key>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock1/WindowManager</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock2/WindowManager</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock3/WindowManager</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock4/WindowManager</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock5/WindowManager</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock6/WindowManager</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>true<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Interface/DockPreferences/DockN/ZoomEnabled</key>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock1/ZoomEnabled</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock2/ZoomEnabled</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock3/ZoomEnabled</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock4/ZoomEnabled</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock5/ZoomEnabled</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock6/ZoomEnabled</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>true<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Interface/DockPreferences/DockN/ZoomPercent</key>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock1/ZoomPercent</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock2/ZoomPercent</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock3/ZoomPercent</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock4/ZoomPercent</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock5/ZoomPercent</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock6/ZoomPercent</applyto>
+			<owner>docky</owner>
+			<type>float</type>
+			<default>2.0<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Items/DockyItem/DockyItemCommand</key>
+			<applyto>/apps/docky-2/Docky/Items/DockyItem/DockyItemCommand</applyto>
+			<owner>docky</owner>
+			<type>string</type>
+			<default><default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Items/DockyItem/HoverText</key>
+			<applyto>/apps/docky-2/Docky/Items/DockyItem/HoverText</applyto>
+			<owner>docky</owner>
+			<type>string</type>
+			<default>Docky<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Items/DockyItem/Hue</key>
+			<applyto>/apps/docky-2/Docky/Items/DockyItem/Hue</applyto>
+			<owner>docky</owner>
+			<type>int</type>
+			<default>0<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Items/DockyItem/ShowDockyItem</key>
+			<applyto>/apps/docky-2/Docky/Items/DockyItem/ShowDockyItem</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>true<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Items/DockyItem/ShowQuit</key>
+			<applyto>/apps/docky-2/Docky/Items/DockyItem/ShowQuit</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>true<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Items/DockyItem/ShowSettings</key>
+			<applyto>/apps/docky-2/Docky/Items/DockyItem/ShowSettings</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>true<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Items/FileApplicationProvider/AllowPinToDock</key>
+			<applyto>/apps/docky-2/Docky/Items/FileApplicationProvider/AllowPinToDock</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>true<default>
+			<locale name="C">
+				<short>Show 'Pin to Dock' for items</short>
+				<long>If the 'Pin to Dock' option should show in the menu of items, allowing you to add it permanently to the dock.</long>
+			</locale>
+		</schema>
+		
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Items/WnckDockItem/CurrentDesktopOnly</key>
+			<applyto>/apps/docky-2/Docky/Items/WnckDockItem/CurrentDesktopOnly</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>false<default>
+			<locale name="C">
+				<short>Show windows from only current desktop</short>
+				<long>If true, Docky will only show windows on the currently active desktop.</long>
+			</locale>
+		</schema>
+		
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Services/HelperService/ShowOutput</key>
+			<applyto>/apps/docky-2/Docky/Services/HelperService/ShowOutput</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>true<default>
+			<locale name="C">
+				<short>Redirect helper output to Docky's output</short>
+				<long>If true, output from the helpers will be redirected to show in Docky's output.</long>
+			</locale>
+		</schema>
+		
+		<schema>
 			<key>/schemas/apps/docky-2/Docky/Services/ThemeService/GlowTime</key>
 			<applyto>/apps/docky-2/Docky/Services/ThemeService/GlowTime</applyto>
 			<owner>docky</owner>
@@ -67,6 +494,191 @@
 			<locale name="C">
 				<short>Urgent indicator color shift</short>
 				<long>How much to shift the color of the urgent indicator. The value can be from -180 to 180.</long>
+			</locale>
+		</schema>
+		
+		<schema>
+			<key>/schemas/apps/docky-2/GMail/GMailPreferences/Labels</key>
+			<applyto>/apps/docky-2/GMail/GMailPreferences/Labels</applyto>
+			<owner>docky</owner>
+			<type>list</type>
+			<list_type>string<list_type>
+			<default>[]<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/GMail/GMailPreferences/LastChecked</key>
+			<applyto>/apps/docky-2/GMail/GMailPreferences/LastChecked</applyto>
+			<owner>docky</owner>
+			<type>string</type>
+			<default><default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/GMail/GMailPreferences/NeedsAttention</key>
+			<applyto>/apps/docky-2/GMail/GMailPreferences/NeedsAttention</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>true<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/GMail/GMailPreferences/Notify</key>
+			<applyto>/apps/docky-2/GMail/GMailPreferences/Notify</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>true<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/GMail/GMailPreferences/RefreshRate</key>
+			<applyto>/apps/docky-2/GMail/GMailPreferences/RefreshRate</applyto>
+			<owner>docky</owner>
+			<type>int</type>
+			<default>15<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/GMail/GMailPreferences/User</key>
+			<applyto>/apps/docky-2/GMail/GMailPreferences/User</applyto>
+			<owner>docky</owner>
+			<type>string</type>
+			<default><default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		
+		<schema>
+			<key>/schemas/apps/docky-2/NPR/NPR/MyStations</key>
+			<applyto>/apps/docky-2/NPR/NPR/MyStations</applyto>
+			<owner>docky</owner>
+			<type>list</type>
+			<list_type>int</list_type>
+			<default>[]<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		
+		<schema>
+			<key>/schemas/apps/docky-2/RecentDocuments/RecentDocumentsItem/AlwaysShowRecent</key>
+			<applyto>/apps/docky-2/RecentDocuments/RecentDocumentsItem/AlwaysShowRecent</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>false<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		
+		<schema>
+			<key>/schemas/apps/docky-2/SessionManager/SessionManagerItem/CurrentIndex</key>
+			<applyto>/apps/docky-2/SessionManager/SessionManagerItem/CurrentIndex</applyto>
+			<owner>docky</owner>
+			<type>int</type>
+			<default>0<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		
+		<schema>
+			<key>/schemas/apps/docky-2/Timer/TimerMainDockItem/AutoDismissTimers</key>
+			<applyto>/apps/docky-2/Timer/TimerMainDockItem/AutoDismissTimers</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>false<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Timer/TimerMainDockItem/AutoStartTimers</key>
+			<applyto>/apps/docky-2/Timer/TimerMainDockItem/AutoStartTimers</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>false<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Timer/TimerMainDockItem/DefaultTimer</key>
+			<applyto>/apps/docky-2/Timer/TimerMainDockItem/DefaultTimer</applyto>
+			<owner>docky</owner>
+			<type>int</type>
+			<default><default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		
+		<schema>
+			<key>/schemas/apps/docky-2/WeatherDocklet/WeatherPreferences/Location</key>
+			<applyto>/apps/docky-2/WeatherDocklet/WeatherPreferences/Location</applyto>
+			<owner>docky</owner>
+			<type>list</type>
+			<list_type>string</list_type>
+			<default>[]<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/WeatherDocklet/WeatherPreferences/Metric</key>
+			<applyto>/apps/docky-2/WeatherDocklet/WeatherPreferences/Metric</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>false<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/WeatherDocklet/WeatherPreferences/Source</key>
+			<applyto>/apps/docky-2/WeatherDocklet/WeatherPreferences/Source</applyto>
+			<owner>docky</owner>
+			<type>string</type>
+			<default>Weather Underground<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/WeatherDocklet/WeatherPreferences/Timeout</key>
+			<applyto>/apps/docky-2/WeatherDocklet/WeatherPreferences/Timeout</applyto>
+			<owner>docky</owner>
+			<type>int</type>
+			<default>30<default>
+			<locale name="C">
+				<short></short>
+				<long></long>
 			</locale>
 		</schema>
 	</schemalist>
