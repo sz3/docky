@@ -20,10 +20,14 @@ STD_REFERENCES = $(foreach ref,$(filter-out -r:%,$(REFERENCES)),-r:$(ref))
 BUILD_REFERENCES = $(filter -r:%,$(REFERENCES) $(STD_REFERENCES))
 
 OUTPUT_FILES = \
-        $(ASSEMBLY_FILE) \
+        $(ASSEMBLY_FILE)
+
+if ENABLE_DEBUG
+OUTPUT_FILES += \
         $(ASSEMBLY_FILE).mdb
 
 $(ASSEMBLY_FILE).mdb: $(ASSEMBLY_FILE)
+endif
 
 $(ASSEMBLY_FILE): $(SOURCES_BUILD) $(RESOURCES_EXPANDED) $(COMPONENT_DEPS)
 	@mkdir -p $(BUILD_DIR)
