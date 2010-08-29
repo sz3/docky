@@ -7,8 +7,8 @@
 			<type>string</type>
 			<default>default</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Analog clock theme</short>
+				<long>The theme for the analog clock.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -18,8 +18,8 @@
 			<type>bool</type>
 			<default>false</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Show date</short>
+				<long>If true, the date should show on the digital clock.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -29,8 +29,8 @@
 			<type>bool</type>
 			<default>false</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Show the digital clock</short>
+				<long>If true, show the digital clock otherwise show the analog clock.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -40,8 +40,8 @@
 			<type>bool</type>
 			<default>false</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Use 24-hr time</short>
+				<long>If true, shows time in 24-hr format.</long>
 			</locale>
 		</schema>
 		
@@ -88,8 +88,8 @@
 			<type>bool</type>
 			<default>false</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Stop items from dragging</short>
+				<long>If true, locks all items on all docks so they can't be dragged.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -99,8 +99,8 @@
 			<type>bool</type>
 			<default>true</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Prevent adding items by drops</short>
+				<long>If false, prevents dropping items onto the dock to add them to the dock.</long>
 			</locale>
 		</schema>
 		
@@ -111,8 +111,8 @@
 			<type>bool</type>
 			<default>true</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Do not change this!</short>
+				<long>If true, this is the first time Docky has run.  Internal use only - Do not change!</long>
 			</locale>
 		</schema>
 		
@@ -128,8 +128,8 @@
 			<type>string</type>
 			<default>None</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Dock's hiding mode</short>
+				<long>The dock's hide mode.  Possible values are: None, Autohide, Intellihide, UniversalIntellihide</long>
 			</locale>
 		</schema>
 		<schema>
@@ -144,8 +144,8 @@
 			<type>bool</type>
 			<default>false</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Fade when hiding</short>
+				<long>If true, when the dock hides it will fade away instead of sliding off screen.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -160,8 +160,8 @@
 			<type>int</type>
 			<default>0</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Opacity to fade to</short>
+				<long>If fading when hiding, this is the opacity the dock fades to. 1 is solid, 0 is invisible.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -176,8 +176,8 @@
 			<type>int</type>
 			<default>48</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Dock icon size</short>
+				<long>The size of icons on the dock.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -192,8 +192,8 @@
 			<type>bool</type>
 			<default>true</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Indicate when items have more than one window</short>
+				<long>If true, items with more than one window have two indicator dots instead of just one dot.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -209,8 +209,8 @@
 			<list_type>string</list_type>
 			<default>[]</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>List of launchers</short>
+				<long>This is the list of all the launchers on this dock.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -225,8 +225,8 @@
 			<type>int</type>
 			<default>0</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Which monitor the dock is on</short>
+				<long>This is the monitor the dock exists on.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -241,8 +241,8 @@
 			<type>bool</type>
 			<default>false</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>If the dock is a panel</short>
+				<long>If true, the dock is in panel mode and will extend to fill the entire screen edge.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -258,8 +258,8 @@
 			<list_type>string</list_type>
 			<default>[]</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Plugins on this dock</short>
+				<long>A list of plugins that are active on this dock.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -274,8 +274,8 @@
 			<type>string</type>
 			<default>Bottom</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>The dock's position</short>
+				<long>The dock's position on the screen. Possible values are: Bottom, Top, Left, Right</long>
 			</locale>
 		</schema>
 		<schema>
@@ -291,8 +291,8 @@
 			<list_type>string</list_type>
 			<default>[]</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Sorts the items on the dock</short>
+				<long>Used to sort the items on the dock.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -307,8 +307,8 @@
 			<type>bool</type>
 			<default>false</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Dock is 3d</short>
+				<long>If true, the dock is drawn as a 3d dock.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -323,8 +323,8 @@
 			<type>bool</type>
 			<default>true</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Dock manages all windows</short>
+				<long>If true, any windows without launchers will show on this dock. Exactly 1 dock must have this set to true.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -339,8 +339,8 @@
 			<type>bool</type>
 			<default>true</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Dock zooms</short>
+				<long>If true, the dock will zoom when hovered.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -355,8 +355,8 @@
 			<type>float</type>
 			<default>2.0</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Zoom size</short>
+				<long>The dock's zoom size (if enabled), as a percent.</long>
 			</locale>
 		</schema>
 		
@@ -367,8 +367,8 @@
 			<type>string</type>
 			<default></default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Docky item command to execute</short>
+				<long>The command to execute when left-clicking the Docky item or "" for default behavior (which opens the configuration dialog).</long>
 			</locale>
 		</schema>
 		<schema>
@@ -378,8 +378,8 @@
 			<type>string</type>
 			<default>Docky</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Docky item hover text</short>
+				<long>The text to show when hovering the Docky item.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -389,8 +389,8 @@
 			<type>int</type>
 			<default>0</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Docky item hue</short>
+				<long>Set the color of the Docky icon. 0 means use the GTK+ theme color.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -400,8 +400,8 @@
 			<type>bool</type>
 			<default>true</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Show the Docky item</short>
+				<long>If true, shows the Docky item on the dock managing windows.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -411,8 +411,8 @@
 			<type>bool</type>
 			<default>true</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Show Quit in Docky item menu</short>
+				<long>If true, the Docky item popup menu shows the Quit option.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -422,8 +422,8 @@
 			<type>bool</type>
 			<default>true</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Show Settings in Docky item menu</short>
+				<long>If true, the Docky item popup menu shows the Settings option.</long>
 			</locale>
 		</schema>
 		
@@ -505,8 +505,8 @@
 			<list_type>string</list_type>
 			<default>[]</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>GMail labels to check</short>
+				<long>List of custom GMail labels to check in addition to the inbox.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -516,8 +516,8 @@
 			<type>string</type>
 			<default></default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Last time checked</short>
+				<long>The last time Docky checked GMail for messages.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -527,8 +527,8 @@
 			<type>bool</type>
 			<default>true</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Show indicator dot for unread mail</short>
+				<long>If true, when there is new unread mail Docky will show the indicator dot.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -538,8 +538,8 @@
 			<type>bool</type>
 			<default>true</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Show a notify for unread mail</short>
+				<long>If true, shows a notify message for new unread mail.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -549,8 +549,8 @@
 			<type>int</type>
 			<default>15</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>How often to check</short>
+				<long>How often (in mins) to check for new mail.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -560,8 +560,8 @@
 			<type>string</type>
 			<default></default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>GMail username</short>
+				<long>The GMail username to check.</long>
 			</locale>
 		</schema>
 		
@@ -573,8 +573,8 @@
 			<list_type>int</list_type>
 			<default>[]</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>NPR stations</short>
+				<long>List of NPR stations to display.</long>
 			</locale>
 		</schema>
 		
@@ -585,8 +585,8 @@
 			<type>bool</type>
 			<default>false</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Show most recent doc</short>
+				<long>If true, will try to show the most recent document on the dock.</long>
 			</locale>
 		</schema>
 		
@@ -597,8 +597,8 @@
 			<type>int</type>
 			<default>0</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Currently selected item</short>
+				<long>The currently selected item in the session manager menu.</long>
 			</locale>
 		</schema>
 		
@@ -609,8 +609,8 @@
 			<type>bool</type>
 			<default>false</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Clear finished timers</short>
+				<long>If true, timers will disappear when they time out.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -620,8 +620,8 @@
 			<type>bool</type>
 			<default>false</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Start all new timers</short>
+				<long>If true, all new timers will automatically start.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -631,8 +631,8 @@
 			<type>int</type>
 			<default>30</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>New timer length</short>
+				<long>The default time (in secs) for any new timers.</long>
 			</locale>
 		</schema>
 		
@@ -644,8 +644,8 @@
 			<list_type>string</list_type>
 			<default>[]</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Weather locations</short>
+				<long>The list of weather locations to check.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -655,8 +655,8 @@
 			<type>bool</type>
 			<default>false</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>Use metric units</short>
+				<long>If true, use metric units when showing weather.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -666,8 +666,8 @@
 			<type>string</type>
 			<default>Weather Underground</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>The weather source</short>
+				<long>The name of the weather source to get weather information from.</long>
 			</locale>
 		</schema>
 		<schema>
@@ -677,8 +677,8 @@
 			<type>int</type>
 			<default>30</default>
 			<locale name="C">
-				<short></short>
-				<long></long>
+				<short>How often to check</short>
+				<long>How often to check for new weather information.</long>
 			</locale>
 		</schema>
 	</schemalist>
