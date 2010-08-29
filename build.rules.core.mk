@@ -6,13 +6,18 @@ include $(top_srcdir)/build.rules.common.mk
 
 moduledir = $(pkglibdir)
 # Install libraries as data; there's no need for them to be excutable
-module_DATA = $(foreach file,$(filter %.dll,$(OUTPUT_FILES)),$(file) $(file).mdb) $(foreach file,$(filter %.exe,$(OUTPUT_FILES)),$(file).mdb)
+module_DATA = \
+	$(foreach file,$(filter %.dll,$(OUTPUT_FILES)),$(file)) \
+	$(foreach file,$(filter %.dll.mdb,$(OUTPUT_FILES)),$(file)) \
+	$(foreach file,$(filter %.exe.mdb,$(OUTPUT_FILES)),$(file))
 # Install executables as scripts
 module_SCRIPTS = $(filter %.exe,$(OUTPUT_FILES))
 
 all: $(ASSEMBLY_FILE)
 
+if ENABLE_DEBUG
 $(ASSEMBLY_FILE).mdb: $(ASSEMBLY_FILE)
+endif
 
 build-debug :
 	@echo $(COMPONENT_REFERENCES)

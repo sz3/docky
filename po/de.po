@@ -7,38 +7,38 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: Rico Tzschichholz <ricotz@t-online.de>\n"
-"POT-Creation-Date: 2010-07-22 07:29+0200\n"
-"PO-Revision-Date: 2010-08-02 17:14+0000\n"
+"POT-Creation-Date: 2010-08-16 12:56+0200\n"
+"PO-Revision-Date: 2010-08-07 01:06+0000\n"
 "Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-08-05 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-08-25 06:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:147
+#: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Search Docklets..."
 msgstr "Docklets durchsuchen …"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:163
+#: ../Docky/Docky/ConfigurationWindow.cs:164
 msgid "Search Helpers..."
 msgstr "Erweiterungen durchsuchen …"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:227
+#: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid "Click on any dock to configure."
 msgstr "Klicken Sie auf ein Dock um dessen Einstellungen zu ändern."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:228
+#: ../Docky/Docky/ConfigurationWindow.cs:229
 msgid "Drag any dock to reposition."
 msgstr "Ziehen Sie ein Dock um es neu zu positionieren."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:293
+#: ../Docky/Docky/ConfigurationWindow.cs:294
 msgid "Delete the currently selected dock?"
 msgstr "Das ausgewählte Dock löschen?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:295
+#: ../Docky/Docky/ConfigurationWindow.cs:296
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -46,18 +46,18 @@ msgstr ""
 "Wenn Sie das gewählte Dock löschen,\n"
 "werden alle Einstellungen dieses Docks verloren gehen."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:302
+#: ../Docky/Docky/ConfigurationWindow.cs:303
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
 msgstr "Dock _löschen"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:418
-#: ../Docky/Docky/ConfigurationWindow.cs:438
+#: ../Docky/Docky/ConfigurationWindow.cs:419
+#: ../Docky/Docky/ConfigurationWindow.cs:439
 msgid "_Select"
 msgstr "_Auswählen"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:421
-#: ../Docky/Docky/ConfigurationWindow.cs:441
+#: ../Docky/Docky/ConfigurationWindow.cs:422
+#: ../Docky/Docky/ConfigurationWindow.cs:442
 msgid ".tar Archives"
 msgstr ".tar Archiv"
 
@@ -97,7 +97,7 @@ msgstr "Dieses Docklet zum ausgewählten Dock hinzufügen"
 msgid "Remove this docklet from the selected dock"
 msgstr "Dieses Docklet vom ausgewählten Dock entfernen"
 
-#: ../Docky/Docky/Docky.cs:123
+#: ../Docky/Docky/Docky.cs:113
 msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
@@ -133,7 +133,7 @@ msgstr "Läuft"
 msgid "Stopped"
 msgstr "Gestoppt"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:332
+#: ../Docky/Docky/Interface/DockPreferences.cs:333
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
@@ -141,47 +141,47 @@ msgstr ""
 "Fenster, die keinem bestehenden Starter zugeordnet werden können, werden "
 "diesem Dock hinzugefügt."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:683
+#: ../Docky/Docky/Interface/DockPreferences.cs:692
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 "<i>Niemals verbergen, maximierte Fenster überdecken das Dock nicht.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:686
+#: ../Docky/Docky/Interface/DockPreferences.cs:695
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Verbergen, wenn sich kein Mauszeiger darüber befindet.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:689
+#: ../Docky/Docky/Interface/DockPreferences.cs:698
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Verbergen, wenn es das aktive Anwendungsfenster behindert.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:692
+#: ../Docky/Docky/Interface/DockPreferences.cs:701
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Verbergen, wenn es ein Anwendungsfenster behindert.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:381
+#: ../Docky/Docky/Interface/DockWindow.cs:378
 msgid "Drag to reposition"
 msgstr "Ziehen um neu zu positionieren"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:393
-#: ../Docky/Docky/Interface/DockWindow.cs:407
+#: ../Docky/Docky/Interface/DockWindow.cs:390
+#: ../Docky/Docky/Interface/DockWindow.cs:404
 msgid "Drop to add to dock"
 msgstr "Loslassen um zum Dock hinzuzufügen"
 
-#: ../Docky/Docky/Items/DockyItem.cs:133
+#: ../Docky/Docky/Items/DockyItem.cs:132
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:244
 msgid "_Settings"
 msgstr "_Einstellungen"
 
-#: ../Docky/Docky/Items/DockyItem.cs:134
+#: ../Docky/Docky/Items/DockyItem.cs:133
 msgid "_About"
 msgstr "_Info"
 
-#: ../Docky/Docky/Items/DockyItem.cs:135
+#: ../Docky/Docky/Items/DockyItem.cs:134
 msgid "_Help"
 msgstr "_Hilfe"
 
-#: ../Docky/Docky/Items/DockyItem.cs:137
+#: ../Docky/Docky/Items/DockyItem.cs:136
 msgid "_Quit Docky"
 msgstr "Docky _beenden"
 
@@ -294,79 +294,79 @@ msgstr "Ver_größerung:"
 msgid "Drop to open with {0}"
 msgstr "Loslassen um mit {0} zu öffnen"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:173
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:171
 msgid "New _Window"
 msgstr "_Neues Fenster"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:175
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:173
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
 msgstr "_Öffnen"
 
-#: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:69
+#: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:70
 msgid "Reset Color"
 msgstr "Farbe zurücksetzen"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:477
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:479
 msgid "_Pin to Dock"
 msgstr "An Dock _anheften"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:75
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:72
 #, csharp-format
 msgid "Drop to move to {0}"
 msgstr "Loslassen um nach {0} zu verschieben"
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:239
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:191
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:236
 msgid "Error performing drop action"
 msgstr "Fehler beim Ausführen der Auslass-Aktion"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:191
 msgid "Not enough free space on destination."
 msgstr ""
 "Auf dem Zieldatenträger ist nicht genügend freier Speicherplatz vorhanden."
 
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:208
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:211
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:214
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:246
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:243
 msgid "Complete"
 msgstr "Abgeschlossen"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:224
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:221
 msgid "Moving"
 msgstr "Verschieben …"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:230
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:227
 msgid "Copying"
 msgstr "Kopieren …"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:264
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:261
 msgid "Open"
 msgstr "Öffnen"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:265
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:262
 msgid "Open Containing Folder"
 msgstr "Beinhaltenden Ordner öffnen"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:257
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:258
 msgid "Unma_ximize"
 msgstr "Ma_ximierung aufheben"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:260
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:261
 msgid "Ma_ximize"
 msgstr "Ma_ximieren"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:265
 msgid "_Restore"
 msgstr "_Wiederherstellen"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:267
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:268
 msgid "Mi_nimize"
 msgstr "Mi_nimieren"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:270
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:271
 msgid "_Close All"
 msgstr "_Alle schließen"
 
@@ -442,19 +442,19 @@ msgstr "verbleibend "
 msgid "Computer"
 msgstr "Rechner"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:430
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "Di_gital Clock"
 msgstr "Di_gitale Uhr"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:436
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
 msgid "24-Hour _Clock"
 msgstr "24-Stunden _Uhr"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:442
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:443
 msgid "Show _Date"
 msgstr "_Datum anzeigen"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:448
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:449
 msgid "Select _Theme"
 msgstr "_Thema wählen"
 
@@ -483,40 +483,40 @@ msgstr "_Aktualisieren alle:"
 msgid "minutes"
 msgstr "Minuten"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:174
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:181
 msgid "Click to set username and password."
 msgstr "Klicken Sie, um den Benutzernamen und das Passwort einzustellen"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:233
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:240
 msgid "(no subject)"
 msgstr "(kein Betreff)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:247
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:254
 #, csharp-format
 msgid "You have {0} new, unread messages"
 msgstr "Sie haben {0} neue ungelesen Nachrichten"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:251
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:258
 #, csharp-format
 msgid "From: {0}"
 msgstr "Von: {0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:265
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:270
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:272
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:277
 msgid "Feed Error"
 msgstr "Feed-Fehler"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:275
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:283
 msgid "Invalid Username"
 msgstr "Ungültiger Benutzername"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:279
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:283
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:287
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:293
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:174
 msgid "Network Error"
 msgstr "Netzwerkfehler"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:288
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:298
 msgid "General Error"
 msgstr "Allgemeiner Fehler"
 
@@ -668,163 +668,163 @@ msgstr ""
 msgid "_Clear Recent Documents..."
 msgstr "_Liste der zuletzt geöffneten Dokumente löschen …"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:152
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
 msgid "Lock Screen"
 msgstr "Bildschirm sperren"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:156
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:157
 msgid "Log Out..."
 msgstr "Abmelden …"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:157
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
 msgid "Log Out"
 msgstr "Abmelden"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:159
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
 msgstr ""
 "Sind Sie sicher, dass Sie alle Programme schließen und sich vom Rechner "
 "abmelden wollen?"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:163
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:164
 msgid "Suspend"
 msgstr "Bereitschaft"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:168
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:169
 msgid "Hibernate"
 msgstr "Ruhezustand"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:174
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:175
 msgid "Restart..."
 msgstr "Neu starten …"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:175
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
 msgid "Restart"
 msgstr "Neu starten"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:177
 msgid "Are you sure you want to close all programs and restart the computer?"
 msgstr ""
 "Sind Sie sicher, dass Sie alle Programme schließen und den Rechner neu "
 "starten möchten?"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:181
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:182
 msgid "Shut Down..."
 msgstr "Ausschalten ..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:182
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:183
 msgid "Shut Down"
 msgstr "Ausschalten"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:183
+#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:184
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
 msgstr ""
 "Sind Sie sicher, dass Sie alle Programme schließen und den Rechner "
 "herunterfahren möchten?"
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:90
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:86
 #, csharp-format
 msgid "A timer set for {0} has expired."
 msgstr "Ein Timer ist nach {0} abgelaufen."
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:236
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:232
 msgid "Time remaining:"
 msgstr "Verbleibende Zeit:"
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:238
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:234
 msgid "Timer paused, time remaining:"
 msgstr "Timer angehalten, verbleibende Zeit:"
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:249
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:245
 msgid "Set the timer's label to:"
 msgstr "Name für den Timer:"
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:255
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:289
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:251
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:285
 msgid "_Set Label"
 msgstr "_Name festlegen"
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:280
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:276
 msgid "_Pause Timer"
 msgstr "_Pausiere Timer"
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:280
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:276
 msgid "_Start Timer"
 msgstr "_Starte Timer"
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:284
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:280
 msgid "_Remove Timer"
 msgstr "_Entferne Timer"
 
-#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:62
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:56
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "Stunde"
 msgstr[1] "Stunden"
 
-#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:66
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:60
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "Minute"
 msgstr[1] "Minuten"
 
-#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:71
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:65
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "Sekunde"
 msgstr[1] "Sekunden"
 
-#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:138
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:132
 #, csharp-format
 msgid "Click to create a timer for {0}."
 msgstr "Klicken, um einen Timer gesetzt auf {0} zu starten."
 
-#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:155
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:149
 msgid "Automatically _Start Timers"
 msgstr "Timer beim _Erzeugen starten"
 
-#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:159
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:153
 msgid "Automatically _Dismiss Timers"
 msgstr "Timer nach _Ablauf entfernen"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:50
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:55
 msgid "Drop to move to Trash"
 msgstr "Loslassen um in den Müll zu verschieben"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:77
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:82
 msgid "No items in Trash"
 msgstr "Keine Dateien im Müll"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:79
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:84
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
 msgstr[0] "{0} Datei im Müll"
 msgstr[1] "{0} Dateien im Müll"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:164
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:169
 msgid "Restore Files"
 msgstr "Dateien wiederherstellen"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:195
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:200
 msgid "_Open Trash"
 msgstr "Müll _öffnen"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:197
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:234
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:202
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:233
 msgid "Empty _Trash"
 msgstr "_Müll leeren"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:226
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:225
 msgid "Empty all of the items from the trash?"
 msgstr ""
 "Sind sie sicher, dass Sie alle\n"
 "Objekte im Müll dauerhaft löschen\n"
 "wollen?"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:228
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:227
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
@@ -929,18 +929,18 @@ msgstr "_Morgen"
 msgid "{0} humidity"
 msgstr "{0} Luftfeuchtigkeit"
 
-#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:69
-#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:219
+#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:70
+#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:220
 msgid "Switch Desks"
-msgstr ""
+msgstr "Arbeitsfläche wechseln"
 
-#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:170
+#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:171
 msgid "Desk"
-msgstr ""
+msgstr "Arbeitsfläche"
 
-#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:172
+#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:173
 msgid "Virtual Desk"
-msgstr ""
+msgstr "Virtuelle Arbeitsfläche"
 
 #~ msgid "Network Error: "
 #~ msgstr "Netzwerkfehler: "

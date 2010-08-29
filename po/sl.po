@@ -1,21 +1,21 @@
-# Lithuanian translation for docky
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# Slovenian translation for docky
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the docky package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-08-16 12:56+0200\n"
-"PO-Revision-Date: 2010-06-28 06:51+0000\n"
-"Last-Translator: Mantas Kriaučiūnas <mantas@akl.lt>\n"
-"Language-Team: Lithuanian <lt@li.org>\n"
+"PO-Revision-Date: 2010-08-24 10:22+0000\n"
+"Last-Translator: Andrej Znidarsic <andrej.znidarsic@gmail.com>\n"
+"Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"(n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
+"n%100==4 ? 3 : 0);\n"
 "X-Launchpad-Export-Date: 2010-08-25 06:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
@@ -29,40 +29,42 @@ msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid "Click on any dock to configure."
-msgstr ""
+msgstr "Za nastavitve kliknite na katerokoli sidrišče."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:229
 msgid "Drag any dock to reposition."
-msgstr ""
+msgstr "Za premestitev povlecite izbrano sidrišče."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:294
 msgid "Delete the currently selected dock?"
-msgstr ""
+msgstr "Želite izbrisati trenutno izbrano sidrišče?"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:296
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
+"Če izbrišete izbrano sidrišče, s tem izgubite\n"
+"tudi vse nastavitve tega sidrišča."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:303
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
-msgstr ""
+msgstr "_Izbriši sidrišče"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:419
 #: ../Docky/Docky/ConfigurationWindow.cs:439
 msgid "_Select"
-msgstr "_Pasirinkti"
+msgstr "_Izberi"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:422
 #: ../Docky/Docky/ConfigurationWindow.cs:442
 msgid ".tar Archives"
-msgstr ".tar archyvai"
+msgstr "arhivi .tar"
 
 #: ../Docky/Docky/DockletTile.cs:51
 msgid "Author"
-msgstr "Autorius"
+msgstr "Avtor"
 
 #: ../Docky/Docky/DockletTile.cs:86
 msgid "Move this docklet up on the selected dock"
@@ -104,11 +106,11 @@ msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:42
 msgid "Status"
-msgstr "Būklė"
+msgstr "Stanje"
 
 #: ../Docky/Docky/HelperTile.cs:59
 msgid "Uninstall"
-msgstr "Išdiegti"
+msgstr "Odstrani"
 
 #: ../Docky/Docky/HelperTile.cs:71
 msgid "About this helper"
@@ -124,25 +126,27 @@ msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Running"
-msgstr "Veikia"
+msgstr "V teku"
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Stopped"
-msgstr "Sustabdytas"
+msgstr "Zaustavljeno"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:333
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
+"Omogočena možnost določa, da so okna, ki na sidrišču še nimajo "
+"zaganjalnikov, dodana na to sidrišče."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:692
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
-msgstr ""
+msgstr "<i>Nikoli skrito, razpeta okna ne prekrivajo sidrišča.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:695
 msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr ""
+msgstr "<i>Skrito, kadar miškin kazalec ni nad njim.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:698
 msgid "<i>Hides when dock obstructs the active application.</i>"
@@ -154,38 +158,38 @@ msgstr ""
 
 #: ../Docky/Docky/Interface/DockWindow.cs:378
 msgid "Drag to reposition"
-msgstr ""
+msgstr "Za premestitev povlecite."
 
 #: ../Docky/Docky/Interface/DockWindow.cs:390
 #: ../Docky/Docky/Interface/DockWindow.cs:404
 msgid "Drop to add to dock"
-msgstr ""
+msgstr "Spustite za dodajanje na sidrišče"
 
 #: ../Docky/Docky/Items/DockyItem.cs:132
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:244
 msgid "_Settings"
-msgstr "_Nustatymai"
+msgstr "_Nastavitve"
 
 #: ../Docky/Docky/Items/DockyItem.cs:133
 msgid "_About"
-msgstr "_Apie"
+msgstr "_O programu"
 
 #: ../Docky/Docky/Items/DockyItem.cs:134
 msgid "_Help"
-msgstr "_Pagalba"
+msgstr "Pomo_č"
 
 #: ../Docky/Docky/Items/DockyItem.cs:136
 msgid "_Quit Docky"
-msgstr ""
+msgstr "_Končaj Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
 msgid "Docky Settings"
-msgstr ""
+msgstr "Nastavitve programa Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
 msgid "_Start When User Logs In"
-msgstr ""
+msgstr "_Zaženi ob prijavi uporabnika"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
@@ -194,34 +198,34 @@ msgstr "_Tema:"
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
 msgid "_Install"
-msgstr "Į_diegti"
+msgstr "_Namesti"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
 msgid "<b>General Options</b>"
-msgstr "<b>Bendri nustatymai</b>"
+msgstr "<b>Splošne možnosti</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
-msgstr ""
+msgstr "<b>Nastavitve sidrišča</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
-msgstr ""
+msgstr "Sidrišča"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
 msgid "All"
-msgstr "Visi"
+msgstr "Vsa"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
 msgid "Enabled"
-msgstr "Įjungti"
+msgstr "Omogočeno"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
 msgid "Disabled"
-msgstr "Išjungti"
+msgstr "Onemogočeno"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
 msgid "Docklets"
@@ -229,7 +233,7 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
 msgid "Usable"
-msgstr ""
+msgstr "Uporabno"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
@@ -237,19 +241,19 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
 msgid "_New Dock"
-msgstr ""
+msgstr "_Novo sidrišče"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
 msgid "None"
-msgstr "Jokio"
+msgstr "Brez"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
 msgid "Autohide"
-msgstr "Slėptis automatiškai"
+msgstr "Samodejno skrivanje"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "Intellihide"
-msgstr ""
+msgstr "Pametno skrivanje"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Window Dodge"
@@ -257,111 +261,111 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
 msgid "_Fade On Hide"
-msgstr ""
+msgstr "_Zbledi ob skritju"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
 msgid "_Icon Size:"
-msgstr ""
+msgstr "_Velikost ikon:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:132
 msgid "_Hiding:"
-msgstr "_Slėpimasis:"
+msgstr "_Skrivanje:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
 msgid "_Panel Mode"
-msgstr ""
+msgstr "Način _pladnja"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
 msgid "3D Back_ground"
-msgstr ""
+msgstr "3D Oza_dje"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
 msgid "_Manage Windows Without Launcher"
-msgstr ""
+msgstr "_Upravljaj okna brez zaganjalnika"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
 msgid "_Zoom:"
-msgstr "_Mastelis:"
+msgstr "_Povečava:"
 
 #: ../Docky.Items/Docky.Items/AbstractDockItem.cs:120
 #, csharp-format
 msgid "Drop to open with {0}"
-msgstr ""
+msgstr "Spusti za odpiranje z {0}"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:171
 msgid "New _Window"
-msgstr "Naujas _langas"
+msgstr "Novo _okno"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:173
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
-msgstr "_Atverti"
+msgstr "_Odpri"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:70
 msgid "Reset Color"
-msgstr ""
+msgstr "Ponastavi barvo"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:479
 msgid "_Pin to Dock"
-msgstr ""
+msgstr "_Pripni na sidrišče"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:72
 #, csharp-format
 msgid "Drop to move to {0}"
-msgstr ""
+msgstr "Spustite za premik k {0}"
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:191
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:236
 msgid "Error performing drop action"
-msgstr ""
+msgstr "Napaka med dejanjem spuščanja."
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:191
 msgid "Not enough free space on destination."
-msgstr ""
+msgstr "Na cilju ni dovolj prostega prostora."
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:208
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:211
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:243
 msgid "Complete"
-msgstr ""
+msgstr "Dokončano"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:221
 msgid "Moving"
-msgstr ""
+msgstr "Premikanje"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:227
 msgid "Copying"
-msgstr ""
+msgstr "Kopiranje"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:261
 msgid "Open"
-msgstr "Atverti"
+msgstr "Odpri"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:262
 msgid "Open Containing Folder"
-msgstr ""
+msgstr "Odpri vsebujočo mapo"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:258
 msgid "Unma_ximize"
-msgstr "_Grąžinti iš išdidinimo"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:261
 msgid "Ma_ximize"
-msgstr "Iš_didinti"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:265
 msgid "_Restore"
-msgstr "_Atstatyti"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:268
 msgid "Mi_nimize"
-msgstr "_Sumažinti"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:271
 msgid "_Close All"
-msgstr "_Užverti visus"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
@@ -370,7 +374,7 @@ msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:44
 msgid "Validating..."
-msgstr "Tikrinama..."
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:45
 #, csharp-format
@@ -391,11 +395,11 @@ msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:87
 msgid "Password"
-msgstr "Slaptažodis"
+msgstr "Geslo"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:108
 msgid "Username"
-msgstr "Naudotojo vardas"
+msgstr "Uporabniško ime"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
 msgid "<i>Verify and save account information</i>"
@@ -433,27 +437,27 @@ msgstr ""
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:86
 msgid "Computer"
-msgstr "Kompiuteris"
+msgstr "Računalnik"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "Di_gital Clock"
-msgstr "Skaitmeninis _laikrodis"
+msgstr "Di_gitalna ura"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
 msgid "24-Hour _Clock"
-msgstr ""
+msgstr "24-urni _prikaz"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:443
 msgid "Show _Date"
-msgstr "Rodyti _datą"
+msgstr "Prikaži _datum"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:449
 msgid "Select _Theme"
-msgstr "Pasirinkite _Temą"
+msgstr "Izberi _temo"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
-msgstr "Temos"
+msgstr "Teme"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:62
 msgid "Theme"
@@ -461,20 +465,20 @@ msgstr "Tema"
 
 #: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:42
 msgid "Show Desktop"
-msgstr "Rodyti darbastalį"
+msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
 msgid "_Add Label"
-msgstr ""
+msgstr "_Dodaj oznako"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:113
 msgid "Check e_very:"
-msgstr ""
+msgstr "Preveri vs_akih:"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:123
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:186
 msgid "minutes"
-msgstr "min."
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:181
 msgid "Click to set username and password."
@@ -482,7 +486,7 @@ msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:240
 msgid "(no subject)"
-msgstr ""
+msgstr "(brez zadeve)"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:254
 #, csharp-format
@@ -492,7 +496,7 @@ msgstr ""
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:258
 #, csharp-format
 msgid "From: {0}"
-msgstr ""
+msgstr "Od: {0}"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:272
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:277
@@ -501,40 +505,42 @@ msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:283
 msgid "Invalid Username"
-msgstr "Neteisingas naudotojo vardas"
+msgstr "Neveljavno uporabniško ime"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:293
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:174
 msgid "Network Error"
-msgstr "Tinklo klaida"
+msgstr "Napaka omrežja"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:298
 msgid "General Error"
-msgstr "Bendra klaida"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
 msgid "GMail Configuration"
-msgstr ""
+msgstr "Nastavitve GMail"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 msgid "No unread mail"
-msgstr ""
+msgstr "Ni neprebrane pošte"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:98
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} neprebranih sporočil"
+msgstr[1] "{0} neprebrano sporočilo"
+msgstr[2] "{0} neprebranih sporočili"
+msgstr[3] "{0} neprabranih sporočil"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:119
 msgid "Checking mail..."
-msgstr ""
+msgstr "Iskanje pošte..."
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "_View "
-msgstr "_Rodyti "
+msgstr "_Pogled "
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
 msgid "_Compose Mail"
@@ -546,11 +552,11 @@ msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
 msgid "New Mail"
-msgstr "Naujas laiškas"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:236
 msgid "Check _Mail"
-msgstr "_Tikrinti paštą"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
@@ -562,32 +568,32 @@ msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr "Prisijungti"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
-msgstr "Nuo: "
+msgstr ""
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Eject"
-msgstr "_Išimti"
+msgstr ""
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Unmount"
-msgstr "_Atjungti"
+msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:53
 msgid "Network Manager"
-msgstr "Tinklo tvarkytuvė"
+msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
-msgstr "Jungiamasi..."
+msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:101
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:166
 msgid "Disconnected"
-msgstr "Atsijungta"
+msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
@@ -600,7 +606,7 @@ msgstr ""
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:78
 msgid "S_earch"
-msgstr "_Paieška"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
@@ -621,7 +627,7 @@ msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:111
 msgid "Home Page"
-msgstr "Namų puslapis"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:118
 msgid "Program Schedule"
@@ -629,7 +635,7 @@ msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:125
 msgid "Donate"
-msgstr "Paaukoti"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:132
 msgid "Live Streams"
@@ -637,11 +643,11 @@ msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:170
 msgid "Settings"
-msgstr "Nustatymai"
+msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:56
 msgid "Clear the Recent Documents list?"
-msgstr "Išvalyti paskutiniųjų dokumentų sąrašą?"
+msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:58
 msgid "Clear Recent Documents"
@@ -660,56 +666,53 @@ msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
 msgid "Lock Screen"
-msgstr "Užrakinti ekraną"
+msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:157
 msgid "Log Out..."
-msgstr "Atsijungti..."
+msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
 msgid "Log Out"
-msgstr "Atsijungti"
+msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:159
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
 msgstr ""
-"Ar tikrai norite išjungti visas programas ir atsijungti nuo dabartinio "
-"seanso?"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:164
 msgid "Suspend"
-msgstr "Užmigdyti"
+msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:169
 msgid "Hibernate"
-msgstr "Hibernuoti"
+msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:175
 msgid "Restart..."
-msgstr "Paleisti iš naujo..."
+msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
 msgid "Restart"
-msgstr "Paleisti iš naujo"
+msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:177
 msgid "Are you sure you want to close all programs and restart the computer?"
 msgstr ""
-"Ar tikrai norite išjungti visas programas ir paleisti kompiuterį iš naujo?"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:182
 msgid "Shut Down..."
-msgstr "Išjungti..."
+msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:183
 msgid "Shut Down"
-msgstr "Išjungti"
+msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:184
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
-msgstr "Ar tikrai norite uždaryti visas programas ir išjungti kompiuterį?"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:86
 #, csharp-format
@@ -718,7 +721,7 @@ msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:232
 msgid "Time remaining:"
-msgstr "Liko laiko:"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:234
 msgid "Timer paused, time remaining:"
@@ -748,23 +751,20 @@ msgstr ""
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:56
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] "valanda"
-msgstr[1] "valandos"
-msgstr[2] "valandų"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:60
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] "minutė"
-msgstr[1] "minutės"
-msgstr[2] "minučių"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:65
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] "sekundė"
-msgstr[1] "sekundės"
-msgstr[2] "sekundžių"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:132
 #, csharp-format
@@ -800,16 +800,16 @@ msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:200
 msgid "_Open Trash"
-msgstr "_Atverti šiukšlinę"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:202
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:233
 msgid "Empty _Trash"
-msgstr "Iš_valyti šiukšlinę"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:225
 msgid "Empty all of the items from the trash?"
-msgstr "Ištrinti visus elementus iš šiukšlinės?"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:227
 msgid ""
@@ -828,7 +828,7 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:136
 msgid "_Search"
-msgstr "_Ieškoti"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:176
 msgid "Automatically Update _Every"
@@ -864,11 +864,11 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
-msgstr "Nieko nerasta."
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
-msgstr "Orų prognozės konfigūracija"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
 msgid "Click to add a location."
@@ -884,7 +884,7 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "Forecasts"
-msgstr "Orų prognozės"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:252
 msgid "Check _Weather"
@@ -892,11 +892,11 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
 msgid "_Today"
-msgstr "Š_iandien"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
 msgid "T_omorrow"
-msgstr "_Rytoj"
+msgstr ""
 
 #. draw humidity
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:328

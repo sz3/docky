@@ -129,7 +129,6 @@ if test -z "$ENABLE_DEBUG_TRUE" ; then
 	MCS_FLAGS+=" -debug -d:DEBUG"
 fi
 dnl }}}
-AM_CONDITIONAL(ENABLE_DEBUG, true)
 
 dnl {{{ enable release build configuration
 AC_ARG_ENABLE(release,
