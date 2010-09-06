@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-08-25 06:48+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 11:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
@@ -488,7 +488,7 @@ msgstr "(ללא נושא)"
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:254
 #, csharp-format
 msgid "You have {0} new, unread messages"
-msgstr ""
+msgstr "יש לך {0} הודעות חדשות שלא נקראו"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:258
 #, csharp-format
@@ -871,11 +871,11 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
-msgstr ""
+msgstr "לא נמצאו תוצאות"
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
-msgstr ""
+msgstr "הגדרות מזג האוויר"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
 msgid "Click to add a location."
@@ -883,7 +883,7 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
 msgid "Fetching data..."
-msgstr ""
+msgstr "מאחזר נתונים..."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Radar _Map"
@@ -891,19 +891,19 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "Forecasts"
-msgstr ""
+msgstr "תחזיות"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:252
 msgid "Check _Weather"
-msgstr ""
+msgstr "בדוק את _מזג האוויר"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
 msgid "_Today"
-msgstr ""
+msgstr "_היום"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
 msgid "T_omorrow"
-msgstr ""
+msgstr "מ_חר"
 
 #. draw humidity
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:328
@@ -964,3 +964,18 @@ msgstr ""
 
 #~ msgid "Network Error: "
 #~ msgstr "שגיאת רשת "
+
+#~ msgid "Sunrise"
+#~ msgstr "זריחה"
+
+#~ msgid "Sunset"
+#~ msgstr "שקיעה"
+
+#~ msgid "Wind"
+#~ msgstr "רוח"
+
+#~ msgid "Direction"
+#~ msgstr "כיוון"
+
+#~ msgid "Humidity"
+#~ msgstr "לחות"

@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-08-16 12:56+0200\n"
-"PO-Revision-Date: 2010-08-07 02:44+0000\n"
-"Last-Translator: Robert Dyer <Unknown>\n"
+"PO-Revision-Date: 2010-08-26 07:13+0000\n"
+"Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-08-25 06:48+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 11:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
@@ -25,7 +25,7 @@ msgstr "Szukaj Dockletu"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:164
 msgid "Search Helpers..."
-msgstr "Wyszukaj Dodatki"
+msgstr "Wyszukaj Pomagacze..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid "Click on any dock to configure."
@@ -102,6 +102,8 @@ msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
 msgstr ""
+"Docky wymaga kompozycji, aby pracować poprawnie. Niektóre opcje są "
+"wyłączone, jak również tematy/animacje będą wyglądać niepoprawnie. "
 
 #: ../Docky/Docky/HelperTile.cs:42
 msgid "Status"
@@ -178,11 +180,11 @@ msgstr "_O programie"
 
 #: ../Docky/Docky/Items/DockyItem.cs:134
 msgid "_Help"
-msgstr ""
+msgstr "_Pomoc"
 
 #: ../Docky/Docky/Items/DockyItem.cs:136
 msgid "_Quit Docky"
-msgstr "Zamknij"
+msgstr "_Zamknij Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
 msgid "Docky Settings"
@@ -190,11 +192,11 @@ msgstr "Ustawienia Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
 msgid "_Start When User Logs In"
-msgstr ""
+msgstr "_Start w czasie logowania"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
-msgstr "_Motyw"
+msgstr "_Motyw:"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
@@ -203,11 +205,11 @@ msgstr "_Instaluj"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
 msgid "<b>General Options</b>"
-msgstr "<b>Opcje ogólne</b>"
+msgstr "<b>Opcje Ogólne</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
-msgstr "<b>Konfiguracja Panela</b>"
+msgstr "<b>Konfiguracja Doku</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
@@ -242,7 +244,7 @@ msgstr "Wspomagacze"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
 msgid "_New Dock"
-msgstr "Nowy Dock"
+msgstr "_Nowy Dock"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
 msgid "None"
@@ -262,7 +264,7 @@ msgstr "Unikanie Okna"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
 msgid "_Fade On Hide"
-msgstr "Wygaś przy ukrywaniu."
+msgstr "_Wygaś przy ukrywaniu"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
 msgid "_Icon Size:"
@@ -270,11 +272,11 @@ msgstr "Rozmiar _ikon:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:132
 msgid "_Hiding:"
-msgstr "Ukrywanie"
+msgstr "_Ukrywanie:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
 msgid "_Panel Mode"
-msgstr "Wyświetlanie jako panel"
+msgstr "Wyświetlanie jako _panel"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
 msgid "3D Back_ground"
@@ -308,7 +310,7 @@ msgstr "Resetuj kolor"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:479
 msgid "_Pin to Dock"
-msgstr "Przypnij do panelu"
+msgstr "Przypnij do docku"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:72
 #, csharp-format
@@ -460,11 +462,11 @@ msgstr "Wybierz motyw"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
-msgstr "Style"
+msgstr "Tematy"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:62
 msgid "Theme"
-msgstr "Styl"
+msgstr "Temat"
 
 #: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:42
 msgid "Show Desktop"
@@ -494,7 +496,7 @@ msgstr "(brak tematu)"
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:254
 #, csharp-format
 msgid "You have {0} new, unread messages"
-msgstr ""
+msgstr "Masz {0} nowych, nieprzeczytanych wiadomości"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:258
 #, csharp-format
@@ -504,7 +506,7 @@ msgstr "Od: {0}"
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:272
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:277
 msgid "Feed Error"
-msgstr "Nagłówek"
+msgstr "Błąd Nagłówka"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:283
 msgid "Invalid Username"
@@ -534,6 +536,7 @@ msgid "{0} unread message"
 msgid_plural "{0} unread messages"
 msgstr[0] "{0} nieprzeczytana wiadomość"
 msgstr[1] "{0} nieprzeczytanych wiadomości"
+msgstr[2] "{0} nieprzeczytanych wiadomości"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:119
 msgid "Checking mail..."
@@ -549,7 +552,7 @@ msgstr "Utwórz wiadomość"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:211
 msgid "View C_ontacts"
-msgstr ""
+msgstr "Zobacz K_ontakty"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
 msgid "New Mail"
@@ -628,7 +631,7 @@ msgstr "Nacijnij, aby dodać stacje NPR"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:111
 msgid "Home Page"
-msgstr ""
+msgstr "Strona domowa"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:118
 msgid "Program Schedule"
@@ -636,7 +639,7 @@ msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:125
 msgid "Donate"
-msgstr ""
+msgstr "Darowizna"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:132
 msgid "Live Streams"
@@ -648,11 +651,11 @@ msgstr "Ustawienia"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:56
 msgid "Clear the Recent Documents list?"
-msgstr ""
+msgstr "Wyczyścić listę ostatnio otwieranych dokumentów?"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:58
 msgid "Clear Recent Documents"
-msgstr ""
+msgstr "Wyczyść listę ostatnio używanych dokumentów"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:60
 msgid ""
@@ -660,60 +663,64 @@ msgid ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
+"Jeżeli zostanie wyczyszczona lista ostatnich dokumentów, wyczyszczone "
+"zostaną:\n"
+"• Wszystkie elementy z menu Miejsca → Ostatnie dokumenty.\n"
+"• Wszystkie elementy z listy ostatnich dokumentów we wszystkich programach."
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:81
 msgid "_Clear Recent Documents..."
-msgstr ""
+msgstr "_Wyczyść ostatnie dokumenty"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
 msgid "Lock Screen"
-msgstr ""
+msgstr "Blokada ekranu"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:157
 msgid "Log Out..."
-msgstr ""
+msgstr "Wylogowanie..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
 msgid "Log Out"
-msgstr ""
+msgstr "Wylogowanie"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:159
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
-msgstr ""
+msgstr "Czy na pewno chcesz zamknąć wszystkie programy i się wylogować?"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:164
 msgid "Suspend"
-msgstr ""
+msgstr "Wstrzymaj"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:169
 msgid "Hibernate"
-msgstr ""
+msgstr "Zahibernuj"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:175
 msgid "Restart..."
-msgstr ""
+msgstr "Uruchom ponownie..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
 msgid "Restart"
-msgstr ""
+msgstr "Uruchom ponownie"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:177
 msgid "Are you sure you want to close all programs and restart the computer?"
-msgstr ""
+msgstr "Na pewno zamknąć wszystkie programy i uruchomić ponownie komputer?"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:182
 msgid "Shut Down..."
-msgstr ""
+msgstr "Wyłącz komputer..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:183
 msgid "Shut Down"
-msgstr ""
+msgstr "Wyłącz komputer"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:184
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
-msgstr ""
+msgstr "Na pewno zamknąć wszystkie programy i wyłączyć komputer?"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:86
 #, csharp-format
@@ -722,59 +729,62 @@ msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:232
 msgid "Time remaining:"
-msgstr ""
+msgstr "Czas pozostały:"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:234
 msgid "Timer paused, time remaining:"
-msgstr ""
+msgstr "Timer zatrzymany, czas pozostały:"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:245
 msgid "Set the timer's label to:"
-msgstr ""
+msgstr "Ustaw nazwę timera na:"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:251
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:285
 msgid "_Set Label"
-msgstr ""
+msgstr "_Ustaw Nazwę"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:276
 msgid "_Pause Timer"
-msgstr ""
+msgstr "_Zatrzymaj Timer"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:276
 msgid "_Start Timer"
-msgstr ""
+msgstr "_Start Timer"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:280
 msgid "_Remove Timer"
-msgstr ""
+msgstr "_Usuń Timer"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:56
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "godzina"
+msgstr[1] "godziny"
+msgstr[2] "godzin"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:60
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minuta"
+msgstr[1] "minuty"
+msgstr[2] "minut"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:65
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "sekunda"
+msgstr[1] "sekundy"
+msgstr[2] "sekund"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:132
 #, csharp-format
 msgid "Click to create a timer for {0}."
-msgstr ""
+msgstr "Kliknij aby stworzyć timer na {0}."
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:149
 msgid "Automatically _Start Timers"
-msgstr ""
+msgstr "Automatyczy _Start Timera"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:153
 msgid "Automatically _Dismiss Timers"
@@ -782,35 +792,36 @@ msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:55
 msgid "Drop to move to Trash"
-msgstr ""
+msgstr "Upuść aby przenieść do Kosza"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:82
 msgid "No items in Trash"
-msgstr ""
+msgstr "Kosz jest pusty"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:84
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} element w koszu"
+msgstr[1] "{0} elementy w koszu"
+msgstr[2] "{0} elementów w koszu"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:169
 msgid "Restore Files"
-msgstr ""
+msgstr "Przywróć pliki"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:200
 msgid "_Open Trash"
-msgstr ""
+msgstr "_Otwórz kosz"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:202
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:233
 msgid "Empty _Trash"
-msgstr ""
+msgstr "Op_różnij kosz"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:225
 msgid "Empty all of the items from the trash?"
-msgstr ""
+msgstr "Opróżnić kosz ze wszystkich elementów?"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:227
 msgid ""
@@ -818,14 +829,17 @@ msgid ""
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
+"Jeśli zdecydujesz się na opróżnienie kosza, wszystkie elementy\n"
+"zostaną trwale usunięte. Możesz również\n"
+"usunąć je pojedyńczo."
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:65
 msgid "_Weather Provider:"
-msgstr ""
+msgstr "_Dostawca informacji o pogodzie:"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:105
 msgid "My _Locations"
-msgstr ""
+msgstr "Moje _Lokalizacje"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:136
 msgid "_Search"
@@ -848,6 +862,8 @@ msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
 msgstr ""
+"Dane pogodowe dostarczone przez Google. To źródło wymaga, aby lokacja "
+"została specyfikowana jako US Zip Code albo \"Miasto, Kraj'."
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
@@ -865,11 +881,11 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
-msgstr ""
+msgstr "Nic nie znaleziono."
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
-msgstr ""
+msgstr "Konfiguracja wtyczki Pogoda"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
 msgid "Click to add a location."
@@ -881,23 +897,23 @@ msgstr "Przekazywanie danych..."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Radar _Map"
-msgstr ""
+msgstr "Mapa radarowa"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "Forecasts"
-msgstr ""
+msgstr "Prognozy"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:252
 msgid "Check _Weather"
-msgstr ""
+msgstr "Sprawdź _pogodę"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
 msgid "_Today"
-msgstr ""
+msgstr "_Dziś"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
 msgid "T_omorrow"
-msgstr ""
+msgstr "Jutro"
 
 #. draw humidity
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:328
@@ -1078,3 +1094,24 @@ msgstr ""
 #~ msgstr ""
 #~ "Powoduje, że aktywatory, które zarządzają więcej niż jednym oknem, posiadają "
 #~ "pod sobą dodatkowe oznaczenie."
+
+#~ msgid "Sunrise"
+#~ msgstr "Wschód słońca"
+
+#~ msgid "Sunset"
+#~ msgstr "Zachód słońca"
+
+#~ msgid "Wind"
+#~ msgstr "Wiatr"
+
+#~ msgid "Direction"
+#~ msgstr "Kierunek"
+
+#~ msgid "Temp"
+#~ msgstr "Temperatura"
+
+#~ msgid "Feels Like"
+#~ msgstr "Odczuwalna"
+
+#~ msgid "Humidity"
+#~ msgstr "Wilgotność"

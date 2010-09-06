@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-08-25 06:48+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 11:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
@@ -199,7 +199,7 @@ msgstr "_Installér"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
 msgid "<b>General Options</b>"
-msgstr ""
+msgstr "<b>Generelle Indstillinger</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
@@ -217,7 +217,7 @@ msgstr "Alle"
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
 msgid "Enabled"
-msgstr ""
+msgstr "Aktiveret"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
@@ -346,7 +346,7 @@ msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:258
 msgid "Unma_ximize"
-msgstr ""
+msgstr "_Gendan"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:261
 msgid "Ma_ximize"
@@ -917,3 +917,21 @@ msgstr ""
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:173
 msgid "Virtual Desk"
 msgstr ""
+
+#~ msgid "_Disable"
+#~ msgstr "_Deaktivér"
+
+#~ msgid "_Enable"
+#~ msgstr "_Aktivér"
+
+#~ msgid "_Remove"
+#~ msgstr "_Fjern"
+
+#~ msgid "_Add"
+#~ msgstr "_Tilføj"
+
+#~ msgid "Sunrise"
+#~ msgstr "Solopgang"
+
+#~ msgid "Sunset"
+#~ msgstr "Solnedgang"

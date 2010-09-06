@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-08-25 06:48+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 11:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
@@ -930,3 +930,63 @@ msgstr "Skrivebord"
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:173
 msgid "Virtual Desk"
 msgstr "Virtuelt skrivebord"
+
+#~ msgid "Docky Configuration"
+#~ msgstr "Konfigurer Docky"
+
+#~ msgid "_Disable"
+#~ msgstr "_Deaktiver"
+
+#~ msgid ""
+#~ "Docky requires compositing to work properly. Please enable compositing and "
+#~ "restart docky."
+#~ msgstr ""
+#~ "Docky krever at compositing er aktiv. Aktiver compositing og restart Docky."
+
+#~ msgid ""
+#~ "Causes launchers which currently manage more than one window to have an "
+#~ "extra indicator under it."
+#~ msgstr ""
+#~ "Viser en ekstra indikator under oppstartere som håndterer mer enn et vindu."
+
+#~ msgid "_Start When Computer Starts"
+#~ msgstr "_Start når maskinen starter"
+
+#~ msgid "_Remove"
+#~ msgstr "Fje_rn"
+
+#~ msgid "_Enable"
+#~ msgstr "Aktiv_er"
+
+#~ msgid "_Add"
+#~ msgstr "_Legg til"
+
+#~ msgid "Indicat_e Multiple Windows"
+#~ msgstr "Indik_er flere vinduer"
+
+#~ msgid "Username or Password not set"
+#~ msgstr "Brukernavn og passord er ikke angitt"
+
+#~ msgid "Network Error: "
+#~ msgstr "Nettverksfeil: "
+
+#~ msgid "Temp"
+#~ msgstr "Temperatur"
+
+#~ msgid "Wind"
+#~ msgstr "Vind"
+
+#~ msgid "Feels Like"
+#~ msgstr "Føles som"
+
+#~ msgid "Humidity"
+#~ msgstr "Luftfuktighet"
+
+#~ msgid "Sunrise"
+#~ msgstr "Soloppgang"
+
+#~ msgid "Sunset"
+#~ msgstr "Solnedgang"
+
+#~ msgid "Direction"
+#~ msgstr "Retning"

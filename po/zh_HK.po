@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-08-25 06:48+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 11:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
@@ -913,3 +913,40 @@ msgstr ""
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:173
 msgid "Virtual Desk"
 msgstr ""
+
+#~ msgid "_Start When Computer Starts"
+#~ msgstr "開機時一併啟動（_S）"
+
+#~ msgid ""
+#~ "Docky requires compositing to work properly. Please enable compositing and "
+#~ "restart docky."
+#~ msgstr "Docky 須配合桌面合成功能才可正常使用。請開啟桌面合成功能後再重啟 Docky 。"
+
+#~ msgid "Network Error: "
+#~ msgstr "網絡錯誤： "
+
+#~ msgid ""
+#~ "Causes launchers which currently manage more than one window to have an "
+#~ "extra indicator under it."
+#~ msgstr "在目前管理多個視窗的啟動器下加上額外標示。"
+
+#~ msgid "Indicat_e Multiple Windows"
+#~ msgstr "多視窗時要標示（_E）"
+
+#~ msgid "_Disable"
+#~ msgstr "停用(_D)"
+
+#~ msgid "_Enable"
+#~ msgstr "啟用(_E)"
+
+#~ msgid "_Remove"
+#~ msgstr "移除(_R)"
+
+#~ msgid "_Add"
+#~ msgstr "新增(_A)"
+
+#~ msgid "Wind"
+#~ msgstr "風"
+
+#~ msgid "Direction"
+#~ msgstr "風向"

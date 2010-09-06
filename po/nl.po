@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-08-16 12:56+0200\n"
-"PO-Revision-Date: 2010-08-07 02:47+0000\n"
-"Last-Translator: Robert Dyer <Unknown>\n"
+"PO-Revision-Date: 2010-08-25 10:07+0000\n"
+"Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-08-25 06:48+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 11:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
@@ -54,7 +54,7 @@ msgstr "Verwijder het dock"
 #: ../Docky/Docky/ConfigurationWindow.cs:419
 #: ../Docky/Docky/ConfigurationWindow.cs:439
 msgid "_Select"
-msgstr ""
+msgstr "_Selecteer"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:422
 #: ../Docky/Docky/ConfigurationWindow.cs:442
@@ -171,11 +171,11 @@ msgstr "Laat de muis los om aan het dock toe te voegen"
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:244
 msgid "_Settings"
-msgstr ""
+msgstr "_Instellingen"
 
 #: ../Docky/Docky/Items/DockyItem.cs:133
 msgid "_About"
-msgstr ""
+msgstr "_Over"
 
 #: ../Docky/Docky/Items/DockyItem.cs:134
 msgid "_Help"
@@ -195,12 +195,12 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
-msgstr ""
+msgstr "_Thema:"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
 msgid "_Install"
-msgstr ""
+msgstr "_Installeren"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
 msgid "<b>General Options</b>"
@@ -217,21 +217,21 @@ msgstr "Docks"
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
 msgid "Enabled"
-msgstr ""
+msgstr "Ingeschakeld"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
 msgid "Disabled"
-msgstr ""
+msgstr "Uitgeschakeld"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
 msgid "Docklets"
-msgstr ""
+msgstr "Docklets"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
 msgid "Usable"
@@ -247,7 +247,7 @@ msgstr "_Nieuw Dock"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
 msgid "None"
-msgstr ""
+msgstr "Niet"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
 msgid "Autohide"
@@ -267,7 +267,7 @@ msgstr "Uit_faden bij verbergen"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
 msgid "_Icon Size:"
-msgstr ""
+msgstr "_Icoongrootte:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:132
 msgid "_Hiding:"
@@ -296,16 +296,16 @@ msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:171
 msgid "New _Window"
-msgstr ""
+msgstr "Nieu_w venster"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:173
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
-msgstr ""
+msgstr "_Openen"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:70
 msgid "Reset Color"
-msgstr ""
+msgstr "Herstel Kleur"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:479
 msgid "_Pin to Dock"
@@ -331,15 +331,15 @@ msgstr "Niet genoeg vrije ruimte op de doellocatie"
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:211
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:243
 msgid "Complete"
-msgstr ""
+msgstr "Kompleet"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:221
 msgid "Moving"
-msgstr ""
+msgstr "Verplaatsing"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:227
 msgid "Copying"
-msgstr ""
+msgstr "Kopiëren"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:261
 msgid "Open"
@@ -397,11 +397,11 @@ msgstr "Account is gevalideerd!"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:87
 msgid "Password"
-msgstr ""
+msgstr "Wachtwoord"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:108
 msgid "Username"
-msgstr ""
+msgstr "Gebruikersnaam"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
 msgid "<i>Verify and save account information</i>"
@@ -409,7 +409,7 @@ msgstr "<i>Controleer de accountgegevens en sla deze op</i>"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
 msgid "Don't have an account?"
-msgstr ""
+msgstr "Nog geen account?"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:156
 msgid "No Battery Found"
@@ -439,7 +439,7 @@ msgstr "resterend "
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:86
 msgid "Computer"
-msgstr ""
+msgstr "Computer"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "Di_gital Clock"
@@ -459,11 +459,11 @@ msgstr "Kies _Thema"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
-msgstr ""
+msgstr "Thema's"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:62
 msgid "Theme"
-msgstr ""
+msgstr "Thema"
 
 #: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:42
 msgid "Show Desktop"
@@ -471,7 +471,7 @@ msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
 msgid "_Add Label"
-msgstr ""
+msgstr "Label _Toevoegen"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:113
 msgid "Check e_very:"
@@ -480,7 +480,7 @@ msgstr "Controleer e_lke:"
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:123
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:186
 msgid "minutes"
-msgstr ""
+msgstr "minuten"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:181
 msgid "Click to set username and password."
@@ -488,12 +488,12 @@ msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:240
 msgid "(no subject)"
-msgstr ""
+msgstr "(geen onderwerp)"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:254
 #, csharp-format
 msgid "You have {0} new, unread messages"
-msgstr ""
+msgstr "U heeft {0} nieuwe, ongelezen berichten."
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:258
 #, csharp-format
@@ -507,13 +507,13 @@ msgstr "Feed produceerde een fout"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:283
 msgid "Invalid Username"
-msgstr ""
+msgstr "Ongeldige gebruikersnaam"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:293
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:174
 msgid "Network Error"
-msgstr ""
+msgstr "Netwerk Fout"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:298
 msgid "General Error"
@@ -525,7 +525,7 @@ msgstr "GMail configuratie"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 msgid "No unread mail"
-msgstr ""
+msgstr "Geen ongelezen berichten"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:98
 #, csharp-format
@@ -552,7 +552,7 @@ msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
 msgid "New Mail"
-msgstr ""
+msgstr "Nieuw bericht"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:236
 msgid "Check _Mail"
@@ -560,7 +560,7 @@ msgstr "Controleer _Mail"
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
-msgstr ""
+msgstr "Labels"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
 msgid "GMail"
@@ -568,7 +568,7 @@ msgstr "GMail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr ""
+msgstr "Login"
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
@@ -576,24 +576,24 @@ msgstr "Van: "
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Eject"
-msgstr ""
+msgstr "Uitw_erpen"
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Unmount"
-msgstr ""
+msgstr "_Ontkoppelen"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:53
 msgid "Network Manager"
-msgstr ""
+msgstr "Netwerkbeheerder"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
-msgstr ""
+msgstr "Verbinden..."
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:101
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:166
 msgid "Disconnected"
-msgstr ""
+msgstr "Niet-verbonden"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
@@ -606,7 +606,7 @@ msgstr ""
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:78
 msgid "S_earch"
-msgstr ""
+msgstr "_Zoeken"
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
@@ -627,7 +627,7 @@ msgstr "Klik om NPR zenders toe te voegen."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:111
 msgid "Home Page"
-msgstr ""
+msgstr "Homepage"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:118
 msgid "Program Schedule"
@@ -635,7 +635,7 @@ msgstr "Programmaoverzicht"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:125
 msgid "Donate"
-msgstr ""
+msgstr "Doneer"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:132
 msgid "Live Streams"
@@ -647,7 +647,7 @@ msgstr "Instellingen"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:56
 msgid "Clear the Recent Documents list?"
-msgstr ""
+msgstr "Lijst van recent geopende documenten wissen?"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:58
 msgid "Clear Recent Documents"
@@ -803,16 +803,16 @@ msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:200
 msgid "_Open Trash"
-msgstr ""
+msgstr "Prullenbak _openen"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:202
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:233
 msgid "Empty _Trash"
-msgstr ""
+msgstr "_Prullenbak legen"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:225
 msgid "Empty all of the items from the trash?"
-msgstr ""
+msgstr "Verwijder alle objecten uit de prullenbak?"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:227
 msgid ""
@@ -820,10 +820,13 @@ msgid ""
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
+"Als u er voor kiest om de prullenbak te legen, zullen alle bestanden erin\n"
+"permanent verloren gaan. Hou er alstublieft rekening mee\n"
+"dat u ze ook apart kunt verwijderen."
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:65
 msgid "_Weather Provider:"
-msgstr ""
+msgstr "_Weer Provider:"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:105
 msgid "My _Locations"
@@ -831,7 +834,7 @@ msgstr "Mijn _Locaties"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:136
 msgid "_Search"
-msgstr ""
+msgstr "_Zoeken"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:176
 msgid "Automatically Update _Every"
@@ -877,7 +880,7 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
-msgstr ""
+msgstr "Geen resultaat gevonden."
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
@@ -897,7 +900,7 @@ msgstr "Radar_kaart"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "Forecasts"
-msgstr ""
+msgstr "Forecasts"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:252
 msgid "Check _Weather"
@@ -905,7 +908,7 @@ msgstr "Controleer _weersvoorspellingen"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
 msgid "_Today"
-msgstr ""
+msgstr "_Vandaag"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
 msgid "T_omorrow"
@@ -929,3 +932,65 @@ msgstr ""
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:173
 msgid "Virtual Desk"
 msgstr ""
+
+#~ msgid "_Add"
+#~ msgstr "_Toevoegen"
+
+#~ msgid "_Disable"
+#~ msgstr "_Uitschakelen"
+
+#~ msgid "_Enable"
+#~ msgstr "_Inschakelen"
+
+#~ msgid ""
+#~ "Docky requires compositing to work properly. Please enable compositing and "
+#~ "restart docky."
+#~ msgstr ""
+#~ "Docky vereist compositing om correct te werken. Zet compositing aan en "
+#~ "herstart docky."
+
+#~ msgid "_Remove"
+#~ msgstr "_Verwijderen"
+
+#~ msgid ""
+#~ "Causes launchers which currently manage more than one window to have an "
+#~ "extra indicator under it."
+#~ msgstr ""
+#~ "Geeft onder de  startprogramma's die nu meer dan een venster aansturen een "
+#~ "extra indicator"
+
+#~ msgid "Docky Configuration"
+#~ msgstr "Docky Instellingen"
+
+#~ msgid "_Start When Computer Starts"
+#~ msgstr "_Starten bij het opstarten van de computer"
+
+#~ msgid "Indicat_e Multiple Windows"
+#~ msgstr "Indic_eer Meerdere Vensters"
+
+#~ msgid "Username or Password not set"
+#~ msgstr "Gebruikersnaam of paswoord niet ingesteld"
+
+#~ msgid "Wind"
+#~ msgstr "Windsnelheid"
+
+#~ msgid "Direction"
+#~ msgstr "Windrichting"
+
+#~ msgid "Temp"
+#~ msgstr "Temp"
+
+#~ msgid "Feels Like"
+#~ msgstr "Voelt als"
+
+#~ msgid "Network Error: "
+#~ msgstr "Netwerk Fout: "
+
+#~ msgid "Sunset"
+#~ msgstr "Zonsondergang"
+
+#~ msgid "Humidity"
+#~ msgstr "Luchtvochtigheid"
+
+#~ msgid "Sunrise"
+#~ msgstr "Zonsopgang"

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-08-16 12:56+0200\n"
-"PO-Revision-Date: 2010-08-20 01:58+0000\n"
-"Last-Translator: Cheng-Chia Tseng <Unknown>\n"
+"PO-Revision-Date: 2010-08-25 09:44+0000\n"
+"Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-08-25 06:48+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 11:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
@@ -914,3 +914,30 @@ msgstr "桌面"
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:173
 msgid "Virtual Desk"
 msgstr "虛擬桌面"
+
+#~ msgid "_Disable"
+#~ msgstr "停用(_D)"
+
+#~ msgid "_Enable"
+#~ msgstr "啟用(_E)"
+
+#~ msgid "_Remove"
+#~ msgstr "移除(_R)"
+
+#~ msgid "_Add"
+#~ msgstr "新增(_A)"
+
+#~ msgid "Sunrise"
+#~ msgstr "日出"
+
+#~ msgid "Sunset"
+#~ msgstr "日落"
+
+#~ msgid "Wind"
+#~ msgstr "風"
+
+#~ msgid "Direction"
+#~ msgstr "風向"
+
+#~ msgid "Humidity"
+#~ msgstr "濕度"

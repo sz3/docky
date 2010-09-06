@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-08-16 12:56+0200\n"
-"PO-Revision-Date: 2010-03-30 19:34+0000\n"
+"PO-Revision-Date: 2010-08-26 06:48+0000\n"
 "Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,44 +16,46 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2010-08-25 06:48+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 11:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Search Docklets..."
-msgstr ""
+msgstr "Caută Docklets..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:164
 msgid "Search Helpers..."
-msgstr ""
+msgstr "Caută Ajutători..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid "Click on any dock to configure."
-msgstr ""
+msgstr "Clic pe orice dock pentru configurare."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:229
 msgid "Drag any dock to reposition."
-msgstr ""
+msgstr "Trage orice dock pentru repoziționare."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:294
 msgid "Delete the currently selected dock?"
-msgstr ""
+msgstr "Ştergi dock-ul curent selectat?"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:296
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
+"Dacă alegi sa ștergi dock-ul, toate setările\n"
+"pentru acest dock vor fi pierdute permanent."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:303
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
-msgstr ""
+msgstr "_Șterge Dock"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:419
 #: ../Docky/Docky/ConfigurationWindow.cs:439
 msgid "_Select"
-msgstr ""
+msgstr "_Selectați"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:422
 #: ../Docky/Docky/ConfigurationWindow.cs:442
@@ -135,31 +137,34 @@ msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
+"Când setat, ferestrele care nu au deja lansatoare în dock vor fi adăugate la "
+"acest dock."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:692
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
+"<i>Nu ascunde niciodată; ferestrele maximizate nu vor acoperii dock-ul.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:695
 msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr ""
+msgstr "<i>Ascunde când mouse-ul nu este pe el.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:698
 msgid "<i>Hides when dock obstructs the active application.</i>"
-msgstr ""
+msgstr "<i>Ascunde când dock-ul obstrucționează aplicația activă.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:701
 msgid "<i>Hides when dock obstructs any window.</i>"
-msgstr ""
+msgstr "<i>Ascunde când dock-ul obstrucționează orice fereastră.</i>"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:378
 msgid "Drag to reposition"
-msgstr ""
+msgstr "Trage pentru a repoziţiona"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:390
 #: ../Docky/Docky/Interface/DockWindow.cs:404
 msgid "Drop to add to dock"
-msgstr ""
+msgstr "Aruncă pentru a adăuga la dock"
 
 #: ../Docky/Docky/Items/DockyItem.cs:132
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
@@ -177,7 +182,7 @@ msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:136
 msgid "_Quit Docky"
-msgstr ""
+msgstr "_Închide Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
 msgid "Docky Settings"
@@ -202,11 +207,11 @@ msgstr "<b>Opțiuni generale</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
-msgstr ""
+msgstr "<b>Configurare Dock</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
-msgstr ""
+msgstr "Dock-uri"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
@@ -233,11 +238,11 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
-msgstr ""
+msgstr "Ajutătoare"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
 msgid "_New Dock"
-msgstr ""
+msgstr "Dock _Nou"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
 msgid "None"
@@ -253,11 +258,11 @@ msgstr "Ascundere inteligentă"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Window Dodge"
-msgstr ""
+msgstr "Fereşte Fereastra"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
 msgid "_Fade On Hide"
-msgstr ""
+msgstr "_Fade la Ascundere"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
 msgid "_Icon Size:"
@@ -277,7 +282,7 @@ msgstr "_Fundal 3D"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
 msgid "_Manage Windows Without Launcher"
-msgstr ""
+msgstr "Ad_ministrează fereastra fără lansator"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
 msgid "_Zoom:"
@@ -303,7 +308,7 @@ msgstr "Resetare culoare"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:479
 msgid "_Pin to Dock"
-msgstr ""
+msgstr "_Fixează în Dock"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:72
 #, csharp-format
@@ -315,11 +320,11 @@ msgstr ""
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:191
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:236
 msgid "Error performing drop action"
-msgstr ""
+msgstr "Eroare la desfășurarea acțiuni de drop"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:191
 msgid "Not enough free space on destination."
-msgstr ""
+msgstr "Nu este spaţiu îndeajuns în destinaţia dorită."
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:208
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:211
@@ -329,11 +334,11 @@ msgstr "Terminat"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:221
 msgid "Moving"
-msgstr ""
+msgstr "Mutare"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:227
 msgid "Copying"
-msgstr ""
+msgstr "Copiere"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:261
 msgid "Open"
@@ -341,11 +346,11 @@ msgstr "Deschide"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:262
 msgid "Open Containing Folder"
-msgstr ""
+msgstr "Deschide dosarul conţinător"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:258
 msgid "Unma_ximize"
-msgstr ""
+msgstr "Dema_ximizează"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:261
 msgid "Ma_ximize"
@@ -361,7 +366,7 @@ msgstr "Mi_nimizează"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:271
 msgid "_Close All"
-msgstr ""
+msgstr "În_chide toate"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
@@ -399,7 +404,7 @@ msgstr "Nume utilizator"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
 msgid "<i>Verify and save account information</i>"
-msgstr ""
+msgstr "<i>Verifică şi salvează informaţiile contului</i>"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
 msgid "Don't have an account?"
@@ -407,7 +412,7 @@ msgstr "Nu aveți un cont?"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:156
 msgid "No Battery Found"
-msgstr ""
+msgstr "Nu am găsit baterie"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:173
 #, csharp-format
@@ -443,15 +448,15 @@ msgstr "Ceas di_gital"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
 msgid "24-Hour _Clock"
-msgstr ""
+msgstr "_Ceas de 24 de ore"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:443
 msgid "Show _Date"
-msgstr ""
+msgstr "Arată _Data"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:449
 msgid "Select _Theme"
-msgstr ""
+msgstr "Selectează _Tema"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
@@ -463,7 +468,7 @@ msgstr "Temă"
 
 #: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:42
 msgid "Show Desktop"
-msgstr ""
+msgstr "Afișează desktopul"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
 msgid "_Add Label"
@@ -503,13 +508,13 @@ msgstr "Eroare flux"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:283
 msgid "Invalid Username"
-msgstr ""
+msgstr "Nume utilizator invalid"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:293
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:174
 msgid "Network Error"
-msgstr ""
+msgstr "Eroare de reţea"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:298
 msgid "General Error"
@@ -533,15 +538,15 @@ msgstr[2] "{0} de mesaje necitite"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:119
 msgid "Checking mail..."
-msgstr ""
+msgstr "Verifică email-ul..."
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "_View "
-msgstr ""
+msgstr "_Vezi "
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
 msgid "_Compose Mail"
-msgstr ""
+msgstr "_Compune email"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:211
 msgid "View C_ontacts"
@@ -553,7 +558,7 @@ msgstr "Email nou"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:236
 msgid "Check _Mail"
-msgstr ""
+msgstr "Verifica E_mail"
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
@@ -607,20 +612,20 @@ msgstr "Căutar_e"
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
-msgstr ""
+msgstr "Nu am găsit nici o stație."
 
 #: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
-msgstr ""
+msgstr "Încearcă căutarea ta din nou."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:46
 msgid "Fetching Information..."
-msgstr ""
+msgstr "Preluare informații..."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:72
 msgid "Click to add NPR stations."
-msgstr ""
+msgstr "Clic pentru a adăuga stație NPR."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:111
 msgid "Home Page"
@@ -628,7 +633,7 @@ msgstr "Pagină web"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:118
 msgid "Program Schedule"
-msgstr ""
+msgstr "Orar program"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:125
 msgid "Donate"
@@ -662,7 +667,7 @@ msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:81
 msgid "_Clear Recent Documents..."
-msgstr ""
+msgstr "_Curăţă documentele recente..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
 msgid "Lock Screen"
@@ -810,7 +815,7 @@ msgstr "Goleș_te gunoiul"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:225
 msgid "Empty all of the items from the trash?"
-msgstr ""
+msgstr "Goliți toate elementele din gunoi?"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:227
 msgid ""
@@ -818,14 +823,17 @@ msgid ""
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
+"Dacă alegi să golești gunoiul, toate elementele din el\n"
+"vor fi pierdute permanent. Reține că\n"
+"poți de asemenea să le ștergi separat."
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:65
 msgid "_Weather Provider:"
-msgstr ""
+msgstr "_Furnizor de meteo:"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:105
 msgid "My _Locations"
-msgstr ""
+msgstr "Locaţiile _mele"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:136
 msgid "_Search"
@@ -837,17 +845,19 @@ msgstr "Acualizează automat la fi_ecare"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:220
 msgid "Use _Metric Units"
-msgstr ""
+msgstr "Utilizează unităţile de măsură _metrice"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:171
 msgid "Invalid Weather Location"
-msgstr ""
+msgstr "Locaţie meteo invalidă"
 
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
 msgstr ""
+"Datele meteorologice furnizate de către Google. Această sursă necesită ca "
+"locația să fie specificată ca cod zip US sau 'Oraș, țară'"
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
@@ -856,12 +866,20 @@ msgid ""
 "website.  To find your code, look up your forecast on their site and the "
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
+"Datele meteorologice furnizate de către și cu drepturile de autor The "
+"Weather Channel. Această sursă necesită ca locația să fie specificată ca cod "
+"zip US sau codul unic de pe site-ul web. Pentru a-ți găsi codul, priviți în "
+"susul ferestrei dumneavoastră de previziuni de pe site-ul lor și codul este "
+"în URL după '/local/' și arată ca AAXX0000."
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:56
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
 msgstr ""
+"Datele meteorologice furnizate de către și cu drepturile de autor Weather "
+"Underground. Această sursă necesită ca locația să fie specificată ca cod zip "
+"US sau 'Oraș, țară'"
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
@@ -869,7 +887,7 @@ msgstr "Niciun rezultat găsit."
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
-msgstr ""
+msgstr "Configuraţie meteo"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
 msgid "Click to add a location."
@@ -877,7 +895,7 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
 msgid "Fetching data..."
-msgstr ""
+msgstr "Preluare date..."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Radar _Map"
@@ -944,3 +962,38 @@ msgstr ""
 
 #~ msgid "Humidity"
 #~ msgstr "Umiditate"
+
+#~ msgid ""
+#~ "Docky requires compositing to work properly. Please enable compositing and "
+#~ "restart docky."
+#~ msgstr ""
+#~ "Docky are nevoie de compositing pentru a funcționa corect. Te rog activează "
+#~ "compositing şi restartează docky."
+
+#~ msgid ""
+#~ "Causes launchers which currently manage more than one window to have an "
+#~ "extra indicator under it."
+#~ msgstr ""
+#~ "Face ca lansatoarele care administrează acum mai mult decât o fereastră să "
+#~ "aibe un indicator în plus sub el."
+
+#~ msgid "Docky Configuration"
+#~ msgstr "Configurări Docky"
+
+#~ msgid "_Start When Computer Starts"
+#~ msgstr "_Pornește Când Calculatorul Pornește"
+
+#~ msgid "Indicat_e Multiple Windows"
+#~ msgstr "_Indică Ferestr_e Multiple"
+
+#~ msgid "Username or Password not set"
+#~ msgstr "Nume utilizator sau parolă nesetate"
+
+#~ msgid "Sunset"
+#~ msgstr "Asfinţit"
+
+#~ msgid "Network Error: "
+#~ msgstr "Eroare reţea: "
+
+#~ msgid "Temp"
+#~ msgstr "Temp"

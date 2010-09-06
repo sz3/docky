@@ -1,16 +1,16 @@
-# Spanish translation for docky
-# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# Estonian translation for docky
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the docky package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-08-16 12:56+0200\n"
-"PO-Revision-Date: 2010-08-25 10:07+0000\n"
-"Last-Translator: DiegoJ <diegojromerolopez@gmail.com>\n"
-"Language-Team: Spanish <es@li.org>\n"
+"PO-Revision-Date: 2010-08-26 05:52+0000\n"
+"Last-Translator: Rico Tzschichholz <Unknown>\n"
+"Language-Team: Estonian <et@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,46 +20,46 @@ msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Search Docklets..."
-msgstr "Buscar Docklets..."
+msgstr "Otsi Lisasid..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:164
 msgid "Search Helpers..."
-msgstr "Buscar ayudantes..."
+msgstr "Otsi Abistajaid..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid "Click on any dock to configure."
-msgstr "Seleccionar cualquier dock para configurar."
+msgstr "Klõpsa mõnel dokil, et seadistada."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:229
 msgid "Drag any dock to reposition."
-msgstr "Arrastrar cualquier dock para reposicionarlo."
+msgstr "Lohista dokke ümberasetamiseks."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:294
 msgid "Delete the currently selected dock?"
-msgstr "¿Eliminar el dock actualmente seleccionado?"
+msgstr "Kustuta hetkel valitud dokk?"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:296
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
-"Si decide eliminar el dock, toda la configuración\n"
-"de este dock se perderá permanentemente."
+"Doki kustutamisel kõik kustutatava doki seaded\n"
+"kustutatakse jäädavalt."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:303
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
-msgstr "_Eliminar Dock"
+msgstr "_Kustuta Dokk"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:419
 #: ../Docky/Docky/ConfigurationWindow.cs:439
 msgid "_Select"
-msgstr "_Seleccionar"
+msgstr "_Valik"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:422
 #: ../Docky/Docky/ConfigurationWindow.cs:442
 msgid ".tar Archives"
-msgstr "Archivadores .tar"
+msgstr ".tar Arhiivid"
 
 #: ../Docky/Docky/DockletTile.cs:51
 msgid "Author"
@@ -67,591 +67,587 @@ msgstr "Autor"
 
 #: ../Docky/Docky/DockletTile.cs:86
 msgid "Move this docklet up on the selected dock"
-msgstr "Mover este docklet hacia arriba en el dock seleccionado"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:87
 msgid "Move this docklet down on the selected dock"
-msgstr "Mover este docklet hacia abajo en el dock seleccionado"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:91
 msgid "Move this docklet left on the selected dock"
-msgstr "Mover este docklet a la izquierda en el dock seleccionado"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:92
 msgid "Move this docklet right on the selected dock"
-msgstr "Mover este docklet a la derecha en el dock seleccionado"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:94
 msgid "Configure this docklet"
-msgstr "Configurar este docklet"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:95
 msgid "About this docklet"
-msgstr "Acerca de este docklet"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:96
 msgid "Add this docklet to the selected dock"
-msgstr "Añadir este docklet al dock seleccionado"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:97
 msgid "Remove this docklet from the selected dock"
-msgstr "Quitar este docklet del dock seleccionado"
+msgstr ""
 
 #: ../Docky/Docky/Docky.cs:113
 msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
 msgstr ""
-"Docky necesita que los efectos de escritorio estén activados para trabajar "
-"correctamente. Algunas opciones están deshabilitadas y los temas y "
-"animaciones pueden aparecer de forma incorrecta. "
 
 #: ../Docky/Docky/HelperTile.cs:42
 msgid "Status"
-msgstr "Estado"
+msgstr "Olek"
 
 #: ../Docky/Docky/HelperTile.cs:59
 msgid "Uninstall"
-msgstr "Desinstalar"
+msgstr "Eemalda"
 
 #: ../Docky/Docky/HelperTile.cs:71
 msgid "About this helper"
-msgstr "Acerca de este ayudante"
+msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:72
 msgid "Enable this helper"
-msgstr "Activar este ayudante"
+msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:73
 msgid "Disable this helper"
-msgstr "Desactivar este ayudante"
+msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Running"
-msgstr "En ejecución"
+msgstr "Käivitatud"
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Stopped"
-msgstr "Detenido"
+msgstr "Peatatud"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:333
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
-"Cuando está activado, las ventanas que no tienen lanzadores se añadirán a "
-"ese dock."
+"Kui valitud, lisatakse aknad, millel ei ole käivitajat, antud dokile."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:692
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
-msgstr "<i>Nunca se esconde; las ventanas maximizadas no cubren el dock.</i>"
+msgstr "<i>Ei peida kunagi; maksimumini suurendatud aknad ei kata dokki.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:695
 msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr "<i>Se esconde cuando el ratón no está sobre él.</i>"
+msgstr "<i>Peidab alati kui kursor ei asu dokil.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:698
 msgid "<i>Hides when dock obstructs the active application.</i>"
-msgstr "<i>Se esconde cuando el dock obstruye la aplicación activa.</i>"
+msgstr "<i>Peidab kui dokk segab aktiivset rakendust.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:701
 msgid "<i>Hides when dock obstructs any window.</i>"
-msgstr "<i>Se esconde cuando el dock obstruye cualquier ventana.</i>"
+msgstr "<i>Peidab kui dokk segab mis iganes akent.</i>"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:378
 msgid "Drag to reposition"
-msgstr "Arrastrar para reposicionar"
+msgstr "Lohista asukoha muutmiseks"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:390
 #: ../Docky/Docky/Interface/DockWindow.cs:404
 msgid "Drop to add to dock"
-msgstr "Soltar para añadir al dock"
+msgstr "Lohista lisamiseks dokile"
 
 #: ../Docky/Docky/Items/DockyItem.cs:132
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:244
 msgid "_Settings"
-msgstr "_Configuración"
+msgstr "_Seaded"
 
 #: ../Docky/Docky/Items/DockyItem.cs:133
 msgid "_About"
-msgstr "Acerca _de"
+msgstr "_Programmist"
 
 #: ../Docky/Docky/Items/DockyItem.cs:134
 msgid "_Help"
-msgstr "_Ayuda"
+msgstr "_Abi"
 
 #: ../Docky/Docky/Items/DockyItem.cs:136
 msgid "_Quit Docky"
-msgstr "_Salir de Docky"
+msgstr "_Välju Dockist"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
 msgid "Docky Settings"
-msgstr "Configuración de Docky"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
 msgid "_Start When User Logs In"
-msgstr "Arrancar al iniciar _sesión"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
-msgstr "_Tema:"
+msgstr "_Teema:"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
 msgid "_Install"
-msgstr "_Instalar"
+msgstr "_Paigalda"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
 msgid "<b>General Options</b>"
-msgstr "<b>Opciones generales</b>"
+msgstr "<b>Üldised valikud</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
-msgstr "<b>Configuración del dock</b>"
+msgstr "<b>Doki Seaded</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
-msgstr "Docks"
+msgstr "Dokid"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
 msgid "All"
-msgstr "Todas"
+msgstr "Kõik"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
 msgid "Enabled"
-msgstr "Activado"
+msgstr "Lubatud"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
 msgid "Disabled"
-msgstr "Desactivado"
+msgstr "Keelatud"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
 msgid "Docklets"
-msgstr "Docklets"
+msgstr "Lisad"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
 msgid "Usable"
-msgstr "Utilizable"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
-msgstr "Ayudantes"
+msgstr "Abistajad"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
 msgid "_New Dock"
-msgstr "Dock _nuevo"
+msgstr "_Uus Dokk"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
 msgid "None"
-msgstr "Ninguno"
+msgstr "Puudub"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
 msgid "Autohide"
-msgstr "Ocultar automáticamente"
+msgstr "Automaatne peitmine"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "Intellihide"
-msgstr "Ocultamiento inteligente"
+msgstr "Intelligentne peitmine"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Window Dodge"
-msgstr "Esquivar ventanas"
+msgstr "Kõrvalepõige akendelt"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
 msgid "_Fade On Hide"
-msgstr "_Desvanecer al ocultar"
+msgstr "_Tuhmu peitmisel"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
 msgid "_Icon Size:"
-msgstr "_Tamaño del icono:"
+msgstr "_Ikooni suurus:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:132
 msgid "_Hiding:"
-msgstr "_Ocultación:"
+msgstr "_Peitmine:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
 msgid "_Panel Mode"
-msgstr "_Modo panel"
+msgstr "_Paneeli laad"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
 msgid "3D Back_ground"
-msgstr "Fondo _3D"
+msgstr "3D ta_gapõhi"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
 msgid "_Manage Windows Without Launcher"
-msgstr "_Gestionar ventanas sin lanzador"
+msgstr "_Halda ilma käivitajata aknaid"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
 msgid "_Zoom:"
-msgstr "_Zoom:"
+msgstr "_Suurendus:"
 
 #: ../Docky.Items/Docky.Items/AbstractDockItem.cs:120
 #, csharp-format
 msgid "Drop to open with {0}"
-msgstr "Soltar para abrir con {0}"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:171
 msgid "New _Window"
-msgstr "_Ventana nueva"
+msgstr "_Uus aken"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:173
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
-msgstr "_Abrir"
+msgstr "_Ava"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:70
 msgid "Reset Color"
-msgstr "Reiniciar color"
+msgstr "Taasta Värvid"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:479
 msgid "_Pin to Dock"
-msgstr "_Anclar al dock"
+msgstr "_Naeluta Dokile"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:72
 #, csharp-format
 msgid "Drop to move to {0}"
-msgstr "Soltar para mover a {0}"
+msgstr ""
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:191
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:236
 msgid "Error performing drop action"
-msgstr "Error al soltar"
+msgstr "Viga lohistamise lõpetamisel"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:191
 msgid "Not enough free space on destination."
-msgstr "No hay suficiente espacio en el destino."
+msgstr "Sihtkohas pole piisavalt ruumi."
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:208
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:211
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:243
 msgid "Complete"
-msgstr "Completado"
+msgstr "Valmis"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:221
 msgid "Moving"
-msgstr "Moviendo"
+msgstr "Liigutamine"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:227
 msgid "Copying"
-msgstr "Copiando"
+msgstr "Kopeerimine"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:261
 msgid "Open"
-msgstr "Abrir"
+msgstr "Ava"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:262
 msgid "Open Containing Folder"
-msgstr "Abrir carpeta contenedora"
+msgstr "Ava Sisalduv Kaust"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:258
 msgid "Unma_ximize"
-msgstr "Desma_ximizar"
+msgstr "Taasta s_uurus"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:261
 msgid "Ma_ximize"
-msgstr "Ma_ximizar"
+msgstr "Ma_ksimeeri"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:265
 msgid "_Restore"
-msgstr "_Restaurar"
+msgstr "_Taasta"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:268
 msgid "Mi_nimize"
-msgstr "Mi_nimizar"
+msgstr "_Minimeeri"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:271
 msgid "_Close All"
-msgstr "Cerrar _todo"
+msgstr "_Sulge kõik"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
 msgid "Sign up for {0}"
-msgstr "Registrarse en {0}"
+msgstr "Registreeru {0}"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:44
 msgid "Validating..."
-msgstr "Validando..."
+msgstr "Kinnitan..."
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:45
 #, csharp-format
 msgid "Don't have {0}?"
-msgstr "¿No tiene {0}?"
+msgstr "Pole {0}?"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:46
 msgid "Account validation failed!"
-msgstr "¡Ha fallado la validación de la cuenta!"
+msgstr "Kasutaja kinnitamine ebaõnnestus!"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:47
 msgid "Verify and save account information"
-msgstr "Verificar y guardar la información de la cuenta"
+msgstr "Kinnita ja salvesta kasutaja info"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:48
 msgid "Account validation succeeded!"
-msgstr "La cuenta se validó correctamente"
+msgstr "Kasutaja info kinitatud!"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:87
 msgid "Password"
-msgstr "Contraseña"
+msgstr "Parool"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:108
 msgid "Username"
-msgstr "Nombre de usuario"
+msgstr "Kasutaja nimi"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
 msgid "<i>Verify and save account information</i>"
-msgstr "<i>Verificar y guardar la información de la cuenta</i>"
+msgstr "<i>Kontrolli ja salvesta konto info</i>"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
 msgid "Don't have an account?"
-msgstr "¿No tiene una cuenta?"
+msgstr "Pole kasutajat?"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:156
 msgid "No Battery Found"
-msgstr "No se encontró ninguna batería"
+msgstr "Ei Leitud Akut"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:173
 #, csharp-format
 msgid "{0} hour"
 msgid_plural "{0} hours"
-msgstr[0] "{0} hora"
-msgstr[1] "{0} horas"
+msgstr[0] "{0} tund"
+msgstr[1] "{0} tundi"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:175
 #, csharp-format
 msgid "{0} minute"
 msgid_plural "{0} minutes"
-msgstr[0] "{0} minuto"
-msgstr[1] "{0} minutos"
+msgstr[0] "{0} minut"
+msgstr[1] "{0} minutit"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:177
 msgid "until charged "
-msgstr "hasta que se cargue "
+msgstr "laadimise lõpuni "
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:179
 msgid "remaining "
-msgstr "restantes "
+msgstr "järele jäänud "
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:86
 msgid "Computer"
-msgstr "Equipo"
+msgstr "Arvuti"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "Di_gital Clock"
-msgstr "Reloj d_igital"
+msgstr "Di_gitaalne Kell"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
 msgid "24-Hour _Clock"
-msgstr "_Reloj de 24 horas"
+msgstr "24 T_unni süsteem"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:443
 msgid "Show _Date"
-msgstr "Mostrar _fecha"
+msgstr "Näita _Kuupäeva"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:449
 msgid "Select _Theme"
-msgstr "Seleccionar _tema"
+msgstr "Vali _Teema"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
-msgstr "Temas"
+msgstr "Teemad"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:62
 msgid "Theme"
-msgstr "Tema"
+msgstr "Teema"
 
 #: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:42
 msgid "Show Desktop"
-msgstr "Mostrar el escritorio"
+msgstr "Näita töölauda"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
 msgid "_Add Label"
-msgstr "_Añadir etiqueta"
+msgstr "Lis_a silt"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:113
 msgid "Check e_very:"
-msgstr "Compro_bar cada:"
+msgstr "Kontrolli _intervall:"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:123
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:186
 msgid "minutes"
-msgstr "minutos"
+msgstr "minutit"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:181
 msgid "Click to set username and password."
-msgstr "Pulse para establecer el nombre de usuario y la contraseña."
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:240
 msgid "(no subject)"
-msgstr "(sin asunto)"
+msgstr "(teemat puudub)"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:254
 #, csharp-format
 msgid "You have {0} new, unread messages"
-msgstr "Tienes {0} mensajes nuevos o sin leer"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:258
 #, csharp-format
 msgid "From: {0}"
-msgstr "De: {0}"
+msgstr "Kellelt: {0}"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:272
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:277
 msgid "Feed Error"
-msgstr "Error de suministro"
+msgstr "Viga Saatmisel"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:283
 msgid "Invalid Username"
-msgstr "Nombre de usuario no válido"
+msgstr "Vigane kasutajanimi"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:293
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:174
 msgid "Network Error"
-msgstr "Error de red"
+msgstr "Viga Ühendusel"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:298
 msgid "General Error"
-msgstr "Error general"
+msgstr "Üldine Viga"
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
 msgid "GMail Configuration"
-msgstr "Configuración de Gmail"
+msgstr "GMaili Seadistamine"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 msgid "No unread mail"
-msgstr "No hay correo sin leer"
+msgstr "Lugemata e-kirju pole"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:98
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
-msgstr[0] "{0} mensaje sin leer"
-msgstr[1] "{0} mensajes sin leer"
+msgstr[0] "{0} lugemata teade"
+msgstr[1] "{0} lugemata teadet"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:119
 msgid "Checking mail..."
-msgstr "Comprobando correo..."
+msgstr "Kontrollin e-kirju..."
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "_View "
-msgstr "_Ver "
+msgstr "_Vaade "
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
 msgid "_Compose Mail"
-msgstr "_Redactar correo"
+msgstr "_Koosta Kiri"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:211
 msgid "View C_ontacts"
-msgstr "Ver c_ontactos"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
 msgid "New Mail"
-msgstr "Correo nuevo"
+msgstr "Uus Kiri"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:236
 msgid "Check _Mail"
-msgstr "C_omprobar correo"
+msgstr "Kontrolli _Uusi Kirju"
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
-msgstr "Etiquetas"
+msgstr "Sildid"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
 msgid "GMail"
-msgstr "Gmail"
+msgstr "GMail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr "Iniciar sesión"
+msgstr "Logi sisse"
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
-msgstr "De: "
+msgstr "Kellelt: "
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Eject"
-msgstr "_Expulsar"
+msgstr "_Väljasta"
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Unmount"
-msgstr "_Desmontar"
+msgstr "_Ühenda lahti"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:53
 msgid "Network Manager"
-msgstr "Gestor de red"
+msgstr "Võrguhaldur"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
-msgstr "Conectando..."
+msgstr "Ühenduse loomine..."
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:101
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:166
 msgid "Disconnected"
-msgstr "Desconectado"
+msgstr "Ühendus katkestatud"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
 msgid "Connected: {0}"
-msgstr "Conectado: {0}"
+msgstr "Ühendatud: {0}"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:47
 msgid "My _Stations"
-msgstr "Mis _emisoras"
+msgstr "Minu _Jaamad"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:78
 msgid "S_earch"
-msgstr "B_uscar"
+msgstr "_Otsi"
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
-msgstr "No se encontraron emisoras."
+msgstr "Ühtegi jaama ei leitud."
 
 #: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
-msgstr "Intente de nuevo la búsqueda."
+msgstr "Palun proovi uuesti otsida."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:46
 msgid "Fetching Information..."
-msgstr "Obteniendo información..."
+msgstr "Õngitsen Teavet..."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:72
 msgid "Click to add NPR stations."
-msgstr "Pulse para añadir emisoras NPR."
+msgstr "Klõpsa, et lisada NPR jaamu."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:111
 msgid "Home Page"
-msgstr "Página de inicio"
+msgstr "Kodulehekülg"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:118
 msgid "Program Schedule"
-msgstr "Planificación"
+msgstr "Rakenduste Graafik"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:125
 msgid "Donate"
-msgstr "Donar"
+msgstr "Anneta"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:132
 msgid "Live Streams"
-msgstr "Emisiones en directo"
+msgstr "Otse-ülekanded"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:170
 msgid "Settings"
-msgstr "Configuración"
+msgstr "Seaded"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:56
 msgid "Clear the Recent Documents list?"
-msgstr "¿Desea vaciar la lista de documentos recientes?"
+msgstr "Kas tühjendada hiljuti avatud dokumentide nimekiri?"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:58
 msgid "Clear Recent Documents"
-msgstr "Vaciar documentos recientes"
+msgstr "Puhasta hiljutiste dokumendite nimekiri"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:60
 msgid ""
@@ -659,163 +655,163 @@ msgid ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
-"Si vacía la lista de documentos recientes, eliminará lo siguiente:\n"
-"• Todos los elementos del menú Lugares → Documentos recientes.\n"
-"• Todos los elementos de la lista de documentos recientes en todas las "
-"aplicaciones."
+"Kui sa puhastad hiljutiste dokumentide loendi, siis puhastatakse järgnev:\n"
+"• Kõik menüü Asukohad → Hiljutised dokumendid kirjed.\n"
+"• Kõik kirjed rakenduste viimaste dokumentide loenditest."
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:81
 msgid "_Clear Recent Documents..."
-msgstr "_Vaciar documentos recientes..."
+msgstr "_Puhasta hiljuti avatud dokumentide nimekiri..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
 msgid "Lock Screen"
-msgstr "Bloquear la pantalla"
+msgstr "Lukusta ekraan"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:157
 msgid "Log Out..."
-msgstr "Cerrando sesión..."
+msgstr "Logi välja..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
 msgid "Log Out"
-msgstr "Cerrar Sesión"
+msgstr "Logi välja"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:159
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
 msgstr ""
-"¿Seguro que desea cerrar todos los programas y finalizar su sesión en el "
-"equipo?"
+"Kas oled kindel, et tahad kõik programmid sulgeda ja arvutist välja logida?"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:164
 msgid "Suspend"
-msgstr "Suspender"
+msgstr "Arvuti seisatakse"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:169
 msgid "Hibernate"
-msgstr "Hibernar"
+msgstr "Arvuti uinutatakse"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:175
 msgid "Restart..."
-msgstr "Reiniciar..."
+msgstr "Taaskäivita..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
 msgid "Restart"
-msgstr "Reiniciar"
+msgstr "Taaskäivita"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:177
 msgid "Are you sure you want to close all programs and restart the computer?"
-msgstr "¿Seguro que desea cerrar todos los programas y reiniciar el equipo?"
+msgstr ""
+"Kas oled kindel, et tahad kõik programmid sulgeda ja arvuti taaskäivitada?"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:182
 msgid "Shut Down..."
-msgstr "Apagar..."
+msgstr "Väljalülitamine..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:183
 msgid "Shut Down"
-msgstr "Apagar"
+msgstr "Väljalülitamine"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:184
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
-msgstr "¿Seguro que desea cerrar todos los programas y apagar el equipo?"
+msgstr ""
+"Kas oled kindel, et tahad kõik programmid sulgeda ja arvuti välja lülitada?"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:86
 #, csharp-format
 msgid "A timer set for {0} has expired."
-msgstr "El tiempo establecido para {0} terminó."
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:232
 msgid "Time remaining:"
-msgstr "Tiempo restante:"
+msgstr "Jäänud aega:"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:234
 msgid "Timer paused, time remaining:"
-msgstr "Temporizador pausado, tiempo restante:"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:245
 msgid "Set the timer's label to:"
-msgstr "Establecer la etiqueta del temporizador a:"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:251
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:285
 msgid "_Set Label"
-msgstr "E_stablecer etiqueta"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:276
 msgid "_Pause Timer"
-msgstr "_Pausar el temporizador"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:276
 msgid "_Start Timer"
-msgstr "_Iniciar temporizador"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:280
 msgid "_Remove Timer"
-msgstr "Elimina_r temporizador"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:56
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] "hora"
-msgstr[1] "horas"
+msgstr[0] "tund"
+msgstr[1] "tundi"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:60
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] "minuto"
-msgstr[1] "minutos"
+msgstr[0] "minut"
+msgstr[1] "minuti"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:65
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] "segundo"
-msgstr[1] "segundos"
+msgstr[0] "sekund"
+msgstr[1] "sekundi"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:132
 #, csharp-format
 msgid "Click to create a timer for {0}."
-msgstr "Pulse para crear un temporizador para {0}."
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:149
 msgid "Automatically _Start Timers"
-msgstr "Iniciar temporizadore_s automáticamente"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:153
 msgid "Automatically _Dismiss Timers"
-msgstr "Parar temporiza_dores automáticamente"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:55
 msgid "Drop to move to Trash"
-msgstr "Soltar para mover a la papelera"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:82
 msgid "No items in Trash"
-msgstr "No hay elementos en la papelera"
+msgstr "Prügikast on tühi"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:84
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
-msgstr[0] "{0} elemento en la papelera"
-msgstr[1] "{0} elementos en la papelera"
+msgstr[0] "{0} ese on Prügikastis"
+msgstr[1] "{0} eset on Prügikastis"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:169
 msgid "Restore Files"
-msgstr "Restaurar Archivos"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:200
 msgid "_Open Trash"
-msgstr "_Abrir la papelera"
+msgstr "_Ava prügikast"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:202
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:233
 msgid "Empty _Trash"
-msgstr "_Vaciar papelera"
+msgstr "Tühjenda _prügikast"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:225
 msgid "Empty all of the items from the trash?"
-msgstr "¿Vaciar todos los elementos de la papelera?"
+msgstr "Kas tühjendada kogu prügikast?"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:227
 msgid ""
@@ -823,41 +819,41 @@ msgid ""
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
-"Si elige vaciar la papelera, todos los elementos que\n"
-"haya en ella se borrarán para siempre. Observe que\n"
-"también puede borrarlos por separado."
+"Kui sa valid kogu prügikasti tühjendamise siis kustutatakse \n"
+"kõik sisu alatiseks. Palun arvesta, et sul on võimalik ka \n"
+"ükshaaval sisu kustutada."
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:65
 msgid "_Weather Provider:"
-msgstr "_Proveedor meteorológico:"
+msgstr "_Ilma Ennustaja:"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:105
 msgid "My _Locations"
-msgstr "Mis _lugares"
+msgstr "Minu _Asukohad"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:136
 msgid "_Search"
-msgstr "_Buscar"
+msgstr "_Otsi"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:176
 msgid "Automatically Update _Every"
-msgstr "Actualizar automáticamente _cada"
+msgstr "Automaatse Uuenduse _Intervall"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:220
 msgid "Use _Metric Units"
-msgstr "Usar unidades _métricas"
+msgstr "Kasuta _Meeter Ühikuid"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:171
 msgid "Invalid Weather Location"
-msgstr "Área meteorológica incorrecta"
+msgstr "Vigane Asukoht"
 
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
 msgstr ""
-"Datos meteorológicos proporcionados por Google. Requiere que los lugares se "
-"especifiquen como un código postal de EE. UU. o como «Ciudad, País»."
+"Ilma informatsiooni pakub Google.  Antud allika puhul on vajalik asukoha "
+"määramine kas USA postiindeksi või ' Linn, Riik ' näol."
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
@@ -866,356 +862,134 @@ msgid ""
 "website.  To find your code, look up your forecast on their site and the "
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
-"Datos meteorológicos proporcionados por The Weather Channel©. Requiere que "
-"los lugares se especifiquen como un código postal de EE. UU. o como un "
-"código único del sitio web. Para saber el código, busque el pronóstico en su "
-"página web y encontrará el código en el URL, después de «/local/» como algo "
-"parecido a AAXX0000."
+"Ilma informatsiooni pakub ja autoriõigusi omab The Weather Channel. Antud "
+"allika puhul on vajalik asukoha määramiseks kas USA postiindeksi või "
+"unikaalne kood kodulehelt. Et leida teile vajaliku koodi, otsige üles "
+"kodulehelt teie asukoha ilmaennustus ja kood ilmneb aadressiribal peale "
+"\"/local\" kirjet, nähes välja nagu AAXX0000."
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:56
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
 msgstr ""
-"Datos meteorológicos proporcionados por Weather Underground©. Requiere que "
-"los lugares se especifiquen como un código postal de EE. UU. o como «Ciudad, "
-"País»."
+"Ilma informatsiooni pakub ja autoriõigusi omab Weather Underground.  Antud "
+"allika puhul on vajalik asukoha määramine kas USA postiindeksi või ' Linn, "
+"Riik ' näol."
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
-msgstr "No se encontraron resultados."
+msgstr "Midagi ei leitud."
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
-msgstr "Configuración de meteorología"
+msgstr "Ilmaennustuse Seadistamine"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
 msgid "Click to add a location."
-msgstr "Pulse para añadir una nueva ubicación."
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
 msgid "Fetching data..."
-msgstr "Obteniendo datos..."
+msgstr "Õngitsen teavet..."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Radar _Map"
-msgstr "_Mapa del radar"
+msgstr "Radari _Kaart"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "Forecasts"
-msgstr "Pronóstico"
+msgstr "Ennustus"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:252
 msgid "Check _Weather"
-msgstr "Consultar la _meteorología"
+msgstr "Kontrolli _Ilma"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
 msgid "_Today"
-msgstr "_Hoy"
+msgstr "_Täna"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
 msgid "T_omorrow"
-msgstr "M_añana"
+msgstr "_Homme"
 
 #. draw humidity
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:328
 #, csharp-format
 msgid "{0} humidity"
-msgstr "{0} humedad"
+msgstr ""
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:70
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:220
 msgid "Switch Desks"
-msgstr "Cambiar escritorios"
+msgstr ""
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:171
 msgid "Desk"
-msgstr "Escritorio"
+msgstr ""
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:173
 msgid "Virtual Desk"
-msgstr "Escritorio virtual"
-
-#~ msgid "Tomorrow"
-#~ msgstr "Mañana"
-
-#~ msgid "Today"
-#~ msgstr "Hoy"
-
-#~ msgid "Radar Map"
-#~ msgstr "Mapa de Radar"
-
-#~ msgid "Reload Weather Data"
-#~ msgstr "Recargar Datos del Clima"
-
-#~ msgid "Add _Location"
-#~ msgstr "Agregar _Lugar"
-
-#~ msgid "Some information about the weather source."
-#~ msgstr "Algo de información acerca de la fuente del clima."
-
-#~ msgid "Move _Up"
-#~ msgstr "Mover _Arriba"
-
-#~ msgid "Move _Down"
-#~ msgstr "Mover _Abajo"
-
-#~ msgid "mins"
-#~ msgstr "mins"
+msgstr ""
 
 #~ msgid "_Add"
-#~ msgstr "_Añadir"
-
-#~ msgid "Add _Label"
-#~ msgstr "Agregar _Etiqueta"
-
-#~ msgid ""
-#~ "<big><b>Empty all of the items from the trash?</b></big>\n"
-#~ "\n"
-#~ "If you choose to empty the trash, all items in it\n"
-#~ "will be permanently lost. Please note that you\n"
-#~ "can also delete them separately."
-#~ msgstr ""
-#~ "<big><b>¿Borrar todos los archivos de la papelera?</b></big>\n"
-#~ "\n"
-#~ "Si elige vaciar la papelera, todos los elementos en ella\n"
-#~ "se borrarán permanentemente. Tenga en cuenta que\n"
-#~ "también puede borrarlos separadamente."
-
-#~ msgid "Check _Every"
-#~ msgstr "Comprobar _Cada"
-
-#~ msgid "Compose Mail"
-#~ msgstr "Redactar Correo"
-
-#~ msgid "View "
-#~ msgstr "Ver "
-
-#~ msgid "Check Now"
-#~ msgstr "Comprobar Ahora"
-
-#~ msgid "Digital Clock"
-#~ msgstr "Reloj Digital"
-
-#~ msgid "Docky Configuration"
-#~ msgstr "Configuración de Docky"
-
-#~ msgid "Exec"
-#~ msgstr "Ejecutar"
-
-#~ msgid "Select Theme"
-#~ msgstr "Seleccionar Tema"
-
-#~ msgid "Show Date"
-#~ msgstr "Mostrar Fecha"
-
-#~ msgid "24-Hour Clock"
-#~ msgstr "Reloj de 24 Horas"
-
-#~ msgid "New Dock"
-#~ msgstr "Nuevo Dock"
-
-#~ msgid "Start When Computer Starts"
-#~ msgstr "Iniciar Cuando Inicia la Computadora"
-
-#~ msgid "Theme:"
-#~ msgstr "Tema:"
-
-#~ msgid "Icon Size:"
-#~ msgstr "Tamaño del Icono:"
-
-#~ msgid "Fade On Hide"
-#~ msgstr "Desvanecer Al Esconder"
-
-#~ msgid "Indicate Multiple Windows"
-#~ msgstr "Indicar Múltiples Ventanas"
-
-#~ msgid "Autohide:"
-#~ msgstr "Autoesconder:"
-
-#~ msgid "Manage Windows Without Launcher"
-#~ msgstr "Gestionar Ventanas Sin Lanzador"
-
-#~ msgid "The finest dock no money can buy."
-#~ msgstr "El mejor dock que el dinero no puede comprar."
-
-#~ msgid "Icon"
-#~ msgstr "Ícono"
-
-#~ msgid "Zoom:"
-#~ msgstr "Zoom:"
-
-#~ msgid "<b>Active Plugins</b>"
-#~ msgstr "<b>Plugins Activos</b>"
-
-#~ msgid "<b>Inactive Plugins</b>"
-#~ msgstr "<b>Plugins Inactivos</b>"
-
-#~ msgid "Name"
-#~ msgstr "Nombre"
-
-#~ msgid "Docky"
-#~ msgstr "Docky"
-
-#~ msgid "Sunrise"
-#~ msgstr "Amanecer"
-
-#~ msgid "Sunset"
-#~ msgstr "Ocaso"
-
-#~ msgid "Wind"
-#~ msgstr "Viento"
-
-#~ msgid "Direction"
-#~ msgstr "Dirección"
-
-#~ msgid "Humidity"
-#~ msgstr "Humedad"
-
-#~ msgid "Temp"
-#~ msgstr "Temperatura"
-
-#, csharp-format
-#~ msgid "{0}'s Forecast"
-#~ msgstr "Pronóstico para {0}"
-
-#~ msgid "_Cancel"
-#~ msgstr "_Cancelar"
-
-#~ msgid "Panel Mode"
-#~ msgstr "Modo Panel"
-
-#~ msgid "Delete Dock"
-#~ msgstr "Borrar Dock"
-
-#~ msgid "Drag any dock to move it."
-#~ msgstr "Arrastra cualquier dock para moverlo."
-
-#~ msgid "_Show Preferences"
-#~ msgstr "_Mostrar Preferencias"
-
-#~ msgid "Fade out dock instead of slide off screen"
-#~ msgstr "Se desvanece en lugar de deslizarse fuera de la pantalla"
-
-#~ msgid "Reset _Color"
-#~ msgstr "Restaurar _Color"
-
-#~ msgid "_Quit"
-#~ msgstr "_Salir"
-
-#~ msgid "Inbox"
-#~ msgstr "Bandeja de Entrada"
-
-#~ msgid "Check _Now"
-#~ msgstr "Comprobar _Ahora"
-
-#~ msgid "Config"
-#~ msgstr "Configuración"
-
-#~ msgid "_Reset Color"
-#~ msgstr "_Restaurar Color"
-
-#~ msgid "iGoogle"
-#~ msgstr "iGoogle"
-
-#~ msgid "Locations"
-#~ msgstr "Lugares"
-
-#~ msgid "Search Results"
-#~ msgstr "Resultados de la Búsqueda"
-
-#~ msgid "Currently searching..."
-#~ msgstr "Actualmente buscando..."
-
-#~ msgid "Weather Channel"
-#~ msgstr "Weather Channel"
-
-#~ msgid "Weather Underground"
-#~ msgstr "Weather Underground"
-
-#~ msgid "No results found"
-#~ msgstr "No se encontraron resultados"
-
-#~ msgid "_Reload Weather Data"
-#~ msgstr "_Recargar Datos del Clima"
-
-#~ msgid "_Weather Provider"
-#~ msgstr "Proveedor del Clima"
-
-#~ msgid "Related Items"
-#~ msgstr "Elementos Relacionados"
-
-#~ msgid "<i>Always present, acts like a panel.</i>"
-#~ msgstr "<i>Siempre presente, actua como una panel.</i>"
-
-#~ msgid ""
-#~ "Docky requires compositing to work properly.  Please enable compositing and "
-#~ "restart docky."
-#~ msgstr ""
-#~ "Docky necesita compositing para funcionar correctamente. Por favor habilita "
-#~ "compositing y reinicia docky."
-
-#~ msgid "Drop to open"
-#~ msgstr "Soltar para abrir"
-
-#~ msgid "Extensions"
-#~ msgstr "Extensiones"
-
-#~ msgid "3D Background"
-#~ msgstr "Fondo 3D"
-
-#~ msgid "Click to browse..."
-#~ msgstr "Clic para buscar..."
-
-#~ msgid "Enable"
-#~ msgstr "Activar"
-
-#~ msgid "Disable"
-#~ msgstr "Desactivar"
-
-#~ msgid "<b>Active Docklets</b>"
-#~ msgstr "<b>Docklets Activos</b>"
-
-#~ msgid "<b>Inactive Docklets</b>"
-#~ msgstr "<b>Docklets Inactivos</b>"
+#~ msgstr "_Lisa"
 
 #~ msgid "_Disable"
-#~ msgstr "_Desactivar"
+#~ msgstr "_Keela"
 
 #~ msgid "_Enable"
-#~ msgstr "_Activar"
-
-#~ msgid ""
-#~ "Causes launchers which currently manage more than one window to have an "
-#~ "extra indicator under it."
-#~ msgstr ""
-#~ "Hace que los lanzadores que actualmente gestionen más de una ventana tengan "
-#~ "un indicador extra debajo."
-
-#~ msgid "_Start When Computer Starts"
-#~ msgstr "_Iniciar al arrancar el equipo"
-
-#~ msgid "Indicat_e Multiple Windows"
-#~ msgstr "Indic_ar varias ventanas"
-
-#~ msgid "Username or Password not set"
-#~ msgstr "El nombre de usuario o contraseña no están configurados"
-
-#~ msgid "Network Error: "
-#~ msgstr "Error de red: "
-
-#~ msgid "Feels Like"
-#~ msgstr "Sensación térmica"
-
-#~ msgid "_Remove"
-#~ msgstr "Elimina_r"
+#~ msgstr "_Luba"
 
 #~ msgid ""
 #~ "Docky requires compositing to work properly. Please enable compositing and "
 #~ "restart docky."
 #~ msgstr ""
-#~ "Docky requiere composición para funcionar correctamente. Active la "
-#~ "composición y reinicie Docky."
+#~ "Docky vajab compositingut töötamiseks. Palun võimalda compositing ja "
+#~ "taaskäivita docky."
 
-#~ msgid "Invalid XML Weather Data"
-#~ msgstr "El XML con la información del clima es inválido"
+#~ msgid "_Remove"
+#~ msgstr "_Eemalda"
+
+#~ msgid ""
+#~ "Causes launchers which currently manage more than one window to have an "
+#~ "extra indicator under it."
+#~ msgstr ""
+#~ "Käivitajate alla, mis haldavad rohkem kui ühte akent, ilmub lisaks "
+#~ "indikaator."
+
+#~ msgid "Docky Configuration"
+#~ msgstr "Docky Seaded"
+
+#~ msgid "_Start When Computer Starts"
+#~ msgstr "_Käivita arvuti käivitumisel"
+
+#~ msgid "Indicat_e Multiple Windows"
+#~ msgstr "_Tähista rakendused mitmete akendega"
+
+#~ msgid "Username or Password not set"
+#~ msgstr "Kasutaja nimi või Parool puuduvad"
+
+#~ msgid "Network Error: "
+#~ msgstr "Võrgu Viga: "
+
+#~ msgid "Sunrise"
+#~ msgstr "Päikesetõus"
+
+#~ msgid "Wind"
+#~ msgstr "Tuul"
+
+#~ msgid "Direction"
+#~ msgstr "Suund"
+
+#~ msgid "Temp"
+#~ msgstr "Temperatuur"
+
+#~ msgid "Feels Like"
+#~ msgstr "Tundub Nagu"
+
+#~ msgid "Humidity"
+#~ msgstr "_Niiskus"
+
+#~ msgid "Sunset"
+#~ msgstr "Päikeseloojang"

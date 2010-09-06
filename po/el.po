@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-08-25 06:48+0000\n"
+"X-Launchpad-Export-Date: 2010-09-06 11:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
@@ -368,7 +368,7 @@ msgstr "_Κλείσιμο Όλων"
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
 msgid "Sign up for {0}"
-msgstr ""
+msgstr "Υπογράψτε για {0}"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:44
 msgid "Validating..."
@@ -377,7 +377,7 @@ msgstr "Επικύρωση..."
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:45
 #, csharp-format
 msgid "Don't have {0}?"
-msgstr ""
+msgstr "Δεν έχετε {0};"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:46
 msgid "Account validation failed!"
@@ -415,15 +415,15 @@ msgstr "Δε Βρέθηκε Μπαταρία."
 #, csharp-format
 msgid "{0} hour"
 msgid_plural "{0} hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} ώρα"
+msgstr[1] "{0} ώρες"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:175
 #, csharp-format
 msgid "{0} minute"
 msgid_plural "{0} minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} λεπτό"
+msgstr[1] "{0} λεπτά"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:177
 msgid "until charged "
@@ -467,7 +467,7 @@ msgstr "Εμφάνιση Επιφάνειας Εργασίας"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
 msgid "_Add Label"
-msgstr ""
+msgstr "_Προσθήκη ετικέτας"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:113
 msgid "Check e_very:"
@@ -484,7 +484,7 @@ msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:240
 msgid "(no subject)"
-msgstr ""
+msgstr "(χωρίς θέμα)"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:254
 #, csharp-format
@@ -503,13 +503,13 @@ msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:283
 msgid "Invalid Username"
-msgstr ""
+msgstr "Μη έγκυρο όνομα χρήστη"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:293
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:174
 msgid "Network Error"
-msgstr ""
+msgstr "Πρόβλημα Δικτύου"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:298
 msgid "General Error"
@@ -521,7 +521,7 @@ msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 msgid "No unread mail"
-msgstr ""
+msgstr "Κανένα μη αναγνωσμένο μήνυμα"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:98
 #, csharp-format
@@ -548,7 +548,7 @@ msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
 msgid "New Mail"
-msgstr ""
+msgstr "Νέα αλληλογραφία"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:236
 msgid "Check _Mail"
@@ -556,7 +556,7 @@ msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
-msgstr ""
+msgstr "Ετικέτες"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
 msgid "GMail"
@@ -564,32 +564,32 @@ msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr ""
+msgstr "Είσοδος"
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
-msgstr ""
+msgstr "Από: "
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Eject"
-msgstr ""
+msgstr "_Αποβολή"
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Unmount"
-msgstr ""
+msgstr "_Απόσπαση"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:53
 msgid "Network Manager"
-msgstr ""
+msgstr "Διαχειριστής δικτύου"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
-msgstr ""
+msgstr "Σύνδεση..."
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:101
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:166
 msgid "Disconnected"
-msgstr ""
+msgstr "Αποσυνδεδεμένο"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
@@ -602,7 +602,7 @@ msgstr ""
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:78
 msgid "S_earch"
-msgstr ""
+msgstr "Ανα_ζήτηση"
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
@@ -623,7 +623,7 @@ msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:111
 msgid "Home Page"
-msgstr ""
+msgstr "Αρχική Σελίδα"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:118
 msgid "Program Schedule"
@@ -631,7 +631,7 @@ msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:125
 msgid "Donate"
-msgstr ""
+msgstr "Δωρεά"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:132
 msgid "Live Streams"
@@ -643,11 +643,11 @@ msgstr "Ρυθμίσεις"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:56
 msgid "Clear the Recent Documents list?"
-msgstr ""
+msgstr "Εκκαθάριση της λίστας πρόσφατων εγγράφων;"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:58
 msgid "Clear Recent Documents"
-msgstr ""
+msgstr "Εκκαθάριση πρόσφατων εγγράφων"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:60
 msgid ""
@@ -655,6 +655,9 @@ msgid ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
+"Αν εκκαθαρίσετε τη λίστα Πρόσφατων Εγγράφων, θα διαγράψετε τα ακόλουθα:\n"
+"• Όλα τα αντικείμενα από το μενού Τοποθεσίες → Πρόσφατα Έγγραφα.\n"
+"• Όλα τα αντικείμενα από τη λίστα πρόσφατων εγγράφων σε όλες τις εφαρμογές."
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:81
 msgid "_Clear Recent Documents..."
@@ -796,16 +799,16 @@ msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:200
 msgid "_Open Trash"
-msgstr ""
+msgstr "Ά_νοιγμα απορριμμάτων"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:202
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:233
 msgid "Empty _Trash"
-msgstr ""
+msgstr "Άδειασμα α_πορριμμάτων"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:225
 msgid "Empty all of the items from the trash?"
-msgstr ""
+msgstr "Διαγραφή όλων των αντικειμένων από τα απορρίμματα;"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:227
 msgid ""
@@ -824,7 +827,7 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:136
 msgid "_Search"
-msgstr ""
+msgstr "Α_ναζήτηση"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:176
 msgid "Automatically Update _Every"
@@ -890,7 +893,7 @@ msgstr "_Χάρτης Ραντάρ"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "Forecasts"
-msgstr ""
+msgstr "Καιρικές Προβλέψεις"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:252
 msgid "Check _Weather"
@@ -922,3 +925,45 @@ msgstr ""
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:173
 msgid "Virtual Desk"
 msgstr ""
+
+#~ msgid "_Disable"
+#~ msgstr "Α_πενεργοποίηση"
+
+#~ msgid "_Enable"
+#~ msgstr "Ενερ_γοποίηση"
+
+#~ msgid "Docky Configuration"
+#~ msgstr "Ρυθμίσεις του Docky"
+
+#~ msgid "_Start When Computer Starts"
+#~ msgstr "Ε_κκίνηση όταν ξεκινά ο υπολογιστής"
+
+#~ msgid "Network Error: "
+#~ msgstr "Σφάλμα Δικτύου: "
+
+#~ msgid "Temp"
+#~ msgstr "Θερμοκρασία"
+
+#~ msgid "Humidity"
+#~ msgstr "Υγρασία"
+
+#~ msgid "_Remove"
+#~ msgstr "_Αφαίρεση"
+
+#~ msgid "_Add"
+#~ msgstr "_Προσθήκη"
+
+#~ msgid "Indicat_e Multiple Windows"
+#~ msgstr "Σήμαν_ση Πολλαπλών Παραθύρων"
+
+#~ msgid "Sunrise"
+#~ msgstr "Ανατολή"
+
+#~ msgid "Sunset"
+#~ msgstr "Ηλιοβασίλεμα"
+
+#~ msgid "Wind"
+#~ msgstr "Άνεμος"
+
+#~ msgid "Direction"
+#~ msgstr "Κατεύθυνση"

@@ -1,4 +1,4 @@
-# Spanish translation for docky
+# Slovak translation for docky
 # Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the docky package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
@@ -8,58 +8,58 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-08-16 12:56+0200\n"
-"PO-Revision-Date: 2010-08-25 10:07+0000\n"
-"Last-Translator: DiegoJ <diegojromerolopez@gmail.com>\n"
-"Language-Team: Spanish <es@li.org>\n"
+"PO-Revision-Date: 2010-08-26 06:20+0000\n"
+"Last-Translator: Rico Tzschichholz <Unknown>\n"
+"Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
 "X-Launchpad-Export-Date: 2010-09-06 11:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Search Docklets..."
-msgstr "Buscar Docklets..."
+msgstr "Hľadať docklety..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:164
 msgid "Search Helpers..."
-msgstr "Buscar ayudantes..."
+msgstr "Hľadať pomocníkov..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid "Click on any dock to configure."
-msgstr "Seleccionar cualquier dock para configurar."
+msgstr "Pre konfiguráciu klinite na ľubovoľný dok"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:229
 msgid "Drag any dock to reposition."
-msgstr "Arrastrar cualquier dock para reposicionarlo."
+msgstr "Chyť a ťahaj Dock pre usporiadanie"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:294
 msgid "Delete the currently selected dock?"
-msgstr "¿Eliminar el dock actualmente seleccionado?"
+msgstr "Odstrániť aktuálne vybraný Dock?"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:296
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
-"Si decide eliminar el dock, toda la configuración\n"
-"de este dock se perderá permanentemente."
+"Ak sa rozhodnete odstrániť aktuálne vybraný Dock, \n"
+"všetky jeho nastavenia sa natrvalo stratia."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:303
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
-msgstr "_Eliminar Dock"
+msgstr "_Odstrániť Dock"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:419
 #: ../Docky/Docky/ConfigurationWindow.cs:439
 msgid "_Select"
-msgstr "_Seleccionar"
+msgstr "_Vybrať"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:422
 #: ../Docky/Docky/ConfigurationWindow.cs:442
 msgid ".tar Archives"
-msgstr "Archivadores .tar"
+msgstr ".tar Archívy"
 
 #: ../Docky/Docky/DockletTile.cs:51
 msgid "Author"
@@ -67,591 +67,591 @@ msgstr "Autor"
 
 #: ../Docky/Docky/DockletTile.cs:86
 msgid "Move this docklet up on the selected dock"
-msgstr "Mover este docklet hacia arriba en el dock seleccionado"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:87
 msgid "Move this docklet down on the selected dock"
-msgstr "Mover este docklet hacia abajo en el dock seleccionado"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:91
 msgid "Move this docklet left on the selected dock"
-msgstr "Mover este docklet a la izquierda en el dock seleccionado"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:92
 msgid "Move this docklet right on the selected dock"
-msgstr "Mover este docklet a la derecha en el dock seleccionado"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:94
 msgid "Configure this docklet"
-msgstr "Configurar este docklet"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:95
 msgid "About this docklet"
-msgstr "Acerca de este docklet"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:96
 msgid "Add this docklet to the selected dock"
-msgstr "Añadir este docklet al dock seleccionado"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:97
 msgid "Remove this docklet from the selected dock"
-msgstr "Quitar este docklet del dock seleccionado"
+msgstr ""
 
 #: ../Docky/Docky/Docky.cs:113
 msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
 msgstr ""
-"Docky necesita que los efectos de escritorio estén activados para trabajar "
-"correctamente. Algunas opciones están deshabilitadas y los temas y "
-"animaciones pueden aparecer de forma incorrecta. "
 
 #: ../Docky/Docky/HelperTile.cs:42
 msgid "Status"
-msgstr "Estado"
+msgstr "Stav"
 
 #: ../Docky/Docky/HelperTile.cs:59
 msgid "Uninstall"
-msgstr "Desinstalar"
+msgstr "Odinštalovať"
 
 #: ../Docky/Docky/HelperTile.cs:71
 msgid "About this helper"
-msgstr "Acerca de este ayudante"
+msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:72
 msgid "Enable this helper"
-msgstr "Activar este ayudante"
+msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:73
 msgid "Disable this helper"
-msgstr "Desactivar este ayudante"
+msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Running"
-msgstr "En ejecución"
+msgstr "Spustené"
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Stopped"
-msgstr "Detenido"
+msgstr "Zastavené"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:333
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
-"Cuando está activado, las ventanas que no tienen lanzadores se añadirán a "
-"ese dock."
+"Pri tomto nastavení budú okná ktoré zatiaľ nemajú spúšťač, do tohto doku "
+"pridané."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:692
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
-msgstr "<i>Nunca se esconde; las ventanas maximizadas no cubren el dock.</i>"
+msgstr "<i>Nikdy neskrývať: Maximalizované okná neprekrývajú Dock.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:695
 msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr "<i>Se esconde cuando el ratón no está sobre él.</i>"
+msgstr "<i>Skryje sa vždy, keď nad ním nie je myš.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:698
 msgid "<i>Hides when dock obstructs the active application.</i>"
-msgstr "<i>Se esconde cuando el dock obstruye la aplicación activa.</i>"
+msgstr "<i>Skryje sa vždy, keď Dock prekryje aktívne okno.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:701
 msgid "<i>Hides when dock obstructs any window.</i>"
-msgstr "<i>Se esconde cuando el dock obstruye cualquier ventana.</i>"
+msgstr "<i>Skryje sa vždy, keď Dock prekryje akékoľvek okno.</i>"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:378
 msgid "Drag to reposition"
-msgstr "Arrastrar para reposicionar"
+msgstr "Ťahajte na zmenu pozície"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:390
 #: ../Docky/Docky/Interface/DockWindow.cs:404
 msgid "Drop to add to dock"
-msgstr "Soltar para añadir al dock"
+msgstr "Pustite pre pridanie do doku"
 
 #: ../Docky/Docky/Items/DockyItem.cs:132
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:244
 msgid "_Settings"
-msgstr "_Configuración"
+msgstr "_Nastavenia"
 
 #: ../Docky/Docky/Items/DockyItem.cs:133
 msgid "_About"
-msgstr "Acerca _de"
+msgstr "_O programe"
 
 #: ../Docky/Docky/Items/DockyItem.cs:134
 msgid "_Help"
-msgstr "_Ayuda"
+msgstr "_Pomocník"
 
 #: ../Docky/Docky/Items/DockyItem.cs:136
 msgid "_Quit Docky"
-msgstr "_Salir de Docky"
+msgstr "_Ukončiť Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
 msgid "Docky Settings"
-msgstr "Configuración de Docky"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
 msgid "_Start When User Logs In"
-msgstr "Arrancar al iniciar _sesión"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
-msgstr "_Tema:"
+msgstr "_Téma:"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
 msgid "_Install"
-msgstr "_Instalar"
+msgstr "_Inštalovať"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
 msgid "<b>General Options</b>"
-msgstr "<b>Opciones generales</b>"
+msgstr "<b>Všeobecné možnosti</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
-msgstr "<b>Configuración del dock</b>"
+msgstr "<b>Konfigurácia doku</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
-msgstr "Docks"
+msgstr "Doky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
 msgid "All"
-msgstr "Todas"
+msgstr "Všetko"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
 msgid "Enabled"
-msgstr "Activado"
+msgstr "Povolené"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
 msgid "Disabled"
-msgstr "Desactivado"
+msgstr "Zakázané"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
 msgid "Docklets"
-msgstr "Docklets"
+msgstr "Doklety"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
 msgid "Usable"
-msgstr "Utilizable"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
-msgstr "Ayudantes"
+msgstr "Pomocníci"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
 msgid "_New Dock"
-msgstr "Dock _nuevo"
+msgstr "_Nový Dok"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
 msgid "None"
-msgstr "Ninguno"
+msgstr "Žiadny"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
 msgid "Autohide"
-msgstr "Ocultar automáticamente"
+msgstr "Automatické skrývanie"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "Intellihide"
-msgstr "Ocultamiento inteligente"
+msgstr "Inteligentné skrývanie"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Window Dodge"
-msgstr "Esquivar ventanas"
+msgstr "Vyhýbanie"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
 msgid "_Fade On Hide"
-msgstr "_Desvanecer al ocultar"
+msgstr "_Vyblednúť pri skrývaní"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
 msgid "_Icon Size:"
-msgstr "_Tamaño del icono:"
+msgstr "_Veľkosť ikony:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:132
 msgid "_Hiding:"
-msgstr "_Ocultación:"
+msgstr "_Skrývanie:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
 msgid "_Panel Mode"
-msgstr "_Modo panel"
+msgstr "_Režim panelu"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
 msgid "3D Back_ground"
-msgstr "Fondo _3D"
+msgstr "3D poza_die"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
 msgid "_Manage Windows Without Launcher"
-msgstr "_Gestionar ventanas sin lanzador"
+msgstr "_Spravovať okná bez spúšťača"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
 msgid "_Zoom:"
-msgstr "_Zoom:"
+msgstr "_Priblíženie"
 
 #: ../Docky.Items/Docky.Items/AbstractDockItem.cs:120
 #, csharp-format
 msgid "Drop to open with {0}"
-msgstr "Soltar para abrir con {0}"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:171
 msgid "New _Window"
-msgstr "_Ventana nueva"
+msgstr "Nové _okno"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:173
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
-msgstr "_Abrir"
+msgstr "_Otvoriť"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:70
 msgid "Reset Color"
-msgstr "Reiniciar color"
+msgstr "Resetovať farbu"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:479
 msgid "_Pin to Dock"
-msgstr "_Anclar al dock"
+msgstr "_Pripnúť do doku"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:72
 #, csharp-format
 msgid "Drop to move to {0}"
-msgstr "Soltar para mover a {0}"
+msgstr ""
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:191
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:236
 msgid "Error performing drop action"
-msgstr "Error al soltar"
+msgstr "Chyba pri pokuse o uvoľnenie"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:191
 msgid "Not enough free space on destination."
-msgstr "No hay suficiente espacio en el destino."
+msgstr "Nedostatok miesta v cieli."
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:208
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:211
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:243
 msgid "Complete"
-msgstr "Completado"
+msgstr "Hotovo"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:221
 msgid "Moving"
-msgstr "Moviendo"
+msgstr "Presúvanie"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:227
 msgid "Copying"
-msgstr "Copiando"
+msgstr "Kopírovanie"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:261
 msgid "Open"
-msgstr "Abrir"
+msgstr "Otvoriť"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:262
 msgid "Open Containing Folder"
-msgstr "Abrir carpeta contenedora"
+msgstr "Otvoriť priečinok"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:258
 msgid "Unma_ximize"
-msgstr "Desma_ximizar"
+msgstr "Zrušiť ma_ximalizáciu"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:261
 msgid "Ma_ximize"
-msgstr "Ma_ximizar"
+msgstr "Ma_ximalizovať"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:265
 msgid "_Restore"
-msgstr "_Restaurar"
+msgstr "_Obnoviť"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:268
 msgid "Mi_nimize"
-msgstr "Mi_nimizar"
+msgstr "Mi_nimalizovať"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:271
 msgid "_Close All"
-msgstr "Cerrar _todo"
+msgstr "_Zavrieť všetko"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
 msgid "Sign up for {0}"
-msgstr "Registrarse en {0}"
+msgstr "Zaregistrujte sa pre {0}"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:44
 msgid "Validating..."
-msgstr "Validando..."
+msgstr "Overujem..."
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:45
 #, csharp-format
 msgid "Don't have {0}?"
-msgstr "¿No tiene {0}?"
+msgstr "Nemáte {0}?"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:46
 msgid "Account validation failed!"
-msgstr "¡Ha fallado la validación de la cuenta!"
+msgstr "Overenie účtu zlyhalo!"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:47
 msgid "Verify and save account information"
-msgstr "Verificar y guardar la información de la cuenta"
+msgstr "Overiť a uložiť informácie o účte"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:48
 msgid "Account validation succeeded!"
-msgstr "La cuenta se validó correctamente"
+msgstr "Účet bol úspešne overený!"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:87
 msgid "Password"
-msgstr "Contraseña"
+msgstr "Heslo"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:108
 msgid "Username"
-msgstr "Nombre de usuario"
+msgstr "Meno používateľa:"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
 msgid "<i>Verify and save account information</i>"
-msgstr "<i>Verificar y guardar la información de la cuenta</i>"
+msgstr "<i>Overiť a uložiť informácie o účte</i>"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
 msgid "Don't have an account?"
-msgstr "¿No tiene una cuenta?"
+msgstr "Nemáte účet?"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:156
 msgid "No Battery Found"
-msgstr "No se encontró ninguna batería"
+msgstr "Batéria nebola nájdená"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:173
 #, csharp-format
 msgid "{0} hour"
 msgid_plural "{0} hours"
-msgstr[0] "{0} hora"
-msgstr[1] "{0} horas"
+msgstr[0] "{0} hodinami"
+msgstr[1] "{0} hodinou"
+msgstr[2] "{0} hodinami"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:175
 #, csharp-format
 msgid "{0} minute"
 msgid_plural "{0} minutes"
-msgstr[0] "{0} minuto"
-msgstr[1] "{0} minutos"
+msgstr[0] "{0} minútami"
+msgstr[1] "{0} minútou"
+msgstr[2] "{0} minútami"
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:177
 msgid "until charged "
-msgstr "hasta que se cargue "
+msgstr "do nabitia "
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:179
 msgid "remaining "
-msgstr "restantes "
+msgstr "zostáva "
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:86
 msgid "Computer"
-msgstr "Equipo"
+msgstr "Počítač"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "Di_gital Clock"
-msgstr "Reloj d_igital"
+msgstr "Di_gitálne hodiny"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
 msgid "24-Hour _Clock"
-msgstr "_Reloj de 24 horas"
+msgstr "24-hod. zobrazenie"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:443
 msgid "Show _Date"
-msgstr "Mostrar _fecha"
+msgstr "Zobraziť _dátum"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:449
 msgid "Select _Theme"
-msgstr "Seleccionar _tema"
+msgstr "Vybrať _tému"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
-msgstr "Temas"
+msgstr "Témy"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:62
 msgid "Theme"
-msgstr "Tema"
+msgstr "Téma"
 
 #: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:42
 msgid "Show Desktop"
-msgstr "Mostrar el escritorio"
+msgstr "Zobraziť plochu"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
 msgid "_Add Label"
-msgstr "_Añadir etiqueta"
+msgstr "_Pridať štítok"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:113
 msgid "Check e_very:"
-msgstr "Compro_bar cada:"
+msgstr "Skontrolovať k_aždých:"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:123
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:186
 msgid "minutes"
-msgstr "minutos"
+msgstr "minúty"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:181
 msgid "Click to set username and password."
-msgstr "Pulse para establecer el nombre de usuario y la contraseña."
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:240
 msgid "(no subject)"
-msgstr "(sin asunto)"
+msgstr "(bez predmetu)"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:254
 #, csharp-format
 msgid "You have {0} new, unread messages"
-msgstr "Tienes {0} mensajes nuevos o sin leer"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:258
 #, csharp-format
 msgid "From: {0}"
-msgstr "De: {0}"
+msgstr "Od: {0}"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:272
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:277
 msgid "Feed Error"
-msgstr "Error de suministro"
+msgstr "Chyba"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:283
 msgid "Invalid Username"
-msgstr "Nombre de usuario no válido"
+msgstr "Neplatné používateľské meno"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:293
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:174
 msgid "Network Error"
-msgstr "Error de red"
+msgstr "Chyba siete"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:298
 msgid "General Error"
-msgstr "Error general"
+msgstr "Celková chyba"
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
 msgid "GMail Configuration"
-msgstr "Configuración de Gmail"
+msgstr "Nastavenie GMail"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 msgid "No unread mail"
-msgstr "No hay correo sin leer"
+msgstr "Žiadna neprečítaná pošta"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:98
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
-msgstr[0] "{0} mensaje sin leer"
-msgstr[1] "{0} mensajes sin leer"
+msgstr[0] "{0} neprečítaná správa"
+msgstr[1] "{0} neprečítaných správ"
+msgstr[2] "{0} neprečítaných správ"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:119
 msgid "Checking mail..."
-msgstr "Comprobando correo..."
+msgstr "Kontrolujem poštu..."
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "_View "
-msgstr "_Ver "
+msgstr "_Zobraziť "
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
 msgid "_Compose Mail"
-msgstr "_Redactar correo"
+msgstr "_Napísať správu"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:211
 msgid "View C_ontacts"
-msgstr "Ver c_ontactos"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
 msgid "New Mail"
-msgstr "Correo nuevo"
+msgstr "Nová pošta"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:236
 msgid "Check _Mail"
-msgstr "C_omprobar correo"
+msgstr "Skontrolovať _poštu"
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
-msgstr "Etiquetas"
+msgstr "Štítky"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
 msgid "GMail"
-msgstr "Gmail"
+msgstr "GMail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr "Iniciar sesión"
+msgstr "Prihlásenie"
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
-msgstr "De: "
+msgstr "Od: "
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Eject"
-msgstr "_Expulsar"
+msgstr "_Vysunúť"
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Unmount"
-msgstr "_Desmontar"
+msgstr "_Odpojiť"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:53
 msgid "Network Manager"
-msgstr "Gestor de red"
+msgstr "Správca siete"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
-msgstr "Conectando..."
+msgstr "Pripájanie..."
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:101
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:166
 msgid "Disconnected"
-msgstr "Desconectado"
+msgstr "Odpojený"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
 msgid "Connected: {0}"
-msgstr "Conectado: {0}"
+msgstr "Pripojený: {0}"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:47
 msgid "My _Stations"
-msgstr "Mis _emisoras"
+msgstr "Moje _stanice"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:78
 msgid "S_earch"
-msgstr "B_uscar"
+msgstr "_Hľadať"
 
 #: ../StandardPlugins/NPR/src/Station.cs:76
 msgid "No stations found."
-msgstr "No se encontraron emisoras."
+msgstr "Žiadne stanice neboli nájdené."
 
 #: ../StandardPlugins/NPR/src/Station.cs:77
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
-msgstr "Intente de nuevo la búsqueda."
+msgstr "Prosím skúste hľadanie znova."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:46
 msgid "Fetching Information..."
-msgstr "Obteniendo información..."
+msgstr "Získavam informácie..."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:72
 msgid "Click to add NPR stations."
-msgstr "Pulse para añadir emisoras NPR."
+msgstr "Kliknite pre pridanie NPR staníc."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:111
 msgid "Home Page"
-msgstr "Página de inicio"
+msgstr "Domovská stránka"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:118
 msgid "Program Schedule"
-msgstr "Planificación"
+msgstr "Časový rozvrh"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:125
 msgid "Donate"
-msgstr "Donar"
+msgstr "Prispieť"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:132
 msgid "Live Streams"
-msgstr "Emisiones en directo"
+msgstr "Živé vysielanie"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:170
 msgid "Settings"
-msgstr "Configuración"
+msgstr "Nastavenia"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:56
 msgid "Clear the Recent Documents list?"
-msgstr "¿Desea vaciar la lista de documentos recientes?"
+msgstr "Vyčistiť zoznam 'Nedávne dokumenty'?"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:58
 msgid "Clear Recent Documents"
-msgstr "Vaciar documentos recientes"
+msgstr "Vyčistiť Nedávne dokumenty"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:60
 msgid ""
@@ -659,163 +659,163 @@ msgid ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
-"Si vacía la lista de documentos recientes, eliminará lo siguiente:\n"
-"• Todos los elementos del menú Lugares → Documentos recientes.\n"
-"• Todos los elementos de la lista de documentos recientes en todas las "
-"aplicaciones."
+"Ak vyčistíte zoznam Nedávnych dokumentov, vyčistíte nasledujúce:\n"
+"• Všetky položky z položky ponuky Miesta → Nedávne dokumenty.\n"
+"• Všetky položky zo zoznamu nedávnych dokumentov všetkých aplikácií."
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:81
 msgid "_Clear Recent Documents..."
-msgstr "_Vaciar documentos recientes..."
+msgstr "_Vyčistiť Nedávne dokumenty..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
 msgid "Lock Screen"
-msgstr "Bloquear la pantalla"
+msgstr "Zamknúť obrazovku"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:157
 msgid "Log Out..."
-msgstr "Cerrando sesión..."
+msgstr "Odhlásiť sa..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
 msgid "Log Out"
-msgstr "Cerrar Sesión"
+msgstr "Odhlásiť sa"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:159
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
-msgstr ""
-"¿Seguro que desea cerrar todos los programas y finalizar su sesión en el "
-"equipo?"
+msgstr "Naozaj chcete zavrieť všetky programy a odhlásiť sa?"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:164
 msgid "Suspend"
-msgstr "Suspender"
+msgstr "Úsporný režim"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:169
 msgid "Hibernate"
-msgstr "Hibernar"
+msgstr "Dlhodobý spánok"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:175
 msgid "Restart..."
-msgstr "Reiniciar..."
+msgstr "Reštartovať..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
 msgid "Restart"
-msgstr "Reiniciar"
+msgstr "Reštartovať"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:177
 msgid "Are you sure you want to close all programs and restart the computer?"
-msgstr "¿Seguro que desea cerrar todos los programas y reiniciar el equipo?"
+msgstr "Naozaj chcete zavrieť všetky programy a reštartovať počítač?"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:182
 msgid "Shut Down..."
-msgstr "Apagar..."
+msgstr "Vypnúť..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:183
 msgid "Shut Down"
-msgstr "Apagar"
+msgstr "Vypnúť"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:184
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
-msgstr "¿Seguro que desea cerrar todos los programas y apagar el equipo?"
+msgstr "Naozaj chcete zavrieť všetky programy a vypnúť počítač?"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:86
 #, csharp-format
 msgid "A timer set for {0} has expired."
-msgstr "El tiempo establecido para {0} terminó."
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:232
 msgid "Time remaining:"
-msgstr "Tiempo restante:"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:234
 msgid "Timer paused, time remaining:"
-msgstr "Temporizador pausado, tiempo restante:"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:245
 msgid "Set the timer's label to:"
-msgstr "Establecer la etiqueta del temporizador a:"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:251
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:285
 msgid "_Set Label"
-msgstr "E_stablecer etiqueta"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:276
 msgid "_Pause Timer"
-msgstr "_Pausar el temporizador"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:276
 msgid "_Start Timer"
-msgstr "_Iniciar temporizador"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:280
 msgid "_Remove Timer"
-msgstr "Elimina_r temporizador"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:56
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] "hora"
-msgstr[1] "horas"
+msgstr[0] "hodín"
+msgstr[1] "hodina"
+msgstr[2] "hodiny"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:60
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] "minuto"
-msgstr[1] "minutos"
+msgstr[0] "minút"
+msgstr[1] "minúta"
+msgstr[2] "minúty"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:65
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] "segundo"
-msgstr[1] "segundos"
+msgstr[0] "sekúnd"
+msgstr[1] "sekunda"
+msgstr[2] "sekundy"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:132
 #, csharp-format
 msgid "Click to create a timer for {0}."
-msgstr "Pulse para crear un temporizador para {0}."
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:149
 msgid "Automatically _Start Timers"
-msgstr "Iniciar temporizadore_s automáticamente"
+msgstr ""
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:153
 msgid "Automatically _Dismiss Timers"
-msgstr "Parar temporiza_dores automáticamente"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:55
 msgid "Drop to move to Trash"
-msgstr "Soltar para mover a la papelera"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:82
 msgid "No items in Trash"
-msgstr "No hay elementos en la papelera"
+msgstr "Žiadne položky v koši"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:84
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
-msgstr[0] "{0} elemento en la papelera"
-msgstr[1] "{0} elementos en la papelera"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:169
 msgid "Restore Files"
-msgstr "Restaurar Archivos"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:200
 msgid "_Open Trash"
-msgstr "_Abrir la papelera"
+msgstr "_Otvoriť kôš"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:202
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:233
 msgid "Empty _Trash"
-msgstr "_Vaciar papelera"
+msgstr "Vyprázdniť _kôš"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:225
 msgid "Empty all of the items from the trash?"
-msgstr "¿Vaciar todos los elementos de la papelera?"
+msgstr "Vyprázdniť všetky položky z koša?"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:227
 msgid ""
@@ -823,41 +823,41 @@ msgid ""
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
-"Si elige vaciar la papelera, todos los elementos que\n"
-"haya en ella se borrarán para siempre. Observe que\n"
-"también puede borrarlos por separado."
+"Ak sa rozhodnete vyprázdniť kôš, všetky položky\n"
+"v ňom budé nenávratne stratené. Nezabúdajte že\n"
+"v prípade potreby ich môžete mazať po jednom."
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:65
 msgid "_Weather Provider:"
-msgstr "_Proveedor meteorológico:"
+msgstr "_Poskytovateľ predpovede:"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:105
 msgid "My _Locations"
-msgstr "Mis _lugares"
+msgstr "Moje _umiestnenia"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:136
 msgid "_Search"
-msgstr "_Buscar"
+msgstr "_Vyhľadať"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:176
 msgid "Automatically Update _Every"
-msgstr "Actualizar automáticamente _cada"
+msgstr "Automaticky obnoviť _každých"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:220
 msgid "Use _Metric Units"
-msgstr "Usar unidades _métricas"
+msgstr "Použiť _metrické jednotky"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:171
 msgid "Invalid Weather Location"
-msgstr "Área meteorológica incorrecta"
+msgstr "Neplatné umiestnenie"
 
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
 msgstr ""
-"Datos meteorológicos proporcionados por Google. Requiere que los lugares se "
-"especifiquen como un código postal de EE. UU. o como «Ciudad, País»."
+"Predpoveď poskytuje Google. Cieľovú oblasť je potrebné uviesť vo formáte ako "
+"US Zip kód alebo 'Mesto, Krajina'."
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
@@ -866,356 +866,131 @@ msgid ""
 "website.  To find your code, look up your forecast on their site and the "
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
-"Datos meteorológicos proporcionados por The Weather Channel©. Requiere que "
-"los lugares se especifiquen como un código postal de EE. UU. o como un "
-"código único del sitio web. Para saber el código, busque el pronóstico en su "
-"página web y encontrará el código en el URL, después de «/local/» como algo "
-"parecido a AAXX0000."
+"Predpoveď poskytuje Weather Channel. Cieľovú oblasť je potrebné uviesť vo "
+"formáte ako US Zip kód alebo ako unikátny kód z ich webstránky. Aby ste ten "
+"kód našli, je potrebné na ich stránke násjť svoje počasie a ten kód potom "
+"uvidíte v URL adrese za '/local/' a bude vyzerať ako AAXX0000."
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:56
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
 msgstr ""
-"Datos meteorológicos proporcionados por Weather Underground©. Requiere que "
-"los lugares se especifiquen como un código postal de EE. UU. o como «Ciudad, "
-"País»."
+"Predpoveď poskytuje Weather Underground. Cieľovú oblasť je potrebné uviesť "
+"vo formáte ako US Zip kód alebo 'Mesto, Krajina'."
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
-msgstr "No se encontraron resultados."
+msgstr "Výsledky neboli nájdené."
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
-msgstr "Configuración de meteorología"
+msgstr "Nastavenie počasia"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
 msgid "Click to add a location."
-msgstr "Pulse para añadir una nueva ubicación."
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
 msgid "Fetching data..."
-msgstr "Obteniendo datos..."
+msgstr "Príjímam dáta..."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Radar _Map"
-msgstr "_Mapa del radar"
+msgstr "Radarová _mapa"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "Forecasts"
-msgstr "Pronóstico"
+msgstr "Predpovede"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:252
 msgid "Check _Weather"
-msgstr "Consultar la _meteorología"
+msgstr "Skontroluj _počasie"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
 msgid "_Today"
-msgstr "_Hoy"
+msgstr "_Dnes"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
 msgid "T_omorrow"
-msgstr "M_añana"
+msgstr "Z_ajtra"
 
 #. draw humidity
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:328
 #, csharp-format
 msgid "{0} humidity"
-msgstr "{0} humedad"
+msgstr ""
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:70
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:220
 msgid "Switch Desks"
-msgstr "Cambiar escritorios"
+msgstr ""
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:171
 msgid "Desk"
-msgstr "Escritorio"
+msgstr ""
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:173
 msgid "Virtual Desk"
-msgstr "Escritorio virtual"
-
-#~ msgid "Tomorrow"
-#~ msgstr "Mañana"
-
-#~ msgid "Today"
-#~ msgstr "Hoy"
-
-#~ msgid "Radar Map"
-#~ msgstr "Mapa de Radar"
-
-#~ msgid "Reload Weather Data"
-#~ msgstr "Recargar Datos del Clima"
-
-#~ msgid "Add _Location"
-#~ msgstr "Agregar _Lugar"
-
-#~ msgid "Some information about the weather source."
-#~ msgstr "Algo de información acerca de la fuente del clima."
-
-#~ msgid "Move _Up"
-#~ msgstr "Mover _Arriba"
-
-#~ msgid "Move _Down"
-#~ msgstr "Mover _Abajo"
-
-#~ msgid "mins"
-#~ msgstr "mins"
+msgstr ""
 
 #~ msgid "_Add"
-#~ msgstr "_Añadir"
-
-#~ msgid "Add _Label"
-#~ msgstr "Agregar _Etiqueta"
-
-#~ msgid ""
-#~ "<big><b>Empty all of the items from the trash?</b></big>\n"
-#~ "\n"
-#~ "If you choose to empty the trash, all items in it\n"
-#~ "will be permanently lost. Please note that you\n"
-#~ "can also delete them separately."
-#~ msgstr ""
-#~ "<big><b>¿Borrar todos los archivos de la papelera?</b></big>\n"
-#~ "\n"
-#~ "Si elige vaciar la papelera, todos los elementos en ella\n"
-#~ "se borrarán permanentemente. Tenga en cuenta que\n"
-#~ "también puede borrarlos separadamente."
-
-#~ msgid "Check _Every"
-#~ msgstr "Comprobar _Cada"
-
-#~ msgid "Compose Mail"
-#~ msgstr "Redactar Correo"
-
-#~ msgid "View "
-#~ msgstr "Ver "
-
-#~ msgid "Check Now"
-#~ msgstr "Comprobar Ahora"
-
-#~ msgid "Digital Clock"
-#~ msgstr "Reloj Digital"
-
-#~ msgid "Docky Configuration"
-#~ msgstr "Configuración de Docky"
-
-#~ msgid "Exec"
-#~ msgstr "Ejecutar"
-
-#~ msgid "Select Theme"
-#~ msgstr "Seleccionar Tema"
-
-#~ msgid "Show Date"
-#~ msgstr "Mostrar Fecha"
-
-#~ msgid "24-Hour Clock"
-#~ msgstr "Reloj de 24 Horas"
-
-#~ msgid "New Dock"
-#~ msgstr "Nuevo Dock"
-
-#~ msgid "Start When Computer Starts"
-#~ msgstr "Iniciar Cuando Inicia la Computadora"
-
-#~ msgid "Theme:"
-#~ msgstr "Tema:"
-
-#~ msgid "Icon Size:"
-#~ msgstr "Tamaño del Icono:"
-
-#~ msgid "Fade On Hide"
-#~ msgstr "Desvanecer Al Esconder"
-
-#~ msgid "Indicate Multiple Windows"
-#~ msgstr "Indicar Múltiples Ventanas"
-
-#~ msgid "Autohide:"
-#~ msgstr "Autoesconder:"
-
-#~ msgid "Manage Windows Without Launcher"
-#~ msgstr "Gestionar Ventanas Sin Lanzador"
-
-#~ msgid "The finest dock no money can buy."
-#~ msgstr "El mejor dock que el dinero no puede comprar."
-
-#~ msgid "Icon"
-#~ msgstr "Ícono"
-
-#~ msgid "Zoom:"
-#~ msgstr "Zoom:"
-
-#~ msgid "<b>Active Plugins</b>"
-#~ msgstr "<b>Plugins Activos</b>"
-
-#~ msgid "<b>Inactive Plugins</b>"
-#~ msgstr "<b>Plugins Inactivos</b>"
-
-#~ msgid "Name"
-#~ msgstr "Nombre"
-
-#~ msgid "Docky"
-#~ msgstr "Docky"
-
-#~ msgid "Sunrise"
-#~ msgstr "Amanecer"
-
-#~ msgid "Sunset"
-#~ msgstr "Ocaso"
-
-#~ msgid "Wind"
-#~ msgstr "Viento"
-
-#~ msgid "Direction"
-#~ msgstr "Dirección"
-
-#~ msgid "Humidity"
-#~ msgstr "Humedad"
-
-#~ msgid "Temp"
-#~ msgstr "Temperatura"
-
-#, csharp-format
-#~ msgid "{0}'s Forecast"
-#~ msgstr "Pronóstico para {0}"
-
-#~ msgid "_Cancel"
-#~ msgstr "_Cancelar"
-
-#~ msgid "Panel Mode"
-#~ msgstr "Modo Panel"
-
-#~ msgid "Delete Dock"
-#~ msgstr "Borrar Dock"
-
-#~ msgid "Drag any dock to move it."
-#~ msgstr "Arrastra cualquier dock para moverlo."
-
-#~ msgid "_Show Preferences"
-#~ msgstr "_Mostrar Preferencias"
-
-#~ msgid "Fade out dock instead of slide off screen"
-#~ msgstr "Se desvanece en lugar de deslizarse fuera de la pantalla"
-
-#~ msgid "Reset _Color"
-#~ msgstr "Restaurar _Color"
-
-#~ msgid "_Quit"
-#~ msgstr "_Salir"
-
-#~ msgid "Inbox"
-#~ msgstr "Bandeja de Entrada"
-
-#~ msgid "Check _Now"
-#~ msgstr "Comprobar _Ahora"
-
-#~ msgid "Config"
-#~ msgstr "Configuración"
-
-#~ msgid "_Reset Color"
-#~ msgstr "_Restaurar Color"
-
-#~ msgid "iGoogle"
-#~ msgstr "iGoogle"
-
-#~ msgid "Locations"
-#~ msgstr "Lugares"
-
-#~ msgid "Search Results"
-#~ msgstr "Resultados de la Búsqueda"
-
-#~ msgid "Currently searching..."
-#~ msgstr "Actualmente buscando..."
-
-#~ msgid "Weather Channel"
-#~ msgstr "Weather Channel"
-
-#~ msgid "Weather Underground"
-#~ msgstr "Weather Underground"
-
-#~ msgid "No results found"
-#~ msgstr "No se encontraron resultados"
-
-#~ msgid "_Reload Weather Data"
-#~ msgstr "_Recargar Datos del Clima"
-
-#~ msgid "_Weather Provider"
-#~ msgstr "Proveedor del Clima"
-
-#~ msgid "Related Items"
-#~ msgstr "Elementos Relacionados"
-
-#~ msgid "<i>Always present, acts like a panel.</i>"
-#~ msgstr "<i>Siempre presente, actua como una panel.</i>"
-
-#~ msgid ""
-#~ "Docky requires compositing to work properly.  Please enable compositing and "
-#~ "restart docky."
-#~ msgstr ""
-#~ "Docky necesita compositing para funcionar correctamente. Por favor habilita "
-#~ "compositing y reinicia docky."
-
-#~ msgid "Drop to open"
-#~ msgstr "Soltar para abrir"
-
-#~ msgid "Extensions"
-#~ msgstr "Extensiones"
-
-#~ msgid "3D Background"
-#~ msgstr "Fondo 3D"
-
-#~ msgid "Click to browse..."
-#~ msgstr "Clic para buscar..."
-
-#~ msgid "Enable"
-#~ msgstr "Activar"
-
-#~ msgid "Disable"
-#~ msgstr "Desactivar"
-
-#~ msgid "<b>Active Docklets</b>"
-#~ msgstr "<b>Docklets Activos</b>"
-
-#~ msgid "<b>Inactive Docklets</b>"
-#~ msgstr "<b>Docklets Inactivos</b>"
+#~ msgstr "_Pridať"
 
 #~ msgid "_Disable"
-#~ msgstr "_Desactivar"
+#~ msgstr "_Zakázať"
 
 #~ msgid "_Enable"
-#~ msgstr "_Activar"
-
-#~ msgid ""
-#~ "Causes launchers which currently manage more than one window to have an "
-#~ "extra indicator under it."
-#~ msgstr ""
-#~ "Hace que los lanzadores que actualmente gestionen más de una ventana tengan "
-#~ "un indicador extra debajo."
-
-#~ msgid "_Start When Computer Starts"
-#~ msgstr "_Iniciar al arrancar el equipo"
-
-#~ msgid "Indicat_e Multiple Windows"
-#~ msgstr "Indic_ar varias ventanas"
-
-#~ msgid "Username or Password not set"
-#~ msgstr "El nombre de usuario o contraseña no están configurados"
-
-#~ msgid "Network Error: "
-#~ msgstr "Error de red: "
-
-#~ msgid "Feels Like"
-#~ msgstr "Sensación térmica"
-
-#~ msgid "_Remove"
-#~ msgstr "Elimina_r"
+#~ msgstr "_Povoliť"
 
 #~ msgid ""
 #~ "Docky requires compositing to work properly. Please enable compositing and "
 #~ "restart docky."
 #~ msgstr ""
-#~ "Docky requiere composición para funcionar correctamente. Active la "
-#~ "composición y reinicie Docky."
+#~ "Pre beh Docky je potrebné zapnúť vizuálne efekty. Prosím zapnite ich a "
+#~ "reštartujte Docky."
 
-#~ msgid "Invalid XML Weather Data"
-#~ msgstr "El XML con la información del clima es inválido"
+#~ msgid "_Remove"
+#~ msgstr "O_dstrániť"
+
+#~ msgid ""
+#~ "Causes launchers which currently manage more than one window to have an "
+#~ "extra indicator under it."
+#~ msgstr ""
+#~ "Spôsobí, že pod spúšťačmi ktoré spravujú viac okien pribudne ďalší indikátor."
+
+#~ msgid "Docky Configuration"
+#~ msgstr "Konfigurácia Docky"
+
+#~ msgid "_Start When Computer Starts"
+#~ msgstr "_Spustiť pri štarte počítača"
+
+#~ msgid "Indicat_e Multiple Windows"
+#~ msgstr "Ukazovať viacero okien"
+
+#~ msgid "Username or Password not set"
+#~ msgstr "Meno používateľa alebo heslo nie je nastavené"
+
+#~ msgid "Network Error: "
+#~ msgstr "Chyba siete: "
+
+#~ msgid "Sunrise"
+#~ msgstr "Východ slnka"
+
+#~ msgid "Wind"
+#~ msgstr "Vietor"
+
+#~ msgid "Direction"
+#~ msgstr "Smer"
+
+#~ msgid "Temp"
+#~ msgstr "Teplota"
+
+#~ msgid "Feels Like"
+#~ msgstr "Pocitovo"
+
+#~ msgid "Humidity"
+#~ msgstr "Vlhkosť"
+
+#~ msgid "Sunset"
+#~ msgstr "Západ slnka"
