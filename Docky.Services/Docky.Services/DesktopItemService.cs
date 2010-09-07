@@ -490,7 +490,8 @@ namespace Docky.Services
 				
 				// for openoffice
 				if (exec.Contains (' ') &&
-					(exec.StartsWith ("ooffice") || exec.StartsWith ("openoffice") || exec.StartsWith ("soffice"))) {
+				   (exec.StartsWith ("ooffice") || exec.StartsWith ("openoffice") || exec.StartsWith ("soffice") ||
+				    exec.Contains ("/ooffice ") || exec.Contains ("/openoffice.org ") || exec.Contains ("/soffice "))) {
 					vexec = "ooffice" + exec.Split (' ')[1];
 				
 				// for wine apps
