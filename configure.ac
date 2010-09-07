@@ -58,9 +58,26 @@ SHAMROCK_EXPAND_LIBDIR
 SHAMROCK_EXPAND_BINDIR
 SHAMROCK_EXPAND_DATADIR
 
+dnl minimal dependency versions
+GTK_REQUIRED_VERSION=2.14.3
+GLIB_REQUIRED_VERSION=2.22
+GIO_SHARP_REQUIRED_VERSION=2.22.2
+
 PKG_CHECK_MODULES([GCONF_SHARP_20], [gconf-sharp-2.0])
 PKG_CHECK_MODULES([GLIB_SHARP_20], [glib-sharp-2.0])
-PKG_CHECK_MODULES([GIO_SHARP], [gio-sharp-2.0])
+
+dnl gio-sharp is an unstable api library
+PKG_CHECK_MODULES([GIO_SHARP], [gio-sharp-2.0 >= $GIO_SHARP_REQUIRED_VERSION])
+files="`$PKG_CONFIG --variable=Libraries gio-sharp-2.0`"
+for file in $files; do
+	[ mkdir -p $top_srcdir/build ] && [ cp -vu $file $top_srcdir/build/ ]
+	GIO_SHARP_ASSEMBLIES="$GIO_SHARP_ASSEMBLIES $top_srcdir/build/$(basename $file)"
+	GIO_SHARP_LIBS="$GIO_SHARP_LIBS -r:$top_srcdir/build/$(basename $file)"
+	[[ -r "$file.config" ]] && [ mkdir -p $top_srcdir/build ] && [ cp -vu $file.config $top_srcdir/build/ ]
+	[[ -r "$file.config" ]] && GIO_SHARP_ASSEMBLIES="$GIO_SHARP_ASSEMBLIES $top_srcdir/build/$(basename $file).config"
+done
+AC_SUBST([GIO_SHARP_ASSEMBLIES])
+
 PKG_CHECK_MODULES([GNOME_DESKTOP_SHARP_20], [gnome-desktop-sharp-2.0])
 PKG_CHECK_MODULES([GNOME_KEYRING_SHARP], [gnome-keyring-sharp-1.0])
 PKG_CHECK_MODULES([GTK_SHARP_20], [gtk-sharp-2.0])
@@ -75,8 +92,6 @@ PKG_CHECK_MODULES([NOTIFY_SHARP], [notify-sharp])
 PKG_CHECK_MODULES([WNCK_SHARP_10], [wnck-sharp-1.0])
 
 dnl check for native libraries (ones that are p/invoked)
-GTK_REQUIRED_VERSION=2.14.3
-GLIB_REQUIRED_VERSION=2.22
 PKG_CHECK_MODULES(GIO, gio-2.0 >= $GLIB_REQUIRED_VERSION)
 PKG_CHECK_MODULES(GTK, gtk+-2.0 >= $GTK_REQUIRED_VERSION)
 PKG_CHECK_MODULES(GLIB, gobject-2.0 >= $GLIB_REQUIRED_VERSION)
