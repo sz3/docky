@@ -109,6 +109,13 @@ namespace Docky.Services.Applications
 			get { return System.IO.Path.GetFileNameWithoutExtension (Path); }
 		}
 
+		public bool Ignored {
+			get {
+				return ((HasAttribute ("NoDisplay") && GetBool ("NoDisplay"))
+					|| (HasAttribute ("X-Docky-NoMatch") && GetBool ("X-Docky-NoMatch")));
+			}
+		}
+		
 		public DesktopItem (GLib.File file, bool load_file)
 		{
 			if (file == null)

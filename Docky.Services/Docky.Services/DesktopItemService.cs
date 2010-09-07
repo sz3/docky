@@ -37,7 +37,7 @@ namespace Docky.Services
 		
 		// shorthand for all registered AND unregistered desktop items
 		public IEnumerable<DesktopItem> DesktopItems {
-			get { return RegisteredItems.Union (UnregisteredItems).AsEnumerable (); }
+			get { return RegisteredItems.Union (UnregisteredItems); }
 		}
 		
 		public Dictionary<string, string> Remaps { get; private set; }
@@ -119,9 +119,10 @@ namespace Docky.Services
 		
 		public IEnumerable<DesktopItem> DesktopItemsFromID (string id)
 		{
-			if (DesktopItems.Any (item => item.DesktopID.Equals (id, StringComparison.InvariantCultureIgnoreCase)))
-				return DesktopItems.Where (item => item.DesktopID.Equals (id, StringComparison.CurrentCultureIgnoreCase));
-			return Enumerable.Empty<DesktopItem> ();
+			IEnumerable<DesktopItem> result = DesktopItems
+				.Where (item => item.DesktopID.Equals (id, StringComparison.CurrentCultureIgnoreCase) 
+				        && !item.Ignored);
+			return (result.Any () ? result : Enumerable.Empty<DesktopItem> ());
 		}
 		
 		/// <summary>
@@ -135,9 +136,8 @@ namespace Docky.Services
 		/// </param>
 		public DesktopItem DesktopItemFromDesktopFile (string file)
 		{
-			if (DesktopItems.Any (item => item.Path.Equals (file, StringComparison.InvariantCultureIgnoreCase)))
-				return DesktopItems.First (item => item.Path.Equals (file, StringComparison.CurrentCultureIgnoreCase));
-			return null;
+			return DesktopItems
+				.First (item => item.Path.Equals (file, StringComparison.CurrentCultureIgnoreCase));
 		}
 		
 		public void RegisterDesktopItem (DesktopItem item)
@@ -198,15 +198,15 @@ namespace Docky.Services
 				RegisteredItems = new List<DesktopItem> ();
 			
 			List<DesktopItem> newItems = new List<DesktopItem> ();
-
+			IEnumerable<DesktopItem> knownItems = DesktopItems;
+			
 			// Get desktop items for new "valid" desktop files
 			newItems = DesktopFileDirectories
 				.SelectMany (dir => dir.SubDirs ())
 				.Union (DesktopFileDirectories)
-				.SelectMany (file => file.GetFiles (".desktop"))
-				.Where (file => !DesktopItems.Any (existing => existing.File.Path == file.Path))
+				.SelectMany (dir => dir.GetFiles (".desktop"))
+				.Where (file => !knownItems.Any (existing => existing.File.Path == file.Path))
 				.Select (file => new DesktopItem (file))
-				.Where (item => item.Values.Any ())
 				.ToList ();
 			
 			RegisteredItems.AddRange (newItems);
@@ -218,9 +218,14 @@ namespace Docky.Services
 			}
 
 			// Check file existence and remove unlinked items
-			int removed = RegisteredItems.RemoveAll (item => !item.File.Exists);
-			if (removed > 0)
-				Log<DesktopItemService>.Debug ("{0} application(s) removed.", removed);
+			List<DesktopItem> removeItems = RegisteredItems.Where (item => !item.File.Exists).ToList ();
+			if (removeItems.Count > 0) {
+				removeItems.ForEach (item => {
+					RegisteredItems.Remove (item);
+					item.Dispose ();
+				});
+				Log<DesktopItemService>.Debug ("{0} application(s) removed.", removeItems.Count);
+			}
 		}
 		
 		void ProcessAndMergeAllSystemCacheFiles ()
@@ -461,13 +466,7 @@ namespace Docky.Services
 			ItemByClass = new Dictionary<string, DesktopItem> ();
 			
 			foreach (DesktopItem item in DesktopItems) {
-				if (item == null || !item.HasAttribute ("StartupWMClass"))
-					continue;
-				
-				if (item.HasAttribute ("NoDisplay") && item.GetBool ("NoDisplay"))
-					continue;
-				
-				if (item.HasAttribute ("X-Docky-NoMatch") && item.GetBool ("X-Docky-NoMatch"))
+				if (item == null || item.Ignored || !item.HasAttribute ("StartupWMClass"))
 					continue;
 				
 				string cls = item.GetString ("StartupWMClass").Trim ();
@@ -483,13 +482,7 @@ namespace Docky.Services
 			ItemsByExec = new Dictionary<string, List<DesktopItem>> ();
 			
 			foreach (DesktopItem item in DesktopItems) {
-				if (item == null || !item.HasAttribute ("Exec"))
-					continue;
-				
-				if (item.HasAttribute ("NoDisplay") && item.GetBool ("NoDisplay"))
-					continue;
-				
-				if (item.HasAttribute ("X-Docky-NoMatch") && item.GetBool ("X-Docky-NoMatch"))
+				if (item == null || item.Ignored || !item.HasAttribute ("Exec"))
 					continue;
 				
 				string exec = item.GetString ("Exec").Trim ();
