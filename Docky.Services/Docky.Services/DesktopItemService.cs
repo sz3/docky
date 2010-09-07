@@ -120,8 +120,7 @@ namespace Docky.Services
 		public IEnumerable<DesktopItem> DesktopItemsFromID (string id)
 		{
 			IEnumerable<DesktopItem> result = DesktopItems
-				.Where (item => item.DesktopID.Equals (id, StringComparison.CurrentCultureIgnoreCase) 
-				        && !item.Ignored);
+				.Where (item => item.DesktopID.Equals (id, StringComparison.CurrentCultureIgnoreCase));
 			return (result.Any () ? result : Enumerable.Empty<DesktopItem> ());
 		}
 		
