@@ -67,7 +67,7 @@ namespace Docky.Items
 			
 			for (int i = 1; i <= num_seps; i++) {
 				// Create some perspective illusion: lines are getting closer to eachother at the top
-				double vertOffset = (int) (surface.Height + height * (Math.Pow ((double) (num_seps - i) / num_seps, 1.15) - 1));
+				double vertOffset = (int) (surface.Height + height * ((double) (num_seps - i) / num_seps - 1));
 				double offset = 0.8 * (i - 1);
 
 				surface.Context.Color = new Cairo.Color (1, 1, 1, 0.5);
