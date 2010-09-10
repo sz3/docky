@@ -62,26 +62,23 @@ namespace Docky.Items
 			surface.Context.LineCap = LineCap.Round;
 			surface.Context.LineWidth = 1;
 			
-			int num_seps = 1 + surface.Height / 18;
-			int num_spaces = num_seps - 1;
-			int spacing = 3;
+			// Calculate the line count depending on the available height 
+			int num_seps = (int) Math.Round (0.04 * surface.Height + 1.5);
 			
-			double vertOffset = surface.Height - (height - 2 * num_seps - num_spaces * spacing) / 2;
-			
-			for (int i = 0; i < num_seps; i++) {
-				double offset = 0.6 * i;
-				
+			for (int i = 1; i <= num_seps; i++) {
+				// Create some perspective illusion: lines are getting closer to eachother at the top
+				double vertOffset = (int) (surface.Height + height * (Math.Pow ((double) (num_seps - i) / num_seps, 1.15) - 1));
+				double offset = 0.8 * (i - 1);
+
 				surface.Context.Color = new Cairo.Color (1, 1, 1, 0.5);
-				surface.Context.MoveTo (offset, vertOffset - 0.5);
-				surface.Context.LineTo (surface.Width - offset, vertOffset - 0.5);
+				surface.Context.MoveTo (offset, vertOffset + 0.5);
+				surface.Context.LineTo (surface.Width - offset, vertOffset + 0.5);
 				surface.Context.Stroke ();
 				
 				surface.Context.Color = new Cairo.Color (0, 0, 0, 0.5);
-				surface.Context.MoveTo (offset, vertOffset - 1.5);
-				surface.Context.LineTo (surface.Width - offset, vertOffset - 1.5);
+				surface.Context.MoveTo (offset, vertOffset - 0.5);
+				surface.Context.LineTo (surface.Width - offset, vertOffset - 0.5);
 				surface.Context.Stroke ();
-				
-				vertOffset -= spacing + 2;
 			}
 		}
 		
