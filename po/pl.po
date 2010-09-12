@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-08-16 12:56+0200\n"
-"PO-Revision-Date: 2010-08-26 07:13+0000\n"
+"PO-Revision-Date: 2010-09-11 06:50+0000\n"
 "Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-09-06 11:44+0000\n"
+"X-Launchpad-Export-Date: 2010-09-12 07:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
@@ -127,7 +127,7 @@ msgstr "Wyłącz ten wspomagacz"
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Running"
-msgstr "Uruchomione"
+msgstr "Uruchomiony"
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Stopped"
@@ -161,7 +161,7 @@ msgstr "<i>Ukryje się, jeśli Dock przesłania jakiekolwiek okno.</i>"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:378
 msgid "Drag to reposition"
-msgstr "Przenieś, aby zmienić pozycję."
+msgstr "Przeciągnij by zmienić położenie"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:390
 #: ../Docky/Docky/Interface/DockWindow.cs:404
@@ -213,12 +213,12 @@ msgstr "<b>Konfiguracja Doku</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
-msgstr "Dock'i"
+msgstr "Docki"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
 msgid "All"
-msgstr "Wszystko"
+msgstr "Wszystkie"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
@@ -240,7 +240,7 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
-msgstr "Wspomagacze"
+msgstr "Pomocnicy"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
 msgid "_New Dock"
@@ -252,7 +252,7 @@ msgstr "Brak"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
 msgid "Autohide"
-msgstr "Ukryj automatycznie"
+msgstr "Autoukrywanie"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "Intellihide"
@@ -402,7 +402,7 @@ msgstr "Hasło"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:108
 msgid "Username"
-msgstr "Użytkownik"
+msgstr "Nazwa użytkownika"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
 msgid "<i>Verify and save account information</i>"
@@ -510,7 +510,7 @@ msgstr "Błąd Nagłówka"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:283
 msgid "Invalid Username"
-msgstr "Niepoprawny Login"
+msgstr "Niepoprawna nazwa użytkownika"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:293
