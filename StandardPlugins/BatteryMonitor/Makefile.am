@@ -5,6 +5,9 @@ ASSEMBLY = BatteryMonitor
 
 FILES = \
 	src/BatteryMonitorItemProvider.cs \
+	src/BatteryMonitorAbstractItem.cs \
+	src/BatteryMonitorSysItem.cs \
+	src/BatteryMonitorUPowerItem.cs \
 	src/BatteryMonitorProcItem.cs
 
 RESOURCES = \

@@ -39,9 +39,9 @@ namespace BatteryMonitor
 		
 		#endregion
 
-		AbstractDockItem battery;
+		BatteryMonitorAbstractItem battery;
 		
-		bool hidden;
+		bool hidden = true;
 		public bool Hidden
 		{
 			get {
@@ -60,10 +60,16 @@ namespace BatteryMonitor
 		
 		public BatteryMonitorItemProvider ()
 		{
-			hidden = false;
-			battery = new BatteryMonitorProcItem (this);
-			if (!hidden)
-				Items = battery.AsSingle<AbstractDockItem> ();
+			// determine what system is available and instantiate the proper item for it
+			if (BatteryMonitorUPowerItem.Available)
+				battery = new BatteryMonitorUPowerItem (this);
+			else if (BatteryMonitorSysItem.Available)
+				battery = new BatteryMonitorSysItem (this);
+			else
+				battery = new BatteryMonitorProcItem (this);
+			
+			Hidden = false;
+			battery.UpdateBattStat ();
 		}
 	}
 }

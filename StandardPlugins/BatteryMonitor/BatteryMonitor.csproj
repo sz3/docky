@@ -55,6 +55,9 @@
   <ItemGroup>
     <Compile Include="src\BatteryMonitorItemProvider.cs" />
     <Compile Include="src\BatteryMonitorProcItem.cs" />
+    <Compile Include="src\BatteryMonitorUPowerItem.cs" />
+    <Compile Include="src\BatteryMonitorSysItem.cs" />
+    <Compile Include="src\BatteryMonitorAbstractItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\BatteryMonitor.addin.xml" />
