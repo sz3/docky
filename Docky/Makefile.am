@@ -13,7 +13,6 @@ FILES = \
 	Mono/Options.cs \
 	Docky/ConfigurationWindow.cs \
 	Docky/DockController.cs \
-	Docky/DockPlacementWidget.cs \
 	Docky/Docky.cs \
 	Docky/UserArgs.cs \
 	Docky/PluginManager.cs \
