@@ -146,10 +146,12 @@ namespace BatteryMonitor
 					current_capacity += (int) GetEnergy (device);
 					current_rate += (int) GetEnergyRate (device);
 					
+					// 0: Unknown, 1: Charging, 2: Discharging, 3: Empty, 
+					// 4: Fully charged, 5: Pending charge, 6: Pending discharge
 					uint state = GetState (device);
-					if (state == 2) // discharging
+					if (state == 2 || state == 6) // discharging
 						charging = false;
-					else if (state == 3) // charging
+					else if (state == 1 || state == 5) // charging
 						charging = true;
 				}
 			
