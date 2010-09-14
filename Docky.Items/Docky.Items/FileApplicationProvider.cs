@@ -145,10 +145,12 @@ namespace Docky.Items
 		
 		void WnckScreenDefaultActiveWindowChanged (object o, ActiveWindowChangedArgs args)
 		{
-			if (args.PreviousWindow != null)
-				args.PreviousWindow.GeometryChanged -= HandleActiveWindowGeometryChangedChanged;
-			if (Wnck.Screen.Default.ActiveWindow != null)
-				Wnck.Screen.Default.ActiveWindow.GeometryChanged += HandleActiveWindowGeometryChangedChanged;
+			if (WnckDockItem.CurrentDesktopOnly) {
+				if (args.PreviousWindow != null)
+					args.PreviousWindow.GeometryChanged -= HandleActiveWindowGeometryChangedChanged;
+				if (Wnck.Screen.Default.ActiveWindow != null)
+					Wnck.Screen.Default.ActiveWindow.GeometryChanged += HandleActiveWindowGeometryChangedChanged;
+			}
 			UpdateTransientItems ();
 		}
 		
