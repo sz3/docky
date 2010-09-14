@@ -124,6 +124,8 @@ namespace Docky.Menus
 					cr.Stroke ();
 					rg.Destroy ();
 				}
+				
+				(cr.Target as IDisposable).Dispose ();
 			}
 			return false;
 		}

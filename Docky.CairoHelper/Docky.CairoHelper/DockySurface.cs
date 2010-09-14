@@ -27,8 +27,6 @@ using Gtk;
 
 namespace Docky.CairoHelper
 {
-
-
 	public class DockySurface : IDisposable
 	{
 		bool disposed;
@@ -112,6 +110,7 @@ namespace Docky.CairoHelper
 			Surface copy = Internal.CreateSimilar (Content.ColorAlpha, Width, Height);
 			using (Cairo.Context cr = new Cairo.Context (copy)) {
 				Internal.Show (cr, 0, 0);
+				(cr.Target as IDisposable).Dispose ();
 			}
 			
 			DockySurface result = new DockySurface (Width, Height);
@@ -141,11 +140,13 @@ namespace Docky.CairoHelper
 			if (hadInternal) {
 				using (Cairo.Context cr = new Cairo.Context (Internal)) {
 					last.Show (cr, 0, 0);
+					(cr.Target as IDisposable).Dispose ();
 				}
 				if (context != null) {
 					(context as IDisposable).Dispose ();
 					context = null;
 				}
+				(last as IDisposable).Dispose ();
 				last.Destroy ();
 			}
 		}
@@ -193,10 +194,16 @@ namespace Docky.CairoHelper
 			if (disposed)
 				return;
 			disposed = true;
+			
 			if (context != null)
 				(context as IDisposable).Dispose ();
-			if (surface != null)
+			context = null;
+			
+			if (surface != null) {
+				(surface as IDisposable).Dispose ();
 				surface.Destroy ();
+			}
+			surface = null;
 		}
 		#endregion
 

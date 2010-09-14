@@ -294,6 +294,8 @@ namespace Docky.Menus
 					
 					layout.Context.Dispose ();
 				}
+				
+				(cr.Target as IDisposable).Dispose ();
 			}
 			
 			return true;

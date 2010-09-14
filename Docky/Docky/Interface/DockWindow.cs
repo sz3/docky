@@ -2739,11 +2739,12 @@ namespace Docky.Interface
 			}
 
 			using (Gdk.Pixmap pixmap = new Gdk.Pixmap (null, area.Width, area.Height, 1)) {
-				using (Context cr = Gdk.CairoHelper.Create (pixmap)) {
+				using (Cairo.Context cr = Gdk.CairoHelper.Create (pixmap)) {
 					cr.Color = new Cairo.Color (0, 0, 0, 1);
 					cr.Paint ();
 					
 					InputShapeCombineMask (pixmap, area.X, area.Y);
+					(cr.Target as IDisposable).Dispose ();
 				}
 			}
 		}

@@ -116,6 +116,8 @@ namespace Docky.Interface
 				
 				Gdk.CairoHelper.SetSourcePixbuf (cr, poof, 0, -(offset));
 				cr.Paint ();
+				
+				(cr.Target as IDisposable).Dispose ();
 			}
 		}
 	}
