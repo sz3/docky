@@ -136,7 +136,9 @@ namespace Docky.Services
 		public DesktopItem DesktopItemFromDesktopFile (string file)
 		{
 			return DesktopItems
-				.First (item => item.Path.Equals (file, StringComparison.CurrentCultureIgnoreCase));
+				.Where (item => item.Path.Equals (file, StringComparison.CurrentCultureIgnoreCase))
+				.DefaultIfEmpty (null)
+				.First ();
 		}
 		
 		public void RegisterDesktopItem (DesktopItem item)
