@@ -197,13 +197,9 @@ namespace Docky.Services.Applications
 		public void Launch (IEnumerable<string> uris)
 		{
 			if (File.Exists) {
-				// This fixes the freeze caused with an installed libzeitgeit-gio module
-				GLib.Timeout.Add (0, delegate {
-					GLib.DesktopAppInfo appinfo = GLib.DesktopAppInfo.NewFromFilename (File.Path);
-					DockServices.System.Open (appinfo, uris.Select (uri => GLib.FileFactory.NewForUri (uri)));
-					appinfo.Dispose ();
-					return false;
-				});
+				GLib.DesktopAppInfo appinfo = GLib.DesktopAppInfo.NewFromFilename (File.Path);
+				DockServices.System.Open (appinfo, uris.Select (uri => GLib.FileFactory.NewForUri (uri)));
+				appinfo.Dispose ();
 			}
 		}
 
