@@ -196,11 +196,8 @@ namespace Docky.Services.Applications
 		
 		public void Launch (IEnumerable<string> uris)
 		{
-			if (File.Exists) {
-				GLib.DesktopAppInfo appinfo = GLib.DesktopAppInfo.NewFromFilename (File.Path);
-				DockServices.System.Open (appinfo, uris.Select (uri => GLib.FileFactory.NewForUri (uri)));
-				appinfo.Dispose ();
-			}
+			if (File.Exists)
+				DockServices.System.Launch (File, uris.Select (uri => GLib.FileFactory.NewForUri (uri)));
 		}
 
 		Dictionary<string, string> GetValuesFromFile ()

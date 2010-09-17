@@ -27,6 +27,7 @@ using System.Net;
 using GLib;
 
 using Docky.Services.Prefs;
+using Docky.Services.Applications;
 
 using NDesk.DBus;
 using org.freedesktop.DBus;
@@ -316,7 +317,7 @@ namespace Docky.Services
 		
 		public void Open (IEnumerable<string> uris)
 		{
-			uris.ToList ().ForEach (uri => Open (uri));
+			Launch (null, uris.Select (uri => GLib.FileFactory.NewForUri (uri)));
 		}
 		
 		public void Open (GLib.File file)
@@ -327,10 +328,10 @@ namespace Docky.Services
 		public void Open (IEnumerable<GLib.File> files)
 		{
 			// null forces the default handler
-			Open (null, files);
+			Launch (null, files);
 		}
 		
-		public void Open (AppInfo app, IEnumerable<GLib.File> files)
+		public void Launch (GLib.File app, IEnumerable<GLib.File> files)
 		{
 			List<GLib.File> noMountNeeded = new List<GLib.File> ();
 
@@ -339,11 +340,10 @@ namespace Docky.Services
 				// if the path isn't empty, 
 				// check if it's a local file or on VolumeMonitor's mount list.
 				// if it is, skip it.
-				if (!string.IsNullOrEmpty (f.Path)) {
-					if (f.IsNative || VolumeMonitor.Default.Mounts.Any (m => f.Path.Contains (m.Root.Path))) {
-						noMountNeeded.Add (f);
-						continue;
-					}
+				if (!string.IsNullOrEmpty (f.Path) 
+				    && (f.IsNative || VolumeMonitor.Default.Mounts.Any (m => f.Path.Contains (m.Root.Path)))) {
+					noMountNeeded.Add (f);
+					continue;
 				}
 				// if the file has no path, there are 2 possibilities
 				// either it's a "fake" file, like computer:// or trash://
@@ -356,51 +356,47 @@ namespace Docky.Services
 				} catch { 
 					// otherwise:
 					// try to mount, if successful launch, otherwise (it's possibly already mounted) try to launch anyways
-					f.MountWithActionAndFallback (() => Launch (app, new [] {f}), () => Launch (app, new [] {f}));				
+					f.MountWithActionAndFallback (() => LaunchWithFiles (app, new [] {f}), () => LaunchWithFiles (app, new [] {f}));				
 				}
 			}
 
 			if (noMountNeeded.Any () || !files.Any ())
-				Launch (app, noMountNeeded);
+				LaunchWithFiles (app, noMountNeeded);
 		}
 		
-		void Launch (AppInfo app, IEnumerable<GLib.File> files)
+		void LaunchWithFiles (GLib.File app, IEnumerable<GLib.File> files)
 		{
-			// if we weren't given an app info, query the file for the default handler
-			if (app == null && files.Any ())
+			AppInfo appinfo = null;
+			if (app != null) {
+				appinfo = GLib.DesktopAppInfo.NewFromFilename (app.Path);
+			} else {
+				if (!files.Any ())
+					return;
+
+				// if we weren't given an app info, query the file for the default handler
 				try {
-					app = files.First ().QueryDefaultHandler (null);
+					appinfo = files.First ().QueryDefaultHandler (null);
 				} catch {
 					// file probably doesnt exist
-				}
-			
-			GLib.List launchList;
-			
-			if (app != null) {
-				if (files.Count () == 0) {
-					try {
-						app.Launch (null, null);
-					} catch (GException e) {
-						Log.Notify (string.Format ("Error running: {0}", app.Name), Gtk.Stock.DialogWarning, e.Message);
-						Log<SystemService>.Error (e.Message);
-						Log<SystemService>.Info (e.StackTrace);
-					}
 					return;
+				}
+			}
+			
+			try {
+				GLib.List launchList;
+				
+				if (!files.Any ()) {
+					appinfo.Launch (null, null);
+
 				// check if the app supports files or Uris
-				} else if (app.SupportsFiles) {
+				} else if (appinfo.SupportsFiles) {
 					launchList = new GLib.List (typeof (GLib.File));
 					foreach (GLib.File f in files)
 						launchList.Append (f);
-					try {
-						// if launching was successful, bail
-						if (app.Launch (launchList, null))
-							return;
-					} catch (GLib.GException e) {
-						Log.Notify (string.Format ("Error running: {0}", app.Name), Gtk.Stock.DialogWarning, e.Message);
-						Log<SystemService>.Error (e.Message);
-						Log<SystemService>.Info (e.StackTrace);
-					}
-				} else if (app.SupportsUris) {
+
+					appinfo.Launch (launchList, null);
+
+				} else if (appinfo.SupportsUris) {
 					launchList = new GLib.List (typeof (string));
 					foreach (GLib.File f in files) {
 						// try to use GLib.File.Uri first, if that throws an exception,
@@ -416,18 +412,19 @@ namespace Docky.Services
 							launchList.Append (uri);
 						}
 					}
-					try {
-						if (app.LaunchUris (launchList, null))
-							return;
-					} catch (GLib.GException e) {
-						Log.Notify (string.Format ("Error running: {0}", app.Name), Gtk.Stock.DialogWarning, e.Message);
-						Log<SystemService>.Error (e.Message);
-						Log<SystemService>.Info (e.StackTrace);
-					}
+					appinfo.LaunchUris (launchList, null);
+					
+				} else {
+					Log<SystemService>.Error ("Error opening files. The application doesn't support files/URIs or wasn't found.");	
 				}
+				
+			} catch (GException e) {
+				Log.Notify (string.Format ("Error running: {0}", appinfo.Name), Gtk.Stock.DialogWarning, e.Message);
+				Log<SystemService>.Error (e.Message);
+				Log<SystemService>.Info (e.StackTrace);
 			}
 
-			Log<SystemService>.Error ("Error opening files. The application doesn't support files/URIs or wasn't found.");
+			(appinfo as IDisposable).Dispose ();
 		}
 		
 		public void Execute (string executable)
