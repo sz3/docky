@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-08-16 12:56+0200\n"
-"PO-Revision-Date: 2010-09-06 18:34+0000\n"
+"PO-Revision-Date: 2010-09-17 05:37+0000\n"
 "Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2010-09-12 07:48+0000\n"
+"X-Launchpad-Export-Date: 2010-09-17 06:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
@@ -190,7 +190,7 @@ msgstr "Configuração do Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
 msgid "_Start When User Logs In"
-msgstr ""
+msgstr "_Iniciar Quando Usuario Se Conectar"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
@@ -466,7 +466,7 @@ msgstr "Tema"
 
 #: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:42
 msgid "Show Desktop"
-msgstr "Mostrar área de trabalho"
+msgstr "Mostrar Área de Trabalho"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
 msgid "_Add Label"
@@ -547,7 +547,7 @@ msgstr "_Compor E-mail"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:211
 msgid "View C_ontacts"
-msgstr ""
+msgstr "Ver c_ontatos"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
 msgid "New Mail"
@@ -725,67 +725,67 @@ msgstr ""
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:86
 #, csharp-format
 msgid "A timer set for {0} has expired."
-msgstr ""
+msgstr "Um cronômetro definido para {0} expirou."
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:232
 msgid "Time remaining:"
-msgstr ""
+msgstr "Tempo restante:"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:234
 msgid "Timer paused, time remaining:"
-msgstr ""
+msgstr "Croômetro em pausa, tempo restante:"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:245
 msgid "Set the timer's label to:"
-msgstr ""
+msgstr "Defina o rótulo do temporizador para:"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:251
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:285
 msgid "_Set Label"
-msgstr ""
+msgstr "_Defina o Rótulo"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:276
 msgid "_Pause Timer"
-msgstr ""
+msgstr "_Pausar Cronômetro"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:276
 msgid "_Start Timer"
-msgstr ""
+msgstr "_Iniciar Cronômetro"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:280
 msgid "_Remove Timer"
-msgstr ""
+msgstr "_Remover Cronômetro"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:56
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "hora"
+msgstr[1] "horas"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:60
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minuto"
+msgstr[1] "minutos"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:65
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "segundo"
+msgstr[1] "segundos"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:132
 #, csharp-format
 msgid "Click to create a timer for {0}."
-msgstr ""
+msgstr "Clique para criar um cronômetro para {0}."
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:149
 msgid "Automatically _Start Timers"
-msgstr ""
+msgstr "Automaticamente_Iniciar Cronômetro"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:153
 msgid "Automatically _Dismiss Timers"
-msgstr ""
+msgstr "Automaticamete_Ignorar Cronômetro"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:55
 msgid "Drop to move to Trash"
@@ -926,7 +926,7 @@ msgstr ""
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:70
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:220
 msgid "Switch Desks"
-msgstr ""
+msgstr "Mudar Área de Trabalho"
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:171
 msgid "Desk"
