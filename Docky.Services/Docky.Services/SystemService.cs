@@ -390,14 +390,15 @@ namespace Docky.Services
 
 				// check if the app supports files or Uris
 				} else if (appinfo.SupportsFiles) {
-					launchList = new GLib.List (typeof (GLib.File));
+					launchList = new GLib.List (new GLib.File[] {}, typeof (GLib.File), true, false);
 					foreach (GLib.File f in files)
 						launchList.Append (f);
 
 					appinfo.Launch (launchList, null);
-
+					launchList.Dispose ();
+					
 				} else if (appinfo.SupportsUris) {
-					launchList = new GLib.List (typeof (string));
+					launchList = new GLib.List (new string[] {}, typeof (string), true, true);
 					foreach (GLib.File f in files) {
 						// try to use GLib.File.Uri first, if that throws an exception,
 						// catch and use P/Invoke to libdocky.  If that's still null, warn & skip the file.
@@ -413,6 +414,7 @@ namespace Docky.Services
 						}
 					}
 					appinfo.LaunchUris (launchList, null);
+					launchList.Dispose ();
 					
 				} else {
 					Log<SystemService>.Error ("Error opening files. The application doesn't support files/URIs or wasn't found.");	
