@@ -146,10 +146,15 @@ namespace BatteryMonitor
 			
 			List<MenuItem> items = new List<MenuItem> ();
 			
+			items.Add (new MenuItem (Catalog.GetString ("_Statistics"),
+					"gnome-power-statistics",
+					delegate {
+						DockServices.System.Execute ("gnome-power-statistics --device /org/freedesktop/UPower/devices/battery_BAT0");
+					}));
 			items.Add (new MenuItem (Catalog.GetString ("_Preferences"),
 					Gtk.Stock.Preferences,
 					delegate {
-						DockServices.System.Open ("gnome-power-preferences");
+						DockServices.System.Execute ("gnome-power-preferences");
 					}));
 			list[MenuListContainer.Actions].InsertRange (0, items);
 			
