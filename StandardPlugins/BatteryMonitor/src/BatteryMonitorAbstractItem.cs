@@ -17,12 +17,14 @@
 // 
 
 using System;
+using System.Collections.Generic;
 
 using Cairo;
 using Mono.Unix;
 
 using Docky.CairoHelper;
 using Docky.Items;
+using Docky.Menus;
 using Docky.Services;
 
 namespace BatteryMonitor
@@ -136,6 +138,22 @@ namespace BatteryMonitor
 			}
 			
 			return ClickAnimation.None;
+		}
+		
+		protected override MenuList OnGetMenuItems ()
+		{
+			MenuList list = base.OnGetMenuItems ();
+			
+			List<MenuItem> items = new List<MenuItem> ();
+			
+			items.Add (new MenuItem (Catalog.GetString ("_Preferences"),
+					Gtk.Stock.Preferences,
+					delegate {
+						DockServices.System.Open ("gnome-power-preferences");
+					}));
+			list[MenuListContainer.Actions].InsertRange (0, items);
+			
+			return list;
 		}
 		
 		void RenderSvgOnContext (Context cr, string file, int size)
