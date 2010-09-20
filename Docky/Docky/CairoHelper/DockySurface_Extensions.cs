@@ -366,6 +366,8 @@ namespace Docky.CairoHelper
 			self.Context.Operator = Operator.Source;
 			self.Context.SetSource (original);
 			self.Context.Paint ();
+			
+			(original as IDisposable).Dispose ();
 			original.Destroy ();
 		}
 		
@@ -427,6 +429,7 @@ namespace Docky.CairoHelper
 					cr.Operator = Operator.Source;
 					cr.SetSource (self.Internal);
 					cr.Paint ();
+					(cr.Target as IDisposable).Dispose ();
 				}
 			}
 			
@@ -457,6 +460,8 @@ namespace Docky.CairoHelper
 				self.Context.SetSource (original);
 				self.Context.Paint ();
 				self.Context.Operator = Operator.Over;
+				
+				(original as IDisposable).Dispose ();
 				original.Destroy ();
 			}
 		}

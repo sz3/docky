@@ -76,8 +76,6 @@ namespace Docky.Services.Applications
 
 		public Dictionary<string, string> Values { get; set; }
 
-		GLib.DesktopAppInfo appinfo;
-		
 		GLib.FileMonitor monitor;
 		GLib.File file;
 		public GLib.File File {
@@ -122,8 +120,6 @@ namespace Docky.Services.Applications
 				throw new ArgumentNullException ("DesktopItem can't be initialized with a null file object");
 			
 			File = file;
-			
-			appinfo = GLib.DesktopAppInfo.NewFromFilename (file.Path);
 			
 			if (load_file)
 				Values = GetValuesFromFile ();
@@ -200,8 +196,11 @@ namespace Docky.Services.Applications
 		
 		public void Launch (IEnumerable<string> uris)
 		{
-			if (File.Exists)
+			if (File.Exists) {
+				GLib.DesktopAppInfo appinfo = GLib.DesktopAppInfo.NewFromFilename (File.Path);
 				DockServices.System.Open (appinfo, uris.Select (uri => GLib.FileFactory.NewForUri (uri)));
+				appinfo.Dispose ();
+			}
 		}
 
 		Dictionary<string, string> GetValuesFromFile ()
@@ -305,8 +304,6 @@ namespace Docky.Services.Applications
 		{
 			Values.Clear ();
 
-			appinfo.Dispose ();
-			
 			if (monitor != null) {
 				monitor.Cancel ();
 				monitor.Changed -= HandleFileChanged;

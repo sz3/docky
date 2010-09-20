@@ -81,10 +81,11 @@ namespace Docky.Items
 			
 			Wnck.Screen.Default.WindowOpened += WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed += WnckScreenDefaultWindowClosed;
-			Wnck.Screen.Default.ActiveWindowChanged += WnckScreenDefaultWindowChanged;
+			
 			if (CurrentDesktopOnly) {
 				Wnck.Screen.Default.ViewportsChanged += WnckScreenDefaultViewportsChanged;
 				Wnck.Screen.Default.ActiveWorkspaceChanged += WnckScreenDefaultActiveWorkspaceChanged;
+				Wnck.Screen.Default.ActiveWindowChanged += WnckScreenDefaultWindowChanged;
 				if (Wnck.Screen.Default.ActiveWindow != null)
 					Wnck.Screen.Default.ActiveWindow.GeometryChanged += HandleActiveWindowGeometryChangedChanged;
 			}
@@ -148,6 +149,12 @@ namespace Docky.Items
 		
 		void WnckScreenDefaultWindowChanged (object o, ActiveWindowChangedArgs args)
 		{
+			if (CurrentDesktopOnly) {
+				if (args.PreviousWindow != null)
+					args.PreviousWindow.GeometryChanged -= HandleActiveWindowGeometryChangedChanged;
+				if (Wnck.Screen.Default.ActiveWindow != null)
+					Wnck.Screen.Default.ActiveWindow.GeometryChanged += HandleActiveWindowGeometryChangedChanged;
+			}
 			UpdateWindows ();
 		}
 
@@ -223,10 +230,11 @@ namespace Docky.Items
 
 			Wnck.Screen.Default.WindowOpened -= WnckScreenDefaultWindowOpened;
 			Wnck.Screen.Default.WindowClosed -= WnckScreenDefaultWindowClosed;
-			Wnck.Screen.Default.ActiveWindowChanged -= WnckScreenDefaultWindowChanged;
+			
 			if (CurrentDesktopOnly) {
 				Wnck.Screen.Default.ViewportsChanged -= WnckScreenDefaultViewportsChanged;
 				Wnck.Screen.Default.ActiveWorkspaceChanged -= WnckScreenDefaultActiveWorkspaceChanged;
+				Wnck.Screen.Default.ActiveWindowChanged -= WnckScreenDefaultWindowChanged;
 				if (Wnck.Screen.Default.ActiveWindow != null)
 					Wnck.Screen.Default.ActiveWindow.GeometryChanged -= HandleActiveWindowGeometryChangedChanged;
 			}

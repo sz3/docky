@@ -62,7 +62,6 @@
     <Compile Include="Docky\Items\SeparatorItem.cs" />
     <Compile Include="Docky\CairoHelper\DockySurface_Extensions.cs" />
     <Compile Include="Docky\ConfigurationWindow.cs" />
-    <Compile Include="Docky\DockPlacementWidget.cs" />
     <Compile Include="Docky\Items\SpacingItem.cs" />
     <Compile Include="Gtk\Widget_Extensions.cs" />
     <Compile Include="Docky\Interface\HoveredItemChangedArgs.cs" />

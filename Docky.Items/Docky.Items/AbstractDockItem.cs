@@ -394,9 +394,9 @@ namespace Docky.Items
 			
 			double pixelCount = icon_buffers [0].Width * icon_buffers [0].Height * byte.MaxValue;
 			
-			sr.Destroy ();
 			// FIXME: once we use mono 2.6.3+ we can do sr.Dispose ()
 			(sr as IDisposable).Dispose ();
+			sr.Destroy ();
 			
 			average_color = new Cairo.Color (rTotal / pixelCount, 
 			                                 gTotal / pixelCount, 

@@ -140,7 +140,7 @@ namespace Docky.Interface
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (args.Event.Window)) {
 				cr.Operator = Operator.Source;
 				
-				if (currentSurface == null) {
+				if (currentSurface == null || currentSurface.Internal == null) {
 					cr.Color = new Cairo.Color (1, 1, 1, 0);
 				} else {
 					if (background_buffer == null) {
