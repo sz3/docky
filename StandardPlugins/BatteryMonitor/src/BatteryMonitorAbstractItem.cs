@@ -132,7 +132,7 @@ namespace BatteryMonitor
 		
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
-			if (button == 1) {
+			if (button == 1 && DockServices.System.IsValidExecutable ("gnome-power-statistics")) {
 				DockServices.System.Execute ("gnome-power-statistics --device /org/freedesktop/UPower/devices/battery_BAT0");
 				return ClickAnimation.Bounce;
 			}
@@ -146,17 +146,21 @@ namespace BatteryMonitor
 			
 			List<MenuItem> items = new List<MenuItem> ();
 			
-			items.Add (new MenuItem (Catalog.GetString ("_Statistics"),
-					"gnome-power-statistics",
-					delegate {
-						DockServices.System.Execute ("gnome-power-statistics --device /org/freedesktop/UPower/devices/battery_BAT0");
-					}));
-			items.Add (new MenuItem (Catalog.GetString ("_Preferences"),
-					Gtk.Stock.Preferences,
-					delegate {
-						DockServices.System.Execute ("gnome-power-preferences");
-					}));
-			list[MenuListContainer.Actions].InsertRange (0, items);
+			if (DockServices.System.IsValidExecutable ("gnome-power-statistics"))
+				items.Add (new MenuItem (Catalog.GetString ("_Statistics"),
+						"gnome-power-statistics",
+						delegate {
+							DockServices.System.Execute ("gnome-power-statistics --device /org/freedesktop/UPower/devices/battery_BAT0");
+						}));
+			if (DockServices.System.IsValidExecutable ("gnome-power-preferences"))
+				items.Add (new MenuItem (Catalog.GetString ("_Preferences"),
+						Gtk.Stock.Preferences,
+						delegate {
+							DockServices.System.Execute ("gnome-power-preferences");
+						}));
+			
+			if (items.Count > 0)
+				list[MenuListContainer.Actions].InsertRange (0, items);
 			
 			return list;
 		}
