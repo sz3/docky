@@ -333,6 +333,11 @@ namespace Docky.Services
 		
 		public void Launch (GLib.File app, IEnumerable<GLib.File> files)
 		{
+			if (app != null && !app.Exists) {
+				Log<SystemService>.Warn ("Application {0} doesnt exist", app.Path);
+				return;
+			}
+			
 			List<GLib.File> noMountNeeded = new List<GLib.File> ();
 
 			// before we try to use the files, make sure they are mounted
