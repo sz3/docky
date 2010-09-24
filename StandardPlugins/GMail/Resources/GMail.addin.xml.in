@@ -4,7 +4,7 @@
 	version="1.0"
 	isroot="false"
 	defaultEnabled="false"
-	name="GMail"
+	name="Gmail"
 	description="Check GMail"
 	author="Robert Dyer"
 	icon="gmail"

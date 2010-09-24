@@ -29,7 +29,7 @@ namespace GMail
 		
 		public override string Name {
 			get {
-				return "GMail";
+				return "Gmail";
 			}
 		}
 		

@@ -27,7 +27,7 @@ namespace GMail
 	public class GMailConfigDialog : ConfigDialog
 	{
 
-		public GMailConfigDialog () : base (Catalog.GetString ("GMail Configuration"),
+		public GMailConfigDialog () : base (Catalog.GetString ("Gmail Configuration"),
 			new Gtk.Widget [] { new GMailLoginConfig (), new GMailLabelConfig ()})
 		{
 		}
