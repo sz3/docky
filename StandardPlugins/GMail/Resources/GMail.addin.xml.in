@@ -5,7 +5,7 @@
 	isroot="false"
 	defaultEnabled="false"
 	name="Gmail"
-	description="Check GMail"
+	description="Check Gmail"
 	author="Robert Dyer"
 	icon="gmail"
 >
