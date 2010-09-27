@@ -2344,7 +2344,7 @@ namespace Docky.Interface
 				center = center.MoveIn (Position, move);
 			}
 			
-			double opacity = Math.Min (1, (render_time - item.AddTime).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds);
+			double opacity = Math.Max (0, Math.Min (1, (render_time - item.AddTime).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds));
 			opacity = Math.Pow (opacity, 2);
 			DockySurface icon;
 			
