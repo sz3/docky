@@ -183,7 +183,7 @@ namespace RecentDocuments
 					if (!f.OwnedFile.Exists)
 						continue;
 
-					MenuItem item = new IconMenuItem (f.OwnedFile.Basename, f.Icon, (o, a) => DockServices.System.Open (GLib.FileFactory.NewForPath (f.OwnedFile.Path)));
+					MenuItem item = new IconMenuItem (f.OwnedFile.Basename, f.Icon, (o, a) => DockServices.System.Open (f.OwnedFile.Dup ()));
 					item.Mnemonic = null;
 					list[MenuListContainer.RelatedItems].Add (item);
 				}
