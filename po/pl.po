@@ -523,7 +523,7 @@ msgid "General Error"
 msgstr "Błąd ogólny"
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
-msgid "GMail Configuration"
+msgid "Gmail Configuration"
 msgstr "Konfiguracja GMail'a"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
@@ -567,8 +567,8 @@ msgid "Labels"
 msgstr "Etykiety"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
-msgid "GMail"
-msgstr "GMail"
+msgid "Gmail"
+msgstr "Gmail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"

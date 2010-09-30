@@ -521,8 +521,8 @@ msgid "General Error"
 msgstr "Allgemeiner Fehler"
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
-msgid "GMail Configuration"
-msgstr "GMail Konfiguration"
+msgid "Gmail Configuration"
+msgstr "Gmail Konfiguration"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 msgid "No unread mail"
@@ -564,7 +564,7 @@ msgid "Labels"
 msgstr "Labels"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
-msgid "GMail"
+msgid "Gmail"
 msgstr "Google Mail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41

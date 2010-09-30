@@ -520,8 +520,8 @@ msgid "General Error"
 msgstr "Genel Hata"
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
-msgid "GMail Configuration"
-msgstr "GMail Yapılandırması"
+msgid "Gmail Configuration"
+msgstr "Gmail Yapılandırması"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 msgid "No unread mail"
@@ -562,8 +562,8 @@ msgid "Labels"
 msgstr "Etiketler"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
-msgid "GMail"
-msgstr "GMail"
+msgid "Gmail"
+msgstr "Gmail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"

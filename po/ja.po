@@ -513,8 +513,8 @@ msgid "General Error"
 msgstr "一般エラー"
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
-msgid "GMail Configuration"
-msgstr "GMail の設定"
+msgid "Gmail Configuration"
+msgstr "Gmail の設定"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 msgid "No unread mail"
@@ -555,8 +555,8 @@ msgid "Labels"
 msgstr "ラベル"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
-msgid "GMail"
-msgstr "GMail"
+msgid "Gmail"
+msgstr "Gmail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"

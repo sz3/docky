@@ -519,7 +519,7 @@ msgid "General Error"
 msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
-msgid "GMail Configuration"
+msgid "Gmail Configuration"
 msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
@@ -562,7 +562,7 @@ msgid "Labels"
 msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
-msgid "GMail"
+msgid "Gmail"
 msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
