@@ -554,7 +554,7 @@ namespace Docky.Interface
 		
 		int VisibleDockHeight {
 			get {
-				return ThreeDimensional ? (int) (0.4 * DockHeight) : DockHeight;
+				return ThreeDimensional ? (int) ((Preferences.PanelMode ? 0.33 : 0.4 ) * DockHeight) : DockHeight;
 			}
 		}
 		
