@@ -79,6 +79,15 @@ namespace BatteryMonitor
 			}
 		}
 		
+		int GetInt (org.freedesktop.DBus.Properties dbusobj, string path, string propname) 
+		{
+			try {
+				return Int32.Parse (dbusobj.Get (path, propname).ToString ());
+			} catch (Exception) {
+				return 0;
+			}
+		}
+		
 		uint GetUInt (org.freedesktop.DBus.Properties dbusobj, string path, string propname) 
 		{
 			try {
@@ -98,9 +107,14 @@ namespace BatteryMonitor
 			return GetDouble (device, UPowerDeviceName, "EnergyFull");
 		}
 		
-		double GetEnergyRate (IUPowerDevice device)
+		int GetTimeToEmpty (IUPowerDevice device)
 		{
-			return GetDouble (device, UPowerDeviceName, "EnergyRate");
+			return GetInt (device, UPowerDeviceName, "TimeToEmpty");
+		}
+		
+		int GetTimeToFull (IUPowerDevice device)
+		{
+			return GetInt (device, UPowerDeviceName, "TimeToFull");
 		}
 		
 		uint GetState (IUPowerDevice device)
@@ -137,14 +151,28 @@ namespace BatteryMonitor
 			max_capacity = Math.Max (1, max_capacity);
 		}
 		
+		int time_to_empty;
+		int time_to_full;
+		
+		protected override double GetBatteryTime (bool charging)
+		{
+			if (charging)
+				return (double) time_to_full / 3600.0;
+			
+			return (double) time_to_empty / 3600.0;
+		}
+		
 		protected override bool GetCurrentBatteryCapacity ()
 		{
 			bool charging = false;
+			time_to_empty = 0;
+			time_to_full = 0;
 			
 			if (upower != null)
 				foreach (IUPowerDevice device in devices) {
 					current_capacity += (int) GetEnergy (device);
-					current_rate += (int) GetEnergyRate (device);
+					time_to_empty += GetTimeToEmpty (device);
+					time_to_full += GetTimeToFull (device);
 					
 					// 0: Unknown, 1: Charging, 2: Discharging, 3: Empty, 
 					// 4: Fully charged, 5: Pending charge, 6: Pending discharge
@@ -154,6 +182,9 @@ namespace BatteryMonitor
 					else if (state == 1 || state == 5) // charging
 						charging = true;
 				}
+			
+			if (time_to_empty > 0 || time_to_full > 0)
+				current_rate = 1;
 			
 			return charging;
 		}

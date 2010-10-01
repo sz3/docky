@@ -77,6 +77,14 @@ namespace BatteryMonitor
 		
 		protected abstract bool GetCurrentBatteryCapacity ();
 		
+		protected virtual double GetBatteryTime (bool charging)
+		{
+			if (charging)
+				return (double) (max_capacity - current_capacity) / (double) current_rate;
+			
+			return (double) current_capacity / (double) current_rate;
+		}
+		
 		public bool UpdateBattStat ()
 		{
 			max_capacity = 0;
@@ -94,11 +102,7 @@ namespace BatteryMonitor
 				if (current_rate == 0) {
 					HoverText = string.Format ("{0:0.0}%", Capacity * 100);
 				} else {
-					double time;
-					if (charging)
-						time = (double) (max_capacity - current_capacity) / (double) current_rate;
-					else
-						time = (double) current_capacity / (double) current_rate;
+					double time = GetBatteryTime (charging);
 					int hours = (int) time;
 					int mins = (int) (60 * (time - hours));
 					
