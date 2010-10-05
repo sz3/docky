@@ -182,9 +182,7 @@ namespace BatteryMonitor
 						// 0: Unknown, 1: Charging, 2: Discharging, 3: Empty, 
 						// 4: Fully charged, 5: Pending charge, 6: Pending discharge
 						uint state = GetState (device);
-						if (state == 2 || state == 6) // discharging
-							charging = false;
-						else if (state == 1 || state == 5) // charging
+						if (state == 1 || state == 5) // charging
 							charging = true;
 					}
 				}
