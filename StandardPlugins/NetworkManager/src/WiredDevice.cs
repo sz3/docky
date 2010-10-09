@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using NDesk.DBus;
+using DBus;
 using org.freedesktop.DBus;
 
 namespace NetworkManagerDocklet

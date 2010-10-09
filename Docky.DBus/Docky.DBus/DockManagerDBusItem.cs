@@ -22,7 +22,7 @@ using System.Linq;
 using GLib;
 
 using org.freedesktop.DBus;
-using NDesk.DBus;
+using DBus;
 
 using Docky.Items;
 using Docky.Menus;

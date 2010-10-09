@@ -17,7 +17,7 @@
 
 using System;
 
-using NDesk.DBus;
+using DBus;
 using org.freedesktop.DBus;
 
 namespace NetworkManagerDocklet
