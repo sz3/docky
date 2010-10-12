@@ -25,7 +25,7 @@ using Cairo;
 using Gdk;
 using GLib;
 using Mono.Unix;
-using NDesk.DBus;
+using DBus;
 
 using Docky.CairoHelper;
 using Docky.Items;

@@ -29,7 +29,7 @@ using GLib;
 using Docky.Services.Prefs;
 using Docky.Services.Applications;
 
-using NDesk.DBus;
+using DBus;
 using org.freedesktop.DBus;
 
 namespace Docky.Services

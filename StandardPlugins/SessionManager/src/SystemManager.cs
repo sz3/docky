@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-using NDesk.DBus;
+using DBus;
 using org.freedesktop.DBus;
 
 using Mono.Unix;

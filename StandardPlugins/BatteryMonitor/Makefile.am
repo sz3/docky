@@ -34,5 +34,5 @@ REFERENCES =  \
 	System.Core \
 	Mono.Posix \
 	$(MONO_CAIRO_LIBS) \
-	$(NDESK_DBUS_10_LIBS) \
+	$(DBUS_SHARP_10_LIBS) \
 	$(GTK_SHARP_20_LIBS)
