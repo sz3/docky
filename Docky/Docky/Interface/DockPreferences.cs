@@ -558,8 +558,10 @@ namespace Docky.Interface
 			threedee_check.Sensitive = Position == DockPosition.Bottom && Gdk.Screen.Default.IsComposited;
 			
 			window_manager_check.Active = DefaultProvider.IsWindowManager;
+			window_manager_check.Sensitive = !window_manager_check.Active;
 			DefaultProvider.WindowManagerChanged += delegate {
 				WindowManager = window_manager_check.Active = DefaultProvider.IsWindowManager;
+				window_manager_check.Sensitive = !window_manager_check.Active;
 			};
 			
 			if (!Gdk.Screen.Default.IsComposited) {
@@ -771,6 +773,7 @@ namespace Docky.Interface
 			if (window_manager_check.Active)
 				DefaultProvider.SetWindowManager ();
 			WindowManager = window_manager_check.Active = DefaultProvider.IsWindowManager;
+			window_manager_check.Sensitive = !window_manager_check.Active;
 		}
 		
 		protected virtual void OnPanelModeButtonToggled (object sender, System.EventArgs e)
