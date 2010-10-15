@@ -17,18 +17,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
 
-using Cairo;
 using Gdk;
-using Gtk;
 
 namespace Docky.Interface
 {
-
-
 	public class CursorTracker
 	{
 		static Dictionary<Gdk.Display, CursorTracker> trackers = new Dictionary<Gdk.Display, CursorTracker> ();

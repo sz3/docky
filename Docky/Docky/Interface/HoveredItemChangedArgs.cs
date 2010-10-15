@@ -21,11 +21,8 @@ using Docky.Items;
 
 namespace Docky.Interface
 {
-
-
 	public class HoveredItemChangedArgs : EventArgs
 	{
-
 		public AbstractDockItem LastItem;
 		
 		public HoveredItemChangedArgs ()

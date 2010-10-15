@@ -17,19 +17,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Cairo;
-using Gdk;
-using Gtk;
 
 using Docky.Items;
 
 namespace Docky.Interface
 {
-
-
 	public interface IDockPreferences
 	{
 		event EventHandler PositionChanged;

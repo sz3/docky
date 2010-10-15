@@ -17,7 +17,6 @@
 
 using System;
 
-using org.freedesktop.DBus;
 using DBus;
 
 namespace Docky.DBus

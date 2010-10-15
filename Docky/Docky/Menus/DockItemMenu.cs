@@ -17,18 +17,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 
 using Cairo;
 using Gdk;
 using Gtk;
-using Wnck;
 
 using Docky.CairoHelper;
-using Docky.Items;
-using Docky.Interface;
 
 namespace Docky.Menus
 {

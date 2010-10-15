@@ -16,24 +16,13 @@
 // 
 
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-
-using Cairo;
-using Gdk;
-using Gtk;
 
 using Docky.CairoHelper;
 
 namespace Docky.Items
 {
-
-
 	internal class SpacingItem : AbstractDockItem, INonPersistedItem
 	{
-
 		public SpacingItem ()
 		{
 		}

@@ -19,11 +19,8 @@ using System;
 
 namespace Cairo
 {
-
-
 	public static class Context_Extensions
 	{
-
 		public delegate PointD CairoPlotDelegate (double val);
 		
 		public static void Plot (this Context self, CairoPlotDelegate func, double lower, double upper, double step, double x, double y)

@@ -17,18 +17,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.IO;
-using System.Text;
 
 using Gdk;
 using Gtk;
 
 using Mono.Unix;
-
-using ICSharpCode.SharpZipLib;
-using ICSharpCode.SharpZipLib.Tar;
 
 using Docky.Items;
 using Docky.Interface;
