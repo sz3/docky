@@ -163,8 +163,8 @@ namespace GMail
 				else
 					Log<GMailAtom>.Error ("Network error: {0}", e.Message);
 				HttpWebResponse response = (HttpWebResponse) e.Response;
-				Log<GMailAtom>.Debug ("Response status: {0} - {1}", response.StatusCode, response.StatusDescription);
-				
+				if (response != null)
+					Log<GMailAtom>.Debug ("Response status: {0} - {1}", response.StatusCode, response.StatusDescription);
 				return false;
 			} catch (Exception) { }
 			
