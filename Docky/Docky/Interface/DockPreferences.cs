@@ -628,16 +628,13 @@ namespace Docky.Interface
 				}.Where (s => !String.IsNullOrEmpty (s));
 			}
 			
-			foreach (string launcher in Launchers) {
+			foreach (string launcher in Launchers)
 				DefaultProvider.InsertItem (launcher);
-			}
 			
 			// we have a plugin thats not enabled, go nuclear
-			if (Plugins.Any (s => !PluginManager.ItemProviders.Any (ip => ip.Name == s))) {
-				foreach (Mono.Addins.Addin addin in PluginManager.AllAddins) {
+			if (Plugins.Any (s => !PluginManager.ItemProviders.Any (ip => ip.Name == s)))
+				foreach (Mono.Addins.Addin addin in PluginManager.AllAddins)
 					addin.Enabled = true;
-				}
-			}
 			
 			foreach (string providerName in Plugins) {
 				AbstractDockItemProvider provider = PluginManager.ItemProviders
@@ -650,9 +647,8 @@ namespace Docky.Interface
 			}
 			
 			List<string> sortList = SortList.ToList ();
-			foreach (AbstractDockItemProvider provider in item_providers) {
+			foreach (AbstractDockItemProvider provider in item_providers)
 				SortProviderOnList (provider, sortList);
-			}
 			
 			UpdateSortList ();
 		}
@@ -666,9 +662,8 @@ namespace Docky.Interface
 			};
 			
 			int i = 0;
-			foreach (AbstractDockItem item in provider.Items.OrderBy (indexFunc)) {
+			foreach (AbstractDockItem item in provider.Items.OrderBy (indexFunc))
 				item.Position = i++;
-			}
 		}
 		
 		void UpdateSortList ()

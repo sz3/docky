@@ -195,12 +195,11 @@ namespace Docky
 		
 		void EnsurePluginState ()
 		{
-			foreach (AbstractDockItemProvider provider in PluginManager.ItemProviders) {
+			foreach (AbstractDockItemProvider provider in PluginManager.ItemProviders)
 				if (!docks.Any (d => d.Preferences.ItemProviders.Contains (provider))) {
-					Log<DockController>.Warn ("\"{0}\" seems to have been abaondoned... disabling.", provider.Name);
+					Log<DockController>.Warn ("\"{0}\" seems to have been abandoned... disabling.", provider.Name);
 					PluginManager.Disable (provider);
 				}
-			}
 		}
 		
 		#region IDisposable implementation
