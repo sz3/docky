@@ -58,14 +58,6 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Docky.Widgets\ConfigDialog.cs" />
     <Compile Include="Docky.Widgets\WrapLabel.cs" />
-    <Compile Include="Docky.Widgets\AnimatedBox.cs" />
-    <Compile Include="Docky.Widgets\AnimatedHBox.cs" />
-    <Compile Include="Docky.Widgets\AnimatedVBox.cs" />
-    <Compile Include="Docky.Widgets\AnimatedWidget.cs" />
-    <Compile Include="Docky.Widgets\SingleActorStage.cs" />
-    <Compile Include="Docky.Widgets\Stage.cs" />
-    <Compile Include="Docky.Widgets\Actor.cs" />
-    <Compile Include="Docky.Widgets\Choreographer.cs" />
     <Compile Include="Docky.Widgets\TileView.cs" />
     <Compile Include="Docky.Widgets\Tile.cs" />
     <Compile Include="Docky.Widgets\HoverImageButton.cs" />
