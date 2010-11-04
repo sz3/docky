@@ -1888,7 +1888,7 @@ namespace Docky.Interface
 				DrawValues[adi] = val;
 
 				// keep the hovereditem in mind, but don't change it while rendering
-				if (hoverArea.Contains (localCursor) && !AutohideManager.Hidden)
+				if (hoverArea.Contains (localCursor) && !AutohideManager.Hidden && !(adi is SeparatorItem))
 					next_hoveredItem = adi;
 				
 				if (update_screen_regions) {
