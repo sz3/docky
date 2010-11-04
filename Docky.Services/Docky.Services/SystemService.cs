@@ -77,7 +77,6 @@ namespace Docky.Services
 		{
 			NetworkConnected = true;
 			try {
-				BusG.Init ();
 				if (Bus.System.NameHasOwner (NetworkManagerName)) {
 					network = Bus.System.GetObject<INetworkManager> (NetworkManagerName, new ObjectPath (NetworkManagerPath));
 					network.StateChanged += OnConnectionStatusChanged;
@@ -257,7 +256,6 @@ namespace Docky.Services
 			// we assume we're not on battery.
 			on_battery = false;
 			try {
-				BusG.Init ();
 				if (Bus.System.NameHasOwner (UPowerName)) {
 					upower = Bus.System.GetObject<IUPower> (UPowerName, new ObjectPath (UPowerPath));
 					upower.Changed += HandleUPowerChanged;

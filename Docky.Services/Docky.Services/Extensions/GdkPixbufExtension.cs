@@ -53,7 +53,7 @@ namespace Docky.Services
 						                                     b / byte.MaxValue);
 						
 						color = colorTransform.Invoke (color);
-												
+						
 						pixels[0] = (byte) (color.R * byte.MaxValue);
 						pixels[1] = (byte) (color.G * byte.MaxValue);
 						pixels[2] = (byte) (color.B * byte.MaxValue);

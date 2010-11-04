@@ -169,8 +169,6 @@ namespace Docky.DBus
 		
 		public bool Initialize ()
 		{
-			BusG.Init ();
-			
 			Bus bus = Bus.Session;
 			
 			if (!InitializePrivateBus (bus))
