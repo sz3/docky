@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-30 09:57+0200\n"
-"PO-Revision-Date: 2010-09-30 11:15+0000\n"
+"PO-Revision-Date: 2010-11-05 21:02+0000\n"
 "Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,12 +16,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-10-19 17:36+0000\n"
+"X-Launchpad-Export-Date: 2010-11-06 08:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Search Docklets..."
-msgstr "Szukaj Dockletu"
+msgstr "Szukaj Dockletów..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:164
 msgid "Search Helpers..."
@@ -236,7 +236,7 @@ msgstr "Docklety"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
 msgid "Usable"
-msgstr ""
+msgstr "Użytek"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
@@ -293,7 +293,7 @@ msgstr "Powiększenie"
 #: ../Docky.Items/Docky.Items/AbstractDockItem.cs:120
 #, csharp-format
 msgid "Drop to open with {0}"
-msgstr ""
+msgstr "Upuść aby otworzyć za pomocą: {0}"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:178
 msgid "New _Window"
@@ -315,7 +315,7 @@ msgstr "Przypnij do docku"
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:72
 #, csharp-format
 msgid "Drop to move to {0}"
-msgstr ""
+msgstr "Upuść aby przenieść do: {0}"
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
@@ -725,7 +725,7 @@ msgstr "Na pewno zamknąć wszystkie programy i wyłączyć komputer?"
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:86
 #, csharp-format
 msgid "A timer set for {0} has expired."
-msgstr ""
+msgstr "Timer ustawiony na: {0} wygasł"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:232
 msgid "Time remaining:"
@@ -788,7 +788,7 @@ msgstr "Automatyczy _Start Timera"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:153
 msgid "Automatically _Dismiss Timers"
-msgstr ""
+msgstr "Automatycznie _usuwaj timery"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:55
 msgid "Drop to move to Trash"
@@ -872,12 +872,19 @@ msgid ""
 "website.  To find your code, look up your forecast on their site and the "
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
+"Dane pogodowe udostępnione i opracowane przez The Weather Channel. Źródło "
+"wymaga lokalizacji przez podanie amerykańskiego kodu pocztowego lub "
+"unikalnego kodu ze strony www. W celu odnalezienia kodu, spójrz na prognozę "
+"na stronie www w adresie URL za '/local/', kod ma postać AAXX0000."
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:56
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
 msgstr ""
+"Dane pogodowe udostępnione i opracowane przez The Weather Channel. Źródło "
+"wymaga lokalizacji przez podanie amerykańskiego kodu pocztowego lub 'Miasta, "
+"Państwa'."
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
@@ -889,7 +896,7 @@ msgstr "Konfiguracja wtyczki Pogoda"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
 msgid "Click to add a location."
-msgstr ""
+msgstr "Kliknij aby doadać swoją lokalizacje"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
 msgid "Fetching data..."
@@ -919,20 +926,20 @@ msgstr "Jutro"
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:328
 #, csharp-format
 msgid "{0} humidity"
-msgstr ""
+msgstr "{0} wilgotności"
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:70
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:220
 msgid "Switch Desks"
-msgstr ""
+msgstr "Przełącz pulpity"
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:171
 msgid "Desk"
-msgstr ""
+msgstr "Pulpit"
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:173
 msgid "Virtual Desk"
-msgstr ""
+msgstr "Wirtualny pulpit"
 
 #~ msgid "Network Error: "
 #~ msgstr "Błąd sieci. "
@@ -1086,6 +1093,12 @@ msgstr ""
 #~ "Powoduje, że aktywatory, które zarządzają więcej niż jednym oknem, posiadają "
 #~ "pod sobą dodatkowe oznaczenie."
 
+#~ msgid "_Remove"
+#~ msgstr "_Usuń"
+
+#~ msgid "_Add"
+#~ msgstr "_Dodaj"
+
 #~ msgid "Sunrise"
 #~ msgstr "Wschód słońca"
 
@@ -1106,3 +1119,6 @@ msgstr ""
 
 #~ msgid "Humidity"
 #~ msgstr "Wilgotność"
+
+#~ msgid "_Start When Computer Starts"
+#~ msgstr "_Uruchom wraz ze startem komputera"
