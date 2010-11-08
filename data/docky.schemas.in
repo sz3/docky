@@ -157,7 +157,7 @@
 			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock5/FadeOpacity</applyto>
 			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock6/FadeOpacity</applyto>
 			<owner>docky</owner>
-			<type>int</type>
+			<type>float</type>
 			<default>0</default>
 			<locale name="C">
 				<short>Opacity to fade to</short>
