@@ -66,6 +66,8 @@ namespace Docky
 			if (!UserArgs.Parse (args))
 				return;
 			
+			DockServices.Init ();
+			
 			Wnck.Global.ClientType = Wnck.ClientType.Pager;
 			
 			// set process name
@@ -95,7 +97,6 @@ namespace Docky
 				ShowAbout ();
 			};
 			PluginManager.Initialize ();
-			DockServices.Theme.Initialize ();
 			Controller.Initialize ();
 			
 			Gdk.Threads.Enter ();

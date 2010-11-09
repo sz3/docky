@@ -92,7 +92,7 @@ namespace Docky.Services
 		#endregion
 		
 		
-		internal PathsService ()
+		public void Initialize ()
 		{
 			// get environment-based settings
 			File env_home         = FileFactory.NewForPath (Environment.GetFolderPath (Environment.SpecialFolder.Personal));

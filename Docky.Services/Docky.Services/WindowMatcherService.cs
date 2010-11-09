@@ -31,8 +31,7 @@ namespace Docky.Services
 {
 	public class WindowMatcherService
 	{
-		
-		internal WindowMatcherService ()
+		public void Initialize ()
 		{
 			// Initialize window matching with currently available windows
 			DesktopItemsByWindow = new Dictionary<Window, List<DesktopItem>> ();

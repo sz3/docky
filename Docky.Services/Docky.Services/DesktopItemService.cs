@@ -46,7 +46,7 @@ namespace Docky.Services
 		Dictionary<string, List<DesktopItem>> ItemsByExec { get; set; }
 		Dictionary<string, DesktopItem> ItemByClass { get; set; }
 
-		internal DesktopItemService ()
+		public void Initialize ()
 		{
 			update_lock = new object ();
 

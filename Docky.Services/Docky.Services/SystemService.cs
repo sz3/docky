@@ -38,7 +38,7 @@ namespace Docky.Services
 	{
 		public System.Threading.Thread MainThread { get; set; }
 		
-		internal SystemService ()
+		public void Initialize ()
 		{
 			InitializeBattery ();
 			InitializeNetwork ();
