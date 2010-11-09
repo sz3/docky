@@ -78,10 +78,12 @@ namespace Docky.Items
 			if (!ManagedWindows.Any ())
 				return;
 			
-			if (ManagedWindows.Count () > 1 && Windows.First ().ClassGroup != null)
-				HoverText = ManagedWindows.First ().ClassGroup.Name;
-			else
-				HoverText = ManagedWindows.First ().Name;
+			if (ShowHovers) {
+				if (ManagedWindows.Count () > 1 && Windows.First ().ClassGroup != null)
+					HoverText = ManagedWindows.First ().ClassGroup.Name;
+				else
+					HoverText = ManagedWindows.First ().Name;
+			}
 			
 			SetIconFromPixbuf (base_window.Icon);
 		}

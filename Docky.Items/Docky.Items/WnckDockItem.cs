@@ -76,6 +76,15 @@ namespace Docky.Items
 			}
 		}
 
+		static bool? showHovers;
+		protected static bool ShowHovers {
+			get {
+				if (!showHovers.HasValue)
+					showHovers = prefs.Get<bool> ("ShowHovers", true);
+				return showHovers.Value;
+			}
+		}
+		
 		public IEnumerable<Wnck.Window> ManagedWindows {
 			get {
 				return Windows.Where (w => !w.IsSkipTasklist &&
