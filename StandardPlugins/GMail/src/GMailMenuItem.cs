@@ -30,6 +30,7 @@ namespace GMail
 		
 		public GMailMenuItem (UnreadMessage message, string icon) : base (message.Topic + " - " + Catalog.GetString ("From: ") + message.FromName, icon)
 		{
+			Mnemonic = null;
 			this.message = message;
 			Clicked += delegate {
 				DockServices.System.Open (this.message.Link);
