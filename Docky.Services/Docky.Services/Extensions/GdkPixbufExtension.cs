@@ -39,11 +39,13 @@ namespace Docky.Services
 		public static Pixbuf PixelColorTransform (this Pixbuf source, Func<Cairo.Color, Cairo.Color> colorTransform)
 		{
 			try {
-				int offset = (source.HasAlpha) ? 4 : 3;
+				if (source.BitsPerSample != 8)
+					throw new Exception ("Pixbuf does not have 8 bits per sample, it has " + source.BitsPerSample);
+				
 				unsafe {
 					double r, g, b;
 					byte* pixels = (byte*) source.Pixels;
-					for (int i = 0; i < source.Height * source.Width; i++) {
+					for (int i = 0; i < source.Height * source.Rowstride / source.NChannels; i++) {
 						r = (double) pixels[0];
 						g = (double) pixels[1];
 						b = (double) pixels[2];
@@ -58,7 +60,7 @@ namespace Docky.Services
 						pixels[1] = (byte) (color.G * byte.MaxValue);
 						pixels[2] = (byte) (color.B * byte.MaxValue);
 						
-						pixels += offset;
+						pixels += source.NChannels;
 					}
 				}
 			} catch (Exception e) {
