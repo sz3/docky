@@ -31,8 +31,6 @@ using Docky.Services.Windows;
 
 namespace Docky.Items
 {
-
-
 	public class WindowDockItem : WnckDockItem
 	{
 		Wnck.Window base_window;
@@ -90,12 +88,11 @@ namespace Docky.Items
 		
 		void UpdateWindows (Wnck.Window baseWindow)
 		{
-			if (baseWindow != null) {
+			if (baseWindow != null)
 				Windows = DockServices.WindowMatcher.SimilarWindows (baseWindow)
 					.Where (w => !FileApplicationProvider.ManagedWindows.Contains (w));
-			} else {
+			else
 				Windows = Enumerable.Empty<Wnck.Window> ();
-			}
 		}
 		
 		public override void Dispose ()
