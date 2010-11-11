@@ -238,6 +238,7 @@ data/themes/Matte/Makefile
 data/themes/Smoke/Makefile
 data/themes/Transparent/Makefile
 m4/Makefile
+man/Makefile
 po/Makefile.in
 ])
 
