@@ -8,53 +8,53 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-30 09:57+0200\n"
-"PO-Revision-Date: 2010-09-30 11:12+0000\n"
-"Last-Translator: Rico Tzschichholz <Unknown>\n"
+"PO-Revision-Date: 2010-11-10 22:25+0000\n"
+"Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-11-06 08:28+0000\n"
+"X-Launchpad-Export-Date: 2010-11-11 15:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Search Docklets..."
-msgstr "חפש"
+msgstr "חיפוש יישומי עגינה..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:164
 msgid "Search Helpers..."
-msgstr "חפש עזרים..."
+msgstr "חיפוש עזרים..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid "Click on any dock to configure."
-msgstr "בחר אחד מסרגלי הדוק בכדי להגדירו"
+msgstr "נא ללחוץ על מעגן כלשהו כדי להגדיר אותו."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:229
 msgid "Drag any dock to reposition."
-msgstr "גרור אחד מסרגלי הדוק למיקום הרצוי"
+msgstr "יש לגרור מעגן כלשהו כדי למקם אותו."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:294
 msgid "Delete the currently selected dock?"
-msgstr "למחוק את סרגל הכלים המסומן?"
+msgstr "האם למחוק את סרגל הכלים המסומן?"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:296
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
-"אם ברצונך למחוק את סרגל הדוק, כלל ההגדרות\n"
-"לסרגל זה ימחקו לחלוטין."
+"אם ברצונך למחוק את המעגן, כל ההגדרות\n"
+"לסרגל זה יימחקו לחלוטין."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:303
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
-msgstr "_מחק סרגל"
+msgstr "_מחיקת מעגן"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:419
 #: ../Docky/Docky/ConfigurationWindow.cs:439
 msgid "_Select"
-msgstr "_בחר"
+msgstr "_בחירה"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:422
 #: ../Docky/Docky/ConfigurationWindow.cs:442
@@ -67,61 +67,63 @@ msgstr "יוצר"
 
 #: ../Docky/Docky/DockletTile.cs:86
 msgid "Move this docklet up on the selected dock"
-msgstr "הזז כלי עזר זה מעלה בדוק הנבחר"
+msgstr "הזזת יישום מעגן זה במעלה המעגן הנבחר"
 
 #: ../Docky/Docky/DockletTile.cs:87
 msgid "Move this docklet down on the selected dock"
-msgstr "הזז כלי עזר זה מטה בדוק הנבחר"
+msgstr "הזזת יישום מעגן זה במורד המעגן הנבחר"
 
 #: ../Docky/Docky/DockletTile.cs:91
 msgid "Move this docklet left on the selected dock"
-msgstr "הזז כלי עזר זה שמאלה בדוק הנבחר"
+msgstr "הזזת יישום מעגן זה שמאלה במעגן הנבחר"
 
 #: ../Docky/Docky/DockletTile.cs:92
 msgid "Move this docklet right on the selected dock"
-msgstr "הזז כלי עזר זה ימינה בדוק הנבחר"
+msgstr "הזזת יישום מעגן זה ימינה במעגן הנבחר"
 
 #: ../Docky/Docky/DockletTile.cs:94
 msgid "Configure this docklet"
-msgstr "עצב כלי עזר זה"
+msgstr "הגדרת יישום מעגן זה"
 
 #: ../Docky/Docky/DockletTile.cs:95
 msgid "About this docklet"
-msgstr "אודות כלי עזר זה"
+msgstr "על אודות יישום מעגן זה"
 
 #: ../Docky/Docky/DockletTile.cs:96
 msgid "Add this docklet to the selected dock"
-msgstr "הוסף כלי עזר זה לדוק הנבחר"
+msgstr "הוספת יישום מעגן זה למעגן הנבחר"
 
 #: ../Docky/Docky/DockletTile.cs:97
 msgid "Remove this docklet from the selected dock"
-msgstr "הסר כלי עזר זה בדוק הנבחר"
+msgstr "הסרת יישום מעגן זה מהמעגן הנבחר"
 
 #: ../Docky/Docky/Docky.cs:113
 msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
 msgstr ""
+"דרישת Docky היא שמנגנון ה־compositing (הרכבת חלונות) תקין. אפשרויות מסוימות "
+"ינוטרלו וערכות נושא/הנפשות לא יוצגו כראוי. "
 
 #: ../Docky/Docky/HelperTile.cs:42
 msgid "Status"
-msgstr "סטטוס"
+msgstr "מצב"
 
 #: ../Docky/Docky/HelperTile.cs:59
 msgid "Uninstall"
-msgstr "הסר"
+msgstr "הסרה"
 
 #: ../Docky/Docky/HelperTile.cs:71
 msgid "About this helper"
-msgstr "אודות כלי עזר זה"
+msgstr "על אודות כלי עזר זה"
 
 #: ../Docky/Docky/HelperTile.cs:72
 msgid "Enable this helper"
-msgstr "הפעל כלי עזר זה"
+msgstr "הפעלת כלי עזר זה"
 
 #: ../Docky/Docky/HelperTile.cs:73
 msgid "Disable this helper"
-msgstr "נטרל כלי עזר זה"
+msgstr "נטרול כלי עזר זה"
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Running"
