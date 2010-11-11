@@ -25,7 +25,7 @@ namespace Docky.Services
 	{
 		// these methods all assume that the BitsPerSample is 8 (byte).  Pixbuf documentation
 		// states that values from 1-16 are allowed, but currently only 8 bit samples are supported.
-		// http://developer.gimp.org/api/2.0/gdk-pixbuf/gdk-pixbuf-gdk-pixbuf.html#GdkPixbuf--bits-per-sample
+		// http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-gdk-pixbuf.html#GdkPixbuf--bits-per-sample
 		
 		/// <summary>
 		/// Applies a color transformation to each pixel in a pixbuf.
