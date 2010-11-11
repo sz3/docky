@@ -147,6 +147,7 @@ namespace Docky.Items
 		
 		void WindowStateChanged (object o, StateChangedArgs args)
 		{
+			SetIndicator ();
 			SetState ();
 		}
 
