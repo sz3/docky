@@ -76,8 +76,6 @@ namespace GMail
 			get { return UnreadCount > 0 && State != GMailState.Error; }
 		}
 
-		bool IsChecking { get; set; }
-		
 		public GMailAtom (string label)
 		{
 			CurrentLabel = label;
@@ -117,8 +115,11 @@ namespace GMail
 				GLib.Source.Remove (UpdateTimer);
 			UpdateTimer = 0;
 			
-			if (checkerThread != null)
+			if (checkerThread != null) {
 				checkerThread.Abort ();
+				checkerThread.Join ();
+				checkerThread = null;
+			}
 		}
 			
 		public void ResetTimer ()
@@ -171,6 +172,10 @@ namespace GMail
 			return true;
 		}
 		
+		bool IsChecking {
+			get { return checkerThread != null && checkerThread.IsAlive; }
+		}
+		
 		void CheckGMail ()
 		{
 			if (IsChecking || !DockServices.System.NetworkConnected)
@@ -181,8 +186,6 @@ namespace GMail
 				OnGMailFailed (Catalog.GetString ("Click to set username and password."));
 				return;
 			}
-			
-			IsChecking = true;
 			
 			checkerThread = DockServices.System.RunOnThread (() => {
 				try {
@@ -298,7 +301,7 @@ namespace GMail
 						OnGMailFailed (Catalog.GetString ("General Error"));
 					});
 				} finally {
-					IsChecking = false;
+					checkerThread = null;
 				}
 			});
 		}
