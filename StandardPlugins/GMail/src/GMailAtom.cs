@@ -189,7 +189,7 @@ namespace GMail
 			
 			checkerThread = DockServices.System.RunOnThread (() => {
 				try {
-					Gtk.Application.Invoke (delegate { OnGMailChecking (); });
+					OnGMailChecking ();
 
 					String[] login = GMailPreferences.User.Split (new char[] { '@' });
 					string domain = login.Length > 1 ? login[1] : "gmail.com";
@@ -266,40 +266,28 @@ namespace GMail
 					} catch (Exception) { GMailPreferences.LastChecked = DateTime.Now; }
 					
 					messages = tmp;
-					Gtk.Application.Invoke (delegate { OnGMailChecked (); });
+					OnGMailChecked ();
 				} catch (ThreadAbortException) {
 					Log<GMailAtom>.Debug ("Stoping Atom thread");
 				} catch (NullReferenceException e) {
 					Log<GMailAtom>.Debug (e.Message);
-					Gtk.Application.Invoke (delegate {
-						OnGMailFailed (Catalog.GetString ("Feed Error"));
-					});
+					OnGMailFailed (Catalog.GetString ("Feed Error"));
 				} catch (XmlException e) {
 					Log<GMailAtom>.Error ("Error parsing XML: {0}", e.Message);
-					Gtk.Application.Invoke (delegate {
-						OnGMailFailed (Catalog.GetString ("Feed Error"));
-					});
+					OnGMailFailed (Catalog.GetString ("Feed Error"));
 				} catch (WebException e) {
 					Log<GMailAtom>.Error ("Network error: {0}", e.Message);
 					if (e.Message.IndexOf ("401") != -1)
-						Gtk.Application.Invoke (delegate {
-							OnGMailFailed (Catalog.GetString ("Invalid Username"));
-						});
+						OnGMailFailed (Catalog.GetString ("Invalid Username"));
 					else
-						Gtk.Application.Invoke (delegate {
-							OnGMailFailed (Catalog.GetString ("Network Error"));
-						});
+						OnGMailFailed (Catalog.GetString ("Network Error"));
 					HttpWebResponse response = (HttpWebResponse) e.Response;
 					Log<GMailAtom>.Debug ("Response status: {0} - {1}", response.StatusCode, response.StatusDescription);
 				} catch (ObjectDisposedException) {
-					Gtk.Application.Invoke (delegate {
-						OnGMailFailed (Catalog.GetString ("Network Error"));
-					});
+					OnGMailFailed (Catalog.GetString ("Network Error"));
 				} catch (Exception e) {
 					Log<GMailAtom>.Error (e.Message);
-					Gtk.Application.Invoke (delegate {
-						OnGMailFailed (Catalog.GetString ("General Error"));
-					});
+					OnGMailFailed (Catalog.GetString ("General Error"));
 				} finally {
 					checkerThread = null;
 				}
@@ -310,7 +298,9 @@ namespace GMail
 		{
 			State = GMailState.Normal;
 			if (GMailChecked != null)
-				GMailChecked (null, EventArgs.Empty);
+				Gtk.Application.Invoke (delegate {
+					GMailChecked (null, EventArgs.Empty);
+				});
 		}
 		
 		void OnGMailChecking ()
@@ -318,14 +308,18 @@ namespace GMail
 			if (State != GMailState.ManualReload)
 				State = GMailState.Reloading;
 			if (GMailChecking != null)
-				GMailChecking (null, EventArgs.Empty);
+				Gtk.Application.Invoke (delegate {
+					GMailChecking (null, EventArgs.Empty);
+				});
 		}
 		
 		void OnGMailFailed (string error)
 		{
 			State = GMailState.Error;
 			if (GMailFailed != null)
-				GMailFailed (null, new GMailErrorArgs (error));
+				Gtk.Application.Invoke (delegate {
+					GMailFailed (null, new GMailErrorArgs (error));
+				});
 		}
 		
 		public void Dispose ()
