@@ -118,6 +118,7 @@ namespace GMail
 			if (checkerThread != null) {
 				checkerThread.Abort ();
 				checkerThread.Join ();
+				IsChecking = false;
 				checkerThread = null;
 			}
 		}
@@ -172,9 +173,7 @@ namespace GMail
 			return true;
 		}
 		
-		bool IsChecking {
-			get { return checkerThread != null && checkerThread.IsAlive; }
-		}
+		bool IsChecking { get; set; }
 		
 		void CheckGMail ()
 		{
@@ -186,6 +185,8 @@ namespace GMail
 				OnGMailFailed (Catalog.GetString ("Click to set username and password."));
 				return;
 			}
+			
+			IsChecking = true;
 			
 			checkerThread = DockServices.System.RunOnThread (() => {
 				try {
@@ -290,7 +291,7 @@ namespace GMail
 					Log<GMailAtom>.Error (e.Message);
 					OnGMailFailed (Catalog.GetString ("General Error"));
 				} finally {
-					checkerThread = null;
+					IsChecking = false;
 				}
 			});
 		}
