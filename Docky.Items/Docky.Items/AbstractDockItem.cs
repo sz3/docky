@@ -931,21 +931,20 @@ namespace Docky.Items
 					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (11);
 					layout.FontDescription.Weight = Pango.Weight.Bold;
 					layout.Ellipsize = Pango.EllipsizeMode.End;
-					layout.Width = Pango.Units.FromPixels (500);
 					
 					layout.SetText (HoverText);
 					
 					Pango.Rectangle inkRect, logicalRect;
 					layout.GetPixelExtents (out inkRect, out logicalRect);
 					
-					int textWidth = inkRect.Width;
+					int textWidth = logicalRect.Width;
 					int textHeight = logicalRect.Height;
 					int buffer = HoverTextHeight - textHeight;
 					text_buffer = new DockySurface (Math.Max (HoverTextHeight, textWidth + buffer), HoverTextHeight, model);
 					
 					Cairo.Context cr = text_buffer.Context;
 					
-					cr.MoveTo ((text_buffer.Width - textWidth) / 2, buffer / 2);
+					cr.MoveTo (buffer / 2, buffer / 2);
 					Pango.CairoHelper.LayoutPath (cr, layout);
 					cr.Color = isLight ? new Cairo.Color (0.1, 0.1, 0.1) : new Cairo.Color (1, 1, 1);
 					cr.Fill ();
