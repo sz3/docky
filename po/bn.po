@@ -8,35 +8,35 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-09-30 09:57+0200\n"
-"PO-Revision-Date: 2009-11-29 02:23+0000\n"
-"Last-Translator: Scio <Sayantan.Chaudhuri@Gmail.com>\n"
+"PO-Revision-Date: 2010-11-12 06:27+0000\n"
+"Last-Translator: Aniruddha Adhikary <Unknown>\n"
 "Language-Team: Bengali <bn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-11-06 08:28+0000\n"
+"X-Launchpad-Export-Date: 2010-11-14 07:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Search Docklets..."
-msgstr ""
+msgstr "ডকলেট সমূহ খোঁজ..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:164
 msgid "Search Helpers..."
-msgstr ""
+msgstr "সাহায্যকারী সমূহ খোঁজ"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid "Click on any dock to configure."
-msgstr ""
+msgstr "যেকোন ডক কনফিগার করতে ক্লিক করুন।"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:229
 msgid "Drag any dock to reposition."
-msgstr ""
+msgstr "যেকোন ডককে নতুন অবস্থানে আনতে ড্র্যাগ করুন।"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:294
 msgid "Delete the currently selected dock?"
-msgstr ""
+msgstr "বর্তমানে নির্বাচিত ডকটি মুছতে চান?"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:296
 msgid ""
@@ -47,53 +47,53 @@ msgstr ""
 #: ../Docky/Docky/ConfigurationWindow.cs:303
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
-msgstr ""
+msgstr "_ডক মোছ"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:419
 #: ../Docky/Docky/ConfigurationWindow.cs:439
 msgid "_Select"
-msgstr ""
+msgstr "_সিলেক্ট"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:422
 #: ../Docky/Docky/ConfigurationWindow.cs:442
 msgid ".tar Archives"
-msgstr ""
+msgstr ".tar আর্কাইভ সমূহ"
 
 #: ../Docky/Docky/DockletTile.cs:51
 msgid "Author"
-msgstr ""
+msgstr "লেখক"
 
 #: ../Docky/Docky/DockletTile.cs:86
 msgid "Move this docklet up on the selected dock"
-msgstr ""
+msgstr "এই ডকটি নির্বাচিত ডকের ওপর সরাও"
 
 #: ../Docky/Docky/DockletTile.cs:87
 msgid "Move this docklet down on the selected dock"
-msgstr ""
+msgstr "এই ডকটি নির্বাচিত ডকের নিচে সরাও"
 
 #: ../Docky/Docky/DockletTile.cs:91
 msgid "Move this docklet left on the selected dock"
-msgstr ""
+msgstr "এই ডকটি নির্বাচিত ডকের বামে সরাও"
 
 #: ../Docky/Docky/DockletTile.cs:92
 msgid "Move this docklet right on the selected dock"
-msgstr ""
+msgstr "এই ডকটি নির্বাচিত ডকের ডানে সরাও"
 
 #: ../Docky/Docky/DockletTile.cs:94
 msgid "Configure this docklet"
-msgstr ""
+msgstr "এই ডকলেটটি কনফিগার করুন"
 
 #: ../Docky/Docky/DockletTile.cs:95
 msgid "About this docklet"
-msgstr ""
+msgstr "এই ডকলেট সম্পর্কে"
 
 #: ../Docky/Docky/DockletTile.cs:96
 msgid "Add this docklet to the selected dock"
-msgstr ""
+msgstr "এই ডকলেটটি নির্বাচিত ডকলেটে যোগ কর"
 
 #: ../Docky/Docky/DockletTile.cs:97
 msgid "Remove this docklet from the selected dock"
-msgstr ""
+msgstr "এই ডকলেটটি নির্বাচিত ডকলেট হতে অপসারণ কর"
 
 #: ../Docky/Docky/Docky.cs:113
 msgid ""
@@ -103,31 +103,31 @@ msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:42
 msgid "Status"
-msgstr ""
+msgstr "স্ট্যাটাস"
 
 #: ../Docky/Docky/HelperTile.cs:59
 msgid "Uninstall"
-msgstr ""
+msgstr "আনইন্সটল"
 
 #: ../Docky/Docky/HelperTile.cs:71
 msgid "About this helper"
-msgstr ""
+msgstr "এই সাহায্যকারী সম্পর্কে"
 
 #: ../Docky/Docky/HelperTile.cs:72
 msgid "Enable this helper"
-msgstr ""
+msgstr "এই সাহায্যকারীটি কার্যকর কর"
 
 #: ../Docky/Docky/HelperTile.cs:73
 msgid "Disable this helper"
-msgstr ""
+msgstr "এই সাহায্যকারীটি অকার্যকর কর"
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Running"
-msgstr ""
+msgstr "চলমান"
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Stopped"
-msgstr ""
+msgstr "থামানো"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:333
 msgid ""
@@ -158,121 +158,121 @@ msgstr ""
 #: ../Docky/Docky/Interface/DockWindow.cs:390
 #: ../Docky/Docky/Interface/DockWindow.cs:404
 msgid "Drop to add to dock"
-msgstr ""
+msgstr "নতুন অবস্থানে নিতে ড্র্যাগ করুন"
 
 #: ../Docky/Docky/Items/DockyItem.cs:132
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:244
 msgid "_Settings"
-msgstr ""
+msgstr "_সেটিংস"
 
 #: ../Docky/Docky/Items/DockyItem.cs:133
 msgid "_About"
-msgstr ""
+msgstr "স_ম্পর্কে"
 
 #: ../Docky/Docky/Items/DockyItem.cs:134
 msgid "_Help"
-msgstr ""
+msgstr "সাহা_য্য"
 
 #: ../Docky/Docky/Items/DockyItem.cs:136
 msgid "_Quit Docky"
-msgstr ""
+msgstr "ডকি _বন্ধ কর"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
 msgid "Docky Settings"
-msgstr ""
+msgstr "ডক সেটিংস"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
 msgid "_Start When User Logs In"
-msgstr ""
+msgstr "ব্যবহারকারী _লগইন করলে চালু কর"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
-msgstr ""
+msgstr "_থীমঃ"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
 msgid "_Install"
-msgstr ""
+msgstr "_ইন্সটল"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
 msgid "<b>General Options</b>"
-msgstr ""
+msgstr "<b>সাধারণ অপশন সমূহ</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
-msgstr ""
+msgstr "<b>ডক কনফিগারেশন</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
-msgstr ""
+msgstr "ডক সমূহ"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
 msgid "All"
-msgstr ""
+msgstr "সব"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
 msgid "Enabled"
-msgstr ""
+msgstr "কার্যকর"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
 msgid "Disabled"
-msgstr ""
+msgstr "অকার্যকর"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
 msgid "Docklets"
-msgstr ""
+msgstr "ডকলেট সমূহ"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
 msgid "Usable"
-msgstr ""
+msgstr "ব্যবহারযোগ্য"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
-msgstr ""
+msgstr "সাহায্যকারী সমূহ"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
 msgid "_New Dock"
-msgstr ""
+msgstr "_নতুন ডক"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
 msgid "None"
-msgstr ""
+msgstr "একটিও না"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
 msgid "Autohide"
-msgstr ""
+msgstr "স্বয়ংক্রিয় লুকায়ন"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "Intellihide"
-msgstr ""
+msgstr "ইন্টেলিহাইড"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Window Dodge"
-msgstr ""
+msgstr "উইন্ডো ডজ"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
 msgid "_Fade On Hide"
-msgstr ""
+msgstr "লুকানোর সময় _ফেড কর"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
 msgid "_Icon Size:"
-msgstr ""
+msgstr "_আইকন আকৃতিঃ"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:132
 msgid "_Hiding:"
-msgstr ""
+msgstr "_লুকানোঃ"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
 msgid "_Panel Mode"
-msgstr ""
+msgstr "_প্যানেল মোডঃ"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
 msgid "3D Back_ground"
-msgstr ""
+msgstr "3D ব্যাক_গ্রাউন্ড"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
 msgid "_Manage Windows Without Launcher"
@@ -280,34 +280,34 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
 msgid "_Zoom:"
-msgstr ""
+msgstr "_জুমঃ"
 
 #: ../Docky.Items/Docky.Items/AbstractDockItem.cs:120
 #, csharp-format
 msgid "Drop to open with {0}"
-msgstr ""
+msgstr "{0} দিয়ে খুলতে ড্রপ করুন"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:178
 msgid "New _Window"
-msgstr ""
+msgstr "নতুন _উইন্ডো"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:180
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
-msgstr ""
+msgstr "_খোল"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:70
 msgid "Reset Color"
-msgstr ""
+msgstr "রং রিসেট"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:481
 msgid "_Pin to Dock"
-msgstr ""
+msgstr "ডকে _পিন কর"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:72
 #, csharp-format
 msgid "Drop to move to {0}"
-msgstr ""
+msgstr "{0} তে সরাতে ড্রপ করুন"
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
