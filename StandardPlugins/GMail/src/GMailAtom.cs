@@ -282,7 +282,8 @@ namespace GMail
 					else
 						OnGMailFailed (Catalog.GetString ("Network Error"));
 					HttpWebResponse response = (HttpWebResponse) e.Response;
-					Log<GMailAtom>.Debug ("Response status: {0} - {1}", response.StatusCode, response.StatusDescription);
+					if (response != null)
+						Log<GMailAtom>.Debug ("Response status: {0} - {1}", response.StatusCode, response.StatusDescription);
 				} catch (ObjectDisposedException) {
 					OnGMailFailed (Catalog.GetString ("Network Error"));
 				} catch (Exception e) {
