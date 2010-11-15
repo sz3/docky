@@ -115,14 +115,9 @@ namespace GMail
 				GLib.Source.Remove (UpdateTimer);
 			UpdateTimer = 0;
 			
-			if (checkerThread != null) {
-				checkerThread.Abort ();
-				checkerThread.Join ();
-				IsChecking = false;
-				checkerThread = null;
-			}
+			StopChecker ();
 		}
-			
+		
 		public void ResetTimer ()
 		{
 			StopTimer ();
@@ -130,6 +125,7 @@ namespace GMail
 			CheckGMail ();
 			
 			UpdateTimer = GLib.Timeout.Add (GMailPreferences.RefreshRate * 60 * 1000, () => { 
+				StopChecker ();
 				CheckGMail (); 
 				return true; 
 			});
@@ -173,11 +169,18 @@ namespace GMail
 			return true;
 		}
 		
-		bool IsChecking { get; set; }
+		void StopChecker ()
+		{
+			if (checkerThread != null) {
+				checkerThread.Abort ();
+				checkerThread.Join ();
+				checkerThread = null;
+			}
+		}
 		
 		void CheckGMail ()
 		{
-			if (IsChecking || !DockServices.System.NetworkConnected)
+			if (!DockServices.System.NetworkConnected)
 				return;
 			
 			string password = GMailPreferences.Password;
@@ -185,8 +188,6 @@ namespace GMail
 				OnGMailFailed (Catalog.GetString ("Click to set username and password."));
 				return;
 			}
-			
-			IsChecking = true;
 			
 			checkerThread = DockServices.System.RunOnThread (() => {
 				try {
@@ -290,8 +291,6 @@ namespace GMail
 				} catch (Exception e) {
 					Log<GMailAtom>.Error (e.Message);
 					OnGMailFailed (Catalog.GetString ("General Error"));
-				} finally {
-					IsChecking = false;
 				}
 			});
 		}
