@@ -89,6 +89,9 @@ namespace BatteryMonitor
 		{
 			max_capacity = 0;
 			
+			if (!System.IO.File.Exists (BattBasePath))
+				return;
+			
 			DirectoryInfo basePath = new DirectoryInfo (BattBasePath);
 			
 			foreach (DirectoryInfo battDir in basePath.GetDirectories ()) {
@@ -120,6 +123,10 @@ namespace BatteryMonitor
 			
 			current_capacity = 0;
 			current_rate = 0;
+			
+			if (!System.IO.File.Exists (BattBasePath))
+				return false;
+			
 			DirectoryInfo basePath = new DirectoryInfo (BattBasePath);
 			
 			foreach (DirectoryInfo battDir in basePath.GetDirectories ()) {
