@@ -1274,6 +1274,11 @@ namespace Docky.Interface
 				
 				if (painter_area.Contains (LocalCursor))
 					Painter.Scrolled (evnt.Direction, x, y, evnt.State);
+			} else if ((evnt.State & ModifierType.ControlMask) == ModifierType.ControlMask) {
+				if (evnt.Direction == ScrollDirection.Up)
+					Preferences.IconSize++;
+				else if (evnt.Direction == ScrollDirection.Down)
+					Preferences.IconSize--;
 			} else if (HoveredItem != null) {
 				HoveredItem.Scrolled (evnt.Direction, evnt.State);
 			}

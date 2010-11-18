@@ -160,6 +160,7 @@ namespace Docky.Interface
 				if (icon_size == value)
 					return;
 				icon_size = value;
+				icon_scale.Value = IconSize;
 				SetOption<int?> ("IconSize", icon_size.Value);
 				OnIconSizeChanged ();
 			}
