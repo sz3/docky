@@ -1279,6 +1279,7 @@ namespace Docky.Interface
 					Preferences.IconSize++;
 				else if (evnt.Direction == ScrollDirection.Down)
 					Preferences.IconSize--;
+				return false;
 			} else if (HoveredItem != null) {
 				HoveredItem.Scrolled (evnt.Direction, evnt.State);
 			}
