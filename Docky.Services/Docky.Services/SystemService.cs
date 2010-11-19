@@ -230,7 +230,6 @@ namespace Docky.Services
 						Log.Debug (e.StackTrace);
 					}
 			}
-				BatteryStateChanged (this, EventArgs.Empty);
 		}
 		
 		const string PowerManagementName = "org.freedesktop.PowerManagement";
