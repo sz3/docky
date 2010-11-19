@@ -75,7 +75,7 @@ namespace BatteryMonitor
 			DockServices.System.BatteryStateChanged += HandleBatteryStateChanged;
 			number_regex = new Regex ("[0-9]+");
 			
-			if (!System.IO.File.Exists (BattBasePath)) {
+			if (!System.IO.Directory.Exists (BattBasePath)) {
 				if (!(owner as BatteryMonitorItemProvider).Hidden)
 					(owner as BatteryMonitorItemProvider).Hidden = true;
 			} else {
@@ -87,7 +87,7 @@ namespace BatteryMonitor
 		
 		void HandleBatteryStateChanged (object sender, EventArgs args)
 		{
-			if (System.IO.File.Exists (BattBasePath))
+			if (System.IO.Directory.Exists (BattBasePath))
 				UpdateBattStat ();
 		}
 		
