@@ -87,7 +87,8 @@ namespace BatteryMonitor
 		
 		void HandleBatteryStateChanged (object sender, EventArgs args)
 		{
-			UpdateBattStat ();
+			if (System.IO.File.Exists (BattBasePath))
+				UpdateBattStat ();
 		}
 		
 		void GetBatteryCapacity ()
