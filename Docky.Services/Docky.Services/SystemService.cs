@@ -128,8 +128,16 @@ namespace Docky.Services
 			NetworkState newState = (NetworkState) Enum.ToObject (typeof (NetworkState), state);
 			SetConnected ();
 			
-			if (ConnectionStatusChanged != null)
-				ConnectionStatusChanged (this, new ConnectionStatusChangeEventArgs (newState));
+			if (ConnectionStatusChanged != null) {
+				Delegate [] handlers = ConnectionStatusChanged.GetInvocationList ();
+				foreach (Delegate d in handlers)
+					try {
+						d.DynamicInvoke (new object [] {this, new ConnectionStatusChangeEventArgs (newState)});
+					} catch (Exception e) {
+						Log.Error ("Error in ConnectionStatusChanged handler, {0}", e.Message);
+						Log.Debug (e.StackTrace);
+					}
+			}
 		}
 		
 		void SetConnected ()
@@ -212,7 +220,16 @@ namespace Docky.Services
 		
 		void OnBatteryStateChanged ()
 		{
-			if (BatteryStateChanged != null)
+			if (BatteryStateChanged != null) {
+				Delegate [] handlers = BatteryStateChanged.GetInvocationList ();
+				foreach (Delegate d in handlers)
+					try {
+						d.DynamicInvoke (new object [] {this, EventArgs.Empty});
+					} catch (Exception e) {
+						Log.Error ("Error in BatteryStateChanged handler, {0}", e.Message);
+						Log.Debug (e.StackTrace);
+					}
+			}
 				BatteryStateChanged (this, EventArgs.Empty);
 		}
 		
