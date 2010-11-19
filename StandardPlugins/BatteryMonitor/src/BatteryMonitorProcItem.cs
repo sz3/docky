@@ -75,9 +75,14 @@ namespace BatteryMonitor
 			DockServices.System.BatteryStateChanged += HandleBatteryStateChanged;
 			number_regex = new Regex ("[0-9]+");
 			
-			UpdateBattStat ();
-			
-			timer = GLib.Timeout.Add (20 * 1000, UpdateBattStat);
+			if (!System.IO.File.Exists (BattBasePath)) {
+				if (!(owner as BatteryMonitorItemProvider).Hidden)
+					(owner as BatteryMonitorItemProvider).Hidden = true;
+			} else {
+				UpdateBattStat ();
+				
+				timer = GLib.Timeout.Add (20 * 1000, UpdateBattStat);
+			}
 		}
 		
 		void HandleBatteryStateChanged (object sender, EventArgs args)
@@ -88,9 +93,6 @@ namespace BatteryMonitor
 		void GetBatteryCapacity ()
 		{
 			max_capacity = 0;
-			
-			if (!System.IO.File.Exists (BattBasePath))
-				return;
 			
 			DirectoryInfo basePath = new DirectoryInfo (BattBasePath);
 			
@@ -123,9 +125,6 @@ namespace BatteryMonitor
 			
 			current_capacity = 0;
 			current_rate = 0;
-			
-			if (!System.IO.File.Exists (BattBasePath))
-				return false;
 			
 			DirectoryInfo basePath = new DirectoryInfo (BattBasePath);
 			
