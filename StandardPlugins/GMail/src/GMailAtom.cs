@@ -299,7 +299,7 @@ namespace GMail
 		{
 			State = GMailState.Normal;
 			if (GMailChecked != null)
-				Gtk.Application.Invoke (delegate {
+				DockServices.System.RunOnMainThread (delegate {
 					GMailChecked (null, EventArgs.Empty);
 				});
 		}
@@ -309,7 +309,7 @@ namespace GMail
 			if (State != GMailState.ManualReload)
 				State = GMailState.Reloading;
 			if (GMailChecking != null)
-				Gtk.Application.Invoke (delegate {
+				DockServices.System.RunOnMainThread (delegate {
 					GMailChecking (null, EventArgs.Empty);
 				});
 		}
@@ -318,7 +318,7 @@ namespace GMail
 		{
 			State = GMailState.Error;
 			if (GMailFailed != null)
-				Gtk.Application.Invoke (delegate {
+				DockServices.System.RunOnMainThread (delegate {
 					GMailFailed (null, new GMailErrorArgs (error));
 				});
 		}

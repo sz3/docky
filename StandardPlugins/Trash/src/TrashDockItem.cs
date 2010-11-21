@@ -69,7 +69,7 @@ namespace Trash
 
 		void HandleChanged (object o, ChangedArgs args)
 		{			
-			Gtk.Application.Invoke (delegate {
+			DockServices.System.RunOnMainThread (delegate {
 				Update ();
 			});
 		}
@@ -257,7 +257,7 @@ namespace Trash
 			// eneble events again
 			TrashMonitor.Changed += HandleChanged;
 
-			Gtk.Application.Invoke (delegate {
+			DockServices.System.RunOnMainThread (delegate {
 				Update ();
 				OnPaintNeeded ();
 			});

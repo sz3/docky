@@ -97,7 +97,7 @@ namespace Bookmarks
 		void WatcherChanged (object o, ChangedArgs args)
 		{
 			if (args.EventType == FileMonitorEvent.ChangesDoneHint)
-				Gtk.Application.Invoke ( delegate {
+				DockServices.System.RunOnMainThread ( delegate {
 					UpdateItems ();
 				});
 		}

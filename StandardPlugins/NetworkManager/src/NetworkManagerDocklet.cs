@@ -74,7 +74,7 @@ namespace NetworkManagerDocklet
 		
 		void ReDraw ()
 		{
-			Gtk.Application.Invoke (delegate {
+			DockServices.System.RunOnMainThread (delegate {
 				Icon = SetDockletIcon ();
 				QueueRedraw ();
 			});

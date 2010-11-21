@@ -209,7 +209,7 @@ namespace Docky.Widgets
 		void ValidateCredentials (string username, string password)
 		{
 			bool valid = Validate (username, password);
-			Gtk.Application.Invoke (delegate { UpdateInterface (username, password, valid); });
+			DockServices.System.RunOnMainThread (delegate { UpdateInterface (username, password, valid); });
 		}
 
 		void UpdateInterface (string username, string password, bool valid)

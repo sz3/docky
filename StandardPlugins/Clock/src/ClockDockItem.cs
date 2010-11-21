@@ -419,7 +419,7 @@ namespace Clock
 			if (string.IsNullOrEmpty (theme))
 				return;
 			
-			Gtk.Application.Invoke (delegate {
+			DockServices.System.RunOnMainThread (delegate {
 				CurrentTheme = theme;
 				QueueRedraw ();
 			});
