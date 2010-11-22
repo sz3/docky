@@ -40,6 +40,7 @@ namespace Timer
 			defaultTimer = (uint) prefs.Get<int> ("DefaultTimer", 60);
 			autoStart = prefs.Get<bool> ("AutoStartTimers", false);
 			autoDismiss = prefs.Get<bool> ("AutoDismissTimers", false);
+			dismissOnClick = prefs.Get<bool> ("DismissOnClick", true);
 		}
 		
 		public static string TimeRemaining (uint remaining)
@@ -97,6 +98,17 @@ namespace Timer
 					return;
 				autoDismiss = value;
 				prefs.Set<bool> ("AutoDismissTimers", value);
+			}
+		}
+		
+		static bool dismissOnClick;
+		public static bool DismissOnClick {
+			get { return dismissOnClick; }
+			set {
+				if (dismissOnClick == value)
+					return;
+				dismissOnClick = value;
+				prefs.Set<bool> ("DismissOnClick", value);
 			}
 		}
 		

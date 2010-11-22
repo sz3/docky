@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-08-16 12:56+0200\n"
-"PO-Revision-Date: 2010-07-22 08:27+0000\n"
+"POT-Creation-Date: 2010-09-30 09:57+0200\n"
+"PO-Revision-Date: 2010-11-05 20:56+0000\n"
 "Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-09-17 06:00+0000\n"
+"X-Launchpad-Export-Date: 2010-11-06 08:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
@@ -24,27 +24,27 @@ msgstr "Søg Docklets"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:164
 msgid "Search Helpers..."
-msgstr "Søg hjælpere"
+msgstr "Søg Hjælpere..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid "Click on any dock to configure."
-msgstr "Klik på en Dock for at configurerer"
+msgstr "Klik på en dock for at konfigurere."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:229
 msgid "Drag any dock to reposition."
-msgstr ""
+msgstr "Træk i en dock for at flytte."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:294
 msgid "Delete the currently selected dock?"
-msgstr "Slet valgte Dock?"
+msgstr "Vil du slette den valgte dock?"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:296
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
-"Hvis du sletter dock'en, vil alle indstillinger\n"
-"for den slettede dock blive tabt"
+"Hvis du sletter docken, vil alle indstillinger\n"
+"for den slettede dock gå tabt."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:303
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
@@ -67,19 +67,19 @@ msgstr "Udvikler"
 
 #: ../Docky/Docky/DockletTile.cs:86
 msgid "Move this docklet up on the selected dock"
-msgstr ""
+msgstr "Flyt denne docklet op på den valgte dock"
 
 #: ../Docky/Docky/DockletTile.cs:87
 msgid "Move this docklet down on the selected dock"
-msgstr ""
+msgstr "Flyt denne docklet ned på den valgte dock"
 
 #: ../Docky/Docky/DockletTile.cs:91
 msgid "Move this docklet left on the selected dock"
-msgstr ""
+msgstr "Flyt denne docklet til venstre på den valgte dock"
 
 #: ../Docky/Docky/DockletTile.cs:92
 msgid "Move this docklet right on the selected dock"
-msgstr ""
+msgstr "Flyt denne docklet til højre på den valgte dock"
 
 #: ../Docky/Docky/DockletTile.cs:94
 msgid "Configure this docklet"
@@ -87,21 +87,23 @@ msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:95
 msgid "About this docklet"
-msgstr ""
+msgstr "Om denne docklet"
 
 #: ../Docky/Docky/DockletTile.cs:96
 msgid "Add this docklet to the selected dock"
-msgstr ""
+msgstr "Tilføj denne docklet til den valgte dock"
 
 #: ../Docky/Docky/DockletTile.cs:97
 msgid "Remove this docklet from the selected dock"
-msgstr ""
+msgstr "Fjern denne docklet fra den valgte dock"
 
 #: ../Docky/Docky/Docky.cs:113
 msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
 msgstr ""
+"Docky kræver kompositionering for at fungere korrekt. Visse muligheder er "
+"stået fra og temaer/animationer vil se forkerte ud. "
 
 #: ../Docky/Docky/HelperTile.cs:42
 msgid "Status"
@@ -113,7 +115,7 @@ msgstr "Afinstallér"
 
 #: ../Docky/Docky/HelperTile.cs:71
 msgid "About this helper"
-msgstr "Omkring denne hjælper"
+msgstr "Om denne hjælper"
 
 #: ../Docky/Docky/HelperTile.cs:72
 msgid "Enable this helper"
@@ -139,11 +141,11 @@ msgstr ""
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:692
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
-msgstr ""
+msgstr "<i>Skjules aldrig; maksimerende vinduer overlapper ikke docken.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:695
 msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr ""
+msgstr "<i>Skjules når musen ikke er over den.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:698
 msgid "<i>Hides when dock obstructs the active application.</i>"
@@ -178,7 +180,7 @@ msgstr "_Hjælp"
 
 #: ../Docky/Docky/Items/DockyItem.cs:136
 msgid "_Quit Docky"
-msgstr "_Slut Docky"
+msgstr "_Afslut Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
 msgid "Docky Settings"
@@ -234,7 +236,7 @@ msgstr "Brugbar"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
-msgstr "Hjælperer"
+msgstr "Hjælpere"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
 msgid "_New Dock"
@@ -270,11 +272,11 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
 msgid "_Panel Mode"
-msgstr ""
+msgstr "_Panel Tilstand"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
 msgid "3D Back_ground"
-msgstr ""
+msgstr "3D Bag_grund"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
 msgid "_Manage Windows Without Launcher"
@@ -289,11 +291,11 @@ msgstr "_Zoom:"
 msgid "Drop to open with {0}"
 msgstr "Slip for at åbne med {0}"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:171
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:178
 msgid "New _Window"
 msgstr "Nyt _Vndue"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:173
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:180
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
 msgstr "_Åben"
@@ -302,7 +304,7 @@ msgstr "_Åben"
 msgid "Reset Color"
 msgstr "Nulstil Farve"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:479
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:481
 msgid "_Pin to Dock"
 msgstr "_Fastgør til Dock"
 
@@ -320,7 +322,7 @@ msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:191
 msgid "Not enough free space on destination."
-msgstr ""
+msgstr "Ikke nok fri plads på destinationen."
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:208
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:211
@@ -342,7 +344,7 @@ msgstr "Åben"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:262
 msgid "Open Containing Folder"
-msgstr ""
+msgstr "Åben Indeholdene Mappe"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:258
 msgid "Unma_ximize"
@@ -512,11 +514,11 @@ msgstr "Netværksfejl"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:298
 msgid "General Error"
-msgstr ""
+msgstr "Generel Fejl"
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
-msgid "GMail Configuration"
-msgstr "GMail Konfiguration"
+msgid "Gmail Configuration"
+msgstr "Gmail Konfiguration"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 msgid "No unread mail"
@@ -558,8 +560,8 @@ msgid "Labels"
 msgstr "Etiketter"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
-msgid "GMail"
-msgstr "GMail"
+msgid "Gmail"
+msgstr "Gmail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
@@ -718,7 +720,7 @@ msgstr "Er du sikker på, du vil lukke alle programmer og slukke computeren?"
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:86
 #, csharp-format
 msgid "A timer set for {0} has expired."
-msgstr ""
+msgstr "En timer sat til {0} er udløbet."
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:232
 msgid "Time remaining:"
@@ -726,16 +728,16 @@ msgstr "Tid tilbage:"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:234
 msgid "Timer paused, time remaining:"
-msgstr ""
+msgstr "Timer sat på pause, tid tilbage:"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:245
 msgid "Set the timer's label to:"
-msgstr ""
+msgstr "Sæt timerens etiket til:"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:251
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:285
 msgid "_Set Label"
-msgstr ""
+msgstr "_Sæt Etiket"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:276
 msgid "_Pause Timer"
@@ -841,13 +843,15 @@ msgstr "Brug _Metriske Enheder"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:171
 msgid "Invalid Weather Location"
-msgstr ""
+msgstr "Ugyldig Vejr Lokalitet"
 
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
 msgstr ""
+"Vejrdata leveres af Google. Denne kilde kræver at lokaliteter angives som "
+"Amerikansk postnummer eller som 'By, Land'."
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
@@ -862,6 +866,8 @@ msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
 msgstr ""
+"Vejrdata leveres af Weather Underground. Denne kilde kræver at lokaliteter "
+"angives som Amerikansk postnummer eller som 'By, Land'."
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
@@ -873,7 +879,7 @@ msgstr "Vejr Konfiguration"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
 msgid "Click to add a location."
-msgstr ""
+msgstr "Klik for at tilføje en lokalitet."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
 msgid "Fetching data..."
@@ -908,15 +914,15 @@ msgstr "{0} luftfugtighed"
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:70
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:220
 msgid "Switch Desks"
-msgstr ""
+msgstr "Skift Skriveborde"
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:171
 msgid "Desk"
-msgstr ""
+msgstr "Skivebord"
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:173
 msgid "Virtual Desk"
-msgstr ""
+msgstr "Virtuelt Skrivebord"
 
 #~ msgid "_Disable"
 #~ msgstr "_Deaktivér"

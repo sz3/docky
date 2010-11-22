@@ -137,13 +137,15 @@ namespace NPR
 		
 		public static Station LookupStation (int id)
 		{
-			if (Stations.Where (s => s.ID == id).Any ())
-				return Stations.First (s => s.ID == id);
-		
-			//the station wasn't in our list, so create one and add it
-			Station station = new Station (id);
-			Stations.Add (station);
-			return station;
+			lock (Stations) {
+				if (Stations.Where (s => s.ID == id).Any ())
+					return Stations.First (s => s.ID == id);
+			
+				//the station wasn't in our list, so create one and add it
+				Station station = new Station (id);
+				Stations.Add (station);
+				return station;
+			}
 		}
 	}
 }

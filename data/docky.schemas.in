@@ -157,7 +157,7 @@
 			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock5/FadeOpacity</applyto>
 			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock6/FadeOpacity</applyto>
 			<owner>docky</owner>
-			<type>int</type>
+			<type>float</type>
 			<default>0</default>
 			<locale name="C">
 				<short>Opacity to fade to</short>
@@ -450,6 +450,17 @@
 				<long>If true, Docky will only show windows on the currently active desktop.</long>
 			</locale>
 		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/Items/WnckDockItem/ShowHovers</key>
+			<applyto>/apps/docky-2/Docky/Items/WnckDockItem/ShowHovers</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>true</default>
+			<locale name="C">
+				<short>Show hover text labels for launchers</short>
+				<long>If false, Docky will not show hover texts for launchers (but still show for plugins).</long>
+			</locale>
+		</schema>
 		
 		<schema>
 			<key>/schemas/apps/docky-2/Docky/Services/HelperService/ShowOutput</key>
@@ -633,6 +644,17 @@
 			<locale name="C">
 				<short>New timer length</short>
 				<long>The default time (in secs) for any new timers.</long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Timer/TimerMainDockItem/DismissOnClick</key>
+			<applyto>/apps/docky-2/Timer/TimerMainDockItem/DismissOnClick</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>true</default>
+			<locale name="C">
+				<short>Dismiss a stopped timer when clicked</short>
+				<long>If false, finished timers will reset instead of dismiss.</long>
 			</locale>
 		</schema>
 		

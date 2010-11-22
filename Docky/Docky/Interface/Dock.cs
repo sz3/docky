@@ -16,22 +16,11 @@
 // 
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 
-using Cairo;
-using Gdk;
 using Gtk;
-
-using Docky;
-using Docky.Items;
 
 namespace Docky.Interface
 {
-
-
 	public class Dock : IDisposable
 	{
 		DockPreferences prefs;

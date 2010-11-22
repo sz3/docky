@@ -188,11 +188,21 @@ namespace Timer
 			if (button == 1) {
 				if (Remaining > 0)
 					Toggle ();
-				else
+				else if (TimerMainDockItem.DismissOnClick)
 					OnFinished (false, true);
+				else
+					Reset ();
 			}
 			
 			return ClickAnimation.None;
+		}
+		
+		void Reset ()
+		{
+			Remaining = Length;
+			Running = false;
+			QueueRedraw ();
+			UpdateHoverText ();
 		}
 		
 		public void Toggle ()
@@ -276,6 +286,10 @@ namespace Timer
 				list[MenuListContainer.Actions].Add (new Docky.Menus.MenuItem (Running ? Catalog.GetString ("_Pause Timer") : Catalog.GetString ("_Start Timer"), Running ? "media-playback-pause" : "media-playback-start", delegate {
 					Toggle ();
 				}));
+			
+			list[MenuListContainer.Actions].Add (new Docky.Menus.MenuItem (Catalog.GetString ("R_eset Timer"), "document-revert", delegate {
+				Reset ();
+			}));
 			
 			list[MenuListContainer.Actions].Add (new Docky.Menus.MenuItem (Catalog.GetString ("_Remove Timer"), "gtk-remove", delegate {
 				if (Finished != null)

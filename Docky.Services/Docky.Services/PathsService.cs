@@ -48,6 +48,11 @@ namespace Docky.Services
 		#region XDG Base Directory paths
 		
 		/// <summary>
+		/// $XDG_CONFIG_HOME - defaults to $HOME/.config
+		/// </summary>
+		public File XdgConfigHomeFolder { get; protected set; }
+
+		/// <summary>
 		/// $XDG_DATA_HOME - defaults to $HOME/.local/share
 		/// </summary>
 		public File XdgDataHomeFolder { get; protected set; }
@@ -87,7 +92,7 @@ namespace Docky.Services
 		#endregion
 		
 		
-		internal PathsService ()
+		public void Initialize ()
 		{
 			// get environment-based settings
 			File env_home         = FileFactory.NewForPath (Environment.GetFolderPath (Environment.SpecialFolder.Personal));
@@ -100,12 +105,18 @@ namespace Docky.Services
 			
 			
 			// get XDG Base Directory settings
+			string xdg_config_home  = Environment.GetEnvironmentVariable ("XDG_CONFIG_HOME");
 			string xdg_data_home  = Environment.GetEnvironmentVariable ("XDG_DATA_HOME");
 			string xdg_data_dirs  = Environment.GetEnvironmentVariable ("XDG_DATA_DIRS");
 			string xdg_cache_home = Environment.GetEnvironmentVariable ("XDG_CACHE_HOME");
 			
 			
 			// determine directories based on XDG with fallbacks
+			if (string.IsNullOrEmpty (xdg_config_home))
+				XdgConfigHomeFolder = HomeFolder.GetChild (".config");
+			else
+				XdgConfigHomeFolder = FileFactory.NewForPath (xdg_config_home);
+			
 			if (string.IsNullOrEmpty (xdg_cache_home))
 				XdgCacheHomeFolder = HomeFolder.GetChild (".cache");
 			else
@@ -126,14 +137,14 @@ namespace Docky.Services
 			UserCacheFolder           = XdgCacheHomeFolder.GetChild ("docky");
 			UserDataFolder            = XdgDataHomeFolder.GetChild ("docky");
 			DockManagerUserDataFolder = XdgDataHomeFolder.GetChild ("dockmanager");
-			AutoStartFile             = XdgDataHomeFolder.GetChild ("autostart").GetChild ("docky.desktop");
+			AutoStartFile             = XdgConfigHomeFolder.GetChild ("autostart").GetChild ("docky.desktop");
 			
 			
 			// ensure all writable directories exist
 			EnsureDirectoryExists (UserCacheFolder);
 			EnsureDirectoryExists (UserDataFolder);
 			EnsureDirectoryExists (DockManagerUserDataFolder);
-			EnsureDirectoryExists (XdgDataHomeFolder.GetChild ("autostart"));
+			EnsureDirectoryExists (XdgConfigHomeFolder.GetChild ("autostart"));
 		}
 		
 		void EnsureDirectoryExists (File dir)

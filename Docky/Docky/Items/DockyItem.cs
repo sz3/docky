@@ -17,9 +17,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 
 using Cairo;
 using Gdk;
@@ -115,10 +113,12 @@ namespace Docky.Items
 		{
 			if (button == 1) {
 				string command = prefs.Get<string> ("DockyItemCommand", "");
-				if (string.IsNullOrEmpty (command))
+				if (!string.IsNullOrEmpty (command))
+					DockServices.System.Execute (command);
+				else if (ShowSettings)
 					ConfigurationWindow.Instance.Show ();
 				else
-					DockServices.System.Execute (command);
+					return ClickAnimation.None;
 				
 				return ClickAnimation.Bounce;
 			}

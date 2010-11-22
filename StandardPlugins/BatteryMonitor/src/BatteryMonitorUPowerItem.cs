@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using Docky.Items;
 using Docky.Services;
 
-using NDesk.DBus;
+using DBus;
 
 namespace BatteryMonitor
 {

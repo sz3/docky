@@ -19,6 +19,7 @@ using System.Threading;
 
 using Mono.Unix;
 
+using DBus;
 using Gtk;
 
 using Docky.DBus;
@@ -54,10 +55,18 @@ namespace Docky
 			Gdk.Threads.Init ();
 			Gtk.Application.Init ("Docky", ref args);
 			GLib.GType.Init ();
+			try {
+				BusG.Init ();
+			} catch {
+				Log.Fatal ("DBus could not be found and is required by Docky. Exiting.");
+				return;	
+			}
 			
 			// process the command line args
 			if (!UserArgs.Parse (args))
 				return;
+			
+			DockServices.Init ();
 			
 			Wnck.Global.ClientType = Wnck.ClientType.Pager;
 			
@@ -88,7 +97,6 @@ namespace Docky
 				ShowAbout ();
 			};
 			PluginManager.Initialize ();
-			DockServices.Theme.Initialize ();
 			Controller.Initialize ();
 			
 			Gdk.Threads.Enter ();

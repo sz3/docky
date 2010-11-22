@@ -554,7 +554,7 @@ namespace Docky.Interface
 		
 		int VisibleDockHeight {
 			get {
-				return ThreeDimensional ? (int) (0.4 * DockHeight) : DockHeight;
+				return ThreeDimensional ? (int) ((Preferences.PanelMode ? 0.33 : 0.4 ) * DockHeight) : DockHeight;
 			}
 		}
 		
@@ -1274,6 +1274,12 @@ namespace Docky.Interface
 				
 				if (painter_area.Contains (LocalCursor))
 					Painter.Scrolled (evnt.Direction, x, y, evnt.State);
+			} else if ((evnt.State & ModifierType.ControlMask) == ModifierType.ControlMask) {
+				if (evnt.Direction == ScrollDirection.Up)
+					Preferences.IconSize++;
+				else if (evnt.Direction == ScrollDirection.Down)
+					Preferences.IconSize--;
+				return false;
 			} else if (HoveredItem != null) {
 				HoveredItem.Scrolled (evnt.Direction, evnt.State);
 			}
@@ -1888,7 +1894,7 @@ namespace Docky.Interface
 				DrawValues[adi] = val;
 
 				// keep the hovereditem in mind, but don't change it while rendering
-				if (hoverArea.Contains (localCursor) && !AutohideManager.Hidden)
+				if (hoverArea.Contains (localCursor) && !AutohideManager.Hidden && !(adi is SeparatorItem))
 					next_hoveredItem = adi;
 				
 				if (update_screen_regions) {
@@ -2344,7 +2350,7 @@ namespace Docky.Interface
 				center = center.MoveIn (Position, move);
 			}
 			
-			double opacity = Math.Min (1, (render_time - item.AddTime).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds);
+			double opacity = Math.Max (0, Math.Min (1, (render_time - item.AddTime).TotalMilliseconds / BaseAnimationTime.TotalMilliseconds));
 			opacity = Math.Pow (opacity, 2);
 			DockySurface icon;
 			

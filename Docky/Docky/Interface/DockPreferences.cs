@@ -17,16 +17,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Linq;
-using System.IO;
-using System.Text;
-using System.Text.RegularExpressions;
 
-using Cairo;
-using Gdk;
 using Gtk;
 
 using Docky.Items;
@@ -168,6 +160,7 @@ namespace Docky.Interface
 				if (icon_size == value)
 					return;
 				icon_size = value;
+				icon_scale.Value = IconSize;
 				SetOption<int?> ("IconSize", icon_size.Value);
 				OnIconSizeChanged ();
 			}
@@ -558,8 +551,10 @@ namespace Docky.Interface
 			threedee_check.Sensitive = Position == DockPosition.Bottom && Gdk.Screen.Default.IsComposited;
 			
 			window_manager_check.Active = DefaultProvider.IsWindowManager;
+			window_manager_check.Sensitive = !window_manager_check.Active;
 			DefaultProvider.WindowManagerChanged += delegate {
 				WindowManager = window_manager_check.Active = DefaultProvider.IsWindowManager;
+				window_manager_check.Sensitive = !window_manager_check.Active;
 			};
 			
 			if (!Gdk.Screen.Default.IsComposited) {
@@ -634,16 +629,13 @@ namespace Docky.Interface
 				}.Where (s => !String.IsNullOrEmpty (s));
 			}
 			
-			foreach (string launcher in Launchers) {
+			foreach (string launcher in Launchers)
 				DefaultProvider.InsertItem (launcher);
-			}
 			
 			// we have a plugin thats not enabled, go nuclear
-			if (Plugins.Any (s => !PluginManager.ItemProviders.Any (ip => ip.Name == s))) {
-				foreach (Mono.Addins.Addin addin in PluginManager.AllAddins) {
+			if (Plugins.Any (s => !PluginManager.ItemProviders.Any (ip => ip.Name == s)))
+				foreach (Mono.Addins.Addin addin in PluginManager.AllAddins)
 					addin.Enabled = true;
-				}
-			}
 			
 			foreach (string providerName in Plugins) {
 				AbstractDockItemProvider provider = PluginManager.ItemProviders
@@ -656,9 +648,8 @@ namespace Docky.Interface
 			}
 			
 			List<string> sortList = SortList.ToList ();
-			foreach (AbstractDockItemProvider provider in item_providers) {
+			foreach (AbstractDockItemProvider provider in item_providers)
 				SortProviderOnList (provider, sortList);
-			}
 			
 			UpdateSortList ();
 		}
@@ -672,9 +663,8 @@ namespace Docky.Interface
 			};
 			
 			int i = 0;
-			foreach (AbstractDockItem item in provider.Items.OrderBy (indexFunc)) {
+			foreach (AbstractDockItem item in provider.Items.OrderBy (indexFunc))
 				item.Position = i++;
-			}
 		}
 		
 		void UpdateSortList ()
@@ -771,6 +761,7 @@ namespace Docky.Interface
 			if (window_manager_check.Active)
 				DefaultProvider.SetWindowManager ();
 			WindowManager = window_manager_check.Active = DefaultProvider.IsWindowManager;
+			window_manager_check.Sensitive = !window_manager_check.Active;
 		}
 		
 		protected virtual void OnPanelModeButtonToggled (object sender, System.EventArgs e)

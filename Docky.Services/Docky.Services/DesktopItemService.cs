@@ -46,7 +46,7 @@ namespace Docky.Services
 		Dictionary<string, List<DesktopItem>> ItemsByExec { get; set; }
 		Dictionary<string, DesktopItem> ItemByClass { get; set; }
 
-		internal DesktopItemService ()
+		public void Initialize ()
 		{
 			update_lock = new object ();
 
@@ -494,6 +494,11 @@ namespace Docky.Services
 				   (exec.StartsWith ("ooffice") || exec.StartsWith ("openoffice") || exec.StartsWith ("soffice") ||
 				    exec.Contains ("/ooffice ") || exec.Contains ("/openoffice.org ") || exec.Contains ("/soffice "))) {
 					vexec = "ooffice" + exec.Split (' ')[1];
+				
+				// for libreoffice
+				} else if (exec.Contains (' ') &&
+				   (exec.StartsWith ("libreoffice"))) {
+					vexec = "libreoffice" + exec.Split (' ')[1];
 				
 				// for wine apps
 				} else if ((exec.Contains ("env WINEPREFIX=") && exec.Contains (" wine ")) ||

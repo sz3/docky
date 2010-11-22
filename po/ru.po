@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-08-16 12:56+0200\n"
-"PO-Revision-Date: 2010-09-12 15:33+0000\n"
-"Last-Translator: alexey.ivanes <bagzillya@gmail.com>\n"
+"POT-Creation-Date: 2010-09-30 09:57+0200\n"
+"PO-Revision-Date: 2010-10-19 21:45+0000\n"
+"Last-Translator: Alexey Ivanov <alexey.ivanes@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-09-17 06:00+0000\n"
+"X-Launchpad-Export-Date: 2010-11-06 08:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
@@ -149,7 +149,7 @@ msgstr "<i>Видна всё время, развёрнутые окна не п
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:695
 msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr "<i>Исчезает, если курсор не над ним.</i>"
+msgstr "<i>Исчезает, если курсор не над панелью.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:698
 msgid "<i>Hides when dock obstructs the active application.</i>"
@@ -295,11 +295,11 @@ msgstr "_Масштаб:"
 msgid "Drop to open with {0}"
 msgstr "Отпустите, чтобы открыть в {0}"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:171
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:178
 msgid "New _Window"
 msgstr "Новое _окно"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:173
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:180
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
 msgstr "Открыть"
@@ -308,7 +308,7 @@ msgstr "Открыть"
 msgid "Reset Color"
 msgstr "Восстановить цвет"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:479
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:481
 msgid "_Pin to Dock"
 msgstr "Прикрепить к панели"
 
@@ -523,7 +523,7 @@ msgid "General Error"
 msgstr "Общая ошибка"
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
-msgid "GMail Configuration"
+msgid "Gmail Configuration"
 msgstr "Настройки GMail"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
@@ -567,8 +567,8 @@ msgid "Labels"
 msgstr "Метки"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
-msgid "GMail"
-msgstr "GMail"
+msgid "Gmail"
+msgstr "Gmail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
@@ -1029,3 +1029,6 @@ msgstr "Виртуальный стол"
 
 #~ msgid "Drop to open"
 #~ msgstr "Перетащите для открытия"
+
+#~ msgid "_Start When Computer Starts"
+#~ msgstr "_Запускать вместе с системой"

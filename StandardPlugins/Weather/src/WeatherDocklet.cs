@@ -86,7 +86,7 @@ namespace WeatherDocklet
 		/// </summary>
 		void HandleWeatherReloading ()
 		{
-			Gtk.Application.Invoke (delegate {
+			DockServices.System.RunOnMainThread (delegate {
 				HoverText = Catalog.GetString ("Fetching data...");
 				if (Status != WeatherDockletStatus.Initializing && Status != WeatherDockletStatus.ManualReload) {
 					Status = WeatherDockletStatus.Reloading;
@@ -109,7 +109,7 @@ namespace WeatherDocklet
 		/// </param>
 		void HandleWeatherError (object sender, WeatherErrorArgs e)
 		{
-			Gtk.Application.Invoke (delegate {
+			DockServices.System.RunOnMainThread (delegate {
 				HoverText = e.Error;
 				Icon = "weather-few-clouds";
 				Status = WeatherDockletStatus.Error;
@@ -123,7 +123,7 @@ namespace WeatherDocklet
 		/// </summary>
 		void HandleWeatherUpdated ()
 		{
-			Gtk.Application.Invoke (delegate {
+			DockServices.System.RunOnMainThread (delegate {
 				AbstractWeatherSource weather = WeatherController.Weather;
 				
 				string feelsLike = "";

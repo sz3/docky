@@ -17,13 +17,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 
 using org.freedesktop.DBus;
-using NDesk.DBus;
+using DBus;
 
 using Docky.Items;
 using Docky.Services;
@@ -173,8 +169,6 @@ namespace Docky.DBus
 		
 		public bool Initialize ()
 		{
-			NDesk.DBus.BusG.Init ();
-			
 			Bus bus = Bus.Session;
 			
 			if (!InitializePrivateBus (bus))

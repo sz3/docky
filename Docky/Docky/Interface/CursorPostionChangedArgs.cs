@@ -19,11 +19,8 @@ using System;
 
 namespace Docky.Interface
 {
-
-
 	public class CursorPostionChangedArgs : EventArgs
 	{
-
 		public Gdk.Point LastPosition;
 		
 		public CursorPostionChangedArgs ()

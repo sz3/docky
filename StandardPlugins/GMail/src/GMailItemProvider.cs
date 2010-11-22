@@ -88,6 +88,9 @@ namespace GMail
 				.Where (label => label != GMailDockItem.DefaultLabel).ToArray ();
 			string[] newLabels = GMailPreferences.Labels;
 
+			if (currentLabels.Length == newLabels.Length)
+				return;
+			
 			if (currentLabels.Length > newLabels.Length)
 				RemoveItem (currentLabels.Except (newLabels).First ());
 			else

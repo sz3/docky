@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-08-16 12:56+0200\n"
-"PO-Revision-Date: 2010-05-17 23:13+0000\n"
-"Last-Translator: Steven Rose <launchpad@stevey.eu>\n"
+"POT-Creation-Date: 2010-09-30 09:57+0200\n"
+"PO-Revision-Date: 2010-11-05 20:59+0000\n"
+"Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-09-17 06:00+0000\n"
+"X-Launchpad-Export-Date: 2010-11-06 08:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
@@ -102,6 +102,8 @@ msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
 msgstr ""
+"Docky requires compositing to work properly. Certain options are disabled "
+"and themes/animations will look incorrect. "
 
 #: ../Docky/Docky/HelperTile.cs:42
 msgid "Status"
@@ -176,7 +178,7 @@ msgstr "_About"
 
 #: ../Docky/Docky/Items/DockyItem.cs:134
 msgid "_Help"
-msgstr ""
+msgstr "_Help"
 
 #: ../Docky/Docky/Items/DockyItem.cs:136
 msgid "_Quit Docky"
@@ -188,7 +190,7 @@ msgstr "Docky Settings"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
 msgid "_Start When User Logs In"
-msgstr ""
+msgstr "_Start When User Logs In"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
@@ -232,7 +234,7 @@ msgstr "Docklets"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
 msgid "Usable"
-msgstr ""
+msgstr "Usable"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
@@ -289,13 +291,13 @@ msgstr "_Zoom:"
 #: ../Docky.Items/Docky.Items/AbstractDockItem.cs:120
 #, csharp-format
 msgid "Drop to open with {0}"
-msgstr ""
+msgstr "Drop to open with {0}"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:171
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:178
 msgid "New _Window"
 msgstr "New _Window"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:173
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:180
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
 msgstr "_Open"
@@ -304,14 +306,14 @@ msgstr "_Open"
 msgid "Reset Color"
 msgstr "Reset Colour"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:479
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:481
 msgid "_Pin to Dock"
 msgstr "_Pin to Dock"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:72
 #, csharp-format
 msgid "Drop to move to {0}"
-msgstr ""
+msgstr "Drop to move to {0}"
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
@@ -490,7 +492,7 @@ msgstr "(no subject)"
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:254
 #, csharp-format
 msgid "You have {0} new, unread messages"
-msgstr ""
+msgstr "You have {0} new, unread messages"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:258
 #, csharp-format
@@ -517,8 +519,8 @@ msgid "General Error"
 msgstr "General Error"
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
-msgid "GMail Configuration"
-msgstr "GMail Configuration"
+msgid "Gmail Configuration"
+msgstr "Gmail Configuration"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 msgid "No unread mail"
@@ -545,7 +547,7 @@ msgstr "_Compose Mail"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:211
 msgid "View C_ontacts"
-msgstr ""
+msgstr "View C_ontacts"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
 msgid "New Mail"
@@ -560,8 +562,8 @@ msgid "Labels"
 msgstr "Labels"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
-msgid "GMail"
-msgstr "GMail"
+msgid "Gmail"
+msgstr "Gmail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
@@ -720,71 +722,71 @@ msgstr ""
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:86
 #, csharp-format
 msgid "A timer set for {0} has expired."
-msgstr ""
+msgstr "A timer set for {0} has expired."
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:232
 msgid "Time remaining:"
-msgstr ""
+msgstr "Time remaining:"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:234
 msgid "Timer paused, time remaining:"
-msgstr ""
+msgstr "Timer paused, time remaining:"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:245
 msgid "Set the timer's label to:"
-msgstr ""
+msgstr "Set the timer's label to:"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:251
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:285
 msgid "_Set Label"
-msgstr ""
+msgstr "_Set Label"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:276
 msgid "_Pause Timer"
-msgstr ""
+msgstr "_Pause Timer"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:276
 msgid "_Start Timer"
-msgstr ""
+msgstr "_Start Timer"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:280
 msgid "_Remove Timer"
-msgstr ""
+msgstr "_Remove Timer"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:56
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "hour"
+msgstr[1] "hours"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:60
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minute"
+msgstr[1] "minutes"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:65
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "second"
+msgstr[1] "seconds"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:132
 #, csharp-format
 msgid "Click to create a timer for {0}."
-msgstr ""
+msgstr "Click to create a timer for {0}."
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:149
 msgid "Automatically _Start Timers"
-msgstr ""
+msgstr "Automatically _Start Timers"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:153
 msgid "Automatically _Dismiss Timers"
-msgstr ""
+msgstr "Automatically _Dismiss Timers"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:55
 msgid "Drop to move to Trash"
-msgstr ""
+msgstr "Drop to move to Trash"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:82
 msgid "No items in Trash"
@@ -799,7 +801,7 @@ msgstr[1] "{0} items in Deleted Items"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:169
 msgid "Restore Files"
-msgstr ""
+msgstr "Restore Files"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:200
 msgid "_Open Trash"
@@ -921,15 +923,15 @@ msgstr "{0} humidity"
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:70
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:220
 msgid "Switch Desks"
-msgstr ""
+msgstr "Switch Desks"
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:171
 msgid "Desk"
-msgstr ""
+msgstr "Desk"
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:173
 msgid "Virtual Desk"
-msgstr ""
+msgstr "Virtual Desk"
 
 #~ msgid "Docky Configuration"
 #~ msgstr "Docky Configuration"

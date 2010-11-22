@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-08-16 12:56+0200\n"
-"PO-Revision-Date: 2010-08-26 04:58+0000\n"
+"POT-Creation-Date: 2010-09-30 09:57+0200\n"
+"PO-Revision-Date: 2010-09-30 11:12+0000\n"
 "Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-09-17 06:00+0000\n"
+"X-Launchpad-Export-Date: 2010-11-06 08:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
@@ -293,11 +293,11 @@ msgstr "_Uvećaj"
 msgid "Drop to open with {0}"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:171
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:178
 msgid "New _Window"
 msgstr "Novi _prozor"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:173
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:180
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
 msgstr "_Otvori"
@@ -306,7 +306,7 @@ msgstr "_Otvori"
 msgid "Reset Color"
 msgstr "Vrati izvornu boju"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:479
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:481
 msgid "_Pin to Dock"
 msgstr "_Pričvrsti na dok"
 
@@ -521,7 +521,7 @@ msgid "General Error"
 msgstr "Opća pogreška"
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
-msgid "GMail Configuration"
+msgid "Gmail Configuration"
 msgstr "Postavke GMail pošte"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
@@ -565,8 +565,8 @@ msgid "Labels"
 msgstr "Labele"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
-msgid "GMail"
-msgstr "GMail"
+msgid "Gmail"
+msgstr "Gmail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"

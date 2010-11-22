@@ -197,8 +197,12 @@ namespace Docky.Services
 				if (info.FileType == FileType.Directory)
 					Delete_Recurse (child);
 				
-				if (info.GetAttributeBoolean ("access::can-delete"))
-					child.Delete (null);
+				try {
+					if (info.GetAttributeBoolean ("access::can-delete"))
+						child.Delete (null);
+				} catch {
+					// if it fails to delete, not much we can do!
+				}
 				
 				info.Dispose ();
 			}

@@ -16,7 +16,6 @@
 // 
 
 using System;
-using System.Text.RegularExpressions;
 
 using Mono.Unix;
 using Mono.Addins;
@@ -24,7 +23,6 @@ using Mono.Addins;
 using Docky.Widgets;
 using Docky.Items;
 using Docky.Services;
-using Docky.Interface;
 
 namespace Docky
 {

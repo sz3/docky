@@ -18,6 +18,7 @@ SUBDIRS = \
 	Docky.DBus \
 	StandardPlugins \
 	Docky \
+	man \
 	m4
 
 # Get rid of the build dir on clean.

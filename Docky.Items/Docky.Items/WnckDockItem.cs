@@ -76,6 +76,15 @@ namespace Docky.Items
 			}
 		}
 
+		static bool? showHovers;
+		protected static bool ShowHovers {
+			get {
+				if (!showHovers.HasValue)
+					showHovers = prefs.Get<bool> ("ShowHovers", true);
+				return showHovers.Value;
+			}
+		}
+		
 		public IEnumerable<Wnck.Window> ManagedWindows {
 			get {
 				return Windows.Where (w => !w.IsSkipTasklist &&
@@ -138,6 +147,7 @@ namespace Docky.Items
 		
 		void WindowStateChanged (object o, StateChangedArgs args)
 		{
+			SetIndicator ();
 			SetState ();
 		}
 
@@ -156,8 +166,6 @@ namespace Docky.Items
 				Indicator = ActivityIndicator.Single;
 			else
 				Indicator = ActivityIndicator.None;
-			
-			OnPaintNeeded ();
 		}
 		
 		void SetState ()
@@ -170,8 +178,6 @@ namespace Docky.Items
 				state |= ItemState.Urgent;
 			
 			State = state;
-			
-			OnPaintNeeded ();
 		}
 		
 		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)

@@ -25,23 +25,22 @@ using LibNotify = Notifications;
 	
 namespace Docky.Services
 {	
-	
 	internal class NotificationService
 	{
 		enum NotificationCapability {
-				actions,
-				append,
-				body,
-				body_hyperlinks,
-				body_images,
-				body_markup,
-				icon_multi,
-				icon_static,
-				image_svg,
-				max,
-				positioning, // not an official capability
-				scaling, // not an official capability
-				sound
+			actions,
+			append,
+			body,
+			body_hyperlinks,
+			body_images,
+			body_markup,
+			icon_multi,
+			icon_static,
+			image_svg,
+			max,
+			positioning, // not an official capability
+			scaling,     // not an official capability
+			sound
 		}
 		
 		const string DefaultIconName = "docky";
@@ -72,24 +71,22 @@ namespace Docky.Services
 
 		public static LibNotify.Notification Notify (string title, string message, string icon)
 		{	
-			if (ServerIsNotifyOSD ()) {
-				return Notify (title, message, icon, Screen.Default, 0, 0);
-			}
-			
 			Screen screen = Screen.Default;
 			int x = 0, y = 0;
 			
-			// if we aren't using notify-osd, show a status icon
-			DockServices.System.RunOnMainThread (() => {
-				statusIcon.Visible = true;
-			});
-			
-			Rectangle area;
-			Orientation orientation;
+			if (!ServerIsNotifyOSD ()) {
+				// if we aren't using notify-osd, show a status icon
+				DockServices.System.RunOnMainThread (() => {
+					statusIcon.Visible = true;
+				});
+				
+				Rectangle area;
+				Orientation orientation;
 
-			statusIcon.GetGeometry (out screen, out area, out orientation);
-			x = area.X + area.Width / 2;
-			y = area.Y + area.Height - 5;
+				statusIcon.GetGeometry (out screen, out area, out orientation);
+				x = area.X + area.Width / 2;
+				y = area.Y + area.Height - 5;
+			}
 			
 			return Notify (title, message, icon, screen, x, y);
 		}
@@ -126,15 +123,14 @@ namespace Docky.Services
 			notify.Summary = title;
 			notify.Timeout = ReadableDurationForMessage (title, message);
 			
-			if (SupportsCapability (NotificationCapability.scaling) && !icon.Contains ("@")) {
+			if (SupportsCapability (NotificationCapability.scaling) && !icon.Contains ("@"))
 				notify.IconName = string.IsNullOrEmpty (icon)
 					? DefaultIconName
 					: icon;
-			} else {
+			else
 				notify.Icon = string.IsNullOrEmpty (icon)
 					? DefaultIcon
 					: DockServices.Drawing.LoadIcon (icon, NoteIconSize);
-			}
 
 			return notify;
 		}
@@ -145,4 +141,4 @@ namespace Docky.Services
 		}
 	}
 }
-	
+

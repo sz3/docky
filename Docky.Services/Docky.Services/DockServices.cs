@@ -40,6 +40,7 @@ namespace Docky.Services
 		static DockServices ()
 		{
 			Paths = new PathsService ();
+			Paths.Initialize ();
 			Drawing = new DrawingService ();
 			Preferences = new PreferencesService ();
 			System = new SystemService ();
@@ -47,9 +48,16 @@ namespace Docky.Services
 			Theme = new ThemeService ();
 			WindowMatcher = new WindowMatcherService ();
 			DesktopItems = new DesktopItemService ();
-			
-			NotificationService.Initialize ();
+		}
+		
+		public static void Init ()
+		{
+			System.Initialize ();
+			Helpers.Initialize ();
 			Theme.Initialize ();
+			WindowMatcher.Initialize ();
+			DesktopItems.Initialize ();
+			NotificationService.Initialize ();
 			
 			Log<DockServices>.Info ("Dock services initialized.");
 		}

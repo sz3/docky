@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-08-16 12:56+0200\n"
-"PO-Revision-Date: 2010-09-17 05:47+0000\n"
+"POT-Creation-Date: 2010-09-30 09:57+0200\n"
+"PO-Revision-Date: 2010-09-30 11:13+0000\n"
 "Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2010-09-17 06:00+0000\n"
+"X-Launchpad-Export-Date: 2010-11-11 15:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:148
@@ -54,7 +54,7 @@ msgstr "_Odstrániť Dock"
 #: ../Docky/Docky/ConfigurationWindow.cs:419
 #: ../Docky/Docky/ConfigurationWindow.cs:439
 msgid "_Select"
-msgstr "_Vybrať"
+msgstr "Označiť"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:422
 #: ../Docky/Docky/ConfigurationWindow.cs:442
@@ -107,11 +107,11 @@ msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:42
 msgid "Status"
-msgstr "Stav"
+msgstr "Status"
 
 #: ../Docky/Docky/HelperTile.cs:59
 msgid "Uninstall"
-msgstr "Odinštalovať"
+msgstr "Odinštaluj"
 
 #: ../Docky/Docky/HelperTile.cs:71
 msgid "About this helper"
@@ -127,19 +127,19 @@ msgstr "Zakázať pomocníka"
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Running"
-msgstr "Spustené"
+msgstr "Beží"
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Stopped"
-msgstr "Zastavené"
+msgstr "Zastavený"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:333
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
-"Pri tomto nastavení budú okná ktoré zatiaľ nemajú spúšťač, do tohto doku "
-"pridané."
+"Po nastavení, okná ktoré nemajú ešte spúšťač v docku budú pridané do tohoto "
+"docku."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:692
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
@@ -159,12 +159,12 @@ msgstr "<i>Skryje sa vždy, keď Dock prekryje akékoľvek okno.</i>"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:378
 msgid "Drag to reposition"
-msgstr "Ťahajte na zmenu pozície"
+msgstr "Ťahaj na nové miesto"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:390
 #: ../Docky/Docky/Interface/DockWindow.cs:404
 msgid "Drop to add to dock"
-msgstr "Pustite pre pridanie do doku"
+msgstr "Pusti pre pridanie do docku"
 
 #: ../Docky/Docky/Items/DockyItem.cs:132
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
@@ -174,7 +174,7 @@ msgstr "_Nastavenia"
 
 #: ../Docky/Docky/Items/DockyItem.cs:133
 msgid "_About"
-msgstr "_O programe"
+msgstr "_O Programe"
 
 #: ../Docky/Docky/Items/DockyItem.cs:134
 msgid "_Help"
@@ -207,7 +207,7 @@ msgstr "<b>Všeobecné možnosti</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
-msgstr "<b>Konfigurácia doku</b>"
+msgstr "<b>Konfigurácia docku</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
@@ -216,21 +216,21 @@ msgstr "Doky"
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
 msgid "All"
-msgstr "Všetko"
+msgstr "Všetky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
 msgid "Enabled"
-msgstr "Povolené"
+msgstr "Zapnuté"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
 msgid "Disabled"
-msgstr "Zakázané"
+msgstr "Vypnuté"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
 msgid "Docklets"
-msgstr "Doklety"
+msgstr "Docklety"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
 msgid "Usable"
@@ -293,11 +293,11 @@ msgstr "_Priblíženie"
 msgid "Drop to open with {0}"
 msgstr "Pusti na otvorenie s {0}"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:171
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:178
 msgid "New _Window"
 msgstr "Nové _okno"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:173
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:180
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
 msgstr "_Otvoriť"
@@ -306,7 +306,7 @@ msgstr "_Otvoriť"
 msgid "Reset Color"
 msgstr "Resetovať farbu"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:479
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:481
 msgid "_Pin to Dock"
 msgstr "_Pripnúť do doku"
 
@@ -521,7 +521,7 @@ msgid "General Error"
 msgstr "Celková chyba"
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
-msgid "GMail Configuration"
+msgid "Gmail Configuration"
 msgstr "Nastavenie GMail"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
@@ -565,8 +565,8 @@ msgid "Labels"
 msgstr "Štítky"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
-msgid "GMail"
-msgstr "GMail"
+msgid "Gmail"
+msgstr "Gmail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"

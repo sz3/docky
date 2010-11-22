@@ -21,14 +21,8 @@ using Docky.Services.Prefs;
 
 namespace Docky.Services
 {
-
 	public class PreferencesService
 	{
-
-		internal PreferencesService ()
-		{
-		}
-		
 		public IPreferences Get<TOwner> ()
 			where TOwner : class
 		{

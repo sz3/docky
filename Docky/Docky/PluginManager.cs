@@ -21,7 +21,6 @@ using System.Xml;
 using System.Linq;
 using System.Reflection;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 using Mono.Addins;
 
@@ -325,7 +324,7 @@ namespace Docky
 			Log<PluginManager>.Debug ("Processing config file for \"{0}\".", addin.Name);
 			Assembly addinAssembly = Assembly.LoadFile (addin.AddinFile);
 			
-			string addinManifestName = addinAssembly.GetManifestResourceNames ().First (res => res.Contains ("addin.xml"));
+			string addinManifestName = addinAssembly.GetManifestResourceNames ().FirstOrDefault (res => res.Contains ("addin.xml"));
 			
 			if (string.IsNullOrEmpty (addinManifestName)) {
 				Log<PluginManager>.Warn ("Could not find addin manifest for '{0}'.", addin.AddinFile);

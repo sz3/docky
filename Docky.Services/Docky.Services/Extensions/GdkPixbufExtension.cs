@@ -25,7 +25,7 @@ namespace Docky.Services
 	{
 		// these methods all assume that the BitsPerSample is 8 (byte).  Pixbuf documentation
 		// states that values from 1-16 are allowed, but currently only 8 bit samples are supported.
-		// http://developer.gimp.org/api/2.0/gdk-pixbuf/gdk-pixbuf-gdk-pixbuf.html#GdkPixbuf--bits-per-sample
+		// http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-gdk-pixbuf.html#GdkPixbuf--bits-per-sample
 		
 		/// <summary>
 		/// Applies a color transformation to each pixel in a pixbuf.
@@ -39,11 +39,13 @@ namespace Docky.Services
 		public static Pixbuf PixelColorTransform (this Pixbuf source, Func<Cairo.Color, Cairo.Color> colorTransform)
 		{
 			try {
-				int offset = (source.HasAlpha) ? 4 : 3;
+				if (source.BitsPerSample != 8)
+					throw new Exception ("Pixbuf does not have 8 bits per sample, it has " + source.BitsPerSample);
+				
 				unsafe {
 					double r, g, b;
 					byte* pixels = (byte*) source.Pixels;
-					for (int i = 0; i < source.Height * source.Width; i++) {
+					for (int i = 0; i < source.Height * source.Rowstride / source.NChannels; i++) {
 						r = (double) pixels[0];
 						g = (double) pixels[1];
 						b = (double) pixels[2];
@@ -53,12 +55,12 @@ namespace Docky.Services
 						                                     b / byte.MaxValue);
 						
 						color = colorTransform.Invoke (color);
-												
+						
 						pixels[0] = (byte) (color.R * byte.MaxValue);
 						pixels[1] = (byte) (color.G * byte.MaxValue);
 						pixels[2] = (byte) (color.B * byte.MaxValue);
 						
-						pixels += offset;
+						pixels += source.NChannels;
 					}
 				}
 			} catch (Exception e) {

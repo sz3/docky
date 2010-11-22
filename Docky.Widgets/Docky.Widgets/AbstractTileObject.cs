@@ -82,8 +82,7 @@ namespace Docky.Widgets
 				if (icon == value)
 					return;
 				// if we set an icon, clear the forced pixbuf
-				if (ForcePixbuf != null)
-					ForcePixbuf = null;
+				ForcePixbuf = null;
 				icon = value;
 				OnIconUpdated ();
 			}

@@ -19,7 +19,6 @@ using System;
 
 namespace Docky.Interface
 {
-
 	public enum DockPosition
 	{
 		Top = 0,

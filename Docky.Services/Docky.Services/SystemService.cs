@@ -27,8 +27,9 @@ using System.Net;
 using GLib;
 
 using Docky.Services.Prefs;
+using Docky.Services.Applications;
 
-using NDesk.DBus;
+using DBus;
 using org.freedesktop.DBus;
 
 namespace Docky.Services
@@ -37,7 +38,7 @@ namespace Docky.Services
 	{
 		public System.Threading.Thread MainThread { get; set; }
 		
-		internal SystemService ()
+		public void Initialize ()
 		{
 			InitializeBattery ();
 			InitializeNetwork ();
@@ -72,21 +73,18 @@ namespace Docky.Services
 		const string PROXY_PASSWORD = "authentication_password";
 		const string PROXY_BYPASS_LIST = "ignore_hosts";
 		
+		IBus NetworkManagerBus;
+		
 		void InitializeNetwork ()
 		{
-			NetworkConnected = true;
-			try {
-				BusG.Init ();
-				if (Bus.System.NameHasOwner (NetworkManagerName)) {
-					network = Bus.System.GetObject<INetworkManager> (NetworkManagerName, new ObjectPath (NetworkManagerPath));
-					network.StateChanged += OnConnectionStatusChanged;
-					SetConnected ();
-				}
-			} catch (Exception e) {
-				// if something bad happened, log the error and assume we are connected
-				Log<SystemService>.Error ("Could not initialize Network Manager dbus: '{0}'", e.Message);
-				Log<SystemService>.Info (e.StackTrace);
-			}
+			NetworkManagerBus = Bus.System.GetObject<IBus> ("org.freedesktop.DBus", new ObjectPath ("/org/freedesktop/DBus"));
+			NetworkManagerBus.NameOwnerChanged += delegate(string name, string old_owner, string new_owner) {
+				if (name != NetworkManagerName)
+					return;
+				Log<SystemService>.Debug ("DBus services changed, reconnecting to Network Manager");
+				network = null;
+			};
+			InitializeNetworkManager ();
 			
 			// watch for changes on any of the proxy keys. If they change, reload the proxy
 			NetworkSettings.Changed += delegate (object sender, PreferencesChangedEventArgs e) {
@@ -105,6 +103,35 @@ namespace Docky.Services
 			};
 			
 			Proxy = GetWebProxy ();
+		}
+		
+		uint nmTimer = 0;
+		
+		void InitializeNetworkManager ()
+		{
+			NetworkConnected = true;
+			if (nmTimer != 0) {
+				GLib.Source.Remove (nmTimer);
+				nmTimer = 0;
+			}
+			
+			if (Bus.System.NameHasOwner (NetworkManagerName)) {
+				try {
+					network = Bus.System.GetObject<INetworkManager> (NetworkManagerName, new ObjectPath (NetworkManagerPath));
+					NetworkConnected = State == NetworkState.Connected;
+					network.StateChanged += OnConnectionStatusChanged;
+					nmTimer = GLib.Timeout.Add (1 * 60 * 1000, () => { 
+						NetworkConnected = State == NetworkState.Connected;
+						return true;
+					});
+				} catch (Exception e) {
+					// if something bad happened, log the error and assume we are connected
+					Log<SystemService>.Error ("Could not initialize Network Manager dbus: '{0}'", e.Message);
+					Log<SystemService>.Info (e.StackTrace);
+				}
+			} else {
+				Log<SystemService>.Error ("Network Manager is not available.");
+			}
 		}
 		
 		public event EventHandler<ConnectionStatusChangeEventArgs> ConnectionStatusChanged;
@@ -126,18 +153,18 @@ namespace Docky.Services
 		void OnConnectionStatusChanged (uint state)
 		{
 			NetworkState newState = (NetworkState) Enum.ToObject (typeof (NetworkState), state);
-			SetConnected ();
+			NetworkConnected = newState == NetworkState.Connected;
 			
-			if (ConnectionStatusChanged != null)
-				ConnectionStatusChanged (this, new ConnectionStatusChangeEventArgs (newState));
-		}
-		
-		void SetConnected ()
-		{
-			if (State == NetworkState.Connected)
-				NetworkConnected = true;
-			else
-				NetworkConnected = false;
+			if (ConnectionStatusChanged != null) {
+				Delegate [] handlers = ConnectionStatusChanged.GetInvocationList ();
+				foreach (Delegate d in handlers)
+					try {
+						d.DynamicInvoke (new object [] {this, new ConnectionStatusChangeEventArgs (newState)});
+					} catch (Exception e) {
+						Log.Error ("Error in ConnectionStatusChanged handler, {0}", e.Message);
+						Log.Debug (e.StackTrace);
+					}
+			}
 		}
 		
 		NetworkState State {
@@ -212,8 +239,16 @@ namespace Docky.Services
 		
 		void OnBatteryStateChanged ()
 		{
-			if (BatteryStateChanged != null)
-				BatteryStateChanged (this, EventArgs.Empty);
+			if (BatteryStateChanged != null) {
+				Delegate [] handlers = BatteryStateChanged.GetInvocationList ();
+				foreach (Delegate d in handlers)
+					try {
+						d.DynamicInvoke (new object [] {this, EventArgs.Empty});
+					} catch (Exception e) {
+						Log.Error ("Error in BatteryStateChanged handler, {0}", e.Message);
+						Log.Debug (e.StackTrace);
+					}
+			}
 		}
 		
 		const string PowerManagementName = "org.freedesktop.PowerManagement";
@@ -256,7 +291,6 @@ namespace Docky.Services
 			// we assume we're not on battery.
 			on_battery = false;
 			try {
-				BusG.Init ();
 				if (Bus.System.NameHasOwner (UPowerName)) {
 					upower = Bus.System.GetObject<IUPower> (UPowerName, new ObjectPath (UPowerPath));
 					upower.Changed += HandleUPowerChanged;
@@ -316,7 +350,7 @@ namespace Docky.Services
 		
 		public void Open (IEnumerable<string> uris)
 		{
-			uris.ToList ().ForEach (uri => Open (uri));
+			Launch (null, uris.Select (uri => GLib.FileFactory.NewForUri (uri)));
 		}
 		
 		public void Open (GLib.File file)
@@ -327,11 +361,16 @@ namespace Docky.Services
 		public void Open (IEnumerable<GLib.File> files)
 		{
 			// null forces the default handler
-			Open (null, files);
+			Launch (null, files);
 		}
 		
-		public void Open (AppInfo app, IEnumerable<GLib.File> files)
+		public void Launch (GLib.File app, IEnumerable<GLib.File> files)
 		{
+			if (app != null && !app.Exists) {
+				Log<SystemService>.Warn ("Application {0} doesnt exist", app.Path);
+				return;
+			}
+			
 			List<GLib.File> noMountNeeded = new List<GLib.File> ();
 
 			// before we try to use the files, make sure they are mounted
@@ -339,11 +378,10 @@ namespace Docky.Services
 				// if the path isn't empty, 
 				// check if it's a local file or on VolumeMonitor's mount list.
 				// if it is, skip it.
-				if (!string.IsNullOrEmpty (f.Path)) {
-					if (f.IsNative || VolumeMonitor.Default.Mounts.Any (m => f.Path.Contains (m.Root.Path))) {
-						noMountNeeded.Add (f);
-						continue;
-					}
+				if (!string.IsNullOrEmpty (f.Path) 
+				    && (f.IsNative || VolumeMonitor.Default.Mounts.Any (m => f.Path.Contains (m.Root.Path)))) {
+					noMountNeeded.Add (f);
+					continue;
 				}
 				// if the file has no path, there are 2 possibilities
 				// either it's a "fake" file, like computer:// or trash://
@@ -356,52 +394,49 @@ namespace Docky.Services
 				} catch { 
 					// otherwise:
 					// try to mount, if successful launch, otherwise (it's possibly already mounted) try to launch anyways
-					f.MountWithActionAndFallback (() => Launch (app, new [] {f}), () => Launch (app, new [] {f}));				
+					f.MountWithActionAndFallback (() => LaunchWithFiles (app, new [] {f}), () => LaunchWithFiles (app, new [] {f}));				
 				}
 			}
 
 			if (noMountNeeded.Any () || !files.Any ())
-				Launch (app, noMountNeeded);
+				LaunchWithFiles (app, noMountNeeded);
 		}
 		
-		void Launch (AppInfo app, IEnumerable<GLib.File> files)
+		void LaunchWithFiles (GLib.File app, IEnumerable<GLib.File> files)
 		{
-			// if we weren't given an app info, query the file for the default handler
-			if (app == null && files.Any ())
+			AppInfo appinfo = null;
+			if (app != null) {
+				appinfo = GLib.DesktopAppInfo.NewFromFilename (app.Path);
+			} else {
+				if (!files.Any ())
+					return;
+
+				// if we weren't given an app info, query the file for the default handler
 				try {
-					app = files.First ().QueryDefaultHandler (null);
+					appinfo = files.First ().QueryDefaultHandler (null);
 				} catch {
 					// file probably doesnt exist
-				}
-			
-			GLib.List launchList;
-			
-			if (app != null) {
-				if (files.Count () == 0) {
-					try {
-						app.Launch (null, null);
-					} catch (GException e) {
-						Log.Notify (string.Format ("Error running: {0}", app.Name), Gtk.Stock.DialogWarning, e.Message);
-						Log<SystemService>.Error (e.Message);
-						Log<SystemService>.Info (e.StackTrace);
-					}
 					return;
+				}
+			}
+			
+			try {
+				GLib.List launchList;
+				
+				if (!files.Any ()) {
+					appinfo.Launch (null, null);
+
 				// check if the app supports files or Uris
-				} else if (app.SupportsFiles) {
-					launchList = new GLib.List (typeof (GLib.File));
+				} else if (appinfo.SupportsFiles) {
+					launchList = new GLib.List (new GLib.File[] {}, typeof (GLib.File), true, false);
 					foreach (GLib.File f in files)
 						launchList.Append (f);
-					try {
-						// if launching was successful, bail
-						if (app.Launch (launchList, null))
-							return;
-					} catch (GLib.GException e) {
-						Log.Notify (string.Format ("Error running: {0}", app.Name), Gtk.Stock.DialogWarning, e.Message);
-						Log<SystemService>.Error (e.Message);
-						Log<SystemService>.Info (e.StackTrace);
-					}
-				} else if (app.SupportsUris) {
-					launchList = new GLib.List (typeof (string));
+
+					appinfo.Launch (launchList, null);
+					launchList.Dispose ();
+					
+				} else if (appinfo.SupportsUris) {
+					launchList = new GLib.List (new string[] {}, typeof (string), true, true);
 					foreach (GLib.File f in files) {
 						// try to use GLib.File.Uri first, if that throws an exception,
 						// catch and use P/Invoke to libdocky.  If that's still null, warn & skip the file.
@@ -416,18 +451,20 @@ namespace Docky.Services
 							launchList.Append (uri);
 						}
 					}
-					try {
-						if (app.LaunchUris (launchList, null))
-							return;
-					} catch (GLib.GException e) {
-						Log.Notify (string.Format ("Error running: {0}", app.Name), Gtk.Stock.DialogWarning, e.Message);
-						Log<SystemService>.Error (e.Message);
-						Log<SystemService>.Info (e.StackTrace);
-					}
+					appinfo.LaunchUris (launchList, null);
+					launchList.Dispose ();
+					
+				} else {
+					Log<SystemService>.Error ("Error opening files. The application doesn't support files/URIs or wasn't found.");	
 				}
+				
+			} catch (GException e) {
+				Log.Notify (string.Format ("Error running: {0}", appinfo.Name), Gtk.Stock.DialogWarning, e.Message);
+				Log<SystemService>.Error (e.Message);
+				Log<SystemService>.Info (e.StackTrace);
 			}
 
-			Log<SystemService>.Error ("Error opening files. The application doesn't support files/URIs or wasn't found.");
+			(appinfo as IDisposable).Dispose ();
 		}
 		
 		public void Execute (string executable)

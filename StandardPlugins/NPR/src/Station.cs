@@ -36,10 +36,6 @@ namespace NPR
 	public class Station : AbstractTileObject
 	{
 		public int ID { get; private set; }
-		public string Logo { get; private set; }
-		public override string Description { get; protected set; }
-		public override string Icon { get; protected set; }
-		public override string Name { get; protected set; }
 		public IEnumerable<StationUrl> StationUrls { get; private set; }
 		public bool IsLoaded { get; private set; }
 		
@@ -78,6 +74,8 @@ namespace NPR
 				ShowActionButton = false;
 				IsLoaded = true;
 			}
+
+			DockServices.System.ConnectionStatusChanged += HandleConnectionStatusChanged;
 		}
 		
 		void HandleConnectionStatusChanged (object o, EventArgs args)
@@ -183,6 +181,7 @@ namespace NPR
 		public override void Dispose ()
 		{
 			DockServices.System.ConnectionStatusChanged -= HandleConnectionStatusChanged;
+			FinishedLoading = null;
 			base.Dispose ();
 		}
 	}

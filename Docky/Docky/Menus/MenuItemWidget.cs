@@ -18,9 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 
 using Cairo;
 using Gdk;
@@ -101,7 +98,6 @@ namespace Docky.Menus
 					layout.SetMarkupWithAccel (item.Text, '_', out accel);
 				else
 					layout.SetMarkup (item.Text);
-				layout.Width = Pango.Units.FromPixels (2 * MaxWidth);
 				layout.FontDescription = Style.FontDescription;
 				layout.Ellipsize = Pango.EllipsizeMode.End;
 				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (FontSize);

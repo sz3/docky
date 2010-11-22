@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-using NDesk.DBus;
+using DBus;
 using org.freedesktop.DBus;
 
 using Gdk;
@@ -56,7 +56,7 @@ namespace SessionManager
 			get {
 				if (!current.HasValue) {
 					current = prefs.Get<int> ("CurrentIndex", 0);
-					if (current > SessionDockItems.Count - 1)
+					if (current >= SessionDockItems.Count)
 						CurrentIndex = 0;
 				}
 				return current.Value;
@@ -85,9 +85,6 @@ namespace SessionManager
 			
 			system_manager.CapabilitiesChanged += HandlePowermanagerCapabilitiesChanged;
 			system_manager.RebootRequired += HandleRebootRequired;
-			
-			HoverText = SessionDockItems[CurrentIndex].hover_text;
-			Icon = SessionDockItems[CurrentIndex].icon;
 		}
 
 		void HandleRebootRequired (object sender, EventArgs e)
@@ -105,9 +102,6 @@ namespace SessionManager
 		void HandlePowermanagerCapabilitiesChanged (object sender, EventArgs e)
 		{
 			GenerateSessionItems ();
-			
-			HoverText = SessionDockItems[CurrentIndex].hover_text;
-			Icon = SessionDockItems[CurrentIndex].icon;
 
 			QueueRedraw ();
 		}
@@ -146,6 +140,12 @@ namespace SessionManager
 				SessionMenuItems.Add (shutdown);
 				SessionDockItems.Add (shutdown);
 			}
+			
+			if (CurrentIndex >= SessionDockItems.Count)
+				CurrentIndex = 0;
+			
+			HoverText = SessionDockItems[CurrentIndex].hover_text;
+			Icon = SessionDockItems[CurrentIndex].icon;
 		}
 		
 		void BuildMenuEntries () 

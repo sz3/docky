@@ -93,21 +93,21 @@ namespace Docky
 		{
 			try {
 				Options.Parse (args);
+				
+				// if the buffer time wasn't explicity set, and a Nvidia card is present,
+				// force the buffer refresh time to 10 minutes
+				if (DockServices.System.HasNvidia && BufferTime == 0)
+					BufferTime = FORCE_BUFFER_REFRESH;
+				
+				// log the parsed user args
+				Log<UserArgs>.Debug ("BufferTime = " + BufferTime);
+				Log<UserArgs>.Debug ("MaxSize = " + MaxSize);
+				Log<UserArgs>.Debug ("NetbookMode = " + NetbookMode);
+				Log<UserArgs>.Debug ("NoPollCursor = " + NoPollCursor);
 			} catch (OptionException ex) {
 				Log<UserArgs>.Error ("Error parsing options: {0}", ex.Message);
 				ShowHelp ();
 			}
-			
-			// if the buffer time wasn't explicity set, and a Nvidia card is present,
-			// force the buffer refresh time to 10 minutes
-			if (DockServices.System.HasNvidia && BufferTime == 0)
-				BufferTime = FORCE_BUFFER_REFRESH;
-			
-			// log the parsed user args
-			Log<UserArgs>.Debug ("BufferTime = " + BufferTime);
-			Log<UserArgs>.Debug ("MaxSize = " + MaxSize);
-			Log<UserArgs>.Debug ("NetbookMode = " + NetbookMode);
-			Log<UserArgs>.Debug ("NoPollCursor = " + NoPollCursor);
 			
 			// if the help was shown, return false, alerting the main thread to exit
 			return !HelpShown;

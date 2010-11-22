@@ -31,8 +31,7 @@ namespace Docky.Services
 {
 	public class WindowMatcherService
 	{
-		
-		internal WindowMatcherService ()
+		public void Initialize ()
 		{
 			// Initialize window matching with currently available windows
 			DesktopItemsByWindow = new Dictionary<Window, List<DesktopItem>> ();
@@ -117,7 +116,7 @@ namespace Docky.Services
 		
 		public bool WindowIsReadyForMatch (Window window)
 		{
-			if (!WindowIsOpenOffice (window))
+			if (!WindowIsOpenOffice (window) && !WindowIsLibreOffice (window))
 				return true;
 			
 			return SetupWindow (window);
@@ -126,6 +125,11 @@ namespace Docky.Services
 		public bool WindowIsOpenOffice (Window window)
 		{
 			return window.ClassGroup != null && window.ClassGroup.Name.ToLower ().StartsWith ("openoffice");
+		}
+
+		public bool WindowIsLibreOffice (Window window)
+		{
+			return window.ClassGroup != null && window.ClassGroup.Name.ToLower ().StartsWith ("libreoffice");
 		}
 
 		#endregion
@@ -202,6 +206,18 @@ namespace Docky.Services
 						commandLine.Add ("ooffice-calc");
 					else if (title.EndsWith ("Math"))
 						commandLine.Add ("ooffice-math");
+				} else if (WindowIsLibreOffice (window)) {
+					string title = window.Name.Trim ();
+					if (title.EndsWith ("Writer"))
+						commandLine.Add ("libreoffice-writer");
+					else if (title.EndsWith ("Draw"))
+						commandLine.Add ("libreoffice-draw");
+					else if (title.EndsWith ("Impress"))
+						commandLine.Add ("libreoffice-impress");
+					else if (title.EndsWith ("Calc"))
+						commandLine.Add ("libreoffice-calc");
+					else if (title.EndsWith ("Math"))
+						commandLine.Add ("libreoffice-math");
 				} else if (window.ClassGroup.ResClass == "Wine") {
 					// we can match Wine apps normally so don't do anything here
 				} else {
