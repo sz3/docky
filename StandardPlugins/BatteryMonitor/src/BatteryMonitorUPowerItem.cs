@@ -129,28 +129,26 @@ namespace BatteryMonitor
 		
 		void EnumerateDevices ()
 		{
-			lock (devices) {
-				devices.Clear ();
+			devices = new List<IUPowerDevice> ();
+			
+			foreach (string s in upower.EnumerateDevices ()) {
+				IUPowerDevice device = Bus.System.GetObject<IUPowerDevice> (UPowerName, new ObjectPath (s));
 				
-				foreach (string s in upower.EnumerateDevices ()) {
-					IUPowerDevice device = Bus.System.GetObject<IUPowerDevice> (UPowerName, new ObjectPath (s));
-					
-					// only want batteries
-					if (GetType (device) != 2)
-						continue;
-					
-					devices.Add (device);
-				}
+				// only want batteries
+				if (GetType (device) != 2)
+					continue;
+				
+				devices.Add (device);
 			}
 		}
 		
 		protected override void GetMaxBatteryCapacity ()
 		{
-			if (upower != null)
-				lock (devices) {
-					foreach (IUPowerDevice device in devices)
-						max_capacity += (int) GetEnergyFull (device);
-				}
+			if (upower != null) {
+				List<IUPowerDevice> batt_devices = devices;
+				foreach (IUPowerDevice device in batt_devices)
+					max_capacity += (int) GetEnergyFull (device);
+			}
 			
 			max_capacity = Math.Max (1, max_capacity);
 		}
@@ -172,20 +170,20 @@ namespace BatteryMonitor
 			time_to_empty = 0;
 			time_to_full = 0;
 			
-			if (upower != null)
-				lock (devices) {
-					foreach (IUPowerDevice device in devices) {
-						current_capacity += (int) GetEnergy (device);
-						time_to_empty += GetTimeToEmpty (device);
-						time_to_full += GetTimeToFull (device);
-						
-						// 0: Unknown, 1: Charging, 2: Discharging, 3: Empty, 
-						// 4: Fully charged, 5: Pending charge, 6: Pending discharge
-						uint state = GetState (device);
-						if (state == 1 || state == 5) // charging
-							charging = true;
-					}
+			if (upower != null) {
+				List<IUPowerDevice> batt_devices = devices;
+				foreach (IUPowerDevice device in batt_devices) {
+					current_capacity += (int) GetEnergy (device);
+					time_to_empty += GetTimeToEmpty (device);
+					time_to_full += GetTimeToFull (device);
+					
+					// 0: Unknown, 1: Charging, 2: Discharging, 3: Empty, 
+					// 4: Fully charged, 5: Pending charge, 6: Pending discharge
+					uint state = GetState (device);
+					if (state == 1 || state == 5) // charging
+						charging = true;
 				}
+			}
 			
 			if (time_to_empty > 0 || time_to_full > 0)
 				current_rate = 1;
