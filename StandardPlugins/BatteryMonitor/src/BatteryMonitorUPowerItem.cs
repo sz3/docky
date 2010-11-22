@@ -74,7 +74,7 @@ namespace BatteryMonitor
 		{
 			try {
 				return Double.Parse (dbusobj.Get (path, propname).ToString ());
-			} catch (Exception) {
+			} catch {
 				return 0;
 			}
 		}
@@ -83,7 +83,7 @@ namespace BatteryMonitor
 		{
 			try {
 				return Int32.Parse (dbusobj.Get (path, propname).ToString ());
-			} catch (Exception) {
+			} catch {
 				return 0;
 			}
 		}
@@ -92,7 +92,7 @@ namespace BatteryMonitor
 		{
 			try {
 				return UInt32.Parse (dbusobj.Get (path, propname).ToString ());
-			} catch (Exception) {
+			} catch {
 				return 0;
 			}
 		}
