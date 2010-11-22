@@ -176,6 +176,7 @@ namespace GMail
 				checkerThread.Join ();
 				checkerThread = null;
 			}
+			OnGMailChecked ();
 		}
 		
 		void CheckGMail ()
@@ -271,6 +272,7 @@ namespace GMail
 					OnGMailChecked ();
 				} catch (ThreadAbortException) {
 					Log<GMailAtom>.Debug ("Stoping Atom thread");
+					OnGMailChecked ();
 				} catch (NullReferenceException e) {
 					Log<GMailAtom>.Debug (e.Message);
 					OnGMailFailed (Catalog.GetString ("Feed Error"));

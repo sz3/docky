@@ -73,20 +73,18 @@ namespace Docky.Services
 		const string PROXY_PASSWORD = "authentication_password";
 		const string PROXY_BYPASS_LIST = "ignore_hosts";
 		
+		IBus NetworkManagerBus;
+		
 		void InitializeNetwork ()
 		{
-			NetworkConnected = true;
-			try {
-				if (Bus.System.NameHasOwner (NetworkManagerName)) {
-					network = Bus.System.GetObject<INetworkManager> (NetworkManagerName, new ObjectPath (NetworkManagerPath));
-					network.StateChanged += OnConnectionStatusChanged;
-					SetConnected ();
-				}
-			} catch (Exception e) {
-				// if something bad happened, log the error and assume we are connected
-				Log<SystemService>.Error ("Could not initialize Network Manager dbus: '{0}'", e.Message);
-				Log<SystemService>.Info (e.StackTrace);
-			}
+			NetworkManagerBus = Bus.System.GetObject<IBus> ("org.freedesktop.DBus", new ObjectPath ("/org/freedesktop/DBus"));
+			NetworkManagerBus.NameOwnerChanged += delegate(string name, string old_owner, string new_owner) {
+				if (name != NetworkManagerName)
+					return;
+				Log<SystemService>.Debug ("DBus services changed, reconnecting to Network Manager");
+				network = null;
+			};
+			InitializeNetworkManager ();
 			
 			// watch for changes on any of the proxy keys. If they change, reload the proxy
 			NetworkSettings.Changed += delegate (object sender, PreferencesChangedEventArgs e) {
@@ -105,6 +103,35 @@ namespace Docky.Services
 			};
 			
 			Proxy = GetWebProxy ();
+		}
+		
+		uint nmTimer = 0;
+		
+		void InitializeNetworkManager ()
+		{
+			NetworkConnected = true;
+			if (nmTimer != 0) {
+				GLib.Source.Remove (nmTimer);
+				nmTimer = 0;
+			}
+			
+			if (Bus.System.NameHasOwner (NetworkManagerName)) {
+				try {
+					network = Bus.System.GetObject<INetworkManager> (NetworkManagerName, new ObjectPath (NetworkManagerPath));
+					NetworkConnected = State == NetworkState.Connected;
+					network.StateChanged += OnConnectionStatusChanged;
+					nmTimer = GLib.Timeout.Add (1 * 60 * 1000, () => { 
+						NetworkConnected = State == NetworkState.Connected;
+						return true;
+					});
+				} catch (Exception e) {
+					// if something bad happened, log the error and assume we are connected
+					Log<SystemService>.Error ("Could not initialize Network Manager dbus: '{0}'", e.Message);
+					Log<SystemService>.Info (e.StackTrace);
+				}
+			} else {
+				Log<SystemService>.Error ("Network Manager is not available.");
+			}
 		}
 		
 		public event EventHandler<ConnectionStatusChangeEventArgs> ConnectionStatusChanged;
@@ -126,7 +153,7 @@ namespace Docky.Services
 		void OnConnectionStatusChanged (uint state)
 		{
 			NetworkState newState = (NetworkState) Enum.ToObject (typeof (NetworkState), state);
-			SetConnected ();
+			NetworkConnected = newState == NetworkState.Connected;
 			
 			if (ConnectionStatusChanged != null) {
 				Delegate [] handlers = ConnectionStatusChanged.GetInvocationList ();
@@ -138,14 +165,6 @@ namespace Docky.Services
 						Log.Debug (e.StackTrace);
 					}
 			}
-		}
-		
-		void SetConnected ()
-		{
-			if (State == NetworkState.Connected)
-				NetworkConnected = true;
-			else
-				NetworkConnected = false;
 		}
 		
 		NetworkState State {

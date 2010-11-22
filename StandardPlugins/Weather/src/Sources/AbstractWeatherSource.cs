@@ -162,7 +162,6 @@ namespace WeatherDocklet
 					FetchData ();
 					
 					OnWeatherUpdated ();
-
 				} catch (ThreadAbortException) {
 					Log<AbstractWeatherSource>.Debug (Name + ": Reload aborted");
 					// restore Dockitem state
@@ -174,13 +173,15 @@ namespace WeatherDocklet
 					OnWeatherError (Catalog.GetString ("Network Error"));
 				}
 			});
-
 		}
 
 		public void StopReload ()
 		{
-			if (checkerThread != null)
+			if (checkerThread != null) {
 				checkerThread.Abort ();
+				checkerThread.Join ();
+			}
+			OnWeatherUpdated ();
 		}
 		
 		public void ShowRadar ()

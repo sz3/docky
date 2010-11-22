@@ -147,9 +147,8 @@ namespace WeatherDocklet
 			if (CurrentLocation == "" || !DockServices.System.NetworkConnected)
 				return;
 
-			if (reloadImmediately && !Weather.IsBusy) {
+			if (reloadImmediately && !Weather.IsBusy)
 				Weather.StartReload ();
-			}
 				
 			UpdateTimer = GLib.Timeout.Add (WeatherPreferences.Timeout * 60 * 1000, () => {
 				if (!Weather.IsBusy && DockServices.System.NetworkConnected) 
@@ -163,6 +162,7 @@ namespace WeatherDocklet
 			if (UpdateTimer > 0)
 				GLib.Source.Remove (UpdateTimer);
 			UpdateTimer = 0;
+			Weather.StopReload (); 
 		}
 		
 		/// <summary>
