@@ -2053,9 +2053,9 @@ namespace Docky.Interface
 				dockArea.Height = DockHeight;
 				
 				cursorArea = new Gdk.Rectangle (staticArea.X,
-				                                dockArea.Y,
+				                                -window_position.Y,
 				                                staticArea.Width,
-				                                hotAreaSize);
+				                                hotAreaSize + window_position.Y);
 				break;
 			case DockPosition.Left:
 				dockArea.X = 0;
@@ -2063,9 +2063,9 @@ namespace Docky.Interface
 				dockArea.Width = DockHeight;
 				dockArea.Height = dockWidth;
 				
-				cursorArea = new Gdk.Rectangle (dockArea.X,
+				cursorArea = new Gdk.Rectangle (-window_position.X,
 				                                staticArea.Y,
-				                                hotAreaSize,
+				                                hotAreaSize + window_position.X,
 				                                staticArea.Height);
 				break;
 			case DockPosition.Right:
@@ -2076,7 +2076,7 @@ namespace Docky.Interface
 				
 				cursorArea = new Gdk.Rectangle (dockArea.X + dockArea.Width - hotAreaSize,
 				                                staticArea.Y,
-				                                hotAreaSize,
+				                                hotAreaSize + (Screen.Width - monitor_geo.Width),
 				                                staticArea.Height);
 				break;
 			default:
@@ -2089,7 +2089,7 @@ namespace Docky.Interface
 				cursorArea = new Gdk.Rectangle (staticArea.X,
 				                                dockArea.Y + dockArea.Height - hotAreaSize,
 				                                staticArea.Width,
-				                                hotAreaSize);
+				                                hotAreaSize + (Screen.Height - monitor_geo.Height));
 				break;
 			}
 		}
@@ -2199,7 +2199,6 @@ namespace Docky.Interface
 			
 			cursorArea.X += window_position.X;
 			cursorArea.Y += window_position.Y;
-			cursorArea.Intersect (monitor_geo);
 			AutohideManager.SetCursorArea (cursorArea);
 		}
 		
