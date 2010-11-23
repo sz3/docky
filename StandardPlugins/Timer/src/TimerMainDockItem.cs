@@ -125,16 +125,17 @@ namespace Timer
 		{
 			uint amount = 1;
 			
-			if ((mod & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask)
-				amount = 60;
-			else if ((mod & Gdk.ModifierType.ControlMask) == Gdk.ModifierType.ControlMask)
-				amount = 3600;
-			
-			if (direction == Gdk.ScrollDirection.Up || direction == Gdk.ScrollDirection.Right) {
-				DefaultTimer += amount;
-			} else if (DefaultTimer > amount) {
-				DefaultTimer -= amount;
+			if ((mod & Gdk.ModifierType.ShiftMask) == Gdk.ModifierType.ShiftMask) {
+				if ((mod & Gdk.ModifierType.Mod1Mask) == Gdk.ModifierType.Mod1Mask)
+					amount = 3600;
+				else
+					amount = 60;
 			}
+			
+			if (direction == Gdk.ScrollDirection.Up || direction == Gdk.ScrollDirection.Right)
+				DefaultTimer += amount;
+			else if (DefaultTimer > amount)
+				DefaultTimer -= amount;
 			
 			UpdateHoverText ();
 		}
