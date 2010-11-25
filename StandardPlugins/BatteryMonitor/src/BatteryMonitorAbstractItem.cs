@@ -157,7 +157,7 @@ namespace BatteryMonitor
 							DockServices.System.Execute ("gnome-power-statistics --device /org/freedesktop/UPower/devices/battery_BAT0");
 						}));
 			if (DockServices.System.IsValidExecutable ("gnome-power-preferences"))
-				items.Add (new MenuItem (Catalog.GetString ("_Preferences"),
+				items.Add (new MenuItem (Catalog.GetString ("_Settings"),
 						Gtk.Stock.Preferences,
 						delegate {
 							DockServices.System.Execute ("gnome-power-preferences");
