@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-30 09:57+0200\n"
+"POT-Creation-Date: 2010-11-28 18:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,43 +59,43 @@ msgstr ""
 msgid ".tar Archives"
 msgstr ""
 
-#: ../Docky/Docky/DockletTile.cs:51
+#: ../Docky/Docky/DockletTile.cs:49
 msgid "Author"
 msgstr ""
 
-#: ../Docky/Docky/DockletTile.cs:86
+#: ../Docky/Docky/DockletTile.cs:84
 msgid "Move this docklet up on the selected dock"
 msgstr ""
 
-#: ../Docky/Docky/DockletTile.cs:87
+#: ../Docky/Docky/DockletTile.cs:85
 msgid "Move this docklet down on the selected dock"
 msgstr ""
 
-#: ../Docky/Docky/DockletTile.cs:91
+#: ../Docky/Docky/DockletTile.cs:89
 msgid "Move this docklet left on the selected dock"
 msgstr ""
 
-#: ../Docky/Docky/DockletTile.cs:92
+#: ../Docky/Docky/DockletTile.cs:90
 msgid "Move this docklet right on the selected dock"
 msgstr ""
 
-#: ../Docky/Docky/DockletTile.cs:94
+#: ../Docky/Docky/DockletTile.cs:92
 msgid "Configure this docklet"
 msgstr ""
 
-#: ../Docky/Docky/DockletTile.cs:95
+#: ../Docky/Docky/DockletTile.cs:93
 msgid "About this docklet"
 msgstr ""
 
-#: ../Docky/Docky/DockletTile.cs:96
+#: ../Docky/Docky/DockletTile.cs:94
 msgid "Add this docklet to the selected dock"
 msgstr ""
 
-#: ../Docky/Docky/DockletTile.cs:97
+#: ../Docky/Docky/DockletTile.cs:95
 msgid "Remove this docklet from the selected dock"
 msgstr ""
 
-#: ../Docky/Docky/Docky.cs:113
+#: ../Docky/Docky/Docky.cs:121
 msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
@@ -129,25 +129,25 @@ msgstr ""
 msgid "Stopped"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:333
+#: ../Docky/Docky/Interface/DockPreferences.cs:326
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:692
+#: ../Docky/Docky/Interface/DockPreferences.cs:682
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:695
+#: ../Docky/Docky/Interface/DockPreferences.cs:685
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:698
+#: ../Docky/Docky/Interface/DockPreferences.cs:688
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:701
+#: ../Docky/Docky/Interface/DockPreferences.cs:691
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr ""
 
@@ -161,6 +161,7 @@ msgid "Drop to add to dock"
 msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:132
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:160
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:244
 msgid "_Settings"
@@ -287,11 +288,11 @@ msgstr ""
 msgid "Drop to open with {0}"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:178
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:180
 msgid "New _Window"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:180
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:182
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
 msgstr ""
@@ -300,7 +301,7 @@ msgstr ""
 msgid "Reset Color"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:481
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:482
 msgid "_Pin to Dock"
 msgstr ""
 
@@ -342,23 +343,23 @@ msgstr ""
 msgid "Open Containing Folder"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:258
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
 msgid "Unma_ximize"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:261
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:267
 msgid "Ma_ximize"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:265
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:271
 msgid "_Restore"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:268
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:274
 msgid "Mi_nimize"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:271
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:277
 msgid "_Close All"
 msgstr ""
 
@@ -404,30 +405,34 @@ msgstr ""
 msgid "Don't have an account?"
 msgstr ""
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:156
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:98
 msgid "No Battery Found"
 msgstr ""
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:173
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:111
 #, csharp-format
 msgid "{0} hour"
 msgid_plural "{0} hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:175
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:113
 #, csharp-format
 msgid "{0} minute"
 msgid_plural "{0} minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:177
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:115
 msgid "until charged "
 msgstr ""
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:179
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:117
 msgid "remaining "
+msgstr ""
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:154
+msgid "_Statistics"
 msgstr ""
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:86
@@ -475,40 +480,40 @@ msgstr ""
 msgid "minutes"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:181
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:189
 msgid "Click to set username and password."
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:240
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:246
 msgid "(no subject)"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:254
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:260
 #, csharp-format
 msgid "You have {0} new, unread messages"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:258
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:264
 #, csharp-format
 msgid "From: {0}"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:272
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:277
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:278
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:281
 msgid "Feed Error"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:283
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:285
 msgid "Invalid Username"
 msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:287
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:293
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:174
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:292
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:173
 msgid "Network Error"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:298
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:295
 msgid "General Error"
 msgstr ""
 
@@ -601,11 +606,11 @@ msgstr ""
 msgid "S_earch"
 msgstr ""
 
-#: ../StandardPlugins/NPR/src/Station.cs:76
+#: ../StandardPlugins/NPR/src/Station.cs:72
 msgid "No stations found."
 msgstr ""
 
-#: ../StandardPlugins/NPR/src/Station.cs:77
+#: ../StandardPlugins/NPR/src/Station.cs:73
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
 msgstr ""
@@ -711,63 +716,67 @@ msgstr ""
 msgid "A timer set for {0} has expired."
 msgstr ""
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:232
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:242
 msgid "Time remaining:"
 msgstr ""
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:234
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:244
 msgid "Timer paused, time remaining:"
 msgstr ""
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:245
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:255
 msgid "Set the timer's label to:"
 msgstr ""
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:251
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:285
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:261
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:299
 msgid "_Set Label"
 msgstr ""
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:276
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:286
 msgid "_Pause Timer"
 msgstr ""
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:276
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:286
 msgid "_Start Timer"
 msgstr ""
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:280
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:290
+msgid "R_eset Timer"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:294
 msgid "_Remove Timer"
 msgstr ""
 
-#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:56
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:57
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:60
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:61
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:65
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:66
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:132
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:145
 #, csharp-format
 msgid "Click to create a timer for {0}."
 msgstr ""
 
-#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:149
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:162
 msgid "Automatically _Start Timers"
 msgstr ""
 
-#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:153
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:166
 msgid "Automatically _Dismiss Timers"
 msgstr ""
 
@@ -830,7 +839,7 @@ msgstr ""
 msgid "Use _Metric Units"
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:171
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:170
 msgid "Invalid Weather Location"
 msgstr ""
 
