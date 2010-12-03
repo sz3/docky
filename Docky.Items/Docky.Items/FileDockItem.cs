@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Jason Smith, Robert Dyer, Chris Szikszoy
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -42,10 +43,9 @@ namespace Docky.Items
 			// even File.QueryExists () will return false for valid files (ftp://) that aren't mounted.
 
 			// for now we just attempt to figure out if it is a local file and check for its existance
-			if (uri.IndexOf ("file://") != -1 || uri.IndexOf ("://") == -1) {
+			if (uri.IndexOf ("file://") != -1 || uri.IndexOf ("://") == -1)
 				if (!GLib.FileFactory.NewForUri (uri).Exists)
 					return null;
-			}
 
 			return new FileDockItem (uri, force_hover_text, backup_icon);
 		}
@@ -109,10 +109,7 @@ namespace Docky.Items
 		// this should be called after a successful mount of the file
 		public void UpdateInfo ()
 		{
-			if (OwnedFile.QueryFileType (0, null) == FileType.Directory)
-				is_folder = true;
-			else
-				is_folder = false;
+			is_folder = OwnedFile.QueryFileType (0, null) == FileType.Directory;
 			
 			// only check the icon if it's mounted (ie: .Path != null)
 			if (!string.IsNullOrEmpty (OwnedFile.Path)) {
@@ -124,15 +121,14 @@ namespace Docky.Items
 				// is actually a relative path... not a file uri.
 				// we need to make this a file:// uri regardless.
 				if (!string.IsNullOrEmpty (customIconPath)) {
-					if (!customIconPath.StartsWith ("file://")) {
+					if (!customIconPath.StartsWith ("file://"))
 						customIconPath = System.IO.Path.Combine (OwnedFile.StringUri (), customIconPath);
-					}
 					Icon = customIconPath;
-				}
-				else if (!string.IsNullOrEmpty (thumbnailPath))
+				} else if (!string.IsNullOrEmpty (thumbnailPath)) {
 					Icon = thumbnailPath;
-				else
+				} else {
 					Icon = OwnedFile.Icon ();
+				}
 				
 				// process the emblems
 				if (emblems.Length != 0) {
@@ -180,8 +176,7 @@ namespace Docky.Items
 			try {
 				if (!string.IsNullOrEmpty (OwnedFile.Path))
 					can_write = OwnedFile.QueryInfo<bool> ("access::can-write");
-			} catch {
-			}
+			} catch { }
 			
 			// only accept the drop if it's a folder, and we can write to it
 			return is_folder && can_write;
