@@ -153,10 +153,10 @@ namespace Docky.Items
 				Icon = "";
 			}
 
-			if (string.IsNullOrEmpty (forced_hover_text))
+			if (string.IsNullOrEmpty (ForcedHoverText))
 			    HoverText = OwnedFile.Basename;
 			else
-				HoverText = forced_hover_text;
+				HoverText = ForcedHoverText;
 			
 			OnPaintNeeded ();
 		}
