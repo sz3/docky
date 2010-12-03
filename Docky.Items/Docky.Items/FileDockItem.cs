@@ -61,6 +61,17 @@ namespace Docky.Items
 		string forced_hover_text;
 		string backup_icon;
 		
+		public string ForcedHoverText {
+			get { return forced_hover_text; }
+			set {
+				if (forced_hover_text == value)
+					return;
+				forced_hover_text = value;
+				if (!string.IsNullOrEmpty (forced_hover_text))
+					HoverText = forced_hover_text;
+			}
+		}
+		
 		public string Uri {
 			get { return uri; }
 		}

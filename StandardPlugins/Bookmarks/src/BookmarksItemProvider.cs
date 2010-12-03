@@ -125,6 +125,7 @@ namespace Bookmarks
 						FileDockItem item = old.Cast<FileDockItem> ().First (fdi => fdi.Uri == uri);
 						old.Remove (item);
 						items.Add (item);
+						item.ForcedHoverText = name;
 					} else if (bookmark.StringUri ().StartsWith ("file://") && !bookmark.Exists) {
 						Log<BookmarksItemProvider>.Warn ("Bookmark path '{0}' does not exist, please fix the bookmarks file",
 						    bookmark.StringUri ());
