@@ -19,6 +19,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using DBus;
+
 using Docky.Items;
 
 namespace Docky.DBus
@@ -55,50 +57,46 @@ namespace Docky.DBus
 			};
 		}
 		
-		public string[] GetItems ()
+		public ObjectPath[] GetItems ()
 		{
 			return DBusManager.Default.Items
-				.Select (adi => DBusManager.Default.PathForItem (adi))
+				.Select (adi => new ObjectPath(DBusManager.Default.PathForItem (adi)))
 				.ToArray ();
 		}
 
-		public string[] GetItemsByName (string name)
+		public ObjectPath[] GetItemsByName (string name)
 		{
 			return DBusManager.Default.Items
 				.OfType<ApplicationDockItem> ()
 				.Where (adi => adi.OwnedItem.GetString ("Name") == name)
-				.Select (adi => DBusManager.Default.PathForItem (adi))
-				.DefaultIfEmpty ("")
+				.Select (adi => new ObjectPath(DBusManager.Default.PathForItem (adi)))
 				.ToArray ();
 		}
 
-		public string[] GetItemsByDesktopFile (string path)
+		public ObjectPath[] GetItemsByDesktopFile (string path)
 		{
 			return DBusManager.Default.Items
 				.OfType<ApplicationDockItem> ()
 				.Where (adi => adi.OwnedItem.Path == path)
-				.Select (adi => DBusManager.Default.PathForItem (adi))
-				.DefaultIfEmpty ("")
+				.Select (adi => new ObjectPath(DBusManager.Default.PathForItem (adi)))
 				.ToArray ();
 		}
 		
-		public string[] GetItemsByPID (uint pid)
+		public ObjectPath[] GetItemsByPID (uint pid)
 		{
 			return DBusManager.Default.Items
 				.OfType<WnckDockItem> ()
 				.Where (wdi => wdi.Windows.Any (w => (uint) w.Pid == pid))
-				.Select (wdi => DBusManager.Default.PathForItem (wdi))
-				.DefaultIfEmpty ("")
+				.Select (wdi => new ObjectPath(DBusManager.Default.PathForItem (wdi)))
 				.ToArray ();
 		}
 		
-		public string GetItemByXid (uint xid)
+		public ObjectPath GetItemByXid (uint xid)
 		{
 			return DBusManager.Default.Items
 				.OfType<WnckDockItem> ()
 				.Where (wdi => wdi.Windows.Any (w => (uint) w.Xid == xid))
-				.Select (wdi => DBusManager.Default.PathForItem (wdi))
-				.DefaultIfEmpty ("")
+				.Select (wdi => new ObjectPath(DBusManager.Default.PathForItem (wdi)))
 				.FirstOrDefault ();
 		}
 		
@@ -108,13 +106,13 @@ namespace Docky.DBus
 		{
 		}
 		
-		public void OnItemAdded (string path)
+		public void OnItemAdded (ObjectPath path)
 		{
 			if (ItemAdded != null)
 				ItemAdded (path);
 		}
 		
-		public void OnItemRemoved (string path)
+		public void OnItemRemoved (ObjectPath path)
 		{
 			if (ItemRemoved != null)
 				ItemRemoved (path);

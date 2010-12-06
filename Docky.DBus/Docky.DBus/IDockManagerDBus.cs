@@ -21,7 +21,7 @@ using DBus;
 
 namespace Docky.DBus
 {
-	public delegate void ItemChangedHandler (string path);
+	public delegate void ItemChangedHandler (ObjectPath path);
 
 	[Interface(DBusManager.DockManagerBusName)]
 	public interface IDockManagerDBus
@@ -32,14 +32,14 @@ namespace Docky.DBus
 		
 		string[] GetCapabilities ();
 		
-		string[] GetItems ();
+		ObjectPath[] GetItems ();
 		
-		string[] GetItemsByName (string name);
+		ObjectPath[] GetItemsByName (string name);
 		
-		string[] GetItemsByDesktopFile (string path);
+		ObjectPath[] GetItemsByDesktopFile (string path);
 		
-		string[] GetItemsByPID (uint id);
+		ObjectPath[] GetItemsByPID (uint id);
 		
-		string GetItemByXid (uint xid);
+		ObjectPath GetItemByXid (uint xid);
 	}
 }

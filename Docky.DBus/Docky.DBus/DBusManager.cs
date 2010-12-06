@@ -125,8 +125,8 @@ namespace Docky.DBus
 			DockManagerDBusItem dbusitem = new DockManagerDBusItem (item);
 			item_dict[item] = dbusitem;
 			
-			string path = PathForItem (item);
-			Bus.Session.Register (new ObjectPath (path), dbusitem);
+			ObjectPath path = new ObjectPath (PathForItem (item));
+			Bus.Session.Register (path, dbusitem);
 			
 			dock_manager.OnItemAdded (path);
 		}
@@ -149,7 +149,7 @@ namespace Docky.DBus
 				return;
 			}
 			
-			dock_manager.OnItemRemoved (PathForItem (item));
+			dock_manager.OnItemRemoved (path);
 		}
 		
 		#endregion
