@@ -7,38 +7,38 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-09-30 09:57+0200\n"
-"PO-Revision-Date: 2010-11-05 20:57+0000\n"
+"POT-Creation-Date: 2010-11-28 18:41+0100\n"
+"PO-Revision-Date: 2010-11-06 11:28+0000\n"
 "Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-11-06 08:28+0000\n"
+"X-Launchpad-Export-Date: 2010-12-12 13:21+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:148
+#: ../Docky/Docky/ConfigurationWindow.cs:147
 msgid "Search Docklets..."
-msgstr "Zoek docklets"
+msgstr "Zoek docklets…"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:164
+#: ../Docky/Docky/ConfigurationWindow.cs:163
 msgid "Search Helpers..."
 msgstr "Zoek helpers..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:228
+#: ../Docky/Docky/ConfigurationWindow.cs:227
 msgid "Click on any dock to configure."
 msgstr "Pas een dock aan door er op te klikken."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:229
+#: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid "Drag any dock to reposition."
 msgstr "Sleep een dock om het te verplaatsen."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:294
+#: ../Docky/Docky/ConfigurationWindow.cs:293
 msgid "Delete the currently selected dock?"
-msgstr "Wil je het huidige dock verwijderen?"
+msgstr "Wilt u het geselecteerde dock verwijderen?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:296
+#: ../Docky/Docky/ConfigurationWindow.cs:295
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -46,58 +46,56 @@ msgstr ""
 "Als je er voor kiest om het dock te verwijderen,\n"
 "verlies je alle keuzes voor dat dock definitief."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:303
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
+#: ../Docky/Docky/ConfigurationWindow.cs:310
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:405
 msgid "_Delete Dock"
-msgstr "Verwijder het dock"
+msgstr "_Verwijder het dock"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:419
-#: ../Docky/Docky/ConfigurationWindow.cs:439
+#: ../Docky/Docky/ConfigurationWindow.cs:426
 msgid "_Select"
 msgstr "_Selecteer"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:422
-#: ../Docky/Docky/ConfigurationWindow.cs:442
+#: ../Docky/Docky/ConfigurationWindow.cs:429
 msgid ".tar Archives"
-msgstr ".tar archieven"
+msgstr ".tar-archieven"
 
-#: ../Docky/Docky/DockletTile.cs:51
+#: ../Docky/Docky/DockletTile.cs:49
 msgid "Author"
 msgstr "Auteur"
 
-#: ../Docky/Docky/DockletTile.cs:86
+#: ../Docky/Docky/DockletTile.cs:84
 msgid "Move this docklet up on the selected dock"
 msgstr "Verplaats dit docklet naar boven in het geselecteerde dock"
 
-#: ../Docky/Docky/DockletTile.cs:87
+#: ../Docky/Docky/DockletTile.cs:85
 msgid "Move this docklet down on the selected dock"
 msgstr "Verplaats dit docklet naar beneden in het geselecteerde dock"
 
-#: ../Docky/Docky/DockletTile.cs:91
+#: ../Docky/Docky/DockletTile.cs:89
 msgid "Move this docklet left on the selected dock"
 msgstr "Verplaats dit docklet naar links in het geselecteerde dock"
 
-#: ../Docky/Docky/DockletTile.cs:92
+#: ../Docky/Docky/DockletTile.cs:90
 msgid "Move this docklet right on the selected dock"
 msgstr "Verplaats dit docklet naar rechts in het geselecteerde dock"
 
-#: ../Docky/Docky/DockletTile.cs:94
+#: ../Docky/Docky/DockletTile.cs:92
 msgid "Configure this docklet"
 msgstr "Pas dit docklet aan"
 
-#: ../Docky/Docky/DockletTile.cs:95
+#: ../Docky/Docky/DockletTile.cs:93
 msgid "About this docklet"
 msgstr "Over dit docklet"
 
-#: ../Docky/Docky/DockletTile.cs:96
+#: ../Docky/Docky/DockletTile.cs:94
 msgid "Add this docklet to the selected dock"
 msgstr "Voeg dit docklet toe aan het geselecteerde dock"
 
-#: ../Docky/Docky/DockletTile.cs:97
+#: ../Docky/Docky/DockletTile.cs:95
 msgid "Remove this docklet from the selected dock"
 msgstr "Verwijder dit docklet van het geselecteerde dock"
 
-#: ../Docky/Docky/Docky.cs:113
+#: ../Docky/Docky/Docky.cs:121
 msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
@@ -109,7 +107,7 @@ msgstr "Status"
 
 #: ../Docky/Docky/HelperTile.cs:59
 msgid "Uninstall"
-msgstr "Verwijderen"
+msgstr "Deïnstalleren"
 
 #: ../Docky/Docky/HelperTile.cs:71
 msgid "About this helper"
@@ -123,57 +121,59 @@ msgstr "Activeer deze helper"
 msgid "Disable this helper"
 msgstr "De-activeer deze helper"
 
-#: ../Docky/Docky/HelperTile.cs:90
+#: ../Docky/Docky/HelperTile.cs:74
 msgid "Running"
 msgstr "Actief"
 
-#: ../Docky/Docky/HelperTile.cs:90
+#: ../Docky/Docky/HelperTile.cs:74
 msgid "Stopped"
 msgstr "Gestopt"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:333
+#: ../Docky/Docky/Interface/DockPreferences.cs:331
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
-"Als dit aanstaat, worden vensters die nog geen startprogramma in het dock "
-"hebben aan dit dock toegevoegd."
+"Als dit aanstaat worden vensters die nog geen starters in het dock hebben "
+"aan dit dock toegevoegd."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:692
+#: ../Docky/Docky/Interface/DockPreferences.cs:600
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 "<i>Altijd zichtbaar; gemaximaliseerde vensters overlappen het dock niet.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:695
+#: ../Docky/Docky/Interface/DockPreferences.cs:603
 msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr "<i>Enkel zichtbaar bij mouse-over</i>"
+msgstr "<i>Zichtbaar als de muis boven het dock is</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:698
+#: ../Docky/Docky/Interface/DockPreferences.cs:606
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr ""
 "<i>Zichtbaar wanneer het dock niet conflicteert met de zichtbaarheid van het "
 "actieve venster</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:701
+#: ../Docky/Docky/Interface/DockPreferences.cs:609
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr ""
+"<i>Zichtbaar tenzij dit conflicteert met de zichtbaarheid alle vensters.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:378
+#: ../Docky/Docky/Interface/DockWindow.cs:382
 msgid "Drag to reposition"
 msgstr "Sleep om te verplaatsen"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:390
-#: ../Docky/Docky/Interface/DockWindow.cs:404
+#: ../Docky/Docky/Interface/DockWindow.cs:394
+#: ../Docky/Docky/Interface/DockWindow.cs:408
 msgid "Drop to add to dock"
 msgstr "Laat de muis los om aan het dock toe te voegen"
 
-#: ../Docky/Docky/Items/DockyItem.cs:132
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:244
+#: ../Docky/Docky/Items/DockyItem.cs:93
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:160
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:214
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "_Settings"
 msgstr "_Instellingen"
 
-#: ../Docky/Docky/Items/DockyItem.cs:133
+#: ../Docky/Docky/Items/DockyItem.cs:94
 msgid "_About"
 msgstr "_Over"
 
@@ -181,9 +181,9 @@ msgstr "_Over"
 msgid "_Help"
 msgstr "_Hulp"
 
-#: ../Docky/Docky/Items/DockyItem.cs:136
+#: ../Docky/Docky/Items/DockyItem.cs:95
 msgid "_Quit Docky"
-msgstr "_Afsluiten"
+msgstr "Docky _afsluiten"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
 msgid "Docky Settings"
@@ -193,43 +193,42 @@ msgstr "Docky instellingen"
 msgid "_Start When User Logs In"
 msgstr "Start op login"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:155
 msgid "_Theme:"
 msgstr "_Thema:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:315
 msgid "_Install"
 msgstr "_Installeren"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:179
 msgid "<b>General Options</b>"
 msgstr "<b>Algemene opties</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:199
 msgid "<b>Dock Configuration</b>"
 msgstr "<b>Dock instellingen</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:213
 msgid "Docks"
 msgstr "Docks"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:234
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:289
 msgid "All"
 msgstr "Alle"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:235
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:290
 msgid "Enabled"
 msgstr "Ingeschakeld"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:236
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:291
 msgid "Disabled"
 msgstr "Uitgeschakeld"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:268
 msgid "Docklets"
 msgstr "Docklets"
 
@@ -237,135 +236,135 @@ msgstr "Docklets"
 msgid "Usable"
 msgstr "Bruikbaar"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:347
 msgid "Helpers"
 msgstr "Helpers"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:378
 msgid "_New Dock"
-msgstr "_Nieuw Dock"
-
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
-msgid "None"
-msgstr "Niet"
-
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
-msgid "Autohide"
-msgstr "Autohide"
+msgstr "_Nieuw dock"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
-msgid "Intellihide"
-msgstr "Intellihide"
+msgid "None"
+msgstr "Geen"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
+msgid "Autohide"
+msgstr "Automatisch verbergen"
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:62
+msgid "Intellihide"
+msgstr "Intelligent verbergen"
+
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:63
 msgid "Window Dodge"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
 msgid "_Fade On Hide"
 msgstr "Uit_faden bij verbergen"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:121
 msgid "_Icon Size:"
-msgstr "_Icoongrootte:"
+msgstr "P_ictogramgrootte:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:132
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:134
 msgid "_Hiding:"
-msgstr "_Verborgen:"
+msgstr "_Verbergen:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:158
 msgid "_Panel Mode"
 msgstr "_Paneelmodus"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:172
 msgid "3D Back_ground"
-msgstr "3D Achter_grond"
+msgstr "3D achter_grond"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:186
 msgid "_Manage Windows Without Launcher"
 msgstr "_Beheer vensters zonder starter"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:201
 msgid "_Zoom:"
 msgstr "_Zoom:"
 
-#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:120
+#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:119
 #, csharp-format
 msgid "Drop to open with {0}"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:178
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:180
 msgid "New _Window"
 msgstr "Nieu_w venster"
 
-#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:180
+#: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:182
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
 msgstr "_Openen"
 
-#: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:70
+#: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:69
 msgid "Reset Color"
-msgstr "Herstel Kleur"
+msgstr "Kleur herstellen"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:481
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:434
 msgid "_Pin to Dock"
 msgstr "Vastzetten o_p het dock"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:72
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:75
 #, csharp-format
 msgid "Drop to move to {0}"
 msgstr ""
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:191
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:236
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:239
 msgid "Error performing drop action"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:191
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
 msgid "Not enough free space on destination."
 msgstr "Niet genoeg vrije ruimte op de doellocatie"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:208
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:211
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:243
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:214
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:246
 msgid "Complete"
-msgstr "Kompleet"
+msgstr "Voltooid"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:221
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:224
 msgid "Moving"
 msgstr "Verplaatsing"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:227
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:230
 msgid "Copying"
 msgstr "Kopiëren"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:261
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:264
 msgid "Open"
 msgstr "Openen"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:262
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:265
 msgid "Open Containing Folder"
 msgstr "Doelmap openen"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:258
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:265
 msgid "Unma_ximize"
 msgstr "_Herstellen"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:261
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:268
 msgid "Ma_ximize"
 msgstr "Ma_ximaliseren"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:265
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:273
 msgid "_Restore"
-msgstr "_Herstellen"
+msgstr "He_rstellen"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:268
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:276
 msgid "Mi_nimize"
 msgstr "Mi_nimaliseren"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:271
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:280
 msgid "_Close All"
 msgstr "Alles sl_uiten"
 
@@ -376,12 +375,12 @@ msgstr "Aanmelden voor {0}"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:44
 msgid "Validating..."
-msgstr "Valideren..."
+msgstr "Valideren…"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:45
 #, csharp-format
 msgid "Don't have {0}?"
-msgstr "Heb je geen {0}?"
+msgstr "Heeft u geen {0}?"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:46
 msgid "Account validation failed!"
@@ -411,57 +410,61 @@ msgstr "<i>Controleer de accountgegevens en sla deze op</i>"
 msgid "Don't have an account?"
 msgstr "Nog geen account?"
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:156
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:98
 msgid "No Battery Found"
 msgstr "Geen batterij gevonden"
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:173
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:111
 #, csharp-format
 msgid "{0} hour"
 msgid_plural "{0} hours"
 msgstr[0] "{0} uur"
 msgstr[1] "{0} uur"
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:175
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:113
 #, csharp-format
 msgid "{0} minute"
 msgid_plural "{0} minutes"
 msgstr[0] "{0} minuut"
 msgstr[1] "{0} minuten"
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:177
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:115
 msgid "until charged "
-msgstr "voor een volledige oplaadbeurt "
+msgstr "tot volledige opgeladen "
 
-#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorProcItem.cs:179
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:117
 msgid "remaining "
 msgstr "resterend "
+
+#: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:154
+msgid "_Statistics"
+msgstr "_Statistieken"
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:86
 msgid "Computer"
 msgstr "Computer"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:430
 msgid "Di_gital Clock"
-msgstr "Di_gitale Klok"
+msgstr "Di_gitale klok"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:436
 msgid "24-Hour _Clock"
-msgstr "24-uur _Klok"
+msgstr "24-uur _klok"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:443
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:442
 msgid "Show _Date"
-msgstr "Toon _Datum"
+msgstr "Toon _datum"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:449
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:448
 msgid "Select _Theme"
-msgstr "Kies _Thema"
+msgstr "Kies _thema"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
 msgstr "Thema's"
 
-#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:62
+#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
 msgid "Theme"
 msgstr "Thema"
 
@@ -471,7 +474,7 @@ msgstr "Toon bureaublad"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
 msgid "_Add Label"
-msgstr "Label _Toevoegen"
+msgstr "Label _toevoegen"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:113
 msgid "Check e_very:"
@@ -482,40 +485,39 @@ msgstr "Controleer e_lke:"
 msgid "minutes"
 msgstr "minuten"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:181
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:189
 msgid "Click to set username and password."
 msgstr "Klik om gebruikersnaam en wachtwoord in te stellen."
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:240
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:246
 msgid "(no subject)"
 msgstr "(geen onderwerp)"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:254
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:260
 #, csharp-format
 msgid "You have {0} new, unread messages"
 msgstr "U heeft {0} nieuwe, ongelezen berichten."
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:258
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:264
 #, csharp-format
 msgid "From: {0}"
 msgstr "Van: {0}"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:272
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:277
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:278
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:281
 msgid "Feed Error"
 msgstr "Feed produceerde een fout"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:283
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:285
 msgid "Invalid Username"
 msgstr "Ongeldige gebruikersnaam"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:287
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:293
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:174
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:292
 msgid "Network Error"
 msgstr "Netwerk Fout"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:298
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:295
 msgid "General Error"
 msgstr "Algemene Fout"
 
@@ -538,11 +540,11 @@ msgstr[1] "{0} ongelezen berichten"
 msgid "Checking mail..."
 msgstr "Controleert op e-mail..."
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:193
 msgid "_View "
 msgstr "_Toon "
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:198
 msgid "_Compose Mail"
 msgstr "_Nieuw Bericht"
 
@@ -550,11 +552,11 @@ msgstr "_Nieuw Bericht"
 msgid "View C_ontacts"
 msgstr "Toon C_ontacten"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
 msgid "New Mail"
 msgstr "Nieuw bericht"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:236
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:222
 msgid "Check _Mail"
 msgstr "Controleer _Mail"
 
@@ -608,11 +610,11 @@ msgstr ""
 msgid "S_earch"
 msgstr "_Zoeken"
 
-#: ../StandardPlugins/NPR/src/Station.cs:76
+#: ../StandardPlugins/NPR/src/Station.cs:72
 msgid "No stations found."
 msgstr "Geen zenders gevonden."
 
-#: ../StandardPlugins/NPR/src/Station.cs:77
+#: ../StandardPlugins/NPR/src/Station.cs:73
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
 msgstr "Gelieve uw zoekopdracht opnieuw te proberen"
@@ -641,19 +643,20 @@ msgstr "Doneer"
 msgid "Live Streams"
 msgstr "Live Streams"
 
+#: ../Docky/Docky/DockletTile.cs:56
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:170
 msgid "Settings"
 msgstr "Instellingen"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:56
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:76
 msgid "Clear the Recent Documents list?"
 msgstr "Lijst van recent geopende documenten wissen?"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:58
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:78
 msgid "Clear Recent Documents"
 msgstr "Recente documenten wissen"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:60
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:80
 msgid ""
 "If you clear the Recent Documents list, you clear the following:\n"
 "• All items from the Places → Recent Documents menu item.\n"
@@ -663,7 +666,7 @@ msgstr ""
 "• Alle items uit het menu-item Locaties → Recente documenten.\n"
 "• Alle items uit de recente documentenlijst van alle toepassingen."
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:81
+#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
 msgid "_Clear Recent Documents..."
 msgstr "Wis Recente Do_cumenten"
 
@@ -728,75 +731,79 @@ msgstr ""
 msgid "A timer set for {0} has expired."
 msgstr "Een timer van {0} is beëindigd."
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:232
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:242
 msgid "Time remaining:"
 msgstr "Resterende tijd:"
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:234
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:244
 msgid "Timer paused, time remaining:"
 msgstr "Timer gepauzeerd, resterende tijd:"
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:245
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:255
 msgid "Set the timer's label to:"
 msgstr "Voer de timers label in:"
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:251
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:285
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:261
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:299
 msgid "_Set Label"
 msgstr "Voer _label in"
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:276
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:286
 msgid "_Pause Timer"
 msgstr "_Pauzeer timer"
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:276
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:286
 msgid "_Start Timer"
 msgstr "_Start timer"
 
-#: ../StandardPlugins/Timer/src/TimerDockItem.cs:280
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:290
+msgid "R_eset Timer"
+msgstr ""
+
+#: ../StandardPlugins/Timer/src/TimerDockItem.cs:294
 msgid "_Remove Timer"
 msgstr "_Verwijder timer"
 
-#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:56
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:57
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "uur"
 msgstr[1] "uur"
 
-#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:60
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:61
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minuut"
 msgstr[1] "minuten"
 
-#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:65
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:66
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "seconde"
 msgstr[1] "seconden"
 
-#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:132
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:145
 #, csharp-format
 msgid "Click to create a timer for {0}."
 msgstr "Klik om een timer aan te maken van {0}."
 
-#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:149
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:162
 msgid "Automatically _Start Timers"
 msgstr "_Start timers automatisch"
 
-#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:153
+#: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:166
 msgid "Automatically _Dismiss Timers"
 msgstr "_Verwijder timers automatisch"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:55
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:50
 msgid "Drop to move to Trash"
 msgstr "Sleep om het te verplaatsen naar de prullenbak"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:82
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:77
 msgid "No items in Trash"
 msgstr "Prullenbak is leeg"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:84
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:79
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
@@ -807,20 +814,20 @@ msgstr[1] "{0} items in de prullenbak"
 msgid "Restore Files"
 msgstr "Bestanden terugzetten"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:200
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:164
 msgid "_Open Trash"
 msgstr "Prullenbak _openen"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:202
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:233
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:166
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:203
 msgid "Empty _Trash"
 msgstr "_Prullenbak legen"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:225
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:188
 msgid "Empty all of the items from the trash?"
 msgstr "Verwijder alle objecten uit de prullenbak?"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:227
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:190
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
@@ -850,7 +857,9 @@ msgstr "Automatisch Updaten _Elke"
 msgid "Use _Metric Units"
 msgstr "Gebruik _Metrische Eenheden"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:171
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:98
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:101
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:106
 msgid "Invalid Weather Location"
 msgstr "Ongeldige Weerlocatie"
 
@@ -875,7 +884,7 @@ msgstr ""
 "weersvoorspelling op via de site. De code staat dan in de URL na '/local' en "
 "lijkt op AAXX0000."
 
-#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:56
+#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
@@ -896,27 +905,28 @@ msgstr "Weer instellingen"
 msgid "Click to add a location."
 msgstr "Klik om een locatie toe te voegen."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
 msgid "Fetching data..."
 msgstr "Gegevens ophalen..."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:222
 msgid "Radar _Map"
 msgstr "Radar_kaart"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:227
 msgid "Forecasts"
 msgstr "Forecasts"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:252
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:243
 msgid "Check _Weather"
 msgstr "Controleer _weersvoorspellingen"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
 msgid "_Today"
 msgstr "_Vandaag"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
 msgid "T_omorrow"
 msgstr "M_orgen"
 
@@ -958,21 +968,8 @@ msgstr "Virtueel Bureau"
 #~ msgid "_Remove"
 #~ msgstr "_Verwijderen"
 
-#~ msgid ""
-#~ "Causes launchers which currently manage more than one window to have an "
-#~ "extra indicator under it."
-#~ msgstr ""
-#~ "Geeft onder de  startprogramma's die nu meer dan een venster aansturen een "
-#~ "extra indicator"
-
-#~ msgid "Docky Configuration"
-#~ msgstr "Docky Instellingen"
-
 #~ msgid "_Start When Computer Starts"
 #~ msgstr "_Starten bij het opstarten van de computer"
-
-#~ msgid "Indicat_e Multiple Windows"
-#~ msgstr "Indic_eer Meerdere Vensters"
 
 #~ msgid "Username or Password not set"
 #~ msgstr "Gebruikersnaam of paswoord niet ingesteld"
