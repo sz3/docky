@@ -210,6 +210,7 @@ namespace Docky.Services
 			if (info != null)
 				info.Dispose ();
 			enumerator.Close (null);
+			enumerator.Dispose ();
 		}
 		
 		// This is the recursive equivalent of GLib.File.Copy ()

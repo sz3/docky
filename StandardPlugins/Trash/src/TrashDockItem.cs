@@ -182,6 +182,7 @@ namespace Trash
 				if (info != null)
 					info.Dispose ();
 				enumerator.Close (null);
+				enumerator.Dispose ();
 			}
 			
 			/* FIXME
