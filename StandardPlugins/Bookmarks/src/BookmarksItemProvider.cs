@@ -70,9 +70,8 @@ namespace Bookmarks
 		
 		File BookmarksFile {
 			get {
-				if (bookmarks_file == null) {
+				if (bookmarks_file == null)
 					bookmarks_file = FileFactory.NewForPath (Environment.GetFolderPath (Environment.SpecialFolder.Personal)).GetChild (".gtk-bookmarks");
-				}
 				return bookmarks_file;
 			}
 		}
@@ -127,11 +126,12 @@ namespace Bookmarks
 						items.Add (item);
 						item.ForcedHoverText = name;
 					} else if (bookmark.StringUri ().StartsWith ("file://") && !bookmark.Exists) {
-						Log<BookmarksItemProvider>.Warn ("Bookmark path '{0}' does not exist, please fix the bookmarks file",
-						    bookmark.StringUri ());
+						Log<BookmarksItemProvider>.Warn ("Bookmark path '{0}' does not exist, please fix the bookmarks file", bookmark.StringUri ());
 						continue;
 					} else {
-						items.Add (FileDockItem.NewFromUri (bookmark.StringUri (), name, "folder"));
+						FileDockItem item = FileDockItem.NewFromUri (bookmark.StringUri (), name, "folder");
+						if (item != null)
+							items.Add (item);
 					}
 				}
 			}
@@ -145,9 +145,7 @@ namespace Bookmarks
 		#region IDockItemProvider implementation
 		
 		public override string Name {
-			get {
-				return "Bookmark Items";
-			}
+			get { return "Bookmark Items"; }
 		}		
 		
 		protected override bool OnCanAcceptDrop (string uri)
@@ -168,9 +166,8 @@ namespace Bookmarks
 				using (DataOutputStream writer = new DataOutputStream (tempFile.AppendTo (FileCreateFlags.None, null))) {
 					string line;
 					ulong length;
-					while ((line = reader.ReadLine (out length, null)) != null) {
+					while ((line = reader.ReadLine (out length, null)) != null)
 						writer.PutString (string.Format ("{0}{1}", line, reader.NewLineString ()), null);
-					}
 					
 					writer.PutString (string.Format ("{0}{1}", bookmark.Uri, reader.NewLineString ()), null);
 				}
@@ -207,9 +204,9 @@ namespace Bookmarks
 					string line;
 					ulong length;
 					while ((line = reader.ReadLine (out length, null)) != null) {
-						if (line.Split (' ')[0] != bookmark.Uri)
+						if (line.Split (' ')[0] != bookmark.Uri) {
 							writer.PutString (string.Format ("{0}{1}", line, reader.NewLineString ()), null);
-						else {
+						} else {
 							items.Remove (bookmark);
 							Items = InnerItems;
 							Log<BookmarksItemProvider>.Debug ("Removing '{0}'", bookmark.HoverText);
@@ -225,9 +222,7 @@ namespace Bookmarks
 		}
 		
 		public override bool Separated {
-			get {
-				return true;
-			}
+			get { return true; }
 		}
 		
 		#endregion
