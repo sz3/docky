@@ -185,7 +185,6 @@ namespace Docky.Services
 			}
 			
 			bool matched = false;
-			int currentPid = 0;
 			
 			// get ppid and parents
 			IEnumerable<int> pids = PidAndParents (pid);
@@ -233,17 +232,17 @@ namespace Docky.Services
 				}
 			}
 			
-			do {
+			foreach (int currentPid in pids) {
 				// do a match on the process name
-				string name = NameForPid (pids.ElementAt (currentPid));
+				string name = NameForPid (currentPid);
 				foreach (DesktopItem s in DockServices.DesktopItems.DesktopItemsFromExec (name)) {
 					yield return s;
 					matched = true;
 				}
 				
-					// otherwise do a match on the commandline
-				commandLine.AddRange (CommandLineForPid (pids.ElementAt (currentPid++))
-				.Select (cmd => cmd.Replace (@"\", @"\\")));
+				// otherwise do a match on the commandline
+				commandLine.AddRange (CommandLineForPid (currentPid)
+					.Select (cmd => cmd.Replace (@"\", @"\\")));
 				
 				if (commandLine.Count () == 0)
 					continue;
@@ -260,7 +259,7 @@ namespace Docky.Services
 				// if we found a match, bail.
 				if (matched)
 					yield break;
-			} while (currentPid < pids.Count ());
+			}
 			
 			yield break;
 		}
