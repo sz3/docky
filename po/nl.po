@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-11-28 18:41+0100\n"
-"PO-Revision-Date: 2010-11-06 11:28+0000\n"
+"PO-Revision-Date: 2010-12-12 15:41+0000\n"
 "Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-12-12 13:21+0000\n"
+"X-Launchpad-Export-Date: 2010-12-19 15:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:147
@@ -258,7 +258,7 @@ msgstr "Intelligent verbergen"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:63
 msgid "Window Dodge"
-msgstr ""
+msgstr "Ontwijk vensters"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
 msgid "_Fade On Hide"
@@ -291,7 +291,7 @@ msgstr "_Zoom:"
 #: ../Docky.Items/Docky.Items/AbstractDockItem.cs:119
 #, csharp-format
 msgid "Drop to open with {0}"
-msgstr ""
+msgstr "Laat los om met {0} te openen"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:180
 msgid "New _Window"
@@ -313,14 +313,14 @@ msgstr "Vastzetten o_p het dock"
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:75
 #, csharp-format
 msgid "Drop to move to {0}"
-msgstr ""
+msgstr "Laat los om naar {0} te verplaatsen"
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:194
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:239
 msgid "Error performing drop action"
-msgstr ""
+msgstr "Fout bij het verslepen"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:194
 msgid "Not enough free space on destination."
@@ -515,11 +515,11 @@ msgstr "Ongeldige gebruikersnaam"
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:292
 msgid "Network Error"
-msgstr "Netwerk Fout"
+msgstr "Netwerkfout"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:295
 msgid "General Error"
-msgstr "Algemene Fout"
+msgstr "Algemene fout"
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
 msgid "Gmail Configuration"
@@ -538,7 +538,7 @@ msgstr[1] "{0} ongelezen berichten"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:119
 msgid "Checking mail..."
-msgstr "Controleert op e-mail..."
+msgstr "Op e-mail controleren…"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:193
 msgid "_View "
@@ -546,7 +546,7 @@ msgstr "_Toon "
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:198
 msgid "_Compose Mail"
-msgstr "_Nieuw Bericht"
+msgstr "_Nieuw bericht"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:211
 msgid "View C_ontacts"
@@ -558,7 +558,7 @@ msgstr "Nieuw bericht"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:222
 msgid "Check _Mail"
-msgstr "Controleer _Mail"
+msgstr "Controleer e-_mail"
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
@@ -570,7 +570,7 @@ msgstr "Gmail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr "Login"
+msgstr "Aanmelden"
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
@@ -590,7 +590,7 @@ msgstr "Netwerkbeheerder"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
-msgstr "Verbinden..."
+msgstr "Verbinden…"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:101
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:166
@@ -604,7 +604,7 @@ msgstr "Verbonden: {0}"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:47
 msgid "My _Stations"
-msgstr ""
+msgstr "Mijn _zenders"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:78
 msgid "S_earch"
@@ -617,15 +617,15 @@ msgstr "Geen zenders gevonden."
 #: ../StandardPlugins/NPR/src/Station.cs:73
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
-msgstr "Gelieve uw zoekopdracht opnieuw te proberen"
+msgstr "Probeer opnieuw te zoeken."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:46
 msgid "Fetching Information..."
-msgstr "Informatie Ophalen..."
+msgstr "Informatie ophalen…"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:72
 msgid "Click to add NPR stations."
-msgstr "Klik om NPR zenders toe te voegen."
+msgstr "Klik om NPR-zenders toe te voegen."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:111
 msgid "Home Page"
@@ -641,7 +641,7 @@ msgstr "Doneer"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:132
 msgid "Live Streams"
-msgstr "Live Streams"
+msgstr "Live streams"
 
 #: ../Docky/Docky/DockletTile.cs:56
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:170
@@ -662,13 +662,13 @@ msgid ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
-"Als u de Recente documentenlijst wist, dan gooit u het volgende weg:\n"
+"Als u de recente documenten-lijst wist zal het volgende verwijderd worden:\n"
 "• Alle items uit het menu-item Locaties → Recente documenten.\n"
-"• Alle items uit de recente documentenlijst van alle toepassingen."
+"• Alle items uit de recente documenten-lijst van alle toepassingen."
 
 #: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
 msgid "_Clear Recent Documents..."
-msgstr "Wis Recente Do_cumenten"
+msgstr "_Wis recente documenten…"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
 msgid "Lock Screen"
@@ -797,7 +797,7 @@ msgstr "_Verwijder timers automatisch"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:50
 msgid "Drop to move to Trash"
-msgstr "Sleep om het te verplaatsen naar de prullenbak"
+msgstr "Sleep om het naar de prullenbak te verplaatsen"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:77
 msgid "No items in Trash"
@@ -825,7 +825,7 @@ msgstr "_Prullenbak legen"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:188
 msgid "Empty all of the items from the trash?"
-msgstr "Verwijder alle objecten uit de prullenbak?"
+msgstr "Alle items uit de prullenbak verwijderen?"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:190
 msgid ""
@@ -833,17 +833,17 @@ msgid ""
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
-"Als u er voor kiest om de prullenbak te legen, zullen alle bestanden erin\n"
-"permanent verloren gaan. Hou er alstublieft rekening mee\n"
-"dat u ze ook apart kunt verwijderen."
+"Als u er voor kiest om de prullenbak te legen, zullen alle bestanden\n"
+"permanent verloren gaan. Denk er aan dat het ook mogelijk is om\n"
+"bestanden apart te verwijderen."
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:65
 msgid "_Weather Provider:"
-msgstr "_Weer Provider:"
+msgstr "_Weerbericht-provider:"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:105
 msgid "My _Locations"
-msgstr "Mijn _Locaties"
+msgstr "Mijn _locaties"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:136
 msgid "_Search"
@@ -851,17 +851,17 @@ msgstr "_Zoeken"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:176
 msgid "Automatically Update _Every"
-msgstr "Automatisch Updaten _Elke"
+msgstr "_Ververs informatie elke"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:220
 msgid "Use _Metric Units"
-msgstr "Gebruik _Metrische Eenheden"
+msgstr "Gebruik _metrische eenheden"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:98
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:101
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:106
 msgid "Invalid Weather Location"
-msgstr "Ongeldige Weerlocatie"
+msgstr "Ongeldige weerlocatie"
 
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
@@ -869,7 +869,7 @@ msgid ""
 "specified as US Zip Code or 'City, Country'."
 msgstr ""
 "Weergegevens geleverd door Google. Deze bron vereist dat de locatie gegeven "
-"wordt als een US Zip Code of 'Stad, Land'."
+"wordt als een US Zip Code of ‘Stad, Land’."
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
@@ -880,9 +880,9 @@ msgid ""
 msgstr ""
 "Weergegevens geleverd en auteursrechtelijk beschermd door The Weather "
 "Channel. Deze bron vereist dat de locatie gegeven wordt als een VS Zip Code "
-"of hun unieke code op de website. Om je code te vinden, zoek je de gevraagde "
-"weersvoorspelling op via de site. De code staat dan in de URL na '/local' en "
-"lijkt op AAXX0000."
+"of hun unieke code op de website. Om de code te vinden kunt u de gevraagde "
+"weersvoorspelling op via de site opzoeken. De code staat dan in de URL na "
+"'/local' en lijkt op AAXX0000."
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
 msgid ""
@@ -891,15 +891,15 @@ msgid ""
 msgstr ""
 "Weergegevens geleverd en auteursrechtelijk beschermd door Weather "
 "Underground. Deze bron vereist dat de locatie gegeven wordt als een US Zip "
-"Code of 'Stad, Land'."
+"Code of ‘Stad, Land’."
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
-msgstr "Geen resultaat gevonden."
+msgstr "Geen resultaten gevonden."
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
-msgstr "Weer instellingen"
+msgstr "Weer-instellingen"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
 msgid "Click to add a location."
@@ -908,7 +908,7 @@ msgstr "Klik om een locatie toe te voegen."
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
 msgid "Fetching data..."
-msgstr "Gegevens ophalen..."
+msgstr "Gegevens ophalen…"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:222
 msgid "Radar _Map"
@@ -916,7 +916,7 @@ msgstr "Radar_kaart"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:227
 msgid "Forecasts"
-msgstr "Forecasts"
+msgstr "Verwachtingen"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:243
 msgid "Check _Weather"
@@ -985,9 +985,6 @@ msgstr "Virtueel Bureau"
 
 #~ msgid "Feels Like"
 #~ msgstr "Voelt als"
-
-#~ msgid "Network Error: "
-#~ msgstr "Netwerk Fout: "
 
 #~ msgid "Sunset"
 #~ msgstr "Zonsondergang"

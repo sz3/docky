@@ -8,20 +8,20 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-11-28 18:41+0100\n"
-"PO-Revision-Date: 2010-11-06 11:27+0000\n"
-"Last-Translator: Rico Tzschichholz <Unknown>\n"
+"PO-Revision-Date: 2010-12-15 07:34+0000\n"
+"Last-Translator: R33D3M33R <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2010-12-12 13:21+0000\n"
+"X-Launchpad-Export-Date: 2010-12-19 15:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:147
 msgid "Search Docklets..."
-msgstr "Poišči vključke..."
+msgstr "Iskanje vključkov ..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:163
 msgid "Search Helpers..."
@@ -442,7 +442,7 @@ msgstr "ostaja "
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:154
 msgid "_Statistics"
-msgstr ""
+msgstr "_Statistika"
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:86
 msgid "Computer"
@@ -474,7 +474,7 @@ msgstr "Tema"
 
 #: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:42
 msgid "Show Desktop"
-msgstr ""
+msgstr "Pokaži namizje"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
 msgid "_Add Label"
@@ -510,7 +510,7 @@ msgstr "Od: {0}"
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:278
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:281
 msgid "Feed Error"
-msgstr ""
+msgstr "Napaka vira"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:285
 msgid "Invalid Username"
@@ -678,36 +678,36 @@ msgstr "Počis_ti nedavne dokumente..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
 msgid "Lock Screen"
-msgstr ""
+msgstr "Zakleni zaslon"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:157
 msgid "Log Out..."
-msgstr ""
+msgstr "Odjava ..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
 msgid "Log Out"
-msgstr ""
+msgstr "Odjava"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:159
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
-msgstr ""
+msgstr "Resnično želite zapreti vse programe in se odjaviti iz sistema?"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:164
 msgid "Suspend"
-msgstr ""
+msgstr "V pripravljenost"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:169
 msgid "Hibernate"
-msgstr ""
+msgstr "V mirovanje"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:175
 msgid "Restart..."
-msgstr ""
+msgstr "Ponovni zagon ..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
 msgid "Restart"
-msgstr ""
+msgstr "Ponovni zagon"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:177
 msgid "Are you sure you want to close all programs and restart the computer?"
@@ -717,16 +717,16 @@ msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:182
 msgid "Shut Down..."
-msgstr ""
+msgstr "Izklop ..."
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:183
 msgid "Shut Down"
-msgstr ""
+msgstr "Izklop"
 
 #: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:184
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
-msgstr ""
+msgstr "Resnično želite zapreti vse programe in izklopiti računalnik?"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:86
 #, csharp-format
@@ -735,7 +735,7 @@ msgstr "Odštevalnik, nastavljen na {0} je potekel"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:242
 msgid "Time remaining:"
-msgstr ""
+msgstr "Preostali čas:"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:244
 msgid "Timer paused, time remaining:"
@@ -760,7 +760,7 @@ msgstr "Zaž_eni odštevalnik"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:290
 msgid "R_eset Timer"
-msgstr ""
+msgstr "Ponastavi št_evec"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:294
 msgid "_Remove Timer"
@@ -769,20 +769,26 @@ msgstr "O_dstrani odštevalnik"
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:57
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ur"
+msgstr[1] "ura"
+msgstr[2] "uri"
+msgstr[3] "ure"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:61
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minut"
+msgstr[1] "minuta"
+msgstr[2] "minuti"
+msgstr[3] "minute"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:66
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "sekund"
+msgstr[1] "sekunda"
+msgstr[2] "sekundi"
+msgstr[3] "sekunde"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:145
 #, csharp-format
@@ -855,17 +861,17 @@ msgstr "_Poišči"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:176
 msgid "Automatically Update _Every"
-msgstr ""
+msgstr "Samod_ejno posodobi vsakih"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:220
 msgid "Use _Metric Units"
-msgstr ""
+msgstr "Uporabi _metrične enote"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:98
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:101
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:106
 msgid "Invalid Weather Location"
-msgstr ""
+msgstr "Neveljavna vremenska lokacija"
 
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
@@ -893,36 +899,36 @@ msgstr "Ni rezultatov."
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
-msgstr ""
+msgstr "Nastavitve vremena"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
 msgid "Click to add a location."
-msgstr ""
+msgstr "Kliknite za dodajanje lokacije."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
 msgid "Fetching data..."
-msgstr ""
+msgstr "Pridobivanje podatkov ..."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:222
 msgid "Radar _Map"
-msgstr ""
+msgstr "Radarska _slika"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:227
 msgid "Forecasts"
-msgstr ""
+msgstr "Napovedi"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:243
 msgid "Check _Weather"
-msgstr ""
+msgstr "Preveri _vreme"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
 msgid "_Today"
-msgstr ""
+msgstr "_Danes"
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
 msgid "T_omorrow"
-msgstr ""
+msgstr "J_utri"
 
 #. draw humidity
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:328
