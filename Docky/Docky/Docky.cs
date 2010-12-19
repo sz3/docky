@@ -127,6 +127,7 @@ namespace Docky
 			if (Gdk.Screen.Default.IsComposited && compositeNotify != null) {
 				compositeNotify.Close ();
 				compositeNotify = null;
+				return;
 			}
 			
 			checkCompositeTimer = GLib.Timeout.Add (timeout * 1000, delegate {
