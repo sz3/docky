@@ -94,7 +94,6 @@ namespace Docky
 		public override void OnActiveChanged ()
 		{
 			Helper.Enabled = !Enabled;
-			SetProps ();
 		}
 		
 		void HandleHelperStatusChanged (object sender, HelperStatusChangedEventArgs e)

@@ -56,12 +56,13 @@ namespace Docky.Services.Helpers
 			}
 		}
 		
+		bool enabled;
 		public bool Enabled {
 			get {
-				return prefs.Get<bool> (prefs.SanitizeKey (File.Basename), false);
+				return enabled;
 			}
 			set {
-				if (Enabled == value)
+				if (enabled == value)
 					return;
 				
 				if (value)
@@ -69,7 +70,8 @@ namespace Docky.Services.Helpers
 				else
 					Stop ();
 				
-				prefs.Set<bool> (prefs.SanitizeKey (File.Basename), value);
+				enabled = value;
+				prefs.Set<bool> (prefs.SanitizeKey (File.Basename), enabled);
 				OnHelperStatusChanged ();
 			}
 		}
@@ -86,6 +88,7 @@ namespace Docky.Services.Helpers
 		{
 			File = file;
 			IsUser = file.Path.StartsWith (HelperService.UserDir.Path);
+			enabled = prefs.Get<bool> (prefs.SanitizeKey (File.Basename), false);
 			
 			GLib.File DataFile;
 			if (IsUser)
