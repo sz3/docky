@@ -56,6 +56,8 @@ namespace Clippy
 					return;
 				if (clips.Count == 0 || !clips[clips.Count - 1].Equals(text)) {
 					clips.Add (text);
+					while (clips.Count > 15)
+						clips.RemoveAt (0);
 					curPos = clips.Count;
 					Updated ();
 				}
