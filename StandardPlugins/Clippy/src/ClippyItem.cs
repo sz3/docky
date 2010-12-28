@@ -33,8 +33,9 @@ namespace Clippy
 	{
 		static IPreferences prefs = DockServices.Preferences.Get<ClippyItem> ();
 
-		uint timerDelay = prefs.Get<uint> ("TimerDelay", 500);
-		uint maxEntries = prefs.Get<uint> ("MaxEntries", 15);
+		bool trackMouseSelections = prefs.Get<bool> ("TrackMouseSelections", false);
+		uint timerDelay = (uint)prefs.Get<int> ("TimerDelay", 500);
+		uint maxEntries = (uint)prefs.Get<int> ("MaxEntries", 15);
 
 		List<string> clips = new List<string> ();
 		int curPos = -1;
@@ -44,7 +45,7 @@ namespace Clippy
 			return "Clippy";
 		}
 
-		Gtk.Clipboard clipboard = Gtk.Clipboard.Get (Gdk.Selection.Clipboard);
+		Gtk.Clipboard clipboard;
 
 		uint timer;
 		
@@ -52,13 +53,19 @@ namespace Clippy
 		{
 			Icon = "edit-cut";
 
+			if (trackMouseSelections)
+				clipboard = Gtk.Clipboard.Get (Gdk.Selection.Primary);
+			else
+				clipboard = Gtk.Clipboard.Get (Gdk.Selection.Clipboard);
+
 			timer = GLib.Timeout.Add (timerDelay, CheckClipboard);
+			Updated ();
 		}
 
 		bool CheckClipboard ()
 		{
 			clipboard.RequestText ((cb, text) => {
-				if (text == null)
+				if (string.IsNullOrEmpty (text))
 					return;
 				if (clips.Count == 0 || !clips[clips.Count - 1].Equals(text)) {
 					clips.Add (text);
@@ -78,17 +85,17 @@ namespace Clippy
 
 		void Updated ()
 		{
-			if (curPos == -1 && clips.Count > 0)
-				HoverText = GetClipboardAt (clips.Count);
-			else if (curPos > clips.Count)
+			if (clips.Count == 0)
 				HoverText = Catalog.GetString ("Clipboard is currently empty.");
+			else if (curPos == -1 || curPos > clips.Count)
+				HoverText = GetClipboardAt (clips.Count);
 			else
 				HoverText = GetClipboardAt (curPos);
 		}
 
 		void CopyEntry (int pos)
 		{
-			if (pos > clips.Count)
+			if (pos < 1 || pos > clips.Count)
 				return;
 
 			clipboard.Text = clips[pos - 1];
@@ -99,7 +106,10 @@ namespace Clippy
 
 		void CopyEntry ()
 		{
-			CopyEntry (curPos);
+			if (curPos == -1)
+				CopyEntry (clips.Count);
+			else
+				CopyEntry (curPos);
 		}
 		
 		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
@@ -119,7 +129,7 @@ namespace Clippy
 
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
-			if (button == 1) {
+			if (button == 1 && clips.Count > 0) {
 				CopyEntry ();
 				return ClickAnimation.Bounce;
 			}
