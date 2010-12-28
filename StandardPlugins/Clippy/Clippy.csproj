@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2F5FDD02-4BDA-4E80-8B92-A8BD55FFBC81}</ProjectGuid>
+    <ProjectGuid>{E15414F1-C6F7-4D3E-8D25-BF32F93D3818}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Clippy</RootNamespace>
     <AssemblyName>Clippy</AssemblyName>
