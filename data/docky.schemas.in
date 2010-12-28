@@ -1,6 +1,40 @@
 <gconfschemafile>
 	<schemalist>
 		<schema>
+			<key>/schemas/apps/docky-2/Clippy/ClippyItem/MaxEntries</key>
+			<applyto>/apps/docky-2/Clippy/ClippyItem/MaxEntries</applyto>
+			<owner>docky</owner>
+			<type>int</type>
+			<default>15</default>
+			<locale name="C">
+				<short>Max Entries</short>
+				<long>How many recent clipboard selections to show.</long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Clippy/ClippyItem/TimerDelay</key>
+			<applyto>/apps/docky-2/Clippy/ClippyItem/TimerDelay</applyto>
+			<owner>docky</owner>
+			<type>int</type>
+			<default>500</default>
+			<locale name="C">
+				<short>Timer Delay</short>
+				<long>How often to poll (in ms) for new clipboard data.</long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Clippy/ClippyItem/TrackMouseSelections</key>
+			<applyto>/apps/docky-2/Clippy/ClippyItem/TrackMouseSelections</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>false</default>
+			<locale name="C">
+				<short>Track Mouse Selections</short>
+				<long>If true, tracks the mouse selection clipboard. If false, tracks the secondary clipboard.</long>
+			</locale>
+		</schema>
+
+		<schema>
 			<key>/schemas/apps/docky-2/Clock/ClockDockItem/ClockTheme</key>
 			<applyto>/apps/docky-2/Clock/ClockDockItem/ClockTheme</applyto>
 			<owner>docky</owner>
