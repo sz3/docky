@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2010 Rico Tzschichholz, Robert Dyer
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,24 +16,31 @@
 // 
 
 using System;
+using System.Collections.Generic;
 
 using Docky.Items;
 
 namespace Desktop
 {
-	public class DesktopDockItem : ProxyDockItem
+	public class DesktopActionsProvider : AbstractDockItemProvider
 	{
-		#region AbstractDockItem implementation
+		#region IDockItemProvider implementation
 		
-		public override string UniqueID ()
-		{
-			return "Desktop";
+		public override string Name {
+			get {
+				return "DesktopActions";
+			}
 		}
 		
 		#endregion
-		
-		public DesktopDockItem () : base (new DesktopActionsProvider ())
+
+		public DesktopActionsProvider ()
 		{
+			List<AbstractDockItem> items = new List<AbstractDockItem> ();
+			items.Add (new ShowDesktopItem ());
+			items.Add (new TileDesktopItem ());
+			items.Add (new CascadeDesktopItem ());
+			Items = items;
 		}
 	}
 }

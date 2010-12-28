@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2010 Rico Tzschichholz, Robert Dyer
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,24 +16,36 @@
 // 
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+
+using Mono.Unix;
 
 using Docky.Items;
+using WindowManager.Wink;
 
 namespace Desktop
 {
-	public class DesktopDockItem : ProxyDockItem
+	public class TileDesktopItem : IconDockItem
 	{
-		#region AbstractDockItem implementation
-		
 		public override string UniqueID ()
 		{
-			return "Desktop";
+			return "TileDesktop";
 		}
 		
-		#endregion
-		
-		public DesktopDockItem () : base (new DesktopActionsProvider ())
+		public TileDesktopItem ()
 		{
+			HoverText = Catalog.GetString ("Tile Desktop");
+			Icon = "desktop";
+		}
+
+		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
+		{
+			if (button == 1) {
+				ScreenUtils.ActiveViewport.Tile ();
+				return ClickAnimation.Bounce;
+			}
+			return ClickAnimation.None;
 		}
 	}
 }

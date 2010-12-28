@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2010 Rico Tzschichholz
+//  Copyright (C) 2010 Rico Tzschichholz, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -19,13 +19,12 @@ using System;
 using System.Collections.Generic;
 
 using Docky.Items;
+using WindowManager.Wink;
 
 namespace Desktop
 {
 	public class DesktopItemProvider : AbstractDockItemProvider
 	{
-		List<AbstractDockItem> items;
-
 		#region IDockItemProvider implementation
 		
 		public override string Name {
@@ -36,14 +35,10 @@ namespace Desktop
 		
 		#endregion
 
-		DesktopDockItem desktop;
-
 		public DesktopItemProvider ()
 		{
-			desktop = new DesktopDockItem ();
-			items = new List<AbstractDockItem> ();
-			items.Add (desktop);
-			Items = items;
+			ScreenUtils.Initialize ();
+			Items = (new DesktopDockItem ()).AsSingle<AbstractDockItem> ();
 		}
 	}
 }

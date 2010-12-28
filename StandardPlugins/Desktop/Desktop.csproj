@@ -30,6 +30,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="src\DesktopDockItem.cs" />
+    <Compile Include="src\ShowDesktopItem.cs" />
+    <Compile Include="src\TileDesktopItem.cs" />
+    <Compile Include="src\DesktopActionsProvider.cs" />
     <Compile Include="src\DesktopItemProvider.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -21,7 +21,9 @@ StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs
 StandardPlugins/Clippy/src/ClippyItem.cs
 StandardPlugins/Clock/src/ClockDockItem.cs
 StandardPlugins/Clock/src/ClockThemeSelector.cs
-StandardPlugins/Desktop/src/DesktopDockItem.cs
+StandardPlugins/Desktop/src/ShowDesktopItem.cs
+StandardPlugins/Desktop/src/TileDesktopItem.cs
+StandardPlugins/Desktop/src/CascadeDesktopItem.cs
 StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs
 StandardPlugins/GMail/src/GMailAtom.cs
 StandardPlugins/GMail/src/GMailConfigDialog.cs

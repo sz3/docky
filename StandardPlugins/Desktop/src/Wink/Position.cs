@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2010 Rico Tzschichholz, Robert Dyer
+//  Copyright (C) 2009 GNOME Do
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,23 +17,12 @@
 
 using System;
 
-using Docky.Items;
-
-namespace Desktop
+namespace WindowManager.Wink
 {
-	public class DesktopDockItem : ProxyDockItem
-	{
-		#region AbstractDockItem implementation
-		
-		public override string UniqueID ()
-		{
-			return "Desktop";
-		}
-		
-		#endregion
-		
-		public DesktopDockItem () : base (new DesktopActionsProvider ())
-		{
-		}
+	public enum Position {
+		Left = 0,
+		Right,
+		Top,
+		Bottom,
 	}
 }

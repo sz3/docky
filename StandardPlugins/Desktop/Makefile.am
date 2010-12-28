@@ -4,7 +4,17 @@ include $(top_srcdir)/build.rules.docklets.mk
 ASSEMBLY = Desktop
 
 FILES = \
+	src/Xlib/X11Atoms.cs \
+	src/Xlib/Xlib.cs \
+	src/Wink/Position.cs \
+	src/Wink/Viewport.cs \
+	src/Wink/ScreenUtils.cs \
+	src/Wink/WnckWindow_Extensions.cs \
 	src/DesktopDockItem.cs \
+	src/ShowDesktopItem.cs \
+	src/TileDesktopItem.cs \
+	src/CascadeDesktopItem.cs \
+	src/DesktopActionsProvider.cs \
 	src/DesktopItemProvider.cs
 	
 RESOURCES = \

@@ -17,23 +17,34 @@
 
 using System;
 
+using Mono.Unix;
+using Wnck;
+
 using Docky.Items;
+using WindowManager.Wink;
 
 namespace Desktop
 {
-	public class DesktopDockItem : ProxyDockItem
+	public class ShowDesktopItem : IconDockItem
 	{
-		#region AbstractDockItem implementation
-		
 		public override string UniqueID ()
 		{
-			return "Desktop";
+			return "ShowDesktop";
 		}
 		
-		#endregion
-		
-		public DesktopDockItem () : base (new DesktopActionsProvider ())
+		public ShowDesktopItem ()
 		{
+			HoverText = Catalog.GetString ("Show Desktop");
+			Icon = "desktop";
+		}
+
+		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
+		{
+			if (button == 1) {
+				ScreenUtils.ActiveViewport.ShowDesktop ();
+				return ClickAnimation.Bounce;
+			}
+			return ClickAnimation.None;
 		}
 	}
 }
