@@ -65,7 +65,6 @@ namespace Docky.Items
 					CurrentPosition = 0;
 			}
 			
-			Provider.ItemsChanged += HandleItemsChanged;
 			ItemChanged ();
 		}
 		
@@ -93,24 +92,18 @@ namespace Docky.Items
 			ItemChanged ();
 		}
 		
-		void HandleItemsChanged (object o, ItemsChangedArgs args)
-		{
-			foreach (AbstractDockItem adi in args.AddedItems) {
-				adi.HoverTextChanged += HandleHoverTextChanged;
-				adi.PaintNeeded      += HandlePaintNeeded;
-				adi.PainterRequest   += HandlePainterRequest;
-			}
-			
-			foreach (AbstractDockItem adi in args.RemovedItems) {
-				adi.HoverTextChanged -= HandleHoverTextChanged;
-				adi.PaintNeeded      -= HandlePaintNeeded;
-				adi.PainterRequest   -= HandlePainterRequest;
-			}
-		}
-		
 		void ItemChanged ()
 		{
+			if (currentItem != null) {
+				currentItem.HoverTextChanged -= HandleHoverTextChanged;
+				currentItem.PaintNeeded      -= HandlePaintNeeded;
+				currentItem.PainterRequest   -= HandlePainterRequest;
+			}
+			
 			currentItem = Provider.Items.ToArray ()[CurrentPosition];
+			currentItem.HoverTextChanged += HandleHoverTextChanged;
+			currentItem.PaintNeeded      += HandlePaintNeeded;
+			currentItem.PainterRequest   += HandlePainterRequest;
 
 			QueueRedraw ();
 			OnHoverTextChanged ();
@@ -285,13 +278,12 @@ namespace Docky.Items
 		
 		public override void Dispose ()
 		{
-			foreach (AbstractDockItem adi in Provider.Items) {
-				adi.HoverTextChanged -= HandleHoverTextChanged;
-				adi.PaintNeeded      -= HandlePaintNeeded;
-				adi.PainterRequest   -= HandlePainterRequest;
+			if (currentItem != null) {
+				currentItem.HoverTextChanged -= HandleHoverTextChanged;
+				currentItem.PaintNeeded      -= HandlePaintNeeded;
+				currentItem.PainterRequest   -= HandlePainterRequest;
 			}
 			
-			Provider.ItemsChanged -= HandleItemsChanged;
 			Provider.Dispose ();
 			
 			base.Dispose ();
