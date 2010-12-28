@@ -197,12 +197,24 @@ namespace Docky.Items
 			get { return currentItem.State; }
 		}
 		
+		public override DateTime AddTime {
+			get { return currentItem.AddTime; }
+		}
+		
+		public override DateTime LastClick {
+			get { return currentItem.LastClick; }
+		}
+		
 		public override MenuButton MenuButton {
 			get { return currentItem.MenuButton; }
 		}
 		
 		public override string DropText {
 			get { return currentItem.DropText; }
+		}
+		
+		public override ClickAnimation ClickAnimation {
+			get { return currentItem.ClickAnimation; }
 		}
 		
 		public override bool ScalableRendering {
@@ -235,6 +247,22 @@ namespace Docky.Items
 		
 		public override string BadgeText {
 			get { return currentItem.BadgeText; }
+		}
+		
+		public override int Position {
+			get { return currentItem.Position; }
+		}
+		
+		public override int LastPosition {
+			get { return currentItem.LastPosition; }
+		}
+		
+		public override AbstractDockItemProvider Owner {
+			get { return currentItem.Owner; }
+		}
+		
+		public override Docky.Menus.MenuList RemoteMenuItems {
+			get { return currentItem.RemoteMenuItems; }
 		}
 		
 		public override DateTime StateSetTime (ItemState state)

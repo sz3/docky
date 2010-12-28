@@ -99,12 +99,12 @@ namespace Docky.Items
 		/// <summary>
 		/// The time at which the item was added (and made visible) in the item provider
 		/// </summary>
-		public DateTime AddTime { get; internal set; }
+		public virtual DateTime AddTime { get; internal set; }
 		
 		/// <summary>
 		/// The last time this item was clicked
 		/// </summary>
-		public DateTime LastClick { get; private set; }
+		public virtual DateTime LastClick { get; private set; }
 		
 		/// <summary>
 		/// Which mouse buttons trigger the menu
@@ -123,7 +123,7 @@ namespace Docky.Items
 		/// <summary>
 		/// The animation with which the item wishes to display
 		/// </summary>
-		public ClickAnimation ClickAnimation { get; private set; }
+		public virtual ClickAnimation ClickAnimation { get; private set; }
 		
 		/// <summary>
 		/// Determines if the item will be rendered at multiple sizes when zoomed. Not advised for icons who
@@ -208,7 +208,7 @@ namespace Docky.Items
 		/// The position of the icon, non-providers should not modify this value!
 		/// </summary>
 		int position;
-		public int Position {
+		public virtual int Position {
 			get { 
 				return position; 
 			}
@@ -219,17 +219,17 @@ namespace Docky.Items
 			}
 		}
 		
-		public int LastPosition { get; private set; }
+		public virtual int LastPosition { get; private set; }
 		
 		/// <summary>
 		/// The owning provider of the item
 		/// </summary>
-		public AbstractDockItemProvider Owner { get; internal set; }
+		public virtual AbstractDockItemProvider Owner { get; internal set; }
 		
 		/// <summary>
 		/// 
 		/// </summary>
-		public Docky.Menus.MenuList RemoteMenuItems { get; private set; }
+		public virtual Docky.Menus.MenuList RemoteMenuItems { get; private set; }
 		
 		public void SetMessage (string message)
 		{
