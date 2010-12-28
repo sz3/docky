@@ -5,7 +5,9 @@ ASSEMBLY = SessionManager
 
 FILES = \
 	src/SessionManagerItemProvider.cs \
+	src/SessionActionsProvider.cs \
 	src/SessionManagerItem.cs \
+	src/SessionManagerActionItem.cs \
 	src/SystemManager.cs
 
 RESOURCES = \

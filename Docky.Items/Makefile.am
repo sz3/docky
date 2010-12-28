@@ -12,6 +12,7 @@ FILES = \
 	Docky.Items/Enumerable_Extensions.cs \
 	Docky.Items/ItemState.cs \
 	Docky.Menus/MenuItem.cs \
+	Docky.Menus/ProxyMenuItem.cs \
 	Docky.Menus/MenuList.cs \
 	Docky.Menus/SeparatorMenuItem.cs \
 	Docky.Menus/WindowMenuItem.cs \
@@ -26,6 +27,7 @@ FILES = \
 	Docky.Items/ClickAnimation.cs \
 	Docky.Items/PaintNeededEventArgs.cs \
 	Docky.Items/PainterRequestEventArgs.cs \
+	Docky.Items/ProxyDockItem.cs \
 	Docky.Items/FileApplicationProvider.cs \
 	Docky.Items/IconDockItem.cs \
 	Docky.Items/ColoredIconDockItem.cs \

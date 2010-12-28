@@ -85,7 +85,9 @@
     <Compile Include="Docky.Items\ActivityIndicator.cs" />
     <Compile Include="Docky.Items\ItemState.cs" />
     <Compile Include="Docky.Items\WindowDockItem.cs" />
+    <Compile Include="Docky.Items\ProxyDockItem.cs" />
     <Compile Include="Docky.Menus\MenuItem.cs" />
+    <Compile Include="Docky.Menus\ProxyMenuItem.cs" />
     <Compile Include="Docky.Menus\SeparatorMenuItem.cs" />
     <Compile Include="Docky.Menus\WindowMenuItem.cs" />
     <Compile Include="Docky.Items\Enumerable_Extensions.cs" />
