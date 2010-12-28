@@ -31,6 +31,7 @@ namespace Docky.Menus
 		CustomOne,
 		CustomTwo,
 		Footer,
+		ProxiedItems,
 	}
 	
 	public class MenuList

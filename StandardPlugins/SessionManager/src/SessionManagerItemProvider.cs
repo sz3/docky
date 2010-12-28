@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2010 Claudio Melis
+//  Copyright (C) 2010 Claudio Melis, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -38,12 +38,9 @@ namespace SessionManager
 
 		#endregion
 
-		SessionManagerItem session_manager;
-
 		public SessionManagerItemProvider ()
 		{
-			session_manager = new SessionManagerItem ();
-			Items = session_manager.AsSingle<AbstractDockItem> ();
+			Items = (new SessionManagerItem ()).AsSingle<AbstractDockItem> ();
 		}
 	}
 }

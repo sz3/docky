@@ -67,7 +67,7 @@ namespace Docky.Items
 		/// <summary>
 		/// Indicates if the item should have zero, one, or multiple indicate dots below it
 		/// </summary>
-		public ActivityIndicator Indicator {
+		public virtual ActivityIndicator Indicator {
 			get {
 				return indicator; 
 			}
@@ -82,7 +82,7 @@ namespace Docky.Items
 		/// <summary>
 		/// The current state of the item. Indicates wait, urgency, and active
 		/// </summary>
-		public ItemState State {
+		public virtual ItemState State {
 			get { return state; }
 			set {
 				if (state == value)
@@ -156,7 +156,7 @@ namespace Docky.Items
 		/// The progress (0 to 100) for the item.  If it is negative it should not be shown.
 		/// </summary>
 		double progress;
-		public double Progress {
+		public virtual double Progress {
 			get { return progress; }
 			set {
 				if (progress == value)
@@ -169,7 +169,7 @@ namespace Docky.Items
 		/// <summary>
 		/// The text displayed when an item is hovered
 		/// </summary>
-		public string HoverText {
+		public virtual string HoverText {
 			get {
 				return string.IsNullOrEmpty (remote_text) ? hover_text : remote_text;
 			}
@@ -178,7 +178,6 @@ namespace Docky.Items
 					return;
 				
 				hover_text = value;
-				text_buffer = ResetBuffer (text_buffer);
 				OnHoverTextChanged ();
 			}
 		}
@@ -193,7 +192,7 @@ namespace Docky.Items
 		/// <summary>
 		/// The text displayed over a badge
 		/// </summary>
-		public string BadgeText {
+		public virtual string BadgeText {
 			get {
 				return string.IsNullOrEmpty (remote_badge_text) ? badge_text : remote_badge_text;
 			}
@@ -287,7 +286,6 @@ namespace Docky.Items
 		public void SetRemoteText (string text)
 		{
 			remote_text = text;
-			text_buffer = ResetBuffer (text_buffer);
 			OnHoverTextChanged ();
 		}
 
@@ -305,7 +303,7 @@ namespace Docky.Items
 		/// <returns>
 		/// The <see cref="DateTime"/> at which the state was changed
 		/// </returns>
-		public DateTime StateSetTime (ItemState state)
+		public virtual DateTime StateSetTime (ItemState state)
 		{
 			return state_times [state];
 		}
@@ -417,7 +415,7 @@ namespace Docky.Items
 		/// <returns>
 		/// A <see cref="System.Boolean"/>
 		/// </returns>
-		public bool CanAcceptDrop (IEnumerable<string> uris)
+		public virtual bool CanAcceptDrop (IEnumerable<string> uris)
 		{
 			bool result = false;
 			try {
@@ -438,7 +436,7 @@ namespace Docky.Items
 		/// <returns>
 		/// A <see cref="System.Boolean"/>
 		/// </returns>
-		public bool AcceptDrop (IEnumerable<string> uris)
+		public virtual bool AcceptDrop (IEnumerable<string> uris)
 		{
 			bool result = false;
 			try {
@@ -459,7 +457,7 @@ namespace Docky.Items
 		/// <returns>
 		/// A <see cref="System.Boolean"/>
 		/// </returns>
-		public bool CanAcceptDrop (AbstractDockItem item)
+		public virtual bool CanAcceptDrop (AbstractDockItem item)
 		{
 			bool result = false;
 			try {
@@ -480,7 +478,7 @@ namespace Docky.Items
 		/// <returns>
 		/// A <see cref="System.Boolean"/>
 		/// </returns>
-		public bool AcceptDrop (AbstractDockItem item)
+		public virtual bool AcceptDrop (AbstractDockItem item)
 		{
 			bool result = false;
 			try {
@@ -531,7 +529,7 @@ namespace Docky.Items
 		/// <param name="yPercent">
 		/// A <see cref="System.Double"/> representing the percentage down the icon on which the click took place
 		/// </param>
-		public void Clicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
+		public virtual void Clicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
 			try {
 				ClickAnimation = OnClicked (button, mod, xPercent, yPercent);
@@ -558,7 +556,7 @@ namespace Docky.Items
 		/// <param name="mod">
 		/// A <see cref="Gdk.ModifierType"/>
 		/// </param>
-		public void Scrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
+		public virtual void Scrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
 		{
 			try {
 				OnScrolled (direction, mod);
@@ -588,7 +586,7 @@ namespace Docky.Items
 		/// <returns>
 		/// A <see cref="DockySurface"/>
 		/// </returns>
-		public DockySurface IconSurface (DockySurface model, int size, int iconSize, int threeDimHeight)
+		public virtual DockySurface IconSurface (DockySurface model, int size, int iconSize, int threeDimHeight)
 		{
 			IconSize = iconSize;
 			
@@ -996,7 +994,7 @@ namespace Docky.Items
 		/// <returns>
 		/// A <see cref="Docky.Menus.MenuList"/>
 		/// </returns>
-		public Docky.Menus.MenuList GetMenuItems ()
+		public virtual Docky.Menus.MenuList GetMenuItems ()
 		{
 			try {
 				return OnGetMenuItems ().Combine (RemoteMenuItems);
@@ -1014,7 +1012,7 @@ namespace Docky.Items
 		
 		protected Gtk.Style Style { get; private set; }
 		
-		public void SetStyle (Gtk.Style style)
+		public virtual void SetStyle (Gtk.Style style)
 		{
 			Style = style;
 			try {
@@ -1037,7 +1035,7 @@ namespace Docky.Items
 			// do nothing
 		}
 		
-		public void SetScreenRegion (Gdk.Screen screen, Gdk.Rectangle region)
+		public virtual void SetScreenRegion (Gdk.Screen screen, Gdk.Rectangle region)
 		{
 			try {
 				OnSetScreenRegion (screen, region);
@@ -1052,8 +1050,9 @@ namespace Docky.Items
 			return;
 		}
 		
-		void OnHoverTextChanged ()
+		protected void OnHoverTextChanged ()
 		{
+			text_buffer = ResetBuffer (text_buffer);
 			if (HoverTextChanged != null)
 				HoverTextChanged (this, EventArgs.Empty);
 		}
