@@ -34,14 +34,14 @@ namespace SessionManager
 			return "SessionManager";
 		}
 
-		public SessionManagerItem () : base (new ActionsProvider (), prefs)
+		public SessionManagerItem () : base (new SessionActionsProvider (), prefs)
 		{
 			system_manager.RebootRequired += HandleRebootRequired;
 		}
 		
 		void HandleRebootRequired (object sender, EventArgs e)
 		{
-			ActionsProvider provider = (ActionsProvider)Provider;
+			SessionActionsProvider provider = (SessionActionsProvider)Provider;
 			
 			if (system_manager.CanRestart ()) {
 				SetItem (provider.restartItem, true);

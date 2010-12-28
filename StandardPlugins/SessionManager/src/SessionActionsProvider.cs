@@ -25,7 +25,7 @@ using Docky.Items;
 
 namespace SessionManager
 {
-	public class ActionsProvider : AbstractDockItemProvider
+	public class SessionActionsProvider : AbstractDockItemProvider
 	{
 		#region IDockItemProvider implementation
 		
@@ -109,7 +109,7 @@ namespace SessionManager
 			});
 		}
 
-		public ActionsProvider ()
+		public SessionActionsProvider ()
 		{
 			CreateItems ();
 

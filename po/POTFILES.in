@@ -35,7 +35,7 @@ StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs
 StandardPlugins/NPR/src/Station.cs
 StandardPlugins/NPR/src/StationDockItem.cs
 StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs
-StandardPlugins/SessionManager/src/ActionsProvider.cs
+StandardPlugins/SessionManager/src/SessionActionsProvider.cs
 StandardPlugins/Timer/src/TimerDockItem.cs
 StandardPlugins/Timer/src/TimerMainDockItem.cs
 StandardPlugins/Trash/src/TrashDockItem.cs

@@ -39,7 +39,7 @@
     <Compile Include="src\SessionManagerItem.cs" />
     <Compile Include="src\SessionManagerActionItem.cs" />
     <Compile Include="src\SessionManagerItemProvider.cs" />
-    <Compile Include="src\ActionsProvider.cs" />
+    <Compile Include="src\SessionActionsProvider.cs" />
     <Compile Include="src\SystemManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
