@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-28 18:41+0100\n"
+"POT-Creation-Date: 2010-12-27 21:13-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -305,41 +305,41 @@ msgstr ""
 msgid "_Pin to Dock"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:72
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:83
 #, csharp-format
 msgid "Drop to move to {0}"
 msgstr ""
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:191
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:236
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:197
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:242
 msgid "Error performing drop action"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:191
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:197
 msgid "Not enough free space on destination."
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:208
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:211
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:243
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:214
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:217
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:249
 msgid "Complete"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:221
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:227
 msgid "Moving"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:227
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:233
 msgid "Copying"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:261
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:267
 msgid "Open"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:262
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:268
 msgid "Open Containing Folder"
 msgstr ""
 
@@ -435,8 +435,12 @@ msgstr ""
 msgid "_Statistics"
 msgstr ""
 
-#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:86
+#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:85
 msgid "Computer"
+msgstr ""
+
+#: ../StandardPlugins/Clippy/src/ClippyItem.cs:88
+msgid "Clipboard is currently empty."
 msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
@@ -799,20 +803,20 @@ msgstr[1] ""
 msgid "Restore Files"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:200
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:201
 msgid "_Open Trash"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:202
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:233
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:203
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:234
 msgid "Empty _Trash"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:225
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:226
 msgid "Empty all of the items from the trash?"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:227
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:228
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
