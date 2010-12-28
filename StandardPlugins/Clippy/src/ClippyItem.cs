@@ -93,7 +93,7 @@ namespace Clippy
 				HoverText = GetClipboardAt (curPos);
 		}
 
-		void CopyEntry (int pos)
+		public void CopyEntry (int pos)
 		{
 			if (pos < 1 || pos > clips.Count)
 				return;
@@ -142,10 +142,7 @@ namespace Clippy
 			List<Docky.Menus.MenuItem> items = new List<Docky.Menus.MenuItem> ();
 			
 			for (int i = clips.Count; i > 0; i--)
-				items.Add (new Docky.Menus.MenuItem (GetClipboardAt (i), Gtk.Stock.Cut,
-						delegate {
-							CopyEntry (i);
-						}));
+				items.Add (new ClippyMenuItem (this, i, GetClipboardAt (i)));
 			
 			MenuList list = base.OnGetMenuItems ();
 			

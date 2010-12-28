@@ -5,6 +5,7 @@ ASSEMBLY = Clippy
 
 FILES = \
 	src/ClippyItemProvider.cs \
+	src/ClippyMenuItem.cs \
 	src/ClippyItem.cs
 
 RESOURCES = \

@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="src\ClippyItemProvider.cs" />
     <Compile Include="src\ClippyItem.cs" />
+    <Compile Include="src\ClippyMenuItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Clippy.addin.xml" />
