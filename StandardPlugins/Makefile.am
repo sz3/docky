@@ -1,6 +1,7 @@
 SUBDIRS = \
 	BatteryMonitor \
 	Bookmarks \
+	Clippy \
 	Clock \
 	Desktop \
 	CPUMonitor \
@@ -18,6 +19,7 @@ SUBDIRS = \
 DIST_SUBDIRS = \
 	BatteryMonitor \
 	Bookmarks \
+	Clippy \
 	Clock \
 	Desktop \
 	CPUMonitor \

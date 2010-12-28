@@ -181,6 +181,8 @@ StandardPlugins/BatteryMonitor/Makefile
 StandardPlugins/BatteryMonitor/Resources/BatteryMonitor.addin.xml
 StandardPlugins/Bookmarks/Makefile
 StandardPlugins/Bookmarks/Resources/Bookmarks.addin.xml
+StandardPlugins/Clippy/Makefile
+StandardPlugins/Clippy/Resources/Clippy.addin.xml
 StandardPlugins/Clock/Makefile
 StandardPlugins/Clock/Resources/Clock.addin.xml
 StandardPlugins/Clock/Themes/Makefile

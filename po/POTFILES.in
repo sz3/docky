@@ -18,6 +18,7 @@ Docky.Widgets/Docky.Widgets/AbstractTileObject.cs
 Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs
 StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs
 StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs
+StandardPlugins/Clippy/src/ClippyItem.cs
 StandardPlugins/Clock/src/ClockDockItem.cs
 StandardPlugins/Clock/src/ClockThemeSelector.cs
 StandardPlugins/Desktop/src/DesktopDockItem.cs
