@@ -70,6 +70,8 @@
   <ItemGroup>
     <Compile Include="src\RecentDocumentsItemProvider.cs" />
     <Compile Include="src\RecentDocumentsItem.cs" />
+    <Compile Include="src\RecentFilesProvider.cs" />
+    <Compile Include="src\EmptyRecentItem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

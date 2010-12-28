@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-28 05:47-0600\n"
+"POT-Creation-Date: 2010-12-28 09:12-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -647,23 +647,23 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:56
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:76
+msgid "_Clear Recent Documents..."
+msgstr ""
+
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:87
 msgid "Clear the Recent Documents list?"
 msgstr ""
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:58
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:89
 msgid "Clear Recent Documents"
 msgstr ""
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:60
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:91
 msgid ""
 "If you clear the Recent Documents list, you clear the following:\n"
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
-msgstr ""
-
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:81
-msgid "_Clear Recent Documents..."
 msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:76

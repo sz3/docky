@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Jason Smith
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -30,8 +31,8 @@ namespace Docky.Menus
 		RelatedItems,
 		CustomOne,
 		CustomTwo,
-		Footer,
 		ProxiedItems,
+		Footer,
 	}
 	
 	public class MenuList

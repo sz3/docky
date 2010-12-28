@@ -30,6 +30,7 @@ namespace Docky.Items
 	public class ProxyDockItem : AbstractDockItem
 	{
 		AbstractDockItem currentItem;
+		
 		int currentPos;
 		int CurrentPosition {
 			get { return currentPos; }
@@ -42,6 +43,8 @@ namespace Docky.Items
 					prefs.Set<int> ("CurrentIndex", value);
 			}
 		}
+		
+		public event EventHandler CurrentItemChanged;
 		
 		IPreferences prefs;
 		
@@ -104,6 +107,9 @@ namespace Docky.Items
 			currentItem.HoverTextChanged += HandleHoverTextChanged;
 			currentItem.PaintNeeded      += HandlePaintNeeded;
 			currentItem.PainterRequest   += HandlePainterRequest;
+			
+			if (CurrentItemChanged != null)
+				CurrentItemChanged (currentItem, EventArgs.Empty);
 
 			QueueRedraw ();
 			OnHoverTextChanged ();

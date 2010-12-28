@@ -17,7 +17,6 @@
 // 
 using System;
 using System.Linq;
-using System.Collections.Generic;
 
 using GLib;
 using Mono.Unix;
@@ -29,7 +28,7 @@ using Docky.Services.Prefs;
 
 namespace RecentDocuments
 {
-	public class RecentDocumentsItem : IconDockItem
+	public class RecentDocumentsItem : ProxyDockItem
 	{
 		#region AbstractDockItem implementation
 		
@@ -42,200 +41,56 @@ namespace RecentDocuments
 		
 		static IPreferences prefs = DockServices.Preferences.Get <RecentDocumentsItem> ();
 		
-		bool? _alwaysShowRecent;
-		bool AlwaysShowRecent {
-			get {
-				if (!_alwaysShowRecent.HasValue)
-					_alwaysShowRecent = prefs.Get<bool> ("AlwaysShowRecent", false);
-				return _alwaysShowRecent.Value;
+		bool AlwaysShowRecent { get; set; }
+		
+		FileMonitor watcher;
+		
+		public RecentDocumentsItem () : base (new RecentFilesProvider (prefs), prefs)
+		{
+			AlwaysShowRecent = prefs.Get<bool> ("AlwaysShowRecent", false);
+			
+			Provider.ItemsChanged += HandleItemsChanged;
+			CurrentItemChanged += HandleCurrentItemChanged;
+		}
+		
+		void HandleItemsChanged (object o, ItemsChangedArgs args)
+		{
+			if (AlwaysShowRecent)
+				SetItem (Provider.Items.First ());
+		}
+		
+		void HandleCurrentItemChanged (object o, EventArgs args)
+		{
+			StopWatcher ();
+			
+			if (o is FileDockItem) {
+				watcher = FileMonitor.File ((o as FileDockItem).OwnedFile, FileMonitorFlags.None, null);
+				watcher.Changed += WatcherChanged;
 			}
 		}
 		
-		public bool CanClear { get; protected set; }
-		
-		const int NumRecentDocs = 7;
-		
-		internal List<FileDockItem> RecentDocs;
-		
-		FileDockItem currentFile;
-		FileMonitor watcher;
-		
-		public FileDockItem CurrentFile {
-			get {
-				return currentFile;
-			}
-			set {
-				if (currentFile == value)
-					return;
-				currentFile = value;
-				
-				if (watcher != null) {
-					watcher.Cancel ();
-					watcher.Changed -= WatcherChanged;
-					watcher.Dispose ();
-					watcher = null;
-				}
-				
-				if (value != null) {
-					watcher = FileMonitor.File (currentFile.OwnedFile, FileMonitorFlags.None, null);
-					watcher.Changed += WatcherChanged;
-				}
+		void StopWatcher ()
+		{
+			if (watcher != null) {
+				watcher.Cancel ();
+				watcher.Changed -= WatcherChanged;
+				watcher.Dispose ();
+				watcher = null;
 			}
 		}
 		
 		void WatcherChanged (object o, ChangedArgs args)
 		{
-			RefreshRecentDocs ();
-		}
-		
-		public RecentDocumentsItem ()
-		{
-			RecentDocs = new List<FileDockItem> ();
-			
-			Gtk.RecentManager.Default.Changed += delegate { RefreshRecentDocs (); };
-			
-			CurrentFile = null;
-			RefreshRecentDocs ();
-		}
-		
-		void RefreshRecentDocs ()
-		{
-			GLib.List recent_items = new GLib.List (Gtk.RecentManager.Default.Items.Handle, typeof(Gtk.RecentInfo));
-			CanClear = recent_items.Cast<Gtk.RecentInfo> ().Count () != 0;
-			
-			lock (RecentDocs) {
-				foreach (FileDockItem f in RecentDocs)
-					f.Dispose ();
-				RecentDocs.Clear ();
-				
-				RecentDocs.AddRange (recent_items.Cast<Gtk.RecentInfo> ()
-				                     .Where (it => it.Exists ())
-									 .OrderByDescending (f => f.Modified)
-				                     .Take (NumRecentDocs)
-				                     .Select (f => FileDockItem.NewFromUri (f.Uri)));
-			}
-			
-			UpdateInfo ();
-		}
-		
-		void UpdateInfo ()
-		{
-			lock (RecentDocs) {
-				if (RecentDocs.Count() == 0)
-					CurrentFile = null;
-				else if (AlwaysShowRecent || (CurrentFile != null && RecentDocs.IndexOf (CurrentFile) == -1))
-					CurrentFile = RecentDocs.First ();
-			}
-			
-			if (CurrentFile == null) {
-				Icon = "folder-recent;;document-open-recent";
-				HoverText = "Recent Documents";
-			} else {
-				Icon = CurrentFile.Icon;
-				HoverText = CurrentFile.HoverText;
-			}
-			QueueRedraw ();
-		}
-		
-		protected override void OnScrolled (Gdk.ScrollDirection direction, Gdk.ModifierType mod)
-		{
-			int offset = Math.Min (NumRecentDocs, RecentDocs.Count ());
-			int currentIndex = RecentDocs.IndexOf (CurrentFile);
-			
-			currentIndex += offset;
-			
-			if (direction == Gdk.ScrollDirection.Up)
-				currentIndex -= 1;
-			else if (direction == Gdk.ScrollDirection.Down)
-				currentIndex += 1;
-			
-			if (offset == 0)
-				currentIndex = 0;
-			else
-				currentIndex %= offset;
-			
-			try {
-				CurrentFile = RecentDocs.ElementAt (currentIndex);
-			} catch (Exception) {
-				CurrentFile = null;
-			}
-			UpdateInfo ();
-		}
-		
-		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
-		{
-			if (button == 1 && CurrentFile != null) {
-				DockServices.System.Open (CurrentFile.OwnedFile);
-				return ClickAnimation.Bounce;
-			}
-			
-			return ClickAnimation.None;
-		}
-
-		protected override MenuList OnGetMenuItems ()
-		{
-			MenuList list = base.OnGetMenuItems ();
-			
-			lock (RecentDocs) {
-				foreach (FileDockItem _f in RecentDocs) {
-					FileDockItem f = _f;
-					if (!f.OwnedFile.Exists)
-						continue;
-
-					MenuItem item = new IconMenuItem (f.OwnedFile.Basename, f.Icon, (o, a) => DockServices.System.Open (f.OwnedFile.Dup ()));
-					item.Mnemonic = null;
-					list[MenuListContainer.RelatedItems].Add (item);
-				}
-			}
-			
-			// check to make sure our right click menu has the same number of items as RecentDocs
-			// if it doesn't, one of the recent docs might have been deleted, so update the list.
-			if (list[MenuListContainer.RelatedItems].Count () != RecentDocs.Count ())
-				RefreshRecentDocs ();
-			
-			list[MenuListContainer.Footer].Add (new MenuItem (Catalog.GetString ("_Clear Recent Documents..."), "edit-clear", (o, a) => ClearRecent (), !CanClear));
-			
-			return list;
-		}
-		
-		void ClearRecent ()
-		{
-			Gtk.MessageDialog md = new Gtk.MessageDialog (null, 
-					  0,
-					  Gtk.MessageType.Warning, 
-					  Gtk.ButtonsType.None,
-					  "<b><big>" + Catalog.GetString ("Clear the Recent Documents list?") + "</big></b>");
-			
-			md.Title = Catalog.GetString ("Clear Recent Documents");
-			md.Icon = DockServices.Drawing.LoadIcon ("docky", 22);
-			md.SecondaryText = Catalog.GetString ("If you clear the Recent Documents list, you clear the following:\n" +
-				"\u2022 All items from the Places \u2192 Recent Documents menu item.\n" +
-				"\u2022 All items from the recent documents list in all applications.");
-			md.Modal = false;
-			
-			md.AddButton (Gtk.Stock.Cancel, Gtk.ResponseType.Cancel);
-			md.AddButton (Gtk.Stock.Clear, Gtk.ResponseType.Ok);
-			md.DefaultResponse = Gtk.ResponseType.Ok;
-
-			md.Response += (o, args) => {
-				if (args.ResponseId != Gtk.ResponseType.Cancel)
-					Gtk.RecentManager.Default.PurgeItems ();
-				md.Destroy ();
-			};
-			
-			md.Show ();
+			((RecentFilesProvider) Provider).RefreshRecentDocs ();
 		}
 		
 		public override void Dispose ()
 		{
-			foreach (FileDockItem f in RecentDocs)
-				f.Dispose ();
-			RecentDocs.Clear ();
-			if (watcher != null) {
-				watcher.Cancel ();
-				watcher.Changed -= WatcherChanged;
-				watcher.Dispose ();
-			}
+			Provider.ItemsChanged -= HandleItemsChanged;
+			CurrentItemChanged -= HandleCurrentItemChanged;
+			
+			StopWatcher ();
+			
 			base.Dispose ();
 		}
 	}

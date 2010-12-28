@@ -634,6 +634,17 @@
 				<long>If true, will try to show the most recent document on the dock.</long>
 			</locale>
 		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/RecentDocuments/RecentDocumentsItem/NumRecentDocs</key>
+			<applyto>/apps/docky-2/RecentDocuments/RecentDocumentsItem/NumRecentDocs</applyto>
+			<owner>docky</owner>
+			<type>int</type>
+			<default>7</default>
+			<locale name="C">
+				<short>Number of recent docs</short>
+				<long>The number of most recent documents to show.</long>
+			</locale>
+		</schema>
 		
 		<schema>
 			<key>/schemas/apps/docky-2/SessionManager/SessionManagerItem/CurrentIndex</key>

@@ -4,6 +4,8 @@ include $(top_srcdir)/build.rules.docklets.mk
 ASSEMBLY = RecentDocuments
 
 FILES = \
+	src/EmptyRecentItem.cs \
+	src/RecentFilesProvider.cs \
 	src/RecentDocumentsItemProvider.cs \
 	src/RecentDocumentsItem.cs
 
