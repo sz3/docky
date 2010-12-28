@@ -925,12 +925,12 @@ namespace Docky.Items
 				return null;
 			
 			if (text_buffer == null) {
-				using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ())
-				{
+				using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ()) {
 					layout.FontDescription = style.FontDescription;
 					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (11);
 					layout.FontDescription.Weight = Pango.Weight.Bold;
 					layout.Ellipsize = Pango.EllipsizeMode.End;
+					layout.Width = Pango.Units.FromPixels ((int) (0.8 * Gdk.Screen.Default.Width));
 					
 					layout.SetText (HoverText);
 					
