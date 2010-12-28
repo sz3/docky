@@ -928,12 +928,15 @@ namespace Docky.Items
 					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (11);
 					layout.FontDescription.Weight = Pango.Weight.Bold;
 					layout.Ellipsize = Pango.EllipsizeMode.End;
-					layout.Width = Pango.Units.FromPixels ((int) (0.8 * Gdk.Screen.Default.Width));
 					
 					layout.SetText (HoverText);
 					
 					Pango.Rectangle inkRect, logicalRect;
 					layout.GetPixelExtents (out inkRect, out logicalRect);
+					if (logicalRect.Width > 0.8 * Gdk.Screen.Default.Width) {
+						layout.Width = Pango.Units.FromPixels ((int) (0.8 * Gdk.Screen.Default.Width));
+						layout.GetPixelExtents (out inkRect, out logicalRect);
+					}
 					
 					int textWidth = logicalRect.Width;
 					int textHeight = logicalRect.Height;
