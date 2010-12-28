@@ -25,11 +25,17 @@ using Mono.Unix;
 using Docky.Items;
 using Docky.Menus;
 using Docky.Services;
+using Docky.Services.Prefs;
 
 namespace Clippy
 {
 	public class ClippyItem : IconDockItem
 	{
+		static IPreferences prefs = DockServices.Preferences.Get<ClippyItem> ();
+
+		uint timerDelay = prefs.Get<uint> ("TimerDelay", 500);
+		uint maxEntries = prefs.Get<uint> ("MaxEntries", 15);
+
 		List<string> clips = new List<string> ();
 		int curPos = -1;
 
@@ -46,7 +52,7 @@ namespace Clippy
 		{
 			Icon = "edit-cut";
 
-			timer = GLib.Timeout.Add (500, CheckClipboard);
+			timer = GLib.Timeout.Add (timerDelay, CheckClipboard);
 		}
 
 		bool CheckClipboard ()
@@ -56,7 +62,7 @@ namespace Clippy
 					return;
 				if (clips.Count == 0 || !clips[clips.Count - 1].Equals(text)) {
 					clips.Add (text);
-					while (clips.Count > 15)
+					while (clips.Count > maxEntries)
 						clips.RemoveAt (0);
 					curPos = clips.Count;
 					Updated ();
