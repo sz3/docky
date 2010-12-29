@@ -70,6 +70,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <None Include="Resources\icons\show-desktop.svg" />
+    <None Include="Resources\icons\window-tile.svg" />
+    <None Include="Resources\icons\window-cascade.svg" />
     <None Include="Resources\Desktop.addin.xml" />
   </ItemGroup>
 </Project>

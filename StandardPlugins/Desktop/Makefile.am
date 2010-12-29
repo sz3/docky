@@ -15,6 +15,9 @@ FILES = \
 	src/DesktopItemProvider.cs
 	
 RESOURCES = \
+	Resources/icons/show-desktop.svg \
+	Resources/icons/window-cascade.svg \
+	Resources/icons/window-tile.svg \
 	Resources/Desktop.addin.xml
 
 PROJECT_REFERENCES= \

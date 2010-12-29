@@ -36,7 +36,7 @@ namespace Desktop
 		public CascadeDesktopItem ()
 		{
 			HoverText = Catalog.GetString ("Cascade Desktop");
-			Icon = "desktop";
+			Icon = "window-cascade.svg@" + GetType ().Assembly.FullName;
 		}
 
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)

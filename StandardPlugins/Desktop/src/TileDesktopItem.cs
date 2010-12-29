@@ -36,7 +36,7 @@ namespace Desktop
 		public TileDesktopItem ()
 		{
 			HoverText = Catalog.GetString ("Tile Desktop");
-			Icon = "desktop";
+			Icon = "window-tile.svg@" + GetType ().Assembly.FullName;
 		}
 
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)

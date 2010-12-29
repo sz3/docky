@@ -35,7 +35,7 @@ namespace Desktop
 		public ShowDesktopItem ()
 		{
 			HoverText = Catalog.GetString ("Show Desktop");
-			Icon = "desktop";
+			Icon = "show-desktop.svg@" + GetType ().Assembly.FullName;
 		}
 
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
