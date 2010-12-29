@@ -33,7 +33,7 @@ namespace WindowManager.Wink
 	{
 		static Stack<Dictionary<Wnck.Window, WindowState>> window_states = new Stack<Dictionary<Wnck.Window, WindowState>> ();
 		
-		private class WindowState
+		private struct WindowState
 		{
 			public Gdk.Rectangle Area;
 			public Wnck.WindowState State;
@@ -42,6 +42,32 @@ namespace WindowManager.Wink
 			{
 				Area = area;
 				State = state;
+			}
+			
+			public static bool operator ==(WindowState a, WindowState b)
+			{
+				return a.Area.Equals (b.Area) && (a.State == b.State);
+			}
+			
+			public static bool operator !=(WindowState a, WindowState b)
+			{
+				return !a.Area.Equals (b.Area) || !(a.State == b.State);
+			}
+			
+			public override bool Equals (object obj)
+			{
+				WindowState ws = (WindowState) obj;
+				return Area.Equals (ws.Area) && (State == ws.State);
+			}
+			
+			public override int GetHashCode ()
+			{
+				return (int) (((long) Area.GetHashCode () + State.GetHashCode ()) % int.MaxValue);
+			}
+			
+			public override string ToString ()
+			{
+				return string.Format ("{0} ({1})", Area, State);
 			}
 		}
 		
@@ -128,7 +154,9 @@ namespace WindowManager.Wink
 				int x = screenGeo.X + titleBarSize * count - parent.ViewportX;
 				int y = screenGeo.Y + titleBarSize * count - parent.ViewportY;
 				
-				SetTemporaryWindowGeometry (window, new Gdk.Rectangle (x, y, windowWidth, windowHeight), state);
+				Gdk.Rectangle windowArea = new Gdk.Rectangle (x, y, windowWidth, windowHeight);;
+
+				SetTemporaryWindowGeometry (window, windowArea, state);
 				count++;
 			}
 		}
