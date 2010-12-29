@@ -235,7 +235,7 @@ namespace Docky.CairoHelper
 			}
 			
 			if (needsDispose)
-				image_surface.Dispose ();
+				(image_surface as IDisposable).Dispose ();
 			
 			return pb;
 		}
