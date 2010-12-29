@@ -48,8 +48,6 @@ namespace WindowManager.Wink
 		
 		public static void Initialize ()
 		{
-			Wnck.Global.ClientType = Wnck.ClientType.Pager;
-			
 			Wnck.Screen.Default.ViewportsChanged += HandleViewportsChanged;
 			Wnck.Screen.Default.WorkspaceCreated += HandleWorkspaceCreated;
 			Wnck.Screen.Default.WorkspaceDestroyed += HandleWorkspaceDestroyed;
