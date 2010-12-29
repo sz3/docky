@@ -36,17 +36,14 @@ namespace WindowManager.Wink
 			get {
 				if (!parent.IsVirtual)
 					return Wnck.Screen.Default.ActiveWorkspace == parent;
-				else
-					return Wnck.Screen.Default.ActiveWorkspace.ViewportX == area.X && Wnck.Screen.Default.ActiveWorkspace.ViewportY == area.Y;
+				return Wnck.Screen.Default.ActiveWorkspace.ViewportX == area.X && Wnck.Screen.Default.ActiveWorkspace.ViewportY == area.Y;
 			}
 		}
 		
 		WindowMoveResizeMask MoveResizeMask {
 			get {
-				return WindowMoveResizeMask.X |
-					   WindowMoveResizeMask.Y |
-					   WindowMoveResizeMask.Height |
-					   WindowMoveResizeMask.Width;
+				return WindowMoveResizeMask.X | WindowMoveResizeMask.Y |
+					   WindowMoveResizeMask.Height | WindowMoveResizeMask.Width;
 			}
 		}
 		
@@ -54,11 +51,6 @@ namespace WindowManager.Wink
 		{
 			this.area = area;
 			this.parent = parent;
-		}
-		
-		bool Contains (Gdk.Point point)
-		{
-			return area.Contains (point);
 		}
 		
 		IEnumerable<Wnck.Window> RawWindows ()
@@ -82,8 +74,7 @@ namespace WindowManager.Wink
 			geo.X += parent.ViewportX;
 			geo.Y += parent.ViewportY;
 			
-			Point center = new Point (geo.X + geo.Width / 2, geo.Y + geo.Height / 2);
-			return Contains (center);
+			return area.Contains (new Point (geo.X + geo.Width / 2, geo.Y + geo.Height / 2));
 		}
 		
 		public void ShowDesktop ()
@@ -106,10 +97,9 @@ namespace WindowManager.Wink
 			int windowWidth = screenGeo.Width - ((windows.Count () - 1) * titleBarSize);
 			
 			int count = 0;
-			int x, y;
 			foreach (Wnck.Window window in windows) {
-				x = screenGeo.X + titleBarSize * count - parent.ViewportX;
-				y = screenGeo.Y + titleBarSize * count - parent.ViewportY;
+				int x = screenGeo.X + titleBarSize * count - parent.ViewportX;
+				int y = screenGeo.Y + titleBarSize * count - parent.ViewportY;
 				
 				SetTemporaryWindowGeometry (window, new Gdk.Rectangle (x, y, windowWidth, windowHeight));
 				count++;
@@ -123,26 +113,23 @@ namespace WindowManager.Wink
 			
 			Gdk.Rectangle screenGeo = GetScreenGeoMinusStruts ();
 			
-			int width, height;
-			//We are going to tile to a square, so what we want is to find
-			//the smallest perfect square all our windows will fit into
-			width = (int) Math.Ceiling (Math.Sqrt (windows.Count ()));
+			// We are going to tile to a square, so what we want is to find
+			// the smallest perfect square all our windows will fit into
+			int width = (int) Math.Ceiling (Math.Sqrt (windows.Count ()));
 			
-			//Our height is at least one (e.g. a 2x1)
-			height = 1;
+			// Our height is at least one (e.g. a 2x1)
+			int height = 1;
 			while (width * height < windows.Count ())
 				height++;
 			
-			int windowWidth, windowHeight;
-			windowWidth = screenGeo.Width / width;
-			windowHeight = screenGeo.Height / height;
+			int windowWidth = screenGeo.Width / width;
+			int windowHeight = screenGeo.Height / height;
 			
 			int row = 0, column = 0;
-			int x, y;
 			
 			foreach (Wnck.Window window in windows) {
-				x = screenGeo.X + (column * windowWidth) - parent.ViewportX;
-				y = screenGeo.Y + (row * windowHeight) - parent.ViewportY;
+				int x = screenGeo.X + (column * windowWidth) - parent.ViewportX;
+				int y = screenGeo.Y + (row * windowHeight) - parent.ViewportY;
 				
 				Gdk.Rectangle windowArea = new Gdk.Rectangle (x, y, windowWidth, windowHeight);;
 				
@@ -180,11 +167,6 @@ namespace WindowManager.Wink
 		
 		void SetTemporaryWindowGeometry (Wnck.Window window, Gdk.Rectangle area)
 		{
-			Gdk.Rectangle oldGeo = window.EasyGeometry ();
-			
-			oldGeo.X += parent.ViewportX;
-			oldGeo.Y += parent.ViewportY;
-			
 			if (window.IsMaximized)
 				window.Unmaximize ();
 			

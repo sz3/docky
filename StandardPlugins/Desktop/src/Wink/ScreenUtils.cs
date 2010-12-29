@@ -30,8 +30,6 @@ namespace WindowManager.Wink
 		static List<Window> window_list;
 		static bool window_list_update_needed;
 		
-		public static event EventHandler ViewportsChanged;
-		
 		public static Viewport ActiveViewport {
 			get {
 				if (Viewports.Any (vp => vp.IsActive))
@@ -125,12 +123,10 @@ namespace WindowManager.Wink
 			layouts = new Dictionary<Workspace, Viewport [,]> ();
 
 			int currentViewport = 1;
-			foreach (Wnck.Workspace workspace in Wnck.Screen.Default.Workspaces) {
+			foreach (Wnck.Workspace workspace in Wnck.Screen.Default.Workspaces)
 				if (workspace.IsVirtual) {
-					int viewportWidth;
-					int viewportHeight;
-					viewportWidth = workspace.Screen.Width;
-					viewportHeight = workspace.Screen.Height;
+					int viewportWidth = workspace.Screen.Width;
+					int viewportHeight = workspace.Screen.Height;
 					
 					int rows = workspace.Height / viewportHeight;
 					int columns = workspace.Width / viewportWidth;
@@ -139,10 +135,8 @@ namespace WindowManager.Wink
 					
 					for (int i = 0; i < rows; i++)
 						for (int j = 0; j < columns; j++) {
-							Gdk.Rectangle area = new Gdk.Rectangle (j * viewportWidth,
-							                                        i * viewportHeight,
-							                                        viewportWidth,
-							                                        viewportHeight);
+							Gdk.Rectangle area = new Gdk.Rectangle (j * viewportWidth, i * viewportHeight,
+							                                        viewportWidth, viewportHeight);
 							layouts [workspace] [i, j] = new Viewport (area, workspace);
 							currentViewport++;
 						}
@@ -153,9 +147,6 @@ namespace WindowManager.Wink
 					layouts [workspace] [0,0] = viewport;
 					currentViewport++;
 				}
-			}
-			if (ViewportsChanged != null)
-				ViewportsChanged (new object (), EventArgs.Empty);
 		}
 		
 		public static List<Window> GetWindows ()
