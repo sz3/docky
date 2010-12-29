@@ -4,10 +4,19 @@ include $(top_srcdir)/build.rules.docklets.mk
 ASSEMBLY = Desktop
 
 FILES = \
+	src/Wink/Viewport.cs \
+	src/Wink/ScreenUtils.cs \
 	src/DesktopDockItem.cs \
+	src/ShowDesktopItem.cs \
+	src/TileDesktopItem.cs \
+	src/CascadeDesktopItem.cs \
+	src/DesktopActionsProvider.cs \
 	src/DesktopItemProvider.cs
 	
 RESOURCES = \
+	Resources/icons/show-desktop.svg \
+	Resources/icons/window-cascade.svg \
+	Resources/icons/window-tile.svg \
 	Resources/Desktop.addin.xml
 
 PROJECT_REFERENCES= \

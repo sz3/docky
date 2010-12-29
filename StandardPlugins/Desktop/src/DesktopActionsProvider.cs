@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2010 Rico Tzschichholz, Robert Dyer
+//  Copyright (C) 2010 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,25 +18,45 @@
 using System;
 using System.Collections.Generic;
 
+using Mono.Unix;
+
 using Docky.Items;
+using Docky.Menus;
+
+using WindowManager.Wink;
 
 namespace Desktop
 {
-	public class DesktopItemProvider : AbstractDockItemProvider
+	public class DesktopActionsProvider : AbstractDockItemProvider
 	{
 		#region IDockItemProvider implementation
 		
 		public override string Name {
 			get {
-				return "Desktop";
+				return "DesktopActions";
 			}
 		}
 		
 		#endregion
 
-		public DesktopItemProvider ()
+		public DesktopActionsProvider ()
 		{
-			Items = (new DesktopDockItem ()).AsSingle<AbstractDockItem> ();
+			ScreenUtils.Initialize ();
+			
+			List<AbstractDockItem> items = new List<AbstractDockItem> ();
+			items.Add (new ShowDesktopItem ());
+			items.Add (new TileDesktopItem ());
+			items.Add (new CascadeDesktopItem ());
+			Items = items;
+		}
+		
+		public override MenuList GetMenuItems (AbstractDockItem item)
+		{
+			MenuList list = base.GetMenuItems (item);
+			
+			list[MenuListContainer.Footer].Add (new MenuItem (Catalog.GetString ("_Undo"), "edit-undo", (o, a) => ScreenUtils.ActiveViewport.RestoreLayout (), !ScreenUtils.ActiveViewport.CanRestoreLayout ()));
+			
+			return list;
 		}
 	}
 }

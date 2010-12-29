@@ -16,27 +16,35 @@
 // 
 
 using System;
-using System.Collections.Generic;
+
+using Mono.Unix;
+using Wnck;
 
 using Docky.Items;
+using WindowManager.Wink;
 
 namespace Desktop
 {
-	public class DesktopItemProvider : AbstractDockItemProvider
+	public class ShowDesktopItem : IconDockItem
 	{
-		#region IDockItemProvider implementation
-		
-		public override string Name {
-			get {
-				return "Desktop";
-			}
+		public override string UniqueID ()
+		{
+			return "ShowDesktop";
 		}
 		
-		#endregion
-
-		public DesktopItemProvider ()
+		public ShowDesktopItem ()
 		{
-			Items = (new DesktopDockItem ()).AsSingle<AbstractDockItem> ();
+			HoverText = Catalog.GetString ("Show Desktop");
+			Icon = "show-desktop.svg@" + GetType ().Assembly.FullName;
+		}
+
+		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
+		{
+			if (button == 1) {
+				ScreenUtils.ActiveViewport.ShowDesktop ();
+				return ClickAnimation.Bounce;
+			}
+			return ClickAnimation.None;
 		}
 	}
 }

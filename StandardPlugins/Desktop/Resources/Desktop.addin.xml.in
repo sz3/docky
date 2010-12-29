@@ -5,21 +5,20 @@
 	isroot="false"
 	defaultEnabled="false"
 	name="Desktop"
-	description="Show Desktop Toggler"
-	author="Rico Tzschichholz"
+	description="Show, Tile or Cascade your Desktop"
+	author="Rico Tzschichholz, Robert Dyer"
 	icon="desktop"
 >
- 
+
  	<Dependencies>
 		<Addin id="Items" version="1.0" />
 	</Dependencies>
- 
+
 	<Runtime>
-		<Import assembly="Desktop.dll"/>
+		<Import assembly="Desktop.dll" />
 	</Runtime>
-	
+
 	<Extension path="/Docky/ItemProvider">
 		<ItemProvider type="Desktop.DesktopItemProvider" />
-	</Extension>	
-
+	</Extension>
 </Addin>

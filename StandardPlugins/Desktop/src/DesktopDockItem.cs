@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2010 Rico Tzschichholz
+//  Copyright (C) 2010 Rico Tzschichholz, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,79 +16,24 @@
 // 
 
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-
-using Mono.Unix;
-
-using Cairo;
-using GLib;
-using Gdk;
-using Wnck;
 
 using Docky.Items;
-using Docky.Menus;
-using Docky.Services;
 
 namespace Desktop
 {
-	public class DesktopDockItem : IconDockItem
+	public class DesktopDockItem : ProxyDockItem
 	{
+		#region AbstractDockItem implementation
 		
-		public DesktopDockItem ()
-		{
-			HoverText = Catalog.GetString ("Show Desktop");
-			Icon = "desktop";
-		}
-
 		public override string UniqueID ()
 		{
 			return "Desktop";
 		}
 		
-		protected override bool OnCanAcceptDrop (IEnumerable<string> uris)
-		{
-			return false;
-		}
-		
-		protected override bool OnCanAcceptDrop (AbstractDockItem item)
-		{
-			return false;
-		}
-		
-		protected override bool OnAcceptDrop (AbstractDockItem item)
-		{
-			return false;
-		}
-		
-		protected override bool OnAcceptDrop (IEnumerable<string> uris)
-		{
-			return false;
-		}
-		
-		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
-		{
-			if (button == 1) {
-				ToggleShowDesktop ();
-				return ClickAnimation.Bounce;
-			}
-			return ClickAnimation.None;
-		}
-		
-		void ToggleShowDesktop ()
-		{
-			Wnck.Screen.Default.ToggleShowingDesktop (!Wnck.Screen.Default.ShowingDesktop);
-		}
-
-		#region IDisposable implementation
-		public override void Dispose ()
-		{
-			base.Dispose ();
-		}
-
 		#endregion
 		
+		public DesktopDockItem () : base (new DesktopActionsProvider ())
+		{
+		}
 	}
 }

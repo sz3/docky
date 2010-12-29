@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-28 09:12-0600\n"
+"POT-Creation-Date: 2010-12-29 02:49-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -467,8 +467,20 @@ msgstr ""
 msgid "Theme"
 msgstr ""
 
-#: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:42
+#: ../StandardPlugins/Desktop/src/DesktopActionsProvider.cs:57
+msgid "_Undo"
+msgstr ""
+
+#: ../StandardPlugins/Desktop/src/ShowDesktopItem.cs:37
 msgid "Show Desktop"
+msgstr ""
+
+#: ../StandardPlugins/Desktop/src/TileDesktopItem.cs:38
+msgid "Tile Desktop"
+msgstr ""
+
+#: ../StandardPlugins/Desktop/src/CascadeDesktopItem.cs:38
+msgid "Cascade Desktop"
 msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
