@@ -25,6 +25,7 @@ using Wnck;
 
 using Docky.Services;
 using Docky.Services.Xlib;
+using Docky.Services.Windows;
 
 namespace WindowManager.Wink
 {

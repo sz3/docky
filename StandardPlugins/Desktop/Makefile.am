@@ -4,7 +4,6 @@ include $(top_srcdir)/build.rules.docklets.mk
 ASSEMBLY = Desktop
 
 FILES = \
-	src/Wink/Position.cs \
 	src/Wink/Viewport.cs \
 	src/Wink/ScreenUtils.cs \
 	src/DesktopDockItem.cs \
