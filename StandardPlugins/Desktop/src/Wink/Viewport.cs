@@ -30,6 +30,20 @@ namespace WindowManager.Wink
 {
 	public class Viewport
 	{
+		static Stack<Dictionary<Wnck.Window, WindowState>> window_states = new Stack<Dictionary<Wnck.Window, WindowState>> ();
+		
+		private class WindowState
+		{
+			public Gdk.Rectangle Area;
+			public Wnck.WindowState State;
+			
+			public WindowState (Gdk.Rectangle area, Wnck.WindowState state)
+			{
+				Area = area;
+				State = state;
+			}
+		}
+		
 		Workspace parent;
 		Rectangle area;
 		
@@ -80,14 +94,24 @@ namespace WindowManager.Wink
 		
 		public void ShowDesktop ()
 		{
+			ShowDesktop (true);
+		}
+		
+		void ShowDesktop (bool storeState)
+		{
 			if (!ScreenUtils.DesktopShown (parent.Screen))
 				ScreenUtils.ShowDesktop (parent.Screen);
 			else
 				ScreenUtils.UnshowDesktop (parent.Screen);
+			if (storeState)
+				window_states.Push (new Dictionary<Wnck.Window, WindowState> ());
 		}
 		
 		public void Cascade ()
 		{
+			Dictionary<Wnck.Window, WindowState> state = new Dictionary<Wnck.Window, WindowState> ();
+			window_states.Push (state);
+			
 			IEnumerable<Wnck.Window> windows = Windows ().Where (w => !w.IsMinimized);
 			if (windows.Count () <= 1) return;
 			
@@ -102,13 +126,16 @@ namespace WindowManager.Wink
 				int x = screenGeo.X + titleBarSize * count - parent.ViewportX;
 				int y = screenGeo.Y + titleBarSize * count - parent.ViewportY;
 				
-				SetTemporaryWindowGeometry (window, new Gdk.Rectangle (x, y, windowWidth, windowHeight));
+				SetTemporaryWindowGeometry (window, new Gdk.Rectangle (x, y, windowWidth, windowHeight), state);
 				count++;
 			}
 		}
 		
 		public void Tile ()
 		{
+			Dictionary<Wnck.Window, WindowState> state = new Dictionary<Wnck.Window, WindowState> ();
+			window_states.Push (state);
+			
 			IEnumerable<Wnck.Window> windows = Windows ().Where (w => !w.IsMinimized);
 			if (windows.Count () <= 1) return;
 			
@@ -137,7 +164,7 @@ namespace WindowManager.Wink
 				if (window == windows.Last ())
 					windowArea.Width *= width - column;
 				
-				SetTemporaryWindowGeometry (window, windowArea);
+				SetTemporaryWindowGeometry (window, windowArea, state);
 				
 				column++;
 				if (column == width) {
@@ -145,6 +172,25 @@ namespace WindowManager.Wink
 					row++;
 				}
 			}
+		}
+		
+		public bool CanRestoreLayout ()
+		{
+			return window_states.Count () > 0;
+		}
+		
+		public void RestoreLayout ()
+		{
+			if (!CanRestoreLayout ())
+				return;
+			
+			Dictionary<Wnck.Window, WindowState> state = window_states.Pop ();
+			
+			if (state.Count () == 0)
+				ShowDesktop (false);
+			else
+				foreach (Wnck.Window window in Windows ())
+					RestoreTemporaryWindowGeometry (window, state);
 		}
 		
 		Gdk.Rectangle GetScreenGeoMinusStruts ()
@@ -166,12 +212,30 @@ namespace WindowManager.Wink
 			return screenGeo;
 		}
 		
-		void SetTemporaryWindowGeometry (Wnck.Window window, Gdk.Rectangle area)
+		void SetTemporaryWindowGeometry (Wnck.Window window, Gdk.Rectangle area, Dictionary<Wnck.Window, WindowState> state)
 		{
+			Gdk.Rectangle oldGeo = window.EasyGeometry ();
+			
+			oldGeo.X += parent.ViewportX;
+			oldGeo.Y += parent.ViewportY;
+			
+			state [window] = new WindowState (oldGeo, window.State);
+			
 			if (window.IsMaximized)
 				window.Unmaximize ();
 			
 			window.SetWorkaroundGeometry (WindowGravity.Current, MoveResizeMask, area.X, area.Y, area.Width, area.Height);
+		}
+		
+		void RestoreTemporaryWindowGeometry (Wnck.Window window, Dictionary<Wnck.Window, WindowState> state)
+		{
+			if (!state.ContainsKey (window))
+				return;
+			
+			WindowState currentState = state [window];
+			window.SetWorkaroundGeometry (WindowGravity.Current, MoveResizeMask,
+											currentState.Area.X - parent.ViewportX, currentState.Area.Y - parent.ViewportY,
+											currentState.Area.Width, currentState.Area.Height);
 		}
 	}
 }

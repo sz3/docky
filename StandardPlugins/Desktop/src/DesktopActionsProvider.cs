@@ -18,7 +18,12 @@
 using System;
 using System.Collections.Generic;
 
+using Mono.Unix;
+
 using Docky.Items;
+using Docky.Menus;
+
+using WindowManager.Wink;
 
 namespace Desktop
 {
@@ -36,11 +41,22 @@ namespace Desktop
 
 		public DesktopActionsProvider ()
 		{
+			ScreenUtils.Initialize ();
+			
 			List<AbstractDockItem> items = new List<AbstractDockItem> ();
 			items.Add (new ShowDesktopItem ());
 			items.Add (new TileDesktopItem ());
 			items.Add (new CascadeDesktopItem ());
 			Items = items;
+		}
+		
+		public override MenuList GetMenuItems (AbstractDockItem item)
+		{
+			MenuList list = base.GetMenuItems (item);
+			
+			list[MenuListContainer.Footer].Add (new MenuItem (Catalog.GetString ("_Undo"), "edit-undo", (o, a) => ScreenUtils.ActiveViewport.RestoreLayout (), !ScreenUtils.ActiveViewport.CanRestoreLayout ()));
+			
+			return list;
 		}
 	}
 }

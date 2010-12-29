@@ -19,7 +19,6 @@ using System;
 using System.Collections.Generic;
 
 using Docky.Items;
-using WindowManager.Wink;
 
 namespace Desktop
 {
@@ -37,7 +36,6 @@ namespace Desktop
 
 		public DesktopItemProvider ()
 		{
-			ScreenUtils.Initialize ();
 			Items = (new DesktopDockItem ()).AsSingle<AbstractDockItem> ();
 		}
 	}
