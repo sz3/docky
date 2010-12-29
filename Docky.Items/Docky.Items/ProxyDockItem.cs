@@ -57,6 +57,7 @@ namespace Docky.Items
 		public ProxyDockItem (AbstractDockItemProvider provider, IPreferences prefs)
 		{
 			Provider = provider;
+			Provider.ItemsChanged += HandleProviderItemsChanged;
 			this.prefs = prefs;
 			
 			if (prefs == null) {
@@ -95,6 +96,11 @@ namespace Docky.Items
 			ItemChanged ();
 		}
 		
+		void HandleProviderItemsChanged (object o, EventArgs args)
+		{
+			ItemChanged ();
+		}
+		
 		void ItemChanged ()
 		{
 			if (currentItem != null) {
@@ -102,6 +108,11 @@ namespace Docky.Items
 				currentItem.PaintNeeded      -= HandlePaintNeeded;
 				currentItem.PainterRequest   -= HandlePainterRequest;
 			}
+			
+			if (CurrentPosition < 0)
+				CurrentPosition = Provider.Items.Count () - 1;
+			else if (CurrentPosition >= Provider.Items.Count ()) 
+				CurrentPosition = 0;
 			
 			currentItem = Provider.Items.ToArray ()[CurrentPosition];
 			currentItem.HoverTextChanged += HandleHoverTextChanged;
@@ -154,11 +165,6 @@ namespace Docky.Items
 				CurrentPosition--;
 			else
 				CurrentPosition++;
-			
-			if (CurrentPosition < 0)
-				CurrentPosition = Provider.Items.Count () - 1;
-			else if (CurrentPosition >= Provider.Items.Count ()) 
-				CurrentPosition = 0;
 			
 			ItemChanged ();
 		}
@@ -312,6 +318,8 @@ namespace Docky.Items
 		
 		public override void Dispose ()
 		{
+			Provider.ItemsChanged -= HandleProviderItemsChanged;
+			
 			if (currentItem != null) {
 				currentItem.HoverTextChanged -= HandleHoverTextChanged;
 				currentItem.PaintNeeded      -= HandlePaintNeeded;
