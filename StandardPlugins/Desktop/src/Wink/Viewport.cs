@@ -23,6 +23,7 @@ using System.Linq;
 using Gdk;
 using Wnck;
 
+using Docky.Services;
 using Docky.Services.Xlib;
 
 namespace WindowManager.Wink

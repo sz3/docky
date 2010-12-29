@@ -7,7 +7,6 @@ FILES = \
 	src/Wink/Position.cs \
 	src/Wink/Viewport.cs \
 	src/Wink/ScreenUtils.cs \
-	src/Wink/WnckWindow_Extensions.cs \
 	src/DesktopDockItem.cs \
 	src/ShowDesktopItem.cs \
 	src/TileDesktopItem.cs \
