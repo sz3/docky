@@ -42,6 +42,8 @@ namespace RecentDocuments
 		
 		int NumRecentDocs { get; set; }
 		
+		bool CanClear { get; set; }
+		
 		AbstractDockItem emptyItem = new EmptyRecentItem ();
 		
 		public RecentFilesProvider (IPreferences prefs)
@@ -57,6 +59,7 @@ namespace RecentDocuments
 			List<AbstractDockItem> items = new List<AbstractDockItem> ();
 			
 			GLib.List recent_items = new GLib.List (Gtk.RecentManager.Default.Items.Handle, typeof(Gtk.RecentInfo));
+			CanClear = recent_items.Cast<Gtk.RecentInfo> ().Any ();
 			
 			items.AddRange (recent_items.Cast<Gtk.RecentInfo> ()
 								 .Where (it => it.Exists ())
@@ -73,7 +76,7 @@ namespace RecentDocuments
 			MenuList list = base.GetMenuItems (item);
 			
 			list[MenuListContainer.ProxiedItems].RemoveAt (list[MenuListContainer.ProxiedItems].Count () - 1);
-			list[MenuListContainer.Footer].Add (new MenuItem (Catalog.GetString ("_Clear Recent Documents..."), "edit-clear", (o, a) => ClearRecent (), Items.Count () == 1));
+			list[MenuListContainer.Footer].Add (new MenuItem (Catalog.GetString ("_Clear Recent Documents..."), "edit-clear", (o, a) => ClearRecent (), !CanClear));
 			
 			return list;
 		}
