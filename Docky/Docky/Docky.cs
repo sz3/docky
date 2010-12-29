@@ -21,6 +21,7 @@ using Mono.Unix;
 
 using DBus;
 using Gtk;
+using Notifications;
 
 using Docky.DBus;
 using Docky.Services;
@@ -77,7 +78,7 @@ namespace Docky
 			DockServices.System.MainThread = Thread.CurrentThread;
 			
 			// check compositing
-			CheckComposite ();
+			CheckComposite (8);
 			Gdk.Screen.Default.CompositedChanged += delegate {
 				CheckComposite ();
 			};
@@ -109,17 +110,37 @@ namespace Docky
 		}
 		
 		static uint checkCompositeTimer = 0;
+		static Notification compositeNotify = null;
 		static void CheckComposite ()
+		{
+			CheckComposite (2);
+		}
+		
+		static void CheckComposite (uint timeout)
 		{
 			if (checkCompositeTimer != 0) {
 				GLib.Source.Remove (checkCompositeTimer);
 				checkCompositeTimer = 0;
 			}
 			
-			checkCompositeTimer = GLib.Timeout.Add (2000, delegate {
+			// compositing is enabled and we are still showing a notify, so close it
+			if (Gdk.Screen.Default.IsComposited && compositeNotify != null) {
+				compositeNotify.Close ();
+				compositeNotify = null;
+				return;
+			}
+			
+			checkCompositeTimer = GLib.Timeout.Add (timeout * 1000, delegate {
+				// no matter what, close any notify open
+				if (compositeNotify != null) {
+					compositeNotify.Close ();
+					compositeNotify = null;
+				}
+				
 				if (!Gdk.Screen.Default.IsComposited)
-					Log.Notify (Catalog.GetString ("Docky requires compositing to work properly. " +
+					compositeNotify = Log.Notify (Catalog.GetString ("Docky requires compositing to work properly. " +
 						"Certain options are disabled and themes/animations will look incorrect. "));
+				
 				checkCompositeTimer = 0;
 				return false;
 			});
