@@ -29,9 +29,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="src\Wink\Position.cs" />
+    <Compile Include="src\Wink\Viewport.cs" />
+    <Compile Include="src\Wink\ScreenUtils.cs" />
+    <Compile Include="src\Wink\WnckWindow_Extensions.cs" />
     <Compile Include="src\DesktopDockItem.cs" />
     <Compile Include="src\ShowDesktopItem.cs" />
     <Compile Include="src\TileDesktopItem.cs" />
+    <Compile Include="src\CascadeDesktopItem.cs" />
     <Compile Include="src\DesktopActionsProvider.cs" />
     <Compile Include="src\DesktopItemProvider.cs" />
   </ItemGroup>

@@ -21,7 +21,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 
 using Wnck;
-using WindowManager.Xlib;
+using Docky.Services.Xlib;
 
 namespace WindowManager.Wink
 {
@@ -59,14 +59,14 @@ namespace WindowManager.Wink
 			
 			int [] extents = new int[12];
 			
-			IntPtr display = Xlib.Xlib.GdkDisplayXDisplay (Gdk.Screen.Default.Display);
+			IntPtr display = X.GdkDisplayXDisplay (Gdk.Screen.Default.Display);
 			IntPtr window_handle = (IntPtr) window.Xid;
 			IntPtr type = IntPtr.Zero;
 			int format;
 			IntPtr nitems, bytes_after;
 			IntPtr prop_return;
 			
-			Xlib.Xlib.XGetWindowProperty (display, window_handle, atom, (IntPtr) 0,
+			X.XGetWindowProperty (display, window_handle, atom, (IntPtr) 0,
 			                                  (IntPtr) System.Int32.MaxValue, false, atoms.XA_CARDINAL, out type, out format,
 			                                  out nitems, out bytes_after, out prop_return);
 			
