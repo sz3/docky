@@ -100,21 +100,22 @@ namespace WindowManager.Wink
 		
 		void ShowDesktop (bool storeState)
 		{
+			if (storeState)
+				window_states.Push (new Dictionary<Wnck.Window, WindowState> ());
+			
 			if (!ScreenUtils.DesktopShown (parent.Screen))
 				ScreenUtils.ShowDesktop (parent.Screen);
 			else
 				ScreenUtils.UnshowDesktop (parent.Screen);
-			if (storeState)
-				window_states.Push (new Dictionary<Wnck.Window, WindowState> ());
 		}
 		
 		public void Cascade ()
 		{
-			Dictionary<Wnck.Window, WindowState> state = new Dictionary<Wnck.Window, WindowState> ();
-			window_states.Push (state);
-			
 			IEnumerable<Wnck.Window> windows = Windows ().Where (w => !w.IsMinimized);
 			if (windows.Count () <= 1) return;
+			
+			Dictionary<Wnck.Window, WindowState> state = new Dictionary<Wnck.Window, WindowState> ();
+			window_states.Push (state);
 			
 			Gdk.Rectangle screenGeo = GetScreenGeoMinusStruts ();
 			
@@ -134,11 +135,11 @@ namespace WindowManager.Wink
 		
 		public void Tile ()
 		{
-			Dictionary<Wnck.Window, WindowState> state = new Dictionary<Wnck.Window, WindowState> ();
-			window_states.Push (state);
-			
 			IEnumerable<Wnck.Window> windows = Windows ().Where (w => !w.IsMinimized);
 			if (windows.Count () <= 1) return;
+			
+			Dictionary<Wnck.Window, WindowState> state = new Dictionary<Wnck.Window, WindowState> ();
+			window_states.Push (state);
 			
 			Gdk.Rectangle screenGeo = GetScreenGeoMinusStruts ();
 			
@@ -192,6 +193,27 @@ namespace WindowManager.Wink
 			else
 				foreach (Wnck.Window window in Windows ())
 					RestoreTemporaryWindowGeometry (window, state);
+		}
+		
+		public void CleanRestoreStates ()
+		{
+			IEnumerable<Wnck.Window> windows = Windows ();
+			List<Dictionary<Wnck.Window, WindowState>> expireStates = new List<Dictionary<Wnck.Window, WindowState>> ();
+			
+			foreach (Dictionary<Wnck.Window, WindowState> dict in window_states) {
+				if (dict.Count () == 0)
+					continue;
+				
+				IEnumerable<Wnck.Window> keys = dict.Keys;
+				foreach (Wnck.Window w in keys.Except (windows))
+					dict.Remove (w);
+				
+				if (dict.Count () == 0)
+					expireStates.Add (dict);
+			}
+			
+			IEnumerable<Dictionary<Wnck.Window, WindowState>> newStack = window_states.Except (expireStates).Take (10);
+			window_states = new Stack<Dictionary<Wnck.Window, WindowState>> (newStack);
 		}
 		
 		Gdk.Rectangle GetScreenGeoMinusStruts ()

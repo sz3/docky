@@ -149,8 +149,12 @@ namespace WindowManager.Wink
 		
 		public static List<Window> GetWindows ()
 		{
-			if (window_list == null || window_list_update_needed)
+			if (window_list == null || window_list_update_needed) {
+				window_list_update_needed = false;
 				window_list = new List<Window> (Wnck.Screen.Default.WindowsStacked);
+				
+				ActiveViewport.CleanRestoreStates ();
+			}
 			
 			return window_list;
 		}
