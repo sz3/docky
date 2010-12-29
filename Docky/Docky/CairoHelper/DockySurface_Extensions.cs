@@ -210,17 +210,6 @@ namespace Docky.CairoHelper
 			}
 		}
 		
-		public static Gdk.Pixbuf LoadToPixbuf (this DockySurface self)
-		{
-			Gdk.Pixbuf pbuf;
-			string tmp = System.IO.Path.GetTempFileName ();
-			self.Internal.WriteToPng (tmp);
-			pbuf = new Pixbuf (tmp);
-			System.IO.File.Delete (tmp);
-
-			return pbuf;
-		}
-		
 		public static DockySurface CreateMask (this DockySurface self, double cutOff, out Gdk.Rectangle extents)
 		{
 			ImageSurface original = new ImageSurface (Format.ARGB32, self.Width, self.Height);

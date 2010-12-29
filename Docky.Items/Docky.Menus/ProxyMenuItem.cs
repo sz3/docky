@@ -39,11 +39,7 @@ namespace Docky.Menus
 			Disabled = false;
 			
 			using (DockySurface surface = new DockySurface (ICON_SIZE, ICON_SIZE)) {
-				DockySurface menuSurface = item.IconSurface (surface, ICON_SIZE, ICON_SIZE, 0);
-				string tmp = System.IO.Path.GetTempFileName ();
-				menuSurface.Internal.WriteToPng (tmp);
-				ForcePixbuf = new Pixbuf (tmp);
-				System.IO.File.Delete (tmp);
+				ForcePixbuf = item.IconSurface (surface, ICON_SIZE, ICON_SIZE, 0).LoadToPixbuf ();
 			}
 			
 			Clicked += delegate {

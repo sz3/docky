@@ -18,6 +18,7 @@
 using System;
 
 using Cairo;
+using Gdk;
 
 namespace Docky.CairoHelper
 {
@@ -181,7 +182,64 @@ namespace Docky.CairoHelper
 			
 			Context.ResetClip ();
 		}
+		
+		public Gdk.Pixbuf LoadToPixbuf ()
+		{
+			bool needsDispose = false;
+			ImageSurface image_surface = (Internal as ImageSurface);
+			if (image_surface == null) {
+				image_surface = new ImageSurface (Format.Argb32, Width, Height);
+				using (Cairo.Context cr = new Cairo.Context (image_surface)) {
+					cr.Operator = Operator.Source;
+					cr.SetSource (Internal);
+					cr.Paint ();
+				}
+				needsDispose = true;
+			}
+			
+			int width = image_surface.Width;
+			int height = image_surface.Height;
 
+			Gdk.Pixbuf pb = new Gdk.Pixbuf (Colorspace.Rgb, true, 8, width, height);
+			pb.Fill (0x00000000);
+			
+			unsafe {
+				byte *data = (byte*)image_surface.DataPtr;
+				byte *pixels = (byte*)pb.Pixels;
+				int length = width * height;
+				
+				if (image_surface.Format == Format.Argb32) {
+					for (int i = 0; i < length; i++) {
+						// if alpha is 0 set nothing
+						if (data[3] > 0) {
+							pixels[0] = (byte) (data[2] * 255 / data[3]);
+							pixels[1] = (byte) (data[1] * 255 / data[3]);
+							pixels[2] = (byte) (data[0] * 255 / data[3]);
+							pixels[3] = data[3];
+						}
+			
+						pixels += 4;
+						data += 4;
+					}
+				} else if (image_surface.Format == Format.Rgb24) {
+					for (int i = 0; i < length; i++) {
+						pixels[0] = data[2];
+						pixels[1] = data[1];
+						pixels[2] = data[0];
+						pixels[3] = data[3];
+			
+						pixels += 4;
+						data += 4;
+					}
+				}
+			}
+			
+			if (needsDispose)
+				image_surface.Dispose ();
+			
+			return pb;
+		}
+		
 		#region IDisposable implementation
 		public void Dispose ()
 		{

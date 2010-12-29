@@ -202,7 +202,9 @@ namespace Docky.Interface
 				foreach (AbstractDockItem adi in ProviderForItem (drag_item).Items)
 					original_item_pos [adi] = adi.Position;
 				
-				pbuf = Owner.HoveredItem.IconSurface (new DockySurface (1, 1), Owner.ZoomedIconSize, Owner.IconSize, 0).LoadToPixbuf ();
+				using (DockySurface surface = new DockySurface (Owner.ZoomedIconSize, Owner.ZoomedIconSize)) {
+					pbuf = Owner.HoveredItem.IconSurface (surface, Owner.ZoomedIconSize, Owner.IconSize, 0).LoadToPixbuf ();
+				}
 			} else {
 				pbuf = new Gdk.Pixbuf (Gdk.Colorspace.Rgb, true, 8, 1, 1);
 			}
