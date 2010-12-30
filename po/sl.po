@@ -7,39 +7,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-11-28 18:41+0100\n"
-"PO-Revision-Date: 2010-12-15 07:34+0000\n"
-"Last-Translator: R33D3M33R <Unknown>\n"
+"POT-Creation-Date: 2010-12-29 02:49-0600\n"
+"PO-Revision-Date: 2010-12-19 19:47+0000\n"
+"Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2010-12-19 15:40+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2010-12-30 13:32+0000\n"
+"X-Generator: Launchpad (build 12138)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:147
+#: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Search Docklets..."
 msgstr "Iskanje vključkov ..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:163
+#: ../Docky/Docky/ConfigurationWindow.cs:164
 msgid "Search Helpers..."
-msgstr "Poišči pomagala..."
+msgstr "Poišči pomagala ..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:227
+#: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid "Click on any dock to configure."
 msgstr "Za nastavitve kliknite na katerokoli sidrišče."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:228
+#: ../Docky/Docky/ConfigurationWindow.cs:229
 msgid "Drag any dock to reposition."
 msgstr "Za premestitev povlecite izbrano sidrišče."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:293
+#: ../Docky/Docky/ConfigurationWindow.cs:294
 msgid "Delete the currently selected dock?"
 msgstr "Želite izbrisati trenutno izbrano sidrišče?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:295
+#: ../Docky/Docky/ConfigurationWindow.cs:296
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -47,16 +47,18 @@ msgstr ""
 "Če izbrišete izbrano sidrišče, s tem izgubite\n"
 "tudi vse nastavitve tega sidrišča."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:310
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:405
+#: ../Docky/Docky/ConfigurationWindow.cs:303
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
 msgstr "_Izbriši sidrišče"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:426
+#: ../Docky/Docky/ConfigurationWindow.cs:419
+#: ../Docky/Docky/ConfigurationWindow.cs:439
 msgid "_Select"
 msgstr "_Izberi"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:429
+#: ../Docky/Docky/ConfigurationWindow.cs:422
+#: ../Docky/Docky/ConfigurationWindow.cs:442
 msgid ".tar Archives"
 msgstr "arhivi .tar"
 
@@ -124,15 +126,15 @@ msgstr "Omogoči pomagalo"
 msgid "Disable this helper"
 msgstr "Onemogoči pomagalo"
 
-#: ../Docky/Docky/HelperTile.cs:74
+#: ../Docky/Docky/HelperTile.cs:90
 msgid "Running"
 msgstr "V teku"
 
-#: ../Docky/Docky/HelperTile.cs:74
+#: ../Docky/Docky/HelperTile.cs:90
 msgid "Stopped"
 msgstr "Zaustavljeno"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:331
+#: ../Docky/Docky/Interface/DockPreferences.cs:326
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
@@ -140,40 +142,40 @@ msgstr ""
 "Omogočena možnost določa, da so okna, ki na sidrišču še nimajo "
 "zaganjalnikov, dodana na to sidrišče."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:600
+#: ../Docky/Docky/Interface/DockPreferences.cs:682
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr "<i>Nikoli skrito, razpeta okna ne prekrivajo sidrišča.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:603
+#: ../Docky/Docky/Interface/DockPreferences.cs:685
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Skrito, kadar miškin kazalec ni nad njim.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:606
+#: ../Docky/Docky/Interface/DockPreferences.cs:688
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr ""
 "<i>Skrit, kadar odlagališče prekrije okno trenutno izbranega programa. </i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:609
+#: ../Docky/Docky/Interface/DockPreferences.cs:691
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i> Se skrije ko odložišče ovira katerokoli okno."
 
-#: ../Docky/Docky/Interface/DockWindow.cs:382
+#: ../Docky/Docky/Interface/DockWindow.cs:378
 msgid "Drag to reposition"
 msgstr "Za premestitev povlecite."
 
-#: ../Docky/Docky/Interface/DockWindow.cs:394
-#: ../Docky/Docky/Interface/DockWindow.cs:408
+#: ../Docky/Docky/Interface/DockWindow.cs:390
+#: ../Docky/Docky/Interface/DockWindow.cs:404
 msgid "Drop to add to dock"
 msgstr "Spustite za dodajanje na sidrišče"
 
-#: ../Docky/Docky/Items/DockyItem.cs:93
+#: ../Docky/Docky/Items/DockyItem.cs:132
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:160
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:214
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:244
 msgid "_Settings"
 msgstr "_Nastavitve"
 
-#: ../Docky/Docky/Items/DockyItem.cs:94
+#: ../Docky/Docky/Items/DockyItem.cs:133
 msgid "_About"
 msgstr "_O programu"
 
@@ -181,7 +183,7 @@ msgstr "_O programu"
 msgid "_Help"
 msgstr "Pomo_č"
 
-#: ../Docky/Docky/Items/DockyItem.cs:95
+#: ../Docky/Docky/Items/DockyItem.cs:136
 msgid "_Quit Docky"
 msgstr "_Končaj Docky"
 
@@ -193,42 +195,43 @@ msgstr "Nastavitve programa Docky"
 msgid "_Start When User Logs In"
 msgstr "_Zaženi ob prijavi uporabnika"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:155
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
 msgstr "_Tema:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:315
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
 msgid "_Install"
 msgstr "_Namesti"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:179
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
 msgid "<b>General Options</b>"
 msgstr "<b>Splošne možnosti</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:199
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
 msgstr "<b>Nastavitve sidrišča</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:213
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
 msgstr "Sidrišča"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:234
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:289
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
 msgid "All"
 msgstr "Vsa"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:235
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:290
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
 msgid "Enabled"
 msgstr "Omogočeno"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:236
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:291
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
 msgid "Disabled"
 msgstr "Onemogočeno"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:268
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
 msgid "Docklets"
 msgstr "Vključki"
 
@@ -236,59 +239,59 @@ msgstr "Vključki"
 msgid "Usable"
 msgstr "Uporabno"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:347
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
 msgstr "Pomagala"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:378
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
 msgid "_New Dock"
 msgstr "_Novo sidrišče"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
 msgid "None"
 msgstr "Brez"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
 msgid "Autohide"
 msgstr "Samodejno skrivanje"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:62
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "Intellihide"
 msgstr "Pametno skrivanje"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:63
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Window Dodge"
 msgstr "Izogibanje oknom"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
 msgid "_Fade On Hide"
 msgstr "_Zbledi ob skritju"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:121
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
 msgid "_Icon Size:"
 msgstr "_Velikost ikon:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:134
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:132
 msgid "_Hiding:"
 msgstr "_Skrivanje:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:158
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
 msgid "_Panel Mode"
 msgstr "Način _pladnja"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:172
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
 msgid "3D Back_ground"
 msgstr "3D Oza_dje"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:186
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
 msgid "_Manage Windows Without Launcher"
 msgstr "_Upravljaj okna brez zaganjalnika"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:201
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
 msgid "_Zoom:"
 msgstr "_Povečava:"
 
-#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:119
+#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:120
 #, csharp-format
 msgid "Drop to open with {0}"
 msgstr "Spusti za odpiranje z {0}"
@@ -302,69 +305,69 @@ msgstr "Novo _okno"
 msgid "_Open"
 msgstr "_Odpri"
 
-#: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:69
+#: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:70
 msgid "Reset Color"
 msgstr "Ponastavi barvo"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:434
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:482
 msgid "_Pin to Dock"
 msgstr "_Pripni na sidrišče"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:75
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:83
 #, csharp-format
 msgid "Drop to move to {0}"
 msgstr "Spustite za premik k {0}"
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:239
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:197
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:242
 msgid "Error performing drop action"
 msgstr "Napaka med dejanjem spuščanja."
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:197
 msgid "Not enough free space on destination."
 msgstr "Na cilju ni dovolj prostega prostora."
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:211
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:214
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:246
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:217
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:249
 msgid "Complete"
 msgstr "Dokončano"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:224
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:227
 msgid "Moving"
 msgstr "Premikanje"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:230
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:233
 msgid "Copying"
 msgstr "Kopiranje"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:264
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:267
 msgid "Open"
 msgstr "Odpri"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:265
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:268
 msgid "Open Containing Folder"
 msgstr "Odpri vsebujočo mapo"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:265
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
 msgid "Unma_ximize"
 msgstr "Odr_azpni"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:268
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:267
 msgid "Ma_ximize"
 msgstr "Ra_zpni"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:273
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:271
 msgid "_Restore"
 msgstr "Pov_rni"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:276
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:274
 msgid "Mi_nimize"
 msgstr "_Skrči"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:280
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:277
 msgid "_Close All"
 msgstr "Zapri _vse"
 
@@ -444,23 +447,27 @@ msgstr "ostaja "
 msgid "_Statistics"
 msgstr "_Statistika"
 
-#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:86
+#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:85
 msgid "Computer"
 msgstr "Računalnik"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:430
+#: ../StandardPlugins/Clippy/src/ClippyItem.cs:89
+msgid "Clipboard is currently empty."
+msgstr ""
+
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "Di_gital Clock"
 msgstr "Di_gitalna ura"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:436
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
 msgid "24-Hour _Clock"
 msgstr "24-urni _prikaz"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:442
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:443
 msgid "Show _Date"
 msgstr "Prikaži _datum"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:448
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:449
 msgid "Select _Theme"
 msgstr "Izberi _temo"
 
@@ -468,13 +475,25 @@ msgstr "Izberi _temo"
 msgid "Themes"
 msgstr "Teme"
 
-#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
+#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:62
 msgid "Theme"
 msgstr "Tema"
 
-#: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:42
+#: ../StandardPlugins/Desktop/src/DesktopActionsProvider.cs:57
+msgid "_Undo"
+msgstr ""
+
+#: ../StandardPlugins/Desktop/src/ShowDesktopItem.cs:37
 msgid "Show Desktop"
 msgstr "Pokaži namizje"
+
+#: ../StandardPlugins/Desktop/src/TileDesktopItem.cs:38
+msgid "Tile Desktop"
+msgstr ""
+
+#: ../StandardPlugins/Desktop/src/CascadeDesktopItem.cs:38
+msgid "Cascade Desktop"
+msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
 msgid "_Add Label"
@@ -518,6 +537,7 @@ msgstr "Neveljavno uporabniško ime"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:292
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:173
 msgid "Network Error"
 msgstr "Napaka omrežja"
 
@@ -546,11 +566,11 @@ msgstr[3] "{0} neprabranih sporočil"
 msgid "Checking mail..."
 msgstr "Iskanje pošte..."
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:193
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "_View "
 msgstr "_Pogled "
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:198
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
 msgid "_Compose Mail"
 msgstr "_Sestavi Pošto"
 
@@ -558,11 +578,11 @@ msgstr "_Sestavi Pošto"
 msgid "View C_ontacts"
 msgstr "_Prikaži Stike"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
 msgid "New Mail"
 msgstr "Nova pošta"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:222
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:236
 msgid "Check _Mail"
 msgstr "P_reveri pošto"
 
@@ -649,20 +669,23 @@ msgstr "Doniraj"
 msgid "Live Streams"
 msgstr "Živo pretakanje"
 
-#: ../Docky/Docky/DockletTile.cs:56
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:170
 msgid "Settings"
 msgstr "Nastavitve"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:76
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:76
+msgid "_Clear Recent Documents..."
+msgstr "Počis_ti nedavne dokumente..."
+
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:87
 msgid "Clear the Recent Documents list?"
 msgstr "Počisti seznam nedavnih dokumentov?"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:78
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:89
 msgid "Clear Recent Documents"
 msgstr "Počisti zadnje dokumente"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:80
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:91
 msgid ""
 "If you clear the Recent Documents list, you clear the following:\n"
 "• All items from the Places → Recent Documents menu item.\n"
@@ -672,58 +695,54 @@ msgstr ""
 "• vsi predmeti iz menija Mesta → Nedavni dokumenti.\n"
 "• vsi predmeti iz seznamov nedavnih dokumentov vaših programov."
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
-msgid "_Clear Recent Documents..."
-msgstr "Počis_ti nedavne dokumente..."
-
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:76
 msgid "Lock Screen"
 msgstr "Zakleni zaslon"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:157
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:80
 msgid "Log Out..."
 msgstr "Odjava ..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:81
 msgid "Log Out"
 msgstr "Odjava"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:159
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:82
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
 msgstr "Resnično želite zapreti vse programe in se odjaviti iz sistema?"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:164
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:87
 msgid "Suspend"
 msgstr "V pripravljenost"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:169
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:92
 msgid "Hibernate"
 msgstr "V mirovanje"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:175
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:97
 msgid "Restart..."
 msgstr "Ponovni zagon ..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:98
 msgid "Restart"
 msgstr "Ponovni zagon"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:177
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:99
 msgid "Are you sure you want to close all programs and restart the computer?"
 msgstr ""
 "Ali ste prepričani, da želite zapreti vse programe in ponovno zagnati "
 "računalnik?"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:182
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:104
 msgid "Shut Down..."
 msgstr "Izklop ..."
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:183
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:105
 msgid "Shut Down"
 msgstr "Izklop"
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:184
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:106
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
 msgstr "Resnično želite zapreti vse programe in izklopiti računalnik?"
@@ -803,15 +822,15 @@ msgstr "Samode_jno zaženi odštevalnike"
 msgid "Automatically _Dismiss Timers"
 msgstr "Samodejno opusti odštevalnike"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:50
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:55
 msgid "Drop to move to Trash"
 msgstr "Spustite za premik v smeti"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:77
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:82
 msgid "No items in Trash"
 msgstr "Smeti so prazne"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:79
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:84
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
@@ -824,20 +843,20 @@ msgstr[3] "{0} predmeti v smeteh"
 msgid "Restore Files"
 msgstr "Obnovi datoteke"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:164
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:201
 msgid "_Open Trash"
 msgstr "_Odpreti smeti"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:166
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:203
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:234
 msgid "Empty _Trash"
 msgstr "Sprazni _smeti"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:188
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:226
 msgid "Empty all of the items from the trash?"
 msgstr "Ali naj se izbrišejo vsi predmeti iz smeti?"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:190
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:228
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
@@ -867,9 +886,7 @@ msgstr "Samod_ejno posodobi vsakih"
 msgid "Use _Metric Units"
 msgstr "Uporabi _metrične enote"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:98
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:101
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:106
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:170
 msgid "Invalid Weather Location"
 msgstr "Neveljavna vremenska lokacija"
 
@@ -887,7 +904,7 @@ msgid ""
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
+#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:56
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
@@ -905,28 +922,27 @@ msgstr "Nastavitve vremena"
 msgid "Click to add a location."
 msgstr "Kliknite za dodajanje lokacije."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
 msgid "Fetching data..."
 msgstr "Pridobivanje podatkov ..."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:222
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Radar _Map"
 msgstr "Radarska _slika"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:227
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "Forecasts"
 msgstr "Napovedi"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:243
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:252
 msgid "Check _Weather"
 msgstr "Preveri _vreme"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
 msgid "_Today"
 msgstr "_Danes"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
 msgid "T_omorrow"
 msgstr "J_utri"
 
@@ -948,6 +964,12 @@ msgstr ""
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:173
 msgid "Virtual Desk"
 msgstr ""
+
+#~ msgid "GMail Configuration"
+#~ msgstr "Nastavitve GMail"
+
+#~ msgid "GMail"
+#~ msgstr "GMail"
 
 #~ msgid "Docky Configuration"
 #~ msgstr "Nastavitve za Docky"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-11-28 18:41+0100\n"
+"POT-Creation-Date: 2010-12-29 02:49-0600\n"
 "PO-Revision-Date: 2010-09-30 11:12+0000\n"
 "Last-Translator: Baldur <baldurpet@gmail.com>\n"
 "Language-Team: Icelandic <is@li.org>\n"
@@ -15,45 +15,47 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-12-12 13:21+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2010-12-30 13:32+0000\n"
+"X-Generator: Launchpad (build 12138)\n"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:147
+#: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Search Docklets..."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:163
+#: ../Docky/Docky/ConfigurationWindow.cs:164
 msgid "Search Helpers..."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:227
+#: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid "Click on any dock to configure."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:228
+#: ../Docky/Docky/ConfigurationWindow.cs:229
 msgid "Drag any dock to reposition."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:293
+#: ../Docky/Docky/ConfigurationWindow.cs:294
 msgid "Delete the currently selected dock?"
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:295
+#: ../Docky/Docky/ConfigurationWindow.cs:296
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:310
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:405
+#: ../Docky/Docky/ConfigurationWindow.cs:303
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:426
+#: ../Docky/Docky/ConfigurationWindow.cs:419
+#: ../Docky/Docky/ConfigurationWindow.cs:439
 msgid "_Select"
 msgstr "_Velja"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:429
+#: ../Docky/Docky/ConfigurationWindow.cs:422
+#: ../Docky/Docky/ConfigurationWindow.cs:442
 msgid ".tar Archives"
 msgstr ".tar safnskrár"
 
@@ -119,53 +121,53 @@ msgstr ""
 msgid "Disable this helper"
 msgstr ""
 
-#: ../Docky/Docky/HelperTile.cs:74
+#: ../Docky/Docky/HelperTile.cs:90
 msgid "Running"
 msgstr "Keyrandi"
 
-#: ../Docky/Docky/HelperTile.cs:74
+#: ../Docky/Docky/HelperTile.cs:90
 msgid "Stopped"
 msgstr "Stöðvað"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:331
+#: ../Docky/Docky/Interface/DockPreferences.cs:326
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:600
+#: ../Docky/Docky/Interface/DockPreferences.cs:682
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:603
+#: ../Docky/Docky/Interface/DockPreferences.cs:685
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:606
+#: ../Docky/Docky/Interface/DockPreferences.cs:688
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:609
+#: ../Docky/Docky/Interface/DockPreferences.cs:691
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr ""
 
-#: ../Docky/Docky/Interface/DockWindow.cs:382
+#: ../Docky/Docky/Interface/DockWindow.cs:378
 msgid "Drag to reposition"
 msgstr "Haltu inni til að endurstaðsetja"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:394
-#: ../Docky/Docky/Interface/DockWindow.cs:408
+#: ../Docky/Docky/Interface/DockWindow.cs:390
+#: ../Docky/Docky/Interface/DockWindow.cs:404
 msgid "Drop to add to dock"
 msgstr ""
 
-#: ../Docky/Docky/Items/DockyItem.cs:93
+#: ../Docky/Docky/Items/DockyItem.cs:132
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:160
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:214
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:244
 msgid "_Settings"
 msgstr "_Stillingar"
 
-#: ../Docky/Docky/Items/DockyItem.cs:94
+#: ../Docky/Docky/Items/DockyItem.cs:133
 msgid "_About"
 msgstr "_Um"
 
@@ -173,7 +175,7 @@ msgstr "_Um"
 msgid "_Help"
 msgstr ""
 
-#: ../Docky/Docky/Items/DockyItem.cs:95
+#: ../Docky/Docky/Items/DockyItem.cs:136
 msgid "_Quit Docky"
 msgstr "_Hætta í Docky"
 
@@ -185,42 +187,43 @@ msgstr ""
 msgid "_Start When User Logs In"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:155
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
 msgstr "_Þema"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:315
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
 msgid "_Install"
 msgstr "_Setja upp"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:179
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
 msgid "<b>General Options</b>"
 msgstr "<b>Valmöguleikar</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:199
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
 msgstr "<b>Stillingar á stiku</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:213
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:234
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:289
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
 msgid "All"
 msgstr "Allt"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:235
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:290
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
 msgid "Enabled"
 msgstr "Virkt"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:236
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:291
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
 msgid "Disabled"
 msgstr "Óvirkt"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:268
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
 msgid "Docklets"
 msgstr ""
 
@@ -228,59 +231,59 @@ msgstr ""
 msgid "Usable"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:347
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:378
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
 msgid "_New Dock"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
 msgid "None"
 msgstr "Ekkert"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
 msgid "Autohide"
 msgstr "Fela sjálfkrafa"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:62
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "Intellihide"
 msgstr "Fela gáfulega"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:63
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Window Dodge"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
 msgid "_Fade On Hide"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:121
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
 msgid "_Icon Size:"
 msgstr "Stærð tá_knmynda:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:134
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:132
 msgid "_Hiding:"
 msgstr "_Felun:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:158
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
 msgid "_Panel Mode"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:172
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
 msgid "3D Back_ground"
 msgstr "3D bak_grunnur"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:186
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
 msgid "_Manage Windows Without Launcher"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:201
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
 msgid "_Zoom:"
 msgstr "Að_dráttur:"
 
-#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:119
+#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:120
 #, csharp-format
 msgid "Drop to open with {0}"
 msgstr ""
@@ -294,69 +297,69 @@ msgstr "Nýr _gluggi"
 msgid "_Open"
 msgstr "_Opna"
 
-#: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:69
+#: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:70
 msgid "Reset Color"
 msgstr "Frumstilla lit"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:434
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:482
 msgid "_Pin to Dock"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:75
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:83
 #, csharp-format
 msgid "Drop to move to {0}"
 msgstr ""
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:239
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:197
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:242
 msgid "Error performing drop action"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:194
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:197
 msgid "Not enough free space on destination."
 msgstr "Ekki nægilegt pláss á áfangastaðnum."
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:211
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:214
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:246
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:217
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:249
 msgid "Complete"
 msgstr "Lokið"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:224
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:227
 msgid "Moving"
 msgstr "Færi"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:230
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:233
 msgid "Copying"
 msgstr "Afrita"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:264
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:267
 msgid "Open"
 msgstr "Opna"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:265
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:268
 msgid "Open Containing Folder"
 msgstr "Opna geymslumöppu"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:265
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
 msgid "Unma_ximize"
 msgstr "Minn_ka glugga"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:268
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:267
 msgid "Ma_ximize"
 msgstr "_Hámarka"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:273
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:271
 msgid "_Restore"
 msgstr "Endu_rheimta"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:276
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:274
 msgid "Mi_nimize"
 msgstr "Lág_marka"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:280
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:277
 msgid "_Close All"
 msgstr "Loka _öllu"
 
@@ -432,23 +435,27 @@ msgstr "eftir "
 msgid "_Statistics"
 msgstr ""
 
-#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:86
+#: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:85
 msgid "Computer"
 msgstr "Tölva"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:430
+#: ../StandardPlugins/Clippy/src/ClippyItem.cs:89
+msgid "Clipboard is currently empty."
+msgstr ""
+
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "Di_gital Clock"
 msgstr "Sta_fræn klukka"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:436
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
 msgid "24-Hour _Clock"
 msgstr "24 klst. k_lukka"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:442
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:443
 msgid "Show _Date"
 msgstr "Sýna _dagsetningu"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:448
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:449
 msgid "Select _Theme"
 msgstr "Velja _þema"
 
@@ -456,12 +463,24 @@ msgstr "Velja _þema"
 msgid "Themes"
 msgstr "Þemur"
 
-#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
+#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:62
 msgid "Theme"
 msgstr "Þema"
 
-#: ../StandardPlugins/Desktop/src/DesktopDockItem.cs:42
+#: ../StandardPlugins/Desktop/src/DesktopActionsProvider.cs:57
+msgid "_Undo"
+msgstr ""
+
+#: ../StandardPlugins/Desktop/src/ShowDesktopItem.cs:37
 msgid "Show Desktop"
+msgstr ""
+
+#: ../StandardPlugins/Desktop/src/TileDesktopItem.cs:38
+msgid "Tile Desktop"
+msgstr ""
+
+#: ../StandardPlugins/Desktop/src/CascadeDesktopItem.cs:38
+msgid "Cascade Desktop"
 msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
@@ -506,6 +525,7 @@ msgstr "Ógilt notandanafn"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:292
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:173
 msgid "Network Error"
 msgstr "Netvilla"
 
@@ -532,11 +552,11 @@ msgstr[1] "{0} ólesin skilaboð"
 msgid "Checking mail..."
 msgstr "Athuga póstinn..."
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:193
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "_View "
 msgstr "Sk_oða "
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:198
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
 msgid "_Compose Mail"
 msgstr "Skrifa _póst"
 
@@ -544,11 +564,11 @@ msgstr "Skrifa _póst"
 msgid "View C_ontacts"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
 msgid "New Mail"
 msgstr "Nýr póstur"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:222
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:236
 msgid "Check _Mail"
 msgstr "Athuga _með póst"
 
@@ -635,20 +655,23 @@ msgstr "Gefa"
 msgid "Live Streams"
 msgstr "Lifandi straumar"
 
-#: ../Docky/Docky/DockletTile.cs:56
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:170
 msgid "Settings"
 msgstr "Stillingar"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:76
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:76
+msgid "_Clear Recent Documents..."
+msgstr "_Hreinsa nýleg skjöl..."
+
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:87
 msgid "Clear the Recent Documents list?"
 msgstr "Hreinsa lista nýlegra skjala?"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:78
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:89
 msgid "Clear Recent Documents"
 msgstr "Hreinsa nýleg skjöl"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:80
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:91
 msgid ""
 "If you clear the Recent Documents list, you clear the following:\n"
 "• All items from the Places → Recent Documents menu item.\n"
@@ -658,56 +681,52 @@ msgstr ""
 "• Alla hluti úr Staðir → Nýleg skjöl valmyndaratriðinu.\n"
 "• Alla hluti úr listanum yfir nýleg skjöl í öllum forritum."
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:116
-msgid "_Clear Recent Documents..."
-msgstr "_Hreinsa nýleg skjöl..."
-
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:153
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:76
 msgid "Lock Screen"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:157
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:80
 msgid "Log Out..."
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:158
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:81
 msgid "Log Out"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:159
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:82
 msgid ""
 "Are you sure you want to close all programs and log out of the computer?"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:164
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:87
 msgid "Suspend"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:169
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:92
 msgid "Hibernate"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:175
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:97
 msgid "Restart..."
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:176
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:98
 msgid "Restart"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:177
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:99
 msgid "Are you sure you want to close all programs and restart the computer?"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:182
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:104
 msgid "Shut Down..."
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:183
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:105
 msgid "Shut Down"
 msgstr ""
 
-#: ../StandardPlugins/SessionManager/src/SessionManagerItem.cs:184
+#: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:106
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
 msgstr ""
@@ -781,15 +800,15 @@ msgstr ""
 msgid "Automatically _Dismiss Timers"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:50
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:55
 msgid "Drop to move to Trash"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:77
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:82
 msgid "No items in Trash"
 msgstr "Ruslið er tómt"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:79
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:84
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
@@ -800,20 +819,20 @@ msgstr[1] "{0} hlutir í ruslinu"
 msgid "Restore Files"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:164
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:201
 msgid "_Open Trash"
 msgstr "_Opna ruslið"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:166
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:203
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:234
 msgid "Empty _Trash"
 msgstr "_Tæma ruslið"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:188
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:226
 msgid "Empty all of the items from the trash?"
 msgstr "Fjarlægja alla hluti úr ruslinu?"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:190
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:228
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
@@ -840,9 +859,7 @@ msgstr "Uppfæra _sjálfkrafa hverjar"
 msgid "Use _Metric Units"
 msgstr "Nota _einingar metrakerfisins"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:98
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:101
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:106
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:170
 msgid "Invalid Weather Location"
 msgstr "Ógild staðsetning"
 
@@ -860,7 +877,7 @@ msgid ""
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
+#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:56
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
@@ -878,28 +895,27 @@ msgstr "Stillingar veðurupplýsinga"
 msgid "Click to add a location."
 msgstr ""
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
 msgid "Fetching data..."
 msgstr "Sæki gögnin..."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:222
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Radar _Map"
 msgstr "Ratsjár_mynd"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:227
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "Forecasts"
 msgstr "Veðurspár"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:243
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:252
 msgid "Check _Weather"
 msgstr "Athuga _veðrið"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
 msgid "_Today"
 msgstr "Í _dag"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
 msgid "T_omorrow"
 msgstr "Á m_orgun"
 
@@ -982,6 +998,19 @@ msgstr ""
 #~ msgid "Add _Label"
 #~ msgstr "Bæta við _miða"
 
+#~ msgid ""
+#~ "<big><b>Empty all of the items from the trash?</b></big>\n"
+#~ "\n"
+#~ "If you choose to empty the trash, all items in it\n"
+#~ "will be permanently lost. Please note that you\n"
+#~ "can also delete them separately."
+#~ msgstr ""
+#~ "<big><b>Viltu henda öllu úr ruslinu?</b></big>\n"
+#~ "\n"
+#~ "Allir hlutir í ruslinu munu hverfa að eilífu ef þú\n"
+#~ "ákveður að tæma úr því. Hafðu það í huga að \n"
+#~ "þú getur eitt einni skrá í einu."
+
 #~ msgid "Check _Every"
 #~ msgstr "_Skoða hverja"
 
@@ -1054,6 +1083,12 @@ msgstr ""
 
 #~ msgid "Username or Password not set"
 #~ msgstr "Notandanafn eða lykilorð eru ekki stillt"
+
+#~ msgid "GMail Configuration"
+#~ msgstr "Stillingar GMail"
+
+#~ msgid "GMail"
+#~ msgstr "GMail"
 
 #~ msgid "Feels Like"
 #~ msgstr "Vindkæling"
