@@ -35,7 +35,7 @@ namespace Desktop
 		
 		public TileDesktopItem ()
 		{
-			HoverText = Catalog.GetString ("Tile Desktop");
+			HoverText = Catalog.GetString ("_Tile Desktop");
 			Icon = "window-tile.svg@" + GetType ().Assembly.FullName;
 		}
 

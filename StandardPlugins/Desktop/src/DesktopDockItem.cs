@@ -34,6 +34,7 @@ namespace Desktop
 		
 		public DesktopDockItem () : base (new DesktopActionsProvider ())
 		{
+			StripMnemonics = true;
 		}
 	}
 }

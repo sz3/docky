@@ -73,35 +73,35 @@ namespace SessionManager
 
 		void CreateItems ()
 		{
-			lockItem = new SessionManagerActionItem ("system-lock-screen", Catalog.GetString ("Lock Screen"), () => { 
+			lockItem = new SessionManagerActionItem ("system-lock-screen", Catalog.GetString ("L_ock Screen"), () => { 
 				system_manager.LockScreen ();
 			});
 		
-			logoutItem = new SessionManagerActionItem ("system-log-out", Catalog.GetString ("Log Out..."), () => { 
+			logoutItem = new SessionManagerActionItem ("system-log-out", Catalog.GetString ("_Log Out..."), () => { 
 				SessionManagerActionItem.ShowConfirmationDialog (Catalog.GetString ("Log Out"), 
 										Catalog.GetString ("Are you sure you want to close all programs and log out of the computer?"), 
 										"system-log-out", 
 										system_manager.LogOut);
 			});
 		
-			suspendItem = new SessionManagerActionItem ("system-suspend", Catalog.GetString ("Suspend"), () => { 
+			suspendItem = new SessionManagerActionItem ("system-suspend", Catalog.GetString ("_Suspend"), () => { 
 				system_manager.LockScreen ();
 				system_manager.Suspend (); 
 			});
 		
-			hibernateItem = new SessionManagerActionItem ("system-hibernate", Catalog.GetString ("Hibernate"), () => { 
+			hibernateItem = new SessionManagerActionItem ("system-hibernate", Catalog.GetString ("_Hibernate"), () => { 
 				system_manager.LockScreen ();
 				system_manager.Hibernate (); 
 			});
 		
-			restartItem = new SessionManagerActionItem ("system-restart", Catalog.GetString ("Restart..."), () => { 
+			restartItem = new SessionManagerActionItem ("system-restart", Catalog.GetString ("_Restart..."), () => { 
 				SessionManagerActionItem.ShowConfirmationDialog (Catalog.GetString ("Restart"), 
 										Catalog.GetString ("Are you sure you want to close all programs and restart the computer?"), 
 										"system-restart", 
 										() => system_manager.Restart ());
 			});
 		
-			shutdownItem = new SessionManagerActionItem ("system-shutdown", Catalog.GetString ("Shut Down..."), () => { 
+			shutdownItem = new SessionManagerActionItem ("system-shutdown", Catalog.GetString ("Shut _Down..."), () => { 
 				SessionManagerActionItem.ShowConfirmationDialog (Catalog.GetString ("Shut Down"), 
 										Catalog.GetString ("Are you sure you want to close all programs and shut down the computer?"), 
 										"system-shutdown", 

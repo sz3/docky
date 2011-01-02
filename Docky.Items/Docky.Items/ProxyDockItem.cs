@@ -31,6 +31,8 @@ namespace Docky.Items
 	{
 		AbstractDockItem currentItem;
 		
+		protected bool StripMnemonics { get; set; }
+		
 		int currentPos;
 		int CurrentPosition {
 			get { return currentPos; }
@@ -56,6 +58,8 @@ namespace Docky.Items
 		
 		public ProxyDockItem (AbstractDockItemProvider provider, IPreferences prefs)
 		{
+			StripMnemonics = false;
+			
 			Provider = provider;
 			Provider.ItemsChanged += HandleProviderItemsChanged;
 			this.prefs = prefs;
@@ -72,15 +76,21 @@ namespace Docky.Items
 			ItemChanged ();
 		}
 		
-		public void SetItem (AbstractDockItem item)
+		void HandleProviderItemsChanged (object o, EventArgs args)
 		{
-			SetItem (item, false);
+			if (!SetItem (currentItem))
+				ItemChanged ();
 		}
 		
-		public void SetItem (AbstractDockItem item, bool temporary)
+		public bool SetItem (AbstractDockItem item)
+		{
+			return SetItem (item, false);
+		}
+		
+		public bool SetItem (AbstractDockItem item, bool temporary)
 		{
 			if (!Provider.Items.Contains (item))
-				return;
+				return false;
 			
 			AbstractDockItem[] items = Provider.Items.ToArray ();
 			
@@ -94,11 +104,7 @@ namespace Docky.Items
 				}
 			
 			ItemChanged ();
-		}
-		
-		void HandleProviderItemsChanged (object o, EventArgs args)
-		{
-			ItemChanged ();
+			return true;
 		}
 		
 		void ItemChanged ()
@@ -252,7 +258,7 @@ namespace Docky.Items
 		}
 		
 		public override string HoverText {
-			get { return currentItem.HoverText; }
+			get { return StripMnemonics ? currentItem.HoverText.Replace ("_", "") : currentItem.HoverText; }
 		}
 		
 		public override string ShortName {

@@ -34,7 +34,7 @@ namespace Desktop
 		
 		public ShowDesktopItem ()
 		{
-			HoverText = Catalog.GetString ("Show Desktop");
+			HoverText = Catalog.GetString ("_Show Desktop");
 			Icon = "show-desktop.svg@" + GetType ().Assembly.FullName;
 		}
 

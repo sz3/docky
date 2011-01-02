@@ -36,6 +36,7 @@ namespace SessionManager
 
 		public SessionManagerItem () : base (new SessionActionsProvider (), prefs)
 		{
+			StripMnemonics = true;
 			system_manager.RebootRequired += HandleRebootRequired;
 		}
 		

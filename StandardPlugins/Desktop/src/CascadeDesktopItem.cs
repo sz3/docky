@@ -35,7 +35,7 @@ namespace Desktop
 		
 		public CascadeDesktopItem ()
 		{
-			HoverText = Catalog.GetString ("Cascade Desktop");
+			HoverText = Catalog.GetString ("_Cascade Desktop");
 			Icon = "window-cascade.svg@" + GetType ().Assembly.FullName;
 		}
 
