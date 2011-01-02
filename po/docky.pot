@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 02:49-0600\n"
+"POT-Creation-Date: 2011-01-02 22:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -95,7 +95,7 @@ msgstr ""
 msgid "Remove this docklet from the selected dock"
 msgstr ""
 
-#: ../Docky/Docky/Docky.cs:121
+#: ../Docky/Docky/Docky.cs:141
 msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
@@ -293,12 +293,13 @@ msgid "New _Window"
 msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:182
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:267
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
 msgstr ""
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:70
-msgid "Reset Color"
+msgid "_Reset Color"
 msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:482
@@ -335,12 +336,8 @@ msgstr ""
 msgid "Copying"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:267
-msgid "Open"
-msgstr ""
-
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:268
-msgid "Open Containing Folder"
+msgid "Open Containing _Folder"
 msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
@@ -472,15 +469,15 @@ msgid "_Undo"
 msgstr ""
 
 #: ../StandardPlugins/Desktop/src/ShowDesktopItem.cs:37
-msgid "Show Desktop"
+msgid "_Show Desktop"
 msgstr ""
 
 #: ../StandardPlugins/Desktop/src/TileDesktopItem.cs:38
-msgid "Tile Desktop"
+msgid "_Tile Desktop"
 msgstr ""
 
 #: ../StandardPlugins/Desktop/src/CascadeDesktopItem.cs:38
-msgid "Cascade Desktop"
+msgid "_Cascade Desktop"
 msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
@@ -659,19 +656,19 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:76
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:83
 msgid "_Clear Recent Documents..."
 msgstr ""
 
-#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:87
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:94
 msgid "Clear the Recent Documents list?"
 msgstr ""
 
-#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:89
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:96
 msgid "Clear Recent Documents"
 msgstr ""
 
-#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:91
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:98
 msgid ""
 "If you clear the Recent Documents list, you clear the following:\n"
 "• All items from the Places → Recent Documents menu item.\n"
@@ -679,11 +676,11 @@ msgid ""
 msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:76
-msgid "Lock Screen"
+msgid "L_ock Screen"
 msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:80
-msgid "Log Out..."
+msgid "_Log Out..."
 msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:81
@@ -696,15 +693,15 @@ msgid ""
 msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:87
-msgid "Suspend"
+msgid "_Suspend"
 msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:92
-msgid "Hibernate"
+msgid "_Hibernate"
 msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:97
-msgid "Restart..."
+msgid "_Restart..."
 msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:98
@@ -716,7 +713,7 @@ msgid "Are you sure you want to close all programs and restart the computer?"
 msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:104
-msgid "Shut Down..."
+msgid "Shut _Down..."
 msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:105
