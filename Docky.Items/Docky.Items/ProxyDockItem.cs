@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2010 Robert Dyer
+//  Copyright (C) 2010-2011 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@ namespace Docky.Items
 			}
 		}
 		
-		public event EventHandler CurrentItemChanged;
+		public event EventHandler<CurrentItemChangedArgs> CurrentItemChanged;
 		
 		IPreferences prefs;
 		
@@ -103,10 +103,12 @@ namespace Docky.Items
 		
 		void ItemChanged ()
 		{
-			if (currentItem != null) {
-				currentItem.HoverTextChanged -= HandleHoverTextChanged;
-				currentItem.PaintNeeded      -= HandlePaintNeeded;
-				currentItem.PainterRequest   -= HandlePainterRequest;
+			AbstractDockItem oldItem = currentItem;
+			
+			if (oldItem != null) {
+				oldItem.HoverTextChanged -= HandleHoverTextChanged;
+				oldItem.PaintNeeded      -= HandlePaintNeeded;
+				oldItem.PainterRequest   -= HandlePainterRequest;
 			}
 			
 			if (CurrentPosition < 0)
@@ -120,7 +122,7 @@ namespace Docky.Items
 			currentItem.PainterRequest   += HandlePainterRequest;
 			
 			if (CurrentItemChanged != null)
-				CurrentItemChanged (currentItem, EventArgs.Empty);
+				CurrentItemChanged (currentItem, new CurrentItemChangedArgs (currentItem, oldItem));
 
 			QueueRedraw ();
 			OnHoverTextChanged ();
