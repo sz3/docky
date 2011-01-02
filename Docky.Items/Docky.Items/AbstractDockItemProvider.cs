@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009 Robert Dyer
+//  Copyright (C) 2011 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,13 +18,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
 
-using Docky;
 using Docky.Menus;
-using Docky.CairoHelper;
 using Docky.Services;
 
 namespace Docky.Items
@@ -39,7 +36,7 @@ namespace Docky.Items
 		}
 		
 		public virtual bool AutoDisable {
-			get { return !disposing && true; }
+			get { return !disposing; }
 		}
 		
 		public bool IsOnVerticalDock { get; set; }
@@ -51,15 +48,15 @@ namespace Docky.Items
 				IEnumerable<AbstractDockItem> added = value.Where (adi => !items.Contains (adi)).ToArray ();
 				IEnumerable<AbstractDockItem> removed = items.Where (adi => !value.Contains (adi)).ToArray ();
 				
+				if (!added.Any () && !removed.Any ())
+					return;
+				
 				int position = items.Any () ? items.Max (adi => adi.Position) + 1 : 0;
 				foreach (AbstractDockItem item in added) {
 					item.AddTime = DateTime.UtcNow;
 					item.Position = position;
 					position++;
 				}
-				
-				if (!added.Any () && !removed.Any ())
-					return;
 				
 				items = value.ToArray ();
 				foreach (AbstractDockItem item in items)
@@ -102,10 +99,9 @@ namespace Docky.Items
 			}
 			
 			if (newItem != null) {
-				foreach (AbstractDockItem item in Items.Where (adi => adi.Position >= position)) {
-					item.Position++;
-				}
 				newItem.Position = position;
+				foreach (AbstractDockItem item in Items.Where (adi => adi.Position >= position))
+					item.Position++;
 			}
 			
 			OnItemsChanged (null, null);
