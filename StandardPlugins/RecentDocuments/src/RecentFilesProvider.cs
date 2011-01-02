@@ -1,6 +1,7 @@
 //  
 //  Copyright (C) 2009 Chris Szikszoy, Robert Dyer
 //  Copyright (C) 2010 Robert Dyer
+//  Copyright (C) 2011 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -58,16 +59,19 @@ namespace RecentDocuments
 		{
 			List<AbstractDockItem> items = new List<AbstractDockItem> ();
 			
-			GLib.List recent_items = new GLib.List (Gtk.RecentManager.Default.Items.Handle, typeof(Gtk.RecentInfo));
-			CanClear = recent_items.Cast<Gtk.RecentInfo> ().Any ();
+			GLib.List recent_items = new GLib.List (Gtk.RecentManager.Default.Items.Handle, typeof(Gtk.RecentInfo), true, false);
+			IEnumerable<Gtk.RecentInfo> infos = recent_items.OfType<Gtk.RecentInfo> ();
+			CanClear = recent_items.Count > 0;
 			
-			items.AddRange (recent_items.Cast<Gtk.RecentInfo> ()
-								 .Where (it => it.Exists ())
+			items.Add (emptyItem);
+			items.AddRange (infos.Where (it => it.Exists ())
 								 .OrderByDescending (f => f.Modified)
 								 .Take (NumRecentDocs)
 								 .Select (f => (AbstractDockItem)FileDockItem.NewFromUri (f.Uri)));
 			
-			items.Add (emptyItem);
+			foreach (Gtk.RecentInfo ri in infos)
+				ri.Dispose ();
+			
 			Items = items;
 		}
 		
@@ -75,7 +79,7 @@ namespace RecentDocuments
 		{
 			MenuList list = base.GetMenuItems (item);
 			
-			list[MenuListContainer.ProxiedItems].RemoveAt (list[MenuListContainer.ProxiedItems].Count () - 1);
+			list[MenuListContainer.ProxiedItems].RemoveAt (0);
 			list[MenuListContainer.Footer].Add (new MenuItem (Catalog.GetString ("_Clear Recent Documents..."), "edit-clear", (o, a) => ClearRecent (), !CanClear));
 			
 			return list;
