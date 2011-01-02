@@ -7,7 +7,7 @@
 	name="Desktop"
 	description="Show, Tile or Cascade your Desktop"
 	author="Rico Tzschichholz, Robert Dyer"
-	icon="desktop"
+	icon="show-desktop.svg@"
 >
 
  	<Dependencies>
