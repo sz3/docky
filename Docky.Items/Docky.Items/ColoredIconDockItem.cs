@@ -67,7 +67,7 @@ namespace Docky.Items
 		protected override MenuList OnGetMenuItems ()
 		{
 			MenuList list = base.OnGetMenuItems ();
-			list[MenuListContainer.Footer].Add (new Menus.MenuItem (Catalog.GetString ("Reset Color"), "edit-clear", (o, a) => ResetHue (), HueShift == 0));
+			list[MenuListContainer.Footer].Add (new Menus.MenuItem (Catalog.GetString ("_Reset Color"), "edit-clear", (o, a) => ResetHue (), HueShift == 0));
 			return list;
 		}
 		
