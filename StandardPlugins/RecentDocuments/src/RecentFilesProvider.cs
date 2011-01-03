@@ -59,7 +59,7 @@ namespace RecentDocuments
 		{
 			List<AbstractDockItem> items = new List<AbstractDockItem> ();
 			
-			GLib.List recent_items = new GLib.List (Gtk.RecentManager.Default.Items.Handle, typeof(Gtk.RecentInfo), true, false);
+			GLib.List recent_items = new GLib.List (Gtk.RecentManager.Default.Items.Handle, typeof(Gtk.RecentInfo), false, false);
 			IEnumerable<Gtk.RecentInfo> infos = recent_items.OfType<Gtk.RecentInfo> ();
 			CanClear = recent_items.Count > 0;
 			
@@ -71,6 +71,7 @@ namespace RecentDocuments
 			
 			foreach (Gtk.RecentInfo ri in infos)
 				ri.Dispose ();
+			recent_items.Dispose ();
 			
 			Items = items;
 		}
