@@ -32,7 +32,7 @@ namespace Mounter
 		#region AbstractDockItemProvider implementation
 		
 		public override string Name {
-			get { return "Mount"; }
+			get { return "Mounter"; }
 		}
 		
 		public override bool AutoDisable {

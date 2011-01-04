@@ -24,6 +24,7 @@ using Gtk;
 using Docky.Items;
 using Docky.Services;
 using Docky.Services.Prefs;
+using Mono.Addins;
 
 namespace Docky.Interface
 {
@@ -471,12 +472,12 @@ namespace Docky.Interface
 		
 		public bool ProviderCanMoveUp (AbstractDockItemProvider provider)
 		{
-			return provider != ItemProviders.Where (p => p != DefaultProvider).First ();
+			return provider != item_providers.Where (p => p != DefaultProvider).First ();
 		}
 		
 		public bool ProviderCanMoveDown (AbstractDockItemProvider provider)
 		{
-			return provider != ItemProviders.Where (p => p != DefaultProvider).Last ();
+			return provider != item_providers.Where (p => p != DefaultProvider).Last ();
 		}
 		
 		public void MoveProviderUp (AbstractDockItemProvider provider)
@@ -577,11 +578,6 @@ namespace Docky.Interface
 		
 		void BuildItemProviders ()
 		{
-			item_providers = new List<AbstractDockItemProvider> ();
-			
-			DefaultProvider = new FileApplicationProvider ();
-			item_providers.Add (DefaultProvider);
-			
 			if (FirstRun) {
 				WindowManager = true;
 				
@@ -629,20 +625,21 @@ namespace Docky.Interface
 				}.Where (s => !String.IsNullOrEmpty (s));
 			}
 			
+			item_providers = new List<AbstractDockItemProvider> ();
+			
+			DefaultProvider = new FileApplicationProvider ();
+			item_providers.Add (DefaultProvider);
+			
 			foreach (string launcher in Launchers)
 				DefaultProvider.InsertItem (launcher);
 			
-			// we have a plugin thats not enabled, go nuclear
-			if (Plugins.Any (s => !PluginManager.ItemProviders.Any (ip => ip.Name == s)))
-				foreach (Mono.Addins.Addin addin in PluginManager.AllAddins)
-					addin.Enabled = true;
-			
-			foreach (string providerName in Plugins) {
-				AbstractDockItemProvider provider = PluginManager.ItemProviders
-					.Where (adip => adip.Name == providerName)
-					.DefaultIfEmpty (null)
-					.FirstOrDefault ();
-				
+			foreach (string pluginId in Plugins) {
+				Addin addin = PluginManager.AllAddins.FirstOrDefault (a => a.LocalId == pluginId);
+				if (addin == null)
+					continue;
+				addin.Enabled = true;
+
+				AbstractDockItemProvider provider = PluginManager.ItemProviderFromAddin (addin.Id);
 				if (provider != null)
 					item_providers.Add (provider);
 			}
@@ -787,7 +784,9 @@ namespace Docky.Interface
 		
 		void SyncPlugins ()
 		{
-			Plugins = ItemProviders.Where (p => p != DefaultProvider).Select (p => p.Name);
+			Plugins = item_providers.Where (p => p != DefaultProvider)
+				.Select (p => PluginManager.AddinFromID (PluginManager.AddinIDFromProvider (p)))
+				.Select (a => a.LocalId);
 		}
 		
 		public void FreeProviders ()

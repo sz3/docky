@@ -145,7 +145,7 @@ namespace Bookmarks
 		#region IDockItemProvider implementation
 		
 		public override string Name {
-			get { return "Bookmark Items"; }
+			get { return "Bookmarks"; }
 		}		
 		
 		protected override bool OnCanAcceptDrop (string uri)
