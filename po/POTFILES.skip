@@ -1,5 +1,3 @@
-data/docky.desktop.in
-data/docky.schemas.in
 Docky/Mono/Options.cs
 Docky.DBus/Docky.DBus/DockManagerDBus.cs
 Docky.Services/Docky.Services/DesktopItemService.cs

@@ -1,3 +1,5 @@
+data/docky.desktop.in
+data/docky.schemas.in
 Docky/Docky/ConfigurationWindow.cs
 Docky/Docky/DockletTile.cs
 Docky/Docky/Docky.cs
