@@ -2819,8 +2819,9 @@ namespace Docky.Interface
 			AutohideManager.HiddenChanged       -= HandleHiddenChanged;
 			AutohideManager.DockHoveredChanged  -= HandleDockHoveredChanged;
 			Screen.SizeChanged                  -= ScreenSizeChanged;
-			DockServices.Theme.ThemeChanged     -= DockyControllerThemeChanged;
 			Wnck.Screen.Default.WindowOpened    -= HandleWindowOpened;
+			Realized                            -= HandleRealized;
+			DockServices.Theme.ThemeChanged     -= DockyControllerThemeChanged;
 			
 			// clear out our separators
 			foreach (AbstractDockItem adi in Items.Where (adi => adi is INonPersistedItem && adi != DockyItem)) {
