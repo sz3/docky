@@ -103,6 +103,19 @@ namespace Docky.Interface
 			} 
 		}
 		
+		bool config_mode;
+		public bool ConfigMode { 
+			get { return config_mode; } 
+			set { 
+				if (config_mode == value)
+					return;
+				
+				config_mode = value; 
+				
+				SetHidden ();
+			} 
+		}
+		
 		internal AutohideManager (Gdk.Screen screen)
 		{
 			pid = System.Diagnostics.Process.GetCurrentProcess ().Id;
@@ -255,11 +268,11 @@ namespace Docky.Interface
 				Hidden = false;
 				break;
 			case AutohideType.Autohide:
-				Hidden = !DockHovered;
+				Hidden = !ConfigMode && !DockHovered;
 				break;
 			case AutohideType.Intellihide:
 			case AutohideType.UniversalIntellihide:
-				Hidden = !DockHovered && WindowIntersectingOther;
+				Hidden = !ConfigMode && !DockHovered && WindowIntersectingOther;
 				break;
 			}
 		}

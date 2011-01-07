@@ -255,6 +255,7 @@ namespace Docky.Interface
 				DragTracker.RepositionMode = config_mode;
 				if (value)
 					DragTracker.DragDisabled = false;
+				AutohideManager.ConfigMode = value;
 				UpdateScreenRegions ();
 				
 				SetTooltipVisibility ();
@@ -627,7 +628,7 @@ namespace Docky.Interface
 		
 		double HideOffset {
 			get {
-				if (Painter != null || ConfigurationMode)
+				if (Painter != null)
 					return 0;
 				double progress = Math.Min (1, (render_time - hidden_change_time).TotalMilliseconds / 
 				                            BaseAnimationTime.TotalMilliseconds);
