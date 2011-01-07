@@ -211,7 +211,7 @@ namespace Docky.Items
 					long cur = 0, tot = 10;
 					
 					if (note == null) {
-						note = Docky.Services.Log.Notify ("", file.Icon (), "{0}% " + Catalog.GetString ("Complete") + "...", cur / tot);
+						note = Docky.Services.Log.Notify ("", file.Icon (), string.Format ("{0}% " + Catalog.GetString ("Complete") + "...", cur / tot));
 						
 						GLib.Timeout.Add (250, () => {
 							note.Body = string.Format ("{0:00.0}% ", ((float) Math.Min (cur, tot) / tot) * 100) + Catalog.GetString ("Complete") + "...";

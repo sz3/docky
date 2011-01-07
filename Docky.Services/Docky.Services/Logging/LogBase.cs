@@ -122,15 +122,12 @@ namespace Docky.Services.Logging
 			}
 		}
 		
-		public static Notification SendNote (string sender, string icon, string msg, params object[] args)
+		public static Notification SendNote (string sender, string icon, string msg)
 		{			
 			string title = sender;
 			
 			if (string.IsNullOrEmpty (sender))
 				title = "Docky";
-			
-			if (args.Length > 0)
-				msg = string.Format (msg, args);
 			
 			return NotificationService.Notify (title, msg, icon);
 		}

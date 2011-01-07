@@ -21,10 +21,8 @@ using Notifications;
 
 namespace Docky.Services
 {
-	
 	public class Log<TSender> : Logging.LogBase
 	{
-
 		const string SenderFormat = "[{0}] {1}";
 
 		static string AddSender (string message)
@@ -42,12 +40,12 @@ namespace Docky.Services
 			Write (LogLevel.Info, AddSender (msg), args);
 		}
 		
-		public static Notification Notify (string msg, params object[] args)
+		public static Notification Notify (string msg)
 		{
 			// also write the log out to the console
-			Write (LogLevel.Notify, AddSender (msg), args);
+			Write (LogLevel.Notify, AddSender (msg));
 			
-			return SendNote (typeof (TSender).Name, "", msg, args);
+			return SendNote (typeof (TSender).Name, "", msg);
 		}
 		
 		public static void Warn (string msg, params object [] args)

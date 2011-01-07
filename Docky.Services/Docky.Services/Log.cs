@@ -42,17 +42,17 @@ namespace Docky.Services
 			Write (LogLevel.Info, msg, args);
 		}
 		
-		public static Notification Notify (string msg, params object[] args)
+		public static Notification Notify (string msg)
 		{
-			return Notify ("Docky", "", msg, args);
+			return Notify ("Docky", "", msg);
 		}
 		
-		public static Notification Notify (string title, string icon, string msg, params object[] args)
+		public static Notification Notify (string title, string icon, string msg)
 		{
 			// also write the log out to the console
-			Write (LogLevel.Notify, title + " - " + msg, args);
+			Write (LogLevel.Notify, title + " - " + msg);
 			
-			return SendNote (title, icon, msg, args);
+			return SendNote (title, icon, msg);
 		}
 		
 		public static void Warn (string msg, params object [] args)
