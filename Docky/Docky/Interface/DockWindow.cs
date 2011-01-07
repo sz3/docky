@@ -2728,10 +2728,11 @@ namespace Docky.Interface
 				next_hoveredItem = null;
 			}
 			
-			GLib.Timeout.Add ((uint) (2 * SlideTime.TotalMilliseconds), delegate {
-				AutohideManager.StartupMode = false;
-				return false;
-			});
+			if (AutohideManager.StartupMode)
+				GLib.Timeout.Add ((uint) (2 * SlideTime.TotalMilliseconds), delegate {
+					AutohideManager.StartupMode = false;
+					return false;
+				});
 			
 			return false;
 		}
