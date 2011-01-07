@@ -1,6 +1,6 @@
 //  
 //  Copyright (C) 2009 Jason Smith, Robert Dyer
-//  Copyright (C) 2010 Robert Dyer
+//  Copyright (C) 2010-2011 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -111,6 +111,19 @@ namespace Docky.Interface
 					return;
 				
 				config_mode = value; 
+				
+				SetHidden ();
+			} 
+		}
+		
+		bool startup_mode;
+		public bool StartupMode { 
+			get { return startup_mode; } 
+			set { 
+				if (startup_mode == value)
+					return;
+				
+				startup_mode = value; 
 				
 				SetHidden ();
 			} 
@@ -262,6 +275,11 @@ namespace Docky.Interface
 		
 		void SetHidden ()
 		{
+			if (StartupMode) {
+				Hidden = true;
+				return;
+			}
+			
 			switch (Behavior) {
 			default:
 			case AutohideType.None:

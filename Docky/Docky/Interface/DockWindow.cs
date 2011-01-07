@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009-2010 Jason Smith, Robert Dyer, Rico Tzschichhholz
+//  Copyright (C) 2011 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -801,6 +802,7 @@ namespace Docky.Interface
 			CursorTracker.CursorPositionChanged += HandleCursorPositionChanged;	
 			
 			AutohideManager = new AutohideManager (Screen);
+			AutohideManager.StartupMode = true;
 			AutohideManager.Behavior = Preferences.Autohide;
 			
 			AutohideManager.HiddenChanged      += HandleHiddenChanged;
@@ -2726,6 +2728,11 @@ namespace Docky.Interface
 				HoveredItem = next_hoveredItem;
 				next_hoveredItem = null;
 			}
+			
+			GLib.Timeout.Add ((uint) (2 * SlideTime.TotalMilliseconds), delegate {
+				AutohideManager.StartupMode = false;
+				return false;
+			});
 			
 			return false;
 		}
