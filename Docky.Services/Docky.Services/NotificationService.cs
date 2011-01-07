@@ -71,36 +71,19 @@ namespace Docky.Services
 
 		public static LibNotify.Notification Notify (string title, string message, string icon)
 		{	
-			Screen screen = Screen.Default;
-			int x = 0, y = 0;
-			
-			if (!ServerIsNotifyOSD ()) {
-				// if we aren't using notify-osd, show a status icon
+			// if we aren't using notify-osd, show a status icon
+			if (!ServerIsNotifyOSD ())
 				DockServices.System.RunOnMainThread (() => {
 					statusIcon.Visible = true;
 				});
-				
-				Rectangle area;
-				Orientation orientation;
-
-				statusIcon.GetGeometry (out screen, out area, out orientation);
-				x = area.X + area.Width / 2;
-				y = area.Y + area.Height - 5;
-			}
 			
-			return Notify (title, message, icon, screen, x, y);
-		}
-		
-		static LibNotify.Notification Notify (string title, string message, string icon, Screen screen, int x, int y)
-		{
 			LibNotify.Notification notify = ToNotify (title, message, icon);
-			notify.SetGeometryHints (screen, x, y);
-			notify.Show ();
 			
 			notify.Closed += delegate {
 				DockServices.System.RunOnMainThread (() => statusIcon.Visible = false );
 			};
 			
+			notify.Show ();
 			return notify;
 		}
 		
