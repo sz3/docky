@@ -706,7 +706,6 @@ namespace Docky.Interface
 			SkipTaskbarHint = true;
 			Resizable = false;
 			CanFocus = false;
-			KeepAbove = true;
 			TypeHint = WindowTypeHint.Dock;
 			
 			this.SetCompositeColormap ();
