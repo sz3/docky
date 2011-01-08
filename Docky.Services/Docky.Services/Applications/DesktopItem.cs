@@ -110,6 +110,7 @@ namespace Docky.Services.Applications
 		public bool Ignored {
 			get {
 				return ((HasAttribute ("NoDisplay") && GetBool ("NoDisplay"))
+					|| (HasAttribute ("Hidden") && GetBool ("Hidden"))
 					|| (HasAttribute ("X-Docky-NoMatch") && GetBool ("X-Docky-NoMatch")));
 			}
 		}
