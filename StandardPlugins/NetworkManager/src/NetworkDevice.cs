@@ -24,6 +24,8 @@ using System.Collections.Generic;
 using DBus;
 using org.freedesktop.DBus;
 
+using Docky.Services;
+
 namespace NetworkManagerDocklet
 {
 	public class NetworkDevice : DBusObject<INetworkDevice>
@@ -59,11 +61,27 @@ namespace NetworkManagerDocklet
 		DBusObject<IIP4Config> IP4Config { get; set; }
 		
 		public DeviceType DType {
-			get { return (DeviceType) Enum.ToObject (typeof (DeviceType), BusObject.Get (BusName, "DeviceType")); }
+			get { 
+				try {
+					return (DeviceType) Enum.ToObject (typeof (DeviceType), BusObject.Get (BusName, "DeviceType"));
+				} catch (Exception e) {
+					Log<NetworkDevice>.Error (e.Message);
+					Log<NetworkDevice>.Debug (e.StackTrace);
+					return DeviceType.Unknown;
+				}
+			}
 		}
 		
 		public DeviceState State {
-			get	{ return (DeviceState) Enum.ToObject (typeof (DeviceType), BusObject.Get (BusName, "State")); }
+			get	{ 
+				try {
+					return (DeviceState) Enum.ToObject (typeof (DeviceState), BusObject.Get (BusName, "State")); 
+				} catch (Exception e) {
+					Log<NetworkDevice>.Error (e.Message);
+					Log<NetworkDevice>.Debug (e.StackTrace);
+					return DeviceState.Unknown;
+				}
+			}
 		}
 		
 		protected NetworkDevice (string objectPath) : base (NMBusName, objectPath)
