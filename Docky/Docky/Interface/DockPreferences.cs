@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2009-2010 Jason Smith, Robert Dyer, Chris Szikszoy
+//  Copyright (C) 2011 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -576,53 +577,83 @@ namespace Docky.Interface
 			return prefs.Set<T> (name + "/" + key, val);
 		}
 		
+		bool GnomeBuildLaunchers ()
+		{
+			IPreferences prefs = DockServices.Preferences.Get ("/desktop/gnome/applications");
+			
+			// browser
+			string browser = prefs.Get<string> ("browser/exec", "");
+			// terminal
+			string terminal = prefs.Get<string> ("terminal/exec", "");
+			// calendar
+			string calendar = prefs.Get<string> ("calendar/exec", "");
+			// media
+			string media = prefs.Get<string> ("media/exec", "");
+			
+			if (string.IsNullOrEmpty (browser) && string.IsNullOrEmpty (terminal) &&
+				string.IsNullOrEmpty (calendar) && string.IsNullOrEmpty (media))
+				return false;
+			
+			Launchers = new[] {
+				DockServices.DesktopItems.DesktopItemsFromExec (browser).FirstOrDefault (),
+				DockServices.DesktopItems.DesktopItemsFromExec (terminal).FirstOrDefault (),
+				DockServices.DesktopItems.DesktopItemsFromExec (calendar).FirstOrDefault (),
+				DockServices.DesktopItems.DesktopItemsFromExec (media).FirstOrDefault (),
+			}.Where (s => s != null).Select (s => s.Path);
+			
+			return true;
+		}
+		
+		// this is the fallback for finding launchers
+		// try to find files and pick the first one we find
+		void DefaultBuildLaunchers ()
+		{
+			// browser
+			string launcher_browser = new[] {
+				"file:///usr/share/applications/firefox.desktop",
+				"file:///usr/share/applications/chromium-browser.desktop",
+				"file:///usr/local/share/applications/google-chrome.desktop",
+				"file:///usr/share/applications/epiphany.desktop",
+				"file:///usr/share/applications/kde4/konqbrowser.desktop",
+			}.Where (s => System.IO.File.Exists (new Uri (s).LocalPath)).FirstOrDefault ();
+			
+			// terminal
+			string launcher_terminal = new[] {
+				"file:///usr/share/applications/terminator.desktop",
+				"file:///usr/share/applications/gnome-terminal.desktop",
+				"file:///usr/share/applications/kde4/konsole.desktop",
+			}.Where (s => System.IO.File.Exists (new Uri (s).LocalPath)).FirstOrDefault ();
+			
+			// music player
+			string launcher_music = new[] {
+				"file:///usr/share/applications/exaile.desktop",
+				"file:///usr/share/applications/songbird.desktop",
+				"file:///usr/share/applications/banshee-1.desktop",
+				"file:///usr/share/applications/rhythmbox.desktop",
+				"file:///usr/share/applications/kde4/amarok.desktop",
+			}.Where (s => System.IO.File.Exists (new Uri (s).LocalPath)).FirstOrDefault ();
+			
+			// IM client
+			string launcher_im = new[] {
+				"file:///usr/share/applications/pidgin.desktop",
+				"file:///usr/share/applications/empathy.desktop",
+			}.Where (s => System.IO.File.Exists (new Uri (s).LocalPath)).FirstOrDefault ();
+			
+			Launchers = new[] {
+				launcher_browser,
+				launcher_terminal,
+				launcher_music,
+				launcher_im,
+			}.Where (s => !String.IsNullOrEmpty (s));
+		}
+		
 		void BuildItemProviders ()
 		{
 			if (FirstRun) {
 				WindowManager = true;
 				
-				// TODO optimize this better, right now we try to find files and
-				// pick the first one we find (which sorta works)
-				// ideally, we should query the system for the 'default web browser'
-				// etc and then use that
-				
-				// browser
-				string launcher_browser = new[] {
-					"file:///usr/share/applications/firefox.desktop",
-					"file:///usr/share/applications/chromium-browser.desktop",
-					"file:///usr/local/share/applications/google-chrome.desktop",
-					"file:///usr/share/applications/epiphany.desktop",
-					"file:///usr/share/applications/kde4/konqbrowser.desktop",
-				}.Where (s => System.IO.File.Exists (new Uri (s).LocalPath)).FirstOrDefault ();
-				
-				// terminal
-				string launcher_terminal = new[] {
-					"file:///usr/share/applications/terminator.desktop",
-					"file:///usr/share/applications/gnome-terminal.desktop",
-					"file:///usr/share/applications/kde4/konsole.desktop",
-				}.Where (s => System.IO.File.Exists (new Uri (s).LocalPath)).FirstOrDefault ();
-				
-				// music player
-				string launcher_music = new[] {
-					"file:///usr/share/applications/exaile.desktop",
-					"file:///usr/share/applications/songbird.desktop",
-					"file:///usr/share/applications/banshee-1.desktop",
-					"file:///usr/share/applications/rhythmbox.desktop",
-					"file:///usr/share/applications/kde4/amarok.desktop",
-				}.Where (s => System.IO.File.Exists (new Uri (s).LocalPath)).FirstOrDefault ();
-				
-				// IM client
-				string launcher_im = new[] {
-					"file:///usr/share/applications/pidgin.desktop",
-					"file:///usr/share/applications/empathy.desktop",
-				}.Where (s => System.IO.File.Exists (new Uri (s).LocalPath)).FirstOrDefault ();
-				
-				Launchers = new[] {
-					launcher_browser,
-					launcher_terminal,
-					launcher_music,
-					launcher_im,
-				}.Where (s => !String.IsNullOrEmpty (s));
+				if (!GnomeBuildLaunchers ())
+					DefaultBuildLaunchers ();
 			}
 			
 			item_providers = new List<AbstractDockItemProvider> ();

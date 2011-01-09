@@ -1,5 +1,6 @@
 //  
 //  Copyright (C) 2010 Chris Szikszoy
+//  Copyright (C) 2011 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -96,6 +97,7 @@ namespace Docky.Services
 		/// </param>
 		public IEnumerable<DesktopItem> DesktopItemsFromExec (string exec)
 		{
+			exec = ExecForPath (exec);
 			if (ItemsByExec.ContainsKey (exec))
 				return ItemsByExec [exec].AsEnumerable ();
 			return Enumerable.Empty<DesktopItem> ();
@@ -550,7 +552,7 @@ namespace Docky.Services
 					if (parts.Any (part => part.StartsWith ("C:"))) {
 						vexec = parts.First (part => part.StartsWith ("C:"));
 						// and take only app.lnk (this is what is exposed to ps -ef)
-						vexec = vexec.Split (new[] { '/' }).Last ();
+						vexec = ExecForPath (vexec);
 					} else {
 						continue;
 					}
@@ -561,7 +563,7 @@ namespace Docky.Services
 					
 					vexec = parts
 						.DefaultIfEmpty (null)
-						.Select (part => part.Split ( new[] { '/', '\\' }).Last ())
+						.Select (part => ExecForPath (part))
 						.Where (part => !DockServices.WindowMatcher.PrefixFilters.Any (f => f.IsMatch (part)))
 						.FirstOrDefault ();
 					
@@ -587,6 +589,11 @@ namespace Docky.Services
 					}
 				}
 			}
+		}
+		
+		string ExecForPath (string path)
+		{
+			return path.Split (new [] {'/', '\\'}).Last ();
 		}
 	}
 }
