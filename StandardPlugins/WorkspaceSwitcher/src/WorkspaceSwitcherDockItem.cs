@@ -52,6 +52,7 @@ namespace WorkspaceSwitcher
 				
 		public event EventHandler DesksChanged;
 		
+		uint update_timer = 0;
 		List<Desk> Desks = new List<Desk> ();
 		Desk[,] DeskGrid = null;
 		
@@ -221,21 +222,36 @@ namespace WorkspaceSwitcher
 		}
 
 		#endregion
+
+		void Update ()
+		{
+			if (update_timer > 0)
+				GLib.Source.Remove (update_timer);
+			
+			update_timer = GLib.Timeout.Add (250, delegate {
+				UpdateDesks ();
+				UpdateItem ();
+				
+				QueueRedraw ();
+
+				update_timer = 0;
+				return false;
+			});
+		}
 		
 		void HandleWnckScreenDefaultWorkspaceCreated (object o, WorkspaceCreatedArgs args)
 		{
-			UpdateDesks ();
-			UpdateItem ();
-			
-			QueueRedraw ();
-		}
+			Update ();
+		}	
 		
 		void HandleWnckScreenDefaultWorkspaceDestroyed (object o, WorkspaceDestroyedArgs args)
 		{
-			UpdateDesks ();
-			UpdateItem ();
-			
-			QueueRedraw ();
+			Update ();
+		}
+		
+		void HandleWnckScreenDefaultViewportsChanged (object sender, EventArgs e)
+		{
+			Update ();
 		}
 		
 		void HandleWnckScreenDefaultActiveWorkspaceChanged (object o, ActiveWorkspaceChangedArgs args)
@@ -247,15 +263,7 @@ namespace WorkspaceSwitcher
 			
 			QueueRedraw ();
 		}
-
-		void HandleWnckScreenDefaultViewportsChanged (object sender, EventArgs e)
-		{
-			UpdateDesks ();
-			UpdateItem ();
-			
-			QueueRedraw ();
-		}
-
+		
 		#region Drawing
 		protected override DockySurface CreateIconBuffer (DockySurface model, int size)
 		{
