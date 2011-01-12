@@ -95,8 +95,10 @@ namespace Docky.Menus
 			get { return icon; }
 			set {
 				// if we set this, clear the forced pixbuf
-				if (forced_pixbuf != null)
+				if (forced_pixbuf != null) {
+					forced_pixbuf.Dispose ();
 					forced_pixbuf = null;
+				}
 				if (icon == value)
 					return;
 				icon = value;
@@ -111,6 +113,8 @@ namespace Docky.Menus
 			protected set {
 				if (forced_pixbuf == value)
 					return;
+				if (forced_pixbuf != null)
+					forced_pixbuf.Dispose ();
 				forced_pixbuf = value;
 			}
 		}		

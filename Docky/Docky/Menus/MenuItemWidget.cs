@@ -204,7 +204,9 @@ namespace Docky.Menus
 			if (monochrome)
 				icon = icon.Substring ("[monochrome]".Length);
 			
-			DockySurface surface = LoadIcon (DockServices.Drawing.LoadIcon (icon, size), size);
+			Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (icon, size);
+			DockySurface surface = LoadIcon (pbuf, size);
+			pbuf.Dispose ();
 			
 			if (monochrome) {
 				surface.Context.Operator = Operator.Atop;
