@@ -128,6 +128,10 @@ namespace Docky.Menus
 
 		void ItemIconChanged (object sender, EventArgs e)
 		{
+			if (icon_surface != null)
+				icon_surface.Dispose ();
+			icon_surface = null;
+			
 			QueueDraw ();
 		}
 		
