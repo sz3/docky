@@ -77,23 +77,19 @@ namespace Docky.Services
 		public bool IsIconLight (string icon) {
 			int light = 0;
 			using (Gdk.Pixbuf pixbuf = DockServices.Drawing.LoadIcon (icon)) {
-				int offset = (pixbuf.HasAlpha) ? 4 : 3;
 				unsafe {
 					byte* pixelPtr = (byte*) pixbuf.Pixels;
-					for (int i = 0; i < pixbuf.Height; i++) {
-						for (int j = 0; j < pixbuf.Width; j++) {
-							byte max = Math.Max (pixelPtr[0], Math.Max (pixelPtr[1], pixelPtr[2]));
-							
-							if ((pixbuf.HasAlpha && pixelPtr[3] > 0) || (!pixbuf.HasAlpha)) {
-								if (max > byte.MaxValue / 2)
-									light++;
-								else
-									light--;
-							}
-							
-							pixelPtr += offset;
+					for (int i = 0; i < pixbuf.Height * pixbuf.Rowstride / pixbuf.NChannels; i++) {
+						byte max = Math.Max (pixelPtr[0], Math.Max (pixelPtr[1], pixelPtr[2]));
+						
+						if (pixbuf.NChannels == 3 || pixelPtr[3] > 0) {
+							if (max > byte.MaxValue / 2)
+								light++;
+							else
+								light--;
 						}
-						pixelPtr += pixbuf.Rowstride - pixbuf.Width * offset;
+						
+						pixelPtr += pixbuf.NChannels;
 					}
 				}
 			}
@@ -252,9 +248,8 @@ namespace Docky.Services
             // at some point, might be nice to allow any blend?
             double blend = 0.5;
 
-            if (blend < 0.0 || blend > 1.0) {
+            if (blend < 0.0 || blend > 1.0)
                 throw new ApplicationException ("blend < 0.0 || blend > 1.0");
-            }
             
             double blendRatio = 1.0 - blend;
 
