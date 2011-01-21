@@ -1422,8 +1422,13 @@ namespace Docky.Interface
 		#region Painters
 		void ShowPainter (AbstractDockItem owner, AbstractDockPainter painter)
 		{
-			if (Painter != null || owner == null || painter == null || (!painter.SupportsVertical && Preferences.IsVertical))
+			if (Painter != null || owner == null || painter == null)
 				return;
+			
+			if (!painter.SupportsVertical && Preferences.IsVertical) {
+				Log<DockWindow>.Notify ("The docklet's painter only works on horizontal (bottom or top) docks.");
+				return;
+			}
 			
 			Painter = painter;
 			painterOwner = owner;
