@@ -63,7 +63,7 @@ namespace Docky {
         
         private Gtk.Label label2;
         
-        private Gtk.Alignment alignment3;
+        private Gtk.Alignment helper_alignment;
         
         private Gtk.VBox vbox5;
         
@@ -297,14 +297,14 @@ namespace Docky {
             this.config_notebook.SetTabLabel(this.alignment2, this.label2);
             this.label2.ShowAll();
             // Container child config_notebook.Gtk.Notebook+NotebookChild
-            this.alignment3 = new Gtk.Alignment(0.5F, 0.5F, 1F, 1F);
-            this.alignment3.Name = "alignment3";
-            this.alignment3.LeftPadding = ((uint)(7));
-            this.alignment3.TopPadding = ((uint)(7));
-            this.alignment3.RightPadding = ((uint)(7));
-            this.alignment3.BottomPadding = ((uint)(7));
-            this.alignment3.BorderWidth = ((uint)(7));
-            // Container child alignment3.Gtk.Container+ContainerChild
+            this.helper_alignment = new Gtk.Alignment(0.5F, 0.5F, 1F, 1F);
+            this.helper_alignment.Name = "helper_alignment";
+            this.helper_alignment.LeftPadding = ((uint)(7));
+            this.helper_alignment.TopPadding = ((uint)(7));
+            this.helper_alignment.RightPadding = ((uint)(7));
+            this.helper_alignment.BottomPadding = ((uint)(7));
+            this.helper_alignment.BorderWidth = ((uint)(7));
+            // Container child helper_alignment.Gtk.Container+ContainerChild
             this.vbox5 = new Gtk.VBox();
             this.vbox5.Name = "vbox5";
             this.vbox5.Spacing = 6;
@@ -365,15 +365,15 @@ namespace Docky {
             this.vbox5.Add(this.helper_scroll);
             Gtk.Box.BoxChild w39 = ((Gtk.Box.BoxChild)(this.vbox5[this.helper_scroll]));
             w39.Position = 1;
-            this.alignment3.Add(this.vbox5);
-            this.config_notebook.Add(this.alignment3);
-            Gtk.Notebook.NotebookChild w41 = ((Gtk.Notebook.NotebookChild)(this.config_notebook[this.alignment3]));
+            this.helper_alignment.Add(this.vbox5);
+            this.config_notebook.Add(this.helper_alignment);
+            Gtk.Notebook.NotebookChild w41 = ((Gtk.Notebook.NotebookChild)(this.config_notebook[this.helper_alignment]));
             w41.Position = 2;
             // Notebook tab
             this.label4 = new Gtk.Label();
             this.label4.Name = "label4";
             this.label4.LabelProp = Mono.Unix.Catalog.GetString("Helpers");
-            this.config_notebook.SetTabLabel(this.alignment3, this.label4);
+            this.config_notebook.SetTabLabel(this.helper_alignment, this.label4);
             this.label4.ShowAll();
             this.vbox1.Add(this.config_notebook);
             Gtk.Box.BoxChild w42 = ((Gtk.Box.BoxChild)(this.vbox1[this.config_notebook]));

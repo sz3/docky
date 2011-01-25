@@ -1,6 +1,7 @@
 //  
 //  Copyright (C) 2009 Jason Smith, Robert Dyer
 //  Copyright (C) 2010 Chris Szikszoy
+//  Copyright (C) 2011 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -60,9 +61,127 @@ namespace Docky
 		NStates
 	}
 	
+	public class CurtainWindow : Gtk.Window
+	{
+		readonly uint AnimationTime = 350;
+		readonly double CurtainOpacity = 0.9;
+		
+		DateTime shown_time = DateTime.UtcNow;
+		uint timer = 0;
+		
+		bool curtainDown = true;
+		
+		public static CurtainWindow Instance { get; protected set; }
+		
+		static CurtainWindow ()
+		{
+			Instance = new CurtainWindow ();
+		}
+		
+		public CurtainWindow () : base(Gtk.WindowType.Toplevel)
+		{
+			AppPaintable = true;
+			//AcceptFocus = false;
+			Decorated = false;
+			SkipPagerHint = true;
+			SkipTaskbarHint = true;
+			//Resizable = false;
+			//CanFocus = false;
+			KeepAbove = true;
+			//TypeHint = WindowTypeHint.Normal;
+			
+			Realized += HandleRealized;
+			
+			this.SetCompositeColormap ();
+			Stick ();
+			
+			Move (0, 0);
+			SetSizeRequest (Screen.Width, Screen.Height);
+		}
+		
+		void HandleRealized (object sender, EventArgs e)
+		{
+			GdkWindow.SetBackPixmap (null, false);
+		}
+		
+		public void CurtainDown ()
+		{
+			curtainDown = true;
+			StartTimer ();
+			Show ();
+		}
+		
+		public void CurtainUp ()
+		{
+			curtainDown = false;
+			StartTimer ();
+		}
+		
+		void StopTimer ()
+		{
+			if (timer == 0)
+				return;
+			
+			GLib.Source.Remove (timer);
+			timer = 0;
+		}
+		
+		void StartTimer ()
+		{
+			StopTimer ();
+			shown_time = DateTime.UtcNow;
+			timer = GLib.Timeout.Add (20, delegate {
+				QueueDraw ();
+				
+				bool finished = (DateTime.UtcNow - shown_time).TotalMilliseconds / AnimationTime >= 1;
+				if (finished && !curtainDown)
+					Hide ();
+				
+				return !finished;
+			});
+		}
+		
+		protected override bool OnExposeEvent (EventExpose evnt)
+		{
+			if (!IsRealized)
+				return true;
+			
+			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
+				cr.Save ();
+				
+				cr.Color = new Cairo.Color (0, 0, 0, 0);
+				cr.Operator = Operator.Source;
+				cr.Paint ();
+				
+				cr.Restore ();
+				
+				int width, height;
+				GetSizeRequest (out width, out height);
+				
+				double opacity = Math.Min (1, (DateTime.UtcNow - shown_time).TotalMilliseconds / AnimationTime);
+				if (!curtainDown)
+					opacity = 1 - opacity;
+				
+				cr.Rectangle (0, 0, width, height);
+				cr.Color = new Cairo.Color (0, 0, 0, CurtainOpacity * opacity);
+				cr.Fill ();
+
+				(cr.Target as IDisposable).Dispose ();
+			}
+			
+			return false;
+		}
+		
+		public override void Dispose ()
+		{
+			StopTimer ();
+			Realized -= HandleRealized;
+			base.Dispose ();
+		}
+	}
+	
 	public partial class ConfigurationWindow : Gtk.Window
 	{
-
 		TileView HelpersTileview, DockletsTileview;
 		Widgets.SearchEntry HelperSearch, DockletSearch;
 		
@@ -219,6 +338,19 @@ namespace Docky
 			docklet_alignment.ShowAll ();
 		}
 		
+		void SetupHelperAlignment ()
+		{
+			if (helper_alignment.Child != null)
+				helper_alignment.Remove (helper_alignment.Child);
+			
+			if (helpertiles.Count () == 0)
+				helper_alignment.Add (MakeHelperInfoBox ());
+			else
+				helper_alignment.Add (vbox5);
+			
+			helper_alignment.ShowAll ();
+		}
+		
 		VBox MakeInfoBox ()
 		{
 			VBox vbox = new VBox ();
@@ -241,8 +373,33 @@ namespace Docky
 			return vbox;
 		}
 
+		VBox MakeHelperInfoBox ()
+		{
+			VBox vbox = new VBox ();
+			
+			HBox hboxTop = new HBox ();
+			HBox hboxBottom = new HBox ();
+			Label label1 = new Gtk.Label (Mono.Unix.Catalog.GetString ("Helpers require DockManager be installed."));
+			Label label2 = new Gtk.Label ();
+			label2.Markup = "<a href=\"https://launchpad.net/dockmanager\">https://launchpad.net/dockmanager</a>";
+			
+			vbox.Add (hboxTop);
+			vbox.Add (label1);
+			vbox.Add (label2);
+			vbox.Add (hboxBottom);
+			
+			vbox.SetChildPacking (hboxTop, true, true, 0, PackType.Start);
+			vbox.SetChildPacking (label1, false, false, 0, PackType.Start);
+			vbox.SetChildPacking (label2, false, false, 0, PackType.Start);
+			vbox.SetChildPacking (hboxBottom, true, true, 0, PackType.Start);
+			
+			return vbox;
+		}
+
 		protected override void OnShown ()
 		{
+			CurtainWindow.Instance.CurtainDown ();
+
 			foreach (Dock dock in Docky.Controller.Docks) {
 				dock.EnterConfigurationMode ();
 				dock.ConfigurationClick += HandleDockConfigurationClick;
@@ -255,7 +412,7 @@ namespace Docky
 			
 			KeepAbove = true;
 			Stick ();
-
+			
 			base.OnShown ();
 		}
 
@@ -266,6 +423,7 @@ namespace Docky
 
 		protected override void OnHidden ()
 		{
+			CurtainWindow.Instance.CurtainUp ();
 			foreach (Dock dock in Docky.Controller.Docks) {
 				dock.ConfigurationClick -= HandleDockConfigurationClick;
 				dock.LeaveConfigurationMode ();
@@ -469,9 +627,9 @@ namespace Docky
 		{
 			if (HelpersTileview == null)
 				return;
-
+			
 			HelpersTileview.Clear ();
-
+			
 			List<Helper> helpers = DockServices.Helpers.Helpers;
 			
 			foreach (HelperTile tileobject in helpertiles.Where (to => !helpers.Contains (to.Helper))) {
@@ -496,6 +654,8 @@ namespace Docky
 			
 			foreach (HelperTile tileobject in showinghelpertiles)
 				HelpersTileview.AppendTile (tileobject);
+			
+			SetupHelperAlignment ();
 		}
 		
 		void RefreshDocklets ()

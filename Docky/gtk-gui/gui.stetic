@@ -588,7 +588,7 @@ Disabled</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.Alignment" id="alignment3">
+              <widget class="Gtk.Alignment" id="helper_alignment">
                 <property name="MemberName" />
                 <property name="LeftPadding">7</property>
                 <property name="TopPadding">7</property>
