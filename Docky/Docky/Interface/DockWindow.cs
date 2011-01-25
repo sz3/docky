@@ -1622,6 +1622,8 @@ namespace Docky.Interface
 				GLib.Source.Remove (animation_timer);
 			animation_timer = 0;
 
+			// one final draw to clea out the end of previous animations
+			QueueDraw ();
 			return false;
 		}
 		
