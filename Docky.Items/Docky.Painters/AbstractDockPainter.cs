@@ -41,6 +41,8 @@ namespace Docky.Painters
 			get { return false; }
 		}
 		
+		public bool IsVertical { get; set; }
+		
 		public virtual int MinimumHeight {
 			get { return 0; }
 		}

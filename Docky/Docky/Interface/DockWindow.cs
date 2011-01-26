@@ -549,7 +549,10 @@ namespace Docky.Interface
 		int DockHeight {
 			get {
 				if (Painter != null)
-					return Math.Max (IconSize, Painter.MinimumHeight) + 2 * DockHeightBuffer;
+					if (Preferences.IsVertical)
+						return Math.Max (IconSize, Painter.MinimumWidth) + 2 * DockHeightBuffer;
+					else
+						return Math.Max (IconSize, Painter.MinimumHeight) + 2 * DockHeightBuffer;
 				return IconSize + 2 * DockHeightBuffer;
 			}
 		}
@@ -583,21 +586,43 @@ namespace Docky.Interface
 				if (Painter == null)
 					return last_painter_width;
 				
-				Gdk.Rectangle allocation = new Gdk.Rectangle (
-					0, 
-					0, 
-					DockWidth - PainterBufferSize, 
-					DockHeight - 2 * DockWidthBuffer);
+				int max, last;
 				
-				int maxWidth = Preferences.IsVertical ? monitor_geo.Height : monitor_geo.Width;
-				
-				if (Painter.Allocation != allocation) {
-					Painter.SetAllocation (allocation);
-					allocation.Width = Math.Min (maxWidth - PainterBufferSize, Painter.MinimumWidth);
-					Painter.SetAllocation (allocation);
+				if (Preferences.IsVertical) {
+					max = monitor_geo.Height;
+					
+					Gdk.Rectangle allocation = new Gdk.Rectangle (
+						0,
+						0,
+						IconSize,
+						DockWidth - PainterBufferSize);
+					
+					if (Painter.Allocation != allocation) {
+						Painter.SetAllocation (allocation);
+						allocation.Height = Math.Min (max - PainterBufferSize, Painter.MinimumHeight);
+						allocation.Width = Math.Max (allocation.Width, Painter.MinimumWidth);
+						Painter.SetAllocation (allocation);
+					}
+					last = allocation.Height;
+				} else {
+					max = monitor_geo.Width;
+					
+					Gdk.Rectangle allocation = new Gdk.Rectangle (
+						0,
+						0,
+						DockWidth - PainterBufferSize,
+						IconSize);
+					
+					if (Painter.Allocation != allocation) {
+						Painter.SetAllocation (allocation);
+						allocation.Width = Math.Min (max - PainterBufferSize, Painter.MinimumWidth);
+						allocation.Height = Math.Max (allocation.Height, Painter.MinimumHeight);
+						Painter.SetAllocation (allocation);
+					}
+					last = allocation.Width;
 				}
 				
-				last_painter_width = Math.Min (maxWidth, Painter.MinimumWidth + PainterBufferSize);
+				last_painter_width = Math.Min (max, last + PainterBufferSize);
 				return last_painter_width;
 			}
 		}
@@ -1430,6 +1455,7 @@ namespace Docky.Interface
 				return;
 			}
 			
+			painter.IsVertical = Preferences.IsVertical;
 			Painter = painter;
 			painterOwner = owner;
 			Painter.HideRequest += HandlePainterHideRequest;
@@ -2229,16 +2255,26 @@ namespace Docky.Interface
 				
 				DockySurface painterSurface = Painter.GetSurface (surface);
 			
-				painter_area = new Gdk.Rectangle (dockArea.X + 2 * IconSize + 2 * DockWidthBuffer,
-					dockArea.Y + DockWidthBuffer,
-					painterSurface.Width,
-					painterSurface.Height);
+				if (Preferences.IsVertical)
+					painter_area = new Gdk.Rectangle (dockArea.X + DockWidthBuffer,
+						dockArea.Y + PainterBufferSize - DockWidthBuffer,
+						painterSurface.Width,
+						painterSurface.Height);
+				else
+					painter_area = new Gdk.Rectangle (dockArea.X + PainterBufferSize - DockWidthBuffer,
+						dockArea.Y + DockWidthBuffer,
+						painterSurface.Width,
+						painterSurface.Height);
 				
 				painterSurface.Internal.Show (painter_buffer.Context, painter_area.X, painter_area.Y);
 			
 				int offset = IconSize + DockHeightBuffer;
-				if (dockArea.Height > 2 * IconSize)
-					offset += (dockArea.Height - 2 * IconSize) / 2;
+				if (dockArea.Height > 2 * IconSize) {
+					if (Preferences.IsVertical)
+						offset += (dockArea.Width - 2 * IconSize) / 2;
+					else
+						offset += (dockArea.Height - 2 * IconSize) / 2;
+				}
 				
 				PointD center;
 				switch (Position) {
@@ -2256,7 +2292,7 @@ namespace Docky.Interface
 						dockArea.Y + IconSize + DockWidthBuffer);
 					break;
 				case DockPosition.Right:
-					center = new PointD (dockArea.X + dockArea.Height - offset,
+					center = new PointD (dockArea.X + dockArea.Width - offset,
 						dockArea.Y + IconSize + DockWidthBuffer);
 					break;
 				}

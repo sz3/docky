@@ -1,6 +1,6 @@
 //  
 //  Copyright (C) 2009 GNOME Do
-//  Copyright (C) 2010 Robert Dyer
+//  Copyright (C) 2010-2011 Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -37,33 +37,42 @@ namespace WeatherDocklet
 		/// <value>
 		/// The color to draw most text in.
 		/// </value>
-		static readonly Cairo.Color colorTitle = new Cairo.Color (0.627, 0.627, 0.627, 1);
+		protected static readonly Cairo.Color colorTitle = new Cairo.Color (0.627, 0.627, 0.627, 1);
 		
 		/// <value>
 		/// The color to draw high temperatures in.
 		/// </value>
-		static readonly Cairo.Color colorHigh = new Cairo.Color (0.945, 0.431, 0.431, 1);
+		protected static readonly Cairo.Color colorHigh = new Cairo.Color (0.945, 0.431, 0.431, 1);
 		
 		/// <value>
 		/// The color to draw low temperatures in.
 		/// </value>
-		static readonly Cairo.Color colorLow = new Cairo.Color (0.427, 0.714, 0.945, 1);
+		protected static readonly Cairo.Color colorLow = new Cairo.Color (0.427, 0.714, 0.945, 1);
 		
 		/// <summary>
 		/// Creates a new weather painter object.
 		/// </summary>
 		public WeatherPainter () : base (3)
 		{
+			Page = 1;
+		}
+		
+		public override bool SupportsVertical {
+			get { return true; }
 		}
 		
 		public override int MinimumHeight {
 			get {
+				if (IsVertical)
+					return BUTTON_SIZE + (int) (1.5 * WeatherController.Weather.ForecastDays * Math.Max (42, Allocation.Width));
 				return 42;
 			}
 		}
 		
 		public override int MinimumWidth {
 			get {
+				if (IsVertical)
+					return 2 * 42;
 				return 2 * BUTTON_SIZE + 2 * WeatherController.Weather.ForecastDays * Math.Max (MinimumHeight, Allocation.Height);
 			}
 		}
@@ -72,19 +81,24 @@ namespace WeatherDocklet
 		
 		protected override void DrawPageOnSurface (int page, DockySurface surface)
 		{
-			switch (page)
-			{
+			switch (page) {
 				default:
 				case 0:
-					DrawForecast (surface.Context);
+					if (IsVertical)
+						DrawVertCurrentCondition (surface.Context);
+					else
+						DrawCurrentCondition (surface.Context);
 					break;
 				
 				case 1:
-					DrawTempGraph (surface.Context);
+					if (IsVertical)
+						DrawVertForecast (surface.Context);
+					else
+						DrawForecast (surface.Context);
 					break;
 				
 				case 2:
-					DrawCurrentCondition (surface.Context);
+					DrawTempGraph (surface.Context);
 					break;
 			}
 		}
@@ -110,8 +124,7 @@ namespace WeatherDocklet
 				layout.Ellipsize = Pango.EllipsizeMode.None;
 				layout.Width = Pango.Units.FromPixels (cellWidth);
 				
-				for (int day = 0; day < WeatherController.Weather.ForecastDays; day++)
-				{
+				for (int day = 0; day < WeatherController.Weather.ForecastDays; day++) {
 					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (cellWidth / 5));
 					
 					cr.Color = colorTitle;
@@ -135,14 +148,12 @@ namespace WeatherDocklet
 					Pango.CairoHelper.LayoutPath (cr, layout);
 					cr.Fill ();
 					
-					using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (WeatherController.Weather.Forecasts [day].image, cellWidth - 5))
-					{
+					using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (WeatherController.Weather.Forecasts [day].image, cellWidth - 5)) {
 						Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, xOffset + cellWidth + 2, 5 + (Allocation.Height - cellWidth) / 2);
 						cr.PaintWithAlpha (WeatherController.Weather.Forecasts [day].chanceOf ? .6 : 1);
 					}
 					
-					if (WeatherController.Weather.Forecasts [day].chanceOf)
-					{
+					if (WeatherController.Weather.Forecasts [day].chanceOf) {
 						layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (cellWidth / 2));
 						
 						layout.SetText ("?");
@@ -168,6 +179,80 @@ namespace WeatherDocklet
 		}
 		
 		/// <summary>
+		/// Paints an overview of the forecast including high/low temps and a condition icon.
+		/// </summary>
+		/// <param name="cr">
+		/// A <see cref="Cairo.Context"/> to do the painting.
+		/// </param>
+		void DrawVertForecast (Cairo.Context cr)
+		{
+			int cellHeight = (int) ((Allocation.Height - BUTTON_SIZE) / WeatherController.Weather.ForecastDays / 1.5);
+			double xOffset = 0;
+			double yOffset = cellHeight / 4.0;
+			
+			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ()) {
+				Pango.Rectangle inkRect, logicalRect;
+				
+				layout.FontDescription = new Gtk.Style().FontDescription;
+				layout.FontDescription.Weight = Pango.Weight.Bold;
+				layout.Ellipsize = Pango.EllipsizeMode.None;
+				layout.Width = Pango.Units.FromPixels (cellHeight);
+				
+				for (int day = 0; day < WeatherController.Weather.ForecastDays; day++) {
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (cellHeight / 5));
+					
+					cr.Color = colorTitle;
+					layout.SetText (string.Format ("{0}", WeatherForecast.DayShortName (WeatherController.Weather.Forecasts [day].dow)));
+					layout.GetPixelExtents (out inkRect, out logicalRect);
+					cr.MoveTo (xOffset + (cellHeight - inkRect.Width) / 2, yOffset);
+					Pango.CairoHelper.LayoutPath (cr, layout);
+					cr.Fill ();
+					
+					cr.Color = colorHigh;
+					layout.SetText (string.Format ("{0}{1}", WeatherController.Weather.Forecasts [day].high, AbstractWeatherSource.TempUnit));
+					layout.GetPixelExtents (out inkRect, out logicalRect);
+					cr.MoveTo (xOffset + (cellHeight - inkRect.Width) / 2, yOffset + (cellHeight - logicalRect.Height) / 2);
+					Pango.CairoHelper.LayoutPath (cr, layout);
+					cr.Fill ();
+					
+					cr.Color = colorLow;
+					layout.SetText (string.Format ("{0}{1}", WeatherController.Weather.Forecasts [day].low, AbstractWeatherSource.TempUnit));
+					layout.GetPixelExtents (out inkRect, out logicalRect);
+					cr.MoveTo (xOffset + (cellHeight - inkRect.Width) / 2, yOffset + cellHeight - logicalRect.Height);
+					Pango.CairoHelper.LayoutPath (cr, layout);
+					cr.Fill ();
+					
+					using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (WeatherController.Weather.Forecasts [day].image, cellHeight - 5)) {
+						Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, xOffset + 5 + cellHeight, yOffset + 2);
+						cr.PaintWithAlpha (WeatherController.Weather.Forecasts [day].chanceOf ? .6 : 1);
+					}
+					
+					if (WeatherController.Weather.Forecasts [day].chanceOf) {
+						layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (cellHeight / 2));
+						
+						layout.SetText ("?");
+						
+						layout.GetPixelExtents (out inkRect, out logicalRect);
+						cr.MoveTo (xOffset + cellHeight + (cellHeight - inkRect.Width) / 2, yOffset + (cellHeight - logicalRect.Height) / 2);
+						
+						cr.LineWidth = 4;
+						cr.Color = new Cairo.Color (0, 0, 0, 0.3);
+						Pango.CairoHelper.LayoutPath (cr, layout);
+						cr.StrokePreserve ();
+						
+						cr.Color = new Cairo.Color (1, 1, 1, .6);
+						cr.Fill ();
+					}
+					
+					yOffset += (int) (1.5 * cellHeight);
+				}
+				
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
+			}
+		}
+		
+		/// <summary>
 		/// Paints the forecast temperatures as a chart.
 		/// </summary>
 		/// <param name="cr">
@@ -177,8 +262,7 @@ namespace WeatherDocklet
 		{
 			int max = -1000, min = 1000;
 			
-			for (int day = 0; day < WeatherController.Weather.ForecastDays; day++)
-			{
+			for (int day = 0; day < WeatherController.Weather.ForecastDays; day++) {
 				if (WeatherController.Weather.Forecasts [day].high > max)
 					max = WeatherController.Weather.Forecasts [day].high;
 				if (WeatherController.Weather.Forecasts [day].low > max)
@@ -220,8 +304,7 @@ namespace WeatherDocklet
 				layout.Width = Pango.Units.FromPixels (2 * Allocation.Height);
 				
 				cr.Color = colorTitle;
-				for (int day = 0; day < WeatherController.Weather.ForecastDays; day++)
-				{
+				for (int day = 0; day < WeatherController.Weather.ForecastDays; day++) {
 					layout.SetText (WeatherForecast.DayShortName (WeatherController.Weather.Forecasts [day].dow));
 					layout.GetPixelExtents (out inkRect, out logicalRect);
 					cr.MoveTo (BUTTON_SIZE + day * Allocation.Height * 2 + (Allocation.Height - inkRect.Width) / 2, Allocation.Height * 8 / 9 - logicalRect.Height / 2);
@@ -311,8 +394,7 @@ namespace WeatherDocklet
 			int xPos = BUTTON_SIZE + (int) (1.5 * xSpacing);
 			
 			// draw the temp
-			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (DockServices.Paths.SystemDataFolder.GetChild ("temp.svg").Path, iconSize))
-			{
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (DockServices.Paths.SystemDataFolder.GetChild ("temp.svg").Path, iconSize)) {
 				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, xPos, ySpacing);
 				cr.Paint ();
 			}
@@ -332,8 +414,7 @@ namespace WeatherDocklet
 			
 
 			// draw the wind
-			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (DockServices.Paths.SystemDataFolder.GetChild ("wind.svg").Path, iconSize))
-			{
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (DockServices.Paths.SystemDataFolder.GetChild ("wind.svg").Path, iconSize)) {
 				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, xPos, ySpacing);
 				cr.Paint ();
 			}
@@ -346,8 +427,7 @@ namespace WeatherDocklet
 
 			
 			// draw sun
-			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (DockServices.Paths.SystemDataFolder.GetChild ("sun.svg").Path, iconSize))
-			{
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (DockServices.Paths.SystemDataFolder.GetChild ("sun.svg").Path, iconSize)) {
 				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, xPos, ySpacing);
 				cr.Paint ();
 			}
@@ -382,6 +462,99 @@ namespace WeatherDocklet
 				layout.FontDescription.Dispose ();
 				layout.Context.Dispose ();
 			}
+		}
+		
+		/// <summary>
+		/// Paints the current condition.
+		/// </summary>
+		/// <param name="cr">
+		/// A <see cref="Cairo.Context"/> to do the painting.
+		/// </param>
+		void DrawVertCurrentCondition (Cairo.Context cr)
+		{
+			int cellSize = Allocation.Height / 6;
+			int iconSize = cellSize - 4;
+			
+			int yPos = 0;
+			int topYPos = cellSize / 3;
+			int botYPos = 2 * topYPos;
+			
+			// draw the temp
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (DockServices.Paths.SystemDataFolder.GetChild ("temp.svg").Path, iconSize)) {
+				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, (Allocation.Width - iconSize) / 2, yPos + (cellSize - iconSize) / 2);
+				cr.Paint ();
+			}
+			yPos += cellSize;
+			
+			if (!WeatherController.Weather.ShowFeelsLike)
+				DrawVertConditionText (cr, yPos + topYPos, WeatherController.Weather.Temp + AbstractWeatherSource.TempUnit);
+			else
+				DrawVertConditionText (cr, yPos + topYPos, WeatherController.Weather.Temp + AbstractWeatherSource.TempUnit + " (" + WeatherController.Weather.FeelsLike + AbstractWeatherSource.TempUnit + ")");
+			
+
+			// draw humidity
+			string humidity = String.Format (Catalog.GetString ("{0} humidity"), WeatherController.Weather.Humidity);
+			DrawVertConditionText (cr, yPos + botYPos, humidity);
+			yPos += cellSize;
+			
+
+			// draw the wind
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (DockServices.Paths.SystemDataFolder.GetChild ("wind.svg").Path, iconSize)) {
+				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, (Allocation.Width - iconSize) / 2, yPos + (cellSize - iconSize) / 2);
+				cr.Paint ();
+			}
+			yPos += iconSize;
+			
+			DrawVertConditionText (cr, yPos + topYPos, WeatherController.Weather.Wind + " " + AbstractWeatherSource.WindUnit);
+			DrawVertConditionText (cr, yPos + botYPos, WeatherController.Weather.WindDirection);
+			yPos += cellSize;
+
+			
+			// draw sun
+			using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (DockServices.Paths.SystemDataFolder.GetChild ("sun.svg").Path, iconSize)) {
+				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, (Allocation.Width - iconSize) / 2, yPos + (cellSize - iconSize) / 2);
+				cr.Paint ();
+			}
+			yPos += iconSize;
+			
+			DrawVertConditionText (cr, yPos + topYPos, WeatherController.Weather.SunRise.ToShortTimeString ());
+			DrawVertConditionText (cr, yPos + botYPos, WeatherController.Weather.SunSet.ToShortTimeString ());
+		}
+		
+		void DrawVertConditionText (Cairo.Context cr, int yCenter, string text)
+		{
+			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ()) {
+				Pango.Rectangle inkRect, logicalRect;
+				
+				layout.FontDescription = new Gtk.Style().FontDescription;
+				layout.FontDescription.Weight = Pango.Weight.Bold;
+				layout.Ellipsize = Pango.EllipsizeMode.None;
+				layout.Width = Pango.Units.FromPixels (Allocation.Width);
+				
+				if (WeatherController.Weather.ForecastDays < 6)
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Width / 10));
+				else
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) (Allocation.Width / 7));
+				
+				cr.Color = new Cairo.Color (1, 1, 1, 0.9);
+				layout.SetText (text);
+				layout.GetPixelExtents (out inkRect, out logicalRect);
+				cr.MoveTo ((Allocation.Width - logicalRect.Width) / 2, yCenter - logicalRect.Height / 2);
+				Pango.CairoHelper.LayoutPath (cr, layout);
+				cr.Fill ();
+				
+				layout.FontDescription.Dispose ();
+				layout.Context.Dispose ();
+			}
+		}
+		
+		protected override void OnShown ()
+		{
+			NumPages = IsVertical ? 2 : 3;
+			base.OnShown ();
+			Page = 1;
+			ResetBuffers ();
+			QueueRepaint ();
 		}
 		
 		/// <summary>

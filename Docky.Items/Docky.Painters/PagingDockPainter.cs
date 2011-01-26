@@ -79,7 +79,18 @@ namespace Docky.Painters
 		/// <value>
 		/// The number of pages for this painter.
 		/// </value>
-		protected int NumPages { get; private set; }
+		int num_pages;
+		protected int NumPages {
+			get { return num_pages; }
+			set {
+				if (num_pages == value)
+					return;
+				num_pages = value;
+				buffers = new DockySurface [num_pages];
+				if (Page >= num_pages)
+					Page = num_pages - 1;
+			}
+		}
 		
 		DockySurface[] buffers;
 		
@@ -88,7 +99,6 @@ namespace Docky.Painters
 		public PagingDockPainter (int pages) : base ()
 		{
 			NumPages = pages;
-			buffers = new DockySurface [NumPages];
 			Page = 0;
 		}
 		
@@ -111,13 +121,13 @@ namespace Docky.Painters
 					}
 					
 					// fade out the edges during a slide
-					Gradient linpat = new LinearGradient(0, surface.Height / 2, surface.Width, surface.Height / 2);
-					linpat.AddColorStop(0, new Color(1, 1, 1, 1));
-					linpat.AddColorStop(2 * (double) BUTTON_SIZE / surface.Width, new Color(1, 1, 1, 0));
-					linpat.AddColorStop(1 - 2 * (double) BUTTON_SIZE / surface.Width, new Color(1, 1, 1, 0));
-					linpat.AddColorStop(1, new Color(1, 1, 1, 1));
+					Gradient linpat = new LinearGradient (0, surface.Height / 2, surface.Width, surface.Height / 2);
+					linpat.AddColorStop (0, new Color(1, 1, 1, 1));
+					linpat.AddColorStop (2 * (double) BUTTON_SIZE / surface.Width, new Color(1, 1, 1, 0));
+					linpat.AddColorStop (1 - 2 * (double) BUTTON_SIZE / surface.Width, new Color(1, 1, 1, 0));
+					linpat.AddColorStop (1, new Color(1, 1, 1, 1));
 						
-					surface.Context.Save();
+					surface.Context.Save ();
 					surface.Context.Operator = Operator.Source;
 					surface.Context.Color = new Cairo.Color (0, 0, 0, 0);
 					surface.Context.Mask (linpat);
@@ -190,8 +200,13 @@ namespace Docky.Painters
 		
 		protected override void OnAllocationSet (Gdk.Rectangle allocation)
 		{
-			prevButtonRect = new Gdk.Rectangle (0, 0, BUTTON_SIZE, allocation.Height);
-			nextButtonRect = new Gdk.Rectangle (allocation.Width - BUTTON_SIZE, 0, BUTTON_SIZE, allocation.Height);
+			if (IsVertical) {
+				prevButtonRect = new Gdk.Rectangle (0, Allocation.Height - BUTTON_SIZE, Allocation.Width / 2, BUTTON_SIZE);
+				nextButtonRect = new Gdk.Rectangle (allocation.Width / 2, Allocation.Height - BUTTON_SIZE, Allocation.Width / 2, BUTTON_SIZE);
+			} else {
+				prevButtonRect = new Gdk.Rectangle (0, 0, BUTTON_SIZE, allocation.Height);
+				nextButtonRect = new Gdk.Rectangle (allocation.Width - BUTTON_SIZE, 0, BUTTON_SIZE, allocation.Height);
+			}
 		}
 		
 		internal override void OnMotionNotify (int x, int y, Gdk.ModifierType mod)
