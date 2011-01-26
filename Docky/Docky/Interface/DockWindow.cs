@@ -1142,7 +1142,7 @@ namespace Docky.Interface
 				
 				if (painter_area.Contains (LocalCursor))
 					Painter.ButtonPressed (x, y, evnt.State);
-			} else if (HoveredItem != null && !(HoveredItem is SeparatorItem)) {
+			} else if (HoveredItem != null && !(HoveredItem is SeparatorItem) && !(HoveredItem is SpacingItem)) {
 				if ((button & HoveredItem.MenuButton) == button) {
 					MenuList list;
 					
@@ -1203,7 +1203,7 @@ namespace Docky.Interface
 					HidePainter ();
 				else
 					Painter.ButtonReleased (x, y, evnt.State);
-			} else if (HoveredItem != null && !(HoveredItem is SeparatorItem)) {
+			} else if (HoveredItem != null && !(HoveredItem is SeparatorItem) && !(HoveredItem is SpacingItem)) {
 				if (lastClickedItem == HoveredItem) {
 					Gdk.Rectangle region = DrawRegionForItem (HoveredItem);
 					
