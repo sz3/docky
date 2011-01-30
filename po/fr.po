@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-01-05 06:53-0600\n"
-"PO-Revision-Date: 2011-01-20 17:24+0000\n"
-"Last-Translator: Pierre Slamich <pierre.slamich@gmail.com>\n"
+"PO-Revision-Date: 2011-01-30 15:11+0000\n"
+"Last-Translator: Thierry Frenkel <Unknown>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2011-01-22 18:19+0000\n"
-"X-Generator: Launchpad (build 12214)\n"
+"X-Launchpad-Export-Date: 2011-01-30 15:16+0000\n"
+"X-Generator: Launchpad (build 12274)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -169,12 +169,12 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:32
 msgid "If the dock is a panel"
-msgstr ""
+msgstr "Si le dock est un panneau"
 
 #: ../data/docky.schemas.in.h:33
 msgid ""
 "If true, Docky will only show windows on the currently active desktop."
-msgstr ""
+msgstr "Docky n'affichera que les fenêtres du bureau actif si activé."
 
 #: ../data/docky.schemas.in.h:34
 msgid "If true, all new timers will automatically start."
@@ -193,6 +193,8 @@ msgid ""
 "If true, items with more than one window have two indicator dots instead of "
 "just one dot."
 msgstr ""
+"Des éléments avec plus qu'une fenêtre vont avoir deux points indicateurs au "
+"lieu d'un si activé."
 
 #: ../data/docky.schemas.in.h:37
 msgid "If true, locks all items on all docks so they can't be dragged."
@@ -206,11 +208,12 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:39
 msgid "If true, show the digital clock otherwise show the analog clock."
-msgstr ""
+msgstr "Afficher l'horloge numérique si activé, sinon l'horloge analogique."
 
 #: ../data/docky.schemas.in.h:40
 msgid "If true, shows a notify message for new unread mail."
 msgstr ""
+"Affiche une notification pour les nouveaux messages non lus si activé."
 
 #: ../data/docky.schemas.in.h:41
 msgid "If true, shows the Docky item on the dock managing windows."
@@ -218,33 +221,39 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:42
 msgid "If true, shows time in 24-hr format."
-msgstr ""
+msgstr "Affiche l'heure au format 24h si activé."
 
 #: ../data/docky.schemas.in.h:43
 msgid "If true, the Docky item popup menu shows the Quit option."
 msgstr ""
+"Affiche l'option Quitter dans le menu contextuel de l'icône de Docky si "
+"activé."
 
 #: ../data/docky.schemas.in.h:44
 msgid "If true, the Docky item popup menu shows the Settings option."
 msgstr ""
+"Affiche l'option Réglages dans le menu contextuel de l'icône de Docky si "
+"activé."
 
 #: ../data/docky.schemas.in.h:45
 msgid "If true, the date should show on the digital clock."
-msgstr ""
+msgstr "Affiche la date avec l'horloge numérique si activé."
 
 #: ../data/docky.schemas.in.h:46
 msgid "If true, the dock is drawn as a 3d dock."
-msgstr ""
+msgstr "Le dock sera affiché en tridimensionnel si activé"
 
 #: ../data/docky.schemas.in.h:47
 msgid ""
 "If true, the dock is in panel mode and will extend to fill the entire screen "
 "edge."
 msgstr ""
+"Le dock sera affiché sous forme panneau qui prendra toute la largeur de "
+"l'écran si activé."
 
 #: ../data/docky.schemas.in.h:48
 msgid "If true, the dock will zoom when hovered."
-msgstr ""
+msgstr "Le dock va s'agrandir quand la souris passe au-dessus si activé"
 
 #: ../data/docky.schemas.in.h:49
 msgid ""
@@ -254,7 +263,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:50
 msgid "If true, timers will disappear when they time out."
-msgstr ""
+msgstr "Les chronomètres terminés vont disparaître si activé."
 
 #: ../data/docky.schemas.in.h:51
 msgid ""
@@ -264,7 +273,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:52
 msgid "If true, use metric units when showing weather."
-msgstr ""
+msgstr "Utiliser les unités métriques pour la météo si activé."
 
 #: ../data/docky.schemas.in.h:53
 msgid ""
@@ -275,26 +284,29 @@ msgstr ""
 msgid ""
 "If true, when there is new unread mail Docky will show the indicator dot."
 msgstr ""
+"Docky affichera un point indicateur s'il y a des nouveaux messages non lus "
+"si activé."
 
 #: ../data/docky.schemas.in.h:55
 msgid "If true, will try to show the most recent document on the dock."
 msgstr ""
+"Essayera d'afficher le document le plus récent sur le dock si activé."
 
 #: ../data/docky.schemas.in.h:56
 msgid "Indicate when items have more than one window"
-msgstr ""
+msgstr "Indiquer si un élément a plus qu'une fenêtre"
 
 #: ../data/docky.schemas.in.h:57
 msgid "Last time checked"
-msgstr ""
+msgstr "Heure de la dernière vérification"
 
 #: ../data/docky.schemas.in.h:58
 msgid "List of NPR stations to display."
-msgstr ""
+msgstr "Liste des stations NPR à afficher."
 
 #: ../data/docky.schemas.in.h:59
 msgid "List of active docks"
-msgstr ""
+msgstr "Liste des docks actifs"
 
 #: ../data/docky.schemas.in.h:60
 msgid "List of custom GMail labels to check in addition to the inbox."
@@ -302,15 +314,15 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:61
 msgid "List of launchers"
-msgstr ""
+msgstr "Liste des lanceurs"
 
 #: ../data/docky.schemas.in.h:62
 msgid "Max Entries"
-msgstr ""
+msgstr "Nombre maximal d'entrées"
 
 #: ../data/docky.schemas.in.h:63
 msgid "NPR stations"
-msgstr ""
+msgstr "Stations NPR"
 
 #: ../data/docky.schemas.in.h:64
 msgid "New timer length"
@@ -318,7 +330,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:65
 msgid "Number of recent docs"
-msgstr ""
+msgstr "Nombre de documents récents"
 
 #: ../data/docky.schemas.in.h:66
 msgid "Opacity to fade to"
@@ -326,7 +338,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:67
 msgid "Plugins on this dock"
-msgstr ""
+msgstr "Greffons sur ce dock"
 
 #: ../data/docky.schemas.in.h:68
 msgid "Prevent adding items by drops"
@@ -339,6 +351,7 @@ msgstr ""
 #: ../data/docky.schemas.in.h:70
 msgid "Set the color of the Docky icon. 0 means use the GTK+ theme color."
 msgstr ""
+"Définir la couleur de l'icône Docky. 0 va utiliser la couleur du thème GTK+."
 
 #: ../data/docky.schemas.in.h:71
 msgid "Show 'Pin to Dock' for items"
@@ -347,14 +360,16 @@ msgstr ""
 #: ../data/docky.schemas.in.h:72
 msgid "Show Quit in Docky item menu"
 msgstr ""
+"Afficher l'option Quitter dans le menu contextuel de l'icône de Docky"
 
 #: ../data/docky.schemas.in.h:73
 msgid "Show Settings in Docky item menu"
 msgstr ""
+"Afficher l'option Réglages dans le menu contextuel de l'icône de Docky"
 
 #: ../data/docky.schemas.in.h:74
 msgid "Show a notify for unread mail"
-msgstr ""
+msgstr "Afficher une notification pour les messages non lus"
 
 #: ../data/docky.schemas.in.h:75
 msgid "Show date"
@@ -366,7 +381,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:77
 msgid "Show indicator dot for unread mail"
-msgstr ""
+msgstr "Afficher un point indicateur pour les messages non lus"
 
 #: ../data/docky.schemas.in.h:78
 msgid "Show most recent doc"
@@ -374,23 +389,23 @@ msgstr "Afficher les documents les plus récents"
 
 #: ../data/docky.schemas.in.h:79
 msgid "Show the Docky item"
-msgstr ""
+msgstr "Afficher l'icône de Docky"
 
 #: ../data/docky.schemas.in.h:80
 msgid "Show the digital clock"
-msgstr ""
+msgstr "Afficher l'horloge numérique"
 
 #: ../data/docky.schemas.in.h:81
 msgid "Show windows from only current desktop"
-msgstr ""
+msgstr "N'afficher que les fenêtres du bureau actif"
 
 #: ../data/docky.schemas.in.h:82
 msgid "Sorts the items on the dock"
-msgstr ""
+msgstr "Trie les éléments du dock"
 
 #: ../data/docky.schemas.in.h:83
 msgid "Start all new timers"
-msgstr ""
+msgstr "Démarrer tous les nouveaux chronomètres"
 
 #: ../data/docky.schemas.in.h:84
 msgid "Stop items from dragging"
@@ -426,7 +441,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:91
 msgid "The dock's position"
-msgstr ""
+msgstr "La position du dock"
 
 #: ../data/docky.schemas.in.h:92
 msgid ""
