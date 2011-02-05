@@ -61,6 +61,127 @@ namespace Docky
 		NStates
 	}
 	
+	public class CurtainWindow : Gtk.Window
+	{
+		readonly uint AnimationTime = 350;
+		readonly double CurtainOpacity = 0.9;
+		
+		DateTime shown_time = DateTime.UtcNow;
+		uint timer = 0;
+		
+		bool curtainDown = true;
+		
+		public static CurtainWindow Instance { get; protected set; }
+		
+		static CurtainWindow ()
+		{
+			Instance = new CurtainWindow ();
+		}
+		
+		public CurtainWindow () : base(Gtk.WindowType.Toplevel)
+		{
+			AppPaintable = true;
+			AcceptFocus = false;
+			Decorated = false;
+			SkipPagerHint = true;
+			SkipTaskbarHint = true;
+			Resizable = false;
+			CanFocus = false;
+			TypeHint = WindowTypeHint.Normal;
+			
+			Realized += HandleRealized;
+			
+			this.SetCompositeColormap ();
+			Stick ();
+			
+			// why 1? because Compiz sucks... thats why!
+			Move (0, 1);
+			SetSizeRequest (Screen.Width, Screen.Height - 1);
+		}
+		
+		void HandleRealized (object sender, EventArgs e)
+		{
+			GdkWindow.SetBackPixmap (null, false);
+		}
+		
+		public void CurtainDown ()
+		{
+			curtainDown = true;
+			StartTimer ();
+			Show ();
+			// this seems needed for Metacity
+			Present ();
+		}
+		
+		public void CurtainUp ()
+		{
+			curtainDown = false;
+			StartTimer ();
+		}
+		
+		void StopTimer ()
+		{
+			if (timer == 0)
+				return;
+			
+			GLib.Source.Remove (timer);
+			timer = 0;
+		}
+		
+		void StartTimer ()
+		{
+			StopTimer ();
+			shown_time = DateTime.UtcNow;
+			timer = GLib.Timeout.Add (20, delegate {
+				QueueDraw ();
+				
+				bool finished = (DateTime.UtcNow - shown_time).TotalMilliseconds / AnimationTime > 1;
+				if (finished && !curtainDown)
+					Hide ();
+				
+				return !finished;
+			});
+		}
+		
+		protected override bool OnExposeEvent (EventExpose evnt)
+		{
+			if (!IsRealized)
+				return true;
+			
+			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
+				cr.Save ();
+				
+				cr.Color = new Cairo.Color (0, 0, 0, 0);
+				cr.Operator = Operator.Source;
+				cr.Paint ();
+				
+				cr.Restore ();
+				
+				int width, height;
+				GetSizeRequest (out width, out height);
+				
+				double opacity = Math.Min (1, (DateTime.UtcNow - shown_time).TotalMilliseconds / AnimationTime);
+				if (!curtainDown)
+					opacity = 1 - opacity;
+				
+				cr.Rectangle (0, 0, width, height);
+				cr.Color = new Cairo.Color (0, 0, 0, CurtainOpacity * opacity);
+				cr.Fill ();
+
+				(cr.Target as IDisposable).Dispose ();
+			}
+			
+			return false;
+		}
+		
+		public override void Dispose ()
+		{
+			StopTimer ();
+			Realized -= HandleRealized;
+			base.Dispose ();
+		}
+	}
+	
 	public partial class ConfigurationWindow : Gtk.Window
 	{
 		TileView HelpersTileview, DockletsTileview;
@@ -279,6 +400,8 @@ namespace Docky
 
 		protected override void OnShown ()
 		{
+			CurtainWindow.Instance.CurtainDown ();
+
 			foreach (Dock dock in Docky.Controller.Docks) {
 				dock.EnterConfigurationMode ();
 				dock.ConfigurationClick += HandleDockConfigurationClick;
@@ -302,11 +425,14 @@ namespace Docky
 
 		protected override void OnHidden ()
 		{
+			CurtainWindow.Instance.CurtainUp ();
+			
 			foreach (Dock dock in Docky.Controller.Docks) {
 				dock.ConfigurationClick -= HandleDockConfigurationClick;
 				dock.LeaveConfigurationMode ();
 				dock.UnsetActiveGlow ();
 			}
+			
 			base.OnHidden ();
 		}
 
