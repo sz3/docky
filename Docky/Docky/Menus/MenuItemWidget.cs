@@ -94,10 +94,11 @@ namespace Docky.Menus
 			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ()) {
 				char accel;
 				
+				string text = GLib.Markup.EscapeText (item.Text.Replace ("\n", ""));
 				if (item.Mnemonic.HasValue)
-					layout.SetMarkupWithAccel (item.Text, '_', out accel);
+					layout.SetMarkupWithAccel (text, '_', out accel);
 				else
-					layout.SetMarkup (item.Text);
+					layout.SetMarkup (text);
 				layout.FontDescription = Style.FontDescription;
 				layout.Ellipsize = Pango.EllipsizeMode.End;
 				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (FontSize);
@@ -273,10 +274,11 @@ namespace Docky.Menus
 			
 				using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ()) {
 					char accel;
+					string text = GLib.Markup.EscapeText (item.Text.Replace ("\n", ""));
 					if (item.Mnemonic.HasValue)
-						layout.SetMarkupWithAccel (item.Text, '_', out accel);
+						layout.SetMarkupWithAccel (text, '_', out accel);
 					else
-						layout.SetMarkup (item.Text);
+						layout.SetMarkup (text);
 					layout.Width = Pango.Units.FromPixels (TextWidth);
 					layout.FontDescription = Style.FontDescription;
 					layout.Ellipsize = Pango.EllipsizeMode.End;

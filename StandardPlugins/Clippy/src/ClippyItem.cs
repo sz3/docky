@@ -140,7 +140,7 @@ namespace Clippy
 			List<Docky.Menus.MenuItem> items = new List<Docky.Menus.MenuItem> ();
 			
 			for (int i = clips.Count; i > 0; i--)
-				items.Add (new ClippyMenuItem (this, i, GetClipboardAt (i)));
+				items.Add (new ClippyMenuItem (this, i, clips [i - 1]));
 			
 			MenuList list = base.OnGetMenuItems ();
 			
