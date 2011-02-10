@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-01-05 06:53-0600\n"
-"PO-Revision-Date: 2011-01-22 19:14+0000\n"
-"Last-Translator: zeeeeee <jose.california@gmail.com>\n"
+"PO-Revision-Date: 2011-02-01 00:20+0000\n"
+"Last-Translator: Carlos Manuel <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-01-30 15:16+0000\n"
-"X-Generator: Launchpad (build 12274)\n"
+"X-Launchpad-Export-Date: 2011-02-10 14:19+0000\n"
+"X-Generator: Launchpad (build 12335)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -76,19 +76,19 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:14
 msgid "Docky item hue"
-msgstr ""
+msgstr "Tom de item do Docky"
 
 #: ../data/docky.schemas.in.h:15
 msgid "Fade when hiding"
-msgstr ""
+msgstr "Desvanecer ao esconder"
 
 #: ../data/docky.schemas.in.h:16
 msgid "GMail labels to check"
-msgstr ""
+msgstr "Etiquetas GMail a verificar"
 
 #: ../data/docky.schemas.in.h:17
 msgid "GMail username"
-msgstr ""
+msgstr "Nome de utilizador GMail"
 
 #: ../data/docky.schemas.in.h:18
 msgid ""
@@ -98,7 +98,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:19
 msgid "How long to wait (ms) before unhiding"
-msgstr ""
+msgstr "Quanto esperar (ms) antes de reaparecer"
 
 #: ../data/docky.schemas.in.h:20
 msgid "How long to wait (ms) to update after a window switch"
@@ -106,7 +106,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:21
 msgid "How many recent clipboard selections to show."
-msgstr ""
+msgstr "Quantas selecções recentes da Área de Transferência mostrar."
 
 #: ../data/docky.schemas.in.h:22
 msgid ""
@@ -116,19 +116,20 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:23
 msgid "How often (in mins) to check for new mail."
-msgstr ""
+msgstr "Com que frequência (em minutos) a verificar por novo email."
 
 #: ../data/docky.schemas.in.h:24
 msgid "How often to check"
-msgstr ""
+msgstr "Verificar com que frequência"
 
 #: ../data/docky.schemas.in.h:25
 msgid "How often to check for new weather information."
-msgstr ""
+msgstr "Frequência com que verificar nova informação meterológica"
 
 #: ../data/docky.schemas.in.h:26
 msgid "How often to poll (in ms) for new clipboard data."
 msgstr ""
+"Com que frequência (em ms) consultar novos dados na área de transferência."
 
 #: ../data/docky.schemas.in.h:27
 msgid ""
@@ -141,6 +142,8 @@ msgid ""
 "If false, Docky will not show hover texts for launchers (but still show for "
 "plugins)."
 msgstr ""
+"Se falso, o Docky não irá mostrar textos que pairam sobre lançadores (mas "
+"ainda assim mostrar para plugins)."
 
 #: ../data/docky.schemas.in.h:29
 msgid "If false, finished timers will reset instead of dismiss."
@@ -195,6 +198,7 @@ msgstr ""
 #: ../data/docky.schemas.in.h:39
 msgid "If true, show the digital clock otherwise show the analog clock."
 msgstr ""
+"Se verdadeiro, mostrar relógio digital, ou então mostrar relógio analógico."
 
 #: ../data/docky.schemas.in.h:40
 msgid "If true, shows a notify message for new unread mail."
@@ -492,7 +496,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:109
 msgid "Track Mouse Selections"
-msgstr ""
+msgstr "Rastrear Escolhas do Rato"
 
 #: ../data/docky.schemas.in.h:110
 msgid "Urgent indicator color shift"
@@ -504,11 +508,11 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:112
 msgid "Use 24-hr time"
-msgstr ""
+msgstr "Usar modo de 24 horas"
 
 #: ../data/docky.schemas.in.h:113
 msgid "Use metric units"
-msgstr ""
+msgstr "Utilizar o sistema métrico"
 
 #: ../data/docky.schemas.in.h:114
 msgid "Used to sort the items on the dock."
@@ -516,7 +520,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:115
 msgid "Weather locations"
-msgstr ""
+msgstr "Locais da Meteorologia"
 
 #: ../data/docky.schemas.in.h:116
 msgid "Which monitor the dock is on"
@@ -524,7 +528,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:117
 msgid "Zoom size"
-msgstr ""
+msgstr "Tamanho da ampliação"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:147
 msgid "Search Docklets..."
@@ -810,7 +814,7 @@ msgstr "_Abrir"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:70
 msgid "_Reset Color"
-msgstr ""
+msgstr "_Reiniciar Cor"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:434
 msgid "_Pin to Dock"
@@ -848,7 +852,7 @@ msgstr "A Copiar"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:268
 msgid "Open Containing _Folder"
-msgstr ""
+msgstr "Abrir Pasta Respectiva"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:261
 msgid "Unma_ximize"
@@ -940,7 +944,7 @@ msgstr "restante "
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:154
 msgid "_Statistics"
-msgstr ""
+msgstr "_Estatísticas"
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:85
 msgid "Computer"
@@ -948,7 +952,7 @@ msgstr "Computador"
 
 #: ../StandardPlugins/Clippy/src/ClippyItem.cs:88
 msgid "Clipboard is currently empty."
-msgstr ""
+msgstr "Área de Transferência está vazia."
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:430
 msgid "Di_gital Clock"
@@ -976,11 +980,11 @@ msgstr "Tema"
 
 #: ../StandardPlugins/Desktop/src/DesktopActionsProvider.cs:57
 msgid "_Undo"
-msgstr ""
+msgstr "_Desfazer"
 
 #: ../StandardPlugins/Desktop/src/ShowDesktopItem.cs:37
 msgid "_Show Desktop"
-msgstr ""
+msgstr "_Mostrar Ambiente de Trabalho"
 
 #: ../StandardPlugins/Desktop/src/TileDesktopItem.cs:38
 msgid "_Tile Desktop"
@@ -1190,11 +1194,11 @@ msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:76
 msgid "L_ock Screen"
-msgstr ""
+msgstr "Tr_ancar o Ecrã"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:80
 msgid "_Log Out..."
-msgstr ""
+msgstr "_Sair da Sessão..."
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:81
 msgid "Log Out"
@@ -1209,15 +1213,15 @@ msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:87
 msgid "_Suspend"
-msgstr ""
+msgstr "_Suspender"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:92
 msgid "_Hibernate"
-msgstr ""
+msgstr "_Hibernar"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:97
 msgid "_Restart..."
-msgstr ""
+msgstr "_Reiniciar..."
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:98
 msgid "Restart"
@@ -1230,7 +1234,7 @@ msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:104
 msgid "Shut _Down..."
-msgstr ""
+msgstr "_Encerrar..."
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:105
 msgid "Shut Down"
@@ -1274,7 +1278,7 @@ msgstr "_Iniciar Temporizador"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:290
 msgid "R_eset Timer"
-msgstr ""
+msgstr "R_einiciar Temporizador"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:294
 msgid "_Remove Timer"

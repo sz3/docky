@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-01-05 06:53-0600\n"
-"PO-Revision-Date: 2011-01-15 09:05+0000\n"
-"Last-Translator: Rico Tzschichholz <Unknown>\n"
+"PO-Revision-Date: 2011-02-04 12:35+0000\n"
+"Last-Translator: nehxby <Unknown>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-01-30 15:16+0000\n"
-"X-Generator: Launchpad (build 12274)\n"
+"X-Launchpad-Export-Date: 2011-02-10 14:19+0000\n"
+"X-Generator: Launchpad (build 12335)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -25,51 +25,51 @@ msgstr "Найкраща панелька, яку можна придбати з
 
 #: ../data/docky.schemas.in.h:1
 msgid "A list of plugins that are active on this dock."
-msgstr ""
+msgstr "Список активних на цій панелі плагінів."
 
 #: ../data/docky.schemas.in.h:2
 msgid "Analog clock theme"
-msgstr ""
+msgstr "Аналогова тема годинника"
 
 #: ../data/docky.schemas.in.h:3
 msgid "Clear finished timers"
-msgstr ""
+msgstr "Очистити завершені таймери"
 
 #: ../data/docky.schemas.in.h:4
 msgid "Currently selected item"
-msgstr ""
+msgstr "Вибраний елемент"
 
 #: ../data/docky.schemas.in.h:5
 msgid "Dismiss a stopped timer when clicked"
-msgstr ""
+msgstr "Не зупиняти таймер, якщо клацнути на ньому"
 
 #: ../data/docky.schemas.in.h:6
 msgid "Do not change this!"
-msgstr ""
+msgstr "Не змінюйте це!"
 
 #: ../data/docky.schemas.in.h:7
 msgid "Dock icon size"
-msgstr ""
+msgstr "Розмір значків панелі"
 
 #: ../data/docky.schemas.in.h:8
 msgid "Dock is 3d"
-msgstr ""
+msgstr "Панель 3D"
 
 #: ../data/docky.schemas.in.h:9
 msgid "Dock manages all windows"
-msgstr ""
+msgstr "Панель керує всіма вікнами"
 
 #: ../data/docky.schemas.in.h:10
 msgid "Dock zooms"
-msgstr ""
+msgstr "Масштабування панелі"
 
 #: ../data/docky.schemas.in.h:11
 msgid "Dock's hiding mode"
-msgstr ""
+msgstr "Режим приховування панелі"
 
 #: ../data/docky.schemas.in.h:12
 msgid "Docky item command to execute"
-msgstr ""
+msgstr "Елемент панелі \"виконати команду\""
 
 #: ../data/docky.schemas.in.h:13
 msgid "Docky item hover text"
@@ -77,29 +77,31 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:14
 msgid "Docky item hue"
-msgstr ""
+msgstr "Відтінок елементу панелі"
 
 #: ../data/docky.schemas.in.h:15
 msgid "Fade when hiding"
-msgstr ""
+msgstr "Повільне проховування"
 
 #: ../data/docky.schemas.in.h:16
 msgid "GMail labels to check"
-msgstr ""
+msgstr "Позначки для перевірки GMail"
 
 #: ../data/docky.schemas.in.h:17
 msgid "GMail username"
-msgstr ""
+msgstr "Ім'я користувача GMail"
 
 #: ../data/docky.schemas.in.h:18
 msgid ""
 "How long the urgent indicator glow animation is (in seconds), 0 to disable, "
 "or -1 for infinite."
 msgstr ""
+"Як довго має світитись індикатор (у секундах), 0 для відключення, або -1 для "
+"нескінченного."
 
 #: ../data/docky.schemas.in.h:19
 msgid "How long to wait (ms) before unhiding"
-msgstr ""
+msgstr "Затримка (у мілісекундах), перш ніж показати панель"
 
 #: ../data/docky.schemas.in.h:20
 msgid "How long to wait (ms) to update after a window switch"
@@ -987,11 +989,11 @@ msgstr "_Показати стільницю"
 
 #: ../StandardPlugins/Desktop/src/TileDesktopItem.cs:38
 msgid "_Tile Desktop"
-msgstr ""
+msgstr "_Розмістити стільниці поруч"
 
 #: ../StandardPlugins/Desktop/src/CascadeDesktopItem.cs:38
 msgid "_Cascade Desktop"
-msgstr ""
+msgstr "Розмістити стільниці _каскадно"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
 msgid "_Add Label"
