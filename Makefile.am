@@ -1,4 +1,7 @@
-EXTRA_DIST = config.rpath  COPYRIGHT
+EXTRA_DIST = \
+	config.rpath \
+	COPYRIGHT \
+	NEWS
 
 ACLOCAL_AMFLAGS = -I m4 -I m4/shamrock
 
