@@ -152,9 +152,8 @@ namespace Docky.Interface
 		int? icon_size;
 		public int IconSize {
 			get {
-				if (!icon_size.HasValue) {
-					icon_size = GetOption<int?> ("IconSize", 48);
-				}
+				if (!icon_size.HasValue)
+					icon_size = Clamp (GetOption<int> ("IconSize", 48), 128, 24);
 				return icon_size.Value;
 			}
 			set {
@@ -220,7 +219,7 @@ namespace Docky.Interface
 		public double ZoomPercent {
 			get {
 				if (!zoom_percent.HasValue)
-					zoom_percent = GetOption<double?> ("ZoomPercent", 2.0);
+					zoom_percent = Clamp (GetOption<double> ("ZoomPercent", 2.0), 4, 1);
 				return zoom_percent.Value;
 			}
 			set {
