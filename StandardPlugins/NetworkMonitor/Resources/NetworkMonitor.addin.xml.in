@@ -19,6 +19,6 @@
 	</Runtime>
 	
 	<Extension path="/Docky/ItemProvider">
-		<ItemProvider type="NetworkMonitor.NmonItemProvider" />
+		<ItemProvider type="NetworkMonitorDocklet.NetworkMonitorItemProvider" />
 	</Extension>
 </Addin>
