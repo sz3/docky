@@ -26,101 +26,82 @@ using GLib;
 
 namespace NetworkMonitorDocklet
 {
-	enum OutputDevice {
+	enum OutputDevice
+	{
 		AUTO = 0
 	}
-	class NetworkMonitor {
-		Dictionary<string, DeviceInfo> devices;
+	
+	class NetworkMonitor
+	{
+		Dictionary<string, DeviceInfo> devices = new Dictionary<string, DeviceInfo> ();
 		
+		public NetworkMonitor ()
+		{
+		}
+
 		public void printResults ()
 		{
-			foreach (KeyValuePair<string, DeviceInfo> pair in this.devices) {
-				Console.WriteLine(pair.Value.ToString());
-			}
+			foreach (DeviceInfo device in devices.Values)
+				Console.WriteLine (device.ToString ());
 		}
 		
 		public void update ()
 		{
-			using (StreamReader reader = new StreamReader ("/proc/net/dev")) {
-				try  {
-						string data = reader.ReadToEnd();
-						char[] delimiters = new char [] { '\r', '\n' };
-						//Console.WriteLine(data);
-						foreach (string row in data.Split(delimiters)) {
-							this.parseRow(row);
-						}
-
-				} catch {
-						// we dont care
+			try  {
+				using (StreamReader reader = new StreamReader ("/proc/net/dev")) {
+					string data = reader.ReadToEnd ();
+					char[] delimiters = new char[] { '\n' };
+					foreach (string row in data.Split (delimiters))
+						parseDeviceInfoString (row);
 				}
+			} catch {
+				// we dont care
 			}
 		}
 		
-		public void parseRow (string row)
+		public void parseDeviceInfoString (string row)
 		{
-			if(row.IndexOf (":") < 1)
+			if (row.IndexOf (":") < 1)
 				return;
 			
-			
-			string devicename = row.Substring (0,row.IndexOf (':')).Trim ();
-			if(devicename == "lo") {
-				return;
-			}
-			
-			row = row.Substring (row.IndexOf (":"),row.Length-row.IndexOf (":"));
-			
-			Regex regex = new Regex ("\\d+");
+			Regex regex = new Regex (@"\w+|\d+");
 			MatchCollection collection = regex.Matches (row);
 
-			DeviceInfo d;
-			long rx, tx;
-			double txRate, rxRate;
 			//The row has the following format:
-			//Inter-|   Receive												|  Transmit
-			//face  |bytes	packets errs drop fifo frame compressed multicast|bytes	packets errs drop fifo colls carrier compressed
-			//So we need fields 0(bytes-sent) and 8(bytes-received)
-			rx = Convert.ToInt64 (collection [0].Value);
-			tx = Convert.ToInt64 (collection [8].Value);
+			//Inter-|   Receive                                                |  Transmit
+			//face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed
+			//So we need fields 0 device name 1 (bytes-sent) and 8 (bytes-received)
+			string devicename = collection [0].Value;
+			long rx = Convert.ToInt64 (collection [1].Value);
+			long tx = Convert.ToInt64 (collection [9].Value);
+			
 			DateTime now = DateTime.Now;
-			try {
-				d = devices [devicename];
-				TimeSpan diff = now - d.lastUpdated;
-				txRate = (tx - d.tx) / diff.TotalSeconds;
-				rxRate = (rx - d.rx) / diff.TotalSeconds;
-			} catch {
-				d = new DeviceInfo();
-				d.name = devicename;
-				txRate = 0;
-				rxRate = 0;
-				this.devices.Add(devicename,d);
+			DeviceInfo d;
+			if (devices.TryGetValue (devicename, out d)) {
+				d.txRate = (tx - d.tx) / (now - d.lastUpdated).TotalSeconds;
+				d.rxRate = (rx - d.rx) / (now - d.lastUpdated).TotalSeconds;
+			} else {
+				d = new DeviceInfo (devicename);
+				devices.Add (devicename, d);
 			}
+			
 			d.lastUpdated = now;
-			d.txRate = txRate;
-			d.rxRate = rxRate;
 			d.tx = tx;
 			d.rx = rx;
 		}
 		
 		public DeviceInfo getDevice (OutputDevice n)
 		{
-			DeviceInfo d = null ;
-			if(n == OutputDevice.AUTO) {
-				foreach (KeyValuePair<string, DeviceInfo> pair in this.devices) {
-					if (d == null) {
-						d = pair.Value;
-						continue;
-					}
-					if ( (pair.Value.tx + pair.Value.rx) > (d.tx+d.rx)) {
-						d = pair.Value;					
-					}
-				}
-			}
+			if (n != OutputDevice.AUTO)
+				return null;
+			
+			DeviceInfo d = null;
+			foreach (DeviceInfo device in devices.Values)
+				if (d == null || device.sumRate > d.sumRate)
+					d = device;
+			
 			return d;
 		}
 
-		public NetworkMonitor ()
-		{
-			devices = new Dictionary<string, DeviceInfo> ();
-		}
 	}
 }

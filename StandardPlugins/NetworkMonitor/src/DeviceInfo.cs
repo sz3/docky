@@ -19,66 +19,79 @@ using System;
 
 namespace NetworkMonitorDocklet 
 {
-	class DeviceInfo {
+	class DeviceInfo 
+	{
 		public string name;
-		public long tx;
-		public long rx;
-		public double txRate;
-		public double rxRate;
+		public long tx = 0;
+		public long rx = 0;
+		public double txRate = 0.0;
+		public double rxRate = 0.0;
 		public DateTime lastUpdated;
+		public double sumRate {
+			get {
+				return txRate + rxRate;
+			}
+		}
+		
+		public DeviceInfo (string _name)
+		{
+			name = _name;
+		}
 
 		override public string ToString ()
 		{
 			return string.Format("{0}: {2,10} down {1,10} up (Total: {3}/{4})",
-							this.name, 
-							bytes_to_string(this.txRate), 
-							bytes_to_string(this.rxRate), 
-							bytes_to_string(this.tx,false), 
-							bytes_to_string(this.rx,false));
+			                     name,
+			                     bytes_to_string (txRate),
+			                     bytes_to_string (rxRate),
+			                     bytes_to_string (tx, false),
+			                     bytes_to_string (rx, false));
 		}
 		
 		public string formatUpDown (bool up)
 		{
 			double rate = rxRate;
+			
 			if (rate < 1)
 				return "-";
+			
 			if (up)
 				rate = txRate;
-			return this.bytes_to_string (rate,true);
+			
+			return bytes_to_string (rate, true);
 		}
+		
 		public string bytes_to_string (double bytes)
 		{
-			return bytes_to_string (bytes,false);
+			return bytes_to_string (bytes, false);
 		}
-		public string bytes_to_string (double bytes,bool per_sec)
+		
+		public string bytes_to_string (double bytes, bool per_sec)
 		{
 			int kilo = 1024;
-			string format,unit;
-			if(bytes < kilo)
-			{
+			string format, unit;
+			
+			if (bytes < kilo) {
 				format = "{0:0} {1}";
-				unit = ("B");
-			} 
-			else if (bytes < (kilo * kilo)) 
-			{
-				if(bytes < (100*kilo)) {
+				unit = "B";
+			} else if (bytes < (kilo * kilo)) {
+				if (bytes < (100 * kilo)) {
 					format = "{0:0.0} {1}";
 				} else {
-					format = "%.0f %s";
 					format = "{0:0} {1}";
 				}
 				bytes /= kilo;
-				unit = ("K");
+				unit = "K";
 			} else {
 				format = "{0:0.0} {1}";
 				bytes /= (kilo * kilo);
-				unit = ("M");
-				
+				unit = "M";
 			}
-			if(per_sec)
-				unit = string.Format ("{0}/s",unit);
-			return string.Format (format,bytes,unit);
+			
+			if (per_sec)
+				unit = string.Format ("{0}/s", unit);
+			
+			return string.Format (format, bytes, unit);
 		}
-
 	}
 }

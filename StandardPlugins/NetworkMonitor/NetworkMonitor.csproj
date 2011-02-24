@@ -63,6 +63,7 @@
     <Compile Include="src\NetworkMonitorItemProvider.cs" />
     <Compile Include="src\NetworkMonitorDockItem.cs" />
     <Compile Include="src\NetworkMonitor.cs" />
+    <Compile Include="src\DeviceInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

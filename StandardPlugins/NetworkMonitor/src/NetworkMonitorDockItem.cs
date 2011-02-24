@@ -37,54 +37,53 @@ namespace NetworkMonitorDocklet
 	public class NetworkMonitorDockItem : AbstractDockItem
 	{
 		uint timer;
-		NetworkMonitor nmonitor;
+		NetworkMonitor monitor;
 		DeviceInfo device;
 		
 		public override string UniqueID () { return "NetworkMonitor"; }
 
 		public NetworkMonitorDockItem ()
 		{
-			nmonitor = new NetworkMonitor ();
+			monitor = new NetworkMonitor ();
 			UpdateUtilization ();
 			timer = GLib.Timeout.Add (3000, UpdateUtilization);
 		}
+		
 		bool UpdateUtilization ()
 		{
-			nmonitor.update ();
+			monitor.update ();
 			QueueRedraw ();
 			return true;
 		}
 		
 		protected override void PaintIconSurface (DockySurface surface)
 		{
-			device = nmonitor.getDevice (OutputDevice.AUTO);
+			device = monitor.getDevice (OutputDevice.AUTO);
 			HoverText = device.ToString ();
 			
 			Context cr = surface.Context;
 			
-			// useful sizes
-			int timeSize = surface.Height / 5;
+			int fontSize = surface.Height / 5;
 			
 			// shared by all text
 			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ()) {
-				layout.FontDescription = new Gtk.Style().FontDescription;
+				layout.FontDescription = new Gtk.Style ().FontDescription;
 				layout.FontDescription.Weight = Pango.Weight.Bold;
 				layout.Ellipsize = Pango.EllipsizeMode.None;
 				layout.Width = Pango.Units.FromPixels (surface.Width);
 				
 				// draw up/down
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (timeSize);
-				string text;
-				text = string.Format("↓{1}\n↑{0}", device.formatUpDown (true), device.formatUpDown (false));
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (fontSize);
+				string text = string.Format ("↓{1}\n↑{0}", device.formatUpDown (true), device.formatUpDown (false));
 				
 				layout.SetText (text );
 				
 				Pango.Rectangle inkRect, logicalRect;
 				layout.GetPixelExtents (out inkRect, out logicalRect);
 				
-				int timeYOffset = timeSize / 2;
-				int timeXOffset = (surface.Width - inkRect.Width) / 2;
-				cr.MoveTo (timeXOffset, timeYOffset);
+				int yOffset = fontSize / 2;
+				int xOffset = (surface.Width - inkRect.Width) / 2;
+				cr.MoveTo (xOffset, yOffset);
 				
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.LineWidth = 2;
