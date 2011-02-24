@@ -1,6 +1,5 @@
 //  
-//  Copyright (C) 2009 Jason Smith, Robert Dyer
-//  Copyright (C) 2010 Robert Dyer
+//  Copyright (C) 2011 Florian Dorn
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -33,38 +32,35 @@ using Docky.Menus;
 using Docky.Services;
 using Docky.Widgets;
 
-namespace NetworkMonitorDocklet {
+namespace NetworkMonitorDocklet 
+{
 	public class NetworkMonitorDockItem : AbstractDockItem
-    //, IConfig
+
 	{
 		uint timer;
-		NetworkMonitor nmonitor = new NetworkMonitor();
-        DeviceInfo device;
+		NetworkMonitor nmonitor;
+		DeviceInfo device;
 		
-        public override string UniqueID () { return "NetworkMonitor"; }
+		public override string UniqueID () { return "NetworkMonitor"; }
 
 		public NetworkMonitorDockItem ()
 		{
+			nmonitor = new NetworkMonitor();
+			
+			UpdateUtilization();
 			timer = GLib.Timeout.Add (3000, UpdateUtilization);
 		}
 		bool UpdateUtilization() {
-            nmonitor.update();
-            QueueRedraw();
-            return true;
-        }
-		
-		
+			nmonitor.update();
+			QueueRedraw();
+			return true;
+		}
 		
 		protected override void PaintIconSurface (DockySurface surface)
 		{
-            device = nmonitor.getDevice(OutputDevice.AUTO);
+			device = nmonitor.getDevice(OutputDevice.AUTO);
 			HoverText = device.ToString();
-			MakeSquareDigitalIcon (surface);
-		}
-		
-		
-		void MakeSquareDigitalIcon (DockySurface surface)
-		{
+			
 			Context cr = surface.Context;
 			
 			// useful sizes
@@ -77,11 +73,10 @@ namespace NetworkMonitorDocklet {
 				layout.Ellipsize = Pango.EllipsizeMode.None;
 				layout.Width = Pango.Units.FromPixels (surface.Width);
 				
-				
 				// draw up/down
 				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (timeSize);
-				string text;//⇩:{0} - ⇧:{1}
-                text = String.Format("↓{1}\n↑{0}", device.formatUpDown(true),  device.formatUpDown(false));
+				string text;
+				text = String.Format("↓{1}\n↑{0}", device.formatUpDown(true), device.formatUpDown(false));
 				
 				layout.SetText (text );
 				

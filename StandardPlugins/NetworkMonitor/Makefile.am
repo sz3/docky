@@ -6,7 +6,8 @@ ASSEMBLY = NetworkMonitor
 FILES = \
 	src/NetworkMonitorItemProvider.cs \
 	src/NetworkMonitorDockItem.cs \
-    src/NetworkMonitor.cs
+	src/DeviceInfo.cs \
+	src/NetworkMonitor.cs 
 
 RESOURCES = \
 	Resources/NetworkMonitor.addin.xml
