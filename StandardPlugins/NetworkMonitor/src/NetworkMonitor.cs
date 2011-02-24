@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2011 Florian Dorn
+//  Copyright (C) 2011 Florian Dorn, Rico Tzschichholz
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -39,58 +39,51 @@ namespace NetworkMonitorDocklet
 		{
 		}
 
-		public void printResults ()
+		public void PrintDevices ()
 		{
 			foreach (DeviceInfo device in devices.Values)
 				Console.WriteLine (device.ToString ());
 		}
 		
-		public void update ()
+		public void UpdateDevices ()
 		{
 			try  {
 				using (StreamReader reader = new StreamReader ("/proc/net/dev")) {
-					string data = reader.ReadToEnd ();
-					char[] delimiters = new char[] { '\n' };
-					foreach (string row in data.Split (delimiters))
-						parseDeviceInfoString (row);
+					while (!reader.EndOfStream)
+						ParseDeviceInfoString (reader.ReadLine ());
+					reader.Close ();
 				}
 			} catch {
 				// we dont care
 			}
 		}
 		
-		public void parseDeviceInfoString (string row)
+		public void ParseDeviceInfoString (string line)
 		{
-			if (row.IndexOf (":") < 1)
+			if (string.IsNullOrEmpty (line) || !line.Contains (':'))
 				return;
 			
-			Regex regex = new Regex (@"\w+|\d+");
-			MatchCollection collection = regex.Matches (row);
-
-			//The row has the following format:
-			//Inter-|   Receive                                                |  Transmit
-			//face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed
-			//So we need fields 0 device name 1 (bytes-sent) and 8 (bytes-received)
-			string devicename = collection [0].Value;
-			long rx = Convert.ToInt64 (collection [1].Value);
-			long tx = Convert.ToInt64 (collection [9].Value);
+			string[] parts = line.Split (new char[] {':'}, 2);
+			string devicename = parts[0].Trim ();
 			
-			DateTime now = DateTime.Now;
+			if (devicename == "lo")
+				return;
+			
+			//             Receive                                                 Transmit
+			// interface : bytes packets errs drop fifo frame compressed multicast bytes packets errs drop fifo colls carrier compressed
+			// So we need fields 0 (bytes-sent) and 8 (bytes-received)
+			string[] values = parts[1].Trim ().Split (new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+			long downloadedBytes = Convert.ToInt64 (values [0].Trim ());
+			long uploadedBytes = Convert.ToInt64 (values [8].Trim ());
+			
 			DeviceInfo d;
-			if (devices.TryGetValue (devicename, out d)) {
-				d.txRate = (tx - d.tx) / (now - d.lastUpdated).TotalSeconds;
-				d.rxRate = (rx - d.rx) / (now - d.lastUpdated).TotalSeconds;
-			} else {
-				d = new DeviceInfo (devicename);
-				devices.Add (devicename, d);
-			}
-			
-			d.lastUpdated = now;
-			d.tx = tx;
-			d.rx = rx;
+			if (devices.TryGetValue (devicename, out d))
+				d.Update (downloadedBytes, uploadedBytes);
+			else
+				devices.Add (devicename, new DeviceInfo (devicename, downloadedBytes, uploadedBytes));
 		}
 		
-		public DeviceInfo getDevice (OutputDevice n)
+		public DeviceInfo GetDevice (OutputDevice n)
 		{
 			if (n != OutputDevice.AUTO)
 				return null;

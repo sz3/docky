@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2011 Florian Dorn
+//  Copyright (C) 2011 Florian Dorn, Rico Tzschichholz
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -51,14 +51,18 @@ namespace NetworkMonitorDocklet
 		
 		bool UpdateUtilization ()
 		{
-			monitor.update ();
+			monitor.UpdateDevices ();
 			QueueRedraw ();
 			return true;
 		}
 		
 		protected override void PaintIconSurface (DockySurface surface)
 		{
-			device = monitor.getDevice (OutputDevice.AUTO);
+			device = monitor.GetDevice (OutputDevice.AUTO);
+			
+			if (device == null)
+				return;
+			
 			HoverText = device.ToString ();
 			
 			Context cr = surface.Context;
@@ -74,7 +78,7 @@ namespace NetworkMonitorDocklet
 				
 				// draw up/down
 				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (fontSize);
-				string text = string.Format ("↓{1}\n↑{0}", device.formatUpDown (true), device.formatUpDown (false));
+				string text = string.Format ("↓{1}\n↑{0}", device.FormatUpDown (true), device.FormatUpDown (false));
 				
 				layout.SetText (text );
 				
