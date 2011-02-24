@@ -39,7 +39,6 @@ namespace NetworkMonitorDocklet
 		public NetworkMonitorItemProvider ()
 		{
 			monitor = new NetworkMonitorDockItem ();
-			
 			Items = monitor.AsSingle<AbstractDockItem> ();
 		}
 	}

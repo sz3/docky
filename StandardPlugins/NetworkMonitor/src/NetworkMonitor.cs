@@ -29,92 +29,82 @@ namespace NetworkMonitorDocklet
 	enum OutputDevice {
 		AUTO = 0
 	}
-	class NetworkMonitor
-	{
+	class NetworkMonitor {
 		Dictionary<string, DeviceInfo> devices;
 		
-		public void printResults()
+		public void printResults ()
 		{
-			foreach (KeyValuePair<string, DeviceInfo> pair in this.devices)
-			{
+			foreach (KeyValuePair<string, DeviceInfo> pair in this.devices) {
 				Console.WriteLine(pair.Value.ToString());
 			}
 		}
 		
-		public void update()
+		public void update ()
 		{
-			using (StreamReader reader = new StreamReader ("/proc/net/dev"))
-			{
-					try 
-					{
-							string data = reader.ReadToEnd();
-							char[] delimiters = new char[] { '\r', '\n' };
-							//Console.WriteLine(data);
-							foreach (string row in data.Split(delimiters)) {
-								this.parseRow(row);
-							}
+			using (StreamReader reader = new StreamReader ("/proc/net/dev")) {
+				try  {
+						string data = reader.ReadToEnd();
+						char[] delimiters = new char [] { '\r', '\n' };
+						//Console.WriteLine(data);
+						foreach (string row in data.Split(delimiters)) {
+							this.parseRow(row);
+						}
 
-					} 
-					catch {
-							// we dont care
-					}
+				} catch {
+						// we dont care
+				}
 			}
 		}
 		
-		public void parseRow(string row)
+		public void parseRow (string row)
 		{
-			if(row.IndexOf(":") < 1) {
+			if(row.IndexOf (":") < 1)
 				return;
-			}
-			//Console.WriteLine(row);
-			string devicename = row.Substring(0,row.IndexOf(':')).Trim();
+			
+			
+			string devicename = row.Substring (0,row.IndexOf (':')).Trim ();
 			if(devicename == "lo") {
 				return;
 			}
-			//Console.WriteLine(devicename);
-			row = row.Substring(row.IndexOf(":"),row.Length-row.IndexOf(":"));
-			//Console.WriteLine(row);
-			Regex regex = new Regex("\\d+");
+			
+			row = row.Substring (row.IndexOf (":"),row.Length-row.IndexOf (":"));
+			
+			Regex regex = new Regex ("\\d+");
+			MatchCollection collection = regex.Matches (row);
+
+			DeviceInfo d;
+			long rx, tx;
+			double txRate, rxRate;
 			//The row has the following format:
 			//Inter-|   Receive												|  Transmit
 			//face  |bytes	packets errs drop fifo frame compressed multicast|bytes	packets errs drop fifo colls carrier compressed
 			//So we need fields 0(bytes-sent) and 8(bytes-received)
-			MatchCollection collection = regex.Matches (row);
-			//debug_collection(collection);
-			DeviceInfo d;
-			long rx, tx;
-			double tx_rate, rx_rate;
 			rx = Convert.ToInt64 (collection [0].Value);
 			tx = Convert.ToInt64 (collection [8].Value);
 			DateTime now = DateTime.Now;
-			
-			if (devices.ContainsKey(devicename)) {
-				d = devices[devicename];
-				TimeSpan diff = now - d.last_update;
-				//todo: use now and d.last_update to calc the correct rate in bytes/seconds
-				tx_rate = (tx - d.tx) / diff.TotalSeconds; //todo, adjust to seconds according to update_interval
-				rx_rate = (rx - d.rx) / diff.TotalSeconds; //todo, adjust to seconds according to update_interval
-				
-			} else {
+			try {
+				d = devices [devicename];
+				TimeSpan diff = now - d.lastUpdated;
+				txRate = (tx - d.tx) / diff.TotalSeconds;
+				rxRate = (rx - d.rx) / diff.TotalSeconds;
+			} catch {
 				d = new DeviceInfo();
 				d.name = devicename;
-				d.rx = rx;
-				d.tx = tx;
-				tx_rate = 0;
-				rx_rate = 0;
+				txRate = 0;
+				rxRate = 0;
 				this.devices.Add(devicename,d);
 			}
-			d.last_update = now;
-			d.tx_rate = tx_rate;
-			d.rx_rate = rx_rate;
+			d.lastUpdated = now;
+			d.txRate = txRate;
+			d.rxRate = rxRate;
 			d.tx = tx;
 			d.rx = rx;
 		}
 		
-		public DeviceInfo getDevice(OutputDevice n)
+		public DeviceInfo getDevice (OutputDevice n)
 		{
 			DeviceInfo d = null ;
-			if(n == 0) {
+			if(n == OutputDevice.AUTO) {
 				foreach (KeyValuePair<string, DeviceInfo> pair in this.devices) {
 					if (d == null) {
 						d = pair.Value;
@@ -128,9 +118,9 @@ namespace NetworkMonitorDocklet
 			return d;
 		}
 
-		public NetworkMonitor()
+		public NetworkMonitor ()
 		{
-			devices = new Dictionary<string, DeviceInfo>();
+			devices = new Dictionary<string, DeviceInfo> ();
 		}
 	}
 }

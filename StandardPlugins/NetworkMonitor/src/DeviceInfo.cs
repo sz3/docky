@@ -20,51 +20,47 @@ using System;
 namespace NetworkMonitorDocklet 
 {
 	class DeviceInfo {
-		public String name;
-		public String ip = "xxx.xxx.xxx.xxx";
+		public string name;
 		public long tx;
 		public long rx;
-		public double tx_rate;
-		public double rx_rate;
-		public long bytesIn {get; set; }
-		public long bytesOut {get; set; }
-		public DateTime last_update;
+		public double txRate;
+		public double rxRate;
+		public DateTime lastUpdated;
 
-		override public string ToString() {
-			return string.Format("{0}: {2,10} down {1,10} up (Total: {3}/{4})", this.name, bytes_to_string(this.tx_rate), bytes_to_string(this.rx_rate), bytes_to_string(this.tx,false),bytes_to_string(this.rx,false));
+		override public string ToString ()
+		{
+			return string.Format("{0}: {2,10} down {1,10} up (Total: {3}/{4})",
+							this.name, 
+							bytes_to_string(this.txRate), 
+							bytes_to_string(this.rxRate), 
+							bytes_to_string(this.tx,false), 
+							bytes_to_string(this.rx,false));
 		}
 		
-		public String formatUpDown(bool up)
+		public string formatUpDown (bool up)
 		{
-			double rate = rx_rate;
-			if (up) {
-				rate = tx_rate;
-			}
-			if (rate < 1) {
+			double rate = rxRate;
+			if (rate < 1)
 				return "-";
-			}			 
-			return this.bytes_to_string(rate,true);
+			if (up)
+				rate = txRate;
+			return this.bytes_to_string (rate,true);
 		}
-		public String bytes_to_string(double bytes)
+		public string bytes_to_string (double bytes)
 		{
-			return bytes_to_string(bytes,false);
+			return bytes_to_string (bytes,false);
 		}
-		public String bytes_to_string(double bytes,bool per_sec)
+		public string bytes_to_string (double bytes,bool per_sec)
 		{
 			int kilo = 1024;
-			String format,unit;
+			string format,unit;
 			if(bytes < kilo)
 			{
 				format = "{0:0} {1}";
-				if(per_sec) {
-					unit = ("B/s");
-				} else {
-					unit = ("B");
-				}
+				unit = ("B");
 			} 
 			else if (bytes < (kilo * kilo)) 
 			{
-			//kilo
 				if(bytes < (100*kilo)) {
 					format = "{0:0.0} {1}";
 				} else {
@@ -72,22 +68,16 @@ namespace NetworkMonitorDocklet
 					format = "{0:0} {1}";
 				}
 				bytes /= kilo;
-				if (per_sec) {
-						unit = ("K/s");
-				} else {
-						unit = ("KB");
-				}
+				unit = ("K");
 			} else {
 				format = "{0:0.0} {1}";
 				bytes /= (kilo * kilo);
-
-				if (per_sec) {
-						unit = ("M/s");
-				} else {
-						unit = ("M");
-				}
+				unit = ("M");
+				
 			}
-			return String.Format(format,bytes,unit);
+			if(per_sec)
+				unit = string.Format ("{0}/s",unit);
+			return string.Format (format,bytes,unit);
 		}
 
 	}

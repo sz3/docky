@@ -35,7 +35,6 @@ using Docky.Widgets;
 namespace NetworkMonitorDocklet 
 {
 	public class NetworkMonitorDockItem : AbstractDockItem
-
 	{
 		uint timer;
 		NetworkMonitor nmonitor;
@@ -45,21 +44,21 @@ namespace NetworkMonitorDocklet
 
 		public NetworkMonitorDockItem ()
 		{
-			nmonitor = new NetworkMonitor();
-			
-			UpdateUtilization();
+			nmonitor = new NetworkMonitor ();
+			UpdateUtilization ();
 			timer = GLib.Timeout.Add (3000, UpdateUtilization);
 		}
-		bool UpdateUtilization() {
-			nmonitor.update();
-			QueueRedraw();
+		bool UpdateUtilization ()
+		{
+			nmonitor.update ();
+			QueueRedraw ();
 			return true;
 		}
 		
 		protected override void PaintIconSurface (DockySurface surface)
 		{
-			device = nmonitor.getDevice(OutputDevice.AUTO);
-			HoverText = device.ToString();
+			device = nmonitor.getDevice (OutputDevice.AUTO);
+			HoverText = device.ToString ();
 			
 			Context cr = surface.Context;
 			
@@ -76,7 +75,7 @@ namespace NetworkMonitorDocklet
 				// draw up/down
 				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (timeSize);
 				string text;
-				text = String.Format("↓{1}\n↑{0}", device.formatUpDown(true), device.formatUpDown(false));
+				text = string.Format("↓{1}\n↑{0}", device.formatUpDown (true), device.formatUpDown (false));
 				
 				layout.SetText (text );
 				
