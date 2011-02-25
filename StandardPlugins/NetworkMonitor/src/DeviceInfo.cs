@@ -91,30 +91,20 @@ namespace NetworkMonitorDocklet
 		
 		static string BytesToFormattedString (double bytes, bool per_sec)
 		{
-			int kilo = 1024;
-			string format, unit;
+			var suffix = new string[] { "B", "K", "M", "G", "T", "P", "E" };
+			int depth = 0;
 			
-			if (bytes < kilo) {
-				format = "{0:0} {1}";
-				unit = "B";
-			} else if (bytes < (kilo * kilo)) {
-				if (bytes < (100 * kilo)) {
-					format = "{0:0.0} {1}";
-				} else {
-					format = "{0:0} {1}";
-				}
-				bytes /= kilo;
-				unit = "K";
-			} else {
-				format = "{0:0.0} {1}";
-				bytes /= (kilo * kilo);
-				unit = "M";
-			}
+			while (bytes >= 1000 && depth++ < suffix.Length)
+				bytes /= 1024;
 			
+			string unit = suffix[depth];
 			if (per_sec)
 				unit = string.Format ("{0}/s", unit);
 			
-			return string.Format (format, bytes, unit);
+			if (bytes > 100 || depth == 0)
+				return string.Format ("{0:0} {1}", bytes, unit);
+			else
+				return string.Format ("{0:0.0} {1}", bytes, unit);
 		}
 	}
 }
