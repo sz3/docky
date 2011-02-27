@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2011 Florian Dorn
+//  Copyright (C) 2011 Florian Dorn, Rico Tzschichholz
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -22,76 +22,90 @@ namespace NetworkMonitorDocklet
 	class DeviceInfo 
 	{
 		public string name;
-		public long tx = 0;
-		public long rx = 0;
-		public double txRate = 0.0;
-		public double rxRate = 0.0;
+		public long uploadedBytes = 0;
+		public long downloadedBytes = 0;
+		public double uploadRate = 0.0;
+		public double downloadRate = 0.0;
 		public DateTime lastUpdated;
+
 		public double sumRate {
 			get {
-				return txRate + rxRate;
+				return uploadRate + downloadRate;
 			}
 		}
 		
-		public DeviceInfo (string _name)
+		public DeviceInfo (string _name) : this (_name, 0, 0)
 		{
-			name = _name;
 		}
 
-		override public string ToString ()
+		public DeviceInfo (string _name, long _downloadedBytes, long _uploadedBytes)
 		{
-			return string.Format("{0}: {2,10} down {1,10} up (Total: {3}/{4})",
-			                     name,
-			                     bytes_to_string (txRate),
-			                     bytes_to_string (rxRate),
-			                     bytes_to_string (tx, false),
-			                     bytes_to_string (rx, false));
+			name = _name;
+			
+			lastUpdated = DateTime.Now;
+
+			downloadedBytes = _downloadedBytes;
+			uploadedBytes = _uploadedBytes;
+		}
+
+		public void Update (long new_downloadedBytes, long new_uploadedBytes)
+		{
+			var now = DateTime.Now;
+			
+			uploadRate = (new_uploadedBytes - uploadedBytes) / (now - lastUpdated).TotalSeconds;
+			downloadRate = (new_downloadedBytes - downloadedBytes) / (now - lastUpdated).TotalSeconds;
+			
+			uploadedBytes = new_uploadedBytes;
+			downloadedBytes = new_downloadedBytes;
+
+			lastUpdated = now;
 		}
 		
-		public string formatUpDown (bool up)
+		public override string ToString ()
 		{
-			double rate = rxRate;
+			return string.Format ("{0}: {2,10} down {1,10} up (Total: {3}/{4})",
+			                      name,
+			                      BytesToFormattedString (uploadRate),
+			                      BytesToFormattedString (downloadRate),
+			                      BytesToFormattedString (uploadedBytes),
+			                      BytesToFormattedString (downloadedBytes));
+		}
+		
+		public string FormatUpDown (bool up)
+		{
+			double rate = downloadRate;
 			
 			if (rate < 1)
 				return "-";
 			
 			if (up)
-				rate = txRate;
+				rate = uploadRate;
 			
-			return bytes_to_string (rate, true);
+			return BytesToFormattedString (rate, true);
 		}
 		
-		public string bytes_to_string (double bytes)
+		static string BytesToFormattedString (double bytes)
 		{
-			return bytes_to_string (bytes, false);
+			return BytesToFormattedString (bytes, false);
 		}
 		
-		public string bytes_to_string (double bytes, bool per_sec)
+		static string BytesToFormattedString (double bytes, bool per_sec)
 		{
-			int kilo = 1024;
-			string format, unit;
+			var suffix = new string[] { "B", "K", "M", "G", "T", "P", "E" };
+			int depth = 0;
 			
-			if (bytes < kilo) {
-				format = "{0:0} {1}";
-				unit = "B";
-			} else if (bytes < (kilo * kilo)) {
-				if (bytes < (100 * kilo)) {
-					format = "{0:0.0} {1}";
-				} else {
-					format = "{0:0} {1}";
-				}
-				bytes /= kilo;
-				unit = "K";
-			} else {
-				format = "{0:0.0} {1}";
-				bytes /= (kilo * kilo);
-				unit = "M";
+			while (bytes >= 1000 && depth < suffix.Length-1) {
+				bytes /= 1024;
+				depth++;
 			}
-			
+			string unit = suffix[depth];
 			if (per_sec)
 				unit = string.Format ("{0}/s", unit);
 			
-			return string.Format (format, bytes, unit);
+			if (bytes > 100 || depth == 0)
+				return string.Format ("{0:0} {1}", bytes, unit);
+			else
+				return string.Format ("{0:0.0} {1}", bytes, unit);
 		}
 	}
 }

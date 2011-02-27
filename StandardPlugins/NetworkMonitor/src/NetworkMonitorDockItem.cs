@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2011 Florian Dorn
+//  Copyright (C) 2011 Florian Dorn, Rico Tzschichholz
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -51,14 +51,18 @@ namespace NetworkMonitorDocklet
 		
 		bool UpdateUtilization ()
 		{
-			monitor.update ();
+			monitor.UpdateDevices ();
 			QueueRedraw ();
 			return true;
 		}
 		
 		protected override void PaintIconSurface (DockySurface surface)
 		{
-			device = monitor.getDevice (OutputDevice.AUTO);
+			device = monitor.GetDevice (OutputDevice.AUTO);
+			
+			if (device == null)
+				return;
+			
 			HoverText = device.ToString ();
 			
 			Context cr = surface.Context;
@@ -71,26 +75,26 @@ namespace NetworkMonitorDocklet
 				layout.FontDescription.Weight = Pango.Weight.Bold;
 				layout.Ellipsize = Pango.EllipsizeMode.None;
 				layout.Width = Pango.Units.FromPixels (surface.Width);
-				
+				layout.Alignment = Pango.Alignment.Center;
+			
 				// draw up/down
 				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (fontSize);
-				string text = string.Format ("↓{1}\n↑{0}", device.formatUpDown (true), device.formatUpDown (false));
+				string text = string.Format ("{0}\n↓{1}\n↑{2}", device.name, device.FormatUpDown (false), device.FormatUpDown (true));
 				
 				layout.SetText (text );
 				
 				Pango.Rectangle inkRect, logicalRect;
 				layout.GetPixelExtents (out inkRect, out logicalRect);
-				
-				int yOffset = fontSize / 2;
-				int xOffset = (surface.Width - inkRect.Width) / 2;
-				cr.MoveTo (xOffset, yOffset);
-				
+			
+				cr.MoveTo (0, 0);
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.LineWidth = 2;
 				cr.Color = new Cairo.Color (0, 0, 0, 0.5);
 				cr.StrokePreserve ();
 				cr.Color = new Cairo.Color (1, 1, 1, 0.8);
 				cr.Fill ();
+
+				
 				layout.FontDescription.Dispose ();
 				layout.Context.Dispose ();
 			}
