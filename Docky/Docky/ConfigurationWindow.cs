@@ -279,28 +279,29 @@ namespace Docky
 			docklet_scroll.AddWithViewport (DockletsTileview);
 			// }
 			
-			// setup helpers {
-			helpertiles = new List<HelperTile> ();
-			HelperSearch = new SearchEntry ();
-			HelperSearch.EmptyMessage = Catalog.GetString ("Search Helpers...");
-			HelperSearch.InnerEntry.Changed += delegate {
-				RefreshHelpers ();
-			};
-			HelperSearch.Ready = true;
-			HelperSearch.Show ();
-			hbox5.PackStart (HelperSearch, true, true, 2);
-			
-			HelpersTileview = new TileView ();
-			HelpersTileview.IconSize = 48;
-			helper_scroll.AddWithViewport (HelpersTileview);
-			
-			DockServices.Helpers.HelperInstalled += delegate {
-				RefreshHelpers ();
-			};
-			DockServices.Helpers.HelperUninstalled += delegate {
-				RefreshHelpers ();
-			};
-			// }
+			// setup helpers
+			if (!UserArgs.DisableDockManager) {
+				helpertiles = new List<HelperTile> ();
+				HelperSearch = new SearchEntry ();
+				HelperSearch.EmptyMessage = Catalog.GetString ("Search Helpers...");
+				HelperSearch.InnerEntry.Changed += delegate {
+					RefreshHelpers ();
+				};
+				HelperSearch.Ready = true;
+				HelperSearch.Show ();
+				hbox5.PackStart (HelperSearch, true, true, 2);
+				
+				HelpersTileview = new TileView ();
+				HelpersTileview.IconSize = 48;
+				helper_scroll.AddWithViewport (HelpersTileview);
+				
+				DockServices.Helpers.HelperInstalled += delegate {
+					RefreshHelpers ();
+				};
+				DockServices.Helpers.HelperUninstalled += delegate {
+					RefreshHelpers ();
+				};
+			}
 			
 			SetupConfigAlignment();
 			

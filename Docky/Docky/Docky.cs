@@ -67,7 +67,7 @@ namespace Docky
 			if (!UserArgs.Parse (args))
 				return;
 			
-			DockServices.Init ();
+			DockServices.Init (UserArgs.DisableDockManager);
 			
 			Wnck.Global.ClientType = Wnck.ClientType.Pager;
 			
@@ -83,7 +83,7 @@ namespace Docky
 				CheckComposite ();
 			};
 			
-			if (!DBusManager.Default.Initialize ()) {
+			if (!DBusManager.Default.Initialize (UserArgs.DisableDockManager)) {
 				Log.Fatal ("Another Docky instance was detected - exiting.");
 				return;	
 			}

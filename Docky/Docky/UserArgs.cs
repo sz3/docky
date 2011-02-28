@@ -55,6 +55,13 @@ namespace Docky
 		/// The buffer refresh interval.
 		/// </value>
 		public static uint BufferTime { get; private set; }
+		/// <summary>
+		/// Gets or sets a value indicating whether Docky should disable its DockManager server.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> if dockmanager disabled; otherwise, <c>false</c>.
+		/// </value>
+		public static bool DisableDockManager { get; private set; }
 		
 		static bool HelpShown { get; set; }
 		static OptionSet Options { get; set; }
@@ -69,6 +76,7 @@ namespace Docky
 				{ "d|debug", "Enable debug logging", debug => {
 						Log.DisplayLevel = (debug == null) ? LogLevel.Warn : LogLevel.Debug;
 					} },
+				{ "disable-dockmanager", "Disable DockManager server", disabled => DisableDockManager = true },
 				{ "n|netbook", "Netbook mode", netbook => NetbookMode = true },
 				{ "nv|nvidia", "Nvidia mode (for Nvidia cards that lag after a while).  Equivalent to '-b 10'.",
 					nv => {

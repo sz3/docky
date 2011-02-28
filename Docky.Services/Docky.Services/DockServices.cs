@@ -50,10 +50,11 @@ namespace Docky.Services
 			DesktopItems = new DesktopItemService ();
 		}
 		
-		public static void Init ()
+		public static void Init (bool disableHelpers)
 		{
 			System.Initialize ();
-			Helpers.Initialize ();
+			if (!disableHelpers)
+				Helpers.Initialize ();
 			Theme.Initialize ();
 			WindowMatcher.Initialize ();
 			DesktopItems.Initialize ();
