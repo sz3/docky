@@ -47,6 +47,7 @@ namespace NetworkMonitorDocklet
 			monitor = new NetworkMonitor ();
 			UpdateUtilization ();
 			timer = GLib.Timeout.Add (3000, UpdateUtilization);
+			ScalableRendering = false;
 		}
 		
 		bool UpdateUtilization ()
