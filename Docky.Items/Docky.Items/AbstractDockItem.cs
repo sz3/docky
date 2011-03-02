@@ -702,12 +702,12 @@ namespace Docky.Items
 				layout.Width = Pango.Units.FromPixels (2 * maxWidth);
 				layout.Ellipsize = Pango.EllipsizeMode.None;
 				layout.FontDescription = new Gtk.Style ().FontDescription;
-				layout.FontDescription.Weight = Pango.Weight.Normal;
+				layout.FontDescription.Weight = Pango.Weight.Bold;
 				
 				Pango.Rectangle inkRect, logicalRect;
 				int fontSize = (int) slotHeight - 6;
 				while (true) {
-					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (fontSize--);
+					layout.FontDescription.AbsoluteSize = Math.Max (1, Pango.Units.FromPixels (fontSize--));
 					layout.SetText (message);
 					layout.GetPixelExtents (out inkRect, out logicalRect);
 					if (logicalRect.Width <= maxWidth || fontSize < 1)
