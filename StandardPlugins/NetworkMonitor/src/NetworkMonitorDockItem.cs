@@ -70,8 +70,7 @@ namespace NetworkMonitorDocklet
 			
 			Context cr = surface.Context;
 			
-			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ())
-			{
+			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ()) {
 				layout.FontDescription = new Gtk.Style ().FontDescription;
 				layout.FontDescription.Weight = Pango.Weight.Bold;
 				layout.Ellipsize = Pango.EllipsizeMode.None;

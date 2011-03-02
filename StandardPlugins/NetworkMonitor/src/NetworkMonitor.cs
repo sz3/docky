@@ -98,6 +98,5 @@ namespace NetworkMonitorDocklet
 			
 			return d;
 		}
-
 	}
 }

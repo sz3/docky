@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2011 Florian Dorn
+//  Copyright (C) 2011 Florian Dorn, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -27,26 +27,14 @@ namespace NetworkMonitorDocklet
 		#region IDockItemProvider implementation
 		
 		public override string Name {
-			get {
-				return "NetworkMonitor";
-			}
+			get { return "NetworkMonitor"; }
 		}
 		
 		#endregion
 
-		NetworkMonitorDockItem monitor;
-		
 		public NetworkMonitorItemProvider ()
 		{
-			monitor = new NetworkMonitorDockItem ();
-			Items = monitor.AsSingle<AbstractDockItem> ();
-		}
-		
-		public override void Dispose ()
-		{
-			monitor.Dispose ();
-			
-			base.Dispose ();
+			Items = new NetworkMonitorDockItem ().AsSingle<AbstractDockItem> ();
 		}
 	}
 }

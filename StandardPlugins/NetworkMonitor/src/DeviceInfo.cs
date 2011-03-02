@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2011 Florian Dorn, Rico Tzschichholz
+//  Copyright (C) 2011 Florian Dorn, Rico Tzschichholz, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -29,9 +29,7 @@ namespace NetworkMonitorDocklet
 		public DateTime lastUpdated;
 
 		public double sumRate {
-			get {
-				return uploadRate + downloadRate;
-			}
+			get { return uploadRate + downloadRate; }
 		}
 		
 		public DeviceInfo (string _name) : this (_name, 0, 0)
@@ -75,11 +73,11 @@ namespace NetworkMonitorDocklet
 		{
 			double rate = downloadRate;
 			
-			if (rate < 1)
-				return "-";
-			
 			if (up)
 				rate = uploadRate;
+			
+			if (rate < 1)
+				return "-";
 			
 			return BytesToFormattedString (rate, true);
 		}
@@ -104,8 +102,8 @@ namespace NetworkMonitorDocklet
 			
 			if (bytes > 100 || depth == 0)
 				return string.Format ("{0:0} {1}", bytes, unit);
-			else
-				return string.Format ("{0:0.0} {1}", bytes, unit);
+			
+			return string.Format ("{0:0.0} {1}", bytes, unit);
 		}
 	}
 }
