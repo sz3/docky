@@ -36,6 +36,7 @@ StandardPlugins/GMail/src/GMailLoginConfig.cs
 StandardPlugins/GMail/src/GMailMenuItem.cs
 StandardPlugins/Mounter/src/MountItem.cs
 StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs
+StandardPlugins/NetworkMonitor/src/NetworkMonitorDockItem.cs
 StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs
 StandardPlugins/NPR/src/Station.cs
 StandardPlugins/NPR/src/StationDockItem.cs
