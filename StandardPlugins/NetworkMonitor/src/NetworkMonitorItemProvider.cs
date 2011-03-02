@@ -28,7 +28,7 @@ namespace NetworkMonitorDocklet
 		
 		public override string Name {
 			get {
-				return " NetworkMonitor";
+				return "NetworkMonitor";
 			}
 		}
 		
@@ -40,6 +40,13 @@ namespace NetworkMonitorDocklet
 		{
 			monitor = new NetworkMonitorDockItem ();
 			Items = monitor.AsSingle<AbstractDockItem> ();
+		}
+		
+		public override void Dispose ()
+		{
+			monitor.Dispose ();
+			
+			base.Dispose ();
 		}
 	}
 }

@@ -104,6 +104,7 @@ namespace NetworkMonitorDocklet
 		{
 			if (timer > 0)
 				GLib.Source.Remove (timer);
+			
 			base.Dispose ();
 		}
 	}

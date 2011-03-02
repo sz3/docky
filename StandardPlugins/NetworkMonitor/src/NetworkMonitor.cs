@@ -73,6 +73,9 @@ namespace NetworkMonitorDocklet
 			// interface : bytes packets errs drop fifo frame compressed multicast bytes packets errs drop fifo colls carrier compressed
 			// So we need fields 0 (bytes-sent) and 8 (bytes-received)
 			string[] values = parts[1].Trim ().Split (new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+			if (values.Length <= 8)
+				return;
+			
 			long downloadedBytes = Convert.ToInt64 (values [0].Trim ());
 			long uploadedBytes = Convert.ToInt64 (values [8].Trim ());
 			

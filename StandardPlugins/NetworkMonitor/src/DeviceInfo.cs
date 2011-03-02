@@ -65,8 +65,8 @@ namespace NetworkMonitorDocklet
 		{
 			return string.Format ("{0}: {2,10} down {1,10} up (Total: {3}/{4})",
 			                      name,
-			                      BytesToFormattedString (uploadRate),
-			                      BytesToFormattedString (downloadRate),
+			                      BytesToFormattedString (uploadRate, true),
+			                      BytesToFormattedString (downloadRate, true),
 			                      BytesToFormattedString (uploadedBytes),
 			                      BytesToFormattedString (downloadedBytes));
 		}

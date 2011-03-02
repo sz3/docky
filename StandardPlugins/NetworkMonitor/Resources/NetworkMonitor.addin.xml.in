@@ -7,13 +7,12 @@
 	name="Network Monitor"
 	description="Monitor your network usage"
 	author="Florian Dorn"
-  icon="system"
+	icon="system"
 >
- 
  	<Dependencies>
 		<Addin id="Items" version="1.0" />
 	</Dependencies>
- 
+	
 	<Runtime>
 		<Import assembly="NetworkMonitor.dll"/>
 	</Runtime>
