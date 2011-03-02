@@ -639,6 +639,10 @@ namespace Docky.Interface
 			get { return (int) (0.08 * IconSize); }
 		}
 		
+		int HotAreaPadding {
+			get { return Preferences.HotAreaPadding; }
+		}
+		
 		/// <summary>
 		/// The int size a fully zoomed icon will display at.
 		/// </summary>
@@ -2076,7 +2080,7 @@ namespace Docky.Interface
 			if ((!Preferences.FadeOnHide || Preferences.FadeOpacity == 0) && Painter == null && AutohideManager.Hidden && !ConfigurationMode) {
 				hotAreaSize = 1;
 			} else if (DockHovered && !ConfigurationMode) {
-				hotAreaSize = (int) (ZoomedDockHeight * 1.3);
+				hotAreaSize = ZoomedDockHeight + HotAreaPadding;
 			} else {
 				hotAreaSize = DockHeight;
 			}

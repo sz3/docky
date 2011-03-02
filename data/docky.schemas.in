@@ -199,6 +199,22 @@
 			</locale>
 		</schema>
 		<schema>
+			<key>/schemas/apps/docky-2/Docky/Interface/DockPreferences/DockN/HotAreaPadding</key>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock1/HotAreaPadding</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock2/HotAreaPadding</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock3/HotAreaPadding</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock4/HotAreaPadding</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock5/HotAreaPadding</applyto>
+			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock6/HotAreaPadding</applyto>
+			<owner>docky</owner>
+			<type>int</type>
+			<default>24</default>
+			<locale name="C">
+				<short>Hot-area padding</short>
+				<long>The number of extra pixels to pad the hover area on the top of the dock.</long>
+			</locale>
+		</schema>
+		<schema>
 			<key>/schemas/apps/docky-2/Docky/Interface/DockPreferences/DockN/IconSize</key>
 			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock1/IconSize</applyto>
 			<applyto>/apps/docky-2/Docky/Interface/DockPreferences/Dock2/IconSize</applyto>

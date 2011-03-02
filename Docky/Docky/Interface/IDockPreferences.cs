@@ -52,6 +52,8 @@ namespace Docky.Interface
 		
 		DockPosition Position { get; set; }
 		
+		int HotAreaPadding { get; set; }
+		
 		int IconSize { get; set; }
 		
 		bool IndicateMultipleWindows { get; set; }

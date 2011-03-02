@@ -149,6 +149,23 @@ namespace Docky.Interface
 			}
 		}
 		
+		int? hot_area_padding;
+		public int HotAreaPadding {
+			get {
+				if (!hot_area_padding.HasValue)
+					hot_area_padding = Clamp (GetOption<int> ("HotAreaPadding", 24), 100, 0);
+				return hot_area_padding.Value;
+			}
+			set {
+				value = Clamp (value, 128, 24);
+				if (hot_area_padding == value)
+					return;
+				hot_area_padding = value;
+				SetOption<int?> ("HotAreaPadding", value);
+				OnIconSizeChanged ();
+			}
+		}
+		
 		int? icon_size;
 		public int IconSize {
 			get {
@@ -296,6 +313,7 @@ namespace Docky.Interface
 			SetOption<string> ("Autohide", "None");
 			SetOption<bool> ("FadeOnHide", false);
 			SetOption<double> ("FadeOpacity", 0);
+			SetOption<int?> ("HotAreaPadding", 24);
 			SetOption<int?> ("IconSize", 48);
 			SetOption<bool?> ("IndicateMultipleWindows", true);
 			SetOption<string[]> ("Launchers", new string[0]);
