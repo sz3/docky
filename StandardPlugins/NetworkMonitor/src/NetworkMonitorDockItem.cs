@@ -54,7 +54,10 @@ namespace NetworkMonitorDocklet
 			monitor.UpdateDevices ();
 			device = monitor.GetDevice (OutputDevice.AUTO);
 			
-			HoverText = device.ToString ();
+			if (device != null)
+				HoverText = device.ToString ();
+			else
+				HoverText = Catalog.GetString ("No network connection available");
 			
 			QueueRedraw ();
 			return true;
