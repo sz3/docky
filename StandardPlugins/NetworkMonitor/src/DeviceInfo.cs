@@ -27,7 +27,11 @@ namespace NetworkMonitorDocklet
 		public double uploadRate = 0.0;
 		public double downloadRate = 0.0;
 		public DateTime lastUpdated;
-
+		
+		public long TotalBytes {
+			get { return uploadedBytes + downloadedBytes; }
+		}
+		
 		public double sumRate {
 			get { return uploadRate + downloadRate; }
 		}

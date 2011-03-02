@@ -1,5 +1,5 @@
 //  
-//  Copyright (C) 2011 Florian Dorn, Rico Tzschichholz
+//  Copyright (C) 2011 Florian Dorn, Rico Tzschichholz, Robert Dyer
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -91,7 +91,7 @@ namespace NetworkMonitorDocklet
 			if (n != OutputDevice.AUTO)
 				return null;
 			
-			DeviceInfo d = null;
+			DeviceInfo d = devices.Values.OrderByDescending (dev => dev.TotalBytes).FirstOrDefault ();
 			foreach (DeviceInfo device in devices.Values)
 				if (d == null || device.sumRate > d.sumRate)
 					d = device;
