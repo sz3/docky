@@ -677,7 +677,7 @@ namespace Docky.Items
 			
 			double slotHeight = surface.Height / (double) MaxMessages;
 			double yOffset = slot * slotHeight;
-			surface.Context.RoundedRectangle (2, yOffset, surface.Width - 4, slotHeight - 2, 2.0);
+			surface.Context.RoundedRectangle (1, yOffset, surface.Width - 2, slotHeight - 1, 2.0);
 			surface.Context.Color = new Cairo.Color (1, 1, 1, 0.9);
 			surface.Context.StrokePreserve ();
 			surface.Context.Color = new Cairo.Color (0, 0, 0, 0.7);
@@ -690,7 +690,7 @@ namespace Docky.Items
 				using (Gdk.Pixbuf pbuf = DockServices.Drawing.LoadIcon (icon, iconSize, iconSize)) {
 					Gdk.CairoHelper.SetSourcePixbuf (surface.Context, 
 													 pbuf, 
-													 4 + (iconSize - pbuf.Width) / 2, 
+													 2 + (iconSize - pbuf.Width) / 2, 
 													 1 + yOffset + (iconSize - pbuf.Height) / 2);
 					surface.Context.Paint ();
 				}
@@ -698,17 +698,23 @@ namespace Docky.Items
 			
 			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ())
 			{
-				layout.Width = Pango.Units.FromPixels (surface.Width - iconSize - 8);
+				int maxWidth = surface.Width - iconSize - 6;
+				layout.Width = Pango.Units.FromPixels (2 * maxWidth);
 				layout.Ellipsize = Pango.EllipsizeMode.None;
 				layout.FontDescription = new Gtk.Style ().FontDescription;
 				layout.FontDescription.Weight = Pango.Weight.Normal;
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels ((int) slotHeight - 6);
-				layout.SetText (message);
 				
 				Pango.Rectangle inkRect, logicalRect;
-				layout.GetPixelExtents (out inkRect, out logicalRect);
+				int fontSize = (int) slotHeight - 6;
+				while (true) {
+					layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (fontSize--);
+					layout.SetText (message);
+					layout.GetPixelExtents (out inkRect, out logicalRect);
+					if (logicalRect.Width <= maxWidth || fontSize < 1)
+						break;
+				}
 				
-				surface.Context.MoveTo (surface.Width - 4 - logicalRect.Width, yOffset + (slotHeight - 2 - logicalRect.Height) / 2);
+				surface.Context.MoveTo (iconSize + 4 + (surface.Width - iconSize - 6 - logicalRect.Width) / 2, yOffset + (slotHeight - 2 - logicalRect.Height) / 2);
 				
 				Pango.CairoHelper.LayoutPath (surface.Context, layout);
 				surface.Context.LineWidth = 2;
