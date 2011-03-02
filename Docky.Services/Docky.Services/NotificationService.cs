@@ -71,20 +71,26 @@ namespace Docky.Services
 
 		public static LibNotify.Notification Notify (string title, string message, string icon)
 		{	
-			// if we aren't using notify-osd, show a status icon
-			if (!ServerIsNotifyOSD ())
-				DockServices.System.RunOnMainThread (() => {
-					statusIcon.Visible = true;
-				});
-			
-			LibNotify.Notification notify = ToNotify (title, message, icon);
-			
-			notify.Closed += delegate {
-				DockServices.System.RunOnMainThread (() => statusIcon.Visible = false );
-			};
-			
-			notify.Show ();
-			return notify;
+			try {
+				LibNotify.Notification notify = ToNotify (title, message, icon);
+				
+				// if we aren't using notify-osd, show a status icon
+				if (!ServerIsNotifyOSD ()) {
+					DockServices.System.RunOnMainThread (() => statusIcon.Visible = true );
+					
+					notify.Closed += delegate {
+						DockServices.System.RunOnMainThread (() => statusIcon.Visible = false );
+					};
+				}
+				
+				notify.Show ();
+				
+				return notify;
+			} catch (Exception e) {
+				Log<NotificationService>.Warn ("Error showing notification: {0}", e.Message); 
+				Log<NotificationService>.Debug (e.StackTrace);
+				return null;
+			}
 		}
 		
 		static bool SupportsCapability (NotificationCapability capability)
