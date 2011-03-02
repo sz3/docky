@@ -41,7 +41,7 @@ namespace NetworkMonitorDocklet
 		DeviceInfo device;
 		
 		public override string UniqueID () { return "NetworkMonitor"; }
-
+		
 		public NetworkMonitorDockItem ()
 		{
 			monitor = new NetworkMonitor ();
@@ -52,48 +52,44 @@ namespace NetworkMonitorDocklet
 		bool UpdateUtilization ()
 		{
 			monitor.UpdateDevices ();
+			device = monitor.GetDevice (OutputDevice.AUTO);
+			
+			HoverText = device.ToString ();
+			
 			QueueRedraw ();
 			return true;
 		}
 		
 		protected override void PaintIconSurface (DockySurface surface)
 		{
-			device = monitor.GetDevice (OutputDevice.AUTO);
-			
 			if (device == null)
 				return;
 			
-			HoverText = device.ToString ();
-			
 			Context cr = surface.Context;
 			
-			int fontSize = surface.Height / 5;
-			
-			// shared by all text
-			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ()) {
+			using (Pango.Layout layout = DockServices.Drawing.ThemedPangoLayout ())
+			{
 				layout.FontDescription = new Gtk.Style ().FontDescription;
 				layout.FontDescription.Weight = Pango.Weight.Bold;
 				layout.Ellipsize = Pango.EllipsizeMode.None;
-				layout.Width = Pango.Units.FromPixels (surface.Width);
 				layout.Alignment = Pango.Alignment.Center;
-			
-				// draw up/down
-				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (fontSize);
-				string text = string.Format ("{0}\n↓{1}\n↑{2}", device.name, device.FormatUpDown (false), device.FormatUpDown (true));
 				
+				int fontSize = surface.Height / 5;
+				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (fontSize);
+				string text = string.Format ("{0}\n↓{1}\n↑{2}", device.name,
+				                             device.FormatUpDown (false), device.FormatUpDown (true));
 				layout.SetText (text );
 				
 				Pango.Rectangle inkRect, logicalRect;
 				layout.GetPixelExtents (out inkRect, out logicalRect);
-			
-				cr.MoveTo (0, 0);
+				
+				cr.MoveTo ((surface.Width - logicalRect.Width) / 2, (surface.Height - logicalRect.Height) / 2);
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.LineWidth = 2;
 				cr.Color = new Cairo.Color (0, 0, 0, 0.5);
 				cr.StrokePreserve ();
 				cr.Color = new Cairo.Color (1, 1, 1, 0.8);
 				cr.Fill ();
-
 				
 				layout.FontDescription.Dispose ();
 				layout.Context.Dispose ();
