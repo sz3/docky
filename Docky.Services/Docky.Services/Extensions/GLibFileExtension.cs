@@ -184,7 +184,10 @@ namespace Docky.Services
 		/// </param>
 		public static void Delete_Recurse (this GLib.File file)
 		{
-			FileEnumerator enumerator = file.EnumerateChildren ("standard::type,standard::name,access::can-delete", FileQueryInfoFlags.NofollowSymlinks, null);
+			FileEnumerator enumerator = null;
+			try {
+				enumerator = file.EnumerateChildren ("standard::type,standard::name,access::can-delete", FileQueryInfoFlags.NofollowSymlinks, null);
+			} catch { }
 			
 			if (enumerator == null)
 				return;
