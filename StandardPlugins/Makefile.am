@@ -8,6 +8,7 @@ SUBDIRS = \
 	GMail \
 	Mounter \
 	NetworkManager \
+	NetworkMonitor \
 	NPR \
 	RecentDocuments \
 	SessionManager \
@@ -26,6 +27,7 @@ DIST_SUBDIRS = \
 	GMail \
 	Mounter \
 	NetworkManager \
+	NetworkMonitor \
 	NPR \
 	RecentDocuments \
 	SessionManager \
