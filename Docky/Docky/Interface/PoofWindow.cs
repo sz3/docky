@@ -58,9 +58,13 @@ namespace Docky.Interface
 
 		public void Run ()
 		{
-			window = new Gtk.Window (Gtk.WindowType.Toplevel);
-			poof = new Pixbuf (DockServices.Paths.SystemDataFolder.GetChild ("poof.png").Path);
+			var poof_file = DockServices.Paths.SystemDataFolder.GetChild ("poof.png");
+			if (!poof_file.Exists)
+				return;
 			
+			poof = new Pixbuf (poof_file.Path);
+			
+			window = new Gtk.Window (Gtk.WindowType.Toplevel);
 			window.AppPaintable = true;
 			window.Resizable = false;
 			window.KeepAbove = true;
