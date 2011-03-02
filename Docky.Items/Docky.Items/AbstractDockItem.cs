@@ -677,7 +677,7 @@ namespace Docky.Items
 			
 			double slotHeight = surface.Height / (double) MaxMessages;
 			double yOffset = slot * slotHeight;
-			surface.Context.RoundedRectangle (1, yOffset, surface.Width - 2, slotHeight - 1, 2.0);
+			surface.Context.RoundedRectangle (1, 1 + yOffset, surface.Width - 2, slotHeight - 2, 2 * (1 + (int) (IconSize / 64)));
 			surface.Context.Color = new Cairo.Color (1, 1, 1, 0.9);
 			surface.Context.StrokePreserve ();
 			surface.Context.Color = new Cairo.Color (0, 0, 0, 0.7);
@@ -691,7 +691,7 @@ namespace Docky.Items
 					Gdk.CairoHelper.SetSourcePixbuf (surface.Context, 
 													 pbuf, 
 													 2 + (iconSize - pbuf.Width) / 2, 
-													 1 + yOffset + (iconSize - pbuf.Height) / 2);
+													 2 + yOffset + (iconSize - pbuf.Height) / 2);
 					surface.Context.Paint ();
 				}
 			}
