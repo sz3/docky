@@ -6,7 +6,7 @@
 	defaultEnabled="false"
 	name="Network Monitor"
 	description="Monitor your network usage"
-	author="Florian Dorn"
+	author="Florian Dorn, Rico Tzschichholz, Robert Dyer"
 	icon="system"
 >
  	<Dependencies>

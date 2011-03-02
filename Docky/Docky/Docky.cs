@@ -166,6 +166,7 @@ namespace Docky
 				"Seif Lotfy <seif@lotfy.com>",
 				"Chris Halse Rogers <raof@ubuntu.com>",
 				"Alex Launi <alex.launi@gmail.com>",
+				"Florian Dorn <florian.dorn@h3c.de>",
 			};
 			about.Artists = new[] { 
 				"Daniel Foré <bunny@go-docky.com>",
