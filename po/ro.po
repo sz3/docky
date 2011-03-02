@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2011-02-10 14:19+0000\n"
-"X-Generator: Launchpad (build 12335)\n"
+"X-Launchpad-Export-Date: 2011-02-26 14:08+0000\n"
+"X-Generator: Launchpad (build 12460)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -583,27 +583,27 @@ msgstr "Pe care monitor se află docul"
 msgid "Zoom size"
 msgstr "Dimensiunea apropierii"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:147
+#: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Search Docklets..."
 msgstr "Caută Docklets..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:163
+#: ../Docky/Docky/ConfigurationWindow.cs:164
 msgid "Search Helpers..."
 msgstr "Caută Ajutători..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:227
+#: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid "Click on any dock to configure."
 msgstr "Clic pe orice dock pentru configurare."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:228
+#: ../Docky/Docky/ConfigurationWindow.cs:229
 msgid "Drag any dock to reposition."
 msgstr "Trage orice dock pentru repoziționare."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:293
+#: ../Docky/Docky/ConfigurationWindow.cs:294
 msgid "Delete the currently selected dock?"
 msgstr "Ştergi dock-ul curent selectat?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:295
+#: ../Docky/Docky/ConfigurationWindow.cs:296
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -611,16 +611,18 @@ msgstr ""
 "Dacă alegi sa ștergi dock-ul, toate setările\n"
 "pentru acest dock vor fi pierdute permanent."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:310
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:405
+#: ../Docky/Docky/ConfigurationWindow.cs:303
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
 msgstr "_Șterge Dock"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:426
+#: ../Docky/Docky/ConfigurationWindow.cs:419
+#: ../Docky/Docky/ConfigurationWindow.cs:439
 msgid "_Select"
 msgstr "_Selectați"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:429
+#: ../Docky/Docky/ConfigurationWindow.cs:422
+#: ../Docky/Docky/ConfigurationWindow.cs:442
 msgid ".tar Archives"
 msgstr "Arhive .tar"
 
@@ -688,15 +690,15 @@ msgstr "Activati acest ajutor"
 msgid "Disable this helper"
 msgstr "Dezactivati acest ajutor"
 
-#: ../Docky/Docky/HelperTile.cs:74
+#: ../Docky/Docky/HelperTile.cs:90
 msgid "Running"
 msgstr "Pornit"
 
-#: ../Docky/Docky/HelperTile.cs:74
+#: ../Docky/Docky/HelperTile.cs:90
 msgid "Stopped"
 msgstr "Oprit"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:332
+#: ../Docky/Docky/Interface/DockPreferences.cs:327
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
@@ -704,40 +706,40 @@ msgstr ""
 "Când setat, ferestrele care nu au deja lansatoare în dock vor fi adăugate la "
 "acest dock."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:597
+#: ../Docky/Docky/Interface/DockPreferences.cs:679
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 "<i>Nu ascunde niciodată; ferestrele maximizate nu vor acoperii dock-ul.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:600
+#: ../Docky/Docky/Interface/DockPreferences.cs:682
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Ascunde când mouse-ul nu este pe el.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:603
+#: ../Docky/Docky/Interface/DockPreferences.cs:685
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Ascunde când dock-ul obstrucționează aplicația activă.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:606
+#: ../Docky/Docky/Interface/DockPreferences.cs:688
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Ascunde când dock-ul obstrucționează orice fereastră.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:382
+#: ../Docky/Docky/Interface/DockWindow.cs:378
 msgid "Drag to reposition"
 msgstr "Trage pentru a repoziţiona"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:394
-#: ../Docky/Docky/Interface/DockWindow.cs:408
+#: ../Docky/Docky/Interface/DockWindow.cs:390
+#: ../Docky/Docky/Interface/DockWindow.cs:404
 msgid "Drop to add to dock"
 msgstr "Aruncă pentru a adăuga la dock"
 
-#: ../Docky/Docky/Items/DockyItem.cs:93
+#: ../Docky/Docky/Items/DockyItem.cs:132
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:160
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:214
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:244
 msgid "_Settings"
 msgstr "_Configurări"
 
-#: ../Docky/Docky/Items/DockyItem.cs:94
+#: ../Docky/Docky/Items/DockyItem.cs:133
 msgid "_About"
 msgstr "_Despre"
 
@@ -745,7 +747,7 @@ msgstr "_Despre"
 msgid "_Help"
 msgstr "_Ajutor"
 
-#: ../Docky/Docky/Items/DockyItem.cs:95
+#: ../Docky/Docky/Items/DockyItem.cs:136
 msgid "_Quit Docky"
 msgstr "_Închide Docky"
 
@@ -757,42 +759,43 @@ msgstr "Setari Docky"
 msgid "_Start When User Logs In"
 msgstr "_Porneste atunci cand userul se logheaza"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:155
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
 msgstr "_Temă:"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:315
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
 msgid "_Install"
 msgstr "_Instalează"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:179
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
 msgid "<b>General Options</b>"
 msgstr "<b>Opțiuni generale</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:199
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
 msgstr "<b>Configurare Dock</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:213
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
 msgstr "Dock-uri"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:234
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:289
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
 msgid "All"
 msgstr "Toate"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:235
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:290
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
 msgid "Enabled"
 msgstr "Activat"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:236
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:291
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
 msgid "Disabled"
 msgstr "Dezactivat"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:268
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
 msgid "Docklets"
 msgstr "Docklets"
 
@@ -800,59 +803,59 @@ msgstr "Docklets"
 msgid "Usable"
 msgstr "Folosibil"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:347
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
 msgstr "Ajutătoare"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:378
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
 msgid "_New Dock"
 msgstr "Dock _Nou"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
 msgid "None"
 msgstr "Niciunul"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
 msgid "Autohide"
 msgstr "Ascundere automată"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:62
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "Intellihide"
 msgstr "Ascundere inteligentă"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:63
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Window Dodge"
 msgstr "Fereşte Fereastra"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
 msgid "_Fade On Hide"
 msgstr "_Fade la Ascundere"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:121
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
 msgid "_Icon Size:"
 msgstr "Mărime _iconiță:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:134
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:132
 msgid "_Hiding:"
 msgstr "_Ascundere:"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:158
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
 msgid "_Panel Mode"
 msgstr "Mod _panou"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:172
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
 msgid "3D Back_ground"
 msgstr "_Fundal 3D"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:186
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
 msgid "_Manage Windows Without Launcher"
 msgstr "Ad_ministrează fereastra fără lansator"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:201
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
 msgid "_Zoom:"
 msgstr "_Zoom:"
 
-#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:119
+#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:120
 #, csharp-format
 msgid "Drop to open with {0}"
 msgstr "Aruncă pentru a deschide cu {0}"
@@ -862,6 +865,7 @@ msgid "New _Window"
 msgstr "_Fereastră nouă"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:182
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:267
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
 msgstr "_Deschide"
@@ -870,37 +874,37 @@ msgstr "_Deschide"
 msgid "_Reset Color"
 msgstr "_Resetează culoarea"
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:434
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:482
 msgid "_Pin to Dock"
 msgstr "_Fixează în Dock"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:86
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:83
 #, csharp-format
 msgid "Drop to move to {0}"
 msgstr "Aruncă pentru a muta la {0}"
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:205
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:250
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:197
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:242
 msgid "Error performing drop action"
 msgstr "Eroare la desfășurarea acțiuni de drop"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:205
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:197
 msgid "Not enough free space on destination."
 msgstr "Nu este spaţiu îndeajuns în destinaţia dorită."
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:222
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:225
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:257
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:214
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:217
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:249
 msgid "Complete"
 msgstr "Terminat"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:235
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:227
 msgid "Moving"
 msgstr "Mutare"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:241
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:233
 msgid "Copying"
 msgstr "Copiere"
 
@@ -908,23 +912,23 @@ msgstr "Copiere"
 msgid "Open Containing _Folder"
 msgstr "Deschide _dosarul ce îl conține"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:261
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
 msgid "Unma_ximize"
 msgstr "Dema_ximizează"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:267
 msgid "Ma_ximize"
 msgstr "Ma_ximizează"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:269
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:271
 msgid "_Restore"
 msgstr "_Restaurează"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:272
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:274
 msgid "Mi_nimize"
 msgstr "Mi_nimizează"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:276
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:277
 msgid "_Close All"
 msgstr "În_chide toate"
 
@@ -1010,19 +1014,19 @@ msgstr "Calculator"
 msgid "Clipboard is currently empty."
 msgstr "Clipboardul este momentan gol."
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:430
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "Di_gital Clock"
 msgstr "Ceas di_gital"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:436
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
 msgid "24-Hour _Clock"
 msgstr "_Ceas de 24 de ore"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:442
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:443
 msgid "Show _Date"
 msgstr "Arată _Data"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:448
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:449
 msgid "Select _Theme"
 msgstr "Selectează _Tema"
 
@@ -1030,7 +1034,7 @@ msgstr "Selectează _Tema"
 msgid "Themes"
 msgstr "Teme"
 
-#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
+#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:62
 msgid "Theme"
 msgstr "Temă"
 
@@ -1092,10 +1096,11 @@ msgstr "Nume utilizator invalid"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:292
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:173
 msgid "Network Error"
 msgstr "Eroare de reţea"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:296
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:295
 msgid "General Error"
 msgstr "Eroare generală"
 
@@ -1119,11 +1124,11 @@ msgstr[2] "{0} de mesaje necitite"
 msgid "Checking mail..."
 msgstr "Verifică email-ul..."
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:193
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "_View "
 msgstr "_Vezi "
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:198
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
 msgid "_Compose Mail"
 msgstr "_Compune email"
 
@@ -1131,11 +1136,11 @@ msgstr "_Compune email"
 msgid "View C_ontacts"
 msgstr "Vizualizare c_ontacte"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
 msgid "New Mail"
 msgstr "Email nou"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:222
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:236
 msgid "Check _Mail"
 msgstr "Verifica E_mail"
 
@@ -1222,24 +1227,23 @@ msgstr "Donează"
 msgid "Live Streams"
 msgstr "Fluxuri în direct"
 
-#: ../Docky/Docky/DockletTile.cs:56
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:170
 msgid "Settings"
 msgstr "Configurări"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:107
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:91
 msgid "_Clear Recent Documents..."
 msgstr "_Curăţă documentele recente..."
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:67
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:102
 msgid "Clear the Recent Documents list?"
 msgstr "Curăță lista documentelor recente?"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:69
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:104
 msgid "Clear Recent Documents"
 msgstr "Curăță documentele recente"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:71
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:106
 msgid ""
 "If you clear the Recent Documents list, you clear the following:\n"
 "• All items from the Places → Recent Documents menu item.\n"
@@ -1373,15 +1377,15 @@ msgstr "P_ornește automat cronometrele"
 msgid "Automatically _Dismiss Timers"
 msgstr "_Dizolvă automat cronometrele"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:50
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:55
 msgid "Drop to move to Trash"
 msgstr "Aruncă pentru a muta la gunoi"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:77
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:82
 msgid "No items in Trash"
 msgstr "Niciun element în gunoi"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:79
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:84
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
@@ -1393,20 +1397,20 @@ msgstr[2] "{0} de elemente în gunoi"
 msgid "Restore Files"
 msgstr "Restaurează fișierele"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:164
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:201
 msgid "_Open Trash"
 msgstr "Deschide gun_oiul"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:166
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:203
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:234
 msgid "Empty _Trash"
 msgstr "Goleș_te gunoiul"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:188
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:226
 msgid "Empty all of the items from the trash?"
 msgstr "Goliți toate elementele din gunoi?"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:190
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:228
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
@@ -1436,9 +1440,7 @@ msgstr "Acualizează automat la fi_ecare"
 msgid "Use _Metric Units"
 msgstr "Utilizează unităţile de măsură _metrice"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:98
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:101
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:106
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:170
 msgid "Invalid Weather Location"
 msgstr "Locaţie meteo invalidă"
 
@@ -1463,7 +1465,7 @@ msgstr ""
 "susul ferestrei dumneavoastră de previziuni de pe site-ul lor și codul este "
 "în URL după '/local/' și arată ca AAXX0000."
 
-#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
+#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:56
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
@@ -1484,28 +1486,27 @@ msgstr "Configuraţie meteo"
 msgid "Click to add a location."
 msgstr "Clic pentru a adăuga o locație."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
 msgid "Fetching data..."
 msgstr "Preluare date..."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:222
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Radar _Map"
 msgstr "_Hartă radar"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:227
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "Forecasts"
 msgstr "Previziuni"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:243
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:252
 msgid "Check _Weather"
 msgstr "_Verifică vremea"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
 msgid "_Today"
 msgstr "_Astăzi"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
 msgid "T_omorrow"
 msgstr "_Mâine"
 

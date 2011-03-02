@@ -167,20 +167,22 @@ namespace Docky.DBus
 		
 		private DBusManager () { }
 		
-		public bool Initialize ()
+		public bool Initialize (bool disableDockManager)
 		{
 			Bus bus = Bus.Session;
 			
 			if (!InitializePrivateBus (bus))
 				return false;
 			
-			InitializeSharedBus (bus);
-			
-			DockServices.Helpers.HelperStatusChanged += delegate(object sender, Docky.Services.Helpers.HelperStatusChangedEventArgs e) {
-				// if a script has stopped running, trigger a refresh
-				if (!e.IsRunning)
-					ForceRefresh ();
-			};
+			if (!disableDockManager) {
+				InitializeSharedBus (bus);
+				
+				DockServices.Helpers.HelperStatusChanged += delegate(object sender, Docky.Services.Helpers.HelperStatusChangedEventArgs e) {
+					// if a script has stopped running, trigger a refresh
+					if (!e.IsRunning)
+						ForceRefresh ();
+				};
+			}
 			
 			return true;
 		}

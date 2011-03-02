@@ -15,9 +15,6 @@ schemas_DATA = $(schemas_in_files:.schemas.in=.schemas)
 applicationsdir = $(datadir)/applications
 applications_DATA = docky.desktop
 
-startupdir = $(sysconfdir)/xdg/autostart
-startup_DATA = docky.desktop
-
 remapsdir = $(datadir)/docky
 remaps_DATA = remaps.ini
 

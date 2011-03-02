@@ -8,63 +8,63 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-01-05 06:53-0600\n"
-"PO-Revision-Date: 2010-09-30 11:14+0000\n"
-"Last-Translator: Rico Tzschichholz <Unknown>\n"
+"PO-Revision-Date: 2011-02-15 10:30+0000\n"
+"Last-Translator: partrita <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-02-10 14:19+0000\n"
-"X-Generator: Launchpad (build 12335)\n"
+"X-Launchpad-Export-Date: 2011-02-26 14:08+0000\n"
+"X-Generator: Launchpad (build 12460)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
-msgstr ""
+msgstr "돈으로도 살 수 없는 최고의 독."
 
 #: ../data/docky.schemas.in.h:1
 msgid "A list of plugins that are active on this dock."
-msgstr ""
+msgstr "이 독에서 활성화된 플러그인의 목록"
 
 #: ../data/docky.schemas.in.h:2
 msgid "Analog clock theme"
-msgstr ""
+msgstr "아날로그 시계 테마"
 
 #: ../data/docky.schemas.in.h:3
 msgid "Clear finished timers"
-msgstr ""
+msgstr "종료된 타이머 초기화"
 
 #: ../data/docky.schemas.in.h:4
 msgid "Currently selected item"
-msgstr ""
+msgstr "현재 선택된 항목"
 
 #: ../data/docky.schemas.in.h:5
 msgid "Dismiss a stopped timer when clicked"
-msgstr ""
+msgstr "멈춘 타이머를 클릭할 시 제거함"
 
 #: ../data/docky.schemas.in.h:6
 msgid "Do not change this!"
-msgstr ""
+msgstr "설정을 변경하지 마세요!"
 
 #: ../data/docky.schemas.in.h:7
 msgid "Dock icon size"
-msgstr ""
+msgstr "아이콘 크기"
 
 #: ../data/docky.schemas.in.h:8
 msgid "Dock is 3d"
-msgstr ""
+msgstr "3D모드"
 
 #: ../data/docky.schemas.in.h:9
 msgid "Dock manages all windows"
-msgstr ""
+msgstr "독이 모든 창을 관리함"
 
 #: ../data/docky.schemas.in.h:10
 msgid "Dock zooms"
-msgstr ""
+msgstr "독 확대"
 
 #: ../data/docky.schemas.in.h:11
 msgid "Dock's hiding mode"
-msgstr ""
+msgstr "독 숨김 모드"
 
 #: ../data/docky.schemas.in.h:12
 msgid "Docky item command to execute"
@@ -76,11 +76,11 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:14
 msgid "Docky item hue"
-msgstr ""
+msgstr "도키 아이템 색상"
 
 #: ../data/docky.schemas.in.h:15
 msgid "Fade when hiding"
-msgstr ""
+msgstr "숨길때 페이드 효과"
 
 #: ../data/docky.schemas.in.h:16
 msgid "GMail labels to check"
@@ -94,11 +94,11 @@ msgstr ""
 msgid ""
 "How long the urgent indicator glow animation is (in seconds), 0 to disable, "
 "or -1 for infinite."
-msgstr ""
+msgstr "응급상황을 알리는 애니메이션의 재생시간(초). 0 은 비활성 -1 무제한."
 
 #: ../data/docky.schemas.in.h:19
 msgid "How long to wait (ms) before unhiding"
-msgstr ""
+msgstr "다시 나타날때 기다리는 시간(ms)"
 
 #: ../data/docky.schemas.in.h:20
 msgid "How long to wait (ms) to update after a window switch"
@@ -526,42 +526,44 @@ msgstr ""
 msgid "Zoom size"
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:147
+#: ../Docky/Docky/ConfigurationWindow.cs:148
 msgid "Search Docklets..."
 msgstr "Docklets 찾기..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:163
+#: ../Docky/Docky/ConfigurationWindow.cs:164
 msgid "Search Helpers..."
 msgstr "도우미 찾기..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:227
+#: ../Docky/Docky/ConfigurationWindow.cs:228
 msgid "Click on any dock to configure."
 msgstr "설정하고 싶은 dock을 클릭해주세요."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:228
+#: ../Docky/Docky/ConfigurationWindow.cs:229
 msgid "Drag any dock to reposition."
 msgstr "위치를 변경할 dock을 드래그해주세요."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:293
+#: ../Docky/Docky/ConfigurationWindow.cs:294
 msgid "Delete the currently selected dock?"
 msgstr "현재 선택된 dock를 삭제 하시겠습니까?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:295
+#: ../Docky/Docky/ConfigurationWindow.cs:296
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr "만약 삭제를 선택 한다면, 해당되는 삭제할 dock의 모든 설정을 잃게 될 것 입니다."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:310
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:405
+#: ../Docky/Docky/ConfigurationWindow.cs:303
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
 msgstr "Dock 삭제 (_D)"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:426
+#: ../Docky/Docky/ConfigurationWindow.cs:419
+#: ../Docky/Docky/ConfigurationWindow.cs:439
 msgid "_Select"
 msgstr "선택 (_S)"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:429
+#: ../Docky/Docky/ConfigurationWindow.cs:422
+#: ../Docky/Docky/ConfigurationWindow.cs:442
 msgid ".tar Archives"
 msgstr ".tar 압축 파일"
 
@@ -630,53 +632,53 @@ msgstr "이 도우미를 활성화"
 msgid "Disable this helper"
 msgstr "이 도우미를 비활성화"
 
-#: ../Docky/Docky/HelperTile.cs:74
+#: ../Docky/Docky/HelperTile.cs:90
 msgid "Running"
 msgstr "실행 중"
 
-#: ../Docky/Docky/HelperTile.cs:74
+#: ../Docky/Docky/HelperTile.cs:90
 msgid "Stopped"
 msgstr "정지됨"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:332
+#: ../Docky/Docky/Interface/DockPreferences.cs:327
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr "설정하면, Dock에 런처를 갖고 있지 않은 창도 이 Dock에 추가됩니다."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:597
+#: ../Docky/Docky/Interface/DockPreferences.cs:679
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr "<i>최대화된 창이 dock를 덮어도 숨기지 않습니다</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:600
+#: ../Docky/Docky/Interface/DockPreferences.cs:682
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>마우스가 dock위에 위치해 있지 않을때 숨깁니다.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:603
+#: ../Docky/Docky/Interface/DockPreferences.cs:685
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>활성화된 어플리케이션의 창이 dock를 일부라도 덮을때 숨깁니다.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:606
+#: ../Docky/Docky/Interface/DockPreferences.cs:688
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>활성화 관계 없이 어느 창이든 dock를 일부라도 덮는다면 숨깁니다.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:382
+#: ../Docky/Docky/Interface/DockWindow.cs:378
 msgid "Drag to reposition"
 msgstr "드래그하여 옮기기"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:394
-#: ../Docky/Docky/Interface/DockWindow.cs:408
+#: ../Docky/Docky/Interface/DockWindow.cs:390
+#: ../Docky/Docky/Interface/DockWindow.cs:404
 msgid "Drop to add to dock"
 msgstr "드래그하여 Dock에 추가"
 
-#: ../Docky/Docky/Items/DockyItem.cs:93
+#: ../Docky/Docky/Items/DockyItem.cs:132
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:160
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:214
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:244
 msgid "_Settings"
 msgstr "설정 (_S)"
 
-#: ../Docky/Docky/Items/DockyItem.cs:94
+#: ../Docky/Docky/Items/DockyItem.cs:133
 msgid "_About"
 msgstr "Docky 정보 (_A)"
 
@@ -684,7 +686,7 @@ msgstr "Docky 정보 (_A)"
 msgid "_Help"
 msgstr "도움말 (_H)"
 
-#: ../Docky/Docky/Items/DockyItem.cs:95
+#: ../Docky/Docky/Items/DockyItem.cs:136
 msgid "_Quit Docky"
 msgstr "Docky 종료 (_Q)"
 
@@ -696,42 +698,43 @@ msgstr "Docky 설정"
 msgid "_Start When User Logs In"
 msgstr ""
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:155
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
 msgstr "테마 (_T):"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:315
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
 msgid "_Install"
 msgstr "설치 (_I)"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:179
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
 msgid "<b>General Options</b>"
 msgstr "<b>일반 설정</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:199
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
 msgstr "<b>Dock 설정</b>"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:213
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
 msgstr "Docks"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:234
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:289
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
 msgid "All"
 msgstr "전체"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:235
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:290
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
 msgid "Enabled"
 msgstr "사용함"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:236
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:291
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
 msgid "Disabled"
 msgstr "사용 안 함"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:268
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
 msgid "Docklets"
 msgstr "Docklets"
 
@@ -739,59 +742,59 @@ msgstr "Docklets"
 msgid "Usable"
 msgstr "사용가능"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:347
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
 msgstr "도우미"
 
-#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:378
+#: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
 msgid "_New Dock"
 msgstr "새 Dock (_N)"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
 msgid "None"
 msgstr "사용 안함"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
 msgid "Autohide"
 msgstr "자동 숨기기"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:62
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "Intellihide"
 msgstr "똑똑하게 숨기기"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:63
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Window Dodge"
 msgstr "창은 무조건 피하기"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:77
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
 msgid "_Fade On Hide"
 msgstr "숨길때 페이드 효과 사용 (_F)"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:121
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
 msgid "_Icon Size:"
 msgstr "아이콘 크기 (_I)"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:134
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:132
 msgid "_Hiding:"
 msgstr "숨기기 (_H):"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:158
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
 msgid "_Panel Mode"
 msgstr "패널 모드 (_P)"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:172
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
 msgid "3D Back_ground"
 msgstr "3D 배경(_G)"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:186
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
 msgid "_Manage Windows Without Launcher"
 msgstr "바로가기 없는 창도 관리하기(_M)"
 
-#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:201
+#: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
 msgid "_Zoom:"
 msgstr "확대 (_Z):"
 
-#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:119
+#: ../Docky.Items/Docky.Items/AbstractDockItem.cs:120
 #, csharp-format
 msgid "Drop to open with {0}"
 msgstr ""
@@ -801,6 +804,7 @@ msgid "New _Window"
 msgstr "새 창으로 열기 (_W)"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:182
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:267
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
 msgstr "열기 (_O)"
@@ -809,37 +813,37 @@ msgstr "열기 (_O)"
 msgid "_Reset Color"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:434
+#: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:482
 msgid "_Pin to Dock"
 msgstr "Dock에 고정(_P)"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:86
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:83
 #, csharp-format
 msgid "Drop to move to {0}"
 msgstr ""
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:205
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:250
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:197
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:242
 msgid "Error performing drop action"
 msgstr "드래그하는 중 에러 발생"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:205
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:197
 msgid "Not enough free space on destination."
 msgstr "대상 공간에 빈공간이 충분하지 않습니다."
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:222
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:225
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:257
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:214
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:217
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:249
 msgid "Complete"
 msgstr "완료"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:235
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:227
 msgid "Moving"
 msgstr "이동 중"
 
-#: ../Docky.Items/Docky.Items/FileDockItem.cs:241
+#: ../Docky.Items/Docky.Items/FileDockItem.cs:233
 msgid "Copying"
 msgstr "복사 중"
 
@@ -847,23 +851,23 @@ msgstr "복사 중"
 msgid "Open Containing _Folder"
 msgstr ""
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:261
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
 msgid "Unma_ximize"
 msgstr "최대화 취소(_X)"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:267
 msgid "Ma_ximize"
 msgstr "최대화 (_X)"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:269
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:271
 msgid "_Restore"
 msgstr "복구(_R)"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:272
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:274
 msgid "Mi_nimize"
 msgstr "최소화 (_N)"
 
-#: ../Docky.Items/Docky.Items/WnckDockItem.cs:276
+#: ../Docky.Items/Docky.Items/WnckDockItem.cs:277
 msgid "_Close All"
 msgstr "모두 닫기 (_C)"
 
@@ -945,19 +949,19 @@ msgstr "컴퓨터"
 msgid "Clipboard is currently empty."
 msgstr ""
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:430
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "Di_gital Clock"
 msgstr "디지털 시계 (_G)"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:436
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
 msgid "24-Hour _Clock"
 msgstr "24 시간 시계(_C)"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:442
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:443
 msgid "Show _Date"
 msgstr "날짜 표시 (_D)"
 
-#: ../StandardPlugins/Clock/src/ClockDockItem.cs:448
+#: ../StandardPlugins/Clock/src/ClockDockItem.cs:449
 msgid "Select _Theme"
 msgstr "테마 선택 (_T)"
 
@@ -965,7 +969,7 @@ msgstr "테마 선택 (_T)"
 msgid "Themes"
 msgstr "테마"
 
-#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:69
+#: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:62
 msgid "Theme"
 msgstr "테마"
 
@@ -1027,10 +1031,11 @@ msgstr "잘못된 사용자 이름"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:292
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:173
 msgid "Network Error"
 msgstr "네트워크 오류"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:296
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:295
 msgid "General Error"
 msgstr "일반 에러"
 
@@ -1052,11 +1057,11 @@ msgstr[0] "{0} 개의 읽지 않은 메시지"
 msgid "Checking mail..."
 msgstr "메일 확인 중..."
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:193
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "_View "
 msgstr "보기(_V) "
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:198
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
 msgid "_Compose Mail"
 msgstr "메일 작성하기(_C)"
 
@@ -1064,11 +1069,11 @@ msgstr "메일 작성하기(_C)"
 msgid "View C_ontacts"
 msgstr ""
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
 msgid "New Mail"
 msgstr "새 메일"
 
-#: ../StandardPlugins/GMail/src/GMailDockItem.cs:222
+#: ../StandardPlugins/GMail/src/GMailDockItem.cs:236
 msgid "Check _Mail"
 msgstr "메일 확인하기(_M)"
 
@@ -1155,24 +1160,23 @@ msgstr "기부하기"
 msgid "Live Streams"
 msgstr "라이브 스트림"
 
-#: ../Docky/Docky/DockletTile.cs:56
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:170
 msgid "Settings"
 msgstr "설정"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:107
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:91
 msgid "_Clear Recent Documents..."
 msgstr "최근 문서 지우기(_C)..."
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:67
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:102
 msgid "Clear the Recent Documents list?"
 msgstr "최근 문서 목록을 지우시겠습니까?"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:69
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:104
 msgid "Clear Recent Documents"
 msgstr "최근 문서 지우기"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentDocumentsItemProvider.cs:71
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:106
 msgid ""
 "If you clear the Recent Documents list, you clear the following:\n"
 "• All items from the Places → Recent Documents menu item.\n"
@@ -1301,15 +1305,15 @@ msgstr ""
 msgid "Automatically _Dismiss Timers"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:50
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:55
 msgid "Drop to move to Trash"
 msgstr ""
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:77
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:82
 msgid "No items in Trash"
 msgstr "휴지통이 비어있습니다."
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:79
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:84
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
@@ -1319,20 +1323,20 @@ msgstr[0] "휴지통 안에 {0} 개가 있습니다."
 msgid "Restore Files"
 msgstr "파일 복구"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:164
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:201
 msgid "_Open Trash"
 msgstr "휴지통 열기 (_O)"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:166
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:203
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:234
 msgid "Empty _Trash"
 msgstr "휴지통 비우기 (_T)"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:188
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:226
 msgid "Empty all of the items from the trash?"
 msgstr "휴지통에 들어 있는 모든 항목을 비우시겠습니까?"
 
-#: ../StandardPlugins/Trash/src/TrashDockItem.cs:190
+#: ../StandardPlugins/Trash/src/TrashDockItem.cs:228
 msgid ""
 "If you choose to empty the trash, all items in it\n"
 "will be permanently lost. Please note that you\n"
@@ -1362,9 +1366,7 @@ msgstr "매 분마다 자동으로 업데이트(_E)"
 msgid "Use _Metric Units"
 msgstr "미터법 표기 사용(_M)"
 
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:98
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:101
-#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:106
+#: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:170
 msgid "Invalid Weather Location"
 msgstr "잘못된 날씨 위치"
 
@@ -1385,7 +1387,7 @@ msgstr ""
 "코드로 구분된 위치 정보를 필요로 합니다. 사이트의 해당 지역의 예보에서 URL 뒤에 있는 AAXX0000과 같은 코드를 찾을 수 "
 "있습니다."
 
-#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:55
+#: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:56
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
@@ -1405,28 +1407,27 @@ msgstr "날씨 설정"
 msgid "Click to add a location."
 msgstr "클릭하여 위치를 추가합니다."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:81
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:91
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
 msgid "Fetching data..."
 msgstr "데이터를 불러오는 중..."
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:222
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Radar _Map"
 msgstr "레이더 지도(_M)"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:227
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "Forecasts"
 msgstr "일기예보"
 
-#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:243
+#: ../StandardPlugins/Weather/src/WeatherDocklet.cs:252
 msgid "Check _Weather"
 msgstr "날씨 확인(_W)"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:88
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
 msgid "_Today"
 msgstr "오늘(_T)"
 
-#: ../StandardPlugins/Weather/src/WeatherForecast.cs:91
+#: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
 msgid "T_omorrow"
 msgstr "내일(_O)"
 

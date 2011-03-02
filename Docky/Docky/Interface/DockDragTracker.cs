@@ -431,6 +431,8 @@ namespace Docky.Interface
 				return;
 			
 			ExternalDragActive = !InternalDragActive;
+			Owner.UpdateHoverText ();
+			Owner.SetTooltipVisibility ();
 			
 			if (marker != args.Context.GetHashCode ()) {
 				marker = args.Context.GetHashCode ();
