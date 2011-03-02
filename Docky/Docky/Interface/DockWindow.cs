@@ -2386,7 +2386,7 @@ namespace Docky.Interface
 			else if (Menu.Visible && HoveredItem == item)
 				darken += .4;
 			
-			if (ExternalDragActive && DragTracker.DragData != null && !item.CanAcceptDrop (DragTracker.DragData))
+			if (ExternalDragActive && DragTracker.DragData != null && DockHovered && !item.CanAcceptDrop (DragTracker.DragData))
 				darken += .6;
 			
 			if (Gdk.Screen.Default.IsComposited &&
