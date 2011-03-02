@@ -59,6 +59,8 @@ namespace NetworkMonitorDocklet
 			else
 				HoverText = Catalog.GetString ("No network connection available");
 			
+			SetMessage (string.Format ("0;;{0};;down", device.FormatUpDown (false)));
+			SetMessage (string.Format ("1;;{0};;up", device.FormatUpDown (true)));
 			QueueRedraw ();
 			return true;
 		}
@@ -78,14 +80,12 @@ namespace NetworkMonitorDocklet
 				
 				int fontSize = surface.Height / 5;
 				layout.FontDescription.AbsoluteSize = Pango.Units.FromPixels (fontSize);
-				string text = string.Format ("{0}\n↓{1}\n↑{2}", device.name,
-				                             device.FormatUpDown (false), device.FormatUpDown (true));
-				layout.SetText (text );
+				layout.SetText (device.name);
 				
 				Pango.Rectangle inkRect, logicalRect;
 				layout.GetPixelExtents (out inkRect, out logicalRect);
 				
-				cr.MoveTo ((surface.Width - logicalRect.Width) / 2, (surface.Height - logicalRect.Height) / 2);
+				cr.MoveTo ((surface.Width - logicalRect.Width) / 2, 1);
 				Pango.CairoHelper.LayoutPath (cr, layout);
 				cr.LineWidth = 2;
 				cr.Color = new Cairo.Color (0, 0, 0, 0.5);
