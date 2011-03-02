@@ -93,7 +93,7 @@ namespace NetworkMonitorDocklet
 			
 			DeviceInfo d = devices.Values.OrderByDescending (dev => dev.TotalBytes).FirstOrDefault ();
 			foreach (DeviceInfo device in devices.Values)
-				if (d == null || device.sumRate > d.sumRate)
+				if (d == null || device.TotalRate > d.TotalRate)
 					d = device;
 			
 			return d;

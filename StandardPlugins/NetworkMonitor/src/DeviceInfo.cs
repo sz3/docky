@@ -32,7 +32,7 @@ namespace NetworkMonitorDocklet
 			get { return uploadedBytes + downloadedBytes; }
 		}
 		
-		public double sumRate {
+		public double TotalRate {
 			get { return uploadRate + downloadRate; }
 		}
 		
