@@ -369,7 +369,7 @@ namespace Docky.Interface
 			return surface;
 		}
 		
-		void UpdateHoverText ()
+		internal void UpdateHoverText ()
 		{
 			int top = (int) (IconSize * (ZoomPercent + .2));
 			Gdk.Point point = new Gdk.Point (-1, -1);
@@ -1331,7 +1331,7 @@ namespace Docky.Interface
 			AnimatedDraw ();
 		}
 		
-		void SetTooltipVisibility ()
+		internal void SetTooltipVisibility ()
 		{
 			bool visible = (HoveredItem != null && !InternalDragActive && !ExternalDragActive &&
 								!Menu.Visible && !ConfigurationMode && Painter == null) ||
