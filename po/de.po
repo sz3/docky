@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: Rico Tzschichholz <ricotz@t-online.de>\n"
-"POT-Creation-Date: 2011-01-05 06:53-0600\n"
-"PO-Revision-Date: 2011-02-10 13:47+0000\n"
-"Last-Translator: Rico Tzschichholz <Unknown>\n"
+"POT-Creation-Date: 2011-03-03 00:41+0100\n"
+"PO-Revision-Date: 2011-02-27 15:02+0000\n"
+"Last-Translator: Ralf Czaska <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-02-26 14:08+0000\n"
-"X-Generator: Launchpad (build 12460)\n"
+"X-Launchpad-Export-Date: 2011-03-05 07:32+0000\n"
+"X-Generator: Launchpad (build 12515)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -32,7 +32,7 @@ msgstr "Thema der Analog-Uhr"
 
 #: ../data/docky.schemas.in.h:3
 msgid "Clear finished timers"
-msgstr "Beendete Timer leeren"
+msgstr "Abgelaufene Timer entfernen"
 
 #: ../data/docky.schemas.in.h:4
 msgid "Currently selected item"
@@ -91,6 +91,10 @@ msgid "GMail username"
 msgstr "GMail Benutzername"
 
 #: ../data/docky.schemas.in.h:18
+msgid "Hot-area padding"
+msgstr ""
+
+#: ../data/docky.schemas.in.h:19
 msgid ""
 "How long the urgent indicator glow animation is (in seconds), 0 to disable, "
 "or -1 for infinite."
@@ -98,45 +102,45 @@ msgstr ""
 "Dauer (in Sekunden) der Animation für die \"Dringlichkeits\"-Anzeige. Wert 0 "
 "zum Abschalten der Funktion, -1 für dauerhafte Animation"
 
-#: ../data/docky.schemas.in.h:19
+#: ../data/docky.schemas.in.h:20
 msgid "How long to wait (ms) before unhiding"
 msgstr "Verzögerung (in ms), bis das Dock wieder sichtbar wird"
 
-#: ../data/docky.schemas.in.h:20
+#: ../data/docky.schemas.in.h:21
 msgid "How long to wait (ms) to update after a window switch"
 msgstr ""
 "Verzögerung (in ms), bis die Anzeige nach einem Fensterwechsel erneuert wird"
 
-#: ../data/docky.schemas.in.h:21
+#: ../data/docky.schemas.in.h:22
 msgid "How many recent clipboard selections to show."
 msgstr "Wie viele Einträge der Zwischenablage sollen angezeigt werden?"
 
-#: ../data/docky.schemas.in.h:22
+#: ../data/docky.schemas.in.h:23
 msgid ""
 "How much to shift the color of the urgent indicator. The value can be from -"
 "180 to 180."
 msgstr ""
 "Farbveränderung bei der Dringlichkeits-Anzeige. Wert von -180 bis 180"
 
-#: ../data/docky.schemas.in.h:23
+#: ../data/docky.schemas.in.h:24
 msgid "How often (in mins) to check for new mail."
 msgstr "Intervall (in min) der Mail-Abfrage"
 
-#: ../data/docky.schemas.in.h:24
-msgid "How often to check"
-msgstr "Intervall der Mail-Abfrage"
-
 #: ../data/docky.schemas.in.h:25
+msgid "How often to check"
+msgstr "Intervall der Wetter-Abfrage"
+
+#: ../data/docky.schemas.in.h:26
 msgid "How often to check for new weather information."
 msgstr "Intervall der Abfrage neuer Wetterinformationen"
 
-#: ../data/docky.schemas.in.h:26
+#: ../data/docky.schemas.in.h:27
 msgid "How often to poll (in ms) for new clipboard data."
 msgstr ""
 "In welchem Abstand (in ms)  soll die Zwischenablage auf neue Daten überprüft "
 "werden?"
 
-#: ../data/docky.schemas.in.h:27
+#: ../data/docky.schemas.in.h:28
 msgid ""
 "If fading when hiding, this is the opacity the dock fades to. 1 is solid, 0 "
 "is invisible."
@@ -144,7 +148,7 @@ msgstr ""
 "Wert für die Durchsichtigkeit beim langsamen Ausblenden des Docks, 1 = "
 "komplett sichtbar 0 = unsichtbar"
 
-#: ../data/docky.schemas.in.h:28
+#: ../data/docky.schemas.in.h:29
 msgid ""
 "If false, Docky will not show hover texts for launchers (but still show for "
 "plugins)."
@@ -152,20 +156,20 @@ msgstr ""
 "Ist diese Option abgewählt, werden für Programmstarter keine Tooltips "
 "angezeigt (für Plugins jedoch weiterhin)."
 
-#: ../data/docky.schemas.in.h:29
+#: ../data/docky.schemas.in.h:30
 msgid "If false, finished timers will reset instead of dismiss."
 msgstr ""
 "Ist diese Option abgewählt, werden beendete Timer nur zurückgesetzt anstatt "
 "gelöscht."
 
-#: ../data/docky.schemas.in.h:30
+#: ../data/docky.schemas.in.h:31
 msgid ""
 "If false, prevents dropping items onto the dock to add them to the dock."
 msgstr ""
 "Ist diese Option abgewählt, können keine Elemente durch Fallenlassen über "
 "dem Dock hinzugefügt werden."
 
-#: ../data/docky.schemas.in.h:31
+#: ../data/docky.schemas.in.h:32
 msgid ""
 "If the 'Pin to Dock' option should show in the menu of items, allowing you "
 "to add it permanently to the dock."
@@ -173,22 +177,22 @@ msgstr ""
 "Soll die Option \"Auf dem Dock sperren\" im Menü der Elemente angezeigt "
 "werden?"
 
-#: ../data/docky.schemas.in.h:32
+#: ../data/docky.schemas.in.h:33
 msgid "If the dock is a panel"
 msgstr "Ist das Dock im Panel-Modus?"
 
-#: ../data/docky.schemas.in.h:33
+#: ../data/docky.schemas.in.h:34
 msgid ""
 "If true, Docky will only show windows on the currently active desktop."
 msgstr ""
 "Ist diese Option gewählt, zeigt Docky nur Fenster der jeweils aktiven "
 "Arbeitsfläche an."
 
-#: ../data/docky.schemas.in.h:34
+#: ../data/docky.schemas.in.h:35
 msgid "If true, all new timers will automatically start."
 msgstr "Ist diese Oprion gewählt, werden neue Timer automatisch gestartet."
 
-#: ../data/docky.schemas.in.h:35
+#: ../data/docky.schemas.in.h:36
 msgid ""
 "If true, any windows without launchers will show on this dock. Exactly 1 "
 "dock must have this set to true."
@@ -196,7 +200,7 @@ msgstr ""
 "Ist diese Option gesetzt, werden Fenster ohne Starter auf diesem Dock "
 "angezeigt. Genau 1 Dock muß diese Option gesetzt haben."
 
-#: ../data/docky.schemas.in.h:36
+#: ../data/docky.schemas.in.h:37
 msgid ""
 "If true, items with more than one window have two indicator dots instead of "
 "just one dot."
@@ -204,13 +208,13 @@ msgstr ""
 "Ist diese Option gesetzt, bekommen Elemente mit mehr als einem Fenster 2 "
 "Hinweispunkte statt nur einem."
 
-#: ../data/docky.schemas.in.h:37
+#: ../data/docky.schemas.in.h:38
 msgid "If true, locks all items on all docks so they can't be dragged."
 msgstr ""
 "Ist diese Option gesetzt, sind alle Elemente auf allen Docks gesperrt, "
 "können also nicht verschoben werden."
 
-#: ../data/docky.schemas.in.h:38
+#: ../data/docky.schemas.in.h:39
 msgid ""
 "If true, output from the helpers will be redirected to show in Docky's "
 "output."
@@ -218,47 +222,47 @@ msgstr ""
 "Ist diese Option gesetzt, werden Ausgaben der Erweiterungen zur Docky-"
 "Ausgabe umgeleitet."
 
-#: ../data/docky.schemas.in.h:39
+#: ../data/docky.schemas.in.h:40
 msgid "If true, show the digital clock otherwise show the analog clock."
 msgstr ""
 "Ist diese Option gesetzt, wird die Digital-Uhr angezeigt, ansonsten die "
 "Analog-Uhr."
 
-#: ../data/docky.schemas.in.h:40
+#: ../data/docky.schemas.in.h:41
 msgid "If true, shows a notify message for new unread mail."
 msgstr "Soll bei neuer Mail eine Benachrichtigung angezeigt werden?"
 
-#: ../data/docky.schemas.in.h:41
+#: ../data/docky.schemas.in.h:42
 msgid "If true, shows the Docky item on the dock managing windows."
 msgstr ""
 "Ist diese Option gesetzt, wird das Docky-Element auf dem Dock angezeigt, das "
 "die Fenster verwaltet."
 
-#: ../data/docky.schemas.in.h:42
+#: ../data/docky.schemas.in.h:43
 msgid "If true, shows time in 24-hr format."
 msgstr "Uhr in 24h-Format?"
 
-#: ../data/docky.schemas.in.h:43
+#: ../data/docky.schemas.in.h:44
 msgid "If true, the Docky item popup menu shows the Quit option."
 msgstr ""
 "Ist diese Option gesetzt, wird im Menü des Docky-Elements eine Option zum "
 "Beenden angezeigt."
 
-#: ../data/docky.schemas.in.h:44
+#: ../data/docky.schemas.in.h:45
 msgid "If true, the Docky item popup menu shows the Settings option."
 msgstr ""
 "Ist diese Option gesetzt, wird im menü des Docky-Elements eine Option für "
 "die Einstellungen angezeigt."
 
-#: ../data/docky.schemas.in.h:45
+#: ../data/docky.schemas.in.h:46
 msgid "If true, the date should show on the digital clock."
 msgstr "Soll die Digital-Uhr zusätzlich das Datum anzeigen?"
 
-#: ../data/docky.schemas.in.h:46
+#: ../data/docky.schemas.in.h:47
 msgid "If true, the dock is drawn as a 3d dock."
 msgstr "Soll das Dock in 3D gezeichnet werden?"
 
-#: ../data/docky.schemas.in.h:47
+#: ../data/docky.schemas.in.h:48
 msgid ""
 "If true, the dock is in panel mode and will extend to fill the entire screen "
 "edge."
@@ -266,11 +270,11 @@ msgstr ""
 "Soll das Dock im Panel-Modus laufen, sich also auf die volle "
 "Bildschirmbreite erstrecken?"
 
-#: ../data/docky.schemas.in.h:48
+#: ../data/docky.schemas.in.h:49
 msgid "If true, the dock will zoom when hovered."
 msgstr "Soll das Dock beim Überfahren mit der Maus zoomen?"
 
-#: ../data/docky.schemas.in.h:49
+#: ../data/docky.schemas.in.h:50
 msgid ""
 "If true, this is the first time Docky has run. Internal use only - Do not "
 "change!"
@@ -278,11 +282,11 @@ msgstr ""
 "Ist diese Option gesetzt, wird Docky zum ersten Mal ausgeführt. Nur zur "
 "internen Benutzung - bitte nicht ändern!"
 
-#: ../data/docky.schemas.in.h:50
+#: ../data/docky.schemas.in.h:51
 msgid "If true, timers will disappear when they time out."
 msgstr "Sollen Timer vom Dock entfernt werden, wenn sie beendet sind?"
 
-#: ../data/docky.schemas.in.h:51
+#: ../data/docky.schemas.in.h:52
 msgid ""
 "If true, tracks the mouse selection clipboard. If false, tracks the "
 "secondary clipboard."
@@ -290,155 +294,155 @@ msgstr ""
 "Ist diese Option gesetzt, wird die primäre Zwischenablage (Mausmarkierung) "
 "benutzt, anderenfalls die sekundäre (anwendungsspezifische) Zwischenablage."
 
-#: ../data/docky.schemas.in.h:52
+#: ../data/docky.schemas.in.h:53
 msgid "If true, use metric units when showing weather."
 msgstr ""
 "Sollen beim Wetter Einheiten des metrischen Systems verwendet werden?"
 
-#: ../data/docky.schemas.in.h:53
+#: ../data/docky.schemas.in.h:54
 msgid ""
 "If true, when the dock hides it will fade away instead of sliding off screen."
 msgstr ""
 "Ist diese Option gesetzt, wird das Dock langsam ausgeblendet anstatt aus dem "
 "Bild verschoben."
 
-#: ../data/docky.schemas.in.h:54
+#: ../data/docky.schemas.in.h:55
 msgid ""
 "If true, when there is new unread mail Docky will show the indicator dot."
 msgstr ""
 "Ist diese Option gesetzt, wird bei neuer ungelesener Mail ein Hinweispunkt "
 "angezeigt."
 
-#: ../data/docky.schemas.in.h:55
+#: ../data/docky.schemas.in.h:56
 msgid "If true, will try to show the most recent document on the dock."
 msgstr ""
 "Ist diese Option gesetzt, wird versucht, das zuletzt geöffnete Dokument im "
 "Dock-Element als Symbol anzuzeigen."
 
-#: ../data/docky.schemas.in.h:56
+#: ../data/docky.schemas.in.h:57
 msgid "Indicate when items have more than one window"
 msgstr "Zeige an, wenn Elemente mehr als ein Fenster besitzen."
 
-#: ../data/docky.schemas.in.h:57
+#: ../data/docky.schemas.in.h:58
 msgid "Last time checked"
 msgstr "Zeit der letzten Abfrage"
 
-#: ../data/docky.schemas.in.h:58
+#: ../data/docky.schemas.in.h:59
 msgid "List of NPR stations to display."
 msgstr "Liste der NPR-Sender, die angezeigt werden soillen."
 
-#: ../data/docky.schemas.in.h:59
+#: ../data/docky.schemas.in.h:60
 msgid "List of active docks"
 msgstr "Liste der aktiven Docks"
 
-#: ../data/docky.schemas.in.h:60
+#: ../data/docky.schemas.in.h:61
 msgid "List of custom GMail labels to check in addition to the inbox."
 msgstr ""
 "Liste der GMail Labels, die zusätzlich zur Inbox überprüft werden sollen."
 
-#: ../data/docky.schemas.in.h:61
+#: ../data/docky.schemas.in.h:62
 msgid "List of launchers"
 msgstr "Liste der Starter"
 
-#: ../data/docky.schemas.in.h:62
+#: ../data/docky.schemas.in.h:63
 msgid "Max Entries"
 msgstr "Maximale Anzahl von Einträgen"
 
-#: ../data/docky.schemas.in.h:63
+#: ../data/docky.schemas.in.h:64
 msgid "NPR stations"
 msgstr "NPR Sender"
 
-#: ../data/docky.schemas.in.h:64
+#: ../data/docky.schemas.in.h:65
 msgid "New timer length"
 msgstr "Dauer neuer Timer"
 
-#: ../data/docky.schemas.in.h:65
+#: ../data/docky.schemas.in.h:66
 msgid "Number of recent docs"
 msgstr "Anzahl der zuletzt geöffneten Dokumente"
 
-#: ../data/docky.schemas.in.h:66
+#: ../data/docky.schemas.in.h:67
 msgid "Opacity to fade to"
 msgstr "Transparenzwert beim Ausblenden."
 
-#: ../data/docky.schemas.in.h:67
+#: ../data/docky.schemas.in.h:68
 msgid "Plugins on this dock"
 msgstr "Plugins auf diesem Dock"
 
-#: ../data/docky.schemas.in.h:68
+#: ../data/docky.schemas.in.h:69
 msgid "Prevent adding items by drops"
 msgstr "Verhindert Hinzufügen von Elementen durch Fallenlassen."
 
-#: ../data/docky.schemas.in.h:69
+#: ../data/docky.schemas.in.h:70
 msgid "Redirect helper output to Docky's output"
 msgstr "Ausgabe der Erweiterungen geht zu den Docky-Ausgaben."
 
-#: ../data/docky.schemas.in.h:70
+#: ../data/docky.schemas.in.h:71
 msgid "Set the color of the Docky icon. 0 means use the GTK+ theme color."
 msgstr ""
 "Farbe des Docky-Symbols setzen; beim Wert 0 wird die Farbe des GTK+ Themas "
 "verwendet."
 
-#: ../data/docky.schemas.in.h:71
+#: ../data/docky.schemas.in.h:72
 msgid "Show 'Pin to Dock' for items"
 msgstr "Zeige 'Anheften am Dock' für Elemente"
 
-#: ../data/docky.schemas.in.h:72
+#: ../data/docky.schemas.in.h:73
 msgid "Show Quit in Docky item menu"
 msgstr "Zeige Beenden-Option im Menü des Docky-Elements"
 
-#: ../data/docky.schemas.in.h:73
+#: ../data/docky.schemas.in.h:74
 msgid "Show Settings in Docky item menu"
 msgstr "Zeige Einstellungen-Option im Menü des Docky-Elements"
 
-#: ../data/docky.schemas.in.h:74
+#: ../data/docky.schemas.in.h:75
 msgid "Show a notify for unread mail"
 msgstr "Benachrichtigung für ungelesene Mail"
 
-#: ../data/docky.schemas.in.h:75
+#: ../data/docky.schemas.in.h:76
 msgid "Show date"
 msgstr "Zeige Datum"
 
-#: ../data/docky.schemas.in.h:76
+#: ../data/docky.schemas.in.h:77
 msgid "Show hover text labels for launchers"
 msgstr "Zeige Tooltips für Starter"
 
-#: ../data/docky.schemas.in.h:77
+#: ../data/docky.schemas.in.h:78
 msgid "Show indicator dot for unread mail"
 msgstr "Zeige Hinweispunkt für ungelesene Mail."
 
-#: ../data/docky.schemas.in.h:78
+#: ../data/docky.schemas.in.h:79
 msgid "Show most recent doc"
 msgstr "Zeige zuletzt benutztes Dokument"
 
-#: ../data/docky.schemas.in.h:79
+#: ../data/docky.schemas.in.h:80
 msgid "Show the Docky item"
 msgstr "Zeige Docky-Element"
 
-#: ../data/docky.schemas.in.h:80
+#: ../data/docky.schemas.in.h:81
 msgid "Show the digital clock"
 msgstr "Zeige Digital-Uhr"
 
-#: ../data/docky.schemas.in.h:81
+#: ../data/docky.schemas.in.h:82
 msgid "Show windows from only current desktop"
 msgstr "Nur Fenster der aktuellen Arbeitsfläche zeigen"
 
-#: ../data/docky.schemas.in.h:82
+#: ../data/docky.schemas.in.h:83
 msgid "Sorts the items on the dock"
 msgstr "Sortiert Elemente auf dem Dock"
 
-#: ../data/docky.schemas.in.h:83
+#: ../data/docky.schemas.in.h:84
 msgid "Start all new timers"
 msgstr "Neue Timer starten"
 
-#: ../data/docky.schemas.in.h:84
+#: ../data/docky.schemas.in.h:85
 msgid "Stop items from dragging"
 msgstr "Verhindere das Verschieben von Elementen"
 
-#: ../data/docky.schemas.in.h:85
+#: ../data/docky.schemas.in.h:86
 msgid "The GMail username to check."
 msgstr "GMail Benutzername"
 
-#: ../data/docky.schemas.in.h:86
+#: ../data/docky.schemas.in.h:87
 msgid ""
 "The command to execute when left-clicking the Docky item or \"\" for default "
 "behavior (which opens the configuration dialog)."
@@ -446,19 +450,19 @@ msgstr ""
 "Kommando, das beim Links-Klick auf das Docky-Element ausgeführt werden soll. "
 "\"\" für das Standardverhalten, welches die Docky-Einstellungen öffnet."
 
-#: ../data/docky.schemas.in.h:87
+#: ../data/docky.schemas.in.h:88
 msgid "The current theme"
 msgstr "Aktuelles Thema"
 
-#: ../data/docky.schemas.in.h:88
+#: ../data/docky.schemas.in.h:89
 msgid "The currently selected item in the session manager menu."
 msgstr "Aktuell ausgewähltes Element im Menü des Sitzungs-Managers"
 
-#: ../data/docky.schemas.in.h:89
+#: ../data/docky.schemas.in.h:90
 msgid "The default time (in secs) for any new timers."
 msgstr "Voreingestellte Zeit (in s) für jeden neuen Timer."
 
-#: ../data/docky.schemas.in.h:90
+#: ../data/docky.schemas.in.h:91
 msgid ""
 "The dock's hide mode. Possible values are: None, Autohide, Intellihide, "
 "UniversalIntellihide"
@@ -466,11 +470,11 @@ msgstr ""
 "Verstecken-Modus des Docks. Mögliche Werte: None, Autohide, Intellihide, "
 "UniversalIntellihide"
 
-#: ../data/docky.schemas.in.h:91
+#: ../data/docky.schemas.in.h:92
 msgid "The dock's position"
 msgstr "Position des Docks"
 
-#: ../data/docky.schemas.in.h:92
+#: ../data/docky.schemas.in.h:93
 msgid ""
 "The dock's position on the screen. Possible values are: Bottom, Top, Left, "
 "Right"
@@ -478,58 +482,63 @@ msgstr ""
 "Position des Docks auf dem Bildschirm. Mögliche Werte: Bottom (unten), Top "
 "(oben), Left (links), Right (rechts)"
 
-#: ../data/docky.schemas.in.h:93
+#: ../data/docky.schemas.in.h:94
 msgid "The dock's zoom size (if enabled), as a percent."
 msgstr "Vergrößerung des Docks (in Prozent) beim Zoomen, wenn eingeschaltet."
 
-#: ../data/docky.schemas.in.h:94
+#: ../data/docky.schemas.in.h:95
 msgid "The last time Docky checked GMail for messages."
 msgstr "Zeit der zuletzt durchgeführten Googlemail-Abfrage."
 
-#: ../data/docky.schemas.in.h:95
+#: ../data/docky.schemas.in.h:96
 msgid "The list of weather locations to check."
 msgstr "Liste der Orte für die Abfrage der Wetterbedingungen."
 
-#: ../data/docky.schemas.in.h:96
+#: ../data/docky.schemas.in.h:97
 msgid "The name of the current Docky theme."
 msgstr "Name das aktuellen Docky-Themas"
 
-#: ../data/docky.schemas.in.h:97
+#: ../data/docky.schemas.in.h:98
 msgid "The name of the weather source to get weather information from."
 msgstr "Name der Quelle, die für die Wetterinformationen benutzt wird."
 
-#: ../data/docky.schemas.in.h:98
+#: ../data/docky.schemas.in.h:99
+msgid ""
+"The number of extra pixels to pad the hover area on the top of the dock."
+msgstr ""
+
+#: ../data/docky.schemas.in.h:100
 msgid "The number of most recent documents to show."
 msgstr ""
 "Anzahl der zuletzt geöffneten Dokumente, die angezeigt werden sollen."
 
-#: ../data/docky.schemas.in.h:99
+#: ../data/docky.schemas.in.h:101
 msgid "The size of icons on the dock."
 msgstr "Größe der Icons auf dem Dock."
 
-#: ../data/docky.schemas.in.h:100
+#: ../data/docky.schemas.in.h:102
 msgid "The text to show when hovering the Docky item."
 msgstr ""
 "Text, der beim Überfahren des Docky-Elements mit der Maus angezeigt werden "
 "soll."
 
-#: ../data/docky.schemas.in.h:101
+#: ../data/docky.schemas.in.h:103
 msgid "The theme for the analog clock."
 msgstr "Thema für die analoge Uhr"
 
-#: ../data/docky.schemas.in.h:102
+#: ../data/docky.schemas.in.h:104
 msgid "The weather source"
 msgstr "Quelle der Wetter-Daten"
 
-#: ../data/docky.schemas.in.h:103
+#: ../data/docky.schemas.in.h:105
 msgid "This is the list of all the launchers on this dock."
 msgstr "Liste aller Starter auf diesem Dock"
 
-#: ../data/docky.schemas.in.h:104
+#: ../data/docky.schemas.in.h:106
 msgid "This is the monitor the dock exists on."
 msgstr "Der Monitor, auf dem sich das Dock befindet."
 
-#: ../data/docky.schemas.in.h:105
+#: ../data/docky.schemas.in.h:107
 msgid ""
 "This is the time (in milliseconds) to wait before unhiding a hidden dock "
 "when the cursor moves over it."
@@ -537,7 +546,7 @@ msgstr ""
 "Verzögerung (in Millisekunden), bevor das Dock sichtbar gemacht wird, wenn "
 "der Mauszeiger darüberfährt."
 
-#: ../data/docky.schemas.in.h:106
+#: ../data/docky.schemas.in.h:108
 msgid ""
 "This is the time (in milliseconds) to wait to determine if a window switch "
 "causes a (un)hide."
@@ -545,71 +554,75 @@ msgstr ""
 "Wartezeit (in Millisekunden), um festzustellen, ob ein Fensterwechsel zu "
 "einem Verstecken oder wieder sichtbar machen des Docks führen muß."
 
-#: ../data/docky.schemas.in.h:107
+#: ../data/docky.schemas.in.h:109
 msgid "This lists all the currently active (displayed) docks, by name."
 msgstr "Liste der Namen aller im Moment aktiven (angezeigten) Docks."
 
-#: ../data/docky.schemas.in.h:108
+#: ../data/docky.schemas.in.h:110
 msgid "Timer Delay"
 msgstr "Timer Wartezeit"
 
-#: ../data/docky.schemas.in.h:109
+#: ../data/docky.schemas.in.h:111
 msgid "Track Mouse Selections"
 msgstr ""
 
-#: ../data/docky.schemas.in.h:110
+#: ../data/docky.schemas.in.h:112
 msgid "Urgent indicator color shift"
 msgstr "Farbänderungs-Wert für die Dringlichkeits-Anzeige"
 
-#: ../data/docky.schemas.in.h:111
+#: ../data/docky.schemas.in.h:113
 msgid "Urgent indicator glow animation time (in seconds)"
 msgstr "Zeit (in Sekunden) für die Glüh-Animation der Dringlichkeits-Anzeige"
 
-#: ../data/docky.schemas.in.h:112
+#: ../data/docky.schemas.in.h:114
 msgid "Use 24-hr time"
 msgstr "24h-Format benutzen"
 
-#: ../data/docky.schemas.in.h:113
+#: ../data/docky.schemas.in.h:115
 msgid "Use metric units"
 msgstr "Metrische Einheiten verwenden"
 
-#: ../data/docky.schemas.in.h:114
+#: ../data/docky.schemas.in.h:116
 msgid "Used to sort the items on the dock."
 msgstr "Wird benutzt, um die Elemente auf dem Dock zu sortieren."
 
-#: ../data/docky.schemas.in.h:115
+#: ../data/docky.schemas.in.h:117
 msgid "Weather locations"
 msgstr "Orte für Wetterinformationen"
 
-#: ../data/docky.schemas.in.h:116
+#: ../data/docky.schemas.in.h:118
 msgid "Which monitor the dock is on"
 msgstr "Monitor des Docks"
 
-#: ../data/docky.schemas.in.h:117
+#: ../data/docky.schemas.in.h:119
 msgid "Zoom size"
 msgstr "Zoom-Größe"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:148
+#: ../Docky/Docky/ConfigurationWindow.cs:269
 msgid "Search Docklets..."
 msgstr "Docklets durchsuchen …"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:164
+#: ../Docky/Docky/ConfigurationWindow.cs:286
 msgid "Search Helpers..."
 msgstr "Erweiterungen durchsuchen …"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:228
+#: ../Docky/Docky/ConfigurationWindow.cs:363
 msgid "Click on any dock to configure."
 msgstr "Klicken Sie auf ein Dock um dessen Einstellungen zu ändern."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:229
+#: ../Docky/Docky/ConfigurationWindow.cs:364
 msgid "Drag any dock to reposition."
 msgstr "Ziehen Sie ein Dock um es neu zu positionieren."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:294
+#: ../Docky/Docky/ConfigurationWindow.cs:385
+msgid "Helpers require DockManager be installed."
+msgstr ""
+
+#: ../Docky/Docky/ConfigurationWindow.cs:457
 msgid "Delete the currently selected dock?"
 msgstr "Das ausgewählte Dock löschen?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:296
+#: ../Docky/Docky/ConfigurationWindow.cs:459
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -617,18 +630,18 @@ msgstr ""
 "Wenn Sie das gewählte Dock löschen,\n"
 "werden alle Einstellungen dieses Docks verloren gehen."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:303
+#: ../Docky/Docky/ConfigurationWindow.cs:466
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
 msgstr "Dock _löschen"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:419
-#: ../Docky/Docky/ConfigurationWindow.cs:439
+#: ../Docky/Docky/ConfigurationWindow.cs:582
+#: ../Docky/Docky/ConfigurationWindow.cs:602
 msgid "_Select"
 msgstr "_Auswählen"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:422
-#: ../Docky/Docky/ConfigurationWindow.cs:442
+#: ../Docky/Docky/ConfigurationWindow.cs:585
+#: ../Docky/Docky/ConfigurationWindow.cs:605
 msgid ".tar Archives"
 msgstr ".tar Archiv"
 
@@ -704,7 +717,7 @@ msgstr "Läuft"
 msgid "Stopped"
 msgstr "Gestoppt"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:327
+#: ../Docky/Docky/Interface/DockPreferences.cs:345
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
@@ -712,29 +725,29 @@ msgstr ""
 "Fenster, die keinem bestehenden Starter zugeordnet werden können, werden "
 "diesem Dock hinzugefügt."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:679
+#: ../Docky/Docky/Interface/DockPreferences.cs:727
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 "<i>Niemals verbergen, maximierte Fenster überdecken das Dock nicht.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:682
+#: ../Docky/Docky/Interface/DockPreferences.cs:730
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Verbergen, wenn sich kein Mauszeiger darüber befindet.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:685
+#: ../Docky/Docky/Interface/DockPreferences.cs:733
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Verbergen, wenn es das aktive Anwendungsfenster behindert.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:688
+#: ../Docky/Docky/Interface/DockPreferences.cs:736
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Verbergen, wenn es ein Anwendungsfenster behindert.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:378
+#: ../Docky/Docky/Interface/DockWindow.cs:380
 msgid "Drag to reposition"
 msgstr "Ziehen um neu zu positionieren"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:390
-#: ../Docky/Docky/Interface/DockWindow.cs:404
+#: ../Docky/Docky/Interface/DockWindow.cs:392
+#: ../Docky/Docky/Interface/DockWindow.cs:406
 msgid "Drop to add to dock"
 msgstr "Loslassen um zum Dock hinzuzufügen"
 
@@ -1105,7 +1118,7 @@ msgstr "Ungültiger Benutzername"
 msgid "Network Error"
 msgstr "Netzwerkfehler"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:295
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:296
 msgid "General Error"
 msgstr "Allgemeiner Fehler"
 
@@ -1190,6 +1203,10 @@ msgstr "Verbindung getrennt"
 msgid "Connected: {0}"
 msgstr "Verbunden: {0}"
 
+#: ../StandardPlugins/NetworkMonitor/src/NetworkMonitorDockItem.cs:61
+msgid "No network connection available"
+msgstr ""
+
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:47
 msgid "My _Stations"
 msgstr "Meine _Sender"
@@ -1235,19 +1252,19 @@ msgstr "Live-Streams"
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:91
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:84
 msgid "_Clear Recent Documents..."
 msgstr "_Liste der zuletzt geöffneten Dokumente löschen …"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:102
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:95
 msgid "Clear the Recent Documents list?"
 msgstr "Liste der zuletzt geöffneten Dokumente löschen?"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:104
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:97
 msgid "Clear Recent Documents"
 msgstr "Liste der zuletzt geöffneten Dokumente löschen"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:106
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:99
 msgid ""
 "If you clear the Recent Documents list, you clear the following:\n"
 "• All items from the Places → Recent Documents menu item.\n"
@@ -1517,21 +1534,22 @@ msgid "T_omorrow"
 msgstr "_Morgen"
 
 #. draw humidity
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:328
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:410
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:496
 #, csharp-format
 msgid "{0} humidity"
 msgstr "{0} Luftfeuchtigkeit"
 
-#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:70
-#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:220
+#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:71
+#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:221
 msgid "Switch Desks"
 msgstr "Arbeitsfläche wechseln"
 
-#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:171
+#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:172
 msgid "Desk"
 msgstr "Arbeitsfläche"
 
-#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:173
+#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:174
 msgid "Virtual Desk"
 msgstr "Virtuelle Arbeitsfläche"
 

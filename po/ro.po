@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-01-05 06:53-0600\n"
+"POT-Creation-Date: 2011-03-03 00:41+0100\n"
 "PO-Revision-Date: 2011-01-13 06:46+0000\n"
 "Last-Translator: Rico Tzschichholz <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2011-02-26 14:08+0000\n"
-"X-Generator: Launchpad (build 12460)\n"
+"X-Launchpad-Export-Date: 2011-03-05 07:32+0000\n"
+"X-Generator: Launchpad (build 12515)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -92,6 +92,10 @@ msgid "GMail username"
 msgstr "Nume de utilizator GMail"
 
 #: ../data/docky.schemas.in.h:18
+msgid "Hot-area padding"
+msgstr ""
+
+#: ../data/docky.schemas.in.h:19
 msgid ""
 "How long the urgent indicator glow animation is (in seconds), 0 to disable, "
 "or -1 for infinite."
@@ -99,21 +103,21 @@ msgstr ""
 "Cât timp să strălucească indicatorul de urgență (în secunde), 0 pentru "
 "dezactivare, sau -1 pentru infinit."
 
-#: ../data/docky.schemas.in.h:19
+#: ../data/docky.schemas.in.h:20
 msgid "How long to wait (ms) before unhiding"
 msgstr "Cât timp să se aștepte (în milisecunde) până la reapariție"
 
-#: ../data/docky.schemas.in.h:20
+#: ../data/docky.schemas.in.h:21
 msgid "How long to wait (ms) to update after a window switch"
 msgstr ""
 "Cât timp să se aștepte (în milisecunde) până la reactualizare după o "
 "comutare de fereastră"
 
-#: ../data/docky.schemas.in.h:21
+#: ../data/docky.schemas.in.h:22
 msgid "How many recent clipboard selections to show."
 msgstr "Câte selecții recente de clipboard să fie afișate."
 
-#: ../data/docky.schemas.in.h:22
+#: ../data/docky.schemas.in.h:23
 msgid ""
 "How much to shift the color of the urgent indicator. The value can be from -"
 "180 to 180."
@@ -121,23 +125,23 @@ msgstr ""
 "Cât de mult să se schimbe culoarea indicatorului de urgență. Valoarea poate "
 "varia de la -180 până la 180"
 
-#: ../data/docky.schemas.in.h:23
+#: ../data/docky.schemas.in.h:24
 msgid "How often (in mins) to check for new mail."
 msgstr "Cât de des (în minute) se verifică emailul."
 
-#: ../data/docky.schemas.in.h:24
+#: ../data/docky.schemas.in.h:25
 msgid "How often to check"
 msgstr "Cât de des se verifică"
 
-#: ../data/docky.schemas.in.h:25
+#: ../data/docky.schemas.in.h:26
 msgid "How often to check for new weather information."
 msgstr "Cât de des să se verifice informațiile legate de vreme."
 
-#: ../data/docky.schemas.in.h:26
+#: ../data/docky.schemas.in.h:27
 msgid "How often to poll (in ms) for new clipboard data."
 msgstr "Cât de des să se sondeze noi date clipboard."
 
-#: ../data/docky.schemas.in.h:27
+#: ../data/docky.schemas.in.h:28
 msgid ""
 "If fading when hiding, this is the opacity the dock fades to. 1 is solid, 0 "
 "is invisible."
@@ -145,7 +149,7 @@ msgstr ""
 "Dacă se decolorează la ascundere, se va ajunge la următorul grad de "
 "opacitate al docului. 1 pentru culoare solidă, 0 pentru invizibilitate."
 
-#: ../data/docky.schemas.in.h:28
+#: ../data/docky.schemas.in.h:29
 msgid ""
 "If false, Docky will not show hover texts for launchers (but still show for "
 "plugins)."
@@ -153,19 +157,19 @@ msgstr ""
 "În caz contrar, Docky nu va arăta texte de planare pentru lansatoarele de "
 "programe (dar tot le va arăta pentru module)."
 
-#: ../data/docky.schemas.in.h:29
+#: ../data/docky.schemas.in.h:30
 msgid "If false, finished timers will reset instead of dismiss."
 msgstr ""
 "În caz contrar, cronometrele care au terminat se vor reseta în loc să se "
 "dizolve."
 
-#: ../data/docky.schemas.in.h:30
+#: ../data/docky.schemas.in.h:31
 msgid ""
 "If false, prevents dropping items onto the dock to add them to the dock."
 msgstr ""
 "În caz contrar, se interzice aruncarea elementelor în doc pentru a le adăuga."
 
-#: ../data/docky.schemas.in.h:31
+#: ../data/docky.schemas.in.h:32
 msgid ""
 "If the 'Pin to Dock' option should show in the menu of items, allowing you "
 "to add it permanently to the dock."
@@ -173,21 +177,21 @@ msgstr ""
 "Dacă opțiunea 'Fixare la doc' apare în meniul de elemente, permițându-vă să "
 "o adaugați permanent în doc."
 
-#: ../data/docky.schemas.in.h:32
+#: ../data/docky.schemas.in.h:33
 msgid "If the dock is a panel"
 msgstr "Dacă docul este un panou"
 
-#: ../data/docky.schemas.in.h:33
+#: ../data/docky.schemas.in.h:34
 msgid ""
 "If true, Docky will only show windows on the currently active desktop."
 msgstr ""
 "În acest caz, Docky va afișa doar ferestrele din desktopul curent activ."
 
-#: ../data/docky.schemas.in.h:34
+#: ../data/docky.schemas.in.h:35
 msgid "If true, all new timers will automatically start."
 msgstr "În acest caz, toate noile cronometre vor porni automat."
 
-#: ../data/docky.schemas.in.h:35
+#: ../data/docky.schemas.in.h:36
 msgid ""
 "If true, any windows without launchers will show on this dock. Exactly 1 "
 "dock must have this set to true."
@@ -195,7 +199,7 @@ msgstr ""
 "În acest caz, orice ferestre fără lansator vor apărea pe doc. Un doc trebuie "
 "sa aibă această opțiune activă"
 
-#: ../data/docky.schemas.in.h:36
+#: ../data/docky.schemas.in.h:37
 msgid ""
 "If true, items with more than one window have two indicator dots instead of "
 "just one dot."
@@ -203,13 +207,13 @@ msgstr ""
 "În acest caz, elementele cu mai mult de o fereastră au doua puncte indicator "
 "în loc de unul."
 
-#: ../data/docky.schemas.in.h:37
+#: ../data/docky.schemas.in.h:38
 msgid "If true, locks all items on all docks so they can't be dragged."
 msgstr ""
 "În acest caz, se blochează toate elementele de pe toate docurile,în așa fel "
 "încât să nu poată fi mutate."
 
-#: ../data/docky.schemas.in.h:38
+#: ../data/docky.schemas.in.h:39
 msgid ""
 "If true, output from the helpers will be redirected to show in Docky's "
 "output."
@@ -217,45 +221,45 @@ msgstr ""
 "În acest caz, rezultatul asistenței va fi redirecționat pentru a apărea în "
 "ieșirea docului."
 
-#: ../data/docky.schemas.in.h:39
+#: ../data/docky.schemas.in.h:40
 msgid "If true, show the digital clock otherwise show the analog clock."
 msgstr "În acest caz, se arată ceasul digital dacă nu, cel analog."
 
-#: ../data/docky.schemas.in.h:40
+#: ../data/docky.schemas.in.h:41
 msgid "If true, shows a notify message for new unread mail."
 msgstr ""
 "În acest caz, se arată un mesaj de notificare pentru un email necitit."
 
-#: ../data/docky.schemas.in.h:41
+#: ../data/docky.schemas.in.h:42
 msgid "If true, shows the Docky item on the dock managing windows."
 msgstr ""
 "În acest caz, se arată elementul Docky în ferestrele de gestionare ale "
 "docului."
 
-#: ../data/docky.schemas.in.h:42
+#: ../data/docky.schemas.in.h:43
 msgid "If true, shows time in 24-hr format."
 msgstr "În acest caz, se afișează timpul în format de 24 de ore."
 
-#: ../data/docky.schemas.in.h:43
+#: ../data/docky.schemas.in.h:44
 msgid "If true, the Docky item popup menu shows the Quit option."
 msgstr ""
 "În acest caz, meniul contextual de elemente Docky va arăta opțiunea Ieșire."
 
-#: ../data/docky.schemas.in.h:44
+#: ../data/docky.schemas.in.h:45
 msgid "If true, the Docky item popup menu shows the Settings option."
 msgstr ""
 "În acest caz, meniul contextual de elemente Docky va arăta opțiunea "
 "Preferințe."
 
-#: ../data/docky.schemas.in.h:45
+#: ../data/docky.schemas.in.h:46
 msgid "If true, the date should show on the digital clock."
 msgstr "În acest caz, data ar trebui să apară pe ceasul digital."
 
-#: ../data/docky.schemas.in.h:46
+#: ../data/docky.schemas.in.h:47
 msgid "If true, the dock is drawn as a 3d dock."
 msgstr "În acest caz, docul este desenat ca un doc 3d."
 
-#: ../data/docky.schemas.in.h:47
+#: ../data/docky.schemas.in.h:48
 msgid ""
 "If true, the dock is in panel mode and will extend to fill the entire screen "
 "edge."
@@ -263,11 +267,11 @@ msgstr ""
 "În acest caz, docul este în modul panou și se va extinde pentru a umple "
 "întreaga margine a ecranului."
 
-#: ../data/docky.schemas.in.h:48
+#: ../data/docky.schemas.in.h:49
 msgid "If true, the dock will zoom when hovered."
 msgstr "În acest caz, docul se va mări la planare."
 
-#: ../data/docky.schemas.in.h:49
+#: ../data/docky.schemas.in.h:50
 msgid ""
 "If true, this is the first time Docky has run. Internal use only - Do not "
 "change!"
@@ -275,11 +279,11 @@ msgstr ""
 "În acest caz, aceasta este prima dată când a rulat Docky. Doar uz intern - "
 "Nu schimbați!"
 
-#: ../data/docky.schemas.in.h:50
+#: ../data/docky.schemas.in.h:51
 msgid "If true, timers will disappear when they time out."
 msgstr "În acest caz, cronometrele vor dispărea când timpul s-a terminat."
 
-#: ../data/docky.schemas.in.h:51
+#: ../data/docky.schemas.in.h:52
 msgid ""
 "If true, tracks the mouse selection clipboard. If false, tracks the "
 "secondary clipboard."
@@ -287,154 +291,154 @@ msgstr ""
 "În acest caz, se urmărește clipboardul cu selecția mausului. în caz contrar, "
 "se urmărește clipboardul secundar."
 
-#: ../data/docky.schemas.in.h:52
+#: ../data/docky.schemas.in.h:53
 msgid "If true, use metric units when showing weather."
 msgstr ""
 "În acest caz, se folosesc unități metrice pentru a descrie starea vremii."
 
-#: ../data/docky.schemas.in.h:53
+#: ../data/docky.schemas.in.h:54
 msgid ""
 "If true, when the dock hides it will fade away instead of sliding off screen."
 msgstr ""
 "În acest caz, când docul se ascunde, se va decolora în loc să gliseze de pe "
 "ecran."
 
-#: ../data/docky.schemas.in.h:54
+#: ../data/docky.schemas.in.h:55
 msgid ""
 "If true, when there is new unread mail Docky will show the indicator dot."
 msgstr ""
 "În acest caz, dacă se găsește un nou email, Docky va afișa punctul indicator."
 
-#: ../data/docky.schemas.in.h:55
+#: ../data/docky.schemas.in.h:56
 msgid "If true, will try to show the most recent document on the dock."
 msgstr ""
 "În acest caz, se va încerca afișarea celor mai recente documente din doc."
 
-#: ../data/docky.schemas.in.h:56
+#: ../data/docky.schemas.in.h:57
 msgid "Indicate when items have more than one window"
 msgstr "Arată că elementele au mai mult de o fereastră"
 
-#: ../data/docky.schemas.in.h:57
+#: ../data/docky.schemas.in.h:58
 msgid "Last time checked"
 msgstr "Ultima verificare"
 
-#: ../data/docky.schemas.in.h:58
+#: ../data/docky.schemas.in.h:59
 msgid "List of NPR stations to display."
 msgstr "Listă cu stații NPR pentru afișare."
 
-#: ../data/docky.schemas.in.h:59
+#: ../data/docky.schemas.in.h:60
 msgid "List of active docks"
 msgstr "Listă cu docuri active"
 
-#: ../data/docky.schemas.in.h:60
+#: ../data/docky.schemas.in.h:61
 msgid "List of custom GMail labels to check in addition to the inbox."
 msgstr ""
 "Listă cu etichete GMail customizate pentru a verifica în plus fată de căsuța "
 "de primire."
 
-#: ../data/docky.schemas.in.h:61
+#: ../data/docky.schemas.in.h:62
 msgid "List of launchers"
 msgstr "Listă cu lansatoare de aplicații"
 
-#: ../data/docky.schemas.in.h:62
+#: ../data/docky.schemas.in.h:63
 msgid "Max Entries"
 msgstr "Înregistrări maxime"
 
-#: ../data/docky.schemas.in.h:63
+#: ../data/docky.schemas.in.h:64
 msgid "NPR stations"
 msgstr "Stații NPR"
 
-#: ../data/docky.schemas.in.h:64
+#: ../data/docky.schemas.in.h:65
 msgid "New timer length"
 msgstr "Durată nouă de cronometru"
 
-#: ../data/docky.schemas.in.h:65
+#: ../data/docky.schemas.in.h:66
 msgid "Number of recent docs"
 msgstr "Numărul documentelor recente"
 
-#: ../data/docky.schemas.in.h:66
+#: ../data/docky.schemas.in.h:67
 msgid "Opacity to fade to"
 msgstr "Opacitatea să se decoloreze în"
 
-#: ../data/docky.schemas.in.h:67
+#: ../data/docky.schemas.in.h:68
 msgid "Plugins on this dock"
 msgstr "Module în acest doc"
 
-#: ../data/docky.schemas.in.h:68
+#: ../data/docky.schemas.in.h:69
 msgid "Prevent adding items by drops"
 msgstr "Interzice adăugarea elementelor din greșeală"
 
-#: ../data/docky.schemas.in.h:69
+#: ../data/docky.schemas.in.h:70
 msgid "Redirect helper output to Docky's output"
 msgstr "Redirecționează rezultatul asistenței către ieșirea Docky"
 
-#: ../data/docky.schemas.in.h:70
+#: ../data/docky.schemas.in.h:71
 msgid "Set the color of the Docky icon. 0 means use the GTK+ theme color."
 msgstr ""
 "Setează culoarea iconiței Docky. 0 desemnează folosirea culorii din tema "
 "GTK+."
 
-#: ../data/docky.schemas.in.h:71
+#: ../data/docky.schemas.in.h:72
 msgid "Show 'Pin to Dock' for items"
 msgstr "Afișează opțiunea 'Fixează în doc' pentru elemente"
 
-#: ../data/docky.schemas.in.h:72
+#: ../data/docky.schemas.in.h:73
 msgid "Show Quit in Docky item menu"
 msgstr "Afișează opțiunea Ieșire în meniul de elemente Docky"
 
-#: ../data/docky.schemas.in.h:73
+#: ../data/docky.schemas.in.h:74
 msgid "Show Settings in Docky item menu"
 msgstr "Afișează opțiunea Preferințe în meniul de elemente Docky"
 
-#: ../data/docky.schemas.in.h:74
+#: ../data/docky.schemas.in.h:75
 msgid "Show a notify for unread mail"
 msgstr "Afișează o notificare pentru emailuri necitite."
 
-#: ../data/docky.schemas.in.h:75
+#: ../data/docky.schemas.in.h:76
 msgid "Show date"
 msgstr "Afișare dată"
 
-#: ../data/docky.schemas.in.h:76
+#: ../data/docky.schemas.in.h:77
 msgid "Show hover text labels for launchers"
 msgstr "Afișează etichetele din textele de planare pentru lansatoare"
 
-#: ../data/docky.schemas.in.h:77
+#: ../data/docky.schemas.in.h:78
 msgid "Show indicator dot for unread mail"
 msgstr "Afișează punctul indicator pentru emailuri necitite"
 
-#: ../data/docky.schemas.in.h:78
+#: ../data/docky.schemas.in.h:79
 msgid "Show most recent doc"
 msgstr "Afișează cele mai recente documente"
 
-#: ../data/docky.schemas.in.h:79
+#: ../data/docky.schemas.in.h:80
 msgid "Show the Docky item"
 msgstr "Afișează elementul Docky"
 
-#: ../data/docky.schemas.in.h:80
+#: ../data/docky.schemas.in.h:81
 msgid "Show the digital clock"
 msgstr "Afișează ceasul digital"
 
-#: ../data/docky.schemas.in.h:81
+#: ../data/docky.schemas.in.h:82
 msgid "Show windows from only current desktop"
 msgstr "Afișează ferestrele doar din desktopul curent"
 
-#: ../data/docky.schemas.in.h:82
+#: ../data/docky.schemas.in.h:83
 msgid "Sorts the items on the dock"
 msgstr "Sortează elementele din doc"
 
-#: ../data/docky.schemas.in.h:83
+#: ../data/docky.schemas.in.h:84
 msgid "Start all new timers"
 msgstr "Începe cronometrări noi"
 
-#: ../data/docky.schemas.in.h:84
+#: ../data/docky.schemas.in.h:85
 msgid "Stop items from dragging"
 msgstr "Interzice tragerea elementelor"
 
-#: ../data/docky.schemas.in.h:85
+#: ../data/docky.schemas.in.h:86
 msgid "The GMail username to check."
 msgstr "Numele utilizator GMail pentru verificare"
 
-#: ../data/docky.schemas.in.h:86
+#: ../data/docky.schemas.in.h:87
 msgid ""
 "The command to execute when left-clicking the Docky item or \"\" for default "
 "behavior (which opens the configuration dialog)."
@@ -442,19 +446,19 @@ msgstr ""
 "Comanda care se execută la clic stânga pe un element al docului sau „” "
 "pentru comportamentul implicit (ce deschide fereastra de dialog)"
 
-#: ../data/docky.schemas.in.h:87
+#: ../data/docky.schemas.in.h:88
 msgid "The current theme"
 msgstr "Tema curenta"
 
-#: ../data/docky.schemas.in.h:88
+#: ../data/docky.schemas.in.h:89
 msgid "The currently selected item in the session manager menu."
 msgstr "Elementul curent selectat în meniul de administrare al sesiunii."
 
-#: ../data/docky.schemas.in.h:89
+#: ../data/docky.schemas.in.h:90
 msgid "The default time (in secs) for any new timers."
 msgstr "Timpul implicit (în secunde) pentru un nou cronometru."
 
-#: ../data/docky.schemas.in.h:90
+#: ../data/docky.schemas.in.h:91
 msgid ""
 "The dock's hide mode. Possible values are: None, Autohide, Intellihide, "
 "UniversalIntellihide"
@@ -462,66 +466,71 @@ msgstr ""
 "Mod de ascundere al docului. Opțiunile posibile sunt: Nimic, Ascundere-"
 "automată, Ascundere-inteligentă, Ascundere-universal-inteligentă"
 
-#: ../data/docky.schemas.in.h:91
+#: ../data/docky.schemas.in.h:92
 msgid "The dock's position"
 msgstr "Poziția docului"
 
-#: ../data/docky.schemas.in.h:92
+#: ../data/docky.schemas.in.h:93
 msgid ""
 "The dock's position on the screen. Possible values are: Bottom, Top, Left, "
 "Right"
 msgstr ""
 "Poziția docului pe ecran. Opțiunile posibile sunt: Jos, Sus, Stânga, Dreapta"
 
-#: ../data/docky.schemas.in.h:93
+#: ../data/docky.schemas.in.h:94
 msgid "The dock's zoom size (if enabled), as a percent."
 msgstr "Dimensiunea de focalizare (Dacă este activată), ca procent."
 
-#: ../data/docky.schemas.in.h:94
+#: ../data/docky.schemas.in.h:95
 msgid "The last time Docky checked GMail for messages."
 msgstr "Ultima verificare a mesajelor GMail."
 
-#: ../data/docky.schemas.in.h:95
+#: ../data/docky.schemas.in.h:96
 msgid "The list of weather locations to check."
 msgstr "Listă de locații meteo de verificat."
 
-#: ../data/docky.schemas.in.h:96
+#: ../data/docky.schemas.in.h:97
 msgid "The name of the current Docky theme."
 msgstr "Numele temei curente Docky"
 
-#: ../data/docky.schemas.in.h:97
+#: ../data/docky.schemas.in.h:98
 msgid "The name of the weather source to get weather information from."
 msgstr "Numele sursei meteo pentru a obține informații despre vreme."
 
-#: ../data/docky.schemas.in.h:98
+#: ../data/docky.schemas.in.h:99
+msgid ""
+"The number of extra pixels to pad the hover area on the top of the dock."
+msgstr ""
+
+#: ../data/docky.schemas.in.h:100
 msgid "The number of most recent documents to show."
 msgstr "Numărul celor mai recente documente pentru a le afișa."
 
-#: ../data/docky.schemas.in.h:99
+#: ../data/docky.schemas.in.h:101
 msgid "The size of icons on the dock."
 msgstr "Dimensiunea iconițelor din doc."
 
-#: ../data/docky.schemas.in.h:100
+#: ../data/docky.schemas.in.h:102
 msgid "The text to show when hovering the Docky item."
 msgstr "Textul ce se va afișa la aplanarea elementul Docky"
 
-#: ../data/docky.schemas.in.h:101
+#: ../data/docky.schemas.in.h:103
 msgid "The theme for the analog clock."
 msgstr "Tema pentru ceasul analog."
 
-#: ../data/docky.schemas.in.h:102
+#: ../data/docky.schemas.in.h:104
 msgid "The weather source"
 msgstr "Sursa meteo"
 
-#: ../data/docky.schemas.in.h:103
+#: ../data/docky.schemas.in.h:105
 msgid "This is the list of all the launchers on this dock."
 msgstr "Aceasta este lista tuturor lansatoarelor din doc."
 
-#: ../data/docky.schemas.in.h:104
+#: ../data/docky.schemas.in.h:106
 msgid "This is the monitor the dock exists on."
 msgstr "Acesta este monitorul pe care se află docul."
 
-#: ../data/docky.schemas.in.h:105
+#: ../data/docky.schemas.in.h:107
 msgid ""
 "This is the time (in milliseconds) to wait before unhiding a hidden dock "
 "when the cursor moves over it."
@@ -529,7 +538,7 @@ msgstr ""
 "Acesta este timpul (în milisecunde) pe care trebuie să îl așteptați până la "
 "dezvăluirea unui doc ascuns, la trecerea cu mausul peste el."
 
-#: ../data/docky.schemas.in.h:106
+#: ../data/docky.schemas.in.h:108
 msgid ""
 "This is the time (in milliseconds) to wait to determine if a window switch "
 "causes a (un)hide."
@@ -537,73 +546,77 @@ msgstr ""
 "Acesta este timpul (în milisecunde) pe care trebuie să îl așteptați pentru a "
 "determina dacă o comutare de fereastră cauzează o ascundere(dezvăluire)."
 
-#: ../data/docky.schemas.in.h:107
+#: ../data/docky.schemas.in.h:109
 msgid "This lists all the currently active (displayed) docks, by name."
 msgstr ""
 "Această opțiune listează toate docurile active (afișate) momentan, după nume."
 
-#: ../data/docky.schemas.in.h:108
+#: ../data/docky.schemas.in.h:110
 msgid "Timer Delay"
 msgstr "Întârziere a cronometrului"
 
-#: ../data/docky.schemas.in.h:109
+#: ../data/docky.schemas.in.h:111
 msgid "Track Mouse Selections"
 msgstr "Urmărește selecțiile mausului"
 
-#: ../data/docky.schemas.in.h:110
+#: ../data/docky.schemas.in.h:112
 msgid "Urgent indicator color shift"
 msgstr "Schimbare de culoare a indicatorului de urgență"
 
-#: ../data/docky.schemas.in.h:111
+#: ../data/docky.schemas.in.h:113
 msgid "Urgent indicator glow animation time (in seconds)"
 msgstr ""
 "Timpul de animație (în secunde) al strălucirii indicatorului de urgență"
 
-#: ../data/docky.schemas.in.h:112
+#: ../data/docky.schemas.in.h:114
 msgid "Use 24-hr time"
 msgstr "Utilizează formatul de 24 ore"
 
-#: ../data/docky.schemas.in.h:113
+#: ../data/docky.schemas.in.h:115
 msgid "Use metric units"
 msgstr "Utilizează sistemul metric"
 
-#: ../data/docky.schemas.in.h:114
+#: ../data/docky.schemas.in.h:116
 msgid "Used to sort the items on the dock."
 msgstr "Folosit pentru a sorta elementele din doc."
 
-#: ../data/docky.schemas.in.h:115
+#: ../data/docky.schemas.in.h:117
 msgid "Weather locations"
 msgstr "Locații meteo"
 
-#: ../data/docky.schemas.in.h:116
+#: ../data/docky.schemas.in.h:118
 msgid "Which monitor the dock is on"
 msgstr "Pe care monitor se află docul"
 
-#: ../data/docky.schemas.in.h:117
+#: ../data/docky.schemas.in.h:119
 msgid "Zoom size"
 msgstr "Dimensiunea apropierii"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:148
+#: ../Docky/Docky/ConfigurationWindow.cs:269
 msgid "Search Docklets..."
 msgstr "Caută Docklets..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:164
+#: ../Docky/Docky/ConfigurationWindow.cs:286
 msgid "Search Helpers..."
 msgstr "Caută Ajutători..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:228
+#: ../Docky/Docky/ConfigurationWindow.cs:363
 msgid "Click on any dock to configure."
 msgstr "Clic pe orice dock pentru configurare."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:229
+#: ../Docky/Docky/ConfigurationWindow.cs:364
 msgid "Drag any dock to reposition."
 msgstr "Trage orice dock pentru repoziționare."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:294
+#: ../Docky/Docky/ConfigurationWindow.cs:385
+msgid "Helpers require DockManager be installed."
+msgstr ""
+
+#: ../Docky/Docky/ConfigurationWindow.cs:457
 msgid "Delete the currently selected dock?"
 msgstr "Ştergi dock-ul curent selectat?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:296
+#: ../Docky/Docky/ConfigurationWindow.cs:459
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -611,18 +624,18 @@ msgstr ""
 "Dacă alegi sa ștergi dock-ul, toate setările\n"
 "pentru acest dock vor fi pierdute permanent."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:303
+#: ../Docky/Docky/ConfigurationWindow.cs:466
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
 msgstr "_Șterge Dock"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:419
-#: ../Docky/Docky/ConfigurationWindow.cs:439
+#: ../Docky/Docky/ConfigurationWindow.cs:582
+#: ../Docky/Docky/ConfigurationWindow.cs:602
 msgid "_Select"
 msgstr "_Selectați"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:422
-#: ../Docky/Docky/ConfigurationWindow.cs:442
+#: ../Docky/Docky/ConfigurationWindow.cs:585
+#: ../Docky/Docky/ConfigurationWindow.cs:605
 msgid ".tar Archives"
 msgstr "Arhive .tar"
 
@@ -698,7 +711,7 @@ msgstr "Pornit"
 msgid "Stopped"
 msgstr "Oprit"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:327
+#: ../Docky/Docky/Interface/DockPreferences.cs:345
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
@@ -706,29 +719,29 @@ msgstr ""
 "Când setat, ferestrele care nu au deja lansatoare în dock vor fi adăugate la "
 "acest dock."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:679
+#: ../Docky/Docky/Interface/DockPreferences.cs:727
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
 "<i>Nu ascunde niciodată; ferestrele maximizate nu vor acoperii dock-ul.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:682
+#: ../Docky/Docky/Interface/DockPreferences.cs:730
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Ascunde când mouse-ul nu este pe el.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:685
+#: ../Docky/Docky/Interface/DockPreferences.cs:733
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Ascunde când dock-ul obstrucționează aplicația activă.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:688
+#: ../Docky/Docky/Interface/DockPreferences.cs:736
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Ascunde când dock-ul obstrucționează orice fereastră.</i>"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:378
+#: ../Docky/Docky/Interface/DockWindow.cs:380
 msgid "Drag to reposition"
 msgstr "Trage pentru a repoziţiona"
 
-#: ../Docky/Docky/Interface/DockWindow.cs:390
-#: ../Docky/Docky/Interface/DockWindow.cs:404
+#: ../Docky/Docky/Interface/DockWindow.cs:392
+#: ../Docky/Docky/Interface/DockWindow.cs:406
 msgid "Drop to add to dock"
 msgstr "Aruncă pentru a adăuga la dock"
 
@@ -1100,7 +1113,7 @@ msgstr "Nume utilizator invalid"
 msgid "Network Error"
 msgstr "Eroare de reţea"
 
-#: ../StandardPlugins/GMail/src/GMailAtom.cs:295
+#: ../StandardPlugins/GMail/src/GMailAtom.cs:296
 msgid "General Error"
 msgstr "Eroare generală"
 
@@ -1186,6 +1199,10 @@ msgstr "Deconectat"
 msgid "Connected: {0}"
 msgstr "Conectat: {0}"
 
+#: ../StandardPlugins/NetworkMonitor/src/NetworkMonitorDockItem.cs:61
+msgid "No network connection available"
+msgstr ""
+
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:47
 msgid "My _Stations"
 msgstr "_Stațiile mele"
@@ -1231,19 +1248,19 @@ msgstr "Fluxuri în direct"
 msgid "Settings"
 msgstr "Configurări"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:91
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:84
 msgid "_Clear Recent Documents..."
 msgstr "_Curăţă documentele recente..."
 
-#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:102
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:95
 msgid "Clear the Recent Documents list?"
 msgstr "Curăță lista documentelor recente?"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:104
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:97
 msgid "Clear Recent Documents"
 msgstr "Curăță documentele recente"
 
-#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:106
+#: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:99
 msgid ""
 "If you clear the Recent Documents list, you clear the following:\n"
 "• All items from the Places → Recent Documents menu item.\n"
@@ -1511,21 +1528,22 @@ msgid "T_omorrow"
 msgstr "_Mâine"
 
 #. draw humidity
-#: ../StandardPlugins/Weather/src/WeatherPainter.cs:328
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:410
+#: ../StandardPlugins/Weather/src/WeatherPainter.cs:496
 #, csharp-format
 msgid "{0} humidity"
 msgstr "{0} umiditate"
 
-#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:70
-#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:220
+#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:71
+#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:221
 msgid "Switch Desks"
 msgstr "Comută birourile"
 
-#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:171
+#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:172
 msgid "Desk"
 msgstr "Birou"
 
-#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:173
+#: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:174
 msgid "Virtual Desk"
 msgstr "Birou virtual"
 
