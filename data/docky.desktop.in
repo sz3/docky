@@ -5,4 +5,5 @@ Exec=docky
 Terminal=false
 Icon=docky
 _Comment=The finest dock no money can buy.
+NoDisplay=false
 Categories=Utility;
