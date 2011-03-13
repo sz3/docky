@@ -117,7 +117,7 @@ namespace Docky.Painters
 						ShowBuffer (surface, LastPage, offset);
 					} else {
 						ShowBuffer (surface, Page, Allocation.Width - offset);
-						ShowBuffer (surface, LastPage, 0 - offset);
+						ShowBuffer (surface, LastPage, -offset);
 					}
 					
 					// fade out the edges during a slide

@@ -543,15 +543,15 @@ namespace Docky.Menus
 				switch (Orientation) {
 				case DockPosition.Top:
 					cr.Scale (1, -1);
-					cr.Translate (0, 0 - background_buffer.Height);
+					cr.Translate (0, -background_buffer.Height);
 					break;
 				case DockPosition.Left:
 					cr.Rotate (Math.PI * .5);
-					cr.Translate (0, 0 - background_buffer.Height);
+					cr.Translate (0, -background_buffer.Height);
 					break;
 				case DockPosition.Right:
 					cr.Rotate (Math.PI * -0.5);
-					cr.Translate (0 - background_buffer.Width, 0);
+					cr.Translate (-background_buffer.Width, 0);
 					break;
 				}
 				

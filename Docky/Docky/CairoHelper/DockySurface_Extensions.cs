@@ -44,15 +44,15 @@ namespace Docky.CairoHelper
 			double cos, sin;
 			cos = Math.Cos (rotation);
 			sin = Math.Sin (rotation);
-			Matrix m = new Matrix (cos, sin, 0 - sin, cos, point.X, point.Y);
+			Matrix m = new Matrix (cos, sin, -sin, cos, point.X, point.Y);
 			cr.Transform (m);
 			
 			if (zoom != 1)
 				cr.Scale (zoom, zoom);
 			
 			cr.SetSource (self.Internal,
-				0 - self.Width / 2, 
-				0 - self.Height / 2);
+				-self.Width / 2, 
+				-self.Height / 2);
 			
 			cr.PaintWithAlpha (opacity);
 			
@@ -85,7 +85,7 @@ namespace Docky.CairoHelper
 			double cos, sin;
 			cos = Math.Cos (rotation);
 			sin = Math.Sin (rotation);
-			Matrix m = new Matrix (cos, sin, 0 - sin, cos, point.X, point.Y);
+			Matrix m = new Matrix (cos, sin, -sin, cos, point.X, point.Y);
 			cr.Transform (m);
 			
 			if (zoom != 1)
@@ -97,8 +97,8 @@ namespace Docky.CairoHelper
 				cr.Scale (1, -1);
 			
 			cr.SetSource (self.Internal, 
-				0 - self.Width / 2, 
-				0 - self.Height / 2);
+				-self.Width / 2, 
+				-self.Height / 2);
 			
 			cr.PaintWithAlpha (opacity * .3);
 			

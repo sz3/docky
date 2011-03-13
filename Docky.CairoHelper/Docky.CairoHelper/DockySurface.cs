@@ -150,7 +150,7 @@ namespace Docky.CairoHelper
 		{
 			DockySurface result = new DockySurface (area.Width, area.Height, this);
 			
-			Internal.Show (result.Context, 0 - area.X, 0 - area.Y);
+			Internal.Show (result.Context, -area.X, -area.Y);
 			
 			return result;
 		}

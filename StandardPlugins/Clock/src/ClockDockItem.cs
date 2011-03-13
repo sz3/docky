@@ -388,20 +388,20 @@ namespace Clock
 			double minuteRotation = 2 * Math.PI * (DateTime.Now.Minute / 60.0) + Math.PI;
 			cr.Rotate (minuteRotation);
 			cr.MoveTo (0, radius - radius * .35);
-			cr.LineTo (0, 0 - radius * .15);
+			cr.LineTo (0, -radius * .15);
 			cr.Stroke ();
-			cr.Rotate (0 - minuteRotation);
+			cr.Rotate (-minuteRotation);
 			
 			cr.Color = new Cairo.Color (0, 0, 0);
 			double hourRotation = 2 * Math.PI * (DateTime.Now.Hour / (ShowMilitary ? 24.0 : 12.0)) + 
 					Math.PI + (Math.PI / (ShowMilitary ? 12.0 : 6.0)) * DateTime.Now.Minute / 60.0;
 			cr.Rotate (hourRotation);
 			cr.MoveTo (0, radius - radius * .5);
-			cr.LineTo (0, 0 - radius * .15);
+			cr.LineTo (0, -radius * .15);
 			cr.Stroke ();
-			cr.Rotate (0 - hourRotation);
+			cr.Rotate (-hourRotation);
 			
-			cr.Translate (0 - center, 0 - center);
+			cr.Translate (-center, -center);
 			
 			RenderFileOntoContext (cr, System.IO.Path.Combine (ThemePath, "clock-glass.svg"), radius * 2);
 			RenderFileOntoContext (cr, System.IO.Path.Combine (ThemePath, "clock-frame.svg"), radius * 2);
