@@ -94,9 +94,10 @@ namespace Docky
 			this.SetCompositeColormap ();
 			Stick ();
 			
-			// why 1? because Compiz sucks... thats why!
-			Move (0, 1);
-			SetSizeRequest (Screen.Width, Screen.Height - 1);
+			// make the window extend off screen in all directions
+			// to work around problems with struts
+			Move (-50, -50);
+			SetSizeRequest (Screen.Width + 100, Screen.Height + 100);
 		}
 		
 		void HandleRealized (object sender, EventArgs e)
