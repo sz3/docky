@@ -539,7 +539,7 @@ namespace Docky.Interface
 				EnableDragTo ();
 			} else if ((Owner.CursorTracker.Modifier & ModifierType.Button1Mask) == ModifierType.Button1Mask) {
 				Gdk.Window bestProxy = BestProxyWindow ();
-				if (proxy_window != null && proxy_window != bestProxy) {
+				if (bestProxy != null && proxy_window != bestProxy) {
 					proxy_window = bestProxy;
 					Gtk.Drag.DestSetProxy (Owner, proxy_window, DragProtocol.Xdnd, true);
 				}
