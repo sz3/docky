@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Docky.Items;
 
@@ -38,9 +39,13 @@ namespace NetworkManagerDocklet
 		
 		public NetworkManagerItemProvider ()
 		{
-			manager = new NetworkManagerDocklet ();
-			
-			Items = manager.AsSingle<AbstractDockItem> ();
+			try {
+				manager = new NetworkManagerDocklet ();
+				
+				Items = manager.AsSingle<AbstractDockItem> ();
+			} catch {
+				Items = Enumerable.Empty<AbstractDockItem> ();
+			}
 		}
 	}
 }
