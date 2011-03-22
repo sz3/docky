@@ -100,7 +100,7 @@ namespace Docky.Items
 			
 			if (newItem != null) {
 				newItem.Position = position;
-				foreach (AbstractDockItem item in Items.Where (adi => adi.Position >= position))
+				foreach (AbstractDockItem item in Items.Where (adi => adi != newItem && adi.Position >= newItem.Position))
 					item.Position++;
 			}
 			
