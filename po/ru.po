@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-03 00:41+0100\n"
-"PO-Revision-Date: 2011-02-26 07:59+0000\n"
-"Last-Translator: Alexey Ivanov <alexey.ivanes@gmail.com>\n"
+"PO-Revision-Date: 2011-04-02 16:49+0000\n"
+"Last-Translator: Pavel <kitchenknif@Gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-03-05 07:32+0000\n"
-"X-Generator: Launchpad (build 12515)\n"
+"X-Launchpad-Export-Date: 2011-04-06 16:57+0000\n"
+"X-Generator: Launchpad (build 12735)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -73,7 +73,7 @@ msgstr "выполняемая команда объекта Docky"
 
 #: ../data/docky.schemas.in.h:13
 msgid "Docky item hover text"
-msgstr ""
+msgstr "Текст всплывающий подсказки объекта Docky"
 
 #: ../data/docky.schemas.in.h:14
 msgid "Docky item hue"
@@ -95,7 +95,7 @@ msgstr "Имя пользователя GMail"
 msgid "Hot-area padding"
 msgstr ""
 
-#: ../data/docky.schemas.in.h:19
+#: ../data/docky.schemas.in.h:18
 msgid ""
 "How long the urgent indicator glow animation is (in seconds), 0 to disable, "
 "or -1 for infinite."
@@ -103,19 +103,19 @@ msgstr ""
 "Как долго длится анимация индикатора \"срочно\" (в секундах), 0 чтобы "
 "отключить, -1 для бесконечности."
 
-#: ../data/docky.schemas.in.h:20
+#: ../data/docky.schemas.in.h:19
 msgid "How long to wait (ms) before unhiding"
 msgstr "Как долго ждать до появления (мс)"
 
-#: ../data/docky.schemas.in.h:21
+#: ../data/docky.schemas.in.h:20
 msgid "How long to wait (ms) to update after a window switch"
 msgstr "Как долго ждать (мс) после смены окна перед тем как обновиться"
 
-#: ../data/docky.schemas.in.h:22
+#: ../data/docky.schemas.in.h:21
 msgid "How many recent clipboard selections to show."
 msgstr "Сколько недавно использованных элементов буфера обмена показывать."
 
-#: ../data/docky.schemas.in.h:23
+#: ../data/docky.schemas.in.h:22
 msgid ""
 "How much to shift the color of the urgent indicator. The value can be from -"
 "180 to 180."
@@ -123,24 +123,24 @@ msgstr ""
 "На сколько изменить цвет индакатора \"срочно\". Значение может быть от -180 "
 "до 180"
 
-#: ../data/docky.schemas.in.h:24
+#: ../data/docky.schemas.in.h:23
 msgid "How often (in mins) to check for new mail."
 msgstr "Как часто проверять почтовый ящик (в минутах)."
 
-#: ../data/docky.schemas.in.h:25
+#: ../data/docky.schemas.in.h:24
 msgid "How often to check"
 msgstr "Как часто проверять"
 
-#: ../data/docky.schemas.in.h:26
+#: ../data/docky.schemas.in.h:25
 msgid "How often to check for new weather information."
 msgstr "Как часто обновлять информацию о погоде."
 
-#: ../data/docky.schemas.in.h:27
+#: ../data/docky.schemas.in.h:26
 msgid "How often to poll (in ms) for new clipboard data."
 msgstr ""
 "Как часто опрашивать на наличие новых данных в буфере обмена (в минутах)."
 
-#: ../data/docky.schemas.in.h:28
+#: ../data/docky.schemas.in.h:27
 msgid ""
 "If fading when hiding, this is the opacity the dock fades to. 1 is solid, 0 "
 "is invisible."
@@ -148,431 +148,443 @@ msgstr ""
 "Если док \"растворяется\" при исчезновении, это - степень прозрачности, до "
 "котороой \"раствориться\" док. 1 - непроницаем, 0 - невидимый."
 
-#: ../data/docky.schemas.in.h:29
+#: ../data/docky.schemas.in.h:28
 msgid ""
 "If false, Docky will not show hover texts for launchers (but still show for "
 "plugins)."
 msgstr ""
+"Показывать всплывающие подсказки для ярлыков дока (исключение - плагины, для "
+"них оговаривается отдельно)"
+
+#: ../data/docky.schemas.in.h:29
+msgid "If false, finished timers will reset instead of dismiss."
+msgstr "Закончившиеся таймеры будут исчезать а не обнуляться"
 
 #: ../data/docky.schemas.in.h:30
-msgid "If false, finished timers will reset instead of dismiss."
-msgstr ""
-
-#: ../data/docky.schemas.in.h:31
 msgid ""
 "If false, prevents dropping items onto the dock to add them to the dock."
-msgstr ""
+msgstr "Разрешить добалвение иконок на док перетаскиванием"
 
-#: ../data/docky.schemas.in.h:32
+#: ../data/docky.schemas.in.h:31
 msgid ""
 "If the 'Pin to Dock' option should show in the menu of items, allowing you "
 "to add it permanently to the dock."
 msgstr ""
+"Показывать в меню иконок пункт \"Прикрепить к доку\", позволяющий закрепить "
+"их там."
 
-#: ../data/docky.schemas.in.h:33
+#: ../data/docky.schemas.in.h:32
 msgid "If the dock is a panel"
 msgstr "Если док является панелью"
 
-#: ../data/docky.schemas.in.h:34
+#: ../data/docky.schemas.in.h:33
 msgid ""
 "If true, Docky will only show windows on the currently active desktop."
 msgstr ""
-"Если выбрано, Docky будет показывать только окна активного в данный момент "
-"рабочего стола."
+"Показывать только окна активного в данный момент времени рабоченго стола"
+
+#: ../data/docky.schemas.in.h:34
+msgid "If true, all new timers will automatically start."
+msgstr "Автоматически запускать все новые таймеры"
 
 #: ../data/docky.schemas.in.h:35
-msgid "If true, all new timers will automatically start."
-msgstr "Если выбрано, все новые таймеры будут автоматически запускаться."
-
-#: ../data/docky.schemas.in.h:36
 msgid ""
 "If true, any windows without launchers will show on this dock. Exactly 1 "
 "dock must have this set to true."
 msgstr ""
+"Показывать все окна, не имеющих постоянных ярлыков ни на одном из доков, на "
+"этом доке. Ровно у одного дока должна быть включена эта опция."
 
-#: ../data/docky.schemas.in.h:37
+#: ../data/docky.schemas.in.h:36
 msgid ""
 "If true, items with more than one window have two indicator dots instead of "
 "just one dot."
 msgstr ""
-"Если выбрано, объекты с двумя или более окнами будет обозначены двумя "
-"индикаторными точками вместо одной."
+"Обозначать объекты с двумя или более окнами двумя индикаторными точками "
+"вместо одной."
+
+#: ../data/docky.schemas.in.h:37
+msgid "If true, locks all items on all docks so they can't be dragged."
+msgstr "Закрепить все объекты на доке, запрещая их перетаскивание."
 
 #: ../data/docky.schemas.in.h:38
-msgid "If true, locks all items on all docks so they can't be dragged."
-msgstr "Закрепляет все объекты на доке, запрещая их перетаскивание."
-
-#: ../data/docky.schemas.in.h:39
 msgid ""
 "If true, output from the helpers will be redirected to show in Docky's "
 "output."
 msgstr ""
 
-#: ../data/docky.schemas.in.h:40
+#: ../data/docky.schemas.in.h:39
 msgid "If true, show the digital clock otherwise show the analog clock."
-msgstr ""
+msgstr "Показывать электронные часы вместо стрелочных."
+
+#: ../data/docky.schemas.in.h:40
+msgid "If true, shows a notify message for new unread mail."
+msgstr "Показывать оповещение о непрочитанных письмах"
 
 #: ../data/docky.schemas.in.h:41
-msgid "If true, shows a notify message for new unread mail."
-msgstr "Если выбрано, будет показываться сообщение о непрочитанных письмах."
+msgid "If true, shows the Docky item on the dock managing windows."
+msgstr "Показывать иконку Docky на доке, отвечающим за  открытые окна."
 
 #: ../data/docky.schemas.in.h:42
-msgid "If true, shows the Docky item on the dock managing windows."
-msgstr ""
+msgid "If true, shows time in 24-hr format."
+msgstr "Отображать время в 24-х часовом формате."
 
 #: ../data/docky.schemas.in.h:43
-msgid "If true, shows time in 24-hr format."
-msgstr "Если выбрано, время будет отображаться в 24-х часовом формате."
+msgid "If true, the Docky item popup menu shows the Quit option."
+msgstr "Показывать пункт \"Выйти\" в контекстном меню иконки Docky."
 
 #: ../data/docky.schemas.in.h:44
-msgid "If true, the Docky item popup menu shows the Quit option."
-msgstr ""
+msgid "If true, the Docky item popup menu shows the Settings option."
+msgstr "Показывать пункт  \"Настройки\" в контекстном меню иконки Docky."
 
 #: ../data/docky.schemas.in.h:45
-msgid "If true, the Docky item popup menu shows the Settings option."
-msgstr ""
+msgid "If true, the date should show on the digital clock."
+msgstr "Показывать дату на электронных часах."
 
 #: ../data/docky.schemas.in.h:46
-msgid "If true, the date should show on the digital clock."
-msgstr ""
+msgid "If true, the dock is drawn as a 3d dock."
+msgstr "Отображать док в режиме 3D."
 
 #: ../data/docky.schemas.in.h:47
-msgid "If true, the dock is drawn as a 3d dock."
-msgstr ""
-
-#: ../data/docky.schemas.in.h:48
 msgid ""
 "If true, the dock is in panel mode and will extend to fill the entire screen "
 "edge."
 msgstr ""
+"Ставит док в режим панели, то-есть растягивает его на весь край экрана."
+
+#: ../data/docky.schemas.in.h:48
+msgid "If true, the dock will zoom when hovered."
+msgstr "Увеличивать док при наведении на него мыши."
 
 #: ../data/docky.schemas.in.h:49
-msgid "If true, the dock will zoom when hovered."
-msgstr ""
-
-#: ../data/docky.schemas.in.h:50
 msgid ""
 "If true, this is the first time Docky has run. Internal use only - Do not "
 "change!"
 msgstr ""
+"Является-ли это первым запуском Docky? Для внутреннего использования - Не "
+"менять."
+
+#: ../data/docky.schemas.in.h:50
+msgid "If true, timers will disappear when they time out."
+msgstr "После завершения таймеры будут исчезать."
 
 #: ../data/docky.schemas.in.h:51
-msgid "If true, timers will disappear when they time out."
-msgstr ""
-
-#: ../data/docky.schemas.in.h:52
 msgid ""
 "If true, tracks the mouse selection clipboard. If false, tracks the "
 "secondary clipboard."
 msgstr ""
 
-#: ../data/docky.schemas.in.h:53
+#: ../data/docky.schemas.in.h:52
 msgid "If true, use metric units when showing weather."
-msgstr ""
-"Если выбрано, погода будет отображаться с использованием метрических единиц."
+msgstr "Отображать погоду с использованием метрических единиц."
+
+#: ../data/docky.schemas.in.h:53
+msgid ""
+"If true, when the dock hides it will fade away instead of sliding off screen."
+msgstr "Док будет плавно \"растворяться\" а не уезжать за край экрана."
 
 #: ../data/docky.schemas.in.h:54
 msgid ""
-"If true, when the dock hides it will fade away instead of sliding off screen."
-msgstr ""
+"If true, when there is new unread mail Docky will show the indicator dot."
+msgstr "Показывать индикаторную точку при наличии непрочитанной почты."
 
 #: ../data/docky.schemas.in.h:55
-msgid ""
-"If true, when there is new unread mail Docky will show the indicator dot."
-msgstr ""
+msgid "If true, will try to show the most recent document on the dock."
+msgstr "Пытаться показывать все последние документы на доке."
 
 #: ../data/docky.schemas.in.h:56
-msgid "If true, will try to show the most recent document on the dock."
-msgstr ""
+msgid "Indicate when items have more than one window"
+msgstr "Показывать, когда у объектов больше одно окна"
 
 #: ../data/docky.schemas.in.h:57
-msgid "Indicate when items have more than one window"
-msgstr ""
-
-#: ../data/docky.schemas.in.h:58
 msgid "Last time checked"
 msgstr "Время последней проверки"
 
-#: ../data/docky.schemas.in.h:59
+#: ../data/docky.schemas.in.h:58
 msgid "List of NPR stations to display."
-msgstr ""
+msgstr "Отображаемый список станций NPR"
+
+#: ../data/docky.schemas.in.h:59
+msgid "List of active docks"
+msgstr "Список активных доков"
 
 #: ../data/docky.schemas.in.h:60
-msgid "List of active docks"
-msgstr ""
+msgid "List of custom GMail labels to check in addition to the inbox."
+msgstr "Список меток GMail, подлежающие проверке в добавок к «входящим»"
 
 #: ../data/docky.schemas.in.h:61
-msgid "List of custom GMail labels to check in addition to the inbox."
-msgstr ""
+msgid "List of launchers"
+msgstr "Список ярлыков"
 
 #: ../data/docky.schemas.in.h:62
-msgid "List of launchers"
-msgstr ""
-
-#: ../data/docky.schemas.in.h:63
 msgid "Max Entries"
 msgstr "Максимальное количество записей"
 
-#: ../data/docky.schemas.in.h:64
+#: ../data/docky.schemas.in.h:63
 msgid "NPR stations"
-msgstr ""
+msgstr "Станции NPR"
+
+#: ../data/docky.schemas.in.h:64
+msgid "New timer length"
+msgstr "Длительность новых таймеров"
 
 #: ../data/docky.schemas.in.h:65
-msgid "New timer length"
-msgstr ""
+msgid "Number of recent docs"
+msgstr "Количество недавних документов"
 
 #: ../data/docky.schemas.in.h:66
-msgid "Number of recent docs"
-msgstr ""
-
-#: ../data/docky.schemas.in.h:67
 msgid "Opacity to fade to"
 msgstr ""
 
-#: ../data/docky.schemas.in.h:68
+#: ../data/docky.schemas.in.h:67
 msgid "Plugins on this dock"
-msgstr ""
+msgstr "Плагины на этой панели дока"
+
+#: ../data/docky.schemas.in.h:68
+msgid "Prevent adding items by drops"
+msgstr "Запретить добавление объектов перетаскиванием"
 
 #: ../data/docky.schemas.in.h:69
-msgid "Prevent adding items by drops"
-msgstr ""
-
-#: ../data/docky.schemas.in.h:70
 msgid "Redirect helper output to Docky's output"
 msgstr ""
 
-#: ../data/docky.schemas.in.h:71
+#: ../data/docky.schemas.in.h:70
 msgid "Set the color of the Docky icon. 0 means use the GTK+ theme color."
-msgstr ""
+msgstr "Цвет иконки «Docky». 0 - использовать цвет темы GTK+."
+
+#: ../data/docky.schemas.in.h:71
+msgid "Show 'Pin to Dock' for items"
+msgstr "Показывать \"Закрепить в доке\" для элементов."
 
 #: ../data/docky.schemas.in.h:72
-msgid "Show 'Pin to Dock' for items"
-msgstr ""
-
-#: ../data/docky.schemas.in.h:73
 msgid "Show Quit in Docky item menu"
 msgstr "Показывать \"Выход\" в контекстном меню Docky"
 
-#: ../data/docky.schemas.in.h:74
+#: ../data/docky.schemas.in.h:73
 msgid "Show Settings in Docky item menu"
 msgstr "Показывать \"Настройки\" в контекстном меню Docky"
 
-#: ../data/docky.schemas.in.h:75
+#: ../data/docky.schemas.in.h:74
 msgid "Show a notify for unread mail"
-msgstr ""
+msgstr "Показывать уведомления для непрочитаной почты"
 
-#: ../data/docky.schemas.in.h:76
+#: ../data/docky.schemas.in.h:75
 msgid "Show date"
 msgstr "Показывать дату"
 
-#: ../data/docky.schemas.in.h:77
+#: ../data/docky.schemas.in.h:76
 msgid "Show hover text labels for launchers"
-msgstr ""
+msgstr "Показывать всплывающий текст наведения для ярлыков"
+
+#: ../data/docky.schemas.in.h:77
+msgid "Show indicator dot for unread mail"
+msgstr "Показывать индикаторную точку при наличии непрочитанных писем"
 
 #: ../data/docky.schemas.in.h:78
-msgid "Show indicator dot for unread mail"
-msgstr ""
+msgid "Show most recent doc"
+msgstr "Показывать самые последние документы"
 
 #: ../data/docky.schemas.in.h:79
-msgid "Show most recent doc"
-msgstr ""
+msgid "Show the Docky item"
+msgstr "Отображать объект «Docky»"
 
 #: ../data/docky.schemas.in.h:80
-msgid "Show the Docky item"
-msgstr ""
-
-#: ../data/docky.schemas.in.h:81
 msgid "Show the digital clock"
 msgstr "Показывать цифровые часы"
 
-#: ../data/docky.schemas.in.h:82
+#: ../data/docky.schemas.in.h:81
 msgid "Show windows from only current desktop"
 msgstr "Показывать окна только с текущего рабочего стола"
 
-#: ../data/docky.schemas.in.h:83
+#: ../data/docky.schemas.in.h:82
 msgid "Sorts the items on the dock"
-msgstr ""
+msgstr "Сортирует объекты на доке"
+
+#: ../data/docky.schemas.in.h:83
+msgid "Start all new timers"
+msgstr "Запустить все таймеры"
 
 #: ../data/docky.schemas.in.h:84
-msgid "Start all new timers"
-msgstr ""
+msgid "Stop items from dragging"
+msgstr "Предотвратить перетаскивание объектов"
 
 #: ../data/docky.schemas.in.h:85
-msgid "Stop items from dragging"
-msgstr ""
+msgid "The GMail username to check."
+msgstr "Имя пользователя GMail, чью почту проверять."
 
 #: ../data/docky.schemas.in.h:86
-msgid "The GMail username to check."
-msgstr ""
-
-#: ../data/docky.schemas.in.h:87
 msgid ""
 "The command to execute when left-clicking the Docky item or \"\" for default "
 "behavior (which opens the configuration dialog)."
 msgstr ""
+"Комманда, выполняемая при нажатии левой кнопкой мыши на объект «Docky», при "
+"«» по умолчанию открывается окно настроек Docky."
 
-#: ../data/docky.schemas.in.h:88
+#: ../data/docky.schemas.in.h:87
 msgid "The current theme"
 msgstr "Текущая тема"
 
-#: ../data/docky.schemas.in.h:89
+#: ../data/docky.schemas.in.h:88
 msgid "The currently selected item in the session manager menu."
 msgstr ""
 
-#: ../data/docky.schemas.in.h:90
+#: ../data/docky.schemas.in.h:89
 msgid "The default time (in secs) for any new timers."
-msgstr ""
+msgstr "Продолжительность таймера по умолчанию (в секундах)"
 
-#: ../data/docky.schemas.in.h:91
+#: ../data/docky.schemas.in.h:90
 msgid ""
 "The dock's hide mode. Possible values are: None, Autohide, Intellihide, "
 "UniversalIntellihide"
 msgstr ""
 
-#: ../data/docky.schemas.in.h:92
+#: ../data/docky.schemas.in.h:91
 msgid "The dock's position"
 msgstr "Позиция дока"
 
-#: ../data/docky.schemas.in.h:93
+#: ../data/docky.schemas.in.h:92
 msgid ""
 "The dock's position on the screen. Possible values are: Bottom, Top, Left, "
 "Right"
 msgstr ""
+"Полоэение дока на экране. Вожможные значения: Внизу, сверху, с лева, с права"
+
+#: ../data/docky.schemas.in.h:93
+msgid "The dock's zoom size (if enabled), as a percent."
+msgstr "Разрем дока при увеличении (если включено), в процентах."
 
 #: ../data/docky.schemas.in.h:94
-msgid "The dock's zoom size (if enabled), as a percent."
-msgstr ""
+msgid "The last time Docky checked GMail for messages."
+msgstr "Последний раз, когда Docky проверял GMail на нерочитанные письма."
 
 #: ../data/docky.schemas.in.h:95
-msgid "The last time Docky checked GMail for messages."
-msgstr ""
+msgid "The list of weather locations to check."
+msgstr "Список мест для которых проверять погоду."
 
 #: ../data/docky.schemas.in.h:96
-msgid "The list of weather locations to check."
-msgstr ""
+msgid "The name of the current Docky theme."
+msgstr "Имя текущей темы Docky"
 
 #: ../data/docky.schemas.in.h:97
-msgid "The name of the current Docky theme."
-msgstr ""
-
-#: ../data/docky.schemas.in.h:98
 msgid "The name of the weather source to get weather information from."
-msgstr ""
+msgstr "Название службы погоды, запрашиваемой для информации о погоде."
 
 #: ../data/docky.schemas.in.h:99
 msgid ""
 "The number of extra pixels to pad the hover area on the top of the dock."
 msgstr ""
 
-#: ../data/docky.schemas.in.h:100
+#: ../data/docky.schemas.in.h:98
 msgid "The number of most recent documents to show."
-msgstr ""
+msgstr "Количество отображаемых последних документов."
+
+#: ../data/docky.schemas.in.h:99
+msgid "The size of icons on the dock."
+msgstr "Размер значков на панели."
+
+#: ../data/docky.schemas.in.h:100
+msgid "The text to show when hovering the Docky item."
+msgstr "Текст отображаемый при наведении на объект «Docky»."
 
 #: ../data/docky.schemas.in.h:101
-msgid "The size of icons on the dock."
-msgstr ""
+msgid "The theme for the analog clock."
+msgstr "Тема стрелочных часов."
 
 #: ../data/docky.schemas.in.h:102
-msgid "The text to show when hovering the Docky item."
-msgstr ""
+msgid "The weather source"
+msgstr "Служба погоды"
 
 #: ../data/docky.schemas.in.h:103
-msgid "The theme for the analog clock."
-msgstr ""
+msgid "This is the list of all the launchers on this dock."
+msgstr "Список всех ярлыков на этом доке"
 
 #: ../data/docky.schemas.in.h:104
-msgid "The weather source"
-msgstr ""
+msgid "This is the monitor the dock exists on."
+msgstr "Монитор, на котором существует док."
 
 #: ../data/docky.schemas.in.h:105
-msgid "This is the list of all the launchers on this dock."
-msgstr ""
-
-#: ../data/docky.schemas.in.h:106
-msgid "This is the monitor the dock exists on."
-msgstr ""
-
-#: ../data/docky.schemas.in.h:107
 msgid ""
 "This is the time (in milliseconds) to wait before unhiding a hidden dock "
 "when the cursor moves over it."
 msgstr ""
+"Время задержки (в милисекундах) перед появлением появлением скрытого дока "
+"при наведении на него курсора."
 
-#: ../data/docky.schemas.in.h:108
+#: ../data/docky.schemas.in.h:106
 msgid ""
 "This is the time (in milliseconds) to wait to determine if a window switch "
 "causes a (un)hide."
 msgstr ""
 
-#: ../data/docky.schemas.in.h:109
+#: ../data/docky.schemas.in.h:107
 msgid "This lists all the currently active (displayed) docks, by name."
 msgstr ""
 
-#: ../data/docky.schemas.in.h:110
+#: ../data/docky.schemas.in.h:108
 msgid "Timer Delay"
-msgstr ""
+msgstr "Задержка таймера"
 
-#: ../data/docky.schemas.in.h:111
+#: ../data/docky.schemas.in.h:109
 msgid "Track Mouse Selections"
 msgstr ""
 
-#: ../data/docky.schemas.in.h:112
+#: ../data/docky.schemas.in.h:110
 msgid "Urgent indicator color shift"
 msgstr ""
 
-#: ../data/docky.schemas.in.h:113
+#: ../data/docky.schemas.in.h:111
 msgid "Urgent indicator glow animation time (in seconds)"
 msgstr ""
 
-#: ../data/docky.schemas.in.h:114
+#: ../data/docky.schemas.in.h:112
 msgid "Use 24-hr time"
-msgstr ""
+msgstr "Использовть 24-часовое время"
+
+#: ../data/docky.schemas.in.h:113
+msgid "Use metric units"
+msgstr "Использовать метрическую систему"
+
+#: ../data/docky.schemas.in.h:114
+msgid "Used to sort the items on the dock."
+msgstr "Сортирует объекты на доке."
 
 #: ../data/docky.schemas.in.h:115
-msgid "Use metric units"
-msgstr ""
-
-#: ../data/docky.schemas.in.h:116
-msgid "Used to sort the items on the dock."
-msgstr ""
-
-#: ../data/docky.schemas.in.h:117
 msgid "Weather locations"
 msgstr ""
 
-#: ../data/docky.schemas.in.h:118
+#: ../data/docky.schemas.in.h:116
 msgid "Which monitor the dock is on"
-msgstr ""
+msgstr "Монитор, на котором находится док"
 
-#: ../data/docky.schemas.in.h:119
+#: ../data/docky.schemas.in.h:117
 msgid "Zoom size"
-msgstr ""
+msgstr "Размер при увеличении"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:269
 msgid "Search Docklets..."
 msgstr "Поиск доклетов"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:286
+#: ../Docky/Docky/ConfigurationWindow.cs:285
 msgid "Search Helpers..."
 msgstr "Поиск дополнений..."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:363
+#: ../Docky/Docky/ConfigurationWindow.cs:362
 msgid "Click on any dock to configure."
 msgstr "Нажмите на панель для её настройки"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:364
+#: ../Docky/Docky/ConfigurationWindow.cs:363
 msgid "Drag any dock to reposition."
 msgstr "Перетащите панель для изменения положения."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:385
+#: ../Docky/Docky/ConfigurationWindow.cs:384
 msgid "Helpers require DockManager be installed."
 msgstr ""
 
-#: ../Docky/Docky/ConfigurationWindow.cs:457
+#: ../Docky/Docky/ConfigurationWindow.cs:456
 msgid "Delete the currently selected dock?"
 msgstr "Удалить выбранную панель?"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:459
+#: ../Docky/Docky/ConfigurationWindow.cs:458
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
@@ -580,18 +592,18 @@ msgstr ""
 "Если вы удалите панель, то\n"
 "все ее настройки будут навсегда утеряны."
 
-#: ../Docky/Docky/ConfigurationWindow.cs:466
+#: ../Docky/Docky/ConfigurationWindow.cs:465
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
 msgstr "Удалить панель"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:582
-#: ../Docky/Docky/ConfigurationWindow.cs:602
+#: ../Docky/Docky/ConfigurationWindow.cs:581
+#: ../Docky/Docky/ConfigurationWindow.cs:601
 msgid "_Select"
 msgstr "Выбрать"
 
-#: ../Docky/Docky/ConfigurationWindow.cs:585
-#: ../Docky/Docky/ConfigurationWindow.cs:605
+#: ../Docky/Docky/ConfigurationWindow.cs:584
+#: ../Docky/Docky/ConfigurationWindow.cs:604
 msgid ".tar Archives"
 msgstr "архивы .tar"
 
@@ -668,27 +680,27 @@ msgstr "Выполняется"
 msgid "Stopped"
 msgstr "Остановлено"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:345
+#: ../Docky/Docky/Interface/DockPreferences.cs:327
 msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
-"При выборе этого, окна, у которых еще нет значков запуска на панели, будут "
-"добавлены к текущей активной панели."
+"При выборе этого, окна, у которых еще нет ярлыков на панели, будут добавлены "
+"к текущей активной панели."
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:727
+#: ../Docky/Docky/Interface/DockPreferences.cs:709
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr "<i>Видна всё время, развёрнутые окна не перекрывают панель.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:730
+#: ../Docky/Docky/Interface/DockPreferences.cs:712
 msgid "<i>Hides whenever the mouse is not over it.</i>"
 msgstr "<i>Исчезает, если курсор не над панелью.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:733
+#: ../Docky/Docky/Interface/DockPreferences.cs:715
 msgid "<i>Hides when dock obstructs the active application.</i>"
 msgstr "<i>Исчезает, если панель перекрывает активное приложение.</i>"
 
-#: ../Docky/Docky/Interface/DockPreferences.cs:736
+#: ../Docky/Docky/Interface/DockPreferences.cs:718
 msgid "<i>Hides when dock obstructs any window.</i>"
 msgstr "<i>Спрятать, если док перекрывает одно из окон.</i>"
 
@@ -1013,7 +1025,7 @@ msgstr "_Отменить"
 
 #: ../StandardPlugins/Desktop/src/ShowDesktopItem.cs:37
 msgid "_Show Desktop"
-msgstr ""
+msgstr "_Показать рабочий стол"
 
 #: ../StandardPlugins/Desktop/src/TileDesktopItem.cs:38
 msgid "_Tile Desktop"
@@ -1157,7 +1169,7 @@ msgstr "Подключен: {0}"
 
 #: ../StandardPlugins/NetworkMonitor/src/NetworkMonitorDockItem.cs:61
 msgid "No network connection available"
-msgstr ""
+msgstr "Нет доступного сетевого соединения"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:47
 msgid "My _Stations"
@@ -1232,7 +1244,7 @@ msgstr "_Заблокировать экран"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:80
 msgid "_Log Out..."
-msgstr ""
+msgstr "_Выйти..."
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:81
 msgid "Log Out"
@@ -1246,15 +1258,15 @@ msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:87
 msgid "_Suspend"
-msgstr ""
+msgstr "_Ждущий режим"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:92
 msgid "_Hibernate"
-msgstr ""
+msgstr "_Спящий режим"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:97
 msgid "_Restart..."
-msgstr ""
+msgstr "_Перезаспустить..."
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:98
 msgid "Restart"
@@ -1267,7 +1279,7 @@ msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:104
 msgid "Shut _Down..."
-msgstr ""
+msgstr "_Выключить..."
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:105
 msgid "Shut Down"
