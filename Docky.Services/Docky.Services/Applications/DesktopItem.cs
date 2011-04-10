@@ -177,22 +177,24 @@ namespace Docky.Services.Applications
 
 		public bool GetBool (string key)
 		{
-			string result = GetString (key);
+			string result = GetStrings (key).First ();
+
+			bool val;
+			if (bool.TryParse (result, out val))
+				return val;
 			
-			if (string.Equals (result, "false", StringComparison.CurrentCultureIgnoreCase)) {
-				return false;
-			} else if (string.Equals (result, "true", StringComparison.CurrentCultureIgnoreCase)) {
-				return true;
-			} else {
-				throw new ArgumentException ();
-			}
+			return false;
 		}
 
 		public double GetDouble (string key)
 		{
-			string result = GetString (key);
+			string result = GetStrings (key).First ();
 			
-			return Convert.ToDouble (result);
+			double val;
+			if (double.TryParse (result, out val))
+				return val;
+			
+			return 0;
 		}
 		
 		public void Launch (IEnumerable<string> uris)
