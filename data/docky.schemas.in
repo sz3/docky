@@ -80,6 +80,18 @@
 		</schema>
 		
 		<schema>
+			<key>/schemas/apps/docky-2/CPUMonitor/CPUMonitorDockItem/ClickCommand</key>
+			<applyto>/apps/docky-2/CPUMonitor/CPUMonitorDockItem/ClickCommand</applyto>
+			<owner>docky</owner>
+			<type>string</type>
+			<default>gnome-system-monitor</default>
+			<locale name="C">
+				<short>Left click command</short>
+				<long>This is the command to execute when left clicking on the CPU docklet item.</long>
+			</locale>
+		</schema>
+		
+		<schema>
 			<key>/schemas/apps/docky-2/Docky/DockController/ActiveDocks</key>
 			<applyto>/apps/docky-2/Docky/DockController/ActiveDocks</applyto>
 			<owner>docky</owner>

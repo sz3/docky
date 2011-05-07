@@ -30,11 +30,16 @@ using Docky.CairoHelper;
 using Docky.Items;
 using Docky.Menus;
 using Docky.Services;
+using Docky.Services.Prefs;
 
 namespace CPUMonitor
 {
 	public class CPUMonitorDockItem : AbstractDockItem
 	{
+		static IPreferences prefs = DockServices.Preferences.Get<CPUMonitorDockItem> ();
+
+		string click_command = prefs.Get<string> ("ClickCommand", "gnome-system-monitor");
+		
 		const int UpdateMS = 1000;
 		const double RadiusPercent = .9;
 		
@@ -75,7 +80,7 @@ namespace CPUMonitor
 		protected override ClickAnimation OnClicked (uint button, Gdk.ModifierType mod, double xPercent, double yPercent)
 		{
 			if (button == 1) {
-				DockServices.System.Execute ("gnome-system-monitor");
+				DockServices.System.Execute (click_command);
 				return ClickAnimation.Bounce;
 			}
 			
