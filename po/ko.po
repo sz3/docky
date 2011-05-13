@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-04-06 16:57+0000\n"
-"X-Generator: Launchpad (build 12735)\n"
+"X-Launchpad-Export-Date: 2011-05-13 05:52+0000\n"
+"X-Generator: Launchpad (build 13023)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -68,7 +68,7 @@ msgstr "독 숨김 모드"
 
 #: ../data/docky.schemas.in.h:12
 msgid "Docky item command to execute"
-msgstr ""
+msgstr "실행가능한 도키 명령"
 
 #: ../data/docky.schemas.in.h:13
 msgid "Docky item hover text"
@@ -84,11 +84,11 @@ msgstr "숨길때 페이드 효과"
 
 #: ../data/docky.schemas.in.h:16
 msgid "GMail labels to check"
-msgstr ""
+msgstr "지메일 확인"
 
 #: ../data/docky.schemas.in.h:17
 msgid "GMail username"
-msgstr ""
+msgstr "지메일 ID"
 
 #: ../data/docky.schemas.in.h:18
 msgid "Hot-area padding"
@@ -106,7 +106,7 @@ msgstr "다시 나타날때 기다리는 시간(ms)"
 
 #: ../data/docky.schemas.in.h:20
 msgid "How long to wait (ms) to update after a window switch"
-msgstr ""
+msgstr "창 전환시 업데이트 기다리는 시간(ms)"
 
 #: ../data/docky.schemas.in.h:21
 msgid "How many recent clipboard selections to show."

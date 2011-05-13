@@ -2,46 +2,47 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the docky package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# Sergiy Gavrylov <sergiovana@bigmir.net>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-03 00:41+0100\n"
-"PO-Revision-Date: 2011-02-04 12:35+0000\n"
-"Last-Translator: nehxby <Unknown>\n"
-"Language-Team: Ukrainian <uk@li.org>\n"
+"PO-Revision-Date: 2011-05-06 18:28+0000\n"
+"Last-Translator: Sergiy Gavrylov <sergiovana@bigmir.net>\n"
+"Language-Team: Ukrainian <linux@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-04-06 16:57+0000\n"
-"X-Generator: Launchpad (build 12735)\n"
+"X-Launchpad-Export-Date: 2011-05-13 05:52+0000\n"
+"X-Generator: Launchpad (build 13023)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
-msgstr "Найкраща панелька, яку можна придбати за 0 гривень."
+msgstr "Найкращий безкоштовний док."
 
 #: ../data/docky.schemas.in.h:1
 msgid "A list of plugins that are active on this dock."
-msgstr "Список активних на цій панелі плагінів."
+msgstr "Список активних модулів на цьому доці."
 
 #: ../data/docky.schemas.in.h:2
 msgid "Analog clock theme"
-msgstr "Аналогова тема годинника"
+msgstr "Тема аналогового годинника"
 
 #: ../data/docky.schemas.in.h:3
 msgid "Clear finished timers"
-msgstr "Очистити завершені таймери"
+msgstr "Скинути завершені таймери"
 
 #: ../data/docky.schemas.in.h:4
 msgid "Currently selected item"
-msgstr "Вибраний елемент"
+msgstr "Поточний вибраний елемент"
 
 #: ../data/docky.schemas.in.h:5
 msgid "Dismiss a stopped timer when clicked"
-msgstr "Не зупиняти таймер, якщо клацнути на ньому"
+msgstr "Скинути зупинений таймер клацанням кнопкою миші"
 
 #: ../data/docky.schemas.in.h:6
 msgid "Do not change this!"
@@ -49,15 +50,15 @@ msgstr "Не змінюйте це!"
 
 #: ../data/docky.schemas.in.h:7
 msgid "Dock icon size"
-msgstr "Розмір значків панелі"
+msgstr "Розмір значків в доці"
 
 #: ../data/docky.schemas.in.h:8
 msgid "Dock is 3d"
-msgstr "Панель 3D"
+msgstr "3D-док"
 
 #: ../data/docky.schemas.in.h:9
 msgid "Dock manages all windows"
-msgstr "Панель керує всіма вікнами"
+msgstr "Док керує всіма вікнами"
 
 #: ../data/docky.schemas.in.h:10
 msgid "Dock zooms"
@@ -69,19 +70,19 @@ msgstr "Режим приховування панелі"
 
 #: ../data/docky.schemas.in.h:12
 msgid "Docky item command to execute"
-msgstr "Елемент панелі \"виконати команду\""
+msgstr "Виконувана команда елемента Docky"
 
 #: ../data/docky.schemas.in.h:13
 msgid "Docky item hover text"
-msgstr ""
+msgstr "Текст підказки елемента Docky"
 
 #: ../data/docky.schemas.in.h:14
 msgid "Docky item hue"
-msgstr "Відтінок елементу панелі"
+msgstr "Відтінок елемента Docky"
 
 #: ../data/docky.schemas.in.h:15
 msgid "Fade when hiding"
-msgstr "Повільне проховування"
+msgstr "Затінення під час приховування"
 
 #: ../data/docky.schemas.in.h:16
 msgid "GMail labels to check"
@@ -93,454 +94,484 @@ msgstr "Ім'я користувача GMail"
 
 #: ../data/docky.schemas.in.h:18
 msgid "Hot-area padding"
-msgstr ""
+msgstr "Активна область заповнення"
 
 #: ../data/docky.schemas.in.h:18
 msgid ""
 "How long the urgent indicator glow animation is (in seconds), 0 to disable, "
 "or -1 for infinite."
 msgstr ""
-"Як довго має світитись індикатор (у секундах), 0 для відключення, або -1 для "
-"нескінченного."
+"Час анімації сяяння термінового індикатора (в секундах), 0 — вимкнутий, -1 — "
+"необмежено."
 
 #: ../data/docky.schemas.in.h:19
 msgid "How long to wait (ms) before unhiding"
-msgstr "Затримка (у мілісекундах), перш ніж показати панель"
+msgstr "Затримка перед показом панелі (в мс)"
 
 #: ../data/docky.schemas.in.h:20
 msgid "How long to wait (ms) to update after a window switch"
-msgstr ""
+msgstr "Час очікування оновлення (в мс) після зміни вікна"
 
 #: ../data/docky.schemas.in.h:21
 msgid "How many recent clipboard selections to show."
-msgstr ""
+msgstr "Скільки показувати недавніх елементів вибору в буфері."
 
 #: ../data/docky.schemas.in.h:22
 msgid ""
 "How much to shift the color of the urgent indicator. The value can be from -"
 "180 to 180."
 msgstr ""
+"На скільки змінити колір індикатора «терміново». Значення може бути від -180 "
+"до 180."
 
 #: ../data/docky.schemas.in.h:23
 msgid "How often (in mins) to check for new mail."
-msgstr ""
+msgstr "Як часто перевіряти пошту (у хвилинах)."
 
 #: ../data/docky.schemas.in.h:24
 msgid "How often to check"
-msgstr ""
+msgstr "Як часто перевіряти"
 
 #: ../data/docky.schemas.in.h:25
 msgid "How often to check for new weather information."
-msgstr ""
+msgstr "Як часто перевіряти прогноз погоди."
 
 #: ../data/docky.schemas.in.h:26
 msgid "How often to poll (in ms) for new clipboard data."
-msgstr ""
+msgstr "Як часто перевіряти буфер на нові дані (у хв.)."
 
 #: ../data/docky.schemas.in.h:27
 msgid ""
 "If fading when hiding, this is the opacity the dock fades to. 1 is solid, 0 "
 "is invisible."
 msgstr ""
+"Прозорість панелі під час поступового зникнення. 1 — суцільна, 2 — невидима."
 
 #: ../data/docky.schemas.in.h:28
 msgid ""
 "If false, Docky will not show hover texts for launchers (but still show for "
 "plugins)."
 msgstr ""
+"Якщо ні, Docky не показуватиме підказки для значків під вказівником (але "
+"показуватиме для модулів)."
 
 #: ../data/docky.schemas.in.h:29
 msgid "If false, finished timers will reset instead of dismiss."
-msgstr ""
+msgstr "Якщо ні, завершені таймери будуть перезапускатись а не обнулятись."
 
 #: ../data/docky.schemas.in.h:30
 msgid ""
 "If false, prevents dropping items onto the dock to add them to the dock."
-msgstr ""
+msgstr "Якщо ні, блокується додавання елементів до панелі перетягуванням."
 
 #: ../data/docky.schemas.in.h:31
 msgid ""
 "If the 'Pin to Dock' option should show in the menu of items, allowing you "
 "to add it permanently to the dock."
 msgstr ""
+"Якщо параметр «Закріпити на панелі» буде в меню елементів, дозволити "
+"додавати елементи до панелі."
 
 #: ../data/docky.schemas.in.h:32
 msgid "If the dock is a panel"
-msgstr ""
+msgstr "Якщо док є панеллю"
 
 #: ../data/docky.schemas.in.h:33
 msgid ""
 "If true, Docky will only show windows on the currently active desktop."
-msgstr ""
+msgstr "Якщо так, Docky показуватиме вікна лише на активній стільниці."
 
 #: ../data/docky.schemas.in.h:34
 msgid "If true, all new timers will automatically start."
-msgstr ""
+msgstr "Якщо так, всі нові таймери запускатимуться автоматично."
 
 #: ../data/docky.schemas.in.h:35
 msgid ""
 "If true, any windows without launchers will show on this dock. Exactly 1 "
 "dock must have this set to true."
 msgstr ""
+"Якщо так, всі вікна без значків будуть показуватись на цій панелі. "
+"Щонайменше, одна панель повинна мати значення «так»."
 
 #: ../data/docky.schemas.in.h:36
 msgid ""
 "If true, items with more than one window have two indicator dots instead of "
 "just one dot."
 msgstr ""
+"Якщо так, елементи, що мають більше одного вікна, позначатимуться двома "
+"крапками замість однієї."
 
 #: ../data/docky.schemas.in.h:37
 msgid "If true, locks all items on all docks so they can't be dragged."
-msgstr ""
+msgstr "Якщо так, всі елементи на всіх панелях блокуються від перетягування."
 
 #: ../data/docky.schemas.in.h:38
 msgid ""
 "If true, output from the helpers will be redirected to show in Docky's "
 "output."
-msgstr ""
+msgstr "Якщо так, вивід додатків перенаправляється на вивід Docky."
 
 #: ../data/docky.schemas.in.h:39
 msgid "If true, show the digital clock otherwise show the analog clock."
-msgstr ""
+msgstr "Якщо так, буде показуватись цифровий годинник замість аналогового."
 
 #: ../data/docky.schemas.in.h:40
 msgid "If true, shows a notify message for new unread mail."
-msgstr ""
+msgstr "Якщо так, показуватиметься сповіщення про не прочитані листи."
 
 #: ../data/docky.schemas.in.h:41
 msgid "If true, shows the Docky item on the dock managing windows."
-msgstr ""
+msgstr "Якщо так, буде показаний значок Docky на панелі керування вікнами."
 
 #: ../data/docky.schemas.in.h:42
 msgid "If true, shows time in 24-hr format."
-msgstr ""
+msgstr "Якщо так, час показуватиметься у 24-годинному форматі."
 
 #: ../data/docky.schemas.in.h:43
 msgid "If true, the Docky item popup menu shows the Quit option."
-msgstr ""
+msgstr "Якщо так, контекстне меню Docky міститиме пункт «Вийти»."
 
 #: ../data/docky.schemas.in.h:44
 msgid "If true, the Docky item popup menu shows the Settings option."
-msgstr ""
+msgstr "Якщо так, контекстне меню Docky міститиме пункт «Параметри»."
 
 #: ../data/docky.schemas.in.h:45
 msgid "If true, the date should show on the digital clock."
-msgstr ""
+msgstr "Якщо так, цифровий годинник показуватиме дату."
 
 #: ../data/docky.schemas.in.h:46
 msgid "If true, the dock is drawn as a 3d dock."
-msgstr ""
+msgstr "Якщо так, панель буде в режимі 3D."
 
 #: ../data/docky.schemas.in.h:47
 msgid ""
 "If true, the dock is in panel mode and will extend to fill the entire screen "
 "edge."
-msgstr ""
+msgstr "Якщо так, панель розширюватиметься на всю ширину екрана."
 
 #: ../data/docky.schemas.in.h:48
 msgid "If true, the dock will zoom when hovered."
-msgstr ""
+msgstr "Якщо так, панель розширюватиметься під вказівником."
 
 #: ../data/docky.schemas.in.h:49
 msgid ""
 "If true, this is the first time Docky has run. Internal use only - Do not "
 "change!"
 msgstr ""
+"Якщо так, це перший запуск Docky. Лише для внутрішнього користування: Не "
+"змінюйте це значення!"
 
 #: ../data/docky.schemas.in.h:50
 msgid "If true, timers will disappear when they time out."
-msgstr ""
+msgstr "Якщо так, таймери зникатимуть, якщо час вийшов."
 
 #: ../data/docky.schemas.in.h:51
 msgid ""
 "If true, tracks the mouse selection clipboard. If false, tracks the "
 "secondary clipboard."
 msgstr ""
+"Якщо так, у буфері відстежуватимуться варіанти вибору мишею. Якщо ні, "
+"відстежуватиметься вторинний буфер."
 
 #: ../data/docky.schemas.in.h:52
 msgid "If true, use metric units when showing weather."
-msgstr ""
+msgstr "Якщо так, прогноз погоди буде в метричних одиницях."
 
 #: ../data/docky.schemas.in.h:53
 msgid ""
 "If true, when the dock hides it will fade away instead of sliding off screen."
 msgstr ""
+"Якщо так, панель поступово зникатиме замість ковзання за край екрана."
 
 #: ../data/docky.schemas.in.h:54
 msgid ""
 "If true, when there is new unread mail Docky will show the indicator dot."
 msgstr ""
+"Якщо так, Docky показуватиме індикаторну крапку, якщо є не прочитані листи."
 
 #: ../data/docky.schemas.in.h:55
 msgid "If true, will try to show the most recent document on the dock."
-msgstr ""
+msgstr "Якщо так, на панелі будуть показуватись недавні документи."
 
 #: ../data/docky.schemas.in.h:56
 msgid "Indicate when items have more than one window"
-msgstr ""
+msgstr "Показувати, якщо елемент має кілька вікон"
 
 #: ../data/docky.schemas.in.h:57
 msgid "Last time checked"
-msgstr ""
+msgstr "Час останньої перевірки"
 
 #: ../data/docky.schemas.in.h:58
 msgid "List of NPR stations to display."
-msgstr ""
+msgstr "Список NPR-станцій до показу."
 
 #: ../data/docky.schemas.in.h:59
 msgid "List of active docks"
-msgstr ""
+msgstr "Список активних доків"
 
 #: ../data/docky.schemas.in.h:60
 msgid "List of custom GMail labels to check in addition to the inbox."
 msgstr ""
+"Список нетипових міток GMail для перевірки на додавання до «вхідних»."
 
 #: ../data/docky.schemas.in.h:61
 msgid "List of launchers"
-msgstr ""
+msgstr "Список кнопок запуску"
 
 #: ../data/docky.schemas.in.h:62
 msgid "Max Entries"
-msgstr ""
+msgstr "Макс. кількість записів"
 
 #: ../data/docky.schemas.in.h:63
 msgid "NPR stations"
-msgstr ""
+msgstr "NPR-радіостанції"
 
 #: ../data/docky.schemas.in.h:64
 msgid "New timer length"
-msgstr ""
+msgstr "Термін дії нового таймера"
 
 #: ../data/docky.schemas.in.h:65
 msgid "Number of recent docs"
-msgstr ""
+msgstr "Кількість недавніх документів"
 
 #: ../data/docky.schemas.in.h:66
 msgid "Opacity to fade to"
-msgstr ""
+msgstr "Прозорість, до якої «зникати»"
 
 #: ../data/docky.schemas.in.h:67
 msgid "Plugins on this dock"
-msgstr ""
+msgstr "Модулі на цій панелі"
 
 #: ../data/docky.schemas.in.h:68
 msgid "Prevent adding items by drops"
-msgstr ""
+msgstr "Заборонити додавання елементів перетягуванням"
 
 #: ../data/docky.schemas.in.h:69
 msgid "Redirect helper output to Docky's output"
-msgstr ""
+msgstr "Перенаправити вивід додатків до виводу Docky"
 
 #: ../data/docky.schemas.in.h:70
 msgid "Set the color of the Docky icon. 0 means use the GTK+ theme color."
-msgstr ""
+msgstr "Колір значка Docky. Значення 0 — використовувати колір теми GTK+."
 
 #: ../data/docky.schemas.in.h:71
 msgid "Show 'Pin to Dock' for items"
-msgstr ""
+msgstr "Показувати пункт «Закріпити на панелі»"
 
 #: ../data/docky.schemas.in.h:72
 msgid "Show Quit in Docky item menu"
-msgstr ""
+msgstr "Показувати пункт в меню Docky «Вийти»"
 
 #: ../data/docky.schemas.in.h:73
 msgid "Show Settings in Docky item menu"
-msgstr ""
+msgstr "Показувати пункт в меню Docky «Налаштування»"
 
 #: ../data/docky.schemas.in.h:74
 msgid "Show a notify for unread mail"
-msgstr ""
+msgstr "Показувати сповіщення про не прочитані листи"
 
 #: ../data/docky.schemas.in.h:75
 msgid "Show date"
-msgstr ""
+msgstr "Показувати дату"
 
 #: ../data/docky.schemas.in.h:76
 msgid "Show hover text labels for launchers"
-msgstr ""
+msgstr "Показувати підказки для кнопок запуску"
 
 #: ../data/docky.schemas.in.h:77
 msgid "Show indicator dot for unread mail"
-msgstr ""
+msgstr "Показувати крапку, якщо є непрочитані листи"
 
 #: ../data/docky.schemas.in.h:78
 msgid "Show most recent doc"
-msgstr ""
+msgstr "Показувати найновіші документи"
 
 #: ../data/docky.schemas.in.h:79
 msgid "Show the Docky item"
-msgstr ""
+msgstr "Показувати значок «Docky»"
 
 #: ../data/docky.schemas.in.h:80
 msgid "Show the digital clock"
-msgstr ""
+msgstr "Показувати цифровий годинник"
 
 #: ../data/docky.schemas.in.h:81
 msgid "Show windows from only current desktop"
-msgstr ""
+msgstr "Показувати вікна лише з поточної стільниці"
 
 #: ../data/docky.schemas.in.h:82
 msgid "Sorts the items on the dock"
-msgstr ""
+msgstr "Сортує елементи на панелі"
 
 #: ../data/docky.schemas.in.h:83
 msgid "Start all new timers"
-msgstr ""
+msgstr "Запустити всі нові таймери"
 
 #: ../data/docky.schemas.in.h:84
 msgid "Stop items from dragging"
-msgstr ""
+msgstr "Припинити перетягування елементів"
 
 #: ../data/docky.schemas.in.h:85
 msgid "The GMail username to check."
-msgstr ""
+msgstr "Ім'я користувача GMail для перевірки пошти."
 
 #: ../data/docky.schemas.in.h:86
 msgid ""
 "The command to execute when left-clicking the Docky item or \"\" for default "
 "behavior (which opens the configuration dialog)."
 msgstr ""
+"Команда, яка виконуватиметься під час клацання лівою кнопкою миші на "
+"елементі Docky, або «» для типової поведінки (тобто, відкрити діалог "
+"налаштування)."
 
 #: ../data/docky.schemas.in.h:87
 msgid "The current theme"
-msgstr ""
+msgstr "Поточна тема"
 
 #: ../data/docky.schemas.in.h:88
 msgid "The currently selected item in the session manager menu."
-msgstr ""
+msgstr "Вибраний елемент в меню менеджера сеансу"
 
 #: ../data/docky.schemas.in.h:89
 msgid "The default time (in secs) for any new timers."
-msgstr ""
+msgstr "Типовий час (в сек.) для нових таймерів."
 
 #: ../data/docky.schemas.in.h:90
 msgid ""
 "The dock's hide mode. Possible values are: None, Autohide, Intellihide, "
 "UniversalIntellihide"
 msgstr ""
+"Режим приховування панелі. Можливі значення: «Нічого», «Авто-приховування», "
+"«Розумне приховування» та «Уникати вікон»"
 
 #: ../data/docky.schemas.in.h:91
 msgid "The dock's position"
-msgstr ""
+msgstr "Розташування панелі"
 
 #: ../data/docky.schemas.in.h:92
 msgid ""
 "The dock's position on the screen. Possible values are: Bottom, Top, Left, "
 "Right"
 msgstr ""
+"Розташування панелі на екрані. Можливі значення: «Внизу», «Зверху», "
+"«Ліворуч» та «Праворуч»"
 
 #: ../data/docky.schemas.in.h:93
 msgid "The dock's zoom size (if enabled), as a percent."
-msgstr ""
+msgstr "Масштабування панелі (якщо увімкнено), у відсотках."
 
 #: ../data/docky.schemas.in.h:94
 msgid "The last time Docky checked GMail for messages."
-msgstr ""
+msgstr "Час останньої перевірки GMail на нові листи."
 
 #: ../data/docky.schemas.in.h:95
 msgid "The list of weather locations to check."
-msgstr ""
+msgstr "Список адрес для перевірки прогнозу погоди."
 
 #: ../data/docky.schemas.in.h:96
 msgid "The name of the current Docky theme."
-msgstr ""
+msgstr "Назва поточної теми Docky."
 
 #: ../data/docky.schemas.in.h:97
 msgid "The name of the weather source to get weather information from."
-msgstr ""
+msgstr "Назва джерела прогнозу погоди для отримання даних про погоду."
 
 #: ../data/docky.schemas.in.h:99
 msgid ""
 "The number of extra pixels to pad the hover area on the top of the dock."
 msgstr ""
+"Кількість додаткових пікселів для доповнення області наведення на початку "
+"панелі."
 
 #: ../data/docky.schemas.in.h:98
 msgid "The number of most recent documents to show."
-msgstr ""
+msgstr "Кількість недавніх документів до показу."
 
 #: ../data/docky.schemas.in.h:99
 msgid "The size of icons on the dock."
-msgstr ""
+msgstr "Розмір значків на панелі."
 
 #: ../data/docky.schemas.in.h:100
 msgid "The text to show when hovering the Docky item."
-msgstr ""
+msgstr "Текст для показу під вказівником на елементі в Docky."
 
 #: ../data/docky.schemas.in.h:101
 msgid "The theme for the analog clock."
-msgstr ""
+msgstr "Тема аналогового годинника."
 
 #: ../data/docky.schemas.in.h:102
 msgid "The weather source"
-msgstr ""
+msgstr "Джерело прогнозу погоди."
 
 #: ../data/docky.schemas.in.h:103
 msgid "This is the list of all the launchers on this dock."
-msgstr ""
+msgstr "Список всіх значків запуску на цій панелі."
 
 #: ../data/docky.schemas.in.h:104
 msgid "This is the monitor the dock exists on."
-msgstr ""
+msgstr "Монітор, на якому розташована панель."
 
 #: ../data/docky.schemas.in.h:105
 msgid ""
 "This is the time (in milliseconds) to wait before unhiding a hidden dock "
 "when the cursor moves over it."
 msgstr ""
+"Час очікування появи прихованої панелі під вказівником миші (в мілісекундах)."
 
 #: ../data/docky.schemas.in.h:106
 msgid ""
 "This is the time (in milliseconds) to wait to determine if a window switch "
 "causes a (un)hide."
 msgstr ""
+"Час очікування перемикання вікна, що спричиняє появі або зникнення панелі (в "
+"мілісекундах)."
 
 #: ../data/docky.schemas.in.h:107
 msgid "This lists all the currently active (displayed) docks, by name."
-msgstr ""
+msgstr "Список всіх активних на цей час (показаних) панелей, за назвою."
 
 #: ../data/docky.schemas.in.h:108
 msgid "Timer Delay"
-msgstr ""
+msgstr "Затримка таймера"
 
 #: ../data/docky.schemas.in.h:109
 msgid "Track Mouse Selections"
-msgstr ""
+msgstr "Відслідковувати вибір мишею"
 
 #: ../data/docky.schemas.in.h:110
 msgid "Urgent indicator color shift"
-msgstr ""
+msgstr "Зміни кольору індикатора «терміново»"
 
 #: ../data/docky.schemas.in.h:111
 msgid "Urgent indicator glow animation time (in seconds)"
-msgstr ""
+msgstr "Час сяяння індикатора «терміново» (в секундах)"
 
 #: ../data/docky.schemas.in.h:112
 msgid "Use 24-hr time"
-msgstr ""
+msgstr "Використовувати 24-годинний час"
 
 #: ../data/docky.schemas.in.h:113
 msgid "Use metric units"
-msgstr ""
+msgstr "Використовувати метричні одиниці."
 
 #: ../data/docky.schemas.in.h:114
 msgid "Used to sort the items on the dock."
-msgstr ""
+msgstr "Використовується для сортування елементів на панелі."
 
 #: ../data/docky.schemas.in.h:115
 msgid "Weather locations"
-msgstr ""
+msgstr "Адреси для прогнозу погоди"
 
 #: ../data/docky.schemas.in.h:116
 msgid "Which monitor the dock is on"
-msgstr ""
+msgstr "Монітор, на якому розташована панель"
 
 #: ../data/docky.schemas.in.h:117
 msgid "Zoom size"
-msgstr ""
+msgstr "Розмір збільшення"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:269
 msgid "Search Docklets..."
-msgstr "Знайти Доклети..."
+msgstr "Пошук доклетів..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:285
 msgid "Search Helpers..."
@@ -556,7 +587,7 @@ msgstr "Перетягніть панель, щоб змінити її розт
 
 #: ../Docky/Docky/ConfigurationWindow.cs:384
 msgid "Helpers require DockManager be installed."
-msgstr ""
+msgstr "Додатки потребують встановленого DockManager."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:456
 msgid "Delete the currently selected dock?"
@@ -695,7 +726,7 @@ msgstr "Перетягніть та киньте, щоб додати до па�
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:244
 msgid "_Settings"
-msgstr "_Налаштування"
+msgstr "П_араметри"
 
 #: ../Docky/Docky/Items/DockyItem.cs:133
 msgid "_About"
@@ -711,7 +742,7 @@ msgstr "_Вийти з  Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
 msgid "Docky Settings"
-msgstr "Налаштування Docky"
+msgstr "Параметри Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
 msgid "_Start When User Logs In"
@@ -741,17 +772,17 @@ msgstr "Панелі"
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
 msgid "All"
-msgstr "Все"
+msgstr "Всі"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
 msgid "Enabled"
-msgstr "Увімкнено"
+msgstr "Увімкнені"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
 msgid "Disabled"
-msgstr "Деактивовано"
+msgstr "Вимкнені"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
 msgid "Docklets"
@@ -759,7 +790,7 @@ msgstr "Доклети"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:317
 msgid "Usable"
-msgstr "Придатний"
+msgstr "Прийнятні"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:375
 msgid "Helpers"
@@ -783,7 +814,7 @@ msgstr "«Розумне» приховування"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Window Dodge"
-msgstr "Край вікна"
+msgstr "Уникати вікон"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:75
 msgid "_Fade On Hide"
@@ -830,7 +861,7 @@ msgstr "_Відкрити"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:70
 msgid "_Reset Color"
-msgstr ""
+msgstr "Скинути колір"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:482
 msgid "_Pin to Dock"
@@ -868,7 +899,7 @@ msgstr "Копіювання"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:268
 msgid "Open Containing _Folder"
-msgstr ""
+msgstr "Відкрити відповідну _теку"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
 msgid "Unma_ximize"
@@ -893,11 +924,11 @@ msgstr "_Закрити все"
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
 msgid "Sign up for {0}"
-msgstr "Зареєеструватися у {0}"
+msgstr "Зареєструватися у {0}"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:44
 msgid "Validating..."
-msgstr "Перевіряю..."
+msgstr "Перевірка..."
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:45
 #, csharp-format
@@ -906,15 +937,15 @@ msgstr "Не маєте {0}?"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:46
 msgid "Account validation failed!"
-msgstr "Не вдалося перевірити акаунт!"
+msgstr "Не вдалося перевірити обліковий запис!"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:47
 msgid "Verify and save account information"
-msgstr "Перевірити та зберегти інформацію про обліковий запис"
+msgstr "Перевірити та зберегти дані облікового запису"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:48
 msgid "Account validation succeeded!"
-msgstr "Акаунт перевірено успішно!"
+msgstr "Обліковий запис перевірено успішно!"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:87
 msgid "Password"
@@ -926,7 +957,7 @@ msgstr "Ім’я користувача"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
 msgid "<i>Verify and save account information</i>"
-msgstr "<i>Перевірити та зберегти інформацію про обліковий запис</i>"
+msgstr "<i>Перевірити та зберегти дані облікового запису</i>"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
 msgid "Don't have an account?"
@@ -970,7 +1001,7 @@ msgstr "Комп'ютер"
 
 #: ../StandardPlugins/Clippy/src/ClippyItem.cs:88
 msgid "Clipboard is currently empty."
-msgstr ""
+msgstr "Буфер обміну порожній."
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "Di_gital Clock"
@@ -986,7 +1017,7 @@ msgstr "Показувати дату"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:449
 msgid "Select _Theme"
-msgstr "Обрати тему"
+msgstr "Вибрати _тему"
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
@@ -1018,12 +1049,12 @@ msgstr "_Додати мітку"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:113
 msgid "Check e_very:"
-msgstr "Перевіряти кожні:"
+msgstr "Перевіряти к_ожні:"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:123
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:186
 msgid "minutes"
-msgstr "хв"
+msgstr "хв."
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:189
 msgid "Click to set username and password."
@@ -1031,12 +1062,12 @@ msgstr "Клацніть, щоб задати ім’я користувача �
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:246
 msgid "(no subject)"
-msgstr "(нема теми)"
+msgstr "(без теми)"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:260
 #, csharp-format
 msgid "You have {0} new, unread messages"
-msgstr "У вас {0} нових непрочитаних повідомлень"
+msgstr "У вас {0} нових непрочитаних листа(ів)"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:264
 #, csharp-format
@@ -1060,7 +1091,7 @@ msgstr "Помилка мережі"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:296
 msgid "General Error"
-msgstr "Помилка"
+msgstr "Загальна помилка"
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
 msgid "Gmail Configuration"
@@ -1068,23 +1099,23 @@ msgstr "Налаштування Gmail"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 msgid "No unread mail"
-msgstr "Нема непрочитаних повідомлень"
+msgstr "Немає непрочитаних листів"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:98
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
-msgstr[0] "{0} непрочитане повідомлення"
-msgstr[1] "{0} непрочитаних повідомлення"
-msgstr[2] "{0} непрочитаних повідомлень"
+msgstr[0] "{0} непрочитаний лист"
+msgstr[1] "{0} непрочитаних листи"
+msgstr[2] "{0} непрочитаних листів"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:119
 msgid "Checking mail..."
-msgstr "Перевіряю пошту..."
+msgstr "Перевірка пошти..."
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "_View "
-msgstr "Перегляд "
+msgstr "_Перегляд "
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
 msgid "_Compose Mail"
@@ -1146,7 +1177,7 @@ msgstr "З’єднано: {0}"
 
 #: ../StandardPlugins/NetworkMonitor/src/NetworkMonitorDockItem.cs:61
 msgid "No network connection available"
-msgstr ""
+msgstr "Немає з'єднання з мережею"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:47
 msgid "My _Stations"
@@ -1191,7 +1222,7 @@ msgstr "«Живі» потоки"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:170
 msgid "Settings"
-msgstr "Налаштування"
+msgstr "Параметри"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:84
 msgid "_Clear Recent Documents..."
@@ -1199,7 +1230,7 @@ msgstr "_Очистити недавні документи..."
 
 #: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:95
 msgid "Clear the Recent Documents list?"
-msgstr "Очистити список недавно використаних документів?"
+msgstr "Очистити список недавніх документів?"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:97
 msgid "Clear Recent Documents"
@@ -1454,7 +1485,7 @@ msgstr "Радарна _мапа"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "Forecasts"
-msgstr "Прогнози"
+msgstr "Прогноз погоди"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:252
 msgid "Check _Weather"
@@ -1478,15 +1509,15 @@ msgstr "Вологість {0}"
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:71
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:221
 msgid "Switch Desks"
-msgstr "Перемкнути стільницю"
+msgstr "Перемкнути столи"
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:172
 msgid "Desk"
-msgstr "Стільниця"
+msgstr "Стіл"
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:174
 msgid "Virtual Desk"
-msgstr "Віртуальна столиця"
+msgstr "Віртуальний стіл"
 
 #~ msgid "_Add"
 #~ msgstr "_Додати"

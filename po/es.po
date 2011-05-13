@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-03 00:41+0100\n"
-"PO-Revision-Date: 2011-03-06 08:06+0000\n"
-"Last-Translator: Paco Molinero <paco@byasl.com>\n"
+"PO-Revision-Date: 2011-04-21 08:33+0000\n"
+"Last-Translator: Jorge González <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-04-06 16:57+0000\n"
-"X-Generator: Launchpad (build 12735)\n"
+"X-Launchpad-Export-Date: 2011-05-13 05:52+0000\n"
+"X-Generator: Launchpad (build 13023)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -48,7 +48,7 @@ msgstr "¡No cambie esto!"
 
 #: ../data/docky.schemas.in.h:7
 msgid "Dock icon size"
-msgstr "Tamaño de los íconos en el Dock"
+msgstr "Tamaño de los íconos en el dock"
 
 #: ../data/docky.schemas.in.h:8
 msgid "Dock is 3d"
@@ -145,7 +145,7 @@ msgid ""
 "is invisible."
 msgstr ""
 "Sí se desvanece cuando  se oculta, el dock pierde brillo. Opacidad: 1 es "
-"sólido, 0 es invisible"
+"sólido, 0 es invisible."
 
 #: ../data/docky.schemas.in.h:28
 msgid ""
@@ -165,7 +165,7 @@ msgstr ""
 msgid ""
 "If false, prevents dropping items onto the dock to add them to the dock."
 msgstr ""
-"Sí se desactiva, evita que los elementos se añadan al ser soltados sobre el "
+"Si se desactiva, evita que los elementos se añadan al ser soltados sobre el "
 "dock."
 
 #: ../data/docky.schemas.in.h:31
@@ -173,8 +173,8 @@ msgid ""
 "If the 'Pin to Dock' option should show in the menu of items, allowing you "
 "to add it permanently to the dock."
 msgstr ""
-"Si la opción «anclar al dock» debe mostrarse en el menú de los elementos, "
-"permitiéndole añadirlo permanentemente al dock."
+"Si la opción «Anclar al dock» se mostrará en el menú de los elementos, "
+"permitiéndole añadirlos permanentemente al dock."
 
 #: ../data/docky.schemas.in.h:32
 msgid "If the dock is a panel"
@@ -196,8 +196,8 @@ msgid ""
 "If true, any windows without launchers will show on this dock. Exactly 1 "
 "dock must have this set to true."
 msgstr ""
-"Si se activa, cualquier ventana sin lanzador se mostrará en este dock. Uno "
-"(y solo uno) de los docks debe tener esta opción activada."
+"Si se activa, cualquier ventana sin lanzador se mostrará en este dock. Solo "
+"uno de los docks debe tener esta opción activada."
 
 #: ../data/docky.schemas.in.h:36
 msgid ""
@@ -253,14 +253,14 @@ msgstr "Sí se activa, la fecha debe aparecer en el reloj digital."
 
 #: ../data/docky.schemas.in.h:46
 msgid "If true, the dock is drawn as a 3d dock."
-msgstr "Si se activa, el dock se muestra como dock 3d."
+msgstr "Si se activa, el dock se muestra en modo 3d."
 
 #: ../data/docky.schemas.in.h:47
 msgid ""
 "If true, the dock is in panel mode and will extend to fill the entire screen "
 "edge."
 msgstr ""
-"Si se activa, el dock estará en modo panel y se extenderá hasta llenar todo "
+"Si se activa, el dock estará en modo panel y se extenderá hasta ocupar todo "
 "el borde de la pantalla."
 
 #: ../data/docky.schemas.in.h:48
@@ -297,7 +297,7 @@ msgstr "Sí se activa, usa unidades metricas cuando muestra el clima."
 msgid ""
 "If true, when the dock hides it will fade away instead of sliding off screen."
 msgstr ""
-"Si se activa,  el dock se oculta desvaneciendose en vez de deslizarse fuera "
+"Si se activa,  el dock se oculta desvaneciéndose en vez de deslizarse fuera "
 "del pantalla."
 
 #: ../data/docky.schemas.in.h:54
@@ -478,7 +478,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:93
 msgid "The dock's zoom size (if enabled), as a percent."
-msgstr "El valor porcentual del zoom (si está activado)."
+msgstr "El valor porcentual del zoom del dock (si está activado)."
 
 #: ../data/docky.schemas.in.h:94
 msgid "The last time Docky checked GMail for messages."
@@ -501,7 +501,7 @@ msgstr ""
 msgid ""
 "The number of extra pixels to pad the hover area on the top of the dock."
 msgstr ""
-"Número extra de píxeles para rellenar el área de sobrevuelo en la parte "
+"Número adicional de píxeles para rellenar el área de sobrevuelo en la parte "
 "superior del dock."
 
 #: ../data/docky.schemas.in.h:98
@@ -550,7 +550,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:107
 msgid "This lists all the currently active (displayed) docks, by name."
-msgstr "Lista por nombre todos los docks activos (en pantalla)."
+msgstr "Esto enlista por nombre todos los docks activos (en pantalla)."
 
 #: ../data/docky.schemas.in.h:108
 msgid "Timer Delay"
@@ -595,7 +595,7 @@ msgstr "Tamaño del zoom"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:269
 msgid "Search Docklets..."
-msgstr "Buscar Docklets..."
+msgstr "Buscar docklets..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:285
 msgid "Search Helpers..."
@@ -603,11 +603,11 @@ msgstr "Buscar ayudantes..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:362
 msgid "Click on any dock to configure."
-msgstr "Seleccione un lanzador para configurar."
+msgstr "Seleccione un dock para configurarlo."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:363
 msgid "Drag any dock to reposition."
-msgstr "Arrastrar cualquier dock para reposicionarlo."
+msgstr "Arrastre cualquier dock para reposicionarlo."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:384
 msgid "Helpers require DockManager be installed."
@@ -615,7 +615,7 @@ msgstr "Los ayudantes necesitan que esté instalado DockManager."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:456
 msgid "Delete the currently selected dock?"
-msgstr "¿Eliminar el lanzador actualmente seleccionado?"
+msgstr "¿Eliminar el dock seleccionado actualmente?"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:458
 msgid ""
@@ -628,7 +628,7 @@ msgstr ""
 #: ../Docky/Docky/ConfigurationWindow.cs:465
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
-msgstr "_Eliminar Dock"
+msgstr "_Eliminar dock"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:581
 #: ../Docky/Docky/ConfigurationWindow.cs:601
@@ -681,9 +681,9 @@ msgid ""
 "Docky requires compositing to work properly. Certain options are disabled "
 "and themes/animations will look incorrect. "
 msgstr ""
-"Docky necesita que los efectos de escritorio estén activados para trabajar "
-"correctamente. Algunas opciones están desactivadas y los temas y animaciones "
-"pueden aparecer de forma incorrecta. "
+"Docky necesita que los efectos de escritorio estén activados para funcionar "
+"adecuadamente. Algunas opciones están desactivadas y los temas y animaciones "
+"aparecerán de forma incorrecta. "
 
 #: ../Docky/Docky/HelperTile.cs:42
 msgid "Status"
