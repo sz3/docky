@@ -787,5 +787,17 @@
 				<long>How often to check for new weather information.</long>
 			</locale>
 		</schema>
+		
+		<schema>
+			<key>/schemas/apps/docky-2/WorkspaceSwitcher/WorkspaceSwitcherDockItem/WrappedScrolling</key>
+			<applyto>/apps/docky-2/WorkspaceSwitcher/WorkspaceSwitcherDockItem/WrappedScrolling</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>true</default>
+			<locale name="C">
+				<short>If scrolling wraps</short>
+				<long>If true, scrolling one direction through all workspaces is possible.</long>
+			</locale>
+		</schema>
 	</schemalist>
 </gconfschemafile>
