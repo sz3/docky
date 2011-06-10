@@ -103,6 +103,17 @@
 				<long>This lists all the currently active (displayed) docks, by name.</long>
 			</locale>
 		</schema>
+		<schema>
+			<key>/schemas/apps/docky-2/Docky/DockController/CompositeCheckEnabled</key>
+			<applyto>/apps/docky-2/Docky/DockController/CompositeCheckEnabled</applyto>
+			<owner>docky</owner>
+			<type>bool</type>
+			<default>true</default>
+			<locale name="C">
+				<short>Enable checks for compositing</short>
+				<long>If true, Docky will check for compositing and warn if it is not available.</long>
+			</locale>
+		</schema>
 		
 		<schema>
 			<key>/schemas/apps/docky-2/Docky/Interface/AutohideManager/UnhideDelay</key>
