@@ -40,7 +40,7 @@ namespace Docky
 
 	internal class DockController : IDisposable
 	{
-		IPreferences prefs;
+		IPreferences prefs = DockServices.Preferences.Get<DockController> ();
 		
 		List<Dock> docks;
 		public IEnumerable<Dock> Docks { 
@@ -78,10 +78,13 @@ namespace Docky
 			}
 		}
 		
+		public bool CompositeCheckEnabled {
+			get { return prefs.Get<bool> ("CompositeCheckEnabled", true); }
+		}
+		
 		public void Initialize ()
 		{
 			docks = new List<Dock> ();
-			prefs = DockServices.Preferences.Get<DockController> ();
 			
 			DetectMonitors ();
 			CreateDocks ();

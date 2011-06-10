@@ -78,10 +78,12 @@ namespace Docky
 			DockServices.System.MainThread = Thread.CurrentThread;
 			
 			// check compositing
-			CheckComposite (8);
-			Gdk.Screen.Default.CompositedChanged += delegate {
-				CheckComposite ();
-			};
+			if (Controller.CompositeCheckEnabled) {
+				CheckComposite (8);
+				Gdk.Screen.Default.CompositedChanged += delegate {
+					CheckComposite (2);
+				};
+			}
 			
 			if (!DBusManager.Default.Initialize (UserArgs.DisableDockManager)) {
 				Log.Fatal ("Another Docky instance was detected - exiting.");
@@ -111,10 +113,6 @@ namespace Docky
 		
 		static uint checkCompositeTimer = 0;
 		static Notification compositeNotify = null;
-		static void CheckComposite ()
-		{
-			CheckComposite (2);
-		}
 		
 		static void CheckComposite (uint timeout)
 		{
