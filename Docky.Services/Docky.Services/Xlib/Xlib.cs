@@ -65,7 +65,7 @@ namespace Docky.Services.Xlib {
 	}
 	
 	public static class X {
-		const string libX11 = "X11";
+		const string libX11 = "libX11";
 		const string libGdkX11 = "libgdk-x11-2.0";
 		
 		[DllImport (libGdkX11)]

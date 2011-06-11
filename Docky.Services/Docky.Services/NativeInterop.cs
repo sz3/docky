@@ -28,7 +28,7 @@ namespace Docky.Services
 	
 	internal class NativeInterop
 	{		
-		[DllImport ("gio-2.0")]
+		[DllImport ("libgio-2.0")]
 		private static extern IntPtr g_file_get_uri (IntPtr fileHandle);
 		
 		[DllImport("libc")]
@@ -36,18 +36,18 @@ namespace Docky.Services
 		
 		// these next 4 methods are not yet in GIO#.  The methods in GIO# (Unmount, Eject, UnmountFinish, EjectFinish)
 		// have been marked as deprecated since 2.22.  Once GIO# gets these methods we can remove these.
-		[DllImport("gio-2.0")]
+		[DllImport("libgio-2.0")]
 		private static extern void g_mount_unmount_with_operation (IntPtr mount, int flags, IntPtr mount_operation, 
 			IntPtr cancellable, GLibSharp.AsyncReadyCallbackNative callback, IntPtr user_data);
 		
-		[DllImport("gio-2.0")]
+		[DllImport("libgio-2.0")]
 		private static extern void g_mount_eject_with_operation (IntPtr mount, int flags, IntPtr mount_operation, 
 			IntPtr cancellable, GLibSharp.AsyncReadyCallbackNative callback, IntPtr user_data);
 		
-		[DllImport("gio-2.0")]
+		[DllImport("libgio-2.0")]
 		private static extern bool g_mount_unmount_with_operation_finish (IntPtr mount, IntPtr result, out IntPtr error);
 		
-		[DllImport("gio-2.0")]
+		[DllImport("libgio-2.0")]
 		private static extern bool g_mount_eject_with_operation_finish (IntPtr mount, IntPtr result, out IntPtr error);
 		
 		// GTK# seems not to have lookup_by_gicon... I need it...
@@ -73,34 +73,34 @@ namespace Docky.Services
 		[DllImport("libgobject-2.0")]
 		private static extern void g_object_unref (IntPtr @object);
 		
-		[DllImport("gio-2.0")]
+		[DllImport("libgio-2.0")]
 		private static extern IntPtr g_file_query_info (IntPtr file, string attributes, int flags, IntPtr cancellable, out IntPtr error);
 
-		[DllImport("gio-2.0")]
+		[DllImport("libgio-2.0")]
 		private static extern IntPtr g_file_query_filesystem_info(IntPtr file, string attributes, IntPtr cancellable, out IntPtr error);
 		
-		[DllImport("gio-2.0")]
+		[DllImport("libgio-2.0")]
 		private static extern IntPtr g_file_info_get_attribute_string (IntPtr info, string attribute);
 		
-		[DllImport("gio-2.0")]
+		[DllImport("libgio-2.0")]
 		private static extern IntPtr g_file_info_get_attribute_stringv (IntPtr info, string attribute);
 				
-		[DllImport("gio-2.0")]
+		[DllImport("libgio-2.0")]
 		private static extern IntPtr g_file_info_get_attribute_byte_string (IntPtr info, string attribute);
 		
-		[DllImport("gio-2.0")]
+		[DllImport("libgio-2.0")]
 		static extern uint g_file_info_get_attribute_uint32 (IntPtr info, string attribute);
 		
-		[DllImport("gio-2.0")]
+		[DllImport("libgio-2.0")]
 		static extern ulong g_file_info_get_attribute_uint64 (IntPtr info, string attribute);
 		
-		[DllImport("gio-2.0")]
+		[DllImport("libgio-2.0")]
 		static extern bool g_file_info_get_attribute_boolean (IntPtr info, string attribute);
 		
-		[DllImport("gio-2.0")]
+		[DllImport("libgio-2.0")]
 		static extern long g_file_info_get_size (IntPtr info);
 		
-		[DllImport("gio-2.0")]
+		[DllImport("libgio-2.0")]
 		static extern IntPtr g_file_info_get_icon (IntPtr info);
 		
 		#endregion
