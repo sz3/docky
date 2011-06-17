@@ -8,87 +8,87 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-03 00:41+0100\n"
-"PO-Revision-Date: 2010-11-06 11:28+0000\n"
-"Last-Translator: Rico Tzschichholz <Unknown>\n"
+"PO-Revision-Date: 2011-06-17 11:41+0000\n"
+"Last-Translator: Aldo Mann <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-05-13 05:52+0000\n"
-"X-Generator: Launchpad (build 13023)\n"
+"X-Launchpad-Export-Date: 2011-06-17 11:44+0000\n"
+"X-Generator: Launchpad (build 13242)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
-msgstr ""
+msgstr "The finest dock no money can buy."
 
 #: ../data/docky.schemas.in.h:1
 msgid "A list of plugins that are active on this dock."
-msgstr ""
+msgstr "A list of plug-ins that are active on this dock."
 
 #: ../data/docky.schemas.in.h:2
 msgid "Analog clock theme"
-msgstr ""
+msgstr "Analogue clock theme"
 
 #: ../data/docky.schemas.in.h:3
 msgid "Clear finished timers"
-msgstr ""
+msgstr "Clear finished timers"
 
 #: ../data/docky.schemas.in.h:4
 msgid "Currently selected item"
-msgstr ""
+msgstr "Currently selected item"
 
 #: ../data/docky.schemas.in.h:5
 msgid "Dismiss a stopped timer when clicked"
-msgstr ""
+msgstr "Dismiss a stopped timer when clicked"
 
 #: ../data/docky.schemas.in.h:6
 msgid "Do not change this!"
-msgstr ""
+msgstr "Do not change this!"
 
 #: ../data/docky.schemas.in.h:7
 msgid "Dock icon size"
-msgstr ""
+msgstr "Dock icon size"
 
 #: ../data/docky.schemas.in.h:8
 msgid "Dock is 3d"
-msgstr ""
+msgstr "Dock is 3D"
 
 #: ../data/docky.schemas.in.h:9
 msgid "Dock manages all windows"
-msgstr ""
+msgstr "Dock manages all windows"
 
 #: ../data/docky.schemas.in.h:10
 msgid "Dock zooms"
-msgstr ""
+msgstr "Dock zooms"
 
 #: ../data/docky.schemas.in.h:11
 msgid "Dock's hiding mode"
-msgstr ""
+msgstr "Dock's hiding mode"
 
 #: ../data/docky.schemas.in.h:12
 msgid "Docky item command to execute"
-msgstr ""
+msgstr "Docky item command to execute"
 
 #: ../data/docky.schemas.in.h:13
 msgid "Docky item hover text"
-msgstr ""
+msgstr "Docky item hover text"
 
 #: ../data/docky.schemas.in.h:14
 msgid "Docky item hue"
-msgstr ""
+msgstr "Docky item hue"
 
 #: ../data/docky.schemas.in.h:15
 msgid "Fade when hiding"
-msgstr ""
+msgstr "Fade when hiding"
 
 #: ../data/docky.schemas.in.h:16
 msgid "GMail labels to check"
-msgstr ""
+msgstr "Gmail labels to check"
 
 #: ../data/docky.schemas.in.h:17
 msgid "GMail username"
-msgstr ""
+msgstr "Gmail username"
 
 #: ../data/docky.schemas.in.h:18
 msgid "Hot-area padding"
@@ -99,52 +99,60 @@ msgid ""
 "How long the urgent indicator glow animation is (in seconds), 0 to disable, "
 "or -1 for infinite."
 msgstr ""
+"How long the urgent indicator glow animation is (in seconds), 0 to disable, "
+"or -1 for infinite."
 
 #: ../data/docky.schemas.in.h:19
 msgid "How long to wait (ms) before unhiding"
-msgstr ""
+msgstr "How long to wait (ms) before unhiding"
 
 #: ../data/docky.schemas.in.h:20
 msgid "How long to wait (ms) to update after a window switch"
-msgstr ""
+msgstr "How long to wait (ms) to update after a window switch"
 
 #: ../data/docky.schemas.in.h:21
 msgid "How many recent clipboard selections to show."
-msgstr ""
+msgstr "How many recent clipboard selections to show."
 
 #: ../data/docky.schemas.in.h:22
 msgid ""
 "How much to shift the color of the urgent indicator. The value can be from -"
 "180 to 180."
 msgstr ""
+"How much to shift the coluor of the urgent indicator. The value can be from -"
+"180 to 180."
 
 #: ../data/docky.schemas.in.h:23
 msgid "How often (in mins) to check for new mail."
-msgstr ""
+msgstr "How often (in mins) to check for new mail."
 
 #: ../data/docky.schemas.in.h:24
 msgid "How often to check"
-msgstr ""
+msgstr "How often to check"
 
 #: ../data/docky.schemas.in.h:25
 msgid "How often to check for new weather information."
-msgstr ""
+msgstr "How often to check for new weather information."
 
 #: ../data/docky.schemas.in.h:26
 msgid "How often to poll (in ms) for new clipboard data."
-msgstr ""
+msgstr "How often to poll (in ms) for new clipboard data."
 
 #: ../data/docky.schemas.in.h:27
 msgid ""
 "If fading when hiding, this is the opacity the dock fades to. 1 is solid, 0 "
 "is invisible."
 msgstr ""
+"If fading when hiding, this is the opacity the dock fades to. 1 is solid, 0 "
+"is invisible."
 
 #: ../data/docky.schemas.in.h:28
 msgid ""
 "If false, Docky will not show hover texts for launchers (but still show for "
 "plugins)."
 msgstr ""
+"If false, Docky will not show hover texts for launchers (but still show for "
+"plugins)."
 
 #: ../data/docky.schemas.in.h:29
 msgid "If false, finished timers will reset instead of dismiss."

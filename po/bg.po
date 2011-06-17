@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-03 00:41+0100\n"
-"PO-Revision-Date: 2010-11-06 11:31+0000\n"
-"Last-Translator: Rico Tzschichholz <Unknown>\n"
+"PO-Revision-Date: 2011-06-07 18:47+0000\n"
+"Last-Translator: PhobosK <phobosk@kbfx.net>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-05-13 05:52+0000\n"
-"X-Generator: Launchpad (build 13023)\n"
+"X-Launchpad-Export-Date: 2011-06-17 11:44+0000\n"
+"X-Generator: Launchpad (build 13242)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -557,7 +557,7 @@ msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:456
 msgid "Delete the currently selected dock?"
-msgstr "Изтриване на текущо изпрания док?"
+msgstr "Изтриване на текущо избрания док?"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:458
 msgid ""
@@ -570,7 +570,7 @@ msgstr ""
 #: ../Docky/Docky/ConfigurationWindow.cs:465
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
-msgstr "_Изтриване"
+msgstr "_Изтриване на док"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:581
 #: ../Docky/Docky/ConfigurationWindow.cs:601
@@ -638,7 +638,7 @@ msgstr "Относно този помощник"
 
 #: ../Docky/Docky/HelperTile.cs:72
 msgid "Enable this helper"
-msgstr ""
+msgstr "Активиране на този помощник"
 
 #: ../Docky/Docky/HelperTile.cs:73
 msgid "Disable this helper"
@@ -657,13 +657,14 @@ msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
-"Когато е настроено, прозорци, които все още нямат стартер на програма на "
-"дока ще бъдат добавени към него."
+"Когато е избрано, прозорци които все още нямат програмни иконки на дока ще "
+"бъдат добавени към него."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:709
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
-"<i>Не се скрива никога; максимизираните прозорци не препокриват дока.</i>"
+"<i>Не се скрива никога; прозорците с максимален размер не препокриват "
+"дока.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:712
 msgid "<i>Hides whenever the mouse is not over it.</i>"

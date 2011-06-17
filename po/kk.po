@@ -8,31 +8,31 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-03 00:41+0100\n"
-"PO-Revision-Date: 2011-01-09 05:27+0000\n"
+"PO-Revision-Date: 2011-05-20 16:58+0000\n"
 "Last-Translator: jmb_kz <Unknown>\n"
 "Language-Team: Kazakh <kk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-05-13 05:52+0000\n"
-"X-Generator: Launchpad (build 13023)\n"
+"X-Launchpad-Export-Date: 2011-06-17 11:44+0000\n"
+"X-Generator: Launchpad (build 13242)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
-msgstr ""
+msgstr "Ақшаға сатылмайтын ең күшті док."
 
 #: ../data/docky.schemas.in.h:1
 msgid "A list of plugins that are active on this dock."
-msgstr ""
+msgstr "Осы докта жұмыс істеп жатқан кеңейтулер тізімі."
 
 #: ../data/docky.schemas.in.h:2
 msgid "Analog clock theme"
-msgstr ""
+msgstr "Аналогты сағат әсемдеу тақырыбы"
 
 #: ../data/docky.schemas.in.h:3
 msgid "Clear finished timers"
-msgstr ""
+msgstr "Аяқталған таймерлерді ысыру"
 
 #: ../data/docky.schemas.in.h:4
 msgid "Currently selected item"
@@ -88,7 +88,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:17
 msgid "GMail username"
-msgstr ""
+msgstr "GMail пайдаланушы аты"
 
 #: ../data/docky.schemas.in.h:18
 msgid "Hot-area padding"
@@ -1270,23 +1270,23 @@ msgstr ""
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:261
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:299
 msgid "_Set Label"
-msgstr ""
+msgstr "Белгі _орнату"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:286
 msgid "_Pause Timer"
-msgstr ""
+msgstr "Таймерді _аялдату"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:286
 msgid "_Start Timer"
-msgstr ""
+msgstr "Таймерді і_ске қосу"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:290
 msgid "R_eset Timer"
-msgstr ""
+msgstr "Таймерді _ысыру"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:294
 msgid "_Remove Timer"
-msgstr ""
+msgstr "Таймерді жою"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:57
 msgid "hour"
@@ -1306,19 +1306,19 @@ msgstr[0] "секунд"
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:145
 #, csharp-format
 msgid "Click to create a timer for {0}."
-msgstr ""
+msgstr "{0} үшін таймерді қосу үшін осы жерге шертіңіз."
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:162
 msgid "Automatically _Start Timers"
-msgstr ""
+msgstr "Таймерлерді автоматты түрде і_ске қосу"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:166
 msgid "Automatically _Dismiss Timers"
-msgstr ""
+msgstr "Аяқталған таймерлерді автоматты түрде істен а_жырату"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:55
 msgid "Drop to move to Trash"
-msgstr ""
+msgstr "Объектіні қоқыс шелегіне тастау үшін, оны осы жерге әкеліңіз"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:82
 msgid "No items in Trash"
@@ -1332,7 +1332,7 @@ msgstr[0] "Қоқыс шелегінде {0} элемент"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:169
 msgid "Restore Files"
-msgstr ""
+msgstr "Файлдарды қайта қалыпқа келтіру"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:201
 msgid "_Open Trash"
@@ -1360,7 +1360,7 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:65
 msgid "_Weather Provider:"
-msgstr ""
+msgstr "Ауа-_райы қызметі:"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:105
 msgid "My _Locations"
@@ -1372,7 +1372,7 @@ msgstr "І_здеу"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:176
 msgid "Automatically Update _Every"
-msgstr ""
+msgstr "Әрбір сайын жаңарту"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:220
 msgid "Use _Metric Units"
@@ -1380,7 +1380,7 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:170
 msgid "Invalid Weather Location"
-msgstr ""
+msgstr "Осы орын үшін ауа-райын алу мүмкін емес"
 
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
@@ -1452,8 +1452,8 @@ msgstr ""
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:172
 msgid "Desk"
-msgstr ""
+msgstr "Үстел"
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:174
 msgid "Virtual Desk"
-msgstr ""
+msgstr "Виртуалды үстел"

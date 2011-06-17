@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-03 00:41+0100\n"
-"PO-Revision-Date: 2011-04-21 08:33+0000\n"
-"Last-Translator: Jorge González <Unknown>\n"
+"PO-Revision-Date: 2011-06-02 06:17+0000\n"
+"Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-05-13 05:52+0000\n"
-"X-Generator: Launchpad (build 13023)\n"
+"X-Launchpad-Export-Date: 2011-06-17 11:44+0000\n"
+"X-Generator: Launchpad (build 13242)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -92,7 +92,7 @@ msgstr "Nombre de usuario de GMail"
 
 #: ../data/docky.schemas.in.h:18
 msgid "Hot-area padding"
-msgstr ""
+msgstr "Separación de área activa"
 
 #: ../data/docky.schemas.in.h:18
 msgid ""
