@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1518,135 +1518,11 @@ msgstr "Wirtualny pulpit"
 #~ msgid "Network Error: "
 #~ msgstr "Błąd sieci. "
 
-#~ msgid "Today"
-#~ msgstr "Dziś"
-
-#~ msgid "_Weather Provider"
-#~ msgstr "Dostawca danych pogodowych"
-
-#~ msgid "Tomorrow"
-#~ msgstr "Jutro"
-
-#~ msgid "'s Forecast"
-#~ msgstr "- dane pogodowe."
-
-#~ msgid "Radar Map"
-#~ msgstr "Mapa radarowa"
-
-#~ msgid "Reload Weather Data"
-#~ msgstr "Wczytaj ponownie dane pogodowe"
-
-#~ msgid "Add _Location"
-#~ msgstr "Dodaj lokację"
-
-#~ msgid "Move _Up"
-#~ msgstr "W górę"
-
-#~ msgid "Some information about the weather source."
-#~ msgstr "Trochę informacji o źródle danych pogodowych."
-
-#~ msgid "Move _Down"
-#~ msgstr "W dół"
-
-#~ msgid "mins"
-#~ msgstr "min."
-
-#~ msgid "Add _Label"
-#~ msgstr "Dodaj nazwę"
-
-#~ msgid ""
-#~ "<big><b>Empty all of the items from the trash?</b></big>\n"
-#~ "\n"
-#~ "If you choose to empty the trash, all items in it\n"
-#~ "will be permanently lost. Please note that you\n"
-#~ "can also delete them separately."
-#~ msgstr ""
-#~ "<big><b>Usunąć wszystkie elementy z kosza?</b></big>\n"
-#~ "\n"
-#~ "Wybierając opróżnienie kosza, wszystkie\n"
-#~ "elementy zostaną z niego trwale usunięte.\n"
-#~ "Zamiast tego można usunąć je pojedynczo."
-
-#~ msgid "Check _Every"
-#~ msgstr "Sprawdzaj co"
-
-#~ msgid "Compose Mail"
-#~ msgstr "Napisz wiadomość"
-
-#~ msgid "View "
-#~ msgstr "Zobacz "
-
 #~ msgid "Username or Password not set"
 #~ msgstr "Login lub hasło nie ustawione"
 
-#~ msgid "Check Now"
-#~ msgstr "Sprawdź teraz"
-
-#~ msgid "Digital Clock"
-#~ msgstr "Zegar cyfrowy"
-
 #~ msgid "Docky Configuration"
 #~ msgstr "Konfiguracja Docky"
-
-#~ msgid "Exec"
-#~ msgstr "Wykonaj"
-
-#~ msgid "Select Theme"
-#~ msgstr "Wybierz motyw"
-
-#~ msgid "Show Date"
-#~ msgstr "Pokaż datę"
-
-#~ msgid "24-Hour Clock"
-#~ msgstr "Zegar 24-godzinny"
-
-#~ msgid "Start When Computer Starts"
-#~ msgstr "Startuj razem z komputerem."
-
-#~ msgid "Theme:"
-#~ msgstr "Motyw:"
-
-#~ msgid "New Dock"
-#~ msgstr "Nowy Panel"
-
-#~ msgid "Icon Size:"
-#~ msgstr "Rozmiar ikony:"
-
-#~ msgid "Fade On Hide"
-#~ msgstr "Wygaś przy ukrywaniu"
-
-#~ msgid "Indicate Multiple Windows"
-#~ msgstr "Oznaczaj zbiór okien"
-
-#~ msgid "Autohide:"
-#~ msgstr "Ukryj automatycznie:"
-
-#~ msgid "Defenestraphobia"
-#~ msgstr "Defenestraphobia"
-
-#~ msgid "Delete Dock"
-#~ msgstr "Usuń Panel"
-
-#~ msgid "Icon"
-#~ msgstr "Ikona"
-
-#~ msgid "Zoom:"
-#~ msgstr "Powiększenie:"
-
-#~ msgid "<b>Active Plugins</b>"
-#~ msgstr "<b>Aktywne Pluginy</b>"
-
-#~ msgid "<b>Inactive Plugins</b>"
-#~ msgstr "<b>Nieaktywne Pluginy</b>"
-
-#~ msgid "Docky"
-#~ msgstr "Docky"
-
-#~ msgid "Name"
-#~ msgstr "Nazwa"
-
-#~ msgid "Manage Windows Without Launcher"
-#~ msgstr "Zarządzaj oknami nie posiadającymi launcher'ów"
 
 #~ msgid "Reset Color"
 #~ msgstr "Resetuj kolor"
@@ -1654,29 +1530,11 @@ msgstr "Wirtualny pulpit"
 #~ msgid "Open Containing Folder"
 #~ msgstr "Otwórz folder zawierający"
 
-#~ msgid "Drag any dock to move it."
-#~ msgstr "Chwyć dowolny Dock, aby go przesunąć."
-
-#~ msgid "Enable"
-#~ msgstr "Aktywuj"
-
-#~ msgid "Disable"
-#~ msgstr "Zablokuj"
-
-#~ msgid "Drop to open"
-#~ msgstr "Upuść aby otworzyć"
-
-#~ msgid "3D Background"
-#~ msgstr "Tło 3D"
-
 #~ msgid "Indicat_e Multiple Windows"
 #~ msgstr "Wyróżnij wielookienkowe aplikacje"
 
 #~ msgid "Open"
 #~ msgstr "Otwórz"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
 
 #~ msgid "_Disable"
 #~ msgstr "Wyłącz"
@@ -1698,29 +1556,11 @@ msgstr "Wirtualny pulpit"
 #~ "Powoduje, że aktywatory, które zarządzają więcej niż jednym oknem, posiadają "
 #~ "pod sobą dodatkowe oznaczenie."
 
-#~ msgid "Show Desktop"
-#~ msgstr "Pokaż Pulpit"
-
-#~ msgid "GMail Configuration"
-#~ msgstr "Konfiguracja GMail'a"
-
 #~ msgid "_Remove"
 #~ msgstr "_Usuń"
 
 #~ msgid "_Add"
 #~ msgstr "_Dodaj"
-
-#~ msgid "Restart..."
-#~ msgstr "Uruchom ponownie..."
-
-#~ msgid "Suspend"
-#~ msgstr "Wstrzymaj"
-
-#~ msgid "Hibernate"
-#~ msgstr "Zahibernuj"
-
-#~ msgid "Shut Down..."
-#~ msgstr "Wyłącz komputer..."
 
 #~ msgid "Sunrise"
 #~ msgstr "Wschód słońca"
@@ -1742,12 +1582,6 @@ msgstr "Wirtualny pulpit"
 
 #~ msgid "Humidity"
 #~ msgstr "Wilgotność"
-
-#~ msgid "Lock Screen"
-#~ msgstr "Blokada ekranu"
-
-#~ msgid "Log Out..."
-#~ msgstr "Wylogowanie..."
 
 #~ msgid "_Start When Computer Starts"
 #~ msgstr "_Uruchom wraz ze startem komputera"

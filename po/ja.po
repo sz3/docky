@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1511,23 +1511,11 @@ msgstr "仮想デスク"
 #~ "extra indicator under it."
 #~ msgstr "現在複数のウィンドウを管理しているランチャー下に、追加のインジケータを表示します。"
 
-#~ msgid "Drop to open"
-#~ msgstr "ドロップして開く"
-
 #~ msgid "Docky Configuration"
 #~ msgstr "Docky の設定"
 
 #~ msgid "_Start When Computer Starts"
 #~ msgstr "コンピュータ起動時に起動(_S)"
-
-#~ msgid "Icon"
-#~ msgstr "アイコン"
-
-#~ msgid "<b>Active Docklets</b>"
-#~ msgstr "<b>有効状態のドックレット</b>"
-
-#~ msgid "<b>Inactive Docklets</b>"
-#~ msgstr "<b>無効状態のドックレット</b>"
 
 #~ msgid "Indicat_e Multiple Windows"
 #~ msgstr "複数ウィンドウを示す目印(_E)"
@@ -1543,12 +1531,6 @@ msgstr "仮想デスク"
 
 #~ msgid "Username or Password not set"
 #~ msgstr "ユーザー名またはパスワードの設定なし"
-
-#~ msgid "GMail Configuration"
-#~ msgstr "GMail の設定"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
 
 #~ msgid "Humidity"
 #~ msgstr "湿度"
@@ -1571,32 +1553,5 @@ msgstr "仮想デスク"
 #~ msgid "Feels Like"
 #~ msgstr "体感温度"
 
-#~ msgid "Show Desktop"
-#~ msgstr "デスクトップの表示"
-
 #~ msgid "Network Error: "
 #~ msgstr "ネットワークエラー: "
-
-#~ msgid "Restart..."
-#~ msgstr "再起動..."
-
-#~ msgid "Suspend"
-#~ msgstr "サスペンド"
-
-#~ msgid "Hibernate"
-#~ msgstr "ハイバネート"
-
-#~ msgid "Lock Screen"
-#~ msgstr "画面のロック"
-
-#~ msgid "Log Out..."
-#~ msgstr "ログアウト..."
-
-#~ msgid "Shut Down..."
-#~ msgstr "シャットダウン..."
-
-#~ msgid "Invalid XML Weather Data"
-#~ msgstr "不正な XML 天気予報データ"
-
-#~ msgid "Name"
-#~ msgstr "名前"

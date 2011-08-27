@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1508,145 +1508,20 @@ msgstr "Mahaigaina"
 msgid "Virtual Desk"
 msgstr "Mahaigain birtuala"
 
-#~ msgid "Today"
-#~ msgstr "Gaur"
-
-#~ msgid "Tomorrow"
-#~ msgstr "Bihar"
-
-#~ msgid "_Weather Provider"
-#~ msgstr "_Hornitzailea"
-
 #~ msgid "Network Error: "
 #~ msgstr "Sareko errorea: "
-
-#~ msgid "'s Forecast"
-#~ msgstr "- Aurrikuspenak"
-
-#~ msgid "Radar Map"
-#~ msgstr "Radar-mapa"
-
-#~ msgid "Reload Weather Data"
-#~ msgstr "Birkargatu eguraldi informazioa"
-
-#~ msgid "Add _Location"
-#~ msgstr "Gehi_tu kokalekua"
-
-#~ msgid "Some information about the weather source."
-#~ msgstr "Eguraldi aurrikuspenaren jatorriari buruzko informazioa"
-
-#~ msgid "Move _Up"
-#~ msgstr "Eraman _gora"
-
-#~ msgid "Move _Down"
-#~ msgstr "Eraman _behera"
 
 #~ msgid "_Remove"
 #~ msgstr "_Kendu"
 
-#~ msgid "mins"
-#~ msgstr "min"
-
 #~ msgid "_Add"
 #~ msgstr "_Gehitu"
-
-#~ msgid "Add _Label"
-#~ msgstr "_Etiketa gehitu"
-
-#~ msgid ""
-#~ "<big><b>Empty all of the items from the trash?</b></big>\n"
-#~ "\n"
-#~ "If you choose to empty the trash, all items in it\n"
-#~ "will be permanently lost. Please note that you\n"
-#~ "can also delete them separately."
-#~ msgstr ""
-#~ "<big><b>Zakarrontziko elementu guztiak hustu?</b></big>\n"
-#~ "\n"
-#~ "Zakarrontzia husten baduzu, bertan dauden\n"
-#~ "elementu guztiak galduko dira, betirako.\n"
-#~ "Gogora ezazu banaka ere ezabatu\n"
-#~ "ditzakezula."
-
-#~ msgid "Check _Every"
-#~ msgstr "Mezurik dagoen _begiratu"
-
-#~ msgid "Compose Mail"
-#~ msgstr "Idatzi mezu berria"
-
-#~ msgid "View "
-#~ msgstr "Ikusi "
 
 #~ msgid "Username or Password not set"
 #~ msgstr "Erabiltzaile-izena edo pasahitza falta da"
 
-#~ msgid "Check Now"
-#~ msgstr "Begiratu orain"
-
-#~ msgid "Digital Clock"
-#~ msgstr "Erloju digitala"
-
 #~ msgid "Docky Configuration"
 #~ msgstr "Dockyren konfigurazioa"
-
-#~ msgid "Exec"
-#~ msgstr "Exekutatu"
-
-#~ msgid "Select Theme"
-#~ msgstr "Hautatu gaia"
-
-#~ msgid "Show Date"
-#~ msgstr "Erakutsi data"
-
-#~ msgid "24-Hour Clock"
-#~ msgstr "24 orduko erlojua"
-
-#~ msgid "Start When Computer Starts"
-#~ msgstr "Abiarazi konputagailua martxan jartzean"
-
-#~ msgid "Theme:"
-#~ msgstr "Gaia:"
-
-#~ msgid "New Dock"
-#~ msgstr "Dock berria"
-
-#~ msgid "Icon Size:"
-#~ msgstr "Ikonoen tamaina:"
-
-#~ msgid "Fade On Hide"
-#~ msgstr "Pixkanaka desagertu"
-
-#~ msgid "Indicate Multiple Windows"
-#~ msgstr "Adierazi leiho batetik gora daudenean"
-
-#~ msgid "Autohide:"
-#~ msgstr "Ezkutatu:"
-
-#~ msgid "Manage Windows Without Launcher"
-#~ msgstr "Kudeatu abiarazle gabeko leihoak"
-
-#~ msgid "Defenestraphobia"
-#~ msgstr "Defenestraphobia"
-
-#~ msgid "Delete Dock"
-#~ msgstr "Dock-a ezabatu"
-
-#~ msgid "Icon"
-#~ msgstr "Ikonoa"
-
-#~ msgid "Zoom:"
-#~ msgstr "Zoom-a:"
-
-#~ msgid "<b>Active Plugins</b>"
-#~ msgstr "<b>Plugin aktiboak</b>"
-
-#~ msgid "<b>Inactive Plugins</b>"
-#~ msgstr "<b>Plugin ez-aktiboak</b>"
-
-#~ msgid "Name"
-#~ msgstr "Izena"
-
-#~ msgid "Docky"
-#~ msgstr "Docky"
 
 #~ msgid "Wind"
 #~ msgstr "Haizea"
@@ -1660,81 +1535,17 @@ msgstr "Mahaigain birtuala"
 #~ msgid "Humidity"
 #~ msgstr "Hezetasuna"
 
-#, csharp-format
-#~ msgid "{0}'s Forecast"
-#~ msgstr "{0} (aurrikuspena)"
-
 #~ msgid "Feels Like"
 #~ msgstr "Sentsazioa"
 
 #~ msgid "Reset Color"
 #~ msgstr "Berrezarri kolorea"
 
-#~ msgid "Drag any dock to move it."
-#~ msgstr "Arrastatu edozein dock mugitzeko."
-
-#~ msgid "Panel Mode"
-#~ msgstr "Panel modua"
-
-#~ msgid "Quit Docky"
-#~ msgstr "Itxi Docky"
-
-#~ msgid "New Window"
-#~ msgstr "Leiho berria"
-
-#~ msgid "Show Preferences"
-#~ msgstr "Erakutsi hobespenak"
-
-#~ msgid "About"
-#~ msgstr "Honi buruz"
-
 #~ msgid "Open Containing Folder"
 #~ msgstr "Ireki karpeta"
 
 #~ msgid "Open"
 #~ msgstr "Ireki"
-
-#~ msgid "Pin to Dock"
-#~ msgstr "Itsatsi dockera"
-
-#~ msgid "Eject"
-#~ msgstr "Egotzi"
-
-#~ msgid "Remove"
-#~ msgstr "Kendu"
-
-#~ msgid "Quit"
-#~ msgstr "Itxi"
-
-#~ msgid "Minimize"
-#~ msgstr "Ikonotu"
-
-#~ msgid "Unmount"
-#~ msgstr "Desmuntatu"
-
-#~ msgid "Maximize"
-#~ msgstr "Maximizatu"
-
-#~ msgid "Restore"
-#~ msgstr "Leheneratu"
-
-#~ msgid "Unmaximize"
-#~ msgstr "Desmaximizatu"
-
-#~ msgid "Open Trash"
-#~ msgstr "Ireki zakarrontzia"
-
-#~ msgid "Empty Trash"
-#~ msgstr "Hustu zakarrontzia"
-
-#~ msgid "C_lear"
-#~ msgstr "_Garbitu"
-
-#~ msgid "_Cancel"
-#~ msgstr "_Utzi"
-
-#~ msgid "Clear Recent Documents..."
-#~ msgstr "Garbitu azken dokumentuak..."
 
 #~ msgid "Sunset"
 #~ msgstr "Ilunsentia"
@@ -1748,126 +1559,11 @@ msgstr "Mahaigain birtuala"
 #~ msgstr ""
 #~ "Leiho bat baino gehiagodun abiarazleen azpian adierazle bat bistaratu."
 
-#~ msgid "_Show Preferences"
-#~ msgstr "_Erakutsi hobespenak"
-
-#~ msgid ""
-#~ "None : Always present, acts like a panel.\n"
-#~ "Autohide : Hides whenever the mouse is not over it.\n"
-#~ "Intellihide : Hides when dock obstructs the active application.\n"
-#~ "Window Dodge : Hides when dock obstructs any window."
-#~ msgstr ""
-#~ "Inoiz ez: beti gainean, panel bat balitz bezala.\n"
-#~ "Automatikoki ezkutatu: sagua gainean ez duenero ezkutatzen da.\n"
-#~ "Adimentsuki ezkutatu: aplikazio aktibo bat oztopatzen duenean ezkutatzen "
-#~ "da.\n"
-#~ "Leihoak ekidin: edozein leiho oztopatzen duenean ezkutatzen da."
-
-#~ msgid "Fade out dock instead of slide off screen"
-#~ msgstr "Desagertarazi dock-a pixkanaka, pantailatik arrastatu beharrean"
-
-#~ msgid "Reset _Color"
-#~ msgstr "Kolorea _berrezarri"
-
-#~ msgid "_Quit"
-#~ msgstr "It_xi"
-
-#~ msgid "Inbox"
-#~ msgstr "Sarrera-ontzia"
-
-#~ msgid "Check _Now"
-#~ msgstr "_Begiratu orain"
-
-#~ msgid "Config"
-#~ msgstr "Konfigurazioa"
-
-#~ msgid "GMail Configuration"
-#~ msgstr "GMailen konfigurazioa"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
-
-#~ msgid "iGoogle"
-#~ msgstr "iGoogle"
-
-#~ msgid "No results found"
-#~ msgstr "Ez da emaitzarik aurkitu"
-
-#~ msgid "Locations"
-#~ msgstr "Kokalekuak"
-
-#~ msgid "Search Results"
-#~ msgstr "Bilaketaren emaitzak"
-
-#~ msgid "Currently searching..."
-#~ msgstr "Kokalekuen bila..."
-
-#~ msgid "Weather Channel"
-#~ msgstr "Weather Channel"
-
-#~ msgid "_Reload Weather Data"
-#~ msgstr "_Birkargatu eguraldiaren informazioa"
-
-#~ msgid "Weather Underground"
-#~ msgstr "Weather Underground"
-
-#~ msgid "Actions"
-#~ msgstr "Ekintzak"
-
-#~ msgid "Windows"
-#~ msgstr "Leihoak"
-
-#~ msgid "Related Items"
-#~ msgstr "Erlazionatutako elementuak"
-
-#~ msgid "Configuration"
-#~ msgstr "Konfigurazioa"
-
-#~ msgid "Zip Code"
-#~ msgstr "Posta-kodea"
-
-#~ msgid "<i>Always present, acts like a panel.</i>"
-#~ msgstr "<i>Beti ikusgai, panel bat balitz bezala.</i>"
-
-#~ msgid ""
-#~ "Docky requires compositing to work properly.  Please enable compositing and "
-#~ "restart docky."
-#~ msgstr ""
-#~ "Dockyk compositing behar du behar bezala funtzionatzeko. Gaitu compositing "
-#~ "eta berrabiarazi Docky."
-
 #~ msgid "_Start When Computer Starts"
 #~ msgstr "_Abiarazi ordenagailua pizterakoan"
 
 #~ msgid "Indicat_e Multiple Windows"
 #~ msgstr "A_dierazi leiho bat baino gehiago daudenean"
-
-#~ msgid "Drop to open"
-#~ msgstr "Jaregin irekitzeko"
-
-#~ msgid "Extensions"
-#~ msgstr "Hedapenak"
-
-#~ msgid "3D Background"
-#~ msgstr "3D atzeko planoa"
-
-#~ msgid "Click to browse..."
-#~ msgstr "Klikatu arakatzeko..."
-
-#~ msgid "Enable"
-#~ msgstr "Aktibatu"
-
-#~ msgid "Disable"
-#~ msgstr "Desaktibatu"
-
-#~ msgid "Search Extensions..."
-#~ msgstr "Bilatu hedapenak..."
-
-#~ msgid "<b>Active Docklets</b>"
-#~ msgstr "<b>Docklet aktiboak</b>"
-
-#~ msgid "<b>Inactive Docklets</b>"
-#~ msgstr "<b>Docklet ez-aktiboak</b>"
 
 #~ msgid "_Disable"
 #~ msgstr "_Desaktibatu"
@@ -1881,33 +1577,3 @@ msgstr "Mahaigain birtuala"
 #~ msgstr ""
 #~ "Docky-k compositing behar du egoki funtzionatzeko. Aktibatu compositing eta "
 #~ "berrabiarazi Docky."
-
-#~ msgid "Show Desktop"
-#~ msgstr "Erakutsi mahaigaina"
-
-#~ msgid "Restart..."
-#~ msgstr "Berrabiarazi..."
-
-#~ msgid "Suspend"
-#~ msgstr "Eseki"
-
-#~ msgid "Hibernate"
-#~ msgstr "Hibernatu"
-
-#~ msgid "Log Out..."
-#~ msgstr "Amaitu saioa..."
-
-#~ msgid "Shut Down..."
-#~ msgstr "Itzali..."
-
-#~ msgid "Lock Screen"
-#~ msgstr "Pantaila blokeatu"
-
-#~ msgid "Invalid XML Weather Data"
-#~ msgstr "Eguraldi-datuen XML baliogabea"
-
-#~ msgid "Cascade Desktop"
-#~ msgstr "Mahaigaina kaskadan"
-
-#~ msgid "Tile Desktop"
-#~ msgstr "Mahaigaina mosaikoan"

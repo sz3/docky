@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1511,91 +1511,11 @@ msgstr "Desktop"
 msgid "Virtual Desk"
 msgstr "Desktop virtuale"
 
-#~ msgid "'s Forecast"
-#~ msgstr "Meteo di"
-
-#~ msgid "Radar Map"
-#~ msgstr "Mappa Radar"
-
-#~ msgid "Reload Weather Data"
-#~ msgstr "Ricarica Dati Meteo"
-
-#~ msgid "mins"
-#~ msgstr "minuti"
-
-#~ msgid "Compose Mail"
-#~ msgstr "Scrivi Messaggio"
-
-#~ msgid "View "
-#~ msgstr "Mostra "
-
-#~ msgid "Check Now"
-#~ msgstr "Controlla Ora"
-
-#~ msgid "Digital Clock"
-#~ msgstr "Orologio Digitale"
-
 #~ msgid "Docky Configuration"
 #~ msgstr "Configurazione di Docky"
 
-#~ msgid "Exec"
-#~ msgstr "Esegui"
-
-#~ msgid "Select Theme"
-#~ msgstr "Seleziona Tema"
-
-#~ msgid "Show Date"
-#~ msgstr "Mostra Data"
-
-#~ msgid "24-Hour Clock"
-#~ msgstr "Orologio 24-Ore"
-
-#~ msgid "New Dock"
-#~ msgstr "Nuovo Dock"
-
-#~ msgid "Theme:"
-#~ msgstr "Tema:"
-
-#~ msgid "Delete Dock"
-#~ msgstr "Elimina Dock"
-
-#~ msgid "Icon"
-#~ msgstr "Icona"
-
-#~ msgid "Name"
-#~ msgstr "Nome"
-
-#~ msgid "Docky"
-#~ msgstr "Docky"
-
-#~ msgid ""
-#~ "<big><b>Empty all of the items from the trash?</b></big>\n"
-#~ "\n"
-#~ "If you choose to empty the trash, all items in it\n"
-#~ "will be permanently lost. Please note that you\n"
-#~ "can also delete them separately."
-#~ msgstr ""
-#~ "<big><b>Rimuovere tutti gli elementi dal cestino?</b></big>\n"
-#~ "\n"
-#~ "Se si sceglie di svuotare il cestino, tutti gli elementi contenuti\n"
-#~ "saranno persi per sempre. È anche possibile cancellarli\n"
-#~ "separatamente."
-
-#~ msgid "Zoom:"
-#~ msgstr "Ingrandimento:"
-
-#~ msgid "Some information about the weather source."
-#~ msgstr "Alcune informazioni sulla fonte meteo."
-
-#~ msgid "Defenestraphobia"
-#~ msgstr "Evita Le Finestre"
-
 #~ msgid "_Add"
 #~ msgstr "A_ggiungi"
-
-#, csharp-format
-#~ msgid "{0}'s Forecast"
-#~ msgstr "Previsioni per {0}"
 
 #~ msgid "Sunrise"
 #~ msgstr "Alba"
@@ -1615,216 +1535,17 @@ msgstr "Desktop virtuale"
 #~ msgid "Direction"
 #~ msgstr "Direzione"
 
-#~ msgid "Quit Docky"
-#~ msgstr "Chiudi Docky"
-
-#~ msgid "Show Preferences"
-#~ msgstr "Mostra Preferenze"
-
-#~ msgid "About"
-#~ msgstr "Informazioni su"
-
-#~ msgid "New Window"
-#~ msgstr "Nuova Finestra"
-
 #~ msgid "Open"
 #~ msgstr "Apri"
-
-#~ msgid "Pin to Dock"
-#~ msgstr "Fissa sul Dock"
-
-#~ msgid "Remove"
-#~ msgstr "Elimina"
-
-#~ msgid "Quit"
-#~ msgstr "Esci"
-
-#~ msgid "Minimize"
-#~ msgstr "Minimizza"
-
-#~ msgid "Maximize"
-#~ msgstr "Massimizza"
-
-#~ msgid "Restore"
-#~ msgstr "Ripristina"
-
-#~ msgid "Unmaximize"
-#~ msgstr "Demassimizza"
-
-#~ msgid "Eject"
-#~ msgstr "Espelli"
-
-#~ msgid "Unmount"
-#~ msgstr "Smonta"
-
-#~ msgid "Open Trash"
-#~ msgstr "Apri il cestino"
-
-#~ msgid "Empty Trash"
-#~ msgstr "Svuota cestino"
-
-#~ msgid "C_lear"
-#~ msgstr "Pu_lisci"
-
-#~ msgid "_Cancel"
-#~ msgstr "_Annulla"
-
-#~ msgid "Clear Recent Documents..."
-#~ msgstr "Pulisci documenti recenti..."
-
-#~ msgid "Today"
-#~ msgstr "oggi"
-
-#~ msgid "Tomorrow"
-#~ msgstr "domani"
-
-#~ msgid "_Show Preferences"
-#~ msgstr "_Mostra preferenze"
-
-#~ msgid "Start When Computer Starts"
-#~ msgstr "Esegui all'avvio del computer"
-
-#~ msgid ""
-#~ "None : Always present, acts like a panel.\n"
-#~ "Autohide : Hides whenever the mouse is not over it.\n"
-#~ "Intellihide : Hides when dock obstructs the active application.\n"
-#~ "Window Dodge : Hides when dock obstructs any window."
-#~ msgstr ""
-#~ "Nessuna: Sempre presente, si comporta come un pannello.\n"
-#~ "Scomparsa automatica: Scompare quando il mouse non si trova sul dock.\n"
-#~ "Scomparsa intelligente: Scompare quando il dock ostruisce l'applicazione "
-#~ "attiva.\n"
-#~ "Evita finestre: Scompare quando il dock ostruisce qualsiasi finestra."
-
-#~ msgid "Fade out dock instead of slide off screen"
-#~ msgstr "Dissolve invece di scorrere via dallo schermo"
-
-#~ msgid "Fade On Hide"
-#~ msgstr "Dissolvenza alla scomparsa"
-
-#~ msgid "Icon Size:"
-#~ msgstr "Dimensione icone:"
-
-#~ msgid "Autohide:"
-#~ msgstr "Scomparsa automatica:"
-
-#~ msgid "Indicate Multiple Windows"
-#~ msgstr "Indica finestre multiple"
-
-#~ msgid "Panel Mode"
-#~ msgstr "Modalità pannello"
-
-#~ msgid "Manage Windows Without Launcher"
-#~ msgstr "Gestione finestre senza lanciatore"
-
-#~ msgid "<b>Inactive Plugins</b>"
-#~ msgstr "<b>Plugin inattivi</b>"
-
-#~ msgid "<b>Active Plugins</b>"
-#~ msgstr "<b>Plugin attivi</b>"
-
-#~ msgid "_Quit"
-#~ msgstr "_Esci"
-
-#~ msgid "Reset _Color"
-#~ msgstr "Reset del _colore"
 
 #~ msgid "Username or Password not set"
 #~ msgstr "Nome utente o password non impostati"
 
-#~ msgid "GMail Configuration"
-#~ msgstr "Configurazione di GMail"
-
-#~ msgid "Config"
-#~ msgstr "Configura"
-
-#~ msgid "Inbox"
-#~ msgstr "Posta in arrivo"
-
-#~ msgid "Check _Now"
-#~ msgstr "_Controlla ora"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
-
-#~ msgid "Check _Every"
-#~ msgstr "_Verifica ogni"
-
-#~ msgid "Move _Up"
-#~ msgstr "Sposta in a_lto"
-
-#~ msgid "Add _Label"
-#~ msgstr "Aggiungi _etichetta"
-
-#~ msgid "_Empty Trash"
-#~ msgstr "_Svuota cestino"
-
 #~ msgid "Network Error: "
 #~ msgstr "Errore rete: "
 
-#~ msgid "iGoogle"
-#~ msgstr "iGoogle"
-
-#~ msgid "Weather Underground"
-#~ msgstr "Weather Underground"
-
-#~ msgid "Locations"
-#~ msgstr "Località"
-
-#~ msgid "Search Results"
-#~ msgstr "Risultati ricerca"
-
-#~ msgid "Currently searching..."
-#~ msgstr "Ricerca in corso..."
-
-#~ msgid "No results found"
-#~ msgstr "Nessun risultato trovato"
-
-#~ msgid "_Reload Weather Data"
-#~ msgstr "_Ricarica dati meteo"
-
-#~ msgid "_Weather Provider"
-#~ msgstr "_Provider meteo"
-
-#~ msgid "Add _Location"
-#~ msgstr "Aggiungi _località"
-
 #~ msgid "Feels Like"
 #~ msgstr "Sembrano quasi"
-
-#~ msgid "Weather Channel"
-#~ msgstr "Weather Channel"
-
-#~ msgid "Related Items"
-#~ msgstr "Elementi correlati"
-
-#~ msgid "Actions"
-#~ msgstr "Azioni"
-
-#~ msgid "Windows"
-#~ msgstr "Finestre"
-
-#~ msgid "Move _Down"
-#~ msgstr "Sposta in _basso"
-
-#~ msgid "Zip Code"
-#~ msgstr "C.A.P."
-
-#~ msgid "Configuration"
-#~ msgstr "Configurazione"
-
-#~ msgid ""
-#~ "Docky requires compositing to work properly.  Please enable compositing and "
-#~ "restart docky."
-#~ msgstr ""
-#~ "Docky richiede il compositing per funzionare correttamente. Per favore "
-#~ "abilitare il compositing e riavviare Docky."
-
-#~ msgid "<i>Always present, acts like a panel.</i>"
-#~ msgstr "<i>Sempre presente, si comporta come un pannello.</i>"
-
-#~ msgid "Drag any dock to move it."
-#~ msgstr "Trascina una dock per spostarla."
 
 #~ msgid "_Start When Computer Starts"
 #~ msgstr "_Esegui all'avvio del computer"
@@ -1839,35 +1560,11 @@ msgstr "Desktop virtuale"
 #~ "Consente ai lanciatori che gestiscono più di una finestra di avere un "
 #~ "indicatore aggiuntivo al di sotto di essi."
 
-#~ msgid "Extensions"
-#~ msgstr "Estensioni"
-
 #~ msgid "Open Containing Folder"
 #~ msgstr "Apri cartella che lo contiene"
 
 #~ msgid "_Remove"
 #~ msgstr "_Rimuovi"
-
-#~ msgid "3D Background"
-#~ msgstr "Sfondo 3D"
-
-#~ msgid "Disable"
-#~ msgstr "Disabilita"
-
-#~ msgid "Enable"
-#~ msgstr "Abilita"
-
-#~ msgid "Click to browse..."
-#~ msgstr "Clicca per sfogliare..."
-
-#~ msgid "Search Extensions..."
-#~ msgstr "Cerca estensioni..."
-
-#~ msgid "<b>Inactive Docklets</b>"
-#~ msgstr "<b>Docklet inattive</b>"
-
-#~ msgid "<b>Active Docklets</b>"
-#~ msgstr "<b>Docklet attive</b>"
 
 #~ msgid "_Disable"
 #~ msgstr "_Disabilita"
@@ -1882,41 +1579,5 @@ msgstr "Desktop virtuale"
 #~ "Docky richiede il compositing per funzionare correttamente. Per favore "
 #~ "abilitare il compositing e riavviare docky."
 
-#~ msgid "Drop to open"
-#~ msgstr "Trascina per aprire"
-
-#~ msgid "Show Desktop"
-#~ msgstr "Mostra Desktop"
-
-#~ msgid "Restart..."
-#~ msgstr "Riavvia..."
-
-#~ msgid "Suspend"
-#~ msgstr "Sospendi"
-
-#~ msgid "Hibernate"
-#~ msgstr "Iberna"
-
-#~ msgid "Lock Screen"
-#~ msgstr "Blocca schermo"
-
 #~ msgid "Reset Color"
 #~ msgstr "Ripristina colore"
-
-#~ msgid "Shut Down..."
-#~ msgstr "Arresto..."
-
-#~ msgid "Log Out..."
-#~ msgstr "Logout..."
-
-#~ msgid "Invalid XML Weather Data"
-#~ msgstr "Dati meteo XML non validi"
-
-#~ msgid "X-GNOME-FullName"
-#~ msgstr "X-GNOME-FullName"
-
-#~ msgid "Tile Desktop"
-#~ msgstr "Desktop affiancato"
-
-#~ msgid "Cascade Desktop"
-#~ msgstr "Desktop a cascata"

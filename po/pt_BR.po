@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1569,16 +1569,6 @@ msgstr "Área de Trabalho Virtual"
 #~ msgstr "Temp"
 
 #~ msgid ""
-#~ "Docky requires compositing to work properly.  Please enable compositing and "
-#~ "restart docky."
-#~ msgstr ""
-#~ "O Docky necessita dos efeitos \"compositing\" para funcionar devidamente. "
-#~ "Por favor, habilite o \"compositing\" e depois reinicie o docky."
-
-#~ msgid "Enable"
-#~ msgstr "Habilitar"
-
-#~ msgid ""
 #~ "Causes launchers which currently manage more than one window to have an "
 #~ "extra indicator under it."
 #~ msgstr ""
@@ -1591,29 +1581,11 @@ msgstr "Área de Trabalho Virtual"
 #~ msgid "_Start When Computer Starts"
 #~ msgstr "Iniciar no Início da _Sessão"
 
-#~ msgid "Drop to open"
-#~ msgstr "Solte para abrir"
-
-#~ msgid "3D Background"
-#~ msgstr "Plano de Fundo 3D"
-
 #~ msgid "Indicat_e Multiple Windows"
 #~ msgstr "Indicar Múltiplas Jan_elas"
 
-#~ msgid "Icon"
-#~ msgstr "Ícone"
-
 #~ msgid "Reset Color"
 #~ msgstr "Resetar a Cor"
-
-#~ msgid "<b>Active Docklets</b>"
-#~ msgstr "<b>Docklets Ativos</b>"
-
-#~ msgid "<b>Inactive Docklets</b>"
-#~ msgstr "<b>Docklets Inativos</b>"
-
-#~ msgid "_Quit"
-#~ msgstr "_Fechar"
 
 #~ msgid "Open Containing Folder"
 #~ msgstr "Abrir a Pasta que o Contém"
@@ -1627,23 +1599,11 @@ msgstr "Área de Trabalho Virtual"
 #~ msgid "_Remove"
 #~ msgstr "_Remover"
 
-#~ msgid "GMail Configuration"
-#~ msgstr "Configuração GMail"
-
 #~ msgid "Username or Password not set"
 #~ msgstr "Nome de Usuário e Senha não informados"
 
-#~ msgid "GMail"
-#~ msgstr "GMail"
-
 #~ msgid "Network Error: "
 #~ msgstr "Erro de Conexão: "
-
-#~ msgid "Disable"
-#~ msgstr "Desabilitar"
-
-#~ msgid "Drag any dock to move it."
-#~ msgstr "Arraste qualquer Dock para movê-lo"
 
 #~ msgid "_Disable"
 #~ msgstr "_Desabilitar"
@@ -1657,24 +1617,3 @@ msgstr "Área de Trabalho Virtual"
 #~ msgstr ""
 #~ "Docky precisa dos efeitos visuais para funcionar perfeitamente. Por favor, "
 #~ "habilite os efeitos visuais e reinicie o docky."
-
-#~ msgid "Show Desktop"
-#~ msgstr "Mostrar Área de Trabalho"
-
-#~ msgid "Suspend"
-#~ msgstr "Suspender"
-
-#~ msgid "Restart..."
-#~ msgstr "Reiniciar..."
-
-#~ msgid "Hibernate"
-#~ msgstr "Hibernar"
-
-#~ msgid "Shut Down..."
-#~ msgstr "Desligar..."
-
-#~ msgid "Lock Screen"
-#~ msgstr "Travar Tela"
-
-#~ msgid "Log Out..."
-#~ msgstr "Sair..."

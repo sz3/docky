@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1515,126 +1515,23 @@ msgstr "Escritorio virtual"
 #~ msgid "Docky Configuration"
 #~ msgstr "Configuración de Docky"
 
-#~ msgid "Start When Computer Starts"
-#~ msgstr "Iniciar cando inicia o computador"
-
-#~ msgid "Theme:"
-#~ msgstr "Tema:"
-
-#~ msgid "New Dock"
-#~ msgstr "Novo Dock"
-
-#~ msgid "Delete Dock"
-#~ msgstr "Borrar Dock"
-
-#~ msgid "Icon Size:"
-#~ msgstr "Tamaño da icona:"
-
-#~ msgid "Fade On Hide"
-#~ msgstr "Desvanecer ao ocultar"
-
-#~ msgid "Indicate Multiple Windows"
-#~ msgstr "Indicar xanelas múltiples"
-
-#~ msgid "Autohide:"
-#~ msgstr "Ocultar automaticamente:"
-
-#~ msgid "Zoom:"
-#~ msgstr "Zoom:"
-
-#~ msgid "Manage Windows Without Launcher"
-#~ msgstr "Xestionar xanelas sen lanzador"
-
-#~ msgid "<b>Inactive Plugins</b>"
-#~ msgstr "<b>Complementos inactivos</b>"
-
-#~ msgid "<b>Active Plugins</b>"
-#~ msgstr "<b>Complementos activos</b>"
-
-#~ msgid "Select Theme"
-#~ msgstr "Seleccionar tema"
-
-#~ msgid "Show Date"
-#~ msgstr "Amosar a data"
-
-#~ msgid "24-Hour Clock"
-#~ msgstr "Reloxo de 24 horas"
-
-#~ msgid "Digital Clock"
-#~ msgstr "Reloxo dixital"
-
 #~ msgid "Username or Password not set"
 #~ msgstr "Nome de usuario ou contrasinal non configurados"
-
-#~ msgid "Compose Mail"
-#~ msgstr "Redactar"
-
-#~ msgid "View "
-#~ msgstr "Ver "
-
-#~ msgid "Check Now"
-#~ msgstr "Comprobar agora"
-
-#~ msgid "Move _Up"
-#~ msgstr "S_ubir"
-
-#~ msgid "Move _Down"
-#~ msgstr "_Baixar"
 
 #~ msgid "_Remove"
 #~ msgstr "_Eliminar"
 
-#~ msgid ""
-#~ "<big><b>Empty all of the items from the trash?</b></big>\n"
-#~ "\n"
-#~ "If you choose to empty the trash, all items in it\n"
-#~ "will be permanently lost. Please note that you\n"
-#~ "can also delete them separately."
-#~ msgstr ""
-#~ "<big><b>Está seguro que quere baleirar os elementos do lixo?</b></big>\n"
-#~ "\n"
-#~ "Se selecciona baleirar o lixo, todos os elementos que están\n"
-#~ "nel serán eliminados de forma permanente.\n"
-#~ "Teña en conta que pode eliminalos de forma de forma separada."
-
-#~ msgid "Check _Every"
-#~ msgstr "Comprobar _cada"
-
-#~ msgid "mins"
-#~ msgstr "minutos"
-
 #~ msgid "_Add"
 #~ msgstr "_Engadir"
 
-#~ msgid "Add _Location"
-#~ msgstr "Engadir _lugar"
-
 #~ msgid "Network Error: "
 #~ msgstr "Erro de rede: "
-
-#~ msgid "_Weather Provider"
-#~ msgstr "Proveedor do clima"
-
-#~ msgid "Some information about the weather source."
-#~ msgstr "Algo de información acerca da fonte do clima."
-
-#~ msgid "Radar Map"
-#~ msgstr "Mapa de radar"
-
-#~ msgid "Reload Weather Data"
-#~ msgstr "Recargar datos do clima"
 
 #~ msgid "Sunset"
 #~ msgstr "Entre lusco e fusco"
 
 #~ msgid "Wind"
 #~ msgstr "Vento"
-
-#~ msgid "Today"
-#~ msgstr "Hoxe"
-
-#~ msgid "Tomorrow"
-#~ msgstr "Mañá"
 
 #~ msgid "Feels Like"
 #~ msgstr "Sensación térmica"
@@ -1651,39 +1548,11 @@ msgstr "Escritorio virtual"
 #~ msgid "Temp"
 #~ msgstr "Temperatura"
 
-#~ msgid "Docky"
-#~ msgstr "Docky"
-
-#, csharp-format
-#~ msgid "{0}'s Forecast"
-#~ msgstr "Prognóstico para {0}"
-
-#~ msgid "Add _Label"
-#~ msgstr "Engadir _etiqueta"
-
-#~ msgid "Drag any dock to move it."
-#~ msgstr "Arrastre calqueira dock para movela."
-
 #~ msgid "_Disable"
 #~ msgstr "_Desactivar"
 
 #~ msgid "_Enable"
 #~ msgstr "_Activar"
-
-#~ msgid "Drop to open"
-#~ msgstr "Soltar para abrir"
-
-#~ msgid "Icon"
-#~ msgstr "Icona"
-
-#~ msgid "<b>Active Docklets</b>"
-#~ msgstr "<b>Docklets activos</b>"
-
-#~ msgid "<b>Inactive Docklets</b>"
-#~ msgstr "<b>Docklets inactivos</b>"
-
-#~ msgid "3D Background"
-#~ msgstr "Fondo en 3D"
 
 #~ msgid "Indicat_e Multiple Windows"
 #~ msgstr "Indic_a múltiples xanelas"
@@ -1693,30 +1562,6 @@ msgstr "Escritorio virtual"
 
 #~ msgid "Open Containing Folder"
 #~ msgstr "Abrir o cartafol contedor"
-
-#~ msgid "GMail Configuration"
-#~ msgstr "Configuración de GMail"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
-
-#~ msgid "Restart..."
-#~ msgstr "Reiniciar..."
-
-#~ msgid "Suspend"
-#~ msgstr "Suspender"
-
-#~ msgid "Hibernate"
-#~ msgstr "Hibernar"
-
-#~ msgid "Log Out..."
-#~ msgstr "Saír da sesión..."
-
-#~ msgid "Shut Down..."
-#~ msgstr "Apagar..."
-
-#~ msgid "Lock Screen"
-#~ msgstr "Bloquear a pantalla"
 
 #~ msgid ""
 #~ "Causes launchers which currently manage more than one window to have an "
@@ -1731,15 +1576,9 @@ msgstr "Escritorio virtual"
 #~ msgid "Reset Color"
 #~ msgstr "Restabelecer a cor"
 
-#~ msgid "Show Desktop"
-#~ msgstr "Mostrar o escritorio"
-
 #~ msgid ""
 #~ "Docky requires compositing to work properly. Please enable compositing and "
 #~ "restart docky."
 #~ msgstr ""
 #~ "Docky require a composición para funcionar correctamente. Active a "
 #~ "composición e reinicie Docky."
-
-#~ msgid "Invalid XML Weather Data"
-#~ msgstr "O XML coa información meteorolóxica non é correcto"

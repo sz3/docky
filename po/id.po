@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1492,9 +1492,6 @@ msgstr ""
 msgid "Virtual Desk"
 msgstr ""
 
-#~ msgid "Drag any dock to move it."
-#~ msgstr "Geser sembarang dock untuk memindahkannya."
-
 #~ msgid "_Add"
 #~ msgstr "Tamb_ah"
 
@@ -1520,9 +1517,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Menyebabkan peluncur yang kini mengelola lebih dari satu jendela akan "
 #~ "memiliki indikator ekstra di bawahnya."
-
-#~ msgid "Drop to open"
-#~ msgstr "Jatuhkan untuk membuka"
 
 #~ msgid "Docky Configuration"
 #~ msgstr "Konfigurasi Docky"

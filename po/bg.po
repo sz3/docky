@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1538,9 +1538,6 @@ msgstr ""
 #~ msgid "_Start When Computer Starts"
 #~ msgstr "_Стартиране когато компютъра стартира"
 
-#~ msgid "Drop to open"
-#~ msgstr "Отпуснете за отваряне"
-
 #~ msgid "Indicat_e Multiple Windows"
 #~ msgstr "Показва_не на много прозорци"
 
@@ -1555,12 +1552,6 @@ msgstr ""
 
 #~ msgid "Username or Password not set"
 #~ msgstr "Потребителско име и парола не са зададени"
-
-#~ msgid "GMail Configuration"
-#~ msgstr "GMail конфигурация"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
 
 #~ msgid "Network Error: "
 #~ msgstr "Мрежова грешка: "
@@ -1592,18 +1583,3 @@ msgstr ""
 
 #~ msgid "Direction"
 #~ msgstr "Посока"
-
-#~ msgid "Suspend"
-#~ msgstr "Отложи Работата"
-
-#~ msgid "Log Out..."
-#~ msgstr "Отписване..."
-
-#~ msgid "Restart..."
-#~ msgstr "Рестартиране..."
-
-#~ msgid "Hibernate"
-#~ msgstr "Спящ режим"
-
-#~ msgid "Shut Down..."
-#~ msgstr "Изключване..."

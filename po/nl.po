@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1538,12 +1538,6 @@ msgstr "Virtueel Bureau"
 #~ msgid "Open Containing Folder"
 #~ msgstr "Doelmap openen"
 
-#~ msgid "GMail Configuration"
-#~ msgstr "GMail configuratie"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
-
 #~ msgid "_Start When Computer Starts"
 #~ msgstr "_Starten bij het opstarten van de computer"
 
@@ -1565,18 +1559,6 @@ msgstr "Virtueel Bureau"
 #~ msgid "Feels Like"
 #~ msgstr "Voelt als"
 
-#~ msgid "Log Out..."
-#~ msgstr "Afmelden..."
-
-#~ msgid "Lock Screen"
-#~ msgstr "Scherm vergrendelen"
-
-#~ msgid "Restart..."
-#~ msgstr "Opnieuw opstarten..."
-
-#~ msgid "Shut Down..."
-#~ msgstr "Uitschakelen..."
-
 #~ msgid "Sunset"
 #~ msgstr "Zonsondergang"
 
@@ -1585,12 +1567,6 @@ msgstr "Virtueel Bureau"
 
 #~ msgid "Sunrise"
 #~ msgstr "Zonsopgang"
-
-#~ msgid "Show Desktop"
-#~ msgstr "Toon bureaublad"
-
-#~ msgid "Hibernate"
-#~ msgstr "Slaapstand"
 
 #~ msgid ""
 #~ "Causes launchers which currently manage more than one window to have an "
@@ -1610,6 +1586,3 @@ msgstr "Virtueel Bureau"
 
 #~ msgid "Network Error: "
 #~ msgstr "Netwerkfout: "
-
-#~ msgid "Suspend"
-#~ msgstr "Pauzestand"

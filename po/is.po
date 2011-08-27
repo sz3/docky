@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1487,103 +1487,14 @@ msgstr ""
 msgid "Virtual Desk"
 msgstr ""
 
-#~ msgid "Theme:"
-#~ msgstr "Útlit:"
-
-#~ msgid "Delete Dock"
-#~ msgstr "Eyða stiku"
-
-#~ msgid "New Dock"
-#~ msgstr "Ný stika"
-
-#~ msgid "Icon Size:"
-#~ msgstr "Stærð tákna:"
-
-#~ msgid "Indicate Multiple Windows"
-#~ msgstr "Gefa til kynna marga glugga"
-
-#~ msgid "Autohide:"
-#~ msgstr "Fela sjálfkrafa:"
-
-#~ msgid "Zoom:"
-#~ msgstr "Stækkun:"
-
-#~ msgid "<b>Active Plugins</b>"
-#~ msgstr "<b>Virkar viðbætur</b>"
-
-#~ msgid "<b>Inactive Plugins</b>"
-#~ msgstr "<b>Óvirkar viðbætur</b>"
-
-#~ msgid "Select Theme"
-#~ msgstr "Velja útlit"
-
-#~ msgid "Show Date"
-#~ msgstr "Birta dagsetningu"
-
-#~ msgid "24-Hour Clock"
-#~ msgstr "24 tíma klukka"
-
-#~ msgid "Digital Clock"
-#~ msgstr "Stafræn klukka"
-
-#~ msgid "Compose Mail"
-#~ msgstr "Semja póst"
-
-#~ msgid "View "
-#~ msgstr "Skoða "
-
-#~ msgid "Check Now"
-#~ msgstr "Kíkja núna"
-
-#~ msgid "Move _Up"
-#~ msgstr "Færa _upp"
-
-#~ msgid "Move _Down"
-#~ msgstr "Færa _niður"
-
 #~ msgid "_Remove"
 #~ msgstr "_Fjarlægja"
-
-#~ msgid "Add _Label"
-#~ msgstr "Bæta við _miða"
-
-#~ msgid ""
-#~ "<big><b>Empty all of the items from the trash?</b></big>\n"
-#~ "\n"
-#~ "If you choose to empty the trash, all items in it\n"
-#~ "will be permanently lost. Please note that you\n"
-#~ "can also delete them separately."
-#~ msgstr ""
-#~ "<big><b>Viltu henda öllu úr ruslinu?</b></big>\n"
-#~ "\n"
-#~ "Allir hlutir í ruslinu munu hverfa að eilífu ef þú\n"
-#~ "ákveður að tæma úr því. Hafðu það í huga að \n"
-#~ "þú getur eitt einni skrá í einu."
-
-#~ msgid "Check _Every"
-#~ msgstr "_Skoða hverja"
-
-#~ msgid "mins"
-#~ msgstr "mín"
 
 #~ msgid "_Add"
 #~ msgstr "_Bæta við"
 
-#~ msgid "Add _Location"
-#~ msgstr "Bæta við _staðsetningu"
-
 #~ msgid "Network Error: "
 #~ msgstr "Netvilla: "
-
-#, csharp-format
-#~ msgid "{0}'s Forecast"
-#~ msgstr "Spá fyrir {0}"
-
-#~ msgid "Radar Map"
-#~ msgstr "Ratsjármynd"
-
-#~ msgid "Reload Weather Data"
-#~ msgstr "Endursækja veðurupplýsingar"
 
 #~ msgid "Sunset"
 #~ msgstr "Sólsetur"
@@ -1594,32 +1505,20 @@ msgstr ""
 #~ msgid "Wind"
 #~ msgstr "Vindur"
 
-#~ msgid "Today"
-#~ msgstr "Í dag"
-
 #~ msgid "Temp"
 #~ msgstr "Hitastig"
 
 #~ msgid "Direction"
 #~ msgstr "Átt"
 
-#~ msgid "Tomorrow"
-#~ msgstr "Á morgun"
-
 #~ msgid "Humidity"
 #~ msgstr "Raki"
-
-#~ msgid "Docky"
-#~ msgstr "Docky"
 
 #~ msgid "_Enable"
 #~ msgstr "_Virkja"
 
 #~ msgid "_Disable"
 #~ msgstr "_Afvirkja"
-
-#~ msgid "Drop to open"
-#~ msgstr "Sleppa til að opna"
 
 #~ msgid "Docky Configuration"
 #~ msgstr "Stillingar Docky"
@@ -1638,12 +1537,6 @@ msgstr ""
 
 #~ msgid "Username or Password not set"
 #~ msgstr "Notandanafn eða lykilorð eru ekki stillt"
-
-#~ msgid "GMail Configuration"
-#~ msgstr "Stillingar GMail"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
 
 #~ msgid "Feels Like"
 #~ msgstr "Vindkæling"

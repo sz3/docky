@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1543,50 +1543,17 @@ msgstr "Bureau virtuel"
 #~ msgid "Docky Configuration"
 #~ msgstr "Configuration de Docky"
 
-#~ msgid "Start When Computer Starts"
-#~ msgstr "Lancer au démarrage de l'ordinateur"
-
-#~ msgid "New Dock"
-#~ msgstr "Nouveau Dock"
-
-#~ msgid "Delete Dock"
-#~ msgstr "Supprimer le Dock"
-
 #~ msgid "Username or Password not set"
 #~ msgstr "Nom d'utilisateur ou mot de passe non spécifié"
 
 #~ msgid "Temp"
 #~ msgstr "Température"
 
-#~ msgid "Fade On Hide"
-#~ msgstr "Fondu lors du masquage"
-
-#~ msgid "<b>Inactive Plugins</b>"
-#~ msgstr "<b>Extensions inactives</b>"
-
-#~ msgid "Panel Mode"
-#~ msgstr "Mode panneau"
-
-#~ msgid "<b>Active Plugins</b>"
-#~ msgstr "<b>Extensions actives</b>"
-
 #~ msgid "Feels Like"
 #~ msgstr "Ressenti"
 
 #~ msgid "Reset Color"
 #~ msgstr "Réinitialiser la couleur"
-
-#~ msgid "Indicate Multiple Windows"
-#~ msgstr "Indiquer les fenêtres multiples"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
-
-#~ msgid "Theme:"
-#~ msgstr "Thème :"
-
-#~ msgid "_Quit"
-#~ msgstr "_Quitter"
 
 #~ msgid "_Remove"
 #~ msgstr "_Supprimer"
@@ -1603,30 +1570,11 @@ msgstr "Bureau virtuel"
 #~ msgid "Sunset"
 #~ msgstr "Coucher de soleil"
 
-#~ msgid "Icon"
-#~ msgstr "Icône"
-
-#~ msgid "<i>Always present, acts like a panel.</i>"
-#~ msgstr "<i>Toujours présent, agit comme un tableau de bord.</i>"
-
 #~ msgid "Direction"
 #~ msgstr "Orientation"
 
-#~ msgid "Drag any dock to move it."
-#~ msgstr "Maintenir le clic sur un dock pour le déplacer."
-
 #~ msgid "Indicat_e Multiple Windows"
 #~ msgstr "Indiquer les fenêtres multiples"
-
-#~ msgid "Extensions"
-#~ msgstr "Extensions"
-
-#~ msgid ""
-#~ "Docky requires compositing to work properly.  Please enable compositing and "
-#~ "restart docky."
-#~ msgstr ""
-#~ "Docky a besoin des effets du bureau pour fonctionner correctement. Merci "
-#~ "d'activer les effets du bureau et de relancer Docky."
 
 #~ msgid "Open"
 #~ msgstr "Ouvrir"
@@ -1634,35 +1582,11 @@ msgstr "Bureau virtuel"
 #~ msgid "Network Error: "
 #~ msgstr "Erreur réseau : "
 
-#~ msgid "GMail Configuration"
-#~ msgstr "Configuration de GMail"
-
-#~ msgid "Enable"
-#~ msgstr "Activer"
-
-#~ msgid "Disable"
-#~ msgstr "Désactiver"
-
-#~ msgid "3D Background"
-#~ msgstr "Arrière-plan 3D"
-
-#~ msgid "Search Extensions..."
-#~ msgstr "Rechercher une extension..."
-
-#~ msgid "Drop to open"
-#~ msgstr "Relâchez pour ouvrir"
-
 #~ msgid "_Add"
 #~ msgstr "A_jouter"
 
 #~ msgid "_Start When Computer Starts"
 #~ msgstr "_Lancer au démarrage du système"
-
-#~ msgid "<b>Active Docklets</b>"
-#~ msgstr "<b>Docklets actifs</b>"
-
-#~ msgid "<b>Inactive Docklets</b>"
-#~ msgstr "<b>Docklets Inactifs</b>"
 
 #~ msgid "Open Containing Folder"
 #~ msgstr "Ouvrir le dossier parent"
@@ -1686,30 +1610,3 @@ msgstr "Bureau virtuel"
 
 #~ msgid "_Enable"
 #~ msgstr "_Activer"
-
-#~ msgid "Shut Down..."
-#~ msgstr "Éteindre..."
-
-#~ msgid "Restart..."
-#~ msgstr "Redémarrer..."
-
-#~ msgid "Log Out..."
-#~ msgstr "Se déconnecter..."
-
-#~ msgid "Show Desktop"
-#~ msgstr "Afficher le bureau"
-
-#~ msgid "Suspend"
-#~ msgstr "Mettre en Veille"
-
-#~ msgid "Hibernate"
-#~ msgstr "Hiberner"
-
-#~ msgid "Lock Screen"
-#~ msgstr "Verrouiller l'écran"
-
-#~ msgid "Name"
-#~ msgstr "Nom"
-
-#~ msgid "Invalid XML Weather Data"
-#~ msgstr "Données météorologiques XML invalides"

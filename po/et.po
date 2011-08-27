@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1506,9 +1506,6 @@ msgstr ""
 msgid "Virtual Desk"
 msgstr ""
 
-#~ msgid "Show Desktop"
-#~ msgstr "Näita töölauda"
-
 #~ msgid "_Add"
 #~ msgstr "_Lisa"
 
@@ -1556,12 +1553,6 @@ msgstr ""
 #~ msgid "Username or Password not set"
 #~ msgstr "Kasutaja nimi või Parool puuduvad"
 
-#~ msgid "GMail Configuration"
-#~ msgstr "GMaili Seadistamine"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
-
 #~ msgid "Network Error: "
 #~ msgstr "Võrgu Viga: "
 
@@ -1585,21 +1576,3 @@ msgstr ""
 
 #~ msgid "Sunset"
 #~ msgstr "Päikeseloojang"
-
-#~ msgid "Restart..."
-#~ msgstr "Taaskäivita..."
-
-#~ msgid "Suspend"
-#~ msgstr "Arvuti seisatakse"
-
-#~ msgid "Hibernate"
-#~ msgstr "Arvuti uinutatakse"
-
-#~ msgid "Lock Screen"
-#~ msgstr "Lukusta ekraan"
-
-#~ msgid "Log Out..."
-#~ msgstr "Logi välja..."
-
-#~ msgid "Shut Down..."
-#~ msgstr "Väljalülitamine..."

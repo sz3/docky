@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1508,126 +1508,14 @@ msgstr "Asztal"
 msgid "Virtual Desk"
 msgstr "Virtuális asztal"
 
-#~ msgid "Today"
-#~ msgstr "Ma"
-
-#~ msgid "Tomorrow"
-#~ msgstr "Holnap"
-
-#~ msgid "Radar Map"
-#~ msgstr "Műholdas térkép"
-
-#~ msgid "mins"
-#~ msgstr "perc"
-
-#~ msgid ""
-#~ "<big><b>Empty all of the items from the trash?</b></big>\n"
-#~ "\n"
-#~ "If you choose to empty the trash, all items in it\n"
-#~ "will be permanently lost. Please note that you\n"
-#~ "can also delete them separately."
-#~ msgstr ""
-#~ "<big><b>Mindent töröl a Kukából?</b></big>\n"
-#~ "\n"
-#~ "Ha a kiüríti a Kukát, minden benne lévő\n"
-#~ "elem véglegesen elvész. Ne feledje,\n"
-#~ "hogy az elemek egyesével is törölhetők."
-
-#~ msgid "Check Now"
-#~ msgstr "Ellenőrzés most"
-
-#~ msgid "View "
-#~ msgstr "Nézet "
-
-#~ msgid "Digital Clock"
-#~ msgstr "Digitális óra"
-
-#~ msgid "Exec"
-#~ msgstr "Végrehajtás"
-
-#~ msgid "Show Date"
-#~ msgstr "Dátum megjelenítése"
-
-#~ msgid "Theme:"
-#~ msgstr "Téma:"
-
-#~ msgid "Icon Size:"
-#~ msgstr "Ikonméret:"
-
-#~ msgid "Indicate Multiple Windows"
-#~ msgstr "Többszörös ablakok jelzése"
-
-#~ msgid "Icon"
-#~ msgstr "Ikon"
-
-#~ msgid "Zoom:"
-#~ msgstr "Nagyítás:"
-
-#~ msgid "Name"
-#~ msgstr "Név"
-
-#~ msgid "Docky"
-#~ msgstr "Docky"
-
 #~ msgid "_Remove"
 #~ msgstr "_Eltávolítás"
 
 #~ msgid "_Add"
 #~ msgstr "_Hozzáadás"
 
-#~ msgid "Compose Mail"
-#~ msgstr "Levél írása"
-
-#~ msgid "Fade On Hide"
-#~ msgstr "Áttűnés elrejtéskor"
-
-#~ msgid "Autohide:"
-#~ msgstr "Automatikus elrejtés:"
-
-#~ msgid "Manage Windows Without Launcher"
-#~ msgstr "Indítóikon nélküli ablakok kezelése"
-
 #~ msgid "Network Error: "
 #~ msgstr "Hálózati hiba: "
-
-#~ msgid "Move _Up"
-#~ msgstr "Mozgatás _fel"
-
-#~ msgid "Move _Down"
-#~ msgstr "Mozgatás _le"
-
-#~ msgid "24-Hour Clock"
-#~ msgstr "24 órás formátum"
-
-#~ msgid "Add _Location"
-#~ msgstr "_Hely hozzáadása"
-
-#~ msgid "Add _Label"
-#~ msgstr "_Címke hozzáadása"
-
-#~ msgid "Delete Dock"
-#~ msgstr "Dokk törlése"
-
-#~ msgid "New Dock"
-#~ msgstr "Új dokk"
-
-#~ msgid "Defenestraphobia"
-#~ msgstr "Defenestraphobia"
-
-#~ msgid "Reload Weather Data"
-#~ msgstr "Időjárási adatok újratöltése"
-
-#~ msgid "Check _Every"
-#~ msgstr "_Ellenőrzés"
-
-#~ msgid "_Weather Provider"
-#~ msgstr "_Időjárásjelentés-szolgáltató"
-
-#~ msgid "'s Forecast"
-#~ msgstr "előrejelzése"
-
-#~ msgid "Some information about the weather source."
-#~ msgstr "Információk az időjárásjelntés forrásáról."
 
 #~ msgid "Username or Password not set"
 #~ msgstr "A felhasználónév vagy jelszó nincs megadva"
@@ -1635,72 +1523,11 @@ msgstr "Virtuális asztal"
 #~ msgid "Docky Configuration"
 #~ msgstr "Docky beállításai"
 
-#~ msgid "Select Theme"
-#~ msgstr "Válasszon témát"
-
-#~ msgid "Start When Computer Starts"
-#~ msgstr "Indítás a számítógép indításakor"
-
-#, csharp-format
-#~ msgid "{0}'s Forecast"
-#~ msgstr "{0}i előrejelzés"
-
 #~ msgid "Humidity"
 #~ msgstr "Páratartalom"
 
-#~ msgid "New Window"
-#~ msgstr "Új ablak"
-
-#~ msgid "About"
-#~ msgstr "Névjegy"
-
 #~ msgid "Open"
 #~ msgstr "Megnyitás"
-
-#~ msgid "Remove"
-#~ msgstr "Törlés"
-
-#~ msgid "Eject"
-#~ msgstr "Kiadás"
-
-#~ msgid "Quit"
-#~ msgstr "Kilépés"
-
-#~ msgid "Minimize"
-#~ msgstr "Minimalizálás"
-
-#~ msgid "Unmount"
-#~ msgstr "Leválasztás"
-
-#~ msgid "Maximize"
-#~ msgstr "Maximalizálás"
-
-#~ msgid "Restore"
-#~ msgstr "Visszaállítás"
-
-#~ msgid "Unmaximize"
-#~ msgstr "Kicsinyítés"
-
-#~ msgid "Open Trash"
-#~ msgstr "Kuka megnyitása"
-
-#~ msgid "Empty Trash"
-#~ msgstr "Kuka ürítése"
-
-#~ msgid "C_lear"
-#~ msgstr "_Törlés"
-
-#~ msgid "_Cancel"
-#~ msgstr "_Mégsem"
-
-#~ msgid "Clear Recent Documents..."
-#~ msgstr "Legutóbbi dokumentumok törlése…"
-
-#~ msgid "_Show Preferences"
-#~ msgstr "_Beállítások"
-
-#~ msgid "Panel Mode"
-#~ msgstr "Panel mód"
 
 #~ msgid "Open Containing Folder"
 #~ msgstr "Tartalmazó mappa megnyitása"
@@ -1708,77 +1535,8 @@ msgstr "Virtuális asztal"
 #~ msgid "Reset Color"
 #~ msgstr "Színek visszaállítása"
 
-#~ msgid "Reset _Color"
-#~ msgstr "Színek_Visszaállítása"
-
-#~ msgid "_Quit"
-#~ msgstr "_Kilépés"
-
-#~ msgid "Check _Now"
-#~ msgstr "Ellenőrzés _most"
-
-#~ msgid "_Empty Trash"
-#~ msgstr "_Kuka ürítése"
-
-#~ msgid "_Reload Weather Data"
-#~ msgstr "_Időjárási adatok újratöltése"
-
-#~ msgid "Actions"
-#~ msgstr "Műveletek"
-
-#~ msgid "Windows"
-#~ msgstr "Ablakok"
-
-#~ msgid "Related Items"
-#~ msgstr "Kapcsolódó elemek"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
-
-#~ msgid "Inbox"
-#~ msgstr "Beérkezett levelek"
-
-#~ msgid "Config"
-#~ msgstr "Beállítás"
-
-#~ msgid "iGoogle"
-#~ msgstr "iGoogle"
-
-#~ msgid "Weather Channel"
-#~ msgstr "Weather Channel"
-
-#~ msgid "Configuration"
-#~ msgstr "Beállítások"
-
-#~ msgid "No results found"
-#~ msgstr "Nincs találat"
-
-#~ msgid "Locations"
-#~ msgstr "Helyek"
-
-#~ msgid "Search Results"
-#~ msgstr "Keresési Eredmények"
-
-#~ msgid "Currently searching..."
-#~ msgstr "Keresés folyamatban..."
-
-#~ msgid "Weather Underground"
-#~ msgstr "Weather Underground"
-
-#~ msgid "Extensions"
-#~ msgstr "Kiterjesztések"
-
 #~ msgid "_Start When Computer Starts"
 #~ msgstr "_Indítás a számítógép indulásakor"
-
-#~ msgid "<b>Active Plugins</b>"
-#~ msgstr "<b>Aktív bővítmények</b>"
-
-#~ msgid "<b>Inactive Plugins</b>"
-#~ msgstr "<b>Inaktív bővítmények</b>"
-
-#~ msgid "GMail Configuration"
-#~ msgstr "GMail beállítása"
 
 #~ msgid "Feels Like"
 #~ msgstr "Hőérzet"
@@ -1798,29 +1556,11 @@ msgstr "Virtuális asztal"
 #~ msgid "Temp"
 #~ msgstr "Hőm."
 
-#~ msgid "Disable"
-#~ msgstr "Letiltás"
-
-#~ msgid "Enable"
-#~ msgstr "Engedélyezés"
-
-#~ msgid "3D Background"
-#~ msgstr "3D Háttér"
-
 #~ msgid "_Disable"
 #~ msgstr "_Letiltás"
 
 #~ msgid "_Enable"
 #~ msgstr "_Engedélyezés"
-
-#~ msgid "<b>Active Docklets</b>"
-#~ msgstr "<b>Aktív dockletek</b>"
-
-#~ msgid "<b>Inactive Docklets</b>"
-#~ msgstr "<b>Inaktív dockletek</b>"
-
-#~ msgid "Drag any dock to move it."
-#~ msgstr "Húzza a dokkot a mozgatásához."
 
 #~ msgid "Indicat_e Multiple Windows"
 #~ msgstr "_Több azonos ablak jelzése"
@@ -1832,33 +1572,9 @@ msgstr "Virtuális asztal"
 #~ "A docky megfelelő működéséhez engedélyezze a vizuális effektusokat "
 #~ "(compositing), majd indítsa újra a dockyt."
 
-#~ msgid "Show Desktop"
-#~ msgstr "Asztal megjelenítése"
-
-#~ msgid "Restart..."
-#~ msgstr "Újraindítás..."
-
-#~ msgid "Suspend"
-#~ msgstr "Felfüggesztés"
-
-#~ msgid "Hibernate"
-#~ msgstr "Hibernálás"
-
-#~ msgid "Lock Screen"
-#~ msgstr "Képernyő zárolása"
-
-#~ msgid "Log Out..."
-#~ msgstr "Kijelentkezés…"
-
-#~ msgid "Shut Down..."
-#~ msgstr "Leállítás…"
-
 #~ msgid ""
 #~ "Causes launchers which currently manage more than one window to have an "
 #~ "extra indicator under it."
 #~ msgstr ""
 #~ "Azok az indítóikonok, amelyek jelenleg több mint egy ablakot kezelnek, egy "
 #~ "extra jelet kapnak."
-
-#~ msgid "Drop to open"
-#~ msgstr "Ragadja meg a kinyitáshoz"

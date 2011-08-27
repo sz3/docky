@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1591,12 +1591,6 @@ msgstr "Birou virtual"
 #~ msgid "Open"
 #~ msgstr "Deschide"
 
-#~ msgid "GMail Configuration"
-#~ msgstr "Configurare GMail"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
-
 #~ msgid "Sunrise"
 #~ msgstr "Răsărit"
 
@@ -1649,6 +1643,3 @@ msgstr "Birou virtual"
 
 #~ msgid "Temp"
 #~ msgstr "Temp"
-
-#~ msgid "Show Desktop"
-#~ msgstr "Afișează desktopul"

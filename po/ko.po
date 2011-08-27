@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1509,23 +1509,8 @@ msgstr ""
 #~ msgid "Docky Configuration"
 #~ msgstr "Docky 설정"
 
-#~ msgid "Icon"
-#~ msgstr "아이콘"
-
-#~ msgid "3D Background"
-#~ msgstr "3D 배경 효과"
-
-#~ msgid "Drag any dock to move it."
-#~ msgstr "이동하고 싶은 dock를 드래그 해 주십시오."
-
 #~ msgid "Open"
 #~ msgstr "열기"
-
-#~ msgid "GMail Configuration"
-#~ msgstr "GMail 설정"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
 
 #~ msgid "_Start When Computer Starts"
 #~ msgstr "부팅 시 Docky 자동 실행 (_S)"
@@ -1535,38 +1520,14 @@ msgstr ""
 #~ "extra indicator under it."
 #~ msgstr "현재 런처가 관리하고 있는 창이 한 개 이상일 경우 런처 아래에 별도의 표시를 나타냅니다."
 
-#~ msgid "Drop to open"
-#~ msgstr "드래그해서 열기"
-
 #~ msgid "Reset Color"
 #~ msgstr "색깔 초기화"
 
 #~ msgid "Open Containing Folder"
 #~ msgstr "저장 폴더 열기"
 
-#~ msgid "Show Desktop"
-#~ msgstr "데스크톱 보이기"
-
 #~ msgid "Username or Password not set"
 #~ msgstr "사용자 이름과 비밀번호가 없음"
-
-#~ msgid "Lock Screen"
-#~ msgstr "화면 잠그기"
-
-#~ msgid "Restart..."
-#~ msgstr "다시 시작..."
-
-#~ msgid "Suspend"
-#~ msgstr "절전 모드"
-
-#~ msgid "Hibernate"
-#~ msgstr "최대 절전모드"
-
-#~ msgid "Log Out..."
-#~ msgstr "로그아웃..."
-
-#~ msgid "Shut Down..."
-#~ msgstr "컴퓨터 끄기..."
 
 #~ msgid "Network Error: "
 #~ msgstr "네트워크 에러: "
@@ -1599,6 +1560,3 @@ msgstr ""
 
 #~ msgid "Indicat_e Multiple Windows"
 #~ msgstr "여러 개의 창을 표시하기(_E)"
-
-#~ msgid "Invalid XML Weather Data"
-#~ msgstr "손상된 XML 날씨 데이터"

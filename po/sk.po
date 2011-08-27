@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1557,12 +1557,6 @@ msgstr "Virtuálna plocha"
 #~ msgid "Username or Password not set"
 #~ msgstr "Meno používateľa alebo heslo nie je nastavené"
 
-#~ msgid "GMail Configuration"
-#~ msgstr "Nastavenie GMail"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
-
 #~ msgid "Network Error: "
 #~ msgstr "Chyba siete: "
 
@@ -1586,24 +1580,3 @@ msgstr "Virtuálna plocha"
 
 #~ msgid "Sunset"
 #~ msgstr "Západ slnka"
-
-#~ msgid "Show Desktop"
-#~ msgstr "Zobraziť plochu"
-
-#~ msgid "Restart..."
-#~ msgstr "Reštartovať..."
-
-#~ msgid "Log Out..."
-#~ msgstr "Odhlásiť sa..."
-
-#~ msgid "Suspend"
-#~ msgstr "Úsporný režim"
-
-#~ msgid "Hibernate"
-#~ msgstr "Dlhodobý spánok"
-
-#~ msgid "Lock Screen"
-#~ msgstr "Zamknúť obrazovku"
-
-#~ msgid "Shut Down..."
-#~ msgstr "Vypnúť..."

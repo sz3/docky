@@ -10,15 +10,15 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-06-17 13:49+0200\n"
-"PO-Revision-Date: 2011-07-04 09:48+0000\n"
+"PO-Revision-Date: 2011-08-07 18:03+0000\n"
 "Last-Translator: Irmak Bıçakçıgil <Unknown>\n"
 "Language-Team: Turkish <Free (Not in Team)>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -306,7 +306,7 @@ msgstr "Denetlenen son zaman"
 
 #: ../data/docky.schemas.in.h:63
 msgid "Left click command"
-msgstr ""
+msgstr "Sol tıklama komutu"
 
 #: ../data/docky.schemas.in.h:64
 msgid "List of NPR stations to display."
@@ -1540,12 +1540,6 @@ msgstr "Sanal Masaüstü"
 #~ msgid "Username or Password not set"
 #~ msgstr "Kullanıcı adı ve Şifre ayarlanmadı"
 
-#~ msgid "Show Desktop"
-#~ msgstr "Masaüstünü Göster"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
-
 #~ msgid "Network Error: "
 #~ msgstr "Ağ Hatası: "
 
@@ -1577,38 +1571,11 @@ msgstr "Sanal Masaüstü"
 #~ msgid "Indicat_e Multiple Windows"
 #~ msgstr "Çoklu Pencereleri Beli_rt"
 
-#~ msgid "Restart..."
-#~ msgstr "Yeniden Başlat..."
-
-#~ msgid "Suspend"
-#~ msgstr "Askıya Al"
-
-#~ msgid "Hibernate"
-#~ msgstr "Hazırda Beklet"
-
-#~ msgid "Lock Screen"
-#~ msgstr "Ekranı Kilitle"
-
-#~ msgid "Log Out..."
-#~ msgstr "Oturumu Kapat..."
-
-#~ msgid "Shut Down..."
-#~ msgstr "Kapat..."
-
-#~ msgid "Drop to open"
-#~ msgstr "Açmak için bırakın"
-
 #~ msgid "_Start When Computer Starts"
 #~ msgstr "_Bilgisayar Açıldığında Başlat"
 
-#~ msgid "Invalid XML Weather Data"
-#~ msgstr "Geçersiz XML Hava Verisi"
-
 #~ msgid "Open Containing Folder"
 #~ msgstr "İçeren Dizini Aç"
-
-#~ msgid "GMail Configuration"
-#~ msgstr "GMail Yapılandırması"
 
 #~ msgid ""
 #~ "Causes launchers which currently manage more than one window to have an "
@@ -1616,12 +1583,3 @@ msgstr "Sanal Masaüstü"
 #~ msgstr ""
 #~ "Birden fazla pencereyi yöneten başlatıcıların alt kısmına fazladan bir "
 #~ "belirteç ekler."
-
-#~ msgid "Icon"
-#~ msgstr "Simge"
-
-#~ msgid "Name"
-#~ msgstr "Ad"
-
-#~ msgid "X-GNOME-FullName"
-#~ msgstr "X-GNOME-TamAd"

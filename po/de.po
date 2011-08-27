@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1579,129 +1579,20 @@ msgstr "Arbeitsfläche"
 msgid "Virtual Desk"
 msgstr "Virtuelle Arbeitsfläche"
 
-#~ msgid "Radar Map"
-#~ msgstr "Radarkarte"
-
-#~ msgid "Today"
-#~ msgstr "Heute"
-
-#~ msgid "Tomorrow"
-#~ msgstr "Morgen"
-
-#~ msgid "'s Forecast"
-#~ msgstr "s Vorhersage"
-
-#~ msgid "Reload Weather Data"
-#~ msgstr "Aktualisiere Wetterdaten"
-
 #~ msgid "Network Error: "
 #~ msgstr "Netzwerkfehler: "
-
-#~ msgid "_Weather Provider"
-#~ msgstr "_Wetterdienst"
-
-#~ msgid "Some information about the weather source."
-#~ msgstr "Einige Informationen über die Wetterdatenquelle"
-
-#~ msgid "Move _Up"
-#~ msgstr "Nach _oben"
-
-#~ msgid "Move _Down"
-#~ msgstr "Nach _unten"
 
 #~ msgid "_Remove"
 #~ msgstr "_Entfernen"
 
-#~ msgid "Add _Location"
-#~ msgstr "Neuer Standort"
-
 #~ msgid "_Add"
 #~ msgstr "_Hinzufügen"
-
-#~ msgid "mins"
-#~ msgstr "min"
-
-#~ msgid ""
-#~ "<big><b>Empty all of the items from the trash?</b></big>\n"
-#~ "\n"
-#~ "If you choose to empty the trash, all items in it\n"
-#~ "will be permanently lost. Please note that you\n"
-#~ "can also delete them separately."
-#~ msgstr ""
-#~ "<big><b>Leere den Inhalt des Mülleimers</b></big>\n"
-#~ "\n"
-#~ "Wenn sie Mülleimer leeren wählen, werden alle enthaltenen\n"
-#~ "Elemente verloren gehen. Bitte beachten sie, dass sie\n"
-#~ "diese auch einzeln löschen können."
-
-#~ msgid "Check _Every"
-#~ msgstr "Über_prüfe alle"
-
-#~ msgid "View "
-#~ msgstr "Zeige "
-
-#~ msgid "Compose Mail"
-#~ msgstr "Schreibe Email"
-
-#~ msgid "Check Now"
-#~ msgstr "Jetzt abrufen"
 
 #~ msgid "Username or Password not set"
 #~ msgstr "Benutzer oder Passwort nicht gesetzt"
 
-#~ msgid "Digital Clock"
-#~ msgstr "Digitale Uhr"
-
-#~ msgid "24-Hour Clock"
-#~ msgstr "24-Stunden Uhr"
-
-#~ msgid "Show Date"
-#~ msgstr "Datum anzeigen"
-
-#~ msgid "Select Theme"
-#~ msgstr "Thema wählen"
-
 #~ msgid "Docky Configuration"
 #~ msgstr "Docky Einstellungen"
-
-#~ msgid "Start When Computer Starts"
-#~ msgstr "Automatisch mit Computer starten"
-
-#~ msgid "Theme:"
-#~ msgstr "Thema:"
-
-#~ msgid "New Dock"
-#~ msgstr "Neues Dock"
-
-#~ msgid "Delete Dock"
-#~ msgstr "Lösche Dock"
-
-#~ msgid "Fade On Hide"
-#~ msgstr "Ausblenden"
-
-#~ msgid "Icon Size:"
-#~ msgstr "Icongröße"
-
-#~ msgid "Indicate Multiple Windows"
-#~ msgstr "Hinweis bei mehreren Fenstern"
-
-#~ msgid "Manage Windows Without Launcher"
-#~ msgstr "Verwalte Fenster ohne Starter"
-
-#~ msgid "Zoom:"
-#~ msgstr "Zoom:"
-
-#~ msgid "Name"
-#~ msgstr "Name"
-
-#~ msgid "Docky"
-#~ msgstr "Docky"
-
-#~ msgid "<b>Active Plugins</b>"
-#~ msgstr "<b>Aktive Plugins</b>"
-
-#~ msgid "<b>Inactive Plugins</b>"
-#~ msgstr "<b>Inaktive Plugins</b>"
 
 #~ msgid "Temp"
 #~ msgstr "Temperatur"
@@ -1721,200 +1612,20 @@ msgstr "Virtuelle Arbeitsfläche"
 #~ msgid "Sunset"
 #~ msgstr "Sonnenuntergang"
 
-#~ msgid "Show Preferences"
-#~ msgstr "Zeige Einstellungen"
-
-#~ msgid "About"
-#~ msgstr "Über"
-
-#~ msgid "Quit Docky"
-#~ msgstr "Beende Docky"
-
-#~ msgid "Autohide:"
-#~ msgstr "Verstecken:"
-
-#~ msgid "New Window"
-#~ msgstr "Neues Fenster"
-
 #~ msgid "Open"
 #~ msgstr "Öffnen"
-
-#~ msgid "Pin to Dock"
-#~ msgstr "An Dock binden"
 
 #~ msgid "Reset Color"
 #~ msgstr "Farbe zurücksetzen"
 
-#~ msgid "Unmaximize"
-#~ msgstr "Entmaximieren"
-
-#~ msgid "Maximize"
-#~ msgstr "Maximieren"
-
-#~ msgid "Restore"
-#~ msgstr "Wiederherstellen"
-
-#~ msgid "Minimize"
-#~ msgstr "Minimieren"
-
-#~ msgid "Quit"
-#~ msgstr "Schließen"
-
-#~ msgid "Remove"
-#~ msgstr "Entfernen"
-
-#~ msgid "Eject"
-#~ msgstr "Auswerfen"
-
-#~ msgid "Unmount"
-#~ msgstr "Aushängen"
-
-#~ msgid "_Cancel"
-#~ msgstr "_Abbrechen"
-
-#~ msgid "C_lear"
-#~ msgstr "_Leeren"
-
-#~ msgid "Clear Recent Documents..."
-#~ msgstr "Leere zuletzt geöffnete Dokumente..."
-
-#~ msgid "Open Trash"
-#~ msgstr "Öffne Müll"
-
-#~ msgid "Empty Trash"
-#~ msgstr "Müll leeren"
-
-#, csharp-format
-#~ msgid "{0}'s Forecast"
-#~ msgstr "{0}s Vorhersage"
-
 #~ msgid "Feels Like"
 #~ msgstr "gefühlte"
-
-#~ msgid "_Show Preferences"
-#~ msgstr "Zeige _Einstellungen"
-
-#~ msgid "_Quit"
-#~ msgstr "_Beenden"
-
-#~ msgid "Reset _Color"
-#~ msgstr "Farbe _zurücksetzen"
-
-#~ msgid "Check _Now"
-#~ msgstr "_Jetzt aktualisieren"
-
-#~ msgid "_Empty Trash"
-#~ msgstr "_Müll leeren"
-
-#~ msgid "_Reload Weather Data"
-#~ msgstr "_Aktualisiere Wetterdaten"
-
-#~ msgid "Panel Mode"
-#~ msgstr "Panel-Modus"
-
-#~ msgid "Config"
-#~ msgstr "Einstellung"
-
-#~ msgid "Inbox"
-#~ msgstr "Posteingang"
-
-#~ msgid "Locations"
-#~ msgstr "Standorte"
-
-#~ msgid "Search Results"
-#~ msgstr "Suchergebnisse"
-
-#~ msgid "Currently searching..."
-#~ msgstr "Suche läuft..."
-
-#~ msgid "No results found"
-#~ msgstr "Kein Ergebnis gefunden"
-
-#~ msgid "Add _Label"
-#~ msgstr "Label anfügen"
-
-#~ msgid ""
-#~ "None : Always present, acts like a panel.\n"
-#~ "Autohide : Hides whenever the mouse is not over it.\n"
-#~ "Intellihide : Hides when dock obstructs the active application.\n"
-#~ "Window Dodge : Hides when dock obstructs any window."
-#~ msgstr ""
-#~ "Nein: Immer sichtbar, verhält sich wie eine Panel\n"
-#~ "Automatisches Ausblenden: Versteckt sich immer, wenn kein Mauscursor es "
-#~ "berührt.\n"
-#~ "Intelligentes Ausblenden: Versteckt sich, wenn es das aktive "
-#~ "Anwendungsfenster behindert.\n"
-#~ "Fenstern ausweichen: Versteckt sich, wenn es ein Anwendungsfenster behindert."
-
-#~ msgid "Fade out dock instead of slide off screen"
-#~ msgstr "Dock wird ausgeblendet anstatt ausgerollt"
-
-#~ msgid "Actions"
-#~ msgstr "Aktionen"
-
-#~ msgid "Windows"
-#~ msgstr "Fenster"
-
-#~ msgid "Configuration"
-#~ msgstr "Konfiguration"
-
-#~ msgid "Related Items"
-#~ msgstr "Verwandte Elemente"
-
-#~ msgid "GMail Configuration"
-#~ msgstr "GMail Konfiguration"
-
-#~ msgid "<i>Always present, acts like a panel.</i>"
-#~ msgstr "<i>Immer sichtbar, verhält sich wie eine Panel</i>"
-
-#~ msgid ""
-#~ "Docky requires compositing to work properly.  Please enable compositing and "
-#~ "restart docky."
-#~ msgstr ""
-#~ "Docky benötigt einen Composition-Manager um korrekt zu arbeiten. Bitte "
-#~ "aktivieren Sie einen Composition-Manager und starten Sie Docky neu."
-
-#~ msgid "Drag any dock to move it."
-#~ msgstr "Ziehen Sie ein Dock um es zu verschieben."
-
-#~ msgid "Extensions"
-#~ msgstr "Erweiterungen"
-
-#~ msgid "Icon"
-#~ msgstr "Symbol"
 
 #~ msgid "Open Containing Folder"
 #~ msgstr "Beinhaltenden Ordner öffnen"
 
-#~ msgid "GMail"
-#~ msgstr "Google Mail"
-
 #~ msgid "Indicat_e Multiple Windows"
 #~ msgstr "Hinweis bei _mehreren Fenstern"
-
-#~ msgid "Disable"
-#~ msgstr "Deaktivieren"
-
-#~ msgid "Enable"
-#~ msgstr "Aktivieren"
-
-#~ msgid "3D Background"
-#~ msgstr "3D Hintergrund"
-
-#~ msgid "Click to browse..."
-#~ msgstr "Klicken um zu durchsuchen …"
-
-#~ msgid "Search Extensions..."
-#~ msgstr "Suche Erweiterungen ..."
-
-#~ msgid "Drop to open"
-#~ msgstr "Loslassen um zu öffnen"
-
-#~ msgid "<b>Active Docklets</b>"
-#~ msgstr "<b>Aktive Docklets</b>"
-
-#~ msgid "<b>Inactive Docklets</b>"
-#~ msgstr "<b>Inaktive Docklets</b>"
 
 #~ msgid "_Disable"
 #~ msgstr "_Deaktivieren"
@@ -1929,27 +1640,6 @@ msgstr "Virtuelle Arbeitsfläche"
 #~ "Docky benötigt einen Composition-Manager um korrekt zu arbeiten. Bitte "
 #~ "aktivieren Sie einen Composition-Manager und starten Sie Docky neu."
 
-#~ msgid "Show Desktop"
-#~ msgstr "Desktop anzeigen"
-
-#~ msgid "Restart..."
-#~ msgstr "Neu starten …"
-
-#~ msgid "Hibernate"
-#~ msgstr "Ruhezustand"
-
-#~ msgid "Suspend"
-#~ msgstr "Bereitschaft"
-
-#~ msgid "Lock Screen"
-#~ msgstr "Bildschirm sperren"
-
-#~ msgid "Log Out..."
-#~ msgstr "Abmelden …"
-
-#~ msgid "Shut Down..."
-#~ msgstr "Ausschalten ..."
-
 #~ msgid ""
 #~ "Causes launchers which currently manage more than one window to have an "
 #~ "extra indicator under it."
@@ -1959,6 +1649,3 @@ msgstr "Virtuelle Arbeitsfläche"
 
 #~ msgid "_Start When Computer Starts"
 #~ msgstr "_Automatisch beim Systemstart starten"
-
-#~ msgid "Invalid XML Weather Data"
-#~ msgstr "Ungültige XML Wetterdaten"

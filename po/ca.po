@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1493,108 +1493,11 @@ msgstr ""
 #~ msgid "Network Error: "
 #~ msgstr "Error de Xarxa "
 
-#~ msgid "Today"
-#~ msgstr "Avui"
-
-#~ msgid "Tomorrow"
-#~ msgstr "Demà"
-
-#~ msgid "Radar Map"
-#~ msgstr "Mapa de radar"
-
-#~ msgid "Reload Weather Data"
-#~ msgstr "Recarrega la informació del Temps"
-
-#~ msgid "Move _Up"
-#~ msgstr "Mou am_unt"
-
-#~ msgid "Move _Down"
-#~ msgstr "Mou a_vall"
-
 #~ msgid "_Remove"
 #~ msgstr "_Elimina"
 
-#~ msgid "mins"
-#~ msgstr "mins."
-
-#~ msgid "Digital Clock"
-#~ msgstr "Rellotge digital"
-
 #~ msgid "Docky Configuration"
 #~ msgstr "Configuració del Docky"
-
-#~ msgid "Exec"
-#~ msgstr "Executa"
-
-#~ msgid "Select Theme"
-#~ msgstr "Seleccioneu un tema"
-
-#~ msgid "Show Date"
-#~ msgstr "Mostra la data"
-
-#~ msgid "24-Hour Clock"
-#~ msgstr "Rellotge de 24-Hores"
-
-#~ msgid "New Dock"
-#~ msgstr "Nou Dock"
-
-#~ msgid "Start When Computer Starts"
-#~ msgstr "Engega quan l'ordinador engegui"
-
-#~ msgid "Theme:"
-#~ msgstr "Tema:"
-
-#~ msgid "Icon Size:"
-#~ msgstr "Mida de la icona:"
-
-#~ msgid "Fade On Hide"
-#~ msgstr "Esvaeix al ocultar"
-
-#~ msgid "Indicate Multiple Windows"
-#~ msgstr "Indica finestres múltiples"
-
-#~ msgid "Autohide:"
-#~ msgstr "Auto Ocultar:"
-
-#~ msgid "Delete Dock"
-#~ msgstr "Elimina el Dock"
-
-#~ msgid "Icon"
-#~ msgstr "Icona"
-
-#~ msgid "Zoom:"
-#~ msgstr "Ampliació:"
-
-#~ msgid "<b>Active Plugins</b>"
-#~ msgstr "<b>Extensions Actives</b>"
-
-#~ msgid "<b>Inactive Plugins</b>"
-#~ msgstr "<b>Extensions Inactives</b>"
-
-#~ msgid "Name"
-#~ msgstr "Nom"
-
-#~ msgid "Docky"
-#~ msgstr "Docky"
-
-#~ msgid "<i>Always present, acts like a panel.</i>"
-#~ msgstr "<i>Sempre present, actua com un panell</i>"
-
-#~ msgid ""
-#~ "Docky requires compositing to work properly.  Please enable compositing and "
-#~ "restart docky."
-#~ msgstr ""
-#~ "El Docky necessita la composició d'escriptori per funcionar correctament. "
-#~ "Sisplau, habilita la composició d'escriptori i renicicia el docky."
-
-#~ msgid "Manage Windows Without Launcher"
-#~ msgstr "Gestiona les finestres sense llançador"
-
-#~ msgid "Panel Mode"
-#~ msgstr "Mode Panell"
-
-#~ msgid "_Quit"
-#~ msgstr "_Surt"
 
 #~ msgid "Open Containing Folder"
 #~ msgstr "Obre la carpeta contenidora"
@@ -1604,15 +1507,6 @@ msgstr ""
 
 #~ msgid "Username or Password not set"
 #~ msgstr "Nom d'usuari o paraula de pas no definits"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
-
-#~ msgid "GMail Configuration"
-#~ msgstr "Configuració del GMail"
-
-#~ msgid "Drag any dock to move it."
-#~ msgstr "Arrossegueu qualsevol plafó per a moure'l."
 
 #~ msgid "_Add"
 #~ msgstr "_Afegeix"
@@ -1632,15 +1526,6 @@ msgstr ""
 
 #~ msgid "_Start When Computer Starts"
 #~ msgstr "_Inicia automàticament amb l'inici de sessió"
-
-#~ msgid "<b>Active Docklets</b>"
-#~ msgstr "<b>Miniaplicacions actives</b>"
-
-#~ msgid "<b>Inactive Docklets</b>"
-#~ msgstr "<b>Miniaplicacions inactives</b>"
-
-#~ msgid "3D Background"
-#~ msgstr "Fons tridimensional"
 
 #~ msgid "Indicat_e Multiple Windows"
 #~ msgstr "_Indica múltiples finestres"

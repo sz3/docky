@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-06-17 13:49+0200\n"
-"PO-Revision-Date: 2011-07-14 17:20+0000\n"
-"Last-Translator: Sérgio Marques <Unknown>\n"
+"PO-Revision-Date: 2011-08-22 14:35+0000\n"
+"Last-Translator: Carlos Manuel <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -414,7 +414,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:83
 msgid "Show indicator dot for unread mail"
-msgstr ""
+msgstr "Mostrar indicador para mensagens não lidas"
 
 #: ../data/docky.schemas.in.h:84
 msgid "Show most recent doc"
@@ -438,11 +438,11 @@ msgstr "Ordenar itens na dock"
 
 #: ../data/docky.schemas.in.h:89
 msgid "Start all new timers"
-msgstr ""
+msgstr "Iniciar todos os novos temporizadores"
 
 #: ../data/docky.schemas.in.h:90
 msgid "Stop items from dragging"
-msgstr ""
+msgstr "Impedir que os itens possam ser arrastados"
 
 #: ../data/docky.schemas.in.h:91
 msgid "The GMail username to check."
@@ -460,17 +460,19 @@ msgstr "O tema actual"
 
 #: ../data/docky.schemas.in.h:94
 msgid "The currently selected item in the session manager menu."
-msgstr ""
+msgstr "O item selecionado no menu do início de sessão"
 
 #: ../data/docky.schemas.in.h:95
 msgid "The default time (in secs) for any new timers."
-msgstr ""
+msgstr "O tempo padrão (em segundos) para todos os novos temporizadores."
 
 #: ../data/docky.schemas.in.h:96
 msgid ""
 "The dock's hide mode. Possible values are: None, Autohide, Intellihide, "
 "UniversalIntellihide"
 msgstr ""
+"O estado da visibilidade da dock. Os valores possíveis são: Nenhum, "
+"Autohide, Intellihide, UniversalIntellihide"
 
 #: ../data/docky.schemas.in.h:97
 msgid "The dock's position"
@@ -541,7 +543,7 @@ msgstr "A lista de lançadores nesta dock."
 
 #: ../data/docky.schemas.in.h:112
 msgid "This is the monitor the dock exists on."
-msgstr ""
+msgstr "Este é o monitor em que a dock se encontra."
 
 #: ../data/docky.schemas.in.h:113
 msgid ""
@@ -557,7 +559,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:115
 msgid "This lists all the currently active (displayed) docks, by name."
-msgstr ""
+msgstr "Isto mostra todas as docks visíveis ativas, ordenadas por nome."
 
 #: ../data/docky.schemas.in.h:116
 msgid "Timer Delay"
@@ -1569,14 +1571,8 @@ msgstr "Secretária Virtual"
 #~ msgid "Reset Color"
 #~ msgstr "Restabelecer cor"
 
-#~ msgid "GMail Configuration"
-#~ msgstr "Configuração do GMail"
-
 #~ msgid "Username or Password not set"
 #~ msgstr "Nome de utilizador e Password não definidas"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
 
 #~ msgid "Network Error: "
 #~ msgstr "Erro de Rede: "
@@ -1605,26 +1601,5 @@ msgstr "Secretária Virtual"
 #~ msgid "Open"
 #~ msgstr "Abrir"
 
-#~ msgid "Lock Screen"
-#~ msgstr "Trancar Ecrã"
-
-#~ msgid "Log Out..."
-#~ msgstr "Terminar Sessão..."
-
 #~ msgid "Open Containing Folder"
 #~ msgstr "Abrir Pasta Respectiva"
-
-#~ msgid "Show Desktop"
-#~ msgstr "Mostrar Área de Trabalho"
-
-#~ msgid "Restart..."
-#~ msgstr "Reiniciar..."
-
-#~ msgid "Suspend"
-#~ msgstr "Suspender"
-
-#~ msgid "Hibernate"
-#~ msgstr "Hibernar"
-
-#~ msgid "Shut Down..."
-#~ msgstr "Desligar..."

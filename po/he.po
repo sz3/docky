@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1523,9 +1523,6 @@ msgstr "שולחן כתיבה וירטואלי"
 #~ "extra indicator under it."
 #~ msgstr "גורם למשגרים שכרגע מריצים יותר מחלון אחד להיות עם מחוון נוסף תחתיהם."
 
-#~ msgid "Drop to open"
-#~ msgstr "שחרר בכדי לפתוח"
-
 #~ msgid "Docky Configuration"
 #~ msgstr "הגדרות דוקי"
 
@@ -1541,38 +1538,11 @@ msgstr "שולחן כתיבה וירטואלי"
 #~ msgid "Open Containing Folder"
 #~ msgstr "פתח תיקייה מכילה"
 
-#~ msgid "Show Desktop"
-#~ msgstr "הצג את שולחן העבודה"
-
-#~ msgid "GMail Configuration"
-#~ msgstr "הגדרות GMail"
-
 #~ msgid "Username or Password not set"
 #~ msgstr "שם משתמש או סיסמה אינם מוגדרים"
 
 #~ msgid "_Start When Computer Starts"
 #~ msgstr "התחל בעת הפעלת המחשב"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
-
-#~ msgid "Restart..."
-#~ msgstr "הפעלה מחדש..."
-
-#~ msgid "Suspend"
-#~ msgstr "השהיה"
-
-#~ msgid "Hibernate"
-#~ msgstr "תרדמת"
-
-#~ msgid "Lock Screen"
-#~ msgstr "נעל מסך"
-
-#~ msgid "Log Out..."
-#~ msgstr "ניתוק..."
-
-#~ msgid "Shut Down..."
-#~ msgstr "כיבוי..."
 
 #~ msgid "Network Error: "
 #~ msgstr "שגיאת רשת "

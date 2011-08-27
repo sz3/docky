@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1507,36 +1507,6 @@ msgstr "Skrivbord"
 msgid "Virtual Desk"
 msgstr "Virtuellt skrivbord"
 
-#~ msgid "_Show Preferences"
-#~ msgstr "_Visa inställningar"
-
-#~ msgid "Drag any dock to move it."
-#~ msgstr "Dra i en docka för att flytta den."
-
-#~ msgid "Theme:"
-#~ msgstr "Tema:"
-
-#~ msgid "Delete Dock"
-#~ msgstr "Ta bort docka"
-
-#~ msgid "Icon Size:"
-#~ msgstr "Ikonstorlek:"
-
-#~ msgid "Icon"
-#~ msgstr "Ikon"
-
-#~ msgid "Indicate Multiple Windows"
-#~ msgstr "Indikera flera fönster"
-
-#~ msgid "Panel Mode"
-#~ msgstr "Panelläge"
-
-#~ msgid "Actions"
-#~ msgstr "Åtgärder"
-
-#~ msgid "Windows"
-#~ msgstr "Fönster"
-
 #~ msgid "Open Containing Folder"
 #~ msgstr "Öppna mappen med filen"
 
@@ -1546,101 +1516,20 @@ msgstr "Virtuellt skrivbord"
 #~ msgid "_Remove"
 #~ msgstr "_Ta bort"
 
-#~ msgid "Config"
-#~ msgstr "Konfigurera"
-
-#~ msgid "GMail Configuration"
-#~ msgstr "Inställningar för GMail"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
-
-#~ msgid "Inbox"
-#~ msgstr "Inkorg"
-
-#~ msgid "mins"
-#~ msgstr "min"
-
-#~ msgid "Zip Code"
-#~ msgstr "Postnummer"
-
-#~ msgid "iGoogle"
-#~ msgstr "iGoogle"
-
-#~ msgid "Locations"
-#~ msgstr "Platser"
-
-#~ msgid "Search Results"
-#~ msgstr "Sökresultat"
-
-#~ msgid "Currently searching..."
-#~ msgstr "Söker..."
-
-#~ msgid "Weather Underground"
-#~ msgstr "Weather Underground"
-
 #~ msgid "Docky Configuration"
 #~ msgstr "Konfigurera Docky"
-
-#~ msgid "Start When Computer Starts"
-#~ msgstr "Starta när datorn startar"
-
-#~ msgid "New Dock"
-#~ msgstr "Ny docka"
-
-#~ msgid "Zoom:"
-#~ msgstr "Zooma:"
-
-#~ msgid "Autohide:"
-#~ msgstr "Dölj automatiskt:"
 
 #~ msgid "Reset Color"
 #~ msgstr "Nollställ färg"
 
-#~ msgid "Related Items"
-#~ msgstr "Relaterade objekt"
-
-#~ msgid "Reset _Color"
-#~ msgstr "Nollställ _färg"
-
-#~ msgid "_Quit"
-#~ msgstr "A_vsluta"
-
 #~ msgid "Username or Password not set"
 #~ msgstr "Användarnamn och lösenord har inte angivits"
-
-#~ msgid "Move _Up"
-#~ msgstr "Flytta _uppåt"
-
-#~ msgid "Move _Down"
-#~ msgstr "Flytta _nedåt"
-
-#~ msgid "Add _Label"
-#~ msgstr "Lägg till _etikett"
 
 #~ msgid "_Add"
 #~ msgstr "_Lägg till"
 
 #~ msgid "Network Error: "
 #~ msgstr "Nätverksfel: "
-
-#~ msgid "No results found"
-#~ msgstr "Inga resultat hittades"
-
-#~ msgid "Weather Channel"
-#~ msgstr "Weather Channel"
-
-#~ msgid "Add _Location"
-#~ msgstr "Lägg till _plats"
-
-#~ msgid "_Weather Provider"
-#~ msgstr "_Väderleverantör"
-
-#~ msgid "Configuration"
-#~ msgstr "Konfiguration"
-
-#~ msgid "_Reload Weather Data"
-#~ msgstr "_Uppdatera väderdata"
 
 #~ msgid "Wind"
 #~ msgstr "Vind"
@@ -1660,38 +1549,8 @@ msgstr "Virtuellt skrivbord"
 #~ msgid "Sunrise"
 #~ msgstr "Soluppgång"
 
-#~ msgid "Docky"
-#~ msgstr "Docky"
-
 #~ msgid "Sunset"
 #~ msgstr "Solnedgång"
-
-#~ msgid "Fade On Hide"
-#~ msgstr "Tona ut dockan"
-
-#~ msgid "Manage Windows Without Launcher"
-#~ msgstr "Hantera fönster utan programstartare"
-
-#~ msgid "Fade out dock instead of slide off screen"
-#~ msgstr "Dockan tonas ut istället för att glida av skärmen."
-
-#~ msgid "Check _Now"
-#~ msgstr "Kontrollera _nu"
-
-#~ msgid "Some information about the weather source."
-#~ msgstr "Information om väderkällan."
-
-#~ msgid "Check _Every"
-#~ msgstr "Kontrollera _var"
-
-#~ msgid "<b>Active Plugins</b>"
-#~ msgstr "<b>Aktiva insticksmoduler</b>"
-
-#~ msgid "<b>Inactive Plugins</b>"
-#~ msgstr "<b>Inaktiva insticksmoduler</b>"
-
-#~ msgid "<i>Always present, acts like a panel.</i>"
-#~ msgstr "<i>Visas alltid, fungerar som en panel.</i>"
 
 #~ msgid "_Start When Computer Starts"
 #~ msgstr "_Starta när datorn startar"
@@ -1706,37 +1565,6 @@ msgstr "Virtuellt skrivbord"
 #~ "Gör så att programstartare som hanterar fler än ett fönster har en extra "
 #~ "indikator under sig."
 
-#~ msgid ""
-#~ "Docky requires compositing to work properly.  Please enable compositing and "
-#~ "restart docky."
-#~ msgstr ""
-#~ "Docky kräver att compositing för att fungera korrekt. Aktivera compositing "
-#~ "och starta om Docky."
-
-#~ msgid "Drop to open"
-#~ msgstr "Släpp för att öppna"
-
-#~ msgid "Extensions"
-#~ msgstr "Tillägg"
-
-#~ msgid "Disable"
-#~ msgstr "Inaktivera"
-
-#~ msgid "3D Background"
-#~ msgstr "3D-bakgrund"
-
-#~ msgid "Enable"
-#~ msgstr "Aktivera"
-
-#~ msgid "Click to browse..."
-#~ msgstr "Klicka för att bläddra..."
-
-#~ msgid "<b>Active Docklets</b>"
-#~ msgstr "<b>Aktiva docklets</b>"
-
-#~ msgid "<b>Inactive Docklets</b>"
-#~ msgstr "<b>Inaktiva docklets</b>"
-
 #~ msgid "_Disable"
 #~ msgstr "_Inaktivera"
 
@@ -1749,24 +1577,3 @@ msgstr "Virtuellt skrivbord"
 #~ msgstr ""
 #~ "Docky kräver compositing för att fungera korrekt. Aktivera composition och "
 #~ "starta om docky."
-
-#~ msgid "Restart..."
-#~ msgstr "Starta om..."
-
-#~ msgid "Log Out..."
-#~ msgstr "Logga ut..."
-
-#~ msgid "Shut Down..."
-#~ msgstr "Stäng av..."
-
-#~ msgid "Show Desktop"
-#~ msgstr "Visa skrivbordet"
-
-#~ msgid "Suspend"
-#~ msgstr "Vänteläge"
-
-#~ msgid "Hibernate"
-#~ msgstr "Viloläge"
-
-#~ msgid "Lock Screen"
-#~ msgstr "Lås skärmen"

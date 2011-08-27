@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1512,9 +1512,6 @@ msgstr "虚拟桌面"
 #~ msgid "Username or Password not set"
 #~ msgstr "用户名或密码未设置"
 
-#~ msgid "GMail"
-#~ msgstr "GMail"
-
 #~ msgid "Network Error: "
 #~ msgstr "网络错误： "
 
@@ -1544,9 +1541,6 @@ msgstr "虚拟桌面"
 #~ "restart docky."
 #~ msgstr "Docky 需要混合窗口管理器才能工作。请启用混合窗口管理器后重新启动 Docky。"
 
-#~ msgid "Drop to open"
-#~ msgstr "松开鼠标以开启"
-
 #~ msgid "_Enable"
 #~ msgstr "启用(_E)"
 
@@ -1559,38 +1553,5 @@ msgstr "虚拟桌面"
 #~ msgid "_Remove"
 #~ msgstr "删除(_R)"
 
-#~ msgid "<b>Active Docklets</b>"
-#~ msgstr "<b>已激活的停靠组件</b>"
-
-#~ msgid "<b>Inactive Docklets</b>"
-#~ msgstr "<b>未激活的停靠组件</b>"
-
-#~ msgid "GMail Configuration"
-#~ msgstr "GMail 配置"
-
 #~ msgid "Indicat_e Multiple Windows"
 #~ msgstr "表示多重窗口(_E)"
-
-#~ msgid "Show Desktop"
-#~ msgstr "显示桌面"
-
-#~ msgid "Lock Screen"
-#~ msgstr "锁住屏幕"
-
-#~ msgid "Suspend"
-#~ msgstr "挂起"
-
-#~ msgid "Hibernate"
-#~ msgstr "休眠"
-
-#~ msgid "Shut Down..."
-#~ msgstr "关机..."
-
-#~ msgid "Log Out..."
-#~ msgstr "注销..."
-
-#~ msgid "Invalid XML Weather Data"
-#~ msgstr "无效的XML天气数据"
-
-#~ msgid "Restart..."
-#~ msgstr "重启..."

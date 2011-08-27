@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1570,45 +1570,14 @@ msgstr "Виртуальный стол"
 #~ msgstr "_Удалить"
 
 #~ msgid ""
-#~ "Docky requires compositing to work properly.  Please enable compositing and "
-#~ "restart docky."
-#~ msgstr ""
-#~ "Для правильной работы Docky необходим композитный менеджер окон. Пожалуйста "
-#~ "включите его и перезапустите Docky."
-
-#~ msgid ""
 #~ "Causes launchers which currently manage more than one window to have an "
 #~ "extra indicator under it."
 #~ msgstr ""
 #~ "На значках для запуска, которые имеют более одного активного окна есть "
 #~ "специальный индикатор."
 
-#~ msgid "Disable"
-#~ msgstr "Выключить"
-
-#~ msgid "Enable"
-#~ msgstr "Включить"
-
-#~ msgid "GMail Configuration"
-#~ msgstr "Настройки GMail"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
-
-#~ msgid "Drag any dock to move it."
-#~ msgstr "Перетащите любую панель для изменения её положения."
-
-#~ msgid "3D Background"
-#~ msgstr "фон 3D"
-
-#~ msgid "Icon"
-#~ msgstr "Значок"
-
 #~ msgid "Reset Color"
 #~ msgstr "Восстановить цвет"
-
-#~ msgid "_Quit"
-#~ msgstr "В_ыход"
 
 #~ msgid "Open"
 #~ msgstr "Открыть"
@@ -1649,36 +1618,6 @@ msgstr "Виртуальный стол"
 
 #~ msgid "Open Containing Folder"
 #~ msgstr "Открыть папку с объектом"
-
-#~ msgid "Drop to open"
-#~ msgstr "Перетащите для открытия"
-
-#~ msgid "<b>Active Docklets</b>"
-#~ msgstr "<b>Активные доклеты</b>"
-
-#~ msgid "<b>Inactive Docklets</b>"
-#~ msgstr "<b>Неактивные доклеты</b>"
-
-#~ msgid "Show Desktop"
-#~ msgstr "Показать рабочий стол"
-
-#~ msgid "Lock Screen"
-#~ msgstr "Заблокировать экран"
-
-#~ msgid "Log Out..."
-#~ msgstr "Завершить сеанс..."
-
-#~ msgid "Restart..."
-#~ msgstr "Перезагрузить..."
-
-#~ msgid "Shut Down..."
-#~ msgstr "Выключить..."
-
-#~ msgid "Suspend"
-#~ msgstr "Спящий режим"
-
-#~ msgid "Hibernate"
-#~ msgstr "Гибернация"
 
 #~ msgid "_Start When Computer Starts"
 #~ msgstr "_Запускать вместе с системой"

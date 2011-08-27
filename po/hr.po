@@ -8,44 +8,44 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-06-17 13:49+0200\n"
-"PO-Revision-Date: 2010-09-30 11:12+0000\n"
-"Last-Translator: Rico Tzschichholz <Unknown>\n"
+"PO-Revision-Date: 2011-07-26 13:41+0000\n"
+"Last-Translator: iWeb <Unknown>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
-msgstr ""
+msgstr "Najbolji dock kojeg novac ne može kupiti."
 
 #: ../data/docky.schemas.in.h:1
 msgid "A list of plugins that are active on this dock."
-msgstr ""
+msgstr "Popis dodataka koji su aktivni na ovom docku"
 
 #: ../data/docky.schemas.in.h:2
 msgid "Analog clock theme"
-msgstr ""
+msgstr "Tema analognog sata"
 
 #: ../data/docky.schemas.in.h:3
 msgid "Clear finished timers"
-msgstr ""
+msgstr "Očisti završena odbrojavanja"
 
 #: ../data/docky.schemas.in.h:4
 msgid "Currently selected item"
-msgstr ""
+msgstr "Trenutno odabrana stavka"
 
 #: ../data/docky.schemas.in.h:5
 msgid "Dismiss a stopped timer when clicked"
-msgstr ""
+msgstr "Odbaci zaustavljen timer na klik miša"
 
 #: ../data/docky.schemas.in.h:6
 msgid "Do not change this!"
-msgstr ""
+msgstr "Ne mijenjaj ovo!"
 
 #: ../data/docky.schemas.in.h:7
 msgid "Dock icon size"
@@ -1512,26 +1512,8 @@ msgstr ""
 msgid "Virtual Desk"
 msgstr ""
 
-#~ msgid "Drop to open"
-#~ msgstr "Ispustite da otvorite"
-
-#~ msgid "Extensions"
-#~ msgstr "Nastavci"
-
-#~ msgid "Icon"
-#~ msgstr "Sličica"
-
-#~ msgid "<b>Active Plugins</b>"
-#~ msgstr "<b>Aktivne ekstenzije</b>"
-
-#~ msgid "<b>Inactive Plugins</b>"
-#~ msgstr "<b>Neaktivne ekstenzije</b>"
-
 #~ msgid "Reset Color"
 #~ msgstr "Vrati izvornu boju"
-
-#~ msgid "_Quit"
-#~ msgstr "_Izađi"
 
 #~ msgid "Open Containing Folder"
 #~ msgstr "Otvori mapu koja sadrži"
@@ -1547,12 +1529,6 @@ msgstr ""
 
 #~ msgid "Username or Password not set"
 #~ msgstr "Korisničko ime ili Lozinka nisu podešeni"
-
-#~ msgid "GMail Configuration"
-#~ msgstr "Postavke GMail pošte"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
 
 #~ msgid "Network Error: "
 #~ msgstr "Mrežna pogrješka: "
@@ -1582,13 +1558,6 @@ msgstr ""
 #~ msgstr "_Pokreni kada se računalo pokrene"
 
 #~ msgid ""
-#~ "Docky requires compositing to work properly.  Please enable compositing and "
-#~ "restart docky."
-#~ msgstr ""
-#~ "Docky treba compositng kako bi funkcionirao pravilno.  Molimo vas uključite "
-#~ "compositing i ponovno pokrenite Docky."
-
-#~ msgid ""
 #~ "Causes launchers which currently manage more than one window to have an "
 #~ "extra indicator under it."
 #~ msgstr ""
@@ -1598,32 +1567,11 @@ msgstr ""
 #~ msgid "Indicat_e Multiple Windows"
 #~ msgstr "Prikaž_i Višestruke Prozore"
 
-#~ msgid "3D Background"
-#~ msgstr "3D Pozadina"
-
-#~ msgid "Disable"
-#~ msgstr "Isključi"
-
-#~ msgid "Enable"
-#~ msgstr "Uključi"
-
-#~ msgid "Click to browse..."
-#~ msgstr "Kliknite za pregledavanje..."
-
 #~ msgid "_Enable"
 #~ msgstr "_Omogući"
 
 #~ msgid "_Disable"
 #~ msgstr "O_nemogući"
-
-#~ msgid "Drag any dock to move it."
-#~ msgstr "Povucite bilo koji dock kako biste ga pomaknuli."
-
-#~ msgid "<b>Active Docklets</b>"
-#~ msgstr "<b>Aktivni dockleti</b>"
-
-#~ msgid "<b>Inactive Docklets</b>"
-#~ msgstr "<b>Neaktivni dockleti</b>"
 
 #~ msgid "Docky Configuration"
 #~ msgstr "Postavke Dockyja"
@@ -1634,24 +1582,3 @@ msgstr ""
 #~ msgstr ""
 #~ "Za ispravan rad, Docky zahtijeva vizualne efekte. Molim omogućite vizualne "
 #~ "efekte i ponovno pokrenite docky."
-
-#~ msgid "Show Desktop"
-#~ msgstr "Prikaži radnu površinu"
-
-#~ msgid "Lock Screen"
-#~ msgstr "Zaključaj zaslon"
-
-#~ msgid "Log Out..."
-#~ msgstr "Odjava..."
-
-#~ msgid "Restart..."
-#~ msgstr "Ponovno pokretanje..."
-
-#~ msgid "Suspend"
-#~ msgstr "Stanje mirovanja"
-
-#~ msgid "Hibernate"
-#~ msgstr "Hibernacija"
-
-#~ msgid "Shut Down..."
-#~ msgstr "Isključivanje..."

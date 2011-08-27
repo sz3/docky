@@ -9,23 +9,23 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-06-17 13:49+0200\n"
-"PO-Revision-Date: 2011-03-07 09:32+0000\n"
-"Last-Translator: Liudas Ališauskas <Unknown>\n"
+"PO-Revision-Date: 2011-08-06 15:19+0000\n"
+"Last-Translator: Mantas Kriaučiūnas <mantas@akl.lt>\n"
 "Language-Team: Lithuanian <liudas@akmc.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 "X-Poedit-Country: LITHUANIA\n"
 "X-Poedit-Language: lithuanian\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
-msgstr "Geriausio skydelio nenupirksi už jokius pinigus"
+msgstr "Geriausias skydelis, neįpirkamas už jokius pinigus."
 
 #: ../data/docky.schemas.in.h:1
 msgid "A list of plugins that are active on this dock."
@@ -41,7 +41,7 @@ msgstr "Išvalyti pasibaigusius laikmačius"
 
 #: ../data/docky.schemas.in.h:4
 msgid "Currently selected item"
-msgstr "Dabar pažymėtas elementas"
+msgstr "Dabar pasirinktas elementas"
 
 #: ../data/docky.schemas.in.h:5
 msgid "Dismiss a stopped timer when clicked"
@@ -49,7 +49,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:6
 msgid "Do not change this!"
-msgstr "Nekeisti šio!"
+msgstr "Nekeisti šito!"
 
 #: ../data/docky.schemas.in.h:7
 msgid "Dock icon size"
@@ -57,7 +57,7 @@ msgstr "Skydelio piktogramų dydis"
 
 #: ../data/docky.schemas.in.h:8
 msgid "Dock is 3d"
-msgstr "Skydelis yra 3D"
+msgstr "Skydelis yra trimatis"
 
 #: ../data/docky.schemas.in.h:9
 msgid "Dock manages all windows"
@@ -69,7 +69,7 @@ msgstr "Skydelio išdidinimai"
 
 #: ../data/docky.schemas.in.h:11
 msgid "Dock's hiding mode"
-msgstr "Skydelio slepimosi veiksena"
+msgstr "Skydelio slėpimosi veiksena"
 
 #: ../data/docky.schemas.in.h:12
 msgid "Docky item command to execute"
@@ -77,7 +77,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:13
 msgid "Docky item hover text"
-msgstr "Docky elemento hover tekstas"
+msgstr "Docky elemento „hover“ tekstas"
 
 #: ../data/docky.schemas.in.h:14
 msgid "Docky item hue"
@@ -1521,24 +1521,3 @@ msgstr "Virtuali lenta"
 
 #~ msgid "Open"
 #~ msgstr "Atverti"
-
-#~ msgid "Show Desktop"
-#~ msgstr "Rodyti darbastalį"
-
-#~ msgid "Log Out..."
-#~ msgstr "Atsijungti..."
-
-#~ msgid "Lock Screen"
-#~ msgstr "Užrakinti ekraną"
-
-#~ msgid "Restart..."
-#~ msgstr "Paleisti iš naujo..."
-
-#~ msgid "Suspend"
-#~ msgstr "Užmigdyti"
-
-#~ msgid "Hibernate"
-#~ msgstr "Hibernuoti"
-
-#~ msgid "Shut Down..."
-#~ msgstr "Išjungti..."

@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1565,30 +1565,3 @@ msgstr "Віртуальний стіл"
 
 #~ msgid "Open Containing Folder"
 #~ msgstr "Вікрити каталог об’єкта"
-
-#~ msgid "Show Desktop"
-#~ msgstr "Показати робочий стіл"
-
-#~ msgid "Shut Down..."
-#~ msgstr "Вимкнути..."
-
-#~ msgid "Hibernate"
-#~ msgstr "Режим сну"
-
-#~ msgid "Log Out..."
-#~ msgstr "Завершити сеанс..."
-
-#~ msgid "Restart..."
-#~ msgstr "Перезапустити..."
-
-#~ msgid "Suspend"
-#~ msgstr "Призупинити"
-
-#~ msgid "Lock Screen"
-#~ msgstr "Заблокувати екран"
-
-#~ msgid "GMail Configuration"
-#~ msgstr "Налаштування GMail"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"

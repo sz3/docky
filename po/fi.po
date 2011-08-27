@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1525,9 +1525,6 @@ msgstr "Työtila"
 #~ msgid "_Remove"
 #~ msgstr "Poi_sta"
 
-#~ msgid "Drop to open"
-#~ msgstr "Tiputa avataksesi"
-
 #~ msgid "Docky Configuration"
 #~ msgstr "Dockyn asetukset"
 
@@ -1545,30 +1542,6 @@ msgstr "Työtila"
 
 #~ msgid "Username or Password not set"
 #~ msgstr "Tunnusta ja salasanaa ei ole asetettu"
-
-#~ msgid "Show Desktop"
-#~ msgstr "Näytä työpöytä"
-
-#~ msgid "GMail Configuration"
-#~ msgstr "GMail-asetukset"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
-
-#~ msgid "Lock Screen"
-#~ msgstr "Lukitse näyttö"
-
-#~ msgid "Log Out..."
-#~ msgstr "Kirjaudu ulos…"
-
-#~ msgid "Restart..."
-#~ msgstr "Käynnistä uudelleen..."
-
-#~ msgid "Hibernate"
-#~ msgstr "Lepotila"
-
-#~ msgid "Shut Down..."
-#~ msgstr "Sammuta…"
 
 #~ msgid "Network Error: "
 #~ msgstr "Verkkovirhe: "
@@ -1610,18 +1583,3 @@ msgstr "Työtila"
 
 #~ msgid "Reset Color"
 #~ msgstr "Poista asetettu väri"
-
-#~ msgid "Invalid XML Weather Data"
-#~ msgstr "Epäkelvollista XML-säätietoa"
-
-#~ msgid "Icon"
-#~ msgstr "Kuvake"
-
-#~ msgid "Name"
-#~ msgstr "Nimi"
-
-#~ msgid "X-GNOME-FullName"
-#~ msgstr "X-GNOME-FullName"
-
-#~ msgid "Suspend"
-#~ msgstr "Valmiustila"

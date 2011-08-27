@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-06-17 13:49+0200\n"
 "PO-Revision-Date: 2011-06-27 15:26+0000\n"
-"Last-Translator: Aldo Mann <Unknown>\n"
+"Last-Translator: Alfredo Hernández <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1571,126 +1571,11 @@ msgstr "Escritorio"
 msgid "Virtual Desk"
 msgstr "Escritorio virtual"
 
-#~ msgid "Tomorrow"
-#~ msgstr "Mañana"
-
-#~ msgid "Today"
-#~ msgstr "Hoy"
-
-#~ msgid "Radar Map"
-#~ msgstr "Mapa de Radar"
-
-#~ msgid "Reload Weather Data"
-#~ msgstr "Recargar Datos del Clima"
-
-#~ msgid "Add _Location"
-#~ msgstr "Agregar _Lugar"
-
-#~ msgid "Some information about the weather source."
-#~ msgstr "Algo de información acerca de la fuente del clima."
-
-#~ msgid "Move _Up"
-#~ msgstr "Mover _Arriba"
-
-#~ msgid "Move _Down"
-#~ msgstr "Mover _Abajo"
-
-#~ msgid "mins"
-#~ msgstr "mins"
-
 #~ msgid "_Add"
 #~ msgstr "_Añadir"
 
-#~ msgid "Add _Label"
-#~ msgstr "Agregar _Etiqueta"
-
-#~ msgid ""
-#~ "<big><b>Empty all of the items from the trash?</b></big>\n"
-#~ "\n"
-#~ "If you choose to empty the trash, all items in it\n"
-#~ "will be permanently lost. Please note that you\n"
-#~ "can also delete them separately."
-#~ msgstr ""
-#~ "<big><b>¿Borrar todos los archivos de la papelera?</b></big>\n"
-#~ "\n"
-#~ "Si elige vaciar la papelera, todos los elementos en ella\n"
-#~ "se borrarán permanentemente. Tenga en cuenta que\n"
-#~ "también puede borrarlos separadamente."
-
-#~ msgid "Check _Every"
-#~ msgstr "Comprobar _Cada"
-
-#~ msgid "Compose Mail"
-#~ msgstr "Redactar Correo"
-
-#~ msgid "View "
-#~ msgstr "Ver "
-
-#~ msgid "Check Now"
-#~ msgstr "Comprobar Ahora"
-
-#~ msgid "Digital Clock"
-#~ msgstr "Reloj Digital"
-
 #~ msgid "Docky Configuration"
 #~ msgstr "Configuración de Docky"
-
-#~ msgid "Exec"
-#~ msgstr "Ejecutar"
-
-#~ msgid "Select Theme"
-#~ msgstr "Seleccionar Tema"
-
-#~ msgid "Show Date"
-#~ msgstr "Mostrar Fecha"
-
-#~ msgid "24-Hour Clock"
-#~ msgstr "Reloj de 24 Horas"
-
-#~ msgid "New Dock"
-#~ msgstr "Nuevo Dock"
-
-#~ msgid "Start When Computer Starts"
-#~ msgstr "Iniciar Cuando Inicia la Computadora"
-
-#~ msgid "Theme:"
-#~ msgstr "Tema:"
-
-#~ msgid "Icon Size:"
-#~ msgstr "Tamaño del Icono:"
-
-#~ msgid "Fade On Hide"
-#~ msgstr "Desvanecer Al Esconder"
-
-#~ msgid "Indicate Multiple Windows"
-#~ msgstr "Indicar Múltiples Ventanas"
-
-#~ msgid "Autohide:"
-#~ msgstr "Autoesconder:"
-
-#~ msgid "Manage Windows Without Launcher"
-#~ msgstr "Gestionar Ventanas Sin Lanzador"
-
-#~ msgid "Icon"
-#~ msgstr "Ícono"
-
-#~ msgid "Zoom:"
-#~ msgstr "Zoom:"
-
-#~ msgid "<b>Active Plugins</b>"
-#~ msgstr "<b>Plugins Activos</b>"
-
-#~ msgid "<b>Inactive Plugins</b>"
-#~ msgstr "<b>Plugins Inactivos</b>"
-
-#~ msgid "Name"
-#~ msgstr "Nombre"
-
-#~ msgid "Docky"
-#~ msgstr "Docky"
-
-#~ msgid "'s Forecast"
-#~ msgstr "Pronóstico para"
 
 #~ msgid "Sunrise"
 #~ msgstr "Amanecer"
@@ -1710,210 +1595,14 @@ msgstr "Escritorio virtual"
 #~ msgid "Temp"
 #~ msgstr "Temperatura"
 
-#, csharp-format
-#~ msgid "{0}'s Forecast"
-#~ msgstr "Pronóstico para {0}"
-
-#~ msgid "_Cancel"
-#~ msgstr "_Cancelar"
-
-#~ msgid "Panel Mode"
-#~ msgstr "Modo Panel"
-
-#~ msgid "Delete Dock"
-#~ msgstr "Borrar Dock"
-
-#~ msgid "Drag any dock to move it."
-#~ msgstr "Arrastra cualquier dock para moverlo."
-
-#~ msgid "Quit Docky"
-#~ msgstr "Cerrar Docky"
-
-#~ msgid "New Window"
-#~ msgstr "Nueva Ventana"
-
-#~ msgid "Show Preferences"
-#~ msgstr "Mostrar Preferencias"
-
-#~ msgid "About"
-#~ msgstr "Acerca de"
-
 #~ msgid "Open"
 #~ msgstr "Abrir"
-
-#~ msgid "Pin to Dock"
-#~ msgstr "Anclar al Dock"
-
-#~ msgid "Eject"
-#~ msgstr "Expulsar"
-
-#~ msgid "Remove"
-#~ msgstr "Eliminar"
-
-#~ msgid "Quit"
-#~ msgstr "Cerrar"
-
-#~ msgid "Minimize"
-#~ msgstr "Minimizar"
-
-#~ msgid "Unmount"
-#~ msgstr "Desmontar"
-
-#~ msgid "Maximize"
-#~ msgstr "Maximizar"
-
-#~ msgid "Restore"
-#~ msgstr "Restaurar"
-
-#~ msgid "Unmaximize"
-#~ msgstr "Desmaximizar"
-
-#~ msgid "Empty Trash"
-#~ msgstr "Vaciar la Papelera"
-
-#~ msgid "Open Trash"
-#~ msgstr "Abrir Papelera"
-
-#~ msgid "C_lear"
-#~ msgstr "_Vaciar"
-
-#~ msgid "Clear Recent Documents..."
-#~ msgstr "Vaciar Documentos Recientes…"
-
-#~ msgid "_Show Preferences"
-#~ msgstr "_Mostrar Preferencias"
-
-#~ msgid "Fade out dock instead of slide off screen"
-#~ msgstr "Se desvanece en lugar de deslizarse fuera de la pantalla"
-
-#~ msgid "Reset _Color"
-#~ msgstr "Restaurar _Color"
-
-#~ msgid "_Quit"
-#~ msgstr "_Salir"
-
-#~ msgid "Inbox"
-#~ msgstr "Bandeja de Entrada"
-
-#~ msgid "Check _Now"
-#~ msgstr "Comprobar _Ahora"
-
-#~ msgid "Config"
-#~ msgstr "Configuración"
-
-#~ msgid "GMail Configuration"
-#~ msgstr "Configuración de Gmail"
-
-#~ msgid "iGoogle"
-#~ msgstr "iGoogle"
-
-#~ msgid "Locations"
-#~ msgstr "Lugares"
-
-#~ msgid "Search Results"
-#~ msgstr "Resultados de la Búsqueda"
-
-#~ msgid "Currently searching..."
-#~ msgstr "Actualmente buscando..."
-
-#~ msgid "Weather Channel"
-#~ msgstr "Weather Channel"
-
-#~ msgid "Weather Underground"
-#~ msgstr "Weather Underground"
-
-#~ msgid "No results found"
-#~ msgstr "No se encontraron resultados"
-
-#~ msgid "_Reload Weather Data"
-#~ msgstr "_Recargar Datos del Clima"
-
-#~ msgid "_Weather Provider"
-#~ msgstr "Proveedor del Clima"
-
-#~ msgid "Zip Code"
-#~ msgstr "Código Postal"
-
-#~ msgid "Actions"
-#~ msgstr "Acciones"
-
-#~ msgid "Windows"
-#~ msgstr "Ventanas"
-
-#~ msgid "Related Items"
-#~ msgstr "Elementos Relacionados"
-
-#~ msgid "Configuration"
-#~ msgstr "Configuración"
-
-#~ msgid ""
-#~ "None : Always present, acts like a panel.\n"
-#~ "Autohide : Hides whenever the mouse is not over it.\n"
-#~ "Intellihide : Hides when dock obstructs the active application.\n"
-#~ "Window Dodge : Hides when dock obstructs any window."
-#~ msgstr ""
-#~ "Ninguno : Siempre presente, actua como un panel.\n"
-#~ "Autohide : Se esconde cuando el ratón no está sobre el.\n"
-#~ "Intellihide : Se esconde cuando el dock obstruye la aplicación activa.\n"
-#~ "Window Dodge : Se esconde cuando el dock obstruye cualquier ventana."
-
-#~ msgid "<i>Always present, acts like a panel.</i>"
-#~ msgstr "<i>Siempre presente, actua como una panel.</i>"
-
-#~ msgid ""
-#~ "Docky requires compositing to work properly.  Please enable compositing and "
-#~ "restart docky."
-#~ msgstr ""
-#~ "Docky necesita compositing para funcionar correctamente. Por favor habilita "
-#~ "compositing y reinicia docky."
-
-#~ msgid "Drop to open"
-#~ msgstr "Soltar para abrir"
-
-#~ msgid "Extensions"
-#~ msgstr "Extensiones"
-
-#~ msgid "3D Background"
-#~ msgstr "Fondo 3D"
-
-#~ msgid "Click to browse..."
-#~ msgstr "Clic para buscar..."
-
-#~ msgid "Enable"
-#~ msgstr "Activar"
-
-#~ msgid "Disable"
-#~ msgstr "Desactivar"
-
-#~ msgid "Search Extensions..."
-#~ msgstr "Buscar Extensiones..."
-
-#~ msgid "<b>Active Docklets</b>"
-#~ msgstr "<b>Docklets Activos</b>"
-
-#~ msgid "<b>Inactive Docklets</b>"
-#~ msgstr "<b>Docklets Inactivos</b>"
 
 #~ msgid "_Disable"
 #~ msgstr "_Desactivar"
 
 #~ msgid "_Enable"
 #~ msgstr "_Activar"
-
-#~ msgid "Show Desktop"
-#~ msgstr "Mostrar el escritorio"
-
-#~ msgid "Suspend"
-#~ msgstr "Suspender"
-
-#~ msgid "Restart..."
-#~ msgstr "Reiniciar..."
-
-#~ msgid "Hibernate"
-#~ msgstr "Hibernar"
-
-#~ msgid "Shut Down..."
-#~ msgstr "Apagar..."
 
 #~ msgid ""
 #~ "Causes launchers which currently manage more than one window to have an "
@@ -1943,17 +1632,8 @@ msgstr "Escritorio virtual"
 #~ msgid "Feels Like"
 #~ msgstr "Sensación térmica"
 
-#~ msgid "Lock Screen"
-#~ msgstr "Bloquear la pantalla"
-
-#~ msgid "Log Out..."
-#~ msgstr "Cerrando sesión..."
-
 #~ msgid "_Remove"
 #~ msgstr "Elimina_r"
-
-#~ msgid "GMail"
-#~ msgstr "Gmail"
 
 #~ msgid ""
 #~ "Docky requires compositing to work properly. Please enable compositing and "
@@ -1961,6 +1641,3 @@ msgstr "Escritorio virtual"
 #~ msgstr ""
 #~ "Docky requiere composición para funcionar correctamente. Active la "
 #~ "composición y reinicie Docky."
-
-#~ msgid "Invalid XML Weather Data"
-#~ msgstr "El XML con la información del clima es inválido"

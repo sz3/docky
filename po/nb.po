@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1514,24 +1514,6 @@ msgstr "Virtuelt skrivebord"
 #~ msgid "Open"
 #~ msgstr "Åpne"
 
-#~ msgid "Show Desktop"
-#~ msgstr "Vis skrivebordet"
-
-#~ msgid "GMail Configuration"
-#~ msgstr "Oppsett av GMail"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
-
-#~ msgid "Lock Screen"
-#~ msgstr "Lås skjerm"
-
-#~ msgid "Suspend"
-#~ msgstr "Hvilemodus"
-
-#~ msgid "Hibernate"
-#~ msgstr "Dvalemodus"
-
 #~ msgid "Docky Configuration"
 #~ msgstr "Konfigurer Docky"
 
@@ -1591,12 +1573,3 @@ msgstr "Virtuelt skrivebord"
 
 #~ msgid "Direction"
 #~ msgstr "Retning"
-
-#~ msgid "Log Out..."
-#~ msgstr "Logg av…"
-
-#~ msgid "Restart..."
-#~ msgstr "Start på nytt…"
-
-#~ msgid "Shut Down..."
-#~ msgstr "Slå av…"

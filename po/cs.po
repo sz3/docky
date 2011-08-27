@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1534,27 +1534,6 @@ msgstr "Virtuální plocha"
 
 #~ msgid "Open"
 #~ msgstr "Otevřít"
-
-#~ msgid "Show Desktop"
-#~ msgstr "Zobrazit plochu"
-
-#~ msgid "Lock Screen"
-#~ msgstr "Zamknout obrazovku"
-
-#~ msgid "Shut Down..."
-#~ msgstr "Vypnout..."
-
-#~ msgid "Log Out..."
-#~ msgstr "Odhlásit..."
-
-#~ msgid "Restart..."
-#~ msgstr "Restartování..."
-
-#~ msgid "Suspend"
-#~ msgstr "Uspat"
-
-#~ msgid "Hibernate"
-#~ msgstr "Režim spánku"
 
 #~ msgid "_Disable"
 #~ msgstr "_Zakázat"

@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1502,9 +1502,6 @@ msgstr ""
 
 #~ msgid "Open Containing Folder"
 #~ msgstr "Άνοιγμα φακέλου"
-
-#~ msgid "Show Desktop"
-#~ msgstr "Εμφάνιση Επιφάνειας Εργασίας"
 
 #~ msgid "_Disable"
 #~ msgstr "Α_πενεργοποίηση"

@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1494,35 +1494,8 @@ msgstr ""
 #~ msgid "Open Containing Folder"
 #~ msgstr "開啟所在文件夾"
 
-#~ msgid "GMail Configuration"
-#~ msgstr "GMail 設定"
-
-#~ msgid "GMail"
-#~ msgstr "GMail"
-
-#~ msgid "Suspend"
-#~ msgstr "暫停"
-
-#~ msgid "Lock Screen"
-#~ msgstr "鎖定螢幕"
-
-#~ msgid "Log Out..."
-#~ msgstr "登出……"
-
-#~ msgid "Restart..."
-#~ msgstr "重新啟動……"
-
-#~ msgid "Hibernate"
-#~ msgstr "休眠"
-
-#~ msgid "Shut Down..."
-#~ msgstr "關機……"
-
 #~ msgid "Open"
 #~ msgstr "開啟"
-
-#~ msgid "Show Desktop"
-#~ msgstr "顯示桌面"
 
 #~ msgid "_Start When Computer Starts"
 #~ msgstr "開機時一併啟動（_S）"

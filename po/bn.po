@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-20 17:11+0000\n"
-"X-Generator: Launchpad (build 13468)\n"
+"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1484,41 +1484,8 @@ msgstr ""
 msgid "Virtual Desk"
 msgstr ""
 
-#~ msgid "Today"
-#~ msgstr "আজকের দিন"
-
-#~ msgid "Tomorrow"
-#~ msgstr "আগামীকাল"
-
-#~ msgid "_Weather Provider"
-#~ msgstr "আবহাওয়া তথ্য সরবরাহক"
-
-#~ msgid "'s Forecast"
-#~ msgstr "এর পূর্বাভাষ"
-
-#~ msgid "Radar Map"
-#~ msgstr "রেডার মানচিত্র"
-
-#~ msgid "Reload Weather Data"
-#~ msgstr "আবহাওয়া তথ্য রিলোড কর"
-
-#~ msgid "Add _Location"
-#~ msgstr "অবস্থান যোগ (_L)"
-
-#~ msgid "Some information about the weather source."
-#~ msgstr "আবহাওয়া তথ্য সরবরাহক সম্বন্ধে কিছু কথা"
-
-#~ msgid "Move _Up"
-#~ msgstr "উপরে স্থানান্তর (_U)"
-
-#~ msgid "Move _Down"
-#~ msgstr "নীচে স্থানান্তর (_D)"
-
 #~ msgid "_Remove"
 #~ msgstr "মুছে ফেল (_R)"
-
-#~ msgid "mins"
-#~ msgstr "মিনিটে"
 
 #~ msgid "_Add"
 #~ msgstr "যোগ (_A)"
