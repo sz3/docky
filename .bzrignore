@@ -9,6 +9,7 @@ install-sh
 intltool-extract.in
 intltool-merge.in
 intltool-update.in
+m4/*.m4
 missing
 py-compile
 *.addin.xml
