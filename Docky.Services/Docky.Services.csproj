@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -8,8 +8,7 @@
     <ProjectGuid>{8A6E0EDD-6443-4F99-9EAC-D9CC906F080D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Docky.Services</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <ReleaseVersion>2.0</ReleaseVersion>
+    <ReleaseVersion>2.2</ReleaseVersion>
     <RootNamespace>Docky.Services</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
@@ -21,7 +20,6 @@
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -30,13 +28,10 @@
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
+    <Reference Include="System" />
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
       <Package>gtk-sharp-2.0</Package>
@@ -49,9 +44,6 @@
       <SpecificVersion>False</SpecificVersion>
       <Package>gconf-sharp-2.0</Package>
     </Reference>
-    <Reference Include="Mono.Cairo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
       <Package>gtk-sharp-2.0</Package>
@@ -61,7 +53,6 @@
       <Package>rsvg2-sharp-2.0</Package>
     </Reference>
     <Reference Include="System.Core">
-      <SpecificVersion>False</SpecificVersion>
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="Mono.Posix" />
@@ -87,6 +78,7 @@
     <Reference Include="dbus-sharp-glib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5675b0c3093115b5">
       <Package>dbus-sharp-glib-1.0</Package>
     </Reference>
+    <Reference Include="Mono.Cairo" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Docky.Services\PreferencesService.cs" />
@@ -134,9 +126,6 @@
     <Folder Include="Docky.Services\Logging\" />
     <Folder Include="Docky.Services\Extensions\" />
     <Folder Include="GLibSharp\" />
-    <Folder Include="Docky.Services\Helpers\" />
-    <Folder Include="Docky.Services\Helpers\" />
-    <Folder Include="Docky.Services\Helpers\" />
     <Folder Include="Docky.Services\Helpers\" />
     <Folder Include="Docky.Services\Preferences\" />
     <Folder Include="Docky.Services\Applications\" />
