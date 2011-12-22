@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-06-17 13:49+0200\n"
-"PO-Revision-Date: 2011-02-27 03:04+0000\n"
+"PO-Revision-Date: 2011-12-09 10:02+0000\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
-"X-Generator: Launchpad (build 13794)\n"
+"X-Launchpad-Export-Date: 2011-12-22 16:00+0000\n"
+"X-Generator: Launchpad (build 14560)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -40,7 +40,7 @@ msgstr "目前選取的項目"
 
 #: ../data/docky.schemas.in.h:5
 msgid "Dismiss a stopped timer when clicked"
-msgstr "當點擊時拋棄停止的計時器"
+msgstr "當點擊時刪除已停止的計時器"
 
 #: ../data/docky.schemas.in.h:6
 msgid "Do not change this!"
@@ -60,7 +60,7 @@ msgstr "Dock 管理所有視窗"
 
 #: ../data/docky.schemas.in.h:10
 msgid "Dock zooms"
-msgstr "Dock 拉近拉遠"
+msgstr "Dock 縮放"
 
 #: ../data/docky.schemas.in.h:11
 msgid "Dock's hiding mode"
@@ -80,7 +80,7 @@ msgstr "Docky 項目色調"
 
 #: ../data/docky.schemas.in.h:15
 msgid "Enable checks for compositing"
-msgstr ""
+msgstr "啟用混成檢查"
 
 #: ../data/docky.schemas.in.h:16
 msgid "Fade when hiding"
@@ -96,53 +96,53 @@ msgstr "GMail 使用者名稱"
 
 #: ../data/docky.schemas.in.h:19
 msgid "Hot-area padding"
-msgstr ""
+msgstr "填補熱門區域"
 
 #: ../data/docky.schemas.in.h:20
 msgid ""
 "How long the urgent indicator glow animation is (in seconds), 0 to disable, "
 "or -1 for infinite."
-msgstr ""
+msgstr "緊急指示器的發光動畫時間多久？(秒鐘)，0 為關閉，-1 為永久顯示。"
 
 #: ../data/docky.schemas.in.h:21
 msgid "How long to wait (ms) before unhiding"
-msgstr ""
+msgstr "取消隱藏前需等待的時間 (毫秒)"
 
 #: ../data/docky.schemas.in.h:22
 msgid "How long to wait (ms) to update after a window switch"
-msgstr ""
+msgstr "視窗切換之後多久才更新 (毫秒)"
 
 #: ../data/docky.schemas.in.h:23
 msgid "How many recent clipboard selections to show."
-msgstr ""
+msgstr "顯示多少剪貼簿的內容"
 
 #: ../data/docky.schemas.in.h:24
 msgid ""
 "How much to shift the color of the urgent indicator. The value can be from -"
 "180 to 180."
-msgstr ""
+msgstr "要變更多少緊急指示器的顏色。數值可以從-180到180。"
 
 #: ../data/docky.schemas.in.h:25
 msgid "How often (in mins) to check for new mail."
-msgstr ""
+msgstr "多久 (分鐘) 檢查一次新郵件。"
 
 #: ../data/docky.schemas.in.h:26
 msgid "How often to check"
-msgstr ""
+msgstr "多久檢查一次"
 
 #: ../data/docky.schemas.in.h:27
 msgid "How often to check for new weather information."
-msgstr ""
+msgstr "多久檢查一次天氣資訊。"
 
 #: ../data/docky.schemas.in.h:28
 msgid "How often to poll (in ms) for new clipboard data."
-msgstr ""
+msgstr "多久更新一次剪貼簿資料 (毫秒)"
 
 #: ../data/docky.schemas.in.h:29
 msgid ""
 "If fading when hiding, this is the opacity the dock fades to. 1 is solid, 0 "
 "is invisible."
-msgstr ""
+msgstr "若要在隱藏時淡出，這是 Docky 淡出時的透明度。1 代表不透明，0 代表透明。"
 
 #: ../data/docky.schemas.in.h:30
 msgid ""
@@ -152,12 +152,12 @@ msgstr "若為否，Docky 將不會為啟動器顯示滑鼠指標懸停時的文
 
 #: ../data/docky.schemas.in.h:31
 msgid "If false, finished timers will reset instead of dismiss."
-msgstr ""
+msgstr "如果失敗，倒數計時器會重設而不是結束"
 
 #: ../data/docky.schemas.in.h:32
 msgid ""
 "If false, prevents dropping items onto the dock to add them to the dock."
-msgstr ""
+msgstr "如果失敗，阻止任何項目丟入、新增到 dock 上。"
 
 #: ../data/docky.schemas.in.h:33
 msgid "If scrolling wraps"
@@ -171,27 +171,27 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:35
 msgid "If the dock is a panel"
-msgstr ""
+msgstr "Dock 是否當作面板"
 
 #: ../data/docky.schemas.in.h:36
 msgid ""
 "If true, Docky will check for compositing and warn if it is not available."
-msgstr ""
+msgstr "如果值為真，Docky 會檢查混成能力，並且在無法執行的時候提出警告。"
 
 #: ../data/docky.schemas.in.h:37
 msgid ""
 "If true, Docky will only show windows on the currently active desktop."
-msgstr ""
+msgstr "如果值為真，Docky 只會展現目前使用中的桌面區域視窗而已。"
 
 #: ../data/docky.schemas.in.h:38
 msgid "If true, all new timers will automatically start."
-msgstr ""
+msgstr "如果值為真，所有新的計時器都會自動開始。"
 
 #: ../data/docky.schemas.in.h:39
 msgid ""
 "If true, any windows without launchers will show on this dock. Exactly 1 "
 "dock must have this set to true."
-msgstr ""
+msgstr "如果值為真，所有沒放啟動圖示在 dock 上的視窗都會展現在這個 dock 上。只能有一個 dock 將這個值設為真。"
 
 #: ../data/docky.schemas.in.h:40
 msgid ""
@@ -201,7 +201,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:41
 msgid "If true, locks all items on all docks so they can't be dragged."
-msgstr ""
+msgstr "如果值為真，鎖定所有 Dock 上的項目，讓它們無法被拖曳。"
 
 #: ../data/docky.schemas.in.h:42
 msgid ""
@@ -211,59 +211,59 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:43
 msgid "If true, scrolling one direction through all workspaces is possible."
-msgstr ""
+msgstr "如果值為真，便能以單一方向捲動至所有工作區。"
 
 #: ../data/docky.schemas.in.h:44
 msgid "If true, show the digital clock otherwise show the analog clock."
-msgstr ""
+msgstr "如果值為真，顯示數位時鐘，否則顯示類比時鐘。"
 
 #: ../data/docky.schemas.in.h:45
 msgid "If true, shows a notify message for new unread mail."
-msgstr ""
+msgstr "如果值為真，幫新的未讀信件顯示通知訊息。"
 
 #: ../data/docky.schemas.in.h:46
 msgid "If true, shows the Docky item on the dock managing windows."
-msgstr ""
+msgstr "如果值為真，在 Dock 管理視窗上面展現所有 Docky 的項目。"
 
 #: ../data/docky.schemas.in.h:47
 msgid "If true, shows time in 24-hr format."
-msgstr ""
+msgstr "如果值為真，將時間顯示成 24 小時制"
 
 #: ../data/docky.schemas.in.h:48
 msgid "If true, the Docky item popup menu shows the Quit option."
-msgstr ""
+msgstr "如果值為真，Docky 的彈出式選單會有「退出」的選項。"
 
 #: ../data/docky.schemas.in.h:49
 msgid "If true, the Docky item popup menu shows the Settings option."
-msgstr ""
+msgstr "如果值為真，Docky 的彈出式選單會有「設定值」選項。"
 
 #: ../data/docky.schemas.in.h:50
 msgid "If true, the date should show on the digital clock."
-msgstr ""
+msgstr "如果值為真，數位時鐘上會有日期。"
 
 #: ../data/docky.schemas.in.h:51
 msgid "If true, the dock is drawn as a 3d dock."
-msgstr ""
+msgstr "如果值為真，Dock 會以 3D 的方式展現。"
 
 #: ../data/docky.schemas.in.h:52
 msgid ""
 "If true, the dock is in panel mode and will extend to fill the entire screen "
 "edge."
-msgstr ""
+msgstr "如果值為真，Docky 會進入面板模式，並延伸到整個螢幕邊緣。"
 
 #: ../data/docky.schemas.in.h:53
 msgid "If true, the dock will zoom when hovered."
-msgstr ""
+msgstr "如果值為真，當滑鼠指標懸停時，Dock 會放大。"
 
 #: ../data/docky.schemas.in.h:54
 msgid ""
 "If true, this is the first time Docky has run. Internal use only - Do not "
 "change!"
-msgstr ""
+msgstr "如果值為真，代表這是 Docky 第一次執行。開發小組專用，不要改變這個數值！"
 
 #: ../data/docky.schemas.in.h:55
 msgid "If true, timers will disappear when they time out."
-msgstr ""
+msgstr "如果值為真，計時器會在計時結束後消失。"
 
 #: ../data/docky.schemas.in.h:56
 msgid ""
@@ -273,69 +273,69 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:57
 msgid "If true, use metric units when showing weather."
-msgstr ""
+msgstr "如果值為真，會以公制單位顯示天氣。"
 
 #: ../data/docky.schemas.in.h:58
 msgid ""
 "If true, when the dock hides it will fade away instead of sliding off screen."
-msgstr ""
+msgstr "如果值為真，Dock 隱藏時會淡出，而不是滑出螢幕畫面。"
 
 #: ../data/docky.schemas.in.h:59
 msgid ""
 "If true, when there is new unread mail Docky will show the indicator dot."
-msgstr ""
+msgstr "如果值為真，當有未讀信件時，Docky 會顯示出指示標記。"
 
 #: ../data/docky.schemas.in.h:60
 msgid "If true, will try to show the most recent document on the dock."
-msgstr ""
+msgstr "如果值為真，將會在 Dock 上顯示最近使用過的文件。"
 
 #: ../data/docky.schemas.in.h:61
 msgid "Indicate when items have more than one window"
-msgstr ""
+msgstr "當項目超過一個視窗時明確指出"
 
 #: ../data/docky.schemas.in.h:62
 msgid "Last time checked"
-msgstr ""
+msgstr "上次檢查時間"
 
 #: ../data/docky.schemas.in.h:63
 msgid "Left click command"
-msgstr ""
+msgstr "滑鼠左鍵指令"
 
 #: ../data/docky.schemas.in.h:64
 msgid "List of NPR stations to display."
-msgstr ""
+msgstr "要顯示的 NPR 電臺清單。"
 
 #: ../data/docky.schemas.in.h:65
 msgid "List of active docks"
-msgstr ""
+msgstr "使用中 Dock 的清單"
 
 #: ../data/docky.schemas.in.h:66
 msgid "List of custom GMail labels to check in addition to the inbox."
-msgstr ""
+msgstr "除了收信匣外要查看的自訂 GMail 標籤清單。"
 
 #: ../data/docky.schemas.in.h:67
 msgid "List of launchers"
-msgstr ""
+msgstr "啟動圖示清單"
 
 #: ../data/docky.schemas.in.h:68
 msgid "Max Entries"
-msgstr ""
+msgstr "最大條目數"
 
 #: ../data/docky.schemas.in.h:69
 msgid "NPR stations"
-msgstr ""
+msgstr "NPR 站台"
 
 #: ../data/docky.schemas.in.h:70
 msgid "New timer length"
-msgstr ""
+msgstr "新計時器的長度"
 
 #: ../data/docky.schemas.in.h:71
 msgid "Number of recent docs"
-msgstr ""
+msgstr "最近開啓文件數目"
 
 #: ../data/docky.schemas.in.h:72
 msgid "Opacity to fade to"
-msgstr ""
+msgstr "淡化透明度"
 
 #: ../data/docky.schemas.in.h:73
 msgid "Plugins on this dock"
@@ -343,15 +343,15 @@ msgstr "此 Dock 上的插件"
 
 #: ../data/docky.schemas.in.h:74
 msgid "Prevent adding items by drops"
-msgstr ""
+msgstr "拒絕拖曳新增項目"
 
 #: ../data/docky.schemas.in.h:75
 msgid "Redirect helper output to Docky's output"
-msgstr ""
+msgstr "將輔助程式的輸出重新導引至 Docky 輸出"
 
 #: ../data/docky.schemas.in.h:76
 msgid "Set the color of the Docky icon. 0 means use the GTK+ theme color."
-msgstr ""
+msgstr "設定 Docky 圖示的顏色。0 代表使用 GTK+ 主題的顏色。"
 
 #: ../data/docky.schemas.in.h:77
 msgid "Show 'Pin to Dock' for items"
@@ -359,51 +359,51 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:78
 msgid "Show Quit in Docky item menu"
-msgstr ""
+msgstr "讓 Docky 項目選單出現「退出」"
 
 #: ../data/docky.schemas.in.h:79
 msgid "Show Settings in Docky item menu"
-msgstr ""
+msgstr "讓 Docky 項目選單出現「設定值」"
 
 #: ../data/docky.schemas.in.h:80
 msgid "Show a notify for unread mail"
-msgstr ""
+msgstr "顯示未讀信件通知"
 
 #: ../data/docky.schemas.in.h:81
 msgid "Show date"
-msgstr ""
+msgstr "顯示日期"
 
 #: ../data/docky.schemas.in.h:82
 msgid "Show hover text labels for launchers"
-msgstr ""
+msgstr "滑鼠游標移到啟動圖示時，顯示文字標籤"
 
 #: ../data/docky.schemas.in.h:83
 msgid "Show indicator dot for unread mail"
-msgstr ""
+msgstr "顯示未讀郵件指示器的點標記"
 
 #: ../data/docky.schemas.in.h:84
 msgid "Show most recent doc"
-msgstr ""
+msgstr "顯示最近使用過的文件"
 
 #: ../data/docky.schemas.in.h:85
 msgid "Show the Docky item"
-msgstr ""
+msgstr "顯示 Docky 項目"
 
 #: ../data/docky.schemas.in.h:86
 msgid "Show the digital clock"
-msgstr ""
+msgstr "顯示數位時鐘"
 
 #: ../data/docky.schemas.in.h:87
 msgid "Show windows from only current desktop"
-msgstr ""
+msgstr "只顯示目前桌面上的視窗"
 
 #: ../data/docky.schemas.in.h:88
 msgid "Sorts the items on the dock"
-msgstr ""
+msgstr "為 Dock 上的項目分類"
 
 #: ../data/docky.schemas.in.h:89
 msgid "Start all new timers"
-msgstr ""
+msgstr "開始全部的新計時器"
 
 #: ../data/docky.schemas.in.h:90
 msgid "Stop items from dragging"
@@ -411,7 +411,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:91
 msgid "The GMail username to check."
-msgstr ""
+msgstr "要查看的 GMail 使用者名稱。"
 
 #: ../data/docky.schemas.in.h:92
 msgid ""
@@ -421,7 +421,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:93
 msgid "The current theme"
-msgstr ""
+msgstr "目前使用主題"
 
 #: ../data/docky.schemas.in.h:94
 msgid "The currently selected item in the session manager menu."
@@ -429,7 +429,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:95
 msgid "The default time (in secs) for any new timers."
-msgstr ""
+msgstr "新計時器的預設時間 (秒鐘)。"
 
 #: ../data/docky.schemas.in.h:96
 msgid ""
@@ -439,33 +439,33 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:97
 msgid "The dock's position"
-msgstr ""
+msgstr "Dock 的位置"
 
 #: ../data/docky.schemas.in.h:98
 msgid ""
 "The dock's position on the screen. Possible values are: Bottom, Top, Left, "
 "Right"
-msgstr ""
+msgstr "Dock 在螢幕上的位置。可能的選項有：底部，頂部，左邊，右邊。"
 
 #: ../data/docky.schemas.in.h:99
 msgid "The dock's zoom size (if enabled), as a percent."
-msgstr ""
+msgstr "Dock 放大的尺寸 (如果有開啓的話)，以百分比計算。"
 
 #: ../data/docky.schemas.in.h:100
 msgid "The last time Docky checked GMail for messages."
-msgstr ""
+msgstr "Docky 最後一次檢查 GMail 訊息的時間。"
 
 #: ../data/docky.schemas.in.h:101
 msgid "The list of weather locations to check."
-msgstr ""
+msgstr "要檢查的天氣地點清單。"
 
 #: ../data/docky.schemas.in.h:102
 msgid "The name of the current Docky theme."
-msgstr ""
+msgstr "Docky 目前主題的名稱。"
 
 #: ../data/docky.schemas.in.h:103
 msgid "The name of the weather source to get weather information from."
-msgstr ""
+msgstr "取得天氣資訊的來源名稱。"
 
 #: ../data/docky.schemas.in.h:104
 msgid ""
@@ -478,7 +478,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:106
 msgid "The size of icons on the dock."
-msgstr ""
+msgstr "Dock 上的圖示大小。"
 
 #: ../data/docky.schemas.in.h:107
 msgid "The text to show when hovering the Docky item."
@@ -486,11 +486,11 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:108
 msgid "The theme for the analog clock."
-msgstr ""
+msgstr "類比時鐘的主題。"
 
 #: ../data/docky.schemas.in.h:109
 msgid "The weather source"
-msgstr ""
+msgstr "天氣資訊來源"
 
 #: ../data/docky.schemas.in.h:110
 msgid ""
@@ -519,39 +519,39 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:115
 msgid "This lists all the currently active (displayed) docks, by name."
-msgstr ""
+msgstr "這會依照名稱列出目前使用中 (顯示) 的 Dock。"
 
 #: ../data/docky.schemas.in.h:116
 msgid "Timer Delay"
-msgstr ""
+msgstr "計時器延遲"
 
 #: ../data/docky.schemas.in.h:117
 msgid "Track Mouse Selections"
-msgstr ""
+msgstr "追蹤滑鼠選取項目"
 
 #: ../data/docky.schemas.in.h:118
 msgid "Urgent indicator color shift"
-msgstr ""
+msgstr "緊急指示器顏色變換"
 
 #: ../data/docky.schemas.in.h:119
 msgid "Urgent indicator glow animation time (in seconds)"
-msgstr ""
+msgstr "緊急指示器的發光動畫時間 (秒鐘)"
 
 #: ../data/docky.schemas.in.h:120
 msgid "Use 24-hr time"
-msgstr ""
+msgstr "使用 24 小時制"
 
 #: ../data/docky.schemas.in.h:121
 msgid "Use metric units"
-msgstr ""
+msgstr "使用公制單位"
 
 #: ../data/docky.schemas.in.h:122
 msgid "Used to sort the items on the dock."
-msgstr ""
+msgstr "使用來為 dock 上的項目分類。"
 
 #: ../data/docky.schemas.in.h:123
 msgid "Weather locations"
-msgstr ""
+msgstr "天氣地點"
 
 #: ../data/docky.schemas.in.h:124
 msgid "Which monitor the dock is on"
@@ -559,7 +559,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:125
 msgid "Zoom size"
-msgstr ""
+msgstr "縮放尺寸"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:270
 msgid "Search Docklets..."
@@ -579,7 +579,7 @@ msgstr "拖曳任一個 Dock 以重新定位。"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:386
 msgid "Helpers require DockManager be installed."
-msgstr ""
+msgstr "輔助程式要求安裝 DockManager 程式。"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:458
 msgid "Delete the currently selected dock?"
@@ -849,7 +849,7 @@ msgstr "開啟(_O)"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:70
 msgid "_Reset Color"
-msgstr ""
+msgstr "重設顏色 (_R)"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:482
 msgid "_Pin to Dock"
@@ -887,7 +887,7 @@ msgstr "複製中"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:268
 msgid "Open Containing _Folder"
-msgstr ""
+msgstr "開啟所在資料夾(_F)"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
 msgid "Unma_ximize"
@@ -985,7 +985,7 @@ msgstr "電腦"
 
 #: ../StandardPlugins/Clippy/src/ClippyItem.cs:88
 msgid "Clipboard is currently empty."
-msgstr ""
+msgstr "剪貼簿目前為空。"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "Di_gital Clock"
@@ -1013,15 +1013,15 @@ msgstr "主題"
 
 #: ../StandardPlugins/Desktop/src/DesktopActionsProvider.cs:57
 msgid "_Undo"
-msgstr ""
+msgstr "復原(_U)"
 
 #: ../StandardPlugins/Desktop/src/ShowDesktopItem.cs:37
 msgid "_Show Desktop"
-msgstr ""
+msgstr "顯示桌面(_S)"
 
 #: ../StandardPlugins/Desktop/src/TileDesktopItem.cs:38
 msgid "_Tile Desktop"
-msgstr ""
+msgstr "鋪排桌面(_T)"
 
 #: ../StandardPlugins/Desktop/src/CascadeDesktopItem.cs:38
 msgid "_Cascade Desktop"
@@ -1159,7 +1159,7 @@ msgstr "已連線：{0}"
 
 #: ../StandardPlugins/NetworkMonitor/src/NetworkMonitorDockItem.cs:61
 msgid "No network connection available"
-msgstr ""
+msgstr "無可用的網路連線"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:47
 msgid "My _Stations"
@@ -1230,11 +1230,11 @@ msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:76
 msgid "L_ock Screen"
-msgstr ""
+msgstr "鎖定螢幕(_O)"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:80
 msgid "_Log Out..."
-msgstr ""
+msgstr "登出(_L)..."
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:81
 msgid "Log Out"
@@ -1247,15 +1247,15 @@ msgstr "您是否確定要關閉所有程式並從電腦登出？"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:87
 msgid "_Suspend"
-msgstr ""
+msgstr "暫停(_S)"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:92
 msgid "_Hibernate"
-msgstr ""
+msgstr "休眠(_H)"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:97
 msgid "_Restart..."
-msgstr ""
+msgstr "重新啟動(_R)..."
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:98
 msgid "Restart"

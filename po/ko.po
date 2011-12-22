@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-06-17 13:49+0200\n"
-"PO-Revision-Date: 2011-02-15 10:30+0000\n"
-"Last-Translator: partrita <Unknown>\n"
+"PO-Revision-Date: 2011-11-08 11:37+0000\n"
+"Last-Translator: MinSik CHO <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
-"X-Generator: Launchpad (build 13794)\n"
+"X-Launchpad-Export-Date: 2011-12-22 16:00+0000\n"
+"X-Generator: Launchpad (build 14560)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -124,31 +124,31 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:25
 msgid "How often (in mins) to check for new mail."
-msgstr ""
+msgstr "얼마나 자주 메일을 체크할 지 설정"
 
 #: ../data/docky.schemas.in.h:26
 msgid "How often to check"
-msgstr ""
+msgstr "얼마나 자주 체크할 지 설정"
 
 #: ../data/docky.schemas.in.h:27
 msgid "How often to check for new weather information."
-msgstr ""
+msgstr "얼마나 자주 날씨 정보를 체크할 지 설정"
 
 #: ../data/docky.schemas.in.h:28
 msgid "How often to poll (in ms) for new clipboard data."
-msgstr ""
+msgstr "새로운 클립보드 데이터를 얼마나 자주 가져올 지 설정 (밀리초로 설정)"
 
 #: ../data/docky.schemas.in.h:29
 msgid ""
 "If fading when hiding, this is the opacity the dock fades to. 1 is solid, 0 "
 "is invisible."
-msgstr ""
+msgstr "독을 숨기는 설정할 때 투명도를 설정. (1로 설정하면 투명하지 않고, 0으로 설정하면 완전히 투명합니다.)"
 
 #: ../data/docky.schemas.in.h:30
 msgid ""
 "If false, Docky will not show hover texts for launchers (but still show for "
 "plugins)."
-msgstr ""
+msgstr "false로 설정하면, Docky의 텍스트는 움직이는 효과를 보여주지 않을 것입니다. (플러그인인 경우 보여줍니다)"
 
 #: ../data/docky.schemas.in.h:31
 msgid "If false, finished timers will reset instead of dismiss."
@@ -181,11 +181,11 @@ msgstr ""
 #: ../data/docky.schemas.in.h:37
 msgid ""
 "If true, Docky will only show windows on the currently active desktop."
-msgstr ""
+msgstr "true로 설정하면, Docky는 현재 데스크톱에 있는 창만 보여줄 것입니다."
 
 #: ../data/docky.schemas.in.h:38
 msgid "If true, all new timers will automatically start."
-msgstr ""
+msgstr "true로 설정하면 모든 새로운 타이머는 자동으로 시작할 것입니다."
 
 #: ../data/docky.schemas.in.h:39
 msgid ""
@@ -201,7 +201,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:41
 msgid "If true, locks all items on all docks so they can't be dragged."
-msgstr ""
+msgstr "true로 설정하면, Docky에 있는 항목들이 옮겨지지 못하도록 잠금 설정됩니다."
 
 #: ../data/docky.schemas.in.h:42
 msgid ""
@@ -227,15 +227,15 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:47
 msgid "If true, shows time in 24-hr format."
-msgstr ""
+msgstr "true로 설정하면, 시간을 24시간제로 보여줍니다."
 
 #: ../data/docky.schemas.in.h:48
 msgid "If true, the Docky item popup menu shows the Quit option."
-msgstr ""
+msgstr "true로 설정하면 Docky 팝업 메뉴에서 '종료' 아이콘을 보이게 할 수 있습니다."
 
 #: ../data/docky.schemas.in.h:49
 msgid "If true, the Docky item popup menu shows the Settings option."
-msgstr ""
+msgstr "true로 설정하면 Docky 팝업 메뉴에서 '설정' 아이콘을 보이게 할 수 있습니다."
 
 #: ../data/docky.schemas.in.h:50
 msgid "If true, the date should show on the digital clock."

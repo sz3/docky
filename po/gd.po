@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-06-17 13:49+0200\n"
-"PO-Revision-Date: 2011-07-14 23:26+0000\n"
+"PO-Revision-Date: 2011-11-11 00:40+0000\n"
 "Last-Translator: alasdair caimbeul <Unknown>\n"
 "Language-Team: Gaelic; Scottish <gd@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n < 2 ? 0 : n == 2 ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-08-26 16:56+0000\n"
-"X-Generator: Launchpad (build 13794)\n"
+"X-Launchpad-Export-Date: 2011-12-22 16:01+0000\n"
+"X-Generator: Launchpad (build 14560)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -559,7 +559,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:125
 msgid "Zoom size"
-msgstr ""
+msgstr "Meud sùm"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:270
 msgid "Search Docklets..."
@@ -670,7 +670,7 @@ msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Running"
-msgstr ""
+msgstr "Ruith"
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Stopped"
@@ -792,7 +792,7 @@ msgstr "Neoni"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
 msgid "Autohide"
-msgstr ""
+msgstr "Fhèin-falaich"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "Intellihide"
@@ -828,7 +828,7 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
 msgid "_Zoom:"
-msgstr ""
+msgstr "_Sùm"
 
 #: ../Docky.Items/Docky.Items/AbstractDockItem.cs:120
 #, csharp-format
@@ -897,7 +897,7 @@ msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:271
 msgid "_Restore"
-msgstr ""
+msgstr "_Thoir air ais"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:274
 msgid "Mi_nimize"
@@ -1215,11 +1215,11 @@ msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:95
 msgid "Clear the Recent Documents list?"
-msgstr ""
+msgstr "Glan liosta sgrìobhainnean o chionn ghoirid?"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:97
 msgid "Clear Recent Documents"
-msgstr ""
+msgstr "Glan Sgrìobhainnean O Chionn Ghoirid"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:99
 msgid ""
