@@ -496,11 +496,13 @@ namespace Docky.Services
 				   (exec.StartsWith ("ooffice") || exec.StartsWith ("openoffice") || exec.StartsWith ("soffice") ||
 				    exec.Contains ("/ooffice ") || exec.Contains ("/openoffice.org ") || exec.Contains ("/soffice "))) {
 					vexec = "ooffice" + exec.Split (' ')[1];
+					vexec = vexec.Replace ("--", "-");
 				
 				// for libreoffice
 				} else if (exec.Contains (' ') &&
 				   (exec.StartsWith ("libreoffice"))) {
 					vexec = "libreoffice" + exec.Split (' ')[1];
+					vexec = vexec.Replace ("--", "-");
 				
 				// for wine apps
 				} else if ((exec.Contains ("env WINEPREFIX=") && exec.Contains (" wine ")) ||
