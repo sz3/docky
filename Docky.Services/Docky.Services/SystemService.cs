@@ -118,10 +118,10 @@ namespace Docky.Services
 			if (Bus.System.NameHasOwner (NetworkManagerName)) {
 				try {
 					network = Bus.System.GetObject<INetworkManager> (NetworkManagerName, new ObjectPath (NetworkManagerPath));
-					NetworkConnected = State == NetworkState.Connected;
+					//NetworkConnected = State == NetworkState.Connected;
 					network.StateChanged += OnConnectionStatusChanged;
 					nmTimer = GLib.Timeout.Add (1 * 60 * 1000, () => { 
-						NetworkConnected = State == NetworkState.Connected;
+						//NetworkConnected = State == NetworkState.Connected;
 						return true;
 					});
 				} catch (Exception e) {
@@ -153,7 +153,7 @@ namespace Docky.Services
 		void OnConnectionStatusChanged (uint state)
 		{
 			NetworkState newState = (NetworkState) Enum.ToObject (typeof (NetworkState), state);
-			NetworkConnected = newState == NetworkState.Connected;
+			//NetworkConnected = newState == NetworkState.Connected;
 			
 			if (ConnectionStatusChanged != null) {
 				Delegate [] handlers = ConnectionStatusChanged.GetInvocationList ();
