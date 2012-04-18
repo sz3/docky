@@ -13,8 +13,9 @@ AC_DEFUN([SHAMROCK_FIND_MONO_3_0_OR_4_0_COMPILER],
 	AC_REQUIRE([SHAMROCK_FIND_MONO_RUNTIME])
 
 	SHAMROCK_FIND_PROGRAM(MCS, dmcs, no)
-	if test "x$$1" = "xno"; then
-		SHAMROCK_FIND_PROGRAM_OR_BAIL(MCS, gmcs)
+	if test "x$MCS" = "xno"; then
+		SHAMROCK_FIND_PROGRAM_OR_BAIL(GMCS, gmcs)
+		MCS="$GMCS"
 		changequote(<<, >>)
 		MCS_VERSION=$($MCS --version | egrep -o "([[:digit:]]\.)+[[:digit:]]+")
 		changequote([, ])
