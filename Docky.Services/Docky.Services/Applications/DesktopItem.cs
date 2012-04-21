@@ -43,6 +43,10 @@ namespace Docky.Services.Applications
 			@"(^(\s)*(?<PureKey>([^\[^\n]+))\[(?<Locale>([^\]^\n]+))\])" ,
 			RegexOptions.Compiled | RegexOptions.CultureInvariant
 		);
+		public static Regex execAcceptsDropRegex = new Regex (
+			@"%[fFuU]",
+			RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled | RegexOptions.CultureInvariant
+		);
 
 		IEnumerable<string> Locales {
 			get {
@@ -107,6 +111,12 @@ namespace Docky.Services.Applications
 			get { return System.IO.Path.GetFileNameWithoutExtension (Path); }
 		}
 
+		public bool AcceptsDrops {
+			get {
+				return HasAttribute ("Exec") && execAcceptsDropRegex.Match (GetString ("Exec")).Success;
+			}
+		}
+		
 		public bool Ignored {
 			get {
 				return ((HasAttribute ("NoDisplay") && GetBool ("NoDisplay"))

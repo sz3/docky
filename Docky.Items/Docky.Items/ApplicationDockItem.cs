@@ -189,6 +189,10 @@ namespace Docky.Items
 			if (uris == null)
 				return false;
 			
+			// if they dont specify mimes but have '%F' etc in their Exec, assume any file allowed
+			if (mimes.Count() == 0 && OwnedItem.AcceptsDrops)
+				return true;
+			
 			foreach (string uri in uris) {
 				string mime = GLib.FileFactory.NewForUri (uri).QueryInfo<string> ("standard::content-type");
 				if (mimes.Any (m => GLib.Content.TypeIsA (mime, m) || GLib.Content.TypeEquals (mime, m)))
