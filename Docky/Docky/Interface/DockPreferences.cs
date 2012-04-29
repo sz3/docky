@@ -157,7 +157,7 @@ namespace Docky.Interface
 				return hot_area_padding.Value;
 			}
 			set {
-				value = Clamp (value, 128, 24);
+				value = Clamp (value, 100, 0);
 				if (hot_area_padding == value)
 					return;
 				hot_area_padding = value;
