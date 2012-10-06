@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-06-17 13:49+0200\n"
-"PO-Revision-Date: 2011-12-14 21:42+0000\n"
-"Last-Translator: Christos Spyroglou <Unknown>\n"
+"PO-Revision-Date: 2012-04-16 13:16+0000\n"
+"Last-Translator: tzem <athmakrigiannis@gmail.com>\n"
 "Language-Team: Greek <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-12-22 16:01+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-10-06 12:21+0000\n"
+"X-Generator: Launchpad (build 16061)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -106,7 +106,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:21
 msgid "How long to wait (ms) before unhiding"
-msgstr ""
+msgstr "Πόσος χρόνος(ms) να περάσει μέχρι την εμφάνιση"
 
 #: ../data/docky.schemas.in.h:22
 msgid "How long to wait (ms) to update after a window switch"
@@ -115,7 +115,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:23
 msgid "How many recent clipboard selections to show."
-msgstr ""
+msgstr "Πόσες πρόσφατες επιλογές θα φαίνονται στο πρόχειρο"
 
 #: ../data/docky.schemas.in.h:24
 msgid ""
@@ -187,6 +187,8 @@ msgstr ""
 msgid ""
 "If true, Docky will only show windows on the currently active desktop."
 msgstr ""
+"Αν είναι επιλεγμένο, το Docky θα εμφανίσει μόνο τα παράθυρα που είναι ενεργά "
+"στην τρέχουσα επιφάνεια εργασίας."
 
 #: ../data/docky.schemas.in.h:38
 msgid "If true, all new timers will automatically start."
@@ -376,7 +378,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:81
 msgid "Show date"
-msgstr ""
+msgstr "Εμφάνιση ημερομηνίας"
 
 #: ../data/docky.schemas.in.h:82
 msgid "Show hover text labels for launchers"

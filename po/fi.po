@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-06-17 13:49+0200\n"
-"PO-Revision-Date: 2011-11-04 09:48+0000\n"
-"Last-Translator: Juhani Numminen <juhaninumminen0@gmail.com>\n"
+"PO-Revision-Date: 2012-02-24 22:59+0000\n"
+"Last-Translator: Eerik Uusi-Illikainen <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-12-22 16:01+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-10-06 12:21+0000\n"
+"X-Generator: Launchpad (build 16061)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -24,7 +24,7 @@ msgstr "\"Hienoin telakkasovellus mitä rahalla ei saa.\""
 
 #: ../data/docky.schemas.in.h:1
 msgid "A list of plugins that are active on this dock."
-msgstr ""
+msgstr "Lista liitännäisistä jotka ovat aktiivisia tässä telakassa."
 
 #: ../data/docky.schemas.in.h:2
 msgid "Analog clock theme"
@@ -32,15 +32,15 @@ msgstr "Analogisen kellon teema"
 
 #: ../data/docky.schemas.in.h:3
 msgid "Clear finished timers"
-msgstr ""
+msgstr "Nollaa valmiit ajastimet"
 
 #: ../data/docky.schemas.in.h:4
 msgid "Currently selected item"
-msgstr ""
+msgstr "Valitut kohteet"
 
 #: ../data/docky.schemas.in.h:5
 msgid "Dismiss a stopped timer when clicked"
-msgstr ""
+msgstr "Poista pysäytetty ajastin klikkaamalla"
 
 #: ../data/docky.schemas.in.h:6
 msgid "Do not change this!"
@@ -68,7 +68,7 @@ msgstr "Telakan piilotustila"
 
 #: ../data/docky.schemas.in.h:12
 msgid "Docky item command to execute"
-msgstr ""
+msgstr "Docky pikakuvakkeen suoritettava komento"
 
 #: ../data/docky.schemas.in.h:13
 msgid "Docky item hover text"
@@ -171,7 +171,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:35
 msgid "If the dock is a panel"
-msgstr ""
+msgstr "Jos telakka on paneeli"
 
 #: ../data/docky.schemas.in.h:36
 msgid ""
@@ -181,7 +181,7 @@ msgstr ""
 #: ../data/docky.schemas.in.h:37
 msgid ""
 "If true, Docky will only show windows on the currently active desktop."
-msgstr ""
+msgstr "Näytä Docky vain aktiivisella työpöydällä."
 
 #: ../data/docky.schemas.in.h:38
 msgid "If true, all new timers will automatically start."
@@ -273,7 +273,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:57
 msgid "If true, use metric units when showing weather."
-msgstr ""
+msgstr "Käytä SI-jäjestelmää (ms) näytettäessä säätä."
 
 #: ../data/docky.schemas.in.h:58
 msgid ""
@@ -303,7 +303,7 @@ msgstr "Hiiren vasemman painikkeen komento"
 
 #: ../data/docky.schemas.in.h:64
 msgid "List of NPR stations to display."
-msgstr ""
+msgstr "Lista näytettävistä NPR-asemista."
 
 #: ../data/docky.schemas.in.h:65
 msgid "List of active docks"
@@ -401,11 +401,11 @@ msgstr "Näytä ikkunat vain nykyisestä työtilasta"
 
 #: ../data/docky.schemas.in.h:88
 msgid "Sorts the items on the dock"
-msgstr ""
+msgstr "Telekan kohteet lajiteltu"
 
 #: ../data/docky.schemas.in.h:89
 msgid "Start all new timers"
-msgstr ""
+msgstr "Aloita kaikki uudet ajastimet"
 
 #: ../data/docky.schemas.in.h:90
 msgid "Stop items from dragging"
@@ -1171,7 +1171,7 @@ msgstr "Yhteys muodostettu: {0}"
 
 #: ../StandardPlugins/NetworkMonitor/src/NetworkMonitorDockItem.cs:61
 msgid "No network connection available"
-msgstr ""
+msgstr "Ei verkkoyhteyttä käytettävissä"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:47
 msgid "My _Stations"

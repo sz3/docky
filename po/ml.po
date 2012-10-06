@@ -1,16 +1,16 @@
-# Icelandic translation for docky
-# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# Malayalam translation for docky
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
 # This file is distributed under the same license as the docky package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-06-17 13:49+0200\n"
-"PO-Revision-Date: 2010-09-30 11:12+0000\n"
-"Last-Translator: Baldur <baldurpet@gmail.com>\n"
-"Language-Team: Icelandic <is@li.org>\n"
+"PO-Revision-Date: 2011-11-21 11:09+0000\n"
+"Last-Translator: Amal Bose <axatrikx@gmail.com>\n"
+"Language-Team: Malayalam <ml@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,43 +20,43 @@ msgstr ""
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
-msgstr "Betri er stika en keldi."
+msgstr "പൈസ്സയില്ലാതെ കിട്ടുന്ന ഏറ്റവും നല്ല ടോക്ക്"
 
 #: ../data/docky.schemas.in.h:1
 msgid "A list of plugins that are active on this dock."
-msgstr ""
+msgstr "ഈ ടോക്കില്‍  സജീവമായ പ്ലഗ്ഗിന്സിന്റെ പട്ടിക"
 
 #: ../data/docky.schemas.in.h:2
 msgid "Analog clock theme"
-msgstr ""
+msgstr "ക്ലോക്കിന്റെ തീം"
 
 #: ../data/docky.schemas.in.h:3
 msgid "Clear finished timers"
-msgstr ""
+msgstr "പൂര്‍ത്തിയായ ടൈമര്‍ ക്ലിയര്‍ ചെയ്യുക"
 
 #: ../data/docky.schemas.in.h:4
 msgid "Currently selected item"
-msgstr ""
+msgstr "ഇപ്പോള്‍ തിരഞ്ഞെടുത്തിരിക്കുന്ന ചെയ്തിരിക്കുന്ന സംഗതി"
 
 #: ../data/docky.schemas.in.h:5
 msgid "Dismiss a stopped timer when clicked"
-msgstr ""
+msgstr "ക്ലിക്ക് ചെയ്യുമ്പോള്‍ നിര്‍ത്തിയ ടൈമര്‍ പുറന്തള്ളുക"
 
 #: ../data/docky.schemas.in.h:6
 msgid "Do not change this!"
-msgstr ""
+msgstr "ഇത് മാറ്റരുത്!"
 
 #: ../data/docky.schemas.in.h:7
 msgid "Dock icon size"
-msgstr ""
+msgstr "ഡോക്ക് ഐക്കണിന്റെ വലുപ്പം"
 
 #: ../data/docky.schemas.in.h:8
 msgid "Dock is 3d"
-msgstr ""
+msgstr "ഡോക്ക് 3D ആണ്"
 
 #: ../data/docky.schemas.in.h:9
 msgid "Dock manages all windows"
-msgstr ""
+msgstr "ഡോക്ക് എല്ലാ ജാലകങ്ങളും നിയന്ത്രിക്കുന്നു"
 
 #: ../data/docky.schemas.in.h:10
 msgid "Dock zooms"
@@ -599,16 +599,16 @@ msgstr ""
 #: ../Docky/Docky/ConfigurationWindow.cs:583
 #: ../Docky/Docky/ConfigurationWindow.cs:603
 msgid "_Select"
-msgstr "_Velja"
+msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:586
 #: ../Docky/Docky/ConfigurationWindow.cs:606
 msgid ".tar Archives"
-msgstr ".tar safnskrár"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:49
 msgid "Author"
-msgstr "Höfundur"
+msgstr ""
 
 #: ../Docky/Docky/DockletTile.cs:84
 msgid "Move this docklet up on the selected dock"
@@ -650,11 +650,11 @@ msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:42
 msgid "Status"
-msgstr "Staða"
+msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:59
 msgid "Uninstall"
-msgstr "Henda út"
+msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:71
 msgid "About this helper"
@@ -670,11 +670,11 @@ msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Running"
-msgstr "Keyrandi"
+msgstr ""
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Stopped"
-msgstr "Stöðvað"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:345
 msgid ""
@@ -700,7 +700,7 @@ msgstr ""
 
 #: ../Docky/Docky/Interface/DockWindow.cs:380
 msgid "Drag to reposition"
-msgstr "Haltu inni til að endurstaðsetja"
+msgstr ""
 
 #: ../Docky/Docky/Interface/DockWindow.cs:392
 #: ../Docky/Docky/Interface/DockWindow.cs:406
@@ -712,11 +712,11 @@ msgstr ""
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:227
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:244
 msgid "_Settings"
-msgstr "_Stillingar"
+msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:133
 msgid "_About"
-msgstr "_Um"
+msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:134
 msgid "_Help"
@@ -724,7 +724,7 @@ msgstr ""
 
 #: ../Docky/Docky/Items/DockyItem.cs:136
 msgid "_Quit Docky"
-msgstr "_Hætta í Docky"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
 msgid "Docky Settings"
@@ -736,20 +736,20 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
-msgstr "_Þema"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
 msgid "_Install"
-msgstr "_Setja upp"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
 msgid "<b>General Options</b>"
-msgstr "<b>Valmöguleikar</b>"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
-msgstr "<b>Stillingar á stiku</b>"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
@@ -758,17 +758,17 @@ msgstr ""
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
 msgid "All"
-msgstr "Allt"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:263
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:318
 msgid "Enabled"
-msgstr "Virkt"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
 msgid "Disabled"
-msgstr "Óvirkt"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
 msgid "Docklets"
@@ -788,15 +788,15 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
 msgid "None"
-msgstr "Ekkert"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
 msgid "Autohide"
-msgstr "Fela sjálfkrafa"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "Intellihide"
-msgstr "Fela gáfulega"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Window Dodge"
@@ -808,11 +808,11 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:119
 msgid "_Icon Size:"
-msgstr "Stærð tá_knmynda:"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:132
 msgid "_Hiding:"
-msgstr "_Felun:"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
 msgid "_Panel Mode"
@@ -820,7 +820,7 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
 msgid "3D Back_ground"
-msgstr "3D bak_grunnur"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
 msgid "_Manage Windows Without Launcher"
@@ -828,7 +828,7 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
 msgid "_Zoom:"
-msgstr "Að_dráttur:"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/AbstractDockItem.cs:120
 #, csharp-format
@@ -837,13 +837,13 @@ msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:180
 msgid "New _Window"
-msgstr "Nýr _gluggi"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:182
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:267
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
-msgstr "_Opna"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:70
 msgid "_Reset Color"
@@ -867,21 +867,21 @@ msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:197
 msgid "Not enough free space on destination."
-msgstr "Ekki nægilegt pláss á áfangastaðnum."
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:214
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:217
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:249
 msgid "Complete"
-msgstr "Lokið"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:227
 msgid "Moving"
-msgstr "Færi"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:233
 msgid "Copying"
-msgstr "Afrita"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:268
 msgid "Open Containing _Folder"
@@ -889,91 +889,91 @@ msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
 msgid "Unma_ximize"
-msgstr "Minn_ka glugga"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:267
 msgid "Ma_ximize"
-msgstr "_Hámarka"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:271
 msgid "_Restore"
-msgstr "Endu_rheimta"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:274
 msgid "Mi_nimize"
-msgstr "Lág_marka"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:277
 msgid "_Close All"
-msgstr "Loka _öllu"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
 msgid "Sign up for {0}"
-msgstr "Skrá sig í {0}"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:44
 msgid "Validating..."
-msgstr "Auðkenni..."
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:45
 #, csharp-format
 msgid "Don't have {0}?"
-msgstr "Hefurðu ekki {0}?"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:46
 msgid "Account validation failed!"
-msgstr "Það tókst ekki að auðkenna!"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:47
 msgid "Verify and save account information"
-msgstr "Staðfesta og vista upplýsingar um reikning"
+msgstr ""
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:48
 msgid "Account validation succeeded!"
-msgstr "Það tókst að auðkenna aðganginn!"
+msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:87
 msgid "Password"
-msgstr "Lykilorð"
+msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:108
 msgid "Username"
-msgstr "Notandanafn"
+msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
 msgid "<i>Verify and save account information</i>"
-msgstr "<i>Staðfesta og vista upplýsingar um aðgang</i>"
+msgstr ""
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
 msgid "Don't have an account?"
-msgstr "Átt þú reikning?"
+msgstr ""
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:98
 msgid "No Battery Found"
-msgstr "Enginn rafhlaða fannst"
+msgstr ""
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:111
 #, csharp-format
 msgid "{0} hour"
 msgid_plural "{0} hours"
-msgstr[0] "{0} klukkustund"
-msgstr[1] "{0} klukkustundir"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:113
 #, csharp-format
 msgid "{0} minute"
 msgid_plural "{0} minutes"
-msgstr[0] "{0} mínúta"
-msgstr[1] "{0} mínútur"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:115
 msgid "until charged "
-msgstr "þar til hlaðin "
+msgstr ""
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:117
 msgid "remaining "
-msgstr "eftir "
+msgstr ""
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:154
 msgid "_Statistics"
@@ -981,7 +981,7 @@ msgstr ""
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:85
 msgid "Computer"
-msgstr "Tölva"
+msgstr ""
 
 #: ../StandardPlugins/Clippy/src/ClippyItem.cs:88
 msgid "Clipboard is currently empty."
@@ -989,27 +989,27 @@ msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "Di_gital Clock"
-msgstr "Sta_fræn klukka"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
 msgid "24-Hour _Clock"
-msgstr "24 klst. k_lukka"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:443
 msgid "Show _Date"
-msgstr "Sýna _dagsetningu"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:449
 msgid "Select _Theme"
-msgstr "Velja _þema"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:54
 msgid "Themes"
-msgstr "Þemur"
+msgstr ""
 
 #: ../StandardPlugins/Clock/src/ClockThemeSelector.cs:62
 msgid "Theme"
-msgstr "Þema"
+msgstr ""
 
 #: ../StandardPlugins/Desktop/src/DesktopActionsProvider.cs:57
 msgid "_Undo"
@@ -1033,12 +1033,12 @@ msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:113
 msgid "Check e_very:"
-msgstr "Athuga hverjar:"
+msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:123
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:186
 msgid "minutes"
-msgstr "mínútur"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:189
 msgid "Click to set username and password."
@@ -1046,7 +1046,7 @@ msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:246
 msgid "(no subject)"
-msgstr "(ekkert viðfangsefni)"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:260
 #, csharp-format
@@ -1056,53 +1056,53 @@ msgstr ""
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:264
 #, csharp-format
 msgid "From: {0}"
-msgstr "Frá: {0}"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:278
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:281
 msgid "Feed Error"
-msgstr "Villa í straumi."
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:285
 msgid "Invalid Username"
-msgstr "Ógilt notandanafn"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:292
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:173
 msgid "Network Error"
-msgstr "Netvilla"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:296
 msgid "General Error"
-msgstr "Almenn villa"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
 msgid "Gmail Configuration"
-msgstr "Stillingar GMail"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 msgid "No unread mail"
-msgstr "Enginn ólesinn póstur"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:98
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
-msgstr[0] "{0} ólesið skilaboð"
-msgstr[1] "{0} ólesin skilaboð"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:119
 msgid "Checking mail..."
-msgstr "Athuga póstinn..."
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "_View "
-msgstr "Sk_oða "
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
 msgid "_Compose Mail"
-msgstr "Skrifa _póst"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:211
 msgid "View C_ontacts"
@@ -1110,53 +1110,53 @@ msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
 msgid "New Mail"
-msgstr "Nýr póstur"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:236
 msgid "Check _Mail"
-msgstr "Athuga _með póst"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
-msgstr "Merki"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
 msgid "Gmail"
-msgstr "Gmail"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr "Innskráning"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
-msgstr "Frá: "
+msgstr ""
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Eject"
-msgstr "_Spýta út"
+msgstr ""
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Unmount"
-msgstr "_Aftengja"
+msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:53
 msgid "Network Manager"
-msgstr "Netstjóri"
+msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
-msgstr "Tengist..."
+msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:101
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:166
 msgid "Disconnected"
-msgstr "Ótengd"
+msgstr ""
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
 msgid "Connected: {0}"
-msgstr "Tengdur: {0}"
+msgstr ""
 
 #: ../StandardPlugins/NetworkMonitor/src/NetworkMonitorDockItem.cs:61
 msgid "No network connection available"
@@ -1164,60 +1164,60 @@ msgstr ""
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:47
 msgid "My _Stations"
-msgstr "_Stöðvarnar mínar"
+msgstr ""
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:78
 msgid "S_earch"
-msgstr "L_eita"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/Station.cs:72
 msgid "No stations found."
-msgstr "Engar stöðvar fundust."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/Station.cs:73
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "Please try your search again."
-msgstr "Reyndu að leita aftur."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:46
 msgid "Fetching Information..."
-msgstr "Næ í upplýsingar..."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:72
 msgid "Click to add NPR stations."
-msgstr "Smelltu til að bæta við NPR stöðvum."
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:111
 msgid "Home Page"
-msgstr "Heimasíða"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:118
 msgid "Program Schedule"
-msgstr "Dagskrá"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:125
 msgid "Donate"
-msgstr "Gefa"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:132
 msgid "Live Streams"
-msgstr "Lifandi straumar"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:170
 msgid "Settings"
-msgstr "Stillingar"
+msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:84
 msgid "_Clear Recent Documents..."
-msgstr "_Hreinsa nýleg skjöl..."
+msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:95
 msgid "Clear the Recent Documents list?"
-msgstr "Hreinsa lista nýlegra skjala?"
+msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:97
 msgid "Clear Recent Documents"
-msgstr "Hreinsa nýleg skjöl"
+msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:99
 msgid ""
@@ -1225,9 +1225,6 @@ msgid ""
 "• All items from the Places → Recent Documents menu item.\n"
 "• All items from the recent documents list in all applications."
 msgstr ""
-"Ef þú hreinsar listann fyrir nýleg skjöl, hreinsar þú eftirfarandi:\n"
-"• Alla hluti úr Staðir → Nýleg skjöl valmyndaratriðinu.\n"
-"• Alla hluti úr listanum yfir nýleg skjöl í öllum forritum."
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:76
 msgid "L_ock Screen"
@@ -1354,14 +1351,14 @@ msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:82
 msgid "No items in Trash"
-msgstr "Ruslið er tómt"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:84
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
-msgstr[0] "{0} hlutur í ruslinu"
-msgstr[1] "{0} hlutir í ruslinu"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:169
 msgid "Restore Files"
@@ -1369,16 +1366,16 @@ msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:201
 msgid "_Open Trash"
-msgstr "_Opna ruslið"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:203
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:234
 msgid "Empty _Trash"
-msgstr "_Tæma ruslið"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:226
 msgid "Empty all of the items from the trash?"
-msgstr "Fjarlægja alla hluti úr ruslinu?"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:228
 msgid ""
@@ -1389,27 +1386,27 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:65
 msgid "_Weather Provider:"
-msgstr "_Veðurþjónusta:"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:105
 msgid "My _Locations"
-msgstr "Staðirnir _mínir"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:136
 msgid "_Search"
-msgstr "_Leita"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:176
 msgid "Automatically Update _Every"
-msgstr "Uppfæra _sjálfkrafa hverjar"
+msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:220
 msgid "Use _Metric Units"
-msgstr "Nota _einingar metrakerfisins"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:170
 msgid "Invalid Weather Location"
-msgstr "Ógild staðsetning"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
@@ -1433,11 +1430,11 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
-msgstr "Engar niðurstöður fundust."
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
-msgstr "Stillingar veðurupplýsinga"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
 msgid "Click to add a location."
@@ -1445,27 +1442,27 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
 msgid "Fetching data..."
-msgstr "Sæki gögnin..."
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Radar _Map"
-msgstr "Ratsjár_mynd"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:236
 msgid "Forecasts"
-msgstr "Veðurspár"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:252
 msgid "Check _Weather"
-msgstr "Athuga _veðrið"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:108
 msgid "_Today"
-msgstr "Í _dag"
+msgstr ""
 
 #: ../StandardPlugins/Weather/src/WeatherForecast.cs:111
 msgid "T_omorrow"
-msgstr "Á m_orgun"
+msgstr ""
 
 #. draw humidity
 #: ../StandardPlugins/Weather/src/WeatherPainter.cs:410
@@ -1486,57 +1483,3 @@ msgstr ""
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:174
 msgid "Virtual Desk"
 msgstr ""
-
-#~ msgid "_Remove"
-#~ msgstr "_Fjarlægja"
-
-#~ msgid "_Add"
-#~ msgstr "_Bæta við"
-
-#~ msgid "Network Error: "
-#~ msgstr "Netvilla: "
-
-#~ msgid "Sunset"
-#~ msgstr "Sólsetur"
-
-#~ msgid "Sunrise"
-#~ msgstr "Sólarupprás"
-
-#~ msgid "Wind"
-#~ msgstr "Vindur"
-
-#~ msgid "Temp"
-#~ msgstr "Hitastig"
-
-#~ msgid "Direction"
-#~ msgstr "Átt"
-
-#~ msgid "Humidity"
-#~ msgstr "Raki"
-
-#~ msgid "_Enable"
-#~ msgstr "_Virkja"
-
-#~ msgid "_Disable"
-#~ msgstr "_Afvirkja"
-
-#~ msgid "Docky Configuration"
-#~ msgstr "Stillingar Docky"
-
-#~ msgid "_Start When Computer Starts"
-#~ msgstr "Þegar _tölvan er ræst"
-
-#~ msgid "Reset Color"
-#~ msgstr "Frumstilla lit"
-
-#~ msgid "Open"
-#~ msgstr "Opna"
-
-#~ msgid "Open Containing Folder"
-#~ msgstr "Opna geymslumöppu"
-
-#~ msgid "Username or Password not set"
-#~ msgstr "Notandanafn eða lykilorð eru ekki stillt"
-
-#~ msgid "Feels Like"
-#~ msgstr "Vindkæling"

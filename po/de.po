@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: Rico Tzschichholz <ricotz@t-online.de>\n"
 "POT-Creation-Date: 2011-06-17 13:49+0200\n"
-"PO-Revision-Date: 2011-04-16 20:46+0000\n"
-"Last-Translator: Rico Tzschichholz <Unknown>\n"
+"PO-Revision-Date: 2011-12-22 20:07+0000\n"
+"Last-Translator: Florian Unwichtig <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-12-22 16:01+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-10-06 12:21+0000\n"
+"X-Generator: Launchpad (build 16061)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -346,7 +346,7 @@ msgstr "Zeit der letzten Abfrage"
 
 #: ../data/docky.schemas.in.h:63
 msgid "Left click command"
-msgstr ""
+msgstr "Befehl für Linksklick"
 
 #: ../data/docky.schemas.in.h:64
 msgid "List of NPR stations to display."
@@ -527,6 +527,8 @@ msgstr "Name der Quelle, die für die Wetterinformationen benutzt wird."
 msgid ""
 "The number of extra pixels to pad the hover area on the top of the dock."
 msgstr ""
+"Die Anzahl der zusätzlichen Pixel, die den Rollover-Bereich oben am Dock "
+"vergrößern."
 
 #: ../data/docky.schemas.in.h:105
 msgid "The number of most recent documents to show."
@@ -555,6 +557,7 @@ msgstr "Quelle der Wetter-Daten"
 msgid ""
 "This is the command to execute when left clicking on the CPU docklet item."
 msgstr ""
+"Dieser Befehl wird beim Linksklick auf das CPU Docklet Item ausgeführt."
 
 #: ../data/docky.schemas.in.h:111
 msgid "This is the list of all the launchers on this dock."
@@ -590,7 +593,7 @@ msgstr "Timer Wartezeit"
 
 #: ../data/docky.schemas.in.h:117
 msgid "Track Mouse Selections"
-msgstr ""
+msgstr "Mausauswahl verfolgen"
 
 #: ../data/docky.schemas.in.h:118
 msgid "Urgent indicator color shift"

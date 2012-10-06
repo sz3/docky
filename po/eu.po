@@ -15,16 +15,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-12-22 16:01+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-10-06 12:21+0000\n"
+"X-Generator: Launchpad (build 16061)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
-msgstr "Diruz erosi ezin daitekeen dock-ik ederrena."
+msgstr "Diruz erosi ezin daitekeen atrakerik ederrena."
 
 #: ../data/docky.schemas.in.h:1
 msgid "A list of plugins that are active on this dock."
-msgstr "Dock honetan aktibo dauden plugin-en zerrenda."
+msgstr "Atrake honetan aktibo dauden pluginen zerrenda."
 
 #: ../data/docky.schemas.in.h:2
 msgid "Analog clock theme"
@@ -48,27 +48,27 @@ msgstr "Ez aldatu hau!"
 
 #: ../data/docky.schemas.in.h:7
 msgid "Dock icon size"
-msgstr "Dock-eko ikonoen neurria"
+msgstr "Atrakeko ikonoen neurria"
 
 #: ../data/docky.schemas.in.h:8
 msgid "Dock is 3d"
-msgstr "Dock-a 3D da"
+msgstr "Atrakea 3D da"
 
 #: ../data/docky.schemas.in.h:9
 msgid "Dock manages all windows"
-msgstr "Dock-ak leiho guztiak kudeatzen ditu"
+msgstr "Atrakeak leiho guztiak kudeatzen ditu"
 
 #: ../data/docky.schemas.in.h:10
 msgid "Dock zooms"
-msgstr "Dock-ak zoom egiten du"
+msgstr "Atrakeak zoom egiten du"
 
 #: ../data/docky.schemas.in.h:11
 msgid "Dock's hiding mode"
-msgstr "Dock-a ezkutatzeko modua"
+msgstr "Atrakea ezkutatzeko modua"
 
 #: ../data/docky.schemas.in.h:12
 msgid "Docky item command to execute"
-msgstr "Exekutatu beharreko docky elementuaren agindua"
+msgstr "Exekutatu beharreko Docky elementuaren agindua"
 
 #: ../data/docky.schemas.in.h:13
 msgid "Docky item hover text"
@@ -92,7 +92,7 @@ msgstr "Begiratu beharreko GMail etiketak"
 
 #: ../data/docky.schemas.in.h:18
 msgid "GMail username"
-msgstr "GMail-eko erabiltzailea"
+msgstr "GMail-eko erabiltzaile-izena"
 
 #: ../data/docky.schemas.in.h:19
 msgid "Hot-area padding"
@@ -103,14 +103,16 @@ msgid ""
 "How long the urgent indicator glow animation is (in seconds), 0 to disable, "
 "or -1 for infinite."
 msgstr ""
+"Premiazko adierazlearen animazioak zenbat iraungo duen (segundotan), 0 "
+"ezgaitzeko, edo -1 mugagabe jartzeko."
 
 #: ../data/docky.schemas.in.h:21
 msgid "How long to wait (ms) before unhiding"
-msgstr ""
+msgstr "Zenbat (ms) itxaron erakutsi baino lehen"
 
 #: ../data/docky.schemas.in.h:22
 msgid "How long to wait (ms) to update after a window switch"
-msgstr ""
+msgstr "Zenbat (ms) itxaron eguneratzeko leihoa aldatu eta gero"
 
 #: ../data/docky.schemas.in.h:23
 msgid "How many recent clipboard selections to show."
@@ -124,11 +126,11 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:25
 msgid "How often (in mins) to check for new mail."
-msgstr ""
+msgstr "Zenbatero (minututan) begiratu mezu berririk dagoen."
 
 #: ../data/docky.schemas.in.h:26
 msgid "How often to check"
-msgstr ""
+msgstr "Zenbatero begiratu"
 
 #: ../data/docky.schemas.in.h:27
 msgid "How often to check for new weather information."
@@ -571,11 +573,11 @@ msgstr "Bilatu hedapenak..."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:364
 msgid "Click on any dock to configure."
-msgstr "Klikatu edozein dock konfiguratzeko."
+msgstr "Klikatu edozein atrake konfiguratzeko."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:365
 msgid "Drag any dock to reposition."
-msgstr "Arrastatu edozein dock birkokatzeko."
+msgstr "Arrastatu edozein atrake birkokatzeko."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:386
 msgid "Helpers require DockManager be installed."
@@ -583,20 +585,20 @@ msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:458
 msgid "Delete the currently selected dock?"
-msgstr "Hautatutako dock-a ezabatu?"
+msgstr "Hautatutako atrakea ezabatu?"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:460
 msgid ""
 "If you choose to delete the dock, all settings\n"
 "for the deleted dock will be permanently lost."
 msgstr ""
-"Dock-a ezabatzea aukeratzen baduzu, dock horrekin\n"
+"Atrakea ezabatzea aukeratzen baduzu, atrake horrekin\n"
 "lotutako ezarpen guztiak betiko galduko dira."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:467
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:457
 msgid "_Delete Dock"
-msgstr "E_zabatu dock-a"
+msgstr "E_zabatu atrakea"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:583
 #: ../Docky/Docky/ConfigurationWindow.cs:603
@@ -614,19 +616,19 @@ msgstr "Egilea"
 
 #: ../Docky/Docky/DockletTile.cs:84
 msgid "Move this docklet up on the selected dock"
-msgstr "Eraman docklet hau gora hautatutako dock-ean"
+msgstr "Eraman docklet hau gora hautatutako atrakean"
 
 #: ../Docky/Docky/DockletTile.cs:85
 msgid "Move this docklet down on the selected dock"
-msgstr "Eraman docklet hau behera hautatutako dock-ean"
+msgstr "Eraman docklet hau behera hautatutako atrakean"
 
 #: ../Docky/Docky/DockletTile.cs:89
 msgid "Move this docklet left on the selected dock"
-msgstr "Eraman docklet hau ezkerrera hautatutako dock-ean"
+msgstr "Eraman docklet hau ezkerrera hautatutako atrakean"
 
 #: ../Docky/Docky/DockletTile.cs:90
 msgid "Move this docklet right on the selected dock"
-msgstr "Eraman docklet hau eskumara hautatutako dock-ean"
+msgstr "Eraman docklet hau eskumara hautatutako atrakean"
 
 #: ../Docky/Docky/DockletTile.cs:92
 msgid "Configure this docklet"
@@ -638,11 +640,11 @@ msgstr "Docklet honi buruz"
 
 #: ../Docky/Docky/DockletTile.cs:94
 msgid "Add this docklet to the selected dock"
-msgstr "Gehitu docklet hau hautatutako dock-era"
+msgstr "Gehitu docklet hau hautatutako atrakera"
 
 #: ../Docky/Docky/DockletTile.cs:95
 msgid "Remove this docklet from the selected dock"
-msgstr "Kendu docklet hau hautatutako dock-etik"
+msgstr "Kendu docklet hau hautatutako atraketik"
 
 #: ../Docky/Docky/Docky.cs:139
 msgid ""
@@ -685,13 +687,13 @@ msgid ""
 "When set, windows which do not already have launchers on a dock will be "
 "added to this dock."
 msgstr ""
-"Aukera hau aktibatzean, abiarazlerik ez duten leihoak dock honetan "
+"Aukera hau aktibatzean, abiarazlerik ez duten leihoak atrake honetan "
 "bistaratuko dira."
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:727
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
-"<i>Beti ikusgai; maximizatutako leihoek ez dute dock-a ezkutatzen.</i>"
+"<i>Beti ikusgai; maximizatutako leihoek ez dute atrakea ezkutatzen.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:730
 msgid "<i>Hides whenever the mouse is not over it.</i>"
@@ -712,7 +714,7 @@ msgstr "Arrastatu lekuz aldatzeko"
 #: ../Docky/Docky/Interface/DockWindow.cs:392
 #: ../Docky/Docky/Interface/DockWindow.cs:406
 msgid "Drop to add to dock"
-msgstr "Jaregin dock-era itsasteko"
+msgstr "Jaregin atrakera itsasteko"
 
 #: ../Docky/Docky/Items/DockyItem.cs:132
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:160
@@ -756,11 +758,11 @@ msgstr "<b>Aukera orokorrak</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
-msgstr "Dock-aren konfigurazioa"
+msgstr "Atrakearen konfigurazioa"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
-msgstr "Dock-ak"
+msgstr "Atrakeak"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:262
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:320
@@ -791,7 +793,7 @@ msgstr "Hedapenak"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:430
 msgid "_New Dock"
-msgstr "Dock _berria"
+msgstr "Atrake _berria"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
 msgid "None"
@@ -858,7 +860,7 @@ msgstr "_Kolorea berrezarri"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:482
 msgid "_Pin to Dock"
-msgstr "I_tsatsi dock-era"
+msgstr "I_tsatsi atrakera"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:83
 #, csharp-format
@@ -892,7 +894,7 @@ msgstr "Kopiatzen"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:268
 msgid "Open Containing _Folder"
-msgstr "Ireki gaineko _karpeta"
+msgstr "Ireki daukan _karpeta"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
 msgid "Unma_ximize"

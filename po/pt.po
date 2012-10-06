@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-12-22 16:00+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-10-06 12:20+0000\n"
+"X-Generator: Launchpad (build 16061)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -1603,3 +1603,19 @@ msgstr "Secretária Virtual"
 
 #~ msgid "Open Containing Folder"
 #~ msgstr "Abrir Pasta Respectiva"
+
+#~ msgid "_Enable"
+#~ msgstr "_Ativar"
+
+#~ msgid ""
+#~ "Docky requires compositing to work properly. Please enable compositing and "
+#~ "restart docky."
+#~ msgstr ""
+#~ "Docky precisa que a composição funcione corretamente. Por favor ative a "
+#~ "composição e reinicie docky."
+
+#~ msgid "_Disable"
+#~ msgstr "_Desativar"
+
+#~ msgid "Indicat_e Multiple Windows"
+#~ msgstr "Janelas Múltiplas Indicat_e"
