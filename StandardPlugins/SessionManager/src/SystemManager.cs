@@ -41,6 +41,10 @@ namespace SessionManager
 		const string DeviceKitPowerPath = "/org/freedesktop/DeviceKit/Power";
 		const string DeviceKitPowerIface = "org.freedesktop.DeviceKit.Power";
 
+		const string SystemdName = "org.freedesktop.login1";
+		const string SystemdPath = "/org/freedesktop/login1";
+		const string SystemdIface = "org.freedesktop.login1.Manager";
+
 		const string ConsoleKitName = "org.freedesktop.ConsoleKit";
 		const string ConsoleKitPath = "/org/freedesktop/ConsoleKit/Manager";
 		const string ConsoleKitIface = "org.freedesktop.ConsoleKit.Manager";
@@ -79,6 +83,16 @@ namespace SessionManager
 			event Action Changed;
 		}
 
+		[Interface (SystemdIface)]
+		interface ISystemd
+		{
+			string CanPowerOff ();
+			string CanReboot ();
+
+			void PowerOff (bool interactive);
+			void Reboot (bool interactive);
+		}
+
 		[Interface (ConsoleKitIface)]
 		interface IConsoleKit
 		{
@@ -100,6 +114,7 @@ namespace SessionManager
 		
 		IDeviceKitPower devicekit;
 		IUPower upower;
+		ISystemd systemd;
 		IConsoleKit consolekit;
 		
 		private static SystemManager instance;
@@ -117,7 +132,7 @@ namespace SessionManager
 				SystemBus = Bus.System.GetObject<IBus> ("org.freedesktop.DBus", new ObjectPath ("/org/freedesktop/DBus"));
 				
 				SystemBus.NameOwnerChanged += delegate(string name, string old_owner, string new_owner) {
-					if (name != UPowerName && name != DeviceKitPowerName && name != ConsoleKitName)
+					if (name != UPowerName && name != DeviceKitPowerName && name != SystemdName && name != ConsoleKitName)
 						return;
 
 					Log<SystemManager>.Debug ("DBus services changed, reconnecting now");
@@ -127,6 +142,9 @@ namespace SessionManager
 					
 					if (devicekit != null)
 						devicekit = null;
+
+					if (systemd != null)
+						systemd = null;
 
 					if (consolekit != null)
 						consolekit = null;
@@ -161,7 +179,10 @@ namespace SessionManager
 					Log<SystemManager>.Debug ("Using DeviceKit.Power dbus service");
 				}
 				
-				if (consolekit == null && Bus.System.NameHasOwner (ConsoleKitName)) {
+				if (systemd == null && Bus.System.NameHasOwner (SystemdName)) {
+					systemd = Bus.System.GetObject<ISystemd> (SystemdName, new ObjectPath (SystemdPath));
+					Log<SystemManager>.Debug ("Using login1.Manager dbus service");
+				} else if (consolekit == null && Bus.System.NameHasOwner (ConsoleKitName)) {
 					consolekit = Bus.System.GetObject<IConsoleKit> (ConsoleKitName, new ObjectPath (ConsoleKitPath));
 					Log<SystemManager>.Debug ("Using ConsoleKit.Manager dbus service");
 				}
@@ -261,39 +282,49 @@ namespace SessionManager
 		
 		public bool CanRestart ()
 		{
-			if (consolekit != null)
+			if (systemd != null)
+				return systemd.CanReboot () == "yes";
+			else if (consolekit != null)
 				return consolekit.CanRestart ();
 			
-			Log<SystemManager>.Debug ("No consolekit bus available");
+			Log<SystemManager>.Debug ("No session bus available");
 			return false;
 		}
 
 		public void Restart ()
 		{
-			if (consolekit != null) {
+			if (systemd != null) {
+				if (systemd.CanReboot () == "yes")
+					systemd.Reboot (true);
+			} else if (consolekit != null) {
 				if (consolekit.CanRestart ())
 					consolekit.Restart ();
 			} else {
-				Log<SystemManager>.Debug ("No consolekit bus available");
+				Log<SystemManager>.Debug ("No session bus available");
 			}
 		}
 
 		public bool CanStop ()
 		{
-			if (consolekit != null)
+			if (systemd != null)
+				return systemd.CanPowerOff () == "yes";
+			else if (consolekit != null)
 				return consolekit.CanStop ();
 			
-			Log<SystemManager>.Debug ("No consolekit bus available");
+			Log<SystemManager>.Debug ("No session bus available");
 			return false;
 		}
 
 		public void Stop ()
 		{
-			if (consolekit != null) {
+			if (systemd != null) {
+				if (systemd.CanPowerOff () == "yes")
+					systemd.PowerOff (true);
+			} else if (consolekit != null) {
 				if (consolekit.CanStop ())
 					consolekit.Stop ();
 			} else {
-				Log<SystemManager>.Debug ("No consolekit bus available");
+				Log<SystemManager>.Debug ("No session bus available");
 			}
 		}
 		
@@ -309,12 +340,12 @@ namespace SessionManager
 		
 		public bool CanLogOut ()
 		{
-			return DockServices.System.IsValidExecutable ("gnome-session-save");
+			return DockServices.System.IsValidExecutable ("gnome-session-quit");
 		}
 		
 		public void LogOut ()
 		{
-			DockServices.System.Execute ("gnome-session-save --logout");
+			DockServices.System.Execute ("gnome-session-quit --logout --no-prompt");
 		}
 		
 		public void Dispose ()
