@@ -97,7 +97,7 @@ namespace SessionManager
 			restartItem = new SessionManagerActionItem ("system-restart", Catalog.GetString ("_Restart..."), () => { 
 				SessionManagerActionItem.ShowConfirmationDialog (Catalog.GetString ("Restart"), 
 										Catalog.GetString ("Are you sure you want to close all programs and restart the computer?"), 
-										"system-shutdown", 
+										"system-restart", 
 										() => system_manager.Restart ());
 			});
 		

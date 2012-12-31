@@ -283,48 +283,48 @@ namespace SessionManager
 		public bool CanRestart ()
 		{
 			if (systemd != null)
-				return systemd.CanReboot () == "yes";
+				return String.Equals (systemd.CanReboot (), "yes");
 			else if (consolekit != null)
 				return consolekit.CanRestart ();
 			
-			Log<SystemManager>.Debug ("No session bus available");
+			Log<SystemManager>.Debug ("No consolekit or systemd bus available");
 			return false;
 		}
 
 		public void Restart ()
 		{
 			if (systemd != null) {
-				if (systemd.CanReboot () == "yes")
+				if (String.Equals (systemd.CanReboot (), "yes"))
 					systemd.Reboot (true);
 			} else if (consolekit != null) {
 				if (consolekit.CanRestart ())
 					consolekit.Restart ();
 			} else {
-				Log<SystemManager>.Debug ("No session bus available");
+				Log<SystemManager>.Debug ("No consolekit or systemd bus available");
 			}
 		}
 
 		public bool CanStop ()
 		{
 			if (systemd != null)
-				return systemd.CanPowerOff () == "yes";
+				return String.Equals (systemd.CanPowerOff (), "yes");
 			else if (consolekit != null)
 				return consolekit.CanStop ();
 			
-			Log<SystemManager>.Debug ("No session bus available");
+			Log<SystemManager>.Debug ("No consolekit or systemd bus available");
 			return false;
 		}
 
 		public void Stop ()
 		{
 			if (systemd != null) {
-				if (systemd.CanPowerOff () == "yes")
+				if (String.Equals (systemd.CanPowerOff (), "yes"))
 					systemd.PowerOff (true);
 			} else if (consolekit != null) {
 				if (consolekit.CanStop ())
 					consolekit.Stop ();
 			} else {
-				Log<SystemManager>.Debug ("No session bus available");
+				Log<SystemManager>.Debug ("No consolekit or systemd bus available");
 			}
 		}
 		
