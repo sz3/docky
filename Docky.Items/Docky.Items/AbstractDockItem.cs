@@ -1068,7 +1068,10 @@ namespace Docky.Items
 		
 		void HandleIconThemeChanged (object o, EventArgs e)
 		{
-			QueueRedraw ();
+			GLib.Idle.Add (delegate {
+				QueueRedraw ();
+				return false;
+			});
 		}
 		
 		protected void OnPaintNeeded ()
