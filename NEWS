@@ -1,5 +1,30 @@
 Docky: The finest dock no money can buy!
 
+2.2.0 "???" (2013-xx-xx)
+===============================================================================
+ * New Feature Release
+   + new docklets:
+     - NetworkMonitor
+ * update translations
+
+ CORE:
+ * Accept dropping of every file when no MimeType specified (LP: #986693)
+ * Docky click area larger than visible in panel mode (LP: #730959)
+ * Gconf key to suppress compositing warning. (LP: #754064)
+ * Error building with mono 3 (LP: #1097805)
+
+ DOCKLETS:
+ * CPU Monitor Docklet doesn't launch System Monitor in KDE (LP: #779181)
+
+2.1.4 "Rediscovered friend" (2012-03-24)
+===============================================================================
+ * Bug-fix and Maintenance Release
+ * update translations
+
+ CORE:
+ * matcher: fix for libreoffice 3.4+ (LP: #823834)
+ * add support building with dmcs
+
 2.1.3 "Paper cut" (2011-06-15)
 ===============================================================================
  * Bug-fix and Maintenance Release
