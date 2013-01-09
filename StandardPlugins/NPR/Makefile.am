@@ -28,8 +28,10 @@ PROJECT_REFERENCES = \
 REFERENCES =  \
 	System \
 	System.Web \
+	System.Xml \
 	System.Xml.Linq \
 	System.Core \
 	Mono.Posix \
+	$(NOTIFY_SHARP_LIBS) \
 	$(GIO_SHARP_LIBS) \
 	$(GTK_SHARP_20_LIBS)

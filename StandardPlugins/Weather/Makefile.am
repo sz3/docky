@@ -38,4 +38,5 @@ REFERENCES =  \
 	System.Xml \
 	Mono.Posix \
 	$(MONO_CAIRO_LIBS) \
+	$(GIO_SHARP_LIBS) \
 	$(GTK_SHARP_20_LIBS)
