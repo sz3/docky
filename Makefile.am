@@ -1,5 +1,4 @@
 EXTRA_DIST = \
-	config.rpath \
 	COPYRIGHT \
 	NEWS
 
