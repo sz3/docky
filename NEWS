@@ -1,6 +1,6 @@
 Docky: The finest dock no money can buy!
 
-2.2.0 "???" (2013-xx-xx)
+2.2.0 "Sneak it in you system" (2013-05-02)
 ===============================================================================
  * New Feature Release
    + new docklets:
@@ -15,6 +15,7 @@ Docky: The finest dock no money can buy!
 
  DOCKLETS:
  * CPU Monitor Docklet doesn't launch System Monitor in KDE (LP: #779181)
+ * Add systemd support for SessionManager
 
 2.1.4 "Rediscovered friend" (2012-03-24)
 ===============================================================================
