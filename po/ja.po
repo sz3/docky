@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-06-17 13:49+0200\n"
-"PO-Revision-Date: 2011-02-16 21:52+0000\n"
-"Last-Translator: kawaji <jiro.kawada@gmail.com>\n"
+"PO-Revision-Date: 2012-10-08 07:36+0000\n"
+"Last-Translator: OKANO Takayoshi <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2012-10-06 12:20+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2013-05-02 11:16+0000\n"
+"X-Generator: Launchpad (build 16580)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -858,7 +858,7 @@ msgstr "ドックに追加(_P)"
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:83
 #, csharp-format
 msgid "Drop to move to {0}"
-msgstr "ドロッップして {0} へ移動"
+msgstr "ドロップして {0} へ移動"
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
@@ -1167,7 +1167,7 @@ msgstr "登録した放送局(_S)"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:78
 msgid "S_earch"
-msgstr "検索(_S)"
+msgstr "検索(_E)"
 
 #: ../StandardPlugins/NPR/src/Station.cs:72
 msgid "No stations found."
@@ -1208,7 +1208,7 @@ msgstr "設定"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:84
 msgid "_Clear Recent Documents..."
-msgstr "最近開いたドキュメントの履歴クリア(C)..."
+msgstr "最近開いたドキュメントの履歴クリア(_C)..."
 
 #: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:95
 msgid "Clear the Recent Documents list?"
@@ -1387,7 +1387,7 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:65
 msgid "_Weather Provider:"
-msgstr "天気予報の提供元 :"
+msgstr "天気予報の提供元(_W):"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:105
 msgid "My _Locations"
