@@ -1,10 +1,14 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.54])
 
-AC_INIT([docky], [2.2.0])
-AM_INIT_AUTOMAKE([foreign tar-pax])
+AC_INIT([docky], [2.2.0],
+        [https://bugs.launchpad.net/docky], [docky],
+        [https://launchpad.net/docky])
+AM_INIT_AUTOMAKE([1.10 foreign tar-pax dist-xz no-dist-gzip])
 
 AC_CONFIG_MACRO_DIR([m4])
+AC_CONFIG_SRCDIR([Makefile.am])
+AC_CONFIG_SRCDIR([configure.ac])
 
 dnl -- Intl
 IT_PROG_INTLTOOL([0.35.0])
@@ -37,10 +41,7 @@ fi
 AC_SUBST(VERSION_INFO)
 
 dnl pkg-config
-AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
-if test "x$PKG_CONFIG" = "xno"; then
-        AC_MSG_ERROR([You need to install pkg-config])
-fi
+PKG_PROG_PKG_CONFIG([0.21])
 
 AC_PROG_INSTALL
 AC_PROG_CC
