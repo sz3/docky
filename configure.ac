@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.54])
 
-AC_INIT([docky], [2.2.0],
+AC_INIT([docky], [2.2.1],
         [https://bugs.launchpad.net/docky], [docky],
         [https://launchpad.net/docky])
 AM_INIT_AUTOMAKE([1.10 foreign tar-pax dist-xz no-dist-gzip])
