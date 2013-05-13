@@ -52,7 +52,7 @@ RESOURCES = \
 
 PROJECT_REFERENCES= \
 	Docky.CairoHelper
-        
+
 REFERENCES =  \
 	System \
 	System.Core \
@@ -66,8 +66,7 @@ REFERENCES =  \
 	$(GTK_SHARP_20_LIBS) \
 	$(GNOME_KEYRING_SHARP_LIBS) \
 	$(NOTIFY_SHARP_LIBS) \
-	$(WNCK_SHARP_10_LIBS) \
-	$(LIBRSVG_SHARP_LIBS)
+	$(WNCK_SHARP_10_LIBS)
 
 EXTRA_DIST += Docky.Services.dll.config
 

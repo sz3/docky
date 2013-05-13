@@ -54,6 +54,9 @@ namespace Docky.Services
 		[DllImport("libgtk-x11-2.0", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr gtk_icon_theme_lookup_by_gicon (IntPtr icon_theme, IntPtr icon, int size, int flags);
 
+		[DllImport("libgdk_pixbuf-2.0")]
+		private static extern IntPtr gdk_pixbuf_new_from_file_at_size (string filename, int width, int height, out IntPtr error);
+
 		#region Workaround for GLib.FileInfo leaks...
 		
 		// some attributes must be looked up as bytestrings, not strings
@@ -108,6 +111,7 @@ namespace Docky.Services
 		const string GIO_NOT_FOUND = "Could not find gio-2.0, please report immediately.";
 		const string GOBJECT_NOT_FOUND = "Could not find gobject-2.0, please report immediately.";
 		const string GTK_NOT_FOUND = "Could not find gtk-2.0, please report immediately.";
+		const string GDK_PIXBUF_NOT_FOUND = "Could not find gdk_pixbuf-2.0, please report immediately.";
 		
 		public static string StrUri (File file)
 		{
@@ -292,6 +296,19 @@ namespace Docky.Services
 			"Failed to query icon {0}");
 		}
 		
+		public static Gdk.Pixbuf GdkPixbufNewFromFileAtSize (string filename, int width, int height)
+		{
+			return NativeHelper<Gdk.Pixbuf> (() =>
+			{
+				IntPtr error = IntPtr.Zero;
+				IntPtr pixbuf = gdk_pixbuf_new_from_file_at_size (filename, width, height, out error);
+				if (error != IntPtr.Zero)
+					throw new GLib.GException (error);
+				return new Gdk.Pixbuf (pixbuf);
+			}, GDK_PIXBUF_NOT_FOUND,
+			"Failed to load pixbuf from file {0}");
+		}
+
 		public static void GObjectUnref (IntPtr objectHandle)
 		{
 			NativeHelper (() =>

@@ -129,5 +129,10 @@ namespace Docky.Services
 			
 			return tmp;
 		}
+
+		public static Pixbuf FromFileAtSize (string filename, int width, int height)
+		{
+			return NativeInterop.GdkPixbufNewFromFileAtSize (filename, width, height);
+		}
 	}
 }
