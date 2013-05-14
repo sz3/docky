@@ -174,7 +174,7 @@ namespace Clock
 			if (!File.Exists (file))
 				return;
 			
-			using (Gdk.Pixbuf pbuf = Rsvg.Tool.PixbufFromFileAtSize (file, size, size)) {
+			using (Gdk.Pixbuf pbuf = GdkPixbufExtension.FromFileAtSize (file, size, size)) {
 				Gdk.CairoHelper.SetSourcePixbuf (cr, pbuf, 0, 0);
 				cr.Paint ();
 			}
