@@ -5,6 +5,7 @@ build
 config.log
 config.status
 configure
+compile
 install-sh
 intltool-extract.in
 intltool-merge.in
