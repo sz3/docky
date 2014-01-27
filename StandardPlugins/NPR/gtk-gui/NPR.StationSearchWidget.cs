@@ -11,7 +11,7 @@ namespace NPR
 		private global::Gtk.Button Search;
 		private global::Gtk.ScrolledWindow stationsScroll;
 		private global::Docky.Widgets.TileView tileview;
-		
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);

@@ -21,7 +21,7 @@ namespace WeatherDocklet
 		private global::Gtk.SpinButton auto_update;
 		private global::Gtk.HBox hbox4;
 		private global::Gtk.CheckButton metric_units;
-		
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);

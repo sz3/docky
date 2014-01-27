@@ -42,6 +42,10 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="Mono.Cairo" />
+    <Reference Include="notify-sharp, Version=0.4.0.0, Culture=neutral, PublicKeyToken=2df29c54e245917a">
+      <Private>False</Private>
+      <Package>notify-sharp</Package>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\TimerItemProvider.cs" />
