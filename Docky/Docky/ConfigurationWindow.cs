@@ -123,11 +123,10 @@ namespace Docky
 		
 		void StopTimer ()
 		{
-			if (timer == 0)
-				return;
-			
-			GLib.Source.Remove (timer);
-			timer = 0;
+			if (timer > 0) {
+				GLib.Source.Remove (timer);
+				timer = 0;
+			}
 		}
 		
 		void StartTimer ()
@@ -140,7 +139,10 @@ namespace Docky
 				bool finished = (DateTime.UtcNow - shown_time).TotalMilliseconds / AnimationTime > 1;
 				if (finished && !curtainDown)
 					Hide ();
-				
+
+				if (finished)
+					timer = 0;
+
 				return !finished;
 			});
 		}

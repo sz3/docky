@@ -110,7 +110,7 @@ namespace Docky.Services
 		void InitializeNetworkManager ()
 		{
 			NetworkConnected = true;
-			if (nmTimer != 0) {
+			if (nmTimer > 0) {
 				GLib.Source.Remove (nmTimer);
 				nmTimer = 0;
 			}

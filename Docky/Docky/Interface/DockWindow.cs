@@ -1648,9 +1648,10 @@ namespace Docky.Interface
 			
 			//reset the timer to 0 so that the next time AnimatedDraw is called we fall back into
 			//the draw loop.
-			if (animation_timer > 0)
+			if (animation_timer > 0) {
 				GLib.Source.Remove (animation_timer);
-			animation_timer = 0;
+				animation_timer = 0;
+			}
 
 			// one final draw to clea out the end of previous animations
 			QueueDraw ();
@@ -1975,6 +1976,8 @@ namespace Docky.Interface
 				GLib.Source.Remove (icon_size_timer);
 			
 			icon_size_timer = GLib.Timeout.Add (1000, delegate {
+				icon_size_timer = 0;
+
 				int dockWidth = DockWidth;
 				int maxWidth = Preferences.IsVertical ? monitor_geo.Height : monitor_geo.Width;
 				
@@ -1995,7 +1998,6 @@ namespace Docky.Interface
 					MaxIconSize = Preferences.IconSize;
 				}
 				AnimatedDraw ();
-				icon_size_timer = 0;
 				return false;
 			});
 		}
@@ -2858,13 +2860,19 @@ namespace Docky.Interface
 		
 		public override void Dispose ()
 		{
-			if (size_request_timer > 0)
+			if (size_request_timer > 0) {
 				GLib.Source.Remove (size_request_timer);
-			if (animation_timer > 0)
+				size_request_timer = 0;
+			}
+			if (animation_timer > 0) {
 				GLib.Source.Remove (animation_timer);
-			if (icon_size_timer > 0)
+				animation_timer = 0;
+			}
+			if (icon_size_timer > 0) {
 				GLib.Source.Remove (icon_size_timer);
-			
+				icon_size_timer = 0;
+			}
+
 			if (Menu != null)
 				Menu.Dispose ();
 			

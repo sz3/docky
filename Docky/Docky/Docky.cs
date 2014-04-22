@@ -116,7 +116,7 @@ namespace Docky
 		
 		static void CheckComposite (uint timeout)
 		{
-			if (checkCompositeTimer != 0) {
+			if (checkCompositeTimer > 0) {
 				GLib.Source.Remove (checkCompositeTimer);
 				checkCompositeTimer = 0;
 			}
@@ -129,6 +129,8 @@ namespace Docky
 			}
 			
 			checkCompositeTimer = GLib.Timeout.Add (timeout * 1000, delegate {
+				checkCompositeTimer = 0;
+
 				// no matter what, close any notify open
 				if (compositeNotify != null) {
 					compositeNotify.Close ();
@@ -139,7 +141,6 @@ namespace Docky
 					compositeNotify = Log.Notify (Catalog.GetString ("Docky requires compositing to work properly. " +
 						"Certain options are disabled and themes/animations will look incorrect. "));
 				
-				checkCompositeTimer = 0;
 				return false;
 			});
 		}

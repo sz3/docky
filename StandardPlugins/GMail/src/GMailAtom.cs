@@ -111,9 +111,10 @@ namespace GMail
 		
 		public void StopTimer ()
 		{
-			if (UpdateTimer > 0)
+			if (UpdateTimer > 0) {
 				GLib.Source.Remove (UpdateTimer);
-			UpdateTimer = 0;
+				UpdateTimer = 0;
+			}
 			
 			StopChecker ();
 		}

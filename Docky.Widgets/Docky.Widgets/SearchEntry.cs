@@ -34,7 +34,7 @@ using Docky.Services;
 
 namespace Docky.Widgets
 {
-	[System.ComponentModel.ToolboxItem(true)]
+    [System.ComponentModel.ToolboxItem(true)]
     public class SearchEntry : EventBox
     {
         private HBox box;
@@ -183,19 +183,17 @@ namespace Docky.Widgets
         {
             ShowHideButtons();
 
-            if(changed_timeout_id > 0) {
+            if (changed_timeout_id > 0) {
                 GLib.Source.Remove (changed_timeout_id);
                 changed_timeout_id = 0;
             }
 
             if (Ready)
-                changed_timeout_id = GLib.Timeout.Add (25, OnChangedTimeout);
-        }
-
-        private bool OnChangedTimeout()
-        {
-            OnChanged();
-            return false;
+                changed_timeout_id = GLib.Timeout.Add (25, delegate {
+                    changed_timeout_id = 0;
+                    OnChanged ();
+                    return false;
+                });
         }
 
         private void UpdateStyle ()

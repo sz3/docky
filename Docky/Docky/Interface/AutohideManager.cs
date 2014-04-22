@@ -310,8 +310,10 @@ namespace Docky.Interface
 		#region IDisposable implementation
 		public void Dispose ()
 		{
-			if (event_timer > 0)
+			if (event_timer > 0) {
 				GLib.Source.Remove (event_timer);
+				event_timer = 0;
+			}
 			
 			if (screen != null) {
 				screen.ActiveWindowChanged -= HandleActiveWindowChanged;

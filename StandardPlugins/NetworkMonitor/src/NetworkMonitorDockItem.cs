@@ -101,8 +101,10 @@ namespace NetworkMonitorDocklet
 		
 		public override void Dispose ()
 		{
-			if (timer > 0)
+			if (timer > 0) {
 				GLib.Source.Remove (timer);
+				timer = 0;
+			}
 			
 			base.Dispose ();
 		}

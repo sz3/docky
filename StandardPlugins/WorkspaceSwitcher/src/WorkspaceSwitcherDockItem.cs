@@ -229,12 +229,13 @@ namespace WorkspaceSwitcher
 				GLib.Source.Remove (update_timer);
 			
 			update_timer = GLib.Timeout.Add (250, delegate {
+				update_timer = 0;
+
 				UpdateDesks ();
 				UpdateItem ();
 				
 				QueueRedraw ();
 
-				update_timer = 0;
 				return false;
 			});
 		}

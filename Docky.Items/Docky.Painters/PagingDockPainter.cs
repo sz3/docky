@@ -59,7 +59,12 @@ namespace Docky.Painters
 				slideTimer = GLib.Timeout.Add (10, delegate {
 					slideCounter++;
 					QueueRepaint ();
-					return slideCounter < slideSteps;
+					if (slideCounter < slideSteps) {
+						return true;
+					} else {
+						slideTimer = 0;
+						return false;
+					}
 				});
 			}
 		}

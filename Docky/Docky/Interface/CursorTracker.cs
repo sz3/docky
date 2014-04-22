@@ -105,8 +105,10 @@ namespace Docky.Interface
 		{
 			uint length = resolution_senders.Any () ? HighResTimeout : LowResTimeout;
 			if (timer_speed != length) {
-				if (timer > 0)
+				if (timer > 0) {
 					GLib.Source.Remove (timer);
+					timer = 0;
+				}
 				if (!UserArgs.NoPollCursor)
 					timer = GLib.Timeout.Add (length, OnTimerTick);
 				timer_speed = length;
