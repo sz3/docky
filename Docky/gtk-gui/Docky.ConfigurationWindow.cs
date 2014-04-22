@@ -42,7 +42,7 @@ namespace Docky
 		private global::Gtk.Button new_dock_button;
 		private global::Gtk.Button delete_dock_button;
 		private global::Gtk.Button close_button;
-		
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);

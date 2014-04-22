@@ -17,7 +17,7 @@ namespace Docky.Interface
 		private global::Gtk.CheckButton window_manager_check;
 		private global::Gtk.CheckButton zoom_checkbutton;
 		private global::Gtk.HScale zoom_scale;
-		
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
