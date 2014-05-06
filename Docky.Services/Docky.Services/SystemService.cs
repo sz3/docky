@@ -264,9 +264,22 @@ namespace Docky.Services
 		[Interface(UPowerName)]
 		interface IUPower : org.freedesktop.DBus.Properties
 		{
+			//bool OnBattery { get; }
+
 			event Action Changed;
 		}
 		
+		bool GetBoolean (org.freedesktop.DBus.Properties dbusobj, string path, string propname) 
+		{
+			try {
+				return Boolean.Parse (dbusobj.Get (path, propname).ToString ());
+			} catch (Exception e) {
+				Log.Error ("{0}", e.Message);
+				Log.Debug (e.StackTrace);
+				return false;
+			}
+		}
+
 		bool on_battery;
 		
 		IUPower upower;
@@ -291,7 +304,7 @@ namespace Docky.Services
 
 		void HandleUPowerChanged ()
 		{
-			bool newState = (bool) upower.Get (UPowerName, "OnBattery");
+			bool newState = GetBoolean (upower, UPowerName, "OnBattery");
 			
 			if (on_battery != newState) {
 				on_battery = newState;
