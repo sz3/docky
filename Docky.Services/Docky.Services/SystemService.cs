@@ -256,28 +256,11 @@ namespace Docky.Services
 			}
 		}
 		
-		const string PowerManagementName = "org.freedesktop.PowerManagement";
-		const string PowerManagementPath = "/org/freedesktop/PowerManagement";
-		const string DeviceKitPowerName = "org.freedesktop.DeviceKit.Power";
-		const string DeviceKitPowerPath = "/org/freedesktop/DeviceKit/Power";
 		const string UPowerName = "org.freedesktop.UPower";
 		const string UPowerPath = "/org/freedesktop/UPower";
 		
 		delegate void BoolDelegate (bool val);
 		
-		[Interface(PowerManagementName)]
-		interface IPowerManagement
-		{
-			bool GetOnBattery ();
-			event BoolDelegate OnBatteryChanged;
-		}
-		
-		[Interface(DeviceKitPowerName)]
-		interface IDeviceKitPower : org.freedesktop.DBus.Properties
-		{
-			event Action Changed;
-		}
-
 		[Interface(UPowerName)]
 		interface IUPower : org.freedesktop.DBus.Properties
 		{
@@ -286,8 +269,6 @@ namespace Docky.Services
 		
 		bool on_battery;
 		
-		IPowerManagement power;
-		IDeviceKitPower devicekit;
 		IUPower upower;
 		
 		void InitializeBattery ()
@@ -301,38 +282,10 @@ namespace Docky.Services
 					upower.Changed += HandleUPowerChanged;
 					HandleUPowerChanged ();
 					Log<SystemService>.Debug ("Using org.freedesktop.UPower for battery information");
-				} else if (Bus.System.NameHasOwner (DeviceKitPowerName)) {
-					devicekit = Bus.System.GetObject<IDeviceKitPower> (DeviceKitPowerName, new ObjectPath (DeviceKitPowerPath));
-					devicekit.Changed += HandleDeviceKitChanged;
-					HandleDeviceKitChanged ();
-					Log<SystemService>.Debug ("Using org.freedesktop.DeviceKit.Power for battery information");
-				} else if (Bus.Session.NameHasOwner (PowerManagementName)) {
-					power = Bus.Session.GetObject<IPowerManagement> (PowerManagementName, new ObjectPath (PowerManagementPath));
-					power.OnBatteryChanged += PowerOnBatteryChanged;
-					on_battery = power.GetOnBattery ();
-					Log<SystemService>.Debug ("Using org.freedesktop.PowerManager for battery information");
 				}
 			} catch (Exception e) {
 				Log<SystemService>.Error ("Could not initialize power manager dbus: '{0}'", e.Message);
 				Log<SystemService>.Info (e.StackTrace);
-			}
-		}
-
-		void PowerOnBatteryChanged (bool val)
-		{
-			if (on_battery != val) {
-				on_battery = val;
-				OnBatteryStateChanged ();
-			}
-		}
-		
-		void HandleDeviceKitChanged ()
-		{
-			bool newState = (bool) devicekit.Get (DeviceKitPowerName, "OnBattery");
-			
-			if (on_battery != newState) {
-				on_battery = newState;
-				OnBatteryStateChanged ();
 			}
 		}
 

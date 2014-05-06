@@ -37,10 +37,6 @@ namespace SessionManager
 		const string UPowerPath = "/org/freedesktop/UPower";
 		const string UPowerIface = "org.freedesktop.UPower";
 
-		const string DeviceKitPowerName = "org.freedesktop.DeviceKit.Power";
-		const string DeviceKitPowerPath = "/org/freedesktop/DeviceKit/Power";
-		const string DeviceKitPowerIface = "org.freedesktop.DeviceKit.Power";
-
 		const string SystemdName = "org.freedesktop.login1";
 		const string SystemdPath = "/org/freedesktop/login1";
 		const string SystemdIface = "org.freedesktop.login1.Manager";
@@ -56,18 +52,6 @@ namespace SessionManager
 		public event EventHandler BusChanged;
 		public event EventHandler CapabilitiesChanged;
 		public event EventHandler RebootRequired;
-		
-		[Interface (DeviceKitPowerIface)]
-		interface IDeviceKitPower : org.freedesktop.DBus.Properties
-		{
-			void Hibernate ();
-			void Suspend ();
-
-			//bool CanHibernate { get; }
-			//bool CanSuspend { get; }
-			
-			event Action Changed;
-		}
 		
 		[Interface (UPowerIface)]
 		interface IUPower : org.freedesktop.DBus.Properties
@@ -116,7 +100,6 @@ namespace SessionManager
 			}
 		}
 		
-		IDeviceKitPower devicekit;
 		IUPower upower;
 		ISystemd systemd;
 		IConsoleKit consolekit;
@@ -136,7 +119,7 @@ namespace SessionManager
 				SystemBus = Bus.System.GetObject<IBus> ("org.freedesktop.DBus", new ObjectPath ("/org/freedesktop/DBus"));
 				
 				SystemBus.NameOwnerChanged += delegate(string name, string old_owner, string new_owner) {
-					if (name != UPowerName && name != DeviceKitPowerName && name != SystemdName && name != ConsoleKitName)
+					if (name != UPowerName && name != SystemdName && name != ConsoleKitName)
 						return;
 
 					Log<SystemManager>.Debug ("DBus services changed, reconnecting now");
@@ -144,9 +127,6 @@ namespace SessionManager
 					if (upower != null)
 						upower = null;
 					
-					if (devicekit != null)
-						devicekit = null;
-
 					if (systemd != null)
 						systemd = null;
 
@@ -177,10 +157,6 @@ namespace SessionManager
 					upower = Bus.System.GetObject<IUPower> (UPowerName, new ObjectPath (UPowerPath));
 					upower.Changed += HandleCapabilitiesChanged;
 					Log<SystemManager>.Debug ("Using UPower dbus service");
-				} else if (devicekit == null && Bus.System.NameHasOwner (DeviceKitPowerName)) {
-					devicekit = Bus.System.GetObject<IDeviceKitPower> (DeviceKitPowerName, new ObjectPath (DeviceKitPowerPath));
-					devicekit.Changed += HandleCapabilitiesChanged;
-					Log<SystemManager>.Debug ("Using DeviceKit.Power dbus service");
 				}
 				
 				if (systemd == null && Bus.System.NameHasOwner (SystemdName)) {
@@ -220,8 +196,6 @@ namespace SessionManager
 				return String.Equals (systemd.CanHibernate (), "yes");
 			else if (upower != null)
 				return GetBoolean (upower, UPowerName, "CanHibernate") && upower.HibernateAllowed ();
-			else if (devicekit != null)
-				return GetBoolean (devicekit, DeviceKitPowerName, "CanHibernate");
 			
 			Log<SystemManager>.Debug ("No power bus available");
 			return false;
@@ -235,9 +209,6 @@ namespace SessionManager
 			} else if (upower != null) {
 				if (GetBoolean (upower, UPowerName, "CanHibernate") && upower.HibernateAllowed ())
 					upower.Hibernate ();
-			} else if (devicekit != null) {
-				if (GetBoolean (devicekit, DeviceKitPowerName, "CanHibernate"))
-					devicekit.Hibernate ();
 			} else {
 				Log<SystemManager>.Debug ("No power bus available");
 			}
@@ -249,8 +220,6 @@ namespace SessionManager
 				return String.Equals (systemd.CanSuspend (), "yes");
 			else if (upower != null)
 				return GetBoolean (upower, UPowerName, "CanSuspend") && upower.SuspendAllowed ();
-			else if (devicekit != null)
-				return GetBoolean (devicekit, DeviceKitPowerName, "CanSuspend");
 			
 			Log<SystemManager>.Debug ("No power bus available");
 			return false;
@@ -264,9 +233,6 @@ namespace SessionManager
 			} else if (upower != null) {
 				if (GetBoolean (upower, UPowerName, "CanSuspend") && upower.SuspendAllowed ())
 					upower.Suspend ();
-			} else if (devicekit != null) {
-				if (GetBoolean (devicekit, DeviceKitPowerName, "CanSuspend"))
-					devicekit.Suspend ();
 			} else {
 				Log<SystemManager>.Debug ("No power bus available");
 			}
@@ -276,8 +242,6 @@ namespace SessionManager
 		{
 			if (upower != null)
 				return GetBoolean (upower, UPowerName, "OnBattery");
-			else if (devicekit != null)
-				return GetBoolean (devicekit, DeviceKitPowerName, "OnBattery");
 			
 			Log<SystemManager>.Debug ("No power bus available");
 			return false;
@@ -287,8 +251,6 @@ namespace SessionManager
 		{
 			if (upower != null)
 				return GetBoolean (upower, UPowerName, "OnLowBattery");
-			else if (devicekit != null)
-				return false;
 			
 			Log<SystemManager>.Debug ("No power bus available");
 			return false;
