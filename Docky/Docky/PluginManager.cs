@@ -306,7 +306,13 @@ namespace Docky
 		/// </value>
 		public static IEnumerable<AbstractDockItemProvider> ItemProviders {
 			get { 
-				return AddinManager.GetExtensionObjects (IPExtensionPath).OfType<AbstractDockItemProvider> ();
+				try {
+					return AddinManager.GetExtensionObjects (IPExtensionPath).OfType<AbstractDockItemProvider> ();
+				} catch (Exception e) {
+					Log<PluginManager>.Error ("{0}", e.Message);
+					Log<PluginManager>.Info (e.StackTrace);
+					return Enumerable.Empty<AbstractDockItemProvider> ();
+				}
 			}
 		}
 		
