@@ -155,7 +155,7 @@ namespace Docky
 			about.Website = "https://launchpad.net/docky";
 			about.WebsiteLabel = "Website";
 			Gtk.AboutDialog.SetUrlHook ((dialog, link) => DockServices.System.Open (link));
-			about.Copyright = "Copyright \xa9 2009-2012 Docky Developers";
+			about.Copyright = "Copyright \xa9 2009-2015 Docky Developers";
 			about.Comments = "Docky. Simply Powerful.";
 			about.Authors = new[] {
 				"Jason Smith <jason@go-docky.com>",
