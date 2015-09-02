@@ -33,15 +33,19 @@ generated/Window.cs: $(builddir)/wnck-api.xml
 gtk-sharp.snk: $(SNK)
 	cp $< $@
 
-wnck-sharp1.dll: generated/Window.cs $(SRCS) gtk-sharp.snk wnck-sharp1.dll.config
+wnck-sharp1.dll: generated/Window.cs $(SRCS) gtk-sharp.snk $(srcdir)/wnck-sharp1.dll.config
 	@echo -e "\n*** Building $@"
 	$(MCS) -target:library -out:$@ $(UNSAFE) $(DEBUG) $(ASSEMBLIES) $(SRCS) generated/*.cs
 	mkdir -p $(top_builddir)/build
-	cp $@ wnck-sharp1.dll.config $(top_builddir)/build/
+	cp $@ $(srcdir)/wnck-sharp1.dll.config $(top_builddir)/build/
 
 assemblydir = $(pkglibdir)
 assembly_DATA =	\
 	wnck-sharp1.dll \
-	wnck-sharp1.dll.config
+	$(srcdir)/wnck-sharp1.dll.config
 
 CLEANFILES = wnck-sharp1.dll wnck-sharp1.dll.mdb gtk-sharp.snk wnck-api.xml
+
+# Get rid of the generated source on clean.
+clean-local:
+	rm -rf $(builddir)/generated
