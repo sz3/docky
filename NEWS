@@ -1,5 +1,20 @@
 Docky: The finest dock no money can buy!
 
+2.2.1 "Don't get your hopes too high" (2015-09-02)
+===============================================================================
+ * Bug-fix and Maintenance Release
+ * update translations
+
+ BUILD
+ * Drop gnome-desktop-sharp-2.0, rsvg2-sharp-2.0
+ * Use dbus-sharp-(glib-)2.0, gkeyfile-sharp
+ * Use internal copy of libwnck-1.0 bindings
+ * Don't create a private copy of gio-sharp-2.0
+
+ DOCKLETS:
+ * SessionManager: Use logind for suspend and hibernate
+ * SessionManager: Drop support for deprecated DeviceKit and PowerManager
+
 2.2.0 "Sneak it in you system" (2013-05-02)
 ===============================================================================
  * New Feature Release
