@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-06-17 13:49+0200\n"
-"PO-Revision-Date: 2011-11-11 00:40+0000\n"
-"Last-Translator: alasdair caimbeul <Unknown>\n"
+"PO-Revision-Date: 2015-04-02 21:05+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Gaelic; Scottish <gd@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2013-05-02 11:16+0000\n"
-"X-Generator: Launchpad (build 16580)\n"
+"X-Launchpad-Export-Date: 2015-09-02 08:48+0000\n"
+"X-Generator: Launchpad (build 17706)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -61,11 +61,11 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:10
 msgid "Dock zooms"
-msgstr "Doca sùmannan"
+msgstr ""
 
 #: ../data/docky.schemas.in.h:11
 msgid "Dock's hiding mode"
-msgstr "Modh falaich Docannan"
+msgstr ""
 
 #: ../data/docky.schemas.in.h:12
 msgid "Docky item command to execute"
@@ -93,7 +93,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:18
 msgid "GMail username"
-msgstr "GMail ainm-cleachdaiche"
+msgstr ""
 
 #: ../data/docky.schemas.in.h:19
 msgid "Hot-area padding"
@@ -372,7 +372,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:81
 msgid "Show date"
-msgstr "Foillsich deat"
+msgstr ""
 
 #: ../data/docky.schemas.in.h:82
 msgid "Show hover text labels for launchers"
@@ -540,7 +540,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:120
 msgid "Use 24-hr time"
-msgstr "Cleachd àm 24-ur"
+msgstr ""
 
 #: ../data/docky.schemas.in.h:121
 msgid "Use metric units"
@@ -560,7 +560,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:125
 msgid "Zoom size"
-msgstr "Meud sùm"
+msgstr ""
 
 #: ../Docky/Docky/ConfigurationWindow.cs:270
 msgid "Search Docklets..."
@@ -717,11 +717,11 @@ msgstr "_Suidheachaidhean"
 
 #: ../Docky/Docky/Items/DockyItem.cs:133
 msgid "_About"
-msgstr "_Mu dhèidhinn"
+msgstr "M_u dhèidhinn"
 
 #: ../Docky/Docky/Items/DockyItem.cs:134
 msgid "_Help"
-msgstr "_Taic"
+msgstr "Cob_hair"
 
 #: ../Docky/Docky/Items/DockyItem.cs:136
 msgid "_Quit Docky"
@@ -729,7 +729,7 @@ msgstr "_Fàg Docky"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:96
 msgid "Docky Settings"
-msgstr "Suidheachaidhean Docky"
+msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:141
 msgid "_Start When User Logs In"
@@ -737,7 +737,7 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:157
 msgid "_Theme:"
-msgstr "_Tèama:"
+msgstr "Ùr_lar:"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:188
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:344
@@ -769,7 +769,7 @@ msgstr "Dèan comasach"
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:264
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:319
 msgid "Disabled"
-msgstr "Neo-comasach"
+msgstr "À comas"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:296
 msgid "Docklets"
@@ -789,11 +789,11 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:58
 msgid "None"
-msgstr "Neoni"
+msgstr "Chan eil gin"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
 msgid "Autohide"
-msgstr "Fhèin-falaich"
+msgstr "Fèin-fhalaich"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "Intellihide"
@@ -829,7 +829,7 @@ msgstr ""
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:185
 msgid "_Zoom:"
-msgstr "_Sùm"
+msgstr "_Sùm:"
 
 #: ../Docky.Items/Docky.Items/AbstractDockItem.cs:120
 #, csharp-format
@@ -838,13 +838,13 @@ msgstr ""
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:180
 msgid "New _Window"
-msgstr "Uinneag _Ùr"
+msgstr "_Uinneag ùr"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:182
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:267
 #: ../StandardPlugins/Mounter/src/MountItem.cs:108
 msgid "_Open"
-msgstr "_Fosgail"
+msgstr "F_osgail"
 
 #: ../Docky.Items/Docky.Items/ColoredIconDockItem.cs:70
 msgid "_Reset Color"
@@ -874,15 +874,15 @@ msgstr ""
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:217
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:249
 msgid "Complete"
-msgstr "Crìochnaich"
+msgstr "Coilean"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:227
 msgid "Moving"
-msgstr "Siùbhlach"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:233
 msgid "Copying"
-msgstr "Copaigeadh"
+msgstr ""
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:268
 msgid "Open Containing _Folder"
@@ -898,7 +898,7 @@ msgstr ""
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:271
 msgid "_Restore"
-msgstr "_Thoir air ais"
+msgstr "_Aisig"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:274
 msgid "Mi_nimize"
@@ -976,11 +976,11 @@ msgstr ""
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:117
 msgid "remaining "
-msgstr "maireann "
+msgstr ""
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:154
 msgid "_Statistics"
-msgstr "_Staitistearachd"
+msgstr ""
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:85
 msgid "Computer"
@@ -1020,15 +1020,15 @@ msgstr "_Neo-dhèan"
 
 #: ../StandardPlugins/Desktop/src/ShowDesktopItem.cs:37
 msgid "_Show Desktop"
-msgstr "_Foillsich Bàrr-deasca"
+msgstr ""
 
 #: ../StandardPlugins/Desktop/src/TileDesktopItem.cs:38
 msgid "_Tile Desktop"
-msgstr "_Leacag Bàrr-deasca"
+msgstr ""
 
 #: ../StandardPlugins/Desktop/src/CascadeDesktopItem.cs:38
 msgid "_Cascade Desktop"
-msgstr "_Mar sglèatan Bàrr-deasca"
+msgstr ""
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
 msgid "_Add Label"
@@ -1041,7 +1041,7 @@ msgstr ""
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:123
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:186
 msgid "minutes"
-msgstr "mionaidean"
+msgstr "mionaid(ean)"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:189
 msgid "Click to set username and password."
@@ -1097,7 +1097,7 @@ msgstr[1] ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:119
 msgid "Checking mail..."
-msgstr "Sgrùdadh post..."
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "_View "
@@ -1117,7 +1117,7 @@ msgstr "Post Ùr"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:236
 msgid "Check _Mail"
-msgstr "Sgrùd _Post"
+msgstr ""
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
@@ -1129,32 +1129,32 @@ msgstr "Gmail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
-msgstr "Log a-steach"
+msgstr "Clàraich a-steach"
 
 #: ../StandardPlugins/GMail/src/GMailMenuItem.cs:31
 msgid "From: "
-msgstr "Bhon: "
+msgstr "O: "
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Eject"
-msgstr "_Tilg a-mach"
+msgstr "_Gluais a-mach"
 
 #: ../StandardPlugins/Mounter/src/MountItem.cs:111
 msgid "_Unmount"
-msgstr "_Ìochdarach"
+msgstr "_Dì-mhunntaich"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:53
 msgid "Network Manager"
-msgstr "Manaidsear Lìonra"
+msgstr "Manaidsear nan lìonra"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
-msgstr "Ceangaltach..."
+msgstr "'Ga cheangal..."
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:101
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:166
 msgid "Disconnected"
-msgstr "Geàrr ceangailte"
+msgstr "Air a dhì-cheangal"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:110
 #, csharp-format
@@ -1171,7 +1171,7 @@ msgstr ""
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:78
 msgid "S_earch"
-msgstr "S_ireadh"
+msgstr ""
 
 #: ../StandardPlugins/NPR/src/Station.cs:72
 msgid "No stations found."
@@ -1192,7 +1192,7 @@ msgstr ""
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:111
 msgid "Home Page"
-msgstr "Duilleag Dhachaigh"
+msgstr "Duilleag dhachaigh"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:118
 msgid "Program Schedule"
@@ -1204,11 +1204,11 @@ msgstr "Thoir tabhartas"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:132
 msgid "Live Streams"
-msgstr "Sruthan Beò"
+msgstr "Sruthan beòtha"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:170
 msgid "Settings"
-msgstr "Suidheachaidhean"
+msgstr "Roghainnean"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:84
 msgid "_Clear Recent Documents..."
@@ -1216,11 +1216,12 @@ msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:95
 msgid "Clear the Recent Documents list?"
-msgstr "Glan liosta sgrìobhainnean o chionn ghoirid?"
+msgstr ""
+"A bheil thu airson liosta nan sgrìobhainnean o chionn goirid fhalamhadh?"
 
 #: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:97
 msgid "Clear Recent Documents"
-msgstr "Glan Sgrìobhainnean O Chionn Ghoirid"
+msgstr ""
 
 #: ../StandardPlugins/RecentDocuments/src/RecentFilesProvider.cs:99
 msgid ""
@@ -1231,7 +1232,7 @@ msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:76
 msgid "L_ock Screen"
-msgstr "G_lais Sgrìn"
+msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:80
 msgid "_Log Out..."
@@ -1258,21 +1259,21 @@ msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:97
 msgid "_Restart..."
-msgstr "_Ath-tòisich..."
+msgstr "_Ath-thòisich..."
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:98
 msgid "Restart"
-msgstr "Ath-tòisich"
+msgstr "Ath-thòisich"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:99
 msgid "Are you sure you want to close all programs and restart the computer?"
 msgstr ""
-"Cinnteach gu bheil thu ag iarraidh dùnadh na prògraman gu lèir agus  ath-"
-"thòiseachadh a' choimpiutair?"
+"A bheil thu cinnteach gu bheil thu airson gach prògram a dhùnadh is an "
+"coimpiutair ath-thòiseachadh?"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:104
 msgid "Shut _Down..."
-msgstr "Dùin_Sìos..."
+msgstr "Dùin _Sìos..."
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:105
 msgid "Shut Down"
@@ -1282,8 +1283,8 @@ msgstr "Dùin sìos"
 msgid ""
 "Are you sure you want to close all programs and shut down the computer?"
 msgstr ""
-"Cinnteach gu bheil thu ag iarraidh dùnadh na prògraman gu lèir agus dùinadh "
-"sìos a' choimpiutair?"
+"A bheil thu cinnteach gu bheil thu airson gach prògram a dhùnadh is an "
+"coimpiutair a dhùnadh sìos?"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:86
 #, csharp-format
@@ -1378,16 +1379,16 @@ msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:201
 msgid "_Open Trash"
-msgstr "_Fosgail  Sgudal"
+msgstr "F_osgail  an sgudal"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:203
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:234
 msgid "Empty _Trash"
-msgstr "Dùin_Sgudal"
+msgstr "Falamhaich an _sgudal"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:226
 msgid "Empty all of the items from the trash?"
-msgstr "Falamh na h-uile nithean bhon an sgudal?"
+msgstr ""
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:228
 msgid ""
@@ -1406,7 +1407,7 @@ msgstr ""
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:136
 msgid "_Search"
-msgstr "_Sireadh"
+msgstr "_Lorg"
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:176
 msgid "Automatically Update _Every"

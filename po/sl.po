@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-06-17 13:49+0200\n"
-"PO-Revision-Date: 2011-03-19 06:18+0000\n"
-"Last-Translator: Luka Pušić <admin@360percents.com>\n"
+"PO-Revision-Date: 2015-05-02 08:19+0000\n"
+"Last-Translator: Drago Kraner <drago.kraner@gmail.com>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2013-05-02 11:16+0000\n"
-"X-Generator: Launchpad (build 16580)\n"
+"X-Launchpad-Export-Date: 2015-09-02 08:48+0000\n"
+"X-Generator: Launchpad (build 17706)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -61,7 +61,7 @@ msgstr "Sidrišče upravlja z vsemi okni"
 
 #: ../data/docky.schemas.in.h:10
 msgid "Dock zooms"
-msgstr ""
+msgstr "Približevanje sidrišča"
 
 #: ../data/docky.schemas.in.h:11
 msgid "Dock's hiding mode"
@@ -73,7 +73,7 @@ msgstr "Ukaz predmeta sidrišča"
 
 #: ../data/docky.schemas.in.h:13
 msgid "Docky item hover text"
-msgstr ""
+msgstr "Lebdeči napis sidrišča"
 
 #: ../data/docky.schemas.in.h:14
 msgid "Docky item hue"

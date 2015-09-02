@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-06-17 13:49+0200\n"
-"PO-Revision-Date: 2013-02-22 04:28+0000\n"
+"PO-Revision-Date: 2013-10-07 21:19+0000\n"
 "Last-Translator: Chidananda Sahoo <chidanandsahoo8@gmail.com>\n"
 "Language-Team: Oriya <or@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n!=1;\n"
-"X-Launchpad-Export-Date: 2013-05-02 11:16+0000\n"
-"X-Generator: Launchpad (build 16580)\n"
+"X-Launchpad-Export-Date: 2015-09-02 08:48+0000\n"
+"X-Generator: Launchpad (build 17706)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -40,7 +40,7 @@ msgstr "ବର୍ତମାନ ଚୟନ ହୋଇଥିବା ବସ୍ତୁ"
 
 #: ../data/docky.schemas.in.h:5
 msgid "Dismiss a stopped timer when clicked"
-msgstr ""
+msgstr "କ୍ଲିକ୍ ହେଲେ ଏକ ଅଟକିଥିବା କାଳ ମାପକକୁ ଖାରଜ କରନ୍ତୁ"
 
 #: ../data/docky.schemas.in.h:6
 msgid "Do not change this!"

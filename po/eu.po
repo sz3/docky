@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-06-17 13:49+0200\n"
-"PO-Revision-Date: 2011-10-31 19:37+0000\n"
-"Last-Translator: Ibai Oihanguren <Unknown>\n"
+"PO-Revision-Date: 2014-01-10 19:05+0000\n"
+"Last-Translator: Ibai Oihanguren Sala <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-05-02 11:16+0000\n"
-"X-Generator: Launchpad (build 16580)\n"
+"X-Launchpad-Export-Date: 2015-09-02 08:48+0000\n"
+"X-Generator: Launchpad (build 17706)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -80,7 +80,7 @@ msgstr "Docky elementuaren ñabardura"
 
 #: ../data/docky.schemas.in.h:15
 msgid "Enable checks for compositing"
-msgstr ""
+msgstr "Gaitu konposatzeko saioak"
 
 #: ../data/docky.schemas.in.h:16
 msgid "Fade when hiding"
@@ -96,7 +96,7 @@ msgstr "GMail-eko erabiltzaile-izena"
 
 #: ../data/docky.schemas.in.h:19
 msgid "Hot-area padding"
-msgstr ""
+msgstr "Eremu aktiboaren tartea"
 
 #: ../data/docky.schemas.in.h:20
 msgid ""
@@ -116,13 +116,15 @@ msgstr "Zenbat (ms) itxaron eguneratzeko leihoa aldatu eta gero"
 
 #: ../data/docky.schemas.in.h:23
 msgid "How many recent clipboard selections to show."
-msgstr ""
+msgstr "Zenbat arbeleko azken hautapen erakutsi."
 
 #: ../data/docky.schemas.in.h:24
 msgid ""
 "How much to shift the color of the urgent indicator. The value can be from -"
 "180 to 180."
 msgstr ""
+"Zenbatean aldatu larritasun-adierazlearen kolorea. Balioa -180tik 180rakoa "
+"izan daiteke."
 
 #: ../data/docky.schemas.in.h:25
 msgid "How often (in mins) to check for new mail."
@@ -134,7 +136,7 @@ msgstr "Zenbatero begiratu"
 
 #: ../data/docky.schemas.in.h:27
 msgid "How often to check for new weather information."
-msgstr ""
+msgstr "Zenbatero begiratu ea eguraldiaren informazio berririk dagoen."
 
 #: ../data/docky.schemas.in.h:28
 msgid "How often to poll (in ms) for new clipboard data."

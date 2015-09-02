@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-06-17 13:49+0200\n"
-"PO-Revision-Date: 2011-01-08 17:23+0000\n"
-"Last-Translator: Rico Tzschichholz <Unknown>\n"
+"PO-Revision-Date: 2013-12-13 15:17+0000\n"
+"Last-Translator: Tadeáš Pařík <tadeas.parik@gmail.com>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-05-02 11:16+0000\n"
-"X-Generator: Launchpad (build 16580)\n"
+"X-Launchpad-Export-Date: 2015-09-02 08:48+0000\n"
+"X-Generator: Launchpad (build 17706)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
-msgstr ""
+msgstr "Kvalitní dockovací aplikace"
 
 #: ../data/docky.schemas.in.h:1
 msgid "A list of plugins that are active on this dock."
@@ -32,7 +32,7 @@ msgstr "Motiv analogových hodin"
 
 #: ../data/docky.schemas.in.h:3
 msgid "Clear finished timers"
-msgstr ""
+msgstr "Vymazat dokončené časovače"
 
 #: ../data/docky.schemas.in.h:4
 msgid "Currently selected item"
@@ -40,7 +40,7 @@ msgstr "Aktuálně vybraná položka"
 
 #: ../data/docky.schemas.in.h:5
 msgid "Dismiss a stopped timer when clicked"
-msgstr ""
+msgstr "Zrušit pozastavený časovač kliknutím"
 
 #: ../data/docky.schemas.in.h:6
 msgid "Do not change this!"
@@ -60,7 +60,7 @@ msgstr "Dock spravuje všechna okna"
 
 #: ../data/docky.schemas.in.h:10
 msgid "Dock zooms"
-msgstr ""
+msgstr "Zvětšení docku"
 
 #: ../data/docky.schemas.in.h:11
 msgid "Dock's hiding mode"
@@ -68,15 +68,15 @@ msgstr "Mód skrývání docku"
 
 #: ../data/docky.schemas.in.h:12
 msgid "Docky item command to execute"
-msgstr ""
+msgstr "Příkazu prvků docku k vykonání"
 
 #: ../data/docky.schemas.in.h:13
 msgid "Docky item hover text"
-msgstr ""
+msgstr "Text při najetí na prvek docku"
 
 #: ../data/docky.schemas.in.h:14
 msgid "Docky item hue"
-msgstr ""
+msgstr "Odstín položky docku"
 
 #: ../data/docky.schemas.in.h:15
 msgid "Enable checks for compositing"
@@ -96,13 +96,15 @@ msgstr "GMail uživatelské jméno"
 
 #: ../data/docky.schemas.in.h:19
 msgid "Hot-area padding"
-msgstr ""
+msgstr "Vyplňení aktivní oblasti"
 
 #: ../data/docky.schemas.in.h:20
 msgid ""
 "How long the urgent indicator glow animation is (in seconds), 0 to disable, "
 "or -1 for infinite."
 msgstr ""
+"Jak dlouho bude aktivní animace indikátoru urgentních událostí ve vteřinách, "
+"0 jej zcela zakáže a -1 jej povolí na neomezeně dlouhou dobu."
 
 #: ../data/docky.schemas.in.h:21
 msgid "How long to wait (ms) before unhiding"
@@ -110,17 +112,19 @@ msgstr "Jak dlouho čekat (ms) před odkrytím"
 
 #: ../data/docky.schemas.in.h:22
 msgid "How long to wait (ms) to update after a window switch"
-msgstr ""
+msgstr "Jak dlouho čekat (v ms) na obnovení po přepnutí okna"
 
 #: ../data/docky.schemas.in.h:23
 msgid "How many recent clipboard selections to show."
-msgstr ""
+msgstr "Kolik posledních obsahů schránky zobrazovat."
 
 #: ../data/docky.schemas.in.h:24
 msgid ""
 "How much to shift the color of the urgent indicator. The value can be from -"
 "180 to 180."
 msgstr ""
+"Jak moc změnit barvu urgentního indikátoru. Hodnota může být nastavena od -"
+"180 do 180."
 
 #: ../data/docky.schemas.in.h:25
 msgid "How often (in mins) to check for new mail."
@@ -136,28 +140,33 @@ msgstr "Jak často aktualizovat informace o počasí."
 
 #: ../data/docky.schemas.in.h:28
 msgid "How often to poll (in ms) for new clipboard data."
-msgstr ""
+msgstr "Jak často (v ms) prohledávat schránku pro nová data."
 
 #: ../data/docky.schemas.in.h:29
 msgid ""
 "If fading when hiding, this is the opacity the dock fades to. 1 is solid, 0 "
 "is invisible."
 msgstr ""
+"Toto je průhlednost, ke které se uchyluje dock při blednutí když se skrývá, "
+"1 znamená bez průhlednosti a 0 zcela průhledné prostředí."
 
 #: ../data/docky.schemas.in.h:30
 msgid ""
 "If false, Docky will not show hover texts for launchers (but still show for "
 "plugins)."
 msgstr ""
+"Pokud není povoleno, tak aplikace Docky nebude zobrazovat tooltipy při "
+"najetí na zástupce programu."
 
 #: ../data/docky.schemas.in.h:31
 msgid "If false, finished timers will reset instead of dismiss."
-msgstr ""
+msgstr "Pokud není povoleno, tak se budou časovače resetovat."
 
 #: ../data/docky.schemas.in.h:32
 msgid ""
 "If false, prevents dropping items onto the dock to add them to the dock."
 msgstr ""
+"Pokud není povoleno, tak nemůžete přidat zástupce programu přetáhnutím."
 
 #: ../data/docky.schemas.in.h:33
 msgid "If scrolling wraps"
@@ -317,7 +326,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:64
 msgid "List of NPR stations to display."
-msgstr ""
+msgstr "Seznam zobrazovaných NPR stanic."
 
 #: ../data/docky.schemas.in.h:65
 msgid "List of active docks"
@@ -325,7 +334,7 @@ msgstr "Seznam aktivních docků."
 
 #: ../data/docky.schemas.in.h:66
 msgid "List of custom GMail labels to check in addition to the inbox."
-msgstr ""
+msgstr "Seznam kontrolovaných štítků GMail v příchozí poště."
 
 #: ../data/docky.schemas.in.h:67
 msgid "List of launchers"
@@ -333,39 +342,39 @@ msgstr "Seznam spouštěčů"
 
 #: ../data/docky.schemas.in.h:68
 msgid "Max Entries"
-msgstr ""
+msgstr "Maximální počet vstupů"
 
 #: ../data/docky.schemas.in.h:69
 msgid "NPR stations"
-msgstr ""
+msgstr "NPR stanice"
 
 #: ../data/docky.schemas.in.h:70
 msgid "New timer length"
-msgstr ""
+msgstr "Trvání nového časovače"
 
 #: ../data/docky.schemas.in.h:71
 msgid "Number of recent docs"
-msgstr ""
+msgstr "Počet nedávných dokumentů"
 
 #: ../data/docky.schemas.in.h:72
 msgid "Opacity to fade to"
-msgstr ""
+msgstr "Průhlednost, do které se prolínat"
 
 #: ../data/docky.schemas.in.h:73
 msgid "Plugins on this dock"
-msgstr ""
+msgstr "Doplňky v tomto docku"
 
 #: ../data/docky.schemas.in.h:74
 msgid "Prevent adding items by drops"
-msgstr ""
+msgstr "Zabránit přidávání položek upuštěním"
 
 #: ../data/docky.schemas.in.h:75
 msgid "Redirect helper output to Docky's output"
-msgstr ""
+msgstr "Přesměrování výstupu pomocníka do výstupu aplikace Docky"
 
 #: ../data/docky.schemas.in.h:76
 msgid "Set the color of the Docky icon. 0 means use the GTK+ theme color."
-msgstr ""
+msgstr "Nastavit barvu ikony Docky. Zadáním 0 se použije barva tématu GTK+."
 
 #: ../data/docky.schemas.in.h:77
 msgid "Show 'Pin to Dock' for items"
@@ -373,27 +382,27 @@ msgstr "Zobrazit u položek 'Připnout k panelu'"
 
 #: ../data/docky.schemas.in.h:78
 msgid "Show Quit in Docky item menu"
-msgstr ""
+msgstr "Zobrazení nabídky Ukončit v menu aplikace Docky"
 
 #: ../data/docky.schemas.in.h:79
 msgid "Show Settings in Docky item menu"
-msgstr ""
+msgstr "Zobrazit nabídku nastavení v menu aplikace Docky"
 
 #: ../data/docky.schemas.in.h:80
 msgid "Show a notify for unread mail"
-msgstr ""
+msgstr "Zobrazit oznamení o nepřečtených emailech"
 
 #: ../data/docky.schemas.in.h:81
 msgid "Show date"
-msgstr ""
+msgstr "Zobrazit datum"
 
 #: ../data/docky.schemas.in.h:82
 msgid "Show hover text labels for launchers"
-msgstr ""
+msgstr "Zobrazit názvy spouštěčů"
 
 #: ../data/docky.schemas.in.h:83
 msgid "Show indicator dot for unread mail"
-msgstr ""
+msgstr "Zobrazit oznamovací tečku o nepřečtených emailech"
 
 #: ../data/docky.schemas.in.h:84
 msgid "Show most recent doc"
@@ -401,7 +410,7 @@ msgstr "Zobrazit nejpoužívanější dokumenty"
 
 #: ../data/docky.schemas.in.h:85
 msgid "Show the Docky item"
-msgstr ""
+msgstr "Zobrazovat ikonku Docky"
 
 #: ../data/docky.schemas.in.h:86
 msgid "Show the digital clock"
@@ -421,17 +430,19 @@ msgstr "Odstartovat všechny nové časovače"
 
 #: ../data/docky.schemas.in.h:90
 msgid "Stop items from dragging"
-msgstr ""
+msgstr "Zakázat přetahování"
 
 #: ../data/docky.schemas.in.h:91
 msgid "The GMail username to check."
-msgstr ""
+msgstr "Uživatelské jméno GMail ke kontrole."
 
 #: ../data/docky.schemas.in.h:92
 msgid ""
 "The command to execute when left-clicking the Docky item or \"\" for default "
 "behavior (which opens the configuration dialog)."
 msgstr ""
+"Příkaz, který se spustí po kliknutí levým tlačítkem myši na ikonu Docky nebo "
+"\"\" pro výchozí nastavení (které otevře nastavení)."
 
 #: ../data/docky.schemas.in.h:93
 msgid "The current theme"
@@ -439,7 +450,7 @@ msgstr "Aktuální téma"
 
 #: ../data/docky.schemas.in.h:94
 msgid "The currently selected item in the session manager menu."
-msgstr ""
+msgstr "Aktuálně vybrná položka v menu správce sezení."
 
 #: ../data/docky.schemas.in.h:95
 msgid "The default time (in secs) for any new timers."
@@ -519,7 +530,7 @@ msgstr "Toto je seznam všech spouštěčů na panelu."
 
 #: ../data/docky.schemas.in.h:112
 msgid "This is the monitor the dock exists on."
-msgstr ""
+msgstr "Toto je monitor na kterém je dock."
 
 #: ../data/docky.schemas.in.h:113
 msgid ""
@@ -535,11 +546,11 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:115
 msgid "This lists all the currently active (displayed) docks, by name."
-msgstr ""
+msgstr "Seznam všech aktuálně zobrazených docků, podle jména."
 
 #: ../data/docky.schemas.in.h:116
 msgid "Timer Delay"
-msgstr ""
+msgstr "Zpoždění časovače"
 
 #: ../data/docky.schemas.in.h:117
 msgid "Track Mouse Selections"
@@ -559,23 +570,23 @@ msgstr "Používat 24 hodinový  formát času"
 
 #: ../data/docky.schemas.in.h:121
 msgid "Use metric units"
-msgstr ""
+msgstr "Používat metrické jednotky"
 
 #: ../data/docky.schemas.in.h:122
 msgid "Used to sort the items on the dock."
-msgstr ""
+msgstr "Použito pro třídění položek na docku."
 
 #: ../data/docky.schemas.in.h:123
 msgid "Weather locations"
-msgstr ""
+msgstr "Ikona počasí"
 
 #: ../data/docky.schemas.in.h:124
 msgid "Which monitor the dock is on"
-msgstr ""
+msgstr "Na kterém monitoru je zobrazen dock"
 
 #: ../data/docky.schemas.in.h:125
 msgid "Zoom size"
-msgstr ""
+msgstr "Velikost zvětšení"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:270
 msgid "Search Docklets..."
@@ -909,7 +920,7 @@ msgstr "Kopíruji"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:268
 msgid "Open Containing _Folder"
-msgstr ""
+msgstr "Otevřít složku _programu"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
 msgid "Unma_ximize"
@@ -1003,7 +1014,7 @@ msgstr "zbývá "
 
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:154
 msgid "_Statistics"
-msgstr ""
+msgstr "_Statistiky"
 
 #: ../StandardPlugins/Bookmarks/src/BookmarksItemProvider.cs:85
 msgid "Computer"
@@ -1011,7 +1022,7 @@ msgstr "Počítač"
 
 #: ../StandardPlugins/Clippy/src/ClippyItem.cs:88
 msgid "Clipboard is currently empty."
-msgstr ""
+msgstr "Schránka je momentálně prázdná."
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "Di_gital Clock"
@@ -1039,11 +1050,11 @@ msgstr "Téma"
 
 #: ../StandardPlugins/Desktop/src/DesktopActionsProvider.cs:57
 msgid "_Undo"
-msgstr ""
+msgstr "_Zpět"
 
 #: ../StandardPlugins/Desktop/src/ShowDesktopItem.cs:37
 msgid "_Show Desktop"
-msgstr ""
+msgstr "Z_obrazit plochu"
 
 #: ../StandardPlugins/Desktop/src/TileDesktopItem.cs:38
 msgid "_Tile Desktop"
@@ -1116,7 +1127,8 @@ msgstr "Žádná nepřečtená pošta"
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
 msgstr[0] "{0} nepřečtená zpráva"
-msgstr[1] "{0} nepřečtených zpráv"
+msgstr[1] "{0} nepřečtené zprávy"
+msgstr[2] "{0} nepřečtených zpráv"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:119
 msgid "Checking mail..."
@@ -1186,7 +1198,7 @@ msgstr "Připojeno k: {0}"
 
 #: ../StandardPlugins/NetworkMonitor/src/NetworkMonitorDockItem.cs:61
 msgid "No network connection available"
-msgstr ""
+msgstr "Není dostupné síťové připojení"
 
 #: ../StandardPlugins/NPR/gtk-gui/NPR.StationSearchWidget.cs:47
 msgid "My _Stations"
@@ -1257,11 +1269,11 @@ msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:76
 msgid "L_ock Screen"
-msgstr ""
+msgstr "U_zamknout obrazovku"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:80
 msgid "_Log Out..."
-msgstr ""
+msgstr "Odh_lásit..."
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:81
 msgid "Log Out"
@@ -1274,15 +1286,15 @@ msgstr "Opravdu chcete ukončit všechny programy a odhlásit se?"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:87
 msgid "_Suspend"
-msgstr ""
+msgstr "Uspat do _paměti"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:92
 msgid "_Hibernate"
-msgstr ""
+msgstr "Uspat na _disk"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:97
 msgid "_Restart..."
-msgstr ""
+msgstr "_Restartovat..."
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:98
 msgid "Restart"
@@ -1294,7 +1306,7 @@ msgstr "Opravdu chcete ukončit všechny programy a restartovat počítač?"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:104
 msgid "Shut _Down..."
-msgstr ""
+msgstr "_Vypnout..."
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:105
 msgid "Shut Down"
@@ -1337,7 +1349,7 @@ msgstr "_Spustit časovač"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:290
 msgid "R_eset Timer"
-msgstr ""
+msgstr "V_ynulovat časovač"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:294
 msgid "_Remove Timer"
@@ -1390,7 +1402,8 @@ msgstr "Žádné soubory v koši"
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
 msgstr[0] "{0} soubor v koši"
-msgstr[1] "{0} souborů v koši"
+msgstr[1] "{0} soubory v koši"
+msgstr[2] "{0} souborů v koši"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:169
 msgid "Restore Files"

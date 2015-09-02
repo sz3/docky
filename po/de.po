@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: docky\n"
 "Report-Msgid-Bugs-To: Rico Tzschichholz <ricotz@t-online.de>\n"
 "POT-Creation-Date: 2011-06-17 13:49+0200\n"
-"PO-Revision-Date: 2011-12-22 20:07+0000\n"
-"Last-Translator: Florian Unwichtig <Unknown>\n"
+"PO-Revision-Date: 2014-07-20 15:31+0000\n"
+"Last-Translator: Tobias Bannert <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-05-02 11:16+0000\n"
-"X-Generator: Launchpad (build 16580)\n"
+"X-Launchpad-Export-Date: 2015-09-02 08:48+0000\n"
+"X-Generator: Launchpad (build 17706)\n"
 
 #: ../data/docky.desktop.in.h:1
 msgid "The finest dock no money can buy."
@@ -24,15 +24,15 @@ msgstr "Das tollste Dock, welches man nicht für Geld kaufen kann."
 
 #: ../data/docky.schemas.in.h:1
 msgid "A list of plugins that are active on this dock."
-msgstr "Liste der aktiven Plugins auf diesem Dock"
+msgstr "Liste der aktiven Erweiterungen, auf diesem Dock"
 
 #: ../data/docky.schemas.in.h:2
 msgid "Analog clock theme"
-msgstr "Thema der Analog-Uhr"
+msgstr "Thema der Analoguhr"
 
 #: ../data/docky.schemas.in.h:3
 msgid "Clear finished timers"
-msgstr "Abgelaufene Timer entfernen"
+msgstr "Abgelaufene Zeitmesser entfernen"
 
 #: ../data/docky.schemas.in.h:4
 msgid "Currently selected item"
@@ -40,7 +40,7 @@ msgstr "Ausgewähltes Element"
 
 #: ../data/docky.schemas.in.h:5
 msgid "Dismiss a stopped timer when clicked"
-msgstr "Beim Anklicken den beendeten Timer löschen"
+msgstr "Beim Anklicken den beendeten Zeitmesser löschen"
 
 #: ../data/docky.schemas.in.h:6
 msgid "Do not change this!"
@@ -64,15 +64,15 @@ msgstr "Dock-Elemente vergrößern sich beim Überfahren mit der Maus"
 
 #: ../data/docky.schemas.in.h:11
 msgid "Dock's hiding mode"
-msgstr "Verstecken-Modus für das Dock"
+msgstr "Versteckenmodus des Docks"
 
 #: ../data/docky.schemas.in.h:12
 msgid "Docky item command to execute"
-msgstr "Kommando zum Ausführen beim Klicken auf das Docky-Symbol"
+msgstr "Ausführenbefehl beim Klicken auf das Docky-Symbol"
 
 #: ../data/docky.schemas.in.h:13
 msgid "Docky item hover text"
-msgstr "Tooltip für das Docky-Symbol"
+msgstr "Infotext des Docky-Symbols"
 
 #: ../data/docky.schemas.in.h:14
 msgid "Docky item hue"
@@ -80,7 +80,7 @@ msgstr "Farbton des Docky-Symbols"
 
 #: ../data/docky.schemas.in.h:15
 msgid "Enable checks for compositing"
-msgstr ""
+msgstr "Überprüfungen fürs Compositing aktivieren"
 
 #: ../data/docky.schemas.in.h:16
 msgid "Fade when hiding"
@@ -88,11 +88,11 @@ msgstr "Zum Verstecken ausblenden"
 
 #: ../data/docky.schemas.in.h:17
 msgid "GMail labels to check"
-msgstr "GMail Labels, die abgefragt werden sollen"
+msgstr "GMail-Bezeichnungen, die abgefragt werden sollen"
 
 #: ../data/docky.schemas.in.h:18
 msgid "GMail username"
-msgstr "GMail Benutzername"
+msgstr "GMail-Benutzername"
 
 #: ../data/docky.schemas.in.h:19
 msgid "Hot-area padding"
@@ -103,8 +103,8 @@ msgid ""
 "How long the urgent indicator glow animation is (in seconds), 0 to disable, "
 "or -1 for infinite."
 msgstr ""
-"Dauer (in Sekunden) der Animation für die \"Dringlichkeits\"-Anzeige. Wert 0 "
-"zum Abschalten der Funktion, -1 für dauerhafte Animation"
+"Dauer (in Sekunden) der Animation für die »Dringlichkeits«-Anzeige. Wert 0 "
+"zum Abschalten der Funktion, -1 für dauerhafte Animation."
 
 #: ../data/docky.schemas.in.h:21
 msgid "How long to wait (ms) before unhiding"
@@ -123,16 +123,15 @@ msgstr "Wie viele Einträge der Zwischenablage sollen angezeigt werden?"
 msgid ""
 "How much to shift the color of the urgent indicator. The value can be from -"
 "180 to 180."
-msgstr ""
-"Farbveränderung bei der Dringlichkeits-Anzeige. Wert von -180 bis 180"
+msgstr "Farbveränderung der Dringlichkeitsanzeige. Wert von -180 bis 180"
 
 #: ../data/docky.schemas.in.h:25
 msgid "How often (in mins) to check for new mail."
-msgstr "Intervall (in min) der Mail-Abfrage"
+msgstr "Intervall (in min) der Nachrichtenabfrage"
 
 #: ../data/docky.schemas.in.h:26
 msgid "How often to check"
-msgstr "Intervall der Wetter-Abfrage"
+msgstr "Intervall der Wetterabfrage"
 
 #: ../data/docky.schemas.in.h:27
 msgid "How often to check for new weather information."
@@ -157,13 +156,13 @@ msgid ""
 "If false, Docky will not show hover texts for launchers (but still show for "
 "plugins)."
 msgstr ""
-"Ist diese Option abgewählt, werden für Programmstarter keine Tooltips "
-"angezeigt (für Plugins jedoch weiterhin)."
+"Wenn abgewählt, werden für die Programmstarter keine Infotexte angezeigt "
+"(aber für Erweiterungen weiterhin)."
 
 #: ../data/docky.schemas.in.h:31
 msgid "If false, finished timers will reset instead of dismiss."
 msgstr ""
-"Ist diese Option abgewählt, werden beendete Timer nur zurückgesetzt anstatt "
+"Wenn abgewählt, werden beendete Zeitmesser nur zurückgesetzt anstatt "
 "gelöscht."
 
 #: ../data/docky.schemas.in.h:32
@@ -182,12 +181,11 @@ msgid ""
 "If the 'Pin to Dock' option should show in the menu of items, allowing you "
 "to add it permanently to the dock."
 msgstr ""
-"Soll die Option \"Auf dem Dock sperren\" im Menü der Elemente angezeigt "
-"werden?"
+"Soll die Option »Auf dem Dock sperren« im Menü der Elemente angezeigt werden?"
 
 #: ../data/docky.schemas.in.h:35
 msgid "If the dock is a panel"
-msgstr "Ist das Dock im Panel-Modus?"
+msgstr "Wenn das Dock eine Leiste ist"
 
 #: ../data/docky.schemas.in.h:36
 msgid ""
@@ -198,12 +196,12 @@ msgstr ""
 msgid ""
 "If true, Docky will only show windows on the currently active desktop."
 msgstr ""
-"Ist diese Option gewählt, zeigt Docky nur Fenster der jeweils aktiven "
-"Arbeitsfläche an."
+"Ist diese Option gewählt, zeigt Docky nur Fenster des jeweils aktiven "
+"Schreibtischs an."
 
 #: ../data/docky.schemas.in.h:38
 msgid "If true, all new timers will automatically start."
-msgstr "Ist diese Oprion gewählt, werden neue Timer automatisch gestartet."
+msgstr "Wenn ausgewählt, werden neue Zeitmesser automatisch gestartet."
 
 #: ../data/docky.schemas.in.h:39
 msgid ""
@@ -242,12 +240,13 @@ msgstr ""
 #: ../data/docky.schemas.in.h:44
 msgid "If true, show the digital clock otherwise show the analog clock."
 msgstr ""
-"Ist diese Option gesetzt, wird die Digital-Uhr angezeigt, ansonsten die "
-"Analog-Uhr."
+"Wenn aktiviert, wird die Digitaluhr angezeigt, ansonsten die Analoguhr."
 
 #: ../data/docky.schemas.in.h:45
 msgid "If true, shows a notify message for new unread mail."
-msgstr "Soll bei neuer Mail eine Benachrichtigung angezeigt werden?"
+msgstr ""
+"Wenn aktiviert, wird bei einer neuen, nicht gelesenen Nachricht eine "
+"Benachrichtigung angezeigt."
 
 #: ../data/docky.schemas.in.h:46
 msgid "If true, shows the Docky item on the dock managing windows."
@@ -257,7 +256,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:47
 msgid "If true, shows time in 24-hr format."
-msgstr "Uhr in 24h-Format?"
+msgstr "Wenn ausgewählt, wird die Uhr im 24-Stundenformat angezeigt."
 
 #: ../data/docky.schemas.in.h:48
 msgid "If true, the Docky item popup menu shows the Quit option."
@@ -268,12 +267,12 @@ msgstr ""
 #: ../data/docky.schemas.in.h:49
 msgid "If true, the Docky item popup menu shows the Settings option."
 msgstr ""
-"Ist diese Option gesetzt, wird im menü des Docky-Elements eine Option für "
-"die Einstellungen angezeigt."
+"Wenn aktiviert, wird im Menü des Docky-Elements eine Option für die "
+"Einstellungen angezeigt."
 
 #: ../data/docky.schemas.in.h:50
 msgid "If true, the date should show on the digital clock."
-msgstr "Soll die Digital-Uhr zusätzlich das Datum anzeigen?"
+msgstr "Wenn aktiviert, wird die Digitaluhr das Datum anzeigen."
 
 #: ../data/docky.schemas.in.h:51
 msgid "If true, the dock is drawn as a 3d dock."
@@ -284,24 +283,26 @@ msgid ""
 "If true, the dock is in panel mode and will extend to fill the entire screen "
 "edge."
 msgstr ""
-"Soll das Dock im Panel-Modus laufen, sich also auf die volle "
-"Bildschirmbreite erstrecken?"
+"Wenn aktiviert, ist das Dock im Leistenmodus und wird sich erweitern, um den "
+"gesamten Bildschirmrand zu füllen."
 
 #: ../data/docky.schemas.in.h:53
 msgid "If true, the dock will zoom when hovered."
-msgstr "Soll das Dock beim Überfahren mit der Maus zoomen?"
+msgstr ""
+"Wenn ausgewählt, wird das Dock beim Überfahren mit der Maus vergrößert."
 
 #: ../data/docky.schemas.in.h:54
 msgid ""
 "If true, this is the first time Docky has run. Internal use only - Do not "
 "change!"
 msgstr ""
-"Ist diese Option gesetzt, wird Docky zum ersten Mal ausgeführt. Nur zur "
-"internen Benutzung - bitte nicht ändern!"
+"Wenn ausgewählt, ist das der erste Start von Docky. Nur zur internen "
+"Benutzung - bitte nicht ändern!"
 
 #: ../data/docky.schemas.in.h:55
 msgid "If true, timers will disappear when they time out."
-msgstr "Sollen Timer vom Dock entfernt werden, wenn sie beendet sind?"
+msgstr ""
+"Wenn ausgewählt, werden die Zeitmesser verschwinden, wenn sie beendet sind."
 
 #: ../data/docky.schemas.in.h:56
 msgid ""
@@ -314,20 +315,20 @@ msgstr ""
 #: ../data/docky.schemas.in.h:57
 msgid "If true, use metric units when showing weather."
 msgstr ""
-"Sollen beim Wetter Einheiten des metrischen Systems verwendet werden?"
+"Wenn aktiviert, werden metrische Einheiten beim Anzeigen des Wetters benutzt."
 
 #: ../data/docky.schemas.in.h:58
 msgid ""
 "If true, when the dock hides it will fade away instead of sliding off screen."
 msgstr ""
-"Ist diese Option gesetzt, wird das Dock langsam ausgeblendet anstatt aus dem "
-"Bild verschoben."
+"Wenn aktiviert, wird das Dock langsam ausgeblendet anstatt sich aus dem Bild "
+"zu schieben."
 
 #: ../data/docky.schemas.in.h:59
 msgid ""
 "If true, when there is new unread mail Docky will show the indicator dot."
 msgstr ""
-"Ist diese Option gesetzt, wird bei neuer ungelesener Mail ein Hinweispunkt "
+"Wenn aktiviert, wird bei neuer nicht gelesener Nachricht ein Hinweispunkt "
 "angezeigt."
 
 #: ../data/docky.schemas.in.h:60
@@ -338,7 +339,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:61
 msgid "Indicate when items have more than one window"
-msgstr "Zeige an, wenn Elemente mehr als ein Fenster besitzen."
+msgstr "Anzeigen, wenn Elemente mehr als ein Fenster besitzen"
 
 #: ../data/docky.schemas.in.h:62
 msgid "Last time checked"
@@ -359,7 +360,8 @@ msgstr "Liste der aktiven Docks"
 #: ../data/docky.schemas.in.h:66
 msgid "List of custom GMail labels to check in addition to the inbox."
 msgstr ""
-"Liste der GMail Labels, die zusätzlich zur Inbox überprüft werden sollen."
+"Liste der GMail-Bezeichnungen, die zusätzlich zum Posteingang überprüft "
+"werden sollen."
 
 #: ../data/docky.schemas.in.h:67
 msgid "List of launchers"
@@ -367,15 +369,15 @@ msgstr "Liste der Starter"
 
 #: ../data/docky.schemas.in.h:68
 msgid "Max Entries"
-msgstr "Maximale Anzahl von Einträgen"
+msgstr "Höchste Anzahl von Einträgen"
 
 #: ../data/docky.schemas.in.h:69
 msgid "NPR stations"
-msgstr "NPR Sender"
+msgstr "NPR-Sender"
 
 #: ../data/docky.schemas.in.h:70
 msgid "New timer length"
-msgstr "Dauer neuer Timer"
+msgstr "Dauer neuer Zeitmesser"
 
 #: ../data/docky.schemas.in.h:71
 msgid "Number of recent docs"
@@ -387,11 +389,11 @@ msgstr "Transparenzwert beim Ausblenden."
 
 #: ../data/docky.schemas.in.h:73
 msgid "Plugins on this dock"
-msgstr "Plugins auf diesem Dock"
+msgstr "Erweiterungen auf diesem Dock"
 
 #: ../data/docky.schemas.in.h:74
 msgid "Prevent adding items by drops"
-msgstr "Verhindert Hinzufügen von Elementen durch Fallenlassen."
+msgstr "Verhindert das Hinzufügen von Elementen durch Fallenlassen."
 
 #: ../data/docky.schemas.in.h:75
 msgid "Redirect helper output to Docky's output"
@@ -405,47 +407,47 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:77
 msgid "Show 'Pin to Dock' for items"
-msgstr "Zeige 'Anheften am Dock' für Elemente"
+msgstr "»Anheften am Dock« für Elemente anzeigen"
 
 #: ../data/docky.schemas.in.h:78
 msgid "Show Quit in Docky item menu"
-msgstr "Zeige Beenden-Option im Menü des Docky-Elements"
+msgstr "»Beenden« im Menü des Docky-Elements anzeigen"
 
 #: ../data/docky.schemas.in.h:79
 msgid "Show Settings in Docky item menu"
-msgstr "Zeige Einstellungen-Option im Menü des Docky-Elements"
+msgstr "»Einstellungen« im Menü des Docky-Elements anzeigen"
 
 #: ../data/docky.schemas.in.h:80
 msgid "Show a notify for unread mail"
-msgstr "Benachrichtigung für ungelesene Mail"
+msgstr "Hinweis für nicht gelesene Nachricht anzeigen"
 
 #: ../data/docky.schemas.in.h:81
 msgid "Show date"
-msgstr "Zeige Datum"
+msgstr "Datum anzeigen"
 
 #: ../data/docky.schemas.in.h:82
 msgid "Show hover text labels for launchers"
-msgstr "Zeige Tooltips für Starter"
+msgstr "Infotextbezeichungen für Starter anzeigen"
 
 #: ../data/docky.schemas.in.h:83
 msgid "Show indicator dot for unread mail"
-msgstr "Zeige Hinweispunkt für ungelesene Mail."
+msgstr "Anzeige für nicht gelesene Nachricht anzeigen."
 
 #: ../data/docky.schemas.in.h:84
 msgid "Show most recent doc"
-msgstr "Zeige zuletzt benutztes Dokument"
+msgstr "Zuletzt benutztes Dokument anzeigen"
 
 #: ../data/docky.schemas.in.h:85
 msgid "Show the Docky item"
-msgstr "Zeige Docky-Element"
+msgstr "Docky-Element anzeigen"
 
 #: ../data/docky.schemas.in.h:86
 msgid "Show the digital clock"
-msgstr "Zeige Digital-Uhr"
+msgstr "Digitaluhr anzeigen"
 
 #: ../data/docky.schemas.in.h:87
 msgid "Show windows from only current desktop"
-msgstr "Nur Fenster der aktuellen Arbeitsfläche zeigen"
+msgstr "Nur Fenster des aktuellen Schreibtischs anzeigen"
 
 #: ../data/docky.schemas.in.h:88
 msgid "Sorts the items on the dock"
@@ -453,22 +455,22 @@ msgstr "Sortiert Elemente auf dem Dock"
 
 #: ../data/docky.schemas.in.h:89
 msgid "Start all new timers"
-msgstr "Neue Timer starten"
+msgstr "Alle neuen Zeitmesser starten"
 
 #: ../data/docky.schemas.in.h:90
 msgid "Stop items from dragging"
-msgstr "Verhindere das Verschieben von Elementen"
+msgstr "Verhindert das Verschieben von Elementen"
 
 #: ../data/docky.schemas.in.h:91
 msgid "The GMail username to check."
-msgstr "GMail Benutzername"
+msgstr "Der GMail-Benutzername zum überprüfen."
 
 #: ../data/docky.schemas.in.h:92
 msgid ""
 "The command to execute when left-clicking the Docky item or \"\" for default "
 "behavior (which opens the configuration dialog)."
 msgstr ""
-"Kommando, das beim Links-Klick auf das Docky-Element ausgeführt werden soll. "
+"Befehl, der beim Linksklick auf das Docky-Symbol ausgeführt werden soll. "
 "\"\" für das Standardverhalten, welches die Docky-Einstellungen öffnet."
 
 #: ../data/docky.schemas.in.h:93
@@ -477,18 +479,18 @@ msgstr "Aktuelles Thema"
 
 #: ../data/docky.schemas.in.h:94
 msgid "The currently selected item in the session manager menu."
-msgstr "Aktuell ausgewähltes Element im Menü des Sitzungs-Managers"
+msgstr "Aktuell ausgewähltes Element im Menü der Sitzungsverwaltung"
 
 #: ../data/docky.schemas.in.h:95
 msgid "The default time (in secs) for any new timers."
-msgstr "Voreingestellte Zeit (in s) für jeden neuen Timer."
+msgstr "Voreingestellte Zeit (in s) für jeden neuen Zeitmesser."
 
 #: ../data/docky.schemas.in.h:96
 msgid ""
 "The dock's hide mode. Possible values are: None, Autohide, Intellihide, "
 "UniversalIntellihide"
 msgstr ""
-"Verstecken-Modus des Docks. Mögliche Werte: None, Autohide, Intellihide, "
+"Ausblendenmodus des Docks. Mögliche Werte: None, Autohide, Intellihide, "
 "UniversalIntellihide"
 
 #: ../data/docky.schemas.in.h:97
@@ -505,11 +507,11 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:99
 msgid "The dock's zoom size (if enabled), as a percent."
-msgstr "Vergrößerung des Docks (in Prozent) beim Zoomen, wenn eingeschaltet."
+msgstr "Die Vergrößerungsstufe des Docks (wenn aktiviert), in Prozent."
 
 #: ../data/docky.schemas.in.h:100
 msgid "The last time Docky checked GMail for messages."
-msgstr "Zeit der zuletzt durchgeführten Googlemail-Abfrage."
+msgstr "Zeit der zuletzt durchgeführten GMail-Abfrage."
 
 #: ../data/docky.schemas.in.h:101
 msgid "The list of weather locations to check."
@@ -527,8 +529,8 @@ msgstr "Name der Quelle, die für die Wetterinformationen benutzt wird."
 msgid ""
 "The number of extra pixels to pad the hover area on the top of the dock."
 msgstr ""
-"Die Anzahl der zusätzlichen Pixel, die den Rollover-Bereich oben am Dock "
-"vergrößern."
+"Die Anzahl der zusätzlichen Pixel, die den Bereich zum Überfahren oben am "
+"Dock vergrößern."
 
 #: ../data/docky.schemas.in.h:105
 msgid "The number of most recent documents to show."
@@ -537,7 +539,7 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:106
 msgid "The size of icons on the dock."
-msgstr "Größe der Icons auf dem Dock."
+msgstr "Größe der Symbole auf dem Dock."
 
 #: ../data/docky.schemas.in.h:107
 msgid "The text to show when hovering the Docky item."
@@ -547,17 +549,17 @@ msgstr ""
 
 #: ../data/docky.schemas.in.h:108
 msgid "The theme for the analog clock."
-msgstr "Thema für die analoge Uhr"
+msgstr "Das Thema für die analoge Uhr."
 
 #: ../data/docky.schemas.in.h:109
 msgid "The weather source"
-msgstr "Quelle der Wetter-Daten"
+msgstr "Quelle der Wetterdaten"
 
 #: ../data/docky.schemas.in.h:110
 msgid ""
 "This is the command to execute when left clicking on the CPU docklet item."
 msgstr ""
-"Dieser Befehl wird beim Linksklick auf das CPU Docklet Item ausgeführt."
+"Dieser Befehl wird beim Linksklick auf den CPU-Docklet-Eintrag ausgeführt."
 
 #: ../data/docky.schemas.in.h:111
 msgid "This is the list of all the launchers on this dock."
@@ -581,7 +583,7 @@ msgid ""
 "causes a (un)hide."
 msgstr ""
 "Wartezeit (in Millisekunden), um festzustellen, ob ein Fensterwechsel zu "
-"einem Verstecken oder wieder sichtbar machen des Docks führen muß."
+"einem Ausblenden oder Einblenden des Docks führt."
 
 #: ../data/docky.schemas.in.h:115
 msgid "This lists all the currently active (displayed) docks, by name."
@@ -589,7 +591,7 @@ msgstr "Liste der Namen aller im Moment aktiven (angezeigten) Docks."
 
 #: ../data/docky.schemas.in.h:116
 msgid "Timer Delay"
-msgstr "Timer Wartezeit"
+msgstr "Wartezeit des Zeitmessers"
 
 #: ../data/docky.schemas.in.h:117
 msgid "Track Mouse Selections"
@@ -597,11 +599,11 @@ msgstr "Mausauswahl verfolgen"
 
 #: ../data/docky.schemas.in.h:118
 msgid "Urgent indicator color shift"
-msgstr "Farbänderungs-Wert für die Dringlichkeits-Anzeige"
+msgstr "Farbänderungswert für die Dringlichkeitsanzeige"
 
 #: ../data/docky.schemas.in.h:119
 msgid "Urgent indicator glow animation time (in seconds)"
-msgstr "Zeit (in Sekunden) für die Glüh-Animation der Dringlichkeits-Anzeige"
+msgstr "Zeit (in Sekunden) für die Glühanimation der Dringlichkeitsanzeige"
 
 #: ../data/docky.schemas.in.h:120
 msgid "Use 24-hr time"
@@ -625,7 +627,7 @@ msgstr "Monitor des Docks"
 
 #: ../data/docky.schemas.in.h:125
 msgid "Zoom size"
-msgstr "Zoom-Größe"
+msgstr "Vergrößerungsstufe"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:270
 msgid "Search Docklets..."
@@ -637,11 +639,11 @@ msgstr "Erweiterungen durchsuchen …"
 
 #: ../Docky/Docky/ConfigurationWindow.cs:364
 msgid "Click on any dock to configure."
-msgstr "Klicken Sie auf ein Dock um dessen Einstellungen zu ändern."
+msgstr "Auf ein Dock klicken, um dessen Einstellungen zu ändern."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:365
 msgid "Drag any dock to reposition."
-msgstr "Ziehen Sie ein Dock um es neu zu positionieren."
+msgstr "Ein Dock ziehen, um es neu anzuordnen."
 
 #: ../Docky/Docky/ConfigurationWindow.cs:386
 msgid "Helpers require DockManager be installed."
@@ -672,7 +674,7 @@ msgstr "_Auswählen"
 #: ../Docky/Docky/ConfigurationWindow.cs:586
 #: ../Docky/Docky/ConfigurationWindow.cs:606
 msgid ".tar Archives"
-msgstr ".tar Archiv"
+msgstr ".tar-Archive"
 
 #: ../Docky/Docky/DockletTile.cs:49
 msgid "Author"
@@ -744,7 +746,7 @@ msgstr "Läuft"
 
 #: ../Docky/Docky/HelperTile.cs:90
 msgid "Stopped"
-msgstr "Gestoppt"
+msgstr "Angehalten"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:345
 msgid ""
@@ -757,28 +759,29 @@ msgstr ""
 #: ../Docky/Docky/Interface/DockPreferences.cs:727
 msgid "<i>Never hides; maximized windows do not overlap the dock.</i>"
 msgstr ""
-"<i>Niemals verbergen, maximierte Fenster überdecken das Dock nicht.</i>"
+"<i>Niemals Ausblenden, vergrößerte Fenster überdecken das Dock nicht.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:730
 msgid "<i>Hides whenever the mouse is not over it.</i>"
-msgstr "<i>Verbergen, wenn sich kein Mauszeiger darüber befindet.</i>"
+msgstr "<i>Ausblenden, wenn sich kein Mauszeiger darüber befindet.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:733
 msgid "<i>Hides when dock obstructs the active application.</i>"
-msgstr "<i>Verbergen, wenn es das aktive Anwendungsfenster behindert.</i>"
+msgstr ""
+"<i>Ausblenden, wenn das Dock das aktive Anwendungsfenster behindert.</i>"
 
 #: ../Docky/Docky/Interface/DockPreferences.cs:736
 msgid "<i>Hides when dock obstructs any window.</i>"
-msgstr "<i>Verbergen, wenn es ein Anwendungsfenster behindert.</i>"
+msgstr "<i>Ausblenden, wenn das Dock ein Anwendungsfenster behindert.</i>"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:380
 msgid "Drag to reposition"
-msgstr "Ziehen um neu zu positionieren"
+msgstr "Ziehen, zum neu anordnen"
 
 #: ../Docky/Docky/Interface/DockWindow.cs:392
 #: ../Docky/Docky/Interface/DockWindow.cs:406
 msgid "Drop to add to dock"
-msgstr "Loslassen um zum Dock hinzuzufügen"
+msgstr "Loslassen, um es zum Dock hinzuzufügen"
 
 #: ../Docky/Docky/Items/DockyItem.cs:132
 #: ../StandardPlugins/BatteryMonitor/src/BatteryMonitorAbstractItem.cs:160
@@ -789,7 +792,7 @@ msgstr "_Einstellungen"
 
 #: ../Docky/Docky/Items/DockyItem.cs:133
 msgid "_About"
-msgstr "_Info"
+msgstr "_Über"
 
 #: ../Docky/Docky/Items/DockyItem.cs:134
 msgid "_Help"
@@ -818,11 +821,11 @@ msgstr "_Installieren"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:207
 msgid "<b>General Options</b>"
-msgstr "<b>Allgemeine Einstellungen</b>"
+msgstr "<b>Allgemeine Optionen</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:227
 msgid "<b>Dock Configuration</b>"
-msgstr "<b>Dock Einstellungen</b>"
+msgstr "<b>Dockkonfiguration</b>"
 
 #: ../Docky/gtk-gui/Docky.ConfigurationWindow.cs:241
 msgid "Docks"
@@ -865,11 +868,11 @@ msgstr "Nie verbergen"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:59
 msgid "Autohide"
-msgstr "Automatisch verbergen"
+msgstr "Automatisches Ausblenden"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:60
 msgid "Intellihide"
-msgstr "Aktivem Fenster ausweichen"
+msgstr "Intelligentes Ausblenden"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:61
 msgid "Window Dodge"
@@ -889,11 +892,11 @@ msgstr "_Verbergen:"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:142
 msgid "_Panel Mode"
-msgstr "_Panel-Modus"
+msgstr "_Leistenmodus"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:156
 msgid "3D Back_ground"
-msgstr "3D Hinter_grund"
+msgstr "3D-Hinter_grund"
 
 #: ../Docky/gtk-gui/Docky.Interface.DockPreferences.cs:170
 msgid "_Manage Windows Without Launcher"
@@ -906,7 +909,7 @@ msgstr "Ver_größerung:"
 #: ../Docky.Items/Docky.Items/AbstractDockItem.cs:120
 #, csharp-format
 msgid "Drop to open with {0}"
-msgstr "Loslassen um mit {0} zu öffnen"
+msgstr "Loslassen, um mit {0} zu öffnen"
 
 #: ../Docky.Items/Docky.Items/ApplicationDockItem.cs:180
 msgid "New _Window"
@@ -924,19 +927,19 @@ msgstr "Farbe _zurücksetzen"
 
 #: ../Docky.Items/Docky.Items/FileApplicationProvider.cs:482
 msgid "_Pin to Dock"
-msgstr "An Dock _anheften"
+msgstr "Am Dock _anheften"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:83
 #, csharp-format
 msgid "Drop to move to {0}"
-msgstr "Loslassen um nach {0} zu verschieben"
+msgstr "Loslassen, um nach {0} zu verschieben"
 
 #. until we use a new version of GTK# which supports getting the GLib.Error code
 #. this is about the best we can do.
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:197
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:242
 msgid "Error performing drop action"
-msgstr "Fehler beim Ausführen der Auslass-Aktion"
+msgstr "Fehler beim Ausführen des Fallenlassens"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:197
 msgid "Not enough free space on destination."
@@ -951,23 +954,23 @@ msgstr "Abgeschlossen"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:227
 msgid "Moving"
-msgstr "Verschieben …"
+msgstr "Verschiebevorgang läuft"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:233
 msgid "Copying"
-msgstr "Kopieren …"
+msgstr "Kopiervorgang läuft"
 
 #: ../Docky.Items/Docky.Items/FileDockItem.cs:268
 msgid "Open Containing _Folder"
-msgstr "Öffne enthaltenen _Ordner"
+msgstr "Übergeordneten _Ordner öffnen"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:264
 msgid "Unma_ximize"
-msgstr "Ma_ximierung aufheben"
+msgstr "_Wiederherstellen"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:267
 msgid "Ma_ximize"
-msgstr "Ma_ximieren"
+msgstr "Ver_größern"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:271
 msgid "_Restore"
@@ -975,7 +978,7 @@ msgstr "_Wiederherstellen"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:274
 msgid "Mi_nimize"
-msgstr "Mi_nimieren"
+msgstr "Ver_kleinern"
 
 #: ../Docky.Items/Docky.Items/WnckDockItem.cs:277
 msgid "_Close All"
@@ -984,11 +987,11 @@ msgstr "_Alle schließen"
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:43
 #, csharp-format
 msgid "Sign up for {0}"
-msgstr "Registrieren für {0}"
+msgstr "Für {0} registrieren"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:44
 msgid "Validating..."
-msgstr "Überprüfen …"
+msgstr "Überprüfung läuft …"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:45
 #, csharp-format
@@ -1001,7 +1004,7 @@ msgstr "Überprüfung des Benutzerkontos fehlgeschlagen!"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:47
 msgid "Verify and save account information"
-msgstr "Kontoinformationen prüfen und speichern"
+msgstr "Kontoinformationen überprüfen und speichern"
 
 #: ../Docky.Widgets/Docky.Widgets/AbstractLoginWidget.cs:48
 msgid "Account validation succeeded!"
@@ -1017,7 +1020,7 @@ msgstr "Benutzername"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:121
 msgid "<i>Verify and save account information</i>"
-msgstr "<i>Kontoinformationen prüfen und speichern</i>"
+msgstr "<i>Kontoinformationen überprüfen und speichern</i>"
 
 #: ../Docky.Widgets/gtk-gui/Docky.Widgets.AbstractLoginWidget.cs:178
 msgid "Don't have an account?"
@@ -1063,7 +1066,7 @@ msgstr "Die Zwischenablage ist momentan leer."
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:431
 msgid "Di_gital Clock"
-msgstr "Di_gitale Uhr"
+msgstr "Di_gitaluhr"
 
 #: ../StandardPlugins/Clock/src/ClockDockItem.cs:437
 msgid "24-Hour _Clock"
@@ -1091,19 +1094,19 @@ msgstr "_Rückgängig"
 
 #: ../StandardPlugins/Desktop/src/ShowDesktopItem.cs:37
 msgid "_Show Desktop"
-msgstr "_Zeige Desktop"
+msgstr "_Schreibtisch anzeigen"
 
 #: ../StandardPlugins/Desktop/src/TileDesktopItem.cs:38
 msgid "_Tile Desktop"
-msgstr ""
+msgstr "_Schreibtisch kacheln"
 
 #: ../StandardPlugins/Desktop/src/CascadeDesktopItem.cs:38
 msgid "_Cascade Desktop"
-msgstr ""
+msgstr "Schreibtisch _hintereinanderschalten"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:74
 msgid "_Add Label"
-msgstr "Label _hinzufügen"
+msgstr "Bezeichnung _hinzufügen"
 
 #: ../StandardPlugins/GMail/gtk-gui/GMail.GMailLabelConfig.cs:113
 msgid "Check e_very:"
@@ -1116,7 +1119,7 @@ msgstr "Minuten"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:189
 msgid "Click to set username and password."
-msgstr "Klicken Sie, um den Benutzernamen und das Passwort einzustellen"
+msgstr "Bitte anklicken, um den Benutzernamen und das Passwort einzustellen"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:246
 msgid "(no subject)"
@@ -1125,7 +1128,7 @@ msgstr "(kein Betreff)"
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:260
 #, csharp-format
 msgid "You have {0} new, unread messages"
-msgstr "Sie haben {0} neue ungelesen Nachrichten"
+msgstr "Sie haben {0} neue nicht gelesen(e) Nachrichte(n)"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:264
 #, csharp-format
@@ -1135,11 +1138,11 @@ msgstr "Von: {0}"
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:278
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:281
 msgid "Feed Error"
-msgstr "Feed-Fehler"
+msgstr "Fehler im Nachrichtenstrom"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:285
 msgid "Invalid Username"
-msgstr "Ungültiger Benutzername"
+msgstr "Benutzername ist nicht gültig"
 
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:287
 #: ../StandardPlugins/GMail/src/GMailAtom.cs:292
@@ -1153,7 +1156,7 @@ msgstr "Allgemeiner Fehler"
 
 #: ../StandardPlugins/GMail/src/GMailConfigDialog.cs:30
 msgid "Gmail Configuration"
-msgstr "Gmail Konfiguration"
+msgstr "Gmail-Konfiguration"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:95
 msgid "No unread mail"
@@ -1163,20 +1166,20 @@ msgstr "Keine ungelesenen Nachrichten"
 #, csharp-format
 msgid "{0} unread message"
 msgid_plural "{0} unread messages"
-msgstr[0] "{0} ungelesene Nachricht"
-msgstr[1] "{0} ungelesene Nachrichten"
+msgstr[0] "{0} nicht gelesene Nachricht"
+msgstr[1] "{0} nicht gelesene Nachrichten"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:119
 msgid "Checking mail..."
-msgstr "Auf neue Nachrichten prüfen …"
+msgstr "Auf neue Nachrichten wird geprüft …"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:201
 msgid "_View "
-msgstr "_Zeige "
+msgstr "_Anzeigen "
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:206
 msgid "_Compose Mail"
-msgstr "E-Mail _verfassen"
+msgstr "Nachricht _verfassen"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:211
 msgid "View C_ontacts"
@@ -1184,7 +1187,7 @@ msgstr "K_ontakte anzeigen"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:218
 msgid "New Mail"
-msgstr "Neue E-Mail"
+msgstr "Neue Nachricht"
 
 #: ../StandardPlugins/GMail/src/GMailDockItem.cs:236
 msgid "Check _Mail"
@@ -1192,11 +1195,11 @@ msgstr "Auf neue Nachrichten _prüfen"
 
 #: ../StandardPlugins/GMail/src/GMailLabelConfig.cs:36
 msgid "Labels"
-msgstr "Labels"
+msgstr "Bezeichnungen"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:37
 msgid "Gmail"
-msgstr "Google Mail"
+msgstr "Gmail"
 
 #: ../StandardPlugins/GMail/src/GMailLoginConfig.cs:41
 msgid "Login"
@@ -1216,7 +1219,7 @@ msgstr "_Aushängen"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:53
 msgid "Network Manager"
-msgstr "Netzwerk-Manager"
+msgstr "Netzwerkverwaltung"
 
 #: ../StandardPlugins/NetworkManager/src/NetworkManagerDocklet.cs:92
 msgid "Connecting..."
@@ -1259,11 +1262,11 @@ msgstr "Informationen werden geladen …"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:72
 msgid "Click to add NPR stations."
-msgstr "Klicken um NPR Sender hinzuzufügen."
+msgstr "Klicken, um NPR Sender hinzuzufügen."
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:111
 msgid "Home Page"
-msgstr "Webseite"
+msgstr "Internetseite"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:118
 msgid "Program Schedule"
@@ -1275,7 +1278,7 @@ msgstr "Spenden"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:132
 msgid "Live Streams"
-msgstr "Live-Streams"
+msgstr "Aktuelle Datenströme"
 
 #: ../StandardPlugins/NPR/src/StationDockItem.cs:170
 msgid "Settings"
@@ -1309,7 +1312,7 @@ msgstr "Bi_ldschirm sperren"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:80
 msgid "_Log Out..."
-msgstr "_Abmelden..."
+msgstr "_Abmelden …"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:81
 msgid "Log Out"
@@ -1332,7 +1335,7 @@ msgstr "_Ruhezustand"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:97
 msgid "_Restart..."
-msgstr "_Neustart..."
+msgstr "_Neustarten …"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:98
 msgid "Restart"
@@ -1346,7 +1349,7 @@ msgstr ""
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:104
 msgid "Shut _Down..."
-msgstr "Herunter_fahren..."
+msgstr "_Herunterfahren …"
 
 #: ../StandardPlugins/SessionManager/src/SessionActionsProvider.cs:105
 msgid "Shut Down"
@@ -1362,7 +1365,7 @@ msgstr ""
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:86
 #, csharp-format
 msgid "A timer set for {0} has expired."
-msgstr "Ein Timer ist nach {0} abgelaufen."
+msgstr "Ein Zeitmesser ist nach {0} abgelaufen."
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:242
 msgid "Time remaining:"
@@ -1370,11 +1373,11 @@ msgstr "Verbleibende Zeit:"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:244
 msgid "Timer paused, time remaining:"
-msgstr "Timer angehalten, verbleibende Zeit:"
+msgstr "Zeitmesser angehalten, verbleibende Zeit:"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:255
 msgid "Set the timer's label to:"
-msgstr "Name für den Timer:"
+msgstr "Name des Zeitmessers:"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:261
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:299
@@ -1383,19 +1386,19 @@ msgstr "_Name festlegen"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:286
 msgid "_Pause Timer"
-msgstr "_Pausiere Timer"
+msgstr "Zeitmesser _pausieren"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:286
 msgid "_Start Timer"
-msgstr "_Starte Timer"
+msgstr "Zeitmesser _starten"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:290
 msgid "R_eset Timer"
-msgstr "Timer zurücks_etzen"
+msgstr "Zeitmesser _zurücksetzen"
 
 #: ../StandardPlugins/Timer/src/TimerDockItem.cs:294
 msgid "_Remove Timer"
-msgstr "_Entferne Timer"
+msgstr "Zeitmesser _entfernen"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:57
 msgid "hour"
@@ -1418,30 +1421,30 @@ msgstr[1] "Sekunden"
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:145
 #, csharp-format
 msgid "Click to create a timer for {0}."
-msgstr "Klicken, um einen Timer gesetzt auf {0} zu starten."
+msgstr "Klicken, um einen Zeitmesser auf {0} gestellt zu starten."
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:162
 msgid "Automatically _Start Timers"
-msgstr "Timer beim _Erzeugen starten"
+msgstr "Zeitmesser _automatisch starten"
 
 #: ../StandardPlugins/Timer/src/TimerMainDockItem.cs:166
 msgid "Automatically _Dismiss Timers"
-msgstr "Timer nach _Ablauf entfernen"
+msgstr "Zeitmesser nach _Ablauf entfernen"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:55
 msgid "Drop to move to Trash"
-msgstr "Loslassen um in den Müll zu verschieben"
+msgstr "Loslassen, um in den Papierkorb zu verschieben"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:82
 msgid "No items in Trash"
-msgstr "Keine Dateien im Müll"
+msgstr "Keine Objekte im Papierkorb"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:84
 #, csharp-format
 msgid "{0} item in Trash"
 msgid_plural "{0} items in Trash"
-msgstr[0] "{0} Datei im Müll"
-msgstr[1] "{0} Dateien im Müll"
+msgstr[0] "{0} Objekt im Papierkorb"
+msgstr[1] "{0} Objekte im Papierkorb"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:169
 msgid "Restore Files"
@@ -1449,19 +1452,18 @@ msgstr "Dateien wiederherstellen"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:201
 msgid "_Open Trash"
-msgstr "Müll _öffnen"
+msgstr "Papierkorb _öffnen"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:203
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:234
 msgid "Empty _Trash"
-msgstr "_Müll leeren"
+msgstr "_Papierkorb leeren"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:226
 msgid "Empty all of the items from the trash?"
 msgstr ""
-"Sind Sie sicher, dass Sie alle\r\n"
-"Objekte im Müll dauerhaft löschen\r\n"
-"wollen?"
+"Sind Sie sicher, dass Sie alle Objekte \r\n"
+"im Papierkorb dauerhaft löschen wollen?"
 
 #: ../StandardPlugins/Trash/src/TrashDockItem.cs:228
 msgid ""
@@ -1469,9 +1471,9 @@ msgid ""
 "will be permanently lost. Please note that you\n"
 "can also delete them separately."
 msgstr ""
-"Falls Sie den Müll leeren, werden darin enthaltene\n"
-"Objekte dauerhaft gelöscht. Beachten Sie, dass\n"
-"Sie auch einzelne Objekte löschen können."
+"Falls Sie auswählen, dass der Papierkorb geleert werden soll,\n"
+"werden alle darin enthaltenen Objekte dauerhaft gelöscht.\n"
+"Bitte beachten Sie, dass Sie auch einzelne Objekte löschen können."
 
 #: ../StandardPlugins/Weather/gtk-gui/WeatherDocklet.WeatherConfig.cs:65
 msgid "_Weather Provider:"
@@ -1495,15 +1497,15 @@ msgstr "Metrische Einheiten verwenden"
 
 #: ../StandardPlugins/Weather/src/Sources/AbstractWeatherSource.cs:170
 msgid "Invalid Weather Location"
-msgstr "Ungültiger Standort"
+msgstr "Nicht gültiger Wetterstandort"
 
 #: ../StandardPlugins/Weather/src/Sources/GoogleWeatherSource.cs:55
 msgid ""
 "Weather data provided by Google.  This source requires locations to be "
 "specified as US Zip Code or 'City, Country'."
 msgstr ""
-"Wetterdaten werden von Google bereitgestellt. Diese Quelle benötigt die Orte "
-"als US Zip Code oder als 'Stadt, Land'."
+"Die Wetterdaten werden von Google bereitgestellt. Diese Quelle benötigt es, "
+"dass die Orte als US-Postleitzahl oder als »Stadt, Land« angegeben werden."
 
 #: ../StandardPlugins/Weather/src/Sources/WeatherChannelWeatherSource.cs:60
 msgid ""
@@ -1512,19 +1514,20 @@ msgid ""
 "website.  To find your code, look up your forecast on their site and the "
 "code is in the URL after '/local/' and looks like AAXX0000."
 msgstr ""
-"Wetterdaten werden von Weather Underground bereitgestellt. Diese Quelle "
-"benötigt die Orte als US Zip Code oder als eindeutigen Code. Um den "
-"richtigen Code zu finden, machen Sie eine Anfrage auf deren Website, der "
-"Code wird dann in der Adressleiste nach »/local/« angefügt und kann so "
-"aussehen: AAXX0000."
+"Wetterdaten werden von »Weather Underground« bereitgestellt. Diese Quelle "
+"benötigt die Orte als USA-Postleitzahl oder als eindeutigen Code von der "
+"Internetseite. Um den richtigen Code zu finden, machen Sie bitte eine "
+"Anfrage auf deren Internetseite, der Code wird dann in der Adressleiste nach "
+"»/local/« angefügt und kann folgendermaßen aussehen: AAXX0000."
 
 #: ../StandardPlugins/Weather/src/Sources/WunderWeatherSource.cs:56
 msgid ""
 "Weather data provided by and copyright Weather Underground.  This source "
 "requires locations to be specified as US Zip Code or 'City, Country'."
 msgstr ""
-"Wetterdaten werden von Weather Underground bereitgestellt. Diese Quelle "
-"benötigt die Orte als US Zip Code oder als 'Stadt, Land'."
+"Die Wetterdaten werden von »Weather Underground« bereitgestellt und "
+"unterliegen deren Urheberrecht. Diese Quelle benötigt es, dass die Orte als "
+"USA-Postleitzahl oder als »Stadt, Land« angegeben werden."
 
 #: ../StandardPlugins/Weather/src/WeatherConfig.cs:90
 msgid "No results found."
@@ -1532,15 +1535,15 @@ msgstr "Keine Ergebnisse gefunden."
 
 #: ../StandardPlugins/Weather/src/WeatherConfigDialog.cs:34
 msgid "Weather Configuration"
-msgstr "Wetter-Konfiguration"
+msgstr "Wetterkonfiguration"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:80
 msgid "Click to add a location."
-msgstr "Klicken Sie, um einen Ort hinzuzufügen"
+msgstr "Bitte anlicken, um einen Ort hinzuzufügen."
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:90
 msgid "Fetching data..."
-msgstr "Aktualisieren …"
+msgstr "Daten werden abgerufen …"
 
 #: ../StandardPlugins/Weather/src/WeatherDocklet.cs:231
 msgid "Radar _Map"
@@ -1572,15 +1575,15 @@ msgstr "{0} Luftfeuchtigkeit"
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:71
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:221
 msgid "Switch Desks"
-msgstr "Arbeitsfläche wechseln"
+msgstr "Schreibtische wechseln"
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:172
 msgid "Desk"
-msgstr "Arbeitsfläche"
+msgstr "Schreibtisch"
 
 #: ../StandardPlugins/WorkspaceSwitcher/src/WorkspaceSwitcherDockItem.cs:174
 msgid "Virtual Desk"
-msgstr "Virtuelle Arbeitsfläche"
+msgstr "Virtueller Schreibtisch"
 
 #~ msgid "Network Error: "
 #~ msgstr "Netzwerkfehler: "
@@ -1590,12 +1593,6 @@ msgstr "Virtuelle Arbeitsfläche"
 
 #~ msgid "_Add"
 #~ msgstr "_Hinzufügen"
-
-#~ msgid "Username or Password not set"
-#~ msgstr "Benutzer oder Passwort nicht gesetzt"
-
-#~ msgid "Docky Configuration"
-#~ msgstr "Docky Einstellungen"
 
 #~ msgid "Temp"
 #~ msgstr "Temperatur"
@@ -1637,13 +1634,6 @@ msgstr "Virtuelle Arbeitsfläche"
 #~ msgstr "_Aktivieren"
 
 #~ msgid ""
-#~ "Docky requires compositing to work properly. Please enable compositing and "
-#~ "restart docky."
-#~ msgstr ""
-#~ "Docky benötigt einen Composition-Manager um korrekt zu arbeiten. Bitte "
-#~ "aktivieren Sie einen Composition-Manager und starten Sie Docky neu."
-
-#~ msgid ""
 #~ "Causes launchers which currently manage more than one window to have an "
 #~ "extra indicator under it."
 #~ msgstr ""
@@ -1652,3 +1642,16 @@ msgstr "Virtuelle Arbeitsfläche"
 
 #~ msgid "_Start When Computer Starts"
 #~ msgstr "_Automatisch beim Systemstart starten"
+
+#~ msgid "Docky Configuration"
+#~ msgstr "Docky-Konfiguration"
+
+#~ msgid "Username or Password not set"
+#~ msgstr "Benutzername oder Passwort nicht eingestellt"
+
+#~ msgid ""
+#~ "Docky requires compositing to work properly. Please enable compositing and "
+#~ "restart docky."
+#~ msgstr ""
+#~ "Docky benötigt eine Compositing-Verwaltung um korrekt zu arbeiten. Bitte "
+#~ "aktivieren Sie eine Compositing-Verwaltung und starten Sie Docky neu."
