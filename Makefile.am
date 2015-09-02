@@ -4,6 +4,11 @@ EXTRA_DIST = \
 
 ACLOCAL_AMFLAGS = -I m4 -I m4/shamrock
 
+# Install copied assemblies to our libdir
+copiedlibsdir = $(pkglibdir)
+copiedlibs_DATA = \
+	$(GIO_SHARP_ASSEMBLIES)
+
 SUBDIRS = \
 	. \
 	data \
