@@ -13,6 +13,7 @@ SUBDIRS = \
 	. \
 	data \
 	po \
+	lib \
 	Docky.CairoHelper \
 	Docky.Services \
 	Docky.Widgets \

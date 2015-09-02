@@ -6,6 +6,7 @@ config.log
 config.status
 configure
 compile
+generated
 install-sh
 intltool-extract.in
 intltool-merge.in
@@ -14,14 +15,18 @@ m4/*.m4
 missing
 py-compile
 *.addin.xml
+*.dll
+*.dll.*
 *.pc
 *.pidb
-*.userprefs
+*.useprefs
 Makefile
 Makefile.in
 AssemblyInfo.cs
 data/docky.desktop
 Docky/docky
+lib/*/*.snk
+lib/*/*.xml
 po/*.gmo
 po/.intltool-merge-cache
 po/Makefile.in.in
