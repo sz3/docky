@@ -5,17 +5,29 @@ namespace Docky.Interface
 	public partial class DockPreferences
 	{
 		private global::Gtk.VBox vbox1;
+		
 		private global::Gtk.Table table3;
+		
 		private global::Gtk.ComboBox autohide_box;
+		
 		private global::Gtk.CheckButton fade_on_hide_check;
+		
 		private global::Gtk.Label hide_desc;
+		
 		private global::Gtk.HScale icon_scale;
+		
 		private global::Gtk.Label label1;
+		
 		private global::Gtk.Label label3;
+		
 		private global::Gtk.CheckButton panel_mode_button;
+		
 		private global::Gtk.CheckButton threedee_check;
+		
 		private global::Gtk.CheckButton window_manager_check;
+		
 		private global::Gtk.CheckButton zoom_checkbutton;
+		
 		private global::Gtk.HScale zoom_scale;
 
 		protected virtual void Build ()

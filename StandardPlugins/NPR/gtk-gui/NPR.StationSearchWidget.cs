@@ -5,11 +5,17 @@ namespace NPR
 	public partial class StationSearchWidget
 	{
 		private global::Gtk.VBox vbox1;
+		
 		private global::Gtk.HBox hbox1;
+		
 		private global::Gtk.Button my_stations;
+		
 		private global::Docky.Widgets.SearchEntry ZipEntry;
+		
 		private global::Gtk.Button Search;
+		
 		private global::Gtk.ScrolledWindow stationsScroll;
+		
 		private global::Docky.Widgets.TileView tileview;
 
 		protected virtual void Build ()
@@ -51,32 +57,20 @@ namespace NPR
 			this.Search.CanFocus = true;
 			this.Search.Name = "Search";
 			this.Search.UseUnderline = true;
-			// Container child Search.Gtk.Container+ContainerChild
-			global::Gtk.Alignment w3 = new global::Gtk.Alignment (0.5F, 0.5F, 0F, 0F);
-			// Container child GtkAlignment.Gtk.Container+ContainerChild
-			global::Gtk.HBox w4 = new global::Gtk.HBox ();
-			w4.Spacing = 2;
-			// Container child GtkHBox.Gtk.Container+ContainerChild
-			global::Gtk.Image w5 = new global::Gtk.Image ();
-			w5.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-find", global::Gtk.IconSize.Menu);
-			w4.Add (w5);
-			// Container child GtkHBox.Gtk.Container+ContainerChild
-			global::Gtk.Label w7 = new global::Gtk.Label ();
-			w7.LabelProp = global::Mono.Unix.Catalog.GetString ("S_earch");
-			w7.UseUnderline = true;
-			w4.Add (w7);
-			w3.Add (w4);
-			this.Search.Add (w3);
+			this.Search.Label = global::Mono.Unix.Catalog.GetString ("S_earch");
+			global::Gtk.Image w3 = new global::Gtk.Image ();
+			w3.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-find", global::Gtk.IconSize.Menu);
+			this.Search.Image = w3;
 			this.hbox1.Add (this.Search);
-			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.Search]));
-			w11.Position = 2;
-			w11.Expand = false;
-			w11.Fill = false;
+			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.Search]));
+			w4.Position = 2;
+			w4.Expand = false;
+			w4.Fill = false;
 			this.vbox1.Add (this.hbox1);
-			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox1]));
-			w12.Position = 0;
-			w12.Expand = false;
-			w12.Fill = false;
+			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox1]));
+			w5.Position = 0;
+			w5.Expand = false;
+			w5.Fill = false;
 			// Container child vbox1.Gtk.Box+BoxChild
 			this.stationsScroll = new global::Gtk.ScrolledWindow ();
 			this.stationsScroll.CanFocus = true;
@@ -84,17 +78,17 @@ namespace NPR
 			this.stationsScroll.HscrollbarPolicy = ((global::Gtk.PolicyType)(2));
 			this.stationsScroll.ShadowType = ((global::Gtk.ShadowType)(1));
 			// Container child stationsScroll.Gtk.Container+ContainerChild
-			global::Gtk.Viewport w13 = new global::Gtk.Viewport ();
-			w13.ShadowType = ((global::Gtk.ShadowType)(0));
+			global::Gtk.Viewport w6 = new global::Gtk.Viewport ();
+			w6.ShadowType = ((global::Gtk.ShadowType)(0));
 			// Container child GtkViewport.Gtk.Container+ContainerChild
 			this.tileview = new global::Docky.Widgets.TileView ();
 			this.tileview.Name = "tileview";
 			this.tileview.IconSize = 64;
-			w13.Add (this.tileview);
-			this.stationsScroll.Add (w13);
+			w6.Add (this.tileview);
+			this.stationsScroll.Add (w6);
 			this.vbox1.Add (this.stationsScroll);
-			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.stationsScroll]));
-			w16.Position = 1;
+			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.stationsScroll]));
+			w9.Position = 1;
 			this.Add (this.vbox1);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();

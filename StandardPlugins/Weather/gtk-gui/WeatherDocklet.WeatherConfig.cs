@@ -5,21 +5,37 @@ namespace WeatherDocklet
 	public partial class WeatherConfig
 	{
 		private global::Gtk.VBox vbox1;
+		
 		private global::Gtk.HBox hbox1;
+		
 		private global::Gtk.Label label1;
+		
 		private global::Gtk.ComboBox provider;
+		
 		private global::Docky.Widgets.WrapLabel provider_info;
+		
 		private global::Gtk.HBox hbox2;
+		
 		private global::Gtk.Button my_locations;
+		
 		private global::Docky.Widgets.SearchEntry location_code;
+		
 		private global::Gtk.Button search;
+		
 		private global::Gtk.ScrolledWindow scrolledwindow1;
+		
 		private global::Docky.Widgets.TileView results_view;
+		
 		private global::Gtk.HBox hbox3;
+		
 		private global::Gtk.Label label2;
+		
 		private global::Gtk.Label label3;
+		
 		private global::Gtk.SpinButton auto_update;
+		
 		private global::Gtk.HBox hbox4;
+		
 		private global::Gtk.CheckButton metric_units;
 
 		protected virtual void Build ()
@@ -99,32 +115,20 @@ namespace WeatherDocklet
 			this.search.CanFocus = true;
 			this.search.Name = "search";
 			this.search.UseUnderline = true;
-			// Container child search.Gtk.Container+ContainerChild
-			global::Gtk.Alignment w7 = new global::Gtk.Alignment (0.5F, 0.5F, 0F, 0F);
-			// Container child GtkAlignment.Gtk.Container+ContainerChild
-			global::Gtk.HBox w8 = new global::Gtk.HBox ();
-			w8.Spacing = 2;
-			// Container child GtkHBox.Gtk.Container+ContainerChild
-			global::Gtk.Image w9 = new global::Gtk.Image ();
-			w9.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-find", global::Gtk.IconSize.Menu);
-			w8.Add (w9);
-			// Container child GtkHBox.Gtk.Container+ContainerChild
-			global::Gtk.Label w11 = new global::Gtk.Label ();
-			w11.LabelProp = global::Mono.Unix.Catalog.GetString ("_Search");
-			w11.UseUnderline = true;
-			w8.Add (w11);
-			w7.Add (w8);
-			this.search.Add (w7);
+			this.search.Label = global::Mono.Unix.Catalog.GetString ("_Search");
+			global::Gtk.Image w7 = new global::Gtk.Image ();
+			w7.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-find", global::Gtk.IconSize.Menu);
+			this.search.Image = w7;
 			this.hbox2.Add (this.search);
-			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.search]));
-			w15.Position = 2;
-			w15.Expand = false;
-			w15.Fill = false;
+			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.search]));
+			w8.Position = 2;
+			w8.Expand = false;
+			w8.Fill = false;
 			this.vbox1.Add (this.hbox2);
-			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox2]));
-			w16.Position = 2;
-			w16.Expand = false;
-			w16.Fill = false;
+			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox2]));
+			w9.Position = 2;
+			w9.Expand = false;
+			w9.Fill = false;
 			// Container child vbox1.Gtk.Box+BoxChild
 			this.scrolledwindow1 = new global::Gtk.ScrolledWindow ();
 			this.scrolledwindow1.CanFocus = true;
@@ -132,17 +136,17 @@ namespace WeatherDocklet
 			this.scrolledwindow1.HscrollbarPolicy = ((global::Gtk.PolicyType)(2));
 			this.scrolledwindow1.ShadowType = ((global::Gtk.ShadowType)(1));
 			// Container child scrolledwindow1.Gtk.Container+ContainerChild
-			global::Gtk.Viewport w17 = new global::Gtk.Viewport ();
-			w17.ShadowType = ((global::Gtk.ShadowType)(0));
+			global::Gtk.Viewport w10 = new global::Gtk.Viewport ();
+			w10.ShadowType = ((global::Gtk.ShadowType)(0));
 			// Container child GtkViewport.Gtk.Container+ContainerChild
 			this.results_view = new global::Docky.Widgets.TileView ();
 			this.results_view.Name = "results_view";
 			this.results_view.IconSize = 24;
-			w17.Add (this.results_view);
-			this.scrolledwindow1.Add (w17);
+			w10.Add (this.results_view);
+			this.scrolledwindow1.Add (w10);
 			this.vbox1.Add (this.scrolledwindow1);
-			global::Gtk.Box.BoxChild w20 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.scrolledwindow1]));
-			w20.Position = 3;
+			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.scrolledwindow1]));
+			w13.Position = 3;
 			// Container child vbox1.Gtk.Box+BoxChild
 			this.hbox3 = new global::Gtk.HBox ();
 			this.hbox3.Name = "hbox3";
@@ -153,20 +157,20 @@ namespace WeatherDocklet
 			this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("Automatically Update _Every");
 			this.label2.UseUnderline = true;
 			this.hbox3.Add (this.label2);
-			global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.label2]));
-			w21.Position = 0;
-			w21.Expand = false;
-			w21.Fill = false;
+			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.label2]));
+			w14.Position = 0;
+			w14.Expand = false;
+			w14.Fill = false;
 			// Container child hbox3.Gtk.Box+BoxChild
 			this.label3 = new global::Gtk.Label ();
 			this.label3.Name = "label3";
 			this.label3.LabelProp = global::Mono.Unix.Catalog.GetString ("minutes");
 			this.hbox3.Add (this.label3);
-			global::Gtk.Box.BoxChild w22 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.label3]));
-			w22.PackType = ((global::Gtk.PackType)(1));
-			w22.Position = 1;
-			w22.Expand = false;
-			w22.Fill = false;
+			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.label3]));
+			w15.PackType = ((global::Gtk.PackType)(1));
+			w15.Position = 1;
+			w15.Expand = false;
+			w15.Fill = false;
 			// Container child hbox3.Gtk.Box+BoxChild
 			this.auto_update = new global::Gtk.SpinButton (5, 60, 5);
 			this.auto_update.CanFocus = true;
@@ -176,16 +180,16 @@ namespace WeatherDocklet
 			this.auto_update.Numeric = true;
 			this.auto_update.Value = 5;
 			this.hbox3.Add (this.auto_update);
-			global::Gtk.Box.BoxChild w23 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.auto_update]));
-			w23.PackType = ((global::Gtk.PackType)(1));
-			w23.Position = 2;
-			w23.Expand = false;
-			w23.Fill = false;
+			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.auto_update]));
+			w16.PackType = ((global::Gtk.PackType)(1));
+			w16.Position = 2;
+			w16.Expand = false;
+			w16.Fill = false;
 			this.vbox1.Add (this.hbox3);
-			global::Gtk.Box.BoxChild w24 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox3]));
-			w24.Position = 4;
-			w24.Expand = false;
-			w24.Fill = false;
+			global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox3]));
+			w17.Position = 4;
+			w17.Expand = false;
+			w17.Fill = false;
 			// Container child vbox1.Gtk.Box+BoxChild
 			this.hbox4 = new global::Gtk.HBox ();
 			this.hbox4.Name = "hbox4";
@@ -199,13 +203,13 @@ namespace WeatherDocklet
 			this.metric_units.DrawIndicator = true;
 			this.metric_units.UseUnderline = true;
 			this.hbox4.Add (this.metric_units);
-			global::Gtk.Box.BoxChild w25 = ((global::Gtk.Box.BoxChild)(this.hbox4 [this.metric_units]));
-			w25.Position = 0;
+			global::Gtk.Box.BoxChild w18 = ((global::Gtk.Box.BoxChild)(this.hbox4 [this.metric_units]));
+			w18.Position = 0;
 			this.vbox1.Add (this.hbox4);
-			global::Gtk.Box.BoxChild w26 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox4]));
-			w26.Position = 5;
-			w26.Expand = false;
-			w26.Fill = false;
+			global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox4]));
+			w19.Position = 5;
+			w19.Expand = false;
+			w19.Fill = false;
 			this.Add (this.vbox1);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();

@@ -5,10 +5,10 @@
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
+    <widget-library name="notify-sharp, Version=0.4.0.0, Culture=neutral, PublicKeyToken=2df29c54e245917a" />
     <widget-library name="../../../Docky.Items/bin/Debug/Docky.Items.dll" />
     <widget-library name="../../../Docky.Services/bin/Debug/Docky.Services.dll" />
     <widget-library name="../../../Docky.Widgets/bin/Debug/Docky.Widgets.dll" />
-    <widget-library name="notify-sharp, Version=0.4.0.0, Culture=neutral, PublicKeyToken=2df29c54e245917a" />
     <widget-library name="../bin/Debug/NPR.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="NPR.StationSearchWidget" design-size="514 241">

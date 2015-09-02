@@ -289,7 +289,7 @@ namespace WorkspaceSwitcher
 			int cols = DeskGrid.GetLength (0);
 			int rows = DeskGrid.GetLength (1);
 			
-			Gdk.Color gdkColor = Style.Backgrounds [(int) Gtk.StateType.Selected];
+			Gdk.Color gdkColor = this.Style.Backgrounds [(int) Gtk.StateType.Selected];
 			Cairo.Color selection_color = new Cairo.Color ((double) gdkColor.Red / ushort.MaxValue,
 											(double) gdkColor.Green / ushort.MaxValue,
 											(double) gdkColor.Blue / ushort.MaxValue,

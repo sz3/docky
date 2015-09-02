@@ -13,6 +13,7 @@ intltool-merge.in
 intltool-update.in
 m4/*.m4
 missing
+obj
 py-compile
 *.addin.xml
 *.dll
