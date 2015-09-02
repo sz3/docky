@@ -85,16 +85,6 @@ PKG_CHECK_MODULES([GLIB_SHARP_20], [glib-sharp-2.0])
 
 dnl gio-sharp is an unstable api library
 PKG_CHECK_MODULES([GIO_SHARP], [gio-sharp-2.0 >= $GIO_SHARP_REQUIRED_VERSION])
-files="`$PKG_CONFIG --variable=Libraries gio-sharp-2.0`"
-for file in $files; do
-	[ mkdir -p $top_srcdir/build ] && [ cp -vu $file $top_srcdir/build/ ]
-	GIO_SHARP_ASSEMBLIES="$GIO_SHARP_ASSEMBLIES $top_srcdir/build/$(basename $file)"
-	GIO_SHARP_LIBS="$GIO_SHARP_LIBS -r:$top_srcdir/build/$(basename $file)"
-	[[ -r "$file.config" ]] && [ mkdir -p $top_srcdir/build ] && [ cp -vu $file.config $top_srcdir/build/ ]
-	[[ -r "$file.config" ]] && GIO_SHARP_ASSEMBLIES="$GIO_SHARP_ASSEMBLIES $top_srcdir/build/$(basename $file).config"
-done
-AC_SUBST([GIO_SHARP_ASSEMBLIES])
-
 PKG_CHECK_MODULES([GKEYFILE_SHARP], [gkeyfile-sharp])
 PKG_CHECK_MODULES([GNOME_KEYRING_SHARP], [gnome-keyring-sharp-1.0])
 PKG_CHECK_MODULES([GTK_SHARP_20], [gtk-sharp-2.0])
